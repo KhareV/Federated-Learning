@@ -1,6 +1,6 @@
 task_id,phase_family,task_name,prerequisites,gate_impact,status,implemented_at_commit,evidence_path,notes
 T001,FOUNDATION,"Repository bootstrap, reproducible shell, and source-authority lock",,G0,PASS,0069fdf4c75609bf02b3a8bc34d8889f1702c5c9,reports/t001/closure_verification.json,Verified closure evidence records G0 PASS and Python 3.11 CI.
-T002,FOUNDATION,"Requirement registry, coverage map, freeze map, and do-not-start enforcement",T001;G0,G0,PASS,,reports/t002/coverage_audit.json,Status becomes PASS only after the second coverage audit and phase2 gate succeed.
+T002,FOUNDATION,"Requirement registry, coverage map, freeze map, and do-not-start enforcement",T001;G0,G0,PASS,83f0136052cd5136705f2dfc9347f15f2d9c425e,reports/t002/coverage_audit.json,Status becomes PASS only after the second coverage audit and phase2 gate succeed.
 T003,CONTRACTS,Canonical hardware/data/API/label contract skeletons,T002;G0,G1;G4;G18,NOT_STARTED,,,Exact next task supplied by the implementation sequence authority.
 T004,HARDWARE,Hardware semantics verification and data-contract freeze,T003,G1,NOT_STARTED,,,T002 operational decomposition derived from v2.2 Sections 3/36/37 and the solo-plan critical path; the local plan source does not enumerate named T004-T036 packets.
 T005,DATA,Public dataset acquisition manifests and immutable raw provenance,T003;G1,G2,NOT_STARTED,,,T002 operational decomposition derived from v2.2 Sections 3/36/37 and the solo-plan critical path; the local plan source does not enumerate named T004-T036 packets.

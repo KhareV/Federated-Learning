@@ -86,6 +86,7 @@ TASKS = [
         "T001;G0",
         "G0",
         status="PASS",
+        commit="83f0136052cd5136705f2dfc9347f15f2d9c425e",
         evidence="reports/t002/coverage_audit.json",
         notes="Status becomes PASS only after the second coverage audit and phase2 gate succeed.",
     ),
