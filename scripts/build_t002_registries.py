@@ -125,17 +125,31 @@ def canonical_tasks() -> list[dict[str, str]]:
         task_id = packet["task_id"]
         gates = packet["gate_freeze_impact"].replace("-", ";")
         gates = gates.replace("post;G10", "G10").replace("G11 prep", "G11")
-        status = "PASS" if task_id in {"T001", "T002", "T003"} else "NOT_STARTED"
+        status = {
+            "T001": "PASS",
+            "T002": "PASS",
+            "T003": "PASS",
+            "T004": "BLOCKED",
+        }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
             "T002": "83f0136052cd5136705f2dfc9347f15f2d9c425e",
             "T003": "1f35bc044474900b5a54d5a17d51727e5a1a2388",
+            "T004": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
             "T002": "reports/t002/source_reconciliation.json",
             "T003": "reports/t003/contract_validation.json",
+            "T004": "reports/t004/hardware_deferral.json",
         }.get(task_id, "")
+        notes = TASK_NOTES_OVERRIDE.get(
+            task_id,
+            (
+                "Canonical execution-plan packet; normalized prerequisite IDs follow "
+                "Sections 4-5 where the packet uses a cross-reference."
+            ),
+        )
         tasks.append(
             task(
                 task_id,
@@ -148,14 +162,21 @@ def canonical_tasks() -> list[dict[str, str]]:
                 evidence=evidence,
                 source_prerequisites=packet["prerequisites"],
                 source_gate_impact=packet["gate_freeze_impact"],
-                notes=(
-                    "Canonical execution-plan packet; normalized prerequisite IDs follow "
-                    "Sections 4-5 where the packet uses a cross-reference."
-                ),
+                notes=notes,
             )
         )
     return tasks
 
+
+TASK_NOTES_OVERRIDE = {
+    "T004": (
+        "Canonical execution-plan packet; normalized prerequisite IDs follow Sections 4-5 "
+        "where the packet uses a cross-reference. BLOCKED_HARDWARE: physical ESP32/AD8232/"
+        "MAX30102 hardware is unavailable for bench testing; recovery per the execution plan "
+        "is continue software with fixtures, block wearable evidence. See "
+        "docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md and reports/t004/hardware_deferral.json."
+    ),
+}
 
 TASKS = canonical_tasks()
 

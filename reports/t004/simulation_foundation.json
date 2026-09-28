@@ -1,0 +1,36 @@
+{
+  "contract_check": {
+    "distinct_from_wearable_v1": true,
+    "markers_present": {
+      "ACCELERATED_REPLAY": true,
+      "BIDMC_REPLAY": true,
+      "FAULT_INJECTION": true,
+      "LIVE_SPEED_REPLAY": true,
+      "LONGITUDINAL_COHORT": true,
+      "MITDB_REPLAY": true,
+      "ObservedRecord": true,
+      "SIM_P000001": true,
+      "SYNTHETIC_PHYSIOLOGY": true,
+      "SimulationTruth": true,
+      "WEARABLE_SIM_V1": true,
+      "WEARABLE_V1": true
+    }
+  },
+  "distinct_from": "WEARABLE_V1",
+  "hardware_resume_dependency": "WEARABLE_SIM_V1 is independent of physical hardware and does not resolve or substitute for any VERIFICATION_REQUIRED hardware fact; it exists to unblock hardware-independent software work only.",
+  "primary_fl_real_patient_rule": "The primary FL efficacy experiment's eight simulated sites are built exclusively from whole real MIT-BIH training patients; synthetic virtual patients are never substituted into that experiment.",
+  "primary_model_real_data_rule": "MODEL_V1 is trained, validated, calibrated, internally tested, and externally evaluated exclusively on real MIT-BIH/INCART data; synthetic physiology never substitutes at any stage.",
+  "simulation_id": "WEARABLE_SIM_V1",
+  "status": "PASS",
+  "supported_modes": [
+    "SYNTHETIC_PHYSIOLOGY",
+    "MITDB_REPLAY",
+    "BIDMC_REPLAY",
+    "FAULT_INJECTION",
+    "LONGITUDINAL_COHORT",
+    "LIVE_SPEED_REPLAY",
+    "ACCELERATED_REPLAY"
+  ],
+  "synthetic_provenance_rule": "Every synthetic record carries dataset_id=WEARABLE_SIM_V1, a SYNTHETIC_* source value, simulation_version, and simulation_seed; synthetic participants are never identified as real human volunteers.",
+  "truth_channel_separation": "ObservedRecord is what production NHM software receives; SimulationTruth is internal-only and may be consumed only by tests, simulator validation, and controlled engineering evaluation, never by production code."
+}

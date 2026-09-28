@@ -19,7 +19,8 @@ def test_task_registry_is_complete_and_future_work_is_not_started() -> None:
     assert rows[0]["status"] == "PASS"
     assert rows[1]["status"] == "PASS"
     assert rows[2]["status"] == "PASS"
-    assert all(row["status"] == "NOT_STARTED" for row in rows[3:])
+    assert rows[3]["status"] == "BLOCKED"
+    assert all(row["status"] == "NOT_STARTED" for row in rows[4:])
 
 
 def test_task_prerequisites_reference_known_tasks_or_gates() -> None:

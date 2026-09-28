@@ -1,8 +1,13 @@
 name: T001
 
+# Automatic CI (push/pull_request triggers) is intentionally deferred from T004 through T032.
+# Hardware-independent software tasks in this range run local Python 3.11 validation only
+# (see docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md). Automatic triggers are restored at T033,
+# with end-to-end CI at T034, clean-environment reproducibility CI at T035, and final release
+# CI at T036. Until then this workflow is manual-only (workflow_dispatch) and is not run as
+# part of normal task completion.
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   phase-01:

@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts
@@ -49,3 +49,19 @@ phase3:
 	$(MAKE) t002-evidence PYTHON=$(PYTHON)
 	$(MAKE) contracts PYTHON=$(PYTHON)
 	$(MAKE) t003-evidence PYTHON=$(PYTHON)
+
+t004-deferral:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/validate_t004_deferral.py
+
+t004-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t004_evidence.py
+
+phase4:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) t002-evidence PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t003-evidence PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	$(MAKE) t004-evidence PYTHON=$(PYTHON)

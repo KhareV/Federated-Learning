@@ -1,0 +1,53 @@
+# WEARABLE_SIM_V1 — versioned contract/configuration skeleton.
+# This is a boundary/identity skeleton only, established at T004. It does not configure a
+# generation engine (none exists yet) and does not encode clinical parameter distributions.
+# See contracts/WEARABLE_SIM_V1.md for the full engineering contract.
+
+simulation:
+  simulation_id: "WEARABLE_SIM_V1"
+  status: "CONTRACT_ONLY"
+  distinct_from: "WEARABLE_V1"
+
+provenance:
+  dataset_id: "WEARABLE_SIM_V1"
+  source_prefix: "SYNTHETIC_"
+  required_fields:
+    - dataset_id
+    - source
+    - simulation_version
+    - simulation_seed
+
+seed_policy:
+  deterministic: true
+  identity: "simulator_version + cohort_manifest + participant_seed + session_seed + scenario_configuration"
+  global_untracked_random_state_allowed: false
+
+supported_modes:
+  - SYNTHETIC_PHYSIOLOGY
+  - MITDB_REPLAY
+  - BIDMC_REPLAY
+  - FAULT_INJECTION
+  - LONGITUDINAL_COHORT
+  - LIVE_SPEED_REPLAY
+  - ACCELERATED_REPLAY
+
+profiles:
+  - WEARABLE_SIM_SMOKE
+  - WEARABLE_SIM_DEV
+  - WEARABLE_SIM_FULL
+  - WEARABLE_SIM_STRESS
+
+truth_channel_policy:
+  observed_stream: "ObservedRecord"
+  truth_stream: "SimulationTruth"
+  production_may_consume_truth_stream: false
+  allowed_truth_consumers:
+    - tests
+    - simulator_validation
+    - controlled_engineering_evaluation
+
+claim_boundary:
+  primary_model_real_data_rule: "MODEL_V1 is trained/validated/calibrated/tested exclusively on real MIT-BIH/INCART data; synthetic physiology never substitutes."
+  primary_fl_real_patient_rule: "Primary FL sites are built exclusively from whole real MIT-BIH training patients; synthetic virtual patients are never substituted into the primary FL efficacy experiment."
+  clinical_validation_claim_allowed: false
+  synthetic_participants_are_real_humans: false

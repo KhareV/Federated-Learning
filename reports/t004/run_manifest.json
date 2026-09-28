@@ -1,0 +1,50 @@
+{
+  "config_path": "configs/base.yaml",
+  "config_sha256": "fae3240e8d4261825c6c11b1df591af571238653179ad05b86a8d9e6540f6fec",
+  "created_at_utc": "2026-09-28T14:23:54.261708Z",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
+  "git_commit": "fcb0a96c1000a89f861c85d10c070c97f6e4209d",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md",
+      "sha256": "8d636e5452544d629354d9e7d47165500bd8afb9af08a90f898e71f6f22a48af"
+    },
+    {
+      "path": "docs/LEGACY_FIRMWARE_V0_FINDINGS.md",
+      "sha256": "97f8f116e09bb979efa7d0da853a4d99c4ad53f6b92ffe02ac860eea89e77b6f"
+    },
+    {
+      "path": "contracts/WEARABLE_SIM_V1.md",
+      "sha256": "9a47b29964762f5068ef5d39d05afbe3af1baab773e40c58ec3031c26831d0c2"
+    },
+    {
+      "path": "configs/simulation/WEARABLE_SIM_V1.yaml",
+      "sha256": "236b3d0a8faeb8f45dfa4c61eb07630927f5e9ca5afa497e3ce94f8f866f849e"
+    },
+    {
+      "path": "manifests/task_registry_v1.csv",
+      "sha256": "17fd42aed5ef67dc547d48e71acac49252504b7d9a4ca14f96417037b570d39a"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "T004 canonical hardware verification is BLOCKED_HARDWARE; this evidence records the deferral/fallback preparation and WEARABLE_SIM_V1 contract only. G1/G16 are not marked PASS and the hardware/data contract is not marked FROZEN.",
+  "output_artifacts": [
+    {
+      "path": "reports/t004/hardware_deferral.json",
+      "sha256": "9a449f208cc1f220db12f50eab5a44499cee1b266bd1fcfe0075d12885757cdd"
+    },
+    {
+      "path": "reports/t004/simulation_foundation.json",
+      "sha256": "0caf7a91d7d96da10bcba3c594319acd25acbe757d44392ac57f612f140db9c9"
+    }
+  ],
+  "phase_id": "T004",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T004-HARDWARE-DEFERRAL-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T004"
+}

@@ -1,0 +1,61 @@
+{
+  "block_reason": "BLOCKED_HARDWARE",
+  "canonical_objective": "Bench hardware verification and firmware packet contract",
+  "ci_policy_check": {
+    "manual_only": true,
+    "trigger_keys": [
+      "workflow_dispatch"
+    ]
+  },
+  "deferral_record_status": "PASS",
+  "execution_status": "BLOCKED",
+  "g1_status": "NOT_PASSED",
+  "gate_and_freeze_check": {
+    "f02_not_frozen": true,
+    "f02_status": "NOT_FROZEN",
+    "g16_not_passed": true,
+    "g16_status": "NOT_STARTED",
+    "g1_not_passed": true,
+    "g1_status": "NOT_STARTED"
+  },
+  "hardware_available": false,
+  "hardware_contract_frozen": false,
+  "hardware_deferred_execution_plan": "docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md",
+  "hardware_dependent_claims_blocked": [
+    "G1 hardware verification",
+    "real WEARABLE_V1 evidence",
+    "G16 wearable validation",
+    "physical timing/jitter evidence",
+    "real ADC scaling evidence"
+  ],
+  "legacy_firmware_findings": "docs/LEGACY_FIRMWARE_V0_FINDINGS.md",
+  "recovery_path": "continue software with fixtures; block wearable evidence",
+  "resume_condition": "Physical ESP32/AD8232/MAX30102 system available for bench testing",
+  "software_track_may_continue": true,
+  "task_id": "T004",
+  "task_registry_check": {
+    "t001_t003_pass": true,
+    "t004_status": "BLOCKED",
+    "t004_status_is_blocked": true
+  },
+  "unresolved_hardware_items": [
+    "Exact ESP32 variant",
+    "ADC resolution",
+    "ADC attenuation/reference voltage",
+    "AD8232 actual gain",
+    "AD8232 analog filtering",
+    "Electrode placement",
+    "MAX30102 register configuration",
+    "Actual achieved ECG sample rate",
+    "Actual achieved PPG sample rate",
+    "Timer/sampling jitter",
+    "Timestamp producer/origin (device vs. gateway/API vs. MongoDB)",
+    "Transport packet format",
+    "CRC/checksum behavior",
+    "BPM derivation algorithm",
+    "SpO2 derivation algorithm",
+    "Algorithm/firmware versions",
+    "Raw-count-to-physical-unit scaling"
+  ],
+  "verification_required_count": 17
+}
