@@ -3,7 +3,7 @@ F01,source authority,SPEC_V2.2/PLAN_V1.0,FROZEN,G0,C,T002-T036,E01-E16,all downs
 F02,hardware/data contract,HARDWARE_DATA_CONTRACT_V1,NOT_FROZEN,G1,C,T005;T030;T032;T034,E07;E08;E16,contract and wearable/integration reports,Observed MongoDB V0 remains unverified until T004.
 F03,dataset versions/manifests,DATASETS_V1,NOT_FROZEN,G3,C,T008-T031;T034-T036,E01-E14,data/model/evaluation/federated evidence,PTB-XL excluded from core scope.
 F04,label mapping,AAMI_SVF_MAP_V1,FROZEN,G4,C,T009-T031;T034-T036,E01-E14,labels/models/evaluations/federated evidence,Mapping change requires a new explicit version.
-F05,patient split,MITDB_SPLIT_V1,NOT_FROZEN,G5,C,T010-T031;T034-T036,E01-E14,split/model/evaluation/federated evidence,Patients and 201/202 grouping immutable after freeze.
+F05,patient split,MITDB_SPLIT_V1,FROZEN,G5,C,T010-T031;T034-T036,E01-E14,split/model/evaluation/federated evidence,Patients and 201/202 grouping immutable after freeze.
 F06,preprocessing,PREPROC_V1/GAP_POLICY_V1,NOT_FROZEN,G6,C,T014-T035,E01-E16,all derived caches/models/evaluations/deployment,Any scientific transform change is Class C.
 F07,baseline configuration,BASELINE_V1,NOT_FROZEN,G7,C,T015;T016;T035;T036,E01,baseline report,Majority remains training-only.
 F08,MODEL_V1,MODEL_V1,NOT_FROZEN,G8,C,T017-T034;T036,E02-E16,calibration/evaluation/FL/deployment/context evidence,Checkpoint/config/test vector hash required.

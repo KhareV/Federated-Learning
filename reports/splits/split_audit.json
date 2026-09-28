@@ -1,0 +1,45 @@
+{
+  "201_202_same_group": true,
+  "201_202_same_partition": true,
+  "candidate_hash_after": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+  "candidate_hash_before": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+  "candidate_unchanged": true,
+  "eligible_patient_group_count": 45,
+  "eligible_record_closure": "PASS",
+  "eligible_record_count": 46,
+  "errors": [],
+  "freeze_id": "F05",
+  "gate_id": "G5",
+  "multiply_assigned_groups": 0,
+  "overall_status": "PASS",
+  "pairwise_patient_intersections": [],
+  "partition_patient_counts": {
+    "CALIBRATION": 4,
+    "INTERNAL_TEST": 7,
+    "TRAIN": 27,
+    "VALIDATION": 7
+  },
+  "partition_record_counts": {
+    "CALIBRATION": 4,
+    "INTERNAL_TEST": 7,
+    "TRAIN": 27,
+    "VALIDATION": 8
+  },
+  "partition_role_contract_status": "IMPLEMENTED",
+  "real_window_audit_status": "DEFERRED_TO_T013",
+  "split_id": "MITDB_SPLIT_V1",
+  "split_reconstruction_match": true,
+  "split_record_count": 46,
+  "split_sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+  "strata_mismatch_count": 0,
+  "strata_recomputed": true,
+  "synthetic_window_harness_status": "SEE_reports/splits/window_audit.json",
+  "task_id": "T010",
+  "unassigned_groups": 0,
+  "upstream_hash_verification": "PASS",
+  "warnings": [
+    "VALIDATION has zero SVF-absent patient groups (small-N reality)",
+    "CALIBRATION has zero SVF-absent patient groups (small-N reality)",
+    "only 3 SVF-absent patient groups exist across the entire eligible pool -- a genuine result of the predeclared algorithm, not adjusted for"
+  ]
+}

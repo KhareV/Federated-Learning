@@ -1,0 +1,81 @@
+{
+  "audit_mode": "SYNTHETIC_HARNESS_VALIDATION",
+  "cases": {
+    "clean_manifest_control": {
+      "actual_status": "PASS",
+      "errors": [],
+      "expected_status": "PASS",
+      "matches_expectation": true
+    },
+    "duplicate_example_ids": {
+      "actual_status": "FAIL",
+      "errors": [
+        "duplicate example_id(s): ['g1']"
+      ],
+      "expected_status": "FAIL",
+      "matches_expectation": true
+    },
+    "excluded_record_entering_manifest": {
+      "actual_status": "FAIL",
+      "errors": [
+        "window references ineligible/excluded record(s): ['102']"
+      ],
+      "expected_status": "FAIL",
+      "matches_expectation": true
+    },
+    "identical_window_hash_across_partitions": {
+      "actual_status": "FAIL",
+      "errors": [
+        "duplicate source_hash across partitions: [('TRAIN', 'VALIDATION', ['hdup'])]"
+      ],
+      "expected_status": "FAIL",
+      "matches_expectation": true
+    },
+    "overlapping_source_intervals_across_partitions": {
+      "actual_status": "FAIL",
+      "errors": [
+        "d2: partition 'TRAIN' != frozen split partition 'VALIDATION' for record 201",
+        "patient crossing across partitions: [('TRAIN', 'VALIDATION', ['MITDB_P201_202'])]",
+        "record crossing across partitions: [('TRAIN', 'VALIDATION', ['201'])]",
+        "cross-partition overlapping/neighboring interval: d1 (VALIDATION) vs d2 (TRAIN) on record 201"
+      ],
+      "expected_status": "FAIL",
+      "matches_expectation": true
+    },
+    "same_patient_across_train_and_test": {
+      "actual_status": "FAIL",
+      "errors": [
+        "a2: partition 'INTERNAL_TEST' != frozen split partition 'TRAIN' for record 100",
+        "patient crossing across partitions: [('INTERNAL_TEST', 'TRAIN', ['MITDB_P100'])]",
+        "record crossing across partitions: [('INTERNAL_TEST', 'TRAIN', ['100'])]",
+        "cross-partition overlapping/neighboring interval: a1 (TRAIN) vs a2 (INTERNAL_TEST) on record 100"
+      ],
+      "expected_status": "FAIL",
+      "matches_expectation": true
+    },
+    "same_record_across_train_and_validation": {
+      "actual_status": "FAIL",
+      "errors": [
+        "b2: partition 'VALIDATION' != frozen split partition 'TRAIN' for record 101",
+        "patient crossing across partitions: [('TRAIN', 'VALIDATION', ['MITDB_P101'])]",
+        "record crossing across partitions: [('TRAIN', 'VALIDATION', ['101'])]",
+        "cross-partition overlapping/neighboring interval: b1 (TRAIN) vs b2 (VALIDATION) on record 101"
+      ],
+      "expected_status": "FAIL",
+      "matches_expectation": true
+    },
+    "wrong_record_to_partition_inheritance": {
+      "actual_status": "FAIL",
+      "errors": [
+        "e1: partition 'VALIDATION' != frozen split partition 'TRAIN' for record 100"
+      ],
+      "expected_status": "FAIL",
+      "matches_expectation": true
+    }
+  },
+  "overall_status": "PASS",
+  "real_window_audit_deferred_to": "T013",
+  "real_window_count": 0,
+  "real_window_manifest_available": false,
+  "synthetic_harness_validation": "PASS"
+}

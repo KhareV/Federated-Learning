@@ -1,0 +1,22 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "evaluation/leakage_audit.py": "c44e6025b91d61b73851b2714bf45dbb4bb16ec1b6d09fb25ae7b83d675cb128",
+    "manifests/splits/MITDB_SPLIT_V1.csv": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "manifests/splits/MITDB_SPLIT_V1.lock.json": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+    "manifests/splits/MITDB_SPLIT_V1.yaml": "4f108161c1c6027f2c92699fd39e129cb2af6a9f0c7cd8a93cdab52bd4319a21",
+    "manifests/splits/mitdb_groups.csv": "58f86a92740bcae13cc67d275b3c27692b8b7f308dc99af34a9a63b350c13b5c",
+    "manifests/splits/mitdb_patient_strata.csv": "f9f52efc061eec050f3e87206b53f43f4d5cede9d74d61da230e3dd77b83c2dd",
+    "manifests/splits/partition_roles_v1.yaml": "b5ee26ccf73e59a184bc1f82ccd02bd400066f62389e4b674dba691fb5709f4e",
+    "reports/splits/split_audit.json": "e7a5778f5fd575e84735787877b76407c45b35a13aa6919f5a5ed42054652a35",
+    "reports/splits/window_audit.json": "db736153bec5a51209cbe076e1e73d2df0ff775fe7e326335c222ab7941ac2e3",
+    "reports/t010/leakage_control_matrix.json": "10f0f74956e6a25eb15c8b16d586c819a5f846533334d7fc8ca8fba76902b435",
+    "reports/t010/run_manifest.json": "eddc8b8c981d45c7b7044f4894c9ed31cb07430f965edff8be07fc12fc26efde",
+    "scripts/audit_split_leakage_t010.py": "b6da483f9dcf943c22f5c252bce3b08a20a5e326efa06b2cd6331c27a9456e18",
+    "scripts/build_leakage_control_matrix_t010.py": "2e55b98254435a99016c9573c24779820885f2682d8b23db64ebbfc0cb52d34d",
+    "scripts/freeze_mitdb_split_t010.py": "3c6d34ac8351c6226768c837312dd2573ddf9c0ee448f290413276cfb870ae2d",
+    "scripts/run_window_leakage_harness_t010.py": "60eab09726f62d1aa2e9f3ec6416200fc3b055a9bae0a337690966b41d141653"
+  },
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest"
+}

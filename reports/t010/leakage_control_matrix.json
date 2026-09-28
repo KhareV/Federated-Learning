@@ -1,0 +1,78 @@
+{
+  "controls": {
+    "201_202_grouping": {
+      "status": "PASS"
+    },
+    "causal_filter": {
+      "status": "DEFERRED_TO_T012"
+    },
+    "causal_resampler": {
+      "status": "DEFERRED_TO_T011"
+    },
+    "client_contamination": {
+      "real_manifest": "DEFERRED_TO_T025",
+      "status": "HARNESS_ONLY"
+    },
+    "deterministic_split_reconstruction": {
+      "status": "PASS"
+    },
+    "eligible_record_closure": {
+      "status": "PASS"
+    },
+    "external_adaptation": {
+      "real_evaluation": "DEFERRED_TO_T020",
+      "status": "CONTRACT_GUARD_ONLY"
+    },
+    "fit_scope_contract": {
+      "status": "HARNESS_PASS_FUTURE_COMPONENT_NOT_IMPLEMENTED"
+    },
+    "gap_future_dependence": {
+      "status": "DEFERRED_TO_T012"
+    },
+    "partition_role_contract": {
+      "status": "HARNESS_PASS_FUTURE_COMPONENT_NOT_IMPLEMENTED"
+    },
+    "patient_overlap": {
+      "status": "PASS"
+    },
+    "real_window_neighborhood": {
+      "status": "DEFERRED_TO_T013"
+    },
+    "split_before_windows": {
+      "status": "PASS_BY_CONSTRUCTION"
+    },
+    "split_configuration_identity": {
+      "status": "PASS"
+    },
+    "upstream_hash_integrity": {
+      "status": "PASS"
+    },
+    "window_neighborhood_harness": {
+      "status": "HARNESS_PASS_FUTURE_COMPONENT_NOT_IMPLEMENTED"
+    }
+  },
+  "deferred_controls": [
+    "causal_filter",
+    "causal_resampler",
+    "external_adaptation",
+    "gap_future_dependence",
+    "real_window_neighborhood"
+  ],
+  "g5_actual_pass_controls": [
+    "201_202_grouping",
+    "deterministic_split_reconstruction",
+    "eligible_record_closure",
+    "patient_overlap",
+    "split_before_windows",
+    "split_configuration_identity",
+    "upstream_hash_integrity"
+  ],
+  "harness_only_controls": [
+    "client_contamination",
+    "fit_scope_contract",
+    "partition_role_contract",
+    "window_neighborhood_harness"
+  ],
+  "overall_status": "PASS",
+  "task_id": "T010"
+}

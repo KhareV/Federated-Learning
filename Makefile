@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets
@@ -230,3 +230,42 @@ phase9:
 	$(MAKE) t008-evidence PYTHON=$(PYTHON)
 	$(MAKE) mitdb-split PYTHON=$(PYTHON)
 	$(MAKE) t009-evidence PYTHON=$(PYTHON)
+
+# Offline. Independently recomputes G5 invariants from T006/T008/T009 artifacts (never trusts
+# T009's own report), runs the synthetic window-leakage harness, and -- only if both pass --
+# writes the MITDB_SPLIT_V1 freeze lock and verifies it. Never regenerates the candidate split.
+leakage-audit:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/audit_split_leakage_t010.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_window_leakage_harness_t010.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/build_leakage_control_matrix_t010.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_mitdb_split_t010.py
+
+t010-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t010_evidence.py
+
+# phase10 does not invoke any acquire-* target: normal local validation must not redownload
+# datasets on every run. Run the acquire-* targets (phase6/phase7) once before `make phase10`.
+phase10:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) t002-evidence PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t003-evidence PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	$(MAKE) t004-evidence PYTHON=$(PYTHON)
+	$(MAKE) t005-smoke PYTHON=$(PYTHON)
+	$(MAKE) t005-evidence PYTHON=$(PYTHON)
+	$(MAKE) validate-mitdb PYTHON=$(PYTHON)
+	$(MAKE) t006-evidence PYTHON=$(PYTHON)
+	$(MAKE) validate-incart PYTHON=$(PYTHON)
+	$(MAKE) validate-nstdb PYTHON=$(PYTHON)
+	$(MAKE) validate-bidmc PYTHON=$(PYTHON)
+	$(MAKE) dataset-role-audit PYTHON=$(PYTHON)
+	$(MAKE) t007-evidence PYTHON=$(PYTHON)
+	$(MAKE) annotation-census PYTHON=$(PYTHON)
+	$(MAKE) t008-evidence PYTHON=$(PYTHON)
+	$(MAKE) mitdb-split PYTHON=$(PYTHON)
+	$(MAKE) t009-evidence PYTHON=$(PYTHON)
+	$(MAKE) leakage-audit PYTHON=$(PYTHON)
+	$(MAKE) t010-evidence PYTHON=$(PYTHON)
