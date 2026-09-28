@@ -134,6 +134,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T006": "PASS",
             "T007": "PASS",
             "T008": "PASS",
+            "T009": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -144,6 +145,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T006": "645de3328d990c38ca60055c6a79d8833bfe95c7",
             "T007": "5786a7fa302b995d2f69a4f5e07df621cd3dddde",
             "T008": "27bcdc3986b6351cfde334060b521a1ff5eeac9d",
+            "T009": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
@@ -154,6 +156,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T006": "reports/t006/mitdb_validation.json",
             "T007": "reports/data/validation_report.json",
             "T008": "reports/labels/label_audit.json",
+            "T009": "reports/t009/split_generation.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -225,6 +228,21 @@ TASK_NOTES_OVERRIDE = {
         "INCART's seven documented pre-signal annotations (T007 finding) are preserved and "
         "re-reported (post-signal count 0). No window-building, no patient split, no "
         "preprocessing, no model training. G4 now PASS; G1 remains open."
+    ),
+    "T009": (
+        "Canonical execution-plan packet; normalized prerequisite IDs follow Sections 4-5 "
+        "where the packet uses a cross-reference. Deterministic MITDB_SPLIT_V1 patient-group "
+        "partition (datasets/grouping.py) from the frozen T006 exact-MLII eligible pool (46 "
+        "records, 102/104 excluded) and the frozen AAMI_SVF_MAP_V1 mapper (T008/F04). Records "
+        "201/202 grouped before allocation (45 eligible patient groups). Stratified on "
+        "has_svf_event (42 positive / 3 negative) via one predeclared exact-integer "
+        "minimum-squared-deviation allocation, one fixed seed (20260927), Hamilton/largest- "
+        "remainder partition apportionment, and SHA-256 stable ordering; zero patient "
+        "overlap, zero unassigned groups, byte-identical regeneration verified. Partition "
+        "quotas: TRAIN=27, VALIDATION=7, CALIBRATION=4, INTERNAL_TEST=7 patient groups. No "
+        "window-building, no preprocessing, no model training, no external evaluation. "
+        "split_status=DRAFT_VALIDATED, freeze_status=NOT_FROZEN: G5/F05 remain open -- T010 "
+        "owns the independent leakage audit and freeze."
     ),
 }
 

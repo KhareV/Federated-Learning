@@ -1,0 +1,5 @@
+partition,patient_count,has_svf_patient_count,no_svf_patient_count,has_svf_fraction,mapped_N,mapped_S,mapped_V,mapped_F,mapped_Q,unmappable
+TRAIN,27,25,2,0.925926,55177,2435,3902,419,13,472
+VALIDATION,7,7,0,1.0,15779,223,795,7,0,0
+CALIBRATION,4,4,0,1.0,6482,35,449,363,1802,0
+INTERNAL_TEST,7,6,1,0.857143,12931,88,2084,14,2080,0

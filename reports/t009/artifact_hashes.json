@@ -1,0 +1,19 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "datasets/grouping.py": "2129089ed94b9f62fc03b28b5400ada309a851d9a5be9ebca690e8232829a33d",
+    "manifests/splits/MITDB_SPLIT_V1.csv": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "manifests/splits/MITDB_SPLIT_V1.yaml": "4f108161c1c6027f2c92699fd39e129cb2af6a9f0c7cd8a93cdab52bd4319a21",
+    "manifests/splits/mitdb_groups.csv": "58f86a92740bcae13cc67d275b3c27692b8b7f308dc99af34a9a63b350c13b5c",
+    "manifests/splits/mitdb_patient_strata.csv": "f9f52efc061eec050f3e87206b53f43f4d5cede9d74d61da230e3dd77b83c2dd",
+    "manifests/splits/partition_roles_v1.yaml": "b5ee26ccf73e59a184bc1f82ccd02bd400066f62389e4b674dba691fb5709f4e",
+    "reports/t009/class_coverage.csv": "585af2813a6201e18667228b609503565042c4e5fbc98c3a2cac9a3b46caccdb",
+    "reports/t009/run_manifest.json": "1b4903261ed0bc9fc7641e331c2434dddf1c2bdc2c17d25bd15c3f010333eeea",
+    "reports/t009/split_generation.json": "d776ea9e8ded8068848374ee18767cbb4c3e9a3db54e376f22e6849ed93dd39a",
+    "reports/t009/split_independence_audit.json": "6d5cea7f8767634364f65b1e749e777856c9db2022a2ec6de896b9068fd44c4f",
+    "scripts/audit_split_independence_t009.py": "c7dc2033b1b2b009e133b1c4855e7cc9bd949e6532775f4f750d62d71cffae74",
+    "scripts/build_mitdb_split_t009.py": "3162aa071b1a12c01c9b74ef57e96174ff298102aea734db55e79a1ced210c25"
+  },
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest"
+}

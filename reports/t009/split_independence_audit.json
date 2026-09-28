@@ -1,0 +1,33 @@
+{
+  "audited_modules": [
+    "datasets/grouping.py",
+    "scripts/build_mitdb_split_t009.py"
+  ],
+  "errors": [],
+  "findings": {
+    "datasets/grouping.py": {
+      "forbidden_imports": [],
+      "forbidden_path_strings": []
+    },
+    "scripts/build_mitdb_split_t009.py": {
+      "forbidden_imports": [],
+      "forbidden_path_strings": []
+    }
+  },
+  "forbidden_import_prefixes": [
+    "models",
+    "training",
+    "evaluation",
+    "calibration",
+    "federated"
+  ],
+  "forbidden_path_substrings": [
+    "reports/models/",
+    "reports/evaluation/",
+    "reports/t020/",
+    "reports/calibration/",
+    "reports/federated/",
+    "reports/baselines/"
+  ],
+  "status": "PASS"
+}

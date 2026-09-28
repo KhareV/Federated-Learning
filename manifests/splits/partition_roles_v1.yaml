@@ -1,0 +1,32 @@
+split_id: MITDB_SPLIT_V1
+incart_note: INCART is entirely outside this split.
+partitions:
+  TRAIN:
+    allowed:
+    - fit model weights
+    - fit feature/scaler parameters
+    - derive augmentation settings
+    - derive majority-class baseline
+    forbidden: []
+  VALIDATION:
+    allowed:
+    - architecture/hyperparameter selection
+    - early stopping
+    forbidden:
+    - final test reporting
+    - calibration fitting
+  CALIBRATION:
+    allowed:
+    - temperature scaling
+    - operating threshold selection
+    forbidden:
+    - architecture changes
+    - model training
+  INTERNAL_TEST:
+    allowed:
+    - one final locked internal evaluation after model/calibration freeze
+    forbidden:
+    - all tuning
+    - all fitting
+    - threshold choice
+    - architecture choice

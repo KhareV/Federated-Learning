@@ -1,0 +1,23 @@
+split_id: MITDB_SPLIT_V1
+spec_version: '2.2'
+source_dataset: MITDB
+source_dataset_version: 1.0.0
+lead_policy_id: MITDB_EXACT_MLII_V1
+label_map_id: AAMI_SVF_MAP_V1
+split_seed: 20260927
+grouping_rule: MITDB_GROUPING_V1
+stratification_variable: has_svf_event
+target_proportions:
+  TRAIN: 0.6
+  VALIDATION: 0.15
+  CALIBRATION: 0.1
+  INTERNAL_TEST: 0.15
+allocation_algorithm: EXACT_INTEGER_MIN_SQUARED_DEVIATION
+rounding_algorithm: LARGEST_REMAINDER_HAMILTON
+stable_order_method: SHA256(split_id, split_seed, stratum, participant_group_id)
+split_status: DRAFT_VALIDATED
+freeze_status: NOT_FROZEN
+owning_task: T009
+freeze_owning_task: T010
+notes: Draft, internally validated by T009. Independent leakage audit and freeze (G5/F05)
+  are owned by T010, not this task.

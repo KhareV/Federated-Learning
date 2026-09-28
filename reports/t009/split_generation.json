@@ -1,0 +1,72 @@
+{
+  "algorithm": "EXACT_INTEGER_MIN_SQUARED_DEVIATION",
+  "candidate_seeds_tried": 1,
+  "determinism_check": true,
+  "duplicate_assignment_count": 0,
+  "eligible_patient_group_count": 45,
+  "eligible_record_count": 46,
+  "excluded_records": [
+    "102",
+    "104"
+  ],
+  "freeze_status": "NOT_FROZEN",
+  "manual_adjustments": "none",
+  "negative_patient_quota_by_partition": {
+    "CALIBRATION": 0,
+    "INTERNAL_TEST": 1,
+    "TRAIN": 2,
+    "VALIDATION": 0
+  },
+  "overall_status": "PASS",
+  "pairwise_patient_overlap_count": 0,
+  "partition_patient_counts": {
+    "CALIBRATION": 4,
+    "INTERNAL_TEST": 7,
+    "TRAIN": 27,
+    "VALIDATION": 7
+  },
+  "partition_patient_quotas": {
+    "CALIBRATION": 4,
+    "INTERNAL_TEST": 7,
+    "TRAIN": 27,
+    "VALIDATION": 7
+  },
+  "partition_record_counts": {
+    "CALIBRATION": 4,
+    "INTERNAL_TEST": 7,
+    "TRAIN": 27,
+    "VALIDATION": 8
+  },
+  "partition_target_proportions": {
+    "CALIBRATION": 0.1,
+    "INTERNAL_TEST": 0.15,
+    "TRAIN": 0.6,
+    "VALIDATION": 0.15
+  },
+  "positive_patient_quota_by_partition": {
+    "CALIBRATION": 4,
+    "INTERNAL_TEST": 6,
+    "TRAIN": 25,
+    "VALIDATION": 7
+  },
+  "records_201_202_group_id": "MITDB_P201_202",
+  "records_201_202_partition": "VALIDATION",
+  "records_201_202_same_group": true,
+  "records_201_202_same_partition": true,
+  "rounding_method": "LARGEST_REMAINDER_HAMILTON",
+  "split_id": "MITDB_SPLIT_V1",
+  "split_seed": 20260927,
+  "split_status": "DRAFT_VALIDATED",
+  "stable_order_method": "SHA256(split_id, split_seed, stratum, participant_group_id)",
+  "task_id": "T009",
+  "total_no_svf_patient_groups": 3,
+  "total_svf_positive_patient_groups": 42,
+  "unassigned_patient_count": 0,
+  "upstream_hashes": {
+    "datasets/labels.py": "335711bcf97f01ffb522f91ad757fc96c931be79784344ab035c167bd32f732b",
+    "manifests/datasets/mitdb_mlii_exclusions.csv": "6008fc052e6e6adf1d5bdca571e00398fdf66201837a5e7ded4e41b404dece86",
+    "manifests/datasets/mitdb_mlii_records.csv": "7c2a0695754e3486056626490e9fc9f552e1c78a745e7209901745ac058042c9",
+    "manifests/datasets/mitdb_v1.yaml": "807e185c2fa91a9597cc18034893e3f1ce857f461c634d986982981b1e20ff9a",
+    "manifests/labels/AAMI_SVF_MAP_V1.yaml": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145"
+  }
+}
