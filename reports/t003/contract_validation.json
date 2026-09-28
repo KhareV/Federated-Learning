@@ -1,0 +1,100 @@
+{
+  "contract_ids": [
+    "HARDWARE_DATA_CONTRACT_V1",
+    "SAMPLE_SCHEMA_V1",
+    "API_SCHEMA_V1",
+    "LABEL_SCHEMA_V1"
+  ],
+  "fixture_tests": [
+    {
+      "expected": "VALID",
+      "fixture": "valid_ecg_only_sample_v1.json",
+      "passed": true
+    },
+    {
+      "expected": "VALID",
+      "fixture": "valid_multimodal_sample_v1.json",
+      "passed": true
+    },
+    {
+      "expected": "INVALID",
+      "expected_reason_field": "timestamp_us",
+      "fixture": "invalid_missing_timestamp_v1.json",
+      "passed": true
+    },
+    {
+      "expected": "INVALID",
+      "expected_reason_field": "ecg_quality",
+      "fixture": "invalid_quality_enum_v1.json",
+      "passed": true
+    },
+    {
+      "expected": "INVALID",
+      "expected_reason_field": "sample_index",
+      "fixture": "invalid_negative_sample_index_v1.json",
+      "passed": true
+    },
+    {
+      "expected": "VALID",
+      "fixture": "valid_infer_window_request",
+      "passed": true
+    },
+    {
+      "expected": "INVALID",
+      "fixture": "invalid_infer_window_request_ecg_length",
+      "passed": true
+    },
+    {
+      "expected": "VALID",
+      "fixture": "valid_infer_window_response",
+      "passed": true
+    },
+    {
+      "expected": "INVALID",
+      "fixture": "invalid_infer_window_response_monitoring_state",
+      "passed": true
+    }
+  ],
+  "label_markers_present": {
+    "AAMI_SVF_MAP_V1": true,
+    "AAMI_SVF_WINDOW_V1": true,
+    "N_ONLY_WINDOW": true,
+    "RECHECK_SENSOR": true,
+    "SVF_CONTAINING_WINDOW": true,
+    "UNMAPPABLE": true,
+    "paced": true
+  },
+  "required_identifiers_present": {
+    "AAMI_SVF_MAP_V1": true,
+    "AAMI_SVF_WINDOW_V1": true,
+    "API_SCHEMA_V1": true,
+    "HARDWARE_DATA_CONTRACT_V1": true,
+    "LABEL_SCHEMA_V1": true,
+    "SAMPLE_SCHEMA_V1": true,
+    "SPEC_VERSION = 2.2": true
+  },
+  "schema_validation_status": "PASS",
+  "spec_version": "2.2",
+  "status": "PASS",
+  "task_id": "T003",
+  "unresolved_hardware_items": [
+    "Exact ESP32 variant",
+    "ADC resolution",
+    "ADC attenuation/reference voltage",
+    "AD8232 actual gain",
+    "AD8232 analog filtering",
+    "Electrode placement",
+    "MAX30102 register configuration",
+    "Actual achieved ECG sample rate",
+    "Actual achieved PPG sample rate",
+    "Timer/sampling jitter",
+    "Timestamp producer/origin (device vs. gateway/API vs. MongoDB)",
+    "Transport packet format",
+    "CRC/checksum behavior",
+    "BPM derivation algorithm",
+    "SpO2 derivation algorithm",
+    "Algorithm/firmware versions",
+    "Raw-count-to-physical-unit scaling"
+  ],
+  "verification_required_count": 17
+}

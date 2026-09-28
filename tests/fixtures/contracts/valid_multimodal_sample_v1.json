@@ -1,0 +1,18 @@
+{
+  "contract_version": "SAMPLE_SCHEMA_V1",
+  "participant_id": "PX-FIXTURE-002",
+  "session_id": "SESSION-FIXTURE-002",
+  "timestamp_us": 2000000,
+  "sample_index": 500,
+  "ecg_raw": 2100,
+  "ppg_red_raw": 18432,
+  "ppg_ir_raw": 19200,
+  "spo2_pct": 97.5,
+  "spo2_valid": true,
+  "hr_ecg_bpm": 72.0,
+  "pr_ppg_bpm": 74.0,
+  "ecg_quality": "VALID",
+  "ppg_quality": "VALID",
+  "source": "SYNTHETIC_FIXTURE",
+  "preprocess_version": null
+}

@@ -42,3 +42,7 @@ jobs:
         run: make coverage PYTHON=python
       - name: T002 evidence generation
         run: make t002-evidence PYTHON=python
+      - name: T003 contract validation
+        run: make contracts PYTHON=python
+      - name: T003 evidence generation
+        run: make t003-evidence PYTHON=python

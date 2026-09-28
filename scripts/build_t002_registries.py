@@ -125,14 +125,16 @@ def canonical_tasks() -> list[dict[str, str]]:
         task_id = packet["task_id"]
         gates = packet["gate_freeze_impact"].replace("-", ";")
         gates = gates.replace("post;G10", "G10").replace("G11 prep", "G11")
-        status = "PASS" if task_id in {"T001", "T002"} else "NOT_STARTED"
+        status = "PASS" if task_id in {"T001", "T002", "T003"} else "NOT_STARTED"
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
             "T002": "83f0136052cd5136705f2dfc9347f15f2d9c425e",
+            "T003": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
             "T002": "reports/t002/source_reconciliation.json",
+            "T003": "reports/t003/contract_validation.json",
         }.get(task_id, "")
         tasks.append(
             task(

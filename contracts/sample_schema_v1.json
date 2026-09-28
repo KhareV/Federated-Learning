@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nhm.local/contracts/sample_schema_v1.json",
+  "title": "NHM Canonical Sample Schema V1",
+  "description": "Canonical single-sample record under HARDWARE_DATA_CONTRACT_V1 (status DRAFT_FOR_G1_VERIFICATION, spec_version 2.2). This describes the target project interface, not a claim that current hardware/backend already emits this shape. The OBSERVED_MONGODB_SCHEMA_V0 document does not satisfy this schema; see docs/OBSERVED_MONGODB_SCHEMA_V0.md and the compatibility table in contracts/HARDWARE_DATA_CONTRACT_V1.md. Missing modalities are represented by explicit null/validity fields, never by magic numeric sentinels (0, 1024, 2048, -1 carry no assumed meaning under this contract).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "participant_id",
+    "session_id",
+    "timestamp_us",
+    "sample_index",
+    "ecg_raw",
+    "ppg_red_raw",
+    "ppg_ir_raw",
+    "spo2_pct",
+    "spo2_valid",
+    "hr_ecg_bpm",
+    "pr_ppg_bpm",
+    "ecg_quality",
+    "ppg_quality",
+    "source",
+    "preprocess_version"
+  ],
+  "properties": {
+    "contract_version": { "const": "SAMPLE_SCHEMA_V1" },
+    "participant_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Pseudonymous participant identifier. Demographics must never be inferred from it."
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier for one acquisition session."
+    },
+    "timestamp_us": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Device/session time: microseconds since device session start (int64 semantics). Used for ordering, synchronization, window boundaries, and gap detection. Not a wall-clock claim."
+    },
+    "sample_index": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonically increasing source sample index within the session."
+    },
+    "ecg_raw": {
+      "type": ["integer", "null"],
+      "description": "Raw ECG ADC counts from the AD8232 acquisition path. Not millivolts; calibrated ECG requires a separately versioned field. null means the modality is explicitly unavailable for this sample, not a sentinel value."
+    },
+    "ppg_red_raw": {
+      "type": ["integer", "null"],
+      "description": "Raw MAX30102 red-channel ADC counts. null when unavailable."
+    },
+    "ppg_ir_raw": {
+      "type": ["integer", "null"],
+      "description": "Raw MAX30102 infrared-channel ADC counts. null when unavailable."
+    },
+    "spo2_pct": {
+      "type": ["number", "null"],
+      "description": "Derived SpO2 percentage. Never laboratory ground truth. null when spo2_valid is false or the modality is unavailable."
+    },
+    "spo2_valid": {
+      "type": "boolean",
+      "description": "Explicit validity flag for spo2_pct; required even when spo2_pct is null."
+    },
+    "hr_ecg_bpm": {
+      "type": ["number", "null"],
+      "description": "Heart rate derived from ECG. Kept separate from pr_ppg_bpm; disagreement between the two is never silently collapsed."
+    },
+    "pr_ppg_bpm": {
+      "type": ["number", "null"],
+      "description": "Pulse rate derived from PPG. Kept separate from hr_ecg_bpm."
+    },
+    "ecg_quality": {
+      "$ref": "#/$defs/qualityState",
+      "description": "ECG channel quality state. UNUSABLE suppresses physiological alerting and yields RECHECK_SENSOR at the application layer."
+    },
+    "ppg_quality": {
+      "anyOf": [{ "$ref": "#/$defs/qualityState" }, { "type": "null" }],
+      "description": "PPG channel quality state, or null when no PPG modality is present for this sample at all."
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Provenance identifier for the sample origin (e.g. a dataset id or live acquisition path identifier). Not itself a claim of physiological validity."
+    },
+    "preprocess_version": {
+      "type": ["string", "null"],
+      "description": "Identifier of the causal preprocessing transform applied, or null for an unprocessed raw sample. PREPROC_V1 is not implemented as of T003; this field only reserves the identifier slot."
+    }
+  },
+  "$defs": {
+    "qualityState": {
+      "type": "string",
+      "enum": ["VALID", "DEGRADED", "UNUSABLE"]
+    }
+  }
+}

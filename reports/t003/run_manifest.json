@@ -1,0 +1,62 @@
+{
+  "config_path": "configs/base.yaml",
+  "config_sha256": "4993516f72a97cd59a0d2578abba92369ff6172d249f09f3b368e0454f0fa6bd",
+  "created_at_utc": "2026-09-28T13:51:55.687754Z",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
+  "git_commit": "0346b0058b2bebec5012167324ab8ab8fdfe651e",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "contracts/HARDWARE_DATA_CONTRACT_V1.md",
+      "sha256": "62af6c51cb1f2414b9ec907507c17911868a8933f82c8c11926a6a99454bf864"
+    },
+    {
+      "path": "contracts/sample_schema_v1.json",
+      "sha256": "234b1f49ef6f8581f576e5cb4741c457c0d4703d527f435f0af2974658f4cb38"
+    },
+    {
+      "path": "contracts/API_SCHEMA_V1.json",
+      "sha256": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9"
+    },
+    {
+      "path": "contracts/LABEL_SCHEMA_V1.md",
+      "sha256": "6bfeab65d185a2687c43d114914a14f36e0abf2068aae119dcce75f7a633a373"
+    },
+    {
+      "path": "tests/fixtures/contracts/invalid_missing_timestamp_v1.json",
+      "sha256": "f1db38624b32cdfba2e90de16ecef49ed4551fff0990f0546be0d513c5c8f3d9"
+    },
+    {
+      "path": "tests/fixtures/contracts/invalid_negative_sample_index_v1.json",
+      "sha256": "483909875166f3a742c6c9e821849b8ee0e980a93d4bcd059a27ef3476515c19"
+    },
+    {
+      "path": "tests/fixtures/contracts/invalid_quality_enum_v1.json",
+      "sha256": "0fadb50e0475850836c138d4c53003b92f9841be21d4af3beca513c2073c4b6d"
+    },
+    {
+      "path": "tests/fixtures/contracts/valid_ecg_only_sample_v1.json",
+      "sha256": "f469e35a386f339f7113899842adeb0a883e2334dc7d0c921aabddaa5b95fc84"
+    },
+    {
+      "path": "tests/fixtures/contracts/valid_multimodal_sample_v1.json",
+      "sha256": "a74b31aaa1bb8849399ef9ace749f1376d6c4331829b0e1f0172d70662a63ed0"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Canonical hardware/data/API/label contract skeletons. Hardware physical facts remain VERIFICATION_REQUIRED; G1 is not marked PASS by this task.",
+  "output_artifacts": [
+    {
+      "path": "reports/t003/contract_validation.json",
+      "sha256": "d0defde50c5945e29ba2b8c07c91cf242e5c82b5d6ffb3f0b86cbd65a9c6fcb8"
+    }
+  ],
+  "phase_id": "T003",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T003-CONTRACT-VALIDATION-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T003"
+}

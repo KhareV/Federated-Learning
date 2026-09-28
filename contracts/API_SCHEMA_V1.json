@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nhm.local/contracts/API_SCHEMA_V1.json",
+  "title": "NHM API Schema V1",
+  "description": "Schema contract only for the future POST /v1/infer-window endpoint (v2.2 Section 27). No FastAPI/HTTP implementation exists as of T003; that is T032. target is always AAMI_SVF_WINDOW_V1: a descriptive statement about the observed ECG window, never a disease diagnosis, beat classification, future forecast, or clinical decision. Error status codes are locked: 400 = schema/request error, 422 = unusable or incomplete signal window, 500 = server/internal failure. A future WebSocket endpoint must wrap this same request/response schema and inference semantics rather than an alternate model path. No API field or endpoint may return a disease diagnosis.",
+  "$defs": {
+    "qualityState": {
+      "type": "string",
+      "enum": ["VALID", "DEGRADED", "UNUSABLE"],
+      "description": "Must match the quality enum locked in contracts/sample_schema_v1.json and HARDWARE_DATA_CONTRACT_V1.md."
+    },
+    "monitoringState": {
+      "type": "string",
+      "enum": [
+        "NORMAL_MONITORED_PATTERN",
+        "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+        "RECHECK_SENSOR",
+        "CONTEXT_UNAVAILABLE",
+        "SYSTEM_ERROR"
+      ],
+      "description": "Locked application monitoring states. State-transition logic belongs to later fusion/episode work, not T003."
+    },
+    "ecgWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["samples", "target_hz", "window_seconds"],
+      "description": "Locked canonical MODEL_V1 inference contract target: 10 seconds x 250 Hz = 2500 samples. This is the frozen runtime interface definition, not a measurement of current hardware capability; the achieved ECG sample rate remains VERIFICATION_REQUIRED under HARDWARE_DATA_CONTRACT_V1 until T004.",
+      "properties": {
+        "samples": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2500,
+          "maxItems": 2500
+        },
+        "target_hz": { "const": 250 },
+        "window_seconds": { "const": 10 }
+      }
+    },
+    "ppgContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["quality", "pr_bpm", "spo2_pct", "spo2_valid"],
+      "description": "Deterministic PPG/SpO2/HR context only; never a learned multimodal arrhythmia input (CB05).",
+      "properties": {
+        "quality": {
+          "anyOf": [{ "$ref": "#/$defs/qualityState" }, { "type": "null" }]
+        },
+        "pr_bpm": { "type": ["number", "null"] },
+        "spo2_pct": { "type": ["number", "null"] },
+        "spo2_valid": { "type": ["boolean", "null"] }
+      }
+    },
+    "inferWindowRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_version",
+        "session_id",
+        "timestamp_us",
+        "ecg",
+        "ecg_quality",
+        "ppg_context",
+        "model_id"
+      ],
+      "properties": {
+        "contract_version": { "const": "API_SCHEMA_V1" },
+        "session_id": { "type": "string", "minLength": 1 },
+        "timestamp_us": { "type": "integer", "minimum": 0 },
+        "ecg": { "$ref": "#/$defs/ecgWindow" },
+        "ecg_quality": { "$ref": "#/$defs/qualityState" },
+        "ppg_context": {
+          "anyOf": [{ "$ref": "#/$defs/ppgContext" }, { "type": "null" }]
+        },
+        "model_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "inferWindowResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_version",
+        "timestamp_us",
+        "model_id",
+        "target",
+        "raw_probability",
+        "source_domain_calibrated_probability",
+        "calibration_domain",
+        "calibration_patient_count",
+        "calibration_id",
+        "threshold",
+        "ecg_quality",
+        "monitoring_state",
+        "context",
+        "latency_ms",
+        "preprocess_version",
+        "alert_policy_id"
+      ],
+      "properties": {
+        "contract_version": { "const": "API_SCHEMA_V1" },
+        "timestamp_us": { "type": "integer", "minimum": 0 },
+        "model_id": { "type": ["string", "null"] },
+        "target": {
+          "const": "AAMI_SVF_WINDOW_V1",
+          "description": "Describes the observed ECG window only; never a diagnosis, beat classifier output, or future forecast."
+        },
+        "raw_probability": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "source_domain_calibrated_probability": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "calibration_domain": { "type": ["string", "null"] },
+        "calibration_patient_count": { "type": ["integer", "null"], "minimum": 0 },
+        "calibration_id": { "type": ["string", "null"] },
+        "threshold": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "ecg_quality": { "$ref": "#/$defs/qualityState" },
+        "monitoring_state": { "$ref": "#/$defs/monitoringState" },
+        "context": { "type": ["object", "null"] },
+        "latency_ms": { "type": ["number", "null"], "minimum": 0 },
+        "preprocess_version": { "type": ["string", "null"] },
+        "alert_policy_id": { "type": ["string", "null"] }
+      }
+    },
+    "errorResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_version", "status_code", "error_type", "message"],
+      "properties": {
+        "contract_version": { "const": "API_SCHEMA_V1" },
+        "status_code": {
+          "enum": [400, 422, 500],
+          "description": "400 = schema/request error; 422 = unusable or incomplete signal window; 500 = server/internal failure only."
+        },
+        "error_type": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "contracts/API_SCHEMA_V1.json": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+    "contracts/HARDWARE_DATA_CONTRACT_V1.md": "62af6c51cb1f2414b9ec907507c17911868a8933f82c8c11926a6a99454bf864",
+    "contracts/LABEL_SCHEMA_V1.md": "6bfeab65d185a2687c43d114914a14f36e0abf2068aae119dcce75f7a633a373",
+    "contracts/sample_schema_v1.json": "234b1f49ef6f8581f576e5cb4741c457c0d4703d527f435f0af2974658f4cb38",
+    "reports/t003/contract_validation.json": "d0defde50c5945e29ba2b8c07c91cf242e5c82b5d6ffb3f0b86cbd65a9c6fcb8",
+    "reports/t003/run_manifest.json": "aea0bc88455b7accd9e9451a5be52c45c6ef3b532784c8cec730d8ed859c5682"
+  },
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest"
+}
