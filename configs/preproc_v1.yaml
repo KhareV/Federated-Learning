@@ -1,0 +1,58 @@
+preproc_id: PREPROC_V1
+spec_version: "2.2"
+status: DRAFT_UNTIL_G6
+
+resampler:
+  resampler_id: PREPROC_V1_RESAMPLER_V1
+  design_id: FIR_KAISER_POLYPHASE_V1
+  target_rate_hz: 250
+  timestamp_mapping_id: CAUSAL_OUTPUT_GRID_V1
+  state_initialization: ZERO_FIR_HISTORY_AT_SEGMENT_START
+  tail_policy: NO_FUTURE_ZERO_PADDING
+  internal_dtype: float64
+  validated_by_task: T011
+  status: PASS
+  conversions:
+    MITDB_360_TO_250_V1:
+      input_rate_hz: 360
+      output_rate_hz: 250
+      up: 25
+      down: 36
+      num_taps: 721
+      group_delay_output_samples: 10
+      group_delay_seconds: 0.040
+      startup_transient_output_span: 20
+      coefficient_path: preprocessing/coefficients/MITDB_360_TO_250_V1.npy
+      coefficient_sha256: 3d11b6f904d1630090623bd89b0029f8b21e6edb05f6327b396a13da4090bd72
+    INCART_257_TO_250_V1:
+      input_rate_hz: 257
+      output_rate_hz: 250
+      up: 250
+      down: 257
+      num_taps: 5141
+      group_delay_output_samples: 10
+      group_delay_seconds: 0.040
+      startup_transient_output_span: 20
+      coefficient_path: preprocessing/coefficients/INCART_257_TO_250_V1.npy
+      coefficient_sha256: b8dd6a50530332aad6c163dfdb5363d14393a3c0de9644790a6409072f7f928c
+  gap_handling: DEFERRED_T012
+
+filters:
+  status: DEFERRED_T012
+
+gap_policy:
+  status: DEFERRED_T012
+
+windowing:
+  status: DEFERRED_T013
+
+normalization:
+  status: DEFERRED_T014
+
+notes: >
+  Only the resampler component is validated (T011). PREPROC_V1 as a whole remains
+  DRAFT_UNTIL_G6: causal ECG/PPG bandpass filtering and GAP_POLICY_V1 (T012), and real
+  window construction (T013), are still required before G6 can close. Any change to the
+  resampler design, coefficients, group-delay convention, timestamp mapping, or state
+  initialization after this point requires rerunning T011 evidence and, once F06 freezes,
+  is a formal Class C scientific PREPROC version change (docs/CHANGE_CONTROL.md).

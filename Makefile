@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets
@@ -269,3 +269,46 @@ phase10:
 	$(MAKE) t009-evidence PYTHON=$(PYTHON)
 	$(MAKE) leakage-audit PYTHON=$(PYTHON)
 	$(MAKE) t010-evidence PYTHON=$(PYTHON)
+
+# Offline. Deterministically (re)generates the committed PREPROC_V1_RESAMPLER_V1 FIR
+# coefficient package -- never redesigned at runtime, only regenerated here for provenance.
+resampler-coefficients:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/design_resampler_t011.py
+
+# Offline, synthetic signals only. Verifies F05 before/after, runs future-append/chunk-
+# equivalence/direct-reference/impulse/clock/memory-bound proofs, and the forbidden-API audit.
+resampler-causality:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_resampler_causality_t011.py
+
+t011-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t011_evidence.py
+
+# phase11 does not invoke any acquire-* target: normal local validation must not redownload
+# datasets on every run. Run the acquire-* targets (phase6/phase7) once before `make phase11`.
+phase11:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) t002-evidence PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t003-evidence PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	$(MAKE) t004-evidence PYTHON=$(PYTHON)
+	$(MAKE) t005-smoke PYTHON=$(PYTHON)
+	$(MAKE) t005-evidence PYTHON=$(PYTHON)
+	$(MAKE) validate-mitdb PYTHON=$(PYTHON)
+	$(MAKE) t006-evidence PYTHON=$(PYTHON)
+	$(MAKE) validate-incart PYTHON=$(PYTHON)
+	$(MAKE) validate-nstdb PYTHON=$(PYTHON)
+	$(MAKE) validate-bidmc PYTHON=$(PYTHON)
+	$(MAKE) dataset-role-audit PYTHON=$(PYTHON)
+	$(MAKE) t007-evidence PYTHON=$(PYTHON)
+	$(MAKE) annotation-census PYTHON=$(PYTHON)
+	$(MAKE) t008-evidence PYTHON=$(PYTHON)
+	$(MAKE) mitdb-split PYTHON=$(PYTHON)
+	$(MAKE) t009-evidence PYTHON=$(PYTHON)
+	$(MAKE) leakage-audit PYTHON=$(PYTHON)
+	$(MAKE) t010-evidence PYTHON=$(PYTHON)
+	$(MAKE) resampler-coefficients PYTHON=$(PYTHON)
+	$(MAKE) resampler-causality PYTHON=$(PYTHON)
+	$(MAKE) t011-evidence PYTHON=$(PYTHON)

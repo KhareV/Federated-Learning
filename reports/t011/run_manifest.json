@@ -1,0 +1,62 @@
+{
+  "config_path": "configs/base.yaml",
+  "config_sha256": "ef82049e25d7821bf8a15cfa4416914ee43e3b5473515eca0a04559ec99f120c",
+  "created_at_utc": "2026-09-28T22:27:06.153770Z",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
+  "git_commit": "8f9f4aa81ee1a42fcd87e99b7151695186f33e62",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "preprocessing/resample.py",
+      "sha256": "1aeae9a4833ceed4f46bcc72fc23bc4fb933c195a4b09e05010bb2f22c56f5a9"
+    },
+    {
+      "path": "scripts/design_resampler_t011.py",
+      "sha256": "efcf5e2357279bc2dcbe2169e6328a819003ce984b89b03688be68ef76126dd6"
+    },
+    {
+      "path": "scripts/run_resampler_causality_t011.py",
+      "sha256": "2e119252b7c6abe0515ffecb2f446a026738b3740c078390de767538801f6a4d"
+    },
+    {
+      "path": "manifests/splits/MITDB_SPLIT_V1.lock.json",
+      "sha256": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Stateful causal rational/polyphase FIR resampler (PREPROC_V1_RESAMPLER_V1) for MITDB (360->250 Hz, up=25/down=36) and INCART (257->250 Hz, up=250/down=257). Bounded-memory streaming polyphase implementation, cross-checked against a slow direct causal reference; future-append and chunk-equivalence proven to machine-epsilon tolerance. No centered/offline resample_poly/resample/filtfilt in the production path (statically audited). Group delay 10 output samples (40ms) for both conversions, exposed as explicit metadata, never backdated. F05 split freeze verified unchanged before and after. No GAP_POLICY_V1, no physiological bandpass filtering, no real windows, no normalization, no model training. G6 remains open -- T012/T013 still required.",
+  "output_artifacts": [
+    {
+      "path": "configs/preproc_v1.yaml",
+      "sha256": "0fba0391dbd784830ba32f82834acaf419317948cfc6b1c94bda871c8790b8e5"
+    },
+    {
+      "path": "preprocessing/coefficients/manifest.json",
+      "sha256": "d09def2f2ce9bbed5543b4191807f04689c2717faa09d63d07fc3433f05f9eb3"
+    },
+    {
+      "path": "preprocessing/coefficients/MITDB_360_TO_250_V1.npy",
+      "sha256": "3d11b6f904d1630090623bd89b0029f8b21e6edb05f6327b396a13da4090bd72"
+    },
+    {
+      "path": "preprocessing/coefficients/INCART_257_TO_250_V1.npy",
+      "sha256": "b8dd6a50530332aad6c163dfdb5363d14393a3c0de9644790a6409072f7f928c"
+    },
+    {
+      "path": "reports/preprocessing/resampler_causality.json",
+      "sha256": "8200257684f9b503456111a4add0e8017a9fdcea2439899a5033816faa8bbc52"
+    },
+    {
+      "path": "reports/t011/resampler_spec.json",
+      "sha256": "69aea4d2e26590781ce1403e31288c2f9b04be66f8ce9318148f045f47a74618"
+    }
+  ],
+  "phase_id": "T011",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T011-CAUSAL-RESAMPLER-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T011"
+}

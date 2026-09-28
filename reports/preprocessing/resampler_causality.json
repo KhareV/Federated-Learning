@@ -1,0 +1,113 @@
+{
+  "conversions": {
+    "INCART_257_TO_250_V1": {
+      "chunk_equivalence_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS",
+        "tolerance_atol": 1e-09
+      },
+      "chunk_equivalence_status": "PASS",
+      "coefficient_count": 5141,
+      "coefficient_sha256": "b8dd6a50530332aad6c163dfdb5363d14393a3c0de9644790a6409072f7f928c",
+      "direct_reference_detail": {
+        "max_absolute_error": 8.881784197001252e-16,
+        "status": "PASS",
+        "tolerance_atol": 1e-09
+      },
+      "direct_reference_status": "PASS",
+      "down": 257,
+      "future_append_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS",
+        "tolerance_atol": 1e-09
+      },
+      "future_append_status": "PASS",
+      "group_delay_output_samples": 10,
+      "group_delay_seconds": 0.04,
+      "impulse_delay_detail": {
+        "expected_delay_ms": 40.0,
+        "expected_peak_output_index": 10,
+        "observed_delay_ms": 40.0,
+        "observed_peak_output_index": 10,
+        "status": "PASS"
+      },
+      "impulse_delay_status": "PASS",
+      "memory_bound_detail": {
+        "input_samples_processed": 48850,
+        "max_retained_source_samples": 21,
+        "status": "PASS"
+      },
+      "memory_bound_status": "PASS",
+      "output_clock_detail": {
+        "max_drift_us": 0,
+        "period_us": 4000,
+        "status": "PASS"
+      },
+      "output_clock_status": "PASS",
+      "timestamp_mapping_id": "CAUSAL_OUTPUT_GRID_V1",
+      "up": 250
+    },
+    "MITDB_360_TO_250_V1": {
+      "chunk_equivalence_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS",
+        "tolerance_atol": 1e-09
+      },
+      "chunk_equivalence_status": "PASS",
+      "coefficient_count": 721,
+      "coefficient_sha256": "3d11b6f904d1630090623bd89b0029f8b21e6edb05f6327b396a13da4090bd72",
+      "direct_reference_detail": {
+        "max_absolute_error": 6.661338147750939e-16,
+        "status": "PASS",
+        "tolerance_atol": 1e-09
+      },
+      "direct_reference_status": "PASS",
+      "down": 36,
+      "future_append_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS",
+        "tolerance_atol": 1e-09
+      },
+      "future_append_status": "PASS",
+      "group_delay_output_samples": 10,
+      "group_delay_seconds": 0.04,
+      "impulse_delay_detail": {
+        "expected_delay_ms": 40.0,
+        "expected_peak_output_index": 10,
+        "observed_delay_ms": 40.0,
+        "observed_peak_output_index": 10,
+        "status": "PASS"
+      },
+      "impulse_delay_status": "PASS",
+      "memory_bound_detail": {
+        "input_samples_processed": 48850,
+        "max_retained_source_samples": 29,
+        "status": "PASS"
+      },
+      "memory_bound_status": "PASS",
+      "output_clock_detail": {
+        "max_drift_us": 0,
+        "period_us": 4000,
+        "status": "PASS"
+      },
+      "output_clock_status": "PASS",
+      "timestamp_mapping_id": "CAUSAL_OUTPUT_GRID_V1",
+      "up": 25
+    }
+  },
+  "forbidden_api_audit": {
+    "forbidden_references_found": [],
+    "status": "PASS"
+  },
+  "overall_status": "PASS",
+  "preproc_id": "PREPROC_V1",
+  "resampler_id": "PREPROC_V1_RESAMPLER_V1",
+  "split_freeze_verified": {
+    "split_sha256_after": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "split_sha256_before": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "status": "PASS",
+    "unchanged": true
+  },
+  "target_rate_hz": 250,
+  "task_id": "T011"
+}

@@ -1,0 +1,57 @@
+{
+  "causality_overall_status": "PASS",
+  "conversions": {
+    "INCART_257_TO_250_V1": {
+      "coefficient_path": "preprocessing/coefficients/INCART_257_TO_250_V1.npy",
+      "coefficient_sha256": "b8dd6a50530332aad6c163dfdb5363d14393a3c0de9644790a6409072f7f928c",
+      "dc_scaling": "up",
+      "design_id": "FIR_KAISER_POLYPHASE_V1",
+      "down": 257,
+      "dtype": "float64",
+      "group_delay_output_samples": 10,
+      "group_delay_seconds": 0.04,
+      "half_len": 2570,
+      "input_rate_hz": 257,
+      "kaiser_beta": 5.0,
+      "num_taps": 5141,
+      "output_rate_hz": 250,
+      "startup_transient_output_span": 20,
+      "up": 250,
+      "window": "kaiser"
+    },
+    "MITDB_360_TO_250_V1": {
+      "coefficient_path": "preprocessing/coefficients/MITDB_360_TO_250_V1.npy",
+      "coefficient_sha256": "3d11b6f904d1630090623bd89b0029f8b21e6edb05f6327b396a13da4090bd72",
+      "dc_scaling": "up",
+      "design_id": "FIR_KAISER_POLYPHASE_V1",
+      "down": 36,
+      "dtype": "float64",
+      "group_delay_output_samples": 10,
+      "group_delay_seconds": 0.04,
+      "half_len": 360,
+      "input_rate_hz": 360,
+      "kaiser_beta": 5.0,
+      "num_taps": 721,
+      "output_rate_hz": 250,
+      "startup_transient_output_span": 20,
+      "up": 25,
+      "window": "kaiser"
+    }
+  },
+  "design_id": "FIR_KAISER_POLYPHASE_V1",
+  "filters": "DEFERRED_T012",
+  "gap_handling": "DEFERRED_T012",
+  "numpy_version": "2.4.6",
+  "overall_status": "PASS",
+  "preproc_id": "PREPROC_V1",
+  "resampler_id": "PREPROC_V1_RESAMPLER_V1",
+  "scipy_version": "1.17.1",
+  "split_freeze_verified": {
+    "split_sha256_after": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "split_sha256_before": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "status": "PASS",
+    "unchanged": true
+  },
+  "task_id": "T011",
+  "windowing": "DEFERRED_T013"
+}

@@ -136,6 +136,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T008": "PASS",
             "T009": "PASS",
             "T010": "PASS",
+            "T011": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -148,6 +149,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T008": "27bcdc3986b6351cfde334060b521a1ff5eeac9d",
             "T009": "ce8375304d6e8a82dfc105c0d2d555782d330e85",
             "T010": "df22ee334a873a1489bc944b0c39bf5dcbeed4a7",
+            "T011": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
@@ -160,6 +162,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T008": "reports/labels/label_audit.json",
             "T009": "reports/t009/split_generation.json",
             "T010": "reports/splits/split_audit.json",
+            "T011": "reports/preprocessing/resampler_causality.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -264,6 +267,24 @@ TASK_NOTES_OVERRIDE = {
         "preprocessing, no model training, no external evaluation. G5 now PASS, F05 now "
         "FROZEN; G6/F06 remain open (causal resampling/filtering/gaps/real windows are not "
         "yet implemented)."
+    ),
+    "T011": (
+        "Canonical execution-plan packet; normalized prerequisite IDs follow Sections 4-5 "
+        "where the packet uses a cross-reference. Stateful causal rational/polyphase FIR "
+        "resampler (preprocessing/resample.py, PREPROC_V1_RESAMPLER_V1) for MITDB (360->250 "
+        "Hz, up=25/down=36, 721 taps) and INCART (257->250 Hz, up=250/down=257, 5141 taps); "
+        "FIR_KAISER_POLYPHASE_V1 design (beta=5.0) fixed from rate/math requirements only, "
+        "never tuned on data. Bounded-memory streaming implementation matches a slow direct "
+        "causal reference and is invariant to future-appended input and to arbitrary "
+        "chunking, both to machine-epsilon tolerance; output timestamps sit on an exact "
+        "4000us/250Hz grid with no backward group-delay compensation (10 output samples/"
+        "40ms delay recorded explicitly as metadata for both conversions). Coefficients "
+        "committed and hash-verified; regeneration is bit-identical. No "
+        "resample/resample_poly/filtfilt/sosfiltfilt in the production module (statically "
+        "audited). F05 split freeze verified unchanged before and after (byte-identical "
+        "MITDB_SPLIT_V1.csv). No GAP_POLICY_V1, no physiological bandpass filtering, no real "
+        "windows, no normalization, no model training. G6 remains open -- T012/T013 still "
+        "required."
     ),
 }
 
