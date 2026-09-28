@@ -57,6 +57,9 @@ def main() -> None:
         REPORT_DIR / "python_version.txt",
         REPORT_DIR / "environment.json",
     ]
+    closure = REPORT_DIR / "closure_verification.json"
+    if closure.exists():
+        artifacts.append(closure)
     missing = [str(path) for path in artifacts if not path.exists()]
     if missing:
         raise FileNotFoundError(f"Cannot hash missing evidence: {missing}")
@@ -76,4 +79,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
