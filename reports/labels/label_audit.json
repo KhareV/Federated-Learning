@@ -1,0 +1,67 @@
+{
+  "errors": [],
+  "excluded_datasets": [
+    "NSTDB",
+    "BIDMC",
+    "WEARABLE_SIM_V1"
+  ],
+  "freeze_id": "F04",
+  "gate_id": "G4",
+  "implementation_path": "datasets/labels.py",
+  "incart_post_signal_annotation_count": 0,
+  "incart_pre_signal_annotation_count": 7,
+  "incart_pre_signal_records": [
+    "I04",
+    "I17",
+    "I35",
+    "I44",
+    "I57",
+    "I72",
+    "I74"
+  ],
+  "manifest_path": "manifests/labels/AAMI_SVF_MAP_V1.yaml",
+  "map_id": "AAMI_SVF_MAP_V1",
+  "mapped_class_totals_by_dataset": {
+    "INCART": {
+      "F": 219,
+      "N": 153676,
+      "NOT_A_BEAT": 12,
+      "Q": 6,
+      "S": 1960,
+      "UNMAPPABLE": 33,
+      "V": 20013
+    },
+    "MITDB": {
+      "F": 803,
+      "N": 90631,
+      "NOT_A_BEAT": 2681,
+      "Q": 8043,
+      "S": 2781,
+      "UNMAPPABLE": 472,
+      "V": 7236
+    }
+  },
+  "overall_status": "PASS",
+  "raw_count_conservation_checked": true,
+  "scope_datasets": [
+    "MITDB",
+    "INCART"
+  ],
+  "single_classification_per_symbol_checked": true,
+  "source_scope_annotation_totals": {
+    "INCART": 175919,
+    "MITDB": 112647
+  },
+  "spec_version": "2.2",
+  "target_id": "AAMI_SVF_WINDOW_V1",
+  "unmappable_symbols_by_dataset": {
+    "INCART": [
+      "B",
+      "n"
+    ],
+    "MITDB": [
+      "!"
+    ]
+  },
+  "yaml_matches_executable_mapper_checked": true
+}

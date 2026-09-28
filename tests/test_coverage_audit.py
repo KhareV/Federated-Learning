@@ -34,8 +34,9 @@ def test_blocked_hardware_task_does_not_trip_future_task_guard() -> None:
 
 def test_g1_hardware_block_does_not_prevent_g2_g3_dataset_gates_passing() -> None:
     """G1 (hardware/data contract) stays NOT_STARTED while G2/G3 (public-dataset acquisition
-    and validation, owned by T006+T007) legitimately close ahead of it -- an explicit
-    allowlist (APPROVED_PASSED_GATES), not a numeric ordering assumption."""
+    and validation, owned by T006+T007) and G4 (label freeze, T008) legitimately close ahead
+    of it -- an explicit allowlist (APPROVED_PASSED_GATES), not a numeric ordering
+    assumption."""
     from nhm.coverage import read_csv
 
     result = audit_registries(ROOT)
@@ -44,7 +45,8 @@ def test_g1_hardware_block_does_not_prevent_g2_g3_dataset_gates_passing() -> Non
     assert gates["G1"]["status"] == "NOT_STARTED"
     assert gates["G2"]["status"] == "PASS"
     assert gates["G3"]["status"] == "PASS"
-    assert gates["G4"]["status"] == "NOT_STARTED"
+    assert gates["G4"]["status"] == "PASS"
+    assert gates["G5"]["status"] == "NOT_STARTED"
     assert not any("future gates falsely advanced" in error for error in result["errors"])
 
 

@@ -133,6 +133,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T005": "PASS",
             "T006": "PASS",
             "T007": "PASS",
+            "T008": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -142,6 +143,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T005": "c3f7d85e71ceeeafa2bc31ff902a61913a51b2cf",
             "T006": "645de3328d990c38ca60055c6a79d8833bfe95c7",
             "T007": "5786a7fa302b995d2f69a4f5e07df621cd3dddde",
+            "T008": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
@@ -151,6 +153,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T005": "reports/t005/smoke_report.json",
             "T006": "reports/t006/mitdb_validation.json",
             "T007": "reports/data/validation_report.json",
+            "T008": "reports/labels/label_audit.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -209,6 +212,19 @@ TASK_NOTES_OVERRIDE = {
         "training-eligible dataset). No split, no AAMI mapping, no preprocessing, no "
         "external evaluation, no robustness experiment, no model training. G2/G3 now PASS "
         "jointly with T006; G1/G4 remain open."
+    ),
+    "T008": (
+        "Canonical execution-plan packet; normalized prerequisite IDs follow Sections 4-5 "
+        "where the packet uses a cross-reference. Single shared, pure, dataset-independent "
+        "AAMI_SVF_MAP_V1 beat-symbol mapper (datasets/labels.py) plus the AAMI_SVF_WINDOW_V1 "
+        "window-target decision rule, frozen in manifests/labels/AAMI_SVF_MAP_V1.yaml (freeze "
+        "F04). Full MIT-BIH/INCART annotation symbol census from real T006/T007 raw data with "
+        "explicit SOURCE vs CORE_CHANNEL_ELIGIBLE scope separation; raw-count conservation and "
+        "single-classification-per-symbol verified. MIT-BIH's real '!' and INCART's real 'B'/"
+        "'n' beat symbols are outside the frozen allowlist and are UNMAPPABLE, not coerced. "
+        "INCART's seven documented pre-signal annotations (T007 finding) are preserved and "
+        "re-reported (post-signal count 0). No window-building, no patient split, no "
+        "preprocessing, no model training. G4 now PASS; G1 remains open."
     ),
 }
 
@@ -545,7 +561,7 @@ GATES = [
     gate("G1", "Hardware/Data Contract", "Freeze canonical hardware/data semantics and firmware schema.", "T003;T004", "HW01;DC01;R06.1", "Schema fixtures; bench timing/ADC/packet verification", "contracts/HARDWARE_DATA_CONTRACT_V1.md;reports/hardware/contract_verification.json", "All required fields, types, clocks, provenance, and verified/unknown semantics defined.", "Sensor semantics remain unknown without explicit evidence/status.", "Bench hardware and inspect firmware/backend; version the contract.", "T005;T013;T028", evidence="reports/hardware/contract_verification.json"),
     gate("G2", "Dataset Acquisition", "Verify exact public dataset versions and immutable provenance.", "T005", "R26.1;DS01", "Checksum/license/parse smoke tests", "manifests/datasets/", "Exact declared versions download/parse with hashes and licenses.", "Missing, corrupt, or mis-versioned source.", "Redownload or repair manifest; do not proceed on uncertain source.", "T006", status="PASS", evidence="reports/data/acquisition_audit.json"),
     gate("G3", "Dataset Validation", "Validate records, annotations, identifiers, and locked channel policy.", "T006", "R03;R03.1;R26.1;DS01", "Record/schema/channel/duplicate/symbol-census tests", "reports/data/validation_report.json;manifests/datasets/channel_exclusions.csv", "All expected fields and annotation/channel checks pass or documented version exception is approved.", "Unexpected fields/counts or untracked exclusions.", "Block labels/splits; repair validation or source version.", "T007;T008", status="PASS", evidence="reports/data/validation_report.json"),
-    gate("G4", "Label Freeze", "Freeze AAMI_SVF_WINDOW_V1 and shared AAMI_SVF_MAP_V1.", "T007", "R01;R01.1;R01.2", "Complete allowlist/unknown/paced/non-beat/window eligibility tests", "contracts/LABEL_SCHEMA_V1.md;reports/labels/label_audit.json", "Symbol mapping and target tests pass for both source datasets.", "Any ambiguous, inconsistent, or silently coerced target symbol.", "Revise/version mapping before any training and regenerate dependent artifacts.", "T008;T009;T010;T011;T012", evidence="reports/labels/label_audit.json"),
+    gate("G4", "Label Freeze", "Freeze AAMI_SVF_WINDOW_V1 and shared AAMI_SVF_MAP_V1.", "T007", "R01;R01.1;R01.2", "Complete allowlist/unknown/paced/non-beat/window eligibility tests", "contracts/LABEL_SCHEMA_V1.md;reports/labels/label_audit.json", "Symbol mapping and target tests pass for both source datasets.", "Any ambiguous, inconsistent, or silently coerced target symbol.", "Revise/version mapping before any training and regenerate dependent artifacts.", "T008;T009;T010;T011;T012", status="PASS", evidence="reports/labels/label_audit.json"),
     gate("G5", "Split/Leakage Audit", "Freeze patient partitions before windows/models.", "T008", "R04;R04.1;R04.2", "Disjoint participants; 201/202 grouping; post-split window build audit", "manifests/splits/MITDB_SPLIT_V1.csv;reports/splits/split_audit.json", "Zero patient overlap; 201/202 grouped; patient counts reported.", "Any leakage, role violation, or result-driven regeneration.", "Regenerate before training and invalidate all dependent runs.", "T009;T010;T011;T012;T022", evidence="reports/splits/split_audit.json"),
     gate("G6", "Preprocessing Pass", "Prove causal preprocessing, resampling, gaps, windows, and quality.", "T009;T010", "R02;R05;R05.1;R06;R06.1;SQ01", "Future-append; impulse; chunk equivalence; gap; window; hard-quality tests", "reports/preprocessing/causality_tests.json;reports/preprocessing/gap_tests.json", "All future-append and chunk-equivalence tests pass; gap/window/quality contracts exact.", "Any future dependence, state mismatch, or gap/window contract defect.", "Replace/version the transform and invalidate caches/downstream runs.", "T011;T012", evidence="reports/preprocessing/causality_tests.json"),
     gate("G7", "Baseline Pass", "Establish pipeline sanity with locked trivial/classical baselines.", "T011", "R07", "Training-only majority and feature fit-scope tests", "reports/baselines/baseline_report.json", "Pipeline produces reproducible metrics and majority predictor is train-derived.", "Pipeline failure, leakage, or held-out prevalence selection.", "Debug data/features/model without using test outcomes.", "T012", evidence="reports/baselines/baseline_report.json"),
@@ -637,7 +653,7 @@ FREEZES = [
     freeze("F01", "source authority", "SPEC_V2.2/PLAN_V1.0", "G0", "T002-T036", "E01-E16", "all downstream evidence", "v2.2 and canonical execution-plan source hashes recorded; master prompt is planning input only.", "FROZEN"),
     freeze("F02", "hardware/data contract", "HARDWARE_DATA_CONTRACT_V1", "G1", "T005;T013;T028;T029;T031", "E07;E08;E16", "contract and wearable/integration reports", "Observed MongoDB V0 remains unverified until T004."),
     freeze("F03", "dataset versions/manifests", "DATASETS_V1", "G3", "T007-T026", "E01-E14", "data/model/evaluation/federated evidence", "PTB-XL excluded from core scope."),
-    freeze("F04", "label mapping", "AAMI_SVF_MAP_V1", "G4", "T008-T026", "E01-E14", "labels/models/evaluations/federated evidence", "Mapping change requires a new explicit version."),
+    freeze("F04", "label mapping", "AAMI_SVF_MAP_V1", "G4", "T008-T026", "E01-E14", "labels/models/evaluations/federated evidence", "Mapping change requires a new explicit version.", "FROZEN"),
     freeze("F05", "patient split", "MITDB_SPLIT_V1", "G5", "T009-T026", "E01-E14", "split/model/evaluation/federated evidence", "Patients and 201/202 grouping immutable after freeze."),
     freeze("F06", "preprocessing", "PREPROC_V1/GAP_POLICY_V1", "G6", "T011-T031", "E01-E16", "all derived caches/models/evaluations/deployment", "Any scientific transform change is Class C."),
     freeze("F07", "baseline configuration", "BASELINE_V1", "G7", "T012;T033", "E01", "baseline report", "Majority remains training-only."),

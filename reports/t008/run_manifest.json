@@ -1,0 +1,62 @@
+{
+  "config_path": "configs/base.yaml",
+  "config_sha256": "39ba4564b572c148aae6aa311cbee1d4fceaa44dfe72886b73e7deaeb5d1a98b",
+  "created_at_utc": "2026-09-28T21:16:14.036082Z",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
+  "git_commit": "2979bdf35b5c45bac5c732b4c4147feecff073dd",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "datasets/labels.py",
+      "sha256": "335711bcf97f01ffb522f91ad757fc96c931be79784344ab035c167bd32f732b"
+    },
+    {
+      "path": "scripts/build_annotation_census_t008.py",
+      "sha256": "25dbf885bef35433f7f7dc3a310a4aed1f28c2af84c12d0a61607d4a31a2e16a"
+    },
+    {
+      "path": "scripts/audit_label_map_t008.py",
+      "sha256": "bd6987e85ce117b70144540890f3245c4dde77f2da0190829cbd2f9748098fba"
+    },
+    {
+      "path": "manifests/labels/AAMI_SVF_MAP_V1.yaml",
+      "sha256": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145"
+    },
+    {
+      "path": "contracts/LABEL_SCHEMA_V1.md",
+      "sha256": "6bfeab65d185a2687c43d114914a14f36e0abf2068aae119dcce75f7a633a373"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Shared AAMI_SVF_MAP_V1 beat-symbol mapper and AAMI_SVF_WINDOW_V1 window-target decision rule for MIT-BIH and INCART, plus the full annotation symbol census with explicit SOURCE vs CORE_CHANNEL_ELIGIBLE scope separation. No window-building, no patient split, no preprocessing, no model training. G4 closes only if the label-map audit fully passes.",
+  "output_artifacts": [
+    {
+      "path": "reports/t008/mitdb_annotation_symbol_census.csv",
+      "sha256": "7065435a1b199741a9c6f7a3ace77aaf07b9d7f2ea750e07522dff9da139adeb"
+    },
+    {
+      "path": "reports/t008/incart_annotation_symbol_census.csv",
+      "sha256": "4e512820ccac79a5d49b6a415bbd33acce0476a3d04bdeda31791af7992cf6b1"
+    },
+    {
+      "path": "reports/t008/annotation_symbol_census.csv",
+      "sha256": "79b800e7e6f536fc76c11a45475018471f8f9c730031b96b3acd0fe19729c735"
+    },
+    {
+      "path": "reports/t008/symbol_accounting.csv",
+      "sha256": "a946655a5fd86562514f35042e55f2d8f49ea1bd41717b59163d145dee62097d"
+    },
+    {
+      "path": "reports/labels/label_audit.json",
+      "sha256": "9a3bb0a7f65a906fe6526455531d8fecad6fa61a548cc9ded6f678edc000701a"
+    }
+  ],
+  "phase_id": "T008",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T008-LABEL-MAP-FREEZE-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T008"
+}

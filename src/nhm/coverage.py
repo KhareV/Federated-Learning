@@ -33,15 +33,20 @@ PLAN_SHA256 = "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
 # lower this below T005): the check below only rejects a task ID *above* the threshold, so an
 # authorized hardware-independent task can still reach PASS while a numerically earlier,
 # explicitly blocked task has not.
-LATEST_APPROVED_TASK = "T007"
+LATEST_APPROVED_TASK = "T008"
 
 # Explicit allowlist rather than a numeric/highest-gate threshold: gates do not close in
 # strict numeric order once a hardware-independent track exists. G1 (hardware/data contract)
 # is BLOCKED_HARDWARE and deliberately stays NOT_STARTED (see
 # docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md) while G2/G3 (public-dataset acquisition and
-# validation, T006+T007) legitimately close ahead of it. Add a gate here only when its own
-# documented pass criteria are genuinely met.
-APPROVED_PASSED_GATES = {"G0", "G2", "G3"}
+# validation, T006+T007) and G4 (label freeze, T008) legitimately close ahead of it. Add a
+# gate here only when its own documented pass criteria are genuinely met.
+APPROVED_PASSED_GATES = {"G0", "G2", "G3", "G4"}
+
+# Same allowlist principle for freeze status: a freeze may be marked FROZEN only once its
+# owning gate has genuinely closed. F01 (source authority) freezes at G0; F04 (label mapping,
+# AAMI_SVF_MAP_V1) freezes at G4 (T008).
+APPROVED_FROZEN_ARTIFACTS = {"F01", "F04"}
 
 CANONICAL_GATE_TASK_OWNERS = {
     "G0": "T001;T002", "G1": "T003;T004", "G2": "T006;T007",
@@ -457,7 +462,7 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
             )
     premature_freezes = [
         row["freeze_id"] for row in freezes
-        if row["freeze_id"] != "F01" and row["current_status"] == "FROZEN"
+        if row["freeze_id"] not in APPROVED_FROZEN_ARTIFACTS and row["current_status"] == "FROZEN"
     ]
     if premature_freezes:
         errors.append(f"future freezes falsely marked FROZEN: {premature_freezes}")

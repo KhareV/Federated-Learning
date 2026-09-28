@@ -1,0 +1,74 @@
+map_id: AAMI_SVF_MAP_V1
+target_id: AAMI_SVF_WINDOW_V1
+spec_version: '2.2'
+source_document: NHM_ML_Revised_Locked_Specification_v2.2.docx
+source_section: Section 9.1-9.2
+implementation_module: datasets/labels.py
+declared_by_task: T008
+freeze_id: F04
+freeze_gate: G4
+change_class_required: C
+
+# Frozen beat-symbol -> AAMI superclass allowlist. Must match datasets.labels.AAMI_CLASSES
+# exactly (tests/test_aami_svf_map_v1.py::test_yaml_manifest_matches_executable_mapper).
+aami_classes:
+  N: [N, L, R, e, j]
+  S: [A, a, J, S]
+  V: [V, E]
+  F: [F]
+  Q: [/, f, Q]
+
+# Any beat symbol not listed in aami_classes above is UNMAPPABLE and excluded from the core
+# target. Never coerced to the "closest" class, never silently dropped from the census.
+unmapped_beat_policy: UNMAPPABLE
+
+# Non-beat annotation markers are NOT_A_BEAT: ignored by beat-class target mapping, may later
+# inform quality/provenance signals.
+non_beat_policy: NOT_A_BEAT
+
+# Beat vs. non-beat classification source: WFDB 4.3.1's own `is_qrs` / `ann_label_table`
+# (the complete standard PhysioBank annotation symbol vocabulary). See
+# datasets/labels.py::BEAT_SYMBOLS / NON_BEAT_SYMBOLS for the exact hardcoded table and
+# tests/test_aami_svf_map_v1.py for the cross-check against the live wfdb table.
+beat_non_beat_classification_source: wfdb.io.annotation.is_qrs (wfdb==4.3.1, exact pin)
+
+core_handling_by_class:
+  N: REFERENCE
+  S: POSITIVE_SVF
+  V: POSITIVE_SVF
+  F: POSITIVE_SVF
+  Q: EXCLUDE_Q
+  UNMAPPABLE: EXCLUDE_UNMAPPABLE
+  NOT_A_BEAT: IGNORE_NON_BEAT
+
+# AAMI_SVF_WINDOW_V1 target semantics -- contracts/LABEL_SCHEMA_V1.md Section 3. Implemented
+# as datasets.labels.classify_window_target, a pure decision rule over an already-computed
+# sequence of mapped beat classes for one candidate window (no real signal windowing here;
+# that is T013's job).
+window_target:
+  positive_label: SVF_CONTAINING_WINDOW
+  positive_value: 1
+  positive_rule: at least one mapped S/V/F beat and no Q/unmappable beat
+  negative_label: N_ONLY_WINDOW
+  negative_value: 0
+  negative_rule: all eligible mapped beats are N and no excluded beat exists
+  min_mappable_beats: 5
+  excluded_reasons:
+    - EXCLUDE_Q_OR_UNMAPPABLE_BEAT_PRESENT
+    - EXCLUDE_FEWER_THAN_MIN_MAPPABLE_BEATS
+  runtime_unusable_behavior: RECHECK_SENSOR
+
+applies_to_datasets:
+  - MITDB
+  - INCART
+
+explicitly_out_of_scope_datasets:
+  - NSTDB
+  - BIDMC
+  - WEARABLE_SIM_V1
+
+notes: >
+  Mapping change requires a new explicit version (AAMI_SVF_MAP_V2) and is a scientific
+  change-control event (Class C, docs/CHANGE_CONTROL.md), not a local refactor. This is the
+  single freeze entry for the label mapping (F04 in manifests/freeze_registry_v1.csv); no
+  parallel freeze ID is created.

@@ -10,7 +10,7 @@ def test_source_authority_names_locked_spec_and_current_phase() -> None:
     assert "NHM_Solo_Implementation_Execution_Plan_v1.0.docx" in authority
     assert "NHM_Solo_Implementation_Master_Prompt_FINAL.docx" in authority
     assert "master planner prompt is not the implementation sequencing authority" in authority
-    assert "CURRENT_PHASE = T007" in authority
+    assert "CURRENT_PHASE = T008" in authority
     assert "v2.2 overrides contradictory earlier methodology" in authority
 
 
