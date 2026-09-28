@@ -28,7 +28,13 @@ The controlled sequence is:
 
 `T001 → T002 → T003 → T004 → T005 → T006 → T007 → T008 → T009 → T010 → T011 → T012 → T013 → T014 → T015 → T016 → T017 → T018 → T019 → T020 → T021 → T022 → T023 → T024 → T025 → T026 → T027 → T028 → T029 → T030 → T031 → T032 → T033 → T034 → T035 → T036`
 
-Task titles beyond those supplied by the implementation authority must be read from that source;
-they are not reconstructed from memory.
+T001-T003 retain their externally supplied names. The locally available solo-plan file does not
+enumerate named T004-T036 packets, so those task names are explicitly marked operational
+decompositions of v2.2 and the solo-plan critical path rather than quoted source titles. This
+provenance is recorded in `docs/TRACEABILITY.md` and every affected task-registry row.
 
-`CURRENT_PHASE = T001`
+`CURRENT_PHASE = T002`
+
+The machine-checkable T002 planning baseline is `manifests/requirements_v22.csv`. Its decimal
+sub-requirements preserve R01-R28, while CB01-CB06 identify cross-cutting claim boundaries. Any
+scientific change requires the Class C process and a new source/registry version where applicable.

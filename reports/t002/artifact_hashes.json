@@ -1,0 +1,22 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "configs/base.yaml": "bf1d0c0ac4f92ef5d089f867c30e9d4091bd369d6cff43c8e6810ec88c87621d",
+    "docs/DO_NOT_START_YET.md": "3e31826b557b6f770521960b5f5fa8529353c61e89bcb2e12498d2fe6a6d714e",
+    "docs/TRACEABILITY.md": "25cec78c70665995244cc8db2e1307595fef8b9e12fcd32e1f67f43431f7f1b0",
+    "manifests/do_not_start_v1.csv": "652b81f7f19525f9da985f35573ee42cf327de9eb36095f87766d3ac76386bcd",
+    "manifests/evidence_registry_v1.csv": "62af2f976d2bbadf55321e03e7d59057e7cd41a22581b68bdcb996ba41804ae0",
+    "manifests/experiment_registry_v1.csv": "cf61528eb30c2755310b45c8e4e2a165cbb78465d969e93902140077383ad704",
+    "manifests/freeze_registry_v1.csv": "c03f4d0e46d8a1ab8ffd64693381305abf0b33762928f2ea492f8dcb7fccdfd3",
+    "manifests/gate_registry_v1.csv": "e5cf8d3d7148cecf5b26b632dc7cce3eb8acb26b14394d9c970b3242e98547aa",
+    "manifests/requirements_v22.csv": "74048e91484645d6af04fcb863d5f0c5a78086c4d9aeaa07cfd8e9f8c09ee204",
+    "manifests/task_registry_v1.csv": "7f3cab7cdff23bcae5e0c2837b91362b6bc97de0bebf6e7991ec1dc853e24331",
+    "reports/t002/coverage_audit.json": "0dc43ed8df77b2c40af5870319f912d54f3cdfd2b3b9b4214e4027e905e3c019",
+    "reports/t002/coverage_audit_first_pass.json": "71fd016a3369a4c3d23bcf9022dc223443741ff12c5b54911b0a520b9a631c2a",
+    "reports/t002/coverage_summary.md": "938491da9bae927b4e7e19bee52da088b60a326666792bd39528dbd372a22a39",
+    "reports/t002/run_manifest.json": "219fdb956b152f325dd48cc043dff5d5463c014cd022f5a640056b00b6bf0c28",
+    "reports/t002/source_hashes.json": "eefb102dd14686f5d74a97da6567a4756872549a91d2af18bfc8abfcb70a708f"
+  },
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest"
+}

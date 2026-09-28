@@ -4,9 +4,9 @@ NHM is a research-only physiological-pattern monitoring project. It is not a dia
 clinical decision-support system, treatment recommender, or clinically validated product.
 
 The primary methodological authority is
-`NHM_ML_Revised_Locked_Specification_v2.2.docx`. The current implementation phase is **T001**:
-repository bootstrap, reproducibility, and source-authority lock. Real ML, dataset processing, and
-device-semantic implementation have not started.
+`NHM_ML_Revised_Locked_Specification_v2.2.docx`. The current implementation phase is **T002**:
+machine-checkable requirement, task, gate, freeze, experiment, and evidence traceability. Real ML,
+dataset processing, and device-semantic implementation have not started.
 
 ## Phase-01 environment
 
@@ -35,6 +35,8 @@ make lint
 make test
 make smoke
 make phase1
+make coverage
+make phase2
 ```
 
 `make phase1` runs Ruff, all offline tests, the fixture-driven smoke execution, and evidence/hash
@@ -50,3 +52,7 @@ PYTHONPATH=src .venv/bin/python scripts/generate_t001_closure.py --run-id RUN_ID
 Future commits require an intentionally configured Git author identity. Configure it explicitly
 with `git config user.name` and `git config user.email`; do not rewrite published history merely to
 replace an identity that Git inferred previously.
+
+`make coverage` deterministically rebuilds and audits the T002 registries. `make phase2` runs the
+full lint/test suite, the T001 offline regression smoke, the coverage audit, and T002 evidence
+generation. It does not download datasets or connect to MongoDB.

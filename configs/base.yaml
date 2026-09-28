@@ -2,7 +2,7 @@ project:
   name: NHM
   spec_version: "2.2"
   implementation_plan_version: "1.0"
-  current_phase: "T001"
+  current_phase: "T002"
   clinical_status: "research_prototype"
 
 versions:
@@ -13,4 +13,3 @@ versions:
 reproducibility:
   hash_algorithm: "sha256"
   timezone: "UTC"
-

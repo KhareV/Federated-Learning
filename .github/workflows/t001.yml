@@ -38,3 +38,7 @@ jobs:
           name: python-${{ steps.runtime.outputs.version }}
           path: reports/t001/python_version.txt
           retention-days: 30
+      - name: T002 coverage audit
+        run: make coverage PYTHON=python
+      - name: T002 evidence generation
+        run: make t002-evidence PYTHON=python

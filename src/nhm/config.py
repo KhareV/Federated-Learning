@@ -21,7 +21,7 @@ def validate_base_config(config: dict[str, Any]) -> None:
     """Validate locked identifiers without asserting hardware semantics."""
     expected = {
         ("project", "spec_version"): "2.2",
-        ("project", "current_phase"): "T001",
+        ("project", "current_phase"): "T002",
         ("project", "clinical_status"): "research_prototype",
         ("versions", "target"): "AAMI_SVF_WINDOW_V1",
         ("versions", "label_map"): "AAMI_SVF_MAP_V1",
@@ -34,4 +34,3 @@ def validate_base_config(config: dict[str, Any]) -> None:
         actual = config.get(section, {}).get(field)
         if actual != required_value:
             raise ValueError(f"{section}.{field} must be {required_value!r}, got {actual!r}")
-

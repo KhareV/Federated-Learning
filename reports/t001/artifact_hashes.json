@@ -1,15 +1,15 @@
 {
   "algorithm": "sha256",
   "artifacts": {
-    "configs/base.yaml": "f93f21a0b458a945b37177669c5b28b37636606f359ef1a3abe594d30d1beb03",
+    "configs/base.yaml": "bf1d0c0ac4f92ef5d089f867c30e9d4091bd369d6cff43c8e6810ec88c87621d",
     "contracts/run_manifest_v1.schema.json": "1cf3b21a400a2eeab482279a5172f9ab5665478bb57edc899a819d5c1f0e1731",
-    "docs/SOURCE_AUTHORITY.md": "ba0871c88f69be93f0494d4a63fd09b35f12e8389444e474a3e72778b71992b9",
+    "docs/SOURCE_AUTHORITY.md": "723ed0cdfbb2880a87b93c994a7a88a449016094ebf7b75f64b282e958c332f1",
     "reports/t001/closure_verification.json": "b76049f299a5e6d3a2a53a52967638302584d2181a738bf8b3fe77c101f6dfe0",
     "reports/t001/dependencies.txt": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
-    "reports/t001/environment.json": "723ca3e4c19ec4441bb12752aed9912bb3237d4960a23c35ba29786ab7421a6f",
+    "reports/t001/environment.json": "7bc8698c8871231c5218268842f1cb935ed0181d24ce78fc8d50af160cb33236",
     "reports/t001/python_version.txt": "e465eb8fbbbf6ed3ccfc23f3868b583aaf5317d31a826476bfd032dd8f883b1d",
-    "reports/t001/run_manifest.json": "b475aa5e1bd02a54e7b74a8aa12292a21e735d415de3f5148e11b7a4f9015951",
-    "reports/t001/smoke_report.json": "ae87a14131ff13ea173c3082baeba8b549c74efe107172810314cffa32e0594f",
+    "reports/t001/run_manifest.json": "abf8fe279102b8dde63bafeabfb5ad4123f7e6bb884aa97246edaacee639a0ea",
+    "reports/t001/smoke_report.json": "9569c2abf3ed5e36bea8cc9c101ee18220e469d2ace3feb1cf44b0e1695dafc7",
     "tests/fixtures/mongodb_observed_v0.json": "16fc2030d0ffcf9da32889f7bcd5119acb84ea5055ea0e64e1ff46151e71b4b4"
   },
   "manifest_version": "1.0",

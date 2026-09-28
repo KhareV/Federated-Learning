@@ -39,3 +39,7 @@ extend-exclude = ["frontend", "data"]
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 
+[tool.ruff.lint.per-file-ignores]
+# This script is intentionally a declarative registry source. Keeping each CSV row's
+# complete source statement on one line makes source review and diffs materially safer.
+"scripts/build_t002_registries.py" = ["E501"]

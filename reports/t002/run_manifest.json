@@ -1,0 +1,70 @@
+{
+  "config_path": "configs/base.yaml",
+  "config_sha256": "bf1d0c0ac4f92ef5d089f867c30e9d4091bd369d6cff43c8e6810ec88c87621d",
+  "created_at_utc": "2026-09-28T12:58:53.259861Z",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
+  "git_commit": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "NHM_ML_Revised_Locked_Specification_v2.2.docx",
+      "sha256": "1c72bbbf45c7d9eb23b7fa1a00e249538153f06e337d194ce93108029cb16e0c"
+    },
+    {
+      "path": "NHM_Solo_Implementation_Master_Prompt_FINAL.docx",
+      "sha256": "e65663dc8c53a4843f10b36ada6fcde07cf08122c961c36163cfdd0c03dfdd01"
+    },
+    {
+      "path": "manifests/task_registry_v1.csv",
+      "sha256": "7f3cab7cdff23bcae5e0c2837b91362b6bc97de0bebf6e7991ec1dc853e24331"
+    },
+    {
+      "path": "manifests/requirements_v22.csv",
+      "sha256": "74048e91484645d6af04fcb863d5f0c5a78086c4d9aeaa07cfd8e9f8c09ee204"
+    },
+    {
+      "path": "manifests/gate_registry_v1.csv",
+      "sha256": "e5cf8d3d7148cecf5b26b632dc7cce3eb8acb26b14394d9c970b3242e98547aa"
+    },
+    {
+      "path": "manifests/freeze_registry_v1.csv",
+      "sha256": "c03f4d0e46d8a1ab8ffd64693381305abf0b33762928f2ea492f8dcb7fccdfd3"
+    },
+    {
+      "path": "manifests/do_not_start_v1.csv",
+      "sha256": "652b81f7f19525f9da985f35573ee42cf327de9eb36095f87766d3ac76386bcd"
+    },
+    {
+      "path": "manifests/experiment_registry_v1.csv",
+      "sha256": "cf61528eb30c2755310b45c8e4e2a165cbb78465d969e93902140077383ad704"
+    },
+    {
+      "path": "manifests/evidence_registry_v1.csv",
+      "sha256": "62af2f976d2bbadf55321e03e7d59057e7cd41a22581b68bdcb996ba41804ae0"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Second coverage audit after a manual v2.2 section review; source-name discrepancy is recorded in source_hashes.json.",
+  "output_artifacts": [
+    {
+      "path": "reports/t002/coverage_audit.json",
+      "sha256": "0dc43ed8df77b2c40af5870319f912d54f3cdfd2b3b9b4214e4027e905e3c019"
+    },
+    {
+      "path": "reports/t002/source_hashes.json",
+      "sha256": "eefb102dd14686f5d74a97da6567a4756872549a91d2af18bfc8abfcb70a708f"
+    },
+    {
+      "path": "reports/t002/coverage_summary.md",
+      "sha256": "938491da9bae927b4e7e19bee52da088b60a326666792bd39528dbd372a22a39"
+    }
+  ],
+  "phase_id": "T002",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T002-COVERAGE-AUDIT-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T002"
+}

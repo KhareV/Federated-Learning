@@ -1,0 +1,13 @@
+work_item,blocked_until,required_gate,reason,allowed_fixture_work,status
+Real ML training,"Target, split, and preprocessing are frozen",G4;G5;G6,"Prevents target drift, patient leakage, and causal defects from contaminating models.",Toy shapes and fixed synthetic training fixtures,BLOCKED
+FedAvg conclusions,MODEL_V1 is frozen and analytical aggregation passes,G8;G11,FL conclusions require the same trusted centralized architecture.,Toy analytical aggregation and serialization,BLOCKED
+FedProx,FedAvg correctness and non-IID manifests pass,G11;G12,Otherwise algorithm effects are uninterpretable.,mu=0 objective unit fixture,BLOCKED
+SecAgg+,Plain aggregation correctness passes,G11,Privacy wrapping cannot mask aggregation bugs.,Threat-model documentation and reference-interface fixtures,BLOCKED
+Quantization,MODEL_V1 is frozen and gateway workload is characterized,G8;G15,Optimization before behavior/resources are known risks invalid comparisons.,Export harness against toy model,BLOCKED
+MCU inference optimization,Mandatory gateway behavior is measured,G15,ESP32 inference is optional and needs exact-board evidence.,Operator inventory and memory-budget template,BLOCKED
+Dashboard cosmetics,Runtime state and API contracts stabilize,G18,Visual polish must not drive or hide state semantics.,Contract fixtures and accessible low-fidelity state views,BLOCKED
+Large wearable data collection,Canonical ingest/synchronization and ethics path are verified,G1;G16,"Avoid collecting unusable, untraceable, or unauthorized data.",Sanitized/synthetic replay fixtures and minimal bench dry run,BLOCKED
+Final report polishing,Evidence and final integration stabilize,G20;G21,Prevents manually reconstructed or stale numerical claims.,Report skeleton and evidence links,BLOCKED
+Extra model architectures,A predeclared research question and change-control approval exist,G8,Avoid performance-driven model shopping and scope growth.,None beyond MODEL_V1 test doubles,BLOCKED
+Extra datasets outside v2.2,Versioned scientific revision approves a defined role,G0,Dataset-role drift changes evidence and scope; PTB-XL is removed.,No core execution; retain pre-existing local files without use,BLOCKED
+Clinical claims,Never permitted by v2.2,G0;G22,"Diagnostic, decision-support, treatment, and clinical-readiness claims are prohibited because the project lacks clinical validation and is research-only.",Research-target and engineering wording only,PERMANENTLY_PROHIBITED
