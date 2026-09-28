@@ -1,10 +1,10 @@
 {
   "config_path": "configs/base.yaml",
   "config_sha256": "229b56822fdfc741bd20f118df6895a411bcf0845462b767c0ee6239fb284d23",
-  "created_at_utc": "2026-09-28T21:34:42.566213Z",
+  "created_at_utc": "2026-09-28T21:35:26.756028Z",
   "dependency_snapshot_path": "reports/t001/dependencies.txt",
   "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
-  "git_commit": "ec75f252eada462bcdacc93766fee7baf7abb5c2",
+  "git_commit": "ce8375304d6e8a82dfc105c0d2d555782d330e85",
   "git_dirty": true,
   "input_artifacts": [
     {
@@ -25,7 +25,7 @@
     },
     {
       "path": "manifests/task_registry_v1.csv",
-      "sha256": "0be02223e4acd52188c9e657d4706c677377c5db9bbccaa2ad2a47c3434b6cb9"
+      "sha256": "9704c7dd3572f8cdcfb8e6f899c5ebec89f1f7cdc07ac5b33ff9134bf408c237"
     },
     {
       "path": "manifests/requirements_v22.csv",

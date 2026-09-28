@@ -145,7 +145,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T006": "645de3328d990c38ca60055c6a79d8833bfe95c7",
             "T007": "5786a7fa302b995d2f69a4f5e07df621cd3dddde",
             "T008": "27bcdc3986b6351cfde334060b521a1ff5eeac9d",
-            "T009": "",
+            "T009": "ce8375304d6e8a82dfc105c0d2d555782d330e85",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
