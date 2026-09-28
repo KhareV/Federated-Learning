@@ -1,0 +1,27 @@
+{
+  "determinism_status": "PASS",
+  "fixture_api_response_version": "FixtureApiResponseV0",
+  "fixture_state_policy_id": "FIXTURE_STATE_POLICY_V0",
+  "mock_inference_id": "MOCK_INFERENCE_V0",
+  "observed_record_count": 10,
+  "overall_status": "PASS",
+  "participant_count": 1,
+  "profile": "WEARABLE_SIM_SMOKE",
+  "seed": 20260927,
+  "session_count": 1,
+  "simulation_id": "WEARABLE_SIM_V1",
+  "state_sequence": [
+    "NORMAL_MONITORED_PATTERN",
+    "NORMAL_MONITORED_PATTERN",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN",
+    "NORMAL_MONITORED_PATTERN",
+    "RECHECK_SENSOR",
+    "RECHECK_SENSOR",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+  ],
+  "task_id": "T005",
+  "truth_leakage_test_status": "PASS"
+}

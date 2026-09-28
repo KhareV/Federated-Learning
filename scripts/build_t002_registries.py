@@ -130,18 +130,21 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T002": "PASS",
             "T003": "PASS",
             "T004": "BLOCKED",
+            "T005": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
             "T002": "83f0136052cd5136705f2dfc9347f15f2d9c425e",
             "T003": "1f35bc044474900b5a54d5a17d51727e5a1a2388",
             "T004": "0312d6f6c529676d036f83693a9a58c19f33ef08",
+            "T005": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
             "T002": "reports/t002/source_reconciliation.json",
             "T003": "reports/t003/contract_validation.json",
             "T004": "reports/t004/hardware_deferral.json",
+            "T005": "reports/t005/smoke_report.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -175,6 +178,12 @@ TASK_NOTES_OVERRIDE = {
         "MAX30102 hardware is unavailable for bench testing; recovery per the execution plan "
         "is continue software with fixtures, block wearable evidence. See "
         "docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md and reports/t004/hardware_deferral.json."
+    ),
+    "T005": (
+        "Canonical execution-plan packet; normalized prerequisite IDs follow Sections 4-5 "
+        "where the packet uses a cross-reference. Software-only vertical slice evidence "
+        "(WEARABLE_SIM_SMOKE -> MOCK_INFERENCE_V0 -> FIXTURE_STATE_POLICY_V0); T004 remains "
+        "BLOCKED_HARDWARE and G1/G16 are unaffected by this task."
     ),
 }
 

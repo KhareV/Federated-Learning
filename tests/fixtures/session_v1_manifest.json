@@ -1,0 +1,41 @@
+{
+  "dataset_id": "WEARABLE_SIM_V1",
+  "design_note": "Sparse smoke fixture: each record represents a discrete scenario segment, not a continuous high-rate hardware-timed stream, and is not evidence of measured ECG/PPG sampling rate, jitter, or synchronization. Multi-rate synchronization/resampling semantics are deferred to T011-T013; see contracts/WEARABLE_SIM_V1.md Section 16.",
+  "observed_fixture_path": "tests/fixtures/session_v1.jsonl",
+  "participant_id": "SIM_P000001",
+  "profile": "WEARABLE_SIM_SMOKE",
+  "record_count": 10,
+  "scenario_id": "WEARABLE_SIM_SMOKE_SCENARIO_V1",
+  "segments": [
+    {
+      "kind": "NORMAL",
+      "name": "normal",
+      "sample_count": 2
+    },
+    {
+      "kind": "CONTEXT_UNAVAILABLE",
+      "name": "context_unavailable",
+      "sample_count": 2
+    },
+    {
+      "kind": "DEGRADED_CONTEXT",
+      "name": "degraded_context",
+      "sample_count": 2
+    },
+    {
+      "kind": "UNUSABLE_ECG",
+      "name": "unusable_ecg",
+      "sample_count": 2
+    },
+    {
+      "kind": "MOCK_EVENT",
+      "name": "mock_event",
+      "sample_count": 2
+    }
+  ],
+  "session_id": "SIM_S000001",
+  "simulation_seed": 20260927,
+  "simulation_version": "WEARABLE_SIM_V1",
+  "source_mode": "SYNTHETIC_PHYSIOLOGY",
+  "truth_fixture_path": "tests/fixtures/session_v1_truth.jsonl"
+}

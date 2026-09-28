@@ -1,10 +1,10 @@
 PYTHON ?= .venv/bin/python
-PYTHONPATH := src
+PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5
 
 lint:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api
 
 test:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest
@@ -65,3 +65,24 @@ phase4:
 	$(MAKE) t003-evidence PYTHON=$(PYTHON)
 	$(MAKE) t004-deferral PYTHON=$(PYTHON)
 	$(MAKE) t004-evidence PYTHON=$(PYTHON)
+
+fixture-t005:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t005_fixture.py
+
+t005-smoke: fixture-t005
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/smoke_t005.py
+
+t005-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t005_evidence.py
+
+phase5:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) t002-evidence PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t003-evidence PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	$(MAKE) t004-evidence PYTHON=$(PYTHON)
+	$(MAKE) t005-smoke PYTHON=$(PYTHON)
+	$(MAKE) t005-evidence PYTHON=$(PYTHON)

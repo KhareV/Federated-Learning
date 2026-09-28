@@ -28,8 +28,12 @@ SPEC_FILENAME = "NHM_ML_Revised_Locked_Specification_v2.2.docx"
 PLAN_FILENAME = "NHM_Solo_Implementation_Execution_Plan_v1.0.docx"
 PLAN_SHA256 = "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
 # The highest task_id currently permitted to be PASS/IN_PROGRESS. Bump this only when a task
-# genuinely closes; it never grants a status change by itself.
-LATEST_APPROVED_TASK = "T003"
+# genuinely closes; it never grants a status change by itself. This threshold is intentionally
+# independent of whether an *earlier* task is BLOCKED (e.g. T004/BLOCKED_HARDWARE does not
+# lower this below T005): the check below only rejects a task ID *above* the threshold, so an
+# authorized hardware-independent task can still reach PASS while a numerically earlier,
+# explicitly blocked task has not.
+LATEST_APPROVED_TASK = "T005"
 
 CANONICAL_GATE_TASK_OWNERS = {
     "G0": "T001;T002", "G1": "T003;T004", "G2": "T006;T007",

@@ -20,7 +20,18 @@ def test_task_registry_is_complete_and_future_work_is_not_started() -> None:
     assert rows[1]["status"] == "PASS"
     assert rows[2]["status"] == "PASS"
     assert rows[3]["status"] == "BLOCKED"
-    assert all(row["status"] == "NOT_STARTED" for row in rows[4:])
+    assert rows[4]["status"] == "PASS"
+    assert all(row["status"] == "NOT_STARTED" for row in rows[5:])
+
+
+def test_blocked_hardware_task_does_not_prevent_later_task_pass() -> None:
+    """T004 is BLOCKED_HARDWARE; T005 (a hardware-independent task numerically after it)
+    must still be able to reach PASS. This is the guard required by the T005 execution
+    instructions Section 37: the future-task check rejects tasks *above* the latest
+    approved task, not merely tasks *after* any earlier non-PASS task."""
+    rows = {row["task_id"]: row for row in read_csv(ROOT / "manifests/task_registry_v1.csv")}
+    assert rows["T004"]["status"] == "BLOCKED"
+    assert rows["T005"]["status"] == "PASS"
 
 
 def test_task_prerequisites_reference_known_tasks_or_gates() -> None:

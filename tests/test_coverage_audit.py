@@ -19,6 +19,19 @@ def test_full_registry_audit_passes_with_zero_coverage_gaps() -> None:
     assert result["remaining_derived_task_definition_count"] == 0
 
 
+def test_blocked_hardware_task_does_not_trip_future_task_guard() -> None:
+    """The coverage audit must not treat T004=BLOCKED as preventing T005=PASS merely
+    because T004's numeric task ID is earlier (T005 execution instructions Section 37)."""
+    from nhm.coverage import read_csv
+
+    result = audit_registries(ROOT)
+    assert result["status"] == "PASS", result["errors"]
+    tasks = {row["task_id"]: row for row in read_csv(ROOT / "manifests/task_registry_v1.csv")}
+    assert tasks["T004"]["status"] == "BLOCKED"
+    assert tasks["T005"]["status"] == "PASS"
+    assert not any("future tasks falsely advanced" in error for error in result["errors"])
+
+
 def test_change_control_distinguishes_interface_and_scientific_changes() -> None:
     assert classify_change("Correct an internal parsing bug") == "A"
     assert classify_change("Move an API file path") == "B"
