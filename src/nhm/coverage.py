@@ -33,7 +33,15 @@ PLAN_SHA256 = "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
 # lower this below T005): the check below only rejects a task ID *above* the threshold, so an
 # authorized hardware-independent task can still reach PASS while a numerically earlier,
 # explicitly blocked task has not.
-LATEST_APPROVED_TASK = "T006"
+LATEST_APPROVED_TASK = "T007"
+
+# Explicit allowlist rather than a numeric/highest-gate threshold: gates do not close in
+# strict numeric order once a hardware-independent track exists. G1 (hardware/data contract)
+# is BLOCKED_HARDWARE and deliberately stays NOT_STARTED (see
+# docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md) while G2/G3 (public-dataset acquisition and
+# validation, T006+T007) legitimately close ahead of it. Add a gate here only when its own
+# documented pass criteria are genuinely met.
+APPROVED_PASSED_GATES = {"G0", "G2", "G3"}
 
 CANONICAL_GATE_TASK_OWNERS = {
     "G0": "T001;T002", "G1": "T003;T004", "G2": "T006;T007",
@@ -228,7 +236,9 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
     if invalid_gate_statuses:
         errors.append(f"invalid gate statuses: {invalid_gate_statuses}")
     future_gate_passes = [
-        row["gate_id"] for row in gates if row["gate_id"] != "G0" and row["status"] != "NOT_STARTED"
+        row["gate_id"]
+        for row in gates
+        if row["gate_id"] not in APPROVED_PASSED_GATES and row["status"] != "NOT_STARTED"
     ]
     if future_gate_passes:
         errors.append(f"future gates falsely advanced: {future_gate_passes}")

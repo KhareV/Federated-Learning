@@ -1,0 +1,57 @@
+{
+  "dataset_id": "BIDMC",
+  "hashes_verified": true,
+  "hr_availability": {
+    "available": 53,
+    "records_missing_hr": []
+  },
+  "ii_availability": {
+    "available": 53,
+    "records_missing_ii": [],
+    "unavailable": 0
+  },
+  "known_source_anomalies": [
+    {
+      "finding": "The official v1.0.0 numerics header encodes an ADC gain field as a non-numeric token (observed: garbled signal description below), which breaks WFDB's field tokenization for the SpO2 channel line. Verified by direct inspection of the raw .hea bytes; not a parser or loader bug. The exact-name channel policy correctly reports SpO2_UNAVAILABLE rather than fabricating a value for an uncalibratable channel.",
+      "raw_numeric_sig_name": [
+        "HR,",
+        "PULSE,",
+        "RESP,",
+        "(-32767)/% 0 0 -32768 0 0 SpO2,"
+      ],
+      "record_id": "bidmc19"
+    }
+  ],
+  "missing_numeric_sample_totals": {
+    "HR": 4,
+    "PULSE": 128,
+    "SpO2": 26
+  },
+  "numeric_fs_audit": {
+    "expected_hz": 1,
+    "failures": 0
+  },
+  "overall_status": "PASS",
+  "pleth_availability": {
+    "available": 53,
+    "records_missing_pleth": [],
+    "unavailable": 0
+  },
+  "pulse_availability": {
+    "available": 53,
+    "records_missing_pulse": []
+  },
+  "record_count_expected": 53,
+  "record_count_observed": 53,
+  "spo2_availability": {
+    "available": 52,
+    "records_missing_spo2": [
+      "bidmc19"
+    ]
+  },
+  "version": "1.0.0",
+  "waveform_fs_audit": {
+    "expected_hz": 125,
+    "failures": 0
+  }
+}

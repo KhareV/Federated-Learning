@@ -13,7 +13,7 @@ from typing import Any
 from nhm.hashing import hash_file
 
 SPEC_VERSION = "2.2"
-CURRENT_PHASE = "T006"
+CURRENT_PHASE = "T007"
 
 
 def _git_output(repository_root: Path, *args: str) -> str | None:

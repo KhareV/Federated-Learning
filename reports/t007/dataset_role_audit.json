@@ -1,0 +1,75 @@
+{
+  "errors": [],
+  "loader_import_findings": {
+    "bidmc.py": [],
+    "incart.py": [],
+    "mitdb.py": [],
+    "nstdb.py": [],
+    "physionet.py": []
+  },
+  "roles": {
+    "BIDMC": {
+      "allowed_for_arrhythmia_training": false,
+      "allowed_for_calibration": false,
+      "allowed_for_model_selection": false,
+      "allowed_for_training": false,
+      "external_evaluation_only": false,
+      "multimodal_engineering_only": true,
+      "notes": "ECG/PPG synchronization engineering, pulse-rate context, HR/PR agreement, SpO2 validity/context, quality testing, multimodal replay. Never supervised arrhythmia evidence and never merged into MODEL_V1 training labels.\n",
+      "owning_tasks": [
+        "T012",
+        "T013",
+        "T021"
+      ],
+      "robustness_only": false,
+      "role": "MULTIMODAL_ENGINEERING_CONTEXT"
+    },
+    "INCART": {
+      "allowed_for_calibration": false,
+      "allowed_for_model_selection": false,
+      "allowed_for_threshold_selection": false,
+      "allowed_for_training": false,
+      "external_evaluation_only": true,
+      "multimodal_engineering_only": false,
+      "notes": "Single locked external evaluation after central model/calibration freeze. T007 only acquires/validates it; no inference, tuning, or performance metric may be computed here.\n",
+      "owning_tasks": [
+        "T020"
+      ],
+      "robustness_only": false,
+      "role": "LOCKED_EXTERNAL_ECG_EVALUATION"
+    },
+    "MITDB": {
+      "allowed_for_calibration": true,
+      "allowed_for_internal_test": true,
+      "allowed_for_model_selection": true,
+      "allowed_for_training": true,
+      "external_evaluation_only": false,
+      "multimodal_engineering_only": false,
+      "notes": "Locked patient-disjoint core dataset; T009/T010 own the split freeze. This registry does not grant training permission by itself -- MITDB_SPLIT_V1 must be frozen first.\n",
+      "owning_tasks": [
+        "T009",
+        "T010",
+        "T014",
+        "T015",
+        "T017",
+        "T018"
+      ],
+      "robustness_only": false,
+      "role": "CORE_TRAINING_VALIDATION_CALIBRATION_INTERNAL_TEST"
+    },
+    "NSTDB": {
+      "allowed_for_calibration": false,
+      "allowed_for_model_selection": false,
+      "allowed_for_training": false,
+      "external_evaluation_only": false,
+      "multimodal_engineering_only": false,
+      "notes": "Controlled post-model robustness testing only, not another training source. T007 only acquires/validates provenance (role, SNR, noise type); no robustness experiment runs here.\n",
+      "owning_tasks": [
+        "T019"
+      ],
+      "robustness_only": true,
+      "role": "NOISE_ROBUSTNESS"
+    }
+  },
+  "status": "PASS"
+}

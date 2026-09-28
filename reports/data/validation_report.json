@@ -1,0 +1,15 @@
+{
+  "index_of": {
+    "BIDMC": "reports/t007/bidmc_validation.json",
+    "INCART": "reports/t007/incart_validation.json",
+    "MITDB": "reports/t006/mitdb_validation.json",
+    "NSTDB": "reports/t007/nstdb_validation.json"
+  },
+  "overall_status": "PASS",
+  "status_by_dataset": {
+    "BIDMC": "PASS",
+    "INCART": "PASS",
+    "MITDB": "PASS",
+    "NSTDB": "PASS"
+  }
+}

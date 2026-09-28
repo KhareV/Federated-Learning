@@ -1,0 +1,1514 @@
+{
+  "eligible_count": 75,
+  "eligible_manifest_path": "manifests/datasets/incart_lead_ii_records.csv",
+  "excluded_count": 0,
+  "exclusion_manifest_path": "manifests/datasets/incart_lead_ii_exclusions.csv",
+  "fallback_allowed": false,
+  "performance_based_selection": false,
+  "policy_id": "INCART_EXACT_II_V1",
+  "record_decisions": {
+    "I01": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I02": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I03": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I04": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I05": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I06": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I07": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I08": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I09": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I10": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I11": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I12": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I13": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I14": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I15": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I16": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I17": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I18": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I19": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I20": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I21": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I22": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I23": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I24": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I25": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I26": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I27": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I28": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I29": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I30": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I31": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I32": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I33": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I34": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I35": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I36": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I37": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I38": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I39": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I40": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I41": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I42": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I43": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I44": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I45": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I46": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I47": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I48": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I49": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I50": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I51": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I52": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I53": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I54": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I55": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I56": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I57": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I58": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I59": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I60": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I61": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I62": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I63": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I64": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I65": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I66": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I67": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I68": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I69": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I70": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I71": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I72": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I73": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I74": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    },
+    "I75": {
+      "all_signal_names": [
+        "I",
+        "II",
+        "III",
+        "AVR",
+        "AVL",
+        "AVF",
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_II",
+      "ii_channel_index": 1,
+      "ii_present": true
+    }
+  },
+  "required_value": "II",
+  "selection_before_split": true,
+  "selection_key": "WFDB header sig_name, exact string equality"
+}

@@ -1,0 +1,17 @@
+{
+  "annotation_expectations_by_role": {
+    "PURE_NOISE": "not_applicable_by_source_design",
+    "STRESS_ECG": "required"
+  },
+  "dataset_id": "NSTDB",
+  "hashes_verified": true,
+  "noise_type_status": "PASS",
+  "official_record_count": 15,
+  "overall_status": "PASS",
+  "parse_failures": 0,
+  "pure_noise_count": 3,
+  "snr_mapping_status": "PASS",
+  "stress_annotations_parsed": 12,
+  "stress_ecg_count": 12,
+  "version": "1.0.0"
+}

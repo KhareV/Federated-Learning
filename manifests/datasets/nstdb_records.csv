@@ -1,0 +1,16 @@
+record_id,role,clean_source_record,snr_db,noise_type,fs,signal_count,annotation_present,hash_verified
+118e00,STRESS_ECG,118,0,,360.0,2,True,True
+118e06,STRESS_ECG,118,6,,360.0,2,True,True
+118e12,STRESS_ECG,118,12,,360.0,2,True,True
+118e18,STRESS_ECG,118,18,,360.0,2,True,True
+118e24,STRESS_ECG,118,24,,360.0,2,True,True
+118e_6,STRESS_ECG,118,-6,,360.0,2,True,True
+119e00,STRESS_ECG,119,0,,360.0,2,True,True
+119e06,STRESS_ECG,119,6,,360.0,2,True,True
+119e12,STRESS_ECG,119,12,,360.0,2,True,True
+119e18,STRESS_ECG,119,18,,360.0,2,True,True
+119e24,STRESS_ECG,119,24,,360.0,2,True,True
+119e_6,STRESS_ECG,119,-6,,360.0,2,True,True
+bw,PURE_NOISE,,,baseline_wander,360.0,2,False,True
+em,PURE_NOISE,,,electrode_motion,360.0,2,False,True
+ma,PURE_NOISE,,,muscle_artifact,360.0,2,False,True

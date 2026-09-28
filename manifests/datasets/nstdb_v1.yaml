@@ -1,0 +1,27 @@
+dataset_id: NSTDB
+documented_source:
+  pure_noise_count: 3
+  record_count: 15
+  sampling_rate_hz: 360
+  stress_ecg_count: 12
+doi: 10.13026/C2HS3T
+downloaded_at_utc: '2026-09-28T17:19:49.112037Z'
+files_base_url: https://physionet.org/files/nstdb/1.0.0/
+license: Open Data Commons Attribution License v1.0
+observed_local_validation:
+  parsed_records: 15
+  pure_noise_count: 3
+  records_in_RECORDS: 15
+  stress_ecg_count: 12
+official_name: MIT-BIH Noise Stress Test Database
+official_sha256_manifest_hash: 5b40bdff1b436659424819b49b83ece3c17a487f8a7b8c33d8b9b8e6305e6a1c
+owning_task: T019
+provider: PhysioNet
+raw_data_committed: false
+raw_data_root: data/raw/nstdb/1.0.0
+records_file_hash: 006d76f378c140ebbb1c20865a79ccb58e2f797b8ea7f1aa88968f1e319af5a4
+records_manifest_path: manifests/datasets/nstdb_records.csv
+role: NOISE_ROBUSTNESS
+source_url: https://physionet.org/content/nstdb/1.0.0/
+validation_status: PASS
+version: 1.0.0

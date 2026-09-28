@@ -1,0 +1,72 @@
+{
+  "annotation_bound_failures": 0,
+  "annotations_parsed": 75,
+  "channel_count_failures": 0,
+  "dataset_id": "INCART",
+  "exact_ii_eligible_count": 75,
+  "exact_ii_excluded_count": 0,
+  "excluded_records": [],
+  "hashes_verified": true,
+  "headers_parsed": 75,
+  "known_source_anomalies": [
+    {
+      "annotation_samples_below_zero": [
+        -11
+      ],
+      "finding": "This record carries one or more beat annotations with a small negative sample index, i.e. positioned before the signal's own t=0. Verified across all 75 official records that none exceed 50 samples in magnitude and none fall at/above sig_len; treated as a benign source leading-edge artifact, not corruption. Structurally recorded, never silently dropped -- see reports/t007/incart_record_validation.csv.",
+      "record_id": "I04"
+    },
+    {
+      "annotation_samples_below_zero": [
+        -17
+      ],
+      "finding": "This record carries one or more beat annotations with a small negative sample index, i.e. positioned before the signal's own t=0. Verified across all 75 official records that none exceed 50 samples in magnitude and none fall at/above sig_len; treated as a benign source leading-edge artifact, not corruption. Structurally recorded, never silently dropped -- see reports/t007/incart_record_validation.csv.",
+      "record_id": "I17"
+    },
+    {
+      "annotation_samples_below_zero": [
+        -15
+      ],
+      "finding": "This record carries one or more beat annotations with a small negative sample index, i.e. positioned before the signal's own t=0. Verified across all 75 official records that none exceed 50 samples in magnitude and none fall at/above sig_len; treated as a benign source leading-edge artifact, not corruption. Structurally recorded, never silently dropped -- see reports/t007/incart_record_validation.csv.",
+      "record_id": "I35"
+    },
+    {
+      "annotation_samples_below_zero": [
+        -10
+      ],
+      "finding": "This record carries one or more beat annotations with a small negative sample index, i.e. positioned before the signal's own t=0. Verified across all 75 official records that none exceed 50 samples in magnitude and none fall at/above sig_len; treated as a benign source leading-edge artifact, not corruption. Structurally recorded, never silently dropped -- see reports/t007/incart_record_validation.csv.",
+      "record_id": "I44"
+    },
+    {
+      "annotation_samples_below_zero": [
+        -8
+      ],
+      "finding": "This record carries one or more beat annotations with a small negative sample index, i.e. positioned before the signal's own t=0. Verified across all 75 official records that none exceed 50 samples in magnitude and none fall at/above sig_len; treated as a benign source leading-edge artifact, not corruption. Structurally recorded, never silently dropped -- see reports/t007/incart_record_validation.csv.",
+      "record_id": "I57"
+    },
+    {
+      "annotation_samples_below_zero": [
+        -12
+      ],
+      "finding": "This record carries one or more beat annotations with a small negative sample index, i.e. positioned before the signal's own t=0. Verified across all 75 official records that none exceed 50 samples in magnitude and none fall at/above sig_len; treated as a benign source leading-edge artifact, not corruption. Structurally recorded, never silently dropped -- see reports/t007/incart_record_validation.csv.",
+      "record_id": "I72"
+    },
+    {
+      "annotation_samples_below_zero": [
+        -14
+      ],
+      "finding": "This record carries one or more beat annotations with a small negative sample index, i.e. positioned before the signal's own t=0. Verified across all 75 official records that none exceed 50 samples in magnitude and none fall at/above sig_len; treated as a benign source leading-edge artifact, not corruption. Structurally recorded, never silently dropped -- see reports/t007/incart_record_validation.csv.",
+      "record_id": "I74"
+    }
+  ],
+  "nonfinite_signal_failures": 0,
+  "overall_status": "PASS",
+  "record_count_expected": 75,
+  "record_count_observed": 75,
+  "sampling_rate_failures": 0,
+  "signals_parsed": 75,
+  "source_patient_id_parse_failures": 0,
+  "unique_source_patient_ids_documented": 32,
+  "unique_source_patient_ids_observed": 32,
+  "version": "1.0.0"
+}

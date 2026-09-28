@@ -1,0 +1,158 @@
+{
+  "config_path": "configs/base.yaml",
+  "config_sha256": "367175080e1ff6a8e2a7b2682207c56381ceac29937e16b6845ddba5dac16227",
+  "created_at_utc": "2026-09-28T20:54:12.209496Z",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
+  "git_commit": "866a0d37c769f834785fadd1e754175bf9f6fc0e",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "datasets/physionet.py",
+      "sha256": "9498e6b61826df530182b55be9e45b929a28102e43a2b71c50bba76392f5ab37"
+    },
+    {
+      "path": "datasets/incart.py",
+      "sha256": "7fd3971f2dc34813f23602bb3d9f31930d552120aecdf0b54abd9d567b6bc32a"
+    },
+    {
+      "path": "datasets/nstdb.py",
+      "sha256": "6368dc1c227b64519c0c599eeb9031b50cf7f821c092f9d5765ee0e7e3b53c60"
+    },
+    {
+      "path": "datasets/bidmc.py",
+      "sha256": "5f6a898381ef8dc74659f800a9c7d0f38e75dec5320efd57c3a024493565dd2b"
+    },
+    {
+      "path": "scripts/acquire_incart.py",
+      "sha256": "22e6135c17fca8c5a22cce4847d8ff76448261acbb6df1ff246e968637466033"
+    },
+    {
+      "path": "scripts/acquire_nstdb.py",
+      "sha256": "0d50c7269f5f1e827c8748c5a988eb994f13936d36436509d2ce39bf3db61325"
+    },
+    {
+      "path": "scripts/acquire_bidmc.py",
+      "sha256": "5669d78213ef6425356a60ffa69a433a996c9e2bb456f83db87285943e2cfbd3"
+    },
+    {
+      "path": "scripts/validate_incart_t007.py",
+      "sha256": "314a6577d4f73c4d57e945e98578ce75864cb317b78e813f0799f29953d0bae9"
+    },
+    {
+      "path": "scripts/validate_nstdb_t007.py",
+      "sha256": "bd750c7de60fff31618bca69f3035bfaef8de095a884282c2288fd25f52ce158"
+    },
+    {
+      "path": "scripts/validate_bidmc_t007.py",
+      "sha256": "dcd0466388401e2fc753b173628b3f8bcb92585ef7bb7daecb2f01c0cf420a28"
+    },
+    {
+      "path": "scripts/audit_dataset_roles_t007.py",
+      "sha256": "e5b3c18476a98a2b3ffb2330afb963e2b3cbfc5e0ebd129cd3621a3508bd1802"
+    },
+    {
+      "path": "requirements-dev.lock",
+      "sha256": "3719d58a5dea2a7bffe6dbe7870e9e1a52c9720e8b63a613ac09d3952a8fe4b0"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "INCART/NSTDB/BIDMC exact acquisition, hash verification, structural validation, locked exact-Lead-II policy, and role enforcement. No split, no AAMI mapping, no preprocessing, no external evaluation, no robustness experiment, no multimodal engineering experiment, no model training. G2/G3 close only if their documented criteria are fully met by T006+T007 together.",
+  "output_artifacts": [
+    {
+      "path": "manifests/datasets/dataset_roles_v1.yaml",
+      "sha256": "599476a433989d9ae4fc73f176164635eafe1d6fec459d88e9fbe4daa1448318"
+    },
+    {
+      "path": "manifests/datasets/incart_v1.yaml",
+      "sha256": "a3b578c7f841e4170f8269554691fed957479fdd6c0f59c4f118249c6b85463e"
+    },
+    {
+      "path": "manifests/datasets/incart_v1_files.csv",
+      "sha256": "91dd99ab345a5050c5fde78c44925a77d7e67c3f8c2af4451fd5294cfcb1f6c7"
+    },
+    {
+      "path": "manifests/datasets/incart_lead_ii_records.csv",
+      "sha256": "2053a9da9e4c1ec5a478f58e91e5fb73a3bb50bef7f7b4da21d0b316ef205353"
+    },
+    {
+      "path": "manifests/datasets/incart_lead_ii_exclusions.csv",
+      "sha256": "2c3aac169589e3574c6f836eaa48d51585562bddf9fbabc805b77f9a26194df5"
+    },
+    {
+      "path": "manifests/datasets/incart_patient_map.csv",
+      "sha256": "9e6c00be0d6026fa60c5d16f209411dae99eac70c03fe9fe0ef567a24ce5bcbf"
+    },
+    {
+      "path": "manifests/datasets/nstdb_v1.yaml",
+      "sha256": "1137f5712a2411869ebd19a099720eb5f6ac453c021769af7e8ba327809f028c"
+    },
+    {
+      "path": "manifests/datasets/nstdb_v1_files.csv",
+      "sha256": "21ac7f43ad826796f7d41f427ff0139b5d4463698b4e165d93a6949891a319dc"
+    },
+    {
+      "path": "manifests/datasets/nstdb_records.csv",
+      "sha256": "bc679e136e90749cb93570b1e210066d00c96a16d8659ea74d272330756600c2"
+    },
+    {
+      "path": "manifests/datasets/bidmc_v1.yaml",
+      "sha256": "757b6e7cbc8b2eb5fa76a41aeee4246a026d6c0dec70525648891374de490d08"
+    },
+    {
+      "path": "manifests/datasets/bidmc_v1_files.csv",
+      "sha256": "f74e580894d36ab50120674987a3626fff74c048df197cb95795507ffbfe095a"
+    },
+    {
+      "path": "manifests/datasets/bidmc_channel_availability.csv",
+      "sha256": "91f96dc802b2f522e3d79d76e9c9e9b5677e882b8ed489b49373913e0dd1b755"
+    },
+    {
+      "path": "reports/t007/incart_validation.json",
+      "sha256": "86a2b23731339ff092cd63cca5ea889538dc3a2ea55bfbd7785c7c75bcd577b5"
+    },
+    {
+      "path": "reports/t007/incart_lead_policy_audit.json",
+      "sha256": "3540f7a651d12d71f726322571f049a97312b01a1889065893fda81e51a80f3c"
+    },
+    {
+      "path": "reports/t007/incart_record_validation.csv",
+      "sha256": "c01de388509fd8f7d4e3e441b0d2a96192516aa89787199144b88e3bd8aa47ac"
+    },
+    {
+      "path": "reports/t007/nstdb_validation.json",
+      "sha256": "52b27f70f6bdb0ccdb156cd265678250316cb5fee26362f023614addc8db40d3"
+    },
+    {
+      "path": "reports/t007/nstdb_record_validation.csv",
+      "sha256": "31af06cc73fe4aa24434ff62424f692586294799e23c676920e891c22881e2a6"
+    },
+    {
+      "path": "reports/t007/bidmc_validation.json",
+      "sha256": "8bbe2cec507de5c97c62e8bfb50eda0ad936df5eadb3eeae974dfd5da8135f8d"
+    },
+    {
+      "path": "reports/t007/dataset_role_audit.json",
+      "sha256": "5ca6f2d2f0f99a47f86977d5791a91b3c7ffa5285f17a2274cd88f27164beb2c"
+    },
+    {
+      "path": "reports/data/validation_report.json",
+      "sha256": "82e0672dad778268e68bcfcd19adda6b62e879af81924cd5bef3d29f3d456d3d"
+    },
+    {
+      "path": "manifests/datasets/channel_exclusions.csv",
+      "sha256": "249f4ee214b6b8541746b3ab97b86984143a655d3227c431f15c5a1d704d161c"
+    },
+    {
+      "path": "reports/data/acquisition_audit.json",
+      "sha256": "af2eeaf0127765310cb0b762b916498f1b7cae87dcb5110806e42e55519faf19"
+    }
+  ],
+  "phase_id": "T007",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T007-DATASET-ACQUISITION-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T007"
+}

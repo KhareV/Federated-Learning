@@ -132,6 +132,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T004": "BLOCKED",
             "T005": "PASS",
             "T006": "PASS",
+            "T007": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -140,6 +141,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T004": "0312d6f6c529676d036f83693a9a58c19f33ef08",
             "T005": "c3f7d85e71ceeeafa2bc31ff902a61913a51b2cf",
             "T006": "645de3328d990c38ca60055c6a79d8833bfe95c7",
+            "T007": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
@@ -148,6 +150,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T004": "reports/t004/hardware_deferral.json",
             "T005": "reports/t005/smoke_report.json",
             "T006": "reports/t006/mitdb_validation.json",
+            "T007": "reports/data/validation_report.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -193,7 +196,19 @@ TASK_NOTES_OVERRIDE = {
         "where the packet uses a cross-reference. Real PhysioNet MIT-BIH v1.0.0 acquired and "
         "hash-verified (48/48 records); exact-MLII channel policy applied from WFDB headers "
         "only (46 eligible, 102/104 excluded for no exact MLII channel). No patient split, "
-        "no AAMI mapping, no preprocessing; G2/G3 remain open pending T007."
+        "no AAMI mapping, no preprocessing; G2/G3 closed jointly with T007."
+    ),
+    "T007": (
+        "Canonical execution-plan packet; normalized prerequisite IDs follow Sections 4-5 "
+        "where the packet uses a cross-reference. Real PhysioNet INCART/NSTDB/BIDMC v1.0.0 "
+        "acquired and hash-verified (75/15/53 records); exact-Lead-II policy (INCART, 75/75 "
+        "eligible), source-defined role classification (NSTDB: 12 stress-ECG/3 pure-noise), "
+        "and exact-channel availability audit (BIDMC: PLETH/II/HR/PULSE/SpO2) applied from "
+        "WFDB headers only. Dataset roles locked (INCART=external-eval-only, "
+        "NSTDB=robustness-only, BIDMC=multimodal-engineering-only; MITDB remains the only "
+        "training-eligible dataset). No split, no AAMI mapping, no preprocessing, no "
+        "external evaluation, no robustness experiment, no model training. G2/G3 now PASS "
+        "jointly with T006; G1/G4 remain open."
     ),
 }
 
@@ -528,8 +543,8 @@ def gate(
 GATES = [
     gate("G0", "Scope Freeze", "Freeze task, research questions, authority, and claim boundary.", "T001;T002", "R26;R27;CB01", "T001 closure and T002 registry audits", "reports/t001/closure_verification.json;manifests/requirements_v22.csv", "Task and claim boundary explicit; closure evidence PASS.", "Authority/scope ambiguity or closure not PASS.", "Stop downstream implementation and repair source/coverage evidence.", "T003;T004;T005;T006;T007;T008;T009;T010;T011;T012;T013;T014;T015;T016;T017;T018;T019;T020;T021;T022;T023;T024;T025;T026;T027;T028;T029;T030;T031;T032;T033;T034;T035;T036", status="PASS", evidence="reports/t001/closure_verification.json"),
     gate("G1", "Hardware/Data Contract", "Freeze canonical hardware/data semantics and firmware schema.", "T003;T004", "HW01;DC01;R06.1", "Schema fixtures; bench timing/ADC/packet verification", "contracts/HARDWARE_DATA_CONTRACT_V1.md;reports/hardware/contract_verification.json", "All required fields, types, clocks, provenance, and verified/unknown semantics defined.", "Sensor semantics remain unknown without explicit evidence/status.", "Bench hardware and inspect firmware/backend; version the contract.", "T005;T013;T028", evidence="reports/hardware/contract_verification.json"),
-    gate("G2", "Dataset Acquisition", "Verify exact public dataset versions and immutable provenance.", "T005", "R26.1;DS01", "Checksum/license/parse smoke tests", "manifests/datasets/", "Exact declared versions download/parse with hashes and licenses.", "Missing, corrupt, or mis-versioned source.", "Redownload or repair manifest; do not proceed on uncertain source.", "T006", evidence="reports/data/acquisition_audit.json"),
-    gate("G3", "Dataset Validation", "Validate records, annotations, identifiers, and locked channel policy.", "T006", "R03;R03.1;R26.1;DS01", "Record/schema/channel/duplicate/symbol-census tests", "reports/data/validation_report.json;manifests/datasets/channel_exclusions.csv", "All expected fields and annotation/channel checks pass or documented version exception is approved.", "Unexpected fields/counts or untracked exclusions.", "Block labels/splits; repair validation or source version.", "T007;T008", evidence="reports/data/validation_report.json"),
+    gate("G2", "Dataset Acquisition", "Verify exact public dataset versions and immutable provenance.", "T005", "R26.1;DS01", "Checksum/license/parse smoke tests", "manifests/datasets/", "Exact declared versions download/parse with hashes and licenses.", "Missing, corrupt, or mis-versioned source.", "Redownload or repair manifest; do not proceed on uncertain source.", "T006", status="PASS", evidence="reports/data/acquisition_audit.json"),
+    gate("G3", "Dataset Validation", "Validate records, annotations, identifiers, and locked channel policy.", "T006", "R03;R03.1;R26.1;DS01", "Record/schema/channel/duplicate/symbol-census tests", "reports/data/validation_report.json;manifests/datasets/channel_exclusions.csv", "All expected fields and annotation/channel checks pass or documented version exception is approved.", "Unexpected fields/counts or untracked exclusions.", "Block labels/splits; repair validation or source version.", "T007;T008", status="PASS", evidence="reports/data/validation_report.json"),
     gate("G4", "Label Freeze", "Freeze AAMI_SVF_WINDOW_V1 and shared AAMI_SVF_MAP_V1.", "T007", "R01;R01.1;R01.2", "Complete allowlist/unknown/paced/non-beat/window eligibility tests", "contracts/LABEL_SCHEMA_V1.md;reports/labels/label_audit.json", "Symbol mapping and target tests pass for both source datasets.", "Any ambiguous, inconsistent, or silently coerced target symbol.", "Revise/version mapping before any training and regenerate dependent artifacts.", "T008;T009;T010;T011;T012", evidence="reports/labels/label_audit.json"),
     gate("G5", "Split/Leakage Audit", "Freeze patient partitions before windows/models.", "T008", "R04;R04.1;R04.2", "Disjoint participants; 201/202 grouping; post-split window build audit", "manifests/splits/MITDB_SPLIT_V1.csv;reports/splits/split_audit.json", "Zero patient overlap; 201/202 grouped; patient counts reported.", "Any leakage, role violation, or result-driven regeneration.", "Regenerate before training and invalidate all dependent runs.", "T009;T010;T011;T012;T022", evidence="reports/splits/split_audit.json"),
     gate("G6", "Preprocessing Pass", "Prove causal preprocessing, resampling, gaps, windows, and quality.", "T009;T010", "R02;R05;R05.1;R06;R06.1;SQ01", "Future-append; impulse; chunk equivalence; gap; window; hard-quality tests", "reports/preprocessing/causality_tests.json;reports/preprocessing/gap_tests.json", "All future-append and chunk-equivalence tests pass; gap/window/quality contracts exact.", "Any future dependence, state mismatch, or gap/window contract defect.", "Replace/version the transform and invalidate caches/downstream runs.", "T011;T012", evidence="reports/preprocessing/causality_tests.json"),

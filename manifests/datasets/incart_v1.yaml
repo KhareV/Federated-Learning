@@ -1,0 +1,41 @@
+dataset_id: INCART
+documented_source:
+  record_count: 75
+  sampling_rate_hz: 257
+  source_channel_count: 12
+  source_patient_count: 32
+doi: 10.13026/C2V88N
+downloaded_at_utc: '2026-09-28T20:06:41.941191Z'
+eligible_manifest_path: manifests/datasets/incart_lead_ii_records.csv
+eligible_record_count: 75
+excluded_record_count: 0
+exclusion_manifest_path: manifests/datasets/incart_lead_ii_exclusions.csv
+files_base_url: https://physionet.org/files/incartdb/1.0.0/
+lead_name_required: II
+lead_policy_id: INCART_EXACT_II_V1
+license: Open Data Commons Attribution License v1.0
+observed_local_validation:
+  eligible_exact_II: 75
+  excluded_no_exact_II: 0
+  parsed_records: 75
+  records_in_RECORDS: 75
+  unique_source_patient_ids_observed: 32
+official_name: St Petersburg INCART 12-lead Arrhythmia Database
+official_sha256_manifest_hash: 771b601636873989cab57dac753ba3a6972fc71de88e361d0df8df13186cc826
+owning_task: T020
+patient_map_path: manifests/datasets/incart_patient_map.csv
+provider: PhysioNet
+raw_data_committed: false
+raw_data_root: data/raw/incartdb/1.0.0
+records_file_hash: eaecec2b3179045857b1ff33f20e53faf0bc397f82a042eae0ec226fecb8dd7a
+required_files:
+- hea
+- dat
+- atr
+role: LOCKED_EXTERNAL_ECG_EVALUATION
+sampling_rate_hz: 257
+source_channel_count: 12
+source_url: https://physionet.org/content/incartdb/1.0.0/
+validation_status: PASS
+version: 1.0.0
+wfdb_version: 4.3.1

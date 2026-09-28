@@ -1,0 +1,57 @@
+# Locked dataset-role registry (T007). Availability of a dataset in the repository must
+# never imply permission to train/tune/evaluate on it outside its locked role.
+MITDB:
+  role: CORE_TRAINING_VALIDATION_CALIBRATION_INTERNAL_TEST
+  allowed_for_training: true
+  allowed_for_model_selection: true
+  allowed_for_calibration: true
+  allowed_for_internal_test: true
+  external_evaluation_only: false
+  robustness_only: false
+  multimodal_engineering_only: false
+  owning_tasks: [T009, T010, T014, T015, T017, T018]
+  notes: >
+    Locked patient-disjoint core dataset; T009/T010 own the split freeze. This registry does
+    not grant training permission by itself -- MITDB_SPLIT_V1 must be frozen first.
+
+INCART:
+  role: LOCKED_EXTERNAL_ECG_EVALUATION
+  allowed_for_training: false
+  allowed_for_model_selection: false
+  allowed_for_threshold_selection: false
+  allowed_for_calibration: false
+  external_evaluation_only: true
+  robustness_only: false
+  multimodal_engineering_only: false
+  owning_tasks: [T020]
+  notes: >
+    Single locked external evaluation after central model/calibration freeze. T007 only
+    acquires/validates it; no inference, tuning, or performance metric may be computed here.
+
+NSTDB:
+  role: NOISE_ROBUSTNESS
+  allowed_for_training: false
+  allowed_for_model_selection: false
+  allowed_for_calibration: false
+  external_evaluation_only: false
+  robustness_only: true
+  multimodal_engineering_only: false
+  owning_tasks: [T019]
+  notes: >
+    Controlled post-model robustness testing only, not another training source. T007 only
+    acquires/validates provenance (role, SNR, noise type); no robustness experiment runs here.
+
+BIDMC:
+  role: MULTIMODAL_ENGINEERING_CONTEXT
+  allowed_for_training: false
+  allowed_for_arrhythmia_training: false
+  allowed_for_model_selection: false
+  allowed_for_calibration: false
+  external_evaluation_only: false
+  robustness_only: false
+  multimodal_engineering_only: true
+  owning_tasks: [T012, T013, T021]
+  notes: >
+    ECG/PPG synchronization engineering, pulse-rate context, HR/PR agreement, SpO2
+    validity/context, quality testing, multimodal replay. Never supervised arrhythmia
+    evidence and never merged into MODEL_V1 training labels.

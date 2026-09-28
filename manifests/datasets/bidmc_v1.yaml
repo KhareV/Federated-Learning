@@ -1,0 +1,41 @@
+channel_availability_manifest_path: manifests/datasets/bidmc_channel_availability.csv
+dataset_id: BIDMC
+documented_source:
+  duration_minutes: 8
+  numerics_sampling_rate_hz: 1
+  record_count: 53
+  waveform_sampling_rate_hz: 125
+doi: 10.13026/C2208R
+downloaded_at_utc: '2026-09-28T17:13:45.234007Z'
+excluded_by_design:
+- .breath
+- bidmc_csv/*
+- bidmc_data.mat
+files_base_url: https://physionet.org/files/bidmc/1.0.0/
+license: Open Data Commons Attribution License v1.0
+numerics_sampling_rate_hz: 1
+observed_local_validation:
+  hr_available_count: 53
+  ii_available_count: 53
+  numeric_headers_parsed: 53
+  pleth_available_count: 53
+  pulse_available_count: 53
+  records_in_RECORDS: 53
+  spo2_available_count: 52
+  waveform_headers_parsed: 53
+official_name: BIDMC PPG and Respiration Dataset
+official_sha256_manifest_hash: d853c21e07dc5b067aef5d01aa3a633767de2a6d7397748568acc3c49e5fba97
+owning_tasks:
+- T012
+- T013
+- T021
+provider: PhysioNet
+raw_data_committed: false
+raw_data_root: data/raw/bidmc/1.0.0
+records_file_hash: 730b14f4ebe84a907ba39fe713d5d90e12d4413c0e2d321db9ed9dea584558d0
+records_with_missing_ii: []
+role: MULTIMODAL_ENGINEERING_CONTEXT
+source_url: https://physionet.org/content/bidmc/1.0.0/
+validation_status: PASS
+version: 1.0.0
+waveform_sampling_rate_hz: 125

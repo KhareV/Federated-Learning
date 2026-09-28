@@ -6,7 +6,7 @@
     "contracts/LABEL_SCHEMA_V1.md": "6bfeab65d185a2687c43d114914a14f36e0abf2068aae119dcce75f7a633a373",
     "contracts/sample_schema_v1.json": "234b1f49ef6f8581f576e5cb4741c457c0d4703d527f435f0af2974658f4cb38",
     "reports/t003/contract_validation.json": "d0defde50c5945e29ba2b8c07c91cf242e5c82b5d6ffb3f0b86cbd65a9c6fcb8",
-    "reports/t003/run_manifest.json": "0a90b8d9d881fa73035e9f64e324bc63dc8b9a01c2bc89fc6392346f38f7fd9e"
+    "reports/t003/run_manifest.json": "0ff1dd8a4132a88f4016c48f08405e8f960352498deaaed0c5495625aac39c92"
   },
   "manifest_version": "1.0",
   "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest"

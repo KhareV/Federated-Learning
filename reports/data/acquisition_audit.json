@@ -1,0 +1,43 @@
+{
+  "index_of": {
+    "BIDMC": "reports/t007/bidmc_acquisition_metadata.json",
+    "INCART": "reports/t007/incart_acquisition_metadata.json",
+    "MITDB": "reports/t006/acquisition_metadata.json",
+    "NSTDB": "reports/t007/nstdb_acquisition_metadata.json"
+  },
+  "overall_status": "PASS",
+  "summary_by_dataset": {
+    "BIDMC": {
+      "all_files_hash_verified": true,
+      "doi": "10.13026/C2208R",
+      "license": "Open Data Commons Attribution License v1.0",
+      "record_count": 53,
+      "required_file_count": 212,
+      "version": "1.0.0"
+    },
+    "INCART": {
+      "all_files_hash_verified": true,
+      "doi": "10.13026/C2V88N",
+      "license": "Open Data Commons Attribution License v1.0",
+      "record_count": 75,
+      "required_file_count": 225,
+      "version": "1.0.0"
+    },
+    "MITDB": {
+      "all_files_hash_verified": true,
+      "doi": "10.13026/C2F305",
+      "license": "Open Data Commons Attribution License v1.0",
+      "record_count": 48,
+      "required_file_count": 144,
+      "version": "1.0.0"
+    },
+    "NSTDB": {
+      "all_files_hash_verified": true,
+      "doi": "10.13026/C2HS3T",
+      "license": "Open Data Commons Attribution License v1.0",
+      "record_count": 15,
+      "required_file_count": 42,
+      "version": "1.0.0"
+    }
+  }
+}

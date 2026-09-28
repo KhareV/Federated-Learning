@@ -15,11 +15,16 @@ from __future__ import annotations
 
 import argparse
 import json
-import urllib.request
 from datetime import UTC, datetime
 from pathlib import Path
 
-from nhm.hashing import hash_file
+from datasets.physionet import (
+    download_and_verify,
+    fetch_text,
+    parse_records_list,
+    parse_sha256_manifest,
+    write_local_provenance,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET_ID = "MITDB"
@@ -39,69 +44,8 @@ DOCUMENTED_SOURCE = {
 }
 
 
-def _fetch_text(url: str, timeout: int = 30) -> str:
-    with urllib.request.urlopen(url, timeout=timeout) as response:
-        return response.read().decode("utf-8")
-
-
-def _fetch_bytes(url: str, timeout: int = 120) -> bytes:
-    with urllib.request.urlopen(url, timeout=timeout) as response:
-        return response.read()
-
-
-def fetch_records_list() -> list[str]:
-    text = _fetch_text(FILES_BASE_URL + "RECORDS")
-    return [line.strip() for line in text.splitlines() if line.strip()]
-
-
-def fetch_official_sha256sums() -> dict[str, str]:
-    text = _fetch_text(FILES_BASE_URL + "SHA256SUMS.txt")
-    hashes: dict[str, str] = {}
-    for line in text.splitlines():
-        stripped = line.strip()
-        if not stripped:
-            continue
-        parts = stripped.split(None, 1)
-        if len(parts) != 2:
-            continue
-        digest, name = parts
-        hashes[name] = digest
-    return hashes
-
-
 def required_files_for(records: list[str]) -> list[str]:
     return [f"{record}.{ext}" for record in records for ext in REQUIRED_EXTENSIONS]
-
-
-def download_and_verify(filename: str, expected_sha256: str, *, force: bool = False) -> dict:
-    dest = RAW_ROOT / filename
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    if dest.exists() and not force:
-        local_hash = hash_file(dest)
-        if local_hash == expected_sha256:
-            return {
-                "file": filename,
-                "action": "already_verified",
-                "sha256": local_hash,
-                "match": True,
-            }
-        raise RuntimeError(
-            f"DATASET_HASH_MISMATCH: existing {filename} has sha256={local_hash}, "
-            f"expected {expected_sha256}. Refusing to trust or overwrite it silently; "
-            "remove the file and rerun, or investigate local corruption."
-        )
-    data = _fetch_bytes(FILES_BASE_URL + filename)
-    temporary = dest.with_name(dest.name + ".part")
-    temporary.write_bytes(data)
-    local_hash = hash_file(temporary)
-    if local_hash != expected_sha256:
-        temporary.unlink(missing_ok=True)
-        raise RuntimeError(
-            f"DATASET_HASH_MISMATCH: downloaded {filename} has sha256={local_hash}, "
-            f"expected {expected_sha256}."
-        )
-    temporary.replace(dest)
-    return {"file": filename, "action": "downloaded", "sha256": local_hash, "match": True}
 
 
 def main() -> None:
@@ -112,7 +56,7 @@ def main() -> None:
     args = parser.parse_args()
 
     print(f"Acquiring {DATASET_ID} v{DATASET_VERSION} from {FILES_BASE_URL}")
-    records = fetch_records_list()
+    records = parse_records_list(fetch_text(FILES_BASE_URL + "RECORDS"))
     if len(records) != DOCUMENTED_SOURCE["record_count"]:
         raise RuntimeError(
             f"DATASET_SOURCE_CONFLICT: official RECORDS lists {len(records)} records, "
@@ -121,7 +65,7 @@ def main() -> None:
     if len(set(records)) != len(records):
         raise RuntimeError("DATASET_SOURCE_CONFLICT: duplicate record IDs in official RECORDS")
 
-    official_hashes = fetch_official_sha256sums()
+    official_hashes = parse_sha256_manifest(fetch_text(FILES_BASE_URL + "SHA256SUMS.txt"))
     required = required_files_for(records)
     missing_from_sums = [name for name in required if name not in official_hashes]
     if missing_from_sums:
@@ -133,17 +77,16 @@ def main() -> None:
     RAW_ROOT.mkdir(parents=True, exist_ok=True)
     actions = []
     for filename in required:
-        result = download_and_verify(filename, official_hashes[filename], force=args.force)
+        result = download_and_verify(
+            RAW_ROOT / filename,
+            FILES_BASE_URL + filename,
+            official_hashes[filename],
+            force=args.force,
+        )
         actions.append(result)
         print(f"  {result['action']:>16}  {filename}")
 
-    # Persist the exact official record list and the required-file hash subset locally so the
-    # source can be reconstructed/re-verified even if PhysioNet's presentation changes later.
-    # .gitignore explicitly allows tracking data/raw/**/SHA256SUMS.txt (not raw payload bytes).
-    (RAW_ROOT / "RECORDS").write_text("\n".join(records) + "\n", encoding="utf-8")
-    (RAW_ROOT / "SHA256SUMS.txt").write_text(
-        "\n".join(f"{official_hashes[name]} {name}" for name in required) + "\n", encoding="utf-8"
-    )
+    write_local_provenance(RAW_ROOT, records, {name: official_hashes[name] for name in required})
 
     acquisition_metadata = {
         "dataset_id": DATASET_ID,
