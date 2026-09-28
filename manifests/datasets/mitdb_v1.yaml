@@ -1,0 +1,36 @@
+dataset_id: MITDB
+documented_source:
+  record_count: 48
+  sampling_rate_hz: 360
+  subject_count: 47
+doi: 10.13026/C2F305
+downloaded_at_utc: '2026-09-28T16:37:54.312756Z'
+eligible_manifest_path: manifests/datasets/mitdb_mlii_records.csv
+eligible_record_count: 46
+excluded_record_count: 2
+exclusion_manifest_path: manifests/datasets/mitdb_mlii_exclusions.csv
+files_base_url: https://physionet.org/files/mitdb/1.0.0/
+lead_name_required: MLII
+lead_policy_id: MITDB_EXACT_MLII_V1
+license: Open Data Commons Attribution License v1.0
+observed_local_validation:
+  eligible_exact_MLII: 46
+  excluded_no_exact_MLII: 2
+  parsed_records: 48
+  records_in_RECORDS: 48
+official_name: MIT-BIH Arrhythmia Database
+official_sha256_manifest_hash: 082a9664e00312678ebe93f561784ec6a32e8532d7e318b81cf16a99363c4a0d
+provider: PhysioNet
+raw_data_committed: false
+raw_data_root: data/raw/mitdb/1.0.0
+records_file_hash: fcdca7ead9fc93f612f7e025029241cb6429ba2fcd05327b661bdc6b26fbcb57
+required_files:
+- hea
+- dat
+- atr
+sampling_rate_hz: 360
+source_channel_count: 2
+source_url: https://physionet.org/content/mitdb/1.0.0/
+validation_status: PASS
+version: 1.0.0
+wfdb_version: 4.3.1

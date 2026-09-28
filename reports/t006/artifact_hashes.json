@@ -1,0 +1,17 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "datasets/mitdb.py": "2ea528c02844dec92a8322d4baeda5ee5bd916bd7ef379c45c5f5af2618362c3",
+    "manifests/datasets/mitdb_mlii_exclusions.csv": "6008fc052e6e6adf1d5bdca571e00398fdf66201837a5e7ded4e41b404dece86",
+    "manifests/datasets/mitdb_mlii_records.csv": "7c2a0695754e3486056626490e9fc9f552e1c78a745e7209901745ac058042c9",
+    "manifests/datasets/mitdb_v1.yaml": "807e185c2fa91a9597cc18034893e3f1ce857f461c634d986982981b1e20ff9a",
+    "manifests/datasets/mitdb_v1_files.csv": "5bf80fc0d188342f67f89d6befbed28d18eefed04b426b6a390840a2d35e1cb9",
+    "reports/t006/lead_policy_audit.json": "4502f8e83a059e82b2617090ab55a83df9a22493bde8d9a7a21569da42e590d2",
+    "reports/t006/mitdb_validation.json": "ec9c346de7e284ac3ac5067ad6e288c492175770afa534eb1587665e4c65b9fa",
+    "reports/t006/run_manifest.json": "99ca8da6b67f672356a74bd7221eff565fe212aeaebdc3ff44f179462ef6cf77",
+    "scripts/acquire_mitdb.py": "4138a08b010974e7a73e066c6406225a6d74b66a473bb4f5321efc13d783cc19",
+    "scripts/validate_mitdb_t006.py": "869e4eaacde9a356430cd9b5209288b5e058f2c6c0223d60093c5e1a05fe5e40"
+  },
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest"
+}

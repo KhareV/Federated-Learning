@@ -1,10 +1,10 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6
 
 lint:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets
 
 test:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest
@@ -86,3 +86,32 @@ phase5:
 	$(MAKE) t004-evidence PYTHON=$(PYTHON)
 	$(MAKE) t005-smoke PYTHON=$(PYTHON)
 	$(MAKE) t005-evidence PYTHON=$(PYTHON)
+
+# Network allowed; downloads/verifies the exact PhysioNet MIT-BIH v1.0.0 release into
+# data/raw/mitdb/1.0.0/. Idempotent -- an already-verified local copy is not redownloaded.
+acquire-mitdb:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/acquire_mitdb.py
+
+# Offline. Requires local raw data already acquired via `make acquire-mitdb`.
+validate-mitdb:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/validate_mitdb_t006.py
+
+t006-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t006_evidence.py
+
+# phase6 does not invoke acquire-mitdb: normal local validation must not redownload the
+# dataset on every run. Run `make acquire-mitdb` once (or after a verified-copy repair)
+# before `make phase6`.
+phase6:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) t002-evidence PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t003-evidence PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	$(MAKE) t004-evidence PYTHON=$(PYTHON)
+	$(MAKE) t005-smoke PYTHON=$(PYTHON)
+	$(MAKE) t005-evidence PYTHON=$(PYTHON)
+	$(MAKE) validate-mitdb PYTHON=$(PYTHON)
+	$(MAKE) t006-evidence PYTHON=$(PYTHON)

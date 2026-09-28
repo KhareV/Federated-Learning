@@ -21,7 +21,8 @@ def test_task_registry_is_complete_and_future_work_is_not_started() -> None:
     assert rows[2]["status"] == "PASS"
     assert rows[3]["status"] == "BLOCKED"
     assert rows[4]["status"] == "PASS"
-    assert all(row["status"] == "NOT_STARTED" for row in rows[5:])
+    assert rows[5]["status"] == "PASS"
+    assert all(row["status"] == "NOT_STARTED" for row in rows[6:])
 
 
 def test_blocked_hardware_task_does_not_prevent_later_task_pass() -> None:

@@ -1,0 +1,523 @@
+{
+  "documented_exceptions_cross_check": {
+    "102": {
+      "documented_note": "MLII could not be used",
+      "observed_eligible": false,
+      "observed_mlii_channel_index": null,
+      "observed_sig_name": [
+        "V5",
+        "V2"
+      ]
+    },
+    "104": {
+      "documented_note": "MLII could not be used",
+      "observed_eligible": false,
+      "observed_mlii_channel_index": null,
+      "observed_sig_name": [
+        "V5",
+        "V2"
+      ]
+    },
+    "114": {
+      "documented_note": "signals were reversed",
+      "observed_eligible": true,
+      "observed_mlii_channel_index": 1,
+      "observed_sig_name": [
+        "V5",
+        "MLII"
+      ]
+    }
+  },
+  "eligible_count": 46,
+  "eligible_manifest_path": "manifests/datasets/mitdb_mlii_records.csv",
+  "excluded_count": 2,
+  "exclusion_manifest_path": "manifests/datasets/mitdb_mlii_exclusions.csv",
+  "fallback_allowed": false,
+  "performance_based_selection": false,
+  "policy_id": "MITDB_EXACT_MLII_V1",
+  "record_decisions": {
+    "100": {
+      "all_signal_names": [
+        "MLII",
+        "V5"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "101": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "102": {
+      "all_signal_names": [
+        "V5",
+        "V2"
+      ],
+      "eligible": false,
+      "exclusion_reason": "EXCLUDE_NO_EXACT_MLII",
+      "mlii_channel_index": null,
+      "mlii_present": false
+    },
+    "103": {
+      "all_signal_names": [
+        "MLII",
+        "V2"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "104": {
+      "all_signal_names": [
+        "V5",
+        "V2"
+      ],
+      "eligible": false,
+      "exclusion_reason": "EXCLUDE_NO_EXACT_MLII",
+      "mlii_channel_index": null,
+      "mlii_present": false
+    },
+    "105": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "106": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "107": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "108": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "109": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "111": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "112": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "113": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "114": {
+      "all_signal_names": [
+        "V5",
+        "MLII"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 1,
+      "mlii_present": true
+    },
+    "115": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "116": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "117": {
+      "all_signal_names": [
+        "MLII",
+        "V2"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "118": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "119": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "121": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "122": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "123": {
+      "all_signal_names": [
+        "MLII",
+        "V5"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "124": {
+      "all_signal_names": [
+        "MLII",
+        "V4"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "200": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "201": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "202": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "203": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "205": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "207": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "208": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "209": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "210": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "212": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "213": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "214": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "215": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "217": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "219": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "220": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "221": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "222": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "223": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "228": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "230": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "231": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "232": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "233": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    },
+    "234": {
+      "all_signal_names": [
+        "MLII",
+        "V1"
+      ],
+      "eligible": true,
+      "exclusion_reason": "ELIGIBLE_EXACT_MLII",
+      "mlii_channel_index": 0,
+      "mlii_present": true
+    }
+  },
+  "required_value": "MLII",
+  "selection_before_split": true,
+  "selection_key": "WFDB header sig_name, exact string equality"
+}

@@ -1,0 +1,21 @@
+{
+  "annotation_bound_failures": 0,
+  "annotations_parsed": 48,
+  "channel_count_failures": 0,
+  "dataset_id": "MITDB",
+  "exact_mlii_eligible_count": 46,
+  "exact_mlii_excluded_count": 2,
+  "excluded_records": [
+    "102",
+    "104"
+  ],
+  "hashes_verified": true,
+  "headers_parsed": 48,
+  "nonfinite_signal_failures": 0,
+  "overall_status": "PASS",
+  "record_count_expected": 48,
+  "record_count_observed": 48,
+  "sampling_rate_failures": 0,
+  "signals_parsed": 48,
+  "version": "1.0.0"
+}

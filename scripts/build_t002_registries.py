@@ -131,6 +131,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T003": "PASS",
             "T004": "BLOCKED",
             "T005": "PASS",
+            "T006": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -138,6 +139,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T003": "1f35bc044474900b5a54d5a17d51727e5a1a2388",
             "T004": "0312d6f6c529676d036f83693a9a58c19f33ef08",
             "T005": "c3f7d85e71ceeeafa2bc31ff902a61913a51b2cf",
+            "T006": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
@@ -145,6 +147,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T003": "reports/t003/contract_validation.json",
             "T004": "reports/t004/hardware_deferral.json",
             "T005": "reports/t005/smoke_report.json",
+            "T006": "reports/t006/mitdb_validation.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -184,6 +187,13 @@ TASK_NOTES_OVERRIDE = {
         "where the packet uses a cross-reference. Software-only vertical slice evidence "
         "(WEARABLE_SIM_SMOKE -> MOCK_INFERENCE_V0 -> FIXTURE_STATE_POLICY_V0); T004 remains "
         "BLOCKED_HARDWARE and G1/G16 are unaffected by this task."
+    ),
+    "T006": (
+        "Canonical execution-plan packet; normalized prerequisite IDs follow Sections 4-5 "
+        "where the packet uses a cross-reference. Real PhysioNet MIT-BIH v1.0.0 acquired and "
+        "hash-verified (48/48 records); exact-MLII channel policy applied from WFDB headers "
+        "only (46 eligible, 102/104 excluded for no exact MLII channel). No patient split, "
+        "no AAMI mapping, no preprocessing; G2/G3 remain open pending T007."
     ),
 }
 
