@@ -15,6 +15,8 @@ def test_full_registry_audit_passes_with_zero_coverage_gaps() -> None:
     assert result["invalid_task_reference_count"] == 0
     assert result["invalid_gate_reference_count"] == 0
     assert result["orphan_task_count"] == 0
+    assert result["semantic_task_mapping_error_count"] == 0
+    assert result["remaining_derived_task_definition_count"] == 0
 
 
 def test_change_control_distinguishes_interface_and_scientific_changes() -> None:
@@ -28,3 +30,14 @@ def test_change_control_distinguishes_interface_and_scientific_changes() -> None
 def test_reference_ranges_expand_without_hiding_unknown_identifiers() -> None:
     assert expand_refs("T002-T004;T010") == ["T002", "T003", "T004", "T010"]
     assert expand_refs("E01-E03") == ["E01", "E02", "E03"]
+
+
+def test_task_reconciliation_records_every_corrected_task() -> None:
+    from nhm.coverage import read_csv
+
+    rows = read_csv(ROOT / "reports/t002/task_registry_reconciliation.csv")
+    assert {row["task_id"] for row in rows} == {
+        f"T{number:03d}" for number in range(1, 37)
+    }
+    assert all(row["resolution"] == "REPLACED_WITH_EXECUTION_PLAN_VALUE" for row in rows)
+    assert all(row["scientific_impact"].startswith("NONE") for row in rows)

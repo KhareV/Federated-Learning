@@ -1,30 +1,32 @@
 evidence_id,requirement_ids,task_ids,gate_ids,expected_path,artifact_type,generated_by,status,sha256,notes
 EV001,R26;R27;CB01,T001,G0,reports/t001/closure_verification.json,JSON,scripts/generate_t001_closure.py,GENERATED,b76049f299a5e6d3a2a53a52967638302584d2181a738bf8b3fe77c101f6dfe0,T001/G0 entry evidence.
-EV002,R26;R27;R28;REL01,T002,G0,reports/t002/coverage_audit.json,JSON,scripts/audit_coverage_t002.py,GENERATED,0dc43ed8df77b2c40af5870319f912d54f3cdfd2b3b9b4214e4027e905e3c019,Hash retained in reports/t002/artifact_hashes.json.
-EV003,R26;R28;REL01,T002,G0,reports/t002/source_hashes.json,JSON,scripts/generate_t002_evidence.py,GENERATED,eefb102dd14686f5d74a97da6567a4756872549a91d2af18bfc8abfcb70a708f,Binds registries to exact source files.
-EV004,R27;R28,T002,G0,reports/t002/coverage_summary.md,MARKDOWN,scripts/generate_t002_evidence.py,GENERATED,938491da9bae927b4e7e19bee52da088b60a326666792bd39528dbd372a22a39,Manual second-audit and orphan classification summary.
+EV002,R26;R27;R28;REL01,T002,G0,reports/t002/coverage_audit.json,JSON,scripts/audit_coverage_t002.py,GENERATED,61f2223c7178c3135cd0471173cd53c8f20b87a21057c7a0df8faacee264331d,Hash retained in reports/t002/artifact_hashes.json.
+EV003,R26;R28;REL01,T002,G0,reports/t002/source_hashes.json,JSON,scripts/generate_t002_evidence.py,GENERATED,821187d4fb7e17d735149b148d3c1bfa55ea7508d53c4e725c2f2da9028da246,Binds registries to exact source files.
+EV004,R27;R28,T002,G0,reports/t002/coverage_summary.md,MARKDOWN,scripts/generate_t002_evidence.py,GENERATED,33fdcd0d4e96553ee2b5501ea3500415053b697e18a49945fdc7ebf0477c150f,Manual second-audit and orphan classification summary.
 EV005,HW01;DC01;R06.1,T003;T004,G1,reports/hardware/contract_verification.json,JSON,T004 hardware verification,PLANNED,,No hardware semantics inferred in T002.
-EV006,R26.1;DS01,T005;T006,G2;G3,reports/data/validation_report.json,JSON,dataset build/validation commands,PLANNED,,
-EV007,R01;R01.1,T007,G4,reports/labels/label_audit.json,JSON,label mapping tests,PLANNED,,
-EV008,R04;R04.1;R04.2,T008,G5,reports/splits/split_audit.json,JSON,split audit command,PLANNED,,
-EV009,R02;R05;R05.1;R06;SQ01,T009;T010,G6,reports/preprocessing/causality_tests.json,JSON,preprocessing test suite,PLANNED,,
-EV010,R07,T011,G7,reports/baselines/baseline_report.json,JSON,baseline experiment E01,PLANNED,,
-EV011,R08;R08.1,T012,G8,checkpoints/MODEL_V1.manifest.json,JSON,centralized training E02,PLANNED,,
-EV012,R13;R13.1,T013;T014,G9,reports/bidmc_multimodal_engineering/report.json,JSON,experiment E07,PLANNED,,
-EV013,R14;R14.1;R15;R15.1;CB05,T015;T016,G9,reports/quality_aware_alert_robustness/report.json,JSON,experiment E08,PLANNED,,
+EV006,R26.1;DS01,T006;T007,G2;G3,reports/data/validation_report.json,JSON,dataset build/validation commands,PLANNED,,
+EV007,R01;R01.1,T008,G4,reports/labels/label_audit.json,JSON,label mapping tests,PLANNED,,
+EV008,R04;R04.1;R04.2,T009;T010,G5,reports/splits/split_audit.json,JSON,split audit command,PLANNED,,
+EV009,R02;R05;R05.1;R06;SQ01,T010;T011;T012;T013,G6,reports/preprocessing/causality_tests.json,JSON,preprocessing test suite,PLANNED,,
+EV010,R07,T014,G7,reports/baselines/baseline_report.json,JSON,baseline experiment E01,PLANNED,,
+EV011,R08;R08.1,T015;T016,G8,checkpoints/MODEL_V1.manifest.json,JSON,centralized training E02,PLANNED,,
+EV012,R13;R13.1,T021,G9,reports/bidmc_multimodal_engineering/report.json,JSON,experiment E07,PLANNED,,
+EV013,R14;R14.1;R15;R15.1;CB05,T022;T023,G9,reports/quality_aware_alert_robustness/report.json,JSON,experiment E08,PLANNED,,
 EV014,R09;R09.1;CB06,T017,G10,reports/calibration/calibration.json,JSON,experiment E03,PLANNED,,
 EV015,R10;R10.1,T018,G10,reports/internal_test/report.json,JSON,experiment E04,PLANNED,,
 EV016,R11,T019,G10,reports/noise_robustness/report.json,JSON,experiment E05,PLANNED,,
 EV017,R12,T020,G10,reports/external_incart/report.json,JSON,experiment E06,PLANNED,,
-EV018,R23;R23.1,T021,G17,reports/explainability/case_report.json,JSON,EXPLAINABILITY_V1,PLANNED,,
-EV019,R16;R16.1;R17;CB03,T022;T023,G11,reports/federated/fl_iid/report.json,JSON,experiment E09,PLANNED,,
-EV020,R18;R18.1,T024,G12,reports/federated/non_iid_report.json,JSON,experiments E10-E12,PLANNED,,
-EV021,R19;R10.1,T025,G13,reports/federated/fedprox_report.json,JSON,experiment E13,PLANNED,,
-EV022,R20;R20.1;CB04,T026,G14,reports/privacy_secagg/report.json,JSON,experiment E14,PLANNED,,
-EV023,R21;R21.1,T027,G15,reports/edge_benchmark/report.json,JSON,experiment E15,PLANNED,,
-EV024,R22;R22.1;CB02,T028,G16,reports/wearable_validation/report.json,JSON,experiment E16,PLANNED,,
-EV025,R24;R24.1;CB01;CB06,T029,G18,reports/api/contract_tests.json,JSON,API contract tests,PLANNED,,
-EV026,R25;R25.1;CB01,T030,G19,reports/dashboard/state_tests.json,JSON,dashboard state tests,PLANNED,,
-EV027,R22;R24;R25;R28.9;R28.10,T031,G21,reports/integration/e2e_replay.json,JSON,end-to-end replay,PLANNED,,
-EV028,R26;R26.1;TEST01,T032,G20,reports/reproducibility/clean_run.json,JSON,clean-environment gate,PLANNED,,
-EV029,R28;REL01;CB01;CB02;CB03;CB04;CB05;CB06,T033;T034;T035;T036,G22,release/release_manifest.json,JSON,release evidence generator,PLANNED,,
+EV018,R23;R23.1,T031,G17,reports/explainability/case_report.json,JSON,EXPLAINABILITY_V1,PLANNED,,
+EV019,R16;R16.1;R17;CB03,T024;T025,G11,reports/federated/fl_iid/report.json,JSON,experiment E09,PLANNED,,
+EV020,R18;R18.1,T026,G12,reports/federated/non_iid_report.json,JSON,experiments E10-E12,PLANNED,,
+EV021,R19;R10.1,T027,G13,reports/federated/fedprox_report.json,JSON,experiment E13,PLANNED,,
+EV022,R20;R20.1;CB04,T028,G14,reports/privacy_secagg/report.json,JSON,experiment E14,PLANNED,,
+EV023,R21;R21.1,T029,G15,reports/edge_benchmark/report.json,JSON,experiment E15,PLANNED,,
+EV024,R22;R22.1;CB02,T030,G16,reports/wearable_validation/report.json,JSON,experiment E16,PLANNED,,
+EV025,R24;R24.1;CB01;CB06,T032,G18,reports/api/contract_tests.json,JSON,API contract tests,PLANNED,,
+EV026,R25;R25.1;CB01,T033,G19,reports/dashboard/state_tests.json,JSON,dashboard state tests,PLANNED,,
+EV027,R22;R24;R25;R28.9;R28.10,T034,G21,reports/integration/e2e_replay.json,JSON,end-to-end replay,PLANNED,,
+EV028,R26;R26.1;TEST01,T035,G20,reports/reproducibility/clean_run.json,JSON,clean-environment gate,PLANNED,,
+EV029,R28;REL01;CB01;CB02;CB03;CB04;CB05;CB06,T036,G22,release/release_manifest.json,JSON,release evidence generator,PLANNED,,
+EV030,R26;R27,T002,G0,reports/t002/task_registry_reconciliation.csv,CSV,scripts/reconcile_t002_sources.py,GENERATED,31a82de4db5cb13a616a978520f2a44df42461366a031f5126dc9cf4e104f5fe,Preserves field-level differences between provisional and canonical task registries.
+EV031,R26;R27,T002,G0,reports/t002/source_reconciliation.json,JSON,scripts/generate_t002_evidence.py,GENERATED,aca37c57c0ac79af4a5d56c234b42aa563cf7e6d45b8c28f3f4203cbc28c924b,Records final source roles and zero remaining semantic errors.

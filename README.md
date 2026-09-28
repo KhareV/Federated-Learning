@@ -8,6 +8,11 @@ The primary methodological authority is
 machine-checkable requirement, task, gate, freeze, experiment, and evidence traceability. Real ML,
 dataset processing, and device-semantic implementation have not started.
 
+Implementation sequencing is controlled by
+`NHM_Solo_Implementation_Execution_Plan_v1.0.docx`. The master planner prompt is retained only as
+historical planning input. All 36 task packets are source-bound in
+`manifests/task_packets_v1.json` and checked by the semantic coverage audit.
+
 ## Phase-01 environment
 
 Python 3.11.x is required. Create the local environment and install the exact Phase-01 lock:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import re
 from pathlib import Path
 from typing import Any
@@ -24,7 +25,44 @@ REQUIREMENT_TYPES = {
 }
 CLAIM_BOUNDARY_IDS = {f"CB{number:02d}" for number in range(1, 7)}
 SPEC_FILENAME = "NHM_ML_Revised_Locked_Specification_v2.2.docx"
-PLAN_FILENAME = "NHM_Solo_Implementation_Master_Prompt_FINAL.docx"
+PLAN_FILENAME = "NHM_Solo_Implementation_Execution_Plan_v1.0.docx"
+PLAN_SHA256 = "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
+
+CANONICAL_GATE_TASK_OWNERS = {
+    "G0": "T001;T002", "G1": "T003;T004", "G2": "T006;T007",
+    "G3": "T006;T007", "G4": "T008", "G5": "T009;T010",
+    "G6": "T010;T011;T012;T013", "G7": "T014", "G8": "T015;T016",
+    "G9": "T021;T022;T023", "G10": "T017;T018", "G11": "T024;T025",
+    "G12": "T026", "G13": "T027", "G14": "T028", "G15": "T029",
+    "G16": "T030", "G17": "T031", "G18": "T032", "G19": "T033",
+    "G20": "T035", "G21": "T034", "G22": "T036",
+}
+CANONICAL_EXPERIMENT_TASK_OWNERS = {
+    "E01": "T014", "E02": "T015", "E03": "T017", "E04": "T018",
+    "E05": "T019", "E06": "T020", "E07": "T021", "E08": "T023",
+    "E09": "T025", "E10": "T026", "E11": "T026", "E12": "T026",
+    "E13": "T027", "E14": "T028", "E15": "T029", "E16": "T030",
+}
+CANONICAL_EVIDENCE_TASK_OWNERS = {
+    "EV001": "T001", "EV002": "T002", "EV003": "T002", "EV004": "T002",
+    "EV005": "T003;T004", "EV006": "T006;T007", "EV007": "T008",
+    "EV008": "T009;T010", "EV009": "T010;T011;T012;T013", "EV010": "T014",
+    "EV011": "T015;T016", "EV012": "T021", "EV013": "T022;T023",
+    "EV014": "T017", "EV015": "T018", "EV016": "T019", "EV017": "T020",
+    "EV018": "T031", "EV019": "T024;T025", "EV020": "T026", "EV021": "T027",
+    "EV022": "T028", "EV023": "T029", "EV024": "T030", "EV025": "T032",
+    "EV026": "T033", "EV027": "T034", "EV028": "T035", "EV029": "T036",
+    "EV030": "T002", "EV031": "T002",
+}
+CANONICAL_FREEZE_INVALIDATIONS = {
+    "F01": "T002-T036", "F02": "T005;T030;T032;T034",
+    "F03": "T008-T031;T034-T036", "F04": "T009-T031;T034-T036",
+    "F05": "T010-T031;T034-T036", "F06": "T014-T035",
+    "F07": "T015;T016;T035;T036", "F08": "T017-T034;T036",
+    "F09": "T018-T034;T036", "F10": "T019-T036",
+    "F11": "T031;T035;T036", "F12": "T027;T028;T035;T036",
+    "F13": "T035;T036", "F14": "T030;T032-T036", "F15": "",
+}
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -93,6 +131,35 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
     requirement_ids = [row["requirement_id"] for row in requirements]
     task_set, gate_set, requirement_set = set(task_ids), set(gate_ids), set(requirement_ids)
 
+    task_snapshot = json.loads(
+        (manifest_dir / "task_packets_v1.json").read_text(encoding="utf-8")
+    )
+    snapshot_tasks = {row["task_id"]: row for row in task_snapshot["packets"]}
+    semantic_task_mapping_errors: list[str] = []
+    if (
+        task_snapshot["source_document"] != PLAN_FILENAME
+        or task_snapshot["source_sha256"] != PLAN_SHA256
+        or task_snapshot["packet_count"] != 36
+    ):
+        semantic_task_mapping_errors.append("canonical task snapshot source identity mismatch")
+
+    reconciliation_path = root / "reports/t002/task_registry_reconciliation.csv"
+    if reconciliation_path.exists():
+        reconciliation = read_csv(reconciliation_path)
+        task_by_id = {row["task_id"]: row for row in tasks}
+        for row in reconciliation:
+            current = task_by_id.get(row["task_id"], {}).get(row["field"])
+            if current != row["authoritative_plan_value"]:
+                semantic_task_mapping_errors.append(
+                    f"stale reconciliation row {row['task_id']}.{row['field']}"
+                )
+        if {row["task_id"] for row in reconciliation} != expected_tasks:
+            semantic_task_mapping_errors.append(
+                "task reconciliation does not cover all 36 corrected task packets"
+            )
+    else:
+        semantic_task_mapping_errors.append("task reconciliation evidence is missing")
+
     if len(tasks) != 36 or task_set != expected_tasks:
         errors.append(f"task registry must be exactly T001-T036; got {len(tasks)} rows")
     if duplicates(task_ids):
@@ -106,6 +173,34 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
     ]
     if future_task_passes:
         errors.append(f"future tasks falsely advanced: {future_task_passes}")
+
+    for row in tasks:
+        source = snapshot_tasks.get(row["task_id"])
+        if source is None:
+            semantic_task_mapping_errors.append(f"{row['task_id']}:missing source packet")
+            continue
+        comparisons = {
+            "task_name": source["task_name"],
+            "phase_family": source["phase"],
+            "source_prerequisites": source["prerequisites"],
+            "source_gate_impact": source["gate_freeze_impact"],
+            "source_document": PLAN_FILENAME,
+            "source_sha256": PLAN_SHA256,
+        }
+        for field, expected in comparisons.items():
+            if row.get(field) != expected:
+                semantic_task_mapping_errors.append(
+                    f"{row['task_id']}.{field}: expected {expected!r}, got {row.get(field)!r}"
+                )
+    remaining_derived = [
+        row["task_id"]
+        for row in tasks
+        if "derived" in " ".join(row.values()).casefold()
+    ]
+    if remaining_derived:
+        semantic_task_mapping_errors.append(
+            f"remaining derived task definitions: {remaining_derived}"
+        )
 
     invalid_prerequisites: list[str] = []
     for row in tasks:
@@ -133,6 +228,13 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
     g0 = next((row for row in gates if row["gate_id"] == "G0"), None)
     if not g0 or g0["status"] != "PASS" or not g0["evidence_path"]:
         errors.append("G0 must be PASS with evidence")
+    for row in gates:
+        expected = CANONICAL_GATE_TASK_OWNERS.get(row["gate_id"])
+        if expected != row["prerequisite_tasks"]:
+            semantic_task_mapping_errors.append(
+                f"{row['gate_id']}.prerequisite_tasks: expected {expected!r}, "
+                f"got {row['prerequisite_tasks']!r}"
+            )
 
     if duplicates(requirement_ids):
         errors.append(f"duplicate requirement IDs: {duplicates(requirement_ids)}")
@@ -149,6 +251,19 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
     )
     if invalid_requirement_types:
         errors.append(f"invalid requirement types: {invalid_requirement_types}")
+
+    core_requirement_map = dict(task_snapshot["requirement_task_map"])
+    core_requirement_map["R27"] = ";".join(f"T{number:03d}" for number in range(1, 37))
+    for requirement_id, expected_tasks in core_requirement_map.items():
+        row = next(
+            (item for item in requirements if item["requirement_id"] == requirement_id),
+            None,
+        )
+        if row is not None and row["implementation_tasks"] != expected_tasks:
+            semantic_task_mapping_errors.append(
+                f"{requirement_id}.implementation_tasks: expected {expected_tasks!r}, "
+                f"got {row['implementation_tasks']!r}"
+            )
 
     mandatory = [row for row in requirements if row["mandatory"].upper() == "TRUE"]
     unmapped: list[str] = []
@@ -241,6 +356,13 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
         )
     if evidence_gate_refs - gate_set:
         errors.append(f"invalid evidence gate references: {sorted(evidence_gate_refs - gate_set)}")
+    for row in evidence:
+        expected = CANONICAL_EVIDENCE_TASK_OWNERS.get(row["evidence_id"])
+        if expected != row["task_ids"]:
+            semantic_task_mapping_errors.append(
+                f"{row['evidence_id']}.task_ids: expected {expected!r}, "
+                f"got {row['task_ids']!r}"
+            )
 
     invalid_freeze_task_refs: list[str] = []
     invalid_freeze_experiment_refs: list[str] = []
@@ -297,12 +419,25 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
             errors.append(f"future experiment {row['experiment_id']} is not PLANNED")
         if row["implementing_task"] not in task_set:
             errors.append(f"{row['experiment_id']} has invalid implementing task")
+        expected = CANONICAL_EXPERIMENT_TASK_OWNERS.get(row["experiment_id"])
+        if expected != row["implementing_task"]:
+            semantic_task_mapping_errors.append(
+                f"{row['experiment_id']}.implementing_task: expected {expected!r}, "
+                f"got {row['implementing_task']!r}"
+            )
         for reference in split_refs(row["prerequisite_gates"]):
             if reference not in gate_set:
                 errors.append(f"{row['experiment_id']} has invalid gate {reference}")
 
     if len(freezes) < 15:
         errors.append("freeze registry lacks mandatory freeze points")
+    for row in freezes:
+        expected = CANONICAL_FREEZE_INVALIDATIONS.get(row["freeze_id"])
+        if expected != row["invalidated_tasks_if_changed"]:
+            semantic_task_mapping_errors.append(
+                f"{row['freeze_id']}.invalidated_tasks_if_changed: expected {expected!r}, "
+                f"got {row['invalidated_tasks_if_changed']!r}"
+            )
     premature_freezes = [
         row["freeze_id"] for row in freezes
         if row["freeze_id"] != "F01" and row["current_status"] == "FROZEN"
@@ -321,6 +456,8 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
     ]
     if placeholder_rows:
         errors.append(f"coverage placeholders found: {placeholder_rows}")
+    if semantic_task_mapping_errors:
+        errors.append(f"semantic task mapping errors: {semantic_task_mapping_errors}")
 
     return {
         "task_count": len(tasks),
@@ -342,6 +479,9 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
         "orphan_task_count": len(orphan_tasks),
         "orphan_tasks": orphan_tasks,
         "orphan_classifications": orphan_classifications,
+        "semantic_task_mapping_error_count": len(semantic_task_mapping_errors),
+        "semantic_task_mapping_errors": semantic_task_mapping_errors,
+        "remaining_derived_task_definition_count": len(remaining_derived),
         "experiment_count": len(experiments),
         "freeze_count": len(freezes),
         "do_not_start_count": len(controls),

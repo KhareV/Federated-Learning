@@ -4,13 +4,15 @@
 from __future__ import annotations
 
 import csv
+import json
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFESTS = ROOT / "manifests"
 SPEC = "NHM_ML_Revised_Locked_Specification_v2.2.docx"
-PLAN = "NHM_Solo_Implementation_Master_Prompt_FINAL.docx"
+PLAN = "NHM_Solo_Implementation_Execution_Plan_v1.0.docx"
+PLAN_SHA256 = "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
 
 
 def write_csv(filename: str, fieldnames: list[str], rows: list[dict[str, Any]]) -> None:
@@ -33,6 +35,11 @@ TASK_FIELDS = [
     "status",
     "implemented_at_commit",
     "evidence_path",
+    "source_document",
+    "source_locator",
+    "source_sha256",
+    "source_prerequisites",
+    "source_gate_impact",
     "notes",
 ]
 
@@ -47,6 +54,8 @@ def task(
     status: str = "NOT_STARTED",
     commit: str = "",
     evidence: str = "",
+    source_prerequisites: str = "",
+    source_gate_impact: str = "",
     notes: str = "",
 ) -> dict[str, str]:
     return {
@@ -58,80 +67,95 @@ def task(
         "status": status,
         "implemented_at_commit": commit,
         "evidence_path": evidence,
+        "source_document": PLAN,
+        "source_locator": f"Section 22 — Primary Implementation Task Packets / {task_id}",
+        "source_sha256": PLAN_SHA256,
+        "source_prerequisites": source_prerequisites,
+        "source_gate_impact": source_gate_impact,
         "notes": notes,
     }
 
 
-DERIVED = (
-    "T002 operational decomposition derived from v2.2 Sections 3/36/37 and the solo-plan "
-    "critical path; the local plan source does not enumerate named T004-T036 packets."
-)
+TASK_PREREQUISITES = {
+    "T001": "",
+    "T002": "T001",
+    "T003": "T001;T002;G0",
+    "T004": "T001;T003",
+    "T005": "T003",
+    "T006": "T003;G0",
+    "T007": "T003;G0",
+    "T008": "T006;T007",
+    "T009": "T008;G4",
+    "T010": "T009",
+    "T011": "T006;T010",
+    "T012": "T010;T011",
+    "T013": "T008;T009;T011;T012",
+    "T014": "T013;G6",
+    "T015": "T014;G7",
+    "T016": "T015",
+    "T017": "T016;G8",
+    "T018": "T017",
+    "T019": "T018;G10",
+    "T020": "T008;T018;G10",
+    "T021": "T007;T012;T013",
+    "T022": "T013;T021",
+    "T023": "T017;T021;T022",
+    "T024": "T003",
+    "T025": "T009;T016;T024",
+    "T026": "T025;G11",
+    "T027": "T026",
+    "T028": "T025;G11",
+    "T029": "T016;G8",
+    "T030": "T004;T013;T029",
+    "T031": "T016;T018;G10",
+    "T032": "T003;T017;T029",
+    "T033": "T022;T032;G18",
+    "T034": "T030;T032;T033",
+    "T035": "T034",
+    "T036": "T035;G20;G21",
+}
 
-TASKS = [
-    task(
-        "T001",
-        "FOUNDATION",
-        "Repository bootstrap, reproducible shell, and source-authority lock",
-        "",
-        "G0",
-        status="PASS",
-        commit="0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
-        evidence="reports/t001/closure_verification.json",
-        notes="Verified closure evidence records G0 PASS and Python 3.11 CI.",
-    ),
-    task(
-        "T002",
-        "FOUNDATION",
-        "Requirement registry, coverage map, freeze map, and do-not-start enforcement",
-        "T001;G0",
-        "G0",
-        status="PASS",
-        commit="83f0136052cd5136705f2dfc9347f15f2d9c425e",
-        evidence="reports/t002/coverage_audit.json",
-        notes="Status becomes PASS only after the second coverage audit and phase2 gate succeed.",
-    ),
-    task(
-        "T003",
-        "CONTRACTS",
-        "Canonical hardware/data/API/label contract skeletons",
-        "T002;G0",
-        "G1;G4;G18",
-        notes="Exact next task supplied by the implementation sequence authority.",
-    ),
-    task("T004", "HARDWARE", "Hardware semantics verification and data-contract freeze", "T003", "G1", notes=DERIVED),
-    task("T005", "DATA", "Public dataset acquisition manifests and immutable raw provenance", "T003;G1", "G2", notes=DERIVED),
-    task("T006", "DATA", "Dataset validation, locked channels, and symbol census", "T005;G2", "G3", notes=DERIVED),
-    task("T007", "LABELS", "AAMI_SVF_MAP_V1 mapper and window-target freeze", "T006;G3", "G4", notes=DERIVED),
-    task("T008", "SPLITS", "Patient grouping, split freeze, and leakage audit", "T007;G4", "G5", notes=DERIVED),
-    task("T009", "PREPROCESSING", "Causal resampler and GAP_POLICY_V1", "T008;G5", "G6", notes=DERIVED),
-    task("T010", "PREPROCESSING", "ECG filtering, windows, and quality-state pipeline", "T009", "G6", notes=DERIVED),
-    task("T011", "CENTRALIZED_ML", "Classical features and training-only baselines", "T010;G6", "G7", notes=DERIVED),
-    task("T012", "CENTRALIZED_ML", "MODEL_V1 training, selection, and checkpoint lock", "T011;G7", "G8", notes=DERIVED),
-    task("T013", "MULTIMODAL", "BIDMC PPG, pulse, SpO2 provenance, and engineering validation", "T003;G1", "G9", notes=DERIVED),
-    task("T014", "MULTIMODAL", "Synchronization, signal quality, and deterministic context rules", "T010;T013", "G9", notes=DERIVED),
-    task("T015", "MULTIMODAL", "ALERT_POLICY_V1 episode-state implementation", "T014", "G9", notes=DERIVED),
-    task("T016", "MULTIMODAL", "Controlled ECG-only versus quality-aware experiment", "T012;T015;G8", "G9", notes=DERIVED),
-    task("T017", "EVALUATION", "Source-domain calibration and frozen threshold", "T012;G8", "G10", notes=DERIVED),
-    task("T018", "EVALUATION", "Locked internal evaluation and patient-cluster statistics", "T017", "G10", notes=DERIVED),
-    task("T019", "EVALUATION", "NSTDB controlled noise robustness evaluation", "T018;G10", "G10", notes=DERIVED),
-    task("T020", "EVALUATION", "Locked INCART external evaluation", "T018;G10", "G10", notes=DERIVED),
-    task("T021", "EVALUATION", "Integrated Gradients and predeclared error analysis", "T018;G10", "G17", notes=DERIVED),
-    task("T022", "FEDERATED", "Whole-patient client manifests and analytical aggregation", "T008;T012;G8", "G11", notes=DERIVED),
-    task("T023", "FEDERATED", "FedAvg IID experiment", "T022", "G11", notes=DERIVED),
-    task("T024", "FEDERATED", "Controlled non-IID experiments", "T023;G11", "G12", notes=DERIVED),
-    task("T025", "FEDERATED", "Matched FedProx comparison", "T024;G12", "G13", notes=DERIVED),
-    task("T026", "PRIVACY", "SecAgg+ correctness, visibility, and overhead experiment", "T023;G11", "G14", notes=DERIVED),
-    task("T027", "DEPLOYMENT", "Gateway export and measured resource benchmark", "T012;G8", "G15", notes=DERIVED),
-    task("T028", "WEARABLE", "WEARABLE_V1 ingest, synchronization, and domain validation", "T004;T014;T027;G1", "G16", notes=DERIVED),
-    task("T029", "APPLICATION", "Versioned research-only inference API", "T003;T017;T027", "G18", notes=DERIVED),
-    task("T030", "APPLICATION", "Dashboard state semantics and contract tests", "T015;T029;G18", "G19", notes=DERIVED),
-    task("T031", "INTEGRATION", "Recorded-stream end-to-end gateway replay", "T028;T029;T030", "G21", notes=DERIVED),
-    task("T032", "REPRODUCIBILITY", "Clean-environment reproduction and command surface", "T018;T023;T029", "G20", notes=DERIVED),
-    task("T033", "EVIDENCE", "Experiment/evidence registry consolidation and artifact hashing", "T016;T019;T020;T025;T026;T028", "G20;G21", notes=DERIVED),
-    task("T034", "RELEASE", "Claim, limitation, ethics, and viva-defense audit", "T021;T033", "G21", notes=DERIVED),
-    task("T035", "RELEASE", "Final integration audit and release-candidate verification", "T031;T032;T033;T034", "G21;G22", notes=DERIVED),
-    task("T036", "RELEASE", "Final reproducible release and evidence package", "T035;G21", "G22", notes=DERIVED),
-]
+
+def canonical_tasks() -> list[dict[str, str]]:
+    snapshot = json.loads((MANIFESTS / "task_packets_v1.json").read_text(encoding="utf-8"))
+    if snapshot["source_document"] != PLAN or snapshot["source_sha256"] != PLAN_SHA256:
+        raise RuntimeError("canonical task snapshot is not bound to the execution authority")
+    tasks = []
+    for packet in snapshot["packets"]:
+        task_id = packet["task_id"]
+        gates = packet["gate_freeze_impact"].replace("-", ";")
+        gates = gates.replace("post;G10", "G10").replace("G11 prep", "G11")
+        status = "PASS" if task_id in {"T001", "T002"} else "NOT_STARTED"
+        commit = {
+            "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
+            "T002": "83f0136052cd5136705f2dfc9347f15f2d9c425e",
+        }.get(task_id, "")
+        evidence = {
+            "T001": "reports/t001/closure_verification.json",
+            "T002": "reports/t002/source_reconciliation.json",
+        }.get(task_id, "")
+        tasks.append(
+            task(
+                task_id,
+                packet["phase"],
+                packet["task_name"],
+                TASK_PREREQUISITES[task_id],
+                gates,
+                status=status,
+                commit=commit,
+                evidence=evidence,
+                source_prerequisites=packet["prerequisites"],
+                source_gate_impact=packet["gate_freeze_impact"],
+                notes=(
+                    "Canonical execution-plan packet; normalized prerequisite IDs follow "
+                    "Sections 4-5 where the packet uses a cross-reference."
+                ),
+            )
+        )
+    return tasks
+
+
+TASKS = canonical_tasks()
 
 
 REQ_FIELDS = [
@@ -283,6 +307,95 @@ REQUIREMENTS.extend(
     ]
 )
 
+# Semantic ownership reconciled against the execution plan's Section 3 coverage matrix,
+# Section 22 task packets, and v2.2. R01-R28 are checked against the source-extracted map.
+REQUIREMENT_TASK_OWNERS = {
+    "R01": "T008;T013",
+    "R02": "T013",
+    "R03": "T006;T007",
+    "R04": "T009;T010",
+    "R05": "T011;T012",
+    "R06": "T012",
+    "R07": "T014",
+    "R08": "T015;T016",
+    "R09": "T017",
+    "R10": "T018",
+    "R11": "T019",
+    "R12": "T020",
+    "R13": "T021;T022",
+    "R14": "T022",
+    "R15": "T023",
+    "R16": "T025",
+    "R17": "T025",
+    "R18": "T026",
+    "R19": "T027",
+    "R20": "T028",
+    "R21": "T029",
+    "R22": "T004;T030",
+    "R23": "T031",
+    "R24": "T032",
+    "R25": "T033",
+    "R26": "T001;T002;T035;T036",
+    "R27": ";".join(f"T{number:03d}" for number in range(1, 37)),
+    "R28": "T036",
+    "R01.1": "T008;T013",
+    "R01.2": "T008;T013;T032;T033;T036",
+    "R03.1": "T006;T007;T020",
+    "R04.1": "T009;T010;T014;T015;T017;T018;T020",
+    "R04.2": "T009;T010;T018;T020;T025",
+    "R05.1": "T012;T013;T014;T015",
+    "R06.1": "T003;T012;T013;T022;T032",
+    "R08.1": "T015;T016",
+    "R09.1": "T017;T032;T033;T036",
+    "R10.1": "T018;T020;T027",
+    "R13.1": "T007;T021",
+    "R14.1": "T013;T021;T022",
+    "R15.1": "T022;T023",
+    "R16.1": "T025;T026;T027;T028;T036",
+    "R17.1": "T025;T026;T027",
+    "R18.1": "T026",
+    "R20.1": "T028;T036",
+    "R21.1": "T029;T036",
+    "R22.1": "T004;T030;T036",
+    "R23.1": "T031;T036",
+    "R24.1": "T032",
+    "R25.1": "T033",
+    "R26.1": "T006;T007;T009;T013;T035",
+    "R26.2": "T002;T035;T036",
+    "R27.1": "T035;T036",
+    "HW01": "T003;T004",
+    "DC01": "T003;T004",
+    "DS01": "T002;T006;T007;T019;T020;T021;T030;T036",
+    "SQ01": "T003;T012;T013;T021;T022",
+    "TEST01": "T004;T006;T007;T008;T009;T010;T011;T012;T013;T014;T015;T016;T018;T021;T022;T024;T025;T027;T028;T029;T030;T031;T032;T033;T034;T035",
+    "REL01": "T035;T036",
+    "CB01": "T001;T002;T023;T025;T028;T032;T033;T036",
+    "CB02": "T030;T034;T036",
+    "CB03": "T025;T026;T027;T028;T036",
+    "CB04": "T028;T036",
+    "CB05": "T021;T022;T023;T036",
+    "CB06": "T017;T032;T033;T036",
+    "R28.1": "T035;T036",
+    "R28.2": "T003;T006;T007;T008;T009;T016;T017;T025;T029;T032;T036",
+    "R28.3": "T035",
+    "R28.4": "T018;T019;T020",
+    "R28.5": "T013;T021;T022;T023",
+    "R28.6": "T024;T025;T026;T027",
+    "R28.7": "T028;T036",
+    "R28.8": "T029;T034",
+    "R28.9": "T030;T034",
+    "R28.10": "T032;T033;T034",
+    "R28.11": "T035;T036",
+    "R28.12": "T036",
+    "R10.2": "T018;T019;T020;T027",
+    "R23.2": "T031",
+    "R26.3": "T006;T009;T025;T030;T035;T036",
+    "OOS01": "T002;T036",
+    "OOS02": "T002;T023;T036",
+    "OOS03": "T002;T028;T036",
+    "OOS04": "T002;T029;T036",
+}
+
 for index, (text, tasks, gates, evidence) in enumerate(
     [
         ("G0-G22 are PASS or explicitly downgraded under documented fallback; no gate is silently skipped.", "T035;T036", "G22", "release/gate_status.json"),
@@ -331,6 +444,11 @@ REQUIREMENTS.extend(
         req("OOS04", "DEPLOYMENT", "Mandatory MCU inference excluded", "ESP32 inference is not required; it may be claimed only after separately versioned exact-board evidence.", "Section 21", "T002;T027;T034", "manifests/requirements_v22.csv;deployment/mcu_optional/", "Deployment registry and release-claim scan.", "Mandatory deployment remains gateway and no MCU claim exists without separate benchmark.", "G15;G22", "reports/edge_benchmark/claim_audit.json", "SOURCE_AUTHORITY", "C", status="OUT_OF_SCOPE_BY_SPEC", mandatory="FALSE", claim="No mandatory ESP32 inference claim."),
     ]
 )
+
+if set(REQUIREMENT_TASK_OWNERS) != {row["requirement_id"] for row in REQUIREMENTS}:
+    raise RuntimeError("semantic task-owner map must cover every requirement row exactly")
+for requirement in REQUIREMENTS:
+    requirement["implementation_tasks"] = REQUIREMENT_TASK_OWNERS[requirement["requirement_id"]]
 
 GATE_FIELDS = [
     "gate_id", "gate_name", "purpose", "prerequisite_tasks", "required_requirements",
@@ -391,6 +509,60 @@ GATES = [
     gate("G22", "Final Release", "Freeze complete reproducible evidence package and defensible claims.", "T035;T036", "R27;R27.1;R28;REL01;CB01;CB02;CB03;CB04;CB05;CB06", "Release manifest existence/hash/gate/limitation/claim audit", "release/release_manifest.json", "All mandatory artifacts present and hashed; gate/fallback/limitations consistent.", "Missing evidence, silent gate skip, or unsupported claim.", "Do not submit as complete; regenerate evidence or invoke explicit fallback.", "", evidence="release/release_manifest.json"),
 ]
 
+GATE_TASK_OWNERS = {
+    "G0": "T001;T002",
+    "G1": "T003;T004",
+    "G2": "T006;T007",
+    "G3": "T006;T007",
+    "G4": "T008",
+    "G5": "T009;T010",
+    "G6": "T010;T011;T012;T013",
+    "G7": "T014",
+    "G8": "T015;T016",
+    "G9": "T021;T022;T023",
+    "G10": "T017;T018",
+    "G11": "T024;T025",
+    "G12": "T026",
+    "G13": "T027",
+    "G14": "T028",
+    "G15": "T029",
+    "G16": "T030",
+    "G17": "T031",
+    "G18": "T032",
+    "G19": "T033",
+    "G20": "T035",
+    "G21": "T034",
+    "G22": "T036",
+}
+GATE_BLOCKS = {
+    "G0": ";".join(f"T{number:03d}" for number in range(3, 37)),
+    "G1": "T030",
+    "G2": "T008",
+    "G3": "T008",
+    "G4": "T009;T013;T014;T015",
+    "G5": "T010;T011;T012;T013;T014;T015;T025",
+    "G6": "T014;T015;T021;T023;T030",
+    "G7": "T015",
+    "G8": "T016;T017;T018;T019;T020;T025;T029;T031",
+    "G9": "T033;T034;T036",
+    "G10": "T019;T020;T031;T036",
+    "G11": "T026;T027;T028",
+    "G12": "T027",
+    "G13": "T036",
+    "G14": "T036",
+    "G15": "T030;T034",
+    "G16": "T034",
+    "G17": "T036",
+    "G18": "T033;T034",
+    "G19": "T034",
+    "G20": "T036",
+    "G21": "T036",
+    "G22": "",
+}
+for gate_row in GATES:
+    gate_row["prerequisite_tasks"] = GATE_TASK_OWNERS[gate_row["gate_id"]]
+    gate_row["blocks_tasks"] = GATE_BLOCKS[gate_row["gate_id"]]
+
 FREEZE_FIELDS = [
     "freeze_id", "artifact_or_decision", "version_id", "current_status", "freeze_gate",
     "change_class_required", "invalidated_tasks_if_changed",
@@ -405,7 +577,7 @@ def freeze(fid: str, artifact: str, version: str, gate_id: str, invalid_tasks: s
 
 
 FREEZES = [
-    freeze("F01", "source authority", "SPEC_V2.2/PLAN_V1.0", "G0", "T002-T036", "E01-E16", "all downstream evidence", "v2.2 locked source hash; plan filename discrepancy recorded.", "FROZEN"),
+    freeze("F01", "source authority", "SPEC_V2.2/PLAN_V1.0", "G0", "T002-T036", "E01-E16", "all downstream evidence", "v2.2 and canonical execution-plan source hashes recorded; master prompt is planning input only.", "FROZEN"),
     freeze("F02", "hardware/data contract", "HARDWARE_DATA_CONTRACT_V1", "G1", "T005;T013;T028;T029;T031", "E07;E08;E16", "contract and wearable/integration reports", "Observed MongoDB V0 remains unverified until T004."),
     freeze("F03", "dataset versions/manifests", "DATASETS_V1", "G3", "T007-T026", "E01-E14", "data/model/evaluation/federated evidence", "PTB-XL excluded from core scope."),
     freeze("F04", "label mapping", "AAMI_SVF_MAP_V1", "G4", "T008-T026", "E01-E14", "labels/models/evaluations/federated evidence", "Mapping change requires a new explicit version."),
@@ -421,6 +593,28 @@ FREEZES = [
     freeze("F14", "deployment artifact", "GATEWAY_ARTIFACT_V1", "G15", "T028-T031;T035;T036", "E15;E16", "edge/wearable/API/e2e evidence", "MCU remains optional separate artifact."),
     freeze("F15", "release package", "RELEASE_V1", "G22", "", "E01-E16", "complete release evidence", "No future artifact is frozen during T002."),
 ]
+
+FREEZE_INVALIDATED_TASKS = {
+    "F01": "T002-T036",
+    "F02": "T005;T030;T032;T034",
+    "F03": "T008-T031;T034-T036",
+    "F04": "T009-T031;T034-T036",
+    "F05": "T010-T031;T034-T036",
+    "F06": "T014-T035",
+    "F07": "T015;T016;T035;T036",
+    "F08": "T017-T034;T036",
+    "F09": "T018-T034;T036",
+    "F10": "T019-T036",
+    "F11": "T031;T035;T036",
+    "F12": "T027;T028;T035;T036",
+    "F13": "T035;T036",
+    "F14": "T030;T032-T036",
+    "F15": "",
+}
+for freeze_row in FREEZES:
+    freeze_row["invalidated_tasks_if_changed"] = FREEZE_INVALIDATED_TASKS[
+        freeze_row["freeze_id"]
+    ]
 
 DO_NOT_START_FIELDS = ["work_item", "blocked_until", "required_gate", "reason", "allowed_fixture_work", "status"]
 DO_NOT_START = [
@@ -471,6 +665,29 @@ EXPERIMENTS = [
     experiment("E16", "Wearable domain", "T028", "G1;G15", "HARDWARE_DATA_CONTRACT_V1;locked pipeline", "WEARABLE_V1 all sensors", "Quality;dropout;timing;HR agreement;latency;output distributions", "Descriptive engineering/domain analysis", "reports/wearable_validation/report.json", "Domain compatibility and engineering behavior.", "Disease/AAMI-SVF sensitivity or clinical calibration."),
 ]
 
+EXPERIMENT_TASK_OWNERS = {
+    "E01": "T014",
+    "E02": "T015",
+    "E03": "T017",
+    "E04": "T018",
+    "E05": "T019",
+    "E06": "T020",
+    "E07": "T021",
+    "E08": "T023",
+    "E09": "T025",
+    "E10": "T026",
+    "E11": "T026",
+    "E12": "T026",
+    "E13": "T027",
+    "E14": "T028",
+    "E15": "T029",
+    "E16": "T030",
+}
+for experiment_row in EXPERIMENTS:
+    experiment_row["implementing_task"] = EXPERIMENT_TASK_OWNERS[
+        experiment_row["experiment_id"]
+    ]
+
 EVIDENCE_FIELDS = [
     "evidence_id", "requirement_ids", "task_ids", "gate_ids", "expected_path",
     "artifact_type", "generated_by", "status", "sha256", "notes",
@@ -514,7 +731,45 @@ EVIDENCE = [
     evidence("EV027", "R22;R24;R25;R28.9;R28.10", "T031", "G21", "reports/integration/e2e_replay.json", "JSON", "end-to-end replay"),
     evidence("EV028", "R26;R26.1;TEST01", "T032", "G20", "reports/reproducibility/clean_run.json", "JSON", "clean-environment gate"),
     evidence("EV029", "R28;REL01;CB01;CB02;CB03;CB04;CB05;CB06", "T033;T034;T035;T036", "G22", "release/release_manifest.json", "JSON", "release evidence generator"),
+    evidence("EV030", "R26;R27", "T002", "G0", "reports/t002/task_registry_reconciliation.csv", "CSV", "scripts/reconcile_t002_sources.py", "GENERATED", notes="Preserves field-level differences between provisional and canonical task registries."),
+    evidence("EV031", "R26;R27", "T002", "G0", "reports/t002/source_reconciliation.json", "JSON", "scripts/generate_t002_evidence.py", "GENERATED", notes="Records final source roles and zero remaining semantic errors."),
 ]
+
+EVIDENCE_TASK_OWNERS = {
+    "EV001": "T001",
+    "EV002": "T002",
+    "EV003": "T002",
+    "EV004": "T002",
+    "EV005": "T003;T004",
+    "EV006": "T006;T007",
+    "EV007": "T008",
+    "EV008": "T009;T010",
+    "EV009": "T010;T011;T012;T013",
+    "EV010": "T014",
+    "EV011": "T015;T016",
+    "EV012": "T021",
+    "EV013": "T022;T023",
+    "EV014": "T017",
+    "EV015": "T018",
+    "EV016": "T019",
+    "EV017": "T020",
+    "EV018": "T031",
+    "EV019": "T024;T025",
+    "EV020": "T026",
+    "EV021": "T027",
+    "EV022": "T028",
+    "EV023": "T029",
+    "EV024": "T030",
+    "EV025": "T032",
+    "EV026": "T033",
+    "EV027": "T034",
+    "EV028": "T035",
+    "EV029": "T036",
+    "EV030": "T002",
+    "EV031": "T002",
+}
+for evidence_row in EVIDENCE:
+    evidence_row["task_ids"] = EVIDENCE_TASK_OWNERS[evidence_row["evidence_id"]]
 
 
 def main() -> None:

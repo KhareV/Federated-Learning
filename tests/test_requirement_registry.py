@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from nhm.coverage import CLAIM_BOUNDARY_IDS, read_csv, split_refs
@@ -50,3 +51,17 @@ def test_source_versions_and_out_of_scope_rows_are_explicit() -> None:
         "OOS04",
     }
     assert all(row["mandatory"] == "FALSE" for row in excluded)
+
+
+def test_core_requirement_owners_match_execution_plan_coverage_matrix() -> None:
+    rows = {
+        row["requirement_id"]: row
+        for row in read_csv(ROOT / "manifests/requirements_v22.csv")
+    }
+    snapshot = json.loads((ROOT / "manifests/task_packets_v1.json").read_text())
+    expected = dict(snapshot["requirement_task_map"])
+    expected["R27"] = ";".join(f"T{number:03d}" for number in range(1, 37))
+    assert all(
+        rows[requirement_id]["implementation_tasks"] == tasks
+        for requirement_id, tasks in expected.items()
+    )

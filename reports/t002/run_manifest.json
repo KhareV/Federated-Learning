@@ -1,10 +1,10 @@
 {
   "config_path": "configs/base.yaml",
   "config_sha256": "bf1d0c0ac4f92ef5d089f867c30e9d4091bd369d6cff43c8e6810ec88c87621d",
-  "created_at_utc": "2026-09-28T12:59:49.546017Z",
+  "created_at_utc": "2026-09-28T13:18:39.100573Z",
   "dependency_snapshot_path": "reports/t001/dependencies.txt",
   "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
-  "git_commit": "83f0136052cd5136705f2dfc9347f15f2d9c425e",
+  "git_commit": "c6d009a04d9f265f0bbdbeb76a474028b21f00e6",
   "git_dirty": true,
   "input_artifacts": [
     {
@@ -12,24 +12,32 @@
       "sha256": "1c72bbbf45c7d9eb23b7fa1a00e249538153f06e337d194ce93108029cb16e0c"
     },
     {
+      "path": "NHM_Solo_Implementation_Execution_Plan_v1.0.docx",
+      "sha256": "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
+    },
+    {
       "path": "NHM_Solo_Implementation_Master_Prompt_FINAL.docx",
       "sha256": "e65663dc8c53a4843f10b36ada6fcde07cf08122c961c36163cfdd0c03dfdd01"
     },
     {
+      "path": "manifests/task_packets_v1.json",
+      "sha256": "d05e57f43a42edb1149c1dde6ad8dc8d810acd38879f5b8639964f317794f663"
+    },
+    {
       "path": "manifests/task_registry_v1.csv",
-      "sha256": "fed3677f3e671c3c4b5bcaa4bcbbdeaf1287413d02a79a82a6276dd1d75ec145"
+      "sha256": "80e47a22978590b353262d98a557aacb3576ee0a75948d4c514cde51c418cdfd"
     },
     {
       "path": "manifests/requirements_v22.csv",
-      "sha256": "74048e91484645d6af04fcb863d5f0c5a78086c4d9aeaa07cfd8e9f8c09ee204"
+      "sha256": "a4340ef5f949aece409a56666f5f2b5c0a67223e7c3e1b6efd72fcc107ae827e"
     },
     {
       "path": "manifests/gate_registry_v1.csv",
-      "sha256": "e5cf8d3d7148cecf5b26b632dc7cce3eb8acb26b14394d9c970b3242e98547aa"
+      "sha256": "f7cb645b9cfa9f91cb53c4734e7c17870d3ef1e3a27c3776a725a92d5d3cd3a9"
     },
     {
       "path": "manifests/freeze_registry_v1.csv",
-      "sha256": "c03f4d0e46d8a1ab8ffd64693381305abf0b33762928f2ea492f8dcb7fccdfd3"
+      "sha256": "e413ce2e1465d9cf7a0a7a3be03df1cefeaa69e2e77ce1f0bcf8e7f3598c1b80"
     },
     {
       "path": "manifests/do_not_start_v1.csv",
@@ -37,27 +45,35 @@
     },
     {
       "path": "manifests/experiment_registry_v1.csv",
-      "sha256": "cf61528eb30c2755310b45c8e4e2a165cbb78465d969e93902140077383ad704"
+      "sha256": "ced9fb435662993c5447767822a3e393a96733ab08ec818e94ab597960fb2d80"
     },
     {
       "path": "manifests/evidence_registry_v1.csv",
-      "sha256": "62af2f976d2bbadf55321e03e7d59057e7cd41a22581b68bdcb996ba41804ae0"
+      "sha256": "7523056c793c04ec0fc0b2d2f55175acd747cdf890b30e26d3b1b37a1992ffa7"
     }
   ],
   "manifest_version": "1.0",
-  "notes": "Second coverage audit after a manual v2.2 section review; source-name discrepancy is recorded in source_hashes.json.",
+  "notes": "Second coverage audit after manual review of v2.2 and all 36 canonical execution-plan task packets.",
   "output_artifacts": [
     {
       "path": "reports/t002/coverage_audit.json",
-      "sha256": "0dc43ed8df77b2c40af5870319f912d54f3cdfd2b3b9b4214e4027e905e3c019"
+      "sha256": "61f2223c7178c3135cd0471173cd53c8f20b87a21057c7a0df8faacee264331d"
     },
     {
       "path": "reports/t002/source_hashes.json",
-      "sha256": "eefb102dd14686f5d74a97da6567a4756872549a91d2af18bfc8abfcb70a708f"
+      "sha256": "821187d4fb7e17d735149b148d3c1bfa55ea7508d53c4e725c2f2da9028da246"
     },
     {
       "path": "reports/t002/coverage_summary.md",
-      "sha256": "938491da9bae927b4e7e19bee52da088b60a326666792bd39528dbd372a22a39"
+      "sha256": "33fdcd0d4e96553ee2b5501ea3500415053b697e18a49945fdc7ebf0477c150f"
+    },
+    {
+      "path": "reports/t002/task_registry_reconciliation.csv",
+      "sha256": "31a82de4db5cb13a616a978520f2a44df42461366a031f5126dc9cf4e104f5fe"
+    },
+    {
+      "path": "reports/t002/source_reconciliation.json",
+      "sha256": "aca37c57c0ac79af4a5d56c234b42aa563cf7e6d45b8c28f3f4203cbc28c924b"
     }
   ],
   "phase_id": "T002",

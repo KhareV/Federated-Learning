@@ -24,11 +24,12 @@ because the final orphan count is zero.
 
 ## Source and task-name provenance
 
-The phase prompt names `NHM_Solo_Implementation_Execution_Plan_v1.0.docx`, but that file is
-not present. The local sequencing source is `NHM_Solo_Implementation_Master_Prompt_FINAL.docx`.
-It does not enumerate named work packets T004-T036. Those operational task names are therefore
-documented derivations from v2.2 Sections 3, 36, 37, Appendix A, and the local plan's critical
-path. The registries do not claim those derived names are verbatim source text.
+`NHM_Solo_Implementation_Execution_Plan_v1.0.docx` is the implementation-sequencing authority.
+All 36 task packets were read and captured in the source-bound canonical snapshot. The semantic
+task audit reports 0 remaining errors and
+0 remaining derived task definitions.
+`NHM_Solo_Implementation_Master_Prompt_FINAL.docx` remains planning input only. Git history and
+`task_registry_reconciliation.csv` preserve the correction from the provisional T002 registry.
 
 ## Boundary
 

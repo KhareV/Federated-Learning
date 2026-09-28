@@ -1,21 +1,25 @@
 {
   "algorithm": "sha256",
+  "authority_hierarchy": [
+    "NHM_ML_Revised_Locked_Specification_v2.2.docx",
+    "NHM_Solo_Implementation_Execution_Plan_v1.0.docx",
+    "NHM_Solo_Implementation_Master_Prompt_FINAL.docx"
+  ],
   "rule": "SHA-256 of exact source-document bytes using nhm.hashing.hash_file",
-  "source_name_discrepancy": {
-    "expected_by_phase_prompt": "NHM_Solo_Implementation_Execution_Plan_v1.0.docx",
-    "expected_file_present": false,
-    "local_file_used": "NHM_Solo_Implementation_Master_Prompt_FINAL.docx",
-    "resolution": "The only local sequencing source established during T001 was audited; no missing document content or hash was invented."
-  },
   "sources": [
     {
       "filename": "NHM_ML_Revised_Locked_Specification_v2.2.docx",
-      "role": "primary technical/methodological authority",
+      "role": "technical_authority",
       "sha256": "1c72bbbf45c7d9eb23b7fa1a00e249538153f06e337d194ce93108029cb16e0c"
     },
     {
+      "filename": "NHM_Solo_Implementation_Execution_Plan_v1.0.docx",
+      "role": "implementation_sequencing_authority",
+      "sha256": "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
+    },
+    {
       "filename": "NHM_Solo_Implementation_Master_Prompt_FINAL.docx",
-      "role": "local implementation sequencing source available to T001/T002",
+      "role": "planning_input_only",
       "sha256": "e65663dc8c53a4843f10b36ada6fcde07cf08122c961c36163cfdd0c03dfdd01"
     }
   ]

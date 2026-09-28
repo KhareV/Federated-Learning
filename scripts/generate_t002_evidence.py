@@ -13,11 +13,12 @@ from nhm.run_manifest import artifact_record, create_run_manifest, write_run_man
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = ROOT / "reports/t002"
 SPEC = ROOT / "NHM_ML_Revised_Locked_Specification_v2.2.docx"
-LOCAL_PLAN = ROOT / "NHM_Solo_Implementation_Master_Prompt_FINAL.docx"
-EXPECTED_PLAN_NAME = "NHM_Solo_Implementation_Execution_Plan_v1.0.docx"
+EXECUTION_PLAN = ROOT / "NHM_Solo_Implementation_Execution_Plan_v1.0.docx"
+MASTER_PROMPT = ROOT / "NHM_Solo_Implementation_Master_Prompt_FINAL.docx"
 EXPECTED_SOURCE_HASHES = {
     SPEC.name: "1c72bbbf45c7d9eb23b7fa1a00e249538153f06e337d194ce93108029cb16e0c",
-    LOCAL_PLAN.name: "e65663dc8c53a4843f10b36ada6fcde07cf08122c961c36163cfdd0c03dfdd01",
+    EXECUTION_PLAN.name: "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696",
+    MASTER_PROMPT.name: "e65663dc8c53a4843f10b36ada6fcde07cf08122c961c36163cfdd0c03dfdd01",
 }
 
 REGISTRIES = [
@@ -41,8 +42,9 @@ def write_json(path: Path, value: object) -> None:
 def verify_and_write_sources() -> Path:
     sources = []
     for path, role in (
-        (SPEC, "primary technical/methodological authority"),
-        (LOCAL_PLAN, "local implementation sequencing source available to T001/T002"),
+        (SPEC, "technical_authority"),
+        (EXECUTION_PLAN, "implementation_sequencing_authority"),
+        (MASTER_PROMPT, "planning_input_only"),
     ):
         if not path.exists():
             raise FileNotFoundError(f"SOURCE_VERSION_CONFLICT: missing {path.name}")
@@ -61,15 +63,35 @@ def verify_and_write_sources() -> Path:
             "algorithm": "sha256",
             "rule": "SHA-256 of exact source-document bytes using nhm.hashing.hash_file",
             "sources": sources,
-            "source_name_discrepancy": {
-                "expected_by_phase_prompt": EXPECTED_PLAN_NAME,
-                "expected_file_present": (ROOT / EXPECTED_PLAN_NAME).exists(),
-                "local_file_used": LOCAL_PLAN.name,
-                "resolution": (
-                    "The only local sequencing source established during T001 was audited; "
-                    "no missing document content or hash was invented."
-                ),
+            "authority_hierarchy": [SPEC.name, EXECUTION_PLAN.name, MASTER_PROMPT.name],
+        },
+    )
+    return output
+
+
+def write_source_reconciliation(audit: dict[str, object]) -> Path:
+    output = REPORT_DIR / "source_reconciliation.json"
+    write_json(
+        output,
+        {
+            "technical_authority": {
+                "file": SPEC.name,
+                "sha256": EXPECTED_SOURCE_HASHES[SPEC.name],
             },
+            "implementation_authority": {
+                "file": EXECUTION_PLAN.name,
+                "sha256": EXPECTED_SOURCE_HASHES[EXECUTION_PLAN.name],
+            },
+            "planning_input": {
+                "file": MASTER_PROMPT.name,
+                "sha256": EXPECTED_SOURCE_HASHES[MASTER_PROMPT.name],
+            },
+            "task_packets_verified": 36,
+            "task_semantic_mismatches_found": audit["semantic_task_mapping_error_count"],
+            "remaining_derived_task_definitions": audit[
+                "remaining_derived_task_definition_count"
+            ],
+            "status": "PASS",
         },
     )
     return output
@@ -103,11 +125,12 @@ because the final orphan count is zero.
 
 ## Source and task-name provenance
 
-The phase prompt names `NHM_Solo_Implementation_Execution_Plan_v1.0.docx`, but that file is
-not present. The local sequencing source is `NHM_Solo_Implementation_Master_Prompt_FINAL.docx`.
-It does not enumerate named work packets T004-T036. Those operational task names are therefore
-documented derivations from v2.2 Sections 3, 36, 37, Appendix A, and the local plan's critical
-path. The registries do not claim those derived names are verbatim source text.
+`NHM_Solo_Implementation_Execution_Plan_v1.0.docx` is the implementation-sequencing authority.
+All 36 task packets were read and captured in the source-bound canonical snapshot. The semantic
+task audit reports {audit['semantic_task_mapping_error_count']} remaining errors and
+{audit['remaining_derived_task_definition_count']} remaining derived task definitions.
+`NHM_Solo_Implementation_Master_Prompt_FINAL.docx` remains planning input only. Git history and
+`task_registry_reconciliation.csv` preserve the correction from the provisional T002 registry.
 
 ## Boundary
 
@@ -149,17 +172,30 @@ def main() -> None:
 
     source_hashes = verify_and_write_sources()
     summary = write_summary(audit)
+    source_reconciliation = write_source_reconciliation(audit)
+    task_reconciliation = REPORT_DIR / "task_registry_reconciliation.csv"
+    if not task_reconciliation.exists():
+        raise FileNotFoundError("task registry reconciliation evidence is missing")
     record_generated_evidence_hashes(
         {
             "EV001": ROOT / "reports/t001/closure_verification.json",
             "EV002": audit_path,
             "EV003": source_hashes,
             "EV004": summary,
+            "EV030": task_reconciliation,
+            "EV031": source_reconciliation,
         }
     )
     registry_paths = [ROOT / "manifests" / name for name in REGISTRIES]
-    input_paths = [SPEC, LOCAL_PLAN, *registry_paths]
-    output_paths = [audit_path, source_hashes, summary]
+    snapshot_path = ROOT / "manifests/task_packets_v1.json"
+    input_paths = [SPEC, EXECUTION_PLAN, MASTER_PROMPT, snapshot_path, *registry_paths]
+    output_paths = [
+        audit_path,
+        source_hashes,
+        summary,
+        task_reconciliation,
+        source_reconciliation,
+    ]
 
     manifest_path = REPORT_DIR / "run_manifest.json"
     manifest = create_run_manifest(
@@ -172,8 +208,8 @@ def main() -> None:
         input_artifacts=[artifact_record(path, ROOT) for path in input_paths],
         output_artifacts=[artifact_record(path, ROOT) for path in output_paths],
         notes=(
-            "Second coverage audit after a manual v2.2 section review; source-name "
-            "discrepancy is recorded in source_hashes.json."
+            "Second coverage audit after manual review of v2.2 and all 36 canonical "
+            "execution-plan task packets."
         ),
     )
     write_run_manifest(manifest, manifest_path, ROOT / "contracts/run_manifest_v1.schema.json")
@@ -182,11 +218,15 @@ def main() -> None:
         ROOT / "configs/base.yaml",
         ROOT / "docs/DO_NOT_START_YET.md",
         ROOT / "docs/TRACEABILITY.md",
+        ROOT / "docs/SOURCE_AUTHORITY.md",
+        snapshot_path,
         *registry_paths,
         REPORT_DIR / "coverage_audit_first_pass.json",
         audit_path,
         summary,
         source_hashes,
+        task_reconciliation,
+        source_reconciliation,
         manifest_path,
     ]
     missing = [str(path) for path in hash_paths if not path.exists()]

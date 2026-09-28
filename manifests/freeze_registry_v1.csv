@@ -1,16 +1,16 @@
 freeze_id,artifact_or_decision,version_id,current_status,freeze_gate,change_class_required,invalidated_tasks_if_changed,invalidated_experiments_if_changed,evidence_to_regenerate,notes
-F01,source authority,SPEC_V2.2/PLAN_V1.0,FROZEN,G0,C,T002-T036,E01-E16,all downstream evidence,v2.2 locked source hash; plan filename discrepancy recorded.
-F02,hardware/data contract,HARDWARE_DATA_CONTRACT_V1,NOT_FROZEN,G1,C,T005;T013;T028;T029;T031,E07;E08;E16,contract and wearable/integration reports,Observed MongoDB V0 remains unverified until T004.
-F03,dataset versions/manifests,DATASETS_V1,NOT_FROZEN,G3,C,T007-T026,E01-E14,data/model/evaluation/federated evidence,PTB-XL excluded from core scope.
-F04,label mapping,AAMI_SVF_MAP_V1,NOT_FROZEN,G4,C,T008-T026,E01-E14,labels/models/evaluations/federated evidence,Mapping change requires a new explicit version.
-F05,patient split,MITDB_SPLIT_V1,NOT_FROZEN,G5,C,T009-T026,E01-E14,split/model/evaluation/federated evidence,Patients and 201/202 grouping immutable after freeze.
-F06,preprocessing,PREPROC_V1/GAP_POLICY_V1,NOT_FROZEN,G6,C,T011-T031,E01-E16,all derived caches/models/evaluations/deployment,Any scientific transform change is Class C.
-F07,baseline configuration,BASELINE_V1,NOT_FROZEN,G7,C,T012;T033,E01,baseline report,Majority remains training-only.
-F08,MODEL_V1,MODEL_V1,NOT_FROZEN,G8,C,T016-T031,E02-E16,calibration/evaluation/FL/deployment/context evidence,Checkpoint/config/test vector hash required.
-F09,calibration,CAL_V1,NOT_FROZEN,G10,C,T018-T031,E03-E16,thresholded/evaluation/API/dashboard evidence,MIT-BIH source-domain only.
+F01,source authority,SPEC_V2.2/PLAN_V1.0,FROZEN,G0,C,T002-T036,E01-E16,all downstream evidence,v2.2 and canonical execution-plan source hashes recorded; master prompt is planning input only.
+F02,hardware/data contract,HARDWARE_DATA_CONTRACT_V1,NOT_FROZEN,G1,C,T005;T030;T032;T034,E07;E08;E16,contract and wearable/integration reports,Observed MongoDB V0 remains unverified until T004.
+F03,dataset versions/manifests,DATASETS_V1,NOT_FROZEN,G3,C,T008-T031;T034-T036,E01-E14,data/model/evaluation/federated evidence,PTB-XL excluded from core scope.
+F04,label mapping,AAMI_SVF_MAP_V1,NOT_FROZEN,G4,C,T009-T031;T034-T036,E01-E14,labels/models/evaluations/federated evidence,Mapping change requires a new explicit version.
+F05,patient split,MITDB_SPLIT_V1,NOT_FROZEN,G5,C,T010-T031;T034-T036,E01-E14,split/model/evaluation/federated evidence,Patients and 201/202 grouping immutable after freeze.
+F06,preprocessing,PREPROC_V1/GAP_POLICY_V1,NOT_FROZEN,G6,C,T014-T035,E01-E16,all derived caches/models/evaluations/deployment,Any scientific transform change is Class C.
+F07,baseline configuration,BASELINE_V1,NOT_FROZEN,G7,C,T015;T016;T035;T036,E01,baseline report,Majority remains training-only.
+F08,MODEL_V1,MODEL_V1,NOT_FROZEN,G8,C,T017-T034;T036,E02-E16,calibration/evaluation/FL/deployment/context evidence,Checkpoint/config/test vector hash required.
+F09,calibration,CAL_V1,NOT_FROZEN,G10,C,T018-T034;T036,E03-E16,thresholded/evaluation/API/dashboard evidence,MIT-BIH source-domain only.
 F10,internal test,INTERNAL_TEST_V1,NOT_FROZEN,G10,C,T019-T036,E04-E16,internal and comparison evidence,No post-test tuning.
-F11,external evaluation,INCART_EXT_V1,NOT_FROZEN,G10,C,T033-T036,E06,external report,One locked run before adaptation.
-F12,federated configuration,FL_CONFIG_V1,NOT_FROZEN,G12,C,T025;T026;T033,E09-E14,federated/privacy reports,Patient pool and matched budgets fixed.
-F13,privacy configuration,SECAGG_CONFIG_V1,NOT_FROZEN,G14,C,T033-T036,E14,privacy report and claims,Class B only for interface-only revision; scientific/threat-model claim change is C.
-F14,deployment artifact,GATEWAY_ARTIFACT_V1,NOT_FROZEN,G15,C,T028-T031;T035;T036,E15;E16,edge/wearable/API/e2e evidence,MCU remains optional separate artifact.
+F11,external evaluation,INCART_EXT_V1,NOT_FROZEN,G10,C,T031;T035;T036,E06,external report,One locked run before adaptation.
+F12,federated configuration,FL_CONFIG_V1,NOT_FROZEN,G12,C,T027;T028;T035;T036,E09-E14,federated/privacy reports,Patient pool and matched budgets fixed.
+F13,privacy configuration,SECAGG_CONFIG_V1,NOT_FROZEN,G14,C,T035;T036,E14,privacy report and claims,Class B only for interface-only revision; scientific/threat-model claim change is C.
+F14,deployment artifact,GATEWAY_ARTIFACT_V1,NOT_FROZEN,G15,C,T030;T032-T036,E15;E16,edge/wearable/API/e2e evidence,MCU remains optional separate artifact.
 F15,release package,RELEASE_V1,NOT_FROZEN,G22,C,,E01-E16,complete release evidence,No future artifact is frozen during T002.
