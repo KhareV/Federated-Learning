@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="13 / AI / ANOMALY DETECTION" title="Find the break in pattern." description="Explore anomaly scores, classifications, and confidence without hiding the raw signal context." endpoint="/anomaly/events" signal="ecg" />

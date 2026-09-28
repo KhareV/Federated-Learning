@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="32 / SYSTEM / SETTINGS" title="Tune the environment." description="Configure thresholds, rounds, signal quality gates, and the details that shape the workbench." endpoint="/system/settings" />

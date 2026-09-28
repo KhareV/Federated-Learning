@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="08 / REPORTS" title="Make the signal legible." description="Generate research reports from monitored sessions, model outputs, and quality evidence." endpoint="/reports" />

@@ -1,0 +1,8 @@
+<script lang="ts">
+	import DashboardShell from './DashboardShell.svelte'; import type { Snippet } from 'svelte';
+	let { eyebrow, title, description, children }: { eyebrow: string; title: string; description: string; children?: Snippet } = $props();
+</script>
+<DashboardShell><main class="workbench-page"><header class="page-head"><div><span>{eyebrow}</span><h1>{title}</h1></div><p>{description}</p></header>{@render children?.()}<footer class="research-note"><span>RESEARCH PROTOTYPE</span><p>Synthetic and simulated outputs are staged for backend and model binding. Not for diagnosis or emergency decisions.</p><span>LOCAL-FIRST / QAPFL</span></footer></main></DashboardShell>
+<style>
+	.workbench-page{max-width:1560px;margin:auto}.page-head{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(280px,.7fr);align-items:end;gap:clamp(28px,6vw,100px);margin:8px 0 32px;padding-bottom:25px;border-bottom:1px solid rgba(148,163,184,.15)}.page-head span{color:#2bb8b0;font:8px 'JetBrains Mono',monospace;letter-spacing:.15em}.page-head h1{margin:12px 0 0;font:500 clamp(32px,4vw,58px)/.98 'Space Grotesk',sans-serif;letter-spacing:-.035em}.page-head p{max-width:560px;margin:0;color:#8494a9;font-size:13px;line-height:1.65}.research-note{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;margin-top:12px;padding:16px 0;border-top:1px solid rgba(148,163,184,.14);color:#53647b;font:7px 'JetBrains Mono',monospace;letter-spacing:.1em}.research-note p{margin:0;text-align:center;line-height:1.6}@media(max-width:760px){.page-head{grid-template-columns:1fr;gap:16px}.research-note{grid-template-columns:1fr}.research-note p{text-align:left}}
+</style>

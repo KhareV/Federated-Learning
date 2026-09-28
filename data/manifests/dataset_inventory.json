@@ -1,0 +1,81 @@
+{
+  "registry_version": "1.0.0",
+  "datasets": [
+    {
+      "name": "ptbxl",
+      "display_name": "PTB-XL",
+      "version": "1.0.1",
+      "root": "data/raw/ptbxl",
+      "role": "centralized_ecg_development",
+      "status": "valid",
+      "counts": {
+        "records100_headers": 21837,
+        "records100_dat": 21837,
+        "records500_headers": 21837,
+        "records500_dat": 21837,
+        "metadata_rows": 21837
+      },
+      "checks": [
+        "ptbxl_database.csv present",
+        "scp_statements.csv present",
+        "records100: paired WFDB files",
+        "records500: paired WFDB files"
+      ],
+      "errors": []
+    },
+    {
+      "name": "mitbih",
+      "display_name": "MIT-BIH Arrhythmia Database",
+      "version": "1.0.0",
+      "root": "data/raw/mitbih",
+      "role": "external_ecg_validation",
+      "status": "valid",
+      "counts": {
+        "records_dat": 48,
+        "records_headers": 48,
+        "records_annotations": 48
+      },
+      "checks": [
+        "all MIT-BIH records have dat/hea/atr files"
+      ],
+      "errors": []
+    },
+    {
+      "name": "mitbih_noise_stress",
+      "display_name": "MIT-BIH Noise Stress Test Database",
+      "version": "1.0.0",
+      "root": "data/raw/mitbih_noise_stress",
+      "role": "ecg_noise_robustness",
+      "status": "valid",
+      "counts": {
+        "mat_files": 108,
+        "recognized_snr_files": 108,
+        "recognized_snr_levels": 6
+      },
+      "checks": [
+        "noise MAT files cover configured SNR levels"
+      ],
+      "errors": []
+    },
+    {
+      "name": "bidmc",
+      "display_name": "BIDMC PPG and Respiration Dataset",
+      "version": "1.0.0",
+      "root": "data/raw/bidmc",
+      "role": "multimodal_alignment_and_quality",
+      "status": "valid",
+      "counts": {
+        "wfdb_headers": 106,
+        "wfdb_dat": 106,
+        "signal_csv": 53,
+        "numeric_csv": 53
+      },
+      "checks": [
+        "BIDMC WFDB files present",
+        "BIDMC CSV signal/numeric exports present"
+      ],
+      "errors": []
+    }
+  ],
+  "status": "valid"
+}

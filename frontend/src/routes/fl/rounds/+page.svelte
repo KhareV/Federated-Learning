@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="18 / FL / TRAINING ROUNDS" title="The model evolves in rounds." description="Track participation, convergence, loss, and communication across collaborative training cycles." endpoint="/fl/rounds" />

@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="11 / SIGNAL QUALITY" title="Trust the measurement." description="Quality gates determine whether downstream inference should listen, wait, or ask for a cleaner signal." endpoint="/monitoring/live/client_01" signal="ecg" />

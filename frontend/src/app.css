@@ -1,0 +1,138 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import "shadcn-svelte/tailwind.css";
+
+:root {
+	font-family: Inter, sans-serif;
+	color: #eef7f6;
+	background: #030712;
+	--nhm-bg: #030712;
+	--nhm-surface: #080e1d;
+	--nhm-surface-raised: #0c1426;
+	--nhm-text: #eef7f6;
+	--nhm-muted: #94a3b8;
+	--nhm-subtle: #71829a;
+	--nhm-accent: #2bb8b0;
+	--nhm-cyan: #0ea5e9;
+	--nhm-border: rgba(148, 163, 184, 0.2);
+	--nhm-ink: #030712;
+	--nhm-paper: #f8fafc;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 24px;
+	overscroll-behavior-y: none;
+}
+
+body { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+}
+
+body {
+  min-height: 100vh;
+	margin: 0;
+	background: #030712;
+	color: var(--nhm-text);
+	overflow-x: clip;
+	-webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea { font: inherit; }
+
+a, button { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+	outline: 2px solid var(--nhm-accent);
+	outline-offset: 3px;
+}
+
+::selection { color: #030712; background: #2bb8b0; }
+
+/* The workbench follows the landing page's restrained editorial system: ink,
+   paper, hairline rules, and one quiet signal color. Keep chart traces legible
+   without turning every surface into a neon card. */
+.dashboard-shell .panel,
+.dashboard-shell .metric-tile,
+.dashboard-shell .plot-panel,
+.dashboard-shell .ribbon-panel,
+.dashboard-shell .graph-panel,
+.dashboard-shell .network {
+	background: #080b12 !important;
+	box-shadow: none !important;
+	backdrop-filter: none !important;
+}
+.dashboard-shell .panel,
+.dashboard-shell .metric-tile,
+.dashboard-shell .plot-panel,
+.dashboard-shell .ribbon-panel,
+.dashboard-shell .graph-panel,
+.dashboard-shell .network { border-color: rgba(226,232,240,.14) !important; }
+.dashboard-shell .panel h2,
+.dashboard-shell .graph-panel h3,
+.dashboard-shell .ribbon-panel h3 { letter-spacing: -.02em; }
+.dashboard-shell svg polyline,
+.dashboard-shell svg circle,
+.dashboard-shell .bar,
+.dashboard-shell .core { filter: none !important; box-shadow: none !important; }
+.dashboard-shell .metric-tile--teal,
+.dashboard-shell .metric-tile--cyan,
+.dashboard-shell .metric-tile--amber,
+.dashboard-shell .metric-tile--rose { border-top-color: #7fb6af !important; }
+.dashboard-shell .metric-head b,
+.dashboard-shell .panel header span,
+.dashboard-shell .page-head span,
+.dashboard-shell .network-title,
+.dashboard-shell .core b { color: #8fc6bf !important; }
+.dashboard-shell .graph-panel strong,
+.dashboard-shell .metric-value { color: #eef2f2; }
+.dashboard-shell .graph-panel polyline,
+.dashboard-shell .channel polyline { stroke: #8fc6bf; }
+.dashboard-shell .bar.pos,
+.dashboard-shell .bar.neg { background: #8fc6bf; }
+.dashboard-shell .bar.neg { opacity: .62; }
+.dashboard-shell .graph { background-image: linear-gradient(rgba(148,163,184,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.045) 1px,transparent 1px); }
+.dashboard-shell .brand { gap: 0; align-items: baseline; }
+.dashboard-shell .brand > strong { color: #eef2f2; font: 600 16px 'Space Grotesk', sans-serif; letter-spacing: .22em; }
+.dashboard-shell .brand > span { margin-left: 12px; color: #64748b; font: 8px 'JetBrains Mono', monospace; letter-spacing: .1em; }
+.dashboard-shell .nav-caption { color: #64748b; }
+.dashboard-shell .nav-caption span { display: none; }
+.dashboard-shell .header-route span { color: #eef2f2; font-size: 9px; letter-spacing: .18em; }
+.dashboard-shell .header-readouts { gap: 0; }
+
+@theme inline {
+  --animate-marquee: marquee var(--duration) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+	@keyframes marquee {
+		from {
+			transform: translateX(0);
+    }
+		to {
+			transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+	@keyframes marquee-vertical {
+		from {
+			transform: translateY(0);
+    }
+		to {
+			transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+	--animate-line-shadow: line-shadow 15s linear infinite;
+	@keyframes line-shadow {
+		0% {
+			background-position: 0 0;
+    }
+		100% {
+			background-position: 100% -100%;
+    }
+  }
+}

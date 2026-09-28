@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="10 / SIGNAL ANALYSIS / SpO₂" title="Oxygenation, continuously." description="Track blood oxygen estimates with the sensor-quality context that gives them meaning." endpoint="/signals/spo2/demo" signal="spo2" />

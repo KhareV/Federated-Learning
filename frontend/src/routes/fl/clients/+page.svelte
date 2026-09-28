@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="17 / FL / CLIENT NETWORK" title="Every device keeps its context." description="Explore participating clients, local quality, and the updates they contribute to the global model." endpoint="/fl/clients" />

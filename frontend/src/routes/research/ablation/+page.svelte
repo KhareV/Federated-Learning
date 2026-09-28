@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="26 / RESEARCH / ABLATION" title="Know what each layer contributes." description="Remove one capability at a time and make the system's true dependencies visible." endpoint="/experiments" />

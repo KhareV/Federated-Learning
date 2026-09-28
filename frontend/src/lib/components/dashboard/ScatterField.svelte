@@ -1,0 +1,7 @@
+<script lang="ts">
+	let { color = '#fbbf24', points = Array.from({ length: 24 }, (_, i) => ({ x: .08 + (i * .037) % .8, y: 25 + ((i * 19) % 65), hot: i > 18 })) }: { color?: string; points?: { x: number; y: number; hot?: boolean }[] } = $props();
+</script>
+<div class="scatter"><div class="y-label">SIGNAL QUALITY / SQI</div><svg viewBox="0 0 640 220" preserveAspectRatio="none" role="img" aria-label="Anomaly score versus signal quality"><g class="grid"><line x1="40" y1="20" x2="620" y2="20" /><line x1="40" y1="70" x2="620" y2="70" /><line x1="40" y1="120" x2="620" y2="120" /><line x1="40" y1="170" x2="620" y2="170" /><line x1="40" y1="210" x2="620" y2="210" /></g><line x1="40" y1="155" x2="620" y2="155" stroke="#fbbf24" stroke-dasharray="5 5" opacity=".65" />{#each points as p}<circle cx={40 + p.x * 580} cy={210 - (p.y / 100) * 190} r={p.hot ? 5 : 3.5} fill={p.hot ? '#fb7185' : color} opacity={p.hot ? .95 : .6} style={p.hot ? 'filter:drop-shadow(0 0 5px #fb7185)' : ''} />{/each}</svg><div class="x-label">ANOMALY SCORE →</div><span class="threshold">SQI GATE 60</span></div>
+<style>
+	.scatter{position:relative;padding:18px 0 23px}.scatter svg{width:100%;height:220px}.grid line{stroke:rgba(148,163,184,.1)}.y-label{position:absolute;left:0;top:8px;color:#53647b;font:7px 'JetBrains Mono',monospace;letter-spacing:.1em}.x-label{position:absolute;right:0;bottom:0;color:#53647b;font:7px 'JetBrains Mono',monospace;letter-spacing:.1em}.threshold{position:absolute;right:5px;top:42%;color:#fbbf24;font:7px 'JetBrains Mono',monospace}
+</style>

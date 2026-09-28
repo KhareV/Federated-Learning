@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="09 / SIGNAL ANALYSIS / PPG" title="Read the optical pulse." description="Inspect the optical waveform, pulse quality, and derived oxygenation context." endpoint="/signals/ppg/live/client_01" signal="ppg" />

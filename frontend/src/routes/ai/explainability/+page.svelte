@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="15 / AI / EXPLAINABILITY" title="Show the reasoning." description="Trace model decisions back to signal quality, features, and physiological context." endpoint="/anomaly/timeline" />

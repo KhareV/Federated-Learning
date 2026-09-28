@@ -1,0 +1,18 @@
+{
+  "artifacts": {
+    "config_sha256": "f93f21a0b458a945b37177669c5b28b37636606f359ef1a3abe594d30d1beb03",
+    "fixture_sha256": "16fc2030d0ffcf9da32889f7bcd5119acb84ea5055ea0e64e1ff46151e71b4b4",
+    "run_manifest_sha256": "33456ace637ad9ba8616ee36a0c5c875337fd5277c91ad7452110cbc9b26d12c"
+  },
+  "claims": {
+    "deterministic_hashing": true,
+    "manifest_capture": true,
+    "repository_config_bootstrap": true,
+    "sensor_physiological_validity": "UNVERIFIED",
+    "structural_fixture_validation": true
+  },
+  "phase_id": "T001",
+  "report_version": "1.0",
+  "spec_version": "2.2",
+  "status": "PASS"
+}

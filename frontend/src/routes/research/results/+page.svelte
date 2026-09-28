@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="28 / RESEARCH / RESULTS" title="Evidence, not decoration." description="Collect the results that support the architecture, the privacy boundary, and the quality of its inferences." endpoint="/experiments" />

@@ -1,0 +1,29 @@
+{
+  "config_path": "configs/base.yaml",
+  "config_sha256": "f93f21a0b458a945b37177669c5b28b37636606f359ef1a3abe594d30d1beb03",
+  "created_at_utc": "2026-09-28T12:22:34.709414Z",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "546d3977cadc1cf079c2bf51439113c48dc51dee3c0aa94c7720a442dc73111f",
+  "git_commit": null,
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "configs/base.yaml",
+      "sha256": "f93f21a0b458a945b37177669c5b28b37636606f359ef1a3abe594d30d1beb03"
+    },
+    {
+      "path": "tests/fixtures/mongodb_observed_v0.json",
+      "sha256": "16fc2030d0ffcf9da32889f7bcd5119acb84ea5055ea0e64e1ff46151e71b4b4"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Structural bootstrap only; physiological validity remains UNVERIFIED.",
+  "output_artifacts": [],
+  "phase_id": "T001",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.9.6",
+  "run_id": "t001-smoke",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T001"
+}

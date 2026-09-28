@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="05 / PATIENT PROFILES" title="The baseline is personal." description="Review longitudinal context without flattening an individual into a population average." endpoint="/baseline/demo" />

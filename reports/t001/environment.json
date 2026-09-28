@@ -1,0 +1,21 @@
+{
+  "architecture": "arm64",
+  "config_path": "configs/base.yaml",
+  "config_sha256": "f93f21a0b458a945b37177669c5b28b37636606f359ef1a3abe594d30d1beb03",
+  "created_at_utc": "2026-09-28T12:22:34.770317Z",
+  "current_phase": "T001",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "546d3977cadc1cf079c2bf51439113c48dc51dee3c0aa94c7720a442dc73111f",
+  "git_commit": null,
+  "git_dirty": true,
+  "git_version": "git version 2.54.0 (Apple Git-157)",
+  "os": "Darwin",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_implementation": "CPython",
+  "python_version": "3.9.6",
+  "runtime_compliance": false,
+  "runtime_note": "VERIFICATION_REQUIRED: Python 3.11 unavailable; local T001 used closest Python.",
+  "runtime_requirement": "Python 3.11.x",
+  "seed": null,
+  "spec_version": "2.2"
+}

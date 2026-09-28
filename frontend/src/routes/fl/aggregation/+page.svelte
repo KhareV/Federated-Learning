@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="19 / FL / AGGREGATION" title="Aggregate without centralizing." description="Inspect how local updates become a shared model while raw physiological data stays at the edge." endpoint="/fl/aggregation/demo" />

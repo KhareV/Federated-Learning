@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="30 / SYSTEM / DATA" title="Data should have a visible boundary." description="Manage collection, retention, and handoff across the local-first monitoring pipeline." endpoint="/system/stats" />

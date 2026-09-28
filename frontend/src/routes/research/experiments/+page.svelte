@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="24 / RESEARCH / EXPERIMENTS" title="Turn hypotheses into runs." description="Create, launch, and inspect experiments across the monitoring and federated-learning pipeline." endpoint="/experiments" />

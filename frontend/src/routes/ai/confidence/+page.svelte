@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="16 / AI / CONFIDENCE" title="Uncertainty belongs in the interface." description="Make confidence visible so operators can distinguish a strong pattern from a tentative one." endpoint="/anomaly/stats" />

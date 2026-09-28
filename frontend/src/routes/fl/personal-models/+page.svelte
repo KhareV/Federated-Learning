@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="21 / FL / PERSONAL MODELS" title="Personalization at the edge." description="See how a shared model adapts to individual physiological baselines without exporting raw data." endpoint="/fl/personal-models" />

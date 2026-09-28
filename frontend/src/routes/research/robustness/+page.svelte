@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="25 / RESEARCH / ROBUSTNESS" title="Test the signal under pressure." description="Measure how noise, missing data, and motion artifacts reshape model confidence and performance." endpoint="/experiments" signal="ecg" />

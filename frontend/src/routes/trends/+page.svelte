@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="06 / HEALTH TRENDS" title="Patterns emerge over time." description="Compare physiological trends against personal baselines and signal quality windows." endpoint="/monitoring/sessions" signal="ppg" />

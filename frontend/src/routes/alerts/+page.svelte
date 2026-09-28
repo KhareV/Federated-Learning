@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="07 / ALERTS" title="Attention, with context." description="Keep anomaly events, quality warnings, and system notifications in one traceable stream." endpoint="/alerts/notifications" />

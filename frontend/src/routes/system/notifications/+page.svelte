@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="31 / SYSTEM / NOTIFICATIONS" title="Keep the system's voice close." description="Review operational events, quality warnings, and model notices as a single trace." endpoint="/alerts/notifications" />

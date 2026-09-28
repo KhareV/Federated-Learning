@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="29 / SYSTEM / DEVICES" title="The hardware is part of the model." description="Inspect wearable connectivity, battery, firmware, and sensor readiness at the edge." endpoint="/devices" />

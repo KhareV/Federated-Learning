@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="14 / AI / PERSONAL BASELINE" title="Normal is individual." description="Inspect the learned range for each person and the deviations that matter to them." endpoint="/baseline/demo" signal="ppg" />

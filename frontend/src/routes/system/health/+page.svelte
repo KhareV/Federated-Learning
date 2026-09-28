@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="33 / SYSTEM / HEALTH" title="Know whether the system is listening." description="Monitor backend, database, ML, federated server, WebSocket, latency, and uptime health." endpoint="/system/health" />

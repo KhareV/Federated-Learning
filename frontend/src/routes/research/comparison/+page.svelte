@@ -1,0 +1,1 @@
+<script lang="ts">import SectionPage from '$lib/components/dashboard/SectionPage.svelte';</script><SectionPage eyebrow="23 / RESEARCH / MODEL COMPARISON" title="Compare the intelligence." description="Place classical and neural models beside one another with the metrics that matter to the research question." endpoint="/experiments" />
