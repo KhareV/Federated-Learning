@@ -37,22 +37,66 @@ resampler:
       coefficient_sha256: b8dd6a50530332aad6c163dfdb5363d14393a3c0de9644790a6409072f7f928c
   gap_handling: DEFERRED_T012
 
-filters:
-  status: DEFERRED_T012
+ecg_filter:
+  filter_id: PREPROC_V1_ECG_FILTER_V1
+  fs_hz: 250
+  butterworth_prototype_order: 4
+  total_order: 8
+  band_hz: [0.5, 40.0]
+  form: SOS
+  sos_sections: 4
+  implementation: STATEFUL_CAUSAL_SOSFILT
+  state_initialization: ZERO_SOS_STATE_AT_SEGMENT_START
+  coefficient_path: preprocessing/coefficients/PREPROC_V1_ECG_FILTER_V1.npy
+  coefficient_sha256: 0ec392ef16c73fb3b2309351252479ba6395c779a28a075c70b829f270732e95
+  validated_by_task: T012
+  status: PASS
+
+ppg_filter:
+  filter_id: PREPROC_V1_PPG_FILTER_V1
+  fs_hz: 100
+  butterworth_prototype_order: 4
+  total_order: 8
+  band_hz: [0.5, 8.0]
+  form: SOS
+  sos_sections: 4
+  implementation: STATEFUL_CAUSAL_SOSFILT
+  state_initialization: ZERO_SOS_STATE_AT_SEGMENT_START
+  coefficient_path: preprocessing/coefficients/PREPROC_V1_PPG_FILTER_V1.npy
+  coefficient_sha256: 96bf49f0d0403077187f4723824f3dea8e456681e5b80de7ec0fe0f5f6adaa36
+  validated_by_task: T012
+  status: PASS
+  bidmc_125_to_100_resampling: NOT_IMPLEMENTED_OUT_OF_T012_SCOPE
 
 gap_policy:
-  status: DEFERRED_T012
+  policy_id: GAP_POLICY_V1
+  short_gap_max_ms: 100.0
+  short_gap_max_rule: "10 * missing_count <= source_rate_hz"
+  short_fill: CAUSAL_ZOH_LAST_VALID
+  long_fill: NONE
+  long_gap_action: RESET_SEGMENT_STATE
+  short_gap_quality_floor: DEGRADED
+  long_gap_spanning_requirement: UNUSABLE
+  applies_before: PREPROC_V1_RESAMPLER_V1
+  validated_by_task: T012
+  status: PASS
+  hardware_validation_scope: SOFTWARE_POLICY_ONLY
 
 windowing:
+  status: DEFERRED_T013
+
+quality:
   status: DEFERRED_T013
 
 normalization:
   status: DEFERRED_T014
 
 notes: >
-  Only the resampler component is validated (T011). PREPROC_V1 as a whole remains
-  DRAFT_UNTIL_G6: causal ECG/PPG bandpass filtering and GAP_POLICY_V1 (T012), and real
-  window construction (T013), are still required before G6 can close. Any change to the
-  resampler design, coefficients, group-delay convention, timestamp mapping, or state
-  initialization after this point requires rerunning T011 evidence and, once F06 freezes,
-  is a formal Class C scientific PREPROC version change (docs/CHANGE_CONTROL.md).
+  Resampler (T011), ECG/PPG causal SOS filters, and GAP_POLICY_V1 (T012) are validated.
+  PREPROC_V1 as a whole remains DRAFT_UNTIL_G6: real window construction, quality
+  classification, and the real-window leakage audit (T013) are still required before G6 can
+  close or F06 can freeze. Any change to the resampler design, filter design/coefficients,
+  gap thresholds/fill policy, group-delay convention, timestamp mapping, or state
+  initialization after this point requires rerunning the affected T011/T012 evidence and,
+  once F06 freezes, is a formal Class C scientific PREPROC version change
+  (docs/CHANGE_CONTROL.md).

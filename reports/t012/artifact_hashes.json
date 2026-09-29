@@ -1,0 +1,22 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "configs/preproc_v1.yaml": "a9bf07d1bae8ea31cf2a5fb1d566b60537699481035105b1fa2570788050d431",
+    "preprocessing/coefficients/PREPROC_V1_ECG_FILTER_V1.npy": "0ec392ef16c73fb3b2309351252479ba6395c779a28a075c70b829f270732e95",
+    "preprocessing/coefficients/PREPROC_V1_PPG_FILTER_V1.npy": "96bf49f0d0403077187f4723824f3dea8e456681e5b80de7ec0fe0f5f6adaa36",
+    "preprocessing/coefficients/manifest.json": "c3f247aea62527ab14a5aee47446f4d908f53f6cf857d86897db2be1dde725f8",
+    "preprocessing/ecg.py": "bac52a00b9b4412e3799482086cec77ff56d59e679bc48ab1cd8672b786a8849",
+    "preprocessing/filters.py": "50f39ea7ecb90fb7607f4c207af7b43bb5871b32aa9d706e7eaac23c5dea5bb6",
+    "preprocessing/gaps.py": "ae97a023b348fb7d6f89f90b15d8a1eacc91e18637b028bdc27d90f286b97830",
+    "preprocessing/ppg.py": "3c38d5ce8d5a9cb39ab6e9dda67aaf281855a25dc2b7d49a657138f571e22796",
+    "reports/preprocessing/filter_causality.json": "b4556fd8a1eb2adc3cbfaa21515d79c141208570b00c13955e0f61fd1883840f",
+    "reports/preprocessing/gap_tests.json": "f9198e771b3dd8bb7e7823f6e20ec6396d05a7feec90e5964b8e5c67dc21adb1",
+    "reports/t012/preproc_component_status.json": "13b233598f060f494670d28f98bbf16df527bd1e2252dc14b1882ded050b0de7",
+    "reports/t012/run_manifest.json": "608ad6d1d2c542c291134ba543805f0741757bbb1e66418913cab3c187bb2e06",
+    "scripts/design_filters_t012.py": "34c745a584be51f9eec901f1bec0502cafaf98c8737ab447d2226ab277e1105e",
+    "scripts/run_filter_causality_t012.py": "4f3bb26a511cae7c2907409e822883ff4745d22d44256c9eee03ea93f86086b5",
+    "scripts/run_gap_policy_tests_t012.py": "ea5c272bc5b6f294c6ef8a87a404dd10b4e4b08e80a912776fd8d177479ef3ad"
+  },
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest"
+}

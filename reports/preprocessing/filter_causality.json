@@ -1,0 +1,100 @@
+{
+  "filters": {
+    "PREPROC_V1_ECG_FILTER_V1": {
+      "band_hz": [
+        0.5,
+        40.0
+      ],
+      "butterworth_prototype_order": 4,
+      "chunk_equivalence_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS"
+      },
+      "chunk_equivalence_status": "PASS",
+      "coefficient_sha256": "0ec392ef16c73fb3b2309351252479ba6395c779a28a075c70b829f270732e95",
+      "future_append_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS"
+      },
+      "future_append_status": "PASS",
+      "impulse_causality_detail": {
+        "pre_impulse_max_abs": 0.0,
+        "status": "PASS"
+      },
+      "impulse_causality_status": "PASS",
+      "one_shot_causal_reference_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS"
+      },
+      "one_shot_causal_reference_status": "PASS",
+      "reset_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS"
+      },
+      "reset_status": "PASS",
+      "sample_rate_hz": 250.0,
+      "signal": "ECG",
+      "sos_sections": 4,
+      "stable_poles_detail": {
+        "max_pole_magnitude": 0.9952808951503469,
+        "status": "PASS"
+      },
+      "stable_poles_status": "PASS",
+      "total_order": 8
+    },
+    "PREPROC_V1_PPG_FILTER_V1": {
+      "band_hz": [
+        0.5,
+        8.0
+      ],
+      "butterworth_prototype_order": 4,
+      "chunk_equivalence_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS"
+      },
+      "chunk_equivalence_status": "PASS",
+      "coefficient_sha256": "96bf49f0d0403077187f4723824f3dea8e456681e5b80de7ec0fe0f5f6adaa36",
+      "future_append_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS"
+      },
+      "future_append_status": "PASS",
+      "impulse_causality_detail": {
+        "pre_impulse_max_abs": 0.0,
+        "status": "PASS"
+      },
+      "impulse_causality_status": "PASS",
+      "one_shot_causal_reference_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS"
+      },
+      "one_shot_causal_reference_status": "PASS",
+      "reset_detail": {
+        "max_absolute_error": 0.0,
+        "status": "PASS"
+      },
+      "reset_status": "PASS",
+      "sample_rate_hz": 100.0,
+      "signal": "PPG",
+      "sos_sections": 4,
+      "stable_poles_detail": {
+        "max_pole_magnitude": 0.989127194953628,
+        "status": "PASS"
+      },
+      "stable_poles_status": "PASS",
+      "total_order": 8
+    }
+  },
+  "forbidden_api_audit": {
+    "hits": {},
+    "status": "PASS"
+  },
+  "overall_status": "PASS",
+  "split_freeze_verified": {
+    "split_sha256_after": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "split_sha256_before": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "status": "PASS",
+    "unchanged": true
+  },
+  "task_id": "T012"
+}

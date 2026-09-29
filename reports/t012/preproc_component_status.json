@@ -1,0 +1,45 @@
+{
+  "components": {
+    "ecg_filter": {
+      "evidence": "reports/preprocessing/filter_causality.json",
+      "filter_id": "PREPROC_V1_ECG_FILTER_V1",
+      "status": "PASS_T012"
+    },
+    "gap_policy": {
+      "evidence": "reports/preprocessing/gap_tests.json",
+      "policy_id": "GAP_POLICY_V1",
+      "status": "PASS_T012"
+    },
+    "ppg_filter": {
+      "evidence": "reports/preprocessing/filter_causality.json",
+      "filter_id": "PREPROC_V1_PPG_FILTER_V1",
+      "status": "PASS_T012"
+    },
+    "quality": {
+      "status": "DEFERRED_T013"
+    },
+    "resampler": {
+      "evidence": "reports/preprocessing/resampler_causality.json",
+      "resampler_id": "PREPROC_V1_RESAMPLER_V1",
+      "status": "PASS_T011"
+    },
+    "windowing": {
+      "status": "DEFERRED_T013"
+    }
+  },
+  "filter_causality_overall_status": "PASS",
+  "gap_tests_overall_status": "PASS",
+  "gate_status": {
+    "F06": "NOT_FROZEN",
+    "G6": "NOT_STARTED",
+    "pending": [
+      "T013 windowing",
+      "T013 quality",
+      "T013 real-window leakage audit"
+    ]
+  },
+  "overall_status": "PASS",
+  "preproc_id": "PREPROC_V1",
+  "resampler_causality_overall_status": "PASS",
+  "task_id": "T012"
+}

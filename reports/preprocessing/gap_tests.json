@@ -1,0 +1,112 @@
+{
+  "boundary_cases": {
+    "cases": [
+      {
+        "correct": true,
+        "duration_ms": 100.0,
+        "expected_class": "SHORT",
+        "missing_count": 25,
+        "observed_class": "SHORT",
+        "source_rate_hz": 250
+      },
+      {
+        "correct": true,
+        "duration_ms": 104.0,
+        "expected_class": "LONG",
+        "missing_count": 26,
+        "observed_class": "LONG",
+        "source_rate_hz": 250
+      },
+      {
+        "correct": true,
+        "duration_ms": 100.0,
+        "expected_class": "SHORT",
+        "missing_count": 36,
+        "observed_class": "SHORT",
+        "source_rate_hz": 360
+      },
+      {
+        "correct": true,
+        "duration_ms": 102.777778,
+        "expected_class": "LONG",
+        "missing_count": 37,
+        "observed_class": "LONG",
+        "source_rate_hz": 360
+      },
+      {
+        "correct": true,
+        "duration_ms": 97.276265,
+        "expected_class": "SHORT",
+        "missing_count": 25,
+        "observed_class": "SHORT",
+        "source_rate_hz": 257
+      },
+      {
+        "correct": true,
+        "duration_ms": 101.167315,
+        "expected_class": "LONG",
+        "missing_count": 26,
+        "observed_class": "LONG",
+        "source_rate_hz": 257
+      },
+      {
+        "correct": true,
+        "duration_ms": 100.0,
+        "expected_class": "SHORT",
+        "missing_count": 10,
+        "observed_class": "SHORT",
+        "source_rate_hz": 100
+      },
+      {
+        "correct": true,
+        "duration_ms": 110.0,
+        "expected_class": "LONG",
+        "missing_count": 11,
+        "observed_class": "LONG",
+        "source_rate_hz": 100
+      },
+      {
+        "correct": true,
+        "duration_ms": 96.0,
+        "expected_class": "SHORT",
+        "missing_count": 12,
+        "observed_class": "SHORT",
+        "source_rate_hz": 125
+      },
+      {
+        "correct": true,
+        "duration_ms": 104.0,
+        "expected_class": "LONG",
+        "missing_count": 13,
+        "observed_class": "LONG",
+        "source_rate_hz": 125
+      }
+    ],
+    "status": "PASS"
+  },
+  "cross_chunk_equivalence": "PASS",
+  "future_append_status": "PASS",
+  "gap_policy_id": "GAP_POLICY_V1",
+  "hardware_validation_scope": {
+    "real_device_evidence": false,
+    "software_policy_only": true
+  },
+  "long_gap": {
+    "fresh_segment_equivalence": true,
+    "no_fill": true,
+    "segment_break": true,
+    "status": "PASS",
+    "unusable_spanning_requirement": true
+  },
+  "multiple_gap_status": "PASS",
+  "nonmonotonic_rejection": "PASS",
+  "overall_status": "PASS",
+  "short_gap": {
+    "exact_zoh": true,
+    "fill_mask": true,
+    "no_segment_break": true,
+    "post_gap_independence": true,
+    "status": "PASS"
+  },
+  "task_id": "T012"
+}

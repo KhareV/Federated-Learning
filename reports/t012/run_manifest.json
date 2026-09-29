@@ -1,0 +1,90 @@
+{
+  "config_path": "configs/base.yaml",
+  "config_sha256": "a62cb51603849088d9aa716f2b19a3bf1ebe50553ef1ecdfab06d2ab77c506c2",
+  "created_at_utc": "2026-09-29T09:42:46.286166Z",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
+  "git_commit": "e6681f3f85f35261ac2f3cff3e44996815ce544e",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "preprocessing/gaps.py",
+      "sha256": "ae97a023b348fb7d6f89f90b15d8a1eacc91e18637b028bdc27d90f286b97830"
+    },
+    {
+      "path": "preprocessing/filters.py",
+      "sha256": "50f39ea7ecb90fb7607f4c207af7b43bb5871b32aa9d706e7eaac23c5dea5bb6"
+    },
+    {
+      "path": "preprocessing/ecg.py",
+      "sha256": "bac52a00b9b4412e3799482086cec77ff56d59e679bc48ab1cd8672b786a8849"
+    },
+    {
+      "path": "preprocessing/ppg.py",
+      "sha256": "3c38d5ce8d5a9cb39ab6e9dda67aaf281855a25dc2b7d49a657138f571e22796"
+    },
+    {
+      "path": "scripts/design_filters_t012.py",
+      "sha256": "34c745a584be51f9eec901f1bec0502cafaf98c8737ab447d2226ab277e1105e"
+    },
+    {
+      "path": "scripts/run_filter_causality_t012.py",
+      "sha256": "4f3bb26a511cae7c2907409e822883ff4745d22d44256c9eee03ea93f86086b5"
+    },
+    {
+      "path": "scripts/run_gap_policy_tests_t012.py",
+      "sha256": "ea5c272bc5b6f294c6ef8a87a404dd10b4e4b08e80a912776fd8d177479ef3ad"
+    },
+    {
+      "path": "manifests/splits/MITDB_SPLIT_V1.lock.json",
+      "sha256": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22"
+    },
+    {
+      "path": "preprocessing/resample.py",
+      "sha256": "1aeae9a4833ceed4f46bcc72fc23bc4fb933c195a4b09e05010bb2f22c56f5a9"
+    },
+    {
+      "path": "reports/preprocessing/resampler_causality.json",
+      "sha256": "8200257684f9b503456111a4add0e8017a9fdcea2439899a5033816faa8bbc52"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Causal 4th-order Butterworth SOS bandpass filters (ECG 0.5-40Hz@250Hz, PPG 0.5-8Hz@100Hz) and GAP_POLICY_V1 (exact 100ms short/long-gap classification, causal last-value ZOH short-gap fill, no-fill long-gap segment reset). Integration pipeline enforces the locked order: source -> GAP_POLICY_V1 -> validated T011 resampler -> ECG filter. F05 split freeze verified unchanged before and after; T011 resampler coefficients/behavior unmodified and its full test suite still passes. G6 remains open and F06 remains NOT_FROZEN -- T013 still owns real windows, quality, and the real-window leakage audit.",
+  "output_artifacts": [
+    {
+      "path": "configs/preproc_v1.yaml",
+      "sha256": "a9bf07d1bae8ea31cf2a5fb1d566b60537699481035105b1fa2570788050d431"
+    },
+    {
+      "path": "preprocessing/coefficients/manifest.json",
+      "sha256": "c3f247aea62527ab14a5aee47446f4d908f53f6cf857d86897db2be1dde725f8"
+    },
+    {
+      "path": "preprocessing/coefficients/PREPROC_V1_ECG_FILTER_V1.npy",
+      "sha256": "0ec392ef16c73fb3b2309351252479ba6395c779a28a075c70b829f270732e95"
+    },
+    {
+      "path": "preprocessing/coefficients/PREPROC_V1_PPG_FILTER_V1.npy",
+      "sha256": "96bf49f0d0403077187f4723824f3dea8e456681e5b80de7ec0fe0f5f6adaa36"
+    },
+    {
+      "path": "reports/preprocessing/filter_causality.json",
+      "sha256": "b4556fd8a1eb2adc3cbfaa21515d79c141208570b00c13955e0f61fd1883840f"
+    },
+    {
+      "path": "reports/preprocessing/gap_tests.json",
+      "sha256": "f9198e771b3dd8bb7e7823f6e20ec6396d05a7feec90e5964b8e5c67dc21adb1"
+    },
+    {
+      "path": "reports/t012/preproc_component_status.json",
+      "sha256": "13b233598f060f494670d28f98bbf16df527bd1e2252dc14b1882ded050b0de7"
+    }
+  ],
+  "phase_id": "T012",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T012-CAUSAL-FILTERS-AND-GAP-POLICY-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T012"
+}

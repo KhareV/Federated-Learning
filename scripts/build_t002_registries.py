@@ -137,6 +137,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T009": "PASS",
             "T010": "PASS",
             "T011": "PASS",
+            "T012": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -150,6 +151,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T009": "ce8375304d6e8a82dfc105c0d2d555782d330e85",
             "T010": "df22ee334a873a1489bc944b0c39bf5dcbeed4a7",
             "T011": "11a824f2aa1f2d1598cb26db798cc5d9185925c1",
+            "T012": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
@@ -163,6 +165,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T009": "reports/t009/split_generation.json",
             "T010": "reports/splits/split_audit.json",
             "T011": "reports/preprocessing/resampler_causality.json",
+            "T012": "reports/t012/preproc_component_status.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -285,6 +288,28 @@ TASK_NOTES_OVERRIDE = {
         "MITDB_SPLIT_V1.csv). No GAP_POLICY_V1, no physiological bandpass filtering, no real "
         "windows, no normalization, no model training. G6 remains open -- T012/T013 still "
         "required."
+    ),
+    "T012": (
+        "Canonical execution-plan packet; normalized prerequisite IDs follow Sections 4-5 "
+        "where the packet uses a cross-reference. Causal 4th-order Butterworth SOS bandpass "
+        "filters (preprocessing/filters.py + preprocessing/ecg.py + preprocessing/ppg.py): "
+        "ECG PREPROC_V1_ECG_FILTER_V1 (0.5-40Hz, fs=250Hz) and PPG PREPROC_V1_PPG_FILTER_V1 "
+        "(0.5-8Hz, fs=100Hz), both stable-pole SOS, committed/hash-verified, matching a "
+        "one-shot sosfilt reference and invariant to future-appended input and to arbitrary "
+        "chunking to exact float64 tolerance; independent red/IR PPG channel state. "
+        "GAP_POLICY_V1 (preprocessing/gaps.py): exact integer 100ms short/long "
+        "classification, causal last-valid-value ZOH short-gap fill (provably independent "
+        "of the post-gap sample), no-fill long-gap segment break with resampler/filter "
+        "reset and UNUSABLE-spanning provenance for T013. Integration pipeline "
+        "(preprocessing/ecg.py::ECGPreprocessingPipeline) enforces the locked order source "
+        "-> GAP_POLICY_V1 -> validated T011 resampler -> ECG filter; feeds the resampler "
+        "segment-local indices after a reset (a latent T011 nonzero-origin readiness defect "
+        "was found and avoided at the integration layer, not by editing T011's validated "
+        "resample.py) while preserving true global source indices as separate provenance. "
+        "No resample/resample_poly/filtfilt/sosfiltfilt in production code. F05 split "
+        "freeze and T011 resampler behavior/coefficients verified unchanged. No real "
+        "windows, quality classification, normalization, or model code. G6 remains open, "
+        "F06 remains NOT_FROZEN -- T013 still required."
     ),
 }
 

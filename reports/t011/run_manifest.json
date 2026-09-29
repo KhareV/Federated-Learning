@@ -1,10 +1,10 @@
 {
   "config_path": "configs/base.yaml",
-  "config_sha256": "ef82049e25d7821bf8a15cfa4416914ee43e3b5473515eca0a04559ec99f120c",
-  "created_at_utc": "2026-09-28T22:27:06.153770Z",
+  "config_sha256": "a62cb51603849088d9aa716f2b19a3bf1ebe50553ef1ecdfab06d2ab77c506c2",
+  "created_at_utc": "2026-09-29T09:42:43.878841Z",
   "dependency_snapshot_path": "reports/t001/dependencies.txt",
   "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
-  "git_commit": "8f9f4aa81ee1a42fcd87e99b7151695186f33e62",
+  "git_commit": "e6681f3f85f35261ac2f3cff3e44996815ce544e",
   "git_dirty": true,
   "input_artifacts": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "path": "scripts/design_resampler_t011.py",
-      "sha256": "efcf5e2357279bc2dcbe2169e6328a819003ce984b89b03688be68ef76126dd6"
+      "sha256": "823b631264828d38951cf73d149060b139490659a993196f91b24373f3d86be3"
     },
     {
       "path": "scripts/run_resampler_causality_t011.py",
@@ -29,11 +29,11 @@
   "output_artifacts": [
     {
       "path": "configs/preproc_v1.yaml",
-      "sha256": "0fba0391dbd784830ba32f82834acaf419317948cfc6b1c94bda871c8790b8e5"
+      "sha256": "a9bf07d1bae8ea31cf2a5fb1d566b60537699481035105b1fa2570788050d431"
     },
     {
       "path": "preprocessing/coefficients/manifest.json",
-      "sha256": "d09def2f2ce9bbed5543b4191807f04689c2717faa09d63d07fc3433f05f9eb3"
+      "sha256": "c3f247aea62527ab14a5aee47446f4d908f53f6cf857d86897db2be1dde725f8"
     },
     {
       "path": "preprocessing/coefficients/MITDB_360_TO_250_V1.npy",

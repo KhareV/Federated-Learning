@@ -34,7 +34,7 @@ Section 22 and the dependency/critical-path sections of the execution plan. The 
 `manifests/task_packets_v1.json` snapshot is bound to the execution-plan SHA-256 and is the source
 used by the task-registry generator and semantic tests.
 
-`CURRENT_PHASE = T011`
+`CURRENT_PHASE = T012`
 
 The machine-checkable T002 planning baseline is `manifests/requirements_v22.csv`. Its decimal
 sub-requirements preserve R01-R28, while CB01-CB06 identify cross-cutting claim boundaries. Any

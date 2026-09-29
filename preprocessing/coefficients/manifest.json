@@ -38,6 +38,62 @@
     }
   },
   "design_id": "FIR_KAISER_POLYPHASE_V1",
+  "filters": {
+    "entries": {
+      "PREPROC_V1_ECG_FILTER_V1": {
+        "band_hz": [
+          0.5,
+          40.0
+        ],
+        "butterworth_prototype_order": 4,
+        "coefficient_path": "preprocessing/coefficients/PREPROC_V1_ECG_FILTER_V1.npy",
+        "coefficient_sha256": "0ec392ef16c73fb3b2309351252479ba6395c779a28a075c70b829f270732e95",
+        "design_api": "scipy.signal.butter(..., output=\"sos\")",
+        "dtype": "float64",
+        "filter_type": "butterworth_bandpass",
+        "form": "SOS",
+        "fs_hz": 250.0,
+        "implementation": "STATEFUL_CAUSAL_SOSFILT",
+        "max_pole_magnitude": 0.9952808951503469,
+        "signal": "ECG",
+        "sos_sections": 4,
+        "sos_shape": [
+          4,
+          6
+        ],
+        "stable": true,
+        "state_initialization": "ZERO_SOS_STATE_AT_SEGMENT_START",
+        "total_order": 8
+      },
+      "PREPROC_V1_PPG_FILTER_V1": {
+        "band_hz": [
+          0.5,
+          8.0
+        ],
+        "butterworth_prototype_order": 4,
+        "coefficient_path": "preprocessing/coefficients/PREPROC_V1_PPG_FILTER_V1.npy",
+        "coefficient_sha256": "96bf49f0d0403077187f4723824f3dea8e456681e5b80de7ec0fe0f5f6adaa36",
+        "design_api": "scipy.signal.butter(..., output=\"sos\")",
+        "dtype": "float64",
+        "filter_type": "butterworth_bandpass",
+        "form": "SOS",
+        "fs_hz": 100.0,
+        "implementation": "STATEFUL_CAUSAL_SOSFILT",
+        "max_pole_magnitude": 0.989127194953628,
+        "signal": "PPG",
+        "sos_sections": 4,
+        "sos_shape": [
+          4,
+          6
+        ],
+        "stable": true,
+        "state_initialization": "ZERO_SOS_STATE_AT_SEGMENT_START",
+        "total_order": 8
+      }
+    },
+    "numpy_version": "2.4.6",
+    "scipy_version": "1.17.1"
+  },
   "numpy_version": "2.4.6",
   "preproc_id": "PREPROC_V1",
   "resampler_id": "PREPROC_V1_RESAMPLER_V1",

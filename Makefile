@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets
@@ -312,3 +312,54 @@ phase11:
 	$(MAKE) resampler-coefficients PYTHON=$(PYTHON)
 	$(MAKE) resampler-causality PYTHON=$(PYTHON)
 	$(MAKE) t011-evidence PYTHON=$(PYTHON)
+
+# Offline. Deterministically (re)generates the committed ECG/PPG causal SOS filter packages.
+filter-coefficients:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/design_filters_t012.py
+
+# Offline, synthetic signals only. Verifies F05 before/after; future-append/chunk-equivalence/
+# impulse-causality/one-shot-reference/reset/pole-stability/forbidden-API proofs.
+filter-causality:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_filter_causality_t012.py
+
+# Offline, synthetic/known-rate source-index arithmetic only (software policy, not real
+# hardware evidence). Boundary/short-gap-ZOH/long-gap-reset/future-append/determinism proofs.
+gap-policy-tests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_gap_policy_tests_t012.py
+
+t012-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t012_evidence.py
+
+# phase12 does not invoke any acquire-* target: normal local validation must not redownload
+# datasets on every run. Run the acquire-* targets (phase6/phase7) once before `make phase12`.
+phase12:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) t002-evidence PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t003-evidence PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	$(MAKE) t004-evidence PYTHON=$(PYTHON)
+	$(MAKE) t005-smoke PYTHON=$(PYTHON)
+	$(MAKE) t005-evidence PYTHON=$(PYTHON)
+	$(MAKE) validate-mitdb PYTHON=$(PYTHON)
+	$(MAKE) t006-evidence PYTHON=$(PYTHON)
+	$(MAKE) validate-incart PYTHON=$(PYTHON)
+	$(MAKE) validate-nstdb PYTHON=$(PYTHON)
+	$(MAKE) validate-bidmc PYTHON=$(PYTHON)
+	$(MAKE) dataset-role-audit PYTHON=$(PYTHON)
+	$(MAKE) t007-evidence PYTHON=$(PYTHON)
+	$(MAKE) annotation-census PYTHON=$(PYTHON)
+	$(MAKE) t008-evidence PYTHON=$(PYTHON)
+	$(MAKE) mitdb-split PYTHON=$(PYTHON)
+	$(MAKE) t009-evidence PYTHON=$(PYTHON)
+	$(MAKE) leakage-audit PYTHON=$(PYTHON)
+	$(MAKE) t010-evidence PYTHON=$(PYTHON)
+	$(MAKE) resampler-coefficients PYTHON=$(PYTHON)
+	$(MAKE) resampler-causality PYTHON=$(PYTHON)
+	$(MAKE) t011-evidence PYTHON=$(PYTHON)
+	$(MAKE) filter-coefficients PYTHON=$(PYTHON)
+	$(MAKE) filter-causality PYTHON=$(PYTHON)
+	$(MAKE) gap-policy-tests PYTHON=$(PYTHON)
+	$(MAKE) t012-evidence PYTHON=$(PYTHON)

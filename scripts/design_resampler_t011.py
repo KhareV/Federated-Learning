@@ -105,6 +105,12 @@ def build_manifest() -> dict[str, Any]:
 def main() -> None:
     manifest = build_manifest()
     output_path = COEFFICIENT_DIR / "manifest.json"
+    if output_path.exists():
+        # Preserve sibling top-level keys this script does not own (e.g. T012's "filters"
+        # entry) -- this script only ever overwrites the resampler-owned keys it just built.
+        existing = json.loads(output_path.read_text(encoding="utf-8"))
+        for key, value in existing.items():
+            manifest.setdefault(key, value)
     temporary = output_path.with_suffix(f"{output_path.suffix}.tmp")
     temporary.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     temporary.replace(output_path)
