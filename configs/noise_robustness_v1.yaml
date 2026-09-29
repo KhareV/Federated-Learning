@@ -1,0 +1,74 @@
+protocol_id: NOISE_ROBUSTNESS_V1
+spec_version: "2.2"
+status: METHOD_FROZEN_BEFORE_RESULTS_T019
+
+dataset:
+  id: NSTDB
+  version: 1.0.0
+  raw_root: data/raw/nstdb/1.0.0
+  role: CONTROLLED_NOISE_ROBUSTNESS_ONLY
+
+stress_records:
+  base_sources: ["118", "119"]
+  snr_db_descending: [24, 18, 12, 6, 0, -6]
+  records:
+    "118": [118e24, 118e18, 118e12, 118e06, 118e00, 118e_6]
+    "119": [119e24, 119e18, 119e12, 119e06, 119e00, 119e_6]
+
+pure_noise_records:
+  bw: baseline_wander
+  em: electrode_motion
+  ma: muscle_artifact
+  predictive_labels: FORBIDDEN
+  classification_metrics: FORBIDDEN
+
+signal_contract:
+  required_channel_name: MLII
+  channel_fallback: NONE
+  source_rate_hz: 360
+  preproc_id: PREPROC_V1
+  map_id: AAMI_SVF_MAP_V1
+  target_id: AAMI_SVF_WINDOW_V1
+  windowing_id: WINDOWING_V1
+  model_id: MODEL_V1
+  calibration_id: CAL_V1
+
+pairing:
+  identity: BASE_RECORD_PLUS_EXACT_SOURCE_RIGHT_EDGE_INDEX_V1
+  required_conditions_per_pair: 6
+  require_annotation_identity_within_base: true
+  require_label_identity: true
+  primary_population: LABEL_ELIGIBLE_INTERSECTION_ALL_SIX_SNR
+
+analysis:
+  mode: OFFLINE_MODEL_STRESS_ONLY
+  primary_metric: POOLED_AUPRC
+  reference_snr_db: 24
+  reference_semantics: HIGHEST_SNR_OFFICIAL_NSTDB_STRESS_CONDITION_NOT_CLEAN
+  degradation: AUPRC_AT_SNR_MINUS_AUPRC_AT_24DB
+  secondary_metrics: [AUROC, pooled_F1, precision, sensitivity, specificity]
+  threshold_source: CAL_V1
+  threshold_comparator: ">="
+  calibration_transfer_semantics: MITBIH_SOURCE_DOMAIN_CALIBRATION_TRANSFERRED_UNCHANGED
+  confidence_intervals: NONE
+  quality_population: SAME_FIXED_PAIRED_POPULATION_REPORTED_SEPARATELY
+  runtime_quality_gate_applied_to_primary_curve: false
+
+inference:
+  device: cpu
+  batch_size: 64
+  model_mode: eval
+  augmentation: NONE
+
+prohibitions:
+  tuning: true
+  training: true
+  denoising_adaptation: true
+  internal_test_access: true
+  incart_access: true
+  nstdb_calibration_claim: true
+
+claim_boundary: >-
+  Controlled official NSTDB noise-stress sensitivity of frozen MODEL_V1 across declared
+  SNR conditions only; not clinical, wearable, all-noise, or population-generalization evidence.
+
