@@ -1,0 +1,15 @@
+{
+  "freeze_id": "F07",
+  "gate_id": "G7",
+  "lock_path": "manifests/baselines/BASELINE_V1.lock.json",
+  "lock_sha256": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+  "overall_status": "PASS",
+  "tamper_test_status": "PASS_TEST_SUITE",
+  "task_id": "T014",
+  "verification": {
+    "bound_artifact_count": 15,
+    "freeze_id": "F07",
+    "lock_path": "manifests/baselines/BASELINE_V1.lock.json",
+    "status": "PASS"
+  }
+}

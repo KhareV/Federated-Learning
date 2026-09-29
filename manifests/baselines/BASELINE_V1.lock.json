@@ -1,0 +1,50 @@
+{
+  "artifact_sha256": {
+    "artifacts/baselines/BASELINE_V1/feature_transform.joblib": "5c959f007ad0d773dca487b4ead79a7c0127f70374a9e9b14952097828071341",
+    "artifacts/baselines/BASELINE_V1/logistic.joblib": "08519b50f624b8afd5dffebe154a97013323715cd3fe04f2c9c49bcb2be4a0ee",
+    "artifacts/baselines/BASELINE_V1/majority.json": "f152d856d41bcd6a8454367b7c35e133c50d8cd5dbaaeaca05ec414d8f7b3d88",
+    "artifacts/baselines/BASELINE_V1/random_forest.joblib": "2534f43bd6aca3c828ba381553c7fd345795d749d97faa5e818a3371e1e2c35d",
+    "configs/baseline_v1.yaml": "176c07f810125ffecf13d1d3cc0cadd98b17f4d9cfda7bc248260d34888503cf",
+    "features/ecg.py": "400d29c9824b2f64d0a7a5024ba805b06a77a1a426ef280457e005e8996fdb70",
+    "manifests/features/BASELINE_FEATURES_V1.schema.json": "032bc98b0a6153e373691c3012ce0ca4024a8e9a0071cc7da616d20b663acb55",
+    "manifests/features/MITDB_BASELINE_FEATURES_V1.csv": "6b1ab4f282ebe1bb0793ad087cce956d1018adcf436aa88e5b3d3437725d33c5",
+    "models/baselines.py": "592a681c878f9985df61d4cb1d253c970450790b6f6034a1ad4a20b28a738426",
+    "reports/baselines/baseline_metrics.csv": "a32cd61480aade3b162e9dfc49f980c293835edd6910192b4f5eff75120e8520",
+    "reports/baselines/baseline_report.json": "f9b33023e8f9f3f5fc1b3678b4e8158a424d0a3ddfa7f660dfa5d352a1722e72",
+    "reports/t014/feature_audit.json": "3e81668b73daf4c924c66505999f42470e7c0f6ad09f008c18b186fe7d0dd44c",
+    "reports/t014/fit_scope_audit.json": "3795e509a4bd6d811cbadbb3673b59489a3f42e31d0d9eb6bc5a49560453952c",
+    "reports/t014/reproducibility.json": "d7c2e9987e036add047b2467583f4bc65dbb3eeac4c8934a51b02771838ac0a4",
+    "training/train_baselines.py": "b1d97a9305f9506c913ea968813ae8003c4c12198dfac8cfb4db8ca3a8e347ce"
+  },
+  "baseline_id": "BASELINE_V1",
+  "change_control": "Feature schema/order, detector, train-fit transforms, majority policy, or fixed LR/RF configuration changes require a versioned Class C baseline revision.",
+  "detector_config_sha256": "442b2ed46564ed5b254b3f6bdb027642c255f045376ffe91ab2b767a8b296994",
+  "detector_id": "SCIPY_FIND_PEAKS_ABS_MEDIAN_V1",
+  "feature_schema_sha256": "a81c9aadc88cd65b9b4e937e2b5dd90bb8210ffbbc839dc5a8172d9104425718",
+  "feature_set_id": "BASELINE_FEATURES_V1",
+  "fit_partition": "TRAIN",
+  "forbidden_access": [
+    "CALIBRATION",
+    "INTERNAL_TEST",
+    "INCART",
+    "NSTDB",
+    "BIDMC"
+  ],
+  "freeze_id": "F07",
+  "frozen_by_task": "T014",
+  "library_versions": {
+    "joblib": "1.6.0",
+    "numpy": "2.4.6",
+    "scikit_learn": "1.9.1",
+    "scipy": "1.17.1"
+  },
+  "seed": 20260927,
+  "status": "FROZEN",
+  "upstream_frozen_sha256": {
+    "manifests/labels/AAMI_SVF_MAP_V1.yaml": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.lock.json": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  },
+  "validation_role": "EVALUATE_ONLY"
+}

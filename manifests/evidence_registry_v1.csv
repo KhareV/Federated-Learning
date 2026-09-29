@@ -8,7 +8,7 @@ EV006,R26.1;DS01,T006;T007,G2;G3,reports/data/validation_report.json,JSON,datase
 EV007,R01;R01.1,T008,G4,reports/labels/label_audit.json,JSON,label mapping tests,PLANNED,,
 EV008,R04;R04.1;R04.2,T009;T010,G5,reports/splits/split_audit.json,JSON,split audit command,PLANNED,,
 EV009,R02;R05;R05.1;R06;SQ01,T010;T011;T012;T013,G6,reports/preprocessing/causality_tests.json,JSON,preprocessing test suite,GENERATED,ed8edf4ecb8b7f16b53c0e0820d460cba9d4e668182f7f053da9ffc63a1f4020,
-EV010,R07,T014,G7,reports/baselines/baseline_report.json,JSON,baseline experiment E01,PLANNED,,
+EV010,R07,T014,G7,reports/baselines/baseline_report.json,JSON,training/train_baselines.py,GENERATED,f9b33023e8f9f3f5fc1b3678b4e8158a424d0a3ddfa7f660dfa5d352a1722e72,Hash retained in reports/t014/artifact_hashes.json.
 EV011,R08;R08.1,T015;T016,G8,checkpoints/MODEL_V1.manifest.json,JSON,centralized training E02,PLANNED,,
 EV012,R13;R13.1,T021,G9,reports/bidmc_multimodal_engineering/report.json,JSON,experiment E07,PLANNED,,
 EV013,R14;R14.1;R15;R15.1;CB05,T022;T023,G9,reports/quality_aware_alert_robustness/report.json,JSON,experiment E08,PLANNED,,

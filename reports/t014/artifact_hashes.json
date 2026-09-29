@@ -1,0 +1,40 @@
+{
+  "F07_verification": {
+    "bound_artifact_count": 15,
+    "freeze_id": "F07",
+    "lock_path": "manifests/baselines/BASELINE_V1.lock.json",
+    "status": "PASS"
+  },
+  "algorithm": "sha256",
+  "artifacts": {
+    "artifacts/baselines/BASELINE_V1/feature_transform.joblib": "5c959f007ad0d773dca487b4ead79a7c0127f70374a9e9b14952097828071341",
+    "artifacts/baselines/BASELINE_V1/logistic.joblib": "08519b50f624b8afd5dffebe154a97013323715cd3fe04f2c9c49bcb2be4a0ee",
+    "artifacts/baselines/BASELINE_V1/majority.json": "f152d856d41bcd6a8454367b7c35e133c50d8cd5dbaaeaca05ec414d8f7b3d88",
+    "artifacts/baselines/BASELINE_V1/random_forest.joblib": "2534f43bd6aca3c828ba381553c7fd345795d749d97faa5e818a3371e1e2c35d",
+    "configs/baseline_v1.yaml": "176c07f810125ffecf13d1d3cc0cadd98b17f4d9cfda7bc248260d34888503cf",
+    "features/ecg.py": "400d29c9824b2f64d0a7a5024ba805b06a77a1a426ef280457e005e8996fdb70",
+    "manifests/baselines/BASELINE_V1.lock.json": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+    "manifests/features/BASELINE_FEATURES_V1.schema.json": "032bc98b0a6153e373691c3012ce0ca4024a8e9a0071cc7da616d20b663acb55",
+    "manifests/features/MITDB_BASELINE_FEATURES_V1.csv": "6b1ab4f282ebe1bb0793ad087cce956d1018adcf436aa88e5b3d3437725d33c5",
+    "models/baselines.py": "592a681c878f9985df61d4cb1d253c970450790b6f6034a1ad4a20b28a738426",
+    "reports/baselines/baseline_metrics.csv": "a32cd61480aade3b162e9dfc49f980c293835edd6910192b4f5eff75120e8520",
+    "reports/baselines/baseline_report.json": "f9b33023e8f9f3f5fc1b3678b4e8158a424d0a3ddfa7f660dfa5d352a1722e72",
+    "reports/t014/baseline_freeze_audit.json": "c2ff94f13ca44cb8debf8e032446072ec00bb399d8124894790fb1f6ad4402d2",
+    "reports/t014/feature_audit.json": "3e81668b73daf4c924c66505999f42470e7c0f6ad09f008c18b186fe7d0dd44c",
+    "reports/t014/fit_scope_audit.json": "3795e509a4bd6d811cbadbb3673b59489a3f42e31d0d9eb6bc5a49560453952c",
+    "reports/t014/reproducibility.json": "d7c2e9987e036add047b2467583f4bc65dbb3eeac4c8934a51b02771838ac0a4",
+    "reports/t014/run_manifest.json": "25d74ed6389792f12f512d53d587790339a826b6c154f4ec6704f36b9a78302f",
+    "training/train_baselines.py": "b1d97a9305f9506c913ea968813ae8003c4c12198dfac8cfb4db8ca3a8e347ce"
+  },
+  "feature_cache_location": "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1",
+  "feature_cache_policy": "GENERATED_GITIGNORED_MANIFEST_COMMITTED",
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest",
+  "upstream_frozen_hashes": {
+    "manifests/labels/AAMI_SVF_MAP_V1.yaml": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.lock.json": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+    "manifests/windows/MITDB_WINDOWS_V1.cache.csv": "35610daa9e0611cca9976664af0e37492011637e085ba866806f378092c6fe4d",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  }
+}

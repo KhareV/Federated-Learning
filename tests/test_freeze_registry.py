@@ -25,7 +25,7 @@ def test_freeze_registry_covers_required_decisions_without_premature_freezes() -
     assert len(rows) == 15
     assert rows[0]["freeze_id"] == "F01"
     frozen = {row["freeze_id"] for row in rows if row["current_status"] == "FROZEN"}
-    assert frozen == {"F01", "F04", "F05", "F06"}
+    assert frozen == {"F01", "F04", "F05", "F06", "F07"}
     assert all(
         row["current_status"] == "NOT_FROZEN" for row in rows if row["freeze_id"] not in frozen
     )

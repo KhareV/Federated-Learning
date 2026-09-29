@@ -1,0 +1,19 @@
+{
+  "baseline_id": "BASELINE_V1",
+  "checks": {
+    "LR_coefficients_repeat_identical": true,
+    "LR_predictions_repeat_identical": true,
+    "RF_predictions_repeat_identical": true,
+    "feature_extraction_deterministic": true,
+    "imputer_statistics_repeat_identical": true,
+    "majority_deterministic": true,
+    "metric_report_repeat_identical": true,
+    "scaler_statistics_repeat_identical": true
+  },
+  "feature_cache_root": "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1",
+  "feature_set_id": "BASELINE_FEATURES_V1",
+  "overall_status": "PASS",
+  "semantic_metrics_sha256": "b6e702616ffc3f51ccea02f19a177c1f6eeb30570158d7bfad74d4c08fd7a5a1",
+  "serialization_note": "Model artifact bytes are frozen once; reproducibility is established by exact parameters, probabilities, and metrics because joblib metadata need not be portable.",
+  "task_id": "T014"
+}

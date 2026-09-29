@@ -1,0 +1,35 @@
+{
+  "LR_fit_partitions": [
+    "TRAIN"
+  ],
+  "RF_fit_partitions": [
+    "TRAIN"
+  ],
+  "VALIDATION": "EVALUATE_ONLY",
+  "access_counts": {
+    "BIDMC": 0,
+    "CALIBRATION": 0,
+    "INCART": 0,
+    "INTERNAL_TEST": 0,
+    "NSTDB": 0,
+    "TRAIN": 1,
+    "VALIDATION": 1,
+    "WEARABLE_SIM_V1": 0
+  },
+  "baseline_config_sha_after_validation": "176c07f810125ffecf13d1d3cc0cadd98b17f4d9cfda7bc248260d34888503cf",
+  "baseline_config_sha_before_validation": "176c07f810125ffecf13d1d3cc0cadd98b17f4d9cfda7bc248260d34888503cf",
+  "candidate_artifact_hashes_before_validation": {
+    "feature_transform.joblib": "5c959f007ad0d773dca487b4ead79a7c0127f70374a9e9b14952097828071341",
+    "logistic.joblib": "08519b50f624b8afd5dffebe154a97013323715cd3fe04f2c9c49bcb2be4a0ee",
+    "majority.json": "f152d856d41bcd6a8454367b7c35e133c50d8cd5dbaaeaca05ec414d8f7b3d88",
+    "random_forest.joblib": "2534f43bd6aca3c828ba381553c7fd345795d749d97faa5e818a3371e1e2c35d"
+  },
+  "imputer_fit_partitions": [
+    "TRAIN"
+  ],
+  "majority_label_source": "TRAIN_ONLY",
+  "overall_status": "PASS",
+  "scaler_fit_partitions": [
+    "TRAIN"
+  ]
+}

@@ -48,7 +48,8 @@ def test_g1_hardware_block_does_not_prevent_g2_g3_dataset_gates_passing() -> Non
     assert gates["G4"]["status"] == "PASS"
     assert gates["G5"]["status"] == "PASS"
     assert gates["G6"]["status"] == "PASS"
-    assert gates["G7"]["status"] == "NOT_STARTED"
+    assert gates["G7"]["status"] == "PASS"
+    assert gates["G8"]["status"] == "NOT_STARTED"
     assert not any("future gates falsely advanced" in error for error in result["errors"])
 
 
