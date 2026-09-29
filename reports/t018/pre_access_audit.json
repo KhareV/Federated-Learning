@@ -1,0 +1,24 @@
+{
+  "CAL_V1_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+  "F05_verifier": "PASS",
+  "F06_verifier": "PASS",
+  "F07_verifier": "PASS",
+  "F08_verifier": "PASS",
+  "F09_verifier": "PASS",
+  "MODEL_V1_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "bootstrap_tests": "PASS",
+  "evaluation_code_tests": "PASS",
+  "internal_test_consumed": false,
+  "method_artifact_sha256": {
+    "configs/internal_eval_v1.yaml": "66f2028eec5a35224bd197fe01d4df61be993e1b0befa6b6ea8dd6784effc24e",
+    "evaluation/bootstrap.py": "40741425e555855bbc90ae866e9716717aacc45acc2d9b83f7f1bae6e3d5b21c",
+    "evaluation/internal_test.py": "9ccba48ecaec291a97eb0e0214c16353c5a2a75537929e6ab923890f6223fd97",
+    "evaluation/metrics.py": "52c61b533c17c71c229b19ddd20a02f5b2923713aedbe0724ab6d2fda049acb3"
+  },
+  "method_config_sha256": "66f2028eec5a35224bd197fe01d4df61be993e1b0befa6b6ea8dd6784effc24e",
+  "method_frozen_before_access": true,
+  "pre_access_method_commit": "a98676d9e419525437b9ce4be88d2996b11d5e5b",
+  "split_sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+  "status": "PASS",
+  "window_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+}
