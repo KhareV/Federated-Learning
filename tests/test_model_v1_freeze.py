@@ -90,6 +90,7 @@ def test_frozen_config_preserves_t015_scientific_contract() -> None:
         ("config", "MODEL_CONFIG_HASH_MISMATCH"),
         ("vector", "MODEL_TEST_VECTOR_HASH_MISMATCH"),
         ("upstream", "MODEL_UPSTREAM_HASH_MISMATCH"),
+        ("split", "MODEL_UPSTREAM_HASH_MISMATCH"),
     ],
 )
 def test_f08_bound_artifact_tamper_is_detected(
@@ -102,6 +103,7 @@ def test_f08_bound_artifact_tamper_is_detected(
         "config": manifest["frozen_config"]["path"],
         "vector": manifest["test_vector"]["path"],
         "upstream": "manifests/preprocessing/PREPROC_V1.lock.json",
+        "split": "manifests/splits/MITDB_SPLIT_V1.csv",
     }[kind]
     target = tmp_path / relative
     data = bytearray(target.read_bytes())
