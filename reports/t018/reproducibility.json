@@ -1,0 +1,123 @@
+{
+  "ci_summaries_identical": true,
+  "ci_summary_run_1": {
+    "AUPRC": {
+      "ci_lower_95": 0.7397489189893032,
+      "ci_upper_95": 0.9836823990076896,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9088954942908802,
+      "valid_replicates": 2000
+    },
+    "AUROC": {
+      "ci_lower_95": 0.7892690323304643,
+      "ci_upper_95": 0.9815579989261619,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9036154157261423,
+      "valid_replicates": 2000
+    },
+    "patient_macro_F1": {
+      "ci_lower_95": 0.22348565331724915,
+      "ci_upper_95": 0.847592147255366,
+      "invalid_replicates": 0,
+      "point_estimate": 0.5291135930158938,
+      "valid_replicates": 2000
+    },
+    "pooled_F1": {
+      "ci_lower_95": 0.5835388144357843,
+      "ci_upper_95": 0.9331352154531947,
+      "invalid_replicates": 0,
+      "point_estimate": 0.8237529691211402,
+      "valid_replicates": 2000
+    },
+    "precision": {
+      "ci_lower_95": 0.7898686679174484,
+      "ci_upper_95": 1.0,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9135932560590094,
+      "valid_replicates": 2000
+    },
+    "sensitivity": {
+      "ci_lower_95": 0.42926356589147285,
+      "ci_upper_95": 0.9792694965449161,
+      "invalid_replicates": 0,
+      "point_estimate": 0.75,
+      "valid_replicates": 2000
+    },
+    "specificity": {
+      "ci_lower_95": 0.6645962732919255,
+      "ci_upper_95": 1.0,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9180819180819181,
+      "valid_replicates": 2000
+    }
+  },
+  "ci_summary_run_2": {
+    "AUPRC": {
+      "ci_lower_95": 0.7397489189893032,
+      "ci_upper_95": 0.9836823990076896,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9088954942908802,
+      "valid_replicates": 2000
+    },
+    "AUROC": {
+      "ci_lower_95": 0.7892690323304643,
+      "ci_upper_95": 0.9815579989261619,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9036154157261423,
+      "valid_replicates": 2000
+    },
+    "patient_macro_F1": {
+      "ci_lower_95": 0.22348565331724915,
+      "ci_upper_95": 0.847592147255366,
+      "invalid_replicates": 0,
+      "point_estimate": 0.5291135930158938,
+      "valid_replicates": 2000
+    },
+    "pooled_F1": {
+      "ci_lower_95": 0.5835388144357843,
+      "ci_upper_95": 0.9331352154531947,
+      "invalid_replicates": 0,
+      "point_estimate": 0.8237529691211402,
+      "valid_replicates": 2000
+    },
+    "precision": {
+      "ci_lower_95": 0.7898686679174484,
+      "ci_upper_95": 1.0,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9135932560590094,
+      "valid_replicates": 2000
+    },
+    "sensitivity": {
+      "ci_lower_95": 0.42926356589147285,
+      "ci_upper_95": 0.9792694965449161,
+      "invalid_replicates": 0,
+      "point_estimate": 0.75,
+      "valid_replicates": 2000
+    },
+    "specificity": {
+      "ci_lower_95": 0.6645962732919255,
+      "ci_upper_95": 1.0,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9180819180819181,
+      "valid_replicates": 2000
+    }
+  },
+  "draw_matrices_identical": true,
+  "draw_matrix_run_1_sha256": "9f5953e2acd68acb91c08963dfc11a0073600a499d7e1d1406097d5f7b9f0bc3",
+  "draw_matrix_run_2_sha256": "9f5953e2acd68acb91c08963dfc11a0073600a499d7e1d1406097d5f7b9f0bc3",
+  "evaluation_id": "INTERNAL_EVAL_V1",
+  "freeze_verification": {
+    "evaluation_id": "INTERNAL_EVAL_V1",
+    "freeze_id": "F10",
+    "prediction_sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+    "report_sha256": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "status": "PASS"
+  },
+  "model_inference_repeated": false,
+  "overall_status": "PASS",
+  "point_metric_recalculation": "PASS",
+  "prediction_source": "reports/internal_test_predictions.csv",
+  "replicate_table_run_1_sha256": "db2f666fa575f506f0dd47c4fef2f9809344ca64cd96028c465c69dda0da1ce5",
+  "replicate_table_run_2_sha256": "db2f666fa575f506f0dd47c4fef2f9809344ca64cd96028c465c69dda0da1ce5",
+  "replicate_tables_identical": true
+}

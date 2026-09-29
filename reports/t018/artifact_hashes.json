@@ -1,0 +1,58 @@
+{
+  "CI_executed": false,
+  "F08_verification": {
+    "checkpoint_path": "checkpoints/MODEL_V1.pt",
+    "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "freeze_id": "F08",
+    "maximum_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "status": "PASS"
+  },
+  "F09_verification": {
+    "artifact_path": "artifacts/CAL_V1.json",
+    "artifact_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "calibration_id": "CAL_V1",
+    "freeze_id": "F09",
+    "status": "PASS"
+  },
+  "F10_verification": {
+    "evaluation_id": "INTERNAL_EVAL_V1",
+    "freeze_id": "F10",
+    "prediction_sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+    "report_sha256": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "status": "PASS"
+  },
+  "G10_status": "PASS",
+  "MODEL_V1_inference_passes_over_INTERNAL_TEST": 1,
+  "algorithm": "sha256",
+  "artifacts": {
+    "artifacts/internal_test_access_v1.json": "2fc3749b93357d5a3f93a4e8b2ae07ec742f7a78ebb7a238c734e9ae1e878e67",
+    "configs/internal_eval_v1.yaml": "66f2028eec5a35224bd197fe01d4df61be993e1b0befa6b6ea8dd6784effc24e",
+    "evaluation/bootstrap.py": "40741425e555855bbc90ae866e9716717aacc45acc2d9b83f7f1bae6e3d5b21c",
+    "evaluation/internal_test.py": "9ccba48ecaec291a97eb0e0214c16353c5a2a75537929e6ab923890f6223fd97",
+    "evaluation/metrics.py": "52c61b533c17c71c229b19ddd20a02f5b2923713aedbe0724ab6d2fda049acb3",
+    "reports/internal_test.json": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "reports/internal_test_metrics.csv": "86bdca5d406eac6bdd01444daa977a7799b828aee2666e1e847238cbf500ec7d",
+    "reports/internal_test_predictions.csv": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+    "reports/t018/bootstrap_draws.npz": "9f5953e2acd68acb91c08963dfc11a0073600a499d7e1d1406097d5f7b9f0bc3",
+    "reports/t018/bootstrap_replicates.csv": "db2f666fa575f506f0dd47c4fef2f9809344ca64cd96028c465c69dda0da1ce5",
+    "reports/t018/bootstrap_summary.json": "98bf355130e627e67387f2e4b83c03239554a9869ea4d3dd0c7fd2bd55298ac7",
+    "reports/t018/one_shot_access_audit.json": "1fc8ad8979a9dc328a0859f17d32ab4a7138530871bd7105d5a7df03d9b30f1c",
+    "reports/t018/pre_access_audit.json": "7649727b8de7bbd63f5b61ae11a7ea5d8a6650d91e7da53b315b33de63027785",
+    "reports/t018/reproducibility.json": "5ab73faa70d209016fcc5de81d95ac81dc9941c609d1d29526f58f7e815b52d8",
+    "reports/t018/run_manifest.json": "38e6d5b331410a72c4039e98e42794813a55d3ff994d1585c5d5179d36de6ba0",
+    "scripts/generate_t018_evidence.py": "761bed68e25dc8f52f8d7fcca95c760356edaf2712e820e1ed02d8a2166740b1",
+    "scripts/verify_internal_test_reproducibility_t018.py": "281bca4418d621684e88776d978b7a22f2f75d1a747759946a23274cc50a318c"
+  },
+  "bootstrap_replicates": 2000,
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest",
+  "upstream_frozen_hashes": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "checkpoints/MODEL_V1.manifest.json": "4d65f925d82f4592624927e9a3eec5518d6674bc6042a2601ff3f2783c264619",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.csv": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  }
+}

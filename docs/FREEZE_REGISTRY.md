@@ -16,8 +16,8 @@ the human-readable view; discrepancies are errors and must be resolved through c
 | preprocessing | PREPROC_V1/GAP_POLICY_V1 | FROZEN | T013/G6 | `manifests/preprocessing/PREPROC_V1.lock.json` | C | features, models, evaluation | Includes causal transforms, window/timestamp conventions, QUALITY_V1, and per-window z-score contract. |
 | baseline configuration | BASELINE_V1 / BASELINE_FEATURES_V1 | FROZEN | T014/G7 | `manifests/baselines/BASELINE_V1.lock.json` | C | model comparisons | Waveform-only feature schema, TRAIN-only transforms, majority/LR/RF artifacts, and fixed validation reporting are locked. |
 | MODEL_V1 | MODEL_V1 | FROZEN | T016/G8 | `checkpoints/MODEL_V1.manifest.json` | C | calibration, evaluation, FL, deployment | Exact seed-20260927 candidate, frozen config, and synthetic fixed-vector package are hash-bound; changes require MODEL_V2 or controlled Class-C change. |
-| calibration | CAL_V1 | FROZEN | T017 | `artifacts/CAL_V1.json` | C | internal/noise/external evaluation, alerts, API/dashboard | MIT-BIH source-domain temperature and pooled-F1 threshold; small-patient-sample uncertainty. G10 remains open pending T018. |
-| internal evaluation | — | NOT_FROZEN | — | — | C | reporting | Deferred. |
+| calibration | CAL_V1 | FROZEN | T017 | `artifacts/CAL_V1.json` | C | internal/noise/external evaluation, alerts, API/dashboard | MIT-BIH source-domain temperature and pooled-F1 threshold; small-patient-sample uncertainty. |
+| internal evaluation | INTERNAL_TEST_V1 | FROZEN | T018/G10 | `reports/internal_test.json` | C | noise/external evaluation and reporting | One guarded MODEL_V1 inference pass; patient-cluster bootstrap method frozen before access. Frozen outputs may support later error analysis, but no model, threshold, preprocessing, metric, or bootstrap retuning. |
 | external evaluation | — | NOT_FROZEN | — | — | C | reporting | Deferred. |
 | federated configuration | — | NOT_FROZEN | — | — | C | federated experiments | Synthetic research partitions only; implementation deferred. |
 | privacy configuration | — | NOT_FROZEN | — | — | B or C by impact | federated/release evidence | Deferred. |

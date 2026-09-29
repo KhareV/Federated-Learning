@@ -33,7 +33,7 @@ PLAN_SHA256 = "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
 # lower this below T005): the check below only rejects a task ID *above* the threshold, so an
 # authorized hardware-independent task can still reach PASS while a numerically earlier,
 # explicitly blocked task has not.
-LATEST_APPROVED_TASK = "T017"
+LATEST_APPROVED_TASK = "T018"
 
 # Explicit allowlist rather than a numeric/highest-gate threshold: gates do not close in
 # strict numeric order once a hardware-independent track exists. G1 (hardware/data contract)
@@ -42,13 +42,22 @@ LATEST_APPROVED_TASK = "T017"
 # validation, T006+T007), G4 (label freeze, T008), and G5 (split/leakage audit, T009+T010)
 # legitimately close ahead of it. Add a gate here only when its own documented pass criteria
 # are genuinely met.
-APPROVED_PASSED_GATES = {"G0", "G2", "G3", "G4", "G5", "G6", "G7", "G8"}
+APPROVED_PASSED_GATES = {"G0", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G10"}
 
 # Same allowlist principle for freeze status: a freeze may be marked FROZEN only once its
 # owning gate has genuinely closed. F01 (source authority) freezes at G0; F04 (label mapping,
 # AAMI_SVF_MAP_V1) freezes at G4 (T008); F05 (patient split, MITDB_SPLIT_V1) freezes at G5
 # (T009+T010).
-APPROVED_FROZEN_ARTIFACTS = {"F01", "F04", "F05", "F06", "F07", "F08", "F09"}
+APPROVED_FROZEN_ARTIFACTS = {
+    "F01",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F08",
+    "F09",
+    "F10",
+}
 
 CANONICAL_GATE_TASK_OWNERS = {
     "G0": "T001;T002", "G1": "T003;T004", "G2": "T006;T007",

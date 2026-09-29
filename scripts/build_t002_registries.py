@@ -145,6 +145,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T015": "PASS",
             "T016": "PASS",
             "T017": "PASS",
+            "T018": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -164,6 +165,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T015": "0b07dd09d638486eb1eedb27f1d41c9ebd61cac2",
             "T016": "90ee7a35839abffd08829d7e8de88d58e1717024",
             "T017": "fe7bbb899ff1f00d63efeea529f4b44bacec6fee",
+            "T018": "06b1ab0c3c7a6eb934d898b701a8c55e15704cb5",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
@@ -183,6 +185,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T015": "reports/model/model_v1_training.json",
             "T016": "checkpoints/MODEL_V1.manifest.json",
             "T017": "artifacts/CAL_V1.json",
+            "T018": "reports/internal_test.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -669,7 +672,7 @@ GATES = [
     gate("G7", "Baseline Pass", "Establish pipeline sanity with locked trivial/classical baselines.", "T014", "R07", "Training-only majority and feature fit-scope tests", "reports/baselines/baseline_report.json", "Pipeline produces reproducible metrics and majority predictor is train-derived.", "Pipeline failure, leakage, or held-out prevalence selection.", "Debug data/features/model without using test outcomes.", "T015", status="PASS", evidence="reports/baselines/baseline_report.json"),
     gate("G8", "ECG Model Lock", "Freeze reproducible MODEL_V1 architecture/checkpoint/config.", "T012", "R08;R08.1", "Shape; fixed-vector logits; seed/config/checkpoint determinism", "checkpoints/MODEL_V1.manifest.json", "Validation acceptance and test-vector reproduction pass; checkpoint hash stored.", "Unstable model, interface drift, or unreproducible logits.", "Simplify/tune only on train/validation, then version and re-gate.", "T016;T017;T022;T027", status="PASS", evidence="checkpoints/MODEL_V1.manifest.json"),
     gate("G9", "Multimodal Context Pass", "Validate deterministic context, episode policy, and controlled quality-aware comparison.", "T013;T014;T015;T016", "R13;R13.1;R14;R14.1;R15;R15.1;CB05", "Synchronization; quality; state table; episode; deterministic perturbation tests", "reports/bidmc_multimodal_engineering/report.json;reports/quality_aware_alert_robustness/report.json", "Sync/quality/episode tests pass and controlled comparison reproduces without learned-fusion claim.", "False multimodal claim, undefined episode counting, or nondeterministic comparison.", "Fix context/episode experiment; never invent predictive labels.", "T030;T033", evidence="reports/quality_aware_alert_robustness/report.json"),
-    gate("G10", "Central Eval Freeze", "Freeze calibration, internal, noise, and external evidence without post-test tuning.", "T017;T018;T019;T020", "R09;R09.1;R10;R10.1;R11;R12;CB06", "Calibration provenance; clustered statistics; checkpoint/threshold/no-adaptation audits", "reports/calibration/calibration.json;reports/internal_test/report.json;reports/noise_robustness/report.json;reports/external_incart/report.json", "Checkpoint/threshold locked and evaluations use declared patient-level uncertainty.", "Any post-test tuning, window CI, lead/map drift, or external adaptation.", "Version bump and new untouched-test policy; never overwrite prior evidence.", "T021;T033", evidence="reports/internal_test/report.json"),
+    gate("G10", "Central Eval Freeze", "Freeze calibration, internal, noise, and external evidence without post-test tuning.", "T017;T018;T019;T020", "R09;R09.1;R10;R10.1;R11;R12;CB06", "Calibration provenance; clustered statistics; checkpoint/threshold/no-adaptation audits", "reports/calibration/calibration.json;reports/internal_test.json;reports/noise_robustness/report.json;reports/external_incart/report.json", "Checkpoint/threshold locked and evaluations use declared patient-level uncertainty.", "Any post-test tuning, window CI, lead/map drift, or external adaptation.", "Version bump and new untouched-test policy; never overwrite prior evidence.", "T021;T033", status="PASS", evidence="reports/internal_test.json"),
     gate("G11", "FedAvg Pass", "Validate analytical aggregation and frozen IID FedAvg baseline.", "T022;T023", "R16;R16.1;R17;R17.1;CB03", "Toy weighted mean; client disjointness; round/config audit", "reports/federated/fl_iid/report.json", "Toy equivalence and stable locked-budget IID run pass.", "Aggregation/serialization/patient-contamination defect.", "Block FL extensions; repair toy and client-manifest logic first.", "T024;T025;T026", evidence="reports/federated/fl_iid/report.json"),
     gate("G12", "Non-IID Pass", "Validate controlled heterogeneity with patient integrity and matched budgets.", "T024", "R18;R18.1;R16.1", "Client manifest and config-difference audit", "reports/federated/non_iid_report.json", "Patient integrity and declared matched-budget construction pass.", "Confounded clients, cross-site patients, or hidden budget changes.", "Rebuild/version manifests and rerun affected experiments.", "T025", evidence="reports/federated/non_iid_report.json"),
     gate("G13", "FedProx Pass", "Freeze a matched FedAvg/FedProx comparison.", "T025", "R19;R10.1", "mu=0 equivalence; config-match; paired statistic tests", "reports/federated/fedprox_report.json", "Only local objective differs and all comparison settings remain matched.", "Unmatched setting, failed mu=0 equivalence, or test-driven tuning.", "Repair objective/config, retune only on federated validation, rerun.", "T033", evidence="reports/federated/fedprox_report.json"),
@@ -761,7 +764,7 @@ FREEZES = [
     freeze("F07", "baseline configuration", "BASELINE_V1", "G7", "T015;T016;T035;T036", "E01", "baseline report and model artifacts", "Majority and all learned transformations remain training-only.", "FROZEN"),
     freeze("F08", "MODEL_V1", "MODEL_V1", "G8", "T016-T031", "E02-E16", "calibration/evaluation/FL/deployment/context evidence", "Checkpoint/config/test vector hash required.", "FROZEN"),
     freeze("F09", "calibration", "CAL_V1", "G10", "T018-T031", "E03-E16", "artifacts/CAL_V1.json and downstream thresholded/evaluation/API/dashboard evidence", "Frozen evidence is artifacts/CAL_V1.json; MIT-BIH source-domain only; small-patient-sample uncertainty.", "FROZEN"),
-    freeze("F10", "internal test", "INTERNAL_TEST_V1", "G10", "T019-T036", "E04-E16", "internal and comparison evidence", "No post-test tuning."),
+    freeze("F10", "internal test", "INTERNAL_TEST_V1", "G10", "T019-T036", "E04-E16", "reports/internal_test.json and hash-bound predictions/bootstrap evidence", "One guarded internal-test inference pass; statistical method frozen before access; no post-test tuning. Later error analysis may read frozen outputs but cannot retune MODEL_V1 or CAL_V1.", "FROZEN"),
     freeze("F11", "external evaluation", "INCART_EXT_V1", "G10", "T033-T036", "E06", "external report", "One locked run before adaptation."),
     freeze("F12", "federated configuration", "FL_CONFIG_V1", "G12", "T025;T026;T033", "E09-E14", "federated/privacy reports", "Patient pool and matched budgets fixed."),
     freeze("F13", "privacy configuration", "SECAGG_CONFIG_V1", "G14", "T033-T036", "E14", "privacy report and claims", "Class B only for interface-only revision; scientific/threat-model claim change is C."),

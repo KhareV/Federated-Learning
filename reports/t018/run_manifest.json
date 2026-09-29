@@ -1,0 +1,102 @@
+{
+  "config_path": "configs/internal_eval_v1.yaml",
+  "config_sha256": "66f2028eec5a35224bd197fe01d4df61be993e1b0befa6b6ea8dd6784effc24e",
+  "created_at_utc": "2026-09-29T22:01:27.398770Z",
+  "dependency_snapshot_path": "requirements-dev.lock",
+  "dependency_snapshot_sha256": "4863f6335f9a46e520550116a7e909dfb18b7f34e6fd278c35436a61e964537d",
+  "git_commit": "06b1ab0c3c7a6eb934d898b701a8c55e15704cb5",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "checkpoints/MODEL_V1.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    {
+      "path": "checkpoints/MODEL_V1.manifest.json",
+      "sha256": "4d65f925d82f4592624927e9a3eec5518d6674bc6042a2601ff3f2783c264619"
+    },
+    {
+      "path": "artifacts/CAL_V1.json",
+      "sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b"
+    },
+    {
+      "path": "manifests/splits/MITDB_SPLIT_V1.csv",
+      "sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c"
+    },
+    {
+      "path": "manifests/preprocessing/PREPROC_V1.lock.json",
+      "sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+    },
+    {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.csv",
+      "sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "One locked MODEL_V1 inference pass over eligible MIT-BIH INTERNAL_TEST windows; all point metrics and 2,000 patient-cluster percentile-bootstrap replicates use the immutable prediction table. No post-test tuning, external data, hardware, or CI.",
+  "output_artifacts": [
+    {
+      "path": "evaluation/metrics.py",
+      "sha256": "52c61b533c17c71c229b19ddd20a02f5b2923713aedbe0724ab6d2fda049acb3"
+    },
+    {
+      "path": "evaluation/bootstrap.py",
+      "sha256": "40741425e555855bbc90ae866e9716717aacc45acc2d9b83f7f1bae6e3d5b21c"
+    },
+    {
+      "path": "evaluation/internal_test.py",
+      "sha256": "9ccba48ecaec291a97eb0e0214c16353c5a2a75537929e6ab923890f6223fd97"
+    },
+    {
+      "path": "configs/internal_eval_v1.yaml",
+      "sha256": "66f2028eec5a35224bd197fe01d4df61be993e1b0befa6b6ea8dd6784effc24e"
+    },
+    {
+      "path": "artifacts/internal_test_access_v1.json",
+      "sha256": "2fc3749b93357d5a3f93a4e8b2ae07ec742f7a78ebb7a238c734e9ae1e878e67"
+    },
+    {
+      "path": "reports/internal_test.json",
+      "sha256": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e"
+    },
+    {
+      "path": "reports/internal_test_metrics.csv",
+      "sha256": "86bdca5d406eac6bdd01444daa977a7799b828aee2666e1e847238cbf500ec7d"
+    },
+    {
+      "path": "reports/internal_test_predictions.csv",
+      "sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14"
+    },
+    {
+      "path": "reports/t018/pre_access_audit.json",
+      "sha256": "7649727b8de7bbd63f5b61ae11a7ea5d8a6650d91e7da53b315b33de63027785"
+    },
+    {
+      "path": "reports/t018/one_shot_access_audit.json",
+      "sha256": "1fc8ad8979a9dc328a0859f17d32ab4a7138530871bd7105d5a7df03d9b30f1c"
+    },
+    {
+      "path": "reports/t018/bootstrap_draws.npz",
+      "sha256": "9f5953e2acd68acb91c08963dfc11a0073600a499d7e1d1406097d5f7b9f0bc3"
+    },
+    {
+      "path": "reports/t018/bootstrap_replicates.csv",
+      "sha256": "db2f666fa575f506f0dd47c4fef2f9809344ca64cd96028c465c69dda0da1ce5"
+    },
+    {
+      "path": "reports/t018/bootstrap_summary.json",
+      "sha256": "98bf355130e627e67387f2e4b83c03239554a9869ea4d3dd0c7fd2bd55298ac7"
+    },
+    {
+      "path": "reports/t018/reproducibility.json",
+      "sha256": "5ab73faa70d209016fcc5de81d95ac81dc9941c609d1d29526f58f7e815b52d8"
+    }
+  ],
+  "phase_id": "T018",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T018-INTERNAL-EVAL-V1",
+  "seed": 20260927,
+  "spec_version": "2.2",
+  "task_id": "T018"
+}
