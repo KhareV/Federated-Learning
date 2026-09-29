@@ -1,0 +1,70 @@
+{
+  "architecture_verified": true,
+  "candidate_exists": true,
+  "candidate_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "data_access_counts": {
+    "BIDMC": 0,
+    "CALIBRATION": 0,
+    "INCART": 0,
+    "INTERNAL_TEST": 0,
+    "NSTDB": 0,
+    "TRAIN": 0,
+    "VALIDATION": 0,
+    "WEARABLE": 0
+  },
+  "expected_logits": [
+    [
+      3.3621785640716553
+    ],
+    [
+      9.34778881072998
+    ],
+    [
+      9.932059288024902
+    ]
+  ],
+  "fresh_process_actual_logits": [
+    [
+      [
+        3.3621785640716553
+      ],
+      [
+        9.34778881072998
+      ],
+      [
+        9.932059288024902
+      ]
+    ],
+    [
+      [
+        3.3621785640716553
+      ],
+      [
+        9.34778881072998
+      ],
+      [
+        9.932059288024902
+      ]
+    ]
+  ],
+  "frozen_config_sha256": "e1925fa6f08bc93200038f3a9bfaa49ec12a3ee59718dde99f7bd441c00a3ce5",
+  "maximum_absolute_error": 0.0,
+  "maximum_relative_error": 0.0,
+  "overall_status": "PASS",
+  "parameter_count": 13185,
+  "promotion_byte_identical": true,
+  "state_dict_identical": true,
+  "tamper_tests": "VERIFIED_BY_TEST_SUITE",
+  "task_id": "T016",
+  "test_vector_sha256": "feaf6673f5faf849ee3fc8a62d22e0c09dc3f740a481dafbfeca2b4808fe25c3",
+  "training_executed": false,
+  "upstream_sha256": {
+    "manifests/baselines/BASELINE_V1.lock.json": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+    "manifests/labels/AAMI_SVF_MAP_V1.yaml": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.csv": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "manifests/splits/MITDB_SPLIT_V1.lock.json": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  },
+  "vector_regeneration_byte_identical": true
+}

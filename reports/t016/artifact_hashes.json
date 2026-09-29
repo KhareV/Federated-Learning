@@ -1,0 +1,34 @@
+{
+  "CI_executed": false,
+  "algorithm": "sha256",
+  "artifacts": {
+    "checkpoints/MODEL_V1.manifest.json": "4d65f925d82f4592624927e9a3eec5518d6674bc6042a2601ff3f2783c264619",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "configs/model_v1_frozen.yaml": "e1925fa6f08bc93200038f3a9bfaa49ec12a3ee59718dde99f7bd441c00a3ce5",
+    "models/ecg_cnn.py": "d6a5c0c979a2ef07579f6b29bc8bd57cc396a2bdbd3d9a08ff74403fd95a1a00",
+    "models/model_freeze.py": "6ac4a90ab300c253c825e48e17a07b0fcc5a1ce66e6954a3236ccc731fb19221",
+    "reports/t016/model_freeze_audit.json": "df34d92c1b0c48d3d9400268ac6a5e0838f792af48dd15c3b417ee41ca012b4b",
+    "reports/t016/run_manifest.json": "e7827a051b1531177378088272b1e8a72ab4094d80cec6190c5210b6202b54a8",
+    "scripts/generate_model_v1_test_vector_t016.py": "185cd1c28ee17c48e3a07f498a3bc6d73c02e80357fd19f702598b01d39e67bc",
+    "tests/fixtures/model_v1_test_vector.metadata.json": "59f9c0db4c0ae3f5dd01368554206f559a8a576d39a5290b58bf33aefd7f7acb",
+    "tests/fixtures/model_v1_test_vector.npz": "feaf6673f5faf849ee3fc8a62d22e0c09dc3f740a481dafbfeca2b4808fe25c3"
+  },
+  "dataset_cache_access_count": 0,
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest",
+  "training_executed": false,
+  "upstream_frozen_hashes": {
+    "manifests/baselines/BASELINE_V1.lock.json": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.lock.json": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  },
+  "verification": {
+    "checkpoint_path": "checkpoints/MODEL_V1.pt",
+    "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "freeze_id": "F08",
+    "maximum_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "status": "PASS"
+  }
+}

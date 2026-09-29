@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets features models training evaluation preprocessing
@@ -465,4 +465,31 @@ phase15:
 	$(MAKE) model-v1-audit PYTHON=$(PYTHON)
 	$(MAKE) model-v1-candidates PYTHON=$(PYTHON)
 	$(MAKE) t015-evidence PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
+
+model-v1-freeze:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_model_v1_t016.py
+
+model-v1-vector:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_model_v1_test_vector_t016.py --output tests/fixtures/model_v1_test_vector.npz
+
+model-v1-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from pathlib import Path; from models.model_freeze import verify_frozen_model_v1; assert verify_frozen_model_v1(Path('.'))['status']=='PASS'"
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from pathlib import Path; from models.model_freeze import verify_frozen_model_v1; assert verify_frozen_model_v1(Path('.'))['status']=='PASS'"
+
+t016-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t016_evidence.py
+
+# Complete local Python 3.11 T016 gate. This target never invokes MODEL_V1 training.
+phase16:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from pathlib import Path; from evaluation.leakage_audit import verify_frozen_split; from preprocessing.freeze import verify_preproc_freeze; from models.baseline_freeze import verify_baseline_freeze; r=Path('.'); assert verify_frozen_split(r)['status']=='PASS'; assert verify_preproc_freeze(r)['status']=='PASS'; assert verify_baseline_freeze(r)['status']=='PASS'"
+	$(MAKE) model-v1-candidates PYTHON=$(PYTHON)
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_model_v1_freeze.py tests/test_model_v1_test_vector.py
+	$(MAKE) model-v1-verify PYTHON=$(PYTHON)
+	$(MAKE) t016-evidence PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check

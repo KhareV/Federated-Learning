@@ -1,0 +1,55 @@
+{
+  "architecture_id": "MODEL_V1_ARCHITECTURE_V1",
+  "best_validation_auprc": 0.5328607838787021,
+  "calibration_id": null,
+  "candidate_source": {
+    "byte_identical": true,
+    "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt",
+    "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+  },
+  "checkpoint": {
+    "path": "checkpoints/MODEL_V1.pt",
+    "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+  },
+  "freeze_audit": {
+    "path": "reports/t016/model_freeze_audit.json",
+    "sha256": "df34d92c1b0c48d3d9400268ac6a5e0838f792af48dd15c3b417ee41ca012b4b"
+  },
+  "freeze_id": "F08",
+  "frozen_by_task": "T016",
+  "frozen_config": {
+    "path": "configs/model_v1_frozen.yaml",
+    "sha256": "e1925fa6f08bc93200038f3a9bfaa49ec12a3ee59718dde99f7bd441c00a3ce5"
+  },
+  "gate_id": "G8",
+  "map_id": "AAMI_SVF_MAP_V1",
+  "model_id": "MODEL_V1",
+  "operating_threshold": null,
+  "overall_status": "PASS",
+  "parameter_count": 13185,
+  "preproc_id": "PREPROC_V1",
+  "python_version": "3.11.16",
+  "release_seed": 20260927,
+  "selected_epoch": 4,
+  "split_id": "MITDB_SPLIT_V1",
+  "status": "FROZEN",
+  "target_id": "AAMI_SVF_WINDOW_V1",
+  "task_id": "T016",
+  "test_vector": {
+    "logit_atol": 1e-06,
+    "logit_rtol": 1e-06,
+    "metadata_path": "tests/fixtures/model_v1_test_vector.metadata.json",
+    "path": "tests/fixtures/model_v1_test_vector.npz",
+    "sha256": "feaf6673f5faf849ee3fc8a62d22e0c09dc3f740a481dafbfeca2b4808fe25c3",
+    "test_vector_id": "MODEL_V1_SYNTHETIC_TEST_VECTOR_V1"
+  },
+  "torch_version": "2.14.0",
+  "upstream_sha256": {
+    "manifests/baselines/BASELINE_V1.lock.json": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+    "manifests/labels/AAMI_SVF_MAP_V1.yaml": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.csv": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "manifests/splits/MITDB_SPLIT_V1.lock.json": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  }
+}
