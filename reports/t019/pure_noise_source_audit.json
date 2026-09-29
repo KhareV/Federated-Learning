@@ -1,0 +1,27 @@
+{
+  "annotations_absent_by_source_design": true,
+  "dataset": "NSTDB-v1.0.0",
+  "overall_status": "PASS",
+  "predictive_labels_fabricated": false,
+  "records": {
+    "bw": {
+      "annotations_present": false,
+      "hash_verified": true,
+      "noise_type": "baseline_wander",
+      "present": true
+    },
+    "em": {
+      "annotations_present": false,
+      "hash_verified": true,
+      "noise_type": "electrode_motion",
+      "present": true
+    },
+    "ma": {
+      "annotations_present": false,
+      "hash_verified": true,
+      "noise_type": "muscle_artifact",
+      "present": true
+    }
+  },
+  "used_for_AAMI_classification_metrics": false
+}

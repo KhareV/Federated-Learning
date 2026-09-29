@@ -1,0 +1,28 @@
+{
+  "AAMI_map_unchanged": true,
+  "CAL_V1_unchanged": true,
+  "INCART_accessed": false,
+  "MODEL_unchanged": true,
+  "NSTDB_hashes_verified": true,
+  "PREPROC_unchanged": true,
+  "SNR_levels_db": [
+    24,
+    18,
+    12,
+    6,
+    0,
+    -6
+  ],
+  "exact_MLII_policy": "PASS",
+  "internal_test_accessed": false,
+  "method_config_sha_after": "66edae0c81fd409e479521321c420c1d578f2ecf1b52e06abe52083e8c08b50c",
+  "method_config_sha_before": "66edae0c81fd409e479521321c420c1d578f2ecf1b52e06abe52083e8c08b50c",
+  "overall_status": "PASS",
+  "paired_population_fixed": true,
+  "post_result_tuning": false,
+  "primary_metric": "POOLED_AUPRC",
+  "primary_reference": "24dB_HIGHEST_SNR_NOT_CLEAN",
+  "protocol_id": "NOISE_ROBUSTNESS_V1",
+  "pure_noise_record_count": 3,
+  "stress_record_count": 12
+}

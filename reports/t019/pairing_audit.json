@@ -1,0 +1,32 @@
+{
+  "annotation_semantic_disagreements": 0,
+  "base_source_records": [
+    "118",
+    "119"
+  ],
+  "candidate_pair_ids": 720,
+  "candidate_windows_per_condition": {
+    "118e00": 360,
+    "118e06": 360,
+    "118e12": 360,
+    "118e18": 360,
+    "118e24": 360,
+    "118e_6": 360,
+    "119e00": 360,
+    "119e06": 360,
+    "119e12": 360,
+    "119e18": 360,
+    "119e24": 360,
+    "119e_6": 360
+  },
+  "complete_six_snr_pair_ids": 720,
+  "duplicate_condition_rows": 0,
+  "incomplete_pair_ids": 0,
+  "label_disagreements": 0,
+  "negative_labels": 251,
+  "overall_status": "PASS",
+  "pair_identity": "BASE_RECORD_PLUS_EXACT_SOURCE_RIGHT_EDGE_INDEX_V1",
+  "paired_label_eligible_pair_ids": 720,
+  "positive_labels": 469,
+  "primary_paired_windows_per_condition": 720
+}

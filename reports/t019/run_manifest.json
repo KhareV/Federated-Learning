@@ -1,0 +1,106 @@
+{
+  "config_path": "configs/noise_robustness_v1.yaml",
+  "config_sha256": "66edae0c81fd409e479521321c420c1d578f2ecf1b52e06abe52083e8c08b50c",
+  "created_at_utc": "2026-09-29T22:19:17.014464Z",
+  "dependency_snapshot_path": "requirements-dev.lock",
+  "dependency_snapshot_sha256": "4863f6335f9a46e520550116a7e909dfb18b7f34e6fd278c35436a61e964537d",
+  "git_commit": "f32ec164e43c901fec1480ec4ba7bde02d7dc9c5",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/datasets/nstdb_v1.yaml",
+      "sha256": "1137f5712a2411869ebd19a099720eb5f6ac453c021769af7e8ba327809f028c"
+    },
+    {
+      "path": "manifests/datasets/nstdb_v1_files.csv",
+      "sha256": "21ac7f43ad826796f7d41f427ff0139b5d4463698b4e165d93a6949891a319dc"
+    },
+    {
+      "path": "manifests/datasets/nstdb_records.csv",
+      "sha256": "bc679e136e90749cb93570b1e210066d00c96a16d8659ea74d272330756600c2"
+    },
+    {
+      "path": "checkpoints/MODEL_V1.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    {
+      "path": "checkpoints/MODEL_V1.manifest.json",
+      "sha256": "4d65f925d82f4592624927e9a3eec5518d6674bc6042a2601ff3f2783c264619"
+    },
+    {
+      "path": "artifacts/CAL_V1.json",
+      "sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b"
+    },
+    {
+      "path": "reports/internal_test.json",
+      "sha256": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e"
+    },
+    {
+      "path": "artifacts/internal_test_access_v1.json",
+      "sha256": "2fc3749b93357d5a3f93a4e8b2ae07ec742f7a78ebb7a238c734e9ae1e878e67"
+    },
+    {
+      "path": "manifests/preprocessing/PREPROC_V1.lock.json",
+      "sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Two deterministic CPU inference calculations over official NSTDB v1.0.0 stress records. Fixed paired label-eligible positions across six SNR levels; pure-noise records remain unlabeled; no tuning, adaptation, INTERNAL_TEST, INCART, hardware, or CI access. Protocol commit: f32ec164e43c901fec1480ec4ba7bde02d7dc9c5.",
+  "output_artifacts": [
+    {
+      "path": "evaluation/noise.py",
+      "sha256": "6e04f59ed00f53820a6db5179926f1f0c87e6c1f3ab80e3c41bdbd79c50e2d70"
+    },
+    {
+      "path": "configs/noise_robustness_v1.yaml",
+      "sha256": "66edae0c81fd409e479521321c420c1d578f2ecf1b52e06abe52083e8c08b50c"
+    },
+    {
+      "path": "reports/noise_robustness.json",
+      "sha256": "fae1d2720dd92987689f9c4421ad23b4b1c279c7b26aedc19e26bbd3169d6829"
+    },
+    {
+      "path": "reports/noise_robustness.csv",
+      "sha256": "438b711b6346c0860f5a880e65b8301bd356fc8988e295bdd332b2a22045e2c4"
+    },
+    {
+      "path": "reports/noise_robustness.svg",
+      "sha256": "8571d38785d659fad74bb2324793df663199688c8e1200629f700448642ddac8"
+    },
+    {
+      "path": "reports/t019/nstdb_predictions.csv",
+      "sha256": "46d5d21575e90ef047297021560a281415163702fb870f98348f1c461041b9a4"
+    },
+    {
+      "path": "reports/t019/noise_robustness_by_record.csv",
+      "sha256": "0c796f6ef50905c64231bff9da0994a5bb6febd2bca694368aecbc8d0ad30e21"
+    },
+    {
+      "path": "reports/t019/protocol_audit.json",
+      "sha256": "8880ce91ac8f6efdec0b7f729a25e07bed717c80a52dfd788b80d8de0f36a7fd"
+    },
+    {
+      "path": "reports/t019/pairing_audit.json",
+      "sha256": "9db6acfe9804eeb7d1eb7ecc75d413da6e2c87e340f91bf181e7a33dceaf1b39"
+    },
+    {
+      "path": "reports/t019/quality_by_snr.json",
+      "sha256": "356e7b0d1888816ab198c0a176c7b960f3a85570b0f893c9657a2ec9576e3b8b"
+    },
+    {
+      "path": "reports/t019/pure_noise_source_audit.json",
+      "sha256": "ddf0521df0c9fd921cad6227a8af4bcafef145fba81bb9be6a509e7d36aced82"
+    },
+    {
+      "path": "reports/t019/reproducibility.json",
+      "sha256": "eeaf77796f07bd75b6dd16ace05f8deabab7214e05ca051b4c11eaf29ad22963"
+    }
+  ],
+  "phase_id": "T019",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T019-NSTDB-NOISE-ROBUSTNESS-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T019"
+}

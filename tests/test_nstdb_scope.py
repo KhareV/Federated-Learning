@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 import ast
+import csv
 from pathlib import Path
 
+import pytest
+
 from evaluation.noise import curve_svg
+from scripts.verify_noise_robustness_t019 import verify_noise_robustness
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -54,3 +58,24 @@ def test_quality_and_primary_population_are_separate_in_config() -> None:
     config = (ROOT / "configs/noise_robustness_v1.yaml").read_text(encoding="utf-8")
     assert "OFFLINE_MODEL_STRESS_ONLY" in config
     assert "runtime_quality_gate_applied_to_primary_curve: false" in config
+
+
+def test_canonical_results_verify_without_inference() -> None:
+    result = verify_noise_robustness(ROOT)
+    assert result["status"] == "PASS"
+    assert result["model_inference_repeated"] is False
+
+
+def test_prediction_threshold_tamper_is_detected(tmp_path: Path) -> None:
+    source = ROOT / "reports/t019/nstdb_predictions.csv"
+    with source.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+        fields = list(rows[0])
+    rows[0]["frozen_threshold"] = "0.5"
+    altered = tmp_path / "predictions.csv"
+    with altered.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+    with pytest.raises(RuntimeError, match="NSTDB_THRESHOLD_BINDING_MISMATCH"):
+        verify_noise_robustness(ROOT, predictions_path=altered)
