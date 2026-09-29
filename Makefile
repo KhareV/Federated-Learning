@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17 t018-preflight internal-test-once internal-test-verify t018-evidence phase18
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets features models training evaluation preprocessing
@@ -522,4 +522,32 @@ phase17:
 	$(MAKE) calibration-reproducibility PYTHON=$(PYTHON)
 	$(MAKE) verify-cal-v1 PYTHON=$(PYTHON)
 	$(MAKE) t017-evidence PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
+
+t018-preflight:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from pathlib import Path; from models.model_freeze import verify_frozen_model_v1; from evaluation.calibration import verify_cal_v1; r=Path('.'); assert verify_frozen_model_v1(r)['status']=='PASS'; assert verify_cal_v1(r)['status']=='PASS'"
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_internal_metrics.py tests/test_patient_cluster_bootstrap.py tests/test_internal_test_scope.py tests/test_internal_test_one_shot.py
+	$(PYTHON) -m pip check
+
+internal-test-once:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m evaluation.internal_test --run-once
+
+internal-test-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m evaluation.internal_test --verify
+
+t018-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t018_evidence.py
+
+# Verification-only after the one-shot result exists; never invokes INTERNAL_TEST inference.
+phase18:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from pathlib import Path; from evaluation.leakage_audit import verify_frozen_split; from preprocessing.freeze import verify_preproc_freeze; from models.baseline_freeze import verify_baseline_freeze; from models.model_freeze import verify_frozen_model_v1; from evaluation.calibration import verify_cal_v1; r=Path('.'); assert verify_frozen_split(r)['status']=='PASS'; assert verify_preproc_freeze(r)['status']=='PASS'; assert verify_baseline_freeze(r)['status']=='PASS'; assert verify_frozen_model_v1(r)['status']=='PASS'; assert verify_cal_v1(r)['status']=='PASS'"
+	$(MAKE) internal-test-verify PYTHON=$(PYTHON)
+	$(MAKE) t018-evidence PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check

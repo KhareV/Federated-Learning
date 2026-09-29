@@ -1,0 +1,58 @@
+evaluation_id: INTERNAL_EVAL_V1
+spec_version: "2.2"
+status: METHOD_FROZEN_BEFORE_INTERNAL_TEST_ACCESS
+
+dataset: MIT-BIH-v1.0.0
+partition: INTERNAL_TEST
+model_id: MODEL_V1
+calibration_id: CAL_V1
+
+inference:
+  device: cpu
+  batch_size: 64
+  model_mode: eval
+  gradient_mode: inference_mode
+  augmentation: NONE
+
+probability:
+  field: source_domain_calibrated_probability
+  formula: sigmoid(raw_logit / CAL_V1.temperature)
+  threshold_source: CAL_V1
+  threshold_comparator: ">="
+
+metrics:
+  names:
+    - AUPRC
+    - AUROC
+    - pooled_F1
+    - precision
+    - sensitivity
+    - specificity
+    - patient_macro_F1
+  continuous_probability: source_domain_calibrated_probability
+  zero_division: 0
+  patient_macro_weighting: EQUAL_PATIENT_WEIGHT
+  patient_macro_auprc: FORBIDDEN
+
+bootstrap:
+  method_id: PATIENT_CLUSTER_PERCENTILE_95_V1
+  unit: participant_group_id
+  replicates: 2000
+  seed: 20260927
+  rng: numpy.random.Generator
+  bit_generator: PCG64
+  confidence_level: 0.95
+  interval: percentile
+  lower_quantile: 0.025
+  upper_quantile: 0.975
+  quantile_method: linear
+  resample_with_replacement: true
+  preserve_cluster_multiplicity: true
+  redraw_degenerate_replicates: false
+  finite_replicates_only_for_each_metric_ci: true
+
+claim_boundary: >-
+  Patient-disjoint MIT-BIH internal-test evaluation for the frozen
+  AAMI_SVF_WINDOW_V1 research target; not clinical, disease, wearable,
+  robustness, or external-generalization evidence.
+
