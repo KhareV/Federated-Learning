@@ -1,0 +1,12 @@
+{
+  "MODEL_V1_inference_passes": 1,
+  "eligible_windows_read": 2157,
+  "evaluation_id": "INTERNAL_EVAL_V1",
+  "first_access_event": "guard RUN_STARTED written before any waveform cache open",
+  "guard_status": "COMPLETED",
+  "patients_read": 6,
+  "post_test_tuning": false,
+  "prediction_artifact_sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+  "run_completed": true,
+  "second_run_attempt_blocked": true
+}

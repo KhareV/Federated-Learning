@@ -1,0 +1,131 @@
+{
+  "access_guard": {
+    "path": "artifacts/internal_test_access_v1.json",
+    "status": "COMPLETED"
+  },
+  "bootstrap": {
+    "ci_type": "PERCENTILE_95_V1",
+    "cluster_unit": "participant_group_id",
+    "method_id": "PATIENT_CLUSTER_PERCENTILE_95_V1",
+    "metrics": {
+      "AUPRC": {
+        "ci_lower_95": 0.7397489189893032,
+        "ci_upper_95": 0.9836823990076896,
+        "invalid_replicates": 0,
+        "point_estimate": 0.9088954942908802,
+        "valid_replicates": 2000
+      },
+      "AUROC": {
+        "ci_lower_95": 0.7892690323304643,
+        "ci_upper_95": 0.9815579989261619,
+        "invalid_replicates": 0,
+        "point_estimate": 0.9036154157261423,
+        "valid_replicates": 2000
+      },
+      "patient_macro_F1": {
+        "ci_lower_95": 0.22348565331724915,
+        "ci_upper_95": 0.847592147255366,
+        "invalid_replicates": 0,
+        "point_estimate": 0.5291135930158938,
+        "valid_replicates": 2000
+      },
+      "pooled_F1": {
+        "ci_lower_95": 0.5835388144357843,
+        "ci_upper_95": 0.9331352154531947,
+        "invalid_replicates": 0,
+        "point_estimate": 0.8237529691211402,
+        "valid_replicates": 2000
+      },
+      "precision": {
+        "ci_lower_95": 0.7898686679174484,
+        "ci_upper_95": 1.0,
+        "invalid_replicates": 0,
+        "point_estimate": 0.9135932560590094,
+        "valid_replicates": 2000
+      },
+      "sensitivity": {
+        "ci_lower_95": 0.42926356589147285,
+        "ci_upper_95": 0.9792694965449161,
+        "invalid_replicates": 0,
+        "point_estimate": 0.75,
+        "valid_replicates": 2000
+      },
+      "specificity": {
+        "ci_lower_95": 0.6645962732919255,
+        "ci_upper_95": 1.0,
+        "invalid_replicates": 0,
+        "point_estimate": 0.9180819180819181,
+        "valid_replicates": 2000
+      }
+    },
+    "multiplicity_preserved": true,
+    "patient_slots_per_replicate": 6,
+    "point_estimate_source": "ORIGINAL_INTERNAL_TEST_SAMPLE_NOT_BOOTSTRAP_MEAN",
+    "quantile_method": "linear",
+    "quantiles": [
+      0.025,
+      0.975
+    ],
+    "rejection_or_redraw_used": false,
+    "replicates_generated": 2000,
+    "replicates_requested": 2000,
+    "sampling": "WITH_REPLACEMENT",
+    "source_patient_clusters": 6,
+    "unique_patient_count": {
+      "maximum": 6,
+      "median": 4.0,
+      "minimum": 1
+    }
+  },
+  "calibration_domain": "MIT-BIH-v1.0.0",
+  "calibration_id": "CAL_V1",
+  "calibration_patient_count": 3,
+  "calibration_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+  "change_control": "Post-G10 changes to MODEL_V1, CAL_V1, predictions, metrics, or bootstrap method require a controlled scientific change; later error analysis may not retune them.",
+  "claim_boundary": "Patient-disjoint MIT-BIH internal-test performance for the frozen AAMI_SVF_WINDOW_V1 research target; not clinical, wearable, or external evidence.",
+  "confusion_matrix": {
+    "fn": 289,
+    "fp": 82,
+    "tn": 919,
+    "tp": 867
+  },
+  "dataset": "MIT-BIH-v1.0.0",
+  "eligible_windows": 2157,
+  "evaluation_id": "INTERNAL_EVAL_V1",
+  "freeze_id": "F10",
+  "method_config_sha256": "66f2028eec5a35224bd197fe01d4df61be993e1b0befa6b6ea8dd6784effc24e",
+  "model_id": "MODEL_V1",
+  "model_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "negative_windows": 1001,
+  "no_post_test_tuning": true,
+  "one_shot": true,
+  "partition": "INTERNAL_TEST",
+  "patient_groups": 6,
+  "point_metrics": {
+    "AUPRC": 0.9088954942908802,
+    "AUROC": 0.9036154157261423,
+    "patient_macro_F1": 0.5291135930158938,
+    "pooled_F1": 0.8237529691211402,
+    "precision": 0.9135932560590094,
+    "sensitivity": 0.75,
+    "specificity": 0.9180819180819181
+  },
+  "positive_windows": 1156,
+  "pre_access_method_commit": "a98676d9e419525437b9ce4be88d2996b11d5e5b",
+  "prediction_artifact": {
+    "path": "reports/internal_test_predictions.csv",
+    "sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14"
+  },
+  "records": 6,
+  "status": "FROZEN",
+  "temperature": 0.20521296644321502,
+  "threshold": 0.6128035574269627,
+  "threshold_comparator": ">=",
+  "upstream_sha256": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "checkpoints/MODEL_V1.manifest.json": "4d65f925d82f4592624927e9a3eec5518d6674bc6042a2601ff3f2783c264619",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.csv": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  }
+}

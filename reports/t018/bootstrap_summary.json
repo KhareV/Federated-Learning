@@ -1,0 +1,74 @@
+{
+  "ci_type": "PERCENTILE_95_V1",
+  "cluster_unit": "participant_group_id",
+  "method_id": "PATIENT_CLUSTER_PERCENTILE_95_V1",
+  "metrics": {
+    "AUPRC": {
+      "ci_lower_95": 0.7397489189893032,
+      "ci_upper_95": 0.9836823990076896,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9088954942908802,
+      "valid_replicates": 2000
+    },
+    "AUROC": {
+      "ci_lower_95": 0.7892690323304643,
+      "ci_upper_95": 0.9815579989261619,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9036154157261423,
+      "valid_replicates": 2000
+    },
+    "patient_macro_F1": {
+      "ci_lower_95": 0.22348565331724915,
+      "ci_upper_95": 0.847592147255366,
+      "invalid_replicates": 0,
+      "point_estimate": 0.5291135930158938,
+      "valid_replicates": 2000
+    },
+    "pooled_F1": {
+      "ci_lower_95": 0.5835388144357843,
+      "ci_upper_95": 0.9331352154531947,
+      "invalid_replicates": 0,
+      "point_estimate": 0.8237529691211402,
+      "valid_replicates": 2000
+    },
+    "precision": {
+      "ci_lower_95": 0.7898686679174484,
+      "ci_upper_95": 1.0,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9135932560590094,
+      "valid_replicates": 2000
+    },
+    "sensitivity": {
+      "ci_lower_95": 0.42926356589147285,
+      "ci_upper_95": 0.9792694965449161,
+      "invalid_replicates": 0,
+      "point_estimate": 0.75,
+      "valid_replicates": 2000
+    },
+    "specificity": {
+      "ci_lower_95": 0.6645962732919255,
+      "ci_upper_95": 1.0,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9180819180819181,
+      "valid_replicates": 2000
+    }
+  },
+  "multiplicity_preserved": true,
+  "patient_slots_per_replicate": 6,
+  "point_estimate_source": "ORIGINAL_INTERNAL_TEST_SAMPLE_NOT_BOOTSTRAP_MEAN",
+  "quantile_method": "linear",
+  "quantiles": [
+    0.025,
+    0.975
+  ],
+  "rejection_or_redraw_used": false,
+  "replicates_generated": 2000,
+  "replicates_requested": 2000,
+  "sampling": "WITH_REPLACEMENT",
+  "source_patient_clusters": 6,
+  "unique_patient_count": {
+    "maximum": 6,
+    "median": 4.0,
+    "minimum": 1
+  }
+}

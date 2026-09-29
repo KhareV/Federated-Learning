@@ -1,0 +1,38 @@
+{
+  "CAL_V1_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+  "MODEL_V1_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "accessed_paths": [
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/107_filtered_windows.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/107_example_ids.txt",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/115_filtered_windows.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/115_example_ids.txt",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_filtered_windows.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_example_ids.txt",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/200_filtered_windows.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/200_example_ids.txt",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/214_filtered_windows.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/214_example_ids.txt",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/233_filtered_windows.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/233_example_ids.txt",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/234_filtered_windows.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/234_example_ids.txt"
+  ],
+  "eligible_windows_read": 2157,
+  "evaluation_id": "INTERNAL_EVAL_V1",
+  "method_config_sha256": "66f2028eec5a35224bd197fe01d4df61be993e1b0befa6b6ea8dd6784effc24e",
+  "model_inference_passes": 1,
+  "patients_read": 6,
+  "pre_access_git_sha": "f8acc83160602d197ae72f5f835908abc7e25268",
+  "pre_access_method_commit": "a98676d9e419525437b9ce4be88d2996b11d5e5b",
+  "preproc_lock_sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+  "result_sha256": {
+    "reports/internal_test.json": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "reports/internal_test_metrics.csv": "86bdca5d406eac6bdd01444daa977a7799b828aee2666e1e847238cbf500ec7d",
+    "reports/internal_test_predictions.csv": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+    "reports/t018/bootstrap_replicates.csv": "db2f666fa575f506f0dd47c4fef2f9809344ca64cd96028c465c69dda0da1ce5",
+    "reports/t018/bootstrap_summary.json": "98bf355130e627e67387f2e4b83c03239554a9869ea4d3dd0c7fd2bd55298ac7"
+  },
+  "split_sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+  "status": "COMPLETED",
+  "window_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+}
