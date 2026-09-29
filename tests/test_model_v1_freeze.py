@@ -6,12 +6,14 @@ import subprocess
 import sys
 from pathlib import Path
 
+import numpy as np
 import pytest
 import torch
 import yaml
 
 from models.model_freeze import ModelFreezeError, load_frozen_model_v1, verify_frozen_model_v1
 from nhm.hashing import hash_file
+from scripts.generate_model_v1_test_vector_t016 import write_deterministic_npz
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -109,14 +111,20 @@ def test_f08_bound_artifact_tamper_is_detected(
         verify_frozen_model_v1(tmp_path, manifest_path)
 
 
-def test_expected_logit_tamper_is_detected(tmp_path: Path) -> None:
+@pytest.mark.parametrize("array_name", ["normalized_inputs_float32", "expected_logits_float32"])
+def test_semantic_test_vector_tamper_is_detected(
+    tmp_path: Path, array_name: str
+) -> None:
     manifest_path = frozen_copy(tmp_path)
     manifest = json.loads(manifest_path.read_text())
     vector = tmp_path / manifest["test_vector"]["path"]
-    data = bytearray(vector.read_bytes())
-    data[-20] ^= 1
-    vector.write_bytes(data)
-    with pytest.raises(ModelFreezeError, match="MODEL_TEST_VECTOR_HASH_MISMATCH"):
+    with np.load(vector, allow_pickle=False) as fixture:
+        arrays = {name: fixture[name].copy() for name in fixture.files}
+    arrays[array_name].flat[0] += np.float32(0.5)
+    write_deterministic_npz(vector, arrays)
+    manifest["test_vector"]["sha256"] = hash_file(vector)
+    manifest_path.write_text(json.dumps(manifest))
+    with pytest.raises(ModelFreezeError, match="MODEL_TEST_VECTOR_LOGIT_MISMATCH"):
         verify_frozen_model_v1(tmp_path, manifest_path)
 
 
