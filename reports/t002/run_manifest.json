@@ -1,10 +1,10 @@
 {
   "config_path": "configs/base.yaml",
-  "config_sha256": "7d8e315e9db9f30717e4b48955f3dc53407a8f46817f28d8f900836db2c24264",
-  "created_at_utc": "2026-09-29T10:18:09.472031Z",
+  "config_sha256": "fb070488349c20a09e1dd457386bbef0fa46099c4cd572eb8bc31a291e8fb3ed",
+  "created_at_utc": "2026-09-29T10:44:44.266924Z",
   "dependency_snapshot_path": "reports/t001/dependencies.txt",
   "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
-  "git_commit": "8cc3e66496483336a7cd1fd98120bd0a39da6bca",
+  "git_commit": "6942091eba85cb7f64a1b2e4148b6831afc25c0c",
   "git_dirty": true,
   "input_artifacts": [
     {
@@ -25,7 +25,7 @@
     },
     {
       "path": "manifests/task_registry_v1.csv",
-      "sha256": "c8d293fe744bfd4e0af85ae6e08bcca378250094da673ad6f97b24466ed5d507"
+      "sha256": "a6d04e8910103af93e058c2876f20fe0bcc0c1b230b6345b7e1f50fe9d27f6b9"
     },
     {
       "path": "manifests/requirements_v22.csv",
@@ -33,11 +33,11 @@
     },
     {
       "path": "manifests/gate_registry_v1.csv",
-      "sha256": "9fa1ea9a8554556c0e9e5605bb305228063420814ee6dec5a78d7b2e222a0020"
+      "sha256": "4a8d43074019b08662ae2a78b8199dbc0a4d5a3fcb2f63ae6d121b74161f90e5"
     },
     {
       "path": "manifests/freeze_registry_v1.csv",
-      "sha256": "bc3e22fcb76c0264fafa1b1efe3903873236a2e5fb457137d9ab93f103d83638"
+      "sha256": "ff50b6e553372f819dfea97910a3197be9e5ef7d2eb5764b418d71c833a2162c"
     },
     {
       "path": "manifests/do_not_start_v1.csv",
@@ -49,7 +49,7 @@
     },
     {
       "path": "manifests/evidence_registry_v1.csv",
-      "sha256": "f9563125be966447c8dd3b527b81f7fa542b3876278d9d739ad03d8f3a985b15"
+      "sha256": "79bce1cc7cda2cfcd4a82c91b1c51d597204446dbb3a421739051dd2cb8253a5"
     }
   ],
   "manifest_version": "1.0",
