@@ -146,6 +146,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T016": "PASS",
             "T017": "PASS",
             "T018": "PASS",
+            "T019": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -166,6 +167,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T016": "90ee7a35839abffd08829d7e8de88d58e1717024",
             "T017": "fe7bbb899ff1f00d63efeea529f4b44bacec6fee",
             "T018": "06b1ab0c3c7a6eb934d898b701a8c55e15704cb5",
+            "T019": "cbcb4e44c6a1a00ab0aad2be0d440560d8b7a315",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
@@ -186,6 +188,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T016": "checkpoints/MODEL_V1.manifest.json",
             "T017": "artifacts/CAL_V1.json",
             "T018": "reports/internal_test.json",
+            "T019": "reports/noise_robustness.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
