@@ -1,0 +1,48 @@
+{
+  "CI_executed": false,
+  "F08_verification": {
+    "checkpoint_path": "checkpoints/MODEL_V1.pt",
+    "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "freeze_id": "F08",
+    "maximum_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "status": "PASS"
+  },
+  "F09_verification": {
+    "artifact_path": "artifacts/CAL_V1.json",
+    "artifact_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "calibration_id": "CAL_V1",
+    "freeze_id": "F09",
+    "status": "PASS"
+  },
+  "G10_status": "NOT_STARTED_PENDING_T018",
+  "algorithm": "sha256",
+  "artifacts": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "configs/calibration_v1.yaml": "e90def7439faba9535a72fb96c722f78b991b80914f103a9bd0467661f807e4e",
+    "evaluation/calibration.py": "9fa116fedb0da75ffde16a428193794949e67bcddb804d8251918218d7320683",
+    "reports/calibration/calibration_predictions.csv": "2870ed78b4de13f9d48fec88bacbc1076be690fa2e20c0370506ca14e8a5a3c6",
+    "reports/calibration/reliability.json": "8880112e84bfc336f25941c8e302a196120b06448401b450aca8c0b2923f0dc8",
+    "reports/calibration/reliability_diagram.svg": "22aab51bea2a11804f7c5e56e276b35ac551fc2649ef23b1aaba9d3109486344",
+    "reports/t017/calibration_audit.json": "b8f8127052b33596348668c69c540d7b3d4ea6eeb3ea9bc464f065e46c57e58a",
+    "reports/t017/partition_access_audit.json": "ccc0a77495dc6dfe982c795f08f2d0448556ac821a65496decd888b5d9111d64",
+    "reports/t017/reproducibility.json": "c60f477522e7461a08c8ac4cf8700f8596f9235e9b95f22c283dd7118606e6b6",
+    "reports/t017/run_manifest.json": "78ab02d51b477ce738ce5d4c60b9b0716ad1bd38d9585b676de1437cc263aa23",
+    "reports/t017/threshold_search.json": "d8bac457cf6c8954a48184cfaaf8f2b56e011983037817e5780b7d6b83a5b306",
+    "scripts/verify_calibration_reproducibility_t017.py": "2f47a34a145451b925809fcf7e8d4a0f3951f4f02bf22938c814e72815b3c35d"
+  },
+  "external_data_access_count": 0,
+  "internal_test_access_count": 0,
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest",
+  "upstream_frozen_hashes": {
+    "checkpoints/MODEL_V1.manifest.json": "4d65f925d82f4592624927e9a3eec5518d6674bc6042a2601ff3f2783c264619",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "configs/model_v1_frozen.yaml": "e1925fa6f08bc93200038f3a9bfaa49ec12a3ee59718dde99f7bd441c00a3ce5",
+    "manifests/labels/AAMI_SVF_MAP_V1.yaml": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.csv": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "manifests/windows/MITDB_WINDOWS_V1.cache.csv": "35610daa9e0611cca9976664af0e37492011637e085ba866806f378092c6fe4d",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  }
+}

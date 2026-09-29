@@ -1,0 +1,41 @@
+{
+  "F08_verification": {
+    "checkpoint_path": "checkpoints/MODEL_V1.pt",
+    "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "freeze_id": "F08",
+    "maximum_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "status": "PASS"
+  },
+  "calibrated_brier": 0.08337721583874072,
+  "calibrated_nll": 0.3096821848766577,
+  "calibration_id": "CAL_V1",
+  "fit_partition": "CALIBRATION",
+  "forbidden_partition_access_counts": {
+    "BIDMC": 0,
+    "INCART": 0,
+    "INTERNAL_TEST": 0,
+    "NSTDB": 0,
+    "TRAIN": 0,
+    "VALIDATION": 0,
+    "WEARABLE": 0
+  },
+  "method_config_sha_after": "e90def7439faba9535a72fb96c722f78b991b80914f103a9bd0467661f807e4e",
+  "method_config_sha_before": "e90def7439faba9535a72fb96c722f78b991b80914f103a9bd0467661f807e4e",
+  "method_config_unchanged": true,
+  "model_checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "model_id": "MODEL_V1",
+  "negatives": 713,
+  "overall_status": "PASS",
+  "patient_groups": 3,
+  "positives": 367,
+  "raw_brier": 0.1520555680257559,
+  "raw_nll": 0.48292883275442844,
+  "records": 3,
+  "reliability_method": "EQUAL_WIDTH_10_BINS_V1",
+  "temperature": 0.20521296644321502,
+  "threshold": 0.6128035574269627,
+  "threshold_metric": "POOLED_CALIBRATION_WINDOW_F1",
+  "threshold_tie_policy": "HIGHEST_THRESHOLD_AMONG_MAX_F1_V1",
+  "windows": 1080
+}

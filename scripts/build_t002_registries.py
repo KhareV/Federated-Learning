@@ -144,6 +144,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T014": "PASS",
             "T015": "PASS",
             "T016": "PASS",
+            "T017": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -180,6 +181,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T014": "reports/baselines/baseline_report.json",
             "T015": "reports/model/model_v1_training.json",
             "T016": "checkpoints/MODEL_V1.manifest.json",
+            "T017": "artifacts/CAL_V1.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -757,7 +759,7 @@ FREEZES = [
     freeze("F06", "preprocessing", "PREPROC_V1/GAP_POLICY_V1", "G6", "T011-T031", "E01-E16", "all derived caches/models/evaluations/deployment", "Any scientific transform change is Class C and invalidates dependent caches, models, evaluations, and deployment artifacts.", "FROZEN"),
     freeze("F07", "baseline configuration", "BASELINE_V1", "G7", "T015;T016;T035;T036", "E01", "baseline report and model artifacts", "Majority and all learned transformations remain training-only.", "FROZEN"),
     freeze("F08", "MODEL_V1", "MODEL_V1", "G8", "T016-T031", "E02-E16", "calibration/evaluation/FL/deployment/context evidence", "Checkpoint/config/test vector hash required.", "FROZEN"),
-    freeze("F09", "calibration", "CAL_V1", "G10", "T018-T031", "E03-E16", "thresholded/evaluation/API/dashboard evidence", "MIT-BIH source-domain only."),
+    freeze("F09", "calibration", "CAL_V1", "G10", "T018-T031", "E03-E16", "artifacts/CAL_V1.json and downstream thresholded/evaluation/API/dashboard evidence", "Frozen evidence is artifacts/CAL_V1.json; MIT-BIH source-domain only; small-patient-sample uncertainty.", "FROZEN"),
     freeze("F10", "internal test", "INTERNAL_TEST_V1", "G10", "T019-T036", "E04-E16", "internal and comparison evidence", "No post-test tuning."),
     freeze("F11", "external evaluation", "INCART_EXT_V1", "G10", "T033-T036", "E06", "external report", "One locked run before adaptation."),
     freeze("F12", "federated configuration", "FL_CONFIG_V1", "G12", "T025;T026;T033", "E09-E14", "federated/privacy reports", "Patient pool and matched budgets fixed."),

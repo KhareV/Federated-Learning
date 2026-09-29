@@ -1,0 +1,45 @@
+calibration_id: CAL_V1
+spec_version: "2.2"
+status: METHOD_FROZEN_BEFORE_FIT_T017
+domain: MIT-BIH-v1.0.0
+fit_partition: CALIBRATION
+
+temperature:
+  parameterization: LOG_TEMPERATURE_V1
+  formula: calibrated_logit = raw_logit / exp(theta)
+  objective: MEAN_BINARY_NLL
+  patient_weighting: NONE
+  optimizer: scipy.optimize.minimize_scalar
+  method: bounded
+  theta_bounds: [-8.0, 8.0]
+  xatol: 1.0e-12
+  maxiter: 1000
+  boundary_tolerance: 1.0e-8
+  nll_nonworsening_tolerance: 1.0e-12
+  dtype: float64
+
+brier:
+  formula: mean((probability - label) ** 2)
+  weighting: POOLED_WINDOWS_UNWEIGHTED
+
+reliability:
+  method: EQUAL_WIDTH_10_BINS_V1
+  bin_count: 10
+  range: [0.0, 1.0]
+  intervals: LEFT_CLOSED_RIGHT_OPEN_EXCEPT_FINAL_CLOSED
+  empty_bin_values: null
+
+threshold:
+  metric: POOLED_CALIBRATION_WINDOW_F1
+  candidate_rule: ZERO_UNIQUE_CALIBRATED_PROBABILITIES_ONE
+  comparator: GREATER_THAN_OR_EQUAL
+  tie_policy: HIGHEST_THRESHOLD_AMONG_MAX_F1_V1
+  zero_denominator_f1: 0.0
+
+probability_semantics:
+  raw: UNCALIBRATED_SIGMOID_OF_MODEL_LOGIT
+  calibrated: MITBIH_SOURCE_DOMAIN_SIGMOID_OF_LOGIT_DIVIDED_BY_TEMPERATURE
+
+claim_boundary: >-
+  Research-only MIT-BIH source-domain calibration under small-patient-sample uncertainty;
+  not disease probability, clinical calibration, wearable calibration, or INCART calibration.

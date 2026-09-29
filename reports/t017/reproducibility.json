@@ -1,0 +1,18 @@
+{
+  "absolute_temperature_difference": 0.0,
+  "cal_v1_verification": {
+    "artifact_path": "artifacts/CAL_V1.json",
+    "artifact_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "calibration_id": "CAL_V1",
+    "freeze_id": "F09",
+    "status": "PASS"
+  },
+  "logit_extraction_repeat": "PASS",
+  "maximum_logit_difference": 0.0,
+  "overall_status": "PASS",
+  "reliability_data_repeat": "PASS",
+  "temperature_fit_repeat": "PASS",
+  "temperature_run_1": 0.20521296644321502,
+  "temperature_run_2": 0.20521296644321502,
+  "threshold_search_repeat": "PASS"
+}

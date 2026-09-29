@@ -1,0 +1,40 @@
+{
+  "BIDMC": {
+    "reads": 0
+  },
+  "CALIBRATION": {
+    "paths": [
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/CALIBRATION/123_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/CALIBRATION/123_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/CALIBRATION/213_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/CALIBRATION/213_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/CALIBRATION/217_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/CALIBRATION/217_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/CALIBRATION/219_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/CALIBRATION/219_example_ids.txt"
+    ],
+    "waveform_cache_reads": 8
+  },
+  "INCART": {
+    "reads": 0
+  },
+  "INTERNAL_TEST": {
+    "paths": [],
+    "waveform_cache_reads": 0
+  },
+  "NSTDB": {
+    "reads": 0
+  },
+  "TRAIN": {
+    "paths": [],
+    "waveform_cache_reads": 0
+  },
+  "VALIDATION": {
+    "paths": [],
+    "waveform_cache_reads": 0
+  },
+  "WEARABLE": {
+    "reads": 0
+  },
+  "overall_status": "PASS"
+}

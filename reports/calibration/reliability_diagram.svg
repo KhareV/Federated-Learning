@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="620" height="570" viewBox="0 0 620 570">
+<rect width="620" height="570" fill="white"/>
+<text x="310" y="25" text-anchor="middle" font-family="sans-serif" font-size="16">MIT-BIH calibration partition — research-only source-domain calibration</text>
+<line x1="60" y1="500" x2="500" y2="60" stroke="#777" stroke-dasharray="5,5"/>
+<polyline points="182.368264,475.853659 210.885158,440.000000 253.324928,467.981221 302.754514,182.222222 344.745340,89.333333 389.302956,60.000000 432.680009,60.000000 463.368285,60.000000" fill="none" stroke="#c44" stroke-width="2"/>
+<polyline points="70.857499,456.578947 131.307965,475.705521 167.515831,472.642487 211.187180,445.846154 254.048957,453.684211 293.084533,335.000000 347.212645,231.111111 391.472576,165.600000 431.436335,82.564103 493.189778,69.243697" fill="none" stroke="#36c" stroke-width="2"/>
+<rect x="520" y="75" width="12" height="3" fill="#c44"/><text x="538" y="82" font-family="sans-serif" font-size="12">raw</text>
+<rect x="520" y="100" width="12" height="3" fill="#36c"/><text x="538" y="107" font-family="sans-serif" font-size="12">temperature-scaled</text>
+<text x="280" y="545" text-anchor="middle" font-family="sans-serif" font-size="13">Mean predicted probability</text>
+<text x="15" y="280" transform="rotate(-90 15 280)" text-anchor="middle" font-family="sans-serif" font-size="13">Observed positive fraction</text>
+</svg>

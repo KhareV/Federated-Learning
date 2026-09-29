@@ -1,0 +1,94 @@
+{
+  "config_path": "configs/calibration_v1.yaml",
+  "config_sha256": "e90def7439faba9535a72fb96c722f78b991b80914f103a9bd0467661f807e4e",
+  "created_at_utc": "2026-09-29T21:39:33.480228Z",
+  "dependency_snapshot_path": "requirements-dev.lock",
+  "dependency_snapshot_sha256": "4863f6335f9a46e520550116a7e909dfb18b7f34e6fd278c35436a61e964537d",
+  "git_commit": "65ba1fda361737d8bca5a8b74a4ba383ce2bff84",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "checkpoints/MODEL_V1.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    {
+      "path": "checkpoints/MODEL_V1.manifest.json",
+      "sha256": "4d65f925d82f4592624927e9a3eec5518d6674bc6042a2601ff3f2783c264619"
+    },
+    {
+      "path": "configs/model_v1_frozen.yaml",
+      "sha256": "e1925fa6f08bc93200038f3a9bfaa49ec12a3ee59718dde99f7bd441c00a3ce5"
+    },
+    {
+      "path": "manifests/labels/AAMI_SVF_MAP_V1.yaml",
+      "sha256": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145"
+    },
+    {
+      "path": "manifests/splits/MITDB_SPLIT_V1.csv",
+      "sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c"
+    },
+    {
+      "path": "manifests/preprocessing/PREPROC_V1.lock.json",
+      "sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+    },
+    {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.csv",
+      "sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+    },
+    {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.cache.csv",
+      "sha256": "35610daa9e0611cca9976664af0e37492011637e085ba866806f378092c6fe4d"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "One float64 temperature and one pooled-window F1 threshold fitted only on eligible MIT-BIH CALIBRATION windows. INTERNAL_TEST and all external datasets remained sealed; MODEL_V1 was not trained or modified; CI was not executed.",
+  "output_artifacts": [
+    {
+      "path": "evaluation/calibration.py",
+      "sha256": "9fa116fedb0da75ffde16a428193794949e67bcddb804d8251918218d7320683"
+    },
+    {
+      "path": "configs/calibration_v1.yaml",
+      "sha256": "e90def7439faba9535a72fb96c722f78b991b80914f103a9bd0467661f807e4e"
+    },
+    {
+      "path": "artifacts/CAL_V1.json",
+      "sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b"
+    },
+    {
+      "path": "reports/calibration/calibration_predictions.csv",
+      "sha256": "2870ed78b4de13f9d48fec88bacbc1076be690fa2e20c0370506ca14e8a5a3c6"
+    },
+    {
+      "path": "reports/calibration/reliability.json",
+      "sha256": "8880112e84bfc336f25941c8e302a196120b06448401b450aca8c0b2923f0dc8"
+    },
+    {
+      "path": "reports/calibration/reliability_diagram.svg",
+      "sha256": "22aab51bea2a11804f7c5e56e276b35ac551fc2649ef23b1aaba9d3109486344"
+    },
+    {
+      "path": "reports/t017/calibration_audit.json",
+      "sha256": "b8f8127052b33596348668c69c540d7b3d4ea6eeb3ea9bc464f065e46c57e58a"
+    },
+    {
+      "path": "reports/t017/threshold_search.json",
+      "sha256": "d8bac457cf6c8954a48184cfaaf8f2b56e011983037817e5780b7d6b83a5b306"
+    },
+    {
+      "path": "reports/t017/partition_access_audit.json",
+      "sha256": "ccc0a77495dc6dfe982c795f08f2d0448556ac821a65496decd888b5d9111d64"
+    },
+    {
+      "path": "reports/t017/reproducibility.json",
+      "sha256": "c60f477522e7461a08c8ac4cf8700f8596f9235e9b95f22c283dd7118606e6b6"
+    }
+  ],
+  "phase_id": "T017",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T017-CAL-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T017"
+}
