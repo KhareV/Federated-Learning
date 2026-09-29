@@ -1,0 +1,24 @@
+{
+  "fixtures": {
+    "DEGRADED_SHORT_GAP": "DEGRADED",
+    "UNUSABLE_CLIPPING": "UNUSABLE",
+    "UNUSABLE_DETECTOR": "UNUSABLE",
+    "UNUSABLE_FLATLINE": "UNUSABLE",
+    "UNUSABLE_INCOMPLETE": "UNUSABLE",
+    "UNUSABLE_LONG_GAP": "UNUSABLE",
+    "UNUSABLE_NONFINITE": "UNUSABLE",
+    "VALID": "VALID"
+  },
+  "future_append_status": "PASS",
+  "gap_propagation_status": "PASS",
+  "hardware_dependent_limitations": [
+    "CLIPPING_RAILS_VERIFICATION_REQUIRED_T004",
+    "DETECTOR_DEFINITION_VERIFICATION_REQUIRED_T004"
+  ],
+  "label_independence_status": "PASS",
+  "overall_status": "PASS",
+  "quality_config_sha256": "66bff78cce663b546d4aabcf3c05344c1c66ad4955c9db220c516766df93be13",
+  "quality_id": "QUALITY_V1",
+  "task_id": "T013",
+  "threshold_provenance": "NUMERICAL_EPSILON_NOT_DATA_TUNED"
+}

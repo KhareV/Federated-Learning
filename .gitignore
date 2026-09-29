@@ -28,6 +28,7 @@ data/raw/**
 !data/raw/**/SHA256SUMS.txt
 data/downloads/
 datasets/downloads/
+data/processed/
 
 *.ckpt
 *.pt
@@ -36,4 +37,3 @@ datasets/downloads/
 *.tflite
 artifacts/tmp/
 tmp/
-

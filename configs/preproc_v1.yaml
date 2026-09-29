@@ -1,6 +1,6 @@
 preproc_id: PREPROC_V1
 spec_version: "2.2"
-status: DRAFT_UNTIL_G6
+status: FROZEN_G6
 
 resampler:
   resampler_id: PREPROC_V1_RESAMPLER_V1
@@ -35,7 +35,7 @@ resampler:
       startup_transient_output_span: 20
       coefficient_path: preprocessing/coefficients/INCART_257_TO_250_V1.npy
       coefficient_sha256: b8dd6a50530332aad6c163dfdb5363d14393a3c0de9644790a6409072f7f928c
-  gap_handling: DEFERRED_T012
+  gap_handling: GAP_POLICY_V1
 
 ecg_filter:
   filter_id: PREPROC_V1_ECG_FILTER_V1
@@ -83,20 +83,50 @@ gap_policy:
   hardware_validation_scope: SOFTWARE_POLICY_ONLY
 
 windowing:
-  status: DEFERRED_T013
+  windowing_id: WINDOWING_V1
+  sample_rate_hz: 250
+  window_duration_s: 10
+  window_samples: 2500
+  stride_s: 5
+  stride_samples: 1250
+  sample_period_us: 4000
+  prediction_timestamp: RIGHT_EDGE_BOUNDARY
+  signal_interval: "[t-10s,t)"
+  annotation_interval: "[t-10s,t]"
+  annotation_time_arithmetic: EXACT_RATIONAL_SOURCE_GRID
+  resampler_delay_us: 40000
+  timestamp_backdating: false
+  causal_iir_phase_backdating: false
+  validated_by_task: T013
+  status: PASS
 
 quality:
-  status: DEFERRED_T013
+  quality_id: QUALITY_V1
+  config_path: configs/quality_v1.yaml
+  state_precedence: [UNUSABLE, DEGRADED, VALID]
+  validated_by_task: T013
+  status: PASS
 
 normalization:
-  status: DEFERRED_T014
+  normalization_id: PER_WINDOW_ZSCORE_V1
+  owner_task: T013
+  formula: "(window - population_mean(window)) / (population_std(window) + epsilon)"
+  epsilon: 1.0e-8
+  fit_scope: CURRENT_WINDOW_ONLY
+  dataset_statistics: FORBIDDEN
+  patient_statistics: FORBIDDEN
+  cache_policy: FILTERED_UNNORMALIZED_CANONICAL_CACHE
+  validated_by_task: T013
+  status: PASS
 
 notes: >
-  Resampler (T011), ECG/PPG causal SOS filters, and GAP_POLICY_V1 (T012) are validated.
-  PREPROC_V1 as a whole remains DRAFT_UNTIL_G6: real window construction, quality
-  classification, and the real-window leakage audit (T013) are still required before G6 can
-  close or F06 can freeze. Any change to the resampler design, filter design/coefficients,
+  Resampler (T011), ECG/PPG causal SOS filters, GAP_POLICY_V1 (T012), and WINDOWING_V1,
+  QUALITY_V1, and PER_WINDOW_ZSCORE_V1 (T013) are validated. PREPROC_V1 is frozen by G6/F06.
+  The canonical reusable cache retains causally resampled and filtered float64 ECG before
+  model-specific per-window normalization. Any change to the resampler design,
+  filter design/coefficients,
   gap thresholds/fill policy, group-delay convention, timestamp mapping, or state
   initialization after this point requires rerunning the affected T011/T012 evidence and,
-  once F06 freezes, is a formal Class C scientific PREPROC version change
+  window/timestamp conventions, quality rules, or normalization is a formal Class C
+  scientific PREPROC version change
   (docs/CHANGE_CONTROL.md).

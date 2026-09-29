@@ -11,9 +11,9 @@ the human-readable view; discrepancies are errors and must be resolved through c
 | source authority | SPEC_V2.2 / PLAN_V1.0 | FROZEN | T002 source reconciliation | see `reports/t002/source_hashes.json` | C | all project artifacts | v2.2 is technical authority; execution plan v1.0 is sequencing authority; master prompt is planning input only. |
 | hardware/data contract | OBSERVED_MONGODB_SCHEMA_V0 | NOT_FROZEN | — | — | B or C by impact | wearable ingestion, synchronization, quality | Shape observed; semantics unverified. |
 | dataset versions | — | NOT_FROZEN | — | — | C | splits, training, evaluation | Existing local data is preserved but not accepted or processed in T001. |
-| label mapping | AAMI_SVF_MAP_V1 | NOT_FROZEN | — | — | C | labels, training, evaluation | Identifier locked; mapping implementation deferred. |
-| patient split | — | NOT_FROZEN | — | — | C | training, evaluation | Deferred. |
-| preprocessing | — | NOT_FROZEN | — | — | C | features, models, evaluation | Deferred. |
+| label mapping | AAMI_SVF_MAP_V1 | FROZEN | T008/G4 | `manifests/labels/AAMI_SVF_MAP_V1.yaml` | C | labels, training, evaluation | Frozen mapper; version bump required to change. |
+| patient split | MITDB_SPLIT_V1 | FROZEN | T010/G5 | `manifests/splits/MITDB_SPLIT_V1.lock.json` | C | training, evaluation | Patient-disjoint frozen split; 201/202 grouped. |
+| preprocessing | PREPROC_V1/GAP_POLICY_V1 | FROZEN | T013/G6 | `manifests/preprocessing/PREPROC_V1.lock.json` | C | features, models, evaluation | Includes causal transforms, window/timestamp conventions, QUALITY_V1, and per-window z-score contract. |
 | baseline configuration | — | NOT_FROZEN | — | — | C | model comparisons | Deferred. |
 | MODEL_V1 | — | NOT_FROZEN | — | — | C | calibration, deployment | Deferred. |
 | calibration | — | NOT_FROZEN | — | — | C | thresholds, evaluation | Deferred. |

@@ -1,0 +1,28 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "configs/preproc_v1.yaml": "fde19071afe82270f67c04129db4ab9ffeeeeb431a955c87f9eced41eec67814",
+    "configs/quality_v1.yaml": "66bff78cce663b546d4aabcf3c05344c1c66ad4955c9db220c516766df93be13",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/windows/MITDB_WINDOWS_V1.cache.csv": "35610daa9e0611cca9976664af0e37492011637e085ba866806f378092c6fe4d",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a",
+    "preprocessing/mitdb_windows.py": "12fcf44e818beca784f7b8b6e5fbd82906fd31240d263540a08751657c12fb91",
+    "preprocessing/quality.py": "2af482c1b1411da4a7efb94e68e7a6675ec3c688244873533d7bf5fd93b85da0",
+    "preprocessing/sync.py": "1cbd21e83641c3a0b3bca26b8905e00cbb1a03aabbfdbf8e8194c07431488f57",
+    "preprocessing/windowing.py": "5b7a7a8a5aff74a877e872f0878950e81bd9c889ab6f6d143a5ab89ae4e93628",
+    "reports/preprocessing/causality_tests.json": "ed8edf4ecb8b7f16b53c0e0820d460cba9d4e668182f7f053da9ffc63a1f4020",
+    "reports/preprocessing/quality_tests.json": "4efc7efd71700bb4ef615d6b06e61f737e9d139d7485741a374373d17f2f47a1",
+    "reports/preprocessing/sync_tests.json": "01de1883d6f4aecae41cfc87ef1ea72fa8384cc2354564f21e3f055ef5ec2cef",
+    "reports/preprocessing/window_tests.json": "e460abbde94f1febf138c8004897f427bb5c51f43a3d20cce447094e241428ac",
+    "reports/t013/preproc_freeze_audit.json": "ad8800e0656334c152f0bb7ed15a9f2f8fbabb67a852a1ad31d18e76b4d2eda9",
+    "reports/t013/real_window_audit.json": "73dd325595dfa842ae2a911241ae1444f69078417478c245d6009ac678cbe17d",
+    "reports/t013/run_manifest.json": "e84b6ca5d21cda77cb12214fa5e33b30d4750433666b703ad408ced719fa309d",
+    "reports/t013/window_distribution.json": "adbd58b88ae35f481c28af7997e695b412164cd0cc31a9bdbe583e337d61580a"
+  },
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest",
+  "upstream_frozen_hashes": {
+    "manifests/labels/AAMI_SVF_MAP_V1.yaml": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145",
+    "manifests/splits/MITDB_SPLIT_V1.lock.json": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22"
+  }
+}

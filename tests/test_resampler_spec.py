@@ -134,15 +134,14 @@ def test_config_preproc_v1_agrees_with_coefficient_manifest() -> None:
         assert config_entry["down"] == manifest_entry["down"]
         assert config_entry["num_taps"] == manifest_entry["num_taps"]
         assert config_entry["coefficient_sha256"] == manifest_entry["coefficient_sha256"]
-    # ecg_filter/ppg_filter/gap_policy were DEFERRED_T012 as of T011; T012 has since
-    # validated them (tests/test_ecg_filter.py, tests/test_ppg_filter.py,
-    # tests/test_gap_policy_v1.py) -- only windowing/quality remain deferred to T013.
+    # T011-T013 now jointly close and freeze the complete G6 preprocessing contract.
     assert config["ecg_filter"]["status"] == "PASS"
     assert config["ppg_filter"]["status"] == "PASS"
     assert config["gap_policy"]["status"] == "PASS"
-    assert config["windowing"]["status"] == "DEFERRED_T013"
-    assert config["quality"]["status"] == "DEFERRED_T013"
-    assert config["status"] == "DRAFT_UNTIL_G6"
+    assert config["windowing"]["status"] == "PASS"
+    assert config["quality"]["status"] == "PASS"
+    assert config["normalization"]["status"] == "PASS"
+    assert config["status"] == "FROZEN_G6"
 
 
 # ---------------------------------------------------------------------------------------

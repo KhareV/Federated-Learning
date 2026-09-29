@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from nhm.hashing import hash_file
+
 ROOT = Path(__file__).resolve().parents[1]
 MANIFESTS = ROOT / "manifests"
 SPEC = "NHM_ML_Revised_Locked_Specification_v2.2.docx"
@@ -138,6 +140,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T010": "PASS",
             "T011": "PASS",
             "T012": "PASS",
+            "T013": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -152,6 +155,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T010": "df22ee334a873a1489bc944b0c39bf5dcbeed4a7",
             "T011": "11a824f2aa1f2d1598cb26db798cc5d9185925c1",
             "T012": "9fd6a1350a70eaf762fcdc6d47528531950c59b3",
+            "T013": "",
         }.get(task_id, "")
         evidence = {
             "T001": "reports/t001/closure_verification.json",
@@ -166,6 +170,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T010": "reports/splits/split_audit.json",
             "T011": "reports/preprocessing/resampler_causality.json",
             "T012": "reports/t012/preproc_component_status.json",
+            "T013": "reports/preprocessing/causality_tests.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,
@@ -648,7 +653,7 @@ GATES = [
     gate("G3", "Dataset Validation", "Validate records, annotations, identifiers, and locked channel policy.", "T006", "R03;R03.1;R26.1;DS01", "Record/schema/channel/duplicate/symbol-census tests", "reports/data/validation_report.json;manifests/datasets/channel_exclusions.csv", "All expected fields and annotation/channel checks pass or documented version exception is approved.", "Unexpected fields/counts or untracked exclusions.", "Block labels/splits; repair validation or source version.", "T007;T008", status="PASS", evidence="reports/data/validation_report.json"),
     gate("G4", "Label Freeze", "Freeze AAMI_SVF_WINDOW_V1 and shared AAMI_SVF_MAP_V1.", "T007", "R01;R01.1;R01.2", "Complete allowlist/unknown/paced/non-beat/window eligibility tests", "contracts/LABEL_SCHEMA_V1.md;reports/labels/label_audit.json", "Symbol mapping and target tests pass for both source datasets.", "Any ambiguous, inconsistent, or silently coerced target symbol.", "Revise/version mapping before any training and regenerate dependent artifacts.", "T008;T009;T010;T011;T012", status="PASS", evidence="reports/labels/label_audit.json"),
     gate("G5", "Split/Leakage Audit", "Freeze patient partitions before windows/models.", "T008", "R04;R04.1;R04.2", "Disjoint participants; 201/202 grouping; post-split window build audit", "manifests/splits/MITDB_SPLIT_V1.csv;reports/splits/split_audit.json", "Zero patient overlap; 201/202 grouped; patient counts reported.", "Any leakage, role violation, or result-driven regeneration.", "Regenerate before training and invalidate all dependent runs.", "T009;T010;T011;T012;T022", status="PASS", evidence="reports/splits/split_audit.json"),
-    gate("G6", "Preprocessing Pass", "Prove causal preprocessing, resampling, gaps, windows, and quality.", "T009;T010", "R02;R05;R05.1;R06;R06.1;SQ01", "Future-append; impulse; chunk equivalence; gap; window; hard-quality tests", "reports/preprocessing/causality_tests.json;reports/preprocessing/gap_tests.json", "All future-append and chunk-equivalence tests pass; gap/window/quality contracts exact.", "Any future dependence, state mismatch, or gap/window contract defect.", "Replace/version the transform and invalidate caches/downstream runs.", "T011;T012", evidence="reports/preprocessing/causality_tests.json"),
+    gate("G6", "Preprocessing Pass", "Prove causal preprocessing, resampling, gaps, windows, and quality.", "T009;T010", "R02;R05;R05.1;R06;R06.1;SQ01", "Future-append; impulse; chunk equivalence; gap; window; hard-quality tests", "reports/preprocessing/causality_tests.json;reports/preprocessing/gap_tests.json", "All future-append and chunk-equivalence tests pass; gap/window/quality contracts exact.", "Any future dependence, state mismatch, or gap/window contract defect.", "Replace/version the transform and invalidate caches/downstream runs.", "T011;T012", status="PASS", evidence="reports/preprocessing/causality_tests.json"),
     gate("G7", "Baseline Pass", "Establish pipeline sanity with locked trivial/classical baselines.", "T011", "R07", "Training-only majority and feature fit-scope tests", "reports/baselines/baseline_report.json", "Pipeline produces reproducible metrics and majority predictor is train-derived.", "Pipeline failure, leakage, or held-out prevalence selection.", "Debug data/features/model without using test outcomes.", "T012", evidence="reports/baselines/baseline_report.json"),
     gate("G8", "ECG Model Lock", "Freeze reproducible MODEL_V1 architecture/checkpoint/config.", "T012", "R08;R08.1", "Shape; fixed-vector logits; seed/config/checkpoint determinism", "checkpoints/MODEL_V1.manifest.json", "Validation acceptance and test-vector reproduction pass; checkpoint hash stored.", "Unstable model, interface drift, or unreproducible logits.", "Simplify/tune only on train/validation, then version and re-gate.", "T016;T017;T022;T027", evidence="checkpoints/MODEL_V1.manifest.json"),
     gate("G9", "Multimodal Context Pass", "Validate deterministic context, episode policy, and controlled quality-aware comparison.", "T013;T014;T015;T016", "R13;R13.1;R14;R14.1;R15;R15.1;CB05", "Synchronization; quality; state table; episode; deterministic perturbation tests", "reports/bidmc_multimodal_engineering/report.json;reports/quality_aware_alert_robustness/report.json", "Sync/quality/episode tests pass and controlled comparison reproduces without learned-fusion claim.", "False multimodal claim, undefined episode counting, or nondeterministic comparison.", "Fix context/episode experiment; never invent predictive labels.", "T030;T033", evidence="reports/quality_aware_alert_robustness/report.json"),
@@ -740,7 +745,7 @@ FREEZES = [
     freeze("F03", "dataset versions/manifests", "DATASETS_V1", "G3", "T007-T026", "E01-E14", "data/model/evaluation/federated evidence", "PTB-XL excluded from core scope."),
     freeze("F04", "label mapping", "AAMI_SVF_MAP_V1", "G4", "T008-T026", "E01-E14", "labels/models/evaluations/federated evidence", "Mapping change requires a new explicit version.", "FROZEN"),
     freeze("F05", "patient split", "MITDB_SPLIT_V1", "G5", "T009-T026", "E01-E14", "split/model/evaluation/federated evidence", "Patients and 201/202 grouping immutable after freeze.", "FROZEN"),
-    freeze("F06", "preprocessing", "PREPROC_V1/GAP_POLICY_V1", "G6", "T011-T031", "E01-E16", "all derived caches/models/evaluations/deployment", "Any scientific transform change is Class C."),
+    freeze("F06", "preprocessing", "PREPROC_V1/GAP_POLICY_V1", "G6", "T011-T031", "E01-E16", "all derived caches/models/evaluations/deployment", "Any scientific transform change is Class C and invalidates dependent caches, models, evaluations, and deployment artifacts.", "FROZEN"),
     freeze("F07", "baseline configuration", "BASELINE_V1", "G7", "T012;T033", "E01", "baseline report", "Majority remains training-only."),
     freeze("F08", "MODEL_V1", "MODEL_V1", "G8", "T016-T031", "E02-E16", "calibration/evaluation/FL/deployment/context evidence", "Checkpoint/config/test vector hash required."),
     freeze("F09", "calibration", "CAL_V1", "G10", "T018-T031", "E03-E16", "thresholded/evaluation/API/dashboard evidence", "MIT-BIH source-domain only."),
@@ -868,7 +873,7 @@ EVIDENCE = [
     evidence("EV006", "R26.1;DS01", "T005;T006", "G2;G3", "reports/data/validation_report.json", "JSON", "dataset build/validation commands"),
     evidence("EV007", "R01;R01.1", "T007", "G4", "reports/labels/label_audit.json", "JSON", "label mapping tests"),
     evidence("EV008", "R04;R04.1;R04.2", "T008", "G5", "reports/splits/split_audit.json", "JSON", "split audit command"),
-    evidence("EV009", "R02;R05;R05.1;R06;SQ01", "T009;T010", "G6", "reports/preprocessing/causality_tests.json", "JSON", "preprocessing test suite"),
+    evidence("EV009", "R02;R05;R05.1;R06;SQ01", "T009;T010", "G6", "reports/preprocessing/causality_tests.json", "JSON", "preprocessing test suite", "GENERATED"),
     evidence("EV010", "R07", "T011", "G7", "reports/baselines/baseline_report.json", "JSON", "baseline experiment E01"),
     evidence("EV011", "R08;R08.1", "T012", "G8", "checkpoints/MODEL_V1.manifest.json", "JSON", "centralized training E02"),
     evidence("EV012", "R13;R13.1", "T013;T014", "G9", "reports/bidmc_multimodal_engineering/report.json", "JSON", "experiment E07"),
@@ -928,6 +933,9 @@ EVIDENCE_TASK_OWNERS = {
 }
 for evidence_row in EVIDENCE:
     evidence_row["task_ids"] = EVIDENCE_TASK_OWNERS[evidence_row["evidence_id"]]
+    evidence_path = ROOT / evidence_row["expected_path"]
+    if evidence_row["status"] == "GENERATED" and evidence_path.exists():
+        evidence_row["sha256"] = hash_file(evidence_path)
 
 
 def main() -> None:

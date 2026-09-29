@@ -1,0 +1,55 @@
+quality_id: QUALITY_V1
+spec_version: "2.2"
+status: FROZEN_G6
+
+states:
+  - VALID
+  - DEGRADED
+  - UNUSABLE
+state_precedence:
+  - UNUSABLE
+  - DEGRADED
+  - VALID
+
+hard_failure_rules:
+  incomplete_window: INCOMPLETE_WINDOW
+  nonfinite_signal: NONFINITE_SIGNAL
+  long_gap_spanning: LONG_GAP_SPAN
+  flatline: FLATLINE
+  explicit_clipping_mask: CLIPPING
+  explicit_detector_consistency_failure: DETECTOR_CONSISTENCY_FAILURE
+
+degraded_rules:
+  short_gap_fill_intersection: SHORT_GAP_FILL
+
+flatline:
+  method: POPULATION_STD_DIVIDED_BY_RMS
+  relative_epsilon: 1.0e-12
+  parameter_provenance: NUMERICAL_EPSILON_NOT_DATA_TUNED
+
+clipping:
+  handling: EXPLICIT_UPSTREAM_MASK_ONLY
+  public_or_synthetic_fixture_masks: SUPPORTED
+  wearable_adc_rails: VERIFICATION_REQUIRED_T004
+
+gap_handling:
+  short_gap: DEGRADED_UNLESS_HARD_FAILURE
+  long_gap_spanning: UNUSABLE
+  provenance_source: GAP_POLICY_V1_EVENTS_NOT_ANALOG_RESAMPLED_MASK
+
+no_future_data: REQUIRED
+label_independence: REQUIRED
+development_tuning_provenance:
+  data_dependent_thresholds_used: false
+  forbidden_sources:
+    - VALIDATION
+    - CALIBRATION
+    - INTERNAL_TEST
+    - INCART
+
+hardware_dependent_unresolved_fields:
+  clipping_threshold: VERIFICATION_REQUIRED_T004
+  detector_consistency_definition: VERIFICATION_REQUIRED_T004
+  wearable_timing_tolerance: VERIFICATION_REQUIRED_T004
+
+claim_boundary: RESEARCH_ENGINEERING_QUALITY_ONLY_NOT_A_CLINICAL_THRESHOLD_SYSTEM

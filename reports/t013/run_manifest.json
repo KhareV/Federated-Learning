@@ -1,0 +1,82 @@
+{
+  "config_path": "configs/preproc_v1.yaml",
+  "config_sha256": "fde19071afe82270f67c04129db4ab9ffeeeeb431a955c87f9eced41eec67814",
+  "created_at_utc": "2026-09-29T10:16:48.297464Z",
+  "dependency_snapshot_path": "reports/t001/dependencies.txt",
+  "dependency_snapshot_sha256": "e68c3d3eab6fa881350ee929491df808c16b1488d1af8f2b0d2c7961149ede9e",
+  "git_commit": "e70057214ec58afe41ae30de2be11d1d7915af42",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/splits/MITDB_SPLIT_V1.lock.json",
+      "sha256": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22"
+    },
+    {
+      "path": "manifests/labels/AAMI_SVF_MAP_V1.yaml",
+      "sha256": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145"
+    },
+    {
+      "path": "reports/preprocessing/resampler_causality.json",
+      "sha256": "8200257684f9b503456111a4add0e8017a9fdcea2439899a5033816faa8bbc52"
+    },
+    {
+      "path": "reports/preprocessing/filter_causality.json",
+      "sha256": "b4556fd8a1eb2adc3cbfaa21515d79c141208570b00c13955e0f61fd1883840f"
+    },
+    {
+      "path": "reports/preprocessing/gap_tests.json",
+      "sha256": "f9198e771b3dd8bb7e7823f6e20ec6396d05a7feec90e5964b8e5c67dc21adb1"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Partition-first real MITDB window construction after frozen MITDB_SPLIT_V1; QUALITY_V1 was hashed before held-out construction and remained unchanged. No model training/evaluation. T011/T012 evidence was referenced, not regenerated. Hardware timing/clipping semantics remain VERIFICATION_REQUIRED_T004.",
+  "output_artifacts": [
+    {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.csv",
+      "sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+    },
+    {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.cache.csv",
+      "sha256": "35610daa9e0611cca9976664af0e37492011637e085ba866806f378092c6fe4d"
+    },
+    {
+      "path": "manifests/preprocessing/PREPROC_V1.lock.json",
+      "sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+    },
+    {
+      "path": "reports/preprocessing/window_tests.json",
+      "sha256": "e460abbde94f1febf138c8004897f427bb5c51f43a3d20cce447094e241428ac"
+    },
+    {
+      "path": "reports/preprocessing/quality_tests.json",
+      "sha256": "4efc7efd71700bb4ef615d6b06e61f737e9d139d7485741a374373d17f2f47a1"
+    },
+    {
+      "path": "reports/preprocessing/sync_tests.json",
+      "sha256": "01de1883d6f4aecae41cfc87ef1ea72fa8384cc2354564f21e3f055ef5ec2cef"
+    },
+    {
+      "path": "reports/preprocessing/causality_tests.json",
+      "sha256": "ed8edf4ecb8b7f16b53c0e0820d460cba9d4e668182f7f053da9ffc63a1f4020"
+    },
+    {
+      "path": "reports/t013/window_distribution.json",
+      "sha256": "adbd58b88ae35f481c28af7997e695b412164cd0cc31a9bdbe583e337d61580a"
+    },
+    {
+      "path": "reports/t013/real_window_audit.json",
+      "sha256": "73dd325595dfa842ae2a911241ae1444f69078417478c245d6009ac678cbe17d"
+    },
+    {
+      "path": "reports/t013/preproc_freeze_audit.json",
+      "sha256": "ad8800e0656334c152f0bb7ed15a9f2f8fbabb67a852a1ad31d18e76b4d2eda9"
+    }
+  ],
+  "phase_id": "T013",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T013-WINDOWING-QUALITY-SYNC-PREPROC-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T013"
+}

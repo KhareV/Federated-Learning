@@ -1,0 +1,15 @@
+{
+  "cases": [
+    "ELIGIBLE_NEGATIVE",
+    "ELIGIBLE_POSITIVE",
+    "EXCLUDE_Q",
+    "EXCLUDE_UNMAPPABLE",
+    "EXCLUDE_LT5_MAPPABLE_BEATS",
+    "DEGRADED_SHORT_GAP",
+    "UNUSABLE_LONG_GAP"
+  ],
+  "clinical_evidence": false,
+  "fixture_origin": "synthetic_engineering_regression",
+  "sample_rate_hz": 250,
+  "window_samples": 2500
+}

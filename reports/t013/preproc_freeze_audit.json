@@ -1,0 +1,24 @@
+{
+  "bound_artifact_count": 22,
+  "component_statuses": {
+    "reports/preprocessing/filter_causality.json": "PASS",
+    "reports/preprocessing/gap_tests.json": "PASS",
+    "reports/preprocessing/quality_tests.json": "PASS",
+    "reports/preprocessing/resampler_causality.json": "PASS",
+    "reports/preprocessing/sync_tests.json": "PASS",
+    "reports/preprocessing/window_tests.json": "PASS",
+    "reports/t013/real_window_audit.json": "PASS"
+  },
+  "freeze_id": "F06",
+  "lock_path": "manifests/preprocessing/PREPROC_V1.lock.json",
+  "lock_sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+  "overall_status": "PASS",
+  "tamper_test_status": "PASS_TEST_SUITE",
+  "task_id": "T013",
+  "verification": {
+    "bound_artifact_count": 25,
+    "freeze_id": "F06",
+    "lock_path": "manifests/preprocessing/PREPROC_V1.lock.json",
+    "status": "PASS"
+  }
+}

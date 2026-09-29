@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets
@@ -363,3 +363,42 @@ phase12:
 	$(MAKE) filter-causality PYTHON=$(PYTHON)
 	$(MAKE) gap-policy-tests PYTHON=$(PYTHON)
 	$(MAKE) t012-evidence PYTHON=$(PYTHON)
+
+# T013: these fixture reports are offline and do not rewrite historical T011/T012 evidence.
+window-tests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_window_tests_t013.py
+
+quality-tests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_quality_tests_t013.py
+
+sync-tests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_sync_tests_t013.py
+
+build-mitdb-windows:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/build_mitdb_windows_t013.py
+
+# The partition-first builder writes and validates the real leakage audit as one transaction.
+real-window-audit: build-mitdb-windows
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "import json; from pathlib import Path; p=Path('reports/t013/real_window_audit.json'); assert json.loads(p.read_text())['overall_status']=='PASS'"
+
+preproc-freeze-audit:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_preproc_t013.py
+
+t013-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t013_evidence.py
+
+# Complete local Python 3.11 T013 gate. No dataset download and no remote CI.
+phase13:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	$(MAKE) validate-mitdb PYTHON=$(PYTHON)
+	$(MAKE) window-tests PYTHON=$(PYTHON)
+	$(MAKE) quality-tests PYTHON=$(PYTHON)
+	$(MAKE) sync-tests PYTHON=$(PYTHON)
+	$(MAKE) real-window-audit PYTHON=$(PYTHON)
+	$(MAKE) preproc-freeze-audit PYTHON=$(PYTHON)
+	$(MAKE) t013-evidence PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check

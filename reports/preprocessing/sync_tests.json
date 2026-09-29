@@ -1,0 +1,12 @@
+{
+  "duplicate_timestamp_policy": "RIGHTMOST_EQUAL_TIMESTAMP",
+  "future_rejection_status": "PASS",
+  "known_offset_status": "PASS",
+  "known_offset_us": 20000,
+  "latest_at_or_before_status": "PASS",
+  "overall_status": "PASS",
+  "production_hardware_tolerance_status": "VERIFICATION_REQUIRED_T004",
+  "sync_contract_id": "SYNC_CAUSAL_V1",
+  "task_id": "T013",
+  "timestamp_order_status": "PASS"
+}

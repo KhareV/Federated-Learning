@@ -1,0 +1,37 @@
+{
+  "annotation_boundary_fixtures": {
+    "257": {
+      "inside": true,
+      "just_after_right": false,
+      "just_before_left": false,
+      "left_edge": true,
+      "right_edge": true
+    },
+    "360": {
+      "inside": true,
+      "just_after_right": false,
+      "just_before_left": false,
+      "left_edge": true,
+      "right_edge": true
+    }
+  },
+  "annotation_interval_convention": "[t-10s,t]",
+  "candidate_count_boundaries": {
+    "2499": 0,
+    "2500": 1,
+    "3749": 1,
+    "3750": 2,
+    "5000": 3
+  },
+  "chunk_equivalence_status": "PASS",
+  "gap_fixture_results": "PASS",
+  "no_future_sample_status": "PASS",
+  "overall_status": "PASS",
+  "prediction_timestamp_rule": "RIGHT_EDGE_BOUNDARY",
+  "signal_interval_convention": "[t-10s,t)",
+  "stride_samples": 1250,
+  "target_id": "AAMI_SVF_WINDOW_V1",
+  "task_id": "T013",
+  "window_length_samples": 2500,
+  "windowing_id": "WINDOWING_V1"
+}

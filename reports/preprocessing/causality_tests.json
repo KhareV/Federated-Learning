@@ -1,0 +1,67 @@
+{
+  "components": {
+    "F06_lock": {
+      "path": "manifests/preprocessing/PREPROC_V1.lock.json",
+      "sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+      "status": "PASS"
+    },
+    "T011_resampler": {
+      "path": "reports/preprocessing/resampler_causality.json",
+      "sha256": "8200257684f9b503456111a4add0e8017a9fdcea2439899a5033816faa8bbc52",
+      "status": "PASS"
+    },
+    "T012_filters": {
+      "path": "reports/preprocessing/filter_causality.json",
+      "sha256": "b4556fd8a1eb2adc3cbfaa21515d79c141208570b00c13955e0f61fd1883840f",
+      "status": "PASS"
+    },
+    "T012_gap_policy": {
+      "path": "reports/preprocessing/gap_tests.json",
+      "sha256": "f9198e771b3dd8bb7e7823f6e20ec6396d05a7feec90e5964b8e5c67dc21adb1",
+      "status": "PASS"
+    },
+    "T013_quality": {
+      "path": "reports/preprocessing/quality_tests.json",
+      "sha256": "4efc7efd71700bb4ef615d6b06e61f737e9d139d7485741a374373d17f2f47a1",
+      "status": "PASS"
+    },
+    "T013_real_window_audit": {
+      "path": "reports/t013/real_window_audit.json",
+      "sha256": "73dd325595dfa842ae2a911241ae1444f69078417478c245d6009ac678cbe17d",
+      "status": "PASS"
+    },
+    "T013_synchronization": {
+      "path": "reports/preprocessing/sync_tests.json",
+      "sha256": "01de1883d6f4aecae41cfc87ef1ea72fa8384cc2354564f21e3f055ef5ec2cef",
+      "status": "PASS"
+    },
+    "T013_windows": {
+      "path": "reports/preprocessing/window_tests.json",
+      "sha256": "e460abbde94f1febf138c8004897f427bb5c51f43a3d20cce447094e241428ac",
+      "status": "PASS"
+    },
+    "cache_staleness_guard": {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.cache.csv",
+      "sha256": "35610daa9e0611cca9976664af0e37492011637e085ba866806f378092c6fe4d",
+      "status": "PASS"
+    }
+  },
+  "gate_id": "G6",
+  "overall_status": "PASS",
+  "preproc_id": "PREPROC_V1",
+  "scope": {
+    "generic_sync_fixture_evidence": true,
+    "hardware_validation": "NOT_PERFORMED_T004_BLOCKED_HARDWARE",
+    "real_mitdb_evidence": [
+      "window build",
+      "labels",
+      "leakage audit"
+    ],
+    "synthetic_fixture_evidence": [
+      "gap propagation",
+      "quality hard failures"
+    ],
+    "wearable_validation": "NOT_PERFORMED_G16_OPEN"
+  },
+  "upstream_evidence_policy": "REFERENCED_BY_SHA256_NOT_REGENERATED_BY_T013"
+}
