@@ -142,6 +142,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T012": "PASS",
             "T013": "PASS",
             "T014": "PASS",
+            "T015": "PASS",
         }.get(task_id, "NOT_STARTED")
         commit = {
             "T001": "0069fdf4c75609bf02b3a8bc34d8889f1702c5c9",
@@ -174,6 +175,7 @@ def canonical_tasks() -> list[dict[str, str]]:
             "T012": "reports/t012/preproc_component_status.json",
             "T013": "reports/preprocessing/causality_tests.json",
             "T014": "reports/baselines/baseline_report.json",
+            "T015": "reports/model/model_v1_training.json",
         }.get(task_id, "")
         notes = TASK_NOTES_OVERRIDE.get(
             task_id,

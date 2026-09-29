@@ -1,0 +1,37 @@
+{
+  "F08_status": "NOT_FROZEN_T016_OWNED",
+  "algorithm": "sha256",
+  "artifacts": {
+    "artifacts/MODEL_V1_candidate/train_pos_weight.json": "c42ab5151654cca31630547e7a3bcde4882b5f01f7df4a62861ac11585ffa191",
+    "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.metadata.json": "27605e0a506d7f968cb7f48b659164d88c8155a8426f798d4a458f9b92af198a",
+    "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260928_best.metadata.json": "7a5e7a973bffef6f9a29ee912b96f5e554ed9a33d68a3f900295db83258734f8",
+    "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260928_best.pt": "a346ce6c8b38c50c0c87c4c6ed72a85b36e829c7a27878d86e1e672404db9e8d",
+    "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260929_best.metadata.json": "7f19f44c0c3ce122ca36fa418686909dcfd02caa3963e20d4325ef9e326287e4",
+    "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260929_best.pt": "63ab477810e65efca388ba53eb4a290b98aad51234f600f37f12b87950af9b74",
+    "checkpoints/candidates/MODEL_V1/candidate_manifest.json": "834589d848106449d7dfc3ff13e0fff28a55a01d7ced2a4448074ac8ea1f1197",
+    "configs/model_v1.yaml": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc",
+    "models/ecg_cnn.py": "d6a5c0c979a2ef07579f6b29bc8bd57cc396a2bdbd3d9a08ff74403fd95a1a00",
+    "reports/model/model_v1_training.json": "c3f53ea88dc678118cf1e8a3697bbe093adc6d8e9db6895a8a02654dabb24bf3",
+    "reports/t015/augmentation_audit.json": "4fb43860e4e09ee3e98e69f2f02d9523ab03999c501b3db52ab852245293fa9d",
+    "reports/t015/determinism_smoke.json": "26aa5969fdb98575dcc9ee89dd1b0f21a7fe69e4ff9aa663ab36315f9cced425",
+    "reports/t015/partition_access_audit.json": "cf749d7f20e4872d1d43a6791b878f6daf14c9c45c413487c89c8f45dccdd427",
+    "reports/t015/run_manifest.json": "63fb745cf504ccf24ea7905e8698ee151d6d2265cfd09f92a75d00e5e74fc1d1",
+    "reports/t015/seed_robustness.json": "2bcec529125a181721994c951073e6cb2fbdbb13e1b3664e46fa77d7fd89af71",
+    "reports/t015/seeds/20260927.json": "079c283a347e83c49d504d97865f433229eb3c8c095959988ad8e43823cc5726",
+    "reports/t015/seeds/20260928.json": "7677af6b040fcfbc39325ff866ea1cde5150d633a7290ace8805b46330a0cbd5",
+    "reports/t015/seeds/20260929.json": "225d6947591229841929dd1f4f67fb2b46f32996b0fee407036011f660cb3df5",
+    "reports/t015/training_contract_audit.json": "94bd7800ce0803286b4e6f6081c8acfa3dc04b817467ca210a90df83ed9c271c",
+    "training/train_central.py": "73cca30cdece34a1af6264100736452b56826b96511ec18bf7559a82f930c411"
+  },
+  "candidate_binary_policy": "Generated .pt files remain gitignored; committed candidate manifest and metadata retain hashes and the normal training command regenerates them.",
+  "manifest_version": "1.0",
+  "rule": "exact file bytes; this manifest excludes itself to avoid a circular digest",
+  "upstream_frozen_hashes": {
+    "manifests/baselines/BASELINE_V1.lock.json": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.lock.json": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+    "manifests/windows/MITDB_WINDOWS_V1.cache.csv": "35610daa9e0611cca9976664af0e37492011637e085ba866806f378092c6fe4d",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  }
+}

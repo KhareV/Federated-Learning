@@ -1,0 +1,122 @@
+{
+  "config_path": "configs/model_v1.yaml",
+  "config_sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc",
+  "created_at_utc": "2026-09-29T17:00:19.564271Z",
+  "dependency_snapshot_path": "requirements-dev.lock",
+  "dependency_snapshot_sha256": "4863f6335f9a46e520550116a7e909dfb18b7f34e6fd278c35436a61e964537d",
+  "git_commit": "29960e9404588a453e72d9c6e5af68602bc1b4d0",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/splits/MITDB_SPLIT_V1.lock.json",
+      "sha256": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22"
+    },
+    {
+      "path": "manifests/preprocessing/PREPROC_V1.lock.json",
+      "sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+    },
+    {
+      "path": "manifests/baselines/BASELINE_V1.lock.json",
+      "sha256": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5"
+    },
+    {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.csv",
+      "sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+    },
+    {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.cache.csv",
+      "sha256": "35610daa9e0611cca9976664af0e37492011637e085ba866806f378092c6fe4d"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Exact MODEL_V1 candidates trained on TRAIN and selected within-seed by pooled VALIDATION AUPRC. Release seed fixed to 20260927. Robustness seeds cannot replace it. No calibration, internal test, external data, final promotion, F08 freeze, or CI.",
+  "output_artifacts": [
+    {
+      "path": "configs/model_v1.yaml",
+      "sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc"
+    },
+    {
+      "path": "models/ecg_cnn.py",
+      "sha256": "d6a5c0c979a2ef07579f6b29bc8bd57cc396a2bdbd3d9a08ff74403fd95a1a00"
+    },
+    {
+      "path": "training/train_central.py",
+      "sha256": "73cca30cdece34a1af6264100736452b56826b96511ec18bf7559a82f930c411"
+    },
+    {
+      "path": "artifacts/MODEL_V1_candidate/train_pos_weight.json",
+      "sha256": "c42ab5151654cca31630547e7a3bcde4882b5f01f7df4a62861ac11585ffa191"
+    },
+    {
+      "path": "checkpoints/candidates/MODEL_V1/candidate_manifest.json",
+      "sha256": "834589d848106449d7dfc3ff13e0fff28a55a01d7ced2a4448074ac8ea1f1197"
+    },
+    {
+      "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    {
+      "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.metadata.json",
+      "sha256": "27605e0a506d7f968cb7f48b659164d88c8155a8426f798d4a458f9b92af198a"
+    },
+    {
+      "path": "reports/t015/seeds/20260927.json",
+      "sha256": "079c283a347e83c49d504d97865f433229eb3c8c095959988ad8e43823cc5726"
+    },
+    {
+      "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260928_best.pt",
+      "sha256": "a346ce6c8b38c50c0c87c4c6ed72a85b36e829c7a27878d86e1e672404db9e8d"
+    },
+    {
+      "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260928_best.metadata.json",
+      "sha256": "7a5e7a973bffef6f9a29ee912b96f5e554ed9a33d68a3f900295db83258734f8"
+    },
+    {
+      "path": "reports/t015/seeds/20260928.json",
+      "sha256": "7677af6b040fcfbc39325ff866ea1cde5150d633a7290ace8805b46330a0cbd5"
+    },
+    {
+      "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260929_best.pt",
+      "sha256": "63ab477810e65efca388ba53eb4a290b98aad51234f600f37f12b87950af9b74"
+    },
+    {
+      "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260929_best.metadata.json",
+      "sha256": "7f19f44c0c3ce122ca36fa418686909dcfd02caa3963e20d4325ef9e326287e4"
+    },
+    {
+      "path": "reports/t015/seeds/20260929.json",
+      "sha256": "225d6947591229841929dd1f4f67fb2b46f32996b0fee407036011f660cb3df5"
+    },
+    {
+      "path": "reports/model/model_v1_training.json",
+      "sha256": "c3f53ea88dc678118cf1e8a3697bbe093adc6d8e9db6895a8a02654dabb24bf3"
+    },
+    {
+      "path": "reports/t015/training_contract_audit.json",
+      "sha256": "94bd7800ce0803286b4e6f6081c8acfa3dc04b817467ca210a90df83ed9c271c"
+    },
+    {
+      "path": "reports/t015/partition_access_audit.json",
+      "sha256": "cf749d7f20e4872d1d43a6791b878f6daf14c9c45c413487c89c8f45dccdd427"
+    },
+    {
+      "path": "reports/t015/seed_robustness.json",
+      "sha256": "2bcec529125a181721994c951073e6cb2fbdbb13e1b3664e46fa77d7fd89af71"
+    },
+    {
+      "path": "reports/t015/augmentation_audit.json",
+      "sha256": "4fb43860e4e09ee3e98e69f2f02d9523ab03999c501b3db52ab852245293fa9d"
+    },
+    {
+      "path": "reports/t015/determinism_smoke.json",
+      "sha256": "26aa5969fdb98575dcc9ee89dd1b0f21a7fe69e4ff9aa663ab36315f9cced425"
+    }
+  ],
+  "phase_id": "T015",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T015-MODEL-V1-CANDIDATES",
+  "seed": 20260927,
+  "spec_version": "2.2",
+  "task_id": "T015"
+}

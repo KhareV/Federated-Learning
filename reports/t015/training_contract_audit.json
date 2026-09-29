@@ -1,0 +1,26 @@
+{
+  "TRAIN_only_pos_weight": "PASS",
+  "architecture_exact": "PASS",
+  "batch_size": 64,
+  "config_sha_after_validation": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc",
+  "config_sha_before_validation": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc",
+  "early_stop_monitor": "VALIDATION_POOLED_WINDOW_AUPRC",
+  "early_stop_patience": 7,
+  "input_shape_exact": "PASS",
+  "learning_rate": 0.001,
+  "loss": "BCEWithLogitsLoss",
+  "max_epochs": 50,
+  "optimizer": "AdamW",
+  "overall_status": "PASS",
+  "parameter_count": 13185,
+  "release_seed": 20260927,
+  "robustness_seeds": [
+    20260928,
+    20260929
+  ],
+  "scheduler": "ReduceLROnPlateau",
+  "scheduler_monitor": "VALIDATION_POOLED_WINDOW_AUPRC",
+  "sigmoid_absent_from_forward": "PASS",
+  "time_reversal": false,
+  "weight_decay": 0.0001
+}

@@ -1,0 +1,130 @@
+model_id: MODEL_V1
+candidate_status: CANDIDATE_VALIDATED_T015_NOT_FROZEN_UNTIL_T016
+spec_version: "2.2"
+target_id: AAMI_SVF_WINDOW_V1
+map_id: AAMI_SVF_MAP_V1
+preproc_id: PREPROC_V1
+split_id: MITDB_SPLIT_V1
+
+input:
+  channels: 1
+  samples: 2500
+  dtype: float32
+  source: PREPROC_V1_CAUSAL_FILTERED_UNNORMALIZED_FLOAT64
+  normalization_id: PER_WINDOW_ZSCORE_V1
+  normalization_formula: "(window - population_mean(window)) / (population_std(window) + epsilon)"
+  epsilon: 1.0e-8
+  classical_features: FORBIDDEN
+
+architecture:
+  conv1: {in_channels: 1, out_channels: 16, kernel_size: 7, stride: 1, padding: 0, dilation: 1, groups: 1, bias: true}
+  batch_norm1: {num_features: 16}
+  activation1: ReLU
+  max_pool1: {kernel_size: 2, stride: 2, padding: 0, dilation: 1, ceil_mode: false}
+  conv2: {in_channels: 16, out_channels: 32, kernel_size: 5, stride: 1, padding: 0, dilation: 1, groups: 1, bias: true}
+  batch_norm2: {num_features: 32}
+  activation2: ReLU
+  max_pool2: {kernel_size: 2, stride: 2, padding: 0, dilation: 1, ceil_mode: false}
+  conv3: {in_channels: 32, out_channels: 64, kernel_size: 5, stride: 1, padding: 0, dilation: 1, groups: 1, bias: true}
+  activation3: ReLU
+  adaptive_average_pool: {output_size: 1}
+  flatten: {start_dim: 1}
+  dropout: {p: 0.2}
+  output: {in_features: 64, out_features: 1, bias: true}
+  output_activation: NONE_RAW_LOGIT
+  expected_trainable_parameters: 13185
+
+loss:
+  implementation: torch.nn.BCEWithLogitsLoss
+  positive_weight_formula_id: TRAIN_NEG_OVER_POS_V1
+  positive_weight_formula: N_train_negative / N_train_positive
+  source_partition: TRAIN
+
+optimizer:
+  implementation: torch.optim.AdamW
+  learning_rate: 0.001
+  betas: [0.9, 0.999]
+  epsilon: 1.0e-8
+  weight_decay: 0.0001
+  amsgrad: false
+  maximize: false
+  foreach: null
+  capturable: false
+  differentiable: false
+  fused: null
+
+scheduler:
+  implementation: torch.optim.lr_scheduler.ReduceLROnPlateau
+  monitor: VALIDATION_POOLED_WINDOW_AUPRC
+  mode: max
+  factor: 0.1
+  patience: 10
+  threshold: 0.0001
+  threshold_mode: rel
+  cooldown: 0
+  min_lr: 0.0
+  epsilon: 1.0e-8
+
+training:
+  device: cpu
+  batch_size: 64
+  max_epochs: 50
+  train_shuffle: true
+  validation_shuffle: false
+  drop_last: false
+  num_workers: 0
+  early_stopping_monitor: VALIDATION_POOLED_WINDOW_AUPRC
+  early_stopping_mode: max
+  early_stopping_patience: 7
+  strict_improvement: true
+  tie_policy: RETAIN_EARLIEST_BEST
+  descriptive_threshold: 0.5
+
+augmentation:
+  augmentation_id: MODEL_V1_TRAIN_AUG_V1
+  scope: TRAIN_ONLY
+  order: FILTERED_WINDOW_THEN_AUGMENT_THEN_PER_WINDOW_ZSCORE
+  amplitude_scale_distribution: UNIFORM
+  amplitude_scale_min: 0.90
+  amplitude_scale_max: 1.10
+  baseline_drift:
+    waveform: sinusoid
+    frequency_hz_distribution: UNIFORM
+    frequency_hz_min: 0.05
+    frequency_hz_max: 0.50
+    amplitude_distribution: UNIFORM_ZERO_TO_MAX
+    max_amplitude_window_std_fraction: 0.02
+    phase_distribution: UNIFORM_0_TO_2PI
+  gaussian_noise:
+    mean: 0.0
+    std_window_std_fraction: 0.01
+  parameter_derivation: CONSERVATIVE_PREVALIDATION_ENGINEERING_CHOICE_TRAIN_WINDOW_SCALE_ONLY
+  development_sources: TRAIN_WAVEFORM_ONLY
+  validation_or_heldout_tuning: false
+  time_reversal: false
+
+seeds:
+  release: 20260927
+  robustness: [20260928, 20260929]
+  release_selection: FIXED_SEED_NEVER_BEST_SEED
+
+determinism:
+  torch_deterministic_algorithms: true
+  python_random_seed: true
+  numpy_seed: true
+  torch_cpu_seed: true
+  canonical_device: cpu
+
+partition_contract:
+  TRAIN: FIT_AUGMENT_POS_WEIGHT
+  VALIDATION: MODEL_SELECTION_EARLY_STOPPING_ONLY
+  CALIBRATION: NOT_ACCESSED
+  INTERNAL_TEST: NOT_ACCESSED
+  INCART: NOT_ACCESSED
+  NSTDB: NOT_ACCESSED
+  BIDMC: NOT_ACCESSED
+  WEARABLE_V1: NOT_ACCESSED
+  WEARABLE_SIM_V1: NOT_ACCESSED
+
+calibration: null
+operating_threshold: null

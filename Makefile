@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets features models training evaluation preprocessing
@@ -432,4 +432,37 @@ phase14:
 	$(MAKE) baseline-audit PYTHON=$(PYTHON)
 	$(MAKE) baseline-freeze-audit PYTHON=$(PYTHON)
 	$(MAKE) t014-evidence PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
+
+# T015 real training command. It executes exactly the fixed primary + two robustness seeds.
+model-v1-train:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m training.train_central
+
+model-v1-tests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_model_v1_architecture.py tests/test_model_v1_loss.py tests/test_model_v1_data_scope.py tests/test_model_v1_training.py tests/test_model_v1_seed_policy.py
+
+model-v1-audit:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/audit_model_v1_t015.py
+
+# Verifies the already-completed real candidates without repeating the costly scientific run.
+model-v1-candidates:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_model_v1_candidates_t015.py
+
+t015-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t015_evidence.py
+
+# Complete local Python 3.11 T015 gate. Candidate training is run once via model-v1-train;
+# subsequent phase validation verifies its exact hashes and reload behavior without retraining.
+phase15:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	$(MAKE) validate-mitdb PYTHON=$(PYTHON)
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from pathlib import Path; from evaluation.leakage_audit import verify_frozen_split; from preprocessing.freeze import verify_preproc_freeze; from models.baseline_freeze import verify_baseline_freeze; r=Path('.'); assert verify_frozen_split(r)['status']=='PASS'; assert verify_preproc_freeze(r)['status']=='PASS'; assert verify_baseline_freeze(r)['status']=='PASS'"
+	$(MAKE) model-v1-tests PYTHON=$(PYTHON)
+	$(MAKE) model-v1-audit PYTHON=$(PYTHON)
+	$(MAKE) model-v1-candidates PYTHON=$(PYTHON)
+	$(MAKE) t015-evidence PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check

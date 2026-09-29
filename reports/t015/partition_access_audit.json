@@ -1,0 +1,120 @@
+{
+  "BIDMC": {
+    "access_count": 0,
+    "paths": [],
+    "role": "NOT_ACCESSED"
+  },
+  "CALIBRATION": {
+    "access_count": 0,
+    "paths": [],
+    "role": "NOT_ACCESSED"
+  },
+  "INCART": {
+    "access_count": 0,
+    "paths": [],
+    "role": "NOT_ACCESSED"
+  },
+  "INTERNAL_TEST": {
+    "access_count": 0,
+    "paths": [],
+    "role": "NOT_ACCESSED"
+  },
+  "NSTDB": {
+    "access_count": 0,
+    "paths": [],
+    "role": "NOT_ACCESSED"
+  },
+  "TRAIN": {
+    "access_count": 54,
+    "paths": [
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/101_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/101_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/103_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/103_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/105_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/105_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/111_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/111_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/113_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/113_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/114_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/114_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/117_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/117_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/118_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/118_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/119_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/119_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/121_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/121_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/122_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/122_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/124_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/124_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/203_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/203_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/205_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/205_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/207_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/207_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/208_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/208_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/209_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/209_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/210_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/210_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/212_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/212_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/215_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/215_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/220_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/220_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/221_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/221_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/222_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/222_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/223_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/223_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/228_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/228_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/230_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/230_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/232_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/232_example_ids.txt"
+    ],
+    "role": "FIT"
+  },
+  "VALIDATION": {
+    "access_count": 16,
+    "paths": [
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/100_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/100_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/106_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/106_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/108_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/108_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/109_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/109_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/112_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/112_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/201_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/201_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/202_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/202_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/231_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/231_example_ids.txt"
+    ],
+    "role": "MODEL_SELECTION_EARLY_STOPPING_ONLY"
+  },
+  "WEARABLE_SIM_V1": {
+    "access_count": 0,
+    "paths": [],
+    "role": "NOT_ACCESSED"
+  },
+  "WEARABLE_V1": {
+    "access_count": 0,
+    "paths": [],
+    "role": "NOT_ACCESSED"
+  },
+  "overall_status": "PASS"
+}

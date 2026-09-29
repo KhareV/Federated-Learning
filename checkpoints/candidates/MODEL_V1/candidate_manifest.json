@@ -1,0 +1,126 @@
+{
+  "F08_frozen": false,
+  "candidates": [
+    {
+      "best_epoch": 4,
+      "best_validation_auprc": 0.5328607838787021,
+      "checkpoint_path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt",
+      "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+      "metadata_path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.metadata.json",
+      "metadata_sha256": "27605e0a506d7f968cb7f48b659164d88c8155a8426f798d4a458f9b92af198a",
+      "seed": 20260927,
+      "seed_log_path": "reports/t015/seeds/20260927.json",
+      "seed_log_sha256": "079c283a347e83c49d504d97865f433229eb3c8c095959988ad8e43823cc5726",
+      "status": "CANDIDATE_T015_NOT_FROZEN"
+    },
+    {
+      "best_epoch": 4,
+      "best_validation_auprc": 0.4794350072114173,
+      "checkpoint_path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260928_best.pt",
+      "checkpoint_sha256": "a346ce6c8b38c50c0c87c4c6ed72a85b36e829c7a27878d86e1e672404db9e8d",
+      "metadata_path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260928_best.metadata.json",
+      "metadata_sha256": "7a5e7a973bffef6f9a29ee912b96f5e554ed9a33d68a3f900295db83258734f8",
+      "seed": 20260928,
+      "seed_log_path": "reports/t015/seeds/20260928.json",
+      "seed_log_sha256": "7677af6b040fcfbc39325ff866ea1cde5150d633a7290ace8805b46330a0cbd5",
+      "status": "CANDIDATE_T015_NOT_FROZEN"
+    },
+    {
+      "best_epoch": 3,
+      "best_validation_auprc": 0.4825433837968652,
+      "checkpoint_path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260929_best.pt",
+      "checkpoint_sha256": "63ab477810e65efca388ba53eb4a290b98aad51234f600f37f12b87950af9b74",
+      "metadata_path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260929_best.metadata.json",
+      "metadata_sha256": "7f19f44c0c3ce122ca36fa418686909dcfd02caa3963e20d4325ef9e326287e4",
+      "seed": 20260929,
+      "seed_log_path": "reports/t015/seeds/20260929.json",
+      "seed_log_sha256": "225d6947591229841929dd1f4f67fb2b46f32996b0fee407036011f660cb3df5",
+      "status": "CANDIDATE_T015_NOT_FROZEN"
+    }
+  ],
+  "config_sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc",
+  "final_MODEL_V1_promoted": false,
+  "intermediate_shapes": {
+    "bn1": [
+      1,
+      16,
+      2494
+    ],
+    "bn2": [
+      1,
+      32,
+      1243
+    ],
+    "conv1": [
+      1,
+      16,
+      2494
+    ],
+    "conv2": [
+      1,
+      32,
+      1243
+    ],
+    "conv3": [
+      1,
+      64,
+      617
+    ],
+    "dropout": [
+      1,
+      64
+    ],
+    "flatten": [
+      1,
+      64
+    ],
+    "global_pool": [
+      1,
+      64,
+      1
+    ],
+    "input": [
+      1,
+      1,
+      2500
+    ],
+    "output": [
+      1,
+      1
+    ],
+    "pool1": [
+      1,
+      16,
+      1247
+    ],
+    "pool2": [
+      1,
+      32,
+      621
+    ],
+    "relu1": [
+      1,
+      16,
+      2494
+    ],
+    "relu2": [
+      1,
+      32,
+      1243
+    ],
+    "relu3": [
+      1,
+      64,
+      617
+    ]
+  },
+  "model_id": "MODEL_V1",
+  "overall_status": "PASS",
+  "package_status": "MODEL_V1_CANDIDATE_READY_FOR_T016",
+  "parameter_count": 13185,
+  "release_candidate_seed": 20260927,
+  "robustness_seeds": [
+    20260928,
+    20260929
+  ]
+}

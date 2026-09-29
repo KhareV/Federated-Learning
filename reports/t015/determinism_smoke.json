@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "BN_validation_state_unchanged": true,
+    "eval_mode_repeat_logits": true,
+    "final_parameters_repeat_identical": true,
+    "initial_parameters_repeat_identical": true,
+    "loss_sequence_repeat_identical": true,
+    "validation_logits_repeat_identical": true
+  },
+  "first_loss_sequence": [
+    0.7337779998779297,
+    0.6941561698913574
+  ],
+  "fixture_scope": "SYNTHETIC_T015_ONLY_NOT_FINAL_T016_TEST_VECTOR",
+  "model_id": "MODEL_V1",
+  "overall_status": "PASS",
+  "seed": 314159,
+  "steps": 2
+}

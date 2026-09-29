@@ -1,0 +1,32 @@
+{
+  "amplitude_scale_range": [
+    0.9,
+    1.1
+  ],
+  "augmentation_id": "MODEL_V1_TRAIN_AUG_V1",
+  "baseline_drift": {
+    "amplitude_distribution": "UNIFORM_ZERO_TO_MAX",
+    "frequency_hz_distribution": "UNIFORM",
+    "frequency_hz_max": 0.5,
+    "frequency_hz_min": 0.05,
+    "max_amplitude_window_std_fraction": 0.02,
+    "phase_distribution": "UNIFORM_0_TO_2PI",
+    "waveform": "sinusoid"
+  },
+  "config_sha256": "9bfd7b2cb2a645d91fd335cdffdc0e8131158084ef07c2a80cd53128ec8828e3",
+  "deterministic_identity_inputs": [
+    "seed",
+    "epoch",
+    "example_id",
+    "config"
+  ],
+  "development_sources": "TRAIN_WAVEFORM_ONLY",
+  "gaussian_noise": {
+    "mean": 0.0,
+    "std_window_std_fraction": 0.01
+  },
+  "overall_status": "PASS",
+  "scope": "TRAIN_ONLY",
+  "time_reversal": false,
+  "validation_or_heldout_tuning": false
+}

@@ -1,0 +1,518 @@
+{
+  "architecture_parameter_count": 13185,
+  "calibration": null,
+  "environment": {
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "numpy_version": "2.4.6",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "torch_version": "2.14.0"
+  },
+  "model_id": "MODEL_V1",
+  "operating_threshold": null,
+  "overall_status": "PASS",
+  "partition_access": {
+    "BIDMC": {
+      "access_count": 0,
+      "paths": [],
+      "role": "NOT_ACCESSED"
+    },
+    "CALIBRATION": {
+      "access_count": 0,
+      "paths": [],
+      "role": "NOT_ACCESSED"
+    },
+    "INCART": {
+      "access_count": 0,
+      "paths": [],
+      "role": "NOT_ACCESSED"
+    },
+    "INTERNAL_TEST": {
+      "access_count": 0,
+      "paths": [],
+      "role": "NOT_ACCESSED"
+    },
+    "NSTDB": {
+      "access_count": 0,
+      "paths": [],
+      "role": "NOT_ACCESSED"
+    },
+    "TRAIN": {
+      "access_count": 54,
+      "paths": [
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/101_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/101_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/103_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/103_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/105_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/105_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/111_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/111_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/113_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/113_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/114_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/114_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/117_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/117_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/118_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/118_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/119_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/119_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/121_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/121_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/122_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/122_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/124_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/124_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/203_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/203_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/205_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/205_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/207_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/207_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/208_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/208_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/209_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/209_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/210_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/210_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/212_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/212_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/215_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/215_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/220_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/220_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/221_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/221_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/222_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/222_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/223_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/223_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/228_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/228_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/230_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/230_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/232_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/232_example_ids.txt"
+      ],
+      "role": "FIT"
+    },
+    "VALIDATION": {
+      "access_count": 16,
+      "paths": [
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/100_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/100_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/106_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/106_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/108_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/108_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/109_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/109_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/112_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/112_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/201_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/201_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/202_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/202_example_ids.txt",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/231_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/VALIDATION/231_example_ids.txt"
+      ],
+      "role": "MODEL_SELECTION_EARLY_STOPPING_ONLY"
+    },
+    "WEARABLE_SIM_V1": {
+      "access_count": 0,
+      "paths": [],
+      "role": "NOT_ACCESSED"
+    },
+    "WEARABLE_V1": {
+      "access_count": 0,
+      "paths": [],
+      "role": "NOT_ACCESSED"
+    },
+    "overall_status": "PASS"
+  },
+  "pos_weight": {
+    "formula": "N_train_negative / N_train_positive",
+    "formula_id": "TRAIN_NEG_OVER_POS_V1",
+    "pos_weight": 1.7157717177396683,
+    "source_partition": "TRAIN",
+    "split_sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "train_negatives": 6103,
+    "train_positives": 3557,
+    "window_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  },
+  "release_candidate": {
+    "best_epoch": 4,
+    "best_validation_auprc": 0.5328607838787021,
+    "best_validation_metrics": {
+      "AUPRC": 0.5328607838787021,
+      "AUROC": 0.7669923699782,
+      "accuracy": 0.64375,
+      "negatives": 2204,
+      "patient_groups": 7,
+      "patient_macro_F1": 0.48482809114434505,
+      "pooled_F1": 0.4940828402366864,
+      "positives": 676,
+      "precision": 0.37056213017751477,
+      "sensitivity": 0.7411242603550295,
+      "specificity": 0.6138838475499092,
+      "windows": 2880
+    },
+    "candidate_status": "CANDIDATE_T015",
+    "checkpoint_path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt",
+    "checkpoint_reload_test": "PASS",
+    "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "checkpoint_size_bytes": 60301,
+    "epoch_logs": [
+      {
+        "epoch": 1,
+        "improved": true,
+        "learning_rate": 0.001,
+        "non_improvement_count": 0,
+        "train_loss": 0.8341822084432803,
+        "validation_auprc": 0.4351705128904006,
+        "validation_loss": 0.7882119337717692
+      },
+      {
+        "epoch": 2,
+        "improved": false,
+        "learning_rate": 0.001,
+        "non_improvement_count": 1,
+        "train_loss": 0.7209905884033898,
+        "validation_auprc": 0.41809424081276203,
+        "validation_loss": 0.937946942779753
+      },
+      {
+        "epoch": 3,
+        "improved": false,
+        "learning_rate": 0.001,
+        "non_improvement_count": 2,
+        "train_loss": 0.6288705341440797,
+        "validation_auprc": 0.37859775703000165,
+        "validation_loss": 1.0528092245260874
+      },
+      {
+        "epoch": 4,
+        "improved": true,
+        "learning_rate": 0.001,
+        "non_improvement_count": 0,
+        "train_loss": 0.5759994774131301,
+        "validation_auprc": 0.5328607838787021,
+        "validation_loss": 0.7077716539303461
+      },
+      {
+        "epoch": 5,
+        "improved": false,
+        "learning_rate": 0.001,
+        "non_improvement_count": 1,
+        "train_loss": 0.5212564780351785,
+        "validation_auprc": 0.4107947581516134,
+        "validation_loss": 1.0854664214783245
+      },
+      {
+        "epoch": 6,
+        "improved": false,
+        "learning_rate": 0.001,
+        "non_improvement_count": 2,
+        "train_loss": 0.4952730252135614,
+        "validation_auprc": 0.3626753025363103,
+        "validation_loss": 1.197923424674405
+      },
+      {
+        "epoch": 7,
+        "improved": false,
+        "learning_rate": 0.001,
+        "non_improvement_count": 3,
+        "train_loss": 0.4690929782193146,
+        "validation_auprc": 0.3515853935069667,
+        "validation_loss": 1.5936242303086652
+      },
+      {
+        "epoch": 8,
+        "improved": false,
+        "learning_rate": 0.001,
+        "non_improvement_count": 4,
+        "train_loss": 0.4621348886386208,
+        "validation_auprc": 0.3964595430133974,
+        "validation_loss": 1.2778012223541737
+      },
+      {
+        "epoch": 9,
+        "improved": false,
+        "learning_rate": 0.001,
+        "non_improvement_count": 5,
+        "train_loss": 0.44013527672483316,
+        "validation_auprc": 0.39157734574298386,
+        "validation_loss": 1.5502527880171935
+      },
+      {
+        "epoch": 10,
+        "improved": false,
+        "learning_rate": 0.001,
+        "non_improvement_count": 6,
+        "train_loss": 0.425588615908139,
+        "validation_auprc": 0.40615427691307016,
+        "validation_loss": 1.1199862044718532
+      },
+      {
+        "epoch": 11,
+        "improved": false,
+        "learning_rate": 0.001,
+        "non_improvement_count": 7,
+        "train_loss": 0.41644566514477227,
+        "validation_auprc": 0.39090016924029647,
+        "validation_loss": 1.109318001733886
+      }
+    ],
+    "epochs_completed": 11,
+    "final_learning_rate": 0.001,
+    "initial_learning_rate": 0.001,
+    "lr_reductions": 0,
+    "model_id": "MODEL_V1",
+    "seed": 20260927,
+    "stop_epoch": 11,
+    "stop_reason": "EARLY_STOP_PATIENCE_7_NON_IMPROVING_EPOCHS",
+    "wall_clock_seconds": 320.0099332090467
+  },
+  "robustness": {
+    "highest_scoring_seed": 20260927,
+    "overall_status": "PASS",
+    "release_candidate_seed": 20260927,
+    "release_seed_invariant": "PASS",
+    "sd_convention": "sample standard deviation, ddof=1",
+    "seeds": [
+      {
+        "best_epoch": 4,
+        "best_validation_auprc": 0.5328607838787021,
+        "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+        "seed": 20260927,
+        "validation_patient_macro_F1": 0.48482809114434505
+      },
+      {
+        "best_epoch": 4,
+        "best_validation_auprc": 0.4794350072114173,
+        "checkpoint_sha256": "a346ce6c8b38c50c0c87c4c6ed72a85b36e829c7a27878d86e1e672404db9e8d",
+        "seed": 20260928,
+        "validation_patient_macro_F1": 0.42316732798030676
+      },
+      {
+        "best_epoch": 3,
+        "best_validation_auprc": 0.4825433837968652,
+        "checkpoint_sha256": "63ab477810e65efca388ba53eb4a290b98aad51234f600f37f12b87950af9b74",
+        "seed": 20260929,
+        "validation_patient_macro_F1": 0.31284196936283076
+      }
+    ],
+    "validation_auprc_mean": 0.49827972496232814,
+    "validation_auprc_sd": 0.029988376549632215,
+    "validation_patient_macro_F1_mean": 0.4069457961624942,
+    "validation_patient_macro_F1_sd": 0.08713300231398374
+  },
+  "seed_policy": {
+    "best_seed_selection": "FORBIDDEN",
+    "release_seed": 20260927,
+    "robustness_seeds": [
+      20260928,
+      20260929
+    ]
+  },
+  "status": "MODEL_V1_CANDIDATE_READY_FOR_T016",
+  "training_contract": {
+    "architecture": {
+      "activation1": "ReLU",
+      "activation2": "ReLU",
+      "activation3": "ReLU",
+      "adaptive_average_pool": {
+        "output_size": 1
+      },
+      "batch_norm1": {
+        "num_features": 16
+      },
+      "batch_norm2": {
+        "num_features": 32
+      },
+      "conv1": {
+        "bias": true,
+        "dilation": 1,
+        "groups": 1,
+        "in_channels": 1,
+        "kernel_size": 7,
+        "out_channels": 16,
+        "padding": 0,
+        "stride": 1
+      },
+      "conv2": {
+        "bias": true,
+        "dilation": 1,
+        "groups": 1,
+        "in_channels": 16,
+        "kernel_size": 5,
+        "out_channels": 32,
+        "padding": 0,
+        "stride": 1
+      },
+      "conv3": {
+        "bias": true,
+        "dilation": 1,
+        "groups": 1,
+        "in_channels": 32,
+        "kernel_size": 5,
+        "out_channels": 64,
+        "padding": 0,
+        "stride": 1
+      },
+      "dropout": {
+        "p": 0.2
+      },
+      "expected_trainable_parameters": 13185,
+      "flatten": {
+        "start_dim": 1
+      },
+      "max_pool1": {
+        "ceil_mode": false,
+        "dilation": 1,
+        "kernel_size": 2,
+        "padding": 0,
+        "stride": 2
+      },
+      "max_pool2": {
+        "ceil_mode": false,
+        "dilation": 1,
+        "kernel_size": 2,
+        "padding": 0,
+        "stride": 2
+      },
+      "output": {
+        "bias": true,
+        "in_features": 64,
+        "out_features": 1
+      },
+      "output_activation": "NONE_RAW_LOGIT"
+    },
+    "augmentation": {
+      "amplitude_scale_distribution": "UNIFORM",
+      "amplitude_scale_max": 1.1,
+      "amplitude_scale_min": 0.9,
+      "augmentation_id": "MODEL_V1_TRAIN_AUG_V1",
+      "baseline_drift": {
+        "amplitude_distribution": "UNIFORM_ZERO_TO_MAX",
+        "frequency_hz_distribution": "UNIFORM",
+        "frequency_hz_max": 0.5,
+        "frequency_hz_min": 0.05,
+        "max_amplitude_window_std_fraction": 0.02,
+        "phase_distribution": "UNIFORM_0_TO_2PI",
+        "waveform": "sinusoid"
+      },
+      "development_sources": "TRAIN_WAVEFORM_ONLY",
+      "gaussian_noise": {
+        "mean": 0.0,
+        "std_window_std_fraction": 0.01
+      },
+      "order": "FILTERED_WINDOW_THEN_AUGMENT_THEN_PER_WINDOW_ZSCORE",
+      "parameter_derivation": "CONSERVATIVE_PREVALIDATION_ENGINEERING_CHOICE_TRAIN_WINDOW_SCALE_ONLY",
+      "scope": "TRAIN_ONLY",
+      "time_reversal": false,
+      "validation_or_heldout_tuning": false
+    },
+    "calibration": null,
+    "candidate_status": "CANDIDATE_VALIDATED_T015_NOT_FROZEN_UNTIL_T016",
+    "determinism": {
+      "canonical_device": "cpu",
+      "numpy_seed": true,
+      "python_random_seed": true,
+      "torch_cpu_seed": true,
+      "torch_deterministic_algorithms": true
+    },
+    "input": {
+      "channels": 1,
+      "classical_features": "FORBIDDEN",
+      "dtype": "float32",
+      "epsilon": 1e-08,
+      "normalization_formula": "(window - population_mean(window)) / (population_std(window) + epsilon)",
+      "normalization_id": "PER_WINDOW_ZSCORE_V1",
+      "samples": 2500,
+      "source": "PREPROC_V1_CAUSAL_FILTERED_UNNORMALIZED_FLOAT64"
+    },
+    "loss": {
+      "implementation": "torch.nn.BCEWithLogitsLoss",
+      "positive_weight_formula": "N_train_negative / N_train_positive",
+      "positive_weight_formula_id": "TRAIN_NEG_OVER_POS_V1",
+      "source_partition": "TRAIN"
+    },
+    "map_id": "AAMI_SVF_MAP_V1",
+    "model_id": "MODEL_V1",
+    "operating_threshold": null,
+    "optimizer": {
+      "amsgrad": false,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "capturable": false,
+      "differentiable": false,
+      "epsilon": 1e-08,
+      "foreach": null,
+      "fused": null,
+      "implementation": "torch.optim.AdamW",
+      "learning_rate": 0.001,
+      "maximize": false,
+      "weight_decay": 0.0001
+    },
+    "partition_contract": {
+      "BIDMC": "NOT_ACCESSED",
+      "CALIBRATION": "NOT_ACCESSED",
+      "INCART": "NOT_ACCESSED",
+      "INTERNAL_TEST": "NOT_ACCESSED",
+      "NSTDB": "NOT_ACCESSED",
+      "TRAIN": "FIT_AUGMENT_POS_WEIGHT",
+      "VALIDATION": "MODEL_SELECTION_EARLY_STOPPING_ONLY",
+      "WEARABLE_SIM_V1": "NOT_ACCESSED",
+      "WEARABLE_V1": "NOT_ACCESSED"
+    },
+    "preproc_id": "PREPROC_V1",
+    "scheduler": {
+      "cooldown": 0,
+      "epsilon": 1e-08,
+      "factor": 0.1,
+      "implementation": "torch.optim.lr_scheduler.ReduceLROnPlateau",
+      "min_lr": 0.0,
+      "mode": "max",
+      "monitor": "VALIDATION_POOLED_WINDOW_AUPRC",
+      "patience": 10,
+      "threshold": 0.0001,
+      "threshold_mode": "rel"
+    },
+    "seeds": {
+      "release": 20260927,
+      "release_selection": "FIXED_SEED_NEVER_BEST_SEED",
+      "robustness": [
+        20260928,
+        20260929
+      ]
+    },
+    "spec_version": "2.2",
+    "split_id": "MITDB_SPLIT_V1",
+    "target_id": "AAMI_SVF_WINDOW_V1",
+    "training": {
+      "batch_size": 64,
+      "descriptive_threshold": 0.5,
+      "device": "cpu",
+      "drop_last": false,
+      "early_stopping_mode": "max",
+      "early_stopping_monitor": "VALIDATION_POOLED_WINDOW_AUPRC",
+      "early_stopping_patience": 7,
+      "max_epochs": 50,
+      "num_workers": 0,
+      "strict_improvement": true,
+      "tie_policy": "RETAIN_EARLIEST_BEST",
+      "train_shuffle": true,
+      "validation_shuffle": false
+    }
+  },
+  "upstream_frozen_hashes": {
+    "F05": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+    "F06": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "F07": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+    "window_manifest": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  }
+}

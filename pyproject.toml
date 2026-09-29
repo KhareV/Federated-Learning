@@ -15,6 +15,7 @@ dependencies = [
   "wfdb==4.3.1",
   "scikit-learn==1.9.1",
   "joblib==1.6.0",
+  "torch==2.14.0",
 ]
 
 [project.optional-dependencies]

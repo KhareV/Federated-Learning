@@ -1,0 +1,34 @@
+{
+  "highest_scoring_seed": 20260927,
+  "overall_status": "PASS",
+  "release_candidate_seed": 20260927,
+  "release_seed_invariant": "PASS",
+  "sd_convention": "sample standard deviation, ddof=1",
+  "seeds": [
+    {
+      "best_epoch": 4,
+      "best_validation_auprc": 0.5328607838787021,
+      "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+      "seed": 20260927,
+      "validation_patient_macro_F1": 0.48482809114434505
+    },
+    {
+      "best_epoch": 4,
+      "best_validation_auprc": 0.4794350072114173,
+      "checkpoint_sha256": "a346ce6c8b38c50c0c87c4c6ed72a85b36e829c7a27878d86e1e672404db9e8d",
+      "seed": 20260928,
+      "validation_patient_macro_F1": 0.42316732798030676
+    },
+    {
+      "best_epoch": 3,
+      "best_validation_auprc": 0.4825433837968652,
+      "checkpoint_sha256": "63ab477810e65efca388ba53eb4a290b98aad51234f600f37f12b87950af9b74",
+      "seed": 20260929,
+      "validation_patient_macro_F1": 0.31284196936283076
+    }
+  ],
+  "validation_auprc_mean": 0.49827972496232814,
+  "validation_auprc_sd": 0.029988376549632215,
+  "validation_patient_macro_F1_mean": 0.4069457961624942,
+  "validation_patient_macro_F1_sd": 0.08713300231398374
+}
