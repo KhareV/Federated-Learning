@@ -1,0 +1,26 @@
+transport_id: FL_STATE_TRANSPORT_V1
+task: T024
+model_id: MODEL_V1
+state_order: MODEL_V1.state_dict insertion order
+aggregatable:
+  rule: all floating-point state_dict entries
+  includes:
+    - trainable parameters
+    - BatchNorm running_mean
+    - BatchNorm running_var
+non_aggregatable:
+  rule: all non-floating state_dict buffers
+  behavior: preserve server/global value
+  includes:
+    - BatchNorm num_batches_tracked
+aggregation:
+  id: SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1
+  weight: num_examples
+  formula: global + sum(num_examples_i * client_delta_i) / sum(num_examples_i)
+  optimizer_state: excluded
+fl_training_initialization: UNRESOLVED_FOR_T025
+claim_boundary:
+  plain_reference_aggregation: true
+  secure_aggregation: false
+  real_client_manifest: false
+  real_federated_training: false

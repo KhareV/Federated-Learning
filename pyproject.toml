@@ -16,6 +16,7 @@ dependencies = [
   "scikit-learn==1.9.1",
   "joblib==1.6.0",
   "torch==2.14.0",
+  "flwr==1.39.0",
 ]
 
 [project.optional-dependencies]
@@ -29,6 +30,13 @@ package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.flwr.app]
+publisher = "nhm-research"
+
+[tool.flwr.app.components]
+serverapp = "federated.server_app:app"
+clientapp = "federated.client_app:app"
 
 [tool.pytest.ini_options]
 addopts = "--strict-config --strict-markers -ra"
