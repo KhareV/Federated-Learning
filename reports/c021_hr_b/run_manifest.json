@@ -1,0 +1,78 @@
+{
+  "MODEL_V1_inference": false,
+  "checkpoint": "C021-HR-B",
+  "ci_executed": false,
+  "controlled_perturbations": false,
+  "evaluation_id": "BIDMC_CONTEXT_V2",
+  "git_sha_at_evidence_generation": "b8dbfa8165a36bd6bc9a04a94460ad0f8189dd2f",
+  "protected_upstream_hashes": {
+    "artifacts/ALERT_POLICY_V1.lock.json": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/ECG_HR_CONTEXT_V2.lock.json": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "configs/alert_policy_v1.yaml": "782b174d6caf769cd448edb25c2a12c9a601caa9c3fccc5f05d5d1d3a617b25a",
+    "configs/bidmc_context_v1.yaml": "d6a6cafd033a96d863042d8be34c03659dfab07ac7e4334b84dd48004ffdd596",
+    "configs/ecg_hr_context_v2.yaml": "6fa358ae412568ccbab4efbe015fa8524ca81ed416fd19cc49b23bd6fc1112e4",
+    "configs/preproc_v1.yaml": "fde19071afe82270f67c04129db4ab9ffeeeeb431a955c87f9eced41eec67814",
+    "fusion/episode_manager.py": "eb4e78a978a2f27ad5e8a074530ef21a5023c911a39114df0f05371be447a357",
+    "fusion/state_machine.py": "bc656b4aef48dd08fbde5ce304eeea4baa160fb4e8c435e60ce8c6cae68b89fc",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "preprocessing/ecg_hr_context.py": "f6e4d9db77cdd708b1d220b97150ebbc8270809eed862249ce718403e85dcc3c",
+    "reports/bidmc_multimodal_engineering.json": "49decf602ca28cd542cf6693417acacf46188a05a76537f06ec7ba8a950ac95c",
+    "reports/c021_hr_a/artifact_hashes.json": "d80193f307408b80e10d8c4eea12cea38615f7e95d95c078adb39aa8e2a6fa9b",
+    "reports/external_incart.json": "dbffd38f3fe0fe829544fcf991b5106dd0ec96bf968f7209a6bba77a624bb7de",
+    "reports/internal_test.json": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "reports/noise_robustness.json": "fae1d2720dd92987689f9c4421ad23b4b1c279c7b26aedc19e26bbd3169d6829",
+    "reports/t021/artifact_hashes.json": "e32b6a1a9273b2778c93ecfb4ba26e72e7f2deab86090c85848ca8a50f08ce89",
+    "reports/t022/artifact_hashes.json": "1a1957e93599780f97f8afd1cb4641d6979b337fee5106f74bcd126b8ea78fbc"
+  },
+  "python": "3.11.16",
+  "raw_BIDMC_access": "one frozen V2 engineering evaluation",
+  "records": 53,
+  "status": "PASS",
+  "verification": {
+    "agreement": {
+      "greater_than_20_count": 1099,
+      "greater_than_20_fraction": 0.044026920919798096,
+      "mae_bpm": 4.189106281193606,
+      "mean_signed_difference_bpm": -3.051789122655934,
+      "median_absolute_difference_bpm": 0.44065804929999786,
+      "p95_absolute_difference_bpm": 10.063202639219938,
+      "paired_samples": 24962,
+      "within_or_equal_20_count": 23863,
+      "within_or_equal_20_fraction": 0.9559730790802019
+    },
+    "context_id": "BIDMC_CONTEXT_V2",
+    "metrics": {
+      "comparable_samples": 24958,
+      "coverage": 0.9999599342922393,
+      "mae_bpm": 1.1777045462407885,
+      "mean_signed_difference_bpm": 0.10908139579981518,
+      "median_absolute_error_bpm": 0.38464590400000986,
+      "p95_absolute_error_bpm": 4.979282989114994,
+      "record_macro_mae_bpm": 1.177596489449162,
+      "records_with_comparisons": 53,
+      "reference_samples": 24959,
+      "rmse_bpm": 3.389792559778213
+    },
+    "rows": 24963,
+    "status": "PASS",
+    "warning": {
+      "duration_seconds": 10,
+      "paired_timestamps": 24962,
+      "policy": "HR_DISAGREEMENT_TOLERANCE_V1",
+      "policy_changed_from_result": false,
+      "record_ids_affected": [
+        "bidmc18",
+        "bidmc39",
+        "bidmc47",
+        "bidmc48"
+      ],
+      "records_affected": 4,
+      "sustained_disagreement_runs": 7,
+      "tolerance_bpm": 20.0,
+      "warning_time_fraction": 0.03256950564858585,
+      "warning_timestamps": 813
+    }
+  }
+}

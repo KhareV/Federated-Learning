@@ -1,0 +1,17 @@
+{
+  "duration_seconds": 10,
+  "paired_timestamps": 24962,
+  "policy": "HR_DISAGREEMENT_TOLERANCE_V1",
+  "policy_changed_from_result": false,
+  "record_ids_affected": [
+    "bidmc18",
+    "bidmc39",
+    "bidmc47",
+    "bidmc48"
+  ],
+  "records_affected": 4,
+  "sustained_disagreement_runs": 7,
+  "tolerance_bpm": 20.0,
+  "warning_time_fraction": 0.03256950564858585,
+  "warning_timestamps": 813
+}

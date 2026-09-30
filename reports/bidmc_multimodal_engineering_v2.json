@@ -1,0 +1,128 @@
+{
+  "ECG_PPG_V2_agreement": {
+    "greater_than_20_count": 1099,
+    "greater_than_20_fraction": 0.044026920919798096,
+    "mae_bpm": 4.189106281193606,
+    "mean_signed_difference_bpm": -3.051789122655934,
+    "median_absolute_difference_bpm": 0.44065804929999786,
+    "p95_absolute_difference_bpm": 10.063202639219938,
+    "paired_samples": 24962,
+    "within_or_equal_20_count": 23863,
+    "within_or_equal_20_fraction": 0.9559730790802019
+  },
+  "SpO2_provenance": "BIDMC_PROVIDED_NUMERIC; bidmc19 unavailable",
+  "V1_historical_ECG_HR_vs_HR": {
+    "coverage": 1.0,
+    "mae_bpm": 50.669121199650355,
+    "mean_signed_difference_bpm": 50.514932028886825,
+    "median_absolute_error_bpm": 62.25,
+    "p95_absolute_error_bpm": 118.33333347066664,
+    "rmse_bpm": 66.12226899694977
+  },
+  "V1_to_V2": {
+    "coverage": {
+      "V1": 1.0,
+      "V2": 0.9999599342922393,
+      "change": -4.006570776071694e-05
+    },
+    "mae_bpm": {
+      "V1": 50.669121199650355,
+      "V2": 1.1777045462407885,
+      "change": -49.491416653409566
+    },
+    "mean_signed_difference_bpm": {
+      "V1": 50.514932028886825,
+      "V2": 0.10908139579981518,
+      "change": -50.40585063308701
+    },
+    "median_absolute_error_bpm": {
+      "V1": 62.25,
+      "V2": 0.38464590400000986,
+      "change": -61.86535409599999
+    },
+    "p95_absolute_error_bpm": {
+      "V1": 118.33333347066664,
+      "V2": 4.979282989114994,
+      "change": -113.35405048155165
+    },
+    "rmse_bpm": {
+      "V1": 66.12226899694977,
+      "V2": 3.389792559778213,
+      "change": -62.732476437171556
+    }
+  },
+  "V2_ECG_HR_vs_HR": {
+    "comparable_samples": 24958,
+    "coverage": 0.9999599342922393,
+    "mae_bpm": 1.1777045462407885,
+    "mean_signed_difference_bpm": 0.10908139579981518,
+    "median_absolute_error_bpm": 0.38464590400000986,
+    "p95_absolute_error_bpm": 4.979282989114994,
+    "record_macro_mae_bpm": 1.177596489449162,
+    "records_with_comparisons": 53,
+    "reference_samples": 24959,
+    "rmse_bpm": 3.389792559778213
+  },
+  "alert_policy": {
+    "changed": false,
+    "id": "ALERT_POLICY_V1",
+    "lock_sha256": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15"
+  },
+  "alignment": "frozen T021 record/timestamp identity; samples <= t only; no time shift",
+  "changed_component": "ECG_HR_CONTEXT_V2 only",
+  "context_id": "BIDMC_CONTEXT_V2",
+  "critical_care_domain_limitation": true,
+  "dataset": "BIDMC-v1.0.0",
+  "estimator": {
+    "candidate": "WFDB_XQRS_V1",
+    "id": "ECG_HR_CONTEXT_V2",
+    "lock_sha256": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca"
+  },
+  "natural_rate_warning_audit": {
+    "duration_seconds": 10,
+    "paired_timestamps": 24962,
+    "policy": "HR_DISAGREEMENT_TOLERANCE_V1",
+    "policy_changed_from_result": false,
+    "record_ids_affected": [
+      "bidmc18",
+      "bidmc39",
+      "bidmc47",
+      "bidmc48"
+    ],
+    "records_affected": 4,
+    "sustained_disagreement_runs": 7,
+    "tolerance_bpm": 20.0,
+    "warning_time_fraction": 0.03256950564858585,
+    "warning_timestamps": 813
+  },
+  "no_AAMI_target": true,
+  "no_clinical_certification": true,
+  "no_tuning": true,
+  "overall_status": "PASS",
+  "predecessor": "BIDMC_CONTEXT_V1",
+  "source_audit": {
+    "HR": 53,
+    "II": 53,
+    "PLETH": 53,
+    "PULSE": 53,
+    "SpO2": 52,
+    "missing_SpO2": [
+      "bidmc19"
+    ],
+    "numeric_hz": 1,
+    "records": 53,
+    "status": "PASS",
+    "waveform_hz": 125
+  },
+  "unchanged_PPG_metrics": {
+    "comparison_count": 24843,
+    "coverage_fraction": 1.0,
+    "mae_bpm": 5.0566581259909675,
+    "mean_signed_error_bpm": 3.888884078929185,
+    "median_absolute_error_bpm": 0.9188878999060677,
+    "p95_absolute_error_bpm": 17.412006705449187,
+    "records_with_comparable_estimates": 53,
+    "reference_count": 24843,
+    "rmse_bpm": 17.874371945515982
+  }
+}

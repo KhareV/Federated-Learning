@@ -673,7 +673,7 @@ phase22:
 	$(PYTHON) -m pip check
 
 bidmc-context-v2-tests:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_bidmc_context_v2.py tests/test_bidmc_hr_v2_scope.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_bidmc_context_v2.py tests/test_bidmc_hr_v2_scope.py tests/test_bidmc_context_v2_freeze.py
 
 bidmc-context-v2-run:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m evaluation.bidmc_context_v2 --run

@@ -1,0 +1,14 @@
+{
+  "change": "ECG HR estimator only",
+  "predecessor": "BIDMC_CONTEXT_V1",
+  "preserved": [
+    "PPG estimator",
+    "SpO2 provenance",
+    "synchronization",
+    "resampling",
+    "quality/missingness behavior"
+  ],
+  "reason": "T021 ECG-HR engineering failure",
+  "replacement": "BIDMC_CONTEXT_V2",
+  "replacement_component": "ECG_HR_CONTEXT_V2"
+}

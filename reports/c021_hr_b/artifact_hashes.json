@@ -1,0 +1,19 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "artifacts/BIDMC_CONTEXT_V2.lock.json": "5b2f9bf89aa5461d6acc0001b24a72d20457846ea379e84c44c339c968009f97",
+    "artifacts/BIDMC_CONTEXT_V2.supersedes.json": "5075998053f581b09478dfd75d8addd183447d1a27f3c80c85a5d3584481ac42",
+    "configs/bidmc_context_v2.yaml": "277eb466d66518b158f58addba075bc7c08f94509344d982cd6de54d6d3f3d65",
+    "evaluation/bidmc_context_v2.py": "8fe6d689c67960376bf122589661fa22540a3c394cffc81c95fef46fae5fea5d",
+    "reports/bidmc_multimodal_engineering_v2.csv": "d90b3fb370eca7289e939a30e599c476ca0b8fe413ed8651a76bdbd0c059cc04",
+    "reports/bidmc_multimodal_engineering_v2.json": "c863d2dd6f6fcb1f52394c24ccfbdd382e3a96f6ef4684e30b14acaa26a610f5",
+    "reports/c021_hr_b/bidmc_by_record_v2.csv": "bfb7ac715b37bb66a506045b3156b1a636651f1ca75969b3c932e28cde58de1d",
+    "reports/c021_hr_b/bidmc_context_rows_v2.csv": "cd82471ed3c971810c45ca17ec3503f2089670890d23eb3044fa5d60b7ed7361",
+    "reports/c021_hr_b/protocol.json": "40d0d44caf898a6889a5886e0d2b9c3282f90461b9e8bdc8450416bb1c160675",
+    "reports/c021_hr_b/rate_consistency_audit.json": "caf7b66cf70b3e3bd9d8948af5f495fa375cbd0149fcc23d1c5dade485385e26",
+    "reports/c021_hr_b/reproducibility.json": "91eff2a64c3438bd5fbb5ce06f2659f46a7b1a63e800b131db624ef8bc9202da",
+    "reports/c021_hr_b/run_manifest.json": "562cfc204258c352828dd12b3c8e09ff44fd26fe4ebfa92173049a016819a68c",
+    "reports/c021_hr_b/v1_v2_comparison.json": "664b6829b197daa2f69ed5454386e37cee371a1f056504b7b054159c2007f7d6"
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,3 @@
+comparison,reference_samples,comparable_samples,coverage,mean_signed_difference_bpm,mae_bpm,median_absolute_error_bpm,rmse_bpm,p95_absolute_error_bpm,record_macro_mae_bpm,records_with_comparisons,paired_samples,median_absolute_difference_bpm,p95_absolute_difference_bpm,within_or_equal_20_fraction,greater_than_20_fraction
+V2 ECG HR vs provided HR,24959,24958,0.9999599342922393,0.10908139579981518,1.1777045462407885,0.38464590400000986,3.389792559778213,4.979282989114994,1.177596489449162,53,,,,,
+V2 ECG HR vs T021 PPG PR,,,,-3.051789122655934,4.189106281193606,,,,,,24962,0.44065804929999786,10.063202639219938,0.9559730790802019,0.044026920919798096
