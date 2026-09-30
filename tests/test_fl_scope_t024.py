@@ -31,7 +31,10 @@ def test_federated_scope_and_no_future_work() -> None:
             assert not roots & forbidden_import_roots
 
 
-def test_no_real_client_manifest_or_t025_artifact() -> None:
-    assert not (ROOT / "manifests/clients/CLIENTS_IID_V1.csv").exists()
-    assert not (ROOT / "configs/fedavg_v1.yaml").exists()
+def test_t024_scope_audit_records_no_real_client_manifest_at_t024() -> None:
+    import json
 
+    audit = json.loads((ROOT / "reports/t024/protocol_audit.json").read_text())
+    assert audit["real_MITDB_client_construction"] is False
+    assert (ROOT / "manifests/clients/CLIENTS_IID_V1.csv").exists()
+    assert not (ROOT / "configs/fedavg_v1.yaml").exists()

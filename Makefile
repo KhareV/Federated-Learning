@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17 t018-preflight internal-test-once internal-test-verify t018-evidence phase18 nstdb-protocol nstdb-robustness nstdb-verify t019-evidence phase19 t020-preflight external-incart-once external-incart-verify t020-evidence phase20 bidmc-context-protocol bidmc-context-tests bidmc-context-run bidmc-context-verify t021-evidence phase21 ecg-hr-v2-tests ecg-hr-v2-train-audit ecg-hr-v2-validation ecg-hr-v2-freeze c021-hr-a-evidence c021-hr-a alert-policy-tests alert-policy-verify t022-evidence phase22 bidmc-context-v2-tests bidmc-context-v2-run bidmc-context-v2-verify c021-hr-b-evidence c021-hr-b t023-preflight t023-bidmc t023-wearable-sim t023-verify t023-evidence phase23 fl-toy-tests flower-smoke fl-model-adapter-audit t024-evidence t024-verify phase24
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17 t018-preflight internal-test-once internal-test-verify t018-evidence phase18 nstdb-protocol nstdb-robustness nstdb-verify t019-evidence phase19 t020-preflight external-incart-once external-incart-verify t020-evidence phase20 bidmc-context-protocol bidmc-context-tests bidmc-context-run bidmc-context-verify t021-evidence phase21 ecg-hr-v2-tests ecg-hr-v2-train-audit ecg-hr-v2-validation ecg-hr-v2-freeze c021-hr-a-evidence c021-hr-a alert-policy-tests alert-policy-verify t022-evidence phase22 bidmc-context-v2-tests bidmc-context-v2-run bidmc-context-v2-verify c021-hr-b-evidence c021-hr-b t023-preflight t023-bidmc t023-wearable-sim t023-verify t023-evidence phase23 fl-toy-tests flower-smoke fl-model-adapter-audit t024-evidence t024-verify phase24 fl-iid-manifest fl-iid-preflight fl-iid-run fl-iid-verify t025-evidence phase25
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets features models training evaluation preprocessing
@@ -735,4 +735,26 @@ phase24:
 	$(MAKE) fl-model-adapter-audit PYTHON=$(PYTHON)
 	$(MAKE) t024-evidence PYTHON=$(PYTHON)
 	$(MAKE) t024-verify PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
+
+fl-iid-manifest:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_fl_iid_method_t025.py
+
+fl-iid-preflight:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_fl_client_manifest_t025.py tests/test_fl_local_training_t025.py tests/test_fl_iid_runner_t025.py tests/test_fl_iid_scope_t025.py tests/test_fl_iid_metrics_t025.py
+
+fl-iid-run:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.fedavg_runner
+
+fl-iid-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_t025.py
+
+t025-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t025_evidence.py
+
+phase25:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) t024-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-iid-verify PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check
