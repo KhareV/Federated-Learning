@@ -1,11 +1,11 @@
 {
   "config_path": "configs/bidmc_context_v1.yaml",
   "config_sha256": "d6a6cafd033a96d863042d8be34c03659dfab07ac7e4334b84dd48004ffdd596",
-  "created_at_utc": "2026-09-30T10:11:08.047157Z",
+  "created_at_utc": "2026-09-30T10:13:08.332054Z",
   "dependency_snapshot_path": "requirements-dev.lock",
   "dependency_snapshot_sha256": "4863f6335f9a46e520550116a7e909dfb18b7f34e6fd278c35436a61e964537d",
-  "git_commit": "6d1431fb71382b5c79907c2eaafcdba69daca963",
-  "git_dirty": true,
+  "git_commit": "6eb6b93688e775816812299c0f83d9a2eaaefda0",
+  "git_dirty": false,
   "input_artifacts": [
     {
       "path": "manifests/datasets/bidmc_v1.yaml",
