@@ -1,0 +1,13 @@
+{
+  "bidmc19": "SOURCE_CHANNEL_UNAVAILABLE",
+  "derived_spo2_performed": false,
+  "finite_samples_after_warmup": 24429,
+  "imputation_performed": false,
+  "invalid_or_missing_samples_after_warmup": 534,
+  "medical_grade_claim": false,
+  "records_with_usable_channel": 52,
+  "records_without_usable_channel": [
+    "bidmc19"
+  ],
+  "source": "BIDMC_PROVIDED_NUMERIC"
+}

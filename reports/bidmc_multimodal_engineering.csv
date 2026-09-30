@@ -1,0 +1,5 @@
+comparison,records,reference_count,comparison_count,coverage_fraction,mean_signed_error_bpm,mae_bpm,median_absolute_error_bpm,rmse_bpm,p95_absolute_error_bpm
+PPG pulse-rate comparison,53,24843,24843,1.0,3.888884078929185,5.0566581259909675,0.9188878999060677,17.874371945515982,17.412006705449187
+ECG HR comparison,53,24959,24959,1.0,50.514932028886825,50.669121199650355,62.25,66.12226899694977,118.33333347066664
+derived ECG-vs-PPG agreement,53,,24963,,47.36008684009574,,64.14473684210526,,120.9724098012734
+SpO2 availability,52,24429,,,,,,,

@@ -1,0 +1,16 @@
+{
+  "AAMI_labels": false,
+  "F06_unchanged": true,
+  "SpO2_source_provided_only": true,
+  "alert_episode_implementation": false,
+  "arrhythmia_model_predictions": false,
+  "context_resamplers_separate_from_PREPROC_V1": true,
+  "dataset": "BIDMC-v1.0.0",
+  "learned_fusion": false,
+  "numeric_hz": 1,
+  "overall_status": "PASS",
+  "record_count_verified": 53,
+  "reference_guided_detector_tuning": false,
+  "training": false,
+  "waveform_hz": 125
+}

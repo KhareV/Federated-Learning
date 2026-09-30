@@ -1,0 +1,31 @@
+{
+  "clipping": {
+    "quality": "UNUSABLE",
+    "rate": null
+  },
+  "flatline": {
+    "quality": "UNUSABLE",
+    "rate": null
+  },
+  "intentionally_degraded": {
+    "quality": "DEGRADED"
+  },
+  "long_dropout_13_samples": {
+    "fill_count": 0,
+    "gap_kind": "LONG",
+    "quality": "UNUSABLE",
+    "rate": null
+  },
+  "missing_ppg": {
+    "available": false,
+    "quality": "UNUSABLE",
+    "rate": null
+  },
+  "overall_status": "PASS",
+  "short_dropout_12_samples": {
+    "fill_count": 12,
+    "future_interpolation": false,
+    "gap_kind": "SHORT",
+    "quality": "DEGRADED"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "ECG_HR_vs_HR": {
+    "comparison_count": 24959,
+    "coverage_fraction": 1.0,
+    "mae_bpm": 50.669121199650355,
+    "mean_signed_error_bpm": 50.514932028886825,
+    "median_absolute_error_bpm": 62.25,
+    "p95_absolute_error_bpm": 118.33333347066664,
+    "records_with_comparable_estimates": 53,
+    "reference_count": 24959,
+    "rmse_bpm": 66.12226899694977
+  },
+  "ECG_PPG_rate_agreement": {
+    "fusion_threshold_selected": false,
+    "mean_signed_difference_bpm": 47.36008684009574,
+    "median_absolute_difference_bpm": 64.14473684210526,
+    "p95_absolute_difference_bpm": 120.9724098012734,
+    "paired_count": 24963
+  },
+  "PPG_vs_PULSE": {
+    "comparison_count": 24843,
+    "coverage_fraction": 1.0,
+    "mae_bpm": 5.0566581259909675,
+    "mean_signed_error_bpm": 3.888884078929185,
+    "median_absolute_error_bpm": 0.9188878999060677,
+    "p95_absolute_error_bpm": 17.412006705449187,
+    "records_with_comparable_estimates": 53,
+    "reference_count": 24843,
+    "rmse_bpm": 17.874371945515982
+  },
+  "SpO2_policy": {
+    "derive_from_pleth": false,
+    "provenance": "BIDMC_PROVIDED_NUMERIC",
+    "validity_range_pct": [
+      0,
+      100
+    ]
+  },
+  "alignment_audit": "reports/t021/alignment_audit.json",
+  "claim_boundary": "Critical-care engineering/context validation only; not AAMI-SVF efficacy, arrhythmia diagnosis, clinical certification, wearable validation, or general-population accuracy.",
+  "context_contract_id": "BIDMC_CONTEXT_V1",
+  "dataset": "BIDMC PPG and Respiration Database",
+  "detectors": {
+    "ecg_hr": {
+      "implementation": "scipy.signal.find_peaks_abs_normalized_ecg",
+      "minimum_peak_distance_samples": 62,
+      "minimum_prominence": 1.0,
+      "window_samples": 2500
+    },
+    "epsilon": 1e-12,
+    "minimum_valid_intervals": 2,
+    "ppg": {
+      "implementation": "scipy.signal.find_peaks",
+      "minimum_peak_distance_samples": 25,
+      "minimum_prominence": 0.5,
+      "window_samples": 1000
+    },
+    "robust_center": "median",
+    "robust_scale": "1.4826_times_MAD",
+    "valid_interval_seconds": [
+      0.25,
+      2.0
+    ]
+  },
+  "filters": {
+    "ECG": "PREPROC_V1_ECG_FILTER_V1",
+    "PPG": "PREPROC_V1_PPG_FILTER_V1",
+    "reuse": "READ_ONLY"
+  },
+  "known_anomalies": {
+    "bidmc19": "SpO2 SOURCE_CHANNEL_UNAVAILABLE"
+  },
+  "missingness_behavior": "reports/t021/context_quality_tests.json",
+  "no_AAMI_SVF_target": true,
+  "no_arrhythmia_model_use": true,
+  "no_learned_fusion": true,
+  "numeric_hz": 1,
+  "overall_status": "PASS",
+  "quality": {
+    "severe_clipping_fraction": 0.2,
+    "states": [
+      "VALID",
+      "DEGRADED",
+      "UNUSABLE"
+    ],
+    "unusable_if_fewer_than_two_intervals": true
+  },
+  "quality_distribution": {
+    "VALID": 24963
+  },
+  "rate_unavailable_contexts": 0,
+  "record_count": 53,
+  "reproducibility": "reports/t021/reproducibility.json",
+  "resamplers": {
+    "ECG_HR": {
+      "delay_seconds": 0.08,
+      "id": "BIDMC_ECG_HR_125_TO_250_V1",
+      "sha256": "9098407204a3a0cceb8e7ad9e58a5788e3ef24a20dd8b898f003a32eec8405c7"
+    },
+    "PPG": {
+      "delay_seconds": 0.1,
+      "id": "BIDMC_PPG_125_TO_100_V1",
+      "sha256": "2d1dcd23407a7bd8f1f87f479672117af5fe3bbb24304c8d14664b8a77732571"
+    }
+  },
+  "source_channel_availability": {
+    "HR": 53,
+    "II": 53,
+    "PLETH": 53,
+    "PULSE": 53,
+    "SpO2": 52
+  },
+  "version": "1.0.0",
+  "waveform_hz": 125
+}
