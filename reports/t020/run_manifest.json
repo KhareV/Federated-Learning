@@ -1,11 +1,11 @@
 {
   "config_path": "configs/external_incart_v1.yaml",
   "config_sha256": "e0f4c5547bd3c3ddbdddaa8a799b01579643ddfeb500334cd34d687979959872",
-  "created_at_utc": "2026-09-30T09:24:36.770096Z",
+  "created_at_utc": "2026-09-30T09:31:07.310192Z",
   "dependency_snapshot_path": "requirements-dev.lock",
   "dependency_snapshot_sha256": "4863f6335f9a46e520550116a7e909dfb18b7f34e6fd278c35436a61e964537d",
-  "git_commit": "46da562ad3a6e77ca3fa3b00261d1368947fb7a4",
-  "git_dirty": true,
+  "git_commit": "23a4177281f45251503101ab1ce9abe76c2abdd9",
+  "git_dirty": false,
   "input_artifacts": [
     {
       "path": "checkpoints/MODEL_V1.pt",
