@@ -1,0 +1,70 @@
+{
+  "AAMI_map_sha256": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145",
+  "CAL_V1_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+  "F06_verification": {
+    "bound_artifact_count": 25,
+    "freeze_id": "F06",
+    "lock_path": "manifests/preprocessing/PREPROC_V1.lock.json",
+    "status": "PASS"
+  },
+  "F08_verification": {
+    "checkpoint_path": "checkpoints/MODEL_V1.pt",
+    "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "freeze_id": "F08",
+    "maximum_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "status": "PASS"
+  },
+  "F09_verification": {
+    "artifact_path": "artifacts/CAL_V1.json",
+    "artifact_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "calibration_id": "CAL_V1",
+    "freeze_id": "F09",
+    "status": "PASS"
+  },
+  "F10_verification": {
+    "evaluation_id": "INTERNAL_EVAL_V1",
+    "freeze_id": "F10",
+    "prediction_sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+    "report_sha256": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "status": "PASS"
+  },
+  "INCART_MODEL_V1_inference_before_method_commit": false,
+  "INCART_dataset_manifest_sha256": "a3b578c7f841e4170f8269554691fed957479fdd6c0f59c4f118249c6b85463e",
+  "INCART_lead_manifest_sha256": "2053a9da9e4c1ec5a478f58e91e5fb73a3bb50bef7f7b4da21d0b316ef205353",
+  "INCART_patient_map_sha256": "9e6c00be0d6026fa60c5d16f209411dae99eac70c03fe9fe0ef567a24ce5bcbf",
+  "MODEL_V1_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "PREPROC_V1_lock_sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+  "Ruff_before_access": "PASS",
+  "evaluation_id": "EXTERNAL_INCART_V1",
+  "external_data_consumed_by_T020": false,
+  "external_evaluator_sha256": "37de4abc37db8213018008c3fe43d9bdb08672fd1bbe8b1915cef68704780f95",
+  "method_artifact_sha256": {
+    "configs/external_incart_v1.yaml": "e0f4c5547bd3c3ddbdddaa8a799b01579643ddfeb500334cd34d687979959872",
+    "datasets/labels.py": "335711bcf97f01ffb522f91ad757fc96c931be79784344ab035c167bd32f732b",
+    "evaluation/bootstrap.py": "40741425e555855bbc90ae866e9716717aacc45acc2d9b83f7f1bae6e3d5b21c",
+    "evaluation/external_incart.py": "37de4abc37db8213018008c3fe43d9bdb08672fd1bbe8b1915cef68704780f95",
+    "evaluation/metrics.py": "52c61b533c17c71c229b19ddd20a02f5b2923713aedbe0724ab6d2fda049acb3",
+    "preprocessing/ecg.py": "bac52a00b9b4412e3799482086cec77ff56d59e679bc48ab1cd8672b786a8849",
+    "preprocessing/windowing.py": "5b7a7a8a5aff74a877e872f0878950e81bd9c889ab6f6d143a5ab89ae4e93628"
+  },
+  "method_config_sha256": "e0f4c5547bd3c3ddbdddaa8a799b01579643ddfeb500334cd34d687979959872",
+  "method_frozen_before_access": true,
+  "overall_status": "PASS",
+  "pip_check_before_access": "PASS",
+  "pre_access_method_commit": "8d2d55633659092bf31f65a1f0f2cbf9a7c18280",
+  "pytest_before_access": "PASS",
+  "source_contract": {
+    "annotation_validation": "PASS",
+    "dataset": "St Petersburg INCART 12-lead Arrhythmia Database",
+    "fallback_used": false,
+    "lead_eligible_records": 75,
+    "lead_exclusions": 0,
+    "patient_groups": 32,
+    "provider_hashes": "PASS",
+    "records": 75,
+    "sampling_rate_hz": 257,
+    "status": "PASS",
+    "version": "1.0.0"
+  }
+}
