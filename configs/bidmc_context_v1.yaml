@@ -1,0 +1,86 @@
+context_contract_id: BIDMC_CONTEXT_V1
+status: METHOD_FROZEN_BEFORE_REAL_COMPARISON
+dataset:
+  id: BIDMC
+  version: 1.0.0
+  role: MULTIMODAL_ENGINEERING_CONTEXT
+  raw_root: data/raw/bidmc/1.0.0
+  record_count: 53
+clocks:
+  waveform_hz: 125
+  numeric_hz: 1
+  waveform_timestamp_rule: source_index_times_8000_us
+  numeric_timestamp_rule: numeric_index_times_1000000_us
+  origin: RECORD_RELATIVE_ZERO
+context:
+  lookback_seconds: 10
+  numeric_join: SAME_RECORD_RELATIVE_TIMESTAMP
+  future_samples_allowed: false
+  early_state: NOT_EVALUABLE_WARMUP
+resampling:
+  design_id: FIR_KAISER_POLYPHASE_V1
+  kaiser_beta: 5.0
+  state_initialization: ZERO_FIR_HISTORY
+  tail_policy: NO_FUTURE_ZERO_PADDING
+  ppg:
+    id: BIDMC_PPG_125_TO_100_V1
+    input_hz: 125
+    output_hz: 100
+    up: 4
+    down: 5
+    taps: 101
+    group_delay_seconds: 0.1
+    group_delay_output_samples: 10
+  ecg_hr:
+    id: BIDMC_ECG_HR_125_TO_250_V1
+    input_hz: 125
+    output_hz: 250
+    up: 2
+    down: 1
+    taps: 41
+    group_delay_seconds: 0.08
+    group_delay_output_samples: 20
+filters:
+  ppg: PREPROC_V1_PPG_FILTER_V1
+  ecg: PREPROC_V1_ECG_FILTER_V1
+  reuse: READ_ONLY
+gap_policy:
+  source_hz: 125
+  short_rule: 10_times_missing_count_le_source_hz
+  short_fill: CAUSAL_ZOH
+  long_fill: NONE_RESET_STATE
+detectors:
+  robust_center: median
+  robust_scale: 1.4826_times_MAD
+  epsilon: 1.0e-12
+  valid_interval_seconds: [0.25, 2.0]
+  minimum_valid_intervals: 2
+  ppg:
+    implementation: scipy.signal.find_peaks
+    window_samples: 1000
+    minimum_peak_distance_samples: 25
+    minimum_prominence: 0.5
+  ecg_hr:
+    implementation: scipy.signal.find_peaks_abs_normalized_ecg
+    window_samples: 2500
+    minimum_peak_distance_samples: 62
+    minimum_prominence: 1.0
+quality:
+  states: [VALID, DEGRADED, UNUSABLE]
+  severe_clipping_fraction: 0.20
+  unusable_if_fewer_than_two_intervals: true
+spo2:
+  provenance: BIDMC_PROVIDED_NUMERIC
+  validity_range_pct: [0, 100]
+  derive_from_pleth: false
+scope:
+  core_preproc_v1_unchanged: true
+  context_resampling_separate: true
+  aami_svf_labels: false
+  model_v1_inference: false
+  supervised_training: false
+  learned_fusion: false
+  alert_policy: false
+  clinical_certification_claim: false
+  wearable_validation_claim: false
+

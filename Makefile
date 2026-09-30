@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17 t018-preflight internal-test-once internal-test-verify t018-evidence phase18 nstdb-protocol nstdb-robustness nstdb-verify t019-evidence phase19 t020-preflight external-incart-once external-incart-verify t020-evidence phase20
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17 t018-preflight internal-test-once internal-test-verify t018-evidence phase18 nstdb-protocol nstdb-robustness nstdb-verify t019-evidence phase19 t020-preflight external-incart-once external-incart-verify t020-evidence phase20 bidmc-context-protocol bidmc-context-tests bidmc-context-run bidmc-context-verify t021-evidence phase21
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets features models training evaluation preprocessing
@@ -604,4 +604,33 @@ phase20:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from pathlib import Path; from evaluation.leakage_audit import verify_frozen_split; from preprocessing.freeze import verify_preproc_freeze; from models.baseline_freeze import verify_baseline_freeze; from models.model_freeze import verify_frozen_model_v1; from evaluation.calibration import verify_cal_v1; from evaluation.internal_test import verify_internal_test_freeze; r=Path('.'); assert verify_frozen_split(r)['status']=='PASS'; assert verify_preproc_freeze(r)['status']=='PASS'; assert verify_baseline_freeze(r)['status']=='PASS'; assert verify_frozen_model_v1(r)['status']=='PASS'; assert verify_cal_v1(r)['status']=='PASS'; assert verify_internal_test_freeze(r)['status']=='PASS'"
 	$(MAKE) external-incart-verify PYTHON=$(PYTHON)
 	$(MAKE) t020-evidence PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
+
+bidmc-context-protocol:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/design_bidmc_context_resamplers_t021.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from evaluation.bidmc_context import validate_config, verify_bidmc_source; assert validate_config()['context_contract_id']=='BIDMC_CONTEXT_V1'; assert verify_bidmc_source()['status']=='PASS'"
+
+bidmc-context-tests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_bidmc_context_alignment.py tests/test_bidmc_context_resampling.py tests/test_bidmc_rate_estimators.py tests/test_bidmc_context_quality.py tests/test_bidmc_context_scope.py
+
+bidmc-context-run:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m evaluation.bidmc_context --run
+
+bidmc-context-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m evaluation.bidmc_context --verify
+
+t021-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t021_evidence.py
+
+phase21:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) coverage PYTHON=$(PYTHON)
+	$(MAKE) contracts PYTHON=$(PYTHON)
+	$(MAKE) t004-deferral PYTHON=$(PYTHON)
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from pathlib import Path; from evaluation.leakage_audit import verify_frozen_split; from preprocessing.freeze import verify_preproc_freeze; from models.baseline_freeze import verify_baseline_freeze; from models.model_freeze import verify_frozen_model_v1; from evaluation.calibration import verify_cal_v1; from evaluation.internal_test import verify_internal_test_freeze; from evaluation.external_incart import verify_external_freeze; r=Path('.'); assert verify_frozen_split(r)['status']=='PASS'; assert verify_preproc_freeze(r)['status']=='PASS'; assert verify_baseline_freeze(r)['status']=='PASS'; assert verify_frozen_model_v1(r)['status']=='PASS'; assert verify_cal_v1(r)['status']=='PASS'; assert verify_internal_test_freeze(r)['status']=='PASS'; assert verify_external_freeze(r)['status']=='PASS'"
+	$(MAKE) validate-bidmc PYTHON=$(PYTHON)
+	$(MAKE) bidmc-context-tests PYTHON=$(PYTHON)
+	$(MAKE) bidmc-context-verify PYTHON=$(PYTHON)
+	$(MAKE) t021-evidence PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check

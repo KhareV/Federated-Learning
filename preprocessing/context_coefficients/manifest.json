@@ -1,0 +1,38 @@
+{
+  "context_contract_id": "BIDMC_CONTEXT_V1",
+  "conversions": {
+    "BIDMC_ECG_HR_125_TO_250_V1": {
+      "coefficient_sha256": "9098407204a3a0cceb8e7ad9e58a5788e3ef24a20dd8b898f003a32eec8405c7",
+      "design_id": "FIR_KAISER_POLYPHASE_V1",
+      "down": 1,
+      "dtype": "float64",
+      "group_delay_output_samples": 20,
+      "group_delay_seconds": 0.08,
+      "half_len": 20,
+      "input_rate_hz": 125,
+      "kaiser_beta": 5.0,
+      "num_taps": 41,
+      "output_rate_hz": 250,
+      "startup_transient_output_span": 40,
+      "up": 2
+    },
+    "BIDMC_PPG_125_TO_100_V1": {
+      "coefficient_sha256": "2d1dcd23407a7bd8f1f87f479672117af5fe3bbb24304c8d14664b8a77732571",
+      "design_id": "FIR_KAISER_POLYPHASE_V1",
+      "down": 5,
+      "dtype": "float64",
+      "group_delay_output_samples": 10,
+      "group_delay_seconds": 0.1,
+      "half_len": 50,
+      "input_rate_hz": 125,
+      "kaiser_beta": 5.0,
+      "num_taps": 101,
+      "output_rate_hz": 100,
+      "startup_transient_output_span": 20,
+      "up": 4
+    }
+  },
+  "design_id": "FIR_KAISER_POLYPHASE_V1",
+  "numpy_version": "2.4.6",
+  "scipy_version": "1.17.1"
+}
