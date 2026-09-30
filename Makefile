@@ -611,7 +611,7 @@ bidmc-context-protocol:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -c "from evaluation.bidmc_context import validate_config, verify_bidmc_source; assert validate_config()['context_contract_id']=='BIDMC_CONTEXT_V1'; assert verify_bidmc_source()['status']=='PASS'"
 
 bidmc-context-tests:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_bidmc_context_alignment.py tests/test_bidmc_context_resampling.py tests/test_bidmc_rate_estimators.py tests/test_bidmc_context_quality.py tests/test_bidmc_context_scope.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_bidmc_context_alignment.py tests/test_bidmc_context_resampling.py tests/test_bidmc_rate_estimators.py tests/test_bidmc_context_quality.py tests/test_bidmc_context_scope.py tests/test_bidmc_context_results.py
 
 bidmc-context-run:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m evaluation.bidmc_context --run

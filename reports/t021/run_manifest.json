@@ -1,0 +1,118 @@
+{
+  "config_path": "configs/bidmc_context_v1.yaml",
+  "config_sha256": "d6a6cafd033a96d863042d8be34c03659dfab07ac7e4334b84dd48004ffdd596",
+  "created_at_utc": "2026-09-30T10:11:08.047157Z",
+  "dependency_snapshot_path": "requirements-dev.lock",
+  "dependency_snapshot_sha256": "4863f6335f9a46e520550116a7e909dfb18b7f34e6fd278c35436a61e964537d",
+  "git_commit": "6d1431fb71382b5c79907c2eaafcdba69daca963",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/datasets/bidmc_v1.yaml",
+      "sha256": "757b6e7cbc8b2eb5fa76a41aeee4246a026d6c0dec70525648891374de490d08"
+    },
+    {
+      "path": "manifests/datasets/bidmc_v1_files.csv",
+      "sha256": "f74e580894d36ab50120674987a3626fff74c048df197cb95795507ffbfe095a"
+    },
+    {
+      "path": "reports/t007/bidmc_validation.json",
+      "sha256": "8bbe2cec507de5c97c62e8bfb50eda0ad936df5eadb3eeae974dfd5da8135f8d"
+    },
+    {
+      "path": "manifests/preprocessing/PREPROC_V1.lock.json",
+      "sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+    },
+    {
+      "path": "checkpoints/MODEL_V1.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    {
+      "path": "artifacts/CAL_V1.json",
+      "sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b"
+    },
+    {
+      "path": "reports/internal_test.json",
+      "sha256": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e"
+    },
+    {
+      "path": "reports/external_incart.json",
+      "sha256": "dbffd38f3fe0fe829544fcf991b5106dd0ec96bf968f7209a6bba77a624bb7de"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Deterministic BIDMC context engineering validation; no MODEL_V1 inference, AAMI labels, learned fusion, alert episodes, or CI execution.",
+  "output_artifacts": [
+    {
+      "path": "configs/bidmc_context_v1.yaml",
+      "sha256": "d6a6cafd033a96d863042d8be34c03659dfab07ac7e4334b84dd48004ffdd596"
+    },
+    {
+      "path": "preprocessing/context_resample.py",
+      "sha256": "a495650b213569b5f2c9891e3c663e33e834db68dee58cfa8c270b16c9fc62a5"
+    },
+    {
+      "path": "preprocessing/context_quality.py",
+      "sha256": "4cb46a4dc9146772f04bea5a75508eb0e6d1e34bd4e308c97b95e6891fb52ba6"
+    },
+    {
+      "path": "preprocessing/context_coefficients/manifest.json",
+      "sha256": "9213bc09d21bac7c84377a0eab2e1667adc0f90228433cc66eef1c3aef118071"
+    },
+    {
+      "path": "preprocessing/context_coefficients/BIDMC_PPG_125_TO_100_V1.npy",
+      "sha256": "2d1dcd23407a7bd8f1f87f479672117af5fe3bbb24304c8d14664b8a77732571"
+    },
+    {
+      "path": "preprocessing/context_coefficients/BIDMC_ECG_HR_125_TO_250_V1.npy",
+      "sha256": "9098407204a3a0cceb8e7ad9e58a5788e3ef24a20dd8b898f003a32eec8405c7"
+    },
+    {
+      "path": "evaluation/bidmc_context.py",
+      "sha256": "446b04c56b283317774af6ab9ca72a78445d25c3e51a37f4cc0b78eef42bfbbb"
+    },
+    {
+      "path": "reports/bidmc_multimodal_engineering.json",
+      "sha256": "49decf602ca28cd542cf6693417acacf46188a05a76537f06ec7ba8a950ac95c"
+    },
+    {
+      "path": "reports/bidmc_multimodal_engineering.csv",
+      "sha256": "6f908846f3033e7124b72dd085c4a36b5548f9439d7d1da14ec0fcacf7a418fd"
+    },
+    {
+      "path": "reports/t021/bidmc_context_rows.csv",
+      "sha256": "7587eb3d312c74db664ef0a2f26be9890c325496e4147f48910e2388294ff14f"
+    },
+    {
+      "path": "reports/t021/bidmc_by_record.csv",
+      "sha256": "90bf59631d089e0e9dcc263ad41e580923c6dd33ceee041521bef9c065e71902"
+    },
+    {
+      "path": "reports/t021/alignment_audit.json",
+      "sha256": "e01e50db5a8a46d821877acec75e406032f066b5e768a840c68972cd629c61ec"
+    },
+    {
+      "path": "reports/t021/context_quality_tests.json",
+      "sha256": "3f28b921234ac12773f32abee106f42e7fecaa4e25cdef4e030adb126be84173"
+    },
+    {
+      "path": "reports/t021/spo2_provenance.json",
+      "sha256": "66964860d2bd1246350465573938ffc7fca0e7ca613623ba5018f12aac7531ae"
+    },
+    {
+      "path": "reports/t021/protocol_audit.json",
+      "sha256": "95bcd2c4985a652fda5a7ae5d91eab6b546889037b498138df5f03b312ec8343"
+    },
+    {
+      "path": "reports/t021/reproducibility.json",
+      "sha256": "169219f04496efcb5bbcc4b49dde48b2e1b3bb476f6fcc05c64ac1d348a5b4fc"
+    }
+  ],
+  "phase_id": "T021",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T021-BIDMC-CONTEXT-V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T021"
+}

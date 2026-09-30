@@ -39,6 +39,7 @@
   "alignment_audit": "reports/t021/alignment_audit.json",
   "claim_boundary": "Critical-care engineering/context validation only; not AAMI-SVF efficacy, arrhythmia diagnosis, clinical certification, wearable validation, or general-population accuracy.",
   "context_contract_id": "BIDMC_CONTEXT_V1",
+  "context_row_count": 24963,
   "dataset": "BIDMC PPG and Respiration Database",
   "detectors": {
     "ecg_hr": {
@@ -67,6 +68,10 @@
     "PPG": "PREPROC_V1_PPG_FILTER_V1",
     "reuse": "READ_ONLY"
   },
+  "frozen_filter_hashes": {
+    "PREPROC_V1_ECG_FILTER_V1": "0ec392ef16c73fb3b2309351252479ba6395c779a28a075c70b829f270732e95",
+    "PREPROC_V1_PPG_FILTER_V1": "96bf49f0d0403077187f4723824f3dea8e456681e5b80de7ec0fe0f5f6adaa36"
+  },
   "known_anomalies": {
     "bidmc19": "SpO2 SOURCE_CHANNEL_UNAVAILABLE"
   },
@@ -76,6 +81,7 @@
   "no_learned_fusion": true,
   "numeric_hz": 1,
   "overall_status": "PASS",
+  "protocol_commit": "2390098ca2a05390bea506fe49a877732714aef2",
   "quality": {
     "severe_clipping_fraction": 0.2,
     "states": [
@@ -103,6 +109,7 @@
       "sha256": "2d1dcd23407a7bd8f1f87f479672117af5fe3bbb24304c8d14664b8a77732571"
     }
   },
+  "result_commit": "6d1431fb71382b5c79907c2eaafcdba69daca963",
   "source_channel_availability": {
     "HR": 53,
     "II": 53,

@@ -1,0 +1,53 @@
+{
+  "CI_executed": false,
+  "F06_bound_file_hashes": {
+    "configs/preproc_v1.yaml": "fde19071afe82270f67c04129db4ab9ffeeeeb431a955c87f9eced41eec67814",
+    "preprocessing/ecg.py": "bac52a00b9b4412e3799482086cec77ff56d59e679bc48ab1cd8672b786a8849",
+    "preprocessing/filters.py": "50f39ea7ecb90fb7607f4c207af7b43bb5871b32aa9d706e7eaac23c5dea5bb6",
+    "preprocessing/gaps.py": "ae97a023b348fb7d6f89f90b15d8a1eacc91e18637b028bdc27d90f286b97830",
+    "preprocessing/ppg.py": "3c38d5ce8d5a9cb39ab6e9dda67aaf281855a25dc2b7d49a657138f571e22796",
+    "preprocessing/resample.py": "1aeae9a4833ceed4f46bcc72fc23bc4fb933c195a4b09e05010bb2f22c56f5a9"
+  },
+  "G9_status": "NOT_STARTED",
+  "T021_status": "PASS",
+  "algorithm": "sha256",
+  "artifacts": {
+    "configs/bidmc_context_v1.yaml": "d6a6cafd033a96d863042d8be34c03659dfab07ac7e4334b84dd48004ffdd596",
+    "evaluation/bidmc_context.py": "446b04c56b283317774af6ab9ca72a78445d25c3e51a37f4cc0b78eef42bfbbb",
+    "preprocessing/context_coefficients/BIDMC_ECG_HR_125_TO_250_V1.npy": "9098407204a3a0cceb8e7ad9e58a5788e3ef24a20dd8b898f003a32eec8405c7",
+    "preprocessing/context_coefficients/BIDMC_PPG_125_TO_100_V1.npy": "2d1dcd23407a7bd8f1f87f479672117af5fe3bbb24304c8d14664b8a77732571",
+    "preprocessing/context_coefficients/manifest.json": "9213bc09d21bac7c84377a0eab2e1667adc0f90228433cc66eef1c3aef118071",
+    "preprocessing/context_quality.py": "4cb46a4dc9146772f04bea5a75508eb0e6d1e34bd4e308c97b95e6891fb52ba6",
+    "preprocessing/context_resample.py": "a495650b213569b5f2c9891e3c663e33e834db68dee58cfa8c270b16c9fc62a5",
+    "reports/bidmc_multimodal_engineering.csv": "6f908846f3033e7124b72dd085c4a36b5548f9439d7d1da14ec0fcacf7a418fd",
+    "reports/bidmc_multimodal_engineering.json": "49decf602ca28cd542cf6693417acacf46188a05a76537f06ec7ba8a950ac95c",
+    "reports/t021/alignment_audit.json": "e01e50db5a8a46d821877acec75e406032f066b5e768a840c68972cd629c61ec",
+    "reports/t021/bidmc_by_record.csv": "90bf59631d089e0e9dcc263ad41e580923c6dd33ceee041521bef9c065e71902",
+    "reports/t021/bidmc_context_rows.csv": "7587eb3d312c74db664ef0a2f26be9890c325496e4147f48910e2388294ff14f",
+    "reports/t021/context_quality_tests.json": "3f28b921234ac12773f32abee106f42e7fecaa4e25cdef4e030adb126be84173",
+    "reports/t021/protocol_audit.json": "95bcd2c4985a652fda5a7ae5d91eab6b546889037b498138df5f03b312ec8343",
+    "reports/t021/reproducibility.json": "169219f04496efcb5bbcc4b49dde48b2e1b3bb476f6fcc05c64ac1d348a5b4fc",
+    "reports/t021/run_manifest.json": "ab449a84db30ab9f3988728f1f0f5248ed856a1fccf1bace3f7d342601aae5a3",
+    "reports/t021/spo2_provenance.json": "66964860d2bd1246350465573938ffc7fca0e7ca613623ba5018f12aac7531ae",
+    "scripts/design_bidmc_context_resamplers_t021.py": "7c829d7a84c6c2ab1a7b0d47ea65c5c4d479a91da4cb5118c44962eeb90b797a",
+    "scripts/generate_t021_evidence.py": "4580654e88aadca5fbde53ae9ac19c7efacfa97a1f8b499aaf2bb9f18a863dc3"
+  },
+  "manifest_version": "1.0",
+  "new_freeze": false,
+  "rule": "exact file bytes; this manifest excludes itself to avoid circular digest",
+  "upstream_frozen_hashes": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "manifests/datasets/bidmc_v1.yaml": "757b6e7cbc8b2eb5fa76a41aeee4246a026d6c0dec70525648891374de490d08",
+    "manifests/datasets/bidmc_v1_files.csv": "f74e580894d36ab50120674987a3626fff74c048df197cb95795507ffbfe095a",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "reports/external_incart.json": "dbffd38f3fe0fe829544fcf991b5106dd0ec96bf968f7209a6bba77a624bb7de",
+    "reports/internal_test.json": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "reports/t007/bidmc_validation.json": "8bbe2cec507de5c97c62e8bfb50eda0ad936df5eadb3eeae974dfd5da8135f8d"
+  },
+  "verification": {
+    "context_contract_id": "BIDMC_CONTEXT_V1",
+    "records": 53,
+    "status": "PASS"
+  }
+}
