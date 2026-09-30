@@ -1,0 +1,68 @@
+context_contract_id: BIDMC_CONTEXT_V2
+status: METHOD_FROZEN_BEFORE_BIDMC_V2_EVALUATION
+predecessor: BIDMC_CONTEXT_V1
+dataset:
+  id: BIDMC
+  version: 1.0.0
+  raw_root: data/raw/bidmc/1.0.0
+  records: 53
+changed_component:
+  name: ECG_HR_CONTEXT
+  replacement: ECG_HR_CONTEXT_V2
+  selected_detector: WFDB_XQRS_V1
+unchanged_components:
+  - BIDMC_SYNCHRONIZATION
+  - BIDMC_PPG_125_TO_100_V1
+  - BIDMC_ECG_HR_125_TO_250_V1
+  - PREPROC_V1_PPG_FILTER_V1
+  - PREPROC_V1_ECG_FILTER_V1
+  - T021_PPG_PULSE_DETECTOR
+  - T021_PPG_QUALITY
+  - T021_SPO2_PROVENANCE
+  - T021_GAP_BEHAVIOR
+  - T021_ALIGNMENT_POLICY
+alignment:
+  row_authority: reports/t021/bidmc_context_rows.csv
+  join_keys: [record_id, timestamp_us]
+  evaluation_cadence_hz: 1
+  use_samples_at_or_before_timestamp_only: true
+  time_shift_optimization: false
+rate:
+  input_hz: 250
+  lookback_seconds: 10
+  rr_bounds_seconds: [0.25, 2.0]
+  minimum_valid_intervals: 2
+  formula: 60_divided_by_median_valid_rr_seconds
+reference:
+  channel: HR
+  join: same_record_same_timestamp
+  finite_only: true
+  interpolation: false
+  detector_access: false
+metrics:
+  - coverage
+  - mean_signed_difference_bpm
+  - MAE_bpm
+  - median_absolute_error_bpm
+  - RMSE_bpm
+  - p95_absolute_error_bpm
+  - record_macro_MAE_bpm
+guardrails:
+  pooled_coverage_min: 0.90
+  pooled_median_absolute_error_bpm_max: 10.0
+  pooled_MAE_bpm_max: 20.0
+rate_consistency_audit:
+  policy: HR_DISAGREEMENT_TOLERANCE_V1
+  tolerance_bpm: 20.0
+  continuous_duration_seconds: 10.0
+  descriptive_only: true
+policy_binding:
+  alert_policy_id: ALERT_POLICY_V1
+  alert_policy_lock_sha256: 0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15
+scope:
+  tuning: false
+  model_v1_inference: false
+  aami_labels: false
+  controlled_perturbations: false
+  hardware_required: false
+  clinical_certification_claim: false

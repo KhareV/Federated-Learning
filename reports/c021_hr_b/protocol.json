@@ -1,0 +1,35 @@
+{
+  "alignment": "same frozen T021 record_id/timestamp_us rows; no time shifting",
+  "all_53_records": true,
+  "anti_circularity": [
+    "ECG_HR_CONTEXT_V2 selected on MIT-BIH TRAIN/VALIDATION and frozen",
+    "ALERT_POLICY_V1 frozen before BIDMC V2 outcomes",
+    "BIDMC V2 evaluated without tuning"
+  ],
+  "checkpoint": "C021-HR-B",
+  "context_id": "BIDMC_CONTEXT_V2",
+  "cross_modal_summary": {
+    "difference": "hr_ecg_bpm_v2 - pr_ppg_bpm",
+    "natural_warning": "abs_difference > 20 bpm continuously for >=10 seconds"
+  },
+  "detector": "ECG_HR_CONTEXT_V2 / WFDB_XQRS_V1",
+  "engineering_guardrails": {
+    "pooled_MAE_bpm_max": 20.0,
+    "pooled_coverage_min": 0.9,
+    "pooled_median_absolute_error_bpm_max": 10.0
+  },
+  "metrics": [
+    "coverage",
+    "bias",
+    "MAE",
+    "median_AE",
+    "RMSE",
+    "p95_AE",
+    "record_macro_MAE"
+  ],
+  "no_tuning": true,
+  "reference": "provided BIDMC HR numeric at identical timestamp; finite values only",
+  "role": "frozen post-remediation engineering evaluation; not pristine external evaluation",
+  "status": "METHOD_FROZEN_BEFORE_BIDMC_V2_EVALUATION",
+  "v1_comparison": "descriptive side-by-side; no significance test"
+}
