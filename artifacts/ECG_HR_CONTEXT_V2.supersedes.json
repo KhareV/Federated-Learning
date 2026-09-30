@@ -1,0 +1,19 @@
+{
+  "affected_subsystem": "ECG-HR context only",
+  "historical_bidmc_context_v1_preserved": true,
+  "predecessor": "T021_ABS_PEAK_V1 ECG-HR component",
+  "reason": "failed T021 engineering validation",
+  "replacement": "ECG_HR_CONTEXT_V2",
+  "unaffected": [
+    "PPG processing",
+    "PPG rate estimator",
+    "SpO2 provenance",
+    "BIDMC synchronization",
+    "BIDMC context resamplers",
+    "context quality",
+    "PREPROC_V1",
+    "MODEL_V1",
+    "CAL_V1",
+    "internal/external classification evidence"
+  ]
+}

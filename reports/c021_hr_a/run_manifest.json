@@ -1,0 +1,101 @@
+{
+  "checkpoint": "C021-HR-A",
+  "method_config_sha256": "6fa358ae412568ccbab4efbe015fa8524ca81ed416fd19cc49b23bd6fc1112e4",
+  "method_git_sha": "b88447e6222c3a76c9d22430568e7afb140ad0bd",
+  "selected_estimator": "WFDB_XQRS_V1",
+  "status": "PASS",
+  "train_metrics": {
+    "T021_ABS_PEAK_V1": {
+      "comparable_timestamps": 48473,
+      "coverage": 1.0,
+      "mean_signed_error_bpm": 51.5036848451008,
+      "median_absolute_error_bpm": 51.56554908652337,
+      "p95_absolute_error_bpm": 117.55558841469026,
+      "patient_coverage_fraction_ge_0_90": 1.0,
+      "patient_groups": 27,
+      "patient_macro_mae_bpm": 51.69492368364514,
+      "patient_macro_median_ae_bpm": 48.37881520833184,
+      "patients_with_coverage_ge_0_90": 27,
+      "pooled_mae_bpm": 51.680106788439865,
+      "reference_timestamps": 48473,
+      "rmse_bpm": 63.338480512806676
+    },
+    "WFDB_GQRS_V1": {
+      "comparable_timestamps": 48466,
+      "coverage": 0.9998555897097353,
+      "mean_signed_error_bpm": -0.26462148808976377,
+      "median_absolute_error_bpm": 0.3011697393263937,
+      "p95_absolute_error_bpm": 6.19417811838623,
+      "patient_coverage_fraction_ge_0_90": 1.0,
+      "patient_groups": 27,
+      "patient_macro_mae_bpm": 1.782231392474588,
+      "patient_macro_median_ae_bpm": 0.5172870986185442,
+      "patients_with_coverage_ge_0_90": 27,
+      "pooled_mae_bpm": 1.782109630313864,
+      "reference_timestamps": 48473,
+      "rmse_bpm": 7.818270688089427
+    },
+    "WFDB_XQRS_V1": {
+      "comparable_timestamps": 48473,
+      "coverage": 1.0,
+      "mean_signed_error_bpm": -0.21931397703423644,
+      "median_absolute_error_bpm": 0.13813063211621568,
+      "p95_absolute_error_bpm": 2.425900592798018,
+      "patient_coverage_fraction_ge_0_90": 1.0,
+      "patient_groups": 27,
+      "patient_macro_mae_bpm": 0.7195643345161782,
+      "patient_macro_median_ae_bpm": 0.2270892892471222,
+      "patients_with_coverage_ge_0_90": 27,
+      "pooled_mae_bpm": 0.7195638823252211,
+      "reference_timestamps": 48473,
+      "rmse_bpm": 3.423129667291067
+    }
+  },
+  "validation_metrics": {
+    "T021_ABS_PEAK_V1": {
+      "comparable_timestamps": 14368,
+      "coverage": 1.0,
+      "mean_signed_error_bpm": 64.69493245035923,
+      "median_absolute_error_bpm": 68.43822843823568,
+      "p95_absolute_error_bpm": 114.26367665221883,
+      "patient_coverage_fraction_ge_0_90": 1.0,
+      "patient_groups": 7,
+      "patient_macro_mae_bpm": 66.01089231707569,
+      "patient_macro_median_ae_bpm": 65.52797009240865,
+      "patients_with_coverage_ge_0_90": 7,
+      "pooled_mae_bpm": 64.76328542883358,
+      "reference_timestamps": 14368,
+      "rmse_bpm": 72.54279042444024
+    },
+    "WFDB_GQRS_V1": {
+      "comparable_timestamps": 14367,
+      "coverage": 0.9999304008908686,
+      "mean_signed_error_bpm": -0.38833611424574765,
+      "median_absolute_error_bpm": 0.31390820652833895,
+      "p95_absolute_error_bpm": 5.503554934424457,
+      "patient_coverage_fraction_ge_0_90": 1.0,
+      "patient_groups": 7,
+      "patient_macro_mae_bpm": 1.7319761623884145,
+      "patient_macro_median_ae_bpm": 0.37880915191498993,
+      "patients_with_coverage_ge_0_90": 7,
+      "pooled_mae_bpm": 1.7546268272385221,
+      "reference_timestamps": 14368,
+      "rmse_bpm": 6.502823013867684
+    },
+    "WFDB_XQRS_V1": {
+      "comparable_timestamps": 14368,
+      "coverage": 1.0,
+      "mean_signed_error_bpm": 0.2898980039817993,
+      "median_absolute_error_bpm": 0.12058979371936118,
+      "p95_absolute_error_bpm": 7.035456530248656,
+      "patient_coverage_fraction_ge_0_90": 1.0,
+      "patient_groups": 7,
+      "patient_macro_mae_bpm": 1.2250505571438488,
+      "patient_macro_median_ae_bpm": 0.2211754578610002,
+      "patients_with_coverage_ge_0_90": 7,
+      "pooled_mae_bpm": 1.201759395202002,
+      "reference_timestamps": 14368,
+      "rmse_bpm": 4.72813683800023
+    }
+  }
+}
