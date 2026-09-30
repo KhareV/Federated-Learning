@@ -1,0 +1,79 @@
+{
+  "flower_output": [
+    14.0,
+    26.0
+  ],
+  "framework": "Flower App",
+  "identical": true,
+  "maximum_absolute_error": 0.0,
+  "reference_aggregator_output": [
+    14.0,
+    26.0
+  ],
+  "required_clients": [
+    "TOY_CLIENT_0",
+    "TOY_CLIENT_1"
+  ],
+  "rounds": 1,
+  "run_1": {
+    "clients": [
+      {
+        "client_id": "TOY_CLIENT_0",
+        "delta": [
+          1.0,
+          3.0
+        ],
+        "num_examples": 2
+      },
+      {
+        "client_id": "TOY_CLIENT_1",
+        "delta": [
+          5.0,
+          7.0
+        ],
+        "num_examples": 6
+      }
+    ],
+    "new_global": [
+      14.0,
+      26.0
+    ],
+    "round": 1,
+    "weighted_delta": [
+      4.0,
+      6.0
+    ]
+  },
+  "run_1_sha256": "84cca44d7fee6f50437d58623e0f8c5eaf370716a8d768c51bd2ae853074632b",
+  "run_2": {
+    "clients": [
+      {
+        "client_id": "TOY_CLIENT_0",
+        "delta": [
+          1.0,
+          3.0
+        ],
+        "num_examples": 2
+      },
+      {
+        "client_id": "TOY_CLIENT_1",
+        "delta": [
+          5.0,
+          7.0
+        ],
+        "num_examples": 6
+      }
+    ],
+    "new_global": [
+      14.0,
+      26.0
+    ],
+    "round": 1,
+    "weighted_delta": [
+      4.0,
+      6.0
+    ]
+  },
+  "run_2_sha256": "84cca44d7fee6f50437d58623e0f8c5eaf370716a8d768c51bd2ae853074632b",
+  "status": "PASS"
+}

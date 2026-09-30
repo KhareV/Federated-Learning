@@ -1,0 +1,27 @@
+{
+  "F12_frozen": false,
+  "FedProx": false,
+  "Flower_legacy_API": false,
+  "G11_passed": false,
+  "SecAgg_plus": false,
+  "aggregation": "sample-count-weighted model delta",
+  "differential_privacy": false,
+  "hardware": false,
+  "protected_hashes": {
+    "F05": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+    "F06": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "F07": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+    "F08": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "F09": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "F10": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "F11": "dbffd38f3fe0fe829544fcf991b5106dd0ec96bf968f7209a6bba77a624bb7de",
+    "T023": "a3b9d8ef2cf20960e7d29a06a44c74be0759a1e71d4a9628c94d957f2dfe01e1"
+  },
+  "real_MITDB_client_construction": false,
+  "real_federated_training": false,
+  "status": "PASS",
+  "task_id": "T024",
+  "test_evaluation": false,
+  "transport_policy": "FL_STATE_TRANSPORT_V1",
+  "validation_evaluation": false
+}

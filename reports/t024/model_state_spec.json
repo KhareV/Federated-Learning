@@ -1,0 +1,176 @@
+{
+  "canonical_order": "MODEL_V1.state_dict insertion order",
+  "entries": [
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "conv1.weight",
+      "shape": [
+        16,
+        1,
+        7
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "conv1.bias",
+      "shape": [
+        16
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "bn1.weight",
+      "shape": [
+        16
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "bn1.bias",
+      "shape": [
+        16
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "bn1.running_mean",
+      "shape": [
+        16
+      ],
+      "state_role": "floating_buffer"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "bn1.running_var",
+      "shape": [
+        16
+      ],
+      "state_role": "floating_buffer"
+    },
+    {
+      "aggregatable": false,
+      "dtype": "int64",
+      "key": "bn1.num_batches_tracked",
+      "shape": [],
+      "state_role": "non_floating_buffer"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "conv2.weight",
+      "shape": [
+        32,
+        16,
+        5
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "conv2.bias",
+      "shape": [
+        32
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "bn2.weight",
+      "shape": [
+        32
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "bn2.bias",
+      "shape": [
+        32
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "bn2.running_mean",
+      "shape": [
+        32
+      ],
+      "state_role": "floating_buffer"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "bn2.running_var",
+      "shape": [
+        32
+      ],
+      "state_role": "floating_buffer"
+    },
+    {
+      "aggregatable": false,
+      "dtype": "int64",
+      "key": "bn2.num_batches_tracked",
+      "shape": [],
+      "state_role": "non_floating_buffer"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "conv3.weight",
+      "shape": [
+        64,
+        32,
+        5
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "conv3.bias",
+      "shape": [
+        64
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "output.weight",
+      "shape": [
+        1,
+        64
+      ],
+      "state_role": "parameter"
+    },
+    {
+      "aggregatable": true,
+      "dtype": "float32",
+      "key": "output.bias",
+      "shape": [
+        1
+      ],
+      "state_role": "parameter"
+    }
+  ],
+  "entry_count": 18,
+  "floating_entry_count": 16,
+  "non_floating_behavior": "preserve server/global value",
+  "non_floating_entry_count": 2,
+  "status": "PASS",
+  "transport_id": "FL_STATE_TRANSPORT_V1"
+}

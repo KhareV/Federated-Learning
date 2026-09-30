@@ -1,0 +1,47 @@
+{
+  "aggregation_id": "SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1",
+  "analytical_expected_new_global": [
+    14.0,
+    26.0
+  ],
+  "analytical_expected_weighted_delta": [
+    4.0,
+    6.0
+  ],
+  "fixture": {
+    "clients": [
+      {
+        "client_id": "TOY_CLIENT_0",
+        "delta": [
+          1.0,
+          3.0
+        ],
+        "num_examples": 2
+      },
+      {
+        "client_id": "TOY_CLIENT_1",
+        "delta": [
+          5.0,
+          7.0
+        ],
+        "num_examples": 6
+      }
+    ],
+    "global": [
+      10.0,
+      20.0
+    ]
+  },
+  "implementation_new_global": [
+    14.0,
+    26.0
+  ],
+  "implementation_weighted_delta": [
+    4.0,
+    6.0
+  ],
+  "per_key_max_abs_error": {
+    "vector": 0.0
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,20 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "configs/fl_state_transport_v1.yaml": "125449202aba091582add6641b60d7bc2311206e237039cf8f2ba0f5933cdbdc",
+    "federated/aggregation.py": "902a72b976399afe85a512ecb83897a80a483e6b541d5dbc544acbe654660920",
+    "federated/client_app.py": "5b0a9cea1cb67b1abb7101a604b152b52f9bf91382d7f089ec98f6c4a82ab191",
+    "federated/model_adapter.py": "1e0f8e457d32a3737e06071b862574e7c7d73e0bfb7571cbd0da9a7f42bae945",
+    "federated/server_app.py": "9f75fd295f45d70a0e878243e72cab388295130a6ed579232d2fde1da902abf9",
+    "reports/t024/fl_smoke.json": "4e428d72c0acd893ce370fbc788bc442b9e7f1d08ab4e9efb5a242f7fba28485",
+    "reports/t024/flower_environment.json": "bba7eaf8068e7861b8640b0364b0df50d33a45b064f6c628cd8d6883dcb7a027",
+    "reports/t024/model_adapter_audit.json": "1d10400bfb0eb025b8f3cc9fce570db03b422e982097db0739293c004e3a2863",
+    "reports/t024/model_state_spec.json": "5dcd79c15c381ac29f2aa1858823cf6955259d60d5e18b7bc826b8af7dc1d21e",
+    "reports/t024/protocol_audit.json": "dc49bc479ded803f954be8c93bf7c7394636e1437ad63103fadc1a93ce50b0b0",
+    "reports/t024/reproducibility.json": "87bf1980fc5376b32f76592007470cf42192e4d59b37540fa46a28ca273d8607",
+    "reports/t024/run_manifest.json": "2c8eb65a245b101aa2b694e13ed8fc9f2bd2bb30cf5985f2bb85c5a9664ee7d2",
+    "reports/t024/scope_audit.json": "b53e4fdfae0c405aa74593d547df7d490f6b5c9c9a7620ced2e1518905adf043",
+    "reports/t024/toy_aggregation.json": "5721d693d7292721141484e0bebbdaac61695f6f361746f51087e308389237e9"
+  },
+  "status": "PASS"
+}

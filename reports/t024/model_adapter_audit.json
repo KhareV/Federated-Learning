@@ -1,0 +1,14 @@
+{
+  "adapter_id": "FL_STATE_TRANSPORT_V1",
+  "architecture_source": "models.ecg_cnn.build_model_v1",
+  "checkpoint_path": "checkpoints/MODEL_V1.pt",
+  "checkpoint_used_only_for_adapter_audit": true,
+  "fl_training_initialization": "UNRESOLVED_FOR_T025",
+  "maximum_logit_difference": 0.0,
+  "post_restoration_logits_sha256": "b808a1103a5a898ad6e8e4c7a859428b9f8bd470749625378556112af6975330",
+  "pre_serialization_logits_sha256": "b808a1103a5a898ad6e8e4c7a859428b9f8bd470749625378556112af6975330",
+  "serialized_state_sha256": "dcc60b0b2913a000e876308dfb54e4f55c1812cb1c4db1d0d638eff046051cc3",
+  "status": "PASS",
+  "test_vector": "tests/fixtures/model_v1_test_vector.npz",
+  "within_frozen_tolerance": true
+}
