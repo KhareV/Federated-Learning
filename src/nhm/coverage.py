@@ -60,6 +60,7 @@ APPROVED_FROZEN_ARTIFACTS = {
     "F09",
     "F10",
     "F11",
+    "F12",
 }
 
 CANONICAL_GATE_TASK_OWNERS = {

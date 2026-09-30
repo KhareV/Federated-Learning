@@ -1,0 +1,347 @@
+{
+  "conditions": {
+    "combined": {
+      "duplicate_patients": 0,
+      "held_out_contamination": 0,
+      "omitted_patients": 0,
+      "patient_integrity": true,
+      "sites": {
+        "SITE_00": {
+          "negatives": 720,
+          "patients": 2,
+          "positive_rate": 0.0,
+          "positives": 0,
+          "windows": 720
+        },
+        "SITE_01": {
+          "negatives": 716,
+          "patients": 2,
+          "positive_rate": 0.005555555555555556,
+          "positives": 4,
+          "windows": 720
+        },
+        "SITE_02": {
+          "negatives": 716,
+          "patients": 2,
+          "positive_rate": 0.005555555555555556,
+          "positives": 4,
+          "windows": 720
+        },
+        "SITE_03": {
+          "negatives": 1054,
+          "patients": 3,
+          "positive_rate": 0.020446096654275093,
+          "positives": 22,
+          "windows": 1076
+        },
+        "SITE_04": {
+          "negatives": 870,
+          "patients": 3,
+          "positive_rate": 0.16586768935762225,
+          "positives": 173,
+          "windows": 1043
+        },
+        "SITE_05": {
+          "negatives": 1049,
+          "patients": 4,
+          "positive_rate": 0.2674581005586592,
+          "positives": 383,
+          "windows": 1432
+        },
+        "SITE_06": {
+          "negatives": 766,
+          "patients": 5,
+          "positive_rate": 0.5744444444444444,
+          "positives": 1034,
+          "windows": 1800
+        },
+        "SITE_07": {
+          "negatives": 212,
+          "patients": 6,
+          "positive_rate": 0.9013494648673802,
+          "positives": 1937,
+          "windows": 2149
+        }
+      },
+      "total_negatives": 6103,
+      "total_positives": 3557,
+      "total_windows": 9660
+    },
+    "feature": {
+      "duplicate_patients": 0,
+      "held_out_contamination": 0,
+      "omitted_patients": 0,
+      "patient_integrity": true,
+      "sites": {
+        "SITE_00": {
+          "negatives": 909,
+          "patients": 4,
+          "positive_rate": 0.366991643454039,
+          "positives": 527,
+          "windows": 1436
+        },
+        "SITE_01": {
+          "negatives": 915,
+          "patients": 4,
+          "positive_rate": 0.3623693379790941,
+          "positives": 520,
+          "windows": 1435
+        },
+        "SITE_02": {
+          "negatives": 886,
+          "patients": 4,
+          "positive_rate": 0.36304816678648455,
+          "positives": 505,
+          "windows": 1391
+        },
+        "SITE_03": {
+          "negatives": 700,
+          "patients": 3,
+          "positive_rate": 0.35185185185185186,
+          "positives": 380,
+          "windows": 1080
+        },
+        "SITE_04": {
+          "negatives": 683,
+          "patients": 3,
+          "positive_rate": 0.3675925925925926,
+          "positives": 397,
+          "windows": 1080
+        },
+        "SITE_05": {
+          "negatives": 649,
+          "patients": 3,
+          "positive_rate": 0.3990740740740741,
+          "positives": 431,
+          "windows": 1080
+        },
+        "SITE_06": {
+          "negatives": 684,
+          "patients": 3,
+          "positive_rate": 0.36666666666666664,
+          "positives": 396,
+          "windows": 1080
+        },
+        "SITE_07": {
+          "negatives": 677,
+          "patients": 3,
+          "positive_rate": 0.3719851576994434,
+          "positives": 401,
+          "windows": 1078
+        }
+      },
+      "total_negatives": 6103,
+      "total_positives": 3557,
+      "total_windows": 9660
+    },
+    "label": {
+      "duplicate_patients": 0,
+      "held_out_contamination": 0,
+      "omitted_patients": 0,
+      "patient_integrity": true,
+      "sites": {
+        "SITE_00": {
+          "negatives": 1430,
+          "patients": 4,
+          "positive_rate": 0.006944444444444444,
+          "positives": 10,
+          "windows": 1440
+        },
+        "SITE_01": {
+          "negatives": 1315,
+          "patients": 4,
+          "positive_rate": 0.08426183844011143,
+          "positives": 121,
+          "windows": 1436
+        },
+        "SITE_02": {
+          "negatives": 1079,
+          "patients": 4,
+          "positive_rate": 0.22652329749103942,
+          "positives": 316,
+          "windows": 1395
+        },
+        "SITE_03": {
+          "negatives": 1078,
+          "patients": 3,
+          "positive_rate": 0.001851851851851852,
+          "positives": 2,
+          "windows": 1080
+        },
+        "SITE_04": {
+          "negatives": 573,
+          "patients": 3,
+          "positive_rate": 0.46944444444444444,
+          "positives": 507,
+          "windows": 1080
+        },
+        "SITE_05": {
+          "negatives": 416,
+          "patients": 3,
+          "positive_rate": 0.6148148148148148,
+          "positives": 664,
+          "windows": 1080
+        },
+        "SITE_06": {
+          "negatives": 174,
+          "patients": 3,
+          "positive_rate": 0.838139534883721,
+          "positives": 901,
+          "windows": 1075
+        },
+        "SITE_07": {
+          "negatives": 38,
+          "patients": 3,
+          "positive_rate": 0.9646182495344506,
+          "positives": 1036,
+          "windows": 1074
+        }
+      },
+      "total_negatives": 6103,
+      "total_positives": 3557,
+      "total_windows": 9660
+    },
+    "quantity": {
+      "duplicate_patients": 0,
+      "held_out_contamination": 0,
+      "omitted_patients": 0,
+      "patient_integrity": true,
+      "sites": {
+        "SITE_00": {
+          "negatives": 431,
+          "patients": 2,
+          "positive_rate": 0.4013888888888889,
+          "positives": 289,
+          "windows": 720
+        },
+        "SITE_01": {
+          "negatives": 459,
+          "patients": 2,
+          "positive_rate": 0.3625,
+          "positives": 261,
+          "windows": 720
+        },
+        "SITE_02": {
+          "negatives": 416,
+          "patients": 2,
+          "positive_rate": 0.41818181818181815,
+          "positives": 299,
+          "windows": 715
+        },
+        "SITE_03": {
+          "negatives": 699,
+          "patients": 3,
+          "positive_rate": 0.34916201117318435,
+          "positives": 375,
+          "windows": 1074
+        },
+        "SITE_04": {
+          "negatives": 680,
+          "patients": 3,
+          "positive_rate": 0.3656716417910448,
+          "positives": 392,
+          "windows": 1072
+        },
+        "SITE_05": {
+          "negatives": 912,
+          "patients": 4,
+          "positive_rate": 0.36666666666666664,
+          "positives": 528,
+          "windows": 1440
+        },
+        "SITE_06": {
+          "negatives": 1123,
+          "patients": 5,
+          "positive_rate": 0.3630175836642087,
+          "positives": 640,
+          "windows": 1763
+        },
+        "SITE_07": {
+          "negatives": 1383,
+          "patients": 6,
+          "positive_rate": 0.3585343228200371,
+          "positives": 773,
+          "windows": 2156
+        }
+      },
+      "total_negatives": 6103,
+      "total_positives": 3557,
+      "total_windows": 9660
+    }
+  },
+  "construction": {
+    "combined": {
+      "capacities": {
+        "SITE_00": 2,
+        "SITE_01": 2,
+        "SITE_02": 2,
+        "SITE_03": 3,
+        "SITE_04": 3,
+        "SITE_05": 4,
+        "SITE_06": 5,
+        "SITE_07": 6
+      },
+      "final_label_objective": 0.8974375384995339,
+      "initial_label_objective": 0.8974375384995339,
+      "secondary_objective": 0.0019321732177062245,
+      "swap_count": 0
+    },
+    "feature": {
+      "mapping_source": "CLIENTS_IID_V1",
+      "swap_count": 0
+    },
+    "label": {
+      "capacities": {
+        "SITE_00": 4,
+        "SITE_01": 4,
+        "SITE_02": 4,
+        "SITE_03": 3,
+        "SITE_04": 3,
+        "SITE_05": 3,
+        "SITE_06": 3,
+        "SITE_07": 3
+      },
+      "final_label_objective": 1.0130267530198016,
+      "initial_label_objective": 0.984735587700746,
+      "secondary_objective": 5.171579595836119e-05,
+      "swap_count": 8
+    },
+    "quantity": {
+      "capacities": {
+        "SITE_00": 2,
+        "SITE_01": 2,
+        "SITE_02": 2,
+        "SITE_03": 3,
+        "SITE_04": 3,
+        "SITE_05": 4,
+        "SITE_06": 5,
+        "SITE_07": 6
+      },
+      "final_label_objective": 0.0041221106370818135,
+      "initial_label_objective": 0.32287492172391563,
+      "secondary_objective": 0.0017446880156859073,
+      "swap_count": 13
+    }
+  },
+  "quantity_integer_allocation": [
+    2,
+    2,
+    2,
+    3,
+    3,
+    4,
+    5,
+    6
+  ],
+  "quantity_unconstrained_targets": [
+    1.588235294117647,
+    1.588235294117647,
+    1.588235294117647,
+    3.176470588235294,
+    3.176470588235294,
+    4.764705882352941,
+    4.764705882352941,
+    6.352941176470588
+  ],
+  "status": "PASS"
+}

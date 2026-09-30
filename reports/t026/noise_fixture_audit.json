@@ -1,0 +1,109 @@
+{
+  "fixtures": [
+    {
+      "achieved_snr_db": 24.0,
+      "clean_example_sha256": "9ed60c88508c0d78cd9d5fd66cd5b050c92efdf56f6fa09ce42bc3db92360efd",
+      "label_unchanged": true,
+      "noise_segment_offset": 174681,
+      "noise_source": "bw",
+      "noisy_example_sha256": "5fe06fed0a07e19b9eda13e1112be85207a5264873133c309a6fb609b792f48b",
+      "repeat_sha256": "5fe06fed0a07e19b9eda13e1112be85207a5264873133c309a6fb609b792f48b",
+      "round_independent": true,
+      "site_id": "SITE_00",
+      "status": "PASS",
+      "target_snr_db": 24.0
+    },
+    {
+      "achieved_snr_db": 24.0,
+      "clean_example_sha256": "f0083725ec4630e6c915120e45a0ecacc1aa00458c449e72cf318748d2785d87",
+      "label_unchanged": true,
+      "noise_segment_offset": 94355,
+      "noise_source": "em",
+      "noisy_example_sha256": "bd60147189f22409e145e7a33fd4ceb568de72fc6aea5470d82c9896b41a260b",
+      "repeat_sha256": "bd60147189f22409e145e7a33fd4ceb568de72fc6aea5470d82c9896b41a260b",
+      "round_independent": true,
+      "site_id": "SITE_01",
+      "status": "PASS",
+      "target_snr_db": 24.0
+    },
+    {
+      "achieved_snr_db": 18.0,
+      "clean_example_sha256": "3ab4e9a67c77892fedf39075e1f848ccdcf0a4ea99ff0883acdeaf6410cb2114",
+      "label_unchanged": true,
+      "noise_segment_offset": 303108,
+      "noise_source": "ma",
+      "noisy_example_sha256": "6c2b88e0d0d0b825e64a5fe1d55fb0aed6348d0d4a7c55422e6c4f817c6ae039",
+      "repeat_sha256": "6c2b88e0d0d0b825e64a5fe1d55fb0aed6348d0d4a7c55422e6c4f817c6ae039",
+      "round_independent": true,
+      "site_id": "SITE_02",
+      "status": "PASS",
+      "target_snr_db": 18.0
+    },
+    {
+      "achieved_snr_db": 12.0,
+      "clean_example_sha256": "a68d24b2e8aba2928546f2af31ce6eb4927ad261ef867ef38fa8fa24733ab842",
+      "label_unchanged": true,
+      "noise_segment_offset": 303825,
+      "noise_source": "bw",
+      "noisy_example_sha256": "35b01e3eb07fe3b8101c0ae1e35253dc26c9ca1c503ba337142e6645e7ad992f",
+      "repeat_sha256": "35b01e3eb07fe3b8101c0ae1e35253dc26c9ca1c503ba337142e6645e7ad992f",
+      "round_independent": true,
+      "site_id": "SITE_03",
+      "status": "PASS",
+      "target_snr_db": 12.0
+    },
+    {
+      "achieved_snr_db": 5.999999999999998,
+      "clean_example_sha256": "6b8d9535879d78a7a04199558060bd7972143af6944ac4eefd26ffc80fe46b73",
+      "label_unchanged": true,
+      "noise_segment_offset": 46719,
+      "noise_source": "em",
+      "noisy_example_sha256": "644bc4df3ccf126cf110195f161b186c2938ef88991dd8bd621c0f32e700aaa9",
+      "repeat_sha256": "644bc4df3ccf126cf110195f161b186c2938ef88991dd8bd621c0f32e700aaa9",
+      "round_independent": true,
+      "site_id": "SITE_04",
+      "status": "PASS",
+      "target_snr_db": 6.0
+    },
+    {
+      "achieved_snr_db": 1.928654933106574e-15,
+      "clean_example_sha256": "1663a6a62027b30caf495d06825cf33075978b9d0101a0139b5e8da096ab3895",
+      "label_unchanged": true,
+      "noise_segment_offset": 219166,
+      "noise_source": "ma",
+      "noisy_example_sha256": "47d85e31d9af0764c47212d7e3eebd458c3e009668ddc3c85ac8d368085e8aee",
+      "repeat_sha256": "47d85e31d9af0764c47212d7e3eebd458c3e009668ddc3c85ac8d368085e8aee",
+      "round_independent": true,
+      "site_id": "SITE_05",
+      "status": "PASS",
+      "target_snr_db": 0.0
+    },
+    {
+      "achieved_snr_db": -6.000000000000001,
+      "clean_example_sha256": "3ffdce1bef715b8204d11951b705159545acbb744ab4ee8cf9583b98425de798",
+      "label_unchanged": true,
+      "noise_segment_offset": 274922,
+      "noise_source": "bw",
+      "noisy_example_sha256": "b56410ff0a4cdf658ac81389279a9b61397674eaf10ad35231fbba4851159868",
+      "repeat_sha256": "b56410ff0a4cdf658ac81389279a9b61397674eaf10ad35231fbba4851159868",
+      "round_independent": true,
+      "site_id": "SITE_06",
+      "status": "PASS",
+      "target_snr_db": -6.0
+    },
+    {
+      "achieved_snr_db": -6.000000000000001,
+      "clean_example_sha256": "a67f4281ef1e97dc5482e8d52fbb65e7017b36a09031209542424cab37962d3d",
+      "label_unchanged": true,
+      "noise_segment_offset": 255435,
+      "noise_source": "em",
+      "noisy_example_sha256": "9db594e497ec7f86e84396c21e82c64c8f6e3aae3a260bfba7bc4d1c3234350c",
+      "repeat_sha256": "9db594e497ec7f86e84396c21e82c64c8f6e3aae3a260bfba7bc4d1c3234350c",
+      "round_independent": true,
+      "site_id": "SITE_07",
+      "status": "PASS",
+      "target_snr_db": -6.0
+    }
+  ],
+  "status": "PASS"
+}

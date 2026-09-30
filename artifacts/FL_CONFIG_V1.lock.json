@@ -1,0 +1,100 @@
+{
+  "Flower_version": "1.39.0",
+  "checkpoint_policy": "highest validation AUPRC rounds 1-50; earliest exact tie",
+  "feature_noise_schedule": {
+    "SITE_00": {
+      "snr_db": 24.0,
+      "source": "bw"
+    },
+    "SITE_01": {
+      "snr_db": 24.0,
+      "source": "em"
+    },
+    "SITE_02": {
+      "snr_db": 18.0,
+      "source": "ma"
+    },
+    "SITE_03": {
+      "snr_db": 12.0,
+      "source": "bw"
+    },
+    "SITE_04": {
+      "snr_db": 6.0,
+      "source": "em"
+    },
+    "SITE_05": {
+      "snr_db": 0.0,
+      "source": "ma"
+    },
+    "SITE_06": {
+      "snr_db": -6.0,
+      "source": "bw"
+    },
+    "SITE_07": {
+      "snr_db": -6.0,
+      "source": "em"
+    }
+  },
+  "freeze_id": "F12",
+  "frozen_before_T026_outcomes": true,
+  "global_pos_weight": 1.7157717177396683,
+  "hashes": {
+    "CLIENTS_IID_V1": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+    "FL_INIT_V1": "eeca6cc0f7deed3e7374092a21422447960fd5f8bb79d3d4635d7e43c4c59ef1",
+    "NONIID_COMBINED_V1": "c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47",
+    "NONIID_FEATURE_V1": "dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291",
+    "NONIID_LABEL_V1": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176",
+    "NONIID_QUANTITY_V1": "9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e",
+    "PREPROC_V1_lock": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "aggregation": "902a72b976399afe85a512ecb83897a80a483e6b541d5dbc544acbe654660920",
+    "feature_noise_source": "aad5552c4c82790191835c16c13dfa1c275594926ccc36f5442d2d3a51797aee",
+    "fl_feature_noise_v1": "b82fb0a4570f33f04a84d0d15b7709e70ffb936ab79f67cf172a8160da6850e9",
+    "fl_iid_v1": "529a43dab43b36c57ed65e2ba769d10eafefa79f21689fb3339dbe4d67e1cf89",
+    "fl_non_iid_v1": "7c562aa559b33ca339f84e93cd50346f39ad8885e0cd8b779b2518cbd95a73c9",
+    "non_iid_manifest_source": "9d4dc86ed52a32bd1486381c27aec5906b24e4fa4c00b5014f47fe002b416ce4",
+    "non_iid_runner": "d5ba866a7426b2a33404259d518f4222f499117af6cd62235c69e70c9ad97d47",
+    "split": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "transport": "125449202aba091582add6641b60d7bc2311206e237039cf8f2ba0f5933cdbdc",
+    "window_manifest": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  },
+  "metric_threshold": {
+    "CAL_V1": false,
+    "probability": "sigmoid(raw_logit)",
+    "threshold": 0.5
+  },
+  "optimizer": {
+    "learning_rate": 0.001,
+    "name": "AdamW",
+    "weight_decay": 0.0001
+  },
+  "quantity_integer_allocation": [
+    2,
+    2,
+    2,
+    3,
+    3,
+    4,
+    5,
+    6
+  ],
+  "quantity_source_ratio": [
+    1,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4
+  ],
+  "round_budget": {
+    "batch_size": 64,
+    "clients": 8,
+    "clients_per_round": 8,
+    "local_epochs": 1,
+    "rounds": 50
+  },
+  "shuffle_seed_namespace": "FL_IID_V1",
+  "status": "FROZEN",
+  "version_id": "FL_CONFIG_V1"
+}

@@ -1,0 +1,55 @@
+config_id: FL_NON_IID_V1
+task_id: T026
+conditions:
+  - FL_LABEL_SKEW_V1
+  - FL_QUANTITY_SKEW_V1
+  - FL_FEATURE_NOISE_V1
+  - FL_COMBINED_SKEW_V1
+reference: FL_IID_V1
+model: {architecture_id: MODEL_V1_ARCHITECTURE_V1, centralized_checkpoint_warm_start: false}
+initialization: {id: FL_INIT_V1, source: FRESH_MODEL_V1_ARCHITECTURE, seed: 20260927}
+shuffle_seed_namespace: FL_IID_V1
+manifests:
+  label: NONIID_LABEL_V1
+  quantity: NONIID_QUANTITY_V1
+  feature: NONIID_FEATURE_V1
+  combined: NONIID_COMBINED_V1
+label_skew:
+  capacities: [4, 4, 4, 3, 3, 3, 3, 3]
+  primary: MAXIMIZE_LABEL_VARIANCE_OBJECTIVE_V1
+  secondary: MINIMIZE_IID_SITE_WINDOW_DEVIATION
+quantity_skew:
+  source_ratio: [1, 1, 1, 2, 2, 3, 3, 4]
+  integer_allocation: [2, 2, 2, 3, 3, 4, 5, 6]
+  primary: MINIMIZE_LABEL_DIVERGENCE
+  secondary: MINIMIZE_WINDOW_FRACTION_DEVIATION
+combined_skew:
+  integer_allocation: [2, 2, 2, 3, 3, 4, 5, 6]
+  primary: MAXIMIZE_LABEL_VARIANCE_OBJECTIVE_V1
+  secondary: MINIMIZE_WINDOW_FRACTION_DEVIATION
+feature_noise_config: configs/fl_feature_noise_v1.yaml
+training:
+  clients: 8
+  clients_per_round: 8
+  rounds: 50
+  local_epochs: 1
+  batch_size: 64
+  drop_last: false
+  device: cpu
+optimizer: {implementation: AdamW, learning_rate: 0.001, weight_decay: 0.0001, state_policy: RESET_EACH_CLIENT_EACH_ROUND, scheduler: NONE}
+loss: {implementation: BCEWithLogitsLoss, pos_weight: 1.7157717177396683, pos_weight_source: GLOBAL_TRAIN_NEG_OVER_POS, client_specific_weights: false}
+aggregation: {id: SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1, weight: num_examples_actually_used}
+transport: {id: FL_STATE_TRANSPORT_V1}
+evaluation: {partition: VALIDATION, probability: sigmoid(raw_logit), calibration: NONE, metric_threshold_id: FL_METRIC_THRESHOLD_V1, metric_threshold: 0.5, metric_comparator: ">="}
+checkpoint: {metric: validation_AUPRC, eligible_rounds: "1-50", tie_policy: EARLIEST_EXACT_MAXIMUM}
+access:
+  TRAIN: TRAINING_ONLY
+  VALIDATION: SERVER_DEVELOPMENT_EVALUATION_ONLY
+  NSTDB: PURE_NOISE_TRAINING_RESOURCE_ONLY
+  CALIBRATION: FORBIDDEN
+  INTERNAL_TEST: FORBIDDEN
+  INCART: FORBIDDEN
+  BIDMC: FORBIDDEN
+  WEARABLE_V1: FORBIDDEN
+FedProx: false
+secure_aggregation: false

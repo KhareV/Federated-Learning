@@ -1,0 +1,20 @@
+feature_noise_id: FL_FEATURE_NOISE_V1
+dataset: NSTDB
+dataset_version: "1.0.0"
+role: PURE_NOISE_TRAINING_RESOURCE_ONLY
+input_domain: PREPROC_V1_FILTERED_250_HZ_BEFORE_WINDOW_ZSCORE
+segment_samples: 2500
+offset_rule: SHA256_FL_FEATURE_NOISE_V1_SITE_EXAMPLE_SOURCE
+fixed_across_rounds: true
+snr_tolerance_db: 0.05
+schedule:
+  SITE_00: {source: bw, snr_db: 24.0}
+  SITE_01: {source: em, snr_db: 24.0}
+  SITE_02: {source: ma, snr_db: 18.0}
+  SITE_03: {source: bw, snr_db: 12.0}
+  SITE_04: {source: em, snr_db: 6.0}
+  SITE_05: {source: ma, snr_db: 0.0}
+  SITE_06: {source: bw, snr_db: -6.0}
+  SITE_07: {source: em, snr_db: -6.0}
+labels_used_from_nstdb: false
+validation_noise: false

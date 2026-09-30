@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import json
+import tempfile
 from pathlib import Path
 
 from nhm.hashing import hash_file
+from scripts.verify_fl_config_t026 import verify
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -47,3 +49,18 @@ def test_t025_artifacts_remain_exact() -> None:
         ),
     }
     assert all(hash_file(ROOT / path) == digest for path, digest in expected.items())
+
+
+def test_f12_verifier_and_tamper_detection() -> None:
+    assert verify(ROOT)["status"] == "PASS"
+    lock = json.loads((ROOT / "artifacts/FL_CONFIG_V1.lock.json").read_text())
+    lock["hashes"]["NONIID_LABEL_V1"] = "0" * 64
+    with tempfile.TemporaryDirectory() as directory:
+        path = Path(directory) / "lock.json"
+        path.write_text(json.dumps(lock))
+        try:
+            verify(ROOT, path)
+        except RuntimeError as error:
+            assert "FL_CONFIG_V1_VERIFY_FAILURE" in str(error)
+        else:
+            raise AssertionError("tampered F12 lock accepted")
