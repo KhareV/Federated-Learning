@@ -35,14 +35,17 @@ def verify() -> dict[str, object]:
             raise RuntimeError(f"T022_ARTIFACT_HASH_MISMATCH: {relative}")
     with (ROOT / "manifests/task_registry_v1.csv").open(newline="", encoding="utf-8") as handle:
         tasks = {row["task_id"]: row for row in csv.DictReader(handle)}
-    if tasks["T022"]["status"] != "PASS" or tasks["T023"]["status"] != "NOT_STARTED":
+    if tasks["T022"]["status"] != "PASS" or tasks["T023"]["status"] not in {
+        "NOT_STARTED",
+        "PASS",
+    }:
         raise RuntimeError("T022_REGISTRY_STATE_MISMATCH")
     return {
         **policy,
         "upstream_immutability": "PASS",
         "artifact_hashes": "PASS",
         "T022": "PASS",
-        "T023": "NOT_STARTED",
+        "T023": tasks["T023"]["status"],
         "G9": "NOT_STARTED",
         "real_data_access": False,
     }

@@ -26,7 +26,10 @@ def main() -> None:
             raise RuntimeError(f"C021_HR_B_ARTIFACT_HASH_MISMATCH: {path}")
     with (ROOT / "manifests/task_registry_v1.csv").open(newline="", encoding="utf-8") as handle:
         tasks = {row["task_id"]: row for row in csv.DictReader(handle)}
-    if tasks["T022"]["status"] != "PASS" or tasks["T023"]["status"] != "NOT_STARTED":
+    if tasks["T022"]["status"] != "PASS" or tasks["T023"]["status"] not in {
+        "NOT_STARTED",
+        "PASS",
+    }:
         raise RuntimeError("C021_HR_B_TASK_STATE_MISMATCH")
     print(json.dumps({**result, "upstream_immutability": "PASS"}, indent=2, sort_keys=True))
 
