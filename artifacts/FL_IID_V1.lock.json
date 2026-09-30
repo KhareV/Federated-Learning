@@ -1,0 +1,37 @@
+{
+  "aggregation_sha256": "902a72b976399afe85a512ecb83897a80a483e6b541d5dbc544acbe654660920",
+  "best_round": 1,
+  "best_validation_AUPRC": 0.5062218463441578,
+  "canonical_F12_status": "NOT_FROZEN",
+  "client_manifest_sha256": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+  "config_sha256": "529a43dab43b36c57ed65e2ba769d10eafefa79f21689fb3339dbe4d67e1cf89",
+  "initialization_sha256": "eeca6cc0f7deed3e7374092a21422447960fd5f8bb79d3d4635d7e43c4c59ef1",
+  "lock_id": "FL_IID_V1",
+  "method_lock_sha256": "11f254daa97da0867345e99237fc55c9ab56de8df3596e59cd5cbfd953bc9a7c",
+  "result_hashes": {
+    "aggregation_parity": "f1116fe898d565762f38f7df4bcd99eee8bb5a5135ea27784b14356486ec653b",
+    "best_checkpoint": "7a2a7fc6bad6d713784cef114006b0e6d5a56e211ebc7d4e4a94fecdf3c85d10",
+    "client_round_log": "f6dcee3027ae6422bc9c41ef0501c33ab1b7611271f58c6348ea2988dcfd82c5",
+    "initialization_audit": "a65941ce5c01ca974639635840825fcda91b68dc2569987ebb298327de813df3",
+    "main_report": "54fc131d1696cec648d04815d743f49cb96df6aca4c3d2deb329d07c23db3f0f",
+    "round_50_checkpoint": "2b2abb7859a32d7ca7b59b4479bb666f5ad4d6adf74c20831e04ae6c40227bf2",
+    "round_log": "fde13b3aa5a54b4a7dffe6d0ca3bac85cf9fb07175b117beaa685268ced77e0d",
+    "stability_audit": "309b90048fdb9f5a57292a2212575988ae30032e0a170854c2cb80e535966b2d",
+    "summary_csv": "da600e02783995d0d7f0ed1a256903a7110b8fe553e624ae941ce09c90e89409",
+    "validation_predictions": "7d449b00efda61a3755089c900e7a5fa58186dfe5ccb72c45c5f9beae10f9ce5"
+  },
+  "result_paths": {
+    "aggregation_parity": "reports/t025/aggregation_parity.json",
+    "best_checkpoint": "checkpoints/federated/FL_IID_V1_best.pt",
+    "client_round_log": "reports/t025/fl_iid_client_rounds.csv",
+    "initialization_audit": "reports/t025/initialization_audit.json",
+    "main_report": "reports/fl_iid.json",
+    "round_50_checkpoint": "checkpoints/federated/FL_IID_V1_round50.pt",
+    "round_log": "reports/t025/fl_iid_rounds.csv",
+    "stability_audit": "reports/t025/stability_audit.json",
+    "summary_csv": "reports/fl_iid.csv",
+    "validation_predictions": "reports/t025/fl_iid_validation_predictions.csv"
+  },
+  "status": "FROZEN_ENGINEERING_RESULT",
+  "transport_sha256": "125449202aba091582add6641b60d7bc2311206e237039cf8f2ba0f5933cdbdc"
+}

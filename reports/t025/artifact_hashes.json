@@ -1,0 +1,30 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "artifacts/FL_IID_METHOD_V1.lock.json": "11f254daa97da0867345e99237fc55c9ab56de8df3596e59cd5cbfd953bc9a7c",
+    "artifacts/FL_IID_V1.lock.json": "6939fa01d608fb8ff5feaffd7f76b16dbeb1e73d13086ed5785c2bc241aec13f",
+    "checkpoints/federated/FL_IID_V1_best.pt": "7a2a7fc6bad6d713784cef114006b0e6d5a56e211ebc7d4e4a94fecdf3c85d10",
+    "checkpoints/federated/FL_IID_V1_round50.pt": "2b2abb7859a32d7ca7b59b4479bb666f5ad4d6adf74c20831e04ae6c40227bf2",
+    "configs/fl_iid_v1.yaml": "529a43dab43b36c57ed65e2ba769d10eafefa79f21689fb3339dbe4d67e1cf89",
+    "configs/fl_init_v1.yaml": "eeca6cc0f7deed3e7374092a21422447960fd5f8bb79d3d4635d7e43c4c59ef1",
+    "federated/client_manifest.py": "24533ab78189ca2f1a1ddd097e1a1bf6e69db3f4908ae36b3b2f14fca459e047",
+    "federated/evaluation.py": "06680aa9f15577be2310f998ede5d154aa2e30e1921fa1b541b2c26f1137355d",
+    "federated/fedavg_runner.py": "bec0e47388adbe284787489be28dcc2077dc97d987a82b1a79febdde5287afd4",
+    "federated/local_training.py": "1b7924e5e6e9f99f927c835594071021b666b4e9553bbc64fff941b5d5b06ca3",
+    "manifests/clients/CLIENTS_IID_V1.csv": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+    "reports/fl_iid.csv": "da600e02783995d0d7f0ed1a256903a7110b8fe553e624ae941ce09c90e89409",
+    "reports/fl_iid.json": "54fc131d1696cec648d04815d743f49cb96df6aca4c3d2deb329d07c23db3f0f",
+    "reports/t025/aggregation_parity.json": "f1116fe898d565762f38f7df4bcd99eee8bb5a5135ea27784b14356486ec653b",
+    "reports/t025/client_balance.csv": "9c31815ddaa435fb0051f284d3ade8de4986d84e2c23326771c094e190434b5f",
+    "reports/t025/client_manifest_audit.json": "b4fd8e7e65c1f25a0fa92cff7332f317787185ec18cb1c1f55df4c93e489ff02",
+    "reports/t025/fl_iid_client_rounds.csv": "f6dcee3027ae6422bc9c41ef0501c33ab1b7611271f58c6348ea2988dcfd82c5",
+    "reports/t025/fl_iid_rounds.csv": "fde13b3aa5a54b4a7dffe6d0ca3bac85cf9fb07175b117beaa685268ced77e0d",
+    "reports/t025/fl_iid_validation_predictions.csv": "7d449b00efda61a3755089c900e7a5fa58186dfe5ccb72c45c5f9beae10f9ce5",
+    "reports/t025/initialization_audit.json": "a65941ce5c01ca974639635840825fcda91b68dc2569987ebb298327de813df3",
+    "reports/t025/reproducibility.json": "1c3b0322a545fda94fb1377ffe68a6bb5ce93acd4a6e5cb1c32b01752b0f5711",
+    "reports/t025/run_manifest.json": "ca76c7272f804c1aee50c2d3b5e50d6192c1b3bcb1342a2a4d086fe489501514",
+    "reports/t025/scope_audit.json": "bd59a4035627e773b7caeeebeb5ea834dfb40d1f5f837e57510bc6eafaec49cc",
+    "reports/t025/stability_audit.json": "309b90048fdb9f5a57292a2212575988ae30032e0a170854c2cb80e535966b2d"
+  },
+  "status": "PASS"
+}

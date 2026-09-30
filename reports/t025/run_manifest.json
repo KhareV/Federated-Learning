@@ -1,0 +1,15 @@
+{
+  "Flower": "1.39.0",
+  "ci_executed": false,
+  "client_updates": 400,
+  "command": "PYTHONPATH=src:. .venv-t024/bin/python -m federated.fedavg_runner",
+  "device": "cpu",
+  "experiment_id": "FL_IID_V1",
+  "implementation_commit": "c908c654fc7a8d676774f30e392ccc85f42938ec",
+  "pre_result_protocol_commit": "980e73e690398578a9ebed2a9339f87297828b6b",
+  "python": "3.11.16",
+  "pytorch": "2.14.0",
+  "rounds": 50,
+  "status": "PASS",
+  "task_id": "T025"
+}
