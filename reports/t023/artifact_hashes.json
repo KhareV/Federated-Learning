@@ -1,0 +1,21 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "artifacts/QUALITY_AWARE_EXPERIMENT_V1.lock.json": "a3b9d8ef2cf20960e7d29a06a44c74be0759a1e71d4a9628c94d957f2dfe01e1",
+    "configs/quality_aware_experiment_v1.yaml": "dea295c26b69a491deb308e985828ae68f2dfbc904e92f8f5083a71b74cfe6d7",
+    "evaluation/episode_metrics.py": "988f4040342837baf140bbe38c9f78a8dccd4bd5f8d159b5466080d2d881aa97",
+    "evaluation/quality_aware_alerts.py": "7d6758823a3b84dc21d5e5f0cc413829bacceb4e1752039e4b1625b98b68c1f0",
+    "reports/quality_aware_alerts.csv": "98943429a29aa8794c98709a07970dca265ec67f93c3a1963f1d375d1ff8a420",
+    "reports/quality_aware_alerts.json": "fec1075657665af87c8ec00a2ce2d8a7a198f35603ec5c341a54d1ae1d38ddc9",
+    "reports/t023/bidmc_episode_metrics.csv": "b2eddd607f700792298aa715da07011c21c0254a35a69eead98d6f26aa20d8f5",
+    "reports/t023/episode_event_trace.csv": "6c1eac31b64dd5c4e5b8778d1f89b9f631bdb003d0f1795811b906808f2f54cc",
+    "reports/t023/policy_sensitivity_audit.json": "719e05482aa8cfba3cd285f69c9484162ffc83b61399ac1ce5df8c685a383f36",
+    "reports/t023/quality_response_by_scenario.csv": "f1e0d45cb17fcc00a13dff5884ca46446d894b2413a0eab167fc3e3ffb6ea896",
+    "reports/t023/reproducibility.json": "b2cd3a0c92bce96d43e3f60bbcf980105d61e993702c107c7c943884a215948d",
+    "reports/t023/run_manifest.json": "93805b043e7542139dcb14314fc0fe4d08eed51d88f9d5be05b88dfd9ca85592",
+    "reports/t023/scenario_manifest.csv": "2ac4158ed1ce3f6252d2f9bc7d1f1bde209c76d44db9b2ecf1f789fea316f318",
+    "reports/t023/wearable_sim_episode_metrics.csv": "3dc64f289f9c944a15bf04b29073da59938949ada569a27dc86ae9dc2022e9a5",
+    "simulation/quality_perturbations.py": "e61cb9be86f8723f83de3e1b07092243179913cb988068b15279a48c8c537b97"
+  },
+  "status": "PASS"
+}

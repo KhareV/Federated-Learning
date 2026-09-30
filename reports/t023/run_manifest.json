@@ -1,0 +1,40 @@
+{
+  "BIDMC_records": 53,
+  "WEARABLE_SIM_sessions": 8,
+  "WEARABLE_V1_access": false,
+  "ci_executed": false,
+  "device": "cpu",
+  "experiment_id": "QUALITY_AWARE_EXPERIMENT_V1",
+  "git_sha_at_result_generation": "01c75142b9baf135996615c4dd38cd7f272697e1",
+  "hardware_access": false,
+  "pre_result_commit": "01c7514",
+  "protected_upstream_hashes": {
+    "artifacts/ALERT_POLICY_V1.lock.json": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+    "artifacts/BIDMC_CONTEXT_V2.lock.json": "5b2f9bf89aa5461d6acc0001b24a72d20457846ea379e84c44c339c968009f97",
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/ECG_HR_CONTEXT_V2.lock.json": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "preprocessing/quality.py": "2af482c1b1411da4a7efb94e68e7a6675ec3c688244873533d7bf5fd93b85da0",
+    "reports/external_incart.json": "dbffd38f3fe0fe829544fcf991b5106dd0ec96bf968f7209a6bba77a624bb7de",
+    "reports/internal_test.json": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "reports/noise_robustness.json": "fae1d2720dd92987689f9c4421ad23b4b1c279c7b26aedc19e26bbd3169d6829"
+  },
+  "python": "3.11.16",
+  "status": "PASS_WITH_WARNINGS",
+  "task_id": "T023",
+  "verification": {
+    "BIDMC_records": 53,
+    "WEARABLE_SIM_sessions": 8,
+    "arm_pairing": "PASS",
+    "healthy_context_preservation": 1.0,
+    "lock_status": "FROZEN_EXPERIMENT_METHOD",
+    "method_lock": "PASS",
+    "method_lock_sha256": "a3b9d8ef2cf20960e7d29a06a44c74be0759a1e71d4a9628c94d957f2dfe01e1",
+    "metric_rows": 1114,
+    "metric_traceability": "PASS",
+    "status": "PASS_WITH_WARNINGS",
+    "structural_episode_invariance": "PASS",
+    "trace_rows": 109670
+  }
+}

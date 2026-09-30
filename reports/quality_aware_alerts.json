@@ -1,0 +1,658 @@
+{
+  "BIDMC": {
+    "CLEAN_REFERENCE": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 16.214242239805237,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 18.843578819233112,
+        "record_macro_context_unavailable_fraction": 0.021911138161898963,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.03164942178940961,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 53,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "CROSS_MODAL_RATE_DISAGREEMENT": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 16.214242239805237,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 18.843578819233112,
+        "record_macro_context_unavailable_fraction": 0.021911138161898963,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.34449178332318936,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 53,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "ECG_CLIPPING": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 9.811320754716986,
+        "record_macro_chattering_per_hour": 57.407181984175295,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 1.4850882531953742,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 23.225806451612904,
+        "record_macro_recheck_fraction": 0.4193548387096773,
+        "record_macro_suppression_rate": 0.4193548387096773,
+        "sessions": 53
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 9.811320754716986,
+        "record_macro_chattering_per_hour": 58.28362751065125,
+        "record_macro_context_unavailable_fraction": 0.021911138161898963,
+        "record_macro_excess_alert_rate": 1.4850882531953742,
+        "record_macro_quality_warning_fraction": 0.03164942178940961,
+        "record_macro_recheck_entries_per_hour": 23.225806451612904,
+        "record_macro_recheck_fraction": 0.4193548387096773,
+        "record_macro_suppression_rate": 0.4193548387096773,
+        "sessions": 53
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 53,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "ECG_DROPOUT": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 9.218328840970344,
+        "record_macro_chattering_per_hour": 62.665855143031045,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.8920963394487437,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 23.225806451612904,
+        "record_macro_recheck_fraction": 0.0967741935483871,
+        "record_macro_suppression_rate": 0.0967741935483871,
+        "sessions": 53
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 9.218328840970344,
+        "record_macro_chattering_per_hour": 64.85696895922094,
+        "record_macro_context_unavailable_fraction": 0.021911138161898963,
+        "record_macro_excess_alert_rate": 0.8920963394487437,
+        "record_macro_quality_warning_fraction": 0.03164942178940961,
+        "record_macro_recheck_entries_per_hour": 23.225806451612904,
+        "record_macro_recheck_fraction": 0.0967741935483871,
+        "record_macro_suppression_rate": 0.0967741935483871,
+        "sessions": 53
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 53,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "ECG_NOISE_0DB": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 22.34936092513693,
+        "record_macro_chattering_per_hour": 44.26049908703591,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 14.02312842361534,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 22.34936092513693,
+        "record_macro_chattering_per_hour": 46.013390139987834,
+        "record_macro_context_unavailable_fraction": 0.021911138161898963,
+        "record_macro_excess_alert_rate": 14.02312842361534,
+        "record_macro_quality_warning_fraction": 0.03164942178940961,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 53,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "MISSING_PPG": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 16.214242239805237,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 52.14850882531954,
+        "record_macro_context_unavailable_fraction": 0.3998782714546561,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.016433353621424222,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 53,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "PPG_CLIPPING": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 16.214242239805237,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 52.14850882531954,
+        "record_macro_context_unavailable_fraction": 0.3998782714546561,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.016433353621424222,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 53,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "PPG_DROPOUT": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 16.214242239805237,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 55.21606816798539,
+        "record_macro_context_unavailable_fraction": 0.08460133901399876,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.027997565429093124,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 53,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "SPO2_UNAVAILABLE": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 16.214242239805237,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 8.326232501521602,
+        "record_macro_chattering_per_hour": 52.14850882531954,
+        "record_macro_context_unavailable_fraction": 0.3998782714546561,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.03164942178940961,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 53
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 53,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    }
+  },
+  "QUALITY_V1_noise_sensitivity_limitation": true,
+  "WEARABLE_SIM_V1_engineering_replay_only": {
+    "CLEAN_REFERENCE": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 37.74193548387097,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 37.74193548387097,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "CROSS_MODAL_RATE_DISAGREEMENT": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 37.74193548387097,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 37.74193548387097,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.3225806451612903,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "ECG_CLIPPING": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.0,
+        "record_macro_chattering_per_hour": 66.77419354838709,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": -0.32258064516129004,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 23.225806451612904,
+        "record_macro_recheck_fraction": 0.41935483870967744,
+        "record_macro_suppression_rate": 0.41935483870967744,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.0,
+        "record_macro_chattering_per_hour": 66.77419354838709,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": -0.32258064516129004,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 23.225806451612904,
+        "record_macro_recheck_fraction": 0.41935483870967744,
+        "record_macro_suppression_rate": 0.41935483870967744,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "ECG_DROPOUT": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 19.285714285714285,
+        "record_macro_chattering_per_hour": 78.38709677419355,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": -1.0368663594470036,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 23.225806451612904,
+        "record_macro_recheck_fraction": 0.0967741935483871,
+        "record_macro_suppression_rate": 0.0967741935483871,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 19.285714285714285,
+        "record_macro_chattering_per_hour": 78.38709677419355,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": -1.0368663594470036,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 23.225806451612904,
+        "record_macro_recheck_fraction": 0.0967741935483871,
+        "record_macro_suppression_rate": 0.0967741935483871,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "ECG_NOISE_0DB": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 17.419354838709676,
+        "record_macro_chattering_per_hour": 31.935483870967744,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": -2.903225806451612,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 17.419354838709676,
+        "record_macro_chattering_per_hour": 31.935483870967744,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": -2.903225806451612,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "MISSING_PPG": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 37.74193548387097,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 52.25806451612903,
+        "record_macro_context_unavailable_fraction": 0.3870967741935484,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "MOTION_TAGGED": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 17.419354838709676,
+        "record_macro_chattering_per_hour": 31.935483870967744,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": -2.903225806451612,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 17.419354838709676,
+        "record_macro_chattering_per_hour": 31.935483870967744,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": -2.903225806451612,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "PPG_CLIPPING": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 37.74193548387097,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 52.25806451612903,
+        "record_macro_context_unavailable_fraction": 0.3870967741935484,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "PPG_DROPOUT": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 37.74193548387097,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 52.258064516129025,
+        "record_macro_context_unavailable_fraction": 0.06451612903225806,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    },
+    "SPO2_UNAVAILABLE": {
+      "ECG_ONLY_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 37.74193548387097,
+        "record_macro_context_unavailable_fraction": 0.0,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "QUALITY_AWARE_MONITOR_V1": {
+        "pooled_alert_episodes_per_usable_hour": 20.32258064516129,
+        "record_macro_chattering_per_hour": 52.25806451612903,
+        "record_macro_context_unavailable_fraction": 0.3870967741935484,
+        "record_macro_excess_alert_rate": 0.0,
+        "record_macro_quality_warning_fraction": 0.0,
+        "record_macro_recheck_entries_per_hour": 0.0,
+        "record_macro_recheck_fraction": 0.0,
+        "record_macro_suppression_rate": 0.0,
+        "sessions": 8
+      },
+      "primary_contrast_B_minus_A": 0.0,
+      "record_distribution": {
+        "B_eq_A": 8,
+        "B_gt_A": 0,
+        "B_lt_A": 0,
+        "maximum": 0.0,
+        "median": 0.0,
+        "minimum": 0.0
+      }
+    }
+  },
+  "WEARABLE_V1_pending_T030": true,
+  "calibration_domain": "MIT-BIH-v1.0.0",
+  "experiment_id": "QUALITY_AWARE_EXPERIMENT_V1",
+  "hardware_deferred": true,
+  "healthy_context_preservation": {
+    "fraction": 1.0,
+    "healthy_timestamps": 1555,
+    "matching": 1555
+  },
+  "method_lock": "artifacts/QUALITY_AWARE_EXPERIMENT_V1.lock.json",
+  "no_AAMI_labels": true,
+  "no_diagnostic_metrics": true,
+  "no_learned_fusion": true,
+  "no_tuning": true,
+  "overall_status": "PASS_WITH_WARNINGS",
+  "structural_sensitivity": {
+    "PRIMARY_EPISODE_CONTEXT_INVARIANCE_EXPECTED": true,
+    "RQ5_PRIMARY_EPISODE_RESULT": "NO_REDUCTION_UNDER_ALERT_POLICY_V1",
+    "context_only_episode_invariant": true,
+    "episode_transition_inputs": [
+      "ECG probability",
+      "ECG quality"
+    ]
+  }
+}
