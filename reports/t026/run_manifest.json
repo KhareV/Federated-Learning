@@ -1,0 +1,21 @@
+{
+  "CI": false,
+  "Flower": "1.39.0",
+  "PyTorch": "2.14.0",
+  "Python": "3.11.16",
+  "commands": [
+    "python -m federated.non_iid_runner label",
+    "python -m federated.non_iid_runner quantity",
+    "python -m federated.non_iid_runner feature",
+    "python -m federated.non_iid_runner combined"
+  ],
+  "device": "cpu",
+  "run_order": [
+    "label",
+    "quantity",
+    "feature",
+    "combined"
+  ],
+  "status": "PASS",
+  "task_id": "T026"
+}

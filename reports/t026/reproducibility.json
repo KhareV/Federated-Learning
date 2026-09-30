@@ -1,0 +1,80 @@
+{
+  "condition_replays": {
+    "combined": {
+      "best_AUPRC_replay": 0.4369708383334254,
+      "best_AUPRC_stored": 0.4369708383334254,
+      "best_prediction_replay_sha256": "4aa89283cafebeaa02b3996834d121b4347b0264c3640dde596ac0652a49f530",
+      "best_prediction_stored_sha256": "4aa89283cafebeaa02b3996834d121b4347b0264c3640dde596ac0652a49f530",
+      "best_round_checkpoint": 3,
+      "best_round_stored": 3,
+      "manifest_replay": "PASS",
+      "noise_fixture_replay_sha256": "00b9d77c0e69c8f5ca9b9fcddf1c8929c715e131771ee08f33819431b34f658b",
+      "round_0_state_sha256": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+      "round_1_replay_sha256": "b0b4b6a2beaf823a11f5beb9757a609166ade3f6e89f2f4cc718b45d6ff45b59",
+      "round_1_stored_sha256": "b0b4b6a2beaf823a11f5beb9757a609166ade3f6e89f2f4cc718b45d6ff45b59",
+      "status": "PASS"
+    },
+    "feature": {
+      "best_AUPRC_replay": 0.4928732353001021,
+      "best_AUPRC_stored": 0.4928732353001021,
+      "best_prediction_replay_sha256": "07995cef7856efd2f68a0457f329506da173bcc8a990e580841a099503f05e95",
+      "best_prediction_stored_sha256": "07995cef7856efd2f68a0457f329506da173bcc8a990e580841a099503f05e95",
+      "best_round_checkpoint": 1,
+      "best_round_stored": 1,
+      "manifest_replay": "PASS",
+      "noise_fixture_replay_sha256": "d66d11f2615ceb7df1686dc6ebb64799cc3b7e04036bce1b38848c3242a61387",
+      "round_0_state_sha256": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+      "round_1_replay_sha256": "cca171ce3c55b6e70c2f903d1ed8becc425d6ea3612532ad6c454a6c500f28a7",
+      "round_1_stored_sha256": "cca171ce3c55b6e70c2f903d1ed8becc425d6ea3612532ad6c454a6c500f28a7",
+      "status": "PASS"
+    },
+    "label": {
+      "best_AUPRC_replay": 0.5455569642172218,
+      "best_AUPRC_stored": 0.5455569642172218,
+      "best_prediction_replay_sha256": "5bd996e8fa1e1a3ddce439f303588973f12bdf1b86f02613567824fb90b08eac",
+      "best_prediction_stored_sha256": "5bd996e8fa1e1a3ddce439f303588973f12bdf1b86f02613567824fb90b08eac",
+      "best_round_checkpoint": 49,
+      "best_round_stored": 49,
+      "manifest_replay": "PASS",
+      "noise_fixture_replay_sha256": null,
+      "round_0_state_sha256": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+      "round_1_replay_sha256": "c30bad18e60786d0270e092a888473c15f07ecf81423db704d3733dca2cd7970",
+      "round_1_stored_sha256": "c30bad18e60786d0270e092a888473c15f07ecf81423db704d3733dca2cd7970",
+      "status": "PASS"
+    },
+    "quantity": {
+      "best_AUPRC_replay": 0.5160353244837765,
+      "best_AUPRC_stored": 0.5160353244837765,
+      "best_prediction_replay_sha256": "d8db0adc72aa4789063fc9d91683430e109ff7202af8cefcd2dee8117939e695",
+      "best_prediction_stored_sha256": "d8db0adc72aa4789063fc9d91683430e109ff7202af8cefcd2dee8117939e695",
+      "best_round_checkpoint": 27,
+      "best_round_stored": 27,
+      "manifest_replay": "PASS",
+      "noise_fixture_replay_sha256": null,
+      "round_0_state_sha256": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+      "round_1_replay_sha256": "bc5c3f584347cf6b708da376bab4a17d7b883423f5329acba8e98054826267f4",
+      "round_1_stored_sha256": "bc5c3f584347cf6b708da376bab4a17d7b883423f5329acba8e98054826267f4",
+      "status": "PASS"
+    }
+  },
+  "full_second_50_round_runs_performed": false,
+  "manifest_hashes": {
+    "combined": {
+      "run1": "c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47",
+      "run2": "c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47"
+    },
+    "feature": {
+      "run1": "dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291",
+      "run2": "dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291"
+    },
+    "label": {
+      "run1": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176",
+      "run2": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176"
+    },
+    "quantity": {
+      "run1": "9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e",
+      "run2": "9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e"
+    }
+  },
+  "status": "PASS"
+}

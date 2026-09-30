@@ -1,0 +1,65 @@
+{
+  "conditions": {
+    "combined": {
+      "aggregation": "SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1",
+      "batch_size": 64,
+      "clients_per_round": 8,
+      "initialization_sha256": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+      "learning_rate": 0.001,
+      "local_epochs": 1,
+      "only_intended_heterogeneity_changed": true,
+      "optimizer": "AdamW",
+      "patient_pool_identical": true,
+      "rounds": 50,
+      "total_examples_identical": true,
+      "transport": "FL_STATE_TRANSPORT_V1",
+      "validation": "VALIDATION_CLEAN"
+    },
+    "feature": {
+      "aggregation": "SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1",
+      "batch_size": 64,
+      "clients_per_round": 8,
+      "initialization_sha256": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+      "learning_rate": 0.001,
+      "local_epochs": 1,
+      "only_intended_heterogeneity_changed": true,
+      "optimizer": "AdamW",
+      "patient_pool_identical": true,
+      "rounds": 50,
+      "total_examples_identical": true,
+      "transport": "FL_STATE_TRANSPORT_V1",
+      "validation": "VALIDATION_CLEAN"
+    },
+    "label": {
+      "aggregation": "SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1",
+      "batch_size": 64,
+      "clients_per_round": 8,
+      "initialization_sha256": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+      "learning_rate": 0.001,
+      "local_epochs": 1,
+      "only_intended_heterogeneity_changed": true,
+      "optimizer": "AdamW",
+      "patient_pool_identical": true,
+      "rounds": 50,
+      "total_examples_identical": true,
+      "transport": "FL_STATE_TRANSPORT_V1",
+      "validation": "VALIDATION_CLEAN"
+    },
+    "quantity": {
+      "aggregation": "SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1",
+      "batch_size": 64,
+      "clients_per_round": 8,
+      "initialization_sha256": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+      "learning_rate": 0.001,
+      "local_epochs": 1,
+      "only_intended_heterogeneity_changed": true,
+      "optimizer": "AdamW",
+      "patient_pool_identical": true,
+      "rounds": 50,
+      "total_examples_identical": true,
+      "transport": "FL_STATE_TRANSPORT_V1",
+      "validation": "VALIDATION_CLEAN"
+    }
+  },
+  "status": "PASS"
+}
