@@ -1,0 +1,114 @@
+experiment_id: QUALITY_AWARE_EXPERIMENT_V1
+spec_version: "2.2"
+status: METHOD_FROZEN_BEFORE_OUTCOMES
+datasets:
+  BIDMC-v1.0.0:
+    role: public_critical_care_operational_stress
+    sessions: 53
+  WEARABLE_SIM_V1:
+    role: engineering_replay_only
+    profile: WEARABLE_SIM_DEV_T023
+    sessions: 8
+    duration_seconds: 600
+arms:
+  ECG_ONLY_MONITOR_V1:
+    context_projection: healthy_context_adapter
+  QUALITY_AWARE_MONITOR_V1:
+    context_projection: frozen_full_context
+shared:
+  model: MODEL_V1
+  calibration: CAL_V1
+  cadence_seconds: 5
+  window_seconds: 10
+  threshold_source: CAL_V1
+  threshold_comparator: ">="
+  open_K: 2
+  close_M: 2
+  cooldown_seconds: 30
+  ecg_quality: QUALITY_V1
+seed:
+  base: 20260930
+  derivation: sha256_first_16_hex_of_base_seed_pipe_dataset_id_pipe_session_id_pipe_scenario_id
+interval:
+  preferred_start_seconds: 120
+  perturbation_seconds: 60
+  pre_seconds: 30
+  post_seconds: 60
+  alignment_seconds: 5
+scenarios:
+  - CLEAN_REFERENCE
+  - ECG_CLIPPING
+  - ECG_DROPOUT
+  - ECG_NOISE_0DB
+  - PPG_CLIPPING
+  - PPG_DROPOUT
+  - MISSING_PPG
+  - CROSS_MODAL_RATE_DISAGREEMENT
+  - SPO2_UNAVAILABLE
+wearable_sim_extra_scenarios:
+  - MOTION_TAGGED
+perturbations:
+  ECG_CLIPPING:
+    interval_seconds: 60
+    signal: alternating_source_interval_extrema
+    clipping_mask: explicit
+  ECG_DROPOUT:
+    offset_seconds: 20
+    duration_seconds: 10
+    gap_class: LONG
+    interpolation: false
+  ECG_NOISE_0DB:
+    interval_seconds: 60
+    noise: zero_mean_gaussian
+    snr_db: 0
+  PPG_CLIPPING:
+    interval_seconds: 60
+    quality: UNUSABLE
+    saturation_provenance: explicit
+  PPG_DROPOUT:
+    offset_seconds: 20
+    duration_seconds: 10
+    quality: UNUSABLE
+    interpolation: false
+  MISSING_PPG:
+    interval_seconds: 60
+    context_available: false
+  CROSS_MODAL_RATE_DISAGREEMENT:
+    interval_seconds: 60
+    difference_bpm: 30
+    injection: CONTEXT_RATE_DISAGREEMENT_INJECTION
+  SPO2_UNAVAILABLE:
+    interval_seconds: 60
+    spo2_valid: false
+  MOTION_TAGGED:
+    interval_seconds: 60
+    dataset: WEARABLE_SIM_V1_only
+metrics:
+  usable_monitoring_hours: usable_ecg_slots_times_5_divided_by_3600
+  alert_episodes_per_usable_hour: episode_open_transitions_divided_by_usable_monitoring_hours
+  degradation_excess_alert_rate: degraded_same_arm_rate_minus_clean_same_arm_rate
+  primary_contrast: quality_aware_excess_minus_ecg_only_excess
+  contrast_interpretation:
+    negative: quality_aware_reduced_excess
+    zero: no_change
+    positive: quality_aware_increased_excess
+  candidate_monitoring_hours: all_slots_times_5_divided_by_3600
+  chattering: adjacent_top_level_state_changes_excluding_initialization_and_end
+  suppression: ecg_unusable_slots_divided_by_all_slots
+analysis:
+  patient_or_session_paired: true
+  pooled_and_unweighted_record_macro: true
+  bootstrap: false
+  p_values: false
+structural_expectation:
+  confirmed_episode_context_invariant: true
+  primary_episode_context_invariance_expected: true
+  null_result_label: NO_REDUCTION_UNDER_ALERT_POLICY_V1
+scope:
+  aami_labels: false
+  diagnostic_metrics: false
+  learned_fusion: false
+  tuning: false
+  wearable_v1_access: false
+  hardware_required: false
+  clinical_claim: false

@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17 t018-preflight internal-test-once internal-test-verify t018-evidence phase18 nstdb-protocol nstdb-robustness nstdb-verify t019-evidence phase19 t020-preflight external-incart-once external-incart-verify t020-evidence phase20 bidmc-context-protocol bidmc-context-tests bidmc-context-run bidmc-context-verify t021-evidence phase21 ecg-hr-v2-tests ecg-hr-v2-train-audit ecg-hr-v2-validation ecg-hr-v2-freeze c021-hr-a-evidence c021-hr-a alert-policy-tests alert-policy-verify t022-evidence phase22 bidmc-context-v2-tests bidmc-context-v2-run bidmc-context-v2-verify c021-hr-b-evidence c021-hr-b
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17 t018-preflight internal-test-once internal-test-verify t018-evidence phase18 nstdb-protocol nstdb-robustness nstdb-verify t019-evidence phase19 t020-preflight external-incart-once external-incart-verify t020-evidence phase20 bidmc-context-protocol bidmc-context-tests bidmc-context-run bidmc-context-verify t021-evidence phase21 ecg-hr-v2-tests ecg-hr-v2-train-audit ecg-hr-v2-validation ecg-hr-v2-freeze c021-hr-a-evidence c021-hr-a alert-policy-tests alert-policy-verify t022-evidence phase22 bidmc-context-v2-tests bidmc-context-v2-run bidmc-context-v2-verify c021-hr-b-evidence c021-hr-b t023-preflight t023-bidmc t023-wearable-sim t023-verify t023-evidence phase23
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets features models training evaluation preprocessing
@@ -689,4 +689,24 @@ c021-hr-b:
 	$(MAKE) lint PYTHON=$(PYTHON)
 	$(MAKE) test PYTHON=$(PYTHON)
 	$(MAKE) bidmc-context-v2-verify PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
+
+t023-preflight:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_t023_method.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_t023_monitor_arms.py tests/test_t023_perturbations.py tests/test_t023_episode_metrics.py tests/test_t023_scope.py
+
+# The frozen runner executes both data arms once and emits separately scoped outputs.
+t023-bidmc t023-wearable-sim:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m evaluation.quality_aware_alerts --run
+
+t023-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_t023.py
+
+t023-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t023_evidence.py
+
+phase23:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) t023-verify PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check

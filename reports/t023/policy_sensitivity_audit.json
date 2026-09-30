@@ -1,0 +1,40 @@
+{
+  "ECG_PPG_disagreement": {
+    "RECHECK_SENSOR": false,
+    "episode_count": false,
+    "quality_warning_metadata": true,
+    "suppression": false,
+    "top_level_state": false
+  },
+  "ECG_probability": {
+    "RECHECK_SENSOR": false,
+    "episode_count": true,
+    "quality_warning_metadata": false,
+    "suppression": false,
+    "top_level_state": true
+  },
+  "ECG_quality": {
+    "RECHECK_SENSOR": true,
+    "episode_count": true,
+    "quality_warning_metadata": false,
+    "suppression": true,
+    "top_level_state": true
+  },
+  "PPG_quality": {
+    "RECHECK_SENSOR": false,
+    "episode_count": false,
+    "quality_warning_metadata": true,
+    "suppression": false,
+    "top_level_state": true
+  },
+  "PRIMARY_EPISODE_CONTEXT_INVARIANCE_EXPECTED": true,
+  "SpO2_validity": {
+    "RECHECK_SENSOR": false,
+    "episode_count": false,
+    "quality_warning_metadata": false,
+    "suppression": false,
+    "top_level_state": true
+  },
+  "confirmed_episode_count_structurally_context_invariant": true,
+  "status": "PASS"
+}

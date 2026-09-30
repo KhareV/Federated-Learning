@@ -1,0 +1,35 @@
+{
+  "base_seed": 20260930,
+  "experiment_id": "QUALITY_AWARE_EXPERIMENT_V1",
+  "hashes": {
+    "ALERT_POLICY_V1": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+    "BIDMC_CONTEXT_V2": "5b2f9bf89aa5461d6acc0001b24a72d20457846ea379e84c44c339c968009f97",
+    "CAL_V1": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "ECG_HR_CONTEXT_V2": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "MODEL_V1": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "QUALITY_V1": "2af482c1b1411da4a7efb94e68e7a6675ec3c688244873533d7bf5fd93b85da0",
+    "config": "dea295c26b69a491deb308e985828ae68f2dfbc904e92f8f5083a71b74cfe6d7",
+    "evaluator": "7d6758823a3b84dc21d5e5f0cc413829bacceb4e1752039e4b1625b98b68c1f0",
+    "metrics": "988f4040342837baf140bbe38c9f78a8dccd4bd5f8d159b5466080d2d881aa97",
+    "perturbations": "e61cb9be86f8723f83de3e1b07092243179913cb988068b15279a48c8c537b97",
+    "policy_sensitivity_audit": "719e05482aa8cfba3cd285f69c9484162ffc83b61399ac1ce5df8c685a383f36",
+    "scenario_manifest": "2ac4158ed1ce3f6252d2f9bc7d1f1bde209c76d44db9b2ecf1f789fea316f318"
+  },
+  "metric_direction": "quality_aware_excess_minus_ecg_only_excess",
+  "paths": {
+    "ALERT_POLICY_V1": "artifacts/ALERT_POLICY_V1.lock.json",
+    "BIDMC_CONTEXT_V2": "artifacts/BIDMC_CONTEXT_V2.lock.json",
+    "CAL_V1": "artifacts/CAL_V1.json",
+    "ECG_HR_CONTEXT_V2": "artifacts/ECG_HR_CONTEXT_V2.lock.json",
+    "MODEL_V1": "checkpoints/MODEL_V1.pt",
+    "QUALITY_V1": "preprocessing/quality.py",
+    "config": "configs/quality_aware_experiment_v1.yaml",
+    "evaluator": "evaluation/quality_aware_alerts.py",
+    "metrics": "evaluation/episode_metrics.py",
+    "perturbations": "simulation/quality_perturbations.py",
+    "policy_sensitivity_audit": "reports/t023/policy_sensitivity_audit.json",
+    "scenario_manifest": "reports/t023/scenario_manifest.csv"
+  },
+  "seed_rule": "SHA256(base|dataset|session|scenario), first 16 hex",
+  "status": "FROZEN_EXPERIMENT_METHOD"
+}
