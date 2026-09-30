@@ -1,0 +1,179 @@
+{
+  "INCART_calibration_claim": false,
+  "access_guard": {
+    "path": "artifacts/external_incart_access_v1.json",
+    "status": "COMPLETED"
+  },
+  "artifacts": {
+    "bootstrap_summary": {
+      "path": "reports/t020/bootstrap_summary.json",
+      "sha256": "50ae55036a6333ebd9f0793b4584ab0b10676be8aefc3cb4abfe6bd86b35d4c3"
+    },
+    "metrics": {
+      "path": "reports/external_incart_metrics.csv",
+      "sha256": "1d9cfc89eef9d65613bdee980b2f27e4b413e4f684090b40731de6f9c91ee91b"
+    },
+    "predictions": {
+      "path": "reports/external_incart_predictions.csv",
+      "sha256": "b532f3b0cbcef1d47dd28a898b05f99cce706e2b8e62589ce95e25fb28bfc14e"
+    },
+    "window_manifest": {
+      "path": "manifests/windows/INCART_EXTERNAL_WINDOWS_V1.csv",
+      "sha256": "c8c3d3369d0b370248783d18a5c1d4010a43b81a8b18b23002c824d5deea3b3e"
+    }
+  },
+  "bootstrap": {
+    "ci_type": "PERCENTILE_95_V1",
+    "cluster_unit": "participant_group_id",
+    "method_id": "PATIENT_CLUSTER_PERCENTILE_95_V1",
+    "metrics": {
+      "AUPRC": {
+        "ci_lower_95": 0.639236446968054,
+        "ci_upper_95": 0.8868655619080194,
+        "invalid_replicates": 0,
+        "point_estimate": 0.7891764965800256,
+        "valid_replicates": 2000
+      },
+      "AUROC": {
+        "ci_lower_95": 0.6996721176196142,
+        "ci_upper_95": 0.8910308510187073,
+        "invalid_replicates": 0,
+        "point_estimate": 0.8077435266581959,
+        "valid_replicates": 2000
+      },
+      "patient_macro_F1": {
+        "ci_lower_95": 0.47691196544278097,
+        "ci_upper_95": 0.7059520308577671,
+        "invalid_replicates": 0,
+        "point_estimate": 0.590314816713766,
+        "valid_replicates": 2000
+      },
+      "pooled_F1": {
+        "ci_lower_95": 0.6109029947988877,
+        "ci_upper_95": 0.829774656455861,
+        "invalid_replicates": 0,
+        "point_estimate": 0.7370311984455769,
+        "valid_replicates": 2000
+      },
+      "precision": {
+        "ci_lower_95": 0.5606971643329216,
+        "ci_upper_95": 0.8258209411487002,
+        "invalid_replicates": 0,
+        "point_estimate": 0.7087857847976308,
+        "valid_replicates": 2000
+      },
+      "sensitivity": {
+        "ci_lower_95": 0.6149218018397121,
+        "ci_upper_95": 0.8933336394972716,
+        "invalid_replicates": 0,
+        "point_estimate": 0.7676212294768996,
+        "valid_replicates": 2000
+      },
+      "specificity": {
+        "ci_lower_95": 0.5696542215761117,
+        "ci_upper_95": 0.8092375725790808,
+        "invalid_replicates": 0,
+        "point_estimate": 0.7000508388408744,
+        "valid_replicates": 2000
+      }
+    },
+    "multi_record_patient_clusters_preserved": true,
+    "multiplicity_preserved": true,
+    "patient_slots_per_replicate": 32,
+    "point_estimate_source": "ORIGINAL_EXTERNAL_SAMPLE_NOT_BOOTSTRAP_MEAN",
+    "quantile_method": "linear",
+    "quantiles": [
+      0.025,
+      0.975
+    ],
+    "record_bootstrap_used": false,
+    "rejection_or_redraw_used": false,
+    "replicates_generated": 2000,
+    "replicates_requested": 2000,
+    "sampling": "WITH_REPLACEMENT",
+    "source_patient_clusters": 32,
+    "unique_patient_count": {
+      "maximum": 26,
+      "median": 20.0,
+      "minimum": 15
+    },
+    "window_bootstrap_used": false
+  },
+  "calibration_domain": "MIT-BIH-v1.0.0",
+  "calibration_id": "CAL_V1",
+  "calibration_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+  "candidate_windows": 26925,
+  "claim_boundary": "Cross-dataset performance of frozen MODEL_V1 on INCART exact Lead II under the locked map, target, preprocessing, calibration-transfer, and threshold procedure; not wearable, clinical, medical-device, population-wide, or 12-lead diagnostic evidence.",
+  "confusion_matrix": {
+    "fn": 3043,
+    "fp": 4130,
+    "tn": 9639,
+    "tp": 10052
+  },
+  "contributing_patient_count": 32,
+  "contributing_record_count": 75,
+  "dataset": "St Petersburg INCART 12-lead Arrhythmia Database",
+  "dataset_version": "1.0.0",
+  "eligible_windows": 26864,
+  "evaluation_id": "EXTERNAL_INCART_V1",
+  "exclusion_counts": {
+    "LT5_MAPPABLE_BEATS": 0,
+    "Q_or_paced": 12,
+    "UNMAPPABLE": 49,
+    "UNUSABLE_QUALITY": 0
+  },
+  "external_evaluator_sha256": "37de4abc37db8213018008c3fe43d9bdb08672fd1bbe8b1915cef68704780f95",
+  "freeze_id": "F11",
+  "lead_policy": {
+    "fallback": "NONE",
+    "id": "INCART_EXACT_II_V1",
+    "lead": "II"
+  },
+  "map_id": "AAMI_SVF_MAP_V1",
+  "method_config_sha256": "e0f4c5547bd3c3ddbdddaa8a799b01579643ddfeb500334cd34d687979959872",
+  "model_id": "MODEL_V1",
+  "model_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "negative_windows": 13769,
+  "no_adaptation": true,
+  "no_post_result_tuning": true,
+  "one_shot": true,
+  "overall_status": "PASS",
+  "point_metrics": {
+    "AUPRC": 0.7891764965800256,
+    "AUROC": 0.8077435266581959,
+    "patient_macro_F1": 0.590314816713766,
+    "pooled_F1": 0.7370311984455769,
+    "precision": 0.7087857847976308,
+    "sensitivity": 0.7676212294768996,
+    "specificity": 0.7000508388408744
+  },
+  "positive_windows": 13095,
+  "pre_access_method_commit": "8d2d55633659092bf31f65a1f0f2cbf9a7c18280",
+  "preproc_id": "PREPROC_V1",
+  "quality_counts": {
+    "candidate": {
+      "VALID": 26925
+    },
+    "eligible": {
+      "VALID": 26864
+    }
+  },
+  "record_count": 75,
+  "resampler_id": "INCART_257_TO_250_V1",
+  "source_patient_count": 32,
+  "status": "FROZEN",
+  "target_id": "AAMI_SVF_WINDOW_V1",
+  "temperature": 0.20521296644321502,
+  "threshold": 0.6128035574269627,
+  "threshold_comparator": ">=",
+  "upstream_sha256": {
+    "AAMI_SVF_MAP_V1": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145",
+    "CAL_V1": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "INCART_lead_manifest": "2053a9da9e4c1ec5a478f58e91e5fb73a3bb50bef7f7b4da21d0b316ef205353",
+    "INCART_manifest": "a3b578c7f841e4170f8269554691fed957479fdd6c0f59c4f118249c6b85463e",
+    "INCART_patient_map": "9e6c00be0d6026fa60c5d16f209411dae99eac70c03fe9fe0ef567a24ce5bcbf",
+    "MODEL_V1": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "PREPROC_V1": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+  },
+  "version_id": "INCART_EXT_V1"
+}

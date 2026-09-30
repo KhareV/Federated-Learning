@@ -1,0 +1,77 @@
+{
+  "ci_type": "PERCENTILE_95_V1",
+  "cluster_unit": "participant_group_id",
+  "method_id": "PATIENT_CLUSTER_PERCENTILE_95_V1",
+  "metrics": {
+    "AUPRC": {
+      "ci_lower_95": 0.639236446968054,
+      "ci_upper_95": 0.8868655619080194,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7891764965800256,
+      "valid_replicates": 2000
+    },
+    "AUROC": {
+      "ci_lower_95": 0.6996721176196142,
+      "ci_upper_95": 0.8910308510187073,
+      "invalid_replicates": 0,
+      "point_estimate": 0.8077435266581959,
+      "valid_replicates": 2000
+    },
+    "patient_macro_F1": {
+      "ci_lower_95": 0.47691196544278097,
+      "ci_upper_95": 0.7059520308577671,
+      "invalid_replicates": 0,
+      "point_estimate": 0.590314816713766,
+      "valid_replicates": 2000
+    },
+    "pooled_F1": {
+      "ci_lower_95": 0.6109029947988877,
+      "ci_upper_95": 0.829774656455861,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7370311984455769,
+      "valid_replicates": 2000
+    },
+    "precision": {
+      "ci_lower_95": 0.5606971643329216,
+      "ci_upper_95": 0.8258209411487002,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7087857847976308,
+      "valid_replicates": 2000
+    },
+    "sensitivity": {
+      "ci_lower_95": 0.6149218018397121,
+      "ci_upper_95": 0.8933336394972716,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7676212294768996,
+      "valid_replicates": 2000
+    },
+    "specificity": {
+      "ci_lower_95": 0.5696542215761117,
+      "ci_upper_95": 0.8092375725790808,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7000508388408744,
+      "valid_replicates": 2000
+    }
+  },
+  "multi_record_patient_clusters_preserved": true,
+  "multiplicity_preserved": true,
+  "patient_slots_per_replicate": 32,
+  "point_estimate_source": "ORIGINAL_EXTERNAL_SAMPLE_NOT_BOOTSTRAP_MEAN",
+  "quantile_method": "linear",
+  "quantiles": [
+    0.025,
+    0.975
+  ],
+  "record_bootstrap_used": false,
+  "rejection_or_redraw_used": false,
+  "replicates_generated": 2000,
+  "replicates_requested": 2000,
+  "sampling": "WITH_REPLACEMENT",
+  "source_patient_clusters": 32,
+  "unique_patient_count": {
+    "maximum": 26,
+    "median": 20.0,
+    "minimum": 15
+  },
+  "window_bootstrap_used": false
+}

@@ -1,0 +1,25 @@
+{
+  "artifact_id": "INCART_EXTERNAL_WINDOWS_V1",
+  "candidate_quality_counts": {
+    "VALID": 26925
+  },
+  "candidate_windows": 26925,
+  "eligible_quality_counts": {
+    "VALID": 26864
+  },
+  "eligible_windows": 26864,
+  "exclusion_counts": {
+    "LT5_MAPPABLE_BEATS": 0,
+    "Q_or_paced": 12,
+    "UNMAPPABLE": 49,
+    "UNUSABLE_QUALITY": 0
+  },
+  "negative_windows": 13769,
+  "overall_status": "PASS",
+  "positive_windows": 13095,
+  "prediction_closure": {
+    "duplicates": 0,
+    "extras": 0,
+    "missing": 0
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "CI_summaries_identical": true,
+  "CI_summary_run_1": {
+    "AUPRC": {
+      "ci_lower_95": 0.639236446968054,
+      "ci_upper_95": 0.8868655619080194,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7891764965800256,
+      "valid_replicates": 2000
+    },
+    "AUROC": {
+      "ci_lower_95": 0.6996721176196142,
+      "ci_upper_95": 0.8910308510187073,
+      "invalid_replicates": 0,
+      "point_estimate": 0.8077435266581959,
+      "valid_replicates": 2000
+    },
+    "patient_macro_F1": {
+      "ci_lower_95": 0.47691196544278097,
+      "ci_upper_95": 0.7059520308577671,
+      "invalid_replicates": 0,
+      "point_estimate": 0.590314816713766,
+      "valid_replicates": 2000
+    },
+    "pooled_F1": {
+      "ci_lower_95": 0.6109029947988877,
+      "ci_upper_95": 0.829774656455861,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7370311984455769,
+      "valid_replicates": 2000
+    },
+    "precision": {
+      "ci_lower_95": 0.5606971643329216,
+      "ci_upper_95": 0.8258209411487002,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7087857847976308,
+      "valid_replicates": 2000
+    },
+    "sensitivity": {
+      "ci_lower_95": 0.6149218018397121,
+      "ci_upper_95": 0.8933336394972716,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7676212294768996,
+      "valid_replicates": 2000
+    },
+    "specificity": {
+      "ci_lower_95": 0.5696542215761117,
+      "ci_upper_95": 0.8092375725790808,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7000508388408744,
+      "valid_replicates": 2000
+    }
+  },
+  "CI_summary_run_2": {
+    "AUPRC": {
+      "ci_lower_95": 0.639236446968054,
+      "ci_upper_95": 0.8868655619080194,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7891764965800256,
+      "valid_replicates": 2000
+    },
+    "AUROC": {
+      "ci_lower_95": 0.6996721176196142,
+      "ci_upper_95": 0.8910308510187073,
+      "invalid_replicates": 0,
+      "point_estimate": 0.8077435266581959,
+      "valid_replicates": 2000
+    },
+    "patient_macro_F1": {
+      "ci_lower_95": 0.47691196544278097,
+      "ci_upper_95": 0.7059520308577671,
+      "invalid_replicates": 0,
+      "point_estimate": 0.590314816713766,
+      "valid_replicates": 2000
+    },
+    "pooled_F1": {
+      "ci_lower_95": 0.6109029947988877,
+      "ci_upper_95": 0.829774656455861,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7370311984455769,
+      "valid_replicates": 2000
+    },
+    "precision": {
+      "ci_lower_95": 0.5606971643329216,
+      "ci_upper_95": 0.8258209411487002,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7087857847976308,
+      "valid_replicates": 2000
+    },
+    "sensitivity": {
+      "ci_lower_95": 0.6149218018397121,
+      "ci_upper_95": 0.8933336394972716,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7676212294768996,
+      "valid_replicates": 2000
+    },
+    "specificity": {
+      "ci_lower_95": 0.5696542215761117,
+      "ci_upper_95": 0.8092375725790808,
+      "invalid_replicates": 0,
+      "point_estimate": 0.7000508388408744,
+      "valid_replicates": 2000
+    }
+  },
+  "MODEL_V1_rerun_for_reproducibility": false,
+  "draw_matrices_identical": true,
+  "draw_matrix_run_1_sha256": "462cfc340da3dadf8516e34fccaca4e4559e10e75b045f428761ce7e39e6f8b6",
+  "draw_matrix_run_2_sha256": "462cfc340da3dadf8516e34fccaca4e4559e10e75b045f428761ce7e39e6f8b6",
+  "evaluation_id": "EXTERNAL_INCART_V1",
+  "freeze_verification": {
+    "evaluation_id": "EXTERNAL_INCART_V1",
+    "freeze_id": "F11",
+    "model_inference_repeated": false,
+    "prediction_sha256": "b532f3b0cbcef1d47dd28a898b05f99cce706e2b8e62589ce95e25fb28bfc14e",
+    "report_sha256": "dbffd38f3fe0fe829544fcf991b5106dd0ec96bf968f7209a6bba77a624bb7de",
+    "status": "PASS"
+  },
+  "overall_status": "PASS",
+  "point_metrics_identical": true,
+  "point_metrics_run_1": {
+    "AUPRC": 0.7891764965800256,
+    "AUROC": 0.8077435266581959,
+    "confusion_matrix": {
+      "fn": 3043,
+      "fp": 4130,
+      "tn": 9639,
+      "tp": 10052
+    },
+    "patient_macro_F1": 0.590314816713766,
+    "pooled_F1": 0.7370311984455769,
+    "precision": 0.7087857847976308,
+    "sensitivity": 0.7676212294768996,
+    "specificity": 0.7000508388408744
+  },
+  "point_metrics_run_2": {
+    "AUPRC": 0.7891764965800256,
+    "AUROC": 0.8077435266581959,
+    "confusion_matrix": {
+      "fn": 3043,
+      "fp": 4130,
+      "tn": 9639,
+      "tp": 10052
+    },
+    "patient_macro_F1": 0.590314816713766,
+    "pooled_F1": 0.7370311984455769,
+    "precision": 0.7087857847976308,
+    "sensitivity": 0.7676212294768996,
+    "specificity": 0.7000508388408744
+  },
+  "prediction_source": "reports/external_incart_predictions.csv",
+  "replicate_table_run_1_sha256": "7f05dfa2f609c731af6ca13a52f4a42d1c890dc69b7976f0905ceb96ce002bba",
+  "replicate_table_run_2_sha256": "7f05dfa2f609c731af6ca13a52f4a42d1c890dc69b7976f0905ceb96ce002bba",
+  "replicate_tables_identical": true
+}

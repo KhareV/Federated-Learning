@@ -1,0 +1,126 @@
+{
+  "config_path": "configs/external_incart_v1.yaml",
+  "config_sha256": "e0f4c5547bd3c3ddbdddaa8a799b01579643ddfeb500334cd34d687979959872",
+  "created_at_utc": "2026-09-30T09:24:36.770096Z",
+  "dependency_snapshot_path": "requirements-dev.lock",
+  "dependency_snapshot_sha256": "4863f6335f9a46e520550116a7e909dfb18b7f34e6fd278c35436a61e964537d",
+  "git_commit": "46da562ad3a6e77ca3fa3b00261d1368947fb7a4",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "checkpoints/MODEL_V1.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    {
+      "path": "artifacts/CAL_V1.json",
+      "sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b"
+    },
+    {
+      "path": "manifests/preprocessing/PREPROC_V1.lock.json",
+      "sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+    },
+    {
+      "path": "manifests/labels/AAMI_SVF_MAP_V1.yaml",
+      "sha256": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145"
+    },
+    {
+      "path": "manifests/datasets/incart_v1.yaml",
+      "sha256": "a3b578c7f841e4170f8269554691fed957479fdd6c0f59c4f118249c6b85463e"
+    },
+    {
+      "path": "manifests/datasets/incart_v1_files.csv",
+      "sha256": "91dd99ab345a5050c5fde78c44925a77d7e67c3f8c2af4451fd5294cfcb1f6c7"
+    },
+    {
+      "path": "manifests/datasets/incart_lead_ii_records.csv",
+      "sha256": "2053a9da9e4c1ec5a478f58e91e5fb73a3bb50bef7f7b4da21d0b316ef205353"
+    },
+    {
+      "path": "manifests/datasets/incart_patient_map.csv",
+      "sha256": "9e6c00be0d6026fa60c5d16f209411dae99eac70c03fe9fe0ef567a24ce5bcbf"
+    },
+    {
+      "path": "reports/internal_test.json",
+      "sha256": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e"
+    },
+    {
+      "path": "artifacts/internal_test_access_v1.json",
+      "sha256": "2fc3749b93357d5a3f93a4e8b2ae07ec742f7a78ebb7a238c734e9ae1e878e67"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "One locked MODEL_V1 inference pass over official INCART v1.0.0 exact Lead II; all metrics and 2,000 patient-cluster bootstrap replicates derive from the immutable prediction table. No adaptation, retuning, CI, or other dataset access.",
+  "output_artifacts": [
+    {
+      "path": "evaluation/external_incart.py",
+      "sha256": "37de4abc37db8213018008c3fe43d9bdb08672fd1bbe8b1915cef68704780f95"
+    },
+    {
+      "path": "configs/external_incart_v1.yaml",
+      "sha256": "e0f4c5547bd3c3ddbdddaa8a799b01579643ddfeb500334cd34d687979959872"
+    },
+    {
+      "path": "manifests/windows/INCART_EXTERNAL_WINDOWS_V1.csv",
+      "sha256": "c8c3d3369d0b370248783d18a5c1d4010a43b81a8b18b23002c824d5deea3b3e"
+    },
+    {
+      "path": "reports/external_incart.json",
+      "sha256": "dbffd38f3fe0fe829544fcf991b5106dd0ec96bf968f7209a6bba77a624bb7de"
+    },
+    {
+      "path": "reports/external_incart_metrics.csv",
+      "sha256": "1d9cfc89eef9d65613bdee980b2f27e4b413e4f684090b40731de6f9c91ee91b"
+    },
+    {
+      "path": "reports/external_incart_predictions.csv",
+      "sha256": "b532f3b0cbcef1d47dd28a898b05f99cce706e2b8e62589ce95e25fb28bfc14e"
+    },
+    {
+      "path": "artifacts/external_incart_access_v1.json",
+      "sha256": "b4bb75c11158f5ab5bfe3bb118eb1958d6794e48a3277f283b479cebf4b0e274"
+    },
+    {
+      "path": "reports/t020/pre_access_audit.json",
+      "sha256": "40e3e0ba4cdc548231ca40b8d6a0cd0be9e2fe5cc37cca000d820626376d5dac"
+    },
+    {
+      "path": "reports/t020/one_shot_access_audit.json",
+      "sha256": "58b02956f01049a7845e6d2714b834d0527be71e5c88c64de87011701ba1fbd6"
+    },
+    {
+      "path": "reports/t020/incart_window_audit.json",
+      "sha256": "68bd4251e4b1291e8932f427e0d804bef2923997aef03928ad8a5f1c80fcd673"
+    },
+    {
+      "path": "reports/t020/patient_group_audit.json",
+      "sha256": "3d03aa264436b5b0af57598ba409aff83978015e6634104b37b445f5bbc8e80f"
+    },
+    {
+      "path": "reports/t020/lead_policy_audit.json",
+      "sha256": "986a760e9af21b02fcd5b3cb16fdd4fc4063656276c17c413a06d73edba6fba5"
+    },
+    {
+      "path": "reports/t020/bootstrap_draws.npz",
+      "sha256": "462cfc340da3dadf8516e34fccaca4e4559e10e75b045f428761ce7e39e6f8b6"
+    },
+    {
+      "path": "reports/t020/bootstrap_replicates.csv",
+      "sha256": "7f05dfa2f609c731af6ca13a52f4a42d1c890dc69b7976f0905ceb96ce002bba"
+    },
+    {
+      "path": "reports/t020/bootstrap_summary.json",
+      "sha256": "50ae55036a6333ebd9f0793b4584ab0b10676be8aefc3cb4abfe6bd86b35d4c3"
+    },
+    {
+      "path": "reports/t020/reproducibility.json",
+      "sha256": "a9c48e3379d7218671a72c35f3f12b1f48c3c369d1a10c4fa41a94faae2466e0"
+    }
+  ],
+  "phase_id": "T020",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "T020-EXTERNAL-INCART-V1",
+  "seed": 20260927,
+  "spec_version": "2.2",
+  "task_id": "T020"
+}

@@ -1,0 +1,15 @@
+{
+  "MODEL_V1_external_inference_passes": 1,
+  "adaptation": false,
+  "eligible_windows": 26864,
+  "evaluation_id": "EXTERNAL_INCART_V1",
+  "guard_final_state": "COMPLETED",
+  "guard_initial_state": "NOT_STARTED",
+  "overall_status": "PASS",
+  "patients_represented": 32,
+  "post_exposure_scientific_edits": false,
+  "prediction_sha256": "b532f3b0cbcef1d47dd28a898b05f99cce706e2b8e62589ce95e25fb28bfc14e",
+  "real_external_waveform_access": true,
+  "records_processed": 75,
+  "second_run_attempt_blocked": true
+}
