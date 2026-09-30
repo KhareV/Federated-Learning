@@ -5,9 +5,9 @@
   "ci_executed": false,
   "device": "cpu",
   "experiment_id": "QUALITY_AWARE_EXPERIMENT_V1",
-  "git_sha_at_result_generation": "01c75142b9baf135996615c4dd38cd7f272697e1",
+  "git_sha_at_result_generation": "37ea2860aba4efa3756641c935701241093b2b62",
   "hardware_access": false,
-  "pre_result_commit": "01c7514",
+  "pre_result_commit": "01c75142b9baf135996615c4dd38cd7f272697e1",
   "protected_upstream_hashes": {
     "artifacts/ALERT_POLICY_V1.lock.json": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
     "artifacts/BIDMC_CONTEXT_V2.lock.json": "5b2f9bf89aa5461d6acc0001b24a72d20457846ea379e84c44c339c968009f97",
@@ -21,6 +21,7 @@
     "reports/noise_robustness.json": "fae1d2720dd92987689f9c4421ad23b4b1c279c7b26aedc19e26bbd3169d6829"
   },
   "python": "3.11.16",
+  "result_commit": "37ea2860aba4efa3756641c935701241093b2b62",
   "status": "PASS_WITH_WARNINGS",
   "task_id": "T023",
   "verification": {

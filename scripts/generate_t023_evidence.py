@@ -34,6 +34,14 @@ def git_sha() -> str:
     return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
 
 
+def commit_for_subject(subject: str) -> str:
+    return subprocess.check_output(
+        ["git", "log", "--format=%H", "--grep", f"^{subject}$", "-1"],
+        cwd=ROOT,
+        text=True,
+    ).strip()
+
+
 def main() -> None:
     verification_one = verify()
     verification_two = verify()
@@ -78,7 +86,12 @@ def main() -> None:
         {
             "task_id": "T023",
             "experiment_id": "QUALITY_AWARE_EXPERIMENT_V1",
-            "pre_result_commit": "01c7514",
+            "pre_result_commit": commit_for_subject(
+                "ctx(T023): freeze quality-aware robustness experiment protocol"
+            ),
+            "result_commit": commit_for_subject(
+                "eval(T023): record controlled quality-aware robustness experiment"
+            ),
             "git_sha_at_result_generation": git_sha(),
             "python": platform.python_version(),
             "device": "cpu",
