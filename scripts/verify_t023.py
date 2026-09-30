@@ -149,7 +149,10 @@ def verify() -> dict[str, Any]:
         raise RuntimeError("T023_RATE_WARNING_PERTURBATION_FAILURE")
     with (ROOT / "manifests/task_registry_v1.csv").open(newline="", encoding="utf-8") as handle:
         tasks = {row["task_id"]: row for row in csv.DictReader(handle)}
-    if tasks["T023"]["status"] != "PASS" or tasks["T024"]["status"] != "NOT_STARTED":
+    if tasks["T023"]["status"] != "PASS" or tasks["T024"]["status"] not in {
+        "NOT_STARTED",
+        "PASS",
+    }:
         raise RuntimeError("T023_TASK_REGISTRY_MISMATCH")
     with (ROOT / "manifests/gate_registry_v1.csv").open(newline="", encoding="utf-8") as handle:
         gates = {row["gate_id"]: row for row in csv.DictReader(handle)}

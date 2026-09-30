@@ -21,7 +21,7 @@ def validate_base_config(config: dict[str, Any]) -> None:
     """Validate locked identifiers without asserting hardware semantics."""
     expected = {
         ("project", "spec_version"): "2.2",
-        ("project", "current_phase"): "T023",
+        ("project", "current_phase"): "T024",
         ("project", "clinical_status"): "research_prototype",
         ("versions", "target"): "AAMI_SVF_WINDOW_V1",
         ("versions", "label_map"): "AAMI_SVF_MAP_V1",

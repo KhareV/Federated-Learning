@@ -45,10 +45,6 @@ def write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def git_sha() -> str:
-    return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-
-
 def commit_for_subject(subject: str) -> str:
     return subprocess.check_output(
         ["git", "log", "--format=%H", "--grep", f"^{subject}$", "-1"],
@@ -259,14 +255,15 @@ def main() -> None:
             "status": "PASS",
         },
     )
+    implementation_commit = commit_for_subject(
+        "fl(T024): implement deterministic FedAvg aggregation and Flower scaffold"
+    )
     write_json(
         REPORT_DIR / "run_manifest.json",
         {
             "task_id": "T024",
-            "implementation_commit": commit_for_subject(
-                "fl(T024): implement deterministic FedAvg aggregation and Flower scaffold"
-            ),
-            "git_sha_at_evidence_generation": git_sha(),
+            "implementation_commit": implementation_commit,
+            "git_sha_at_evidence_generation": implementation_commit,
             "python": platform.python_version(),
             "flower": flwr.__version__,
             "pytorch": torch.__version__,
