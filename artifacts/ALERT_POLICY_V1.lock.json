@@ -1,0 +1,44 @@
+{
+  "CAL_V1_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+  "ECG_HR_CONTEXT_V2_sha256": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+  "change_control": {
+    "invalidates": [
+      "C021-HR-B",
+      "T023",
+      "T030",
+      "T032",
+      "T033",
+      "T034"
+    ],
+    "next_version_if_changed": "ALERT_POLICY_V2"
+  },
+  "config_sha256": "782b174d6caf769cd448edb25c2a12c9a601caa9c3fccc5f05d5d1d3a617b25a",
+  "cooldown_seconds": 30,
+  "ecg_hr_context_id": "ECG_HR_CONTEXT_V2",
+  "episode_manager_sha256": "eb4e78a978a2f27ad5e8a074530ef21a5023c911a39114df0f05371be447a357",
+  "hr_disagreement_duration_seconds": 10,
+  "hr_disagreement_tolerance_bpm": 20.0,
+  "monitoring_state_vocabulary": [
+    "NORMAL_MONITORED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "RECHECK_SENSOR",
+    "CONTEXT_UNAVAILABLE",
+    "SYSTEM_ERROR"
+  ],
+  "policy_id": "ALERT_POLICY_V1",
+  "required_consecutive_valid_above": 2,
+  "required_consecutive_valid_below": 2,
+  "state_machine_sha256": "bc656b4aef48dd08fbde5ce304eeea4baa160fb4e8c435e60ce8c6cae68b89fc",
+  "state_precedence": [
+    "SYSTEM_ERROR",
+    "ECG_UNUSABLE_RECHECK_SENSOR",
+    "ECG_DEGRADED_ABOVE_RECHECK_SENSOR",
+    "CONFIRMED_ACTIVE_EPISODE",
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN"
+  ],
+  "status": "FROZEN_ENGINEERING_POLICY",
+  "threshold": 0.6128035574269627,
+  "threshold_comparator": ">=",
+  "threshold_source": "CAL_V1"
+}

@@ -1,0 +1,30 @@
+{
+  "BIDMC_V2_inspected": false,
+  "K": 2,
+  "M": 2,
+  "MODEL_V1_inference": false,
+  "WEARABLE_SIM_engineering_only": true,
+  "clinical_threshold_claim": false,
+  "cooldown_seconds": 30,
+  "hardware_required": false,
+  "hr_duration_seconds": 10.0,
+  "hr_tolerance_bpm": 20.0,
+  "learned_fusion": false,
+  "probability_modification": false,
+  "status": "PASS",
+  "threshold_comparator": ">=",
+  "threshold_source": "CAL_V1",
+  "tolerance_selected_before_BIDMC_V2": true,
+  "upstream_hashes": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/ECG_HR_CONTEXT_V2.lock.json": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "configs/bidmc_context_v1.yaml": "d6a6cafd033a96d863042d8be34c03659dfab07ac7e4334b84dd48004ffdd596",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "reports/bidmc_multimodal_engineering.json": "49decf602ca28cd542cf6693417acacf46188a05a76537f06ec7ba8a950ac95c",
+    "reports/c021_hr_a/artifact_hashes.json": "d80193f307408b80e10d8c4eea12cea38615f7e95d95c078adb39aa8e2a6fa9b",
+    "reports/external_incart.json": "dbffd38f3fe0fe829544fcf991b5106dd0ec96bf968f7209a6bba77a624bb7de",
+    "reports/internal_test.json": "c2f48e80a7826eb4383151310c7b107f717a7e2bb71c2258a7c3a08ab922309e",
+    "reports/noise_robustness.json": "fae1d2720dd92987689f9c4421ad23b4b1c279c7b26aedc19e26bbd3169d6829"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "artifacts/ALERT_POLICY_V1.lock.json": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+    "configs/alert_policy_v1.yaml": "782b174d6caf769cd448edb25c2a12c9a601caa9c3fccc5f05d5d1d3a617b25a",
+    "fusion/episode_manager.py": "eb4e78a978a2f27ad5e8a074530ef21a5023c911a39114df0f05371be447a357",
+    "fusion/state_machine.py": "bc656b4aef48dd08fbde5ce304eeea4baa160fb4e8c435e60ce8c6cae68b89fc",
+    "reports/t022/alert_policy_validation.json": "76bf8efbaa6ff78f7b0cdbbcb603b714fcb1a8bdf44c77d301eaf6bc7819cd09",
+    "reports/t022/episode_tests.json": "fde302ee653cceb87e493c5e8398a694000ee80a8bc339b9fd4949ce35d3649c",
+    "reports/t022/fusion_state_table.json": "bfc1df9e51172f59aef982906eea21332d7016fce94a290b796e8cd8b12a1292",
+    "reports/t022/protocol_audit.json": "2071dd56424c5addbb3f3bd001e9d45002e0e28378ba8c878b5268649f88d248",
+    "reports/t022/run_manifest.json": "abdb47b9978dd59a1a5725c4825d4ddbde9bae695bb8900d34186159fed28d79"
+  },
+  "status": "PASS"
+}

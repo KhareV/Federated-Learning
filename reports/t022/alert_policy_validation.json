@@ -1,0 +1,14 @@
+{
+  "SimulationTruth_visible_to_production": false,
+  "WEARABLE_SIM_same_production_path": true,
+  "all_scripted_scenarios_pass": true,
+  "policy_verification": {
+    "config_sha256": "782b174d6caf769cd448edb25c2a12c9a601caa9c3fccc5f05d5d1d3a617b25a",
+    "lock_sha256": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+    "policy_id": "ALERT_POLICY_V1",
+    "status": "PASS",
+    "threshold": 0.6128035574269627
+  },
+  "scenario_count": 20,
+  "status": "PASS"
+}

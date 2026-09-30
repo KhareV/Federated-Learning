@@ -37,6 +37,10 @@ def test_temporary_policy_lock_verifies() -> None:
     assert payload["threshold_source"] == "CAL_V1"
 
 
+def test_canonical_policy_lock_verifies() -> None:
+    assert verify_alert_policy_lock(ROOT)["status"] == "PASS"
+
+
 @pytest.mark.parametrize(
     ("relative", "original", "changed"),
     [

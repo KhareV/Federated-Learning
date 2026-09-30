@@ -1,0 +1,26 @@
+{
+  "replay_identical": true,
+  "scenarios": {
+    "DEGRADED_above": "PASS",
+    "DEGRADED_below": "PASS",
+    "K2_open": "PASS",
+    "M2_close": "PASS",
+    "UNUSABLE": "PASS",
+    "active_DEGRADED": "PASS",
+    "active_UNUSABLE": "PASS",
+    "context_unavailable": "PASS",
+    "context_unavailable_episode_open": "PASS",
+    "cooldown": "PASS",
+    "cooldown_boundary": "PASS",
+    "determinism": "PASS",
+    "exact_20_bpm_tolerance": "PASS",
+    "interrupted_close": "PASS",
+    "interrupted_open": "PASS",
+    "mismatch_interruption": "PASS",
+    "no_duplicate_open": "PASS",
+    "rate_mismatch_10_seconds": "PASS",
+    "session_reset": "PASS",
+    "threshold_equality": "PASS"
+  },
+  "status": "PASS"
+}
