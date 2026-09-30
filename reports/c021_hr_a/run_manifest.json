@@ -1,7 +1,14 @@
 {
   "checkpoint": "C021-HR-A",
+  "checkpoint_id": "C021-HR-A",
+  "ci_executed": false,
+  "config_sha256": "6fa358ae412568ccbab4efbe015fa8524ca81ed416fd19cc49b23bd6fc1112e4",
   "method_config_sha256": "6fa358ae412568ccbab4efbe015fa8524ca81ed416fd19cc49b23bd6fc1112e4",
   "method_git_sha": "b88447e6222c3a76c9d22430568e7afb140ad0bd",
+  "python": "3.11.16",
+  "raw_validation_access_repeated": false,
+  "result_git_sha": "af2bbd71a5655e79e7a4e67c2665d67f056e512c",
+  "scipy": "1.17.1",
   "selected_estimator": "WFDB_XQRS_V1",
   "status": "PASS",
   "train_metrics": {
@@ -97,5 +104,6 @@
       "reference_timestamps": 14368,
       "rmse_bpm": 4.72813683800023
     }
-  }
+  },
+  "wfdb": "4.3.1"
 }

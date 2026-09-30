@@ -1,0 +1,28 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "artifacts/ECG_HR_CONTEXT_V2.lock.json": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "artifacts/ECG_HR_CONTEXT_V2.supersedes.json": "9cc4cbdb89cde5cfc08d1c14596a858dd3ffddfec3ae406c48bb2412dd58d874",
+    "configs/ecg_hr_context_v2.yaml": "6fa358ae412568ccbab4efbe015fa8524ca81ed416fd19cc49b23bd6fc1112e4",
+    "preprocessing/ecg_hr_context.py": "f6e4d9db77cdd708b1d220b97150ebbc8270809eed862249ce718403e85dcc3c",
+    "reports/c021_hr_a/candidate_selection.json": "b69772a4ee3667c5dad52505bd2c1c7b67138d19944ab9328ab6c2558250a83a",
+    "reports/c021_hr_a/change_control.json": "743d53ef9f38cecc191607220ece1f5d5ed174bad6b31b82d2a5f2cd77cc5ca8",
+    "reports/c021_hr_a/protocol.json": "bc53593246fd2791553482f7ec1c1f059f53d02727d8ab1c0d42c9ed609f1ed6",
+    "reports/c021_hr_a/reproducibility.json": "5640a55d86b1d6eec3522cb31422cc099b643b15f37dcd2cd76f698f9beed23f",
+    "reports/c021_hr_a/run_manifest.json": "e219c1057c8f9ee1afce21a85cd0b58609d56cd731a9134532c82ae0b5eeb695",
+    "reports/c021_hr_a/synthetic_rate_tests.json": "f3735355320afe47b31c53779395b23c140fce9bf53b21db736b90f9b977d147",
+    "reports/c021_hr_a/train_candidate_metrics.csv": "bc20ebcc9da063e47cadaa41d9e606de217208c31081c6bfb0946083aced26fe",
+    "reports/c021_hr_a/validation_access_audit.json": "4a67e404c3e15f9f1ea23368e4500c87abc3e7a43106b21d8c90c1221a4ac6a2",
+    "reports/c021_hr_a/validation_candidate_metrics.csv": "44d5cea101d05c7c0e71c96ad278d62a2d31821a69cbea1a496c1858979e41f4",
+    "reports/c021_hr_a/wearable_sim_interface.json": "add5c9c44c577b9c9d35709fc4d6d7b6d1d1a0bab12ada868ba4117589a93b19"
+  },
+  "status": "PASS",
+  "verification": {
+    "config_sha256": "6fa358ae412568ccbab4efbe015fa8524ca81ed416fd19cc49b23bd6fc1112e4",
+    "forbidden_access": 0,
+    "lock_sha256": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "selected_estimator": "WFDB_XQRS_V1",
+    "status": "PASS",
+    "upstream_immutability": "PASS"
+  }
+}

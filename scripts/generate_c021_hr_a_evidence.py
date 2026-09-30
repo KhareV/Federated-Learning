@@ -146,23 +146,23 @@ def main() -> None:
             "status": "PASS",
         },
     )
-    write_json(
-        REPORT_DIR / "run_manifest.json",
+    run_manifest_path = REPORT_DIR / "run_manifest.json"
+    run_manifest = json.loads(run_manifest_path.read_text(encoding="utf-8"))
+    run_manifest.update(
         {
             "checkpoint_id": "C021-HR-A",
-            "git_sha": subprocess.check_output(
+            "result_git_sha": subprocess.check_output(
                 ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
             ).strip(),
             "python": platform.python_version(),
             "scipy": scipy.__version__,
             "wfdb": wfdb.__version__,
             "config_sha256": lock["config_sha256"],
-            "selected_estimator": selected,
             "raw_validation_access_repeated": False,
             "ci_executed": False,
-            "status": "PASS",
-        },
+        }
     )
+    write_json(run_manifest_path, run_manifest)
     artifacts = [
         "configs/ecg_hr_context_v2.yaml",
         "preprocessing/ecg_hr_context.py",

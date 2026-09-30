@@ -1,0 +1,26 @@
+{
+  "candidate_metrics_identical": true,
+  "derived_row_sha_run_1": "dcfc550e7dfbef9b6c0aa270bfc4734673903f37e19d42e5d8ab74dca9aa3500",
+  "derived_row_sha_run_2": "dcfc550e7dfbef9b6c0aa270bfc4734673903f37e19d42e5d8ab74dca9aa3500",
+  "max_hr_difference_bpm": 0.0,
+  "metric_run_1": {
+    "comparable_timestamps": 14368,
+    "mean_signed_error_bpm": 0.2898980039817993,
+    "median_absolute_error_bpm": 0.12058979371936118,
+    "p95_absolute_error_bpm": 7.035456530248656,
+    "patient_macro_mae_bpm": 1.2250505571438488,
+    "pooled_mae_bpm": 1.201759395202002,
+    "rmse_bpm": 4.72813683800023
+  },
+  "metric_run_2": {
+    "comparable_timestamps": 14368,
+    "mean_signed_error_bpm": 0.2898980039817993,
+    "median_absolute_error_bpm": 0.12058979371936118,
+    "p95_absolute_error_bpm": 7.035456530248656,
+    "patient_macro_mae_bpm": 1.2250505571438488,
+    "pooled_mae_bpm": 1.201759395202002,
+    "rmse_bpm": 4.72813683800023
+  },
+  "selected_detector_identical": true,
+  "status": "PASS"
+}

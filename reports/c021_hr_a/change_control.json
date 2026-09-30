@@ -1,0 +1,20 @@
+{
+  "affected_downstream": [
+    "T022",
+    "T023",
+    "T030"
+  ],
+  "bidmc_v2_deferred_until_after_t022": true,
+  "canonical_task_created": false,
+  "checkpoint": "C021-HR-A",
+  "component_changed": "auxiliary ECG-HR context estimator",
+  "reason": "T021 engineering evidence demonstrated QRS-deflection overcounting",
+  "status": "PASS",
+  "unaffected_evidence": [
+    "MODEL_V1",
+    "CAL_V1",
+    "INTERNAL_TEST_V1",
+    "NSTDB robustness",
+    "INCART_EXT_V1"
+  ]
+}
