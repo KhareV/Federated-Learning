@@ -4,7 +4,8 @@
   "ci_executed": false,
   "controlled_perturbations": false,
   "evaluation_id": "BIDMC_CONTEXT_V2",
-  "git_sha_at_evidence_generation": "b8dbfa8165a36bd6bc9a04a94460ad0f8189dd2f",
+  "git_sha_at_evidence_generation": "9009b7bd2a25929f1e7a1ee6c2e35e5510506d89",
+  "pre_result_protocol_commit": "b8dbfa8165a36bd6bc9a04a94460ad0f8189dd2f",
   "protected_upstream_hashes": {
     "artifacts/ALERT_POLICY_V1.lock.json": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
     "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
@@ -30,6 +31,7 @@
   "raw_BIDMC_access": "one frozen V2 engineering evaluation",
   "records": 53,
   "status": "PASS",
+  "v2_result_commit": "9009b7bd2a25929f1e7a1ee6c2e35e5510506d89",
   "verification": {
     "agreement": {
       "greater_than_20_count": 1099,

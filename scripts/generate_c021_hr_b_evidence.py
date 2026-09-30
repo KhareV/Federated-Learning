@@ -38,7 +38,23 @@ def git_sha() -> str:
     return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
 
 
+def commit_for_subject(subject: str) -> str:
+    return subprocess.check_output(
+        ["git", "log", "--format=%H", "--grep", f"^{subject}$", "-1"],
+        cwd=ROOT,
+        text=True,
+    ).strip()
+
+
 def main() -> None:
+    protocol_commit = commit_for_subject(
+        "ctx(C021-HR-B): freeze BIDMC V2 evaluation protocol"
+    )
+    result_commit = commit_for_subject(
+        "ctx(C021-HR-B): record frozen BIDMC V2 engineering evaluation"
+    )
+    if not protocol_commit or not result_commit:
+        raise RuntimeError("C021_HR_B_COMMIT_CHRONOLOGY_MISSING")
     first = verify_rows(ROOT)
     second = verify_rows(ROOT)
     if first != second:
@@ -85,6 +101,8 @@ def main() -> None:
             "checkpoint": "C021-HR-B",
             "evaluation_id": "BIDMC_CONTEXT_V2",
             "git_sha_at_evidence_generation": git_sha(),
+            "pre_result_protocol_commit": protocol_commit,
+            "v2_result_commit": result_commit,
             "python": platform.python_version(),
             "records": 53,
             "raw_BIDMC_access": "one frozen V2 engineering evaluation",
@@ -95,6 +113,23 @@ def main() -> None:
                 path: sha256(ROOT / path) for path in protected_paths
             },
             "verification": verification,
+            "status": "PASS",
+        },
+    )
+    write_json(
+        REPORT_DIR / "change_control.json",
+        {
+            "checkpoint": "C021-HR-B",
+            "canonical_task_added": False,
+            "canonical_freeze_row_added": False,
+            "reason": "independent frozen BIDMC evaluation after ECG-HR V2 and alert policy locks",
+            "changed_component": "BIDMC context authority: ECG-HR V2 only",
+            "predecessor_preserved": True,
+            "upstream_scientific_evidence_invalidated": False,
+            "T022_policy_changed": False,
+            "T023_started": False,
+            "G9_closed": False,
+            "downstream_authority": "BIDMC_CONTEXT_V2",
             "status": "PASS",
         },
     )
@@ -112,6 +147,7 @@ def main() -> None:
         "reports/c021_hr_b/rate_consistency_audit.json",
         "reports/c021_hr_b/reproducibility.json",
         "reports/c021_hr_b/run_manifest.json",
+        "reports/c021_hr_b/change_control.json",
     ]
     write_json(
         REPORT_DIR / "artifact_hashes.json",

@@ -1,0 +1,14 @@
+{
+  "G9_closed": false,
+  "T022_policy_changed": false,
+  "T023_started": false,
+  "canonical_freeze_row_added": false,
+  "canonical_task_added": false,
+  "changed_component": "BIDMC context authority: ECG-HR V2 only",
+  "checkpoint": "C021-HR-B",
+  "downstream_authority": "BIDMC_CONTEXT_V2",
+  "predecessor_preserved": true,
+  "reason": "independent frozen BIDMC evaluation after ECG-HR V2 and alert policy locks",
+  "status": "PASS",
+  "upstream_scientific_evidence_invalidated": false
+}
