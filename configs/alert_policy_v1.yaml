@@ -1,0 +1,58 @@
+policy_id: ALERT_POLICY_V1
+spec_version: "2.2"
+status: METHOD_FROZEN_BEFORE_BIDMC_V2
+window_cadence_seconds: 5
+threshold:
+  source: CAL_V1
+  comparator: ">="
+open:
+  required_consecutive_valid_above: 2
+close:
+  required_consecutive_valid_below: 2
+cooldown_seconds: 30
+degraded_above:
+  monitoring_state: RECHECK_SENSOR
+  possible_pattern: true
+  advances_open_counter: false
+unusable:
+  monitoring_state: RECHECK_SENSOR
+  clears_confirmation_counters: true
+  pauses_episode_counting: true
+  closes_active_episode: false
+rate_consistency:
+  policy_id: HR_DISAGREEMENT_TOLERANCE_V1
+  tolerance_bpm: 20.0
+  continuous_duration_seconds: 10.0
+  comparator: ">"
+  retain_both_values: true
+  top_level_state: false
+  metadata_flag: QUALITY_WARNING
+  numeric_value_source: T022_PREDECLARED_ENGINEERING_POLICY
+  selected_before_bidmc_v2: true
+  selected_from_outcome_data: false
+context:
+  missing_context_state: CONTEXT_UNAVAILABLE
+ecg_hr_context:
+  id: ECG_HR_CONTEXT_V2
+  lock_sha256: 8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca
+monitoring_state_vocabulary:
+  - NORMAL_MONITORED_PATTERN
+  - POTENTIAL_ECTOPY_ASSOCIATED_PATTERN
+  - RECHECK_SENSOR
+  - CONTEXT_UNAVAILABLE
+  - SYSTEM_ERROR
+state_precedence:
+  - SYSTEM_ERROR
+  - ECG_UNUSABLE_RECHECK_SENSOR
+  - ECG_DEGRADED_ABOVE_RECHECK_SENSOR
+  - CONFIRMED_ACTIVE_EPISODE
+  - CONTEXT_UNAVAILABLE
+  - NORMAL_MONITORED_PATTERN
+claim_boundary:
+  engineering_policy_only: true
+  clinical_threshold: false
+  learned_fusion: false
+  probability_modification: false
+change_control:
+  next_version_if_changed: ALERT_POLICY_V2
+  invalidates: [C021-HR-B, T023, T030, T032, T033, T034]

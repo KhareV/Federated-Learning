@@ -12,6 +12,9 @@ Consumes only `ObservedRecord`/`MockInferenceResult`-shaped input. Must never im
 
 from __future__ import annotations
 
+import math
+from dataclasses import dataclass
+from enum import StrEnum
 from typing import Protocol
 
 FIXTURE_STATE_POLICY_ID = "FIXTURE_STATE_POLICY_V0"
@@ -40,6 +43,17 @@ class ObservedContextInput(Protocol):
 
 class InferenceInput(Protocol):
     raw_score: float | None
+
+
+class RuntimeContextInput(Protocol):
+    session_id: str
+    timestamp_us: int
+    ecg_quality: str
+    ppg_quality: str | None
+    spo2_pct: float | None
+    spo2_valid: bool
+    hr_ecg_bpm: float | None
+    pr_ppg_bpm: float | None
 
 
 def _context_available(record: ObservedContextInput) -> bool:
@@ -84,3 +98,167 @@ def classify_safe(record: ObservedContextInput, inference: InferenceInput) -> st
         return classify(record, inference)
     except (AttributeError, TypeError, ValueError):
         return "SYSTEM_ERROR"
+
+
+class QualityState(StrEnum):
+    VALID = "VALID"
+    DEGRADED = "DEGRADED"
+    UNUSABLE = "UNUSABLE"
+
+
+class WindowSignal(StrEnum):
+    VALID_ABOVE_THRESHOLD = "VALID_ABOVE_THRESHOLD"
+    VALID_BELOW_THRESHOLD = "VALID_BELOW_THRESHOLD"
+    DEGRADED_ABOVE_THRESHOLD = "DEGRADED_ABOVE_THRESHOLD"
+    DEGRADED_BELOW_THRESHOLD = "DEGRADED_BELOW_THRESHOLD"
+    UNUSABLE = "UNUSABLE"
+    SYSTEM_ERROR = "SYSTEM_ERROR"
+
+
+class MonitoringState(StrEnum):
+    NORMAL_MONITORED_PATTERN = "NORMAL_MONITORED_PATTERN"
+    POTENTIAL_ECTOPY_ASSOCIATED_PATTERN = "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+    RECHECK_SENSOR = "RECHECK_SENSOR"
+    CONTEXT_UNAVAILABLE = "CONTEXT_UNAVAILABLE"
+    SYSTEM_ERROR = "SYSTEM_ERROR"
+
+
+@dataclass(frozen=True)
+class FusionObservation:
+    session_id: str
+    timestamp_us: int
+    source_domain_calibrated_probability: float
+    ecg_quality: str
+    ppg_quality: str | None
+    spo2_pct: float | None
+    spo2_valid: bool
+    hr_ecg_bpm: float | None
+    hr_ecg_valid: bool
+    pr_ppg_bpm: float | None
+    pr_ppg_valid: bool
+    model_id: str
+    calibration_id: str
+    system_error: bool = False
+
+
+@dataclass(frozen=True)
+class FusionDecision:
+    timestamp_us: int
+    monitoring_state: str
+    window_signal: str
+    episode_active: bool
+    episode_opened: bool
+    episode_closed: bool
+    episode_count: int
+    open_counter: int
+    close_counter: int
+    cooldown_active: bool
+    cooldown_until_us: int | None
+    possible_pattern: bool
+    context_available: bool
+    quality_warning: bool
+    quality_warning_reasons: tuple[str, ...]
+    ecg_quality: str
+    ppg_quality: str | None
+    hr_ecg_bpm: float | None
+    pr_ppg_bpm: float | None
+    spo2_pct: float | None
+    spo2_valid: bool
+    source_domain_calibrated_probability: float
+    threshold: float
+    alert_policy_id: str
+
+
+def observation_from_runtime(
+    record: RuntimeContextInput,
+    *,
+    source_domain_calibrated_probability: float,
+    model_id: str,
+    calibration_id: str,
+) -> FusionObservation:
+    """Adapt the canonical observed runtime shape without importing simulator internals."""
+    return FusionObservation(
+        session_id=record.session_id,
+        timestamp_us=record.timestamp_us,
+        source_domain_calibrated_probability=source_domain_calibrated_probability,
+        ecg_quality=record.ecg_quality,
+        ppg_quality=record.ppg_quality,
+        spo2_pct=record.spo2_pct,
+        spo2_valid=record.spo2_valid,
+        hr_ecg_bpm=record.hr_ecg_bpm,
+        hr_ecg_valid=record.hr_ecg_bpm is not None,
+        pr_ppg_bpm=record.pr_ppg_bpm,
+        pr_ppg_valid=record.pr_ppg_bpm is not None,
+        model_id=model_id,
+        calibration_id=calibration_id,
+    )
+
+
+def validate_observation(observation: FusionObservation) -> None:
+    if not observation.session_id:
+        raise ValueError("EMPTY_SESSION_ID")
+    if observation.timestamp_us < 0:
+        raise ValueError("NEGATIVE_TIMESTAMP")
+    probability = observation.source_domain_calibrated_probability
+    if not math.isfinite(probability) or not 0.0 <= probability <= 1.0:
+        raise ValueError("INVALID_CALIBRATED_PROBABILITY")
+    if observation.ecg_quality not in {state.value for state in QualityState}:
+        raise ValueError("INVALID_ECG_QUALITY")
+    if observation.ppg_quality is not None and observation.ppg_quality not in {
+        state.value for state in QualityState
+    }:
+        raise ValueError("INVALID_PPG_QUALITY")
+    for value, valid, name in (
+        (observation.hr_ecg_bpm, observation.hr_ecg_valid, "ECG_HR"),
+        (observation.pr_ppg_bpm, observation.pr_ppg_valid, "PPG_PR"),
+    ):
+        if value is not None and not math.isfinite(value):
+            raise ValueError(f"NONFINITE_{name}")
+        if valid and (value is None or value <= 0):
+            raise ValueError(f"INVALID_VALID_{name}")
+    if observation.spo2_valid and (
+        observation.spo2_pct is None
+        or not math.isfinite(observation.spo2_pct)
+        or not 0.0 <= observation.spo2_pct <= 100.0
+    ):
+        raise ValueError("INVALID_VALID_SPO2")
+
+
+def window_signal(observation: FusionObservation, threshold: float) -> WindowSignal:
+    if observation.system_error:
+        return WindowSignal.SYSTEM_ERROR
+    above = observation.source_domain_calibrated_probability >= threshold
+    if observation.ecg_quality == QualityState.UNUSABLE.value:
+        return WindowSignal.UNUSABLE
+    if observation.ecg_quality == QualityState.DEGRADED.value:
+        return (
+            WindowSignal.DEGRADED_ABOVE_THRESHOLD
+            if above
+            else WindowSignal.DEGRADED_BELOW_THRESHOLD
+        )
+    return WindowSignal.VALID_ABOVE_THRESHOLD if above else WindowSignal.VALID_BELOW_THRESHOLD
+
+
+def context_available(observation: FusionObservation) -> bool:
+    ppg_available = observation.ppg_quality not in (None, QualityState.UNUSABLE.value)
+    return ppg_available and observation.spo2_valid
+
+
+def public_monitoring_state(
+    signal: WindowSignal,
+    *,
+    episode_active: bool,
+    has_context: bool,
+) -> tuple[MonitoringState, bool]:
+    """Apply the frozen public-state precedence; warning metadata is deliberately separate."""
+    if signal is WindowSignal.SYSTEM_ERROR:
+        return MonitoringState.SYSTEM_ERROR, False
+    if signal is WindowSignal.UNUSABLE:
+        return MonitoringState.RECHECK_SENSOR, False
+    if signal is WindowSignal.DEGRADED_ABOVE_THRESHOLD:
+        return MonitoringState.RECHECK_SENSOR, True
+    if episode_active:
+        return MonitoringState.POTENTIAL_ECTOPY_ASSOCIATED_PATTERN, False
+    if not has_context:
+        return MonitoringState.CONTEXT_UNAVAILABLE, False
+    return MonitoringState.NORMAL_MONITORED_PATTERN, False
