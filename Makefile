@@ -1,7 +1,7 @@
 PYTHON ?= .venv/bin/python
 PYTHONPATH := src:.
 
-.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17 t018-preflight internal-test-once internal-test-verify t018-evidence phase18 nstdb-protocol nstdb-robustness nstdb-verify t019-evidence phase19 t020-preflight external-incart-once external-incart-verify t020-evidence phase20 bidmc-context-protocol bidmc-context-tests bidmc-context-run bidmc-context-verify t021-evidence phase21
+.PHONY: lint test snapshot smoke evidence phase1 registries coverage t002-evidence phase2 contracts t003-evidence phase3 t004-deferral t004-evidence phase4 fixture-t005 t005-smoke t005-evidence phase5 acquire-mitdb validate-mitdb t006-evidence phase6 acquire-incart acquire-nstdb acquire-bidmc validate-incart validate-nstdb validate-bidmc dataset-role-audit t007-evidence phase7 annotation-census t008-evidence phase8 mitdb-split t009-evidence phase9 leakage-audit t010-evidence phase10 resampler-coefficients resampler-causality t011-evidence phase11 filter-coefficients filter-causality gap-policy-tests t012-evidence phase12 window-tests quality-tests sync-tests build-mitdb-windows real-window-audit preproc-freeze-audit t013-evidence phase13 baseline-features baseline-train baseline-audit baseline-freeze-audit t014-evidence phase14 model-v1-tests model-v1-train model-v1-audit model-v1-candidates t015-evidence phase15 model-v1-freeze model-v1-vector model-v1-verify t016-evidence phase16 calibration-tests fit-cal-v1 verify-cal-v1 calibration-reproducibility t017-evidence phase17 t018-preflight internal-test-once internal-test-verify t018-evidence phase18 nstdb-protocol nstdb-robustness nstdb-verify t019-evidence phase19 t020-preflight external-incart-once external-incart-verify t020-evidence phase20 bidmc-context-protocol bidmc-context-tests bidmc-context-run bidmc-context-verify t021-evidence phase21 ecg-hr-v2-tests ecg-hr-v2-train-audit ecg-hr-v2-validation ecg-hr-v2-freeze c021-hr-a-evidence c021-hr-a
 
 lint:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m ruff check src tests scripts simulation deployment fusion api datasets features models training evaluation preprocessing
@@ -633,4 +633,26 @@ phase21:
 	$(MAKE) bidmc-context-tests PYTHON=$(PYTHON)
 	$(MAKE) bidmc-context-verify PYTHON=$(PYTHON)
 	$(MAKE) t021-evidence PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
+
+ecg-hr-v2-tests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_ecg_hr_context_v2.py tests/test_ecg_hr_reference_v2.py tests/test_ecg_hr_selection_v2.py tests/test_ecg_hr_scope_v2.py
+
+ecg-hr-v2-train-audit:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m evaluation.ecg_hr_v2 --partition TRAIN --output reports/c021_hr_a
+
+ecg-hr-v2-validation:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m evaluation.ecg_hr_v2 --partition VALIDATION --output reports/c021_hr_a
+
+ecg-hr-v2-freeze:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_ecg_hr_v2_c021.py
+
+c021-hr-a-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_c021_hr_a_evidence.py
+
+# Verification-only after ECG_HR_CONTEXT_V2 is frozen; never accesses raw validation ECG.
+c021-hr-a:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_c021_hr_a.py
 	$(PYTHON) -m pip check

@@ -1,0 +1,73 @@
+estimator_id: ECG_HR_CONTEXT_V2
+status: METHOD_FROZEN_BEFORE_VALIDATION
+checkpoint_id: C021-HR-A
+change_reason: T021 auxiliary absolute-ECG peak detector counted multiple QRS deflections
+input:
+  signal: causally_filtered_ecg
+  sampling_rate_hz: 250
+  runtime_labels_used: false
+  future_samples_allowed: false
+rate:
+  evaluation_cadence_hz: 1
+  first_evaluation_second: 10
+  lookback_seconds: 10
+  rr_interval_seconds: [0.25, 2.0]
+  minimum_valid_intervals: 2
+  formula: 60_divided_by_median_valid_rr_seconds
+reference:
+  source: MITDB_BEAT_ANNOTATIONS
+  genuine_beat_policy: all_symbols_classified_as_BEAT_by_AAMI_SVF_MAP_V1
+  nonbeat_policy: ignored
+  future_annotations_allowed: false
+candidates:
+  eligible: [WFDB_XQRS_V1, WFDB_GQRS_V1]
+  historical_comparator: T021_ABS_PEAK_V1
+  historical_comparator_selection_eligible: false
+  parameters:
+    WFDB_XQRS_V1: documented_wfdb_defaults_at_250_hz
+    WFDB_GQRS_V1: documented_wfdb_defaults_at_250_hz
+selection:
+  dataset: MITDB_VALIDATION
+  primary_metric: patient_macro_MAE
+  coverage_eligibility:
+    pooled_reference_coverage_min: 0.95
+    patient_coverage_min: 0.90
+    patient_fraction_meeting_min: 0.90
+  tie_rule:
+    primary_within_bpm: 0.1
+    then:
+      - lower_pooled_median_absolute_error
+      - lower_pooled_p95_absolute_error
+      - higher_pooled_coverage
+      - lexical_candidate_id
+  engineering_quality_floor:
+    pooled_coverage_min: 0.95
+    patient_macro_MAE_bpm_max: 10.0
+    pooled_median_absolute_error_bpm_max: 5.0
+    pooled_p95_absolute_error_bpm_max: 20.0
+development_data:
+  train_role: engineering_diagnostics
+  validation_role: one_predeclared_candidate_selection
+  allowed:
+    - MITDB_TRAIN
+    - MITDB_VALIDATION
+    - DETERMINISTIC_SYNTHETIC_ECG
+    - WEARABLE_SIM_ENGINEERING_FIXTURE_ONLY
+  forbidden:
+    - MITDB_CALIBRATION
+    - MITDB_INTERNAL_TEST
+    - INCART
+    - NSTDB
+    - BIDMC_REFERENCE_HR_OR_PULSE
+    - WEARABLE_V1
+scope:
+  preproc_v1_modified: false
+  model_v1_used: false
+  aami_svf_classification: false
+  arrhythmia_diagnosis: false
+  alert_policy_id: null
+  hr_disagreement_tolerance_bpm: null
+  bidmc_context_v2_created: false
+anti_circularity:
+  bidmc_v2_evaluation_after_t022: true
+  rationale: freeze_alert_disagreement_policy_before_bidmc_v2_outcomes

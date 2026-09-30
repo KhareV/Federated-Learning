@@ -1,0 +1,28 @@
+{
+  "allowed_real_partitions": ["MITDB_TRAIN", "MITDB_VALIDATION"],
+  "anti_circularity": "T022 freezes the ECG-PPG disagreement policy before any BIDMC V2 outcome is exposed.",
+  "candidate_set_fixed_before_validation": true,
+  "checkpoint_id": "C021-HR-A",
+  "config_path": "configs/ecg_hr_context_v2.yaml",
+  "defect": {
+    "historical_estimator": "T021_ABS_PEAK_V1",
+    "mae_bpm": 50.669121199650355,
+    "mean_signed_error_bpm": 50.514932028886825,
+    "median_absolute_error_bpm": 62.25,
+    "p95_absolute_error_bpm": 118.33333347066664,
+    "reason": "generic absolute-ECG peak detection counts multiple QRS deflections"
+  },
+  "eligible_candidates": ["WFDB_XQRS_V1", "WFDB_GQRS_V1"],
+  "forbidden_real_data": [
+    "MITDB_CALIBRATION",
+    "MITDB_INTERNAL_TEST",
+    "INCART",
+    "NSTDB",
+    "BIDMC_REFERENCE_HR_OR_PULSE",
+    "WEARABLE_V1"
+  ],
+  "historical_comparator": "T021_ABS_PEAK_V1",
+  "historical_comparator_selection_eligible": false,
+  "overall_status": "METHOD_FROZEN_BEFORE_VALIDATION",
+  "selection_metric": "patient_macro_MAE"
+}
