@@ -1,0 +1,17 @@
+initialization_id: FL_INIT_V1
+architecture_id: MODEL_V1_ARCHITECTURE_V1
+architecture_factory: models.ecg_cnn.build_model_v1
+source: FRESH_MODEL_V1_ARCHITECTURE
+seed: 20260927
+central_checkpoint_pretraining: false
+determinism:
+  device: cpu
+  torch_deterministic_algorithms: true
+  python_seeded: true
+  numpy_seeded: true
+  torch_seeded: true
+reuse_required_for:
+  - FL_IID_V1
+  - T026_NON_IID_FEDAVG
+  - T027_FEDPROX
+

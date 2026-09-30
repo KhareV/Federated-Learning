@@ -1,0 +1,75 @@
+experiment_id: FL_IID_V1
+task_id: T025
+model:
+  architecture_id: MODEL_V1_ARCHITECTURE_V1
+  factory: models.ecg_cnn.build_model_v1
+  centralized_checkpoint_warm_start: false
+initialization:
+  id: FL_INIT_V1
+  source: FRESH_MODEL_V1_ARCHITECTURE
+  seed: 20260927
+client_manifest:
+  id: CLIENTS_IID_V1
+  sites: 8
+  construction: BALANCED_WHOLE_PATIENT_IID_V1
+training:
+  clients: 8
+  clients_per_round: 8
+  rounds: 50
+  local_epochs: 1
+  batch_size: 64
+  shuffle: true
+  drop_last: false
+  num_workers: 0
+  device: cpu
+optimizer:
+  implementation: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  state_policy: RESET_EACH_CLIENT_EACH_ROUND
+  scheduler: NONE
+loss:
+  implementation: BCEWithLogitsLoss
+  pos_weight: 1.7157717177396683
+  pos_weight_source: GLOBAL_TRAIN_NEG_OVER_POS
+  client_specific_weights: false
+aggregation:
+  id: SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1
+  weight: num_examples_actually_used
+transport:
+  id: FL_STATE_TRANSPORT_V1
+evaluation:
+  partition: VALIDATION
+  cadence: ROUND_0_AND_EVERY_ROUND
+  probability: sigmoid(raw_logit)
+  calibration: NONE
+  metric_threshold_id: FL_METRIC_THRESHOLD_V1
+  metric_threshold: 0.5
+  metric_comparator: ">="
+checkpoint:
+  metric: validation_AUPRC
+  eligible_rounds: 1-50
+  tie_policy: EARLIEST_EXACT_MAXIMUM
+stable_convergence:
+  rounds_complete: 50
+  clients_successful_each_round: 8
+  finite_states: true
+  finite_validation_loss: true
+  finite_validation_AUPRC: true
+  minimum_AUPRC_improvement_over_round_0: 0.000001
+seed_rule:
+  id: FL_CLIENT_ROUND_SHA256_V1
+  fields: [20260927, experiment_id, round, client_id]
+access:
+  TRAIN: TRAINING_ONLY
+  VALIDATION: SERVER_DEVELOPMENT_EVALUATION_ONLY
+  CALIBRATION: FORBIDDEN_IN_T025
+  INTERNAL_TEST: FORBIDDEN_IN_T025
+  INCART: FORBIDDEN_IN_T025
+  NSTDB: FORBIDDEN_IN_T025
+  BIDMC: FORBIDDEN_IN_T025
+  WEARABLE_V1: FORBIDDEN_IN_T025
+secure_aggregation: false
+FedProx: false
+non_IID: false
+

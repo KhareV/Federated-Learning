@@ -1,0 +1,130 @@
+{
+  "TRAIN_patient_groups": 27,
+  "aggregate_balance": {
+    "global_positive_rate": 0.36821946169772257,
+    "maximum_patient_count": 4,
+    "maximum_positive_rate": 0.3990740740740741,
+    "maximum_window_count": 1436,
+    "minimum_patient_count": 3,
+    "minimum_positive_rate": 0.35185185185185186,
+    "minimum_window_count": 1078,
+    "target_windows_per_site": 1207.5,
+    "window_count_CV": 0.13715820920064067
+  },
+  "all_sites_both_classes": true,
+  "assigned_patient_groups": 27,
+  "assignment_method": "BALANCED_WHOLE_PATIENT_IID_V1",
+  "capacities": {
+    "SITE_00": 4,
+    "SITE_01": 4,
+    "SITE_02": 4,
+    "SITE_03": 3,
+    "SITE_04": 3,
+    "SITE_05": 3,
+    "SITE_06": 3,
+    "SITE_07": 3
+  },
+  "client_manifest_id": "CLIENTS_IID_V1",
+  "cross_site_patients": [],
+  "duplicate_patient_assignments": [],
+  "final_assignment_objective": 0.1517983589458579,
+  "forbidden_partition_patients": {
+    "CALIBRATION": [],
+    "INTERNAL_TEST": [],
+    "VALIDATION": []
+  },
+  "initial_assignment_objective": 0.27262150673111424,
+  "manifest_sha256": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+  "omitted_TRAIN_patients": [],
+  "patient_indivisibility": true,
+  "reconstruction_byte_identical": true,
+  "reconstruction_sha256": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+  "site_rows": [
+    {
+      "label_rate_deviation_from_global": -0.001227818243683565,
+      "negative": 909,
+      "patients": 4,
+      "positive": 527,
+      "positive_rate": 0.366991643454039,
+      "quantity_deviation_from_target": 0.18923395445134572,
+      "site_id": "SITE_00",
+      "windows": 1436
+    },
+    {
+      "label_rate_deviation_from_global": -0.005850123718628475,
+      "negative": 915,
+      "patients": 4,
+      "positive": 520,
+      "positive_rate": 0.3623693379790941,
+      "quantity_deviation_from_target": 0.18840579710144922,
+      "site_id": "SITE_01",
+      "windows": 1435
+    },
+    {
+      "label_rate_deviation_from_global": -0.005171294911238022,
+      "negative": 886,
+      "patients": 4,
+      "positive": 505,
+      "positive_rate": 0.36304816678648455,
+      "quantity_deviation_from_target": 0.15196687370600404,
+      "site_id": "SITE_02",
+      "windows": 1391
+    },
+    {
+      "label_rate_deviation_from_global": -0.016367609845870712,
+      "negative": 700,
+      "patients": 3,
+      "positive": 380,
+      "positive_rate": 0.35185185185185186,
+      "quantity_deviation_from_target": -0.10559006211180122,
+      "site_id": "SITE_03",
+      "windows": 1080
+    },
+    {
+      "label_rate_deviation_from_global": -0.0006268691051299902,
+      "negative": 683,
+      "patients": 3,
+      "positive": 397,
+      "positive_rate": 0.3675925925925926,
+      "quantity_deviation_from_target": -0.10559006211180122,
+      "site_id": "SITE_04",
+      "windows": 1080
+    },
+    {
+      "label_rate_deviation_from_global": 0.03085461237635151,
+      "negative": 649,
+      "patients": 3,
+      "positive": 431,
+      "positive_rate": 0.3990740740740741,
+      "quantity_deviation_from_target": -0.10559006211180122,
+      "site_id": "SITE_05",
+      "windows": 1080
+    },
+    {
+      "label_rate_deviation_from_global": -0.0015527950310559313,
+      "negative": 684,
+      "patients": 3,
+      "positive": 396,
+      "positive_rate": 0.36666666666666664,
+      "quantity_deviation_from_target": -0.10559006211180122,
+      "site_id": "SITE_06",
+      "windows": 1080
+    },
+    {
+      "label_rate_deviation_from_global": 0.0037656960017208307,
+      "negative": 677,
+      "patients": 3,
+      "positive": 401,
+      "positive_rate": 0.3719851576994434,
+      "quantity_deviation_from_target": -0.10724637681159421,
+      "site_id": "SITE_07",
+      "windows": 1078
+    }
+  ],
+  "sites": 8,
+  "status": "PASS",
+  "swap_count": 15,
+  "total_negatives": 6103,
+  "total_positives": 3557,
+  "total_windows": 9660
+}

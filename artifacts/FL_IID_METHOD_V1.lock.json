@@ -1,0 +1,63 @@
+{
+  "Flower_version": "1.39.0",
+  "canonical_F12_status": "NOT_FROZEN",
+  "experiment_id": "FL_IID_V1",
+  "hashes": {
+    "aggregation_source": "902a72b976399afe85a512ecb83897a80a483e6b541d5dbc544acbe654660920",
+    "client_manifest": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+    "evaluation": "06680aa9f15577be2310f998ede5d154aa2e30e1921fa1b541b2c26f1137355d",
+    "fl_iid_config": "529a43dab43b36c57ed65e2ba769d10eafefa79f21689fb3339dbe4d67e1cf89",
+    "fl_init_config": "eeca6cc0f7deed3e7374092a21422447960fd5f8bb79d3d4635d7e43c4c59ef1",
+    "local_training": "1b7924e5e6e9f99f927c835594071021b666b4e9553bbc64fff941b5d5b06ca3",
+    "manifest_builder": "24533ab78189ca2f1a1ddd097e1a1bf6e69db3f4908ae36b3b2f14fca459e047",
+    "model_adapter": "1e0f8e457d32a3737e06071b862574e7c7d73e0bfb7571cbd0da9a7f42bae945",
+    "model_architecture": "d6a5c0c979a2ef07579f6b29bc8bd57cc396a2bdbd3d9a08ff74403fd95a1a00",
+    "model_frozen_config": "e1925fa6f08bc93200038f3a9bfaa49ec12a3ee59718dde99f7bd441c00a3ce5",
+    "preproc_lock": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "runner": "bec0e47388adbe284787489be28dcc2077dc97d987a82b1a79febdde5287afd4",
+    "split": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "transport_config": "125449202aba091582add6641b60d7bc2311206e237039cf8f2ba0f5933cdbdc",
+    "window_manifest": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  },
+  "initialization": {
+    "central_checkpoint_pretraining": false,
+    "id": "FL_INIT_V1",
+    "seed": 20260927,
+    "source": "FRESH_MODEL_V1_ARCHITECTURE"
+  },
+  "lock_id": "FL_IID_METHOD_V1",
+  "metric_threshold": {
+    "CAL_V1_applied": false,
+    "comparator": ">=",
+    "id": "FL_METRIC_THRESHOLD_V1",
+    "probability": "sigmoid(raw_logit)",
+    "threshold": 0.5
+  },
+  "outcome_metrics_included": false,
+  "paths": {
+    "aggregation_source": "federated/aggregation.py",
+    "client_manifest": "manifests/clients/CLIENTS_IID_V1.csv",
+    "evaluation": "federated/evaluation.py",
+    "fl_iid_config": "configs/fl_iid_v1.yaml",
+    "fl_init_config": "configs/fl_init_v1.yaml",
+    "local_training": "federated/local_training.py",
+    "manifest_builder": "federated/client_manifest.py",
+    "model_adapter": "federated/model_adapter.py",
+    "model_architecture": "models/ecg_cnn.py",
+    "model_frozen_config": "configs/model_v1_frozen.yaml",
+    "preproc_lock": "manifests/preprocessing/PREPROC_V1.lock.json",
+    "runner": "federated/fedavg_runner.py",
+    "split": "manifests/splits/MITDB_SPLIT_V1.csv",
+    "transport_config": "configs/fl_state_transport_v1.yaml",
+    "window_manifest": "manifests/windows/MITDB_WINDOWS_V1.csv"
+  },
+  "seed_rule": "SHA256(20260927|experiment_id|round|client_id)",
+  "stable_convergence": {
+    "clients_per_round": 8,
+    "finite_states_and_metrics": true,
+    "post_round_AUPRC_improvement_over_round_0": ">1e-6",
+    "rounds": 50
+  },
+  "status": "FROZEN_ENGINEERING_METHOD",
+  "validation_only_access": true
+}

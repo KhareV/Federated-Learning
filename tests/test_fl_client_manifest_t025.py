@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import csv
+from pathlib import Path
+
 from federated.client_manifest import (
     SITE_IDS,
     PatientSummary,
@@ -7,6 +10,8 @@ from federated.client_manifest import (
     build_assignment,
     manifest_rows,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _patients() -> list[PatientSummary]:
@@ -41,3 +46,18 @@ def test_pairwise_swaps_never_worsen_objective() -> None:
     _, audit = build_assignment(_patients())
     assert audit["final_objective"] <= audit["initial_objective"]
 
+
+def test_real_manifest_has_all_and_only_whole_train_patients() -> None:
+    with (ROOT / "manifests/clients/CLIENTS_IID_V1.csv").open(newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    with (ROOT / "manifests/splits/MITDB_SPLIT_V1.csv").open(newline="") as handle:
+        split = list(csv.DictReader(handle))
+    train = {row["participant_group_id"] for row in split if row["partition"] == "TRAIN"}
+    assigned = [row["participant_group_id"] for row in rows]
+    assert len(rows) == len(train) == len(set(assigned)) == 27
+    assert set(assigned) == train
+    assert {row["site_id"] for row in rows} == set(SITE_IDS)
+    assert all(row["partition"] == "TRAIN" for row in rows)
+    assert sum(int(row["eligible_window_count"]) for row in rows) == 9660
+    assert sum(int(row["positive_window_count"]) for row in rows) == 3557
+    assert sum(int(row["negative_window_count"]) for row in rows) == 6103

@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import numpy as np
+import yaml
 
 from federated.aggregation import ClientUpdate
 from federated.fedavg_runner import (
@@ -9,6 +13,9 @@ from federated.fedavg_runner import (
     fresh_initial_state,
     stable_convergence,
 )
+from nhm.hashing import hash_file
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_real_shaped_flower_reference_parity() -> None:
@@ -52,3 +59,32 @@ def test_stable_convergence_predicate() -> None:
         row["validation_AUPRC"] = 0.4
     assert stable_convergence(rounds, clients)["stable_convergence"] is False
 
+
+def test_pre_result_method_lock_and_exact_training_contract() -> None:
+    config = yaml.safe_load((ROOT / "configs/fl_iid_v1.yaml").read_text())
+    assert config["training"] == {
+        "clients": 8,
+        "clients_per_round": 8,
+        "rounds": 50,
+        "local_epochs": 1,
+        "batch_size": 64,
+        "shuffle": True,
+        "drop_last": False,
+        "num_workers": 0,
+        "device": "cpu",
+    }
+    assert config["optimizer"]["implementation"] == "AdamW"
+    assert config["optimizer"]["learning_rate"] == 0.001
+    assert config["optimizer"]["weight_decay"] == 0.0001
+    assert config["optimizer"]["scheduler"] == "NONE"
+    assert config["loss"]["pos_weight"] == 6103 / 3557
+    assert config["loss"]["client_specific_weights"] is False
+    assert config["evaluation"]["partition"] == "VALIDATION"
+    assert config["evaluation"]["calibration"] == "NONE"
+    assert config["access"]["INTERNAL_TEST"] == "FORBIDDEN_IN_T025"
+    method = json.loads((ROOT / "artifacts/FL_IID_METHOD_V1.lock.json").read_text())
+    assert method["status"] == "FROZEN_ENGINEERING_METHOD"
+    assert method["outcome_metrics_included"] is False
+    for name, path in method["paths"].items():
+        assert hash_file(ROOT / path) == method["hashes"][name], name
+    assert method["canonical_F12_status"] == "NOT_FROZEN"
