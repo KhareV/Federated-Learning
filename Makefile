@@ -1006,17 +1006,40 @@ replay-demo:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_replay.py --speed 0 --run-label replay_run_2
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/compare_replay_runs_t034.py
 
-# Optional human-paced local demo: same replay, 5-second recorded cadence, not required for
-# T034 PASS. Prints the local dashboard URL; this is "recorded replay", never live hardware.
+# ONE-COMMAND complete local software demo (C034 Section 16): verifies locks, starts the real
+# production API + the real /frontend production build/preview, waits for both, prints the
+# exact recorded-replay URL, tears down cleanly on exit. No manual "start the dashboard
+# separately" step. --speed 1 paces at the recorded 5-second cadence for a human demo.
 replay-demo-live-view:
-	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_replay.py --speed 1 --run-label replay_run_live_view
-	@echo "Recorded replay written. Start the dashboard separately with: cd frontend && npm run dev -- then open /monitoring"
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_e2e_dashboard_demo_c034.py --speed 1
 
 replay-verify:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_e2e_replay_t034.py
 
 t034-evidence:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t034_evidence.py
+
+.PHONY: replay-bundle dashboard-verify-c034 replay-verify-c034 replay-demo-c034 c034-evidence phase-c034-ui-e2e
+
+# Regenerates the browser-consumable replay bundle from the frozen NPZ fixture (byte-identical
+# on rerun). Rebuild after touching the fixture or its manifest, never to reselect windows.
+replay-bundle:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/build_frontend_replay_bundle_c034.py
+
+dashboard-verify-c034:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_dashboard_ui_c034.py
+
+replay-verify-c034:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_e2e_replay_c034.py
+
+# Non-interactive one-command demo check (used by phase-c034-ui-e2e / CI-free local
+# verification): same supervisor as replay-demo-live-view but --speed 0 and writes the audit.
+replay-demo-c034:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_e2e_dashboard_demo_c034.py --speed 0 --audit-out reports/c034_ui_e2e/one_command_demo_audit.json
+
+c034-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_c034_evidence.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/record_rendered_dashboard_test_c034.py
 
 # LOCAL verification only -- no GitHub Actions, no CI query (user-deferred, see
 # reports/t034/ci_deferral.json).
@@ -1025,9 +1048,21 @@ phase34:
 	$(MAKE) test PYTHON=$(PYTHON)
 	$(MAKE) gateway-verify PYTHON=$(PYTHON)
 	$(MAKE) api-verify PYTHON=$(PYTHON)
-	$(MAKE) dashboard-verify PYTHON=$(PYTHON)
+	$(MAKE) dashboard-verify-c034 PYTHON=$(PYTHON)
 	$(MAKE) replay-demo PYTHON=$(PYTHON)
-	$(MAKE) replay-verify PYTHON=$(PYTHON)
+	$(MAKE) replay-verify-c034 PYTHON=$(PYTHON)
+	$(MAKE) frontend-check PYTHON=$(PYTHON)
+	$(MAKE) frontend-test PYTHON=$(PYTHON)
+	$(MAKE) frontend-build PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
+
+# C034-UI-E2E corrective checkpoint: local-only verification of the recorded-replay dashboard
+# integration specifically (does not repeat all of phase34).
+phase-c034-ui-e2e:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) dashboard-verify-c034 PYTHON=$(PYTHON)
+	$(MAKE) replay-verify-c034 PYTHON=$(PYTHON)
 	$(MAKE) frontend-check PYTHON=$(PYTHON)
 	$(MAKE) frontend-test PYTHON=$(PYTHON)
 	$(MAKE) frontend-build PYTHON=$(PYTHON)

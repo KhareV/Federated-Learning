@@ -1,0 +1,20 @@
+{
+  "Python": "3.11.16",
+  "checkpoint": "C034-UI-E2E",
+  "ci_executed": false,
+  "ci_queried": false,
+  "dashboard_ui_lock": "DASHBOARD_UI_V1_1",
+  "e2e_replay_lock": "E2E_REPLAY_SOFTWARE_V1_1",
+  "frontend_npm_audit_note": "Recorded as reported; no dependency upgrades were made solely to reduce this count for this checkpoint.",
+  "frontend_npm_audit_vulnerabilities": {
+    "critical": 0,
+    "high": 1,
+    "info": 0,
+    "low": 4,
+    "moderate": 2,
+    "total": 7
+  },
+  "node": "v26.5.0",
+  "public_semantic_digest": "e3f8607617d3fc7cce7be58752340047d120815653cce36acfac5e8b8bc099b3",
+  "status": "PASS"
+}

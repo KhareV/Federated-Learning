@@ -39,7 +39,7 @@ MONITORING_STATES_WITH_PROBABILITY = {
 
 def _verify_upstream_locks() -> None:
     from scripts.verify_api_runtime_t032 import verify as verify_api_runtime
-    from scripts.verify_dashboard_ui_t033 import verify as verify_dashboard_ui
+    from scripts.verify_dashboard_ui_c034 import verify as verify_dashboard_ui
 
     verify_api_runtime()
     verify_dashboard_ui()

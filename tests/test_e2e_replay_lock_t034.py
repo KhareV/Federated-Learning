@@ -1,6 +1,8 @@
-"""T034 E2E_REPLAY_SOFTWARE_V1 lock: creation is reproducible, verification passes against
-current repo state, tampering with any bound file is detected, and the selection ordering
-rules (Section 45/46) reject reversed windows, duplicated timestamps, and missing windows."""
+"""T034 E2E_REPLAY_SOFTWARE_V1 lock: creation is reproducible, tampering with any bound file is
+detected, the selection ordering rules (Section 45/46) reject reversed windows, duplicated
+timestamps, and missing windows -- and, as of the C034-UI-E2E successor
+(E2E_REPLAY_SOFTWARE_V1_1), the predecessor lock file itself remains preserved byte-identical
+even though live verify() now correctly reports drift for the files that moved on."""
 
 from __future__ import annotations
 
@@ -11,6 +13,7 @@ from pathlib import Path
 
 import pytest
 
+from nhm.hashing import hash_file
 from scripts.select_replay_windows_t034 import select, validate_selection
 from scripts.verify_e2e_replay_t034 import verify
 
@@ -31,10 +34,17 @@ def test_lock_never_claims_final_g21_closure() -> None:
     assert lock["g21_status"] == "NON_PASS_PENDING_T030_REAL_WEARABLE"
 
 
-def test_verify_passes_against_current_repository_state() -> None:
-    result = verify()
-    assert result["status"] == "PASS"
-    assert result["bound_artifacts"] > 0
+def test_lock_file_itself_is_preserved_byte_identical_after_c034_supersession() -> None:
+    expected_sha = "fbb76813214c926230dbdc12db218557ebc696c968025fd8c20b3de0d59f25ec"
+    assert hash_file(LOCK_PATH) == expected_sha
+
+
+def test_verify_now_correctly_reports_the_expected_post_supersession_drift() -> None:
+    """replay.ts and run_replay.py moved to E2E_REPLAY_SOFTWARE_V1_1 at C034-UI-E2E; the
+    PREDECESSOR's own live-state verify() must now fail -- continuing to silently pass would
+    mean this tamper check is not actually sensitive to real file changes."""
+    with pytest.raises(RuntimeError, match="E2E_REPLAY_SOFTWARE_V1_TAMPER"):
+        verify()
 
 
 def test_verify_detects_tamper_on_any_bound_file(

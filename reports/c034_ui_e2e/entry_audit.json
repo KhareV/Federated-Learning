@@ -1,0 +1,46 @@
+{
+  "checkpoint": "C034-UI-E2E",
+  "starting_sha": "f025942616e29a142eb629f82de159e1d821fef6",
+  "head_matches_origin_main": true,
+  "working_tree_clean_at_entry": true,
+  "registry_entry_state": {
+    "T033": "PASS",
+    "T034": "PASS (recorded, under corrective audit)",
+    "T035": "NOT_STARTED",
+    "G19": "PASS",
+    "G20": "NOT_STARTED",
+    "G21": "NOT_STARTED",
+    "T030": "NOT_STARTED (hardware-deferred)",
+    "G16": "NOT_STARTED"
+  },
+  "lock_status_entry_state": {
+    "API_RUNTIME_V1": "FROZEN_ENGINEERING_INTERFACE",
+    "DASHBOARD_UI_V1": "FROZEN_ENGINEERING_INTERFACE",
+    "E2E_REPLAY_SOFTWARE_V1": "FROZEN_ENGINEERING_INTEGRATION"
+  },
+  "ci_trigger_state_entry": {
+    "push": false,
+    "pull_request": false,
+    "workflow_dispatch": true
+  },
+  "local_verification_at_entry": {
+    "ruff": "PASS",
+    "verify_e2e_replay_t034": "PASS",
+    "verify_t029": "PASS",
+    "verify_api_runtime_t032": "PASS",
+    "verify_dashboard_ui_t033": "PASS",
+    "relevant_t034_tests": "31 passed (test_e2e_replay.py, test_e2e_replay_lock_t034.py, test_simulation_truth_isolation_t034.py, test_ci_policy.py)"
+  },
+  "recorded_identities_at_entry": {
+    "public_ecg_replay_v1_npz_sha256": "d5d1f6516473feb68f9bee2768a3b008ec0ef2da5ba412fb3c55d3d049699340",
+    "public_ecg_replay_v1_manifest_participant_group_id": "MITDB_P101",
+    "public_ecg_replay_v1_manifest_record_id": "101",
+    "windows_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a",
+    "public_semantic_digest": "e3f8607617d3fc7cce7be58752340047d120815653cce36acfac5e8b8bc099b3",
+    "e2e_replay_software_v1_lock_sha256": "fbb76813214c926230dbdc12db218557ebc696c968025fd8c20b3de0d59f25ec",
+    "dashboard_ui_v1_lock_sha256": "a8f7c557001503017a392f8703260ee589f4453e413e09498482b018ca8ef1b6",
+    "api_runtime_v1_lock_sha256": "a6bfedc258977cdf27ecb36e7b326f69800c4897d4cacb09c796b280eebff971"
+  },
+  "public_digest_matches_expected": true,
+  "status": "PASS"
+}

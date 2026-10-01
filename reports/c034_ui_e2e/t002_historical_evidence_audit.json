@@ -1,0 +1,19 @@
+{
+  "compared_from_sha": "6b63cd39c9427d20048ff70c359b79688ff9491d",
+  "compared_to_sha": "f025942616e29a142eb629f82de159e1d821fef6",
+  "files_checked": [
+    "reports/t002/coverage_audit.json",
+    "reports/t002/artifact_hashes.json",
+    "reports/t002/run_manifest.json"
+  ],
+  "git_diff_empty": true,
+  "coverage_audit_sha256_from": "61f2223c7178c3135cd0471173cd53c8f20b87a21057c7a0df8faacee264331d",
+  "coverage_audit_sha256_to": "61f2223c7178c3135cd0471173cd53c8f20b87a21057c7a0df8faacee264331d",
+  "changed": false,
+  "manual_review_completed_flag_regressed": false,
+  "restoration_required": false,
+  "historical_t002_evidence_rewritten": false,
+  "note": "No change to reports/t002/{coverage_audit,artifact_hashes,run_manifest}.json exists on this branch between the T033 entry SHA and the current T034 HEAD. The T034 development log's mention of a manual_review_completed false->true edit does not correspond to any committed diff reachable from this branch at this SHA; nothing to restore.",
+  "status": "PASS",
+  "result": "NO_FINAL_CHANGE"
+}
