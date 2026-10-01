@@ -121,3 +121,61 @@ describe('replay adapter: no diagnosis wording leaks through replayed data', () 
 		}
 	});
 });
+
+describe('replay adapter: separate controlled failure sequence', () => {
+	const success = (sequence_index: number, timestamp_us: number) => ({
+		sequence_index,
+		timestamp_us,
+		http_status: 200,
+		model_id: 'MODEL_V1',
+		preprocess_version: 'PREPROC_V1',
+		alert_policy_id: 'ALERT_POLICY_V1',
+		calibration_id: 'CAL_V1',
+		calibration_domain: 'MIT-BIH-v1.0.0',
+		calibration_patient_count: 3,
+		raw_probability: 0.2,
+		source_domain_calibrated_probability: 0.2,
+		threshold: 0.6128035574269627,
+		ecg_quality: 'VALID',
+		monitoring_state: 'NO_ALERT',
+		context_available: false
+	});
+
+	it('maps 200/422/200/500/200 without probability points for either error', () => {
+		const rows = [
+			success(0, 5_000_000),
+			{
+				sequence_index: 1,
+				timestamp_us: 10_000_000,
+				http_status: 422,
+				error_type: 'UNUSABLE_SIGNAL',
+				message: 'Signal window is unusable.'
+			},
+			success(2, 15_000_000),
+			{
+				sequence_index: 3,
+				timestamp_us: 20_000_000,
+				http_status: 500,
+				error_type: 'INTERNAL_ERROR',
+				message: 'Internal server error.'
+			},
+			success(4, 25_000_000)
+		];
+		const session = createDashboardSession('T034-CONTROLLED-FAILURE-FIXTURE');
+		applyReplayLog(session, rows);
+
+		expect(session.history).toHaveLength(5);
+		expect(session.history.map((point) => point.kind)).toEqual([
+			'success',
+			'gap',
+			'success',
+			'gap',
+			'success'
+		]);
+		expect(session.history[1].monitoring_state).toBe('RECHECK_SENSOR');
+		expect(session.history[3].monitoring_state).toBe('SYSTEM_ERROR');
+		expect(session.history[1].source_domain_calibrated_probability).toBeNull();
+		expect(session.history[3].source_domain_calibrated_probability).toBeNull();
+		expect(session.latestOutcome?.kind).toBe('success');
+	});
+});

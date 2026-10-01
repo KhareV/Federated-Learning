@@ -17,6 +17,7 @@ from jsonschema import Draft202012Validator
 
 from api.app import app
 from scripts.run_replay import _public_requests, _sim_requests
+from tests._t032_support import build_app, make_payload
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -134,3 +135,35 @@ def test_replay_requests_never_use_mock_inference_module() -> None:
     assert "mock_inference" not in text
     assert "MOCK_INFERENCE_V0" not in text
     assert "FIXTURE_STATE_POLICY_V0" not in text
+
+
+def test_engineering_failure_sequence_uses_test_only_500_injection() -> None:
+    """The non-canonical failure fixture exercises 200/422/200/500/200 while keeping
+    the canonical public replay entirely production-backed and failure-free."""
+    healthy_app, _, _ = build_app(probability=0.2)
+    healthy = TestClient(healthy_app)
+    statuses = [
+        healthy.post("/v1/infer-window", json=make_payload("T034-FAILURE", 5_000_000)).status_code,
+        healthy.post(
+            "/v1/infer-window",
+            json=make_payload("T034-FAILURE", 10_000_000, ecg_quality="UNUSABLE"),
+        ).status_code,
+        healthy.post("/v1/infer-window", json=make_payload("T034-FAILURE", 15_000_000)).status_code,
+    ]
+
+    failing_app, _, _ = build_app(raise_on_infer=RuntimeError("controlled test failure"))
+    failing = TestClient(failing_app, raise_server_exceptions=False)
+    statuses.append(
+        failing.post(
+            "/v1/infer-window", json=make_payload("T034-FAILURE-500", 20_000_000)
+        ).status_code
+    )
+
+    retry_app, _, _ = build_app(probability=0.2)
+    retry = TestClient(retry_app)
+    statuses.append(
+        retry.post(
+            "/v1/infer-window", json=make_payload("T034-FAILURE-RETRY", 25_000_000)
+        ).status_code
+    )
+    assert statuses == [200, 422, 200, 500, 200]

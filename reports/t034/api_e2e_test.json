@@ -5,7 +5,7 @@
     "tests/test_simulation_truth_isolation_t034.py",
     "tests/test_ci_policy.py"
   ],
-  "passed": 30,
+  "passed": 31,
   "results": [
     {
       "outcome": "PASSED",
@@ -34,6 +34,10 @@
     {
       "outcome": "PASSED",
       "test": "tests/test_e2e_replay.py::test_replay_requests_never_use_mock_inference_module"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay.py::test_engineering_failure_sequence_uses_test_only_500_injection"
     },
     {
       "outcome": "PASSED",
@@ -129,5 +133,5 @@
     }
   ],
   "status": "PASS",
-  "total": 30
+  "total": 31
 }
