@@ -112,7 +112,9 @@ def real_payloads() -> tuple[list[ClientPayload], list[np.ndarray], OrderedDict[
 
 
 def known_payloads() -> tuple[list[ClientPayload], list[np.ndarray], list[np.ndarray]]:
-    weights = (2, 3, 5, 7, 11, 13, 17, 19)
+    # Sample-count-scale unequal integers avoid magnifying parameter quantization
+    # through an unrealistically tiny total_weight/max_weight denominator.
+    weights = (1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350)
     payloads = [
         ClientPayload(
             f"SITE_{index:02d}",

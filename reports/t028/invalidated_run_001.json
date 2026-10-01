@@ -1,0 +1,11 @@
+{
+  "attempt": "pre-canonical known-vector diagnostic",
+  "configuration_changed": false,
+  "correctness_tolerance_changed": false,
+  "invalidated": true,
+  "observed_maximum_absolute_difference": 0.00040584996149128916,
+  "observed_relative_L2_difference": 0.0007055231804158052,
+  "reason": "The initial fixture total sample count was 77 against max_weight 4096, magnifying Flower parameter quantization during deweighting. The fixture did not represent the declared sample-count scale.",
+  "remediation": "Use fixed unequal integer weights [1000,1050,1100,1150,1200,1250,1300,1350], bind the canonical runner into the method lock, and rerun the complete canonical experiment.",
+  "status": "INVALIDATED_IMPLEMENTATION_FIXTURE"
+}

@@ -18,6 +18,7 @@ def main() -> None:
         "privacy/secagg_app.py",
         "privacy/server_visibility.py",
         "privacy/accounting.py",
+        "scripts/run_secagg_t028.py",
         "manifests/clients/CLIENTS_IID_V1.csv",
         "artifacts/FL_CONFIG_V1.lock.json",
         "federated/aggregation.py",
