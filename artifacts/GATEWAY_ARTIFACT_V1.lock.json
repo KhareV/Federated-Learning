@@ -1,0 +1,35 @@
+{
+  "INT8_STATUS": "OPTIONAL_NOT_ATTEMPTED",
+  "artifact_id": "GATEWAY_FP32_V1",
+  "benchmark_policy": {
+    "CPU": true,
+    "N": 1000,
+    "interop": 1,
+    "intraop": 1,
+    "warmup": 100
+  },
+  "bound_artifacts": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "configs/gateway_artifact_v1.yaml": "baa06067357d14455d0506390d8c22e07eb9a0fcf9b103a8c56cbc0767deb754",
+    "deployment/benchmark.py": "e3473ed1fd2c42a38ab47623895144b941c3b9dc9b9f6ce0702583d9e0a147e9",
+    "deployment/export.py": "7f1bac836ac63508a5be708fa9ebf6457b2a3bbffae04ca490b083a416a296ac",
+    "deployment/runtime.py": "d822ebc0f0b1f994f2a9def38ef55e0be4a44256b67235980b9aaca8203c11ff",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "reports/t029/deployment_equivalence.json": "be79454d8604c608d8bd633d1cd7ee2c3a18fcc090d81eadd75c61b316281959",
+    "reports/t029/latency_samples.csv": "05d7b65e60ee602205bd16199c3d25a4c67b5776f9d95b51502173bc386e90f0",
+    "reports/t029/latency_summary.json": "e03587e7f2a1bb004d5c58f743feb92b083b523d79cd5d3b5395e17c816e3ee3",
+    "reports/t029/memory_benchmark.json": "e5f47f0924ff608c4e130d314151b9cb4e7031d5df0a83a106c87ade220bdcc5",
+    "reports/t029/model_size.json": "9e055c5014b21ccd27c2b1e19f0453df081f263ecccd27a28cb40b8a6f58e13e"
+  },
+  "environment": {
+    "PyTorch": "2.14.0",
+    "Python": "3.11.16"
+  },
+  "format": "TORCHSCRIPT_SCRIPT",
+  "freeze_id": "F14",
+  "input_contract": "GATEWAY_MODEL_INPUT_V1:[1,1,2500]:float32",
+  "lock_id": "GATEWAY_ARTIFACT_V1",
+  "status": "FROZEN"
+}

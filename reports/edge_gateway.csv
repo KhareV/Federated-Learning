@@ -1,0 +1,2 @@
+artifact_id,format,source_checkpoint_bytes,artifact_bytes,trainable_parameters,peak_RSS_bytes,p50_ms,p95_ms,throughput_windows_per_second,maximum_raw_logit_delta,decision_agreement,status
+GATEWAY_FP32_V1,TORCHSCRIPT_SCRIPT,60301,82741,13185,325844992,0.185167,0.19984025,5370.9737187030605,9.5367431640625e-07,1.0,PASS

@@ -37,6 +37,7 @@ def test_freeze_registry_covers_required_decisions_without_premature_freezes() -
         "F11",
         "F12",
         "F13",
+        "F14",
     }
     assert all(
         row["current_status"] == "NOT_FROZEN" for row in rows if row["freeze_id"] not in frozen

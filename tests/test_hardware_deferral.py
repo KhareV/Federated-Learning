@@ -39,7 +39,8 @@ def test_t004_is_blocked_not_pass() -> None:
     assert rows["T026"]["status"] == "PASS"
     assert rows["T027"]["status"] == "PASS"
     assert rows["T028"]["status"] == "PASS"
-    assert rows["T029"]["status"] == "NOT_STARTED"
+    assert rows["T029"]["status"] == "PASS"
+    assert rows["T030"]["status"] == "NOT_STARTED"
 
 
 def test_g1_and_g16_are_not_passed() -> None:

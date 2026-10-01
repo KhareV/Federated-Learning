@@ -1,0 +1,182 @@
+{
+  "INT8": {
+    "attempted": false,
+    "reason": "No prevalidated reliable conversion path is required for the mandatory FP32 gateway.",
+    "status": "OPTIONAL_NOT_ATTEMPTED"
+  },
+  "claim_boundary": {
+    "CPU_gateway_measurement": true,
+    "ESP32_inference": false,
+    "MCU_feasibility": false,
+    "hardware_real_time_guarantee": false,
+    "production_readiness": false,
+    "wearable_validation": false
+  },
+  "deployment_equivalence": {
+    "access_role": "DEPLOYMENT_EQUIVALENCE_ONLY",
+    "artifact_changed_after_test": false,
+    "artifact_selected_before_test": true,
+    "baseline_metrics": {
+      "AUPRC": 0.9088954942908802,
+      "AUROC": 0.9036154157261423,
+      "patient_macro_F1": 0.5291135930158938,
+      "pooled_F1": 0.8237529691211402,
+      "precision": 0.9135932560590094,
+      "sensitivity": 0.75,
+      "specificity": 0.9180819180819181
+    },
+    "baseline_prediction_path": "reports/internal_test_predictions.csv",
+    "baseline_prediction_sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+    "decision_agreement_fraction": 1.0,
+    "deployment_artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+    "deployment_metrics": {
+      "AUPRC": 0.9088954942908802,
+      "AUROC": 0.9036154157261423,
+      "confusion_matrix": {
+        "fn": 289,
+        "fp": 82,
+        "tn": 919,
+        "tp": 867
+      },
+      "patient_macro_F1": 0.5291135930158938,
+      "pooled_F1": 0.8237529691211402,
+      "precision": 0.9135932560590094,
+      "sensitivity": 0.75,
+      "specificity": 0.9180819180819181
+    },
+    "duplicates": 0,
+    "extra": 0,
+    "maximum_absolute_raw_logit_delta": 9.5367431640625e-07,
+    "maximum_calibrated_probability_delta": 6.833583107157537e-07,
+    "mean_absolute_raw_logit_delta": 1.8279828514608454e-07,
+    "mean_calibrated_probability_delta": 6.019381170232889e-08,
+    "metric_absolute_deltas": {
+      "AUPRC": 0.0,
+      "AUROC": 0.0,
+      "patient_macro_F1": 0.0,
+      "pooled_F1": 0.0
+    },
+    "missing": 0,
+    "rows_compared": 2157,
+    "rows_expected": 2157,
+    "status": "PASS",
+    "threshold_decision_disagreements": 0
+  },
+  "format": "TORCHSCRIPT_SCRIPT",
+  "gateway_artifact_id": "GATEWAY_FP32_V1",
+  "gateway_target": "LOCAL_CPU_GATEWAY_V1",
+  "hardware_status": "NOT_REQUIRED_FOR_T029",
+  "host": {
+    "CPU_model": "Apple M5",
+    "NumPy": "2.4.6",
+    "OS": "Darwin",
+    "OS_version": "27.0.1",
+    "PyTorch": "2.14.0",
+    "Python": "3.11.16",
+    "architecture": "arm64",
+    "device": "CPU",
+    "hardware_required": false,
+    "logical_cores": 10,
+    "physical_cores": 10,
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "total_RAM_bytes": 17179869184
+  },
+  "latency": {
+    "all_outputs_finite": true,
+    "artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+    "batch_size": 1,
+    "canonical_run": {
+      "N": 1000,
+      "maximum_ms": 0.256875,
+      "mean_ms": 0.186185979,
+      "minimum_ms": 0.164208,
+      "p50_ms": 0.185167,
+      "p95_ms": 0.19984025,
+      "p99_ms": 0.21610300999999998,
+      "standard_deviation_ms": 0.008635803911840677,
+      "throughput_windows_per_second": 5370.9737187030605,
+      "total_timed_seconds": 0.186185979
+    },
+    "data_loading_included": false,
+    "decision_mismatches": 0,
+    "host_identity": {
+      "CPU_model": "Apple M5",
+      "NumPy": "2.4.6",
+      "OS": "Darwin",
+      "OS_version": "27.0.1",
+      "PyTorch": "2.14.0",
+      "Python": "3.11.16",
+      "architecture": "arm64",
+      "device": "CPU",
+      "hardware_required": false,
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "torch_interop_threads": 1,
+      "torch_intraop_threads": 1,
+      "total_RAM_bytes": 17179869184
+    },
+    "measured_N": 1000,
+    "preprocessing_included": false,
+    "status": "PASS",
+    "threads": {
+      "interop": 1,
+      "intraop": 1
+    },
+    "timing_boundary": "Gateway runtime model plus CAL_V1 inference call",
+    "verification_repeat": {
+      "N": 1000,
+      "maximum_ms": 0.226041,
+      "mean_ms": 0.18471376700000003,
+      "minimum_ms": 0.165834,
+      "p50_ms": 0.184146,
+      "p95_ms": 0.1962205,
+      "p99_ms": 0.20633509,
+      "standard_deviation_ms": 0.006909262661763572,
+      "throughput_windows_per_second": 5413.781637618814,
+      "total_timed_seconds": 0.184713767
+    },
+    "warmup_count": 100
+  },
+  "memory": {
+    "artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+    "baseline_process_RSS_bytes": 316719104,
+    "input_shape": [
+      1,
+      1,
+      2500
+    ],
+    "method": "fresh child process resource.getrusage(RUSAGE_SELF).ru_maxrss",
+    "peak_inference_RSS_bytes": 325844992,
+    "peak_minus_baseline_bytes": 9125888,
+    "peak_minus_pre_inference_bytes": 262144,
+    "platform_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+    "post_inference_RSS_bytes": 325844992,
+    "post_model_load_RSS_bytes": 319635456,
+    "pre_inference_RSS_bytes": 325582848,
+    "process_model": "isolated child process",
+    "status": "PASS"
+  },
+  "model_size": {
+    "deployment_artifact": {
+      "bytes": 82741,
+      "format": "TORCHSCRIPT_SCRIPT",
+      "path": "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts",
+      "sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4"
+    },
+    "deployment_to_source_size_ratio": 1.3721331321205288,
+    "source_checkpoint": {
+      "bytes": 60301,
+      "path": "checkpoints/MODEL_V1.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    "status": "PASS",
+    "theoretical_FP32_trainable_parameter_bytes": 52740,
+    "total_parameter_count": 13185,
+    "total_state_entries": 18,
+    "total_state_values": 13283,
+    "trainable_parameter_count": 13185
+  },
+  "source_model": "MODEL_V1",
+  "status": "PASS"
+}

@@ -854,3 +854,28 @@ phase28:
 	$(MAKE) fedprox-verify PYTHON=$(PYTHON)
 	$(MAKE) secagg-verify PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check
+
+.PHONY: gateway-export gateway-equivalence gateway-benchmark gateway-verify t029-evidence phase29
+
+gateway-export:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/export_gateway_t029.py
+
+gateway-equivalence gateway-benchmark:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_gateway_t029.py canonical
+
+t029-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t029_evidence.py
+
+gateway-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_t029.py
+
+phase29:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) t024-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-iid-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-noniid-verify PYTHON=$(PYTHON)
+	$(MAKE) fedprox-verify PYTHON=$(PYTHON)
+	$(MAKE) secagg-verify PYTHON=$(PYTHON)
+	$(MAKE) gateway-verify PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check

@@ -1,0 +1,11 @@
+{
+  "CI_executed": false,
+  "PyTorch": "2.14.0",
+  "Python": "3.11.16",
+  "command": "PYTHONPATH=src:. .venv-t024/bin/python scripts/run_gateway_t029.py canonical",
+  "device": "CPU",
+  "experiment_id": "GATEWAY_ARTIFACT_V1",
+  "method_lock_sha256": "364947909843c948966c46dda5edc3d385ecc46c7fd3359f5987302e2bca2f8a",
+  "status": "PASS",
+  "task": "T029"
+}

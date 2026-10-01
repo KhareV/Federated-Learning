@@ -1,0 +1,16 @@
+{
+  "ESP32_required": false,
+  "FL_model_deployment": false,
+  "INT8_mandatory": false,
+  "INTERNAL_TEST_role": "DEPLOYMENT_EQUIVALENCE_ONLY",
+  "MCU_inference_claim": false,
+  "MODEL_V1_training": false,
+  "PREPROC_change": false,
+  "WEARABLE_V1_access": false,
+  "calibration_fitting": false,
+  "dashboard": false,
+  "hardware": false,
+  "public_API": false,
+  "status": "PASS",
+  "threshold_tuning": false
+}
