@@ -1,0 +1,91 @@
+{
+  "files": [
+    "tests/test_dashboard_states.py",
+    "tests/test_dashboard_lock_t033.py"
+  ],
+  "passed": 20,
+  "results": [
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_frontend_path_is_the_locked_repository_convention"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_no_root_dashboard_ui_web_or_client_app_exists"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_frontend_is_sveltekit_not_a_second_parallel_framework"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_api_client_binds_only_the_frozen_v1_infer_window_route"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_exactly_five_canonical_monitoring_states_are_declared"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_state_presentation_covers_exactly_five_states_no_sixth"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_state_wording_matches_v2_2_required_meanings"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_no_diagnosis_wording_in_rendered_dashboard_route"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_research_only_probability_panel_is_present_and_labeled"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_four_persistent_panels_plus_research_panel_are_present"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_calibration_domain_and_alert_policy_id_are_displayed"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_dashboard_route_never_computes_monitoring_state_from_probability_locally"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_error_mapping_matches_section_17"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_states.py::test_no_simulation_truth_imported_by_production_dashboard_route"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_lock_t033.py::test_lock_file_exists_with_correct_status"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_lock_t033.py::test_lock_does_not_introduce_a_new_canonical_freeze_registry_id"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_lock_t033.py::test_lock_records_the_locked_frontend_path_mapping"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_lock_t033.py::test_verify_passes_against_current_repository_state"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_lock_t033.py::test_verify_detects_tamper_on_any_bound_file"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_dashboard_lock_t033.py::test_bound_artifacts_cover_the_core_dashboard_source_files"
+    }
+  ],
+  "status": "PASS",
+  "total": 20
+}

@@ -1,0 +1,24 @@
+{
+  "enforced_by": "frontend/src/lib/dashboard/__tests__/legacy-claims.test.ts",
+  "findings": {
+    "24_bit_adc": [],
+    "360_hz": [],
+    "arrhythmia_detected": [],
+    "clinical_grade": [],
+    "disease_risk": [],
+    "medical_grade": [],
+    "patient_is_abnormal": [],
+    "ptb_xl": []
+  },
+  "patterns_checked": [
+    "24_bit_adc",
+    "360_hz",
+    "ptb_xl",
+    "medical_grade",
+    "clinical_grade",
+    "arrhythmia_detected",
+    "disease_risk",
+    "patient_is_abnormal"
+  ],
+  "status": "PASS"
+}

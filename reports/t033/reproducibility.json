@@ -1,0 +1,6 @@
+{
+  "backend_tests_rerun_deterministic": true,
+  "frontend_build_bundle_hash_deterministic": "NOT_GUARANTEED (bundler may embed non-deterministic build metadata; semantic/UI tests are the reproducibility claim, not a byte-identical bundle hash)",
+  "frontend_vitest_rerun_deterministic": true,
+  "status": "PASS"
+}

@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "aria_live_on_monitoring_state": true,
+    "native_button_controls": true,
+    "no_color_only_state_encoding": true,
+    "role_status_on_monitoring_state": true,
+    "semantic_h1_present": true,
+    "semantic_h2_panel_titles": true
+  },
+  "status": "PASS"
+}

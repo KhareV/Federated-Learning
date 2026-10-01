@@ -954,3 +954,36 @@ phase32:
 	$(MAKE) explainability-verify PYTHON=$(PYTHON)
 	$(MAKE) api-verify PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check
+
+.PHONY: frontend-install frontend-check frontend-test frontend-build dashboard-freeze dashboard-verify t033-evidence phase33
+
+frontend-install:
+	cd frontend && npm ci
+
+frontend-check:
+	cd frontend && npm run check
+
+frontend-test:
+	cd frontend && npx vitest run
+
+frontend-build:
+	cd frontend && npm run build
+
+dashboard-freeze:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_dashboard_ui_t033.py
+
+dashboard-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_dashboard_ui_t033.py
+
+t033-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t033_evidence.py
+
+phase33:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) api-verify PYTHON=$(PYTHON)
+	$(MAKE) dashboard-verify PYTHON=$(PYTHON)
+	$(MAKE) frontend-check PYTHON=$(PYTHON)
+	$(MAKE) frontend-test PYTHON=$(PYTHON)
+	$(MAKE) frontend-build PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check

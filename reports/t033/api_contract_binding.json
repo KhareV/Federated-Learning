@@ -1,0 +1,7 @@
+{
+  "contract_version": "API_SCHEMA_V1",
+  "no_local_inference_reimplementation": true,
+  "parity_enforced_by": "frontend/src/lib/api/__tests__/nhm-v1.test.ts",
+  "route": "POST /v1/infer-window",
+  "status": "PASS"
+}

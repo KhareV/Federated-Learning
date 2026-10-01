@@ -1,0 +1,11 @@
+{
+  "fields_displayed": [
+    "calibration_domain",
+    "calibration_patient_count",
+    "calibration_id",
+    "alert_policy_id",
+    "threshold"
+  ],
+  "source": "response fields only, never hardcoded in the dashboard route",
+  "status": "PASS"
+}

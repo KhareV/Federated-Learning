@@ -1,0 +1,6 @@
+{
+  "400": "Request error -- no monitoring state, no probability point, no history entry",
+  "422": "RECHECK_SENSOR -- no probability point, history gap marker recorded",
+  "500": "SYSTEM_ERROR -- no probability point, history gap marker recorded, prior result not implied current",
+  "status": "PASS"
+}

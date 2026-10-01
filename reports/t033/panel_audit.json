@@ -1,0 +1,11 @@
+{
+  "enforced_by": "tests/test_dashboard_states.py::test_four_persistent_panels_plus_research_panel_are_present",
+  "panels": [
+    "LIVE WAVEFORMS",
+    "SIGNAL QUALITY",
+    "CURRENT MONITORING STATE",
+    "TECHNICAL METADATA",
+    "RESEARCH ONLY"
+  ],
+  "status": "PASS"
+}

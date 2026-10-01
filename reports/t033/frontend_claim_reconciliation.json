@@ -1,0 +1,37 @@
+[
+  {
+    "action": "relabeled as synthetic/illustrative, not live hardware",
+    "claim": "360 Hz // GAIN 1100x sampling claim tied to a simulated waveform",
+    "file": "frontend/src/lib/components/landing/ProductWorkstation.svelte"
+  },
+  {
+    "action": "replaced with unverified/not-implemented framing matching actual server-side architecture and locked SecAgg+/FedProx limitations",
+    "claim": "24-bit ADC, on-device arrhythmia classifier, formal DP proof, AES-256 SecAgg",
+    "file": "frontend/src/lib/components/landing/SystemArchitecture.svelte"
+  },
+  {
+    "action": "replaced with explicit VERIFICATION_REQUIRED/unverified framing per docs/LEGACY_FIRMWARE_V0_FINDINGS.md; removed fake live-data simulation",
+    "claim": "AD8232/MAX30102/ESP32-S3 full spec sheet with fabricated CMRR/SNR/clock numbers, medical-grade battery, fake live BPM/SpO2",
+    "file": "frontend/src/lib/components/hardware/HardwareStudio.svelte"
+  },
+  {
+    "action": "renamed category to 'Illustrative Output'; replaced fabricated clinical events with explicitly hypothetical/illustrative placeholders",
+    "claim": "'Edge Diagnostic' category with fabricated ischemia/sleep-apnea clinical blind-spot events",
+    "file": "frontend/src/lib/components/landing/NeuralGraph.svelte"
+  },
+  {
+    "action": "relabeled as illustrative/simulated, not a diagnosis, not verified hardware",
+    "claim": "'ARRHYTHMIA DETECTED BY EDGE' status and AD8232/MAX30102 channel labels",
+    "file": "frontend/src/lib/components/signals/MultimodalStudio.svelte"
+  },
+  {
+    "action": "replaced with honest research-prototype framing, no fabricated statistics",
+    "claim": "Hardware spec marquee (24-bit ADC, 360Hz) and 'on-device neural knowledge graph', '99.8%' fabricated statistic, 'arrhythmia detection' feature claim",
+    "file": "frontend/src/routes/+page.svelte"
+  },
+  {
+    "action": "removed fabricated live-telemetry panel; replaced with a link to the real /monitoring dashboard",
+    "claim": "Fake live BPM/SpO2 bound to 'MAX30102 / SENSOR ARRAY' label",
+    "file": "frontend/src/routes/monitor/+page.svelte"
+  }
+]

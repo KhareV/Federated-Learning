@@ -1,0 +1,29 @@
+{
+  "enforced_by": "frontend/src/lib/dashboard/__tests__/state-presentation.test.ts",
+  "http_mapping": {
+    "400": {
+      "append_history_gap": false,
+      "append_probability_point": false,
+      "display_state": null
+    },
+    "422": {
+      "append_history_gap": true,
+      "append_probability_point": false,
+      "display_state": "RECHECK_SENSOR"
+    },
+    "500": {
+      "append_history_gap": true,
+      "append_probability_point": false,
+      "display_state": "SYSTEM_ERROR"
+    }
+  },
+  "monitoring_state_vocabulary": [
+    "NORMAL_MONITORED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "RECHECK_SENSOR",
+    "CONTEXT_UNAVAILABLE",
+    "SYSTEM_ERROR"
+  ],
+  "quality_warning_is_metadata_not_a_state": true,
+  "status": "PASS"
+}

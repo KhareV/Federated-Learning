@@ -1,0 +1,67 @@
+{
+  "api_route_consumed": "POST /v1/infer-window",
+  "api_runtime_v1_lock_sha256": "a6bfedc258977cdf27ecb36e7b326f69800c4897d4cacb09c796b280eebff971",
+  "api_schema_v1_sha256": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+  "bound_artifacts": {
+    "artifacts/API_RUNTIME_V1.lock.json": "a6bfedc258977cdf27ecb36e7b326f69800c4897d4cacb09c796b280eebff971",
+    "contracts/API_SCHEMA_V1.json": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+    "contracts/openapi_v1.json": "a3f02bbe3512ecd68bf41aa6a7ce9013af2914a72f0178b532591710748ab22d",
+    "frontend/package-lock.json": "a91ee08f67befd56e29331ec5422c80ea4a05aa91b01499fe767ad5d1cd871ce",
+    "frontend/package.json": "11dfa35f0d7bb5a80af705288b71e759a4e0567994259d30635e5b8b62224ddd",
+    "frontend/src/lib/api/nhm-v1.ts": "4204ac3e91485577c321cca2179d0dbe551b4f736f75dd62967539c28e0dff56",
+    "frontend/src/lib/dashboard/demo-window.ts": "f58564ba6f5dde84b83001cb9d2ab0239d047cda13657ae7503a0900f703b222",
+    "frontend/src/lib/dashboard/fixtures.ts": "5813f5ad233588f3648ef71f9005fd7aa844a259e11ccc148803909b44d60567",
+    "frontend/src/lib/dashboard/session.svelte.ts": "c683282ba0164f939adf5e3270f6d70d97836ac2bed8928eb4e41509946b156c",
+    "frontend/src/lib/dashboard/state-presentation.ts": "24d1cc07b8911247474d850ca42da68e407d7311a3ffbcf35ea916e406a3132f",
+    "frontend/src/routes/monitoring/+page.svelte": "4f1a38382aa860554a57ea55d5133ee9bc888bda70d9afa0890a669f3b12098d",
+    "frontend/vite.config.ts": "8ada43702603e36cd7889415144167460159b4387b5f89edbf81c102737b21da",
+    "frontend/vitest.config.ts": "7f911c080ae78a8186931d2dc95610e64ab1402269f2085cc8047727f6c5627b",
+    "reports/t033/frontend_claim_reconciliation.json": "fc9f8bbc9ae7be65cf729f125701ceb55403feb0dc8cb31c674d2e5936a8546f",
+    "reports/t033/frontend_legacy_audit.json": "85343489f0e61375461c945ca6249a35b5a330e620e27da5bc962aebb5ffb11c",
+    "reports/t033/frontend_path_mapping.json": "178a9ad2028d788606da1554c2e4f8e7ca0fd46105f54054d596daf51738ac46"
+  },
+  "calibration_metadata_required": [
+    "calibration_domain",
+    "calibration_patient_count",
+    "calibration_id",
+    "alert_policy_id",
+    "threshold"
+  ],
+  "change_control": "Changing the frontend API client, state-presentation mapping, or the /monitoring route's panel structure requires a controlled DASHBOARD_UI_V2 and invalidates this lock.",
+  "contract_version": "API_SCHEMA_V1",
+  "framework": "SvelteKit",
+  "framework_version": "2.70.3",
+  "gateway_artifact_lock_sha256": "cc4fc0fe7ae9f011f0db20305238a3687da36d3491d91248065f9627ca232946",
+  "lock_id": "DASHBOARD_UI_V1",
+  "logical_subsystem": "dashboard",
+  "mapping_reason": "explicit project repository convention (see T033 task instructions)",
+  "monitoring_state_vocabulary": [
+    "NORMAL_MONITORED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "RECHECK_SENSOR",
+    "CONTEXT_UNAVAILABLE",
+    "SYSTEM_ERROR"
+  ],
+  "no_new_canonical_freeze_row": true,
+  "openapi_v1_sha256": "a3f02bbe3512ecd68bf41aa6a7ce9013af2914a72f0178b532591710748ab22d",
+  "persistent_panels": [
+    "LIVE WAVEFORMS",
+    "SIGNAL QUALITY",
+    "CURRENT MONITORING STATE",
+    "TECHNICAL METADATA"
+  ],
+  "repository_path": "frontend/",
+  "required_wording": {
+    "CONTEXT_UNAVAILABLE": "Context unavailable (PPG/SpO2); ECG result retained when valid",
+    "NORMAL_MONITORED_PATTERN": "Normal monitored pattern",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN": "Potential SVF-associated ECG pattern -- Not a diagnosis.",
+    "RECHECK_SENSOR": "Recheck sensor / signal quality",
+    "SYSTEM_ERROR": "Technical system error -- monitoring result unavailable"
+  },
+  "research_only_panel_required": true,
+  "route": "/monitoring",
+  "source_plan_path": "dashboard/",
+  "status": "FROZEN_ENGINEERING_INTERFACE",
+  "svelte_version": "5.57.0",
+  "vite_version": "6.4.3"
+}
