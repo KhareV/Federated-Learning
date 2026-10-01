@@ -112,9 +112,17 @@ Automatic GitHub Actions (push/pull_request triggers) were intentionally disable
 T032; `.github/workflows/t001.yml` triggered only on `workflow_dispatch` during that range. Local
 Python 3.11 validation (`make phase4` and successors) was mandatory for every task in that range.
 
-Automatic CI was restored at T033: `.github/workflows/t001.yml` now also triggers on `push` and
-`pull_request`, adding two jobs (`t033-backend`, `t033-frontend`) scoped to git-tracked
-checkpoints/artifacts/manifests only -- neither job acquires a raw PhysioNet dataset. End-to-end CI
-lands at T034, clean-environment reproducibility CI at T035, and final release CI at T036. This is
-an engineering-process decision, not a scientific one, and does not require Class C change control;
-see `docs/CHANGE_CONTROL.md` Class B.
+Automatic CI was restored at T033: `.github/workflows/t001.yml` briefly also triggered on `push`
+and `pull_request`, adding two jobs (`t033-backend`, `t033-frontend`) scoped to git-tracked
+checkpoints/artifacts/manifests only -- neither job acquires a raw PhysioNet dataset. The resulting
+run (id `36910820027`) is preserved as historical evidence in `reports/t033/ci_run.json` and
+`reports/t033/ci_report.json`.
+
+At T034, automatic CI was deferred again by explicit in-chat user instruction: `push` and
+`pull_request` triggers were removed, returning the workflow to `workflow_dispatch`-only. The
+T033 jobs were not deleted -- they remain available on demand. This is a scheduling/control-plane
+change only; see `reports/t034/ci_deferral.json`. Automatic CI is restored again only when the
+user explicitly asks for it in a future conversation; clean-environment reproducibility CI
+(originally planned for T035) and final release CI (T036) remain subject to the same explicit-ask
+policy until then. This is an engineering-process decision, not a scientific one, and does not
+require Class C change control; see `docs/CHANGE_CONTROL.md` Class B.

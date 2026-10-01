@@ -1,13 +1,14 @@
 name: NHM CI
 
 # Automatic CI (push/pull_request triggers) was intentionally deferred from T004 through T032
-# (see docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md): hardware-independent software tasks in that
-# range ran local Python 3.11 validation only. T033 is the first of the final four stages
-# where automatic CI is restored; end-to-end CI lands at T034, clean-environment
-# reproducibility CI at T035, and final release CI at T036.
+# (see docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md), then briefly restored at T033. As of T034,
+# automatic CI is deferred again by EXPLICIT USER INSTRUCTION given in-chat: this workflow is
+# manual-only (workflow_dispatch) until the user explicitly asks for CI to be re-enabled in a
+# future conversation. The t033-backend/t033-frontend/phase-01 jobs below are unchanged and
+# available on demand; see reports/t034/ci_deferral.json for the recorded policy, and
+# reports/t033/ci_run.json / reports/t033/ci_report.json for the preserved historical T033 CI
+# result (not rewritten by this change).
 on:
-  push:
-  pull_request:
   workflow_dispatch:
 
 jobs:

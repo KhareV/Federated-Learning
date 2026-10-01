@@ -1,0 +1,16 @@
+{
+  "policy": "USER_EXPLICIT_OVERRIDE",
+  "automatic_ci_enabled": false,
+  "workflow_dispatch_available": true,
+  "ci_executed_t034": false,
+  "ci_queried_t034": false,
+  "previous_t033_ci_record_preserved": true,
+  "previous_t033_ci_run_id": 36910820027,
+  "previous_t033_ci_evidence_paths": [
+    "reports/t033/ci_run.json",
+    "reports/t033/ci_report.json"
+  ],
+  "reason": "CI deferred until explicit user request in this chat.",
+  "scope": "Scheduling/control-plane change only -- does not alter T033 scientific/UI evidence, DASHBOARD_UI_V1, API_RUNTIME_V1, or any scientific freeze.",
+  "jobs_preserved_not_deleted": ["phase-01", "t033-backend", "t033-frontend"]
+}

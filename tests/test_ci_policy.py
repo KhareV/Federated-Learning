@@ -12,24 +12,24 @@ def _triggers() -> dict:
     return workflow.get(True, workflow.get("on", {}))
 
 
-def test_automatic_ci_is_restored_at_t033() -> None:
-    """Regression guard: T033 is the first stage where automatic push/pull_request CI is
-    restored, after being intentionally deferred from T004 through T032 (see
-    docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md). This test replaces the pre-T033
-    manual-only-until-T033 guard; it must be updated, not deleted, if the CI policy changes
-    again at T034/T035/T036.
+def test_ci_is_manual_only_as_of_t034() -> None:
+    """Regression guard: automatic CI (push/pull_request) was briefly restored at T033, then
+    deferred again at T034 by explicit in-chat user instruction -- see
+    reports/t034/ci_deferral.json. This workflow must stay manual-only (workflow_dispatch)
+    until the user explicitly asks for CI to be re-enabled in a future conversation. This test
+    must be updated, not deleted, when that happens.
     """
     triggers = _triggers()
     assert isinstance(triggers, dict)
-    assert "push" in triggers
-    assert "pull_request" in triggers
-    assert "workflow_dispatch" in triggers
+    assert set(triggers) == {"workflow_dispatch"}
+    assert "push" not in triggers
+    assert "pull_request" not in triggers
 
 
-def test_ci_restoration_is_documented_in_the_workflow() -> None:
+def test_ci_deferral_is_documented_in_the_workflow() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
-    assert "T033" in text
-    assert "restored" in text.lower()
+    assert "T034" in text
+    assert "manual-only" in text.lower()
 
 
 def test_ci_deferral_history_remains_documented_in_the_deferral_plan() -> None:
@@ -40,30 +40,24 @@ def test_ci_deferral_history_remains_documented_in_the_deferral_plan() -> None:
     assert "T004 through T032" in normalized
 
 
+def test_t033_jobs_are_preserved_not_deleted() -> None:
+    """The CI deferral at T034 is a scheduling/control-plane change only -- the T033 jobs
+    remain available on demand (workflow_dispatch), never deleted."""
+    text = WORKFLOW.read_text(encoding="utf-8")
+    assert "t033-backend:" in text
+    assert "t033-frontend:" in text
+    assert "phase-01:" in text
+
+
 def test_t033_jobs_never_acquire_raw_datasets_in_ci() -> None:
-    """T033 CI is scoped to git-tracked checkpoints/artifacts/manifests only -- it must never
-    invoke a multi-GB PhysioNet acquisition script (that remains a local, manual step)."""
     text = WORKFLOW.read_text(encoding="utf-8")
     for forbidden in ("acquire_mitdb", "acquire_incart", "acquire_nstdb", "acquire_bidmc"):
         assert forbidden not in text
 
 
-def test_t033_backend_job_runs_lint_and_relevant_tests() -> None:
-    text = WORKFLOW.read_text(encoding="utf-8")
-    assert "t033-backend:" in text
-    assert "make lint" in text
-    assert "test_api_t032.py" in text
-    assert "test_dashboard_states.py" in text
-    assert "verify_api_runtime_t032.py" in text
-    assert "verify_dashboard_ui_t033.py" in text
-    assert "pip check" in text
-
-
-def test_t033_frontend_job_runs_locked_install_check_test_build() -> None:
-    text = WORKFLOW.read_text(encoding="utf-8")
-    assert "t033-frontend:" in text
-    assert "working-directory: frontend" in text
-    assert "npm ci" in text
-    assert "npm run check" in text
-    assert "vitest run" in text
-    assert "npm run build" in text
+def test_historical_t033_ci_evidence_is_preserved() -> None:
+    """T034's CI-deferral correction must not rewrite the T033 CI run record."""
+    assert (ROOT / "reports/t033/ci_run.json").exists()
+    assert (ROOT / "reports/t033/ci_report.json").exists()
+    run = (ROOT / "reports/t033/ci_run.json").read_text(encoding="utf-8")
+    assert "36910820027" in run
