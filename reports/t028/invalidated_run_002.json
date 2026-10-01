@@ -1,0 +1,13 @@
+{
+  "attempt": "first complete protected canonical execution",
+  "configuration_changed": false,
+  "correctness_tolerance_changed": false,
+  "invalidated": true,
+  "known_vector_status": "PASS",
+  "model_shaped_maximum_absolute_difference": 0.00000685679363077174,
+  "model_shaped_relative_L2_difference": 0.00002182634523922492,
+  "protected_visibility_clear_update_count": 0,
+  "reason": "The plain numerical comparator used a float64 full-state average. Although algebraically equivalent and within tolerance, its serialized state did not reproduce the frozen T025 sample-weighted-delta state SHA.",
+  "remediation": "Anchor the plain MODEL_V1 result to federated.aggregation.aggregate_weighted_deltas using the exact reconstructed client deltas, require its SHA to equal the frozen T025 round-one SHA, and rerun every canonical trial.",
+  "status": "INVALIDATED_REFERENCE_TRACEABILITY_FIX"
+}

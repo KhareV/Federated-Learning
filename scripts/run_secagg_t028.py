@@ -20,6 +20,7 @@ import yaml
 from flwr.client.mod import secaggplus_mod
 from flwr.server.workflow import SecAggPlusWorkflow
 
+from federated.aggregation import ClientUpdate, aggregate_weighted_deltas
 from federated.client_manifest import SITE_IDS
 from federated.fedavg_runner import (
     fresh_initial_state,
@@ -73,7 +74,12 @@ def api_audit() -> dict[str, Any]:
     }
 
 
-def real_payloads() -> tuple[list[ClientPayload], list[np.ndarray], OrderedDict[str, np.ndarray]]:
+def real_payloads() -> tuple[
+    list[ClientPayload],
+    list[np.ndarray],
+    OrderedDict[str, np.ndarray],
+    list[ClientUpdate],
+]:
     cfg = yaml.safe_load((ROOT / "configs/fl_iid_v1.yaml").read_text(encoding="utf-8"))
     sites = load_manifest_sites(ROOT / "manifests/clients/CLIENTS_IID_V1.csv")
     train = load_population("TRAIN")
@@ -87,6 +93,7 @@ def real_payloads() -> tuple[list[ClientPayload], list[np.ndarray], OrderedDict[
     floating_keys = [spec.key for spec in specs if spec.aggregatable]
     pos_weight = float(np.sum(train.labels == 0) / np.sum(train.labels == 1))
     payloads: list[ClientPayload] = []
+    updates: list[ClientUpdate] = []
     for node_id, site in enumerate(SITE_IDS, start=1):
         selected = indices[site]
         result = train_local_epoch(
@@ -107,8 +114,9 @@ def real_payloads() -> tuple[list[ClientPayload], list[np.ndarray], OrderedDict[
             for key in floating_keys
         )
         payloads.append(ClientPayload(site, node_id, arrays, result.examples_seen))
+        updates.append(result.update)
     initial = [np.array(global_state[key], copy=True) for key in floating_keys]
-    return payloads, initial, global_state
+    return payloads, initial, global_state, updates
 
 
 def known_payloads() -> tuple[list[ClientPayload], list[np.ndarray], list[np.ndarray]]:
@@ -171,7 +179,7 @@ def preflight() -> None:
     if api["status"] != "PASS":
         raise RuntimeError("FLOWER_SECAGGPLUS_UNAVAILABLE")
     write_json(REPORT_DIR / "flower_secagg_api_audit.json", api)
-    payloads, _, _ = real_payloads()
+    payloads, _, _, _ = real_payloads()
     all_values = np.concatenate(
         [
             np.asarray(array, dtype=np.float64).ravel()
@@ -250,8 +258,17 @@ def canonical() -> None:
     if not known_pass:
         raise RuntimeError("known-vector SecAgg+ mismatch")
 
-    payloads, initial, global_state = real_payloads()
-    plain, plain_probe, plain_bytes = run_plain_reference(payloads, initial)
+    payloads, initial, global_state, updates = real_payloads()
+    full_state_plain, plain_probe, plain_bytes = run_plain_reference(payloads, initial)
+    canonical_plain_state, _ = aggregate_weighted_deltas(global_state, updates)
+    floating_keys = [
+        spec.key for spec in model_v1_state_spec(fresh_model_v1()) if spec.aggregatable
+    ]
+    plain = [np.array(canonical_plain_state[key], copy=True) for key in floating_keys]
+    algebraic_rounding = differences(plain, full_state_plain)
+    expected_round_one_sha = "271bb957daa82172b91df60edbada7d9139b6af61fbcde59f9a949d3f8590eba"
+    if state_sha(canonical_plain_state) != expected_round_one_sha:
+        raise RuntimeError("plain reference does not reproduce frozen T025 round one")
     protected, protected_probe, _, stage_calls = run_flower_secaggplus(payloads, initial, **kwargs)
     require_visibility_contract(plain_probe, protected_probe)
     real_diff = differences(plain, protected)
@@ -291,9 +308,8 @@ def canonical() -> None:
             "client_count": 8,
             "plain_aggregate_sha256": state_sha(merged_plain),
             "protected_aggregate_sha256": state_sha(merged_protected),
-            "authoritative_T025_round_1_state_sha256": (
-                "271bb957daa82172b91df60edbada7d9139b6af61fbcde59f9a949d3f8590eba"
-            ),
+            "authoritative_T025_round_1_state_sha256": expected_round_one_sha,
+            "full_state_vs_delta_reference_rounding": algebraic_rounding,
             **real_diff,
             "nonfinite_tensor_count": 0 if finite else 1,
             "clipped_value_count": 0,
