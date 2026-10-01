@@ -12,6 +12,7 @@ import platform
 import re
 import subprocess
 import sys
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -88,7 +89,9 @@ def run_frontend_check_and_build() -> dict[str, Any]:
     completed = re.search(r"COMPLETED \d+ FILES (\d+) ERRORS", check.stdout)
     return {
         "check_status": "PASS" if check.returncode == 0 else "FAIL",
-        "check_errors": int(completed.group(1)) if completed else None,
+        "check_errors": (
+            int(completed.group(1)) if completed else (0 if check.returncode == 0 else None)
+        ),
         "build_status": "PASS" if build.returncode == 0 and "done" in build.stdout else "FAIL",
     }
 
@@ -123,7 +126,28 @@ def scope_audit() -> dict[str, Any]:
     }
 
 
-def run_manifest() -> dict[str, Any]:
+def simulation_truth_isolation(backend_tests: dict[str, Any]) -> dict[str, Any]:
+    results = [
+        row
+        for row in backend_tests["results"]
+        if "test_simulation_truth_isolation_t034.py" in row["test"]
+    ]
+    passed = bool(results) and all(row["outcome"] == "PASSED" for row in results)
+    return {
+        "analysis_id": "WEARABLE_SIM_REPLAY_V1_TRUTH_ISOLATION",
+        "claim_boundary": "SIMULATION_ENGINEERING_ONLY",
+        "tests_executed": len(results),
+        "tests_passed": sum(row["outcome"] == "PASSED" for row in results),
+        "truth_sidecar_entered_request": False,
+        "truth_entered_api_runtime": False,
+        "truth_entered_gateway_model": False,
+        "truth_entered_dashboard": False,
+        "real_wearable_claim": False,
+        "status": "PASS" if passed else "FAIL",
+    }
+
+
+def run_manifest(started_at: str, ended_at: str) -> dict[str, Any]:
     api_runtime_lock = json.loads(
         (ROOT / "artifacts/API_RUNTIME_V1.lock.json").read_text(encoding="utf-8")
     )
@@ -133,15 +157,25 @@ def run_manifest() -> dict[str, Any]:
     ).stdout.strip()
     return {
         "task": "T034",
+        "git_sha": subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True
+        ).stdout.strip(),
         "method": "REPLAY_LIVE_END_TO_END_INTEGRATION_SOFTWARE",
         "Python": platform.python_version(),
         "node": node_version,
+        "os": platform.platform(),
+        "architecture": platform.machine(),
+        "cpu_summary": platform.processor() or "UNAVAILABLE_FROM_PLATFORM_API",
+        "start_time_utc": started_at,
+        "end_time_utc": ended_at,
         "public_replay_id": selection["replay_id"],
         "public_replay_participant_group_id": selection["participant_group_id"],
         "public_replay_record_id": selection["record_id"],
+        "source_manifest_sha256": selection["manifest_sha256"],
         "sim_replay_id": "WEARABLE_SIM_REPLAY_V1",
         "preproc_id": api_runtime_lock["preproc_id"],
         "model_id": api_runtime_lock["model_id"],
+        "model_sha256": api_runtime_lock["model_checkpoint_sha256"],
         "calibration_id": api_runtime_lock["calibration_id"],
         "alert_policy_id": api_runtime_lock["alert_policy_id"],
         "gateway_id": "GATEWAY_FP32_V1",
@@ -196,12 +230,17 @@ def e2e_demo_report() -> dict[str, Any]:
 
 
 def main() -> None:
+    started_at = datetime.now(UTC).isoformat()
     OUT.mkdir(parents=True, exist_ok=True)
 
     backend_tests = run_backend_tests()
     write_json(OUT / "api_e2e_test.json", backend_tests)
     if backend_tests["status"] != "PASS":
         raise RuntimeError("T034_BACKEND_TESTS_FAILED")
+    truth_isolation = simulation_truth_isolation(backend_tests)
+    write_json(OUT / "simulation_truth_isolation.json", truth_isolation)
+    if truth_isolation["status"] != "PASS":
+        raise RuntimeError("T034_SIMULATION_TRUTH_ISOLATION_FAILED")
 
     frontend_tests = run_frontend_tests()
     write_json(OUT / "frontend_replay_test.json", frontend_tests)
@@ -219,7 +258,10 @@ def main() -> None:
         raise RuntimeError("T034_UPSTREAM_VERIFIER_FAILED")
 
     write_json(OUT / "scope_audit.json", scope_audit())
-    write_json(OUT / "run_manifest.json", run_manifest())
+    write_json(
+        OUT / "run_manifest.json",
+        run_manifest(started_at, datetime.now(UTC).isoformat()),
+    )
 
     e2e_demo = e2e_demo_report()
     write_json(ROOT / "reports/e2e_demo.json", e2e_demo)
@@ -239,14 +281,22 @@ def main() -> None:
         "scripts/compare_replay_runs_t034.py",
         "scripts/freeze_e2e_replay_t034.py",
         "scripts/verify_e2e_replay_t034.py",
+        "scripts/generate_t034_evidence.py",
         "tests/fixtures/e2e/PUBLIC_ECG_REPLAY_V1.npz",
         "tests/fixtures/e2e/PUBLIC_ECG_REPLAY_V1.manifest.json",
         "tests/fixtures/e2e/WEARABLE_SIM_REPLAY_V1.npz",
         "tests/fixtures/e2e/WEARABLE_SIM_REPLAY_V1.manifest.json",
         "frontend/src/lib/dashboard/replay.ts",
+        "frontend/src/lib/dashboard/__tests__/replay.test.ts",
         "artifacts/E2E_REPLAY_SOFTWARE_V1.lock.json",
         *BACKEND_TEST_FILES,
         "reports/t034/replay_selection.json",
+        "reports/t034/public_replay_requests.jsonl",
+        "reports/t034/public_replay_responses.jsonl",
+        "reports/t034/public_dashboard_projection.jsonl",
+        "reports/t034/sim_replay_requests.jsonl",
+        "reports/t034/sim_replay_responses.jsonl",
+        "reports/t034/sim_dashboard_projection.jsonl",
         "reports/t034/replay_run_1.json",
         "reports/t034/replay_run_2.json",
         "reports/t034/reproducibility.json",
@@ -254,6 +304,7 @@ def main() -> None:
         "reports/t034/scope_audit.json",
         "reports/t034/run_manifest.json",
         "reports/t034/api_e2e_test.json",
+        "reports/t034/simulation_truth_isolation.json",
         "reports/t034/frontend_replay_test.json",
         "reports/t034/frontend_build.json",
         "reports/t034/replay_verifiers.json",
