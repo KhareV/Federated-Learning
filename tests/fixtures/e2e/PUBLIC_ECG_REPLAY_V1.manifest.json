@@ -1,0 +1,112 @@
+{
+  "fixture_id": "PUBLIC_ECG_REPLAY_V1",
+  "labels_included": false,
+  "npz_sha256": "d5d1f6516473feb68f9bee2768a3b008ec0ef2da5ba412fb3c55d3d049699340",
+  "sample_dtype": "float32",
+  "sample_shape": [
+    12,
+    2500
+  ],
+  "selection": {
+    "cadence_us": 5000000,
+    "dataset_id": "MITDB",
+    "manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a",
+    "participant_group_id": "MITDB_P101",
+    "partition": "TRAIN",
+    "record_id": "101",
+    "replay_id": "PUBLIC_ECG_REPLAY_V1",
+    "selection_rule": "Lexicographically smallest TRAIN participant_group_id containing a run of 12 windows (within one record_id) with prediction_timestamp_us exactly 5,000,000us apart; earliest such run by timestamp within that group. No label, probability, prediction-correctness, beat-class, or signal-quality field was used to select.",
+    "status": "PASS",
+    "window_count": 12,
+    "window_seconds": 10,
+    "windows": [
+      {
+        "example_id": "7e85d9ad2d63d428ec248251a14c6475ae76abcd0c3826e4d935e2e29cbee559",
+        "prediction_timestamp_us": 10000000,
+        "sequence_index": 0,
+        "signal_end_exclusive_timestamp_us": 10000000,
+        "signal_start_timestamp_us": 0
+      },
+      {
+        "example_id": "642e69e0b75144ce7982e6c68ce1923b8ddd7dae20e77ce8041e07a073bbfa2c",
+        "prediction_timestamp_us": 15000000,
+        "sequence_index": 1,
+        "signal_end_exclusive_timestamp_us": 15000000,
+        "signal_start_timestamp_us": 5000000
+      },
+      {
+        "example_id": "76646a2e816ac5bac994e9ae0dbac0da8b496f95755e1afdd19ac5183ec1bf7c",
+        "prediction_timestamp_us": 20000000,
+        "sequence_index": 2,
+        "signal_end_exclusive_timestamp_us": 20000000,
+        "signal_start_timestamp_us": 10000000
+      },
+      {
+        "example_id": "669c051ef288d23bf4d2b6f0e2760a06f8577dd1d843d22c5f93e1cafd54f100",
+        "prediction_timestamp_us": 25000000,
+        "sequence_index": 3,
+        "signal_end_exclusive_timestamp_us": 25000000,
+        "signal_start_timestamp_us": 15000000
+      },
+      {
+        "example_id": "562f170f3f29aa862de40499f66713c676217950ae263a8dbf3d3594e3f14d84",
+        "prediction_timestamp_us": 30000000,
+        "sequence_index": 4,
+        "signal_end_exclusive_timestamp_us": 30000000,
+        "signal_start_timestamp_us": 20000000
+      },
+      {
+        "example_id": "2be142592e8d65a36cd7b43ea8828e811bcf1d32accbc1d0f64802db8acc7ffe",
+        "prediction_timestamp_us": 35000000,
+        "sequence_index": 5,
+        "signal_end_exclusive_timestamp_us": 35000000,
+        "signal_start_timestamp_us": 25000000
+      },
+      {
+        "example_id": "a598f0b8ee4ed85aabb7c8646fa5f314de194a975cab3db11da92a2d460cbdf0",
+        "prediction_timestamp_us": 40000000,
+        "sequence_index": 6,
+        "signal_end_exclusive_timestamp_us": 40000000,
+        "signal_start_timestamp_us": 30000000
+      },
+      {
+        "example_id": "191a89efbad10a290925a1a6faf89a3258ecdd8f86b0e5f155f9bcbadd077053",
+        "prediction_timestamp_us": 45000000,
+        "sequence_index": 7,
+        "signal_end_exclusive_timestamp_us": 45000000,
+        "signal_start_timestamp_us": 35000000
+      },
+      {
+        "example_id": "cc9c79c2d6c7d1abe965c019ddc04f3372632010bd2c8f57c3c5a22305322da6",
+        "prediction_timestamp_us": 50000000,
+        "sequence_index": 8,
+        "signal_end_exclusive_timestamp_us": 50000000,
+        "signal_start_timestamp_us": 40000000
+      },
+      {
+        "example_id": "d39d8c9222e917a86001e779c48c5df12777c1719dc603b87663468361ee3121",
+        "prediction_timestamp_us": 55000000,
+        "sequence_index": 9,
+        "signal_end_exclusive_timestamp_us": 55000000,
+        "signal_start_timestamp_us": 45000000
+      },
+      {
+        "example_id": "eeab342b9408248b4eb490027ea388cb0a4636a30f0f5af349098156bfbe0320",
+        "prediction_timestamp_us": 60000000,
+        "sequence_index": 10,
+        "signal_end_exclusive_timestamp_us": 60000000,
+        "signal_start_timestamp_us": 50000000
+      },
+      {
+        "example_id": "2cd3fcf04fafb80bedfb90ce57050e64bf99ea83f537232b17327ec8a3fe5310",
+        "prediction_timestamp_us": 65000000,
+        "sequence_index": 11,
+        "signal_end_exclusive_timestamp_us": 65000000,
+        "signal_start_timestamp_us": 55000000
+      }
+    ]
+  },
+  "source_cache_npy_sha256": "59d4dc412c13cdad9654c5ae9a0980957dcb1a3a0b8f3d188c823547246e7cf0",
+  "source_cache_relative_path": "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/101_filtered_windows.npy",
+  "status": "PASS"
+}

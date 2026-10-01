@@ -1,0 +1,52 @@
+{
+  "cadence_us": 10000000,
+  "claim_boundary": "SIMULATION_ENGINEERING_ONLY -- not real wearable validation, not G16/G21 evidence",
+  "fixture_id": "WEARABLE_SIM_REPLAY_V1",
+  "labels_included": false,
+  "npz_sha256": "23a0d909b8b92e7f9603e634b23163eafd1ee51e535d167bbfff540c569caf5c",
+  "participant_id": "SIM_P000000",
+  "sample_dtype": "float32",
+  "sample_shape": [
+    3,
+    2500
+  ],
+  "session_id": "T034-SIM-SOURCE-SESSION",
+  "simulation_seed": 20340101,
+  "simulation_truth_used": false,
+  "source": "simulation.wearable (WEARABLE_SIM_V1 generator)",
+  "status": "PASS",
+  "window_count": 3,
+  "window_samples": 2500,
+  "windows": [
+    {
+      "ecg_quality": "VALID",
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 72.7,
+      "prediction_timestamp_us": 10000000,
+      "segment_kind": "NORMAL",
+      "sequence_index": 0,
+      "spo2_pct": 97.7,
+      "spo2_valid": true
+    },
+    {
+      "ecg_quality": "VALID",
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "prediction_timestamp_us": 20000000,
+      "segment_kind": "CONTEXT_UNAVAILABLE",
+      "sequence_index": 1,
+      "spo2_pct": null,
+      "spo2_valid": false
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 72.7,
+      "prediction_timestamp_us": 30000000,
+      "segment_kind": "UNUSABLE_ECG",
+      "sequence_index": 2,
+      "spo2_pct": 97.7,
+      "spo2_valid": true
+    }
+  ]
+}
