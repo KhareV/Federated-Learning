@@ -793,3 +793,40 @@ phase26:
 	$(MAKE) fl-iid-verify PYTHON=$(PYTHON)
 	$(MAKE) fl-noniid-verify PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check
+
+.PHONY: fedprox-zero-equivalence fedprox-preflight fedprox-candidates fedprox-select fedprox-compare fedprox-verify t027-evidence phase27
+
+fedprox-zero-equivalence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_fedprox_method_t027.py
+
+fedprox-preflight:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_fedprox_training_t027.py tests/test_validation_group_metrics_t027.py tests/test_fedprox_scope_t027.py
+
+fedprox-candidates:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.fedprox_runner label --mu 0.001 --candidate
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.fedprox_runner label --mu 0.01 --candidate
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.fedprox_runner label --mu 0.1 --candidate
+
+fedprox-select:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/select_fedprox_t027.py
+
+fedprox-compare:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.fedprox_runner iid --mu 0.01
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.fedprox_runner quantity --mu 0.01
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.fedprox_runner feature --mu 0.01
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.fedprox_runner combined --mu 0.01
+
+fedprox-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_t027.py
+
+t027-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t027_evidence.py
+
+phase27:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) t024-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-iid-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-noniid-verify PYTHON=$(PYTHON)
+	$(MAKE) fedprox-verify PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
