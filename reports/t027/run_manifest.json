@@ -1,0 +1,21 @@
+{
+  "CI": false,
+  "Flower": "1.39.0",
+  "PyTorch": "2.14.0",
+  "Python": "3.11.16",
+  "candidate_order": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "device": "cpu",
+  "post_selection_order": [
+    "iid",
+    "quantity",
+    "feature",
+    "combined"
+  ],
+  "selected_mu": 0.01,
+  "status": "PASS",
+  "task_id": "T027"
+}

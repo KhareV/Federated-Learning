@@ -1,0 +1,78 @@
+{
+  "checkpoint_prediction_replay": {
+    "combined": {
+      "AUPRC": 0.4456558087527336,
+      "replay_sha256": "9d811ad61b680087737d5bcb360ddef5fbd15384a5287b053e1f9945f272474a",
+      "status": "PASS",
+      "stored_sha256": "9d811ad61b680087737d5bcb360ddef5fbd15384a5287b053e1f9945f272474a"
+    },
+    "feature": {
+      "AUPRC": 0.49356504067844564,
+      "replay_sha256": "3e6ad8c784539ec66890846cbf96cceef18dca0e0cfb297f0d102220687cbfb1",
+      "status": "PASS",
+      "stored_sha256": "3e6ad8c784539ec66890846cbf96cceef18dca0e0cfb297f0d102220687cbfb1"
+    },
+    "iid": {
+      "AUPRC": 0.507035023889082,
+      "replay_sha256": "759edaf21bb6b0d953f86c9adcce7d1aa9fb8382f315ef4d96d75c0106837511",
+      "status": "PASS",
+      "stored_sha256": "759edaf21bb6b0d953f86c9adcce7d1aa9fb8382f315ef4d96d75c0106837511"
+    },
+    "label": {
+      "AUPRC": 0.5520990688759435,
+      "replay_sha256": "560905b7ece21c79c55fc111833e4ef9868839f343f3bb8d57700542e752741d",
+      "status": "PASS",
+      "stored_sha256": "560905b7ece21c79c55fc111833e4ef9868839f343f3bb8d57700542e752741d"
+    },
+    "quantity": {
+      "AUPRC": 0.502195767890695,
+      "replay_sha256": "5d43c60633436f1e1e3c08339fdcf7151cd815353534f256a1d4d7dc38ad9547",
+      "status": "PASS",
+      "stored_sha256": "5d43c60633436f1e1e3c08339fdcf7151cd815353534f256a1d4d7dc38ad9547"
+    }
+  },
+  "full_duplicate_50_round_runs": false,
+  "mu_candidate_round0_hashes": {
+    "0.001": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+    "0.01": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+    "0.1": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa"
+  },
+  "round1_replay": {
+    "combined": {
+      "replay": "0759d2335a84bcff7404ec40c5f40e5e9321a6d66878af6ace6f0c3162dae5c1",
+      "status": "PASS",
+      "stored": "0759d2335a84bcff7404ec40c5f40e5e9321a6d66878af6ace6f0c3162dae5c1"
+    },
+    "feature": {
+      "replay": "2787078135ccb5cae38252735e1fae742f3235d5e9cc14a705d0f5097b16e497",
+      "status": "PASS",
+      "stored": "2787078135ccb5cae38252735e1fae742f3235d5e9cc14a705d0f5097b16e497"
+    },
+    "iid": {
+      "replay": "2d4ea646364a24e255dcca26d6c8591fa07c73161490f2fb8b0482d4665c4507",
+      "status": "PASS",
+      "stored": "2d4ea646364a24e255dcca26d6c8591fa07c73161490f2fb8b0482d4665c4507"
+    },
+    "label": {
+      "replay": "9724450db056aa2c0d4616dfc2c774b55e469e91f63295f7569361238ed93d8f",
+      "status": "PASS",
+      "stored": "9724450db056aa2c0d4616dfc2c774b55e469e91f63295f7569361238ed93d8f"
+    },
+    "quantity": {
+      "replay": "c5fd687bdc0a867fd0d01b683f636ea79f55c225b02350b1333ffc98348e3d57",
+      "status": "PASS",
+      "stored": "c5fd687bdc0a867fd0d01b683f636ea79f55c225b02350b1333ffc98348e3d57"
+    }
+  },
+  "selected_comparison_round0_hashes": {
+    "combined": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+    "feature": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+    "iid": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+    "label": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+    "quantity": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa"
+  },
+  "selected_mu_identical": true,
+  "selection_run1_sha256": "62af2e364cda0a1ebc8934eda22a4579121235aaf04b8e2d4b97007b3a6cee17",
+  "selection_run2_sha256": "62af2e364cda0a1ebc8934eda22a4579121235aaf04b8e2d4b97007b3a6cee17",
+  "status": "PASS"
+}
