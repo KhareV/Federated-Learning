@@ -38,7 +38,8 @@ def test_t004_is_blocked_not_pass() -> None:
     assert rows["T025"]["status"] == "PASS"
     assert rows["T026"]["status"] == "PASS"
     assert rows["T027"]["status"] == "PASS"
-    assert rows["T028"]["status"] == "NOT_STARTED"
+    assert rows["T028"]["status"] == "PASS"
+    assert rows["T029"]["status"] == "NOT_STARTED"
 
 
 def test_g1_and_g16_are_not_passed() -> None:
@@ -49,9 +50,7 @@ def test_g1_and_g16_are_not_passed() -> None:
 
 
 def test_hardware_data_contract_freeze_remains_not_frozen() -> None:
-    freezes = {
-        row["freeze_id"]: row for row in read_csv(ROOT / "manifests/freeze_registry_v1.csv")
-    }
+    freezes = {row["freeze_id"]: row for row in read_csv(ROOT / "manifests/freeze_registry_v1.csv")}
     assert freezes["F02"]["current_status"] == "NOT_FROZEN"
 
 

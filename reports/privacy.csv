@@ -1,0 +1,2 @@
+experiment_id,clients,known_max_abs_error,model_max_abs_error,model_relative_l2_error,plain_clear_updates,protected_clear_updates,protected_trials_completed,protected_median_seconds,runtime_median_ratio,plain_application_payload_bytes,protected_application_payload_bytes,payload_ratio,status
+SECAGG_CONFIG_V1,8,5.849498385668284e-09,6.856939921205717e-06,2.182609683314038e-05,8,0,10,0.15309139599412447,68.18394304194204,502784,1384968,2.7545983961303464,PASS

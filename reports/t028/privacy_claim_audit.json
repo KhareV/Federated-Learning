@@ -1,0 +1,16 @@
+{
+  "no_dropout_injected_disclosed": true,
+  "single_host_simulation_disclosed": true,
+  "status": "PASS",
+  "supported_claim": "Flower SecAgg+ was integrated in an eight-client controlled simulation. Under the instrumented protected aggregation interface, no individual clear client model update was exposed to the application-level server aggregation point, while the resulting aggregate matched the unprotected reference within the predeclared quantization tolerance.",
+  "unsupported_claims_absent": [
+    "general privacy guarantee",
+    "differential privacy",
+    "attack resistance",
+    "HIPAA compliance",
+    "production security",
+    "hospital-grade privacy",
+    "anonymous clients",
+    "model-inversion protection"
+  ]
+}

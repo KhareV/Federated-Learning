@@ -830,3 +830,27 @@ phase27:
 	$(MAKE) fl-noniid-verify PYTHON=$(PYTHON)
 	$(MAKE) fedprox-verify PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check
+
+.PHONY: secagg-preflight secagg-known-vector secagg-protected-round secagg-overhead secagg-verify t028-evidence phase28
+
+secagg-preflight:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_secagg_t028.py preflight
+
+secagg-known-vector secagg-protected-round secagg-overhead:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_secagg_t028.py canonical
+
+t028-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t028_evidence.py
+
+secagg-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_t028.py
+
+phase28:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) t024-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-iid-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-noniid-verify PYTHON=$(PYTHON)
+	$(MAKE) fedprox-verify PYTHON=$(PYTHON)
+	$(MAKE) secagg-verify PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check

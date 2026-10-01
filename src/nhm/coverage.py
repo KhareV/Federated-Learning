@@ -9,19 +9,48 @@ from pathlib import Path
 from typing import Any
 
 TASK_STATUSES = {
-    "NOT_STARTED", "IN_PROGRESS", "PASS", "PASS_WITH_WARNINGS", "BLOCKED", "FAILED",
+    "NOT_STARTED",
+    "IN_PROGRESS",
+    "PASS",
+    "PASS_WITH_WARNINGS",
+    "BLOCKED",
+    "FAILED",
     "SUPERSEDED",
 }
 GATE_STATUSES = {"NOT_STARTED", "PASS", "FAIL", "BLOCKED", "SUPERSEDED"}
 REQUIREMENT_STATUSES = {
-    "PLANNED", "IMPLEMENTED", "VERIFIED", "BLOCKED", "OUT_OF_SCOPE_BY_SPEC", "SUPERSEDED",
+    "PLANNED",
+    "IMPLEMENTED",
+    "VERIFIED",
+    "BLOCKED",
+    "OUT_OF_SCOPE_BY_SPEC",
+    "SUPERSEDED",
 }
 REQUIREMENT_TYPES = {
-    "SCIENTIFIC_TARGET", "DATA_CONTRACT", "DATASET_POLICY", "LEAKAGE_INVARIANT",
-    "PREPROCESSING", "LABEL_POLICY", "SPLIT_POLICY", "MODEL", "CALIBRATION", "STATISTICS",
-    "MULTIMODAL", "ALERTING", "FEDERATED", "PRIVACY", "DEPLOYMENT", "WEARABLE", "API",
-    "DASHBOARD", "REPRODUCIBILITY", "GATE", "EXPERIMENT", "CLAIM_BOUNDARY",
-    "DEFINITION_OF_DONE", "RELEASE",
+    "SCIENTIFIC_TARGET",
+    "DATA_CONTRACT",
+    "DATASET_POLICY",
+    "LEAKAGE_INVARIANT",
+    "PREPROCESSING",
+    "LABEL_POLICY",
+    "SPLIT_POLICY",
+    "MODEL",
+    "CALIBRATION",
+    "STATISTICS",
+    "MULTIMODAL",
+    "ALERTING",
+    "FEDERATED",
+    "PRIVACY",
+    "DEPLOYMENT",
+    "WEARABLE",
+    "API",
+    "DASHBOARD",
+    "REPRODUCIBILITY",
+    "GATE",
+    "EXPERIMENT",
+    "CLAIM_BOUNDARY",
+    "DEFINITION_OF_DONE",
+    "RELEASE",
 }
 CLAIM_BOUNDARY_IDS = {f"CB{number:02d}" for number in range(1, 7)}
 SPEC_FILENAME = "NHM_ML_Revised_Locked_Specification_v2.2.docx"
@@ -33,7 +62,7 @@ PLAN_SHA256 = "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
 # lower this below T005): the check below only rejects a task ID *above* the threshold, so an
 # authorized hardware-independent task can still reach PASS while a numerically earlier,
 # explicitly blocked task has not.
-LATEST_APPROVED_TASK = "T027"
+LATEST_APPROVED_TASK = "T028"
 
 # Explicit allowlist rather than a numeric/highest-gate threshold: gates do not close in
 # strict numeric order once a hardware-independent track exists. G1 (hardware/data contract)
@@ -43,7 +72,19 @@ LATEST_APPROVED_TASK = "T027"
 # legitimately close ahead of it. Add a gate here only when its own documented pass criteria
 # are genuinely met.
 APPROVED_PASSED_GATES = {
-    "G0", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G10", "G11", "G12", "G13",
+    "G0",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "G10",
+    "G11",
+    "G12",
+    "G13",
+    "G14",
 }
 
 # Same allowlist principle for freeze status: a freeze may be marked FROZEN only once its
@@ -61,42 +102,101 @@ APPROVED_FROZEN_ARTIFACTS = {
     "F10",
     "F11",
     "F12",
+    "F13",
 }
 
 CANONICAL_GATE_TASK_OWNERS = {
-    "G0": "T001;T002", "G1": "T003;T004", "G2": "T006;T007",
-    "G3": "T006;T007", "G4": "T008", "G5": "T009;T010",
-    "G6": "T010;T011;T012;T013", "G7": "T014", "G8": "T015;T016",
-    "G9": "T021;T022;T023", "G10": "T017;T018", "G11": "T024;T025",
-    "G12": "T026", "G13": "T027", "G14": "T028", "G15": "T029",
-    "G16": "T030", "G17": "T031", "G18": "T032", "G19": "T033",
-    "G20": "T035", "G21": "T034", "G22": "T036",
+    "G0": "T001;T002",
+    "G1": "T003;T004",
+    "G2": "T006;T007",
+    "G3": "T006;T007",
+    "G4": "T008",
+    "G5": "T009;T010",
+    "G6": "T010;T011;T012;T013",
+    "G7": "T014",
+    "G8": "T015;T016",
+    "G9": "T021;T022;T023",
+    "G10": "T017;T018",
+    "G11": "T024;T025",
+    "G12": "T026",
+    "G13": "T027",
+    "G14": "T028",
+    "G15": "T029",
+    "G16": "T030",
+    "G17": "T031",
+    "G18": "T032",
+    "G19": "T033",
+    "G20": "T035",
+    "G21": "T034",
+    "G22": "T036",
 }
 CANONICAL_EXPERIMENT_TASK_OWNERS = {
-    "E01": "T014", "E02": "T015", "E03": "T017", "E04": "T018",
-    "E05": "T019", "E06": "T020", "E07": "T021", "E08": "T023",
-    "E09": "T025", "E10": "T026", "E11": "T026", "E12": "T026",
-    "E13": "T027", "E14": "T028", "E15": "T029", "E16": "T030",
+    "E01": "T014",
+    "E02": "T015",
+    "E03": "T017",
+    "E04": "T018",
+    "E05": "T019",
+    "E06": "T020",
+    "E07": "T021",
+    "E08": "T023",
+    "E09": "T025",
+    "E10": "T026",
+    "E11": "T026",
+    "E12": "T026",
+    "E13": "T027",
+    "E14": "T028",
+    "E15": "T029",
+    "E16": "T030",
 }
 CANONICAL_EVIDENCE_TASK_OWNERS = {
-    "EV001": "T001", "EV002": "T002", "EV003": "T002", "EV004": "T002",
-    "EV005": "T003;T004", "EV006": "T006;T007", "EV007": "T008",
-    "EV008": "T009;T010", "EV009": "T010;T011;T012;T013", "EV010": "T014",
-    "EV011": "T015;T016", "EV012": "T021", "EV013": "T022;T023",
-    "EV014": "T017", "EV015": "T018", "EV016": "T019", "EV017": "T020",
-    "EV018": "T031", "EV019": "T024;T025", "EV020": "T026", "EV021": "T027",
-    "EV022": "T028", "EV023": "T029", "EV024": "T030", "EV025": "T032",
-    "EV026": "T033", "EV027": "T034", "EV028": "T035", "EV029": "T036",
-    "EV030": "T002", "EV031": "T002",
+    "EV001": "T001",
+    "EV002": "T002",
+    "EV003": "T002",
+    "EV004": "T002",
+    "EV005": "T003;T004",
+    "EV006": "T006;T007",
+    "EV007": "T008",
+    "EV008": "T009;T010",
+    "EV009": "T010;T011;T012;T013",
+    "EV010": "T014",
+    "EV011": "T015;T016",
+    "EV012": "T021",
+    "EV013": "T022;T023",
+    "EV014": "T017",
+    "EV015": "T018",
+    "EV016": "T019",
+    "EV017": "T020",
+    "EV018": "T031",
+    "EV019": "T024;T025",
+    "EV020": "T026",
+    "EV021": "T027",
+    "EV022": "T028",
+    "EV023": "T029",
+    "EV024": "T030",
+    "EV025": "T032",
+    "EV026": "T033",
+    "EV027": "T034",
+    "EV028": "T035",
+    "EV029": "T036",
+    "EV030": "T002",
+    "EV031": "T002",
 }
 CANONICAL_FREEZE_INVALIDATIONS = {
-    "F01": "T002-T036", "F02": "T005;T030;T032;T034",
-    "F03": "T008-T031;T034-T036", "F04": "T009-T031;T034-T036",
-    "F05": "T010-T031;T034-T036", "F06": "T014-T035",
-    "F07": "T015;T016;T035;T036", "F08": "T017-T034;T036",
-    "F09": "T018-T034;T036", "F10": "T019-T036",
-    "F11": "T031;T035;T036", "F12": "T027;T028;T035;T036",
-    "F13": "T035;T036", "F14": "T030;T032-T036", "F15": "",
+    "F01": "T002-T036",
+    "F02": "T005;T030;T032;T034",
+    "F03": "T008-T031;T034-T036",
+    "F04": "T009-T031;T034-T036",
+    "F05": "T010-T031;T034-T036",
+    "F06": "T014-T035",
+    "F07": "T015;T016;T035;T036",
+    "F08": "T017-T034;T036",
+    "F09": "T018-T034;T036",
+    "F10": "T019-T036",
+    "F11": "T031;T035;T036",
+    "F12": "T027;T028;T035;T036",
+    "F13": "T035;T036",
+    "F14": "T030;T032-T036",
+    "F15": "",
 }
 
 
@@ -122,9 +222,7 @@ def expand_refs(value: str) -> list[str]:
             expanded.append(item)
             continue
         width = len(start)
-        expanded.extend(
-            f"{prefix}{number:0{width}d}" for number in range(int(start), int(end) + 1)
-        )
+        expanded.extend(f"{prefix}{number:0{width}d}" for number in range(int(start), int(end) + 1))
     return expanded
 
 
@@ -136,9 +234,16 @@ def classify_change(description: str) -> str:
     """Classify representative changes under the documented A/B/C policy."""
     normalized = description.casefold()
     scientific_markers = (
-        "mit-bih lead", "best-performing lead", "window to 8", "window length",
-        "aami_svf_map", "target change", "split policy", "threshold policy",
-        "preprocessing change", "federated partition",
+        "mit-bih lead",
+        "best-performing lead",
+        "window to 8",
+        "window length",
+        "aami_svf_map",
+        "target change",
+        "split policy",
+        "threshold policy",
+        "preprocessing change",
+        "federated partition",
     )
     if any(marker in normalized for marker in scientific_markers):
         return "C"
@@ -166,9 +271,7 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
     requirement_ids = [row["requirement_id"] for row in requirements]
     task_set, gate_set, requirement_set = set(task_ids), set(gate_ids), set(requirement_ids)
 
-    task_snapshot = json.loads(
-        (manifest_dir / "task_packets_v1.json").read_text(encoding="utf-8")
-    )
+    task_snapshot = json.loads((manifest_dir / "task_packets_v1.json").read_text(encoding="utf-8"))
     snapshot_tasks = {row["task_id"]: row for row in task_snapshot["packets"]}
     semantic_task_mapping_errors: list[str] = []
     if (
@@ -203,7 +306,8 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
     if invalid_task_statuses:
         errors.append(f"invalid task statuses: {invalid_task_statuses}")
     future_task_passes = [
-        row["task_id"] for row in tasks
+        row["task_id"]
+        for row in tasks
         if row["task_id"] > LATEST_APPROVED_TASK and row["status"] not in {"NOT_STARTED", "BLOCKED"}
     ]
     if future_task_passes:
@@ -228,9 +332,7 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
                     f"{row['task_id']}.{field}: expected {expected!r}, got {row.get(field)!r}"
                 )
     remaining_derived = [
-        row["task_id"]
-        for row in tasks
-        if "derived" in " ".join(row.values()).casefold()
+        row["task_id"] for row in tasks if "derived" in " ".join(row.values()).casefold()
     ]
     if remaining_derived:
         semantic_task_mapping_errors.append(
@@ -307,9 +409,17 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
     invalid_task_refs: list[str] = []
     invalid_gate_refs: list[str] = []
     required_fields = (
-        "source_document", "source_version", "source_section", "source_page_or_locator",
-        "implementation_tasks", "planned_files_or_modules", "validation_method",
-        "acceptance_criterion", "gate_ids", "evidence_artifacts", "change_class",
+        "source_document",
+        "source_version",
+        "source_section",
+        "source_page_or_locator",
+        "implementation_tasks",
+        "planned_files_or_modules",
+        "validation_method",
+        "acceptance_criterion",
+        "gate_ids",
+        "evidence_artifacts",
+        "change_class",
     )
     for row in mandatory:
         missing = [field for field in required_fields if not row[field].strip()]
@@ -388,17 +498,14 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
         errors.append(f"invalid evidence task references: {sorted(evidence_task_refs - task_set)}")
     if evidence_req_refs - requirement_set:
         invalid = sorted(evidence_req_refs - requirement_set)
-        errors.append(
-            f"invalid evidence requirement references: {invalid}"
-        )
+        errors.append(f"invalid evidence requirement references: {invalid}")
     if evidence_gate_refs - gate_set:
         errors.append(f"invalid evidence gate references: {sorted(evidence_gate_refs - gate_set)}")
     for row in evidence:
         expected = CANONICAL_EVIDENCE_TASK_OWNERS.get(row["evidence_id"])
         if expected != row["task_ids"]:
             semantic_task_mapping_errors.append(
-                f"{row['evidence_id']}.task_ids: expected {expected!r}, "
-                f"got {row['task_ids']!r}"
+                f"{row['evidence_id']}.task_ids: expected {expected!r}, got {row['task_ids']!r}"
             )
 
     invalid_freeze_task_refs: list[str] = []
@@ -476,19 +583,19 @@ def audit_registries(repository_root: str | Path) -> dict[str, Any]:
                 f"got {row['invalidated_tasks_if_changed']!r}"
             )
     premature_freezes = [
-        row["freeze_id"] for row in freezes
+        row["freeze_id"]
+        for row in freezes
         if row["freeze_id"] not in APPROVED_FROZEN_ARTIFACTS and row["current_status"] == "FROZEN"
     ]
     if premature_freezes:
         errors.append(f"future freezes falsely marked FROZEN: {premature_freezes}")
-    if len(controls) < 12 or not any(
-        row["status"] == "PERMANENTLY_PROHIBITED" for row in controls
-    ):
+    if len(controls) < 12 or not any(row["status"] == "PERMANENTLY_PROHIBITED" for row in controls):
         errors.append("do-not-start registry lacks required controls/prohibition")
 
     no_coverage_placeholders = re.compile(r"\b(?:TODO|TBD|implement eventually)\b", re.I)
     placeholder_rows = [
-        row["requirement_id"] for row in mandatory
+        row["requirement_id"]
+        for row in mandatory
         if any(no_coverage_placeholders.search(row[field] or "") for field in required_fields)
     ]
     if placeholder_rows:

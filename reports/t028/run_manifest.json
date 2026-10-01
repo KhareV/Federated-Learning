@@ -1,0 +1,12 @@
+{
+  "CI_executed": false,
+  "Flower": "1.39.0",
+  "PyTorch": "2.14.0",
+  "Python": "3.11.16",
+  "command": "PYTHONPATH=src:. .venv-t024/bin/python scripts/run_secagg_t028.py canonical",
+  "device": "cpu",
+  "experiment_id": "SECAGG_CONFIG_V1",
+  "method_lock_sha256": "ee6c89d383d133b4d2bdd3cb0f4feda20b46ebfa6e659cda77e7f71c36a9895e",
+  "status": "PASS",
+  "task": "T028"
+}

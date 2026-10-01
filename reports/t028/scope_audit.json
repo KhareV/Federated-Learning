@@ -1,0 +1,21 @@
+{
+  "FedProx": false,
+  "TLS_claim": false,
+  "algorithm": "FedAvg",
+  "authentication_claim": false,
+  "broad_privacy_claim": false,
+  "custom_crypto_substituted": false,
+  "differential_privacy": false,
+  "hardware": false,
+  "partition_access": {
+    "BIDMC": false,
+    "CALIBRATION": false,
+    "INCART": false,
+    "INTERNAL_TEST": false,
+    "NSTDB": false,
+    "TRAIN": true,
+    "VALIDATION": false,
+    "WEARABLE_V1": false
+  },
+  "status": "PASS"
+}

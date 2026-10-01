@@ -1,0 +1,24 @@
+{
+  "Flower_version": "1.39.0",
+  "base_condition": "FL_IID_V1",
+  "bound_artifacts": {
+    "artifacts/FL_CONFIG_V1.lock.json": "03e49b4949e900192da19d8aa0b0066281cb14ed8807d5bfdd8f196f13f3138c",
+    "artifacts/SECAGG_METHOD_V1.lock.json": "ee6c89d383d133b4d2bdd3cb0f4feda20b46ebfa6e659cda77e7f71c36a9895e",
+    "configs/secagg_v1.yaml": "c0724a9f5d4b8432b56eaf19fb9f7298af5ab4380051779a404623151077526d",
+    "manifests/clients/CLIENTS_IID_V1.csv": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+    "reports/privacy.json": "6cd3cfc052b12e465439c5a8d2f261fd69d1cc85fbe9bca8b991f01e82dfa9ca",
+    "reports/t028/aggregate_correctness.json": "01faa18091da4831a9895548d3ec3d022fe5122f0bd28bf2bf045c1f412f5f50",
+    "reports/t028/privacy_claim_audit.json": "1f9078b48d4ae46686f8d9534a96c1983cd237001c68c4e59b31e51b52eb07d9",
+    "reports/t028/server_visibility_audit.json": "f268f362478e3d8eed8f3423ff3d436a3ca215ed6eba303fe6e4249b92604e9f"
+  },
+  "byte_accounting": "FLOWER_APPLICATION_PAYLOAD_BYTES_V1",
+  "correctness_tolerance": {
+    "max_absolute": 0.0001,
+    "relative_L2": 0.0001
+  },
+  "freeze_id": "F13",
+  "lock_id": "SECAGG_CONFIG_V1",
+  "status": "FROZEN",
+  "supported_claim": "Flower SecAgg+ was integrated in an eight-client controlled simulation. Under the instrumented protected aggregation interface, no individual clear client model update was exposed to the application-level server aggregation point, while the resulting aggregate matched the unprotected reference within the predeclared quantization tolerance.",
+  "visibility_definition": "FLOWER_APPLICATION_SERVER_AGGREGATION_INTERFACE_V1"
+}

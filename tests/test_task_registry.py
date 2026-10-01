@@ -43,7 +43,8 @@ def test_task_registry_is_complete_and_future_work_is_not_started() -> None:
     assert rows[24]["status"] == "PASS"
     assert rows[25]["status"] == "PASS"
     assert rows[26]["status"] == "PASS"
-    assert all(row["status"] == "NOT_STARTED" for row in rows[27:])
+    assert rows[27]["status"] == "PASS"
+    assert all(row["status"] == "NOT_STARTED" for row in rows[28:])
 
 
 def test_blocked_hardware_task_does_not_prevent_later_task_pass() -> None:
@@ -60,9 +61,7 @@ def test_task_prerequisites_reference_known_tasks_or_gates() -> None:
     rows = read_csv(ROOT / "manifests/task_registry_v1.csv")
     allowed = {row["task_id"] for row in rows} | {f"G{number}" for number in range(23)}
     assert all(
-        reference in allowed
-        for row in rows
-        for reference in split_refs(row["prerequisites"])
+        reference in allowed for row in rows for reference in split_refs(row["prerequisites"])
     )
 
 
