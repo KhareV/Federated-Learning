@@ -1,0 +1,56 @@
+{
+  "all_outputs_finite": true,
+  "artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+  "batch_size": 1,
+  "canonical_run": {
+    "N": 1000,
+    "maximum_ms": 0.256875,
+    "mean_ms": 0.186185979,
+    "minimum_ms": 0.164208,
+    "p50_ms": 0.185167,
+    "p95_ms": 0.19984025,
+    "p99_ms": 0.21610300999999998,
+    "standard_deviation_ms": 0.008635803911840677,
+    "throughput_windows_per_second": 5370.9737187030605,
+    "total_timed_seconds": 0.186185979
+  },
+  "data_loading_included": false,
+  "decision_mismatches": 0,
+  "host_identity": {
+    "CPU_model": "Apple M5",
+    "NumPy": "2.4.6",
+    "OS": "Darwin",
+    "OS_version": "27.0.1",
+    "PyTorch": "2.14.0",
+    "Python": "3.11.16",
+    "architecture": "arm64",
+    "device": "CPU",
+    "hardware_required": false,
+    "logical_cores": 10,
+    "physical_cores": 10,
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "total_RAM_bytes": 17179869184
+  },
+  "measured_N": 1000,
+  "preprocessing_included": false,
+  "status": "PASS",
+  "threads": {
+    "interop": 1,
+    "intraop": 1
+  },
+  "timing_boundary": "Gateway runtime model plus CAL_V1 inference call",
+  "verification_repeat": {
+    "N": 1000,
+    "maximum_ms": 0.226041,
+    "mean_ms": 0.18471376700000003,
+    "minimum_ms": 0.165834,
+    "p50_ms": 0.184146,
+    "p95_ms": 0.1962205,
+    "p99_ms": 0.20633509,
+    "standard_deviation_ms": 0.006909262661763572,
+    "throughput_windows_per_second": 5413.781637618814,
+    "total_timed_seconds": 0.184713767
+  },
+  "warmup_count": 100
+}

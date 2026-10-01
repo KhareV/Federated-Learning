@@ -1,0 +1,19 @@
+{
+  "artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+  "baseline_process_RSS_bytes": 316719104,
+  "input_shape": [
+    1,
+    1,
+    2500
+  ],
+  "method": "fresh child process resource.getrusage(RUSAGE_SELF).ru_maxrss",
+  "peak_inference_RSS_bytes": 325844992,
+  "peak_minus_baseline_bytes": 9125888,
+  "peak_minus_pre_inference_bytes": 262144,
+  "platform_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+  "post_inference_RSS_bytes": 325844992,
+  "post_model_load_RSS_bytes": 319635456,
+  "pre_inference_RSS_bytes": 325582848,
+  "process_model": "isolated child process",
+  "status": "PASS"
+}

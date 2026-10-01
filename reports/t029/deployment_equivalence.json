@@ -1,0 +1,50 @@
+{
+  "access_role": "DEPLOYMENT_EQUIVALENCE_ONLY",
+  "artifact_changed_after_test": false,
+  "artifact_selected_before_test": true,
+  "baseline_metrics": {
+    "AUPRC": 0.9088954942908802,
+    "AUROC": 0.9036154157261423,
+    "patient_macro_F1": 0.5291135930158938,
+    "pooled_F1": 0.8237529691211402,
+    "precision": 0.9135932560590094,
+    "sensitivity": 0.75,
+    "specificity": 0.9180819180819181
+  },
+  "baseline_prediction_path": "reports/internal_test_predictions.csv",
+  "baseline_prediction_sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+  "decision_agreement_fraction": 1.0,
+  "deployment_artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+  "deployment_metrics": {
+    "AUPRC": 0.9088954942908802,
+    "AUROC": 0.9036154157261423,
+    "confusion_matrix": {
+      "fn": 289,
+      "fp": 82,
+      "tn": 919,
+      "tp": 867
+    },
+    "patient_macro_F1": 0.5291135930158938,
+    "pooled_F1": 0.8237529691211402,
+    "precision": 0.9135932560590094,
+    "sensitivity": 0.75,
+    "specificity": 0.9180819180819181
+  },
+  "duplicates": 0,
+  "extra": 0,
+  "maximum_absolute_raw_logit_delta": 9.5367431640625e-07,
+  "maximum_calibrated_probability_delta": 6.833583107157537e-07,
+  "mean_absolute_raw_logit_delta": 1.8279828514608454e-07,
+  "mean_calibrated_probability_delta": 6.019381170232889e-08,
+  "metric_absolute_deltas": {
+    "AUPRC": 0.0,
+    "AUROC": 0.0,
+    "patient_macro_F1": 0.0,
+    "pooled_F1": 0.0
+  },
+  "missing": 0,
+  "rows_compared": 2157,
+  "rows_expected": 2157,
+  "status": "PASS",
+  "threshold_decision_disagreements": 0
+}
