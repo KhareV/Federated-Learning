@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import csv
+import json
+from pathlib import Path
+
 import pytest
 
 from evaluation.error_analysis import (
@@ -11,6 +15,8 @@ from evaluation.error_analysis import (
     select_explainability_cases,
     threshold_region,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _row(identifier: str, label: int, prediction: int, probability: float) -> dict[str, object]:
@@ -68,3 +74,38 @@ def test_single_class_metrics_are_explicitly_undefined() -> None:
     result = binary_metrics([_row("a", 1, 1, 0.9), _row("b", 1, 0, 0.4)])
     assert result["AUPRC"] == "UNDEFINED_SINGLE_CLASS"
     assert result["AUROC"] == "UNDEFINED_SINGLE_CLASS"
+
+
+def test_canonical_error_slices_and_hardware_deferral() -> None:
+    required = (
+        "patient_slice.csv",
+        "class_composition_slice.csv",
+        "quality_slice.csv",
+        "noise_snr_slice.csv",
+        "heart_rate_slice.csv",
+        "dataset_slice.csv",
+        "threshold_region_slice.csv",
+    )
+    assert all((ROOT / "reports/t031" / name).exists() for name in required)
+    with (ROOT / "reports/t031/heart_rate_slice.csv").open(newline="") as handle:
+        heart = list(csv.DictReader(handle))
+    assert {row["HR_bin"] for row in heart if row["dataset"] == "MITDB_INTERNAL_TEST"} == {
+        "HR_BIN_1",
+        "HR_BIN_2",
+        "HR_BIN_3",
+        "HR_BIN_4",
+    }
+    wearable = json.loads((ROOT / "reports/t031/wearable_slice_status.json").read_text())
+    assert wearable["status"] == "DEFERRED_T030_HARDWARE"
+    assert not wearable["WEARABLE_SIM_substituted"]
+
+
+def test_method_lock_detects_bound_artifact_tamper(tmp_path: Path) -> None:
+    from nhm.hashing import hash_file
+
+    source = tmp_path / "method.py"
+    source.write_text("steps = 64\n")
+    expected = hash_file(source)
+    assert hash_file(source) == expected
+    source.write_text("steps = 32\n")
+    assert hash_file(source) != expected

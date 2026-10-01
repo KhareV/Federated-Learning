@@ -1,0 +1,11 @@
+{
+  "CI_executed": false,
+  "PyTorch": "2.14.0",
+  "Python": "3.11.16",
+  "command": "PYTHONPATH=src:. .venv-t024/bin/python scripts/run_t031.py",
+  "device": "CPU",
+  "method": "EXPLAINABILITY_V1_AND_ERROR_ANALYSIS_V1",
+  "method_lock_sha256": "c5ec8bbfa7329a72f9cfad066837bc6a0740019d0141a78a70633a1458403a4a",
+  "status": "PASS",
+  "task": "T031"
+}

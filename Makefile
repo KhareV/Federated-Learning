@@ -879,3 +879,26 @@ phase29:
 	$(MAKE) secagg-verify PYTHON=$(PYTHON)
 	$(MAKE) gateway-verify PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check
+
+.PHONY: explainability-preflight explainability-cases explainability-run error-analysis explainability-verify t031-evidence phase31
+
+explainability-preflight explainability-cases:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/prepare_t031_protocol.py
+
+explainability-run error-analysis:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_t031.py
+
+t031-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t031_evidence.py
+
+explainability-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_t031.py
+
+phase31:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) gateway-verify PYTHON=$(PYTHON)
+	$(MAKE) model-v1-verify verify-cal-v1 internal-test-verify PYTHON=$(PYTHON)
+	$(MAKE) nstdb-verify external-incart-verify PYTHON=$(PYTHON)
+	$(MAKE) explainability-verify PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check
