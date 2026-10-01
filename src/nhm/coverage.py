@@ -62,7 +62,7 @@ PLAN_SHA256 = "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
 # lower this below T005): the check below only rejects a task ID *above* the threshold, so an
 # authorized hardware-independent task can still reach PASS while a numerically earlier,
 # explicitly blocked task has not.
-LATEST_APPROVED_TASK = "T029"
+LATEST_APPROVED_TASK = "T031"
 
 # Explicit allowlist rather than a numeric/highest-gate threshold: gates do not close in
 # strict numeric order once a hardware-independent track exists. G1 (hardware/data contract)
@@ -86,6 +86,7 @@ APPROVED_PASSED_GATES = {
     "G13",
     "G14",
     "G15",
+    "G17",
 }
 
 # Same allowlist principle for freeze status: a freeze may be marked FROZEN only once its

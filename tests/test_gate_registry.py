@@ -31,6 +31,7 @@ def test_gate_registry_is_exact_and_only_approved_gates_are_passed() -> None:
         "G13",
         "G14",
         "G15",
+        "G17",
     }
     not_started = {row["gate_id"] for row in rows if row["gate_id"] not in passed}
     assert all(row["status"] == "NOT_STARTED" for row in rows if row["gate_id"] in not_started)
