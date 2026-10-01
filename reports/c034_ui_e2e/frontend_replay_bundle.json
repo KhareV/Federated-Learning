@@ -1,0 +1,41 @@
+{
+  "contains_labels": false,
+  "contains_prediction_outcome": false,
+  "contains_simulation_truth": false,
+  "generated_by": "scripts/build_frontend_replay_bundle_c034.py",
+  "generated_deterministically": true,
+  "path": "frontend/static/replay/PUBLIC_ECG_REPLAY_V1.json",
+  "samples_per_event": 2500,
+  "sha256": "6b7ca9d7dfd23c7814ebce4da4a1ac97b1c04c2b3111fff3acdc3c73c7975cb3",
+  "source_npz_sha256": "d5d1f6516473feb68f9bee2768a3b008ec0ef2da5ba412fb3c55d3d049699340",
+  "status": "PASS",
+  "timestamps_ordered": [
+    10000000,
+    15000000,
+    20000000,
+    25000000,
+    30000000,
+    35000000,
+    40000000,
+    45000000,
+    50000000,
+    55000000,
+    60000000,
+    65000000
+  ],
+  "window_count": 12,
+  "window_ids_ordered": [
+    "7e85d9ad2d63d428ec248251a14c6475ae76abcd0c3826e4d935e2e29cbee559",
+    "642e69e0b75144ce7982e6c68ce1923b8ddd7dae20e77ce8041e07a073bbfa2c",
+    "76646a2e816ac5bac994e9ae0dbac0da8b496f95755e1afdd19ac5183ec1bf7c",
+    "669c051ef288d23bf4d2b6f0e2760a06f8577dd1d843d22c5f93e1cafd54f100",
+    "562f170f3f29aa862de40499f66713c676217950ae263a8dbf3d3594e3f14d84",
+    "2be142592e8d65a36cd7b43ea8828e811bcf1d32accbc1d0f64802db8acc7ffe",
+    "a598f0b8ee4ed85aabb7c8646fa5f314de194a975cab3db11da92a2d460cbdf0",
+    "191a89efbad10a290925a1a6faf89a3258ecdd8f86b0e5f155f9bcbadd077053",
+    "cc9c79c2d6c7d1abe965c019ddc04f3372632010bd2c8f57c3c5a22305322da6",
+    "d39d8c9222e917a86001e779c48c5df12777c1719dc603b87663468361ee3121",
+    "eeab342b9408248b4eb490027ea388cb0a4636a30f0f5af349098156bfbe0320",
+    "2cd3fcf04fafb80bedfb90ce57050e64bf99ea83f537232b17327ec8a3fe5310"
+  ]
+}

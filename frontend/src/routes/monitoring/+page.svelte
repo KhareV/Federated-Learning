@@ -4,6 +4,7 @@
 	// calibration, threshold comparison, K=2/M=2 debouncing, cooldown, or fusion logic is
 	// reimplemented here -- every monitoring_state and probability value comes directly from
 	// the API response (see $lib/dashboard/session.svelte.ts and state-presentation.ts).
+	import { page } from '$app/state';
 	import Panel from '$lib/components/dashboard/Panel.svelte';
 	import MetricTile from '$lib/components/dashboard/MetricTile.svelte';
 	import MultiLine from '$lib/components/dashboard/MultiLine.svelte';
@@ -12,6 +13,7 @@
 	import { createDashboardSession } from '$lib/dashboard/session.svelte';
 	import { STATE_PRESENTATION, httpErrorPresentation } from '$lib/dashboard/state-presentation';
 	import { flatDemoWindow } from '$lib/dashboard/demo-window';
+	import { loadReplayBundle, runCanonicalRecordedReplay, type ReplayBundleEvent } from '$lib/dashboard/replay';
 
 	function newSessionId(): string {
 		return `nhm-dashboard-${Math.random().toString(36).slice(2, 10)}`;
@@ -21,8 +23,48 @@
 	let sending = $state(false);
 	let nextTimestampUs = $state(Date.now() * 1000);
 
+	// RECORDED REPLAY mode: /monitoring?mode=replay&replay=PUBLIC_ECG_REPLAY_V1[&speed=1]
+	// This is a recorded public-ECG stream (never live hardware, never a real-time feed), fed through
+	// the exact same real typed API client and dashboard session as the manual demo control
+	// above -- see $lib/dashboard/replay.ts::runCanonicalRecordedReplay. speed=1 paces at the
+	// recorded 5-second cadence for a human demo; any other value (default) replays immediately
+	// for fast/test use. Pacing is presentation-only and never alters request timestamps.
+	const replayMode = $derived(page.url.searchParams.get('mode') === 'replay');
+	const replayId = $derived(page.url.searchParams.get('replay') ?? 'PUBLIC_ECG_REPLAY_V1');
+	const replaySpeed = $derived(page.url.searchParams.get('speed') === '1' ? 5000 : 0);
+	let replayRunning = $state(false);
+	let replayCompletedCount = $state(0);
+	let replayTotalCount = $state(0);
+	let replayError = $state('');
+
+	async function startRecordedReplay() {
+		if (replayRunning) return;
+		replayRunning = true;
+		replayError = '';
+		replayCompletedCount = 0;
+		session = createDashboardSession(`nhm-replay-${replayId}-${Math.random().toString(36).slice(2, 8)}`);
+		try {
+			const bundle = await loadReplayBundle(replayId);
+			replayTotalCount = bundle.events.length;
+			await runCanonicalRecordedReplay(session, bundle, {
+				stepDelayMs: replaySpeed,
+				onEvent: (_event: ReplayBundleEvent, index: number) => {
+					replayCompletedCount = index + 1;
+				}
+			});
+		} catch (cause) {
+			replayError = cause instanceof Error ? cause.message : 'Recorded replay failed.';
+		} finally {
+			replayRunning = false;
+		}
+	}
+
+	$effect(() => {
+		if (replayMode) void startRecordedReplay();
+	});
+
 	async function sendNextWindow() {
-		if (sending) return;
+		if (sending || replayMode) return;
 		sending = true;
 		const timestamp_us = nextTimestampUs;
 		nextTimestampUs += 5_000_000; // matches configs/alert_policy_v1.yaml window_cadence_seconds
@@ -97,16 +139,26 @@
 			<p class="lede">This dashboard presents the frozen NHM research-runtime API (POST /v1/infer-window): signal quality, debounced monitoring state, technical/calibration provenance, and a clearly labeled research-only probability history. It is not a diagnosis, not a medical device, and not validated on real wearable hardware.</p>
 		</div>
 		<div class="session-box">
-			<span>SESSION</span>
+			{#if replayMode}
+				<span class="replay-badge">RECORDED REPLAY -- {replayId}</span>
+			{:else}
+				<span>SESSION</span>
+			{/if}
 			<strong>{session.sessionId}</strong>
-			<span>WINDOWS SENT: {session.requestCount}</span>
-			<div class="session-actions">
-				<button type="button" onclick={sendNextWindow} disabled={sending}>
-					{sending ? 'SENDING…' : 'SEND NEXT RESEARCH WINDOW'}
-				</button>
-				<button type="button" class="ghost" onclick={startNewSession}>NEW SESSION</button>
-			</div>
-			<small>No live wearable hardware is connected (WEARABLE_V1 pending). Each window is a deterministic placeholder sent to the real API -- see $lib/dashboard/demo-window.ts. T034 will provide replayed signal streams through this same interface.</small>
+			{#if replayMode}
+				<span>WINDOWS: {replayCompletedCount} / {replayTotalCount || '--'}</span>
+				{#if replayError}<span class="replay-error">{replayError}</span>{/if}
+				<small>Recorded public-ECG stream (MIT-BIH TRAIN, PUBLIC_ECG_REPLAY_V1) replayed through the real typed API client and this same dashboard session -- not live hardware, not a real-time feed. Every monitoring_state/probability shown is the real API response for that recorded window, not a prerecorded outcome.</small>
+			{:else}
+				<span>WINDOWS SENT: {session.requestCount}</span>
+				<div class="session-actions">
+					<button type="button" onclick={sendNextWindow} disabled={sending}>
+						{sending ? 'SENDING…' : 'SEND NEXT RESEARCH WINDOW'}
+					</button>
+					<button type="button" class="ghost" onclick={startNewSession}>NEW SESSION</button>
+				</div>
+				<small>No live wearable hardware is connected (WEARABLE_V1 pending). Each window is a deterministic placeholder sent to the real API -- see $lib/dashboard/demo-window.ts, or <a href="/monitoring?mode=replay&replay=PUBLIC_ECG_REPLAY_V1">play back a recorded public-ECG stream</a>.</small>
+			{/if}
 		</div>
 	</header>
 
@@ -216,6 +268,9 @@
 	.session-actions button.ghost { background: transparent; color: #2bb8b0; }
 	.session-actions button:disabled { opacity: .55; cursor: wait; }
 	.session-box small { margin-top: 8px; color: #53647b; font-size: 10px; line-height: 1.6; }
+	.session-box small a { color: #2bb8b0; }
+	.replay-badge { color: #0ea5e9 !important; }
+	.replay-error { color: #fb7185 !important; }
 	.panel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(148,163,184,.14); margin-bottom: 1px; }
 	.panel-note { color: #94a3b8; font-size: 12px; line-height: 1.6; margin: 0 0 12px; }
 	.panel-footnote { margin-top: 12px; color: #64748b; font: 10px 'JetBrains Mono', monospace; letter-spacing: .04em; line-height: 1.6; }

@@ -163,4 +163,6 @@ export function createNhmApiClient(options: NhmApiClientOptions = {}) {
 	return { inferWindow };
 }
 
+export type NhmApiClient = ReturnType<typeof createNhmApiClient>;
+
 export const nhmApi = createNhmApiClient();

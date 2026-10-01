@@ -1,0 +1,43 @@
+{
+  "source_cache_representation": {
+    "path": "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/TRAIN/101_filtered_windows.npy",
+    "description": "Causally filtered (baseline-wander/bandpass + resample), per-window population statistics are NOT unit-variance: empirically mean approx 0.0006, std approx 0.193 on the first selected window.",
+    "empirical_check_window_0": {
+      "example_id": "7e85d9ad2d63d428ec248251a14c6475ae76abcd0c3826e4d935e2e29cbee559",
+      "mean": 0.0005623507587055834,
+      "std": 0.19290981926766917
+    }
+  },
+  "existing_t034_backend_request_path": {
+    "scripts": ["scripts/run_replay.py", "scripts/build_replay_fixture_t034.py"],
+    "representation_sent_as_ecg_samples": "The raw filtered (unnormalized) cache values, cast to float32, with NO call to preprocessing.windowing.normalize_window_zscore anywhere in either script.",
+    "verified_by": "grep -n normalize scripts/run_replay.py scripts/build_replay_fixture_t034.py -> no matches"
+  },
+  "other_codebase_consumers_of_the_same_cache": {
+    "scripts": [
+      "scripts/run_gateway_t029.py",
+      "scripts/generate_model_v1_test_vector_t016.py",
+      "scripts/run_t031.py",
+      "training/train_central.py"
+    ],
+    "representation": "All of these explicitly call preprocessing.windowing.normalize_window_zscore(row, epsilon=NORMALIZATION_EPSILON) on each cached window before use.",
+    "note": "This means the existing T034 V1 backend request path (run_replay.py) sends a DIFFERENT numeric representation (unnormalized) than T029/T016/T031 consumers of the identical cache (normalized)."
+  },
+  "numeric_comparison_one_event": {
+    "example_id": "7e85d9ad2d63d428ec248251a14c6475ae76abcd0c3826e4d935e2e29cbee559",
+    "unnormalized_raw_probability": 0.5298739917280197,
+    "unnormalized_calibrated_probability": 0.6417566361581147,
+    "normalized_raw_probability": 0.13332726840190287,
+    "normalized_calibrated_probability": 0.0001092762315932129,
+    "materially_different": true
+  },
+  "normalization_owner_in_locked_contract": "api/schemas.py::ECGWindow docstring states the field is already a GATEWAY_MODEL_INPUT_V1-ready window -- i.e. the CLIENT (request constructor) owns normalization; api/runtime.py and deployment/runtime.py apply no normalization server-side.",
+  "scope_decision_for_this_checkpoint": {
+    "decision": "C034-UI-E2E is scoped to UI wiring/waveform-plumbing parity with the EXISTING, already-frozen T034 V1 backend request path -- it is explicitly NOT scoped to change MODEL_V1/PREPROC_V1 input-form science (Section 4/20/36 of the C034 task instructions forbid changing science and require STOPPING rather than silently updating the expected semantic digest on drift).",
+    "action_taken": "The new frontend replay bundle is built from the EXACT SAME tests/fixtures/e2e/PUBLIC_ECG_REPLAY_V1.npz samples the existing backend request path already uses, byte-for-byte -- no normalization is added or removed relative to the existing T034 V1 fixture. This guarantees 'exact agreement' between the frontend bundle and the existing backend request path, and preserves the frozen public_semantic_digest (e3f8607617d3fc7cce7be58752340047d120815653cce36acfac5e8b8bc099b3) unchanged.",
+    "double_normalization_check": "Not applicable: this checkpoint applies normalize_window_zscore ZERO times (same as the existing backend path), not twice.",
+    "finding_flagged_for_future_review": "Whether PUBLIC_ECG_REPLAY_V1's unnormalized representation is itself a latent T034 V1 defect (inconsistent with the T029/T016/T031 consumption convention for the same underlying cache) is a SEPARATE, out-of-scope question for a future corrective checkpoint or explicit user decision -- it is not resolved, hidden, or silently fixed here."
+  },
+  "status": "PASS",
+  "result": "NO_CHANGE_TO_EXISTING_REPRESENTATION -- EXACT AGREEMENT WITH EXISTING BACKEND PATH PRESERVED; NORMALIZATION DISCREPANCY DOCUMENTED, NOT SILENTLY CORRECTED"
+}

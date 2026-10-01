@@ -5,8 +5,15 @@ import { defineConfig } from 'vitest/config';
 // Reuses the project's own SvelteKit/Vite plugin pipeline (for $lib resolution AND so Svelte 5
 // rune syntax in .svelte.ts modules like dashboard/session.svelte.ts compiles correctly)
 // rather than hand-rolling a separate alias/transform setup.
+//
+// C034: resolve.conditions: ['browser'] makes `svelte` resolve to its CLIENT build under
+// Vitest (default is the server/SSR build, which has no `mount()`) -- required only for the
+// one rendered-component test (page.render.test.ts, environment: jsdom via an inline
+// `// @vitest-environment jsdom` directive); it does not affect the actual app build, which
+// uses the separate top-level vite.config.ts.
 export default defineConfig({
 	plugins: [sveltekit()],
+	resolve: { conditions: ['browser'] },
 	test: {
 		environment: 'node',
 		include: ['src/**/__tests__/**/*.test.ts']
