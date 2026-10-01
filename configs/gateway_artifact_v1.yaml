@@ -1,0 +1,54 @@
+config_id: GATEWAY_ARTIFACT_V1
+deployment_artifact_id: GATEWAY_FP32_V1
+target: LOCAL_CPU_GATEWAY_V1
+source_model:
+  id: MODEL_V1
+  sha256: 021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe
+preprocessing:
+  id: PREPROC_V1
+  lock_sha256: 181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c
+calibration:
+  id: CAL_V1
+  sha256: d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b
+input_contract:
+  id: GATEWAY_MODEL_INPUT_V1
+  dtype: float32
+  shape: [1, 1, 2500]
+  sample_rate_hz: 250
+  duration_seconds: 10
+  preprocessing_location: upstream
+format:
+  preference_order: [torch.jit.script, torch.jit.trace, PYTORCH_EAGER_GATEWAY_V1]
+  selected: TORCHSCRIPT_SCRIPT
+  FP32: true
+execution:
+  device: cpu
+  batch_size: 1
+  eval_mode: true
+  inference_mode: true
+  intraop_threads: 1
+  interop_threads: 1
+build_command: PYTHONPATH=src:. .venv-t024/bin/python scripts/export_gateway_t029.py
+development_equivalence:
+  inputs: [F08_TEST_VECTOR, DETERMINISTIC_SYNTHETIC_FIXTURES]
+  maximum_absolute_raw_logit_delta: 0.00001
+internal_test_equivalence:
+  access_role: DEPLOYMENT_EQUIVALENCE_ONLY
+  maximum_absolute_raw_logit_delta: 0.00001
+  maximum_absolute_AUPRC_delta: 0.000001
+  maximum_absolute_pooled_F1_delta: 0.000001
+  maximum_absolute_patient_macro_F1_delta: 0.000001
+  required_decision_agreement: 1.0
+benchmark:
+  boundary: gateway model plus CAL_V1 inference call only
+  warmup_count: 100
+  measured_window_count: 1000
+  selection: first 1000 INTERNAL_TEST example IDs in frozen prediction order
+  preload_inputs: true
+  clock: time.perf_counter_ns
+  repeat_count: 2
+memory:
+  process: isolated child
+  source: resource.getrusage
+INT8_STATUS: OPTIONAL_NOT_ATTEMPTED
+INT8_reason: no prevalidated reliable conversion path is required for the mandatory FP32 gateway
