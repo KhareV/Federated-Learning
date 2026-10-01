@@ -1,0 +1,23 @@
+{
+  "client_weights": {
+    "SITE_00": 1436,
+    "SITE_01": 1435,
+    "SITE_02": 1391,
+    "SITE_03": 1080,
+    "SITE_04": 1080,
+    "SITE_05": 1080,
+    "SITE_06": 1080,
+    "SITE_07": 1078
+  },
+  "configured_clipping_range": [
+    -8.0,
+    8.0
+  ],
+  "coordinates_at_or_beyond_boundary": 0,
+  "floating_transport_maximum": 1.2860623598098755,
+  "floating_transport_minimum": -0.5588581562042236,
+  "max_weight": 4096.0,
+  "maximum_client_weight": 1436,
+  "status": "PASS",
+  "weight_clipping_possible": false
+}

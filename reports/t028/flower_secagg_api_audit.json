@@ -1,0 +1,15 @@
+{
+  "ClientApp_available": true,
+  "Flower_version": "1.39.0",
+  "SecAggPlusWorkflow_import": "flwr.server.workflow.SecAggPlusWorkflow",
+  "SecAggPlusWorkflow_signature": "(num_shares: int | float, reconstruction_threshold: int | float, *, max_weight: float = 1000.0, clipping_range: float = 8.0, quantization_range: int = 4194304, modulus_range: int = 4294967296, timeout: float | None = None) -> None",
+  "SecAggPlusWorkflow_source": "/Users/Home/Downloads/miniproject/.venv-t024/lib/python3.11/site-packages/flwr/server/workflow/secure_aggregation/secaggplus_workflow.py",
+  "ServerApp_available": true,
+  "installed_signatures_verified": true,
+  "legacy_API_used": false,
+  "package_source_modified": false,
+  "secaggplus_mod_import": "flwr.client.mod.secaggplus_mod",
+  "secaggplus_mod_signature": "(msg: flwr.app.message.message.Message, ctxt: flwr.app.message.context.Context, call_next: collections.abc.Callable[[flwr.app.message.message.Message, flwr.app.message.context.Context], flwr.app.message.message.Message]) -> flwr.app.message.message.Message",
+  "secaggplus_mod_source": "/Users/Home/Downloads/miniproject/.venv-t024/lib/python3.11/site-packages/flwr/client/mod/secure_aggregation/secaggplus_mod.py",
+  "status": "PASS"
+}

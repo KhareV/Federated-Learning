@@ -1,0 +1,41 @@
+{
+  "Flower_version": "1.39.0",
+  "base_condition": "FL_IID_V1",
+  "bound_artifacts": {
+    "artifacts/FL_CONFIG_V1.lock.json": "03e49b4949e900192da19d8aa0b0066281cb14ed8807d5bfdd8f196f13f3138c",
+    "configs/fl_state_transport_v1.yaml": "125449202aba091582add6641b60d7bc2311206e237039cf8f2ba0f5933cdbdc",
+    "configs/secagg_v1.yaml": "c0724a9f5d4b8432b56eaf19fb9f7298af5ab4380051779a404623151077526d",
+    "docs/privacy_threat_model.md": "4332d69bf0f5c094c9ef84a5c5e431997dda436d5b740c9481f5b03c95c3d905",
+    "federated/aggregation.py": "902a72b976399afe85a512ecb83897a80a483e6b541d5dbc544acbe654660920",
+    "manifests/clients/CLIENTS_IID_V1.csv": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+    "privacy/accounting.py": "e48508dc8d8ed53e047a810bc1853b3a9495929ff3071a167612fb64a04343dd",
+    "privacy/secagg_app.py": "96e45efccb200b3c0b526ebbf11a1ea326f69e40408687f10917ed4735fee6d2",
+    "privacy/server_visibility.py": "15b534fa4a85c511a303a3f78be287869a8d7ae8828791c5d5849117fc37a51d",
+    "reports/t028/clipping_preflight.json": "f355848eb531413ab7e826b6ca87676ac853ae44f0224e85e3db790265f772e2",
+    "reports/t028/flower_secagg_api_audit.json": "ad03461fd0f0c62c6d8341f76ad0660ef9c0d7bdc6f1b3f29f89498c46c1f9a7"
+  },
+  "byte_accounting": "FLOWER_APPLICATION_PAYLOAD_BYTES_V1",
+  "claim_boundary": "narrow application-interface observation only",
+  "configuration": {
+    "clients": 8,
+    "clipping_range": 8.0,
+    "injected_dropout": 0,
+    "max_weight": 4096.0,
+    "modulus_range": 4294967296,
+    "num_shares": 5,
+    "quantization_range": 4194304,
+    "reconstruction_threshold": 4
+  },
+  "correctness_tolerance": {
+    "max_absolute": 0.0001,
+    "relative_L2": 0.0001
+  },
+  "lock_id": "SECAGG_METHOD_V1",
+  "protocol": "Flower SecAggPlusWorkflow + secaggplus_mod",
+  "runtime_trials": {
+    "measured": 10,
+    "warmup": 1
+  },
+  "status": "FROZEN_PRE_RESULT_METHOD",
+  "visibility_boundary": "FLOWER_APPLICATION_SERVER_AGGREGATION_INTERFACE_V1"
+}
