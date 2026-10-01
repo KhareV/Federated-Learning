@@ -1,0 +1,21 @@
+method_id: FEDPROX_METHOD_V1
+task_id: T027
+selection_semantics: FEDPROX_SELECTION_SEMANTICS_V1
+candidate_tuning_condition: FL_LABEL_SKEW_V1
+mu_candidates: [0.001, 0.01, 0.1]
+mu_zero_candidate: false
+objective: BCEWithLogitsLoss + mu/2 * sum_trainable_parameters_squared_distance_from_round_start_global
+proximal_scope: trainable_parameters_only
+f12_lock: artifacts/FL_CONFIG_V1.lock.json
+initialization: {id: FL_INIT_V1, seed: 20260927}
+shuffle_seed_namespace: FL_IID_V1
+training: {clients: 8, clients_per_round: 8, rounds: 50, local_epochs: 1, batch_size: 64, drop_last: false, device: cpu}
+optimizer: {implementation: AdamW, learning_rate: 0.001, weight_decay: 0.0001, state_policy: RESET_EACH_CLIENT_EACH_ROUND, scheduler: NONE}
+loss: {base: BCEWithLogitsLoss, pos_weight: 1.7157717177396683, pos_weight_source: GLOBAL_TRAIN_NEG_OVER_POS}
+aggregation: SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1
+transport: FL_STATE_TRANSPORT_V1
+validation: {partition: VALIDATION, calibration: NONE, probability: sigmoid(raw_logit), threshold: 0.5}
+checkpoint: {metric: validation_AUPRC, eligible_rounds: "1-50", tie_policy: EARLIEST_EXACT_MAXIMUM}
+access: {TRAIN: TRAINING_ONLY, VALIDATION: DEVELOPMENT_EVALUATION_ONLY, CALIBRATION: FORBIDDEN, INTERNAL_TEST: FORBIDDEN, INCART: FORBIDDEN, BIDMC: FORBIDDEN, WEARABLE_V1: FORBIDDEN}
+secure_aggregation: false
+differential_privacy: false

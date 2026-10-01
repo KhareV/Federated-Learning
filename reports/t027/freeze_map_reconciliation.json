@@ -1,0 +1,17 @@
+{
+  "FL_config_freeze": {
+    "id": "F12",
+    "status": "FROZEN",
+    "version": "FL_CONFIG_V1"
+  },
+  "canonical_FedProx_Fxx_row_exists": false,
+  "existing_Fxx_repurposed": false,
+  "privacy_freeze": {
+    "id": "F13",
+    "status": "NOT_FROZEN",
+    "version": "SECAGG_CONFIG_V1"
+  },
+  "repository_canonical_numbering_differs": true,
+  "selected_mu_component_lock": "FEDPROX_MU_V1",
+  "source_conceptual_FedProx_freeze_exists": true
+}

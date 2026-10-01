@@ -1,0 +1,17 @@
+{
+  "full_round": {
+    "FedAvg_replay_sha256": "c30bad18e60786d0270e092a888473c15f07ecf81423db704d3733dca2cd7970",
+    "FedProx_mu_zero_sha256": "c30bad18e60786d0270e092a888473c15f07ecf81423db704d3733dca2cd7970",
+    "expected_T026_LABEL_round1_sha256": "c30bad18e60786d0270e092a888473c15f07ecf81423db704d3733dca2cd7970",
+    "maximum_absolute_difference": 0.0,
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "unit": {
+    "FedAvg_BCE_loss": 0.9260596632957458,
+    "FedProx_mu_zero_loss": 0.9260596632957458,
+    "loss_absolute_difference": 0.0,
+    "maximum_gradient_difference": 0.0,
+    "status": "PASS"
+  }
+}

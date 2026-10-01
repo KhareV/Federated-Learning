@@ -1,0 +1,18 @@
+selection_semantics_id: FEDPROX_SELECTION_SEMANTICS_V1
+source_term: validation mean-client AUPRC
+source_conflict: validation patients are never clients and no independent validation cohort exists per training site
+implemented_metric: VALIDATION_PATIENT_MACRO_AUPRC_V1
+worst_metric: VALIDATION_PATIENT_WORST_AUPRC_V1
+evaluation_unit: frozen MIT-BIH VALIDATION participant_group_id
+unweighted: true
+validation_patients_are_clients: false
+pseudo_client_mapping: false
+train_site_diagnostics_used_for_selection: false
+undefined_group_behavior: FEDPROX_SELECTION_METRIC_UNDEFINED
+guardrail:
+  absolute_AUPRC_degradation: 0.05
+  comparator: ">="
+selection:
+  primary: highest VALIDATION_PATIENT_MACRO_AUPRC_V1 among eligible candidates
+  tie_tolerance: 1.0e-12
+  tie_order: [higher_validation_patient_worst_AUPRC, higher_global_validation_AUPRC, smaller_mu]

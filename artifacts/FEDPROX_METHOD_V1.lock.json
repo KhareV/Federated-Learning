@@ -1,0 +1,30 @@
+{
+  "bound_artifacts": {
+    "artifacts/FL_CONFIG_V1.lock.json": "03e49b4949e900192da19d8aa0b0066281cb14ed8807d5bfdd8f196f13f3138c",
+    "configs/fedprox_selection_semantics_v1.yaml": "27b32511e0c480167d7fc0de6146caaf2523aac93284f8dafc3da26265546222",
+    "configs/fedprox_v1.yaml": "d607f2fc61918a61af75ab2d40e362d2fb4d92b59645a8b21a8e11598182a717",
+    "configs/fl_init_v1.yaml": "eeca6cc0f7deed3e7374092a21422447960fd5f8bb79d3d4635d7e43c4c59ef1",
+    "federated/fedprox_runner.py": "1292fc6be4d8479aaa1b5bc955579319b6d54e998856c8606902536db1b8918d",
+    "federated/fedprox_selection.py": "fcbf5bddc25b2be5b41d29bf9b3a01f99d6a1fcb3379e9adcbd51bcd9fdf2055",
+    "federated/fedprox_training.py": "34e35c789492de4470db03ed5268686ab3b4bcfc2b5876fee5ab94d9e1e5822a",
+    "federated/validation_group_metrics.py": "a5ea5c4c170de10b6fb4f503447d55baaabc52e49d688d8c2642fd1646ed3e7b",
+    "manifests/clients/NONIID_LABEL_V1.csv": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176",
+    "reports/t027/label_fedavg_selection_baseline.json": "e44a05ea43a43fba8233229450112f799e27d17b83b631c890403a7523c80f6a",
+    "reports/t027/mu_zero_equivalence.json": "f0210c1408a0c13b5000d4a75e5e396f642444cd9f3eb46d80e4876a3b4dcdf9"
+  },
+  "candidate_order": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "guardrail_absolute_AUPRC": 0.05,
+  "lock_id": "FEDPROX_METHOD_V1",
+  "status": "FROZEN_PRE_CANDIDATE_METHOD",
+  "tie_policy": [
+    "higher_macro",
+    "higher_worst",
+    "higher_global",
+    "smaller_mu"
+  ],
+  "tuning_condition": "FL_LABEL_SKEW_V1"
+}
