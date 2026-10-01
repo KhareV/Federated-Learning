@@ -1,0 +1,28 @@
+{
+  "compared_fields": [
+    "public_200",
+    "public_422",
+    "public_500",
+    "sim_200",
+    "sim_422",
+    "sim_requests_sent",
+    "public_requests_sent",
+    "public_semantic_digest",
+    "sim_semantic_digest",
+    "public_monitoring_state_sequence"
+  ],
+  "excluded_from_comparison": [
+    "latency_ms_measured",
+    "process id",
+    "wall-clock start/end time",
+    "ephemeral port number"
+  ],
+  "field_mismatches": [],
+  "float_absolute_tolerance": 1e-07,
+  "float_mismatches": [],
+  "public_projection_count": 12,
+  "public_response_count": 12,
+  "run_1_label": "replay_run_1",
+  "run_2_label": "replay_run_2",
+  "status": "PASS"
+}

@@ -987,3 +987,48 @@ phase33:
 	$(MAKE) frontend-test PYTHON=$(PYTHON)
 	$(MAKE) frontend-build PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check
+
+.PHONY: replay-fixture replay-demo replay-demo-live-view replay-verify t034-evidence phase34
+
+# Offline: builds the frozen PUBLIC_ECG_REPLAY_V1 selection + both tracked fixtures from the
+# already-acquired/processed local MITDB TRAIN cache. Not run automatically by phase34 -- the
+# fixtures are tracked files, regenerate only if the selection rule or source cache changes.
+replay-fixture:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/select_replay_windows_t034.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/build_replay_fixture_t034.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/build_wearable_sim_replay_t034.py
+
+# One local command: verifies locks, starts the real production API on an ephemeral localhost
+# port, replays PUBLIC_ECG_REPLAY_V1 + WEARABLE_SIM_REPLAY_V1, writes request/response/
+# projection logs, exits cleanly. No external server, no GitHub Actions.
+replay-demo:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_replay.py --speed 0 --run-label replay_run_1
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_replay.py --speed 0 --run-label replay_run_2
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/compare_replay_runs_t034.py
+
+# Optional human-paced local demo: same replay, 5-second recorded cadence, not required for
+# T034 PASS. Prints the local dashboard URL; this is "recorded replay", never live hardware.
+replay-demo-live-view:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_replay.py --speed 1 --run-label replay_run_live_view
+	@echo "Recorded replay written. Start the dashboard separately with: cd frontend && npm run dev -- then open /monitoring"
+
+replay-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_e2e_replay_t034.py
+
+t034-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t034_evidence.py
+
+# LOCAL verification only -- no GitHub Actions, no CI query (user-deferred, see
+# reports/t034/ci_deferral.json).
+phase34:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) gateway-verify PYTHON=$(PYTHON)
+	$(MAKE) api-verify PYTHON=$(PYTHON)
+	$(MAKE) dashboard-verify PYTHON=$(PYTHON)
+	$(MAKE) replay-demo PYTHON=$(PYTHON)
+	$(MAKE) replay-verify PYTHON=$(PYTHON)
+	$(MAKE) frontend-check PYTHON=$(PYTHON)
+	$(MAKE) frontend-test PYTHON=$(PYTHON)
+	$(MAKE) frontend-build PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check

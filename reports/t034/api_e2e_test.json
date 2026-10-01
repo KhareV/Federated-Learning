@@ -1,0 +1,133 @@
+{
+  "files": [
+    "tests/test_e2e_replay.py",
+    "tests/test_e2e_replay_lock_t034.py",
+    "tests/test_simulation_truth_isolation_t034.py",
+    "tests/test_ci_policy.py"
+  ],
+  "passed": 30,
+  "results": [
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay.py::test_canonical_public_replay_processes_all_twelve_windows"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay.py::test_canonical_public_replay_uses_real_model_never_mocked"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay.py::test_canonical_public_replay_never_produces_an_unexpected_500"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay.py::test_sim_replay_produces_expected_200_200_422_sequence"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay.py::test_replay_is_semantically_deterministic_across_two_fresh_sessions"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay.py::test_upstream_model_and_gateway_hashes_are_unchanged"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay.py::test_replay_requests_never_use_mock_inference_module"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_lock_file_exists_with_correct_status"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_lock_never_claims_final_g21_closure"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_verify_passes_against_current_repository_state"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_verify_detects_tamper_on_any_bound_file"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_validate_selection_passes_on_the_real_frozen_selection"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_validate_selection_rejects_reversed_windows"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_validate_selection_rejects_a_duplicated_timestamp"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_validate_selection_rejects_a_missing_window"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_validate_selection_rejects_a_broken_cadence"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_validate_selection_rejects_a_duplicate_window_id"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_e2e_replay_lock_t034.py::test_frozen_selection_report_matches_a_fresh_recomputation"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_simulation_truth_isolation_t034.py::test_build_wearable_sim_replay_fixture_never_imports_get_truth"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_simulation_truth_isolation_t034.py::test_run_replay_never_imports_get_truth_or_simulation_truth"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_simulation_truth_isolation_t034.py::test_replay_ts_adapter_never_references_simulation_truth"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_simulation_truth_isolation_t034.py::test_actual_sim_replay_requests_contain_no_truth_field"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_simulation_truth_isolation_t034.py::test_actual_sim_replay_requests_match_the_real_api_schema_fields_only"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_simulation_truth_isolation_t034.py::test_wearable_sim_fixture_manifest_declares_no_truth_usage"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_ci_policy.py::test_ci_is_manual_only_as_of_t034"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_ci_policy.py::test_ci_deferral_is_documented_in_the_workflow"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_ci_policy.py::test_ci_deferral_history_remains_documented_in_the_deferral_plan"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_ci_policy.py::test_t033_jobs_are_preserved_not_deleted"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_ci_policy.py::test_t033_jobs_never_acquire_raw_datasets_in_ci"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_ci_policy.py::test_historical_t033_ci_evidence_is_preserved"
+    }
+  ],
+  "status": "PASS",
+  "total": 30
+}
