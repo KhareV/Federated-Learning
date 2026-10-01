@@ -1,0 +1,26 @@
+{
+  "commit_sha": "ce6887c89760daabad002ba809ee6f03e093a02b",
+  "workflow": "NHM CI",
+  "run_id": 36910820027,
+  "trigger": "push",
+  "url": "https://github.com/KhareV/Federated-Learning/actions/runs/36910820027",
+  "jobs": {
+    "phase-01": {
+      "status": "completed",
+      "conclusion": "failure",
+      "note": "Pre-existing T001-T003 job, previously manual-only (workflow_dispatch); this is its first automatic run under the T033-restored push trigger. Failed at the Pytest step. Not modified by T033 and not investigated further per explicit user direction to deprioritize CI follow-up."
+    },
+    "t033-backend": {
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "t033-frontend": {
+      "status": "completed",
+      "conclusion": "failure",
+      "note": "Failed at the svelte-check type-check step in the CI environment. Not investigated further per explicit user direction to deprioritize CI follow-up; local `npm run check` passed cleanly (0 errors) in the development environment -- see reports/t033/typecheck_report.json."
+    }
+  },
+  "overall_conclusion": "failure",
+  "status": "RECORDED_NOT_GREEN",
+  "disposition": "User explicitly instructed to stop pursuing CI and move on (2026-10-02); recorded honestly rather than claimed as passing. T033's actual deliverable (dashboard implementation, DASHBOARD_UI_V1 lock, local test/build verification) is otherwise complete and independently verified locally."
+}

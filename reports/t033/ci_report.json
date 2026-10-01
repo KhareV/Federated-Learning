@@ -1,4 +1,10 @@
 {
-  "note": "Recorded separately after the real GitHub Actions run on the final pushed commit -- see reports/t033/ci_run.json, written by scripts/record_t033_ci_run.py.",
-  "status": "PENDING_REAL_CI_RUN"
+  "note": "Real GitHub Actions run recorded on the final pushed commit (ce6887c) -- see reports/t033/ci_run.json for per-job detail.",
+  "run_id": 36910820027,
+  "overall_conclusion": "failure",
+  "t033_backend_job": "success",
+  "t033_frontend_job": "failure",
+  "phase_01_job": "failure",
+  "status": "RECORDED_NOT_GREEN",
+  "disposition": "Not pursued further per explicit user direction (2026-10-02) to deprioritize CI and move on. T033's local verification (pytest, vitest, svelte-check, build) is independently PASS -- see reports/t033/python_test_report.json, vitest_report.json, typecheck_report.json, build_report.json."
 }
