@@ -1,0 +1,161 @@
+{
+  "FedAvg_LABEL_baseline": {
+    "best_round": 49,
+    "checkpoint": "checkpoints/federated/FL_LABEL_SKEW_V1_best.pt",
+    "global_validation_AUPRC": 0.5455569642172218,
+    "source_predictions_sha256": "5bd996e8fa1e1a3ddce439f303588973f12bdf1b86f02613567824fb90b08eac",
+    "status": "PASS",
+    "validation_patient_metrics": {
+      "evaluation_unit": "MITDB_VALIDATION_PARTICIPANT_GROUP",
+      "macro_AUPRC": 0.5280564309007619,
+      "metric_id": "VALIDATION_PATIENT_MACRO_AUPRC_V1",
+      "patient_groups": 7,
+      "per_group": [
+        {
+          "AUPRC": 0.23080889812019223,
+          "negatives": 298,
+          "participant_group_id": "MITDB_P100",
+          "positives": 62,
+          "record_ids": [
+            "100"
+          ],
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.967248164464364,
+          "negatives": 165,
+          "participant_group_id": "MITDB_P106",
+          "positives": 195,
+          "record_ids": [
+            "106"
+          ],
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.20294568421903195,
+          "negatives": 321,
+          "participant_group_id": "MITDB_P108",
+          "positives": 39,
+          "record_ids": [
+            "108"
+          ],
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.40253440418649317,
+          "negatives": 285,
+          "participant_group_id": "MITDB_P109",
+          "positives": 75,
+          "record_ids": [
+            "109"
+          ],
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.019959852466738447,
+          "negatives": 356,
+          "participant_group_id": "MITDB_P112",
+          "positives": 4,
+          "record_ids": [
+            "112"
+          ],
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8728980128485141,
+          "negatives": 421,
+          "participant_group_id": "MITDB_P201_202",
+          "positives": 299,
+          "record_ids": [
+            "201",
+            "202"
+          ],
+          "windows": 720
+        },
+        {
+          "AUPRC": 1.0,
+          "negatives": 358,
+          "participant_group_id": "MITDB_P231",
+          "positives": 2,
+          "record_ids": [
+            "231"
+          ],
+          "windows": 360
+        }
+      ],
+      "unweighted": true,
+      "validation_patients_are_clients": false,
+      "worst_AUPRC": 0.019959852466738447,
+      "worst_metric_id": "VALIDATION_PATIENT_WORST_AUPRC_V1"
+    },
+    "worst_guardrail_threshold": -0.030040147533261556
+  },
+  "eligible_candidates": [
+    0.01,
+    0.001,
+    0.1
+  ],
+  "evaluated_candidates": [
+    {
+      "best_global_validation_AUPRC": 0.5378744240583928,
+      "best_round": 33,
+      "candidate_status": "PASS",
+      "finite": true,
+      "guardrail_pass": true,
+      "logical_payload_bytes": 43491200,
+      "mu": 0.001,
+      "round0_global_AUPRC": 0.19231112419494034,
+      "round50_global_AUPRC": 0.5244039195472672,
+      "validation_patient_macro_AUPRC": 0.5099225264658516,
+      "validation_patient_worst_AUPRC": 0.02453188861772197,
+      "worst_guardrail_threshold": -0.030040147533261556
+    },
+    {
+      "best_global_validation_AUPRC": 0.5520990688759435,
+      "best_round": 49,
+      "candidate_status": "PASS",
+      "finite": true,
+      "guardrail_pass": true,
+      "logical_payload_bytes": 43491200,
+      "mu": 0.01,
+      "round0_global_AUPRC": 0.19231112419494034,
+      "round50_global_AUPRC": 0.5400518619071434,
+      "validation_patient_macro_AUPRC": 0.5291301047580961,
+      "validation_patient_worst_AUPRC": 0.016327373834259817,
+      "worst_guardrail_threshold": -0.030040147533261556
+    },
+    {
+      "best_global_validation_AUPRC": 0.5572366544818077,
+      "best_round": 27,
+      "candidate_status": "PASS",
+      "finite": true,
+      "guardrail_pass": true,
+      "logical_payload_bytes": 43491200,
+      "mu": 0.1,
+      "round0_global_AUPRC": 0.19231112419494034,
+      "round50_global_AUPRC": 0.44710419159498094,
+      "validation_patient_macro_AUPRC": 0.4993820664096268,
+      "validation_patient_worst_AUPRC": 0.018817495261389115,
+      "worst_guardrail_threshold": -0.030040147533261556
+    }
+  ],
+  "guardrail_absolute_degradation": 0.05,
+  "guardrail_threshold": -0.030040147533261556,
+  "human_override": false,
+  "primary_metric": "VALIDATION_PATIENT_MACRO_AUPRC_V1",
+  "ranking": [
+    0.01,
+    0.001,
+    0.1
+  ],
+  "selected_mu": 0.01,
+  "selection_run_1_sha256": "af898925fc4f25901b79d408f4cd2d02e551b40f09594c27c41e74d87ca0d447",
+  "selection_run_2_sha256": "af898925fc4f25901b79d408f4cd2d02e551b40f09594c27c41e74d87ca0d447",
+  "selection_semantics_id": "FEDPROX_SELECTION_SEMANTICS_V1",
+  "tie_policy": [
+    "higher_worst",
+    "higher_global",
+    "smaller_mu"
+  ],
+  "tuning_condition": "FL_LABEL_SKEW_V1"
+}

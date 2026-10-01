@@ -1,0 +1,18 @@
+{
+  "F12_lock_sha256": "03e49b4949e900192da19d8aa0b0066281cb14ed8807d5bfdd8f196f13f3138c",
+  "LABEL_manifest_sha256": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176",
+  "algorithm_implementation_sha256": "34e35c789492de4470db03ed5268686ab3b4bcfc2b5876fee5ab94d9e1e5822a",
+  "candidate_checkpoint_sha256": {
+    "0.001": "93dddcb9d9f619246c05d1daccd4dca6c26a79bd8927239a18912098816b9e98",
+    "0.01": "a928666869ac73fec510e9f120d1cf786fe0caa64cf0c04f10b5797de035401e",
+    "0.1": "5495466a6497ca929ba8c2f904b51723ced675a7b5eb2e618354a891ccd427fc"
+  },
+  "candidate_table_sha256": "7264da24d730fc9b3bf0d4b4b1195e32f511a463510402f401a0b09b640182c3",
+  "lock_id": "FEDPROX_MU_V1",
+  "selected_before_cross_condition_runs": true,
+  "selected_mu": 0.01,
+  "selection_evidence_sha256": "62af2e364cda0a1ebc8934eda22a4579121235aaf04b8e2d4b97007b3a6cee17",
+  "selection_provenance": "T027_LABEL_ONLY_PREDECLARED_SELECTION",
+  "selection_semantics_sha256": "27b32511e0c480167d7fc0de6146caaf2523aac93284f8dafc3da26265546222",
+  "status": "FROZEN_ENGINEERING_METHOD"
+}

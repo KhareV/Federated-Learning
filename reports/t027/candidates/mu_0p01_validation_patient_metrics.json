@@ -1,0 +1,83 @@
+{
+  "evaluation_unit": "MITDB_VALIDATION_PARTICIPANT_GROUP",
+  "macro_AUPRC": 0.5291301047580961,
+  "metric_id": "VALIDATION_PATIENT_MACRO_AUPRC_V1",
+  "patient_groups": 7,
+  "per_group": [
+    {
+      "AUPRC": 0.241869718908664,
+      "negatives": 298,
+      "participant_group_id": "MITDB_P100",
+      "positives": 62,
+      "record_ids": [
+        "100"
+      ],
+      "windows": 360
+    },
+    {
+      "AUPRC": 0.9782643223059423,
+      "negatives": 165,
+      "participant_group_id": "MITDB_P106",
+      "positives": 195,
+      "record_ids": [
+        "106"
+      ],
+      "windows": 360
+    },
+    {
+      "AUPRC": 0.2110806744582776,
+      "negatives": 321,
+      "participant_group_id": "MITDB_P108",
+      "positives": 39,
+      "record_ids": [
+        "108"
+      ],
+      "windows": 360
+    },
+    {
+      "AUPRC": 0.39374960447781404,
+      "negatives": 285,
+      "participant_group_id": "MITDB_P109",
+      "positives": 75,
+      "record_ids": [
+        "109"
+      ],
+      "windows": 360
+    },
+    {
+      "AUPRC": 0.016327373834259817,
+      "negatives": 356,
+      "participant_group_id": "MITDB_P112",
+      "positives": 4,
+      "record_ids": [
+        "112"
+      ],
+      "windows": 360
+    },
+    {
+      "AUPRC": 0.8626190393217149,
+      "negatives": 421,
+      "participant_group_id": "MITDB_P201_202",
+      "positives": 299,
+      "record_ids": [
+        "201",
+        "202"
+      ],
+      "windows": 720
+    },
+    {
+      "AUPRC": 1.0,
+      "negatives": 358,
+      "participant_group_id": "MITDB_P231",
+      "positives": 2,
+      "record_ids": [
+        "231"
+      ],
+      "windows": 360
+    }
+  ],
+  "unweighted": true,
+  "validation_patients_are_clients": false,
+  "worst_AUPRC": 0.016327373834259817,
+  "worst_metric_id": "VALIDATION_PATIENT_WORST_AUPRC_V1"
+}
