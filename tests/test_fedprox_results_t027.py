@@ -56,5 +56,9 @@ def test_mu_lock_and_replay() -> None:
     assert lock["selected_before_cross_condition_runs"] is True
     replay = json.loads((ROOT / "reports/t027/reproducibility.json").read_text())
     assert replay["selected_mu_identical"] is True
+    assert all(row["status"] == "PASS" for row in replay["candidate_round1_replay"].values())
+    assert all(
+        row["status"] == "PASS" for row in replay["candidate_checkpoint_prediction_replay"].values()
+    )
     assert all(row["status"] == "PASS" for row in replay["round1_replay"].values())
     assert all(row["status"] == "PASS" for row in replay["checkpoint_prediction_replay"].values())

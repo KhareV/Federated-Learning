@@ -1,4 +1,41 @@
 {
+  "candidate_checkpoint_prediction_replay": {
+    "0.001": {
+      "AUPRC": 0.5378744240583928,
+      "replay_sha256": "0a6c7ac355d7e8aea95e3fbf65db571b76541985c5f01db5d29f32f3c1eda391",
+      "status": "PASS",
+      "stored_sha256": "0a6c7ac355d7e8aea95e3fbf65db571b76541985c5f01db5d29f32f3c1eda391"
+    },
+    "0.01": {
+      "AUPRC": 0.5520990688759435,
+      "replay_sha256": "560905b7ece21c79c55fc111833e4ef9868839f343f3bb8d57700542e752741d",
+      "status": "PASS",
+      "stored_sha256": "560905b7ece21c79c55fc111833e4ef9868839f343f3bb8d57700542e752741d"
+    },
+    "0.1": {
+      "AUPRC": 0.5572366544818077,
+      "replay_sha256": "ba3ef9158b0fef143fc916426cff7701586ea21432112370516c843a674a6067",
+      "status": "PASS",
+      "stored_sha256": "ba3ef9158b0fef143fc916426cff7701586ea21432112370516c843a674a6067"
+    }
+  },
+  "candidate_round1_replay": {
+    "0.001": {
+      "replay": "efaab061270240d05df3ba9077baf86f9c746f9d2eb39bd6070effacf86fa7a9",
+      "status": "PASS",
+      "stored": "efaab061270240d05df3ba9077baf86f9c746f9d2eb39bd6070effacf86fa7a9"
+    },
+    "0.01": {
+      "replay": "9724450db056aa2c0d4616dfc2c774b55e469e91f63295f7569361238ed93d8f",
+      "status": "PASS",
+      "stored": "9724450db056aa2c0d4616dfc2c774b55e469e91f63295f7569361238ed93d8f"
+    },
+    "0.1": {
+      "replay": "6524c74678cff21511ce7738d99616eb41873d36bdd9bf4d584cb778c5a5f1b0",
+      "status": "PASS",
+      "stored": "6524c74678cff21511ce7738d99616eb41873d36bdd9bf4d584cb778c5a5f1b0"
+    }
+  },
   "checkpoint_prediction_replay": {
     "combined": {
       "AUPRC": 0.4456558087527336,

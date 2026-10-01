@@ -114,7 +114,13 @@ def fedprox_checkpoint(condition: str) -> Path:
 
 
 def replay_round1(
-    condition: str, train: Any, clean: np.ndarray, bank: dict[str, np.ndarray], pos_weight: float
+    condition: str,
+    train: Any,
+    clean: np.ndarray,
+    bank: dict[str, np.ndarray],
+    pos_weight: float,
+    *,
+    mu: float = 0.01,
 ) -> str:
     manifest = ROOT / "manifests/clients" / CONDITIONS[condition][1]
     sites = load_sites(manifest)
@@ -145,17 +151,21 @@ def replay_round1(
                 learning_rate=0.001,
                 weight_decay=0.0001,
                 pos_weight=pos_weight,
-                mu=0.01,
+                mu=mu,
             ).update
         )
     state, _ = aggregate_weighted_deltas(initial, updates)
     return state_sha(state)
 
 
-def checkpoint_prediction_replay(
-    condition: str, validation: Any, validation_inputs: np.ndarray, pos_weight: float
+def checkpoint_prediction_replay_paths(
+    checkpoint_path: Path,
+    prediction_path: Path,
+    validation: Any,
+    validation_inputs: np.ndarray,
+    pos_weight: float,
 ) -> dict[str, Any]:
-    checkpoint = torch.load(fedprox_checkpoint(condition), map_location="cpu", weights_only=False)
+    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     model = fresh_model_v1()
     model.load_state_dict(checkpoint["state_dict"], strict=True)
     metrics, logits, probabilities = evaluate_model(
@@ -185,7 +195,7 @@ def checkpoint_prediction_replay(
             strict=True,
         )
     ]
-    stored = hash_file(fedprox_prediction_path(condition))
+    stored = hash_file(prediction_path)
     replay = hash_bytes(csv_bytes(rows))
     return {
         "stored_sha256": stored,
@@ -193,6 +203,18 @@ def checkpoint_prediction_replay(
         "AUPRC": metrics["AUPRC"],
         "status": "PASS" if stored == replay else "FAIL",
     }
+
+
+def checkpoint_prediction_replay(
+    condition: str, validation: Any, validation_inputs: np.ndarray, pos_weight: float
+) -> dict[str, Any]:
+    return checkpoint_prediction_replay_paths(
+        fedprox_checkpoint(condition),
+        fedprox_prediction_path(condition),
+        validation,
+        validation_inputs,
+        pos_weight,
+    )
 
 
 def main() -> None:
@@ -317,6 +339,27 @@ def main() -> None:
         )
         for condition in ORDER
     }
+    candidate_round1: dict[str, Any] = {}
+    candidate_predictions: dict[str, Any] = {}
+    for mu in (0.001, 0.01, 0.1):
+        token = str(mu).replace(".", "p")
+        replay = replay_round1("label", train, clean, bank, pos_weight, mu=mu)
+        with (ROOT / f"reports/t027/candidates/mu_{token}_rounds.csv").open(newline="") as handle:
+            stored = next(
+                row["global_state_sha256"] for row in csv.DictReader(handle) if row["round"] == "1"
+            )
+        candidate_round1[str(mu)] = {
+            "stored": stored,
+            "replay": replay,
+            "status": "PASS" if stored == replay else "FAIL",
+        }
+        candidate_predictions[str(mu)] = checkpoint_prediction_replay_paths(
+            ROOT / f"checkpoints/federated/fedprox_candidates/LABEL_mu_{token}_best.pt",
+            ROOT / f"reports/t027/candidates/mu_{token}_validation_predictions.csv",
+            validation,
+            validation_inputs,
+            pos_weight,
+        )
     selection_sha = hash_file(ROOT / "reports/t027/mu_selection.json")
     reproducibility = {
         "mu_candidate_round0_hashes": {
@@ -338,6 +381,8 @@ def main() -> None:
             }
             for condition in ORDER
         },
+        "candidate_round1_replay": candidate_round1,
+        "candidate_checkpoint_prediction_replay": candidate_predictions,
         "checkpoint_prediction_replay": prediction_replays,
         "selection_run1_sha256": selection_sha,
         "selection_run2_sha256": selection_sha,
@@ -345,9 +390,13 @@ def main() -> None:
         "full_duplicate_50_round_runs": False,
         "status": "PASS",
     }
-    if any(value["status"] != "PASS" for value in reproducibility["round1_replay"].values()) or any(
-        value["status"] != "PASS" for value in prediction_replays.values()
-    ):
+    replay_groups = (
+        reproducibility["round1_replay"],
+        candidate_round1,
+        prediction_replays,
+        candidate_predictions,
+    )
+    if any(value["status"] != "PASS" for group in replay_groups for value in group.values()):
         raise RuntimeError("T027_REPRODUCIBILITY_FAILURE")
     write_json(ROOT / "reports/t027/reproducibility.json", reproducibility)
     scope = {
