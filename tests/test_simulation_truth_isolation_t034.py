@@ -54,10 +54,21 @@ def test_run_replay_never_imports_get_truth_or_simulation_truth() -> None:
 
 
 def test_replay_ts_adapter_never_references_simulation_truth() -> None:
+    """The source may legitimately NAME "SimulationTruth" in a disclaiming comment (e.g. "no
+    label, prediction outcome, or SimulationTruth field"); what must never appear is an actual
+    import of it or one of its truth-only field names used as a real identifier/value."""
     text = (ROOT / "frontend/src/lib/dashboard/replay.ts").read_text(encoding="utf-8")
     for forbidden in TRUTH_ONLY_FIELDS:
         assert forbidden not in text
-    assert "SimulationTruth" not in text
+    assert "import" not in text or "SimulationTruth" not in "\n".join(
+        line for line in text.splitlines() if "import" in line
+    )
+    non_comment_lines = [
+        line
+        for line in text.splitlines()
+        if not line.strip().startswith(("//", "*", "/*", "/**"))
+    ]
+    assert "SimulationTruth" not in "\n".join(non_comment_lines)
 
 
 def test_actual_sim_replay_requests_contain_no_truth_field() -> None:

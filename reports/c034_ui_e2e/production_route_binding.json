@@ -1,0 +1,15 @@
+{
+  "canonical_route": "frontend/src/routes/monitoring/+page.svelte",
+  "checks": {
+    "imports_loadReplayBundle": true,
+    "imports_runCanonicalRecordedReplay": true,
+    "never_claims_live_sensor": true,
+    "never_imports_metadata_only_replay_path": true,
+    "no_second_frontend_app_created": true,
+    "recorded_replay_label_present": true,
+    "replay_mode_query_param_convention": true
+  },
+  "replay_controller": "frontend/src/lib/dashboard/replay.ts",
+  "status": "PASS",
+  "typed_api_client": "frontend/src/lib/api/nhm-v1.ts"
+}

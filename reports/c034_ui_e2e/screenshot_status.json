@@ -1,0 +1,11 @@
+{
+  "status": "TOOLING_NOT_PRESENT",
+  "checked_for": ["chromium", "chromium-browser", "google-chrome", "playwright (python module)"],
+  "check_commands": [
+    "which chromium chromium-browser google-chrome",
+    "python3 -c 'import playwright'",
+    "ls ~/.cache/ms-playwright"
+  ],
+  "result": "No headless/local browser or Playwright installation found in this environment. Per the C034 instructions, no heavyweight browser-automation stack was added solely to produce a screenshot.",
+  "fallback_evidence": "reports/c034_ui_e2e/rendered_dashboard_test.json (Vitest-rendered replay/session assertions) and reports/c034_ui_e2e/one_command_demo_audit.json (real localhost service health: backend + frontend production preview both reachable, recorded-replay route reachable) together substitute for a visual screenshot."
+}

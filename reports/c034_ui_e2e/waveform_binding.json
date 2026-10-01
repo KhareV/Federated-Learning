@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "bundle_events_all_have_2500_samples": true,
+    "bundle_has_no_labels_or_truth": true,
+    "canonical_path_requires_2500_samples": true,
+    "canonical_path_throws_on_incomplete_window": true,
+    "metadata_only_path_never_used_for_waveform": true
+  },
+  "events_in_bundle": 12,
+  "samples_per_event_expected": 2500,
+  "status": "PASS"
+}

@@ -1,0 +1,298 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@sveltejs/adapter-static": {
+      "name": "@sveltejs/adapter-static",
+      "severity": "low",
+      "isDirect": true,
+      "via": [
+        "@sveltejs/kit"
+      ],
+      "effects": [],
+      "range": "1.0.0-next.0 - 3.0.10",
+      "nodes": [
+        "node_modules/@sveltejs/adapter-static"
+      ],
+      "fixAvailable": {
+        "name": "@sveltejs/adapter-static",
+        "version": "4.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@sveltejs/kit": {
+      "name": "@sveltejs/kit",
+      "severity": "low",
+      "isDirect": true,
+      "via": [
+        "cookie"
+      ],
+      "effects": [
+        "@sveltejs/adapter-static",
+        "runed"
+      ],
+      "range": "1.0.0-next.0 - 2.70.3",
+      "nodes": [
+        "node_modules/@sveltejs/kit"
+      ],
+      "fixAvailable": {
+        "name": "@sveltejs/kit",
+        "version": "3.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@vitest/mocker": {
+      "name": "@vitest/mocker",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1193684,
+          "name": "@vitest/mocker",
+          "dependency": "@vitest/mocker",
+          "title": "Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock",
+          "url": "https://github.com/advisories/GHSA-82fw-gwwq-j7x9",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-22"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": ">=2.1.0 <4.1.11"
+        }
+      ],
+      "effects": [
+        "vitest"
+      ],
+      "range": "2.1.0 - 4.1.10",
+      "nodes": [
+        "node_modules/@vitest/mocker"
+      ],
+      "fixAvailable": {
+        "name": "vitest",
+        "version": "5.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "cookie": {
+      "name": "cookie",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1103907,
+          "name": "cookie",
+          "dependency": "cookie",
+          "title": "cookie accepts cookie name, path, and domain with out of bounds characters",
+          "url": "https://github.com/advisories/GHSA-pxg6-pf52-xh8x",
+          "severity": "low",
+          "cwe": [
+            "CWE-74"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<0.7.0"
+        }
+      ],
+      "effects": [
+        "@sveltejs/kit"
+      ],
+      "range": "<0.7.0",
+      "nodes": [
+        "node_modules/cookie"
+      ],
+      "fixAvailable": {
+        "name": "@sveltejs/kit",
+        "version": "3.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "devalue": {
+      "name": "devalue",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1240870,
+          "name": "devalue",
+          "dependency": "devalue",
+          "title": "devalue: `stringify`/`uneval` serialize shared memory",
+          "url": "https://github.com/advisories/GHSA-j22f-vq7h-c4qm",
+          "severity": "high",
+          "cwe": [
+            "CWE-200",
+            "CWE-226"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": ">=5.1.0 <=5.9.2"
+        },
+        {
+          "source": 1240871,
+          "name": "devalue",
+          "dependency": "devalue",
+          "title": "devalue: Residual sparse-array CPU amplification in uneval",
+          "url": "https://github.com/advisories/GHSA-hx4r-w6wj-j8fg",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=5.9.2"
+        },
+        {
+          "source": 1240872,
+          "name": "devalue",
+          "dependency": "devalue",
+          "title": "devalue: Repeated primitive strings cause quadratic expansion in uneval",
+          "url": "https://github.com/advisories/GHSA-mcm9-63f2-9j32",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-409"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=5.9.2"
+        },
+        {
+          "source": 1240873,
+          "name": "devalue",
+          "dependency": "devalue",
+          "title": "devalue: Sparse arrays emitted by uneval cause eager allocation when evaluated",
+          "url": "https://github.com/advisories/GHSA-wf3x-273g-mvxv",
+          "severity": "low",
+          "cwe": [
+            "CWE-400",
+            "CWE-789"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.0.0 <=5.9.2"
+        },
+        {
+          "source": 1240874,
+          "name": "devalue",
+          "dependency": "devalue",
+          "title": "devalue: stringifyAsync can cause an unhandled rejection despite a caught returned promise",
+          "url": "https://github.com/advisories/GHSA-x5rw-q4pp-hg5g",
+          "severity": "high",
+          "cwe": [
+            "CWE-248",
+            "CWE-755"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=5.8.0 <=5.9.2"
+        },
+        {
+          "source": 1240875,
+          "name": "devalue",
+          "dependency": "devalue",
+          "title": "devalue: Malformed null-prototype object keys bypass __proto__ rejection via property-key coercion",
+          "url": "https://github.com/advisories/GHSA-4q55-j62x-fr9h",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=5.9.2"
+        }
+      ],
+      "effects": [],
+      "range": "<=5.9.2",
+      "nodes": [
+        "node_modules/devalue"
+      ],
+      "fixAvailable": true
+    },
+    "runed": {
+      "name": "runed",
+      "severity": "low",
+      "isDirect": true,
+      "via": [
+        "@sveltejs/kit"
+      ],
+      "effects": [],
+      "range": ">=0.32.0",
+      "nodes": [
+        "node_modules/runed"
+      ],
+      "fixAvailable": {
+        "name": "runed",
+        "version": "0.31.1",
+        "isSemVerMajor": true
+      }
+    },
+    "vitest": {
+      "name": "vitest",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@vitest/mocker",
+        {
+          "source": 1193683,
+          "name": "vitest",
+          "dependency": "vitest",
+          "title": "Vitest: Path Traversal / Arbitrary File Read via @vitest/mocker Redirect Mock",
+          "url": "https://github.com/advisories/GHSA-82fw-gwwq-j7x9",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-22"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": ">=2.1.0 <4.1.11"
+        }
+      ],
+      "effects": [],
+      "range": "2.1.0-beta.1 - 4.1.10",
+      "nodes": [
+        "node_modules/vitest"
+      ],
+      "fixAvailable": {
+        "name": "vitest",
+        "version": "5.0.3",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 4,
+      "moderate": 2,
+      "high": 1,
+      "critical": 0,
+      "total": 7
+    },
+    "dependencies": {
+      "prod": 86,
+      "dev": 109,
+      "optional": 76,
+      "peer": 8,
+      "peerOptional": 0,
+      "total": 266
+    }
+  }
+}
