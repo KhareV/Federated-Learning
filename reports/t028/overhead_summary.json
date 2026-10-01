@@ -1,0 +1,55 @@
+{
+  "accounting_boundary": "aggregation protocol only; local training excluded",
+  "application_payload_bytes": {
+    "absolute_total_overhead": 882184,
+    "accounting_id": "FLOWER_APPLICATION_PAYLOAD_BYTES_V1",
+    "exact_network_bytes": false,
+    "exclusions": [
+      "lower-level transport framing",
+      "TCP",
+      "TLS"
+    ],
+    "plain": {
+      "accounting_id": "FLOWER_APPLICATION_PAYLOAD_BYTES_V1",
+      "client_to_server": 446336,
+      "server_to_client": 56448,
+      "total": 502784
+    },
+    "protected": {
+      "client_to_server": 897384,
+      "server_to_client": 487584,
+      "total": 1384968
+    },
+    "total_ratio": 2.7545983961303464
+  },
+  "completion": {
+    "attempted": 10,
+    "completed": 10,
+    "failed": 0,
+    "rate": 1.0
+  },
+  "deployment_latency_claim": false,
+  "measured_trials_per_path": 10,
+  "plain_runtime": {
+    "N": 10,
+    "maximum_seconds": 0.0024070829967968166,
+    "mean_seconds": 0.0022691290025250053,
+    "median_seconds": 0.0022452705015894026,
+    "minimum_seconds": 0.002215959000750445,
+    "p95_seconds": 0.0024070829967968166,
+    "standard_deviation_seconds": 5.6187873334426806e-05
+  },
+  "protected_minus_plain_median_milliseconds": 150.84612549253507,
+  "protected_runtime": {
+    "N": 10,
+    "maximum_seconds": 0.15875537499960046,
+    "mean_seconds": 0.1537517956981901,
+    "median_seconds": 0.15309139599412447,
+    "minimum_seconds": 0.15193891599483322,
+    "p95_seconds": 0.15875537499960046,
+    "standard_deviation_seconds": 0.0019480274876391955
+  },
+  "protected_to_plain_median_runtime_ratio": 68.18394304194204,
+  "status": "PASS",
+  "warmup_trials_per_path": 1
+}

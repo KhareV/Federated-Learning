@@ -1,0 +1,293 @@
+{
+  "MODEL_V1_shaped": {
+    "authoritative_T025_round_1_state_sha256": "271bb957daa82172b91df60edbada7d9139b6af61fbcde59f9a949d3f8590eba",
+    "client_count": 8,
+    "clipped_value_count": 0,
+    "full_state_vs_delta_reference_rounding": {
+      "maximum_absolute_difference": 6.489872195203361e-08,
+      "relative_L2_difference": 3.228005582755582e-08
+    },
+    "maximum_absolute_difference": 6.856939921205717e-06,
+    "nonfinite_tensor_count": 0,
+    "per_tensor": [
+      {
+        "L2_difference": 1.9810966548496277e-05,
+        "dtype": "float32",
+        "key": "conv1.weight",
+        "maximum_absolute_difference": 5.186190269512725e-06,
+        "plain_maximum": 0.38347190618515015,
+        "plain_minimum": -0.3585851490497589,
+        "protected_maximum": 0.3834708203933747,
+        "protected_minimum": -0.3585840450310559,
+        "shape": [
+          16,
+          1,
+          7
+        ]
+      },
+      {
+        "L2_difference": 8.82496970347231e-06,
+        "dtype": "float32",
+        "key": "conv1.bias",
+        "maximum_absolute_difference": 6.029435566490271e-06,
+        "plain_maximum": 0.37386777997016907,
+        "plain_minimum": -0.37036505341529846,
+        "protected_maximum": 0.3738677536231884,
+        "protected_minimum": -0.3703626423395445,
+        "shape": [
+          16
+        ]
+      },
+      {
+        "L2_difference": 8.0193144989528e-06,
+        "dtype": "float32",
+        "key": "bn1.weight",
+        "maximum_absolute_difference": 3.4213066101296263e-06,
+        "plain_maximum": 1.0091179609298706,
+        "plain_minimum": 0.9917227625846863,
+        "protected_maximum": 1.0091145833333333,
+        "protected_minimum": 0.9917200439958592,
+        "shape": [
+          16
+        ]
+      },
+      {
+        "L2_difference": 5.940801396865642e-06,
+        "dtype": "float32",
+        "key": "bn1.bias",
+        "maximum_absolute_difference": 3.2232744102491686e-06,
+        "plain_maximum": 0.009056195616722107,
+        "plain_minimum": -0.009846598841249943,
+        "protected_maximum": 0.009057971014492754,
+        "protected_minimum": -0.00984569099378882,
+        "shape": [
+          16
+        ]
+      },
+      {
+        "L2_difference": 6.42208522968291e-06,
+        "dtype": "float32",
+        "key": "bn1.running_mean",
+        "maximum_absolute_difference": 3.506974403877372e-06,
+        "plain_maximum": 0.3237643241882324,
+        "plain_minimum": -0.3207491636276245,
+        "protected_maximum": 0.32376423395445136,
+        "protected_minimum": -0.32074760610766045,
+        "shape": [
+          16
+        ]
+      },
+      {
+        "L2_difference": 6.384153746425164e-06,
+        "dtype": "float32",
+        "key": "bn1.running_var",
+        "maximum_absolute_difference": 2.907719424544153e-06,
+        "plain_maximum": 1.197417974472046,
+        "plain_minimum": 0.1377999186515808,
+        "protected_maximum": 1.1974200957556935,
+        "protected_minimum": 0.13780085403726708,
+        "shape": [
+          16
+        ]
+      },
+      {
+        "L2_difference": 9.197663924940398e-05,
+        "dtype": "float32",
+        "key": "conv2.weight",
+        "maximum_absolute_difference": 6.8025559371992506e-06,
+        "plain_maximum": 0.11751721054315567,
+        "plain_minimum": -0.11697713285684586,
+        "protected_maximum": 0.11751585144927536,
+        "protected_minimum": -0.11697560817805383,
+        "shape": [
+          32,
+          16,
+          5
+        ]
+      },
+      {
+        "L2_difference": 9.351828954788144e-06,
+        "dtype": "float32",
+        "key": "conv2.bias",
+        "maximum_absolute_difference": 5.082441127510391e-06,
+        "plain_maximum": 0.10632719844579697,
+        "plain_minimum": -0.10970849543809891,
+        "protected_maximum": 0.10632602225672878,
+        "protected_minimum": -0.10970982142857143,
+        "shape": [
+          32
+        ]
+      },
+      {
+        "L2_difference": 1.0818157375910488e-05,
+        "dtype": "float32",
+        "key": "bn2.weight",
+        "maximum_absolute_difference": 3.913964297108663e-06,
+        "plain_maximum": 1.0087940692901611,
+        "plain_minimum": 0.9966059923171997,
+        "protected_maximum": 1.008794319358178,
+        "protected_minimum": 0.9966064958592132,
+        "shape": [
+          32
+        ]
+      },
+      {
+        "L2_difference": 1.1328870134967846e-05,
+        "dtype": "float32",
+        "key": "bn2.bias",
+        "maximum_absolute_difference": 4.476309015452335e-06,
+        "plain_maximum": 0.004068110603839159,
+        "plain_minimum": -0.005836052354425192,
+        "protected_maximum": 0.004071234472049689,
+        "protected_minimum": -0.00583592132505176,
+        "shape": [
+          32
+        ]
+      },
+      {
+        "L2_difference": 1.164031688574158e-05,
+        "dtype": "float32",
+        "key": "bn2.running_mean",
+        "maximum_absolute_difference": 4.656801065802685e-06,
+        "plain_maximum": 0.27871033549308777,
+        "plain_minimum": -0.39734870195388794,
+        "protected_maximum": 0.278710533126294,
+        "protected_minimum": -0.3973473084886128,
+        "shape": [
+          32
+        ]
+      },
+      {
+        "L2_difference": 1.0203335448770737e-05,
+        "dtype": "float32",
+        "key": "bn2.running_var",
+        "maximum_absolute_difference": 5.451344555207349e-06,
+        "plain_maximum": 0.5418541431427002,
+        "plain_minimum": 0.18265438079833984,
+        "protected_maximum": 0.5418526785714286,
+        "protected_minimum": 0.1826572204968944,
+        "shape": [
+          32
+        ]
+      },
+      {
+        "L2_difference": 0.00018765001080258784,
+        "dtype": "float32",
+        "key": "conv3.weight",
+        "maximum_absolute_difference": 6.856939921205717e-06,
+        "plain_maximum": 0.08707761019468307,
+        "plain_minimum": -0.08578325062990189,
+        "protected_maximum": 0.08708106884057971,
+        "protected_minimum": -0.08578383799171843,
+        "shape": [
+          64,
+          32,
+          5
+        ]
+      },
+      {
+        "L2_difference": 1.5559650638664888e-05,
+        "dtype": "float32",
+        "key": "conv3.bias",
+        "maximum_absolute_difference": 5.83468386845809e-06,
+        "plain_maximum": 0.07363804429769516,
+        "plain_minimum": -0.07847817242145538,
+        "protected_maximum": 0.07363806935817806,
+        "protected_minimum": -0.07847923136645962,
+        "shape": [
+          64
+        ]
+      },
+      {
+        "L2_difference": 1.2454860162423496e-05,
+        "dtype": "float32",
+        "key": "output.weight",
+        "maximum_absolute_difference": 4.2282831594769865e-06,
+        "plain_maximum": 0.12750837206840515,
+        "plain_minimum": -0.12763047218322754,
+        "protected_maximum": 0.12750549948240167,
+        "protected_minimum": -0.12763166407867496,
+        "shape": [
+          1,
+          64
+        ]
+      },
+      {
+        "L2_difference": 4.79959306257105e-07,
+        "dtype": "float32",
+        "key": "output.bias",
+        "maximum_absolute_difference": 4.79959306257105e-07,
+        "plain_maximum": 0.06480702757835388,
+        "plain_minimum": 0.06480702757835388,
+        "protected_maximum": 0.06480654761904762,
+        "protected_minimum": 0.06480654761904762,
+        "shape": [
+          1
+        ]
+      }
+    ],
+    "plain_aggregate_sha256": "271bb957daa82172b91df60edbada7d9139b6af61fbcde59f9a949d3f8590eba",
+    "protected_aggregate_sha256": "1cdf3cc7bbf208ef1d4c1ab3e6cf3434740c4c4d307e5bf50a76a55e6478bae3",
+    "relative_L2_difference": 2.182609683314038e-05,
+    "round_0_state_sha256": "c368b6cfaaa8a52b60b48e92332ca9fa694e94cf7b655c7c83f4e63bf747d5aa",
+    "source_round": "FL_IID_V1 round 1",
+    "status": "PASS"
+  },
+  "known_vector": {
+    "analytic_aggregate": [
+      [
+        0.4723404313814133,
+        -0.18617021492583322
+      ],
+      [
+        [
+          0.07446808447229102
+        ]
+      ]
+    ],
+    "client_count": 8,
+    "maximum_absolute_difference": 5.849498385668284e-09,
+    "plain_aggregate": [
+      [
+        0.4723404313814133,
+        -0.18617021492583322
+      ],
+      [
+        [
+          0.07446808447229102
+        ]
+      ]
+    ],
+    "protected_aggregate": [
+      [
+        0.4723404255319149,
+        -0.18617021276595744
+      ],
+      [
+        [
+          0.07446808510638298
+        ]
+      ]
+    ],
+    "relative_L2_difference": 1.2214413505235399e-08,
+    "status": "PASS",
+    "tolerance": {
+      "maximum_absolute_parameter_difference": 0.0001,
+      "relative_l2_difference": 0.0001
+    },
+    "weights": [
+      1000,
+      1050,
+      1100,
+      1150,
+      1200,
+      1250,
+      1300,
+      1350
+    ]
+  },
+  "non_floating_server_buffers_preserved": true,
+  "sample_count_weighting_preserved": true,
+  "status": "PASS",
+  "transport_policy": "FL_STATE_TRANSPORT_V1"
+}
