@@ -1,0 +1,19 @@
+{
+  "analysis_id": "NOISE_TYPE_ERROR_ANALYSIS_V1",
+  "bound_artifacts": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "configs/c031_error_analysis_v1.yaml": "f447cd80c7dd10110e7bdb52890230928b4a6b0d12739cad85a16df0c203cd75",
+    "data/raw/nstdb/1.0.0/bw.dat": "15f68280aba8b006f5497c14da44b558e68caaabc2afc5c4b710eea779b7512c",
+    "data/raw/nstdb/1.0.0/em.dat": "4f9416a04b2bed98081ee3118c1282f9e35321bfd5da96ce48056a3fe147358d",
+    "data/raw/nstdb/1.0.0/ma.dat": "40bda613a3e65adb277df1b72f8a41d2c1c2e0131ea4ec1e03cf1e2cd68199c4",
+    "evaluation/c031_error_analysis.py": "8680fe1df46f1b051178d8691f7528c3eabba33600c0f06ec233ec89d9a14ccb",
+    "federated/feature_noise.py": "aad5552c4c82790191835c16c13dfa1c275594926ccc36f5442d2d3a51797aee",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "reports/error_analysis_v1.json": "94805cdb84f98b979e67e3712dc2d759db3b371807be768a050a428037eb14f1",
+    "reports/noise_robustness.json": "fae1d2720dd92987689f9c4421ad23b4b1c279c7b26aedc19e26bbd3169d6829",
+    "reports/t031/c031_noise_base_manifest.csv": "16a885257048edc80f13bc6c24843627d008cde6235a5def8426f3258c1152fe"
+  },
+  "lock_id": "C031_ERROR_ANALYSIS_V1",
+  "status": "PRE_RESULT_LOCKED"
+}

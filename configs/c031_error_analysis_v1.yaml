@@ -1,0 +1,33 @@
+id: NOISE_TYPE_ERROR_ANALYSIS_V1
+claim_boundary: CONTROLLED_SOURCE_WINDOW_NOISE_TYPE_ANALYSIS
+base_records:
+- '118'
+- '119'
+base_manifest_sha256: 16a885257048edc80f13bc6c24843627d008cde6235a5def8426f3258c1152fe
+base_windows: 720
+positive: 469
+negative: 251
+noise_sources:
+  BASELINE_WANDER: bw
+  ELECTRODE_MOTION: em
+  MUSCLE_ARTIFACT: ma
+snr_db:
+- 24
+- 18
+- 12
+- 6
+- 0
+- -6
+noise_preprocessing: T026 frozen PREPROC_V1_MITDB_360_TO_250_CAUSAL_PATH
+segment_namespace: C031_NOISE_TYPE_V1
+same_segment_across_snr: true
+snr_formula: signal_rms/(noise_rms*10**(snr_db/20))
+post_mix: frozen per-window MODEL_V1 z-score
+MODEL_V1_sha256: 021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe
+CAL_V1_sha256: d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b
+PREPROC_V1_sha256: 181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c
+patient_ranking: 'PATIENT_ERROR_RANKING_V2: patient Brier; lower better'
+historical_patient_F1: PATIENT_POSITIVE_F1_DIAGNOSTIC_V1_WITH_CAVEAT
+pure_noise_labels: NONE; labels originate only from clean MIT-BIH windows
+quality_claim: false
+tuning: false
