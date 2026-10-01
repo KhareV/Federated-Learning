@@ -1,0 +1,13 @@
+{
+  "Q1_bpm": 65.4545454545441,
+  "Q2_bpm": 76.19047619046849,
+  "Q3_bpm": 88.70636550307518,
+  "defined_train_windows": 9660,
+  "derivation_partition": "TRAIN",
+  "estimator": "60 / median consecutive annotation RR intervals wholly inside window",
+  "id": "HR_ANALYSIS_BINS_V1",
+  "minimum_intervals": 2,
+  "quantile_method": "linear",
+  "status": "FROZEN_DESCRIPTIVE_METHOD",
+  "total_train_windows": 9660
+}

@@ -1,0 +1,15 @@
+id: EXPLAINABILITY_V1
+MODEL_V1_sha256: 021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe
+PREPROC_V1_lock_sha256: 181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c
+CAL_V1_sha256: d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b
+internal_predictions_sha256: e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14
+target: MODEL_V1_PRE_SIGMOID_LOGIT
+baseline: ALL_ZERO_NORMALIZED_INPUT
+integration: GAUSS_LEGENDRE
+steps: 64
+case_selection: TP high; TN low; FP high; FN low calibrated probability
+tie_rule: lexicographically_smallest_window_id
+overlay_normalization: PER_WINDOW_ABS_DIVIDE_BY_WINDOW_MAX
+completeness: sum(IG) - (F(x)-F(zero))
+completeness_acceptance: absolute<=1e-3 OR relative<=1e-3
+claim_boundary: engineering diagnostic only; non-causal and non-clinical

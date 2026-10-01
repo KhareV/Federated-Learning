@@ -1,0 +1,18 @@
+id: ERROR_ANALYSIS_V1
+patient_metric: frozen-threshold F1
+class_composition: F first; else S/V dominance or tie
+HR_estimator: 60 / median consecutive annotation RR intervals wholly inside window
+HR_bins:
+  Q1_bpm: 65.4545454545441
+  Q2_bpm: 76.19047619046849
+  Q3_bpm: 88.70636550307518
+HR_derivation_partition: TRAIN_ONLY
+threshold_region:
+  id: THRESHOLD_REGION_V1
+  margin: 0.05
+dataset_sources:
+- MITDB_INTERNAL_TEST
+- INCART_FROZEN_EXTERNAL
+- NSTDB_T019
+wearable_status: DEFERRED_T030_HARDWARE
+posthoc_only: true

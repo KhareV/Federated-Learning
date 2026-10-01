@@ -1,0 +1,21 @@
+{
+  "baseline": "ALL_ZERO_NORMALIZED_INPUT",
+  "bound_artifacts": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "configs/error_analysis_v1.yaml": "a06082f2efabfb704d879f4dd4283c7c0b8ae4f93efd4db943e8b666dc24a18d",
+    "configs/explainability_v1.yaml": "756303efe65c77d13a9a5ee713714ddea5fb46436721b005bb1490ce4f3f23ce",
+    "evaluation/explain.py": "e3f4c5f7eebf5abe0a802a86731b7307d854f472abac1e28a038d2671007616a",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "reports/internal_test_predictions.csv": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+    "reports/t031/explainability_case_manifest.csv": "4e5dedcd4524362dea6ec59b77b7bcd53816c2035372e54625e705cde60be071",
+    "reports/t031/hr_bins.json": "af2e71296fd091843e060af135bf3b81baca495c51caa6e29be5a1dc9848a63c"
+  },
+  "case_selection": "TP high; TN low; FP high; FN low calibrated probability",
+  "claim_boundary": "engineering diagnostic only; non-causal and non-clinical",
+  "integration": "64_POINT_GAUSS_LEGENDRE",
+  "lock_id": "EXPLAINABILITY_V1_METHOD",
+  "overlay": "PER_WINDOW_NORMALIZED_ABSOLUTE_IG_WITH_SIGNED_IG_PRESERVED",
+  "status": "FROZEN_COMPONENT_METHOD",
+  "target": "MODEL_V1_PRE_SIGMOID_LOGIT"
+}
