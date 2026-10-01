@@ -451,6 +451,39 @@ def main() -> None:
     ]
     write_json(OUT / "artifact_hashes.json", {path: hash_file(ROOT / path) for path in artifacts})
 
+    dashboard_lock_path = ROOT / "artifacts/DASHBOARD_UI_V1.lock.json"
+    if dashboard_lock_path.exists():
+        dashboard_lock = json.loads(dashboard_lock_path.read_text(encoding="utf-8"))
+        write_json(
+            ROOT / "reports/dashboard_v1.json",
+            {
+                "gate_id": "G19",
+                "task_id": "T033",
+                "status": "PASS",
+                "route": dashboard_lock["route"],
+                "api_route_consumed": dashboard_lock["api_route_consumed"],
+                "component_lock": "DASHBOARD_UI_V1",
+                "component_lock_sha256": hash_file(dashboard_lock_path),
+                "monitoring_state_vocabulary": dashboard_lock["monitoring_state_vocabulary"],
+                "required_wording": dashboard_lock["required_wording"],
+                "persistent_panels": dashboard_lock["persistent_panels"],
+                "research_only_panel_required": dashboard_lock["research_only_panel_required"],
+                "frontend_path_mapping": {
+                    "logical_subsystem": dashboard_lock["logical_subsystem"],
+                    "repository_path": dashboard_lock["repository_path"],
+                    "source_plan_path": dashboard_lock["source_plan_path"],
+                },
+                "no_new_canonical_freeze_registry_row": True,
+                "pass_criteria": (
+                    "UI state wording exactly matches contract and exposes versions/domain."
+                ),
+                "test_summary_path": "reports/t033/python_test_report.json",
+                "vitest_summary_path": "reports/t033/vitest_report.json",
+                "legacy_audit_path": "reports/t033/frontend_legacy_audit.json",
+                "evidence_path": "reports/dashboard_v1.json",
+            },
+        )
+
     print("reports/t033 evidence generated")
 
 

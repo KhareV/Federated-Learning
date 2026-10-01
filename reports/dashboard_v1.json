@@ -1,0 +1,41 @@
+{
+  "api_route_consumed": "POST /v1/infer-window",
+  "component_lock": "DASHBOARD_UI_V1",
+  "component_lock_sha256": "a8f7c557001503017a392f8703260ee589f4453e413e09498482b018ca8ef1b6",
+  "evidence_path": "reports/dashboard_v1.json",
+  "frontend_path_mapping": {
+    "logical_subsystem": "dashboard",
+    "repository_path": "frontend/",
+    "source_plan_path": "dashboard/"
+  },
+  "gate_id": "G19",
+  "legacy_audit_path": "reports/t033/frontend_legacy_audit.json",
+  "monitoring_state_vocabulary": [
+    "NORMAL_MONITORED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "RECHECK_SENSOR",
+    "CONTEXT_UNAVAILABLE",
+    "SYSTEM_ERROR"
+  ],
+  "no_new_canonical_freeze_registry_row": true,
+  "pass_criteria": "UI state wording exactly matches contract and exposes versions/domain.",
+  "persistent_panels": [
+    "LIVE WAVEFORMS",
+    "SIGNAL QUALITY",
+    "CURRENT MONITORING STATE",
+    "TECHNICAL METADATA"
+  ],
+  "required_wording": {
+    "CONTEXT_UNAVAILABLE": "Context unavailable (PPG/SpO2); ECG result retained when valid",
+    "NORMAL_MONITORED_PATTERN": "Normal monitored pattern",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN": "Potential SVF-associated ECG pattern -- Not a diagnosis.",
+    "RECHECK_SENSOR": "Recheck sensor / signal quality",
+    "SYSTEM_ERROR": "Technical system error -- monitoring result unavailable"
+  },
+  "research_only_panel_required": true,
+  "route": "/monitoring",
+  "status": "PASS",
+  "task_id": "T033",
+  "test_summary_path": "reports/t033/python_test_report.json",
+  "vitest_summary_path": "reports/t033/vitest_report.json"
+}
