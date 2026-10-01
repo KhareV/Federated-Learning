@@ -44,12 +44,14 @@ def test_t004_is_blocked_not_pass() -> None:
     assert rows["T031"]["status"] == "PASS"
     assert rows["T032"]["status"] == "PASS"
     assert rows["T033"]["status"] == "PASS"
+    assert rows["T034"]["status"] == "PASS"
 
 
 def test_g1_and_g16_are_not_passed() -> None:
     gates = {row["gate_id"]: row for row in read_csv(ROOT / "manifests/gate_registry_v1.csv")}
     assert gates["G1"]["status"] != "PASS"
     assert gates["G16"]["status"] != "PASS"
+    assert gates["G21"]["status"] != "PASS"
     assert gates["G0"]["status"] == "PASS"
 
 
