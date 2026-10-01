@@ -1,0 +1,42 @@
+{
+  "artifact_id": "GATEWAY_FP32_V1",
+  "benchmark": {
+    "batch_size": 1,
+    "measured_windows": 1000,
+    "warmups": 100
+  },
+  "bound_artifacts": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "configs/gateway_artifact_v1.yaml": "baa06067357d14455d0506390d8c22e07eb9a0fcf9b103a8c56cbc0767deb754",
+    "deployment/benchmark.py": "e3473ed1fd2c42a38ab47623895144b941c3b9dc9b9f6ce0702583d9e0a147e9",
+    "deployment/export.py": "7f1bac836ac63508a5be708fa9ebf6457b2a3bbffae04ca490b083a416a296ac",
+    "deployment/runtime.py": "d822ebc0f0b1f994f2a9def38ef55e0be4a44256b67235980b9aaca8203c11ff",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "reports/t029/export_development_audit.json": "b20448f9a7c58b9d7c2938b5bffd89cdaafef9fe66c7b0072ea7dcdd4ab307f9",
+    "reports/t029/gateway_host.json": "8644a2887123bce77d944b4165693f98e053e26a94ed8f3bb0524557c4fc9634",
+    "reports/t029/model_size.json": "9e055c5014b21ccd27c2b1e19f0453df081f263ecccd27a28cb40b8a6f58e13e",
+    "scripts/export_gateway_t029.py": "587f9ea8c058ec186f753d18390f347bfe3e2b25c237800bccd410c05487b40b",
+    "scripts/run_gateway_t029.py": "ea6e0e3ceb0d2858a2faf2a0d2f9747f66b465397d8b341e8776615b6725abab",
+    "tests/fixtures/model_v1_test_vector.npz": "feaf6673f5faf849ee3fc8a62d22e0c09dc3f740a481dafbfeca2b4808fe25c3"
+  },
+  "development_max_absolute_raw_logit_delta": 1e-05,
+  "device": "CPU",
+  "format": "TORCHSCRIPT_SCRIPT",
+  "input_contract": "GATEWAY_MODEL_INPUT_V1:[1,1,2500]:float32",
+  "internal_equivalence": {
+    "max_AUPRC_delta": 1e-06,
+    "max_patient_macro_F1_delta": 1e-06,
+    "max_pooled_F1_delta": 1e-06,
+    "max_raw_logit_delta": 1e-05,
+    "required_decision_agreement": 1.0
+  },
+  "lock_id": "GATEWAY_FP32_METHOD_V1",
+  "status": "FROZEN_PRE_INTERNAL_TEST_METHOD",
+  "test_access_role": "DEPLOYMENT_EQUIVALENCE_ONLY",
+  "threads": {
+    "interop": 1,
+    "intraop": 1
+  }
+}

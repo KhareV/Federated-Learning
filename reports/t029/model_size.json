@@ -1,0 +1,20 @@
+{
+  "deployment_artifact": {
+    "bytes": 82741,
+    "format": "TORCHSCRIPT_SCRIPT",
+    "path": "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts",
+    "sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4"
+  },
+  "deployment_to_source_size_ratio": 1.3721331321205288,
+  "source_checkpoint": {
+    "bytes": 60301,
+    "path": "checkpoints/MODEL_V1.pt",
+    "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+  },
+  "status": "PASS",
+  "theoretical_FP32_trainable_parameter_bytes": 52740,
+  "total_parameter_count": 13185,
+  "total_state_entries": 18,
+  "total_state_values": 13283,
+  "trainable_parameter_count": 13185
+}

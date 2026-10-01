@@ -1,0 +1,35 @@
+{
+  "EAGER_fallback": false,
+  "F08_deployment_logits": [
+    3.3621785640716553,
+    9.34778881072998,
+    9.932059288024902
+  ],
+  "F08_expected_logits": [
+    3.3621785640716553,
+    9.34778881072998,
+    9.932059288024902
+  ],
+  "F08_maximum_absolute_difference": 0.0,
+  "INTERNAL_TEST_used_for_selection": false,
+  "SCRIPT": "PASS",
+  "TRACE": "NOT_ATTEMPTED_FIRST_OPTION_PASSED",
+  "artifact_id": "GATEWAY_FP32_V1",
+  "artifact_path": "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts",
+  "artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+  "format": "TORCHSCRIPT_SCRIPT",
+  "input_contract_id": "GATEWAY_MODEL_INPUT_V1",
+  "selection_data": [
+    "F08 test vector",
+    "deterministic synthetic fixtures"
+  ],
+  "selection_order": [
+    "torch.jit.script",
+    "torch.jit.trace",
+    "eager"
+  ],
+  "source_model_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "status": "PASS",
+  "synthetic_maximum_absolute_difference": 0.0,
+  "threshold": 1e-05
+}
