@@ -1,0 +1,39 @@
+config_id: SECAGG_CONFIG_V1
+flower_version: 1.39.0
+base_condition: FL_IID_V1
+client_manifest: CLIENTS_IID_V1
+clients: 8
+algorithm: FEDAVG
+workflow: flwr.server.workflow.SecAggPlusWorkflow
+client_mod: flwr.client.mod.secaggplus_mod
+num_shares: 5
+reconstruction_threshold: 4
+max_weight: 4096.0
+clipping_range: 8.0
+quantization_range: 4194304
+modulus_range: 4294967296
+timeout: null
+dropout:
+  injected: false
+  count: 0
+correctness:
+  maximum_absolute_parameter_difference: 0.0001
+  relative_l2_difference: 0.0001
+visibility:
+  boundary: FLOWER_APPLICATION_SERVER_AGGREGATION_INTERFACE_V1
+  plain_clear_update_count_required: 8
+  protected_clear_update_count_required: 0
+runtime:
+  clock: time.perf_counter
+  warmup_trials: 1
+  measured_trials: 10
+  excludes: [data_acquisition, preprocessing, local_training, validation, artifact_writing]
+byte_accounting:
+  id: FLOWER_APPLICATION_PAYLOAD_BYTES_V1
+  serialization: deterministic Flower Message protobuf
+  excludes: [transport_framing, TCP, TLS, Python_object_memory]
+claim_boundary: >-
+  In the instrumented Flower 1.39 SecAgg+ simulation and configured workflow,
+  the protected server aggregation interface did not expose individual
+  participating clients' clear model updates while forming the aggregate.
+
