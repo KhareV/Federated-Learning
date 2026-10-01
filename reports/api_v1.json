@@ -1,0 +1,32 @@
+{
+  "component_lock": "API_RUNTIME_V1",
+  "component_lock_sha256": "a6bfedc258977cdf27ecb36e7b326f69800c4897d4cacb09c796b280eebff971",
+  "contract_version": "API_SCHEMA_V1",
+  "disease_diagnosis_wording_present": false,
+  "error_semantics": {
+    "400": "REQUEST_SCHEMA_ERROR / application-level request-contract error",
+    "422": "UNUSABLE_OR_INCOMPLETE_SIGNAL_WINDOW (MODEL_V1 never run)",
+    "500": "INTERNAL_SERVER_ERROR (safe generic body)"
+  },
+  "evidence_path": "reports/api_v1.json",
+  "gate_id": "G18",
+  "monitoring_state_vocabulary": [
+    "NORMAL_MONITORED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "RECHECK_SENSOR",
+    "CONTEXT_UNAVAILABLE",
+    "SYSTEM_ERROR"
+  ],
+  "openapi_path": "contracts/openapi_v1.json",
+  "openapi_sha256": "a3f02bbe3512ecd68bf41aa6a7ce9013af2914a72f0178b532591710748ab22d",
+  "pass_criteria": "Versioned outputs/errors and research semantics pass.",
+  "route": "POST /v1/infer-window",
+  "scope_audit_path": "reports/t032/scope_audit.json",
+  "status": "PASS",
+  "tamper_matrix_path": "reports/t032/tamper_matrix.json",
+  "target_id": "AAMI_SVF_WINDOW_V1",
+  "task_id": "T032",
+  "test_summary_path": "reports/t032/test_summary.json",
+  "websocket_equivalence_implemented": false,
+  "websocket_equivalence_note": "T032 delivers the REST contract POST /v1/infer-window only. The gate-registry row's prose ('REST/WebSocket equivalence') is planning-stage language from Sections 4-5; no WebSocket transport was specified by the actual T032 task packet delivered, so none is implemented or claimed here. This is reported explicitly, not silently dropped."
+}

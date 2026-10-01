@@ -916,3 +916,41 @@ c031-ea-evidence:
 
 c031-ea-verify:
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_c031_ea.py
+
+.PHONY: api-preflight api-contract-tests api-state-tests api-openapi api-freeze api-verify t032-evidence phase32
+
+# Offline, fast: no MODEL_V1/torch, no GATEWAY_ARTIFACT_V1 load -- fake-runtime HTTP tests only.
+api-preflight:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_api_scope_t032.py tests/test_api_errors_t032.py
+
+api-contract-tests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_api_errors_t032.py tests/test_api_schema_v1.py tests/test_api_tamper_matrix_t032.py
+
+api-state-tests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_api_stateful_t032.py
+
+# Regenerates contracts/openapi_v1.json from the real, unmocked app -- never hand-authored.
+api-openapi:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_openapi_v1_t032.py
+
+api-freeze: api-openapi
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_api_runtime_t032.py
+
+api-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_api_runtime_t032.py
+
+t032-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t032_evidence.py
+
+phase32:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) t024-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-iid-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-noniid-verify PYTHON=$(PYTHON)
+	$(MAKE) fedprox-verify PYTHON=$(PYTHON)
+	$(MAKE) secagg-verify PYTHON=$(PYTHON)
+	$(MAKE) gateway-verify PYTHON=$(PYTHON)
+	$(MAKE) explainability-verify PYTHON=$(PYTHON)
+	$(MAKE) api-verify PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check

@@ -1,0 +1,327 @@
+{
+  "failed": 0,
+  "files": [
+    "tests/test_api_t032.py",
+    "tests/test_api_errors_t032.py",
+    "tests/test_api_stateful_t032.py",
+    "tests/test_api_openapi_t032.py",
+    "tests/test_api_scope_t032.py",
+    "tests/test_api_runtime_lock_t032.py",
+    "tests/test_api_tamper_matrix_t032.py",
+    "tests/test_api_schema_v1.py",
+    "tests/test_api_slice_t005.py"
+  ],
+  "passed": 77,
+  "results": [
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_t032.py::test_golden_path_returns_200_with_real_frozen_artifacts"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_t032.py::test_golden_path_response_matches_api_schema_v1"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_t032.py::test_response_never_contains_diagnosis_wording"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_t032.py::test_context_does_not_alter_calibrated_probability_or_threshold"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_t032.py::test_t005_fixture_path_still_isolated_and_passing"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_malformed_json_body_is_400"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_wrong_contract_version_is_400"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_extra_unknown_field_is_400"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_wrong_enum_value_is_400"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_raw_nan_in_ecg_samples_is_400_and_does_not_echo_waveform"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_unsupported_model_id_is_400"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_non_monotonic_timestamp_is_400"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_string_timestamp_is_rejected_not_coerced"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_declared_unusable_ecg_is_422_and_does_not_run_model"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_incomplete_window_is_422_and_does_not_run_model"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_unusable_window_still_commits_session_timestamp"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_internal_failure_is_500_with_safe_generic_body"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_errors_t032.py::test_error_responses_conform_to_api_schema_v1_error_shape"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_k2_requires_two_consecutive_above_threshold_windows_to_open"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_m2_requires_two_consecutive_below_threshold_windows_to_close_then_cooldown"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_cooldown_prevents_reopen_until_elapsed"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_degraded_ecg_quality_maps_to_recheck_sensor_and_warns"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_missing_context_reports_context_unavailable"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_out_of_range_spo2_degrades_to_unavailable_instead_of_crashing"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_session_state_does_not_leak_between_session_ids"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_session_timestamps_are_independent_per_session"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_same_session_concurrent_requests_serialize_without_corruption"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_stateful_t032.py::test_concurrent_requests_across_different_sessions_do_not_contend"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_openapi_t032.py::test_openapi_file_exists_and_is_canonical_json"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_openapi_t032.py::test_openapi_file_is_byte_identical_to_fresh_regeneration"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_openapi_t032.py::test_openapi_route_documents_infer_window"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_openapi_t032.py::test_openapi_documents_400_422_500_with_correct_meanings_not_fastapi_defaults"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_openapi_t032.py::test_openapi_does_not_document_a_disease_diagnosis_field"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_openapi_t032.py::test_app_title_and_version_are_api_schema_v1"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_openapi_t032.py::test_live_app_openapi_matches_on_disk_contract"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_scope_t032.py::test_production_api_files_never_import_forbidden_modules"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_scope_t032.py::test_production_api_files_never_import_mock_inference_or_fixture_state_policy"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_scope_t032.py::test_production_api_files_contain_no_prohibited_diagnosis_field_names"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_scope_t032.py::test_production_app_never_constructs_mock_inference_runtime"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_scope_t032.py::test_fixture_v0_module_is_clearly_isolated_and_historical"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_scope_t032.py::test_production_runtime_binds_only_frozen_artifact_identifiers"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_scope_t032.py::test_no_database_or_auth_dependencies_are_imported"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_runtime_lock_t032.py::test_lock_file_exists_with_correct_status"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_runtime_lock_t032.py::test_lock_does_not_introduce_a_new_canonical_freeze_registry_id"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_runtime_lock_t032.py::test_verify_passes_against_current_repository_state"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_runtime_lock_t032.py::test_verify_detects_tamper_on_any_bound_file"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_runtime_lock_t032.py::test_bound_artifacts_cover_every_production_api_source_file"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_runtime_lock_t032.py::test_calibration_and_policy_identifiers_match_upstream_frozen_artifacts"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_api_schema_v1_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_openapi_contract_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_gateway_artifact_identity_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_model_v1_checkpoint_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_preproc_v1_lock_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_cal_v1_temperature_and_threshold_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_alert_policy_v1_lock_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_ecg_hr_context_v2_lock_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_api_app_source_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_monitoring_state_enum_tamper_is_rejected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_status_code_mapping_tamper_is_rejected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_target_id_tamper_is_rejected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_response_contract_version_tamper_is_rejected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_openapi_route_tamper_is_detected_as_drift"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_schema_v1.py::test_request_and_response_schemas_are_valid_json_schema"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_schema_v1.py::test_valid_request_passes"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_schema_v1.py::test_request_requires_exact_2500_sample_ecg_window"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_schema_v1.py::test_valid_response_passes"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_schema_v1.py::test_response_requires_version_and_provenance_fields"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_schema_v1.py::test_target_is_locked_to_aami_svf_window_v1"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_schema_v1.py::test_monitoring_state_enum_is_exact"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_schema_v1.py::test_error_response_locks_status_codes"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_schema_v1.py::test_no_disease_diagnosis_output_is_present"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_slice_t005.py::test_response_is_json_serializable"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_slice_t005.py::test_response_reports_correct_monitoring_state"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_slice_t005.py::test_response_makes_mock_provenance_explicit"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_slice_t005.py::test_no_fake_calibration_or_model_evidence"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_slice_t005.py::test_no_disease_diagnosis_wording"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_slice_t005.py::test_does_not_claim_to_satisfy_production_api_schema"
+    }
+  ],
+  "status": "PASS",
+  "total": 77
+}

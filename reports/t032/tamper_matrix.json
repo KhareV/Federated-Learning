@@ -1,0 +1,62 @@
+{
+  "scenario_count": 14,
+  "scenarios": [
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_api_schema_v1_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_openapi_contract_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_gateway_artifact_identity_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_model_v1_checkpoint_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_preproc_v1_lock_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_cal_v1_temperature_and_threshold_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_alert_policy_v1_lock_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_ecg_hr_context_v2_lock_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_api_app_source_tamper_is_detected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_monitoring_state_enum_tamper_is_rejected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_status_code_mapping_tamper_is_rejected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_target_id_tamper_is_rejected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_response_contract_version_tamper_is_rejected"
+    },
+    {
+      "outcome": "PASSED",
+      "test": "tests/test_api_tamper_matrix_t032.py::test_openapi_route_tamper_is_detected_as_drift"
+    }
+  ],
+  "status": "PASS"
+}

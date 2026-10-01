@@ -1,0 +1,16 @@
+{
+  "CAL_fitting": false,
+  "MODEL_V1_modified": false,
+  "PREPROC_change": false,
+  "component_lock_created": "API_RUNTIME_V1",
+  "database_or_auth_dependency": false,
+  "dataset_access": false,
+  "disease_diagnosis_wording": false,
+  "model_training": false,
+  "new_canonical_freeze_registry_row_created": false,
+  "simulation_truth_access": false,
+  "status": "PASS",
+  "threshold_tuning": false,
+  "websocket_equivalence_implemented": false,
+  "websocket_equivalence_note": "T032 delivers the REST contract POST /v1/infer-window only. The gate-registry row's prose ('REST/WebSocket equivalence') is planning-stage language from Sections 4-5; no WebSocket transport was specified by the actual T032 task packet delivered, so none is implemented or claimed here. This is reported explicitly, not silently dropped."
+}
