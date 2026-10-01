@@ -1,0 +1,19 @@
+{
+  "artifacts/C031_ERROR_ANALYSIS_V1.lock.json": "4e06a7aa25ddd26bb929028eb513c9bac4e4dcf9f7f901363b9383300a0ace0d",
+  "configs/c031_error_analysis_v1.yaml": "f447cd80c7dd10110e7bdb52890230928b4a6b0d12739cad85a16df0c203cd75",
+  "evaluation/c031_error_analysis.py": "8680fe1df46f1b051178d8691f7528c3eabba33600c0f06ec233ec89d9a14ccb",
+  "reports/error_analysis_v1_1.csv": "c64514a1b394c347df18735e3334caed1f5371c275cda9dd57db0b8b344ea231",
+  "reports/error_analysis_v1_1.json": "5f554a91deb33748475c005dc8e3c37ed6cdb96cd1f41bc1f01f395966c927ea",
+  "reports/t031/c031_immutability_audit.json": "956187f5d688b63d075f5c8944306b01afcbecfd4150f39dc64a81e5cdb9456f",
+  "reports/t031/c031_noise_base_manifest.csv": "16a885257048edc80f13bc6c24843627d008cde6235a5def8426f3258c1152fe",
+  "reports/t031/c031_noise_fixture_audit.json": "633b04b1e7239ce0369c1d0c44186bdcbaf48a47e46da0a55fe1e7ca7d957c68",
+  "reports/t031/c031_reproducibility.json": "446003f82b2601a41bbf045ecc0e3ccea41fb78699030b29f641e14c63152b56",
+  "reports/t031/c031_scope_audit.json": "dd4ec9877a1472c25ee6e18078ecd3aa836712743865356cfac134f828a021b2",
+  "reports/t031/noise_type_predictions_v2.csv": "9425d4a3fcc4e9d80372049a1517d5e291119bccb4149f5d41ed7dd96f35434a",
+  "reports/t031/noise_type_snr_slice_v2.csv": "e671d42f3ed80eaea5446d1d642d477466152989e75c1097dd29b92dbb2fb861",
+  "reports/t031/patient_slice_v2.csv": "82ebab140a34d3ca1c8710a11d65972698580284c7aebc482273b05eb238a097",
+  "scripts/generate_c031_ea_evidence.py": "cf6dbf09adb6fc6c8ae2d4861422e595cd78932aa38023b7d0c0ee4c087d98a4",
+  "scripts/prepare_c031_ea.py": "0ef622d845b7a406a5c2010ad31a843d8106300543a1b1d83030ebdd5a22bcc5",
+  "scripts/run_c031_ea.py": "336f141f7e0342260585d7cffe4b77db4810d405ea30fbb65433378b4b252766",
+  "scripts/verify_c031_ea.py": "a02279787df8cf0a17d79bff4c0ec205cc497036ecdacbb6a8bd29db24992cce"
+}

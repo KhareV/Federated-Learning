@@ -1,0 +1,22 @@
+{
+  "G17_remains_PASS": true,
+  "artifacts": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/EXPLAINABILITY_V1_METHOD.lock.json": "c5ec8bbfa7329a72f9cfad066837bc6a0740019d0141a78a70633a1458403a4a",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "reports/error_analysis_v1.json": "94805cdb84f98b979e67e3712dc2d759db3b371807be768a050a428037eb14f1",
+    "reports/noise_robustness.json": "fae1d2720dd92987689f9c4421ad23b4b1c279c7b26aedc19e26bbd3169d6829",
+    "reports/t031/cases/FN_attribution.csv": "a5cdcd2133be162056a753767ae9b84a81fa66cd81c985b114cc1438af26d834",
+    "reports/t031/cases/FN_figure.svg": "ff667c2eaeb84d92270045ed13637b001774cb214bcb0c3b4027342584d37115",
+    "reports/t031/cases/FP_attribution.csv": "863bca69b016d138e8c47d022ff4dfabd590a031a07f11b7b975142504570c19",
+    "reports/t031/cases/FP_figure.svg": "8698f9575344e67283198abd0574bb2fa0a5fabba451a4cb22e1bf441a851c7a",
+    "reports/t031/cases/TN_attribution.csv": "2e928aa11472ef54cfe60c99bb972963ea9c16ac2bda575092a9981604f91b9d",
+    "reports/t031/cases/TN_figure.svg": "a73048c09127216a3da095f63a3f37266af46faf3ad2e117498b4057b90669e3",
+    "reports/t031/cases/TP_attribution.csv": "5e52deead972566aa6627ec8faa8548b89314974513d9f9355d2f0f363a9b1e6",
+    "reports/t031/cases/TP_figure.svg": "54f7c1de94470b490174708bb313f86414f30ffc715e5d0d36d39c002491c24c",
+    "reports/t031/explainability_case_manifest.csv": "4e5dedcd4524362dea6ec59b77b7bcd53816c2035372e54625e705cde60be071"
+  },
+  "entry_SHA": "4f3caebd9f62616ed3b5a1c05f0a2e44acdb9285",
+  "status": "PASS"
+}

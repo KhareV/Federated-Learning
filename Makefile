@@ -902,3 +902,17 @@ phase31:
 	$(MAKE) nstdb-verify external-incart-verify PYTHON=$(PYTHON)
 	$(MAKE) explainability-verify PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check
+
+.PHONY: c031-ea-prepare c031-ea-run c031-ea-evidence c031-ea-verify
+
+c031-ea-prepare:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/prepare_c031_ea.py
+
+c031-ea-run:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/run_c031_ea.py
+
+c031-ea-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_c031_ea_evidence.py
+
+c031-ea-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_c031_ea.py
