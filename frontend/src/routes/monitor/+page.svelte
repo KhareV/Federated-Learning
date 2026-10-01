@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { api } from '$lib/services/api';
 	import { connectLive } from '$lib/services/websocket';
-	import TelemetryPlot from '$lib/components/dashboard/TelemetryPlot.svelte';
 
 	let systemStatus = 'CHECKING';
 	let statusError = '';
@@ -58,9 +57,12 @@
 		{#if statusError}<div class="notice">SYSTEM HEALTH / {statusError}</div>{/if}
 
 		<div class="signal-grid">
-			<TelemetryPlot label="ECG / ELECTRICAL CARDIAC SIGNAL" value={liveData.hr || '--'} unit="BPM" detail={liveStatus} />
-			<TelemetryPlot label="PPG / OPTICAL PULSE WAVEFORM" mode="ppg" color="#0ea5e9" value={liveData.spo2 || '--'} unit="%" detail="MAX30102 / SENSOR ARRAY" />
-			<article class="signal-card"><span>SpO₂ / BLOOD OXYGEN ESTIMATION</span><strong>{liveData.spo2 || '--'}<em>%</em></strong><small>EDGE FEATURE PROCESSING</small><div class="metric">{liveData.spo2 || '--'}<em>%</em></div></article>
+			<article class="signal-card signal-card--teal">
+				<span>NHM RESEARCH DASHBOARD</span>
+				<strong style="font-size:20px;line-height:1.4">Frozen API_RUNTIME_V1 contract, five monitoring states, no diagnosis claim.</strong>
+				<small>No live wearable hardware is connected -- see /monitoring for the real, typed POST /v1/infer-window integration.</small>
+				<a class="metric" style="font-size:16px;text-decoration:none" href="/monitoring">OPEN DASHBOARD →</a>
+			</article>
 		</div>
 
 		<nav class="workbench" aria-label="Monitoring workbench">

@@ -7,7 +7,7 @@
 		layer: number;
 		x: number;
 		y: number;
-		category: 'Sensor Input' | 'Waveform Feature' | 'Autonomic / Context' | 'Edge Diagnostic';
+		category: 'Sensor Input' | 'Waveform Feature' | 'Autonomic / Context' | 'Illustrative Output';
 		clinicalRole: string;
 		signalSource: string;
 		samplingRate: string;
@@ -33,9 +33,9 @@
 	// Curated authentic physiological nodes across 4 architectural tiers
 	const nodes: SignalNode[] = [
 		// Tier 0: Biosensors
-		{ id: 'ecg_lead', name: 'ECG Biopotential', layer: 0, x: 0.12, y: 0.22, category: 'Sensor Input', clinicalRole: 'Differential cardiac electrical vector', signalSource: 'AD8232 Front-End', samplingRate: '360 Hz', normalRange: '0.5 – 2.0 mV', currentValue: '1.14 mV (QRS)' },
-		{ id: 'ppg_red', name: 'PPG 660nm (Red)', layer: 0, x: 0.12, y: 0.50, category: 'Sensor Input', clinicalRole: 'Oxygenated pulsatile arterial volume', signalSource: 'MAX30102 Optical', samplingRate: '100 Hz', normalRange: '660 nm Peak', currentValue: '0.84 AC/DC' },
-		{ id: 'ppg_ir', name: 'PPG 880nm (IR)', layer: 0, x: 0.12, y: 0.78, category: 'Sensor Input', clinicalRole: 'Deoxygenated infrared tissue transmission', signalSource: 'MAX30102 Optical', samplingRate: '100 Hz', normalRange: '880 nm Peak', currentValue: '0.92 AC/DC' },
+		{ id: 'ecg_lead', name: 'ECG Biopotential', layer: 0, x: 0.12, y: 0.22, category: 'Sensor Input', clinicalRole: 'Differential cardiac electrical vector (illustrative)', signalSource: 'Concept Front-End (Unverified)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
+		{ id: 'ppg_red', name: 'PPG 660nm (Red)', layer: 0, x: 0.12, y: 0.50, category: 'Sensor Input', clinicalRole: 'Oxygenated pulsatile arterial volume (illustrative)', signalSource: 'Concept Optical Sensor (Unverified)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
+		{ id: 'ppg_ir', name: 'PPG 880nm (IR)', layer: 0, x: 0.12, y: 0.78, category: 'Sensor Input', clinicalRole: 'Deoxygenated infrared tissue transmission (illustrative)', signalSource: 'Concept Optical Sensor (Unverified)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
 
 		// Tier 1: Morphological Features
 		{ id: 'qrs_morph', name: 'QRS Morphology', layer: 1, x: 0.38, y: 0.18, category: 'Waveform Feature', clinicalRole: 'Ventricular depolarization duration & axis', signalSource: 'Pan-Tompkins Filter', samplingRate: 'Real-time', normalRange: '80 – 120 ms', currentValue: '92 ms (Normal)' },
@@ -48,9 +48,9 @@
 		{ id: 'autonomic_tone', name: 'Autonomic Balance', layer: 2, x: 0.65, y: 0.62, category: 'Autonomic / Context', clinicalRole: 'Sympathovagal circadian balance (LF/HF)', signalSource: 'Spectral Fusion', samplingRate: 'Continuous', normalRange: '0.8 – 2.2 LF/HF', currentValue: '1.24 LF/HF' },
 
 		// Tier 3: Continuous Clinical Output
-		{ id: 'arrhythmia_out', name: 'Sinus Rhythm Guard', layer: 3, x: 0.88, y: 0.24, category: 'Edge Diagnostic', clinicalRole: 'Continuous ectopic beat & flutter detector', signalSource: 'Local TFLite Micro', samplingRate: 'Instantaneous', normalRange: 'Risk < 0.05', currentValue: '0.01 (Normal Sinus)' },
-		{ id: 'vital_stability', name: 'Hemodynamic Stability', layer: 3, x: 0.88, y: 0.52, category: 'Edge Diagnostic', clinicalRole: 'Continuous micro-vascular perfusion index', signalSource: 'Multi-Sensor Fusion', samplingRate: 'Instantaneous', normalRange: 'Score 90 – 100', currentValue: '98 / 100 (Optimal)' },
-		{ id: 'federated_grad', name: 'Federated Gradient', layer: 3, x: 0.88, y: 0.80, category: 'Edge Diagnostic', clinicalRole: 'Differential privacy model update weight', signalSource: 'Privacy Engine', samplingRate: 'Periodic Sync', normalRange: 'DP Epsilon < 1.0', currentValue: 'Ready (ε = 0.45)' }
+		{ id: 'arrhythmia_out', name: 'Research Monitoring State (Illustrative)', layer: 3, x: 0.88, y: 0.24, category: 'Illustrative Output', clinicalRole: 'Concept node -- not an implemented diagnostic feature', signalSource: 'Illustrative Concept', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live, not a diagnosis)' },
+		{ id: 'vital_stability', name: 'Context Fusion (Illustrative)', layer: 3, x: 0.88, y: 0.52, category: 'Illustrative Output', clinicalRole: 'Concept node -- not an implemented scoring feature', signalSource: 'Illustrative Concept', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
+		{ id: 'federated_grad', name: 'FedProx Gradient (Illustrative)', layer: 3, x: 0.88, y: 0.80, category: 'Illustrative Output', clinicalRole: 'Research FedProx local-objective weight update (no formal DP proof)', signalSource: 'Illustrative Concept', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'See reports/fedprox.json' }
 	];
 
 	// Synapses connecting the layers
@@ -72,28 +72,29 @@
 		{ from: 'autonomic_tone', to: 'federated_grad', weight: 0.82, pulseProgress: 0.9, pulseSpeed: 0.006 }
 	];
 
-	// Real clinical blind spot occurrences
+	// Illustrative scenarios only -- not real patient events, not a detection/diagnosis claim.
+	// NHM does not claim to detect bradycardia, sleep apnea, ischemia, or any other disease.
 	const clinicalBlindspots = [
 		{
 			hour: '03:45 AM',
-			title: 'Nocturnal Bradycardia & Sleep Apnea Desaturation',
-			severity: 'High Clinical Risk',
-			snapshotStatus: 'Undetected (Patient Asleep)',
-			nhmStatus: 'Continuous Flag: SpO₂ dipped to 87% for 22s'
+			title: 'Illustrative overnight window (hypothetical)',
+			severity: 'Illustrative only -- not a detection claim',
+			snapshotStatus: 'Outside a periodic spot-check window',
+			nhmStatus: 'Hypothetical: a continuous research window would exist here'
 		},
 		{
 			hour: '11:20 AM',
-			title: 'Transient Ischemic ST-Segment Shift',
-			severity: 'Moderate Clinical Risk',
-			snapshotStatus: 'Undetected (Between Visits)',
-			nhmStatus: 'Continuous Flag: 0.16 mV ST deflection during exertion'
+			title: 'Illustrative exertion window (hypothetical)',
+			severity: 'Illustrative only -- not a detection claim',
+			snapshotStatus: 'Outside a periodic spot-check window',
+			nhmStatus: 'Hypothetical: a continuous research window would exist here'
 		},
 		{
 			hour: '18:15 PM',
-			title: 'Post-Work Autonomic Sympathetic Overdrive',
-			severity: 'Sub-Clinical Stress Spike',
-			snapshotStatus: 'Undetected (Normal at clinic)',
-			nhmStatus: 'Continuous Flag: HRV SDNN dropped to 18ms'
+			title: 'Illustrative post-activity window (hypothetical)',
+			severity: 'Illustrative only -- not a detection claim',
+			snapshotStatus: 'Outside a periodic spot-check window',
+			nhmStatus: 'Hypothetical: a continuous research window would exist here'
 		}
 	];
 
@@ -184,7 +185,8 @@
 			if (node.category === 'Sensor Input') ctx.fillStyle = '#0f766e';
 			else if (node.category === 'Waveform Feature') ctx.fillStyle = '#0369a1';
 			else if (node.category === 'Autonomic / Context') ctx.fillStyle = '#4f46e5';
-			else ctx.fillStyle = '#059669';
+			else if (node.category === 'Illustrative Output') ctx.fillStyle = '#059669';
+			else ctx.fillStyle = '#64748b';
 			ctx.fill();
 
 			ctx.strokeStyle = '#ffffff';
@@ -384,11 +386,11 @@
 						<strong>{activeNode.samplingRate}</strong>
 					</div>
 					<div class="meta-item">
-						<span>CLINICAL REFERENCE</span>
+						<span>ILLUSTRATIVE RANGE</span>
 						<strong>{activeNode.normalRange}</strong>
 					</div>
 					<div class="meta-item">
-						<span>LIVE VECTOR VALUE</span>
+						<span>ILLUSTRATIVE VALUE (NOT LIVE)</span>
 						<strong class="text-teal">{activeNode.currentValue}</strong>
 					</div>
 				</div>

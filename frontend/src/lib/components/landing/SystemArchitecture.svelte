@@ -24,8 +24,8 @@
 			latency: '< 0.2 ms',
 			dataThroughput: '14.4 kbps raw',
 			security: 'Direct Skin Contact Guard',
-			description: 'Captures electrical cardiac potentials via differential electrodes and optical pulsatile absorption at 660nm and 880nm.',
-			details: ['AD8232 Integrated Instrumentation Amp', 'MAX30102 Dual-Wavelength Core', 'Hardware Right-Leg Drive Active Filter']
+			description: 'Concept sensing stage for electrical cardiac potentials and optical pulsatile absorption. Exact front-end hardware and electrode placement are unverified (see docs/LEGACY_FIRMWARE_V0_FINDINGS.md: VERIFICATION_REQUIRED).',
+			details: ['ECG Front-End: Unverified', 'PPG Front-End: Unverified', 'Concept Only -- Not Bench-Tested']
 		},
 		{
 			id: 'embedded',
@@ -36,8 +36,8 @@
 			latency: '0.6 ms',
 			dataThroughput: '512 KB Internal SRAM',
 			security: 'Isolated Local Ring Buffer',
-			description: 'Continuous ADC sampling with baseline wander removal, 50Hz notch filter, and circular buffer storage on the ESP32-S3.',
-			details: ['24-Bit Sigma-Delta Conversion', 'Zero-Latency Motion Artifact Suppression', 'Dual-Core Asynchronous Core Affinity']
+			description: 'Concept firmware sketch for ADC sampling, baseline wander removal, and buffer storage on an ESP32-class board. ADC resolution, sampling rate, and filtering are unverified pending bench testing (see docs/LEGACY_FIRMWARE_V0_FINDINGS.md).',
+			details: ['ADC Resolution: Unverified', 'Sampling Rate: Unverified', 'Concept Only -- Not Bench-Tested']
 		},
 		{
 			id: 'features',
@@ -54,38 +54,38 @@
 		{
 			id: 'inference',
 			index: '04',
-			title: 'On-Device Edge ML',
-			role: 'Local Arrhythmia Classifier',
-			protocol: 'TensorFlow Lite Micro (INT8)',
-			latency: '1.4 ms / Inference',
-			dataThroughput: '18 KB Model Flash Footprint',
-			security: '100% Zero Raw Data Upload',
-			description: 'Quantized neural network performing real-time classification of arrhythmias, PVCs, and sleep desaturations entirely on the wearable.',
-			details: ['On-Chip Quantized 8-Bit Inference Engine', 'Zero Cloud Dependency for Immediate Alarms', 'Automated Anomaly Confidence Scoring']
+			title: 'Research Model Inference',
+			role: 'Server-Side CPU Gateway (Current Implementation)',
+			protocol: 'TorchScript CPU Gateway via POST /v1/infer-window',
+			latency: 'See reports/t029/latency_summary.json',
+			dataThroughput: 'One 10-second ECG window per request',
+			security: 'Research prototype -- no clinical-grade security claim',
+			description: 'MODEL_V1 currently runs server-side through the frozen GATEWAY_ARTIFACT_V1 CPU runtime behind the typed /v1/infer-window API -- not on-device. On-device inference is a possible future direction, not an implemented or verified capability.',
+			details: ['Server-Side CPU Inference (Current)', 'On-Device Inference: Not Implemented', 'Research-Only Monitoring States, Not a Diagnosis']
 		},
 		{
 			id: 'privacy',
 			index: '05',
 			title: 'Differential Privacy Engine',
-			role: 'Gradient Perturbation & Noise Addition',
-			protocol: 'DP-FedAvg (ε = 0.45, δ = 1e-5)',
-			latency: '3.8 ms / Batch',
-			dataThroughput: 'Perturbed Weights Only',
-			security: 'Formal Differential Privacy Proof',
-			description: 'Calculates model parameter weight updates locally and injects Gaussian noise to guarantee zero patient re-identification.',
-			details: ['Rényi Differential Privacy Accounting', 'Gradient Clipping Against Outlier Exploits', 'Zero Raw ECG/PPG Exposure Guarantee']
+			role: 'FedProx Local Objective (Research Prototype)',
+			protocol: 'FedProx (see artifacts/FEDPROX_METHOD_V1.lock.json)',
+			latency: 'See reports/fedprox.json',
+			dataThroughput: 'Model Weight Updates',
+			security: 'No Formal Differential-Privacy Proof',
+			description: 'Research FedProx comparison against a matched FedAvg baseline. No differential-privacy mechanism or formal privacy guarantee is implemented or claimed.',
+			details: ['Matched FedAvg/FedProx Comparison (T027)', 'No DP Noise Injection', 'No Formal Privacy Proof']
 		},
 		{
 			id: 'federated',
 			index: '06',
-			title: 'Federated Global Consensus',
-			role: 'Collaborative Model Sync',
-			protocol: 'WSS / TLS 1.3 Asymmetric Mesh',
-			latency: '42 ms / Round',
-			dataThroughput: 'Model Delta (~32 KB)',
-			security: 'AES-256 / Secure Aggregation',
-			description: 'Participating client devices securely broadcast encrypted weight vectors to update a shared global clinical intelligence model.',
-			details: ['Secure Multi-Party Aggregation (SecAgg)', 'Byzantine Fault-Tolerant Consensus', 'Worldwide Model Generalization']
+			title: 'SecAgg+ Interface Prototype',
+			role: 'Research Secure-Aggregation Reference',
+			protocol: 'SecAgg+ (see artifacts/SECAGG_METHOD_V1.lock.json)',
+			latency: 'See reports/privacy_secagg/report.json',
+			dataThroughput: 'Model Weight Updates',
+			security: 'Single-Host Application-Interface Evidence Only -- No DP/Security Proof',
+			description: 'A single-host SecAgg+ application-interface reference showing that the server-visible aggregation interface never exposes an individual clear client update. This is not a deployed multi-host security system and carries no formal privacy or security guarantee.',
+			details: ['Server-Visible-Interface Evidence Only (T028)', 'No Formal Security/DP Proof', 'Not a Deployed Multi-Host System']
 		}
 	];
 
@@ -164,33 +164,33 @@
 		<div class="federated-globe-card">
 			<div class="globe-top-bar">
 				<div>
-					<span class="globe-tag">FEDERATED LEARNING MESH</span>
-					<h4>One Global Model · Many Private Devices</h4>
+					<span class="globe-tag">FEDERATED LEARNING -- ILLUSTRATIVE MAP</span>
+					<h4>Concept Map, Not Live Deployment Telemetry</h4>
 				</div>
-				<span class="globe-status-pill"><span class="globe-dot"></span> LIVE CONSENSUS</span>
+				<span class="globe-status-pill"><span class="globe-dot"></span> ILLUSTRATIVE</span>
 			</div>
 
-			<!-- 3D Globe Visualizer -->
+			<!-- 3D Globe Visualizer (decorative; marker locations are illustrative, not real device telemetry) -->
 			<div class="globe-viewport">
 				<Globe config={{ width: 520, height: 520, dark: 1, diffuse: 1.8, mapSamples: 12000, mapBrightness: 4.5, baseColor: [0.04, 0.12, 0.18], markerColor: [0.17, 0.83, 0.75], glowColor: [0.05, 0.25, 0.28], markers: federationMarkers.map(m => ({ location: [m.lat, m.lng], size: m.size * 0.05 })) }} />
 			</div>
 
 			<div class="globe-stats-dock">
 				<div class="g-stat">
-					<span>ACTIVE NODES</span>
-					<strong>9 NODES</strong>
+					<span>CLIENTS (DEMO)</span>
+					<strong>Illustrative</strong>
 				</div>
 				<div class="g-stat">
 					<span>ROUND</span>
-					<strong>#142</strong>
+					<strong>See reports/fl_iid.json</strong>
 				</div>
 				<div class="g-stat">
 					<span>ACCURACY</span>
-					<strong class="text-teal">98.6%</strong>
+					<strong class="text-teal">See reports/fl_iid.json</strong>
 				</div>
 				<div class="g-stat">
-					<span>PRIVACY (ε)</span>
-					<strong class="text-teal">0.45 DP</strong>
+					<span>PRIVACY</span>
+					<strong class="text-teal">No Formal DP Proof</strong>
 				</div>
 			</div>
 		</div>

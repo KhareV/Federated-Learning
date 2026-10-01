@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import WatchScene from '$lib/components/landing/WatchScene.svelte';
 	import PhysiologicalWaveform from '$lib/components/landing/PhysiologicalWaveform.svelte';
 
@@ -14,104 +13,98 @@
 		highlights: string[];
 	}
 
+	// All specs below describe an UNBUILT concept sketch (LEGACY_FIRMWARE_V0, see
+	// docs/LEGACY_FIRMWARE_V0_FINDINGS.md). T004 (bench hardware verification) is BLOCKED;
+	// T030 (wearable validation) is NOT_STARTED pending real hardware. Nothing here is a
+	// verified spec, a shipping product, or live sensor data.
 	const subsystems: Subsystem[] = [
 		{
-			id: 'ad8232',
+			id: 'ecg_frontend',
 			index: '01',
-			name: 'AD8232 Biopotential Front-End',
-			tag: 'CARDIAC ELECTRICAL SENSING',
-			summary: 'Integrated analog front-end for ECG signal conditioning. Extracts, amplifies, and filters microvolt cardiac potentials in high-motion environments with active right-leg drive.',
+			name: 'ECG Analog Front-End (Concept)',
+			tag: 'CARDIAC ELECTRICAL SENSING -- UNVERIFIED',
+			summary: 'Concept sketch for ECG signal conditioning. The exact front-end chip, gain, filtering, and electrode placement have not been bench-verified against physical hardware.',
 			waveformMode: 'ecg',
 			specs: [
-				{ key: 'CMRR', val: '> 86 dB', note: 'Common-mode noise rejection' },
-				{ key: 'SAMPLING RATE', val: '360 Hz', note: 'Exceeds clinical Holter standard' },
-				{ key: 'ADC RESOLUTION', val: '24-Bit', note: 'Sigma-Delta conversion' },
-				{ key: 'POWER DRAW', val: '170 µA', note: 'Ultra-low battery consumption' }
+				{ key: 'CMRR', val: 'Unverified', note: 'Not bench-tested' },
+				{ key: 'SAMPLING RATE', val: 'Unverified', note: 'See HW01 bench verification (BLOCKED)' },
+				{ key: 'ADC RESOLUTION', val: 'Unverified', note: 'Not bench-tested' },
+				{ key: 'POWER DRAW', val: 'Unverified', note: 'Not bench-tested' }
 			],
 			highlights: [
-				'2-pole adjustable high-pass filter eliminates motion baseline wander',
-				'Integrated Right-Leg Drive (RLD) suppresses 50Hz/60Hz mains hum',
-				'Active leads-off detection with microsecond recovery'
+				'Concept sketch only -- no physical front-end has been bench-verified',
+				'Electrode placement and lead-off handling remain VERIFICATION_REQUIRED',
+				'T004 bench hardware verification is BLOCKED_HARDWARE'
 			]
 		},
 		{
-			id: 'max30102',
+			id: 'ppg_optical',
 			index: '02',
-			name: 'MAX30102 Optical Core',
-			tag: 'PULSE OXIMETRY & PPG',
-			summary: 'High-sensitivity optical biosensor combining 660nm Red and 880nm Infrared emitters with photodetectors for continuous blood oxygen saturation and micro-vascular pulsatile flow.',
+			name: 'PPG Optical Sensor (Concept)',
+			tag: 'PULSE OXIMETRY & PPG -- UNVERIFIED',
+			summary: 'Concept sketch for an optical PPG/SpO2 sensor. The legacy firmware sketch referenced a MAX3010x-family library call, but register configuration and achieved sample rate are unverified.',
 			waveformMode: 'ppg',
 			specs: [
-				{ key: 'EMITTER SPECTRA', val: '660 / 880 nm', note: 'Dual-wavelength optical array' },
-				{ key: 'SNR RATIO', val: '89.4 dB', note: 'Clean photodiode acquisition' },
-				{ key: 'PULSE WIDTH', val: '69 – 411 µs', note: 'Programmable optical timing' },
-				{ key: 'FIFO DEPTH', val: '32 Samples', note: 'Hardware ring buffer queue' }
+				{ key: 'EMITTER SPECTRA', val: 'Unverified', note: 'Not bench-tested' },
+				{ key: 'SNR', val: 'Unverified', note: 'Not bench-tested' },
+				{ key: 'SAMPLE TIMING', val: 'Unverified', note: 'Library arguments observed, not verified' },
+				{ key: 'FIFO DEPTH', val: 'Unverified', note: 'Not bench-tested' }
 			],
 			highlights: [
-				'Robust optical ambient light cancellation up to 100 Hz',
-				'Calibrated AC/DC decomposition for beat-to-beat SpO₂ estimation',
-				'Scratch-resistant medical glass cover lens with optical barrier'
+				'Legacy sketch computes a PPG-derived pulse-rate estimate, not an ECG heart rate',
+				'SpO2 ratio heuristic observed in source is unverified against reference oximetry',
+				'No physical enclosure or glass cover has been fabricated or tested'
 			]
 		},
 		{
-			id: 'esp32s3',
+			id: 'edge_mcu',
 			index: '03',
-			name: 'ESP32-S3 Edge Processor',
-			tag: 'ON-DEVICE VECTOR ML',
-			summary: 'Dual-core 32-bit Xtensa processor running at 240 MHz with single-cycle SIMD vector instructions for on-device wavelet decomposition and local neural classification without raw data upload.',
+			name: 'Edge Microcontroller (Concept)',
+			tag: 'FIRMWARE CONCEPT -- NO ON-DEVICE INFERENCE',
+			summary: 'Concept firmware target (ESP32-class). Today, MODEL_V1 inference runs server-side via the frozen GATEWAY_ARTIFACT_V1 CPU runtime behind POST /v1/infer-window -- not on this or any device.',
 			waveformMode: 'ecg',
 			specs: [
-				{ key: 'CLOCK FREQUENCY', val: '240 MHz', note: 'Dual-core Xtensa LX7' },
-				{ key: 'SRAM MEMORY', val: '512 KB', note: 'Ultra-fast on-chip memory' },
-				{ key: 'INFERENCE TIME', val: '1.4 ms', note: 'Per 500-sample cardiac window' },
-				{ key: 'CRYPTO ENGINE', val: 'AES-256', note: 'Hardware root-of-trust' }
+				{ key: 'ON-DEVICE INFERENCE', val: 'Not Implemented', note: 'Inference is server-side (API_RUNTIME_V1)' },
+				{ key: 'CLOCK / MEMORY', val: 'Unverified', note: 'Not bench-tested' },
+				{ key: 'INFERENCE TIME', val: 'See reports/t029/latency_summary.json', note: 'Server-side CPU gateway, 1000-window benchmark' },
+				{ key: 'CRYPTO', val: 'Not Implemented', note: 'No device-side crypto claim' }
 			],
 			highlights: [
-				'Dedicated vector instructions accelerate real-time QRS feature extraction',
-				'Zero raw data egress guarantee — only perturbed model weights leave the device',
-				'Low-power coprocessor mode draws under 15 µA in sleep state'
+				'No on-device/edge ML inference is implemented anywhere in this project',
+				'Server-side CPU gateway benchmark is the only measured latency evidence',
+				'This tier is a future-direction concept, not a built or verified capability'
 			]
 		},
 		{
-			id: 'power_mesh',
+			id: 'power_radio',
 			index: '04',
-			name: 'Medical LiPo & BLE 5.0 Radio',
-			tag: 'POWER & ENCRYPTED TELEMETRY',
-			summary: 'Medical-grade 350 mAh lithium-polymer battery managed by dynamic frequency scaling and long-range Bluetooth 5.0 mesh radio for secure collaborative model updates.',
+			name: 'Power & Radio (Concept)',
+			tag: 'POWER & TELEMETRY -- UNVERIFIED',
+			summary: 'Concept power/radio sketch. No physical battery, enclosure, or radio link has been built, certified, or bench-tested, and no "medical-grade" claim is made about any component.',
 			waveformMode: 'spo2',
 			specs: [
-				{ key: 'BATTERY LIFE', val: '72 Hours', note: 'Continuous real-time sensing' },
-				{ key: 'CAPACITY', val: '350 mAh', note: 'High-density Li-Polymer' },
-				{ key: 'RADIO PROTOCOL', val: 'BLE 5.0 Mesh', note: 'Long-range encrypted link' },
-				{ key: 'CHARGING', val: '45 Mins', note: 'Fast magnetic dock' }
+				{ key: 'BATTERY LIFE', val: 'Unverified', note: 'No physical unit built' },
+				{ key: 'CAPACITY', val: 'Unverified', note: 'No physical unit built' },
+				{ key: 'RADIO PROTOCOL', val: 'Unverified', note: 'No physical unit built' },
+				{ key: 'ENCLOSURE RATING', val: 'Not Tested', note: 'No IP rating claimed' }
 			],
 			highlights: [
-				'Hermetic IP68 water, sweat, and dust resistance for continuous wear',
-				'Asymmetric RSA-4096 handshake for local device pairing',
-				'Intelligent sleep cycling extends battery life during sedentary periods'
+				'No "medical-grade" claim is made about any hardware component',
+				'No water/dust ingress rating has been tested or is claimed',
+				'Physical wearable validation (WEARABLE_V1) remains pending real hardware'
 			]
 		}
 	];
 
 	let active = $state(subsystems[0]);
-	let liveBpm = $state(72);
-	let liveSpo2 = $state(98);
-
-	onMount(() => {
-		const interval = setInterval(() => {
-			liveBpm = 70 + Math.floor(Math.sin(Date.now() * 0.002) * 3);
-			liveSpo2 = 98 + (Math.random() > 0.8 ? -1 : 0);
-		}, 1800);
-		return () => clearInterval(interval);
-	});
 </script>
 
 <div class="hardware-pro-showcase">
 	<!-- Left: 3D Model Explorer with Tactile Reticle Pins -->
 	<div class="viewport-card">
 		<div class="viewport-badge-row">
-			<span class="pro-tag">NHM-01 INDUSTRIAL SPECIFICATION</span>
-			<span class="pro-meta">42MM UNIBODY · TITANIUM</span>
+			<span class="pro-tag">NHM-01 CONCEPT MODEL (3D RENDER, NOT A SHIPPING PRODUCT)</span>
+			<span class="pro-meta">ILLUSTRATIVE INDUSTRIAL DESIGN ONLY</span>
 		</div>
 
 		<!-- 3D Interactive Stage -->
@@ -161,8 +154,8 @@
 		<!-- Live Signal Stream for Active Subsystem -->
 		<div class="signal-preview-box">
 			<div class="preview-topline">
-				<span>LIVE STREAM // {active.name.split(' ')[0]}</span>
-				<span class="live-pill"><span class="pulse-dot"></span> LIVE ACQUISITION</span>
+				<span>SIMULATED WAVEFORM // {active.name.split(' ')[0]}</span>
+				<span class="live-pill"><span class="pulse-dot"></span> ILLUSTRATIVE, NOT LIVE HARDWARE</span>
 			</div>
 			<div class="preview-waveform">
 				<PhysiologicalWaveform mode={active.waveformMode} speed={0.55} amplitude={0.65} />

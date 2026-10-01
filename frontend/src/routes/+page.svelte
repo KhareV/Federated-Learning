@@ -260,7 +260,7 @@
 
 					<div class="problem__intro-copy">
 						<BlurFade inView={true} direction="up" offset={18} delay={0.12} blur="6px" duration={0.7}>
-							<p>Standard episodic clinical visits capture isolated 15-minute readings months apart, leaving 99.8% of cardiac and respiratory variations completely unobserved. NHM bridges this discontinuous void with an on-device neural knowledge graph that correlates multi-modal biopotentials continuously in real time.</p>
+							<p>Standard episodic clinical visits capture only brief, isolated readings months apart. NHM is a research prototype exploring whether continuous, multi-modal research monitoring can observe more of the picture between those visits -- today via server-side research inference, not on-device, and not yet validated on real wearable hardware.</p>
 						</BlurFade>
 					</div>
 				</div>
@@ -319,7 +319,7 @@
 			<div class="technical-marquee">
 				<Marquee repeat={4} pauseOnHover={true}>
 					<div class="marquee-item">
-						<span>MAX30102 PPG</span><i>•</i><span>AD8232 ECG</span><i>•</i><span>ESP32-S3 EDGE</span><i>•</i><span>BLE 5.0 MESH</span><i>•</i><span>LOCAL 24-BIT ADC</span><i>•</i><span>360Hz SAMPLING</span><i>•</i><span>AES-256 ENCRYPTED</span>
+						<span>RESEARCH PROTOTYPE</span><i>•</i><span>CONCEPT HARDWARE (UNVERIFIED)</span><i>•</i><span>SERVER-SIDE CPU INFERENCE</span><i>•</i><span>NO DIAGNOSIS CLAIM</span><i>•</i><span>SOURCE-DOMAIN CALIBRATION ONLY</span><i>•</i><span>WEARABLE VALIDATION PENDING</span>
 					</div>
 				</Marquee>
 				<ProgressiveBlur position="both" height="100%" class="marquee-blur" />
@@ -471,7 +471,7 @@
 				<div class="section-kicker">09 / THE PRODUCT</div>
 				<div class="product__heading">
 					<h2>See the system<br /><span>in action.</span></h2>
-					<p>An interactive preview of the continuous health telemetry environment: live multilead signals, arrhythmia detection, and privacy-preserving insights.</p>
+					<p>An interactive, simulated preview of the research monitoring environment: illustrative multilead waveforms and research-only monitoring states. Not live signals, not a diagnosis.</p>
 				</div>
 
 				<div class="product__workstation-wrap">

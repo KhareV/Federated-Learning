@@ -56,9 +56,9 @@
 			spo2: 94.8,
 			ptt: 290,
 			hrv: 92,
-			status: 'ARRHYTHMIA DETECTED BY EDGE',
+			status: 'ILLUSTRATIVE PVC PATTERN (SIMULATED, NOT A DIAGNOSIS)',
 			statusColor: '#e11d48',
-			description: 'Premature ventricular depolarization with compensatory pause, captured and classified locally by on-device ML.'
+			description: 'Simulated premature ventricular depolarization pattern for illustration only. No on-device ML classification is implemented; this is not a diagnosis.'
 		}
 	];
 
@@ -93,8 +93,8 @@
 		// Channel Labels
 		ctx.font = '600 10px JetBrains Mono, monospace';
 		ctx.fillStyle = '#64748b';
-		ctx.fillText('CH 1 // AD8232 ECG (LEAD-I)', 16, 22);
-		ctx.fillText('CH 2 // MAX30102 PPG (OPTICAL)', 16, channelH + 22);
+		ctx.fillText('CH 1 // SIMULATED ECG (ILLUSTRATIVE)', 16, 22);
+		ctx.fillText('CH 2 // SIMULATED PPG (ILLUSTRATIVE)', 16, channelH + 22);
 		ctx.fillText('CH 3 // ARTERIAL SpO2 DELTA', 16, channelH * 2 + 22);
 
 		const speed = (currentState.bpm / 60) * 0.008;

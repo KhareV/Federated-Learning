@@ -57,11 +57,11 @@
 			<div class="chrome-traffic-lights">
 				<span></span><span></span><span></span>
 			</div>
-			<span class="chrome-session">SESSION // #NHM-84920-LIVE</span>
+			<span class="chrome-session">SESSION // #NHM-DEMO-SIMULATED</span>
 		</div>
 
 		<div class="chrome-center">
-			<span class="chrome-title">NHM CLINICAL MONITORING ENVIRONMENT</span>
+			<span class="chrome-title">NHM RESEARCH MONITORING ENVIRONMENT (SIMULATED)</span>
 		</div>
 
 		<div class="chrome-right">
@@ -97,8 +97,8 @@
 		<div class="waveform-console">
 			<div class="waveform-box">
 				<div class="wave-topline">
-					<span>LEAD-I CARDIAC BIOPOTENTIAL (AD8232)</span>
-					<code>360 Hz // GAIN 1100x</code>
+					<span>SIMULATED CARDIAC BIOPOTENTIAL (ILLUSTRATIVE)</span>
+					<code>SYNTHETIC WAVEFORM // NOT LIVE HARDWARE</code>
 				</div>
 				<div class="wave-screen">
 					<PhysiologicalWaveform mode="ecg" speed={simMode === 'tachy' ? 0.9 : simMode === 'brady' ? 0.35 : 0.55} amplitude={0.78} />
@@ -107,8 +107,8 @@
 
 			<div class="waveform-box">
 				<div class="wave-topline">
-					<span>PHOTOPLETHYSMOGRAM (MAX30102)</span>
-					<code>660 / 880 nm DUAL-WAVE</code>
+					<span>SIMULATED PHOTOPLETHYSMOGRAM (ILLUSTRATIVE)</span>
+					<code>SYNTHETIC WAVEFORM // NOT LIVE HARDWARE</code>
 				</div>
 				<div class="wave-screen">
 					<PhysiologicalWaveform mode="ppg" speed={simMode === 'tachy' ? 0.9 : simMode === 'brady' ? 0.35 : 0.55} amplitude={0.65} />
