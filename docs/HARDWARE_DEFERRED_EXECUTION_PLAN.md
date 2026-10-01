@@ -108,9 +108,13 @@ limitation. Only then may `G1` and `F02` move to PASS/FROZEN.
 
 ## 8. CI policy during this deferral
 
-Automatic GitHub Actions (push/pull_request triggers) are intentionally disabled from T004 through
-T032. `.github/workflows/t001.yml` now triggers only on `workflow_dispatch`. Local Python 3.11
-validation (`make phase4` and successors) is mandatory for every task in this range. Automatic CI is
-restored starting at T033, with end-to-end CI at T034, clean-environment reproducibility CI at T035,
-and final release CI at T036. This is an engineering-process decision, not a scientific one, and
-does not require Class C change control; see `docs/CHANGE_CONTROL.md` Class B.
+Automatic GitHub Actions (push/pull_request triggers) were intentionally disabled from T004 through
+T032; `.github/workflows/t001.yml` triggered only on `workflow_dispatch` during that range. Local
+Python 3.11 validation (`make phase4` and successors) was mandatory for every task in that range.
+
+Automatic CI was restored at T033: `.github/workflows/t001.yml` now also triggers on `push` and
+`pull_request`, adding two jobs (`t033-backend`, `t033-frontend`) scoped to git-tracked
+checkpoints/artifacts/manifests only -- neither job acquires a raw PhysioNet dataset. End-to-end CI
+lands at T034, clean-environment reproducibility CI at T035, and final release CI at T036. This is
+an engineering-process decision, not a scientific one, and does not require Class C change control;
+see `docs/CHANGE_CONTROL.md` Class B.

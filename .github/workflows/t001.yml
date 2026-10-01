@@ -1,12 +1,13 @@
-name: T001
+name: NHM CI
 
-# Automatic CI (push/pull_request triggers) is intentionally deferred from T004 through T032.
-# Hardware-independent software tasks in this range run local Python 3.11 validation only
-# (see docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md). Automatic triggers are restored at T033,
-# with end-to-end CI at T034, clean-environment reproducibility CI at T035, and final release
-# CI at T036. Until then this workflow is manual-only (workflow_dispatch) and is not run as
-# part of normal task completion.
+# Automatic CI (push/pull_request triggers) was intentionally deferred from T004 through T032
+# (see docs/HARDWARE_DEFERRED_EXECUTION_PLAN.md): hardware-independent software tasks in that
+# range ran local Python 3.11 validation only. T033 is the first of the final four stages
+# where automatic CI is restored; end-to-end CI lands at T034, clean-environment
+# reproducibility CI at T035, and final release CI at T036.
 on:
+  push:
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -51,3 +52,68 @@ jobs:
         run: make contracts PYTHON=python
       - name: T003 evidence generation
         run: make t003-evidence PYTHON=python
+
+  # T033: the first automatic-CI job. Scoped deliberately: data/raw (multi-GB PhysioNet
+  # acquisitions) is never downloaded here, so this job runs only the T032/T033 test files and
+  # frozen-artifact verifiers that are self-contained against git-tracked
+  # checkpoints/artifacts/manifests -- not the repo's full pytest suite (which includes
+  # dataset-dependent tests). T035 owns the full clean-environment reproducibility audit.
+  t033-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install exact Phase-01 environment
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.lock
+          python -m pip install --no-deps -e .
+      - name: Lint (full repository)
+        run: make lint PYTHON=python
+      - name: T032 API contract/runtime tests
+        run: |
+          PYTHONPATH=src:. python -m pytest -v \
+            tests/test_api_t032.py \
+            tests/test_api_errors_t032.py \
+            tests/test_api_stateful_t032.py \
+            tests/test_api_openapi_t032.py \
+            tests/test_api_scope_t032.py \
+            tests/test_api_runtime_lock_t032.py \
+            tests/test_api_tamper_matrix_t032.py \
+            tests/test_api_schema_v1.py \
+            tests/test_api_slice_t005.py
+      - name: T033 dashboard-state tests
+        run: |
+          PYTHONPATH=src:. python -m pytest -v \
+            tests/test_dashboard_states.py \
+            tests/test_dashboard_lock_t033.py
+      - name: API_RUNTIME_V1 verification
+        run: PYTHONPATH=src:. python scripts/verify_api_runtime_t032.py
+      - name: DASHBOARD_UI_V1 verification
+        run: PYTHONPATH=src:. python scripts/verify_dashboard_ui_t033.py
+      - name: pip check
+        run: python -m pip check
+
+  t033-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install (locked)
+        run: npm ci
+      - name: Type-check (svelte-check)
+        run: npm run check
+      - name: Unit tests (vitest)
+        run: npx vitest run
+      - name: Production build
+        run: npm run build
