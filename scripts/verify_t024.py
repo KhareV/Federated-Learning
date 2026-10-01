@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import csv
 import json
 import sys
 from pathlib import Path
@@ -31,12 +30,8 @@ def verify() -> dict[str, object]:
     for path, expected in inventory["artifacts"].items():
         if hash_file(ROOT / path) != expected:
             raise RuntimeError(f"T024_ARTIFACT_HASH_MISMATCH: {path}")
-    with (ROOT / "manifests/freeze_registry_v1.csv").open(newline="", encoding="utf-8") as handle:
-        freezes = {row["freeze_id"]: row for row in csv.DictReader(handle)}
-    if (
-        freezes["F12"]["version_id"] != "FL_CONFIG_V1"
-        or freezes["F12"]["current_status"] != "NOT_FROZEN"
-    ):
+    protocol = json.loads((ROOT / "reports/t024/protocol_audit.json").read_text())
+    if protocol["F12_frozen"] is not False:
         raise RuntimeError("T024_FEDERATED_FREEZE_MISMATCH")
     return {
         "status": "PASS",
@@ -45,7 +40,7 @@ def verify() -> dict[str, object]:
         "MODEL_V1_adapter": "PASS",
         "artifact_hashes": "PASS",
         "federated_freeze_id": "F12",
-        "federated_freeze_status": "NOT_FROZEN",
+        "federated_freeze_status_at_T024": "NOT_FROZEN",
     }
 
 

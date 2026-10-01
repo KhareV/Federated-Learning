@@ -758,3 +758,38 @@ phase25:
 	$(MAKE) t024-verify PYTHON=$(PYTHON)
 	$(MAKE) fl-iid-verify PYTHON=$(PYTHON)
 	$(PYTHON) -m pip check
+
+.PHONY: fl-noniid-manifests fl-noniid-preflight fl-label-skew fl-quantity-skew fl-feature-skew fl-combined-skew fl-noniid-verify t026-evidence phase26
+
+fl-noniid-manifests:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/freeze_fl_config_t026.py
+
+fl-noniid-preflight:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m pytest tests/test_fl_non_iid_manifest_t026.py tests/test_fl_feature_noise_t026.py tests/test_fl_config_freeze_t026.py
+
+fl-label-skew:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.non_iid_runner label
+
+fl-quantity-skew:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.non_iid_runner quantity
+
+fl-feature-skew:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.non_iid_runner feature
+
+fl-combined-skew:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m federated.non_iid_runner combined
+
+fl-noniid-verify:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_fl_config_t026.py
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/verify_t026.py
+
+t026-evidence:
+	PYTHONPATH=$(PYTHONPATH) $(PYTHON) scripts/generate_t026_evidence.py
+
+phase26:
+	$(MAKE) lint PYTHON=$(PYTHON)
+	$(MAKE) test PYTHON=$(PYTHON)
+	$(MAKE) t024-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-iid-verify PYTHON=$(PYTHON)
+	$(MAKE) fl-noniid-verify PYTHON=$(PYTHON)
+	$(PYTHON) -m pip check

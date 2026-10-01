@@ -10,6 +10,6 @@ def test_base_config_loads_with_locked_versions() -> None:
     validate_base_config(config)
 
     assert config["project"]["spec_version"] == "2.2"
-    assert config["project"]["current_phase"] == "T025"
+    assert config["project"]["current_phase"] == "T026"
     assert config["versions"]["target"] == "AAMI_SVF_WINDOW_V1"
     assert config["versions"]["label_map"] == "AAMI_SVF_MAP_V1"
