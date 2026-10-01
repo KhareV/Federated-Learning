@@ -1,0 +1,438 @@
+{
+  "components": {
+    "schemas": {
+      "ECGWindow": {
+        "additionalProperties": false,
+        "description": "The canonical MODEL_V1-ready window (GATEWAY_MODEL_INPUT_V1): already resampled to\n250 Hz and causally filtered by PREPROC_V1 upstream of this API. Never raw ADC counts,\nan arbitrary-rate signal, or a hardware serial packet -- see api/runtime.py docstring.\n\n`samples` is intentionally NOT length-constrained here: a non-2500-length array is a\n*signal-completeness* condition (HTTP 422, matching this schema file's own documented\n\"422 = unusable or incomplete signal window\"), not a request-schema error (HTTP 400).\nEnforcing the length as a Pydantic constraint would conflate the two and make ordinary\nincomplete-window requests indistinguishable from malformed ones.",
+        "properties": {
+          "samples": {
+            "items": {
+              "type": "number"
+            },
+            "title": "Samples",
+            "type": "array"
+          },
+          "target_hz": {
+            "const": 250,
+            "title": "Target Hz",
+            "type": "integer"
+          },
+          "window_seconds": {
+            "const": 10,
+            "title": "Window Seconds",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "samples",
+          "target_hz",
+          "window_seconds"
+        ],
+        "title": "ECGWindow",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "contract_version": {
+            "const": "API_SCHEMA_V1",
+            "default": "API_SCHEMA_V1",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "error_type": {
+            "title": "Error Type",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "status_code": {
+            "enum": [
+              400,
+              422,
+              500
+            ],
+            "title": "Status Code",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "status_code",
+          "error_type",
+          "message"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "InferWindowRequest": {
+        "additionalProperties": false,
+        "description": "Session-oriented request for one 10-second ECG window (v2.2 Section 27). The session\nID is opaque -- no participant_id, demographics, or diagnosis field exists here because\nthe frozen contract does not require one.",
+        "properties": {
+          "contract_version": {
+            "const": "API_SCHEMA_V1",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "ecg": {
+            "$ref": "#/components/schemas/ECGWindow"
+          },
+          "ecg_quality": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "model_id": {
+            "minLength": 1,
+            "title": "Model Id",
+            "type": "string"
+          },
+          "ppg_context": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PPGContext"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "session_id": {
+            "minLength": 1,
+            "title": "Session Id",
+            "type": "string"
+          },
+          "timestamp_us": {
+            "maximum": 9.223372036854776e+18,
+            "minimum": 0.0,
+            "title": "Timestamp Us",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "contract_version",
+          "session_id",
+          "timestamp_us",
+          "ecg",
+          "ecg_quality",
+          "ppg_context",
+          "model_id"
+        ],
+        "title": "InferWindowRequest",
+        "type": "object"
+      },
+      "InferWindowResponse": {
+        "additionalProperties": false,
+        "description": "Every successful inference response carries the full set of version identifiers\nrequired by API_SCHEMA_V1 (model/target/preprocess/alert-policy/calibration), the\nexplicit calibration domain/patient-count, and both probability fields distinctly.",
+        "properties": {
+          "alert_policy_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Alert Policy Id"
+          },
+          "calibration_domain": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calibration Domain"
+          },
+          "calibration_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calibration Id"
+          },
+          "calibration_patient_count": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calibration Patient Count"
+          },
+          "context": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context"
+          },
+          "contract_version": {
+            "const": "API_SCHEMA_V1",
+            "default": "API_SCHEMA_V1",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "ecg_quality": {
+            "$ref": "#/components/schemas/QualityState"
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms"
+          },
+          "model_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Id"
+          },
+          "monitoring_state": {
+            "$ref": "#/components/schemas/MonitoringState"
+          },
+          "preprocess_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preprocess Version"
+          },
+          "raw_probability": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Probability"
+          },
+          "source_domain_calibrated_probability": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Domain Calibrated Probability"
+          },
+          "target": {
+            "const": "AAMI_SVF_WINDOW_V1",
+            "default": "AAMI_SVF_WINDOW_V1",
+            "title": "Target",
+            "type": "string"
+          },
+          "threshold": {
+            "anyOf": [
+              {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Threshold"
+          },
+          "timestamp_us": {
+            "title": "Timestamp Us",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "timestamp_us",
+          "model_id",
+          "calibration_domain",
+          "calibration_id",
+          "ecg_quality",
+          "monitoring_state",
+          "context",
+          "preprocess_version",
+          "alert_policy_id"
+        ],
+        "title": "InferWindowResponse",
+        "type": "object"
+      },
+      "MonitoringState": {
+        "enum": [
+          "NORMAL_MONITORED_PATTERN",
+          "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+          "RECHECK_SENSOR",
+          "CONTEXT_UNAVAILABLE",
+          "SYSTEM_ERROR"
+        ],
+        "title": "MonitoringState",
+        "type": "string"
+      },
+      "PPGContext": {
+        "additionalProperties": false,
+        "properties": {
+          "pr_bpm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pr Bpm"
+          },
+          "quality": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/QualityState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "spo2_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spo2 Pct"
+          },
+          "spo2_valid": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spo2 Valid"
+          }
+        },
+        "required": [
+          "quality",
+          "pr_bpm",
+          "spo2_pct",
+          "spo2_valid"
+        ],
+        "title": "PPGContext",
+        "type": "object"
+      },
+      "QualityState": {
+        "enum": [
+          "VALID",
+          "DEGRADED",
+          "UNUSABLE"
+        ],
+        "title": "QualityState",
+        "type": "string"
+      }
+    }
+  },
+  "info": {
+    "description": "Research-prototype-only typed inference API for the observed-window target AAMI_SVF_WINDOW_V1. Never a diagnosis, beat classifier output, or future forecast.",
+    "title": "NHM Research Runtime API",
+    "version": "API_SCHEMA_V1"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/v1/infer-window": {
+      "post": {
+        "operationId": "infer_window_v1_infer_window_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InferWindowRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InferWindowResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request/schema contract error."
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unusable or incomplete signal window."
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal server failure."
+          }
+        },
+        "summary": "Infer the AAMI_SVF_WINDOW_V1 target for one observed 10-second ECG window."
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "alert_policy_id": "ALERT_POLICY_V1",
+  "alert_policy_lock_sha256": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+  "bound_artifacts": {
+    "api/app.py": "f1c662e73bd06e1df360b016b2a17dd944166e466ad367d0499054fa0913d593",
+    "api/runtime.py": "e6a706b44822b31794d5e8675c89bd7fe8a19ea7a14cb73828279da27a6bb9dc",
+    "api/schemas.py": "e2d63ff7e81d1b6274833c60ecc31274703925074d291e84f37d7731f7fe7cb8",
+    "api/session.py": "f61286d342459950ce3e8589ad375c1d648785d35254be0b110628e4b0369770",
+    "artifacts/ALERT_POLICY_V1.lock.json": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/ECG_HR_CONTEXT_V2.lock.json": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "artifacts/GATEWAY_ARTIFACT_V1.lock.json": "cc4fc0fe7ae9f011f0db20305238a3687da36d3491d91248065f9627ca232946",
+    "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "configs/alert_policy_v1.yaml": "782b174d6caf769cd448edb25c2a12c9a601caa9c3fccc5f05d5d1d3a617b25a",
+    "contracts/API_SCHEMA_V1.json": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+    "contracts/openapi_v1.json": "a3f02bbe3512ecd68bf41aa6a7ce9013af2914a72f0178b532591710748ab22d",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+  },
+  "calibration_domain": "MIT-BIH-v1.0.0",
+  "calibration_id": "CAL_V1",
+  "calibration_patient_count": 3,
+  "change_control": "Changing api/app.py, api/schemas.py, api/runtime.py, api/session.py, contracts/API_SCHEMA_V1.json, or contracts/openapi_v1.json requires a controlled API_RUNTIME_V2 and invalidates this lock.",
+  "contract_version": "API_SCHEMA_V1",
+  "deployment_artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+  "ecg_hr_context_id": "ECG_HR_CONTEXT_V2",
+  "ecg_hr_context_lock_sha256": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+  "error_semantics": {
+    "400": "REQUEST_SCHEMA_ERROR or application-level request-contract error",
+    "422": "UNUSABLE_OR_INCOMPLETE_SIGNAL_WINDOW -- MODEL_V1 is never run",
+    "500": "INTERNAL_SERVER_ERROR -- safe generic body, never a traceback"
+  },
+  "framework_versions": {
+    "fastapi": "0.138.2",
+    "pydantic": "2.13.5",
+    "starlette": "1.3.1",
+    "uvicorn": "0.49.0"
+  },
+  "gateway_artifact_id": "GATEWAY_FP32_V1",
+  "gateway_artifact_lock_sha256": "cc4fc0fe7ae9f011f0db20305238a3687da36d3491d91248065f9627ca232946",
+  "lock_id": "API_RUNTIME_V1",
+  "model_checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "model_id": "MODEL_V1",
+  "monitoring_state_vocabulary": [
+    "NORMAL_MONITORED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "RECHECK_SENSOR",
+    "CONTEXT_UNAVAILABLE",
+    "SYSTEM_ERROR"
+  ],
+  "no_dataset_access": true,
+  "no_simulation_truth_access": true,
+  "no_training_access": true,
+  "preproc_id": "PREPROC_V1",
+  "response_version": "API_SCHEMA_V1",
+  "route": "POST /v1/infer-window",
+  "session_state": "PROCESS_LOCAL_IN_MEMORY_PER_SESSION_ID",
+  "status": "FROZEN_ENGINEERING_INTERFACE",
+  "target_id": "AAMI_SVF_WINDOW_V1"
+}
