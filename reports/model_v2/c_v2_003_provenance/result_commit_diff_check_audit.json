@@ -1,0 +1,36 @@
+{
+  "diff_range": "d07a561c92d9a5e5401b074e682784fe727075d4..52013e3dae2bc763cf9462f252d2b91598403e7c",
+  "ordinary_check": {
+    "command": "git diff --check d07a561c92d9a5e5401b074e682784fe727075d4 52013e3dae2bc763cf9462f252d2b91598403e7c",
+    "exit_code": 2,
+    "warning_line_count": 10,
+    "warning_lines": [
+      "manifests/model_v2/component_registry_v1.csv:10: trailing whitespace.",
+      "manifests/model_v2/component_registry_v1.csv:11: trailing whitespace.",
+      "manifests/model_v2/component_registry_v1.csv:12: trailing whitespace.",
+      "manifests/model_v2/gate_registry_v1.csv:4: trailing whitespace.",
+      "manifests/model_v2/task_registry_v1.csv:4: trailing whitespace."
+    ],
+    "flagged_files": [
+      "manifests/model_v2/component_registry_v1.csv",
+      "manifests/model_v2/gate_registry_v1.csv",
+      "manifests/model_v2/task_registry_v1.csv"
+    ]
+  },
+  "crlf_aware_check": {
+    "command": "git -c core.whitespace=cr-at-eol diff --check d07a561c92d9a5e5401b074e682784fe727075d4 52013e3dae2bc763cf9462f252d2b91598403e7c",
+    "exit_code": 0,
+    "warning_line_count": 0
+  },
+  "classification": {
+    "every_ordinary_warning_is_a_crlf_line_ending_on_an_added_registry_row": true,
+    "files_flagged_are_exactly_the_3_registry_csvs_that_already_use_crlf_throughout_before_this_commit": true,
+    "no_malformed_csv": true,
+    "no_real_trailing_space_beyond_the_crlf_byte": true,
+    "no_other_semantic_formatting_defect": true
+  },
+  "result_commit_diff_hygiene": "PASS_WITH_CRLF_CONVENTION",
+  "semantic_whitespace_defect": false,
+  "action_taken": "none -- no defect exists; historical registries intentionally left unnormalized per instruction not to normalize them merely to silence Git",
+  "status": "PASS"
+}

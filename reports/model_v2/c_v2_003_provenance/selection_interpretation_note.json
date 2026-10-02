@@ -1,0 +1,54 @@
+{
+  "A_rr_selection": {
+    "rule": "SMALLEST_SUBSET_WITHIN_0.02_ABSOLUTE_RF_POOLED_OOF_AUPRC_OF_ALL_29",
+    "RF_ALL_pooled_OOF_AUPRC": 0.605530307984657,
+    "margin": 0.02,
+    "threshold": 0.585530307984657,
+    "RR_pooled_OOF_AUPRC": 0.713140103147974,
+    "RR_qualifies": true,
+    "RR_is_smallest_qualifying_subset": true,
+    "selection_remains_valid": true,
+    "wording": "RR was selected by the predeclared deterministic minimal-adequate-subset rule (smallest reduced RF variant with pooled OOF AUPRC within 0.02 of RF-ALL); it is the smallest of the two qualifying candidates (RR and RR_QRS)."
+  },
+  "B_rr_versus_all_uncertainty": {
+    "delta_AUPRC_point": 0.10760979516331703,
+    "delta_AUPRC_paired_95_ci": [-0.05893066553701717, 0.2639856087543366],
+    "ci_crosses_zero": true,
+    "correct_wording": "RR had the higher observed pooled OOF AUPRC and was selected by the predeclared minimal-adequate-subset rule; the paired 95% bootstrap interval for RR-minus-ALL includes zero.",
+    "forbidden_wording_not_used": "RR is significantly superior to ALL.",
+    "transcription_correction": {
+      "defect_found": true,
+      "description": "The V2-003 final handoff (prior turn, not this checkpoint) reported the RR-minus-ALL delta_AUPRC 95% CI as approximately [-0.011, 0.228]. Re-reading the frozen, never-regenerated reports/model_v2/v2_003/paired_variant_bootstrap_summary.json in THIS checkpoint shows the actual stored value is [-0.0589, 0.2640]. This was a reporting/transcription error in the prior handoff's authoring (the paired_bootstrap_v2003.py stdout was viewed through a truncating `tail -60` that cut off the STAT and RR entries; the other four reduced-variant CIs -- QRS, RR_QRS, STAT_RR, STAT_QRS -- were correctly transcribed and match the frozen file exactly). No underlying data, code, or computed artifact was wrong or changed; only the prose summary in the prior handoff message misstated two of the six CI pairs.",
+      "point_estimate_affected": false,
+      "qualitative_conclusion_affected": false,
+      "note": "Both the erroneous and the correct CI include zero, so the qualitative conclusion (interval includes zero, no significance claim) was never wrong -- only the exact bound values were. This note now carries the correct, file-sourced value forward.",
+      "corrected_in": "this checkpoint's selection_interpretation_note.json and final handoff; the original V2-003 commit/handoff text is historical and is not rewritten"
+    }
+  },
+  "C_stat_versus_all": {
+    "delta_AUPRC_point": -0.16578905322629084,
+    "delta_AUPRC_paired_95_ci": [-0.24885674759876775, -0.08100029031773831],
+    "ci_entirely_below_zero": true,
+    "correct_wording": "the paired 95% bootstrap interval for STAT-minus-ALL is entirely below zero.",
+    "not_called_multiplicity_adjusted_significance": true,
+    "transcription_correction": {
+      "defect_found": true,
+      "description": "The V2-003 final handoff reported STAT-minus-ALL CI as approximately [-0.299, -0.045]; the frozen file's actual value is [-0.2489, -0.0810]. Same root cause and same disclosure as section B above.",
+      "qualitative_conclusion_affected": false
+    }
+  },
+  "D_post_selection_nature": {
+    "best_reduced_rf_v1_selected_variant": "RR",
+    "selected_using_same_train_cv_development_results_as_the_metrics_reported": true,
+    "classification": "development/post-selection evidence, not an independent confirmatory test",
+    "AUPRC_0_713140103147974_remains_valid_for_frozen_use": true,
+    "frozen_use_context": "the predeclared V2-005 hybrid-trigger equation (best_reduced_classical_RF_TRAIN_CV_AUPRC term)",
+    "invalidates_frozen_value_usage": false,
+    "wording": "BEST_REDUCED_RF_V1's AUPRC (0.7131) and its paired CI versus MODEL_V1_CV_REFERENCE_V1 are development/post-selection evidence (RR was chosen because it had the best observed TRAIN-CV AUPRC among the candidates), not an independent confirmatory test. This does not invalidate using the frozen 0.7131 value in the predeclared V2-005 hybrid-trigger equation, which was itself predeclared to consume exactly this kind of development-selected value."
+  },
+  "no_numerical_recomputation_performed": true,
+  "no_rerun_of_training_feature_extraction_oof_bootstrap_permutation_or_selection": true,
+  "margin_0_02_unchanged": true,
+  "rr_selection_unchanged": true,
+  "status": "PASS"
+}

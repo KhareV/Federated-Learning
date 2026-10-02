@@ -1,0 +1,20 @@
+{
+  "checkpoint": "C-V2-003-PROVENANCE",
+  "parent_phase": "V2-003",
+  "expected_entry_sha": "52013e3dae2bc763cf9462f252d2b91598403e7c",
+  "actual_head_sha_at_entry": "52013e3dae2bc763cf9462f252d2b91598403e7c",
+  "head_equals_origin_main": true,
+  "working_tree_clean_at_entry": true,
+  "registry_state_at_entry": {
+    "V2-001_status": "PASS",
+    "V2-002_status": "PASS",
+    "V2-003_status": "PASS",
+    "V2G0_status": "PASS",
+    "V2G1_status": "PASS",
+    "V2G2_status": "PASS",
+    "V2-004_status": "NOT_STARTED",
+    "V2G3_status": "NOT_STARTED"
+  },
+  "registry_statuses_not_altered_by_this_checkpoint_entry": true,
+  "status": "PASS"
+}

@@ -1,0 +1,220 @@
+{
+  "diff_range": "d07a561c92d9a5e5401b074e682784fe727075d4..52013e3dae2bc763cf9462f252d2b91598403e7c",
+  "predeclared_scientific_method_files_checked": [
+    "configs/model_v2/classical_feature_audit_v1.yaml",
+    "src/nhm/model_v2_cv_role_guard.py",
+    "scripts/_v2_003_lib.py",
+    "scripts/run_feature_audit_v2003.py",
+    "scripts/aggregate_v2003.py",
+    "scripts/paired_bootstrap_v2003.py",
+    "scripts/select_subset_v2003.py",
+    "scripts/grouped_permutation_v2003.py"
+  ],
+  "predeclared_scientific_method_files_changed_after_freeze": [],
+  "all_files_changed_in_range": [
+    {
+      "file": "manifests/model_v2/MODEL_V2_FEATURE_AUDIT_V1.lock.json",
+      "changed_after_freeze": true,
+      "classification": "component_freeze_packaging",
+      "scientific_effect": "none -- binds hashes of already-produced results, does not alter them",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "manifests/model_v2/component_registry_v1.csv",
+      "changed_after_freeze": true,
+      "classification": "registry_update",
+      "scientific_effect": "none -- status/notes fields only",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "manifests/model_v2/gate_registry_v1.csv",
+      "changed_after_freeze": true,
+      "classification": "registry_update",
+      "scientific_effect": "none -- status/notes fields only",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "manifests/model_v2/task_registry_v1.csv",
+      "changed_after_freeze": true,
+      "classification": "registry_update",
+      "scientific_effect": "none -- status/notes fields only",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/artifact_hashes.json",
+      "changed_after_freeze": true,
+      "classification": "evidence_generation",
+      "scientific_effect": "none -- records hashes of other artifacts",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/best_reduced_rf.json",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "this IS the real-fit result, produced by the frozen method; not a post-freeze method edit",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/feature_access_ledger.jsonl",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "append-only firewall access log produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/fit_scope_audit.csv",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/fold_predictions.csv",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/grouped_permutation_importance.csv",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/grouped_permutation_summary.json",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/minimal_adequate_subset.json",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen selection rule applied to the frozen result",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/oof_closure_audit.json",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/oof_metrics.csv",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/oof_metrics.json",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/oof_predictions.csv",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/paired_variant_bootstrap.csv",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method, reusing V2-002's bootstrap draws unchanged",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/paired_variant_bootstrap_summary.json",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen method",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/reproducibility.json",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "records the required second-run byte-identity check",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/run_manifest.json",
+      "changed_after_freeze": true,
+      "classification": "evidence_generation",
+      "scientific_effect": "none -- MODEL_V2_RUN_MANIFEST_V1 provenance record",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/scope_leakage_audit.json",
+      "changed_after_freeze": true,
+      "classification": "evidence_generation",
+      "scientific_effect": "none -- reads the access ledger, reports on it",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/search_budget.json",
+      "changed_after_freeze": true,
+      "classification": "evidence_generation",
+      "scientific_effect": "none -- fixed accounting record",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "reports/model_v2/v2_003/v1_reference_comparison.json",
+      "changed_after_freeze": true,
+      "classification": "canonical_result_output",
+      "scientific_effect": "produced by the frozen V1-comparison rule applied to the frozen result",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "scripts/freeze_feature_audit_v2003.py",
+      "changed_after_freeze": true,
+      "classification": "component_freeze_packaging",
+      "scientific_effect": "none -- reads already-produced JSON/CSV results and writes a lock; contains no feature/variant/model/fit-scope/metric/bootstrap/selection/permutation logic",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "scripts/generate_v2_003_evidence.py",
+      "changed_after_freeze": true,
+      "classification": "evidence_generation",
+      "scientific_effect": "none -- orchestrates calls into the frozen run_feature_audit_v2003/aggregate_v2003/select_subset_v2003 modules for the required reproducibility re-run; defines no new scientific logic itself",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "tests/test_model_v2_control_plane.py",
+      "changed_after_freeze": true,
+      "classification": "test_registry_assertion_update",
+      "scientific_effect": "none -- updates the expected PASS-set assertion to include V2-002/V2-003 now that they legitimately passed; does not alter experiment behavior",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "tests/test_model_v2_feature_audit_bootstrap_permutation.py",
+      "changed_after_freeze": true,
+      "classification": "tests_added",
+      "scientific_effect": "none -- read-only assertions against frozen code/results; added, not modified",
+      "status": "ALLOWED"
+    },
+    {
+      "file": "tests/test_model_v2_feature_audit_selection.py",
+      "changed_after_freeze": true,
+      "classification": "tests_added",
+      "scientific_effect": "none -- read-only assertions against frozen code/results; added, not modified",
+      "status": "ALLOWED"
+    }
+  ],
+  "forbidden_change_categories_checked": [
+    "feature_definitions", "variant_definitions", "model_hyperparameters", "fit_scope",
+    "metrics", "bootstrap_algorithm", "selection_rules", "permutation_algorithm",
+    "v1_comparison_rule"
+  ],
+  "forbidden_change_categories_found": [],
+  "SCIENTIFIC_METHOD_UNCHANGED_AFTER_FREEZE": true,
+  "status": "PASS"
+}

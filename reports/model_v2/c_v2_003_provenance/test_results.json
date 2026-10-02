@@ -1,0 +1,23 @@
+{
+  "ruff_check_full_repo": "PASS",
+  "targeted_provenance_tests": {
+    "file": "tests/test_c_v2_003_provenance.py",
+    "collected": 9,
+    "passed": 9,
+    "failed": 0
+  },
+  "full_pytest": {
+    "passed": 1291,
+    "failed": 0,
+    "warnings": 12
+  },
+  "pip_check": "No broken requirements found.",
+  "registry_csv_parse_tests": "PASS (task/gate/component registries all parse to consistent column counts)",
+  "model_v2_lock_verification": "PASS (MODEL_V2_FEATURE_AUDIT_V1.lock.json, MODEL_V1_CV_REFERENCE_V1.lock.json, BASELINE_V1.lock.json, MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json all byte-match expected hashes)",
+  "v2_003_oof_files_unchanged": true,
+  "v2_003_result_hashes_unchanged": true,
+  "model_v2_feature_audit_v1_lock_unchanged": true,
+  "best_reduced_rf_v1_unchanged": true,
+  "minimal_adequate_subset_unchanged": true,
+  "status": "PASS"
+}

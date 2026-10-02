@@ -1,0 +1,48 @@
+{
+  "config_path": null,
+  "config_sha256": null,
+  "corrective_checkpoint": "C-V2-003-PROVENANCE",
+  "created_at_utc": "2026-10-02T17:52:23.180079Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "52013e3dae2bc763cf9462f252d2b91598403e7c",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/model_v2/MODEL_V2_FEATURE_AUDIT_V1.lock.json",
+      "sha256": "a6876430dcad040b7008a69200fb4a36d735ad9a58d834c46d66d5543609623b"
+    },
+    {
+      "path": "reports/model_v2/v2_003/oof_predictions.csv",
+      "sha256": "45b4523dca6af338f678017958a56705a6a83e2fe216fb498d5eb33ef782ca78"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "C-V2-003-PROVENANCE: method-freeze ancestry attestation, post-freeze mutation audit, diff-check CRLF resolution, scientific-wording correction. Read-only, no recomputation.",
+  "output_artifacts": [
+    {
+      "path": "reports/model_v2/c_v2_003_provenance/method_freeze_commit_attestation.json",
+      "sha256": "763299a5599fd855765ddbbff87928bc7f5b09643412ace509f1f9d2667761f2"
+    },
+    {
+      "path": "reports/model_v2/c_v2_003_provenance/post_freeze_change_audit.json",
+      "sha256": "e165e9f3adaf8e298659654f0fda0273197124ce5427ae8a4ec7168d9d4101e4"
+    },
+    {
+      "path": "reports/model_v2/c_v2_003_provenance/result_commit_diff_check_audit.json",
+      "sha256": "c03c8946ee3f16d26dbd4c3ddf4233164680722e89b3677433ca196e2cfec085"
+    },
+    {
+      "path": "reports/model_v2/c_v2_003_provenance/selection_interpretation_note.json",
+      "sha256": "ad0e3b26e7a5f1cec373c99757e3aa9a86a631e64a354ccfe65e19dec3ca9328"
+    }
+  ],
+  "phase_id": "V2-003",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "c-v2-003-provenance",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "V2-003"
+}

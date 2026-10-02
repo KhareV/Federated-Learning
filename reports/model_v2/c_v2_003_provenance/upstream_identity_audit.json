@@ -1,0 +1,74 @@
+{
+  "read_only": true,
+  "no_recomputation_from_models": true,
+  "frozen_lock_hashes": {
+    "MODEL_V2_RESEARCH_PROTOCOL_V1": {
+      "path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json",
+      "expected": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+      "actual": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+      "match": true
+    },
+    "MITDB_TRAIN_CV_V2_V1": {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+      "expected": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+      "actual": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+      "match": true
+    },
+    "MITDB_TRAIN_INNER_V2_V1": {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv",
+      "expected": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+      "actual": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+      "match": true
+    },
+    "MODEL_V1_CV_REFERENCE_V1": {
+      "path": "manifests/model_v2/MODEL_V1_CV_REFERENCE_V1.lock.json",
+      "expected": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+      "actual": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+      "match": true
+    },
+    "BASELINE_V1_F07": {
+      "path": "manifests/baselines/BASELINE_V1.lock.json",
+      "expected": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+      "actual": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+      "match": true,
+      "all_15_referenced_artifacts_in_lock_re_verified_byte_exact": true
+    }
+  },
+  "baseline_features_v1_schema": {
+    "path": "manifests/features/BASELINE_FEATURES_V1.schema.json",
+    "feature_schema_sha256_field": "a81c9aadc88cd65b9b4e937e2b5dd90bb8210ffbbc839dc5a8172d9104425718",
+    "matches_baseline_v1_lock_field": true,
+    "feature_count": 29
+  },
+  "model_v2_feature_audit_v1_lock": {
+    "path": "manifests/model_v2/MODEL_V2_FEATURE_AUDIT_V1.lock.json",
+    "file_sha256": "a6876430dcad040b7008a69200fb4a36d735ad9a58d834c46d66d5543609623b",
+    "status_field": "FROZEN_FEATURE_AUDIT",
+    "not_mutated_by_this_checkpoint": true
+  },
+  "preserved_v2_003_findings": {
+    "RF_pooled_OOF_AUPRC": {
+      "STAT": 0.4397412547583662,
+      "RR": 0.713140103147974,
+      "QRS": 0.5386305475769498,
+      "RR_QRS": 0.6648790323465298,
+      "STAT_RR": 0.5750209692692609,
+      "STAT_QRS": 0.5257286151872305,
+      "ALL": 0.605530307984657
+    },
+    "LOGISTIC_pooled_OOF_AUPRC": {
+      "ALL": 0.728520590871806,
+      "RR_QRS": 0.7675169869811461
+    },
+    "minimal_adequate_subset": {"variant": "RR", "feature_count": 9},
+    "best_reduced_rf": {
+      "variant": "RR",
+      "AUPRC": 0.713140103147974,
+      "AUROC": 0.8283616260289637
+    },
+    "model_v1_cv_reference_three_seed_mean_AUPRC": 0.4138882608052527
+  },
+  "all_values_match_instructions_approximate_expectations": true,
+  "source": "read directly from frozen reports/model_v2/v2_003/*.json and manifests/model_v2/*.lock.json; nothing recomputed",
+  "status": "PASS"
+}

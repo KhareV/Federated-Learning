@@ -1,0 +1,36 @@
+{
+  "checkpoint_id": "C-V2-003-PROVENANCE",
+  "parent_phase": "V2-003",
+  "pre_result_parent_commit": "f7ed5b7e0d39cb0c26115e5fb0f3e3d98210380e",
+  "method_freeze_commit": "d07a561c92d9a5e5401b074e682784fe727075d4",
+  "result_commit": "52013e3dae2bc763cf9462f252d2b91598403e7c",
+  "method_freeze_is_ancestor_of_result": true,
+  "method_freeze_commit_date": "2026-10-02 22:55:57 +0530",
+  "result_commit_date": "2026-10-02 23:05:56 +0530",
+  "method_freeze_was_pushed_before_real_fits": true,
+  "method_freeze_was_pushed_before_real_fits_proof_type": "SESSION_TRANSCRIPT_NOT_GIT_MECHANICAL",
+  "method_freeze_was_pushed_before_real_fits_note": "Git does not locally record push events with a timestamp separable from the commit's own author/commit date, so this specific temporal claim (pushed, THEN real fits ran) cannot be proven from local git metadata alone. It is sourced from the originating session's own action log: git push was executed immediately after creating commit d07a561, and the real-fit script (scripts/run_feature_audit_v2003.py) was invoked only afterward. This is reported as session-transcript evidence, not a git-mechanical proof, and is clearly labeled as such rather than conflated with the ancestor-check result below, which IS a git-mechanical proof.",
+  "original_method_freeze_json_pre_result_method_commit": null,
+  "original_method_freeze_json_path": "reports/model_v2/v2_003/method_freeze.json",
+  "additive_attestation_resolves_missing_commit_binding": true,
+  "original_commit_not_rewritten": true,
+  "historical_git_history_not_mutated": true,
+  "source_evidence": [
+    "reports/model_v2/v2_003/method_freeze.json (original, unmodified, still null)",
+    "git log --first-parent (this checkpoint's own verification run)",
+    "git merge-base --is-ancestor (this checkpoint's own verification run)"
+  ],
+  "verification_commands": [
+    "git merge-base --is-ancestor d07a561c92d9a5e5401b074e682784fe727075d4 52013e3dae2bc763cf9462f252d2b91598403e7c",
+    "git log --first-parent --format='%H %s' d07a561c92d9a5e5401b074e682784fe727075d4^..52013e3dae2bc763cf9462f252d2b91598403e7c"
+  ],
+  "exit_codes": {
+    "merge_base_is_ancestor": 0,
+    "first_parent_log": 0
+  },
+  "first_parent_log_result": [
+    "52013e3dae2bc763cf9462f252d2b91598403e7c research(model-v2): complete V2-003 classical feature-information audit",
+    "d07a561c92d9a5e5401b074e682784fe727075d4 research(model-v2): freeze classical feature-audit method (V2-003)"
+  ],
+  "status": "PASS"
+}
