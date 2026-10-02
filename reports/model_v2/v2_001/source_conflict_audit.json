@@ -1,27 +1,52 @@
 {
   "checkpoint": "V2-001",
-  "sources_reviewed": [
-    "NHM_ML_Revised_Locked_Specification_v2.2.docx",
-    "NHM_Solo_Implementation_Execution_Plan_v1.0.docx",
-    "this session's own implementation ledger (the conversation history across T001-T036, C032-NORM-RUNTIME, C034-UI-E2E, T035, C035-CLEAN-REPRO) -- no separate 'Reading master transcript' file exists in the repository; the running conversation IS the implementation ledger referenced",
-    "the current repository state (manifests/, reports/, configs/, artifacts/)"
-  ],
+  "corrected_by": "C-V2-001-VERIFY (see reports/model_v2/cv2_001_verify/source_scope_correction.json for the full correction rationale)",
+  "source_classification": {
+    "A_repository_available_authority": [
+      "NHM_ML_Revised_Locked_Specification_v2.2.docx (present in repository root)",
+      "NHM_Solo_Implementation_Execution_Plan_v1.0.docx (present in repository root)",
+      "NHM_Solo_Implementation_Master_Prompt_FINAL.docx (present in repository root, retained as historical planning input per README.md)",
+      "committed manifests/ (task/gate/freeze/experiment/evidence registries, splits, windows, features)",
+      "committed reports/ (T001-T036, C032, C034, T035, C035 evidence)",
+      "current repository source code (api/, deployment/, models/, preprocessing/, training/, evaluation/, datasets/, fusion/, scripts/, src/)",
+      "committed configs/ and artifacts/*.lock.json"
+    ],
+    "B_phase_instruction_inherited_decisions": {
+      "description": "Specific implementation decisions, task sequencing, and historical outcome summaries supplied directly to this Codex run inside the V2-001 (and prior T001-T036/C032/C034/T035/C035) corrective-checkpoint instructions. These instructions were themselves reconstructed externally (outside this repository and outside this Codex session) from the full project history by whoever authored each checkpoint prompt.",
+      "available_via_phase_instruction": true,
+      "externally_reconstructed": true
+    },
+    "C_external_implementation_ledger": {
+      "description": "A separately supplied, 903-page prior-conversation transcript/PDF referenced in checkpoint instructions as authoritative project history.",
+      "repo_availability": "NOT_PRESENT_IN_REPOSITORY",
+      "mechanically_read_by_this_codex_run": false,
+      "decisions_available_via_phase_instruction": true,
+      "note": "This Codex run never opened, parsed, or hashed that PDF -- it does not exist as a repository file. Any historical claim this run makes is sourced from (A) repository-available evidence or (B) decisions already supplied in the phase instruction text, never from independently reading (C). A separate, independent orchestration process outside this repository and outside this Codex run is stated to have already cross-checked the V2-001-relevant T013-T017 history against that ledger; this audit does not claim to have performed or verified that cross-check itself."
+    }
+  },
+  "external_ledger_repo_availability": "NOT_PRESENT_IN_REPOSITORY",
+  "external_ledger_decisions_available_via_phase_instruction": true,
+  "external_ledger_hash": null,
+  "external_ledger_hash_note": "No hash is recorded for the external ledger -- it was never accessed by this Codex run, and inventing a hash for a file this run did not read would misrepresent its own scope.",
   "conflicts_found": [],
   "notable_resolved_decisions_carried_forward": [
     {
       "decision": "api/runtime.py normalization defect (C032-NORM-RUNTIME)",
       "classification": "RESOLVED_BY_LATER_DECISION",
+      "source_classification": "B_phase_instruction_inherited_decision, cross-checked against A (committed C032 evidence/commits, repository-available)",
       "note": "Does not affect MODEL_V2 lineage: V2-001 never touches API_RUNTIME_V1_1 or any runtime inference path; this was a deployment-layer fix, not a training-data or label-mapping change."
     },
     {
       "decision": "T035 clean-environment proof required a second, fully untouched clone (C035-CLEAN-REPRO) after the original clone was contaminated by post-hoc copies",
       "classification": "RESOLVED_BY_LATER_DECISION",
-      "note": "Addressed explicitly in reports/model_v2/v2_001/t035_repro_prerequisite.json; the current committed C035 evidence is the authoritative final proof, superseding the original T035 clean_checkout_audit.json's own self-description where they differ in rigor."
+      "source_classification": "B_phase_instruction_inherited_decision, cross-checked against A (committed C035 evidence, repository-available)",
+      "note": "Addressed explicitly in reports/model_v2/v2_001/t035_repro_prerequisite.json; the current committed C035 evidence is the authoritative final proof."
     },
     {
       "decision": "@types/node and T015-candidate-checkpoint reproducibility defects (T035)",
       "classification": "IMPLEMENTATION_DRIFT, fixed",
-      "note": "Both were genuine implementation drift between the developer machine and a true clean checkout, now fixed and versioned (DASHBOARD_UI_V1_3; pytest.skip guard). Unrelated to MODEL_V2 scientific content."
+      "source_classification": "A_repository_available (reports/t035/*, DASHBOARD_UI_V1_3 lock, test diffs -- all directly readable in-repo)",
+      "note": "Both were genuine implementation drift between the developer machine and a true clean checkout, now fixed and versioned. Unrelated to MODEL_V2 scientific content."
     }
   ],
   "unresolved_blockers": [],

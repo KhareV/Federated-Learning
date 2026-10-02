@@ -1,0 +1,12 @@
+{
+  "checkpoint": "C-V2-001-VERIFY",
+  "defect_being_corrected": "reports/model_v2/v2_001/source_conflict_audit.json previously listed 'this session's own implementation ledger (the conversation history across T001-T036, ...)' as an equivalent stand-in for the separately supplied historical implementation transcript referenced in checkpoint instructions as the 'Reading master transcript' / '903-page ledger'. That wording implied this Codex run had reviewed that external document; it had not, because it is not a repository file and was never supplied to or opened by this run.",
+  "correction_applied": "reports/model_v2/v2_001/source_conflict_audit.json rewritten to explicitly classify every source into three categories (A: repository-available authority, B: phase-instruction inherited decisions -- externally reconstructed before being supplied to this run, C: the external implementation ledger, which this run never accessed), with explicit fields external_ledger_repo_availability=NOT_PRESENT_IN_REPOSITORY and external_ledger_decisions_available_via_phase_instruction=true, and external_ledger_hash=null (not invented) with a note explaining why.",
+  "scope_boundary_now_stated_truthfully": {
+    "what_this_codex_run_actually_did": "Read repository-available files (category A) mechanically, and treated specific historical outcome claims appearing in checkpoint instruction text (category B) as given facts to cross-check against category A evidence where a repository artifact existed to check them against (e.g. the upstream_identity_audit.json cross-checks every numeric claim in the V2-001 instructions against actual committed reports/manifests). It never opened, parsed, hashed, or otherwise accessed the external 903-page implementation-ledger PDF (category C).",
+    "what_this_codex_run_did_not_claim": "This run does not claim to have independently verified the 903-page ledger's content, and does not claim the separately-stated external cross-check (of T013-T017 history against that ledger, performed outside this repository and outside this Codex run) as its own work product."
+  },
+  "research_protocol_affected": false,
+  "frozen_artifacts_affected": false,
+  "status": "PASS"
+}
