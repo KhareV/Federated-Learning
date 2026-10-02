@@ -1,0 +1,89 @@
+{
+  "architecture_ids": [
+    "MODEL_V2_CAPCTRL",
+    "MODEL_V2_TCN_MEAN",
+    "MODEL_V2_TCN_MEANMAX"
+  ],
+  "calibration_policy_component_id": "CAL_V2",
+  "canonical_task_sequence_unaffected": true,
+  "change_control": "This lock is never mutated in place. Any change to the MODEL_V2 scientific protocol requires an explicit, additive MODEL_V2_RESEARCH_PROTOCOL_V2 successor lock with this lock preserved byte-identical as its predecessor.",
+  "fixed_scientific_constants": {
+    "eligibility_exclusion_policy": "UNCHANGED_FROM_FROZEN_V1",
+    "map_id": "AAMI_SVF_MAP_V1",
+    "model_input_normalization_epsilon": 1e-08,
+    "model_input_normalization_id": "PER_WINDOW_ZSCORE_V1",
+    "preproc_id": "PREPROC_V1",
+    "preproc_v2_in_first_lineage": false,
+    "quality_gap_policy": "UNCHANGED_FROM_FROZEN_V1",
+    "sampling_hz": 250,
+    "source_lead": "MLII",
+    "split_id": "MITDB_SPLIT_V1",
+    "stride_samples": 1250,
+    "stride_seconds": 5,
+    "target_id": "AAMI_SVF_WINDOW_V1",
+    "window_samples": 2500,
+    "window_seconds": 10
+  },
+  "hybrid_trigger_condition": "best_reduced_classical_RF_TRAIN_CV_AUPRC - best_learned_only_V2_TRAIN_CV_AUPRC >= 0.03",
+  "lineage": "MODEL_V2",
+  "lock_id": "MODEL_V2_RESEARCH_PROTOCOL_V1",
+  "model_seeds": {
+    "release_seed_fixed_regardless_of_score": 20260927,
+    "role": "MATCHED_ROBUSTNESS_SEEDS",
+    "seeds": [
+      20260927,
+      20260928,
+      20260929
+    ]
+  },
+  "no_new_canonical_freeze_registry_row": true,
+  "official_validation_promotion_requirement": {
+    "auroc_material_regression_forbidden": true,
+    "computation": "0.5328607838787021 (V1 release AUPRC) + 0.03",
+    "release_seed_validation_auprc_min": 0.5628607838787021,
+    "three_seed_confirmation_required": true
+  },
+  "owner_task": "V2-001",
+  "patient_cluster_bootstrap_seed": 20261002,
+  "practical_improvement_rule_min_delta_auprc": 0.02,
+  "primary_metrics": {
+    "per_patient_auprc_averaging_forbidden": true,
+    "primary": "pooled_AUPRC",
+    "report_fields": [
+      "seed_mean",
+      "seed_sd",
+      "seed_minimum",
+      "fold_range",
+      "patient_counts",
+      "window_counts",
+      "prevalence",
+      "parameter_count"
+    ],
+    "secondary": "pooled_AUROC",
+    "threshold_metrics_role": "DEVELOPMENT_DIAGNOSTIC_ONLY",
+    "weighted_composite_score_forbidden": true
+  },
+  "protocol_md_path": "docs/MODEL_V2_RESEARCH_PROTOCOL_V1.md",
+  "protocol_md_sha256": "505cc4d2fa138e9db156b9f2ad50c6d735fd0ed9f5b6c4e6c317a93788b72111",
+  "protocol_yaml_path": "configs/model_v2/research_protocol_v1.yaml",
+  "protocol_yaml_sha256": "7e865a4625cb746cd3db83b5d96ca4fcfe633611a936a4dab85060909c204cfb",
+  "runtime_acceptance_guardrails": {
+    "INCART": {
+      "min_point_delta_auprc": -0.03,
+      "min_point_delta_auroc": -0.03
+    },
+    "INTERNAL_TEST": {
+      "min_point_delta_auprc": -0.05,
+      "min_point_delta_auroc": -0.05
+    },
+    "NSTDB": {
+      "min_mean_six_snr_delta_auprc": -0.05,
+      "min_single_snr_delta_auprc": -0.1
+    },
+    "note": "Scientific MODEL_V2_FINAL and operational runtime acceptance are different decisions. MODEL_V2_FINAL cannot be retuned after second-look exposure.",
+    "on_failure": "MODEL_V2_FINAL remains a frozen research result; MODEL_V1 remains the operational runtime lineage.",
+    "report_paired_confidence_intervals": true,
+    "these_are_guardrails_not_tuning_objectives": true
+  },
+  "status": "FROZEN_RESEARCH_PROTOCOL"
+}
