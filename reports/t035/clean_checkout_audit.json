@@ -1,0 +1,41 @@
+{
+  "checkpoint": "T035",
+  "clone_method": "git clone git@github.com:KhareV/Federated-Learning.git <fresh directory outside /Users/Home/Downloads/miniproject>",
+  "clone_resolved_commit": "4e599aea9466689bc7e60f1b765f5bb0bb3cd199",
+  "clone_directory_category": "session scratchpad, isolated filesystem tree distinct from the developer working tree (not a git worktree sharing object storage/config -- a fully independent `git clone`)",
+  "clone_working_tree_clean": true,
+  "python_environment": {
+    "created_with": "python3.11 -m venv .venv (fresh, inside the clean clone only)",
+    "python_version": "3.11.16",
+    "pip_install_command": ".venv/bin/python -m pip install -r requirements-dev.lock",
+    "pip_install_exit_code": 0,
+    "editable_install_command": ".venv/bin/python -m pip install --no-deps -e .",
+    "editable_install_exit_code": 0,
+    "pip_check_result": "No broken requirements found.",
+    "manual_rescue_pip_install_performed": false,
+    "inherited_developer_venv": false
+  },
+  "frontend_environment": {
+    "install_command": "npm ci (frontend/, fresh node_modules, never copied from the developer tree)",
+    "install_exit_code": 0,
+    "node_version": "v26.5.0",
+    "npm_version": "11.17.0",
+    "manual_rescue_npm_install_performed": false,
+    "inherited_developer_node_modules": false
+  },
+  "raw_third_party_datasets": {
+    "policy": "data/raw/** and data/processed/ are deliberately gitignored (R26.1/R26.3: public builds are scripted from URLs/checksums, raw payload bytes are never committed); only SHA256SUMS.txt/LICENSE/README per dataset are tracked.",
+    "method_used": "The already PhysioNet-checksum-verified raw bytes for MITDB/BIDMC/INCARTDB/NSTDB (originally acquired over network at T006/T007 and verified then) were copied from the developer tree into the clean clone's data/raw/ tree, then re-verified byte-for-byte inside the clean clone against the repository's own TRACKED checksum authority (data/raw/<dataset>/<version>/SHA256SUMS.txt) using scripts/materialize_raw_provenance_t035.py -- see raw_provenance_materialization.json. All 4 datasets verified 100% hash-match (mitdb 144/144 files, bidmc 212/212, incartdb 225/225, nstdb 42/42; 0 missing, 0 mismatches).",
+    "live_network_fetch_to_physionet_org_attempted": true,
+    "live_network_fetch_outcome": "scripts/acquire_mitdb.py (the project's own network-based acquisition script, unmodified) was run directly against the clean clone three times; outbound network access to physionet.org in this sandboxed environment proved extremely slow/unreliable (one run genuinely completed after 6m09s for a single dataset; two further attempts, including one for the SAME already-downloaded dataset, did not complete within 10-15 minutes and were terminated). Given this, the offline checksum-verification path above was used as the basis for proceeding, documented transparently here rather than silently claimed as a live network proof.",
+    "bytes_fabricated_or_invented": false,
+    "classification": "hidden_dependency_audit.json finding F8"
+  },
+  "clean_checkout_never_inherited": [
+    "developer .venv or any .venv-* (confirmed: fresh .venv created with explicit python3.11 inside the clean clone only)",
+    "developer frontend/node_modules (confirmed: npm ci ran fresh inside the clean clone)",
+    "developer-generated reports/ (the clean clone's reports/t035/* files were generated fresh by this checkpoint's own scripts, run inside the clean clone)",
+    "developer shell aliases / PATH customizations (all commands invoked with explicit interpreter paths: .venv/bin/python, npm)"
+  ],
+  "status": "PASS"
+}

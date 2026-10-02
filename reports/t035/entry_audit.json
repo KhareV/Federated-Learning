@@ -1,0 +1,61 @@
+{
+  "checkpoint": "T035",
+  "gate": "G20",
+  "head_sha_at_entry": "4e599aea9466689bc7e60f1b765f5bb0bb3cd199",
+  "origin_main_sha_at_entry": "4e599aea9466689bc7e60f1b765f5bb0bb3cd199",
+  "head_matched_origin_main": true,
+  "working_tree_clean_at_entry": true,
+  "active_branch": "main",
+  "accepted_predecessor_abbreviated_sha": "4e599ae",
+  "accepted_predecessor_present_in_ancestry": true,
+  "unexplained_intervening_commits": false,
+  "recent_log": [
+    "4e599ae docs(runtime): supersede unnormalized replay semantics",
+    "05136c7 chore(runtime): version API/dashboard/E2E successors",
+    "a05fa8c test(runtime): prove normalized gateway equivalence and impact",
+    "cb63ac8 fix(runtime): restore PREPROC_V1 model-input normalization",
+    "4f44ea4 docs(C034): close T034 software dashboard replay gap",
+    "8b65922 chore(C034): version dashboard and E2E integration locks",
+    "9e9cb73 test(C034): prove rendered recorded-stream dashboard integration",
+    "35c139b fix(C034): bind full recorded ECG replay into canonical frontend",
+    "f025942 test(T034): verify controlled replay failure recovery",
+    "5db28a2 test(T034): complete replay evidence inventory",
+    "b833bb1 docs(T034): record software replay completion and hardware gate deferral",
+    "621a848 eval(T034): record deterministic replay integration evidence"
+  ],
+  "task_registry_t035_status_at_entry": "NOT_STARTED",
+  "gate_registry_g20_status_at_entry": "NOT_STARTED",
+  "gate_registry_g20_evidence_path_declared": "reports/reproducibility/clean_run.json",
+  "evidence_registry_ev028_status_at_entry": "PLANNED",
+  "evidence_registry_ev028_expected_path": "reports/reproducibility/clean_run.json",
+  "requirements_referenced": ["R26", "R26.1", "R26.2", "R26.3", "TEST01"],
+  "active_component_locks_present": {
+    "API_RUNTIME_V1_1.lock.json": true,
+    "DASHBOARD_UI_V1_2.lock.json": true,
+    "E2E_REPLAY_SOFTWARE_V1_2.lock.json": true,
+    "GATEWAY_ARTIFACT_V1.lock.json": true,
+    "GATEWAY_FP32_METHOD_V1.lock.json": true,
+    "CAL_V1.json": true,
+    "PREPROC_V1.lock.json": true
+  },
+  "predecessor_locks_still_present_byte_identical": {
+    "API_RUNTIME_V1.lock.json": true,
+    "DASHBOARD_UI_V1.lock.json": true,
+    "DASHBOARD_UI_V1_1.lock.json": true,
+    "E2E_REPLAY_SOFTWARE_V1.lock.json": true,
+    "E2E_REPLAY_SOFTWARE_V1_1.lock.json": true
+  },
+  "ci_workflow_trigger_at_entry": "workflow_dispatch",
+  "ci_workflow_file": ".github/workflows/t001.yml",
+  "declared_python_dependency_sources": {
+    "pyproject.toml": "direct dependency declarations",
+    "requirements-dev.lock": "exact project dependency resolution; canonical install source per README.md Phase-01 environment section"
+  },
+  "declared_python_version_requirement": ">=3.11,<3.12",
+  "declared_frontend_dependency_sources": {
+    "frontend/package.json": "direct dependency declarations",
+    "frontend/package-lock.json": "exact resolution for npm ci"
+  },
+  "canonical_bootstrap_commands_found_in": "README.md (Phase-01 environment section)",
+  "status": "PASS"
+}

@@ -1,0 +1,58 @@
+{
+  "config_path": null,
+  "config_sha256": null,
+  "created_at_utc": "2026-10-02T09:23:58.980807Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "4e599aea9466689bc7e60f1b765f5bb0bb3cd199",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "requirements-dev.lock",
+      "sha256": "0d4a0561bfadf89157b9f6f6dfbfa87e885aca2815a45a442e04a98d662f2a0e"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "sha256": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae"
+    },
+    {
+      "path": "checkpoints/MODEL_V1.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    {
+      "path": "artifacts/API_RUNTIME_V1_1.lock.json",
+      "sha256": "7023087dd91eccd4b740a81197d1c8b85dfc6d39ec9bc0a8e962986018c63c6e"
+    },
+    {
+      "path": "artifacts/DASHBOARD_UI_V1_3.lock.json",
+      "sha256": "c6418b857bac62e30381b7f0e1b80b500cf94a06ec8c86e24907622dfa2e01c2"
+    },
+    {
+      "path": "artifacts/E2E_REPLAY_SOFTWARE_V1_2.lock.json",
+      "sha256": "a28c0d4e32eb847503fca785f928ac2bdff73fb60f28150908f4fb5b41ae0f49"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "Clean-environment reproducibility proof executed from a genuinely fresh `git clone` with a fresh python3.11 venv and fresh frontend node_modules.",
+  "output_artifacts": [
+    {
+      "path": "reports/t035/full_test_report.json",
+      "sha256": "e63cd21951345a2a80d2d82cd40beae262b2b94da7a898b4d0c544b90b5d047e"
+    },
+    {
+      "path": "reports/t035/cpu_smoke_report.json",
+      "sha256": "154eef4f2373df1b8890a82fd1f98cdcbd0759002c4b827fd13bee69ad28644e"
+    },
+    {
+      "path": "reports/t035/reproducibility_report.json",
+      "sha256": "84ea4be1f71d77a0a80e3f2bf67bc24a4332c90be697c0d6e873c5137637a5d3"
+    }
+  ],
+  "phase_id": "T035",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "t035-clean-checkout-reproducibility",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "T035"
+}

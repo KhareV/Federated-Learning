@@ -1,0 +1,46 @@
+{
+  "checkpoint": "T035",
+  "all_checks_run_from": "genuinely fresh git clone, fresh python3.11 venv, fresh npm ci node_modules -- never the developer's working tree",
+  "labels_used_anywhere": false,
+  "checks": {
+    "A_model_fixed_vector": {
+      "fixture": "tests/fixtures/model_v1_test_vector.npz",
+      "vectors_checked": 3,
+      "max_abs_logit_delta": 2.384185791015625e-07,
+      "status": "PASS"
+    },
+    "B_preproc_causality_regression": {
+      "scope": "offline synthetic-signal regression suite (resampler/filter coefficients, window/quality/sync tests) plus the real deterministic MITDB split+window build",
+      "split_builder_result": "T009 split: eligible_records=46 eligible_groups=45 positive=42 negative=3 201/202 partition=VALIDATION determinism_check=True",
+      "split_independence_audit": "PASS",
+      "window_build_result": "T013 real MITDB build: PASS (46 records, 16560 candidates, 15777 eligible)",
+      "status": "PASS"
+    },
+    "C_api_runtime_normalization_regression": {
+      "tests": "tests/test_c032_norm_runtime.py (branch separation, exact equivalence vs normalize_window_zscore -> GatewayModelRuntime.infer, T029-reference equivalence across 2157 INTERNAL_TEST rows)",
+      "status": "PASS (included in full pytest run, see full_test_report.json)"
+    },
+    "D_gateway_equivalence": {
+      "method": "GatewayModelRuntime loaded from GATEWAY_ARTIFACT_V1, frozen model_v1_test_vector.npz reproduced within float32 tolerance; T029's own decision_agreement_fraction=1.0 claim verified via the engineering-equivalence regression test against INTERNAL_TEST windows built from the clean checkout's own verified raw MITDB data",
+      "status": "PASS"
+    },
+    "E_corrected_e2e_replay_determinism": {
+      "runner": "scripts/run_replay_corrected_t035.py (reuses scripts/run_replay.py helpers; checks API_RUNTIME_V1_1 + DASHBOARD_UI_V1_3)",
+      "run_1_public_semantic_digest": "128fa6d60fab9d9136a6f99f057332c4b6fc2bd16d6ae9e991f60faeb41f30ab",
+      "run_2_public_semantic_digest": "128fa6d60fab9d9136a6f99f057332c4b6fc2bd16d6ae9e991f60faeb41f30ab",
+      "run_1_equals_run_2": true,
+      "matches_active_e2e_replay_software_v1_2_lock_digest": true,
+      "note": "The full (not abbreviated/chat-copied) digest stored in artifacts/E2E_REPLAY_SOFTWARE_V1_2.lock.json was read programmatically and compared exactly.",
+      "status": "PASS"
+    },
+    "F_one_command_demo": {
+      "runner": "scripts/run_e2e_dashboard_demo_corrected_t035.py",
+      "backend_ready": true,
+      "frontend_ready": true,
+      "replay_route_reachable": true,
+      "lock_status": {"api_runtime_v1_1": "PASS", "dashboard_ui_v1_3": "PASS"},
+      "status": "PASS"
+    }
+  },
+  "status": "PASS"
+}

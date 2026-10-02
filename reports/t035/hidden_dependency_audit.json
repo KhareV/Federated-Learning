@@ -1,0 +1,74 @@
+{
+  "checkpoint": "T035",
+  "method": "grep across tracked source (scripts/ tests/ src/ api/ evaluation/ deployment/ fusion/ preprocessing/ training/ datasets/ features/ models/ federated/) for absolute developer paths, stale venv names used as live dependencies, undocumented required environment variables, and forbidden MongoDB/private-data access; cross-checked README.md and Makefile for the canonical bootstrap source of truth.",
+  "findings": [
+    {
+      "id": "F1",
+      "pattern": "/Users/Home or Downloads/miniproject absolute paths in tracked, non-evidence source",
+      "result": "NONE found in live scripts/tests/src/api/* code",
+      "note": "One committed evidence file (reports/t028/flower_secagg_api_audit.json) contains an absolute path as descriptive text recording where a third-party library's source file was found on the authoring machine during a historical T028 audit. It is static JSON text, never re-read as a required input by any script/test, so it is not a reproducibility defect; left unmodified as historical evidence.",
+      "classification": "INFORMATIONAL_ONLY",
+      "fix_applied": false
+    },
+    {
+      "id": "F2",
+      "pattern": ".venv-t032 / .venv-t024 referenced in source",
+      "result": "Found only as literal provenance strings inside historical evidence-generator scripts (scripts/generate_t032_evidence.py, generate_t031_evidence.py, generate_t028_evidence.py, generate_t029_evidence.py, generate_t025_evidence.py) describing the exact command that was historically run.",
+      "classification": "INFORMATIONAL_ONLY",
+      "fix_applied": false,
+      "note": "No script executes against these paths at runtime; they are descriptive text only."
+    },
+    {
+      "id": "F3",
+      "pattern": "required os.environ[...] / os.getenv without default in tracked project code",
+      "result": "NONE found outside third-party packages inside .venv*/",
+      "classification": "NOT_APPLICABLE"
+    },
+    {
+      "id": "F4",
+      "pattern": "pymongo / MongoClient / mongodb:// usage",
+      "result": "Only a negative assertion in tests/test_api_scope_t032.py proving MongoDB/JWT/OAuth/SQLAlchemy are NOT imported by the production API -- no actual MongoDB dependency anywhere.",
+      "classification": "CONFIRMS_R26.3_COMPLIANCE"
+    },
+    {
+      "id": "F5",
+      "pattern": "committed .venv (local Python environment)",
+      "result": "The repository's own working-copy .venv/ (gitignored, never committed) was built with system Python 3.9.6 instead of the pyproject.toml-declared >=3.11,<3.12 -- a stale pre-T006 artifact on this one developer machine, NOT a tracked repository defect (the canonical bootstrap in README.md always specifies `python3.11 -m venv .venv`).",
+      "classification": "LOCAL_MACHINE_ARTIFACT_NOT_A_REPO_DEFECT",
+      "fix_applied": false,
+      "proof": "T035's clean-checkout proof creates its own fresh .venv with python3.11 explicitly and never reuses this stale one -- see clean_checkout_audit.json."
+    },
+    {
+      "id": "F6",
+      "pattern": "frontend absolute path / undocumented env var assumptions",
+      "result": "NHM_API_PORT and C034_DEMO_HOLD_OPEN are both set BY the orchestrating demo script itself (scripts/run_e2e_dashboard_demo_c034.py), never required to be pre-set by the caller. No absolute paths found in frontend/src or frontend config files.",
+      "classification": "NOT_A_DEFECT"
+    },
+    {
+      "id": "F7",
+      "pattern": "test assuming an untracked local-only artifact",
+      "result": "tests/test_model_v1_freeze.py::test_candidate_and_final_are_byte_and_state_identical_and_tracked compared checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt (correctly .gitignore-excluded by the project's own '*.pt' policy -- only the final checkpoints/MODEL_V1.pt is force-added) against the final frozen checkpoint. It failed in a genuinely clean checkout because the candidate file does not exist there by design.",
+      "classification": "TEST_HARNESS_ASSUMPTION_DEFECT",
+      "fix_applied": true,
+      "fix_description": "Added an explicit pytest.skip with a clear reason when the untracked candidate file is absent; all assertions still run unchanged (and still pass) when the candidate happens to be present locally. checkpoints/MODEL_V1.pt's own tracked identity/hash is independently proven by test_committed_f08_package_verifies_and_loads_eval_model, which is unaffected. No scientific output, checkpoint, or conclusion was altered.",
+      "commit_scope": "fix(repro)"
+    },
+    {
+      "id": "F8",
+      "pattern": "raw third-party dataset directories (MITDB/BIDMC/INCART/NSTDB) required by evaluation/split code but excluded from git by design (.gitignore: data/raw/**, data/processed/)",
+      "result": "4 tests (tests/test_split_determinism.py, tests/test_real_window_leakage.py, tests/test_bidmc_context_alignment.py, tests/test_bidmc_context_results.py, tests/test_external_incart_protocol.py, tests/test_nstdb_noise_protocol.py) and one downstream consumer (tests/test_c032_norm_runtime.py::test_runtime_equivalence_against_t029_internal_population, via data/processed/ window caches built from MITDB) fail in a bare `git clone` because raw datasets are deliberately never committed (R26.1/R26.3: 'Public builds are scripted from URLs/checksums'; 'real local data is required, this is never silently downgraded to a skip').",
+      "classification": "DOCUMENTED_EXTERNAL_DATA_DEPENDENCY_BY_DESIGN",
+      "fix_applied": false,
+      "note": "This is the project's own long-standing, intentional anti-fakery policy (scripts/acquire_*.py refuse to silently skip), unrelated to C032 or any prior checkpoint. See deterministic_checks.json and clean_checkout_audit.json for how this was resolved for the T035 proof: the already PhysioNet-checksum-verified raw bytes from the working tree were supplied into the clean checkout and re-verified via the project's own idempotent acquire/validate scripts (hash check, no re-download needed since the bytes already matched), then the deterministic PREPROC_V1 window-build scripts were re-run from that verified raw data to regenerate manifests/caches inside the clean checkout."
+    }
+  ],
+  "summary": {
+    "total_findings": 8,
+    "genuine_reproducibility_defects_found": 1,
+    "genuine_reproducibility_defects_fixed": 1,
+    "documented_by_design_external_dependencies": 1,
+    "informational_only": 3,
+    "not_applicable_or_not_a_defect": 3
+  },
+  "status": "PASS"
+}

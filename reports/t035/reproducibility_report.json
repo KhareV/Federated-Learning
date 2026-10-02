@@ -1,0 +1,66 @@
+{
+  "environment_dependent_observations": {
+    "cpu_smoke_duration_seconds": 0.614,
+    "full_regression_duration_seconds": {
+      "pip_check": 0.183,
+      "pytest": 16.595,
+      "ruff": 0.033
+    },
+    "note": "Wall-clock durations are host-dependent observations, not portable pass/fail criteria; no timing-identical reproduction is required or claimed."
+  },
+  "exact_identity_checks": {
+    "api_runtime_v1_1_lock_sha256": "7023087dd91eccd4b740a81197d1c8b85dfc6d39ec9bc0a8e962986018c63c6e",
+    "corrected_replay_digest_matches_active_lock": true,
+    "corrected_replay_public_semantic_digest": "128fa6d60fab9d9136a6f99f057332c4b6fc2bd16d6ae9e991f60faeb41f30ab",
+    "dashboard_ui_v1_3_lock_sha256": "c6418b857bac62e30381b7f0e1b80b500cf94a06ec8c86e24907622dfa2e01c2",
+    "e2e_replay_software_v1_2_lock_sha256": "a28c0d4e32eb847503fca785f928ac2bdff73fb60f28150908f4fb5b41ae0f49",
+    "experiment_registry_referential_integrity": "PASS",
+    "model_v1_checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "model_v1_load_status": "PASS",
+    "preproc_v1_verify_status": "PASS"
+  },
+  "failures_encountered_and_repaired": [
+    {
+      "classification": "test_harness_assumption",
+      "defect": "tests/test_model_v1_freeze.py::test_candidate_and_final_are_byte_and_state_identical_and_tracked required an untracked (by design) T015 candidate checkpoint absent from a clean checkout",
+      "fix": "pytest.skip with explicit reason when the file is absent; full assertions still run and pass when present",
+      "verified_by": "rerun from a second genuinely fresh clean clone: skipped (not failed)"
+    },
+    {
+      "classification": "undeclared_dependency / hidden_local_state",
+      "defect": "frontend svelte-check: 13 real TypeScript errors (Cannot find module 'node:fs'/'node:path', __dirname/process undefined) surfaced only from a clean `npm ci` outside the developer's home directory -- the developer tree was silently resolving an unrelated, undeclared @types/node package from a stray node_modules directory several levels up /Users/Home",
+      "fix": "declared @types/node==26.6.4 as an explicit devDependency (frontend/package.json, frontend/package-lock.json); versioned as DASHBOARD_UI_V1_3 (predecessor DASHBOARD_UI_V1_2 preserved byte-identical)",
+      "verified_by": "rerun from a second genuinely fresh clean clone: svelte-check 0 errors"
+    },
+    {
+      "classification": "sandbox_network_constraint (not a repository defect)",
+      "defect": "scripts/acquire_{mitdb,bidmc,incart,nstdb}.py require a live physionet.org network fetch on every invocation (even when local bytes already match), which was extremely slow/unreliable in this sandboxed environment",
+      "fix": "none to the repository; scripts/materialize_raw_provenance_t035.py performs the equivalent offline verification against the repository's own tracked SHA256SUMS.txt + tracked historical acquisition metadata",
+      "verified_by": "all 4 datasets verified 100% hash-match offline; see raw_provenance_materialization.json"
+    }
+  ],
+  "final_fresh_clone_rerun_result": {
+    "cpu_smoke_status": "PASS",
+    "frontend_build_exit_code": 0,
+    "frontend_svelte_check_exit_code": 0,
+    "frontend_vitest_exit_code": 0,
+    "pip_check_exit_code": 0,
+    "pytest": {
+      "passed": 1128,
+      "skipped": 1
+    },
+    "ruff_exit_code": 0,
+    "status": "PASS"
+  },
+  "gate": "G20",
+  "numerical_tolerance_checks": {
+    "api_runtime_equivalence_vs_t029_reference": "max_abs_calibrated_probability_delta 0.0 across 2157 rows, decision_agreement_fraction 1.0 (see full_test_report.json pytest results; same tolerance as reports/t029/deployment_equivalence.json)",
+    "model_fixed_vector_max_abs_logit_delta": 2.384185791015625e-07,
+    "model_fixed_vector_tolerance": "< 1e-3 (existing project tolerance for float32 gateway vs frozen expected logits, per tests/fixtures/model_v1_test_vector.npz cross-checks established at T016/C032)"
+  },
+  "one_shot_evaluations_rerun": false,
+  "report_version": "1.0",
+  "scientific_outputs_changed": false,
+  "status": "PASS",
+  "task_id": "T035"
+}

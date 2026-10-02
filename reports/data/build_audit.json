@@ -1,0 +1,14 @@
+{
+  "datasets_verified": [
+    "bidmc",
+    "incartdb",
+    "mitdb",
+    "nstdb"
+  ],
+  "detailed_evidence": "reports/t035/raw_provenance_materialization.json",
+  "requirement": "R26.1",
+  "split_build_reproduced": true,
+  "status": "PASS",
+  "task_id": "T035",
+  "window_build_reproduced": true
+}

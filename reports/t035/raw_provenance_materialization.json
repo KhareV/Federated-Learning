@@ -1,0 +1,51 @@
+{
+  "checkpoint": "T035",
+  "datasets": {
+    "bidmc": {
+      "checksum_authority": "data/raw/bidmc/1.0.0/SHA256SUMS.txt",
+      "files_hash_mismatch": [],
+      "files_in_tracked_sha256sums": 212,
+      "files_missing": [],
+      "files_verified": 212,
+      "record_count": 53,
+      "record_list_source": "reports/t007/bidmc_acquisition_metadata.json",
+      "records_file_written": true,
+      "status": "PASS"
+    },
+    "incartdb": {
+      "checksum_authority": "data/raw/incartdb/1.0.0/SHA256SUMS.txt",
+      "files_hash_mismatch": [],
+      "files_in_tracked_sha256sums": 225,
+      "files_missing": [],
+      "files_verified": 225,
+      "record_count": 75,
+      "record_list_source": "reports/t007/incart_acquisition_metadata.json",
+      "records_file_written": true,
+      "status": "PASS"
+    },
+    "mitdb": {
+      "checksum_authority": "data/raw/mitdb/1.0.0/SHA256SUMS.txt",
+      "files_hash_mismatch": [],
+      "files_in_tracked_sha256sums": 144,
+      "files_missing": [],
+      "files_verified": 144,
+      "record_count": 48,
+      "record_list_source": "reports/t006/acquisition_metadata.json",
+      "records_file_written": true,
+      "status": "PASS"
+    },
+    "nstdb": {
+      "checksum_authority": "data/raw/nstdb/1.0.0/SHA256SUMS.txt",
+      "files_hash_mismatch": [],
+      "files_in_tracked_sha256sums": 42,
+      "files_missing": [],
+      "files_verified": 42,
+      "record_count": 15,
+      "record_list_source": "reports/t007/nstdb_acquisition_metadata.json",
+      "records_file_written": true,
+      "status": "PASS"
+    }
+  },
+  "method": "offline verification against repository-TRACKED SHA256SUMS.txt + tracked historical acquisition metadata; no network access used (physionet.org fetch was unreliable/very slow in this sandbox -- see reports/t035/clean_checkout_audit.json)",
+  "status": "PASS"
+}

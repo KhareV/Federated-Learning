@@ -1,0 +1,54 @@
+{
+  "developer_local_data_path_required": false,
+  "duration_seconds": 0.614,
+  "gate": "G20",
+  "git_commit": "4e599aea9466689bc7e60f1b765f5bb0bb3cd199",
+  "git_dirty": true,
+  "held_out_reevaluation_performed": false,
+  "labels_used": false,
+  "manual_edit_required": false,
+  "python_version": "3.11.16",
+  "report_version": "1.0",
+  "retraining_performed": false,
+  "status": "PASS",
+  "steps": {
+    "deterministic_replay_fixture": {
+      "public_200": 12,
+      "public_semantic_digest": "128fa6d60fab9d9136a6f99f057332c4b6fc2bd16d6ae9e991f60faeb41f30ab",
+      "status": "PASS"
+    },
+    "environment_import": {
+      "status": "PASS"
+    },
+    "frontend_replay_reachability": {
+      "checks": {
+        "bundle_exists": true,
+        "bundle_has_events": true,
+        "bundle_is_valid_json": true,
+        "monitoring_route_exists": true,
+        "replay_controller_exists": true
+      },
+      "status": "PASS"
+    },
+    "gateway_and_model_fixed_vector": {
+      "max_abs_logit_delta": 2.384185791015625e-07,
+      "status": "PASS",
+      "vectors_checked": 3
+    },
+    "model_v1_load": {
+      "maximum_absolute_error": 0.0,
+      "status": "PASS"
+    },
+    "preproc_v1_contract": {
+      "bound_artifact_count": 25,
+      "status": "PASS"
+    },
+    "production_runtime_construction": {
+      "calibration_patient_count": 3,
+      "note": "ProductionRuntime() fails closed at construction if PREPROC_V1, ECG_HR_CONTEXT_V2, ALERT_POLICY_V1, or GATEWAY_ARTIFACT_V1 mismatch -- successful construction is itself the pass condition.",
+      "status": "PASS"
+    }
+  },
+  "task_id": "T035",
+  "tuning_performed": false
+}

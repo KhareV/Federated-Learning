@@ -1,0 +1,30 @@
+{
+  "checkpoint": "T035",
+  "python": {
+    "declared_requirement": ">=3.11,<3.12 (pyproject.toml [project] requires-python)",
+    "canonical_lock_file": "requirements-dev.lock",
+    "canonical_lock_role": "exact project dependency resolution; used by CI and reproducible setup per README.md Phase-01 environment section",
+    "canonical_bootstrap_commands": [
+      "python3.11 -m venv .venv",
+      ".venv/bin/python -m pip install --upgrade pip",
+      ".venv/bin/python -m pip install -r requirements-dev.lock",
+      ".venv/bin/python -m pip install --no-deps -e ."
+    ],
+    "clean_run_python_version": "3.11.16",
+    "clean_run_pip_install_exit_code": 0,
+    "clean_run_editable_install_exit_code": 0,
+    "clean_run_pip_check_result": "No broken requirements found.",
+    "manual_rescue_install_required": false,
+    "pyproject_direct_dependencies_subset_of_lock": true,
+    "note": "pyproject.toml's [project].dependencies lists only the project's direct top-level scientific dependencies (jsonschema, PyYAML, wfdb, scikit-learn, joblib, torch, flwr); requirements-dev.lock is the FULL resolved install (including fastapi/uvicorn/httpx/pydantic/matplotlib/etc. pulled in by later tasks). This is expected lock-vs-direct-deps divergence, not a gap: README.md names requirements-dev.lock as the canonical install source, and the clean install from it alone (no direct pip install of fastapi etc. was ever needed) proves there is no undeclared dependency."
+  },
+  "frontend": {
+    "declared_requirement": "none pinned (no package.json engines field, no .nvmrc)",
+    "canonical_lock_file": "frontend/package-lock.json",
+    "canonical_install_command": "npm ci",
+    "observed_node_version": "v26.5.0",
+    "observed_npm_version": "11.17.0",
+    "manual_rescue_install_required": false
+  },
+  "status": "PASS"
+}

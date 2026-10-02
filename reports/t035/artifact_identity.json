@@ -1,0 +1,86 @@
+{
+  "checkpoint": "T035",
+  "verified_from": "genuinely fresh `git clone` into a separate filesystem tree outside /Users/Home/Downloads/miniproject, with its own fresh .venv (python3.11) and frontend node_modules (npm ci)",
+  "components": {
+    "MODEL_V1": {
+      "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+      "verify_function": "models.model_freeze.verify_frozen_model_v1",
+      "clean_checkout_result": "PASS",
+      "clean_checkout_max_abs_error": 0.0
+    },
+    "PREPROC_V1": {
+      "lock_path": "manifests/preprocessing/PREPROC_V1.lock.json",
+      "freeze_id": "F06",
+      "verify_function": "preprocessing.freeze.verify_preproc_freeze",
+      "clean_checkout_result": "PASS",
+      "bound_artifact_count": 25
+    },
+    "CAL_V1": {
+      "path": "artifacts/CAL_V1.json",
+      "verified_via": "fusion.episode_manager.load_alert_policy (reads+cross-checks CAL_V1.json)",
+      "clean_checkout_result": "PASS"
+    },
+    "ALERT_POLICY_V1": {
+      "verify_function": "fusion.episode_manager.verify_alert_policy_lock",
+      "clean_checkout_result": "PASS",
+      "threshold": 0.6128035574269627
+    },
+    "ECG_HR_CONTEXT_V2": {
+      "lock_path": "artifacts/ECG_HR_CONTEXT_V2.lock.json",
+      "verified_via": "api.runtime.ProductionRuntime.__init__ (_verify_ecg_hr_context_lock)",
+      "clean_checkout_result": "PASS (ProductionRuntime() constructs successfully)"
+    },
+    "GATEWAY_ARTIFACT_V1": {
+      "lock_path": "artifacts/GATEWAY_ARTIFACT_V1.lock.json",
+      "freeze_id": "F14",
+      "verified_via": "api.runtime.ProductionRuntime.__init__ (_verify_gateway_artifact_lock)",
+      "clean_checkout_result": "PASS"
+    },
+    "GATEWAY_FP32_METHOD_V1": {
+      "lock_path": "artifacts/GATEWAY_FP32_METHOD_V1.lock.json",
+      "status": "FROZEN_PRE_INTERNAL_TEST_METHOD",
+      "not_reopened": true
+    },
+    "API_RUNTIME_V1": {
+      "lock_path": "artifacts/API_RUNTIME_V1.lock.json",
+      "predecessor_of": "API_RUNTIME_V1_1",
+      "status": "preserved byte-identical (predecessor); its own live verify() correctly reports drift, by design, since C032"
+    },
+    "API_RUNTIME_V1_1": {
+      "lock_path": "artifacts/API_RUNTIME_V1_1.lock.json",
+      "lock_sha256": "7023087dd91eccd4b740a81197d1c8b85dfc6d39ec9bc0a8e962986018c63c6e",
+      "verify_function": "scripts.verify_api_runtime_v1_1_c032.verify",
+      "clean_checkout_result": "PASS",
+      "predecessor_preserved": true
+    },
+    "DASHBOARD_UI_V1": {"status": "preserved byte-identical predecessor"},
+    "DASHBOARD_UI_V1_1": {"status": "preserved byte-identical predecessor"},
+    "DASHBOARD_UI_V1_2": {
+      "lock_path": "artifacts/DASHBOARD_UI_V1_2.lock.json",
+      "status": "preserved byte-identical predecessor (its own live verify() correctly reports drift as of T035, since frontend/package.json & package-lock.json legitimately moved to DASHBOARD_UI_V1_3)"
+    },
+    "DASHBOARD_UI_V1_3": {
+      "lock_path": "artifacts/DASHBOARD_UI_V1_3.lock.json",
+      "lock_sha256": "c6418b857bac62e30381b7f0e1b80b500cf94a06ec8c86e24907622dfa2e01c2",
+      "verify_function": "scripts.verify_dashboard_ui_v1_3_t035.verify",
+      "clean_checkout_result": "PASS",
+      "predecessor_preserved": true,
+      "reason": "T035: declare @types/node devDependency for reproducible svelte-check"
+    },
+    "E2E_REPLAY_SOFTWARE_V1": {"status": "preserved byte-identical predecessor"},
+    "E2E_REPLAY_SOFTWARE_V1_1": {"status": "preserved byte-identical predecessor"},
+    "E2E_REPLAY_SOFTWARE_V1_2": {
+      "lock_path": "artifacts/E2E_REPLAY_SOFTWARE_V1_2.lock.json",
+      "lock_sha256": "a28c0d4e32eb847503fca785f928ac2bdff73fb60f28150908f4fb5b41ae0f49",
+      "verify_function": "scripts.verify_e2e_replay_v1_2_c032.verify",
+      "clean_checkout_result": "PASS",
+      "predecessor_preserved": true,
+      "public_semantic_digest": "128fa6d60fab9d9136a6f99f057332c4b6fc2bd16d6ae9e991f60faeb41f30ab",
+      "digest_reproduced_from_clean_checkout": true
+    },
+    "MITDB_SPLIT_V1": {
+      "verified_separately_in": "deterministic_checks.json (requires raw MITDB acquisition; see below)"
+    }
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,29 @@
+{
+  "api_runtime_lock_id": "API_RUNTIME_V1_1",
+  "dashboard_ui_lock_id": "DASHBOARD_UI_V1_3",
+  "public_200": 12,
+  "public_422": 0,
+  "public_500": 0,
+  "public_monitoring_state_sequence": [
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE"
+  ],
+  "public_requests_sent": 12,
+  "public_semantic_digest": "128fa6d60fab9d9136a6f99f057332c4b6fc2bd16d6ae9e991f60faeb41f30ab",
+  "run_label": "t035_replay_run_2",
+  "sim_200": 2,
+  "sim_422": 1,
+  "sim_requests_sent": 3,
+  "sim_semantic_digest": "85fbd1c24a13d45b2069db65039ed1decd6087056db14ee32f23c0e7be9aa046",
+  "status": "PASS"
+}
