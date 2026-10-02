@@ -1,0 +1,33 @@
+{
+  "checkpoint": "V2-004",
+  "METHOD_COMMIT": "bb87014c84ad92b23a2bbb21c60e48fa66c68e15",
+  "method_commit_binds_hashes_of": {
+    "active_protocol_v2": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V2.lock.json",
+    "architecture_source": "models/model_v2_architectures.py",
+    "training_source": "training/train_central.py",
+    "v2_004_config": "configs/model_v2/architecture_causality_v1.yaml",
+    "cv_manifests": [
+      "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+      "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv"
+    ],
+    "reference_lock": "manifests/model_v2/MODEL_V1_CV_REFERENCE_V1.lock.json",
+    "bootstrap_draws": "reports/model_v2/v2_002/bootstrap_draws.npy (identity hash only, file reused unchanged)",
+    "decision_code": [
+      "scripts/decide_d1_v2004.py",
+      "scripts/decide_d2_v2004.py"
+    ],
+    "metric_code": [
+      "scripts/aggregate_d1_v2004.py",
+      "scripts/aggregate_d2_v2004.py",
+      "scripts/bootstrap_d1_v2004.py",
+      "scripts/bootstrap_d2_v2004.py"
+    ],
+    "role_firewall_code": [
+      "src/nhm/model_v2_cv_role_guard.py",
+      "src/nhm/model_v2_partition_guard.py"
+    ]
+  },
+  "all_hashes_recorded_in": "reports/model_v2/v2_004/method_freeze.json (committed as part of METHOD_COMMIT)",
+  "real_results_started_at_time_of_this_commit": false,
+  "status": "PASS"
+}
