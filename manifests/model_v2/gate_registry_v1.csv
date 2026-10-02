@@ -1,0 +1,15 @@
+gate_id,gate_name,purpose,prerequisite_tasks,required_tests,required_artifacts,pass_criteria,fail_criteria,recovery_action,blocks_tasks,status,evidence_path
+V2G0,Lineage Bootstrap,"Prove a clean, additive MODEL_V2 control plane with a hash-locked research protocol, fail-closed partition firewall, and frozen TRAIN-only CV manifests before any new neural result is generated.",V2-001,partition firewall fail-closed tests; CV/inner manifest conservation tests; protocol hash reproducibility test,manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json; manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.lock.json; manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.lock.json,All Section-18 V2G0 pass conditions hold.,"Any frozen upstream mismatch, leakage, or unresolved T035 provenance blocker.",Fix the specific defect; do not silently alter a frozen scientific contract.,V2-002,PASS,reports/model_v2/v2_001/research_protocol_audit.json
+V2G1,Matched V1 CV Reference,Establish the 15-fit MODEL_V1-architecture TRAIN-CV baseline the V2 architecture search must beat.,V2-002,,,,,,V2-003;V2-004,NOT_STARTED,
+V2G2,Feature-Information Audit,Establish the minimal adequate classical feature subset and hybrid trigger inputs.,V2-003,,,,,,V2-004;V2-005,NOT_STARTED,
+V2G3,Architecture Causality,Screen ARCH-A/B/C against the matched V1 CV reference under the pre-registered practical-improvement rule.,V2-004,,,,,,V2-005;V2-006,NOT_STARTED,
+V2G4,Conditional Hybrid,Run the hybrid branch only if the feature-information trigger fires.,V2-005,,,,,,V2-007,NOT_STARTED,
+V2G5,Optimizer Shortlist,One predeclared optimizer/scheduler comparison on the winning architecture family.,V2-006,,,,,,V2-007,NOT_STARTED,
+V2G6,Official Validation,"At most two frozen configurations evaluated once on official VALIDATION, 3 seeds each.",V2-007,,,,,,V2-008,NOT_STARTED,
+V2G7,MODEL_V2_FINAL Freeze,Promote and freeze MODEL_V2_FINAL only if the predeclared promotion threshold and three-seed confirmation hold.,V2-008,,,,,,V2-009,NOT_STARTED,
+V2G8,CAL_V2,Fit and freeze CAL_V2 strictly after MODEL_V2_FINAL freezes.,V2-009,,,,,,V2-010,NOT_STARTED,
+V2G9,Post-Freeze Second Look,One guardrail-checked pass each on INTERNAL_TEST/INCART/NSTDB.,V2-010,,,,,,V2-011;V2-012,NOT_STARTED,
+V2G10,Explainability,Error analysis on frozen V2 second-look outputs.,V2-011,,,,,,,NOT_STARTED,
+V2G11,Runtime Binding,"GATEWAY_ARTIFACT_V2 export/equivalence, additive only, gated on runtime-acceptance guardrails.",V2-012,,,,,,V2-013,NOT_STARTED,
+V2G12,Integration,"API_RUNTIME_V2/frontend/replay integration, additive only.",V2-013,,,,,,V2-014,NOT_STARTED,
+V2G13,Clean Reproducibility,Clean-environment reproducibility proof for the full MODEL_V2 lineage.,V2-014,,,,,,,NOT_STARTED,
