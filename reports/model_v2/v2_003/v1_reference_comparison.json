@@ -1,0 +1,53 @@
+{
+  "comparisons": {
+    "BEST_REDUCED_RF": {
+      "classical_AUPRC_point": 0.713140103147974,
+      "classical_combo": "RR_RF",
+      "delta_AUPRC_ci": [
+        0.11279901677149018,
+        0.43561997599495184
+      ],
+      "delta_AUPRC_point": 0.29925184234272134,
+      "invalid_B": 0,
+      "model_v1_three_seed_mean_AUPRC_point": 0.4138882608052527,
+      "valid_B": 2000
+    },
+    "LOGISTIC_ALL": {
+      "classical_AUPRC_point": 0.728520590871806,
+      "classical_combo": "ALL_LOGISTIC",
+      "delta_AUPRC_ci": [
+        0.14764846810323978,
+        0.45118817683521517
+      ],
+      "delta_AUPRC_point": 0.3146323300665533,
+      "invalid_B": 0,
+      "model_v1_three_seed_mean_AUPRC_point": 0.4138882608052527,
+      "valid_B": 2000
+    },
+    "MINIMAL_ADEQUATE_SUBSET_RF": {
+      "classical_AUPRC_point": 0.713140103147974,
+      "classical_combo": "RR_RF",
+      "delta_AUPRC_ci": [
+        0.11279901677149018,
+        0.43561997599495184
+      ],
+      "delta_AUPRC_point": 0.29925184234272134,
+      "invalid_B": 0,
+      "model_v1_three_seed_mean_AUPRC_point": 0.4138882608052527,
+      "valid_B": 2000
+    },
+    "RF_ALL": {
+      "classical_AUPRC_point": 0.605530307984657,
+      "classical_combo": "ALL_RF",
+      "delta_AUPRC_ci": [
+        0.05797791299810165,
+        0.3304913310445599
+      ],
+      "delta_AUPRC_point": 0.1916420471794043,
+      "invalid_B": 0,
+      "model_v1_three_seed_mean_AUPRC_point": 0.4138882608052527,
+      "valid_B": 2000
+    }
+  },
+  "note": "Descriptive paired patient-cluster comparison on the SAME V2-002 bootstrap draw; MODEL_V1 side is the mean of its three independently trained seeds on that draw, never an ensemble. No p-values, no t-tests."
+}

@@ -1,0 +1,22 @@
+{
+  "bidmc_touched": false,
+  "calibration_touched": false,
+  "incart_touched": false,
+  "inner_validation_touched": false,
+  "internal_test_touched": false,
+  "method_note": "No code path in scripts/run_feature_audit_v2003.py, scripts/_v2_003_lib.py, or scripts/grouped_permutation_v2003.py references VALIDATION/CALIBRATION/INTERNAL_TEST/INCART/NSTDB/BIDMC partitions, VALIDATION_features.npy, or INNER_VALIDATION groups; the access ledger above, produced by the fail-closed CV-role and partition firewalls, independently confirms only TRAIN-partition OPTIMISE/OUTER_TEST roles were ever read.",
+  "new_baseline_v1_artifacts_created": false,
+  "nstdb_touched": false,
+  "official_validation_touched": false,
+  "roles_match_known_set": true,
+  "roles_seen": [
+    "OPTIMISE",
+    "OUTER_TEST"
+  ],
+  "stages_seen": [
+    "V2-003_EVAL",
+    "V2-003_FIT"
+  ],
+  "status": "PASS",
+  "total_access_rows": 30
+}

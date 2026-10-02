@@ -1,0 +1,29 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "configs/model_v2/classical_feature_audit_v1.yaml": "6648331ef076d725d40b55c8a47faa293ab6b6ed88a4f59064989214ab570d51",
+    "manifests/model_v2/MODEL_V2_FEATURE_AUDIT_V1.lock.json": "a6876430dcad040b7008a69200fb4a36d735ad9a58d834c46d66d5543609623b",
+    "reports/model_v2/v2_003/best_reduced_rf.json": "419f6bbc5f7564f2488a486ea03f2ee33c35c9a117d551d3bb791d366df4e4d5",
+    "reports/model_v2/v2_003/entry_audit.json": "f7978a18d632c8c4277d5087ee50a20f4998b86a1395bef597b619bf474c3c6b",
+    "reports/model_v2/v2_003/experiment_matrix.csv": "c824fac7bd484e793e5927c57381b9489b85b430db3ebcadad2ae3294f95907a",
+    "reports/model_v2/v2_003/feature_schema_audit.json": "39d58a53123482568b4b1fcfc342777cfb2983841b94fe62e004d053c25df4de",
+    "reports/model_v2/v2_003/fit_scope_audit.csv": "0676de9b5d05b397f721a351e582fd767771ed9c9988992d092f33590edc8022",
+    "reports/model_v2/v2_003/fold_predictions.csv": "3c5d3f4954353769624b7d688ae8d1082ba3cc7dba2c49f5e7c267bcdb2aefa3",
+    "reports/model_v2/v2_003/grouped_permutation_importance.csv": "2c913a9ba4aa1b249a0db5f3bc5ec11a5c30987267e36e47761d5e0462931246",
+    "reports/model_v2/v2_003/grouped_permutation_summary.json": "fff68e199d7a3cdb9f4ecc584f81b57354521643c3dbf72cad8bfa9045aeb028",
+    "reports/model_v2/v2_003/method_freeze.json": "c4f3e3982ee0d428f0f50e22651c18c46d9f73a5a53be226babf1b25fdce97be",
+    "reports/model_v2/v2_003/minimal_adequate_subset.json": "5e324cf0d5702713c9fce3f8afa60b72b52d46bfa9dbfa77ce6f83848d9e529c",
+    "reports/model_v2/v2_003/oof_closure_audit.json": "d8091adc308626bf536c201bec493642040acfb222ced63365e28e47d231c602",
+    "reports/model_v2/v2_003/oof_metrics.csv": "a0699290f6cb5720f73d2c13d84df938b8b6fb9f80ca5547ed3c061888d2f3c2",
+    "reports/model_v2/v2_003/oof_metrics.json": "3fed5c7393f50261817564ccd98cb51e8dcfabcc75d1c06725c76836b6858306",
+    "reports/model_v2/v2_003/oof_predictions.csv": "45b4523dca6af338f678017958a56705a6a83e2fe216fb498d5eb33ef782ca78",
+    "reports/model_v2/v2_003/paired_variant_bootstrap.csv": "6e3d6477483df519c660d0abcc1b8f615e84c4d912d9a4bab0c6ff96f0c229df",
+    "reports/model_v2/v2_003/paired_variant_bootstrap_summary.json": "70630475d182a8118f758a3ef900ef016f3982f76419bdaa687838a97bcf75f3",
+    "reports/model_v2/v2_003/reproducibility.json": "37e86ae45bfcd5e59cf9bdbd4d698ec8d4c41d634726c3299cdaa1e4b5040097",
+    "reports/model_v2/v2_003/run_manifest.json": "3976b859b0465c58469ae0b64b351b576ff9d30d7afa78d55691b321b667dbbe",
+    "reports/model_v2/v2_003/scope_leakage_audit.json": "df28f71cb8e57b8e12a6b04ca0f4faca96d0a9f60181a5d6c0fe0ed138f15bdb",
+    "reports/model_v2/v2_003/search_budget.json": "acf1c32809134789676bf7688ae8a9ce7fbff13c7f21247351a59a5b721058ba",
+    "reports/model_v2/v2_003/v1_reference_comparison.json": "53dcfad99ba715bd09f69db517975b38e083a9fc9c15b37fbfc9c19a17c4e353"
+  },
+  "manifest_version": "1.0"
+}

@@ -1,0 +1,44 @@
+{
+  "config_path": "configs/model_v2/classical_feature_audit_v1.yaml",
+  "config_sha256": "6648331ef076d725d40b55c8a47faa293ab6b6ed88a4f59064989214ab570d51",
+  "corrective_checkpoint": null,
+  "created_at_utc": "2026-10-02T17:33:44.301727Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "d07a561c92d9a5e5401b074e682784fe727075d4",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/features/MITDB_BASELINE_FEATURES_V1.csv",
+      "sha256": "6b1ab4f282ebe1bb0793ad087cce956d1018adcf436aa88e5b3d3437725d33c5"
+    },
+    {
+      "path": "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1/TRAIN_features.npy",
+      "sha256": "52f394c6dfb80921a6ddc58566399fadd4a43ffe8102bddcaa6d9a59a3399ca7"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "V2-003 MODEL_V2_FEATURE_AUDIT_V1: 70/70 canonical fits complete, TRAIN-only.",
+  "output_artifacts": [
+    {
+      "path": "reports/model_v2/v2_003/oof_predictions.csv",
+      "sha256": "45b4523dca6af338f678017958a56705a6a83e2fe216fb498d5eb33ef782ca78"
+    },
+    {
+      "path": "reports/model_v2/v2_003/minimal_adequate_subset.json",
+      "sha256": "5e324cf0d5702713c9fce3f8afa60b72b52d46bfa9dbfa77ce6f83848d9e529c"
+    },
+    {
+      "path": "reports/model_v2/v2_003/best_reduced_rf.json",
+      "sha256": "419f6bbc5f7564f2488a486ea03f2ee33c35c9a117d551d3bb791d366df4e4d5"
+    }
+  ],
+  "phase_id": "V2-003",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "v2-003-classical-feature-audit",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "V2-003"
+}

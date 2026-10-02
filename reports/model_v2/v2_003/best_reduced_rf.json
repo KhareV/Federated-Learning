@@ -1,0 +1,47 @@
+{
+  "AUPRC": 0.713140103147974,
+  "AUROC": 0.8283616260289637,
+  "candidates_considered": [
+    {
+      "AUPRC": 0.713140103147974,
+      "AUROC": 0.8283616260289637,
+      "feature_count": 9,
+      "variant": "RR"
+    },
+    {
+      "AUPRC": 0.6648790323465298,
+      "AUROC": 0.7911525236048342,
+      "feature_count": 16,
+      "variant": "RR_QRS"
+    },
+    {
+      "AUPRC": 0.5750209692692609,
+      "AUROC": 0.7508104822789329,
+      "feature_count": 22,
+      "variant": "STAT_RR"
+    },
+    {
+      "AUPRC": 0.5386305475769498,
+      "AUROC": 0.6485349130987305,
+      "feature_count": 7,
+      "variant": "QRS"
+    },
+    {
+      "AUPRC": 0.5257286151872305,
+      "AUROC": 0.6996377342178277,
+      "feature_count": 20,
+      "variant": "STAT_QRS"
+    },
+    {
+      "AUPRC": 0.4397412547583662,
+      "AUROC": 0.6191636396853546,
+      "feature_count": 13,
+      "variant": "STAT"
+    }
+  ],
+  "component_id": "BEST_REDUCED_RF_V1",
+  "feature_count": 9,
+  "rule": "HIGHEST_POOLED_OOF_RF_AUPRC_AMONG_REDUCED_VARIANTS",
+  "selected_variant": "RR",
+  "tie_rule": "higher_AUROC_then_fewer_features_then_lexical_id"
+}

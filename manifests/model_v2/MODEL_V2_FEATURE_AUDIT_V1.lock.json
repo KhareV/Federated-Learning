@@ -1,0 +1,63 @@
+{
+  "baseline_config_sha256": "176c07f810125ffecf13d1d3cc0cadd98b17f4d9cfda7bc248260d34888503cf",
+  "baseline_v1_lock_sha256": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+  "best_reduced_rf": {
+    "AUPRC": 0.713140103147974,
+    "AUROC": 0.8283616260289637,
+    "component_id": "BEST_REDUCED_RF_V1",
+    "feature_count": 9,
+    "selected_variant": "RR"
+  },
+  "bootstrap_draws_identity_sha256_reused_from_v2_002": "e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071",
+  "change_control": "This lock is never mutated in place. A corrected feature audit requires a new, additive MODEL_V2_FEATURE_AUDIT_V2 successor with this lock preserved byte-identical as its predecessor. BASELINE_FEATURES_V1 itself is never mutated.",
+  "component_id": "MODEL_V2_FEATURE_AUDIT_V1",
+  "feature_implementation_sha256": "400d29c9824b2f64d0a7a5024ba805b06a77a1a426ef280457e005e8996fdb70",
+  "feature_schema_sha256": "032bc98b0a6153e373691c3012ce0ca4024a8e9a0071cc7da616d20b663acb55",
+  "git_sha": "d07a561c92d9a5e5401b074e682784fe727075d4",
+  "grouped_permutation_summary_sha256": "fff68e199d7a3cdb9f4ecc584f81b57354521643c3dbf72cad8bfa9045aeb028",
+  "hybrid_trigger_status": "PENDING_V2_004",
+  "inner_cv_manifest_sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+  "minimal_adequate_feature_subset": {
+    "component_id": "MODEL_V2_MINIMAL_ADEQUATE_FEATURE_SUBSET_V1",
+    "selected_RF_AUPRC": 0.713140103147974,
+    "selected_feature_count": 9,
+    "selected_variant": "RR"
+  },
+  "model_v1_cv_reference_lock_sha256": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+  "new_baseline_v1_artifacts_created": false,
+  "not_a_canonical_freeze_row": true,
+  "oof_closure_status": "PASS",
+  "oof_metrics_sha256": "3fed5c7393f50261817564ccd98cb51e8dcfabcc75d1c06725c76836b6858306",
+  "oof_predictions_sha256": "45b4523dca6af338f678017958a56705a6a83e2fe216fb498d5eb33ef782ca78",
+  "outer_cv_manifest_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+  "owner_task": "V2-003",
+  "paired_variant_bootstrap_summary_sha256": "70630475d182a8118f758a3ef900ef016f3982f76419bdaa687838a97bcf75f3",
+  "per_variant_model_pooled_OOF_AUPRC": {
+    "ALL_LOGISTIC": 0.728520590871806,
+    "ALL_RF": 0.605530307984657,
+    "QRS_LOGISTIC": 0.5686905265444061,
+    "QRS_RF": 0.5386305475769498,
+    "RR_LOGISTIC": 0.7318790896361879,
+    "RR_QRS_LOGISTIC": 0.7675169869811461,
+    "RR_QRS_RF": 0.6648790323465298,
+    "RR_RF": 0.713140103147974,
+    "STAT_LOGISTIC": 0.5303143914960041,
+    "STAT_QRS_LOGISTIC": 0.5647879448980301,
+    "STAT_QRS_RF": 0.5257286151872305,
+    "STAT_RF": 0.4397412547583662,
+    "STAT_RR_LOGISTIC": 0.6720942401366724,
+    "STAT_RR_RF": 0.5750209692692609
+  },
+  "reproducibility_status": "PASS",
+  "research_protocol_sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+  "status": "FROZEN_FEATURE_AUDIT",
+  "three_seed_summary_reference": "MODEL_V1_CV_REFERENCE_V1 (unchanged, not retrained)",
+  "v1_reference_comparison_sha256": "53dcfad99ba715bd09f69db517975b38e083a9fc9c15b37fbfc9c19a17c4e353",
+  "v1_reference_comparison_summary": {
+    "BEST_REDUCED_RF": 0.29925184234272134,
+    "LOGISTIC_ALL": 0.3146323300665533,
+    "MINIMAL_ADEQUATE_SUBSET_RF": 0.29925184234272134,
+    "RF_ALL": 0.1916420471794043
+  },
+  "v2_003_method_config_sha256": "6648331ef076d725d40b55c8a47faa293ab6b6ed88a4f59064989214ab570d51"
+}
