@@ -18,7 +18,22 @@ import pytest
 import scripts._d0_6_diagnostics as diag
 import scripts._d0_6_lib as lib
 from nhm.hashing import hash_file
-from nhm.model_v2_d0_6_guard import D06AccessViolation, check_d0_6_read_allowed
+from nhm.model_v2_d0_6_guard import (
+    D06AccessViolation,
+    check_d0_6_read_allowed,
+    set_ledger_root_override,
+)
+
+
+@pytest.fixture(autouse=True)
+def _redirect_d0_6_ledger_to_tmp(tmp_path: Path) -> None:
+    """This file's tests call the real gated loaders (by design, to prove the firewall end
+    to end), which would otherwise append to the already-frozen, committed reports/model_v2/
+    c_v2_d0_6/scope_access_ledger.jsonl on every test run. Redirect ledger writes to a
+    per-test tmp_path instead; the data reads themselves still go through the real files."""
+    set_ledger_root_override(tmp_path)
+    yield
+    set_ledger_root_override(None)
 
 ROOT = Path(__file__).resolve().parents[1]
 

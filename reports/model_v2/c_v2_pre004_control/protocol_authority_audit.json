@@ -1,0 +1,35 @@
+{
+  "inspected": [
+    "configs/model_v2/research_protocol_v1.yaml",
+    "docs/MODEL_V2_RESEARCH_PROTOCOL_V1.md",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json"
+  ],
+  "fit_budget_finding": {
+    "actual_v1_text": {
+      "all_primary_comparisons_use_all_three_seeds": true,
+      "elimination_after_single_seed_forbidden": true,
+      "primary_experiment_fits": {"architectures": 3, "folds": 5, "seeds": 3, "total": 45}
+    },
+    "authoritative_staged_design": "D1=15 (seed 20260927 only) -> D2<=20 (<=2 advanced architectures, remaining 2 seeds) -> max 35",
+    "located_in_actual_protocol_yaml_not_just_handoff_prose": true,
+    "verdict": "CASE_B -- mismatch is in the actual frozen V1 protocol text itself"
+  },
+  "promotion_rule_finding": {
+    "actual_v1_text": {
+      "release_seed_validation_auprc_min": 0.5628607838787021,
+      "computation": "0.5328607838787021 (V1 release AUPRC) + 0.03",
+      "frozen_classical_references_are_interpretation_benchmarks_only": {
+        "LR_AUPRC": 0.645879, "RF_AUPRC": 0.799672, "hard_promotion_gates": false
+      }
+    },
+    "authoritative_rule": "mean 3-seed VALIDATION AUPRC > 0.646 AND paired patient-cluster-bootstrap delta-AUPRC-vs-V1 lower 95% CI bound > 0",
+    "located_in_actual_protocol_yaml_not_just_handoff_prose": true,
+    "verdict": "CASE_B -- mismatch is in the actual frozen V1 protocol text itself"
+  },
+  "v1_change_control_clause": "Any change requires a new MODEL_V2_RESEARCH_PROTOCOL_V2 successor; this lock is never mutated in place.",
+  "v1_mutated": false,
+  "v2_successor_required": true,
+  "v2_successor_created": true,
+  "v2_successor_id": "MODEL_V2_RESEARCH_PROTOCOL_V2",
+  "status": "CASE_B_CONFIRMED"
+}

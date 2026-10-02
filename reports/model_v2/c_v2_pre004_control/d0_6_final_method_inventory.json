@@ -1,0 +1,45 @@
+{
+  "d0_6_code_sha256": {
+    "configs/model_v2/d0_6_diagnostic_reconstruction_v1.yaml": "cc7e9dfa1d63dc67d72959b0d2729ac0803bab3d2a864d7cf76a4f34b5ed10c5",
+    "scripts/_d0_6_diagnostics.py": "05b8da6a6a3f4c32ea31367e66c7f57ebb64f7a9bd7428cbb42cfa257d34e1d8",
+    "scripts/_d0_6_lib.py": "075bcfe4cf1d8d2126643bf568aed7e7e0caec89c473abea8a0de9100a540e14",
+    "scripts/generate_d0_6_prefreeze_evidence.py": "1c30bdaeb681576fec489e3b2dc7a8d7615e8788994840f79a7897198bc3ceda",
+    "scripts/run_d0_6_diagnostics.py": "f2a905964447946e09e26dd3aefe412f5a2e0e9bb15d33a8dd00a69728de5a21",
+    "src/nhm/model_v2_d0_6_guard.py": "f2e91e91f969c9919e10572cd44ff36a2f54b0c4b4e2c46daa2d9d14f4dda196",
+    "tests/test_c_v2_d0_6_config.py": "01793c74d48826f120da6c300b47aeb8213379ed0ccf186cdf91041d1a9c72b6",
+    "tests/test_c_v2_d0_6_results.py": "a232dec3e812f79fb9e3655e0cc4dcbcba85309fff43cf2fa758f65bc27d83b0"
+  },
+  "d0_6_input_artifact_sha256": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "configs/baseline_v1.yaml": "176c07f810125ffecf13d1d3cc0cadd98b17f4d9cfda7bc248260d34888503cf",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1/TRAIN_features.npy": "52f394c6dfb80921a6ddc58566399fadd4a43ffe8102bddcaa6d9a59a3399ca7",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1/VALIDATION_features.npy": "b7b764761d702f8db97bf45ee9faea4a43c79559bd5bf5a11c7bb716dc671aa4",
+    "evaluation/error_analysis.py": "36a06822db98e8a0c4239838ca24545bc1cd7ecf5e72f1feeb695c1dc9220b3d",
+    "manifests/features/BASELINE_FEATURES_V1.schema.json": "032bc98b0a6153e373691c3012ce0ca4024a8e9a0071cc7da616d20b663acb55",
+    "manifests/features/MITDB_BASELINE_FEATURES_V1.csv": "6b1ab4f282ebe1bb0793ad087cce956d1018adcf436aa88e5b3d3437725d33c5",
+    "manifests/windows/MITDB_WINDOWS_V1.csv": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a",
+    "reports/baselines/baseline_report.json": "f9b33023e8f9f3f5fc1b3678b4e8158a424d0a3ddfa7f660dfa5d352a1722e72",
+    "reports/model_v2/v2_002/oof_predictions.csv": "1b4100d10dda0c25dd488a233835c1db46200fa6f0ca7c2c93b87b92be9983e4",
+    "reports/model_v2/v2_003/grouped_permutation_summary.json": "fff68e199d7a3cdb9f4ecc584f81b57354521643c3dbf72cad8bfa9045aeb028",
+    "reports/model_v2/v2_003/oof_metrics.json": "3fed5c7393f50261817564ccd98cb51e8dcfabcc75d1c06725c76836b6858306",
+    "reports/model_v2/v2_003/oof_predictions.csv": "45b4523dca6af338f678017958a56705a6a83e2fe216fb498d5eb33ef782ca78",
+    "reports/t015/seeds/20260927.json": "079c283a347e83c49d504d97865f433229eb3c8c095959988ad8e43823cc5726",
+    "reports/t015/seeds/20260928.json": "7677af6b040fcfbc39325ff866ea1cde5150d633a7290ace8805b46330a0cbd5",
+    "reports/t015/seeds/20260929.json": "225d6947591229841929dd1f4f67fb2b46f32996b0fee407036011f660cb3df5"
+  },
+  "d0_6_original_result_sha256": {
+    "reports/model_v2/c_v2_d0_6/class_composition_train_oof.csv": "d1f4a95af5293a2ea935054fb3914501acc5749d0c79f27d29756f72e2a2f58c",
+    "reports/model_v2/c_v2_d0_6/class_composition_validation.csv": "6c9d56395eb3b054a7b65a3187aecbef84b1dcbaba646c78730e270ee9d66ff9",
+    "reports/model_v2/c_v2_d0_6/diagnostic_thresholds.json": "786ec2a7c9a3cd8f244b59cd7ac4842be9224407fe6f52731da989ee59840cd0",
+    "reports/model_v2/c_v2_d0_6/historical_validation_context.json": "d16722f3b54cce2a74cf65d333c4a71cecae120b43b2170b0f2a46893d5b4690",
+    "reports/model_v2/c_v2_d0_6/patient_brier.csv": "ba2788ba5a896630a98e24b586ac4bb9224b1c3495c4b30085a7eb108cd3a030",
+    "reports/model_v2/c_v2_d0_6/patient_composition_train_oof.csv": "6f1b94ace6c7b94e84306d456696eb11a50941bb68c7e717af8973a01d066808",
+    "reports/model_v2/c_v2_d0_6/patient_composition_validation.csv": "d511b7e666d680a48d1a63018b1a50cc45ed97049e413c49a91195585fa8f069",
+    "reports/model_v2/c_v2_d0_6/patient_loo_auprc.csv": "a8727d31ad83fdfdf552b5b76d735f57fa7894d4d260aab1e0e7ee50d93280cf",
+    "reports/model_v2/c_v2_d0_6/score_distributions.csv": "dd875a22926a343b7932b96f5c0e256298d8ec98c0045fe84d817fd2e6649524",
+    "reports/model_v2/c_v2_d0_6/threshold_region_errors.csv": "ea1eae58d123618e9d4e44f2228e935fbe794a4d6de2f9c822c9c008daf1e675",
+    "reports/model_v2/c_v2_d0_6/train_oof_hypothesis_audit.json": "00e1c74c00dc415b3d87ee4a9584b7cf27c46256c590ea0631aeb44a81a8bbf0"
+  },
+  "note": "This inventory hashes the CURRENT committed state as of this checkpoint's entry (69d7d90). scripts/run_d0_6_diagnostics.py is included here for the first time as an explicitly frozen-and-attested file (see d0_6_git_chronology_audit.json for the historical gap this remediates).",
+  "status": "PASS"
+}

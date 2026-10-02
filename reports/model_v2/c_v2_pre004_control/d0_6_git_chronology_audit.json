@@ -1,0 +1,108 @@
+{
+  "commits": {
+    "METHOD_COMMIT": "37a2cecfa824be7b7d5b4dfc29b2ed0039b50f28",
+    "ATTESTATION_COMMIT": "19e62e297c3d94dc65c2556690e1bb939bf6bad1",
+    "PRE_RESULT_CORRECTION_COMMIT": "fff5f166f46fd266a3149334ace518536fae73e7",
+    "RESULT_COMMIT": "69d7d90bf8a311a1c6ce65af0571cc5e620b8e2d"
+  },
+  "ancestry_checks": {
+    "37a2cec_is_ancestor_of_19e62e2": {"exit_code": 0, "pass": true},
+    "19e62e2_is_ancestor_of_fff5f16": {"exit_code": 0, "pass": true},
+    "fff5f16_is_ancestor_of_69d7d90": {"exit_code": 0, "pass": true}
+  },
+  "diffs": {
+    "37a2cec..19e62e2": [
+      {
+        "file": "reports/model_v2/c_v2_d0_6/method_commit_attestation.json",
+        "change": "A",
+        "classification": "PROVENANCE_ONLY"
+      }
+    ],
+    "19e62e2..fff5f16": [
+      {
+        "file": "reports/model_v2/c_v2_d0_6/method_freeze.json",
+        "change": "M",
+        "classification": "PROVENANCE_ONLY"
+      },
+      {
+        "file": "reports/model_v2/c_v2_d0_6/source_artifact_inventory.json",
+        "change": "M",
+        "classification": "PROVENANCE_ONLY"
+      },
+      {
+        "file": "scripts/_d0_6_lib.py",
+        "change": "M",
+        "classification": "SOURCE_ACCESS_CONTROL",
+        "detail": "added 2 gated loaders (load_v2_003_rf_variant_metrics, load_v2_003_grouped_permutation_summary); no scientific computation logic changed"
+      },
+      {
+        "file": "scripts/generate_d0_6_prefreeze_evidence.py",
+        "change": "M",
+        "classification": "PROVENANCE_ONLY"
+      },
+      {
+        "file": "src/nhm/model_v2_d0_6_guard.py",
+        "change": "M",
+        "classification": "SOURCE_ACCESS_CONTROL",
+        "detail": "added 2 paths to ALLOWED_PATHS allowlist; no relaxation of denylist or role logic"
+      },
+      {
+        "file": "tests/test_c_v2_d0_6_config.py",
+        "change": "M",
+        "classification": "TEST"
+      }
+    ],
+    "fff5f16..69d7d90": [
+      {"file": "manifests/model_v2/task_registry_v1.csv", "change": "M", "classification": "REGISTRY"},
+      {"file": "reports/model_v2/c_v2_d0_6/artifact_hashes.json", "change": "A", "classification": "PROVENANCE_ONLY"},
+      {"file": "reports/model_v2/c_v2_d0_6/class_composition_train_oof.csv", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/class_composition_validation.csv", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/d0_exit_audit.json", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/design_firewall_attestation.json", "change": "A", "classification": "PROVENANCE_ONLY"},
+      {"file": "reports/model_v2/c_v2_d0_6/diagnostic_thresholds.json", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/historical_validation_context.json", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/patient_brier.csv", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/patient_composition_train_oof.csv", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/patient_composition_validation.csv", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/patient_loo_auprc.csv", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/run_manifest.json", "change": "A", "classification": "PROVENANCE_ONLY"},
+      {"file": "reports/model_v2/c_v2_d0_6/scope_access_audit.json", "change": "A", "classification": "PROVENANCE_ONLY"},
+      {"file": "reports/model_v2/c_v2_d0_6/scope_access_ledger.jsonl", "change": "A", "classification": "PROVENANCE_ONLY"},
+      {"file": "reports/model_v2/c_v2_d0_6/score_distributions.csv", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/test_results.json", "change": "A", "classification": "PROVENANCE_ONLY"},
+      {"file": "reports/model_v2/c_v2_d0_6/threshold_region_errors.csv", "change": "A", "classification": "RESULT_OUTPUT"},
+      {"file": "reports/model_v2/c_v2_d0_6/train_oof_hypothesis_audit.json", "change": "A", "classification": "RESULT_OUTPUT"},
+      {
+        "file": "scripts/run_d0_6_diagnostics.py",
+        "change": "A",
+        "classification": "RESULT_RUNNER",
+        "detail": "THE ACTUAL SCIENTIFIC COMPUTATION RUNNER. Not present in METHOD_COMMIT (37a2cec), not present in PRE_RESULT_CORRECTION_COMMIT (fff5f16). First appears in RESULT_COMMIT (69d7d90), committed together with its own outputs."
+      },
+      {"file": "tests/test_c_v2_d0_6_results.py", "change": "A", "classification": "TEST"}
+    ]
+  },
+  "defect_confirmed": {
+    "statement": "scripts/run_d0_6_diagnostics.py was not committed in the original method commit (37a2cec) or the pre-result correction commit (fff5f16). It was created and first committed together with its own real result at 69d7d90.",
+    "concealed_or_relabeled": false,
+    "practical_effect": "The runner's own code was never independently hashed/attested BEFORE it produced the real diagnostic result it is responsible for -- there is no git-mechanical proof that this specific file's content predates the numbers it computed, even though the underlying DEFINITIONS it implements (thresholds, LOO formula, Brier formula, class-composition reuse, firewall) were all frozen beforehand in scripts/_d0_6_diagnostics.py and scripts/_d0_6_lib.py (both present in METHOD_COMMIT, unmodified since)."
+  },
+  "scope_of_missing_freeze": {
+    "frozen_before_fff5f16_and_unmodified_since": [
+      "configs/model_v2/d0_6_diagnostic_reconstruction_v1.yaml",
+      "src/nhm/model_v2_d0_6_guard.py (modified once in fff5f16, additively, before any result)",
+      "scripts/_d0_6_lib.py (modified once in fff5f16, additively, before any result)",
+      "scripts/_d0_6_diagnostics.py (pure primitives: diagnostic_threshold, score_distribution_summary, threshold_region_counts, leave_one_patient_out_auprc, patient_brier -- unmodified since 37a2cec)"
+    ],
+    "never_independently_frozen_before_producing_its_result": [
+      "scripts/run_d0_6_diagnostics.py"
+    ]
+  },
+  "second_defect_discovered_and_fixed_by_this_checkpoint": {
+    "description": "Running this checkpoint's own full-pytest regression discovered that tests/test_c_v2_d0_6_config.py's tests call the real D0.6 gated loaders, which append to reports/model_v2/c_v2_d0_6/scope_access_ledger.jsonl -- the already-frozen, committed D0.6 evidence file that Section 4 of this checkpoint requires be preserved unchanged. Every future full-pytest run would otherwise keep silently growing that committed file.",
+    "immediate_action": "git checkout -- reports/model_v2/c_v2_d0_6/scope_access_ledger.jsonl (reverted the unintended appended rows before any commit; no commit was ever made with the mutated ledger)",
+    "root_cause_fix": "Added set_ledger_root_override() to src/nhm/model_v2_d0_6_guard.py (a new, additive, forward-only change -- not a rewrite of commits 37a2cec/19e62e2/fff5f16/69d7d90) and an autouse pytest fixture in tests/test_c_v2_d0_6_config.py that redirects ledger writes to tmp_path for the duration of that file's tests. The data reads themselves are unaffected -- only the ledger side-effect is redirected.",
+    "verified_fix": "md5 of reports/model_v2/c_v2_d0_6/scope_access_ledger.jsonl identical before and after running the full pytest suite post-fix; git status shows zero diff on reports/model_v2/c_v2_d0_6/ after a full regression run.",
+    "concealed_or_relabeled": false
+  },
+  "status": "DEFECT_CONFIRMED_SEE_SECTION_5_6_REMEDIATION"
+}

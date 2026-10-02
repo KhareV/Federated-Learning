@@ -1,0 +1,32 @@
+{
+  "verified_mechanically": {
+    "MODEL_V2_CAPCTRL_parameter_count": 51969,
+    "MODEL_V2_TCN_MEAN_parameter_count": 57553,
+    "MODEL_V2_TCN_MEANMAX_parameter_count": 57577,
+    "tcn_analytic_receptive_field_samples": 3063
+  },
+  "expected": {
+    "MODEL_V2_CAPCTRL_parameter_count": 51969,
+    "MODEL_V2_TCN_MEAN_parameter_count": 57553,
+    "MODEL_V2_TCN_MEANMAX_parameter_count": 57577,
+    "tcn_analytic_receptive_field_samples": 3063
+  },
+  "all_match": true,
+  "no_architecture_changes": true,
+  "fourth_architecture_created": false,
+  "legacy_alias_resolution": {
+    "prose_name": "MODEL_V2_TCN_GAP",
+    "resolves_to": "MODEL_V2_TCN_MEAN",
+    "proof": "ModelV2TcnMean.forward (models/model_v2_architectures.py) computes features.mean(dim=2) -- a global average pool (GAP) over the temporal dimension -- as its only pooling operation, feeding the same _TCNBackbone() and the same Linear(TCN_CHANNELS, 1) head. 'Global temporal mean pooling' and 'global average pooling (GAP)' over time are the same operation under two names.",
+    "grep_for_TCN_GAP_in_repo": "0 matches -- the name does not appear in this repository at all; it is purely the legacy/descriptive name used by the correction instructions themselves",
+    "verdict": "ALIAS_CONFIRMED_NOT_A_FOURTH_ARCHITECTURE",
+    "no_new_component_created": true
+  },
+  "files_verified_not_edited": [
+    "models/model_v2_architectures.py",
+    "configs/model_v2/research_protocol_v1.yaml",
+    "docs/MODEL_V2_RESEARCH_PROTOCOL_V1.md",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json"
+  ],
+  "status": "PASS"
+}

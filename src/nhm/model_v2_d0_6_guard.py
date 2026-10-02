@@ -84,6 +84,20 @@ def check_d0_6_read_allowed(relative_path: str) -> None:
         raise D06AccessViolation(f"D0_6_FIREWALL_NOT_ALLOWLISTED: {relative_path!r}")
 
 
+_LEDGER_ROOT_OVERRIDE: Path | None = None
+
+
+def set_ledger_root_override(path: Path | None) -> None:
+    """Test-only hook: redirect the D0.6 scope-access ledger writes to `path` (typically a
+    pytest tmp_path) instead of the real repository root, so that running the D0.6 test suite
+    never appends to the already-frozen, committed reports/model_v2/c_v2_d0_6/
+    scope_access_ledger.jsonl. Pass None to restore default (real-root) behavior. Added by
+    C-V2-PRE004-CONTROL after discovering the test suite was mutating that frozen evidence
+    file on every full-pytest run."""
+    global _LEDGER_ROOT_OVERRIDE
+    _LEDGER_ROOT_OVERRIDE = path
+
+
 def record_d0_6_access(
     root: Path,
     *,
@@ -94,7 +108,7 @@ def record_d0_6_access(
 ) -> None:
     """Append one row to the D0.6 scope-access ledger. Call only AFTER
     check_d0_6_read_allowed has not raised, and after the read has actually happened."""
-    ledger_path = root / LEDGER_RELATIVE_PATH
+    ledger_path = (_LEDGER_ROOT_OVERRIDE or root) / LEDGER_RELATIVE_PATH
     ledger_path.parent.mkdir(parents=True, exist_ok=True)
     row: dict[str, Any] = {
         "timestamp_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),

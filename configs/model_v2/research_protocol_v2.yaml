@@ -1,0 +1,419 @@
+protocol_id: MODEL_V2_RESEARCH_PROTOCOL_V2
+lineage: MODEL_V2
+owner_task: C-V2-PRE004-CONTROL
+status: FROZEN_RESEARCH_PROTOCOL
+spec_version: '2.2'
+canonical_task_sequence_unaffected: true
+no_new_canonical_freeze_registry_row: true
+fixed_scientific_constants:
+  target_id: AAMI_SVF_WINDOW_V1
+  map_id: AAMI_SVF_MAP_V1
+  split_id: MITDB_SPLIT_V1
+  source_lead: MLII
+  sampling_hz: 250
+  window_seconds: 10
+  window_samples: 2500
+  stride_seconds: 5
+  stride_samples: 1250
+  preproc_id: PREPROC_V1
+  model_input_normalization_id: PER_WINDOW_ZSCORE_V1
+  model_input_normalization_epsilon: 1.0e-08
+  eligibility_exclusion_policy: UNCHANGED_FROM_FROZEN_V1
+  quality_gap_policy: UNCHANGED_FROM_FROZEN_V1
+  preproc_v2_in_first_lineage: false
+model_seeds:
+  seeds:
+  - 20260927
+  - 20260928
+  - 20260929
+  role: MATCHED_ROBUSTNESS_SEEDS
+  release_seed_fixed_regardless_of_score: 20260927
+primary_metrics:
+  primary: pooled_AUPRC
+  secondary: pooled_AUROC
+  report_fields:
+  - seed_mean
+  - seed_sd
+  - seed_minimum
+  - fold_range
+  - patient_counts
+  - window_counts
+  - prevalence
+  - parameter_count
+  per_patient_auprc_averaging_forbidden: true
+  threshold_metrics_role: DEVELOPMENT_DIAGNOSTIC_ONLY
+  weighted_composite_score_forbidden: true
+patient_cluster_bootstrap:
+  replicates: 2000
+  bootstrap_seed_id: V2_BOOTSTRAP_SEED
+  bootstrap_seed_value: 20261002
+  sampling_unit: participant_group_id
+  sampling_with_replacement: true
+  preserves_window_multiplicity: true
+  recompute_pooled_metric_per_replicate: true
+  paired_comparison_rule: SAME_SAMPLED_PATIENT_IDS_BOTH_MODELS
+  multi_seed_paired_rule: PAIRED_DELTA_PER_SEED_THEN_AVERAGE_SEED_DELTAS_PER_REPLICATE
+  window_bootstrap_forbidden: true
+architectures:
+  ARCH_A:
+    component_id: MODEL_V2_CAPCTRL
+    purpose: capacity_only_control
+    layers:
+    - op: Conv1d
+      in_channels: 1
+      out_channels: 32
+      kernel_size: 7
+    - op: BatchNorm1d
+    - op: ReLU
+    - op: MaxPool1d
+      kernel_size: 2
+    - op: Conv1d
+      in_channels: 32
+      out_channels: 64
+      kernel_size: 5
+    - op: BatchNorm1d
+    - op: ReLU
+    - op: MaxPool1d
+      kernel_size: 2
+    - op: Conv1d
+      in_channels: 64
+      out_channels: 128
+      kernel_size: 5
+    - op: ReLU
+    - op: AdaptiveAvgPool1d
+      output_size: 1
+    - op: Flatten
+    - op: Dropout
+      p: 0.2
+    - op: Linear
+      in_features: 128
+      out_features: 1
+    output_is_raw_logit: true
+    sigmoid_in_model: false
+    expected_trainable_parameters_approx: 51969
+    parameter_count_verification: MECHANICAL_LATER
+    receptive_field_semantics: SHORT_V1_LIKE
+  ARCH_B:
+    component_id: MODEL_V2_TCN_MEAN
+    stem:
+      op: Conv1d
+      in_channels: 1
+      out_channels: 24
+      kernel_size: 15
+      stride: 2
+      padding: 7
+      bias: false
+    stem_followed_by:
+    - BatchNorm1d_24
+    - ReLU
+    residual_blocks: 7
+    channels: 24
+    kernel_size: 7
+    dilations:
+    - 1
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    residual_block_structure:
+    - op: Conv1d
+      channels: 24
+      kernel_size: 7
+      dilation: d
+      padding: 3*d
+      bias: false
+    - op: BatchNorm1d
+    - op: ReLU
+    - op: Dropout
+      p: 0.1
+    - op: Conv1d
+      channels: 24
+      kernel_size: 7
+      dilation: d
+      padding: 3*d
+      bias: false
+    - op: BatchNorm1d
+    - op: ResidualAdd
+    - op: ReLU
+    head:
+      pooling: global_temporal_mean
+      dropout: 0.2
+      linear:
+        in_features: 24
+        out_features: 1
+    output_is_raw_logit: true
+    sigmoid_in_model: false
+    expected_analytic_receptive_field_samples: 3063
+    receptive_field_requirement: '>=2500'
+    expected_parameter_count_approx: 58000
+    parameter_count_hard_cap: 120000
+  ARCH_C:
+    component_id: MODEL_V2_TCN_MEANMAX
+    identical_to: ARCH_B
+    identical_through: final_temporal_feature_map
+    pooling: concat(global_mean(features,time), global_max(features,time))
+    head:
+      dropout: 0.2
+      linear:
+        in_features: 48
+        out_features: 1
+    output_is_raw_logit: true
+    sigmoid_in_model: false
+    isolates: sparse_event_pooling
+  forbidden_in_first_lineage:
+  - transformer
+  - LSTM
+  - GRU
+  - spectrogram
+  - wavelet_model
+  - self_supervised_pretraining
+  - attention_pooling
+  - new_window_size
+  - new_target
+  - new_patient_split
+  - new_lead
+  - preproc_change
+  - model_ensemble
+architecture_search_policy:
+  v1_cv_reference_fits:
+    folds: 5
+    seeds: 3
+    total: 15
+  candidate_ranking: pooled_OOF_AUPRC_within_each_stage
+  practical_improvement_rule_min_delta_auprc: 0.02
+  auroc_guardrail_min_delta: -0.01
+  report_paired_patient_cluster_bootstrap_ci: true
+  unrealistically_narrow_ci_requirement_forbidden: true
+  max_eligible_candidate_families_continuing: 2
+  within_one_bootstrap_se_tiebreak: prefer_simpler_lower_variance
+  hybrid_runs_only_if_feature_information_trigger_satisfied: true
+  superseded_v1_fields:
+    all_primary_comparisons_use_all_three_seeds: true
+    elimination_after_single_seed_forbidden: true
+    primary_experiment_fits:
+      architectures: 3
+      folds: 5
+      seeds: 3
+      total: 45
+    note: These V1 fields required all three architectures to receive all three seeds before any elimination
+      (45 fits, no staging). Superseded by stage_D1/stage_D2 below. V1 itself is unmodified; this block
+      documents what changed and why.
+  stage_D1:
+    architectures:
+    - MODEL_V2_CAPCTRL
+    - MODEL_V2_TCN_MEAN
+    - MODEL_V2_TCN_MEANMAX
+    seed: 20260927
+    folds: 5
+    total_fits: 15
+    disqualification_rules:
+    - non_finite_candidate
+    - pooled_OOF_AUROC_below_frozen_V1_CV_reference_mean_AUROC
+    - trainable_parameters_above_120000
+    ranking: pooled_OOF_AUPRC
+    advancement_rule: paired_patient_cluster_bootstrap_delta_AUPRC_vs_MODEL_V1_CV_REFERENCE_V1_lower_95_CI_bound_greater_than_0
+    max_advancing: 2
+    tie_rule: within_one_bootstrap_se_prefer_simpler_lower_variance
+    zero_candidates_advance_policy: STOP_NEURAL_ARCHITECTURE_SEARCH_PER_PROTOCOL -- do not manufacture
+      D2 fits, do not access official VALIDATION
+  stage_D2:
+    architectures: at most 2, exactly the D1-advanced set
+    seeds:
+    - 20260928
+    - 20260929
+    folds: 5
+    max_additional_fits: 20
+  maximum_v2_004_fits: 35
+feature_ablation_contract:
+  feature_set_id: BASELINE_FEATURES_V1
+  groups:
+    STAT: 13
+    RR: 9
+    QRS: 7
+  variants:
+  - STAT
+  - RR
+  - QRS
+  - RR+QRS
+  - STAT+RR
+  - STAT+QRS
+  - ALL
+  models:
+  - frozen_config_logistic_regression
+  - frozen_config_random_forest
+  fit_scope: WITHIN_EACH_TRAIN_CV_TRAINING_FOLD_ONLY
+  new_features_forbidden: true
+  new_annotations_forbidden: true
+  quality_predictor_forbidden: true
+  patient_id_as_feature_forbidden: true
+  minimal_adequate_subset_rule: SMALLEST_SUBSET_WITHIN_0.02_ABSOLUTE_RF_POOLED_OOF_AUPRC_OF_ALL_29
+  tie_rule: FEWER_FEATURES_FIRST
+  grouped_permutation_importance_required: true
+hybrid_trigger:
+  condition: best_reduced_classical_RF_TRAIN_CV_AUPRC - best_learned_only_V2_TRAIN_CV_AUPRC >= 0.03
+  if_false_task_status: SKIPPED_BY_PROTOCOL
+  hybrid_branch: best_temporal_ecg_backbone_plus_tiny_mlp_over_minimal_adequate_feature_subset
+  mlp_max_shape:
+  - input
+  - 32
+  - 16
+  fusion: concatenate_ecg_and_feature_embeddings_then_one_raw_logit
+  new_component_id: MODEL_V2_AUX_FEATURES_V1
+  baseline_features_v1_mutation_forbidden: true
+loss_and_sampling:
+  first_line_loss: BCEWithLogitsLoss
+  pos_weight_recomputed_per_actual_optimisation_subset_only: true
+  forbidden:
+  - focal_loss
+  - asymmetric_loss
+  - AUPRC_surrogate
+  - patient_balanced_sampler_first_lineage
+  adaptive_addition_of_forbidden_items_forbidden: true
+optimizer_experiment:
+  initial_architecture_search_schedule: V1_SCHEDULE_VERBATIM
+  runs_after_winning_family_determined_only: true
+  control:
+    schedule: V1_EXISTING_SCHEDULE
+  challenger:
+    optimizer: AdamW
+    learning_rate: 0.001
+    weight_decay: SAME_AS_CONTROL
+    scheduler: ReduceLROnPlateau
+    scheduler_mode: max
+    scheduler_factor: 0.3
+    scheduler_patience: 3
+    monitor: inner_validation_AUPRC
+    early_stop_patience: 8
+  comparisons_allowed: 1
+  grid_search_forbidden: true
+  adoption_rule: mean TRAIN-CV AUPRC improvement exceeds one bootstrap SE AND seed SD does not materially
+    worsen
+official_validation:
+  max_frozen_configurations: 2
+  training_population: ALL_27_TRAIN_PATIENT_GROUPS
+  early_stopping_checkpoint_selection: OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE
+  seeds:
+  - 20260927
+  - 20260928
+  - 20260929
+  change_freeze_on_first_access: true
+  architecture_selection_rule: HIGHEST_MEAN_THREE_SEED_VALIDATION_AUPRC
+  tie_rule: WITHIN_ONE_BOOTSTRAP_SE_PREFER_LOWER_VARIANCE_SIMPLER_MODEL
+  release_checkpoint_seed: 20260927
+  release_checkpoint_seed_fixed_regardless_of_score: true
+  promotion_requirement:
+    three_seed_confirmation_required: true
+    auroc_material_regression_forbidden: true
+    superseded_v1_rule:
+      release_seed_validation_auprc_min: 0.5628607838787021
+      computation: 0.5328607838787021 (V1 release AUPRC) + 0.03
+      note: 'V1''s hard D5 gate. Superseded below. The classical LR/RF historical VALIDATION AUPRC values
+        (0.645879, 0.799672) were marked interpretation-benchmarks-only in V1 (hard_promotion_gates: false);
+        V2 makes the LR-derived 0.646 value the actual hard gate threshold.'
+    mean_three_seed_validation_auprc_min: 0.646
+    mean_three_seed_validation_auprc_min_derivation: frozen historical LOGISTIC_BASELINE_V1 VALIDATION
+      AUPRC (0.645879), rounded
+    paired_patient_cluster_bootstrap_delta_auprc_vs_model_v1_lower_95_ci_bound_min: 0.0
+    paired_comparison_rule_reused_from: patient_cluster_bootstrap (unchanged)
+  frozen_classical_references_are_interpretation_benchmarks_only:
+    LR_AUPRC: 0.645879
+    RF_AUPRC: 0.799672
+    hard_promotion_gates: PARTIAL -- LR_AUPRC (rounded to 0.646) is now the hard mean-three-seed-VALIDATION-AUPRC
+      gate; RF_AUPRC remains interpretation-only
+calibration_policy:
+  component_id: CAL_V2
+  timing: STRICTLY_AFTER_MODEL_V2_FINAL_FROZEN
+  method: single_positive_scalar_temperature
+  fit_scope: CALIBRATION_PARTITION_ONLY
+  objective: NLL_minimization
+  probability_formula: p = sigmoid(logit / T_V2)
+  threshold_rule: F1_MAXIMUM_ON_CALIBRATED_CALIBRATION_PROBABILITIES
+  threshold_comparator: '>='
+  threshold_tie_policy: SAME_AS_V1_DETERMINISTIC_RULE
+  forbidden:
+  - Platt_scaling
+  - isotonic_regression
+  - TRAIN_OOF_calibration
+  - TRAIN_plus_VALIDATION_calibration
+  - reuse_or_mutation_of_CAL_V1
+  required_report_fields:
+  - NLL_raw
+  - NLL_calibrated
+  - Brier_raw
+  - Brier_calibrated
+  - ECE
+  - reliability_bins
+  - patient_count
+  - window_and_class_counts
+  claim_boundary: MIT_BIH_SOURCE_DOMAIN_CALIBRATION_ONLY
+post_freeze_second_look:
+  timing: STRICTLY_AFTER_MODEL_V2_FINAL_AND_CAL_V2_FROZEN
+  domains:
+    INTERNAL_TEST:
+      passes: 1
+      population: SAME_ELIGIBLE_POPULATION
+      compare_to: FROZEN_V1_PREDICTIONS
+      v1_rerun_forbidden: true
+    INCART:
+      passes: 1
+      population: SAME_CLUSTERS_WINDOWS
+      recalibration_forbidden: true
+      lead_change_forbidden: true
+      map_change_forbidden: true
+    NSTDB:
+      protocol: SAME_FROZEN_T019_STRESS_PROTOCOL
+      population: SAME_PAIRED_WINDOWS
+      snrs: SAME
+      retuning_forbidden: true
+  evidence_label: POST-FREEZE COMPARATIVE SECOND-LOOK EVIDENCE ON PREVIOUSLY EXPOSED EVALUATION DOMAINS
+  untouched_v2_validation_claim_forbidden: true
+runtime_acceptance_guardrails:
+  note: Scientific MODEL_V2_FINAL and operational runtime acceptance are different decisions. MODEL_V2_FINAL
+    cannot be retuned after second-look exposure.
+  INCART:
+    min_point_delta_auprc: -0.03
+    min_point_delta_auroc: -0.03
+  INTERNAL_TEST:
+    min_point_delta_auprc: -0.05
+    min_point_delta_auroc: -0.05
+  NSTDB:
+    min_single_snr_delta_auprc: -0.1
+    min_mean_six_snr_delta_auprc: -0.05
+  report_paired_confidence_intervals: true
+  these_are_guardrails_not_tuning_objectives: true
+  on_failure: MODEL_V2_FINAL remains a frozen research result; MODEL_V1 remains the operational runtime
+    lineage.
+downstream_impact:
+  if_runtime_accepted_may_create:
+  - CAL_V2
+  - GATEWAY_ARTIFACT_V2
+  - EXPLAINABILITY_V2
+  - API_RUNTIME_V2
+  - V2_alert_calibration_binding
+  - V2_replay_evidence
+  must_not_mutate:
+  - GATEWAY_ARTIFACT_V1
+  - EXPLAINABILITY_V1
+  - API_RUNTIME_V1_1
+  - ALERT_POLICY_V1
+  - V1_replay
+  frontend_versioning_rule: Inspect later whether the frontend is already model-ID-generic; do not version
+    the frontend solely because V2 exists.
+  federated_model_v2_experiments_in_first_lineage: false
+change_control:
+  protocol_mutation_after_freeze: Any change requires a new MODEL_V2_RESEARCH_PROTOCOL_V2 successor; this
+    lock is never mutated in place.
+parent_protocol: MODEL_V2_RESEARCH_PROTOCOL_V1
+change_reason: 'Pre-V2-004 correction of two verified mismatches between the committed V1 protocol text
+  and the authoritative staged architecture-search design: (1) V1 required all three architectures to
+  receive all three seeds before any elimination (45 total fits, single-seed elimination explicitly forbidden);
+  the authoritative design stages this as D1 (15 fits, seed 20260927 only) -> D2 (<=20 additional fits
+  for <=2 D1-advanced architectures, remaining two seeds), max 35 fits. (2) V1''s hard D5 promotion gate
+  was release_seed_validation_auprc_min=0.5628608 (V1 release AUPRC + 0.03), with the classical LR/RF
+  historical VALIDATION AUPRC values marked interpretation-benchmarks-only (hard_promotion_gates: false);
+  the authoritative rule requires mean three-seed VALIDATION AUPRC > 0.646 AND a paired patient-cluster-bootstrap
+  delta-AUPRC-vs-MODEL_V1 lower 95% CI bound > 0. Both mismatches were confirmed present in the actual
+  committed V1 YAML text (not merely in V2-001 handoff prose) by C-V2-PRE004-CONTROL''s protocol_authority_audit.json.
+  No other field is changed from V1.'

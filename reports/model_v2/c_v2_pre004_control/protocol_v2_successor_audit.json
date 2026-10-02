@@ -1,0 +1,52 @@
+{
+  "case": "CASE_B",
+  "parent_protocol": "MODEL_V2_RESEARCH_PROTOCOL_V1",
+  "parent_protocol_lock_sha256_unchanged": true,
+  "v1_mutated_in_place": false,
+  "v1_files_confirmed_unchanged": [
+    "configs/model_v2/research_protocol_v1.yaml",
+    "docs/MODEL_V2_RESEARCH_PROTOCOL_V1.md",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json"
+  ],
+  "successor_created": {
+    "protocol_id": "MODEL_V2_RESEARCH_PROTOCOL_V2",
+    "config_path": "configs/model_v2/research_protocol_v2.yaml",
+    "doc_path": "docs/MODEL_V2_RESEARCH_PROTOCOL_V2.md",
+    "lock_path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V2.lock.json"
+  },
+  "corrections_applied": [
+    {
+      "field": "architecture_search_policy",
+      "v1_value": "all_primary_comparisons_use_all_three_seeds=true, elimination_after_single_seed_forbidden=true, primary_experiment_fits.total=45",
+      "v2_value": "stage_D1 (15 fits, seed 20260927 only, with disqualification + paired-bootstrap-CI advancement gate, max 2 advance) -> stage_D2 (<=20 additional fits, remaining 2 seeds) -> maximum_v2_004_fits=35"
+    },
+    {
+      "field": "official_validation.promotion_requirement",
+      "v1_value": "release_seed_validation_auprc_min=0.5628607838787021 (hard gate); LR/RF historical VALIDATION AUPRC marked interpretation-only",
+      "v2_value": "mean_three_seed_validation_auprc_min=0.646 AND paired_patient_cluster_bootstrap_delta_auprc_vs_model_v1_lower_95_ci_bound_min=0.0 (both required)"
+    }
+  ],
+  "fields_verified_unchanged_from_v1": [
+    "fixed_scientific_constants", "model_seeds", "primary_metrics",
+    "patient_cluster_bootstrap", "architectures (ARCH_A/B/C identities, parameter counts, receptive field)",
+    "feature_ablation_contract", "hybrid_trigger", "loss_and_sampling",
+    "optimizer_experiment", "calibration_policy", "post_freeze_second_look",
+    "runtime_acceptance_guardrails", "downstream_impact"
+  ],
+  "target_unchanged": true,
+  "split_unchanged": true,
+  "preproc_v1_unchanged": true,
+  "architectures_unchanged": true,
+  "parameter_counts_unchanged": true,
+  "cv_manifests_unchanged": true,
+  "feature_audit_unchanged": true,
+  "model_v1_cv_reference_unchanged": true,
+  "v2_002_results_unchanged": true,
+  "v2_003_results_unchanged": true,
+  "d0_6_results_unchanged": true,
+  "bootstrap_unit_unchanged": true,
+  "cal_v2_method_unchanged": true,
+  "external_evaluation_policy_unchanged": true,
+  "component_registry_successor_row_added": true,
+  "status": "PASS"
+}

@@ -1,0 +1,39 @@
+{
+  "missing_sources": [
+    {
+      "logical_id": "MODEL_V1_PER_WINDOW_VALIDATION_PREDICTIONS",
+      "still_missing": true,
+      "regenerated": false,
+      "classified_as_leakage": false,
+      "classification": "HISTORICAL_LIMITATION"
+    },
+    {
+      "logical_id": "RF_PER_WINDOW_VALIDATION_PREDICTIONS",
+      "still_missing": true,
+      "regenerated": false,
+      "classified_as_leakage": false,
+      "classification": "HISTORICAL_LIMITATION"
+    }
+  ],
+  "affected_outputs_still_marked_missing_frozen_source": [
+    "score_distributions.csv (VALIDATION rows: status=MISSING_FROZEN_SOURCE)",
+    "threshold_region_errors.csv (VALIDATION rows: status=MISSING_FROZEN_SOURCE)",
+    "patient_brier.csv (VALIDATION rows: status=MISSING_FROZEN_SOURCE)",
+    "class_composition_validation.csv (sensitivity/score columns: MISSING_FROZEN_SOURCE_NO_PER_WINDOW_PREDICTIONS)"
+  ],
+  "every_unavailable_validation_diagnostic_marks": {
+    "status_field": "MISSING_FROZEN_SOURCE",
+    "decision_eligible": false,
+    "historical_context_only": true,
+    "verified_in": [
+      "reports/model_v2/c_v2_d0_6/score_distributions.csv",
+      "reports/model_v2/c_v2_d0_6/threshold_region_errors.csv",
+      "reports/model_v2/c_v2_d0_6/patient_brier.csv",
+      "reports/model_v2/c_v2_d0_6/class_composition_validation.csv",
+      "reports/model_v2/c_v2_d0_6/historical_validation_context.json"
+    ]
+  },
+  "train_oof_remains_decision_eligible": true,
+  "no_new_inference_performed_in_this_checkpoint": true,
+  "status": "PASS"
+}

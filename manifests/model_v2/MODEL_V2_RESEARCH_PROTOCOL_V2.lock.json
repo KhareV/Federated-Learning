@@ -1,0 +1,32 @@
+{
+  "change_control": "This lock is never mutated in place. A further correction requires an additive MODEL_V2_RESEARCH_PROTOCOL_V3 successor with this lock preserved byte-identical as its predecessor.",
+  "config_canonical_hash": "ed0ff532da135f08410c514655233a8bb1440867b8ba5ced0a8c4f1f25d8015d",
+  "config_sha256": "d9f6e0aa427b78aaea974ef9c0508b835ad472549928d3c67d7a684f00d36be0",
+  "corrections": [
+    "architecture_search_policy: staged D1(15)/D2(<=20)=<=35 fits, replacing the flat 45-fit all-three-seeds design",
+    "official_validation.promotion_requirement: mean 3-seed VALIDATION AUPRC > 0.646 AND paired-bootstrap lower-95%-CI delta-AUPRC-vs-V1 > 0, replacing the release_seed_validation_auprc_min=0.5628608 hard gate"
+  ],
+  "doc_sha256": "20001adff8db49d0a3008f090ec00b022982ff1db03b8365ff65828a5d11cb45",
+  "owner_task": "C-V2-PRE004-CONTROL",
+  "parent_protocol": "MODEL_V2_RESEARCH_PROTOCOL_V1",
+  "parent_protocol_lock_sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+  "protocol_id": "MODEL_V2_RESEARCH_PROTOCOL_V2",
+  "status": "FROZEN_RESEARCH_PROTOCOL",
+  "unchanged_from_v1": [
+    "fixed_scientific_constants",
+    "model_seeds",
+    "primary_metrics",
+    "patient_cluster_bootstrap",
+    "architectures (identities and parameter counts)",
+    "feature_ablation_contract",
+    "hybrid_trigger",
+    "loss_and_sampling",
+    "optimizer_experiment",
+    "calibration_policy",
+    "post_freeze_second_look",
+    "runtime_acceptance_guardrails",
+    "downstream_impact"
+  ],
+  "v1_lock_path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json",
+  "v1_unmodified": true
+}

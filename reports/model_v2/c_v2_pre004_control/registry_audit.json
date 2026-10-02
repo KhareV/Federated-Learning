@@ -1,0 +1,26 @@
+{
+  "task_registry_v1_csv": {
+    "V2-004": {
+      "status_before": "NOT_STARTED",
+      "status_after": "NOT_STARTED",
+      "status_unchanged": true,
+      "notes_corrected": true,
+      "45_fit_language_removed": true,
+      "35_fit_cap_documented": true
+    },
+    "V2-001_V2-002_V2-003_status_unchanged": true
+  },
+  "gate_registry_v1_csv": {
+    "V2G3": {"status_before": "NOT_STARTED", "status_after": "NOT_STARTED", "unchanged": true},
+    "V2G0_V2G1_V2G2_status_unchanged": true
+  },
+  "component_registry_v1_csv": {
+    "rows_before": 15,
+    "rows_after": 16,
+    "added_row": "MODEL_V2_RESEARCH_PROTOCOL_V2",
+    "predecessor_id": "MODEL_V2_RESEARCH_PROTOCOL_V1",
+    "MODEL_V2_RESEARCH_PROTOCOL_V1_row_annotated_not_mutated": true
+  },
+  "csv_parse_consistency_verified": true,
+  "status": "PASS"
+}

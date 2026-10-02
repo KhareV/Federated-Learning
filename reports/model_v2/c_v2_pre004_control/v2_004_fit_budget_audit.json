@@ -1,0 +1,36 @@
+{
+  "authoritative_design": {
+    "stage_D1": {
+      "architectures": 3,
+      "folds": 5,
+      "seed": 20260927,
+      "total_fits": 15
+    },
+    "stage_D2": {
+      "architectures_max": 2,
+      "constraint": "exactly the D1-advanced set",
+      "folds": 5,
+      "seeds": [20260928, 20260929],
+      "max_additional_fits": 20
+    },
+    "maximum_v2_004_fits": 35
+  },
+  "forbidden_configurations": [
+    "3 architectures x 5 folds x 3 seeds = 45 fits",
+    "D1 using seed 20260928 or 20260929",
+    "D2 containing an architecture that did not pass D1",
+    "D2 containing more than 2 architectures",
+    "total V2-004 fit budget exceeding 35"
+  ],
+  "registry_before_correction": {
+    "task_registry_v1_csv_V2_004_notes_mentioned_45_fits": true,
+    "protocol_v1_yaml_architecture_search_policy_primary_experiment_fits_total": 45
+  },
+  "registry_after_correction": {
+    "task_registry_v1_csv_V2_004_notes_corrected": true,
+    "protocol_v2_yaml_maximum_v2_004_fits": 35,
+    "v1_protocol_text_unchanged": true
+  },
+  "neural_fits_added_by_this_checkpoint": 0,
+  "status": "PASS"
+}
