@@ -1,0 +1,44 @@
+{
+  "config_path": "configs/model_v2/model_v1_cv_reference_v1.yaml",
+  "config_sha256": "9b4ba78eb704a2c128c493cbc88ad1bcc0f195afdee1247620c4a30b9c7bc9bd",
+  "corrective_checkpoint": null,
+  "created_at_utc": "2026-10-02T16:57:09.028760Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "17f34c4b111b6b983483e8a6962145e414811d00",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+      "sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6"
+    },
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv",
+      "sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "V2-002 MODEL_V1_CV_REFERENCE_V1: 15/15 fits complete, TRAIN-only.",
+  "output_artifacts": [
+    {
+      "path": "manifests/model_v2/MODEL_V1_CV_REFERENCE_V1.lock.json",
+      "sha256": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139"
+    },
+    {
+      "path": "reports/model_v2/v2_002/oof_predictions.csv",
+      "sha256": "1b4100d10dda0c25dd488a233835c1db46200fa6f0ca7c2c93b87b92be9983e4"
+    },
+    {
+      "path": "reports/model_v2/v2_002/bootstrap_summary.json",
+      "sha256": "1baffd8353ca25a6558fa65d04d5f5b3365955f90a867468e92b40f04902ecfd"
+    }
+  ],
+  "phase_id": "V2-002",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "v2-002-matched-v1-cv-reference",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "V2-002"
+}

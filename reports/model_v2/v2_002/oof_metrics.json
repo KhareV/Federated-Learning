@@ -1,0 +1,132 @@
+{
+  "canonical_metric_definition": "pooled AUPRC/AUROC computed on the concatenation of all 5 outer-fold OOF predictions for that seed -- fold-level metrics are diagnostics only and are never averaged into the canonical per-seed estimate; patient-average AUPRC is never computed.",
+  "oof_predictions_sha256": "1b4100d10dda0c25dd488a233835c1db46200fa6f0ca7c2c93b87b92be9983e4",
+  "per_seed": {
+    "20260927": {
+      "fold_level_diagnostics_not_averaged": [
+        {
+          "AUPRC": 0.4387959450741451,
+          "AUROC": 0.6116570333001539,
+          "outer_fold": 0,
+          "windows": 2147
+        },
+        {
+          "AUPRC": 0.4273251986962969,
+          "AUROC": 0.688997170305812,
+          "outer_fold": 1,
+          "windows": 2119
+        },
+        {
+          "AUPRC": 0.2861380961956901,
+          "AUROC": 0.34486329606543314,
+          "outer_fold": 2,
+          "windows": 1798
+        },
+        {
+          "AUPRC": 0.6735857652701588,
+          "AUROC": 0.7777190836298932,
+          "outer_fold": 3,
+          "windows": 1796
+        },
+        {
+          "AUPRC": 0.35218724279647273,
+          "AUROC": 0.48674748872441537,
+          "outer_fold": 4,
+          "windows": 1800
+        }
+      ],
+      "negatives": 6103,
+      "pooled_OOF_AUPRC": 0.41681675213519453,
+      "pooled_OOF_AUROC": 0.6064115312936194,
+      "positives": 3557,
+      "windows": 9660
+    },
+    "20260928": {
+      "fold_level_diagnostics_not_averaged": [
+        {
+          "AUPRC": 0.5177286442054514,
+          "AUROC": 0.5992689198564232,
+          "outer_fold": 0,
+          "windows": 2147
+        },
+        {
+          "AUPRC": 0.4514532952817733,
+          "AUROC": 0.7175924582750663,
+          "outer_fold": 1,
+          "windows": 2119
+        },
+        {
+          "AUPRC": 0.2852727922687671,
+          "AUROC": 0.34042280927410046,
+          "outer_fold": 2,
+          "windows": 1798
+        },
+        {
+          "AUPRC": 0.5471582009959837,
+          "AUROC": 0.6969495371547195,
+          "outer_fold": 3,
+          "windows": 1796
+        },
+        {
+          "AUPRC": 0.329389618201002,
+          "AUROC": 0.4588968933446101,
+          "outer_fold": 4,
+          "windows": 1800
+        }
+      ],
+      "negatives": 6103,
+      "pooled_OOF_AUPRC": 0.42971492039431497,
+      "pooled_OOF_AUROC": 0.5730794816432794,
+      "positives": 3557,
+      "windows": 9660
+    },
+    "20260929": {
+      "fold_level_diagnostics_not_averaged": [
+        {
+          "AUPRC": 0.43891327961853394,
+          "AUROC": 0.6356678694235816,
+          "outer_fold": 0,
+          "windows": 2147
+        },
+        {
+          "AUPRC": 0.4288309123720629,
+          "AUROC": 0.6871118357810284,
+          "outer_fold": 1,
+          "windows": 2119
+        },
+        {
+          "AUPRC": 0.3223769072489543,
+          "AUROC": 0.4607829557072656,
+          "outer_fold": 2,
+          "windows": 1798
+        },
+        {
+          "AUPRC": 0.7795143735449085,
+          "AUROC": 0.8313831871716658,
+          "outer_fold": 3,
+          "windows": 1796
+        },
+        {
+          "AUPRC": 0.3141543349120134,
+          "AUROC": 0.428586648708158,
+          "outer_fold": 4,
+          "windows": 1800
+        }
+      ],
+      "negatives": 6103,
+      "pooled_OOF_AUPRC": 0.3951331098862486,
+      "pooled_OOF_AUROC": 0.5514806477187993,
+      "positives": 3557,
+      "windows": 9660
+    }
+  },
+  "three_seed_summary": {
+    "AUPRC_mean": 0.4138882608052527,
+    "AUPRC_minimum": 0.3951331098862486,
+    "AUPRC_sample_sd": 0.017475910580170367,
+    "AUROC_mean": 0.5769905535518993,
+    "AUROC_minimum": 0.5514806477187993,
+    "AUROC_sample_sd": 0.02767350456995653,
+    "note": "This is a summary of three independently trained models (one per seed), never an ensemble prediction and never a fourth model."
+  }
+}

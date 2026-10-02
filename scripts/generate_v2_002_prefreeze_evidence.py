@@ -40,7 +40,9 @@ def write_experiment_matrix() -> Path:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(
-            handle, fieldnames=["experiment_id", "outer_fold", "seed", "run_order_index"]
+            handle,
+            lineterminator="\n",
+            fieldnames=["experiment_id", "outer_fold", "seed", "run_order_index"],
         )
         writer.writeheader()
         writer.writerows(rows)

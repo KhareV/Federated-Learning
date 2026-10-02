@@ -1,0 +1,86 @@
+{
+  "bit_generator": "PCG64",
+  "bootstrap_draws_sha256": "e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071",
+  "bootstrap_id": "MODEL_V2_BOOTSTRAP_DRAWS_V1",
+  "bootstrap_seed": 20261002,
+  "multiplicity_preserved": true,
+  "oof_predictions_sha256": "1b4100d10dda0c25dd488a233835c1db46200fa6f0ca7c2c93b87b92be9983e4",
+  "patient_slots_per_replicate": 27,
+  "per_seed": {
+    "20260927": {
+      "AUPRC_ci": [
+        0.26892147846205416,
+        0.6100005626384599
+      ],
+      "AUPRC_invalid_B": 0,
+      "AUPRC_point": 0.41681675213519453,
+      "AUPRC_valid_B": 2000,
+      "AUROC_ci": [
+        0.47080077401761555,
+        0.7284196175257758
+      ],
+      "AUROC_invalid_B": 0,
+      "AUROC_point": 0.6064115312936194,
+      "AUROC_valid_B": 2000
+    },
+    "20260928": {
+      "AUPRC_ci": [
+        0.23930351151056853,
+        0.6676251291607315
+      ],
+      "AUPRC_invalid_B": 0,
+      "AUPRC_point": 0.42971492039431497,
+      "AUPRC_valid_B": 2000,
+      "AUROC_ci": [
+        0.41705141455341055,
+        0.7232491156367011
+      ],
+      "AUROC_invalid_B": 0,
+      "AUROC_point": 0.5730794816432794,
+      "AUROC_valid_B": 2000
+    },
+    "20260929": {
+      "AUPRC_ci": [
+        0.24284175869442048,
+        0.5874175766851663
+      ],
+      "AUPRC_invalid_B": 0,
+      "AUPRC_point": 0.3951331098862486,
+      "AUPRC_valid_B": 2000,
+      "AUROC_ci": [
+        0.4149260719581003,
+        0.6915134854949261
+      ],
+      "AUROC_invalid_B": 0,
+      "AUROC_point": 0.5514806477187993,
+      "AUROC_valid_B": 2000
+    }
+  },
+  "point_estimate_source": "ORIGINAL_POOLED_OOF_METRIC_NOT_BOOTSTRAP_MEAN",
+  "rejection_redraw_used": false,
+  "replicates": 2000,
+  "rng": "numpy.random.default_rng",
+  "source_patient_clusters": 27,
+  "stratified_bootstrap_used": false,
+  "three_seed_mean": {
+    "AUPRC_ci": [
+      0.26270650731228534,
+      0.613279656082544
+    ],
+    "AUPRC_invalid_B": 0,
+    "AUPRC_point": 0.4138882608052527,
+    "AUPRC_valid_B": 2000,
+    "AUROC_ci": [
+      0.44944436110503194,
+      0.6959319470924786
+    ],
+    "AUROC_invalid_B": 0,
+    "AUROC_point": 0.5769905535518993,
+    "AUROC_valid_B": 2000,
+    "note": "mean of three independently trained seed models on the SAME patient draw; not an ensemble, not a fourth model, not a p-value or t-test"
+  },
+  "unique_patient_count_max": 22,
+  "unique_patient_count_median": 17.0,
+  "unique_patient_count_min": 12,
+  "window_bootstrap_used": false
+}

@@ -193,7 +193,9 @@ def main() -> None:
 
     seed_metrics_path = OUT_DIR / "bootstrap_seed_metrics.csv"
     with seed_metrics_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["seed", "replicate", "AUPRC", "AUROC"])
+        writer = csv.DictWriter(
+            handle, lineterminator="\n", fieldnames=["seed", "replicate", "AUPRC", "AUROC"]
+        )
         writer.writeheader()
         writer.writerows(seed_metrics_csv_rows)
 

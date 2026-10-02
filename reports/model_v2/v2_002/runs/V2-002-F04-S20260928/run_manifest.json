@@ -1,0 +1,48 @@
+{
+  "config_path": "configs/model_v2/model_v1_cv_reference_v1.yaml",
+  "config_sha256": "9b4ba78eb704a2c128c493cbc88ad1bcc0f195afdee1247620c4a30b9c7bc9bd",
+  "corrective_checkpoint": null,
+  "created_at_utc": "2026-10-02T16:46:25.848221Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "17f34c4b111b6b983483e8a6962145e414811d00",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+      "sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6"
+    },
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv",
+      "sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224"
+    },
+    {
+      "path": "configs/model_v1.yaml",
+      "sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "V2-002 fit V2-002-F04-S20260928: outer_fold=4 seed=20260928",
+  "output_artifacts": [
+    {
+      "path": "reports/model_v2/v2_002/runs/V2-002-F04-S20260928/outer_predictions.csv",
+      "sha256": "d81155845e95be45598523e96e99762e3bce146e93330c099b9954f570b1bd7b"
+    },
+    {
+      "path": "reports/model_v2/v2_002/runs/V2-002-F04-S20260928/training_curve.csv",
+      "sha256": "36834871af570483a1e56c22d10a4a30afe0594b0070b6fa8ebd72558a779ad1"
+    },
+    {
+      "path": "checkpoints/model_v2/v2_002_cv_reference/V2-002-F04-S20260928_best.pt",
+      "sha256": "4f012c28927757f7a704c0416e7a5fe34a0a4de8dd637360971e4c0993ebe297"
+    }
+  ],
+  "phase_id": "V2-002",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "V2-002-F04-S20260928",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": 20260928,
+  "spec_version": "2.2",
+  "task_id": "V2-002"
+}

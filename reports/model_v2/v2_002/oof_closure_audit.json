@@ -1,0 +1,36 @@
+{
+  "all_seeds_closure_exact": true,
+  "expected_total_rows": 28980,
+  "per_seed": {
+    "20260927": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_rows": 9660,
+      "extra_count": 0,
+      "missing_count": 0,
+      "non_train_participant_groups": [],
+      "rows": 9660
+    },
+    "20260928": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_rows": 9660,
+      "extra_count": 0,
+      "missing_count": 0,
+      "non_train_participant_groups": [],
+      "rows": 9660
+    },
+    "20260929": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_rows": 9660,
+      "extra_count": 0,
+      "missing_count": 0,
+      "non_train_participant_groups": [],
+      "rows": 9660
+    }
+  },
+  "status": "PASS",
+  "total_rows": 28980,
+  "total_rows_exact": true
+}

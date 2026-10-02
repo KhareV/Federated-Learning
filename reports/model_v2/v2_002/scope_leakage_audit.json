@@ -1,0 +1,22 @@
+{
+  "bidmc_touched": false,
+  "calibration_touched": false,
+  "incart_touched": false,
+  "internal_test_touched": false,
+  "method_note": "No code path in scripts/run_model_v1_cv_reference_fit_v2002.py or scripts/_v2_002_lib.py references VALIDATION/CALIBRATION/INTERNAL_TEST/INCART/NSTDB/BIDMC partitions or checkpoints/MODEL_V1.pt; the access ledger above, produced by the fail-closed CV-role and partition firewalls, independently confirms only TRAIN-partition OPTIMISE/INNER_VALIDATION/OUTER_TEST roles were ever read.",
+  "model_v1_frozen_checkpoint_loaded": false,
+  "nstdb_touched": false,
+  "official_validation_touched": false,
+  "roles_match_known_set": true,
+  "roles_seen": [
+    "INNER_VALIDATION",
+    "OPTIMISE",
+    "OUTER_TEST"
+  ],
+  "stages_seen": [
+    "V2-002_OUTER_EVAL",
+    "V2-002_TRAIN_SELECT"
+  ],
+  "status": "PASS",
+  "total_access_rows": 47
+}

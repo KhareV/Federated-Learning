@@ -52,19 +52,25 @@ def test_v2_gate_registry_is_a_separate_namespace() -> None:
     assert {row["gate_id"] for row in rows} == {f"V2G{n}" for n in range(14)}
 
 
-def test_only_v2_001_and_v2g0_pass_in_this_phase() -> None:
+def test_only_v2_001_v2_002_and_v2g0_v2g1_pass_in_this_phase() -> None:
     task_rows = _rows(ROOT / "manifests/model_v2/task_registry_v1.csv")
     gate_rows = _rows(ROOT / "manifests/model_v2/gate_registry_v1.csv")
 
     passed_tasks = {row["task_id"] for row in task_rows if row["status"] == "PASS"}
     passed_gates = {row["gate_id"] for row in gate_rows if row["status"] == "PASS"}
 
-    assert passed_tasks == {"V2-001"}
-    assert passed_gates == {"V2G0"}
+    assert passed_tasks == {"V2-001", "V2-002"}
+    assert passed_gates == {"V2G0", "V2G1"}
     assert all(
-        row["status"] == "NOT_STARTED" for row in task_rows if row["task_id"] != "V2-001"
+        row["status"] == "NOT_STARTED"
+        for row in task_rows
+        if row["task_id"] not in {"V2-001", "V2-002"}
     )
-    assert all(row["status"] == "NOT_STARTED" for row in gate_rows if row["gate_id"] != "V2G0")
+    assert all(
+        row["status"] == "NOT_STARTED"
+        for row in gate_rows
+        if row["gate_id"] not in {"V2G0", "V2G1"}
+    )
 
 
 def test_frozen_v1_model_hash_unchanged() -> None:

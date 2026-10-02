@@ -171,7 +171,9 @@ def main() -> None:
     rows_sorted = sorted(rows, key=lambda r: (int(r["seed"]), r["example_id"]))
     oof_path = OUT_DIR / "oof_predictions.csv"
     with oof_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows_sorted[0].keys()))
+        writer = csv.DictWriter(
+            handle, lineterminator="\n", fieldnames=list(rows_sorted[0].keys())
+        )
         writer.writeheader()
         writer.writerows(rows_sorted)
 
@@ -186,7 +188,7 @@ def main() -> None:
 
     metrics_csv_path = OUT_DIR / "oof_metrics.csv"
     with metrics_csv_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(["seed", "pooled_OOF_AUPRC", "pooled_OOF_AUROC", "windows"])
         for seed in lib.SEEDS:
             entry = metrics["per_seed"][str(seed)]

@@ -1,0 +1,28 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "configs/model_v2/model_v1_cv_reference_v1.yaml": "9b4ba78eb704a2c128c493cbc88ad1bcc0f195afdee1247620c4a30b9c7bc9bd",
+    "manifests/model_v2/MODEL_V1_CV_REFERENCE_V1.lock.json": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+    "reports/model_v2/v2_002/bootstrap_draws.npy": "e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071",
+    "reports/model_v2/v2_002/bootstrap_patient_index.json": "0a158769b8f5aefca7f1bb2267d9c3bc625c2502a4a9d9a752889df2bd12215a",
+    "reports/model_v2/v2_002/bootstrap_reproducibility_check.json": "6ca794fb46c6214660af213b65f724604b5f45b412395d8b54953351e4f3ef02",
+    "reports/model_v2/v2_002/bootstrap_seed_metrics.csv": "20a3a79a14cce0f3dc52a2e62d59849a8bb1c92193d04e4db77371dcdd25a576",
+    "reports/model_v2/v2_002/bootstrap_summary.json": "1baffd8353ca25a6558fa65d04d5f5b3365955f90a867468e92b40f04902ecfd",
+    "reports/model_v2/v2_002/entry_audit.json": "8163741375279bd99d259520c8838f340088516387a89e3959ef6da76e74dad2",
+    "reports/model_v2/v2_002/experiment_matrix.csv": "0b93bf1322c93acfb937948f57ca1860542da659fbb29342a7c87b58431e74f8",
+    "reports/model_v2/v2_002/fit_summary.csv": "1c7fddd2f493eafaec24f608c897126b2fbd1464b14bbccd4c9fe6b0f1af03ae",
+    "reports/model_v2/v2_002/method_freeze.json": "484a3738a35718d02e1945f6387749225d9eea78bd945db4ab89edadd362a860",
+    "reports/model_v2/v2_002/oof_closure_audit.json": "a759422f63013766b794febea256ec5ee824ec32817073c07a0f0a7587510dc5",
+    "reports/model_v2/v2_002/oof_metrics.csv": "6b1a581e5f765320e95488a24f12ad6208e6fd993e525a51ee316a44e0fc26ad",
+    "reports/model_v2/v2_002/oof_metrics.json": "036cb830a27d910e1df914979777f477e9479834ae7570d793fce258bdb036da",
+    "reports/model_v2/v2_002/oof_predictions.csv": "1b4100d10dda0c25dd488a233835c1db46200fa6f0ca7c2c93b87b92be9983e4",
+    "reports/model_v2/v2_002/reference_lock_audit.json": "9ced35c09e8d7d3559d644379d4e2ff9108576fcbbd7a20d235776daaafd8b43",
+    "reports/model_v2/v2_002/retry_provenance.json": "1de09b2753deb5384680939593c8a584595bbcc8a2036c82b9aa345ef2f447cd",
+    "reports/model_v2/v2_002/role_population_audit.csv": "61a2d58c67918851b1587d1868b650205e94f02a58c1386253302f205062f491",
+    "reports/model_v2/v2_002/run_manifest.json": "b022f3fc0af77d1611b13a22c8afbc6b8892de35a9d390b831fb0b1e47f11987",
+    "reports/model_v2/v2_002/scope_leakage_audit.json": "198c37a8b01126796a3461a129d3edecf3e65fb4840376e9dca4f8fa173f6956",
+    "reports/model_v2/v2_002/search_budget.json": "db8a61539245bb03636cd5706f8c85d3837ad8dbb75a3f19aa0f9849164cf956",
+    "reports/model_v2/v2_002/training_curves.csv": "62900d5716a464e84c2ec91754f3de6d973020bca08170fb9cbf79be83efe4c8"
+  },
+  "manifest_version": "1.0"
+}

@@ -1,0 +1,30 @@
+{
+  "retries": [
+    {
+      "experiment_id": "V2-002-F00-S20260927",
+      "attempt_1": {
+        "started_utc": "2026-10-02T15:00:04Z",
+        "outcome": "KILLED",
+        "cause": "Infrastructure process-lifetime limit on the background shell running the sequential fit driver (scripts/run_all_v2002_fits.sh) terminated the process before fit 1 of 15 finished training. Not a scientific or code defect: no training/metric/firewall code was changed in response.",
+        "scientific_artifacts_produced": false,
+        "checkpoint_saved": false,
+        "checkpoint_finalized": false,
+        "outer_test_accessed": false,
+        "genuine_access_ledger_rows_from_this_attempt": 2,
+        "access_ledger_rows_note": "2 real OPTIMISE/INNER_VALIDATION access rows were logged before the kill (timestamps 2026-10-02T15:00:06Z); these are truthful provenance of a real (incomplete) attempt and were kept, not deleted, since they are not smoke-test pollution.",
+        "disposition": "Abandoned; superseded by attempt 2 of the identical experiment_id with identical config, per Section 28."
+      },
+      "attempt_2": {
+        "started_utc": "2026-10-02T15:11:00Z",
+        "finished_utc": "2026-10-02T15:29:51Z",
+        "outcome": "SUCCESS",
+        "launch_method": "Detached process (nohup, disowned from the harness's own background-task lifetime tracking) to avoid a repeat of the attempt-1 time-limit kill for the remaining 15-fit sequential run.",
+        "code_changed_relative_to_attempt_1": false,
+        "disposition": "This attempt's checkpoint, outer_predictions.csv, fit_summary.json, and run_manifest.json are the canonical frozen fit for V2-002-F00-S20260927, used in all downstream OOF aggregation, bootstrap, and reference-lock evidence."
+      }
+    }
+  ],
+  "other_fits_affected": [],
+  "total_retries": 1,
+  "status": "PASS"
+}

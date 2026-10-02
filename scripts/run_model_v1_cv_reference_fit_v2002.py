@@ -283,13 +283,17 @@ def run_fit(outer_fold: int, seed: int) -> dict:
 
     predictions_path = fit_dir / "outer_predictions.csv"
     with predictions_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(prediction_rows[0].keys()))
+        writer = csv.DictWriter(
+            handle, lineterminator="\n", fieldnames=list(prediction_rows[0].keys())
+        )
         writer.writeheader()
         writer.writerows(prediction_rows)
 
     training_curve_path = fit_dir / "training_curve.csv"
     with training_curve_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(epoch_logs[0].keys()))
+        writer = csv.DictWriter(
+            handle, lineterminator="\n", fieldnames=list(epoch_logs[0].keys())
+        )
         writer.writeheader()
         writer.writerows(epoch_logs)
 

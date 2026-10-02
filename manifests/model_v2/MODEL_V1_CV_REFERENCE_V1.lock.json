@@ -1,0 +1,189 @@
+{
+  "bootstrap_code_sha256": "9d46bc87147d64829e227d3b434afc42689871aa396a99607be95f6d586ef717",
+  "bootstrap_draws_sha256": "e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071",
+  "bootstrap_summary_sha256": "1baffd8353ca25a6558fa65d04d5f5b3365955f90a867468e92b40f04902ecfd",
+  "bootstrap_three_seed_mean": {
+    "AUPRC_ci": [
+      0.26270650731228534,
+      0.613279656082544
+    ],
+    "AUPRC_invalid_B": 0,
+    "AUPRC_point": 0.4138882608052527,
+    "AUPRC_valid_B": 2000,
+    "AUROC_ci": [
+      0.44944436110503194,
+      0.6959319470924786
+    ],
+    "AUROC_invalid_B": 0,
+    "AUROC_point": 0.5769905535518993,
+    "AUROC_valid_B": 2000,
+    "note": "mean of three independently trained seed models on the SAME patient draw; not an ensemble, not a fourth model, not a p-value or t-test"
+  },
+  "change_control": "This lock is never mutated in place. A corrected reference requires a new, additive MODEL_V1_CV_REFERENCE_V2 successor with this lock preserved byte-identical as its predecessor.",
+  "component_id": "MODEL_V1_CV_REFERENCE_V1",
+  "experiment_hashes": {
+    "V2-002-F00-S20260927": {
+      "checkpoint_sha256": "a72ac38ce4df2be3a418366a097fbe027ef38d9964f5b1b5705df5f48169be84",
+      "outer_auprc": 0.4387959450741451,
+      "outer_auroc": 0.6116570333001539,
+      "outer_predictions_sha256": "90506d48d46550ed5bc8fdcca826e3d56eb07bdacccb0c0f73f98428a84c2096",
+      "selected_epoch": 35
+    },
+    "V2-002-F00-S20260928": {
+      "checkpoint_sha256": "0261f2f24d8c1630a989415419891560b6dd5865f72af3a1eadf8fe439e23bb9",
+      "outer_auprc": 0.5177286442054514,
+      "outer_auroc": 0.5992689198564232,
+      "outer_predictions_sha256": "0491e7de716ccdcbbaa0d556901d19205a9d46b6f97b67932cde1750f1481335",
+      "selected_epoch": 15
+    },
+    "V2-002-F00-S20260929": {
+      "checkpoint_sha256": "9e2c6df31ea61e0715d4f83a96ede151604bf54419808026cb9040efff5f7222",
+      "outer_auprc": 0.43891327961853394,
+      "outer_auroc": 0.6356678694235816,
+      "outer_predictions_sha256": "e7bccced2450f747416b2e54d8f2ee2f20af86993b1c5f7dc2538352454ec748",
+      "selected_epoch": 42
+    },
+    "V2-002-F01-S20260927": {
+      "checkpoint_sha256": "fb6565b5d7f3353f33005f4a3832df2db1a0a2f365ad7a804742ca2969feb62e",
+      "outer_auprc": 0.4273251986962969,
+      "outer_auroc": 0.688997170305812,
+      "outer_predictions_sha256": "50772e0b5b9d556b5e65582c425a1bae06c2ad4b51e35ae687e5790fee759d99",
+      "selected_epoch": 22
+    },
+    "V2-002-F01-S20260928": {
+      "checkpoint_sha256": "87268944a8bb2f88c324cbbeb1704ee15fd6f487201199e0210b1dc917d2e070",
+      "outer_auprc": 0.4514532952817733,
+      "outer_auroc": 0.7175924582750663,
+      "outer_predictions_sha256": "d10c4ec2afed927d8897506de085beb69191de4afdc33381256cc75f4ccc42b7",
+      "selected_epoch": 1
+    },
+    "V2-002-F01-S20260929": {
+      "checkpoint_sha256": "3cb4f9ba2b83ecfeed383b3fa9a7c38a57bdc059900b086034cac465bf723309",
+      "outer_auprc": 0.4288309123720629,
+      "outer_auroc": 0.6871118357810284,
+      "outer_predictions_sha256": "434698e9fb7b58c5ccc58e610aea338876cff139adb93122e8eae519ee6f899e",
+      "selected_epoch": 1
+    },
+    "V2-002-F02-S20260927": {
+      "checkpoint_sha256": "6095d5fabbd5724a48c8b6fea8d54d74e607b894e6f238096acca208dba97866",
+      "outer_auprc": 0.2861380961956901,
+      "outer_auroc": 0.34486329606543314,
+      "outer_predictions_sha256": "cde9c7c2af39083a1ec6bd470dc2e1eb5a1ffd6cfc2c1830fc09ce220fad6a5d",
+      "selected_epoch": 1
+    },
+    "V2-002-F02-S20260928": {
+      "checkpoint_sha256": "f0972d248a14ee974f7a12180895e0217e8e71b8fe7d356ffe83bf3570d8196f",
+      "outer_auprc": 0.2852727922687671,
+      "outer_auroc": 0.34042280927410046,
+      "outer_predictions_sha256": "1c34c6f7bcaf99810d79b7311fb07a26e7efa2501bb3bc97061f601e7ba298f3",
+      "selected_epoch": 1
+    },
+    "V2-002-F02-S20260929": {
+      "checkpoint_sha256": "4417c6668930e37bc9f0b71ff70d7ff9762182381c6fc54ae10e2b9c9d229143",
+      "outer_auprc": 0.3223769072489543,
+      "outer_auroc": 0.4607829557072656,
+      "outer_predictions_sha256": "182e12ed59676b576b70b7eb25363e16586edbf958421dfc9605457674db3ff5",
+      "selected_epoch": 15
+    },
+    "V2-002-F03-S20260927": {
+      "checkpoint_sha256": "c6c6c6ab87294d1739b16c70ea66d0ee9ba07a0ec3ff2bfe176b3751ffe691bf",
+      "outer_auprc": 0.6735857652701588,
+      "outer_auroc": 0.7777190836298932,
+      "outer_predictions_sha256": "ed61d1cd0c22df6d71980fecc18c8ae0cc56427ede9d592bbae2e77decf29ccc",
+      "selected_epoch": 2
+    },
+    "V2-002-F03-S20260928": {
+      "checkpoint_sha256": "fd28ef5f193775523f694eb4d5df823ede5968f2a37d944c5145927abf875005",
+      "outer_auprc": 0.5471582009959837,
+      "outer_auroc": 0.6969495371547195,
+      "outer_predictions_sha256": "e39eeb49ec45a688a61e0e04b1e50c7fa170da4101fa902f92d3687ce5cbae4c",
+      "selected_epoch": 2
+    },
+    "V2-002-F03-S20260929": {
+      "checkpoint_sha256": "32c380aa76dda4a33cc87b7a52a29e0e4b18c86113ccdcc818c3d8a2ac4946bc",
+      "outer_auprc": 0.7795143735449085,
+      "outer_auroc": 0.8313831871716658,
+      "outer_predictions_sha256": "8a0446e3dde7a1ea06d5ce24b606abcb3ff82c94e700eb42533cb190554058a5",
+      "selected_epoch": 1
+    },
+    "V2-002-F04-S20260927": {
+      "checkpoint_sha256": "a137396cdc985c50761aff522463f591870dee40a47c6c1b2af87f9c24682e06",
+      "outer_auprc": 0.35218724279647273,
+      "outer_auroc": 0.48674748872441537,
+      "outer_predictions_sha256": "f6b056d71c161e24dd14303a53c7b5fd6a63f5d46e364411e2743e5407af8303",
+      "selected_epoch": 3
+    },
+    "V2-002-F04-S20260928": {
+      "checkpoint_sha256": "4f012c28927757f7a704c0416e7a5fe34a0a4de8dd637360971e4c0993ebe297",
+      "outer_auprc": 0.329389618201002,
+      "outer_auroc": 0.4588968933446101,
+      "outer_predictions_sha256": "402c4574e3ca9a8cb72a430843202026fe3ada8a9d0da292c5760f545efb191a",
+      "selected_epoch": 4
+    },
+    "V2-002-F04-S20260929": {
+      "checkpoint_sha256": "e72a8215122bd81b4b463b58ebeddf79d88f66f6b637cb10b70326ac8cb6291c",
+      "outer_auprc": 0.3141543349120134,
+      "outer_auroc": 0.428586648708158,
+      "outer_predictions_sha256": "c073d151d95fd2e706d1ff1f0e95b8e78654c579fc3487eccfa4680d33a382ec",
+      "selected_epoch": 3
+    }
+  },
+  "experiment_ids": [
+    "V2-002-F00-S20260927",
+    "V2-002-F00-S20260928",
+    "V2-002-F00-S20260929",
+    "V2-002-F01-S20260927",
+    "V2-002-F01-S20260928",
+    "V2-002-F01-S20260929",
+    "V2-002-F02-S20260927",
+    "V2-002-F02-S20260928",
+    "V2-002-F02-S20260929",
+    "V2-002-F03-S20260927",
+    "V2-002-F03-S20260928",
+    "V2-002-F03-S20260929",
+    "V2-002-F04-S20260927",
+    "V2-002-F04-S20260928",
+    "V2-002-F04-S20260929"
+  ],
+  "f05_split_sha256": "b7aa53ba92627f17961c6befa891108ee5aaa6105853ef043db727f98b969b22",
+  "f06_preproc_sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+  "inner_cv_manifest_sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+  "metric_code_sha256": "a1d21f884126792ca7e2433dcd20bebfc31eb9cea44086a2fdc29387c240bb87",
+  "model_v1_architecture_config_sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc",
+  "no_held_out_official_partition_accessed": true,
+  "not_a_release_model": true,
+  "not_calibrated": true,
+  "oof_closure_status": "PASS",
+  "oof_metrics_sha256": "036cb830a27d910e1df914979777f477e9479834ae7570d793fce258bdb036da",
+  "oof_predictions_sha256": "1b4100d10dda0c25dd488a233835c1db46200fa6f0ca7c2c93b87b92be9983e4",
+  "outer_cv_manifest_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+  "outer_folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "owner_task": "V2-002",
+  "research_protocol_sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+  "seeds": [
+    20260927,
+    20260928,
+    20260929
+  ],
+  "status": "FROZEN_CV_REFERENCE",
+  "three_seed_summary": {
+    "AUPRC_mean": 0.4138882608052527,
+    "AUPRC_minimum": 0.3951331098862486,
+    "AUPRC_sample_sd": 0.017475910580170367,
+    "AUROC_mean": 0.5769905535518993,
+    "AUROC_minimum": 0.5514806477187993,
+    "AUROC_sample_sd": 0.02767350456995653,
+    "note": "This is a summary of three independently trained models (one per seed), never an ensemble prediction and never a fourth model."
+  },
+  "train_only_development_reference": true,
+  "training_code_sha256": "32d7a988009cac4e14d696ab90cf8f3029e77aaa48cd9d4b01167272d4c7c20b",
+  "training_lib_sha256": "e2001f74a7cd5b6077643ab262175123430d54b03907c6588190e1cf9413329a",
+  "v2_002_config_sha256": "9b4ba78eb704a2c128c493cbc88ad1bcc0f195afdee1247620c4a30b9c7bc9bd",
+  "window_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+}

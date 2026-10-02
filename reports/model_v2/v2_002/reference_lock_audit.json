@@ -1,0 +1,18 @@
+{
+  "component": "MODEL_V1_CV_REFERENCE_V1",
+  "experiment_count": 15,
+  "lock_path": "manifests/model_v2/MODEL_V1_CV_REFERENCE_V1.lock.json",
+  "lock_sha256": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+  "not_a_canonical_freeze_row": true,
+  "oof_closure_status": "PASS",
+  "status": "FROZEN_CV_REFERENCE",
+  "three_seed_summary": {
+    "AUPRC_mean": 0.4138882608052527,
+    "AUPRC_minimum": 0.3951331098862486,
+    "AUPRC_sample_sd": 0.017475910580170367,
+    "AUROC_mean": 0.5769905535518993,
+    "AUROC_minimum": 0.5514806477187993,
+    "AUROC_sample_sd": 0.02767350456995653,
+    "note": "This is a summary of three independently trained models (one per seed), never an ensemble prediction and never a fourth model."
+  }
+}
