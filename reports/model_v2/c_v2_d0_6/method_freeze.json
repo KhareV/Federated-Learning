@@ -1,0 +1,28 @@
+{
+  "checkpoint": "C-V2-D0.6",
+  "config_sha256": "cc7e9dfa1d63dc67d72959b0d2729ac0803bab3d2a864d7cf76a4f34b5ed10c5",
+  "d0_6_code_sha256": {
+    "scripts/_d0_6_lib.py": "925413e96253f968819e75db87d1437b32008586e7b66cd897cabdc57768ab77",
+    "src/nhm/model_v2_d0_6_guard.py": "6c7ae04167d515cbdd27e8c54fe191e24bb87411a8012d5ef2e814d309360e03"
+  },
+  "hard_data_firewall": {
+    "allowlist_size": 16,
+    "mechanism": "src/nhm/model_v2_d0_6_guard.py per-path allowlist + forbidden-substring denylist"
+  },
+  "note_pre_result_method_commit": "Left null here by construction -- a SEPARATE attestation commit created immediately after this commit binds this exact commit's own SHA, per Section 7's required METHOD_COMMIT -> ATTESTATION_COMMIT -> push both -> THEN compute results chronology (avoiding the prior V2-002/V2-003 null-binding gap by construction, not by rewriting this file after the fact).",
+  "pre_freeze_integration_smoke_test": {
+    "code_changed_based_on_its_numeric_output": false,
+    "description": "Real reads of the window manifest (TRAIN+VALIDATION), BASELINE_FEATURES_V1 HR feature caches (TRAIN+VALIDATION), historical scalar metrics (reports/t015/seeds, baseline_report.json), CAL_V1, and the T014 RF threshold were exercised interactively to confirm the firewall and loaders are correctly wired and that the TRAIN window/OOF example_id populations are exactly identical (9660/9660 match confirmed) before committing to the full diagnostic computation.",
+    "hypothesis_answered": false,
+    "performed": true,
+    "scientific_diagnostic_result_produced": false,
+    "scope_access_ledger_rows_from_smoke_test_removed_before_real_run": true
+  },
+  "pre_result_method_commit": null,
+  "protocol_sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+  "real_results_started": false,
+  "reused_definition_sha256": {
+    "evaluation/error_analysis.py (class_composition, reused unmodified)": "36a06822db98e8a0c4239838ca24545bc1cd7ecf5e72f1feeb695c1dc9220b3d"
+  },
+  "status": "READY_FOR_REAL_RESULTS"
+}

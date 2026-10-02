@@ -1,0 +1,203 @@
+component_id: MODEL_V2_D0_6_DIAGNOSTIC_RECONSTRUCTION_V1
+owner_task: C-V2-D0.6
+status: ACTIVE
+type: DEVELOPMENT_DIAGNOSTIC_RECONSTRUCTION
+not_a_training_phase: true
+not_v2_004: true
+evidentiary_strata:
+  TRAIN_OOF_DECISION_ELIGIBLE:
+    sources:
+    - reports/model_v2/v2_002/oof_predictions.csv
+    - reports/model_v2/v2_003/oof_predictions.csv (feature_variant=ALL, model_family=RF)
+    - manifests/windows/MITDB_WINDOWS_V1.csv (partition=TRAIN, core_eligible=TRUE)
+    - BASELINE_FEATURES_V1 TRAIN_features.npy (HR feature, index 20, only)
+    may_support_mechanistic_hypothesis: true
+  HISTORICAL_VALIDATION_CONTEXT_ONLY:
+    sources:
+    - manifests/windows/MITDB_WINDOWS_V1.csv (partition=VALIDATION)
+    - BASELINE_FEATURES_V1 VALIDATION_features.npy (HR feature, index 20, only)
+    - reports/t015/seeds/{seed}.json (best_validation_metrics, pooled scalar only)
+    - reports/baselines/baseline_report.json (VALIDATION_metrics, pooled scalar only)
+    decision_eligible: false
+    historical_context_only: true
+    forbidden_uses:
+    - change_v2_architecture
+    - change_candidate_count
+    - change_pooling
+    - change_receptive_field
+    - introduce_new_features
+    - change_loss
+    - change_sampling
+    - change_augmentation
+    - change_optimizer
+    - set_a_threshold
+    - select_a_model
+    - trigger_new_search_branch
+missing_frozen_sources:
+  model_v1_per_window_validation_predictions:
+    status: NOT_FOUND
+    search_performed: true
+    disposition: MISSING_FROZEN_SOURCE
+    not_regenerated: true
+    rationale: No comprehensive per-window MODEL_V1 VALIDATION prediction artifact exists in the repository.
+      T015 persisted only pooled scalar best_validation_metrics per seed (used for early stopping), never
+      per-window predictions. The only per-window replay evidence (reports/t034, reports/t035, reports/c032_norm_runtime)
+      covers 12 demo examples out of 2880 eligible VALIDATION windows and is not a comprehensive artifact.
+      New MODEL_V1 inference on VALIDATION to fill this gap is explicitly forbidden (Section 3).
+    affected_outputs:
+    - score_distributions.csv (MODEL_V1, VALIDATION rows)
+    - threshold_region_errors.csv (MODEL_V1, VALIDATION rows)
+    - patient_loo_auprc.csv (MODEL_V1, VALIDATION rows)
+    - patient_brier.csv (MODEL_V1, VALIDATION rows)
+    - class_composition_validation.csv (per-slice sensitivity/score columns; support counts remain available
+      from metadata alone)
+  rf_per_window_validation_predictions:
+    status: NOT_FOUND
+    search_performed: true
+    disposition: MISSING_FROZEN_SOURCE
+    not_regenerated: true
+    rationale: No per-window RF VALIDATION prediction artifact was ever persisted by T014 (only pooled
+      scalar VALIDATION_metrics in baseline_report.json). Recomputing per-window RF probabilities from
+      the frozen model/imputer/feature-cache would constitute new RF inference on VALIDATION, explicitly
+      forbidden (Section 3) even though every ingredient is itself frozen.
+    affected_outputs:
+    - score_distributions.csv (RF, VALIDATION rows)
+    - threshold_region_errors.csv (RF, VALIDATION rows)
+    - patient_loo_auprc.csv (RF, VALIDATION rows)
+    - patient_brier.csv (RF, VALIDATION rows)
+    - class_composition_validation.csv (per-slice sensitivity/score columns)
+class_composition_definition:
+  reused_from: evaluation/error_analysis.py::class_composition
+  reused_exactly: true
+  redefined: false
+  logic: F_CONTAINING if mapped_f_count > 0; elif S_DOMINANT if s>v; elif V_DOMINANT if v>s; elif S_V_TIE
+    if s==v and s>0; else NO_SVF_COMPOSITION.
+  mutually_exclusive: true
+  exhaustive: true
+  applies_to: every TRAIN-OOF and VALIDATION window (positive and negative); slice tables report positive-only
+    support per Section 12's support-windows definition on positive-class slices, since S/V/F composition
+    is undefined for pure-negative windows by AAMI_SVF_MAP_V1 construction
+patient_composition_definition:
+  fields:
+  - participant_group_id
+  - window_count
+  - positive_count
+  - negative_count
+  - prevalence
+  - s_containing_positive_window_count
+  - v_containing_positive_window_count
+  - f_containing_positive_window_count
+  - class_composition_slice_counts
+  - mean_hr
+  - median_hr
+  - missing_hr_count
+  - record_count
+  hr_source: BASELINE_FEATURES_V1 detected_hr_mean_bpm (index 20), already-frozen, not recomputed
+  hr_missing_handling: NaN/non-finite HR values excluded from mean/median HR computation and counted in
+    missing_hr_count; never imputed, never treated as zero
+score_distribution_definition:
+  percentiles:
+  - 5
+  - 25
+  - 50
+  - 75
+  - 95
+  fields:
+  - n
+  - mean
+  - std
+  - p05
+  - p25
+  - median
+  - p75
+  - p95
+  - min
+  - max
+  separate_by:
+  - model
+  - population
+  - label_class
+  bins_predeclared: false
+  histogram_optional: false
+diagnostic_threshold_rule:
+  train_oof:
+    metric: pooled_F1
+    comparator: '>='
+    tie_rule: HIGHEST_THRESHOLD_AMONG_MAX_F1
+    candidate_thresholds: unique observed probability values in that model's complete TRAIN-OOF prediction
+      set, plus 0.0 and 1.0 boundary sentinels
+    per_seed: true
+    per_seed_note: 'MODEL_V1: one threshold per seed, never pooled across seeds'
+    per_outer_fold: false
+    per_outer_fold_note: never derived from a single OUTER_TEST fold
+    patient_specific: false
+  historical_validation:
+    fit_any_threshold: false
+    model_v1:
+      source: CAL_V1
+      threshold: 0.6128035574269627
+      comparator: '>='
+    rf:
+      source: configs/baseline_v1.yaml reporting.decision_threshold
+      threshold: 0.5
+      comparator: '>='
+      provenance_verified: true
+    rf_threshold_dependent_metrics_produced: false
+    rf_threshold_dependent_metrics_produced_note: per-window RF VALIDATION predictions are MISSING_FROZEN_SOURCE;
+      no threshold-dependent VALIDATION metric can be computed for RF
+threshold_region_definition:
+  formula: abs(probability - threshold) <= 0.05
+  fields:
+  - FP_near
+  - FP_total
+  - FP_near_fraction
+  - FN_near
+  - FN_total
+  - FN_near_fraction
+  - ALL_errors_near
+  - ALL_errors_total
+  - ALL_errors_near_fraction
+  train_oof_uses: diagnostic_threshold_rule.train_oof (per seed for MODEL_V1; RF-ALL's own)
+  historical_validation_uses: CAL_V1-calibrated probability + CAL_V1 threshold for MODEL_V1 ONLY, when
+    per-window predictions exist; RF VALIDATION skipped (MISSING_FROZEN_SOURCE)
+leave_one_patient_out_definition:
+  full_auprc: pooled AUPRC using all eligible windows
+  without_p_auprc: pooled AUPRC after removing every window from participant p
+  contribution_delta: full_auprc - without_p_auprc
+  patient_level_auprc_averaging_forbidden: true
+  model_v1_per_seed: true
+  model_v1_cross_seed_predictions_never_averaged: true
+  model_v1_cross_seed_summary: '[mean, min, max] of contribution_delta across seeds, descriptive only'
+  rf_all_single_oof_set: true
+patient_brier_definition:
+  permitted_as: patient_ranking_diagnostic
+  reason: single-class patient groups cannot be ranked by positive-class F1 (C031-EA correction)
+  formula: mean((probability - label)^2) per participant_group_id
+  probability_basis:
+    train_oof: raw probability (no calibration applied to TRAIN-OOF predictions)
+    historical_validation_model_v1: CAL_V1-calibrated probability, explicitly labeled as such (never silently
+      mixed with raw)
+interpretation_firewall:
+  source: this checkpoint's own instructions, Section 4
+  train_oof_decision_eligible: true
+  historical_validation_decision_eligible: false
+  historical_validation_historical_context_only: true
+  every_validation_context_output_field_carries:
+    decision_eligible: false
+    historical_context_only: true
+  disagreement_between_strata: report only, never resolved by changing V2-004
+  cherry_picking_forbidden: true
+no_model_training: true
+no_threshold_fitting_for_future_use: true
+v2_neural_fits_added: 0
+neural_search_budget_unchanged: true
+architecture_lock_verification:
+  MODEL_V2_CAPCTRL_parameter_count: 51969
+  MODEL_V2_TCN_MEAN_parameter_count: 57553
+  MODEL_V2_TCN_MEANMAX_parameter_count: 57577
+  tcn_analytic_receptive_field_samples: 3063
+  files_verified_not_edited:
+  - models/model_v2_architectures.py
+  - configs/model_v2/research_protocol_v1.yaml
+  - docs/MODEL_V2_RESEARCH_PROTOCOL_V1.md
+  - manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json

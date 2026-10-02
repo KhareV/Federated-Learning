@@ -1,0 +1,28 @@
+{
+  "actual_head_sha_at_entry": "48f7b2466ab1e3bf053cc6de4c268fe015893313",
+  "checkpoint": "C-V2-D0.6",
+  "corrective_evidence_present": {
+    "C-V2-001-VERIFY": true,
+    "C-V2-003-PROVENANCE": true
+  },
+  "expected_entry_sha": "48f7b2466ab1e3bf053cc6de4c268fe015893313",
+  "frozen_identities_verified": {
+    "baseline_v1_lock_sha256": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+    "feature_audit_lock_sha256": "a6876430dcad040b7008a69200fb4a36d735ad9a58d834c46d66d5543609623b",
+    "inner_cv_sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+    "model_v1_cv_reference_lock_sha256": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+    "outer_cv_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+    "protocol_lock_sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7"
+  },
+  "registry_state_at_entry": {
+    "V2-001_status": "PASS",
+    "V2-002_status": "PASS",
+    "V2-003_status": "PASS",
+    "V2-004_status": "NOT_STARTED",
+    "V2G0_status": "PASS",
+    "V2G1_status": "PASS",
+    "V2G2_status": "PASS",
+    "V2G3_status": "NOT_STARTED"
+  },
+  "status": "PASS"
+}

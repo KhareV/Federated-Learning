@@ -1,0 +1,168 @@
+{
+  "missing_components": [
+    {
+      "closest_match_found": "reports/t034,t035,c032_norm_runtime replay logs (12 demo examples, not comprehensive)",
+      "logical_id": "MODEL_V1_PER_WINDOW_VALIDATION_PREDICTIONS",
+      "not_regenerated": true,
+      "searched_locations": [
+        "reports/t015",
+        "reports/t016",
+        "reports/t017",
+        "reports/t018",
+        "reports/t034",
+        "reports/t035",
+        "reports/c032_norm_runtime"
+      ],
+      "status": "MISSING_FROZEN_SOURCE"
+    },
+    {
+      "closest_match_found": "none (only pooled scalar VALIDATION_metrics persisted)",
+      "logical_id": "RF_PER_WINDOW_VALIDATION_PREDICTIONS",
+      "not_regenerated": true,
+      "searched_locations": [
+        "reports/baselines",
+        "reports/t014"
+      ],
+      "status": "MISSING_FROZEN_SOURCE"
+    }
+  ],
+  "source_records": [
+    {
+      "frozen_read_only": true,
+      "logical_id": "MODEL_V1_CV_REFERENCE_V1_OOF",
+      "owner_phase": "V2-002",
+      "partition": "TRAIN",
+      "path": "reports/model_v2/v2_002/oof_predictions.csv",
+      "prediction_identity": "MODEL_V1_CV_REFERENCE_V1 (3 seeds, pooled OOF)",
+      "previously_consumed": true,
+      "purpose": "D0.6 TRAIN-OOF primary diagnostic model A",
+      "seed": "20260927,20260928,20260929 (separate rows per seed)",
+      "sha256": "1b4100d10dda0c25dd488a233835c1db46200fa6f0ca7c2c93b87b92be9983e4"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "V2_003_RF_ALL_OOF",
+      "owner_phase": "V2-003",
+      "partition": "TRAIN",
+      "path": "reports/model_v2/v2_003/oof_predictions.csv",
+      "prediction_identity": "RF fit on ALL-29 features (filtered feature_variant=ALL, model_family=RF)",
+      "previously_consumed": true,
+      "purpose": "D0.6 TRAIN-OOF primary diagnostic model B",
+      "seed": "20260927 (fixed RF random_state)",
+      "sha256": "45b4523dca6af338f678017958a56705a6a83e2fe216fb498d5eb33ef782ca78"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "MODEL_V1_HISTORICAL_VALIDATION_SCALARS",
+      "owner_phase": "T015",
+      "partition": "VALIDATION",
+      "path": "reports/t015/seeds/{20260927,20260928,20260929}.json",
+      "prediction_identity": "MODEL_V1 release-architecture best-epoch checkpoint, pooled scalar only",
+      "previously_consumed": true,
+      "purpose": "D0.6 historical VALIDATION context (pooled scalar only; no per-window predictions available)",
+      "seed": "20260927,20260928,20260929",
+      "sha256": {
+        "20260927": "079c283a347e83c49d504d97865f433229eb3c8c095959988ad8e43823cc5726",
+        "20260928": "7677af6b040fcfbc39325ff866ea1cde5150d633a7290ace8805b46330a0cbd5",
+        "20260929": "225d6947591229841929dd1f4f67fb2b46f32996b0fee407036011f660cb3df5"
+      }
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "CLASSICAL_HISTORICAL_VALIDATION_SCALARS",
+      "owner_phase": "T014",
+      "partition": "VALIDATION",
+      "path": "reports/baselines/baseline_report.json",
+      "prediction_identity": "RF_BASELINE_V1 / LOGISTIC_BASELINE_V1, pooled scalar only",
+      "previously_consumed": true,
+      "purpose": "D0.6 historical VALIDATION context (pooled scalar only; no per-window predictions available)",
+      "seed": "20260927",
+      "sha256": "f9b33023e8f9f3f5fc1b3678b4e8158a424d0a3ddfa7f660dfa5d352a1722e72"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "WINDOW_GROUP_LABEL_METADATA",
+      "owner_phase": "T013",
+      "partition": "TRAIN+VALIDATION (filtered per use)",
+      "path": "manifests/windows/MITDB_WINDOWS_V1.csv",
+      "prediction_identity": "n/a (metadata only: labels, groups, mapped_s/v/f_count)",
+      "previously_consumed": true,
+      "purpose": "patient/class-composition tables for both strata; never raw waveform",
+      "seed": "n/a",
+      "sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "BASELINE_FEATURES_V1_SCHEMA",
+      "owner_phase": "T014",
+      "partition": "n/a",
+      "path": "manifests/features/BASELINE_FEATURES_V1.schema.json",
+      "prediction_identity": "n/a (feature schema)",
+      "previously_consumed": true,
+      "purpose": "confirms detected_hr_mean_bpm is feature index 20",
+      "seed": "n/a",
+      "sha256": "032bc98b0a6153e373691c3012ce0ca4024a8e9a0071cc7da616d20b663acb55"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "BASELINE_FEATURES_V1_TRAIN_CACHE",
+      "owner_phase": "T014",
+      "partition": "TRAIN",
+      "path": "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1/TRAIN_features.npy",
+      "prediction_identity": "n/a (already-computed derived feature cache, not raw waveform)",
+      "previously_consumed": true,
+      "purpose": "HR-equivalent feature (detected_hr_mean_bpm) for TRAIN-OOF patient tables",
+      "seed": "n/a",
+      "sha256": "52f394c6dfb80921a6ddc58566399fadd4a43ffe8102bddcaa6d9a59a3399ca7"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "BASELINE_FEATURES_V1_VALIDATION_CACHE",
+      "owner_phase": "T014",
+      "partition": "VALIDATION",
+      "path": "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1/VALIDATION_features.npy",
+      "prediction_identity": "n/a (already-computed derived feature cache, not raw waveform)",
+      "previously_consumed": true,
+      "purpose": "HR-equivalent feature (detected_hr_mean_bpm) for VALIDATION context patient tables",
+      "seed": "n/a",
+      "sha256": "b7b764761d702f8db97bf45ee9faea4a43c79559bd5bf5a11c7bb716dc671aa4"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "CAL_V1_SCALAR",
+      "owner_phase": "T017",
+      "partition": "CALIBRATION (threshold/temperature scalars read only; no CALIBRATION patient rows opened)",
+      "path": "artifacts/CAL_V1.json",
+      "prediction_identity": "n/a (scalar threshold=0.6128035574269627, comparator>=)",
+      "previously_consumed": true,
+      "purpose": "frozen threshold for historical VALIDATION threshold-region analysis",
+      "seed": "n/a",
+      "sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "T014_RF_CONFIG",
+      "owner_phase": "T014",
+      "partition": "n/a",
+      "path": "configs/baseline_v1.yaml",
+      "prediction_identity": "n/a (scalar threshold=0.5, FIXED_NOT_TUNED)",
+      "previously_consumed": true,
+      "purpose": "verify RF historical operating threshold; provenance confirmed, but no per-window RF VALIDATION predictions exist to apply it to",
+      "seed": "n/a",
+      "sha256": "176c07f810125ffecf13d1d3cc0cadd98b17f4d9cfda7bc248260d34888503cf"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "CLASS_COMPOSITION_DEFINITION_CODE",
+      "owner_phase": "T031",
+      "partition": "n/a",
+      "path": "evaluation/error_analysis.py",
+      "prediction_identity": "n/a (pure function, reused exactly)",
+      "previously_consumed": true,
+      "purpose": "reused exactly for class_composition(s,v,f) -> slice label",
+      "seed": "n/a",
+      "sha256": "36a06822db98e8a0c4239838ca24545bc1cd7ecf5e72f1feeb695c1dc9220b3d"
+    }
+  ],
+  "status": "PASS"
+}
