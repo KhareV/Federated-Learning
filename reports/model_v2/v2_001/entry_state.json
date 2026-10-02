@@ -1,0 +1,22 @@
+{
+  "checkpoint": "V2-001",
+  "gate": "V2G0",
+  "expected_sha_approx": "211620ffc710a56feea9b27d65c372050400ff8a",
+  "head_sha_at_entry": "d8071300cbed2bdcb57b3b57447d3156cbdf1ee7",
+  "origin_main_sha_at_entry": "d8071300cbed2bdcb57b3b57447d3156cbdf1ee7",
+  "head_matched_origin_main": true,
+  "working_tree_clean_at_entry": true,
+  "head_advanced_beyond_expectation": true,
+  "intervening_commits": [
+    {
+      "sha": "d8071300cbed2bdcb57b3b57447d3156cbdf1ee7",
+      "subject": "docs(repro): record C035-CLEAN-REPRO final uncontaminated proof",
+      "diff_stat": "7 files changed, 236 insertions(+) -- all under reports/c035_clean_repro/*.json",
+      "classification": "RESOLVED_BY_LATER_DECISION",
+      "alters_frozen_scientific_component": false,
+      "note": "This is the corrective C035-CLEAN-REPRO checkpoint that re-proved T035/G20 from a second, fully untouched clean clone, closing the provenance gap the user raised about the original T035 proof. Purely additive JSON evidence; no code, test, config, or scientific artifact touched."
+    }
+  ],
+  "reset_performed": false,
+  "status": "PASS"
+}

@@ -1,0 +1,30 @@
+{
+  "checkpoint": "V2-001",
+  "sources_reviewed": [
+    "NHM_ML_Revised_Locked_Specification_v2.2.docx",
+    "NHM_Solo_Implementation_Execution_Plan_v1.0.docx",
+    "this session's own implementation ledger (the conversation history across T001-T036, C032-NORM-RUNTIME, C034-UI-E2E, T035, C035-CLEAN-REPRO) -- no separate 'Reading master transcript' file exists in the repository; the running conversation IS the implementation ledger referenced",
+    "the current repository state (manifests/, reports/, configs/, artifacts/)"
+  ],
+  "conflicts_found": [],
+  "notable_resolved_decisions_carried_forward": [
+    {
+      "decision": "api/runtime.py normalization defect (C032-NORM-RUNTIME)",
+      "classification": "RESOLVED_BY_LATER_DECISION",
+      "note": "Does not affect MODEL_V2 lineage: V2-001 never touches API_RUNTIME_V1_1 or any runtime inference path; this was a deployment-layer fix, not a training-data or label-mapping change."
+    },
+    {
+      "decision": "T035 clean-environment proof required a second, fully untouched clone (C035-CLEAN-REPRO) after the original clone was contaminated by post-hoc copies",
+      "classification": "RESOLVED_BY_LATER_DECISION",
+      "note": "Addressed explicitly in reports/model_v2/v2_001/t035_repro_prerequisite.json; the current committed C035 evidence is the authoritative final proof, superseding the original T035 clean_checkout_audit.json's own self-description where they differ in rigor."
+    },
+    {
+      "decision": "@types/node and T015-candidate-checkpoint reproducibility defects (T035)",
+      "classification": "IMPLEMENTATION_DRIFT, fixed",
+      "note": "Both were genuine implementation drift between the developer machine and a true clean checkout, now fixed and versioned (DASHBOARD_UI_V1_3; pytest.skip guard). Unrelated to MODEL_V2 scientific content."
+    }
+  ],
+  "unresolved_blockers": [],
+  "upstream_identity_mismatches": [],
+  "status": "PASS"
+}

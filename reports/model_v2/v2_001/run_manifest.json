@@ -1,0 +1,50 @@
+{
+  "config_path": "configs/model_v2/research_protocol_v1.yaml",
+  "config_sha256": "7e865a4625cb746cd3db83b5d96ca4fcfe633611a936a4dab85060909c204cfb",
+  "created_at_utc": "2026-10-02T10:59:34.079616Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "d8071300cbed2bdcb57b3b57447d3156cbdf1ee7",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "checkpoints/MODEL_V1.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    {
+      "path": "artifacts/CAL_V1.json",
+      "sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b"
+    },
+    {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.csv",
+      "sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+    },
+    {
+      "path": "manifests/splits/MITDB_SPLIT_V1.csv",
+      "sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "V2-001 lineage bootstrap: control-plane/data-governance/pre-registration only. No MODEL_V2 training and no MODEL_V1 retraining occurred.",
+  "output_artifacts": [
+    {
+      "path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json",
+      "sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7"
+    },
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+      "sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6"
+    },
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv",
+      "sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224"
+    }
+  ],
+  "phase_id": "V2-001",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "v2-001-lineage-bootstrap",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "V2-001"
+}

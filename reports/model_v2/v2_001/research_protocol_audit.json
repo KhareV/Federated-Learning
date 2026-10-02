@@ -1,0 +1,58 @@
+{
+  "checkpoint": "V2-001",
+  "gate": "V2G0",
+  "protocol_id": "MODEL_V2_RESEARCH_PROTOCOL_V1",
+  "protocol_lock_path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json",
+  "protocol_yaml_path": "configs/model_v2/research_protocol_v1.yaml",
+  "protocol_md_path": "docs/MODEL_V2_RESEARCH_PROTOCOL_V1.md",
+  "sections_frozen": {
+    "8A_fixed_scientific_constants": true,
+    "8B_model_seeds": true,
+    "8C_primary_metrics": true,
+    "8D_patient_cluster_bootstrap": true,
+    "8E_first_line_architectures": true,
+    "8F_architecture_search_policy": true,
+    "8G_feature_ablation_contract": true,
+    "8H_hybrid_trigger": true,
+    "8I_loss_sampling": true,
+    "8J_optimizer_experiment": true,
+    "8K_official_validation": true,
+    "8L_calibration_policy": true,
+    "8M_post_freeze_second_look": true,
+    "8N_runtime_acceptance_guardrails": true,
+    "8O_downstream_impact": true
+  },
+  "no_new_canonical_freeze_registry_row": true,
+  "architectures_pre_registered_and_mechanically_verified": {
+    "MODEL_V2_CAPCTRL": {"trainable_parameters": 51969, "expected_approx": 51969, "raw_logit_output_shape": [2, 1]},
+    "MODEL_V2_TCN_MEAN": {"trainable_parameters": 57553, "cap": 120000, "raw_logit_output_shape": [2, 1], "analytic_receptive_field_samples": 3063, "receptive_field_requirement_met": true},
+    "MODEL_V2_TCN_MEANMAX": {"trainable_parameters": 57577, "cap": 120000, "raw_logit_output_shape": [2, 1]}
+  },
+  "verification_method": "models/model_v2_architectures.py instantiated with torch.zeros synthetic input only (no real patient ECG); verified by tests/test_model_v2_architecture_specs.py",
+  "seeds_frozen": [20260927, 20260928, 20260929],
+  "metrics_frozen": {"primary": "pooled_AUPRC", "secondary": "pooled_AUROC"},
+  "feature_ablation_plan_frozen": {"variants": 7, "models": ["LOGISTIC", "RF"], "minimal_adequate_subset_rule": "within 0.02 absolute of ALL-29"},
+  "hybrid_trigger_frozen": "best_reduced_classical_RF_TRAIN_CV_AUPRC - best_learned_only_V2_TRAIN_CV_AUPRC >= 0.03",
+  "optimizer_experiment_frozen": {"comparisons_allowed": 1, "grid_search_forbidden": true},
+  "validation_promotion_rule_frozen": {
+    "release_seed_validation_auprc_min": 0.5628607838787021,
+    "computation": "0.5328607838787021 + 0.03",
+    "three_seed_confirmation_required": true
+  },
+  "cal_v2_rule_frozen": {"timing": "after MODEL_V2_FINAL freeze", "method": "single scalar temperature, NLL minimization"},
+  "second_look_policy_frozen": {"domains": ["INTERNAL_TEST", "INCART", "NSTDB"], "label": "POST-FREEZE COMPARATIVE SECOND-LOOK EVIDENCE ON PREVIOUSLY EXPOSED EVALUATION DOMAINS"},
+  "runtime_acceptance_guardrails_frozen": {
+    "INCART": {"min_delta_auprc": -0.03, "min_delta_auroc": -0.03},
+    "INTERNAL_TEST": {"min_delta_auprc": -0.05, "min_delta_auroc": -0.05},
+    "NSTDB": {"min_single_snr_delta_auprc": -0.10, "min_mean_six_snr_delta_auprc": -0.05}
+  },
+  "forbidden_items_declared": [
+    "transformer", "LSTM", "GRU", "spectrogram", "wavelet_model",
+    "self_supervised_pretraining", "attention_pooling", "new_window_size", "new_target",
+    "new_patient_split", "new_lead", "preproc_change", "model_ensemble",
+    "focal_loss", "asymmetric_loss", "AUPRC_surrogate", "patient_balanced_sampler_first_lineage",
+    "Platt_scaling", "isotonic_regression", "TRAIN_OOF_calibration",
+    "TRAIN_plus_VALIDATION_calibration", "reuse_or_mutation_of_CAL_V1"
+  ],
+  "status": "PASS"
+}

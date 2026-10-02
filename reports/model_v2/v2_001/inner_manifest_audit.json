@@ -1,0 +1,30 @@
+{
+  "checkpoint": "V2-001",
+  "manifest_id": "MITDB_TRAIN_INNER_V2_V1",
+  "predecessor_outer_manifest": "MITDB_TRAIN_CV_V2_V1",
+  "algorithm": "EXACT_EXHAUSTIVE_MIN_SQUARED_DEVIATION_4_GROUP_COMBINATION_V1",
+  "inner_validation_size": 4,
+  "fold_audit": [
+    {"outer_fold": 0, "outer_train_group_count": 21, "inner_validation_groups": ["MITDB_P101","MITDB_P113","MITDB_P118","MITDB_P232"], "objective": 1.311214721008403e-05},
+    {"outer_fold": 1, "outer_train_group_count": 21, "inner_validation_groups": ["MITDB_P103","MITDB_P113","MITDB_P203","MITDB_P215"], "objective": 2.6600088456865005e-06},
+    {"outer_fold": 2, "outer_train_group_count": 22, "inner_validation_groups": ["MITDB_P101","MITDB_P114","MITDB_P203","MITDB_P222"], "objective": 4.082144428515509e-06},
+    {"outer_fold": 3, "outer_train_group_count": 22, "inner_validation_groups": ["MITDB_P101","MITDB_P111","MITDB_P203","MITDB_P210"], "objective": 5.405014920465829e-06},
+    {"outer_fold": 4, "outer_train_group_count": 22, "inner_validation_groups": ["MITDB_P105","MITDB_P111","MITDB_P220","MITDB_P232"], "objective": 4.794823863568312e-06}
+  ],
+  "acceptance_checks": {
+    "outer_test_and_inner_validation_disjoint": {"result": true, "test": "tests/test_model_v2_cv_manifests.py::test_outer_test_inner_validation_optimise_cover_27_and_are_disjoint_per_fold"},
+    "inner_validation_and_optimisation_disjoint": {"result": true, "test": "same as above"},
+    "roles_cover_full_27_train_group_universe_per_fold": {"result": true, "test": "same as above"},
+    "exactly_4_inner_validation_groups_per_fold": {"result": true, "test": "tests/test_model_v2_cv_manifests.py::test_inner_validation_has_exactly_4_groups_per_fold"},
+    "all_roles_are_train_patients": {"result": true, "test": "tests/test_model_v2_cv_manifests.py::test_no_non_train_patient_in_inner_manifest"},
+    "no_validation_calibration_test_patient_enters_cv_manifests": {"result": true, "test": "tests/test_model_v2_cv_manifests.py::test_201_202_merged_group_never_enters_cv_manifests (and the general no_non_train tests above)"},
+    "inner_validation_and_remaining_optimise_both_have_both_classes": {"result": true, "test": "tests/test_model_v2_cv_manifests.py::test_inner_validation_and_remaining_optimise_both_have_both_classes"}
+  },
+  "no_201_202_leakage_into_train_cv": {
+    "merged_group_id": "MITDB_P201_202",
+    "partition": "VALIDATION",
+    "found_in_outer_manifest": false,
+    "found_in_inner_manifest": false
+  },
+  "status": "PASS"
+}

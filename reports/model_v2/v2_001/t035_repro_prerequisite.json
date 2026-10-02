@@ -1,0 +1,59 @@
+{
+  "checkpoint": "V2-001",
+  "prerequisite": "T035/G20 reproducibility base",
+  "method": "mechanical inspection of currently committed evidence files; no chat-memory assumption used",
+  "evidence_inspected": [
+    "reports/t035/clean_checkout_audit.json",
+    "reports/t035/dependency_lock_audit.json",
+    "reports/t035/hidden_dependency_audit.json",
+    "reports/t035/reproducibility_report.json",
+    "reports/t035/run_manifest.json",
+    "reports/reproducibility/clean_run.json",
+    "reports/c035_clean_repro/final_clone_audit.json",
+    "reports/c035_clean_repro/data_handling.json",
+    "reports/c035_clean_repro/summary.json",
+    "reports/c035_clean_repro/verification_results.json",
+    "reports/c035_clean_repro/no_copy_attestation.json",
+    "manifests/task_registry_v1.csv (T035 row)",
+    "manifests/gate_registry_v1.csv (G20 row)"
+  ],
+  "checklist": {
+    "post_fix_commit_freshly_cloned": {
+      "result": true,
+      "evidence": "reports/c035_clean_repro/final_clone_audit.json: clone_resolved_commit=211620ffc710a56feea9b27d65c372050400ff8a (the final T035 commit), clone_git_status_immediately_after_clone=clean"
+    },
+    "fresh_python_env_from_tracked_dependency_files": {
+      "result": true,
+      "evidence": "final_clone_audit.json.python_environment: python3.11 -m venv .venv (fresh), pip install -r requirements-dev.lock exit_code=0, pip check exit_code=0, manual_dependency_rescue=false"
+    },
+    "fresh_frontend_deps_from_committed_lock": {
+      "result": true,
+      "evidence": "final_clone_audit.json.frontend_environment: npm ci exit_code=0, manual_dependency_rescue=false; types_node_proof confirms @types/node resolves from the committed lockfile, not a parent/global node_modules"
+    },
+    "no_code_test_config_copied_into_final_clone": {
+      "result": true,
+      "evidence": "final_clone_audit.json.manual_file_copy_into_final_clone=false; no_copy_attestation.json enumerates every category (code, package.json, package-lock.json, tests, reports, model artifacts, node_modules, venv, raw datasets) as not copied"
+    },
+    "no_manual_dependency_rescue_in_final_clone": {
+      "result": true,
+      "evidence": "final_clone_audit.json: manual_dependency_rescue=false for both Python and frontend"
+    },
+    "required_frozen_artifacts_reproduced": {
+      "result": true,
+      "evidence": "verification_results.json: MODEL_V1 checkpoint SHA-256 021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe reproduced, PREPROC_V1/API_RUNTIME_V1_1/DASHBOARD_UI_V1_3 all verify PASS, corrected replay run1==run2 matching the ACTIVE E2E_REPLAY_SOFTWARE_V1_2 digest exactly, frozen test-vector gateway equivalence PASS"
+    },
+    "final_tree_state_clean": {
+      "result": true,
+      "evidence": "summary.json: clone_matches_entry=true; current repository (post C035) git status --short is clean as of this V2-001 entry audit"
+    }
+  },
+  "dataset_bytes_caveat": {
+    "raw_physionet_datasets_reconstructed_from_git_in_final_clone": false,
+    "falsely_described_as_reconstructed": false,
+    "note": "C035-CLEAN-REPRO explicitly documents that the one genuine scripts/acquire_mitdb.py network-acquisition attempt inside the final clone did not complete within a reasonable window (sandbox network limitation), and explicitly excludes the 7 raw-dataset-gated tests from its software-reproducibility PASS claim -- it never claims the raw datasets were reconstructed from Git or treats hash-matching cached bytes as clean-checkout proof. This caveat is carried forward transparently here, not hidden, and does not block V2-001 because V2-001 performs no raw-waveform access outside the already-frozen TRAIN manifest metadata (Section 9/10) -- see partition_firewall_audit.json."
+  },
+  "determination": "T035/G20 base is SUFFICIENTLY REPRODUCIBLE to begin the MODEL_V2 lineage. All checklist items are mechanically TRUE from currently committed evidence.",
+  "unresolved_provenance_issue": "none",
+  "stop_triggered": false,
+  "status": "PASS"
+}

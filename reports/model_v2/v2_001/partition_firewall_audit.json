@@ -1,0 +1,28 @@
+{
+  "checkpoint": "V2-001",
+  "guard_module": "src/nhm/model_v2_partition_guard.py",
+  "design": "fail-closed: check_partition_allowed() raises PartitionAccessViolation BEFORE load_model_v2_partition() ever calls np.load(); existing V1 loaders (datasets/*, evaluation/*) are untouched -- this is a purely additive wrapper",
+  "v2_001_declared_allowed_partitions": ["TRAIN"],
+  "ledger_path": "reports/model_v2/access_ledger.jsonl",
+  "ledger_format": "append-only JSON Lines; one row per successful access: timestamp_utc, stage_id, experiment_id, partition, access_type, rows, source_path, git_sha",
+  "test_results": {
+    "tests/test_model_v2_partition_guard.py::test_train_waveform_access_succeeds": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_forbidden_partition_access_raises_before_opening_file[VALIDATION]": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_forbidden_partition_access_raises_before_opening_file[CALIBRATION]": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_forbidden_partition_access_raises_before_opening_file[INTERNAL_TEST]": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_forbidden_partition_access_raises_before_opening_file[INCART]": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_forbidden_partition_access_raises_before_opening_file[NSTDB]": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_forbidden_partition_access_raises_before_opening_file[BIDMC]": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_unknown_partition_name_raises": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_allowed_partitions_must_themselves_be_known": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_check_partition_allowed_passes_silently_for_train": "PASS",
+    "tests/test_model_v2_partition_guard.py::test_ledger_is_append_only_across_multiple_accesses": "PASS"
+  },
+  "fail_closed_proof": "each forbidden-partition test uses a deliberately nonexistent source_path and asserts the file was never created/touched (assert not nonexistent.exists()) and no ledger row was written -- proving the denial happens strictly before any file I/O, not merely before returning success",
+  "actual_v2_001_data_access_performed": {
+    "note": "V2-001 itself performs no waveform access as part of generating its own evidence -- Sections 10/11 (CV/inner manifests) derive folds from already-frozen TRAIN metadata counts (manifests/splits/*, reports/t013/window_distribution.json) and never open a single .npy waveform file.",
+    "actual_npy_opens_by_v2_001": 0
+  },
+  "no_v1_loader_modified": true,
+  "status": "PASS"
+}

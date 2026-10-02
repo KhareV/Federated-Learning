@@ -1,0 +1,33 @@
+{
+  "checkpoint": "V2-001",
+  "manifest_id": "MITDB_TRAIN_CV_V2_V1",
+  "manifest_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+  "source_derivation": "manifests/windows/MITDB_WINDOWS_V1.csv (metadata-only: participant_group_id, partition, core_eligible, label columns) filtered to partition==TRAIN and core_eligible==TRUE -- no ECG waveform byte was read to build this manifest",
+  "algorithm": "EXACT_GREEDY_MIN_SQUARED_DEVIATION_WITH_PAIR_SWAP_REFINEMENT_V1",
+  "fold_capacities": [6, 6, 5, 5, 5],
+  "initial_objective": 0.1484986544936152,
+  "final_objective": 0.10403533810920561,
+  "swap_refinement_improved_objective": true,
+  "fold_summary": [
+    {"fold": 0, "patient_groups": 6, "eligible_windows": 2147, "positive_windows": 771, "negative_windows": 1376},
+    {"fold": 1, "patient_groups": 6, "eligible_windows": 2119, "positive_windows": 762, "negative_windows": 1357},
+    {"fold": 2, "patient_groups": 5, "eligible_windows": 1798, "positive_windows": 675, "negative_windows": 1123},
+    {"fold": 3, "patient_groups": 5, "eligible_windows": 1796, "positive_windows": 672, "negative_windows": 1124},
+    {"fold": 4, "patient_groups": 5, "eligible_windows": 1800, "positive_windows": 677, "negative_windows": 1123}
+  ],
+  "acceptance_checks": {
+    "every_train_patient_exactly_once": {"result": true, "test": "tests/test_model_v2_cv_manifests.py::test_outer_manifest_has_exactly_27_train_patients_once_each"},
+    "fold_sizes_exactly_6_6_5_5_5": {"result": true, "test": "tests/test_model_v2_cv_manifests.py::test_outer_fold_sizes_are_6_6_5_5_5"},
+    "no_non_train_patient": {"result": true, "test": "tests/test_model_v2_cv_manifests.py::test_no_non_train_patient_in_outer_manifest"},
+    "all_9660_windows_accounted_for": {"result": true, "actual": 9660},
+    "all_3557_positives_accounted_for": {"result": true, "actual": 3557},
+    "all_6103_negatives_accounted_for": {"result": true, "actual": 6103},
+    "each_fold_contains_both_classes": {"result": true, "test": "tests/test_model_v2_cv_manifests.py::test_every_outer_fold_contains_both_classes"},
+    "zero_patient_overlap": {"result": true, "note": "each participant_group_id appears in exactly one outer_fold row by construction (one row per patient in the manifest)"}
+  },
+  "determinism_check": {
+    "result": true,
+    "method": "script re-run twice; manifest SHA-256 identical both times (cc5258...)"
+  },
+  "status": "PASS"
+}
