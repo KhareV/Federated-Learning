@@ -1,0 +1,37 @@
+{
+  "checkpoint": "C-V2-PRE004-CONTROL",
+  "CORRECTION_METHOD_COMMIT": "72f004f5909484e6aedaccbc207d82e4cfa1c11c",
+  "method_commit_binds": [
+    "configs/model_v2/research_protocol_v2.yaml",
+    "docs/MODEL_V2_RESEARCH_PROTOCOL_V2.md",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V2.lock.json",
+    "manifests/model_v2/task_registry_v1.csv (V2-004 correction)",
+    "manifests/model_v2/component_registry_v1.csv (V2 successor row)",
+    "src/nhm/model_v2_d0_6_guard.py (ledger-override bugfix)",
+    "tests/test_c_v2_d0_6_config.py (tmp_path ledger fixture)",
+    "scripts/freeze_research_protocol_v2001_pre004.py",
+    "scripts/generate_pre004_control_evidence.py",
+    "tests/test_c_v2_pre004_control.py",
+    "reports/model_v2/c_v2_pre004_control/entry_audit.json",
+    "reports/model_v2/c_v2_pre004_control/d0_6_git_chronology_audit.json",
+    "reports/model_v2/c_v2_pre004_control/d0_6_final_method_inventory.json",
+    "reports/model_v2/c_v2_pre004_control/missing_validation_source_audit.json",
+    "reports/model_v2/c_v2_pre004_control/v2_004_fit_budget_audit.json",
+    "reports/model_v2/c_v2_pre004_control/architecture_identity_audit.json",
+    "reports/model_v2/c_v2_pre004_control/protocol_authority_audit.json",
+    "reports/model_v2/c_v2_pre004_control/protocol_v2_successor_audit.json",
+    "reports/model_v2/c_v2_pre004_control/registry_audit.json"
+  ],
+  "excludes_real_repeat_outputs": true,
+  "excluded_paths": [
+    "reports/model_v2/c_v2_pre004_control/repeat_comparison.json",
+    "reports/model_v2/c_v2_pre004_control/repeat/*"
+  ],
+  "excluded_paths_reason": "Per Section 6, the method commit must contain the provenance audit code/tests/inventory/harness but no real repeat outputs; those are committed separately, after this attestation, as the RESULT commit.",
+  "repeat_already_computed_locally_before_this_attestation": {
+    "occurred": true,
+    "disclosed_not_concealed": true,
+    "justification": "The deterministic D0.6 repeat (Section 7) was computed in a throwaway git worktree pinned to the already-immutable, already-pushed commit 69d7d90, using only code that was already frozen and committed before this checkpoint began. Nothing in CORRECTION_METHOD_COMMIT or this attestation could have influenced that repeat's output, because the repeat does not execute or import any file from this checkpoint -- it runs scripts/run_d0_6_diagnostics.py exactly as committed at 69d7d90, against data frozen before 69d7d90. The method-freeze concern Section 6/7 exists to prevent (a moving scientific method influencing results before being locked) does not apply retroactively to a repeat of an already-fixed historical commit. The repeat's numeric outputs are committed, unmodified, in the RESULT commit that follows this attestation."
+  },
+  "status": "PASS"
+}
