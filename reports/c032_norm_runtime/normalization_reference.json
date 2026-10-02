@@ -1,0 +1,52 @@
+{
+  "epsilon": 1e-08,
+  "gateway_artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+  "labels_used": false,
+  "model_checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "normalization_helper": "preprocessing.windowing.normalize_window_zscore",
+  "references": {
+    "A_model_v1_synthetic_test_vector": {
+      "above_threshold": true,
+      "cross_check": {
+        "expected_logit": 3.3621785640716553,
+        "normalized_matches_frozen_fixture": true
+      },
+      "logit_matches_frozen_expected": true,
+      "mean_after": 5.2580162446247416e-17,
+      "mean_before": -0.38,
+      "raw_logit": 3.3621788024902344,
+      "raw_probability": 0.9665013903592736,
+      "source": "tests/fixtures/model_v1_test_vector.npz[0]",
+      "source_domain_calibrated_probability": 0.999999923337391,
+      "std_after": 0.9999999996556626,
+      "std_before": 29.041274076734304,
+      "threshold": 0.6128035574269627
+    },
+    "B_public_ecg_replay_window_0": {
+      "above_threshold": false,
+      "mean_after": 4.263256414560601e-18,
+      "mean_before": 0.0005623506163237834,
+      "raw_logit": -1.8718549013137817,
+      "raw_probability": 0.13332724085237432,
+      "source": "tests/fixtures/e2e/PUBLIC_ECG_REPLAY_V1.npz[0]",
+      "source_domain_calibrated_probability": 0.00010927610464888686,
+      "std_after": 0.9999999481623094,
+      "std_before": 0.192909818759597,
+      "threshold": 0.6128035574269627,
+      "window_id": "7e85d9ad2d63d428ec248251a14c6475ae76abcd0c3826e4d935e2e29cbee559"
+    },
+    "C_distinct_train_window_record_103": {
+      "above_threshold": false,
+      "mean_after": -9.237055564881302e-18,
+      "mean_before": -0.000813194593370098,
+      "raw_logit": -1.4292200803756714,
+      "raw_probability": 0.19322023383176393,
+      "source": "TRAIN cache record 103, index 0",
+      "source_domain_calibrated_probability": 0.0009438773038022719,
+      "std_after": 0.999999967288209,
+      "std_before": 0.3057001572144245,
+      "threshold": 0.6128035574269627
+    }
+  },
+  "status": "PASS"
+}

@@ -49,9 +49,11 @@ def _require_finite(value: float | None, field_name: str) -> float | None:
 
 
 class ECGWindow(BaseModel):
-    """The canonical MODEL_V1-ready window (GATEWAY_MODEL_INPUT_V1): already resampled to
-    250 Hz and causally filtered by PREPROC_V1 upstream of this API. Never raw ADC counts,
-    an arbitrary-rate signal, or a hardware serial packet -- see api/runtime.py docstring.
+    """A PREPROC_V1-resampled (250 Hz) and causally-filtered window, in the FILTERED_
+    UNNORMALIZED_CANONICAL_CACHE representation -- NOT yet GATEWAY_MODEL_INPUT_V1-ready.
+    Never raw ADC counts, an arbitrary-rate signal, or a hardware serial packet. The caller
+    must NOT apply PER_WINDOW_ZSCORE_V1 normalization itself: the API server applies it,
+    once, immediately before MODEL_V1/gateway inference -- see api/runtime.py docstring.
 
     `samples` is intentionally NOT length-constrained here: a non-2500-length array is a
     *signal-completeness* condition (HTTP 422, matching this schema file's own documented

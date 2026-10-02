@@ -5,9 +5,15 @@ consumes: GATEWAY_ARTIFACT_V1 (F14), MODEL_V1/CAL_V1 (via GatewayModelRuntime), 
 (F06), ECG_HR_CONTEXT_V2, and ALERT_POLICY_V1. Fails closed -- raises RuntimeVerificationError
 rather than serving a partially-verified app. Imports no dataset loader, training code,
 calibration-fitting code, or SimulationTruth; the only rational-resampling/filtering
-implementation this module is aware of is the frozen one consumed upstream of the request
-(the request's `ecg` field is already a GATEWAY_MODEL_INPUT_V1-ready window -- see
-api/schemas.py::ECGWindow).
+implementation this module is aware of is the frozen one consumed upstream of the request.
+
+The request's `ecg` field (see api/schemas.py::ECGWindow) is PREPROC_V1-resampled/filtered but
+NOT normalized -- it is in the same FILTERED_UNNORMALIZED_CANONICAL_CACHE representation T013
+caches. This module owns applying the locked PREPROC_V1 PER_WINDOW_ZSCORE_V1 normalization,
+exactly once, immediately before MODEL_V1/gateway inference (API_RUNTIME_V1_1, C032-NORM-
+RUNTIME). `estimate_ecg_hr` deliberately continues to receive the amplitude-preserving
+filtered representation -- ECG_HR_CONTEXT_V2 (xqrs beat detection) was validated against that
+representation and must never see the z-scored MODEL branch array.
 """
 
 from __future__ import annotations
@@ -24,11 +30,24 @@ from fusion.episode_manager import AlertPolicy, load_alert_policy, verify_alert_
 from nhm.hashing import hash_file
 from preprocessing.ecg_hr_context import ECGHRResult, estimate_hr
 from preprocessing.freeze import verify_preproc_freeze
+from preprocessing.windowing import (
+    NORMALIZATION_EPSILON,
+    WINDOW_SAMPLES,
+    normalize_window_zscore,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 GATEWAY_ARTIFACT_RELATIVE_PATH = "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts"
 ECG_HR_CANDIDATE_ID = "WFDB_XQRS_V1"
 PREPROCESS_ID = "PREPROC_V1"
+
+
+class InputValidationError(ValueError):
+    """The caller handed `ProductionRuntime.infer` a window that cannot be normalized under
+    the locked PREPROC_V1 PER_WINDOW_ZSCORE_V1 contract (wrong length, non-finite samples, or
+    a non-finite normalization result). Callers (api/app.py) must route UNUSABLE/incomplete
+    windows to the 422 path *before* ever calling `infer` -- this is a defense-in-depth check,
+    not the primary completeness gate."""
 
 
 class RuntimeVerificationError(RuntimeError):
@@ -113,7 +132,21 @@ class ProductionRuntime:
         self.calibration_patient_count: int = int(calibration["calibration_patient_count"])
 
     def infer(self, ecg_samples: list[float]) -> InferenceOutcome:
-        array = np.asarray(ecg_samples, dtype=np.float32).reshape(1, 1, -1)
+        """Applies the locked PREPROC_V1 PER_WINDOW_ZSCORE_V1 normalization to the incoming
+        filtered-but-unnormalized window before MODEL_V1/gateway inference. Never call this
+        with an UNUSABLE/incomplete window -- api/app.py routes those to HTTP 422 first."""
+        window = np.asarray(ecg_samples, dtype=np.float64)
+        if window.ndim != 1 or window.size != WINDOW_SAMPLES:
+            raise InputValidationError(
+                f"INFER_INPUT_LENGTH_MISMATCH: expected {WINDOW_SAMPLES} samples, "
+                f"got shape {window.shape}"
+            )
+        if not np.isfinite(window).all():
+            raise InputValidationError("INFER_INPUT_NONFINITE")
+        normalized = normalize_window_zscore(window, epsilon=NORMALIZATION_EPSILON)
+        if not np.isfinite(normalized).all():
+            raise InputValidationError("INFER_NORMALIZATION_OUTPUT_NONFINITE")
+        array = normalized.astype(np.float32).reshape(1, 1, -1)
         result = self.gateway.infer(array)
         return InferenceOutcome(
             model_id=result.model_id,

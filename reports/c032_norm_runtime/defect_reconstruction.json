@@ -1,0 +1,52 @@
+{
+  "checkpoint": "C032-NORM-RUNTIME",
+  "q1_t013_cache_representation": {
+    "answer": "Causally resampled (250 Hz) and causally filtered float64 ECG, DELIBERATELY NOT z-score normalized.",
+    "evidence": "configs/preproc_v1.yaml normalization.cache_policy == 'FILTERED_UNNORMALIZED_CANONICAL_CACHE'; empirically verified on a real cached window (mean approx 0.0006, std approx 0.193, not unit variance)."
+  },
+  "q2_normalization_helper_and_formula": {
+    "answer": "preprocessing/windowing.py::normalize_window_zscore(values, *, epsilon=NORMALIZATION_EPSILON) -- (signal - population_mean(signal)) / (population_std(signal, ddof=0) + epsilon), CURRENT_WINDOW_ONLY fit scope, dataset/patient statistics FORBIDDEN.",
+    "matches_locked_formula_in_configs/preproc_v1.yaml": true
+  },
+  "q3_epsilon": {
+    "frozen_value": 1e-08,
+    "source_config": "configs/preproc_v1.yaml normalization.epsilon",
+    "source_lock": "manifests/preprocessing/PREPROC_V1.lock.json normalization_epsilon",
+    "source_code_constant": "preprocessing/windowing.py::NORMALIZATION_EPSILON",
+    "all_three_agree": true
+  },
+  "q4_q5_normalized_by_task": {
+    "T015_train_central.py": true,
+    "T016_generate_model_v1_test_vector_t016.py": true,
+    "T017_evaluation/calibration.py": true,
+    "T018_evaluation/internal_test.py": true,
+    "T021_T023_evaluation/quality_aware_alerts.py": true,
+    "T024_T028_evaluation/noise.py_and_c031_error_analysis.py": true,
+    "T029_scripts/run_gateway_t029.py": true,
+    "T031_scripts/run_t031.py": true,
+    "external_eval_evaluation/external_incart.py": true,
+    "evidence": "grep -n normalize_window_zscore across these files: each calls preprocessing.windowing.normalize_window_zscore on cached/raw windows before any model/gateway inference call."
+  },
+  "q6_gatewaymodelruntime_normalizes": {
+    "answer": false,
+    "evidence": "deployment/runtime.py::GatewayModelRuntime docstring: 'Strict batch-one CPU runtime; preprocessing remains upstream.' validate_input() only checks dtype/shape/finiteness, never mean/std. No 'normalize' token anywhere in the file."
+  },
+  "q7_old_productionruntime_normalizes": {
+    "answer": false,
+    "evidence": "api/runtime.py::ProductionRuntime.infer() builds `np.asarray(ecg_samples, dtype=np.float32).reshape(1,1,-1)` and calls self.gateway.infer(array) directly -- zero calls to normalize_window_zscore or any normalization helper anywhere in the file."
+  },
+  "q8_run_replay_normalizes": {
+    "answer": false,
+    "evidence": "scripts/run_replay.py and scripts/build_replay_fixture_t034.py contain no 'normalize' token; both copy the TRAIN cache's filtered_windows.npy values directly (cast to float32) into the request body."
+  },
+  "q9_frontend_bundle_normalizes": {
+    "answer": false,
+    "evidence": "scripts/build_frontend_replay_bundle_c034.py reads the same frozen NPZ and writes samples unchanged (astype(np.float64).tolist()); no normalization call."
+  },
+  "q10_first_path_dropping_normalization": {
+    "answer": "api/runtime.py::ProductionRuntime.infer() (introduced at T032). This is the single, narrow root cause: every consumer upstream of it (T015-T031) correctly normalizes before touching MODEL_V1/the gateway; api/runtime.py is the first and only production code path that hands GatewayModelRuntime an unnormalized window. api/schemas.py::ECGWindow's docstring compounds the error by incorrectly documenting the incoming request body as already 'GATEWAY_MODEL_INPUT_V1'-ready (it is resampled+filtered, but never normalized) -- this is a docstring/comment error, not a claim made by the frozen contracts/API_SCHEMA_V1.json JSON Schema itself, which carries no such semantic claim.",
+    "downstream_of_api_runtime_v1_also_affected": ["scripts/run_replay.py (T034)", "scripts/build_frontend_replay_bundle_c034.py (C034)", "frontend dashboard demo-window.ts (flat-zero, happens to be invariant under z-scoring so no observable symptom)"]
+  },
+  "root_cause_hypothesis_from_section_4": "CONFIRMED by mechanical inspection -- matches exactly.",
+  "status": "PASS"
+}

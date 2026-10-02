@@ -1,0 +1,30 @@
+{
+  "requirement": "Section 7: this is a runtime wiring correction, not a model/science change.",
+  "model_v1_checkpoint_changed": false,
+  "model_v1_checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "preproc_v1_formula_changed": false,
+  "preproc_v1_epsilon_changed": false,
+  "cal_v1_temperature_or_threshold_changed": false,
+  "aami_target_or_map_changed": false,
+  "split_changed": false,
+  "quality_v1_changed": false,
+  "alert_policy_v1_changed": false,
+  "ecg_hr_context_v2_changed": false,
+  "gateway_torchscript_artifact_changed": false,
+  "gateway_artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+  "held_out_data_used": false,
+  "labels_used_anywhere_in_checkpoint": false,
+  "ci_run_or_queried": false,
+  "ci_trigger_mode": "workflow_dispatch",
+  "files_changed": [
+    "api/runtime.py",
+    "api/schemas.py",
+    "contracts/openapi_v1.json"
+  ],
+  "files_changed_reason": {
+    "api/runtime.py": "ProductionRuntime.infer now applies normalize_window_zscore before GatewayModelRuntime.infer; estimate_ecg_hr unchanged.",
+    "api/schemas.py": "ECGWindow docstring corrected (no contract/field change).",
+    "contracts/openapi_v1.json": "regenerated from the live app to match the corrected docstring; not the frozen API_SCHEMA_V1 contract."
+  },
+  "status": "PASS"
+}

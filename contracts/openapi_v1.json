@@ -3,7 +3,7 @@
     "schemas": {
       "ECGWindow": {
         "additionalProperties": false,
-        "description": "The canonical MODEL_V1-ready window (GATEWAY_MODEL_INPUT_V1): already resampled to\n250 Hz and causally filtered by PREPROC_V1 upstream of this API. Never raw ADC counts,\nan arbitrary-rate signal, or a hardware serial packet -- see api/runtime.py docstring.\n\n`samples` is intentionally NOT length-constrained here: a non-2500-length array is a\n*signal-completeness* condition (HTTP 422, matching this schema file's own documented\n\"422 = unusable or incomplete signal window\"), not a request-schema error (HTTP 400).\nEnforcing the length as a Pydantic constraint would conflate the two and make ordinary\nincomplete-window requests indistinguishable from malformed ones.",
+        "description": "A PREPROC_V1-resampled (250 Hz) and causally-filtered window, in the FILTERED_\nUNNORMALIZED_CANONICAL_CACHE representation -- NOT yet GATEWAY_MODEL_INPUT_V1-ready.\nNever raw ADC counts, an arbitrary-rate signal, or a hardware serial packet. The caller\nmust NOT apply PER_WINDOW_ZSCORE_V1 normalization itself: the API server applies it,\nonce, immediately before MODEL_V1/gateway inference -- see api/runtime.py docstring.\n\n`samples` is intentionally NOT length-constrained here: a non-2500-length array is a\n*signal-completeness* condition (HTTP 422, matching this schema file's own documented\n\"422 = unusable or incomplete signal window\"), not a request-schema error (HTTP 400).\nEnforcing the length as a Pydantic constraint would conflate the two and make ordinary\nincomplete-window requests indistinguishable from malformed ones.",
         "properties": {
           "samples": {
             "items": {

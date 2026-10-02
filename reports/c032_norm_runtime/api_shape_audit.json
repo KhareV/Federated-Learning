@@ -1,0 +1,14 @@
+{
+  "requirement": "Section 12: preserve the external JSON request shape (2500 raw ECG floats); do not mutate contracts/API_SCHEMA_V1.json; a docstring-only normalization claim is fixable without a contract change.",
+  "contracts/API_SCHEMA_V1.json_sha256_before": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+  "contracts/API_SCHEMA_V1.json_sha256_after": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+  "contract_unchanged": true,
+  "contract_contains_normalization_claim": false,
+  "docstring_fix_applied": "api/schemas.py::ECGWindow docstring corrected: no longer claims samples are GATEWAY_MODEL_INPUT_V1-ready; now documents FILTERED_UNNORMALIZED_CANONICAL_CACHE representation and that normalization is applied server-side exactly once.",
+  "contracts/openapi_v1.json_regenerated": true,
+  "contracts/openapi_v1.json_regeneration_reason": "contracts/openapi_v1.json is a generated-from-live-app documentation artifact (scripts/generate_openapi_v1_t032.py), tested byte-identical to app.openapi() by tests/test_api_openapi_t032.py -- it is NOT the frozen API_SCHEMA_V1 JSON Schema contract and regenerating it after a docstring change is required, not a contract mutation.",
+  "request_body_shape_unchanged": true,
+  "request_body_ecg_samples_length": 2500,
+  "stop_condition_triggered": false,
+  "status": "PASS"
+}
