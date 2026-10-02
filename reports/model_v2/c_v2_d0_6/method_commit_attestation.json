@@ -1,0 +1,27 @@
+{
+  "checkpoint": "C-V2-D0.6",
+  "method_commit": "37a2cecfa824be7b7d5b4dfc29b2ed0039b50f28",
+  "method_commit_binds": [
+    "configs/model_v2/d0_6_diagnostic_reconstruction_v1.yaml",
+    "src/nhm/model_v2_d0_6_guard.py",
+    "scripts/_d0_6_lib.py",
+    "scripts/_d0_6_diagnostics.py",
+    "scripts/generate_d0_6_prefreeze_evidence.py",
+    "tests/test_c_v2_d0_6_config.py",
+    "reports/model_v2/c_v2_d0_6/entry_audit.json",
+    "reports/model_v2/c_v2_d0_6/method_freeze.json",
+    "reports/model_v2/c_v2_d0_6/source_artifact_inventory.json"
+  ],
+  "attestation_commit": null,
+  "attestation_commit_note": "Filled in by the pointer in this checkpoint's final handoff and registry note -- this file itself is committed in the attestation commit, so it cannot contain its own SHA before that commit exists; the attestation commit's own git log entry is the binding record.",
+  "chronology": [
+    "1. METHOD_COMMIT (37a2cec) created: scientific diagnostic definitions/code, no real result.",
+    "2. This file (method_commit_attestation.json) created, naming METHOD_COMMIT's real SHA.",
+    "3. ATTESTATION_COMMIT created containing only this file (no other change).",
+    "4. Both commits pushed to origin/main.",
+    "5. Only then: real D0.6 diagnostic computation begins."
+  ],
+  "purpose": "Avoids the prior V2-002/V2-003 null-method-commit-binding gap by construction: this attestation exists and is pushed BEFORE any real diagnostic result is produced, not retrofitted afterward.",
+  "real_results_started_at_time_of_this_commit": false,
+  "status": "PASS"
+}
