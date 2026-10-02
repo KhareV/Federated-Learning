@@ -1,0 +1,20 @@
+{
+  "actual_head_sha_at_entry": "4b7494f3a91faa2bdaab5f752051ccb20162dd3b",
+  "checkpoint": "V2-002",
+  "expected_entry_sha": "4b7494f3a91faa2bdaab5f752051ccb20162dd3b",
+  "frozen_identities_verified": {
+    "cal_v1_sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "inner_cv_sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+    "model_v1_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "outer_cv_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+    "protocol_lock_sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7"
+  },
+  "registry_state_at_entry": {
+    "V2-001_status": "PASS",
+    "V2-002_status": "NOT_STARTED",
+    "V2-003_status": "NOT_STARTED",
+    "V2G0_status": "PASS",
+    "V2G1_status": "NOT_STARTED"
+  },
+  "status": "PASS"
+}

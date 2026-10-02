@@ -1,0 +1,102 @@
+reference_id: MODEL_V1_CV_REFERENCE_V1
+owner_task: V2-002
+status: TRAIN_ONLY_DEVELOPMENT_REFERENCE
+not_calibrated: true
+not_a_release_model: true
+no_held_out_official_partition_accessed: true
+
+parent_architecture: MODEL_V1
+parent_architecture_module: models.ecg_cnn
+parent_architecture_factory: build_model_v1
+parent_architecture_config_path: configs/model_v1.yaml
+expected_trainable_parameters: 13185
+
+research_protocol_id: MODEL_V2_RESEARCH_PROTOCOL_V1
+outer_cv_manifest_id: MITDB_TRAIN_CV_V2_V1
+inner_cv_manifest_id: MITDB_TRAIN_INNER_V2_V1
+split_id: MITDB_SPLIT_V1
+preproc_id: PREPROC_V1
+windowing_id: WINDOWING_V1
+target_id: AAMI_SVF_WINDOW_V1
+map_id: AAMI_SVF_MAP_V1
+window_manifest_path: manifests/windows/MITDB_WINDOWS_V1.csv
+cache_manifest_path: manifests/windows/MITDB_WINDOWS_V1.cache.csv
+
+seeds: [20260927, 20260928, 20260929]
+outer_folds: [0, 1, 2, 3, 4]
+total_fits: 15
+
+input_pipeline:
+  source: T013_PREPROC_V1_FILTERED_UNNORMALIZED_CACHE
+  augmentation_scope: OPTIMISE_ONLY
+  augmentation_id: MODEL_V1_TRAIN_AUG_V1
+  augmentation_source_module: training.train_central
+  augmentation_source_function: augment_train_window
+  normalization_id: PER_WINDOW_ZSCORE_V1
+  normalization_epsilon: 1.0e-8
+  execution_order: FILTERED_WINDOW_THEN_AUGMENT_THEN_PER_WINDOW_ZSCORE
+  inner_validation_augmentation: false
+  outer_test_augmentation: false
+
+training_contract:
+  loss: BCEWithLogitsLoss
+  pos_weight_source: OPTIMISE_SUBSET_ONLY
+  pos_weight_formula: "negative_OPTIMISE_windows / positive_OPTIMISE_windows"
+  optimizer: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  batch_size: 64
+  max_epochs: 50
+  checkpoint_selection_metric: POOLED_INNER_VALIDATION_AUPRC
+  early_stopping_patience: 7
+  scheduler: ReduceLROnPlateau
+  scheduler_monitor: POOLED_INNER_VALIDATION_AUPRC
+  reused_from: training.train_central (set_determinism, ModelV1WindowDataset, _make_loaders,
+    _validate, build_model_v1, descriptive_metrics -- optimizer/scheduler construction and
+    training-loop semantics mirrored exactly from training.train_central.train_seed)
+  fresh_initialization: true
+  load_model_v1_checkpoint: false
+  device: cpu
+
+metric_definitions:
+  per_seed_canonical_metric: POOLED_CONCATENATED_OOF_AUPRC
+  per_seed_secondary_metric: POOLED_CONCATENATED_OOF_AUROC
+  fold_level_metrics: DIAGNOSTIC_ONLY_NOT_AVERAGED_INTO_CANONICAL
+  patient_average_auprc: FORBIDDEN
+  three_seed_summary: mean, sample_sd (ddof=1), minimum
+  ensemble_of_seeds: FORBIDDEN
+
+bootstrap:
+  method_id: MODEL_V2_BOOTSTRAP_DRAWS_V1
+  replicates: 2000
+  bootstrap_seed: 20261002
+  rng: numpy.random.default_rng
+  cluster_unit: participant_group_id
+  source_clusters: 27
+  slots_per_replicate: 27
+  multiplicity_preserved: true
+  window_bootstrap: false
+  stratified_bootstrap: false
+  rejection_redraw: false
+  ci_percentiles: [2.5, 97.5]
+
+search_budget:
+  first_line_neural_fit_cap: 100
+  v2_002_fits: 15
+
+run_order:
+  - {outer_fold: 0, seed: 20260927}
+  - {outer_fold: 0, seed: 20260928}
+  - {outer_fold: 0, seed: 20260929}
+  - {outer_fold: 1, seed: 20260927}
+  - {outer_fold: 1, seed: 20260928}
+  - {outer_fold: 1, seed: 20260929}
+  - {outer_fold: 2, seed: 20260927}
+  - {outer_fold: 2, seed: 20260928}
+  - {outer_fold: 2, seed: 20260929}
+  - {outer_fold: 3, seed: 20260927}
+  - {outer_fold: 3, seed: 20260928}
+  - {outer_fold: 3, seed: 20260929}
+  - {outer_fold: 4, seed: 20260927}
+  - {outer_fold: 4, seed: 20260928}
+  - {outer_fold: 4, seed: 20260929}
