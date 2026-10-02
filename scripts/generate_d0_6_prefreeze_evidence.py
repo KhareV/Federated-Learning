@@ -103,6 +103,35 @@ def write_source_artifact_inventory() -> Path:
             "purpose": "D0.6 TRAIN-OOF primary diagnostic model B",
         },
         {
+            "logical_id": "V2_003_RF_VARIANT_METRICS",
+            "path": "reports/model_v2/v2_003/oof_metrics.json",
+            "sha256": hash_file(ROOT / "reports/model_v2/v2_003/oof_metrics.json"),
+            "owner_phase": "V2-003",
+            "partition": "TRAIN",
+            "prediction_identity": "pooled OOF AUPRC/AUROC per (feature_variant, model_family)",
+            "seed": "n/a (deterministic RF/LR)",
+            "frozen_read_only": True,
+            "previously_consumed": True,
+            "purpose": "H-RHYTHM/H-MORPH supporting evidence (STAT/RR/QRS/etc comparison)",
+        },
+        {
+            "logical_id": "V2_003_GROUPED_PERMUTATION_SUMMARY",
+            "path": "reports/model_v2/v2_003/grouped_permutation_summary.json",
+            "sha256": hash_file(
+                ROOT / "reports/model_v2/v2_003/grouped_permutation_summary.json"
+            ),
+            "owner_phase": "V2-003",
+            "partition": "TRAIN",
+            "prediction_identity": "grouped permutation mean delta AUPRC per feature group",
+            "seed": "n/a (permutation seed 20261003, already frozen)",
+            "frozen_read_only": True,
+            "previously_consumed": True,
+            "purpose": (
+                "H-RHYTHM/H-MORPH supporting evidence (secondary/diagnostic in V2-003, "
+                "remains so here)"
+            ),
+        },
+        {
             "logical_id": "MODEL_V1_HISTORICAL_VALIDATION_SCALARS",
             "path": "reports/t015/seeds/{20260927,20260928,20260929}.json",
             "sha256": {

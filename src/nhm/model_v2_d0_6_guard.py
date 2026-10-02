@@ -20,6 +20,8 @@ ALLOWED_PATHS: frozenset[str] = frozenset(
         # TRAIN-OOF decision-eligible sources (Section 4A)
         "reports/model_v2/v2_002/oof_predictions.csv",
         "reports/model_v2/v2_003/oof_predictions.csv",
+        "reports/model_v2/v2_003/oof_metrics.json",
+        "reports/model_v2/v2_003/grouped_permutation_summary.json",
         "manifests/model_v2/MODEL_V1_CV_REFERENCE_V1.lock.json",
         "manifests/model_v2/MODEL_V2_FEATURE_AUDIT_V1.lock.json",
         # frozen TRAIN/VALIDATION window+label+group metadata (not waveform)

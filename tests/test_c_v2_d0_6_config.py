@@ -63,6 +63,20 @@ def test_source_artifact_allowlist_nonempty_and_frozen() -> None:
     assert len(paths) > 0
     assert "reports/model_v2/v2_002/oof_predictions.csv" in paths
     assert "reports/model_v2/v2_003/oof_predictions.csv" in paths
+    assert "reports/model_v2/v2_003/oof_metrics.json" in paths
+    assert "reports/model_v2/v2_003/grouped_permutation_summary.json" in paths
+
+
+def test_v2_003_rf_variant_metrics_loader() -> None:
+    metrics = lib.load_v2_003_rf_variant_metrics()
+    assert "per_variant_model" in metrics
+    assert "RR_RF" in metrics["per_variant_model"]
+
+
+def test_v2_003_grouped_permutation_summary_loader() -> None:
+    summary = lib.load_v2_003_grouped_permutation_summary()
+    assert summary["diagnostic_only"] is True
+    assert "group_overall" in summary
 
 
 # ---------------------------------------------------------------------------------------

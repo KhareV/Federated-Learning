@@ -103,6 +103,28 @@ def load_rf_all_train_oof() -> list[dict]:
     return [r for r in rows if r["feature_variant"] == "ALL" and r["model_family"] == "RF"]
 
 
+def load_v2_003_rf_variant_metrics() -> dict:
+    """reports/model_v2/v2_003/oof_metrics.json -- the already-frozen pooled OOF AUPRC/AUROC
+    for every (feature_variant, model_family), used as H-RHYTHM/H-MORPH supporting evidence.
+    Never recomputed."""
+    return gated_read_json(
+        "reports/model_v2/v2_003/oof_metrics.json",
+        stratum=TRAIN_OOF,
+        purpose="V2-003 per-variant RF/LOGISTIC pooled OOF AUPRC (H-RHYTHM/H-MORPH evidence)",
+    )
+
+
+def load_v2_003_grouped_permutation_summary() -> dict:
+    """reports/model_v2/v2_003/grouped_permutation_summary.json -- the already-frozen grouped
+    permutation importance (STAT/RR/QRS mean delta AUPRC), used as H-RHYTHM/H-MORPH supporting
+    evidence. Diagnostic/secondary in V2-003 and remains so here. Never recomputed."""
+    return gated_read_json(
+        "reports/model_v2/v2_003/grouped_permutation_summary.json",
+        stratum=TRAIN_OOF,
+        purpose="V2-003 grouped permutation importance (H-RHYTHM/H-MORPH evidence)",
+    )
+
+
 def load_window_manifest(partition: str) -> list[dict]:
     """manifests/windows/MITDB_WINDOWS_V1.csv, filtered to one partition AND core_eligible=TRUE
     (matching the exact eligible population used by every OOF/feature-cache artifact; TRAIN has
@@ -239,5 +261,7 @@ __all__ = [
     "load_model_v1_train_oof",
     "load_rf_all_train_oof",
     "load_t014_rf_threshold",
+    "load_v2_003_grouped_permutation_summary",
+    "load_v2_003_rf_variant_metrics",
     "load_window_manifest",
 ]

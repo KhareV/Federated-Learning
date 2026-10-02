@@ -2,11 +2,11 @@
   "checkpoint": "C-V2-D0.6",
   "config_sha256": "cc7e9dfa1d63dc67d72959b0d2729ac0803bab3d2a864d7cf76a4f34b5ed10c5",
   "d0_6_code_sha256": {
-    "scripts/_d0_6_lib.py": "925413e96253f968819e75db87d1437b32008586e7b66cd897cabdc57768ab77",
-    "src/nhm/model_v2_d0_6_guard.py": "6c7ae04167d515cbdd27e8c54fe191e24bb87411a8012d5ef2e814d309360e03"
+    "scripts/_d0_6_lib.py": "075bcfe4cf1d8d2126643bf568aed7e7e0caec89c473abea8a0de9100a540e14",
+    "src/nhm/model_v2_d0_6_guard.py": "db13f812096d875cf6f7350bf002b677c0ce7d946aa73b92dd3ba5b33f1d8b0f"
   },
   "hard_data_firewall": {
-    "allowlist_size": 16,
+    "allowlist_size": 18,
     "mechanism": "src/nhm/model_v2_d0_6_guard.py per-path allowlist + forbidden-substring denylist"
   },
   "note_pre_result_method_commit": "Left null here by construction -- a SEPARATE attestation commit created immediately after this commit binds this exact commit's own SHA, per Section 7's required METHOD_COMMIT -> ATTESTATION_COMMIT -> push both -> THEN compute results chronology (avoiding the prior V2-002/V2-003 null-binding gap by construction, not by rewriting this file after the fact).",

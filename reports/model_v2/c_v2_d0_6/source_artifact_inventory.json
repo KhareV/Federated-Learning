@@ -53,6 +53,30 @@
     },
     {
       "frozen_read_only": true,
+      "logical_id": "V2_003_RF_VARIANT_METRICS",
+      "owner_phase": "V2-003",
+      "partition": "TRAIN",
+      "path": "reports/model_v2/v2_003/oof_metrics.json",
+      "prediction_identity": "pooled OOF AUPRC/AUROC per (feature_variant, model_family)",
+      "previously_consumed": true,
+      "purpose": "H-RHYTHM/H-MORPH supporting evidence (STAT/RR/QRS/etc comparison)",
+      "seed": "n/a (deterministic RF/LR)",
+      "sha256": "3fed5c7393f50261817564ccd98cb51e8dcfabcc75d1c06725c76836b6858306"
+    },
+    {
+      "frozen_read_only": true,
+      "logical_id": "V2_003_GROUPED_PERMUTATION_SUMMARY",
+      "owner_phase": "V2-003",
+      "partition": "TRAIN",
+      "path": "reports/model_v2/v2_003/grouped_permutation_summary.json",
+      "prediction_identity": "grouped permutation mean delta AUPRC per feature group",
+      "previously_consumed": true,
+      "purpose": "H-RHYTHM/H-MORPH supporting evidence (secondary/diagnostic in V2-003, remains so here)",
+      "seed": "n/a (permutation seed 20261003, already frozen)",
+      "sha256": "fff68e199d7a3cdb9f4ecc584f81b57354521643c3dbf72cad8bfa9045aeb028"
+    },
+    {
+      "frozen_read_only": true,
       "logical_id": "MODEL_V1_HISTORICAL_VALIDATION_SCALARS",
       "owner_phase": "T015",
       "partition": "VALIDATION",
