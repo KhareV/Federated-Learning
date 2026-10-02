@@ -1,0 +1,8 @@
+{
+  "requirement": "api/runtime.py::ProductionRuntime.estimate_ecg_hr must continue receiving the amplitude-preserving PREPROC_V1-filtered representation, NOT the PER_WINDOW_ZSCORE_V1-normalized MODEL branch array.",
+  "verification_method": "tests/test_c032_norm_runtime.py::test_estimate_ecg_hr_receives_unnormalized_amplitude_preserving_window calls preprocessing.ecg_hr_context.estimate_hr directly on a raw window and compares against runtime.estimate_ecg_hr(raw, ...) for the identical raw window; asserts hr_ecg_bpm and valid are identical.",
+  "code_evidence": "api/runtime.py::ProductionRuntime.estimate_ecg_hr is unmodified by this checkpoint: `array = np.asarray(ecg_samples, dtype=np.float64); return estimate_hr(array, ...)` -- no call to normalize_window_zscore anywhere in this method.",
+  "code_evidence_model_branch": "api/runtime.py::ProductionRuntime.infer is the ONLY method modified by this checkpoint; it normalizes its own local `window` array and never mutates or shares state with estimate_ecg_hr's independent `array`.",
+  "result": "PASS",
+  "status": "PASS"
+}

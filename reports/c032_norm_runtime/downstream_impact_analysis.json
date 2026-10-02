@@ -1,0 +1,99 @@
+{
+  "checkpoint": "C032-NORM-RUNTIME",
+  "methodology": "Each task is classified by mechanically checking (grep + read) whether its evaluated code path ever called api/runtime.py::ProductionRuntime.infer() / scripts/run_replay.py / scripts/build_frontend_replay_bundle_c034.py (the three confirmed-defective call sites), versus calling preprocessing.windowing.normalize_window_zscore directly before any MODEL_V1/gateway inference.",
+  "tasks": {
+    "T015_model_v1_training": {
+      "used_defective_api_runtime": false,
+      "evidence": "training/train_central.py calls normalize_window_zscore directly on cached windows before model forward pass; never imports api/runtime.py.",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T016_model_v1_test_vector": {
+      "used_defective_api_runtime": false,
+      "evidence": "scripts/generate_model_v1_test_vector_t016.py normalizes raw windows before computing expected_logits_float32; this is the frozen fixture used as cross-check A in this checkpoint and reproduced exactly.",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T017_calibration_cal_v1": {
+      "used_defective_api_runtime": false,
+      "evidence": "evaluation/calibration.py imports and calls normalize_window_zscore (line ~113) before computing calibration temperature/threshold.",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T018_internal_test": {
+      "used_defective_api_runtime": false,
+      "evidence": "evaluation/internal_test.py applies normalize_window_zscore per-row on population.waveforms before model inference.",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T019_nstdb_robustness": {
+      "used_defective_api_runtime": false,
+      "evidence": "evaluation/noise.py (shared normalization call site, line ~262) normalizes before inference; no dependency on api/runtime.py.",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T020_external_incart": {
+      "used_defective_api_runtime": false,
+      "evidence": "evaluation/external_incart.py calls normalize_window_zscore (line ~347) before inference.",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T021_T023_bidmc_context_and_alert_policy": {
+      "used_defective_api_runtime": false,
+      "evidence": "evaluation/quality_aware_alerts.py (line ~210) normalizes ECG before model inference; ALERT_POLICY_V1 state-machine logic itself consumes already-correct calibrated probabilities as input and contains no normalization step of its own, so it is unaffected by this defect class entirely.",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T024_T028_fl_noise_error_analysis": {
+      "used_defective_api_runtime": false,
+      "evidence": "evaluation/noise.py and evaluation/c031_error_analysis.py both call normalize_window_zscore before inference (grep-confirmed at lines ~262 and ~145 respectively).",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T029_gateway_deployment_equivalence": {
+      "used_defective_api_runtime": false,
+      "evidence": "scripts/run_gateway_t029.py::canonical() explicitly computes `normalize_window_zscore(row, ...)` for every row of population.waveforms before calling runtime.infer() -- T029's benchmark input was already normalized. G15/F14/GATEWAY_ARTIFACT_V1 are confirmed unaffected per Section 16 and are NOT reopened.",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T030_wearable_hardware": {
+      "used_defective_api_runtime": "not_applicable_not_yet_executed",
+      "evidence": "T030 remains DEFERRED_HARDWARE; no real-wearable data has been collected through the defective (or any) API runtime path yet.",
+      "scientific_result_invalidated": false,
+      "rerun_required": "not_applicable -- will use API_RUNTIME_V1_1 when executed"
+    },
+    "T031_explainability": {
+      "used_defective_api_runtime": false,
+      "evidence": "scripts/run_t031.py calls normalize_window_zscore (line ~237) before model/gateway inference.",
+      "scientific_result_invalidated": false,
+      "rerun_required": false
+    },
+    "T032_typed_api": {
+      "used_defective_api_runtime": true,
+      "evidence": "api/runtime.py::ProductionRuntime.infer() is the root-cause defect itself, introduced at T032. Its own test suite exercised the HTTP contract shape (request/response schema, error codes, state transitions) using a deterministic fake runtime (tests/test_api_stateful_t032.py) for most state-machine tests, and the real ProductionRuntime for a smaller set of true end-to-end smoke tests whose MODEL_V1 numerical output was never asserted against a normalized reference value.",
+      "scientific_result_invalidated": "contract/schema-level evidence (T032's actual deliverable) is NOT invalidated -- no test asserted a specific normalized-input numeric outcome; the numerical inference path itself was defective and is corrected by this checkpoint via API_RUNTIME_V1_1.",
+      "rerun_required": "regression re-run required (branch-separation + equivalence tests) -- performed in this checkpoint; API_RUNTIME_V1_1 supersedes API_RUNTIME_V1 for the inference numerics only."
+    },
+    "T033_dashboard": {
+      "used_defective_api_runtime": true,
+      "evidence": "T033's dashboard calls the production /v1/infer-window route (via api.app.app / ProductionRuntime), inheriting the unnormalized-input defect for any live or replayed numeric probability it rendered. T033's own deliverable (UI/UX, typed client, rendering, layout) is not about specific numeric correctness of any one inference.",
+      "scientific_result_invalidated": "UI/interface evidence remains informative; any specific probability/monitoring-state VALUES previously rendered during T033 demos are superseded for scientific semantics by this checkpoint's correction (DASHBOARD_UI_V1_1 supersession record applies).",
+      "rerun_required": "frontend regression re-run (this checkpoint); no DASHBOARD_UI_V1_2 code change needed since the frontend never computed probabilities itself -- only the backend normalization needed fixing."
+    },
+    "C034_replay_integration": {
+      "used_defective_api_runtime": true,
+      "evidence": "scripts/run_replay.py (T034) and scripts/build_frontend_replay_bundle_c034.py (C034) both send/package raw unnormalized windows through the real production API, inheriting the defect. Confirmed in defect_reconstruction.json q8/q9.",
+      "scientific_result_invalidated": "The MODEL_V1 output values and monitoring-state sequence recorded in the old T034/C034 replay runs (including the public semantic digest e3f8607617d3fc7cce7be58752340047d120815653cce36acfac5e8b8bc099b3) are superseded for scientific semantics. The UI wiring, request/response shape, waveform binding, and E2E mechanics they proved remain valid and informative.",
+      "rerun_required": "YES -- performed in this checkpoint via a corrected re-run through API_RUNTIME_V1_1, producing a new digest recorded as the current public_semantic_digest; the old digest is preserved historically as SUPERSEDED_UNNORMALIZED_RUNTIME_DIGEST."
+    }
+  },
+  "summary": {
+    "tasks_using_defective_runtime": ["T032", "T033", "C034_replay_integration (T034 base + C034 corrective)"],
+    "tasks_confirmed_unaffected": [
+      "T015", "T016", "T017", "T018", "T019", "T020", "T021_T023", "T024_T028", "T029", "T031"
+    ],
+    "tasks_requiring_rerun": ["T032 (regression only)", "T033 (frontend regression only)", "C034/T034 (full corrected replay re-run)"],
+    "future_tasks_affected": ["T030 will use API_RUNTIME_V1_1 from first execution, no historical data to correct"]
+  },
+  "status": "PASS"
+}
