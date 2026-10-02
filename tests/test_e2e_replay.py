@@ -12,6 +12,7 @@ import hashlib
 import json
 from pathlib import Path
 
+import pytest
 from fastapi.testclient import TestClient
 from jsonschema import Draft202012Validator
 
@@ -124,9 +125,19 @@ def test_replay_is_semantically_deterministic_across_two_fresh_sessions() -> Non
 
 
 def test_upstream_model_and_gateway_hashes_are_unchanged() -> None:
+    """As of the C032-NORM-RUNTIME successor (API_RUNTIME_V1_1), api/runtime.py has
+    legitimately moved on from the predecessor API_RUNTIME_V1 lock (restores PREPROC_V1
+    PER_WINDOW_ZSCORE_V1 normalization) -- its own verify() now correctly reports that drift;
+    the successor's equivalent check is tests/test_c032_lock_versioning.py::
+    test_api_runtime_v1_1_verify_passes. MODEL_V1/GATEWAY_ARTIFACT_V1 themselves are
+    unaffected and still verified via the successor lock."""
     from scripts.verify_api_runtime_t032 import verify as verify_api_runtime
+    from scripts.verify_api_runtime_v1_1_c032 import verify as verify_api_runtime_v1_1
 
-    result = verify_api_runtime()
+    with pytest.raises(RuntimeError, match="API_RUNTIME_V1_TAMPER"):
+        verify_api_runtime()
+
+    result = verify_api_runtime_v1_1()
     assert result["status"] == "PASS"
 
 

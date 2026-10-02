@@ -1,0 +1,20 @@
+{
+  "api_runtime_lock": "API_RUNTIME_V1_1",
+  "checkpoint": "C032-NORM-RUNTIME",
+  "ci_executed": false,
+  "ci_queried": false,
+  "ci_trigger_mode": "workflow_dispatch",
+  "dashboard_ui_lock": "DASHBOARD_UI_V1_2",
+  "e2e_replay_lock": "E2E_REPLAY_SOFTWARE_V1_2",
+  "frontend_test_suite": "6 files, 65 tests passed (npm run test -- --run)",
+  "node": "v26.5.0",
+  "normalization_epsilon": 1e-08,
+  "normalization_id": "PER_WINDOW_ZSCORE_V1",
+  "one_command_demo_status": "PASS",
+  "public_semantic_digest": "128fa6d60fab9d9136a6f99f057332c4b6fc2bd16d6ae9e991f60faeb41f30ab",
+  "python": "3.11.16",
+  "run_1_equals_run_2": true,
+  "runtime_equivalence_decision_agreement_fraction": 1.0,
+  "status": "PASS",
+  "superseded_unnormalized_runtime_digest": "e3f8607617d3fc7cce7be58752340047d120815653cce36acfac5e8b8bc099b3"
+}

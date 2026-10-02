@@ -1,0 +1,10 @@
+{
+  "checkpoint": "C032-NORM-RUNTIME",
+  "defect_class": "NORMALIZATION_OMITTED_AT_PRODUCTION_RUNTIME_BOUNDARY",
+  "predecessor_id": "API_RUNTIME_V1",
+  "predecessor_preserved_unchanged": true,
+  "predecessor_sha256": "a6bfedc258977cdf27ecb36e7b326f69800c4897d4cacb09c796b280eebff971",
+  "predecessor_status_at_supersession": "FROZEN_ENGINEERING_INTERFACE",
+  "reason": "restore the locked PREPROC_V1 PER_WINDOW_ZSCORE_V1 normalization immediately before MODEL_V1/gateway inference in api/runtime.py::ProductionRuntime.infer, which T032 incorrectly omitted",
+  "successor_id": "API_RUNTIME_V1_1"
+}

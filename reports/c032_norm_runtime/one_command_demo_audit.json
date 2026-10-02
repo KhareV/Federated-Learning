@@ -1,0 +1,13 @@
+{
+  "backend_port": 60573,
+  "backend_ready": true,
+  "frontend_port": 60574,
+  "frontend_ready": true,
+  "lock_status": {
+    "api_runtime_v1_1": "PASS",
+    "dashboard_ui_v1_2": "PASS"
+  },
+  "recorded_replay_url": "http://127.0.0.1:60574/monitoring?mode=replay&replay=PUBLIC_ECG_REPLAY_V1&speed=0",
+  "replay_route_reachable": true,
+  "status": "PASS"
+}

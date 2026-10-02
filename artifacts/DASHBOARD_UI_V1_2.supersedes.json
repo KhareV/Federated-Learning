@@ -1,0 +1,9 @@
+{
+  "checkpoint": "C032-NORM-RUNTIME",
+  "predecessor_id": "DASHBOARD_UI_V1_1",
+  "predecessor_preserved_unchanged": true,
+  "predecessor_sha256": "39066bdaa7b54a11b1895ae659991ba441c7511d19822ad492fb744d7a903e19",
+  "predecessor_status_at_supersession": "FROZEN_ENGINEERING_INTERFACE",
+  "reason": "re-pin contracts/openapi_v1.json (regenerated after the api/schemas.py::ECGWindow docstring correction) and the new API_RUNTIME_V1_1 it documents -- no frontend source file changed",
+  "successor_id": "DASHBOARD_UI_V1_2"
+}

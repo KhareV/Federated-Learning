@@ -1,6 +1,10 @@
-"""T032 API_RUNTIME_V1 component lock: creation is reproducible, verification passes against
-the current repository state, and tampering with any bound file is detected. Mirrors the
-tamper-test style of tests/test_t029_* for GATEWAY_ARTIFACT_V1."""
+"""T032 API_RUNTIME_V1 component lock: creation is reproducible and tampering with any bound
+file is detected. Mirrors the tamper-test style of tests/test_t029_* for GATEWAY_ARTIFACT_V1.
+
+As of the C032-NORM-RUNTIME successor (API_RUNTIME_V1_1), the predecessor lock file itself
+remains preserved byte-identical even though live verify() now correctly reports drift for
+api/runtime.py and api/schemas.py, which moved to the successor (see
+tests/test_c032_lock_versioning.py for the successor's own checks)."""
 
 from __future__ import annotations
 
@@ -9,6 +13,7 @@ from pathlib import Path
 
 import pytest
 
+from nhm.hashing import hash_file
 from scripts.verify_api_runtime_t032 import verify
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,10 +34,20 @@ def test_lock_does_not_introduce_a_new_canonical_freeze_registry_id() -> None:
     assert "freeze_id" not in lock
 
 
-def test_verify_passes_against_current_repository_state() -> None:
-    result = verify()
-    assert result["status"] == "PASS"
-    assert result["bound_artifacts"] > 0
+def test_lock_file_itself_is_preserved_byte_identical_after_c032_supersession() -> None:
+    """API_RUNTIME_V1 was superseded by API_RUNTIME_V1_1 at C032-NORM-RUNTIME: the
+    predecessor LOCK FILE must never be mutated in place, even though api/runtime.py and
+    api/schemas.py (files it bound) have since legitimately moved on to the successor."""
+    expected_sha = "a6bfedc258977cdf27ecb36e7b326f69800c4897d4cacb09c796b280eebff971"
+    assert hash_file(LOCK_PATH) == expected_sha
+
+
+def test_verify_now_correctly_reports_the_expected_post_supersession_drift() -> None:
+    """A component that has moved to its successor must make the PREDECESSOR's own live-state
+    verify() fail -- silently continuing to pass here would mean the "tamper" check is not
+    actually sensitive to real file changes."""
+    with pytest.raises(RuntimeError, match="API_RUNTIME_V1_TAMPER"):
+        verify()
 
 
 def test_verify_detects_tamper_on_any_bound_file(tmp_path, monkeypatch) -> None:

@@ -1,0 +1,10 @@
+{
+  "checkpoint": "C032-NORM-RUNTIME",
+  "predecessor_id": "E2E_REPLAY_SOFTWARE_V1_1",
+  "predecessor_preserved_unchanged": true,
+  "predecessor_public_semantic_digest_preserved_historically": "e3f8607617d3fc7cce7be58752340047d120815653cce36acfac5e8b8bc099b3",
+  "predecessor_sha256": "ff97c4d9b60d9695f1bc9bfc7a11a1629110a4274353f6071c468a565f3eee8d",
+  "predecessor_status_at_supersession": "FROZEN_ENGINEERING_INTEGRATION",
+  "reason": "re-run the deterministic public/sim software replay through the corrected API_RUNTIME_V1_1 (restores PREPROC_V1 PER_WINDOW_ZSCORE_V1 normalization before MODEL_V1/gateway inference); the predecessor's recorded digest reflected the defective unnormalized runtime and is preserved historically, not reproduced",
+  "successor_id": "E2E_REPLAY_SOFTWARE_V1_2"
+}

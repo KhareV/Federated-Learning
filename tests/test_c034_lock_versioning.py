@@ -1,6 +1,13 @@
 """C034-UI-E2E successor-lock tests: DASHBOARD_UI_V1_1 and E2E_REPLAY_SOFTWARE_V1_1 are
 additive successors that preserve their predecessors byte-identical, never claim G21 PASS, and
-never claim a scientific/wording/contract change."""
+never claim a scientific/wording/contract change.
+
+As of the C032-NORM-RUNTIME successor (DASHBOARD_UI_V1_2), the DASHBOARD_UI_V1_1 lock FILE
+itself remains preserved byte-identical even though live verify() now correctly reports drift
+for contracts/openapi_v1.json, which moved to DASHBOARD_UI_V1_2 (see
+tests/test_c032_e2e_lock_versioning.py for the successor's own checks). E2E_REPLAY_SOFTWARE_V1_1
+binds no file that changed at C032-NORM-RUNTIME, so its own verify() is unaffected and still
+passes."""
 
 from __future__ import annotations
 
@@ -10,6 +17,7 @@ from pathlib import Path
 
 import pytest
 
+from nhm.hashing import hash_file
 from scripts.verify_dashboard_ui_c034 import verify as verify_dashboard_ui_c034
 from scripts.verify_e2e_replay_c034 import verify as verify_e2e_replay_c034
 
@@ -32,10 +40,14 @@ def test_dashboard_ui_v1_1_exists_and_preserves_predecessor() -> None:
     assert predecessor_lock["status"] == "FROZEN_ENGINEERING_INTERFACE"
 
 
-def test_dashboard_ui_v1_1_verify_passes() -> None:
-    result = verify_dashboard_ui_c034()
-    assert result["status"] == "PASS"
-    assert result["predecessor_preserved"] is True
+def test_dashboard_ui_v1_1_lock_file_preserved_byte_identical_after_c032_supersession() -> None:
+    expected_sha = "39066bdaa7b54a11b1895ae659991ba441c7511d19822ad492fb744d7a903e19"
+    assert hash_file(ROOT / "artifacts/DASHBOARD_UI_V1_1.lock.json") == expected_sha
+
+
+def test_dashboard_ui_v1_1_verify_now_correctly_reports_post_c032_drift() -> None:
+    with pytest.raises(RuntimeError, match="DASHBOARD_UI_V1_1_TAMPER"):
+        verify_dashboard_ui_c034()
 
 
 def test_e2e_replay_software_v1_1_exists_and_never_claims_g21_pass() -> None:
