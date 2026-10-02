@@ -1,0 +1,59 @@
+{
+  "note": "Answered from TRAIN-OOF evidence only (V2-002 MODEL_V1_CV_REFERENCE_V1, V2-003 RF-ALL and per-variant comparison, this checkpoint's own LOO-AUPRC and threshold-region computations). No architecture change is implied or permitted by this checkpoint.",
+  "H_RHYTHM": {
+    "question": "Does RF performance/error structure support the proposition that rhythm/RR information is important?",
+    "verdict": "SUPPORTED",
+    "supporting_numbers": {
+      "RF_pooled_OOF_AUPRC_RR_alone": 0.713140103147974,
+      "RF_pooled_OOF_AUPRC_ALL_29": 0.605530307984657,
+      "RF_pooled_OOF_AUPRC_STAT_alone": 0.4397412547583662,
+      "RF_pooled_OOF_AUPRC_QRS_alone": 0.5386305475769498,
+      "grouped_permutation_mean_delta_AUPRC_RR": -0.17780623355058284,
+      "grouped_permutation_mean_delta_AUPRC_STAT": -0.10660779319999067,
+      "grouped_permutation_mean_delta_AUPRC_QRS": -0.03234789447230676
+    },
+    "reasoning": "RR alone (9 features) achieves higher pooled OOF RF AUPRC than the full 29-feature ALL set, and permuting RR causes the largest mean AUPRC drop of the three feature groups (nearly double STAT's and more than 5x QRS's). Both independent lines of TRAIN-OOF evidence (ablation and permutation) agree."
+  },
+  "H_MORPH": {
+    "question": "Does morphology/QRS information appear independently informative?",
+    "verdict": "MIXED",
+    "supporting_numbers": {
+      "RF_pooled_OOF_AUPRC_QRS_alone": 0.5386305475769498,
+      "RF_pooled_OOF_AUPRC_STAT_alone": 0.4397412547583662,
+      "grouped_permutation_mean_delta_AUPRC_QRS": -0.03234789447230676,
+      "QRS_better_than_STAT_alone": true,
+      "QRS_is_weakest_permutation_effect_of_the_three_groups": true
+    },
+    "reasoning": "QRS alone outperforms STAT alone (0.539 vs 0.440), indicating some independent discriminative content. But QRS's grouped-permutation effect is the smallest of the three groups (-0.032, versus -0.178 for RR and -0.107 for STAT), and QRS alone is well below RR alone. The two lines of evidence agree QRS carries real but comparatively weak independent information -- neither clearly SUPPORTED nor NOT_SUPPORTED on its own."
+  },
+  "H_PATIENT": {
+    "question": "Is performance strongly dominated by a small subset of patient groups?",
+    "verdict": "NOT_SUPPORTED",
+    "supporting_numbers": {
+      "MODEL_V1_n_patients": 27,
+      "MODEL_V1_max_abs_contribution_delta_seed_averaged": 0.06109466360290159,
+      "MODEL_V1_median_abs_contribution_delta": 0.008198742108004328,
+      "MODEL_V1_top3_of27_share_of_total_abs_delta": 0.3438227733429116,
+      "RF_ALL_n_patients": 27,
+      "RF_ALL_max_abs_contribution_delta": 0.07500487800896072,
+      "RF_ALL_median_abs_contribution_delta": 0.005249275046116386,
+      "RF_ALL_top3_of27_share_of_total_abs_delta": 0.47096436323375984
+    },
+    "reasoning": "For both models, individual single-patient LOO-AUPRC contribution deltas are small in absolute magnitude (max ~0.06-0.08 out of pooled AUPRC values of ~0.41-0.71) and the median absolute delta is an order of magnitude smaller than the max. The top-3-of-27 patients account for roughly a third (MODEL_V1) to under half (RF_ALL) of total absolute contribution mass -- a meaningful but not overwhelming concentration; the remaining 24 patients collectively still account for the majority. This does not meet a strong-domination bar: no single or small handful of patients drives the pooled result to the exclusion of the broader population.",
+      "caveat": "RF_ALL's concentration (47%) is notably higher than MODEL_V1's (34%); this directional difference is reported descriptively, not elevated to a stronger verdict."
+  },
+  "H_THRESHOLD": {
+    "question": "Are most V1 errors concentrated near a decision threshold, or are they predominantly ranking/representation errors farther away?",
+    "verdict": "SUPPORTED",
+    "supporting_numbers": {
+      "claim": "predominantly ranking/representation errors farther away from threshold",
+      "MODEL_V1_ALL_errors_near_fraction_seed_20260927": 0.09570188439551133,
+      "MODEL_V1_ALL_errors_near_fraction_seed_20260928": 0.07703194500606551,
+      "MODEL_V1_ALL_errors_near_fraction_seed_20260929": 0.22857778766970843,
+      "MODEL_V1_ALL_errors_near_fraction_mean_across_seeds": 0.13377053902376175,
+      "near_threshold_window": "abs(probability - threshold) <= 0.05",
+      "RF_ALL_ALL_errors_near_fraction_for_comparison_only": 0.1834298118668596
+    },
+    "reasoning": "Across all three MODEL_V1 TRAIN-OOF seeds, only 8-23% (mean ~13%) of total classification errors fall within the near-threshold band; the remaining 77-92% of errors are probability-ranking errors away from the decision boundary. This supports the 'predominantly ranking/representation errors farther away' framing over the 'most errors concentrated near threshold' framing."
+  }
+}

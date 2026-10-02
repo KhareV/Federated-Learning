@@ -1,0 +1,55 @@
+{
+  "decision_eligible": false,
+  "historical_context_only": true,
+  "purpose": "Compare whether TRAIN-OOF diagnostic patterns qualitatively recur in the already-consumed historical VALIDATION evidence. Never resolves a disagreement by changing V2-004; never cherry-picked.",
+  "pooled_scalar_metrics": {
+    "MODEL_V1": {
+      "20260927": {"AUPRC": 0.5328607838787021, "AUROC": 0.7669923699782},
+      "20260928": {"AUPRC": 0.4794350072114173, "AUROC": 0.7192476830721979},
+      "20260929": {"AUPRC": 0.4825433837968652, "AUROC": 0.74443923903822},
+      "three_seed_mean_AUPRC": 0.4982797249623282,
+      "source": "reports/t015/seeds/{seed}.json best_validation_metrics (pooled, raw probability, threshold-free AUPRC/AUROC)"
+    },
+    "RF": {
+      "AUPRC": 0.799672173430413,
+      "AUROC": 0.8835166561067022,
+      "source": "reports/baselines/baseline_report.json random_forest.VALIDATION_metrics"
+    },
+    "LOGISTIC": {
+      "AUPRC": 0.6458789355593425,
+      "AUROC": 0.8427831591834105,
+      "source": "reports/baselines/baseline_report.json logistic.VALIDATION_metrics"
+    }
+  },
+  "train_oof_comparison_point": {
+    "MODEL_V1_three_seed_mean_AUPRC": 0.4138882608052527,
+    "RF_ALL_pooled_OOF_AUPRC": 0.605530307984657
+  },
+  "qualitative_pattern_recurrence": {
+    "question": "Does RF outperform MODEL_V1 on pooled AUPRC in both strata?",
+    "TRAIN_OOF": {"RF_minus_MODEL_V1": 0.1916420471794043, "RF_greater": true},
+    "VALIDATION": {"RF_minus_MODEL_V1": 0.3013924484680848, "RF_greater": true},
+    "pattern_recurs_qualitatively": true,
+    "note": "Reported as a qualitative direction match only; the two strata use different populations, different thresholds (VALIDATION metrics are NOT threshold-free for the F1-family fields, only AUPRC/AUROC are threshold-free and compared here), and no magnitude-level claim is made."
+  },
+  "patient_composition_available": {
+    "note": "Patient/class-composition structural tables ARE available for VALIDATION from frozen metadata alone (no predictions required) -- see patient_composition_validation.csv and class_composition_validation.csv.",
+    "validation_patient_count": 7,
+    "validation_window_count": 2880
+  },
+  "unavailable_per_window_diagnostics": {
+    "status": "MISSING_FROZEN_SOURCE",
+    "not_regenerated_by_new_inference": true,
+    "affected": [
+      "score_distributions.csv (VALIDATION rows)",
+      "threshold_region_errors.csv (VALIDATION rows)",
+      "patient_loo_auprc.csv (VALIDATION rows -- not produced at all)",
+      "patient_brier.csv (VALIDATION rows, placeholder only)",
+      "class_composition_validation.csv (mean_score/median_score/sensitivity/FN_rate columns)"
+    ],
+    "reason": "No comprehensive per-window MODEL_V1 or RF VALIDATION prediction artifact exists as a frozen artifact; see source_artifact_inventory.json missing_components and configs/model_v2/d0_6_diagnostic_reconstruction_v1.yaml missing_frozen_sources."
+  },
+  "disagreement_resolution_policy": "Any disagreement between TRAIN-OOF and historical VALIDATION patterns would be reported as-is; none was found above (the RF>MODEL_V1 direction recurs). No V2-004 architecture, hyperparameter, or search-rule change is made or implied by this file.",
+  "cherry_picking_performed": false,
+  "status": "PASS_WITH_DOCUMENTED_GAPS"
+}

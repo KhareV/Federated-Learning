@@ -1,0 +1,39 @@
+{
+  "ruff_check_full_repo": "PASS",
+  "targeted_pre_result_tests": {
+    "file": "tests/test_c_v2_d0_6_config.py",
+    "collected": 32,
+    "passed": 32,
+    "failed": 0
+  },
+  "targeted_post_result_tests": {
+    "file": "tests/test_c_v2_d0_6_results.py",
+    "collected": 15,
+    "passed": 15,
+    "failed": 0
+  },
+  "full_pytest": {
+    "passed": 1338,
+    "failed": 0,
+    "warnings": 12
+  },
+  "pip_check": "No broken requirements found.",
+  "coverage_notes": {
+    "source_artifact_allowlist": "covered (test_allowed_path_passes, test_unlisted_path_rejected)",
+    "no_raw_waveform_access": "covered (test_raw_waveform_cache_manifest_rejected)",
+    "no_forbidden_partition_access": "covered (test_forbidden_partition_predictions_rejected x4)",
+    "no_model_fitting": "covered (test_diagnostics_module_has_no_fit_calls, test_lib_module_never_imports_torch_or_sklearn_models)",
+    "no_threshold_fitting_on_historical_validation": "covered (test_no_threshold_fitting_permitted_for_validation, design_firewall_attestation.json)",
+    "train_oof_threshold_tie_rule": "covered (test_diagnostic_threshold_picks_highest_among_tied_max_f1)",
+    "class_slice_closure": "covered (test_class_composition_reused_exactly_mutually_exclusive_and_exhaustive, test_class_composition_positive_support_sums_to_3557)",
+    "participant_group_conservation": "covered (test_train_window_manifest_matches_oof_example_ids, test_validation_window_manifest_eligible_count)",
+    "loo_auprc_formula": "covered (test_loo_auprc_formula_matches_definition)",
+    "single_class_patient_handling": "covered (test_patient_brier_handles_single_class_patient)",
+    "raw_vs_calibrated_probability_separation": "covered (test_cal_v1_threshold_is_the_calibrated_threshold_not_raw)",
+    "historical_validation_decision_eligible_false": "covered (test_validation_context_config_marks_decision_ineligible, test_historical_validation_context_decision_ineligible)",
+    "architecture_protocol_lock_immutability": "covered (test_architecture_parameter_counts_unchanged, test_protocol_lock_hash_unchanged)",
+    "registry_csv_parsing": "covered (test_registries_parse_consistently)",
+    "run_manifest_validation": "covered (test_model_v2_run_manifest_schema_exists_and_is_valid_json; real manifest validated at write time via validate_model_v2_run_manifest)"
+  },
+  "status": "PASS"
+}

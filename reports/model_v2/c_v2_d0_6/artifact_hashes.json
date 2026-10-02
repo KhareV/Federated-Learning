@@ -1,0 +1,28 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "configs/model_v2/d0_6_diagnostic_reconstruction_v1.yaml": "cc7e9dfa1d63dc67d72959b0d2729ac0803bab3d2a864d7cf76a4f34b5ed10c5",
+    "reports/model_v2/c_v2_d0_6/class_composition_train_oof.csv": "d1f4a95af5293a2ea935054fb3914501acc5749d0c79f27d29756f72e2a2f58c",
+    "reports/model_v2/c_v2_d0_6/class_composition_validation.csv": "6c9d56395eb3b054a7b65a3187aecbef84b1dcbaba646c78730e270ee9d66ff9",
+    "reports/model_v2/c_v2_d0_6/d0_exit_audit.json": "55eb56ae10a5706093b62009d584c30e28f4ebde2b1987fae4d360cce47ee2c4",
+    "reports/model_v2/c_v2_d0_6/design_firewall_attestation.json": "ea9b191c7763ecfdc14f8aad387bdb331290048a61ee9f09d5133d9515a357eb",
+    "reports/model_v2/c_v2_d0_6/diagnostic_thresholds.json": "786ec2a7c9a3cd8f244b59cd7ac4842be9224407fe6f52731da989ee59840cd0",
+    "reports/model_v2/c_v2_d0_6/entry_audit.json": "ed0952503b8aedfbfa21cf8fa91a48bfd8530f0ef5b66f1258c0d86962de1eef",
+    "reports/model_v2/c_v2_d0_6/historical_validation_context.json": "d16722f3b54cce2a74cf65d333c4a71cecae120b43b2170b0f2a46893d5b4690",
+    "reports/model_v2/c_v2_d0_6/method_commit_attestation.json": "da70696d627158dd248530c74101d4879396328a0e93b71a9ab58b02996032c9",
+    "reports/model_v2/c_v2_d0_6/method_freeze.json": "2393304e4a21c0b24bc8f0eef1527ed3e4461bb137a9cd4750d801c9917e39a1",
+    "reports/model_v2/c_v2_d0_6/patient_brier.csv": "ba2788ba5a896630a98e24b586ac4bb9224b1c3495c4b30085a7eb108cd3a030",
+    "reports/model_v2/c_v2_d0_6/patient_composition_train_oof.csv": "6f1b94ace6c7b94e84306d456696eb11a50941bb68c7e717af8973a01d066808",
+    "reports/model_v2/c_v2_d0_6/patient_composition_validation.csv": "d511b7e666d680a48d1a63018b1a50cc45ed97049e413c49a91195585fa8f069",
+    "reports/model_v2/c_v2_d0_6/patient_loo_auprc.csv": "a8727d31ad83fdfdf552b5b76d735f57fa7894d4d260aab1e0e7ee50d93280cf",
+    "reports/model_v2/c_v2_d0_6/run_manifest.json": "7891fdd7f87a01d302b88150dfa1da694cd403b8524d5163d2c8460605057bdd",
+    "reports/model_v2/c_v2_d0_6/scope_access_audit.json": "228ee59bf4ca6054c15f3f9f3e773264a7bc9ea203c78e1635e38019ecf4f306",
+    "reports/model_v2/c_v2_d0_6/scope_access_ledger.jsonl": "07163c62dc297b81befa07cc7e8fcbd98743bd68999fca260025d22ce06a522f",
+    "reports/model_v2/c_v2_d0_6/score_distributions.csv": "dd875a22926a343b7932b96f5c0e256298d8ec98c0045fe84d817fd2e6649524",
+    "reports/model_v2/c_v2_d0_6/source_artifact_inventory.json": "c963ee4b5553251c0048479350f94079244221050563273f2c2b082234f07ab1",
+    "reports/model_v2/c_v2_d0_6/test_results.json": "140c0875b8cc5d1da3cc675143885bfe5e12120cb27e3d3eaa9d25d74c61f523",
+    "reports/model_v2/c_v2_d0_6/threshold_region_errors.csv": "ea1eae58d123618e9d4e44f2228e935fbe794a4d6de2f9c822c9c008daf1e675",
+    "reports/model_v2/c_v2_d0_6/train_oof_hypothesis_audit.json": "00e1c74c00dc415b3d87ee4a9584b7cf27c46256c590ea0631aeb44a81a8bbf0"
+  },
+  "manifest_version": "1.0"
+}

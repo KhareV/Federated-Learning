@@ -1,0 +1,73 @@
+{
+  "hard_data_firewall": {
+    "mechanism": "src/nhm/model_v2_d0_6_guard.py per-path allowlist + forbidden-substring denylist",
+    "raw_ecg_waveform_opened": false,
+    "new_model_v1_inference_on_validation": false,
+    "new_rf_inference_on_validation": false,
+    "new_feature_extraction_from_validation_waveform": false,
+    "calibration_patient_rows_opened": false,
+    "internal_test_opened": false,
+    "incart_opened": false,
+    "nstdb_opened": false,
+    "bidmc_opened": false,
+    "hardware_wearable_data_opened": false,
+    "external_dataset_opened": false,
+    "partition_guard_weakened": false,
+    "status": "PASS"
+  },
+  "scope_access_ledger_summary": {
+    "total_rows": 12,
+    "distinct_paths_accessed": 10,
+    "strata_seen": [
+      "TRAIN_OOF_DECISION_ELIGIBLE", "HISTORICAL_VALIDATION_CONTEXT_ONLY", "METADATA_SCALAR"
+    ],
+    "paths_accessed": [
+      "artifacts/CAL_V1.json",
+      "configs/baseline_v1.yaml",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1/TRAIN_features.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1/VALIDATION_features.npy",
+      "manifests/features/MITDB_BASELINE_FEATURES_V1.csv",
+      "manifests/windows/MITDB_WINDOWS_V1.csv",
+      "reports/model_v2/v2_002/oof_predictions.csv",
+      "reports/model_v2/v2_003/oof_predictions.csv",
+      "reports/model_v2/v2_003/oof_metrics.json",
+      "reports/model_v2/v2_003/grouped_permutation_summary.json"
+    ],
+    "all_paths_on_allowlist": true,
+    "no_forbidden_substring_matches": true,
+    "note": "2 legitimate reads (V2-003 oof_metrics.json, grouped_permutation_summary.json) were initially performed via a direct file read outside the gated loader during interactive hypothesis-evidence gathering; both were re-read through scripts._d0_6_lib's gated loaders before this attestation to ensure the ledger is a complete and honest record of every source this checkpoint used. No content differs between the two reads (same file, same hash) -- this was a provenance-logging completeness fix, not a scope violation."
+  },
+  "interpretation_firewall": {
+    "source": "configs/model_v2/d0_6_diagnostic_reconstruction_v1.yaml interpretation_firewall",
+    "train_oof_decision_eligible": true,
+    "historical_validation_decision_eligible": false,
+    "every_historical_validation_context_output_marks_decision_eligible_false": true,
+    "v2_architecture_changed": false,
+    "candidate_count_changed": false,
+    "pooling_changed": false,
+    "receptive_field_changed": false,
+    "new_features_introduced": false,
+    "loss_changed": false,
+    "sampling_changed": false,
+    "augmentation_changed": false,
+    "optimizer_changed": false,
+    "threshold_set_for_future_use": false,
+    "model_selected": false,
+    "new_search_branch_triggered": false,
+    "status": "PASS"
+  },
+  "no_model_training": {
+    "cnn_fitting": false,
+    "tcn_fitting": false,
+    "rf_fitting": false,
+    "lr_fitting": false,
+    "feature_selection": false,
+    "hyperparameter_fitting": false,
+    "calibration_fitting": false,
+    "threshold_optimisation_for_future_use": false,
+    "v2_neural_fits_added": 0,
+    "neural_search_budget_unchanged": true,
+    "status": "PASS"
+  },
+  "status": "PASS"
+}

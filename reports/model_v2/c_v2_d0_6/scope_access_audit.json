@@ -1,0 +1,29 @@
+{
+  "ledger_path": "reports/model_v2/c_v2_d0_6/scope_access_ledger.jsonl",
+  "total_rows": 28,
+  "total_rows_note": "Grows each time the pytest suite re-exercises the gated loaders (the test files legitimately call the same allowlisted loaders); the stable invariant is the distinct-path SET below, which does not grow.",
+  "distinct_paths_accessed": 10,
+  "strata_seen": [
+    "TRAIN_OOF_DECISION_ELIGIBLE",
+    "HISTORICAL_VALIDATION_CONTEXT_ONLY",
+    "METADATA_SCALAR"
+  ],
+  "paths_accessed": [
+    "artifacts/CAL_V1.json",
+    "configs/baseline_v1.yaml",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1/TRAIN_features.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/BASELINE_FEATURES_V1/VALIDATION_features.npy",
+    "manifests/features/MITDB_BASELINE_FEATURES_V1.csv",
+    "manifests/windows/MITDB_WINDOWS_V1.csv",
+    "reports/model_v2/v2_002/oof_predictions.csv",
+    "reports/model_v2/v2_003/oof_predictions.csv",
+    "reports/model_v2/v2_003/oof_metrics.json",
+    "reports/model_v2/v2_003/grouped_permutation_summary.json"
+  ],
+  "all_paths_on_allowlist": true,
+  "no_forbidden_substring_matches": true,
+  "raw_waveform_cache_accessed": false,
+  "forbidden_partition_predictions_accessed": false,
+  "cross_check": "every row's relative_path verified in nhm.model_v2_d0_6_guard.known_allowed_paths() by tests/test_c_v2_d0_6_results.py::test_scope_access_ledger_only_allowed_paths",
+  "status": "PASS"
+}

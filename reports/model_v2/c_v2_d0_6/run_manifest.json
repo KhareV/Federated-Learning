@@ -1,0 +1,48 @@
+{
+  "config_path": "configs/model_v2/d0_6_diagnostic_reconstruction_v1.yaml",
+  "config_sha256": "cc7e9dfa1d63dc67d72959b0d2729ac0803bab3d2a864d7cf76a4f34b5ed10c5",
+  "corrective_checkpoint": "C-V2-D0.6",
+  "created_at_utc": "2026-10-02T19:46:58.333111Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "fff5f166f46fd266a3149334ace518536fae73e7",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "reports/model_v2/v2_002/oof_predictions.csv",
+      "sha256": "1b4100d10dda0c25dd488a233835c1db46200fa6f0ca7c2c93b87b92be9983e4"
+    },
+    {
+      "path": "reports/model_v2/v2_003/oof_predictions.csv",
+      "sha256": "45b4523dca6af338f678017958a56705a6a83e2fe216fb498d5eb33ef782ca78"
+    },
+    {
+      "path": "manifests/windows/MITDB_WINDOWS_V1.csv",
+      "sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "C-V2-D0.6: development-diagnostic reconstruction closing the omitted D0.6 prerequisite before D0 exit and V2-004. Not a training phase, not V2-004.",
+  "output_artifacts": [
+    {
+      "path": "reports/model_v2/c_v2_d0_6/train_oof_hypothesis_audit.json",
+      "sha256": "00e1c74c00dc415b3d87ee4a9584b7cf27c46256c590ea0631aeb44a81a8bbf0"
+    },
+    {
+      "path": "reports/model_v2/c_v2_d0_6/historical_validation_context.json",
+      "sha256": "d16722f3b54cce2a74cf65d333c4a71cecae120b43b2170b0f2a46893d5b4690"
+    },
+    {
+      "path": "reports/model_v2/c_v2_d0_6/d0_exit_audit.json",
+      "sha256": "55eb56ae10a5706093b62009d584c30e28f4ebde2b1987fae4d360cce47ee2c4"
+    }
+  ],
+  "phase_id": "V2-001",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "c-v2-d0-6-diagnostic-reconstruction",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "V2-001"
+}

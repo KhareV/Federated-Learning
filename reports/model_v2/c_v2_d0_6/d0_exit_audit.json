@@ -1,0 +1,73 @@
+{
+  "D0_1": {
+    "name": "TRAIN-CV freeze",
+    "artifact": "MITDB_TRAIN_CV_V2_V1",
+    "path": "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+    "sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+    "owner_task": "V2-001",
+    "frozen": true,
+    "complete": true
+  },
+  "D0_2": {
+    "name": "inner-validation freeze",
+    "artifact": "MITDB_TRAIN_INNER_V2_V1",
+    "path": "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv",
+    "sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+    "owner_task": "V2-001",
+    "frozen": true,
+    "complete": true
+  },
+  "D0_3": {
+    "name": "matched MODEL_V1 CV reference",
+    "artifact": "MODEL_V1_CV_REFERENCE_V1",
+    "path": "manifests/model_v2/MODEL_V1_CV_REFERENCE_V1.lock.json",
+    "sha256": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+    "owner_task": "V2-002",
+    "frozen": true,
+    "complete": true
+  },
+  "D0_4": {
+    "name": "historical training/code audit",
+    "artifact": "source_conflict_audit / upstream_immutability (V2-001 / C-V2-001-VERIFY)",
+    "path": "reports/model_v2/cv2_001_verify/",
+    "owner_task": "V2-001",
+    "frozen": true,
+    "complete": true
+  },
+  "D0_5": {
+    "name": "classical feature-information audit",
+    "artifact": "MODEL_V2_FEATURE_AUDIT_V1",
+    "path": "manifests/model_v2/MODEL_V2_FEATURE_AUDIT_V1.lock.json",
+    "sha256": "a6876430dcad040b7008a69200fb4a36d735ad9a58d834c46d66d5543609623b",
+    "owner_task": "V2-003",
+    "frozen": true,
+    "complete": true
+  },
+  "D0_6": {
+    "name": "development-diagnostic reconstruction",
+    "artifact": "this checkpoint (C-V2-D0.6)",
+    "owner_task": "C-V2-D0.6",
+    "complete": true,
+    "evidence": [
+      "patient_composition_train_oof.csv (27 patients)",
+      "patient_composition_validation.csv (7 patients)",
+      "class_composition_train_oof.csv (20 rows, 4 slices x 5)",
+      "class_composition_validation.csv (4 rows, metadata-only)",
+      "score_distributions.csv (8 available + 4 documented-missing rows)",
+      "diagnostic_thresholds.json",
+      "threshold_region_errors.csv (4 available + 2 documented-missing rows)",
+      "patient_loo_auprc.csv (108 rows)",
+      "patient_brier.csv (108 available + 14 documented-missing rows)",
+      "train_oof_hypothesis_audit.json (H-RHYTHM, H-MORPH, H-PATIENT, H-THRESHOLD)",
+      "historical_validation_context.json (decision_eligible=false throughout)",
+      "design_firewall_attestation.json"
+    ],
+    "documented_gaps": [
+      "MODEL_V1_PER_WINDOW_VALIDATION_PREDICTIONS (MISSING_FROZEN_SOURCE, not regenerated)",
+      "RF_PER_WINDOW_VALIDATION_PREDICTIONS (MISSING_FROZEN_SOURCE, not regenerated)"
+    ],
+    "gaps_block_mandatory_questions": false,
+    "mandatory_hypothesis_audit_fully_answered_from_train_oof": true
+  },
+  "D0_EXIT": "PASS"
+}
