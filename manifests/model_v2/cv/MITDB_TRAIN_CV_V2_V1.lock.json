@@ -1,0 +1,104 @@
+{
+  "algorithm": "EXACT_GREEDY_MIN_SQUARED_DEVIATION_WITH_PAIR_SWAP_REFINEMENT_V1",
+  "change_control": "This manifest is never regenerated based on future V2 results. Any change requires a new, additive MITDB_TRAIN_CV_V2_V2 successor.",
+  "final_objective": 0.10403533810920561,
+  "fold_capacities": [
+    6,
+    6,
+    5,
+    5,
+    5
+  ],
+  "fold_summary": [
+    {
+      "capacity": 6,
+      "eligible_windows": 2147,
+      "fold": 0,
+      "members": [
+        "MITDB_P105",
+        "MITDB_P124",
+        "MITDB_P203",
+        "MITDB_P209",
+        "MITDB_P212",
+        "MITDB_P222"
+      ],
+      "negative_windows": 1376,
+      "patient_groups": 6,
+      "positive_windows": 771
+    },
+    {
+      "capacity": 6,
+      "eligible_windows": 2119,
+      "fold": 1,
+      "members": [
+        "MITDB_P101",
+        "MITDB_P118",
+        "MITDB_P119",
+        "MITDB_P122",
+        "MITDB_P207",
+        "MITDB_P210"
+      ],
+      "negative_windows": 1357,
+      "patient_groups": 6,
+      "positive_windows": 762
+    },
+    {
+      "capacity": 5,
+      "eligible_windows": 1798,
+      "fold": 2,
+      "members": [
+        "MITDB_P111",
+        "MITDB_P113",
+        "MITDB_P215",
+        "MITDB_P220",
+        "MITDB_P232"
+      ],
+      "negative_windows": 1123,
+      "patient_groups": 5,
+      "positive_windows": 675
+    },
+    {
+      "capacity": 5,
+      "eligible_windows": 1796,
+      "fold": 3,
+      "members": [
+        "MITDB_P103",
+        "MITDB_P114",
+        "MITDB_P121",
+        "MITDB_P208",
+        "MITDB_P223"
+      ],
+      "negative_windows": 1124,
+      "patient_groups": 5,
+      "positive_windows": 672
+    },
+    {
+      "capacity": 5,
+      "eligible_windows": 1800,
+      "fold": 4,
+      "members": [
+        "MITDB_P117",
+        "MITDB_P205",
+        "MITDB_P221",
+        "MITDB_P228",
+        "MITDB_P230"
+      ],
+      "negative_windows": 1123,
+      "patient_groups": 5,
+      "positive_windows": 677
+    }
+  ],
+  "initial_objective": 0.1484986544936152,
+  "manifest_id": "MITDB_TRAIN_CV_V2_V1",
+  "manifest_path": "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+  "manifest_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+  "owner_task": "V2-001",
+  "partition": "TRAIN",
+  "source_manifest": "manifests/windows/MITDB_WINDOWS_V1.csv",
+  "source_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a",
+  "status": "FROZEN_CV_MANIFEST",
+  "total_eligible_windows": 9660,
+  "total_negative_windows": 6103,
+  "total_patient_groups": 27,
+  "total_positive_windows": 3557
+}
