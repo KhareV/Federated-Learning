@@ -33,10 +33,13 @@ STAGE_ALLOWED_ROLES: dict[str, frozenset[str]] = {
     "V2-002_OUTER_EVAL": frozenset({"OUTER_TEST"}),
     "V2-003_FIT": frozenset({"OPTIMISE"}),
     "V2-003_EVAL": frozenset({"OUTER_TEST"}),
+    "V2-004_TRAIN_SELECT": frozenset({"OPTIMISE", "INNER_VALIDATION"}),
+    "V2-004_OUTER_EVAL": frozenset({"OUTER_TEST"}),
 }
 
 LEDGER_RELATIVE_PATH = "reports/model_v2/v2_002/cv_role_access_ledger.jsonl"
 V2_003_LEDGER_RELATIVE_PATH = "reports/model_v2/v2_003/feature_access_ledger.jsonl"
+V2_004_LEDGER_RELATIVE_PATH = "reports/model_v2/v2_004/cv_role_access_ledger.jsonl"
 
 
 class CVRoleAccessViolation(PermissionError):
@@ -154,4 +157,42 @@ def record_feature_access(
             "git_sha": _git_sha(root),
         },
         ledger_relative_path=V2_003_LEDGER_RELATIVE_PATH,
+    )
+
+
+def record_v2_004_cv_role_access(
+    root: Path,
+    *,
+    task_id: str,
+    stage_id: str,
+    architecture_id: str,
+    seed: int,
+    outer_fold: int,
+    role: str,
+    access_purpose: str,
+    participant_group_ids: Collection[str],
+    example_id_count: int,
+    checkpoint_finalized: bool,
+) -> None:
+    """Append one row to the V2-004 CV-role access ledger (reports/model_v2/v2_004/
+    cv_role_access_ledger.jsonl). Call only AFTER check_cv_role_allowed has not raised, and
+    after the waveform read has actually happened. Adds architecture_id/checkpoint_finalized
+    to the row, required by V2-004 Section 8 (D1/D2 span three architectures, not one)."""
+    _append_ledger(
+        root,
+        {
+            "timestamp_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+            "task_id": task_id,
+            "stage_id": stage_id,
+            "architecture_id": architecture_id,
+            "seed": seed,
+            "outer_fold": outer_fold,
+            "role": role,
+            "access_purpose": access_purpose,
+            "participant_group_ids": sorted(participant_group_ids),
+            "example_id_count": example_id_count,
+            "checkpoint_finalized": checkpoint_finalized,
+            "git_sha": _git_sha(root),
+        },
+        ledger_relative_path=V2_004_LEDGER_RELATIVE_PATH,
     )

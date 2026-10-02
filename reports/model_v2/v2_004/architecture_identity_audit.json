@@ -1,0 +1,22 @@
+{
+  "expected": {
+    "MODEL_V2_CAPCTRL": 51969,
+    "MODEL_V2_TCN_MEAN": 57553,
+    "MODEL_V2_TCN_MEANMAX": 57577
+  },
+  "expected_tcn_receptive_field_samples": 3063,
+  "fourth_architecture_created": false,
+  "legacy_alias_resolution": {
+    "prose_name": "MODEL_V2_TCN_GAP",
+    "resolves_to": "MODEL_V2_TCN_MEAN",
+    "verified_in": "C-V2-PRE004-CONTROL architecture_identity_audit.json"
+  },
+  "source_sha256": "2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0",
+  "status": "PASS",
+  "verified_mechanically": {
+    "MODEL_V2_CAPCTRL_parameter_count": 51969,
+    "MODEL_V2_TCN_MEANMAX_parameter_count": 57577,
+    "MODEL_V2_TCN_MEAN_parameter_count": 57553,
+    "tcn_analytic_receptive_field_samples": 3063
+  }
+}

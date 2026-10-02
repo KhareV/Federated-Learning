@@ -1,0 +1,17 @@
+{
+  "cumulative_after_d1_min": 30,
+  "cumulative_after_d2_max": 50,
+  "d1_planned_fits": 15,
+  "d2_planned_fits_range": [
+    0,
+    20
+  ],
+  "exploratory_fits_forbidden": true,
+  "global_neural_fit_cap": 100,
+  "inference_only_recomputation_excluded_from_budget": true,
+  "neural_fits_before_v2_004": 15,
+  "status": "PASS",
+  "synthetic_tests_excluded_from_budget": true,
+  "v2_004_max_never": 45,
+  "v2_004_max_total_fits": 35
+}

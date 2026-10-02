@@ -1,0 +1,42 @@
+{
+  "active_protocol_sha256": "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81",
+  "architecture_source_sha256": "2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0",
+  "bootstrap_draws_sha256": "e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071",
+  "checkpoint": "V2-004",
+  "cv_manifest_sha256": {
+    "inner": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+    "outer": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6"
+  },
+  "d1_planned_fits": 15,
+  "firewall_code_sha256": {
+    "src/nhm/model_v2_cv_role_guard.py": "835619ce8ebc69f291e6941af439971e4b30ec33167a16da5de5db8ffd9e71dd",
+    "src/nhm/model_v2_partition_guard.py": "bded6ef80bb251ea35eac6683820a91543445b74b852079e77abb60853d7456b"
+  },
+  "frozen_training_contract_config_sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc",
+  "model_v1_cv_reference_lock_sha256": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+  "note_pre_result_method_commit": "Filled in by a SEPARATE attestation commit immediately after this commit, per the required chronology (avoiding the prior null-method-commit-binding gap).",
+  "pre_freeze_integration_smoke_test": {
+    "checkpoint_saved": false,
+    "code_changed_based_on_its_numeric_output": false,
+    "cv_role_access_ledger_rows_from_smoke_test_removed_before_real_run": true,
+    "description": "Real TRAIN-only role-closure verification and fresh instantiation of all three architectures (parameter-count check only) were exercised interactively to confirm wiring before committing to the full 15-fit D1 run. No training step, no checkpoint, no scientific fit was produced.",
+    "performed": true,
+    "scientific_fit_produced": false
+  },
+  "pre_result_method_commit": null,
+  "real_results_started": false,
+  "status": "READY_FOR_REAL_RESULTS",
+  "training_source_sha256": "73cca30cdece34a1af6264100736452b56826b96511ec18bf7559a82f930c411",
+  "v2_004_code_sha256": {
+    "scripts/_v2_004_lib.py": "7c7ef403e647c40c810f5b3fd2cfb9fa1af2694084536a3ef50fb38c2250d4d2",
+    "scripts/aggregate_d1_v2004.py": "c20bb9a877ce6d9e75332d1c3d5c68c6425e62389977fab4fcbcd9f390659532",
+    "scripts/aggregate_d2_v2004.py": "542ad99fd5556527712085a0f260ed352b5075a4d78a591c0687fb2043b2b1e6",
+    "scripts/bootstrap_d1_v2004.py": "c37a98885a02329bc36dd9edef6a72b0dfbd0f479d79791fdd06dc301ae55e6c",
+    "scripts/bootstrap_d2_v2004.py": "015d48c2182ebb925159a2576634afe8feb186fa87e1396a3381ff951b10d535",
+    "scripts/decide_d1_v2004.py": "c67944e5a5b40a8a81ebc0e74c8b5c071ffd80b13b23536404278b8cd5c80653",
+    "scripts/decide_d2_v2004.py": "5525101e65edbef658903cace9628e41878ffe2e317a237e48784c53235d216b",
+    "scripts/run_v2_004_fit.py": "7f45c1e2b3975b37c49d78e97f241e4beeec2b77baead543f6d6ae11669f2fae",
+    "scripts/write_d2_not_run.py": "8b98f0c7fab139d9ac932b5184863b11e70a0933baf7a51fa8bde8e1fa5a1f82"
+  },
+  "v2_004_config_sha256": "f33f369a22bd907691e6d1f9730ccdfb413b5fb2bfcdc467f0fb5a095bb02f7e"
+}

@@ -1,0 +1,204 @@
+component_id: MODEL_V2_ARCH_CAUSALITY_V1
+owner_task: V2-004
+status: ACTIVE
+active_protocol: MODEL_V2_RESEARCH_PROTOCOL_V2
+active_protocol_lock_sha256: f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81
+architectures:
+  MODEL_V2_CAPCTRL:
+    hypothesis: H0_CAPACITY
+    expected_parameter_count: 51969
+    source_sha256: 2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0
+  MODEL_V2_TCN_MEAN:
+    hypothesis: H1_TEMPORAL_CONTEXT
+    legacy_alias: MODEL_V2_TCN_GAP
+    expected_parameter_count: 57553
+    expected_analytic_receptive_field_samples: 3063
+    receptive_field_requirement: '>=2500'
+    source_sha256: 2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0
+  MODEL_V2_TCN_MEANMAX:
+    hypothesis: H2_SPARSE_EVENT_AGGREGATION
+    expected_parameter_count: 57577
+    backbone_identical_to: MODEL_V2_TCN_MEAN
+    source_sha256: 2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0
+  fourth_architecture_forbidden: true
+  parameter_count_hard_cap: 120000
+training_source_sha256: 73cca30cdece34a1af6264100736452b56826b96511ec18bf7559a82f930c411
+v2_004_lib_sha256: 7c7ef403e647c40c810f5b3fd2cfb9fa1af2694084536a3ef50fb38c2250d4d2
+frozen_training_contract_config_sha256: f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc
+preproc_identity:
+  preproc_id: PREPROC_V1
+  target_id: AAMI_SVF_WINDOW_V1
+  map_id: AAMI_SVF_MAP_V1
+cv_manifests:
+  outer_cv_lock_sha256: cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6
+  inner_cv_lock_sha256: 24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224
+model_v1_cv_reference_v1_lock_sha256: 87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139
+bootstrap_draws_identity:
+  bootstrap_id: MODEL_V2_BOOTSTRAP_DRAWS_V1
+  bootstrap_seed: 20261002
+  replicates: 2000
+  patient_slots: 27
+  draws_sha256: e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071
+  source_path: reports/model_v2/v2_002/bootstrap_draws.npy
+  new_rng_forbidden: true
+best_reduced_rf_v1:
+  component_id: BEST_REDUCED_RF_V1
+  feature_subset: RR
+  feature_count: 9
+  pooled_train_cv_oof_auprc: 0.713140103147974
+  usage: hybrid_trigger_only_not_d1_qualification
+training_contract:
+  loss: BCEWithLogitsLoss
+  pos_weight_source: OPTIMISE_ONLY
+  optimizer: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  batch_size: 64
+  max_epochs: 50
+  selection_metric: pooled_INNER_VALIDATION_AUPRC
+  early_stopping_patience: 7
+  scheduler: ReduceLROnPlateau (exact T015 semantics, factor=0.1, patience=10)
+  augmentation_scope: OPTIMISE_ONLY
+  fresh_initialization_required: true
+  checkpoint_comparator: strict_greater_than
+d1:
+  seed: 20260927
+  outer_folds:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  architectures:
+  - MODEL_V2_CAPCTRL
+  - MODEL_V2_TCN_MEAN
+  - MODEL_V2_TCN_MEANMAX
+  total_fits: 15
+  run_order:
+  - architecture_id: MODEL_V2_CAPCTRL
+    outer_fold: 0
+    seed: 20260927
+  - architecture_id: MODEL_V2_CAPCTRL
+    outer_fold: 1
+    seed: 20260927
+  - architecture_id: MODEL_V2_CAPCTRL
+    outer_fold: 2
+    seed: 20260927
+  - architecture_id: MODEL_V2_CAPCTRL
+    outer_fold: 3
+    seed: 20260927
+  - architecture_id: MODEL_V2_CAPCTRL
+    outer_fold: 4
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEAN
+    outer_fold: 0
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEAN
+    outer_fold: 1
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEAN
+    outer_fold: 2
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEAN
+    outer_fold: 3
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEAN
+    outer_fold: 4
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEANMAX
+    outer_fold: 0
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEANMAX
+    outer_fold: 1
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEANMAX
+    outer_fold: 2
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEANMAX
+    outer_fold: 3
+    seed: 20260927
+  - architecture_id: MODEL_V2_TCN_MEANMAX
+    outer_fold: 4
+    seed: 20260927
+  hard_disqualification_rules:
+  - parameter_count_above_120000
+  - irrecoverable_non_finite_scientific_output
+  - pooled_OOF_AUROC_below_model_v1_cv_reference_three_seed_mean_AUROC
+  - oof_closure_failure
+  - role_or_partition_leakage
+  - frozen_method_violation
+  auroc_guardrail_reference: MODEL_V1_CV_REFERENCE_V1 three_seed_summary.AUROC_mean
+  auroc_guardrail_reference_value: 0.5769905535518993
+  bootstrap_comparison_reference: MODEL_V1_CV_REFERENCE_V1 seed 20260927 OOF predictions (not three-seed
+    mean)
+  bootstrap_qualification_rule: paired_95_percentile_lower_bound_of_delta_AUPRC_strictly_greater_than_0
+  one_se_rule:
+    se_source: sample_standard_deviation_of_raw_best_valid_bootstrap_AUPRC_replicates
+    cutoff_formula: raw_best_point_AUPRC - SE_raw_best
+    near_best_rule: point_AUPRC >= cutoff
+    preferred_rule: simplest_architecture_in_near_best_by_parameter_count_then_lexical_id
+    simplicity_order:
+    - MODEL_V2_CAPCTRL
+    - MODEL_V2_TCN_MEAN
+    - MODEL_V2_TCN_MEANMAX
+    max_advancing: 2
+    second_slot_rule: highest_point_AUPRC_qualified_not_already_selected
+  causal_pairs:
+    H0:
+    - MODEL_V2_CAPCTRL
+    - MODEL_V1_CV_REFERENCE_V1_seed_20260927
+    H1:
+    - MODEL_V2_TCN_MEAN
+    - MODEL_V2_CAPCTRL
+    H2:
+    - MODEL_V2_TCN_MEANMAX
+    - MODEL_V2_TCN_MEAN
+  verdict_vocabulary:
+    SUPPORTED: lower_95_CI_of_delta_AUPRC_greater_than_0
+    CONTRADICTED: upper_95_CI_of_delta_AUPRC_less_than_0
+    INCONCLUSIVE: CI_includes_0
+d2:
+  seeds:
+  - 20260928
+  - 20260929
+  seed_20260927_rule: reuse_d1_oof_never_rerun
+  max_architectures: 2
+  architectures_must_be_subset_of: d1_advancement_list
+  max_additional_fits_per_architecture: 10
+  max_additional_fits_total: 20
+  instability_rule:
+    limit_formula: 2 * MODEL_V1_CV_REFERENCE_V1.three_seed_summary.AUPRC_sample_sd
+    limit_value: 0.034951821160340735
+    metric: three_seed_OOF_AUPRC_sample_sd
+    multi_candidate_disqualifies: true
+    only_survivor_exception: true
+    only_survivor_exception_does_not_apply_to:
+    - non_finite
+    - leakage
+    - oof_failure
+    - method_violation
+hybrid_trigger:
+  formula: BEST_REDUCED_RF_V1_AUPRC - BEST_LEARNED_ONLY_V2_CV_V1_three_seed_mean_AUPRC
+  comparator: '>='
+  threshold: 0.03
+  not_evaluable_status: NOT_EVALUABLE_NEURAL_SEARCH_STOPPED
+search_budget:
+  global_neural_fit_cap: 100
+  neural_fits_before_v2_004: 15
+  d1_planned_fits: 15
+  d2_planned_fits_min: 0
+  d2_planned_fits_max: 20
+  v2_004_max_total_fits: 35
+  cumulative_max_after_v2_004: 50
+scope_restrictions:
+  train_only: true
+  forbidden_partitions:
+  - VALIDATION
+  - CALIBRATION
+  - INTERNAL_TEST
+  forbidden_datasets:
+  - INCART
+  - NSTDB
+  - BIDMC
+  hardware_out_of_scope: true
+  d0_6_historical_validation_context_may_not_change_design: true
