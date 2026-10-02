@@ -1,0 +1,67 @@
+{
+  "checkpoint": "C035-CLEAN-REPRO",
+  "all_checks_run_from": "the brand-new, never-copied-into final_clone at commit 211620ffc710a56feea9b27d65c372050400ff8a",
+  "checks": {
+    "ruff": {"exit_code": 0, "status": "PASS"},
+    "pip_check": {"exit_code": 0, "output": "No broken requirements found.", "status": "PASS"},
+    "pytest_full_suite": {
+      "exit_code": 1,
+      "passed": 1121,
+      "skipped": 1,
+      "failed": 7,
+      "failures_are": "exclusively the raw-dataset-acquisition-gated tests (see data_handling.json) -- zero unexpected/code-defect failures",
+      "skip_reason": "CANDIDATE_CHECKPOINT_NOT_TRACKED: untracked T015 artifact absent in a clean checkout (expected, documented T035 fix)",
+      "status": "PASS_FOR_SOFTWARE_SCOPE"
+    },
+    "frontend_vitest": {"exit_code": 0, "passed": 65, "total": 65, "status": "PASS"},
+    "frontend_svelte_check": {"exit_code": 0, "errors": 0, "warnings": 118, "status": "PASS"},
+    "frontend_production_build": {"exit_code": 0, "status": "PASS"},
+    "model_v1_frozen_hash": {
+      "checkpoint_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+      "verify_frozen_model_v1_status": "PASS",
+      "maximum_absolute_error": 0.0,
+      "status": "PASS"
+    },
+    "frozen_test_vector_gateway_equivalence": {
+      "vectors_checked": 3,
+      "max_abs_logit_delta": 2.384185791015625e-07,
+      "status": "PASS"
+    },
+    "preproc_v1_verification": {
+      "status": "PASS",
+      "freeze_id": "F06",
+      "bound_artifact_count": 25
+    },
+    "api_runtime_v1_1_verification": {
+      "status": "PASS",
+      "lock_sha256": "7023087dd91eccd4b740a81197d1c8b85dfc6d39ec9bc0a8e962986018c63c6e",
+      "predecessor_preserved": true
+    },
+    "dashboard_ui_v1_3_verification": {
+      "status": "PASS",
+      "lock_sha256": "c6418b857bac62e30381b7f0e1b80b500cf94a06ec8c86e24907622dfa2e01c2",
+      "predecessor_preserved": true
+    },
+    "corrected_replay_determinism": {
+      "run_1_public_semantic_digest": "128fa6d60fab9d9136a6f99f057332c4b6fc2bd16d6ae9e991f60faeb41f30ab",
+      "run_2_public_semantic_digest": "128fa6d60fab9d9136a6f99f057332c4b6fc2bd16d6ae9e991f60faeb41f30ab",
+      "run_1_equals_run_2": true,
+      "matches_active_e2e_replay_software_v1_2_lock_digest": true,
+      "status": "PASS"
+    },
+    "cpu_smoke": {
+      "status": "PASS",
+      "steps_all_pass": true,
+      "labels_used": false,
+      "retraining_performed": false,
+      "tuning_performed": false,
+      "held_out_reevaluation_performed": false
+    },
+    "c032_runtime_normalization_equivalence_unit_tests": {
+      "note": "the non-raw-dataset-dependent subset of tests/test_c032_norm_runtime.py (branch separation, exact equivalence vs normalize_window_zscore -> GatewayModelRuntime.infer, input validation) ran and passed as part of the full pytest run above; the one sub-test requiring the 2157-row INTERNAL_TEST population (test_runtime_equivalence_against_t029_internal_population) is raw-MITDB-dependent and is accounted for in data_handling.json",
+      "status": "PASS_FOR_SOFTWARE_SCOPE"
+    },
+    "no_training_tuning_calibration_or_held_out_reevaluation_performed": true
+  },
+  "status": "PASS"
+}

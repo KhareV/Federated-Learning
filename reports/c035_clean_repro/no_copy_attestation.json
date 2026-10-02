@@ -1,0 +1,28 @@
+{
+  "checkpoint": "C035-CLEAN-REPRO",
+  "manual_file_copy_into_final_clone": false,
+  "manual_dependency_rescue": false,
+  "details": {
+    "code_copied_in": false,
+    "package_json_copied_in": false,
+    "package_lock_json_copied_in": false,
+    "tests_copied_in": false,
+    "reports_required_for_execution_copied_in": false,
+    "model_artifacts_copied_in": false,
+    "node_modules_copied_in": false,
+    "venv_copied_in": false,
+    "raw_datasets_copied_in_from_developer_tree": false,
+    "previous_t035_clean_repo_reused": false,
+    "git_worktree_used": false
+  },
+  "only_actions_taken_in_final_clone": [
+    "git clone (network, from origin)",
+    "python3.11 -m venv .venv (fresh, created in place)",
+    "pip install -r requirements-dev.lock (network, from PyPI, per the committed lock)",
+    "pip install --no-deps -e . (local build of the repo's own already-cloned source)",
+    "npm ci (network, from npm registry, per the committed package-lock.json)",
+    "running the repository's own committed scripts/tests, which write their own evidence output files under reports/ as a normal, expected side effect of verification (not external data/fixes)",
+    "one genuine network acquisition attempt via the repository's own unmodified scripts/acquire_mitdb.py (did not complete within a reasonable window; no data resulted from it, nothing was substituted for it)"
+  ],
+  "status": "PASS"
+}

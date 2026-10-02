@@ -1,0 +1,32 @@
+{
+  "checkpoint": "C035-CLEAN-REPRO",
+  "policy": "data/raw/** and data/processed/ are deliberately gitignored; raw third-party datasets are never committed and must be obtained via the repository's own tracked acquisition scripts, which fetch from PhysioNet and verify against PhysioNet's own published checksums.",
+  "manual_developer_tree_data_copy_performed": false,
+  "acquisition_method_attempted": "A -- the repository's own unmodified network-based acquisition script (scripts/acquire_mitdb.py) was run directly inside the brand-new clean clone, exactly as documented (PYTHONPATH=src:. .venv/bin/python scripts/acquire_mitdb.py), with no modification and no pre-seeded data.",
+  "acquisition_attempt_result": "DID_NOT_COMPLETE_WITHIN_A_REASONABLE_WINDOW",
+  "acquisition_attempt_duration_observed": "in excess of 20 minutes, near-zero CPU time accumulated by the process throughout, consistent with the process being blocked on a physionet.org network round-trip rather than failing fast or making progress",
+  "acquisition_attempt_classification": "sandbox network-access limitation, NOT a repository code defect -- scripts/acquire_mitdb.py was not modified, and the same script genuinely succeeded once in a prior session attempt (completed in 6m09s) when network conditions in this sandbox happened to cooperate; network reliability to physionet.org is not something this checkpoint can fix in the repository",
+  "manual_raw_data_copy_used_as_clean_reproduction_evidence": false,
+  "raw_dataset_dependent_pytest_results": {
+    "tests_affected": [
+      "tests/test_split_determinism.py::test_split_builder_regenerates_byte_identical_output",
+      "tests/test_real_window_leakage.py::test_real_cache_paths_are_partition_local_and_fresh",
+      "tests/test_bidmc_context_alignment.py::test_source_clock_contract",
+      "tests/test_bidmc_context_results.py::test_frozen_context_result_verifies_and_has_no_disease_metrics",
+      "tests/test_external_incart_protocol.py::test_t007_source_and_lead_contract_closes",
+      "tests/test_nstdb_noise_protocol.py::test_official_source_allowlist_hashes_and_mlii",
+      "tests/test_c032_norm_runtime.py::test_runtime_equivalence_against_t029_internal_population"
+    ],
+    "observed_behavior": "each fails cleanly with the project's own explicit, pre-existing error (e.g. 'MITDB_DATA_NOT_ACQUIRED: ... Run scripts/acquire_mitdb.py first; real local data is required, this is never silently downgraded to a skip') -- this is the project's own long-standing anti-fakery policy from T006/T007/T019/T020, unrelated to and unmodified by this checkpoint or T035",
+    "treated_as_clean_software_proof_failure": false,
+    "explicitly_separated_from_software_reproducibility_claim": true,
+    "fabricated_or_force_passed": false
+  },
+  "software_only_proof_scope": {
+    "note": "Per instruction Section 5, none of the EXPLICITLY REQUIRED T035/G20 checks (Ruff, pip check, MODEL_V1 hash, frozen test-vector, PREPROC_V1 verification, API_RUNTIME_V1_1, DASHBOARD_UI_V1_3, gateway equivalence, corrected replay x2 + digest match, CPU smoke, frontend Vitest/svelte-check/build) require raw third-party dataset acquisition -- all of them use committed, frozen fixtures and checkpoints (tests/fixtures/, checkpoints/MODEL_V1.pt, artifacts/*.lock.json). All of these explicitly required checks were run and PASSED from this clean clone; see verification_results.json.",
+    "pytest_full_suite_count_excluding_raw_dataset_dependent_tests": "1121 passed, 1 skipped (candidate checkpoint, by design)",
+    "pytest_full_suite_count_including_raw_dataset_dependent_tests": "not obtainable in this sandbox session without raw PhysioNet data; not claimed as PASS"
+  },
+  "historical_dataset_hashes_or_manifests_altered": false,
+  "status": "PASS_SOFTWARE_PROOF_DATA_ACQUISITION_NETWORK_LIMITED"
+}

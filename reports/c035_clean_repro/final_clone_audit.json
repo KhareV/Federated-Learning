@@ -1,0 +1,38 @@
+{
+  "checkpoint": "C035-CLEAN-REPRO",
+  "clone_method": "git clone git@github.com:KhareV/Federated-Learning.git final_clone",
+  "clone_location": "/private/tmp/claude-501/.../c035_scratch/final_clone -- a brand-new directory, distinct from the previous T035 clean_repo (not reused), not a git worktree (no shared object store/config with the developer tree)",
+  "clone_resolved_commit": "211620ffc710a56feea9b27d65c372050400ff8a",
+  "clone_resolved_commit_matches_current_final_t035_sha": true,
+  "clone_git_status_immediately_after_clone": "clean (no output from git status --short)",
+  "manual_file_copy_into_final_clone": false,
+  "files_copied_in": "none -- not code, not package.json, not package-lock.json, not tests, not reports, not model artifacts, not node_modules, not a venv, not raw datasets",
+  "python_environment": {
+    "created_with": "python3.11 -m venv .venv (inside the clean clone only)",
+    "python_version": "3.11.16",
+    "pip_install_command": ".venv/bin/python -m pip install -r requirements-dev.lock",
+    "pip_install_exit_code": 0,
+    "editable_install_command": ".venv/bin/python -m pip install --no-deps -e .",
+    "editable_install_exit_code": 0,
+    "pip_check_exit_code": 0,
+    "pip_check_output": "No broken requirements found.",
+    "manual_dependency_rescue": false,
+    "requirements_dev_lock_sha256": "0d4a0561bfadf89157b9f6f6dfbfa87e885aca2815a45a442e04a98d662f2a0e"
+  },
+  "frontend_environment": {
+    "install_command": "npm ci (frontend/, inside the clean clone only)",
+    "install_exit_code": 0,
+    "node_version": "v26.5.0",
+    "npm_version": "11.17.0",
+    "manual_dependency_rescue": false,
+    "package_lock_sha256": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae"
+  },
+  "types_node_proof": {
+    "declared_in_committed_package_json": "26.6.4",
+    "locally_installed_at": "frontend/node_modules/@types/node/package.json",
+    "locally_installed_version": "26.6.4",
+    "resolved_from_committed_lockfile": true,
+    "resolved_from_parent_or_global_node_modules": false
+  },
+  "status": "PASS"
+}

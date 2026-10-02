@@ -1,0 +1,16 @@
+{
+  "checkpoint": "C035-CLEAN-REPRO",
+  "purpose": "one final uncontaminated clean-checkout proof for T035/G20, closing the provenance gap where the original T035 clean clone was later modified by copying files/data in",
+  "head_sha_at_entry": "211620ffc710a56feea9b27d65c372050400ff8a",
+  "origin_main_sha_at_entry": "211620ffc710a56feea9b27d65c372050400ff8a",
+  "head_matched_origin_main": true,
+  "working_tree_clean_at_entry": true,
+  "expected_t035_commits_present": [
+    "211620f docs(repro): record T035/G20 evidence/status",
+    "db54ec8 chore(repro): add clean-run verifier/evidence generation",
+    "521e323 test(repro): add T035 reproducibility regressions",
+    "08ace41 fix(repro): remove clean-environment/bootstrap defects"
+  ],
+  "working_tree_modified_before_proof": false,
+  "status": "PASS"
+}

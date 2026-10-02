@@ -1,0 +1,24 @@
+{
+  "checkpoint": "C035-CLEAN-REPRO",
+  "defect_A_t015_transient_candidate": {
+    "claim": "the intentionally untracked T015 candidate checkpoint is absent in a brand-new clone, and the clean-clone test behavior is the explicitly documented skip, while canonical MODEL_V1.pt identity and fixed-vector verification remain mandatory PASS",
+    "candidate_file_path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt",
+    "candidate_file_present_in_final_clone": false,
+    "test_result": "SKIPPED -- tests/test_model_v1_freeze.py:59 'CANDIDATE_CHECKPOINT_NOT_TRACKED: untracked T015 artifact absent in a clean checkout'",
+    "canonical_checkpoint_identity_result": "PASS (test_committed_f08_package_verifies_and_loads_eval_model, and independently via models.model_freeze.verify_frozen_model_v1)",
+    "fixed_vector_result": "PASS (max_abs_logit_delta 2.384185791015625e-07)",
+    "confirmed": true
+  },
+  "defect_B_types_node": {
+    "claim": "after npm ci, @types/node exists locally under frontend/node_modules, svelte-check reports 0 errors, and no parent-directory package resolution is required",
+    "locally_installed_check": "frontend/node_modules/@types/node/package.json version == 26.6.4",
+    "locally_installed_confirmed": true,
+    "declared_in_committed_package_json": "26.6.4",
+    "svelte_check_errors": 0,
+    "svelte_check_exit_code": 0,
+    "parent_or_global_node_modules_required": false,
+    "evidence": "clone is rooted at /private/tmp/claude-501/.../c035_scratch/final_clone, with no ancestor directory shared with /Users/Home's stray node_modules tree that originally caused the leak; @types/node resolved purely from frontend/node_modules installed by npm ci from the committed lockfile",
+    "confirmed": true
+  },
+  "status": "PASS"
+}
