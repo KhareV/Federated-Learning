@@ -1,0 +1,61 @@
+{
+  "hypotheses": {
+    "H0": {
+      "delta_AUPRC_ci": [
+        -0.01784319496971861,
+        0.08038964425516526
+      ],
+      "delta_AUROC_ci": [
+        -0.03470300295719849,
+        0.07155118179320716
+      ],
+      "invalid_B": 0,
+      "left": "MODEL_V2_CAPCTRL",
+      "point_delta_AUPRC": 0.026510547948474517,
+      "point_delta_AUROC": 0.018246578704592786,
+      "right": "MODEL_V1_CV_REFERENCE_V1_seed_20260927",
+      "valid_B": 2000,
+      "verdict": "INCONCLUSIVE"
+    },
+    "H1": {
+      "delta_AUPRC_ci": [
+        0.23396389645596918,
+        0.5602576191382481
+      ],
+      "delta_AUROC_ci": [
+        0.15942243165931655,
+        0.43685194032053387
+      ],
+      "invalid_B": 0,
+      "left": "MODEL_V2_TCN_MEAN",
+      "point_delta_AUPRC": 0.42170636741113954,
+      "point_delta_AUROC": 0.288967168471554,
+      "right": "MODEL_V2_CAPCTRL",
+      "valid_B": 2000,
+      "verdict": "SUPPORTED"
+    },
+    "H2": {
+      "delta_AUPRC_ci": [
+        -0.08875862843897973,
+        0.07418533237381596
+      ],
+      "delta_AUROC_ci": [
+        -0.08429585733427569,
+        0.02772104954621078
+      ],
+      "invalid_B": 0,
+      "left": "MODEL_V2_TCN_MEANMAX",
+      "point_delta_AUPRC": 0.002306046800480188,
+      "point_delta_AUROC": -0.02312453569178441,
+      "right": "MODEL_V2_TCN_MEAN",
+      "valid_B": 2000,
+      "verdict": "INCONCLUSIVE"
+    }
+  },
+  "note": "Controlled software/model ablation comparisons, not biological causality. No clinical superiority or physiological-mechanism claim.",
+  "verdict_vocabulary": {
+    "CONTRADICTED": "upper_95_CI_of_delta_AUPRC_less_than_0",
+    "INCONCLUSIVE": "CI_includes_0",
+    "SUPPORTED": "lower_95_CI_of_delta_AUPRC_greater_than_0"
+  }
+}

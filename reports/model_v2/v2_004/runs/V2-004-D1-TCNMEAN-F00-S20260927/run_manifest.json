@@ -1,0 +1,48 @@
+{
+  "config_path": "configs/model_v2/architecture_causality_v1.yaml",
+  "config_sha256": "f33f369a22bd907691e6d1f9730ccdfb413b5fb2bfcdc467f0fb5a095bb02f7e",
+  "corrective_checkpoint": null,
+  "created_at_utc": "2026-10-02T22:02:07.398262Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "b1d11a97b3059a8f2f7e62243e2b3cd8059bc696",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+      "sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6"
+    },
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv",
+      "sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224"
+    },
+    {
+      "path": "configs/model_v1.yaml",
+      "sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "V2-004 D1 fit V2-004-D1-TCNMEAN-F00-S20260927: architecture=MODEL_V2_TCN_MEAN outer_fold=0 seed=20260927",
+  "output_artifacts": [
+    {
+      "path": "reports/model_v2/v2_004/runs/V2-004-D1-TCNMEAN-F00-S20260927/outer_predictions.csv",
+      "sha256": "04abbae2473d32edc9e01b53b9b68890be348b3bafdb8756347a403883a80efb"
+    },
+    {
+      "path": "reports/model_v2/v2_004/runs/V2-004-D1-TCNMEAN-F00-S20260927/training_curve.csv",
+      "sha256": "aaf2ee6cd78b2287e32cd049a441dd0a821f7f2da54fa5fcb2bb478e93ee5b6d"
+    },
+    {
+      "path": "checkpoints/model_v2/v2_004_arch_causality/V2-004-D1-TCNMEAN-F00-S20260927_best.pt",
+      "sha256": "fbec6a94dc29fcc15f6feeefca979a081db8e4ded51f44a2ebb37683271f936c"
+    }
+  ],
+  "phase_id": "V2-004",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "V2-004-D1-TCNMEAN-F00-S20260927",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": 20260927,
+  "spec_version": "2.2",
+  "task_id": "V2-004"
+}

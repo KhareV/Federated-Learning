@@ -1,0 +1,32 @@
+{
+  "expected_total_rows": 28980,
+  "per_architecture": {
+    "MODEL_V2_CAPCTRL": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_rows": 9660,
+      "extra_count": 0,
+      "missing_count": 0,
+      "rows": 9660
+    },
+    "MODEL_V2_TCN_MEAN": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_rows": 9660,
+      "extra_count": 0,
+      "missing_count": 0,
+      "rows": 9660
+    },
+    "MODEL_V2_TCN_MEANMAX": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_rows": 9660,
+      "extra_count": 0,
+      "missing_count": 0,
+      "rows": 9660
+    }
+  },
+  "stage": "D1",
+  "status": "PASS",
+  "total_rows_all_architectures": 28980
+}

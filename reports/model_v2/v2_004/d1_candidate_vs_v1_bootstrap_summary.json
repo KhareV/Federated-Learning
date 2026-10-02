@@ -1,0 +1,82 @@
+{
+  "bootstrap_id": "MODEL_V2_BOOTSTRAP_DRAWS_V1",
+  "bootstrap_seed": 20261002,
+  "per_architecture": {
+    "MODEL_V2_CAPCTRL": {
+      "V1_seed_20260927_point_AUPRC": 0.41681675213519453,
+      "V1_seed_20260927_point_AUROC": 0.6064115312936194,
+      "bootstrap_qualified": false,
+      "candidate_bootstrap_ci_AUPRC": [
+        0.2827558033552421,
+        0.6534113741954104
+      ],
+      "candidate_bootstrap_sd_AUPRC": 0.09441966220403976,
+      "candidate_point_AUPRC": 0.44332730008366905,
+      "candidate_point_AUROC": 0.6246581099982121,
+      "delta_AUPRC_ci": [
+        -0.01784319496971861,
+        0.08038964425516526
+      ],
+      "delta_AUPRC_point": 0.026510547948474517,
+      "delta_AUROC_ci": [
+        -0.03470300295719849,
+        0.07155118179320716
+      ],
+      "delta_AUROC_point": 0.018246578704592786,
+      "invalid_B": 0,
+      "valid_B": 2000
+    },
+    "MODEL_V2_TCN_MEAN": {
+      "V1_seed_20260927_point_AUPRC": 0.41681675213519453,
+      "V1_seed_20260927_point_AUROC": 0.6064115312936194,
+      "bootstrap_qualified": true,
+      "candidate_bootstrap_ci_AUPRC": [
+        0.7514852771990588,
+        0.9414786628691891
+      ],
+      "candidate_bootstrap_sd_AUPRC": 0.04921219580023534,
+      "candidate_point_AUPRC": 0.8650336674948086,
+      "candidate_point_AUROC": 0.9136252784697662,
+      "delta_AUPRC_ci": [
+        0.27393706324785544,
+        0.5761119904701374
+      ],
+      "delta_AUPRC_point": 0.44821691535961405,
+      "delta_AUROC_ci": [
+        0.17914806754512777,
+        0.4499197090647578
+      ],
+      "delta_AUROC_point": 0.3072137471761468,
+      "invalid_B": 0,
+      "valid_B": 2000
+    },
+    "MODEL_V2_TCN_MEANMAX": {
+      "V1_seed_20260927_point_AUPRC": 0.41681675213519453,
+      "V1_seed_20260927_point_AUROC": 0.6064115312936194,
+      "bootstrap_qualified": true,
+      "candidate_bootstrap_ci_AUPRC": [
+        0.722767374407108,
+        0.9509627421137812
+      ],
+      "candidate_bootstrap_sd_AUPRC": 0.059166236892210164,
+      "candidate_point_AUPRC": 0.8673397142952888,
+      "candidate_point_AUROC": 0.8905007427779817,
+      "delta_AUPRC_ci": [
+        0.2693202459915531,
+        0.5810031804743641
+      ],
+      "delta_AUPRC_point": 0.45052296216009424,
+      "delta_AUROC_ci": [
+        0.14793168349171726,
+        0.4349539596585209
+      ],
+      "delta_AUROC_point": 0.2840892114843624,
+      "invalid_B": 0,
+      "valid_B": 2000
+    }
+  },
+  "qualification_rule": "paired_95_percentile_lower_bound_of_delta_AUPRC_strictly_greater_than_0",
+  "reference": "MODEL_V1_CV_REFERENCE_V1 seed 20260927 OOF predictions (not three-seed mean)",
+  "replicates": 2000,
+  "reused_from": "V2-002"
+}

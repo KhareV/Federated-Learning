@@ -1,0 +1,122 @@
+{
+  "canonical_metric_definition": "pooled AUPRC/AUROC on the concatenation of all 5 outer-fold predictions for that architecture at seed 20260927 -- fold-level metrics are diagnostics only, never averaged into the canonical estimate.",
+  "per_architecture": {
+    "MODEL_V2_CAPCTRL": {
+      "architecture_id": "MODEL_V2_CAPCTRL",
+      "fold_level_diagnostics_not_averaged": [
+        {
+          "AUPRC": 0.42776889156118975,
+          "AUROC": 0.5332280449733056,
+          "outer_fold": 0,
+          "windows": 2147
+        },
+        {
+          "AUPRC": 0.464656717386004,
+          "AUROC": 0.7177060909022335,
+          "outer_fold": 1,
+          "windows": 2119
+        },
+        {
+          "AUPRC": 0.2983404128057687,
+          "AUROC": 0.3963127865175951,
+          "outer_fold": 2,
+          "windows": 1798
+        },
+        {
+          "AUPRC": 0.7516134833676582,
+          "AUROC": 0.7566924567869853,
+          "outer_fold": 3,
+          "windows": 1796
+        },
+        {
+          "AUPRC": 0.44057602471896695,
+          "AUROC": 0.5148479949912598,
+          "outer_fold": 4,
+          "windows": 1800
+        }
+      ],
+      "parameter_count": 51969,
+      "pooled_OOF_AUPRC": 0.44332730008366905,
+      "pooled_OOF_AUROC": 0.6246581099982121,
+      "seed": 20260927
+    },
+    "MODEL_V2_TCN_MEAN": {
+      "architecture_id": "MODEL_V2_TCN_MEAN",
+      "fold_level_diagnostics_not_averaged": [
+        {
+          "AUPRC": 0.8365410346875265,
+          "AUROC": 0.8783386872982837,
+          "outer_fold": 0,
+          "windows": 2147
+        },
+        {
+          "AUPRC": 0.6770600018630389,
+          "AUROC": 0.8466065912726274,
+          "outer_fold": 1,
+          "windows": 2119
+        },
+        {
+          "AUPRC": 0.8749440789571293,
+          "AUROC": 0.9182414828006993,
+          "outer_fold": 2,
+          "windows": 1798
+        },
+        {
+          "AUPRC": 0.974631226868562,
+          "AUROC": 0.9795757604643281,
+          "outer_fold": 3,
+          "windows": 1796
+        },
+        {
+          "AUPRC": 0.9854995577723568,
+          "AUROC": 0.984990878252623,
+          "outer_fold": 4,
+          "windows": 1800
+        }
+      ],
+      "parameter_count": 57553,
+      "pooled_OOF_AUPRC": 0.8650336674948086,
+      "pooled_OOF_AUROC": 0.9136252784697662,
+      "seed": 20260927
+    },
+    "MODEL_V2_TCN_MEANMAX": {
+      "architecture_id": "MODEL_V2_TCN_MEANMAX",
+      "fold_level_diagnostics_not_averaged": [
+        {
+          "AUPRC": 0.8090456848788443,
+          "AUROC": 0.838099587518475,
+          "outer_fold": 0,
+          "windows": 2147
+        },
+        {
+          "AUPRC": 0.8658914268161182,
+          "AUROC": 0.9037033598508366,
+          "outer_fold": 1,
+          "windows": 2119
+        },
+        {
+          "AUPRC": 0.8981251255451996,
+          "AUROC": 0.9125470795818079,
+          "outer_fold": 2,
+          "windows": 1798
+        },
+        {
+          "AUPRC": 0.9465355294160597,
+          "AUROC": 0.955181060413489,
+          "outer_fold": 3,
+          "windows": 1796
+        },
+        {
+          "AUPRC": 0.9731771306315206,
+          "AUROC": 0.9729951556747528,
+          "outer_fold": 4,
+          "windows": 1800
+        }
+      ],
+      "parameter_count": 57577,
+      "pooled_OOF_AUPRC": 0.8673397142952888,
+      "pooled_OOF_AUROC": 0.8905007427779817,
+      "seed": 20260927
+    }
+  }
+}
