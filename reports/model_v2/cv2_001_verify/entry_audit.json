@@ -1,0 +1,21 @@
+{
+  "checkpoint": "C-V2-001-VERIFY",
+  "expected_entry_sha": "84e87e3a1e565bc8fd154eab4ab1e865bed2ff45",
+  "actual_head_sha_at_entry": "84e87e3a1e565bc8fd154eab4ab1e865bed2ff45",
+  "actual_origin_main_sha_at_entry": "84e87e3a1e565bc8fd154eab4ab1e865bed2ff45",
+  "head_matched_expectation_exactly": true,
+  "working_tree_clean_at_entry": true,
+  "registry_state_at_entry": {
+    "V2-001_status": "PASS",
+    "V2G0_status": "PASS",
+    "V2-002_status": "NOT_STARTED"
+  },
+  "locks_verified_at_entry": {
+    "MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json": "FROZEN_RESEARCH_PROTOCOL",
+    "MITDB_TRAIN_CV_V2_V1.lock.json": "FROZEN_CV_MANIFEST",
+    "MITDB_TRAIN_INNER_V2_V1.lock.json": "FROZEN_CV_MANIFEST"
+  },
+  "repository_legitimately_advanced": false,
+  "reset_performed": false,
+  "status": "PASS"
+}

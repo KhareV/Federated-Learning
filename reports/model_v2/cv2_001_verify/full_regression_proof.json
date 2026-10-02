@@ -1,0 +1,40 @@
+{
+  "checkpoint": "C-V2-001-VERIFY",
+  "correction": "the previous V2-001 handoff's '1168 passed' claim was not backed by a captured, completed invocation transcript in that session; this checkpoint reproduces the complete suite -- including this checkpoint's OWN new tests -- with captured logs and exit codes, via two independent methods.",
+  "note_on_count_growth": "1168 -> 1184 reflects the 16 new tests this checkpoint itself adds (11 in tests/test_model_v2_run_manifest_schema.py; a net +5 in tests/test_model_v2_architecture_specs.py, which replaces 1 old combined finite-output/sigmoid-absence test with 3 structural + 3 behavioral raw-logit tests across the three architectures). No test was removed without a strictly stronger replacement; no test was skipped or excluded to reach this count.",
+  "method_1_single_invocation": {
+    "command": "PYTHONPATH=src:. .venv-t032/bin/python -m pytest -q",
+    "log_file": "/tmp/full_pytest_run_final.log (captured during this checkpoint)",
+    "exit_code": 0,
+    "summary_line": "1184 passed, 12 warnings in 17.51s",
+    "collected_count_cross_check": "pytest --collect-only -q reported '1184 tests collected in 1.78s', matching the executed count exactly"
+  },
+  "method_2_deterministic_exhaustive_chunking": {
+    "script": "scripts/run_chunked_full_regression_cv2001verify.py",
+    "chunk_size": 300,
+    "total_chunks": 4,
+    "total_collected": 1184,
+    "total_executed_node_instances": 1184,
+    "union_executed_equals_collected": true,
+    "duplicate_executions": 0,
+    "missing_nodes": [],
+    "extra_nodes": [],
+    "failed_chunks": [],
+    "all_exit_codes_zero": true,
+    "per_chunk_summary": [
+      {"chunk_index": 0, "node_count": 300, "exit_code": 0, "summary_line": "300 passed, 7 warnings in 5.23s"},
+      {"chunk_index": 1, "node_count": 300, "exit_code": 0, "summary_line": "300 passed, 8 warnings in 3.67s"},
+      {"chunk_index": 2, "node_count": 300, "exit_code": 0, "summary_line": "300 passed in 4.08s"},
+      {"chunk_index": 3, "node_count": 284, "exit_code": 0, "summary_line": "284 passed, 3 warnings in 7.98s"}
+    ],
+    "detailed_proof_path": "reports/model_v2/cv2_001_verify/pytest_chunks.json"
+  },
+  "both_methods_agree": true,
+  "actual_verified_pass_count": 1184,
+  "actual_verified_skip_count": 0,
+  "actual_verified_fail_count": 0,
+  "note_on_skip_count": "0 skipped in THIS dev-tree run because the untracked T015 candidate checkpoint (checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt) happens to be present locally; tests/test_model_v1_freeze.py's pytest.skip guard only activates in a genuinely clean checkout where that untracked file is absent (see reports/t035/full_test_report.json for that documented case: 1128 passed, 1 skipped there).",
+  "dropped_or_excluded_tests": "none -- no -x, no deselection, no exclusion",
+  "slow_tests_dropped": false,
+  "status": "PASS"
+}

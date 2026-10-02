@@ -1,0 +1,45 @@
+{
+  "all_exit_codes_zero": true,
+  "checkpoint": "C-V2-001-VERIFY",
+  "chunk_results": [
+    {
+      "chunk_index": 0,
+      "duration_seconds": 5.819,
+      "exit_code": 0,
+      "node_count": 300,
+      "summary_line": "300 passed, 7 warnings in 5.23s"
+    },
+    {
+      "chunk_index": 1,
+      "duration_seconds": 5.338,
+      "exit_code": 0,
+      "node_count": 300,
+      "summary_line": "300 passed, 8 warnings in 3.67s"
+    },
+    {
+      "chunk_index": 2,
+      "duration_seconds": 4.793,
+      "exit_code": 0,
+      "node_count": 300,
+      "summary_line": "300 passed in 4.08s"
+    },
+    {
+      "chunk_index": 3,
+      "duration_seconds": 8.573,
+      "exit_code": 0,
+      "node_count": 284,
+      "summary_line": "284 passed, 3 warnings in 7.98s"
+    }
+  ],
+  "chunk_size": 300,
+  "duplicate_executions": 0,
+  "extra_nodes": [],
+  "failed_chunks": [],
+  "method": "deterministic_exhaustive_chunking",
+  "missing_nodes": [],
+  "status": "PASS",
+  "total_chunks": 4,
+  "total_collected": 1184,
+  "total_executed_node_instances": 1184,
+  "union_executed_equals_collected": true
+}

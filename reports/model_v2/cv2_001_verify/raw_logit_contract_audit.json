@@ -1,0 +1,31 @@
+{
+  "checkpoint": "C-V2-001-VERIFY",
+  "defect_being_corrected": "the previous architecture test only asserted torch.isfinite(output).all(), which a sigmoid-squashed output would also satisfy -- it did not mechanically distinguish a raw logit from a bounded probability.",
+  "correction": "tests/test_model_v2_architecture_specs.py now requires, per architecture, BOTH a structural check and a behavioral check.",
+  "frozen_architecture_specification_modified": false,
+  "architectures": {
+    "MODEL_V2_CAPCTRL": {
+      "structural_no_sigmoid_softmax_logsoftmax": "PASS",
+      "behavioral_raw_logit_probe": "PASS",
+      "probe_method": "final Linear head (model.output) weight zeroed, bias set to 2.0; forward pass on random synthetic input reproduces 2.0 exactly (atol=1e-5), and does NOT match sigmoid(2.0)=0.8808"
+    },
+    "MODEL_V2_TCN_MEAN": {
+      "structural_no_sigmoid_softmax_logsoftmax": "PASS",
+      "behavioral_raw_logit_probe": "PASS",
+      "probe_method": "same as above"
+    },
+    "MODEL_V2_TCN_MEANMAX": {
+      "structural_no_sigmoid_softmax_logsoftmax": "PASS",
+      "behavioral_raw_logit_probe": "PASS",
+      "probe_method": "same as above"
+    }
+  },
+  "probe_validated_as_discriminating": {
+    "method": "a deliberately sigmoid-wrapped subclass of ModelV2CapCtrl was constructed ad hoc (not committed) and run through the same probe: output was 0.8808 (sigmoid(2.0)), which correctly FAILED the 'output==2.0' assertion and correctly MATCHED the 'output==sigmoid(bias)' negative-check -- confirming the probe would have caught a real squashing defect had one existed",
+    "ad_hoc_negative_control_committed": false
+  },
+  "synthetic_data_only": true,
+  "real_patient_data_used": false,
+  "shape_parameter_count_rf_tests_retained": true,
+  "status": "PASS"
+}

@@ -1,0 +1,39 @@
+{
+  "checkpoint": "C-V2-001-VERIFY",
+  "purpose": "re-verify, after the corrective infrastructure changes in this checkpoint, that every frozen upstream scientific artifact V2-001 depends on remains byte-identical",
+  "checks": {
+    "MODEL_V2_RESEARCH_PROTOCOL_V1_lock_sha256": {
+      "value": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+      "unchanged_from_v2_001": true
+    },
+    "outer_cv_manifest_sha256": {
+      "value": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+      "unchanged_from_v2_001": true
+    },
+    "inner_cv_manifest_sha256": {
+      "value": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+      "unchanged_from_v2_001": true
+    },
+    "MODEL_V1_checkpoint_sha256": {
+      "value": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+      "unchanged_from_v2_001": true
+    },
+    "CAL_V1_sha256": {
+      "value": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+      "unchanged_from_v2_001": true
+    },
+    "freeze_registry_status": {
+      "F05": "FROZEN",
+      "F06": "FROZEN",
+      "F07": "FROZEN",
+      "F08": "FROZEN",
+      "F09": "FROZEN",
+      "F10": "FROZEN",
+      "F11": "FROZEN",
+      "F14": "FROZEN",
+      "all_still_frozen": true
+    }
+  },
+  "method": "nhm.hashing.hash_file computed live against the current repository state; freeze_registry_v1.csv read directly (metadata only)",
+  "status": "PASS"
+}
