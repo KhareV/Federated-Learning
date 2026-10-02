@@ -1,0 +1,9 @@
+{
+  "checkpoint": "T035-REPRO",
+  "predecessor_id": "DASHBOARD_UI_V1_2",
+  "predecessor_preserved_unchanged": true,
+  "predecessor_sha256": "62341027cf4723e221ea58facc66bf2dca65b34fe1e513209bf887c407393382",
+  "predecessor_status_at_supersession": "FROZEN_ENGINEERING_INTERFACE",
+  "reason": "declare @types/node as an explicit devDependency (frontend/package.json, frontend/package-lock.json) so `npm ci` + svelte-check is reproducible from a genuinely clean checkout, without relying on an accidental ambient @types/node resolved from a stray unrelated node_modules directory on the developer machine",
+  "successor_id": "DASHBOARD_UI_V1_3"
+}
