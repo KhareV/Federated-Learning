@@ -1,0 +1,56 @@
+{
+  "config_path": "configs/model_v2/research_protocol_v1.yaml",
+  "config_sha256": "7e865a4625cb746cd3db83b5d96ca4fcfe633611a936a4dab85060909c204cfb",
+  "corrective_checkpoint": "C-V2-001-VERIFY",
+  "created_at_utc": "2026-10-02T11:22:06.276779Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "84e87e3a1e565bc8fd154eab4ab1e865bed2ff45",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "checkpoints/MODEL_V1.pt",
+      "sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    },
+    {
+      "path": "artifacts/CAL_V1.json",
+      "sha256": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b"
+    },
+    {
+      "path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json",
+      "sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7"
+    },
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+      "sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6"
+    },
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv",
+      "sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "C-V2-001-VERIFY: full-regression proof + V2 provenance hardening on top of the already-PASS V2-001. No MODEL_V2_RESEARCH_PROTOCOL_V1 change, no CV manifest regeneration, no MODEL_V1/MODEL_V2 training, no new waveform access.",
+  "output_artifacts": [
+    {
+      "path": "contracts/model_v2_run_manifest_v1.schema.json",
+      "sha256": "783c3f0b56980ee58654788a9e78cefe252f90d1c48630daa1187b247ac0dba1"
+    },
+    {
+      "path": "reports/model_v2/cv2_001_verify/full_regression_proof.json",
+      "sha256": "7034a71e1eb32848da5a32a5c84028f9f962016fc8af723ca8f57f8dba7abb66"
+    },
+    {
+      "path": "reports/model_v2/cv2_001_verify/pytest_chunks.json",
+      "sha256": "21ae53c6e34565ac060a796da125809b8d384f0a7938a9f4a998d92c66dcc273"
+    }
+  ],
+  "phase_id": "V2-001",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "c-v2-001-verify",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "V2-001"
+}

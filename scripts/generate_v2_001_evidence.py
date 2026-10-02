@@ -8,58 +8,48 @@ import json
 from pathlib import Path
 
 from nhm.hashing import hash_file
-from nhm.reproducibility import capture_execution_identity
-from nhm.run_manifest import MANIFEST_VERSION, artifact_record
+from nhm.model_v2_run_manifest import (
+    artifact_record,
+    create_model_v2_run_manifest,
+    write_model_v2_run_manifest,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "reports/model_v2/v2_001"
+SCHEMA = ROOT / "contracts/model_v2_run_manifest_v1.schema.json"
 
 
 def main() -> None:
-    # The canonical contracts/run_manifest_v1.schema.json constrains phase_id/task_id to the
-    # ^T[0-9]{3}$ pattern (T001-T036 only) and is never touched for the separate MODEL_V2
-    # namespace; this V2 manifest reuses the same identity-capture primitive but is written
-    # directly (no schema validation against the canonical T-task schema).
-    identity = capture_execution_identity(
-        ROOT, config_path=ROOT / "configs/model_v2/research_protocol_v1.yaml"
-    )
-    manifest = {
-        "manifest_version": MANIFEST_VERSION,
-        "run_id": "v2-001-lineage-bootstrap",
-        "created_at_utc": identity["created_at_utc"],
-        "phase_id": "V2-001",
-        "task_id": "V2-001",
-        "spec_version": identity["spec_version"],
-        "git_commit": identity["git_commit"],
-        "git_dirty": identity["git_dirty"],
-        "python_version": identity["python_version"],
-        "platform": identity["platform"],
-        "config_path": identity["config_path"],
-        "config_sha256": identity["config_sha256"],
-        "dependency_snapshot_path": None,
-        "dependency_snapshot_sha256": None,
-        "input_artifacts": [
+    # Validated against the additive contracts/model_v2_run_manifest_v1.schema.json
+    # (MODEL_V2_RUN_MANIFEST_V1); the canonical contracts/run_manifest_v1.schema.json
+    # (^T[0-9]{3}$ only) is never touched and is not used here.
+    manifest = create_model_v2_run_manifest(
+        ROOT,
+        run_id="v2-001-lineage-bootstrap",
+        phase_id="V2-001",
+        task_id="V2-001",
+        config_path=ROOT / "configs/model_v2/research_protocol_v1.yaml",
+        dependency_snapshot_path=None,
+        input_artifacts=[
             artifact_record(ROOT / "checkpoints/MODEL_V1.pt", ROOT),
             artifact_record(ROOT / "artifacts/CAL_V1.json", ROOT),
             artifact_record(ROOT / "manifests/windows/MITDB_WINDOWS_V1.csv", ROOT),
             artifact_record(ROOT / "manifests/splits/MITDB_SPLIT_V1.csv", ROOT),
         ],
-        "output_artifacts": [
+        output_artifacts=[
             artifact_record(
                 ROOT / "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json", ROOT
             ),
             artifact_record(ROOT / "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv", ROOT),
             artifact_record(ROOT / "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv", ROOT),
         ],
-        "seed": None,
-        "notes": (
+        seed=None,
+        notes=(
             "V2-001 lineage bootstrap: control-plane/data-governance/pre-registration only. "
             "No MODEL_V2 training and no MODEL_V1 retraining occurred."
         ),
-    }
-    (OUT / "run_manifest.json").write_text(
-        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
+    write_model_v2_run_manifest(manifest, OUT / "run_manifest.json", SCHEMA)
 
     artifacts = sorted(p.name for p in OUT.glob("*.json") if p.name != "artifact_hashes.json")
     hashes = {f"reports/model_v2/v2_001/{name}": hash_file(OUT / name) for name in artifacts}

@@ -1,0 +1,30 @@
+{
+  "checkpoint": "C-V2-001-VERIFY",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "schema_path": "contracts/model_v2_run_manifest_v1.schema.json",
+  "helper_module": "src/nhm/model_v2_run_manifest.py",
+  "canonical_t_task_schema_path": "contracts/run_manifest_v1.schema.json",
+  "canonical_t_task_schema_sha256_unchanged": true,
+  "canonical_t_task_schema_sha256": "1cf3b21a400a2eeab482279a5172f9ab5665478bb57edc899a819d5c1f0e1731",
+  "canonical_t_task_schema_still_T_pattern_only": true,
+  "v2_schema_task_id_pattern": "^V2-[0-9]{3}$",
+  "v2_schema_phase_id_pattern": "^V2-[0-9]{3}$",
+  "test_results": {
+    "valid_v2_001_manifest_passes": "PASS",
+    "malformed_task_id_rejected_by_helper": "PASS",
+    "malformed_phase_id_rejected_by_helper": "PASS",
+    "malformed_task_id_rejected_by_schema_directly": "PASS",
+    "missing_required_field_fails": "PASS",
+    "unknown_extra_field_fails": "PASS",
+    "canonical_schema_byte_unchanged": "PASS",
+    "canonical_schema_still_rejects_v2_ids": "PASS",
+    "schema_id_explicit_in_every_manifest": "PASS",
+    "write_reread_roundtrip_deterministic": "PASS",
+    "v2_001_evidence_run_manifest_validates": "PASS"
+  },
+  "test_file": "tests/test_model_v2_run_manifest_schema.py",
+  "v2_001_run_manifest_regenerated_through_validated_schema": true,
+  "v2_001_run_manifest_path": "reports/model_v2/v2_001/run_manifest.json",
+  "historical_t_task_manifests_regenerated": false,
+  "status": "PASS"
+}

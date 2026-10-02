@@ -1,10 +1,11 @@
 {
   "config_path": "configs/model_v2/research_protocol_v1.yaml",
   "config_sha256": "7e865a4625cb746cd3db83b5d96ca4fcfe633611a936a4dab85060909c204cfb",
-  "created_at_utc": "2026-10-02T10:59:34.079616Z",
+  "corrective_checkpoint": null,
+  "created_at_utc": "2026-10-02T11:22:06.133503Z",
   "dependency_snapshot_path": null,
   "dependency_snapshot_sha256": null,
-  "git_commit": "d8071300cbed2bdcb57b3b57447d3156cbdf1ee7",
+  "git_commit": "84e87e3a1e565bc8fd154eab4ab1e865bed2ff45",
   "git_dirty": true,
   "input_artifacts": [
     {
@@ -44,6 +45,7 @@
   "platform": "macOS-27.0.1-arm64-arm-64bit",
   "python_version": "3.11.16",
   "run_id": "v2-001-lineage-bootstrap",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
   "seed": null,
   "spec_version": "2.2",
   "task_id": "V2-001"
