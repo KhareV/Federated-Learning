@@ -1,0 +1,189 @@
+component_id: MODEL_V2_FEATURE_AUDIT_V1
+owner_task: V2-003
+status: ACTIVE
+
+feature_set:
+  feature_set_id: BASELINE_FEATURES_V1
+  feature_schema_sha256: a81c9aadc88cd65b9b4e937e2b5dd90bb8210ffbbc839dc5a8172d9104425718
+  feature_count: 29
+  detector_id: SCIPY_FIND_PEAKS_ABS_MEDIAN_V1
+  groups:
+    STAT:
+      count: 13
+      indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      names:
+        - ecg_mean
+        - ecg_std
+        - ecg_median
+        - ecg_mad
+        - ecg_rms
+        - ecg_min
+        - ecg_max
+        - ecg_peak_to_peak
+        - ecg_iqr
+        - ecg_mean_absolute
+        - ecg_skewness
+        - ecg_kurtosis
+        - ecg_mean_absolute_difference
+    RR:
+      count: 9
+      indices: [13, 14, 15, 16, 17, 18, 19, 20, 21]
+      names:
+        - detected_beat_count
+        - rr_mean_seconds
+        - rr_median_seconds
+        - rr_std_seconds
+        - rr_min_seconds
+        - rr_max_seconds
+        - rr_rmssd_seconds
+        - detected_hr_mean_bpm
+        - rr_available
+    QRS:
+      count: 7
+      indices: [22, 23, 24, 25, 26, 27, 28]
+      names:
+        - qrs_peak_absolute_mean
+        - qrs_peak_absolute_std
+        - qrs_local_energy_mean
+        - qrs_local_energy_std
+        - qrs_local_max_slope_mean
+        - qrs_width_half_prominence_mean_ms
+        - qrs_available
+
+variants:
+  - id: STAT
+    groups: [STAT]
+    feature_count: 13
+  - id: RR
+    groups: [RR]
+    feature_count: 9
+  - id: QRS
+    groups: [QRS]
+    feature_count: 7
+  - id: RR_QRS
+    groups: [RR, QRS]
+    feature_count: 16
+  - id: STAT_RR
+    groups: [STAT, RR]
+    feature_count: 22
+  - id: STAT_QRS
+    groups: [STAT, QRS]
+    feature_count: 20
+  - id: ALL
+    groups: [STAT, RR, QRS]
+    feature_count: 29
+
+model_families: [LOGISTIC, RF]
+
+model_configs:
+  LOGISTIC:
+    model_id_prefix: V2_003_LOGISTIC
+    reused_factory: models.baselines.create_logistic_regression
+    params:
+      penalty: l2
+      l1_ratio: 0.0
+      C: 1.0
+      solver: liblinear
+      max_iter: 1000
+      tol: 1.0e-4
+      fit_intercept: true
+      class_weight: null
+      random_state: 20260927
+    scaling: FOLD_LOCAL_IMPUTER_THEN_STANDARD_SCALER
+  RF:
+    model_id_prefix: V2_003_RF
+    reused_factory: models.baselines.create_random_forest
+    params:
+      n_estimators: 200
+      criterion: gini
+      max_depth: 12
+      min_samples_split: 2
+      min_samples_leaf: 1
+      max_features: sqrt
+      bootstrap: true
+      class_weight: null
+      random_state: 20260927
+      n_jobs: 1
+    scaling: FOLD_LOCAL_IMPUTER_ONLY_NO_SCALER
+
+outer_folds: [0, 1, 2, 3, 4]
+total_canonical_fits: 70
+
+fit_scope:
+  fit_role: OPTIMISE
+  eval_role: OUTER_TEST
+  inner_validation_used: false
+  inner_validation_unused_reason: >
+    LR/RF hyperparameters are frozen (no early stopping, no in-fold tuning); fitting on
+    OPTIMISE only (never OPTIMISE+INNER_VALIDATION) matches the exact 17/18-patient
+    optimisation population that trained MODEL_V1_CV_REFERENCE_V1 in V2-002, for
+    information-parity between the classical and neural TRAIN-CV references.
+  fold_local_transforms: true
+  full_train_frozen_transformer_reused: false
+
+input_representation:
+  source: T014_CAUSAL_FILTERED_UNNORMALIZED_AMPLITUDE_PRESERVING_WINDOW
+  cnn_zscored_input_used: false
+
+oof_metric_contract:
+  expected_oof_rows: 9660
+  canonical_metric: pooled_OOF_AUPRC_AUROC_on_concatenated_outer_test_predictions
+  fold_average_forbidden: true
+  patient_average_auprc_forbidden: true
+
+bootstrap:
+  reused_from: V2-002
+  bootstrap_id: MODEL_V2_BOOTSTRAP_DRAWS_V1
+  bootstrap_seed: 20261002
+  replicates: 2000
+  patient_slots: 27
+  draws_source_path: reports/model_v2/v2_002/bootstrap_draws.npy
+  draws_sha256: e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071
+  new_rng_forbidden: true
+
+minimal_adequate_subset_rule:
+  margin_absolute_auprc: 0.02
+  candidates: [STAT, RR, QRS, RR_QRS, STAT_RR, STAT_QRS]
+  reference: RF_ALL_pooled_OOF_AUPRC
+  tie_rule_1: fewest_features
+  tie_rule_2: higher_pooled_OOF_RF_AUPRC
+  tie_rule_3: lexicographically_smaller_variant_id
+  no_reduced_variant_adequate_fallback: ALL
+
+best_reduced_rf_rule:
+  candidates: [STAT, RR, QRS, RR_QRS, STAT_RR, STAT_QRS]
+  primary: highest_pooled_OOF_RF_AUPRC
+  tie_rule_1: higher_AUROC
+  tie_rule_2: fewer_features
+  tie_rule_3: lexicographically_smaller_variant_id
+
+grouped_permutation_importance:
+  model: RF_ALL
+  groups: [STAT, RR, QRS]
+  repetitions: 50
+  seed: 20261003
+  diagnostic_only: true
+  shared_row_permutation_within_group: true
+
+hybrid_trigger:
+  status: PENDING_V2_004
+  reason: best_learned_only_V2_TRAIN_CV_AUPRC_does_not_exist_until_V2_004
+
+search_budget:
+  neural_fit_budget_cap: 100
+  v2_002_consumed: 15
+  v2_003_neural_fits: 0
+  cumulative_neural_budget: "15/100"
+  classical_canonical_fits: 70
+  classical_reproducibility_repeat_fits: 70
+
+forbidden_access:
+  - VALIDATION
+  - CALIBRATION
+  - INTERNAL_TEST
+  - INCART
+  - NSTDB
+  - BIDMC
+
+new_baseline_v1_artifacts_forbidden: true
+canonical_fxx_freeze_forbidden: true

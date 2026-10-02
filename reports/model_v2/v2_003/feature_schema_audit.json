@@ -1,0 +1,127 @@
+{
+  "annotation_derived_features": false,
+  "cnn_zscored_input_used": false,
+  "detector": {
+    "detector_id": "SCIPY_FIND_PEAKS_ABS_MEDIAN_V1",
+    "distance_samples": 50,
+    "function": "scipy.signal.find_peaks",
+    "input_transform": "absolute(signal - median(signal))",
+    "local_half_width_samples": 13,
+    "package": "scipy",
+    "package_version": "1.17.1",
+    "prominence_factor_times_window_mad": 3.0,
+    "prominence_numerical_floor": 1e-12,
+    "width_rel_height": 0.5
+  },
+  "feature_cache_strategy": "PARTITION_SEPARATED_TRAIN_ONLY_NPY_NEVER_OPENED_VALIDATION",
+  "feature_count": 29,
+  "feature_names": [
+    "ecg_mean",
+    "ecg_std",
+    "ecg_median",
+    "ecg_mad",
+    "ecg_rms",
+    "ecg_min",
+    "ecg_max",
+    "ecg_peak_to_peak",
+    "ecg_iqr",
+    "ecg_mean_absolute",
+    "ecg_skewness",
+    "ecg_kurtosis",
+    "ecg_mean_absolute_difference",
+    "detected_beat_count",
+    "rr_mean_seconds",
+    "rr_median_seconds",
+    "rr_std_seconds",
+    "rr_min_seconds",
+    "rr_max_seconds",
+    "rr_rmssd_seconds",
+    "detected_hr_mean_bpm",
+    "rr_available",
+    "qrs_peak_absolute_mean",
+    "qrs_peak_absolute_std",
+    "qrs_local_energy_mean",
+    "qrs_local_energy_std",
+    "qrs_local_max_slope_mean",
+    "qrs_width_half_prominence_mean_ms",
+    "qrs_available"
+  ],
+  "feature_schema_sha256": "a81c9aadc88cd65b9b4e937e2b5dd90bb8210ffbbc839dc5a8172d9104425718",
+  "feature_set_id": "BASELINE_FEATURES_V1",
+  "groups": {
+    "QRS": {
+      "count": 7,
+      "indices": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    "RR": {
+      "count": 9,
+      "indices": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    "STAT": {
+      "count": 13,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  "input_representation": "T014_CAUSAL_FILTERED_UNNORMALIZED_AMPLITUDE_PRESERVING_WINDOW",
+  "patient_id_as_feature": false,
+  "quality_as_feature": false,
+  "record_id_as_feature": false,
+  "status": "PASS",
+  "train_feature_cache_sha256": "52f394c6dfb80921a6ddc58566399fadd4a43ffe8102bddcaa6d9a59a3399ca7",
+  "variants": {
+    "ALL": {
+      "feature_count": 29
+    },
+    "QRS": {
+      "feature_count": 7
+    },
+    "RR": {
+      "feature_count": 9
+    },
+    "RR_QRS": {
+      "feature_count": 16
+    },
+    "STAT": {
+      "feature_count": 13
+    },
+    "STAT_QRS": {
+      "feature_count": 20
+    },
+    "STAT_RR": {
+      "feature_count": 22
+    }
+  },
+  "waveform_only": true
+}

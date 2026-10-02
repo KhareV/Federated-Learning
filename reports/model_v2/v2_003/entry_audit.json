@@ -1,0 +1,29 @@
+{
+  "actual_head_sha_at_entry": "f7ed5b7e0d39cb0c26115e5fb0f3e3d98210380e",
+  "checkpoint": "V2-003",
+  "expected_entry_sha": "f7ed5b7e0d39cb0c26115e5fb0f3e3d98210380e",
+  "frozen_identities_verified": {
+    "baseline_v1_lock_matches_expected_historical": true,
+    "baseline_v1_lock_sha256": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+    "feature_schema_sha256": "a81c9aadc88cd65b9b4e937e2b5dd90bb8210ffbbc839dc5a8172d9104425718",
+    "inner_cv_sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+    "model_v1_cv_reference_lock_sha256": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+    "outer_cv_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+    "protocol_lock_sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7"
+  },
+  "model_v1_cv_reference_preserved": {
+    "bootstrap_draws_sha256_reused": "e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071",
+    "note": "Verified, not recomputed -- V2-003 never retrains or mutates this."
+  },
+  "registry_state_at_entry": {
+    "V2-001_status": "PASS",
+    "V2-002_status": "PASS",
+    "V2-003_status": "NOT_STARTED",
+    "V2-004_status": "NOT_STARTED",
+    "V2G0_status": "PASS",
+    "V2G1_status": "PASS",
+    "V2G2_status": "NOT_STARTED",
+    "V2G3_status": "NOT_STARTED"
+  },
+  "status": "PASS"
+}

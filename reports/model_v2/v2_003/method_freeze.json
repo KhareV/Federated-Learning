@@ -1,0 +1,38 @@
+{
+  "baseline_v1_lock_sha256": "38f94cb210fe8872f5a195dee606740bf0d6ae3a93be576c88eb60a88f2021c5",
+  "checkpoint": "V2-003",
+  "config_sha256": "6648331ef076d725d40b55c8a47faa293ab6b6ed88a4f59064989214ab570d51",
+  "feature_implementation_sha256": {
+    "features/ecg.py (reused, unmodified)": "400d29c9824b2f64d0a7a5024ba805b06a77a1a426ef280457e005e8996fdb70",
+    "models/baselines.py (reused, unmodified)": "592a681c878f9985df61d4cb1d253c970450790b6f6034a1ad4a20b28a738426"
+  },
+  "firewall_code_sha256": {
+    "src/nhm/model_v2_cv_role_guard.py": "82907fdc65194b6881042e702af6f111956cdabe09ed40d2e9306b410a6caed9",
+    "src/nhm/model_v2_partition_guard.py": "bded6ef80bb251ea35eac6683820a91543445b74b852079e77abb60853d7456b"
+  },
+  "inner_cv_sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+  "note_pre_result_method_commit": "Filled in after this evidence is committed -- the commit that contains this exact file IS the pre-result method commit; see git log for the actual SHA.",
+  "outer_cv_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+  "planned_canonical_fits": 70,
+  "pre_freeze_integration_smoke_test": {
+    "code_changed_based_on_its_numeric_output": false,
+    "description": "Real TRAIN-only OPTIMISE/OUTER_TEST feature loading was exercised interactively for fold 0 to confirm the feature-cache loader, firewall wiring (role+stage+fold+finalization gating), and fold-local transform fitting are correct before committing to the full 70-fit run.",
+    "feature_access_ledger_rows_from_smoke_test_removed_before_real_run": true,
+    "model_persisted": false,
+    "performed": true,
+    "scientific_fit_produced": false,
+    "subset_selection_decision_made": false
+  },
+  "pre_result_method_commit": null,
+  "protocol_sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+  "real_results_started": false,
+  "status": "READY_FOR_REAL_RESULTS",
+  "v2_003_code_sha256": {
+    "scripts/_v2_003_lib.py": "9f5fde397a14e00f515647eff19deedd53d6f31c52e4c7b40f8959e57869952b",
+    "scripts/aggregate_v2003.py": "64e86c4b1fadb18ab47558b6c8270ff5690d313cc1ca75e940abf184798825d8",
+    "scripts/grouped_permutation_v2003.py": "06cabd44f1797393572a4fdae77857b72915e4f785594769dd289b3ee5567f5a",
+    "scripts/paired_bootstrap_v2003.py": "205f2c195407841f851279363e97b66e6fa09ad1eab1bb0a39a1abcf8a848230",
+    "scripts/run_feature_audit_v2003.py": "e88f39e613add7c9c8ee875f95c2344ea88ebadae762fb4265a0cc7c559497a9",
+    "scripts/select_subset_v2003.py": "16f9d8e6708d55d6760fd21e9267d8ff12af4848d069a044bb0004a031c44563"
+  }
+}
