@@ -1,0 +1,36 @@
+{
+  "ruff_check_full_repo": "PASS",
+  "targeted_corrective_tests": {
+    "file": "tests/test_c_v2_pre004_control.py",
+    "collected": 20,
+    "passed": 20,
+    "failed": 0
+  },
+  "full_pytest": {
+    "passed": 1358,
+    "failed": 0,
+    "warnings": 12
+  },
+  "pip_check": "No broken requirements found.",
+  "registry_parsing": "PASS (task/gate/component registries all parse to consistent column counts)",
+  "lock_verification": "PASS (MODEL_V2_RESEARCH_PROTOCOL_V1 lock byte-unchanged; MODEL_V2_RESEARCH_PROTOCOL_V2 lock created and validated)",
+  "coverage_notes": {
+    "v2_004_registry_no_longer_45_fits": "covered (test_v2_004_registry_does_not_say_45_fits, test_v2_004_registry_states_35_fit_cap)",
+    "d1_seed_restriction": "covered (test_d1_uses_only_release_seed)",
+    "d2_architecture_and_seed_restriction": "covered (test_d2_at_most_two_architectures_and_remaining_seeds)",
+    "v2_004_fit_budget_cap": "covered (test_v2_004_fit_budget_exactly_35)",
+    "architecture_identity_and_parameter_count_drift": "covered (test_architecture_identities_and_parameter_counts_unchanged)",
+    "tcn_receptive_field_drift": "covered (same test, asserts 3063)",
+    "active_promotion_rule": "covered (test_active_promotion_rule_matches_authoritative_target)",
+    "v1_protocol_mutation": "covered (test_v1_protocol_file_not_mutated, test_v1_protocol_still_contains_its_original_rule_as_historical_record)",
+    "d0_6_scientific_repeat_divergence": "covered by repeat_comparison.json (byte-identical for all 9 script-generated files) + manual verification in this session",
+    "missing_validation_sources_silently_regenerated": "covered (test_missing_validation_sources_never_regenerated)",
+    "forbidden_partition_waveform_access": "covered (test_no_forbidden_partition_access_in_firewall)",
+    "d0_6_ancestry_mechanical_proof": "covered (test_merge_base_ancestry_still_holds_mechanically, test_d0_6_ancestry_checks_all_pass)",
+    "d0_6_runner_concealment_check": "covered (test_d0_6_run_d0_6_diagnostics_not_in_method_or_correction_commit)",
+    "registry_csv_parsing": "covered (test_registries_parse_consistently)",
+    "v2_protocol_successor_row": "covered (test_v2_protocol_component_registry_row_exists)",
+    "v2_004_and_v2g3_remain_not_started": "covered (test_v2_004_and_v2g3_still_not_started)"
+  },
+  "status": "PASS"
+}

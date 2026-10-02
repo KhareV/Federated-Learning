@@ -1,0 +1,39 @@
+{
+  "historical_validation": {
+    "MODEL_V1": {
+      "comparator": ">=",
+      "fit_any_threshold": false,
+      "source": "CAL_V1",
+      "temperature": 0.20521296644321502,
+      "threshold": 0.6128035574269627
+    },
+    "RF": {
+      "fit_any_threshold": false,
+      "policy": "FIXED_NOT_TUNED",
+      "reason": "per-window RF VALIDATION predictions are MISSING_FROZEN_SOURCE",
+      "source": "configs/baseline_v1.yaml",
+      "threshold": 0.5,
+      "threshold_dependent_metrics_produced": false
+    }
+  },
+  "train_oof": {
+    "MODEL_V1": {
+      "20260927": {
+        "achieved_pooled_F1": 0.581554000177195,
+        "threshold": 0.4053082764148712
+      },
+      "20260928": {
+        "achieved_pooled_F1": 0.5589441769217051,
+        "threshold": 0.36970630288124084
+      },
+      "20260929": {
+        "achieved_pooled_F1": 0.5816184002234845,
+        "threshold": 0.4909469485282898
+      }
+    },
+    "RF_ALL": {
+      "achieved_pooled_F1": 0.6722011385199241,
+      "threshold": 0.44265760459295966
+    }
+  }
+}

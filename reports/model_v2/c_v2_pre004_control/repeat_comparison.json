@@ -1,0 +1,90 @@
+{
+  "method": {
+    "repeat_environment": "git worktree --detach at commit 69d7d90 (/tmp/d0_6_repeat_check), data/processed and .venv-t032 reused via symlink since both are gitignored, locally-cached, already-frozen artifacts never re-derived by this or any prior phase -- not literally re-downloaded/re-fetched, consistent with established project convention.",
+    "command": "PYTHONPATH=src:. .venv-t032/bin/python scripts/run_d0_6_diagnostics.py",
+    "ledger_reset_before_repeat": true,
+    "ledger_reset_note": "The worktree's checked-in scope_access_ledger.jsonl (identical copy of the original, already-committed ledger) was deleted LOCALLY IN THE WORKTREE ONLY before the repeat run, so the repeat produces its own clean 8-path, 10-row ledger rather than appending to a stale copy. Nothing in the main repository or its git history was touched by this deletion."
+  },
+  "script_generated_files": [
+    {
+      "file": "patient_composition_train_oof.csv",
+      "original_sha256": "6f1b94ace6c7b94e84306d456696eb11a50941bb68c7e717af8973a01d066808",
+      "repeat_sha256": "6f1b94ace6c7b94e84306d456696eb11a50941bb68c7e717af8973a01d066808",
+      "byte_identical": true, "semantic_identical": true, "excluded_identity_fields": [], "status": "PASS"
+    },
+    {
+      "file": "patient_composition_validation.csv",
+      "original_sha256": "d511b7e666d680a48d1a63018b1a50cc45ed97049e413c49a91195585fa8f069",
+      "repeat_sha256": "d511b7e666d680a48d1a63018b1a50cc45ed97049e413c49a91195585fa8f069",
+      "byte_identical": true, "semantic_identical": true, "excluded_identity_fields": [], "status": "PASS"
+    },
+    {
+      "file": "class_composition_train_oof.csv",
+      "original_sha256": "d1f4a95af5293a2ea935054fb3914501acc5749d0c79f27d29756f72e2a2f58c",
+      "repeat_sha256": "d1f4a95af5293a2ea935054fb3914501acc5749d0c79f27d29756f72e2a2f58c",
+      "byte_identical": true, "semantic_identical": true, "excluded_identity_fields": [], "status": "PASS"
+    },
+    {
+      "file": "class_composition_validation.csv",
+      "original_sha256": "6c9d56395eb3b054a7b65a3187aecbef84b1dcbaba646c78730e270ee9d66ff9",
+      "repeat_sha256": "6c9d56395eb3b054a7b65a3187aecbef84b1dcbaba646c78730e270ee9d66ff9",
+      "byte_identical": true, "semantic_identical": true, "excluded_identity_fields": [], "status": "PASS"
+    },
+    {
+      "file": "score_distributions.csv",
+      "original_sha256": "dd875a22926a343b7932b96f5c0e256298d8ec98c0045fe84d817fd2e6649524",
+      "repeat_sha256": "dd875a22926a343b7932b96f5c0e256298d8ec98c0045fe84d817fd2e6649524",
+      "byte_identical": true, "semantic_identical": true, "excluded_identity_fields": [], "status": "PASS"
+    },
+    {
+      "file": "diagnostic_thresholds.json",
+      "original_sha256": "786ec2a7c9a3cd8f244b59cd7ac4842be9224407fe6f52731da989ee59840cd0",
+      "repeat_sha256": "786ec2a7c9a3cd8f244b59cd7ac4842be9224407fe6f52731da989ee59840cd0",
+      "byte_identical": true, "semantic_identical": true, "excluded_identity_fields": [], "status": "PASS"
+    },
+    {
+      "file": "threshold_region_errors.csv",
+      "original_sha256": "ea1eae58d123618e9d4e44f2228e935fbe794a4d6de2f9c822c9c008daf1e675",
+      "repeat_sha256": "ea1eae58d123618e9d4e44f2228e935fbe794a4d6de2f9c822c9c008daf1e675",
+      "byte_identical": true, "semantic_identical": true, "excluded_identity_fields": [], "status": "PASS"
+    },
+    {
+      "file": "patient_loo_auprc.csv",
+      "original_sha256": "a8727d31ad83fdfdf552b5b76d735f57fa7894d4d260aab1e0e7ee50d93280cf",
+      "repeat_sha256": "a8727d31ad83fdfdf552b5b76d735f57fa7894d4d260aab1e0e7ee50d93280cf",
+      "byte_identical": true, "semantic_identical": true, "excluded_identity_fields": [], "status": "PASS"
+    },
+    {
+      "file": "patient_brier.csv",
+      "original_sha256": "ba2788ba5a896630a98e24b586ac4bb9224b1c3495c4b30085a7eb108cd3a030",
+      "repeat_sha256": "ba2788ba5a896630a98e24b586ac4bb9224b1c3495c4b30085a7eb108cd3a030",
+      "byte_identical": true, "semantic_identical": true, "excluded_identity_fields": [], "status": "PASS"
+    }
+  ],
+  "hand_authored_synthesis_files": {
+    "note": "train_oof_hypothesis_audit.json and historical_validation_context.json were NOT produced by scripts/run_d0_6_diagnostics.py or any other committed script -- they were hand-authored JSON syntheses of numbers read from the 9 script-generated files above. No generation script exists for them, so a literal 'rerun the script and diff bytes' repeat does not apply. Verified instead: every numeric value cited in both files traces back to the 9 script-generated files, which are now proven byte-identical between the original run and this clean repeat; therefore the cited numbers are unchanged by transitivity. This is disclosed as a methodology gap (no deterministic generator script for these two files), not concealed.",
+    "files": [
+      {
+        "file": "train_oof_hypothesis_audit.json",
+        "original_sha256": "00e1c74c00dc415b3d87ee4a9584b7cf27c46256c590ea0631aeb44a81a8bbf0",
+        "verification_method": "SEMANTIC_TRACEBACK_TO_BYTE_IDENTICAL_SOURCES",
+        "status": "PASS"
+      },
+      {
+        "file": "historical_validation_context.json",
+        "original_sha256": "d16722f3b54cce2a74cf65d333c4a71cecae120b43b2170b0f2a46893d5b4690",
+        "verification_method": "SEMANTIC_TRACEBACK_TO_BYTE_IDENTICAL_SOURCES",
+        "status": "PASS"
+      }
+    ]
+  },
+  "scope_access_ledger_repeat": {
+    "path": "reports/model_v2/c_v2_pre004_control/repeat/scope_access_ledger_repeat.jsonl",
+    "rows": 10,
+    "distinct_paths": 8,
+    "all_paths_on_allowlist": true,
+    "forbidden_access": false
+  },
+  "overall_scientific_value_changed": false,
+  "status": "PASS"
+}

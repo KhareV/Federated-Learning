@@ -1,0 +1,32 @@
+{
+  "algorithm": "sha256",
+  "artifacts": {
+    "configs/model_v2/research_protocol_v2.yaml": "d9f6e0aa427b78aaea974ef9c0508b835ad472549928d3c67d7a684f00d36be0",
+    "docs/MODEL_V2_RESEARCH_PROTOCOL_V2.md": "20001adff8db49d0a3008f090ec00b022982ff1db03b8365ff65828a5d11cb45",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V2.lock.json": "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81",
+    "reports/model_v2/c_v2_pre004_control/architecture_identity_audit.json": "a87d9cfc88304c753471be41b15a38c57adb5864b669a7e8841f7f30cf746bb8",
+    "reports/model_v2/c_v2_pre004_control/d0_6_final_method_inventory.json": "26096aa38f2cbb4aad41febea355b8758cb361be9e9c73581cd1eec1fa1a39cd",
+    "reports/model_v2/c_v2_pre004_control/d0_6_git_chronology_audit.json": "f10961035ff847a14fc91fd90fb52b5bd7011c23c22bae739d73d7192d724fa5",
+    "reports/model_v2/c_v2_pre004_control/entry_audit.json": "69818b324af8a67447af7b5ae14761b971fcdfba8a77f70199e4a716fba735db",
+    "reports/model_v2/c_v2_pre004_control/method_commit_attestation.json": "86acf120933dc485b49eea443f3300cd8cfecf71ea4f8616d8bdc8e44cb56c10",
+    "reports/model_v2/c_v2_pre004_control/missing_validation_source_audit.json": "8c2db2f6ad86cf7dcbf397ea8a58262491515ddb404480837b4d28cb332ba3d0",
+    "reports/model_v2/c_v2_pre004_control/protocol_authority_audit.json": "204933dc3bf28fcbb9917c51da7d83af39bf46adeaf37dab0b9a4a7c6e994ddc",
+    "reports/model_v2/c_v2_pre004_control/protocol_v2_successor_audit.json": "6d6194b70478fe02176b1e67c6db2b6e0fc7f7ffc8d562350330c792812cf4e8",
+    "reports/model_v2/c_v2_pre004_control/registry_audit.json": "53da494be7853dca5e6eceaa67569786dda64bd8bc61c5c067b7fc8e54aedd67",
+    "reports/model_v2/c_v2_pre004_control/repeat/class_composition_train_oof.csv": "d1f4a95af5293a2ea935054fb3914501acc5749d0c79f27d29756f72e2a2f58c",
+    "reports/model_v2/c_v2_pre004_control/repeat/class_composition_validation.csv": "6c9d56395eb3b054a7b65a3187aecbef84b1dcbaba646c78730e270ee9d66ff9",
+    "reports/model_v2/c_v2_pre004_control/repeat/diagnostic_thresholds.json": "786ec2a7c9a3cd8f244b59cd7ac4842be9224407fe6f52731da989ee59840cd0",
+    "reports/model_v2/c_v2_pre004_control/repeat/patient_brier.csv": "ba2788ba5a896630a98e24b586ac4bb9224b1c3495c4b30085a7eb108cd3a030",
+    "reports/model_v2/c_v2_pre004_control/repeat/patient_composition_train_oof.csv": "6f1b94ace6c7b94e84306d456696eb11a50941bb68c7e717af8973a01d066808",
+    "reports/model_v2/c_v2_pre004_control/repeat/patient_composition_validation.csv": "d511b7e666d680a48d1a63018b1a50cc45ed97049e413c49a91195585fa8f069",
+    "reports/model_v2/c_v2_pre004_control/repeat/patient_loo_auprc.csv": "a8727d31ad83fdfdf552b5b76d735f57fa7894d4d260aab1e0e7ee50d93280cf",
+    "reports/model_v2/c_v2_pre004_control/repeat/scope_access_ledger_repeat.jsonl": "d0449cb015b2fd37c795078cef7c2fc2ad5517b2658875a3d74e9e57678dd5bb",
+    "reports/model_v2/c_v2_pre004_control/repeat/score_distributions.csv": "dd875a22926a343b7932b96f5c0e256298d8ec98c0045fe84d817fd2e6649524",
+    "reports/model_v2/c_v2_pre004_control/repeat/threshold_region_errors.csv": "ea1eae58d123618e9d4e44f2228e935fbe794a4d6de2f9c822c9c008daf1e675",
+    "reports/model_v2/c_v2_pre004_control/repeat_comparison.json": "b0aa57595022bd45e1364e9cd1656642eeadc2de6355b060a439f529f9c0f643",
+    "reports/model_v2/c_v2_pre004_control/run_manifest.json": "5931abc17f12b71bf70612b220a07c89339a453df7c723d6110f7e949a7175c7",
+    "reports/model_v2/c_v2_pre004_control/test_results.json": "c6409debc0958871aa9977c637987860ca41950611fac2715d1025592d4b7bc4",
+    "reports/model_v2/c_v2_pre004_control/v2_004_fit_budget_audit.json": "8ed877dacaa73d3a9d0e044877d7f06f27703ae9feb1c285845d5546f912f435"
+  },
+  "manifest_version": "1.0"
+}

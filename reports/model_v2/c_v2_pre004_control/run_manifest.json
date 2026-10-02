@@ -1,0 +1,40 @@
+{
+  "config_path": "configs/model_v2/research_protocol_v2.yaml",
+  "config_sha256": "d9f6e0aa427b78aaea974ef9c0508b835ad472549928d3c67d7a684f00d36be0",
+  "corrective_checkpoint": "C-V2-PRE004-CONTROL",
+  "created_at_utc": "2026-10-02T20:13:12.122975Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "6cfeceb224ee6624e89749f1450fce26fdaaec46",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "configs/model_v2/research_protocol_v1.yaml",
+      "sha256": "7e865a4625cb746cd3db83b5d96ca4fcfe633611a936a4dab85060909c204cfb"
+    },
+    {
+      "path": "reports/model_v2/c_v2_d0_6/run_manifest.json",
+      "sha256": "7891fdd7f87a01d302b88150dfa1da694cd403b8524d5163d2c8460605057bdd"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "C-V2-PRE004-CONTROL: D0.6 provenance confirmation + V2-004 plan/protocol reconciliation. Not V2-004, no model training, 0 neural fits added.",
+  "output_artifacts": [
+    {
+      "path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V2.lock.json",
+      "sha256": "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81"
+    },
+    {
+      "path": "reports/model_v2/c_v2_pre004_control/repeat_comparison.json",
+      "sha256": "b0aa57595022bd45e1364e9cd1656642eeadc2de6355b060a439f529f9c0f643"
+    }
+  ],
+  "phase_id": "V2-001",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "c-v2-pre004-control",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": null,
+  "spec_version": "2.2",
+  "task_id": "V2-001"
+}
