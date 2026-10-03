@@ -1,0 +1,41 @@
+{
+  "cal_v2_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+  "cal_v2_verifier": "PASS",
+  "identity_checks": {
+    "architecture": true,
+    "checkpoint_sha": true,
+    "comparator": true,
+    "map": true,
+    "seed": true,
+    "target": true,
+    "temperature": true,
+    "threshold": true
+  },
+  "model_v2_final_max_abs_error": 0.0,
+  "model_v2_final_verifier": "PASS",
+  "protocol_v3_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+  "status": "PASS",
+  "v2_010_predictions": {
+    "incart_v2_predictions.csv": {
+      "expected_rows": 26864,
+      "matches_v2_010_artifact_hashes": true,
+      "patient_clusters": 32,
+      "rows": 26864,
+      "sha256": "6517d9415eaad2acaf073afff217ae4c1508ba3ee629b9a54d50c7ba459db7e6"
+    },
+    "internal_v2_predictions.csv": {
+      "expected_rows": 2157,
+      "matches_v2_010_artifact_hashes": true,
+      "rows": 2157,
+      "sha256": "04826ee3f66d466c3d5138e219156efab2a5930f0cc991ee725e6048de26f035"
+    },
+    "nstdb_v2_predictions.csv": {
+      "expected_rows": 4320,
+      "matches_v2_010_artifact_hashes": true,
+      "pair_ids": 720,
+      "rows": 4320,
+      "sha256": "0c93367b50f49d876ddf886ef2c5ff2213541e51e6d8f1dfe1194c34fd48252e",
+      "snr_levels": 6
+    }
+  }
+}

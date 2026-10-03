@@ -1,0 +1,28 @@
+{
+  "candidate_counts": {
+    "FN": 25,
+    "FP": 7,
+    "TN": 994,
+    "TP": 1131
+  },
+  "case_manifest_sha256": "05842d7d07d8cce246eeb9fae7189f349d1a835e5ef49b551639b6728779027a",
+  "manual_selection": false,
+  "model_rerun_for_selection": false,
+  "selected_ids": {
+    "FN": "a05c297ebbacbe23e4edbfc4c37f9a2c67be771f5ad6f7b959e9313183a3e11c",
+    "FP": "6fb6c73f0ead7b9f4b9f42ba59d4ee773a8f880930eda661918d29cbd68afd78",
+    "TN": "b454fc6660d870011036da6c63cf37e15dfe7af73046c58d4ea829e2e194dc70",
+    "TP": "7dae5fa655217f27e270bb7ec1abebaddf3fdcf43f848ffc41330a86b3d7e901"
+  },
+  "selection_rules": {
+    "FN": "lowest_source_domain_calibrated_probability",
+    "FP": "highest_source_domain_calibrated_probability",
+    "TN": "lowest_source_domain_calibrated_probability",
+    "TP": "highest_source_domain_calibrated_probability"
+  },
+  "source_table": "reports/model_v2/v2_010/internal_v2_predictions.csv",
+  "source_table_sha256": "04826ee3f66d466c3d5138e219156efab2a5930f0cc991ee725e6048de26f035",
+  "status": "PASS",
+  "tie_rule": "lexicographically_smallest_example_id",
+  "waveform_access_for_selection": false
+}

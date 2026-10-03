@@ -1,0 +1,41 @@
+{
+  "A_v2_008_timeout_provenance": {
+    "V2_008_outer_timeout_annotations_observed": true,
+    "earlier_no_timeout_or_not_substantiated_wording": "SUPERSEDED_PROVENANCE_WORDING",
+    "old_evidence_rewritten": false,
+    "scientific_MODEL_V2_FINAL_affected": false,
+    "source_of_statement": "operator-attested in the V2-011 phase prompt Section 3A; the outer-harness '(timeout 2m)' annotations are not part of the agent-visible command output",
+    "superseded_wording_locations": [
+      "reports/model_v2/v2_009/ preflight (INVESTIGATED_NOT_SUBSTANTIATED)",
+      "reports/model_v2/v2_010/v2_009_entry_continuity_audit_fact_a.json (not corroborated from the visible transcript)"
+    ]
+  },
+  "B_v2_010_handoff_formatting": {
+    "classification": "PROVENANCE_NORMALIZATION_ONLY",
+    "mechanically_reconstructed_state": {
+      "CAL_V2": "FROZEN",
+      "MODEL_V2_FINAL": "FROZEN",
+      "MODEL_V2_RUNTIME_ACCEPTED": "ACCEPTED",
+      "V2-010": "PASS",
+      "V2-011": "NOT_STARTED",
+      "V2G9": "PASS",
+      "cumulative_neural_fits": 71,
+      "official_validation_promotion": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+      "operational_lineage": "MODEL_V1"
+    },
+    "v2_010_final_handoff_reproduced_verbatim": false
+  },
+  "C_v2_010_registry_chronology": {
+    "classification": "POST_RESULT_CONTROL_PLANE_BOOKKEEPING",
+    "detail": "V2-010 registry/status bookkeeping (V2-010/V2G9 PASS, MODEL_V2_RUNTIME_ACCEPTED component row) was completed after the results existed. An initial edit silently converted CRLF to LF in the two registry CSVs; it was detected via git diff --stat, reverted with git checkout, and reapplied minimally in binary mode with CRLF preserved (3-line diff).",
+    "scientific_result_affected": false
+  },
+  "D_independent_verifier_strength": {
+    "primary_v2_010_analysis_invalidated": false,
+    "remedy": "v2_010_statistical_reverification.json reconstructs BOTH sides from frozen prediction tables and frozen draw matrices",
+    "v2_010_incart_independent_verifier_v1_side_source": "frozen verified V1 T020 bootstrap-replicate table",
+    "v2_side": "independently derived from V2 predictions and the frozen draw matrix"
+  },
+  "status": "DISCLOSED",
+  "v2_010_scientific_result_changed": false
+}

@@ -1,0 +1,44 @@
+id: EXPLAINABILITY_V2
+owner_task: V2-011
+model_id: MODEL_V2_FINAL
+MODEL_V2_FINAL_sha256: 89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b
+MODEL_V2_FINAL_manifest_sha256: 8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253
+MODEL_V2_FINAL_frozen_config_sha256: f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df
+CAL_V2_sha256: 349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7
+protocol_v3_lock_sha256: 287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8
+PREPROC_V1_lock_sha256: 181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c
+case_source: reports/model_v2/v2_010/internal_v2_predictions.csv
+case_source_sha256: 04826ee3f66d466c3d5138e219156efab2a5930f0cc991ee725e6048de26f035
+target: MODEL_V2_FINAL_PRE_SIGMOID_LOGIT
+input_representation: PREPROC_V1_NORMALIZED_10S_INPUT
+input_shape: [1, 1, 2500]
+baseline: ALL_ZERO_NORMALIZED_INPUT
+integration: GAUSS_LEGENDRE
+steps: 64
+attribution: SIGNED_INTEGRATED_GRADIENTS
+visual_overlay: PER_WINDOW_ABSOLUTE_ATTRIBUTION_NORMALIZED_BY_WINDOW_MAX
+case_selection:
+  TP: highest_source_domain_calibrated_probability
+  TN: lowest_source_domain_calibrated_probability
+  FP: highest_source_domain_calibrated_probability
+  FN: lowest_source_domain_calibrated_probability
+tie_rule: lexicographically_smallest_example_id
+case_count: 4
+manual_selection: false
+cal_v2_role: CASE_SELECTION_AND_STATUS_LABELS_ONLY_NEVER_AN_IG_TARGET
+completeness_definition: sum(IG) - (F(x) - F(zero))
+completeness_acceptance: absolute_delta < 1e-3 OR relative_delta < 1e-3
+completeness_absolute_threshold: 0.001
+completeness_relative_threshold: 0.001
+completeness_relative_denominator_floor: 1.0e-12
+completeness_failure_stop_code: V2_011_IG_COMPLETENESS_FAILURE
+logit_consistency_tolerance_abs: 0.001
+repeat_run_tolerance_abs: 1.0e-9
+model_mode: eval_no_grad_to_parameters_input_gradients_only
+guard: V2_EXPLAINABILITY_CASE_ACCESS_ONCE
+claim_boundary: >-
+  Integrated Gradients identifies normalized input regions that contribute to
+  MODEL_V2_FINAL's pre-sigmoid logit under the specified zero baseline; engineering
+  model-contribution diagnostic only, not a causal physiological explanation and not
+  a clinical explanation.
+annotations_role: DISPLAY_CONTEXT_ONLY_NEVER_MODEL_INPUT

@@ -1,0 +1,107 @@
+id: ERROR_ANALYSIS_V2
+owner_task: V2-011
+posthoc_only: true
+tuning: false
+model_id: MODEL_V2_FINAL
+calibration_id: CAL_V2
+cal_v2_threshold: 0.5101937262006424
+cal_v2_comparator: ">="
+sources:
+  INTERNAL_TEST: reports/model_v2/v2_010/internal_v2_predictions.csv
+  INCART: reports/model_v2/v2_010/incart_v2_predictions.csv
+  NSTDB: reports/model_v2/v2_010/nstdb_v2_predictions.csv
+  NSTDB_COMPARISON: reports/model_v2/v2_010/nstdb_comparison.csv
+window_manifests:
+  INTERNAL_TEST: manifests/windows/MITDB_WINDOWS_V1.csv
+  INCART: manifests/windows/INCART_EXTERNAL_WINDOWS_V1.csv
+patient_slice:
+  id: PATIENT_ERROR_RANKING_V2
+  ranking_metric: BRIER
+  direction: LOWER_IS_BETTER
+  best: LOWEST_BRIER
+  worst: HIGHEST_BRIER
+  positive_class_f1_for_ranking: false
+  single_class_f1_caveat: >-
+    Positive-class F1 is descriptive only; for a patient/cluster with no positive windows it
+    is NOT_INTERPRETABLE_FOR_OVERALL_PATIENT_RANKING and F1=0 is never read as worst.
+  pseudonym_prefix:
+    INTERNAL_TEST: INT_PATIENT
+    INCART: INCART_CLUSTER
+  incart_brier_semantics: >-
+    error of the transferred MIT-BIH source-domain probability; not an external
+    calibration validation
+class_composition:
+  id: CLASS_COMPOSITION_V1_REUSED
+  rule: F first; else S/V dominance or tie
+  groups: [S_DOMINANT, V_DOMINANT, F_CONTAINING, S_V_TIE]
+  population: positive_windows
+  exploratory_support_below: 30
+quality_slice:
+  states_reported: [VALID, DEGRADED]
+  unusable_in_metrics: false
+  invent_missing_states: false
+heart_rate_slice:
+  bins_source: reports/t031/hr_bins.json
+  bins_source_sha256: af2e71296fd091843e060af135bf3b81baca495c51caa6e29be5a1dc9848a63c
+  id: HR_ANALYSIS_BINS_V1
+  derivation_partition: TRAIN_ONLY
+  Q1_bpm: 65.4545454545441
+  Q2_bpm: 76.19047619046849
+  Q3_bpm: 88.70636550307518
+  recompute_bins: false
+  estimator: 60 / median consecutive annotation RR intervals wholly inside window
+dataset_slice:
+  metrics: [patients, windows, prevalence, AUPRC, AUPRC_lift_over_prevalence, AUROC,
+    pooled_F1, patient_macro_F1, Brier, precision, sensitivity, specificity]
+  prevalence_note: >-
+    different prevalence means raw AUPRC magnitudes are not directly exchangeable across
+    datasets; INCART remains un-recalibrated
+threshold_region:
+  id: THRESHOLD_REGION_V2
+  center: 0.5101937262006424
+  margin: 0.05
+  clip: [0.0, 1.0]
+  threshold_moved: false
+nstdb_snr_slice:
+  semantics: >-
+    provider-generated 118e*/119e* electrode-motion stress series (V2-010 NSTDB curve); it does
+    NOT independently cover all three artifact types
+noise_type:
+  protocol_id: NOISE_TYPE_ERROR_ANALYSIS_V1
+  reused_exactly: true
+  c031_lock: artifacts/C031_ERROR_ANALYSIS_V1.lock.json
+  c031_lock_sha256: 4e06a7aa25ddd26bb929028eb513c9bac4e4dcf9f7f901363b9383300a0ace0d
+  c031_config: configs/c031_error_analysis_v1.yaml
+  c031_config_sha256: f447cd80c7dd10110e7bdb52890230928b4a6b0d12739cad85a16df0c203cd75
+  c031_code: evaluation/c031_error_analysis.py
+  c031_code_sha256: 8680fe1df46f1b051178d8691f7528c3eabba33600c0f06ec233ec89d9a14ccb
+  mixing_code: federated/feature_noise.py
+  mixing_code_sha256: aad5552c4c82790191835c16c13dfa1c275594926ccc36f5442d2d3a51797aee
+  base_manifest: reports/t031/c031_noise_base_manifest.csv
+  base_manifest_sha256: 16a885257048edc80f13bc6c24843627d008cde6235a5def8426f3258c1152fe
+  base_records: ["118", "119"]
+  base_windows: 720
+  positive: 469
+  negative: 251
+  noise_sources: {BASELINE_WANDER: bw, ELECTRODE_MOTION: em, MUSCLE_ARTIFACT: ma}
+  noise_source_dat_sha256:
+    bw: 15f68280aba8b006f5497c14da44b558e68caaabc2afc5c4b710eea779b7512c
+    em: 4f9416a04b2bed98081ee3118c1282f9e35321bfd5da96ce48056a3fe147358d
+    ma: 40bda613a3e65adb277df1b72f8a41d2c1c2e0131ea4ec1e03cf1e2cd68199c4
+  snr_db: [24, 18, 12, 6, 0, -6]
+  analysis_cells: 18
+  segment_namespace: C031_NOISE_TYPE_V1
+  achieved_snr_tolerance_db: 0.05
+  post_mix: PREPROC_V1 per-window z-score (normalize_window_zscore)
+  pure_noise_labels: NONE; labels originate only from clean MIT-BIH base windows
+  probability: CAL_V2 transferred MIT-BIH source-domain probability
+  v1_comparator: reports/t031/noise_type_snr_slice_v2.csv
+  v1_comparator_sha256: e671d42f3ed80eaea5446d1d642d477466152989e75c1097dd29b92dbb2fb861
+  v1_predictions: reports/t031/noise_type_predictions_v2.csv
+  v1_predictions_sha256: 9425d4a3fcc4e9d80372049a1517d5e291119bccb4149f5d41ed7dd96f35434a
+  v1_rerun: false
+  new_acceptance_gate: false
+  guard: V2_NOISE_TYPE_ERROR_ANALYSIS_ONCE
+  claim_boundary: CONTROLLED_TWO_SOURCE_RECORD_NOISE_TYPE_ROBUSTNESS_ANALYSIS_NOT_POPULATION_ROBUSTNESS
+wearable_status: OUT_OF_SCOPE
+runtime_acceptance_changeable_by_this_phase: false

@@ -1,0 +1,50 @@
+{
+  "analysis_cells": 18,
+  "checks": {
+    "analysis_cells_18": true,
+    "base_manifest_sha": true,
+    "base_pairs_match_t019": true,
+    "base_records": true,
+    "base_windows_720": true,
+    "c031_code_sha": true,
+    "c031_config_sha": true,
+    "c031_lock_sha": true,
+    "lock_bound_artifacts_all_match": true,
+    "mixing_code_sha": true,
+    "negative_251": true,
+    "noise_source_hashes": true,
+    "noise_sources": true,
+    "noise_types_map": true,
+    "positive_469": true,
+    "pure_noise_labels_none": true,
+    "segment_namespace": true,
+    "snr_list": true,
+    "v1_comparator_18_cells": true,
+    "v1_comparator_sha": true,
+    "v1_predictions_sha": true
+  },
+  "negative": 251,
+  "noise_source_dat_sha256": {
+    "bw": "15f68280aba8b006f5497c14da44b558e68caaabc2afc5c4b710eea779b7512c",
+    "em": "4f9416a04b2bed98081ee3118c1282f9e35321bfd5da96ce48056a3fe147358d",
+    "ma": "40bda613a3e65adb277df1b72f8a41d2c1c2e0131ea4ec1e03cf1e2cd68199c4"
+  },
+  "noise_types": [
+    "BASELINE_WANDER",
+    "ELECTRODE_MOTION",
+    "MUSCLE_ARTIFACT"
+  ],
+  "positive": 469,
+  "protocol_id": "NOISE_TYPE_ERROR_ANALYSIS_V1",
+  "pure_noise_labels_fabricated": false,
+  "snr_levels": [
+    24,
+    18,
+    12,
+    6,
+    0,
+    -6
+  ],
+  "source_windows": 720,
+  "status": "PASS"
+}

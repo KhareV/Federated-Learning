@@ -1,0 +1,39 @@
+{
+  "case_ids": {
+    "FN": "a05c297ebbacbe23e4edbfc4c37f9a2c67be771f5ad6f7b959e9313183a3e11c",
+    "FP": "6fb6c73f0ead7b9f4b9f42ba59d4ee773a8f880930eda661918d29cbd68afd78",
+    "TN": "b454fc6660d870011036da6c63cf37e15dfe7af73046c58d4ea829e2e194dc70",
+    "TP": "7dae5fa655217f27e270bb7ec1abebaddf3fdcf43f848ffc41330a86b3d7e901"
+  },
+  "case_manifest_sha256": "05842d7d07d8cce246eeb9fae7189f349d1a835e5ef49b551639b6728779027a",
+  "guards": {
+    "CASE_ACCESS": "ARMED",
+    "NOISE_TYPE": "ARMED"
+  },
+  "method_artifact_sha256": {
+    "configs/model_v2/error_analysis_v2.yaml": "8f790f31c2c466e8dd7b181b98e3e49262a5d06d950e50f16f176a51a0c7bd23",
+    "configs/model_v2/explainability_v2.yaml": "09057c147681c2678cc4688edd5db6d083bdc14d042bb16daa3c10ed1626b834",
+    "evaluation/c031_error_analysis.py": "8680fe1df46f1b051178d8691f7528c3eabba33600c0f06ec233ec89d9a14ccb",
+    "evaluation/error_analysis.py": "36a06822db98e8a0c4239838ca24545bc1cd7ecf5e72f1feeb695c1dc9220b3d",
+    "evaluation/explain.py": "e3f4c5f7eebf5abe0a802a86731b7307d854f472abac1e28a038d2671007616a",
+    "evaluation/explain_v2.py": "dad9ca6bcea296d0bc77bf448fd5848a4478b58f968d7bfa833257c5df19a6b5",
+    "evaluation/metrics.py": "52c61b533c17c71c229b19ddd20a02f5b2923713aedbe0724ab6d2fda049acb3",
+    "federated/feature_noise.py": "aad5552c4c82790191835c16c13dfa1c275594926ccc36f5442d2d3a51797aee",
+    "models/explainability_v2_verify.py": "bedb10e2736b91c0fb3873aa861a91ac7fb121df831b1bb548308c522b426a53",
+    "reports/model_v2/v2_011/case_selection_audit.json": "4a299fca24f9bd59963e27c9d52d843af54917bcdc00f0b95f16c3acb690fb87",
+    "reports/model_v2/v2_011/explainability_case_manifest.csv": "05842d7d07d8cce246eeb9fae7189f349d1a835e5ef49b551639b6728779027a",
+    "reports/model_v2/v2_011/noise_type_protocol_audit.json": "d15ec6e688a2b6de780e102f9766825c38a56b8917974e46678a274ed5a8a3a0",
+    "scripts/_v2_011_analysis.py": "0b7606322536d38eca72d587ba70fff3a104ae8e91f4f669946f32fcf321f0a3",
+    "scripts/_v2_011_cases.py": "5470ed1a8f332f3d6fd8f836983783629a0cba6f955e245f8cc0b0c5247d855d",
+    "scripts/build_explainability_v2.py": "de01ac0a9d43550c12f81fbc3960dc9f5e2403d1d8b7e071e487a87a5dd28fa4",
+    "scripts/freeze_v2_011_method.py": "b54a4cc205e84d0d232eaf44c6355bb946e04d24ab45a89888e4b5983d8f23e3",
+    "scripts/run_v2_011_cases.py": "161ac06b9cdc1a663ca73ca7defb069121a99cba876d8bef52102c241b1bc68e",
+    "scripts/run_v2_011_error_analysis.py": "eb4f27faba82de4bfd05fcf10ac629b78263f8b4dde6b944c568cface1ab7de6",
+    "scripts/run_v2_011_noise_type.py": "ac36641c8d11ed4f85fa05deb92127ba4c564671231b505e41076b39f92d0f5c",
+    "src/nhm/model_v2_explainability_guard.py": "6ea6cdbc4cd48a8afb650b2ac8c40e313424624154580743388ae89b18d9e2a4"
+  },
+  "owner_task": "V2-011",
+  "real_ig_result_exists": false,
+  "status": "PASS",
+  "v2_noise_type_result_exists": false
+}

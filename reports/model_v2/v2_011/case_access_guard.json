@@ -1,0 +1,20 @@
+{
+  "armed_at": "2026-10-03T19:55:09.831589Z",
+  "armed_git_sha": "883d9c9c1818eb65c62367c44a3c3a44ff68b542",
+  "guard": "CASE_ACCESS",
+  "guard_name": "V2_EXPLAINABILITY_CASE_ACCESS_ONCE",
+  "preconditions": {
+    "analysis_lib_sha256": "0b7606322536d38eca72d587ba70fff3a104ae8e91f4f669946f32fcf321f0a3",
+    "cal_v2_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "case_manifest_sha256": "05842d7d07d8cce246eeb9fae7189f349d1a835e5ef49b551639b6728779027a",
+    "cases_lib_sha256": "5470ed1a8f332f3d6fd8f836983783629a0cba6f955e245f8cc0b0c5247d855d",
+    "error_analysis_config_sha256": "8f790f31c2c466e8dd7b181b98e3e49262a5d06d950e50f16f176a51a0c7bd23",
+    "explain_v2_code_sha256": "dad9ca6bcea296d0bc77bf448fd5848a4478b58f968d7bfa833257c5df19a6b5",
+    "explainability_config_sha256": "09057c147681c2678cc4688edd5db6d083bdc14d042bb16daa3c10ed1626b834",
+    "model_v2_final_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "preproc_v1_lock_sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "v2_010_internal_predictions_sha256": "04826ee3f66d466c3d5138e219156efab2a5930f0cc991ee725e6048de26f035"
+  },
+  "state": "ARMED"
+}
