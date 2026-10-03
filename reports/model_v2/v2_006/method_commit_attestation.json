@@ -1,0 +1,29 @@
+{
+  "checkpoint": "V2-006",
+  "METHOD_COMMIT": "69f51cd62b12014724c552d3ab74f7d6c928722b",
+  "method_commit_binds_hashes_of": {
+    "active_protocol_v3": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V3.lock.json",
+    "active_protocol_v3_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "architecture_source": "models/model_v2_architectures.py",
+    "architecture_source_sha256": "2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0",
+    "training_source": "training/train_central.py",
+    "training_source_sha256": "73cca30cdece34a1af6264100736452b56826b96511ec18bf7559a82f930c411",
+    "v2_006_config": "configs/model_v2/optimizer_correction_v1.yaml",
+    "v2_006_config_sha256": "288a1185d5ba74d5f3bfb5729fc73197f1181ceae01c99db4580f86bc5f6dafc",
+    "frozen_training_contract_config": "configs/model_v1.yaml",
+    "frozen_training_contract_config_sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc",
+    "cv_manifests": {
+      "outer_cv_lock_sha256": "4f89d6ce8af2eda669bacf892dbeb4c6579069b2232a86e3b3ddb8f8abf98a5b",
+      "inner_cv_lock_sha256": "d0f8676b2a1f6dd7912e70d768b4001645912352a23812d4b3a61f16d71fbfb9"
+    },
+    "v2_004_control_arch_causality_lock_sha256": "79c423fdcbd5c9dee1743ec60f704e56a48af201b6357499990cd54fa35729c3",
+    "bootstrap_draws_sha256": "e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071",
+    "v2_006_lib_sha256": "73049ad5e634e4c9eb50ae31906c1683c0d82f19c86e8457c0bd25352843a48d",
+    "run_fit_script_sha256": "baee256319d7a353b9c064056078c1769a1965b40e61a2ac01f0b7fd89ce0e48",
+    "aggregate_script_sha256": "75f8379a54d025c52d770d90cc613bd6474f0a0b1f4ae2d8c287a0408e0d8fdc",
+    "bootstrap_script_sha256": "d2540752127a7702abdd06d48f2b3dbb37a6454f1b7f808a1e5766616cde105e",
+    "decide_script_sha256": "8f7acd0d214c9bdc69e37bc17dbfb0bf0e92f9f4c9f18721cf6c51b6e9c772cb",
+    "shortlist_rule_source": "scripts/decide_v2_006.py (finalist_shortlist_policy section, frozen before any challenger result)"
+  },
+  "note": "METHOD_ATTESTATION_COMMIT per the required chronology: METHOD_COMMIT (69f51cd) -> this attestation, naming that commit's own real SHA -> both pushed -> only then may the first V2-006 challenger fit begin."
+}
