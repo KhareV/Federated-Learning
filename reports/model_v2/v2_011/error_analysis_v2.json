@@ -1,0 +1,125 @@
+{
+  "claim_boundary": "descriptive associations only; no tuning, no clinical claim",
+  "dataset_slice": [
+    {
+      "AUPRC": 0.9994730838739116,
+      "AUPRC_lift_over_prevalence": 1.8649337732837608,
+      "AUROC": 0.9993803774080591,
+      "Brier": 0.22538825313649588,
+      "FN": 25,
+      "FP": 7,
+      "TN": 994,
+      "TP": 1131,
+      "dataset": "INTERNAL_TEST",
+      "negative": 1001,
+      "patient_count": 6,
+      "patient_macro_F1": 0.7585622754690675,
+      "pooled_F1": 0.986050566695728,
+      "positive": 1156,
+      "precision": 0.9938488576449912,
+      "prevalence": 0.53592953175707,
+      "prevalence_note": "different prevalence: raw AUPRC magnitudes are not directly exchangeable across datasets; INCART remains un-recalibrated",
+      "sensitivity": 0.9783737024221453,
+      "specificity": 0.993006993006993,
+      "window_count": 2157
+    },
+    {
+      "AUPRC": 0.970004055260483,
+      "AUPRC_lift_over_prevalence": 1.9899342451712574,
+      "AUROC": 0.9676821484566808,
+      "Brier": 0.22909107289933428,
+      "FN": 1173,
+      "FP": 1329,
+      "TN": 12440,
+      "TP": 11922,
+      "dataset": "INCART",
+      "negative": 13769,
+      "patient_count": 32,
+      "patient_macro_F1": 0.8174702883672811,
+      "pooled_F1": 0.90503302209064,
+      "positive": 13095,
+      "precision": 0.8997056825899932,
+      "prevalence": 0.4874553305539011,
+      "prevalence_note": "different prevalence: raw AUPRC magnitudes are not directly exchangeable across datasets; INCART remains un-recalibrated",
+      "sensitivity": 0.9104238258877434,
+      "specificity": 0.9034788292541216,
+      "window_count": 26864
+    }
+  ],
+  "id": "ERROR_ANALYSIS_V2",
+  "model_inference_performed": false,
+  "no_tuning": true,
+  "noise_type": {
+    "claim_boundary": "CONTROLLED_TWO_SOURCE_RECORD_NOISE_TYPE_ROBUSTNESS_ANALYSIS_NOT_POPULATION_ROBUSTNESS",
+    "comparison": "reports/model_v2/v2_011/noise_type_comparison_v1_v2.csv",
+    "limitations": [
+      "two source ECG records (118 and 119) only",
+      "pure-noise bw/em/ma recordings carry no AAMI labels; labels come from the clean MIT-BIH base windows",
+      "official 118e*/119e* provider-generated stress and controlled em injection use different generation procedures; equality is not expected",
+      "not population robustness; no tuning or acceptance decision derives from it"
+    ],
+    "metrics": "reports/model_v2/v2_011/noise_type_metrics.csv",
+    "new_acceptance_gate": false,
+    "pooled_cells": 18,
+    "predictions": "reports/model_v2/v2_011/noise_type_v2_predictions.csv",
+    "protocol_id": "NOISE_TYPE_ERROR_ANALYSIS_V1",
+    "v1_inference_rerun": false
+  },
+  "patient_ranking": {
+    "direction": "LOWER_IS_BETTER",
+    "id": "PATIENT_ERROR_RANKING_V2",
+    "incart_best": "INCART_CLUSTER_029",
+    "incart_worst": "INCART_CLUSTER_012",
+    "internal_best": "INT_PATIENT_003",
+    "internal_worst": "INT_PATIENT_006",
+    "metric": "BRIER",
+    "single_class_f1_caveat": true
+  },
+  "posthoc_only": true,
+  "prevalence_caveat": "different prevalence means raw AUPRC magnitudes are not directly exchangeable across datasets; INCART remains un-recalibrated and its Brier is the error of the transferred MIT-BIH source-domain probability, not an external calibration validation",
+  "quality_states_present": [
+    "VALID"
+  ],
+  "status": "PASS",
+  "tables": {
+    "class_composition": "reports/model_v2/v2_011/class_composition_slice.csv",
+    "dataset": "reports/model_v2/v2_011/dataset_slice.csv",
+    "heart_rate": "reports/model_v2/v2_011/heart_rate_slice.csv",
+    "nstdb_snr": "reports/model_v2/v2_011/nstdb_snr_slice.csv",
+    "patient_incart": "reports/model_v2/v2_011/patient_slice_incart.csv",
+    "patient_internal": "reports/model_v2/v2_011/patient_slice_internal.csv",
+    "quality": "reports/model_v2/v2_011/quality_slice.csv",
+    "threshold_region": "reports/model_v2/v2_011/threshold_region_slice.csv"
+  },
+  "threshold_changed": false,
+  "threshold_region": [
+    {
+      "FN": 25,
+      "FN_within_band": 25,
+      "FP": 7,
+      "FP_within_band": 7,
+      "band_lower": 0.4601937262006424,
+      "band_upper": 0.5601937262006425,
+      "dataset": "INTERNAL_TEST",
+      "share_FN_within_band": 1.0,
+      "share_FP_within_band": 1.0,
+      "threshold": 0.5101937262006424,
+      "window_count": 2157,
+      "windows_in_band": 2154
+    },
+    {
+      "FN": 1173,
+      "FN_within_band": 1173,
+      "FP": 1329,
+      "FP_within_band": 1329,
+      "band_lower": 0.4601937262006424,
+      "band_upper": 0.5601937262006425,
+      "dataset": "INCART",
+      "share_FN_within_band": 1.0,
+      "share_FP_within_band": 1.0,
+      "threshold": 0.5101937262006424,
+      "window_count": 26864,
+      "windows_in_band": 26516
+    }
+  ]
+}

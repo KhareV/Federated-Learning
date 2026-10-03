@@ -146,7 +146,7 @@ def corrective_commit() -> str:
 def _diff_state(commit: str, rel: str) -> dict:
     existed = subprocess.run(["git", "cat-file", "-e", f"{commit}:{rel}"], cwd=ROOT,
                              capture_output=True, check=False).returncode == 0
-    diff = _sh("git", "diff", commit, "HEAD", "--", rel) if existed else "MISSING"
+    diff = _sh("git", "diff", commit, "--", rel) if existed else "MISSING"
     return {"existed_at_commit": existed, "has_diff": bool(diff)}
 
 
@@ -292,14 +292,8 @@ def _edit(root: Path, rel: str, old: str, new: str) -> None:
 
 
 def _reseal(root: Path) -> None:
-    """Re-seal lock + report hashes so that detection must come from semantic checks."""
-    lock_path = root / LOCK_REL
-    lock = json.loads(lock_path.read_text())
-    for rel in lock["bound_artifacts"]:
-        target = root / rel
-        if target.exists() and not target.is_symlink():
-            lock["bound_artifacts"][rel] = hash_file(target)
-    lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n")
+    """Re-seal both locks + report hashes so that detection must come from semantic checks.
+    Order matters: the semantics lock is itself bound by the main lock."""
     sem_lock_path = root / "artifacts/EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2.lock.json"
     sem_lock = json.loads(sem_lock_path.read_text())
     for rel in sem_lock["bound_artifacts"]:
@@ -320,9 +314,12 @@ def _reseal(root: Path) -> None:
         root / "reports/model_v2/v2_011/explainability_case_manifest.csv")
     report["error_analysis_config_sha256"] = hash_file(root / cases_rel("error"))
     report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+    lock_path = root / LOCK_REL
     lock = json.loads(lock_path.read_text())
-    lock["bound_artifacts"]["reports/model_v2/v2_011/explainability_case_manifest.csv"] = hash_file(
-        root / "reports/model_v2/v2_011/explainability_case_manifest.csv")
+    for rel in lock["bound_artifacts"]:
+        target = root / rel
+        if target.exists() and not target.is_symlink():
+            lock["bound_artifacts"][rel] = hash_file(target)
     lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n")
 
 
@@ -679,14 +676,21 @@ def finalize() -> None:
 
 
 def main() -> None:
-    reproducibility()
-    immutability()
-    protected_audit()
-    scope_audit()
-    tamper_suite()
-    run_pytest_summary()
-    finalize()
-    print(json.dumps({"status": "PASS"}))
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--stage", choices=("audits", "finalize"), required=True)
+    stage = parser.parse_args().stage
+    if stage == "audits":
+        reproducibility()
+        immutability()
+        protected_audit()
+        scope_audit()
+        tamper_suite()
+    else:
+        finalize()
+        run_pytest_summary()
+    print(json.dumps({"status": "PASS", "stage": stage}))
 
 
 if __name__ == "__main__":

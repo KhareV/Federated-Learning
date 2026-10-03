@@ -1,6 +1,21 @@
 {
   "armed_at": "2026-10-03T19:55:09.845803Z",
   "armed_git_sha": "883d9c9c1818eb65c62367c44a3c3a44ff68b542",
+  "completed_at": "2026-10-03T20:09:36.138123Z",
+  "completed_git_sha": "4fdbe788079da0e6482d39860e0a6bd2bd29bf88",
+  "completion_summary": {
+    "cal_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "cells": 18,
+    "fixture_count": 18,
+    "fixtures_all_pass": true,
+    "model_mutated": false,
+    "model_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "prediction_rows": 12960,
+    "prediction_table_sha256": "e4f5ca4491f2f1ada0484ec4c611f6112d0aec71cca1310112665b61e60ebcac",
+    "source_windows": 720,
+    "standalone_noise_labels_fabricated": false,
+    "v1_inference_rerun": false
+  },
   "guard": "NOISE_TYPE",
   "guard_name": "V2_NOISE_TYPE_ERROR_ANALYSIS_ONCE",
   "preconditions": {
@@ -17,5 +32,7 @@
     "preproc_v1_lock_sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
     "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8"
   },
-  "state": "ARMED"
+  "running_at": "2026-10-03T20:08:21.502807Z",
+  "running_git_sha": "4fdbe788079da0e6482d39860e0a6bd2bd29bf88",
+  "state": "COMPLETED"
 }

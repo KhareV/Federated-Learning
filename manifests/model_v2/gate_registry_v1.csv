@@ -9,7 +9,7 @@ V2G6,Official Validation,"At most two frozen configurations evaluated once on of
 V2G7,MODEL_V2_FINAL Scientific Freeze,"Freeze the predeclared release-seed checkpoint as the immutable scientific MODEL_V2_FINAL artifact unconditionally (not contingent on promotion), with reproducible identity and no retraining; promotion eligibility is tracked separately and does not gate this freeze.",V2-008,,,,,,V2-009,PASS,reports/model_v2/v2_008/run_manifest.json
 V2G8,CAL_V2,Fit and freeze CAL_V2 strictly after MODEL_V2_FINAL freezes.,V2-009,,,,,,V2-010,PASS,reports/model_v2/v2_009/run_manifest.json
 V2G9,Post-Freeze Second Look,One guardrail-checked pass each on INTERNAL_TEST/INCART/NSTDB.,V2-010,,,,,,V2-011;V2-012,PASS,reports/model_v2/v2_010/run_manifest.json
-V2G10,Explainability,Error analysis on frozen V2 second-look outputs.,V2-011,,,,,,,NOT_STARTED,
+V2G10,Explainability,Error analysis on frozen V2 second-look outputs.,V2-011,,,,,,,PASS,reports/model_v2/v2_011/run_manifest.json
 V2G11,Runtime Binding,"GATEWAY_ARTIFACT_V2 export/equivalence, additive only, gated on runtime-acceptance guardrails.",V2-012,,,,,,V2-013,NOT_STARTED,
 V2G12,Integration,"API_RUNTIME_V2/frontend/replay integration, additive only.",V2-013,,,,,,V2-014,NOT_STARTED,
 V2G13,Clean Reproducibility,Clean-environment reproducibility proof for the full MODEL_V2 lineage.,V2-014,,,,,,,NOT_STARTED,

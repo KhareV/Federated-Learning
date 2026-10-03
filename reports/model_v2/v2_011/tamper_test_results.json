@@ -1,0 +1,188 @@
+{
+  "all_detected": true,
+  "canonical_artifacts_unmodified": true,
+  "clean_temp_copy_verifies": true,
+  "mutation_count": 37,
+  "mutations": {
+    "annotation_alignment_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_ATTRIBUTION_ARRAY_CHANGED:FN:annotations.csv"
+    },
+    "attribution_array_value_changed": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_OVERLAY_NORMALIZATION_MISMATCH:TP"
+    },
+    "attribution_row_deletion": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_ATTRIBUTION_ROW_COUNT:FP"
+    },
+    "baseline_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_CONFIG_METHOD_MISMATCH:baseline"
+    },
+    "cal_v2_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_BOUND_ARTIFACT_MISMATCH:artifacts/CAL_V2.json"
+    },
+    "case_category_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_CASE_CATEGORIES"
+    },
+    "case_id_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_CASE_ID_MISMATCH:TP"
+    },
+    "case_probability_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_CASE_PROBABILITY_MISMATCH:TP"
+    },
+    "case_rule_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_SELECTION_RULE_MISMATCH:TP"
+    },
+    "checkpoint_hash_change": {
+      "detected": true,
+      "error": "ModelV2FinalFreezeError:MODEL_V2_FINAL_CHECKPOINT_HASH_MISMATCH: expected 89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b, got abed83a04669f21bfda05e07ebc43bf43ad6c816"
+    },
+    "completeness_gate_field_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_COMPLETENESS_HARD_GATE_PRESENT"
+    },
+    "completeness_hard_gate_reintroduced": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_COMPLETENESS_HARD_GATE_PRESENT"
+    },
+    "completeness_residual_value_altered": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_COMPLETENESS_NOT_RECORDED:TP:completeness_absolute_delta"
+    },
+    "historical_heuristic_constant_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_HISTORICAL_HEURISTIC_CHANGED"
+    },
+    "hr_bin_boundary_change_config": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_HR_BIN_BOUNDARIES"
+    },
+    "hr_bin_boundary_change_json": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_HR_BIN_BOUNDARIES"
+    },
+    "integration_method_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_CONFIG_METHOD_MISMATCH:integration"
+    },
+    "method_lock_binding_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_BOUND_ARTIFACT_MISMATCH:artifacts/C031_ERROR_ANALYSIS_V1.lock.json"
+    },
+    "method_lock_status_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_LOCK_STATUS"
+    },
+    "noise_source_dat_content_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_BOUND_ARTIFACT_MISMATCH:data/raw/nstdb/1.0.0/bw.dat"
+    },
+    "noise_source_hash_change_config": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_NOISE_SOURCE_HASH:bw"
+    },
+    "noise_source_labels_fabricated": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_NOISE_LABELS"
+    },
+    "noise_type_removed": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_NOISE_ROW_COUNT"
+    },
+    "overlay_normalization_config_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_CONFIG_METHOD_MISMATCH:visual_overlay"
+    },
+    "overlay_normalization_values_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_OVERLAY_NORMALIZATION_MISMATCH:TP"
+    },
+    "patient_ranking_metric_brier_to_f1": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_PATIENT_RANKING_METRIC"
+    },
+    "patient_table_brier_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_PATIENT_BRIER_MISMATCH:INCART"
+    },
+    "protocol_v3_change": {
+      "detected": true,
+      "error": "ModelV2FinalFreezeError:MODEL_V2_FINAL_UPSTREAM_HASH_MISMATCH: expected 287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8, got 0395ce8649d4e935004e6206fafd243961fec6458d"
+    },
+    "raw_ecg_row_deletion": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_ATTRIBUTION_ARRAY_CHANGED:TN:raw_ecg.csv"
+    },
+    "semantics_original_commit_binding_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_SEMANTICS_COMMIT_BINDING"
+    },
+    "signed_attribution_removal": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_SIGNED_ATTRIBUTION_MISSING:TP"
+    },
+    "snr_list_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_SNR_LIST"
+    },
+    "steps_64_to_63": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_CONFIG_METHOD_MISMATCH:steps"
+    },
+    "steps_64_to_65": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_CONFIG_METHOD_MISMATCH:steps"
+    },
+    "target_logit_to_probability": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_CONFIG_METHOD_MISMATCH:target"
+    },
+    "threshold_band_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_THRESHOLD_BAND"
+    },
+    "tie_rule_change": {
+      "detected": true,
+      "error": "ExplainabilityV2VerifyError:EXPLAINABILITY_V2_TIE_RULE_MISMATCH"
+    }
+  },
+  "required_categories": [
+    "checkpoint hash change",
+    "CAL_V2 change",
+    "Protocol V3 change",
+    "case ID change",
+    "case category change",
+    "case probability change",
+    "case rule change",
+    "tie rule change",
+    "baseline change",
+    "steps 64->63 or 65",
+    "integration method change",
+    "target raw logit->probability",
+    "signed attribution removal",
+    "overlay normalization change",
+    "historical completeness heuristic constants change",
+    "completeness hard gate reintroduced",
+    "completeness residual altered",
+    "attribution array value change",
+    "attribution row deletion",
+    "raw ECG row deletion",
+    "annotation alignment change",
+    "HR-bin boundary change",
+    "patient ranking metric Brier->F1",
+    "threshold band +/-0.05 change",
+    "noise-type change",
+    "SNR list change",
+    "noise source hash change",
+    "noise source labels fabricated",
+    "method lock changed"
+  ],
+  "status": "PASS"
+}

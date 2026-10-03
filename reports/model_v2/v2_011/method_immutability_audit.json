@@ -1,0 +1,127 @@
+{
+  "all_scientific_files_unchanged": true,
+  "corrected_only_at_corrective_commit_then_unchanged": {
+    "models/explainability_v2_verify.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "scripts/build_explainability_v2.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    }
+  },
+  "corrective_method_commit": "4fdbe788079da0e6482d39860e0a6bd2bd29bf88",
+  "ig_method_files_unchanged_since_original_method_commit": [
+    "evaluation/explain.py",
+    "evaluation/explain_v2.py",
+    "scripts/_v2_011_cases.py",
+    "configs/model_v2/explainability_v2.yaml",
+    "reports/model_v2/v2_011/explainability_case_manifest.csv"
+  ],
+  "original_method_commit": "1bb81d52876ff70dbc1eba742a2b1f1909b8523d",
+  "semantics_files_unchanged_since_corrective_commit": {
+    "artifacts/EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2.lock.json": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "configs/model_v2/explainability_v2_completeness_semantics_v2.yaml": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "evaluation/explain_v2_semantics.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "reports/model_v2/v2_011/completeness_semantics_authority_audit.json": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "reports/model_v2/v2_011/completeness_semantics_method_freeze.json": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "reports/model_v2/v2_011/failed_diagnostic_run_manifest.json": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "reports/model_v2/v2_011/ig_completeness_diagnostic.csv": {
+      "existed_at_commit": true,
+      "has_diff": false
+    }
+  },
+  "status": "PASS",
+  "unchanged_since_original_method_commit": {
+    "configs/model_v2/error_analysis_v2.yaml": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "configs/model_v2/explainability_v2.yaml": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "evaluation/c031_error_analysis.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "evaluation/error_analysis.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "evaluation/explain.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "evaluation/explain_v2.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "evaluation/metrics.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "federated/feature_noise.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "reports/model_v2/v2_011/case_selection_audit.json": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "reports/model_v2/v2_011/explainability_case_manifest.csv": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "reports/model_v2/v2_011/noise_type_protocol_audit.json": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "scripts/_v2_011_analysis.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "scripts/_v2_011_cases.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "scripts/freeze_v2_011_method.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "scripts/run_v2_011_cases.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "scripts/run_v2_011_error_analysis.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "scripts/run_v2_011_noise_type.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    },
+    "src/nhm/model_v2_explainability_guard.py": {
+      "existed_at_commit": true,
+      "has_diff": false
+    }
+  }
+}

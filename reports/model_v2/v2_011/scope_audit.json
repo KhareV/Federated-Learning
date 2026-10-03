@@ -1,0 +1,27 @@
+{
+  "cal_v2_refit": false,
+  "calibration_access": false,
+  "cumulative_neural_fits": 71,
+  "deployment_api_frontend_changes": false,
+  "full_internal_test_reevaluation": false,
+  "gateway_artifact_v2_created": false,
+  "guard_states": {
+    "CASE_ACCESS": "COMPLETED",
+    "NOISE_TYPE": "COMPLETED"
+  },
+  "hardware_or_wearable": false,
+  "incart_reevaluation": false,
+  "internal_test_windows_materialized_for_ig": 4,
+  "new_neural_fits": 0,
+  "nstdb_second_look_rerun": false,
+  "official_validation_access": false,
+  "retraining": false,
+  "runtime_acceptance_changed": false,
+  "second_invocation_blocked": {
+    "CASE_ACCESS": true,
+    "NOISE_TYPE": true
+  },
+  "status": "PASS",
+  "threshold_refit_or_changed": false,
+  "v1_inference_rerun": false
+}

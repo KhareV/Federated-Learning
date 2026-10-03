@@ -1,0 +1,22 @@
+{
+  "case_selection_identical": true,
+  "ig_maximum_absolute_attribution_difference": 0.0,
+  "ig_repeat_status": "PASS",
+  "model_inference_for_this_audit": false,
+  "noise_type_aggregation_identical_on_rerun": true,
+  "noise_type_metrics_match_disk": true,
+  "noise_type_pooled_cells": 18,
+  "prediction_table_slices_identical_on_rerun": true,
+  "slice_csvs_match_disk": {
+    "class_composition_slice.csv": true,
+    "dataset_slice.csv": true,
+    "heart_rate_slice.csv": true,
+    "nstdb_snr_slice.csv": true,
+    "patient_slice_incart.csv": true,
+    "patient_slice_internal.csv": true,
+    "quality_slice.csv": true,
+    "threshold_region_slice.csv": true
+  },
+  "status": "PASS",
+  "verifier_deterministic": true
+}
