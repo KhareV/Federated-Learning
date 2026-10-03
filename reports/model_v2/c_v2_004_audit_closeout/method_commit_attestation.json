@@ -1,0 +1,16 @@
+{
+  "checkpoint": "C-V2-004-AUDIT-CLOSEOUT",
+  "CORRECTIVE_METHOD_COMMIT": "958f5d016db1aec30bebd83b76ea5481ed9ed68f",
+  "corrective_method_commit_binds": {
+    "orchestrator_script": "scripts/generate_c_v2_004_audit_closeout.py",
+    "corrective_tests": "tests/test_c_v2_004_audit_closeout.py"
+  },
+  "method_commit_subject": "fix(model-v2): freeze V2-004 audit-closeout method",
+  "upstream_chain_bound_by_method": {
+    "METHOD_COMMIT": "bb87014c84ad92b23a2bbb21c60e48fa66c68e15",
+    "METHOD_ATTESTATION_COMMIT": "b1d11a97b3059a8f2f7e62243e2b3cd8059bc696",
+    "D1_RESULT_COMMIT": "31a82649079e495e0c1d9eee100bc29620d91301",
+    "FINAL_V2_004_COMMIT": "95cf8396208aeb3b8e31b9c386b6a76f25425c7f"
+  },
+  "note": "CORRECTIVE_METHOD_ATTESTATION_COMMIT per the required chronology: CORRECTIVE_METHOD_COMMIT (958f5d0) -> this attestation, naming that commit's own real SHA -> both pushed -> only then are the final evidence audits run and committed as the corrective result commit."
+}
