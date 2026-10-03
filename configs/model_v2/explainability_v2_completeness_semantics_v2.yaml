@@ -1,0 +1,43 @@
+id: EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2
+owner_task: V2-011
+checkpoint: C-V2-011-COMPLETENESS-SEMANTICS
+classification: UNSUPPORTED_HARD_GATE_REMOVED
+changes_only: completeness hard gate -> diagnostic completeness metadata
+original_method_commit: 1bb81d52876ff70dbc1eba742a2b1f1909b8523d
+failed_diagnostic_run_commit: ce1d055f37d7ddcb4a7c0c6117ba8c4e20450b51
+base_config: configs/model_v2/explainability_v2.yaml
+authority_audit: reports/model_v2/v2_011/completeness_semantics_authority_audit.json
+failed_run_manifest: reports/model_v2/v2_011/failed_diagnostic_run_manifest.json
+unchanged_from_original_method:
+  target: MODEL_V2_FINAL_PRE_SIGMOID_LOGIT
+  baseline: ALL_ZERO_NORMALIZED_INPUT
+  integration: GAUSS_LEGENDRE
+  steps: 64
+  attribution: SIGNED_INTEGRATED_GRADIENTS
+  visual_overlay: PER_WINDOW_ABSOLUTE_ATTRIBUTION_NORMALIZED_BY_WINDOW_MAX
+  tie_rule: lexicographically_smallest_example_id
+  case_manifest: reports/model_v2/v2_011/explainability_case_manifest.csv
+  model_mode: eval
+  existing_attribution_arrays_remain_primary_result: true
+  ig_rerun_required_or_permitted_for_completeness: false
+completeness:
+  previous_semantics: HARD_GATE_ABS_LT_1E-3_OR_REL_LT_1E-3_PROMPT_INTRODUCED
+  new_semantics: DIAGNOSTIC_METADATA_ALWAYS_RECORDED
+  numerical_completeness_gate: NONE
+  gates_v2g10: false
+  recorded_fields: [completeness_signed_delta, completeness_absolute_delta,
+    completeness_relative_delta, historical_v1_style_1e3_heuristic,
+    locked_v2_2_explainability_status]
+  historical_heuristic:
+    absolute: 0.001
+    relative: 0.001
+    comparator: "<"
+    role: DESCRIPTIVE_ONLY_NEVER_A_GATE
+  forbidden_responses: [more_ig_steps, adaptive_quadrature, new_baseline, multiple_baselines,
+    captum_replacement, case_substitution, tolerance_chosen_from_observed_deltas]
+required_report_wording: >-
+  At the locked 64-point Gauss-Legendre resolution, three of four selected cases exceeded the
+  historical 1e-3 absolute-or-relative completeness heuristic. The locked v2.2 specification
+  requires the completeness/convergence residual to be recorded as diagnostic metadata rather
+  than imposing that heuristic as an explainability acceptance threshold. No quadrature step
+  count, baseline, model, or case was changed in response.

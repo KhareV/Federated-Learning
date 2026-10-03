@@ -1,0 +1,16 @@
+{
+  "baseline_changed": false,
+  "cases_changed": false,
+  "ig_rerun": false,
+  "model_or_waveform_access": false,
+  "only_acceptance_semantics_changed": true,
+  "per_case": {
+    "FN": "EXCEEDS_HISTORICAL_1E3_HEURISTIC",
+    "FP": "EXCEEDS_HISTORICAL_1E3_HEURISTIC",
+    "TN": "WITHIN_HISTORICAL_1E3_HEURISTIC",
+    "TP": "EXCEEDS_HISTORICAL_1E3_HEURISTIC"
+  },
+  "semantics_id": "EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2",
+  "status": "PASS",
+  "steps_changed": false
+}

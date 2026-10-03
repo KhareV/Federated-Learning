@@ -1,0 +1,49 @@
+{
+  "authority_audit": "reports/model_v2/v2_011/completeness_semantics_authority_audit.json",
+  "bound_artifacts": {
+    "artifacts/CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "checkpoints/MODEL_V2_FINAL.pt": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "configs/model_v2/explainability_v2.yaml": "09057c147681c2678cc4688edd5db6d083bdc14d042bb16daa3c10ed1626b834",
+    "configs/model_v2/explainability_v2_completeness_semantics_v2.yaml": "2e2a7c2038a3bf7bc51002bf47259c1317a2d4c20d77c29e84c1dae44deeb622",
+    "evaluation/explain.py": "e3f4c5f7eebf5abe0a802a86731b7307d854f472abac1e28a038d2671007616a",
+    "evaluation/explain_v2.py": "dad9ca6bcea296d0bc77bf448fd5848a4478b58f968d7bfa833257c5df19a6b5",
+    "evaluation/explain_v2_semantics.py": "251667db42307d920d7b9b9bd4c99a2ece68f93b54ba90affd4628d59b43a2f9",
+    "reports/model_v2/v2_011/cases/FN_attribution.csv": "06a7318680e5a51b3ee8a6aaf8e1b2e729ad164f84c76fc7d9890a00716c358d",
+    "reports/model_v2/v2_011/cases/FP_attribution.csv": "100d0e4c3c588df5a3fc3789ea543161686251fc1436cea17e36cd835c685600",
+    "reports/model_v2/v2_011/cases/TN_attribution.csv": "972540f22907677568a2b0b739d7e1b8573a5973415993fe1ed233cac39a90b3",
+    "reports/model_v2/v2_011/cases/TP_attribution.csv": "b2f84a3fc6cb8c4a382c94c8c896dfaf7d0858f6003c4a3c96390f89aa7f6bb5",
+    "reports/model_v2/v2_011/completeness_semantics_authority_audit.json": "4c84d46f1c0e9ef49f6de100a2158d4c3fe9630a3e22478a7c0bd39c002ebd88",
+    "reports/model_v2/v2_011/explainability_case_manifest.csv": "05842d7d07d8cce246eeb9fae7189f349d1a835e5ef49b551639b6728779027a",
+    "reports/model_v2/v2_011/failed_diagnostic_run_manifest.json": "2c4919b0bae724ab64cba13b91f686e8c0138ed5297a630c928078f52b82d36b",
+    "reports/model_v2/v2_011/failed_diagnostic_run_summary.json": "39f3a878c41d2870ff7ed36e52d909546d6db7d85ab813f66ecb22cfd04eb940",
+    "reports/model_v2/v2_011/ig_completeness.csv": "fa13537d943fa92ced295f92697866c859b6fb4335058929545a1a1342e13b67",
+    "reports/model_v2/v2_011/ig_completeness_diagnostic.csv": "ca1f1f1f80377b0cbf320e1c3eb07c270d8bf89d21c9b1d989901ebe378a61d0",
+    "scripts/_v2_011_cases.py": "5470ed1a8f332f3d6fd8f836983783629a0cba6f955e245f8cc0b0c5247d855d"
+  },
+  "case_ids_unchanged": {
+    "FN": "a05c297ebbacbe23e4edbfc4c37f9a2c67be771f5ad6f7b959e9313183a3e11c",
+    "FP": "6fb6c73f0ead7b9f4b9f42ba59d4ee773a8f880930eda661918d29cbd68afd78",
+    "TN": "b454fc6660d870011036da6c63cf37e15dfe7af73046c58d4ea829e2e194dc70",
+    "TP": "7dae5fa655217f27e270bb7ec1abebaddf3fdcf43f848ffc41330a86b3d7e901"
+  },
+  "classification": "UNSUPPORTED_HARD_GATE_REMOVED",
+  "failed_diagnostic_run_commit": "ce1d055f37d7ddcb4a7c0c6117ba8c4e20450b51",
+  "ig_method_unchanged": {
+    "attribution": "SIGNED_INTEGRATED_GRADIENTS",
+    "baseline": "ALL_ZERO_NORMALIZED_INPUT",
+    "case_manifest": "reports/model_v2/v2_011/explainability_case_manifest.csv",
+    "existing_attribution_arrays_remain_primary_result": true,
+    "ig_rerun_required_or_permitted_for_completeness": false,
+    "integration": "GAUSS_LEGENDRE",
+    "model_mode": "eval",
+    "steps": 64,
+    "target": "MODEL_V2_FINAL_PRE_SIGMOID_LOGIT",
+    "tie_rule": "lexicographically_smallest_example_id",
+    "visual_overlay": "PER_WINDOW_ABSOLUTE_ATTRIBUTION_NORMALIZED_BY_WINDOW_MAX"
+  },
+  "lock_id": "EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2",
+  "numerical_completeness_gate": "NONE",
+  "original_method_commit": "1bb81d52876ff70dbc1eba742a2b1f1909b8523d",
+  "owner_task": "V2-011",
+  "status": "FROZEN_SEMANTICS_CORRECTION"
+}

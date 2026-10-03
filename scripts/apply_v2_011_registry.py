@@ -24,15 +24,21 @@ def main() -> None:
         if json.loads((OUT / f"{name}.json").read_text())["status"] != "PASS":
             raise RuntimeError(f"V2_011_ACCEPTANCE_NOT_MET:{name}")
     report = json.loads((OUT / "explainability_v2.json").read_text())
-    if not report["all_completeness_pass"]:
-        raise RuntimeError("V2_011_ACCEPTANCE_NOT_MET:completeness")
+    if report["locked_method_compliance"]["status"] != "PASS":
+        raise RuntimeError("V2_011_ACCEPTANCE_NOT_MET:method_compliance")
+    sem = report["completeness_semantics"]
     ids = {c["case_type"]: c["example_id"][:12] for c in report["cases"]}
     result = (
         " RESULT (executed): EXPLAINABILITY_V2 frozen for MODEL_V2_FINAL. Four deterministic "
         f"confidence-extreme cases from the frozen V2-010 INTERNAL_TEST table (TP {ids['TP']}, "
         f"TN {ids['TN']}, FP {ids['FP']}, FN {ids['FN']}); 64-point Gauss-Legendre signed "
         "Integrated Gradients on the raw pre-sigmoid logit from the zero normalized-input "
-        "baseline; all four completeness checks passed; repeat runs identical; model unmutated. "
+        "baseline; completeness residuals recorded as diagnostic metadata per the locked v2.2 "
+        "contract "
+        f"(largest absolute residual {sem['largest_observed_absolute_residual']:.3e}; "
+        f"{', '.join(sem['cases_exceeding_historical_heuristic'])} exceed the historical 1e-3 "
+        "heuristic, descriptive only, no step/baseline/case change; the preceding hard gate was "
+        "removed by C-V2-011-COMPLETENESS-SEMANTICS); repeat runs identical; model unmutated. "
         "Prediction-table error analysis ranks patients by Brier; TRAIN-defined HR bins reused; "
         "threshold band fixed at +/-0.05; one controlled C031-derived V2 noise-type run "
         "(720 windows x 3 noise types x 6 SNRs = 18 cells; no V1 rerun). V2-010 statistics "

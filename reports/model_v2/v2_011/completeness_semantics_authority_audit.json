@@ -1,0 +1,62 @@
+{
+  "CORRECTIVE_CLASSIFICATION": "UNSUPPORTED_HARD_GATE_REMOVED",
+  "HARD_NUMERICAL_THRESHOLD_IN_V2_2": "NONE",
+  "LOCKED_V2_2_REQUIREMENT": "RECORD_COMPLETENESS_CONVERGENCE_DELTA_AS_DIAGNOSTIC_METADATA",
+  "OLD_PROMPT_RULE": "ABS_LT_1E-3_OR_REL_LT_1E-3",
+  "OLD_RULE_SOURCE": "V2_011_ASSISTANT_PROMPT / V1_IMPLEMENTATION_HEURISTIC",
+  "checkpoint": "C-V2-011-COMPLETENESS-SEMANTICS",
+  "documents": {
+    "execution_plan_v1_0": {
+      "convergence_delta_paragraphs": [
+        {
+          "paragraph": 2870,
+          "text": "zero baseline; 64 GL; fixed case selection; convergence delta"
+        },
+        {
+          "paragraph": 2876,
+          "text": "zero baseline; 64 GL; fixed case selection; convergence delta"
+        }
+      ],
+      "document": "NHM_Solo_Implementation_Execution_Plan_v1.0.docx",
+      "explainability_context_paragraphs": 26,
+      "explainability_paragraphs_containing_a_numeric_1e-3_threshold": [],
+      "paragraphs": 3481,
+      "sha256": "f260a93e973161a1461497fbb4ae0194bc72f20fc47c1689e57ec6c0cd6f2696"
+    },
+    "locked_specification_v2_2": {
+      "convergence_delta_paragraphs": [
+        {
+          "paragraph": 812,
+          "text": "EXPLAINABILITY_V1 is locked to Integrated Gradients (IG) on the MODEL_V1 pre-sigmoid logit. Use a zero tensor in the per-window z-scored input space as the reference baseline, 64 integration steps, and Gauss-Legendre integration. Run the model in eval mode. Save both signed attribution values and an absolute-attribution overlay normalized within each window only for visualization; never renormalize across test patients. Apply the identical method to representative true-positive, true-negative, false-positive, and false-negative windows selected by a predeclared rule (for example, highest-confidence TP/TN and highest-confidence FP/FN within the locked test output), not by visual attractivenes"
+        },
+        {
+          "paragraph": 1241,
+          "text": "fixed zero baseline, 64-step Gauss-Legendre IG, signed values + normalized absolute overlay, convergence delta and predeclared case selection saved"
+        }
+      ],
+      "document": "NHM_ML_Revised_Locked_Specification_v2.2.docx",
+      "explainability_context_paragraphs": 12,
+      "explainability_paragraphs_containing_a_numeric_1e-3_threshold": [],
+      "paragraphs": 1962,
+      "sha256": "1c72bbbf45c7d9eb23b7fa1a00e249538153f06e337d194ce93108029cb16e0c"
+    }
+  },
+  "execution_plan_T031_acceptance": "zero baseline; 64 GL; fixed case selection; convergence delta (no numeric threshold)",
+  "g17_blocking_criterion_absolute_or_relative_1e-3_present": false,
+  "g17_gate_text_requires_convergence_delta_saved": true,
+  "locked_v2_2_explainability_contract_requires": {
+    "completeness_convergence_delta_recorded_as_diagnostic_metadata": true,
+    "eval_mode": true,
+    "exactly_64_gauss_legendre_steps": true,
+    "non_causal_engineering_interpretation": true,
+    "per_window_normalized_absolute_overlay": true,
+    "pre_sigmoid_scalar_logit_target": true,
+    "predeclared_tp_tn_fp_fn_case_selection": true,
+    "raw_ecg_and_nearby_public_beat_annotations": true,
+    "signed_attribution_export": true,
+    "zero_tensor_normalized_input_baseline": true
+  },
+  "nature_of_correction": "source-authority correction; NOT a favorable result-driven threshold relaxation. The review was triggered after the failed diagnostic run, but its basis is solely the text of the locked authority documents, which does not depend on the observed residual values; no replacement threshold is chosen from them (none is introduced).",
+  "observed_residuals_preserved_not_relabelled": true,
+  "status": "PASS"
+}

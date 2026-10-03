@@ -120,20 +120,65 @@ def reproducibility() -> dict:
 # ---------------------------------------------------------------------------
 
 
+CORRECTED_AT_CORRECTIVE_COMMIT = {
+    "models/explainability_v2_verify.py",
+    "scripts/build_explainability_v2.py",
+}
+SEMANTICS_PATHS = [
+    "configs/model_v2/explainability_v2_completeness_semantics_v2.yaml",
+    "artifacts/EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2.lock.json",
+    "evaluation/explain_v2_semantics.py",
+    "reports/model_v2/v2_011/completeness_semantics_authority_audit.json",
+    "reports/model_v2/v2_011/ig_completeness_diagnostic.csv",
+    "reports/model_v2/v2_011/completeness_semantics_method_freeze.json",
+    "reports/model_v2/v2_011/failed_diagnostic_run_manifest.json",
+]
+
+
+def corrective_commit() -> str:
+    log = _sh("git", "log", "--diff-filter=A", "--format=%H", "--",
+              "configs/model_v2/explainability_v2_completeness_semantics_v2.yaml").split()
+    if not log:
+        raise RuntimeError("V2_011_CORRECTIVE_COMMIT_NOT_FOUND")
+    return log[-1]
+
+
+def _diff_state(commit: str, rel: str) -> dict:
+    existed = subprocess.run(["git", "cat-file", "-e", f"{commit}:{rel}"], cwd=ROOT,
+                             capture_output=True, check=False).returncode == 0
+    diff = _sh("git", "diff", commit, "HEAD", "--", rel) if existed else "MISSING"
+    return {"existed_at_commit": existed, "has_diff": bool(diff)}
+
+
 def immutability() -> dict:
-    commit = method_commit()
-    per_file = {}
-    for rel in cases.METHOD_PATHS:
-        existed = subprocess.run(["git", "cat-file", "-e", f"{commit}:{rel}"], cwd=ROOT,
-                                 capture_output=True, check=False).returncode == 0
-        diff = _sh("git", "diff", commit, "HEAD", "--", rel) if existed else "MISSING"
-        per_file[rel] = {"existed_at_method_commit": existed, "has_diff": bool(diff)}
-    unchanged = all(v["existed_at_method_commit"] and not v["has_diff"] for v in per_file.values())
-    data = {"method_commit": commit, "per_file": per_file,
-            "all_scientific_files_unchanged": unchanged,
-            "status": "PASS" if unchanged else "FAIL"}
+    original = method_commit()
+    corrective = corrective_commit()
+    invariant = {rel: _diff_state(original, rel) for rel in cases.METHOD_PATHS
+                 if rel not in CORRECTED_AT_CORRECTIVE_COMMIT}
+    corrected = {rel: _diff_state(corrective, rel)
+                 for rel in sorted(CORRECTED_AT_CORRECTIVE_COMMIT)}
+    semantics = {rel: _diff_state(corrective, rel) for rel in SEMANTICS_PATHS}
+    ig_core = ["evaluation/explain.py", "evaluation/explain_v2.py", "scripts/_v2_011_cases.py",
+               "configs/model_v2/explainability_v2.yaml",
+               "reports/model_v2/v2_011/explainability_case_manifest.csv"]
+    ok = (
+        all(v["existed_at_commit"] and not v["has_diff"] for v in invariant.values())
+        and all(v["existed_at_commit"] and not v["has_diff"] for v in corrected.values())
+        and all(v["existed_at_commit"] and not v["has_diff"] for v in semantics.values())
+        and all(r in invariant for r in ig_core)
+    )
+    data = {
+        "original_method_commit": original,
+        "corrective_method_commit": corrective,
+        "unchanged_since_original_method_commit": invariant,
+        "ig_method_files_unchanged_since_original_method_commit": ig_core,
+        "corrected_only_at_corrective_commit_then_unchanged": corrected,
+        "semantics_files_unchanged_since_corrective_commit": semantics,
+        "all_scientific_files_unchanged": ok,
+        "status": "PASS" if ok else "FAIL",
+    }
     _write("method_immutability_audit.json", data)
-    if not unchanged:
+    if not ok:
         raise RuntimeError("V2_011_METHOD_MUTATED_POST_ACCESS")
     return data
 
@@ -216,6 +261,10 @@ def _verifier_files() -> list[str]:
     lock = json.loads((ROOT / LOCK_REL).read_text())
     files |= set(model_manifest["upstream_sha256"]) | set(cal["upstream_sha256"])
     files |= set(lock["bound_artifacts"])
+    sem_lock = json.loads((ROOT / "artifacts/EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2.lock.json")
+                          .read_text())
+    files |= set(sem_lock["bound_artifacts"]) | {
+        "artifacts/EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2.lock.json"}
     files |= {str(p.relative_to(ROOT)) for p in OUT.rglob("*") if p.is_file()
               and p.name not in {"pytest_collected_nodes.txt"}}
     for rel in list(files):
@@ -251,6 +300,13 @@ def _reseal(root: Path) -> None:
         if target.exists() and not target.is_symlink():
             lock["bound_artifacts"][rel] = hash_file(target)
     lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n")
+    sem_lock_path = root / "artifacts/EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2.lock.json"
+    sem_lock = json.loads(sem_lock_path.read_text())
+    for rel in sem_lock["bound_artifacts"]:
+        target = root / rel
+        if target.exists() and not target.is_symlink():
+            sem_lock["bound_artifacts"][rel] = hash_file(target)
+    sem_lock_path.write_text(json.dumps(sem_lock, indent=2, sort_keys=True) + "\n")
     report_path = root / "reports/model_v2/v2_011/explainability_v2.json"
     report = json.loads(report_path.read_text())
     for case in report["cases"]:
@@ -276,6 +332,7 @@ def cases_rel(kind: str) -> str:
 
 
 V2 = "reports/model_v2/v2_011"
+SEM = "configs/model_v2/explainability_v2_completeness_semantics_v2.yaml"
 EX = "configs/model_v2/explainability_v2.yaml"
 ER = "configs/model_v2/error_analysis_v2.yaml"
 
@@ -426,6 +483,22 @@ def _m_noise_labels(r: Path) -> None:
     _reseal(r)
 
 
+def _m_residual(r: Path) -> None:
+    path = r / f"{V2}/explainability_v2.json"
+    data = json.loads(path.read_text())
+    data["cases"][0]["completeness_diagnostic"]["completeness_absolute_delta"] = 0.0
+    path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
+
+
+def _m_attr_value(r: Path) -> None:
+    path = r / f"{V2}/cases/TP_attribution.csv"
+    header, rows = _csv_rows(path)
+    i = header.index("signed_ig")
+    rows[10][i] = repr(float(rows[10][i]) + 1e-6)
+    _csv_write(path, header, rows)
+    _reseal(r)
+
+
 def _m_lock_status(r: Path) -> None:
     _edit(r, LOCK_REL, "FROZEN_EXPLAINABILITY", "PRE_RESULT_LOCKED")
 
@@ -476,8 +549,16 @@ TAMPERS = {
         EX, "visual_overlay: PER_WINDOW_ABSOLUTE_ATTRIBUTION_NORMALIZED_BY_WINDOW_MAX",
         "visual_overlay: GLOBAL_MAX"),
     "overlay_normalization_values_change": _m_overlay_values,
-    "completeness_threshold_change": _yaml_mut(
+    "historical_heuristic_constant_change": _yaml_mut(
         EX, "completeness_absolute_threshold: 0.001", "completeness_absolute_threshold: 0.1"),
+    "completeness_hard_gate_reintroduced": _yaml_mut(
+        SEM, "gates_v2g10: false", "gates_v2g10: true"),
+    "completeness_gate_field_change": _yaml_mut(
+        SEM, "numerical_completeness_gate: NONE", "numerical_completeness_gate: ABS_LT_1E-3"),
+    "semantics_original_commit_binding_change": _yaml_mut(
+        SEM, "original_method_commit: 1bb81d5", "original_method_commit: 2bb81d5"),
+    "completeness_residual_value_altered": _m_residual,
+    "attribution_array_value_changed": _m_attr_value,
     "attribution_row_deletion": _m_attr_row_delete,
     "raw_ecg_row_deletion": _m_raw_row_delete,
     "annotation_alignment_change": _m_annotation_shift,
@@ -525,7 +606,9 @@ def tamper_suite() -> dict:
         "tie rule change", "baseline change", "steps 64->63 or 65",
         "integration method change", "target raw logit->probability",
         "signed attribution removal", "overlay normalization change",
-        "completeness threshold change", "attribution row deletion", "raw ECG row deletion",
+        "historical completeness heuristic constants change",
+        "completeness hard gate reintroduced", "completeness residual altered",
+        "attribution array value change", "attribution row deletion", "raw ECG row deletion",
         "annotation alignment change", "HR-bin boundary change",
         "patient ranking metric Brier->F1", "threshold band +/-0.05 change",
         "noise-type change", "SNR list change", "noise source hash change",

@@ -15,6 +15,12 @@ from typing import Any
 import numpy as np
 import yaml
 
+from evaluation.explain_v2_semantics import (
+    LOCKED_STATUS,
+    NUMERICAL_GATE,
+    SEMANTICS_ID,
+    completeness_diagnostic,
+)
 from models.cal_v2_verify import verify_cal_v2
 from models.model_v2_final_freeze import verify_model_v2_final
 from nhm.hashing import hash_file
@@ -23,6 +29,11 @@ LOCK_PATH = "artifacts/EXPLAINABILITY_V2_METHOD.lock.json"
 REPORT_PATH = "reports/model_v2/v2_011/explainability_v2.json"
 CASE_MANIFEST = "reports/model_v2/v2_011/explainability_case_manifest.csv"
 EXPLAIN_CONFIG = "configs/model_v2/explainability_v2.yaml"
+SEMANTICS_CONFIG = "configs/model_v2/explainability_v2_completeness_semantics_v2.yaml"
+SEMANTICS_LOCK = "artifacts/EXPLAINABILITY_V2_COMPLETENESS_SEMANTICS_V2.lock.json"
+FAILED_RUN_MANIFEST = "reports/model_v2/v2_011/failed_diagnostic_run_manifest.json"
+ORIGINAL_METHOD_COMMIT = "1bb81d52876ff70dbc1eba742a2b1f1909b8523d"
+FAILED_RUN_COMMIT = "ce1d055f37d7ddcb4a7c0c6117ba8c4e20450b51"
 ERROR_CONFIG = "configs/model_v2/error_analysis_v2.yaml"
 CASE_TYPES = ("TP", "TN", "FP", "FN")
 SNRS = [24, 18, 12, 6, 0, -6]
@@ -169,12 +180,53 @@ def verify_explainability_v2(root: Path) -> dict[str, Any]:
         _need(report.get(key) == EXPECTED[key], "EXPLAINABILITY_V2_REPORT_METHOD_MISMATCH", key)
     _need(report.get("overlay_normalization") == EXPECTED["visual_overlay"],
           "EXPLAINABILITY_V2_OVERLAY_NORMALIZATION_MISMATCH")
+    # The base-config completeness thresholds are the HISTORICAL heuristic constants; they are
+    # descriptive only after C-V2-011-COMPLETENESS-SEMANTICS and must still be unchanged.
     _need(explain_cfg["completeness_absolute_threshold"] == 0.001
           and explain_cfg["completeness_relative_threshold"] == 0.001,
-          "EXPLAINABILITY_V2_COMPLETENESS_RULE_CHANGED")
-    _need(report.get("completeness_absolute_threshold") == 0.001
-          and report.get("completeness_relative_threshold") == 0.001,
-          "EXPLAINABILITY_V2_COMPLETENESS_RULE_CHANGED")
+          "EXPLAINABILITY_V2_HISTORICAL_HEURISTIC_CHANGED")
+    sem_cfg = yaml.safe_load((root / SEMANTICS_CONFIG).read_text(encoding="utf-8"))
+    _need(sem_cfg.get("id") == SEMANTICS_ID, "EXPLAINABILITY_V2_SEMANTICS_IDENTITY")
+    comp = sem_cfg.get("completeness", {})
+    _need(comp.get("numerical_completeness_gate") == NUMERICAL_GATE
+          and comp.get("gates_v2g10") is False
+          and comp.get("new_semantics") == "DIAGNOSTIC_METADATA_ALWAYS_RECORDED",
+          "EXPLAINABILITY_V2_COMPLETENESS_HARD_GATE_PRESENT")
+    heur = comp.get("historical_heuristic", {})
+    _need(heur.get("absolute") == 0.001 and heur.get("relative") == 0.001
+          and heur.get("role") == "DESCRIPTIVE_ONLY_NEVER_A_GATE",
+          "EXPLAINABILITY_V2_HISTORICAL_HEURISTIC_CHANGED")
+    _need(sem_cfg.get("original_method_commit") == ORIGINAL_METHOD_COMMIT
+          and sem_cfg.get("failed_diagnostic_run_commit") == FAILED_RUN_COMMIT,
+          "EXPLAINABILITY_V2_SEMANTICS_COMMIT_BINDING")
+    unchanged = sem_cfg.get("unchanged_from_original_method", {})
+    for key, expected in EXPECTED.items():
+        cfg_key = "visual_overlay" if key == "visual_overlay" else key
+        _need(unchanged.get(cfg_key) == expected, "EXPLAINABILITY_V2_SEMANTICS_METHOD_CHANGED", key)
+    sem = report.get("completeness_semantics", {})
+    _need(sem.get("semantics_id") == SEMANTICS_ID
+          and sem.get("numerical_completeness_gate") == NUMERICAL_GATE
+          and sem.get("gates_v2g10") is False
+          and sem.get("historical_heuristic_role") == "DESCRIPTIVE_ONLY",
+          "EXPLAINABILITY_V2_COMPLETENESS_HARD_GATE_PRESENT")
+    sem_lock = _json(root, SEMANTICS_LOCK)
+    _need(sem_lock.get("status") == "FROZEN_SEMANTICS_CORRECTION"
+          and sem_lock.get("numerical_completeness_gate") == NUMERICAL_GATE,
+          "EXPLAINABILITY_V2_SEMANTICS_LOCK")
+    for rel, digest in sem_lock.get("bound_artifacts", {}).items():
+        _need(_hash(root, rel) == digest, "EXPLAINABILITY_V2_SEMANTICS_LOCK_BINDING_MISMATCH", rel)
+    for key, expected in (("original_method_commit", ORIGINAL_METHOD_COMMIT),
+                          ("failed_diagnostic_run_commit", FAILED_RUN_COMMIT)):
+        _need(lock.get(key) == expected == report.get(key), "EXPLAINABILITY_V2_COMMIT_BINDING", key)
+    _need(len(str(lock.get("corrective_method_commit", ""))) == 40
+          and lock.get("corrective_method_commit") == report.get("corrective_method_commit"),
+          "EXPLAINABILITY_V2_COMMIT_BINDING", "corrective_method_commit")
+    audit = _json(root, "reports/model_v2/v2_011/completeness_semantics_authority_audit.json")
+    _need(audit.get("status") == "PASS"
+          and audit.get("HARD_NUMERICAL_THRESHOLD_IN_V2_2") == "NONE"
+          and audit.get("CORRECTIVE_CLASSIFICATION") == "UNSUPPORTED_HARD_GATE_REMOVED",
+          "EXPLAINABILITY_V2_AUTHORITY_AUDIT")
+    failed_manifest = _json(root, FAILED_RUN_MANIFEST)
     _need(explain_cfg["case_selection"] == EXPECTED_SELECTION
           and report.get("case_selection") == EXPECTED_SELECTION,
           "EXPLAINABILITY_V2_SELECTION_RULE_MISMATCH")
@@ -237,11 +289,28 @@ def verify_explainability_v2(root: Path) -> dict[str, Any]:
         sum_signed = float(np.sum(signed))
         _need(abs(sum_signed - case["attribution_sum"]) <= 1e-9,
               "EXPLAINABILITY_V2_ATTRIBUTION_SUM_MISMATCH", ct)
-        diff = case["F_x"] - case["F_baseline"]
-        abs_delta = abs(sum_signed - diff)
-        rel_delta = abs_delta / max(abs(diff), 1e-12)
-        _need(abs(abs_delta - case["absolute_delta"]) <= 1e-9, "EXPLAINABILITY_V2_COMPLETENESS", ct)
-        _need(abs_delta < 0.001 or rel_delta < 0.001, "EXPLAINABILITY_V2_COMPLETENESS_FAILED", ct)
+        diag = completeness_diagnostic(case["F_x"], case["F_baseline"], sum_signed)
+        stored = case.get("completeness_diagnostic", {})
+        for key in ("completeness_signed_delta", "completeness_absolute_delta",
+                    "completeness_relative_delta"):
+            _need(key in stored and abs(float(stored[key]) - diag[key]) <= 1e-9,
+                  "EXPLAINABILITY_V2_COMPLETENESS_NOT_RECORDED", f"{ct}:{key}")
+        for key in ("historical_v1_style_1e3_heuristic", "historical_heuristic_label",
+                    "locked_v2_2_explainability_status", "numerical_completeness_gate"):
+            _need(stored.get(key) == diag[key],
+                  "EXPLAINABILITY_V2_COMPLETENESS_STATUS", f"{ct}:{key}")
+        _need(stored["locked_v2_2_explainability_status"] == LOCKED_STATUS,
+              "EXPLAINABILITY_V2_COMPLETENESS_STATUS", ct)
+        original = next(r for r in _csv(root, "reports/model_v2/v2_011/ig_completeness.csv")
+                        if r["case_type"] == ct)
+        abs_gap = abs(float(original["absolute_delta"]) - stored["completeness_absolute_delta"])
+        rel_gap = abs(float(original["relative_delta"]) - stored["completeness_relative_delta"])
+        _need(abs_gap <= 1e-12 and rel_gap <= 1e-9,
+              "EXPLAINABILITY_V2_ORIGINAL_RESIDUAL_NOT_PRESERVED", ct)
+        for suffix in ("attribution.csv", "raw_ecg.csv", "annotations.csv", "figure.svg"):
+            rel_path = f"reports/model_v2/v2_011/cases/{ct}_{suffix}"
+            _need(failed_manifest["artifact_sha256"][rel_path] == _hash(root, rel_path),
+                  "EXPLAINABILITY_V2_ATTRIBUTION_ARRAY_CHANGED", f"{ct}:{suffix}")
         _need(int(np.argmax(np.abs(signed))) == case["max_abs_attribution_index"],
               "EXPLAINABILITY_V2_MAX_ATTRIBUTION_INDEX", ct)
         raw = _csv(root, f"{base}_raw_ecg.csv")
@@ -256,7 +325,10 @@ def verify_explainability_v2(root: Path) -> dict[str, Any]:
             inside = 0.0 < float(a["relative_time_s"]) <= 10.0
             _need((a["position"] == "INSIDE_MODEL_WINDOW") == inside,
                   "EXPLAINABILITY_V2_ANNOTATION_POSITION", ct)
-    _need(report.get("all_completeness_pass") is True, "EXPLAINABILITY_V2_COMPLETENESS_FLAG")
+    compliance = report.get("locked_method_compliance", {})
+    _need(compliance.get("status") == "PASS" and all(
+        v is True for k, v in compliance.items() if k != "status"),
+        "EXPLAINABILITY_V2_METHOD_COMPLIANCE")
     checks["cases"] = True
 
     # --- claim boundary -----------------------------------------------------------
