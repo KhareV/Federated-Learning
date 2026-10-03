@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "protocol_v1_lock": {
+      "expected": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+      "match": true,
+      "observed": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+      "path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json"
+    },
+    "protocol_v2_lock": {
+      "expected": "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81",
+      "match": true,
+      "observed": "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81",
+      "path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V2.lock.json"
+    },
+    "protocol_v3_lock": {
+      "expected": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+      "match": true,
+      "observed": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+      "path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V3.lock.json"
+    }
+  },
+  "status": "PASS"
+}

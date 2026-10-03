@@ -1,0 +1,20 @@
+{
+  "canonical_model_v2_final_pt_exists_at_method_commit": false,
+  "component_id": "MODEL_V2_FINAL",
+  "freeze_id_decision": "NO_CANONICAL_FREEZE_ID_ASSIGNED (see freeze_id_selection.json)",
+  "method_files_sha256": {
+    "models/model_v2_final_freeze.py": "00d113053dc759fc66c33241e9227240212a52935ebed49f824b9137a4d3cf9d",
+    "scripts/freeze_model_v2_final_v2008.py": "7871975ef53ae9099d38460a6f68854e660212a0e49d361b141bb69f8de38397",
+    "scripts/generate_model_v2_final_test_vector_v2008.py": "86fa2881df8810b7fafb955eb2d51c94dd2a9bb8da0962f63fe1fc69c2735768",
+    "scripts/generate_v2_008_preflight.py": "3cae54a645cbfe497d53733708f8bade93a8d90dba7cfaad80877194d4984e84",
+    "tests/test_v2_008_config.py": "499f87733122e4be3989479cff44b8a5062fd9e3159862d3326ecead3ef60276"
+  },
+  "operational_lineage": "MODEL_V1",
+  "owner_task": "V2-008",
+  "promotion_decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "promotion_eligible": false,
+  "runtime_acceptance": "NOT_EVALUATED",
+  "source_release_checkpoint_path": "checkpoints/model_v2/v2_007_official_validation/V2-007-TCNMEAN-S20260927_best.pt",
+  "source_release_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "status": "PASS"
+}

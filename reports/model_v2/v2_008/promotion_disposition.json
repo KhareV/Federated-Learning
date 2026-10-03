@@ -1,0 +1,32 @@
+{
+  "criterion_a": true,
+  "criterion_b1": false,
+  "criterion_b2": true,
+  "decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "deployment_authorized": false,
+  "official_validation_promotion_decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "official_validation_promotion_eligible": false,
+  "operational_lineage": "MODEL_V1",
+  "promotion_eligible": false,
+  "release_ci": {
+    "invalid_count": 0,
+    "lower": -0.052370174725249,
+    "upper": 0.5310360993345348,
+    "valid_count": 2000
+  },
+  "release_point_delta": 0.2116981636869386,
+  "release_seed": 20260927,
+  "runtime_acceptance_status": "NOT_EVALUATED",
+  "scientific_final_frozen": true,
+  "scientific_model_id": "MODEL_V2_FINAL",
+  "selected_architecture_id": "MODEL_V2_TCN_MEAN",
+  "selected_schedule_id": "CONFIG_V2_TCN_MEAN_ORIGINAL_V1",
+  "status": "PASS",
+  "three_seed_ci": {
+    "invalid_count": 0,
+    "lower": 0.053446951777224694,
+    "upper": 0.504733599544611,
+    "valid_count": 2000
+  },
+  "three_seed_point_delta": 0.2753374992819335
+}

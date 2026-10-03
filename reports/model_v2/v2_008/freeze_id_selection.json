@@ -1,0 +1,14 @@
+{
+  "canonical_registry_modified": false,
+  "canonical_registry_path": "manifests/freeze_registry_v1.csv",
+  "canonical_registry_row_count": 15,
+  "canonical_registry_row_count_after": 15,
+  "decision": "NO_CANONICAL_FREEZE_ID_ASSIGNED",
+  "f15_current_status": "NOT_FROZEN",
+  "f15_occupied": true,
+  "f15_purpose": "release package",
+  "predecessor_freeze_state": "none (first MODEL_V2_FINAL freeze)",
+  "reasoning": "F15 is already legitimately occupied by the canonical, unrelated 'release package / RELEASE_V1' row bound to gate G22 of the original T002-T036 project -- not available for MODEL_V2_FINAL. The canonical freeze registry is additionally locked at exactly 15 rows by an existing test (tests/test_freeze_registry.py::test_freeze_registry_covers_required_decisions_without_premature_freezes, 'assert len(rows) == 15'); appending F16 there would both misuse an unrelated-purpose ID slot and break that passing test. Every prior MODEL_V2 component (MODEL_V2_ARCH_CAUSALITY_V1, MODEL_V2_OPTIMIZER_CORRECTION_V1, MODEL_V2_FINALIST_SHORTLIST_V1, MODEL_V2_OFFICIAL_VALIDATION_V1, MODEL_V2_VALIDATION_DECISION_V1, MODEL_V2_VALIDATION_BOOTSTRAP_DRAWS_V1) was registered the same way: as an additive manifests/model_v2/component_registry_v1.csv row explicitly marked not_a_canonical_freeze_row=true, never as a canonical Fxx row. MODEL_V2_FINAL follows that same, consistent, already-established convention rather than corrupting the canonical registry for a non-operational scientific research artifact.",
+  "selection_method": "ADDITIVE_MODEL_V2_COMPONENT_REGISTRY_ENTRY",
+  "status": "PASS"
+}
