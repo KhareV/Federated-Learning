@@ -1,0 +1,40 @@
+{
+  "config_path": "configs/model_v2/official_validation_v1.yaml",
+  "config_sha256": "632739becf8adb622ad349b9a7509834baf3963dcf9e4c1c13e1d7532cc19932",
+  "corrective_checkpoint": null,
+  "created_at_utc": "2026-10-03T15:43:51.562354Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "ddf2f689e18501f00e6ee4258c0227c9bfb496be",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_FINAL_INNER_V2_V1.csv",
+      "sha256": "bb5b4f6f7205fe37d0132ebccaca7889a916b115f5ad096ecc967940421455ce"
+    },
+    {
+      "path": "configs/model_v1.yaml",
+      "sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "V2-007 fit V2-007-TCNMEANMAX-S20260929: architecture=MODEL_V2_TCN_MEANMAX seed=20260929",
+  "output_artifacts": [
+    {
+      "path": "reports/model_v2/v2_007/runs/V2-007-TCNMEANMAX-S20260929/training_curve.csv",
+      "sha256": "e775bc25d506f79c764109112a2910817ef425bdbe43b9ecf674d443b1e899d8"
+    },
+    {
+      "path": "checkpoints/model_v2/v2_007_official_validation/V2-007-TCNMEANMAX-S20260929_best.pt",
+      "sha256": "94f399fc6812fb26efb53dada7c1381647c52d49e5d5d2100b5ac80a04257dfe"
+    }
+  ],
+  "phase_id": "V2-007",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "V2-007-TCNMEANMAX-S20260929",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": 20260929,
+  "spec_version": "2.2",
+  "task_id": "V2-007"
+}
