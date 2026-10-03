@@ -1,0 +1,43 @@
+{
+  "architecture_unchanged": true,
+  "checkpoint_created_once_not_changed": true,
+  "expected_logits_unchanged": true,
+  "operational_lineage_unchanged": true,
+  "per_file": {
+    "checkpoints/MODEL_V2_FINAL.manifest.json": {
+      "has_diff": true,
+      "stat": "checkpoints/MODEL_V2_FINAL.manifest.json | 61 ++++++++++++++++++++++++++++++++\n 1 file changed, 61 insertions(+)"
+    },
+    "checkpoints/MODEL_V2_FINAL.pt": {
+      "has_diff": true,
+      "stat": "checkpoints/MODEL_V2_FINAL.pt | Bin 0 -> 264763 bytes\n 1 file changed, 0 insertions(+), 0 deletions(-)"
+    },
+    "configs/model_v2_final_frozen.yaml": {
+      "has_diff": true,
+      "stat": "configs/model_v2_final_frozen.yaml | 49 ++++++++++++++++++++++++++++++++++++++\n 1 file changed, 49 insertions(+)"
+    },
+    "models/model_v2_final_freeze.py": {
+      "has_diff": true,
+      "stat": "models/model_v2_final_freeze.py | 3 +++\n 1 file changed, 3 insertions(+)"
+    },
+    "scripts/freeze_model_v2_final_v2008.py": {
+      "has_diff": false,
+      "stat": ""
+    },
+    "scripts/generate_model_v2_final_test_vector_v2008.py": {
+      "has_diff": false,
+      "stat": ""
+    },
+    "tests/fixtures/model_v2_final_test_vector.npz": {
+      "has_diff": true,
+      "stat": "tests/fixtures/model_v2_final_test_vector.npz | Bin 0 -> 91148 bytes\n 1 file changed, 0 insertions(+), 0 deletions(-)"
+    }
+  },
+  "promotion_status_unchanged": true,
+  "seed_unchanged": true,
+  "selected_epoch_unchanged": true,
+  "source_checkpoint_unchanged": true,
+  "status": "PASS",
+  "synthetic_inputs_unchanged": true,
+  "verifier_change_classification": "ADDITIVE_FAIL_CLOSED_VALIDATION_HARDENING"
+}

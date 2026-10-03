@@ -1,0 +1,32 @@
+{
+  "fact_a_outer_timeout_claim": {
+    "V2_008_exhaustive_chunking_completed_in_phase": false,
+    "V2_008_full_regression_outer_timeout_observed": false,
+    "claim": "Multiple V2-008 full-suite pytest executions displayed an outer-harness '(timeout 2m)' annotation, making the V2-008 handoff's 'ran directly, no timeout ambiguity' statement too strong.",
+    "disclosure_fabrication_declined": true,
+    "finding": "No '(timeout 2m)' or equivalent outer-harness timeout annotation was observed in any V2-008 pytest invocation actually recorded in this session. The claim is not substantiated by anything verifiable in this session's own record.",
+    "investigation_method": "Reviewed every V2-008 pytest invocation actually visible in this session's own tool-call history (not a summary): each one was a foreground command returning an explicit 'N passed in <seconds>s' line directly in its result, with no truncation, backgrounding, or outer-timeout marker of any kind. Actual runtimes observed: ~18-20 seconds per full-suite run, against foreground allowances of 60-120 seconds that were never approached.",
+    "note": "Regardless of this finding, V2-009 Section 6 independently requires an authoritative exhaustive chunked regression before any CALIBRATION access, performed unconditionally in this phase as pre_calibration_full_regression_proof.json -- this provides a strictly stronger proof than any monolithic run either way, so the disclosure disagreement does not weaken V2-009's own gate.",
+    "scientific_model_v2_final_artifact_affected": false,
+    "status": "INVESTIGATED_NOT_SUBSTANTIATED"
+  },
+  "fact_b_verifier_chronology": {
+    "claim": "The V2-008 tamper suite discovered, after METHOD_COMMIT, that the verifier did not validate target/label_map/preprocessing identity; the verifier was strengthened before RESULT_COMMIT.",
+    "classification": "ADDITIVE_FAIL_CLOSED_VALIDATION_HARDENING",
+    "corrected_statement": "Fixed before the final V2-008 result commit, after the original method commit.",
+    "diff_is_purely_additive": true,
+    "prior_mischaracterization": "This session's own V2-008 chat summary and commit message both stated the fix was made 'before any commit' / 'nothing published with the bug present'. That is imprecise: the verifier gap existed in the already-pushed METHOD_COMMIT (7b5097a) and was discovered and fixed only afterward, before RESULT_COMMIT (b2baeae).",
+    "scientific_impact": "NONE",
+    "scientific_impact_reasoning": [
+      "checkpoint bytes did not change",
+      "config scientific fields were already correct; only the verifier's checking of them was incomplete",
+      "fixture did not change because of this check",
+      "release identity did not change",
+      "no patient data was reopened",
+      "no model-selection decision changed"
+    ],
+    "status": "CONFIRMED_AND_CORRECTED",
+    "verified_via": "git diff 7b5097a..b2baeae -- models/model_v2_final_freeze.py"
+  },
+  "status": "DISCLOSED"
+}

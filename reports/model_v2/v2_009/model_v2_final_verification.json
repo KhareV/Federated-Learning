@@ -1,0 +1,21 @@
+{
+  "both_pass": true,
+  "checkpoint_sha_matches_expected": true,
+  "process_1": {
+    "checkpoint_path": "checkpoints/MODEL_V2_FINAL.pt",
+    "checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "maximum_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "model_id": "MODEL_V2_FINAL",
+    "status": "PASS"
+  },
+  "process_2": {
+    "checkpoint_path": "checkpoints/MODEL_V2_FINAL.pt",
+    "checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "maximum_absolute_error": 0.0,
+    "maximum_relative_error": 0.0,
+    "model_id": "MODEL_V2_FINAL",
+    "status": "PASS"
+  },
+  "status": "PASS"
+}

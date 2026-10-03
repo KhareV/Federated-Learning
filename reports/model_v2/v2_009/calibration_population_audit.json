@@ -1,0 +1,27 @@
+{
+  "both_classes_present": true,
+  "contributing_patient_groups": 3,
+  "contributing_records": 3,
+  "eligible_windows": 1080,
+  "groups": [
+    "MITDB_P123",
+    "MITDB_P213",
+    "MITDB_P219"
+  ],
+  "matches_historical_expectation": true,
+  "negative_windows": 713,
+  "positive_windows": 367,
+  "records": [
+    "123",
+    "213",
+    "219"
+  ],
+  "split_record_count": 4,
+  "split_records": [
+    "123",
+    "213",
+    "217",
+    "219"
+  ],
+  "status": "PASS"
+}

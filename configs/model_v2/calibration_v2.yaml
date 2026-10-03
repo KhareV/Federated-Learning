@@ -1,0 +1,80 @@
+calibration_id: CAL_V2
+spec_version: "2.2"
+status: METHOD_FROZEN_BEFORE_FIT_V2009
+domain: MIT-BIH-v1.0.0
+fit_partition: CALIBRATION
+model_id: MODEL_V2_FINAL
+owner_task: V2-009
+active_protocol: MODEL_V2_RESEARCH_PROTOCOL_V3
+active_protocol_lock_sha256: 287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8
+
+temperature:
+  parameterization: LOG_TEMPERATURE_V1
+  formula: calibrated_logit = raw_logit / exp(theta)
+  objective: MEAN_BINARY_NLL
+  patient_weighting: NONE
+  optimizer: scipy.optimize.minimize_scalar
+  method: bounded
+  theta_bounds: [-8.0, 8.0]
+  xatol: 1.0e-12
+  maxiter: 1000
+  boundary_tolerance: 1.0e-8
+  nll_nonworsening_tolerance: 1.0e-12
+  dtype: float64
+  reused_unchanged_from: CAL_V1 (evaluation.calibration.fit_temperature)
+
+brier:
+  formula: mean((probability - label) ** 2)
+  weighting: POOLED_WINDOWS_UNWEIGHTED
+
+reliability:
+  method: EQUAL_WIDTH_10_BINS_V1
+  bin_count: 10
+  range: [0.0, 1.0]
+  intervals: LEFT_CLOSED_RIGHT_OPEN_EXCEPT_FINAL_CLOSED
+  empty_bin_values: null
+
+threshold:
+  metric: POOLED_CALIBRATION_WINDOW_F1
+  candidate_rule: ZERO_UNIQUE_CALIBRATED_PROBABILITIES_ONE
+  comparator: GREATER_THAN_OR_EQUAL
+  tie_policy: HIGHEST_THRESHOLD_AMONG_MAX_F1_V1
+  zero_denominator_f1: 0.0
+
+probability_semantics:
+  raw: UNCALIBRATED_SIGMOID_OF_MODEL_V2_FINAL_LOGIT
+  calibrated: MITBIH_SOURCE_DOMAIN_SIGMOID_OF_LOGIT_DIVIDED_BY_TEMPERATURE
+
+claim_boundary: >-
+  Research-only MIT-BIH source-domain calibration under small-patient-sample uncertainty;
+  not disease probability, clinical calibration, wearable calibration, or INCART calibration.
+  MODEL_V2_FINAL was not promoted (MODEL_V2_NOT_PROMOTED_RELEASE_CI); CAL_V2 is scientific
+  calibration evidence only and does not make MODEL_V2 operational.
+
+model_v2_final_binding:
+  checkpoint_path: checkpoints/MODEL_V2_FINAL.pt
+  architecture_id: MODEL_V2_TCN_MEAN
+  schedule_id: CONFIG_V2_TCN_MEAN_ORIGINAL_V1
+  release_seed: 20260927
+  selected_epoch: 5
+  parameter_count: 57553
+
+access_guard:
+  guard_id: V2_CALIBRATION_ONCE
+  states: [ARMED, RUNNING, COMPLETED]
+  guard_module: nhm.model_v2_calibration_guard
+  second_invocation_error: V2_CALIBRATION_ALREADY_CONSUMED
+  partial_consumption_error: V2_CALIBRATION_PARTIALLY_CONSUMED
+
+scope_restrictions:
+  allowed_partition: CALIBRATION
+  forbidden_partitions: [TRAIN, VALIDATION, INTERNAL_TEST, INCART, NSTDB, BIDMC, WEARABLE]
+  no_official_validation_reaccess: true
+  no_retraining: true
+  no_performance_acceptance_gate: true
+  no_patient_cluster_bootstrap_this_phase: true
+
+operational_status:
+  promotion_eligible: false
+  operational_lineage: MODEL_V1
+  runtime_acceptance: NOT_EVALUATED

@@ -1,0 +1,15 @@
+{
+  "cal_v2_result_exists_at_method_commit": false,
+  "calibration_domain": "MIT-BIH-v1.0.0",
+  "calibration_id": "CAL_V2",
+  "fit_partition": "CALIBRATION",
+  "fitted_temperature_exists_at_method_commit": false,
+  "fitted_threshold_exists_at_method_commit": false,
+  "guard_armed": true,
+  "method_config_path": "configs/model_v2/calibration_v2.yaml",
+  "method_config_sha256": "61de1ae3f8e8297f70261819ce5791fe5a96078e585cf5d4fd1bdd7abec2b94e",
+  "model_id": "MODEL_V2_FINAL",
+  "model_v2_final_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "owner_task": "V2-009",
+  "status": "PASS"
+}
