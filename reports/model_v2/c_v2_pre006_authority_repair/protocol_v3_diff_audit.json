@@ -1,0 +1,36 @@
+{
+  "auroc_material_regression_forbidden": {
+    "v2": true,
+    "v3": false
+  },
+  "early_stopping_checkpoint_selection": {
+    "v2": "OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE",
+    "v3": "FINAL_TRAIN_INNER_VALIDATION_LOCKED_V3_ROLE"
+  },
+  "new_top_level_sections": [
+    "cal_v2_ordering",
+    "final_train_role_split",
+    "model_v2_final_vs_runtime_acceptance",
+    "search_budget"
+  ],
+  "official_validation_unexpected_field_changes": [],
+  "search_budget_d0_d5_max_neural_fits": 90,
+  "status": "PASS",
+  "unchanged_top_level_keys_match": true,
+  "unchanged_top_level_keys_verified": [
+    "fixed_scientific_constants",
+    "model_seeds",
+    "primary_metrics",
+    "patient_cluster_bootstrap",
+    "architectures",
+    "architecture_search_policy",
+    "feature_ablation_contract",
+    "hybrid_trigger",
+    "loss_and_sampling",
+    "optimizer_experiment",
+    "calibration_policy",
+    "post_freeze_second_look",
+    "runtime_acceptance_guardrails",
+    "downstream_impact"
+  ]
+}

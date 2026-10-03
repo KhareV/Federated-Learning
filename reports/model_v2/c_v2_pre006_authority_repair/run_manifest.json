@@ -1,0 +1,30 @@
+{
+  "case_classification": "CASE_B_IMPLEMENTATION_DRIFT_REPAIRED_ADDITIVELY",
+  "checkpoint_id": "C-V2-PRE006-AUTHORITY-REPAIR",
+  "evidence_files": [
+    "cal_v2_ordering_confirmation.json",
+    "conditional_prerequisite_regression.json",
+    "entry_audit.json",
+    "final_inner_manifest_audit.json",
+    "final_inner_method_freeze.json",
+    "final_inner_reproducibility.json",
+    "fit_budget_correction.json",
+    "full_regression_proof.json",
+    "no_data_no_training_audit.json",
+    "prior_closeout_supersession.json",
+    "protocol_v3_diff_audit.json",
+    "protocol_v3_lock_audit.json",
+    "self_contained_authority_contract.json",
+    "upstream_identity_audit.json",
+    "v2_007_semantics_audit.json",
+    "v2_008_promotion_rule_audit.json"
+  ],
+  "final_inner_manifest_created": true,
+  "head_at_generation": "b8ee3c3de7aca4d896b85f44f4f56186010c098a",
+  "no_classical_fits": true,
+  "no_neural_fits": true,
+  "no_scientific_artifact_mutated": true,
+  "parent": "C-V2-PRE006-CLOSEOUT",
+  "protocol_v3_created": true,
+  "v1_v2_protocol_mutated": false
+}

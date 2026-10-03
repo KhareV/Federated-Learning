@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "does_not_claim_all_27_contribute_gradients": true,
+    "does_not_claim_official_validation_selects_checkpoint": true,
+    "final_inner_validation_is_checkpoint_source": true,
+    "final_inner_validation_is_early_stop_source": true,
+    "final_inner_validation_is_scheduler_source": true,
+    "mentions_final_inner_manifest": true,
+    "official_validation_evaluation_only": true,
+    "official_validation_never_gradient_source": true,
+    "official_validation_never_pos_weight_source": true,
+    "optimise_is_gradient_source": true,
+    "optimise_is_pos_weight_source": true,
+    "release_seed_fixed": true
+  },
+  "status": "PASS"
+}

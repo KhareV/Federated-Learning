@@ -1,0 +1,23 @@
+{
+  "chunked_verifier_used": false,
+  "collected_equals_executed": true,
+  "duplicates": 0,
+  "execution_method": "NORMAL_FULL_RUN_TO_COMPLETION",
+  "failed_chunks": 0,
+  "failed_tests": 0,
+  "missing": 0,
+  "pip_check_exit_code": 0,
+  "pytest_collect_only": {
+    "collected_node_count": 1570,
+    "exit_code": 0
+  },
+  "pytest_normal_run": {
+    "command": "PYTHONPATH=src:. .venv-t032/bin/python -m pytest -q",
+    "completed_normally_without_timeout": true,
+    "duration_seconds": 18.43,
+    "exit_code": 0,
+    "result_line": "1570 passed, 15 warnings in 18.43s"
+  },
+  "ruff_exit_code": 0,
+  "status": "PASS"
+}

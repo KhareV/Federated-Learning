@@ -1,0 +1,35 @@
+{
+  "parent_checkpoint": "C-V2-PRE006-CLOSEOUT",
+  "parent_commits_amended_or_deleted": false,
+  "parent_evidence_amended_or_deleted": false,
+  "parent_preserved_historically": true,
+  "reason": "C-V2-PRE006-CLOSEOUT correctly verified what the repository-resident Protocol V1/V2 text said, but incorrectly treated that repository text as the sole scientific authority for MODEL_V2. The self-contained MODEL_V2 authority contract supplied directly in this checkpoint's prompt is the later, explicit MODEL_V2 design authority; the repository protocol text had drifted from it (carrying forward V1/v2.2-era official-VALIDATION-for-checkpoint-selection behavior and the AUROC hard gate unexamined). This is repaired additively via MODEL_V2_RESEARCH_PROTOCOL_V3.",
+  "status": "PASS",
+  "superseded_conclusions": [
+    {
+      "closeout_conclusion": "no TRAIN-only final inner split exists or is needed",
+      "corrected_rule": "A fixed TRAIN-only final inner split (MITDB_TRAIN_FINAL_INNER_V2_V1) is required for V2-007 finalist checkpoint selection.",
+      "status": "SUPERSEDED"
+    },
+    {
+      "closeout_conclusion": "all 27 TRAIN groups contribute gradient updates for V2-007",
+      "corrected_rule": "All 27 are source development groups, but only the 22 OPTIMISE groups update weights; the 5 FINAL_INNER_VALIDATION groups do not.",
+      "status": "SUPERSEDED"
+    },
+    {
+      "closeout_conclusion": "official VALIDATION controls scheduler / early stop / checkpoint",
+      "corrected_rule": "FINAL_INNER_VALIDATION controls those; official VALIDATION is evaluation/finalist-comparison only, after each checkpoint is already fixed.",
+      "status": "SUPERSEDED"
+    },
+    {
+      "closeout_conclusion": "no protocol-wide fit cap exists",
+      "corrected_rule": "D0-D5 search ceiling = 90 neural fits (Protocol V3).",
+      "status": "SUPERSEDED_FOR_MODEL_V2_SCIENTIFIC_SEARCH_GOVERNANCE"
+    },
+    {
+      "closeout_conclusion": "AUROC material-regression prohibition is an active D5 hard promotion criterion",
+      "corrected_rule": "AUROC is secondary at official validation; the two D5 hard criteria are the mean-three-seed-AUPRC and paired-bootstrap-CI rules only.",
+      "status": "SUPERSEDED"
+    }
+  ]
+}

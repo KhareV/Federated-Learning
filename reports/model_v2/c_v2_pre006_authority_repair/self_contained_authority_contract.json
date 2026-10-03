@@ -1,0 +1,17 @@
+{
+  "authority_source": "The scientific rules for this checkpoint were supplied directly in the C-V2-PRE006-AUTHORITY-REPAIR prompt itself, exactly as every MODEL_V2 phase (V2-001 through V2-005 and every corrective checkpoint) has been specified throughout this research lineage -- phase-by-phase, via direct specification, never via an external repository document. The three repository-resident base project documents (NHM_ML_Revised_Locked_Specification_v2.2, NHM_Solo_Implementation_Execution_Plan_v1.0, NHM_Solo_Implementation_Master_Prompt_FINAL) govern the original canonical NHM project (hardware/ECG/PPG/federated/gateway/G0-G22) and contain no MODEL_V2-specific scientific content; they remain historical/base authorities for that separate scope and are not searched for MODEL_V2 phase-specific rules.",
+  "classification": "IMPLEMENTATION_DRIFT_REPAIRED_ADDITIVELY",
+  "prompt_authoritative_for": "the specific MODEL_V2 methodological decisions stated in the C-V2-PRE006-AUTHORITY-REPAIR prompt (final TRAIN-only inner split, official-VALIDATION role restrictions, 90-fit D0-D5 ceiling, D5 promotion criteria, AUROC secondary-diagnostic role, CAL_V2 ordering)",
+  "repository_evidence_remains_authoritative_for": [
+    "what was actually implemented",
+    "artifact hashes",
+    "existing manifests",
+    "current task/gate/component state",
+    "historical V1 behavior",
+    "committed MODEL_V2 results (V2-002/V2-004/V2-005)",
+    "code mechanics"
+  ],
+  "repository_implementation_found_to_contradict_this_contract": true,
+  "separate_model_v2_repo_document_required": false,
+  "status": "PASS"
+}

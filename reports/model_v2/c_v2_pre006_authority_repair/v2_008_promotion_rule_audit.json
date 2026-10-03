@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "auroc_secondary_not_hard_gate": true,
+    "criterion_a_present": true,
+    "criterion_b_present": true,
+    "protocol_auroc_not_hard_gate": true,
+    "protocol_criterion_a_value": true,
+    "protocol_criterion_b_value": true,
+    "release_seed_fixed": true
+  },
+  "status": "PASS"
+}

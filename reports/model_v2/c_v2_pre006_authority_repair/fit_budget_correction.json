@@ -1,0 +1,15 @@
+{
+  "additive_correction_note": "The 100 denominator in reports/model_v2/v2_005/search_budget.json was a prior control-plane reporting convention (never actually defined in Protocol V1/V2) and did not affect V2-005's zero-fit decision, which depended only on the hybrid trigger being FALSE. That historical evidence file is left unchanged; this additive correction establishes 90 as the authoritative cap going forward.",
+  "authoritative_cap": 90,
+  "authoritative_cap_is_90": true,
+  "cap_not_currently_restrictive": true,
+  "completed_before_v2_006": 50,
+  "historical_v2_005_decision_affected": false,
+  "historical_v2_005_evidence_denominator": 100,
+  "historical_v2_005_evidence_rewritten": false,
+  "max_after_v2_006": 65,
+  "max_through_v2_007": 71,
+  "status": "PASS",
+  "v2_006_local_max": 15,
+  "v2_007_max": 6
+}

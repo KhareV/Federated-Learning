@@ -1,0 +1,26 @@
+{
+  "both_roles_contain_both_classes": true,
+  "final_inner_validation_count": 5,
+  "final_inner_validation_groups": [
+    "MITDB_P105",
+    "MITDB_P113",
+    "MITDB_P118",
+    "MITDB_P205",
+    "MITDB_P208"
+  ],
+  "groups_total": 27,
+  "held_out_or_external_overlap": [],
+  "manifest_sha256": "bb5b4f6f7205fe37d0132ebccaca7889a916b115f5ad096ecc967940421455ce",
+  "manifest_sha256_matches_lock": true,
+  "mitdb_train_inner_v2_v1_untouched": true,
+  "negatives_conserved_exactly": true,
+  "negatives_total": 6103,
+  "optimise_count": 22,
+  "positives_conserved_exactly": true,
+  "positives_total": 3557,
+  "role_disjoint": true,
+  "status": "PASS",
+  "union_equals_full_train_population": true,
+  "windows_conserved_exactly": true,
+  "windows_total": 9660
+}

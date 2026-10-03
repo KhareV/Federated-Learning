@@ -1,0 +1,18 @@
+{
+  "cal_v2_absent": true,
+  "method_commit": "b8ee3c3de7aca4d896b85f44f4f56186010c098a",
+  "model_v2_final_absent": true,
+  "origin_main_at_generation_time": "b8ee3c3de7aca4d896b85f44f4f56186010c098a",
+  "registry_at_true_entry": {
+    "V2-004": "PASS",
+    "V2-005": "SKIPPED_BY_PROTOCOL",
+    "V2-006": "NOT_STARTED",
+    "V2-007": "NOT_STARTED",
+    "V2G3": "PASS",
+    "V2G4": "PASS",
+    "V2G5": "NOT_STARTED",
+    "V2G6": "NOT_STARTED"
+  },
+  "true_entry_sha": "718bd6f956695de8ad4415fa4219cc26d6392d43",
+  "working_tree_clean_excluding_own_in_progress_evidence": false
+}

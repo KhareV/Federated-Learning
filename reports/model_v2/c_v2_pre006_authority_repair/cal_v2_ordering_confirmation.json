@@ -1,0 +1,14 @@
+{
+  "cal_v1_modified_in_this_checkpoint": false,
+  "cal_v2_accessed_in_this_checkpoint": false,
+  "cal_v2_contingent_on_runtime_acceptance": false,
+  "chronology": [
+    "MODEL_V2_official_validation",
+    "MODEL_V2_FINAL_freeze",
+    "CAL_V2_fit_freeze",
+    "post_freeze_second_look_INTERNAL_TEST_INCART_NSTDB",
+    "runtime_acceptance_decision",
+    "gateway_api_frontend_integration_only_if_accepted"
+  ],
+  "status": "PASS"
+}

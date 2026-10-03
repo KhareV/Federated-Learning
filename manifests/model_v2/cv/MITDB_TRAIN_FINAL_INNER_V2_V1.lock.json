@@ -1,0 +1,37 @@
+{
+  "algorithm": "EXACT_EXHAUSTIVE_MIN_SQUARED_DEVIATION_5_GROUP_COMBINATION_V1",
+  "audit": {
+    "final_inner_validation_count": 5,
+    "final_inner_validation_eligible_windows": 1788,
+    "final_inner_validation_groups": [
+      "MITDB_P105",
+      "MITDB_P113",
+      "MITDB_P118",
+      "MITDB_P205",
+      "MITDB_P208"
+    ],
+    "final_inner_validation_negative_windows": 1130,
+    "final_inner_validation_positive_windows": 658,
+    "objective": 1.4150512049355803e-06,
+    "optimise_eligible_windows": 7872,
+    "optimise_group_count": 22,
+    "optimise_negative_windows": 4973,
+    "optimise_positive_windows": 2899,
+    "total_eligible_windows": 9660,
+    "total_negative_windows": 6103,
+    "total_positive_windows": 3557,
+    "train_group_count": 27
+  },
+  "change_control": "This manifest is never regenerated based on future V2 results. Any change requires a new, additive MITDB_TRAIN_FINAL_INNER_V2_V2 successor.",
+  "distinct_from": "MITDB_TRAIN_INNER_V2_V1 (historical per-outer-fold inner manifest, untouched)",
+  "final_inner_validation_size": 5,
+  "manifest_id": "MITDB_TRAIN_FINAL_INNER_V2_V1",
+  "manifest_path": "manifests/model_v2/cv/MITDB_TRAIN_FINAL_INNER_V2_V1.csv",
+  "manifest_sha256": "bb5b4f6f7205fe37d0132ebccaca7889a916b115f5ad096ecc967940421455ce",
+  "method_committed_before_result_generated": true,
+  "owner_task": "C-V2-PRE006-AUTHORITY-REPAIR",
+  "predecessor_outer_manifest": "MITDB_TRAIN_CV_V2_V1",
+  "predecessor_outer_manifest_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+  "status": "FROZEN_CV_MANIFEST",
+  "tie_break": "LEXICOGRAPHIC_FIRST_IN_SORTED_ENUMERATION_ORDER"
+}

@@ -1,0 +1,14 @@
+{
+  "candidate_count": 80730,
+  "candidate_count_formula": "C(27, 5)",
+  "input_metadata_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a",
+  "input_metadata_source": "manifests/windows/MITDB_WINDOWS_V1.csv (TRAIN partition, core_eligible only)",
+  "method_commit_sha": "b8ee3c3de7aca4d896b85f44f4f56186010c098a",
+  "method_file_unchanged_since_method_commit": true,
+  "method_id": "EXACT_EXHAUSTIVE_MIN_SQUARED_DEVIATION_5_GROUP_COMBINATION_V1",
+  "no_waveform_no_v2_004_score_no_validation_signal_used": true,
+  "normalization": "targets = totals * FINAL_INNER_SIZE / n, i.e. proportional to the 5/27 share of the full TRAIN population's eligible/positive/negative window totals",
+  "objective_formula": "((inner_windows - target_windows) / target_windows)^2 + ((inner_positive - target_positive) / target_positive)^2 + ((inner_negative - target_negative) / target_negative)^2",
+  "status": "PASS",
+  "tie_breaking": "LEXICOGRAPHIC_FIRST_IN_SORTED_ENUMERATION_ORDER"
+}

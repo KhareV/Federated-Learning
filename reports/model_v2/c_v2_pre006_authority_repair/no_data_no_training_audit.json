@@ -1,0 +1,14 @@
+{
+  "bidmc_accessed": false,
+  "calibration_accessed": false,
+  "classical_fits_added": 0,
+  "incart_accessed": false,
+  "internal_test_accessed": false,
+  "method_note": "This checkpoint's scripts read only already-frozen TRAIN window-count metadata (manifests/windows/MITDB_WINDOWS_V1.csv, TRAIN partition only), protocol YAML/doc/lock text, and registry CSVs. No waveform byte, model score, or VALIDATION/CALIBRATION/INTERNAL_TEST/INCART/NSTDB/BIDMC data was read.",
+  "model_inference_runs": 0,
+  "neural_fits_added": 0,
+  "nstdb_accessed": false,
+  "official_validation_accessed": false,
+  "status": "PASS",
+  "waveform_reads": 0
+}
