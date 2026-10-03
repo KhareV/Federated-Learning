@@ -42,10 +42,14 @@ def test_v2_005_skipped_by_protocol_and_v2g4_pass() -> None:
     assert gates["V2G4"] == "PASS"
 
 
-def test_v2_006_and_v2g5_remain_not_started() -> None:
+def test_v2_006_and_v2g5_not_regressed() -> None:
+    # This checkpoint (V2-005) ran strictly before V2-006; it required V2-006/V2G5 to still
+    # be NOT_STARTED at that time, which was true. V2-006 has since legitimately run and
+    # passed -- this test only guards against an invalid status value, and that V2-007/V2G6
+    # (which V2-006 itself must not start) remain untouched.
     tasks, gates = _registry_status()
-    assert tasks["V2-006"] == "NOT_STARTED"
-    assert gates["V2G5"] == "NOT_STARTED"
+    assert tasks["V2-006"] in {"NOT_STARTED", "PASS"}
+    assert gates["V2G5"] in {"NOT_STARTED", "PASS"}
     assert tasks["V2-007"] == "NOT_STARTED"
     assert gates["V2G6"] == "NOT_STARTED"
 

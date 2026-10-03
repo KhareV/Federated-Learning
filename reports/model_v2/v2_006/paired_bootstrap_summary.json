@@ -1,0 +1,14 @@
+{
+  "B": 2000,
+  "BOOTSTRAP_SE_DELTA": 0.016018182947142027,
+  "bootstrap_id": "MODEL_V2_BOOTSTRAP_DRAWS_V1",
+  "bootstrap_se_delta_definition": "sample standard deviation (ddof=1) of all valid paired delta_rep values, where delta_rep = challenger_rep_mean_over_3_seeds - control_rep_mean_over_3_seeds, each seed's per-replicate AUPRC computed on the SAME sampled patient multiset",
+  "bootstrap_seed": 20261002,
+  "delta_AUPRC_ci_95_percentile": [
+    -0.03677410837754332,
+    0.029946219769933946
+  ],
+  "invalid_B": 0,
+  "sufficient_valid_replicates_for_adoption_decision": true,
+  "valid_B": 2000
+}

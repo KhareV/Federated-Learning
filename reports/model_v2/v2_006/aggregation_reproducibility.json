@@ -1,0 +1,22 @@
+{
+  "all_identical": true,
+  "files_checked": [
+    "challenger_seed_metrics.csv",
+    "control_seed_metrics.json",
+    "oof_closure_audit.json",
+    "paired_bootstrap_summary.json",
+    "optimizer_comparison.json",
+    "adoption_decision.json",
+    "finalist_shortlist.json"
+  ],
+  "identical": {
+    "adoption_decision.json": true,
+    "challenger_seed_metrics.csv": true,
+    "control_seed_metrics.json": true,
+    "finalist_shortlist.json": true,
+    "oof_closure_audit.json": true,
+    "optimizer_comparison.json": true,
+    "paired_bootstrap_summary.json": true
+  },
+  "status": "PASS"
+}

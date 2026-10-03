@@ -1,0 +1,35 @@
+{
+  "active_protocol_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+  "change_control": "This lock is never mutated in place. A corrected finalist shortlist requires a new, additive MODEL_V2_FINALIST_SHORTLIST_V2 successor with this lock preserved byte-identical as its predecessor.",
+  "component_id": "MODEL_V2_FINALIST_SHORTLIST_V1",
+  "final_inner_manifest_for_v2_007": "MITDB_TRAIN_FINAL_INNER_V2_V1",
+  "finalist_shortlist_json_sha256": "3023c8784427d72a657485408b4d75230ae43e86a78d34b8d972a9db6ad958e5",
+  "finalists": [
+    {
+      "architecture_id": "MODEL_V2_TCN_MEAN",
+      "finalist": "A",
+      "optimizer_challenged": false,
+      "schedule_id": "CONFIG_V2_TCN_MEAN_ORIGINAL_V1"
+    },
+    {
+      "adoption_decision": "ORIGINAL_SCHEDULE_RETAINED_BOTH_CRITERIA_FAILED",
+      "architecture_id": "MODEL_V2_TCN_MEANMAX",
+      "finalist": "B",
+      "optimizer_challenged": true,
+      "schedule_id": "CONFIG_V2_TCN_MEANMAX_ORIGINAL_V1"
+    }
+  ],
+  "git_sha": "75108fbe983d964e2d396243a87dfca9f235f410",
+  "model_v2_final_selected": false,
+  "not_a_canonical_freeze_row": true,
+  "not_a_model_v2_final_selection": true,
+  "optimizer_correction_lock_sha256": "7d0962a81e40d8efd507fca6907a582258fd01bb17a41c3945a1e71b3e1d20bc",
+  "owner_task": "V2-006",
+  "seeds_for_v2_007": [
+    20260927,
+    20260928,
+    20260929
+  ],
+  "shortlist_count": 2,
+  "status": "FROZEN_FINALIST_SHORTLIST"
+}

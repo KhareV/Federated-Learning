@@ -1,0 +1,14 @@
+{
+  "CHALLENGER": {
+    "fraction_fits_with_ge_1_lr_reduction": 1.0,
+    "median_lr_reduction_count": 2.0,
+    "median_selected_epoch": 8.0,
+    "median_stop_epoch": 16.0
+  },
+  "CONTROL": {
+    "fraction_fits_with_ge_1_lr_reduction": 0.0,
+    "median_lr_reduction_count": 0.0,
+    "median_selected_epoch": 8.0,
+    "median_stop_epoch": 15.0
+  }
+}

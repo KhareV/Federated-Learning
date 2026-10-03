@@ -1,0 +1,80 @@
+{
+  "BOOTSTRAP_SE_DELTA": 0.016018182947142027,
+  "POINT_DELTA": 0.0002698709682262823,
+  "bootstrap_valid_B": 2000,
+  "challenger_architecture": "MODEL_V2_TCN_MEANMAX",
+  "challenger_mean_AUPRC": 0.8561467166155635,
+  "challenger_schedule_id": "MODEL_V2_OPTIMIZER_CORRECTED_V1",
+  "challenger_seed_SD": 0.024839544417971336,
+  "challenger_seed_metrics": {
+    "20260927": {
+      "AUPRC": 0.8551331207210687
+    },
+    "20260928": {
+      "AUPRC": 0.8814775439378815
+    },
+    "20260929": {
+      "AUPRC": 0.8318294851877402
+    }
+  },
+  "changed_parameters": {
+    "early_stopping_patience": {
+      "challenger": 8,
+      "control": 7
+    },
+    "scheduler_factor": {
+      "challenger": 0.3,
+      "control": 0.1
+    },
+    "scheduler_patience": {
+      "challenger": 3,
+      "control": 10
+    }
+  },
+  "control_architecture": "MODEL_V2_TCN_MEANMAX",
+  "control_mean_AUPRC": 0.8558768456473372,
+  "control_schedule_id": "MODEL_V2_TCN_MEANMAX_ORIGINAL_V1",
+  "control_seed_SD": 0.01911275378128315,
+  "control_seed_metrics": {
+    "20260927": {
+      "pooled_OOF_AUPRC": 0.8673397142952888,
+      "pooled_OOF_AUROC": 0.8905007427779817,
+      "seed": 20260927
+    },
+    "20260928": {
+      "pooled_OOF_AUPRC": 0.8664778740547994,
+      "pooled_OOF_AUROC": 0.9103262285318413,
+      "seed": 20260928
+    },
+    "20260929": {
+      "pooled_OOF_AUPRC": 0.8338129485919235,
+      "pooled_OOF_AUROC": 0.8950203357036786,
+      "seed": 20260929
+    }
+  },
+  "corrected_schedule_adopted": false,
+  "decision_reason": "ORIGINAL_SCHEDULE_RETAINED_BOTH_CRITERIA_FAILED",
+  "improvement_gt_one_SE": false,
+  "paired_95_percentile_CI": [
+    -0.03677410837754332,
+    0.029946219769933946
+  ],
+  "seed_SD_not_worse": false,
+  "unchanged_parameters": [
+    "architecture",
+    "parameter_count",
+    "preprocessing",
+    "augmentation",
+    "dataset_rows",
+    "outer_folds",
+    "inner_roles",
+    "loss",
+    "pos_weight_rule",
+    "optimizer_family_AdamW",
+    "learning_rate_0.001",
+    "weight_decay_0.0001",
+    "batch_size_64",
+    "max_epochs_50",
+    "checkpoint_metric"
+  ]
+}

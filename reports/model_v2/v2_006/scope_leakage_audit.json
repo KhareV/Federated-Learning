@@ -1,0 +1,22 @@
+{
+  "bidmc_touched": false,
+  "cal_v1_used_in_scoring": false,
+  "calibration_touched": false,
+  "final_inner_manifest_touched_by_v2_006": false,
+  "incart_touched": false,
+  "internal_test_touched": false,
+  "method_note": "No code path in scripts/run_v2_006_fit.py or scripts/_v2_006_lib.py references VALIDATION/CALIBRATION/INTERNAL_TEST/INCART/NSTDB/BIDMC partitions, MITDB_TRAIN_FINAL_INNER_V2_V1, checkpoints/MODEL_V1.pt, or CAL_V1; the access ledger above, produced by the fail-closed CV-role and partition firewalls, independently confirms only TRAIN-partition OPTIMISE/INNER_VALIDATION/OUTER_TEST roles were ever read, and CONTROL evidence was read-only from already-frozen V2-004 result files (never through this ledger, since no new waveform access occurred for CONTROL).",
+  "model_v1_frozen_checkpoint_loaded_for_training": false,
+  "nstdb_touched": false,
+  "official_validation_touched": false,
+  "outer_test_used_before_checkpoint_finalization": false,
+  "rf_lr_predictions_used_for_decision": false,
+  "roles_match_known_set": true,
+  "roles_seen": [
+    "INNER_VALIDATION",
+    "OPTIMISE",
+    "OUTER_TEST"
+  ],
+  "status": "PASS",
+  "total_access_rows": 45
+}

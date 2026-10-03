@@ -1,0 +1,33 @@
+{
+  "bindings": {
+    "arch_causality_lock_sha256": "79c423fdcbd5c9dee1743ec60f704e56a48af201b6357499990cd54fa35729c3",
+    "final_inner_manifest_for_v2_007": "MITDB_TRAIN_FINAL_INNER_V2_V1",
+    "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "v2_006_optimizer_correction_result": "reports/model_v2/v2_006/optimizer_comparison.json"
+  },
+  "finalists": [
+    {
+      "architecture_id": "MODEL_V2_TCN_MEAN",
+      "finalist": "A",
+      "optimizer_challenged": false,
+      "schedule_id": "CONFIG_V2_TCN_MEAN_ORIGINAL_V1"
+    },
+    {
+      "adoption_decision": "ORIGINAL_SCHEDULE_RETAINED_BOTH_CRITERIA_FAILED",
+      "architecture_id": "MODEL_V2_TCN_MEANMAX",
+      "finalist": "B",
+      "optimizer_challenged": true,
+      "schedule_id": "CONFIG_V2_TCN_MEANMAX_ORIGINAL_V1"
+    }
+  ],
+  "max_official_validation_configurations": 2,
+  "model_v2_final_selected": false,
+  "rejected_schedule_variant_excluded": true,
+  "seeds_for_v2_007": [
+    20260927,
+    20260928,
+    20260929
+  ],
+  "shortlist_count": 2,
+  "shortlist_id": "MODEL_V2_FINALIST_SHORTLIST_V1"
+}

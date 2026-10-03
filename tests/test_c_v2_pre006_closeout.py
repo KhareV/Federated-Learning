@@ -133,10 +133,13 @@ def test_v2_005_skip_resolver_still_valid_and_arbitrary_rejected() -> None:
     assert data["canonical_t_task_semantics_unchanged"] is True
 
 
-def test_v2_006_and_v2g5_remain_not_started() -> None:
+def test_v2_006_and_v2g5_not_regressed() -> None:
+    # This checkpoint ran strictly before V2-006; it required V2-006/V2G5 to still be
+    # NOT_STARTED at that time, which was true. V2-006 has since legitimately run and
+    # passed -- this test only guards against an invalid status value.
     tasks, gates = _registry()
-    assert tasks["V2-006"]["status"] == "NOT_STARTED"
-    assert gates["V2G5"] == "NOT_STARTED"
+    assert tasks["V2-006"]["status"] in {"NOT_STARTED", "PASS"}
+    assert gates["V2G5"] in {"NOT_STARTED", "PASS"}
     assert tasks["V2-005"]["status"] == "SKIPPED_BY_PROTOCOL"
     assert gates["V2G4"] == "PASS"
 

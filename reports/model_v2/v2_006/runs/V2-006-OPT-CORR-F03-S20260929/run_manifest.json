@@ -1,0 +1,52 @@
+{
+  "config_path": "configs/model_v2/optimizer_correction_v1.yaml",
+  "config_sha256": "288a1185d5ba74d5f3bfb5729fc73197f1181ceae01c99db4580f86bc5f6dafc",
+  "corrective_checkpoint": null,
+  "created_at_utc": "2026-10-03T12:16:37.374578Z",
+  "dependency_snapshot_path": null,
+  "dependency_snapshot_sha256": null,
+  "git_commit": "75108fbe983d964e2d396243a87dfca9f235f410",
+  "git_dirty": true,
+  "input_artifacts": [
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+      "sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6"
+    },
+    {
+      "path": "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv",
+      "sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224"
+    },
+    {
+      "path": "configs/model_v1.yaml",
+      "sha256": "f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc"
+    },
+    {
+      "path": "configs/model_v2/optimizer_correction_v1.yaml",
+      "sha256": "288a1185d5ba74d5f3bfb5729fc73197f1181ceae01c99db4580f86bc5f6dafc"
+    }
+  ],
+  "manifest_version": "1.0",
+  "notes": "V2-006 challenger fit V2-006-OPT-CORR-F03-S20260929: architecture=MODEL_V2_TCN_MEANMAX schedule=MODEL_V2_OPTIMIZER_CORRECTED_V1 outer_fold=3 seed=20260929",
+  "output_artifacts": [
+    {
+      "path": "reports/model_v2/v2_006/runs/V2-006-OPT-CORR-F03-S20260929/outer_predictions.csv",
+      "sha256": "b6125af0c555372a089607cd6bc16247cad52e1d64f062e0acddaa124445d608"
+    },
+    {
+      "path": "reports/model_v2/v2_006/runs/V2-006-OPT-CORR-F03-S20260929/training_curve.csv",
+      "sha256": "cdf6d701611aeb259658f1ff48633e5882be3c7e3738984ed28bade2221e9f42"
+    },
+    {
+      "path": "checkpoints/model_v2/v2_006_optimizer_correction/V2-006-OPT-CORR-F03-S20260929_best.pt",
+      "sha256": "cb146fc72aafbb6f0bbddde7946f3acf5b7cdf8f51f3726461dcfc740d827204"
+    }
+  ],
+  "phase_id": "V2-006",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "python_version": "3.11.16",
+  "run_id": "V2-006-OPT-CORR-F03-S20260929",
+  "schema_id": "MODEL_V2_RUN_MANIFEST_V1",
+  "seed": 20260929,
+  "spec_version": "2.2",
+  "task_id": "V2-006"
+}

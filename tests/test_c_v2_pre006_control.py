@@ -81,11 +81,21 @@ def test_future_task_and_gate_rows_all_not_started() -> None:
     assert gate_summary["all_future_gates_not_started"] is True
     assert gate_summary["unresolved_contradictions"] == []
 
+    # V2-006/V2G5 have since legitimately run and passed (this checkpoint ran strictly
+    # before them); every other future task/gate must still be exactly NOT_STARTED.
     tasks, gates = _registry()
     for n in range(6, 15):
-        assert tasks[f"V2-{n:03d}"]["status"] == "NOT_STARTED"
+        task_id = f"V2-{n:03d}"
+        if task_id == "V2-006":
+            assert tasks[task_id]["status"] in {"NOT_STARTED", "PASS"}
+        else:
+            assert tasks[task_id]["status"] == "NOT_STARTED"
     for n in range(5, 14):
-        assert gates[f"V2G{n}"] == "NOT_STARTED"
+        gate_id = f"V2G{n}"
+        if gate_id == "V2G5":
+            assert gates[gate_id] in {"NOT_STARTED", "PASS"}
+        else:
+            assert gates[gate_id] == "NOT_STARTED"
 
 
 def test_v2_005_and_v2g4_not_regressed() -> None:
@@ -94,9 +104,11 @@ def test_v2_005_and_v2g4_not_regressed() -> None:
     assert gates["V2G4"] == "PASS"
 
 
-def test_v2_006_not_started() -> None:
+def test_v2_006_not_regressed() -> None:
+    # This checkpoint ran strictly before V2-006; V2-006 has since legitimately run and
+    # passed -- this test only guards against an invalid status value.
     tasks, _ = _registry()
-    assert tasks["V2-006"]["status"] == "NOT_STARTED"
+    assert tasks["V2-006"]["status"] in {"NOT_STARTED", "PASS"}
 
 
 def test_model_v2_final_and_cal_v2_do_not_exist() -> None:
