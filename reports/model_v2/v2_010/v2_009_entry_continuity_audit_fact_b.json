@@ -1,0 +1,52 @@
+{
+  "all_scientific_files_unchanged": true,
+  "claim": "CALIBRATION scientific method code was committed before data access; scripts/generate_v2_009_evidence.py and some result-verification/tests were created after CALIBRATION had already been consumed.",
+  "classification": "POST_ACCESS_CONTROL_PLANE_IMPLEMENTATION_DEVIATION",
+  "finding": "CONFIRMED_TRUE",
+  "mechanical_verification": {
+    "cal_v2_verifier_unchanged": true,
+    "guard_unchanged": true,
+    "nll_objective_unchanged": true,
+    "optimizer_unchanged": true,
+    "reliability_ece_definition_unchanged": true,
+    "temperature_fitting_unchanged": true,
+    "threshold_candidate_rule_unchanged": true,
+    "threshold_comparator_unchanged": true,
+    "threshold_tie_policy_unchanged": true
+  },
+  "original_file_mutated": false,
+  "post_access_files_confirmed": {
+    "scripts/generate_v2_009_evidence.py": {
+      "existed_at_method_commit": false
+    },
+    "tests/test_v2_009_results.py": {
+      "existed_at_method_commit": false
+    }
+  },
+  "post_access_script_reimplements_scientific_formula": false,
+  "scientific_method_files_unchanged_post_access": {
+    "configs/model_v2/calibration_v2.yaml": {
+      "has_diff": false
+    },
+    "models/cal_v2_verify.py": {
+      "has_diff": false
+    },
+    "scripts/_cal_v2_lib.py": {
+      "has_diff": false
+    },
+    "scripts/fit_cal_v2.py": {
+      "has_diff": false
+    },
+    "scripts/freeze_cal_v2_method.py": {
+      "has_diff": false
+    },
+    "scripts/run_cal_v2_calibration.py": {
+      "has_diff": false
+    },
+    "src/nhm/model_v2_calibration_guard.py": {
+      "has_diff": false
+    }
+  },
+  "status": "DISCLOSED",
+  "verified_via": "git diff/cat-file across d9eed9c..6bd17b4"
+}

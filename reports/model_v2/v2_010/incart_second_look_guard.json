@@ -1,0 +1,18 @@
+{
+  "armed_at": "2026-10-03T19:03:34.003100Z",
+  "armed_git_sha": "6bd17b41dc06946e562866af2978dc1a9fe42173",
+  "dataset": "INCART",
+  "guard_name": "V2_INCART_SECOND_LOOK",
+  "preconditions": {
+    "cal_v2_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "incart_dataset_lock_sha256": "a3b578c7f841e4170f8269554691fed957479fdd6c0f59c4f118249c6b85463e",
+    "lead_ii_records_sha256": "2053a9da9e4c1ec5a478f58e91e5fb73a3bb50bef7f7b4da21d0b316ef205353",
+    "model_v2_final_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "model_v2_final_frozen_config_sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+    "model_v2_final_manifest_sha256": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+    "patient_map_sha256": "9e6c00be0d6026fa60c5d16f209411dae99eac70c03fe9fe0ef567a24ce5bcbf",
+    "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "v1_prediction_table_sha256": "b532f3b0cbcef1d47dd28a898b05f99cce706e2b8e62589ce95e25fb28bfc14e"
+  },
+  "state": "ARMED"
+}

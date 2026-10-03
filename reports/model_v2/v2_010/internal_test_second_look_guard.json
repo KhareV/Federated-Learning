@@ -1,0 +1,18 @@
+{
+  "armed_at": "2026-10-03T19:03:33.984881Z",
+  "armed_git_sha": "6bd17b41dc06946e562866af2978dc1a9fe42173",
+  "dataset": "INTERNAL_TEST",
+  "guard_name": "V2_INTERNAL_TEST_SECOND_LOOK",
+  "preconditions": {
+    "cal_v2_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "model_v2_final_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "model_v2_final_frozen_config_sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+    "model_v2_final_manifest_sha256": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+    "preproc_lock_sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "split_sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "v1_prediction_table_sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+    "window_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+  },
+  "state": "ARMED"
+}

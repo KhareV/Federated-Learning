@@ -1,0 +1,18 @@
+{
+  "INCART_EXT_V1": {
+    "freeze_id": "F11",
+    "rerun_v1_inference": false,
+    "verify_status": "PASS"
+  },
+  "INTERNAL_TEST_V1": {
+    "freeze_id": "F10",
+    "rerun_v1_inference": false,
+    "verify_status": "PASS"
+  },
+  "NSTDB_T019": {
+    "model_inference_repeated": false,
+    "verify_status": "PASS"
+  },
+  "note": "All three V1 comparator freezes verified by hash/guard check only; zero V1 inference reruns.",
+  "status": "PASS"
+}

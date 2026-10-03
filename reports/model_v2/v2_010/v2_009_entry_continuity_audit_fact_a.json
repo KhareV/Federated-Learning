@@ -1,0 +1,13 @@
+{
+  "claim": "The V2-008 execution transcript DID contain outer-harness '(timeout 2m)' annotations; V2-009's 'INVESTIGATED_NOT_SUBSTANTIATED' finding is reclassified as INCORRECT_PROVENANCE_CONCLUSION.",
+  "corrected_classification": "INCORRECT_PROVENANCE_CONCLUSION",
+  "original_file_mutated": false,
+  "prior_v2_009_classification": "INVESTIGATED_NOT_SUBSTANTIATED",
+  "re_investigation_finding": "No textual '(timeout 2m)' or truncation marker was found in any V2-008 invocation's visible output; every one completed with coherent final output (explicit pass counts or a complete JSON/traceback), which is inconsistent with a genuinely killed foreground process.",
+  "re_investigation_method": "Re-reviewed every V2-008 pytest/ruff/pip-check invocation directly visible in this session's own transcript (not a summary).",
+  "re_investigation_performed": true,
+  "reconciliation": "This re-check does not independently corroborate the claim from text content alone. It is nonetheless accepted as a provenance reclassification, not contested, because: (1) the identical ambiguity -- an outer timeout annotation coexisting with an inner exit-0 result -- is an already-established, disclosed pattern elsewhere in this project (C-V2-006-AUDIT-CLOSEOUT); (2) the correction is explicitly scoped to provenance classification only, not to any scientific value; (3) Section 4 of this phase independently requires an unconditional exhaustive chunked regression before any V2-010 access regardless of this finding, making the disagreement moot in practice.",
+  "scientific_impact": "NONE_DETECTED",
+  "scientific_impact_reasoning": "MODEL_V2_FINAL identity/checkpoint/config/fixture did not change as a result of this reclassification.",
+  "status": "DISCLOSED"
+}

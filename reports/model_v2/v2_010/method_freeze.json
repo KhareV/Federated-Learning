@@ -1,0 +1,85 @@
+{
+  "datasets": {
+    "INCART": {
+      "guard_armed": true,
+      "preconditions": {
+        "cal_v2_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+        "incart_dataset_lock_sha256": "a3b578c7f841e4170f8269554691fed957479fdd6c0f59c4f118249c6b85463e",
+        "lead_ii_records_sha256": "2053a9da9e4c1ec5a478f58e91e5fb73a3bb50bef7f7b4da21d0b316ef205353",
+        "model_v2_final_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+        "model_v2_final_frozen_config_sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+        "model_v2_final_manifest_sha256": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+        "patient_map_sha256": "9e6c00be0d6026fa60c5d16f209411dae99eac70c03fe9fe0ef567a24ce5bcbf",
+        "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+        "v1_prediction_table_sha256": "b532f3b0cbcef1d47dd28a898b05f99cce706e2b8e62589ce95e25fb28bfc14e"
+      },
+      "second_look_result_exists_at_method_commit": false
+    },
+    "INTERNAL_TEST": {
+      "guard_armed": true,
+      "preconditions": {
+        "cal_v2_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+        "model_v2_final_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+        "model_v2_final_frozen_config_sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+        "model_v2_final_manifest_sha256": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+        "preproc_lock_sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+        "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+        "split_sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+        "v1_prediction_table_sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+        "window_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
+      },
+      "second_look_result_exists_at_method_commit": false
+    },
+    "NSTDB": {
+      "guard_armed": true,
+      "preconditions": {
+        "cal_v2_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+        "model_v2_final_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+        "model_v2_final_frozen_config_sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+        "model_v2_final_manifest_sha256": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+        "nstdb_dataset_lock_sha256": "1137f5712a2411869ebd19a099720eb5f6ac453c021769af7e8ba327809f028c",
+        "nstdb_records_manifest_sha256": "bc679e136e90749cb93570b1e210066d00c96a16d8659ea74d272330756600c2",
+        "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+        "v1_prediction_table_sha256": "46d5d21575e90ef047297021560a281415163702fb870f98348f1c461041b9a4"
+      },
+      "second_look_result_exists_at_method_commit": false
+    }
+  },
+  "historical_population_expectations": {
+    "INCART": {
+      "eligible_windows": 26864,
+      "patient_cluster_count": 32,
+      "record_count": 75
+    },
+    "INTERNAL_TEST": {
+      "contributing_group_count": 6,
+      "eligible_windows": 2157,
+      "frozen_group_count": 7,
+      "negative_windows": 1001,
+      "positive_windows": 1156
+    },
+    "NSTDB": {
+      "base_record_ids": [
+        "118",
+        "119"
+      ],
+      "pair_id_count": 720,
+      "prediction_row_count": 4320,
+      "snr_levels": [
+        24,
+        18,
+        12,
+        6,
+        0,
+        -6
+      ]
+    },
+    "matches_phase_prompt_expectations": {
+      "incart": true,
+      "internal_test": true,
+      "nstdb": true
+    }
+  },
+  "owner_task": "V2-010",
+  "status": "PASS"
+}

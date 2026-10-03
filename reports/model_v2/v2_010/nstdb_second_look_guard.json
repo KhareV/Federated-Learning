@@ -1,0 +1,17 @@
+{
+  "armed_at": "2026-10-03T19:03:34.014819Z",
+  "armed_git_sha": "6bd17b41dc06946e562866af2978dc1a9fe42173",
+  "dataset": "NSTDB",
+  "guard_name": "V2_NSTDB_SECOND_LOOK",
+  "preconditions": {
+    "cal_v2_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "model_v2_final_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "model_v2_final_frozen_config_sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+    "model_v2_final_manifest_sha256": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+    "nstdb_dataset_lock_sha256": "1137f5712a2411869ebd19a099720eb5f6ac453c021769af7e8ba327809f028c",
+    "nstdb_records_manifest_sha256": "bc679e136e90749cb93570b1e210066d00c96a16d8659ea74d272330756600c2",
+    "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "v1_prediction_table_sha256": "46d5d21575e90ef047297021560a281415163702fb870f98348f1c461041b9a4"
+  },
+  "state": "ARMED"
+}
