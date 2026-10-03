@@ -1,0 +1,16 @@
+{
+  "execution_method": "NORMAL_FULL_RUN_TO_COMPLETION",
+  "gate_passed_before_first_fit": true,
+  "outer_timeout_or_truncation_observed": false,
+  "pytest_collect_only": {
+    "collected_node_count": 1593,
+    "exit_code": 0
+  },
+  "pytest_normal_run": {
+    "completed_normally_without_timeout": true,
+    "duration_seconds": 22,
+    "exit_code": 0,
+    "result_line": "1593 passed, 15 warnings in 19.64s"
+  },
+  "status": "PASS"
+}

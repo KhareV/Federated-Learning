@@ -1,0 +1,150 @@
+component_id: MODEL_V2_OPTIMIZER_CORRECTION_V1
+owner_task: V2-006
+status: ACTIVE
+active_protocol: MODEL_V2_RESEARCH_PROTOCOL_V3
+active_protocol_lock_sha256: 287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8
+architecture:
+  component_id: MODEL_V2_TCN_MEANMAX
+  expected_parameter_count: 57577
+  source: models/model_v2_architectures.py
+  reason: frozen BEST_LEARNED_ONLY_V2_CV_V1 from MODEL_V2_ARCH_CAUSALITY_V1; not challenged
+    or altered by this phase
+control:
+  schedule_id: MODEL_V2_TCN_MEANMAX_ORIGINAL_V1
+  source: "reports/model_v2/v2_004/runs/V2-004-D1-MEANMAX-*/, V2-004-D2-MEANMAX-*/ (15 fits -
+    seed 20260927 folds 0-4 from D1, seeds 20260928/20260929 folds 0-4 from D2)"
+  reused_not_retrained: true
+  frozen_training_contract_config_sha256: f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc
+  scheduler:
+    implementation: torch.optim.lr_scheduler.ReduceLROnPlateau
+    mode: max
+    factor: 0.1
+    patience: 10
+    threshold: 0.0001
+    threshold_mode: rel
+    cooldown: 0
+    min_lr: 0.0
+    epsilon: 1.0e-08
+  early_stopping_patience: 7
+challenger:
+  schedule_id: MODEL_V2_OPTIMIZER_CORRECTED_V1
+  only_permitted_changes:
+    scheduler_patience: 3
+    scheduler_factor: 0.3
+    early_stopping_patience: 8
+  scheduler:
+    implementation: torch.optim.lr_scheduler.ReduceLROnPlateau
+    mode: max
+    factor: 0.3
+    patience: 3
+    threshold: 0.0001
+    threshold_mode: rel
+    cooldown: 0
+    min_lr: 0.0
+    epsilon: 1.0e-08
+  monitor: pooled_INNER_VALIDATION_AUPRC
+  all_other_fields_inherited_from_control: true
+  inherited_fields:
+    optimizer: AdamW
+    learning_rate: 0.001
+    betas: [0.9, 0.999]
+    epsilon: 1.0e-08
+    weight_decay: 0.0001
+    amsgrad: false
+    batch_size: 64
+    max_epochs: 50
+    loss: BCEWithLogitsLoss
+    pos_weight_source: OPTIMISE_ONLY
+    augmentation_scope: OPTIMISE_ONLY
+    normalization_order: FILTERED_WINDOW_THEN_AUGMENT_THEN_PER_WINDOW_ZSCORE
+    checkpoint_comparator: strict_greater_than
+    fresh_initialization_required: true
+  experiment_matrix:
+    seeds: [20260927, 20260928, 20260929]
+    outer_folds: [0, 1, 2, 3, 4]
+    total_planned_fits: 15
+  forbidden_changes:
+  - learning_rate
+  - weight_decay
+  - batch_size
+  - optimizer_family
+  - loss_function
+  - augmentation
+  - normalization
+  - architecture
+  - pos_weight_rule
+  - second_challenger_variant
+cv_manifests:
+  outer_cv_lock_sha256: cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6
+  inner_cv_lock_sha256: 24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224
+  final_inner_manifest_not_used_by_v2_006: MITDB_TRAIN_FINAL_INNER_V2_V1
+role_firewall:
+  stage_train_select: V2-006_TRAIN_SELECT
+  stage_outer_eval: V2-006_OUTER_EVAL
+  allowed_train_select_roles: [OPTIMISE, INNER_VALIDATION]
+  allowed_outer_eval_roles: [OUTER_TEST]
+  outer_test_requires_checkpoint_finalized: true
+bootstrap_draws_identity:
+  bootstrap_id: MODEL_V2_BOOTSTRAP_DRAWS_V1
+  bootstrap_seed: 20261002
+  replicates: 2000
+  patient_slots: 27
+  draws_sha256: e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071
+  source_path: reports/model_v2/v2_002/bootstrap_draws.npy
+  new_rng_forbidden: true
+bootstrap_se_delta_definition:
+  method: sample_standard_deviation_ddof_1_of_valid_paired_delta_rep_values
+  delta_rep_formula: challenger_rep_mean_over_3_seeds - control_rep_mean_over_3_seeds
+  per_seed_computed_on_same_sampled_patient_multiset: true
+  forbidden_definitions:
+  - control_bootstrap_sd_alone
+  - challenger_bootstrap_sd_alone
+  - ci_width_over_1_96
+  - fold_to_fold_sd
+  - seed_sd
+adoption_rule:
+  point_delta_formula: challenger_mean_auprc - control_mean_auprc
+  condition_a: point_delta_strictly_greater_than_bootstrap_se_delta
+  condition_b: challenger_seed_sd_lte_control_seed_sd
+  seed_sd_formula: sample_standard_deviation_ddof_1_of_three_seed_level_pooled_oof_auprc
+  both_required: true
+  no_auroc_adoption_gate: true
+  no_p_value_rule: true
+  no_ci_only_rule: true
+  decision_vocabulary:
+  - CORRECTED_SCHEDULE_ADOPTED
+  - ORIGINAL_SCHEDULE_RETAINED_INSUFFICIENT_IMPROVEMENT
+  - ORIGINAL_SCHEDULE_RETAINED_SEED_VARIANCE_WORSE
+  - ORIGINAL_SCHEDULE_RETAINED_BOTH_CRITERIA_FAILED
+  - ORIGINAL_SCHEDULE_RETAINED_INVALID_CHALLENGER
+finalist_shortlist_policy:
+  max_official_validation_configurations: 2
+  finalist_a:
+    architecture: MODEL_V2_TCN_MEAN
+    schedule_id: CONFIG_V2_TCN_MEAN_ORIGINAL_V1
+    schedule_unchanged: true
+  finalist_b:
+    architecture: MODEL_V2_TCN_MEANMAX
+    schedule_id_if_adopted: CONFIG_V2_TCN_MEANMAX_OPT_CORR_V1
+    schedule_id_if_not_adopted: CONFIG_V2_TCN_MEANMAX_ORIGINAL_V1
+  third_finalist_forbidden: true
+  rejected_schedule_variant_excluded_from_official_validation: true
+search_budget:
+  d0_d5_max_neural_fits: 90
+  completed_neural_fits_before_v2_006: 50
+  v2_006_max_new_fits: 15
+  max_cumulative_after_v2_006: 65
+  v2_007_max_new_fits: 6
+  max_cumulative_through_v2_007: 71
+  historical_100_denominator_superseded_by_v3: true
+scope_restrictions:
+  train_only: true
+  forbidden_partitions:
+  - VALIDATION
+  - CALIBRATION
+  - INTERNAL_TEST
+  forbidden_datasets:
+  - INCART
+  - NSTDB
+  - BIDMC
+  final_inner_manifest_reserved_for_v2_007_only: true
