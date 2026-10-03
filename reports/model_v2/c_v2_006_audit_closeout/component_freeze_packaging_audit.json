@@ -1,0 +1,22 @@
+{
+  "canonical_locks_unchanged_by_this_audit": true,
+  "classification": "PACKAGING_ONLY",
+  "created_after_results_known": true,
+  "disclosure": "scripts/freeze_v2_006_components.py was authored after V2-006 scientific results already existed. This is disclosed, not concealed.",
+  "expected_differing_fields_reason": "git_sha records HEAD at generation time -- the canonical locks were generated with HEAD at the method-attestation commit, while this replay runs from a worktree detached at the later result commit, so git_sha legitimately differs. optimizer_correction_lock_sha256 inside the shortlist lock is a hash of the optimizer lock file and cascades from that same git_sha difference; both are non-scientific execution-identity fields.",
+  "forbidden_scientific_calls_found": [],
+  "isolated_opt_lock_produced": true,
+  "isolated_shortlist_lock_produced": true,
+  "opt_lock_differing_fields": [
+    "git_sha"
+  ],
+  "replay_exit_code": 0,
+  "scientific_bindings_match": true,
+  "shortlist_lock_differing_fields": [
+    "git_sha",
+    "optimizer_correction_lock_sha256"
+  ],
+  "status": "PASS",
+  "unexpected_differing_fields": [],
+  "worktree_replay_ok": true
+}

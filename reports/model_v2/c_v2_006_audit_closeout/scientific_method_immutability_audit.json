@@ -1,0 +1,68 @@
+{
+  "any_file_changed_after_method_freeze": false,
+  "files": {
+    "configs/model_v2/optimizer_correction_v1.yaml": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "288a1185d5ba74d5f3bfb5729fc73197f1181ceae01c99db4580f86bc5f6dafc",
+      "sha_at_result_commit": "288a1185d5ba74d5f3bfb5729fc73197f1181ceae01c99db4580f86bc5f6dafc"
+    },
+    "scripts/_v2_006_lib.py": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "73049ad5e634e4c9eb50ae31906c1683c0d82f19c86e8457c0bd25352843a48d",
+      "sha_at_result_commit": "73049ad5e634e4c9eb50ae31906c1683c0d82f19c86e8457c0bd25352843a48d"
+    },
+    "scripts/aggregate_v2_006.py": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "75f8379a54d025c52d770d90cc613bd6474f0a0b1f4ae2d8c287a0408e0d8fdc",
+      "sha_at_result_commit": "75f8379a54d025c52d770d90cc613bd6474f0a0b1f4ae2d8c287a0408e0d8fdc"
+    },
+    "scripts/bootstrap_v2_006.py": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "d2540752127a7702abdd06d48f2b3dbb37a6454f1b7f808a1e5766616cde105e",
+      "sha_at_result_commit": "d2540752127a7702abdd06d48f2b3dbb37a6454f1b7f808a1e5766616cde105e"
+    },
+    "scripts/decide_v2_006.py": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "8f7acd0d214c9bdc69e37bc17dbfb0bf0e92f9f4c9f18721cf6c51b6e9c772cb",
+      "sha_at_result_commit": "8f7acd0d214c9bdc69e37bc17dbfb0bf0e92f9f4c9f18721cf6c51b6e9c772cb"
+    },
+    "scripts/generate_v2_006_evidence.py": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "499ea1204a3d56e93aa07c20e211ad834a085f92491ddd7e300390df68d056e8",
+      "sha_at_result_commit": "499ea1204a3d56e93aa07c20e211ad834a085f92491ddd7e300390df68d056e8"
+    },
+    "scripts/run_all_v2_006_fits.py": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "cf2d0544c8b4ce267989c92d6a6c187063d94165f024ba18f885f68a40360c71",
+      "sha_at_result_commit": "cf2d0544c8b4ce267989c92d6a6c187063d94165f024ba18f885f68a40360c71"
+    },
+    "scripts/run_v2_006_fit.py": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "baee256319d7a353b9c064056078c1769a1965b40e61a2ac01f0b7fd89ce0e48",
+      "sha_at_result_commit": "baee256319d7a353b9c064056078c1769a1965b40e61a2ac01f0b7fd89ce0e48"
+    },
+    "src/nhm/model_v2_cv_role_guard.py": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "0ec832fec5c4355ebddb5c5130dad62b458bb8e738445216d3fc87cd70bc50cc",
+      "sha_at_result_commit": "0ec832fec5c4355ebddb5c5130dad62b458bb8e738445216d3fc87cd70bc50cc"
+    },
+    "tests/test_v2_006_config.py": {
+      "changed_after_method_freeze": false,
+      "classification": "NO_CHANGE",
+      "sha_at_method_commit": "f6c631fe56f38a0a800399c528d484d36407493c71b12243bde94608c5ecce77",
+      "sha_at_result_commit": "f6c631fe56f38a0a800399c528d484d36407493c71b12243bde94608c5ecce77"
+    }
+  },
+  "method_commit": "69f51cd62b12014724c552d3ab74f7d6c928722b",
+  "result_commit": "5bf02dc60d929a6c04ae12d4617d7563b543a936",
+  "status": "PASS"
+}

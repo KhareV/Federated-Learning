@@ -1,0 +1,41 @@
+{
+  "all_changes_chronology_or_registry_update_only": true,
+  "entries": [
+    {
+      "classification": "HISTORICAL_TEST_CHRONOLOGY_UPDATE",
+      "diff_excerpt_sha256": "d3608a3507aa79e15327e6c811c015e133468abcb5a45c9f528c018d9615cd13",
+      "diff_present": true,
+      "file": "tests/test_v2_005_results.py",
+      "scientific_value_lock_or_data_scope_weakened": false
+    },
+    {
+      "classification": "HISTORICAL_TEST_CHRONOLOGY_UPDATE",
+      "diff_excerpt_sha256": "93b52f98f65c2a1f444847ea17c58222e9256c4f44233a8352d1800234a9724b",
+      "diff_present": true,
+      "file": "tests/test_c_v2_pre006_authority_repair.py",
+      "scientific_value_lock_or_data_scope_weakened": false
+    },
+    {
+      "classification": "HISTORICAL_TEST_CHRONOLOGY_UPDATE",
+      "diff_excerpt_sha256": "248476ac35f633e30d2957a295406ab28c6b553af9e62c8b0ebedb8cd0ad4b80",
+      "diff_present": true,
+      "file": "tests/test_c_v2_pre006_closeout.py",
+      "scientific_value_lock_or_data_scope_weakened": false
+    },
+    {
+      "classification": "HISTORICAL_TEST_CHRONOLOGY_UPDATE",
+      "diff_excerpt_sha256": "c670ef32193195ab5435ac9d066be065be6d525ce94c66d325cf1818cd3d8a62",
+      "diff_present": true,
+      "file": "tests/test_c_v2_pre006_control.py",
+      "scientific_value_lock_or_data_scope_weakened": false
+    },
+    {
+      "classification": "REGISTRY_STATUS_UPDATE",
+      "diff_excerpt_sha256": "c12d875b5b5ac4958ebd1f628e51334a8c0fa117bcd92daa325566f8153193c6",
+      "diff_present": true,
+      "file": "tests/test_model_v2_control_plane.py",
+      "scientific_value_lock_or_data_scope_weakened": false
+    }
+  ],
+  "status": "PASS"
+}

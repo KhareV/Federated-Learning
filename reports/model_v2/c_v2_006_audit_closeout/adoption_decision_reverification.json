@@ -1,0 +1,14 @@
+{
+  "criterion_a_point_delta_gt_bootstrap_se": false,
+  "criterion_b_challenger_sd_lte_control_sd": false,
+  "frozen_decision": "ORIGINAL_SCHEDULE_RETAINED_BOTH_CRITERIA_FAILED",
+  "matches_frozen": {
+    "corrected_schedule_adopted": true,
+    "criterion_a": true,
+    "criterion_b": true,
+    "decision": true
+  },
+  "no_manual_override": true,
+  "replayed_decision": "ORIGINAL_SCHEDULE_RETAINED_BOTH_CRITERIA_FAILED",
+  "status": "PASS"
+}

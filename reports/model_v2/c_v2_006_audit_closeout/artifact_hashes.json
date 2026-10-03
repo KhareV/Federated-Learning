@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "manifests/model_v2/MODEL_V2_FINALIST_SHORTLIST_V1.lock.json": "ead027c8ebbe864ced4f740cda923d57688b2bf5233a0d7a27ddf34a0598fb64",
+    "manifests/model_v2/MODEL_V2_OPTIMIZER_CORRECTION_V1.lock.json": "7d0962a81e40d8efd507fca6907a582258fd01bb17a41c3945a1e71b3e1d20bc",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V3.lock.json": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "manifests/model_v2/gate_registry_v1.csv": "115a6764fca07f186a22f36c59e698f9c536555d64deedd1603e893ed9cedcbc",
+    "manifests/model_v2/task_registry_v1.csv": "5fa81da4de6c5109b07c372f693744c2a38939a8c93465849b948c9d93582d4c",
+    "reports/model_v2/c_v2_006_audit_closeout/adoption_decision_reverification.json": "6dddeb8527ca9c24762113ee1d69b106a98a503d3163199f9e615aef1e468d93",
+    "reports/model_v2/c_v2_006_audit_closeout/all_fit_integrity_audit.csv": "dd097d04d158a77bdff81411739976f374a95b2e5ca78e26f79389159f1af7c4",
+    "reports/model_v2/c_v2_006_audit_closeout/all_fit_integrity_summary.json": "c4dcfcbe5eeb46ee537ecaae2bc5f5a5ee1f474b492a82edeb842c3b3d73aa3d",
+    "reports/model_v2/c_v2_006_audit_closeout/chunked_regression_proof_core.json": "dd7db64e0c5a26591eff9d1306502d34a300f7535e5047defdab6ae1bbbd5411",
+    "reports/model_v2/c_v2_006_audit_closeout/component_freeze_packaging_audit.json": "fcf5c2f7b2b353db2b26122a313e3af59aa48dc560938ec75076fc6c92d3b69d",
+    "reports/model_v2/c_v2_006_audit_closeout/data_scope_audit.json": "84379e6cb983ee038c9a60600c67a140300a627438cbe71408c8d908f3ec24e7",
+    "reports/model_v2/c_v2_006_audit_closeout/entry_audit.json": "3f3aa9c470ca36871697faeb37b676989f4c9f83af0ed89c0dfce2cbb789b23b",
+    "reports/model_v2/c_v2_006_audit_closeout/full_regression_proof.json": "f353e136b9de92f17974a660367dc928ad84f5b5f07d3198ba32956be5624473",
+    "reports/model_v2/c_v2_006_audit_closeout/git_chronology_audit.json": "38b640706a59f8ac4f0e4315dd1ca86b92e88e877d9c0b69e1c4d7fe4276d568",
+    "reports/model_v2/c_v2_006_audit_closeout/historical_test_change_audit.json": "a5e202f93185b99e7e8075ea52ef38edb9836e0ce4958b2d281d4f14ecdd351d",
+    "reports/model_v2/c_v2_006_audit_closeout/independent_bootstrap_reverification.json": "c8f7597a227494eff91d99be54106910236ca6420d79720a6b90cc906ae4e189",
+    "reports/model_v2/c_v2_006_audit_closeout/independent_metric_reverification.json": "2702161f359418cc0cbb699a918893b99b3df41a2351310e63d8d9d87e1961a9",
+    "reports/model_v2/c_v2_006_audit_closeout/oof_reverification.json": "cc7f3691e9a59b205e1228d75ce22b983458bf38123e2f90a72fd0250a45ee25",
+    "reports/model_v2/c_v2_006_audit_closeout/post_result_test_failure_audit.json": "8bd2790df2ce1d2843007e3e2deb8e2eb6a0c922f66e0adbe07239ca2328b0c4",
+    "reports/model_v2/c_v2_006_audit_closeout/prefit_regression_disclosure.json": "6e73c378e3df6cd004289eae873e2b1f67da5b93542e3963f3bb16346aa2cb3f",
+    "reports/model_v2/c_v2_006_audit_closeout/protected_artifact_hashes_baseline.json": "745c3cb73d80b3955f61ef41492131a301de8b487822cc3b74392b51e77b938b",
+    "reports/model_v2/c_v2_006_audit_closeout/protected_artifact_immutability.json": "3a4decb8f04fbf63d49ed49c588b9882574ade209efb6ad16642c9f94684397a",
+    "reports/model_v2/c_v2_006_audit_closeout/pytest_chunk_manifest.csv": "58a530814c81d372f964b07975ba5d4fd053ec0fc982aa6143e9722011916eb2",
+    "reports/model_v2/c_v2_006_audit_closeout/pytest_chunk_results.csv": "9fd7fe922a4b8c2e21f06de74ebdd905d6dffc92fb43a53b9683b4ed80dbf7d5",
+    "reports/model_v2/c_v2_006_audit_closeout/run_manifest.json": "69c36b3cd46df57778f525f4e33191219411f6ebbaedb4c2f9d9e2c4730897e0",
+    "reports/model_v2/c_v2_006_audit_closeout/scientific_method_immutability_audit.json": "f6722920b3a4a4e51b326abdcf9231af79e7cf8d2bd258cc806305d325ebb7e2",
+    "reports/model_v2/c_v2_006_audit_closeout/search_budget_audit.json": "8772360cb6b0168695be855c82b45c3159cb88445dd9a7d22f864198580ab7c0",
+    "reports/model_v2/c_v2_006_audit_closeout/shortlist_reverification.json": "2db2de5ac7028b60f963f76a5f232d59153a818f2223e0cf784d3a136c5fbc4a",
+    "reports/model_v2/c_v2_006_audit_closeout/test_results.json": "c8581e006a1c6d323940f2f8384c03dd88e6957e9d7bd19e471d3479a180708d"
+  }
+}

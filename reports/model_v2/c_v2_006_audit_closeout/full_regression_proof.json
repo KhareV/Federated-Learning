@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "method_note": "Full-suite pytest trust was not assumed from a single monolithic invocation, per the disclosed pre-fit outer-harness timeout-annotation ambiguity (see prefit_regression_disclosure.json). Instead: (1) collect-only enumerated every test node deterministically, (2) the sorted node list was hashed, (3) the node list was partitioned into fixed-size deterministic chunks, (4) every chunk was executed as its own pytest invocation well under any outer tool timeout, (5) executed == collected was proven exactly. Collection/chunking was run twice: once before tests/test_c_v2_006_audit_closeout.py existed (1607 nodes, PASS) and once after it was added (1622 nodes, PASS) -- the second run is authoritative for the committed state.",
+  "collection": {
+    "collected_node_count": 1622,
+    "collected_node_list_file": "pytest_collected_nodes.txt",
+    "collection_command": "PYTHONPATH=src:. .venv-t032/bin/python -m pytest --collect-only -q -p no:warnings",
+    "prior_run_before_new_test_file_added": 1607
+  },
+  "chunking": {
+    "chunk_size": 80,
+    "chunk_count": 21,
+    "chunk_manifest_file": "pytest_chunk_manifest.csv",
+    "chunk_results_file": "pytest_chunk_results.csv",
+    "collected_sorted_node_list_sha256": "8031da9847c6a0cf77484c9460ca36e3da5fd56ad7c9376bc9920a1e47360e4e",
+    "hash_method_note": "Computed by scripts/run_v2_006_closeout_chunked_regression.py as sha256('\\n'.join(sorted(nodes))) with no trailing newline.",
+    "executed_unique_count": 1622,
+    "missing": 0,
+    "duplicates": 0,
+    "unexpected": 0,
+    "failed_chunks": 0,
+    "failed_tests": 0,
+    "collected_equals_executed": true
+  },
+  "ruff": {
+    "command": ".venv-t032/bin/python -m ruff check .",
+    "exit_code": 0,
+    "result": "All checks passed!"
+  },
+  "pip_check": {
+    "command": ".venv-t032/bin/python -m pip check",
+    "exit_code": 0,
+    "result": "No broken requirements found."
+  }
+}

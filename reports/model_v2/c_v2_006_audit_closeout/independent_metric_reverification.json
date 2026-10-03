@@ -1,0 +1,46 @@
+{
+  "POINT_DELTA": 0.0002698709682262823,
+  "challenger_mean_AUPRC": 0.8561467166155635,
+  "challenger_per_seed": {
+    "20260927": {
+      "AUPRC": 0.8551331207210687,
+      "AUROC": 0.8913619313029061
+    },
+    "20260928": {
+      "AUPRC": 0.8814775439378815,
+      "AUROC": 0.9168490118397183
+    },
+    "20260929": {
+      "AUPRC": 0.8318294851877402,
+      "AUROC": 0.8799843387603796
+    }
+  },
+  "challenger_seed_SD": 0.024839544417971336,
+  "control_mean_AUPRC": 0.8558768456473372,
+  "control_per_seed": {
+    "20260927": {
+      "AUPRC": 0.8673397142952888,
+      "AUROC": 0.8905007427779817
+    },
+    "20260928": {
+      "AUPRC": 0.8664778740547994,
+      "AUROC": 0.9103262285318413
+    },
+    "20260929": {
+      "AUPRC": 0.8338129485919235,
+      "AUROC": 0.8950203357036786
+    }
+  },
+  "control_seed_SD": 0.01911275378128315,
+  "frozen_challenger_mean_AUPRC": 0.8561467166155635,
+  "frozen_control_mean_AUPRC": 0.8558768456473372,
+  "matches_frozen": {
+    "challenger_mean": true,
+    "challenger_sd": true,
+    "control_mean": true,
+    "control_sd": true,
+    "point_delta": true
+  },
+  "method_note": "Independent minimal reimplementation (sklearn average_precision_score/roc_auc_score called directly on pooled per-seed rows); does not import aggregate_v2_006.py.",
+  "status": "PASS"
+}

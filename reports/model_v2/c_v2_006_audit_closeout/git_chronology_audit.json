@@ -1,0 +1,31 @@
+{
+  "ancestor_checks": {
+    "METHOD_ATTESTATION_COMMIT->RESULT_COMMIT": {
+      "exit_code": 0,
+      "is_ancestor": true
+    },
+    "METHOD_COMMIT->METHOD_ATTESTATION_COMMIT": {
+      "exit_code": 0,
+      "is_ancestor": true
+    },
+    "METHOD_COMMIT->RESULT_COMMIT": {
+      "exit_code": 0,
+      "is_ancestor": true
+    }
+  },
+  "commits": {
+    "METHOD_ATTESTATION_COMMIT": {
+      "sha": "75108fbe983d964e2d396243a87dfca9f235f410",
+      "subject": "75108fbe983d964e2d396243a87dfca9f235f410 docs(model-v2): attest V2-006 method-commit SHA (69f51cd)"
+    },
+    "METHOD_COMMIT": {
+      "sha": "69f51cd62b12014724c552d3ab74f7d6c928722b",
+      "subject": "69f51cd62b12014724c552d3ab74f7d6c928722b research(model-v2): freeze V2-006 optimizer-correction method"
+    },
+    "RESULT_COMMIT": {
+      "sha": "5bf02dc60d929a6c04ae12d4617d7563b543a936",
+      "subject": "5bf02dc60d929a6c04ae12d4617d7563b543a936 research(model-v2): complete V2-006 optimizer correction, freeze finalist shortlist"
+    }
+  },
+  "status": "PASS"
+}

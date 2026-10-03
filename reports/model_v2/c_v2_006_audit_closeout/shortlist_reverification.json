@@ -1,0 +1,14 @@
+{
+  "actual_finalist_b_schedule": "CONFIG_V2_TCN_MEANMAX_ORIGINAL_V1",
+  "expected_finalist_b_schedule": "CONFIG_V2_TCN_MEANMAX_ORIGINAL_V1",
+  "matches_frozen": {
+    "count": true,
+    "finalist_a_architecture": true,
+    "finalist_a_schedule": true,
+    "finalist_b_architecture": true,
+    "finalist_b_schedule": true
+  },
+  "no_finalist_promoted_to_model_v2_final": true,
+  "status": "PASS",
+  "tcn_mean_not_replaced": true
+}

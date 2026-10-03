@@ -1,0 +1,47 @@
+{
+  "any_cause_was_torchscript_or_environment_ordering": false,
+  "any_scientific_invariant_altered_by_repair": false,
+  "failures": [
+    {
+      "cause_category": "missing_packaging_artifacts",
+      "failure_reason": "run_manifest.json/artifact_hashes.json did not exist yet at first invocation (packaging step had not run)",
+      "repair_applied": "ran write_run_manifest_and_hashes() to generate the packaging files",
+      "repair_changed_scientific_method": false,
+      "scientific_result_affected": false,
+      "test_name": "tests/test_v2_006_results.py::test_run_manifest_and_artifact_hashes_valid"
+    },
+    {
+      "cause_category": "future_state_historical_registry_assertion",
+      "failure_reason": "hard-coded NOT_STARTED assertion for a status that had since legitimately become PASS",
+      "repair_applied": "relaxed to accept {NOT_STARTED, PASS} with explanatory comment",
+      "repair_changed_scientific_method": false,
+      "scientific_result_affected": false,
+      "test_name": "tests/test_v2_005_results.py::test_v2_006_and_v2g5_remain_not_started"
+    },
+    {
+      "cause_category": "future_state_historical_registry_assertion",
+      "failure_reason": "same as above",
+      "repair_applied": "relaxed to accept {NOT_STARTED, PASS} with explanatory comment",
+      "repair_changed_scientific_method": false,
+      "scientific_result_affected": false,
+      "test_name": "tests/test_c_v2_pre006_authority_repair.py::test_v2_006_and_v2g5_remain_not_started"
+    },
+    {
+      "cause_category": "future_state_historical_registry_assertion",
+      "failure_reason": "same as above",
+      "repair_applied": "relaxed to accept {NOT_STARTED, PASS} with explanatory comment",
+      "repair_changed_scientific_method": false,
+      "scientific_result_affected": false,
+      "test_name": "tests/test_c_v2_pre006_closeout.py::test_v2_006_and_v2g5_remain_not_started"
+    },
+    {
+      "cause_category": "future_state_historical_registry_assertion",
+      "failure_reason": "hard-coded NOT_STARTED assertions for V2-006/V2G5 within a loop over all future tasks/gates",
+      "repair_applied": "special-cased V2-006/V2G5 to accept {NOT_STARTED, PASS}; all other future tasks/gates still require exact NOT_STARTED",
+      "repair_changed_scientific_method": false,
+      "scientific_result_affected": false,
+      "test_name": "tests/test_c_v2_pre006_control.py::test_future_task_and_gate_rows_all_not_started + test_v2_006_not_started"
+    }
+  ],
+  "status": "PASS"
+}

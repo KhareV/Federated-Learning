@@ -1,0 +1,23 @@
+{
+  "B": 2000,
+  "BOOTSTRAP_SE_DELTA": 0.016018182947142027,
+  "bootstrap_id": "MODEL_V2_BOOTSTRAP_DRAWS_V1",
+  "delta_AUPRC_ci_95_percentile": [
+    -0.03677410837754332,
+    0.029946219769933946
+  ],
+  "frozen_BOOTSTRAP_SE_DELTA": 0.016018182947142027,
+  "frozen_ci": [
+    -0.03677410837754332,
+    0.029946219769933946
+  ],
+  "matches_frozen": {
+    "BOOTSTRAP_SE_DELTA": true,
+    "ci_lower": true,
+    "ci_upper": true,
+    "valid_B": true
+  },
+  "method_note": "Independent minimal reimplementation of the paired per-seed-matched bootstrap; does not import bootstrap_v2_006.py. Reuses MODEL_V2_BOOTSTRAP_DRAWS_V1 unchanged -- no new draws generated.",
+  "status": "PASS",
+  "valid_B": 2000
+}

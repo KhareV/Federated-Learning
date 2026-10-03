@@ -1,0 +1,14 @@
+{
+  "bidmc_accessed": false,
+  "calibration_accessed": false,
+  "incart_accessed": false,
+  "internal_test_accessed": false,
+  "method_note": "This checkpoint reads only already-frozen prediction CSVs, evidence JSON, protocol/lock files, and git history. No waveform file was opened; no model object was constructed or run; independent metric/bootstrap recomputation operates purely on already-materialized raw_probability/label columns in frozen CSV files.",
+  "model_inference": 0,
+  "new_classical_fits": 0,
+  "new_neural_fits": 0,
+  "nstdb_accessed": false,
+  "official_validation_accessed": false,
+  "status": "PASS",
+  "waveform_reads": 0
+}
