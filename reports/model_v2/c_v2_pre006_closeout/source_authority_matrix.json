@@ -1,0 +1,36 @@
+{
+  "disagreement_found": {
+    "actual_protocol_text_says": "official VALIDATION itself (not a TRAIN-only split) serves the early-stopping/checkpoint-selection role for the V2-007 finalists -- see Section K quoted above and the byte-identical YAML field official_validation.early_stopping_checkpoint_selection=OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE in both V1 and V2.",
+    "between": "this checkpoint's own Section 0A premise (a fixed final TRAIN-only inner split was pre-registered for V2-007) vs. the actual committed protocol text",
+    "resolution": "Reported mechanically rather than silently choosing a side (per Section 2); see final_inner_split_case_classification.json for the full disposition."
+  },
+  "docs_MODEL_V2_RESEARCH_PROTOCOL_V1_md_IS_the_original_plan": true,
+  "final_inner_split_mentions_by_source": {
+    "configs/model_v2/research_protocol_v1.yaml": false,
+    "configs/model_v2/research_protocol_v2.yaml": false,
+    "docs/MODEL_V2_RESEARCH_PROTOCOL_V1.md": false,
+    "docs/MODEL_V2_RESEARCH_PROTOCOL_V2.md": false
+  },
+  "no_source_requires_a_dedicated_final_train_only_inner_split": true,
+  "no_standalone_pre_v2_001_planning_document_found_in_repo": true,
+  "section_k_official_validation_text": "## K. Official validation\n\nAt most two frozen configurations enter V2-007: trained from scratch on all 27 TRAIN patient\ngroups, using official VALIDATION for early stopping/checkpoint selection in its locked v2.2\nrole, seeds 20260927/28/29. Once the first new V2 official VALIDATION result exists, no\narchitecture/hyperparameter/search-rule change is permitted. Selection: highest mean\nthree-seed validation AUPRC; ties within one bootstrap SE prefer the simpler/lower-variance\nmodel. The release checkpoint is always seed 20260927.\n\n**Promotion requirement before CALIBRATION**: release-seed V2 validation AUPRC \u2265",
+  "sources_inspected": [
+    "configs/model_v2/research_protocol_v2.yaml",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V2.lock.json",
+    "docs/MODEL_V2_RESEARCH_PROTOCOL_V2.md",
+    "configs/model_v2/research_protocol_v1.yaml",
+    "docs/MODEL_V2_RESEARCH_PROTOCOL_V1.md",
+    "manifests/model_v2/cv/MITDB_TRAIN_CV_V2_V1.csv",
+    "manifests/model_v2/cv/MITDB_TRAIN_INNER_V2_V1.csv",
+    "scripts/build_model_v2_train_cv_v2001.py",
+    "scripts/build_model_v2_inner_cv_v2001.py",
+    "src/nhm/model_v2_partition_guard.py",
+    "src/nhm/model_v2_cv_role_guard.py",
+    "reports/model_v2/c_v2_pre004_control/*.json",
+    "reports/model_v2/c_v2_pre006_control/*.json",
+    "manifests/model_v2/task_registry_v1.csv",
+    "manifests/model_v2/gate_registry_v1.csv",
+    "manifests/model_v2/component_registry_v1.csv"
+  ],
+  "status": "PASS"
+}

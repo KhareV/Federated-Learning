@@ -1,0 +1,22 @@
+{
+  "canonical_held_out_partitions": [
+    "TRAIN",
+    "VALIDATION",
+    "CALIBRATION",
+    "INTERNAL_TEST",
+    "INCART",
+    "NSTDB",
+    "BIDMC"
+  ],
+  "change_freeze_on_first_access": true,
+  "distinct_code_level_role_named_OFFICIAL_VALIDATION_LOCKED_exists": false,
+  "finding": "The frozen protocol unambiguously specifies that official VALIDATION itself -- the canonical held-out partition, not a TRAIN-only inner split -- serves the early-stopping/checkpoint-selection role for the V2-007 finalists, under a single locked access (change_freeze_on_first_access=true). This is a deliberate, standard train/val/test design: VALIDATION is used exactly once, after architecture/hyperparameters are already fixed to at most two finalists by V2-004/V2-006, to select the best checkpoint and compare finalists -- it is never used for the earlier multi-architecture search (which V2-004 governs via TRAIN-only OPTIMISE/INNER_VALIDATION roles).",
+  "max_frozen_configurations": 2,
+  "official_validation_is_the_canonical_held_out_VALIDATION_partition": true,
+  "status": "PASS",
+  "training_population_field": "ALL_27_TRAIN_PATIENT_GROUPS",
+  "v1_doc_section_k_confirms_official_validation_used_for_checkpoint_selection": true,
+  "yaml_field_identical_in_v1_and_v2": true,
+  "yaml_field_path": "official_validation.early_stopping_checkpoint_selection",
+  "yaml_field_value": "OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE"
+}

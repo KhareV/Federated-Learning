@@ -1,0 +1,10 @@
+{
+  "classification": "ACTIVE_HARD_REQUIREMENT",
+  "correction_required": false,
+  "registry_mentions_auroc": true,
+  "registry_text_sample": "Promotion requires BOTH (per active MODEL_V2_RESEARCH_PROTOCOL_V2, official_validation.promotion_requirement): (A) mean three-seed official VALIDATION AUPRC > 0.646, AND (B) the paired patient-cluster-bootstrap delta-AUPRC-vs-MODEL_V1 lower-95%-CI bound > 0, for the required release-seed/three-seed comparisons; plus three-seed confirmation and no material AUROC regression (carried forward from V1). The release checkpoint is always seed 20260927, fixed regardless of score -- no seed may be selected because it scores highest after VALIDATION.",
+  "registry_wording_matches_active_classification": true,
+  "status": "PASS",
+  "yaml_path": "official_validation.promotion_requirement.auroc_material_regression_forbidden",
+  "yaml_value": true
+}

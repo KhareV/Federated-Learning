@@ -1,0 +1,31 @@
+{
+  "case_classification": "CASE_NEITHER_PROTOCOL_UNAMBIGUOUS_PRIOR_REGISTRY_ERROR",
+  "checkpoint_id": "C-V2-PRE006-CLOSEOUT",
+  "evidence_files": [
+    "cal_v2_ordering_resolution.json",
+    "conditional_prerequisite_regression.json",
+    "early_stopping_field_resolution.json",
+    "entry_audit.json",
+    "final_inner_split_case_classification.json",
+    "final_inner_split_contract_audit.json",
+    "final_inner_split_manifest_audit.json",
+    "final_inner_split_method_freeze.json",
+    "no_data_no_training_audit.json",
+    "protocol_internal_ordering_audit.json",
+    "search_budget_authority_confirmation.json",
+    "source_authority_matrix.json",
+    "test_results.json",
+    "upstream_identity_audit.json",
+    "v2_007_registry_semantic_audit.json",
+    "v2_008_auroc_clause_audit.json"
+  ],
+  "final_inner_manifest_created": false,
+  "head_at_generation": "70af2d0a95cb6cf389e6440a0561c826f35bf7b1",
+  "no_classical_fits": true,
+  "no_neural_fits": true,
+  "no_protocol_mutated": true,
+  "no_scientific_artifact_mutated": true,
+  "parent": "C-V2-PRE006-CONTROL",
+  "protocol_v3_created": false,
+  "type": "corrective_control_plane_metadata_checkpoint"
+}

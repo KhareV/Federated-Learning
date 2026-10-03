@@ -1,0 +1,12 @@
+{
+  "ambiguous": false,
+  "applies_to_final_train_only_fitting": false,
+  "applies_to_official_validation_at_the_v2_007_finalist_stage": true,
+  "applies_to_outer_cv_only": false,
+  "architecture_decisions_changed_in_this_checkpoint": false,
+  "optimizer_values_changed_in_this_checkpoint": false,
+  "reason_unambiguous": "V1 doc Section K states explicitly: 'trained from scratch on all 27 TRAIN patient groups, using official VALIDATION for early stopping/checkpoint selection in its locked v2.2 role' -- the YAML field's value 'OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE' is a direct slug of this prose. No distinct code-level role named OFFICIAL_VALIDATION_LOCKED exists in src/nhm/model_v2_partition_guard.py or model_v2_cv_role_guard.py, confirming 'official VALIDATION' here means the canonical held-out VALIDATION partition, not a TRAIN-internal mechanism. This field is unchanged from V1 (byte-identical), so it was never altered or clarified by V2 -- it governs only the V2-007 finalist stage, never the earlier V2-004 architecture-search stage (which uses its own, separate TRAIN-only OPTIMISE/INNER_VALIDATION roles).",
+  "status": "PASS",
+  "yaml_path": "official_validation.early_stopping_checkpoint_selection",
+  "yaml_value": "OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE"
+}

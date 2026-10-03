@@ -1,0 +1,9 @@
+{
+  "applicable": false,
+  "mitdb_train_cv_v2_v1_csv_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+  "mitdb_train_cv_v2_v1_csv_sha256_matches_lock": true,
+  "mitdb_train_inner_v2_v1_csv_sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+  "mitdb_train_inner_v2_v1_csv_sha256_matches_lock": true,
+  "reason": "No new final-inner manifest was created; see final_inner_split_case_classification.json. This file instead confirms the two existing, historical CV manifests are completely untouched by this checkpoint.",
+  "status": "NOT_APPLICABLE"
+}

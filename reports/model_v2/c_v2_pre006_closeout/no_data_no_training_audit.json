@@ -1,0 +1,14 @@
+{
+  "bidmc_accessed": false,
+  "calibration_accessed": false,
+  "classical_fits_added": 0,
+  "incart_accessed": false,
+  "internal_test_accessed": false,
+  "method_note": "This checkpoint reads only already-frozen protocol YAML/doc/lock text, registry CSVs, and prior V2-004/V2-005/C-V2-PRE006-CONTROL evidence scalars. No waveform file, feature-cache row, or annotation file was opened; no model object was constructed or run; no final-inner manifest was constructed (see final_inner_split_case_classification.json).",
+  "model_inference_runs": 0,
+  "neural_fits_added": 0,
+  "nstdb_accessed": false,
+  "official_validation_accessed": false,
+  "status": "PASS",
+  "waveform_reads": 0
+}

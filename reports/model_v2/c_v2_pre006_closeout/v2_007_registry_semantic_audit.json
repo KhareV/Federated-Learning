@@ -1,0 +1,12 @@
+{
+  "after_notes_preserves_true_facts": {
+    "all_27_train_groups_gradient_population": true,
+    "change_freeze_on_first_access": true,
+    "release_seed_20260927": true
+  },
+  "after_notes_states_official_validation_used_for_checkpoint_selection": true,
+  "after_notes_text": "At most two frozen configurations (architecture/hyperparameters already fixed by V2-004/V2-006) are trained from scratch on all 27 TRAIN patient groups, which contribute gradient updates and pos_weight as the actual optimisation subset. Per the protocol's early_stopping_checkpoint_selection=OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE field (carried forward unchanged from V1 Section K's explicit prose), official VALIDATION itself -- not a TRAIN-only inner split -- is used for early-stopping/checkpoint selection and for the architecture_selection_rule comparison among the finalists, under a single locked access: once the first new V2 official VALIDATION result exists, no architecture/hyperparameter/search-rule change is permitted. This differs from V2-004's TRAIN-only OPTIMISE/INNER_VALIDATION discipline, which governs only the earlier multi-architecture search stage; by V2-007 the architecture/hyperparameters are already fixed to at most two finalists, and the held-out VALIDATION partition deliberately plays the checkpoint-selection role, as in a standard train/val/test split. Selection: highest mean three-seed VALIDATION AUPRC; ties within one bootstrap SE prefer the simpler/lower-variance model. Release checkpoint is always seed 20260927, fixed regardless of score, seeds 20260927/28/29.",
+  "before_row_contained_incorrect_claim": true,
+  "before_row_text": "V2-007,OFFICIAL_VALIDATION,Official validation,V2-004;V2-005;V2-006,V2G6,NOT_STARTED,,,\"At most two frozen configurations trained from scratch on all 27 TRAIN patient groups, evaluated once on official VALIDATION, 3 seeds each. All model-development/checkpoint-selection decisions use only the already-established TRAIN-only CV discipline (OPTIMISE/INNER_VALIDATION roles); official VALIDATION is never used for early stopping, scheduler decisions, checkpoint selection, architecture modification, or hyperparameter tuning -- it is accessed only once, for the predeclared architecture_selection_rule comparison among the already-frozen finalists. First official VALIDATION access freezes all further architecture/hyperparameter/search-rule changes.\"",
+  "status": "PASS"
+}

@@ -1,0 +1,19 @@
+{
+  "cal_v2_contingent_on_runtime_acceptance": false,
+  "governing_fields": [
+    "calibration_policy.timing=STRICTLY_AFTER_MODEL_V2_FINAL_FROZEN",
+    "post_freeze_second_look.timing=STRICTLY_AFTER_MODEL_V2_FINAL_AND_CAL_V2_FROZEN"
+  ],
+  "prior_ambiguity_confirmed": true,
+  "prior_ambiguity_source": "C-V2-PRE006-CONTROL's protocol_v2_internal_consistency.json flagged downstream_impact.if_runtime_accepted_may_create vs calibration_policy.timing as a documented, non-blocking ambiguity without fully resolving it.",
+  "protocol_v3_reason": "The chronology is already machine-unambiguous from the two specific, authoritative timing fields read together; no protocol repair is needed.",
+  "protocol_v3_required": false,
+  "resolved_chronology": [
+    "MODEL_V2_FINAL frozen",
+    "CAL_V2 fit/frozen",
+    "post-freeze INTERNAL_TEST/INCART/NSTDB comparative second look",
+    "runtime-acceptance decision",
+    "gateway/API/frontend integration only if runtime accepted"
+  ],
+  "status": "PASS"
+}

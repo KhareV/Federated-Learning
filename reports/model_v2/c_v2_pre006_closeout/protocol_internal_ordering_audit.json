@@ -1,0 +1,16 @@
+{
+  "calibration_policy_timing": "STRICTLY_AFTER_MODEL_V2_FINAL_FROZEN",
+  "chain_derivation": [
+    "MODEL_V2_FINAL frozen (prerequisite of calibration_policy.timing)",
+    "CAL_V2 fit/frozen (calibration_policy.timing=STRICTLY_AFTER_MODEL_V2_FINAL_FROZEN)",
+    "post-freeze second look on INTERNAL_TEST/INCART/NSTDB (post_freeze_second_look.timing=STRICTLY_AFTER_MODEL_V2_FINAL_AND_CAL_V2_FROZEN -- this field itself requires CAL_V2 already frozen)",
+    "runtime-acceptance guardrails evaluated at/after second look (registry V2-010 notes: 'Runtime-acceptance guardrails evaluated here')",
+    "gateway/API/frontend integration only if runtime accepted (registry V2-012: 'Only if runtime-acceptance guardrails pass')"
+  ],
+  "chain_proves_cal_v2_necessarily_precedes_runtime_acceptance": true,
+  "downstream_impact_lists_cal_v2_as_if_runtime_accepted": true,
+  "finding": "post_freeze_second_look.timing itself requires CAL_V2 already frozen, and runtime acceptance is evaluated at or after the second look (per the registry's own V2-010/V2-012 wording). Therefore CAL_V2's scientific fit/freeze necessarily precedes any runtime-acceptance decision by the protocol's own explicit field chain -- it cannot be contingent on runtime acceptance. downstream_impact's looser 'if_runtime_accepted_may_create' listing is a general lineage-impact note, not a creation-gate, and does not override the specific, authoritative calibration_policy.timing and post_freeze_second_look.timing fields.",
+  "machine_unambiguous_without_protocol_v3": true,
+  "post_freeze_second_look_timing": "STRICTLY_AFTER_MODEL_V2_FINAL_AND_CAL_V2_FROZEN",
+  "status": "PASS"
+}

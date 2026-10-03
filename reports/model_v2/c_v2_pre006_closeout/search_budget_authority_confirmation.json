@@ -1,0 +1,13 @@
+{
+  "completed_neural_fits_before_v2_006": 50,
+  "cumulative_fit_accounting_remains_descriptive_not_a_hard_protocol_gate": true,
+  "no_cap_of_100_invented_as_authoritative": true,
+  "no_cap_of_90_invented": true,
+  "no_protocol_v3_created_to_formalize_cap": true,
+  "preserved_prior_finding": {
+    "finding": "No global neural-fit budget/cap field exists anywhere in the active Protocol V2 YAML, its lock JSON, the human-readable V2 doc, or Protocol V1 (searched exhaustively; only an unrelated per-architecture parameter_count_hard_cap=120000 field exists, which bounds trainable parameters per model, not the count of fits). The value 100 used consistently in every V2-002/V2-003/V2-004/V2-005 evidence generator script (first_line_neural_fit_cap / global_neural_fit_cap) is a project-level bookkeeping convention embedded directly in those scripts, never promoted into either frozen protocol. It has never been contradicted by any other number found anywhere in this repository (no '90' figure or any other conflicting cap value was found in any committed doc, config, or report).",
+    "protocol_v2_global_neural_fit_cap_field_exists": false
+  },
+  "status": "PASS",
+  "v2_006_phase_local_new_fit_maximum": 15
+}
