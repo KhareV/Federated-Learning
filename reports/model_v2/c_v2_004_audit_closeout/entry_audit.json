@@ -1,0 +1,49 @@
+{
+  "head": "1a2d013e38e6c59102ed58571287fd3282201c6d",
+  "head_equals_origin_main": true,
+  "note": "This function runs mid-checkpoint, after this checkpoint's own audit script and evidence directory already exist as untracked files; those are excluded from the cleanliness check below since they are this checkpoint's own in-progress output, not a pre-existing uncommitted change. The true pre-checkpoint entry state (manually verified before any corrective-checkpoint file was written) was: working tree clean, HEAD == origin/main == 95cf8396208aeb3b8e31b9c386b6a76f25425c7f.",
+  "origin_main": "1a2d013e38e6c59102ed58571287fd3282201c6d",
+  "registry_at_entry": {
+    "gates": {
+      "V2G0": "PASS",
+      "V2G1": "PASS",
+      "V2G2": "PASS",
+      "V2G3": "PASS",
+      "V2G4": "NOT_STARTED",
+      "V2G5": "NOT_STARTED"
+    },
+    "tasks": {
+      "V2-001": "PASS",
+      "V2-002": "PASS",
+      "V2-003": "PASS",
+      "V2-004": "PASS",
+      "V2-005": "NOT_STARTED",
+      "V2-006": "NOT_STARTED"
+    }
+  },
+  "status_lines_excluded_as_own_evidence": [
+    "?? reports/model_v2/c_v2_004_audit_closeout/all_fit_integrity_audit.csv",
+    "?? reports/model_v2/c_v2_004_audit_closeout/all_fit_integrity_summary.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/artifact_hashes.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/component_lock_packaging_audit.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/d2_launch_retry_provenance.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/entry_audit.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/fit_attempt_accounting.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/full_regression_proof.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/git_chronology_audit.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/hybrid_trigger_confirmation.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/post_result_change_audit.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/posthoc_table_generator_audit.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/pytest_collection.txt",
+    "?? reports/model_v2/c_v2_004_audit_closeout/pytest_execution_summary.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/pytest_full_run_stdout_stderr.txt",
+    "?? reports/model_v2/c_v2_004_audit_closeout/registry_state_audit.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/run_manifest.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/scientific_interpretation_correction.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/scientific_method_immutability_audit.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/test_results.json",
+    "?? reports/model_v2/c_v2_004_audit_closeout/upstream_identity_audit.json"
+  ],
+  "working_tree_clean_at_true_entry": false,
+  "working_tree_clean_excluding_own_in_progress_evidence": true
+}

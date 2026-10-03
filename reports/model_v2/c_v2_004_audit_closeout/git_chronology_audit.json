@@ -1,0 +1,49 @@
+{
+  "ancestor_checks": {
+    "D1_RESULT_COMMIT->FINAL_V2_004_COMMIT": {
+      "ancestor": "31a82649079e495e0c1d9eee100bc29620d91301",
+      "descendant": "95cf8396208aeb3b8e31b9c386b6a76f25425c7f",
+      "exit_code": 0,
+      "is_ancestor": true
+    },
+    "METHOD_ATTESTATION_COMMIT->D1_RESULT_COMMIT": {
+      "ancestor": "b1d11a97b3059a8f2f7e62243e2b3cd8059bc696",
+      "descendant": "31a82649079e495e0c1d9eee100bc29620d91301",
+      "exit_code": 0,
+      "is_ancestor": true
+    },
+    "METHOD_COMMIT->FINAL_V2_004_COMMIT": {
+      "ancestor": "bb87014c84ad92b23a2bbb21c60e48fa66c68e15",
+      "descendant": "95cf8396208aeb3b8e31b9c386b6a76f25425c7f",
+      "exit_code": 0,
+      "is_ancestor": true
+    },
+    "METHOD_COMMIT->METHOD_ATTESTATION_COMMIT": {
+      "ancestor": "bb87014c84ad92b23a2bbb21c60e48fa66c68e15",
+      "descendant": "b1d11a97b3059a8f2f7e62243e2b3cd8059bc696",
+      "exit_code": 0,
+      "is_ancestor": true
+    }
+  },
+  "attestation_before_results": true,
+  "commits": {
+    "D1_RESULT_COMMIT": {
+      "sha": "31a82649079e495e0c1d9eee100bc29620d91301",
+      "subject": "31a82649079e495e0c1d9eee100bc29620d91301 research(model-v2): complete V2-004 Stage D1 (architecture causality screening)"
+    },
+    "FINAL_V2_004_COMMIT": {
+      "sha": "95cf8396208aeb3b8e31b9c386b6a76f25425c7f",
+      "subject": "95cf8396208aeb3b8e31b9c386b6a76f25425c7f research(model-v2): complete V2-004 Stage D2, freeze arch-causality lock"
+    },
+    "METHOD_ATTESTATION_COMMIT": {
+      "sha": "b1d11a97b3059a8f2f7e62243e2b3cd8059bc696",
+      "subject": "b1d11a97b3059a8f2f7e62243e2b3cd8059bc696 docs(model-v2): attest V2-004 method-commit SHA (bb87014)"
+    },
+    "METHOD_COMMIT": {
+      "sha": "bb87014c84ad92b23a2bbb21c60e48fa66c68e15",
+      "subject": "bb87014c84ad92b23a2bbb21c60e48fa66c68e15 research(model-v2): freeze V2-004 architecture-causality method"
+    }
+  },
+  "method_before_results": true,
+  "status": "PASS"
+}

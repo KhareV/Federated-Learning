@@ -1,0 +1,39 @@
+{
+  "chunked_verifier_reason_not_used": "Normal pytest -q completed within 20s with exit code 0; no harness timeout was hit in this invocation of the checkpoint, so the exhaustive chunk-verifier fallback was not required. The collect-only run independently confirms 1447 collected nodes, matching the executed-and-passed count exactly, so collected == executed, duplicates = 0, missing = 0, failed = 0.",
+  "chunked_verifier_used": false,
+  "collected_equals_executed": true,
+  "duplicates": 0,
+  "failed_chunks": 0,
+  "failed_tests": 0,
+  "missing": 0,
+  "pip_check": {
+    "command": ".venv-t032/bin/python -m pip check",
+    "exit_code": 0,
+    "result": "No broken requirements found."
+  },
+  "pytest_collect_only": {
+    "collected_node_count": 1447,
+    "evidence_file": "reports/model_v2/c_v2_004_audit_closeout/pytest_collection.txt",
+    "exit_code": 0
+  },
+  "pytest_normal_run": {
+    "command": "PYTHONPATH=src:. .venv-t032/bin/python -m pytest -q",
+    "completed_normally_without_timeout": true,
+    "duration_seconds": 20,
+    "evidence_file": "reports/model_v2/c_v2_004_audit_closeout/pytest_full_run_stdout_stderr.txt",
+    "exit_code": 0,
+    "result_line": "1447 passed, 15 warnings in 19.25s"
+  },
+  "ruff": {
+    "command": ".venv-t032/bin/python -m ruff check .",
+    "exit_code": 0,
+    "result": "All checks passed!"
+  },
+  "status": "PASS",
+  "test_count_delta_from_this_checkpoint": {
+    "after_this_checkpoint": 1447,
+    "before_this_checkpoint": 1432,
+    "new_test_file": "tests/test_c_v2_004_audit_closeout.py",
+    "new_tests_added": 15
+  }
+}

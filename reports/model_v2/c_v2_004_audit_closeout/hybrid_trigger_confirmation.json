@@ -1,0 +1,12 @@
+{
+  "classical_best_reduced_rf_v1_auprc": 0.713140103147974,
+  "expected_result": false,
+  "gap_classical_minus_learned": -0.1427367424993632,
+  "gap_matches_frozen_hybrid_trigger_json": true,
+  "learned_best_learned_only_v2_cv_v1_auprc": 0.8558768456473372,
+  "result": false,
+  "result_status_string": "FALSE",
+  "rule": "classical - learned >= threshold",
+  "status": "PASS",
+  "threshold": 0.03
+}

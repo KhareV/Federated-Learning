@@ -1,0 +1,22 @@
+{
+  "canonical_relaunch": "PYTHONPATH=src:. nohup .venv-t032/bin/python scripts/run_all_d2_fits.py > /tmp/v2004_d2_run.log 2>&1 < /dev/null & disown",
+  "committed_d1_run_directories_count": 15,
+  "committed_d1_run_directories_expected": 15,
+  "committed_d2_run_directories_count": 20,
+  "committed_d2_run_directories_expected": 20,
+  "evidence_for_zero_cost_claim": "The failed invocation raised ModuleNotFoundError in the parent interpreter before executing any of run_all_d2_fits.py's body (confirmed via `ps aux` showing no run_v2_004_fit.py child process and immediate log inspection at the time, and now mechanically confirmed below by an exact count of committed per-fit run directories: exactly 20 D2 directories and 15 D1 directories exist, matching the canonical 35-fit budget with no extra/orphaned directories).",
+  "failed_command": "nohup .venv-t032/bin/python scripts/run_all_d2_fits.py > /tmp/v2004_d2_run.log 2>&1 &",
+  "failed_launch_attributable_artifacts": {
+    "canonical_outer_predictions_from_failed_attempt": 0,
+    "completed_training_curve_from_failed_attempt": 0,
+    "consumed_neural_fit_from_failed_attempt": 0,
+    "fit_summary_json_from_failed_attempt": 0,
+    "ledger_rows_from_failed_attempt": 0,
+    "selected_checkpoint_from_failed_attempt": 0
+  },
+  "failure_cause": "PYTHONPATH=src:. was not set in the parent nohup-launched process's own environment (only the subprocess calls inside the driver were intended to inherit it); the parent process itself failed the very first `import scripts...` before any subprocess.run call, hence before any training began.",
+  "ledger_total_rows": 105,
+  "observed_error_class": "ModuleNotFoundError: No module named 'scripts'",
+  "phase": "before canonical D2 training (parent process failed at import time, prior to the first subprocess.run call that would launch scripts/run_v2_004_fit.py)",
+  "status": "PASS"
+}

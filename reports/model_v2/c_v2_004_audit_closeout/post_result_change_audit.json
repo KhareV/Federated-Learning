@@ -1,0 +1,48 @@
+{
+  "any_scientific_method_change": false,
+  "entries": {
+    "scripts/freeze_arch_causality_v2004.py": {
+      "classification": "LOCK_PACKAGING_ONLY",
+      "created_after_results_known": true,
+      "existed_at_d1_result_commit": false,
+      "existed_at_method_commit": false
+    },
+    "scripts/generate_v2_004_fit_tables.py": {
+      "classification": "RESULT_SERIALIZATION_ONLY",
+      "created_after_results_known": true,
+      "existed_at_d1_result_commit": false,
+      "existed_at_method_commit": false
+    },
+    "tests/test_c_v2_003_provenance.py": {
+      "classification": "HISTORICAL_STATUS_TEST_UPDATE",
+      "created_after_results_known": false,
+      "existed_at_d1_result_commit": true,
+      "existed_at_method_commit": true
+    },
+    "tests/test_c_v2_pre004_control.py": {
+      "classification": "HISTORICAL_STATUS_TEST_UPDATE",
+      "created_after_results_known": false,
+      "existed_at_d1_result_commit": true,
+      "existed_at_method_commit": true
+    },
+    "tests/test_model_v2_control_plane.py": {
+      "classification": "HISTORICAL_STATUS_TEST_UPDATE",
+      "created_after_results_known": false,
+      "existed_at_d1_result_commit": true,
+      "existed_at_method_commit": true
+    },
+    "tests/test_v2_004_config.py": {
+      "classification": "HISTORICAL_STATUS_TEST_UPDATE",
+      "created_after_results_known": false,
+      "existed_at_d1_result_commit": true,
+      "existed_at_method_commit": true
+    },
+    "tests/test_v2_004_results.py": {
+      "classification": "READ_ONLY_RESULT_TEST",
+      "created_after_results_known": true,
+      "existed_at_d1_result_commit": false,
+      "existed_at_method_commit": false
+    }
+  },
+  "status": "PASS"
+}

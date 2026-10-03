@@ -1,0 +1,21 @@
+{
+  "canonical_lock_unchanged_by_this_audit": true,
+  "differing_keys": [
+    "git_sha"
+  ],
+  "expected_execution_identity_differences": {
+    "git_sha": {
+      "canonical_value": "31a82649079e495e0c1d9eee100bc29620d91301",
+      "isolated_value": "95cf8396208aeb3b8e31b9c386b6a76f25425c7f",
+      "reason": "Records HEAD at lock-generation time, not a scientific value. Canonical lock was generated with HEAD at the D1 result commit; this isolated replay ran from a worktree detached at the later final commit."
+    }
+  },
+  "isolated_rerun_produced_lock": true,
+  "script_exit_code": 0,
+  "script_stderr_tail": "",
+  "semantic_equal_to_canonical_excluding_expected_fields": true,
+  "semantic_equal_to_canonical_including_all_fields": false,
+  "status": "PASS",
+  "unexpected_differing_keys": [],
+  "worktree_add_ok": true
+}

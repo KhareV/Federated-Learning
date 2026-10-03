@@ -1,0 +1,129 @@
+{
+  "any_file_changed_after_method_freeze": false,
+  "d1_result_commit": "31a82649079e495e0c1d9eee100bc29620d91301",
+  "files": {
+    "configs/model_v2/architecture_causality_v1.yaml": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "f33f369a22bd907691e6d1f9730ccdfb413b5fb2bfcdc467f0fb5a095bb02f7e",
+      "sha_at_final_result": "f33f369a22bd907691e6d1f9730ccdfb413b5fb2bfcdc467f0fb5a095bb02f7e",
+      "sha_at_method_commit": "f33f369a22bd907691e6d1f9730ccdfb413b5fb2bfcdc467f0fb5a095bb02f7e"
+    },
+    "models/model_v2_architectures.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0",
+      "sha_at_final_result": "2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0",
+      "sha_at_method_commit": "2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0"
+    },
+    "scripts/_v2_004_lib.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "7c7ef403e647c40c810f5b3fd2cfb9fa1af2694084536a3ef50fb38c2250d4d2",
+      "sha_at_final_result": "7c7ef403e647c40c810f5b3fd2cfb9fa1af2694084536a3ef50fb38c2250d4d2",
+      "sha_at_method_commit": "7c7ef403e647c40c810f5b3fd2cfb9fa1af2694084536a3ef50fb38c2250d4d2"
+    },
+    "scripts/aggregate_d1_v2004.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "c20bb9a877ce6d9e75332d1c3d5c68c6425e62389977fab4fcbcd9f390659532",
+      "sha_at_final_result": "c20bb9a877ce6d9e75332d1c3d5c68c6425e62389977fab4fcbcd9f390659532",
+      "sha_at_method_commit": "c20bb9a877ce6d9e75332d1c3d5c68c6425e62389977fab4fcbcd9f390659532"
+    },
+    "scripts/aggregate_d2_v2004.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "542ad99fd5556527712085a0f260ed352b5075a4d78a591c0687fb2043b2b1e6",
+      "sha_at_final_result": "542ad99fd5556527712085a0f260ed352b5075a4d78a591c0687fb2043b2b1e6",
+      "sha_at_method_commit": "542ad99fd5556527712085a0f260ed352b5075a4d78a591c0687fb2043b2b1e6"
+    },
+    "scripts/bootstrap_d1_v2004.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "c37a98885a02329bc36dd9edef6a72b0dfbd0f479d79791fdd06dc301ae55e6c",
+      "sha_at_final_result": "c37a98885a02329bc36dd9edef6a72b0dfbd0f479d79791fdd06dc301ae55e6c",
+      "sha_at_method_commit": "c37a98885a02329bc36dd9edef6a72b0dfbd0f479d79791fdd06dc301ae55e6c"
+    },
+    "scripts/bootstrap_d2_v2004.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "015d48c2182ebb925159a2576634afe8feb186fa87e1396a3381ff951b10d535",
+      "sha_at_final_result": "015d48c2182ebb925159a2576634afe8feb186fa87e1396a3381ff951b10d535",
+      "sha_at_method_commit": "015d48c2182ebb925159a2576634afe8feb186fa87e1396a3381ff951b10d535"
+    },
+    "scripts/decide_d1_v2004.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "c67944e5a5b40a8a81ebc0e74c8b5c071ffd80b13b23536404278b8cd5c80653",
+      "sha_at_final_result": "c67944e5a5b40a8a81ebc0e74c8b5c071ffd80b13b23536404278b8cd5c80653",
+      "sha_at_method_commit": "c67944e5a5b40a8a81ebc0e74c8b5c071ffd80b13b23536404278b8cd5c80653"
+    },
+    "scripts/decide_d2_v2004.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "5525101e65edbef658903cace9628e41878ffe2e317a237e48784c53235d216b",
+      "sha_at_final_result": "5525101e65edbef658903cace9628e41878ffe2e317a237e48784c53235d216b",
+      "sha_at_method_commit": "5525101e65edbef658903cace9628e41878ffe2e317a237e48784c53235d216b"
+    },
+    "scripts/run_all_d1_fits.sh": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "3719b9d905fc6398341f5ffd35ebf9fffc3cd97b1b72d01a20227bf1eeba6aad",
+      "sha_at_final_result": "3719b9d905fc6398341f5ffd35ebf9fffc3cd97b1b72d01a20227bf1eeba6aad",
+      "sha_at_method_commit": "3719b9d905fc6398341f5ffd35ebf9fffc3cd97b1b72d01a20227bf1eeba6aad"
+    },
+    "scripts/run_all_d2_fits.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "57457e696dc61cd0abb7fd5f4a44887deda69c154a8a5f000ad67cf61a3ffa71",
+      "sha_at_final_result": "57457e696dc61cd0abb7fd5f4a44887deda69c154a8a5f000ad67cf61a3ffa71",
+      "sha_at_method_commit": "57457e696dc61cd0abb7fd5f4a44887deda69c154a8a5f000ad67cf61a3ffa71"
+    },
+    "scripts/run_v2_004_fit.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "7f45c1e2b3975b37c49d78e97f241e4beeec2b77baead543f6d6ae11669f2fae",
+      "sha_at_final_result": "7f45c1e2b3975b37c49d78e97f241e4beeec2b77baead543f6d6ae11669f2fae",
+      "sha_at_method_commit": "7f45c1e2b3975b37c49d78e97f241e4beeec2b77baead543f6d6ae11669f2fae"
+    },
+    "scripts/write_d2_not_run.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "8b98f0c7fab139d9ac932b5184863b11e70a0933baf7a51fa8bde8e1fa5a1f82",
+      "sha_at_final_result": "8b98f0c7fab139d9ac932b5184863b11e70a0933baf7a51fa8bde8e1fa5a1f82",
+      "sha_at_method_commit": "8b98f0c7fab139d9ac932b5184863b11e70a0933baf7a51fa8bde8e1fa5a1f82"
+    },
+    "src/nhm/model_v2_cv_role_guard.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "835619ce8ebc69f291e6941af439971e4b30ec33167a16da5de5db8ffd9e71dd",
+      "sha_at_final_result": "835619ce8ebc69f291e6941af439971e4b30ec33167a16da5de5db8ffd9e71dd",
+      "sha_at_method_commit": "835619ce8ebc69f291e6941af439971e4b30ec33167a16da5de5db8ffd9e71dd"
+    },
+    "training/train_central.py": {
+      "changed_after_method_freeze": false,
+      "existed_at_method_commit": true,
+      "scientific_effect": null,
+      "sha_at_d1_result": "73cca30cdece34a1af6264100736452b56826b96511ec18bf7559a82f930c411",
+      "sha_at_final_result": "73cca30cdece34a1af6264100736452b56826b96511ec18bf7559a82f930c411",
+      "sha_at_method_commit": "73cca30cdece34a1af6264100736452b56826b96511ec18bf7559a82f930c411"
+    }
+  },
+  "final_commit": "95cf8396208aeb3b8e31b9c386b6a76f25425c7f",
+  "method_commit": "bb87014c84ad92b23a2bbb21c60e48fa66c68e15",
+  "status": "PASS"
+}

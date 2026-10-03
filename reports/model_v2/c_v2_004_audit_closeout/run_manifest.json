@@ -1,0 +1,30 @@
+{
+  "checkpoint_id": "C-V2-004-AUDIT-CLOSEOUT",
+  "evidence_files": [
+    "all_fit_integrity_audit.csv",
+    "all_fit_integrity_summary.json",
+    "component_lock_packaging_audit.json",
+    "d2_launch_retry_provenance.json",
+    "entry_audit.json",
+    "fit_attempt_accounting.json",
+    "full_regression_proof.json",
+    "git_chronology_audit.json",
+    "hybrid_trigger_confirmation.json",
+    "method_commit_attestation.json",
+    "post_result_change_audit.json",
+    "posthoc_table_generator_audit.json",
+    "pytest_collection.txt",
+    "pytest_execution_summary.json",
+    "pytest_full_run_stdout_stderr.txt",
+    "registry_state_audit.json",
+    "scientific_interpretation_correction.json",
+    "scientific_method_immutability_audit.json",
+    "test_results.json",
+    "upstream_identity_audit.json"
+  ],
+  "head_at_generation": "1a2d013e38e6c59102ed58571287fd3282201c6d",
+  "no_neural_fits": true,
+  "no_scientific_artifact_mutated": true,
+  "parent": "V2-004 ARCHITECTURE CAUSALITY EXPERIMENT",
+  "type": "corrective_checkpoint"
+}

@@ -1,0 +1,21 @@
+{
+  "chunked_verifier_reason_not_used": "Normal pytest -q completed within 19s with exit code 0; no harness timeout was hit in this invocation, so the exhaustive chunk-verifier fallback was not required.",
+  "chunked_verifier_used": false,
+  "collected_equals_executed": true,
+  "collection": {
+    "collected_node_count": 1432,
+    "collection_exit_code": 0
+  },
+  "duplicates": 0,
+  "failed_chunks": 0,
+  "failed_tests": 0,
+  "missing": 0,
+  "normal_run": {
+    "command": "PYTHONPATH=src:. .venv-t032/bin/python -m pytest -q",
+    "completed_normally_without_timeout": true,
+    "duration_seconds": 19,
+    "exit_code": 0,
+    "result_line": "1432 passed, 15 warnings in 18.23s"
+  },
+  "status": "PASS"
+}

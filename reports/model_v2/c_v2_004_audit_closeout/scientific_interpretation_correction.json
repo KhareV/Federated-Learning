@@ -1,0 +1,53 @@
+{
+  "D2": {
+    "allowed_wording": "Both TCN candidates met the predeclared seed-stability rule."
+  },
+  "H0": {
+    "corrected_wording": "H0 is INCONCLUSIVE: CAPCTRL's observed AUPRC exceeded the matched V1 point estimate, but the paired patient-cluster-bootstrap 95% interval for CAPCTRL-minus-V1 includes zero. This is absence of clear separation, not evidence of equivalence.",
+    "preserved_numbers": {
+      "ci_95": [
+        -0.01784319496971861,
+        0.08038964425516526
+      ],
+      "point_delta_AUPRC": 0.026510547948474517,
+      "verdict": "INCONCLUSIVE"
+    },
+    "prohibited_wording": "CAPCTRL is statistically indistinguishable from V1."
+  },
+  "H1": {
+    "corrected_wording": "In this controlled architecture ablation, H1 is SUPPORTED: TCN_MEAN exceeded CAPCTRL by approximately 0.422 pooled OOF AUPRC, and the paired patient-cluster-bootstrap 95% interval for the difference was entirely above zero. This supports the software/model-design hypothesis that access to longer temporal context accounts for a substantial part of the observed TRAIN-CV improvement under the tested architectures. It is not a biological or clinical causal claim, and no formal significance test beyond the predeclared paired bootstrap interval is invoked.",
+    "preserved_numbers": {
+      "ci_95": [
+        0.23396389645596918,
+        0.5602576191382481
+      ],
+      "point_delta_AUPRC": 0.42170636741113954,
+      "verdict": "SUPPORTED"
+    },
+    "prohibited_wording": "temporal context causes a significant improvement."
+  },
+  "H2": {
+    "corrected_wording": "H2 is INCONCLUSIVE: the observed point difference between TCN_MEANMAX and TCN_MEAN was small and its paired 95% bootstrap interval includes zero. The experiment did not establish a clear incremental benefit or harm from adding max pooling.",
+    "preserved_numbers": {
+      "ci_95": [
+        -0.08875862843897973,
+        0.07418533237381596
+      ],
+      "point_delta_AUPRC": 0.002306046800480188,
+      "verdict": "INCONCLUSIVE"
+    },
+    "prohibited_wording": "mean+max pooling adds no benefit."
+  },
+  "best_learned_only": {
+    "allowed_wording": "TCN_MEANMAX was selected by the predeclared highest-three-seed-mean AUPRC rule.",
+    "closeness_note": "TCN_MEANMAX mean AUPRC (0.8558768456473372) and TCN_MEAN mean AUPRC (0.8544937558119111) are extremely close (difference 0.0013830898354261). The selection is a development-rule decision, not proof that MEANMAX is materially superior to MEAN."
+  },
+  "biological_or_clinical_causal_claim_made": false,
+  "formal_significance_claim_made_without_qualification": false,
+  "no_retroactive_reopening": {
+    "best_learned_only_v2_cv_v1_preserved_as": "MODEL_V2_TCN_MEANMAX",
+    "retroactively_changed": false,
+    "rule_applied": "highest mean three-seed pooled OOF AUPRC, then lower seed SD only on a machine-level tie, then parameters, then lexical ID"
+  },
+  "status": "PASS"
+}
