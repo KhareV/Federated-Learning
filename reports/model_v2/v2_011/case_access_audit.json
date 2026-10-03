@@ -1,0 +1,171 @@
+{
+  "all_completeness_pass": false,
+  "all_logits_consistent_with_v2_010": true,
+  "bulk_internal_test_scoring": false,
+  "cases": [
+    {
+      "F_baseline": 1.6370497941970825,
+      "F_x": 13.944600105285645,
+      "absolute_delta": 0.024670866165749317,
+      "annotations_sha256": "c9b5b92d21b384c8069fbac87962e7d1f1b40190566c2c293502d4acec912c22",
+      "attribution_sha256": "b2f84a3fc6cb8c4a382c94c8c896dfaf7d0858f6003c4a3c96390f89aa7f6bb5",
+      "attribution_sum": 12.282879444922813,
+      "cache_paths_opened": [
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/200_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/200_example_ids.txt"
+      ],
+      "case_type": "TP",
+      "example_id": "7dae5fa655217f27e270bb7ec1abebaddf3fdcf43f848ffc41330a86b3d7e901",
+      "figure_sha256": "edf1d7e5d0bf83a822d6789dc19689fa2eb7028378f302b3aa6c817c3b15a263",
+      "logit_consistent_with_v2_010": true,
+      "logit_vs_v2_010_stored_abs_diff": 0.0,
+      "max_abs_attribution_index": 627,
+      "output_difference": 12.307550311088562,
+      "pass": false,
+      "raw_sha256": "58b3cea50a9d45db0897ce1ae25a126f5b0f6c1697abdc6d80a96701f7bb3e77",
+      "record_id": "200",
+      "relative_delta": 0.0020045310026904337,
+      "reproducibility": {
+        "baseline_logit_identical": true,
+        "completeness_identical": true,
+        "max_abs_attribution_index_identical": true,
+        "raw_logit_identical": true,
+        "signed_max_abs_difference": 0.0,
+        "sum_attribution_difference": 0.0,
+        "within_tolerance": true
+      },
+      "signed_delta": -0.024670866165749317,
+      "window_end_s": 1695.0,
+      "window_start_s": 1685.0
+    },
+    {
+      "F_baseline": 1.6370497941970825,
+      "F_x": -4.293853759765625,
+      "absolute_delta": 0.000572247565749251,
+      "annotations_sha256": "ba721c86e3039e5e61a6a8d09bbfbd4448c0846dde6c1c11e8f3560217ea6997",
+      "attribution_sha256": "972540f22907677568a2b0b739d7e1b8573a5973415993fe1ed233cac39a90b3",
+      "attribution_sum": -5.930331306396958,
+      "cache_paths_opened": [
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_example_ids.txt"
+      ],
+      "case_type": "TN",
+      "example_id": "b454fc6660d870011036da6c63cf37e15dfe7af73046c58d4ea829e2e194dc70",
+      "figure_sha256": "7926365e37e40e0aec80061eda762b50d658c5c0f08d18b55c07339e07f18dda",
+      "logit_consistent_with_v2_010": true,
+      "logit_vs_v2_010_stored_abs_diff": 9.5367431640625e-07,
+      "max_abs_attribution_index": 1294,
+      "output_difference": -5.9309035539627075,
+      "pass": true,
+      "raw_sha256": "313ca0de1b470d063c8b1fa62ed7c0f0b4f9c0315419be74e4a3fecacd47f7f8",
+      "record_id": "116",
+      "relative_delta": 9.648573114410303e-05,
+      "reproducibility": {
+        "baseline_logit_identical": true,
+        "completeness_identical": true,
+        "max_abs_attribution_index_identical": true,
+        "raw_logit_identical": true,
+        "signed_max_abs_difference": 0.0,
+        "sum_attribution_difference": 0.0,
+        "within_tolerance": true
+      },
+      "signed_delta": 0.000572247565749251,
+      "window_end_s": 745.0,
+      "window_start_s": 735.0
+    },
+    {
+      "F_baseline": 1.6370497941970825,
+      "F_x": 3.9418983459472656,
+      "absolute_delta": 0.008332708667182942,
+      "annotations_sha256": "5e23687ee7c0babbec3eb8029da57ec8d53997c47dcc8091c7a8483247a59389",
+      "attribution_sha256": "100d0e4c3c588df5a3fc3789ea543161686251fc1436cea17e36cd835c685600",
+      "attribution_sum": 2.296515843083,
+      "cache_paths_opened": [
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_example_ids.txt"
+      ],
+      "case_type": "FP",
+      "example_id": "6fb6c73f0ead7b9f4b9f42ba59d4ee773a8f880930eda661918d29cbd68afd78",
+      "figure_sha256": "f9e496a27907267f9c01b3bf9275e41585751f95a72e6e5ed31814d5d278d6fb",
+      "logit_consistent_with_v2_010": true,
+      "logit_vs_v2_010_stored_abs_diff": 2.384185791015625e-07,
+      "max_abs_attribution_index": 1456,
+      "output_difference": 2.304848551750183,
+      "pass": false,
+      "raw_sha256": "ca94589fb8cef6bd2869b754f9a3d89812e61698400c37598ad7a05ce798b137",
+      "record_id": "116",
+      "relative_delta": 0.0036152955303095785,
+      "reproducibility": {
+        "baseline_logit_identical": true,
+        "completeness_identical": true,
+        "max_abs_attribution_index_identical": true,
+        "raw_logit_identical": true,
+        "signed_max_abs_difference": 0.0,
+        "sum_attribution_difference": 0.0,
+        "within_tolerance": true
+      },
+      "signed_delta": -0.008332708667182942,
+      "window_end_s": 1395.0,
+      "window_start_s": 1385.0
+    },
+    {
+      "F_baseline": 1.6370497941970825,
+      "F_x": -1.333832025527954,
+      "absolute_delta": 0.003195685977686935,
+      "annotations_sha256": "b1e054d1d8ef5af1ef230378627992798104ebc3995d81c2466b279ccd7a1a33",
+      "attribution_sha256": "06a7318680e5a51b3ee8a6aaf8e1b2e729ad164f84c76fc7d9890a00716c358d",
+      "attribution_sum": -2.9676861337473497,
+      "cache_paths_opened": [
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/214_filtered_windows.npy",
+        "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/214_example_ids.txt"
+      ],
+      "case_type": "FN",
+      "example_id": "a05c297ebbacbe23e4edbfc4c37f9a2c67be771f5ad6f7b959e9313183a3e11c",
+      "figure_sha256": "c72f98fdea62f7f462816f125d4f180aee3f56112d3b9951d73b52778051ad47",
+      "logit_consistent_with_v2_010": true,
+      "logit_vs_v2_010_stored_abs_diff": 1.1920928955078125e-07,
+      "max_abs_attribution_index": 234,
+      "output_difference": -2.9708818197250366,
+      "pass": false,
+      "raw_sha256": "f82ba9eda178d8ff6046de4232c7b257a961a67d15a21ae4d065dbf2319f450d",
+      "record_id": "214",
+      "relative_delta": 0.001075669168820288,
+      "reproducibility": {
+        "baseline_logit_identical": true,
+        "completeness_identical": true,
+        "max_abs_attribution_index_identical": true,
+        "raw_logit_identical": true,
+        "signed_max_abs_difference": 0.0,
+        "sum_attribution_difference": 0.0,
+        "within_tolerance": true
+      },
+      "signed_delta": 0.003195685977686935,
+      "window_end_s": 1005.0,
+      "window_start_s": 995.0
+    }
+  ],
+  "checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "frozen_case_ids": {
+    "FN": "a05c297ebbacbe23e4edbfc4c37f9a2c67be771f5ad6f7b959e9313183a3e11c",
+    "FP": "6fb6c73f0ead7b9f4b9f42ba59d4ee773a8f880930eda661918d29cbd68afd78",
+    "TN": "b454fc6660d870011036da6c63cf37e15dfe7af73046c58d4ea829e2e194dc70",
+    "TP": "7dae5fa655217f27e270bb7ec1abebaddf3fdcf43f848ffc41330a86b3d7e901"
+  },
+  "materialized_windows": 4,
+  "model_mutated": false,
+  "new_internal_test_performance_table": false,
+  "source_record_caches_opened": [
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_example_ids.txt",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_filtered_windows.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/200_example_ids.txt",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/200_filtered_windows.npy",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/214_example_ids.txt",
+    "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/214_filtered_windows.npy"
+  ],
+  "source_records_read_for_raw_ecg_and_annotations": [
+    "116",
+    "200",
+    "214"
+  ],
+  "windows_materialized_outside_frozen_manifest": 0
+}

@@ -1,6 +1,37 @@
 {
   "armed_at": "2026-10-03T19:55:09.831589Z",
   "armed_git_sha": "883d9c9c1818eb65c62367c44a3c3a44ff68b542",
+  "completed_at": "2026-10-03T19:56:39.298035Z",
+  "completed_git_sha": "1bb81d52876ff70dbc1eba742a2b1f1909b8523d",
+  "completion_summary": {
+    "all_completeness_pass": false,
+    "all_logits_consistent_with_v2_010": true,
+    "bulk_internal_test_scoring": false,
+    "checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "frozen_case_ids": {
+      "FN": "a05c297ebbacbe23e4edbfc4c37f9a2c67be771f5ad6f7b959e9313183a3e11c",
+      "FP": "6fb6c73f0ead7b9f4b9f42ba59d4ee773a8f880930eda661918d29cbd68afd78",
+      "TN": "b454fc6660d870011036da6c63cf37e15dfe7af73046c58d4ea829e2e194dc70",
+      "TP": "7dae5fa655217f27e270bb7ec1abebaddf3fdcf43f848ffc41330a86b3d7e901"
+    },
+    "materialized_windows": 4,
+    "model_mutated": false,
+    "new_internal_test_performance_table": false,
+    "source_record_caches_opened": [
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/116_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/200_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/200_filtered_windows.npy",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/214_example_ids.txt",
+      "data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1/AAMI_SVF_WINDOW_V1/INTERNAL_TEST/214_filtered_windows.npy"
+    ],
+    "source_records_read_for_raw_ecg_and_annotations": [
+      "116",
+      "200",
+      "214"
+    ],
+    "windows_materialized_outside_frozen_manifest": 0
+  },
   "guard": "CASE_ACCESS",
   "guard_name": "V2_EXPLAINABILITY_CASE_ACCESS_ONCE",
   "preconditions": {
@@ -16,5 +47,7 @@
     "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
     "v2_010_internal_predictions_sha256": "04826ee3f66d466c3d5138e219156efab2a5930f0cc991ee725e6048de26f035"
   },
-  "state": "ARMED"
+  "running_at": "2026-10-03T19:56:37.231117Z",
+  "running_git_sha": "1bb81d52876ff70dbc1eba742a2b1f1909b8523d",
+  "state": "COMPLETED"
 }

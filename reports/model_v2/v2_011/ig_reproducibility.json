@@ -1,0 +1,45 @@
+{
+  "all_within_tolerance": true,
+  "better_looking_run_selected": false,
+  "maximum_absolute_attribution_difference": 0.0,
+  "per_case": {
+    "FN": {
+      "baseline_logit_identical": true,
+      "completeness_identical": true,
+      "max_abs_attribution_index_identical": true,
+      "raw_logit_identical": true,
+      "signed_max_abs_difference": 0.0,
+      "sum_attribution_difference": 0.0,
+      "within_tolerance": true
+    },
+    "FP": {
+      "baseline_logit_identical": true,
+      "completeness_identical": true,
+      "max_abs_attribution_index_identical": true,
+      "raw_logit_identical": true,
+      "signed_max_abs_difference": 0.0,
+      "sum_attribution_difference": 0.0,
+      "within_tolerance": true
+    },
+    "TN": {
+      "baseline_logit_identical": true,
+      "completeness_identical": true,
+      "max_abs_attribution_index_identical": true,
+      "raw_logit_identical": true,
+      "signed_max_abs_difference": 0.0,
+      "sum_attribution_difference": 0.0,
+      "within_tolerance": true
+    },
+    "TP": {
+      "baseline_logit_identical": true,
+      "completeness_identical": true,
+      "max_abs_attribution_index_identical": true,
+      "raw_logit_identical": true,
+      "signed_max_abs_difference": 0.0,
+      "sum_attribution_difference": 0.0,
+      "within_tolerance": true
+    }
+  },
+  "runs_per_case": 2,
+  "status": "PASS"
+}

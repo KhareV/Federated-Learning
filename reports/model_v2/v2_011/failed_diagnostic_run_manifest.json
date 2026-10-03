@@ -1,0 +1,34 @@
+{
+  "artifact_sha256": {
+    "reports/model_v2/v2_011/case_access_audit.json": "563a90fe8b3a5ab11713a1d8b36635295bbe84ad0d09e0253637fcb7a8f6b2e7",
+    "reports/model_v2/v2_011/case_access_guard.json": "4558525de11bc7500d9e94d0b6e72abe4f1838fbb79e195c557191ee5acc2f46",
+    "reports/model_v2/v2_011/cases/FN_annotations.csv": "b1e054d1d8ef5af1ef230378627992798104ebc3995d81c2466b279ccd7a1a33",
+    "reports/model_v2/v2_011/cases/FN_attribution.csv": "06a7318680e5a51b3ee8a6aaf8e1b2e729ad164f84c76fc7d9890a00716c358d",
+    "reports/model_v2/v2_011/cases/FN_figure.svg": "c72f98fdea62f7f462816f125d4f180aee3f56112d3b9951d73b52778051ad47",
+    "reports/model_v2/v2_011/cases/FN_raw_ecg.csv": "f82ba9eda178d8ff6046de4232c7b257a961a67d15a21ae4d065dbf2319f450d",
+    "reports/model_v2/v2_011/cases/FP_annotations.csv": "5e23687ee7c0babbec3eb8029da57ec8d53997c47dcc8091c7a8483247a59389",
+    "reports/model_v2/v2_011/cases/FP_attribution.csv": "100d0e4c3c588df5a3fc3789ea543161686251fc1436cea17e36cd835c685600",
+    "reports/model_v2/v2_011/cases/FP_figure.svg": "f9e496a27907267f9c01b3bf9275e41585751f95a72e6e5ed31814d5d278d6fb",
+    "reports/model_v2/v2_011/cases/FP_raw_ecg.csv": "ca94589fb8cef6bd2869b754f9a3d89812e61698400c37598ad7a05ce798b137",
+    "reports/model_v2/v2_011/cases/TN_annotations.csv": "ba721c86e3039e5e61a6a8d09bbfbd4448c0846dde6c1c11e8f3560217ea6997",
+    "reports/model_v2/v2_011/cases/TN_attribution.csv": "972540f22907677568a2b0b739d7e1b8573a5973415993fe1ed233cac39a90b3",
+    "reports/model_v2/v2_011/cases/TN_figure.svg": "7926365e37e40e0aec80061eda762b50d658c5c0f08d18b55c07339e07f18dda",
+    "reports/model_v2/v2_011/cases/TN_raw_ecg.csv": "313ca0de1b470d063c8b1fa62ed7c0f0b4f9c0315419be74e4a3fecacd47f7f8",
+    "reports/model_v2/v2_011/cases/TP_annotations.csv": "c9b5b92d21b384c8069fbac87962e7d1f1b40190566c2c293502d4acec912c22",
+    "reports/model_v2/v2_011/cases/TP_attribution.csv": "b2f84a3fc6cb8c4a382c94c8c896dfaf7d0858f6003c4a3c96390f89aa7f6bb5",
+    "reports/model_v2/v2_011/cases/TP_figure.svg": "edf1d7e5d0bf83a822d6789dc19689fa2eb7028378f302b3aa6c817c3b15a263",
+    "reports/model_v2/v2_011/cases/TP_raw_ecg.csv": "58b3cea50a9d45db0897ce1ae25a126f5b0f6c1697abdc6d80a96701f7bb3e77",
+    "reports/model_v2/v2_011/failed_diagnostic_run_summary.json": "39f3a878c41d2870ff7ed36e52d909546d6db7d85ab813f66ecb22cfd04eb940",
+    "reports/model_v2/v2_011/ig_completeness.csv": "fa13537d943fa92ced295f92697866c859b6fb4335058929545a1a1342e13b67",
+    "reports/model_v2/v2_011/ig_reproducibility.json": "4eaf904ea20ad7cf743cbc8386affa67d770c6cf335a1c0072d69579e8f05c8d"
+  },
+  "frozen_case_ids": {
+    "FN": "a05c297ebbacbe23e4edbfc4c37f9a2c67be771f5ad6f7b959e9313183a3e11c",
+    "FP": "6fb6c73f0ead7b9f4b9f42ba59d4ee773a8f880930eda661918d29cbd68afd78",
+    "TN": "b454fc6660d870011036da6c63cf37e15dfe7af73046c58d4ea829e2e194dc70",
+    "TP": "7dae5fa655217f27e270bb7ec1abebaddf3fdcf43f848ffc41330a86b3d7e901"
+  },
+  "guard_state": "COMPLETED",
+  "method_commit": "1bb81d52876ff70dbc1eba742a2b1f1909b8523d",
+  "run": "V2-011 first case-access session (failed diagnostic run)"
+}

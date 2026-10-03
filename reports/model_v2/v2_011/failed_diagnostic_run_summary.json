@@ -1,0 +1,50 @@
+{
+  "cases": {
+    "FN": {
+      "completeness_absolute_delta": 0.003195685977686935,
+      "completeness_relative_delta": 0.001075669168820288,
+      "completeness_signed_delta": 0.003195685977686935,
+      "example_id": "a05c297ebbacbe23e4edbfc4c37f9a2c67be771f5ad6f7b959e9313183a3e11c",
+      "prompt_rule_abs_lt_1e-3_or_rel_lt_1e-3": "FAIL"
+    },
+    "FP": {
+      "completeness_absolute_delta": 0.008332708667182942,
+      "completeness_relative_delta": 0.0036152955303095785,
+      "completeness_signed_delta": -0.008332708667182942,
+      "example_id": "6fb6c73f0ead7b9f4b9f42ba59d4ee773a8f880930eda661918d29cbd68afd78",
+      "prompt_rule_abs_lt_1e-3_or_rel_lt_1e-3": "FAIL"
+    },
+    "TN": {
+      "completeness_absolute_delta": 0.000572247565749251,
+      "completeness_relative_delta": 9.648573114410303e-05,
+      "completeness_signed_delta": 0.000572247565749251,
+      "example_id": "b454fc6660d870011036da6c63cf37e15dfe7af73046c58d4ea829e2e194dc70",
+      "prompt_rule_abs_lt_1e-3_or_rel_lt_1e-3": "PASS"
+    },
+    "TP": {
+      "completeness_absolute_delta": 0.024670866165749317,
+      "completeness_relative_delta": 0.0020045310026904337,
+      "completeness_signed_delta": -0.024670866165749317,
+      "example_id": "7dae5fa655217f27e270bb7ec1abebaddf3fdcf43f848ffc41330a86b3d7e901",
+      "prompt_rule_abs_lt_1e-3_or_rel_lt_1e-3": "FAIL"
+    }
+  },
+  "cases_exceeding_prompt_rule": [
+    "FN",
+    "FP",
+    "TP"
+  ],
+  "classification": "FAILED_DIAGNOSTIC_RUN_PRESERVED_AS_IMMUTABLE_HISTORY",
+  "explainability_v2_frozen": false,
+  "ig_method_unchanged_since_method_commit": true,
+  "largest_absolute_residual": 0.024670866165749317,
+  "logits_consistent_with_v2_010": true,
+  "method_commit": "1bb81d52876ff70dbc1eba742a2b1f1909b8523d",
+  "model_mutated": false,
+  "repeat_runs_within_tolerance": true,
+  "scratch_note": "Before the method commit, prediction-table error-analysis code was executed interactively for development/testing only; it wrote no result files and its console output is NON_AUTHORITATIVE_PRELOCK_SCRATCH. The authoritative tables are regenerated after the corrective semantics lock.",
+  "stop_code_basis": "prompt-introduced hard rule absolute_delta<1e-3 OR relative_delta<1e-3",
+  "stop_code_raised_at_the_time": "V2_011_IG_COMPLETENESS_FAILURE",
+  "v2_011_status_marked_pass": false,
+  "v2g10_status_marked_pass": false
+}
