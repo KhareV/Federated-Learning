@@ -1,0 +1,34 @@
+{
+  "artifact_bytes": 294959,
+  "artifact_path": "artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts",
+  "artifact_sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+  "candidates_attempted": 1,
+  "export_api": "torch.jit.script",
+  "format": "TORCHSCRIPT_SCRIPT",
+  "format_selected_before_any_benchmark": true,
+  "int8_attempted": false,
+  "jit_code_sha256": "3a812869df4e299b536c2a4efe697fa4a140e7ba67a61036d2b6cd8f2e167ee9",
+  "onnx_attempted": false,
+  "precision": "FP32",
+  "python_version": "3.11.16",
+  "signature": {
+    "input": "float32[N,1,2500]",
+    "output_dtype": "torch.float32",
+    "output_semantics": "RAW_PRE_SIGMOID_LOGIT",
+    "output_shape_batch_1": [
+      1,
+      1
+    ],
+    "output_shape_batch_3": [
+      3,
+      1
+    ]
+  },
+  "source_checkpoint_bytes": 264763,
+  "source_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "source_model_verifier": "PASS",
+  "status": "PASS",
+  "torch_version": "2.14.0",
+  "trace_attempted": false,
+  "trainable_parameter_count": 57553
+}

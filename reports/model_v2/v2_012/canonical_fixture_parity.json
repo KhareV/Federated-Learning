@@ -1,0 +1,48 @@
+{
+  "allclose": true,
+  "fixture": "MODEL_V2_FINAL_SYNTHETIC_TEST_VECTOR_V1",
+  "fixture_inputs_or_outputs_modified": false,
+  "fixture_sha256": "adabc8f053ce05c6e6e35e6268f1803bdb68d1043f6b5aaf665daf9c3dce8d6e",
+  "frozen_expected_logits": [
+    1.6370497941970825,
+    -4.964743614196777,
+    -0.08284634351730347
+  ],
+  "frozen_expected_vs_gateway": {
+    "allclose": true,
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "nonfinite_outputs": 0,
+    "rows": 3,
+    "shape_mismatches": 0
+  },
+  "gateway_logits": [
+    1.6370497941970825,
+    -4.964743614196777,
+    -0.08284634351730347
+  ],
+  "native_logits": [
+    1.6370497941970825,
+    -4.964743614196777,
+    -0.08284634351730347
+  ],
+  "native_vs_gateway": {
+    "allclose": true,
+    "max_abs_delta": 0.0,
+    "max_rel_delta": 0.0,
+    "nonfinite_outputs": 0,
+    "rows": 3,
+    "shape_mismatches": 0
+  },
+  "per_vector_abs_delta": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "rows": 3,
+  "status": "PASS",
+  "tolerance": {
+    "atol": 1e-06,
+    "rtol": 1e-06
+  }
+}

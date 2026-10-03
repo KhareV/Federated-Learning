@@ -1,0 +1,190 @@
+{
+  "caveats": [
+    "same-host, same-process-policy engineering benchmark only",
+    "V2 wrapper applies CAL_V2 through the canonical helpers while the frozen V1 runtime uses inline math; both are inside the timed boundary",
+    "V1 historical T029 numbers (reports/t029) were measured on INTERNAL_TEST windows in a different session; this comparison is contemporaneous"
+  ],
+  "host": {
+    "CPU_model": "Apple M5",
+    "NumPy": "2.4.6",
+    "OS": "Darwin",
+    "OS_version": "27.0.1",
+    "PyTorch": "2.14.0",
+    "Python": "3.11.16",
+    "architecture": "arm64",
+    "device": "CPU",
+    "hardware_required": false,
+    "logical_cores": 10,
+    "physical_cores": 10,
+    "portability_claim": "none; valid only for this host and process policy",
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "total_RAM_bytes": 17179869184
+  },
+  "policy": "engineering-only, descriptive, same host and process policy, interleaved fresh subprocesses on the same synthetic inputs; not used for model choice; no MODEL_V1 scientific evaluation was rerun",
+  "ratios_v2_over_v1": {
+    "artifact_bytes": 3.5648469319926033,
+    "p50": 8.994770780139756,
+    "p95": 8.733040046701692,
+    "peak_rss": 1.0270843734398403,
+    "throughput": 0.11115957486802559
+  },
+  "status": "PASS",
+  "v1_artifact_bytes": 82741,
+  "v1_artifact_sha256_matches_frozen_lock": true,
+  "v1_available": true,
+  "v1_canonical": {
+    "aggregation_rule": "median of 3 run-level p50/p95/throughput; max RSS across 3 processes",
+    "canonical_p50_ms": 0.2038545,
+    "canonical_p95_ms": 0.214125,
+    "canonical_throughput_windows_per_second": 4896.93808613625,
+    "fastest_run_selected": false,
+    "peak_high_water_process_RSS_bytes": 262537216
+  },
+  "v1_runs": [
+    {
+      "benchmark_process_peak_RSS_bytes": 262504448,
+      "gateway": "v1",
+      "maximum_ms": 0.247459,
+      "mean_ms": 0.20291909000000002,
+      "measured_count": 1000,
+      "minimum_ms": 0.120125,
+      "p50_ms": 0.202208,
+      "p95_ms": 0.2139694,
+      "p99_ms": 0.22559233,
+      "repetition": 1,
+      "standard_deviation_ms": 0.008822354595486881,
+      "throughput_windows_per_second": 4928.072563305897,
+      "total_timed_seconds": 0.20291909,
+      "warmup_count": 100
+    },
+    {
+      "benchmark_process_peak_RSS_bytes": 262537216,
+      "gateway": "v1",
+      "maximum_ms": 0.257916,
+      "mean_ms": 0.20498753899999997,
+      "measured_count": 1000,
+      "minimum_ms": 0.123625,
+      "p50_ms": 0.204125,
+      "p95_ms": 0.21568364999999998,
+      "p99_ms": 0.22929824,
+      "repetition": 2,
+      "standard_deviation_ms": 0.008858221219050957,
+      "throughput_windows_per_second": 4878.345312492385,
+      "total_timed_seconds": 0.204987539,
+      "warmup_count": 100
+    },
+    {
+      "benchmark_process_peak_RSS_bytes": 262422528,
+      "gateway": "v1",
+      "maximum_ms": 0.232333,
+      "mean_ms": 0.204209239,
+      "measured_count": 1000,
+      "minimum_ms": 0.124583,
+      "p50_ms": 0.2038545,
+      "p95_ms": 0.214125,
+      "p99_ms": 0.22522024,
+      "repetition": 3,
+      "standard_deviation_ms": 0.008350787674624811,
+      "throughput_windows_per_second": 4896.93808613625,
+      "total_timed_seconds": 0.204209239,
+      "warmup_count": 100
+    }
+  ],
+  "v1_single_window_child_runs": [
+    {
+      "baseline_process_RSS_bytes": 242335744,
+      "method": "fresh child process resource.getrusage(RUSAGE_SELF).ru_maxrss",
+      "peak_inference_RSS_bytes": 251707392,
+      "peak_minus_baseline_bytes": 9371648,
+      "peak_minus_pre_inference_bytes": 229376,
+      "platform_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+      "post_inference_RSS_bytes": 251707392,
+      "post_model_load_RSS_bytes": 245268480,
+      "pre_inference_RSS_bytes": 251478016
+    },
+    {
+      "baseline_process_RSS_bytes": 242286592,
+      "method": "fresh child process resource.getrusage(RUSAGE_SELF).ru_maxrss",
+      "peak_inference_RSS_bytes": 251740160,
+      "peak_minus_baseline_bytes": 9453568,
+      "peak_minus_pre_inference_bytes": 278528,
+      "platform_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+      "post_inference_RSS_bytes": 251740160,
+      "post_model_load_RSS_bytes": 245202944,
+      "pre_inference_RSS_bytes": 251461632
+    },
+    {
+      "baseline_process_RSS_bytes": 241664000,
+      "method": "fresh child process resource.getrusage(RUSAGE_SELF).ru_maxrss",
+      "peak_inference_RSS_bytes": 251854848,
+      "peak_minus_baseline_bytes": 10190848,
+      "peak_minus_pre_inference_bytes": 262144,
+      "platform_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+      "post_inference_RSS_bytes": 251854848,
+      "post_model_load_RSS_bytes": 244760576,
+      "pre_inference_RSS_bytes": 251592704
+    }
+  ],
+  "v1_trainable_parameters": 13185,
+  "v2_artifact_bytes": 294959,
+  "v2_canonical": {
+    "aggregation_rule": "median of 3 run-level p50/p95/throughput; max RSS across 3 processes",
+    "canonical_p50_ms": 1.8336245,
+    "canonical_p95_ms": 1.8699622,
+    "canonical_throughput_windows_per_second": 544.3415558099484,
+    "fastest_run_selected": false,
+    "peak_high_water_process_RSS_bytes": 269647872
+  },
+  "v2_runs": [
+    {
+      "benchmark_process_peak_RSS_bytes": 269352960,
+      "gateway": "v2",
+      "maximum_ms": 1.892292,
+      "mean_ms": 1.828794177,
+      "measured_count": 1000,
+      "minimum_ms": 1.79775,
+      "p50_ms": 1.827166,
+      "p95_ms": 1.85858305,
+      "p99_ms": 1.87287625,
+      "repetition": 1,
+      "standard_deviation_ms": 0.016371022965979358,
+      "throughput_windows_per_second": 546.8083902369075,
+      "total_timed_seconds": 1.828794177,
+      "warmup_count": 100
+    },
+    {
+      "benchmark_process_peak_RSS_bytes": 268468224,
+      "gateway": "v2",
+      "maximum_ms": 2.0,
+      "mean_ms": 1.8370818640000002,
+      "measured_count": 1000,
+      "minimum_ms": 1.798791,
+      "p50_ms": 1.8348545,
+      "p95_ms": 1.8699622,
+      "p99_ms": 1.89509691,
+      "repetition": 2,
+      "standard_deviation_ms": 0.01953211847285239,
+      "throughput_windows_per_second": 544.3415558099484,
+      "total_timed_seconds": 1.837081864,
+      "warmup_count": 100
+    },
+    {
+      "benchmark_process_peak_RSS_bytes": 269647872,
+      "gateway": "v2",
+      "maximum_ms": 4.917792,
+      "mean_ms": 1.854161819,
+      "measured_count": 1000,
+      "minimum_ms": 1.800125,
+      "p50_ms": 1.8336245,
+      "p95_ms": 1.9110417,
+      "p99_ms": 2.1574515799999996,
+      "repetition": 3,
+      "standard_deviation_ms": 0.15887905812765815,
+      "throughput_windows_per_second": 539.3272527525819,
+      "total_timed_seconds": 1.854161819,
+      "warmup_count": 100
+    }
+  ],
+  "v2_trainable_parameters": 57553
+}

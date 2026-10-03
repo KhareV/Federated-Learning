@@ -1,0 +1,130 @@
+{
+  "artifact": {
+    "byte_reproducible": false,
+    "bytes": 294959,
+    "format": "TORCHSCRIPT_SCRIPT",
+    "path": "artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts",
+    "precision": "FP32",
+    "semantic_reproducibility": true,
+    "sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+    "torch_version": "2.14.0"
+  },
+  "artifact_id": "GATEWAY_ARTIFACT_V2",
+  "benchmark": {
+    "aggregation_rule": "median of 3 run-level p50/p95/throughput; max RSS across 3 processes",
+    "canonical_p50_ms": 1.8336245,
+    "canonical_p95_ms": 1.8699622,
+    "canonical_throughput_windows_per_second": 544.3415558099484,
+    "config_sha256": "6a6dc7a9281be69345491bdfe501f33edb3af9fdc2c479c484376ac550bf2ca1",
+    "host": {
+      "CPU_model": "Apple M5",
+      "NumPy": "2.4.6",
+      "OS": "Darwin",
+      "OS_version": "27.0.1",
+      "PyTorch": "2.14.0",
+      "Python": "3.11.16",
+      "architecture": "arm64",
+      "device": "CPU",
+      "hardware_required": false,
+      "logical_cores": 10,
+      "physical_cores": 10,
+      "portability_claim": "none; valid only for this host and process policy",
+      "torch_interop_threads": 1,
+      "torch_intraop_threads": 1,
+      "total_RAM_bytes": 17179869184
+    },
+    "measured_per_run": 1000,
+    "memory_semantics": "peak/high-water process RSS during benchmark process",
+    "memory_sha256": "54a335e435f31a109407f6009367c3df5612f15739a1e20ff1cafb84909a4e1d",
+    "peak_high_water_process_RSS_bytes": 269647872,
+    "repetitions": 3,
+    "summary_sha256": "2003d2d665294cced56ec54d05e242f192530de120dcd324dbe02fe21bd9fd74",
+    "warmup": 100
+  },
+  "bound_method_artifacts": {
+    "configs/model_v2/gateway_artifact_v2.yaml": "6a6dc7a9281be69345491bdfe501f33edb3af9fdc2c479c484376ac550bf2ca1",
+    "deployment/benchmark.py": "e3473ed1fd2c42a38ab47623895144b941c3b9dc9b9f6ce0702583d9e0a147e9",
+    "deployment/gateway_v2.py": "9f134196fc67db74a61f6e4d7e7209d0b028493c1a152419aa948d8cc47b2ee8",
+    "deployment/runtime.py": "d822ebc0f0b1f994f2a9def38ef55e0be4a44256b67235980b9aaca8203c11ff",
+    "models/gateway_artifact_v2_verify.py": "af43dd437c4461caae80e4111da51b26caf33852f0a94d8fb6f2bdf902549df6",
+    "reports/model_v2/v2_012/benchmark_config.json": "d5a8c1cf22eef2822ea21b8a193d278cd28ce6eab3867f0820928bbde93510e5",
+    "reports/model_v2/v2_012/parity_corpus_manifest.json": "d76964a64899450eb805ed022e42b41f6d9e3cd88d426c8920a3189e0a3dc4f5",
+    "scripts/build_gateway_manifest_v2.py": "7589ca4849187ace8a4b2df16d93608c60c8934df618fecb8d2c6dd7ef3717be",
+    "scripts/export_gateway_v2.py": "aedabfff85326d156ac469d902ee47b97c5c4365c982c999acd3bdc9be1be6c3",
+    "scripts/freeze_v2_012_method.py": "9166328cb1d960c430ddc6a9194ce826b4ddf8f3cf199ce1d570578d6083c550",
+    "scripts/run_gateway_v2_benchmark.py": "6001d34be370d7fbe540283acb8e5ae3e58a54f55cbc853c148feb8758701701",
+    "tests/fixtures/gateway_parity_corpus_v2_v1.npz": "f897471970401fe1b97b8cc2a21acf3acdeeb032b1adb03fc08e14738e8c9da5"
+  },
+  "calibration": {
+    "applied_by": "wrapper (canonical helpers); not baked into weights",
+    "id": "CAL_V2",
+    "path": "artifacts/CAL_V2.json",
+    "sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7"
+  },
+  "deployment_artifact_id": "GATEWAY_FP32_V2",
+  "description": "research-only frozen V2 CPU gateway artifact",
+  "equivalence": {
+    "atol": 1e-06,
+    "comparison_batch_size": 1,
+    "rtol": 1e-06
+  },
+  "fixture_parity": {
+    "allclose": true,
+    "file_sha256": "c5aa43a28b4b76234eca20f65b2ceaa1c4d8f7ea600407b26a6f2000a518900e",
+    "max_abs_logit_delta": 0.0,
+    "rows": 3
+  },
+  "gateway_parameter_count": 57553,
+  "input_contract": "GATEWAY_MODEL_INPUT_V2",
+  "input_dtype": "float32",
+  "input_shape": [
+    "N",
+    1,
+    2500
+  ],
+  "int8": "NOT_EVALUATED",
+  "map_id": "AAMI_SVF_MAP_V1",
+  "method_commit": "4a3c5384e0446a9e5753d34a8f751e5d0b4b938e",
+  "output_semantics": "RAW_PRE_SIGMOID_LOGIT",
+  "owner_task": "V2-012",
+  "parity_corpus": {
+    "id": "GATEWAY_PARITY_CORPUS_V2_V1",
+    "path": "tests/fixtures/gateway_parity_corpus_v2_v1.npz",
+    "rows": 1000,
+    "sha256": "f897471970401fe1b97b8cc2a21acf3acdeeb032b1adb03fc08e14738e8c9da5",
+    "windows_content_sha256": "d6e6c89fa37471b247a44c3b3f8a8f62a52a5a0e5ddf6d4edac2aa35539398f3"
+  },
+  "preprocessing": {
+    "id": "PREPROC_V1",
+    "lock_sha256": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+  },
+  "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+  "source_model": {
+    "architecture_id": "MODEL_V2_TCN_MEAN",
+    "bytes": 264763,
+    "config_sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+    "id": "MODEL_V2_FINAL",
+    "manifest_sha256": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+    "parameter_count": 57553,
+    "path": "checkpoints/MODEL_V2_FINAL.pt",
+    "sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b"
+  },
+  "status": "FROZEN_RESEARCH_GATEWAY",
+  "status_semantics": {
+    "MODEL_V2_RUNTIME_ACCEPTED": "ACCEPTED",
+    "official_validation_promotion": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+    "operational_lineage": "MODEL_V1"
+  },
+  "synthetic_corpus_parity": {
+    "allclose": true,
+    "csv_sha256": "a25676c6316aa8a5ed7583d06bc528b274146e07d913f8c07dac6d8550d7d4fa",
+    "max_abs_logit_delta": 0.0,
+    "max_calibrated_probability_delta": 0.0,
+    "max_raw_probability_delta": 0.0,
+    "max_rel_logit_delta": 0.0,
+    "rows": 1000,
+    "summary_sha256": "94ffb1daf67a9a7f6e0b985836b1a9a9158d8359625c87f9786a52a6b3207f1c",
+    "threshold_decision_disagreements": 0
+  },
+  "target_id": "AAMI_SVF_WINDOW_V1"
+}

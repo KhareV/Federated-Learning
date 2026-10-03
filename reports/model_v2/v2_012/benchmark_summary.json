@@ -1,0 +1,110 @@
+{
+  "artifact_sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+  "batch_size": 1,
+  "canonical": {
+    "aggregation_rule": "median of 3 run-level p50/p95/throughput; max RSS across 3 processes",
+    "canonical_p50_ms": 1.8336245,
+    "canonical_p95_ms": 1.8699622,
+    "canonical_throughput_windows_per_second": 544.3415558099484,
+    "fastest_run_selected": false,
+    "peak_high_water_process_RSS_bytes": 269647872
+  },
+  "config_sha256": "6a6dc7a9281be69345491bdfe501f33edb3af9fdc2c479c484376ac550bf2ca1",
+  "excluded": [
+    "model load",
+    "artifact verification",
+    "warm-up",
+    "CAL file parse"
+  ],
+  "host": {
+    "CPU_model": "Apple M5",
+    "NumPy": "2.4.6",
+    "OS": "Darwin",
+    "OS_version": "27.0.1",
+    "PyTorch": "2.14.0",
+    "Python": "3.11.16",
+    "architecture": "arm64",
+    "device": "CPU",
+    "hardware_required": false,
+    "logical_cores": 10,
+    "physical_cores": 10,
+    "portability_claim": "none; valid only for this host and process policy",
+    "torch_interop_threads": 1,
+    "torch_intraop_threads": 1,
+    "total_RAM_bytes": 17179869184
+  },
+  "inputs": "first 1000 windows of GATEWAY_PARITY_CORPUS_V2_V1 (synthetic)",
+  "performance_target_invented": false,
+  "run_level_p50_ms": [
+    1.827166,
+    1.8348545,
+    1.8336245
+  ],
+  "run_level_p95_ms": [
+    1.85858305,
+    1.8699622,
+    1.9110417
+  ],
+  "run_level_throughput": [
+    546.8083902369075,
+    544.3415558099484,
+    539.3272527525819
+  ],
+  "runs": [
+    {
+      "benchmark_process_peak_RSS_bytes": 269352960,
+      "gateway": "v2",
+      "maximum_ms": 1.892292,
+      "mean_ms": 1.828794177,
+      "measured_count": 1000,
+      "minimum_ms": 1.79775,
+      "p50_ms": 1.827166,
+      "p95_ms": 1.85858305,
+      "p99_ms": 1.87287625,
+      "repetition": 1,
+      "standard_deviation_ms": 0.016371022965979358,
+      "throughput_windows_per_second": 546.8083902369075,
+      "total_timed_seconds": 1.828794177,
+      "warmup_count": 100
+    },
+    {
+      "benchmark_process_peak_RSS_bytes": 268468224,
+      "gateway": "v2",
+      "maximum_ms": 2.0,
+      "mean_ms": 1.8370818640000002,
+      "measured_count": 1000,
+      "minimum_ms": 1.798791,
+      "p50_ms": 1.8348545,
+      "p95_ms": 1.8699622,
+      "p99_ms": 1.89509691,
+      "repetition": 2,
+      "standard_deviation_ms": 0.01953211847285239,
+      "throughput_windows_per_second": 544.3415558099484,
+      "total_timed_seconds": 1.837081864,
+      "warmup_count": 100
+    },
+    {
+      "benchmark_process_peak_RSS_bytes": 269647872,
+      "gateway": "v2",
+      "maximum_ms": 4.917792,
+      "mean_ms": 1.854161819,
+      "measured_count": 1000,
+      "minimum_ms": 1.800125,
+      "p50_ms": 1.8336245,
+      "p95_ms": 1.9110417,
+      "p99_ms": 2.1574515799999996,
+      "repetition": 3,
+      "standard_deviation_ms": 0.15887905812765815,
+      "throughput_windows_per_second": 539.3272527525819,
+      "total_timed_seconds": 1.854161819,
+      "warmup_count": 100
+    }
+  ],
+  "status": "PASS",
+  "threads": {
+    "interop": 1,
+    "intraop": 1
+  },
+  "throughput_scope": "single-process model-inference throughput; not multi-user API throughput",
+  "timing_boundary": "gateway model plus CAL_V2 wrapper inference call"
+}

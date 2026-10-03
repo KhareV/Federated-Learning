@@ -1,0 +1,21 @@
+{
+  "all_finite": true,
+  "allclose": true,
+  "comparison_batch_size": 1,
+  "corpus": "GATEWAY_PARITY_CORPUS_V2_V1",
+  "corpus_sha256": "f897471970401fe1b97b8cc2a21acf3acdeeb032b1adb03fc08e14738e8c9da5",
+  "csv_sha256": "a25676c6316aa8a5ed7583d06bc528b274146e07d913f8c07dac6d8550d7d4fa",
+  "max_abs_logit_delta": 0.0,
+  "max_calibrated_probability_delta": 0.0,
+  "max_raw_probability_delta": 0.0,
+  "max_rel_logit_delta": 0.0,
+  "no_scientific_metrics_reported": true,
+  "rows": 1000,
+  "shape_mismatches": 0,
+  "status": "PASS",
+  "threshold_decision_disagreements": 0,
+  "tolerance": {
+    "atol": 1e-06,
+    "rtol": 1e-06
+  }
+}

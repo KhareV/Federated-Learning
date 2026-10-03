@@ -1,0 +1,139 @@
+{
+  "all_detected": true,
+  "canonical_artifacts_unmodified": true,
+  "clean_temp_copy_verifies": true,
+  "mutation_count": 27,
+  "mutations": {
+    "artifact_id_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_ARTIFACT_ID"
+    },
+    "cal_v2_sha_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_CAL_V2_MISMATCH"
+    },
+    "corpus_parity_missing": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_CORPUS_PARITY_MISSING"
+    },
+    "fixture_parity_missing": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_FIXTURE_PARITY_MISSING"
+    },
+    "fp32_to_int8_metadata_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_PRECISION"
+    },
+    "gateway_artifact_byte_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_ARTIFACT_HASH_MISMATCH"
+    },
+    "input_shape_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_INPUT_SHAPE"
+    },
+    "manifest_artifact_size_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_ARTIFACT_SIZE"
+    },
+    "map_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_MAP"
+    },
+    "model_v2_final_sha_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_SOURCE_CHECKPOINT_MISMATCH"
+    },
+    "operational_lineage_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_LINEAGE_CHANGED"
+    },
+    "output_semantics_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_OUTPUT"
+    },
+    "parameter_count_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_PARAMETER_COUNT"
+    },
+    "parity_corpus_content_mutation_resealed": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_CONFIG_HASH_MISMATCH"
+    },
+    "parity_corpus_file_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_PARITY_CORPUS_MISMATCH"
+    },
+    "preproc_hash_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_PREPROC_MISMATCH"
+    },
+    "preproc_id_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_PREPROC"
+    },
+    "promotion_status_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_PROMOTION_STATUS_CHANGED"
+    },
+    "protocol_v3_hash_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_PROTOCOL_V3_MISMATCH"
+    },
+    "runtime_acceptance_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_RUNTIME_ACCEPTANCE_CHANGED"
+    },
+    "state_tensor_mutation_resealed": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_STATE_MISMATCH"
+    },
+    "target_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_TARGET"
+    },
+    "threshold_disagreement_manifest_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_THRESHOLD_DISAGREEMENTS"
+    },
+    "threshold_disagreement_summary_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_PARITY_RESULT_MISMATCH:summary_sha256"
+    },
+    "tolerance_config_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_TOLERANCE"
+    },
+    "tolerance_manifest_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_TOLERANCE"
+    },
+    "torchscript_format_mutation": {
+      "detected": true,
+      "error": "GatewayArtifactV2VerifyError:GATEWAY_V2_WRONG_FORMAT"
+    }
+  },
+  "required_categories": [
+    "gateway artifact byte mutation",
+    "state tensor mutation",
+    "manifest mutation",
+    "artifact ID mutation",
+    "MODEL_V2_FINAL SHA mutation",
+    "CAL_V2 SHA mutation",
+    "PREPROC mutation",
+    "target mutation",
+    "map mutation",
+    "input shape mutation",
+    "output semantic mutation",
+    "FP32->INT8 metadata mutation",
+    "TorchScript format mutation",
+    "parameter-count mutation",
+    "parity-corpus mutation",
+    "tolerance mutation",
+    "threshold-disagreement mutation",
+    "operational-lineage mutation",
+    "promotion-status mutation",
+    "runtime-acceptance mutation"
+  ],
+  "status": "PASS"
+}

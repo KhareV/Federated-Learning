@@ -1,0 +1,63 @@
+{
+  "archive_difference_explanation": "serialization bytes differ only in the listed archive members; state values, JIT code, signatures and all logits are identical",
+  "byte_reproducible": false,
+  "canonical_artifact_sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+  "committed_canonical_artifact_has_one_fixed_sha": true,
+  "comparisons": {
+    "canonical_vs_workspace_a": {
+      "archive_member_count": [
+        141,
+        141
+      ],
+      "byte_reproducible": false,
+      "differing_archive_members": [
+        ".data/serialization_id",
+        "code/__torch__/torch/nn/modules/conv.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_0.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_1.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_11.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_3.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_5.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_7.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_9.py",
+        "code/__torch__/torch/nn/modules/linear.py"
+      ],
+      "jit_code_identical": true,
+      "semantic_reproducibility": true,
+      "state_values_identical": true
+    },
+    "workspace_a_vs_workspace_b": {
+      "archive_member_count": [
+        141,
+        141
+      ],
+      "byte_reproducible": false,
+      "differing_archive_members": [
+        ".data/serialization_id",
+        "code/__torch__/torch/nn/modules/batchnorm.py",
+        "code/__torch__/torch/nn/modules/conv.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_0.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_1.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_11.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_3.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_5.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_7.py",
+        "code/__torch__/torch/nn/modules/conv/___torch_mangle_9.py",
+        "code/__torch__/torch/nn/modules/dropout.py",
+        "code/__torch__/torch/nn/modules/dropout/___torch_mangle_13.py",
+        "code/__torch__/torch/nn/modules/linear.py"
+      ],
+      "jit_code_identical": true,
+      "semantic_reproducibility": true,
+      "state_values_identical": true
+    }
+  },
+  "fixture_and_corpus_logits_identical_across_exports": true,
+  "semantic_reproducibility": true,
+  "signatures_and_jit_code_identical": true,
+  "status": "PASS",
+  "workspace_artifact_sha256": [
+    "c365b3730ccb7e5ee12a2c3766d916aae13e50598fd81fa427c4344d5e5ba8af",
+    "6baf4ed4da6f47756f431162daa8553d99455f3ac9f93400313874e086ff0d41"
+  ]
+}

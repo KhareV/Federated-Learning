@@ -1,0 +1,38 @@
+{
+  "benchmark_timings_expected_nondeterministic": true,
+  "calibration_wrapper_parity_recomputed_identical": true,
+  "corpus_parity_recomputed_identical": true,
+  "fixture_parity_recomputed_identical": true,
+  "gateway_logit_sha256_identical_across_reruns": true,
+  "matches_stored_export_evidence": true,
+  "status": "PASS",
+  "verifier_deterministic": true,
+  "verifier_run_1": {
+    "checks": {
+      "artifact_internals": true,
+      "benchmark_records": true,
+      "config": true,
+      "hash_bindings": true,
+      "manifest_constants": true,
+      "parity_corpus": true,
+      "parity_recomputed": true,
+      "upstream_verified": true,
+      "wrapper": true
+    },
+    "status": "PASS"
+  },
+  "verifier_run_2": {
+    "checks": {
+      "artifact_internals": true,
+      "benchmark_records": true,
+      "config": true,
+      "hash_bindings": true,
+      "manifest_constants": true,
+      "parity_corpus": true,
+      "parity_recomputed": true,
+      "upstream_verified": true,
+      "wrapper": true
+    },
+    "status": "PASS"
+  }
+}

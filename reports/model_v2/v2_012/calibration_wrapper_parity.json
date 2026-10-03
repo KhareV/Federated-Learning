@@ -1,0 +1,35 @@
+{
+  "calibration_id": "CAL_V2",
+  "comparator": ">=",
+  "formulas_duplicated_in_exporter": false,
+  "helpers_used": [
+    "source_domain_calibrated_probability",
+    "raw_probability_from_logit",
+    "apply_operating_threshold"
+  ],
+  "native_vs_gateway": {
+    "max_calibrated_probability_delta": 0.0,
+    "max_raw_probability_delta": 0.0,
+    "threshold_decision_disagreements": 0
+  },
+  "status": "PASS",
+  "temperature": 52.88261929727761,
+  "temperature_or_threshold_baked_into_weights": false,
+  "threshold": 0.5101937262006424,
+  "wrapper_fields": [
+    "raw_logit",
+    "raw_probability",
+    "source_domain_calibrated_probability",
+    "threshold",
+    "thresholded_prediction",
+    "model_id",
+    "gateway_artifact_id",
+    "calibration_id",
+    "calibration_domain",
+    "target_id",
+    "preproc_id"
+  ],
+  "wrapper_vs_artifact_raw_logit_mismatches": 0,
+  "wrapper_vs_helper_max_calibrated_probability_delta": 0.0,
+  "wrapper_vs_helper_threshold_disagreements": 0
+}

@@ -1,0 +1,49 @@
+{
+  "benchmark_process_peak_RSS_bytes_per_run": [
+    269352960,
+    268468224,
+    269647872
+  ],
+  "canonical_peak_high_water_process_RSS_bytes": 269647872,
+  "method": "fresh subprocess resource.getrusage(RUSAGE_SELF).ru_maxrss",
+  "not": [
+    "instantaneous RAM",
+    "device RAM",
+    "MCU RAM"
+  ],
+  "platform_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+  "semantics": "peak/high-water process RSS during benchmark process",
+  "single_window_child_runs_v2": [
+    {
+      "baseline_process_RSS_bytes": 242384896,
+      "method": "fresh child process resource.getrusage(RUSAGE_SELF).ru_maxrss",
+      "peak_inference_RSS_bytes": 257982464,
+      "peak_minus_baseline_bytes": 15597568,
+      "platform_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+      "post_model_load_RSS_bytes": 246448128,
+      "pre_inference_RSS_bytes": 256327680,
+      "semantics": "peak/high-water process RSS during benchmark process"
+    },
+    {
+      "baseline_process_RSS_bytes": 241680384,
+      "method": "fresh child process resource.getrusage(RUSAGE_SELF).ru_maxrss",
+      "peak_inference_RSS_bytes": 258031616,
+      "peak_minus_baseline_bytes": 16351232,
+      "platform_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+      "post_model_load_RSS_bytes": 245923840,
+      "pre_inference_RSS_bytes": 256344064,
+      "semantics": "peak/high-water process RSS during benchmark process"
+    },
+    {
+      "baseline_process_RSS_bytes": 242335744,
+      "method": "fresh child process resource.getrusage(RUSAGE_SELF).ru_maxrss",
+      "peak_inference_RSS_bytes": 258097152,
+      "peak_minus_baseline_bytes": 15761408,
+      "platform_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+      "post_model_load_RSS_bytes": 246382592,
+      "pre_inference_RSS_bytes": 256491520,
+      "semantics": "peak/high-water process RSS during benchmark process"
+    }
+  ],
+  "status": "PASS"
+}

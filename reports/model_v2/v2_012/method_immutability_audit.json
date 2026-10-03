@@ -1,0 +1,67 @@
+{
+  "frozen": [
+    "format",
+    "precision",
+    "parity corpus",
+    "tolerances",
+    "warm-up",
+    "measurement count",
+    "timer",
+    "thread policy",
+    "aggregation rule",
+    "memory semantics"
+  ],
+  "method_commit": "4a3c5384e0446a9e5753d34a8f751e5d0b4b938e",
+  "per_file": {
+    "configs/model_v2/gateway_artifact_v2.yaml": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "deployment/benchmark.py": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "deployment/gateway_v2.py": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "deployment/runtime.py": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "models/gateway_artifact_v2_verify.py": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "reports/model_v2/v2_012/benchmark_config.json": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "reports/model_v2/v2_012/parity_corpus_manifest.json": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "scripts/build_gateway_manifest_v2.py": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "scripts/export_gateway_v2.py": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "scripts/freeze_v2_012_method.py": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "scripts/run_gateway_v2_benchmark.py": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    },
+    "tests/fixtures/gateway_parity_corpus_v2_v1.npz": {
+      "existed_at_method_commit": true,
+      "has_diff": false
+    }
+  },
+  "status": "PASS",
+  "unchanged_after_benchmark_exposure": true
+}
