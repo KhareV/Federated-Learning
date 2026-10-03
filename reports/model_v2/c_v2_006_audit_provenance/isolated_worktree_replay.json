@@ -1,0 +1,16 @@
+{
+  "chunked_regression_exit_code": 0,
+  "environment_provisioning": {
+    "data_processed_symlinked": true,
+    "data_raw_symlinked": true,
+    "note": ".venv-t032 (gitignored virtualenv) and data/raw + data/processed (gitignored per the 'never commit downloaded payloads' policy) are absent from any fresh git checkout. They are symlinked here to the main checkout's identical local copies -- not newly installed, downloaded, or regenerated -- so the committed verifier scripts run against the same environment/data they were originally run against, without editing any frozen verifier file.",
+    "venv_symlinked": true
+  },
+  "freeze_sha": "2886f19e5eebc5ec80b04bc5f39b2cd67b09bd51",
+  "generator_exit_code": 0,
+  "pip_check_exit_code": 0,
+  "pre_replay_status_empty": true,
+  "ruff_exit_code": 0,
+  "worktree_head": "2886f19e5eebc5ec80b04bc5f39b2cd67b09bd51",
+  "worktree_head_matches_freeze": true
+}

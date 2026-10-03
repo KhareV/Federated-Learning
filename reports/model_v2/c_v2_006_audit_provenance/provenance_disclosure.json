@@ -1,0 +1,8 @@
+{
+  "audit_method_precommitted_before_first_execution": false,
+  "official_validation_accessed": false,
+  "scientific_v2_006_artifacts_changed": false,
+  "statement": "The original C-V2-006-AUDIT-CLOSEOUT did not satisfy its requested pre-result audit-method-commit chronology: its verifier (scripts/generate_c_v2_006_audit_closeout.py) was executed and iterated on while still uncommitted, including a real fix to an isolated-worktree interpreter-selection bug discovered only after observing a suspicious replay_exit_code during that checkpoint's own work. This is not rewritten as though a pre-commit chronology was followed. This corrective checkpoint uses commit 2886f19e5eebc5ec80b04bc5f39b2cd67b09bd51 as the first immutable complete verifier baseline and replays it, unedited, from a clean detached worktree.",
+  "status": "DISCLOSED",
+  "verifier_modified_after_observing_audit_behavior": true
+}

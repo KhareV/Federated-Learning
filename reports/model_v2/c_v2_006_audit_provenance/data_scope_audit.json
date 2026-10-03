@@ -1,0 +1,17 @@
+{
+  "bidmc_accessed": false,
+  "calibration_accessed": false,
+  "challenger_reruns": 0,
+  "checkpoint_pt_files_loaded": 0,
+  "control_reruns": 0,
+  "incart_accessed": false,
+  "internal_test_accessed": false,
+  "method_note": "This checkpoint only replays already-committed evidence-generation code in an isolated detached worktree and compares already-materialized JSON/CSV evidence and git history. No waveform file was opened; no model object was constructed or run.",
+  "model_inference": 0,
+  "new_classical_fits": 0,
+  "new_neural_fits": 0,
+  "nstdb_accessed": false,
+  "official_validation_accessed": false,
+  "status": "PASS",
+  "waveform_reads": 0
+}

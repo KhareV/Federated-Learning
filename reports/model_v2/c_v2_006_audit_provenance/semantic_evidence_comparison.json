@@ -1,0 +1,35 @@
+{
+  "allowed_variable_fields": [
+    "git_sha",
+    "optimizer_correction_lock_sha256"
+  ],
+  "diffs": [],
+  "fields_checked": 17,
+  "fields_matched": 17,
+  "packaging_cascade": {
+    "both_classified_packaging_only": true,
+    "canonical_opt_lock_diff": [
+      "git_sha"
+    ],
+    "canonical_shortlist_lock_diff": [
+      "git_sha",
+      "optimizer_correction_lock_sha256"
+    ],
+    "cascade_explanation": "git_sha differs between the canonical lock generation (HEAD at the method-attestation commit) and every isolated replay (HEAD detached at the later V2-006 result commit); optimizer_correction_lock_sha256 inside the shortlist lock is a hash of the optimizer lock file and therefore cascades from that same git_sha difference in both the original closeout's replay and this provenance checkpoint's replay. No other field differs in either replay.",
+    "replay_opt_lock_diff": [
+      "git_sha"
+    ],
+    "replay_shortlist_lock_diff": [
+      "git_sha",
+      "optimizer_correction_lock_sha256"
+    ]
+  },
+  "shortlist_identities": {
+    "finalist_a_architecture": "MODEL_V2_TCN_MEAN",
+    "finalist_a_schedule": "CONFIG_V2_TCN_MEAN_ORIGINAL_V1",
+    "finalist_b_architecture": "MODEL_V2_TCN_MEANMAX",
+    "finalist_b_schedule": "CONFIG_V2_TCN_MEANMAX_ORIGINAL_V1"
+  },
+  "status": "PASS",
+  "unexpected_diffs": []
+}
