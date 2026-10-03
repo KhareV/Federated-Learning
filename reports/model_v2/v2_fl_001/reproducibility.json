@@ -1,0 +1,35 @@
+{
+  "best_round_reconstructed": true,
+  "checkpoint_sha_stable": true,
+  "fresh_init_sha_identical_in_both_processes": true,
+  "predictions_replayed_identically": true,
+  "replay_runs": [
+    {
+      "best_checkpoint_sha256": "e90749ee700a2b7e55bd2aa6d36e9db32cd55e56ecd1cbc74959925c665d3ca5",
+      "best_checkpoint_sha_matches_result": true,
+      "best_round_matches": true,
+      "best_round_recomputed": 38,
+      "best_round_recorded": 38,
+      "init_sha256_reproduced": true,
+      "max_abs_probability_delta": 0.0,
+      "run_label": "run_1",
+      "status": "PASS",
+      "validation_predictions_replayed_identically": true,
+      "validation_windows": 2880
+    },
+    {
+      "best_checkpoint_sha256": "e90749ee700a2b7e55bd2aa6d36e9db32cd55e56ecd1cbc74959925c665d3ca5",
+      "best_checkpoint_sha_matches_result": true,
+      "best_round_matches": true,
+      "best_round_recomputed": 38,
+      "best_round_recorded": 38,
+      "init_sha256_reproduced": true,
+      "max_abs_probability_delta": 0.0,
+      "run_label": "run_2",
+      "status": "PASS",
+      "validation_predictions_replayed_identically": true,
+      "validation_windows": 2880
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,75 @@
+{
+  "BCE": {
+    "V1": 0.8208663887447781,
+    "V2": 0.4588765276802911
+  },
+  "F1_at_0_5": {
+    "V1": 0.38020247469066365,
+    "V2": 0.7057356608478803
+  },
+  "architecture": {
+    "V1_FL_IID_V1": "MODEL_V1_ARCHITECTURE_V1",
+    "V2": "MODEL_V2_TCN_MEAN"
+  },
+  "best_AUPRC": {
+    "V1": 0.5062218463441578,
+    "V2": 0.8669476403992936,
+    "delta_V2_minus_V1": 0.36072579405513583
+  },
+  "best_AUROC": {
+    "V1": 0.7353983880840645,
+    "V2": 0.9299129339876931
+  },
+  "best_round": {
+    "V1": 1,
+    "V2": 38
+  },
+  "descriptive_only": true,
+  "paired_bootstrap": {
+    "ci95": [
+      0.1750145605302984,
+      0.4563441637280621
+    ],
+    "delta_definition": "V2_FL_pooled_AUPRC - V1_FL_pooled_AUPRC (each at its own selected best round)",
+    "fraction_replicates_delta_positive": 1.0,
+    "mean_delta": 0.332472649625305,
+    "method": "PATIENT_CLUSTER_PERCENTILE_95_V1 (existing framework), paired on identical draws",
+    "replicates": 2000,
+    "role": "DESCRIPTIVE_DEVELOPMENT_EVIDENCE_NOT_A_PROMOTION_CRITERION",
+    "seed": 20260927,
+    "validation_patient_groups": 7
+  },
+  "parameter_count": {
+    "V1": 13185,
+    "V2": 57553
+  },
+  "patient_macro_F1": {
+    "V1": 0.3081050674007343,
+    "V2": 0.4443151291273608
+  },
+  "round_0_AUPRC": {
+    "V1": 0.19231112419494034,
+    "V2": 0.25769234928353735
+  },
+  "round_50_AUPRC": {
+    "V1": 0.400224070046962,
+    "V2": 0.8268321691589757
+  },
+  "runtime": {
+    "V1": "not recorded consistently in T025 (not comparable)",
+    "V2_total_round_wall_seconds": 3689.7
+  },
+  "sensitivity_at_0_5": {
+    "V1": 1.0,
+    "V2": 0.8372781065088757
+  },
+  "specificity_at_0_5": {
+    "V1": 0.0,
+    "V2": 0.8357531760435571
+  },
+  "update_bytes_per_round_each_direction": {
+    "V1": 434912,
+    "V2": 1926624
+  },
+  "v2_protocol_not_modified_by_this_comparison": true
+}

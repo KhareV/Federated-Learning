@@ -13,3 +13,4 @@ V2G10,Explainability,Error analysis on frozen V2 second-look outputs.,V2-011,,,,
 V2G11,Runtime Binding,"GATEWAY_ARTIFACT_V2 export/equivalence, additive only, gated on runtime-acceptance guardrails.",V2-012,,,,,,V2-013,PASS,reports/model_v2/v2_012/run_manifest.json
 V2G12,Integration,"API_RUNTIME_V2/frontend/replay integration, additive only.",V2-013,,,,,,V2-014,PASS,reports/model_v2/v2_013/run_manifest.json
 V2G13,Clean Reproducibility,Clean-environment reproducibility proof for the full MODEL_V2 lineage.,V2-014,,,,,,,NOT_STARTED,
+V2FLG0,Federated IID,"MODEL_V2 IID FedAvg on real MIT-BIH TRAIN patients (development validation only).",V2-FL-001,,,,,,V2-FL-002,PASS,reports/model_v2/v2_fl_001/run_manifest.json

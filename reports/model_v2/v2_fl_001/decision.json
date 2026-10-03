@@ -1,0 +1,7 @@
+{
+  "integrity_finite_complete": true,
+  "outcome": "PASS",
+  "stable_convergence_flag": true,
+  "v2_best_below_historical_v1_best": false,
+  "warning_rule": "predeclared: stable_convergence false OR best V2 AUPRC < historical V1 FL best AUPRC; no retuning in either case"
+}

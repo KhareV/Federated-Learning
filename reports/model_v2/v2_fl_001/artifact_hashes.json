@@ -1,0 +1,31 @@
+{
+  "artifacts": {
+    "reports/model_v2/v2_fl_001/aggregation_parity.json": "a8153ec222abb17ea954e1593a284b3ce0254ce72e4cbab1d32a393d777551fe",
+    "reports/model_v2/v2_fl_001/client_manifest_audit.json": "b9d71fa0d3e7326235a0a72bf6adb1a6d6e8f46202eb85d02b44ca13bafd90cb",
+    "reports/model_v2/v2_fl_001/client_rounds.csv": "c635edfd158fd2c405ac2ad9ef5a1118d2528b1a4a83ff5f2e9b4c5971ea9204",
+    "reports/model_v2/v2_fl_001/decision.json": "b86ec2da5f11d6ca5ee99165be61113643020dac11010363aee9d413cad93571",
+    "reports/model_v2/v2_fl_001/final_handoff.md": "3ae14250076c518cb5f6d3473d24180d64bb8378d553d1e299af0ae8c9ad8038",
+    "reports/model_v2/v2_fl_001/fl_iid_model_v2_result.json": "33004eccf78507a31c5870e622512f69493d03b4e14ee0dbed8013af5076e5a4",
+    "reports/model_v2/v2_fl_001/heldout_firewall_audit.json": "42503bd3a85124ef3efc6866abf0507041be82fbbc54b93584282578eb95f889",
+    "reports/model_v2/v2_fl_001/initialization_audit.json": "14b0adca0cb49bad6c272e4596435475d2d28431528a306f1dd06bb5cf621c66",
+    "reports/model_v2/v2_fl_001/local_training_equivalence.json": "4333b52deaa288ef48d298a2815d525123170c0259a23416362f45a60a5f7baa",
+    "reports/model_v2/v2_fl_001/method_commit.txt": "6895618ab624b34c55546971ca282fcbb4f37001194376ef9db1140c95f247af",
+    "reports/model_v2/v2_fl_001/method_freeze.json": "8b8973195f80e6186336fdd39450f2930b09ef0e0738253e40770562e62f0e17",
+    "reports/model_v2/v2_fl_001/method_immutability_audit.json": "94c70a15e5e0867afd670773429bf57fc1e3ccadeb3417ab2f346304bfdd9116",
+    "reports/model_v2/v2_fl_001/paired_bootstrap_v2_vs_v1_fl.json": "5fee99aa78bb7862e58cee64c8c59f670445991a6999dbcfc77a319444722d33",
+    "reports/model_v2/v2_fl_001/pre_export_regression.json": "5562c7774d11e690c6a3ff8fa7a1edc245f12df6c58ddb8504934ca58bc85332",
+    "reports/model_v2/v2_fl_001/protected_artifact_audit.json": "23948eb24c6ac50bd4d848c48ab7983118a1aad6c5019d490dcda41c33090dd4",
+    "reports/model_v2/v2_fl_001/protected_baseline.json": "6226f3e8d5f9fa11f5a6c4d620532320415786287f73d7dffe082a589ccf15a9",
+    "reports/model_v2/v2_fl_001/regression_audit.json": "329b1e48f7b7be7e5eded3c59211b45c61b6ebd64eb54cf5aa3dd6daf193905e",
+    "reports/model_v2/v2_fl_001/replay_verification_run_1.json": "6c2eb2c09fc121205dc81a23577cf96447cdb1ecbd51203a5429ad2d1307fd18",
+    "reports/model_v2/v2_fl_001/replay_verification_run_2.json": "53fb97beafa83c217a397615f39345fcd27603fcce7123840d529f38f46ad427",
+    "reports/model_v2/v2_fl_001/reproducibility.json": "6d173772b18ed5f68def5712b7317ed1bdae97cee80b78599e0d66743f62f3b3",
+    "reports/model_v2/v2_fl_001/round_log.csv": "125531bbbfd02776cd3279a32800a4bfcaf8616ee63a536ce30f58d3de31f0f4",
+    "reports/model_v2/v2_fl_001/run_manifest.json": "c64bfcbddd3385b5c0cb250221a8ab6876f28cf4f58c16dacba8f8a8b3332ede",
+    "reports/model_v2/v2_fl_001/stability_audit.json": "7971a4e8bc70968eb08ebca871adf766ba231310997f91e7d9a87dc095dbdec5",
+    "reports/model_v2/v2_fl_001/state_transport_audit.json": "ea54d5ceac735061c61849ec55cf859d95afd63f46635c25fe88e8f24257f99b",
+    "reports/model_v2/v2_fl_001/v1_vs_v2_iid_comparison.json": "6ecde676c7d9249e4848af3ab6edb4a05ef5bf00dc35d8e5b525035e3c1e3595",
+    "reports/model_v2/v2_fl_001/validation_patient_metrics_best_round.json": "1fd87f6a2e953efa1eadf5d2dbb74f0df84be5d03e4cd779d14824545edc3a06",
+    "reports/model_v2/v2_fl_001/validation_predictions_best_round.csv": "e42314ee4eee8d535a0ac0fe769a869b9115fdd2b67d92c600bafe875c8aa720"
+  }
+}

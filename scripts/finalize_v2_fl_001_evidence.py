@@ -162,6 +162,13 @@ def main() -> None:
     method = method_immutability()
     protected, firewall = protected_and_firewall()
     replays = [_load(f"replay_verification_{n}.json") for n in ("run_1", "run_2")]
+    if "--audits-only" in sys.argv:
+        repro_only = {"replay_runs": replays, "status": "PASS" if all(
+            r["status"] == "PASS" for r in replays) else "FAIL"}
+        _write("reproducibility.json", repro_only)
+        decision(table, v2)
+        print("audits written")
+        return
     chunked = _load("pre_export_regression.json")
     checks = {
         "ruff": subprocess.run([sys.executable, "-m", "ruff", "check", "src", "tests", "scripts",

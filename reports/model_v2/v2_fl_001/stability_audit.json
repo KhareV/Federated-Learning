@@ -1,0 +1,20 @@
+{
+  "aggregation_failures": 0,
+  "best_round": 38,
+  "best_validation_AUPRC": 0.8669476403992936,
+  "client_updates_expected": 400,
+  "client_updates_received": 400,
+  "clients_expected_per_round": 8,
+  "failed_clients": 0,
+  "final_round_AUPRC": 0.8268321691589757,
+  "improvement_over_round_0": 0.6092552911157563,
+  "maximum_update_norm": 18.031248010547063,
+  "minimum_update_norm": 3.2652755378093605,
+  "nonfinite_metric_count": 0,
+  "nonfinite_tensor_count": 0,
+  "reason": "all predeclared criteria passed",
+  "round_0_validation_AUPRC": 0.25769234928353735,
+  "rounds_completed": 50,
+  "rounds_expected": 50,
+  "stable_convergence": true
+}

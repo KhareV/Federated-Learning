@@ -1,0 +1,14 @@
+{
+  "ci95": [
+    0.1750145605302984,
+    0.4563441637280621
+  ],
+  "delta_definition": "V2_FL_pooled_AUPRC - V1_FL_pooled_AUPRC (each at its own selected best round)",
+  "fraction_replicates_delta_positive": 1.0,
+  "mean_delta": 0.332472649625305,
+  "method": "PATIENT_CLUSTER_PERCENTILE_95_V1 (existing framework), paired on identical draws",
+  "replicates": 2000,
+  "role": "DESCRIPTIVE_DEVELOPMENT_EVIDENCE_NOT_A_PROMOTION_CRITERION",
+  "seed": 20260927,
+  "validation_patient_groups": 7
+}
