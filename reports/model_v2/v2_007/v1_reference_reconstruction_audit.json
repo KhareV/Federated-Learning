@@ -1,0 +1,28 @@
+{
+  "all_historical_values_reproduced": true,
+  "classification": "RECONSTRUCTION_VERIFIED",
+  "expected_three_seed_mean_auprc": 0.49827972496232814,
+  "mean_match": true,
+  "per_seed": {
+    "20260927": {
+      "expected_auprc": 0.5328607838787021,
+      "match": true,
+      "reconstructed_auprc": 0.5328607838787021,
+      "reconstructed_auroc": 0.7669923699782
+    },
+    "20260928": {
+      "expected_auprc": 0.4794350072114173,
+      "match": true,
+      "reconstructed_auprc": 0.4794350072114173,
+      "reconstructed_auroc": 0.7192476830721979
+    },
+    "20260929": {
+      "expected_auprc": 0.4825433837968652,
+      "match": true,
+      "reconstructed_auprc": 0.4825433837968652,
+      "reconstructed_auroc": 0.74443923903822
+    }
+  },
+  "reconstructed_three_seed_mean_auprc": 0.49827972496232814,
+  "status": "PASS"
+}

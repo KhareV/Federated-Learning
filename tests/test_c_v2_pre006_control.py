@@ -63,12 +63,13 @@ def test_v2_007_wording_reflects_frozen_protocol() -> None:
     # checkpoint-selection claim; C-V2-PRE006-CLOSEOUT corrected it one way, and
     # C-V2-PRE006-AUTHORITY-REPAIR has since corrected it again (a dedicated TRAIN-only final
     # inner split, per the self-contained MODEL_V2 authority contract). The exact wording has
-    # now legitimately changed twice; this test only guards that V2-007 remains NOT_STARTED
-    # and still references its governing protocol, not any specific superseded phrasing.
+    # now legitimately changed twice (and V2-007 has since legitimately run and passed); this
+    # test only guards that it still references its governing protocol, not any specific
+    # superseded phrasing or status.
     tasks, _ = _registry()
     notes = tasks["V2-007"]["notes"]
     assert "MODEL_V2_RESEARCH_PROTOCOL_V3" in notes
-    assert tasks["V2-007"]["status"] == "NOT_STARTED"
+    assert tasks["V2-007"]["status"] in {"NOT_STARTED", "PASS"}
 
 
 def test_future_task_and_gate_rows_all_not_started() -> None:
@@ -86,13 +87,13 @@ def test_future_task_and_gate_rows_all_not_started() -> None:
     tasks, gates = _registry()
     for n in range(6, 15):
         task_id = f"V2-{n:03d}"
-        if task_id == "V2-006":
+        if task_id in {"V2-006", "V2-007"}:
             assert tasks[task_id]["status"] in {"NOT_STARTED", "PASS"}
         else:
             assert tasks[task_id]["status"] == "NOT_STARTED"
     for n in range(5, 14):
         gate_id = f"V2G{n}"
-        if gate_id == "V2G5":
+        if gate_id in {"V2G5", "V2G6"}:
             assert gates[gate_id] in {"NOT_STARTED", "PASS"}
         else:
             assert gates[gate_id] == "NOT_STARTED"

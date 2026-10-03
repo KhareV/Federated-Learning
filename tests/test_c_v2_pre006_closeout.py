@@ -58,8 +58,9 @@ def test_v2_007_wording_reflects_actual_role_semantics() -> None:
     # only guards the historical evidence snapshot this checkpoint actually produced
     # (v2_007_registry_semantic_audit.json, read by test_official_validation_role_not_falsely_
     # denied below), not the live registry text, which has since legitimately changed again.
+    # V2-007 has since legitimately run and passed -- guard only against an invalid value.
     tasks, _ = _registry()
-    assert tasks["V2-007"]["status"] == "NOT_STARTED"
+    assert tasks["V2-007"]["status"] in {"NOT_STARTED", "PASS"}
 
 
 def test_official_validation_role_not_falsely_denied() -> None:

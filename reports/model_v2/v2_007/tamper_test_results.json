@@ -1,0 +1,25 @@
+{
+  "all_tampers_detected": true,
+  "canonical_artifacts_mutated": false,
+  "checks": {
+    "B_not_2000_detected": true,
+    "architecture_source_change": true,
+    "bootstrap_seed_change_detected": true,
+    "checkpoint_sha_change": true,
+    "final_train_manifest_change": true,
+    "finalist_selection_mutation_detected": true,
+    "guard_shows_completed_not_resettable_without_file_delete": true,
+    "official_validation_used_for_checkpoint_selection": true,
+    "one_shot_guard_reset_attempt_blocked": true,
+    "prediction_table_mutation_detected": true,
+    "promotion_decision_mutation_detected": true,
+    "promotion_threshold_not_0.646_detected": true,
+    "promotion_uses_strict_gt_not_gte": true,
+    "protocol_v3_change": true,
+    "release_seed_not_20260927_detected": true,
+    "shortlist_change": true,
+    "strict_gt_not_gte": true,
+    "validation_bootstrap_draw_change": true
+  },
+  "status": "PASS"
+}

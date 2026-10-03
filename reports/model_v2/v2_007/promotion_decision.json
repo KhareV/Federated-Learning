@@ -1,0 +1,28 @@
+{
+  "criterion_a_mean_auprc_gt_0_646": true,
+  "criterion_b1_release_delta_lower_ci_gt_0": false,
+  "criterion_b2_three_seed_mean_delta_lower_ci_gt_0": true,
+  "decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "no_auroc_hard_gate": true,
+  "no_p_value_gate": true,
+  "no_rf_or_lr_gate": true,
+  "promotion_eligible": false,
+  "release_ci": {
+    "invalid_count": 0,
+    "lower": -0.052370174725249,
+    "upper": 0.5310360993345348,
+    "valid_count": 2000
+  },
+  "release_point_delta_vs_v1": 0.2116981636869386,
+  "release_seed": 20260927,
+  "selected_architecture_id": "MODEL_V2_TCN_MEAN",
+  "selected_finalist": "A",
+  "selected_schedule_id": "CONFIG_V2_TCN_MEAN_ORIGINAL_V1",
+  "three_seed_ci": {
+    "invalid_count": 0,
+    "lower": 0.053446951777224694,
+    "upper": 0.504733599544611,
+    "valid_count": 2000
+  },
+  "three_seed_point_delta_vs_v1": 0.2753374992819335
+}

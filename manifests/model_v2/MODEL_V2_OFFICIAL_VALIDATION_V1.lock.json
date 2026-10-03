@@ -1,0 +1,18 @@
+{
+  "active_protocol_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+  "bootstrap_draws_lock_sha256": "90aaea41f3efb6434b6760c9e4ce50077aac44cd5df179d2de143b21c70b0a18",
+  "change_control": "This lock is never mutated in place. Official VALIDATION was consumed exactly once for MODEL_V2; no successor may re-access it. A corrected downstream analysis requires a new, additive MODEL_V2_OFFICIAL_VALIDATION_V2 successor bound to the same frozen predictions, never a re-score.",
+  "component_id": "MODEL_V2_OFFICIAL_VALIDATION_V1",
+  "final_inner_manifest_sha256": "bb5b4f6f7205fe37d0132ebccaca7889a916b115f5ad096ecc967940421455ce",
+  "git_sha": "418ccbd350f79d49e7a9c070b149e34f941bfeac",
+  "not_a_canonical_freeze_row": true,
+  "not_a_model_v2_final_selection": true,
+  "official_validation_predictions_sha256": "668a186161044e62773b3754bd2618fcf7c4c5d29e15e56ce896ef0c9a0de2ef",
+  "owner_task": "V2-007",
+  "session_count": 1,
+  "shortlist_lock_sha256": "ead027c8ebbe864ced4f740cda923d57688b2bf5233a0d7a27ddf34a0598fb64",
+  "status": "FROZEN_OFFICIAL_VALIDATION_RESULT",
+  "v1_prediction_rows": 8640,
+  "v1_reference_predictions_sha256": "2cc790b7a0d889e57a08638970633ed30b62264709c1a2da4307b7fb32da75f1",
+  "v2_prediction_rows": 17280
+}

@@ -1,0 +1,10 @@
+{
+  "LR_official_validation_auprc": 0.6458789355593425,
+  "RF_official_validation_auprc": 0.799672173430413,
+  "classical_metrics_descriptive_only": true,
+  "no_paired_bootstrap_vs_classical": "comprehensive frozen per-window LR/RF official-VALIDATION prediction tables were not retained historically, so no paired patient-cluster bootstrap vs classical baselines is computed -- this limitation is disclosed, not worked around.",
+  "no_rf_or_lr_promotion_gate": true,
+  "v1_release_seed_auprc": 0.5328607838787021,
+  "v1_release_seed_auroc": 0.7669923699782,
+  "v1_three_seed_mean_auprc": 0.49827972496232814
+}

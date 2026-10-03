@@ -220,7 +220,9 @@ def test_v2_007_registry_matches_v3_contract() -> None:
     assert "FINAL_INNER_VALIDATION" in notes
     assert "never provides gradient updates" in notes
     assert "never determines pos_weight" in notes
-    assert tasks["V2-007"]["status"] == "NOT_STARTED"
+    # V2-007 has since legitimately run and passed; this test only guards that the registry
+    # notes still state the frozen role contract accurately (checked above), not the status.
+    assert tasks["V2-007"]["status"] in {"NOT_STARTED", "PASS"}
 
 
 def test_v2_008_registry_matches_v3_contract() -> None:

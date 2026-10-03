@@ -1,0 +1,17 @@
+{
+  "a_mean_auprc": 0.8086192899710433,
+  "a_params": 57553,
+  "a_seed_sd": 0.031126887385737517,
+  "b_mean_auprc": 0.7958589867395532,
+  "b_params": 57577,
+  "b_seed_sd": 0.09694966934092629,
+  "bootstrap_se": 0.04630109999793246,
+  "delta_b_minus_a": -0.012760303231490022,
+  "selected_architecture_id": "MODEL_V2_TCN_MEAN",
+  "selected_finalist": "A",
+  "selected_schedule_id": "CONFIG_V2_TCN_MEAN_ORIGINAL_V1",
+  "selected_three_seed_mean_auprc": 0.8086192899710433,
+  "selection_reason": "within_one_SE_tie_break:fewer_trainable_parameters",
+  "tie_break_path": "fewer_trainable_parameters",
+  "within_one_se": true
+}

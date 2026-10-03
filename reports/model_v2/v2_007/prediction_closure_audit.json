@@ -1,0 +1,75 @@
+{
+  "expected_v1_rows": 8640,
+  "expected_v2_rows": 17280,
+  "status": "PASS",
+  "total_v1_rows": 8640,
+  "total_v2_rows": 17280,
+  "v1_seed_closures": {
+    "20260927": {
+      "duplicates": 0,
+      "groups": 7,
+      "negative": 2204,
+      "positive": 676,
+      "windows": 2880
+    },
+    "20260928": {
+      "duplicates": 0,
+      "groups": 7,
+      "negative": 2204,
+      "positive": 676,
+      "windows": 2880
+    },
+    "20260929": {
+      "duplicates": 0,
+      "groups": 7,
+      "negative": 2204,
+      "positive": 676,
+      "windows": 2880
+    }
+  },
+  "v2_config_closures": {
+    "V2-007-TCNMEAN-S20260927": {
+      "duplicates": 0,
+      "groups": 7,
+      "negative": 2204,
+      "positive": 676,
+      "windows": 2880
+    },
+    "V2-007-TCNMEAN-S20260928": {
+      "duplicates": 0,
+      "groups": 7,
+      "negative": 2204,
+      "positive": 676,
+      "windows": 2880
+    },
+    "V2-007-TCNMEAN-S20260929": {
+      "duplicates": 0,
+      "groups": 7,
+      "negative": 2204,
+      "positive": 676,
+      "windows": 2880
+    },
+    "V2-007-TCNMEANMAX-S20260927": {
+      "duplicates": 0,
+      "groups": 7,
+      "negative": 2204,
+      "positive": 676,
+      "windows": 2880
+    },
+    "V2-007-TCNMEANMAX-S20260928": {
+      "duplicates": 0,
+      "groups": 7,
+      "negative": 2204,
+      "positive": 676,
+      "windows": 2880
+    },
+    "V2-007-TCNMEANMAX-S20260929": {
+      "duplicates": 0,
+      "groups": 7,
+      "negative": 2204,
+      "positive": 676,
+      "windows": 2880
+    }
+  },
+  "violations": []
+}

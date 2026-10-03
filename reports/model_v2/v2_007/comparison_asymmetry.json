@@ -1,0 +1,6 @@
+{
+  "asymmetry_retrospectively_corrected": false,
+  "disclosure": "Historical MODEL_V1 used official VALIDATION during training for early stopping/checkpoint selection (T015, partition_contract.VALIDATION = MODEL_SELECTION_EARLY_STOPPING_ONLY). MODEL_V2 (V2-007) used a TRAIN-only FINAL_INNER_VALIDATION split and saw official VALIDATION only once, after its six checkpoints were already fixed. The V1-vs-V2 official-validation comparison is therefore not methodologically symmetric and slightly favors V1 (V1's checkpoint was itself selected using the data being compared on).",
+  "status": "DISCLOSED",
+  "v1_retrained_under_v2_protocol": false
+}

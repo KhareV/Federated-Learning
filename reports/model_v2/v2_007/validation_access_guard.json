@@ -1,6 +1,14 @@
 {
   "armed_at": "2026-10-03T13:59:16.645428Z",
   "armed_git_sha": "fa958e87f5bfac3c4b4cc1d04ec546295f04fe60",
+  "completed_at": "2026-10-03T15:57:18.088943Z",
+  "completed_git_sha": "418ccbd350f79d49e7a9c070b149e34f941bfeac",
+  "completion_summary": {
+    "v1_prediction_rows": 8640,
+    "v1_predictions_sha256": "2cc790b7a0d889e57a08638970633ed30b62264709c1a2da4307b7fb32da75f1",
+    "v2_prediction_rows": 17280,
+    "v2_predictions_sha256": "668a186161044e62773b3754bd2618fcf7c4c5d29e15e56ce896ef0c9a0de2ef"
+  },
   "preconditions": {
     "bootstrap_draws_sha256": "00e597315c9d21184936f80d85b3af9795fc2b836f2335ef6c6279d88cd2de42",
     "final_inner_manifest_sha256": "bb5b4f6f7205fe37d0132ebccaca7889a916b115f5ad096ecc967940421455ce",
@@ -8,5 +16,7 @@
     "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
     "shortlist_lock_sha256": "ead027c8ebbe864ced4f740cda923d57688b2bf5233a0d7a27ddf34a0598fb64"
   },
-  "state": "ARMED"
+  "running_at": "2026-10-03T15:56:09.338857Z",
+  "running_git_sha": "418ccbd350f79d49e7a9c070b149e34f941bfeac",
+  "state": "COMPLETED"
 }

@@ -1,0 +1,19 @@
+{
+  "change_control": "This lock is never mutated in place. A corrected validation decision requires a new, additive MODEL_V2_VALIDATION_DECISION_V2 successor with this lock preserved byte-identical as its predecessor. V2-008 owns any MODEL_V2_FINAL freeze/disposition decision; this lock makes no such freeze.",
+  "component_id": "MODEL_V2_VALIDATION_DECISION_V1",
+  "finalist_selection_sha256": "b56cc49f74fdda5b73af2253d8cf1deb2e936537a08eee5c5bd2425f7e9c3107",
+  "git_sha": "418ccbd350f79d49e7a9c070b149e34f941bfeac",
+  "not_a_canonical_freeze_row": true,
+  "not_a_model_v2_final_freeze": true,
+  "official_validation_lock_sha256": "a5293cd79fe063276cbedfc16c852abbad806833b394e81b867b70dacd477853",
+  "owner_task": "V2-007",
+  "promotion_decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "promotion_decision_sha256": "cc2013973752923db9d6477dc9ba7273b661a0b72a5e1ddcc2cdb9892fd2cf29",
+  "promotion_eligible": false,
+  "release_seed": 20260927,
+  "selected_architecture_id": "MODEL_V2_TCN_MEAN",
+  "selected_finalist": "A",
+  "selected_schedule_id": "CONFIG_V2_TCN_MEAN_ORIGINAL_V1",
+  "selected_three_seed_mean_auprc": 0.8086192899710433,
+  "status": "FROZEN_VALIDATION_DECISION"
+}

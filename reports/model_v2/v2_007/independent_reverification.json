@@ -1,0 +1,25 @@
+{
+  "matches_frozen": {
+    "a_mean_auprc": true,
+    "b_mean_auprc": true,
+    "decision": true,
+    "release_lower_sign": true,
+    "selected_finalist": true,
+    "three_seed_lower_sign": true,
+    "v1_mean_auprc": true
+  },
+  "method_note": "Independent minimal reimplementation (sklearn average_precision_score called directly on pooled rows, bootstrap pooling/percentile reimplemented from scratch); does not import aggregate_v2_007.py/bootstrap_v2_007.py/decide_v2_007.py.",
+  "reverified_a_mean_auprc": 0.8086192899710433,
+  "reverified_a_sd": 0.031126887385737517,
+  "reverified_b_mean_auprc": 0.7958589867395532,
+  "reverified_b_sd": 0.09694966934092629,
+  "reverified_bootstrap_se": 0.04630109999793246,
+  "reverified_decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "reverified_delta_b_minus_a": -0.012760303231490022,
+  "reverified_release_ci_lower": -0.052370174725249,
+  "reverified_selected_finalist": "A",
+  "reverified_three_seed_ci_lower": 0.053446951777224694,
+  "reverified_v1_three_seed_mean": 0.49827972496232814,
+  "reverified_within_one_se": true,
+  "status": "PASS"
+}
