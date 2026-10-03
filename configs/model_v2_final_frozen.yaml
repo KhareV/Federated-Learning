@@ -1,0 +1,49 @@
+model_id: MODEL_V2_FINAL
+parent_architecture: MODEL_V2_TCN_MEAN
+schedule_id: CONFIG_V2_TCN_MEAN_ORIGINAL_V1
+release_seed: 20260927
+selected_epoch: 5
+parameter_count: 57553
+input_shape:
+- 1
+- 2500
+sampling_rate_hz: 250
+window_seconds: 10
+stride_seconds: 5
+target: AAMI_SVF_WINDOW_V1
+label_map: AAMI_SVF_MAP_V1
+preprocessing: PREPROC_V1
+neural_normalization: PER_WINDOW_ZSCORE_V1
+normalization_formula: (x - mean(x)) / (std(x) + 1e-8)
+output: RAW_LOGIT
+probability: SIGMOID_ONCE
+calibration: NONE_YET
+operating_threshold: NONE_YET
+protocol_v3_lock_sha256: 287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8
+shortlist_lock_sha256: ead027c8ebbe864ced4f740cda923d57688b2bf5233a0d7a27ddf34a0598fb64
+official_validation_lock_sha256: a5293cd79fe063276cbedfc16c852abbad806833b394e81b867b70dacd477853
+validation_decision_lock_sha256: 37ea168353d742c4d7c9bb17879f824754c4b8b92842d8cdf3566483b2d57335
+final_inner_manifest_sha256: bb5b4f6f7205fe37d0132ebccaca7889a916b115f5ad096ecc967940421455ce
+architecture_source_sha256: 2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0
+inference_source_sha256: 00d113053dc759fc66c33241e9227240212a52935ebed49f824b9137a4d3cf9d
+checkpoint:
+  path: checkpoints/MODEL_V2_FINAL.pt
+  sha256: 89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b
+source_checkpoint:
+  path: checkpoints/model_v2/v2_007_official_validation/V2-007-TCNMEAN-S20260927_best.pt
+  sha256: 89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b
+  byte_identical: true
+official_validation_promotion_eligible: false
+official_validation_promotion_decision: MODEL_V2_NOT_PROMOTED_RELEASE_CI
+operational_lineage: MODEL_V1
+runtime_acceptance: NOT_EVALUATED
+scientific_final_frozen: true
+status: FROZEN
+reference_runtime:
+  python: 3.11.16
+  torch: 2.14.0
+  device: cpu
+change_control: This frozen config is never mutated in place. A corrected scientific
+  freeze requires a new, additive MODEL_V2_FINAL_V2 successor; this is never an operational
+  promotion change -- that requires a separate runtime-acceptance decision (V2-010)
+  which this freeze does not make.

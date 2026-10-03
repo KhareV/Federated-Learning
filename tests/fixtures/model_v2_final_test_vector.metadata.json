@@ -1,0 +1,43 @@
+{
+  "atol": 1e-07,
+  "byte_identical_regeneration": true,
+  "checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "expected_logit_dtype": "float32",
+  "expected_logit_shape": [
+    3,
+    1
+  ],
+  "expected_logits": [
+    [
+      1.6370497941970825
+    ],
+    [
+      -4.964743614196777
+    ],
+    [
+      -0.08284634351730347
+    ]
+  ],
+  "first_generation_sha256": "adabc8f053ce05c6e6e35e6268f1803bdb68d1043f6b5aaf665daf9c3dce8d6e",
+  "frozen_config_sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+  "generator_version": "V2008_V1",
+  "logit_tolerance_id": "MODEL_V2_FINAL_LOGIT_TOLERANCE_V1",
+  "normalization_epsilon": 1e-08,
+  "normalization_id": "PER_WINDOW_ZSCORE_V1",
+  "normalized_input_shape": [
+    3,
+    1,
+    2500
+  ],
+  "npz_sha256": "adabc8f053ce05c6e6e35e6268f1803bdb68d1043f6b5aaf665daf9c3dce8d6e",
+  "number_of_vectors": 3,
+  "patient_data": false,
+  "raw_shape": [
+    3,
+    2500
+  ],
+  "rtol": 1e-07,
+  "second_generation_sha256": "adabc8f053ce05c6e6e35e6268f1803bdb68d1043f6b5aaf665daf9c3dce8d6e",
+  "synthetic": true,
+  "test_vector_id": "MODEL_V2_FINAL_SYNTHETIC_TEST_VECTOR_V1"
+}

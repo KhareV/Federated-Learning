@@ -151,11 +151,15 @@ def test_v2_006_and_v2g5_not_regressed() -> None:
 
 
 def test_model_v2_final_and_cal_v2_absent() -> None:
+    # MODEL_V2_FINAL has since legitimately frozen at V2-008 (scientific freeze, not
+    # operational promotion); this test only guards against an invalid status value for it.
+    # CAL_V2 must still be exactly absent -- V2-009 owns that freeze.
     with (ROOT / "manifests/model_v2/component_registry_v1.csv").open(newline="") as handle:
         rows = list(csv.DictReader(handle))
-    for component_id in ("MODEL_V2_FINAL", "CAL_V2"):
-        row = next(r for r in rows if r["component_id"] == component_id)
-        assert row["status"] == "NOT_STARTED"
+    model_v2_final = next(r for r in rows if r["component_id"] == "MODEL_V2_FINAL")
+    assert model_v2_final["status"] in {"NOT_STARTED", "FROZEN"}
+    cal_v2 = next(r for r in rows if r["component_id"] == "CAL_V2")
+    assert cal_v2["status"] == "NOT_STARTED"
 
 
 def test_no_waveform_access_or_fits_occurred() -> None:

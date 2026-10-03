@@ -1,0 +1,23 @@
+{
+  "atol": 1e-07,
+  "dtype": "float64 (raw) / float32 (normalized + logits)",
+  "npz_sha256": "adabc8f053ce05c6e6e35e6268f1803bdb68d1043f6b5aaf665daf9c3dce8d6e",
+  "number_of_vectors": 3,
+  "patient_data": false,
+  "rtol": 1e-07,
+  "shape": [
+    3,
+    1,
+    2500
+  ],
+  "status": "PASS",
+  "test_vector_id": "MODEL_V2_FINAL_SYNTHETIC_TEST_VECTOR_V1",
+  "vector_0_all_zero": true,
+  "vector_1_nonconstant": true,
+  "vector_2_nonconstant": true,
+  "vector_ids": [
+    "SYNTH_ALL_ZEROS_V1",
+    "SYNTH_ANALYTIC_SINUSOID_V1",
+    "SYNTH_FIXED_SEED_PRNG_V1"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "architecture_id": "MODEL_V2_TCN_MEAN",
+  "calibration_id": null,
+  "checkpoint": {
+    "path": "checkpoints/MODEL_V2_FINAL.pt",
+    "sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b"
+  },
+  "checkpoint_size_bytes": 264763,
+  "frozen_config": {
+    "path": "configs/model_v2_final_frozen.yaml",
+    "sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df"
+  },
+  "label_map_id": "AAMI_SVF_MAP_V1",
+  "model_id": "MODEL_V2_FINAL",
+  "official_validation_lock_sha256": "a5293cd79fe063276cbedfc16c852abbad806833b394e81b867b70dacd477853",
+  "operating_threshold": null,
+  "operational_lineage": "MODEL_V1",
+  "operational_status": "NOT_OPERATIONAL",
+  "overall_status": "PASS",
+  "parameter_count": 57553,
+  "preproc_id": "PREPROC_V1",
+  "promotion_decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "promotion_eligible": false,
+  "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+  "python_version": "3.11.16",
+  "release_seed": 20260927,
+  "runtime_acceptance": "NOT_EVALUATED",
+  "schedule_id": "CONFIG_V2_TCN_MEAN_ORIGINAL_V1",
+  "scientific_status": "FROZEN",
+  "selected_epoch": 5,
+  "shortlist_lock_sha256": "ead027c8ebbe864ced4f740cda923d57688b2bf5233a0d7a27ddf34a0598fb64",
+  "source_checkpoint": {
+    "byte_identical": true,
+    "path": "checkpoints/model_v2/v2_007_official_validation/V2-007-TCNMEAN-S20260927_best.pt",
+    "sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b"
+  },
+  "status": "FROZEN",
+  "target_id": "AAMI_SVF_WINDOW_V1",
+  "test_vector": {
+    "logit_atol": 1e-07,
+    "logit_rtol": 1e-07,
+    "metadata_path": "tests/fixtures/model_v2_final_test_vector.metadata.json",
+    "path": "tests/fixtures/model_v2_final_test_vector.npz",
+    "sha256": "adabc8f053ce05c6e6e35e6268f1803bdb68d1043f6b5aaf665daf9c3dce8d6e",
+    "test_vector_id": "MODEL_V2_FINAL_SYNTHETIC_TEST_VECTOR_V1"
+  },
+  "torch_version": "2.14.0",
+  "upstream_sha256": {
+    "manifests/model_v2/MODEL_V2_FINALIST_SHORTLIST_V1.lock.json": "ead027c8ebbe864ced4f740cda923d57688b2bf5233a0d7a27ddf34a0598fb64",
+    "manifests/model_v2/MODEL_V2_OFFICIAL_VALIDATION_V1.lock.json": "a5293cd79fe063276cbedfc16c852abbad806833b394e81b867b70dacd477853",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V3.lock.json": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "manifests/model_v2/MODEL_V2_VALIDATION_BOOTSTRAP_DRAWS_V1.lock.json": "90aaea41f3efb6434b6760c9e4ce50077aac44cd5df179d2de143b21c70b0a18",
+    "manifests/model_v2/MODEL_V2_VALIDATION_DECISION_V1.lock.json": "37ea168353d742c4d7c9bb17879f824754c4b8b92842d8cdf3566483b2d57335",
+    "manifests/model_v2/cv/MITDB_TRAIN_FINAL_INNER_V2_V1.csv": "bb5b4f6f7205fe37d0132ebccaca7889a916b115f5ad096ecc967940421455ce",
+    "reports/model_v2/v2_007/finalist_selection.json": "b56cc49f74fdda5b73af2253d8cf1deb2e936537a08eee5c5bd2425f7e9c3107",
+    "reports/model_v2/v2_007/official_validation_predictions.csv": "668a186161044e62773b3754bd2618fcf7c4c5d29e15e56ce896ef0c9a0de2ef",
+    "reports/model_v2/v2_007/promotion_decision.json": "cc2013973752923db9d6477dc9ba7273b661a0b72a5e1ddcc2cdb9892fd2cf29"
+  },
+  "v2_007_continuity_audit_commit": "1c23214f76331fd4cc50b3318e133a164f4c7b58",
+  "validation_decision_lock_sha256": "37ea168353d742c4d7c9bb17879f824754c4b8b92842d8cdf3566483b2d57335"
+}

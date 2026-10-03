@@ -233,7 +233,9 @@ def test_v2_008_registry_matches_v3_contract() -> None:
     assert "lower-95%-CI bound > 0" in notes
     assert "secondary diagnostic" in notes
     assert "NOT an additional hard D5 promotion gate" in notes
-    assert tasks["V2-008"]["status"] == "NOT_STARTED"
+    # V2-008 has since legitimately run and passed; this test only guards that the registry
+    # notes still state the frozen promotion contract accurately (checked above), not status.
+    assert tasks["V2-008"]["status"] in {"NOT_STARTED", "PASS"}
 
 
 def test_component_registry_v3_row_additive() -> None:

@@ -1,0 +1,15 @@
+{
+  "chunking_required": false,
+  "outer_timeout_or_truncation": false,
+  "pip_check_exit_code": 0,
+  "pytest_exit_code": 0,
+  "pytest_tail": [
+    "  /Users/Home/Downloads/miniproject/.venv-t032/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.",
+    "    warnings.warn(",
+    "",
+    "-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+    "1721 passed, 15 warnings in 20.08s"
+  ],
+  "ruff_exit_code": 0,
+  "status": "PASS"
+}

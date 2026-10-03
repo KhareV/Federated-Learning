@@ -1,0 +1,42 @@
+{
+  "expected_logits": [
+    [
+      1.6370497941970825
+    ],
+    [
+      -4.964743614196777
+    ],
+    [
+      -0.08284634351730347
+    ]
+  ],
+  "maximum_absolute_error": 0.0,
+  "maximum_relative_error": 0.0,
+  "process_a_equals_process_b": true,
+  "process_a_logits": [
+    [
+      1.6370497941970825
+    ],
+    [
+      -4.964743614196777
+    ],
+    [
+      -0.08284634351730347
+    ]
+  ],
+  "process_b_logits": [
+    [
+      1.6370497941970825
+    ],
+    [
+      -4.964743614196777
+    ],
+    [
+      -0.08284634351730347
+    ]
+  ],
+  "status": "PASS",
+  "tolerance_atol": 1e-07,
+  "tolerance_rtol": 1e-07,
+  "within_tolerance": true
+}

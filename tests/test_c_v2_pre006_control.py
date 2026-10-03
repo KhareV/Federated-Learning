@@ -48,7 +48,8 @@ def test_v2_008_no_longer_contains_obsolete_promotion_gate() -> None:
     assert "0.5628607838787021" not in notes
     assert "0.646" in notes
     assert "lower-95%-CI" in notes or "lower_95_ci" in notes.lower().replace("-", "_")
-    assert tasks["V2-008"]["status"] == "NOT_STARTED"
+    # V2-008 has since legitimately run and passed; this test only guards the content above.
+    assert tasks["V2-008"]["status"] in {"NOT_STARTED", "PASS"}
 
 
 def test_known_registry_contradiction_was_confirmed_and_corrected() -> None:
@@ -87,13 +88,13 @@ def test_future_task_and_gate_rows_all_not_started() -> None:
     tasks, gates = _registry()
     for n in range(6, 15):
         task_id = f"V2-{n:03d}"
-        if task_id in {"V2-006", "V2-007"}:
+        if task_id in {"V2-006", "V2-007", "V2-008"}:
             assert tasks[task_id]["status"] in {"NOT_STARTED", "PASS"}
         else:
             assert tasks[task_id]["status"] == "NOT_STARTED"
     for n in range(5, 14):
         gate_id = f"V2G{n}"
-        if gate_id in {"V2G5", "V2G6"}:
+        if gate_id in {"V2G5", "V2G6", "V2G7"}:
             assert gates[gate_id] in {"NOT_STARTED", "PASS"}
         else:
             assert gates[gate_id] == "NOT_STARTED"

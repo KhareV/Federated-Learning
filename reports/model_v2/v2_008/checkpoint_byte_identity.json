@@ -1,0 +1,76 @@
+{
+  "architecture_verified": true,
+  "data_access_counts": {
+    "BIDMC": 0,
+    "CALIBRATION": 0,
+    "INCART": 0,
+    "INTERNAL_TEST": 0,
+    "NSTDB": 0,
+    "TRAIN": 0,
+    "VALIDATION": 0,
+    "WEARABLE": 0
+  },
+  "expected_logits": [
+    [
+      1.6370497941970825
+    ],
+    [
+      -4.964743614196777
+    ],
+    [
+      -0.08284634351730347
+    ]
+  ],
+  "frozen_config_sha256": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+  "maximum_absolute_error": 0.0,
+  "maximum_relative_error": 0.0,
+  "official_validation_promotion_decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "official_validation_promotion_eligible": false,
+  "operational_lineage": "MODEL_V1",
+  "overall_status": "PASS",
+  "parameter_count": 57553,
+  "process_a_logits": [
+    [
+      1.6370497941970825
+    ],
+    [
+      -4.964743614196777
+    ],
+    [
+      -0.08284634351730347
+    ]
+  ],
+  "process_b_logits": [
+    [
+      1.6370497941970825
+    ],
+    [
+      -4.964743614196777
+    ],
+    [
+      -0.08284634351730347
+    ]
+  ],
+  "promotion_byte_identical": true,
+  "runtime_acceptance": "NOT_EVALUATED",
+  "source_checkpoint_exists": true,
+  "source_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "state_dict_identical": true,
+  "task_id": "V2-008",
+  "test_vector_sha256": "adabc8f053ce05c6e6e35e6268f1803bdb68d1043f6b5aaf665daf9c3dce8d6e",
+  "tolerance_atol": 1e-07,
+  "tolerance_rtol": 1e-07,
+  "training_executed": false,
+  "upstream_sha256": {
+    "manifests/model_v2/MODEL_V2_FINALIST_SHORTLIST_V1.lock.json": "ead027c8ebbe864ced4f740cda923d57688b2bf5233a0d7a27ddf34a0598fb64",
+    "manifests/model_v2/MODEL_V2_OFFICIAL_VALIDATION_V1.lock.json": "a5293cd79fe063276cbedfc16c852abbad806833b394e81b867b70dacd477853",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V3.lock.json": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "manifests/model_v2/MODEL_V2_VALIDATION_BOOTSTRAP_DRAWS_V1.lock.json": "90aaea41f3efb6434b6760c9e4ce50077aac44cd5df179d2de143b21c70b0a18",
+    "manifests/model_v2/MODEL_V2_VALIDATION_DECISION_V1.lock.json": "37ea168353d742c4d7c9bb17879f824754c4b8b92842d8cdf3566483b2d57335",
+    "manifests/model_v2/cv/MITDB_TRAIN_FINAL_INNER_V2_V1.csv": "bb5b4f6f7205fe37d0132ebccaca7889a916b115f5ad096ecc967940421455ce",
+    "reports/model_v2/v2_007/finalist_selection.json": "b56cc49f74fdda5b73af2253d8cf1deb2e936537a08eee5c5bd2425f7e9c3107",
+    "reports/model_v2/v2_007/official_validation_predictions.csv": "668a186161044e62773b3754bd2618fcf7c4c5d29e15e56ce896ef0c9a0de2ef",
+    "reports/model_v2/v2_007/promotion_decision.json": "cc2013973752923db9d6477dc9ba7273b661a0b72a5e1ddcc2cdb9892fd2cf29"
+  },
+  "vector_regeneration_byte_identical": true
+}

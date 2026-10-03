@@ -1,0 +1,24 @@
+{
+  "all_detected": true,
+  "canonical_artifact_mutated": false,
+  "checks": {
+    "architecture_change": true,
+    "checkpoint_byte_change": true,
+    "checkpoint_tensor_change": true,
+    "config_byte_change": true,
+    "fixture_byte_change": true,
+    "fixture_expected_logit_change": true,
+    "label_map_change": true,
+    "operational_lineage_change": true,
+    "parameter_count_change": true,
+    "preproc_identity_change": true,
+    "promotion_eligible_flip_true": true,
+    "protocol_v3_hash_change": true,
+    "release_seed_change": true,
+    "runtime_acceptance_premature_accept": true,
+    "schedule_change": true,
+    "selected_epoch_change": true,
+    "target_change": true
+  },
+  "status": "PASS"
+}
