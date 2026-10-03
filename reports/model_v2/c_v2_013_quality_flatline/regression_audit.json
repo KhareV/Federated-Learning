@@ -1,0 +1,40 @@
+{
+  "checks": {
+    "frontend_build": {
+      "command": "npm --prefix frontend run build",
+      "exit_code": 0
+    },
+    "frontend_check": {
+      "command": "npm --prefix frontend run check",
+      "exit_code": 0
+    },
+    "frontend_unit": {
+      "command": "npm --prefix frontend run test",
+      "exit_code": 0
+    },
+    "pip_check": {
+      "command": "/Users/Home/Downloads/miniproject/.venv-t032/bin/python -m pip check",
+      "exit_code": 0
+    },
+    "ruff": {
+      "command": "/Users/Home/Downloads/miniproject/.venv-t032/bin/python -m ruff check src tests scripts simulation deployment fusion api datasets features models training evaluation preprocessing",
+      "exit_code": 0
+    }
+  },
+  "chunked_python_regression": {
+    "chunk_count": 26,
+    "chunk_size": 80,
+    "collected_equals_executed": true,
+    "collected_node_count": 2065,
+    "collected_sorted_node_list_sha256": "1a615ebde66b237254305bfb090d8d866b18c9a3f3e0fdbfb461eacfde0d03a2",
+    "duplicates": 0,
+    "executed_unique_count": 2065,
+    "failed_chunks": 0,
+    "failed_tests": 0,
+    "missing": 0,
+    "status": "PASS",
+    "unexpected": 0
+  },
+  "ci": "deferred; Actions never triggered/queried",
+  "status": "PASS"
+}

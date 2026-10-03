@@ -1,0 +1,23 @@
+{
+  "all_four_digests_identical": true,
+  "digest_run_1": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+  "digest_run_2": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+  "flatline_error_type": [
+    "UNUSABLE_OR_INCOMPLETE_SIGNAL_WINDOW"
+  ],
+  "flatline_windows": 6,
+  "flatline_windows_http_422": 6,
+  "flatline_windows_request_quality": [
+    "UNUSABLE"
+  ],
+  "http_status_counts": {
+    "200": 11,
+    "422": 6
+  },
+  "live_speed_equals_accelerated": true,
+  "model_inference_suppressed": true,
+  "original_v2_013_digest_not_expected_to_match": true,
+  "replay_id": "WEARABLE_SIM_V2_REPLAY_V2_FLATLINE",
+  "status": "PASS",
+  "window_count": 17
+}

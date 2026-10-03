@@ -1,0 +1,48 @@
+{
+  "callers_of_evaluate_ecg_quality": [
+    "evaluation/external_incart.py",
+    "evaluation/noise.py",
+    "evaluation/quality_aware_alerts.py",
+    "preprocessing/mitdb_windows.py",
+    "preprocessing/quality.py",
+    "scripts/run_quality_tests_t013.py",
+    "simulation/stream_runtime_v2013.py",
+    "tests/test_c031_error_analysis.py",
+    "tests/test_quality_v1.py",
+    "tests/test_window_gap_propagation.py"
+  ],
+  "drift": false,
+  "evaluated_on": "the complete 2500-sample window of the FILTERED, resampled 250 Hz ECG (ECGPreprocessingPipeline output); every production caller passes filtered[start:end]",
+  "exact_condition": "signal.size==2500 and all finite and (rms==0.0 or np.std(signal,ddof=0)/rms <= 1e-12)  [preprocessing/quality.py::is_flatline]",
+  "f06_verifier_result": {
+    "status": "PASS"
+  },
+  "flatline_rule": {
+    "method": "POPULATION_STD_DIVIDED_BY_RMS",
+    "parameter_provenance": "NUMERICAL_EPSILON_NOT_DATA_TUNED",
+    "relative_epsilon": 1e-12
+  },
+  "frozen_pin_vs_live_hash": {
+    "configs/quality_v1.yaml": {
+      "live": "66bff78cce663b546d4aabcf3c05344c1c66ad4955c9db220c516766df93be13",
+      "match": true,
+      "pinned": "66bff78cce663b546d4aabcf3c05344c1c66ad4955c9db220c516766df93be13"
+    },
+    "preprocessing/quality.py": {
+      "live": "2af482c1b1411da4a7efb94e68e7a6675ec3c688244873533d7bf5fd93b85da0",
+      "match": true,
+      "pinned": "2af482c1b1411da4a7efb94e68e7a6675ec3c688244873533d7bf5fd93b85da0"
+    }
+  },
+  "parameter": 1e-12,
+  "parameter_is_numerical_epsilon_not_data_derived": true,
+  "quality_id": "QUALITY_V1",
+  "quality_runtime_invocation_v2013": "simulation/stream_runtime_v2013.py::_window passes the filtered window (NaN->0 only for already-flagged missing slots) with gap/clip flags",
+  "reason_code": "FLATLINE",
+  "spec_version": "2.2",
+  "state_precedence": [
+    "UNUSABLE",
+    "DEGRADED",
+    "VALID"
+  ]
+}

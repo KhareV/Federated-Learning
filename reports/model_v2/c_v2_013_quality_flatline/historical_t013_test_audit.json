@@ -1,0 +1,22 @@
+{
+  "conclusion": "The historical tests do call the real production evaluator and prove the written rule on direct synthetic input, so the F06 claim 'flatline rule implemented, tested and frozen' is TRUE as stated. They never feed a constant SOURCE through the frozen resampler/band-pass, so they could not reveal that a constant nonzero source is not flat in the filtered representation, and they do not assert the FLATLINE reason code through evaluate_ecg_quality.",
+  "mocking_detected": false,
+  "pytest_exit_code": 0,
+  "tail": "7 passed in 0.43s",
+  "tests_and_scripts_inspected": [
+    "tests/test_quality_v1.py::test_quality_precedence_and_required_states",
+    "tests/test_quality_v1.py::test_flatline_check_is_scale_safe_for_near_constant_signal",
+    "scripts/run_quality_tests_t013.py (T013 evidence generator)"
+  ],
+  "what_they_exercise": {
+    "above_criterion_negative_control": false,
+    "asserts_flatline_reason_code": false,
+    "asserts_state_unusable": true,
+    "complete_2500_sample_window": true,
+    "exact_constant": "np.ones(2500) only (a constant ONE; no zero, negative or scaled constants through evaluate_ecg_quality)",
+    "input_representation": "directly constructed synthetic arrays; never the output of ECGPreprocessingPipeline (the representation every production caller supplies)",
+    "near_flat_cases": "helper is_flatline only: 2.0 +/- 1e-14 ramp is flat",
+    "production_evaluator_called": "evaluate_ecg_quality(np.ones(2500)) in both test_quality_precedence_and_required_states and run_quality_tests_t013.py",
+    "t013_script_assertions_state_only": true
+  }
+}

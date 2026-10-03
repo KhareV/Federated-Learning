@@ -1,0 +1,14 @@
+{
+  "branch": "A",
+  "branch_text": "QUALITY_V1 is correct; the V2-013 simulator 'flatline' (constant NONZERO source) was not a flatline in the representation QUALITY_V1 evaluates",
+  "exact_cause": "QUALITY_V1 evaluates the FILTERED 250 Hz window. For a constant nonzero source the frozen stateful 360->250 Hz polyphase resampler emits a persistent periodic ripple (relative ~1e-5; 13 distinct values per cycle), which the causal band-pass passes while removing the DC level; the filtered window therefore has std/rms ~ 1.0, far above the frozen 1e-12 criterion, and is never flagged (0 of 42 complete flat-source windows flagged, up to a 1400 s constant source). Only an exactly-zero source stays exactly zero through the chain (rms == 0 -> FLATLINE).",
+  "f06_drift": false,
+  "filtered_decay_probe_first_flagged_end_s_constant_nonzero": null,
+  "frozen_limitation_for_independent_replanning": "The frozen QUALITY_V1 + PREPROC_V1 composition cannot hard-fail a stuck-at-nonzero ECG source. Closing that would be a Class C quality/preprocessing change (e.g. a pre-filter flatline guard) and was deliberately NOT made here.",
+  "mid_stream_zero_latency": "A zero source injected mid-stream is flagged only once the band-pass transient has fully underflowed: first flagged window ends at 375.0 s for zeros starting at 50 s (roughly 315 s of zeros precede that window). Zero from stream start is flagged on every complete window.",
+  "quality_semantics_changed": false,
+  "scientific_example_impact_audit_required": false,
+  "separate_defect_found_and_fixed": "simulation/stream_runtime_v2013.py crashed (zero-size array max) when a chunk produced no resampler output (e.g. a 1-sample tail chunk). Guarded additively; the original 93-window V2-013 bundle is reproduced byte-for-byte; successor lock API_RUNTIME_V2_1.",
+  "status": "PASS",
+  "v2_013_handoff_wording_correction": "The V2-013 sentence 'QUALITY_V1 doesn't flag a flatline fault' overstated the finding: QUALITY_V1 flags exact/numerical flatline of the filtered window (direct tests 11/11 PASS); what it does not flag is a stuck NONZERO source."
+}

@@ -1,0 +1,166 @@
+{
+  "all_match_frozen_contract": true,
+  "cases": {
+    "A_exact_zero": {
+      "epsilon": 1e-12,
+      "expected_flatline": true,
+      "pass": true,
+      "reasons": [
+        "FLATLINE"
+      ],
+      "state": "UNUSABLE",
+      "stats": {
+        "range": 0.0,
+        "rms": 0.0,
+        "std": 0.0,
+        "std_over_rms": null
+      }
+    },
+    "B_constant_positive_0.37": {
+      "epsilon": 1e-12,
+      "expected_flatline": true,
+      "pass": true,
+      "reasons": [
+        "FLATLINE"
+      ],
+      "state": "UNUSABLE",
+      "stats": {
+        "range": 0.0,
+        "rms": 0.37,
+        "std": 1.1102230246251565e-16,
+        "std_over_rms": 3.00060276925718e-16
+      }
+    },
+    "C_constant_negative_-1.9": {
+      "epsilon": 1e-12,
+      "expected_flatline": true,
+      "pass": true,
+      "reasons": [
+        "FLATLINE"
+      ],
+      "state": "UNUSABLE",
+      "stats": {
+        "range": 0.0,
+        "rms": 1.9000000000000001,
+        "std": 0.0,
+        "std_over_rms": 0.0
+      }
+    },
+    "D_constant_1e-9": {
+      "epsilon": 1e-12,
+      "expected_flatline": true,
+      "pass": true,
+      "reasons": [
+        "FLATLINE"
+      ],
+      "state": "UNUSABLE",
+      "stats": {
+        "range": 0.0,
+        "rms": 1e-09,
+        "std": 0.0,
+        "std_over_rms": 0.0
+      }
+    },
+    "D_constant_1e3": {
+      "epsilon": 1e-12,
+      "expected_flatline": true,
+      "pass": true,
+      "reasons": [
+        "FLATLINE"
+      ],
+      "state": "UNUSABLE",
+      "stats": {
+        "range": 0.0,
+        "rms": 1000.0,
+        "std": 0.0,
+        "std_over_rms": 0.0
+      }
+    },
+    "D_constant_1e9": {
+      "epsilon": 1e-12,
+      "expected_flatline": true,
+      "pass": true,
+      "reasons": [
+        "FLATLINE"
+      ],
+      "state": "UNUSABLE",
+      "stats": {
+        "range": 0.0,
+        "rms": 1000000000.0,
+        "std": 0.0,
+        "std_over_rms": 0.0
+      }
+    },
+    "E_near_flat_rel_1e-12_boundary_below": {
+      "epsilon": 1e-12,
+      "expected_flatline": true,
+      "pass": true,
+      "reasons": [
+        "FLATLINE"
+      ],
+      "state": "UNUSABLE",
+      "stats": {
+        "range": 5.000444502911705e-12,
+        "rms": 5.000000000000055,
+        "std": 2.499116909659348e-12,
+        "std_over_rms": 4.998233819318641e-13
+      }
+    },
+    "E_near_flat_rel_1e-13_below": {
+      "epsilon": 1e-12,
+      "expected_flatline": true,
+      "pass": true,
+      "reasons": [
+        "FLATLINE"
+      ],
+      "state": "UNUSABLE",
+      "stats": {
+        "range": 5.999645225074346e-13,
+        "rms": 3.000000000000006,
+        "std": 2.9984977205152566e-13,
+        "std_over_rms": 9.994992401717501e-14
+      }
+    },
+    "F_perturbed_rel_1e-10_above": {
+      "epsilon": 1e-12,
+      "expected_flatline": false,
+      "pass": true,
+      "reasons": [],
+      "state": "VALID",
+      "stats": {
+        "range": 6.000000496442226e-10,
+        "rms": 3.0000000000066,
+        "std": 2.9986739549358244e-10,
+        "std_over_rms": 9.99557984976409e-11
+      }
+    },
+    "F_perturbed_rel_1e-6_above": {
+      "epsilon": 1e-12,
+      "expected_flatline": false,
+      "pass": true,
+      "reasons": [],
+      "state": "VALID",
+      "stats": {
+        "range": 5.9999999995064e-06,
+        "rms": 3.0000000660014985,
+        "std": 2.9986737065777094e-06,
+        "std_over_rms": 9.995578802017972e-07
+      }
+    },
+    "G_normal_ecg_control": {
+      "epsilon": 1e-12,
+      "expected_flatline": false,
+      "pass": true,
+      "reasons": [],
+      "state": "VALID",
+      "stats": {
+        "range": 2.597579904102765,
+        "rms": 0.722841614740048,
+        "std": 0.722841614740048,
+        "std_over_rms": 1.0
+      }
+    }
+  },
+  "no_threshold_invented_or_tuned": true,
+  "status": "PASS"
+}

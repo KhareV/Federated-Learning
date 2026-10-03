@@ -1,0 +1,42 @@
+{
+  "bundle_path": "frontend/static/replay/WEARABLE_SIM_V2_REPLAY_V2_FLATLINE.json",
+  "bundle_sha256": "43059391099344cb00edb6e7c741007864d178bb305215429b045a09f8438dc0",
+  "chunk_records": 360,
+  "ecg_quality_counts": {
+    "UNUSABLE": 6,
+    "VALID": 11
+  },
+  "events_semantic_sha256": "23479991c856783dc0f68f79c9586b18d8f737d81c54a14461f48a341a36421c",
+  "fixture_id": "WEARABLE_SIM_V2_REPLAY_V2_FLATLINE",
+  "flatline_reason_window_count": 6,
+  "flatline_window_ids": [
+    "SIM_S_C_V2_013_FLATLINE_000001-W0000",
+    "SIM_S_C_V2_013_FLATLINE_000001-W0001",
+    "SIM_S_C_V2_013_FLATLINE_000001-W0002",
+    "SIM_S_C_V2_013_FLATLINE_000001-W0003",
+    "SIM_S_C_V2_013_FLATLINE_000001-W0004",
+    "SIM_S_C_V2_013_FLATLINE_000001-W0005"
+  ],
+  "protected_partitions_accessed": false,
+  "provenance": {
+    "base_generator": "simulation.profile_v2013.iter_observed_records",
+    "flat_source": "ecg_raw == 0 for the zero interval (exact ADC zero)",
+    "generator": "simulation.flatline_scenario_c_v2_013",
+    "participants_are_human": false,
+    "profile": {
+      "duration_s": 100,
+      "profile_id": "WEARABLE_SIM_V2_FLATLINE_PROFILE",
+      "seed": 20260927,
+      "session_id": "SIM_S_C_V2_013_FLATLINE_000001",
+      "zero_end_s": 40.0,
+      "zero_start_s": 0.0
+    },
+    "protected_partitions_accessed": false
+  },
+  "purpose": "engineering-only software replay containing a true QUALITY_V1 flatline",
+  "relation": "additive successor scenario to WEARABLE_SIM_V2_REPLAY_V1 (which is preserved)",
+  "request_model_id": "MODEL_V2_FINAL",
+  "scientific_metrics": false,
+  "supersedes": null,
+  "window_count": 17
+}

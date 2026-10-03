@@ -38,7 +38,17 @@ def test_evidence_status_pass(name: str) -> None:
 
 
 def test_locks_verify() -> None:
-    assert verifier.verify()["status"] == "PASS"
+    """API_RUNTIME_V2 was superseded by API_RUNTIME_V2_1 (C-V2-013): the streaming adapter gained an
+    empty-chunk guard. The V2 lock file is preserved byte-identical, its live verifier reports
+    drift ONLY on that one file, and the successor verifies."""
+    successor = json.loads((ROOT / "artifacts/API_RUNTIME_V2_1.lock.json").read_text())
+    assert hash_file(ROOT / "artifacts/API_RUNTIME_V2.lock.json") == successor["predecessor_sha256"]
+    assert successor["changed_bound_files"] == ["simulation/stream_runtime_v2013.py"]
+    with pytest.raises(RuntimeError, match="API_RUNTIME_V2_TAMPER:simulation/stream_runtime_v2013"):
+        verifier.verify()
+    from scripts.verify_api_runtime_v2_1 import verify as verify_v2_1
+
+    assert verify_v2_1()["status"] == "PASS"
     assert verifier.verify_alert_binding()["status"] == "PASS"
 
 

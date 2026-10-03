@@ -1,0 +1,8 @@
+{
+  "checkpoint": "C-V2-013-QUALITY-FLATLINE-AUDIT",
+  "predecessor_id": "API_RUNTIME_V2",
+  "predecessor_preserved_unchanged": true,
+  "predecessor_sha256": "e126934e82e177e6d7605f50974f1d69a30372cb2ea1368103e42ce509e5e59a",
+  "reason": "empty-chunk guard in the streaming adapter (a short tail chunk could yield no resampler output and crash ingest) and an additive true-flatline replay scenario; QUALITY_V1/PREPROC_V1/runtime/API/scientific artifacts unchanged",
+  "successor_id": "API_RUNTIME_V2_1"
+}

@@ -1,0 +1,18 @@
+{
+  "drift": false,
+  "pins": {
+    "configs/quality_v1.yaml": {
+      "live": "66bff78cce663b546d4aabcf3c05344c1c66ad4955c9db220c516766df93be13",
+      "match": true,
+      "pinned": "66bff78cce663b546d4aabcf3c05344c1c66ad4955c9db220c516766df93be13"
+    },
+    "preprocessing/quality.py": {
+      "live": "2af482c1b1411da4a7efb94e68e7a6675ec3c688244873533d7bf5fd93b85da0",
+      "match": true,
+      "pinned": "2af482c1b1411da4a7efb94e68e7a6675ec3c688244873533d7bf5fd93b85da0"
+    }
+  },
+  "verifier": {
+    "status": "PASS"
+  }
+}

@@ -94,7 +94,9 @@ class WearableStreamRuntime:
             stamps = np.asarray([r.timestamp_us for r in usable], dtype=np.int64)
             out = self.pipeline.process(values, indices, source_timestamps_us=stamps)
             for chunk in out.chunks:
-                slots = np.rint(chunk.timestamps_us / SLOT_US).astype(np.int64)
+                if chunk.filtered_values.size == 0:
+                    continue  # a short (e.g. 1-sample tail) chunk can yield no resampler output
+                slots =np.rint(chunk.timestamps_us / SLOT_US).astype(np.int64)
                 self._ensure(int(slots.max()))
                 self._values[slots] = chunk.filtered_values
             for event in out.events:
