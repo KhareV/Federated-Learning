@@ -1,0 +1,227 @@
+component_id: MODEL_V2_OFFICIAL_VALIDATION_V1
+owner_task: V2-007
+status: ACTIVE
+active_protocol: MODEL_V2_RESEARCH_PROTOCOL_V3
+active_protocol_lock_sha256: 287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8
+finalist_shortlist:
+  shortlist_id: MODEL_V2_FINALIST_SHORTLIST_V1
+  shortlist_lock_sha256: ead027c8ebbe864ced4f740cda923d57688b2bf5233a0d7a27ddf34a0598fb64
+  finalist_a:
+    architecture_id: MODEL_V2_TCN_MEAN
+    schedule_id: CONFIG_V2_TCN_MEAN_ORIGINAL_V1
+    expected_parameter_count: 57553
+  finalist_b:
+    architecture_id: MODEL_V2_TCN_MEANMAX
+    schedule_id: CONFIG_V2_TCN_MEANMAX_ORIGINAL_V1
+    expected_parameter_count: 57577
+  third_finalist_forbidden: true
+training_contract:
+  source_config: configs/model_v1.yaml
+  source_config_sha256: f46810593edbc3d74e00d1ad992fe2af5b02a0b9474118374a90f0bd1fd338dc
+  reused_unchanged_for_both_finalists: true
+  optimizer: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  batch_size: 64
+  max_epochs: 50
+  loss: BCEWithLogitsLoss
+  pos_weight_source: OPTIMISE_ONLY
+  augmentation_scope: OPTIMISE_ONLY
+  normalization_order: FILTERED_WINDOW_THEN_AUGMENT_THEN_PER_WINDOW_ZSCORE
+  early_stopping_patience: 7
+  scheduler:
+    implementation: torch.optim.lr_scheduler.ReduceLROnPlateau
+    mode: max
+    factor: 0.1
+    patience: 10
+    threshold: 0.0001
+    threshold_mode: rel
+    cooldown: 0
+    min_lr: 0.0
+    epsilon: 1.0e-08
+seeds: [20260927, 20260928, 20260929]
+release_seed: 20260927
+release_seed_never_best_seed_substituted: true
+final_train_manifest:
+  manifest_id: MITDB_TRAIN_FINAL_INNER_V2_V1
+  manifest_sha256: bb5b4f6f7205fe37d0132ebccaca7889a916b115f5ad096ecc967940421455ce
+  optimise_groups: 22
+  final_inner_validation_groups: 5
+  total_train_windows: 9660
+role_contract:
+  OPTIMISE: [gradient_updates, augmentation, pos_weight_source]
+  FINAL_INNER_VALIDATION: [scheduler_metric, early_stopping_metric, checkpoint_selection_metric]
+  FINAL_INNER_VALIDATION_forbidden: [gradient_updates, augmentation]
+  OFFICIAL_VALIDATION_forbidden:
+  - gradient_updates
+  - augmentation
+  - pos_weight
+  - scheduler
+  - early_stopping
+  - checkpoint_selection
+  - architecture_modification
+  - optimizer_modification
+  checkpoint_selection_metric: pooled_FINAL_INNER_VALIDATION_AUPRC
+  checkpoint_comparator: strict_greater_than
+  tie_policy: RETAIN_EARLIEST_BEST
+role_firewall:
+  stage_train_select: V2-007_TRAIN_SELECT
+  stage_train_diagnostic: V2-007_TRAIN_DIAGNOSTIC
+  stage_official_validation: V2-007_OFFICIAL_VALIDATION
+  allowed_train_select_roles: [OPTIMISE, FINAL_INNER_VALIDATION]
+  allowed_official_validation_roles: [OFFICIAL_VALIDATION]
+  official_validation_requires_checkpoint_finalized: true
+experiment_matrix:
+  fits:
+  - experiment_id: V2-007-TCNMEAN-S20260927
+    architecture_id: MODEL_V2_TCN_MEAN
+    seed: 20260927
+  - experiment_id: V2-007-TCNMEAN-S20260928
+    architecture_id: MODEL_V2_TCN_MEAN
+    seed: 20260928
+  - experiment_id: V2-007-TCNMEAN-S20260929
+    architecture_id: MODEL_V2_TCN_MEAN
+    seed: 20260929
+  - experiment_id: V2-007-TCNMEANMAX-S20260927
+    architecture_id: MODEL_V2_TCN_MEANMAX
+    seed: 20260927
+  - experiment_id: V2-007-TCNMEANMAX-S20260928
+    architecture_id: MODEL_V2_TCN_MEANMAX
+    seed: 20260928
+  - experiment_id: V2-007-TCNMEANMAX-S20260929
+    architecture_id: MODEL_V2_TCN_MEANMAX
+    seed: 20260929
+  total_planned_fits: 6
+  deterministic_order: [TCN_MEAN_S27, TCN_MEAN_S28, TCN_MEAN_S29, TCN_MEANMAX_S27,
+    TCN_MEANMAX_S28, TCN_MEANMAX_S29]
+official_validation_population:
+  expected_patient_groups: 7
+  expected_windows: 2880
+  expected_positive: 676
+  expected_negative: 2204
+v1_paired_reference:
+  checkpoints:
+    20260927:
+      path: checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt
+      expected_sha256: 021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe
+      expected_official_validation_auprc: 0.5328607838787021
+      expected_official_validation_auroc: 0.7669923699782
+    20260928:
+      path: checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260928_best.pt
+      expected_sha256: a346ce6c8b38c50c0c87c4c6ed72a85b36e829c7a27878d86e1e672404db9e8d
+      expected_official_validation_auprc: 0.4794350072114173
+    20260929:
+      path: checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260929_best.pt
+      expected_sha256: 63ab477810e65efca388ba53eb4a290b98aad51234f600f37f12b87950af9b74
+      expected_official_validation_auprc: 0.4825433837968652
+  expected_three_seed_mean_auprc: 0.49827972496232814
+  reconstruction_is_evidence_only: true
+  v1_retraining_forbidden: true
+  tolerance: 1.0e-9
+classical_reference_metrics:
+  source: reports/baselines/baseline_metrics.csv
+  LR_official_validation_auprc: 0.6458789355593425
+  RF_official_validation_auprc: 0.799672173430413
+  descriptive_only: true
+  no_paired_bootstrap_vs_classical: true
+  no_rf_promotion_gate: true
+bootstrap_draws:
+  bootstrap_id: MODEL_V2_VALIDATION_BOOTSTRAP_DRAWS_V1
+  bootstrap_seed: 20260927
+  replicates: 2000
+  slots_per_replicate: 7
+  sampling_unit: official_validation_participant_group_id
+  interval_method: percentile_linear
+  lower_quantile: 0.025
+  upper_quantile: 0.975
+  new_rng_forbidden_after_freeze: true
+finalist_comparison_rule:
+  per_seed_metric: pooled_AUPRC_over_sampled_patient_multiset
+  finalist_rep_mean: mean_of_three_seed_level_replicate_AUPRC_values
+  delta_formula: mean_AUPRC(FINALIST_B) - mean_AUPRC(FINALIST_A)
+  se_formula: sample_standard_deviation_ddof_1_of_valid_paired_delta_rep_values
+  within_one_se_rule: abs(delta) <= SE
+  if_not_within_one_se: higher_three_seed_mean_AUPRC_wins
+  tie_break_order:
+  - fewer_trainable_parameters
+  - lower_three_seed_AUPRC_sample_SD
+  - lexicographically_smaller_config_id
+  no_average_probabilities_across_seeds: true
+promotion_rule:
+  condition_a: selected_finalist_three_seed_mean_official_validation_AUPRC_strictly_gt_0.646
+  condition_b1: paired_bootstrap_release_seed_delta_vs_model_v1_lower_95_ci_gt_0
+  condition_b2: paired_bootstrap_three_seed_mean_delta_vs_model_v1_lower_95_ci_gt_0
+  promotion_eligible: A and B1 and B2
+  no_auroc_hard_gate: true
+  no_p_value_gate: true
+  no_rf_or_lr_gate: true
+  decision_vocabulary:
+  - MODEL_V2_PROMOTION_ELIGIBLE
+  - MODEL_V2_NOT_PROMOTED_AUPRC_THRESHOLD
+  - MODEL_V2_NOT_PROMOTED_RELEASE_CI
+  - MODEL_V2_NOT_PROMOTED_THREE_SEED_CI
+  - MODEL_V2_NOT_PROMOTED_MULTIPLE_CRITERIA
+one_shot_semantics:
+  guard_module: nhm.model_v2_official_validation_guard
+  states: [ARMED, RUNNING, COMPLETED]
+  guard_path: reports/model_v2/v2_007/validation_access_guard.json
+  second_invocation_error: MODEL_V2_VALIDATION_ALREADY_CONSUMED
+  partial_consumption_error: MODEL_V2_VALIDATION_PARTIALLY_CONSUMED
+search_budget:
+  d0_d5_max_neural_fits: 90
+  completed_neural_fits_before_v2_007: 65
+  v2_007_new_fits: 6
+  max_cumulative_after_v2_007: 71
+scope_restrictions:
+  forbidden_during_training: [OFFICIAL_VALIDATION, CALIBRATION, INTERNAL_TEST, INCART,
+    NSTDB, BIDMC]
+  no_calibration_this_phase: true
+  no_threshold_search: true
+  no_post_validation_search: true
+  model_v2_final_forbidden_this_phase: true
+  cal_v2_forbidden_this_phase: true
+output_schemas:
+- entry_audit.json
+- source_identity_audit.json
+- v1_reference_preflight.json
+- search_budget_preflight.json
+- experiment_matrix.csv
+- method_freeze.json
+- validation_bootstrap_draws.npz
+- validation_bootstrap_draws_manifest.json
+- training_role_access_ledger.jsonl
+- fit_summary.csv
+- training_curves.csv
+- source_train_metrics.csv
+- validation_ready_checkpoints.json
+- pre_validation_access_audit.json
+- validation_access_guard.json
+- official_validation_access_audit.json
+- official_validation_predictions.csv
+- v1_reference_validation_predictions.csv
+- prediction_closure_audit.json
+- v1_reference_reconstruction_audit.json
+- per_seed_validation_metrics.csv
+- finalist_validation_summary.csv
+- patient_diagnostics.csv
+- train_validation_gap.csv
+- bootstrap_seed_metrics.csv
+- bootstrap_three_seed_metrics.csv
+- bootstrap_summary.json
+- finalist_comparison_bootstrap.csv
+- finalist_selection.json
+- v1_release_paired_bootstrap.csv
+- v1_three_seed_paired_bootstrap.csv
+- promotion_decision.json
+- historical_reference_metrics.json
+- comparison_asymmetry.json
+- second_run_guard_audit.json
+- method_immutability_audit.json
+- independent_reverification.json
+- bootstrap_reproducibility.json
+- tamper_test_results.json
+- scope_leakage_audit.json
+- search_budget.json
+- test_results.json
+- run_manifest.json
+- artifact_hashes.json

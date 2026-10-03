@@ -1,0 +1,26 @@
+{
+  "all_three_available_and_matching": true,
+  "checkpoints": {
+    "20260927": {
+      "expected_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+      "match": true,
+      "observed_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+      "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260927_best.pt"
+    },
+    "20260928": {
+      "expected_sha256": "a346ce6c8b38c50c0c87c4c6ed72a85b36e829c7a27878d86e1e672404db9e8d",
+      "match": true,
+      "observed_sha256": "a346ce6c8b38c50c0c87c4c6ed72a85b36e829c7a27878d86e1e672404db9e8d",
+      "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260928_best.pt"
+    },
+    "20260929": {
+      "expected_sha256": "63ab477810e65efca388ba53eb4a290b98aad51234f600f37f12b87950af9b74",
+      "match": true,
+      "observed_sha256": "63ab477810e65efca388ba53eb4a290b98aad51234f600f37f12b87950af9b74",
+      "path": "checkpoints/candidates/MODEL_V1/MODEL_V1_seed_20260929_best.pt"
+    }
+  },
+  "reconstruction_permitted": true,
+  "status": "PASS",
+  "v1_retraining_forbidden": true
+}

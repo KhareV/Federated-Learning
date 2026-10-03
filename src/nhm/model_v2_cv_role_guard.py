@@ -25,7 +25,9 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-KNOWN_ROLES = frozenset({"OPTIMISE", "INNER_VALIDATION", "OUTER_TEST"})
+KNOWN_ROLES = frozenset(
+    {"OPTIMISE", "INNER_VALIDATION", "OUTER_TEST", "FINAL_INNER_VALIDATION", "OFFICIAL_VALIDATION"}
+)
 
 # Stage -> roles that stage is permitted to read waveform/feature data for.
 STAGE_ALLOWED_ROLES: dict[str, frozenset[str]] = {
@@ -37,12 +39,21 @@ STAGE_ALLOWED_ROLES: dict[str, frozenset[str]] = {
     "V2-004_OUTER_EVAL": frozenset({"OUTER_TEST"}),
     "V2-006_TRAIN_SELECT": frozenset({"OPTIMISE", "INNER_VALIDATION"}),
     "V2-006_OUTER_EVAL": frozenset({"OUTER_TEST"}),
+    "V2-007_TRAIN_SELECT": frozenset({"OPTIMISE", "FINAL_INNER_VALIDATION"}),
+    "V2-007_TRAIN_DIAGNOSTIC": frozenset({"OPTIMISE", "FINAL_INNER_VALIDATION"}),
+    "V2-007_OFFICIAL_VALIDATION": frozenset({"OFFICIAL_VALIDATION"}),
 }
+
+# Roles that may only be read once their owning fit's checkpoint has already been finalized
+# (never during gradient-update training). OUTER_TEST is V2-002/V2-004's rule, carried forward
+# unchanged; OFFICIAL_VALIDATION is V2-007's analogous rule for its one-shot session.
+CHECKPOINT_FINALIZED_REQUIRED_ROLES = frozenset({"OUTER_TEST", "OFFICIAL_VALIDATION"})
 
 LEDGER_RELATIVE_PATH = "reports/model_v2/v2_002/cv_role_access_ledger.jsonl"
 V2_003_LEDGER_RELATIVE_PATH = "reports/model_v2/v2_003/feature_access_ledger.jsonl"
 V2_004_LEDGER_RELATIVE_PATH = "reports/model_v2/v2_004/cv_role_access_ledger.jsonl"
 V2_006_LEDGER_RELATIVE_PATH = "reports/model_v2/v2_006/cv_role_access_ledger.jsonl"
+V2_007_LEDGER_RELATIVE_PATH = "reports/model_v2/v2_007/cv_role_access_ledger.jsonl"
 
 
 class CVRoleAccessViolation(PermissionError):
@@ -89,9 +100,9 @@ def check_cv_role_allowed(
             f"requested_outer_fold={requested_outer_fold} "
             f"experiment_outer_fold={experiment_outer_fold}"
         )
-    if role == "OUTER_TEST" and not checkpoint_finalized:
+    if role in CHECKPOINT_FINALIZED_REQUIRED_ROLES and not checkpoint_finalized:
         raise CVRoleAccessViolation(
-            "CV_ROLE_FIREWALL_OUTER_TEST_BEFORE_CHECKPOINT_FINALIZED"
+            f"CV_ROLE_FIREWALL_{role}_BEFORE_CHECKPOINT_FINALIZED"
         )
 
 
@@ -238,4 +249,43 @@ def record_v2_006_cv_role_access(
             "git_sha": _git_sha(root),
         },
         ledger_relative_path=V2_006_LEDGER_RELATIVE_PATH,
+    )
+
+
+def record_v2_007_cv_role_access(
+    root: Path,
+    *,
+    task_id: str,
+    stage_id: str,
+    architecture_id: str,
+    schedule_id: str,
+    seed: int,
+    role: str,
+    access_purpose: str,
+    participant_group_ids: Collection[str],
+    example_id_count: int,
+    checkpoint_finalized: bool,
+) -> None:
+    """Append one row to the V2-007 CV-role access ledger (reports/model_v2/v2_007/
+    cv_role_access_ledger.jsonl). Call only AFTER check_cv_role_allowed has not raised, and
+    after the waveform read has actually happened. No `outer_fold` field -- V2-007 has no fold
+    dimension (one fixed FINAL TRAIN-only split for OPTIMISE/FINAL_INNER_VALIDATION, and one
+    fixed official-VALIDATION partition for OFFICIAL_VALIDATION)."""
+    _append_ledger(
+        root,
+        {
+            "timestamp_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+            "task_id": task_id,
+            "stage_id": stage_id,
+            "architecture_id": architecture_id,
+            "schedule_id": schedule_id,
+            "seed": seed,
+            "role": role,
+            "access_purpose": access_purpose,
+            "participant_group_ids": sorted(participant_group_ids),
+            "example_id_count": example_id_count,
+            "checkpoint_finalized": checkpoint_finalized,
+            "git_sha": _git_sha(root),
+        },
+        ledger_relative_path=V2_007_LEDGER_RELATIVE_PATH,
     )
