@@ -1,6 +1,18 @@
 {
   "armed_at": "2026-10-03T19:03:34.003100Z",
   "armed_git_sha": "6bd17b41dc06946e562866af2978dc1a9fe42173",
+  "completed_at": "2026-10-03T19:06:59.178336Z",
+  "completed_git_sha": "fd0c55043a8ffdd19738e609f2aafbf530334653",
+  "completion_summary": {
+    "accessed_path_count": 225,
+    "calibration_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "closure_exact": true,
+    "dataset": "INCART",
+    "model_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "patient_cluster_count": 32,
+    "prediction_table_sha256": "6517d9415eaad2acaf073afff217ae4c1508ba3ee629b9a54d50c7ba459db7e6",
+    "row_count": 26864
+  },
   "dataset": "INCART",
   "guard_name": "V2_INCART_SECOND_LOOK",
   "preconditions": {
@@ -14,5 +26,7 @@
     "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
     "v1_prediction_table_sha256": "b532f3b0cbcef1d47dd28a898b05f99cce706e2b8e62589ce95e25fb28bfc14e"
   },
-  "state": "ARMED"
+  "running_at": "2026-10-03T19:05:10.320195Z",
+  "running_git_sha": "fd0c55043a8ffdd19738e609f2aafbf530334653",
+  "state": "COMPLETED"
 }

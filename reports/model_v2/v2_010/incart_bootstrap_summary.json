@@ -1,0 +1,54 @@
+{
+  "method": "PATIENT_CLUSTER_PERCENTILE_95_V1",
+  "metrics": {
+    "AUPRC": {
+      "ci_lower_95": 0.9330231565113604,
+      "ci_upper_95": 0.9892753867106421,
+      "invalid_replicates": 0,
+      "point_estimate": 0.970004055260483,
+      "valid_replicates": 2000
+    },
+    "AUROC": {
+      "ci_lower_95": 0.9446231285387714,
+      "ci_upper_95": 0.9854916121550282,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9676821484566808,
+      "valid_replicates": 2000
+    },
+    "patient_macro_F1": {
+      "ci_lower_95": 0.7270214151706786,
+      "ci_upper_95": 0.8920988863517455,
+      "invalid_replicates": 0,
+      "point_estimate": 0.8174702883672811,
+      "valid_replicates": 2000
+    },
+    "pooled_F1": {
+      "ci_lower_95": 0.8493529157285695,
+      "ci_upper_95": 0.944861110846529,
+      "invalid_replicates": 0,
+      "point_estimate": 0.90503302209064,
+      "valid_replicates": 2000
+    },
+    "precision": {
+      "ci_lower_95": 0.8147416369573522,
+      "ci_upper_95": 0.9566011012730594,
+      "invalid_replicates": 0,
+      "point_estimate": 0.8997056825899932,
+      "valid_replicates": 2000
+    },
+    "sensitivity": {
+      "ci_lower_95": 0.857675664492223,
+      "ci_upper_95": 0.9539324987316582,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9104238258877434,
+      "valid_replicates": 2000
+    },
+    "specificity": {
+      "ci_lower_95": 0.8507047225088437,
+      "ci_upper_95": 0.9498279825150332,
+      "invalid_replicates": 0,
+      "point_estimate": 0.9034788292541216,
+      "valid_replicates": 2000
+    }
+  }
+}

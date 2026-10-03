@@ -1,0 +1,79 @@
+{
+  "dataset": "INTERNAL_TEST",
+  "paired_bootstrap_deltas": {
+    "AUPRC": {
+      "ci_lower_95": 0.016018780251196237,
+      "ci_upper_95": 0.258606193931996,
+      "invalid_replicates": 0,
+      "point_delta": 0.09057758958303141,
+      "v1_point": 0.9088954942908802,
+      "v2_point": 0.9994730838739116,
+      "valid_replicates": 2000
+    },
+    "AUROC": {
+      "ci_lower_95": 0.01787395631502353,
+      "ci_upper_95": 0.20940463076623833,
+      "invalid_replicates": 0,
+      "point_delta": 0.09576496168191673,
+      "v1_point": 0.9036154157261423,
+      "v2_point": 0.9993803774080591,
+      "valid_replicates": 2000
+    },
+    "patient_macro_F1": {
+      "ci_lower_95": 0.06166483002267175,
+      "ci_upper_95": 0.4258688506884177,
+      "invalid_replicates": 0,
+      "point_delta": 0.22944868245317374,
+      "v1_point": 0.5291135930158938,
+      "v2_point": 0.7585622754690675,
+      "valid_replicates": 2000
+    },
+    "pooled_F1": {
+      "ci_lower_95": 0.05291619876143561,
+      "ci_upper_95": 0.40096669561704723,
+      "invalid_replicates": 0,
+      "point_delta": 0.16229759757458784,
+      "v1_point": 0.8237529691211402,
+      "v2_point": 0.986050566695728,
+      "valid_replicates": 2000
+    },
+    "precision": {
+      "ci_lower_95": -0.0027472527472527375,
+      "ci_upper_95": 0.19874921826141345,
+      "invalid_replicates": 0,
+      "point_delta": 0.08025560158598177,
+      "v1_point": 0.9135932560590094,
+      "v2_point": 0.9938488576449912,
+      "valid_replicates": 2000
+    },
+    "sensitivity": {
+      "ci_lower_95": -0.001974333662388972,
+      "ci_upper_95": 0.5368217054263567,
+      "invalid_replicates": 0,
+      "point_delta": 0.22837370242214527,
+      "v1_point": 0.75,
+      "v2_point": 0.9783737024221453,
+      "valid_replicates": 2000
+    },
+    "specificity": {
+      "ci_lower_95": -0.001771479185119551,
+      "ci_upper_95": 0.3074534161490683,
+      "invalid_replicates": 0,
+      "point_delta": 0.07492507492507494,
+      "v1_point": 0.9180819180819181,
+      "v2_point": 0.993006993006993,
+      "valid_replicates": 2000
+    }
+  },
+  "prediction_table_sha256": "04826ee3f66d466c3d5138e219156efab2a5930f0cc991ee725e6048de26f035",
+  "role": "DESCRIPTIVE_ONLY_NOT_A_HARD_GATE",
+  "v2_point_metrics": {
+    "AUPRC": 0.9994730838739116,
+    "AUROC": 0.9993803774080591,
+    "patient_macro_F1": 0.7585622754690675,
+    "pooled_F1": 0.986050566695728,
+    "precision": 0.9938488576449912,
+    "sensitivity": 0.9783737024221453,
+    "specificity": 0.993006993006993
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "decision_agreement": true,
+  "incart_guard": {
+    "ci_agreement": true,
+    "guard_agreement": true,
+    "independent_ci_lower_95": 0.0837960746924609,
+    "independent_guard_pass": true,
+    "official_ci_lower_95": 0.0837960746924609,
+    "official_guard_pass": true
+  },
+  "incart_point_metrics": {
+    "agreement": {
+      "AUPRC": true,
+      "AUROC": true,
+      "pooled_F1": true,
+      "precision": true,
+      "sensitivity": true,
+      "specificity": true
+    },
+    "independent": {
+      "AUPRC": 0.970004055260483,
+      "AUROC": 0.9676821484566808,
+      "pooled_F1": 0.90503302209064,
+      "precision": 0.8997056825899932,
+      "sensitivity": 0.9104238258877434,
+      "specificity": 0.9034788292541216
+    },
+    "official": {
+      "AUPRC": 0.970004055260483,
+      "AUROC": 0.9676821484566808,
+      "patient_macro_F1": 0.8174702883672811,
+      "pooled_F1": 0.90503302209064,
+      "precision": 0.8997056825899932,
+      "sensitivity": 0.9104238258877434,
+      "specificity": 0.9034788292541216
+    }
+  },
+  "independent_decision": "ACCEPTED",
+  "internal_test_point_metrics": {
+    "agreement": {
+      "AUPRC": true,
+      "AUROC": true,
+      "pooled_F1": true,
+      "precision": true,
+      "sensitivity": true,
+      "specificity": true
+    },
+    "independent": {
+      "AUPRC": 0.9994730838739116,
+      "AUROC": 0.9993803774080591,
+      "pooled_F1": 0.9860505666957279,
+      "precision": 0.9938488576449912,
+      "sensitivity": 0.9783737024221453,
+      "specificity": 0.993006993006993
+    },
+    "official": {
+      "AUPRC": 0.9994730838739116,
+      "AUROC": 0.9993803774080591,
+      "patient_macro_F1": 0.7585622754690675,
+      "pooled_F1": 0.986050566695728,
+      "precision": 0.9938488576449912,
+      "sensitivity": 0.9783737024221453,
+      "specificity": 0.993006993006993
+    }
+  },
+  "nstdb_guard": {
+    "guard_agreement": true,
+    "independent_delta_by_snr": {
+      "-6": 0.05515998019553758,
+      "0": 0.05829180517223931,
+      "6": 0.03948969728479468,
+      "12": 0.025856351756317175,
+      "18": 0.035120204607134387,
+      "24": 0.0480831205130845
+    },
+    "independent_guard_pass": true,
+    "official_guard_pass": true
+  },
+  "official_decision": "ACCEPTED",
+  "status": "PASS"
+}

@@ -36,6 +36,14 @@ V2_010_SCIENTIFIC_METHOD_PATHS = [
     "scripts/verify_v2_010_independent.py",
 ]
 
+# Rewritten on every authoritative chunked-regression run; pinning them would make
+# artifact_hashes.json stale the moment the regression is re-run, so they are excluded.
+RUN_LOG_FILES = {
+    "pytest_collected_nodes.txt",
+    "pytest_chunk_manifest.csv",
+    "pytest_chunk_results.csv",
+}
+
 PROTECTED_UPSTREAM_PATHS = [
     "checkpoints/MODEL_V2_FINAL.pt",
     "checkpoints/MODEL_V2_FINAL.manifest.json",
@@ -170,7 +178,7 @@ def main() -> None:
         "artifacts": {
             f"reports/model_v2/v2_010/{name}": hash_file(OUT / name)
             for name in evidence_files
-            if name != "artifact_hashes.json"
+            if name not in RUN_LOG_FILES and name != "artifact_hashes.json"
         }
     }
     _write_json("artifact_hashes.json", artifact_hashes)

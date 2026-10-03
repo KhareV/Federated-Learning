@@ -1,6 +1,18 @@
 {
   "armed_at": "2026-10-03T19:03:33.984881Z",
   "armed_git_sha": "6bd17b41dc06946e562866af2978dc1a9fe42173",
+  "completed_at": "2026-10-03T19:05:05.645765Z",
+  "completed_git_sha": "fd0c55043a8ffdd19738e609f2aafbf530334653",
+  "completion_summary": {
+    "calibration_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "closure_exact": true,
+    "dataset": "INTERNAL_TEST",
+    "model_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "negative_count": 1001,
+    "positive_count": 1156,
+    "prediction_table_sha256": "04826ee3f66d466c3d5138e219156efab2a5930f0cc991ee725e6048de26f035",
+    "row_count": 2157
+  },
   "dataset": "INTERNAL_TEST",
   "guard_name": "V2_INTERNAL_TEST_SECOND_LOOK",
   "preconditions": {
@@ -14,5 +26,7 @@
     "v1_prediction_table_sha256": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
     "window_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a"
   },
-  "state": "ARMED"
+  "running_at": "2026-10-03T19:04:59.616515Z",
+  "running_git_sha": "fd0c55043a8ffdd19738e609f2aafbf530334653",
+  "state": "COMPLETED"
 }

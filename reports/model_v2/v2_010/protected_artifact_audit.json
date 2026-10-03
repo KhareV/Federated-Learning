@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "checkpoints/MODEL_V2_FINAL.manifest.json": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+    "checkpoints/MODEL_V2_FINAL.pt": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "configs/model_v2_final_frozen.yaml": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V3.lock.json": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+    "reports/external_incart_predictions.csv": "b532f3b0cbcef1d47dd28a898b05f99cce706e2b8e62589ce95e25fb28bfc14e",
+    "reports/internal_test_predictions.csv": "e39b84b076ca3ce9113a5eec11356193704e284254d60100dc6c2f4bfd910b14",
+    "reports/t018/bootstrap_draws.npz": "9f5953e2acd68acb91c08963dfc11a0073600a499d7e1d1406097d5f7b9f0bc3",
+    "reports/t018/bootstrap_replicates.csv": "db2f666fa575f506f0dd47c4fef2f9809344ca64cd96028c465c69dda0da1ce5",
+    "reports/t019/nstdb_predictions.csv": "46d5d21575e90ef047297021560a281415163702fb870f98348f1c461041b9a4",
+    "reports/t020/bootstrap_draws.npz": "462cfc340da3dadf8516e34fccaca4e4559e10e75b045f428761ce7e39e6f8b6",
+    "reports/t020/bootstrap_replicates.csv": "7f05dfa2f609c731af6ca13a52f4a42d1c890dc69b7976f0905ceb96ce002bba"
+  },
+  "status": "PASS"
+}
