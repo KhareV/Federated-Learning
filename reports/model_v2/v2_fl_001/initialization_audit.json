@@ -1,0 +1,16 @@
+{
+  "MODEL_V2_FINAL_state_sha256_audit_only": "28bad13d7155cd59a98fae285033efe55a9dc588ff904dbc8ba372689dc4fa06",
+  "algorithm": "set_determinism(seed); ModelV2TcnMean() default PyTorch initialization",
+  "architecture": "MODEL_V2_TCN_MEAN",
+  "equal_to_trained_checkpoint": false,
+  "identical": true,
+  "initialization_id": "FL_INIT_V2",
+  "parameter_count": 57553,
+  "repeat_fresh_process_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "repeat_in_process_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "seed": 20260927,
+  "state_dict_keys": 92,
+  "status": "PASS",
+  "trained_central_checkpoint_loaded_as_initialization": false
+}

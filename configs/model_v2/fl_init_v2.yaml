@@ -1,0 +1,10 @@
+initialization_id: FL_INIT_V2
+architecture_id: MODEL_V2_TCN_MEAN
+architecture_factory: models.model_v2_architectures.ModelV2TcnMean
+source: FRESH_MODEL_V2_TCN_MEAN_ARCHITECTURE
+algorithm: "set_determinism(seed) [python/numpy/torch seeds, deterministic algorithms] then ModelV2TcnMean() default PyTorch initialization"
+seed: 20260927
+central_checkpoint_pretraining: false     # MODEL_V2_FINAL / V2-007 checkpoints are NEVER loaded as initialization
+parameter_count: 57553
+determinism: {device: cpu, torch_deterministic_algorithms: true, python_seeded: true, numpy_seeded: true, torch_seeded: true}
+reuse_required_for: [FL_IID_MODEL_V2_V1, V2-FL-002, V2-FL-003, V2-FL-004]

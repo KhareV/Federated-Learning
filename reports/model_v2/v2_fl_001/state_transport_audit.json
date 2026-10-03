@@ -1,0 +1,871 @@
+{
+  "FL_STATE_TRANSPORT_V2_created": false,
+  "adapter_round_trip_identical_keys_shapes_dtypes_values": true,
+  "adapter_round_trip_max_abs_raw_logit_delta": 0.0,
+  "batchnorm_num_batches_tracked_keys": [
+    "backbone.stem_bn.num_batches_tracked",
+    "backbone.blocks.0.bn1.num_batches_tracked",
+    "backbone.blocks.0.bn2.num_batches_tracked",
+    "backbone.blocks.1.bn1.num_batches_tracked",
+    "backbone.blocks.1.bn2.num_batches_tracked",
+    "backbone.blocks.2.bn1.num_batches_tracked",
+    "backbone.blocks.2.bn2.num_batches_tracked",
+    "backbone.blocks.3.bn1.num_batches_tracked",
+    "backbone.blocks.3.bn2.num_batches_tracked",
+    "backbone.blocks.4.bn1.num_batches_tracked",
+    "backbone.blocks.4.bn2.num_batches_tracked",
+    "backbone.blocks.5.bn1.num_batches_tracked",
+    "backbone.blocks.5.bn2.num_batches_tracked",
+    "backbone.blocks.6.bn1.num_batches_tracked",
+    "backbone.blocks.6.bn2.num_batches_tracked"
+  ],
+  "decision": "REUSE_UNCHANGED",
+  "entries": [
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.stem_conv.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        1,
+        15
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.stem_bn.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.stem_bn.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.stem_bn.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.stem_bn.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.stem_bn.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.conv1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.bn1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.bn1.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.bn1.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.bn1.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.0.bn1.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.conv2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.bn2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.bn2.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.bn2.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.0.bn2.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.0.bn2.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.conv1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.bn1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.bn1.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.bn1.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.bn1.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.1.bn1.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.conv2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.bn2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.bn2.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.bn2.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.1.bn2.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.1.bn2.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.conv1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.bn1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.bn1.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.bn1.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.bn1.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.2.bn1.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.conv2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.bn2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.bn2.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.bn2.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.2.bn2.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.2.bn2.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.conv1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.bn1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.bn1.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.bn1.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.bn1.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.3.bn1.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.conv2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.bn2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.bn2.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.bn2.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.3.bn2.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.3.bn2.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.conv1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.bn1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.bn1.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.bn1.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.bn1.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.4.bn1.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.conv2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.bn2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.bn2.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.bn2.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.4.bn2.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.4.bn2.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.conv1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.bn1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.bn1.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.bn1.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.bn1.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.5.bn1.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.conv2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.bn2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.bn2.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.bn2.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.5.bn2.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.5.bn2.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.conv1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.bn1.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.bn1.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.bn1.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.bn1.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.6.bn1.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.conv2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24,
+        24,
+        7
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.bn2.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.bn2.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.bn2.running_mean",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "backbone.blocks.6.bn2.running_var",
+      "role": "floating_non_trainable_buffer",
+      "shape": [
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": false,
+      "dtype": "torch.int64",
+      "key": "backbone.blocks.6.bn2.num_batches_tracked",
+      "role": "integer_bookkeeping_buffer",
+      "shape": []
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "output.weight",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        1,
+        24
+      ]
+    },
+    {
+      "aggregated_numerically": true,
+      "dtype": "torch.float32",
+      "key": "output.bias",
+      "role": "floating_trainable_parameter",
+      "shape": [
+        1
+      ]
+    }
+  ],
+  "floating_entries_aggregated": 77,
+  "integer_entries_preserved_server_side": 15,
+  "parameter_count": 57553,
+  "role_counts": {
+    "floating_non_trainable_buffer": 30,
+    "floating_trainable_parameter": 47,
+    "integer_bookkeeping_buffer": 15
+  },
+  "state_entries": 92,
+  "status": "PASS",
+  "toy_analytic_fedavg_with_model_v2_shaped_state": "PASS",
+  "transport_id": "FL_STATE_TRANSPORT_V1",
+  "v1_named_items_not_used_here": [
+    "federated.local_training.fresh_model_v1 factory",
+    "error-message wording in restore_state"
+  ],
+  "v1_specific_logic_found_in_transport": false
+}

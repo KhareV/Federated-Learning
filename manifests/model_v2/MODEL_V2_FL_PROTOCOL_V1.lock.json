@@ -1,0 +1,34 @@
+{
+  "bound_artifacts": {
+    "artifacts/FL_CONFIG_V1.lock.json": "03e49b4949e900192da19d8aa0b0066281cb14ed8807d5bfdd8f196f13f3138c",
+    "configs/fl_feature_noise_v1.yaml": "b82fb0a4570f33f04a84d0d15b7709e70ffb936ab79f67cf172a8160da6850e9",
+    "configs/fl_iid_v1.yaml": "529a43dab43b36c57ed65e2ba769d10eafefa79f21689fb3339dbe4d67e1cf89",
+    "configs/fl_non_iid_v1.yaml": "7c562aa559b33ca339f84e93cd50346f39ad8885e0cd8b779b2518cbd95a73c9",
+    "configs/fl_state_transport_v1.yaml": "125449202aba091582add6641b60d7bc2311206e237039cf8f2ba0f5933cdbdc",
+    "configs/model_v2/fl_iid_model_v2_v1.yaml": "ff199530c6dab4174b7f9417b4cf1cab4ea79b72a06a19864e57309ba2ea8f56",
+    "configs/model_v2/fl_init_v2.yaml": "0efaad5da0c5d8eccb19d9d357eec2b3e9eb8e5e58cd1f152cb86b4f60f51ba8",
+    "configs/model_v2/fl_protocol_v1.yaml": "af6140f320089cd0abca2d90ed2ea091883d8e1a55d83dab7bfa127bc0fc65b1",
+    "manifests/clients/CLIENTS_IID_V1.csv": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+    "manifests/clients/NONIID_COMBINED_V1.csv": "c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47",
+    "manifests/clients/NONIID_FEATURE_V1.csv": "dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291",
+    "manifests/clients/NONIID_LABEL_V1.csv": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176",
+    "manifests/clients/NONIID_QUANTITY_V1.csv": "9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V3.lock.json": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8"
+  },
+  "change_control": "Any change requires a successor protocol; the V2-FL-001 method must not be modified in response to results.",
+  "future_phases_predeclared": [
+    "V2-FL-002",
+    "V2-FL-003",
+    "V2-FL-004",
+    "V2-FL-005"
+  ],
+  "initialization": {
+    "id": "FL_INIT_V2",
+    "round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f"
+  },
+  "lock_id": "MODEL_V2_FL_PROTOCOL_V1",
+  "owner_task": "V2-FL-001",
+  "state_transport_decision": "REUSE_FL_STATE_TRANSPORT_V1_UNCHANGED",
+  "status": "FROZEN_BEFORE_FIRST_V2_FL_OUTCOME",
+  "synthetic_wearable_role": "ENGINEERING_EVIDENCE_NOT_EFFICACY"
+}

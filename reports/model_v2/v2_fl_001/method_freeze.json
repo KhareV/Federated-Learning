@@ -1,0 +1,41 @@
+{
+  "decision_codes_frozen": [
+    "checkpoint=best pooled VALIDATION AUPRC rounds 1-50, earliest tie",
+    "no retuning of FL budget",
+    "PASS_WITH_SCIENTIFIC_WARNING rule"
+  ],
+  "entry_head": "87c18e0ba26e6f4b20909ce02474d6f50fa85f02",
+  "experiment_id": "FL_IID_MODEL_V2_V1",
+  "method_file_sha256": {
+    "artifacts/FL_CONFIG_V1.lock.json": "03e49b4949e900192da19d8aa0b0066281cb14ed8807d5bfdd8f196f13f3138c",
+    "configs/fl_iid_v1.yaml": "529a43dab43b36c57ed65e2ba769d10eafefa79f21689fb3339dbe4d67e1cf89",
+    "configs/fl_state_transport_v1.yaml": "125449202aba091582add6641b60d7bc2311206e237039cf8f2ba0f5933cdbdc",
+    "configs/model_v2/fl_iid_model_v2_v1.yaml": "ff199530c6dab4174b7f9417b4cf1cab4ea79b72a06a19864e57309ba2ea8f56",
+    "configs/model_v2/fl_init_v2.yaml": "0efaad5da0c5d8eccb19d9d357eec2b3e9eb8e5e58cd1f152cb86b4f60f51ba8",
+    "configs/model_v2/fl_protocol_v1.yaml": "af6140f320089cd0abca2d90ed2ea091883d8e1a55d83dab7bfa127bc0fc65b1",
+    "federated/aggregation.py": "902a72b976399afe85a512ecb83897a80a483e6b541d5dbc544acbe654660920",
+    "federated/client_manifest.py": "24533ab78189ca2f1a1ddd097e1a1bf6e69db3f4908ae36b3b2f14fca459e047",
+    "federated/evaluation.py": "06680aa9f15577be2310f998ede5d154aa2e30e1921fa1b541b2c26f1137355d",
+    "federated/fedavg_runner.py": "bec0e47388adbe284787489be28dcc2077dc97d987a82b1a79febdde5287afd4",
+    "federated/local_training.py": "1b7924e5e6e9f99f927c835594071021b666b4e9553bbc64fff941b5d5b06ca3",
+    "federated/model_adapter.py": "1e0f8e457d32a3737e06071b862574e7c7d73e0bfb7571cbd0da9a7f42bae945",
+    "federated/model_v2_fedavg_runner.py": "5d0d08a1c57a25590b647b7cdccccf2f8c7565e527ae8cd58993b211bb2f7ade",
+    "federated/model_v2_fl.py": "0554ec13d0bba870f726b936dde5567552939687c25745803634ba4e6d4fc2b1",
+    "federated/validation_group_metrics.py": "a5ea5c4c170de10b6fb4f503447d55baaabc52e49d688d8c2642fd1646ed3e7b",
+    "manifests/clients/CLIENTS_IID_V1.csv": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+    "models/model_v2_architectures.py": "2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0",
+    "scripts/freeze_v2_fl_001_method.py": "d06d83f493f9038355c6b8c750c8e7da87af5adebf73cea2c3b796dc04f8743a",
+    "scripts/run_v2_fl_001.py": "d8de8b956488bc79b2d0f28fe25ac027bb0d18526d4cf853aae36f294012b255"
+  },
+  "owner_task": "V2-FL-001",
+  "patient_waveforms_read_during_preflight": false,
+  "preflight": {
+    "client_manifest": "PASS",
+    "initialization": "PASS",
+    "local_training": "PASS",
+    "state_transport": "PASS"
+  },
+  "protocol_lock_sha256": "7da5a240eee34db6f889c73b694783cb78389968b9d1cade882ee07fe7e0c5af",
+  "real_outcome_exists_at_method_freeze": false,
+  "status": "PASS"
+}

@@ -1,0 +1,93 @@
+# FL_IID_MODEL_V2_V1 -- V2-FL-001 contract. Additive; FL_IID_V1 / FL_CONFIG_V1 are untouched.
+# Identical to configs/fl_iid_v1.yaml in every scientific variable except the model family
+# (MODEL_V1 architecture -> MODEL_V2_TCN_MEAN) and the experiment/checkpoint identity.
+experiment_id: FL_IID_MODEL_V2_V1
+task_id: V2-FL-001
+reference_experiment: FL_IID_V1
+model:
+  architecture_id: MODEL_V2_TCN_MEAN
+  factory: models.model_v2_architectures.ModelV2TcnMean
+  parameter_count: 57553
+  centralized_checkpoint_warm_start: false      # MODEL_V2_FINAL supplies the ARCHITECTURE only
+initialization:
+  id: FL_INIT_V2
+  source: FRESH_MODEL_V2_TCN_MEAN_ARCHITECTURE
+  seed: 20260927
+client_manifest:
+  id: CLIENTS_IID_V1                            # reused; never regenerated
+  path: manifests/clients/CLIENTS_IID_V1.csv
+  sha256: 80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a
+  sites: 8
+  construction: BALANCED_WHOLE_PATIENT_IID_V1
+training:
+  clients: 8
+  clients_per_round: 8
+  rounds: 50
+  local_epochs: 1
+  batch_size: 64
+  shuffle: true
+  drop_last: false
+  num_workers: 0
+  device: cpu
+  augmentation: NONE                            # as T025 (no FL-specific augmentation/regularization)
+optimizer:
+  implementation: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  state_policy: RESET_EACH_CLIENT_EACH_ROUND
+  scheduler: NONE
+  gradient_clipping: NONE
+loss:
+  implementation: BCEWithLogitsLoss
+  pos_weight: 1.7157717177396683                # 6103 / 3557 (global MIT-BIH TRAIN negatives/positives)
+  pos_weight_source: GLOBAL_TRAIN_NEG_OVER_POS
+  client_specific_weights: false
+aggregation:
+  id: SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1
+  weight: num_examples_actually_used
+transport:
+  id: FL_STATE_TRANSPORT_V1                     # reused unchanged (dtype-generic policy); no V2 transport needed
+input_contract:
+  preprocessing: PREPROC_V1
+  normalization: PER_WINDOW_ZSCORE_V1
+  formula: "(x - mean(x)) / (std(x) + 1e-8)"
+  tensor: "float32 [B,1,2500]"
+  extra_model_inputs: NONE                      # no PPG / SpO2 / HR / quality scalar / annotation feature
+evaluation:
+  partition: VALIDATION
+  cadence: ROUND_0_AND_EVERY_ROUND
+  probability: sigmoid(raw_logit)
+  calibration: NONE                             # CAL_V2 belongs to MODEL_V2_FINAL, not this model
+  metric_threshold_id: FL_METRIC_THRESHOLD_V1
+  metric_threshold: 0.5
+  metric_comparator: ">="
+checkpoint:
+  metric: validation_AUPRC
+  eligible_rounds: 1-50
+  tie_policy: EARLIEST_EXACT_MAXIMUM
+stable_convergence:                             # descriptive flag only (see protocol pass semantics)
+  rounds_complete: 50
+  clients_successful_each_round: 8
+  finite_states: true
+  finite_validation_loss: true
+  finite_validation_AUPRC: true
+  minimum_AUPRC_improvement_over_round_0: 0.000001
+# Shuffle-seed namespace is the historical FL_IID_V1 namespace (the T026 precedent), so MODEL_V1 and
+# MODEL_V2 clients see IDENTICAL per-client per-round shuffle seeds: the architecture is the variable.
+shuffle_seed_namespace: FL_IID_V1
+seed_rule:
+  id: FL_CLIENT_ROUND_SHA256_V1
+  fields: [20260927, experiment_id, round, client_id]
+access:
+  TRAIN: TRAINING_ONLY
+  VALIDATION: SERVER_DEVELOPMENT_EVALUATION_ONLY
+  CALIBRATION: FORBIDDEN
+  INTERNAL_TEST: FORBIDDEN
+  INCART: FORBIDDEN
+  NSTDB: FORBIDDEN
+  BIDMC: FORBIDDEN
+  WEARABLE_V1: FORBIDDEN
+  WEARABLE_SIM: FORBIDDEN_AS_EFFICACY_DATA
+secure_aggregation: false
+FedProx: false
+non_IID: false

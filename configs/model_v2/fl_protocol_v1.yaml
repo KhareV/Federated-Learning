@@ -1,0 +1,71 @@
+# MODEL_V2_FL_PROTOCOL_V1 -- additive V2 federated research protocol (predeclared before the first
+# MODEL_V2 federated outcome). The historical MODEL_V1 FL lineage (T024-T028, FL_CONFIG_V1) is
+# preserved and untouched. Non-IID conditions are REUSED from the frozen V1 lineage, never
+# regenerated after observing V2 IID performance.
+protocol_id: MODEL_V2_FL_PROTOCOL_V1
+status_target: FROZEN_BEFORE_FIRST_V2_FL_OUTCOME
+architecture: MODEL_V2_TCN_MEAN
+centralized_schedule_reference: CONFIG_V2_TCN_MEAN_ORIGINAL_V1
+release_seed: 20260927
+fl_initialization: {id: FL_INIT_V2, fresh_untrained: true, central_checkpoint_loaded: false}
+state_transport:
+  decision: REUSE_FL_STATE_TRANSPORT_V1_UNCHANGED
+  rationale: >
+    The V1 policy is dtype-generic (aggregate every floating state_dict entry by sample count;
+    preserve every non-floating buffer at the server value) and federated.aggregation /
+    federated.model_adapter contain no MODEL_V1 key or count logic. MODEL_V2 state: 92 entries =
+    47 floating trainable parameters + 30 floating non-trainable BatchNorm buffers + 15 int64
+    num_batches_tracked buffers; adapter round-trip is exact. No FL_STATE_TRANSPORT_V2 is created.
+shared_budget_and_semantics:   # inherited verbatim from FL_IID_V1 / T025
+  clients: 8
+  clients_per_round: 8
+  rounds: 50
+  local_epochs: 1
+  batch_size: 64
+  drop_last: false
+  optimizer: {name: AdamW, learning_rate: 0.001, weight_decay: 0.0001, state: RESET_EACH_CLIENT_EACH_ROUND}
+  loss: {name: BCEWithLogitsLoss, pos_weight: 1.7157717177396683, source: GLOBAL_TRAIN_NEG_OVER_POS}
+  aggregation: SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1
+  shuffle_seed_namespace: FL_IID_V1
+  budget_tuning_after_observing_v2_results: FORBIDDEN
+checkpoint_selection: {metric: pooled_VALIDATION_AUPRC, rounds: 1-50, tie: EARLIEST_EXACT_MAXIMUM}
+metric_threshold: {id: FL_METRIC_THRESHOLD_V1, value: 0.5, role: DESCRIPTIVE_ONLY}
+calibration: NONE   # CAL_V2 belongs to the centralized MODEL_V2_FINAL checkpoint
+phases:
+  V2-FL-001:
+    name: IID FedAvg on real MIT-BIH TRAIN patients
+    clients: CLIENTS_IID_V1
+    config: FL_IID_MODEL_V2_V1
+  V2-FL-002:
+    name: matched LABEL / QUANTITY / FEATURE-NOISE / COMBINED FedAvg
+    reuses_frozen_manifests:
+      NONIID_LABEL_V1: 753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176
+      NONIID_QUANTITY_V1: 9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e
+      NONIID_FEATURE_V1: dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291
+      NONIID_COMBINED_V1: c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47
+    feature_noise_construction: configs/fl_feature_noise_v1.yaml (frozen)
+    combined_construction: configs/fl_non_iid_v1.yaml combined_skew (frozen)
+  V2-FL-003:
+    name: FedProx mu selection under LABEL only, then matched comparisons
+  V2-FL-004:
+    name: Flower SecAgg+ correctness / visibility / overhead
+  V2-FL-005:
+    name: synthetic-wearable virtual-client / routing / replay / system-level federation exercise
+reused_frozen_clients_iid: {id: CLIENTS_IID_V1, sha256: 80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a}
+synthetic_wearable_role: >
+  WEARABLE_SIM results are ENGINEERING evidence for software, routing and system-level behavior only.
+  They are not AAMI-SVF efficacy evidence, not clinical evidence, and never substitute for real
+  MIT-BIH clients in any efficacy experiment.
+v2_fl_001_pass_semantics:
+  PASS: all integrity/method/evidence requirements satisfied and aggregation finite; V2 need NOT beat V1
+  PASS_WITH_SCIENTIFIC_WARNING: experiment correct but descriptive result weak (no retuning)
+  FAIL: divergence, invalid state transport, or unexplained nonfinite state (stop before V2-FL-002)
+held_out_firewall_until_fl_family_frozen:
+  forbidden: [CALIBRATION, INTERNAL_TEST, INCART, NSTDB, BIDMC, WEARABLE_V1]
+  internal_test: SEALED_UNTIL_V2_FL_ALGORITHM_FAMILY_FROZEN
+carried_limitation:
+  quality_flatline: >
+    QUALITY_V1 flags canonical filtered flatline windows, but the frozen stream composition does not
+    reliably hard-fail a stuck NONZERO raw source. Documented software-quality limitation; not repaired
+    here and unrelated to the MIT-BIH FL experiment.
+non_goals: [architecture_search, centralized_finetuning, synthetic_wearable_efficacy, V2-014, T036]

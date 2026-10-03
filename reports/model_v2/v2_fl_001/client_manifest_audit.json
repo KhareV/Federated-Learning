@@ -1,0 +1,30 @@
+{
+  "client_manifest_id": "CLIENTS_IID_V1",
+  "duplicate_patients": 0,
+  "expected_sha256": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+  "manifest_regenerated": false,
+  "manifest_sha256": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+  "negative": 6103,
+  "omitted_train_patients": [],
+  "partition_overlap": {
+    "CALIBRATION": [],
+    "INTERNAL_TEST": [],
+    "VALIDATION": []
+  },
+  "patient_groups": 27,
+  "pos_weight": 1.7157717177396683,
+  "positive": 3557,
+  "site_patient_counts": [
+    4,
+    4,
+    4,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "sites": 8,
+  "status": "PASS",
+  "windows": 9660
+}

@@ -1,0 +1,18 @@
+{
+  "T025_semantics": [
+    "AdamW reset per client per round",
+    "BCEWithLogitsLoss(global pos_weight)",
+    "shuffle=True seeded DataLoader generator",
+    "drop_last=False",
+    "no augmentation",
+    "no scheduler",
+    "no gradient clipping",
+    "torch.manual_seed(per-client-round seed)"
+  ],
+  "batch_count": 3,
+  "bit_identical_delta": true,
+  "comparison": "train_local_epoch_v2(model_factory=MODEL_V1) vs T025 train_local_epoch",
+  "intentional_difference": "model factory only",
+  "mean_loss_identical": true,
+  "status": "PASS"
+}
