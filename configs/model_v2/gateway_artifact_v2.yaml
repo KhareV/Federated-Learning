@@ -1,0 +1,152 @@
+config_id: GATEWAY_ARTIFACT_V2
+artifact_id: GATEWAY_ARTIFACT_V2
+deployment_artifact_id: GATEWAY_FP32_V2
+owner_task: V2-012
+target: LOCAL_CPU_GATEWAY_V2
+frozen_status_on_completion: FROZEN_RESEARCH_GATEWAY
+claim: research-only frozen V2 CPU gateway artifact (not promoted, not a MODEL_V1 replacement)
+source_model:
+  id: MODEL_V2_FINAL
+  checkpoint_path: checkpoints/MODEL_V2_FINAL.pt
+  checkpoint_sha256: 89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b
+  manifest_sha256: 8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253
+  frozen_config_sha256: f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df
+  architecture_id: MODEL_V2_TCN_MEAN
+  parameter_count: 57553
+calibration:
+  id: CAL_V2
+  sha256: 349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7
+  temperature: 52.88261929727761
+  threshold: 0.5101937262006424
+  comparator: ">="
+  domain: MIT-BIH-v1.0.0
+  applied_by: wrapper_using_canonical_evaluation_calibration_helpers
+  baked_into_model_weights: false
+preprocessing:
+  id: PREPROC_V1
+  lock_sha256: 181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c
+target_id: AAMI_SVF_WINDOW_V1
+map_id: AAMI_SVF_MAP_V1
+protocol_v3_lock_sha256: 287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8
+input_contract:
+  id: GATEWAY_MODEL_INPUT_V2
+  dtype: float32
+  shape: [N, 1, 2500]
+  wrapper_batch_size: 1
+  sample_rate_hz: 250
+  duration_seconds: 10
+  preprocessing_location: upstream
+output_contract:
+  semantics: RAW_PRE_SIGMOID_LOGIT
+  shape: [N, 1]
+  returns_calibrated_probability: false
+  returns_threshold_decision: false
+  returns_diagnosis: false
+  returns_episode_state: false
+format:
+  selected: TORCHSCRIPT_SCRIPT
+  api: torch.jit.script
+  precision: FP32
+  selection: FIXED_BY_GATEWAY_ARTIFACT_V1_PRECEDENT_BEFORE_ANY_BENCHMARK
+  trace_allowed: false
+  onnx_allowed: false
+  benchmark_driven_selection: false
+  failure_status_if_unscriptable: BLOCKED_GATEWAY_FORMAT_INCOMPATIBLE
+  single_candidate_only: true
+INT8_STATUS: NOT_EVALUATED
+quantization_search: false
+execution:
+  device: cpu
+  batch_size: 1
+  eval_mode: true
+  inference_mode: true
+  intraop_threads: 1
+  interop_threads: 1
+artifact_paths:
+  artifact: artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts
+  manifest: artifacts/deployment/GATEWAY_ARTIFACT_V2.manifest.json
+canonical_fixture:
+  id: MODEL_V2_FINAL_SYNTHETIC_TEST_VECTOR_V1
+  path: tests/fixtures/model_v2_final_test_vector.npz
+  sha256: adabc8f053ce05c6e6e35e6268f1803bdb68d1043f6b5aaf665daf9c3dce8d6e
+  windows: 3
+equivalence:
+  comparison: np.allclose(native_logit, gateway_logit, atol=1e-6, rtol=1e-6)
+  atol: 1.0e-6
+  rtol: 1.0e-6
+  comparison_batch_size: 1
+  require_finite: true
+  shape_mismatches_allowed: 0
+  nonfinite_outputs_allowed: 0
+  threshold_decision_disagreements_allowed: 0
+  record: [max_abs_logit_delta, max_rel_logit_delta, max_raw_probability_delta,
+    max_calibrated_probability_delta]
+  no_scientific_metrics: true
+parity_corpus:
+  id: GATEWAY_PARITY_CORPUS_V2_V1
+  path: tests/fixtures/gateway_parity_corpus_v2_v1.npz
+  npz_sha256: f897471970401fe1b97b8cc2a21acf3acdeeb032b1adb03fc08e14738e8c9da5
+  windows_content_sha256: d6e6c89fa37471b247a44c3b3f8a8f62a52a5a0e5ddf6d4edac2aa35539398f3
+  rows: 1000
+  window_shape: [1, 2500]
+  stored_shape: [1000, 1, 2500]
+  dtype: float32
+  patient_data: false
+  labels: none
+  generator: numpy.random.Generator(PCG64)
+  seed: 20260927
+  edge_fixtures: [all_zeros, all_plus_1, all_minus_1, linear_minus3_to_plus3,
+    linear_plus3_to_minus3, unit_sine_10_cycles, sum_of_sines_5_and_37_cycles,
+    single_impulse_amplitude_1_at_index_1250]
+  random_rows: standard_normal clipped to [-6, 6] (rows 8-999), never re-standardized
+export:
+  reproduction: two fresh temporary workspaces and processes
+  compare: [loadability, jit_code, signatures, state_values, fixture_logits, corpus_logits]
+  byte_reproducibility_reported_honestly: true
+benchmark:
+  device: cpu
+  batch_size: 1
+  input_shape: [1, 1, 2500]
+  inputs: first 1000 windows of GATEWAY_PARITY_CORPUS_V2_V1 (synthetic; preloaded)
+  boundary: gateway model plus CAL_V2 wrapper inference call only
+  excluded_from_timing: [model_load, artifact_verification, warmup, cal_file_parse]
+  warmup_count: 100
+  measured_count_per_run: 1000
+  repetitions: 3
+  clock: time.perf_counter_ns
+  percentiles_via: numpy.percentile (linear), shared with the V1 T029 helper
+  throughput: measured_count / total_measured_wall_time (single-process model inference)
+  aggregation:
+    rule: median_of_3_run_level_values
+    p50: median of the 3 run-level p50 values
+    p95: median of the 3 run-level p95 values
+    throughput: median of the 3 run-level throughput values
+    peak_RSS: maximum across the 3 benchmark subprocesses
+    fastest_run_selected: false
+  performance_target_invented: false
+  not_multi_user_api_throughput: true
+memory:
+  process: fresh subprocess per repetition
+  source: resource.getrusage(RUSAGE_SELF).ru_maxrss
+  unit_normalization: macOS bytes; Linux KiB x 1024
+  wording: peak/high-water process RSS during benchmark process
+  not: [instantaneous RAM, device RAM, MCU RAM]
+artifact_size:
+  primary: deployable artifact bytes
+  also_reported: [source checkpoint bytes]
+matched_v1_comparison:
+  policy: engineering-only, descriptive; same host, same fresh-subprocess policy, interleaved
+  v1_artifact: artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts
+  v1_artifact_sha256: 2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4
+  v1_scientific_evaluation_rerun: false
+  used_for_model_choice: false
+status_semantics:
+  MODEL_V2_RUNTIME_ACCEPTED: ACCEPTED
+  official_validation_promotion: MODEL_V2_NOT_PROMOTED_RELEASE_CI
+  operational_lineage: MODEL_V1
+  allowed_description: research-only frozen V2 CPU gateway artifact
+  forbidden_descriptions: [promoted deployment model, production V2 model, MODEL_V1 replacement]
+scope:
+  held_out_or_patient_data_access: none
+  hardware: none
+  api_runtime_frontend_changes: none

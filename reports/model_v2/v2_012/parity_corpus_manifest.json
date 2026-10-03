@@ -1,0 +1,34 @@
+{
+  "all_finite": true,
+  "corpus_id": "GATEWAY_PARITY_CORPUS_V2_V1",
+  "deterministic_regeneration_identical": true,
+  "dtype": "float32",
+  "edge_fixture_checks": {
+    "impulse_single_nonzero": true,
+    "linear_down": true,
+    "linear_up": true,
+    "minus_one": true,
+    "plus_one": true,
+    "zeros": true
+  },
+  "frozen_before_deployment_output_inspection": true,
+  "generator": "numpy.random.Generator(PCG64)",
+  "npz_sha256": "f897471970401fe1b97b8cc2a21acf3acdeeb032b1adb03fc08e14738e8c9da5",
+  "path": "tests/fixtures/gateway_parity_corpus_v2_v1.npz",
+  "purpose": "engineering conversion equivalence only; no patient data; no labels",
+  "random_rows_within_clip": true,
+  "rows": 1000,
+  "scientific_metrics_reported": false,
+  "seed": 20260927,
+  "status": "PASS",
+  "stored_shape": [
+    1000,
+    1,
+    2500
+  ],
+  "window_shape": [
+    1,
+    2500
+  ],
+  "windows_content_sha256": "d6e6c89fa37471b247a44c3b3f8a8f62a52a5a0e5ddf6d4edac2aa35539398f3"
+}

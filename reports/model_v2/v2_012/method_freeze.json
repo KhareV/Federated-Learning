@@ -1,0 +1,32 @@
+{
+  "benchmark_or_export_result_absent_at_freeze": true,
+  "config_bindings_verified": true,
+  "format": "TORCHSCRIPT_SCRIPT",
+  "gateway_artifact_absent_at_freeze": true,
+  "measured_per_run": 1000,
+  "method_artifact_sha256": {
+    "configs/model_v2/gateway_artifact_v2.yaml": "6a6dc7a9281be69345491bdfe501f33edb3af9fdc2c479c484376ac550bf2ca1",
+    "deployment/benchmark.py": "e3473ed1fd2c42a38ab47623895144b941c3b9dc9b9f6ce0702583d9e0a147e9",
+    "deployment/gateway_v2.py": "9f134196fc67db74a61f6e4d7e7209d0b028493c1a152419aa948d8cc47b2ee8",
+    "deployment/runtime.py": "d822ebc0f0b1f994f2a9def38ef55e0be4a44256b67235980b9aaca8203c11ff",
+    "models/gateway_artifact_v2_verify.py": "af43dd437c4461caae80e4111da51b26caf33852f0a94d8fb6f2bdf902549df6",
+    "reports/model_v2/v2_012/benchmark_config.json": "d5a8c1cf22eef2822ea21b8a193d278cd28ce6eab3867f0820928bbde93510e5",
+    "reports/model_v2/v2_012/parity_corpus_manifest.json": "d76964a64899450eb805ed022e42b41f6d9e3cd88d426c8920a3189e0a3dc4f5",
+    "scripts/build_gateway_manifest_v2.py": "7589ca4849187ace8a4b2df16d93608c60c8934df618fecb8d2c6dd7ef3717be",
+    "scripts/export_gateway_v2.py": "aedabfff85326d156ac469d902ee47b97c5c4365c982c999acd3bdc9be1be6c3",
+    "scripts/freeze_v2_012_method.py": "9166328cb1d960c430ddc6a9194ce826b4ddf8f3cf199ce1d570578d6083c550",
+    "scripts/run_gateway_v2_benchmark.py": "6001d34be370d7fbe540283acb8e5ae3e58a54f55cbc853c148feb8758701701",
+    "tests/fixtures/gateway_parity_corpus_v2_v1.npz": "f897471970401fe1b97b8cc2a21acf3acdeeb032b1adb03fc08e14738e8c9da5"
+  },
+  "operational_lineage": "MODEL_V1",
+  "owner_task": "V2-012",
+  "precision": "FP32",
+  "repetitions": 3,
+  "status": "PASS",
+  "tolerance": {
+    "atol": 1e-06,
+    "rtol": 1e-06
+  },
+  "v2_012_registry_status_at_freeze": "NOT_STARTED",
+  "warmup": 100
+}

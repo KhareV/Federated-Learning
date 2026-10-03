@@ -1,0 +1,26 @@
+{
+  "cal_v2_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+  "cal_v2_verifier": "PASS",
+  "checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "checks": {
+    "architecture": true,
+    "calibration_domain": true,
+    "checkpoint_sha": true,
+    "comparator": true,
+    "fixture_reproduced": true,
+    "frozen_config_loads": true,
+    "map": true,
+    "parameter_count": true,
+    "preproc": true,
+    "release_seed": true,
+    "schedule": true,
+    "selected_epoch": true,
+    "target": true,
+    "temperature": true,
+    "threshold": true
+  },
+  "model_v2_final_verifier": "PASS",
+  "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8",
+  "raw_model_output": "single pre-sigmoid logit",
+  "status": "PASS"
+}

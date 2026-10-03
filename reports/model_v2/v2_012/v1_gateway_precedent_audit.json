@@ -1,0 +1,75 @@
+{
+  "artifact": "GATEWAY_ARTIFACT_V1",
+  "artifact_bytes": 82741,
+  "artifact_loads_in_current_runtime": true,
+  "artifact_path": "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts",
+  "artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+  "artifact_sha_matches_lock": true,
+  "deployment_artifact_id": "GATEWAY_FP32_V1",
+  "documented_differences_for_v2": {
+    "benchmark_inputs": "V1 used INTERNAL_TEST windows; V2 must not reopen INTERNAL_TEST and uses a synthetic parity corpus",
+    "calibration_runtime_math": "V1 runtime uses math.exp inline; V2 must use the canonical CAL_V2 helpers (Section 14)",
+    "equivalence_tolerance": "V1 development tolerance 1e-5; V2 predeclares atol=rtol=1e-6",
+    "format_deprecation": "torch.jit.script is deprecated in torch 2.14.0; V1 precedent retained for a controlled comparison",
+    "repeat_count": "V1 used 2; V2 predeclares 3"
+  },
+  "expectation_mechanically_confirmed": true,
+  "freeze_id": "F14",
+  "parameter_count_v1": 13185,
+  "source_model_sha256": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+  "source_sha_matches_live": true,
+  "status": "PASS",
+  "t029_benchmark_method": {
+    "artifact_size_method": true,
+    "batch_size": 1,
+    "benchmark_boundary": "gateway model plus CAL_V1 inference call only",
+    "benchmark_input_selection": "first 1000 INTERNAL_TEST example IDs in frozen prediction order",
+    "conversion_equivalence_fields": [
+      "decision_agreement_fraction",
+      "maximum_absolute_raw_logit_delta",
+      "maximum_calibrated_probability_delta",
+      "mean_absolute_raw_logit_delta",
+      "mean_calibrated_probability_delta",
+      "metric_absolute_deltas",
+      "threshold_decision_disagreements"
+    ],
+    "cpu_device_policy": "cpu",
+    "deployment_format": "TORCHSCRIPT_SCRIPT",
+    "development_equivalence_tolerance_abs": 1e-05,
+    "format_created_by_torch_jit_script": true,
+    "format_preference_order": [
+      "torch.jit.script",
+      "torch.jit.trace",
+      "PYTORCH_EAGER_GATEWAY_V1"
+    ],
+    "fp_precision": "FP32",
+    "input_dtype": "float32",
+    "input_tensor_shape": [
+      1,
+      1,
+      2500
+    ],
+    "int8": "OPTIONAL_NOT_ATTEMPTED",
+    "measured_count": 1000,
+    "memory_measurement_method": "fresh child process resource.getrusage(RUSAGE_SELF).ru_maxrss",
+    "memory_unit_handling": "macOS ru_maxrss treated as bytes; Linux as KiB",
+    "repeat_count": 2,
+    "runtime_calibration_math": true,
+    "thread_code": true,
+    "thread_configuration": {
+      "interop": 1,
+      "intraop": 1
+    },
+    "timer": "time.perf_counter_ns",
+    "timer_code": true,
+    "warmup_code": true,
+    "warmup_count": 100
+  },
+  "t029_recorded_results": {
+    "host": "Apple M5",
+    "p50_ms": 0.185167,
+    "p95_ms": 0.19984025,
+    "peak_rss_bytes": 325844992,
+    "throughput": 5370.9737187030605
+  }
+}

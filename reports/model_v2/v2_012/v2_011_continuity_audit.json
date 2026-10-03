@@ -1,0 +1,25 @@
+{
+  "ancestry": {
+    "corrective_method_commit": true,
+    "failed_diagnostic_commit": true,
+    "result_commit": true
+  },
+  "checks": {
+    "attribution_arrays_unchanged": true,
+    "case_ids_unchanged": true,
+    "commits_in_history": true,
+    "completeness_semantics_successor_frozen": true,
+    "explainability_verifier_pass": true,
+    "final_regression_1926_25_chunks_zero_discrepancies": true,
+    "ig_64_point_gauss_legendre": true,
+    "noise_analysis_complete": true,
+    "v2_011_protected_audit_pass": true
+  },
+  "commits": {
+    "corrective_method_commit": "4fdbe788079da0e6482d39860e0a6bd2bd29bf88",
+    "failed_diagnostic_commit": "ce1d055f37d7ddcb4a7c0c6117ba8c4e20450b51",
+    "result_commit": "09d4d2ae5093e18e3c53b4a847f18a052b00d62e"
+  },
+  "status": "PASS",
+  "v2_011_redone": false
+}
