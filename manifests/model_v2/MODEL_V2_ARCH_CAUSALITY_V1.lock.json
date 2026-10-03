@@ -1,0 +1,105 @@
+{
+  "active_protocol_sha256": "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81",
+  "architecture_source_sha256": "2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0",
+  "best_learned_only_architecture_id": "MODEL_V2_TCN_MEANMAX",
+  "best_learned_only_sha256": "baf7ad545e7b588127a4eb6c422663ecf0435612d814471509f7d213d5560d91",
+  "bootstrap_draws_sha256_reused_from_v2_002": "e51124bb7675fa2fa175c14194fd6df1f3f218ff85fbd1f8f42fa49deb0d4071",
+  "change_control": "This lock is never mutated in place. A corrected architecture-causality result requires a new, additive MODEL_V2_ARCH_CAUSALITY_V2 successor with this lock preserved byte-identical as its predecessor.",
+  "component_id": "MODEL_V2_ARCH_CAUSALITY_V1",
+  "d1_causal_hypotheses": {
+    "H0": {
+      "delta_AUPRC_ci": [
+        -0.01784319496971861,
+        0.08038964425516526
+      ],
+      "delta_AUROC_ci": [
+        -0.03470300295719849,
+        0.07155118179320716
+      ],
+      "invalid_B": 0,
+      "left": "MODEL_V2_CAPCTRL",
+      "point_delta_AUPRC": 0.026510547948474517,
+      "point_delta_AUROC": 0.018246578704592786,
+      "right": "MODEL_V1_CV_REFERENCE_V1_seed_20260927",
+      "valid_B": 2000,
+      "verdict": "INCONCLUSIVE"
+    },
+    "H1": {
+      "delta_AUPRC_ci": [
+        0.23396389645596918,
+        0.5602576191382481
+      ],
+      "delta_AUROC_ci": [
+        0.15942243165931655,
+        0.43685194032053387
+      ],
+      "invalid_B": 0,
+      "left": "MODEL_V2_TCN_MEAN",
+      "point_delta_AUPRC": 0.42170636741113954,
+      "point_delta_AUROC": 0.288967168471554,
+      "right": "MODEL_V2_CAPCTRL",
+      "valid_B": 2000,
+      "verdict": "SUPPORTED"
+    },
+    "H2": {
+      "delta_AUPRC_ci": [
+        -0.08875862843897973,
+        0.07418533237381596
+      ],
+      "delta_AUROC_ci": [
+        -0.08429585733427569,
+        0.02772104954621078
+      ],
+      "invalid_B": 0,
+      "left": "MODEL_V2_TCN_MEANMAX",
+      "point_delta_AUPRC": 0.002306046800480188,
+      "point_delta_AUROC": -0.02312453569178441,
+      "right": "MODEL_V2_TCN_MEAN",
+      "valid_B": 2000,
+      "verdict": "INCONCLUSIVE"
+    }
+  },
+  "d1_d2_advancement_list": [
+    "MODEL_V2_TCN_MEAN",
+    "MODEL_V2_TCN_MEANMAX"
+  ],
+  "d1_decision_sha256": "e6b7c32e721440fd20d0b2d8759840af325275f0169ac03fa2b22fc5a788ea38",
+  "d1_oof_predictions_sha256": "dd843101d130eaa60220d5cb88e1597be078cb52a89b416aeb6e17c3e37bd9b5",
+  "d1_point_metrics": {
+    "MODEL_V2_CAPCTRL": {
+      "pooled_OOF_AUPRC": 0.44332730008366905,
+      "pooled_OOF_AUROC": 0.6246581099982121
+    },
+    "MODEL_V2_TCN_MEAN": {
+      "pooled_OOF_AUPRC": 0.8650336674948086,
+      "pooled_OOF_AUROC": 0.9136252784697662
+    },
+    "MODEL_V2_TCN_MEANMAX": {
+      "pooled_OOF_AUPRC": 0.8673397142952888,
+      "pooled_OOF_AUROC": 0.8905007427779817
+    }
+  },
+  "d1_qualified": [
+    "MODEL_V2_TCN_MEAN",
+    "MODEL_V2_TCN_MEANMAX"
+  ],
+  "d2_oof_predictions_sha256": "f3d15424ede10ccb4fcbbf6ca8ddcfc7eb2629b89a309fb88bd450795a7225d1",
+  "d2_outcome": "D2_TWO_SURVIVORS",
+  "d2_ran": true,
+  "d2_stability_decision_sha256": "d1b8af7e44c06c951a295c44e1dd14d5e03e1ccc1e9d0321afe9509db7275555",
+  "d2_survivors": [
+    "MODEL_V2_TCN_MEAN",
+    "MODEL_V2_TCN_MEANMAX"
+  ],
+  "git_sha": "31a82649079e495e0c1d9eee100bc29620d91301",
+  "hybrid_trigger_sha256": "cc5aea9aa707a33df5dc8ed79a181d7ee003496d7e8ecb7ae20accfdf33ebb4e",
+  "hybrid_trigger_status": "FALSE",
+  "inner_cv_manifest_sha256": "24f7ddc8b6268427a365505785d0cc60d489a2bd2e8e69665ff4c9b49e093224",
+  "model_v1_cv_reference_lock_sha256": "87dc828fcc0c9a6747ca1b228e027d8303542c8fc23981056a4cf5808a3e4139",
+  "not_a_canonical_freeze_row": true,
+  "outer_cv_manifest_sha256": "cc5258191759d5ba102cac7d40497c6bccf85055201c016fc4132d69a2fb76c6",
+  "owner_task": "V2-004",
+  "status": "FROZEN_ARCH_CAUSALITY",
+  "training_source_sha256": "73cca30cdece34a1af6264100736452b56826b96511ec18bf7559a82f930c411",
+  "v2_004_config_sha256": "f33f369a22bd907691e6d1f9730ccdfb413b5fb2bfcdc467f0fb5a095bb02f7e"
+}

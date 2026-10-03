@@ -1,0 +1,23 @@
+{
+  "AUPRC_mean": 0.8558768456473372,
+  "AUPRC_minimum": 0.8338129485919235,
+  "AUPRC_sample_sd": 0.01911275378128315,
+  "AUROC_mean": 0.8986157690045005,
+  "architecture_id": "MODEL_V2_TCN_MEANMAX",
+  "component_id": "BEST_LEARNED_ONLY_V2_CV_V1",
+  "instability_status": "SURVIVOR",
+  "not_a_canonical_freeze": true,
+  "not_a_checkpoint_promotion": true,
+  "paired_bootstrap_vs_v1": {
+    "V1_three_seed_mean_point_AUPRC": 0.4138882608052527,
+    "candidate_three_seed_mean_point_AUPRC": 0.8558768456473372,
+    "delta_AUPRC_ci": [
+      0.2876449518267463,
+      0.5535266895118248
+    ],
+    "invalid_B": 0,
+    "point_delta_AUPRC": 0.44198858484208453,
+    "valid_B": 2000
+  },
+  "parameter_count": 57577
+}

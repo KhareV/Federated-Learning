@@ -1,0 +1,29 @@
+{
+  "bootstrap_id": "MODEL_V2_BOOTSTRAP_DRAWS_V1",
+  "note": "mean of three independently trained seed models on the SAME patient draw, paired against MODEL_V1_CV_REFERENCE_V1's own three-seed-mean replicate series (also reused, never recomputed); not an ensemble, not a p-value or t-test.",
+  "per_architecture": {
+    "MODEL_V2_TCN_MEAN": {
+      "V1_three_seed_mean_point_AUPRC": 0.4138882608052527,
+      "candidate_three_seed_mean_point_AUPRC": 0.8544937558119111,
+      "delta_AUPRC_ci": [
+        0.2782787478913451,
+        0.5651341957288789
+      ],
+      "invalid_B": 0,
+      "point_delta_AUPRC": 0.4406054950066584,
+      "valid_B": 2000
+    },
+    "MODEL_V2_TCN_MEANMAX": {
+      "V1_three_seed_mean_point_AUPRC": 0.4138882608052527,
+      "candidate_three_seed_mean_point_AUPRC": 0.8558768456473372,
+      "delta_AUPRC_ci": [
+        0.2876449518267463,
+        0.5535266895118248
+      ],
+      "invalid_B": 0,
+      "point_delta_AUPRC": 0.44198858484208453,
+      "valid_B": 2000
+    }
+  },
+  "reused_from": "V2-002"
+}

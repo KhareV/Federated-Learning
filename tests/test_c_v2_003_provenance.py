@@ -89,4 +89,5 @@ def test_v2_003_and_v2g2_still_pass() -> None:
         gates = {row["gate_id"]: row["status"] for row in csv.DictReader(handle)}
     assert tasks["V2-003"] == "PASS"
     assert gates["V2G2"] == "PASS"
-    assert tasks["V2-004"] == "NOT_STARTED"
+    # V2-004 has since legitimately passed (see tests/test_v2_004_results.py); this test only
+    # protects V2-003/V2G2's own status, which this corrective checkpoint was scoped to.

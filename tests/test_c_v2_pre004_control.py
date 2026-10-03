@@ -37,7 +37,9 @@ def test_v2_004_registry_states_35_fit_cap() -> None:
         rows = list(csv.DictReader(handle))
     row = next(r for r in rows if r["task_id"] == "V2-004")
     assert "35" in row["notes"]
-    assert row["status"] == "NOT_STARTED"
+    # V2-004 has since legitimately run and passed (see tests/test_v2_004_results.py); this
+    # checkpoint's own scope was only the fit-budget correction, not V2-004's eventual status.
+    assert row["status"] in {"NOT_STARTED", "PASS"}
 
 
 def test_d1_uses_only_release_seed() -> None:
@@ -211,10 +213,14 @@ def test_v2_protocol_component_registry_row_exists() -> None:
     assert row["status"] == "FROZEN_RESEARCH_PROTOCOL"
 
 
-def test_v2_004_and_v2g3_still_not_started() -> None:
+def test_v2_004_and_v2g3_not_regressed() -> None:
+    # This checkpoint (C-V2-PRE004-CONTROL) ran strictly before V2-004; it required V2-004/
+    # V2G3 to still be NOT_STARTED at that time, which was true and is preserved in
+    # reports/model_v2/c_v2_pre004_control/entry_audit.json. V2-004 has since legitimately
+    # run and passed -- this test only guards against an invalid status value.
     with (ROOT / "manifests/model_v2/task_registry_v1.csv").open(newline="") as handle:
         tasks = {row["task_id"]: row["status"] for row in csv.DictReader(handle)}
     with (ROOT / "manifests/model_v2/gate_registry_v1.csv").open(newline="") as handle:
         gates = {row["gate_id"]: row["status"] for row in csv.DictReader(handle)}
-    assert tasks["V2-004"] == "NOT_STARTED"
-    assert gates["V2G3"] == "NOT_STARTED"
+    assert tasks["V2-004"] in {"NOT_STARTED", "PASS"}
+    assert gates["V2G3"] in {"NOT_STARTED", "PASS"}

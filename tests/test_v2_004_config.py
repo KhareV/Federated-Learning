@@ -582,12 +582,15 @@ def test_registries_parse_consistently() -> None:
         assert all(len(row) == header_len for row in rows[1:])
 
 
-def test_v2_004_and_v2g3_not_started_before_real_run() -> None:
+def test_v2_004_and_v2g3_status_valid() -> None:
+    # Originally asserted NOT_STARTED as a pre-run (pre-METHOD_COMMIT) sanity check; V2-004
+    # has since legitimately run and passed (see tests/test_v2_004_results.py), so this now
+    # only guards against an invalid status value rather than the pre-run state specifically.
     import csv
 
     with (ROOT / "manifests/model_v2/task_registry_v1.csv").open(newline="") as handle:
         tasks = {row["task_id"]: row["status"] for row in csv.DictReader(handle)}
     with (ROOT / "manifests/model_v2/gate_registry_v1.csv").open(newline="") as handle:
         gates = {row["gate_id"]: row["status"] for row in csv.DictReader(handle)}
-    assert tasks["V2-004"] == "NOT_STARTED"
-    assert gates["V2G3"] == "NOT_STARTED"
+    assert tasks["V2-004"] in {"NOT_STARTED", "PASS"}
+    assert gates["V2G3"] in {"NOT_STARTED", "PASS"}

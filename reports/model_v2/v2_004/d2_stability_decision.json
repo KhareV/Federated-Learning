@@ -1,0 +1,50 @@
+{
+  "advanced_architectures": [
+    "MODEL_V2_TCN_MEAN",
+    "MODEL_V2_TCN_MEANMAX"
+  ],
+  "best_learned_only_architecture_id": "MODEL_V2_TCN_MEANMAX",
+  "hybrid_trigger": {
+    "best_learned_only_mean_auprc": 0.8558768456473372,
+    "best_reduced_rf_v1_auprc": 0.713140103147974,
+    "comparator": ">=",
+    "gap": -0.1427367424993632,
+    "status": "FALSE",
+    "threshold": 0.03,
+    "trigger": false
+  },
+  "instability_limit": 0.034951821160340735,
+  "multi_candidate": true,
+  "per_architecture": {
+    "MODEL_V2_TCN_MEAN": {
+      "AUPRC_mean": 0.8544937558119111,
+      "AUPRC_minimum": 0.8405370845329192,
+      "AUPRC_sample_sd": 0.01260064795180429,
+      "AUROC_mean": 0.9047950365936409,
+      "disposition": "SURVIVOR",
+      "instability_limit": 0.034951821160340735,
+      "non_instability_disqualification_reasons": [],
+      "non_instability_disqualified": false,
+      "parameter_count": 57553,
+      "unstable": false
+    },
+    "MODEL_V2_TCN_MEANMAX": {
+      "AUPRC_mean": 0.8558768456473372,
+      "AUPRC_minimum": 0.8338129485919235,
+      "AUPRC_sample_sd": 0.01911275378128315,
+      "AUROC_mean": 0.8986157690045005,
+      "disposition": "SURVIVOR",
+      "instability_limit": 0.034951821160340735,
+      "non_instability_disqualification_reasons": [],
+      "non_instability_disqualified": false,
+      "parameter_count": 57577,
+      "unstable": false
+    }
+  },
+  "stage": "D2",
+  "survivors": [
+    "MODEL_V2_TCN_MEAN",
+    "MODEL_V2_TCN_MEANMAX"
+  ],
+  "v2_004_outcome": "D2_TWO_SURVIVORS"
+}

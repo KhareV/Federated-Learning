@@ -1,0 +1,19 @@
+{
+  "d1": {
+    "aggregation_repeated": true,
+    "bootstrap_decisions_identical": true,
+    "d1_decision_identical": true,
+    "fully_identical": true,
+    "point_metrics_identical": true,
+    "stage": "D1",
+    "status": "PASS"
+  },
+  "d2": {
+    "aggregation_repeated": true,
+    "d2_decision_identical": true,
+    "fully_identical": true,
+    "hybrid_trigger_identical": true,
+    "stage": "D2",
+    "status": "PASS"
+  }
+}

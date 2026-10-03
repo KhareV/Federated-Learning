@@ -1,0 +1,22 @@
+{
+  "MODEL_V2_TCN_MEAN": {
+    "AUPRC_mean": 0.8544937558119111,
+    "AUPRC_minimum": 0.8405370845329192,
+    "AUPRC_sample_sd": 0.01260064795180429,
+    "AUROC_mean": 0.9047950365936409,
+    "AUROC_minimum": 0.8950837213902416,
+    "AUROC_sample_sd": 0.009302126229488712,
+    "note": "Summary of three independently trained seeds, never an ensemble prediction and never a fourth model.",
+    "parameter_count": 57553
+  },
+  "MODEL_V2_TCN_MEANMAX": {
+    "AUPRC_mean": 0.8558768456473372,
+    "AUPRC_minimum": 0.8338129485919235,
+    "AUPRC_sample_sd": 0.01911275378128315,
+    "AUROC_mean": 0.8986157690045005,
+    "AUROC_minimum": 0.8905007427779817,
+    "AUROC_sample_sd": 0.01039027558872318,
+    "note": "Summary of three independently trained seeds, never an ensemble prediction and never a fourth model.",
+    "parameter_count": 57577
+  }
+}
