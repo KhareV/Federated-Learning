@@ -1,0 +1,66 @@
+{
+  "all_six_cover_27_groups_9660_windows": true,
+  "checkpoints_modified": false,
+  "classification": "ROLE_LABEL_PROVENANCE_SEMANTIC_ONLY_POPULATION_SCIENTIFICALLY_CORRECT",
+  "correction_required": false,
+  "diagnostic_fit_count": 6,
+  "finalist_selection_affected": false,
+  "finding": "The TRAIN-source diagnostic in run_v2_007_fit.py passes role='FINAL_INNER_VALIDATION' to the CV-role firewall/ledger (reusing an already-allowed role string for V2-007_TRAIN_DIAGNOSTIC, since no dedicated 'ALL_TRAIN_DIAGNOSTIC' role was defined), but the actual population loaded uses participant_group_ids=lib.all_train_groups() -- all 27 TRAIN groups, 9660 windows -- not the 5-group FINAL_INNER_VALIDATION subset. The ledger rows confirm this mechanically: every one of the six diagnostic accesses shows group_count=27, example_id_count=9660, matching source_train_metrics.csv's windows=9660 for every fit.",
+  "per_fit": [
+    {
+      "architecture_id": "MODEL_V2_TCN_MEAN",
+      "covers_all_27_train_groups": true,
+      "covers_all_9660_train_windows": true,
+      "example_id_count": 9660,
+      "group_count": 27,
+      "role_label_used": "FINAL_INNER_VALIDATION",
+      "seed": 20260927
+    },
+    {
+      "architecture_id": "MODEL_V2_TCN_MEAN",
+      "covers_all_27_train_groups": true,
+      "covers_all_9660_train_windows": true,
+      "example_id_count": 9660,
+      "group_count": 27,
+      "role_label_used": "FINAL_INNER_VALIDATION",
+      "seed": 20260928
+    },
+    {
+      "architecture_id": "MODEL_V2_TCN_MEAN",
+      "covers_all_27_train_groups": true,
+      "covers_all_9660_train_windows": true,
+      "example_id_count": 9660,
+      "group_count": 27,
+      "role_label_used": "FINAL_INNER_VALIDATION",
+      "seed": 20260929
+    },
+    {
+      "architecture_id": "MODEL_V2_TCN_MEANMAX",
+      "covers_all_27_train_groups": true,
+      "covers_all_9660_train_windows": true,
+      "example_id_count": 9660,
+      "group_count": 27,
+      "role_label_used": "FINAL_INNER_VALIDATION",
+      "seed": 20260927
+    },
+    {
+      "architecture_id": "MODEL_V2_TCN_MEANMAX",
+      "covers_all_27_train_groups": true,
+      "covers_all_9660_train_windows": true,
+      "example_id_count": 9660,
+      "group_count": 27,
+      "role_label_used": "FINAL_INNER_VALIDATION",
+      "seed": 20260928
+    },
+    {
+      "architecture_id": "MODEL_V2_TCN_MEANMAX",
+      "covers_all_27_train_groups": true,
+      "covers_all_9660_train_windows": true,
+      "example_id_count": 9660,
+      "group_count": 27,
+      "role_label_used": "FINAL_INNER_VALIDATION",
+      "seed": 20260929
+    }
+  ],
+  "status": "PASS"
+}

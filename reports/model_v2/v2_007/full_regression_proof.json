@@ -11,5 +11,21 @@
     "1680 passed, 15 warnings in 18.61s"
   ],
   "ruff_exit_code": 0,
-  "status": "PASS"
+  "status": "PASS",
+  "additional_exhaustive_chunked_proof": {
+    "reason": "Run as extra rigor during the V2-007 continuity audit, not because any actual outer-harness timeout occurred for this phase (see prefit_regression_disclosure.json).",
+    "method_note": "scripts/run_v2_007_chunked_regression.py: collect-only enumerated every test node, partitioned into 21 fixed-size 80-node chunks, executed each chunk as its own pytest invocation, proved executed == collected exactly.",
+    "collected_node_count": 1680,
+    "chunk_count": 21,
+    "chunk_size": 80,
+    "executed_unique_count": 1680,
+    "missing": 0,
+    "duplicates": 0,
+    "unexpected": 0,
+    "failed_chunks": 0,
+    "failed_tests": 0,
+    "collected_sorted_node_list_sha256": "a7cf5dc894290ece611be0b0ffb7ca59c13927949ce7f48a0db565b35150a4e6",
+    "detail_file": "chunked_regression_proof_core.json",
+    "status": "PASS"
+  }
 }

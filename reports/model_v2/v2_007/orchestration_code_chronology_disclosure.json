@@ -1,0 +1,31 @@
+{
+  "any_script_missing_before_access": true,
+  "classification": "ORCHESTRATION_CODE_POST_ACCESS_PROTOCOL_DEVIATION",
+  "original_requirement": "V2-007 Section 21/26 required the official-VALIDATION runner, prediction writer, metric/bootstrap/patient-diagnostic calculation, finalist-comparison rule, promotion rule, independent verifiers, and packaging/registry-transition code to all exist and pass tests BEFORE the first neural fit -- i.e. committed no later than METHOD_COMMIT.",
+  "per_script_existed_before_access": {
+    "scripts/aggregate_v2_007.py": {
+      "existed_at_pre_validation_checkpoint_commit": false
+    },
+    "scripts/bootstrap_v2_007.py": {
+      "existed_at_pre_validation_checkpoint_commit": false
+    },
+    "scripts/decide_v2_007.py": {
+      "existed_at_pre_validation_checkpoint_commit": false
+    },
+    "scripts/freeze_v2_007_components.py": {
+      "existed_at_pre_validation_checkpoint_commit": false
+    },
+    "scripts/generate_v2_007_evidence.py": {
+      "existed_at_pre_validation_checkpoint_commit": false
+    },
+    "scripts/run_v2_007_official_validation.py": {
+      "existed_at_pre_validation_checkpoint_commit": false
+    }
+  },
+  "rerun_performed": false,
+  "rerun_warranted": false,
+  "scientific_impact_assessment": "No new scientific rule was invented after seeing results: the orchestration scripts only call the already-frozen, already-tested stats.* functions and serialize their outputs -- no threshold, tie-break order, or formula in them differs from what Section 23/24 froze at METHOD_COMMIT. This is independently corroborated by generate_v2_007_evidence.py's independent_reverification(), a SEPARATE reimplementation that does not import aggregate_v2_007.py/bootstrap_v2_007.py/decide_v2_007.py and reproduces every scientific value exactly (see independent_reverification.json, status PASS). No scientific method file changed after access (training_method_immutability_diff.json, status PASS). Classification: ORCHESTRATION_CODE_POST_ACCESS_PROTOCOL_DEVIATION -- a real, disclosed process deviation from the strict pre-registration chronology, with no detected scientific impact.",
+  "status": "DISCLOSED",
+  "what_was_actually_pre_frozen_at_method_commit": "The scientific DECISION RULES themselves -- scripts/_v2_007_stats.py's finalist_comparison()/promotion_decision()/bootstrap_auprc_distribution()/percentile_ci() -- were committed at METHOD_COMMIT (ddf2f68) with 41 synthetic unit tests exercising every tie-break branch and every promotion-decision branch on fabricated numbers, before any fit and before any VALIDATION access.",
+  "what_was_not_pre_committed": "The ORCHESTRATION scripts that read the real prediction CSVs and invoke those already-frozen functions -- including the official-VALIDATION one-shot runner itself (run_v2_007_official_validation.py) -- were first committed together with the results in RESULT_COMMIT (babef1b), not at or before METHOD_COMMIT. This is confirmed mechanically: git cat-file -e at the pre-validation-checkpoint commit fails for all six listed scripts."
+}

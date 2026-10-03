@@ -1,0 +1,23 @@
+{
+  "any_scientific_method_file_changed": false,
+  "diff_method_commit_to_pre_validation_checkpoint": "",
+  "diff_pre_validation_checkpoint_to_result": "",
+  "method_commit": "ddf2f689e18501f00e6ee4258c0227c9bfb496be",
+  "pre_validation_checkpoint_commit": "418ccbd350f79d49e7a9c070b149e34f941bfeac",
+  "result_commit": "babef1b88f52cf97c07f51b86949381cdf098184",
+  "scientific_method_paths_checked": [
+    "scripts/_v2_007_lib.py",
+    "scripts/_v2_007_stats.py",
+    "scripts/run_v2_007_fit.py",
+    "scripts/run_all_v2_007_fits.py",
+    "scripts/freeze_v2_007_method.py",
+    "scripts/build_v2_007_validation_bootstrap_draws.py",
+    "src/nhm/model_v2_cv_role_guard.py",
+    "src/nhm/model_v2_official_validation_guard.py",
+    "configs/model_v2/official_validation_v1.yaml",
+    "manifests/model_v2/MODEL_V2_FINALIST_SHORTLIST_V1.lock.json",
+    "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V3.lock.json",
+    "manifests/model_v2/cv/MITDB_TRAIN_FINAL_INNER_V2_V1.csv"
+  ],
+  "status": "PASS"
+}
