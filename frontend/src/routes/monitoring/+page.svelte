@@ -15,6 +15,12 @@
 	import { flatDemoWindow } from '$lib/dashboard/demo-window';
 	import { loadReplayBundle, runCanonicalRecordedReplay, type ReplayBundleEvent } from '$lib/dashboard/replay';
 
+	// Request model_id for the manual research-window control. Build-time deployment configuration,
+	// NOT a user-controlled runtime selector: defaults to the operational MODEL_V1; the V2 research
+	// build sets VITE_NHM_REQUEST_MODEL_ID. The API process accepts only the model it is bound to.
+	const LIVE_REQUEST_MODEL_ID: string =
+		(import.meta as unknown as { env?: Record<string, string> }).env?.VITE_NHM_REQUEST_MODEL_ID || 'MODEL_V1';
+
 	function newSessionId(): string {
 		return `nhm-dashboard-${Math.random().toString(36).slice(2, 10)}`;
 	}
@@ -75,7 +81,7 @@
 			ecg: { samples: flatDemoWindow(), target_hz: ECG_WINDOW_TARGET_HZ, window_seconds: ECG_WINDOW_SECONDS },
 			ecg_quality: 'VALID',
 			ppg_context: null,
-			model_id: 'MODEL_V1'
+			model_id: LIVE_REQUEST_MODEL_ID
 		};
 		try {
 			const result = await nhmApi.inferWindow(request);
@@ -128,7 +134,7 @@
 
 <svelte:head>
 	<title>NHM Research Dashboard</title>
-	<meta name="description" content="NHM research-prototype monitoring dashboard: frozen API_RUNTIME_V1 contract, five canonical monitoring states, no diagnosis claim." />
+	<meta name="description" content="NHM research-prototype monitoring dashboard: frozen API_SCHEMA_V1 contract, five canonical monitoring states, no diagnosis claim." />
 </svelte:head>
 
 <main class="nhm-dashboard">
@@ -148,7 +154,7 @@
 			{#if replayMode}
 				<span>WINDOWS: {replayCompletedCount} / {replayTotalCount || '--'}</span>
 				{#if replayError}<span class="replay-error">{replayError}</span>{/if}
-				<small>Recorded public-ECG stream (MIT-BIH TRAIN, PUBLIC_ECG_REPLAY_V1) replayed through the real typed API client and this same dashboard session -- not live hardware, not a real-time feed. Every monitoring_state/probability shown is the real API response for that recorded window, not a prerecorded outcome.</small>
+				<small>Recorded software replay stream ({replayId}; a deterministic recorded fixture, not a person) replayed through the real typed API client and this same dashboard session -- not live hardware, not a real-time feed. Every monitoring_state/probability shown is the real API response for that recorded window, not a prerecorded outcome.</small>
 			{:else}
 				<span>WINDOWS SENT: {session.requestCount}</span>
 				<div class="session-actions">
@@ -165,7 +171,7 @@
 	<section class="panel-grid">
 		<Panel eyebrow="01 / LIVE WAVEFORMS" title="ECG model-ready window">
 			{#if session.latestEcgWindow}
-				<p class="panel-note">Most recent accepted {ECG_WINDOW_SAMPLE_COUNT}-sample / {ECG_WINDOW_TARGET_HZ} Hz MODEL_V1 interface window (10 seconds). This is the preprocessed model input, not raw hardware ADC output.</p>
+				<p class="panel-note">Most recent accepted {ECG_WINDOW_SAMPLE_COUNT}-sample / {ECG_WINDOW_TARGET_HZ} Hz model interface window (10 seconds). This is the preprocessed model input, not raw hardware ADC output.</p>
 				<MultiLine
 					series={[{ name: 'ECG (model input)', color: '#2bb8b0', values: session.latestEcgWindow }]}
 					height={160}

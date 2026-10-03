@@ -35,8 +35,20 @@ def test_dashboard_ui_v1_3_exists_and_preserves_predecessor() -> None:
     assert hash_file(ROOT / "artifacts/DASHBOARD_UI_V1_2.lock.json") == lock["predecessor_sha256"]
 
 
-def test_dashboard_ui_v1_3_verify_passes() -> None:
-    result = verify_dashboard_ui_v1_3()
+def test_dashboard_ui_v1_3_superseded_by_v1_4_with_preserved_lock() -> None:
+    """V2-013 changed two frontend sources bound by V1_3 (model-identity fix). The V1_3 lock file
+    is preserved byte-identical; its live verifier reports drift; V1_4 verifies."""
+    successor = json.loads(
+        (ROOT / "artifacts/DASHBOARD_UI_V1_4.lock.json").read_text(encoding="utf-8")
+    )
+    assert hash_file(ROOT / "artifacts/DASHBOARD_UI_V1_3.lock.json") == (
+        successor["predecessor_sha256"]
+    )
+    with pytest.raises(RuntimeError, match="DASHBOARD_UI_V1_3_TAMPER"):
+        verify_dashboard_ui_v1_3()
+    from scripts.verify_dashboard_ui_v1_4_v2013 import verify as verify_v1_4
+
+    result = verify_v1_4()
     assert result["status"] == "PASS"
     assert result["predecessor_preserved"] is True
 

@@ -1,0 +1,902 @@
+{
+  "bundle_path": "frontend/static/replay/WEARABLE_SIM_V2_REPLAY_V1.json",
+  "bundle_sha256": "46836bd61305ac6f3be95a57c4fad14ee5a310ac6626b1def1f4fe542f7e8659",
+  "cadence_us": 5000000,
+  "chain": "WEARABLE_SIM_V1 ObservedRecord stream (360 Hz) -> GAP_POLICY_V1 -> stateful 360->250 Hz resampler -> causal ECG band-pass -> 10 s windows @ 5 s cadence -> QUALITY_V1 -> causal context alignment",
+  "chunk_records": 360,
+  "diagnostics_per_window": [
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 0,
+      "short_gap": false,
+      "timestamp_us": 15000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 1,
+      "short_gap": false,
+      "timestamp_us": 20000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 2,
+      "short_gap": false,
+      "timestamp_us": 25000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 3,
+      "short_gap": false,
+      "timestamp_us": 30000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 4,
+      "short_gap": false,
+      "timestamp_us": 35000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 5,
+      "short_gap": false,
+      "timestamp_us": 40000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 6,
+      "short_gap": false,
+      "timestamp_us": 45000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 7,
+      "short_gap": false,
+      "timestamp_us": 50000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 8,
+      "short_gap": false,
+      "timestamp_us": 55000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 9,
+      "short_gap": false,
+      "timestamp_us": 60000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 10,
+      "short_gap": false,
+      "timestamp_us": 65000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 11,
+      "short_gap": false,
+      "timestamp_us": 70000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 12,
+      "short_gap": false,
+      "timestamp_us": 75000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 13,
+      "short_gap": false,
+      "timestamp_us": 80000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 14,
+      "short_gap": false,
+      "timestamp_us": 85000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 15,
+      "short_gap": false,
+      "timestamp_us": 90000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 16,
+      "short_gap": false,
+      "timestamp_us": 95000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 17,
+      "short_gap": false,
+      "timestamp_us": 100000000
+    },
+    {
+      "ecg_quality": "DEGRADED",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [
+        "SHORT_GAP_FILL"
+      ],
+      "sequence_index": 18,
+      "short_gap": true,
+      "timestamp_us": 105000000
+    },
+    {
+      "ecg_quality": "DEGRADED",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [
+        "SHORT_GAP_FILL"
+      ],
+      "sequence_index": 19,
+      "short_gap": true,
+      "timestamp_us": 110000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 20,
+      "short_gap": false,
+      "timestamp_us": 115000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 21,
+      "short_gap": false,
+      "timestamp_us": 120000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 22,
+      "short_gap": false,
+      "timestamp_us": 125000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 23,
+      "short_gap": false,
+      "timestamp_us": 130000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 24,
+      "short_gap": false,
+      "timestamp_us": 135000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 25,
+      "short_gap": false,
+      "timestamp_us": 140000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 26,
+      "short_gap": false,
+      "timestamp_us": 145000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 27,
+      "short_gap": false,
+      "timestamp_us": 150000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 28,
+      "short_gap": false,
+      "timestamp_us": 155000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 29,
+      "short_gap": false,
+      "timestamp_us": 160000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 30,
+      "short_gap": false,
+      "timestamp_us": 165000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 31,
+      "short_gap": false,
+      "timestamp_us": 170000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 32,
+      "short_gap": false,
+      "timestamp_us": 175000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 33,
+      "short_gap": false,
+      "timestamp_us": 180000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 34,
+      "short_gap": false,
+      "timestamp_us": 185000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 35,
+      "short_gap": false,
+      "timestamp_us": 190000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 36,
+      "short_gap": false,
+      "timestamp_us": 195000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 37,
+      "short_gap": false,
+      "timestamp_us": 200000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 38,
+      "short_gap": false,
+      "timestamp_us": 205000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 39,
+      "short_gap": false,
+      "timestamp_us": 210000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 40,
+      "short_gap": false,
+      "timestamp_us": 215000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 41,
+      "short_gap": false,
+      "timestamp_us": 220000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 42,
+      "short_gap": false,
+      "timestamp_us": 225000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 43,
+      "short_gap": false,
+      "timestamp_us": 230000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 44,
+      "short_gap": false,
+      "timestamp_us": 235000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 45,
+      "short_gap": false,
+      "timestamp_us": 240000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 46,
+      "short_gap": false,
+      "timestamp_us": 245000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 47,
+      "short_gap": false,
+      "timestamp_us": 250000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 100,
+      "quality_reasons": [
+        "LONG_GAP_SPAN"
+      ],
+      "sequence_index": 48,
+      "short_gap": false,
+      "timestamp_us": 255000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 100,
+      "quality_reasons": [
+        "LONG_GAP_SPAN"
+      ],
+      "sequence_index": 49,
+      "short_gap": false,
+      "timestamp_us": 260000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 50,
+      "short_gap": false,
+      "timestamp_us": 265000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 51,
+      "short_gap": false,
+      "timestamp_us": 270000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 52,
+      "short_gap": false,
+      "timestamp_us": 275000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 53,
+      "short_gap": false,
+      "timestamp_us": 280000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 54,
+      "short_gap": false,
+      "timestamp_us": 285000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 55,
+      "short_gap": false,
+      "timestamp_us": 290000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 56,
+      "short_gap": false,
+      "timestamp_us": 295000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 57,
+      "short_gap": false,
+      "timestamp_us": 300000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 58,
+      "short_gap": false,
+      "timestamp_us": 305000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 59,
+      "short_gap": false,
+      "timestamp_us": 310000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 60,
+      "short_gap": false,
+      "timestamp_us": 315000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 61,
+      "short_gap": false,
+      "timestamp_us": 320000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 62,
+      "short_gap": false,
+      "timestamp_us": 325000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 63,
+      "short_gap": false,
+      "timestamp_us": 330000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 1250,
+      "quality_reasons": [
+        "LONG_GAP_SPAN"
+      ],
+      "sequence_index": 64,
+      "short_gap": false,
+      "timestamp_us": 335000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 2500,
+      "quality_reasons": [
+        "LONG_GAP_SPAN",
+        "FLATLINE"
+      ],
+      "sequence_index": 65,
+      "short_gap": false,
+      "timestamp_us": 340000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 2500,
+      "quality_reasons": [
+        "LONG_GAP_SPAN",
+        "FLATLINE"
+      ],
+      "sequence_index": 66,
+      "short_gap": false,
+      "timestamp_us": 345000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 1250,
+      "quality_reasons": [
+        "LONG_GAP_SPAN"
+      ],
+      "sequence_index": 67,
+      "short_gap": false,
+      "timestamp_us": 350000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 68,
+      "short_gap": false,
+      "timestamp_us": 355000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 69,
+      "short_gap": false,
+      "timestamp_us": 360000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 70,
+      "short_gap": false,
+      "timestamp_us": 365000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 71,
+      "short_gap": false,
+      "timestamp_us": 370000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 72,
+      "short_gap": false,
+      "timestamp_us": 375000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 73,
+      "short_gap": false,
+      "timestamp_us": 380000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 74,
+      "short_gap": false,
+      "timestamp_us": 385000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 75,
+      "short_gap": false,
+      "timestamp_us": 390000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 76,
+      "short_gap": false,
+      "timestamp_us": 395000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 77,
+      "short_gap": false,
+      "timestamp_us": 400000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [
+        "CLIPPING"
+      ],
+      "sequence_index": 78,
+      "short_gap": false,
+      "timestamp_us": 405000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [
+        "CLIPPING"
+      ],
+      "sequence_index": 79,
+      "short_gap": false,
+      "timestamp_us": 410000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [
+        "CLIPPING"
+      ],
+      "sequence_index": 80,
+      "short_gap": false,
+      "timestamp_us": 415000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 81,
+      "short_gap": false,
+      "timestamp_us": 420000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 82,
+      "short_gap": false,
+      "timestamp_us": 425000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 83,
+      "short_gap": false,
+      "timestamp_us": 430000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 84,
+      "short_gap": false,
+      "timestamp_us": 435000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 85,
+      "short_gap": false,
+      "timestamp_us": 440000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 250,
+      "quality_reasons": [
+        "LONG_GAP_SPAN"
+      ],
+      "sequence_index": 86,
+      "short_gap": false,
+      "timestamp_us": 445000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 250,
+      "quality_reasons": [
+        "LONG_GAP_SPAN"
+      ],
+      "sequence_index": 87,
+      "short_gap": false,
+      "timestamp_us": 450000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 88,
+      "short_gap": false,
+      "timestamp_us": 455000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 1250,
+      "quality_reasons": [
+        "LONG_GAP_SPAN"
+      ],
+      "sequence_index": 89,
+      "short_gap": false,
+      "timestamp_us": 460000000
+    },
+    {
+      "ecg_quality": "UNUSABLE",
+      "long_gap_or_missing": true,
+      "missing_slots": 1250,
+      "quality_reasons": [
+        "LONG_GAP_SPAN"
+      ],
+      "sequence_index": 90,
+      "short_gap": false,
+      "timestamp_us": 465000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 91,
+      "short_gap": false,
+      "timestamp_us": 470000000
+    },
+    {
+      "ecg_quality": "VALID",
+      "long_gap_or_missing": false,
+      "missing_slots": 0,
+      "quality_reasons": [],
+      "sequence_index": 92,
+      "short_gap": false,
+      "timestamp_us": 475000000
+    }
+  ],
+  "ecg_quality_counts": {
+    "DEGRADED": 2,
+    "UNUSABLE": 13,
+    "VALID": 78
+  },
+  "events_semantic_sha256": "47b93a04725e2224c258f8bb010cd55ccebf84e60d08231f3ba420ac8692e2c7",
+  "first_right_edge_us": 15000000,
+  "fixture_id": "WEARABLE_SIM_V2_REPLAY_V1",
+  "protected_partitions_accessed": false,
+  "provenance": {
+    "clinical_or_real_wearable_claim": false,
+    "dataset_id": "WEARABLE_SIM_V1",
+    "participant_id": "SIM_P000013",
+    "profile_id": "WEARABLE_SIM_V2013_INTEGRATION_PROFILE_V1",
+    "session_id": "SIM_S_V2013_LONGITUDINAL_000001",
+    "simulation_seed": 20260927,
+    "simulation_version": "WEARABLE_SIM_V1",
+    "source": "SYNTHETIC_PHYSIOLOGY",
+    "virtual_participant_is_human": false
+  },
+  "purpose": "deterministic ENGINEERING-ONLY simulated-wearable software replay for API_RUNTIME_V2 dashboard E2E; NOT clinical, NOT real-wearable evidence",
+  "request_model_id": "MODEL_V2_FINAL",
+  "scientific_metrics": false,
+  "window_count": 93
+}

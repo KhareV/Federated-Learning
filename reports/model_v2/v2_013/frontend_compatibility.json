@@ -1,0 +1,19 @@
+{
+  "api_client_changed": false,
+  "changed_sources": [
+    "frontend/src/lib/dashboard/state-presentation.ts",
+    "frontend/src/routes/monitoring/+page.svelte"
+  ],
+  "defect": "route hard-coded model_id 'MODEL_V1' for the manual request and showed MODEL_V1-specific copy; against API_RUNTIME_V2 the control could only return 400",
+  "fix": "build-time VITE_NHM_REQUEST_MODEL_ID (default MODEL_V1), model-neutral copy",
+  "git_diff_stat_at_audit": " 2 files changed, 11 insertions(+), 5 deletions(-)",
+  "predecessor_locks_preserved_byte_identical": true,
+  "reused_frontend": "frontend/ (SvelteKit); no dashboard/ui/web/frontend-v2 directory",
+  "runtime_model_selector_added": false,
+  "state_mapping_changed": false,
+  "status": "PASS",
+  "successor_locks": [
+    "DASHBOARD_UI_V1_4",
+    "E2E_REPLAY_SOFTWARE_V1_3"
+  ]
+}

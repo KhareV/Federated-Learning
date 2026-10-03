@@ -1,0 +1,9 @@
+{
+  "checkpoint": "V2-013",
+  "predecessor_id": "DASHBOARD_UI_V1_3",
+  "predecessor_preserved_unchanged": true,
+  "predecessor_sha256": "c6418b857bac62e30381b7f0e1b80b500cf94a06ec8c86e24907622dfa2e01c2",
+  "predecessor_status_at_supersession": "FROZEN_ENGINEERING_INTERFACE",
+  "reason": "remove hard-coded MODEL_V1 identity from the dashboard route's manual request and from model-specific user-facing copy so the same frontend works against the parallel API_RUNTIME_V2 research runtime; request model_id is a build-time deployment value (default MODEL_V1), not a runtime selector",
+  "successor_id": "DASHBOARD_UI_V1_4"
+}

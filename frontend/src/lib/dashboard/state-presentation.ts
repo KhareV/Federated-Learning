@@ -97,7 +97,7 @@ export function httpErrorPresentation(status: HttpErrorKind, message: string): H
 		return {
 			displayState: 'RECHECK_SENSOR',
 			title: STATE_PRESENTATION.RECHECK_SENSOR.title,
-			text: `Unusable or incomplete signal window -- MODEL_V1 was not run for this window: ${message}`,
+			text: `Unusable or incomplete signal window -- No model inference was run for this window: ${message}`,
 			tone: 'warning',
 			appendProbabilityPoint: false,
 			appendHistoryGap: true

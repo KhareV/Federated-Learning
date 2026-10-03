@@ -1,0 +1,122 @@
+{
+  "audited_commit": "40e127308b50bb4d5943826639d467203b9b4b29",
+  "config_status_at_entry": "CONTRACT_ONLY",
+  "contract_only": [
+    "MITDB_REPLAY",
+    "BIDMC_REPLAY",
+    "LIVE_SPEED_REPLAY",
+    "ACCELERATED_REPLAY"
+  ],
+  "existing_t034_wearable_sim_replay": "WEARABLE_SIM_REPLAY_V1 = 3 segment-flat windows (NORMAL / CONTEXT_UNAVAILABLE / UNUSABLE) built from the smoke kernel; kept untouched",
+  "implemented": [],
+  "implemented_profiles_at_entry": [
+    "WEARABLE_SIM_SMOKE"
+  ],
+  "inspected": [
+    "contracts/WEARABLE_SIM_V1.md",
+    "configs/simulation/WEARABLE_SIM_V1.yaml",
+    "simulation/",
+    "tests/fixtures/session_v1*",
+    "reports/t004/",
+    "reports/t005/",
+    "scripts/build_wearable_sim_replay_t034.py",
+    "simulation/quality_perturbations.py",
+    "scripts/run_replay.py"
+  ],
+  "known_quality_v1_observation": "QUALITY_V1 flatline test needs numerical flatness (std/rms<=1e-12); a SOURCE-level flat segment decays through the causal band-pass and is not flagged, so the V2-013 UNUSABLE scenarios use sensor dropout / gaps / ADC-rail clipping instead; recommended for V2-SIM-001, frozen QUALITY_V1 NOT changed",
+  "missing": [
+    "LONGITUDINAL_COHORT"
+  ],
+  "modes": {
+    "ACCELERATED_REPLAY": {
+      "classification": "CONTRACT_ONLY",
+      "non_test_implementation_files": [
+        "scripts/validate_t004_deferral.py"
+      ],
+      "python_files_naming_it_at_entry": [
+        "scripts/validate_t004_deferral.py",
+        "tests/test_wearable_sim_contract.py"
+      ],
+      "reason": "contract name only"
+    },
+    "BIDMC_REPLAY": {
+      "classification": "CONTRACT_ONLY",
+      "non_test_implementation_files": [
+        "scripts/validate_t004_deferral.py"
+      ],
+      "python_files_naming_it_at_entry": [
+        "scripts/validate_t004_deferral.py",
+        "tests/test_wearable_sim_contract.py"
+      ],
+      "reason": "contract/deferral/test names only; BIDMC context code lives in evaluation/bidmc_context*.py outside the simulator"
+    },
+    "FAULT_INJECTION": {
+      "classification": "PARTIAL",
+      "non_test_implementation_files": [
+        "scripts/validate_t004_deferral.py"
+      ],
+      "python_files_naming_it_at_entry": [
+        "scripts/validate_t004_deferral.py",
+        "tests/test_wearable_sim_contract.py"
+      ],
+      "reason": "simulation/quality_perturbations.py (T023) perturbs BIDMC/ECG arrays for the quality-aware experiment; not wired into the simulator sample stream"
+    },
+    "LIVE_SPEED_REPLAY": {
+      "classification": "CONTRACT_ONLY",
+      "non_test_implementation_files": [
+        "scripts/validate_t004_deferral.py"
+      ],
+      "python_files_naming_it_at_entry": [
+        "scripts/validate_t004_deferral.py",
+        "tests/test_wearable_sim_contract.py"
+      ],
+      "reason": "contract name only (the T034 frontend 'speed=1' pacing is a UI presentation option, not a simulator replay mode)"
+    },
+    "LONGITUDINAL_COHORT": {
+      "classification": "MISSING",
+      "non_test_implementation_files": [
+        "scripts/validate_t004_deferral.py"
+      ],
+      "python_files_naming_it_at_entry": [
+        "scripts/validate_t004_deferral.py",
+        "tests/test_wearable_sim_contract.py"
+      ],
+      "reason": "no implementation; simulation.profiles.IMPLEMENTED_PROFILES == (WEARABLE_SIM_SMOKE,)"
+    },
+    "MITDB_REPLAY": {
+      "classification": "CONTRACT_ONLY",
+      "non_test_implementation_files": [
+        "scripts/validate_t004_deferral.py"
+      ],
+      "python_files_naming_it_at_entry": [
+        "scripts/validate_t004_deferral.py",
+        "tests/test_mock_inference.py",
+        "tests/test_wearable_sim_contract.py"
+      ],
+      "reason": "named only in the contract/deferral scripts/tests; the T034 public replay is a frozen NPZ outside the simulator, not a simulator mode"
+    },
+    "SYNTHETIC_PHYSIOLOGY": {
+      "classification": "PARTIAL",
+      "non_test_implementation_files": [
+        "scripts/validate_t004_deferral.py",
+        "simulation/wearable.py"
+      ],
+      "python_files_naming_it_at_entry": [
+        "scripts/validate_t004_deferral.py",
+        "simulation/wearable.py",
+        "tests/test_api_slice_t005.py",
+        "tests/test_mock_inference.py",
+        "tests/test_wearable_sim_contract.py",
+        "tests/test_wearable_sim_smoke.py"
+      ],
+      "reason": "simulation/wearable.py generates SPARSE smoke samples (2 per segment, integer ecg_raw ~2200, no waveform morphology, no streaming rate); T004/T005 explicitly deferred full morphology synthesis"
+    }
+  },
+  "no_duplication_of_existing_functionality": true,
+  "obsolete": [],
+  "partial": [
+    "SYNTHETIC_PHYSIOLOGY",
+    "FAULT_INJECTION"
+  ],
+  "status": "PASS"
+}

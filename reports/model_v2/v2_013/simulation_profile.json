@@ -1,0 +1,105 @@
+{
+  "adc_rail_counts": 2500,
+  "context_schedule": [
+    {
+      "end_s": 120.0,
+      "mode": "VALID",
+      "start_s": 0.0
+    },
+    {
+      "end_s": 170.0,
+      "mode": "MISSING_PPG",
+      "start_s": 120.0
+    },
+    {
+      "end_s": 220.0,
+      "mode": "INVALID_SPO2",
+      "start_s": 170.0
+    },
+    {
+      "end_s": 300.0,
+      "mode": "VALID",
+      "start_s": 220.0
+    },
+    {
+      "end_s": 360.0,
+      "mode": "RATE_DISAGREEMENT",
+      "start_s": 300.0
+    },
+    {
+      "end_s": 480.0,
+      "mode": "VALID",
+      "start_s": 360.0
+    }
+  ],
+  "duration_s": 480,
+  "episode_scores_forced_by_simulator": false,
+  "faults": [
+    {
+      "end_s": 100.08,
+      "kind": "ECG_SHORT_GAP",
+      "start_s": 100.0
+    },
+    {
+      "end_s": 250.4,
+      "kind": "ECG_LONG_GAP",
+      "start_s": 250.0
+    },
+    {
+      "end_s": 345.0,
+      "kind": "ECG_SENSOR_DROPOUT",
+      "start_s": 330.0
+    },
+    {
+      "end_s": 410.0,
+      "kind": "ECG_CLIPPING",
+      "start_s": 400.0
+    },
+    {
+      "end_s": 441.0,
+      "kind": "TRANSPORT_DROPPED_CHUNK",
+      "start_s": 440.0
+    },
+    {
+      "end_s": 460.0,
+      "kind": "ECG_SENSOR_DROPOUT",
+      "start_s": 455.0
+    }
+  ],
+  "profile_id": "WEARABLE_SIM_V2013_INTEGRATION_PROFILE_V1",
+  "provenance": {
+    "clinical_or_real_wearable_claim": false,
+    "dataset_id": "WEARABLE_SIM_V1",
+    "participant_id": "SIM_P000013",
+    "profile_id": "WEARABLE_SIM_V2013_INTEGRATION_PROFILE_V1",
+    "session_id": "SIM_S_V2013_LONGITUDINAL_000001",
+    "simulation_seed": 20260927,
+    "simulation_version": "WEARABLE_SIM_V1",
+    "source": "SYNTHETIC_PHYSIOLOGY",
+    "virtual_participant_is_human": false
+  },
+  "scenarios_exercised": [
+    "clean monitoring",
+    "valid ECG + valid context",
+    "valid ECG + missing PPG",
+    "valid ECG + invalid SpO2",
+    "ECG/PPG rate disagreement",
+    "DEGRADED ECG (short gap)",
+    "UNUSABLE ECG (long gap / sensor dropout / clipping)",
+    "long-gap segment reset",
+    "transport dropped chunk"
+  ],
+  "seed": 20260927,
+  "session_id": "SIM_S_V2013_LONGITUDINAL_000001",
+  "sim_ecg_counts_per_mv": 1000,
+  "source_rate_hz": 360,
+  "state_machine_scenarios_via_separate_fixtures": [
+    "two consecutive above-threshold windows",
+    "episode opening",
+    "two below",
+    "episode closure",
+    "cooldown",
+    "post-cooldown recovery",
+    "SYSTEM_ERROR path"
+  ]
+}

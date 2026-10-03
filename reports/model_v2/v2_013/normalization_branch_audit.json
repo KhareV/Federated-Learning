@@ -1,0 +1,10 @@
+{
+  "behavioral_proof": "tests/test_v2_013_runtime.py::test_c032_branch_separation_hr_gets_unnormalized_gateway_gets_zscore",
+  "estimate_hr_calls_in_estimate_ecg_hr": 1,
+  "gateway_infer_called_once": true,
+  "normalization_epsilon_source": "preprocessing.windowing.NORMALIZATION_EPSILON (1e-8)",
+  "normalize_window_zscore_calls_in_estimate_ecg_hr": 0,
+  "normalize_window_zscore_calls_in_infer": 1,
+  "status": "PASS",
+  "stream_runtime_applies_normalization": false
+}

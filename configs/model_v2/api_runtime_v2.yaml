@@ -1,0 +1,22 @@
+# API_RUNTIME_V2 -- parallel RESEARCH runtime binding (V2-013). Declarative record only: the
+# runtime reads identities/thresholds from the frozen artifacts below, never from this file, and
+# no request or environment variable can change any of them.
+runtime_id: API_RUNTIME_V2
+status_target: FROZEN_RESEARCH_RUNTIME
+operational_default: MODEL_V1   # api.app:app / API_RUNTIME_V1_1 is unchanged and remains default
+launch: "uvicorn --factory api.app_v2:create_default_research_app"
+api_contract: API_SCHEMA_V1     # unchanged; no new HTTP contract version
+route: "POST /v1/infer-window"
+bound:
+  model_id: MODEL_V2_FINAL
+  gateway_artifact: GATEWAY_ARTIFACT_V2
+  gateway_artifact_path: artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts
+  calibration: CAL_V2           # temperature and threshold read from artifacts/CAL_V2.json
+  preprocess: PREPROC_V1
+  ecg_hr_context: ECG_HR_CONTEXT_V2
+  alert_policy: ALERT_POLICY_V1 # via additive ALERT_POLICY_V1_MODEL_V2_BINDING; K=2 M=2 cooldown=30 s
+signal_branches:
+  api_request_ecg: filtered_amplitude_preserving
+  hr_context_input: unnormalized
+  gateway_input: PER_WINDOW_ZSCORE_V1_applied_once_in_runtime
+public_runtime_model_selector: false

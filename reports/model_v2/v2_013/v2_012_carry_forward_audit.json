@@ -1,0 +1,72 @@
+{
+  "ancestry": {
+    "method_commit_is_ancestor_of_result": true
+  },
+  "chronology": {
+    "artifact_first_added_in": "40e127308b50bb4d5943826639d467203b9b4b29",
+    "artifact_present_at_method_commit": false,
+    "benchmark_first_added_in": "40e127308b50bb4d5943826639d467203b9b4b29",
+    "method_precedes_export_and_results": true
+  },
+  "commits": {
+    "method": "4a3c5384e0446a9e5753d34a8f751e5d0b4b938e",
+    "result": "40e127308b50bb4d5943826639d467203b9b4b29"
+  },
+  "control_plane_test_audit": {
+    "files": {
+      "tests/test_c_v2_pre006_control.py": {
+        "added_lines": 3,
+        "narrow": true,
+        "removed_lines": 3,
+        "unclassified_changes": []
+      },
+      "tests/test_model_v2_control_plane.py": {
+        "added_lines": 3,
+        "narrow": true,
+        "removed_lines": 3,
+        "unclassified_changes": []
+      },
+      "tests/test_v2_011_results.py": {
+        "added_lines": 5,
+        "narrow": true,
+        "removed_lines": 2,
+        "unclassified_changes": []
+      }
+    },
+    "semantic_strictness": {
+      "control_plane_keeps_exact_set_equality": true,
+      "control_plane_still_rejects_other_passes": true,
+      "no_arbitrary_strings_or_missing_rows_accepted": true,
+      "pre006_future_states_limited_to_not_started_or_pass": true,
+      "v2_011_results_states_limited_to_forward_lifecycle": true
+    }
+  },
+  "gateway_artifact": {
+    "bytes": 294959,
+    "canonical_artifact_regenerated_by_v2_013": false,
+    "expected_bytes": 294959,
+    "expected_parameter_count": 57553,
+    "expected_sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+    "parameter_count": 57553,
+    "parity_corpus_sha256": "f897471970401fe1b97b8cc2a21acf3acdeeb032b1adb03fc08e14738e8c9da5",
+    "parity_corpus_status": "PASS",
+    "sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+    "verifier": "PASS"
+  },
+  "non_byte_identical_reexport_disclosure": {
+    "archive_bytes_identical": false,
+    "differing_member_count": 13,
+    "fresh_workspace_exports_semantically_equivalent": true,
+    "generated_archive_members_differed": [
+      "code/__torch__/torch/nn/modules/batchnorm.py",
+      "code/__torch__/torch/nn/modules/conv.py",
+      "code/__torch__/torch/nn/modules/conv/___torch_mangle_0.py"
+    ],
+    "handling": "documented reproducibility characteristic; the committed canonical artifact SHA is authoritative; the artifact is NOT rewritten or re-exported; deferred to V2-014",
+    "jit_semantics_identical": true,
+    "logits_identical_across_exports": true,
+    "serialization_id_differed": true,
+    "state_values_identical": true
+  },
+  "status": "PASS"
+}

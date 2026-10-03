@@ -64,8 +64,20 @@ def test_e2e_replay_software_v1_2_digest_is_new_and_superseded_digest_is_preserv
     assert lock["run_1_equals_run_2"] is True
 
 
-def test_e2e_replay_software_v1_2_verify_passes() -> None:
-    result = verify_e2e_replay_v1_2()
+def test_e2e_replay_software_v1_2_superseded_by_v1_3_with_preserved_lock() -> None:
+    """V2-013 legitimately changed the route source bound by V1_2 (model-identity fix), so the
+    V1_2 live verifier now reports drift on that file. The lock file itself is preserved
+    byte-identical and the V1_3 successor verifies."""
+    successor = json.loads(
+        (ROOT / "artifacts/E2E_REPLAY_SOFTWARE_V1_3.lock.json").read_text(encoding="utf-8")
+    )
+    assert hash_file(ROOT / "artifacts/E2E_REPLAY_SOFTWARE_V1_2.lock.json") == (
+        successor["predecessor_sha256"]
+    )
+    with pytest.raises(RuntimeError, match="E2E_REPLAY_SOFTWARE_V1_2_TAMPER"):
+        verify_e2e_replay_v1_2()
+    from scripts.verify_e2e_replay_v1_3_v2013 import verify as verify_v1_3
+
+    result = verify_v1_3()
     assert result["status"] == "PASS"
-    assert result["predecessor_preserved"] is True
     assert result["g21_status"] == "NON_PASS_PENDING_T030_REAL_WEARABLE"

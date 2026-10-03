@@ -1,0 +1,32 @@
+{
+  "api_contract_version": "API_SCHEMA_V1",
+  "bound_model_id": "MODEL_V2_FINAL",
+  "calibration_domain": "MIT-BIH-v1.0.0",
+  "calibration_id": "CAL_V2",
+  "calibration_patient_count": 3,
+  "constants_copied_into_code": false,
+  "file_sha256": {
+    "api/app_v2.py": "7c9bddcc75018d1366ccb06386f0fd47a2604c6555a1e34ad4e31649754f9ac5",
+    "api/runtime_v2.py": "3e9333c3ce02df4d89d99fdc5d977ac4db8bb8a9ee7bc7542a530d1f4e1c51a8",
+    "artifacts/ALERT_POLICY_V1.lock.json": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+    "artifacts/CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "artifacts/ECG_HR_CONTEXT_V2.lock.json": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "artifacts/deployment/GATEWAY_ARTIFACT_V2.manifest.json": "7de9190366ba54b454ae3edbc4e66ce16584431050f0d22a96e3cab9c3218edd",
+    "artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+    "checkpoints/MODEL_V2_FINAL.pt": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "configs/alert_policy_v1.yaml": "782b174d6caf769cd448edb25c2a12c9a601caa9c3fccc5f05d5d1d3a617b25a",
+    "configs/model_v2/api_runtime_v2.yaml": "0b945f1115d2b0521852a1ecd75d899e99e34300085326c4c6dc18ea841b01be",
+    "contracts/API_SCHEMA_V1.json": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+    "deployment/gateway_v2.py": "9f134196fc67db74a61f6e4d7e7209d0b028493c1a152419aa948d8cc47b2ee8",
+    "fusion/alert_policy_v2_binding.py": "2b04df91e6f68e934d02f6fc7a376070cc65fc5b643840afdf123f1707fe59a7",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+  },
+  "launch_command": "uvicorn --factory api.app_v2:create_default_research_app",
+  "operational_default_launch": "uvicorn api.app:app (MODEL_V1, unchanged)",
+  "public_runtime_model_selector": false,
+  "runtime_id": "API_RUNTIME_V2",
+  "status": "PASS",
+  "temperature": 52.88261929727761,
+  "threshold": 0.5101937262006424,
+  "threshold_comparator": ">="
+}

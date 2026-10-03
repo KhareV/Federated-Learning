@@ -1,0 +1,23 @@
+{
+  "alert_policy": "engine generic; only the loader is MODEL_V1-coupled -> additive ALERT_POLICY_V1_MODEL_V2_BINDING; ALERT_POLICY_V1 unchanged",
+  "api_contract_version": "API_SCHEMA_V1 retained (no incompatible schema change needed)",
+  "decision": "PARALLEL_SELF_CONTAINED_APP_FACTORY",
+  "differential_test": "tests/test_v2_013_runtime.py::test_differential_equality_with_v1_app_code_path_on_same_runtime",
+  "frontend": "existing /frontend reused; one genuine defect (hard-coded MODEL_V1 request identity + MODEL_V1 copy) fixed via DASHBOARD_UI_V1_4 successor lock",
+  "injection": "api.app_v2.create_research_app(runtime=...) mirrors the V1 routes one-for-one with the same typed schemas (imported from api.schemas, unchanged) and a bound_model_id check; api.app_v2.create_default_research_app() is a factory, never constructed at import time.",
+  "operational_default": "MODEL_V1 / api.app:app unchanged",
+  "reused_unchanged": [
+    "api.schemas",
+    "api.session",
+    "fusion.episode_manager",
+    "fusion.state_machine",
+    "preprocessing.windowing",
+    "preprocessing.ecg_hr_context",
+    "deployment.gateway_v2"
+  ],
+  "second_unrelated_api_stack": false,
+  "simulation": "WEARABLE_SIM_V1 -> canonical ObservedRecord stream -> simulation.stream_runtime_v2013 (existing causal preprocessing modules) -> API request",
+  "status": "PASS",
+  "why_not_edit_api_app": "api/app.py, api/runtime.py, api/schemas.py and api/session.py are bound by the API_RUNTIME_V1_1 lock and hard-code MODEL_V1 in the request check; editing them would break the operational default's frozen identity.",
+  "written_before_canonical_results": true
+}

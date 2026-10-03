@@ -63,11 +63,17 @@ def test_e2e_replay_software_v1_1_exists_and_never_claims_g21_pass() -> None:
     assert lock["public_semantic_digest_unchanged_from_predecessor"] is True
 
 
-def test_e2e_replay_software_v1_1_verify_passes() -> None:
-    result = verify_e2e_replay_c034()
-    assert result["status"] == "PASS"
-    assert result["predecessor_preserved"] is True
-    assert result["g21_status"] == "NON_PASS_PENDING_T030_REAL_WEARABLE"
+def test_e2e_replay_software_v1_1_superseded_lock_preserved_and_drift_reported() -> None:
+    """V1_1 was superseded (C032 then V2-013); its lock file is preserved byte-identical and its
+    live verifier legitimately reports drift on the since-changed route source."""
+    successor = json.loads(
+        (ROOT / "artifacts/E2E_REPLAY_SOFTWARE_V1_2.lock.json").read_text(encoding="utf-8")
+    )
+    assert hash_file(ROOT / "artifacts/E2E_REPLAY_SOFTWARE_V1_1.lock.json") == (
+        successor["predecessor_sha256"]
+    )
+    with pytest.raises(RuntimeError, match="E2E_REPLAY_SOFTWARE_V1_1_TAMPER"):
+        verify_e2e_replay_c034()
 
 
 def test_dashboard_ui_v1_1_detects_tamper(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

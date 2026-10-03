@@ -1,0 +1,9 @@
+{
+  "checkpoint": "V2-013",
+  "predecessor_id": "E2E_REPLAY_SOFTWARE_V1_2",
+  "predecessor_preserved_unchanged": true,
+  "predecessor_sha256": "a28c0d4e32eb847503fca785f928ac2bdff73fb60f28150908f4fb5b41ae0f49",
+  "predecessor_status_at_supersession": "FROZEN_ENGINEERING_INTEGRATION",
+  "reason": "re-bind the current dashboard route and DASHBOARD_UI_V1_4 after the V2-013 model-identity frontend fix; V1_2 replay digests and reproducibility facts are carried forward unchanged (MODEL_V1 request/response behavior is unchanged)",
+  "successor_id": "E2E_REPLAY_SOFTWARE_V1_3"
+}

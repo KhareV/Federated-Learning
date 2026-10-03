@@ -1,0 +1,16 @@
+{
+  "api_request_schema_has_no_truth_field": true,
+  "behavioral_leakage_test": "tests/test_v2_013_simulation.py::test_behavioral_leakage_poisoned_truth_does_not_change_runtime_output",
+  "dynamic_check_output": "[]",
+  "dynamic_import_closure_contains_truth_or_profile": false,
+  "files_referencing_truth_module": [],
+  "observed_record_fields_exclude_truth": true,
+  "static_forbidden_imports_per_production_file": {
+    "api/app_v2.py": [],
+    "api/runtime_v2.py": [],
+    "deployment/gateway_v2.py": [],
+    "fusion/alert_policy_v2_binding.py": [],
+    "simulation/stream_runtime_v2013.py": []
+  },
+  "status": "PASS"
+}
