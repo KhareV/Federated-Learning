@@ -1,0 +1,11 @@
+{
+  "canonical_t_task_enum_location": "src/nhm/coverage.py:TASK_STATUSES (canonical-only, unaffected)",
+  "canonical_t_task_status_vocabulary_touched": false,
+  "conditional_prerequisite_semantics_tested": true,
+  "csv_field_is_plain_string_no_enum_constraint": true,
+  "narrow_resolution_predicate_module": "src/nhm/model_v2_conditional_prerequisite.py",
+  "narrow_resolution_predicate_tests": "tests/test_v2_005_conditional_prerequisite.py",
+  "skipped_by_protocol_already_predeclared_in_registry_notes": false,
+  "status": "PASS",
+  "v2_specific_validator_updated": "tests/test_model_v2_control_plane.py"
+}

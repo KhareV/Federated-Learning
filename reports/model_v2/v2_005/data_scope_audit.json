@@ -1,0 +1,14 @@
+{
+  "BIDMC_accessed": false,
+  "CALIBRATION_accessed": false,
+  "INCART_accessed": false,
+  "INTERNAL_TEST_accessed": false,
+  "NSTDB_accessed": false,
+  "TRAIN_waveform_accessed": false,
+  "VALIDATION_accessed": false,
+  "annotations_accessed": false,
+  "method_note": "This script and the V2-005 phase as a whole read only already-frozen scalar JSON/CSV metadata (protocol locks, feature-audit lock, arch-causality lock, V2-004 result scalars) and git/registry state. No waveform file, feature-cache row, or annotation file was opened; no CV-role or D0.6 access ledger gained any new row from this phase (neither ledger has a V2-005 stage identity).",
+  "model_inference_run": false,
+  "raw_ECG_accessed": false,
+  "status": "PASS"
+}

@@ -1,0 +1,18 @@
+{
+  "aux_features_component_row": {
+    "component_id": "MODEL_V2_AUX_FEATURES_V1",
+    "component_type": "HYBRID_FEATURE_SPEC",
+    "lock_path": "configs/model_v2/research_protocol_v1.yaml",
+    "notes": "Reserved identity for the conditional hybrid auxiliary-feature MLP; never mutates BASELINE_FEATURES_V1; only instantiated if the V2-005 hybrid trigger fires.",
+    "owner_task": "V2-001",
+    "predecessor_id": "",
+    "status": "PRE_REGISTERED_CONDITIONAL"
+  },
+  "aux_features_row_still_reserved": true,
+  "frozen_or_selected_hybrid_rows": [],
+  "hybrid_component_rows_found": [],
+  "hybrid_or_aux_checkpoint_hits": [],
+  "no_unauthorized_preexisting_hybrid_result": true,
+  "status": "PASS",
+  "v2_005_fit_run_directories_found": []
+}

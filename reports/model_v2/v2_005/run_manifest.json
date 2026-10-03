@@ -1,0 +1,26 @@
+{
+  "checkpoint_id": "V2-005",
+  "evidence_files": [
+    "data_scope_audit.json",
+    "entry_audit.json",
+    "hybrid_disposition.json",
+    "hybrid_trigger_verification.json",
+    "registry_transition.json",
+    "search_budget.json",
+    "status_vocabulary_audit.json",
+    "test_results.json",
+    "unexpected_hybrid_state_audit.json",
+    "upstream_identity_audit.json",
+    "v2_004_readonly_integrity_after.json",
+    "v2_004_readonly_integrity_before.json",
+    "zero_fit_audit.json"
+  ],
+  "gate": "V2G4",
+  "head_at_generation": "6cf66daf085ed04f0560ba21bbb5c2c9c0b172af",
+  "no_classical_fits": true,
+  "no_hybrid_model_created": true,
+  "no_neural_fits": true,
+  "no_scientific_artifact_mutated": true,
+  "phase_family": "HYBRID",
+  "type": "zero_fit_conditional_branch_closure"
+}

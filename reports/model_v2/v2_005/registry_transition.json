@@ -1,0 +1,24 @@
+{
+  "V2-005": {
+    "from": "NOT_STARTED",
+    "to": "SKIPPED_BY_PROTOCOL"
+  },
+  "V2G4": {
+    "from": "NOT_STARTED",
+    "to": "PASS"
+  },
+  "evidence_path": "reports/model_v2/v2_005/hybrid_disposition.json",
+  "gate_notes_required_statement": "PASS signifies correct conditional-branch handling, not hybrid-model performance",
+  "no_canonical_t_task_registry_change": true,
+  "no_freeze_registry_change": true,
+  "no_new_component_registry_row": true,
+  "preserved": {
+    "V2-004": "PASS",
+    "V2-006": "NOT_STARTED",
+    "V2-007": "NOT_STARTED",
+    "V2G3": "PASS",
+    "V2G5": "NOT_STARTED",
+    "V2G6": "NOT_STARTED"
+  },
+  "task_notes_required_statement": "pre-registered hybrid trigger false; no hybrid model trained; 0 neural fits added; not a hybrid-performance result"
+}

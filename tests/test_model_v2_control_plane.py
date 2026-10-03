@@ -52,7 +52,7 @@ def test_v2_gate_registry_is_a_separate_namespace() -> None:
     assert {row["gate_id"] for row in rows} == {f"V2G{n}" for n in range(14)}
 
 
-def test_only_v2_001_through_v2_004_and_v2g0_through_v2g3_pass_in_this_phase() -> None:
+def test_only_v2_001_through_v2_004_and_v2g0_through_v2g4_pass_in_this_phase() -> None:
     task_rows = _rows(ROOT / "manifests/model_v2/task_registry_v1.csv")
     gate_rows = _rows(ROOT / "manifests/model_v2/gate_registry_v1.csv")
 
@@ -60,7 +60,7 @@ def test_only_v2_001_through_v2_004_and_v2g0_through_v2g3_pass_in_this_phase() -
     passed_gates = {row["gate_id"] for row in gate_rows if row["status"] == "PASS"}
 
     expected_tasks = {"V2-001", "V2-002", "V2-003", "V2-004"}
-    expected_gates = {"V2G0", "V2G1", "V2G2", "V2G3"}
+    expected_gates = {"V2G0", "V2G1", "V2G2", "V2G3", "V2G4"}
     assert passed_tasks == expected_tasks
     assert passed_gates == expected_gates
 

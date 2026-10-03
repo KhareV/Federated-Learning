@@ -1,0 +1,29 @@
+{
+  "corrective_closeout_prerequisite": {
+    "c_v2_004_audit_closeout_status": "PASS"
+  },
+  "note": "true_entry_sha is the HEAD this phase's spec expected at entry, manually verified clean before any V2-005 file was written. origin_main_at_generation_time reflects state when this evidence script ran, after this phase's own preceding narrow control-plane commit was already pushed.",
+  "origin_main_at_generation_time": "6cf66daf085ed04f0560ba21bbb5c2c9c0b172af",
+  "registry_at_true_entry": {
+    "gates": {
+      "V2G0": "PASS",
+      "V2G1": "PASS",
+      "V2G2": "PASS",
+      "V2G3": "PASS",
+      "V2G4": "PASS",
+      "V2G5": "NOT_STARTED",
+      "V2G6": "NOT_STARTED"
+    },
+    "tasks": {
+      "V2-001": "PASS",
+      "V2-002": "PASS",
+      "V2-003": "PASS",
+      "V2-004": "PASS",
+      "V2-005": "SKIPPED_BY_PROTOCOL",
+      "V2-006": "NOT_STARTED",
+      "V2-007": "NOT_STARTED"
+    }
+  },
+  "true_entry_sha": "806a21efe21ff87bf23d1839ac3def3ab9fc8bf2",
+  "working_tree_clean_excluding_own_in_progress_evidence": false
+}

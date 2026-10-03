@@ -1,0 +1,36 @@
+{
+  "aux_feature_schema_created": false,
+  "branch": "SKIP_HYBRID",
+  "checkpoint_created": false,
+  "classical_AUPRC": 0.713140103147974,
+  "classical_fits_added": 0,
+  "classical_reference_id": "BEST_REDUCED_RF_V1",
+  "comparator": ">=",
+  "final_task_status": "SKIPPED_BY_PROTOCOL",
+  "formula": "classical - learned",
+  "gap": -0.1427367424993632,
+  "gate_note": "V2G4 PASS signifies correct conditional-branch handling (the pre-registered FALSE branch was followed correctly, with zero hybrid fits), not hybrid-model performance.",
+  "gate_result": "PASS",
+  "hybrid_model_created": false,
+  "interpretation": {
+    "permitted_statement": "The pre-registered hybrid trigger did not fire because the selected learned-only model's TRAIN-CV mean AUPRC exceeded the selected reduced classical RF reference, yielding a classical-minus-learned gap below 0.03.",
+    "prohibited_statements": [
+      "hybrid is worse",
+      "hybrid does not work",
+      "hybrid would reduce performance",
+      "hybrid is unnecessary in general",
+      "TCN_MEANMAX is clinically superior"
+    ],
+    "scope_note": "This does not demonstrate that a hybrid model would fail or could not improve performance. The hybrid branch was not executed because its pre-registered justification criterion was not met."
+  },
+  "learned_AUPRC": 0.8558768456473372,
+  "learned_architecture": "MODEL_V2_TCN_MEANMAX",
+  "learned_reference_id": "BEST_LEARNED_ONLY_V2_CV_V1",
+  "neural_fits_added": 0,
+  "official_validation_accessed": false,
+  "protocol": "MODEL_V2_RESEARCH_PROTOCOL_V2",
+  "reason": "PRE_REGISTERED_HYBRID_TRIGGER_FALSE",
+  "task_id": "V2-005",
+  "threshold": 0.03,
+  "trigger": false
+}

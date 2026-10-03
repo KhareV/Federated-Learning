@@ -1,0 +1,22 @@
+{
+  "classical_auprc_read_from_artifact": 0.713140103147974,
+  "classical_reference_id": "BEST_REDUCED_RF_V1",
+  "gap_matches_within_1e-15": true,
+  "identity_checks": {
+    "classical_reference_feature_count_is_9": true,
+    "classical_reference_variant_is_RR": true,
+    "learned_reference_architecture_is_TCN_MEANMAX": true,
+    "stability_decision_agrees_on_best_learned_only": true
+  },
+  "learned_architecture_read_from_artifact": "MODEL_V2_TCN_MEANMAX",
+  "learned_auprc_read_from_artifact": 0.8558768456473372,
+  "learned_reference_id": "BEST_LEARNED_ONLY_V2_CV_V1",
+  "recomputed_gap": -0.1427367424993632,
+  "recomputed_trigger": false,
+  "status": "PASS",
+  "stored_and_recomputed_trigger_agree": true,
+  "stored_comparator": ">=",
+  "stored_gap": -0.1427367424993632,
+  "stored_threshold": 0.03,
+  "stored_trigger": false
+}
