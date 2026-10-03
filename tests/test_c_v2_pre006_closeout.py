@@ -51,12 +51,14 @@ def test_no_final_inner_manifest_was_fabricated() -> None:
 
 
 def test_v2_007_wording_reflects_actual_role_semantics() -> None:
+    # This checkpoint's own conclusion (official VALIDATION itself governs checkpoint
+    # selection) was itself superseded by C-V2-PRE006-AUTHORITY-REPAIR, which found this to
+    # be implementation drift relative to the self-contained MODEL_V2 authority contract and
+    # corrected V2-007 to use a dedicated TRAIN-only final inner split instead. This test now
+    # only guards the historical evidence snapshot this checkpoint actually produced
+    # (v2_007_registry_semantic_audit.json, read by test_official_validation_role_not_falsely_
+    # denied below), not the live registry text, which has since legitimately changed again.
     tasks, _ = _registry()
-    notes = tasks["V2-007"]["notes"]
-    assert "never used for early stopping" not in notes
-    assert "OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE" in notes
-    assert "official VALIDATION itself" in notes
-    assert "all 27 TRAIN patient groups" in notes
     assert tasks["V2-007"]["status"] == "NOT_STARTED"
 
 
@@ -79,7 +81,11 @@ def test_early_stopping_field_unambiguous() -> None:
     assert data["architecture_decisions_changed_in_this_checkpoint"] is False
 
 
-def test_protocol_v1_and_v2_immutable_and_no_v3_created() -> None:
+def test_protocol_v1_and_v2_immutable() -> None:
+    # The "no V3 created" assertion was this checkpoint's own point-in-time scope: at the
+    # time C-V2-PRE006-CLOSEOUT ran, no V3 was needed. C-V2-PRE006-AUTHORITY-REPAIR has since
+    # legitimately created MODEL_V2_RESEARCH_PROTOCOL_V3 as an additive successor -- this
+    # test now only guards V1/V2 immutability, which both checkpoints agree on.
     assert (
         hash_file(ROOT / "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json")
         == "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7"
@@ -88,8 +94,6 @@ def test_protocol_v1_and_v2_immutable_and_no_v3_created() -> None:
         hash_file(ROOT / "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V2.lock.json")
         == "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81"
     )
-    assert not (ROOT / "configs/model_v2/research_protocol_v3.yaml").exists()
-    assert not (ROOT / "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V3.lock.json").exists()
 
 
 def test_cal_v2_ordering_machine_unambiguous() -> None:

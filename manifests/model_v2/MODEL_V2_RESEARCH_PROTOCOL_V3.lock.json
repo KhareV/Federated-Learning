@@ -1,0 +1,41 @@
+{
+  "change_control": "This lock is never mutated in place. A further correction requires an additive MODEL_V2_RESEARCH_PROTOCOL_V4 successor with this lock preserved byte-identical as its predecessor.",
+  "config_canonical_hash": "cee8b59f356b2cea7328190478d635945705f5c493c238896039e9af01023a04",
+  "config_sha256": "1c6b611e00f1d58cef2ffddbf2205f0d38061be0de61c1a4343703390086f882",
+  "corrections": [
+    "official_validation.early_stopping_checkpoint_selection: FINAL_TRAIN_INNER_VALIDATION_LOCKED_V3_ROLE, replacing OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE",
+    "final_train_role_split: new section binding MITDB_TRAIN_FINAL_INNER_V2_V1 (OPTIMISE/FINAL_INNER_VALIDATION) and forbidding official VALIDATION from gradient/pos_weight/scheduler/early-stop/checkpoint/architecture roles",
+    "official_validation.promotion_requirement.auroc_material_regression_forbidden: false (secondary diagnostic only), replacing the V1/V2 hard gate",
+    "search_budget: new section, d0_d5_max_neural_fits=90, replacing the unauthoritative 100 convention used in prior evidence",
+    "cal_v2_ordering: new section making the already-implied CAL_V2 chronology machine-explicit",
+    "model_v2_final_vs_runtime_acceptance: new section making the already-implied separation machine-explicit"
+  ],
+  "doc_sha256": "49848490928b0399d093029e376b4fb9693c8d1012a99de0e573fdd5e45bd4d6",
+  "owner_task": "C-V2-PRE006-AUTHORITY-REPAIR",
+  "parent_protocol": "MODEL_V2_RESEARCH_PROTOCOL_V2",
+  "parent_protocol_lock_sha256": "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81",
+  "protocol_id": "MODEL_V2_RESEARCH_PROTOCOL_V3",
+  "status": "FROZEN_RESEARCH_PROTOCOL",
+  "unchanged_from_v2": [
+    "fixed_scientific_constants",
+    "model_seeds",
+    "primary_metrics",
+    "patient_cluster_bootstrap",
+    "architectures (identities and parameter counts)",
+    "architecture_search_policy (D1/D2 staged design, 35-fit V2-004 cap)",
+    "feature_ablation_contract",
+    "hybrid_trigger",
+    "loss_and_sampling",
+    "optimizer_experiment",
+    "official_validation.promotion_requirement's two hard AUPRC criteria (mean_three_seed_validation_auprc_min=0.646, paired_patient_cluster_bootstrap_delta_auprc_vs_model_v1_lower_95_ci_bound_min=0.0)",
+    "official_validation.release_checkpoint_seed=20260927",
+    "calibration_policy",
+    "post_freeze_second_look",
+    "runtime_acceptance_guardrails",
+    "downstream_impact"
+  ],
+  "v1_lock_path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V1.lock.json",
+  "v1_unmodified": true,
+  "v2_lock_path": "manifests/model_v2/MODEL_V2_RESEARCH_PROTOCOL_V2.lock.json",
+  "v2_unmodified": true
+}

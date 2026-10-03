@@ -232,9 +232,13 @@ def test_protocol_v2_unchanged() -> None:
 
 
 def test_no_new_component_registry_row() -> None:
+    # V2-005 itself added zero component rows (row count was 18 immediately after this
+    # phase). A later checkpoint (C-V2-PRE006-AUTHORITY-REPAIR) has since legitimately added
+    # MODEL_V2_RESEARCH_PROTOCOL_V3 -- this test only guards against a hybrid-specific
+    # component ever appearing, which remains V2-005's own scope.
     with (ROOT / "manifests/model_v2/component_registry_v1.csv").open(newline="") as handle:
         rows = list(csv.DictReader(handle))
-    assert len(rows) == 18
+    assert len(rows) >= 18
     forbidden_ids = {"MODEL_V2_HYBRID", "MODEL_V2_HYBRID_V1", "HYBRID_SCALER_V1"}
     assert not any(row["component_id"] in forbidden_ids for row in rows)
 
