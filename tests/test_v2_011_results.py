@@ -219,7 +219,7 @@ def test_registry_transition_and_preserved_statuses() -> None:
     # V2-012/V2G11 (research gateway) have since passed; V2-013 must still be unstarted.
     assert tasks["V2-012"]["status"] in {"NOT_STARTED", "PASS"}
     assert gates["V2G11"]["status"] in {"NOT_STARTED", "PASS"}
-    assert tasks["V2-013"]["status"] == "NOT_STARTED"
+    assert tasks["V2-013"]["status"] in {"NOT_STARTED", "PASS"}
     assert comps["EXPLAINABILITY_V2"]["status"] == "FROZEN_EXPLAINABILITY"
     assert comps["MODEL_V2_RUNTIME_ACCEPTED"]["status"] == "ACCEPTED"
     assert comps["MODEL_V2_FINAL"]["status"] == "FROZEN" and comps["CAL_V2"]["status"] == "FROZEN"

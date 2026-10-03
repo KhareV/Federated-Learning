@@ -1,0 +1,664 @@
+{
+  "degraded_above_never_advances_open_counter": true,
+  "fixture_selection": {
+    "above_window_index": 6,
+    "above_windows_in_first_300": 2,
+    "below_window_index": 0,
+    "rule": "first corpus window (index order) at/above and first below the frozen CAL_V2 threshold under the frozen gateway; software fixtures only, no metric"
+  },
+  "parameters_changed_in_response_to_outcomes": false,
+  "policy": {
+    "K_open": 2,
+    "M_close": 2,
+    "comparator": ">=",
+    "cooldown_seconds": 30,
+    "threshold": 0.5101937262006424
+  },
+  "policy_expected": {
+    "K_open": 2,
+    "M_close": 2,
+    "cooldown_seconds": 30
+  },
+  "public_states_observed": [
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "RECHECK_SENSOR"
+  ],
+  "sessions": [
+    {
+      "all_match": true,
+      "session": "V2-013-SEQ-MAIN",
+      "steps": [
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "below_valid",
+          "t_seconds": 10
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_valid_1",
+          "t_seconds": 15
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 2,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 2,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_valid_2_opens",
+          "t_seconds": 20
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_valid_active",
+          "t_seconds": 25
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "RECHECK_SENSOR"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "RECHECK_SENSOR"
+          },
+          "possible_pattern": true,
+          "quality": "DEGRADED",
+          "step": "degraded_above_in_episode",
+          "t_seconds": 30
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 422,
+            "model_executed": false,
+            "open_counter": 0,
+            "state": null
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 422,
+            "model_executed": false,
+            "open_counter": 0,
+            "state": null
+          },
+          "possible_pattern": null,
+          "quality": "UNUSABLE",
+          "step": "unusable_in_episode",
+          "t_seconds": 35
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 1,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 1,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "below_valid_recovery_1",
+          "t_seconds": 40
+        },
+        {
+          "cooldown_until_us": 75000000,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "below_valid_2_closes",
+          "t_seconds": 45
+        },
+        {
+          "cooldown_until_us": 75000000,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_in_cooldown_1",
+          "t_seconds": 50
+        },
+        {
+          "cooldown_until_us": 75000000,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_in_cooldown_2",
+          "t_seconds": 55
+        },
+        {
+          "cooldown_until_us": 75000000,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_after_cooldown_1",
+          "t_seconds": 80
+        },
+        {
+          "cooldown_until_us": 75000000,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 2,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 2,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 2,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 2,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_after_cooldown_2_reopens",
+          "t_seconds": 85
+        }
+      ]
+    },
+    {
+      "all_match": true,
+      "session": "V2-013-SEQ-UNUSABLE-CLEARS",
+      "steps": [
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "below_valid",
+          "t_seconds": 10
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_valid_1",
+          "t_seconds": 15
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 422,
+            "model_executed": false,
+            "open_counter": 0,
+            "state": null
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 422,
+            "model_executed": false,
+            "open_counter": 0,
+            "state": null
+          },
+          "possible_pattern": null,
+          "quality": "UNUSABLE",
+          "step": "unusable_clears_counter",
+          "t_seconds": 20
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_valid_after_unusable",
+          "t_seconds": 25
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 2,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 2,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_valid_opens",
+          "t_seconds": 30
+        }
+      ]
+    },
+    {
+      "all_match": true,
+      "session": "V2-013-SEQ-DEGRADED-IDLE",
+      "steps": [
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "below_valid",
+          "t_seconds": 10
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "RECHECK_SENSOR"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "RECHECK_SENSOR"
+          },
+          "possible_pattern": true,
+          "quality": "DEGRADED",
+          "step": "degraded_above_no_advance",
+          "t_seconds": 15
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "NORMAL_MONITORED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "valid_above_counter_1",
+          "t_seconds": 20
+        }
+      ]
+    },
+    {
+      "all_match": true,
+      "session": "V2-013-SEQ-NO-PPG",
+      "steps": [
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "CONTEXT_UNAVAILABLE"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 0,
+            "state": "CONTEXT_UNAVAILABLE"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "below_no_ppg",
+          "t_seconds": 10
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "CONTEXT_UNAVAILABLE"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": false,
+            "episode_count": 0,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 1,
+            "state": "CONTEXT_UNAVAILABLE"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_no_ppg_1",
+          "t_seconds": 15
+        },
+        {
+          "cooldown_until_us": null,
+          "expected": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 2,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "match": true,
+          "observed": {
+            "close_counter": 0,
+            "episode_active": true,
+            "episode_count": 1,
+            "http": 200,
+            "model_executed": true,
+            "open_counter": 2,
+            "state": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"
+          },
+          "possible_pattern": false,
+          "quality": "VALID",
+          "step": "above_no_ppg_2_opens",
+          "t_seconds": 20
+        }
+      ]
+    }
+  ],
+  "status": "PASS",
+  "system_error_path": {
+    "failed_request_did_not_advance_counters": true,
+    "failure_error_type": "INTERNAL_SERVER_ERROR",
+    "failure_http": 500,
+    "open_counter_after_next_valid_window": 1,
+    "session_continues_after_failure": true,
+    "state_after_next_valid_window": "NORMAL_MONITORED_PATTERN"
+  },
+  "unusable_clears_open_confirmation_counter": true,
+  "unusable_does_not_close_active_episode": true,
+  "unusable_does_not_run_model": true
+}

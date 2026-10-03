@@ -1,0 +1,59 @@
+{
+  "fresh_process_cross_contamination": {
+    "episode_state_independent": true,
+    "v1_alone_equals_v1_interleaved": true,
+    "v1_identities": {
+      "calibration_id": [
+        "CAL_V1"
+      ],
+      "model_id": [
+        "MODEL_V1"
+      ],
+      "threshold": [
+        0.6128035574269627
+      ]
+    },
+    "v2_alone_equals_v2_interleaved": true,
+    "v2_identities": {
+      "calibration_id": [
+        "CAL_V2"
+      ],
+      "model_id": [
+        "MODEL_V2_FINAL"
+      ],
+      "threshold": [
+        0.5101937262006424
+      ]
+    }
+  },
+  "in_process_coexistence": {
+    "calibrations_distinct": true,
+    "gateway_artifact_ids": [
+      "MODEL_V1_GATEWAY_FP32.ts",
+      "MODEL_V2_GATEWAY_FP32.ts"
+    ],
+    "gateway_artifacts_distinct": true,
+    "thresholds_distinct": true,
+    "v1_calibration_still_cal_v1": true,
+    "v1_policy_ids": [
+      "MODEL_V1",
+      "CAL_V1"
+    ],
+    "v1_response_after_v2_traffic": {
+      "calibration_id": "CAL_V1",
+      "model_id": "MODEL_V1",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "threshold": 0.6128035574269627
+    },
+    "v1_session_store_untouched_by_v2_traffic": true,
+    "v2_calibration_still_cal_v2": true,
+    "v2_policy_ids": [
+      "MODEL_V2_FINAL",
+      "CAL_V2"
+    ]
+  },
+  "module_level_mutable_bindings_in_v2_modules": [],
+  "same_session_id_used_in_both_processes": true,
+  "singleton_or_global_model_binding": false,
+  "status": "PASS"
+}

@@ -1,0 +1,51 @@
+{
+  "cases": {
+    "200_valid": {
+      "model_id": "MODEL_V2_FINAL",
+      "status": 200
+    },
+    "400_non_monotonic": {
+      "error_type": "NON_MONOTONIC_TIMESTAMP",
+      "status": 400
+    },
+    "400_schema_error": {
+      "error_type": "REQUEST_SCHEMA_ERROR",
+      "status": 400
+    },
+    "400_wrong_model_id": {
+      "error_type": "UNSUPPORTED_MODEL_ID",
+      "status": 400
+    },
+    "422_incomplete": {
+      "error_type": "UNUSABLE_OR_INCOMPLETE_SIGNAL_WINDOW",
+      "model_executed": false,
+      "status": 422
+    },
+    "422_unusable": {
+      "error_type": "UNUSABLE_OR_INCOMPLETE_SIGNAL_WINDOW",
+      "model_executed": false,
+      "status": 422
+    },
+    "500_internal": {
+      "error_type": "INTERNAL_SERVER_ERROR",
+      "status": 500
+    }
+  },
+  "contract_version": "API_SCHEMA_V1",
+  "diagnostic_wording_hits_in_schema_vocabulary": [],
+  "endpoint": "/v1/infer-window",
+  "info_version_identical": true,
+  "model_id_selection": "runtime-bound only; request model_id must equal the bound model; no query/header/checkpoint/threshold selector exists",
+  "monitoring_state_vocabulary": [
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "RECHECK_SENSOR",
+    "SYSTEM_ERROR"
+  ],
+  "new_http_contract_version_created": false,
+  "openapi_semantically_identical_to_frozen_contract_ignoring_info_title_description": true,
+  "quality_warning_is_public_state": false,
+  "status": "PASS",
+  "vocabulary_exactly_five_unchanged": true
+}

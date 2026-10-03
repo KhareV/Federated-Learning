@@ -1,0 +1,27 @@
+{
+  "api_base": "http://127.0.0.1:49710",
+  "api_pid": 12102,
+  "claim_boundary": "software demonstration of a recorded simulated session; not a clinical result, not a real wearable",
+  "demo": "RESEARCH_V2_SOFTWARE_DEMO",
+  "frontend_build": {
+    "build_exit_code": 0,
+    "model_neutral_strings_present_in_built_bundle": {
+      "No model inference was run": true,
+      "model interface window": true
+    },
+    "request_model_id_build_config": "VITE_NHM_REQUEST_MODEL_ID=MODEL_V2_FINAL (build-time, not a runtime selector)",
+    "v1_specific_strings_absent_from_built_bundle": {
+      "MODEL_V1 interface window": true,
+      "MODEL_V1 was not run": true
+    }
+  },
+  "frontend_url": "http://127.0.0.1:49728/monitoring?mode=replay&replay=WEARABLE_SIM_V2_REPLAY_V1",
+  "http_status_counts": {
+    "200": 80,
+    "422": 13
+  },
+  "operational_default_unchanged": true,
+  "runtime": "API_RUNTIME_V2",
+  "semantic_digest_sha256": "7ef39ae96a6d240677b44d3384cc054a37e4c90add6b9ffabd6d21e9df9201c7",
+  "window_count": 93
+}

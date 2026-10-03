@@ -1,0 +1,20 @@
+{
+  "normal_start_command": "uvicorn api.app:app (unchanged production entry point)",
+  "production_gateway_artifact_path": "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts",
+  "production_policy_calibration_id": "CAL_V1",
+  "production_policy_model_id": "MODEL_V1",
+  "production_runtime_class": "ProductionRuntime",
+  "production_still_hard_binds_model_v1": true,
+  "resolves_to": "MODEL_V1/GATEWAY_ARTIFACT_V1/CAL_V1",
+  "response_alert_policy_id": "ALERT_POLICY_V1",
+  "response_calibration_domain": "MIT-BIH-v1.0.0",
+  "response_calibration_id": "CAL_V1",
+  "response_model_id": "MODEL_V1",
+  "response_threshold_equals_cal_v1": true,
+  "scientific_evaluation_rerun": false,
+  "status": "PASS",
+  "status_for_model_v1_request": 200,
+  "v1_files_changed_since_entry": [],
+  "v2_request_to_production_error": "UNSUPPORTED_MODEL_ID",
+  "v2_request_to_production_status": 400
+}

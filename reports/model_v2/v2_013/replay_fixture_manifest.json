@@ -1,0 +1,36 @@
+{
+  "bundle_manifest": {
+    "bundle_path": "frontend/static/replay/WEARABLE_SIM_V2_REPLAY_V1.json",
+    "bundle_sha256": "46836bd61305ac6f3be95a57c4fad14ee5a310ac6626b1def1f4fe542f7e8659",
+    "cadence_us": 5000000,
+    "chain": "WEARABLE_SIM_V1 ObservedRecord stream (360 Hz) -> GAP_POLICY_V1 -> stateful 360->250 Hz resampler -> causal ECG band-pass -> 10 s windows @ 5 s cadence -> QUALITY_V1 -> causal context alignment",
+    "chunk_records": 360,
+    "ecg_quality_counts": {
+      "DEGRADED": 2,
+      "UNUSABLE": 13,
+      "VALID": 78
+    },
+    "events_semantic_sha256": "47b93a04725e2224c258f8bb010cd55ccebf84e60d08231f3ba420ac8692e2c7",
+    "first_right_edge_us": 15000000,
+    "fixture_id": "WEARABLE_SIM_V2_REPLAY_V1",
+    "protected_partitions_accessed": false,
+    "provenance": {
+      "clinical_or_real_wearable_claim": false,
+      "dataset_id": "WEARABLE_SIM_V1",
+      "participant_id": "SIM_P000013",
+      "profile_id": "WEARABLE_SIM_V2013_INTEGRATION_PROFILE_V1",
+      "session_id": "SIM_S_V2013_LONGITUDINAL_000001",
+      "simulation_seed": 20260927,
+      "simulation_version": "WEARABLE_SIM_V1",
+      "source": "SYNTHETIC_PHYSIOLOGY",
+      "virtual_participant_is_human": false
+    },
+    "purpose": "deterministic ENGINEERING-ONLY simulated-wearable software replay for API_RUNTIME_V2 dashboard E2E; NOT clinical, NOT real-wearable evidence",
+    "request_model_id": "MODEL_V2_FINAL",
+    "scientific_metrics": false,
+    "window_count": 93
+  },
+  "bundle_sha256": "46836bd61305ac6f3be95a57c4fad14ee5a310ac6626b1def1f4fe542f7e8659",
+  "replay_id": "WEARABLE_SIM_V2_REPLAY_V1",
+  "window_count": 93
+}

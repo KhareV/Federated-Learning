@@ -173,7 +173,8 @@ def test_registry_transition_and_preserved_statuses() -> None:
     gates = rows("manifests/model_v2/gate_registry_v1.csv", "gate_id")
     comps = rows("manifests/model_v2/component_registry_v1.csv", "component_id")
     assert tasks["V2-012"]["status"] == "PASS" and gates["V2G11"]["status"] == "PASS"
-    assert tasks["V2-013"]["status"] == "NOT_STARTED" and gates["V2G12"]["status"] == "NOT_STARTED"
+    assert tasks["V2-013"]["status"] in {"NOT_STARTED", "PASS"}
+    assert gates["V2G12"]["status"] in {"NOT_STARTED", "PASS"}
     assert comps["GATEWAY_ARTIFACT_V2"]["status"] == "FROZEN_RESEARCH_GATEWAY"
     assert comps["MODEL_V2_RUNTIME_ACCEPTED"]["status"] == "ACCEPTED"
     assert comps["MODEL_V2_FINAL"]["status"] == "FROZEN" and comps["CAL_V2"]["status"] == "FROZEN"

@@ -1,0 +1,12 @@
+{
+  "amendment_reason": "The V1-default regression check counted the NEW additive file fusion/alert_policy_v2_binding.py as a modified V1 file because its git pathspec covers the fusion/ directory. The pathspec filter was scoped to --diff-filter=MDRT (modified/deleted/renamed/type-changed). No pass criterion for any V1 file was loosened, and no model, calibration, policy, signal-processing or replay behavior changed.",
+  "disclosed_amendments": {
+    "scripts/run_v2_013_v1_isolation.py": "diff --git a/scripts/run_v2_013_v1_isolation.py b/scripts/run_v2_013_v1_isolation.py\nindex a14502a..73ba4bb 100644\n--- a/scripts/run_v2_013_v1_isolation.py\n+++ b/scripts/run_v2_013_v1_isolation.py\n@@ -46,8 +46,8 @@ def v1_default_regression() -> dict:\n             \"V2-013-V1-DEFAULT\", 15 * MS, window.tolist(), quality=\"VALID\",\n             model_id=lib.V2_MODEL_ID))\n     diff = subprocess.run(\n-        [\"git\", \"diff\", \"--name-only\", ENTRY, \"--\", \"api/app.py\", \"api/runtime.py\",\n-         \"api/schemas.py\", \"api/session.py\", \"fusion\", \"deployment/runtime.py\",\n+        [\"git\", \"diff\", \"--name-only\", \"--diff-filter=MDRT\", ENTRY, \"--\", \"api/app.py\",\n+         \"api/runtime.py\", \"api/schemas.py\", \"api/session.py\", \"fusion\", \"deployment/runtime.py\",\n          \"deployment/export.py\", \"deployment/benchmark.py\", \"artifacts/API_RUNTIME_V1_1.lock.json\",\n          \"artifacts/GATEWAY_ARTIFACT_V1.lock.json\", \"artifacts/CAL_V1.json\",\n          \"artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts\", \"checkpoints/MODEL_V1.pt\","
+  },
+  "files_changed_since_method_freeze": [
+    "scripts/run_v2_013_v1_isolation.py"
+  ],
+  "method_commit": "108973cd9ac5aa72f46410598274b0288f7214d8",
+  "status": "PASS",
+  "unexpected_changes": []
+}

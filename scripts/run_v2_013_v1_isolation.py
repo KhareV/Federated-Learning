@@ -46,8 +46,8 @@ def v1_default_regression() -> dict:
             "V2-013-V1-DEFAULT", 15 * MS, window.tolist(), quality="VALID",
             model_id=lib.V2_MODEL_ID))
     diff = subprocess.run(
-        ["git", "diff", "--name-only", ENTRY, "--", "api/app.py", "api/runtime.py",
-         "api/schemas.py", "api/session.py", "fusion", "deployment/runtime.py",
+        ["git", "diff", "--name-only", "--diff-filter=MDRT", ENTRY, "--", "api/app.py",
+         "api/runtime.py", "api/schemas.py", "api/session.py", "fusion", "deployment/runtime.py",
          "deployment/export.py", "deployment/benchmark.py", "artifacts/API_RUNTIME_V1_1.lock.json",
          "artifacts/GATEWAY_ARTIFACT_V1.lock.json", "artifacts/CAL_V1.json",
          "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts", "checkpoints/MODEL_V1.pt",

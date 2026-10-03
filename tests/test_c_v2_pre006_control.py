@@ -88,13 +88,14 @@ def test_future_task_and_gate_rows_all_not_started() -> None:
     tasks, gates = _registry()
     for n in range(6, 15):
         task_id = f"V2-{n:03d}"
-        if task_id in {"V2-006", "V2-007", "V2-008", "V2-009", "V2-010", "V2-011", "V2-012"}:
+        if task_id in {"V2-006", "V2-007", "V2-008", "V2-009", "V2-010", "V2-011", "V2-012",
+                       "V2-013"}:
             assert tasks[task_id]["status"] in {"NOT_STARTED", "PASS"}
         else:
             assert tasks[task_id]["status"] == "NOT_STARTED"
     for n in range(5, 14):
         gate_id = f"V2G{n}"
-        if gate_id in {"V2G5", "V2G6", "V2G7", "V2G8", "V2G9", "V2G10", "V2G11"}:
+        if gate_id in {"V2G5", "V2G6", "V2G7", "V2G8", "V2G9", "V2G10", "V2G11", "V2G12"}:
             assert gates[gate_id] in {"NOT_STARTED", "PASS"}
         else:
             assert gates[gate_id] == "NOT_STARTED"

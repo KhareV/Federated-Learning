@@ -1,0 +1,19 @@
+{
+  "accelerated_wall_seconds": 0.07,
+  "api_digest_accelerated": "1703c38257894425476678acf29e49dea80fa0cfa2c9d2b421e69ab749806003",
+  "api_digest_live": "1703c38257894425476678acf29e49dea80fa0cfa2c9d2b421e69ab749806003",
+  "chunk_sizes_tested": [
+    360,
+    97,
+    1000
+  ],
+  "excerpt_profile": "WEARABLE_SIM_V2013_INTEGRATION_PROFILE_V1_LIVE_EXCERPT",
+  "excerpt_windows": 6,
+  "full_profile_windows": 93,
+  "live_speed_wall_seconds": 44.09,
+  "live_speed_was_paced_to_real_time": true,
+  "semantic_outputs_identical": true,
+  "status": "PASS",
+  "stream_events_identical_across_chunk_sizes": true,
+  "stream_events_identical_live_vs_accelerated": true
+}

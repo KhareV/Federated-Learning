@@ -59,15 +59,15 @@ def test_only_v2_001_through_v2_010_and_v2g0_through_v2g9_pass_in_this_phase() -
     passed_tasks = {row["task_id"] for row in task_rows if row["status"] == "PASS"}
     passed_gates = {row["gate_id"] for row in gate_rows if row["status"] == "PASS"}
 
-    # V2-010/V2G9, V2-011/V2G10 and V2-012/V2G11 (research gateway) have since passed;
+    # V2-010..V2-013 and V2G9..V2G12 (gateway, then API runtime integration) have since passed;
     # this test still guards that no other task/gate has silently passed.
     expected_tasks = {
         "V2-001", "V2-002", "V2-003", "V2-004", "V2-006", "V2-007", "V2-008", "V2-009",
-        "V2-010", "V2-011", "V2-012",
+        "V2-010", "V2-011", "V2-012", "V2-013",
     }
     expected_gates = {
         "V2G0", "V2G1", "V2G2", "V2G3", "V2G4", "V2G5", "V2G6", "V2G7", "V2G8", "V2G9",
-        "V2G10", "V2G11",
+        "V2G10", "V2G11", "V2G12",
     }
     assert passed_tasks == expected_tasks
     assert passed_gates == expected_gates

@@ -1,0 +1,31 @@
+{
+  "api_process": "fresh uvicorn process (explicit V2 research profile)",
+  "finite_output_count": 300,
+  "http_200_count": 300,
+  "identity_and_version_agreement": {
+    "alert_policy_id": true,
+    "calibration_domain": true,
+    "calibration_id": true,
+    "calibration_patient_count": true,
+    "contract_version": true,
+    "model_id": true,
+    "preprocess_version": true,
+    "target": true,
+    "threshold": true
+  },
+  "max_calibrated_probability_delta": 0.0,
+  "max_raw_logit_delta_in_process_gateway": 0.0,
+  "max_raw_probability_delta": 0.0,
+  "monitoring_state_agreement": 1.0,
+  "raw_logit_observable_over_http": false,
+  "reference": "locked per-window z-score -> frozen TorchScript artifact loaded directly -> canonical CAL_V2 helpers -> independent AlertEpisodeManager with LITERAL K=2/M=2/cooldown=30 s and CAL_V2's threshold",
+  "request_count": 300,
+  "scientific_metrics_reported": false,
+  "sessions": {
+    "with_valid_ppg_context": 100,
+    "without_ppg_context": 200
+  },
+  "status": "PASS",
+  "threshold_decision_agreement": 1.0,
+  "tolerance": 1e-12
+}

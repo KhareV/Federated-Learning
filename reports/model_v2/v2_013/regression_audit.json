@@ -1,0 +1,59 @@
+{
+  "browser_e2e_note": "no browser-automation stack exists in the repository; the real-HTTP vitest component E2E (frontend_e2e_evidence.json) is the E2E gate",
+  "checks": {
+    "frontend_build": {
+      "command": "npm --prefix /Users/Home/Downloads/miniproject/frontend run build",
+      "exit_code": 0,
+      "tail": [
+        "- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks",
+        "- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+      ]
+    },
+    "frontend_check": {
+      "command": "npm --prefix /Users/Home/Downloads/miniproject/frontend run check",
+      "exit_code": 0,
+      "tail": [
+        "1791063458573 WARNING \"src/routes/monitor/+page.svelte\" 87:2025 \"Unused CSS selector \\\".metric em\\\"\\nhttps://svelte.dev/e/css_unused_selector\"",
+        "1791063458573 COMPLETED 5671 FILES 0 ERRORS 118 WARNINGS 7 FILES_WITH_PROBLEMS"
+      ]
+    },
+    "frontend_unit": {
+      "command": "npm --prefix /Users/Home/Downloads/miniproject/frontend run test",
+      "exit_code": 0,
+      "tail": [
+        "   Start at  03:07:34",
+        "   Duration  863ms (transform 463ms, setup 0ms, collect 1.27s, tests 91ms, environment 745ms, prepare 344ms)"
+      ]
+    },
+    "pip_check": {
+      "command": "/Users/Home/Downloads/miniproject/.venv-t032/bin/python -m pip check",
+      "exit_code": 0,
+      "tail": [
+        "No broken requirements found."
+      ]
+    },
+    "ruff": {
+      "command": "/Users/Home/Downloads/miniproject/.venv-t032/bin/python -m ruff check src tests scripts simulation deployment fusion api datasets features models training evaluation preprocessing",
+      "exit_code": 0,
+      "tail": [
+        "All checks passed!"
+      ]
+    }
+  },
+  "chunked_python_regression": {
+    "chunk_count": 26,
+    "chunk_size": 80,
+    "collected_equals_executed": true,
+    "collected_node_count": 2046,
+    "collected_sorted_node_list_sha256": "4a3eb7191e31da77f7b283a1e83ecee476870fa6e64e338810641441054a312c",
+    "duplicates": 0,
+    "executed_unique_count": 2046,
+    "failed_chunks": 0,
+    "failed_tests": 0,
+    "missing": 0,
+    "status": "PASS",
+    "unexpected": 0
+  },
+  "ci": "deferred; GitHub Actions never triggered, queried or polled",
+  "status": "PASS"
+}
