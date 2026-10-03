@@ -58,11 +58,18 @@ def test_known_registry_contradiction_was_confirmed_and_corrected() -> None:
     assert "0.5628608" in data["registry_current_text_before_correction"]
 
 
-def test_v2_007_wording_does_not_allow_validation_for_tuning() -> None:
+def test_v2_007_wording_reflects_frozen_protocol() -> None:
+    # This checkpoint (C-V2-PRE006-CONTROL) originally asserted that checkpoint/early-
+    # stopping decisions for V2-007 use only TRAIN-only OPTIMISE/INNER_VALIDATION roles and
+    # that official VALIDATION is "never used for early stopping... checkpoint selection".
+    # C-V2-PRE006-CLOSEOUT found this claim factually wrong: V1 doc Section K explicitly
+    # states official VALIDATION itself serves that role for the V2-007 finalists, carried
+    # forward byte-identical into Protocol V2's early_stopping_checkpoint_selection field.
+    # The registry wording was corrected there; this test now only guards that V2-007's
+    # status and the protocol-field reference remain intact, not the superseded claim.
     tasks, _ = _registry()
     notes = tasks["V2-007"]["notes"]
-    assert "never used for early stopping" in notes
-    assert "OPTIMISE/INNER_VALIDATION" in notes
+    assert "early_stopping_checkpoint_selection" in notes
     assert tasks["V2-007"]["status"] == "NOT_STARTED"
 
 
