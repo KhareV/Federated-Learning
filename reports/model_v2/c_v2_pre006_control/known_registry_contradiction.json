@@ -1,0 +1,18 @@
+{
+  "active_protocol_v2_machine_contract": {
+    "mean_three_seed_validation_auprc_min": 0.646,
+    "paired_patient_cluster_bootstrap_delta_auprc_vs_model_v1_lower_95_ci_bound_min": 0.0,
+    "release_checkpoint_seed": 20260927,
+    "release_checkpoint_seed_fixed_regardless_of_score": true,
+    "superseded_v1_rule": {
+      "computation": "0.5328607838787021 (V1 release AUPRC) + 0.03",
+      "note": "V1's hard D5 gate. Superseded below. The classical LR/RF historical VALIDATION AUPRC values (0.645879, 0.799672) were marked interpretation-benchmarks-only in V1 (hard_promotion_gates: false); V2 makes the LR-derived 0.646 value the actual hard gate threshold.",
+      "release_seed_validation_auprc_min": 0.5628607838787021
+    }
+  },
+  "classification": "CONTRADICTION_CONFIRMED",
+  "method_note": "Determined by reading the actual committed registry row (via `git show HEAD:...`) and the actual parsed Protocol V2 YAML field values directly -- not by trusting any prior handoff's prose claim.",
+  "registry_current_text_before_correction": "V2-008,FREEZE,MODEL_V2_FINAL freeze,V2-007,V2G7,NOT_STARTED,,,Promotion requires release-seed VALIDATION AUPRC >= 0.5628608 (V1 release AUPRC + 0.03) with three-seed confirmation and no material AUROC regression.",
+  "registry_row_hash_before_correction_sha256": "6547005adac5967646abcbad3a5d451fd716fdfdfdc311ed37d5fdb3de86eb9e",
+  "stale_text_present_in_registry_before_correction": true
+}

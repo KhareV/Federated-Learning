@@ -1,0 +1,18 @@
+{
+  "bidmc_accessed": false,
+  "bootstrap_results_generated": 0,
+  "calibration_accessed": false,
+  "checkpoints_created": 0,
+  "classical_fits_added": 0,
+  "feature_extraction_runs": 0,
+  "incart_accessed": false,
+  "internal_test_accessed": false,
+  "method_note": "This checkpoint's script and all of its generated evidence read only already-frozen scalar JSON/CSV/YAML metadata (protocol, registries, prior V2-004/V2-005 result scalars) and git history. No waveform file, feature-cache row, or annotation file was opened; no model object was constructed or run.",
+  "model_inference_runs": 0,
+  "neural_fits_added": 0,
+  "new_scientific_metrics": 0,
+  "nstdb_accessed": false,
+  "official_validation_accessed": false,
+  "status": "PASS",
+  "waveform_reads": 0
+}

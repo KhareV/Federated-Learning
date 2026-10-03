@@ -1,0 +1,39 @@
+{
+  "origin_main_at_generation_time": "f9f489d9fa9f71fb27f9bf487e32e56faa4e8892",
+  "registry_at_true_entry": {
+    "gates": {
+      "V2G0": "PASS",
+      "V2G1": "PASS",
+      "V2G10": "NOT_STARTED",
+      "V2G11": "NOT_STARTED",
+      "V2G12": "NOT_STARTED",
+      "V2G13": "NOT_STARTED",
+      "V2G2": "PASS",
+      "V2G3": "PASS",
+      "V2G4": "PASS",
+      "V2G5": "NOT_STARTED",
+      "V2G6": "NOT_STARTED",
+      "V2G7": "NOT_STARTED",
+      "V2G8": "NOT_STARTED",
+      "V2G9": "NOT_STARTED"
+    },
+    "tasks": {
+      "V2-001": "PASS",
+      "V2-002": "PASS",
+      "V2-003": "PASS",
+      "V2-004": "PASS",
+      "V2-005": "SKIPPED_BY_PROTOCOL",
+      "V2-006": "NOT_STARTED",
+      "V2-007": "NOT_STARTED",
+      "V2-008": "NOT_STARTED",
+      "V2-009": "NOT_STARTED",
+      "V2-010": "NOT_STARTED",
+      "V2-011": "NOT_STARTED",
+      "V2-012": "NOT_STARTED",
+      "V2-013": "NOT_STARTED",
+      "V2-014": "NOT_STARTED"
+    }
+  },
+  "true_entry_sha": "9158ebbe9bc97d36ffaa6c670b43ad1282e67139",
+  "working_tree_clean_excluding_own_in_progress_evidence": false
+}

@@ -1,0 +1,29 @@
+{
+  "files": {
+    "manifests/model_v2/component_registry_v1.csv": {
+      "data_row_count": 18,
+      "expected_row_count": 18,
+      "header_field_count": 7,
+      "ids_unique": true,
+      "misaligned_rows": [],
+      "status": "PASS"
+    },
+    "manifests/model_v2/gate_registry_v1.csv": {
+      "data_row_count": 14,
+      "expected_row_count": 14,
+      "header_field_count": 12,
+      "ids_unique": true,
+      "misaligned_rows": [],
+      "status": "PASS"
+    },
+    "manifests/model_v2/task_registry_v1.csv": {
+      "data_row_count": 14,
+      "expected_row_count": 14,
+      "header_field_count": 9,
+      "ids_unique": true,
+      "misaligned_rows": [],
+      "status": "PASS"
+    }
+  },
+  "status": "PASS"
+}

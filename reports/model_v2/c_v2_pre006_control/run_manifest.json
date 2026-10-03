@@ -1,0 +1,29 @@
+{
+  "checkpoint_id": "C-V2-PRE006-CONTROL",
+  "evidence_files": [
+    "component_registry_semantic_audit.json",
+    "conditional_prerequisite_integration_audit.json",
+    "entry_audit.json",
+    "future_gate_semantic_matrix.csv",
+    "future_gate_semantic_summary.json",
+    "future_task_semantic_matrix.csv",
+    "future_task_semantic_summary.json",
+    "known_registry_contradiction.json",
+    "no_data_no_training_audit.json",
+    "protocol_v2_authority_audit.json",
+    "protocol_v2_internal_consistency.json",
+    "registry_after_hashes.json",
+    "registry_before_hashes.json",
+    "registry_structural_validation.json",
+    "search_budget_authority_audit.json",
+    "test_results.json",
+    "upstream_identity_audit.json"
+  ],
+  "head_at_generation": "f9f489d9fa9f71fb27f9bf487e32e56faa4e8892",
+  "no_classical_fits": true,
+  "no_neural_fits": true,
+  "no_protocol_mutated": true,
+  "no_scientific_artifact_mutated": true,
+  "parent": "V2-005 \u2014 CONDITIONAL HYBRID DISPOSITION",
+  "type": "corrective_control_plane_checkpoint"
+}

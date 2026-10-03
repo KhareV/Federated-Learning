@@ -1,0 +1,220 @@
+{
+  "extracted_active_fields": {
+    "architecture_search_policy": {
+      "auroc_guardrail_min_delta": -0.01,
+      "candidate_ranking": "pooled_OOF_AUPRC_within_each_stage",
+      "hybrid_runs_only_if_feature_information_trigger_satisfied": true,
+      "max_eligible_candidate_families_continuing": 2,
+      "maximum_v2_004_fits": 35,
+      "practical_improvement_rule_min_delta_auprc": 0.02,
+      "report_paired_patient_cluster_bootstrap_ci": true,
+      "stage_D1": {
+        "advancement_rule": "paired_patient_cluster_bootstrap_delta_AUPRC_vs_MODEL_V1_CV_REFERENCE_V1_lower_95_CI_bound_greater_than_0",
+        "architectures": [
+          "MODEL_V2_CAPCTRL",
+          "MODEL_V2_TCN_MEAN",
+          "MODEL_V2_TCN_MEANMAX"
+        ],
+        "disqualification_rules": [
+          "non_finite_candidate",
+          "pooled_OOF_AUROC_below_frozen_V1_CV_reference_mean_AUROC",
+          "trainable_parameters_above_120000"
+        ],
+        "folds": 5,
+        "max_advancing": 2,
+        "ranking": "pooled_OOF_AUPRC",
+        "seed": 20260927,
+        "tie_rule": "within_one_bootstrap_se_prefer_simpler_lower_variance",
+        "total_fits": 15,
+        "zero_candidates_advance_policy": "STOP_NEURAL_ARCHITECTURE_SEARCH_PER_PROTOCOL -- do not manufacture D2 fits, do not access official VALIDATION"
+      },
+      "stage_D2": {
+        "architectures": "at most 2, exactly the D1-advanced set",
+        "folds": 5,
+        "max_additional_fits": 20,
+        "seeds": [
+          20260928,
+          20260929
+        ]
+      },
+      "superseded_v1_fields": {
+        "all_primary_comparisons_use_all_three_seeds": true,
+        "elimination_after_single_seed_forbidden": true,
+        "note": "These V1 fields required all three architectures to receive all three seeds before any elimination (45 fits, no staging). Superseded by stage_D1/stage_D2 below. V1 itself is unmodified; this block documents what changed and why.",
+        "primary_experiment_fits": {
+          "architectures": 3,
+          "folds": 5,
+          "seeds": 3,
+          "total": 45
+        }
+      },
+      "unrealistically_narrow_ci_requirement_forbidden": true,
+      "v1_cv_reference_fits": {
+        "folds": 5,
+        "seeds": 3,
+        "total": 15
+      },
+      "within_one_bootstrap_se_tiebreak": "prefer_simpler_lower_variance"
+    },
+    "bootstrap_specification": {
+      "bootstrap_seed_id": "V2_BOOTSTRAP_SEED",
+      "bootstrap_seed_value": 20261002,
+      "multi_seed_paired_rule": "PAIRED_DELTA_PER_SEED_THEN_AVERAGE_SEED_DELTAS_PER_REPLICATE",
+      "paired_comparison_rule": "SAME_SAMPLED_PATIENT_IDS_BOTH_MODELS",
+      "preserves_window_multiplicity": true,
+      "recompute_pooled_metric_per_replicate": true,
+      "replicates": 2000,
+      "sampling_unit": "participant_group_id",
+      "sampling_with_replacement": true,
+      "window_bootstrap_forbidden": true
+    },
+    "cal_v2_method": {
+      "claim_boundary": "MIT_BIH_SOURCE_DOMAIN_CALIBRATION_ONLY",
+      "component_id": "CAL_V2",
+      "fit_scope": "CALIBRATION_PARTITION_ONLY",
+      "forbidden": [
+        "Platt_scaling",
+        "isotonic_regression",
+        "TRAIN_OOF_calibration",
+        "TRAIN_plus_VALIDATION_calibration",
+        "reuse_or_mutation_of_CAL_V1"
+      ],
+      "method": "single_positive_scalar_temperature",
+      "objective": "NLL_minimization",
+      "probability_formula": "p = sigmoid(logit / T_V2)",
+      "required_report_fields": [
+        "NLL_raw",
+        "NLL_calibrated",
+        "Brier_raw",
+        "Brier_calibrated",
+        "ECE",
+        "reliability_bins",
+        "patient_count",
+        "window_and_class_counts"
+      ],
+      "threshold_comparator": ">=",
+      "threshold_rule": "F1_MAXIMUM_ON_CALIBRATED_CALIBRATION_PROBABILITIES",
+      "threshold_tie_policy": "SAME_AS_V1_DETERMINISTIC_RULE",
+      "timing": "STRICTLY_AFTER_MODEL_V2_FINAL_FROZEN"
+    },
+    "checkpoint_selection_rule": "OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE",
+    "finalist_limit": 2,
+    "freeze_change_control_policy": {
+      "protocol_mutation_after_freeze": "Any change requires a new MODEL_V2_RESEARCH_PROTOCOL_V2 successor; this lock is never mutated in place."
+    },
+    "model_seeds": {
+      "release_seed_fixed_regardless_of_score": 20260927,
+      "role": "MATCHED_ROBUSTNESS_SEEDS",
+      "seeds": [
+        20260927,
+        20260928,
+        20260929
+      ]
+    },
+    "official_validation_policy": {
+      "architecture_selection_rule": "HIGHEST_MEAN_THREE_SEED_VALIDATION_AUPRC",
+      "change_freeze_on_first_access": true,
+      "early_stopping_checkpoint_selection": "OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE",
+      "frozen_classical_references_are_interpretation_benchmarks_only": {
+        "LR_AUPRC": 0.645879,
+        "RF_AUPRC": 0.799672,
+        "hard_promotion_gates": "PARTIAL -- LR_AUPRC (rounded to 0.646) is now the hard mean-three-seed-VALIDATION-AUPRC gate; RF_AUPRC remains interpretation-only"
+      },
+      "max_frozen_configurations": 2,
+      "promotion_requirement": {
+        "auroc_material_regression_forbidden": true,
+        "mean_three_seed_validation_auprc_min": 0.646,
+        "mean_three_seed_validation_auprc_min_derivation": "frozen historical LOGISTIC_BASELINE_V1 VALIDATION AUPRC (0.645879), rounded",
+        "paired_comparison_rule_reused_from": "patient_cluster_bootstrap (unchanged)",
+        "paired_patient_cluster_bootstrap_delta_auprc_vs_model_v1_lower_95_ci_bound_min": 0.0,
+        "superseded_v1_rule": {
+          "computation": "0.5328607838787021 (V1 release AUPRC) + 0.03",
+          "note": "V1's hard D5 gate. Superseded below. The classical LR/RF historical VALIDATION AUPRC values (0.645879, 0.799672) were marked interpretation-benchmarks-only in V1 (hard_promotion_gates: false); V2 makes the LR-derived 0.646 value the actual hard gate threshold.",
+          "release_seed_validation_auprc_min": 0.5628607838787021
+        },
+        "three_seed_confirmation_required": true
+      },
+      "release_checkpoint_seed": 20260927,
+      "release_checkpoint_seed_fixed_regardless_of_score": true,
+      "seeds": [
+        20260927,
+        20260928,
+        20260929
+      ],
+      "tie_rule": "WITHIN_ONE_BOOTSTRAP_SE_PREFER_LOWER_VARIANCE_SIMPLER_MODEL",
+      "training_population": "ALL_27_TRAIN_PATIENT_GROUPS"
+    },
+    "optimizer_correction_policy": {
+      "adoption_rule": "mean TRAIN-CV AUPRC improvement exceeds one bootstrap SE AND seed SD does not materially worsen",
+      "challenger": {
+        "early_stop_patience": 8,
+        "learning_rate": 0.001,
+        "monitor": "inner_validation_AUPRC",
+        "optimizer": "AdamW",
+        "scheduler": "ReduceLROnPlateau",
+        "scheduler_factor": 0.3,
+        "scheduler_mode": "max",
+        "scheduler_patience": 3,
+        "weight_decay": "SAME_AS_CONTROL"
+      },
+      "comparisons_allowed": 1,
+      "control": {
+        "schedule": "V1_EXISTING_SCHEDULE"
+      },
+      "grid_search_forbidden": true,
+      "initial_architecture_search_schedule": "V1_SCHEDULE_VERBATIM",
+      "runs_after_winning_family_determined_only": true
+    },
+    "post_freeze_second_look_policy": {
+      "domains": {
+        "INCART": {
+          "lead_change_forbidden": true,
+          "map_change_forbidden": true,
+          "passes": 1,
+          "population": "SAME_CLUSTERS_WINDOWS",
+          "recalibration_forbidden": true
+        },
+        "INTERNAL_TEST": {
+          "compare_to": "FROZEN_V1_PREDICTIONS",
+          "passes": 1,
+          "population": "SAME_ELIGIBLE_POPULATION",
+          "v1_rerun_forbidden": true
+        },
+        "NSTDB": {
+          "population": "SAME_PAIRED_WINDOWS",
+          "protocol": "SAME_FROZEN_T019_STRESS_PROTOCOL",
+          "retuning_forbidden": true,
+          "snrs": "SAME"
+        }
+      },
+      "evidence_label": "POST-FREEZE COMPARATIVE SECOND-LOOK EVIDENCE ON PREVIOUSLY EXPOSED EVALUATION DOMAINS",
+      "timing": "STRICTLY_AFTER_MODEL_V2_FINAL_AND_CAL_V2_FROZEN",
+      "untouched_v2_validation_claim_forbidden": true
+    },
+    "promotion_requirement": {
+      "auroc_material_regression_forbidden": true,
+      "mean_three_seed_validation_auprc_min": 0.646,
+      "mean_three_seed_validation_auprc_min_derivation": "frozen historical LOGISTIC_BASELINE_V1 VALIDATION AUPRC (0.645879), rounded",
+      "paired_comparison_rule_reused_from": "patient_cluster_bootstrap (unchanged)",
+      "paired_patient_cluster_bootstrap_delta_auprc_vs_model_v1_lower_95_ci_bound_min": 0.0,
+      "superseded_v1_rule": {
+        "computation": "0.5328607838787021 (V1 release AUPRC) + 0.03",
+        "note": "V1's hard D5 gate. Superseded below. The classical LR/RF historical VALIDATION AUPRC values (0.645879, 0.799672) were marked interpretation-benchmarks-only in V1 (hard_promotion_gates: false); V2 makes the LR-derived 0.646 value the actual hard gate threshold.",
+        "release_seed_validation_auprc_min": 0.5628607838787021
+      },
+      "three_seed_confirmation_required": true
+    },
+    "release_seed_rule": {
+      "fixed_regardless_of_score": true,
+      "release_checkpoint_seed": 20260927
+    }
+  },
+  "global_neural_fit_cap_field_found_at_top_level": false,
+  "protocol_v1_lock_expected": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+  "protocol_v1_lock_sha256": "4dadf234afd239539240e4e2662b1fdf54e5154400b1ea4e0c14c8e4107e2eb7",
+  "protocol_v1_unchanged": true,
+  "protocol_v2_lock_expected": "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81",
+  "protocol_v2_lock_sha256": "f300473a84d5ba1ceda1da722c4b2745856b43b4c1353e5af8cb2e8a3f878f81",
+  "protocol_v2_unchanged": true,
+  "status": "PASS"
+}

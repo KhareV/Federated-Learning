@@ -1,0 +1,16 @@
+{
+  "arbitrary_fake_skipped_task_rejected": true,
+  "canonical_prerequisite_code_location": "src/nhm/coverage.py (untouched)",
+  "canonical_t_task_prerequisite_semantics_changed": false,
+  "generic_v2_prerequisite_resolver_existed_before": false,
+  "helper_existed_before_this_checkpoint": true,
+  "integration_performed": true,
+  "new_resolver_module": "src/nhm/model_v2_prerequisite_resolver.py",
+  "production_call_sites_after_this_checkpoint": [
+    "scripts/generate_c_v2_pre006_control_evidence.py",
+    "src/nhm/model_v2_prerequisite_resolver.py"
+  ],
+  "production_call_sites_before_this_checkpoint": [],
+  "status": "PASS",
+  "v2_005_resolves_v2_007_prerequisite": true
+}

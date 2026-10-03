@@ -1,0 +1,24 @@
+{
+  "flagged_observations": [
+    {
+      "field": "official_validation.early_stopping_checkpoint_selection",
+      "observation": "Unchanged from V1 (byte-identical field, not altered by this successor; out of scope for this V1-vs-V2 reconciliation checkpoint). The literal string 'OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE' is not defined anywhere else in the codebase. It is not treated as license to use VALIDATION for tuning; the registry's V2-007 row has been clarified to state explicitly that checkpoint/early-stopping decisions use only the established TRAIN-only OPTIMISE/INNER_VALIDATION roles.",
+      "severity": "FLAGGED_AMBIGUITY_NOT_A_CONTRADICTION",
+      "value": "OFFICIAL_VALIDATION_LOCKED_V2.2_ROLE"
+    },
+    {
+      "field": "downstream_impact.if_runtime_accepted_may_create vs calibration_policy.timing",
+      "observation": "downstream_impact lists CAL_V2 among artifacts created 'if runtime accepted', while calibration_policy.timing says CAL_V2 is fit strictly after MODEL_V2_FINAL freezes with no mention of runtime acceptance. Read as the general lineage-impact note (downstream_impact) versus the specific, authoritative timing contract for CAL_V2 (calibration_policy) -- the more specific section controls. This is a within-YAML redundancy between two sections of the same frozen document, not a YAML-vs-doc disagreement, so it does not meet the STOP threshold of Section 2. The registry's V2-009/V2-012 rows each independently track the correct, relevant section and require no correction.",
+      "severity": "FLAGGED_AMBIGUITY_NOT_A_CONTRADICTION"
+    }
+  ],
+  "material_contradiction_between_yaml_and_doc": false,
+  "status": "PASS",
+  "yaml_vs_doc_checks": {
+    "mean_three_seed_validation_auprc_min_in_doc": true,
+    "paired_bootstrap_ci_vs_model_v1_in_doc": true,
+    "stage_d1_fit_count_in_doc": true,
+    "stage_d2_max_fit_count_in_doc": true,
+    "yaml_promotion_requirement_matches_description": true
+  }
+}

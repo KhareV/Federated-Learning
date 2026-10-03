@@ -1,0 +1,20 @@
+{
+  "additive_correction_needed": false,
+  "additive_correction_reason": "No numeric contradiction exists to correct: every V2-00x evidence file uses the same uncontested 100 convention, and the actual current fit count (50) is well under it regardless. Formalizing a global neural-fit cap field is a protocol-authoring decision for a future MODEL_V2_RESEARCH_PROTOCOL successor, not something this corrective checkpoint may add by mutating the active protocol (hard-stopped).",
+  "cap_90_mentioned_anywhere_in_repo": false,
+  "current_completed_v2_neural_fits": 50,
+  "finding": "No global neural-fit budget/cap field exists anywhere in the active Protocol V2 YAML, its lock JSON, the human-readable V2 doc, or Protocol V1 (searched exhaustively; only an unrelated per-architecture parameter_count_hard_cap=120000 field exists, which bounds trainable parameters per model, not the count of fits). The value 100 used consistently in every V2-002/V2-003/V2-004/V2-005 evidence generator script (first_line_neural_fit_cap / global_neural_fit_cap) is a project-level bookkeeping convention embedded directly in those scripts, never promoted into either frozen protocol. It has never been contradicted by any other number found anywhere in this repository (no '90' figure or any other conflicting cap value was found in any committed doc, config, or report).",
+  "match": "NOT_APPLICABLE_NO_AUTHORITATIVE_PROTOCOL_FIELD_EXISTS",
+  "protocol_v2_fields_matching_cap_or_budget_keywords": [
+    {
+      "path": "architectures.ARCH_B.parameter_count_hard_cap",
+      "value": 120000
+    }
+  ],
+  "protocol_v2_global_neural_fit_cap_field_exists": false,
+  "protocol_v2_global_neural_fit_cap_value": null,
+  "recommendation_for_future_protocol_successor": "If a successor protocol is ever created, it should promote this informal 100-fit convention (or a deliberately chosen replacement) into an explicit machine-readable field so it is authoritative rather than merely consistent.",
+  "status": "PASS",
+  "v2_004_reported_cap": 100,
+  "v2_005_reported_cap": 100
+}

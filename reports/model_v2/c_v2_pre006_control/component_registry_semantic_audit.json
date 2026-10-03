@@ -1,0 +1,15 @@
+{
+  "checks": {
+    "BEST_LEARNED_ONLY_V2_CV_V1_selected": true,
+    "CAL_V2_not_frozen": true,
+    "MODEL_V2_ARCH_CAUSALITY_V1_frozen": true,
+    "MODEL_V2_AUX_FEATURES_V1_still_conditional_reserved": true,
+    "MODEL_V2_FINAL_not_frozen": true,
+    "MODEL_V2_HYBRID_does_not_exist": true,
+    "MODEL_V2_RESEARCH_PROTOCOL_V1_historical": true,
+    "MODEL_V2_RESEARCH_PROTOCOL_V2_active": true
+  },
+  "component_rows_count": 18,
+  "no_fake_future_component_added": true,
+  "status": "PASS"
+}
