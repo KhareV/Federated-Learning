@@ -1,6 +1,12 @@
 {
   "armed_at": "2026-10-03T17:47:35.134937Z",
   "armed_git_sha": "b2baeaeee113e614e53098b61bee0760af9bca26",
+  "completed_at": "2026-10-03T17:50:54.892088Z",
+  "completed_git_sha": "d9eed9cd2df79245c735b84113039e8691104c89",
+  "completion_summary": {
+    "calibration_rows": 1080,
+    "predictions_sha256": "8d40d576105dd143740fca6e5401d331384694198fca19966dc24608ed651247"
+  },
   "preconditions": {
     "calibration_method_config_sha256": "61de1ae3f8e8297f70261819ce5791fe5a96078e585cf5d4fd1bdd7abec2b94e",
     "model_v2_final_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
@@ -8,5 +14,7 @@
     "model_v2_final_manifest_sha256": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
     "protocol_v3_lock_sha256": "287aff4ff3fcf583524f06e6af51f23bd65949a75abef14cde80ff0936873db8"
   },
-  "state": "ARMED"
+  "running_at": "2026-10-03T17:50:51.720385Z",
+  "running_git_sha": "d9eed9cd2df79245c735b84113039e8691104c89",
+  "state": "COMPLETED"
 }

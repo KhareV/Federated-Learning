@@ -1,0 +1,16 @@
+{
+  "candidate_count": 1082,
+  "comparator": ">=",
+  "fn": 36,
+  "fp": 281,
+  "maximum_f1_tie_count": 1,
+  "precision": 0.5408496732026143,
+  "selected_f1": 0.676200204290092,
+  "selected_threshold": 0.5101937262006424,
+  "selection_metric": "POOLED_CALIBRATION_WINDOW_F1",
+  "sensitivity": 0.9019073569482289,
+  "specificity": 0.605890603085554,
+  "tie_policy": "HIGHEST_THRESHOLD_AMONG_MAX_F1_V2",
+  "tn": 432,
+  "tp": 331
+}

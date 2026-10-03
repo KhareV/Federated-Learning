@@ -1,0 +1,12 @@
+{
+  "cal_v1_present_and_unchanged": true,
+  "checks": {
+    "checkpoints/MODEL_V1.pt": {
+      "expected": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+      "match": true,
+      "observed": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe"
+    }
+  },
+  "status": "PASS",
+  "v1_runtime_defaults_touched": false
+}

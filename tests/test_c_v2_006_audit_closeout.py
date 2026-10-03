@@ -76,15 +76,14 @@ def test_finalist_shortlist_exact() -> None:
 
 
 def test_model_v2_final_and_cal_v2_still_absent() -> None:
-    # MODEL_V2_FINAL has since legitimately frozen at V2-008 (scientific freeze, not
-    # operational promotion); this test only guards against an invalid status value for it.
-    # CAL_V2 must still be exactly absent -- V2-009 owns that freeze.
+    # MODEL_V2_FINAL (V2-008) and CAL_V2 (V2-009) have since legitimately frozen; this test
+    # only guards against an invalid status value for either.
     with (ROOT / "manifests/model_v2/component_registry_v1.csv").open(newline="") as handle:
         rows = list(csv.DictReader(handle))
     model_v2_final = next(r for r in rows if r["component_id"] == "MODEL_V2_FINAL")
     assert model_v2_final["status"] in {"NOT_STARTED", "FROZEN"}
     cal_v2 = next(r for r in rows if r["component_id"] == "CAL_V2")
-    assert cal_v2["status"] == "NOT_STARTED"
+    assert cal_v2["status"] in {"NOT_STARTED", "FROZEN"}
 
 
 def test_official_validation_still_unopened() -> None:

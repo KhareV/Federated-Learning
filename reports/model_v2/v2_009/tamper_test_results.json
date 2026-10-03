@@ -1,0 +1,30 @@
+{
+  "all_detected": true,
+  "canonical_artifact_mutated": false,
+  "checks": {
+    "domain_changed": true,
+    "external_data_accessed_flipped_true": true,
+    "fit_partition_changed": true,
+    "guard_state_changed_from_completed": true,
+    "internal_test_accessed_flipped_true": true,
+    "map_changed": true,
+    "model_v2_final_checkpoint_hash_change": true,
+    "model_v2_final_config_hash_change": true,
+    "model_v2_final_manifest_hash_change": true,
+    "operational_lineage_changed": true,
+    "patient_count_removed": true,
+    "preproc_hash_change": true,
+    "protocol_v3_hash_change": true,
+    "split_hash_change": true,
+    "target_changed": true,
+    "temperature_le_0": true,
+    "temperature_nan": true,
+    "threshold_above_1": true,
+    "threshold_below_0": true,
+    "threshold_comparator_changed": true,
+    "threshold_metric_changed": true,
+    "tie_policy_changed": true,
+    "window_manifest_hash_change": true
+  },
+  "status": "PASS"
+}

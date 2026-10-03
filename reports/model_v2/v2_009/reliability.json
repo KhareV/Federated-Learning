@@ -1,0 +1,205 @@
+{
+  "bin_edges": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0
+  ],
+  "calibrated_ece": 0.1720347716359628,
+  "calibration_id": "CAL_V2",
+  "claim_boundary": "Research-only MIT-BIH source-domain calibration under small-patient-sample uncertainty.",
+  "domain": "MIT-BIH-v1.0.0",
+  "method": "EQUAL_WIDTH_10_BINS_V1",
+  "raw": [
+    {
+      "bin_index": 0,
+      "count": 16,
+      "lower": 0.0,
+      "mean_probability": 0.053590013263460405,
+      "observed_positive_fraction": 0.0,
+      "upper": 0.1,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 1,
+      "count": 17,
+      "lower": 0.1,
+      "mean_probability": 0.14550625227991762,
+      "observed_positive_fraction": 0.0,
+      "upper": 0.2,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 2,
+      "count": 26,
+      "lower": 0.2,
+      "mean_probability": 0.2468939517379795,
+      "observed_positive_fraction": 0.0,
+      "upper": 0.3,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 3,
+      "count": 37,
+      "lower": 0.3,
+      "mean_probability": 0.36363482525293184,
+      "observed_positive_fraction": 0.0,
+      "upper": 0.4,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 4,
+      "count": 53,
+      "lower": 0.4,
+      "mean_probability": 0.4434451769788278,
+      "observed_positive_fraction": 0.0,
+      "upper": 0.5,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 5,
+      "count": 66,
+      "lower": 0.5,
+      "mean_probability": 0.5496706936815343,
+      "observed_positive_fraction": 0.045454545454545456,
+      "upper": 0.6,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 6,
+      "count": 65,
+      "lower": 0.6,
+      "mean_probability": 0.6553324823329649,
+      "observed_positive_fraction": 0.06153846153846154,
+      "upper": 0.7,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 7,
+      "count": 82,
+      "lower": 0.7,
+      "mean_probability": 0.7492956911277731,
+      "observed_positive_fraction": 0.13414634146341464,
+      "upper": 0.8,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 8,
+      "count": 114,
+      "lower": 0.8,
+      "mean_probability": 0.8565798140110367,
+      "observed_positive_fraction": 0.20175438596491227,
+      "upper": 0.9,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 9,
+      "count": 604,
+      "lower": 0.9,
+      "mean_probability": 0.9715982905962698,
+      "observed_positive_fraction": 0.5397350993377483,
+      "upper": 1.0,
+      "upper_inclusive": true
+    }
+  ],
+  "raw_ece": 0.4671481132267632,
+  "temperature_scaled": [
+    {
+      "bin_index": 0,
+      "count": 0,
+      "lower": 0.0,
+      "mean_probability": null,
+      "observed_positive_fraction": null,
+      "upper": 0.1,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 1,
+      "count": 0,
+      "lower": 0.1,
+      "mean_probability": null,
+      "observed_positive_fraction": null,
+      "upper": 0.2,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 2,
+      "count": 0,
+      "lower": 0.2,
+      "mean_probability": null,
+      "observed_positive_fraction": null,
+      "upper": 0.3,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 3,
+      "count": 0,
+      "lower": 0.3,
+      "mean_probability": null,
+      "observed_positive_fraction": null,
+      "upper": 0.4,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 4,
+      "count": 149,
+      "lower": 0.4,
+      "mean_probability": 0.49555310780586515,
+      "observed_positive_fraction": 0.0,
+      "upper": 0.5,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 5,
+      "count": 931,
+      "lower": 0.5,
+      "mean_probability": 0.5144577232049043,
+      "observed_positive_fraction": 0.3941997851772288,
+      "upper": 0.6,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 6,
+      "count": 0,
+      "lower": 0.6,
+      "mean_probability": null,
+      "observed_positive_fraction": null,
+      "upper": 0.7,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 7,
+      "count": 0,
+      "lower": 0.7,
+      "mean_probability": null,
+      "observed_positive_fraction": null,
+      "upper": 0.8,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 8,
+      "count": 0,
+      "lower": 0.8,
+      "mean_probability": null,
+      "observed_positive_fraction": null,
+      "upper": 0.9,
+      "upper_inclusive": false
+    },
+    {
+      "bin_index": 9,
+      "count": 0,
+      "lower": 0.9,
+      "mean_probability": null,
+      "observed_positive_fraction": null,
+      "upper": 1.0,
+      "upper_inclusive": true
+    }
+  ]
+}

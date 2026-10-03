@@ -1,0 +1,21 @@
+{
+  "absolute_difference": 0.0,
+  "boundary_hit": false,
+  "bounds": [
+    -8.0,
+    8.0
+  ],
+  "calibrated_nll": 0.6926415288059767,
+  "maxiter": 1000,
+  "method": "bounded",
+  "objective": "MEAN_BINARY_NLL",
+  "optimizer": "scipy.optimize.minimize_scalar",
+  "optimizer_success": true,
+  "parameterization": "theta=log(T); T=exp(theta)",
+  "raw_nll": 1.501691275695839,
+  "repeat_temperature": 52.88261929727761,
+  "status": "PASS",
+  "temperature": 52.88261929727761,
+  "theta": 3.968074727169927,
+  "xatol": 1e-12
+}
