@@ -1,15 +1,24 @@
 #!/usr/bin/env python3
-"""V2-FL-003 evidence assembly. `--stage1` writes everything except the regression criterion (so the
-chunked regression can run against complete evidence); the plain invocation writes the final
-criteria and run manifest; `--hashes-only` writes artifact_hashes.json last. Descriptive only:
-FedProx need not beat FedAvg, and bootstrap results are development diagnostics, never criteria."""
+"""V2_FL_003_EVIDENCE_FINALIZER_V2 (C-V2-FL-003-FREEZE-INTEGRITY). Additive, reconstruction-only
+successor of the frozen scripts/finalize_v2_fl_003_evidence.py (restored byte-identically).
+
+SCIENTIFIC METHOD UNCHANGED. TRAINING OUTPUTS ALREADY FROZEN. EVIDENCE-FINALIZATION CORRECTION ONLY.
+
+The ONLY code change relative to the frozen finalizer's evidence functions is a lazy,
+schema-aware communication logical-byte extraction (`_logical_bytes`): the historical code evaluated
+an eager dict default and raised KeyError on V2-FL-002 records. Nothing about training, the FedProx
+objective, mu candidates/selection/guardrail, checkpoint selection, bootstrap method, patient
+metrics, firewall rules or PASS criteria changes. Inputs are read from the committed V2-FL-003
+evidence (IN); every recomputed artifact is written to a separate directory (OUT) and compared with
+the historical file; no historical evidence is overwritten. The firewall is reconstructed from the
+access ledger as committed in the V2-FL-003 result commit.
+"""
 
 from __future__ import annotations
 
 import csv
 import json
 import subprocess
-import sys
 from pathlib import Path
 
 import numpy as np
@@ -21,17 +30,20 @@ from federated.model_v2_fedprox_runner import mu_token, run_key
 from nhm.hashing import hash_file
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "reports/model_v2/v2_fl_003"
+IN = ROOT / "reports/model_v2/v2_fl_003"
+OUT = ROOT / "reports/model_v2/c_v2_fl_003_freeze_integrity/reconstruction"
+RESULT_COMMIT = "87943640b86fcca2dd769690e5df2706c2f2a793"
 CONFIG = yaml.safe_load((ROOT / "configs/model_v2/fedprox_v2.yaml").read_text())
 CONDS = ["iid", "label", "quantity", "feature", "combined"]
 RUN_LOGS = {"pytest_collected_nodes.txt", "pytest_chunk_manifest.csv", "pytest_chunk_results.csv"}
 
 
 def _load(name: str) -> dict:
-    return json.loads((OUT / name).read_text(encoding="utf-8"))
+    return json.loads((IN / name).read_text(encoding="utf-8"))
 
 
 def _write(name: str, data: dict) -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
     (OUT / name).write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
@@ -53,8 +65,8 @@ def selected_mu() -> float:
 def fedprox_dir(condition: str) -> Path:
     mu = selected_mu()
     if condition == "label":
-        return OUT / run_key("label", mu, "candidate")[1]
-    return OUT / run_key(condition, mu, "transfer")[1]
+        return IN / run_key("label", mu, "candidate")[1]
+    return IN / run_key(condition, mu, "transfer")[1]
 
 
 def fedavg_paths(condition: str) -> dict[str, Path]:
@@ -74,6 +86,14 @@ def _patient_stats(patients: dict) -> dict:
     values = [g["AUPRC"] for g in patients["per_group"] if g["AUPRC"] is not None]
     return {"mean_AUPRC": float(np.mean(values)), "median_AUPRC": float(np.median(values)),
             "worst_AUPRC": float(np.min(values)), "finite_patients": len(values)}
+
+
+def _logical_bytes(communication: dict) -> int:
+    """Lazy, schema-aware: V2-FL-001 stores directional totals, V2-FL-002/003 one logical total."""
+    if "total_logical_payload_bytes" in communication:
+        return int(communication["total_logical_payload_bytes"])
+    return int(communication["total_server_to_client_bytes"]
+               + communication["total_client_to_server_bytes"])
 
 
 def _runtime(result: dict) -> float:
@@ -104,10 +124,7 @@ def comparison() -> dict:
         out["conditions"][c] = {
             "FedAvg": {**fa, **{f"validation_patient_{k}": v for k, v in _patient_stats(
                 avg_patients).items()},
-                "logical_bytes": avg["communication"].get(
-                    "total_logical_payload_bytes",
-                    avg["communication"]["total_server_to_client_bytes"]
-                    + avg["communication"]["total_client_to_server_bytes"]),
+                "logical_bytes": _logical_bytes(avg["communication"]),
                 "runtime_seconds": _runtime(avg)},
             "FedProx": {**fp, **{f"validation_patient_{k}": v for k, v in _patient_stats(
                 prox_patients).items()},
@@ -171,7 +188,7 @@ def bootstrap() -> dict:
 def accounting() -> dict:
     cand = {}
     for mu in CANDIDATES:
-        r = json.loads((OUT / f"candidates/mu_{mu_token(mu)}/result.json").read_text())
+        r = json.loads((IN / f"candidates/mu_{mu_token(mu)}/result.json").read_text())
         cand[str(mu)] = r
     trans = {c: json.loads((fedprox_dir(c) / "result.json").read_text())
              for c in CONFIG["transfer_order"]}
@@ -207,9 +224,8 @@ def accounting() -> dict:
 
 
 def firewall() -> dict:
-    ledger = [json.loads(line) for line in
-              (ROOT / "reports/model_v2/access_ledger.jsonl").read_text().splitlines()
-              if line.strip()]
+    ledger_text = _sh("git", "show", f"{RESULT_COMMIT}:reports/model_v2/access_ledger.jsonl")
+    ledger = [json.loads(line) for line in ledger_text.splitlines() if line.strip()]
     mine = [r for r in ledger if r.get("stage_id") == "V2-FL-003"]
     partitions = sorted({r["partition"] for r in mine})
     nstdb = [r for r in mine if r["partition"] == "NSTDB"]
@@ -258,8 +274,8 @@ def chronology() -> dict:
 
 def selection_audit() -> dict:
     lock = json.loads((ROOT / "artifacts/FEDPROX_MU_V2.lock.json").read_text())
-    selection = json.loads((OUT / "selection/selection.json").read_text())
-    table = (OUT / "selection/mu_candidates.csv").read_bytes()
+    selection = json.loads((IN / "selection/selection.json").read_text())
+    table = (IN / "selection/mu_candidates.csv").read_bytes()
     from nhm.hashing import hash_bytes
 
     data = {"lock_selected_mu": lock["selected_mu"], "selection_selected_mu": selection[
@@ -277,92 +293,38 @@ def selection_audit() -> dict:
     return data
 
 
+RECONSTRUCTED = ["fedavg_vs_fedprox_comparison.json", "patient_level_comparison.json",
+                 "paired_bootstrap.json", "accounting_audit.json", "communication_compute.json",
+                 "heldout_firewall_audit.json", "chronology_audit.json", "selection_audit.json"]
+
+
 def main() -> None:
-    if "--hashes-only" in sys.argv:
-        files = sorted(p for p in OUT.rglob("*") if p.is_file())
-        _write("artifact_hashes.json", {"artifacts": {
-            str(p.relative_to(ROOT)): hash_file(p) for p in files
-            if p.name not in RUN_LOGS and p.name != "artifact_hashes.json"}})
-        print("hashes written")
-        return
     comparison()
-    boot = bootstrap()
-    acct = accounting()
-    fw = firewall()
-    chron = chronology()
-    sel = selection_audit()
-    freeze = _load("method_freeze.json")
-    changed = sorted(p for p, d in freeze["method_file_sha256"].items() if hash_file(ROOT / p) != d)
-    method_commit = chron["method_commit"]
-    ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", method_commit, "HEAD"],
-                              cwd=ROOT, check=False).returncode == 0
-    _write("method_immutability_audit.json", {
-        "method_commit": method_commit, "ancestor_of_head": ancestor,
-        "method_files_changed_since_freeze": changed,
-        "status": "PASS" if not changed and ancestor else "FAIL"})
-    baseline = _load("protected_baseline.json")["artifacts"]
-    drift = sorted(p for p, d in baseline.items() if hash_file(ROOT / p) != d)
-    _write("protected_artifact_audit.json", {"checked": len(baseline), "drift": drift,
-                                             "status": "PASS" if not drift else "FAIL"})
-    runs = [_load(f"replay_verification_{n}.json") for n in ("run_1", "run_2")]
-    _write("reproducibility.json", {"runs": runs, "status": "PASS" if all(
-        r["status"] == "PASS" for r in runs) else "FAIL"})
-    tracked = _sh("git", "ls-files", "checkpoints/model_v2/v2_fl_003").split()
-    _write("checkpoint_tracking_audit.json", {"expected_files": 14, "tracked_files": len(tracked),
-                                              "tracked": tracked,
-                                              "status": "PASS" if len(tracked) == 14 else "FAIL"})
-    mu0 = _load("mu0_equivalence.json")
-    criteria = {
-        "mu0_exact_equivalence": mu0["status"] == "PASS",
-        "candidate_set_exact": sel["candidate_set"] == list(CANDIDATES),
-        "candidates_1200_of_1200": acct["candidates"]["updates"] == 1200,
-        "selection_deterministic": sel["status"] == "PASS",
-        "mu_frozen_before_transfer": chron["frozen_before_transfer_runs"],
-        "label_candidate_reused_not_retrained": acct["selected_label_candidate_retrained"]
-        is False,
-        "transfer_1600_of_1600": acct["transfer"]["updates"] == 1600,
-        "total_updates_2800": acct["total_positive_mu_updates"] == 2800,
-        "finite_states": acct["candidates"]["nonfinite_tensors"] == 0
-        and acct["transfer"]["nonfinite_tensors"] == 0,
-        "all_round_0_FL_INIT_V2": acct["round_0_all_FL_INIT_V2"],
-        "five_conditions_compared": len(_load("fedavg_vs_fedprox_comparison.json")[
-            "conditions"]) == 5,
-        "bootstrap_development_only": "DEVELOPMENT DIAGNOSTICS ONLY" in boot["wording"],
-        "INTERNAL_TEST_untouched": not fw["INTERNAL_TEST_accessed"],
-        "firewall": fw["status"] == "PASS",
-        "replay_reconstruction": all(r["status"] == "PASS" for r in runs),
-        "protected_unchanged": not drift, "method_unchanged": not changed and ancestor,
-        "checkpoints_git_tracked": len(tracked) == 14}
-    if "--stage1" in sys.argv:
-        criteria["regression"] = "PENDING_STAGE1"
-        _write("v2flg2_criteria.json", {"criteria": criteria,
-                                        "performance_direction_irrelevant": True,
-                                        "status": "STAGE1_PENDING_REGRESSION"})
-        print(json.dumps({"stage1_failed": [k for k, v in criteria.items() if v is False]}))
-        return
-    regression = _load("pre_export_regression.json")
-    checks = {
-        "ruff": subprocess.run([sys.executable, "-m", "ruff", "check", "src", "tests", "scripts",
-                                "simulation", "deployment", "fusion", "api", "datasets",
-                                "features", "models", "training", "evaluation", "preprocessing",
-                                "federated"], cwd=ROOT).returncode,
-        "pip_check": subprocess.run([sys.executable, "-m", "pip", "check"], cwd=ROOT).returncode}
-    reg_ok = regression["status"] == "PASS" and all(v == 0 for v in checks.values())
-    _write("regression_audit.json", {"chunked_python_regression": regression,
-                                     "exit_codes": checks, "ci": "never queried or triggered",
-                                     "status": "PASS" if reg_ok else "FAIL"})
-    criteria["regression"] = reg_ok
-    ok = all(v is True for v in criteria.values())
-    _write("v2flg2_criteria.json", {"criteria": criteria, "performance_direction_irrelevant": True,
-                                    "status": "PASS" if ok else "FAIL"})
-    _write("run_manifest.json", {
-        "checkpoint_id": "V2-FL-003", "gate": "V2FLG2", "selected_mu": selected_mu(),
-        "total_positive_mu_updates": acct["total_positive_mu_updates"],
-        "bootstrap_B": boot["B"], "INTERNAL_TEST_accessed": False, "ci_queried": False,
-        "ci_triggered": False, "V2_FL_EVAL_001_started": False,
-        "status": "PASS" if ok else "FAIL"})
-    print(json.dumps({"V2FLG2": "PASS" if ok else "FAIL",
-                      "failed": [k for k, v in criteria.items() if v is not True]}))
+    bootstrap()
+    accounting()
+    firewall()
+    chronology()
+    selection_audit()
+    results = {}
+    for name in RECONSTRUCTED:
+        historical = json.loads((IN / name).read_text())
+        rebuilt = json.loads((OUT / name).read_text())
+        results[name] = {"identical": historical == rebuilt,
+                         "historical_sha256": hash_file(IN / name),
+                         "reconstructed_sha256": hash_file(OUT / name)}
+    lock = json.loads((ROOT / "artifacts/FEDPROX_MU_V2.lock.json").read_text())
+    candidate_table_identical = hash_file(IN / "selection/mu_candidates.csv") == lock[
+        "candidate_table_sha256"]
+    data = {"finalizer_id": "V2_FL_003_EVIDENCE_FINALIZER_V2", "files": results,
+            "all_identical": all(r["identical"] for r in results.values()),
+            "candidate_table_sha256": hash_file(IN / "selection/mu_candidates.csv"),
+            "candidate_table_identical": candidate_table_identical,
+            "scientific_method_changed": False, "training_changed": False,
+            "historical_evidence_overwritten": False,
+            "status": "PASS" if (all(r["identical"] for r in results.values())
+                         and candidate_table_identical) else "FAIL"}
+    _write("reconstruction_equality.json", data)
+    print(json.dumps({"status": data["status"], "all_identical": data["all_identical"]}))
 
 
 if __name__ == "__main__":
