@@ -241,6 +241,7 @@ class Harness:
 
     # ------------------------------------------------------------------ full scope
     def scope_full(self) -> None:
+        self.frontend()  # npm ci first: the V2-013 replay builds and serves the frontend
         self.write("provenance_pre_checks.json", self.provenance("after_install_before_checks"))
         self.check("inventory")
         self.check("artifacts")
@@ -276,6 +277,7 @@ class Harness:
             self.failed = True
 
     def scope_final(self) -> None:
+        self.frontend()
         self.write("provenance_pre_checks.json", self.provenance("after_install_before_checks"))
         self.check("inventory")
         self.check("artifacts")
@@ -291,7 +293,6 @@ class Harness:
     def finish(self) -> int:
         regression_ok = self.check("regression", "--monolithic")
         self.check("lint")
-        self.frontend()
         final_status = self.git("status", "--porcelain").splitlines()
         diff = subprocess.run(["git", "diff", "--exit-code"], cwd=self.clone, env=self.env,
                               capture_output=True, text=True)

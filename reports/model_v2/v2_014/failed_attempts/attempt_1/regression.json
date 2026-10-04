@@ -1,0 +1,223 @@
+{
+  "DATA_GATED_SKIPPED": 14,
+  "DATA_GATED_SKIP_LINES": [
+    "SKIPPED [1] tests/test_bidmc_context_alignment.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/raw/bidmc/1.0.0/bidmc_data.mat']",
+    "SKIPPED [1] tests/test_bidmc_context_results.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/raw/bidmc/1.0.0/bidmc_data.mat']",
+    "SKIPPED [1] tests/test_c032_norm_runtime.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1']",
+    "SKIPPED [1] tests/test_external_incart_protocol.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/raw/incartdb/1.0.0/*.dat']",
+    "SKIPPED [1] tests/test_model_v2_final_inner_split_manifest.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/raw/mitdb/1.0.0/*.dat']",
+    "SKIPPED [2] tests/test_model_v2_partition_guard.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1']",
+    "SKIPPED [1] tests/test_nstdb_noise_protocol.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/raw/nstdb/1.0.0/*.dat']",
+    "SKIPPED [2] tests/test_real_window_leakage.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/processed/mitdb/1.0.0/PREPROC_V1/MITDB_SPLIT_V1', 'data/raw/mitdb/1.0.0/*.dat']",
+    "SKIPPED [1] tests/test_split_determinism.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/raw/mitdb/1.0.0/*.dat']",
+    "SKIPPED [3] tests/test_v2_007_config.py:248: CLEAN_CLONE_DATA_GATED: untracked input absent: ['checkpoints/candidates/MODEL_V1/MODEL_V1_seed_*_best.pt']",
+    "SKIPPED [1] tests/test_v2_008_results.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['checkpoints/model_v2/v2_007_official_validation/*']",
+    "SKIPPED [1] tests/test_v2_010_config.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['.venv-t032/bin/python']",
+    "SKIPPED [1] tests/test_v2_011_config.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/raw/nstdb/1.0.0/*.dat']",
+    "SKIPPED [1] tests/test_v2_011_results.py: CLEAN_CLONE_DATA_GATED: untracked input absent: ['data/raw/nstdb/1.0.0/*.dat']"
+  ],
+  "chunk_count": 30,
+  "chunk_rows": [
+    {
+      "chunk": 0,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.23s"
+    },
+    {
+      "chunk": 1,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.55s"
+    },
+    {
+      "chunk": 2,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "78 passed, 2 skipped in 3.91s"
+    },
+    {
+      "chunk": 3,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "79 passed, 1 skipped in 1.47s"
+    },
+    {
+      "chunk": 4,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 4.84s"
+    },
+    {
+      "chunk": 5,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 0.85s"
+    },
+    {
+      "chunk": 6,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.65s"
+    },
+    {
+      "chunk": 7,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.04s"
+    },
+    {
+      "chunk": 8,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "79 passed, 1 skipped in 2.28s"
+    },
+    {
+      "chunk": 9,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 0.72s"
+    },
+    {
+      "chunk": 10,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.27s"
+    },
+    {
+      "chunk": 11,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 0.25s"
+    },
+    {
+      "chunk": 12,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "79 passed, 1 skipped in 2.95s"
+    },
+    {
+      "chunk": 13,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.27s"
+    },
+    {
+      "chunk": 14,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "77 passed, 3 skipped in 1.94s"
+    },
+    {
+      "chunk": 15,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "79 passed, 1 skipped in 5.10s"
+    },
+    {
+      "chunk": 16,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "78 passed, 2 skipped in 1.17s"
+    },
+    {
+      "chunk": 17,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.39s"
+    },
+    {
+      "chunk": 18,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "79 passed, 1 skipped in 2.27s"
+    },
+    {
+      "chunk": 19,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.26s"
+    },
+    {
+      "chunk": 20,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "77 passed, 3 skipped in 1.56s"
+    },
+    {
+      "chunk": 21,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "79 passed, 1 skipped in 2.35s"
+    },
+    {
+      "chunk": 22,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "79 passed, 1 skipped in 2.08s"
+    },
+    {
+      "chunk": 23,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "78 passed, 2 skipped in 2.50s"
+    },
+    {
+      "chunk": 24,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 3.67s"
+    },
+    {
+      "chunk": 25,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 20.01s"
+    },
+    {
+      "chunk": 26,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 23.58s"
+    },
+    {
+      "chunk": 27,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 5.65s"
+    },
+    {
+      "chunk": 28,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "79 passed, 1 skipped in 23.31s"
+    },
+    {
+      "chunk": 29,
+      "exit_code": 0,
+      "nodes": 23,
+      "summary": "23 passed in 0.54s"
+    }
+  ],
+  "chunk_size": 80,
+  "collected_node_count": 2343,
+  "data_gated_note": "tests needing untracked raw datasets/caches/candidate checkpoints are skipped (never copied in); excluded from the clean SOFTWARE claim",
+  "duplicates": 0,
+  "executed_unique": 2343,
+  "failed_chunks": 0,
+  "failed_tests": 0,
+  "missing": 0,
+  "monolithic": {
+    "exit_code": 0,
+    "summary": "2323 passed, 20 skipped in 99.27s (0:01:39)"
+  },
+  "node_list_sha256": "ba72b4520a62a9d86bfd9b7079e7ebe210e4fc58a75ecb9f84d5664ed98c5dbe",
+  "other_skip_lines": [
+    "SKIPPED [1] tests/test_model_v1_freeze.py:59: CANDIDATE_CHECKPOINT_NOT_TRACKED: untracked T015 artifact absent in a clean checkout",
+    "SKIPPED [1] tests/test_v2_fl_eval_method.py:246: post-exposure state"
+  ],
+  "other_skipped_by_design": 2,
+  "passed_in_chunks": 2323,
+  "status": "PASS",
+  "unexpected": 0
+}
