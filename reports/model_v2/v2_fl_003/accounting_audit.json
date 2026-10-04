@@ -1,0 +1,28 @@
+{
+  "candidates": {
+    "aggregation_failures": 0,
+    "failed_clients": 0,
+    "nonfinite_tensors": 0,
+    "rounds": 150,
+    "updates": 1200
+  },
+  "expected": {
+    "candidate_rounds": 150,
+    "candidate_updates": 1200,
+    "total_positive_mu_updates": 2800,
+    "transfer_rounds": 200,
+    "transfer_updates": 1600
+  },
+  "infrastructure_retries": 0,
+  "loader_failures": 0,
+  "round_0_all_FL_INIT_V2": true,
+  "selected_label_candidate_retrained": false,
+  "total_positive_mu_updates": 2800,
+  "transfer": {
+    "aggregation_failures": 0,
+    "failed_clients": 0,
+    "nonfinite_tensors": 0,
+    "rounds": 200,
+    "updates": 1600
+  }
+}

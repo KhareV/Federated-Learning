@@ -145,7 +145,8 @@ def test_registry_transition_and_later_phases_not_started() -> None:
     comps = {r["component_id"]: r for r in rows("component")}
     assert tasks["V2-FL-002"]["status"] == "PASS" and gates["V2FLG1"]["status"] == "PASS"
     assert gates["V2FLG0"]["status"] == "PASS" and tasks["V2-FL-001"]["status"] == "PASS"
-    for later in ("V2-FL-003", "V2-FL-004", "V2-FL-005", "V2-014"):
+    assert tasks["V2-FL-003"]["status"] in {"NOT_STARTED", "PASS"}  # run after V2-FL-002
+    for later in ("V2-FL-004", "V2-FL-005", "V2-014"):
         assert tasks[later]["status"] == "NOT_STARTED"
     assert comps["FL_NON_IID_MODEL_V2_V1"]["status"].startswith("FROZEN")
     assert comps["MODEL_V2_FL_PROTOCOL_V1"]["status"] == "FROZEN_BEFORE_FIRST_V2_FL_OUTCOME"

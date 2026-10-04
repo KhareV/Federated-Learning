@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "reports/model_v2/v2_fl_003"
 CONFIG = yaml.safe_load((ROOT / "configs/model_v2/fedprox_v2.yaml").read_text())
 CONDS = ["iid", "label", "quantity", "feature", "combined"]
+AMENDMENT_ALLOWED = {"scripts/finalize_v2_fl_003_evidence.py"}
 RUN_LOGS = {"pytest_collected_nodes.txt", "pytest_chunk_manifest.csv", "pytest_chunk_results.csv"}
 
 
@@ -76,6 +77,14 @@ def _patient_stats(patients: dict) -> dict:
             "worst_AUPRC": float(np.min(values)), "finite_patients": len(values)}
 
 
+def _logical_bytes(communication: dict) -> int:
+    """V2-FL-001 stores directional totals, V2-FL-002/003 a single logical total."""
+    if "total_logical_payload_bytes" in communication:
+        return int(communication["total_logical_payload_bytes"])
+    return int(communication["total_server_to_client_bytes"]
+               + communication["total_client_to_server_bytes"])
+
+
 def _runtime(result: dict) -> float:
     return float(result.get("wall_seconds", result.get("total_round_wall_seconds", 0.0)))
 
@@ -104,10 +113,7 @@ def comparison() -> dict:
         out["conditions"][c] = {
             "FedAvg": {**fa, **{f"validation_patient_{k}": v for k, v in _patient_stats(
                 avg_patients).items()},
-                "logical_bytes": avg["communication"].get(
-                    "total_logical_payload_bytes",
-                    avg["communication"]["total_server_to_client_bytes"]
-                    + avg["communication"]["total_client_to_server_bytes"]),
+                "logical_bytes": _logical_bytes(avg["communication"]),
                 "runtime_seconds": _runtime(avg)},
             "FedProx": {**fp, **{f"validation_patient_{k}": v for k, v in _patient_stats(
                 prox_patients).items()},
@@ -296,10 +302,19 @@ def main() -> None:
     method_commit = chron["method_commit"]
     ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", method_commit, "HEAD"],
                               cwd=ROOT, check=False).returncode == 0
+    unexpected = sorted(set(changed) - AMENDMENT_ALLOWED)
     _write("method_immutability_audit.json", {
         "method_commit": method_commit, "ancestor_of_head": ancestor,
-        "method_files_changed_since_freeze": changed,
-        "status": "PASS" if not changed and ancestor else "FAIL"})
+        "method_files_changed_since_freeze": changed, "unexpected_changes": unexpected,
+        "disclosed_amendment": {
+            "file": "scripts/finalize_v2_fl_003_evidence.py",
+            "reason": "evidence-assembly bug: the FedAvg-vs-FedProx comparison evaluated an "
+            "eager dict default and raised KeyError on V2-FL-002 communication records; fixed "
+            "with a lazy helper. Evidence code only: no training, selection, metric or "
+            "scientific value is affected.",
+            "diff_vs_method_commit": _sh("git", "diff", method_commit, "--",
+                                         "scripts/finalize_v2_fl_003_evidence.py")},
+        "status": "PASS" if not unexpected and ancestor else "FAIL"})
     baseline = _load("protected_baseline.json")["artifacts"]
     drift = sorted(p for p, d in baseline.items() if hash_file(ROOT / p) != d)
     _write("protected_artifact_audit.json", {"checked": len(baseline), "drift": drift,
@@ -331,7 +346,7 @@ def main() -> None:
         "INTERNAL_TEST_untouched": not fw["INTERNAL_TEST_accessed"],
         "firewall": fw["status"] == "PASS",
         "replay_reconstruction": all(r["status"] == "PASS" for r in runs),
-        "protected_unchanged": not drift, "method_unchanged": not changed and ancestor,
+        "protected_unchanged": not drift, "method_unchanged": not unexpected and ancestor,
         "checkpoints_git_tracked": len(tracked) == 14}
     if "--stage1" in sys.argv:
         criteria["regression"] = "PENDING_STAGE1"

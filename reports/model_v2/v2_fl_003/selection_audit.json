@@ -1,0 +1,20 @@
+{
+  "candidate_set": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "candidate_table_hash_matches": true,
+  "consistent": true,
+  "guardrail_nonbinding": true,
+  "guardrail_threshold": -0.011904761904761911,
+  "human_override": false,
+  "lock_selected_mu": 0.1,
+  "ranking": [
+    0.1,
+    0.001,
+    0.01
+  ],
+  "selection_selected_mu": 0.1,
+  "status": "PASS"
+}

@@ -1,0 +1,25 @@
+{
+  "criteria": {
+    "INTERNAL_TEST_untouched": true,
+    "all_round_0_FL_INIT_V2": true,
+    "bootstrap_development_only": true,
+    "candidate_set_exact": true,
+    "candidates_1200_of_1200": true,
+    "checkpoints_git_tracked": true,
+    "finite_states": true,
+    "firewall": true,
+    "five_conditions_compared": true,
+    "label_candidate_reused_not_retrained": true,
+    "method_unchanged": true,
+    "mu0_exact_equivalence": true,
+    "mu_frozen_before_transfer": true,
+    "protected_unchanged": true,
+    "regression": true,
+    "replay_reconstruction": true,
+    "selection_deterministic": true,
+    "total_updates_2800": true,
+    "transfer_1600_of_1600": true
+  },
+  "performance_direction_irrelevant": true,
+  "status": "PASS"
+}

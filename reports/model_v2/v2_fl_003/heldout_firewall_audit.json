@@ -1,0 +1,17 @@
+{
+  "BIDMC_accessed": false,
+  "CALIBRATION_accessed": false,
+  "INCART_accessed": false,
+  "INTERNAL_TEST_accessed": false,
+  "NSTDB_only_as_pure_noise_training_resource": true,
+  "NSTDB_rows": 6,
+  "WEARABLE_SIM_efficacy_used": false,
+  "WEARABLE_accessed": false,
+  "partitions_accessed": [
+    "NSTDB",
+    "TRAIN",
+    "VALIDATION"
+  ],
+  "rows": 25,
+  "status": "PASS"
+}

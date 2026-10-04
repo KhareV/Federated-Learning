@@ -1,0 +1,21 @@
+{
+  "expected_files": 14,
+  "status": "PASS",
+  "tracked": [
+    "checkpoints/model_v2/v2_fl_003/candidates/FL_LABEL_FEDPROX_MODEL_V2_MU_0p001_best.pt",
+    "checkpoints/model_v2/v2_fl_003/candidates/FL_LABEL_FEDPROX_MODEL_V2_MU_0p001_round50.pt",
+    "checkpoints/model_v2/v2_fl_003/candidates/FL_LABEL_FEDPROX_MODEL_V2_MU_0p01_best.pt",
+    "checkpoints/model_v2/v2_fl_003/candidates/FL_LABEL_FEDPROX_MODEL_V2_MU_0p01_round50.pt",
+    "checkpoints/model_v2/v2_fl_003/candidates/FL_LABEL_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+    "checkpoints/model_v2/v2_fl_003/candidates/FL_LABEL_FEDPROX_MODEL_V2_MU_0p1_round50.pt",
+    "checkpoints/model_v2/v2_fl_003/transfer/FL_COMBINED_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+    "checkpoints/model_v2/v2_fl_003/transfer/FL_COMBINED_FEDPROX_MODEL_V2_MU_0p1_round50.pt",
+    "checkpoints/model_v2/v2_fl_003/transfer/FL_FEATURE_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+    "checkpoints/model_v2/v2_fl_003/transfer/FL_FEATURE_FEDPROX_MODEL_V2_MU_0p1_round50.pt",
+    "checkpoints/model_v2/v2_fl_003/transfer/FL_IID_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+    "checkpoints/model_v2/v2_fl_003/transfer/FL_IID_FEDPROX_MODEL_V2_MU_0p1_round50.pt",
+    "checkpoints/model_v2/v2_fl_003/transfer/FL_QUANTITY_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+    "checkpoints/model_v2/v2_fl_003/transfer/FL_QUANTITY_FEDPROX_MODEL_V2_MU_0p1_round50.pt"
+  ],
+  "tracked_files": 14
+}
