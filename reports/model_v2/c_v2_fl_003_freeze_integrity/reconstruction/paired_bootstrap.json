@@ -1,0 +1,49 @@
+{
+  "B": 2000,
+  "conditions": {
+    "combined": {
+      "FedProx_minus_FedAvg_mean_delta_AUPRC": -0.021282535233949372,
+      "ci95": [
+        -0.12284302306687073,
+        0.04147081968441879
+      ],
+      "fraction_positive": 0.278
+    },
+    "feature": {
+      "FedProx_minus_FedAvg_mean_delta_AUPRC": -0.03063877398957806,
+      "ci95": [
+        -0.1816337485306917,
+        0.013239368993163136
+      ],
+      "fraction_positive": 0.115
+    },
+    "iid": {
+      "FedProx_minus_FedAvg_mean_delta_AUPRC": 0.019818702937088765,
+      "ci95": [
+        0.0024416188313979292,
+        0.06969506391549307
+      ],
+      "fraction_positive": 0.999
+    },
+    "label": {
+      "FedProx_minus_FedAvg_mean_delta_AUPRC": 0.019163936216890474,
+      "ci95": [
+        -0.048947892766944244,
+        0.12092506862891463
+      ],
+      "fraction_positive": 0.661
+    },
+    "quantity": {
+      "FedProx_minus_FedAvg_mean_delta_AUPRC": -0.047200663880097055,
+      "ci95": [
+        -0.12285514200441772,
+        0.043568503660382674
+      ],
+      "fraction_positive": 0.1445
+    }
+  },
+  "draw_source": "evaluation.bootstrap.generate_patient_draws (deterministic PCG64; identical draws to V2-FL-001/002)",
+  "seed": 20260927,
+  "validation_patient_groups": 7,
+  "wording": "DEVELOPMENT DIAGNOSTICS ONLY: both methods select their checkpoint on this VALIDATION partition and mu was selected on it too; not untouched-generalization intervals; not a V2FLG2 criterion"
+}

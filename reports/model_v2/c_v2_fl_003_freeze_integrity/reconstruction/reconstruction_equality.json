@@ -1,0 +1,52 @@
+{
+  "all_identical": true,
+  "candidate_table_identical": true,
+  "candidate_table_sha256": "27497d341642f3071e7814daa6fb8ab49dbdd40c25c2e59208b368af634cca6e",
+  "files": {
+    "accounting_audit.json": {
+      "historical_sha256": "cc7c0631b8d03dbfab69ec48a185c892993a25570d75bc5bb2f96665a4afdc44",
+      "identical": true,
+      "reconstructed_sha256": "cc7c0631b8d03dbfab69ec48a185c892993a25570d75bc5bb2f96665a4afdc44"
+    },
+    "chronology_audit.json": {
+      "historical_sha256": "8a702d2a3da426b15e3a92ab9acff4f48c5a48eaf9914f7f408d4bc54f324cb0",
+      "identical": true,
+      "reconstructed_sha256": "8a702d2a3da426b15e3a92ab9acff4f48c5a48eaf9914f7f408d4bc54f324cb0"
+    },
+    "communication_compute.json": {
+      "historical_sha256": "0ebdeb011d0f829f4362179a2743556a8ea832dd0bd406f98bb14b7f0f56cd27",
+      "identical": true,
+      "reconstructed_sha256": "0ebdeb011d0f829f4362179a2743556a8ea832dd0bd406f98bb14b7f0f56cd27"
+    },
+    "fedavg_vs_fedprox_comparison.json": {
+      "historical_sha256": "8b0b2181ac874500c13cd36c6e2ecb544865f87d61a8729e9a942e4a7f73ffad",
+      "identical": true,
+      "reconstructed_sha256": "8b0b2181ac874500c13cd36c6e2ecb544865f87d61a8729e9a942e4a7f73ffad"
+    },
+    "heldout_firewall_audit.json": {
+      "historical_sha256": "c3d41b16080c8d88a0acf02533b1dbcd3e15e8ab2a4a6b1ff22d0010cd7c4925",
+      "identical": true,
+      "reconstructed_sha256": "c3d41b16080c8d88a0acf02533b1dbcd3e15e8ab2a4a6b1ff22d0010cd7c4925"
+    },
+    "paired_bootstrap.json": {
+      "historical_sha256": "abce6b6072982613329bb82ce3006510b49957d210a0aaaa9181d4d0b5d75a4a",
+      "identical": true,
+      "reconstructed_sha256": "abce6b6072982613329bb82ce3006510b49957d210a0aaaa9181d4d0b5d75a4a"
+    },
+    "patient_level_comparison.json": {
+      "historical_sha256": "72f81fb2fc0e597b0492f00de59795db104ebeb94368ba7ad3bbcd346e9cef62",
+      "identical": true,
+      "reconstructed_sha256": "72f81fb2fc0e597b0492f00de59795db104ebeb94368ba7ad3bbcd346e9cef62"
+    },
+    "selection_audit.json": {
+      "historical_sha256": "76366787f79e0b6293f963315f5cca2c0d66e124ca80ff9ad6ba9cbe68308d68",
+      "identical": true,
+      "reconstructed_sha256": "76366787f79e0b6293f963315f5cca2c0d66e124ca80ff9ad6ba9cbe68308d68"
+    }
+  },
+  "finalizer_id": "V2_FL_003_EVIDENCE_FINALIZER_V2",
+  "historical_evidence_overwritten": false,
+  "scientific_method_changed": false,
+  "status": "PASS",
+  "training_changed": false
+}
