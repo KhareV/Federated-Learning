@@ -1,0 +1,100 @@
+{
+  "change_control": "No model may be added or substituted after freeze.",
+  "checkpoints": {
+    "V1_FEDAVG_COMBINED": {
+      "path": "checkpoints/federated/FL_COMBINED_SKEW_V1_best.pt",
+      "sha256": "06aa5d90e3018f90012bd93330ce20befa4a3f42fb6f466377c5c098048d3e5f"
+    },
+    "V1_FEDAVG_FEATURE": {
+      "path": "checkpoints/federated/FL_FEATURE_NOISE_V1_best.pt",
+      "sha256": "5279b6fdfb1e18b47f18485c5b87375a8eb3a6431ca1981dbf75fbcc79700c49"
+    },
+    "V1_FEDAVG_IID": {
+      "path": "checkpoints/federated/FL_IID_V1_best.pt",
+      "sha256": "7a2a7fc6bad6d713784cef114006b0e6d5a56e211ebc7d4e4a94fecdf3c85d10"
+    },
+    "V1_FEDAVG_LABEL": {
+      "path": "checkpoints/federated/FL_LABEL_SKEW_V1_best.pt",
+      "sha256": "48ab1a96921a5fabf3594ab40019f1b5d5f7ad9f81162f139689aef7ab44c3a2"
+    },
+    "V1_FEDAVG_QUANTITY": {
+      "path": "checkpoints/federated/FL_QUANTITY_SKEW_V1_best.pt",
+      "sha256": "fa7641fa4216a877f101a3cfa0d2d33bbf76099f6c6e33916e0e3600f160fc6f"
+    },
+    "V1_FEDPROX_COMBINED": {
+      "path": "checkpoints/federated/FL_COMBINED_FEDPROX_V1_best.pt",
+      "sha256": "696d6e64fb64c91eacc1d4e4dc312d6ad0dfcbbf9190b8b38ab395c0c6825808"
+    },
+    "V1_FEDPROX_FEATURE": {
+      "path": "checkpoints/federated/FL_FEATURE_FEDPROX_V1_best.pt",
+      "sha256": "149c2bb373fef8b457b94ce06ea9adeba2e05d1c72404749e5508a3ad35d45a4"
+    },
+    "V1_FEDPROX_IID": {
+      "path": "checkpoints/federated/FL_IID_FEDPROX_V1_best.pt",
+      "sha256": "194043891b548f99e23adad38f9cf9889f8439b6fbe39f05b988618270d6eb31"
+    },
+    "V1_FEDPROX_LABEL": {
+      "path": "checkpoints/federated/fedprox_candidates/LABEL_mu_0p01_best.pt",
+      "sha256": "a928666869ac73fec510e9f120d1cf786fe0caa64cf0c04f10b5797de035401e"
+    },
+    "V1_FEDPROX_QUANTITY": {
+      "path": "checkpoints/federated/FL_QUANTITY_FEDPROX_V1_best.pt",
+      "sha256": "65b75eb59cf5cd7b764c656a34c0f3560356f94b5a4ffc6dfd8d0e6cbed9f49c"
+    },
+    "V2_FEDAVG_COMBINED": {
+      "path": "checkpoints/model_v2/v2_fl_002/FL_COMBINED_SKEW_MODEL_V2_V1_best.pt",
+      "sha256": "2853733760331fed99ed0e9310e01789de825bac9732344b0c65aa0641cf463a"
+    },
+    "V2_FEDAVG_FEATURE": {
+      "path": "checkpoints/model_v2/v2_fl_002/FL_FEATURE_NOISE_MODEL_V2_V1_best.pt",
+      "sha256": "2e4381aaab044008aa1394cf2fd9a97a4e0280ffa9455ac7db77913a452208ca"
+    },
+    "V2_FEDAVG_IID": {
+      "path": "checkpoints/model_v2/v2_fl_001/FL_IID_MODEL_V2_V1_best.pt",
+      "sha256": "e90749ee700a2b7e55bd2aa6d36e9db32cd55e56ecd1cbc74959925c665d3ca5"
+    },
+    "V2_FEDAVG_LABEL": {
+      "path": "checkpoints/model_v2/v2_fl_002/FL_LABEL_SKEW_MODEL_V2_V1_best.pt",
+      "sha256": "524f50674dc907f6791c08e7339ee06e338bd6502f14ac8a7e601da52876be82"
+    },
+    "V2_FEDAVG_QUANTITY": {
+      "path": "checkpoints/model_v2/v2_fl_002/FL_QUANTITY_SKEW_MODEL_V2_V1_best.pt",
+      "sha256": "7a746369c897239c45adb14d312aa2427eb643a46156db7da5d009aad32b9b47"
+    },
+    "V2_FEDPROX_COMBINED": {
+      "path": "checkpoints/model_v2/v2_fl_003/transfer/FL_COMBINED_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+      "sha256": "ee6f2620262ad097a557313c1c03c242bbe26821f603b5132a5a651c2dc46568"
+    },
+    "V2_FEDPROX_FEATURE": {
+      "path": "checkpoints/model_v2/v2_fl_003/transfer/FL_FEATURE_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+      "sha256": "41894e4dfdf008136dc4c599c670df5cefbdefd460c6a84efc6399edc3d3c1b6"
+    },
+    "V2_FEDPROX_IID": {
+      "path": "checkpoints/model_v2/v2_fl_003/transfer/FL_IID_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+      "sha256": "e9adcb6457dd0e9c4bdb85a00df12ebab0d33be1a8712321bb027300d39dbee7"
+    },
+    "V2_FEDPROX_LABEL": {
+      "path": "checkpoints/model_v2/v2_fl_003/candidates/FL_LABEL_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+      "sha256": "6c319b53ff5310b5319487f246c523178bed0df99678614ccf59d6cc951418d9"
+    },
+    "V2_FEDPROX_QUANTITY": {
+      "path": "checkpoints/model_v2/v2_fl_003/transfer/FL_QUANTITY_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+      "sha256": "1323aa3f22de5d2cd2b359d912cc48e00ccb07f6c41838f7872299665edab874"
+    }
+  },
+  "excluded_from_inference": [
+    "V2 FedProx mu=0.001 candidate",
+    "V2 FedProx mu=0.01 candidate",
+    "historical rejected V1 FedProx candidates (mu 0.001 / 0.1)",
+    "any round-50 checkpoint",
+    "any intermediate-round checkpoint",
+    "MODEL_V2_FINAL (centralized; historical evidence only)",
+    "MODEL_V1 centralized checkpoint (historical evidence only)"
+  ],
+  "family_config_sha256": "cf68f74b8189eec44d9ec5d6d70f2f856645d8927df553825db9af1ec00544c5",
+  "frozen_before_any_held_out_inference": true,
+  "lock_id": "V2_FL_TEST_FAMILY_V1",
+  "model_count": 20,
+  "owner_task": "V2-FL-EVAL-001",
+  "status": "FROZEN"
+}

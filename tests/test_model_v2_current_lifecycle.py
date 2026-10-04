@@ -22,7 +22,7 @@ EXPECTED_TASKS = {
 }
 EXPECTED_GATES = {
     **{f"V2G{n}": "PASS" for n in range(13)}, "V2G13": "NOT_STARTED",
-    "V2FLG0": "PASS", "V2FLG1": "PASS", "V2FLG2": "PASS",
+    "V2FLG0": "PASS", "V2FLG1": "PASS", "V2FLG2": "PASS", "V2FLEG0": "NOT_STARTED",
 }
 EXPECTED_COMPONENTS = {
     "MODEL_V2_FINAL": "FROZEN", "CAL_V2": "FROZEN",
@@ -33,6 +33,7 @@ EXPECTED_COMPONENTS = {
     "MODEL_V2_FL_PROTOCOL_V2": "FROZEN_RESEARCH_PROTOCOL_SUCCESSOR",
     "FL_INIT_V2": "FROZEN", "FL_IID_MODEL_V2_V1": "FROZEN", "FL_NON_IID_MODEL_V2_V1": "FROZEN",
     "FEDPROX_METHOD_V2": "FROZEN", "FEDPROX_MU_V2": "FROZEN_ENGINEERING_METHOD",
+    "V2_FL_EVAL_PROTOCOL_V1": "FROZEN", "V2_FL_TEST_FAMILY_V1": "FROZEN",
 }
 
 
@@ -70,5 +71,6 @@ def test_next_phases_are_exactly_not_started_and_gate_blocking_is_consistent() -
     for later in ("V2-FL-EVAL-001", "V2-FL-004", "V2-FL-005", "V2-014"):
         assert tasks[later]["status"] == "NOT_STARTED"
     assert gates["V2FLG2"]["blocks_tasks"] == "V2-FL-EVAL-001"
+    assert gates["V2FLEG0"]["blocks_tasks"] == "V2-FL-004"
     assert tasks["V2-FL-EVAL-001"]["prerequisites"] == "V2-FL-003"
     assert tasks["V2-FL-004"]["prerequisites"] == "V2-FL-EVAL-001"

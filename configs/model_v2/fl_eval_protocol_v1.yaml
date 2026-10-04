@@ -1,0 +1,85 @@
+# V2_FL_EVAL_PROTOCOL_V1 -- frozen BEFORE the first FL-model inference on INTERNAL_TEST or INCART.
+# Evaluation only: no training, no aggregation, no selection, no calibration, no threshold fitting.
+protocol_id: V2_FL_EVAL_PROTOCOL_V1
+task_id: V2-FL-EVAL-001
+gate: V2FLEG0
+predecessor_protocols: [MODEL_V2_FL_PROTOCOL_V1, MODEL_V2_FL_PROTOCOL_V2]   # unchanged
+family: {id: V2_FL_TEST_FAMILY_V1, config: configs/model_v2/fl_test_family_v1.yaml, models: 20, additions_after_freeze: FORBIDDEN}
+scientific_model_fits_added: 0
+federated_client_updates_added: 0
+excluded_from_inference: [V2 FedProx mu=0.001, V2 FedProx mu=0.01, rejected V1 FedProx candidates, any round-50 checkpoint, any intermediate checkpoint, MODEL_V2_FINAL, MODEL_V1 centralized]
+input_contract:
+  preprocessing: PREPROC_V1
+  target: AAMI_SVF_WINDOW_V1
+  label_map: AAMI_SVF_MAP_V1
+  chain: "causal frozen preprocessing -> filtered amplitude-preserving ECG -> per-window PREPROC_V1 z-score (x-mean)/(std+1e-8) -> float32 [1,2500] -> FL model -> raw logit -> sigmoid"
+  calibration: NONE                         # CAL_V1 / CAL_V2 must never be applied to FL models
+probability: {id: raw_probability, definition: sigmoid(raw_logit)}
+threshold: {id: FL_EVAL_RAW_THRESHOLD_0P5_V1, value: 0.5, comparator: ">=", optimized: false}
+datasets:
+  INTERNAL_TEST:
+    role: PRIMARY
+    wording: held out from the V2 federated development lineage (NOT project-globally unseen; centralized models were evaluated on it earlier)
+    source: MIT-BIH v1.0.0, MITDB_SPLIT_V1 partition INTERNAL_TEST, AAMI_SVF_WINDOW_V1, PREPROC_V1
+    expected: {frozen_groups: 7, contributing_groups: 6, zero_eligible_groups: [MITDB_P107], candidate_windows: 2520, eligible_windows: 2157, positive: 1156, negative: 1001}
+    guard: artifacts/V2_FL_INTERNAL_TEST_ACCESS_V1.json
+    bootstrap_draws_reference: {path: reports/t018/bootstrap_draws.npz, clusters: 6}
+  INCART:
+    role: SECONDARY
+    wording: POST-FREEZE EXTERNAL FL SECOND-LOOK (previously project-exposed dataset; NOT project-blind; NOT untouched external validation)
+    source: St Petersburg INCART v1.0.0, standard Lead II, AAMI_SVF_MAP_V1, AAMI_SVF_WINDOW_V1, PREPROC_V1
+    expected: {records: 75, clusters: 32, eligible_windows: 26864}
+    population_must_reproduce_T020_before_inference: true
+    guard: artifacts/V2_FL_INCART_ACCESS_V1.json
+    bootstrap_draws_reference: {path: reports/t020/bootstrap_draws.npz, clusters: 32}
+    cluster_rule: frozen patient/Holter clusters (never 75 independent records)
+one_shot_access:
+  guard_states: [NOT_STARTED, RUN_STARTED, COMPLETED]
+  historical_guards_untouched: [artifacts/internal_test_access_v1.json, artifacts/external_incart_access_v1.json]
+  each_checkpoint_each_dataset_runs_exactly_once: true
+  second_inference_attempt: BLOCKED_DETERMINISTICALLY
+  failure_after_RUN_STARTED: STOP_NO_RESET
+  access_order: [INTERNAL_TEST predictions for 20 models, INCART predictions for 20 models, both guards COMPLETED, then (prediction-only) statistics]
+  metrics_exposed_before_both_inference_stages_complete: false
+prediction_schema:
+  columns: [example_id, participant_group_id, record_id, label, raw_logit, raw_sigmoid_probability, prediction_at_0_5, checkpoint_id]
+  sidecar_binding: [checkpoint_id, algorithm, architecture, condition, mu, checkpoint_sha256, preprocessing_id, split_id, target_id, dataset]
+  ordering: example_id ascending; identical ordered example-ID set for all 20 models
+metrics:
+  point: [AUPRC, AUROC, pooled_F1, precision, sensitivity, specificity, accuracy, BCE, TP, FP, TN, FN, patient_macro_F1, windows, positives, negatives, contributing_patients]
+  per_patient: [windows, positives, negatives, AUPRC, AUROC, F1_at_0_5]   # undefined stays undefined
+  patient_macro_F1: equal weight per patient at threshold 0.5
+  patient_macro_AUPRC: not_used
+bootstrap:
+  method: PATIENT_CLUSTER_PERCENTILE_95_V1
+  B: 2000
+  seed: 20260927
+  rng: numpy Generator / PCG64
+  unit: participant_group_id
+  sampling: with replacement; multiplicity preserved (sampled patient's full block enters once per draw); no set conversion; no window bootstrap; no redraw of degenerate draws
+  draws_shared_by_all_models_and_paired_comparisons: true
+  ci: 95% percentile, linear quantile; point estimate from the original sample
+  p_values: NOT_COMPUTED
+  multiplicity_adjustment: NONE (nominal 95% intervals)
+estimands:
+  primary_absolute: {model: V2 FedAvg IID, dataset: INTERNAL_TEST, metrics: [AUPRC, patient_macro_F1_at_0_5]}
+  primary_architecture: {contrast: V2 FedAvg IID minus V1 FedAvg IID, dataset: INTERNAL_TEST, metrics: [AUPRC, patient_macro_F1_at_0_5], gate_threshold: NONE}
+  secondary_method: {contrast: V2 FedProx IID minus V2 FedAvg IID, dataset: INTERNAL_TEST}
+  secondary_heterogeneity: [V2 minus V1 same algorithm same condition, V2 FedProx minus V2 FedAvg same condition, V2 FedAvg condition minus V2 FedAvg IID, V2 FedProx condition minus V2 FedProx IID]
+  no_best_of_20_selection: true
+interpretation:
+  conditions_are_training_experiments_not_deployment_candidates: true
+  primary_federated_reference: V2 FedAvg IID
+  forbidden_wording: ["never previously seen by the project", "COMBINED was best on test therefore choose COMBINED"]
+shift_descriptors: {development_to_internal: all V2 models, internal_to_incart: all V2 models, label: "cross-dataset shift, not calibration drift or clinical performance", causal_inference: NONE}
+small_n_limitation: INTERNAL_TEST has 7 frozen groups / 6 contributing clusters; bootstrap intervals may be wide and unstable; patient-level metrics are not population clinical estimates
+claim_boundary: [no_model_promotion, no_release_decision, no_method_change_after_exposure, centralized_references_are_HISTORICAL_FROZEN_REFERENCE_only]
+firewall:
+  allowed_new_access: [INTERNAL_TEST via one-shot guard, INCART via one-shot guard]
+  CALIBRATION: FORBIDDEN
+  NSTDB: FORBIDDEN_FOR_EVALUATION
+  BIDMC: FORBIDDEN_FOR_CLASSIFIER_EVALUATION
+  WEARABLE_V1: FORBIDDEN
+  WEARABLE_SIM: NOT_USED
+method_immutability_after_exposure: scientific method files immutable; an evidence-assembly bug is handled by an additive reconstruction-only successor, never by amending a pinned file
+pass_rule: performance_independent

@@ -164,8 +164,8 @@ def test_registry_csv_field_alignment_exact() -> None:
 
     with (ROOT / "manifests/model_v2/gate_registry_v1.csv").open(newline="") as handle:
         gate_rows = list(csv.DictReader(handle))
-    assert len(gate_rows) == 17  # + additive V2FLG0..V2FLG2
-    assert len({row["gate_id"] for row in gate_rows}) == 17
+    assert len(gate_rows) == 18  # + additive V2FLG0..V2FLEG0
+    assert len({row["gate_id"] for row in gate_rows}) == 18
 
 
 def test_run_manifest_and_artifact_hashes_valid() -> None:
