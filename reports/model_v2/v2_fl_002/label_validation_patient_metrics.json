@@ -1,0 +1,95 @@
+{
+  "VALIDATION_PATIENT_MACRO_AUPRC_V2": 0.7247232349533131,
+  "VALIDATION_PATIENT_WORST_AUPRC_V2": 0.03809523809523809,
+  "evaluation_unit": "MITDB_VALIDATION_PARTICIPANT_GROUP",
+  "finite_AUPRC_patients": 7,
+  "per_group": [
+    {
+      "AUPRC": 0.9482726329953137,
+      "AUROC": 0.9725589954535613,
+      "F1_at_0_5": 0.17647058823529413,
+      "false_negatives": 56,
+      "false_positives": 0,
+      "negatives": 298,
+      "participant_group_id": "MITDB_P100",
+      "positives": 62,
+      "true_positives": 6,
+      "windows": 360
+    },
+    {
+      "AUPRC": 1.0,
+      "AUROC": 1.0,
+      "F1_at_0_5": 0.9922480620155039,
+      "false_negatives": 3,
+      "false_positives": 0,
+      "negatives": 165,
+      "participant_group_id": "MITDB_P106",
+      "positives": 195,
+      "true_positives": 192,
+      "windows": 360
+    },
+    {
+      "AUPRC": 0.6492145798228708,
+      "AUROC": 0.8964773544212796,
+      "F1_at_0_5": 0.5137614678899083,
+      "false_negatives": 11,
+      "false_positives": 42,
+      "negatives": 321,
+      "participant_group_id": "MITDB_P108",
+      "positives": 39,
+      "true_positives": 28,
+      "windows": 360
+    },
+    {
+      "AUPRC": 0.9652499448022752,
+      "AUROC": 0.9811929824561404,
+      "F1_at_0_5": 0.42105263157894735,
+      "false_negatives": 55,
+      "false_positives": 0,
+      "negatives": 285,
+      "participant_group_id": "MITDB_P109",
+      "positives": 75,
+      "true_positives": 20,
+      "windows": 360
+    },
+    {
+      "AUPRC": 0.5315824468085106,
+      "AUROC": 0.9269662921348315,
+      "F1_at_0_5": 0.0,
+      "false_negatives": 4,
+      "false_positives": 0,
+      "negatives": 356,
+      "participant_group_id": "MITDB_P112",
+      "positives": 4,
+      "true_positives": 0,
+      "windows": 360
+    },
+    {
+      "AUPRC": 0.9406478021489836,
+      "AUROC": 0.9340557201757244,
+      "F1_at_0_5": 0.8111332007952287,
+      "false_negatives": 95,
+      "false_positives": 0,
+      "negatives": 421,
+      "participant_group_id": "MITDB_P201_202",
+      "positives": 299,
+      "true_positives": 204,
+      "windows": 720
+    },
+    {
+      "AUPRC": 0.03809523809523809,
+      "AUROC": 0.8966480446927374,
+      "F1_at_0_5": 0.029850746268656716,
+      "false_negatives": 0,
+      "false_positives": 130,
+      "negatives": 358,
+      "participant_group_id": "MITDB_P231",
+      "positives": 2,
+      "true_positives": 2,
+      "windows": 360
+    }
+  ],
+  "semantics": "FEDPROX_SELECTION_SEMANTICS_V1 (unweighted over finite per-patient values)",
+  "undefined_AUPRC_patients": 0,
+  "validation_patients_are_clients": false
+}

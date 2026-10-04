@@ -1,0 +1,81 @@
+{
+  "B": 2000,
+  "conditions": {
+    "combined": {
+      "V2_condition_minus_V2_IID": {
+        "ci95": [
+          -0.1731954598507972,
+          0.08957596876830021
+        ],
+        "fraction_positive": 0.1605,
+        "mean_delta_AUPRC": -0.047632144873179155
+      },
+      "V2_minus_V1_same_condition": {
+        "ci95": [
+          0.16952391603818892,
+          0.5126959500012318
+        ],
+        "fraction_positive": 0.9935,
+        "mean_delta_AUPRC": 0.35119057187392394
+      }
+    },
+    "feature": {
+      "V2_condition_minus_V2_IID": {
+        "ci95": [
+          -0.07887531409046844,
+          0.11980025157773941
+        ],
+        "fraction_positive": 0.371,
+        "mean_delta_AUPRC": -0.003804241835677483
+      },
+      "V2_minus_V1_same_condition": {
+        "ci95": [
+          0.14011088452530585,
+          0.5074803544894657
+        ],
+        "fraction_positive": 1.0,
+        "mean_delta_AUPRC": 0.34079956316649906
+      }
+    },
+    "label": {
+      "V2_condition_minus_V2_IID": {
+        "ci95": [
+          -0.2941611655699751,
+          0.07582008708196275
+        ],
+        "fraction_positive": 0.27,
+        "mean_delta_AUPRC": -0.06310646779508096
+      },
+      "V2_minus_V1_same_condition": {
+        "ci95": [
+          -0.04330214687541581,
+          0.4195715698877373
+        ],
+        "fraction_positive": 0.9595,
+        "mean_delta_AUPRC": 0.22256530394282495
+      }
+    },
+    "quantity": {
+      "V2_condition_minus_V2_IID": {
+        "ci95": [
+          -0.025582118900685763,
+          0.17830804361822827
+        ],
+        "fraction_positive": 0.776,
+        "mean_delta_AUPRC": 0.03275227851541735
+      },
+      "V2_minus_V1_same_condition": {
+        "ci95": [
+          0.11189367563259223,
+          0.5734081471329807
+        ],
+        "fraction_positive": 0.9985,
+        "mean_delta_AUPRC": 0.3451609795424812
+      }
+    }
+  },
+  "method": "PATIENT_CLUSTER_PERCENTILE_95_V1, identical draws for all comparisons",
+  "seed": 20260927,
+  "validation_patient_groups": 7,
+  "wording": "DEVELOPMENT DIAGNOSTICS ONLY: checkpoints are selected on this same VALIDATION partition; these are not untouched-generalization intervals"
+}

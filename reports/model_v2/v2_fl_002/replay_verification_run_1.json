@@ -1,0 +1,66 @@
+{
+  "conditions": [
+    {
+      "best_checkpoint_round": 50,
+      "best_checkpoint_sha_matches": true,
+      "best_round_recomputed": 50,
+      "best_round_recorded": 50,
+      "condition": "label",
+      "manifest_sha_matches_frozen": true,
+      "round_0_state_sha256_is_FL_INIT_V2": true,
+      "round_1_identical": true,
+      "round_1_replay_sha256": "3f57e799f19a252a957061df7a5c36ee2002085e33569f370133ce09b170e71b",
+      "round_1_stored_sha256": "3f57e799f19a252a957061df7a5c36ee2002085e33569f370133ce09b170e71b",
+      "round_50_checkpoint_sha_matches": true,
+      "status": "PASS",
+      "validation_predictions_replayed_identically": true
+    },
+    {
+      "best_checkpoint_round": 47,
+      "best_checkpoint_sha_matches": true,
+      "best_round_recomputed": 47,
+      "best_round_recorded": 47,
+      "condition": "quantity",
+      "manifest_sha_matches_frozen": true,
+      "round_0_state_sha256_is_FL_INIT_V2": true,
+      "round_1_identical": true,
+      "round_1_replay_sha256": "af50d266a12fc2c2b332b58e6683c9ad7bd889edfb86a71069a912dcc184f7c2",
+      "round_1_stored_sha256": "af50d266a12fc2c2b332b58e6683c9ad7bd889edfb86a71069a912dcc184f7c2",
+      "round_50_checkpoint_sha_matches": true,
+      "status": "PASS",
+      "validation_predictions_replayed_identically": true
+    },
+    {
+      "best_checkpoint_round": 50,
+      "best_checkpoint_sha_matches": true,
+      "best_round_recomputed": 50,
+      "best_round_recorded": 50,
+      "condition": "feature",
+      "manifest_sha_matches_frozen": true,
+      "round_0_state_sha256_is_FL_INIT_V2": true,
+      "round_1_identical": true,
+      "round_1_replay_sha256": "ac447a96261e67445addf54c66aff25fc59ffcd3e4631ba50e30957472101657",
+      "round_1_stored_sha256": "ac447a96261e67445addf54c66aff25fc59ffcd3e4631ba50e30957472101657",
+      "round_50_checkpoint_sha_matches": true,
+      "status": "PASS",
+      "validation_predictions_replayed_identically": true
+    },
+    {
+      "best_checkpoint_round": 42,
+      "best_checkpoint_sha_matches": true,
+      "best_round_recomputed": 42,
+      "best_round_recorded": 42,
+      "condition": "combined",
+      "manifest_sha_matches_frozen": true,
+      "round_0_state_sha256_is_FL_INIT_V2": true,
+      "round_1_identical": true,
+      "round_1_replay_sha256": "77df900388ebe5d57a9b20dce7d251c112a0d5520ba2043570177a5d7d3d7b56",
+      "round_1_stored_sha256": "77df900388ebe5d57a9b20dce7d251c112a0d5520ba2043570177a5d7d3d7b56",
+      "round_50_checkpoint_sha_matches": true,
+      "status": "PASS",
+      "validation_predictions_replayed_identically": true
+    }
+  ],
+  "run_label": "run_1",
+  "status": "PASS"
+}

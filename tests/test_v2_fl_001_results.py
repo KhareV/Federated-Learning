@@ -117,7 +117,8 @@ def test_registry_transition_and_future_phases_not_started() -> None:
     outcome = _j("decision.json")["outcome"]
     assert tasks["V2-FL-001"]["status"] == outcome.split("_")[0]  # PASS / FAIL
     assert gates["V2FLG0"]["status"] == tasks["V2-FL-001"]["status"]
-    for later in ("V2-FL-002", "V2-FL-003", "V2-FL-004", "V2-FL-005", "V2-014"):
+    assert tasks["V2-FL-002"]["status"] in {"NOT_STARTED", "PASS"}  # run after V2-FL-001
+    for later in ("V2-FL-003", "V2-FL-004", "V2-FL-005", "V2-014"):
         assert tasks[later]["status"] == "NOT_STARTED"
     assert comps["MODEL_V2_FL_PROTOCOL_V1"]["status"].startswith("FROZEN")
     assert comps["FL_INIT_V2"]["status"].startswith("FROZEN")

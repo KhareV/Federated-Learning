@@ -1,0 +1,75 @@
+{
+  "conditions": {
+    "IID": {
+      "BCE": 0.4588765276802911,
+      "F1": 0.7057356608478803,
+      "best_AUPRC": 0.8669476403992936,
+      "best_AUROC": 0.9299129339876931,
+      "best_round": 38,
+      "patient_macro_F1": 0.4443151291273608,
+      "precision": 0.6099137931034483,
+      "round_0_AUPRC": 0.25769234928353735,
+      "round_50_AUPRC": 0.8268321691589757,
+      "rounds_in_log": 50,
+      "sensitivity": 0.8372781065088757,
+      "specificity": 0.8357531760435571
+    },
+    "combined": {
+      "BCE": 0.4126722483171357,
+      "F1": 0.684913217623498,
+      "best_AUPRC": 0.8202489560000589,
+      "best_AUROC": 0.9180779432768822,
+      "best_round": 42,
+      "patient_macro_F1": 0.45981989725685074,
+      "precision": 0.6240875912408759,
+      "round_0_AUPRC": 0.25769234928353735,
+      "round_50_AUPRC": 0.8044346699820742,
+      "rounds_in_log": 50,
+      "sensitivity": 0.7588757396449705,
+      "specificity": 0.8598003629764065
+    },
+    "feature": {
+      "BCE": 0.804360335941116,
+      "F1": 0.6521060842433697,
+      "best_AUPRC": 0.8501518854463859,
+      "best_AUROC": 0.9310270997326001,
+      "best_round": 50,
+      "patient_macro_F1": 0.66254028847651,
+      "precision": 0.5028067361668003,
+      "round_0_AUPRC": 0.25769234928353735,
+      "round_50_AUPRC": 0.8501518854463859,
+      "rounds_in_log": 50,
+      "sensitivity": 0.9275147928994083,
+      "specificity": 0.7186932849364791
+    },
+    "label": {
+      "BCE": 0.41967242235938707,
+      "F1": 0.6953846153846154,
+      "best_AUPRC": 0.8066305693453126,
+      "best_AUROC": 0.9158650490232929,
+      "best_round": 50,
+      "patient_macro_F1": 0.4206452423976485,
+      "precision": 0.7243589743589743,
+      "round_0_AUPRC": 0.25769234928353735,
+      "round_50_AUPRC": 0.8066305693453126,
+      "rounds_in_log": 50,
+      "sensitivity": 0.6686390532544378,
+      "specificity": 0.9219600725952813
+    },
+    "quantity": {
+      "BCE": 0.38045749242107074,
+      "F1": 0.7664429530201342,
+      "best_AUPRC": 0.8873612543728578,
+      "best_AUROC": 0.953162754110332,
+      "best_round": 47,
+      "patient_macro_F1": 0.6622482059816518,
+      "precision": 0.7014742014742015,
+      "round_0_AUPRC": 0.25769234928353735,
+      "round_50_AUPRC": 0.8796769520133982,
+      "rounds_in_log": 50,
+      "sensitivity": 0.8446745562130178,
+      "specificity": 0.8897459165154264
+    }
+  },
+  "descriptive_only": true
+}

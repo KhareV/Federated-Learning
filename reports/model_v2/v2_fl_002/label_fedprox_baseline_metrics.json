@@ -1,0 +1,9 @@
+{
+  "VALIDATION_PATIENT_MACRO_AUPRC_V2": 0.7247232349533131,
+  "VALIDATION_PATIENT_WORST_AUPRC_V2": 0.03809523809523809,
+  "checkpoint": "checkpoints/model_v2/v2_fl_002/FL_LABEL_SKEW_MODEL_V2_V1_best.pt",
+  "fedprox_run": false,
+  "finite_AUPRC_patients": 7,
+  "mu_selected": false,
+  "semantics": "FEDPROX_SELECTION_SEMANTICS_V1: validation patient groups are evaluation units, not federated clients"
+}

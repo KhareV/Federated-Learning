@@ -1,0 +1,19 @@
+{
+  "BIDMC_accessed": false,
+  "CALIBRATION_accessed": false,
+  "INCART_accessed": false,
+  "INTERNAL_TEST_accessed": false,
+  "NSTDB_access_rows": 7,
+  "NSTDB_evaluation_accessed": false,
+  "NSTDB_followup_warning": "any later performance evaluation of these FL models on the same NSTDB noise source is NOT untouched external evidence",
+  "NSTDB_only_as_pure_noise_training_resource": true,
+  "WEARABLE_SIM_efficacy_used": false,
+  "WEARABLE_accessed": false,
+  "partitions_accessed": [
+    "NSTDB",
+    "TRAIN",
+    "VALIDATION"
+  ],
+  "rows": 32,
+  "status": "PASS"
+}

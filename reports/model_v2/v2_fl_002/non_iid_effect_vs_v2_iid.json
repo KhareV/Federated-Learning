@@ -1,0 +1,197 @@
+{
+  "combined": {
+    "best_round_shift_vs_V2_IID": 4,
+    "delta_best_AUPRC_vs_V2_IID": -0.04669868439923475,
+    "delta_best_AUROC_vs_V2_IID": -0.011834990710810955,
+    "delta_patient_macro_F1_vs_V2_IID": 0.015504768129489921,
+    "delta_round_50_AUPRC_vs_V2_IID": -0.02239749917690148,
+    "heterogeneity": {
+      "label_variance_across_sites": 0.09639557719916383,
+      "site_patient_counts": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        4,
+        5,
+        6
+      ],
+      "site_positive_rates": [
+        0.0,
+        0.005555555555555556,
+        0.005555555555555556,
+        0.020446096654275093,
+        0.16586768935762225,
+        0.2674581005586592,
+        0.5744444444444444,
+        0.9013494648673802
+      ],
+      "site_windows": [
+        720,
+        720,
+        720,
+        1076,
+        1043,
+        1432,
+        1800,
+        2149
+      ]
+    }
+  },
+  "feature": {
+    "best_round_shift_vs_V2_IID": 12,
+    "delta_best_AUPRC_vs_V2_IID": -0.01679575495290775,
+    "delta_best_AUROC_vs_V2_IID": 0.0011141657449069697,
+    "delta_patient_macro_F1_vs_V2_IID": 0.2182251593491492,
+    "delta_round_50_AUPRC_vs_V2_IID": 0.02331971628741014,
+    "heterogeneity": {
+      "label_variance_across_sites": 0.0001621920573009423,
+      "site_patient_counts": [
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "site_positive_rates": [
+        0.366991643454039,
+        0.3623693379790941,
+        0.36304816678648455,
+        0.35185185185185186,
+        0.3675925925925926,
+        0.3990740740740741,
+        0.36666666666666664,
+        0.3719851576994434
+      ],
+      "site_windows": [
+        1436,
+        1435,
+        1391,
+        1080,
+        1080,
+        1080,
+        1080,
+        1078
+      ]
+    }
+  },
+  "feature_noise_schedule": {
+    "SITE_00": [
+      "bw",
+      24.0
+    ],
+    "SITE_01": [
+      "em",
+      24.0
+    ],
+    "SITE_02": [
+      "ma",
+      18.0
+    ],
+    "SITE_03": [
+      "bw",
+      12.0
+    ],
+    "SITE_04": [
+      "em",
+      6.0
+    ],
+    "SITE_05": [
+      "ma",
+      0.0
+    ],
+    "SITE_06": [
+      "bw",
+      -6.0
+    ],
+    "SITE_07": [
+      "em",
+      -6.0
+    ]
+  },
+  "label": {
+    "best_round_shift_vs_V2_IID": 12,
+    "delta_best_AUPRC_vs_V2_IID": -0.060317071053980986,
+    "delta_best_AUROC_vs_V2_IID": -0.014047884964400237,
+    "delta_patient_macro_F1_vs_V2_IID": -0.02366988672971232,
+    "delta_round_50_AUPRC_vs_V2_IID": -0.020201599813663096,
+    "heterogeneity": {
+      "label_variance_across_sites": 0.1255652354229431,
+      "site_patient_counts": [
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "site_positive_rates": [
+        0.006944444444444444,
+        0.08426183844011143,
+        0.22652329749103942,
+        0.001851851851851852,
+        0.46944444444444444,
+        0.6148148148148148,
+        0.838139534883721,
+        0.9646182495344506
+      ],
+      "site_windows": [
+        1440,
+        1436,
+        1395,
+        1080,
+        1080,
+        1080,
+        1075,
+        1074
+      ]
+    }
+  },
+  "note": "no sign is assumed; descriptive only",
+  "quantity": {
+    "best_round_shift_vs_V2_IID": 9,
+    "delta_best_AUPRC_vs_V2_IID": 0.020413613973564226,
+    "delta_best_AUROC_vs_V2_IID": 0.023249820122638876,
+    "delta_patient_macro_F1_vs_V2_IID": 0.21793307685429097,
+    "delta_round_50_AUPRC_vs_V2_IID": 0.05284478285442251,
+    "heterogeneity": {
+      "label_variance_across_sites": 0.0004910485241032877,
+      "site_patient_counts": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        4,
+        5,
+        6
+      ],
+      "site_positive_rates": [
+        0.4013888888888889,
+        0.3625,
+        0.41818181818181815,
+        0.34916201117318435,
+        0.3656716417910448,
+        0.36666666666666664,
+        0.3630175836642087,
+        0.3585343228200371
+      ],
+      "site_windows": [
+        720,
+        720,
+        715,
+        1074,
+        1072,
+        1440,
+        1763,
+        2156
+      ]
+    }
+  }
+}

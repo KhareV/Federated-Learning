@@ -1,0 +1,66 @@
+{
+  "conditions": {
+    "IID": {
+      "V1_best_AUPRC": 0.5062218463441578,
+      "V1_best_round": 1,
+      "V1_patient_macro_F1": 0.3081050674007343,
+      "V1_round_50_AUPRC": 0.400224070046962,
+      "V2_best_AUPRC": 0.8669476403992936,
+      "V2_best_round": 38,
+      "V2_patient_macro_F1": 0.4443151291273608,
+      "V2_round_50_AUPRC": 0.8268321691589757,
+      "delta_best_AUPRC_V2_minus_V1": 0.36072579405513583,
+      "delta_round_50_AUPRC_V2_minus_V1": 0.42660809911201375
+    },
+    "combined": {
+      "V1_best_AUPRC": 0.4369708383334254,
+      "V1_best_round": 3,
+      "V1_patient_macro_F1": 0.0,
+      "V1_round_50_AUPRC": 0.2603244630395506,
+      "V2_best_AUPRC": 0.8202489560000589,
+      "V2_best_round": 42,
+      "V2_patient_macro_F1": 0.45981989725685074,
+      "V2_round_50_AUPRC": 0.8044346699820742,
+      "delta_best_AUPRC_V2_minus_V1": 0.38327811766663344,
+      "delta_round_50_AUPRC_V2_minus_V1": 0.5441102069425237
+    },
+    "feature": {
+      "V1_best_AUPRC": 0.4928732353001021,
+      "V1_best_round": 1,
+      "V1_patient_macro_F1": 0.3081050674007343,
+      "V1_round_50_AUPRC": 0.31569171569193777,
+      "V2_best_AUPRC": 0.8501518854463859,
+      "V2_best_round": 50,
+      "V2_patient_macro_F1": 0.66254028847651,
+      "V2_round_50_AUPRC": 0.8501518854463859,
+      "delta_best_AUPRC_V2_minus_V1": 0.3572786501462838,
+      "delta_round_50_AUPRC_V2_minus_V1": 0.5344601697544481
+    },
+    "label": {
+      "V1_best_AUPRC": 0.5455569642172218,
+      "V1_best_round": 49,
+      "V1_patient_macro_F1": 0.08437362185046894,
+      "V1_round_50_AUPRC": 0.5305399800965248,
+      "V2_best_AUPRC": 0.8066305693453126,
+      "V2_best_round": 50,
+      "V2_patient_macro_F1": 0.4206452423976485,
+      "V2_round_50_AUPRC": 0.8066305693453126,
+      "delta_best_AUPRC_V2_minus_V1": 0.26107360512809086,
+      "delta_round_50_AUPRC_V2_minus_V1": 0.2760905892487878
+    },
+    "quantity": {
+      "V1_best_AUPRC": 0.5160353244837765,
+      "V1_best_round": 27,
+      "V1_patient_macro_F1": 0.41379166461354433,
+      "V1_round_50_AUPRC": 0.45353012422595607,
+      "V2_best_AUPRC": 0.8873612543728578,
+      "V2_best_round": 47,
+      "V2_patient_macro_F1": 0.6622482059816518,
+      "V2_round_50_AUPRC": 0.8796769520133982,
+      "delta_best_AUPRC_V2_minus_V1": 0.3713259298890813,
+      "delta_round_50_AUPRC_V2_minus_V1": 0.4261468277874422
+    }
+  },
+  "historical_v1_not_rerun": true,
+  "no_pass_threshold_created": true
+}

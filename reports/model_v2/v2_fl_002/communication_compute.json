@@ -1,0 +1,38 @@
+{
+  "conditions": {
+    "combined": {
+      "client_to_server_bytes_per_round": 1926624,
+      "network_traffic_measured": false,
+      "parameter_count": 57553,
+      "server_to_client_bytes_per_round": 1926624,
+      "total_logical_payload_bytes": 192662400,
+      "wall_seconds": 3627.9
+    },
+    "feature": {
+      "client_to_server_bytes_per_round": 1926624,
+      "network_traffic_measured": false,
+      "parameter_count": 57553,
+      "server_to_client_bytes_per_round": 1926624,
+      "total_logical_payload_bytes": 192662400,
+      "wall_seconds": 3582.3
+    },
+    "label": {
+      "client_to_server_bytes_per_round": 1926624,
+      "network_traffic_measured": false,
+      "parameter_count": 57553,
+      "server_to_client_bytes_per_round": 1926624,
+      "total_logical_payload_bytes": 192662400,
+      "wall_seconds": 3536.0
+    },
+    "quantity": {
+      "client_to_server_bytes_per_round": 1926624,
+      "network_traffic_measured": false,
+      "parameter_count": 57553,
+      "server_to_client_bytes_per_round": 1926624,
+      "total_logical_payload_bytes": 192662400,
+      "wall_seconds": 3374.3
+    }
+  },
+  "network_traffic_measured": false,
+  "note": "logical serialized payload estimates"
+}

@@ -1,0 +1,54 @@
+{
+  "aggregation_failures": 0,
+  "conditions": {
+    "combined": {
+      "aggregation_failures": 0,
+      "failed_clients": 0,
+      "nonfinite_tensors": 0,
+      "round_0_AUPRC": 0.25769234928353735,
+      "round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+      "rounds": 50,
+      "stable_convergence_flag": true,
+      "updates": 400
+    },
+    "feature": {
+      "aggregation_failures": 0,
+      "failed_clients": 0,
+      "nonfinite_tensors": 0,
+      "round_0_AUPRC": 0.25769234928353735,
+      "round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+      "rounds": 50,
+      "stable_convergence_flag": true,
+      "updates": 400
+    },
+    "label": {
+      "aggregation_failures": 0,
+      "failed_clients": 0,
+      "nonfinite_tensors": 0,
+      "round_0_AUPRC": 0.25769234928353735,
+      "round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+      "rounds": 50,
+      "stable_convergence_flag": true,
+      "updates": 400
+    },
+    "quantity": {
+      "aggregation_failures": 0,
+      "failed_clients": 0,
+      "nonfinite_tensors": 0,
+      "round_0_AUPRC": 0.25769234928353735,
+      "round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+      "rounds": 50,
+      "stable_convergence_flag": true,
+      "updates": 400
+    }
+  },
+  "failed_clients": 0,
+  "infrastructure_retries": 0,
+  "loader_failures": 0,
+  "nonfinite_tensors": 0,
+  "round_0_identical_all_conditions": true,
+  "round_0_matches_V2_FL_001": true,
+  "total_rounds": 200,
+  "updates_expected": 1600,
+  "updates_valid": 1600
+}

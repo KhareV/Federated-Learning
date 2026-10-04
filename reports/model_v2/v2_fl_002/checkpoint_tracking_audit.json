@@ -1,0 +1,15 @@
+{
+  "expected_files": 8,
+  "status": "PASS",
+  "tracked": [
+    "checkpoints/model_v2/v2_fl_002/FL_COMBINED_SKEW_MODEL_V2_V1_best.pt",
+    "checkpoints/model_v2/v2_fl_002/FL_COMBINED_SKEW_MODEL_V2_V1_round50.pt",
+    "checkpoints/model_v2/v2_fl_002/FL_FEATURE_NOISE_MODEL_V2_V1_best.pt",
+    "checkpoints/model_v2/v2_fl_002/FL_FEATURE_NOISE_MODEL_V2_V1_round50.pt",
+    "checkpoints/model_v2/v2_fl_002/FL_LABEL_SKEW_MODEL_V2_V1_best.pt",
+    "checkpoints/model_v2/v2_fl_002/FL_LABEL_SKEW_MODEL_V2_V1_round50.pt",
+    "checkpoints/model_v2/v2_fl_002/FL_QUANTITY_SKEW_MODEL_V2_V1_best.pt",
+    "checkpoints/model_v2/v2_fl_002/FL_QUANTITY_SKEW_MODEL_V2_V1_round50.pt"
+  ],
+  "tracked_files": 8
+}

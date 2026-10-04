@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "NSTDB_noise_training_only": true,
+    "all_four_conditions_ran": true,
+    "checkpoints_git_tracked": true,
+    "exact_FL_INIT_V2_all": true,
+    "exact_frozen_manifests": true,
+    "feature_noise_matches_frozen": true,
+    "fifty_rounds_each": true,
+    "finite_states": true,
+    "firewall": true,
+    "method_unchanged": true,
+    "patient_integrity_closure": true,
+    "protected_unchanged": true,
+    "regression": true,
+    "replay_reconstruction": true,
+    "round50_checkpoints_exist": true,
+    "updates_1600_of_1600": true
+  },
+  "performance_direction_irrelevant": true,
+  "status": "PASS"
+}
