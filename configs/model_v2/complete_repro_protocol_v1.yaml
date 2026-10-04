@@ -1,0 +1,57 @@
+# MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1 -- V2-014 final clean-environment reproducibility proof (gate V2G13).
+# Frozen BEFORE the first canonical clean clone. Reproducibility VERIFICATION only: no scientific
+# retraining, no held-out inference, no raw-data access, no frozen-method change, no promotion.
+protocol_id: MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1
+task_id: V2-014
+gate: V2G13
+entry_sha: 3d0e9d4a81a486c5aa05d3073e2fabcbd51f445b
+prerequisites: [V2-001, V2-013, V2-FL-005]
+evidence_categories:
+  A_tracked_artifact_identity: [inventory, artifacts]
+  B_stored_evidence_scientific_reconstruction: [fl-dev, fl-heldout]
+  C_executable_software_and_synthetic_reproduction: [model-v2, fixed-vectors, cal-v2, gateway, replay v2013, replay flatline, fl-init, secagg-data-free, synthetic-fl]
+  D_full_repository_regression: [regression chunked, regression monolithic, ruff, pip check, frontend npm ci/test/check/build, lifecycle]
+distinction_rule: "Verification of a committed result file is NEVER described as a rerun of the original scientific training."
+must_not_rerun: [MODEL_V2 architecture search, MODEL_V2 CV fits, official V2 validation fits, CAL_V2 fitting, MODEL_V2 INTERNAL_TEST/INCART/NSTDB inference, V2-FL-001 50-round training, V2-FL-002 200 rounds, V2-FL-003 350 rounds, V2-FL-EVAL one-shot checkpoint inference, historical V1 FL training, real-TRAIN SecAgg round reconstruction]
+one_shot_guards: {V2_FL_INTERNAL_TEST_ACCESS_V1: COMPLETED, V2_FL_INCART_ACCESS_V1: COMPLETED, INTERNAL_TEST_ACCESS_V1: COMPLETED, EXTERNAL_INCART_ACCESS_V1: COMPLETED, reset_or_bypass: forbidden}
+statistics_policy: held-out statistics are recomputed from the FROZEN prediction tables only (scripts.verify_v2_fl_eval_stats); development statistics are reconstructed from committed round logs, committed VALIDATION prediction tables and result files only (scripts.v2_014_fl_dev_reconstruct); the historical verify_v2_fl_00x_replay scripts re-infer on real windows and are NOT used.
+clean_clone:
+  method: "brand-new `git clone` of the configured remote into a newly created temporary root, then `git checkout --detach <method commit>`"
+  forbidden: [git worktree, copied directory, tarball, filesystem snapshot, reused scratch clone, reused C035 clone, cp/rsync/symlink/bind-mount/scp of any source, data or dependency directory]
+  isolated_environment: {HOME: fresh temp, PYTHONPATH: unset, NODE_PATH: unset, PYTHONNOUSERSITE: 1, inherited_virtualenv: none, parent_node_modules: none}
+  clone_step_exception: "git clone itself runs with the ambient environment so the user's SSH identity can reach the remote; every later command runs under the isolated HOME"
+  python: {version: "3.11", venv: "<clone>/.venv", install: ["pip install -r requirements-dev.lock", "pip install --no-deps -e .", "pip check"], rescue_install: forbidden}
+  frontend: {install: "npm ci (frontend/)", checks: ["npm test", "npm run check", "npm run build"], npm_install: forbidden, copied_node_modules: forbidden}
+  failure_rule: "Any hidden dependency, data dependency, missing artifact, failing test or mismatch STOPs the run. The clone is NEVER edited, repaired or rescue-installed: preserve the failure evidence, make a prospective repository correction, commit, discard the clone and create an entirely NEW clone."
+  public_dataset_download: forbidden (not required by this proof)
+  raw_dataset_copy: forbidden (T035/C035 lesson)
+evidence_output: external directory outside the clone; imported only through scripts/import_v2_014_evidence.py after hash verification
+clean_clone_gating_v1: >-
+  Tests that require untracked inputs (raw datasets, gitignored processed window caches, untracked
+  candidate checkpoints, the developer .venv-t032 interpreter) skip with reason
+  CLEAN_CLONE_DATA_GATED only when the input is absent (tests/conftest.py). When the inputs exist
+  every test runs unchanged. Evidence reports DATA_GATED_SKIPPED separately; these tests are
+  excluded from the clean SOFTWARE claim and are not force-passed.
+synthetic_fl_reproduction:
+  required_final_state_sha256: 3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4
+  required_semantic_digest: e234b755f1d90eb9bc3d9ae4d437904d32b6e453dc476187238191cf409a352e
+  secagg_compat: WEARABLE_SIM_FL_SECAGG_COMPAT_V1 (max_weight rule next_power_of_two(2*93)=256; unchanged)
+secagg_exploration_disclosure: "Exploratory max_weight dry runs (4096, 1024, 256, 128) occurred BEFORE the V2-FL-005 method freeze; 4096 failed the synthetic-workload correctness tolerance. The canonical 256 value was fixed by the structural count-derived rule next_power_of_two(2 * max_client_examples_seen), not selected by post-freeze outcome optimization."
+gateway_reexport: {BYTE_IDENTICAL_REEXPORT_REQUIRED: false, SEMANTIC_REEXPORT_REQUIRED: true, canonical_artifact_must_be_byte_exact: true, canonical_sha256: 25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f, canonical_bytes: 294959}
+regression: {baseline_V2_FL_005: "2336 nodes / 30 chunks (entry baseline only; the V2-014 count legitimately increases)", chunk_size: 80, require: [collected == executed unique, missing 0, duplicates 0, unexpected 0, failed 0, failed chunks 0], monolithic: attempted}
+chronology: [entry audit, control-plane prerequisite correction, protocol + harness + lock, PRE-REPRO METHOD COMMIT, clone 1 (method commit), RESULT TRANSITION COMMIT (evidence import + registries + strict lifecycle test), clone 2 (result commit, final-commit verification), FINAL EVIDENCE COMMIT (evidence-only)]
+result_transition_allowed_changes: [reports/model_v2/v2_014/ evidence, reproducibility locks/manifests, V2-014/V2G13/component registry rows, tests/test_model_v2_current_lifecycle.py]
+final_evidence_commit_allowed_changes: [reports/model_v2/v2_014/]
+claim_boundary: >-
+  Frozen scientific artifacts and statistics are reproducible from their committed identities and
+  prediction tables; deterministic data-free/model-fixed-vector software behavior reproduces; the
+  synthetic wearable federation system reproduces end-to-end from a brand-new clone. No new AUPRC,
+  generalization, clinical, real-wearable or model-promotion evidence is produced.
+forbidden_claims: [new AUPRC, new generalization evidence, clinical validation, real-wearable validation, model promotion, MODEL_V2 default change, retraining reproduced, held-out inference repeated]
+operational_default: MODEL_V1
+v2_007_disposition_untouched: MODEL_V2_NOT_PROMOTED_RELEASE_CI
+next_decision_not_executed_here: prospective system-level release/default decision (e.g. V2-REL-001)
+v2g13:
+  blocks: []
+  performance_independent: true
+  pass_criteria: [two genuinely new independent clones, no worktree, no developer source copied, no raw data copied, no manual dependency rescue, installs only from committed locks, protected artifact hashes verify, MODEL_V2 fixed vectors reproduce, CAL_V2 helpers reproduce, canonical gateway hash verifies, gateway re-export semantic parity, V2 runtime/synthetic replay passes, FL_INIT_V2 regenerates exactly, FL development statistics reconstruct from frozen outputs, FL held-out statistics reconstruct prediction-only, one-shot guards remain consumed, V2-FL-004 frozen privacy artifacts verify, V2-FL-005 cohort regenerates exactly, V2-FL-005 three-round system reproduces exactly, synthetic SecAgg shadow passes with frozen 256 rule, restart/resume reproduces, event replay reproduces, final-state logits finite, frontend clean install/tests/check/build pass, ruff passes, pip check passes, full Python regression passes, zero tracked source drift in both clones, final-result clone passes, final evidence commit is evidence-only, origin/main synchronized]

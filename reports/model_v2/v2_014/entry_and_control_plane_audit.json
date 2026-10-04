@@ -1,0 +1,29 @@
+{
+  "entry_sha": "3d0e9d4a81a486c5aa05d3073e2fabcbd51f445b",
+  "origin_main_equals_entry": true,
+  "tree_clean_at_entry": true,
+  "control_plane": {
+    "old_V2_014_prerequisites": "V2-001;V2-013",
+    "new_V2_014_prerequisites": "V2-001;V2-013;V2-FL-005",
+    "V2G13_purpose_updated_while_NOT_STARTED": true,
+    "update_kind": "prospective append-only correction of NOT_STARTED rows; original references preserved",
+    "historical_statuses_rewritten": false
+  },
+  "lifecycle_registry_preflight": {
+    "applied": "V2-014 PASS, V2G13 PASS and a MODEL_V2_COMPLETE_REPRO_V1 component row in a scratch working-tree state, then reverted",
+    "result": {"passed": 2332, "failed": 3, "skipped": 1},
+    "failed_tests": [
+      "tests/test_model_v2_current_lifecycle.py::test_task_registry_is_exactly_the_current_state",
+      "tests/test_model_v2_current_lifecycle.py::test_gate_registry_is_exactly_the_current_state",
+      "tests/test_model_v2_current_lifecycle.py::test_next_phases_are_exactly_not_started_and_gate_blocking_is_consistent"
+    ],
+    "remaining_brittle_historical_tests": [],
+    "historical_lifecycle_tests_edited_for_V2_014": []
+  },
+  "pre_method_mechanics_dry_run": {
+    "disclosure": "A scratch clone of the entry commit (outside the repository, discarded, NOT the canonical proof) was installed and tested to discover clean-clone defects before the method freeze.",
+    "finding": "18 tests failed because they need inputs absent from a clean clone (raw datasets, gitignored processed caches, untracked candidate checkpoints, developer .venv-t032 path). Prospective correction: tests/conftest.py CLEAN_CLONE_GATING_V1 (skip only when the input is absent, reported as DATA_GATED_SKIPPED).",
+    "also_found": "scripts/verify_v2_fl_00{1,2,3}_replay.py re-infer on real windows, so V2-014 uses the new data-free scripts/v2_014_fl_dev_reconstruct.py instead; frontend npm ci/test/check/build and verify_v2_fl_eval_stats worked in the dry run."
+  },
+  "status": "PASS"
+}

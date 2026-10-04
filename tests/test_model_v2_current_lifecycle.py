@@ -46,6 +46,7 @@ EXPECTED_COMPONENTS = {
     "WEARABLE_SIM_FL_SYSTEM_REPLAY_V1": "FROZEN_ENGINEERING_REPLAY",
     "VIRTUAL_FL_CLIENT_SOURCE_V1": "FROZEN_INTERFACE_CONTRACT",
     "WEARABLE_SIM_FL_SECAGG_COMPAT_V1": "FROZEN_ENGINEERING_COMPATIBILITY",
+    "MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1": "FROZEN_REPRO_PROTOCOL",
 }
 
 
@@ -88,3 +89,5 @@ def test_next_phases_are_exactly_not_started_and_gate_blocking_is_consistent() -
     assert tasks["V2-FL-004"]["prerequisites"] == "V2-FL-EVAL-001"
     assert gates["V2FLG3"]["blocks_tasks"] == "V2-FL-005"
     assert gates["V2FLG4"]["blocks_tasks"] == "V2-014"
+    assert tasks["V2-014"]["prerequisites"] == "V2-001;V2-013;V2-FL-005"
+    assert "WEARABLE_SIM virtual-client FL system path" in gates["V2G13"]["purpose"]
