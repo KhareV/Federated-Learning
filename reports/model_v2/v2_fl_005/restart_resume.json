@@ -1,0 +1,16 @@
+{
+  "continuous_final_sha256": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+  "exact_match": true,
+  "fresh_process": true,
+  "resume_artifact_coordinator_sha256": "20eb2b767935000a055fca6963bf425614a81bb2c5f904a3ca8bbc7973ed84b4",
+  "resume_artifact_state_sha256": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+  "resumed_final_sha256": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+  "resumed_from_round": 2,
+  "round_2_state_matches_continuous": true,
+  "round_3_rejection_codes": [
+    "STALE_ROUND",
+    "DUPLICATE_UPDATE",
+    "BASE_STATE_MISMATCH",
+    "UNKNOWN_CLIENT"
+  ]
+}

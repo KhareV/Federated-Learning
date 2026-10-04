@@ -1,0 +1,10 @@
+{
+  "AAMI_SVF_efficacy_claim": false,
+  "claim_boundary": "The deterministic WEARABLE_SIM_V1 virtual-client cohort was successfully converted through the production-like ECG stream path into isolated client-local MODEL_V2 training windows and exercised through a three-round federated software workflow. Routing, exactly-once aggregation, restart/resume, deterministic replay and one-round Flower SecAgg+ compatibility passed. This is software and systems engineering evidence only; it is not AAMI-SVF efficacy, clinical evidence, real-wearable validation or a model-promotion result.",
+  "clinical_claim": false,
+  "engineering_only": true,
+  "model_promotion": false,
+  "real_wearable_claim": false,
+  "runtime_cutover": false,
+  "status": "PASS"
+}

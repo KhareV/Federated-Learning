@@ -1,0 +1,357 @@
+{
+  "accepted_updates": 24,
+  "aggregation_failures": 0,
+  "clients_per_round": 8,
+  "efficacy_metrics_computed": false,
+  "expected_updates": 24,
+  "experiment_id": "WEARABLE_SIM_FL_SYSTEM_V1",
+  "failed_updates": 0,
+  "local_training_calls": 24,
+  "nonfinite_states": 0,
+  "rejected_injected_attempts": [
+    {
+      "client_id": "SIM_FL_SITE_03",
+      "code": "STALE_ROUND",
+      "injection": "INJECT_STALE"
+    },
+    {
+      "client_id": "SIM_FL_SITE_00",
+      "code": "DUPLICATE_UPDATE",
+      "injection": "INJECT_DUPLICATE"
+    },
+    {
+      "client_id": "SIM_FL_SITE_05",
+      "code": "BASE_STATE_MISMATCH",
+      "injection": "INJECT_WRONG_BASE"
+    },
+    {
+      "client_id": "SIM_FL_SITE_99",
+      "code": "UNKNOWN_CLIENT",
+      "injection": "INJECT_UNKNOWN_CLIENT"
+    }
+  ],
+  "round_reports": {
+    "1": {
+      "accepted": 8,
+      "base_global_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+      "diagnostics_not_in_digest": {
+        "SIM_FL_SITE_00": {
+          "mean_loss": 0.7476189085232314,
+          "payload_bytes": 240828,
+          "update_norm": 2.9294468829675333
+        },
+        "SIM_FL_SITE_01": {
+          "mean_loss": 0.6885287139441941,
+          "payload_bytes": 240828,
+          "update_norm": 2.934324050302853
+        },
+        "SIM_FL_SITE_02": {
+          "mean_loss": 0.7701377246406053,
+          "payload_bytes": 240828,
+          "update_norm": 2.944166709320743
+        },
+        "SIM_FL_SITE_03": {
+          "mean_loss": 0.680572424711806,
+          "payload_bytes": 240828,
+          "update_norm": 2.947733431739538
+        },
+        "SIM_FL_SITE_04": {
+          "mean_loss": 0.7035547534624735,
+          "payload_bytes": 240828,
+          "update_norm": 2.948788823658935
+        },
+        "SIM_FL_SITE_05": {
+          "mean_loss": 0.707839883142902,
+          "payload_bytes": 240828,
+          "update_norm": 2.9627904574325115
+        },
+        "SIM_FL_SITE_06": {
+          "mean_loss": 0.7560774536542995,
+          "payload_bytes": 240828,
+          "update_norm": 2.962234199862318
+        },
+        "SIM_FL_SITE_07": {
+          "mean_loss": 0.6548555651343012,
+          "payload_bytes": 240828,
+          "update_norm": 2.9678556673709355
+        }
+      },
+      "examples_seen": {
+        "SIM_FL_SITE_00": 93,
+        "SIM_FL_SITE_01": 91,
+        "SIM_FL_SITE_02": 91,
+        "SIM_FL_SITE_03": 89,
+        "SIM_FL_SITE_04": 90,
+        "SIM_FL_SITE_05": 93,
+        "SIM_FL_SITE_06": 93,
+        "SIM_FL_SITE_07": 83
+      },
+      "global_state_sha256": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+      "local_training_calls": 8,
+      "order_invariance": {
+        "aggregate_sha256": {
+          "canonical": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+          "permutation": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+          "reverse": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1"
+        },
+        "all_equal": true,
+        "equals_committed": true
+      },
+      "rejections": [],
+      "second_commit": "ROUND_ALREADY_COMMITTED",
+      "server_boundary_forbidden_hits": [],
+      "shuffle_seeds": {
+        "SIM_FL_SITE_00": "15954055098236359270",
+        "SIM_FL_SITE_01": "1554967202167589070",
+        "SIM_FL_SITE_02": "12016259852863132162",
+        "SIM_FL_SITE_03": "2953672053291423430",
+        "SIM_FL_SITE_04": "15416725177561341277",
+        "SIM_FL_SITE_05": "8741149866217350431",
+        "SIM_FL_SITE_06": "7298880200851000603",
+        "SIM_FL_SITE_07": "16159835302290860133"
+      },
+      "update_sha256": {
+        "SIM_FL_SITE_00": "65a450bcb58909e7fb5d90fdd9a4c1a862420466bba3a67268a8ef32f4bcc984",
+        "SIM_FL_SITE_01": "b85a168f3e46294d4af4ed917ba5eeda2bb7947475b30ee6e0cba1364246be17",
+        "SIM_FL_SITE_02": "3f647063e665f8ab2dcf3a6ad29ef735258aa098ea704f88fcbf38bd36afec8f",
+        "SIM_FL_SITE_03": "d8314e85938ae85d3f5774121ca8f7bfbafe6211a33788fb7fe101bcdec7ecc1",
+        "SIM_FL_SITE_04": "fb45a4b14bcef54445d1824ffb9356b732becbf669f573f45902855b371556ce",
+        "SIM_FL_SITE_05": "dfb7fb732ed4160e56318bacf11e31f0bdded7aea22eb3de48fcfdab9f4ff15a",
+        "SIM_FL_SITE_06": "1ea50b682620877f1addaa60a0f79203ad617eff88d40af31af87a26f68e101e",
+        "SIM_FL_SITE_07": "bfd0eff8cea69c436265e844dd477a1b5ba34bbc787a4ed7b45112e2e22535ec"
+      }
+    },
+    "2": {
+      "accepted": 8,
+      "base_global_state_sha256": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+      "diagnostics_not_in_digest": {
+        "SIM_FL_SITE_00": {
+          "mean_loss": 0.6724992766175218,
+          "payload_bytes": 240828,
+          "update_norm": 2.358118388457873
+        },
+        "SIM_FL_SITE_01": {
+          "mean_loss": 0.6574278945451254,
+          "payload_bytes": 240828,
+          "update_norm": 2.3740895602072545
+        },
+        "SIM_FL_SITE_02": {
+          "mean_loss": 0.6523393818310329,
+          "payload_bytes": 240828,
+          "update_norm": 2.3737361943418676
+        },
+        "SIM_FL_SITE_03": {
+          "mean_loss": 0.6412052813540684,
+          "payload_bytes": 240828,
+          "update_norm": 2.3868961119663923
+        },
+        "SIM_FL_SITE_04": {
+          "mean_loss": 0.6424506770239936,
+          "payload_bytes": 240828,
+          "update_norm": 2.387808416875153
+        },
+        "SIM_FL_SITE_05": {
+          "mean_loss": 0.7174151626325422,
+          "payload_bytes": 240828,
+          "update_norm": 2.388436922145545
+        },
+        "SIM_FL_SITE_06": {
+          "mean_loss": 0.5796866634840606,
+          "payload_bytes": 240828,
+          "update_norm": 2.4025497174946358
+        },
+        "SIM_FL_SITE_07": {
+          "mean_loss": 0.5848185405673751,
+          "payload_bytes": 240828,
+          "update_norm": 2.397097505190035
+        }
+      },
+      "examples_seen": {
+        "SIM_FL_SITE_00": 93,
+        "SIM_FL_SITE_01": 91,
+        "SIM_FL_SITE_02": 91,
+        "SIM_FL_SITE_03": 89,
+        "SIM_FL_SITE_04": 90,
+        "SIM_FL_SITE_05": 93,
+        "SIM_FL_SITE_06": 93,
+        "SIM_FL_SITE_07": 83
+      },
+      "global_state_sha256": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+      "local_training_calls": 8,
+      "order_invariance": {
+        "aggregate_sha256": {
+          "canonical": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+          "permutation": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+          "reverse": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef"
+        },
+        "all_equal": true,
+        "equals_committed": true
+      },
+      "rejections": [],
+      "second_commit": "ROUND_ALREADY_COMMITTED",
+      "server_boundary_forbidden_hits": [],
+      "shuffle_seeds": {
+        "SIM_FL_SITE_00": "17787714987982501186",
+        "SIM_FL_SITE_01": "8925142294439536583",
+        "SIM_FL_SITE_02": "15329738370230118845",
+        "SIM_FL_SITE_03": "17016253701626501763",
+        "SIM_FL_SITE_04": "3545035127337493148",
+        "SIM_FL_SITE_05": "17017139818246606736",
+        "SIM_FL_SITE_06": "18155695028264679949",
+        "SIM_FL_SITE_07": "2823371321150985731"
+      },
+      "update_sha256": {
+        "SIM_FL_SITE_00": "56f06ab063fea222a811408d689bb23600e7b443db091c42c7d6ce5caf665097",
+        "SIM_FL_SITE_01": "1a2d5d2c60cc549cb762e283345a75f5639d401cec3fd8f70a2787834ddf3f92",
+        "SIM_FL_SITE_02": "22148fb1bd16d1f239742c400721f2527b88da73040f884d75c5a70a1afab902",
+        "SIM_FL_SITE_03": "495eba4739b4d47a4917eb76b715cd0a9015ca8f47ea0d933b94ee8b056dc886",
+        "SIM_FL_SITE_04": "2c0e05ffeea50934213984e37c0ad22bf5c39173ad54c565a10097088fdd5db3",
+        "SIM_FL_SITE_05": "23d9e92416e6c1994f5153ac113bbf12c870c3316878c5eca3a639707eec5dd9",
+        "SIM_FL_SITE_06": "a29a823afbf8117059fecae77302f5f1f092de81522929d8455090bc2b2471fd",
+        "SIM_FL_SITE_07": "b4cb3bc0218fa3b26d35ec8c2d85392ebe62ea7fd44680096930dea7b4678c4a"
+      }
+    },
+    "3": {
+      "accepted": 8,
+      "base_global_state_sha256": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+      "diagnostics_not_in_digest": {
+        "SIM_FL_SITE_00": {
+          "mean_loss": 0.5447037386637862,
+          "payload_bytes": 240828,
+          "update_norm": 1.9853899218959032
+        },
+        "SIM_FL_SITE_01": {
+          "mean_loss": 0.448348988870998,
+          "payload_bytes": 240828,
+          "update_norm": 1.997166794973879
+        },
+        "SIM_FL_SITE_02": {
+          "mean_loss": 0.47637739319067735,
+          "payload_bytes": 240828,
+          "update_norm": 2.0087676235624827
+        },
+        "SIM_FL_SITE_03": {
+          "mean_loss": 0.5230702925264166,
+          "payload_bytes": 240828,
+          "update_norm": 2.003387831170202
+        },
+        "SIM_FL_SITE_04": {
+          "mean_loss": 0.44536733958456254,
+          "payload_bytes": 240828,
+          "update_norm": 2.018546412671093
+        },
+        "SIM_FL_SITE_05": {
+          "mean_loss": 0.5460557886349258,
+          "payload_bytes": 240828,
+          "update_norm": 2.010959360685952
+        },
+        "SIM_FL_SITE_06": {
+          "mean_loss": 0.543944114318458,
+          "payload_bytes": 240828,
+          "update_norm": 2.0305724246406913
+        },
+        "SIM_FL_SITE_07": {
+          "mean_loss": 0.39577943014811323,
+          "payload_bytes": 240828,
+          "update_norm": 2.0309409053420575
+        }
+      },
+      "examples_seen": {
+        "SIM_FL_SITE_00": 93,
+        "SIM_FL_SITE_01": 91,
+        "SIM_FL_SITE_02": 91,
+        "SIM_FL_SITE_03": 89,
+        "SIM_FL_SITE_04": 90,
+        "SIM_FL_SITE_05": 93,
+        "SIM_FL_SITE_06": 93,
+        "SIM_FL_SITE_07": 83
+      },
+      "global_state_sha256": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+      "local_training_calls": 8,
+      "order_invariance": {
+        "aggregate_sha256": {
+          "canonical": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+          "permutation": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+          "reverse": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+        },
+        "all_equal": true,
+        "equals_committed": true
+      },
+      "rejections": [
+        {
+          "client_id": "SIM_FL_SITE_03",
+          "code": "STALE_ROUND",
+          "injection": "INJECT_STALE"
+        },
+        {
+          "client_id": "SIM_FL_SITE_00",
+          "code": "DUPLICATE_UPDATE",
+          "injection": "INJECT_DUPLICATE"
+        },
+        {
+          "client_id": "SIM_FL_SITE_05",
+          "code": "BASE_STATE_MISMATCH",
+          "injection": "INJECT_WRONG_BASE"
+        },
+        {
+          "client_id": "SIM_FL_SITE_99",
+          "code": "UNKNOWN_CLIENT",
+          "injection": "INJECT_UNKNOWN_CLIENT"
+        }
+      ],
+      "second_commit": "ROUND_ALREADY_COMMITTED",
+      "server_boundary_forbidden_hits": [],
+      "shuffle_seeds": {
+        "SIM_FL_SITE_00": "11295175845878697379",
+        "SIM_FL_SITE_01": "15629121027532081324",
+        "SIM_FL_SITE_02": "17450977076440884721",
+        "SIM_FL_SITE_03": "10316728100989712496",
+        "SIM_FL_SITE_04": "3071033041889952780",
+        "SIM_FL_SITE_05": "17121961187721293774",
+        "SIM_FL_SITE_06": "7548718137931454069",
+        "SIM_FL_SITE_07": "8417913359722302793"
+      },
+      "update_sha256": {
+        "SIM_FL_SITE_00": "99b6dfc36ee8429f5d671a052ffe28590a3b6aef48b0f19e4cc866d2c979e402",
+        "SIM_FL_SITE_01": "dc5161e0211b31b8b3371808fa852d31be2f4f8ed5d262404e59cb0abb7b9b47",
+        "SIM_FL_SITE_02": "6d8169b7c32970b9801bee5f82d324a1979a27b62f0f8bd99689909acd278330",
+        "SIM_FL_SITE_03": "f715be51ccf23d5e6512af5f05d4eb0f891c7a970f8427705469c9bd5af14ab8",
+        "SIM_FL_SITE_04": "7813f237e8a987009c76934d5f05e3974ba287adbcc3b45353e02fb8e8d9f08c",
+        "SIM_FL_SITE_05": "ae3baf64d49d5bf84ba828e53f121df82b552d9736020401550ed7c5a76602da",
+        "SIM_FL_SITE_06": "d478af7a964d90c0acc1663c98f13becf800ee320717c1368db668670592742a",
+        "SIM_FL_SITE_07": "a2a671e9fafac9ec85e86e3ec0c691082a5a87848aae0d2283b63a0b993e1a0e"
+      }
+    }
+  },
+  "rounds": 3,
+  "scientific_checkpoints_added": 0,
+  "scientific_model_fits_added": 0,
+  "starts_from": "FL_INIT_V2",
+  "state_progression": {
+    "0": {
+      "finite": true,
+      "floating_tensors": 77,
+      "integer_buffers": 15,
+      "sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f"
+    },
+    "1": {
+      "finite": true,
+      "floating_tensors": 77,
+      "integer_buffers": 15,
+      "sha256": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1"
+    },
+    "2": {
+      "finite": true,
+      "floating_tensors": 77,
+      "integer_buffers": 15,
+      "sha256": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef"
+    },
+    "3": {
+      "finite": true,
+      "floating_tensors": 77,
+      "integer_buffers": 15,
+      "sha256": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+    }
+  },
+  "validation_or_best_round_or_selection": false
+}

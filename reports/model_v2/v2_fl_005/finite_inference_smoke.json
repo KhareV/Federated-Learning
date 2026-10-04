@@ -1,0 +1,40 @@
+{
+  "all_logits_finite": true,
+  "classification_metrics_computed": false,
+  "labels_read": false,
+  "per_client": {
+    "SIM_FL_SITE_00": {
+      "finite_and_shaped": true,
+      "windows": 93
+    },
+    "SIM_FL_SITE_01": {
+      "finite_and_shaped": true,
+      "windows": 91
+    },
+    "SIM_FL_SITE_02": {
+      "finite_and_shaped": true,
+      "windows": 91
+    },
+    "SIM_FL_SITE_03": {
+      "finite_and_shaped": true,
+      "windows": 89
+    },
+    "SIM_FL_SITE_04": {
+      "finite_and_shaped": true,
+      "windows": 90
+    },
+    "SIM_FL_SITE_05": {
+      "finite_and_shaped": true,
+      "windows": 93
+    },
+    "SIM_FL_SITE_06": {
+      "finite_and_shaped": true,
+      "windows": 93
+    },
+    "SIM_FL_SITE_07": {
+      "finite_and_shaped": true,
+      "windows": 83
+    }
+  },
+  "windows_checked": 723
+}

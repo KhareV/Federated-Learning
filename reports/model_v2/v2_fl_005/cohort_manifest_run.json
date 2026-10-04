@@ -1,0 +1,827 @@
+{
+  "base_seed": 20260927,
+  "clients": [
+    {
+      "base_hr_bpm": 66.0,
+      "client_id": "SIM_FL_SITE_00",
+      "context": [
+        [
+          "VALID",
+          0.0,
+          480.0
+        ]
+      ],
+      "counts": {
+        "DEGRADED": 0,
+        "UNUSABLE": 0,
+        "VALID": 93,
+        "excluded_not_valid": 0,
+        "excluded_valid_but_incomplete": 0,
+        "source_records": 172800,
+        "synthetic_negative": 73,
+        "synthetic_positive": 20,
+        "trainable": 93,
+        "windows_emitted": 93
+      },
+      "coverage": [
+        "clean signal"
+      ],
+      "dataset_sha256": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+      "duration_s": 480,
+      "events": [
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 101.904
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 129.589
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 187.532
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 221.446
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 252.319
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 312.031
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 341.313
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 370.059
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 431.899
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 460.975
+        }
+      ],
+      "faults": [],
+      "participant_id": "SIM_P000101",
+      "provenance": {
+        "client_id": "SIM_FL_SITE_00",
+        "clinical_claim": false,
+        "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+        "dataset_id": "WEARABLE_SIM_V1",
+        "engineering_only": true,
+        "participant_id": "SIM_P000101",
+        "real_wearable_claim": false,
+        "session_id": "SIM_S_FL_00_000001",
+        "simulation_seed": 20260927,
+        "simulation_version": "WEARABLE_SIM_V1",
+        "source": "SYNTHETIC_PHYSIOLOGY",
+        "virtual_participant_is_human": false
+      },
+      "seed": 20260927,
+      "session_id": "SIM_S_FL_00_000001",
+      "source_rate_hz": 360
+    },
+    {
+      "base_hr_bpm": 69.0,
+      "client_id": "SIM_FL_SITE_01",
+      "context": [
+        [
+          "VALID",
+          0.0,
+          480.0
+        ]
+      ],
+      "counts": {
+        "DEGRADED": 2,
+        "UNUSABLE": 0,
+        "VALID": 91,
+        "excluded_not_valid": 2,
+        "excluded_valid_but_incomplete": 0,
+        "source_records": 172771,
+        "synthetic_negative": 71,
+        "synthetic_positive": 20,
+        "trainable": 91,
+        "windows_emitted": 93
+      },
+      "coverage": [
+        "short gap"
+      ],
+      "dataset_sha256": "b3e6499a74042f99aaa0cde359738ed7d769fbcc79dd7fdd3946be4395461c62",
+      "duration_s": 480,
+      "events": [
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 41.239
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 73.239
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 132.251
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 190.034
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 280.801
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 308.757
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 342.223
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 371.029
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 403.012
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 459.413
+        }
+      ],
+      "faults": [
+        [
+          "ECG_SHORT_GAP",
+          100.0,
+          100.08
+        ]
+      ],
+      "participant_id": "SIM_P000102",
+      "provenance": {
+        "client_id": "SIM_FL_SITE_01",
+        "clinical_claim": false,
+        "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+        "dataset_id": "WEARABLE_SIM_V1",
+        "engineering_only": true,
+        "participant_id": "SIM_P000102",
+        "real_wearable_claim": false,
+        "session_id": "SIM_S_FL_01_000001",
+        "simulation_seed": 20260928,
+        "simulation_version": "WEARABLE_SIM_V1",
+        "source": "SYNTHETIC_PHYSIOLOGY",
+        "virtual_participant_is_human": false
+      },
+      "seed": 20260928,
+      "session_id": "SIM_S_FL_01_000001",
+      "source_rate_hz": 360
+    },
+    {
+      "base_hr_bpm": 72.0,
+      "client_id": "SIM_FL_SITE_02",
+      "context": [
+        [
+          "VALID",
+          0.0,
+          480.0
+        ]
+      ],
+      "counts": {
+        "DEGRADED": 0,
+        "UNUSABLE": 2,
+        "VALID": 91,
+        "excluded_not_valid": 2,
+        "excluded_valid_but_incomplete": 0,
+        "source_records": 172656,
+        "synthetic_negative": 72,
+        "synthetic_positive": 19,
+        "trainable": 91,
+        "windows_emitted": 93
+      },
+      "coverage": [
+        "long gap"
+      ],
+      "dataset_sha256": "ac986172820bfa4ff7b7c2ed5d3d6a7c001c337b315d8f2e756041d500a165b5",
+      "duration_s": 480,
+      "events": [
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 127.567
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 159.351
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 188.823
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 221.381
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 247.283
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 282.509
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 310.731
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 339.268
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 371.302
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 432.1
+        }
+      ],
+      "faults": [
+        [
+          "ECG_LONG_GAP",
+          250.0,
+          250.4
+        ]
+      ],
+      "participant_id": "SIM_P000103",
+      "provenance": {
+        "client_id": "SIM_FL_SITE_02",
+        "clinical_claim": false,
+        "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+        "dataset_id": "WEARABLE_SIM_V1",
+        "engineering_only": true,
+        "participant_id": "SIM_P000103",
+        "real_wearable_claim": false,
+        "session_id": "SIM_S_FL_02_000001",
+        "simulation_seed": 20260929,
+        "simulation_version": "WEARABLE_SIM_V1",
+        "source": "SYNTHETIC_PHYSIOLOGY",
+        "virtual_participant_is_human": false
+      },
+      "seed": 20260929,
+      "session_id": "SIM_S_FL_02_000001",
+      "source_rate_hz": 360
+    },
+    {
+      "base_hr_bpm": 75.0,
+      "client_id": "SIM_FL_SITE_03",
+      "context": [
+        [
+          "VALID",
+          0.0,
+          480.0
+        ]
+      ],
+      "counts": {
+        "DEGRADED": 0,
+        "UNUSABLE": 4,
+        "VALID": 89,
+        "excluded_not_valid": 4,
+        "excluded_valid_but_incomplete": 0,
+        "source_records": 172800,
+        "synthetic_negative": 71,
+        "synthetic_positive": 18,
+        "trainable": 89,
+        "windows_emitted": 93
+      },
+      "coverage": [
+        "sensor dropout"
+      ],
+      "dataset_sha256": "e54f4da26b973d7c281a55d779e97cbe4ab1b6478e0d8b69e16572c4aae3e498",
+      "duration_s": 480,
+      "events": [
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 37.497
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 71.32
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 98.343
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 130.798
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 253.936
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 306.804
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 343.527
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 373.433
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 431.77
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 457.243
+        }
+      ],
+      "faults": [
+        [
+          "ECG_SENSOR_DROPOUT",
+          330.0,
+          345.0
+        ]
+      ],
+      "participant_id": "SIM_P000104",
+      "provenance": {
+        "client_id": "SIM_FL_SITE_03",
+        "clinical_claim": false,
+        "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+        "dataset_id": "WEARABLE_SIM_V1",
+        "engineering_only": true,
+        "participant_id": "SIM_P000104",
+        "real_wearable_claim": false,
+        "session_id": "SIM_S_FL_03_000001",
+        "simulation_seed": 20260930,
+        "simulation_version": "WEARABLE_SIM_V1",
+        "source": "SYNTHETIC_PHYSIOLOGY",
+        "virtual_participant_is_human": false
+      },
+      "seed": 20260930,
+      "session_id": "SIM_S_FL_03_000001",
+      "source_rate_hz": 360
+    },
+    {
+      "base_hr_bpm": 78.0,
+      "client_id": "SIM_FL_SITE_04",
+      "context": [
+        [
+          "VALID",
+          0.0,
+          480.0
+        ]
+      ],
+      "counts": {
+        "DEGRADED": 0,
+        "UNUSABLE": 3,
+        "VALID": 90,
+        "excluded_not_valid": 3,
+        "excluded_valid_but_incomplete": 0,
+        "source_records": 172800,
+        "synthetic_negative": 71,
+        "synthetic_positive": 19,
+        "trainable": 90,
+        "windows_emitted": 93
+      },
+      "coverage": [
+        "clipping"
+      ],
+      "dataset_sha256": "89d34fb72f6ef1e256c67b51a9dfaba9d833f7113de8b176c612bef7e68a82ba",
+      "duration_s": 480,
+      "events": [
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 42.592
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 70.703
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 129.919
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 161.514
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 187.184
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 282.596
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 309.68
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 372.924
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 398.353
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 428.256
+        }
+      ],
+      "faults": [
+        [
+          "ECG_CLIPPING",
+          400.0,
+          410.0
+        ]
+      ],
+      "participant_id": "SIM_P000105",
+      "provenance": {
+        "client_id": "SIM_FL_SITE_04",
+        "clinical_claim": false,
+        "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+        "dataset_id": "WEARABLE_SIM_V1",
+        "engineering_only": true,
+        "participant_id": "SIM_P000105",
+        "real_wearable_claim": false,
+        "session_id": "SIM_S_FL_04_000001",
+        "simulation_seed": 20260931,
+        "simulation_version": "WEARABLE_SIM_V1",
+        "source": "SYNTHETIC_PHYSIOLOGY",
+        "virtual_participant_is_human": false
+      },
+      "seed": 20260931,
+      "session_id": "SIM_S_FL_04_000001",
+      "source_rate_hz": 360
+    },
+    {
+      "base_hr_bpm": 81.0,
+      "client_id": "SIM_FL_SITE_05",
+      "context": [
+        [
+          "VALID",
+          0.0,
+          120.0
+        ],
+        [
+          "MISSING_PPG",
+          120.0,
+          250.0
+        ],
+        [
+          "VALID",
+          250.0,
+          480.0
+        ]
+      ],
+      "counts": {
+        "DEGRADED": 0,
+        "UNUSABLE": 0,
+        "VALID": 93,
+        "excluded_not_valid": 0,
+        "excluded_valid_but_incomplete": 0,
+        "source_records": 172800,
+        "synthetic_negative": 73,
+        "synthetic_positive": 20,
+        "trainable": 93,
+        "windows_emitted": 93
+      },
+      "coverage": [
+        "missing PPG/context"
+      ],
+      "dataset_sha256": "ed97214e3542f764098d196bf81a7c19ce8deb6d69c3bb68cb6255c9c30300a2",
+      "duration_s": 480,
+      "events": [
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 40.205
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 132.317
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 157.204
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 219.983
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 248.328
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 309.564
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 342.544
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 399.955
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 433.667
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 463.374
+        }
+      ],
+      "faults": [],
+      "participant_id": "SIM_P000106",
+      "provenance": {
+        "client_id": "SIM_FL_SITE_05",
+        "clinical_claim": false,
+        "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+        "dataset_id": "WEARABLE_SIM_V1",
+        "engineering_only": true,
+        "participant_id": "SIM_P000106",
+        "real_wearable_claim": false,
+        "session_id": "SIM_S_FL_05_000001",
+        "simulation_seed": 20260932,
+        "simulation_version": "WEARABLE_SIM_V1",
+        "source": "SYNTHETIC_PHYSIOLOGY",
+        "virtual_participant_is_human": false
+      },
+      "seed": 20260932,
+      "session_id": "SIM_S_FL_05_000001",
+      "source_rate_hz": 360
+    },
+    {
+      "base_hr_bpm": 84.0,
+      "client_id": "SIM_FL_SITE_06",
+      "context": [
+        [
+          "VALID",
+          0.0,
+          100.0
+        ],
+        [
+          "INVALID_SPO2",
+          100.0,
+          200.0
+        ],
+        [
+          "VALID",
+          200.0,
+          300.0
+        ],
+        [
+          "RATE_DISAGREEMENT",
+          300.0,
+          400.0
+        ],
+        [
+          "VALID",
+          400.0,
+          480.0
+        ]
+      ],
+      "counts": {
+        "DEGRADED": 0,
+        "UNUSABLE": 0,
+        "VALID": 93,
+        "excluded_not_valid": 0,
+        "excluded_valid_but_incomplete": 0,
+        "source_records": 172800,
+        "synthetic_negative": 73,
+        "synthetic_positive": 20,
+        "trainable": 93,
+        "windows_emitted": 93
+      },
+      "coverage": [
+        "invalid SpO2/context",
+        "ECG/PPG rate disagreement"
+      ],
+      "dataset_sha256": "a1c40334c3a415d7214c92a887ea39fa4d59b863cee87539cbe0b72ca8a25081",
+      "duration_s": 480,
+      "events": [
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 42.959
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 72.922
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 103.63
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 163.319
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 189.788
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 281.196
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 373.226
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 397.715
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 430.024
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 462.752
+        }
+      ],
+      "faults": [],
+      "participant_id": "SIM_P000107",
+      "provenance": {
+        "client_id": "SIM_FL_SITE_06",
+        "clinical_claim": false,
+        "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+        "dataset_id": "WEARABLE_SIM_V1",
+        "engineering_only": true,
+        "participant_id": "SIM_P000107",
+        "real_wearable_claim": false,
+        "session_id": "SIM_S_FL_06_000001",
+        "simulation_seed": 20260933,
+        "simulation_version": "WEARABLE_SIM_V1",
+        "source": "SYNTHETIC_PHYSIOLOGY",
+        "virtual_participant_is_human": false
+      },
+      "seed": 20260933,
+      "session_id": "SIM_S_FL_06_000001",
+      "source_rate_hz": 360
+    },
+    {
+      "base_hr_bpm": 87.0,
+      "client_id": "SIM_FL_SITE_07",
+      "context": [
+        [
+          "VALID",
+          0.0,
+          120.0
+        ],
+        [
+          "MISSING_PPG",
+          120.0,
+          170.0
+        ],
+        [
+          "INVALID_SPO2",
+          170.0,
+          220.0
+        ],
+        [
+          "VALID",
+          220.0,
+          300.0
+        ],
+        [
+          "RATE_DISAGREEMENT",
+          300.0,
+          360.0
+        ],
+        [
+          "VALID",
+          360.0,
+          480.0
+        ]
+      ],
+      "counts": {
+        "DEGRADED": 2,
+        "UNUSABLE": 8,
+        "VALID": 83,
+        "excluded_not_valid": 10,
+        "excluded_valid_but_incomplete": 0,
+        "source_records": 172627,
+        "synthetic_negative": 69,
+        "synthetic_positive": 14,
+        "trainable": 83,
+        "windows_emitted": 93
+      },
+      "coverage": [
+        "mixed fault/context session",
+        "short gap",
+        "long gap",
+        "sensor dropout",
+        "clipping",
+        "missing PPG/context",
+        "invalid SpO2/context",
+        "ECG/PPG rate disagreement"
+      ],
+      "dataset_sha256": "9dbe85276d96f4e2487d2cbac74093bc33c90483281fe217ae0b114403aa5790",
+      "duration_s": 480,
+      "events": [
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 39.682
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 67.999
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 97.122
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 127.306
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 216.386
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 251.595
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 308.184
+        },
+        {
+          "kind": "F-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 337.364
+        },
+        {
+          "kind": "S-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 431.409
+        },
+        {
+          "kind": "V-like SYNTHETIC / ENGINEERING EVENT",
+          "time_s": 457.637
+        }
+      ],
+      "faults": [
+        [
+          "ECG_SHORT_GAP",
+          100.0,
+          100.08
+        ],
+        [
+          "ECG_LONG_GAP",
+          250.0,
+          250.4
+        ],
+        [
+          "ECG_SENSOR_DROPOUT",
+          330.0,
+          340.0
+        ],
+        [
+          "ECG_CLIPPING",
+          420.0,
+          426.0
+        ]
+      ],
+      "participant_id": "SIM_P000108",
+      "provenance": {
+        "client_id": "SIM_FL_SITE_07",
+        "clinical_claim": false,
+        "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+        "dataset_id": "WEARABLE_SIM_V1",
+        "engineering_only": true,
+        "participant_id": "SIM_P000108",
+        "real_wearable_claim": false,
+        "session_id": "SIM_S_FL_07_000001",
+        "simulation_seed": 20260934,
+        "simulation_version": "WEARABLE_SIM_V1",
+        "source": "SYNTHETIC_PHYSIOLOGY",
+        "virtual_participant_is_human": false
+      },
+      "seed": 20260934,
+      "session_id": "SIM_S_FL_07_000001",
+      "source_rate_hz": 360
+    }
+  ],
+  "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+  "label_contract": "WEARABLE_SIM_EVENT_WINDOW_V1"
+}

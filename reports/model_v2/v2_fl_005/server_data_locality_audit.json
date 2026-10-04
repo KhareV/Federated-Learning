@@ -1,0 +1,17 @@
+{
+  "PPG_visible": false,
+  "SimulationTruth_visible": false,
+  "SpO2_streams_visible": false,
+  "clear_model_updates_visible_on_plain_fedavg_path": true,
+  "forbidden_hits": [],
+  "labels_visible": false,
+  "minibatches_visible": false,
+  "observed_records_visible": false,
+  "plain_fedavg_update_privacy_claimed": false,
+  "raw_ECG_visible": false,
+  "server_receives": [
+    "update envelopes (identity metadata, hashes, example counts)",
+    "model-state deltas"
+  ],
+  "status": "PASS"
+}

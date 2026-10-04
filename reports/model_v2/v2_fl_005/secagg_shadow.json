@@ -1,0 +1,39 @@
+{
+  "compat_id": "WEARABLE_SIM_FL_SECAGG_COMPAT_V1",
+  "masked_vectors_visible": 8,
+  "maximum_absolute_difference": 6.348358397662013e-06,
+  "plain_clear_update_count": 8,
+  "preflight": {
+    "coordinates_at_or_beyond_boundary": 0,
+    "coordinates_outside_range": 0,
+    "examples_seen": {
+      "SIM_FL_SITE_00": 93,
+      "SIM_FL_SITE_01": 91,
+      "SIM_FL_SITE_02": 91,
+      "SIM_FL_SITE_03": 89,
+      "SIM_FL_SITE_04": 90,
+      "SIM_FL_SITE_05": 93,
+      "SIM_FL_SITE_06": 93,
+      "SIM_FL_SITE_07": 83
+    },
+    "floating_coordinates_per_client": 58273,
+    "global_maximum": 1.0801843404769897,
+    "global_minimum": -0.25967857241630554,
+    "max_examples": 93,
+    "max_weight": 256.0,
+    "max_weight_rule_input_matches_cohort": true,
+    "nonfinite_count": 0,
+    "weight_clipping_possible": false,
+    "weight_headroom_ratio": 2.752688172043011,
+    "weights_below_max_weight": true
+  },
+  "protected_aggregate_available": true,
+  "protected_clear_update_count": 0,
+  "relative_L2_difference": 1.3513456498808712e-05,
+  "stage_calls": 4,
+  "status": "PASS",
+  "tolerance": {
+    "maximum_absolute_parameter_difference": 0.0001,
+    "relative_l2_difference": 0.0001
+  }
+}

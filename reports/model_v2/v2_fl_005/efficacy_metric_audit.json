@@ -1,0 +1,15 @@
+{
+  "efficacy_metrics_computed": false,
+  "forbidden_metric_keys_found": [],
+  "permitted_diagnostics": [
+    "finite local loss",
+    "update norm",
+    "state hash",
+    "examples processed",
+    "tensor count",
+    "payload bytes",
+    "round completion",
+    "finite-logit smoke count"
+  ],
+  "status": "PASS"
+}
