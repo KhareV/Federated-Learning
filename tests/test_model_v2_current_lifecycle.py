@@ -2,8 +2,9 @@
 no 'in {...}' relaxation. This is the single test that must be updated at each phase transition
 (older phase-specific tests only verify forward-compatible, non-regressing facts).
 
-Current state: V2-FL-001/002/003, V2-FL-EVAL-001, V2-FL-004 and V2-FL-005 PASS (V2FLG0/1/2, V2FLEG0,
-V2FLG3 and V2FLG4 PASS); V2-014 and V2G13 NOT_STARTED; V2-005 keeps its historical
+Current state: V2-FL-001/002/003, V2-FL-EVAL-001, V2-FL-004, V2-FL-005 (V2FLG0/1/2, V2FLEG0,
+V2FLG3, V2FLG4 PASS) and V2-014 (V2G13) PASS: clean-clone reproducibility only; MODEL_V1 stays the
+operational default and no release/default decision exists yet. V2-005 keeps its historical
 SKIPPED_BY_PROTOCOL semantics."""
 
 from __future__ import annotations
@@ -17,12 +18,12 @@ EXPECTED_TASKS = {
     "V2-001": "PASS", "V2-002": "PASS", "V2-003": "PASS", "V2-004": "PASS",
     "V2-005": "SKIPPED_BY_PROTOCOL", "V2-006": "PASS", "V2-007": "PASS", "V2-008": "PASS",
     "V2-009": "PASS", "V2-010": "PASS", "V2-011": "PASS", "V2-012": "PASS", "V2-013": "PASS",
-    "V2-014": "NOT_STARTED",
+    "V2-014": "PASS",
     "V2-FL-001": "PASS", "V2-FL-002": "PASS", "V2-FL-003": "PASS",
     "V2-FL-EVAL-001": "PASS", "V2-FL-004": "PASS", "V2-FL-005": "PASS",
 }
 EXPECTED_GATES = {
-    **{f"V2G{n}": "PASS" for n in range(13)}, "V2G13": "NOT_STARTED",
+    **{f"V2G{n}": "PASS" for n in range(13)}, "V2G13": "PASS",
     "V2FLG0": "PASS", "V2FLG1": "PASS", "V2FLG2": "PASS", "V2FLEG0": "PASS",
     "V2FLG3": "PASS", "V2FLG4": "PASS",
 }
@@ -47,6 +48,7 @@ EXPECTED_COMPONENTS = {
     "VIRTUAL_FL_CLIENT_SOURCE_V1": "FROZEN_INTERFACE_CONTRACT",
     "WEARABLE_SIM_FL_SECAGG_COMPAT_V1": "FROZEN_ENGINEERING_COMPATIBILITY",
     "MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1": "FROZEN_REPRO_PROTOCOL",
+    "MODEL_V2_COMPLETE_REPRO_V1": "FROZEN_REPRODUCIBILITY_EVIDENCE",
 }
 
 
@@ -81,8 +83,6 @@ def test_no_unknown_status_vocabulary() -> None:
 def test_next_phases_are_exactly_not_started_and_gate_blocking_is_consistent() -> None:
     tasks = {r["task_id"]: r for r in _rows("task")}
     gates = {r["gate_id"]: r for r in _rows("gate")}
-    for later in ("V2-014",):
-        assert tasks[later]["status"] == "NOT_STARTED"
     assert gates["V2FLG2"]["blocks_tasks"] == "V2-FL-EVAL-001"
     assert gates["V2FLEG0"]["blocks_tasks"] == "V2-FL-004"
     assert tasks["V2-FL-EVAL-001"]["prerequisites"] == "V2-FL-003"

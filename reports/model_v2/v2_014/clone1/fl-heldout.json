@@ -1,0 +1,26 @@
+{
+  "generated_untracked_in_clone": [
+    "reports/model_v2/v2_fl_eval_001/verification/v2_014_1791155047",
+    "reports/model_v2/v2_fl_eval_001/verification/reproduction_v2_014_1791155047.json"
+  ],
+  "inference_rerun": false,
+  "one_shot_guards": {
+    "V2_FL_INCART_ACCESS_V1": "COMPLETED",
+    "V2_FL_INTERNAL_TEST_ACCESS_V1": "COMPLETED"
+  },
+  "report": {
+    "all_identical": true,
+    "checkpoints_loaded": false,
+    "files_identical": {
+      "incart_statistics.json": true,
+      "internal_test_statistics.json": true,
+      "shift_tables.json": true,
+      "stats_inputs.json": true
+    },
+    "run_label": "v2_014_1791155047",
+    "source_data_opened": false,
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "verifier": "scripts.verify_v2_fl_eval_stats (prediction tables only)"
+}

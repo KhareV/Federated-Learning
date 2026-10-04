@@ -1,0 +1,10 @@
+{
+  "keys": {
+    "checkpoint_sha256": true,
+    "fixed_vector_logits": true,
+    "state_digest_sha256": true
+  },
+  "run_1": "model_v2_p1",
+  "run_2": "model_v2_p2",
+  "status": "PASS"
+}

@@ -1,0 +1,26 @@
+{
+  "claim": "reproducibility verification only; no new scientific performance evidence; MODEL_V1 remains the operational default",
+  "clone1_evidence_manifest_sha256": "8f81f769186e0396593e8bde91b41530331657b4288979d49255f22953b73e54",
+  "clone1_reproducibility_manifest_sha256": "91ed1ddc8e549c88e32522ccacda90245bc620b3b8bc7ea46b1f657ea17bae20",
+  "clone1_target_method_commit": "daf905306620cbb01f04e644809ccdb2e684b4a8",
+  "created_by": "result transition (clone-1 evidence imported via scripts/import_v2_014_evidence.py)",
+  "gate": "V2G13",
+  "hash_bound_values": {
+    "FL_INIT_V2_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+    "checkpoint_inventory_sha256": "ccc72cbcb7b07cb7c8053fb8af3fadc1ce082941ad5f810b181031f167f09e95",
+    "component_lock_inventory_sha256": "f9901b14476d6abbbb207562b723a3246b06f2e07b282085f4fab9bf1435e489",
+    "gateway_canonical_sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+    "package_lock_sha256": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae",
+    "prediction_table_inventory_sha256": "95c8a0ba68e67b9cc4490b2b28707dfc3eac29791daff193d3d06edea2b1ef64",
+    "python_test_node_list_sha256": "ba72b4520a62a9d86bfd9b7079e7ebe210e4fc58a75ecb9f84d5664ed98c5dbe",
+    "requirements_lock_sha256": "0d4a0561bfadf89157b9f6f6dfbfa87e885aca2815a45a442e04a98d662f2a0e",
+    "v2_fl_005_cohort_manifest_sha256": "ac7a207577394ca5c434b2d8a87989c6eaa77367826fcf13c47d54d8cd03e378",
+    "v2_fl_005_final_state_sha256": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "v2_fl_005_replay_digest": "e234b755f1d90eb9bc3d9ae4d437904d32b6e453dc476187238191cf409a352e"
+  },
+  "lock_id": "MODEL_V2_COMPLETE_REPRO_V1",
+  "owner_task": "V2-014",
+  "protocol_lock": "artifacts/MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1.lock.json",
+  "protocol_lock_sha256": "1466e0e6176ff1d19839a2bfbef22dbe53ee979fc30215beb4292b4bed708473",
+  "status": "FROZEN_REPRODUCIBILITY_EVIDENCE"
+}

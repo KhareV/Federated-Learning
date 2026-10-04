@@ -1,0 +1,25 @@
+{
+  "all_four_identical": true,
+  "api_model": "API_RUNTIME_V2_1",
+  "digest_matches_expected_constant": true,
+  "digests": {
+    "run_1_direct_http": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+    "run_1_frontend_path": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+    "run_2_direct_http": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+    "run_2_frontend_path": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e"
+  },
+  "digests_equal_frozen": true,
+  "flatline_http_422": 6,
+  "flatline_windows": 6,
+  "http_status_counts": {
+    "200": 11,
+    "422": 6
+  },
+  "kind": "flatline",
+  "lock_flatline_digest": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+  "model_inference_suppressed": true,
+  "real_waveform_dataset_used": false,
+  "replay_status": "PASS",
+  "status": "PASS",
+  "window_count": 17
+}

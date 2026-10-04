@@ -1,0 +1,512 @@
+{
+  "component_count": 28,
+  "component_lock_inventory_sha256": "f9901b14476d6abbbb207562b723a3246b06f2e07b282085f4fab9bf1435e489",
+  "components": [
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "MODEL_V2_FINAL",
+      "error": null,
+      "lock_path": "checkpoints/MODEL_V2_FINAL.manifest.json",
+      "lock_sha256": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "result": "PASS",
+      "verification": "PASS",
+      "verifier": "MODEL_V2_FINAL"
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "CAL_V2",
+      "error": null,
+      "lock_path": "artifacts/CAL_V2.json",
+      "lock_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "result": "PASS",
+      "verification": "PASS",
+      "verifier": "CAL_V2"
+    },
+    {
+      "bound_artifacts": {
+        "bound": 42,
+        "data_gated": [
+          "data/raw/nstdb/1.0.0/bw.dat",
+          "data/raw/nstdb/1.0.0/em.dat",
+          "data/raw/nstdb/1.0.0/ma.dat"
+        ],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 39
+      },
+      "component": "EXPLAINABILITY_V2",
+      "lock_path": "artifacts/EXPLAINABILITY_V2_METHOD.lock.json",
+      "lock_sha256": "774a78148ac2a0c4ba719b0d1902c9d8ff7beb7696d4bf2f67847945b42cfa61",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_EXPLAINABILITY",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 12,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 12
+      },
+      "component": "GATEWAY_ARTIFACT_V2",
+      "error": null,
+      "lock_path": "artifacts/deployment/GATEWAY_ARTIFACT_V2.manifest.json",
+      "lock_sha256": "7de9190366ba54b454ae3edbc4e66ce16584431050f0d22a96e3cab9c3218edd",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_RESEARCH_GATEWAY",
+      "result": "PASS",
+      "verification": "PASS",
+      "verifier": "GATEWAY_ARTIFACT_V2"
+    },
+    {
+      "bound_artifacts": {
+        "bound": 34,
+        "data_gated": [],
+        "drift": [
+          "simulation/stream_runtime_v2013.py"
+        ],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 33
+      },
+      "component": "API_RUNTIME_V2",
+      "lock_path": "artifacts/API_RUNTIME_V2.lock.json",
+      "lock_sha256": "e126934e82e177e6d7605f50974f1d69a30372cb2ea1368103e42ce509e5e59a",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_RESEARCH_RUNTIME",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 45,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 45
+      },
+      "component": "API_RUNTIME_V2_1",
+      "error": null,
+      "lock_path": "artifacts/API_RUNTIME_V2_1.lock.json",
+      "lock_sha256": "25ee35be7855366ffee023fb72b93e3c2d25b2dd3a7355bc60228b69b42c168b",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_RESEARCH_RUNTIME",
+      "result": "PASS",
+      "verification": "PASS",
+      "verifier": "API_RUNTIME_V2_1"
+    },
+    {
+      "bound_artifacts": {
+        "bound": 23,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 23
+      },
+      "component": "DASHBOARD_UI_V1_4",
+      "error": null,
+      "lock_path": "artifacts/DASHBOARD_UI_V1_4.lock.json",
+      "lock_sha256": "fe3d4a1544e903e0da66c50df96f713865027f9999fc2a79d411701e4d7acc47",
+      "registry": "artifact_lock",
+      "registry_status": "FROZEN_ENGINEERING_INTERFACE",
+      "result": "PASS",
+      "verification": "PASS",
+      "verifier": "DASHBOARD_UI_V1_4"
+    },
+    {
+      "bound_artifacts": {
+        "bound": 38,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 38
+      },
+      "component": "E2E_REPLAY_SOFTWARE_V1_3",
+      "error": null,
+      "lock_path": "artifacts/E2E_REPLAY_SOFTWARE_V1_3.lock.json",
+      "lock_sha256": "0d27e917212e588d15bd32138ef43f05f00fe15bdb8b343d21c8c2e6e5422d44",
+      "registry": "artifact_lock",
+      "registry_status": "FROZEN_ENGINEERING_INTEGRATION",
+      "result": "PASS",
+      "verification": "PASS",
+      "verifier": "E2E_REPLAY_SOFTWARE_V1_3"
+    },
+    {
+      "bound_artifacts": {
+        "bound": 14,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 14
+      },
+      "component": "MODEL_V2_FL_PROTOCOL_V1",
+      "lock_path": "manifests/model_v2/MODEL_V2_FL_PROTOCOL_V1.lock.json",
+      "lock_sha256": "7da5a240eee34db6f889c73b694783cb78389968b9d1cade882ee07fe7e0c5af",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_BEFORE_FIRST_V2_FL_OUTCOME",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 2,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 2
+      },
+      "component": "MODEL_V2_FL_PROTOCOL_V2",
+      "lock_path": "manifests/model_v2/MODEL_V2_FL_PROTOCOL_V2.lock.json",
+      "lock_sha256": "a72523a5d2ff022130390f153748a4fe84c6e726328a5e4f2b30b906232d9cea",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_RESEARCH_PROTOCOL_SUCCESSOR",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "FL_INIT_V2",
+      "lock_path": "configs/model_v2/fl_init_v2.yaml",
+      "lock_sha256": "0efaad5da0c5d8eccb19d9d357eec2b3e9eb8e5e58cd1f152cb86b4f60f51ba8",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "FL_IID_MODEL_V2_V1",
+      "lock_path": "configs/model_v2/fl_iid_model_v2_v1.yaml",
+      "lock_sha256": "ff199530c6dab4174b7f9417b4cf1cab4ea79b72a06a19864e57309ba2ea8f56",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "FL_NON_IID_MODEL_V2_V1",
+      "lock_path": "configs/model_v2/fl_non_iid_model_v2_v1.yaml",
+      "lock_sha256": "3901b0ebd8be3b8009fb8a8302e4f6409142f7f78d583f21d1c77a57bfc6977b",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "FEDPROX_METHOD_V2",
+      "lock_path": "configs/model_v2/fedprox_v2.yaml",
+      "lock_sha256": "daf03fe23730773056ee0c28e8cfca9f3ec4676c5eb1cec42a3f2c1b81cef851",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "FEDPROX_MU_V2",
+      "lock_path": "artifacts/FEDPROX_MU_V2.lock.json",
+      "lock_sha256": "a95e44cdef9295a68c217138a02eada69eda86f701eb4c87dd0f67cd7c7ed023",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_ENGINEERING_METHOD",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 24,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 24
+      },
+      "component": "V2_FL_EVAL_PROTOCOL_V1",
+      "lock_path": "manifests/model_v2/V2_FL_EVAL_PROTOCOL_V1.lock.json",
+      "lock_sha256": "fd5ed5ee8a1560fe38e9b146a8eb03ab978faaf28e44ce3e205fa213dedcac50",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "V2_FL_TEST_FAMILY_V1",
+      "lock_path": "manifests/model_v2/V2_FL_TEST_FAMILY_V1.lock.json",
+      "lock_sha256": "e64a5147f0278eb61c45166162632e273ad9726de229afcc364f0e1271e4cc64",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "V2_FL_INTERNAL_TEST_PREDICTION_FAMILY_V1",
+      "lock_path": "artifacts/V2_FL_INTERNAL_TEST_ACCESS_V1.json",
+      "lock_sha256": "fb277938943a6b5d2b14e8e8d5921ac4fcd6b2db7bf18a3e7cb6224cce31b9bd",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "V2_FL_INCART_PREDICTION_FAMILY_V1",
+      "lock_path": "artifacts/V2_FL_INCART_ACCESS_V1.json",
+      "lock_sha256": "123044121aa9a8767be0e898e853ddb7470af2fbd3a995f638a75caac608be7f",
+      "registry": "model_v2",
+      "registry_status": "FROZEN",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "MODEL_V2_LIFECYCLE_TEST_POLICY_V1",
+      "lock_path": "configs/model_v2/lifecycle_test_policy_v1.yaml",
+      "lock_sha256": "b4a7083022b44695dda853d04ca411ccba146308aa733902e8e512e84d0cf780",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_CONTROL_POLICY",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 27,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 27
+      },
+      "component": "SECAGG_METHOD_V2",
+      "lock_path": "artifacts/SECAGG_METHOD_V2.lock.json",
+      "lock_sha256": "d0d3cbb96d142d2f5ea63c8692fe587275aeb938c16d23ae1dbe66f6bfa7115f",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_PRE_RESULT_METHOD",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "SECAGG_CONFIG_V2",
+      "lock_path": "configs/model_v2/secagg_v2.yaml",
+      "lock_sha256": "2742ff3a4f4fc83935148ec6d23f1ab4e0894a2f48ea37ead4f0c5138ec20991",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_RESEARCH_PRIVACY_PROTOCOL",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "WEARABLE_SIM_FL_COHORT_V1",
+      "lock_path": "manifests/model_v2/WEARABLE_SIM_FL_COHORT_V1.json",
+      "lock_sha256": "e586b8cb425dfcfb9c5c72222b174477519445f2cc2529a2d11a2ec6e55803dc",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_ENGINEERING_COHORT",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 38,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 38
+      },
+      "component": "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+      "lock_path": "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json",
+      "lock_sha256": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_ENGINEERING_PROTOCOL",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "WEARABLE_SIM_FL_SYSTEM_REPLAY_V1",
+      "lock_path": "reports/model_v2/v2_fl_005/semantic_replay_digest.json",
+      "lock_sha256": "108b9cc8ff87c8d34a095d55f4ca3a2813b697b556785243726d88064ee89d43",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_ENGINEERING_REPLAY",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "VIRTUAL_FL_CLIENT_SOURCE_V1",
+      "lock_path": "federated/virtual_client_source_v1.py",
+      "lock_sha256": "cc469d5a16d8500490f497ab32dc59d2795dc310692caa2cb0974322273e4f37",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_INTERFACE_CONTRACT",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 0,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 0
+      },
+      "component": "WEARABLE_SIM_FL_SECAGG_COMPAT_V1",
+      "lock_path": "configs/model_v2/wearable_sim_fl_secagg_compat_v1.yaml",
+      "lock_sha256": "214e3baf39f734f9b051e4cf7ef761b8cf2e333ea39b117db12ca404679c6c24",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_ENGINEERING_COMPATIBILITY",
+      "verification": "PASS",
+      "verifier": null
+    },
+    {
+      "bound_artifacts": {
+        "bound": 31,
+        "data_gated": [],
+        "drift": [],
+        "missing": [],
+        "unexpected_drift": [],
+        "verified": 31
+      },
+      "component": "MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1",
+      "lock_path": "artifacts/MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1.lock.json",
+      "lock_sha256": "1466e0e6176ff1d19839a2bfbef22dbe53ee979fc30215beb4292b4bed708473",
+      "registry": "model_v2",
+      "registry_status": "FROZEN_REPRO_PROTOCOL",
+      "verification": "PASS",
+      "verifier": null
+    }
+  ],
+  "data_gated_bound_files_not_verified_in_clean_clone": [
+    "data/raw/nstdb/1.0.0/bw.dat",
+    "data/raw/nstdb/1.0.0/em.dat",
+    "data/raw/nstdb/1.0.0/ma.dat"
+  ],
+  "failures": [],
+  "status": "PASS",
+  "superseded_expected_drift": {
+    "API_RUNTIME_V2": [
+      "simulation/stream_runtime_v2013.py"
+    ]
+  }
+}

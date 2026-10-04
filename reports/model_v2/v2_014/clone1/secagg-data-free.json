@@ -1,0 +1,14 @@
+{
+  "SECAGG_CONFIG_V2_inherits_historical_parameters": true,
+  "flower_api_audit_status": "PASS",
+  "flower_version": null,
+  "known_vector": {
+    "maximum_absolute_difference": 5.849498385668284e-09,
+    "relative_L2_difference": 1.2214413505235399e-08
+  },
+  "note": "data-free checks only; the real V2-FL-004 TRAIN round is NOT reconstructed",
+  "protected_clear_update_count": 0,
+  "real_train_round_reconstructed": false,
+  "stage_calls": 4,
+  "status": "PASS"
+}

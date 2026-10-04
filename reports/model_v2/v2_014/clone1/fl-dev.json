@@ -1,0 +1,287 @@
+{
+  "fedprox_mu_selection": {
+    "lock_selected_mu": 0.1,
+    "recomputed_twice": [
+      0.1,
+      0.1
+    ],
+    "status": "PASS"
+  },
+  "matched_comparisons": {
+    "combined": {
+      "best_round_shift": 6,
+      "delta_AUROC": -0.006496391713828542,
+      "delta_best_AUPRC": -0.019996490869773842,
+      "delta_patient_macro_F1": 0.09254407664260095,
+      "matches_frozen_comparison": true
+    },
+    "feature": {
+      "best_round_shift": -7,
+      "delta_AUROC": -0.005110731966623261,
+      "delta_best_AUPRC": -0.017619084159584686,
+      "delta_patient_macro_F1": -0.008284395503959652,
+      "matches_frozen_comparison": true
+    },
+    "iid": {
+      "best_round_shift": 11,
+      "delta_AUROC": 0.011103399950600945,
+      "delta_best_AUPRC": 0.012315523383412907,
+      "delta_patient_macro_F1": 0.10932625922731676,
+      "matches_frozen_comparison": true
+    },
+    "quantity": {
+      "best_round_shift": 1,
+      "delta_AUROC": -0.03497070952222425,
+      "delta_best_AUPRC": -0.05483339009221888,
+      "delta_patient_macro_F1": -0.07848991311356424,
+      "matches_frozen_comparison": true
+    }
+  },
+  "model_inference_run": false,
+  "real_waveforms_opened": false,
+  "runs": [
+    {
+      "bce_delta": 2.668367304892172e-09,
+      "best_round": 38,
+      "best_validation_AUPRC": 0.8669476403992936,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-001/iid",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 1.308422764578765e-08,
+      "best_round": 50,
+      "best_validation_AUPRC": 0.8066305693453126,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-002/label",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 2.42353359602987e-11,
+      "best_round": 47,
+      "best_validation_AUPRC": 0.8873612543728578,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-002/quantity",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 6.4203755645309e-09,
+      "best_round": 50,
+      "best_validation_AUPRC": 0.8501518854463859,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-002/feature",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 8.453749422709933e-09,
+      "best_round": 42,
+      "best_validation_AUPRC": 0.8202489560000589,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-002/combined",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 1.3893137196241412e-09,
+      "best_round": 39,
+      "best_validation_AUPRC": 0.818285016316268,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-003/candidate/mu_0p001",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 2.407065036180711e-08,
+      "best_round": 41,
+      "best_validation_AUPRC": 0.828471478763645,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-003/candidate/mu_0p01",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 2.032680468389003e-09,
+      "best_round": 41,
+      "best_validation_AUPRC": 0.8199390633130239,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-003/candidate/mu_0p1",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 1.4832525208063885e-09,
+      "best_round": 49,
+      "best_validation_AUPRC": 0.8792631637827065,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-003/transfer/iid",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 5.164650485056654e-09,
+      "best_round": 48,
+      "best_validation_AUPRC": 0.832527864280639,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-003/transfer/quantity",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 4.3385374182136616e-09,
+      "best_round": 43,
+      "best_validation_AUPRC": 0.8325328012868012,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-003/transfer/feature",
+      "status": "PASS"
+    },
+    {
+      "bce_delta": 1.4045318685873553e-08,
+      "best_round": 48,
+      "best_validation_AUPRC": 0.800252465130285,
+      "checks": {
+        "bce_reconstructs_within_1e-5": true,
+        "best_checkpoint_sha_matches": true,
+        "best_round_recomputed_equals_recorded": true,
+        "point_metrics_reconstruct": true,
+        "prediction_rows_are_best_round": true,
+        "prediction_windows_equal_recorded": true,
+        "round_0_is_FL_INIT_V2": true,
+        "round_50_AUPRC_equals_result": true,
+        "round_50_checkpoint_sha_matches": true,
+        "round_log_best_AUPRC_equals_result": true
+      },
+      "max_point_metric_delta": 0.0,
+      "run": "V2-FL-003/transfer/combined",
+      "status": "PASS"
+    }
+  ],
+  "scope": "committed round logs + committed VALIDATION prediction tables + result files",
+  "status": "PASS",
+  "training_run": false
+}
