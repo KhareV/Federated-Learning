@@ -1,0 +1,31 @@
+{
+  "client_weights": {
+    "SITE_00": 1436,
+    "SITE_01": 1435,
+    "SITE_02": 1391,
+    "SITE_03": 1080,
+    "SITE_04": 1080,
+    "SITE_05": 1080,
+    "SITE_06": 1080,
+    "SITE_07": 1078
+  },
+  "exact_match": true,
+  "expected_client_weights": {
+    "SITE_00": 1436,
+    "SITE_01": 1435,
+    "SITE_02": 1391,
+    "SITE_03": 1080,
+    "SITE_04": 1080,
+    "SITE_05": 1080,
+    "SITE_06": 1080,
+    "SITE_07": 1078
+  },
+  "expected_round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "expected_round_1_plain_state_sha256": "fb178f1ad80acdbcebffc2ccc14516157313e302f847eef4c8c17e9d2deb05fa",
+  "local_update_source": "deterministic V2-FL-001 round-1 local epochs, TRAIN only",
+  "plain_aggregate_sha256": "fb178f1ad80acdbcebffc2ccc14516157313e302f847eef4c8c17e9d2deb05fa",
+  "round_0_exact": true,
+  "round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "status": "PASS",
+  "weights_exact": true
+}

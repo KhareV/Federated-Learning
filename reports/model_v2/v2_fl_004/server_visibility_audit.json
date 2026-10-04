@@ -1,0 +1,63 @@
+{
+  "plain_clear_update_count": 8,
+  "plain_detector_positive": true,
+  "plain_reference_interface": {
+    "aggregate_visible": true,
+    "client_ids_visible": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "individual_clear_model_update_arrays_visible": 8,
+    "key_share_metadata_objects_visible": 0,
+    "masked_vectors_visible": 0,
+    "object_types": [
+      "aggregate_model_arrays",
+      "individual_clear_model_arrays"
+    ],
+    "path_id": "PLAIN_REFERENCE_V1",
+    "sensitive_fields_intentionally_not_persisted": [
+      "private_keys",
+      "raw_secret_shares",
+      "protected_clear_client_updates"
+    ],
+    "weight_count_metadata_visible": true
+  },
+  "protected_aggregate_available": true,
+  "protected_clear_update_count": 0,
+  "protected_interface": {
+    "aggregate_visible": true,
+    "client_ids_visible": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "individual_clear_model_update_arrays_visible": 0,
+    "key_share_metadata_objects_visible": 24,
+    "masked_vectors_visible": 8,
+    "object_types": [
+      "RecordDict",
+      "aggregate_model_arrays",
+      "key_share_protocol_metadata",
+      "masked_vector_bytes"
+    ],
+    "path_id": "FLOWER_SECAGGPLUS_V1",
+    "sensitive_fields_intentionally_not_persisted": [
+      "private_keys",
+      "raw_secret_shares",
+      "protected_clear_client_updates"
+    ],
+    "weight_count_metadata_visible": false
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,14 @@
+{
+  "AAMI_labels_in_server_messages": false,
+  "client_minibatches_in_server_messages": false,
+  "host_isolation_demonstrated": false,
+  "observation_scope": "instrumented Flower application message boundary only",
+  "raw_ECG_waveform_in_server_messages": false,
+  "server_application_messages": [
+    "model state",
+    "masked vectors",
+    "SecAgg+ setup/key/share metadata"
+  ],
+  "single_host_process_isolation_claim": false,
+  "status": "PASS"
+}

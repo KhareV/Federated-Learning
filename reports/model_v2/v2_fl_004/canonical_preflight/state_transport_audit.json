@@ -1,0 +1,32 @@
+{
+  "floating_entries": 77,
+  "integer_entries": 15,
+  "integer_keys": [
+    "backbone.stem_bn.num_batches_tracked",
+    "backbone.blocks.0.bn1.num_batches_tracked",
+    "backbone.blocks.0.bn2.num_batches_tracked",
+    "backbone.blocks.1.bn1.num_batches_tracked",
+    "backbone.blocks.1.bn2.num_batches_tracked",
+    "backbone.blocks.2.bn1.num_batches_tracked",
+    "backbone.blocks.2.bn2.num_batches_tracked",
+    "backbone.blocks.3.bn1.num_batches_tracked",
+    "backbone.blocks.3.bn2.num_batches_tracked",
+    "backbone.blocks.4.bn1.num_batches_tracked",
+    "backbone.blocks.4.bn2.num_batches_tracked",
+    "backbone.blocks.5.bn1.num_batches_tracked",
+    "backbone.blocks.5.bn2.num_batches_tracked",
+    "backbone.blocks.6.bn1.num_batches_tracked",
+    "backbone.blocks.6.bn2.num_batches_tracked"
+  ],
+  "integer_num_batches_tracked_policy": "server-side deterministic; not quantized",
+  "matches_expected": true,
+  "only_floating_entries_enter_secagg": true,
+  "role_counts": {
+    "floating_buffer": 30,
+    "non_floating_buffer": 15,
+    "parameter": 47
+  },
+  "status": "PASS",
+  "total_entries": 92,
+  "transport_id": "FL_STATE_TRANSPORT_V1"
+}

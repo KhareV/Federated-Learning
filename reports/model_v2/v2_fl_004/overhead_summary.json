@@ -1,0 +1,62 @@
+{
+  "accounting_boundary": "aggregation protocol only; local training excluded",
+  "application_payload_bytes": {
+    "V2_FL_001_historical_logical_model_payload_bytes": {
+      "client_to_server_per_round": 1926624,
+      "note": "logical serialized MODEL_V2 state (Flower-independent); not comparable to the Flower protobuf application payload above",
+      "server_to_client_per_round": 1926624
+    },
+    "absolute_total_overhead": 3636215,
+    "accounting_id": "FLOWER_APPLICATION_PAYLOAD_BYTES_V1",
+    "exact_network_bytes": false,
+    "exclusions": [
+      "lower-level transport framing",
+      "TCP",
+      "TLS"
+    ],
+    "plain": {
+      "accounting_id": "FLOWER_APPLICATION_PAYLOAD_BYTES_V1",
+      "client_to_server": 1962184,
+      "server_to_client": 245929,
+      "total": 2208113
+    },
+    "plain_bytes_identical_across_trials": true,
+    "protected": {
+      "client_to_server": 3840896,
+      "server_to_client": 2003432,
+      "total": 5844328
+    },
+    "protected_bytes_per_trial_distinct_values": 1,
+    "total_ratio": 2.646752226901431
+  },
+  "completion": {
+    "attempted": 10,
+    "completed": 10,
+    "failed": 0,
+    "rate": 1.0
+  },
+  "deployment_latency_claim": false,
+  "measured_trials_per_path": 10,
+  "plain_runtime": {
+    "N": 10,
+    "maximum_seconds": 0.010891375015489757,
+    "mean_seconds": 0.009200229099951685,
+    "median_seconds": 0.008919166459236294,
+    "minimum_seconds": 0.008181000011973083,
+    "p95_seconds": 0.010891375015489757,
+    "standard_deviation_seconds": 0.0008094136066031701
+  },
+  "protected_minus_plain_median_milliseconds": 203.34506253129803,
+  "protected_runtime": {
+    "N": 10,
+    "maximum_seconds": 0.31330716697266325,
+    "mean_seconds": 0.2205753623973578,
+    "median_seconds": 0.21226422899053432,
+    "minimum_seconds": 0.19914537499425933,
+    "p95_seconds": 0.31330716697266325,
+    "standard_deviation_seconds": 0.03338432977789821
+  },
+  "protected_to_plain_median_runtime_ratio": 23.798662123939046,
+  "status": "PASS",
+  "warmup_trials_per_path": 1
+}

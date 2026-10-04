@@ -1,0 +1,41 @@
+{
+  "bytes": {
+    "overhead_ratio": {
+      "V1": 2.7545983961303464,
+      "V2": 2.646752226901431
+    },
+    "plain_total": {
+      "V1": 502784,
+      "V2": 2208113,
+      "ratio": 4.3917726101069245
+    },
+    "protected_total": {
+      "V1": 1384968,
+      "V2": 5844328,
+      "ratio": 4.2198289057942135
+    }
+  },
+  "extrapolation_beyond_two_points": false,
+  "parameters": {
+    "V1": 13185,
+    "V2": 57553,
+    "ratio": 4.365036025786879
+  },
+  "runtime_comparison_status": "NON_MATCHED_DESCRIPTIVE_CONTEXT (V1 runtimes were measured in an earlier session; same host/environment not guaranteed)",
+  "runtime_median_seconds": {
+    "plain": {
+      "V1": 0.0022452705015894026,
+      "V2": 0.008919166459236294
+    },
+    "protected": {
+      "V1": 0.15309139599412447,
+      "V2": 0.21226422899053432
+    },
+    "protected_over_plain": {
+      "V1": 68.18394304194204,
+      "V2": 23.798662123939046
+    }
+  },
+  "status": "PASS",
+  "v1_source": "reports/t028/overhead_summary.json (historical frozen; MODEL_V1 not rerun)"
+}

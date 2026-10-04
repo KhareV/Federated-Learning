@@ -1,0 +1,22 @@
+{
+  "chunked_python_regression": {
+    "chunk_count": 29,
+    "chunk_size": 80,
+    "collected_equals_executed": true,
+    "collected_node_count": 2277,
+    "collected_sorted_node_list_sha256": "732fe0e0a33b961152d64d6f6efded50f90416fbfc6f0857b94b81c2b673b556",
+    "duplicates": 0,
+    "executed_unique_count": 2277,
+    "failed_chunks": 0,
+    "failed_tests": 0,
+    "missing": 0,
+    "status": "PASS",
+    "unexpected": 0
+  },
+  "ci": "never queried or triggered",
+  "exit_codes": {
+    "pip_check": 0,
+    "ruff": 0
+  },
+  "status": "PASS"
+}

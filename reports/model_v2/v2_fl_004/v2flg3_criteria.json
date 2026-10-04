@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "clipping_zero_violations": true,
+    "data_locality": true,
+    "firewall_train_only": true,
+    "flower_api_available": true,
+    "known_vector": true,
+    "lifecycle_entry_audit": true,
+    "method_immutable": true,
+    "model_v2_aggregate_within_tolerance": true,
+    "no_secret_material_persisted": true,
+    "plain_negative_control_positive": true,
+    "privacy_claim_narrow": true,
+    "protected_artifacts_unchanged": true,
+    "protected_completions_10_of_10": true,
+    "protected_zero_clear_updates": true,
+    "regression": true,
+    "round1_reconstruction_exact": true,
+    "runtime_and_bytes_reported": true,
+    "scaling_comparison": true,
+    "semantic_reproducibility": true,
+    "state_transport_92_entries": true
+  },
+  "performance_magnitude_is_a_criterion": false,
+  "status": "PASS"
+}

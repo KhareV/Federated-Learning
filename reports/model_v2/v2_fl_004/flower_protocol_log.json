@@ -1,0 +1,16 @@
+{
+  "canonical_correctness_status": "PASS",
+  "clients": 8,
+  "exceptions": [],
+  "framework_warnings": [],
+  "num_shares": 5,
+  "private_material_persisted": false,
+  "reconstruction_threshold": 4,
+  "stage_calls_per_successful_trial": 4,
+  "workflow_stages": [
+    "setup",
+    "share_keys",
+    "collect_masked_vectors",
+    "unmask"
+  ]
+}

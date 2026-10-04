@@ -1,0 +1,19 @@
+{
+  "BIDMC_accessed": false,
+  "CALIBRATION_accessed": false,
+  "INCART_accessed": false,
+  "INTERNAL_TEST_accessed": false,
+  "NSTDB_accessed": false,
+  "VALIDATION_accessed": false,
+  "WEARABLE_accessed": false,
+  "access_types": [
+    "waveform_read"
+  ],
+  "checkpoints_written": 0,
+  "ledger_rows": 5,
+  "partitions_accessed": [
+    "TRAIN"
+  ],
+  "scientific_model_fits_added": 0,
+  "status": "PASS"
+}

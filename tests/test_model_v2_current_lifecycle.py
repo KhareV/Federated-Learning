@@ -2,8 +2,8 @@
 no 'in {...}' relaxation. This is the single test that must be updated at each phase transition
 (older phase-specific tests only verify forward-compatible, non-regressing facts).
 
-Current state: V2-FL-001/002/003 and V2-FL-EVAL-001 PASS (V2FLG0/1/2 and V2FLEG0 PASS);
-V2-FL-004, V2-FL-005 and V2-014 NOT_STARTED; V2-005 keeps its historical
+Current state: V2-FL-001/002/003, V2-FL-EVAL-001 and V2-FL-004 PASS (V2FLG0/1/2, V2FLEG0 and
+V2FLG3 PASS); V2-FL-005 and V2-014 NOT_STARTED; V2-005 keeps its historical
 SKIPPED_BY_PROTOCOL semantics."""
 
 from __future__ import annotations
@@ -19,11 +19,12 @@ EXPECTED_TASKS = {
     "V2-009": "PASS", "V2-010": "PASS", "V2-011": "PASS", "V2-012": "PASS", "V2-013": "PASS",
     "V2-014": "NOT_STARTED",
     "V2-FL-001": "PASS", "V2-FL-002": "PASS", "V2-FL-003": "PASS",
-    "V2-FL-EVAL-001": "PASS", "V2-FL-004": "NOT_STARTED", "V2-FL-005": "NOT_STARTED",
+    "V2-FL-EVAL-001": "PASS", "V2-FL-004": "PASS", "V2-FL-005": "NOT_STARTED",
 }
 EXPECTED_GATES = {
     **{f"V2G{n}": "PASS" for n in range(13)}, "V2G13": "NOT_STARTED",
     "V2FLG0": "PASS", "V2FLG1": "PASS", "V2FLG2": "PASS", "V2FLEG0": "PASS",
+    "V2FLG3": "PASS",
 }
 EXPECTED_COMPONENTS = {
     "MODEL_V2_FINAL": "FROZEN", "CAL_V2": "FROZEN",
@@ -38,6 +39,8 @@ EXPECTED_COMPONENTS = {
     "V2_FL_INTERNAL_TEST_PREDICTION_FAMILY_V1": "FROZEN",
     "V2_FL_INCART_PREDICTION_FAMILY_V1": "FROZEN",
     "MODEL_V2_LIFECYCLE_TEST_POLICY_V1": "FROZEN_CONTROL_POLICY",
+    "SECAGG_CONFIG_V2": "FROZEN_RESEARCH_PRIVACY_PROTOCOL",
+    "SECAGG_METHOD_V2": "FROZEN_PRE_RESULT_METHOD",
 }
 
 
@@ -72,9 +75,10 @@ def test_no_unknown_status_vocabulary() -> None:
 def test_next_phases_are_exactly_not_started_and_gate_blocking_is_consistent() -> None:
     tasks = {r["task_id"]: r for r in _rows("task")}
     gates = {r["gate_id"]: r for r in _rows("gate")}
-    for later in ("V2-FL-004", "V2-FL-005", "V2-014"):
+    for later in ("V2-FL-005", "V2-014"):
         assert tasks[later]["status"] == "NOT_STARTED"
     assert gates["V2FLG2"]["blocks_tasks"] == "V2-FL-EVAL-001"
     assert gates["V2FLEG0"]["blocks_tasks"] == "V2-FL-004"
     assert tasks["V2-FL-EVAL-001"]["prerequisites"] == "V2-FL-003"
     assert tasks["V2-FL-004"]["prerequisites"] == "V2-FL-EVAL-001"
+    assert gates["V2FLG3"]["blocks_tasks"] == "V2-FL-005"

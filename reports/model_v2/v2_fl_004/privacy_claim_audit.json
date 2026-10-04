@@ -1,0 +1,22 @@
+{
+  "forbidden_claims_asserted": [],
+  "status": "PASS",
+  "supported_claim": "Within the configured Flower SecAgg+ controlled simulation, the protected application-level server aggregation interface does not receive an individual participating client's clear model-update array while forming the aggregate, and the protected aggregate matches the unprotected reference within the predeclared numerical tolerance.",
+  "unsupported_claims": [
+    "anonymity",
+    "differential privacy",
+    "model-inversion resistance",
+    "membership-inference resistance",
+    "malicious-client resistance",
+    "transport security",
+    "TLS guarantees",
+    "authentication",
+    "authorization",
+    "OS/process isolation",
+    "host isolation",
+    "HIPAA compliance",
+    "hospital privacy",
+    "institution-scale security",
+    "production security certification"
+  ]
+}

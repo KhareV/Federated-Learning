@@ -1,0 +1,645 @@
+{
+  "client_weights": {
+    "SITE_00": 1436,
+    "SITE_01": 1435,
+    "SITE_02": 1391,
+    "SITE_03": 1080,
+    "SITE_04": 1080,
+    "SITE_05": 1080,
+    "SITE_06": 1080,
+    "SITE_07": 1078
+  },
+  "configured_clipping_range": [
+    -8.0,
+    8.0
+  ],
+  "coordinates_at_or_beyond_boundary": 0,
+  "coordinates_outside_range": 0,
+  "floating_coordinates_per_client": 58273,
+  "floating_tensors": 77,
+  "global_maximum": 5.999361991882324,
+  "global_minimum": -2.06392765045166,
+  "max_weight": 4096.0,
+  "maximum_client_weight": 1436,
+  "nonfinite_count": 0,
+  "per_tensor": [
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.stem_conv.weight",
+      "maximum": 0.2720537483692169,
+      "minimum": -0.2663957476615906,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.stem_bn.weight",
+      "maximum": 1.0125856399536133,
+      "minimum": 0.9863600134849548,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.stem_bn.bias",
+      "maximum": 0.012584858573973179,
+      "minimum": -0.014822225086390972,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.stem_bn.running_mean",
+      "maximum": 9.926222264766693e-05,
+      "minimum": -6.84014885337092e-05,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.stem_bn.running_var",
+      "maximum": 0.9575257301330566,
+      "minimum": 0.09533041715621948,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.conv1.weight",
+      "maximum": 0.09028495848178864,
+      "minimum": -0.0898868516087532,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.bn1.weight",
+      "maximum": 1.0169185400009155,
+      "minimum": 0.9879446029663086,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.bn1.bias",
+      "maximum": 0.013613864779472351,
+      "minimum": -0.013726046308875084,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.bn1.running_mean",
+      "maximum": 0.34491175413131714,
+      "minimum": -0.40032199025154114,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.bn1.running_var",
+      "maximum": 0.5562371015548706,
+      "minimum": 0.13961553573608398,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.conv2.weight",
+      "maximum": 0.08945442736148834,
+      "minimum": -0.09110035747289658,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.bn2.weight",
+      "maximum": 1.0112470388412476,
+      "minimum": 0.9873346090316772,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.bn2.bias",
+      "maximum": 0.011686216108500957,
+      "minimum": -0.01196385733783245,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.bn2.running_mean",
+      "maximum": 0.4076966643333435,
+      "minimum": -0.3926083743572235,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.0.bn2.running_var",
+      "maximum": 0.7147184014320374,
+      "minimum": 0.16439396142959595,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.conv1.weight",
+      "maximum": 0.09083624184131622,
+      "minimum": -0.09061621874570847,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.bn1.weight",
+      "maximum": 1.0146124362945557,
+      "minimum": 0.9862450957298279,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.bn1.bias",
+      "maximum": 0.012619820423424244,
+      "minimum": -0.0149840721860528,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.bn1.running_mean",
+      "maximum": 0.5924510359764099,
+      "minimum": -0.8051638007164001,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.bn1.running_var",
+      "maximum": 0.9296215176582336,
+      "minimum": 0.2260228395462036,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.conv2.weight",
+      "maximum": 0.09276217222213745,
+      "minimum": -0.09188346564769745,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.bn2.weight",
+      "maximum": 1.012509822845459,
+      "minimum": 0.9877590537071228,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.bn2.bias",
+      "maximum": 0.012876038439571857,
+      "minimum": -0.01126371044665575,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.bn2.running_mean",
+      "maximum": 0.4475104510784149,
+      "minimum": -0.35794907808303833,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.1.bn2.running_var",
+      "maximum": 0.4705866575241089,
+      "minimum": 0.16839653253555298,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.conv1.weight",
+      "maximum": 0.09318825602531433,
+      "minimum": -0.09404098242521286,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.bn1.weight",
+      "maximum": 1.0145492553710938,
+      "minimum": 0.9863156080245972,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.bn1.bias",
+      "maximum": 0.0140394801273942,
+      "minimum": -0.015202533453702927,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.bn1.running_mean",
+      "maximum": 0.8681014776229858,
+      "minimum": -1.105677843093872,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.bn1.running_var",
+      "maximum": 1.3920413255691528,
+      "minimum": 0.3163755536079407,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.conv2.weight",
+      "maximum": 0.09249873459339142,
+      "minimum": -0.09100586175918579,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.bn2.weight",
+      "maximum": 1.014000654220581,
+      "minimum": 0.9885300993919373,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.bn2.bias",
+      "maximum": 0.011856386438012123,
+      "minimum": -0.010725158266723156,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.bn2.running_mean",
+      "maximum": 0.47905823588371277,
+      "minimum": -0.43227624893188477,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.2.bn2.running_var",
+      "maximum": 0.49187350273132324,
+      "minimum": 0.15676593780517578,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.conv1.weight",
+      "maximum": 0.09429727494716644,
+      "minimum": -0.09391091763973236,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.bn1.weight",
+      "maximum": 1.0134707689285278,
+      "minimum": 0.9868176579475403,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.bn1.bias",
+      "maximum": 0.012660034000873566,
+      "minimum": -0.0147855868563056,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.bn1.running_mean",
+      "maximum": 1.2169052362442017,
+      "minimum": -1.6887484788894653,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.bn1.running_var",
+      "maximum": 2.6575582027435303,
+      "minimum": 0.4850369691848755,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.conv2.weight",
+      "maximum": 0.09133172035217285,
+      "minimum": -0.09222277253866196,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.bn2.weight",
+      "maximum": 1.0128364562988281,
+      "minimum": 0.9881418943405151,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.bn2.bias",
+      "maximum": 0.012443391606211662,
+      "minimum": -0.009599382057785988,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.bn2.running_mean",
+      "maximum": 0.49274036288261414,
+      "minimum": -0.7823324203491211,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.3.bn2.running_var",
+      "maximum": 0.47342532873153687,
+      "minimum": 0.18481773138046265,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.conv1.weight",
+      "maximum": 0.09179163724184036,
+      "minimum": -0.09263305366039276,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.bn1.weight",
+      "maximum": 1.0168757438659668,
+      "minimum": 0.9842833876609802,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.bn1.bias",
+      "maximum": 0.013778435997664928,
+      "minimum": -0.015053111128509045,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.bn1.running_mean",
+      "maximum": 1.1788330078125,
+      "minimum": -1.398626446723938,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.bn1.running_var",
+      "maximum": 3.443000316619873,
+      "minimum": 0.531501054763794,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.conv2.weight",
+      "maximum": 0.09431106597185135,
+      "minimum": -0.09168490767478943,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.bn2.weight",
+      "maximum": 1.0144836902618408,
+      "minimum": 0.9897364974021912,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.bn2.bias",
+      "maximum": 0.01640724577009678,
+      "minimum": -0.009311754256486893,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.bn2.running_mean",
+      "maximum": 0.6300545930862427,
+      "minimum": -0.7294191122055054,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.4.bn2.running_var",
+      "maximum": 0.45600318908691406,
+      "minimum": 0.1829313039779663,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.conv1.weight",
+      "maximum": 0.09245261549949646,
+      "minimum": -0.09064070880413055,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.bn1.weight",
+      "maximum": 1.015229344367981,
+      "minimum": 0.98188316822052,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.bn1.bias",
+      "maximum": 0.013808684423565865,
+      "minimum": -0.015220469795167446,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.bn1.running_mean",
+      "maximum": 1.8229053020477295,
+      "minimum": -2.06392765045166,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.bn1.running_var",
+      "maximum": 4.156186103820801,
+      "minimum": 0.7054206728935242,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.conv2.weight",
+      "maximum": 0.09202683717012405,
+      "minimum": -0.09137560427188873,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.bn2.weight",
+      "maximum": 1.0150752067565918,
+      "minimum": 0.9896823763847351,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.bn2.bias",
+      "maximum": 0.011415545828640461,
+      "minimum": -0.01037444919347763,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.bn2.running_mean",
+      "maximum": 0.5100778341293335,
+      "minimum": -0.43295392394065857,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.5.bn2.running_var",
+      "maximum": 0.7987868785858154,
+      "minimum": 0.22770994901657104,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.conv1.weight",
+      "maximum": 0.09030373394489288,
+      "minimum": -0.09150367975234985,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.bn1.weight",
+      "maximum": 1.0153346061706543,
+      "minimum": 0.9857168197631836,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.bn1.bias",
+      "maximum": 0.01535705290734768,
+      "minimum": -0.014563075266778469,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.bn1.running_mean",
+      "maximum": 2.114457845687866,
+      "minimum": -1.4000892639160156,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.bn1.running_var",
+      "maximum": 5.999361991882324,
+      "minimum": 0.7867594361305237,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.conv2.weight",
+      "maximum": 0.0918637290596962,
+      "minimum": -0.09117962419986725,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.bn2.weight",
+      "maximum": 1.0151993036270142,
+      "minimum": 0.9874181151390076,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.bn2.bias",
+      "maximum": 0.010197619907557964,
+      "minimum": -0.009477742947638035,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.bn2.running_mean",
+      "maximum": 0.5470097064971924,
+      "minimum": -0.5636089444160461,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "backbone.blocks.6.bn2.running_var",
+      "maximum": 0.6876179575920105,
+      "minimum": 0.1763870120048523,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "output.weight",
+      "maximum": 0.20120057463645935,
+      "minimum": -0.19238567352294922,
+      "nonfinite": 0,
+      "outside_range": 0
+    },
+    {
+      "at_or_beyond_boundary": 0,
+      "key": "output.bias",
+      "maximum": 0.13561268150806427,
+      "minimum": 0.1316029280424118,
+      "nonfinite": 0,
+      "outside_range": 0
+    }
+  ],
+  "status": "PASS",
+  "weight_clipping_possible": false
+}

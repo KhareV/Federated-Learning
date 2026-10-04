@@ -1,0 +1,53 @@
+{
+  "analytic_aggregate": [
+    [
+      0.4723404313814133,
+      -0.18617021492583322
+    ],
+    [
+      [
+        0.07446808447229102
+      ]
+    ]
+  ],
+  "client_count": 8,
+  "maximum_absolute_difference": 5.849498385668284e-09,
+  "plain_aggregate": [
+    [
+      0.4723404313814133,
+      -0.18617021492583322
+    ],
+    [
+      [
+        0.07446808447229102
+      ]
+    ]
+  ],
+  "protected_aggregate": [
+    [
+      0.4723404255319149,
+      -0.18617021276595744
+    ],
+    [
+      [
+        0.07446808510638298
+      ]
+    ]
+  ],
+  "relative_L2_difference": 1.2214413505235399e-08,
+  "status": "PASS",
+  "tolerance": {
+    "maximum_absolute_parameter_difference": 0.0001,
+    "relative_l2_difference": 0.0001
+  },
+  "weights": [
+    1000,
+    1050,
+    1100,
+    1150,
+    1200,
+    1250,
+    1300,
+    1350
+  ]
+}
