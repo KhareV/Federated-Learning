@@ -111,9 +111,18 @@ def main() -> None:
     status = "PASS" if all(ok(v) for v in checks.values()) else "FAIL"
     head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True,
                           check=True).stdout.strip()
+    method_commit = subprocess.run(
+        ["git", "log", "--format=%H", "-n", "1", "--",
+         "reports/model_v2/v2_fl_eval_001/method_freeze.json"], cwd=ROOT, capture_output=True,
+        text=True, check=True).stdout.strip()
+    checks["method_commit_is_ancestor_of_head"] = bool(method_commit) and subprocess.run(
+        ["git", "merge-base", "--is-ancestor", method_commit, "HEAD"], cwd=ROOT,
+        check=False).returncode == 0
+    status = "PASS" if all(ok(v) for v in checks.values()) else "FAIL"
     (OUT / "pre_access_audit.json").write_text(json.dumps({
         "audit": "V2_FL_EVAL_PRE_ACCESS_AUDIT", "head_at_audit": head,
-        "method_commit": freeze["entry_head"], "checks": checks,
+        "method_commit": method_commit, "freeze_entry_head": freeze["entry_head"],
+        "checks": checks,
         "drifted_method_files": drift,
         "failed_checks": [k for k, v in checks.items() if not ok(v)], "status": status},
         indent=2, sort_keys=True) + "\n", encoding="utf-8")

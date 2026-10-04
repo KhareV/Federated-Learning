@@ -21,7 +21,7 @@
     "V2_FEDPROX_LABEL": "6c319b53ff5310b5319487f246c523178bed0df99678614ccf59d6cc951418d9",
     "V2_FEDPROX_QUANTITY": "1323aa3f22de5d2cd2b359d912cc48e00ccb07f6c41838f7872299665edab874"
   },
-  "entry_head": "0c51b8e9def4df0d6725539d108c9a310b4d0d66",
+  "entry_head": "39f20cb165fdd1a3cad8939bbafce6ec7a4a3f47",
   "family_lock_sha256": "e64a5147f0278eb61c45166162632e273ad9726de229afcc364f0e1271e4cc64",
   "gate": "V2FLEG0",
   "held_out_inference_exists_at_method_freeze": false,
@@ -48,11 +48,11 @@
     "scripts/compute_v2_fl_eval_stats.py": "9c70da60049d51f93b3e637c8250619f4b8ed1f0bce2dab22ca7421dbcb68e9f",
     "scripts/freeze_v2_fl_eval_001_method.py": "4868970f11b28127a07ac9d57795557c4d449521192d834ec2dcafcbf6e2ebbe",
     "scripts/run_v2_fl_eval_001.py": "52931c9963f7431660c05a20a712e08bd669d7bfa1dc5260a1811168f49e5cb3",
-    "scripts/v2_fl_eval_pre_access_audit.py": "4135610d1d4b0cce47b17692df85a368d0e8497f1aa827dbf18c26a452b687a3",
+    "scripts/v2_fl_eval_pre_access_audit.py": "1e81b095c5cdab91d9838e12aec409686bba9d78dc6978857a0c64494c22252b",
     "scripts/verify_v2_fl_eval_stats.py": "1ff510af5a19e39a8f066303d6a8a39726010b6be30ce5382aa432afd40d7b4b",
     "tests/test_v2_fl_eval_method.py": "77d8de031a032b5a9a1bb517a35e610c18a50ebd375064f0c4ab29d254095205"
   },
   "owner_task": "V2-FL-EVAL-001",
-  "protocol_lock_sha256": "55d0f7e1d6f265417d74d7618b7853fa9d9f347a256f473ec18a6f2cd13e3eb3",
+  "protocol_lock_sha256": "fd5ed5ee8a1560fe38e9b146a8eb03ab978faaf28e44ce3e205fa213dedcac50",
   "status": "PASS"
 }
