@@ -1,0 +1,237 @@
+{
+  "conditions": {
+    "combined": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_sha256": "c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47",
+      "expected_site_patient_counts_sorted_as_config": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        4,
+        5,
+        6
+      ],
+      "label_variance_across_sites": 0.09639557719916383,
+      "manifest_sha256": "c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47",
+      "mapping_equals_CLIENTS_IID_V1": false,
+      "overlap_with_heldout": {
+        "CALIBRATION": [],
+        "INTERNAL_TEST": [],
+        "VALIDATION": []
+      },
+      "patient_groups": 27,
+      "positives": 3557,
+      "regenerated": false,
+      "site_patient_counts": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        4,
+        5,
+        6
+      ],
+      "site_positive_rates": [
+        0.0,
+        0.005555555555555556,
+        0.005555555555555556,
+        0.020446096654275093,
+        0.16586768935762225,
+        0.2674581005586592,
+        0.5744444444444444,
+        0.9013494648673802
+      ],
+      "site_windows": [
+        720,
+        720,
+        720,
+        1076,
+        1043,
+        1432,
+        1800,
+        2149
+      ],
+      "status": "PASS",
+      "windows": 9660
+    },
+    "feature": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_sha256": "dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291",
+      "expected_site_patient_counts_sorted_as_config": [
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "label_variance_across_sites": 0.0001621920573009423,
+      "manifest_sha256": "dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291",
+      "mapping_equals_CLIENTS_IID_V1": true,
+      "overlap_with_heldout": {
+        "CALIBRATION": [],
+        "INTERNAL_TEST": [],
+        "VALIDATION": []
+      },
+      "patient_groups": 27,
+      "positives": 3557,
+      "regenerated": false,
+      "site_patient_counts": [
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "site_positive_rates": [
+        0.366991643454039,
+        0.3623693379790941,
+        0.36304816678648455,
+        0.35185185185185186,
+        0.3675925925925926,
+        0.3990740740740741,
+        0.36666666666666664,
+        0.3719851576994434
+      ],
+      "site_windows": [
+        1436,
+        1435,
+        1391,
+        1080,
+        1080,
+        1080,
+        1080,
+        1078
+      ],
+      "status": "PASS",
+      "windows": 9660
+    },
+    "label": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_sha256": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176",
+      "expected_site_patient_counts_sorted_as_config": [
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "label_variance_across_sites": 0.1255652354229431,
+      "manifest_sha256": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176",
+      "mapping_equals_CLIENTS_IID_V1": false,
+      "overlap_with_heldout": {
+        "CALIBRATION": [],
+        "INTERNAL_TEST": [],
+        "VALIDATION": []
+      },
+      "patient_groups": 27,
+      "positives": 3557,
+      "regenerated": false,
+      "site_patient_counts": [
+        4,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "site_positive_rates": [
+        0.006944444444444444,
+        0.08426183844011143,
+        0.22652329749103942,
+        0.001851851851851852,
+        0.46944444444444444,
+        0.6148148148148148,
+        0.838139534883721,
+        0.9646182495344506
+      ],
+      "site_windows": [
+        1440,
+        1436,
+        1395,
+        1080,
+        1080,
+        1080,
+        1075,
+        1074
+      ],
+      "status": "PASS",
+      "windows": 9660
+    },
+    "quantity": {
+      "closure_exact": true,
+      "duplicates": 0,
+      "expected_sha256": "9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e",
+      "expected_site_patient_counts_sorted_as_config": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        4,
+        5,
+        6
+      ],
+      "label_variance_across_sites": 0.0004910485241032877,
+      "manifest_sha256": "9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e",
+      "mapping_equals_CLIENTS_IID_V1": false,
+      "overlap_with_heldout": {
+        "CALIBRATION": [],
+        "INTERNAL_TEST": [],
+        "VALIDATION": []
+      },
+      "patient_groups": 27,
+      "positives": 3557,
+      "regenerated": false,
+      "site_patient_counts": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        4,
+        5,
+        6
+      ],
+      "site_positive_rates": [
+        0.4013888888888889,
+        0.3625,
+        0.41818181818181815,
+        0.34916201117318435,
+        0.3656716417910448,
+        0.36666666666666664,
+        0.3630175836642087,
+        0.3585343228200371
+      ],
+      "site_windows": [
+        720,
+        720,
+        715,
+        1074,
+        1072,
+        1440,
+        1763,
+        2156
+      ],
+      "status": "PASS",
+      "windows": 9660
+    }
+  },
+  "status": "PASS"
+}

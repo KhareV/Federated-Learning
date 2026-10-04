@@ -1,0 +1,84 @@
+# FL_NON_IID_MODEL_V2_V1 -- V2-FL-002 experiment family (additive). References, never replaces,
+# configs/fl_non_iid_v1.yaml (T026), configs/fl_feature_noise_v1.yaml, FL_CONFIG_V1, FL_INIT_V2,
+# FL_STATE_TRANSPORT_V1 and MODEL_V2_FL_PROTOCOL_V1. The ONLY substitution relative to T026 is the
+# model family (MODEL_V1 -> MODEL_V2_TCN_MEAN). No client assignment is generated here.
+family_id: FL_NON_IID_MODEL_V2_V1
+task_id: V2-FL-002
+gate: V2FLG1
+reference_family: FL_NON_IID_V1
+references:
+  FL_CONFIG_V1: {path: artifacts/FL_CONFIG_V1.lock.json, sha256: 03e49b4949e900192da19d8aa0b0066281cb14ed8807d5bfdd8f196f13f3138c}
+  fl_non_iid_v1: {path: configs/fl_non_iid_v1.yaml, sha256: 7c562aa559b33ca339f84e93cd50346f39ad8885e0cd8b779b2518cbd95a73c9}
+  fl_feature_noise_v1: {path: configs/fl_feature_noise_v1.yaml, sha256: b82fb0a4570f33f04a84d0d15b7709e70ffb936ab79f67cf172a8160da6850e9}
+  FL_INIT_V2: {path: configs/model_v2/fl_init_v2.yaml, sha256: 0efaad5da0c5d8eccb19d9d357eec2b3e9eb8e5e58cd1f152cb86b4f60f51ba8}
+  MODEL_V2_FL_PROTOCOL_V1: {path: configs/model_v2/fl_protocol_v1.yaml, sha256: af6140f320089cd0abca2d90ed2ea091883d8e1a55d83dab7bfa127bc0fc65b1}
+  MODEL_V2_FL_PROTOCOL_V1_LOCK: {path: manifests/model_v2/MODEL_V2_FL_PROTOCOL_V1.lock.json, sha256: 7da5a240eee34db6f889c73b694783cb78389968b9d1cade882ee07fe7e0c5af}
+  FL_IID_MODEL_V2_V1: {path: configs/model_v2/fl_iid_model_v2_v1.yaml, sha256: ff199530c6dab4174b7f9417b4cf1cab4ea79b72a06a19864e57309ba2ea8f56}
+  FL_STATE_TRANSPORT_V1: {path: configs/fl_state_transport_v1.yaml}
+model:
+  architecture_id: MODEL_V2_TCN_MEAN
+  centralized_checkpoint_warm_start: false
+  sequential_transfer_between_conditions: false
+initialization:
+  id: FL_INIT_V2
+  seed: 20260927
+  round_0_state_sha256: 6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f
+  round_0_validation_AUPRC: 0.25769234928353735   # identical across all four conditions
+conditions:                                          # historical T026 run order
+  label:    {experiment_id: FL_LABEL_SKEW_MODEL_V2_V1,    reference_v1: FL_LABEL_SKEW_V1,    manifest: NONIID_LABEL_V1,    manifest_sha256: 753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176, feature_noise: false, site_patient_counts: [4,4,4,3,3,3,3,3]}
+  quantity: {experiment_id: FL_QUANTITY_SKEW_MODEL_V2_V1, reference_v1: FL_QUANTITY_SKEW_V1, manifest: NONIID_QUANTITY_V1, manifest_sha256: 9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e, feature_noise: false, site_patient_counts: [2,2,2,3,3,4,5,6]}
+  feature:  {experiment_id: FL_FEATURE_NOISE_MODEL_V2_V1, reference_v1: FL_FEATURE_NOISE_V1,  manifest: NONIID_FEATURE_V1,  manifest_sha256: dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291, feature_noise: true,  site_patient_counts: [4,4,4,3,3,3,3,3]}
+  combined: {experiment_id: FL_COMBINED_SKEW_MODEL_V2_V1, reference_v1: FL_COMBINED_SKEW_V1, manifest: NONIID_COMBINED_V1, manifest_sha256: c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47, feature_noise: true,  site_patient_counts: [2,2,2,3,3,4,5,6]}
+run_order: [label, quantity, feature, combined]
+v2_iid_reference:
+  experiment_id: FL_IID_MODEL_V2_V1
+  best_round: 38
+  best_validation_AUPRC: 0.8669476403992936
+  round_50_AUPRC: 0.8268321691589757
+  best_checkpoint_sha256: e90749ee700a2b7e55bd2aa6d36e9db32cd55e56ecd1cbc74959925c665d3ca5
+  round_50_checkpoint_sha256: 5a8dd347622680c8243eeb0fd1a06b52b558bcdab2f9519f03256ce08f5ff7b2
+training:                                            # identical for every condition (T025/T026)
+  clients: 8
+  clients_per_round: 8
+  rounds: 50
+  local_epochs: 1
+  batch_size: 64
+  shuffle: true
+  drop_last: false
+  num_workers: 0
+  device: cpu
+  augmentation: NONE
+optimizer: {implementation: AdamW, learning_rate: 0.001, weight_decay: 0.0001, state_policy: RESET_EACH_CLIENT_EACH_ROUND, scheduler: NONE, gradient_clipping: NONE}
+loss: {implementation: BCEWithLogitsLoss, pos_weight: 1.7157717177396683, pos_weight_source: GLOBAL_TRAIN_NEG_OVER_POS, client_specific_weights: false}
+aggregation: {id: SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1, weight: num_examples_actually_used}
+transport: {id: FL_STATE_TRANSPORT_V1}
+shuffle_seed_namespace: FL_IID_V1
+feature_noise:
+  id: FL_FEATURE_NOISE_V1
+  config: configs/fl_feature_noise_v1.yaml
+  nstdb_role: NSTDB_PURE_NOISE_TRAINING_RESOURCE   # NOT an evaluation dataset
+  validation_noise: false
+  fixed_across_rounds: true
+evaluation:
+  partition: VALIDATION            # clean; never a client, never noised
+  probability: sigmoid(raw_logit)
+  calibration: NONE                # CAL_V2 forbidden
+  metric_threshold: 0.5
+  metric_comparator: ">="
+checkpoint: {metric: validation_AUPRC, eligible_rounds: 1-50, tie_policy: EARLIEST_EXACT_MAXIMUM, also_save: round_50_diagnostic}
+fedprox_baseline_metrics:          # computed at the selected LABEL checkpoint; no FedProx here
+  macro_id: VALIDATION_PATIENT_MACRO_AUPRC_V2
+  worst_id: VALIDATION_PATIENT_WORST_AUPRC_V2
+  semantics: FEDPROX_SELECTION_SEMANTICS_V1   # validation patient groups are evaluation units, not clients
+bootstrap: {B: 2000, seed: 20260927, method: PATIENT_CLUSTER_PERCENTILE_95_V1, draws: "regenerated deterministically by evaluation.bootstrap.generate_patient_draws on the 7 VALIDATION groups (identical to V2-FL-001)", role: DEVELOPMENT_DIAGNOSTIC_ONLY}
+access:
+  TRAIN: TRAINING_ONLY
+  VALIDATION: SERVER_DEVELOPMENT_EVALUATION_ONLY
+  NSTDB: PURE_NOISE_TRAINING_RESOURCE_ONLY_VIA_FL_FEATURE_NOISE_V1
+  CALIBRATION: FORBIDDEN
+  INTERNAL_TEST: FORBIDDEN
+  INCART: FORBIDDEN
+  BIDMC: FORBIDDEN
+  WEARABLE_V1: FORBIDDEN
+  WEARABLE_SIM: FORBIDDEN_AS_EFFICACY_DATA
+pass_semantics: {performance_direction_is_irrelevant: true, retuning_after_results: FORBIDDEN}

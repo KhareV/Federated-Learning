@@ -1,0 +1,32 @@
+{
+  "artifacts": {
+    "artifacts/API_RUNTIME_V2.lock.json": "e126934e82e177e6d7605f50974f1d69a30372cb2ea1368103e42ce509e5e59a",
+    "artifacts/API_RUNTIME_V2_1.lock.json": "25ee35be7855366ffee023fb72b93e3c2d25b2dd3a7355bc60228b69b42c168b",
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "artifacts/FEDPROX_METHOD_V1.lock.json": "c89a2be46d34095748a85fff3006587c37613451f1be7346dcca3270b0085269",
+    "artifacts/FEDPROX_MU_V1.lock.json": "da5650e06506774e1cc13a68f3a325902f817850e8ac5d0b7c79e7620c3b5824",
+    "artifacts/FL_IID_METHOD_V1.lock.json": "11f254daa97da0867345e99237fc55c9ab56de8df3596e59cd5cbfd953bc9a7c",
+    "artifacts/FL_IID_V1.lock.json": "6939fa01d608fb8ff5feaffd7f76b16dbeb1e73d13086ed5785c2bc241aec13f",
+    "artifacts/GATEWAY_ARTIFACT_V1.lock.json": "cc4fc0fe7ae9f011f0db20305238a3687da36d3491d91248065f9627ca232946",
+    "artifacts/SECAGG_CONFIG_V1.lock.json": "d49d9467dd2eb8648baf0ef89823ce89825a349f462663da84ee6f6a6c9dbea5",
+    "artifacts/deployment/GATEWAY_ARTIFACT_V2.manifest.json": "7de9190366ba54b454ae3edbc4e66ce16584431050f0d22a96e3cab9c3218edd",
+    "artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "checkpoints/MODEL_V2_FINAL.pt": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "checkpoints/model_v2/v2_fl_001/FL_IID_MODEL_V2_V1_best.pt": "e90749ee700a2b7e55bd2aa6d36e9db32cd55e56ecd1cbc74959925c665d3ca5",
+    "checkpoints/model_v2/v2_fl_001/FL_IID_MODEL_V2_V1_round50.pt": "5a8dd347622680c8243eeb0fd1a06b52b558bcdab2f9519f03256ce08f5ff7b2",
+    "configs/quality_v1.yaml": "66bff78cce663b546d4aabcf3c05344c1c66ad4955c9db220c516766df93be13",
+    "manifests/labels/AAMI_SVF_MAP_V1.yaml": "6a4aaf0fb5534ae8c6ecfc523bbe939f54ba3b85ca86c73159279a018a055145",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c",
+    "manifests/splits/MITDB_SPLIT_V1.csv": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+    "preprocessing/quality.py": "2af482c1b1411da4a7efb94e68e7a6675ec3c688244873533d7bf5fd93b85da0",
+    "reports/fl_iid.json": "54fc131d1696cec648d04815d743f49cb96df6aca4c3d2deb329d07c23db3f0f",
+    "reports/model_v2/c_v2_013_quality_flatline/artifact_hashes.json": "db90a231bf384b69a84df2cb177ceb506bf1049bfd0daebaca4ac0ddb52479f0",
+    "reports/model_v2/v2_013/artifact_hashes.json": "5d773acfeb83c967fb1073c3cc925623ca82999bde9a658fed37a2dc0db0edba",
+    "reports/model_v2/v2_fl_001/artifact_hashes.json": "d886100779e827f5a6b4dde4abcbf36ee44ec376b30cd21dbf897147beb5c836",
+    "reports/model_v2/v2_fl_001/fl_iid_model_v2_result.json": "33004eccf78507a31c5870e622512f69493d03b4e14ee0dbed8013af5076e5a4",
+    "reports/t025/fl_iid_rounds.csv": "fde13b3aa5a54b4a7dffe6d0ca3bac85cf9fb07175b117beaa685268ced77e0d",
+    "reports/t026/artifact_hashes.json": "00c50f73254ac80784d1b4f99529f088b08fef1934dc99b21519f9f33df3e72b"
+  }
+}

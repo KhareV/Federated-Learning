@@ -1,0 +1,65 @@
+{
+  "bound_artifacts": {
+    "artifacts/FL_CONFIG_V1.lock.json": "03e49b4949e900192da19d8aa0b0066281cb14ed8807d5bfdd8f196f13f3138c",
+    "configs/fl_feature_noise_v1.yaml": "b82fb0a4570f33f04a84d0d15b7709e70ffb936ab79f67cf172a8160da6850e9",
+    "configs/fl_non_iid_v1.yaml": "7c562aa559b33ca339f84e93cd50346f39ad8885e0cd8b779b2518cbd95a73c9",
+    "configs/fl_state_transport_v1.yaml": "125449202aba091582add6641b60d7bc2311206e237039cf8f2ba0f5933cdbdc",
+    "configs/model_v2/fl_iid_model_v2_v1.yaml": "ff199530c6dab4174b7f9417b4cf1cab4ea79b72a06a19864e57309ba2ea8f56",
+    "configs/model_v2/fl_init_v2.yaml": "0efaad5da0c5d8eccb19d9d357eec2b3e9eb8e5e58cd1f152cb86b4f60f51ba8",
+    "configs/model_v2/fl_non_iid_model_v2_v1.yaml": "3901b0ebd8be3b8009fb8a8302e4f6409142f7f78d583f21d1c77a57bfc6977b",
+    "configs/model_v2/fl_protocol_v1.yaml": "af6140f320089cd0abca2d90ed2ea091883d8e1a55d83dab7bfa127bc0fc65b1",
+    "evaluation/bootstrap.py": "40741425e555855bbc90ae866e9716717aacc45acc2d9b83f7f1bae6e3d5b21c",
+    "federated/aggregation.py": "902a72b976399afe85a512ecb83897a80a483e6b541d5dbc544acbe654660920",
+    "federated/client_manifest.py": "24533ab78189ca2f1a1ddd097e1a1bf6e69db3f4908ae36b3b2f14fca459e047",
+    "federated/evaluation.py": "06680aa9f15577be2310f998ede5d154aa2e30e1921fa1b541b2c26f1137355d",
+    "federated/feature_noise.py": "aad5552c4c82790191835c16c13dfa1c275594926ccc36f5442d2d3a51797aee",
+    "federated/fedavg_runner.py": "bec0e47388adbe284787489be28dcc2077dc97d987a82b1a79febdde5287afd4",
+    "federated/local_training.py": "1b7924e5e6e9f99f927c835594071021b666b4e9553bbc64fff941b5d5b06ca3",
+    "federated/model_adapter.py": "1e0f8e457d32a3737e06071b862574e7c7d73e0bfb7571cbd0da9a7f42bae945",
+    "federated/model_v2_fl.py": "0554ec13d0bba870f726b936dde5567552939687c25745803634ba4e6d4fc2b1",
+    "federated/model_v2_non_iid_runner.py": "a74c2b63c70bb214b06218dd48dedd7c4c29f64dbece86d6f0543bec7c98cf7d",
+    "federated/non_iid_runner.py": "d5ba866a7426b2a33404259d518f4222f499117af6cd62235c69e70c9ad97d47",
+    "federated/validation_group_metrics.py": "a5ea5c4c170de10b6fb4f503447d55baaabc52e49d688d8c2642fd1646ed3e7b",
+    "manifests/clients/CLIENTS_IID_V1.csv": "80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a",
+    "manifests/clients/NONIID_COMBINED_V1.csv": "c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47",
+    "manifests/clients/NONIID_FEATURE_V1.csv": "dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291",
+    "manifests/clients/NONIID_LABEL_V1.csv": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176",
+    "manifests/clients/NONIID_QUANTITY_V1.csv": "9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e",
+    "manifests/model_v2/MODEL_V2_FL_PROTOCOL_V1.lock.json": "7da5a240eee34db6f889c73b694783cb78389968b9d1cade882ee07fe7e0c5af",
+    "models/model_v2_architectures.py": "2082e5eb462ff41cbbcf8cc1af5fc6a0dd8f28f991749910502fce9ea80ac3a0",
+    "scripts/finalize_v2_fl_002_evidence.py": "e93fe8b2e5e2670b00c404b8680b034ea9c401ef936660e7f8c4f95ce0c35147",
+    "scripts/freeze_v2_fl_002_method.py": "4cc96d7320b1d45a87b8c2362657ad1dd34eea2635054624378be0a94a18b54e",
+    "scripts/run_v2_fl_002.py": "70a3d58edf38187a811a14af01584fa4c7004404a744fcd2b1c80961b606e5d4",
+    "scripts/verify_v2_fl_002_replay.py": "0af8171a16d306d879b200d4d5844646270f76d33e6be7304f34c282c8e3fb3d",
+    "tests/test_v2_fl_002_method.py": "ec7d09bca3f3079f7f68b909ba8253aa606c017b2ab99fc9f275be54856d0961"
+  },
+  "change_control": "Any change requires a successor; no retuning after results.",
+  "conditions": {
+    "combined": {
+      "experiment_id": "FL_COMBINED_SKEW_MODEL_V2_V1",
+      "manifest_sha256": "c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47"
+    },
+    "feature": {
+      "experiment_id": "FL_FEATURE_NOISE_MODEL_V2_V1",
+      "manifest_sha256": "dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291"
+    },
+    "label": {
+      "experiment_id": "FL_LABEL_SKEW_MODEL_V2_V1",
+      "manifest_sha256": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176"
+    },
+    "quantity": {
+      "experiment_id": "FL_QUANTITY_SKEW_MODEL_V2_V1",
+      "manifest_sha256": "9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e"
+    }
+  },
+  "gate": "V2FLG1",
+  "lock_id": "FL_NON_IID_MODEL_V2_V1",
+  "owner_task": "V2-FL-002",
+  "run_order": [
+    "label",
+    "quantity",
+    "feature",
+    "combined"
+  ],
+  "status": "FROZEN_BEFORE_FIRST_V2_NON_IID_OUTCOME"
+}

@@ -48,10 +48,10 @@ def test_v2_task_registry_is_a_separate_namespace() -> None:
 
 def test_v2_gate_registry_is_a_separate_namespace() -> None:
     rows = _rows(ROOT / "manifests/model_v2/gate_registry_v1.csv")
-    assert len(rows) == 15  # V2G0..V2G13 plus the additive federated gate V2FLG0
+    assert len(rows) == 16  # V2G0..V2G13 plus the additive federated gates V2FLG0, V2FLG1
     assert all(row["gate_id"].startswith("V2G") or row["gate_id"].startswith("V2FLG")
                for row in rows)
-    assert {row["gate_id"] for row in rows} == {f"V2G{n}" for n in range(14)} | {"V2FLG0"}
+    assert {row["gate_id"] for row in rows} == {f"V2G{n}" for n in range(14)} | {"V2FLG0", "V2FLG1"}
 
 
 def test_only_v2_001_through_v2_010_and_v2g0_through_v2g9_pass_in_this_phase() -> None:
