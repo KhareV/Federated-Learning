@@ -1,0 +1,17 @@
+{
+  "v2_fl_004_process_disclosure": {
+    "statement": "The first V2-FL-004 post-exposure regression failed because two historical control tests still hard-coded an 18-row gate registry. Files subsequently changed: tests/test_model_v2_control_plane.py and tests/test_v2_005_results.py (already-classified lifecycle/control files under MODEL_V2_LIFECYCLE_TEST_POLICY_V1) plus tests/test_model_v2_current_lifecycle.py for the intended exact lifecycle transition. No SecAgg scientific/method file changed.",
+    "preserved_evidence": "reports/model_v2/v2_fl_004/post_exposure_regression/attempt_1_regression_FAIL_registry_count_tests.json"
+  },
+  "lifecycle_preflight": "reports/model_v2/v2_fl_005/lifecycle_registry_preflight.json (planned append-only V2FLG4/components structure: only the strict lifecycle test failed; no historical test needed repair; no post-result historical cleanup is planned)",
+  "pre_freeze_dry_runs_NOT_CANONICAL": {
+    "description": "Uncommitted scratch executions while implementing the runner, before the method freeze. Their outputs are not canonical V2-FL-005 evidence and were discarded.",
+    "full_demo_runs": "two end-to-end engineering runs (cohort -> 3 rounds -> shadow -> restart) at max_weight=4096; restart exact match held in both",
+    "secagg_shadow_max_weight_4096": "FAILED the 1e-4 tolerances in 4/4 dry runs (max abs ~1.0e-4, relative L2 ~2.2e-4): a workload-scale mismatch (client weights 83-93 vs max_weight sized for 1436-example real clients)",
+    "exploratory_max_weight_values": "1024, 256 and 128 were also executed in the same dry-run script (4 repetitions each) for information; 256 gave max abs ~0.7e-5 and relative L2 ~1.35e-5",
+    "decision": "max_weight=256.0 chosen by the user's rule next_power_of_two(2 * max_client_examples_seen=93) from structural example counts only; not derived from any search over candidate values, aggregate error, logits, loss or metric",
+    "sec_agg_config_v2_changed": false
+  },
+  "canonical_shadow_execution_note": "The frozen compat binding is executed once per fresh-process full reproduction (two canonical full runs); no retries and no parameter changes. A failure in either is a STOP condition.",
+  "scenario_note": "Round-3 duplicate injection necessarily follows the first accepted update of that client; injected stale/wrong-base/unknown envelopes are derived from valid round-3 envelopes by field mutation (frozen in the protocol)."
+}

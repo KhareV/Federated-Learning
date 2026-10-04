@@ -1,0 +1,14 @@
+{
+  "purpose": "Section 4: planned V2FLG4 append-only registry structure (V2-FL-005 PASS, V2FLG4 row, five additive components) applied to a scratch working-tree state; full pytest run before any V2-FL-005 method freeze",
+  "entry_head": "cc98c6c1ac6bc157c207d25da349591e78adacac",
+  "result": {"passed": 2273, "failed": 3, "skipped": 1},
+  "failed_tests": [
+    "tests/test_model_v2_current_lifecycle.py::test_task_registry_is_exactly_the_current_state",
+    "tests/test_model_v2_current_lifecycle.py::test_gate_registry_is_exactly_the_current_state",
+    "tests/test_model_v2_current_lifecycle.py::test_next_phases_are_exactly_not_started_and_gate_blocking_is_consistent"
+  ],
+  "remaining_brittle_historical_tests": [],
+  "historical_tests_corrected_before_method_freeze": [],
+  "note": "Only the single strict current-lifecycle test failed, as designed; it is the sole test updated at phase transition. Registries restored to the entry state after the preflight (git checkout).",
+  "status": "PASS"
+}

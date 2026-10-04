@@ -1,0 +1,37 @@
+# WEARABLE_SIM_FL_SECAGG_COMPAT_V1 -- engineering compatibility binding (V2-FL-005). Additive to
+# SECAGG_CONFIG_V2 (byte-identical, unchanged; bound to the real V2 IID round-1 experiment).
+# Every protocol parameter is inherited EXACTLY except ONE declared override: max_weight.
+# Compatibility evidence only: NOT a new privacy guarantee.
+compat_id: WEARABLE_SIM_FL_SECAGG_COMPAT_V1
+task_id: V2-FL-005
+reuses: {config_id: SECAGG_CONFIG_V2, path: configs/model_v2/secagg_v2.yaml}
+flower_version: 1.39.0
+clients: 8
+num_shares: 5
+reconstruction_threshold: 4
+max_weight: 256.0
+max_weight_override:
+  inherited_value: 4096.0
+  rule: next_power_of_two(2 * max_client_examples_seen)
+  max_client_examples_seen: 93        # frozen-cohort structural count (see cohort preflight)
+  derived_value: 256.0
+  reason: >-
+    SECAGG_CONFIG_V2 max_weight=4096 was sized for the real CLIENTS_IID_V1 workload (largest client
+    1436 examples). The synthetic cohort has client weights 83-93, so 4096 wastes weight-quantization
+    precision (workload-scale mismatch, not a MODEL_V2/SecAgg+ incompatibility). The rule depends
+    only on structural example counts, never on aggregate error, logits, loss or any metric, and no
+    search over candidate values was used to choose it.
+  no_change_after_method_freeze: true
+clipping_range: 8.0
+quantization_range: 4194304
+modulus_range: 4294967296
+timeout: null
+dropout: {injected: false, count: 0}
+rounds_with_secagg: [1]
+on_clipping_violation: STOP_NO_WIDENING
+correctness: {maximum_absolute_parameter_difference: 0.0001, relative_l2_difference: 0.0001}
+visibility: {plain_clear_update_count_required: 8, protected_clear_update_count_required: 0}
+claim_boundary: >-
+  Compatibility evidence only: the existing Flower SecAgg+ layer aggregates synthetic-wearable
+  virtual-client MODEL_V2 states within tolerance with no clear individual update at the protected
+  interface. No new privacy or security guarantee.

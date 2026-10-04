@@ -24,7 +24,7 @@ EXPECTED_TASKS = {
 EXPECTED_GATES = {
     **{f"V2G{n}": "PASS" for n in range(13)}, "V2G13": "NOT_STARTED",
     "V2FLG0": "PASS", "V2FLG1": "PASS", "V2FLG2": "PASS", "V2FLEG0": "PASS",
-    "V2FLG3": "PASS",
+    "V2FLG3": "PASS", "V2FLG4": "NOT_STARTED",
 }
 EXPECTED_COMPONENTS = {
     "MODEL_V2_FINAL": "FROZEN", "CAL_V2": "FROZEN",
@@ -82,3 +82,4 @@ def test_next_phases_are_exactly_not_started_and_gate_blocking_is_consistent() -
     assert tasks["V2-FL-EVAL-001"]["prerequisites"] == "V2-FL-003"
     assert tasks["V2-FL-004"]["prerequisites"] == "V2-FL-EVAL-001"
     assert gates["V2FLG3"]["blocks_tasks"] == "V2-FL-005"
+    assert gates["V2FLG4"]["blocks_tasks"] == "V2-014"

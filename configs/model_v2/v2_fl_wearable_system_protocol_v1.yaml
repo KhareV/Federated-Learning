@@ -1,0 +1,65 @@
+# V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1 -- V2-FL-005 ENGINEERING system exercise (gate V2FLG4).
+# Frozen BEFORE the first canonical local training call. Engineering only: no efficacy metric, no
+# scientific candidate, no checkpoint, no promotion. Disposable final state.
+protocol_id: V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1
+task_id: V2-FL-005
+gate: V2FLG4
+experiment_id: WEARABLE_SIM_FL_SYSTEM_V1
+replay_id: WEARABLE_SIM_FL_SYSTEM_REPLAY_V1
+cohort: {id: WEARABLE_SIM_FL_COHORT_V1, manifest: manifests/model_v2/WEARABLE_SIM_FL_COHORT_V1.json}
+source_contract: VIRTUAL_FL_CLIENT_SOURCE_V1
+dataset: {id: WEARABLE_SIM_V1, source: SYNTHETIC_PHYSIOLOGY, engineering_only: true, clinical_claim: false, real_wearable_claim: false}
+label_contract: {id: WEARABLE_SIM_EVENT_WINDOW_V1, positive: "at least one scheduled SYNTHETIC / ENGINEERING EVENT timestamp in [t-10 s, t]", not: AAMI_SVF_WINDOW_V1}
+stream_path: [ObservedRecord, GAP_POLICY_V1, causal_360_to_250_resampler, causal_ecg_bandpass, window_10s_cadence_5s, QUALITY_V1, local_dataset_builder]
+trainable_window_policy: {quality: VALID, samples: 2500, finite: true, DEGRADED: recorded_not_trained, UNUSABLE: excluded}
+normalization: "(x - mean) / (std + 1e-8) per window, float32, shape [N,1,2500]"
+structural_coverage: {min_trainable: 32, min_positive: 8, min_negative: 8}
+initialization: FL_INIT_V2
+algorithm: FEDAVG_SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1
+state_transport: FL_STATE_TRANSPORT_V1
+rounds: 3
+clients_per_round: 8
+all_clients_required: true
+local_epochs: 1
+local_optimizer: {name: AdamW, learning_rate: 0.001, weight_decay: 0.0001, batch_size: 64, drop_last: false}
+local_loss: {name: BCEWithLogitsLoss, pos_weight: 1.7157717177396683, interpretation: reused code-path fixture, not synthetic prevalence weighting, never tuned}
+shuffle_seed: {rule: FL_CLIENT_ROUND_SHA256_V1, namespace: WEARABLE_SIM_FL_SYSTEM_V1, base_seed: 20260927, inputs: [base_seed, namespace, round, client_id]}
+accounting: {local_training_calls: 24, accepted_updates: 24, scientific_model_fits_added: 0, scientific_checkpoints_added: 0}
+no_validation_no_best_round_no_selection: true
+update_envelope: {fields: [protocol_version, experiment_id, round_id, client_id, participant_id, session_id, base_global_state_sha256, client_dataset_sha256, state_transport_id, state_spec_sha256, examples_seen, update_sha256, engineering_only, source_dataset], payload: model-state delta only}
+rejection_order: [RAW_DATA_FIELD_PRESENT, LABEL_FIELD_PRESENT, TRUTH_FIELD_PRESENT, SCHEMA_MISMATCH, PROTOCOL_MISMATCH, PROVENANCE_MISMATCH, UNKNOWN_CLIENT, PARTICIPANT_MISMATCH, SESSION_MISMATCH, ROUND_NOT_OPEN, STALE_ROUND, FUTURE_ROUND, BASE_STATE_MISMATCH, DUPLICATE_UPDATE, DATASET_SHA_MISMATCH, NONPOSITIVE_EXAMPLES, TRANSPORT_MISMATCH, STATE_SPEC_MISMATCH, DTYPE_POLICY_MISMATCH, NONFINITE_UPDATE, UPDATE_SHA_MISMATCH]
+arrival_schedule:
+  round_1: canonical client order
+  round_2: reverse client order
+  round_3: "INJECT stale (envelope claiming round 2), then first valid update, INJECT duplicate of that accepted update, INJECT wrong-base-state, INJECT unknown client, then the remaining seven valid updates (a duplicate necessarily follows one accepted update)"
+  injected_envelopes_are_derived_from_valid_round_3_envelopes_by_field_mutation: true
+aggregation_canonicalization: "accepted updates are sorted by client ID before aggregation; every arrival sequence maps to that canonical order; invariance proven for canonical, reverse and one fixed permutation"
+commit_rule: "commit only with 8 unique authorized accepted clients; a second commit of a round fails ROUND_ALREADY_COMMITTED; no partial aggregation"
+restart_resume: "continuous run vs rounds 1-2 -> persist {protocol id, experiment id, cohort manifest sha, round, committed hashes, state artifact} -> terminate -> fresh process resumes round 3; final SHA must equal continuous; resume artifact is engineering-only, deleted after verification, hashes recorded"
+secagg_shadow:
+  binding: WEARABLE_SIM_FL_SECAGG_COMPAT_V1
+  config: configs/model_v2/wearable_sim_fl_secagg_compat_v1.yaml
+  rounds: [1]
+  max_weight_override: "256.0 = next_power_of_two(2 * max_client_examples_seen=93), derived from structural example counts only (user decision before freeze)"
+  pre_freeze_dry_runs_disclosed: [max_weight 4096 FAILED tolerance, exploratory max_weight 1024/256/128]
+  after_freeze: "no further max_weight change; if the frozen shadow fails either 1e-4 criterion STOP, preserve the failure, do not loosen"
+inference_smoke: "after round 3 logits on each client's trainable windows: shape and finiteness only; no labels, no metrics, no threshold, no calibration"
+semantic_digest_fields: [replay_id, cohort_id, events (types, round ids, client ids, accepted/rejected update ids and rejection codes, update meta), round base/update/global hashes, dataset hashes, secagg compatibility status and clear-update counts, restart/resume result, final state sha]
+semantic_digest_excludes: [wall-clock, process IDs, timings, diagnostic loss/update norm, cryptographic randomness]
+reproduction: two fresh-process full runs from frozen manifest/seeds/config; event-log control-plane replay without regenerating waveforms or retraining
+access: {TRAIN: FORBIDDEN, VALIDATION: FORBIDDEN, CALIBRATION: FORBIDDEN, INTERNAL_TEST: FORBIDDEN, INCART: FORBIDDEN, NSTDB: FORBIDDEN, BIDMC: FORBIDDEN, WEARABLE_V1: FORBIDDEN, WEARABLE_SIM_V1: ALLOWED}
+forbidden_metrics: [AUPRC, AUROC, F1, precision, sensitivity, specificity, accuracy, patient_macro]
+no_runtime_cutover: [gateway export, API_RUNTIME_V2 binding, CAL_V2, ALERT_POLICY_V1, frontend model id, operational default]
+known_limitation_carried: "stuck nonzero raw ECG is not reliably hard-failed by the frozen filtered-representation flatline rule; not repaired here"
+claim_boundary: >-
+  The deterministic WEARABLE_SIM_V1 virtual-client cohort was successfully converted through the
+  production-like ECG stream path into isolated client-local MODEL_V2 training windows and
+  exercised through a three-round federated software workflow. Routing, exactly-once aggregation,
+  restart/resume, deterministic replay and one-round Flower SecAgg+ compatibility passed. This is
+  software and systems engineering evidence only; it is not AAMI-SVF efficacy, clinical evidence,
+  real-wearable validation or a model-promotion result.
+forbidden_claims: [synthetic wearable accuracy, synthetic AAMI-SVF validation, real sensor accuracy, clinical generalization, hospital federation, production FL deployment, privacy guarantee beyond the existing narrow SecAgg boundary, wearable-domain efficacy, MODEL_V2 improvement caused by synthetic training, personalized medicine, real-world robustness]
+v2flg4:
+  blocks: [V2-014]
+  performance_independent: true
+  pass_criteria: [cohort frozen before training, 8 unique virtual clients, zero participant overlap, deterministic source generation, truth/runtime separation, structural class/window coverage, production-like preprocessing path used, 3 rounds completed, 24/24 canonical updates accepted, all updates finite, deterministic rejection tests correct, no rejected update affects state, exactly-once round commit, arrival-order canonicalization correct, restart/resume equals uninterrupted, server receives no raw samples/labels/truth, round-1 SecAgg shadow passes, protected clear update count 0, two fresh-process reproductions identical, event-log replay identical, final logits finite, zero efficacy metrics, zero real-dataset access, upstream scientific artifacts unchanged, full regression PASS, clean pushed repository]
