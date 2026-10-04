@@ -1,0 +1,36 @@
+{
+  "BYTE_IDENTICAL_REEXPORT_REQUIRED": false,
+  "SEMANTIC_REEXPORT_REQUIRED": true,
+  "calibration_parity": {
+    "max_calibrated_probability_delta": 0.0,
+    "max_raw_probability_delta": 0.0,
+    "threshold_decision_disagreements": 0
+  },
+  "canonical_artifact_rewritten": false,
+  "canonical_bytes": 294959,
+  "canonical_bytes_exact": true,
+  "canonical_expected_sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+  "canonical_sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+  "corpus_rows": 1000,
+  "logits_allclose_atol_rtol": true,
+  "reexport_bytes_identical_informational": false,
+  "reexport_info_keys": [
+    "artifact_bytes",
+    "artifact_path",
+    "artifact_sha256",
+    "format",
+    "precision",
+    "source_checkpoint_sha256"
+  ],
+  "reexport_sha256": "c1acc34c6ba5905fd214a04b511d0b5a7370dda3c52c116cd1d14d258c730032",
+  "same_jit_code": true,
+  "same_signature": true,
+  "same_state": true,
+  "status": "PASS",
+  "tolerance": {
+    "atol": 1e-06,
+    "rtol": 1e-06
+  },
+  "trainable_parameters": 57553,
+  "verifier_status": "PASS"
+}

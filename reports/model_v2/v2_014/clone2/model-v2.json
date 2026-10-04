@@ -1,0 +1,21 @@
+{
+  "architecture": "MODEL_V2_TCN_MEAN",
+  "checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "finite_state": true,
+  "fixed_vector_logits": [
+    1.6370497941970825,
+    -4.964743614196777,
+    -0.08284634351730347
+  ],
+  "max_abs_delta_vs_frozen": 0.0,
+  "parameter_count": 57553,
+  "state_digest_sha256": "a724e49615cd68f78854d422d4fd556095e3c61e8c405ae0cf87d17bf8a74ec5",
+  "state_keys": 92,
+  "status": "PASS",
+  "tolerance": {
+    "atol": 1e-07,
+    "rtol": 1e-07
+  },
+  "trained": false,
+  "verifier_status": "PASS"
+}

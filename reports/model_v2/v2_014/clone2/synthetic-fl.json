@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "24_update_hashes_equal_frozen": true,
+    "8_dataset_hashes_equal_frozen": true,
+    "arrival_order_canonicalization": true,
+    "cohort_manifest_sha_equals_frozen": true,
+    "event_replay_identity_equals_recorded": true,
+    "events_equal_frozen": true,
+    "exactly_once_commits": true,
+    "final_state_sha_equals_expected": true,
+    "finite_logit_smoke_723": true,
+    "max_weight_rule_256_from_93": true,
+    "no_real_loader_modules": true,
+    "rejection_sequence_equal_frozen": true,
+    "restart_resume_exact": true,
+    "round_0_1_2_3_hashes_equal_frozen": true,
+    "secagg_shadow_pass": true,
+    "semantic_digest_equals_frozen": true
+  },
+  "claim": "engineering reproduction only; no efficacy metric",
+  "cohort_manifest_sha256": "ac7a207577394ca5c434b2d8a87989c6eaa77367826fcf13c47d54d8cd03e378",
+  "final_state_sha256": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+  "secagg_shadow": {
+    "maximum_absolute_difference": 6.348358397662013e-06,
+    "plain_clear_update_count": 8,
+    "protected_clear_update_count": 0,
+    "relative_L2_difference": 1.3513456498808712e-05,
+    "status": "PASS"
+  },
+  "semantic_digest": "e234b755f1d90eb9bc3d9ae4d437904d32b6e453dc476187238191cf409a352e",
+  "status": "PASS"
+}

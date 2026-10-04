@@ -1,0 +1,27 @@
+{
+  "file_count": 21,
+  "files": {
+    "artifacts.json": "a596c1381170e94991fa4f0fd3d7e3cc5c5a662913ed87dfe5d138365f179012",
+    "clone_audit.json": "1ac08adf7ea330c3f9f3110ef5d3d7491d064de99f9b9fb4aa4f0198d81a55d2",
+    "clone_final_status.json": "c0516af744f8acaf84ac6b29c224844f5ff1997029174ab9643174f99a8e8537",
+    "dependency_audit_python.json": "bf8a07376f6c5733eab061b8f27fee58a0fc1469bf76a69bc0469963add0db12",
+    "environment_audit.json": "e070186465177330b010154a4b11d7e21bcb6bc001bfc8acaffb112517cce1d6",
+    "evidence_verifier.json": "81b1eeb14fafacd759499cc36e7e2b9548aee14cfedcd81236b1fd98566316e3",
+    "fixed-vectors.json": "ecfd035989c94818dc527bbea5db754602758bc53b2c1a99f71889ad0fb53861",
+    "fl-init.json": "4c749599d6c6a78474eefbf9348b754d03cb94453c68d50264c4ea8f1acb1d83",
+    "frontend_report.json": "a056667891be3e41c3c7bbe0c53b753fb2e6578f41560ad1226deaa4793057d6",
+    "gateway.json": "d39930286b8b3afca700e364c2daca39f32719309718584a64ff6f607307a44c",
+    "inventory.json": "9dcb6fe4cc53275a5f2faeb34dca5fb1c2a88d474ef209e06d05482905c37aab",
+    "lifecycle.json": "3fdc83ff2ea07380d88b124a986ebfe27736eccb9efcb142e0131e46df5103f3",
+    "lint.json": "1e7535f3cd3a8323fcc977eaabbea52786b7e28229738c44e25eea121445d1f1",
+    "model-v2.json": "cc0b1fe0e895fa0128e19cfa6224ea3c825235c0b20dddf23d82e5a4db4d530b",
+    "pip_freeze.txt": "cc3784a838275a3d9a72e30db9ed7a7ef9f5352972afc1fdc8f5f5a0b9907266",
+    "provenance_pre_checks.json": "c81fcedf636b970f3f8952553be629d5da04216698e1269838bb0a9778b57663",
+    "regression.json": "86d87ce29358860c56a066f26f59514f92219a20e01aab150586e27288599c23",
+    "regression.nodes.txt": "58f320f0d1e9789a93fe4352f7fe0f1729f6ed110a5291383df83008b4f534cc",
+    "reproducibility_manifest.json": "029fbf13c9c3ff3d058eeeb2438c5c4ccdb67f43db0a62038c3b8db765b21fb1",
+    "steps.jsonl": "9c0d69ea62e1f91e108758bcbad9c28c4e8c129353b693fadb7ff296a934602e",
+    "synthetic-fl.json": "82405165624f546036bb7f42328316981e0aa7dd785de371767994e4fb191746"
+  },
+  "result": "PASS"
+}

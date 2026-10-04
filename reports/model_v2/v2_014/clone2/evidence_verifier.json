@@ -1,0 +1,40 @@
+{
+  "evidence_present": [
+    "clone1"
+  ],
+  "lock": "artifacts/MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1.lock.json",
+  "lock_bound_files": 31,
+  "lock_drift": [],
+  "packages": {
+    "clone1": {
+      "changed_since_target": [],
+      "checks": {
+        "all_check_statuses_PASS": true,
+        "checkpoint_inventory_hash_matches_live": true,
+        "clone_label_and_mode": true,
+        "clone_result_PASS": true,
+        "clone_target_is_ancestor_of_HEAD": true,
+        "component_inventory_hash_matches_live": true,
+        "firewall_flags": true,
+        "fl_init_sha_matches": true,
+        "frontend_PASS": true,
+        "gateway_sha_matches": true,
+        "manifest_file_hashes_all_match": true,
+        "method_files_unchanged_at_HEAD": true,
+        "method_files_unchanged_since_clone_target": true,
+        "one_shot_guards_consumed": true,
+        "package_lock_hash_matches": true,
+        "regression_clean_and_node_list_subset_of_current": true,
+        "regression_node_list_sha_matches_file": true,
+        "requirements_lock_hash_matches": true,
+        "synthetic_fl_final_and_digest": true
+      },
+      "label": "clone1",
+      "mismatched_files": [],
+      "nodes_added_since_clone": 0,
+      "status": "PASS",
+      "target_sha": "daf905306620cbb01f04e644809ccdb2e684b4a8"
+    }
+  },
+  "status": "PASS"
+}

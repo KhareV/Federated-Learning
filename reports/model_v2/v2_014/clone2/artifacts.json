@@ -1,0 +1,29 @@
+{
+  "MODEL_V2_FINAL_manifest_keys": [
+    "architecture_id",
+    "calibration_id",
+    "checkpoint",
+    "checkpoint_size_bytes",
+    "frozen_config",
+    "label_map_id",
+    "model_id",
+    "official_validation_lock_sha256"
+  ],
+  "MODEL_V2_FINAL_sha256_prefix_ok": true,
+  "checkpoint_inventory_sha256": "ccc72cbcb7b07cb7c8053fb8af3fadc1ce082941ad5f810b181031f167f09e95",
+  "frozen_family_checkpoint_mismatches": [],
+  "guards_reset_or_bypassed": false,
+  "one_shot_guards": {
+    "EXTERNAL_INCART_ACCESS_V1": "COMPLETED",
+    "INTERNAL_TEST_ACCESS_V1": "COMPLETED",
+    "V2_FL_INCART_ACCESS_V1": "COMPLETED",
+    "V2_FL_INTERNAL_TEST_ACCESS_V1": "COMPLETED"
+  },
+  "prediction_table_inventory_sha256": "95c8a0ba68e67b9cc4490b2b28707dfc3eac29791daff193d3d06edea2b1ef64",
+  "prediction_table_mismatches": [],
+  "prediction_tables": 40,
+  "protected_changes_since_entry": [],
+  "status": "PASS",
+  "tracked_checkpoints": 43,
+  "tracked_symlinks": []
+}
