@@ -1,0 +1,28 @@
+# MODEL_V2_LIFECYCLE_TEST_POLICY_V1 -- additive control-plane governance (created in V2-FL-004,
+# BEFORE the SecAgg method freeze). Resolves the repeated "edit old phase tests to admit the next
+# phase" maintenance problem once, prospectively.
+policy_id: MODEL_V2_LIFECYCLE_TEST_POLICY_V1
+status: FROZEN_CONTROL_POLICY
+current_lifecycle_test: tests/test_model_v2_current_lifecycle.py
+rules:
+  A: "the current-lifecycle test is the ONLY test that tracks the exact CURRENT task/gate/component state across phase transitions"
+  B: "historical phase-specific tests may assert immutable hashes, scientific configuration, historical prerequisite relationships, scientific method semantics, historical results and irreversible completed facts; they must NOT require future tasks to remain NOT_STARTED"
+  C: "hash-pinned scientific freezes remain historical; their stored hashes are never rewritten"
+  D: "lifecycle-only test-file drift is never invisible: it must be recorded in the phase lifecycle-drift audit"
+  E: "no scientific method freeze (from V2-FL-004 on) may include the mutable current-lifecycle test"
+  F: "no broad exemption: only files explicitly classified below may carry lifecycle/control-plane drift"
+classified_lifecycle_control_files:        # the ONLY test files whose drift may be classified lifecycle-only
+  - tests/test_model_v2_current_lifecycle.py
+  - tests/test_model_v2_control_plane.py
+  - tests/test_v2_005_results.py
+  - tests/test_c_v2_pre006_control.py
+  - tests/test_v2_013_results.py
+  - tests/test_v2_fl_001_results.py
+  - tests/test_v2_fl_002_results.py
+  - tests/test_v2_fl_002_method.py
+  - tests/test_v2_fl_003_results.py
+  - tests/test_v2_fl_003_method.py
+  - tests/test_v2_fl_eval_results.py
+  - tests/test_c_v2_fl_003_freeze_integrity_method.py
+v2_lineage_test_globs: [tests/test_v2_*.py, tests/test_c_v2_*.py, tests/test_model_v2_*.py]
+forbidden_in_historical_tests: "live-registry assertions that a later task/gate is exactly NOT_STARTED"

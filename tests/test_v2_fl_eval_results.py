@@ -153,5 +153,3 @@ def test_v2fleg0_criteria_and_registry_transition() -> None:
     gates = {r["gate_id"]: r["status"] for r in rows("gate")}
     if flags["regression"] != "PENDING_STAGE1":
         assert tasks["V2-FL-EVAL-001"] == "PASS" and gates["V2FLEG0"] == "PASS"
-    for later in ("V2-FL-004", "V2-FL-005", "V2-014"):
-        assert tasks[later] == "NOT_STARTED"

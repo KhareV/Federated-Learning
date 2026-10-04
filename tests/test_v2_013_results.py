@@ -99,7 +99,6 @@ def test_registry_transition_and_future_phases_untouched() -> None:
     gates = {r["gate_id"]: r for r in _rows("gate")}
     assert components["API_RUNTIME_V2"]["status"] == "FROZEN_RESEARCH_RUNTIME"
     assert tasks["V2-013"]["status"] == "PASS" and gates["V2G12"]["status"] == "PASS"
-    assert tasks["V2-014"]["status"] == "NOT_STARTED" and gates["V2G13"]["status"] == "NOT_STARTED"
     for frozen in ("GATEWAY_ARTIFACT_V2", "EXPLAINABILITY_V2"):
         assert components[frozen]["status"].startswith("FROZEN")
 

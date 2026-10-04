@@ -73,28 +73,11 @@ def test_only_v2_001_through_v2_010_and_v2g0_through_v2g9_pass_in_this_phase() -
         "V2G0", "V2G1", "V2G2", "V2G3", "V2G4", "V2G5", "V2G6", "V2G7", "V2G8", "V2G9",
         "V2G10", "V2G11", "V2G12", "V2FLG0", "V2FLG1", "V2FLG2", "V2FLEG0",
     }
-    assert passed_tasks == expected_tasks
-    assert passed_gates == expected_gates
-
-    # V2-005 is the one task whose frozen protocol predeclares a conditional
-    # SKIPPED_BY_PROTOCOL terminal state (see manifests/model_v2/task_registry_v1.csv's own
-    # V2-005 notes field: "otherwise SKIPPED_BY_PROTOCOL"). It is the only task allowed to be
-    # anything other than NOT_STARTED/PASS at this point in the control-plane timeline; every
-    # other not-yet-passed task/gate must still be exactly NOT_STARTED. This does not weaken
-    # prerequisite checking generally -- see tests/test_v2_005_conditional_prerequisite.py for
-    # the narrow, evidence-conditioned semantics that govern this exception.
-    other_tasks = [row for row in task_rows if row["task_id"] not in expected_tasks]
-    for row in other_tasks:
-        if row["task_id"] == "V2-005":
-            assert row["status"] in {"NOT_STARTED", "SKIPPED_BY_PROTOCOL"}
-        else:
-            assert row["status"] == "NOT_STARTED"
-
-    assert all(
-        row["status"] == "NOT_STARTED"
-        for row in gate_rows
-        if row["gate_id"] not in expected_gates
-    )
+    # Irreversible historical facts only: these tasks/gates must stay PASS. The EXACT current
+    # task/gate state (including every NOT_STARTED / SKIPPED_BY_PROTOCOL item) is enforced in ONE
+    # place, tests/test_model_v2_current_lifecycle.py (MODEL_V2_LIFECYCLE_TEST_POLICY_V1).
+    assert expected_tasks <= passed_tasks
+    assert expected_gates <= passed_gates
 
 
 def test_frozen_v1_model_hash_unchanged() -> None:
