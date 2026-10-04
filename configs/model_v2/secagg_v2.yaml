@@ -1,0 +1,72 @@
+# SECAGG_CONFIG_V2 -- MODEL_V2 Flower SecAgg+ protocol correctness / server-visibility / overhead.
+# Additive to SECAGG_CONFIG_V1 (F13, unchanged). Parameters are the historical T028 values, reused
+# exactly and NOT adjustable from any V2 outcome. Privacy-protocol engineering phase: no scientific
+# FL training, no tuning, no held-out data, no differential privacy, no production-security claim.
+config_id: SECAGG_CONFIG_V2
+task_id: V2-FL-004
+gate: V2FLG3
+predecessor: {config_id: SECAGG_CONFIG_V1, lock: artifacts/SECAGG_CONFIG_V1.lock.json, unchanged: true, canonical_freeze: F13}
+flower_version: 1.39.0
+base_condition: FL_IID_MODEL_V2_V1
+algorithm: FEDAVG
+client_manifest: {id: CLIENTS_IID_V1, sha256: 80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a}
+clients: 8
+workflow: flwr.server.workflow.SecAggPlusWorkflow
+client_mod: flwr.client.mod.secaggplus_mod
+num_shares: 5
+reconstruction_threshold: 4
+max_weight: 4096.0
+clipping_range: 8.0
+quantization_range: 4194304      # 2^22
+modulus_range: 4294967296        # 2^32
+timeout: null
+dropout: {injected: false, count: 0}
+source_round:
+  experiment: FL_IID_MODEL_V2_V1 (V2-FL-001) round 1
+  initialization: {id: FL_INIT_V2, seed: 20260927, round_0_state_sha256: 6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f}
+  expected_round_1_plain_state_sha256: fb178f1ad80acdbcebffc2ccc14516157313e302f847eef4c8c17e9d2deb05fa
+  client_example_counts: {SITE_00: 1436, SITE_01: 1435, SITE_02: 1391, SITE_03: 1080, SITE_04: 1080, SITE_05: 1080, SITE_06: 1080, SITE_07: 1078}
+  reconstruction: deterministic V2-FL-001 round-1 local epochs on TRAIN only (same seeds, AdamW, lr, weight decay, pos_weight, batch size, 1 epoch); a protocol fixture, NOT a new experiment
+  forbidden_sources: [best-round checkpoint, round-50 checkpoint, FedProx, non-IID clients, test data, INCART]
+state_transport:
+  id: FL_STATE_TRANSPORT_V1
+  expected_entries: {total: 92, floating_trainable_parameters: 47, floating_buffers: 30, integer_buffers: 15}
+  only_floating_entries_enter_secagg: true
+  integer_num_batches_tracked: server_side_deterministic_policy_not_quantized
+clipping_preflight:
+  require_coordinates_outside_range: 0
+  require_nonfinite: 0
+  on_violation: STOP_NO_WIDENING
+known_vector:
+  weights: [1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350]
+  fixture: historical_T028_known_payloads
+correctness:
+  maximum_absolute_parameter_difference: 0.0001
+  relative_l2_difference: 0.0001
+visibility:
+  boundary: FLOWER_APPLICATION_SERVER_AGGREGATION_INTERFACE_V1
+  plain_clear_update_count_required: 8
+  protected_clear_update_count_required: 0
+runtime:
+  clock: time.perf_counter
+  warmup_trials_per_path: 1
+  measured_trials_per_path: 10
+  boundary: aggregation protocol only
+  excludes: [data_acquisition, preprocessing, local_training, validation, model_evaluation, artifact_writing]
+  completion_required: 10_of_10_protected
+byte_accounting:
+  id: FLOWER_APPLICATION_PAYLOAD_BYTES_V1
+  serialization: deterministic Flower Message protobuf
+  excludes: [transport_framing, TCP, TLS, Python_object_memory]
+  exact_network_bytes: false
+scaling_comparison:
+  v1_reference: reports/t028/overhead_summary.json (historical frozen values; MODEL_V1 not rerun)
+  runtime_comparison_status: NON_MATCHED_DESCRIPTIVE_CONTEXT_UNLESS_SAME_HOST_AND_ENVIRONMENT
+access: {TRAIN: DETERMINISTIC_ROUND_1_RECONSTRUCTION_ONLY, VALIDATION: FORBIDDEN, CALIBRATION: FORBIDDEN, INTERNAL_TEST: FORBIDDEN, INCART: FORBIDDEN, NSTDB: FORBIDDEN, BIDMC: FORBIDDEN, WEARABLE_V1: FORBIDDEN, WEARABLE_SIM: FORBIDDEN}
+evidence_hygiene: {persist_private_keys: false, persist_raw_secret_shares: false, persist_unmasked_individual_client_updates: false}
+claim_boundary: >-
+  Within the configured Flower SecAgg+ controlled simulation, the protected application-level server
+  aggregation interface does not receive an individual participating client's clear model-update
+  array while forming the aggregate, and the protected aggregate matches the unprotected reference
+  within the predeclared numerical tolerance.
+unsupported_claims: [anonymity, differential privacy, model-inversion resistance, membership-inference resistance, malicious-client resistance, transport security, TLS guarantees, authentication, authorization, OS/process isolation, host isolation, HIPAA compliance, hospital privacy, institution-scale security, production security certification]
