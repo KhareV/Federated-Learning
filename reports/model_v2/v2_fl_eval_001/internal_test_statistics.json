@@ -1,0 +1,4038 @@
+{
+  "bootstrap": {
+    "B": 2000,
+    "draws_sha256": "a60de0f0bb14ac8cc835f01117e232fbc26db925349ebb4296f123e7ce628d51",
+    "multiplicity_adjustment": "NONE (nominal 95% intervals)",
+    "multiplicity_preserved": true,
+    "p_values": "NOT_COMPUTED",
+    "rejection_or_redraw": false,
+    "replicate_metrics": [
+      "AUPRC",
+      "AUROC",
+      "pooled_F1",
+      "precision",
+      "sensitivity",
+      "specificity",
+      "patient_macro_F1"
+    ],
+    "rng": "numpy PCG64",
+    "seed": 20260927,
+    "slots_per_replicate": 6
+  },
+  "claim_label": "FL-LINEAGE HELD-OUT (not project-globally unseen)",
+  "clusters": 6,
+  "comparisons": {
+    "V2_FEDAVG_COMBINED_minus_V1_FEDAVG_COMBINED": {
+      "A": "V2_FEDAVG_COMBINED",
+      "B": "V1_FEDAVG_COMBINED",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.006873877953627039,
+          "ci_upper_95": 0.22286600133044557,
+          "invalid_replicates": 0,
+          "point_delta": 0.06896882051213238,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.009295592997091484,
+          "ci_upper_95": 0.21534737562183626,
+          "invalid_replicates": 0,
+          "point_delta": 0.06713874360933181,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.41688433460585356,
+          "ci_upper_95": 0.9807773799172765,
+          "invalid_replicates": 0,
+          "point_delta": 0.7437925077211367,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.95,
+          "ci_upper_95": 0.9872608807523539,
+          "invalid_replicates": 0,
+          "point_delta": 0.977112676056338,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9782870928829915,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.9946236559139785,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9161425576519916,
+          "ci_upper_95": 0.9761444229529336,
+          "invalid_replicates": 0,
+          "point_delta": 0.9602076124567474,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": -0.024007287449392734,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": -0.005994005994006013,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDAVG_COMBINED_minus_V2_FEDAVG_IID": {
+      "A": "V2_FEDAVG_COMBINED",
+      "B": "V2_FEDAVG_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.004399360429413024,
+          "ci_upper_95": 0.0017656705445930898,
+          "invalid_replicates": 0,
+          "point_delta": -0.00022040314219129442,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.0031752463089828042,
+          "ci_upper_95": 0.004093423366776983,
+          "invalid_replicates": 0,
+          "point_delta": 0.00011061602757100886,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.22912538444719732,
+          "ci_upper_95": -0.005630108526163697,
+          "invalid_replicates": 0,
+          "point_delta": -0.08285517057134983,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.03760050502657925,
+          "ci_upper_95": -0.006509536264223681,
+          "invalid_replicates": 0,
+          "point_delta": -0.01508159974591694,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -0.0011229184925503066,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": -0.00015895278167366023,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.07195547909498488,
+          "ci_upper_95": -0.01275318829707428,
+          "invalid_replicates": 0,
+          "point_delta": -0.02941176470588236,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.0,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "condition_vs_iid"
+    },
+    "V2_FEDAVG_FEATURE_minus_V1_FEDAVG_FEATURE": {
+      "A": "V2_FEDAVG_FEATURE",
+      "B": "V1_FEDAVG_FEATURE",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.005618611150743247,
+          "ci_upper_95": 0.2699841688516811,
+          "invalid_replicates": 0,
+          "point_delta": 0.1431586240461009,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.005717990231052017,
+          "ci_upper_95": 0.313345281247896,
+          "invalid_replicates": 0,
+          "point_delta": 0.09507188313416681,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.024015022192924947,
+          "ci_upper_95": 0.5223081881265632,
+          "invalid_replicates": 0,
+          "point_delta": 0.23076702782718583,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.0808378540055239,
+          "ci_upper_95": 0.6283693503550709,
+          "invalid_replicates": 0,
+          "point_delta": 0.2960877094219374,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.15415286731878985,
+          "ci_upper_95": 0.7704561657764636,
+          "invalid_replicates": 0,
+          "point_delta": 0.4580151049211306,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.012443849481183347,
+          "ci_upper_95": -0.0009389671361502705,
+          "invalid_replicates": 0,
+          "point_delta": -0.006055363321799345,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.970289603960396,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.993006993006993,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDAVG_FEATURE_minus_V2_FEDAVG_IID": {
+      "A": "V2_FEDAVG_FEATURE",
+      "B": "V2_FEDAVG_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -4.48391520269098e-06,
+          "ci_upper_95": 0.003198238368112505,
+          "invalid_replicates": 0,
+          "point_delta": 0.0007789887319125111,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -1.276320427112676e-05,
+          "ci_upper_95": 0.004649818523995042,
+          "invalid_replicates": 0,
+          "point_delta": 0.0013178862659831703,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.01988636080317363,
+          "ci_upper_95": 0.00591715976331364,
+          "invalid_replicates": 0,
+          "point_delta": -0.004339855467304865,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.0020847404600463637,
+          "ci_upper_95": 0.00712211752805203,
+          "invalid_replicates": 0,
+          "point_delta": 0.0017503608759457112,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -0.006569343065693456,
+          "ci_upper_95": 0.006764322417363355,
+          "invalid_replicates": 0,
+          "point_delta": -0.0008379720174515048,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.001367989056087593,
+          "ci_upper_95": 0.00856898029134523,
+          "invalid_replicates": 0,
+          "point_delta": 0.004325259515570945,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": -0.017928286852589626,
+          "ci_upper_95": 0.005600438176091986,
+          "invalid_replicates": 0,
+          "point_delta": -0.0009990009990009652,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "condition_vs_iid"
+    },
+    "V2_FEDAVG_IID_minus_V1_FEDAVG_IID": {
+      "A": "V2_FEDAVG_IID",
+      "B": "V1_FEDAVG_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.003060888336329226,
+          "ci_upper_95": 0.23095629822663855,
+          "invalid_replicates": 0,
+          "point_delta": 0.12148856409439823,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.003136602337554417,
+          "ci_upper_95": 0.2922257152745731,
+          "invalid_replicates": 0,
+          "point_delta": 0.08071686099367759,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.023660597581334316,
+          "ci_upper_95": 0.5397405915124371,
+          "invalid_replicates": 0,
+          "point_delta": 0.2351068832944907,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.07997238044757449,
+          "ci_upper_95": 0.6241720785817237,
+          "invalid_replicates": 0,
+          "point_delta": 0.2943373485459917,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.15798884085614973,
+          "ci_upper_95": 0.7662544851041947,
+          "invalid_replicates": 0,
+          "point_delta": 0.4588530769385821,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.016472868217054293,
+          "ci_upper_95": -0.002195389681668547,
+          "invalid_replicates": 0,
+          "point_delta": -0.01038062283737029,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9759927125506073,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.994005994005994,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDAVG_LABEL_minus_V1_FEDAVG_LABEL": {
+      "A": "V2_FEDAVG_LABEL",
+      "B": "V1_FEDAVG_LABEL",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.013832098107891433,
+          "ci_upper_95": 0.4502840582237932,
+          "invalid_replicates": 0,
+          "point_delta": 0.15939685630255462,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.03487846836205963,
+          "ci_upper_95": 0.4108312657301466,
+          "invalid_replicates": 0,
+          "point_delta": 0.17803217543701977,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.23762646905113205,
+          "ci_upper_95": 0.8554949947210322,
+          "invalid_replicates": 0,
+          "point_delta": 0.5600309820955619,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.4457983117188854,
+          "ci_upper_95": 0.9786232238975417,
+          "invalid_replicates": 0,
+          "point_delta": 0.7356685305919795,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.746551724137931,
+          "invalid_replicates": 0,
+          "point_delta": 0.03521733060312726,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.5785797438882421,
+          "ci_upper_95": 0.9623655913978495,
+          "invalid_replicates": 0,
+          "point_delta": 0.8070934256055363,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.012003643724696348,
+          "invalid_replicates": 0,
+          "point_delta": 0.0029970029970030065,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDAVG_LABEL_minus_V2_FEDAVG_IID": {
+      "A": "V2_FEDAVG_LABEL",
+      "B": "V2_FEDAVG_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.0032806053715886963,
+          "ci_upper_95": 0.0015658879657740599,
+          "invalid_replicates": 0,
+          "point_delta": -1.6206501635140924e-05,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.0019672895835489727,
+          "ci_upper_95": 0.003503831888970965,
+          "invalid_replicates": 0,
+          "point_delta": 0.0001590105396334085,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.4423051751068247,
+          "ci_upper_95": -0.008993223768259768,
+          "invalid_replicates": 0,
+          "point_delta": -0.15859470484232785,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.06759799217538942,
+          "ci_upper_95": -0.00877790314141359,
+          "invalid_replicates": 0,
+          "point_delta": -0.02517110289672908,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0093633732947499,
+          "invalid_replicates": 0,
+          "point_delta": 0.002460038363171324,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.12457912457912457,
+          "ci_upper_95": -0.018996590355577214,
+          "invalid_replicates": 0,
+          "point_delta": -0.051038062283736974,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.012003643724696348,
+          "invalid_replicates": 0,
+          "point_delta": 0.0029970029970030065,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "condition_vs_iid"
+    },
+    "V2_FEDAVG_QUANTITY_minus_V1_FEDAVG_QUANTITY": {
+      "A": "V2_FEDAVG_QUANTITY",
+      "B": "V1_FEDAVG_QUANTITY",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.03325128052403347,
+          "ci_upper_95": 0.40875917473306345,
+          "invalid_replicates": 0,
+          "point_delta": 0.17115999003828442,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.03088618663563747,
+          "ci_upper_95": 0.478696490385649,
+          "invalid_replicates": 0,
+          "point_delta": 0.2418774996629668,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.12663520570085884,
+          "ci_upper_95": 0.6979391469309618,
+          "invalid_replicates": 0,
+          "point_delta": 0.3994228421362268,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.05503470484454365,
+          "ci_upper_95": 0.7661065688562129,
+          "invalid_replicates": 0,
+          "point_delta": 0.3447028455640502,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.03576769690927217,
+          "ci_upper_95": 0.06665150136487707,
+          "invalid_replicates": 0,
+          "point_delta": 0.06064452436358514,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.046699045240428755,
+          "ci_upper_95": 0.858128078817734,
+          "invalid_replicates": 0,
+          "point_delta": 0.49134948096885817,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0027112720976853965,
+          "ci_upper_95": 0.1743894692264249,
+          "invalid_replicates": 0,
+          "point_delta": 0.03596403596403597,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDAVG_QUANTITY_minus_V2_FEDAVG_IID": {
+      "A": "V2_FEDAVG_QUANTITY",
+      "B": "V2_FEDAVG_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.001840017525380949,
+          "ci_upper_95": 0.0012629279576376051,
+          "invalid_replicates": 0,
+          "point_delta": -8.892911542768278e-05,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.0028967778226332785,
+          "ci_upper_95": 0.001771764904129669,
+          "invalid_replicates": 0,
+          "point_delta": -0.00026616981634286496,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.09189854733294822,
+          "ci_upper_95": 0.007850851126722014,
+          "invalid_replicates": 0,
+          "point_delta": -0.02834571754336135,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.011721144024514851,
+          "ci_upper_95": 0.00799796787760687,
+          "invalid_replicates": 0,
+          "point_delta": -0.0004659344874965443,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -0.0025706940874036244,
+          "ci_upper_95": 0.01715382974183921,
+          "invalid_replicates": 0,
+          "point_delta": 0.0034645429257326166,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.02680965147453085,
+          "ci_upper_95": 0.004411845864173469,
+          "invalid_replicates": 0,
+          "point_delta": -0.004325259515570834,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": -0.0049423393739703725,
+          "ci_upper_95": 0.018453255490256663,
+          "invalid_replicates": 0,
+          "point_delta": 0.003996003996003972,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "condition_vs_iid"
+    },
+    "V2_FEDPROX_COMBINED_minus_V1_FEDPROX_COMBINED": {
+      "A": "V2_FEDPROX_COMBINED",
+      "B": "V1_FEDPROX_COMBINED",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.0075142577615679995,
+          "ci_upper_95": 0.22260631012179666,
+          "invalid_replicates": 0,
+          "point_delta": 0.06442543281238233,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.01119236119917888,
+          "ci_upper_95": 0.2074278013779316,
+          "invalid_replicates": 0,
+          "point_delta": 0.0661198662928767,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.4037430478606949,
+          "ci_upper_95": 0.983720464093022,
+          "invalid_replicates": 0,
+          "point_delta": 0.7322115890961602,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.952755905511811,
+          "ci_upper_95": 0.9882854100106496,
+          "invalid_replicates": 0,
+          "point_delta": 0.9798068481123793,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.978391356542617,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.9946524064171123,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9223744292237442,
+          "ci_upper_95": 0.9774352385388922,
+          "invalid_replicates": 0,
+          "point_delta": 0.9653979238754326,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": -0.024007287449392734,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": -0.005994005994006013,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDPROX_COMBINED_minus_V2_FEDAVG_COMBINED": {
+      "A": "V2_FEDPROX_COMBINED",
+      "B": "V2_FEDAVG_COMBINED",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.0037213287721054034,
+          "ci_upper_95": -2.4114796995822196e-05,
+          "invalid_replicates": 0,
+          "point_delta": -0.0004970235646419852,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.0016166901002233613,
+          "ci_upper_95": -6.104330300531756e-05,
+          "invalid_replicates": 0,
+          "point_delta": -0.0006299928445256953,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.04143729654659123,
+          "ci_upper_95": 0.0056481770875338455,
+          "invalid_replicates": 0,
+          "point_delta": -0.011580918624976455,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.001438554764804989,
+          "ci_upper_95": 0.00777673075390406,
+          "invalid_replicates": 0,
+          "point_delta": 0.0026941720560412774,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.00022538355451329206,
+          "invalid_replicates": 0,
+          "point_delta": 2.8750503133778693e-05,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.0027531241215404925,
+          "ci_upper_95": 0.014705882352941235,
+          "invalid_replicates": 0,
+          "point_delta": 0.005190311418685201,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.0,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "fedprox_effect"
+    },
+    "V2_FEDPROX_COMBINED_minus_V2_FEDPROX_IID": {
+      "A": "V2_FEDPROX_COMBINED",
+      "B": "V2_FEDPROX_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.007726959433492442,
+          "ci_upper_95": 0.00016379784579101386,
+          "invalid_replicates": 0,
+          "point_delta": -0.0012846901120465715,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.0041608586562587035,
+          "ci_upper_95": 0.0008176775674239832,
+          "invalid_replicates": 0,
+          "point_delta": -0.0014898596213475113,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.2702035429920209,
+          "ci_upper_95": -0.004942946186869912,
+          "invalid_replicates": 0,
+          "point_delta": -0.09549534399828685,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.035839563127297955,
+          "ci_upper_95": -0.006621631017901919,
+          "invalid_replicates": 0,
+          "point_delta": -0.013702455219511633,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -0.0009052306849379743,
+          "ci_upper_95": 0.002681001845999731,
+          "invalid_replicates": 0,
+          "point_delta": 0.0007130124777183777,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.0700789994746838,
+          "ci_upper_95": -0.013114754098360604,
+          "invalid_replicates": 0,
+          "point_delta": -0.02768166089965396,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.005494505494505475,
+          "invalid_replicates": 0,
+          "point_delta": 0.0009990009990009652,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "condition_vs_iid"
+    },
+    "V2_FEDPROX_FEATURE_minus_V1_FEDPROX_FEATURE": {
+      "A": "V2_FEDPROX_FEATURE",
+      "B": "V1_FEDPROX_FEATURE",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.005682883139448203,
+          "ci_upper_95": 0.2739572265796306,
+          "invalid_replicates": 0,
+          "point_delta": 0.14464220108362735,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.005796025190714094,
+          "ci_upper_95": 0.31493469774897304,
+          "invalid_replicates": 0,
+          "point_delta": 0.09651075568030598,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.02396253332809328,
+          "ci_upper_95": 0.522011110781849,
+          "invalid_replicates": 0,
+          "point_delta": 0.23071453896235405,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.08137288313926894,
+          "ci_upper_95": 0.6273090101644303,
+          "invalid_replicates": 0,
+          "point_delta": 0.29607721485812155,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.15744629887188988,
+          "ci_upper_95": 0.7704384744894224,
+          "invalid_replicates": 0,
+          "point_delta": 0.4597301904651522,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.015552099533437058,
+          "ci_upper_95": -0.0009389671361502705,
+          "invalid_replicates": 0,
+          "point_delta": -0.007785467128027634,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9798850574712644,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.995004995004995,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDPROX_FEATURE_minus_V2_FEDAVG_FEATURE": {
+      "A": "V2_FEDPROX_FEATURE",
+      "B": "V2_FEDAVG_FEATURE",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.0002892376211367509,
+          "ci_upper_95": 0.0004166740189122109,
+          "invalid_replicates": 0,
+          "point_delta": 3.060844176983046e-05,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.00023420543950070094,
+          "ci_upper_95": 0.00043708238057538207,
+          "invalid_replicates": 0,
+          "point_delta": 5.357963835472823e-05,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.0008912320341429858,
+          "ci_upper_95": 0.00073376543964776,
+          "invalid_replicates": 0,
+          "point_delta": -5.248886483177895e-05,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.0014526939694966545,
+          "ci_upper_95": 0.0011485038536704906,
+          "invalid_replicates": 0,
+          "point_delta": -1.0494563815854896e-05,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -1.8494829153947734e-05,
+          "ci_upper_95": 0.004661323292459659,
+          "invalid_replicates": 0,
+          "point_delta": 0.0017150855440215551,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.003282275711159799,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": -0.0017301038062282892,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.013544018058690765,
+          "invalid_replicates": 0,
+          "point_delta": 0.0019980019980019303,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "fedprox_effect"
+    },
+    "V2_FEDPROX_FEATURE_minus_V2_FEDPROX_IID": {
+      "A": "V2_FEDPROX_FEATURE",
+      "B": "V2_FEDPROX_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.00016541273200680606,
+          "ci_upper_95": 0.0011507112424212762,
+          "invalid_replicates": 0,
+          "point_delta": 0.00024233376846904964,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.00010478894352317081,
+          "ci_upper_95": 0.0016279562333261222,
+          "invalid_replicates": 0,
+          "point_delta": 0.00040098309994507364,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.020249863676200963,
+          "ci_upper_95": 0.004153283540901165,
+          "invalid_replicates": 0,
+          "point_delta": -0.005451599134097207,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.002751021269539744,
+          "ci_upper_95": 0.0045260670629723165,
+          "invalid_replicates": 0,
+          "point_delta": 0.00042483878249388596,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -0.0019398642095053154,
+          "ci_upper_95": 0.0077259914199532265,
+          "invalid_replicates": 0,
+          "point_delta": 0.0017203282828283095,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.0060975609756097615,
+          "ci_upper_95": 0.0023346303501945442,
+          "invalid_replicates": 0,
+          "point_delta": -0.0008650519031141446,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": -0.0038022813688213253,
+          "ci_upper_95": 0.008932629870129818,
+          "invalid_replicates": 0,
+          "point_delta": 0.0019980019980019303,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "condition_vs_iid"
+    },
+    "V2_FEDPROX_IID_minus_V1_FEDPROX_IID": {
+      "A": "V2_FEDPROX_IID",
+      "B": "V1_FEDPROX_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.003949541872694584,
+          "ci_upper_95": 0.2386395044785492,
+          "invalid_replicates": 0,
+          "point_delta": 0.12459229331425092,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.0049977885114924625,
+          "ci_upper_95": 0.2948041647438856,
+          "invalid_replicates": 0,
+          "point_delta": 0.0843749675929607,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.024216573799689663,
+          "ci_upper_95": 0.5405461795730786,
+          "invalid_replicates": 0,
+          "point_delta": 0.23616613809645126,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.08137288313926894,
+          "ci_upper_95": 0.6263189589715392,
+          "invalid_replicates": 0,
+          "point_delta": 0.29565237607562767,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.15744629887188988,
+          "ci_upper_95": 0.7642761937876681,
+          "invalid_replicates": 0,
+          "point_delta": 0.45800986218232387,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.011422637590861928,
+          "ci_upper_95": -0.001097694840834218,
+          "invalid_replicates": 0,
+          "point_delta": -0.00692041522491349,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9737803075103489,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.993006993006993,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDPROX_IID_minus_V2_FEDAVG_IID": {
+      "A": "V2_FEDPROX_IID",
+      "B": "V2_FEDAVG_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -5.1239268168634666e-05,
+          "ci_upper_95": 0.0021141768743691003,
+          "invalid_replicates": 0,
+          "point_delta": 0.0005672634052132919,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -3.7208840820590616e-05,
+          "ci_upper_95": 0.003260673318809415,
+          "invalid_replicates": 0,
+          "point_delta": 0.0009704828043928249,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.000253666741319325,
+          "ci_upper_95": 0.0020658119691713273,
+          "invalid_replicates": 0,
+          "point_delta": 0.001059254801960563,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.0003660711666150118,
+          "ci_upper_95": 0.002427562167377273,
+          "invalid_replicates": 0,
+          "point_delta": 0.0013150275296359704,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -0.002817981724804852,
+          "ci_upper_95": 7.399733609592118e-05,
+          "invalid_replicates": 0,
+          "point_delta": -0.0008432147562582593,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.000803858520900258,
+          "ci_upper_95": 0.006684491978609541,
+          "invalid_replicates": 0,
+          "point_delta": 0.0034602076124568004,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": -0.005494505494505475,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": -0.0009990009990009652,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "fedprox_effect"
+    },
+    "V2_FEDPROX_LABEL_minus_V1_FEDPROX_LABEL": {
+      "A": "V2_FEDPROX_LABEL",
+      "B": "V1_FEDPROX_LABEL",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.013206427270589183,
+          "ci_upper_95": 0.6832954312229522,
+          "invalid_replicates": 0,
+          "point_delta": 0.26449888181552883,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.02977877206065116,
+          "ci_upper_95": 0.6464084226709312,
+          "invalid_replicates": 0,
+          "point_delta": 0.2841838092703146,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.21472078196920796,
+          "ci_upper_95": 0.8508204057181534,
+          "invalid_replicates": 0,
+          "point_delta": 0.5378044827002699,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.49519925318727087,
+          "ci_upper_95": 0.9680059523809523,
+          "invalid_replicates": 0,
+          "point_delta": 0.7537975811301423,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.03849966953073358,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.619324796274738,
+          "ci_upper_95": 0.9461077844311377,
+          "invalid_replicates": 0,
+          "point_delta": 0.8062283737024221,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": 0.0,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDPROX_LABEL_minus_V2_FEDAVG_LABEL": {
+      "A": "V2_FEDPROX_LABEL",
+      "B": "V2_FEDAVG_LABEL",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.035769789162705234,
+          "ci_upper_95": -0.000517242258514572,
+          "invalid_replicates": 0,
+          "point_delta": -0.006076657331378743,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.022021526406725278,
+          "ci_upper_95": -0.002598243342548212,
+          "invalid_replicates": 0,
+          "point_delta": -0.009408411657546578,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.08057310554973908,
+          "ci_upper_95": -0.004692722496079328,
+          "invalid_replicates": 0,
+          "point_delta": -0.033886544669938345,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.030080519973644027,
+          "ci_upper_95": -0.001498743827427873,
+          "invalid_replicates": 0,
+          "point_delta": -0.011987201682504334,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -0.01182129560340792,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": -0.002860624586913385,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.043771043771043794,
+          "ci_upper_95": -0.0028901734104046506,
+          "invalid_replicates": 0,
+          "point_delta": -0.019896193771626325,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": -0.012003643724696367,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": -0.0029970029970030065,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "fedprox_effect"
+    },
+    "V2_FEDPROX_LABEL_minus_V2_FEDPROX_IID": {
+      "A": "V2_FEDPROX_LABEL",
+      "B": "V2_FEDPROX_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.03969333208095527,
+          "ci_upper_95": -0.000503761576859163,
+          "invalid_replicates": 0,
+          "point_delta": -0.006660127238227176,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.02326035282926986,
+          "ci_upper_95": -0.0021370832687626073,
+          "invalid_replicates": 0,
+          "point_delta": -0.010219883922305995,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.5242602569786867,
+          "ci_upper_95": -0.01614820354023916,
+          "invalid_replicates": 0,
+          "point_delta": -0.19354050431422676,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.09528405956977382,
+          "ci_upper_95": -0.013799716807514795,
+          "invalid_replicates": 0,
+          "point_delta": -0.038473332108869385,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -0.0024381377824279626,
+          "ci_upper_95": 0.002525252525252486,
+          "invalid_replicates": 0,
+          "point_delta": 0.00044262853251619827,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.17508417508417518,
+          "ci_upper_95": -0.02698760029175784,
+          "invalid_replicates": 0,
+          "point_delta": -0.0743944636678201,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.005494505494505475,
+          "invalid_replicates": 0,
+          "point_delta": 0.0009990009990009652,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "condition_vs_iid"
+    },
+    "V2_FEDPROX_QUANTITY_minus_V1_FEDPROX_QUANTITY": {
+      "A": "V2_FEDPROX_QUANTITY",
+      "B": "V1_FEDPROX_QUANTITY",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": 0.030582834577715677,
+          "ci_upper_95": 0.3267498529417582,
+          "invalid_replicates": 0,
+          "point_delta": 0.14107235404923557,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.026875103999112526,
+          "ci_upper_95": 0.38065628380776806,
+          "invalid_replicates": 0,
+          "point_delta": 0.19333434731358612,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.09695108243225425,
+          "ci_upper_95": 0.6654894079760353,
+          "invalid_replicates": 0,
+          "point_delta": 0.3580847401850113,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.04679506099960651,
+          "ci_upper_95": 0.6780047914593578,
+          "invalid_replicates": 0,
+          "point_delta": 0.3001392906889532,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.030278172736884268,
+          "ci_upper_95": 0.07246376811594202,
+          "invalid_replicates": 0,
+          "point_delta": 0.060558613808249784,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.02399435364041607,
+          "ci_upper_95": 0.7960591133004926,
+          "invalid_replicates": 0,
+          "point_delta": 0.43685121107266434,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0037617554858934144,
+          "ci_upper_95": 0.20496894409937882,
+          "invalid_replicates": 0,
+          "point_delta": 0.03996003996003994,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "architecture_effect"
+    },
+    "V2_FEDPROX_QUANTITY_minus_V2_FEDAVG_QUANTITY": {
+      "A": "V2_FEDPROX_QUANTITY",
+      "B": "V2_FEDAVG_QUANTITY",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.00083797758139042,
+          "ci_upper_95": 6.523429386773305e-05,
+          "invalid_replicates": 0,
+          "point_delta": -0.00023505120128031187,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.0018152629834095046,
+          "ci_upper_95": 0.00020938422004379564,
+          "invalid_replicates": 0,
+          "point_delta": -0.0006083881516406597,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.0032264619992928845,
+          "ci_upper_95": 0.0006460319598882158,
+          "invalid_replicates": 0,
+          "point_delta": -0.0009376266875498196,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.003613325316272384,
+          "ci_upper_95": 0.0012367746996454487,
+          "invalid_replicates": 0,
+          "point_delta": -0.0008786681121439877,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": -0.003424648639101413,
+          "ci_upper_95": 0.0025706940874036244,
+          "invalid_replicates": 0,
+          "point_delta": -3.0778724822155823e-06,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.004249291784702458,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_delta": -0.0017301038062284002,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": -0.0031880977683316214,
+          "ci_upper_95": 0.0049423393739703725,
+          "invalid_replicates": 0,
+          "point_delta": 0.0,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "fedprox_effect"
+    },
+    "V2_FEDPROX_QUANTITY_minus_V2_FEDPROX_IID": {
+      "A": "V2_FEDPROX_QUANTITY",
+      "B": "V2_FEDPROX_IID",
+      "delta": {
+        "AUPRC": {
+          "ci_lower_95": -0.0027942682052661816,
+          "ci_upper_95": 0.00024714634864442253,
+          "invalid_replicates": 0,
+          "point_delta": -0.0008912437219212865,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": -0.004314994606256617,
+          "ci_upper_95": 0.0002338841423008553,
+          "invalid_replicates": 0,
+          "point_delta": -0.0018450407723763496,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": -0.0923941462468374,
+          "ci_upper_95": 0.003649677813149954,
+          "invalid_replicates": 0,
+          "point_delta": -0.03034259903287173,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": -0.013479870507180136,
+          "ci_upper_95": 0.0032404850206475544,
+          "invalid_replicates": 0,
+          "point_delta": -0.0026596301292765023,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.014081558541430783,
+          "invalid_replicates": 0,
+          "point_delta": 0.00430467980950866,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": -0.03144654088050314,
+          "ci_upper_95": -0.0005737234652897216,
+          "invalid_replicates": 0,
+          "point_delta": -0.009515570934256035,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.018100854203067406,
+          "invalid_replicates": 0,
+          "point_delta": 0.004995004995004937,
+          "valid_replicates": 2000
+        }
+      },
+      "family": "condition_vs_iid"
+    }
+  },
+  "dataset": "INTERNAL_TEST",
+  "models": {
+    "V1_FEDAVG_COMBINED": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.7712540274664358,
+          "ci_upper_95": 0.9925412643535457,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9297420668710785,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.779774532395622,
+          "ci_upper_95": 0.9894237975418181,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9312996691889426,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 1.0,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 1.0,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "06aa5d90e3018f90012bd93330ce20befa4a3f42fb6f466377c5c098048d3e5f",
+      "condition": "combined",
+      "development_round": 3,
+      "development_validation_AUPRC": 0.4369708383334254,
+      "development_validation_patient_macro_F1": 0.0,
+      "generation": "V1",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.6964442529878389,
+          "AUROC": 0.7516366231268033,
+          "F1_at_0_5": 0.0,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9982144469983985,
+          "AUROC": 0.9775330886441999,
+          "F1_at_0_5": 0.0,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9016932703525007,
+          "AUROC": 0.6846420991703647,
+          "F1_at_0_5": 0.0,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.9987902244122147,
+          "AUROC": 0.6462395543175488,
+          "F1_at_0_5": 0.0,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.26158988590096555,
+          "AUROC": 0.9299490135225006,
+          "F1_at_0_5": 0.0,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9297420668710785,
+        "AUROC": 0.9312996691889426,
+        "BCE": 0.6900950855514025,
+        "FN": 1156,
+        "FP": 0,
+        "TN": 1001,
+        "TP": 0,
+        "accuracy": 0.46407046824292997,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.0,
+        "pooled_F1": 0.0,
+        "positives": 1156,
+        "precision": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 1.0,
+        "windows": 2157
+      }
+    },
+    "V1_FEDAVG_FEATURE": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.7290264737850125,
+          "ci_upper_95": 0.9943024392528268,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8565516552112138,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.685544218859032,
+          "ci_upper_95": 0.9942408484715439,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9045737999025197,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.27655028722782315,
+          "ci_upper_95": 0.9002695997053528,
+          "invalid_replicates": 0,
+          "point_estimate": 0.5915407949979958,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.3621867881548975,
+          "ci_upper_95": 0.9122541603630863,
+          "invalid_replicates": 0,
+          "point_estimate": 0.6978569272562632,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.2211404728789986,
+          "ci_upper_95": 0.8386648122392212,
+          "invalid_replicates": 0,
+          "point_estimate": 0.53592953175707,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 1.0,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 1.0,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "5279b6fdfb1e18b47f18485c5b87375a8eb3a6431ca1981dbf75fbcc79700c49",
+      "condition": "feature",
+      "development_round": 1,
+      "development_validation_AUPRC": 0.4928732353001021,
+      "development_validation_patient_macro_F1": 0.3081050674007343,
+      "generation": "V1",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": 0.0,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8684868692925001,
+          "AUROC": 0.9503273246253607,
+          "F1_at_0_5": 0.6337760910815939,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9992194424265735,
+          "AUROC": 0.9902124346568791,
+          "F1_at_0_5": 0.961038961038961,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8013322476825342,
+          "AUROC": 0.4578911827127147,
+          "F1_at_0_5": 0.8861154446177847,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.9964419765331551,
+          "AUROC": 0.2757660167130919,
+          "F1_at_0_5": 0.9986091794158554,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.15990084808064095,
+          "AUROC": 0.6464198625581911,
+          "F1_at_0_5": 0.06970509383378017,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.8565516552112138,
+        "AUROC": 0.9045737999025197,
+        "BCE": 0.6807151142089735,
+        "FN": 0,
+        "FP": 1001,
+        "TN": 0,
+        "TP": 1156,
+        "accuracy": 0.53592953175707,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.5915407949979958,
+        "pooled_F1": 0.6978569272562632,
+        "positives": 1156,
+        "precision": 0.53592953175707,
+        "sensitivity": 1.0,
+        "specificity": 0.0,
+        "windows": 2157
+      }
+    },
+    "V1_FEDAVG_IID": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.7678363445970292,
+          "ci_upper_95": 0.9959698984402261,
+          "invalid_replicates": 0,
+          "point_estimate": 0.877442726431004,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.7053054337794186,
+          "ci_upper_95": 0.994865309819009,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9176109357770258,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.27655028722782315,
+          "ci_upper_95": 0.9002695997053528,
+          "invalid_replicates": 0,
+          "point_estimate": 0.5915407949979958,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.3621867881548975,
+          "ci_upper_95": 0.9122541603630863,
+          "invalid_replicates": 0,
+          "point_estimate": 0.6978569272562632,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.2211404728789986,
+          "ci_upper_95": 0.8386648122392212,
+          "invalid_replicates": 0,
+          "point_estimate": 0.53592953175707,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 1.0,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 1.0,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "7a2a7fc6bad6d713784cef114006b0e6d5a56e211ebc7d4e4a94fecdf3c85d10",
+      "condition": "iid",
+      "development_round": 1,
+      "development_validation_AUPRC": 0.5062218463441578,
+      "development_validation_patient_macro_F1": 0.3081050674007343,
+      "generation": "V1",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": 0.0,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8420553182997081,
+          "AUROC": 0.921038751512519,
+          "F1_at_0_5": 0.6337760910815939,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9991302585096559,
+          "AUROC": 0.9891002113224336,
+          "F1_at_0_5": 0.961038961038961,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8279152816223712,
+          "AUROC": 0.49778120779471347,
+          "F1_at_0_5": 0.8861154446177847,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.9983096691729076,
+          "AUROC": 0.5431754874651811,
+          "F1_at_0_5": 0.9986091794158554,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.19069893243670705,
+          "AUROC": 0.7353136776767902,
+          "F1_at_0_5": 0.06970509383378017,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.877442726431004,
+        "AUROC": 0.9176109357770258,
+        "BCE": 0.6784563409373857,
+        "FN": 0,
+        "FP": 1001,
+        "TN": 0,
+        "TP": 1156,
+        "accuracy": 0.53592953175707,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.5915407949979958,
+        "pooled_F1": 0.6978569272562632,
+        "positives": 1156,
+        "precision": 0.53592953175707,
+        "sensitivity": 1.0,
+        "specificity": 0.0,
+        "windows": 2157
+      }
+    },
+    "V1_FEDAVG_LABEL": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.5479951440776321,
+          "ci_upper_95": 0.9858783238447917,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8395182277212124,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.5880288962951441,
+          "ci_upper_95": 0.963993280957739,
+          "invalid_replicates": 0,
+          "point_estimate": 0.820454631873317,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.0011695906432748538,
+          "ci_upper_95": 0.3141077451581929,
+          "invalid_replicates": 0,
+          "point_estimate": 0.10802199135459674,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.0019430283766920533,
+          "ci_upper_95": 0.5208333333333334,
+          "invalid_replicates": 0,
+          "point_estimate": 0.2313546423135464,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.25,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9620253164556962,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.0009724589496032325,
+          "ci_upper_95": 0.3546099290780142,
+          "invalid_replicates": 0,
+          "point_estimate": 0.1314878892733564,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9759927125506073,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.994005994005994,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "48ab1a96921a5fabf3594ab40019f1b5d5f7ad9f81162f139689aef7ab44c3a2",
+      "condition": "label",
+      "development_round": 49,
+      "development_validation_AUPRC": 0.5455569642172218,
+      "development_validation_patient_macro_F1": 0.08437362185046894,
+      "generation": "V1",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8634306660418064,
+          "AUROC": 0.9531506934317894,
+          "F1_at_0_5": 0.022857142857142857,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9989288076026326,
+          "AUROC": 0.9866533199866534,
+          "F1_at_0_5": 0.6182572614107884,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.943784434682451,
+          "AUROC": 0.8148755546980513,
+          "F1_at_0_5": 0.007017543859649123,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.9999136814079329,
+          "AUROC": 0.9693593314763231,
+          "F1_at_0_5": 0.0,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.06377374808831805,
+          "AUROC": 0.4857016182664598,
+          "F1_at_0_5": 0.0,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.8395182277212124,
+        "AUROC": 0.820454631873317,
+        "BCE": 0.670210151442129,
+        "FN": 1004,
+        "FP": 6,
+        "TN": 995,
+        "TP": 152,
+        "accuracy": 0.5317570700046361,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.10802199135459674,
+        "pooled_F1": 0.2313546423135464,
+        "positives": 1156,
+        "precision": 0.9620253164556962,
+        "sensitivity": 0.1314878892733564,
+        "specificity": 0.994005994005994,
+        "windows": 2157
+      }
+    },
+    "V1_FEDAVG_QUANTITY": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.5889551213566975,
+          "ci_upper_95": 0.9645093655542188,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8276823713716901,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.5197662168263684,
+          "ci_upper_95": 0.9676084226622685,
+          "invalid_replicates": 0,
+          "point_estimate": 0.7561841272913937,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.09213324220159101,
+          "ci_upper_95": 0.7335080517312672,
+          "invalid_replicates": 0,
+          "point_estimate": 0.3988791186128984,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.2250237586385096,
+          "ci_upper_95": 0.9368778692964072,
+          "invalid_replicates": 0,
+          "point_estimate": 0.6470254957507082,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9285714285714286,
+          "ci_upper_95": 0.9632352941176471,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9376026272577996,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.12739212239802344,
+          "ci_upper_95": 0.9381012630014853,
+          "invalid_replicates": 0,
+          "point_estimate": 0.4939446366782007,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.8236086603613778,
+          "ci_upper_95": 0.9966109098778932,
+          "invalid_replicates": 0,
+          "point_estimate": 0.962037962037962,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "fa7641fa4216a877f101a3cfa0d2d33bbf76099f6c6e33916e0e3600f160fc6f",
+      "condition": "quantity",
+      "development_round": 27,
+      "development_validation_AUPRC": 0.5160353244837765,
+      "development_validation_patient_macro_F1": 0.41379166461354433,
+      "generation": "V1",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8597488355379397,
+          "AUROC": 0.9411746455275977,
+          "F1_at_0_5": 0.8769716088328076,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9968492327861479,
+          "AUROC": 0.9611834056278501,
+          "F1_at_0_5": 0.9635036496350365,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8952202193576099,
+          "AUROC": 0.7108817287285356,
+          "F1_at_0_5": 0.40331491712707185,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.9999767225927925,
+          "AUROC": 0.9916434540389972,
+          "F1_at_0_5": 0.14948453608247422,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.025243986850227475,
+          "AUROC": 0.27244513411660387,
+          "F1_at_0_5": 0.0,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.8276823713716901,
+        "AUROC": 0.7561841272913937,
+        "BCE": 0.5924124857023165,
+        "FN": 585,
+        "FP": 38,
+        "TN": 963,
+        "TP": 571,
+        "accuracy": 0.7111729253592953,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.3988791186128984,
+        "pooled_F1": 0.6470254957507082,
+        "positives": 1156,
+        "precision": 0.9376026272577996,
+        "sensitivity": 0.4939446366782007,
+        "specificity": 0.962037962037962,
+        "windows": 2157
+      }
+    },
+    "V1_FEDPROX_COMBINED": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.769656110516095,
+          "ci_upper_95": 0.9913905523469688,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9337884310061866,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.7869855067290187,
+          "ci_upper_95": 0.987676043590022,
+          "invalid_replicates": 0,
+          "point_estimate": 0.931688553660872,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 1.0,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 1.0,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "696d6e64fb64c91eacc1d4e4dc312d6ad0dfcbbf9190b8b38ab395c0c6825808",
+      "condition": "combined",
+      "development_round": 3,
+      "development_validation_AUPRC": 0.4456558087527336,
+      "development_validation_patient_macro_F1": 0.0,
+      "generation": "V1",
+      "mu": 0.01,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.6781500258656522,
+          "AUROC": 0.7332381868387577,
+          "F1_at_0_5": 0.0,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9979003795240358,
+          "AUROC": 0.9736403069736403,
+          "F1_at_0_5": 0.0,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9194253937334034,
+          "AUROC": 0.7336967007524601,
+          "F1_at_0_5": 0.0,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.998941143180719,
+          "AUROC": 0.6824512534818942,
+          "F1_at_0_5": 0.0,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.2916637135821471,
+          "AUROC": 0.9421414320549768,
+          "F1_at_0_5": 0.0,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9337884310061866,
+        "AUROC": 0.931688553660872,
+        "BCE": 0.6932952315563762,
+        "FN": 1156,
+        "FP": 0,
+        "TN": 1001,
+        "TP": 0,
+        "accuracy": 0.46407046824292997,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.0,
+        "pooled_F1": 0.0,
+        "positives": 1156,
+        "precision": 0.0,
+        "sensitivity": 0.0,
+        "specificity": 1.0,
+        "windows": 2157
+      }
+    },
+    "V1_FEDPROX_FEATURE": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.7249105416067314,
+          "ci_upper_95": 0.9942528585512781,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8550986866154572,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.6839284079991816,
+          "ci_upper_95": 0.9941705312551451,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9031885069947353,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.27655028722782315,
+          "ci_upper_95": 0.9002695997053528,
+          "invalid_replicates": 0,
+          "point_estimate": 0.5915407949979958,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.3621867881548975,
+          "ci_upper_95": 0.9122541603630863,
+          "invalid_replicates": 0,
+          "point_estimate": 0.6978569272562632,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.2211404728789986,
+          "ci_upper_95": 0.8386648122392212,
+          "invalid_replicates": 0,
+          "point_estimate": 0.53592953175707,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 1.0,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 1.0,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "149c2bb373fef8b457b94ce06ea9adeba2e05d1c72404749e5508a3ad35d45a4",
+      "condition": "feature",
+      "development_round": 1,
+      "development_validation_AUPRC": 0.49356504067844564,
+      "development_validation_patient_macro_F1": 0.3081050674007343,
+      "generation": "V1",
+      "mu": 0.01,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": 0.0,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8692808388398201,
+          "AUROC": 0.9512891315813967,
+          "F1_at_0_5": 0.6337760910815939,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9991921893508584,
+          "AUROC": 0.9898787676565455,
+          "F1_at_0_5": 0.961038961038961,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8000495210403564,
+          "AUROC": 0.45519004437584415,
+          "F1_at_0_5": 0.8861154446177847,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.9965506925057097,
+          "AUROC": 0.28690807799442897,
+          "F1_at_0_5": 0.9986091794158554,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.15850099820078375,
+          "AUROC": 0.6437596985147418,
+          "F1_at_0_5": 0.06970509383378017,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.8550986866154572,
+        "AUROC": 0.9031885069947353,
+        "BCE": 0.6810603354717987,
+        "FN": 0,
+        "FP": 1001,
+        "TN": 0,
+        "TP": 1156,
+        "accuracy": 0.53592953175707,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.5915407949979958,
+        "pooled_F1": 0.6978569272562632,
+        "positives": 1156,
+        "precision": 0.53592953175707,
+        "sensitivity": 1.0,
+        "specificity": 0.0,
+        "windows": 2157
+      }
+    },
+    "V1_FEDPROX_IID": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.7604179812926258,
+          "ci_upper_95": 0.995651978750826,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8749062606163646,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.7035778149515458,
+          "ci_upper_95": 0.9949530672994568,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9149233119821355,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.27655028722782315,
+          "ci_upper_95": 0.9002695997053528,
+          "invalid_replicates": 0,
+          "point_estimate": 0.5915407949979958,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.3621867881548975,
+          "ci_upper_95": 0.9122541603630863,
+          "invalid_replicates": 0,
+          "point_estimate": 0.6978569272562632,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.2211404728789986,
+          "ci_upper_95": 0.8386648122392212,
+          "invalid_replicates": 0,
+          "point_estimate": 0.53592953175707,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 1.0,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 1.0,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.0,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "194043891b548f99e23adad38f9cf9889f8439b6fbe39f05b988618270d6eb31",
+      "condition": "iid",
+      "development_round": 1,
+      "development_validation_AUPRC": 0.507035023889082,
+      "development_validation_patient_macro_F1": 0.3081050674007343,
+      "generation": "V1",
+      "mu": 0.01,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": 0.0,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8417301755611629,
+          "AUROC": 0.921069777543359,
+          "F1_at_0_5": 0.6337760910815939,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9991302585096559,
+          "AUROC": 0.9891002113224336,
+          "F1_at_0_5": 0.961038961038961,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.826794080599401,
+          "AUROC": 0.49508006945784294,
+          "F1_at_0_5": 0.8861154446177847,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.9981190073191402,
+          "AUROC": 0.5069637883008357,
+          "F1_at_0_5": 0.9986091794158554,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.18219702655852504,
+          "AUROC": 0.7264464641986257,
+          "F1_at_0_5": 0.06970509383378017,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.8749062606163646,
+        "AUROC": 0.9149233119821355,
+        "BCE": 0.6788574130664015,
+        "FN": 0,
+        "FP": 1001,
+        "TN": 0,
+        "TP": 1156,
+        "accuracy": 0.53592953175707,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.5915407949979958,
+        "pooled_F1": 0.6978569272562632,
+        "positives": 1156,
+        "precision": 0.53592953175707,
+        "sensitivity": 1.0,
+        "specificity": 0.0,
+        "windows": 2157
+      }
+    },
+    "V1_FEDPROX_LABEL": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.28863840171178246,
+          "ci_upper_95": 0.9859157976450018,
+          "invalid_replicates": 0,
+          "point_estimate": 0.7283395448768595,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.3412747547156149,
+          "ci_upper_95": 0.9649479776996556,
+          "invalid_replicates": 0,
+          "point_estimate": 0.7048945863824756,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.28146679062080365,
+          "invalid_replicates": 0,
+          "point_estimate": 0.09636194607995043,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.4648648648648649,
+          "invalid_replicates": 0,
+          "point_estimate": 0.20123839009287925,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9558823529411765,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.0,
+          "ci_upper_95": 0.3049645390070922,
+          "invalid_replicates": 0,
+          "point_estimate": 0.11245674740484429,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9759927125506073,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.994005994005994,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "a928666869ac73fec510e9f120d1cf786fe0caa64cf0c04f10b5797de035401e",
+      "condition": "label",
+      "development_round": 49,
+      "development_validation_AUPRC": 0.5520990688759435,
+      "development_validation_patient_macro_F1": 0.029747899159663867,
+      "generation": "V1",
+      "mu": 0.01,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8237542563808146,
+          "AUROC": 0.9129409574633117,
+          "F1_at_0_5": 0.022857142857142857,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.998902663565537,
+          "AUROC": 0.9863196529863196,
+          "F1_at_0_5": 0.5553145336225597,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9366135549733432,
+          "AUROC": 0.7978005016399768,
+          "F1_at_0_5": 0.0,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.9999136814079329,
+          "AUROC": 0.9693593314763231,
+          "F1_at_0_5": 0.0,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.0476688301381591,
+          "AUROC": 0.4657503879405897,
+          "F1_at_0_5": 0.0,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.7283395448768595,
+        "AUROC": 0.7048945863824756,
+        "BCE": 0.6822974172572502,
+        "FN": 1026,
+        "FP": 6,
+        "TN": 995,
+        "TP": 130,
+        "accuracy": 0.521557719054242,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.09636194607995043,
+        "pooled_F1": 0.20123839009287925,
+        "positives": 1156,
+        "precision": 0.9558823529411765,
+        "sensitivity": 0.11245674740484429,
+        "specificity": 0.994005994005994,
+        "windows": 2157
+      }
+    },
+    "V1_FEDPROX_QUANTITY": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.6712461268181078,
+          "ci_upper_95": 0.9672475462093661,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8575349561594586,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.6193260060588293,
+          "ci_upper_95": 0.970525884191725,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8041188914891337,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.12443227747360351,
+          "ci_upper_95": 0.7796791206843062,
+          "invalid_replicates": 0,
+          "point_estimate": 0.43927959387656407,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.31262169050387545,
+          "ci_upper_95": 0.9449404761904762,
+          "invalid_replicates": 0,
+          "point_estimate": 0.6907103825136612,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.927536231884058,
+          "ci_upper_95": 0.967479674796748,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9376854599406528,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.18671211832382065,
+          "ci_upper_95": 0.9566473988439307,
+          "invalid_replicates": 0,
+          "point_estimate": 0.5467128027681661,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.7888198757763976,
+          "ci_upper_95": 0.9950647748303516,
+          "invalid_replicates": 0,
+          "point_estimate": 0.958041958041958,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "65b75eb59cf5cd7b764c656a34c0f3560356f94b5a4ffc6dfd8d0e6cbed9f49c",
+      "condition": "quantity",
+      "development_round": 32,
+      "development_validation_AUPRC": 0.502195767890695,
+      "development_validation_patient_macro_F1": 0.43765323496174624,
+      "generation": "V1",
+      "mu": 0.01,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.876015366107235,
+          "AUROC": 0.9584561447054079,
+          "F1_at_0_5": 0.9296636085626911,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9960632153443897,
+          "AUROC": 0.952174396618841,
+          "F1_at_0_5": 0.9594202898550724,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.8929575903983392,
+          "AUROC": 0.7062029712521705,
+          "F1_at_0_5": 0.5326633165829145,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 0.9999767225927925,
+          "AUROC": 0.9916434540389972,
+          "F1_at_0_5": 0.21393034825870647,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.02600905754371274,
+          "AUROC": 0.28463755264908003,
+          "F1_at_0_5": 0.0,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.8575349561594586,
+        "AUROC": 0.8041188914891337,
+        "BCE": 0.5594504114005806,
+        "FN": 524,
+        "FP": 42,
+        "TN": 959,
+        "TP": 632,
+        "accuracy": 0.7375985164580435,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.43927959387656407,
+        "pooled_F1": 0.6907103825136612,
+        "positives": 1156,
+        "precision": 0.9376854599406528,
+        "sensitivity": 0.5467128027681661,
+        "specificity": 0.958041958041958,
+        "windows": 2157
+      }
+    },
+    "V2_FEDAVG_COMBINED": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9943932823942547,
+          "ci_upper_95": 0.9998105594382868,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9987108873832109,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.9958213934481822,
+          "ci_upper_95": 0.9996941268916744,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9984384127982744,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.41688433460585356,
+          "ci_upper_95": 0.9807773799172765,
+          "invalid_replicates": 0,
+          "point_estimate": 0.7437925077211367,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.95,
+          "ci_upper_95": 0.9872608807523539,
+          "invalid_replicates": 0,
+          "point_estimate": 0.977112676056338,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9782870928829915,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9946236559139785,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9161425576519916,
+          "ci_upper_95": 0.9761444229529336,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9602076124567474,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9759927125506073,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.994005994005994,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "2853733760331fed99ed0e9310e01789de825bac9732344b0c65aa0641cf463a",
+      "condition": "combined",
+      "development_round": 42,
+      "development_validation_AUPRC": 0.8202489560000589,
+      "development_validation_patient_macro_F1": 0.45981989725685074,
+      "generation": "V2",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9908728502506814,
+          "AUROC": 0.9928019608451492,
+          "F1_at_0_5": 0.9546827794561934,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9996890343514593,
+          "AUROC": 0.995995995995996,
+          "F1_at_0_5": 0.990909090909091,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9993476079559042,
+          "AUROC": 0.9972988616631295,
+          "F1_at_0_5": 0.972875226039783,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.9887323943661972,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.5555555555555556,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9987108873832109,
+        "AUROC": 0.9984384127982744,
+        "BCE": 0.08331850254421498,
+        "FN": 46,
+        "FP": 6,
+        "TN": 995,
+        "TP": 1110,
+        "accuracy": 0.9758924432081595,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.7437925077211367,
+        "pooled_F1": 0.977112676056338,
+        "positives": 1156,
+        "precision": 0.9946236559139785,
+        "sensitivity": 0.9602076124567474,
+        "specificity": 0.994005994005994,
+        "windows": 2157
+      }
+    },
+    "V2_FEDAVG_FEATURE": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9987031660458275,
+          "ci_upper_95": 0.9999695125830024,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9997102792573147,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.9987959246681075,
+          "ci_upper_95": 0.9999585273137347,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9996456830366865,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.49136094674556213,
+          "ci_upper_95": 0.9941396546570135,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8223078228251817,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.9886148007590133,
+          "ci_upper_95": 0.9980353634577603,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9939446366782007,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9842632331902719,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9939446366782007,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9875561505188166,
+          "ci_upper_95": 0.9990610328638497,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9939446366782007,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.970289603960396,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.993006993006993,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "2e4381aaab044008aa1394cf2fd9a97a4e0280ffa9455ac7db77913a452208ca",
+      "condition": "feature",
+      "development_round": 50,
+      "development_validation_AUPRC": 0.8501518854463859,
+      "development_validation_patient_macro_F1": 0.66254028847651,
+      "generation": "V2",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9993220442263036,
+          "AUROC": 0.9994105054140424,
+          "F1_at_0_5": 0.9881656804733728,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9997360290678656,
+          "AUROC": 0.9966633299966633,
+          "F1_at_0_5": 0.990990990990991,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9994261090946106,
+          "AUROC": 0.9975400347289214,
+          "F1_at_0_5": 0.9946902654867257,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 1.0,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.96,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9997102792573147,
+        "AUROC": 0.9996456830366865,
+        "BCE": 0.023526077162096953,
+        "FN": 7,
+        "FP": 7,
+        "TN": 994,
+        "TP": 1149,
+        "accuracy": 0.9935095039406583,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.8223078228251817,
+        "pooled_F1": 0.9939446366782007,
+        "positives": 1156,
+        "precision": 0.9939446366782007,
+        "sensitivity": 0.9939446366782007,
+        "specificity": 0.993006993006993,
+        "windows": 2157
+      }
+    },
+    "V2_FEDAVG_IID": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9961825883847816,
+          "ci_upper_95": 0.9999514139968478,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9989312905254022,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.9946459623146753,
+          "ci_upper_95": 0.9999382498258602,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9983277967707034,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.49478902449542456,
+          "ci_upper_95": 0.9972591181346955,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8266476782924865,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.9832039492408704,
+          "ci_upper_95": 0.998177178271965,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9921942758022549,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9792387543252595,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9947826086956522,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9835271317829457,
+          "ci_upper_95": 0.9978046103183315,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9896193771626297,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9759927125506073,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.994005994005994,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "e90749ee700a2b7e55bd2aa6d36e9db32cd55e56ecd1cbc74959925c665d3ca5",
+      "condition": "iid",
+      "development_round": 38,
+      "development_validation_AUPRC": 0.8669476403992936,
+      "development_validation_patient_macro_F1": 0.4443151291273608,
+      "generation": "V2",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9988483871994395,
+          "AUROC": 0.999007167013124,
+          "F1_at_0_5": 0.9763313609467456,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9994048210203313,
+          "AUROC": 0.9922144366588811,
+          "F1_at_0_5": 0.9924357034795764,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9995247628432666,
+          "AUROC": 0.9980223808605055,
+          "F1_at_0_5": 0.9911190053285968,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 1.0,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 1.0,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9989312905254022,
+        "AUROC": 0.9983277967707034,
+        "BCE": 0.030554229555729086,
+        "FN": 12,
+        "FP": 6,
+        "TN": 995,
+        "TP": 1144,
+        "accuracy": 0.9916550764951322,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.8266476782924865,
+        "pooled_F1": 0.9921942758022549,
+        "positives": 1156,
+        "precision": 0.9947826086956522,
+        "sensitivity": 0.9896193771626297,
+        "specificity": 0.994005994005994,
+        "windows": 2157
+      }
+    },
+    "V2_FEDAVG_LABEL": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9953922463978024,
+          "ci_upper_95": 0.9998292714026203,
+          "invalid_replicates": 0,
+          "point_estimate": 0.998915084023767,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.996988160250304,
+          "ci_upper_95": 0.9996603634500011,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9984868073103368,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.3379841716533514,
+          "ci_upper_95": 0.9707394406291029,
+          "invalid_replicates": 0,
+          "point_estimate": 0.6680529734501587,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.9237804878048781,
+          "ci_upper_95": 0.9879221099334483,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9670231729055259,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9885496183206107,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9972426470588235,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.8585858585858586,
+          "ci_upper_95": 0.9772209567198178,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9385813148788927,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9879963562753037,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.997002997002997,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "524f50674dc907f6791c08e7339ee06e338bd6502f14ac8a7e601da52876be82",
+      "condition": "label",
+      "development_round": 50,
+      "development_validation_AUPRC": 0.8066305693453126,
+      "development_validation_patient_macro_F1": 0.4206452423976485,
+      "generation": "V2",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9963238236685606,
+          "AUROC": 0.9969284229468525,
+          "F1_at_0_5": 0.940809968847352,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9998503479522309,
+          "AUROC": 0.9981092203314426,
+          "F1_at_0_5": 0.983206106870229,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9989013088603504,
+          "AUROC": 0.9953694771367934,
+          "F1_at_0_5": 0.9442379182156134,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.9972067039106145,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9057647203158039,
+          "AUROC": 0.9957880735978719,
+          "F1_at_0_5": 0.14285714285714285,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.998915084023767,
+        "AUROC": 0.9984868073103368,
+        "BCE": 0.13457702458897106,
+        "FN": 71,
+        "FP": 3,
+        "TN": 998,
+        "TP": 1085,
+        "accuracy": 0.9656930922577655,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.6680529734501587,
+        "pooled_F1": 0.9670231729055259,
+        "positives": 1156,
+        "precision": 0.9972426470588235,
+        "sensitivity": 0.9385813148788927,
+        "specificity": 0.997002997002997,
+        "windows": 2157
+      }
+    },
+    "V2_FEDAVG_QUANTITY": {
+      "algorithm": "FedAvg",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9962442317800853,
+          "ci_upper_95": 0.999985481096294,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9988423614099745,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.9951742042800034,
+          "ci_upper_95": 0.9999797056580254,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9980616269543605,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.46794481789198245,
+          "ci_upper_95": 0.994279304593786,
+          "invalid_replicates": 0,
+          "point_estimate": 0.7983019607491252,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.9786780383795309,
+          "ci_upper_95": 0.9979035260880426,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9917283413147584,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9951534733441034,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9982471516213848,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9610705596107056,
+          "ci_upper_95": 0.9965576592082617,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9852941176470589,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9923857868020305,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.998001998001998,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "7a746369c897239c45adb14d312aa2427eb643a46156db7da5d009aad32b9b47",
+      "condition": "quantity",
+      "development_round": 47,
+      "development_validation_AUPRC": 0.8873612543728578,
+      "development_validation_patient_macro_F1": 0.6622482059816518,
+      "generation": "V2",
+      "mu": null,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9998599292642785,
+          "AUROC": 0.9998758958766405,
+          "F1_at_0_5": 0.9940119760479041,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9998326702716418,
+          "AUROC": 0.9978867756645535,
+          "F1_at_0_5": 0.995475113122172,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9990755324643745,
+          "AUROC": 0.9959965271078526,
+          "F1_at_0_5": 0.9821428571428571,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 1.0,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.8181818181818182,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9988423614099745,
+        "AUROC": 0.9980616269543605,
+        "BCE": 0.02876692344458688,
+        "FN": 17,
+        "FP": 2,
+        "TN": 999,
+        "TP": 1139,
+        "accuracy": 0.9911914696337506,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.7983019607491252,
+        "pooled_F1": 0.9917283413147584,
+        "positives": 1156,
+        "precision": 0.9982471516213848,
+        "sensitivity": 0.9852941176470589,
+        "specificity": 0.998001998001998,
+        "windows": 2157
+      }
+    },
+    "V2_FEDPROX_COMBINED": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9911863175286846,
+          "ci_upper_95": 0.9997380439928558,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9982138638185689,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.9950956920430787,
+          "ci_upper_95": 0.999314423981718,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9978084199537487,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.4037430478606949,
+          "ci_upper_95": 0.983720464093022,
+          "invalid_replicates": 0,
+          "point_estimate": 0.7322115890961602,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.952755905511811,
+          "ci_upper_95": 0.9882854100106496,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9798068481123793,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.978391356542617,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9946524064171123,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9223744292237442,
+          "ci_upper_95": 0.9774352385388922,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9653979238754326,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9759927125506073,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.994005994005994,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "ee6f2620262ad097a557313c1c03c242bbe26821f603b5132a5a651c2dc46568",
+      "condition": "combined",
+      "development_round": 48,
+      "development_validation_AUPRC": 0.800252465130285,
+      "development_validation_patient_macro_F1": 0.5523639738994517,
+      "generation": "V2",
+      "mu": 0.1,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9900809215730005,
+          "AUROC": 0.9924296484750705,
+          "F1_at_0_5": 0.960960960960961,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9996835194119302,
+          "AUROC": 0.9958847736625515,
+          "F1_at_0_5": 0.990909090909091,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9991416175676383,
+          "AUROC": 0.9964306386262782,
+          "F1_at_0_5": 0.982078853046595,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.9887323943661972,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.47058823529411764,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9982138638185689,
+        "AUROC": 0.9978084199537487,
+        "BCE": 0.07490011439336033,
+        "FN": 40,
+        "FP": 6,
+        "TN": 995,
+        "TP": 1116,
+        "accuracy": 0.9786740843764488,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.7322115890961602,
+        "pooled_F1": 0.9798068481123793,
+        "positives": 1156,
+        "precision": 0.9946524064171123,
+        "sensitivity": 0.9653979238754326,
+        "specificity": 0.994005994005994,
+        "windows": 2157
+      }
+    },
+    "V2_FEDPROX_FEATURE": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9987953568463857,
+          "ci_upper_95": 0.999969883480275,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9997408876990845,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.9988398726493966,
+          "ci_upper_95": 0.9999609058775629,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9996992626750413,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.4913511547554101,
+          "ci_upper_95": 0.9939400746659821,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8222553339603499,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.9888475836431226,
+          "ci_upper_95": 0.998,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9939341421143848,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.98531211750306,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9956597222222222,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9844479004665629,
+          "ci_upper_95": 0.9990610328638497,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9922145328719724,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9798850574712644,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.995004995004995,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "41894e4dfdf008136dc4c599c670df5cefbdefd460c6a84efc6399edc3d3c1b6",
+      "condition": "feature",
+      "development_round": 43,
+      "development_validation_AUPRC": 0.8325328012868012,
+      "development_validation_patient_macro_F1": 0.6542558929725504,
+      "generation": "V2",
+      "mu": 0.1,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9986197613772306,
+          "AUROC": 0.9988210108280848,
+          "F1_at_0_5": 0.9881656804733728,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9997700750848642,
+          "AUROC": 0.9971082193304416,
+          "F1_at_0_5": 0.9924585218702866,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9995474402240698,
+          "AUROC": 0.9981188500868223,
+          "F1_at_0_5": 0.9929078014184397,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 1.0,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.96,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9997408876990845,
+        "AUROC": 0.9996992626750413,
+        "BCE": 0.024021996617249575,
+        "FN": 9,
+        "FP": 5,
+        "TN": 996,
+        "TP": 1147,
+        "accuracy": 0.9935095039406583,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.8222553339603499,
+        "pooled_F1": 0.9939341421143848,
+        "positives": 1156,
+        "precision": 0.9956597222222222,
+        "sensitivity": 0.9922145328719724,
+        "specificity": 0.995004995004995,
+        "windows": 2157
+      }
+    },
+    "V2_FEDPROX_IID": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9982988783458323,
+          "ci_upper_95": 0.9999582346625071,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9994985539306155,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.9977709946843103,
+          "ci_upper_95": 0.9999365678446547,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9992982795750962,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.4955471858887422,
+          "ci_upper_95": 0.9978150943530508,
+          "invalid_replicates": 0,
+          "point_estimate": 0.8277069330944471,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.9855568078597023,
+          "ci_upper_95": 0.9985433357611071,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9935093033318909,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9792332268370607,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9939393939393939,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9885773624091381,
+          "ci_upper_95": 0.9989023051591658,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9930795847750865,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9737803075103489,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.993006993006993,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "e9adcb6457dd0e9c4bdb85a00df12ebab0d33be1a8712321bb027300d39dbee7",
+      "condition": "iid",
+      "development_round": 49,
+      "development_validation_AUPRC": 0.8792631637827065,
+      "development_validation_patient_macro_F1": 0.5536413883546776,
+      "generation": "V2",
+      "mu": 0.1,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9986186065962956,
+          "AUROC": 0.9988210108280847,
+          "F1_at_0_5": 0.9793510324483776,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9996547303984826,
+          "AUROC": 0.9955511066622177,
+          "F1_at_0_5": 0.9939577039274925,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9995005225857658,
+          "AUROC": 0.9979259116341888,
+          "F1_at_0_5": 0.9929328621908127,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 1.0,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 1.0,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9994985539306155,
+        "AUROC": 0.9992982795750962,
+        "BCE": 0.026935599652564854,
+        "FN": 8,
+        "FP": 7,
+        "TN": 994,
+        "TP": 1148,
+        "accuracy": 0.9930458970792768,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.8277069330944471,
+        "pooled_F1": 0.9935093033318909,
+        "positives": 1156,
+        "precision": 0.9939393939393939,
+        "sensitivity": 0.9930795847750865,
+        "specificity": 0.993006993006993,
+        "windows": 2157
+      }
+    },
+    "V2_FEDPROX_LABEL": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9586938599092175,
+          "ci_upper_95": 0.9991760479534242,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9928384266923883,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.975633332032189,
+          "ci_upper_95": 0.996276975989682,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9890783956527902,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.3047782402354136,
+          "ci_upper_95": 0.9612906349893836,
+          "invalid_replicates": 0,
+          "point_estimate": 0.6341664287802203,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.8937176625019163,
+          "ci_upper_95": 0.9832775919732442,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9550359712230215,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9767141009055628,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9943820224719101,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.8148148148148148,
+          "ci_upper_95": 0.9676601141407736,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9186851211072664,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9759927125506073,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.994005994005994,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "6c319b53ff5310b5319487f246c523178bed0df99678614ccf59d6cc951418d9",
+      "condition": "label",
+      "development_round": 41,
+      "development_validation_AUPRC": 0.8199390633130239,
+      "development_validation_patient_macro_F1": 0.3883864157707175,
+      "generation": "V2",
+      "mu": 0.1,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9772978912043984,
+          "AUROC": 0.9858211039061773,
+          "F1_at_0_5": 0.9085173501577287,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9998251968041562,
+          "AUROC": 0.9977755533311089,
+          "F1_at_0_5": 0.9847560975609756,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9984135629156375,
+          "AUROC": 0.9930542157051901,
+          "F1_at_0_5": 0.9201520912547528,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.9915730337078652,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.6625814158321899,
+          "AUROC": 0.9487918421636001,
+          "F1_at_0_5": 0.0,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9928384266923883,
+        "AUROC": 0.9890783956527902,
+        "BCE": 0.1864893647670772,
+        "FN": 94,
+        "FP": 6,
+        "TN": 995,
+        "TP": 1062,
+        "accuracy": 0.9536393138618452,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.6341664287802203,
+        "pooled_F1": 0.9550359712230215,
+        "positives": 1156,
+        "precision": 0.9943820224719101,
+        "sensitivity": 0.9186851211072664,
+        "specificity": 0.994005994005994,
+        "windows": 2157
+      }
+    },
+    "V2_FEDPROX_QUANTITY": {
+      "algorithm": "FedProx",
+      "bootstrap_95": {
+        "AUPRC": {
+          "ci_lower_95": 0.9958032692397383,
+          "ci_upper_95": 0.9999640477417241,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9986073102086942,
+          "valid_replicates": 2000
+        },
+        "AUROC": {
+          "ci_lower_95": 0.9944761387304174,
+          "ci_upper_95": 0.9999656833811479,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9974532388027199,
+          "valid_replicates": 2000
+        },
+        "patient_macro_F1": {
+          "ci_lower_95": 0.46694681389996645,
+          "ci_upper_95": 0.9927929281884428,
+          "invalid_replicates": 0,
+          "point_estimate": 0.7973643340615754,
+          "valid_replicates": 2000
+        },
+        "pooled_F1": {
+          "ci_lower_95": 0.9776247848537005,
+          "ci_upper_95": 0.9962978198272316,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9908496732026144,
+          "valid_replicates": 2000
+        },
+        "precision": {
+          "ci_lower_95": 0.9929328621908127,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9982440737489026,
+          "valid_replicates": 2000
+        },
+        "sensitivity": {
+          "ci_lower_95": 0.9601366742596811,
+          "ci_upper_95": 0.9938122631707615,
+          "invalid_replicates": 0,
+          "point_estimate": 0.9835640138408305,
+          "valid_replicates": 2000
+        },
+        "specificity": {
+          "ci_lower_95": 0.9919975708502025,
+          "ci_upper_95": 1.0,
+          "invalid_replicates": 0,
+          "point_estimate": 0.998001998001998,
+          "valid_replicates": 2000
+        }
+      },
+      "checkpoint_sha256": "1323aa3f22de5d2cd2b359d912cc48e00ccb07f6c41838f7872299665edab874",
+      "condition": "quantity",
+      "development_round": 48,
+      "development_validation_AUPRC": 0.832527864280639,
+      "development_validation_patient_macro_F1": 0.5837582928680876,
+      "generation": "V2",
+      "mu": 0.1,
+      "patients": [
+        {
+          "AUPRC": null,
+          "AUROC": null,
+          "F1_at_0_5": null,
+          "negatives": 360,
+          "participant_group_id": "MITDB_P115",
+          "positives": 0,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9997190345830527,
+          "AUROC": 0.999751791753281,
+          "F1_at_0_5": 0.9880239520958084,
+          "negatives": 193,
+          "participant_group_id": "MITDB_P116",
+          "positives": 167,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.9997812094023468,
+          "AUROC": 0.9972194416638861,
+          "F1_at_0_5": 0.995475113122172,
+          "negatives": 27,
+          "participant_group_id": "MITDB_P200",
+          "positives": 333,
+          "windows": 360
+        },
+        {
+          "AUPRC": 0.999402865299807,
+          "AUROC": 0.9974918001157631,
+          "F1_at_0_5": 0.9838998211091234,
+          "negatives": 73,
+          "participant_group_id": "MITDB_P214",
+          "positives": 284,
+          "windows": 357
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.99860529986053,
+          "negatives": 1,
+          "participant_group_id": "MITDB_P233",
+          "positives": 359,
+          "windows": 360
+        },
+        {
+          "AUPRC": 1.0,
+          "AUROC": 1.0,
+          "F1_at_0_5": 0.8181818181818182,
+          "negatives": 347,
+          "participant_group_id": "MITDB_P234",
+          "positives": 13,
+          "windows": 360
+        }
+      ],
+      "point": {
+        "AUPRC": 0.9986073102086942,
+        "AUROC": 0.9974532388027199,
+        "BCE": 0.032728184337496295,
+        "FN": 19,
+        "FP": 2,
+        "TN": 999,
+        "TP": 1137,
+        "accuracy": 0.9902642559109874,
+        "contributing_patients": 6,
+        "negatives": 1001,
+        "patient_macro_F1": 0.7973643340615754,
+        "pooled_F1": 0.9908496732026144,
+        "positives": 1156,
+        "precision": 0.9982440737489026,
+        "sensitivity": 0.9835640138408305,
+        "specificity": 0.998001998001998,
+        "windows": 2157
+      }
+    }
+  },
+  "windows": 2157
+}
