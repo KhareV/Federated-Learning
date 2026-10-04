@@ -1,0 +1,45 @@
+{
+  "FL_INIT_V2_round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "LABEL_manifest_sha256": "753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176",
+  "baseline_label_fedavg": {
+    "VALIDATION_PATIENT_MACRO_AUPRC_V2": 0.7247232349533131,
+    "VALIDATION_PATIENT_WORST_AUPRC_V2": 0.03809523809523809,
+    "best_validation_AUPRC": 0.8066305693453126
+  },
+  "candidate_checkpoint_sha256": {
+    "0.001": {
+      "best_checkpoint_sha256": "dedd10dca3f1e4b79328e2e82ca3386504bd5091c9839a28336fda415c6be863",
+      "round_50_checkpoint_sha256": "4c1dd5daa9ce9d8b25228834ee6f8efb146d07d1f20efa682c7f30d9cfdf7ccb"
+    },
+    "0.01": {
+      "best_checkpoint_sha256": "e6ae62859209a98766a71cab412e76a0525c544a4fc4bc365cc53bcf6130cebc",
+      "round_50_checkpoint_sha256": "087d242b7af46ecba932ddb7058bd1fb8458adf18dbd17af160c5f9d9ebff90a"
+    },
+    "0.1": {
+      "best_checkpoint_sha256": "6c319b53ff5310b5319487f246c523178bed0df99678614ccf59d6cc951418d9",
+      "round_50_checkpoint_sha256": "14f6d26ef97eaa259d419727e5e18525916fbfb71afda650e481c1887e55ff70"
+    }
+  },
+  "candidate_set": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "candidate_table_sha256": "27497d341642f3071e7814daa6fb8ab49dbdd40c25c2e59208b368af634cca6e",
+  "fedprox_implementation_sha256": {
+    "federated/model_v2_fedprox.py": "1b2e71027ff27530c0e27bf5f9f42d0c06d6847301e2934e0bcc80e804d2dce4",
+    "federated/model_v2_fedprox_runner.py": "87e3f8c3d3def1aa860fdcab0f9420472dd8fe182a8d80ac035e89ab6a086289"
+  },
+  "human_override": false,
+  "label_alias": "reports/model_v2/v2_fl_003/selection/label_alias.json",
+  "lock_id": "FEDPROX_MU_V2",
+  "model_architecture": "MODEL_V2_TCN_MEAN",
+  "parameter_count": 57553,
+  "selected_before_cross_condition_runs": true,
+  "selected_mu": 0.1,
+  "selection_evidence_sha256": "5f2bc8690002559b3bb790ff89e249826aceb61fa5b2b40092e366c37732a994",
+  "selection_provenance": "V2_FL_003_LABEL_ONLY_PREDECLARED_SELECTION",
+  "selection_semantics_sha256": "27b32511e0c480167d7fc0de6146caaf2523aac93284f8dafc3da26265546222",
+  "status": "FROZEN_ENGINEERING_METHOD",
+  "supersedes_or_reuses_FEDPROX_MU_V1": false
+}

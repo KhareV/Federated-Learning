@@ -1,0 +1,78 @@
+{
+  "baseline_label_fedavg": {
+    "VALIDATION_PATIENT_MACRO_AUPRC_V2": 0.7247232349533131,
+    "VALIDATION_PATIENT_WORST_AUPRC_V2": 0.03809523809523809
+  },
+  "candidate_table_sha256": "27497d341642f3071e7814daa6fb8ab49dbdd40c25c2e59208b368af634cca6e",
+  "eligible_candidates": [
+    0.1,
+    0.001,
+    0.01
+  ],
+  "evaluated_candidates": [
+    {
+      "VALIDATION_PATIENT_MACRO_AUPRC_V2": 0.7587649296103989,
+      "VALIDATION_PATIENT_WORST_AUPRC_V2": 0.11309523809523808,
+      "best_global_validation_AUPRC": 0.818285016316268,
+      "best_round": 39,
+      "candidate_status": "COMPLETE",
+      "finite": true,
+      "guardrail_pass": true,
+      "logical_payload_bytes": 192662400,
+      "mu": 0.001,
+      "round0_global_AUPRC": 0.25769234928353735,
+      "round50_global_AUPRC": 0.8118580270011256,
+      "worst_guardrail_threshold": -0.011904761904761911
+    },
+    {
+      "VALIDATION_PATIENT_MACRO_AUPRC_V2": 0.7302725237581266,
+      "VALIDATION_PATIENT_WORST_AUPRC_V2": 0.08496732026143791,
+      "best_global_validation_AUPRC": 0.828471478763645,
+      "best_round": 41,
+      "candidate_status": "COMPLETE",
+      "finite": true,
+      "guardrail_pass": true,
+      "logical_payload_bytes": 192662400,
+      "mu": 0.01,
+      "round0_global_AUPRC": 0.25769234928353735,
+      "round50_global_AUPRC": 0.827358114480762,
+      "worst_guardrail_threshold": -0.011904761904761911
+    },
+    {
+      "VALIDATION_PATIENT_MACRO_AUPRC_V2": 0.8574255066267761,
+      "VALIDATION_PATIENT_WORST_AUPRC_V2": 0.4389988733301143,
+      "best_global_validation_AUPRC": 0.8199390633130239,
+      "best_round": 41,
+      "candidate_status": "COMPLETE",
+      "finite": true,
+      "guardrail_pass": true,
+      "logical_payload_bytes": 192662400,
+      "mu": 0.1,
+      "round0_global_AUPRC": 0.25769234928353735,
+      "round50_global_AUPRC": 0.8179857131741266,
+      "worst_guardrail_threshold": -0.011904761904761911
+    }
+  ],
+  "guardrail_absolute_degradation": 0.05,
+  "guardrail_nonbinding_because": "threshold < 0 and finite AUPRC >= 0",
+  "guardrail_threshold": -0.011904761904761911,
+  "human_override": false,
+  "mu_zero_in_candidate_set": false,
+  "primary_metric": "VALIDATION_PATIENT_MACRO_AUPRC_V2",
+  "ranking": [
+    0.1,
+    0.001,
+    0.01
+  ],
+  "runs_identical": true,
+  "selected_mu": 0.1,
+  "selection_runs": 2,
+  "selection_semantics_id": "FEDPROX_SELECTION_SEMANTICS_V1 (MODEL_V2 binding, ids _V2)",
+  "tie_policy": [
+    "higher_worst",
+    "higher_global",
+    "smaller_mu"
+  ],
+  "tuning_condition": "label",
+  "tuning_manifest": "NONIID_LABEL_V1"
+}

@@ -1,0 +1,10 @@
+{
+  "alias_of": "reports/model_v2/v2_fl_003/candidates/mu_0p1/result.json",
+  "best_checkpoint": "checkpoints/model_v2/v2_fl_003/candidates/FL_LABEL_FEDPROX_MODEL_V2_MU_0p1_best.pt",
+  "best_checkpoint_sha256": "6c319b53ff5310b5319487f246c523178bed0df99678614ccf59d6cc951418d9",
+  "retrained": false,
+  "role": "CANONICAL_LABEL_FEDPROX_COMPARISON_RESULT",
+  "round_50_checkpoint": "checkpoints/model_v2/v2_fl_003/candidates/FL_LABEL_FEDPROX_MODEL_V2_MU_0p1_round50.pt",
+  "round_50_checkpoint_sha256": "14f6d26ef97eaa259d419727e5e18525916fbfb71afda650e481c1887e55ff70",
+  "selected_mu": 0.1
+}
