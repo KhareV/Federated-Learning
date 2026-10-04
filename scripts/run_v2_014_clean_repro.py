@@ -330,7 +330,7 @@ class Harness:
         deps = maybe("dependency_audit_python")
         fe = maybe("frontend_report")
         inv, art = maybe("inventory"), maybe("artifacts")
-        synth, gw = maybe("synthetic_fl"), maybe("gateway")
+        synth, gw = maybe("synthetic-fl"), maybe("gateway")
         reg, init = maybe("regression"), maybe("fl_init_p1") or maybe("fl_init")
         env = maybe("environment_audit")
         steps_failed = [s["step"] for s in self.steps if s["exit_code"] != 0]

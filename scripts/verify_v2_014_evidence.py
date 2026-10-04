@@ -62,9 +62,9 @@ def verify_clone_package(package: Path, lock: dict[str, Any], label: str) -> dic
     current_nodes = set(line for line in subprocess.run(
         [sys.executable, "-m", "pytest", "--collect-only", "-q", "-p", "no:warnings"], cwd=ROOT,
         capture_output=True, text=True).stdout.splitlines() if "::" in line)
-    clone_nodes = set(nodes_file.read_text().split())
+    clone_nodes = set(nodes_file.read_text().splitlines())
     regression = json.loads((package / "regression.json").read_text())
-    synth = json.loads((package / "synthetic_fl.json").read_text())
+    synth = json.loads((package / "synthetic-fl.json").read_text())
     gateway = json.loads((package / "gateway.json").read_text())
     checks = {
         "manifest_file_hashes_all_match": not mismatched,
@@ -91,7 +91,7 @@ def verify_clone_package(package: Path, lock: dict[str, Any], label: str) -> dic
         "regression_clean_and_node_list_subset_of_current": regression["status"] == "PASS"
         and regression["failed_tests"] == 0 and clone_nodes <= current_nodes,
         "regression_node_list_sha_matches_file": hashlib.sha256(
-            "\n".join(sorted(nodes_file.read_text().split())).encode()).hexdigest() == repro[
+            "\n".join(nodes_file.read_text().splitlines()).encode()).hexdigest() == repro[
             "python_test_node_list_sha256"],
         "firewall_flags": not (repro["real_waveform_datasets_accessed"]
                                or repro["manual_source_copy"] or repro["manual_data_copy"]
