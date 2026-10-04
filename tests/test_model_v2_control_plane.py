@@ -40,18 +40,20 @@ def test_canonical_gate_registry_untouched_by_v2_namespace() -> None:
 
 def test_v2_task_registry_is_a_separate_namespace() -> None:
     rows = _rows(ROOT / "manifests/model_v2/task_registry_v1.csv")
-    assert len(rows) == 19  # V2-001..V2-014 plus the additive V2-FL-001..005 federated lineage
+    assert len(rows) == 20  # V2-001..V2-014, additive V2-FL-001..005 and V2-FL-EVAL-001
     assert all(row["task_id"].startswith("V2-") for row in rows)
-    expected = {f"V2-{n:03d}" for n in range(1, 15)} | {f"V2-FL-{n:03d}" for n in range(1, 6)}
+    expected = ({f"V2-{n:03d}" for n in range(1, 15)}
+                | {f"V2-FL-{n:03d}" for n in range(1, 6)} | {"V2-FL-EVAL-001"})
     assert {row["task_id"] for row in rows} == expected
 
 
 def test_v2_gate_registry_is_a_separate_namespace() -> None:
     rows = _rows(ROOT / "manifests/model_v2/gate_registry_v1.csv")
-    assert len(rows) == 16  # V2G0..V2G13 plus the additive federated gates V2FLG0, V2FLG1
+    assert len(rows) == 17  # V2G0..V2G13 plus the additive federated gates V2FLG0..V2FLG2
     assert all(row["gate_id"].startswith("V2G") or row["gate_id"].startswith("V2FLG")
                for row in rows)
-    assert {row["gate_id"] for row in rows} == {f"V2G{n}" for n in range(14)} | {"V2FLG0", "V2FLG1"}
+    expected = {f"V2G{n}" for n in range(14)} | {"V2FLG0", "V2FLG1", "V2FLG2"}
+    assert {row["gate_id"] for row in rows} == expected
 
 
 def test_only_v2_001_through_v2_010_and_v2g0_through_v2g9_pass_in_this_phase() -> None:

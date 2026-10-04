@@ -1,0 +1,63 @@
+# FEDPROX_METHOD_V2 -- V2-FL-003 MODEL_V2 FedProx contract (additive; MODEL_V1 FedProx files untouched).
+method_id: FEDPROX_METHOD_V2
+task_id: V2-FL-003
+gate: V2FLG2
+roadmap_protocol: MODEL_V2_FL_PROTOCOL_V2
+selection_semantics: FEDPROX_SELECTION_SEMANTICS_V1   # re-bound additively for MODEL_V2 (ids ..._V2)
+objective: "BCEWithLogitsLoss + mu/2 * sum_trainable_parameters ||w - w_global||^2"
+proximal_scope: trainable_parameters_only             # NOT running_mean / running_var / num_batches_tracked
+w_global: round_start_global_trainable_parameters
+mu_zero_role: IMPLEMENTATION_EQUIVALENCE_CONTROL_ONLY # never a selection candidate
+mu_candidates: [0.001, 0.01, 0.1]                      # exact set and order; no adaptive search
+tuning_condition: label                                # LABEL only
+model: {architecture_id: MODEL_V2_TCN_MEAN, parameter_count: 57553, centralized_checkpoint_warm_start: false}
+initialization: {id: FL_INIT_V2, seed: 20260927, round_0_state_sha256: 6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f, round_0_validation_AUPRC: 0.25769234928353735}
+training: {clients: 8, clients_per_round: 8, rounds: 50, local_epochs: 1, batch_size: 64, shuffle: true, drop_last: false, num_workers: 0, device: cpu, augmentation: NONE}
+optimizer: {implementation: AdamW, learning_rate: 0.001, weight_decay: 0.0001, state_policy: RESET_EACH_CLIENT_EACH_ROUND, scheduler: NONE, gradient_clipping: NONE}
+loss: {base: BCEWithLogitsLoss, pos_weight: 1.7157717177396683, pos_weight_source: GLOBAL_TRAIN_NEG_OVER_POS, client_specific_weights: false}
+aggregation: {id: SAMPLE_COUNT_WEIGHTED_MODEL_DELTA_V1, weight: num_examples_actually_used}
+transport: {id: FL_STATE_TRANSPORT_V1}
+shuffle_seed_namespace: FL_IID_V1
+evaluation: {partition: VALIDATION, probability: sigmoid(raw_logit), calibration: NONE, metric_threshold: 0.5, metric_comparator: ">="}
+checkpoint: {metric: validation_AUPRC, eligible_rounds: 1-50, tie_policy: EARLIEST_EXACT_MAXIMUM, also_save: round_50}
+conditions:                     # transfer run order after FEDPROX_MU_V2 is frozen
+  iid:      {manifest: CLIENTS_IID_V1,    path: CLIENTS_IID_V1.csv,    sha256: 80f38fa25c508f9b4e2a4fd49e29c4c8d0034443ec67f7c24bc0954912b6c32a, feature_noise: false, fedavg_result: reports/model_v2/v2_fl_001/fl_iid_model_v2_result.json}
+  label:    {manifest: NONIID_LABEL_V1,   path: NONIID_LABEL_V1.csv,   sha256: 753368ca061149b79d8fc6a0fa0a09700d63c6deb9b252380d2d5fc769b88176, feature_noise: false, fedavg_result: reports/model_v2/v2_fl_002/label_result.json}
+  quantity: {manifest: NONIID_QUANTITY_V1, path: NONIID_QUANTITY_V1.csv, sha256: 9e4897ad72ee93294abe1785746d82e478f9e032d73257a53c2074a3bf4bea7e, feature_noise: false, fedavg_result: reports/model_v2/v2_fl_002/quantity_result.json}
+  feature:  {manifest: NONIID_FEATURE_V1, path: NONIID_FEATURE_V1.csv,  sha256: dfecfb01d2dc913f7576c18dcc0461b9c1cbb59ab5eb6061384871fc7b1f6291, feature_noise: true,  fedavg_result: reports/model_v2/v2_fl_002/feature_result.json}
+  combined: {manifest: NONIID_COMBINED_V1, path: NONIID_COMBINED_V1.csv, sha256: c0d15625e9f95d923b056244585db2b395d43831fb2cd2ddd4bfdd287ee07f47, feature_noise: true,  fedavg_result: reports/model_v2/v2_fl_002/combined_result.json}
+transfer_order: [iid, quantity, feature, combined]
+label_fedavg_baseline:
+  result: reports/model_v2/v2_fl_002/label_result.json
+  best_round: 50
+  best_validation_AUPRC: 0.8066305693453126
+  best_checkpoint_sha256: 524f50674dc907f6791c08e7339ee06e338bd6502f14ac8a7e601da52876be82
+  round_1_state_sha256: 3f57e799f19a252a957061df7a5c36ee2002085e33569f370133ce09b170e71b
+  VALIDATION_PATIENT_MACRO_AUPRC_V2: 0.7247232349533131
+  VALIDATION_PATIENT_WORST_AUPRC_V2: 0.03809523809523809
+guardrail:
+  rule: candidate_worst_patient_AUPRC >= baseline_worst - 0.05
+  absolute_degradation: 0.05
+  threshold: -0.01190476190476191
+  nonbinding_disclosure: "AUPRC >= 0 > threshold, so the guardrail can never exclude a valid candidate. Documented BEFORE results; not repaired; no tighter V2-specific guardrail is invented."
+selection_rule:
+  primary: highest VALIDATION_PATIENT_MACRO_AUPRC_V2 (compared at 12 decimals)
+  ties: [higher VALIDATION_PATIENT_WORST_AUPRC_V2, higher pooled VALIDATION AUPRC, smaller mu]
+  forbidden_inputs: [pooled_AUPRC_as_primary, AUROC, F1, round_50, site_local_TRAIN_metrics, IID_or_other_condition_results, test, external]
+  human_override: FORBIDDEN
+selected_label_candidate_is_the_canonical_LABEL_FedProx_result: true   # not retrained
+feature_noise: {id: FL_FEATURE_NOISE_V1, config: configs/fl_feature_noise_v1.yaml, nstdb_role: NSTDB_PURE_NOISE_TRAINING_RESOURCE}
+bootstrap: {B: 2000, seed: 20260927, method: PATIENT_CLUSTER_PERCENTILE_95_V1, role: DEVELOPMENT_DIAGNOSTIC_ONLY, not_a_pass_criterion: true}
+access:
+  TRAIN: TRAINING_ONLY
+  VALIDATION: SERVER_DEVELOPMENT_EVALUATION_ONLY
+  NSTDB: PURE_NOISE_TRAINING_RESOURCE_ONLY_FOR_FEATURE_COMBINED
+  CALIBRATION: FORBIDDEN
+  INTERNAL_TEST: FORBIDDEN_SEALED_FOR_V2_FL_EVAL_001
+  INCART: FORBIDDEN
+  BIDMC: FORBIDDEN
+  WEARABLE_V1: FORBIDDEN
+  WEARABLE_SIM: FORBIDDEN_AS_EFFICACY_DATA
+secure_aggregation: false
+differential_privacy: false
+expected_accounting: {candidate_rounds: 150, candidate_updates: 1200, transfer_rounds: 200, transfer_updates: 1600, total_positive_mu_updates: 2800}

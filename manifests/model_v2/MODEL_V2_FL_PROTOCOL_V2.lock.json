@@ -1,0 +1,21 @@
+{
+  "bound_artifacts": {
+    "configs/model_v2/fedprox_v2.yaml": "daf03fe23730773056ee0c28e8cfca9f3ec4676c5eb1cec42a3f2c1b81cef851",
+    "configs/model_v2/fl_protocol_v2.yaml": "3353b8647ffbc2e278c424f35639b4c8d7a960367cd2fb9efa8878741e25870a"
+  },
+  "change_control": "Any change requires a successor; not a response to FedProx results.",
+  "created_before_any_fedprox_outcome": true,
+  "lock_id": "MODEL_V2_FL_PROTOCOL_V2",
+  "owner_task": "V2-FL-003",
+  "predecessor_id": "MODEL_V2_FL_PROTOCOL_V1",
+  "predecessor_sha256": "7da5a240eee34db6f889c73b694783cb78389968b9d1cade882ee07fe7e0c5af",
+  "predecessor_unchanged": true,
+  "roadmap": [
+    "V2-FL-003",
+    "V2-FL-EVAL-001",
+    "V2-FL-004",
+    "V2-FL-005",
+    "V2-014"
+  ],
+  "status": "FROZEN_RESEARCH_PROTOCOL_SUCCESSOR"
+}

@@ -1,0 +1,106 @@
+{
+  "A_objective_gradient": {
+    "fedavg_loss": 0.8982595205307007,
+    "fedprox_mu0_loss": 0.8982595205307007,
+    "gradient_unchanged_at_round_start_for_mu_0_1": true,
+    "loss_delta": 0.0,
+    "max_abs_gradient_delta": 0.0,
+    "penalty_is_zero_at_round_start": true,
+    "status": "PASS",
+    "trainable_parameters_compared": 47
+  },
+  "B_local_updates": {
+    "clients": [
+      {
+        "examples": 1440,
+        "max_abs_delta_difference": 0.0,
+        "non_floating_policy_identical": true,
+        "same_batches": true,
+        "same_examples": true,
+        "same_mean_loss": true,
+        "same_shuffle_seed": true,
+        "site_id": "SITE_00"
+      },
+      {
+        "examples": 1436,
+        "max_abs_delta_difference": 0.0,
+        "non_floating_policy_identical": true,
+        "same_batches": true,
+        "same_examples": true,
+        "same_mean_loss": true,
+        "same_shuffle_seed": true,
+        "site_id": "SITE_01"
+      },
+      {
+        "examples": 1395,
+        "max_abs_delta_difference": 0.0,
+        "non_floating_policy_identical": true,
+        "same_batches": true,
+        "same_examples": true,
+        "same_mean_loss": true,
+        "same_shuffle_seed": true,
+        "site_id": "SITE_02"
+      },
+      {
+        "examples": 1080,
+        "max_abs_delta_difference": 0.0,
+        "non_floating_policy_identical": true,
+        "same_batches": true,
+        "same_examples": true,
+        "same_mean_loss": true,
+        "same_shuffle_seed": true,
+        "site_id": "SITE_03"
+      },
+      {
+        "examples": 1080,
+        "max_abs_delta_difference": 0.0,
+        "non_floating_policy_identical": true,
+        "same_batches": true,
+        "same_examples": true,
+        "same_mean_loss": true,
+        "same_shuffle_seed": true,
+        "site_id": "SITE_04"
+      },
+      {
+        "examples": 1080,
+        "max_abs_delta_difference": 0.0,
+        "non_floating_policy_identical": true,
+        "same_batches": true,
+        "same_examples": true,
+        "same_mean_loss": true,
+        "same_shuffle_seed": true,
+        "site_id": "SITE_05"
+      },
+      {
+        "examples": 1075,
+        "max_abs_delta_difference": 0.0,
+        "non_floating_policy_identical": true,
+        "same_batches": true,
+        "same_examples": true,
+        "same_mean_loss": true,
+        "same_shuffle_seed": true,
+        "site_id": "SITE_06"
+      },
+      {
+        "examples": 1074,
+        "max_abs_delta_difference": 0.0,
+        "non_floating_policy_identical": true,
+        "same_batches": true,
+        "same_examples": true,
+        "same_mean_loss": true,
+        "same_shuffle_seed": true,
+        "site_id": "SITE_07"
+      }
+    ],
+    "max_abs_delta_difference_all_clients": 0.0,
+    "status": "PASS"
+  },
+  "C_round_1_aggregate": {
+    "exact_match": true,
+    "fedavg_recomputed_round_1_sha256": "3f57e799f19a252a957061df7a5c36ee2002085e33569f370133ce09b170e71b",
+    "fedprox_mu0_round_1_sha256": "3f57e799f19a252a957061df7a5c36ee2002085e33569f370133ce09b170e71b",
+    "status": "PASS",
+    "stored_V2_FL_002_LABEL_round_1_sha256": "3f57e799f19a252a957061df7a5c36ee2002085e33569f370133ce09b170e71b"
+  },
+  "status": "PASS"
+}

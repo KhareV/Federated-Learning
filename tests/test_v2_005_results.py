@@ -159,13 +159,13 @@ def test_registry_csv_field_alignment_exact() -> None:
 
     with (ROOT / "manifests/model_v2/task_registry_v1.csv").open(newline="") as handle:
         task_rows = list(csv.DictReader(handle))
-    assert len(task_rows) == 19  # + additive V2-FL-001..005
-    assert len({row["task_id"] for row in task_rows}) == 19
+    assert len(task_rows) == 20  # + additive V2-FL-001..005, V2-FL-EVAL-001
+    assert len({row["task_id"] for row in task_rows}) == 20
 
     with (ROOT / "manifests/model_v2/gate_registry_v1.csv").open(newline="") as handle:
         gate_rows = list(csv.DictReader(handle))
-    assert len(gate_rows) == 16  # + additive V2FLG0, V2FLG1
-    assert len({row["gate_id"] for row in gate_rows}) == 16
+    assert len(gate_rows) == 17  # + additive V2FLG0..V2FLG2
+    assert len({row["gate_id"] for row in gate_rows}) == 17
 
 
 def test_run_manifest_and_artifact_hashes_valid() -> None:

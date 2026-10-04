@@ -1,0 +1,25 @@
+# MODEL_V2_FL_PROTOCOL_V2 -- additive roadmap successor of MODEL_V2_FL_PROTOCOL_V1 (V1 is unchanged).
+# Created BEFORE any MODEL_V2 FedProx candidate outcome. A completeness correction, not a response to
+# FedProx results.
+protocol_id: MODEL_V2_FL_PROTOCOL_V2
+status_target: FROZEN_RESEARCH_PROTOCOL_SUCCESSOR
+predecessor: {id: MODEL_V2_FL_PROTOCOL_V1, lock: manifests/model_v2/MODEL_V2_FL_PROTOCOL_V1.lock.json, unchanged: true}
+change:
+  old_roadmap: [V2-FL-003, V2-FL-004, V2-FL-005, V2-014]
+  new_roadmap: [V2-FL-003, V2-FL-EVAL-001, V2-FL-004, V2-FL-005, V2-014]
+  only_roadmap_level_change: true
+rationale: >
+  The locked federated-learning specification permits held-out test evaluation only after the
+  federated method/configuration family has frozen. That condition is not satisfied until V2-FL-003
+  freezes the FedProx mu and completes the matched method family. V2-FL-EVAL-001 will therefore
+  perform the held-out FL evaluation of the frozen family before SecAgg+ (V2-FL-004).
+phases:
+  V2-FL-001: {status: COMPLETE_PASS, name: IID FedAvg}
+  V2-FL-002: {status: COMPLETE_PASS, name: matched non-IID FedAvg}
+  V2-FL-003: {name: MODEL_V2 FedProx (mu=0 equivalence, LABEL-only mu selection, matched FedAvg-vs-FedProx), gate: V2FLG2, internal_test: NOT_ACCESSED}
+  V2-FL-EVAL-001: {name: frozen V2 FL family held-out evaluation, prerequisite: V2-FL-003, internal_test: OWNER_OF_HELDOUT_FL_EVALUATION, status: NOT_STARTED}
+  V2-FL-004: {name: Flower SecAgg+ correctness/visibility/overhead, prerequisite: V2-FL-EVAL-001, status: NOT_STARTED}
+  V2-FL-005: {name: synthetic-wearable virtual-client system exercise (engineering evidence only), prerequisite: V2-FL-004, status: NOT_STARTED}
+  V2-014: {name: clean reproducibility, status: NOT_STARTED}
+carried_forward_unchanged_from_V1: [architecture, fl_initialization, state_transport, shared_budget_and_semantics, checkpoint_selection, metric_threshold, calibration, synthetic_wearable_role, held_out_firewall, carried_limitation]
+v2_fl_003_firewall: {INTERNAL_TEST: NOT_ACCESSED, CALIBRATION: FORBIDDEN, INCART: FORBIDDEN, BIDMC: FORBIDDEN}

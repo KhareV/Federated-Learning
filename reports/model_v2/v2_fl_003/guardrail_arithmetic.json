@@ -1,0 +1,13 @@
+{
+  "absolute_degradation": 0.05,
+  "baseline_label_fedavg_worst_patient_AUPRC": 0.03809523809523809,
+  "candidates": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "explanation": "finite AUPRC >= 0 > threshold: the source-defined absolute five-point guardrail cannot exclude a candidate when the baseline worst-patient AUPRC is 0.0381. Documented before results; not repaired; no tighter V2 guardrail is invented.",
+  "nonbinding_for_any_valid_candidate": true,
+  "threshold": -0.011904761904761911,
+  "threshold_is_negative": true
+}
