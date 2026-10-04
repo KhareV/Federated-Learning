@@ -1,0 +1,47 @@
+{
+  "audit": "V2_FL_EVAL_PRE_ACCESS_AUDIT",
+  "checks": {
+    "C_V2_FL_003_corrective_attestation_PASS": true,
+    "FEDPROX_MU_V2_is_0_1": true,
+    "PREPROC_V1_exact": true,
+    "access_guards_NOT_STARTED": {
+      "INCART": "NOT_STARTED",
+      "INTERNAL_TEST": "NOT_STARTED"
+    },
+    "all_20_checkpoint_hashes_exact": true,
+    "historical_guards_untouched": {
+      "incart": "COMPLETED",
+      "internal": "COMPLETED"
+    },
+    "historical_v2_fl_003_finalizer_byte_clean": true,
+    "incart_population_expectations": true,
+    "internal_population_expectations": true,
+    "method_commit_is_ancestor_of_head": true,
+    "method_files_unchanged_from_method_commit": true,
+    "no_prediction_outputs_exist": true,
+    "no_prior_family_ledger_rows_on_held_out_partitions": true,
+    "protocol_and_family_locks_bound": true,
+    "regression_PASS": true,
+    "t018_bootstrap_resource_exact": {
+      "clusters": 6,
+      "path": "reports/t018/bootstrap_draws.npz",
+      "regenerated_equals_stored": true,
+      "slots_per_replicate": 6,
+      "stored_hash_matches_pin": true
+    },
+    "t020_bootstrap_resource_exact": {
+      "clusters": 32,
+      "path": "reports/t020/bootstrap_draws.npz",
+      "regenerated_equals_stored": true,
+      "slots_per_replicate": 32,
+      "stored_hash_matches_pin": true
+    },
+    "v2_fl_001_002_003_artifact_pins_exact": true
+  },
+  "drifted_method_files": [],
+  "failed_checks": [],
+  "freeze_entry_head": "39f20cb165fdd1a3cad8939bbafce6ec7a4a3f47",
+  "head_at_audit": "92e4c6781c2511d0c4245120e3b7a6e46f1d382d",
+  "method_commit": "92e4c6781c2511d0c4245120e3b7a6e46f1d382d",
+  "status": "PASS"
+}
