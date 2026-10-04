@@ -1,0 +1,27 @@
+{
+  "checkpoints_evaluated_per_dataset": {
+    "INCART": 20,
+    "INTERNAL_TEST": 20
+  },
+  "evaluated_ids_equal_roster": true,
+  "excluded_checkpoints_evaluated": false,
+  "family_invocations": {
+    "INCART": 1,
+    "INTERNAL_TEST": 1
+  },
+  "historical_guards": {
+    "incart": "COMPLETED",
+    "internal": "COMPLETED"
+  },
+  "post_access_checkpoint_inference": false,
+  "second_attempt_blocked_deterministically": true,
+  "second_inference_attempt": {
+    "INCART": "INCART_FAMILY_INFERENCE_ALREADY_CONSUMED",
+    "INTERNAL_TEST": "INTERNAL_TEST_FAMILY_INFERENCE_ALREADY_CONSUMED"
+  },
+  "states": {
+    "INCART": "COMPLETED",
+    "INTERNAL_TEST": "COMPLETED"
+  },
+  "status": "PASS"
+}

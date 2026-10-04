@@ -67,11 +67,11 @@ def test_only_v2_001_through_v2_010_and_v2g0_through_v2g9_pass_in_this_phase() -
     expected_tasks = {
         "V2-001", "V2-002", "V2-003", "V2-004", "V2-006", "V2-007", "V2-008", "V2-009",
         "V2-010", "V2-011", "V2-012", "V2-013", "V2-FL-001", "V2-FL-002",
-        "V2-FL-003",
+        "V2-FL-003", "V2-FL-EVAL-001",
     }
     expected_gates = {
         "V2G0", "V2G1", "V2G2", "V2G3", "V2G4", "V2G5", "V2G6", "V2G7", "V2G8", "V2G9",
-        "V2G10", "V2G11", "V2G12", "V2FLG0", "V2FLG1", "V2FLG2",
+        "V2G10", "V2G11", "V2G12", "V2FLG0", "V2FLG1", "V2FLG2", "V2FLEG0",
     }
     assert passed_tasks == expected_tasks
     assert passed_gates == expected_gates

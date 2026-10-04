@@ -1,0 +1,20 @@
+{
+  "MODEL_V1_incart": {
+    "AUPRC": 0.7891764965800256,
+    "AUROC": 0.8077435266581959
+  },
+  "MODEL_V1_internal_test": {
+    "AUPRC": 0.9088954942908802,
+    "AUROC": 0.9036154157261423
+  },
+  "MODEL_V2_FINAL_incart": {
+    "AUPRC": 0.970004055260483,
+    "AUROC": 0.9676821484566808
+  },
+  "MODEL_V2_FINAL_internal_test": {
+    "AUPRC": 0.9994730838739116,
+    "AUROC": 0.9993803774080591
+  },
+  "label": "HISTORICAL FROZEN REFERENCE (centralized models; NOT part of the new one-shot FL inference; evaluated earlier with their own calibration/thresholds)",
+  "rerun_in_this_phase": false
+}

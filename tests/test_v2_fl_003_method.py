@@ -252,7 +252,7 @@ def test_protocol_v2_is_additive_and_roadmap_inserts_eval_phase() -> None:
     assert tasks["V2-FL-004"]["prerequisites"] == "V2-FL-EVAL-001"
     assert gates["V2FLG2"]["blocks_tasks"] == "V2-FL-EVAL-001"
     assert "does not require FedProx improvement" in gates["V2FLG2"]["purpose"]
-    assert tasks["V2-FL-EVAL-001"]["status"] == "NOT_STARTED"
+    assert tasks["V2-FL-EVAL-001"]["status"] in {"NOT_STARTED", "PASS"}  # forward lifecycle
 
 
 def _fake_population(partition: str, groups: list[str], per_group: int, seed: int):

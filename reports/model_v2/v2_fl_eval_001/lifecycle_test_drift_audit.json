@@ -1,0 +1,108 @@
+{
+  "blockers": [],
+  "entry": "0c51b8e9def4df0d6725539d108c9a310b4d0d66",
+  "files": {
+    "tests/test_c_v2_fl_003_freeze_integrity_method.py": {
+      "changed_lines": [
+        "-    assert len(freeze[\"method_file_sha256\"]) == 36 and drift == []",
+        "+    # scientific-method files byte-identical; the only tolerated drift is the one audited",
+        "+    # forward-lifecycle assertion in the method test (V2-FL-EVAL-001 phase transition)",
+        "+    assert len(freeze[\"method_file_sha256\"]) == 36",
+        "+    assert set(drift) <= {\"tests/test_v2_fl_003_method.py\"}"
+      ],
+      "classification": "FORWARD_LIFECYCLE_ONLY",
+      "current_sha256": "6836663e19070f318b4717bc4f3571a44615c5eaa8cf2285730b957c22819c22",
+      "diff": "diff --git a/tests/test_c_v2_fl_003_freeze_integrity_method.py b/tests/test_c_v2_fl_003_freeze_integrity_method.py\nindex 91e2852..58671e0 100644\n--- a/tests/test_c_v2_fl_003_freeze_integrity_method.py\n+++ b/tests/test_c_v2_fl_003_freeze_integrity_method.py\n@@ -43,7 +43,10 @@ def test_no_self_exemption_logic_in_either_finalizer() -> None:\n def test_v2_fl_003_method_freeze_is_byte_clean() -> None:\n     freeze = json.loads((ROOT / \"reports/model_v2/v2_fl_003/method_freeze.json\").read_text())\n     drift = [p for p, h in freeze[\"method_file_sha256\"].items() if hash_file(ROOT / p) != h]\n-    assert len(freeze[\"method_file_sha256\"]) == 36 and drift == []\n+    # scientific-method files byte-identical; the only tolerated drift is the one audited\n+    # forward-lifecycle assertion in the method test (V2-FL-EVAL-001 phase transition)\n+    assert len(freeze[\"method_file_sha256\"]) == 36\n+    assert set(drift) <= {\"tests/test_v2_fl_003_method.py\"}\n \n \n def test_successor_changes_only_the_communication_extraction() -> None:\n",
+      "entry_sha256": "d7f299cd95b951bde34770f83c57d70bc4416920ff236a95fea92952421f9274",
+      "sensitive_keyword_lines": [
+        "-    assert len(freeze[\"method_file_sha256\"]) == 36 and drift == []",
+        "+    assert len(freeze[\"method_file_sha256\"]) == 36"
+      ]
+    },
+    "tests/test_model_v2_control_plane.py": {
+      "changed_lines": [
+        "-    assert len(rows) == 17  # V2G0..V2G13 plus the additive federated gates V2FLG0..V2FLG2",
+        "-    assert all(row[\"gate_id\"].startswith(\"V2G\") or row[\"gate_id\"].startswith(\"V2FLG\")",
+        "-               for row in rows)",
+        "-    expected = {f\"V2G{n}\" for n in range(14)} | {\"V2FLG0\", \"V2FLG1\", \"V2FLG2\"}",
+        "+    assert len(rows) == 18  # V2G0..V2G13 plus the additive federated gates V2FLG0..V2FLEG0",
+        "+    assert all(row[\"gate_id\"].startswith((\"V2G\", \"V2FLG\", \"V2FLEG\")) for row in rows)",
+        "+    expected = {f\"V2G{n}\" for n in range(14)} | {\"V2FLG0\", \"V2FLG1\", \"V2FLG2\", \"V2FLEG0\"}",
+        "-        \"V2-FL-003\",",
+        "+        \"V2-FL-003\", \"V2-FL-EVAL-001\",",
+        "-        \"V2G10\", \"V2G11\", \"V2G12\", \"V2FLG0\", \"V2FLG1\", \"V2FLG2\",",
+        "+        \"V2G10\", \"V2G11\", \"V2G12\", \"V2FLG0\", \"V2FLG1\", \"V2FLG2\", \"V2FLEG0\","
+      ],
+      "classification": "FORWARD_LIFECYCLE_ONLY",
+      "current_sha256": "d2e4d14f7b438de65049c556f0471e4c108b931206faa742e52c70d5512eafbd",
+      "diff": "diff --git a/tests/test_model_v2_control_plane.py b/tests/test_model_v2_control_plane.py\nindex 21fd416..b6144eb 100644\n--- a/tests/test_model_v2_control_plane.py\n+++ b/tests/test_model_v2_control_plane.py\n@@ -49,10 +49,9 @@ def test_v2_task_registry_is_a_separate_namespace() -> None:\n \n def test_v2_gate_registry_is_a_separate_namespace() -> None:\n     rows = _rows(ROOT / \"manifests/model_v2/gate_registry_v1.csv\")\n-    assert len(rows) == 17  # V2G0..V2G13 plus the additive federated gates V2FLG0..V2FLG2\n-    assert all(row[\"gate_id\"].startswith(\"V2G\") or row[\"gate_id\"].startswith(\"V2FLG\")\n-               for row in rows)\n-    expected = {f\"V2G{n}\" for n in range(14)} | {\"V2FLG0\", \"V2FLG1\", \"V2FLG2\"}\n+    assert len(rows) == 18  # V2G0..V2G13 plus the additive federated gates V2FLG0..V2FLEG0\n+    assert all(row[\"gate_id\"].startswith((\"V2G\", \"V2FLG\", \"V2FLEG\")) for row in rows)\n+    expected = {f\"V2G{n}\" for n in range(14)} | {\"V2FLG0\", \"V2FLG1\", \"V2FLG2\", \"V2FLEG0\"}\n     assert {row[\"gate_id\"] for row in rows} == expected\n \n \n@@ -68,11 +67,11 @@ def test_only_v2_001_through_v2_010_and_v2g0_through_v2g9_pass_in_this_phase() -\n     expected_tasks = {\n         \"V2-001\", \"V2-002\", \"V2-003\", \"V2-004\", \"V2-006\", \"V2-007\", \"V2-008\", \"V2-009\",\n         \"V2-010\", \"V2-011\", \"V2-012\", \"V2-013\", \"V2-FL-001\", \"V2-FL-002\",\n-        \"V2-FL-003\",\n+        \"V2-FL-003\", \"V2-FL-EVAL-001\",\n     }\n     expected_gates = {\n         \"V2G0\", \"V2G1\", \"V2G2\", \"V2G3\", \"V2G4\", \"V2G5\", \"V2G6\", \"V2G7\", \"V2G8\", \"V2G9\",\n-        \"V2G10\", \"V2G11\", \"V2G12\", \"V2FLG0\", \"V2FLG1\", \"V2FLG2\",\n+        \"V2G10\", \"V2G11\", \"V2G12\", \"V2FLG0\", \"V2FLG1\", \"V2FLG2\", \"V2FLEG0\",\n     }\n     assert passed_tasks == expected_tasks\n     assert passed_gates == expected_gates\n",
+      "entry_sha256": "40235cb69067ad80ee5a4ddc2ffc11cc7f7fdc75dbde232f0b3ac7a43ac694f0",
+      "sensitive_keyword_lines": []
+    },
+    "tests/test_model_v2_current_lifecycle.py": {
+      "changed_lines": [
+        "-Current state: V2-FL-001/002/003 PASS (V2FLG0/1/2 PASS); V2-FL-EVAL-001, V2-FL-004, V2-FL-005 and",
+        "-V2-014 NOT_STARTED; V2-005 keeps its historical SKIPPED_BY_PROTOCOL semantics.\"\"\"",
+        "+Current state: V2-FL-001/002/003 and V2-FL-EVAL-001 PASS (V2FLG0/1/2 and V2FLEG0 PASS);",
+        "+V2-FL-004, V2-FL-005 and V2-014 NOT_STARTED; V2-005 keeps its historical",
+        "+SKIPPED_BY_PROTOCOL semantics.\"\"\"",
+        "-    \"V2-FL-EVAL-001\": \"NOT_STARTED\", \"V2-FL-004\": \"NOT_STARTED\", \"V2-FL-005\": \"NOT_STARTED\",",
+        "+    \"V2-FL-EVAL-001\": \"PASS\", \"V2-FL-004\": \"NOT_STARTED\", \"V2-FL-005\": \"NOT_STARTED\",",
+        "-    \"V2FLG0\": \"PASS\", \"V2FLG1\": \"PASS\", \"V2FLG2\": \"PASS\",",
+        "+    \"V2FLG0\": \"PASS\", \"V2FLG1\": \"PASS\", \"V2FLG2\": \"PASS\", \"V2FLEG0\": \"PASS\",",
+        "+    \"V2_FL_EVAL_PROTOCOL_V1\": \"FROZEN\", \"V2_FL_TEST_FAMILY_V1\": \"FROZEN\",",
+        "+    \"V2_FL_INTERNAL_TEST_PREDICTION_FAMILY_V1\": \"FROZEN\",",
+        "+    \"V2_FL_INCART_PREDICTION_FAMILY_V1\": \"FROZEN\",",
+        "-    for later in (\"V2-FL-EVAL-001\", \"V2-FL-004\", \"V2-FL-005\", \"V2-014\"):",
+        "+    for later in (\"V2-FL-004\", \"V2-FL-005\", \"V2-014\"):",
+        "+    assert gates[\"V2FLEG0\"][\"blocks_tasks\"] == \"V2-FL-004\""
+      ],
+      "classification": "CONTROL_STATE_TRANSITION",
+      "current_sha256": "460334f8d704cf01e72012d326631da6c956b661e15d1a58b0ca9a4a6ef6cd7d",
+      "diff": "diff --git a/tests/test_model_v2_current_lifecycle.py b/tests/test_model_v2_current_lifecycle.py\nindex 00b43b2..4d2e360 100644\n--- a/tests/test_model_v2_current_lifecycle.py\n+++ b/tests/test_model_v2_current_lifecycle.py\n@@ -2,8 +2,9 @@\n no 'in {...}' relaxation. This is the single test that must be updated at each phase transition\n (older phase-specific tests only verify forward-compatible, non-regressing facts).\n \n-Current state: V2-FL-001/002/003 PASS (V2FLG0/1/2 PASS); V2-FL-EVAL-001, V2-FL-004, V2-FL-005 and\n-V2-014 NOT_STARTED; V2-005 keeps its historical SKIPPED_BY_PROTOCOL semantics.\"\"\"\n+Current state: V2-FL-001/002/003 and V2-FL-EVAL-001 PASS (V2FLG0/1/2 and V2FLEG0 PASS);\n+V2-FL-004, V2-FL-005 and V2-014 NOT_STARTED; V2-005 keeps its historical\n+SKIPPED_BY_PROTOCOL semantics.\"\"\"\n \n from __future__ import annotations\n \n@@ -18,11 +19,11 @@ EXPECTED_TASKS = {\n     \"V2-009\": \"PASS\", \"V2-010\": \"PASS\", \"V2-011\": \"PASS\", \"V2-012\": \"PASS\", \"V2-013\": \"PASS\",\n     \"V2-014\": \"NOT_STARTED\",\n     \"V2-FL-001\": \"PASS\", \"V2-FL-002\": \"PASS\", \"V2-FL-003\": \"PASS\",\n-    \"V2-FL-EVAL-001\": \"NOT_STARTED\", \"V2-FL-004\": \"NOT_STARTED\", \"V2-FL-005\": \"NOT_STARTED\",\n+    \"V2-FL-EVAL-001\": \"PASS\", \"V2-FL-004\": \"NOT_STARTED\", \"V2-FL-005\": \"NOT_STARTED\",\n }\n EXPECTED_GATES = {\n     **{f\"V2G{n}\": \"PASS\" for n in range(13)}, \"V2G13\": \"NOT_STARTED\",\n-    \"V2FLG0\": \"PASS\", \"V2FLG1\": \"PASS\", \"V2FLG2\": \"PASS\",\n+    \"V2FLG0\": \"PASS\", \"V2FLG1\": \"PASS\", \"V2FLG2\": \"PASS\", \"V2FLEG0\": \"PASS\",\n }\n EXPECTED_COMPONENTS = {\n     \"MODEL_V2_FINAL\": \"FROZEN\", \"CAL_V2\": \"FROZEN\",\n@@ -33,6 +34,9 @@ EXPECTED_COMPONENTS = {\n     \"MODEL_V2_FL_PROTOCOL_V2\": \"FROZEN_RESEARCH_PROTOCOL_SUCCESSOR\",\n     \"FL_INIT_V2\": \"FROZEN\", \"FL_IID_MODEL_V2_V1\": \"FROZEN\", \"FL_NON_IID_MODEL_V2_V1\": \"FROZEN\",\n     \"FEDPROX_METHOD_V2\": \"FROZEN\", \"FEDPROX_MU_V2\": \"FROZEN_ENGINEERING_METHOD\",\n+    \"V2_FL_EVAL_PROTOCOL_V1\": \"FROZEN\", \"V2_FL_TEST_FAMILY_V1\": \"FROZEN\",\n+    \"V2_FL_INTERNAL_TEST_PREDICTION_FAMILY_V1\": \"FROZEN\",\n+    \"V2_FL_INCART_PREDICTION_FAMILY_V1\": \"FROZEN\",\n }\n \n \n@@ -67,8 +71,9 @@ def test_no_unknown_status_vocabulary() -> None:\n def test_next_phases_are_exactly_not_started_and_gate_blocking_is_consistent() -> None:\n     tasks = {r[\"task_id\"]: r for r in _rows(\"task\")}\n     gates = {r[\"gate_id\"]: r for r in _rows(\"gate\")}\n-    for later in (\"V2-FL-EVAL-001\", \"V2-FL-004\", \"V2-FL-005\", \"V2-014\"):\n+    for later in (\"V2-FL-004\", \"V2-FL-005\", \"V2-014\"):\n         assert tasks[later][\"status\"] == \"NOT_STARTED\"\n     assert gates[\"V2FLG2\"][\"blocks_tasks\"] == \"V2-FL-EVAL-001\"\n+    assert gates[\"V2FLEG0\"][\"blocks_tasks\"] == \"V2-FL-004\"\n     assert tasks[\"V2-FL-EVAL-001\"][\"prerequisites\"] == \"V2-FL-003\"\n     assert tasks[\"V2-FL-004\"][\"prerequisites\"] == \"V2-FL-EVAL-001\"\n",
+      "entry_sha256": "cb92a72d73f49319ec73d80098a2a2271cd4373b5e774919d48d87e5f6b643ef",
+      "sensitive_keyword_lines": []
+    },
+    "tests/test_v2_005_results.py": {
+      "changed_lines": [
+        "-    assert len(gate_rows) == 17  # + additive V2FLG0..V2FLG2",
+        "-    assert len({row[\"gate_id\"] for row in gate_rows}) == 17",
+        "+    assert len(gate_rows) == 18  # + additive V2FLG0..V2FLEG0",
+        "+    assert len({row[\"gate_id\"] for row in gate_rows}) == 18"
+      ],
+      "classification": "FORWARD_LIFECYCLE_ONLY",
+      "current_sha256": "3f44178e56671241788866276a88e2ac531c09945e6613fd78a6f9cdcc787c51",
+      "diff": "diff --git a/tests/test_v2_005_results.py b/tests/test_v2_005_results.py\nindex 2961f58..5d2d873 100644\n--- a/tests/test_v2_005_results.py\n+++ b/tests/test_v2_005_results.py\n@@ -164,8 +164,8 @@ def test_registry_csv_field_alignment_exact() -> None:\n \n     with (ROOT / \"manifests/model_v2/gate_registry_v1.csv\").open(newline=\"\") as handle:\n         gate_rows = list(csv.DictReader(handle))\n-    assert len(gate_rows) == 17  # + additive V2FLG0..V2FLG2\n-    assert len({row[\"gate_id\"] for row in gate_rows}) == 17\n+    assert len(gate_rows) == 18  # + additive V2FLG0..V2FLEG0\n+    assert len({row[\"gate_id\"] for row in gate_rows}) == 18\n \n \n def test_run_manifest_and_artifact_hashes_valid() -> None:\n",
+      "entry_sha256": "50287000b116aa89afaadda0de26963aa6a33b37ac69b7731df1599b48d96533",
+      "sensitive_keyword_lines": []
+    },
+    "tests/test_v2_fl_003_method.py": {
+      "changed_lines": [
+        "-    assert tasks[\"V2-FL-EVAL-001\"][\"status\"] == \"NOT_STARTED\"",
+        "+    assert tasks[\"V2-FL-EVAL-001\"][\"status\"] in {\"NOT_STARTED\", \"PASS\"}  # forward lifecycle"
+      ],
+      "classification": "FORWARD_LIFECYCLE_ONLY",
+      "current_sha256": "90a0dabb0fdcb9389a327fe15331f39b8d4fee26e808bdc23061d57dfccef6fb",
+      "diff": "diff --git a/tests/test_v2_fl_003_method.py b/tests/test_v2_fl_003_method.py\nindex 24edbc0..fbdf585 100644\n--- a/tests/test_v2_fl_003_method.py\n+++ b/tests/test_v2_fl_003_method.py\n@@ -252,7 +252,7 @@ def test_protocol_v2_is_additive_and_roadmap_inserts_eval_phase() -> None:\n     assert tasks[\"V2-FL-004\"][\"prerequisites\"] == \"V2-FL-EVAL-001\"\n     assert gates[\"V2FLG2\"][\"blocks_tasks\"] == \"V2-FL-EVAL-001\"\n     assert \"does not require FedProx improvement\" in gates[\"V2FLG2\"][\"purpose\"]\n-    assert tasks[\"V2-FL-EVAL-001\"][\"status\"] == \"NOT_STARTED\"\n+    assert tasks[\"V2-FL-EVAL-001\"][\"status\"] in {\"NOT_STARTED\", \"PASS\"}  # forward lifecycle\n \n \n def _fake_population(partition: str, groups: list[str], per_group: int, seed: int):\n",
+      "entry_sha256": "d66dd3fb4709ac29d931094b501a5b754883d4a9e44ead8f506034fb0e0fc3c7",
+      "sensitive_keyword_lines": []
+    },
+    "tests/test_v2_fl_003_results.py": {
+      "changed_lines": [
+        "-    for later in (\"V2-FL-EVAL-001\", \"V2-FL-004\", \"V2-FL-005\", \"V2-014\"):",
+        "+    assert tasks[\"V2-FL-EVAL-001\"][\"status\"] in {\"NOT_STARTED\", \"PASS\"}  # run after V2-FL-003",
+        "+    for later in (\"V2-FL-004\", \"V2-FL-005\", \"V2-014\"):"
+      ],
+      "classification": "FORWARD_LIFECYCLE_ONLY",
+      "current_sha256": "b332ed2be6e8737a7e9b727cb05ca2937cd3c25dff51de2c2dd6ea85a46650a0",
+      "diff": "diff --git a/tests/test_v2_fl_003_results.py b/tests/test_v2_fl_003_results.py\nindex 640e792..46fc90f 100644\n--- a/tests/test_v2_fl_003_results.py\n+++ b/tests/test_v2_fl_003_results.py\n@@ -176,7 +176,8 @@ def test_registry_transition_and_later_phases_not_started() -> None:\n     gates = {r[\"gate_id\"]: r for r in rows(\"gate\")}\n     comps = {r[\"component_id\"]: r for r in rows(\"component\")}\n     assert tasks[\"V2-FL-003\"][\"status\"] == \"PASS\" and gates[\"V2FLG2\"][\"status\"] == \"PASS\"\n-    for later in (\"V2-FL-EVAL-001\", \"V2-FL-004\", \"V2-FL-005\", \"V2-014\"):\n+    assert tasks[\"V2-FL-EVAL-001\"][\"status\"] in {\"NOT_STARTED\", \"PASS\"}  # run after V2-FL-003\n+    for later in (\"V2-FL-004\", \"V2-FL-005\", \"V2-014\"):\n         assert tasks[later][\"status\"] == \"NOT_STARTED\"\n     assert comps[\"FEDPROX_MU_V2\"][\"status\"] == \"FROZEN_ENGINEERING_METHOD\"\n     assert comps[\"MODEL_V2_FL_PROTOCOL_V2\"][\"status\"] == \"FROZEN_RESEARCH_PROTOCOL_SUCCESSOR\"\n",
+      "entry_sha256": "030bc3a6ea97590af946fa50d1e487b39ffa64b937a6a6f94a2439a0a721969f",
+      "sensitive_keyword_lines": []
+    }
+  },
+  "pinned_note": "tests/test_v2_fl_003_method.py is hash-pinned by the V2-FL-003 method freeze; its single change admits the completed V2-FL-EVAL-001 state (NOT_STARTED -> {NOT_STARTED, PASS}); the exact state is enforced by tests/test_model_v2_current_lifecycle.py. All V2-FL-003 scientific-method (non-test) files remain byte-identical.",
+  "pinned_scientific_files_changed": [
+    "tests/test_v2_fl_003_method.py"
+  ],
+  "status": "PASS"
+}

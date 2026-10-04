@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "20_of_20_incart_complete": true,
+    "20_of_20_internal_test_complete": true,
+    "all_checkpoint_hashes_verified": true,
+    "all_patient_metrics_complete": true,
+    "all_point_metrics_complete": true,
+    "bootstrap_B_2000_multiplicity_preserved": true,
+    "condition_wise_architecture_effects_reported": true,
+    "firewall": true,
+    "frozen_method_family_only": true,
+    "incart_example_sets_exact": true,
+    "internal_example_sets_exact": true,
+    "later_verification_prediction_only": true,
+    "method_immutable_after_exposure": true,
+    "no_calibration": true,
+    "no_excluded_checkpoint_evaluated": true,
+    "no_tuning_no_promotion": true,
+    "one_shot_guards_completed": true,
+    "primary_architecture_delta_reported": true,
+    "primary_v2_iid_fedavg_reported": true,
+    "protected_artifacts_unchanged": true,
+    "regression": true,
+    "second_inference_blocked": true,
+    "v2_fedprox_vs_fedavg_effects_reported": true
+  },
+  "performance_magnitude_is_a_criterion": false,
+  "status": "PASS"
+}

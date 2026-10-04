@@ -1,0 +1,29 @@
+{
+  "INCART": {
+    "all_20_models_identical_ordered_example_ids_equal_frozen_expectation": true,
+    "claim": "POST-FREEZE EXTERNAL FL SECOND-LOOK on a previously project-exposed dataset; NOT project-blind; NOT untouched external validation",
+    "clusters": 32,
+    "contributing_clusters": 32,
+    "eligible_windows": 26864,
+    "negative": 13769,
+    "positive": 13095,
+    "prevalence": 0.4874553305539011,
+    "records": 75
+  },
+  "INTERNAL_TEST": {
+    "all_20_models_identical_ordered_example_ids_equal_frozen_expectation": true,
+    "candidate_windows": 2520,
+    "claim": "FEDERATED-LINEAGE HELD-OUT; centralized models were evaluated on this partition earlier in the project; NOT project-globally unseen",
+    "contributing_clusters": 6,
+    "eligible_windows": 2157,
+    "frozen_groups": 7,
+    "negative": 1001,
+    "positive": 1156,
+    "prevalence": 0.53592953175707,
+    "zero_eligible_groups": [
+      "MITDB_P107"
+    ]
+  },
+  "development_validation_prevalence": 0.23472222222222222,
+  "note": "Class prevalence differs across datasets (VALIDATION ~0.235, INTERNAL_TEST ~0.536, INCART ~0.487); AUPRC baselines differ accordingly, so absolute AUPRC is not directly comparable across datasets."
+}

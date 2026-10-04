@@ -1,0 +1,17 @@
+{
+  "V2_FL_004_started": false,
+  "calibration_used": false,
+  "checkpoint_id": "V2-FL-EVAL-001",
+  "ci_queried": false,
+  "ci_triggered": false,
+  "datasets": [
+    "INTERNAL_TEST (FL-lineage held-out)",
+    "INCART (post-freeze external second-look)"
+  ],
+  "federated_client_updates_added": 0,
+  "gate": "V2FLEG0",
+  "model_promotion": false,
+  "models": 20,
+  "scientific_model_fits_added": 0,
+  "status": "PASS"
+}

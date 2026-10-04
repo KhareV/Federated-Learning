@@ -1,0 +1,20 @@
+{
+  "BIDMC_accessed": false,
+  "CALIBRATION_accessed": false,
+  "CAL_V1_used": false,
+  "CAL_V2_used": false,
+  "INCART": true,
+  "INTERNAL_TEST": true,
+  "NSTDB_accessed": false,
+  "TRAIN": false,
+  "VALIDATION": false,
+  "WEARABLE_SIM_used": false,
+  "WEARABLE_accessed": false,
+  "ledger_rows": 2,
+  "partitions_accessed": [
+    "INCART",
+    "INTERNAL_TEST"
+  ],
+  "status": "PASS",
+  "threshold_tuned": false
+}
