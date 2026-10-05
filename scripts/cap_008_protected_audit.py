@@ -102,7 +102,7 @@ def final() -> int:
 
 
 # historical guard tests amended through recorded amendments (CAP-008)
-AMENDED_HISTORICAL = ("tests/test_capstone_frontend.py",)
+AMENDED_HISTORICAL = ("tests/test_capstone_frontend.py", "scripts/verify_capstone_ui_v1.py")  # CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 amendment 7
 
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else ""

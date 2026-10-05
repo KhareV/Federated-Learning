@@ -1,0 +1,1016 @@
+{
+ "protocol_id": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1",
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "owner_task": "CAP-008",
+ "gate": "CAPG7",
+ "purpose": "Federation dashboard + model governance UX: replace the CAPSTONE_UI_V1 federation/model placeholders with real CAP-007-backed pages in the existing SvelteKit frontend (successor lock CAPSTONE_UI_V1_1), without any backend, FL, scientific or monitoring change.",
+ "entry": {
+  "expected_entry_sha": "711a4a0a1233765d6f1200fc2b6d8f3aa62d4743",
+  "entry_commit_with_control_plane": "4d38204"
+ },
+ "ui_successor": {
+  "predecessor": "CAPSTONE_UI_V1 (lock file preserved byte-identical)",
+  "successor": "CAPSTONE_UI_V1_1 (artifacts/capstone/CAPSTONE_UI_V1_1.lock.json)",
+  "rule": "every frontend file must be bound by the successor; unaccounted drift fails; the predecessor verifier accepts a changed file only when the successor binds the current bytes",
+  "verifier": "scripts/verify_capstone_ui_v1_1.py"
+ },
+ "no_backend_change_rule": "api/, product/, capstone_persistence/, contracts/, federated/, privacy/, simulation/, src/ are byte-identical to the entry commit; a true incompatibility must STOP and be reported",
+ "routes_consumed": [
+  "GET /product/v1/system",
+  "GET /federation",
+  "GET /federation/clients",
+  "POST /federation/runs",
+  "GET /federation/runs",
+  "GET /federation/runs/{id}",
+  "POST /federation/runs/{id}/start",
+  "GET /federation/runs/{id}/rounds",
+  "WS /federation/runs/{id}/live",
+  "GET /models",
+  "GET /models/{id}"
+ ],
+ "run_configuration": {
+  "user_controlled": {
+   "run_type": [
+    "LIVE_RUN",
+    "REPLAY"
+   ],
+   "algorithm": [
+    "FEDAVG",
+    "FEDPROX"
+   ],
+   "secagg_mode": [
+    "PLAIN",
+    "SECAGG_SHADOW"
+   ]
+  },
+  "read_only_facts": {
+   "scenario_id": "FL_SINGLE_RUN",
+   "clients": 8,
+   "planned_rounds": 3,
+   "base": "FL_INIT_V2"
+  },
+  "request_fields": [
+   "run_type",
+   "algorithm",
+   "secagg_mode",
+   "planned_rounds",
+   "scenario_id"
+  ]
+ },
+ "forbidden_controls": [
+  "model",
+  "model_id",
+  "base_model_id",
+  "checkpoint",
+  "candidate_id",
+  "learning rate",
+  "batch size",
+  "optimizer",
+  "mu",
+  "calibration",
+  "threshold",
+  "epoch count",
+  "client count",
+  "round count"
+ ],
+ "event_parser": {
+  "kinds": [
+   "federation.status",
+   "round.status",
+   "client.status",
+   "client.training_progress",
+   "client.update_ready",
+   "aggregation.status",
+   "secagg.status",
+   "candidate.created",
+   "candidate.validation",
+   "candidate.governance",
+   "federation.completed",
+   "federation.error"
+  ],
+  "rejects": "every monitoring kind, unknown kinds, malformed payloads, foreign run ids",
+  "sequence": "0,1,2,... per run; gap/duplicate/foreign/malformed => FEDERATION STREAM ERROR, derived state frozen and untrusted",
+  "reconnect": "reset then rebuild from sequence 0 (never append replayed events)",
+  "progress": "only 0 and 1 are rendered; nothing is interpolated",
+  "timeline_cap": 2000
+ },
+ "replay_semantics": "REPLAY shows a persistent 'REPLAY - NO TRAINING IS EXECUTING' badge; candidate events are labelled HISTORICAL EVENT REPLAY - NO NEW CANDIDATE CREATED and never increment a frontend candidate counter; no-source 409 shows the exact fixed message and never switches to LIVE_RUN",
+ "secagg_wording": "ROUND-1 PROTECTED-AGGREGATION SHADOW; authoritative aggregate PLAIN; PROTECTED_AGGREGATION_INTERFACE_ONLY; no DP/anonymity/'secure federation' claim",
+ "candidate_governance_wording": "ACCEPTED TO ENGINEERING SANDBOX REGISTRY / STRUCTURAL CHECKS PASSED / NOT A SCIENTIFIC RELEASE / NOT DEPLOYED / NO CANDIDATE INFERENCE RUNTIME ENABLED; REJECTED BY ENGINEERING GOVERNANCE; production_deployed FALSE always shown; the five checks are structural/engineering only",
+ "no_candidate_inference_rule": "no candidate state loading, inference API, comparison with MODEL_V2_FINAL, or CAPSTONE_FL_SANDBOX_RUNTIME",
+ "offline_mode": "DEMO canonical flow works with no Internet; every browser request is same-origin loopback; Clerk is never initialised",
+ "canonical_browser_e2e": {
+  "harness": "scripts/run_capstone_federation_ui_e2e.py + scripts/cap_008_cdp_driver.mjs",
+  "stack": "production CAPSTONE_UI_V1_1 build (vite preview) + headless Chrome with non-loopback hosts blocked + real CAPSTONE_PRODUCT_API_V1_2 DEMO process + fresh SQLite + fresh federation/candidate roots + real training",
+  "live": "LIVE_RUN FEDAVG SECAGG_SHADOW FL_SINGLE_RUN 3 rounds",
+  "then": [
+   "models/privacy/reload persistence",
+   "REPLAY (backend candidate count unchanged)",
+   "second genuine LIVE_RUN refreshed mid-run (PLAIN; creates CAPSTONE_FL_CANDIDATE_0002 by design)",
+   "responsive 1440/1024/768/390",
+   "accessibility checks",
+   "network audit"
+  ],
+  "restart_persistence": "a third backend process on the same database re-serves the registry"
+ },
+ "mutation_controls": [
+  "EIGHT_HOSPITALS_WORDING",
+  "FAKE_ACCURACY_METRIC",
+  "SMOOTH_PROGRESS_INVENTED",
+  "CANDIDATE_SHOWN_AS_RELEASED_DEFAULT",
+  "DEPLOY_BUTTON_ADDED",
+  "CANDIDATE_INFERENCE_REQUEST_ADDED",
+  "SECAGG_PAGE_CLAIMS_DIFFERENTIAL_PRIVACY",
+  "SECAGG_SHOWN_AS_AUTHORITATIVE_AGGREGATION",
+  "WEBSOCKET_TOKEN_IN_URL",
+  "RUN_FORM_EXPOSES_MU",
+  "REPLAY_UI_SAYS_TRAINING_IN_PROGRESS",
+  "MONITORING_EVENT_ACCEPTED_BY_FEDERATION_REDUCER",
+  "CANDIDATE_COUNT_INCREMENTED_FROM_REPLAY_EVENT",
+  "MODEL_V2_FINAL_REPLACED_BY_CANDIDATE_IN_MONITORING_LANE"
+ ],
+ "preserved_disclosures": [
+  "CAP-001 gate-row wording discrepancy",
+  "CAP-002 code-drafted-before-entry",
+  "CAP-003 LIVE_SPEED bounded-settle limitation",
+  "CAP-003 manual-stop-mid-outage limitation",
+  "CAP-003 context projection",
+  "CAP-003 pre-freeze smoke",
+  "CAP-004 additive Clerk lock",
+  "CAP-004 SQLite store location",
+  "CAP-004 seven-amendment chain",
+  "inherited CAP-003 flaky test",
+  "CAP-004 local-only SQLite git exclude",
+  "CAP-004 Clerk local-fixture-only",
+  "CAP-005 Clerk WebSocket cookie path unverified",
+  "CAP-005 no live Clerk-account E2E",
+  "CAP-005 accessibility audit not equivalent to formal WCAG certification",
+  "CAP-005 canonical UI evidence using ACCELERATED simulation",
+  "CAP-006 logical one-laptop locality",
+  "CAP-006 synthetic engineering labels",
+  "CAP-006 FedProx smoke classification",
+  "CAP-007 one-active-run is not a distributed lock",
+  "CAP-007 logical clients on one laptop",
+  "CAP-007 SecAgg round-1 shadow scope",
+  "CAP-007 candidate sandbox has no inference runtime"
+ ],
+ "out_of_scope": [
+  "CAP-009",
+  "backend or FL change",
+  "candidate inference / CAPSTONE_FL_SANDBOX_RUNTIME",
+  "deploy/promote controls",
+  "held-out evaluation or any candidate metric",
+  "FL_NEW_LOCAL_BATCH",
+  "FL_MULTIRUN_CANDIDATE_HISTORY",
+  "monitoring-data training",
+  "personalised models",
+  "physical hardware",
+  "new npm dependencies"
+ ],
+ "components": [
+  "CAPSTONE_FEDERATION_UX_PROTOCOL_V1",
+  "CAPSTONE_UI_V1_1",
+  "CAPSTONE_FEDERATION_FRONTEND_V1",
+  "CAPSTONE_FEDERATION_PRODUCT_CLIENT_V1",
+  "CAPSTONE_FEDERATION_LIVE_MODEL_V1",
+  "CAPSTONE_FEDERATION_STORE_UI_V1",
+  "CAPSTONE_MODEL_GOVERNANCE_UI_V1"
+ ],
+ "control_plane": {
+  "component_registry": "manifests/capstone/component_registry_cap_008_v1.csv",
+  "gate_registry": "manifests/capstone/gate_registry_v1.csv",
+  "task_registry": "manifests/capstone/task_registry_v1.csv"
+ },
+ "chronology_disclosure": "The CAP-008 frontend implementation, its unit/component tests and the E2E harness were written before the freeze commit, and the E2E harness was dry-run end to end into a scratch directory outside the repository (twice) to find harness/UI defects (the first dry run exposed horizontal overflow at 390 px and a redundant WebSocket on first load, both fixed before the freeze). None of that output is committed; all recorded canonical results come after the freeze commit.",
+ "capg7_criteria": [
+  {
+   "id": 1,
+   "text": "CAP-001/CAPG0 PASS",
+   "checks": [
+    "@cap_pass_1"
+   ]
+  },
+  {
+   "id": 2,
+   "text": "CAP-002/CAPG1 PASS",
+   "checks": [
+    "@cap_pass_2"
+   ]
+  },
+  {
+   "id": 3,
+   "text": "CAP-003/CAPG2 PASS",
+   "checks": [
+    "@cap_pass_3"
+   ]
+  },
+  {
+   "id": 4,
+   "text": "CAP-004/CAPG3 PASS",
+   "checks": [
+    "@cap_pass_4"
+   ]
+  },
+  {
+   "id": 5,
+   "text": "CAP-005/CAPG4 PASS",
+   "checks": [
+    "@cap_pass_5"
+   ]
+  },
+  {
+   "id": 6,
+   "text": "CAP-006/CAPG5 PASS",
+   "checks": [
+    "@cap_pass_6"
+   ]
+  },
+  {
+   "id": 7,
+   "text": "CAP-007/CAPG6 PASS",
+   "checks": [
+    "@cap_pass_7"
+   ]
+  },
+  {
+   "id": 8,
+   "text": "all prior locks and amendment chains verify (CAP-001..007, CAPSTONE_UI_V1, V2-FL, FEDPROX_MU_V2, FL_INIT_V2)",
+   "checks": [
+    "@locks_verified"
+   ]
+  },
+  {
+   "id": 9,
+   "text": "scientific/runtime artifacts show zero drift",
+   "checks": [
+    "@no_scientific_drift"
+   ]
+  },
+  {
+   "id": 10,
+   "text": "CAP-006 implementation shows zero drift",
+   "checks": [
+    "@cap006_zero_drift"
+   ]
+  },
+  {
+   "id": 11,
+   "text": "CAP-007 implementation shows zero drift",
+   "checks": [
+    "@cap007_zero_drift"
+   ]
+  },
+  {
+   "id": 12,
+   "text": "backend (api/, product/, capstone_persistence/, contracts/, federated/, privacy/, simulation/, src/) shows zero drift",
+   "checks": [
+    "@backend_zero_drift",
+    "T:test_backend_scientific_fl_cap006_cap007_files_are_byte_identical_to_entry"
+   ]
+  },
+  {
+   "id": 13,
+   "text": "the CAPSTONE_UI_V1 lock file is preserved byte-identical",
+   "checks": [
+    "T:test_ui_v1_lock_file_is_preserved_byte_identical_to_entry"
+   ]
+  },
+  {
+   "id": 14,
+   "text": "CAPSTONE_UI_V1_1 exists as an explicit successor lock that verifies",
+   "checks": [
+    "T:test_ui_v1_1_successor_lock_verifies_and_binds_every_frontend_file",
+    "@ui_v1_1_verified"
+   ]
+  },
+  {
+   "id": 15,
+   "text": "every changed or added frontend file is bound by CAPSTONE_UI_V1_1 and unaccounted frontend drift fails",
+   "checks": [
+    "T:test_unaccounted_frontend_drift_fails",
+    "T:test_ui_v1_verifier_accepts_only_successor_bound_changes",
+    "@frontend_accounted"
+   ]
+  },
+  {
+   "id": 16,
+   "text": "exactly one frontend application exists and no second frontend was created",
+   "checks": [
+    "T:test_exactly_one_frontend_application_and_no_new_npm_dependency"
+   ]
+  },
+  {
+   "id": 17,
+   "text": "no npm dependency was added (package manifests and lock files unchanged)",
+   "checks": [
+    "T:test_exactly_one_frontend_application_and_no_new_npm_dependency",
+    "@no_new_deps"
+   ]
+  },
+  {
+   "id": 18,
+   "text": "the historical frontend guard amendment is committed in its own commit before gate evaluation",
+   "checks": [
+    "@guard_amendment_own_commit"
+   ]
+  },
+  {
+   "id": 19,
+   "text": "the CAP-008 protocol freeze precedes every canonical result file and no bound file drifted since the freeze",
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ]
+  },
+  {
+   "id": 20,
+   "text": "CAP-008 was marked IN_PROGRESS / CAPG7 NOT_STARTED before implementation",
+   "checks": [
+    "@prospective_control_plane"
+   ]
+  },
+  {
+   "id": 21,
+   "text": "the federation backend version is checked from /system before federation controls are enabled",
+   "checks": [
+    "F:backend guard: only ENABLED_ENGINEERING enables federation",
+    "F:an older backend reporting NOT_IMPLEMENTED disables federation and floods no routes"
+   ]
+  },
+  {
+   "id": 22,
+   "text": "/app/federation is a real CAP-007-backed page",
+   "checks": [
+    "F:shows real overview values, two-lane architecture and exactly three user-controlled options",
+    "T:test_federation_pages_are_not_placeholders"
+   ]
+  },
+  {
+   "id": 23,
+   "text": "/app/federation/clients is real",
+   "checks": [
+    "F:shows the eight synthetic logical clients with the synthetic banner and no raw data or labels"
+   ]
+  },
+  {
+   "id": 24,
+   "text": "/app/federation/rounds is real",
+   "checks": [
+    "F:rounds: persisted round cards, rounds 1-2 candidate NONE, final candidate, lineage without MODEL_V2_FINAL"
+   ]
+  },
+  {
+   "id": 25,
+   "text": "/app/federation/live is real",
+   "checks": [
+    "F:renders a full SECAGG_SHADOW run from events only: PLAIN aggregate, shadow verified, 24 updates, candidate sandbox"
+   ]
+  },
+  {
+   "id": 26,
+   "text": "/app/federation/privacy is real",
+   "checks": [
+    "F:privacy: round-1-only shadow wording, plain authoritative aggregation, limitations, no DP/anonymity claim"
+   ]
+  },
+  {
+   "id": 27,
+   "text": "/app/models is real",
+   "checks": [
+    "F:models: two separated namespaces, MODEL_V2_FINAL RELEASED_DEFAULT, candidate production_deployed FALSE, no deploy/promote controls"
+   ]
+  },
+  {
+   "id": 28,
+   "text": "/app/research/* is still CAP-009-owned (placeholders)",
+   "checks": [
+    "T:test_federation_pages_are_not_placeholders"
+   ]
+  },
+  {
+   "id": 29,
+   "text": "federation remains top-level navigation",
+   "checks": [
+    "@nav_top_level"
+   ]
+  },
+  {
+   "id": 30,
+   "text": "the overview uses the real federation API and shows federation as enabled",
+   "checks": [
+    "F:overview shows real system identity, real federation status and no fake metrics"
+   ]
+  },
+  {
+   "id": 31,
+   "text": "the clients, run list and model list use the real CAP-007 APIs",
+   "checks": [
+    "@api_methods_used"
+   ]
+  },
+  {
+   "id": 32,
+   "text": "the run form exposes only mode, algorithm and SecAgg choices (three selects, no inputs)",
+   "checks": [
+    "F:shows real overview values, two-lane architecture and exactly three user-controlled options",
+    "@form_controls_browser"
+   ]
+  },
+  {
+   "id": 33,
+   "text": "scenario is fixed FL_SINGLE_RUN, rounds fixed 3 and base shown FL_INIT_V2 as read-only facts",
+   "checks": [
+    "@fixed_facts_browser"
+   ]
+  },
+  {
+   "id": 34,
+   "text": "no model, candidate-base, mu, learning-rate, optimizer or batch-size control exists",
+   "checks": [
+    "S:has no user-editable control for model, base, checkpoint, candidate, hyperparameters or counts"
+   ]
+  },
+  {
+   "id": 35,
+   "text": "the create request carries exactly the five frozen fields",
+   "checks": [
+    "F:sends exactly the five frozen request fields with the frozen scenario and rounds"
+   ]
+  },
+  {
+   "id": 36,
+   "text": "the federation event union has exactly 12 kinds",
+   "checks": [
+    "F:accepts every one of the exactly 12 federation kinds from a full real-shaped stream"
+   ]
+  },
+  {
+   "id": 37,
+   "text": "monitoring events (and unknown kinds) are rejected by the federation parser",
+   "checks": [
+    "F:rejects every monitoring event kind and unknown kinds",
+    "F:a monitoring event can never enter federation live state"
+   ]
+  },
+  {
+   "id": 38,
+   "text": "a federation event is rejected by the monitoring parser",
+   "checks": [
+    "@monitoring_rejects_federation"
+   ]
+  },
+  {
+   "id": 39,
+   "text": "malformed payloads are rejected",
+   "checks": [
+    "F:rejects malformed payloads"
+   ]
+  },
+  {
+   "id": 40,
+   "text": "sequence integrity is enforced (gap, duplicate, foreign run, malformed)",
+   "checks": [
+    "F:rejects sequence gaps, duplicates, foreign run ids and malformed events and then stays failed",
+    "F:a sequence gap shows a stream error and stops consuming"
+   ]
+  },
+  {
+   "id": 41,
+   "text": "reconnect rebuilds from sequence 0 with no double counting",
+   "checks": [
+    "F:reconnect: reset then replay from 0 rebuilds identically and never double-counts",
+    "F:consumes a stream, reconnect resets and rebuilds from sequence 0 without double counting"
+   ]
+  },
+  {
+   "id": 42,
+   "text": "training progress uses only the real 0/1 milestones and is never interpolated",
+   "checks": [
+    "F:progress is exactly 0 or 1 per round - never interpolated",
+    "S:has no fake dynamic metric: no accuracy/F1/AUPRC/AUROC/loss, no random or timer-driven progress"
+   ]
+  },
+  {
+   "id": 43,
+   "text": "the eight clients are labelled synthetic research partitions, not institutions",
+   "checks": [
+    "F:shows the eight synthetic logical clients with the synthetic banner and no raw data or labels"
+   ]
+  },
+  {
+   "id": 44,
+   "text": "no hospital/institution claim and no privacy over-claim copy",
+   "checks": [
+    "S:contains no institution, hospital-map or privacy-overclaim copy"
+   ]
+  },
+  {
+   "id": 45,
+   "text": "one-laptop logical locality is disclosed",
+   "checks": [
+    "F:shows the eight synthetic logical clients with the synthetic banner and no raw data or labels",
+    "@locality_wording_browser"
+   ]
+  },
+  {
+   "id": 46,
+   "text": "raw client data and labels are never rendered",
+   "checks": [
+    "@no_raw_data_rendered"
+   ]
+  },
+  {
+   "id": 47,
+   "text": "round 1 and 2 aggregates are never shown as candidates; final-round-only candidate semantics",
+   "checks": [
+    "F:rounds: persisted round cards, rounds 1-2 candidate NONE, final candidate, lineage without MODEL_V2_FINAL",
+    "@round_candidate_semantics"
+   ]
+  },
+  {
+   "id": 48,
+   "text": "released and candidate namespaces are visually separated and MODEL_V2_FINAL stays RELEASED_DEFAULT",
+   "checks": [
+    "F:models: two separated namespaces, MODEL_V2_FINAL RELEASED_DEFAULT, candidate production_deployed FALSE, no deploy/promote controls",
+    "@models_browser"
+   ]
+  },
+  {
+   "id": 49,
+   "text": "production_deployed=false is visible on every candidate",
+   "checks": [
+    "F:candidate card: rejected wording and per-check results only when reported",
+    "@models_browser"
+   ]
+  },
+  {
+   "id": 50,
+   "text": "ACCEPTED_TO_SANDBOX is never described as deployment or promotion",
+   "checks": [
+    "@accepted_copy",
+    "S:has no deploy, promote, default, inference or candidate-load control or call"
+   ]
+  },
+  {
+   "id": 51,
+   "text": "no candidate-inference control exists and CAPSTONE_FL_SANDBOX_RUNTIME is absent",
+   "checks": [
+    "S:has no deploy, promote, default, inference or candidate-load control or call",
+    "T:test_candidate_inference_and_sandbox_runtime_absent"
+   ]
+  },
+  {
+   "id": 52,
+   "text": "the five governance checks are labelled structural and results come only from events",
+   "checks": [
+    "F:candidate card: rejected wording and per-check results only when reported"
+   ]
+  },
+  {
+   "id": 53,
+   "text": "no efficacy metric and no held-out evaluation appear",
+   "checks": [
+    "S:has no fake dynamic metric: no accuracy/F1/AUPRC/AUROC/loss, no random or timer-driven progress",
+    "@claim_audit"
+   ]
+  },
+  {
+   "id": 54,
+   "text": "SecAgg is labelled a round-1 shadow with PROTECTED_AGGREGATION_INTERFACE_ONLY scope",
+   "checks": [
+    "@secagg_wording_browser"
+   ]
+  },
+  {
+   "id": 55,
+   "text": "the authoritative aggregation is rendered PLAIN",
+   "checks": [
+    "F:renders a full SECAGG_SHADOW run from events only: PLAIN aggregate, shadow verified, 24 updates, candidate sandbox",
+    "@live_run_ok"
+   ]
+  },
+  {
+   "id": 56,
+   "text": "no differential-privacy or anonymity claim is made",
+   "checks": [
+    "@privacy_claims_browser",
+    "S:contains no institution, hospital-map or privacy-overclaim copy"
+   ]
+  },
+  {
+   "id": 57,
+   "text": "PLAIN runs show SECAGG SHADOW NOT USED",
+   "checks": [
+    "F:PLAIN run reports SECAGG SHADOW: NOT USED"
+   ]
+  },
+  {
+   "id": 58,
+   "text": "LIVE_RUN is visibly genuine execution and REPLAY is visibly a replay",
+   "checks": [
+    "F:REPLAY: persistent no-training badge, historical candidate wording, no new candidate claim",
+    "@replay_ok"
+   ]
+  },
+  {
+   "id": 59,
+   "text": "REPLAY says NO TRAINING IS EXECUTING and historical candidate events create no frontend candidate",
+   "checks": [
+    "F:REPLAY: candidate events are historical and create no new candidate",
+    "@replay_ok"
+   ]
+  },
+  {
+   "id": 60,
+   "text": "REPLAY does not increase the backend candidate count",
+   "checks": [
+    "@replay_no_new_candidate"
+   ]
+  },
+  {
+   "id": 61,
+   "text": "REPLAY without a source shows the exact message and never switches to LIVE_RUN",
+   "checks": [
+    "F:replay without a source shows the exact message",
+    "F:REPLAY without a source shows the exact message and never switches to LIVE_RUN"
+   ]
+  },
+  {
+   "id": 62,
+   "text": "one live run at a time is explained and not claimed as a distributed lock",
+   "checks": [
+    "F:an active LIVE run disables starting another LIVE run (REPLAY stays possible)"
+   ]
+  },
+  {
+   "id": 63,
+   "text": "a failed run is shown as an engineering error and fabricates no candidate",
+   "checks": [
+    "F:a failed run shows the engineering error and no candidate",
+    "F:PLAIN runs report NOT_USED; a failed run keeps the error and fabricates no candidate"
+   ]
+  },
+  {
+   "id": 64,
+   "text": "cold-start clients loading is truthful, requested once and never an error",
+   "checks": [
+    "F:cold start: the clients panel says PREPARING, requests once and shows no invented client state",
+    "F:clients are requested once even when called repeatedly (cold start is slow, never retried)"
+   ]
+  },
+  {
+   "id": 65,
+   "text": "a stream integrity failure shows FEDERATION STREAM ERROR",
+   "checks": [
+    "F:a stream integrity failure shows FEDERATION STREAM ERROR"
+   ]
+  },
+  {
+   "id": 66,
+   "text": "create -> WebSocket -> start ordering",
+   "checks": [
+    "F:create -> open WebSocket -> start, in that order"
+   ]
+  },
+  {
+   "id": 67,
+   "text": "only the CAP-007 routes are called and the WebSocket URL carries no token",
+   "checks": [
+    "F:uses exactly the CAP-007 routes and the token-free same-origin WebSocket URL",
+    "S:never puts a token, cookie, user id or secret in a WebSocket URL",
+    "@ws_url_browser"
+   ]
+  },
+  {
+   "id": 68,
+   "text": "federation and monitoring state stores are separate",
+   "checks": [
+    "S:keeps federation and monitoring separate: neither imports the other"
+   ]
+  },
+  {
+   "id": 69,
+   "text": "the released lane and the candidate are never drawn as connected",
+   "checks": [
+    "S:never draws the candidate into the released lane or live monitoring"
+   ]
+  },
+  {
+   "id": 70,
+   "text": "the federation live model derives all state from validated events",
+   "checks": [
+    "F:derives the full canonical run only from events"
+   ]
+  },
+  {
+   "id": 71,
+   "text": "the event timeline memory is bounded",
+   "checks": [
+    "F:the timeline is bounded"
+   ]
+  },
+  {
+   "id": 72,
+   "text": "frontend unit tests pass (federation types, parser, reducer, store, client)",
+   "checks": [
+    "@frontend_unit_tests"
+   ]
+  },
+  {
+   "id": 73,
+   "text": "component tests render the actual pages and components",
+   "checks": [
+    "@frontend_component_tests"
+   ]
+  },
+  {
+   "id": 74,
+   "text": "the real-backend frontend integration test passes",
+   "checks": [
+    "@integration_ok"
+   ]
+  },
+  {
+   "id": 75,
+   "text": "the canonical browser E2E passes against the production CAPSTONE_UI_V1_1 build",
+   "checks": [
+    "@browser_e2e_ok"
+   ]
+  },
+  {
+   "id": 76,
+   "text": "the canonical LIVE_RUN used a real backend, DEMO auth, FEDAVG + SECAGG_SHADOW, FL_SINGLE_RUN",
+   "checks": [
+    "@live_run_ok"
+   ]
+  },
+  {
+   "id": 77,
+   "text": "the browser observed 8 clients, all reaching SUBMITTED",
+   "checks": [
+    "@live_clients_observed"
+   ]
+  },
+  {
+   "id": 78,
+   "text": "the browser observed 3 rounds and 24 update-ready events and 24 SUBMITTED completions",
+   "checks": [
+    "@live_updates_24"
+   ]
+  },
+  {
+   "id": 79,
+   "text": "the browser observed exactly one candidate",
+   "checks": [
+    "@live_one_candidate"
+   ]
+  },
+  {
+   "id": 80,
+   "text": "the candidate parent is FL_INIT_V2, validation PASSED, governance ACCEPTED_TO_SANDBOX, sandbox IN_SANDBOX, production_deployed false",
+   "checks": [
+    "@candidate_fields"
+   ]
+  },
+  {
+   "id": 81,
+   "text": "the candidate digest equals the backend registry digest and the integration evidence",
+   "checks": [
+    "@candidate_digest_consistent"
+   ]
+  },
+  {
+   "id": 82,
+   "text": "SHADOW_RUNNING and SHADOW_VERIFIED were observed and aggregation stayed PLAIN",
+   "checks": [
+    "@secagg_observed"
+   ]
+  },
+  {
+   "id": 83,
+   "text": "no SecAgg status was invented for rounds 2 and 3",
+   "checks": [
+    "@secagg_round1_only"
+   ]
+  },
+  {
+   "id": 84,
+   "text": "the browser refresh mid-run reloads auth, the run list and the run, reconnects, rebuilds from zero and the run continued",
+   "checks": [
+    "@refresh_ok"
+   ]
+  },
+  {
+   "id": 85,
+   "text": "no event was double counted and no sequence error occurred after refresh",
+   "checks": [
+    "@refresh_no_dupes"
+   ]
+  },
+  {
+   "id": 86,
+   "text": "the completed run and candidate persist after browser reload and after a backend restart",
+   "checks": [
+    "@persistence_ok"
+   ]
+  },
+  {
+   "id": 87,
+   "text": "the models page reloads the candidate from the backend",
+   "checks": [
+    "@persistence_ok"
+   ]
+  },
+  {
+   "id": 88,
+   "text": "released monitoring is unchanged: MODEL_V2_FINAL stays the default and no candidate reference exists in the monitoring path",
+   "checks": [
+    "@monitoring_isolated",
+    "T:test_no_candidate_reference_in_monitoring_or_released_runtime"
+   ]
+  },
+  {
+   "id": 89,
+   "text": "the existing monitoring frontend tests pass unchanged and the monitoring client still never calls /v1/infer-window",
+   "checks": [
+    "@monitoring_regression"
+   ]
+  },
+  {
+   "id": 90,
+   "text": "no FL_NEW_LOCAL_BATCH, multi-run history or physical-hardware code was added",
+   "checks": [
+    "@no_out_of_scope"
+   ]
+  },
+  {
+   "id": 91,
+   "text": "the offline DEMO path works and no external network request was made",
+   "checks": [
+    "@offline_ok"
+   ]
+  },
+  {
+   "id": 92,
+   "text": "Clerk was not initialised in DEMO mode",
+   "checks": [
+    "@clerk_not_initialised"
+   ]
+  },
+  {
+   "id": 93,
+   "text": "responsive checks pass at 1440, 1024, 768 and 390 px with no horizontal overflow",
+   "checks": [
+    "@responsive_ok"
+   ]
+  },
+  {
+   "id": 94,
+   "text": "accessibility engineering checks pass (headings, labels, live region, keyboard focus, state not colour-only, no running animations)",
+   "checks": [
+    "@accessibility_ok"
+   ]
+  },
+  {
+   "id": 95,
+   "text": "no formal WCAG certification is claimed",
+   "checks": [
+    "@no_wcag_claim"
+   ]
+  },
+  {
+   "id": 96,
+   "text": "the claim audit finds no overclaim in rendered or source copy",
+   "checks": [
+    "@claim_audit"
+   ]
+  },
+  {
+   "id": 97,
+   "text": "the fake-metric audit finds no hard-coded dynamic-looking value",
+   "checks": [
+    "S:has no fake dynamic metric: no accuracy/F1/AUPRC/AUROC/loss, no random or timer-driven progress",
+    "@fake_metric_audit"
+   ]
+  },
+  {
+   "id": 98,
+   "text": "all fourteen mutation controls were caught by a test and restored byte-identically",
+   "checks": [
+    "@mutation_log"
+   ]
+  },
+  {
+   "id": 99,
+   "text": "all prior capstone tests pass (inherited flake policy only)",
+   "checks": [
+    "@prior_capstone_tests"
+   ]
+  },
+  {
+   "id": 100,
+   "text": "the full Python regression passes (inherited flake policy only)",
+   "checks": [
+    "@regression"
+   ]
+  },
+  {
+   "id": 101,
+   "text": "frontend npm test passes",
+   "checks": [
+    "@frontend_npm_test"
+   ]
+  },
+  {
+   "id": 102,
+   "text": "svelte-check reports zero errors",
+   "checks": [
+    "@svelte_check"
+   ]
+  },
+  {
+   "id": 103,
+   "text": "the frontend build passes",
+   "checks": [
+    "@frontend_build"
+   ]
+  },
+  {
+   "id": 104,
+   "text": "ruff passes",
+   "checks": [
+    "@ruff"
+   ]
+  },
+  {
+   "id": 105,
+   "text": "pip check passes",
+   "checks": [
+    "@pip"
+   ]
+  },
+  {
+   "id": 106,
+   "text": "CI was neither queried nor triggered",
+   "checks": [
+    "@ci"
+   ]
+  },
+  {
+   "id": 107,
+   "text": "the final protected-artifact audit shows no drift and every frontend change accounted for",
+   "checks": [
+    "@protected_final"
+   ]
+  },
+  {
+   "id": 108,
+   "text": "no state file, tensor, SQLite database or large artifact was committed",
+   "checks": [
+    "@no_large_artifacts"
+   ]
+  },
+  {
+   "id": 109,
+   "text": "the CAP-008 components are registered and locked",
+   "checks": [
+    "@components_registered"
+   ]
+  },
+  {
+   "id": 110,
+   "text": "CAP-008 is PASS in the task registry (final)",
+   "checks": [
+    "@registry_cap008"
+   ]
+  },
+  {
+   "id": 111,
+   "text": "CAPG7 is PASS in the gate registry (final)",
+   "checks": [
+    "@registry_capg7"
+   ]
+  },
+  {
+   "id": 112,
+   "text": "CAP-009 remains NOT_STARTED and no CAP-009 artifact exists",
+   "checks": [
+    "@registry_cap009"
+   ]
+  },
+  {
+   "id": 113,
+   "text": "all preserved disclosures are carried forward",
+   "checks": [
+    "@disclosures_preserved"
+   ]
+  },
+  {
+   "id": 114,
+   "text": "the final handoff uses the exact required section list",
+   "checks": [
+    "@handoff_sections"
+   ]
+  }
+ ],
+ "capg7_criteria_note": "All CAPG7 criteria are frozen here before any canonical result evidence. Check prefixes: F: frontend vitest test title; T: Python test title; S: static-audit vitest title; @name: evidence evaluator."
+}

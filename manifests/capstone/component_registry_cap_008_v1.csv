@@ -1,0 +1,8 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_FEDERATION_UX_PROTOCOL_V1,ENGINEERING_PROTOCOL,CAP-008,FROZEN_ENGINEERING_PROTOCOL,,artifacts/capstone/CAPSTONE_FEDERATION_UX_PROTOCOL_V1.lock.json,CAP-008 method protocol incl. the frozen CAPG7 criteria.
+CAPSTONE_UI_V1_1,UI_SUCCESSOR_LOCK,CAP-008,FROZEN_ENGINEERING_INTERFACE,CAPSTONE_UI_V1,artifacts/capstone/CAPSTONE_UI_V1_1.lock.json,Successor of CAPSTONE_UI_V1 binding the complete CAP-008 frontend.
+CAPSTONE_FEDERATION_FRONTEND_V1,IMPLEMENTATION_BINDING,CAP-008,FROZEN_IMPLEMENTATION_BINDING,,docs/capstone/CAPSTONE_FEDERATION_FRONTEND_V1.md,The federation/model pages and components over the CAP-007 backend.
+CAPSTONE_FEDERATION_PRODUCT_CLIENT_V1,ENGINEERING_IMPLEMENTATION,CAP-008,FROZEN_ENGINEERING_IMPLEMENTATION,CAPSTONE_PRODUCT_CLIENT_V1,frontend/src/lib/product/api.ts,Typed client extension: the nine CAP-007 methods and the token-free federation WebSocket URL.
+CAPSTONE_FEDERATION_LIVE_MODEL_V1,ENGINEERING_IMPLEMENTATION,CAP-008,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/lib/product/federation/live-model.ts,Event-derived federation state with strict sequence integrity (parser: federation/events.ts).
+CAPSTONE_FEDERATION_STORE_UI_V1,ENGINEERING_IMPLEMENTATION,CAP-008,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/lib/product/federation/state.svelte.ts,"Federation product store, separate from the monitoring store."
+CAPSTONE_MODEL_GOVERNANCE_UI_V1,ENGINEERING_IMPLEMENTATION,CAP-008,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/lib/components/product/federation/CandidateCard.svelte,"Candidate/governance presentation: sandbox-only, never deployed."
