@@ -1,0 +1,37 @@
+{
+  "cap_010_011_not_started": true,
+  "ci_queried": false,
+  "ci_triggered": false,
+  "entry_audit_script_untracked_during_generation": true,
+  "entry_sha": "bdc16611290d371abbcca582920086dcfe4d49a8",
+  "expected_entry_sha": "bdc16611290d371abbcca582920086dcfe4d49a8",
+  "intervening_commits": [],
+  "origin_main_sha": "bdc16611290d371abbcca582920086dcfe4d49a8",
+  "phase": "CAP-009",
+  "prior_gates": {
+    "CAPG0": "PASS",
+    "CAPG1": "PASS",
+    "CAPG2": "PASS",
+    "CAPG3": "PASS",
+    "CAPG4": "PASS",
+    "CAPG5": "PASS",
+    "CAPG6": "PASS",
+    "CAPG7": "PASS"
+  },
+  "prior_locks_verified": true,
+  "prior_tasks": {
+    "CAP-001": "PASS",
+    "CAP-002": "PASS",
+    "CAP-003": "PASS",
+    "CAP-004": "PASS",
+    "CAP-005": "PASS",
+    "CAP-006": "PASS",
+    "CAP-007": "PASS",
+    "CAP-008": "PASS",
+    "CAP-009": "NOT_STARTED",
+    "CAP-010": "NOT_STARTED",
+    "CAP-011": "NOT_STARTED"
+  },
+  "protected_tracked_file_count": 3784,
+  "working_tree_clean_before_entry": true
+}
