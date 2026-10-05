@@ -1,0 +1,45 @@
+{
+ "all_prior_locks_and_amendment_chains_verified": true,
+ "ci": {
+  "queried": false,
+  "triggered": false
+ },
+ "entry_sha": "9db76b482678114ac5c22f3f91a3f55ccb159e17",
+ "environment": {
+  "frontend": "existing frontend/ (SvelteKit, adapter-static)",
+  "python": "3.11 venv outside the repo from requirements-dev.lock + requirements-capstone-auth.lock"
+ },
+ "expected_entry_sha": "9db76b482678114ac5c22f3f91a3f55ccb159e17",
+ "frozen_lock_findings": [
+  "DASHBOARD_UI_V1_5 is the only live frontend lock (older V1..V1_4 already superseded); frontend files it binds are superseded by CAPSTONE_UI_V1 in the same way V1_1..V1_5 superseded their predecessors.",
+  "artifacts/MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1.lock.json binds frontend/package.json and frontend/package-lock.json (change control: requires a new clean clone) -> the exact-pinned @clerk/clerk-js lives in an additive nested package frontend/clerk-sdk/ (user-approved)."
+ ],
+ "gate": "CAPG4",
+ "intervening_commits": [],
+ "later_phases_not_started": true,
+ "matches_expected_entry": true,
+ "origin_main_sha": "9db76b482678114ac5c22f3f91a3f55ccb159e17",
+ "phase": "CAP-005",
+ "preserved_disclosures": [
+  "CAP-001 33-vs-50 gate-row wording",
+  "CAP-002 code-drafted-before-entry",
+  "CAP-002 amendment chain",
+  "CAP-003 LIVE_SPEED bounded-settle/fail-loud",
+  "CAP-003 manual-stop-mid-outage",
+  "CAP-003 context-withholding projection",
+  "CAP-003 pre-freeze smoke",
+  "CAP-004 additive Clerk Python pin file",
+  "CAP-004 SQLite store outside product/",
+  "CAP-004 six-amendment chain",
+  "CAP-004 inherited CAP-003 flaky test",
+  "CAP-004 local-only SQLite git exclude",
+  "CAP-004 Clerk local-fixture-only verification"
+ ],
+ "statuses_at_entry": {
+  "CAP-001..004": "PASS",
+  "CAP-005": "NOT_STARTED",
+  "CAP-006..011": "NOT_STARTED",
+  "CAPG0..3": "PASS"
+ },
+ "working_tree_clean": true
+}
