@@ -1,0 +1,36 @@
+{
+ "cap001_lock_verified": true,
+ "cap002_amendment_chain_length": 4,
+ "cap002_amendment_chain_verified": true,
+ "cap002_lock_verified": true,
+ "ci": {
+  "queried": false,
+  "triggered": false
+ },
+ "entry_sha": "9f49b0c52fd93f7a28aff9ef67407fa9c56976df",
+ "environment": {
+  "new_dependencies": "none (fastapi 0.138.2, starlette 1.3.1, httpx 0.28.1, uvicorn 0.49.0, websockets 17.1 already locked)",
+  "python": "3.11 fresh venv outside the repo from requirements-dev.lock"
+ },
+ "expected_entry_sha": "9f49b0c52fd93f7a28aff9ef67407fa9c56976df",
+ "gate": "CAPG2",
+ "intervening_commits": [],
+ "later_phases_not_started": true,
+ "matches_expected_entry": true,
+ "origin_main_sha": "9f49b0c52fd93f7a28aff9ef67407fa9c56976df",
+ "phase": "CAP-003",
+ "preserved_disclosures": [
+  "CAP-001 gate-row '33 vs 50' bookkeeping discrepancy",
+  "CAP-002 code-drafted-before-entry disclosure",
+  "CAP-002 amendment chain (3 amendments)",
+  "CAP-002 intermediate added-file-count reporting discrepancy (named by the CAP-003 brief; preserved as a historical disclosure, not re-derived or corrected here)"
+ ],
+ "statuses_at_entry": {
+  "CAP-001": "PASS",
+  "CAP-002": "PASS",
+  "CAP-003": "NOT_STARTED",
+  "CAPG0": "PASS",
+  "CAPG1": "PASS"
+ },
+ "working_tree_clean": false
+}

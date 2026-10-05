@@ -1,0 +1,31 @@
+{
+ "amendment_chain": [
+  {
+   "amendment": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_1.json",
+   "old_matches_previous_link": true,
+   "path": "scripts/cap_002_build_evidence.py"
+  },
+  {
+   "amendment": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_1.json",
+   "old_matches_previous_link": true,
+   "path": "scripts/cap_002_mutation_controls.py"
+  },
+  {
+   "amendment": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_2.json",
+   "old_matches_previous_link": true,
+   "path": "scripts/cap_002_build_evidence.py"
+  },
+  {
+   "amendment": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_3.json",
+   "old_matches_previous_link": true,
+   "path": "scripts/cap_002_build_evidence.py"
+  }
+ ],
+ "broken_chain_links": [],
+ "entries_checked": 27,
+ "lock": "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json",
+ "lock_sha256": "3eb5ee97665b006088b15b021b484a5e5ac6f4174f58051d97aacfed0ae0be7d",
+ "mismatches": [],
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "verified": true
+}
