@@ -1,0 +1,1155 @@
+{
+ "protocol_id": "CAPSTONE_FEDERATION_PROTOCOL_V1",
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "owner_task": "CAP-007",
+ "gate": "CAPG6",
+ "purpose": "LIVE federation orchestrator + candidate model registry over the frozen V2 FL stack: authenticated, persisted, deterministic, engineering-only. One FL_SINGLE_RUN = 8 clients x 3 rounds x 24 genuine local updates through the unchanged Coordinator/aggregate_weighted_deltas, exact V2-FL-005 parity, exactly one CAPSTONE_FL_CANDIDATE with structural validation and sandbox-only governance. No candidate is served, deployed or promoted.",
+ "entry": {
+  "expected_entry_sha": "651bfa61022cf699a43c0a91cbc43a6486943bcb",
+  "entry_commit_with_control_plane": "b7be753"
+ },
+ "upstream": {
+  "locks": [
+   "CAPSTONE_PRODUCT_PROTOCOL_V1 (+1)",
+   "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1 (+4)",
+   "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1 (+1)",
+   "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1 (+6)",
+   "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 (+6)",
+   "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1 (+3)",
+   "CAPSTONE_UI_V1",
+   "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+   "FEDPROX_MU_V2",
+   "FL_INIT_V2"
+  ],
+  "frontend_and_released_runtime": "frozen during CAP-007 (zero change); Federation pages stay NOT YET ENABLED (CAP-008 owns them)",
+  "protection_audit": "scripts/cap_007_protected_audit.py (strict: every entry file byte-identical except the control-plane registries and the lifecycle test; new files only in explicit CAP-007 namespaces)"
+ },
+ "contract_reconciliation": {
+  "audit": "reports/capstone/cap_007/federation_contract_reconciliation.json",
+  "problem": "CAPSTONE_FEDERATION_CONTRACT_V1 maps ROUND_AGGREGATED to AGGREGATING -> CANDIDATE_CREATED for every round, i.e. three candidates for a 3-round run, while the frozen V2-FL-005 lineage carries the round-1/2 aggregates forward as the next round's base state.",
+  "resolution": "additive CAPSTONE_FEDERATION_CONTRACT_V2 (contracts/capstone/federation_v2.json): AGGREGATING additionally -> COMPLETED for non-final rounds; no vocabulary or algorithm change; the V1 file is not edited",
+  "client": "additive CAPSTONE_FL_CLIENT_ADAPTER_V2 (CAP-006 V1 is FL_INIT-only and stays unchanged)"
+ },
+ "execution_binding": {
+  "id": "CAPSTONE_FEDERATION_EXECUTION_BINDING_V1",
+  "file": "contracts/capstone/federation_execution_binding_v1.json",
+  "implementation": "product/federation/execution_binding.py"
+ },
+ "client_successor_semantics": "one adapter per client per round over the CAP-006 local buffer; the round base is accepted only after lineage verification (round 1 = FL_INIT_V2 digest; round N>1 = digest of the immediately preceding committed round state); train/envelope code is inherited from V1; MODEL_V2_FINAL and candidates are refused; no copied training loop",
+ "fl_single_run": {
+  "clients": [
+   "SIM_FL_SITE_00",
+   "SIM_FL_SITE_01",
+   "SIM_FL_SITE_02",
+   "SIM_FL_SITE_03",
+   "SIM_FL_SITE_04",
+   "SIM_FL_SITE_05",
+   "SIM_FL_SITE_06",
+   "SIM_FL_SITE_07"
+  ],
+  "planned_rounds": 3,
+  "local_training_calls": 24,
+  "accepted_updates": 24,
+  "rejected_updates": 0,
+  "base_model_id": "FL_INIT_V2",
+  "candidates": 1,
+  "engineering_only": true,
+  "scientific_evidence": false,
+  "production_deployed": false
+ },
+ "algorithms": {
+  "FEDAVG": "federated.model_v2_fl.train_local_epoch_v2 via the CAP-006 client",
+  "FEDPROX": "federated.model_v2_fedprox.train_local_fedprox_epoch_v2 with the frozen mu 0.1 (artifacts/FEDPROX_MU_V2.lock.json)"
+ },
+ "round_events_order": [
+  "federation.status CREATED (create)",
+  "federation.status RUNNING round 0 (start)",
+  "per round: federation.status RUNNING, round.status COLLECTING, client.status DATA_READY x8, round.status LOCAL_TRAINING, per client (canonical order): client.status TRAINING, client.training_progress 0, client.training_progress 1, client.status UPDATE_READY, client.update_ready, client.status SUBMITTED; round.status UPDATES_READY, round.status AGGREGATING, secagg.status, aggregation.status",
+  "non-final round: round.status COMPLETED",
+  "final round: round.status CANDIDATE_CREATED, candidate.created, round.status VALIDATING, candidate.validation RUNNING, candidate.validation PASSED|FAILED (checks = ids of passed checks), candidate.governance, round.status ACCEPTED_TO_SANDBOX|REJECTED, round.status COMPLETED",
+  "federation.status COMPLETED, federation.completed"
+ ],
+ "training_progress_policy": "only the start (0.0, examples 0) and completion (1.0, examples_seen) milestones; intermediate progress is never invented",
+ "candidate": {
+  "id_pattern": "CAPSTONE_FL_CANDIDATE_####",
+  "first": "CAPSTONE_FL_CANDIDATE_0001",
+  "parent_model_id": "FL_INIT_V2",
+  "artifact": "data/capstone/fl_candidates/<id>/state.bin + metadata.json (written serialise -> verify -> temp dir -> atomic rename -> then the SQL row)",
+  "committed": false
+ },
+ "validation_checks": [
+  "STATE_FINITE",
+  "STATE_SPEC_MATCHES_BASE",
+  "UPDATE_DIGESTS_RECONCILE",
+  "ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE",
+  "BASE_STATE_LINEAGE_VERIFIED"
+ ],
+ "governance_rule": "CREATED -> VALIDATION_PENDING -> VALIDATING -> ACCEPTED_TO_SANDBOX (all five checks pass: validation PASSED, sandbox IN_SANDBOX) | REJECTED; scientific_promotion=false and production_deployed=false always",
+ "secagg_shadow": {
+  "scope": "round 1 only; authoritative aggregation stays PLAIN",
+  "claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY",
+  "implementation": "federated.wearable_fl_secagg_shadow_v1.run_shadow (unchanged)",
+  "expected": {
+   "clients": 8,
+   "max_weight": 256,
+   "plain_clear_update_count": 8,
+   "protected_clear_update_count": 0
+  },
+  "tolerances": "frozen, never widened",
+  "on_failure": "run FAILED"
+ },
+ "replay": "a REPLAY run replays the events of the most recent COMPLETED LIVE_RUN of the same owner with the same algorithm/secagg_mode/rounds; source recorded in artifact metadata; zero training/submit/aggregate/SecAgg/candidate/governance; federation.status run_type is REPLAY",
+ "restart_resume": "round-boundary checkpoints (run id, protocol id, cohort identity, algorithm, secagg mode, planned rounds, last committed round, state sha, state-file sha, event count); a RUNNING run with a valid checkpoint resumes the next round in a fresh process, otherwise FAILED; orphan candidate artifacts of the run are removed before resume",
+ "persistence": {
+  "store": "capstone_persistence/federation_store.py (own connection, same SQLite file)",
+  "tables": [
+   "federation_runs",
+   "federation_rounds",
+   "fl_client_statuses",
+   "candidate_models",
+   "governance_decisions"
+  ],
+  "schema_change": false,
+  "events": "run event JSONL in the federation artifact store; no per-event SQL table"
+ },
+ "api": {
+  "implementation": "api/product_app_v1_2.py (CAPSTONE_PRODUCT_API_V1_2)",
+  "routes": 10,
+  "ownership": {
+   "OWN": [
+    "runs create/list/get/start/rounds/live"
+   ],
+   "GLOBAL_READ": [
+    "federation overview",
+    "federation clients",
+    "models list",
+    "models get"
+   ]
+  },
+  "concurrency": "at most one active LIVE run globally (409 INVALID_STATE FEDERATION_RUN_ALREADY_ACTIVE)",
+  "ws_close_codes": [
+   4401,
+   4403,
+   4404
+  ]
+ },
+ "claim_boundary": {
+  "allowed": [
+   "engineering evidence",
+   "deterministic synthetic simulation",
+   "research prototype",
+   "sandbox candidate"
+  ],
+  "forbidden": [
+   "model efficacy or any classification metric",
+   "clinical or diagnostic claim",
+   "privacy / anonymity / differential-privacy claim",
+   "hospital or real-device federation",
+   "scientific promotion or deployment of a candidate"
+  ]
+ },
+ "locality_claim": {
+  "allowed": "eight logically isolated local client datasets on one demonstration machine; the federation server receives model updates rather than raw local training examples",
+  "not_claimed": [
+   "hospital deployment",
+   "separate machines",
+   "VM or enclave isolation",
+   "network-level isolation",
+   "privacy guarantees"
+  ]
+ },
+ "canonical_runs": {
+  "live": "reports/capstone/cap_007/canonical_live_run_{1,2}.json via scripts/run_capstone_federation.py live N (fresh processes)",
+  "scenarios": [
+   "fedprox",
+   "secagg",
+   "invalid",
+   "restart",
+   "replay",
+   "multiuser"
+  ],
+  "chronology": "all canonical and scenario runs execute after the freeze commit"
+ },
+ "mutation_controls": [
+  "ROUND_2_STARTS_FROM_FL_INIT",
+  "THREE_CANDIDATES_PER_RUN",
+  "MODEL_V2_FINAL_ACCEPTED_AS_BASE",
+  "UPDATE_OMITTED_FROM_ROUND",
+  "LABEL_ADDED_TO_SUBMITTED_ENVELOPE",
+  "PRODUCTION_DEPLOYED_TRUE",
+  "CANDIDATE_IN_DEFAULT_RUNTIME_BINDING",
+  "ACCEPT_DESPITE_FAILED_CHECK",
+  "SECAGG_TOLERANCE_WIDENED",
+  "REPLAY_TRAINS",
+  "CROSS_USER_ACCESS_ALLOWED",
+  "SECOND_SIMULTANEOUS_LIVE_RUN"
+ ],
+ "preserved_disclosures": [
+  "CAP-001 gate-row wording discrepancy",
+  "CAP-002 code-drafted-before-entry",
+  "CAP-003 LIVE_SPEED bounded-settle limitation",
+  "CAP-003 manual-stop-mid-outage limitation",
+  "CAP-003 context projection",
+  "CAP-003 pre-freeze smoke",
+  "CAP-004 additive Clerk lock",
+  "CAP-004 SQLite store location",
+  "CAP-004 six-amendment chain",
+  "inherited CAP-003 flaky test",
+  "CAP-004 local-only SQLite git exclude",
+  "CAP-004 Clerk local-fixture-only",
+  "CAP-005 Clerk WebSocket cookie path unverified",
+  "CAP-005 no live Clerk-account E2E",
+  "CAP-005 accessibility audit not equivalent to formal WCAG certification",
+  "CAP-005 canonical UI evidence using ACCELERATED simulation",
+  "CAP-006 logical one-laptop locality",
+  "CAP-006 synthetic engineering labels",
+  "CAP-006 FedProx smoke classification"
+ ],
+ "out_of_scope": [
+  "CAP-008 or any federation UX",
+  "frontend change",
+  "serving or running a candidate (CAPSTONE_FL_SANDBOX_RUNTIME)",
+  "deploying/promoting a candidate or changing DEFAULT_RUNTIME_BINDING_V2",
+  "held-out scientific evaluation or any efficacy metric",
+  "FL_NEW_LOCAL_BATCH",
+  "multi-run continual sandbox / candidate history",
+  "training on website user monitoring data",
+  "personalised models",
+  "physical hardware"
+ ],
+ "components": [
+  "CAPSTONE_FEDERATION_PROTOCOL_V1",
+  "CAPSTONE_FEDERATION_CONTRACT_V2",
+  "CAPSTONE_FEDERATION_EXECUTION_BINDING_V1",
+  "CAPSTONE_FL_CLIENT_ADAPTER_V2",
+  "CAPSTONE_FEDERATION_SERVICE_V1",
+  "CAPSTONE_FEDERATION_EVENT_JOURNAL_V1",
+  "CAPSTONE_FEDERATION_STORE_V1",
+  "CAPSTONE_FEDERATION_ARTIFACT_STORE_V1",
+  "CAPSTONE_FEDERATION_RECOVERY_V1",
+  "CAPSTONE_MODEL_REGISTRY_V1",
+  "CAPSTONE_MODEL_GOVERNANCE_RUNTIME_V1",
+  "CAPSTONE_PRODUCT_API_V1_2"
+ ],
+ "control_plane": {
+  "component_registry": "manifests/capstone/component_registry_cap_007_v1.csv",
+  "gate_registry": "manifests/capstone/gate_registry_v1.csv",
+  "task_registry": "manifests/capstone/task_registry_v1.csv"
+ },
+ "chronology_disclosure": "The CAP-007 implementation was written and its targeted tests run BEFORE this freeze commit (as in earlier phases). Before the freeze the canonical harness and the evidence builder were dry-run end to end into a scratch directory outside the repository (and one canonical live run was briefly written to reports/capstone/cap_007 and deleted) to find harness/evaluator defects; none of that output is committed and no canonical result file exists in the freeze commit. The two recorded canonical runs, all scenarios, the mutation controls, the regression and the criteria evaluation are produced only after the freeze commit.",
+ "environment": "Python 3.11 venv outside the repo; no GPU; CI neither queried nor triggered",
+ "capg6_criteria": [
+  {
+   "id": 1,
+   "text": "CAP-001/CAPG0 PASS",
+   "checks": [
+    "@cap_pass_1"
+   ]
+  },
+  {
+   "id": 2,
+   "text": "CAP-002/CAPG1 PASS",
+   "checks": [
+    "@cap_pass_2"
+   ]
+  },
+  {
+   "id": 3,
+   "text": "CAP-003/CAPG2 PASS",
+   "checks": [
+    "@cap_pass_3"
+   ]
+  },
+  {
+   "id": 4,
+   "text": "CAP-004/CAPG3 PASS",
+   "checks": [
+    "@cap_pass_4"
+   ]
+  },
+  {
+   "id": 5,
+   "text": "CAP-005/CAPG4 PASS",
+   "checks": [
+    "@cap_pass_5"
+   ]
+  },
+  {
+   "id": 6,
+   "text": "CAP-006/CAPG5 PASS",
+   "checks": [
+    "@cap_pass_6"
+   ]
+  },
+  {
+   "id": 7,
+   "text": "every prior protocol lock and amendment chain verifies (CAP-001..006, CAPSTONE_UI_V1, V2-FL system, FEDPROX_MU_V2, FL_INIT_V2)",
+   "checks": [
+    "@locks_verified"
+   ]
+  },
+  {
+   "id": 8,
+   "text": "CAPSTONE_UI_V1 lock verifies and the frontend is byte-identical to the entry commit (Federation pages stay NOT YET ENABLED)",
+   "checks": [
+    "@frontend_unchanged"
+   ]
+  },
+  {
+   "id": 9,
+   "text": "V2-FL-005 evidence, FL_INIT_V2 and the V2 FL / FedProx / SecAgg bound artifacts are unchanged",
+   "checks": [
+    "@v2fl005_unchanged"
+   ]
+  },
+  {
+   "id": 10,
+   "text": "MODEL_V1/MODEL_V2_FINAL, calibrations, SOFTWARE_SYSTEM_V2, DEFAULT_RUNTIME_BINDING_V2 and every other named protected component are unchanged",
+   "checks": [
+    "@no_scientific_drift"
+   ]
+  },
+  {
+   "id": 11,
+   "text": "the CAP-006 implementation, the CAP-004 store/auth/persistence, api/product_app_v1_1.py and the CAP-003 monitoring path are byte-identical to the entry commit",
+   "checks": [
+    "test_the_frozen_cap_006_client_and_every_protected_file_are_byte_identical_to_the_entry_commit",
+    "@cap006_unchanged"
+   ]
+  },
+  {
+   "id": 12,
+   "text": "the entry commit is recorded, HEAD descends from it and CAP-007 was marked IN_PROGRESS / CAPG6 NOT_STARTED before any implementation",
+   "checks": [
+    "@entry_audit_ok",
+    "@prospective_control_plane"
+   ]
+  },
+  {
+   "id": 13,
+   "text": "the CAPSTONE_FEDERATION_PROTOCOL_V1 freeze commit precedes every canonical result file and no bound file drifted since the freeze",
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ]
+  },
+  {
+   "id": 14,
+   "text": "the contract reconciliation audit was written prospectively and records the exact V1->V2 delta",
+   "checks": [
+    "@reconciliation_prospective"
+   ]
+  },
+  {
+   "id": 15,
+   "text": "CAPSTONE_FEDERATION_CONTRACT_V2 is an additive successor: the V1 file is unchanged and the only delta is AGGREGATING -> COMPLETED for non-final rounds",
+   "checks": [
+    "test_contract_v2_is_an_additive_successor_with_exactly_one_transition_delta",
+    "@contract_v1_unchanged"
+   ]
+  },
+  {
+   "id": 16,
+   "text": "non-final rounds complete after aggregation and only the final round creates a candidate",
+   "checks": [
+    "test_non_final_round_may_complete_after_aggregating_and_only_the_final_round_creates_a_candidate"
+   ]
+  },
+  {
+   "id": 17,
+   "text": "CAPSTONE_FEDERATION_EXECUTION_BINDING_V1 is frozen with one candidate per run, intermediate aggregates as round states and the lineage rules",
+   "checks": [
+    "test_execution_binding_freezes_one_candidate_and_the_lineage_rules",
+    "@binding_frozen"
+   ]
+  },
+  {
+   "id": 18,
+   "text": "CAPSTONE_FL_CLIENT_ADAPTER_V2 is an additive successor of V1 (V1 unchanged) that inherits, not re-implements, the local training path",
+   "checks": [
+    "test_client_v2_refuses_unverified_bases_and_reuses_the_v1_training_path",
+    "@client_successor_audit"
+   ]
+  },
+  {
+   "id": 19,
+   "text": "round 1 starts only from FL_INIT_V2",
+   "checks": [
+    "test_round_two_cannot_start_from_fl_init_and_model_v2_final_is_never_a_base"
+   ]
+  },
+  {
+   "id": 20,
+   "text": "every round N>1 starts from the digest of the immediately preceding committed round state",
+   "checks": [
+    "test_each_round_starts_from_the_previous_committed_state_and_the_candidate_is_the_round_3_state",
+    "@round_lineage"
+   ]
+  },
+  {
+   "id": 21,
+   "text": "MODEL_V2_FINAL and candidates are refused as a federation base",
+   "checks": [
+    "test_round_two_cannot_start_from_fl_init_and_model_v2_final_is_never_a_base",
+    "@no_final_as_base_in_code"
+   ]
+  },
+  {
+   "id": 22,
+   "text": "the canonical run base model is FL_INIT_V2",
+   "checks": [
+    "@canonical_base"
+   ]
+  },
+  {
+   "id": 23,
+   "text": "a user cannot submit a model, checkpoint, mu, learning rate, optimizer, batch size, calibration, threshold, base model or candidate id",
+   "checks": [
+    "test_a_user_can_never_submit_a_model_or_hyperparameter_field"
+   ]
+  },
+  {
+   "id": 24,
+   "text": "the create-run request carries exactly the five frozen request fields",
+   "checks": [
+    "test_request_fields_are_exactly_the_five_frozen_fields"
+   ]
+  },
+  {
+   "id": 25,
+   "text": "only FL_SINGLE_RUN is accepted publicly and planned_rounds must be 3",
+   "checks": [
+    "test_public_create_run_rejects_every_non_frozen_scenario_and_round_count"
+   ]
+  },
+  {
+   "id": 26,
+   "text": "monitoring scenario ids, FL_NEW_LOCAL_BATCH and FL_MULTIRUN_CANDIDATE_HISTORY are rejected publicly",
+   "checks": [
+    "test_public_create_run_rejects_every_non_frozen_scenario_and_round_count",
+    "@no_out_of_scope"
+   ]
+  },
+  {
+   "id": 27,
+   "text": "the canonical LIVE_RUN completes through the real CAPSTONE_PRODUCT_API_V1_2 process with explicit DEMO auth and a temporary SQLite file",
+   "checks": [
+    "@live_run_ok"
+   ]
+  },
+  {
+   "id": 28,
+   "text": "the canonical run performs exactly 24 genuine local training calls",
+   "checks": [
+    "@live_calls_24"
+   ]
+  },
+  {
+   "id": 29,
+   "text": "the canonical run has 24 accepted and 0 rejected updates",
+   "checks": [
+    "@live_accepted_24",
+    "@live_no_failures"
+   ]
+  },
+  {
+   "id": 30,
+   "text": "the canonical run has exactly 3 rounds of 8 accepted updates",
+   "checks": [
+    "@live_rounds_3"
+   ]
+  },
+  {
+   "id": 31,
+   "text": "the canonical run uses exactly the eight SIM_FL_SITE_00..07 clients",
+   "checks": [
+    "@live_clients"
+   ]
+  },
+  {
+   "id": 32,
+   "text": "the canonical run creates exactly one candidate, CAPSTONE_FL_CANDIDATE_0001, in an empty registry",
+   "checks": [
+    "@live_one_candidate"
+   ]
+  },
+  {
+   "id": 33,
+   "text": "the candidate parent is FL_INIT_V2",
+   "checks": [
+    "@candidate_parent"
+   ]
+  },
+  {
+   "id": 34,
+   "text": "the candidate digest equals the round-3 committed global state",
+   "checks": [
+    "@candidate_digest"
+   ]
+  },
+  {
+   "id": 35,
+   "text": "round state paths equal the frozen CAPSTONE_FEDERATION_CONTRACT_V2 paths",
+   "checks": [
+    "test_round_state_paths_match_the_frozen_v2_contract",
+    "@live_round_states"
+   ]
+  },
+  {
+   "id": 36,
+   "text": "every federation event validates against PRODUCT_LIVE_EVENT_V1, the sequence is contiguous and ids are deterministic",
+   "checks": [
+    "test_events_are_valid_contiguous_federation_only_and_deterministic",
+    "@event_validation"
+   ]
+  },
+  {
+   "id": 37,
+   "text": "training progress events carry only the frozen start (0) and completion (1) milestones",
+   "checks": [
+    "@progress_policy"
+   ]
+  },
+  {
+   "id": 38,
+   "text": "POST start returns promptly while the run executes in the background",
+   "checks": [
+    "test_start_returns_promptly_and_a_second_live_run_is_refused_while_one_is_active",
+    "@start_latency"
+   ]
+  },
+  {
+   "id": 39,
+   "text": "two canonical runs in fresh processes are semantically identical",
+   "checks": [
+    "@repro_semantic"
+   ]
+  },
+  {
+   "id": 40,
+   "text": "the two canonical runs used different server process ids and both created CAPSTONE_FL_CANDIDATE_0001 in their own empty databases",
+   "checks": [
+    "@repro_fresh_processes"
+   ]
+  },
+  {
+   "id": 41,
+   "text": "the two canonical federation event streams are identical after the frozen projection",
+   "checks": [
+    "@repro_events"
+   ]
+  },
+  {
+   "id": 42,
+   "text": "every subscriber (two live, one late reconnect) received the identical stream",
+   "checks": [
+    "@live_subscribers_identical"
+   ]
+  },
+  {
+   "id": 43,
+   "text": "no federation event or SQL row carries raw data, labels, truth or tensors",
+   "checks": [
+    "test_no_event_or_row_carries_data_labels_truth_or_tensors"
+   ]
+  },
+  {
+   "id": 44,
+   "text": "every submitted envelope passes scan_forbidden with zero findings",
+   "checks": [
+    "test_every_submitted_envelope_passes_the_forbidden_field_scan"
+   ]
+  },
+  {
+   "id": 45,
+   "text": "the V2-FL-005 global state lineage (FL_INIT, round 1, round 2, round 3) is reproduced exactly",
+   "checks": [
+    "@parity_lineage"
+   ]
+  },
+  {
+   "id": 46,
+   "text": "all 24 updates match V2-FL-005: client set, per-round examples_seen",
+   "checks": [
+    "@parity_clients",
+    "@parity_examples"
+   ]
+  },
+  {
+   "id": 47,
+   "text": "all 24 updates match V2-FL-005 shuffle seeds",
+   "checks": [
+    "@parity_seeds"
+   ]
+  },
+  {
+   "id": 48,
+   "text": "all 24 updates match V2-FL-005 update SHAs",
+   "checks": [
+    "@parity_update_sha"
+   ]
+  },
+  {
+   "id": 49,
+   "text": "per-round base and committed digests match V2-FL-005",
+   "checks": [
+    "@parity_bases"
+   ]
+  },
+  {
+   "id": 50,
+   "text": "the candidate digest equals the V2-FL-005 round-3 state",
+   "checks": [
+    "@parity_candidate"
+   ]
+  },
+  {
+   "id": 51,
+   "text": "the V2-FL-005 parity holds in both canonical runs",
+   "checks": [
+    "@parity_both",
+    "test_canonical_run_has_exact_v2_fl_005_lineage_and_update_parity"
+   ]
+  },
+  {
+   "id": 52,
+   "text": "candidate IDs are allocated atomically and the first candidate in an empty registry is 0001",
+   "checks": [
+    "test_ids_are_allocated_atomically_across_concurrent_creators",
+    "test_first_candidate_is_0001_with_fl_init_parent_and_sandbox_unreachable_defaults"
+   ]
+  },
+  {
+   "id": 53,
+   "text": "an existing artifact directory forces the next candidate number",
+   "checks": [
+    "test_an_existing_artifact_directory_forces_the_next_number"
+   ]
+  },
+  {
+   "id": 54,
+   "text": "the candidate artifact is serialised, verified, atomically renamed and tampering is detected",
+   "checks": [
+    "test_artifact_is_written_then_verified_and_tampering_is_detected",
+    "@artifact_files"
+   ]
+  },
+  {
+   "id": 55,
+   "text": "candidate weights never enter SQLite and only the five policy tables are used",
+   "checks": [
+    "test_candidate_weights_never_enter_sqlite_and_only_the_five_policy_tables_are_used"
+   ]
+  },
+  {
+   "id": 56,
+   "text": "the released and candidate model namespaces never mix",
+   "checks": [
+    "test_released_namespace_is_frozen_and_candidates_never_enter_it",
+    "@models_namespaces"
+   ]
+  },
+  {
+   "id": 57,
+   "text": "the candidate state file digest matches its metadata and the registry row",
+   "checks": [
+    "@artifact_hash"
+   ]
+  },
+  {
+   "id": 58,
+   "text": "GET /models and GET /models/{id} are authenticated read-only GLOBAL_READ routes",
+   "checks": [
+    "test_global_read_routes_and_the_models_namespaces"
+   ]
+  },
+  {
+   "id": 59,
+   "text": "no promote, deploy, set-default or select-model route exists",
+   "checks": [
+    "test_the_successor_exposes_exactly_the_ten_cap_007_routes_and_no_later_phase_route",
+    "test_the_api_module_adds_no_cap_009_or_promotion_surface"
+   ]
+  },
+  {
+   "id": 60,
+   "text": "production_deployed is false and scientific_promotion is false everywhere",
+   "checks": [
+    "@no_deployment"
+   ]
+  },
+  {
+   "id": 61,
+   "text": "only the five frozen structural validation checks exist and all pass for the canonical candidate",
+   "checks": [
+    "test_only_the_five_frozen_checks_exist_and_all_pass_for_the_canonical_candidate"
+   ]
+  },
+  {
+   "id": 62,
+   "text": "each validation check fails for its own defect",
+   "checks": [
+    "test_each_check_fails_for_its_own_defect"
+   ]
+  },
+  {
+   "id": 63,
+   "text": "acceptance requires every check and yields sandbox-only status",
+   "checks": [
+    "test_accept_requires_all_checks_and_yields_sandbox_only_never_promotion"
+   ]
+  },
+  {
+   "id": 64,
+   "text": "a failed check rejects the candidate and it never reaches the sandbox",
+   "checks": [
+    "test_a_failed_check_rejects_the_candidate_and_it_never_reaches_the_sandbox"
+   ]
+  },
+  {
+   "id": 65,
+   "text": "the governance state machine is the frozen one and cannot skip validation",
+   "checks": [
+    "test_governance_state_machine_is_the_frozen_one_and_cannot_skip_validation",
+    "test_incomplete_or_reordered_check_lists_never_accept"
+   ]
+  },
+  {
+   "id": 66,
+   "text": "the governance decision is persisted with scientific_promotion=false and production_deployed=false",
+   "checks": [
+    "@governance_persisted"
+   ]
+  },
+  {
+   "id": 67,
+   "text": "no inference runs on a candidate and no CAPSTONE_FL_SANDBOX_RUNTIME exists",
+   "checks": [
+    "test_the_canonical_run_persisted_one_accepted_decision_and_no_inference_surface",
+    "@no_sandbox_runtime"
+   ]
+  },
+  {
+   "id": 68,
+   "text": "a full temporary FedProx 3-round product run completes with 24 calls and 24 accepted updates",
+   "checks": [
+    "@fedprox_run"
+   ]
+  },
+  {
+   "id": 69,
+   "text": "FedProx uses the frozen mu 0.1 and produces one finite candidate",
+   "checks": [
+    "test_full_fedprox_run_uses_the_frozen_mu_and_creates_one_finite_candidate",
+    "@fedprox_mu"
+   ]
+  },
+  {
+   "id": 70,
+   "text": "the FedProx run computes no metrics, tunes nothing and deploys nothing",
+   "checks": [
+    "@fedprox_clean"
+   ]
+  },
+  {
+   "id": 71,
+   "text": "the invalid-update scenario produces STALE_ROUND, DUPLICATE_UPDATE, BASE_STATE_MISMATCH and UNKNOWN_CLIENT through the existing coordinator logic",
+   "checks": [
+    "test_invalid_update_probe_uses_the_existing_rejection_logic_and_creates_nothing",
+    "@invalid_codes"
+   ]
+  },
+  {
+   "id": 72,
+   "text": "the invalid-update scenario is separate: normal runs inject nothing and no run, round or candidate is created",
+   "checks": [
+    "@invalid_no_candidate",
+    "@no_injected_updates"
+   ]
+  },
+  {
+   "id": 73,
+   "text": "the SecAgg shadow verifies round 1 only and aggregation stays PLAIN",
+   "checks": [
+    "test_shadow_run_verifies_round_one_only_and_the_authoritative_result_stays_plain",
+    "test_plain_runs_report_not_used_each_round_and_aggregation_is_plain"
+   ]
+  },
+  {
+   "id": 74,
+   "text": "the shadow run matched the expectations 8 clients, max_weight 256, 8 plain clear updates, 0 protected clear updates",
+   "checks": [
+    "@secagg_expected"
+   ]
+  },
+  {
+   "id": 75,
+   "text": "the frozen SecAgg tolerances are untouched and never widened",
+   "checks": [
+    "test_the_frozen_tolerances_and_expectations_are_untouched"
+   ]
+  },
+  {
+   "id": 76,
+   "text": "a failed shadow fails the run loudly without a candidate",
+   "checks": [
+    "test_a_failed_shadow_fails_the_run_loudly_without_a_candidate"
+   ]
+  },
+  {
+   "id": 77,
+   "text": "the SecAgg claim scope is PROTECTED_AGGREGATION_INTERFACE_ONLY with no DP or anonymity claim",
+   "checks": [
+    "@secagg_claim_scope"
+   ]
+  },
+  {
+   "id": 78,
+   "text": "only the five federation policy tables are populated with the exact expected counts",
+   "checks": [
+    "@db_counts"
+   ]
+  },
+  {
+   "id": 79,
+   "text": "SQLite integrity and foreign-key checks pass and a separate connection is used",
+   "checks": [
+    "@db_integrity"
+   ]
+  },
+  {
+   "id": 80,
+   "text": "the SQLite schema and storage policy are unchanged",
+   "checks": [
+    "@schema_unchanged"
+   ]
+  },
+  {
+   "id": 81,
+   "text": "a killed server restarted in a fresh process resumes round 3 after the round-2 checkpoint",
+   "checks": [
+    "@restart_ok",
+    "test_restart_after_round_two_resumes_round_three_with_the_identical_final_digest"
+   ]
+  },
+  {
+   "id": 82,
+   "text": "the resumed run ends with the identical final digest and the canonical event stream",
+   "checks": [
+    "@restart_digest"
+   ]
+  },
+  {
+   "id": 83,
+   "text": "the resumed run has one candidate and no duplicated updates or decisions",
+   "checks": [
+    "@restart_no_dupes"
+   ]
+  },
+  {
+   "id": 84,
+   "text": "a RUNNING run without a valid checkpoint or with inconsistent metadata is marked FAILED, never fabricated",
+   "checks": [
+    "test_a_running_run_without_a_valid_checkpoint_is_marked_failed_never_fabricated",
+    "test_corrupt_or_mismatched_checkpoints_fail_the_run"
+   ]
+  },
+  {
+   "id": 85,
+   "text": "recovery leaves finished runs untouched",
+   "checks": [
+    "test_recovery_is_a_no_op_for_finished_runs_and_for_runs_owned_by_this_process"
+   ]
+  },
+  {
+   "id": 86,
+   "text": "a REPLAY run replays a real prior completed LIVE_RUN and is visibly run_type REPLAY",
+   "checks": [
+    "@replay_ok"
+   ]
+  },
+  {
+   "id": 87,
+   "text": "a REPLAY performs zero training, submission, aggregation, SecAgg, candidate or governance work",
+   "checks": [
+    "test_replay_reproduces_the_source_stream_with_zero_training_and_zero_new_candidates",
+    "@replay_no_work"
+   ]
+  },
+  {
+   "id": 88,
+   "text": "the REPLAY stream has semantic parity with its source",
+   "checks": [
+    "@replay_parity"
+   ]
+  },
+  {
+   "id": 89,
+   "text": "a REPLAY without a completed source fails clearly and creates no run",
+   "checks": [
+    "test_replay_without_a_completed_source_fails_clearly_and_creates_no_run"
+   ]
+  },
+  {
+   "id": 90,
+   "text": "a REPLAY never uses another user's run or a different configuration",
+   "checks": [
+    "test_replay_does_not_use_another_users_run_or_a_different_configuration",
+    "test_replay_is_visibly_replay_in_every_status_event"
+   ]
+  },
+  {
+   "id": 91,
+   "text": "exactly the ten CAP-007 routes exist and no CAP-008/CAP-009 route",
+   "checks": [
+    "test_the_successor_exposes_exactly_the_ten_cap_007_routes_and_no_later_phase_route"
+   ]
+  },
+  {
+   "id": 92,
+   "text": "system info reports CAPSTONE_PRODUCT_API_V1_2, federation_runtime ENABLED_ENGINEERING, simulated-only hardware and MODEL_V2_FINAL",
+   "checks": [
+    "test_system_reports_engineering_federation_and_the_unchanged_released_model",
+    "@system_info"
+   ]
+  },
+  {
+   "id": 93,
+   "text": "every federation and model route requires authentication",
+   "checks": [
+    "test_all_federation_routes_require_authentication"
+   ]
+  },
+  {
+   "id": 94,
+   "text": "run create/list/get/start/rounds/WS are owner-only; overview, clients and models are authenticated GLOBAL_READ",
+   "checks": [
+    "test_run_ownership_for_get_list_rounds_and_start",
+    "@ownership_ok"
+   ]
+  },
+  {
+   "id": 95,
+   "text": "WS closes with 4401 / 4403 / 4404 for unauthenticated / foreign / unknown runs",
+   "checks": [
+    "test_close_codes_4401_4403_4404",
+    "@ws_codes"
+   ]
+  },
+  {
+   "id": 96,
+   "text": "the WebSocket replays from sequence 0 then tails, supports reconnect, zero and multiple subscribers",
+   "checks": [
+    "test_a_finished_run_replays_from_sequence_zero_identically_to_every_subscriber",
+    "test_live_tail_reconnect_and_multiple_concurrent_subscribers_on_a_running_run"
+   ]
+  },
+  {
+   "id": 97,
+   "text": "the federation channel is server-to-client only",
+   "checks": [
+    "test_the_channel_is_server_to_client_only"
+   ]
+  },
+  {
+   "id": 98,
+   "text": "at most one LIVE run is active globally and a second start is refused with FEDERATION_RUN_ALREADY_ACTIVE",
+   "checks": [
+    "test_start_returns_promptly_and_a_second_live_run_is_refused_while_one_is_active",
+    "@concurrency_ok"
+   ]
+  },
+  {
+   "id": 99,
+   "text": "the released default runtime is unchanged and references no candidate",
+   "checks": [
+    "test_the_released_default_runtime_is_unchanged_and_names_no_candidate"
+   ]
+  },
+  {
+   "id": 100,
+   "text": "no candidate reference exists in the frontend, the CAP-003 client or the inference service sources",
+   "checks": [
+    "test_no_candidate_reference_exists_in_the_frontend_or_the_inference_service_sources"
+   ]
+  },
+  {
+   "id": 101,
+   "text": "the new modules import no truth, data-loader or scientific-runtime module",
+   "checks": [
+    "test_new_modules_import_no_truth_data_loader_or_scientific_runtime_module"
+   ]
+  },
+  {
+   "id": 102,
+   "text": "no efficacy metric is computed and no inference is run by the new modules",
+   "checks": [
+    "test_new_modules_never_compute_efficacy_metrics_or_run_inference",
+    "@no_metrics"
+   ]
+  },
+  {
+   "id": 103,
+   "text": "the central database holds only federation metadata, never data, labels or tensors",
+   "checks": [
+    "test_the_central_database_holds_only_federation_metadata_no_data_labels_or_tensors"
+   ]
+  },
+  {
+   "id": 104,
+   "text": "cross-user access is refused and no monitoring or user data reaches federation",
+   "checks": [
+    "test_cross_user_access_is_refused_and_no_user_data_reaches_federation",
+    "@no_monitoring_data"
+   ]
+  },
+  {
+   "id": 105,
+   "text": "claims stay bounded to engineering and one-laptop logical isolation",
+   "checks": [
+    "test_the_claims_in_the_overview_are_bounded",
+    "@locality_claim"
+   ]
+  },
+  {
+   "id": 106,
+   "text": "no held-out data is loaded",
+   "checks": [
+    "@no_heldout"
+   ]
+  },
+  {
+   "id": 107,
+   "text": "no FL_NEW_LOCAL_BATCH, multi-run history, personalised model or hardware code exists",
+   "checks": [
+    "@no_cap008_scope"
+   ]
+  },
+  {
+   "id": 108,
+   "text": "the targeted CAP-007 tests pass",
+   "checks": [
+    "@targeted_tests"
+   ]
+  },
+  {
+   "id": 109,
+   "text": "the CAP-001..006 capstone tests pass",
+   "checks": [
+    "@prior_capstone_tests"
+   ]
+  },
+  {
+   "id": 110,
+   "text": "the full local regression passes",
+   "checks": [
+    "@regression"
+   ]
+  },
+  {
+   "id": 111,
+   "text": "frontend npm test passes",
+   "checks": [
+    "@frontend_npm_test"
+   ]
+  },
+  {
+   "id": 112,
+   "text": "svelte-check passes",
+   "checks": [
+    "@svelte_check"
+   ]
+  },
+  {
+   "id": 113,
+   "text": "the frontend build passes",
+   "checks": [
+    "@frontend_build"
+   ]
+  },
+  {
+   "id": 114,
+   "text": "ruff passes",
+   "checks": [
+    "@ruff"
+   ]
+  },
+  {
+   "id": 115,
+   "text": "pip check passes",
+   "checks": [
+    "@pip"
+   ]
+  },
+  {
+   "id": 116,
+   "text": "CI was neither queried nor triggered",
+   "checks": [
+    "@ci"
+   ]
+  },
+  {
+   "id": 117,
+   "text": "all twelve mutation controls were caught by a test and restored",
+   "checks": [
+    "@mutation_log"
+   ]
+  },
+  {
+   "id": 118,
+   "text": "the final protected-artifact audit shows no drift and new files only in explicit CAP-007 namespaces",
+   "checks": [
+    "@protected_final"
+   ]
+  },
+  {
+   "id": 119,
+   "text": "no state file, checkpoint, tensor, SQLite database or runtime event journal was committed",
+   "checks": [
+    "@no_large_artifacts"
+   ]
+  },
+  {
+   "id": 120,
+   "text": "the CAP-007 components are registered and locked",
+   "checks": [
+    "@components_registered"
+   ]
+  },
+  {
+   "id": 121,
+   "text": "CAP-007 is PASS in the task registry (final)",
+   "checks": [
+    "@registry_cap007"
+   ]
+  },
+  {
+   "id": 122,
+   "text": "CAPG6 is PASS in the gate registry (final)",
+   "checks": [
+    "@registry_capg6"
+   ]
+  },
+  {
+   "id": 123,
+   "text": "CAP-008 is NOT_STARTED and no CAP-008 artifact exists",
+   "checks": [
+    "@registry_cap008"
+   ]
+  },
+  {
+   "id": 124,
+   "text": "all preserved disclosures are carried forward",
+   "checks": [
+    "@disclosures_preserved"
+   ]
+  },
+  {
+   "id": 125,
+   "text": "the final handoff uses the exact required section list",
+   "checks": [
+    "@handoff_sections"
+   ]
+  }
+ ],
+ "capg6_criteria_note": "All CAPG6 criteria are frozen here before any canonical result evidence."
+}

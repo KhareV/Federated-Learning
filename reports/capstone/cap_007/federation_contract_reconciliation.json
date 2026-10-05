@@ -1,0 +1,84 @@
+{
+ "audit_id": "CAPSTONE_FEDERATION_CONTRACT_RECONCILIATION_V1",
+ "authoritative_inputs_read": [
+  "contracts/capstone/federation_v1.json",
+  "contracts/capstone/fl_run_v1.json",
+  "contracts/capstone/model_registry_v1.json",
+  "contracts/capstone/model_governance_v1.json",
+  "contracts/capstone/demo_scenarios_v1.json",
+  "contracts/capstone/product_api_v1.json",
+  "contracts/capstone/product_api_v2.json",
+  "contracts/capstone/storage_policy_v2.json",
+  "product/federation/base.py",
+  "product/models/registry_contract.py",
+  "product/events.py",
+  "reports/model_v2/v2_fl_005/federation_run.json",
+  "federated/wearable_fl_system_v1.py",
+  "federated/wearable_fl_runner_v1.py",
+  "product/federation/client.py"
+ ],
+ "execution_binding": "CAPSTONE_FEDERATION_EXECUTION_BINDING_V1 (contracts/capstone/federation_execution_binding_v1.json) freezes the resolution",
+ "other_contracts_checked_without_conflict": {
+  "fl_run_v1": "allowed_protocol_ids [V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1] and allowed_base_model_ids [FL_INIT_V2] are satisfied by the run model",
+  "live_event_v1": "twelve federation event kinds suffice; no event schema change",
+  "model_governance_v1": "the five check ids and CREATED->VALIDATION_PENDING->VALIDATING->ACCEPTED_TO_SANDBOX|REJECTED suffice",
+  "product_api_v2.SystemInfoV2.federation_runtime": "plain string field: ENABLED_ENGINEERING needs no API contract successor",
+  "storage_policy_v2": "the five federation tables suffice; no schema change"
+ },
+ "phase": "CAP-007",
+ "reconciliation_A_client": {
+  "problem": "CAPSTONE_FL_CLIENT_ADAPTER_V1 (CAP-006) only accepts FL_INIT_V2 as base (ALLOWED_BASE_MODEL_IDS and a hard BASE_STATE_NOT_FL_INIT_V2 check), but rounds 2 and 3 of a federation run start from the previous committed global state (V2-FL-005 lineage).",
+  "resolution": "additive CAPSTONE_FL_CLIENT_ADAPTER_V2 (product/federation/client_v2.py). V1 is not edited. V2 subclasses V1 (inherits prepare/local_train/produce_update, therefore reuses the CAP-006 buffer, train_local_epoch_v2 / train_local_fedprox_epoch_v2, the frozen hyperparameters, the existing V2 envelope and the forbidden-field scan) and only replaces the base-state check with lineage verification: round 1 = FL_INIT_V2 digest, round N>1 = digest of the immediately preceding committed round state. MODEL_V2_FINAL is refused; a candidate base is reserved for later scenarios and refused now.",
+  "training_loop_copied": false
+ },
+ "reconciliation_B_candidate_cardinality": {
+  "algorithm_changes": [],
+  "delta": {
+   "round_transitions": {
+    "AGGREGATING": {
+     "added": [
+      "COMPLETED"
+     ],
+     "applies_to": "non-final rounds only; the final round keeps AGGREGATING -> CANDIDATE_CREATED",
+     "v1": [
+      "CANDIDATE_CREATED",
+      "FAILED"
+     ],
+     "v2": [
+      "CANDIDATE_CREATED",
+      "COMPLETED",
+      "FAILED"
+     ]
+    }
+   }
+  },
+  "every_other_transition_identical": true,
+  "final_round_path": [
+   "CREATED",
+   "COLLECTING",
+   "LOCAL_TRAINING",
+   "UPDATES_READY",
+   "AGGREGATING",
+   "CANDIDATE_CREATED",
+   "VALIDATING",
+   "ACCEPTED_TO_SANDBOX|REJECTED",
+   "COMPLETED"
+  ],
+  "non_final_round_path": [
+   "CREATED",
+   "COLLECTING",
+   "LOCAL_TRAINING",
+   "UPDATES_READY",
+   "AGGREGATING",
+   "COMPLETED"
+  ],
+  "problem": "federation_v1.coordinator_state_mapping maps ROUND_AGGREGATED to 'AGGREGATING -> CANDIDATE_CREATED' for every round and the V1 round_transitions only allow AGGREGATING -> CANDIDATE_CREATED|FAILED, i.e. one candidate per round and three candidates for the three-round FL_SINGLE_RUN, whereas the demonstration scenario 'produces one engineering candidate' and V2-FL-005 carries the round-1/2 aggregates forward as the next round's base state.",
+  "resolution": "additive CAPSTONE_FEDERATION_CONTRACT_V2 (contracts/capstone/federation_v2.json). federation_v1.json is NOT modified. One candidate per FL_SINGLE_RUN; intermediate aggregates are round global states, not registry candidates.",
+  "vocabulary_changes": []
+ },
+ "v1_file_modified": false,
+ "v1_file_sha256_at_entry": "e0bf46f8678703e8b51dfc292fbb064a16dfd6f345c32645935d8e30dd556359",
+ "v2_file": "contracts/capstone/federation_v2.json",
+ "v2_file_sha256": "266b29ca8e71134527d59a265e2b1336fb249204a483919087a7b0bf8133c7e6",
+ "written": "PROSPECTIVELY: before any federation service, client successor, registry, store or API code existed and before every canonical result"
+}

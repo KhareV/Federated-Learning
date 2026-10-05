@@ -1,0 +1,147 @@
+{
+ "binding_id": "CAPSTONE_FEDERATION_EXECUTION_BINDING_V1",
+ "owner_phase": "CAP-007",
+ "status": "FROZEN_EXECUTION_BINDING",
+ "federation_contract": "CAPSTONE_FEDERATION_CONTRACT_V2",
+ "coordinator": "federated.wearable_fl_system_v1.Coordinator (unchanged)",
+ "aggregation": "federated.aggregation.aggregate_weighted_deltas (unchanged, called only by Coordinator.aggregate)",
+ "client_successor": "CAPSTONE_FL_CLIENT_ADAPTER_V2 (additive; CAPSTONE_FL_CLIENT_ADAPTER_V1 unchanged)",
+ "federation_protocol_id": "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+ "public_scenario": "FL_SINGLE_RUN",
+ "public_request_fields": [
+  "run_type",
+  "algorithm",
+  "secagg_mode",
+  "planned_rounds",
+  "scenario_id"
+ ],
+ "forbidden_request_fields": [
+  "mu",
+  "learning_rate",
+  "optimizer",
+  "batch_size",
+  "model_id",
+  "checkpoint",
+  "calibration",
+  "threshold",
+  "base_model_id",
+  "candidate_id"
+ ],
+ "rejected_public_scenarios": [
+  "FL_NEW_LOCAL_BATCH",
+  "FL_MULTIRUN_CANDIDATE_HISTORY",
+  "NORMAL_MONITORING",
+  "FL_RESTART_RESUME",
+  "FL_REJECT_INVALID_UPDATE",
+  "FL_SECAGG_SHADOW"
+ ],
+ "internal_harness_scenarios": [
+  "FL_RESTART_RESUME",
+  "FL_REJECT_INVALID_UPDATE",
+  "FL_SECAGG_SHADOW"
+ ],
+ "single_run_shape": {
+  "clients": [
+   "SIM_FL_SITE_00",
+   "SIM_FL_SITE_01",
+   "SIM_FL_SITE_02",
+   "SIM_FL_SITE_03",
+   "SIM_FL_SITE_04",
+   "SIM_FL_SITE_05",
+   "SIM_FL_SITE_06",
+   "SIM_FL_SITE_07"
+  ],
+  "planned_rounds": 3,
+  "accepted_updates": 24,
+  "local_training_calls": 24,
+  "base_model_id": "FL_INIT_V2",
+  "candidates": 1,
+  "engineering_only": true,
+  "scientific_evidence": false,
+  "production_deployed": false
+ },
+ "algorithms": {
+  "FEDAVG": "train_local_epoch_v2",
+  "FEDPROX": "train_local_fedprox_epoch_v2 with the frozen FEDPROX_MU_V2 selected_mu (0.1); never request-supplied"
+ },
+ "one_candidate_per_run": true,
+ "intermediate_aggregates_are_round_states": true,
+ "run_level_base": "FL_INIT_V2 (the only allowed run base in CAP-007; MODEL_V2_FINAL and CAPSTONE_FL_CANDIDATE_* are refused)",
+ "round_level_base_digests": {
+  "round_1": "FL_INIT_V2 round-0 state digest (frozen)",
+  "round_N_gt_1": "digest of the immediately preceding committed round global state"
+ },
+ "candidate_parent": "FL_INIT_V2 (the run-level base), never an intermediate aggregate",
+ "candidate_state": "the round-3 committed global state",
+ "normal_run_injected_updates": 0,
+ "accepted_updates_per_round": 8,
+ "arrival_order": "canonical client order (the Coordinator sorts by client id before aggregation, so arrival order cannot change the aggregate)",
+ "training_progress_policy": {
+  "events": "client.training_progress",
+  "milestones": [
+   0.0,
+   1.0
+  ],
+  "intermediate_progress": "never invented",
+  "start": {
+   "progress_fraction": 0.0,
+   "examples_seen": 0
+  },
+  "completion": {
+   "progress_fraction": 1.0,
+   "examples_seen": "result.examples_seen"
+  }
+ },
+ "aggregation_status_mode": "always PLAIN (authoritative aggregation is plain weighted-delta aggregation in every run)",
+ "secagg_shadow": {
+  "scope": "round 1 only",
+  "claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY",
+  "authoritative_aggregation": "PLAIN",
+  "implementation": "federated.wearable_fl_secagg_shadow_v1.run_shadow (unchanged)",
+  "expected": {
+   "clients": 8,
+   "max_weight": 256,
+   "plain_clear_update_count": 8,
+   "protected_clear_update_count": 0
+  },
+  "on_failure": "run FAILED loudly; tolerances never widened"
+ },
+ "replay": {
+  "source": "most recent COMPLETED LIVE_RUN of the same owner with the same scenario/algorithm/secagg_mode/planned_rounds",
+  "source_recorded_in": "artifact run.json (replay_source_run_id); not a request field",
+  "work": "zero training / submit / aggregate / SecAgg / candidate / governance",
+  "parity": "payloads and event kinds equal to the source stream excluding run_id, event ids and timestamps",
+  "no_source": "409 INVALID_STATE NO_COMPLETED_SOURCE_RUN_FOR_REPLAY at create"
+ },
+ "restart_resume": {
+  "checkpoint": "round boundary after each non-final committed round; binds run id, protocol id, cohort identity, algorithm, last committed round, state sha, state file sha, event count",
+  "resume": "RUNNING run with a valid checkpoint is resumed from the next round by the recovering process",
+  "invalid": "RUNNING run without a valid checkpoint or with inconsistent metadata is marked FAILED (never fabricated)",
+  "mid_round_resume": "unsupported",
+  "orphan_candidate_artifacts": "candidate artifacts of the run without a database row are removed before resume"
+ },
+ "concurrency": {
+  "active_live_runs_globally": 1,
+  "second_start": "409 INVALID_STATE FEDERATION_RUN_ALREADY_ACTIVE",
+  "start_returns": "promptly; the run executes in a background task",
+  "blocking_work": "each local epoch / aggregation / SecAgg shadow runs in a worker thread so the event loop stays responsive",
+  "replay_counts_as_active": false
+ },
+ "event_journal": "CAPSTONE_FEDERATION_EVENT_JOURNAL_V1",
+ "store": "CAPSTONE_FEDERATION_STORE_V1",
+ "artifact_store": "CAPSTONE_FEDERATION_ARTIFACT_STORE_V1",
+ "recovery": "CAPSTONE_FEDERATION_RECOVERY_V1",
+ "locality_claim": "one-laptop logical isolation only: no hospital, hardware, VM, enclave or privacy claim",
+ "forbidden": [
+  "MODEL_V2_FINAL as base",
+  "candidate as a run base",
+  "candidate inference",
+  "CAPSTONE_FL_SANDBOX_RUNTIME",
+  "promotion / deployment / default-model change",
+  "efficacy metrics",
+  "held-out inference",
+  "monitoring or user data in FL",
+  "FL_NEW_LOCAL_BATCH",
+  "multi-run candidate history"
+ ]
+}

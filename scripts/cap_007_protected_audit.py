@@ -18,6 +18,7 @@ from src.nhm.hashing import hash_file
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "reports/capstone/cap_007"
 CAP006_LOCK = ROOT / "artifacts/capstone/CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.lock.json"
+CAP007_LOCK = ROOT / "artifacts/capstone/CAPSTONE_FEDERATION_PROTOCOL_V1.lock.json"
 EXPECTED_ENTRY = "651bfa61022cf699a43c0a91cbc43a6486943bc"
 ADDITIVE_PREFIXES = (
     "manifests/capstone/", "configs/capstone/", "artifacts/capstone/", "docs/capstone/",
@@ -68,6 +69,9 @@ def all_locks() -> dict:
     locks["cap006"] = verify_amended_lock(
         CAP006_LOCK, "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.amendment_*.json")
     locks.update(fl_locks())
+    if CAP007_LOCK.exists():  # the lock does not exist at entry; it must verify at final
+        locks["cap007"] = verify_amended_lock(CAP007_LOCK, "CAPSTONE_FEDERATION_PROTOCOL_V1.amendment_*.json")
+        locks["cap007"]["verified"] = not locks["cap007"]["mismatches"] and not locks["cap007"]["broken_chain_links"]
     return locks
 
 

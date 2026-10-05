@@ -1,0 +1,128 @@
+{
+ "contract_id": "CAPSTONE_FEDERATION_CONTRACT_V2",
+ "contract_version": "CAPSTONE_FEDERATION_V2",
+ "status": "FROZEN_INTERFACE_CONTRACT_SUCCESSOR",
+ "supersedes_for_cap007": "CAPSTONE_FEDERATION_CONTRACT_V1 (file unchanged)",
+ "owner_phase": "CAP-007",
+ "reason": "CAPSTONE_FEDERATION_CONTRACT_V1 maps ROUND_AGGREGATED to AGGREGATING -> CANDIDATE_CREATED for EVERY round, which would create a candidate per round (three per FL_SINGLE_RUN). The frozen V2-FL-005 lineage carries the aggregate of rounds 1 and 2 forward as the NEXT ROUND'S base state; only the final aggregate is a registry candidate (one candidate per FL_SINGLE_RUN).",
+ "delta_from_v1": {
+  "round_transitions": {
+   "AGGREGATING": {
+    "v1": [
+     "CANDIDATE_CREATED",
+     "FAILED"
+    ],
+    "v2": [
+     "CANDIDATE_CREATED",
+     "COMPLETED",
+     "FAILED"
+    ],
+    "added": [
+     "COMPLETED"
+    ],
+    "applies_to": "non-final rounds only; the final round keeps AGGREGATING -> CANDIDATE_CREATED"
+   }
+  }
+ },
+ "unchanged_from_v1": [
+  "round_states",
+  "terminal_states",
+  "forbidden_round_states",
+  "algorithms",
+  "aggregation_modes",
+  "forbidden_inventions",
+  "secagg_scope",
+  "update_rejection_codes_reuse",
+  "event_stream (kinds)",
+  "every other round transition"
+ ],
+ "vocabulary_changes": [],
+ "algorithm_changes": [],
+ "round_states": [
+  "CREATED",
+  "COLLECTING",
+  "LOCAL_TRAINING",
+  "UPDATES_READY",
+  "AGGREGATING",
+  "CANDIDATE_CREATED",
+  "VALIDATING",
+  "ACCEPTED_TO_SANDBOX",
+  "REJECTED",
+  "COMPLETED",
+  "FAILED"
+ ],
+ "terminal_states": [
+  "COMPLETED",
+  "FAILED"
+ ],
+ "round_transitions": {
+  "CREATED": [
+   "COLLECTING",
+   "FAILED"
+  ],
+  "COLLECTING": [
+   "LOCAL_TRAINING",
+   "FAILED"
+  ],
+  "LOCAL_TRAINING": [
+   "UPDATES_READY",
+   "FAILED"
+  ],
+  "UPDATES_READY": [
+   "AGGREGATING",
+   "FAILED"
+  ],
+  "AGGREGATING": [
+   "CANDIDATE_CREATED",
+   "COMPLETED",
+   "FAILED"
+  ],
+  "CANDIDATE_CREATED": [
+   "VALIDATING",
+   "FAILED"
+  ],
+  "VALIDATING": [
+   "ACCEPTED_TO_SANDBOX",
+   "REJECTED",
+   "FAILED"
+  ],
+  "ACCEPTED_TO_SANDBOX": [
+   "COMPLETED",
+   "FAILED"
+  ],
+  "REJECTED": [
+   "COMPLETED",
+   "FAILED"
+  ],
+  "COMPLETED": [],
+  "FAILED": []
+ },
+ "non_final_round_path": [
+  "CREATED",
+  "COLLECTING",
+  "LOCAL_TRAINING",
+  "UPDATES_READY",
+  "AGGREGATING",
+  "COMPLETED"
+ ],
+ "final_round_path": [
+  "CREATED",
+  "COLLECTING",
+  "LOCAL_TRAINING",
+  "UPDATES_READY",
+  "AGGREGATING",
+  "CANDIDATE_CREATED",
+  "VALIDATING",
+  "ACCEPTED_TO_SANDBOX|REJECTED",
+  "COMPLETED"
+ ],
+ "candidate_cardinality": "exactly one candidate per FL_SINGLE_RUN (final round only); intermediate aggregates are round global states, not registry candidates",
+ "coordinator_state_mapping": {
+  "ROUND_OPENED": "COLLECTING",
+  "GLOBAL_STATE_BROADCAST": "LOCAL_TRAINING",
+  "CLIENT_UPDATE_ACCEPTED (all expected)": "UPDATES_READY",
+  "ROUND_AGGREGATED": "AGGREGATING",
+  "ROUND_COMMITTED (non-final round)": "COMPLETED",
+  "ROUND_COMMITTED (final round)": "CANDIDATE_CREATED -> VALIDATING -> ACCEPTED_TO_SANDBOX|REJECTED -> COMPLETED (capstone governance step added by CAP-007)"
+ }
+}
