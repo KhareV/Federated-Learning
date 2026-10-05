@@ -18,12 +18,12 @@ EXPECTED_TASKS = {
     "V2-001": "PASS", "V2-002": "PASS", "V2-003": "PASS", "V2-004": "PASS",
     "V2-005": "SKIPPED_BY_PROTOCOL", "V2-006": "PASS", "V2-007": "PASS", "V2-008": "PASS",
     "V2-009": "PASS", "V2-010": "PASS", "V2-011": "PASS", "V2-012": "PASS", "V2-013": "PASS",
-    "V2-014": "PASS",
+    "V2-014": "PASS", "V2-REL-001": "NOT_STARTED",
     "V2-FL-001": "PASS", "V2-FL-002": "PASS", "V2-FL-003": "PASS",
     "V2-FL-EVAL-001": "PASS", "V2-FL-004": "PASS", "V2-FL-005": "PASS",
 }
 EXPECTED_GATES = {
-    **{f"V2G{n}": "PASS" for n in range(13)}, "V2G13": "PASS",
+    **{f"V2G{n}": "PASS" for n in range(13)}, "V2G13": "PASS", "V2RELG0": "NOT_STARTED",
     "V2FLG0": "PASS", "V2FLG1": "PASS", "V2FLG2": "PASS", "V2FLEG0": "PASS",
     "V2FLG3": "PASS", "V2FLG4": "PASS",
 }
@@ -49,6 +49,7 @@ EXPECTED_COMPONENTS = {
     "WEARABLE_SIM_FL_SECAGG_COMPAT_V1": "FROZEN_ENGINEERING_COMPATIBILITY",
     "MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1": "FROZEN_REPRO_PROTOCOL",
     "MODEL_V2_COMPLETE_REPRO_V1": "FROZEN_REPRODUCIBILITY_EVIDENCE",
+    "SYSTEM_V2_RELEASE_POLICY_V1": "FROZEN_RELEASE_POLICY",
 }
 
 
@@ -90,4 +91,5 @@ def test_next_phases_are_exactly_not_started_and_gate_blocking_is_consistent() -
     assert gates["V2FLG3"]["blocks_tasks"] == "V2-FL-005"
     assert gates["V2FLG4"]["blocks_tasks"] == "V2-014"
     assert tasks["V2-014"]["prerequisites"] == "V2-001;V2-013;V2-FL-005"
+    assert tasks["V2-REL-001"]["prerequisites"] == "V2-014;V2-FL-005"
     assert "WEARABLE_SIM virtual-client FL system path" in gates["V2G13"]["purpose"]

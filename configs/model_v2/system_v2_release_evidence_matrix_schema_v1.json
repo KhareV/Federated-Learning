@@ -1,0 +1,10 @@
+{
+  "schema_id": "SYSTEM_V2_RELEASE_EVIDENCE_MATRIX_V1",
+  "required_sections": ["A_official_validation_history", "B_central_model_improvement_evidence",
+    "C_runtime_acceptance", "D_gateway", "E_software_integration", "F_real_data_federated_program",
+    "G_federated_heldout_evaluation", "H_privacy_protocol_engineering", "I_synthetic_wearable_system",
+    "J_complete_reproducibility"],
+  "required_row_fields": ["source", "observed"],
+  "rewrites_history": false,
+  "official_validation_vs_post_freeze_second_look_must_be_distinguished": true
+}

@@ -159,8 +159,8 @@ def test_registry_csv_field_alignment_exact() -> None:
 
     with (ROOT / "manifests/model_v2/task_registry_v1.csv").open(newline="") as handle:
         task_rows = list(csv.DictReader(handle))
-    assert len(task_rows) == 20  # + additive V2-FL-001..005, V2-FL-EVAL-001
-    assert len({row["task_id"] for row in task_rows}) == 20
+    assert len(task_rows) >= 20  # + additive tasks (append-only)
+    assert len({row["task_id"] for row in task_rows}) == len(task_rows)
 
     with (ROOT / "manifests/model_v2/gate_registry_v1.csv").open(newline="") as handle:
         gate_rows = list(csv.DictReader(handle))

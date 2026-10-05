@@ -1,0 +1,94 @@
+# SYSTEM_V2_RELEASE_POLICY_V1 -- V2-REL-001 prospective SYSTEM-LEVEL RESEARCH-SOFTWARE release decision (gate V2RELG0).
+# Frozen BEFORE the deterministic decision evaluation and BEFORE any operational-default change.
+policy_id: SYSTEM_V2_RELEASE_POLICY_V1
+task_id: V2-REL-001
+gate: V2RELG0
+entry_sha: f3d3d9f642fbd20158743c24c60d96b945c35d0c
+release_level: RESEARCH_SOFTWARE_OPERATIONAL_DEFAULT
+not_release_levels: [CLINICAL_RELEASE, MEDICAL_DEVICE_RELEASE, PRODUCTION_HOSPITAL_RELEASE, HARDWARE_RELEASE, WEARABLE_VALIDATION_RELEASE]
+evidence_timing_disclosure: >-
+  This policy is created AFTER the scientific and engineering evidence exists. It is NOT a
+  preregistered scientific hypothesis test and NOT a prospective validation-performance gate. It is a
+  prospective SOFTWARE-GOVERNANCE decision made before the operational default changes. No new
+  scientific p-value or performance threshold is invented. The frozen evidence may legitimately
+  inform the decision.
+scientific_preregistration_claim: false
+forbidden_new_evidence: [TRAIN model fitting, VALIDATION inference, CALIBRATION fitting, INTERNAL_TEST inference, INCART inference, NSTDB inference, BIDMC classifier evaluation, new bootstrap draws on source data, new checkpoint selection, new threshold tuning, new FedProx selection, new architecture comparison, any new scientific metric from waveform data]
+allowed_activities: [reading frozen reports, reading frozen prediction tables, reconstructing already-frozen summaries, artifact verification, runtime/software testing, synthetic replay]
+decision_rule: >-
+  ACCEPT iff every hard system release blocker passes AND no newly discovered unresolved integrity
+  defect exists; otherwise REJECT and no default change occurs. Not based on any new numerical
+  performance cutoff. Computed mechanically by scripts/evaluate_system_v2_release.py; manual override
+  is forbidden.
+hard_blockers:
+  - {id: H01, requirement: MODEL_V2_FINAL checkpoint/manifest hash valid}
+  - {id: H02, requirement: CAL_V2 hash/identity valid}
+  - {id: H03, requirement: GATEWAY_ARTIFACT_V2 valid (canonical identity)}
+  - {id: H04, requirement: MODEL_V2_RUNTIME_ACCEPTED == ACCEPTED with INCART runtime guard and NSTDB no-collapse guard PASS and no override}
+  - {id: H05, requirement: V2-012 PASS and its gate PASS}
+  - {id: H06, requirement: V2-013 PASS and its gate PASS}
+  - {id: H07, requirement: V2-FL-001 PASS and V2FLG0 PASS}
+  - {id: H08, requirement: V2-FL-002 PASS and V2FLG1 PASS}
+  - {id: H09, requirement: V2-FL-003 PASS and V2FLG2 PASS}
+  - {id: H10, requirement: V2-FL-EVAL-001 PASS and V2FLEG0 PASS}
+  - {id: H11, requirement: V2-FL-004 PASS and V2FLG3 PASS}
+  - {id: H12, requirement: V2-FL-005 PASS and V2FLG4 PASS}
+  - {id: H13, requirement: V2-014 PASS and V2G13 PASS with MODEL_V2_COMPLETE_REPRO_V1 evidence (clone 1 and clone 2) verifying}
+  - {id: H14, requirement: API_SCHEMA_V1 compatibility maintained (contract and OpenAPI hashes unchanged)}
+  - {id: H15, requirement: no public model/checkpoint/threshold selector introduced}
+  - {id: H16, requirement: non-diagnostic five-state monitoring vocabulary preserved}
+  - {id: H17, requirement: PREPROC_V1 normalization boundary preserved}
+  - {id: H18, requirement: HR branch remains amplitude-preserving}
+  - {id: H19, requirement: source-domain CAL_V2 labeling preserved}
+  - {id: H20, requirement: V1 rollback remains available (MODEL_V1, CAL_V1, GATEWAY_ARTIFACT_V1, API_RUNTIME_V1_1)}
+  - {id: H21, requirement: historical MODEL_V2_NOT_PROMOTED_RELEASE_CI disposition immutable and unchanged}
+  - {id: H22, requirement: no protected-artifact drift since entry}
+  - {id: H23, requirement: full regression passes (frozen V2-014 clone regression evidence at decision time; re-run on the release commit as a V2RELG0 criterion)}
+  - {id: H24, requirement: V2 real-data FL program complete (V2-FL-001..003 criteria PASS; frozen client partitions; no scientific integrity failure)}
+non_blocking_known_limitations:
+  - {id: L01, text: "MODEL_V2_NOT_PROMOTED_RELEASE_CI remains true: the release-seed paired VALIDATION CI lower bound crossed zero; permanent historical negative finding, not rewritten"}
+  - {id: L02, text: "INTERNAL_TEST has only six eligible contributing patient groups"}
+  - {id: L03, text: "V2-010 INTERNAL_TEST/INCART/NSTDB evidence is post-freeze second-look evidence, not untouched validation"}
+  - {id: L04, text: "INCART FL evaluation is project-exposed external second-look evidence"}
+  - {id: L05, text: "QUALITY_V1 does not reliably hard-fail a raw stuck-nonzero ECG source because of the frozen preprocessing composition (not repaired here)"}
+  - {id: L06, text: "CAL_V2 is MIT-BIH source-domain calibration only"}
+  - {id: L07, text: "No physical wearable validation exists"}
+  - {id: L08, text: "SecAgg evidence is a narrow protected-aggregation-interface result, not a complete privacy guarantee"}
+  - {id: L09, text: "CLEAN_CLONE_GATING_V1 excluded raw-data-dependent tests from the clean-software claim when their untracked inputs were absent"}
+default_target:
+  model: MODEL_V2_FINAL
+  runtime_stack: [MODEL_V2_FINAL, GATEWAY_ARTIFACT_V2, CAL_V2, ALERT_POLICY_V1_MODEL_V2_BINDING, API_SCHEMA_V1]
+  not_deployed: [any V2 FL checkpoint, the V2-FL-005 synthetic-trained disposable state, MODEL_V1]
+  rationale: MODEL_V2_FINAL is the frozen CENTRAL checkpoint for which gateway, source-domain calibration, threshold and software integration were built. FL checkpoints remain federated research evidence.
+api_policy: {schema: API_SCHEMA_V1 (unchanged), route: POST /v1/infer-window, status_semantics: [400, 422, 500], monitoring_states: 5, new_schema_version: forbidden, public_model_selector: forbidden}
+runtime_architecture: >-
+  Thin additive default wrapper (api/app_default.py) around the already-tested api.app_v2.create_research_app
+  / api.runtime_v2.ResearchRuntimeV2; an additive DEFAULT_RUNTIME_BINDING_V2 lock is verified fail-closed
+  before construction; API_RUNTIME_V2_1 is NOT mutated. The default module never imports api.app (no V1 at
+  import), never imports SimulationTruth and exposes no model selector. A separate explicit operator-only
+  rollback factory builds the V1 stack; rollback is a launch profile, never a request parameter. No
+  mixed V1/V2 component stack is permitted.
+rollback_policy: {kept: [api.app, api.runtime.ProductionRuntime, API_RUNTIME_V1_1, MODEL_V1, CAL_V1, GATEWAY_ARTIFACT_V1], role_after_cutover: FROZEN_ROLLBACK_REFERENCE, selection: operator launch profile only, forbidden: [MODEL_V2+CAL_V1, MODEL_V1+CAL_V2, V2 gateway + V1 threshold]}
+frontend_transition_policy: >-
+  The normal build requests MODEL_V2_FINAL via an additive DASHBOARD_UI_V1_5 successor (DASHBOARD_UI_V1_4
+  preserved byte-identical); no frontend fork; the UI displays actual model/calibration/domain/alert-policy/
+  preprocess/quality identities from the API response. Public copy that overstates the evidence is corrected
+  additively before the successor is frozen.
+claim_rules:
+  required_wording: >-
+    SOFTWARE_SYSTEM_V2 is accepted as the default NHM research-software runtime based on the complete
+    frozen evidence lineage, runtime acceptance, real-data federated evaluation, software integration and
+    clean reproducibility. This is a prospective system-level operational decision and does not alter the
+    historical MODEL_V2_NOT_PROMOTED_RELEASE_CI scientific-validation disposition. The system remains a
+    non-diagnostic research prototype and has not been validated as a physical wearable or clinical device.
+  forbidden_claims: [clinical diagnosis, hospital deployment, hardware deployment, differential privacy, real wearable validation, the default MODEL_V2 checkpoint was trained federatively, system privacy guarantee, patient data cannot be reconstructed, all raw-data scientific tests passed in the clean clone, retroactive MODEL_V2 scientific promotion]
+  federated_wording: "The project includes a complete federated-learning research lineage for the MODEL_V2 architecture."
+  clean_clone_wording: "All available clean-software tests passed; explicitly data-gated tests were reported separately."
+historical_dispositions_preserved: {model_promotion: MODEL_V2_NOT_PROMOTED_RELEASE_CI, new_system_release_disposition_if_accepted: SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED, both_true_simultaneously: true}
+chronology: [entry audit, POLICY METHOD COMMIT, deterministic decision evaluation, RELEASE DECISION COMMIT (only if ACCEPT), CUTOVER IMPLEMENTATION, CUTOVER RESULT COMMIT, fresh-clone release smoke, FINAL RELEASE EVIDENCE COMMIT]
+test_plan: [release decision verifier, artifact-lock verifier, default-binding verifier, mixed-stack rejection tests, V2 API equivalence vs API_RUNTIME_V2_1, V2 replay through the default launch path, flatline replay, V1 rollback replay, process isolation, frontend tests/check/build, runtime/frontend E2E, V2-FL-005 verification mode, MODEL_V2 fixed-vector smoke, gateway parity smoke, FL_INIT deterministic smoke, full Python regression, ruff, pip check]
+v2relg0:
+  blocks: []
+  performance_independent: true
+  pass_criteria: [release policy frozen before default change, decision evaluator reads frozen evidence only, all hard blockers pass, historical scientific non-promotion preserved, release decision explicit, MODEL_V2_FINAL becomes default only after ACCEPT, FL checkpoint not deployed, CAL_V2/GATEWAY_V2 binding exact, API_SCHEMA_V1 unchanged, no public model selector, V1 rollback preserved, mixed bindings fail closed, frontend reflects V2 identities, V2 replay succeeds through the default launch path, V1 rollback replay succeeds, clean release clone succeeds, known limitations present, no hardware/clinical claim, protected artifacts unchanged, full regression passes, repository clean and pushed]
+out_of_scope: [T036, hardware, WEARABLE_V1 evidence, API_SCHEMA_V2, new scientific experiments]

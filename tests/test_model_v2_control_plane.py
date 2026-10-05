@@ -40,17 +40,17 @@ def test_canonical_gate_registry_untouched_by_v2_namespace() -> None:
 
 def test_v2_task_registry_is_a_separate_namespace() -> None:
     rows = _rows(ROOT / "manifests/model_v2/task_registry_v1.csv")
-    assert len(rows) == 20  # V2-001..V2-014, additive V2-FL-001..005 and V2-FL-EVAL-001
+    assert len(rows) >= 20  # V2-001..014, additive V2-FL-001..005/EVAL (append-only)
     assert all(row["task_id"].startswith("V2-") for row in rows)
     expected = ({f"V2-{n:03d}" for n in range(1, 15)}
                 | {f"V2-FL-{n:03d}" for n in range(1, 6)} | {"V2-FL-EVAL-001"})
-    assert {row["task_id"] for row in rows} == expected
+    assert expected <= {row["task_id"] for row in rows}  # later additive tasks are allowed
 
 
 def test_v2_gate_registry_is_a_separate_namespace() -> None:
     rows = _rows(ROOT / "manifests/model_v2/gate_registry_v1.csv")
     assert len(rows) >= 18  # V2G0..V2G13 plus additive federated gates (append-only)
-    assert all(row["gate_id"].startswith(("V2G", "V2FLG", "V2FLEG")) for row in rows)
+    assert all(row["gate_id"].startswith(("V2G", "V2FLG", "V2FLEG", "V2RELG")) for row in rows)
     expected = {f"V2G{n}" for n in range(14)} | {"V2FLG0", "V2FLG1", "V2FLG2", "V2FLEG0"}
     assert expected <= {row["gate_id"] for row in rows}  # append-only: later gates may be added
 

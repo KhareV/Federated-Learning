@@ -1,0 +1,30 @@
+{
+  "entry_sha": "f3d3d9f642fbd20158743c24c60d96b945c35d0c",
+  "lifecycle_repairs_before_policy_freeze": {
+    "files": [
+      "tests/test_model_v2_control_plane.py",
+      "tests/test_v2_005_results.py"
+    ],
+    "post_freeze_historical_lifecycle_edits_planned": [],
+    "statement": "Adding the append-only V2-REL-001 task / V2RELG0 gate rows exposed three more brittle historical registry-shape tests (exact task count 20, exact task-id set, gate-id prefix list). They were repaired to append-only form NOW, before the policy freeze and before any decision or cutover, under MODEL_V2_LIFECYCLE_TEST_POLICY_V1."
+  },
+  "policy_created_after_evidence": true,
+  "pre_policy_mechanics_dry_run": {
+    "disclosure": "While implementing the evaluator, scripts/evaluate_system_v2_release.py was executed once into a scratch directory (outside the repository, discarded) to exercise its code paths BEFORE the policy commit. All hard criteria evaluated PASS in that dry run. It is NOT the canonical decision; the canonical evaluation is run only after the policy method commit and its output is committed in the decision commit.",
+    "operational_default_changed": false
+  },
+  "read_only_architecture_audit_before_policy": {
+    "current_default_launch": "uvicorn api.app:app (V1, instantiates ProductionRuntime at import)",
+    "frontend_default_request_model_id": "MODEL_V1 (frontend/src/routes/monitoring/+page.svelte build-time default; locked by DASHBOARD_UI_V1_4)",
+    "frontend_lock_chain": "E2E_REPLAY_SOFTWARE_V1_3 binds the page and the DASHBOARD_UI_V1_4 lock, so a default change needs additive DASHBOARD_UI_V1_5 and E2E_REPLAY_SOFTWARE_V1_4 successors",
+    "stale_or_overstated_public_copy_candidates": [
+      "landing SystemArchitecture MODEL_V1 text",
+      "HardwareStudio API_RUNTIME_V1 note",
+      "monitor page API_RUNTIME_V1 text",
+      "root page 'on-device SIMD feature extraction ... differential privacy accounting' sentence"
+    ],
+    "v2_research_launch": "uvicorn --factory api.app_v2:create_default_research_app (API_RUNTIME_V2_1)"
+  },
+  "scientific_preregistration_claim": false,
+  "status": "PASS"
+}
