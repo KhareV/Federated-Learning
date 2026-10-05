@@ -1,0 +1,8 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1,ENGINEERING_PROTOCOL,CAP-005,FROZEN_ENGINEERING_PROTOCOL,,artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.lock.json,CAP-005 method protocol incl. the frozen CAPG4 criteria.
+CAPSTONE_UI_V1,FRONTEND_INTERFACE,CAP-005,FROZEN_ENGINEERING_INTERFACE,DASHBOARD_UI_V1_5,artifacts/capstone/CAPSTONE_UI_V1.lock.json,The existing SvelteKit frontend extended into the product UI; lock supersedes DASHBOARD_UI_V1_5.
+CAPSTONE_FRONTEND_AUTH_V1,ENGINEERING_IMPLEMENTATION,CAP-005,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/lib/product/auth.ts,Backend-decided DEMO/CLERK bootstrap; lazy official ClerkJS; no fallback.
+CAPSTONE_PRODUCT_CLIENT_V1,ENGINEERING_IMPLEMENTATION,CAP-005,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/lib/product/api.ts,Typed client for PRODUCT_API_CONTRACT_V2 (same-origin /product/v1).
+CAPSTONE_MONITORING_STORE_V1,ENGINEERING_IMPLEMENTATION,CAP-005,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/lib/product/state.svelte.ts,"Svelte 5 product store over the pure live model, strict event parser, bounded waveform and socket."
+CAPSTONE_DEVICE_UI_V1,ENGINEERING_IMPLEMENTATION,CAP-005,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/routes/app/device/+page.svelte,/app/device virtual-wearable lifecycle UI.
+CAPSTONE_MONITORING_UI_V1,ENGINEERING_IMPLEMENTATION,CAP-005,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/routes/app/monitoring/+page.svelte,/app/monitoring live session UI.

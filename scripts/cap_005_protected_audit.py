@@ -32,7 +32,7 @@ MODIFIABLE = (
     "manifests/capstone/task_registry_v1.csv", "manifests/capstone/gate_registry_v1.csv",
     "tests/test_capstone_lifecycle.py",
     # DASHBOARD_UI_V1_5 supersession (same mechanism as V1_1..V1_5): predecessor-lock tests
-    "tests/test_t035_lock_versioning.py",
+    "tests/test_t035_lock_versioning.py", "tests/test_v2_rel_001_results.py",
 )
 
 

@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 
 // Minimal vitest config (Section 43): this project tree has no prior unit-test framework.
@@ -13,7 +14,10 @@ import { defineConfig } from 'vitest/config';
 // uses the separate top-level vite.config.ts.
 export default defineConfig({
 	plugins: [sveltekit()],
-	resolve: { conditions: ['browser'] },
+	resolve: {
+		conditions: ['browser'],
+		alias: { '@clerk/clerk-js': fileURLToPath(new URL('./clerk-sdk/node_modules/@clerk/clerk-js', import.meta.url)) }
+	},
 	test: {
 		environment: 'node',
 		include: ['src/**/__tests__/**/*.test.ts']

@@ -55,7 +55,14 @@ def test_dashboard_ui_v1_3_superseded_by_v1_4_with_preserved_lock() -> None:
         verify_v1_4()
     from scripts.verify_dashboard_ui_v1_5_v2rel001 import verify as verify_v1_5
 
-    result = verify_v1_5()
+    # CAP-005 later superseded V1_5 with CAPSTONE_UI_V1 (product shell, landing page, /monitor
+    # retirement, /product proxy): V1_5's live verifier now reports drift by design, its lock
+    # file stays byte-identical (checked by CAPSTONE_UI_V1), and CAPSTONE_UI_V1 verifies.
+    with pytest.raises(RuntimeError, match="DASHBOARD_UI_V1_5_TAMPER"):
+        verify_v1_5()
+    from scripts.verify_capstone_ui_v1 import verify as verify_capstone_ui
+
+    result = verify_capstone_ui()
     assert result["status"] == "PASS"
     assert result["predecessor_preserved"] is True
 

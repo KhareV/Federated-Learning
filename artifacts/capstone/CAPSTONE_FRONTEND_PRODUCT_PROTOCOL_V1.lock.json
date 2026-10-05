@@ -1,0 +1,93 @@
+{
+ "bound_files": {
+  "artifacts/capstone/CAPSTONE_UI_V1.lock.json": "374f996e3c4cf26d97bee8df68b73239ebb737fcb284e3249dc2466cffd67e1a",
+  "docs/capstone/CAPSTONE_UI_V1.md": "2272d214a95e9a0a8b5e4431c49ae9498966a2d172a93b57196d36087163c8ff",
+  "scripts/cap_005_build_evidence.py": "6aba38d73f81cc28807c694a7b2d62db01cb01b6abee87b4c0abdda9acb0d6d4",
+  "scripts/cap_005_build_freeze.py": "ff89d96c4738994539919b6ccac38beb7f28176671e4bfe785d980519f1592a6",
+  "scripts/cap_005_cdp_driver.mjs": "5531076439fb9b92a88ac304d63b88e261cd7d55361fb40446f8a44833dee722",
+  "scripts/cap_005_mutation_controls.py": "46c48824b618625fd8b54f16ede2c77cda4b9a39cfefd964e4a73d03eeb11f34",
+  "scripts/cap_005_protected_audit.py": "f8e9d3f9ced700bd0a99e58d8774beec58d91f432277ccc8f00eff40dae5ee35",
+  "scripts/run_capstone_frontend_e2e.py": "28ca5bcc9703392ece35528658dd58a9f0a781659dd925d7cf8d4e12497cb937",
+  "scripts/verify_capstone_ui_v1.py": "1c0e8942dd4f784f729e70be93fdf93637a3579af902a0e884bf92ece6c8f6b6",
+  "tests/test_capstone_frontend.py": "88f34e299eadc6453788d6328dcbc666563143a480f3f3f31cd5acff38d2b3a4",
+  "tests/test_t035_lock_versioning.py": "66eb76a0fe35095a2d79e011640f75ec915fe53f6ae87198df5bafeba874d463",
+  "tests/test_v2_rel_001_results.py": "b933602bd19696de44c9325e78a9c6a6a8821c582e23bd03781165fc2c293f29"
+ },
+ "component_registry": {
+  "path": "manifests/capstone/component_registry_cap_005_v1.csv",
+  "sha256": "01e6a3fab6adf7aa5947324a13738c5db8d3930ac17f64451645cd238cd59b2b"
+ },
+ "components": {
+  "CAPSTONE_DEVICE_UI_V1": {
+   "path": "frontend/src/routes/app/device/+page.svelte",
+   "sha256": "74df49697ef4097685c2ad34b625ffb1c95164679ef370d2503ded8ad3c36b38",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_FRONTEND_AUTH_V1": {
+   "path": "frontend/src/lib/product/auth.ts",
+   "sha256": "6334d9230da692a8ffbcfc0b19f55621657bc23521b9d9f24c303c35ea7df13a",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1": {
+   "path": "configs/capstone/cap_005_frontend_product_protocol_v1.json",
+   "sha256": "9cc6c6628210548b3bd62207f6b095a989f5d829460c254339194d03e890163b",
+   "status": "FROZEN_ENGINEERING_PROTOCOL"
+  },
+  "CAPSTONE_MONITORING_STORE_V1": {
+   "path": "frontend/src/lib/product/state.svelte.ts",
+   "sha256": "a77d7713cb49217f1df3f9290bfe1a6d130e9933b3d20a540db39685378eb3f3",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_MONITORING_UI_V1": {
+   "path": "frontend/src/routes/app/monitoring/+page.svelte",
+   "sha256": "b8de1d01383cc4132980fb59c037ec44cde85626f879b4da2380bd2d89515c33",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_PRODUCT_CLIENT_V1": {
+   "path": "frontend/src/lib/product/api.ts",
+   "sha256": "70501d50fc4a6a75ef4d05b511d26a2aeee6331a15749fa2aa49067c3d70af0b",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_UI_V1": {
+   "path": "docs/capstone/CAPSTONE_UI_V1.md",
+   "sha256": "2272d214a95e9a0a8b5e4431c49ae9498966a2d172a93b57196d36087163c8ff",
+   "status": "FROZEN_ENGINEERING_INTERFACE"
+  }
+ },
+ "entry_sha": "9db76b482678114ac5c22f3f91a3f55ccb159e17",
+ "freeze_basis": "method/UI freeze: bound files precede CAPG4 result evidence",
+ "freeze_time_state": {
+  "CAP-005": "IN_PROGRESS",
+  "CAPG4": "NOT_STARTED",
+  "gate_registry_sha256": "f2d62bc853550fc3eb2c08fa299817cccf43b3f3de531b23f3064e1187b58857",
+  "note": "informational; these registries transition at the result commit",
+  "task_registry_sha256": "e29db8a72502e32e485bc867ceaea850ed51cafb3a7650901eecdde0ee266b13"
+ },
+ "gate": "CAPG4",
+ "lock_id": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1",
+ "mutable_future_implementation_files_bound": false,
+ "owner_task": "CAP-005",
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "ui_lock": {
+  "bound_files": 200,
+  "path": "artifacts/capstone/CAPSTONE_UI_V1.lock.json",
+  "sha256": "374f996e3c4cf26d97bee8df68b73239ebb737fcb284e3249dc2466cffd67e1a"
+ },
+ "upstream_frozen_identity": {
+  "api/product_app.py": "496ce89a91f233e3dfb5c9473c4ce456d6fc53d8680393fe748e93cbd6ca8657",
+  "api/product_app_v1_1.py": "47ae7b03eb05796ce4d807e641e5adf27f54ceb16c146d62119419c12c9de985",
+  "artifacts/DASHBOARD_UI_V1_5.lock.json": "a81cd69c7e964dffd58c1ccff988170efd5891c79478d8f23e5b8eab0d162d54",
+  "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+  "artifacts/MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1.lock.json": "1466e0e6176ff1d19839a2bfbef22dbe53ee979fc30215beb4292b4bed708473",
+  "artifacts/SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0",
+  "artifacts/capstone/CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.lock.json": "a125a60edb7343004280d48bf1e75ab1163eec1a6da998f8a022789be1ee9c8e",
+  "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json": "3eb5ee97665b006088b15b021b484a5e5ac6f4174f58051d97aacfed0ae0be7d",
+  "artifacts/capstone/CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1.lock.json": "70e9488a2530bbb3593cc39200e947250bf7f83f8a5a3ba0b205b33387c80597",
+  "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "capstone_persistence/store.py": "38e7bd1f4927c76be7815239cca09c72cbb07f775d08119cb2319b137d7c1717",
+  "contracts/capstone/live_event_v1.schema.json": "fb5c920b72debb223a2c9a67a16be9743ad97b7286ab288334dbc49dc3d8cb2b",
+  "contracts/capstone/product_api_v2.json": "4d39fae9e43841decb7297c5e22a180852096e4e8fe429e5723728e2fc8cfa0f",
+  "contracts/capstone/storage_policy_v2.json": "85a45f6eff634ce756beabf6c7816c4310ecd8b825882196aa666e2b3b9214e5",
+  "scripts/run_capstone_product.py": "1b9065a7e5d0bd8a644bb0f228301df4024d9886a7fa64cd12d98fd149719da4"
+ }
+}

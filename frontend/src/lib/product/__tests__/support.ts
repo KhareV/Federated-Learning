@@ -1,0 +1,193 @@
+// Test helpers: an in-memory product backend (unit/component tests ONLY - the canonical proof uses the
+// real CAP-004 backend, see scripts/run_capstone_frontend_e2e.py) and a scriptable fake socket.
+import type { ProductClient } from '../api';
+import type { SocketLike } from '../socket';
+import type {
+	AuthIdentity,
+	DeviceDescriptor,
+	DeviceState,
+	LiveEvent,
+	MonitoringSession,
+	SystemInfoV2
+} from '../types';
+
+export function systemInfo(over: Partial<SystemInfoV2> = {}): SystemInfoV2 {
+	return {
+		product_api_version: 'PRODUCT_API_V2',
+		capstone_protocol: 'CAPSTONE_PRODUCT_PROTOCOL_V1',
+		monitoring_protocol: 'CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1',
+		software_system: 'SOFTWARE_SYSTEM_V2',
+		model_id: 'MODEL_V2_FINAL',
+		calibration_id: 'CAL_V2',
+		api_contract_version: 'API_SCHEMA_V1',
+		hardware_mode: 'SIMULATED_ONLY',
+		physical_hardware_available: false,
+		persistence_mode: 'SQLITE',
+		federation_runtime: 'NOT_IMPLEMENTED',
+		auth_status: 'CONFIGURED',
+		claim: 'research prototype; simulated device; not diagnostic; no clinical claim',
+		product_api_implementation: 'CAPSTONE_PRODUCT_API_V1_1',
+		auth_provider: 'DEMO',
+		demo_mode: true,
+		...over
+	};
+}
+
+export const DEMO_IDENTITY: AuthIdentity = {
+	user_id: 'demo:faculty',
+	display_name: 'Faculty Demo User',
+	email: null,
+	auth_provider: 'DEMO',
+	auth_session_id: 'DEMO_OFFLINE_SESSION',
+	roles: [],
+	demo_mode: true
+};
+
+export function device(state: DeviceState = 'DETACHED', id = 'NHM_VIRTUAL_WEARABLE_01'): DeviceDescriptor {
+	return {
+		device_id: id,
+		display_name: 'NHM Virtual Wearable',
+		adapter_type: 'SIMULATED',
+		source_dataset_id: 'WEARABLE_SIM_V1',
+		source_mode: 'SYNTHETIC_PHYSIOLOGY',
+		connection_state: state,
+		capabilities: {
+			nominal_source_rates_hz: { ECG_SIMULATION_CONVENTION: 360 },
+			supports_device_events: true,
+			supports_ecg: true,
+			supports_ppg: false,
+			supports_spo2_context: true
+		},
+		simulation: true,
+		simulation_version: 'WEARABLE_SIM_V1',
+		hardware_specific_fields_status: 'NOT_APPLICABLE'
+	};
+}
+
+export function session(state: MonitoringSession['state'] = 'DEVICE_READY', id = 'SESS-1'): MonitoringSession {
+	return {
+		session_id: id,
+		user_id: 'demo:faculty',
+		device_id: 'NHM_VIRTUAL_WEARABLE_01',
+		device_adapter_type: 'SIMULATED',
+		source_dataset_id: 'WEARABLE_SIM_V1',
+		source_mode: 'SYNTHETIC_PHYSIOLOGY',
+		created_at_us: 1_700_000_000_000_000,
+		started_at_us: state === 'DEVICE_READY' ? null : 1_700_000_001_000_000,
+		ended_at_us: state === 'COMPLETED' ? 1_700_000_009_000_000 : null,
+		state,
+		runtime: {
+			software_system_id: 'SOFTWARE_SYSTEM_V2',
+			model_id: 'MODEL_V2_FINAL',
+			calibration_id: 'CAL_V2',
+			preprocess_id: 'PREPROC_V1',
+			alert_policy_id: 'ALERT_POLICY_V1',
+			alert_policy_binding_id: 'ALERT_POLICY_V1_MODEL_V2_BINDING',
+			gateway_artifact_id: 'GATEWAY_ARTIFACT_V2',
+			api_contract_version: 'API_SCHEMA_V1'
+		},
+		simulation_provenance: { scenario_id: 'MIXED_MONITORING_SESSION', seed: 1, simulation_version: 'WEARABLE_SIM_V1' }
+	};
+}
+
+export interface FakeBackend extends ProductClient {
+	calls: string[];
+	setState(state: DeviceState): void;
+}
+
+export function fakeBackend(system: SystemInfoV2 = systemInfo()): FakeBackend {
+	let dev = device('DETACHED');
+	let created = false;
+	let sess = session('DEVICE_READY');
+	const calls: string[] = [];
+	const rec = <T>(name: string, value: T) => {
+		calls.push(name);
+		return Promise.resolve(value);
+	};
+	return {
+		calls,
+		setState: (state) => (dev = device(state)),
+		system: () => rec('system', system),
+		me: () => rec('me', DEMO_IDENTITY),
+		devices: () => rec('devices', created ? [dev] : []),
+		createSimulatedDevice: () => {
+			created = true;
+			dev = device('DETACHED');
+			return rec('createSimulatedDevice', dev);
+		},
+		scan: () => rec('scan', (dev = device('FOUND'))),
+		connect: () => rec('connect', (dev = device('CONNECTED'))),
+		disconnect: () => rec('disconnect', (dev = device('DETACHED'))),
+		createSession: () => rec('createSession', (sess = session('DEVICE_READY'))),
+		sessions: () => rec('sessions', created ? [sess] : []),
+		session: () => rec('session', sess),
+		startSession: () => rec('startSession', (sess = session('MONITORING'))),
+		stopSession: () => rec('stopSession', (sess = session('COMPLETED')))
+	};
+}
+
+export class FakeSocket implements SocketLike {
+	static instances: FakeSocket[] = [];
+	onopen: ((ev: unknown) => void) | null = null;
+	onmessage: ((ev: { data: unknown }) => void) | null = null;
+	onclose: ((ev: { code?: number }) => void) | null = null;
+	onerror: ((ev: unknown) => void) | null = null;
+	closed = false;
+	constructor(readonly url: string) {
+		FakeSocket.instances.push(this);
+	}
+	close(): void {
+		this.closed = true;
+	}
+	open(): void {
+		this.onopen?.({});
+	}
+	send(event: unknown): void {
+		this.onmessage?.({ data: typeof event === 'string' ? event : JSON.stringify(event) });
+	}
+	drop(code = 1006): void {
+		this.onclose?.({ code });
+	}
+	static reset(): void {
+		FakeSocket.instances = [];
+	}
+	static get last(): FakeSocket {
+		return FakeSocket.instances[FakeSocket.instances.length - 1];
+	}
+}
+
+let seq = 0;
+export function ev<T extends LiveEvent['event_type']>(
+	type: T,
+	payload: Extract<LiveEvent, { event_type: T }>['payload'],
+	opts: { seq?: number; ts?: number | null; session?: string } = {}
+): LiveEvent {
+	const sequence = opts.seq ?? seq++;
+	return {
+		contract_version: 'PRODUCT_LIVE_EVENT_V1',
+		event_id: `S-PEV${String(sequence).padStart(6, '0')}`,
+		sequence_index: sequence,
+		emitted_at_us: 1000 * (sequence + 1),
+		session_id: opts.session ?? 'SESS-1',
+		source_timestamp_us: opts.ts ?? null,
+		event_type: type,
+		payload
+	} as LiveEvent;
+}
+export function resetSeq(): void {
+	seq = 0;
+}
+
+/** Spy-able in-memory Storage: lets tests prove nothing (no token) is ever written. */
+export function memoryStorage() {
+	const data = new Map<string, string>();
+	return {
+		writes: 0,
+		get length() { return data.size; },
+		clear() { data.clear(); },
+		getItem: (k: string) => data.get(k) ?? null,
+		key: (i: number) => [...data.keys()][i] ?? null,
+		removeItem(k: string) { data.delete(k); },
+		setItem(this: { writes: number }, k: string, v: string) { this.writes += 1; data.set(k, v); }
+	};
+}

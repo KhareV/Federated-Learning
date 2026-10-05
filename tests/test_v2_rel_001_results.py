@@ -61,11 +61,19 @@ def test_default_replay_did_not_use_the_research_launcher() -> None:
 
 
 def test_binding_and_system_locks_verify_and_predecessors_preserved() -> None:
+    # DASHBOARD_UI_V1_5 was superseded by CAPSTONE_UI_V1 (CAP-005): V1_5 reports drift by design
+    # while its lock file is preserved byte-identical; the successor verifies.
+    import pytest
+
+    from scripts.verify_capstone_ui_v1 import verify as capstone_ui
     from scripts.verify_dashboard_ui_v1_5_v2rel001 import verify as ui
     from scripts.verify_default_runtime_binding_v2 import verify as binding
     from scripts.verify_e2e_replay_v1_4_v2rel001 import verify as e2e
 
-    assert binding()["status"] == "PASS" and ui()["status"] == "PASS" and e2e()["status"] == "PASS"
+    with pytest.raises(RuntimeError, match="DASHBOARD_UI_V1_5_TAMPER"):
+        ui()
+    assert binding()["status"] == "PASS" and capstone_ui()["status"] == "PASS"
+    assert e2e()["status"] == "PASS"
     system = _j(ROOT / "artifacts/SOFTWARE_SYSTEM_V2.lock.json")
     assert system["default"]["model"] == "MODEL_V2_FINAL"
     assert system["rollback"]["role"] == "FROZEN_ROLLBACK_REFERENCE"

@@ -26,6 +26,16 @@ const PROHIBITED_PATTERNS: { label: string; pattern: RegExp; allowNegated?: bool
 // rendered UI copy, so it is the scan's input vocabulary, not a scan target.
 const EXCLUDED_RELATIVE_PATHS = new Set(['lib/dashboard/state-presentation.ts']);
 
+// CAP-005: the product monitor renders the SIMULATED device-source ECG transport (360 Hz,
+// ADC_COUNTS). The "360 Hz" pattern above guards against an unsupported HARDWARE sampling claim; these
+// three product files legitimately name the simulated source rate. Each occurrence there must be
+// qualified as simulated -- enforced by lib/product/__tests__/claims-and-copy.test.ts.
+const SIMULATED_SOURCE_RATE_FILES = new Set([
+	'lib/components/product/WaveformPlot.svelte',
+	'lib/product/waveform.ts',
+	'routes/app/monitoring/+page.svelte'
+]);
+
 function listFiles(dir: string, out: string[] = []): string[] {
 	for (const entry of readdirSync(dir)) {
 		if (entry === '__tests__' || entry === 'node_modules' || entry.startsWith('.')) continue;
@@ -62,6 +72,7 @@ describe('legacy claim audit: no unsupported hardware/diagnosis claims in active
 				for (const match of text.matchAll(globalPattern)) {
 					if (match.index === undefined) continue;
 					if (allowNegated && isNegated(text, match.index)) continue;
+					if (label === '360 Hz sampling claim' && SIMULATED_SOURCE_RATE_FILES.has(path.relative(SRC_ROOT, file))) continue;
 					offenders.push(path.relative(SRC_ROOT, file));
 					break;
 				}

@@ -20,7 +20,8 @@ EXPECTED_TASKS = {
     "CAP-005": "IN_PROGRESS",
     **{f"CAP-{n:03d}": "NOT_STARTED" for n in range(6, 12)},
 }
-EXPECTED_GATES = {"CAPG0": "PASS", "CAPG1": "PASS", "CAPG2": "PASS", "CAPG3": "PASS", "CAPG4": "NOT_STARTED"}
+EXPECTED_GATES = {"CAPG0": "PASS", "CAPG1": "PASS", "CAPG2": "PASS", "CAPG3": "PASS",
+                  "CAPG4": "NOT_STARTED"}
 EXPECTED_COMPONENTS = {
     "CAPSTONE_PRODUCT_PROTOCOL_V1": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL",
     "DEVICE_SOURCE_CONTRACT_V1": "FROZEN_INTERFACE_CONTRACT",
@@ -228,3 +229,50 @@ def test_cap_004_freeze_lock_binds_every_listed_file_byte_for_byte() -> None:
 def test_cap_001_002_003_locks_remain_verified_during_cap_004() -> None:
     from scripts.cap_004_protected_audit import verify_cap003_lock
     assert verify_cap003_lock()["verified"] is True
+
+
+CAP005_LOCK = ROOT / "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.lock.json"
+EXPECTED_CAP005_COMPONENTS = {
+    "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1": "FROZEN_ENGINEERING_PROTOCOL",
+    "CAPSTONE_UI_V1": "FROZEN_ENGINEERING_INTERFACE",
+    "CAPSTONE_FRONTEND_AUTH_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+    "CAPSTONE_PRODUCT_CLIENT_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+    "CAPSTONE_MONITORING_STORE_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+    "CAPSTONE_DEVICE_UI_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+    "CAPSTONE_MONITORING_UI_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+}
+
+
+def test_cap_005_components_are_exactly_the_seven_registered_components() -> None:
+    with (ROOT / "manifests/capstone/component_registry_cap_005_v1.csv").open(newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    assert {r["component_id"]: r["status"] for r in rows} == EXPECTED_CAP005_COMPONENTS
+    assert {r["owner_task"] for r in rows} == {"CAP-005"}
+    assert {r["component_id"]: r["predecessor_id"] for r in rows if r["predecessor_id"]} == {
+        "CAPSTONE_UI_V1": "DASHBOARD_UI_V1_5"}
+
+
+def test_cap_005_freeze_lock_binds_every_listed_file_byte_for_byte() -> None:
+    lock = json.loads(CAP005_LOCK.read_text())
+    assert lock["status"] == "FROZEN_ENGINEERING_PROTOCOL"
+    bound = {**lock["bound_files"], **lock["upstream_frozen_identity"]}
+    bound.update({c["path"]: c["sha256"] for c in lock["components"].values()})
+    registry = dict(lock["component_registry"])
+    for amendment in sorted((ROOT / "artifacts/capstone").glob(
+            "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_*.json")):
+        data = json.loads(amendment.read_text())
+        for path, change in data["files"].items():
+            assert bound[path] == change["old_sha256"]
+            bound[path] = change["new_sha256"]
+        bound.update(data.get("added_files", {}))
+        if "component_registry" in data:
+            assert registry["sha256"] == data["component_registry"]["old_sha256"]
+            registry["sha256"] = data["component_registry"]["new_sha256"]
+    for path, digest in bound.items():
+        assert hash_file(ROOT / path) == digest, path
+    assert hash_file(ROOT / registry["path"]) == registry["sha256"]
+
+
+def test_cap_001_to_004_locks_remain_verified_during_cap_005() -> None:
+    from scripts.cap_005_protected_audit import all_locks
+    assert all(v["verified"] is True for v in all_locks().values())

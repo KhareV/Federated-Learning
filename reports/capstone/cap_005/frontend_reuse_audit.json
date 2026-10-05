@@ -1,0 +1,46 @@
+{
+ "created": [
+  "lib/product/*",
+  "lib/components/product/*",
+  "routes/sign-in",
+  "routes/app/**",
+  "clerk-sdk package"
+ ],
+ "no_duplicate_components": "no second Panel/MetricTile/chart library was created",
+ "not_reused_on_purpose": {
+  "components/dashboard/DashboardShell.svelte": "its fixed legacy navigation and /api health call do not fit the product; the product shell reuses its visual language instead",
+  "components/federation/*, stores/fl.svelte.ts": "placeholder FL metrics are non-authoritative (CAP-008 owns federation UX)",
+  "lib/dashboard/session.svelte.ts": "maps 422 to a local RECHECK_SENSOR marker (forbidden in the product live store)"
+ },
+ "refactored_additively": [
+  "routes/+page.svelte (landing: copy, CTAs, hero layout, topology, no remote assets)",
+  "routes/+layout.svelte (research-tool banner; decorative cursor off in the product)",
+  "routes/monitor/+page.svelte (redirect/notice)",
+  "app.html + app.css (offline fonts)",
+  "vite.config.ts + vitest.config.ts (/product proxy, Clerk alias)"
+ ],
+ "reused_unchanged": {
+  "components": [
+   "lib/components/dashboard/Panel.svelte",
+   "lib/components/dashboard/MetricTile.svelte",
+   "lib/components/dashboard/MiniSpark.svelte (via MetricTile)"
+  ],
+  "design_system": [
+   "app.css tokens (--nhm-*)",
+   "teal/cyan accent, Space Grotesk / Inter / JetBrains Mono (now with local fallbacks)",
+   "@lucide/svelte icons"
+  ],
+  "landing": [
+   "WatchScene, PhysiologicalWaveform, NeuralGraph, HardwareStudio, MultimodalStudio, SystemArchitecture, ProductWorkstation and the magic/* components (claims already corrected in earlier phases)"
+  ],
+  "modules": [
+   "lib/dashboard/state-presentation.ts (STATE_PRESENTATION titles/texts only; the legacy 422->RECHECK_SENSOR mapping httpErrorPresentation is NOT used)"
+  ],
+  "research_tool": [
+   "routes/monitoring (research replay, logic untouched)",
+   "lib/api/nhm-v1.ts",
+   "lib/dashboard/replay.ts",
+   "lib/dashboard/session.svelte.ts"
+  ]
+ }
+}

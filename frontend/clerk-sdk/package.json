@@ -1,0 +1,9 @@
+{
+  "name": "nhm-clerk-sdk",
+  "private": true,
+  "version": "0.0.0",
+  "description": "CAP-005 additive package: the official Clerk browser SDK, exact-pinned. Kept out of frontend/package.json because the frozen V2-014 lock binds that file byte-for-byte. Install: npm ci --prefix clerk-sdk",
+  "dependencies": {
+    "@clerk/clerk-js": "6.37.0"
+  }
+}

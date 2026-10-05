@@ -4,7 +4,6 @@
 	import { TypingAnimation } from '$lib/components/magic/typing-animation';
 	import { AnimatedGridPattern } from '$lib/components/magic/animated-grid-pattern';
 	import { AnimatedList } from '$lib/components/magic/animated-list';
-	import { DottedMap } from '$lib/components/magic/dotted-map';
 	import { Lens } from '$lib/components/magic/lens';
 	import { Marquee } from '$lib/components/magic/marquee';
 	import { ProgressiveBlur } from '$lib/components/magic/progressive-blur';
@@ -37,18 +36,11 @@
 	let beamTo: HTMLDivElement | null = null;
 
 	const setupLines = [
-		'SENSOR ARRAY / READY',
-		'ECG STREAM / CONNECTED',
-		'PPG STREAM / CONNECTED',
-		'EDGE PROCESSING / READY',
-		'PRIVACY LAYER / READY'
-	];
-
-	const signalItems = [
-		{ id: 'ecg', label: 'ECG', value: 'Electrical cardiac signal', meta: 'AD8232' },
-		{ id: 'ppg', label: 'PPG', value: 'Optical pulse waveform', meta: 'MAX30102' },
-		{ id: 'spo2', label: 'SpO₂', value: 'Blood oxygen estimation', meta: 'MAX30102' },
-		{ id: 'edge', label: 'EDGE', value: 'Local feature processing', meta: 'ESP32' }
+		'VIRTUAL WEARABLE / SIMULATED',
+		'PRODUCT API / LOCAL',
+		'SOFTWARE_SYSTEM_V2 / SERVER-SIDE',
+		'PHYSICAL HARDWARE / NOT CONNECTED',
+		'FEDERATION RUNTIME / NOT YET ENABLED'
 	];
 
 	const timelineData = [
@@ -57,13 +49,7 @@
 		{ time: '03', steps: [{ icon: 'P', content: 'Privacy-preserving healthcare intelligence' }, { icon: 'N', content: 'NHM: a practical wearable architecture' }] }
 	];
 
-	const federationMarkers = [
-		{ lat: 28.61, lng: 77.21, size: 0.70 }, { lat: 19.07, lng: 72.88, size: 0.70 },
-		{ lat: 13.08, lng: 80.27, size: 0.70 }, { lat: 12.97, lng: 77.59, size: 0.70 },
-		{ lat: 1.35, lng: 103.82, size: 0.55 }, { lat: 35.68, lng: 139.65, size: 0.55 },
-		{ lat: 51.51, lng: -0.13, size: 0.55 }, { lat: 40.71, lng: -74.01, size: 0.55 },
-		{ lat: 37.77, lng: -122.42, size: 0.55 }
-	];
+	const fedSites = Array.from({ length: 8 }, (_, i) => ({ id: `SIM_FL_SITE_${String(i).padStart(2, '0')}`, angle: (i / 8) * Math.PI * 2 - Math.PI / 2 }));
 
 	onMount(() => {
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -88,14 +74,10 @@
 </script>
 
 <svelte:head>
-	<title>NHM — Non-Invasive Health Monitor</title>
-	<meta name="description" content="Continuous physiological monitoring with edge intelligence and privacy-preserving federated learning." />
+	<title>NHM — Federated Physiological Monitoring Research Platform</title>
+	<meta name="description" content="NHM: a research platform for live physiological monitoring with a released model, federated model development architecture and a hardware-ready source. Virtual wearable today. Research prototype, not diagnostic." />
 	<meta name="theme-color" content="#030712" />
 	
-	<!-- High-end typography -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@100..800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </svelte:head>
 
 <!-- =========================================================
@@ -125,7 +107,7 @@
 					</div>
 
 					<div class="mt-6">
-						<Signature once={false} inView class="dark:invert-100" text="Rich Harris" fontSize={16} color="#1D1D1F" />
+						<Signature once={false} inView class="dark:invert-100" text="NHM" fontSize={16} color="#1D1D1F" />
 					</div>
 				</div>
 			</div>
@@ -172,8 +154,8 @@
 			<a href="#research">Research</a>
 		</div>
 
-		<a class="nav__cta button--glass" href="/monitor">
-			<span>Open Monitor</span>
+		<a class="nav__cta button--glass" href="/sign-in">
+			<span>OPEN NHM</span>
 			<span class="arrow">↗</span>
 		</a>
 	</nav>
@@ -189,8 +171,8 @@
 
 			<div class="hero__technical">
 				<span>NHM / 01</span>
-				<span>CONTINUOUS MONITORING</span>
-				<span>ECG · PPG · SpO₂</span>
+				<span>LIVE MONITORING RESEARCH</span>
+				<span>SIMULATED SOURCE · ECG + SpO₂ CONTEXT</span>
 			</div>
 
 			<div class="hero__content-wrapper">
@@ -198,21 +180,22 @@
 					<div class="hero__copy-container">
 						<BlurFade inView={true} direction="up" offset={18} blur="10px" duration={0.85}>
 							<div class="hero__copy">
-							<div class="eyebrow eyebrow--teal">NON-INVASIVE · CONTINUOUS · PRIVATE</div>
+							<div class="eyebrow eyebrow--teal">RESEARCH PLATFORM · SIMULATED SOURCE · NOT DIAGNOSTIC</div>
 							<h1>
-								Your health.<br />
-								<span class="text-gradient">Continuously</span><br />
-								<span>understood.</span>
+								NHM<br />
+								<span class="text-gradient">Federated physiological</span><br />
+								<span>monitoring research platform.</span>
 							</h1>
 							<p class="hero__lede">
-								A wearable monitoring system that captures physiological signals, processes them at the edge, and learns collaboratively without treating raw health data as centralized training data.
+								Live monitoring with a released model, a federated model-development architecture, and a hardware-ready source boundary. A virtual wearable today; a physical adapter later. A research prototype, not a diagnostic or medical device.
 							</p>
 							<div class="hero__actions">
 								<a class="button button--light" href="#technology">
 									<span>Explore the system</span><span>↓</span>
 								</a>
-								<a class="text-link" href="/monitor">Open monitoring environment<span>↗</span></a>
+								<a class="text-link" href="/sign-in">OPEN NHM<span>↗</span></a>
 							</div>
+							<ul class="pillars" aria-label="Product pillars"><li><b>LIVE MONITORING</b><span>Released MODEL_V2, server-side, research states</span></li><li><b>FEDERATED MODEL DEVELOPMENT</b><span>Architecture for synthetic research partitions</span></li><li><b>HARDWARE-READY SOURCE ARCHITECTURE</b><span>Virtual wearable now, physical adapter later</span></li></ul>
 							</div>
 						</BlurFade>
 					</div>
@@ -233,9 +216,9 @@
 					<div class="complex-wave__scanline"></div>
 				</div>
 				<div class="hero__signal-meta">
-					<span>ECG SIGNAL</span>
-					<span>LOCAL / LIVE</span>
-					<span>QUALITY / EXCELLENT</span>
+					<span>ILLUSTRATIVE ECG</span>
+					<span>SYNTHETIC WAVEFORM</span>
+					<span>NOT LIVE DATA</span>
 				</div>
 			</div>
 		</section>
@@ -297,17 +280,16 @@
 		====================================================== -->
 		<section id="technology" class="hardware section-dark">
 			<div class="section-bg">
-				<img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=2070" alt="Hardware Engineering Lab" />
 				<div class="section-bg__overlay section-bg__overlay--heavy"></div>
 			</div>
 
 			<div class="container relative z-10">
-				<div class="section-kicker section-kicker--dark">04 / THE WEARABLE HARDWARE LAB</div>
+				<div class="section-kicker section-kicker--dark">04 / HARDWARE-READY SOURCE ARCHITECTURE</div>
 				<div class="hardware__heading">
 					<div class="hardware__title">
-						<DiaTextReveal text="The body becomes the signal." textColor="#eef7f6" colors={['#2bb8b0', '#89d7d0', '#d5f0ed']} duration={1.65} triggerOnView={true} once={true} />
+						<DiaTextReveal text="Hardware-ready by design." textColor="#eef7f6" colors={['#2bb8b0', '#89d7d0', '#d5f0ed']} duration={1.65} triggerOnView={true} once={true} />
 					</div>
-					<p>An integrated hardware suite uniting biopotential ECG acquisition, dual-wavelength optical PPG, and dual-core edge machine learning within a titanium unibody enclosure.</p>
+					<p>Today the source is a simulated virtual wearable. The architecture defines a source-adapter boundary so a physical wearable can replace it later. The sensor concepts below are unverified design sketches, not an attached device.</p>
 				</div>
 
 				<!-- State-of-the-art Interactive Hardware Studio Component -->
@@ -331,11 +313,11 @@
 		====================================================== -->
 		<section id="signals" class="signals section-light">
 			<div class="container">
-				<div class="section-kicker">05 / MULTIMODAL SENSING</div>
+				<div class="section-kicker">05 / SIGNALS (SIMULATED TODAY)</div>
 
 				<div class="signals__heading">
 					<BlurFade inView={true} direction="up" offset={20} blur="8px">
-						<h2>One device.<br /><span>Synchronized signals.</span></h2>
+						<h2>One source.<br /><span>Synchronized signals.</span></h2>
 					</BlurFade>
 					
 					<div class="signals__morph-container">
@@ -356,33 +338,32 @@
 		====================================================== -->
 		<section class="edge section-dark">
 			<div class="section-bg">
-				<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070" alt="Hardware Intelligence" />
 				<div class="section-bg__overlay"></div>
 			</div>
 			
 			<div class="edge__grid"></div>
 			<div class="container relative z-10">
-				<div class="section-kicker section-kicker--dark">06 / EDGE INTELLIGENCE</div>
+				<div class="section-kicker section-kicker--dark">06 / SERVER-SIDE INFERENCE</div>
 				<div class="edge__heading">
-					<h2>The intelligence<br /><span>stays close.</span></h2>
-					<p>Signals move from sensing to local processing before any collaborative learning step. The architecture keeps the first layer of interpretation close to the device.</p>
+					<h2>Released inference,<br /><span>server-side today.</span></h2>
+					<p>The virtual wearable streams to the NHM product API, which calls the released SOFTWARE_SYSTEM_V2 (MODEL_V2_FINAL) over localhost. Nothing runs on a sensor; on-device or edge deployment is not implemented.</p>
 				</div>
 
 				<div class="edge__flow" bind:this={beamContainer}>
 					<div class="flow-node glass-panel" bind:this={beamFrom}>
 						<span class="flow-node__index">01</span>
-						<strong>SENSORS</strong>
-						<span>ECG · PPG · SpO₂</span>
+						<strong>VIRTUAL WEARABLE</strong>
+						<span>SIMULATED SOURCE</span>
 					</div>
 					<div class="flow-node glass-panel flow-node--active">
 						<span class="flow-node__index">02</span>
-						<strong>ESP32</strong>
-						<span>EDGE PROCESSING</span>
+						<strong>PRODUCT API</strong>
+						<span>LOCAL SESSION + SQLITE</span>
 					</div>
 					<div class="flow-node glass-panel" bind:this={beamTo}>
 						<span class="flow-node__index">03</span>
-						<strong>LOCAL MODEL</strong>
-						<span>FEATURES · INFERENCE</span>
+						<strong>SOFTWARE_SYSTEM_V2</strong>
+						<span>MODEL_V2_FINAL / SERVER-SIDE</span>
 					</div>
 
 					{#if beamContainer && beamFrom && beamTo}
@@ -392,7 +373,7 @@
 
 				<div class="edge__quote">
 					<div class="edge__line-shadow">
-						<LineShadowText content="PROCESS LOCALLY" shadowColor="#2bb8b0" as="div" />
+						<LineShadowText content="VIRTUAL TODAY. HARDWARE LATER." shadowColor="#2bb8b0" as="div" />
 					</div>
 				</div>
 			</div>
@@ -403,7 +384,6 @@
 		====================================================== -->
 		<section id="privacy" class="federation section-dark">
 			<div class="section-bg">
-				<img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072" alt="Global Network" />
 				<div class="section-bg__overlay section-bg__overlay--heavy"></div>
 			</div>
 
@@ -411,12 +391,20 @@
 				<div class="section-kicker section-kicker--dark">07 / PRIVACY-PRESERVING LEARNING</div>
 				<div class="federation__heading">
 					<h2>Learn together.<br /><em>Share less.</em></h2>
-					<p>Federated learning lets participating clients contribute model updates while keeping raw physiological recordings at the local side of the architecture.</p>
+					<p>Federated learning lets participating clients contribute model updates while raw recordings stay at the client. In this prototype the clients are synthetic research partitions - not hospitals or institutions - and the federation product runtime is not yet enabled.</p>
 				</div>
 
 				<div class="federation__stage">
 					<div class="federation__map">
-						<DottedMap width={150} height={75} mapSamples={4200} markers={federationMarkers} dotColor="#64748b" markerColor="#2dd4bf" dotRadius={0.35} />
+						<svg viewBox="-260 -260 520 520" width="500" height="500" role="img" aria-label="Logical federation topology: eight synthetic research partitions around one aggregator">
+							<text x="0" y="-246" text-anchor="middle" fill="#fbbf24" font-size="10" font-family="JetBrains Mono, monospace" letter-spacing="1.5">ILLUSTRATIVE NETWORK TOPOLOGY - NOT PARTICIPATING INSTITUTIONS</text>
+							{#each fedSites as site}
+								<line x1="0" y1="0" x2={Math.cos(site.angle) * 185} y2={Math.sin(site.angle) * 185} stroke="rgba(148,163,184,.3)" />
+								<circle cx={Math.cos(site.angle) * 185} cy={Math.sin(site.angle) * 185} r="5" fill="#2dd4bf" />
+								<text x={Math.cos(site.angle) * 185} y={Math.sin(site.angle) * 185 + (Math.sin(site.angle) > 0.3 ? 20 : -12)} text-anchor="middle" fill="#94a3b8" font-size="10" font-family="JetBrains Mono, monospace">{site.id}</text>
+							{/each}
+							<circle cx="0" cy="0" r="30" fill="none" stroke="#2bb8b0" /><text x="0" y="4" text-anchor="middle" fill="#2bb8b0" font-size="10" font-family="JetBrains Mono, monospace">AGGREGATOR</text>
+						</svg>
 					</div>
 					
 					<div class="federation__path">
@@ -486,7 +474,6 @@
 		<section class="final section-dark">
 			<!-- Aesthetic Background Layer -->
 			<div class="section-bg">
-				<img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2070" alt="Cyber matrix code" />
 				<div class="section-bg__overlay section-bg__overlay--heavy"></div>
 			</div>
 
@@ -496,13 +483,13 @@
 				
 				<!-- Fixed seeping out of screen by splitting the large text and containing width -->
 				<div class="final__headline">
-					<LineShadowText content="Continuous health" shadowColor="#2bb8b0" as="div" />
-					<LineShadowText content="intelligence." shadowColor="#2bb8b0" as="div" />
+					<LineShadowText content="Federated physiological" shadowColor="#2bb8b0" as="div" />
+					<LineShadowText content="monitoring research." shadowColor="#2bb8b0" as="div" />
 				</div>
 				
-				<p class="final__p">Continuous sensing. Local intelligence. Privacy-preserving learning.</p>
-				<a href="/monitor" class="button button--light button--glow">
-					<span>Enter the monitoring environment</span><span>↗</span>
+				<p class="final__p">Live monitoring. Federated model development. Hardware-ready source architecture. Research prototype - not diagnostic.</p>
+				<a href="/sign-in" class="button button--light button--glow">
+					<span>OPEN NHM</span><span>↗</span>
 				</a>
 			</div>
 
@@ -529,7 +516,7 @@
 			<a href="#technology">Technology</a>
 			<a href="#privacy">Privacy</a>
 			<a href="#research">Research</a>
-			<a href="/monitor">Monitor</a>
+			<a href="/sign-in">Open NHM</a>
 		</div>
 		<div class="footer__meta">
 			<span>B.TECH FINAL YEAR PROJECT</span>
@@ -574,7 +561,7 @@
 	.container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 64px); }
 
 	/* Aesthetic Backgrounds for dark sections */
-	.section-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+	.section-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: radial-gradient(circle at 18% 22%, rgba(43,184,176,.10), transparent 55%), radial-gradient(circle at 82% 78%, rgba(14,165,233,.07), transparent 50%); }
 	.section-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.12; mix-blend-mode: screen; filter: grayscale(100%) contrast(120%); }
 	.section-bg__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--bg-dark) 0%, transparent 30%, transparent 70%, var(--bg-dark) 100%); }
 	.section-bg__overlay--heavy { background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 85%); }
@@ -670,15 +657,15 @@
 	
 	.hero__technical { position: absolute; top: 110px; right: clamp(24px, 5vw, 64px); left: clamp(24px, 5vw, 64px); display: flex; justify-content: space-between; color: rgba(255,255,255,0.3); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; z-index: 10; max-width: 1400px; margin: 0 auto; }
 	
-	.hero__content-wrapper { flex: 1; display: flex; align-items: center; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 64px); z-index: 20; position: relative; transform: translateY(-46px); }
+	.hero__content-wrapper { flex: 1; display: flex; align-items: center; width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 64px); z-index: 20; position: relative; transform: none; padding-top: 70px; }
 	
 	/* Fixed Hero Layout */
 	.hero__content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(40px, 6vw, 100px); width: 100%; }
 	
 	.hero__copy-container { width: 100%; }
 	.hero__copy { max-width: 650px; }
-	.hero h1 { font-size: clamp(56px, 6vw, 110px); font-weight: 500; line-height: 0.9; letter-spacing: -0.05em; margin: 24px 0 32px; }
-	.hero__lede { font-size: clamp(16px, 1.2vw, 18px); color: var(--text-muted); line-height: 1.7; margin-bottom: 48px; max-width: 540px; }
+	.hero h1 { font-size: clamp(38px, 4.1vw, 68px); font-weight: 500; line-height: 1.04; letter-spacing: -0.035em; margin: 22px 0 28px; }
+	.hero__lede { font-size: clamp(16px, 1.2vw, 18px); color: var(--text-muted); line-height: 1.7; margin-bottom: 28px; max-width: 540px; }
 	.hero__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 32px; }
 	
 	/* Fixed 3D Canvas wrapper */
@@ -926,7 +913,7 @@
 		.hero__copy { max-width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
 		.hero__actions { justify-content: center; }
 		.hero__device { height: 500px; margin-top: 40px; overflow: visible; }
-		.hero__content-wrapper { transform: translateY(-24px); }
+		.hero__content-wrapper { transform: none; }
 		
 		.problem__heading, .research__heading, .hardware__heading, .signals__heading, .edge__heading, .federation__heading, .system__intro, .product__heading { grid-template-columns: 1fr; text-align: center; }
 		.problem__intro-copy p, .research__heading p, .hardware__heading p, .edge__heading p, .federation__heading p, .system__intro p, .product__heading p { max-width: 600px; margin: 20px auto 0; }
@@ -955,9 +942,9 @@
 		
 		.hero { padding: 120px 0 40px; min-height: auto; }
 		.hero__technical { display: none; }
-		.hero h1 { font-size: clamp(50px, 14vw, 80px); }
+		.hero h1 { font-size: clamp(32px, 9.5vw, 54px); }
 		.hero__device { height: 400px; overflow: visible; }
-		.hero__content-wrapper { transform: translateY(-12px); }
+		.hero__content-wrapper { transform: none; padding-top: 24px; }
 		.hero__signal { padding: 0 20px 20px; }
 		.hero__signal-meta span:nth-child(2) { display: none; }
 		.signals__heading { margin-bottom: 56px; }
@@ -994,4 +981,5 @@
 		.site-shell, .site-shell :global(*) { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 		.preloader, .preloader__orb, .preloader__system, .preloader__progress span, .preloader__ready { animation: none !important; }
 	}
+	.pillars { position: relative; z-index: 30; display: grid; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; max-width: 560px; } .pillars li { display: grid; gap: 2px; padding: 8px 14px; border-left: 2px solid var(--accent, #2bb8b0); background: rgba(5,10,21,.92); } .pillars b { font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: .12em; } .pillars span { font-size: 13px; opacity: .75; }
 </style>

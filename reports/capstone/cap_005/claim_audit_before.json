@@ -1,0 +1,184 @@
+{
+ "external_assets": {
+  "google_fonts": true,
+  "unsplash_images": 4
+ },
+ "files_scanned": 137,
+ "geographic_markers": [
+  "federationMarkers lat/lng markers at real cities (Delhi 28.61/77.21, Mumbai, Chennai, Bengaluru, Singapore, Tokyo, London, New York, San Francisco)"
+ ],
+ "overstatement_hits": [
+  {
+   "file": "lib/components/landing/SystemArchitecture.svelte",
+   "pattern": "federationMarkers"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "ECG STREAM / CONNECTED"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "PPG STREAM / CONNECTED"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "SENSOR ARRAY / READY"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "titanium"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "dual-core edge machine learning"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "<strong>ESP32</strong>"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "PROCESS LOCALLY"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "federationMarkers"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "QUALITY / EXCELLENT"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "images\\.unsplash\\.com"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "fonts\\.googleapis\\.com"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "Your health\\."
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "Open Monitor"
+  },
+  {
+   "file": "routes/+page.svelte",
+   "pattern": "text=\"Rich Harris\""
+  },
+  {
+   "file": "routes/monitor/+page.svelte",
+   "pattern": "Authentication disabled"
+  }
+ ],
+ "phrase_list": [
+  "diagnose",
+  "diagnosis",
+  "disease detected",
+  "patient-specific model",
+  "real wearable",
+  "live hardware",
+  "hospital client",
+  "clinical decision",
+  "medical device",
+  "privacy guaranteed",
+  "anonymous",
+  "differential privacy",
+  "on-device MODEL_V2",
+  "ESP32 inference",
+  "PPG waveform connected"
+ ],
+ "phrase_occurrences": 24,
+ "qualified_occurrences_sample": [
+  {
+   "context": "Not for diagnosis or emergency decisions",
+   "file": "lib/components/dashboard/WorkbenchPage.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "[0]}</span>\n\t\t\t\t<span class=\"live-pill\"><span class=\"pulse-dot\"></span> ILLUSTRATIVE, NOT LIVE HARDWARE</span>\n\t\t\t</div>\n\t\t\t<div class=\"preview-waveform\">\n\t\t\t\t<",
+   "file": "lib/components/hardware/HardwareStudio.svelte",
+   "phrase": "live hardware",
+   "qualified": true
+  },
+  {
+   "context": "'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live, not a diagnosis)' },\n\t\t{ id: 'vital_stability', name: 'Context Fusion (Illus",
+   "file": "lib/components/landing/NeuralGraph.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "SIMULATED CARDIAC BIOPOTENTIAL (ILLUSTRATIVE)</span>\n\t\t\t\t\t<code>SYNTHETIC WAVEFORM // NOT LIVE HARDWARE</code>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"wave-screen\">\n\t\t\t\t\t<Ph",
+   "file": "lib/components/landing/ProductWorkstation.svelte",
+   "phrase": "live hardware",
+   "qualified": true
+  },
+  {
+   "context": "n>SIMULATED PHOTOPLETHYSMOGRAM (ILLUSTRATIVE)</span>\n\t\t\t\t\t<code>SYNTHETIC WAVEFORM // NOT LIVE HARDWARE</code>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"wave-screen\">\n\t\t\t\t\t<Ph",
+   "file": "lib/components/landing/ProductWorkstation.svelte",
+   "phrase": "live hardware",
+   "qualified": true
+  },
+  {
+   "context": "urrent)', 'On-Device Inference: Not Implemented', 'Research-Only Monitoring States, Not a Diagnosis']\n\t\t},\n\t\t{\n\t\t\tid: 'privacy',\n\t\t\tindex: '05',\n\t\t\ttitle: 'Fede",
+   "file": "lib/components/landing/SystemArchitecture.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "8,\n\t\t\tptt: 290,\n\t\t\thrv: 92,\n\t\t\tstatus: 'ILLUSTRATIVE PVC PATTERN (SIMULATED, NOT A DIAGNOSIS)',\n\t\t\tstatusColor: '#e11d48',\n\t\t\tdescription: 'Simulated premature ",
+   "file": "lib/components/signals/MultimodalStudio.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "No on-device ML classification is implemented; this is not a diagnosis",
+   "file": "lib/components/signals/MultimodalStudio.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "Not a diagnosis",
+   "file": "lib/dashboard/state-presentation.ts",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "'medical grade',\n\t'medical-grade',\n\t'clinical grade',\n\t'clinical-grade'\n];\n\n\nexport const DIAGNOSIS_WORD_ALLOWED_PREFIXES = ['not a ', 'not for ', 'no '];",
+   "file": "lib/dashboard/state-presentation.ts",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "ARDWARE (UNVERIFIED)</span><i>\u2022</i><span>SERVER-SIDE CPU INFERENCE</span><i>\u2022</i><span>NO DIAGNOSIS CLAIM</span><i>\u2022</i><span>SOURCE-DOMAIN CALIBRATION ONLY</sp",
+   "file": "routes/+page.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "Not live signals, not a diagnosis",
+   "file": "routes/+page.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  }
+ ],
+ "summary": "the landing page predated the product architecture: attached-hardware status lines, ESP32 edge-processing flow, 'titanium unibody' hardware copy, real-city FL markers, remote fonts/images, and a /monitor shell showing 'Authentication disabled'",
+ "tree": "entry commit 9db76b482678114ac5c22f3f91a3f55ccb159e17",
+ "unqualified_phrase_occurrences": [
+  {
+   "context": "rrhythmia detected',\n\t'ectopy confirmed',\n\t'abnormal patient',\n\t'danger',\n\t'emergency',\n\t'disease detected',\n\t'disease risk',\n\t'medical grade',\n\t'medical-grade'",
+   "file": "lib/dashboard/state-presentation.ts",
+   "phrase": "disease detected",
+   "qualified": false
+  },
+  {
+   "context": "com\" crossorigin=\"anonymous\">\n\t<link href=\"https://fonts",
+   "file": "routes/+page.svelte",
+   "phrase": "anonymous",
+   "qualified": false
+  }
+ ]
+}

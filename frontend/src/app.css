@@ -136,3 +136,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     }
   }
 }
+
+
+/* CAP-005 offline-safe typography: the NHM families resolve to locally installed system fonts, so the
+   product works with no network (no Google Fonts request). Real installs of these families still win. */
+@font-face { font-family: 'Space Grotesk'; font-weight: 300 700; src: local('Space Grotesk'), local('Avenir Next'), local('Helvetica Neue'), local('Segoe UI'), local('Arial'); }
+@font-face { font-family: 'Inter'; font-weight: 300 700; src: local('Inter'), local('SF Pro Text'), local('Segoe UI'), local('Helvetica Neue'), local('Arial'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 100 800; src: local('JetBrains Mono'), local('SF Mono'), local('Menlo'), local('Consolas'), local('Courier New'); }
