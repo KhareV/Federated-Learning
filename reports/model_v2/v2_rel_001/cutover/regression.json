@@ -1,0 +1,207 @@
+{
+  "DATA_GATED_SKIPPED": 0,
+  "DATA_GATED_SKIP_LINES": [],
+  "chunk_count": 30,
+  "chunk_rows": [
+    {
+      "chunk": 0,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.20s"
+    },
+    {
+      "chunk": 1,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.48s"
+    },
+    {
+      "chunk": 2,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 3.14s"
+    },
+    {
+      "chunk": 3,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.69s"
+    },
+    {
+      "chunk": 4,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 4.72s"
+    },
+    {
+      "chunk": 5,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 0.83s"
+    },
+    {
+      "chunk": 6,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.62s"
+    },
+    {
+      "chunk": 7,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.01s"
+    },
+    {
+      "chunk": 8,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.28s"
+    },
+    {
+      "chunk": 9,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 0.69s"
+    },
+    {
+      "chunk": 10,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.22s"
+    },
+    {
+      "chunk": 11,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 0.25s"
+    },
+    {
+      "chunk": 12,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.82s"
+    },
+    {
+      "chunk": 13,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.23s"
+    },
+    {
+      "chunk": 14,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.06s"
+    },
+    {
+      "chunk": 15,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 5.35s"
+    },
+    {
+      "chunk": 16,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.23s"
+    },
+    {
+      "chunk": 17,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.43s"
+    },
+    {
+      "chunk": 18,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.70s"
+    },
+    {
+      "chunk": 19,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.24s"
+    },
+    {
+      "chunk": 20,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 1.45s"
+    },
+    {
+      "chunk": 21,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.09s"
+    },
+    {
+      "chunk": 22,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 3.38s"
+    },
+    {
+      "chunk": 23,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 2.63s"
+    },
+    {
+      "chunk": 24,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 3.50s"
+    },
+    {
+      "chunk": 25,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 22.01s"
+    },
+    {
+      "chunk": 26,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 20.88s"
+    },
+    {
+      "chunk": 27,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "80 passed in 5.70s"
+    },
+    {
+      "chunk": 28,
+      "exit_code": 0,
+      "nodes": 80,
+      "summary": "79 passed, 1 skipped in 26.70s"
+    },
+    {
+      "chunk": 29,
+      "exit_code": 0,
+      "nodes": 62,
+      "summary": "62 passed in 4.34s"
+    }
+  ],
+  "chunk_size": 80,
+  "collected_node_count": 2382,
+  "data_gated_note": "tests needing untracked raw datasets/caches/candidate checkpoints are skipped (never copied in); excluded from the clean SOFTWARE claim",
+  "duplicates": 0,
+  "executed_unique": 2382,
+  "failed_chunks": 0,
+  "failed_tests": 0,
+  "missing": 0,
+  "monolithic": {
+    "exit_code": 0,
+    "summary": "2381 passed, 1 skipped in 102.42s (0:01:42)"
+  },
+  "node_list_sha256": "f60b5d5dc071019c40afcd4aa8ba245d3031336b436d230af34f83a226b2c855",
+  "other_skip_lines": [
+    "SKIPPED [1] tests/test_v2_fl_eval_method.py:246: post-exposure state"
+  ],
+  "other_skipped_by_design": 1,
+  "passed_in_chunks": 2381,
+  "status": "PASS",
+  "unexpected": 0
+}

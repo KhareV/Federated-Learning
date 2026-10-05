@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "all_hard_release_blockers_pass": true,
+    "api_schema_v1_unchanged": true,
+    "cal_v2_gateway_v2_binding_exact": true,
+    "clean_release_clone": "PENDING_CLEAN_CLONE",
+    "decision_evaluator_frozen_evidence_only": true,
+    "default_path_v2_replay_succeeds": true,
+    "fl_checkpoint_not_deployed": true,
+    "frontend_reflects_v2_identities": true,
+    "full_regression_passes": true,
+    "historical_scientific_non_promotion_preserved": true,
+    "known_limitations_present": true,
+    "mixed_bindings_fail_closed": true,
+    "model_v2_final_default_only_after_accept": true,
+    "no_hardware_or_clinical_claim": true,
+    "no_public_model_selector": true,
+    "process_isolation": true,
+    "protected_artifacts_unchanged": true,
+    "release_decision_explicit_and_frozen_before_cutover": true,
+    "release_policy_frozen_before_default_change": true,
+    "repository_clean_and_pushed": "PENDING_FINAL",
+    "v1_rollback_preserved": true,
+    "v1_rollback_replay_succeeds": true
+  },
+  "performance_magnitude_is_a_criterion": false,
+  "status": "STAGE1_PENDING_CLEAN_CLONE"
+}

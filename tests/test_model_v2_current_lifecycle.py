@@ -2,10 +2,10 @@
 no 'in {...}' relaxation. This is the single test that must be updated at each phase transition
 (older phase-specific tests only verify forward-compatible, non-regressing facts).
 
-Current state: V2-FL-001/002/003, V2-FL-EVAL-001, V2-FL-004, V2-FL-005 (V2FLG0/1/2, V2FLEG0,
-V2FLG3, V2FLG4 PASS) and V2-014 (V2G13) PASS: clean-clone reproducibility only; MODEL_V1 stays the
-operational default and no release/default decision exists yet. V2-005 keeps its historical
-SKIPPED_BY_PROTOCOL semantics."""
+Current state: V2-FL-001/002/003, V2-FL-EVAL-001, V2-FL-004, V2-FL-005, V2-014 and V2-REL-001
+(V2FLG0/1/2, V2FLEG0, V2FLG3, V2FLG4, V2G13, V2RELG0) PASS. V2-REL-001 is the prospective
+research-software release decision (ACCEPT): MODEL_V2_FINAL is the default research runtime and
+MODEL_V1 the explicit rollback. V2-005 keeps its historical SKIPPED_BY_PROTOCOL semantics."""
 
 from __future__ import annotations
 
@@ -18,12 +18,12 @@ EXPECTED_TASKS = {
     "V2-001": "PASS", "V2-002": "PASS", "V2-003": "PASS", "V2-004": "PASS",
     "V2-005": "SKIPPED_BY_PROTOCOL", "V2-006": "PASS", "V2-007": "PASS", "V2-008": "PASS",
     "V2-009": "PASS", "V2-010": "PASS", "V2-011": "PASS", "V2-012": "PASS", "V2-013": "PASS",
-    "V2-014": "PASS", "V2-REL-001": "NOT_STARTED",
+    "V2-014": "PASS", "V2-REL-001": "PASS",
     "V2-FL-001": "PASS", "V2-FL-002": "PASS", "V2-FL-003": "PASS",
     "V2-FL-EVAL-001": "PASS", "V2-FL-004": "PASS", "V2-FL-005": "PASS",
 }
 EXPECTED_GATES = {
-    **{f"V2G{n}": "PASS" for n in range(13)}, "V2G13": "PASS", "V2RELG0": "NOT_STARTED",
+    **{f"V2G{n}": "PASS" for n in range(13)}, "V2G13": "PASS", "V2RELG0": "PASS",
     "V2FLG0": "PASS", "V2FLG1": "PASS", "V2FLG2": "PASS", "V2FLEG0": "PASS",
     "V2FLG3": "PASS", "V2FLG4": "PASS",
 }
@@ -51,6 +51,10 @@ EXPECTED_COMPONENTS = {
     "MODEL_V2_COMPLETE_REPRO_V1": "FROZEN_REPRODUCIBILITY_EVIDENCE",
     "SYSTEM_V2_RELEASE_POLICY_V1": "FROZEN_RELEASE_POLICY",
     "SYSTEM_V2_RELEASE_DECISION_V1": "FROZEN_RELEASE_DECISION",
+    "SOFTWARE_SYSTEM_V2": "FROZEN_RESEARCH_SOFTWARE_DEFAULT",
+    "DEFAULT_RUNTIME_BINDING_V2": "FROZEN_OPERATIONAL_RESEARCH_BINDING",
+    "ROLLBACK_RUNTIME_BINDING_V1": "FROZEN_ROLLBACK_REFERENCE",
+    "SYSTEM_V2_RELEASE_MANIFEST_V1": "FROZEN_RELEASE_MANIFEST",
 }
 
 

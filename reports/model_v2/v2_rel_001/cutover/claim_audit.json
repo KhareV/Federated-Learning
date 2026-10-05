@@ -1,0 +1,26 @@
+{
+  "forbidden_phrase_hits": [],
+  "frontend_files_scanned": [
+    "frontend/src/routes/monitoring/+page.svelte",
+    "frontend/src/routes/+page.svelte",
+    "frontend/src/routes/monitor/+page.svelte",
+    "frontend/src/lib/components/landing/SystemArchitecture.svelte",
+    "frontend/src/lib/components/hardware/HardwareStudio.svelte"
+  ],
+  "hardware_or_clinical_claim": false,
+  "known_limitations": 9,
+  "readme_non_diagnostic": true,
+  "readme_preserves_historical_disposition": true,
+  "readme_states_fl_not_deployed": true,
+  "status": "PASS",
+  "unsupported_claims": [
+    "clinical diagnosis",
+    "hospital deployment",
+    "hardware deployment",
+    "differential privacy",
+    "real wearable validation",
+    "federated-trained default checkpoint",
+    "system privacy guarantee",
+    "scientific promotion of MODEL_V2 (MODEL_V2_NOT_PROMOTED_RELEASE_CI stands)"
+  ]
+}
