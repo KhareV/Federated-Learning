@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_5",
+ "change": "Two evaluator checks made principled (criteria text unchanged): (1) @bundle_no_remote_outside_clerk now fails on remote RESOURCE references (HTML src/href, CSS url()/@import, JS fetch/import/WebSocket/new URL of an absolute external URL) outside the lazily loaded Clerk chunk, and merely records incidental URL strings (library comments/error-message docs); amendment 4's host allow-list is replaced by this rule. (2) @e2e_unusable_no_state relies on the deterministic final facts (7 unusable windows rendered, no RECHECK_SENSOR state change, observed monitoring-state sequence) and requires a transient UNUSABLE DOM frame in at least one of the two runs.",
+ "defect": "The second dry evaluation failed criteria 45 and 59: (45) the DOM sampler coalesces frames in ACCELERATED mode, so run 1 did not catch a transient UNUSABLE frame even though the deterministic facts show 7 unusable windows; (59) a bundled three.js chunk carries URLs inside library comments (jcgt.org, reddit.com, ...), which are not requests - zero external requests were recorded in the browser for both runs.",
+ "files": {
+  "scripts/cap_005_build_evidence.py": {
+   "new_sha256": "360b2eef1208725614ea51de950d8daf88335c11593e9c4ec47dd253d8e99b44",
+   "old_sha256": "52303dda4114dfcb859a147bc3efaa43e1c68ea858fb53d01a9e44a4658079da"
+  }
+ },
+ "freeze_commit": "5cf83da",
+ "made_before": "the recorded CAPG4 criteria evaluation",
+ "previous_amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_4",
+ "unchanged": {
+  "capg4_criteria_text": "identical",
+  "product_code_and_canonical_runs": "byte-identical to the freeze commit"
+ }
+}
