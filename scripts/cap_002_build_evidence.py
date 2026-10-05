@@ -231,7 +231,7 @@ def criteria(final: bool) -> None:
         "@no_product_api": not (ROOT / "api/product_app.py").exists() and not _scan(py_added, r"APIRouter|FastAPI\(|WebSocket") and "/product/v1" not in "".join((ROOT / p).read_text() for p in ("api/app_default.py", "api/app_v2.py", "api/runtime_v2.py")),
         "@no_auth": not _scan(py_added, r"import clerk|from clerk|CLERK_SECRET|@clerk") and not drift["frontend_drift"],
         "@no_database": not _scan(py_added, r"sqlite3|sqlalchemy|aiosqlite") and not [p for p in _git("ls-files").splitlines() if p.endswith((".sqlite", ".sqlite3", ".db"))],
-        "@no_fl_training": not _scan(py_added, r"^\s*(import|from)\s+(federated|privacy|flwr)\b|local_train|fedavg|fedprox|secagg"),
+        "@no_fl_training": not _scan(py_added, r"^\s*(import|from)\s+(federated|privacy|flwr)\b|\blocal_train\b|\bfedavg\b|\bfedprox\b|\bsecagg\b"),
         "@no_candidate": not _scan(py_added, r"CAPSTONE_FL_CANDIDATE_\d{4}") and not [p for p in added if "candidate" in p.lower()],
         "@all_cap002_tests": bool(cap002_results) and all(v == "passed" for v in cap002_results.values()),
         "@regression": bool(re.search(r"\d+ passed", last)) and "failed" not in last and "error" not in last,

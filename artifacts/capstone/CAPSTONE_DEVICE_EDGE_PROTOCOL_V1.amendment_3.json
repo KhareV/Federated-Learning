@@ -1,0 +1,17 @@
+{
+ "amendment_id": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1_AMENDMENT_3",
+ "change": "Word-boundary regex (\\blocal_train\\b, \\bfedavg\\b, \\bfedprox\\b, \\bsecagg\\b) plus the existing federated/privacy/flwr import check. Criteria text, implementation and tests unchanged.",
+ "defect": "@no_fl_training used the case-insensitive substring 'local_train', which matched the string LOCAL_TRAINING_BUFFER_IS_IMPLEMENTED_IN_CAP_006 in product/edge/virtual.py (a disabled-boundary error message, not training code). Criteria 35 and 37 therefore reported false failures.",
+ "files": {
+  "scripts/cap_002_build_evidence.py": {
+   "new_sha256": "821f40e297d9e264e9f68875650c1de381233336549834a432fc0fe34cc33d9a",
+   "old_sha256": "03e98b10bed60947bb5966f1991f9911cde540c6fcb8ab1107691495236814b1"
+  }
+ },
+ "freeze_commit": "51cab3c",
+ "made_before": "the recorded CAPG1 evaluation",
+ "unchanged": {
+  "capg1_criteria_text": "identical",
+  "implementation_and_tests": "byte-identical to the freeze commit"
+ }
+}
