@@ -1,0 +1,93 @@
+{
+ "aggregation_or_coordinator_calls": 0,
+ "aggregation_performed": false,
+ "base_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+ "classification": "product-adapter compatibility smoke; NOT research efficacy and NOT part of the V2-FL-005 FedAvg parity digest",
+ "client_id": "SIM_FL_SITE_00",
+ "eligible_examples": 93,
+ "environment": {
+  "central_persistence_loaded": [],
+  "held_out_loader_modules_loaded": [],
+  "monitoring_modules_loaded": [],
+  "privacy_secagg_app_loaded": false,
+  "truth_modules_loaded_via_sanctioned_federated_adapter_only": [
+   "simulation.fl_cohort_truth_v1"
+  ],
+  "wearable_fl_secagg_shadow_loaded": false
+ },
+ "examples_account_exactly": true,
+ "examples_seen": 93,
+ "existing_implementation": "federated.model_v2_fedprox.train_local_fedprox_epoch_v2",
+ "fedprox_global_model_created": false,
+ "forbidden_findings": [],
+ "kind": "FEDPROX_LOCAL_SMOKE",
+ "local_training_calls": {
+  "train_local_epoch_v2": 0,
+  "train_local_fedprox_epoch_v2": 1
+ },
+ "metrics_computed": false,
+ "mu": 0.1,
+ "mu_search_performed": false,
+ "mu_source": "artifacts/FEDPROX_MU_V2.lock.json selected_mu",
+ "record": {
+  "aggregation_performed": false,
+  "algorithm": "FEDPROX",
+  "base_model_id": "FL_INIT_V2",
+  "base_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "batch_count": 2,
+  "buffer_batch_id": "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_00__fca4470983fe",
+  "buffer_record_count": 93,
+  "buffer_semantic_sha256": "144c3698b045e4b9d80ddaf40e00dbc9186a6ff2adbcd64abb7ca9a0fb93eeb3",
+  "client_id": "SIM_FL_SITE_00",
+  "client_state": "UPDATE_READY",
+  "dataset_sha256": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+  "diagnostics_not_in_digest": {
+   "mean_loss": 0.7485160923773243,
+   "update_norm": 2.9286916188368286
+  },
+  "edge_node_id": "VIRTUAL_EDGE_NODE_00",
+  "eligible_examples": 93,
+  "engineering_only": true,
+  "envelope_checks": {
+   "dtypes_match_base": true,
+   "envelope_fields_exact": true,
+   "floating_tensors": 77,
+   "integer_buffers": 15,
+   "integer_buffers_zero_delta": true,
+   "keys_match_base": true,
+   "shapes_match_base": true,
+   "update_digest_matches_payload": true
+  },
+  "examples_seen": 93,
+  "metrics_computed": false,
+  "participant_id": "SIM_P000101",
+  "payload_bytes": 240828,
+  "produce_update_equals_envelope_projection": true,
+  "quality_counts": {
+   "DEGRADED": 0,
+   "UNUSABLE": 0,
+   "VALID": 93
+  },
+  "round": 1,
+  "server_envelope_forbidden_findings": [],
+  "shuffle_seed": "15954055098236359270",
+  "source_records": 172800,
+  "state_spec_sha256": "6e67165530d8c87d7487414d140bd764a6d584b14498a143cdd7818c3ebce314",
+  "synthetic_negative": 73,
+  "synthetic_positive": 20,
+  "update_finite": true,
+  "update_sha256": "17a5f9526daf1a61c92c95929f671f00d52c456f0382be5edc821e2592279768",
+  "update_submission": {
+   "base_state_digest": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "client_id": "SIM_FL_SITE_00",
+   "examples_seen": 93,
+   "round_id": 1,
+   "update_digest": "17a5f9526daf1a61c92c95929f671f00d52c456f0382be5edc821e2592279768"
+  },
+  "windows_emitted": 93
+ },
+ "state_spec_valid": true,
+ "update_digest": "17a5f9526daf1a61c92c95929f671f00d52c456f0382be5edc821e2592279768",
+ "update_digest_matches_payload": true,
+ "update_finite": true
+}

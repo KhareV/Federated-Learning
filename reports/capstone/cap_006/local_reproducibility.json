@@ -1,0 +1,72 @@
+{
+ "buffer_digests_equal": {
+  "SIM_FL_SITE_00": true,
+  "SIM_FL_SITE_01": true,
+  "SIM_FL_SITE_02": true,
+  "SIM_FL_SITE_03": true,
+  "SIM_FL_SITE_04": true,
+  "SIM_FL_SITE_05": true,
+  "SIM_FL_SITE_06": true,
+  "SIM_FL_SITE_07": true
+ },
+ "dataset_shas_equal": {
+  "SIM_FL_SITE_00": true,
+  "SIM_FL_SITE_01": true,
+  "SIM_FL_SITE_02": true,
+  "SIM_FL_SITE_03": true,
+  "SIM_FL_SITE_04": true,
+  "SIM_FL_SITE_05": true,
+  "SIM_FL_SITE_06": true,
+  "SIM_FL_SITE_07": true
+ },
+ "examples_equal": {
+  "SIM_FL_SITE_00": true,
+  "SIM_FL_SITE_01": true,
+  "SIM_FL_SITE_02": true,
+  "SIM_FL_SITE_03": true,
+  "SIM_FL_SITE_04": true,
+  "SIM_FL_SITE_05": true,
+  "SIM_FL_SITE_06": true,
+  "SIM_FL_SITE_07": true
+ },
+ "fresh_processes": 2,
+ "identical": true,
+ "pids_excluded_from_digest": [
+  72162,
+  72167
+ ],
+ "semantic_sha256": [
+  "555e66ba8d608214729ae8df72004bf3e90fb72941b82b10521dc5fa3a3c821e",
+  "555e66ba8d608214729ae8df72004bf3e90fb72941b82b10521dc5fa3a3c821e"
+ ],
+ "shuffle_seeds_equal": {
+  "SIM_FL_SITE_00": true,
+  "SIM_FL_SITE_01": true,
+  "SIM_FL_SITE_02": true,
+  "SIM_FL_SITE_03": true,
+  "SIM_FL_SITE_04": true,
+  "SIM_FL_SITE_05": true,
+  "SIM_FL_SITE_06": true,
+  "SIM_FL_SITE_07": true
+ },
+ "update_digests_equal": {
+  "SIM_FL_SITE_00": true,
+  "SIM_FL_SITE_01": true,
+  "SIM_FL_SITE_02": true,
+  "SIM_FL_SITE_03": true,
+  "SIM_FL_SITE_04": true,
+  "SIM_FL_SITE_05": true,
+  "SIM_FL_SITE_06": true,
+  "SIM_FL_SITE_07": true
+ },
+ "update_submissions_equal": {
+  "SIM_FL_SITE_00": true,
+  "SIM_FL_SITE_01": true,
+  "SIM_FL_SITE_02": true,
+  "SIM_FL_SITE_03": true,
+  "SIM_FL_SITE_04": true,
+  "SIM_FL_SITE_05": true,
+  "SIM_FL_SITE_06": true,
+  "SIM_FL_SITE_07": true
+ }
+}

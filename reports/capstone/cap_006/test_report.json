@@ -1,0 +1,50 @@
+{
+ "cap006_targeted": {
+  "files": [
+   "tests/test_capstone_local_training_buffer.py (14)",
+   "tests/test_capstone_fl_client_adapter.py (17)",
+   "tests/test_capstone_local_update_bridge.py (7)",
+   "tests/test_capstone_local_training_repro.py (3)"
+  ],
+  "junit": "logs/cap006_tests.xml",
+  "log": "logs/cap006_tests.log",
+  "passed": 41
+ },
+ "environment": "Python 3.11 venv outside the repo; CPU only; CI neither queried nor triggered",
+ "frontend": {
+  "npm_run_build": {
+   "done": true,
+   "exit": 0
+  },
+  "npm_run_check": {
+   "errors": 0,
+   "exit": 0,
+   "warnings": 112
+  },
+  "npm_test": {
+   "exit": 0,
+   "files_passed": 12,
+   "tests_passed": 145,
+   "tests_skipped": 2
+  }
+ },
+ "history_disclosure": {
+  "final_full_regression": "2863 passed, 1 skipped, 0 failed",
+  "first_full_regression_on_the_frozen_state": "1 failed: tests/test_capstone_frontend.py::test_backend_and_scientific_trees_are_byte_identical_to_the_entry_commit (CAP-005 guard rejected ADDED files under product/) -> CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 amendment 6",
+  "prior_capstone_subset_runs": "the inherited CAP-003 flake hit once in an intermediate subset run; not in the final runs"
+ },
+ "mutation_controls": "10/10 caught by named tests and restored byte-identically",
+ "pip_check": "No broken requirements found",
+ "prior_capstone_tests": {
+  "failed": 0,
+  "log": "logs/prior_capstone_tests.log",
+  "passed": 423
+ },
+ "python_regression": {
+  "failed": 0,
+  "log": "logs/pytest_full.log",
+  "passed": 2863,
+  "skipped": 1
+ },
+ "ruff": "All checks passed"
+}

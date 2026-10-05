@@ -1,0 +1,18 @@
+{
+ "base_model_id": "FL_INIT_V2",
+ "client_state_sequence": "IDLE -> DATA_READY -> TRAINING -> UPDATE_READY (SUBMITTED reserved for CAP-007)",
+ "edge_identity_mapping": {
+  "SIM_FL_SITE_00": "VIRTUAL_EDGE_NODE_00",
+  "SIM_FL_SITE_01": "VIRTUAL_EDGE_NODE_01",
+  "SIM_FL_SITE_02": "VIRTUAL_EDGE_NODE_02",
+  "SIM_FL_SITE_03": "VIRTUAL_EDGE_NODE_03",
+  "SIM_FL_SITE_04": "VIRTUAL_EDGE_NODE_04",
+  "SIM_FL_SITE_05": "VIRTUAL_EDGE_NODE_05",
+  "SIM_FL_SITE_06": "VIRTUAL_EDGE_NODE_06",
+  "SIM_FL_SITE_07": "VIRTUAL_EDGE_NODE_07"
+ },
+ "isinstance_FLClient": true,
+ "run_client_states": [
+  "UPDATE_READY"
+ ]
+}

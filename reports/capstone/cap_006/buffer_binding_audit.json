@@ -1,0 +1,44 @@
+{
+ "batch_ids": {
+  "SIM_FL_SITE_00": [
+   "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_00__fca4470983fe"
+  ],
+  "SIM_FL_SITE_01": [
+   "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_01__b3e6499a7404"
+  ],
+  "SIM_FL_SITE_02": [
+   "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_02__ac986172820b"
+  ],
+  "SIM_FL_SITE_03": [
+   "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_03__e54f4da26b97"
+  ],
+  "SIM_FL_SITE_04": [
+   "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_04__89d34fb72f6e"
+  ],
+  "SIM_FL_SITE_05": [
+   "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_05__ed97214e3542"
+  ],
+  "SIM_FL_SITE_06": [
+   "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_06__a1c40334c3a4"
+  ],
+  "SIM_FL_SITE_07": [
+   "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_07__9dbe85276d96"
+  ]
+ },
+ "binding": "CAPSTONE_LOCAL_BUFFER_BINDING_V1",
+ "central_sqlite_used": false,
+ "model_input_ref_example": "LOCALREF:fca4470983fef23d:0000:bd361131d282f3a6",
+ "protocol_implemented": true,
+ "record_fields_equal_frozen_contract": true,
+ "records_equal_trainable": {
+  "SIM_FL_SITE_00": true,
+  "SIM_FL_SITE_01": true,
+  "SIM_FL_SITE_02": true,
+  "SIM_FL_SITE_03": true,
+  "SIM_FL_SITE_04": true,
+  "SIM_FL_SITE_05": true,
+  "SIM_FL_SITE_06": true,
+  "SIM_FL_SITE_07": true
+ },
+ "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION"
+}

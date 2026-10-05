@@ -1,0 +1,26 @@
+{
+ "clean": true,
+ "frontend_files_naming_truth": [],
+ "product_wrapper": "product/edge/label_adapter.py (no truth import)",
+ "python_files_scanned": 69,
+ "runtime_truth_modules_loaded": [
+  [
+   "simulation.fl_cohort_truth_v1"
+  ],
+  [
+   "simulation.fl_cohort_truth_v1"
+  ]
+ ],
+ "sanctioned_consumer": "federated/wearable_sim_local_labels.py",
+ "truth_importers_outside_sanctioned": [],
+ "truth_in_envelope_server_objects": [
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  []
+ ]
+}

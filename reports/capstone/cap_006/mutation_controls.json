@@ -1,0 +1,130 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/edge/local_training_buffer.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_local_training_buffer.py::test_label_source_rules_forbidden_prediction_labels_and_real_data_rules_fail",
+   "git_status_of_file_after_restore": "",
+   "mutation": "MODEL_PREDICTION_LABEL_ACCEPTED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_local_training_buffer.py"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/federation/client.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_fl_client_adapter.py::test_identity_fields_before_and_after_training",
+   "git_status_of_file_after_restore": "",
+   "mutation": "SIMULATION_TRUTH_ADDED_TO_UPDATE_ENVELOPE",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_fl_client_adapter.py",
+    "tests/test_capstone_local_update_bridge.py"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/federation/update_bridge.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_local_update_bridge.py::test_the_server_visible_projection_equals_the_frozen_field_mapping_and_the_client_projection",
+   "git_status_of_file_after_restore": "",
+   "mutation": "LABEL_ADDED_TO_UPDATE_SUBMISSION",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_local_update_bridge.py"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/federation/client.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_fl_client_adapter.py::test_identity_fields_before_and_after_training",
+   "git_status_of_file_after_restore": "",
+   "mutation": "RAW_ECG_ARRAY_ADDED_TO_SERVER_ENVELOPE",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_fl_client_adapter.py",
+    "tests/test_capstone_local_update_bridge.py"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/edge/local_training_buffer.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_local_training_buffer.py::test_model_input_lookup_is_client_local_and_cross_client_access_fails",
+   "git_status_of_file_after_restore": "",
+   "mutation": "CROSS_CLIENT_MODEL_INPUT_LOOKUP_ALLOWED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_local_training_buffer.py"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/federation/client.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_fl_client_adapter.py::test_only_fl_init_v2_is_accepted_as_the_base_never_model_v2_final",
+   "git_status_of_file_after_restore": "",
+   "mutation": "MODEL_V2_FINAL_ACCEPTED_AS_FL_BASE",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_fl_client_adapter.py"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/federation/client.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_fl_client_adapter.py::test_wrong_base_digest_and_wrong_round_are_rejected_without_changing_state",
+   "git_status_of_file_after_restore": "",
+   "mutation": "WRONG_BASE_STATE_DIGEST_ACCEPTED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_fl_client_adapter.py"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/federation/client.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_fl_client_adapter.py::test_an_update_digest_mismatch_is_detected_before_the_update_is_exposed",
+   "git_status_of_file_after_restore": "",
+   "mutation": "UPDATE_DIGEST_MISMATCH_ACCEPTED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_fl_client_adapter.py"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/federation/client.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_fl_client_adapter.py::test_fedprox_mode_calls_the_existing_fedprox_epoch_once_with_the_frozen_mu_only",
+   "git_status_of_file_after_restore": "",
+   "mutation": "FEDPROX_MU_CHANGED_FROM_FROZEN_VALUE",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_fl_client_adapter.py"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "file": "product/federation/client.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_fl_client_adapter.py::test_identity_fields_before_and_after_training",
+   "git_status_of_file_after_restore": "",
+   "mutation": "AGGREGATE_WEIGHTED_DELTAS_INVOKED_DURING_LOCAL_TRAINING",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_fl_client_adapter.py",
+    "tests/test_capstone_local_training_repro.py",
+    "tests/test_capstone_local_update_bridge.py"
+   ]
+  }
+ ]
+}

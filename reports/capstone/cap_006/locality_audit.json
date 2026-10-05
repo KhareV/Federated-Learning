@@ -1,0 +1,44 @@
+{
+ "central_persistence_modules_loaded": [
+  [],
+  []
+ ],
+ "claim": "eight logically isolated local client datasets on one demonstration machine; server-visible objects carry model updates, not raw training examples",
+ "forbidden_findings_per_run": [
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ ],
+ "not_claimed": [
+  "hardware isolation",
+  "VM isolation",
+  "secure enclave",
+  "hospital-grade host isolation",
+  "cryptographic local-data secrecy",
+  "differential privacy",
+  "privacy guarantee"
+ ],
+ "server_visible": [
+  "UpdateSubmission(5 fields)",
+  "existing V2 envelope (metadata + model delta)"
+ ],
+ "sqlite_training_data": false,
+ "training_inputs_resolvable_only_by_owning_client": "test_model_input_lookup_is_client_local_and_cross_client_access_fails"
+}

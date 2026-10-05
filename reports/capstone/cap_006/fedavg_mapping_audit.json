@@ -1,0 +1,16 @@
+{
+ "calls_per_run": [
+  {
+   "train_local_epoch_v2": 8,
+   "train_local_fedprox_epoch_v2": 0
+  },
+  {
+   "train_local_epoch_v2": 8,
+   "train_local_fedprox_epoch_v2": 0
+  }
+ ],
+ "client_uses_the_existing_function_object": true,
+ "function": "federated.model_v2_fl.train_local_epoch_v2",
+ "hyperparameters_imported_from": "federated.wearable_fl_runner_v1",
+ "optimizer_code_in_product": false
+}

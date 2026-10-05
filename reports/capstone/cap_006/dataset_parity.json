@@ -1,0 +1,222 @@
+{
+ "all_equal": true,
+ "per_client": {
+  "SIM_FL_SITE_00": {
+   "cap006_dataset_sha256": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+   "counts_equal": {
+    "DEGRADED": true,
+    "UNUSABLE": true,
+    "VALID": true,
+    "source_records": true,
+    "synthetic_negative": true,
+    "synthetic_positive": true,
+    "trainable": true,
+    "windows_emitted": true
+   },
+   "dataset_sha256_equal": true,
+   "frozen_counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": 172800,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "participant_equal": true
+  },
+  "SIM_FL_SITE_01": {
+   "cap006_dataset_sha256": "b3e6499a74042f99aaa0cde359738ed7d769fbcc79dd7fdd3946be4395461c62",
+   "counts_equal": {
+    "DEGRADED": true,
+    "UNUSABLE": true,
+    "VALID": true,
+    "source_records": true,
+    "synthetic_negative": true,
+    "synthetic_positive": true,
+    "trainable": true,
+    "windows_emitted": true
+   },
+   "dataset_sha256_equal": true,
+   "frozen_counts": {
+    "DEGRADED": 2,
+    "UNUSABLE": 0,
+    "VALID": 91,
+    "excluded_not_valid": 2,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": 172771,
+    "synthetic_negative": 71,
+    "synthetic_positive": 20,
+    "trainable": 91,
+    "windows_emitted": 93
+   },
+   "participant_equal": true
+  },
+  "SIM_FL_SITE_02": {
+   "cap006_dataset_sha256": "ac986172820bfa4ff7b7c2ed5d3d6a7c001c337b315d8f2e756041d500a165b5",
+   "counts_equal": {
+    "DEGRADED": true,
+    "UNUSABLE": true,
+    "VALID": true,
+    "source_records": true,
+    "synthetic_negative": true,
+    "synthetic_positive": true,
+    "trainable": true,
+    "windows_emitted": true
+   },
+   "dataset_sha256_equal": true,
+   "frozen_counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 2,
+    "VALID": 91,
+    "excluded_not_valid": 2,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": 172656,
+    "synthetic_negative": 72,
+    "synthetic_positive": 19,
+    "trainable": 91,
+    "windows_emitted": 93
+   },
+   "participant_equal": true
+  },
+  "SIM_FL_SITE_03": {
+   "cap006_dataset_sha256": "e54f4da26b973d7c281a55d779e97cbe4ab1b6478e0d8b69e16572c4aae3e498",
+   "counts_equal": {
+    "DEGRADED": true,
+    "UNUSABLE": true,
+    "VALID": true,
+    "source_records": true,
+    "synthetic_negative": true,
+    "synthetic_positive": true,
+    "trainable": true,
+    "windows_emitted": true
+   },
+   "dataset_sha256_equal": true,
+   "frozen_counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 4,
+    "VALID": 89,
+    "excluded_not_valid": 4,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": 172800,
+    "synthetic_negative": 71,
+    "synthetic_positive": 18,
+    "trainable": 89,
+    "windows_emitted": 93
+   },
+   "participant_equal": true
+  },
+  "SIM_FL_SITE_04": {
+   "cap006_dataset_sha256": "89d34fb72f6ef1e256c67b51a9dfaba9d833f7113de8b176c612bef7e68a82ba",
+   "counts_equal": {
+    "DEGRADED": true,
+    "UNUSABLE": true,
+    "VALID": true,
+    "source_records": true,
+    "synthetic_negative": true,
+    "synthetic_positive": true,
+    "trainable": true,
+    "windows_emitted": true
+   },
+   "dataset_sha256_equal": true,
+   "frozen_counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 3,
+    "VALID": 90,
+    "excluded_not_valid": 3,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": 172800,
+    "synthetic_negative": 71,
+    "synthetic_positive": 19,
+    "trainable": 90,
+    "windows_emitted": 93
+   },
+   "participant_equal": true
+  },
+  "SIM_FL_SITE_05": {
+   "cap006_dataset_sha256": "ed97214e3542f764098d196bf81a7c19ce8deb6d69c3bb68cb6255c9c30300a2",
+   "counts_equal": {
+    "DEGRADED": true,
+    "UNUSABLE": true,
+    "VALID": true,
+    "source_records": true,
+    "synthetic_negative": true,
+    "synthetic_positive": true,
+    "trainable": true,
+    "windows_emitted": true
+   },
+   "dataset_sha256_equal": true,
+   "frozen_counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": 172800,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "participant_equal": true
+  },
+  "SIM_FL_SITE_06": {
+   "cap006_dataset_sha256": "a1c40334c3a415d7214c92a887ea39fa4d59b863cee87539cbe0b72ca8a25081",
+   "counts_equal": {
+    "DEGRADED": true,
+    "UNUSABLE": true,
+    "VALID": true,
+    "source_records": true,
+    "synthetic_negative": true,
+    "synthetic_positive": true,
+    "trainable": true,
+    "windows_emitted": true
+   },
+   "dataset_sha256_equal": true,
+   "frozen_counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": 172800,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "participant_equal": true
+  },
+  "SIM_FL_SITE_07": {
+   "cap006_dataset_sha256": "9dbe85276d96f4e2487d2cbac74093bc33c90483281fe217ae0b114403aa5790",
+   "counts_equal": {
+    "DEGRADED": true,
+    "UNUSABLE": true,
+    "VALID": true,
+    "source_records": true,
+    "synthetic_negative": true,
+    "synthetic_positive": true,
+    "trainable": true,
+    "windows_emitted": true
+   },
+   "dataset_sha256_equal": true,
+   "frozen_counts": {
+    "DEGRADED": 2,
+    "UNUSABLE": 8,
+    "VALID": 83,
+    "excluded_not_valid": 10,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": 172627,
+    "synthetic_negative": 69,
+    "synthetic_positive": 14,
+    "trainable": 83,
+    "windows_emitted": 93
+   },
+   "participant_equal": true
+  }
+ },
+ "source": "reports/model_v2/v2_fl_005/cohort_manifest_run.json (read, not copied)"
+}

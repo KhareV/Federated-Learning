@@ -1,0 +1,104 @@
+{
+ "any_mismatch": false,
+ "compared_fields": [
+  "clients",
+  "examples_seen",
+  "shuffle_seeds",
+  "update_sha256",
+  "payload_bytes",
+  "base_global_state_sha256"
+ ],
+ "intentionally_not_compared": [
+  "mean_loss",
+  "update_norm (diagnostics_not_in_digest in the frozen report)"
+ ],
+ "reference": "reports/model_v2/v2_fl_005/federation_run.json round_reports.1",
+ "run_1": {
+  "base_state_equal": true,
+  "clients_equal": true,
+  "examples_seen_equal": {
+   "SIM_FL_SITE_00": true,
+   "SIM_FL_SITE_01": true,
+   "SIM_FL_SITE_02": true,
+   "SIM_FL_SITE_03": true,
+   "SIM_FL_SITE_04": true,
+   "SIM_FL_SITE_05": true,
+   "SIM_FL_SITE_06": true,
+   "SIM_FL_SITE_07": true
+  },
+  "payload_bytes_equal": {
+   "SIM_FL_SITE_00": true,
+   "SIM_FL_SITE_01": true,
+   "SIM_FL_SITE_02": true,
+   "SIM_FL_SITE_03": true,
+   "SIM_FL_SITE_04": true,
+   "SIM_FL_SITE_05": true,
+   "SIM_FL_SITE_06": true,
+   "SIM_FL_SITE_07": true
+  },
+  "shuffle_seeds_equal": {
+   "SIM_FL_SITE_00": true,
+   "SIM_FL_SITE_01": true,
+   "SIM_FL_SITE_02": true,
+   "SIM_FL_SITE_03": true,
+   "SIM_FL_SITE_04": true,
+   "SIM_FL_SITE_05": true,
+   "SIM_FL_SITE_06": true,
+   "SIM_FL_SITE_07": true
+  },
+  "update_sha256_equal": {
+   "SIM_FL_SITE_00": true,
+   "SIM_FL_SITE_01": true,
+   "SIM_FL_SITE_02": true,
+   "SIM_FL_SITE_03": true,
+   "SIM_FL_SITE_04": true,
+   "SIM_FL_SITE_05": true,
+   "SIM_FL_SITE_06": true,
+   "SIM_FL_SITE_07": true
+  }
+ },
+ "run_2": {
+  "base_state_equal": true,
+  "clients_equal": true,
+  "examples_seen_equal": {
+   "SIM_FL_SITE_00": true,
+   "SIM_FL_SITE_01": true,
+   "SIM_FL_SITE_02": true,
+   "SIM_FL_SITE_03": true,
+   "SIM_FL_SITE_04": true,
+   "SIM_FL_SITE_05": true,
+   "SIM_FL_SITE_06": true,
+   "SIM_FL_SITE_07": true
+  },
+  "payload_bytes_equal": {
+   "SIM_FL_SITE_00": true,
+   "SIM_FL_SITE_01": true,
+   "SIM_FL_SITE_02": true,
+   "SIM_FL_SITE_03": true,
+   "SIM_FL_SITE_04": true,
+   "SIM_FL_SITE_05": true,
+   "SIM_FL_SITE_06": true,
+   "SIM_FL_SITE_07": true
+  },
+  "shuffle_seeds_equal": {
+   "SIM_FL_SITE_00": true,
+   "SIM_FL_SITE_01": true,
+   "SIM_FL_SITE_02": true,
+   "SIM_FL_SITE_03": true,
+   "SIM_FL_SITE_04": true,
+   "SIM_FL_SITE_05": true,
+   "SIM_FL_SITE_06": true,
+   "SIM_FL_SITE_07": true
+  },
+  "update_sha256_equal": {
+   "SIM_FL_SITE_00": true,
+   "SIM_FL_SITE_01": true,
+   "SIM_FL_SITE_02": true,
+   "SIM_FL_SITE_03": true,
+   "SIM_FL_SITE_04": true,
+   "SIM_FL_SITE_05": true,
+   "SIM_FL_SITE_06": true,
+   "SIM_FL_SITE_07": true
+  }
+ }
+}

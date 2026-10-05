@@ -1,0 +1,817 @@
+{
+ "all_decided_pass": true,
+ "cap006_tests": {
+  "passed": 41,
+  "total": 41
+ },
+ "criteria": [
+  {
+   "checks": [
+    "@cap_pass_1"
+   ],
+   "criterion": 1,
+   "pass": true,
+   "text": "CAP-001/CAPG0 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_2"
+   ],
+   "criterion": 2,
+   "pass": true,
+   "text": "CAP-002/CAPG1 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_3"
+   ],
+   "criterion": 3,
+   "pass": true,
+   "text": "CAP-003/CAPG2 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_4"
+   ],
+   "criterion": 4,
+   "pass": true,
+   "text": "CAP-004/CAPG3 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_5"
+   ],
+   "criterion": 5,
+   "pass": true,
+   "text": "CAP-005/CAPG4 PASS"
+  },
+  {
+   "checks": [
+    "@locks_verified"
+   ],
+   "criterion": 6,
+   "pass": true,
+   "text": "all prior amendment chains verify"
+  },
+  {
+   "checks": [
+    "@ui_lock_verified",
+    "@frontend_unchanged"
+   ],
+   "criterion": 7,
+   "pass": true,
+   "text": "CAPSTONE_UI_V1 verifies unchanged"
+  },
+  {
+   "checks": [
+    "@v2fl005_unchanged"
+   ],
+   "criterion": 8,
+   "pass": true,
+   "text": "V2-FL-005 frozen evidence verifies unchanged"
+  },
+  {
+   "checks": [
+    "@fl_init_unchanged"
+   ],
+   "criterion": 9,
+   "pass": true,
+   "text": "FL_INIT_V2 verifies unchanged"
+  },
+  {
+   "checks": [
+    "@no_scientific_drift"
+   ],
+   "criterion": 10,
+   "pass": true,
+   "text": "no scientific/runtime drift"
+  },
+  {
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ],
+   "criterion": 11,
+   "pass": true,
+   "text": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1 frozen before canonical runs"
+  },
+  {
+   "checks": [
+    "test_all_eight_frozen_clients_are_reused_with_exact_v2_fl_005_counts_and_dataset_shas",
+    "test_window_ids_batch_ids_and_provenance_are_deterministic_and_bound",
+    "@buffer_implements_contract"
+   ],
+   "criterion": 12,
+   "pass": true,
+   "text": "LOCAL_TRAINING_BUFFER_V1 implements the frozen protocol"
+  },
+  {
+   "checks": [
+    "test_the_buffer_semantic_digest_is_deterministic_and_metadata_only",
+    "@storage_mode_regeneration"
+   ],
+   "criterion": 13,
+   "pass": true,
+   "text": "buffer uses deterministic local regeneration"
+  },
+  {
+   "checks": [
+    "test_no_new_module_writes_to_central_storage_or_depends_on_the_product_database",
+    "@central_db_untouched"
+   ],
+   "criterion": 14,
+   "pass": true,
+   "text": "no training tensors written to central SQLite"
+  },
+  {
+   "checks": [
+    "test_no_new_module_writes_to_central_storage_or_depends_on_the_product_database",
+    "@central_db_untouched"
+   ],
+   "criterion": 15,
+   "pass": true,
+   "text": "no labels written to central SQLite"
+  },
+  {
+   "checks": [
+    "test_no_new_module_writes_to_central_storage_or_depends_on_the_product_database",
+    "@central_db_untouched"
+   ],
+   "criterion": 16,
+   "pass": true,
+   "text": "no SimulationTruth written to central SQLite"
+  },
+  {
+   "checks": [
+    "test_only_trainable_windows_become_records_and_all_are_quality_eligible",
+    "@buffer_counts_match_trainable"
+   ],
+   "criterion": 17,
+   "pass": true,
+   "text": "only trainable windows become canonical training records"
+  },
+  {
+   "checks": [
+    "@buffer_counts_match_trainable"
+   ],
+   "criterion": 18,
+   "pass": true,
+   "text": "buffer record count matches existing trainable count for each client"
+  },
+  {
+   "checks": [
+    "test_only_trainable_windows_become_records_and_all_are_quality_eligible",
+    "@all_records_eligible"
+   ],
+   "criterion": 19,
+   "pass": true,
+   "text": "every stored canonical record has quality_eligible=true"
+  },
+  {
+   "checks": [
+    "test_model_input_refs_are_opaque_references_not_sample_arrays",
+    "@refs_opaque"
+   ],
+   "criterion": 20,
+   "pass": true,
+   "text": "all model_input_ref values are references, not sample arrays"
+  },
+  {
+   "checks": [
+    "test_model_input_lookup_is_client_local_and_cross_client_access_fails"
+   ],
+   "criterion": 21,
+   "pass": true,
+   "text": "model-input lookup is client-local"
+  },
+  {
+   "checks": [
+    "test_model_input_lookup_is_client_local_and_cross_client_access_fails",
+    "test_a_cross_client_buffer_read_is_refused_by_the_buffer"
+   ],
+   "criterion": 22,
+   "pass": true,
+   "text": "cross-client model-input lookup fails"
+  },
+  {
+   "checks": [
+    "test_duplicate_batch_cross_client_record_and_missing_private_tensor_fail_closed"
+   ],
+   "criterion": 23,
+   "pass": true,
+   "text": "duplicate batch fails"
+  },
+  {
+   "checks": [
+    "test_window_ids_batch_ids_and_provenance_are_deterministic_and_bound",
+    "@provenance_synthetic"
+   ],
+   "criterion": 24,
+   "pass": true,
+   "text": "source provenance is synthetic"
+  },
+  {
+   "checks": [
+    "test_the_label_adapter_wraps_the_existing_adapter_and_keeps_engineering_semantics",
+    "@label_semantics"
+   ],
+   "criterion": 25,
+   "pass": true,
+   "text": "engineering label semantics remain WEARABLE_SIM_EVENT_WINDOW_V1"
+  },
+  {
+   "checks": [
+    "@no_aami_claim"
+   ],
+   "criterion": 26,
+   "pass": true,
+   "text": "no AAMI_SVF equivalence is claimed"
+  },
+  {
+   "checks": [
+    "test_the_label_adapter_wraps_the_existing_adapter_and_keeps_engineering_semantics"
+   ],
+   "criterion": 27,
+   "pass": true,
+   "text": "SIMULATION_LABEL_ADAPTER_V1 reuses the existing label adapter"
+  },
+  {
+   "checks": [
+    "test_product_wrappers_do_not_import_truth_modules_or_names_anywhere_under_product",
+    "test_simulation_truth_is_never_imported_by_the_live_or_federation_server_paths",
+    "test_simulation_truth_importers_are_exactly_the_sanctioned_set"
+   ],
+   "criterion": 28,
+   "pass": true,
+   "text": "product wrapper does not directly import truth modules"
+  },
+  {
+   "checks": [
+    "@truth_firewall_static",
+    "@runtime_truth_only_sanctioned"
+   ],
+   "criterion": 29,
+   "pass": true,
+   "text": "SimulationTruth remains absent from monitoring/server/frontend paths"
+  },
+  {
+   "checks": [
+    "@clients_frozen_eight"
+   ],
+   "criterion": 30,
+   "pass": true,
+   "text": "all eight frozen clients reused"
+  },
+  {
+   "checks": [
+    "@no_second_universe"
+   ],
+   "criterion": 31,
+   "pass": true,
+   "text": "no second client universe introduced"
+  },
+  {
+   "checks": [
+    "@dataset_counts_parity"
+   ],
+   "criterion": 32,
+   "pass": true,
+   "text": "all eight regenerated datasets exactly match V2-FL-005 counts"
+  },
+  {
+   "checks": [
+    "@dataset_sha_parity"
+   ],
+   "criterion": 33,
+   "pass": true,
+   "text": "all eight regenerated dataset SHA256 values match V2-FL-005"
+  },
+  {
+   "checks": [
+    "test_the_adapter_satisfies_the_frozen_flclient_protocol_without_altering_it"
+   ],
+   "criterion": 34,
+   "pass": true,
+   "text": "CAPSTONE_FL_CLIENT_ADAPTER_V1 satisfies FLClient protocol"
+  },
+  {
+   "checks": [
+    "test_edge_identities_come_from_the_frozen_mapping_for_all_eight_clients"
+   ],
+   "criterion": 35,
+   "pass": true,
+   "text": "edge identities match frozen SIM_FL mappings"
+  },
+  {
+   "checks": [
+    "@canonical_base_fl_init"
+   ],
+   "criterion": 36,
+   "pass": true,
+   "text": "canonical base is FL_INIT_V2"
+  },
+  {
+   "checks": [
+    "test_only_fl_init_v2_is_accepted_as_the_base_never_model_v2_final",
+    "@canonical_base_fl_init"
+   ],
+   "criterion": 37,
+   "pass": true,
+   "text": "MODEL_V2_FINAL is not used as the FL starting state"
+  },
+  {
+   "checks": [
+    "test_fedavg_mode_calls_the_existing_fedavg_epoch_and_never_the_fedprox_one",
+    "@fedavg_calls_existing"
+   ],
+   "criterion": 38,
+   "pass": true,
+   "text": "FedAvg local training calls existing train_local_epoch_v2"
+  },
+  {
+   "checks": [
+    "test_local_training_hyperparameters_are_the_frozen_v2_fl_005_constants",
+    "@frozen_modules_unchanged"
+   ],
+   "criterion": 39,
+   "pass": true,
+   "text": "optimizer/hyperparameters unchanged"
+  },
+  {
+   "checks": [
+    "@eight_calls_per_run"
+   ],
+   "criterion": 40,
+   "pass": true,
+   "text": "exactly eight canonical FedAvg local-training calls occur per run"
+  },
+  {
+   "checks": [
+    "@no_aggregation",
+    "test_the_bridge_and_client_never_call_any_coordinator_or_aggregation_or_secagg_function",
+    "test_eight_local_trainings_from_fl_init_v2_with_no_aggregation_or_coordinator_call"
+   ],
+   "criterion": 41,
+   "pass": true,
+   "text": "no aggregation occurs"
+  },
+  {
+   "checks": [
+    "@no_aggregation",
+    "test_the_bridge_and_client_never_call_any_coordinator_or_aggregation_or_secagg_function"
+   ],
+   "criterion": 42,
+   "pass": true,
+   "text": "no Coordinator.submit occurs"
+  },
+  {
+   "checks": [
+    "@no_aggregation",
+    "test_the_bridge_and_client_never_call_any_coordinator_or_aggregation_or_secagg_function"
+   ],
+   "criterion": 43,
+   "pass": true,
+   "text": "no Coordinator.aggregate occurs"
+  },
+  {
+   "checks": [
+    "@no_aggregation",
+    "test_the_bridge_and_client_never_call_any_coordinator_or_aggregation_or_secagg_function"
+   ],
+   "criterion": 44,
+   "pass": true,
+   "text": "no Coordinator.commit occurs"
+  },
+  {
+   "checks": [
+    "@no_secagg"
+   ],
+   "criterion": 45,
+   "pass": true,
+   "text": "no SecAgg run occurs"
+  },
+  {
+   "checks": [
+    "@no_federation_run"
+   ],
+   "criterion": 46,
+   "pass": true,
+   "text": "no federation run is created"
+  },
+  {
+   "checks": [
+    "@no_candidate"
+   ],
+   "criterion": 47,
+   "pass": true,
+   "text": "no candidate model is created"
+  },
+  {
+   "checks": [
+    "test_the_submission_projection_has_exactly_the_five_frozen_fields_and_cannot_carry_labels",
+    "test_the_server_visible_projection_equals_the_frozen_field_mapping_and_the_client_projection",
+    "@submission_projection"
+   ],
+   "criterion": 48,
+   "pass": true,
+   "text": "UpdateSubmission matches frozen metadata projection"
+  },
+  {
+   "checks": [
+    "test_the_bridge_exposes_exactly_the_existing_v2_envelope_with_zero_forbidden_findings",
+    "@envelope_reused"
+   ],
+   "criterion": 49,
+   "pass": true,
+   "text": "existing V2 full envelope is reused"
+  },
+  {
+   "checks": [
+    "test_object_structure_contains_no_raw_samples_labels_truth_or_minibatches",
+    "@envelope_clean"
+   ],
+   "criterion": 50,
+   "pass": true,
+   "text": "server-visible envelope contains no raw data"
+  },
+  {
+   "checks": [
+    "test_object_structure_contains_no_raw_samples_labels_truth_or_minibatches",
+    "@envelope_clean"
+   ],
+   "criterion": 51,
+   "pass": true,
+   "text": "server-visible envelope contains no labels"
+  },
+  {
+   "checks": [
+    "test_object_structure_contains_no_raw_samples_labels_truth_or_minibatches",
+    "@envelope_clean"
+   ],
+   "criterion": 52,
+   "pass": true,
+   "text": "server-visible envelope contains no truth"
+  },
+  {
+   "checks": [
+    "test_every_update_is_finite_valid_and_contains_no_forbidden_data",
+    "@deltas_finite"
+   ],
+   "criterion": 53,
+   "pass": true,
+   "text": "all local deltas finite"
+  },
+  {
+   "checks": [
+    "test_delta_validity_keys_shapes_dtypes_finiteness_and_integer_buffers",
+    "@deltas_valid"
+   ],
+   "criterion": 54,
+   "pass": true,
+   "text": "all local state shapes/dtypes valid"
+  },
+  {
+   "checks": [
+    "test_a_tampered_payload_or_digest_makes_the_bridge_refuse_the_update",
+    "@deltas_valid"
+   ],
+   "criterion": 55,
+   "pass": true,
+   "text": "update digest reconciles with payload"
+  },
+  {
+   "checks": [
+    "@examples_match_eligible"
+   ],
+   "criterion": 56,
+   "pass": true,
+   "text": "examples_seen matches local eligible examples"
+  },
+  {
+   "checks": [
+    "test_round_one_examples_shuffle_seeds_and_update_shas_equal_the_frozen_v2_fl_005_evidence",
+    "@parity_examples"
+   ],
+   "criterion": 57,
+   "pass": true,
+   "text": "CAP-006 FedAvg round-1 examples match V2-FL-005"
+  },
+  {
+   "checks": [
+    "test_round_one_examples_shuffle_seeds_and_update_shas_equal_the_frozen_v2_fl_005_evidence",
+    "@parity_seeds"
+   ],
+   "criterion": 58,
+   "pass": true,
+   "text": "CAP-006 FedAvg round-1 shuffle seeds match V2-FL-005"
+  },
+  {
+   "checks": [
+    "test_round_one_examples_shuffle_seeds_and_update_shas_equal_the_frozen_v2_fl_005_evidence",
+    "@parity_update_sha"
+   ],
+   "criterion": 59,
+   "pass": true,
+   "text": "CAP-006 FedAvg round-1 update SHA values match V2-FL-005"
+  },
+  {
+   "checks": [
+    "@repro_buffer"
+   ],
+   "criterion": 60,
+   "pass": true,
+   "text": "run 1 and run 2 buffer digests match"
+  },
+  {
+   "checks": [
+    "@repro_updates"
+   ],
+   "criterion": 61,
+   "pass": true,
+   "text": "run 1 and run 2 update digests match"
+  },
+  {
+   "checks": [
+    "@repro_submissions"
+   ],
+   "criterion": 62,
+   "pass": true,
+   "text": "run 1 and run 2 UpdateSubmission objects match"
+  },
+  {
+   "checks": [
+    "test_fedprox_mode_calls_the_existing_fedprox_epoch_once_with_the_frozen_mu_only",
+    "@fedprox_existing"
+   ],
+   "criterion": 63,
+   "pass": true,
+   "text": "FedProx local smoke uses existing implementation"
+  },
+  {
+   "checks": [
+    "test_fedprox_mode_calls_the_existing_fedprox_epoch_once_with_the_frozen_mu_only",
+    "@fedprox_mu_frozen"
+   ],
+   "criterion": 64,
+   "pass": true,
+   "text": "FedProx local smoke uses frozen mu only"
+  },
+  {
+   "checks": [
+    "@fedprox_no_tuning"
+   ],
+   "criterion": 65,
+   "pass": true,
+   "text": "FedProx performs no tuning"
+  },
+  {
+   "checks": [
+    "@fedprox_no_aggregation"
+   ],
+   "criterion": 66,
+   "pass": true,
+   "text": "FedProx smoke performs no aggregation"
+  },
+  {
+   "checks": [
+    "@no_metrics"
+   ],
+   "criterion": 67,
+   "pass": true,
+   "text": "no classification/efficacy metric is computed"
+  },
+  {
+   "checks": [
+    "@no_heldout"
+   ],
+   "criterion": 68,
+   "pass": true,
+   "text": "no held-out inference is rerun"
+  },
+  {
+   "checks": [
+    "test_local_fl_code_does_not_import_or_touch_the_monitoring_product",
+    "test_local_training_has_zero_effect_on_an_existing_monitoring_state_object",
+    "@no_monitoring_data"
+   ],
+   "criterion": 69,
+   "pass": true,
+   "text": "no user monitoring data enters training"
+  },
+  {
+   "checks": [
+    "@no_personalized"
+   ],
+   "criterion": 70,
+   "pass": true,
+   "text": "no personalized model exists"
+  },
+  {
+   "checks": [
+    "@no_new_routes"
+   ],
+   "criterion": 71,
+   "pass": true,
+   "text": "no product API routes added"
+  },
+  {
+   "checks": [
+    "@backend_untouched"
+   ],
+   "criterion": 72,
+   "pass": true,
+   "text": "no product backend modified"
+  },
+  {
+   "checks": [
+    "@frontend_unchanged"
+   ],
+   "criterion": 73,
+   "pass": true,
+   "text": "no frontend modified"
+  },
+  {
+   "checks": [
+    "@central_db_untouched"
+   ],
+   "criterion": 74,
+   "pass": true,
+   "text": "no federation SQLite rows written"
+  },
+  {
+   "checks": [
+    "@central_db_untouched"
+   ],
+   "criterion": 75,
+   "pass": true,
+   "text": "no candidate/governance rows written"
+  },
+  {
+   "checks": [
+    "@no_hardware_code"
+   ],
+   "criterion": 76,
+   "pass": true,
+   "text": "no physical hardware code"
+  },
+  {
+   "checks": [
+    "@targeted_tests"
+   ],
+   "criterion": 77,
+   "pass": true,
+   "text": "targeted CAP-006 tests pass"
+  },
+  {
+   "checks": [
+    "@prior_capstone_tests"
+   ],
+   "criterion": 78,
+   "pass": true,
+   "text": "all prior capstone tests pass (subject only to the inherited documented flake policy)"
+  },
+  {
+   "checks": [
+    "@regression"
+   ],
+   "criterion": 79,
+   "pass": true,
+   "text": "full Python regression passes (subject only to the inherited documented flake policy)"
+  },
+  {
+   "checks": [
+    "@frontend_npm_test"
+   ],
+   "criterion": 80,
+   "pass": true,
+   "text": "frontend npm test passes"
+  },
+  {
+   "checks": [
+    "@svelte_check"
+   ],
+   "criterion": 81,
+   "pass": true,
+   "text": "frontend svelte-check has zero errors"
+  },
+  {
+   "checks": [
+    "@frontend_build"
+   ],
+   "criterion": 82,
+   "pass": true,
+   "text": "frontend build passes"
+  },
+  {
+   "checks": [
+    "@ruff"
+   ],
+   "criterion": 83,
+   "pass": true,
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    "@pip"
+   ],
+   "criterion": 84,
+   "pass": true,
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "criterion": 85,
+   "pass": true,
+   "text": "CI not queried"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "criterion": 86,
+   "pass": true,
+   "text": "CI not triggered"
+  },
+  {
+   "checks": [
+    "@registry_cap006"
+   ],
+   "criterion": 87,
+   "pass": true,
+   "text": "CAP-006 PASS"
+  },
+  {
+   "checks": [
+    "@registry_capg5"
+   ],
+   "criterion": 88,
+   "pass": true,
+   "text": "CAPG5 PASS"
+  },
+  {
+   "checks": [
+    "@registry_cap007"
+   ],
+   "criterion": 89,
+   "pass": true,
+   "text": "CAP-007 remains NOT_STARTED"
+  },
+  {
+   "checks": [
+    "@mutation_log"
+   ],
+   "criterion": 90,
+   "pass": true,
+   "text": "ten non-equivalent mutation controls are each caught and restored byte-identically"
+  },
+  {
+   "checks": [
+    "@repro_semantic"
+   ],
+   "criterion": 91,
+   "pass": true,
+   "text": "the two fresh-process canonical runs have identical semantic digests"
+  },
+  {
+   "checks": [
+    "@no_large_artifacts"
+   ],
+   "criterion": 92,
+   "pass": true,
+   "text": "no tensors, datasets or checkpoints are committed (bounded metadata evidence only)"
+  },
+  {
+   "checks": [
+    "test_eight_local_trainings_from_fl_init_v2_with_no_aggregation_or_coordinator_call"
+   ],
+   "criterion": 93,
+   "pass": true,
+   "text": "the first-pass buffer, client, bridge and repro tests reproduce the frozen V2-FL-005 round-1 evidence in-process"
+  },
+  {
+   "checks": [
+    "@disclosures_preserved"
+   ],
+   "criterion": 94,
+   "pass": true,
+   "text": "preserved disclosures remain recorded"
+  }
+ ],
+ "criteria_count": 94,
+ "decided": 94,
+ "gate": "CAPG5",
+ "known_preexisting_flake_failures_in_full_run": [],
+ "protocol_freeze": {
+  "bound_file_drift_since_freeze": [],
+  "freeze_commit": "a1582dad8a4b4c69473a2e979300a89730b08630",
+  "freeze_is_ancestor_of_head": true,
+  "ok": true,
+  "result_files_present_in_freeze": []
+ },
+ "regression_summary": {
+  "passed": 2863,
+  "skipped": 1
+ },
+ "undecided": []
+}

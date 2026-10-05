@@ -1,0 +1,208 @@
+{
+ "clients": {
+  "SIM_FL_SITE_00": {
+   "all_quality_eligible": true,
+   "buffer_batch_ids": [
+    "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_00__fca4470983fe"
+   ],
+   "buffer_semantic_sha256": "144c3698b045e4b9d80ddaf40e00dbc9186a6ff2adbcd64abb7ca9a0fb93eeb3",
+   "client_id": "SIM_FL_SITE_00",
+   "dataset_sha256": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+   "eligible_count": 93,
+   "label_sources": [
+    "SIMULATION_TRUTH_ENGINEERING"
+   ],
+   "participant_id": "SIM_P000101",
+   "provenance_ids": [
+    "WEARABLE_SIM_FL_COHORT_V1/WEARABLE_SIM_V1/SIM_FL_SITE_00/SIM_P000101/fca4470983fef23d"
+   ],
+   "record_count": 93,
+   "refs_are_opaque": true,
+   "simulation_only": true,
+   "storage_location": "process memory only (never central SQLite)",
+   "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION",
+   "synthetic_negative": 73,
+   "synthetic_positive": 20
+  },
+  "SIM_FL_SITE_01": {
+   "all_quality_eligible": true,
+   "buffer_batch_ids": [
+    "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_01__b3e6499a7404"
+   ],
+   "buffer_semantic_sha256": "50eaf01cba59c7c3eca4b65f95cf019ddc0cb0c3dd03ca28ed912d0ec18143ec",
+   "client_id": "SIM_FL_SITE_01",
+   "dataset_sha256": "b3e6499a74042f99aaa0cde359738ed7d769fbcc79dd7fdd3946be4395461c62",
+   "eligible_count": 91,
+   "label_sources": [
+    "SIMULATION_TRUTH_ENGINEERING"
+   ],
+   "participant_id": "SIM_P000102",
+   "provenance_ids": [
+    "WEARABLE_SIM_FL_COHORT_V1/WEARABLE_SIM_V1/SIM_FL_SITE_01/SIM_P000102/b3e6499a74042f99"
+   ],
+   "record_count": 91,
+   "refs_are_opaque": true,
+   "simulation_only": true,
+   "storage_location": "process memory only (never central SQLite)",
+   "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION",
+   "synthetic_negative": 71,
+   "synthetic_positive": 20
+  },
+  "SIM_FL_SITE_02": {
+   "all_quality_eligible": true,
+   "buffer_batch_ids": [
+    "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_02__ac986172820b"
+   ],
+   "buffer_semantic_sha256": "b478acd6696c7100097265151aba5e591f3e322a9c7c1d107f5f26b71028921d",
+   "client_id": "SIM_FL_SITE_02",
+   "dataset_sha256": "ac986172820bfa4ff7b7c2ed5d3d6a7c001c337b315d8f2e756041d500a165b5",
+   "eligible_count": 91,
+   "label_sources": [
+    "SIMULATION_TRUTH_ENGINEERING"
+   ],
+   "participant_id": "SIM_P000103",
+   "provenance_ids": [
+    "WEARABLE_SIM_FL_COHORT_V1/WEARABLE_SIM_V1/SIM_FL_SITE_02/SIM_P000103/ac986172820bfa4f"
+   ],
+   "record_count": 91,
+   "refs_are_opaque": true,
+   "simulation_only": true,
+   "storage_location": "process memory only (never central SQLite)",
+   "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION",
+   "synthetic_negative": 72,
+   "synthetic_positive": 19
+  },
+  "SIM_FL_SITE_03": {
+   "all_quality_eligible": true,
+   "buffer_batch_ids": [
+    "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_03__e54f4da26b97"
+   ],
+   "buffer_semantic_sha256": "ccc32af7aac4d9be54f3bd8e8786de0b2f90489b8fdbd08aa27eeaf2be9e006b",
+   "client_id": "SIM_FL_SITE_03",
+   "dataset_sha256": "e54f4da26b973d7c281a55d779e97cbe4ab1b6478e0d8b69e16572c4aae3e498",
+   "eligible_count": 89,
+   "label_sources": [
+    "SIMULATION_TRUTH_ENGINEERING"
+   ],
+   "participant_id": "SIM_P000104",
+   "provenance_ids": [
+    "WEARABLE_SIM_FL_COHORT_V1/WEARABLE_SIM_V1/SIM_FL_SITE_03/SIM_P000104/e54f4da26b973d7c"
+   ],
+   "record_count": 89,
+   "refs_are_opaque": true,
+   "simulation_only": true,
+   "storage_location": "process memory only (never central SQLite)",
+   "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION",
+   "synthetic_negative": 71,
+   "synthetic_positive": 18
+  },
+  "SIM_FL_SITE_04": {
+   "all_quality_eligible": true,
+   "buffer_batch_ids": [
+    "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_04__89d34fb72f6e"
+   ],
+   "buffer_semantic_sha256": "846b8eebffb020eed6bbf46b6a5eb03dba722ac762f49e8e25f12aa997072f04",
+   "client_id": "SIM_FL_SITE_04",
+   "dataset_sha256": "89d34fb72f6ef1e256c67b51a9dfaba9d833f7113de8b176c612bef7e68a82ba",
+   "eligible_count": 90,
+   "label_sources": [
+    "SIMULATION_TRUTH_ENGINEERING"
+   ],
+   "participant_id": "SIM_P000105",
+   "provenance_ids": [
+    "WEARABLE_SIM_FL_COHORT_V1/WEARABLE_SIM_V1/SIM_FL_SITE_04/SIM_P000105/89d34fb72f6ef1e2"
+   ],
+   "record_count": 90,
+   "refs_are_opaque": true,
+   "simulation_only": true,
+   "storage_location": "process memory only (never central SQLite)",
+   "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION",
+   "synthetic_negative": 71,
+   "synthetic_positive": 19
+  },
+  "SIM_FL_SITE_05": {
+   "all_quality_eligible": true,
+   "buffer_batch_ids": [
+    "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_05__ed97214e3542"
+   ],
+   "buffer_semantic_sha256": "41f1a0e327b92e23e72546365bd5d752ce67b61ba4b0c49c364a6bba98b8cca0",
+   "client_id": "SIM_FL_SITE_05",
+   "dataset_sha256": "ed97214e3542f764098d196bf81a7c19ce8deb6d69c3bb68cb6255c9c30300a2",
+   "eligible_count": 93,
+   "label_sources": [
+    "SIMULATION_TRUTH_ENGINEERING"
+   ],
+   "participant_id": "SIM_P000106",
+   "provenance_ids": [
+    "WEARABLE_SIM_FL_COHORT_V1/WEARABLE_SIM_V1/SIM_FL_SITE_05/SIM_P000106/ed97214e3542f764"
+   ],
+   "record_count": 93,
+   "refs_are_opaque": true,
+   "simulation_only": true,
+   "storage_location": "process memory only (never central SQLite)",
+   "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION",
+   "synthetic_negative": 73,
+   "synthetic_positive": 20
+  },
+  "SIM_FL_SITE_06": {
+   "all_quality_eligible": true,
+   "buffer_batch_ids": [
+    "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_06__a1c40334c3a4"
+   ],
+   "buffer_semantic_sha256": "726f3a1fecc40464018baab1ccb03ff229890428c1090cb2d6e9add8a46508c4",
+   "client_id": "SIM_FL_SITE_06",
+   "dataset_sha256": "a1c40334c3a415d7214c92a887ea39fa4d59b863cee87539cbe0b72ca8a25081",
+   "eligible_count": 93,
+   "label_sources": [
+    "SIMULATION_TRUTH_ENGINEERING"
+   ],
+   "participant_id": "SIM_P000107",
+   "provenance_ids": [
+    "WEARABLE_SIM_FL_COHORT_V1/WEARABLE_SIM_V1/SIM_FL_SITE_06/SIM_P000107/a1c40334c3a415d7"
+   ],
+   "record_count": 93,
+   "refs_are_opaque": true,
+   "simulation_only": true,
+   "storage_location": "process memory only (never central SQLite)",
+   "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION",
+   "synthetic_negative": 73,
+   "synthetic_positive": 20
+  },
+  "SIM_FL_SITE_07": {
+   "all_quality_eligible": true,
+   "buffer_batch_ids": [
+    "WEARABLE_SIM_FL_BATCH_0001__SIM_FL_SITE_07__9dbe85276d96"
+   ],
+   "buffer_semantic_sha256": "6c622c1dbad45859bf46d29a04e5438e91234feefa0f17f10a271477822ac642",
+   "client_id": "SIM_FL_SITE_07",
+   "dataset_sha256": "9dbe85276d96f4e2487d2cbac74093bc33c90483281fe217ae0b114403aa5790",
+   "eligible_count": 83,
+   "label_sources": [
+    "SIMULATION_TRUTH_ENGINEERING"
+   ],
+   "participant_id": "SIM_P000108",
+   "provenance_ids": [
+    "WEARABLE_SIM_FL_COHORT_V1/WEARABLE_SIM_V1/SIM_FL_SITE_07/SIM_P000108/9dbe85276d96f4e2"
+   ],
+   "record_count": 83,
+   "refs_are_opaque": true,
+   "simulation_only": true,
+   "storage_location": "process memory only (never central SQLite)",
+   "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION",
+   "synthetic_negative": 69,
+   "synthetic_positive": 14
+  }
+ },
+ "equals_run_1_semantic_digests": {
+  "SIM_FL_SITE_00": true,
+  "SIM_FL_SITE_01": true,
+  "SIM_FL_SITE_02": true,
+  "SIM_FL_SITE_03": true,
+  "SIM_FL_SITE_04": true,
+  "SIM_FL_SITE_05": true,
+  "SIM_FL_SITE_06": true,
+  "SIM_FL_SITE_07": true
+ },
+ "regenerated_in_audit_process": true,
+ "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION"
+}

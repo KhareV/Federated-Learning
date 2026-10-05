@@ -1,0 +1,38 @@
+{
+ "client_count": 8,
+ "client_ids": [
+  "SIM_FL_SITE_00",
+  "SIM_FL_SITE_01",
+  "SIM_FL_SITE_02",
+  "SIM_FL_SITE_03",
+  "SIM_FL_SITE_04",
+  "SIM_FL_SITE_05",
+  "SIM_FL_SITE_06",
+  "SIM_FL_SITE_07"
+ ],
+ "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+ "dataset_builder": "federated.virtual_client_source_v1.build_local_dataset",
+ "new_profile_constructors_in_new_modules": [],
+ "participant_ids": [
+  "SIM_P000101",
+  "SIM_P000102",
+  "SIM_P000103",
+  "SIM_P000104",
+  "SIM_P000105",
+  "SIM_P000106",
+  "SIM_P000107",
+  "SIM_P000108"
+ ],
+ "profiles_from": "simulation.fl_cohort_v1.cohort_profiles()",
+ "run_client_ids": [
+  "SIM_FL_SITE_00",
+  "SIM_FL_SITE_01",
+  "SIM_FL_SITE_02",
+  "SIM_FL_SITE_03",
+  "SIM_FL_SITE_04",
+  "SIM_FL_SITE_05",
+  "SIM_FL_SITE_06",
+  "SIM_FL_SITE_07"
+ ],
+ "second_client_universe": false
+}

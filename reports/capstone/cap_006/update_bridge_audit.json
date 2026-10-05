@@ -1,0 +1,130 @@
+{
+ "base_state_equal_frozen": true,
+ "existing_envelope_fields": [
+  "protocol_version",
+  "experiment_id",
+  "round_id",
+  "client_id",
+  "participant_id",
+  "session_id",
+  "base_global_state_sha256",
+  "client_dataset_sha256",
+  "state_transport_id",
+  "state_spec_sha256",
+  "examples_seen",
+  "update_sha256",
+  "engineering_only",
+  "source_dataset"
+ ],
+ "fl_init_frozen_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+ "forbidden_findings": [
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  []
+ ],
+ "new_wire_format": false,
+ "per_client_checks": {
+  "SIM_FL_SITE_00": {
+   "dtypes_match_base": true,
+   "envelope_fields_exact": true,
+   "floating_tensors": 77,
+   "integer_buffers": 15,
+   "integer_buffers_zero_delta": true,
+   "keys_match_base": true,
+   "shapes_match_base": true,
+   "update_digest_matches_payload": true
+  },
+  "SIM_FL_SITE_01": {
+   "dtypes_match_base": true,
+   "envelope_fields_exact": true,
+   "floating_tensors": 77,
+   "integer_buffers": 15,
+   "integer_buffers_zero_delta": true,
+   "keys_match_base": true,
+   "shapes_match_base": true,
+   "update_digest_matches_payload": true
+  },
+  "SIM_FL_SITE_02": {
+   "dtypes_match_base": true,
+   "envelope_fields_exact": true,
+   "floating_tensors": 77,
+   "integer_buffers": 15,
+   "integer_buffers_zero_delta": true,
+   "keys_match_base": true,
+   "shapes_match_base": true,
+   "update_digest_matches_payload": true
+  },
+  "SIM_FL_SITE_03": {
+   "dtypes_match_base": true,
+   "envelope_fields_exact": true,
+   "floating_tensors": 77,
+   "integer_buffers": 15,
+   "integer_buffers_zero_delta": true,
+   "keys_match_base": true,
+   "shapes_match_base": true,
+   "update_digest_matches_payload": true
+  },
+  "SIM_FL_SITE_04": {
+   "dtypes_match_base": true,
+   "envelope_fields_exact": true,
+   "floating_tensors": 77,
+   "integer_buffers": 15,
+   "integer_buffers_zero_delta": true,
+   "keys_match_base": true,
+   "shapes_match_base": true,
+   "update_digest_matches_payload": true
+  },
+  "SIM_FL_SITE_05": {
+   "dtypes_match_base": true,
+   "envelope_fields_exact": true,
+   "floating_tensors": 77,
+   "integer_buffers": 15,
+   "integer_buffers_zero_delta": true,
+   "keys_match_base": true,
+   "shapes_match_base": true,
+   "update_digest_matches_payload": true
+  },
+  "SIM_FL_SITE_06": {
+   "dtypes_match_base": true,
+   "envelope_fields_exact": true,
+   "floating_tensors": 77,
+   "integer_buffers": 15,
+   "integer_buffers_zero_delta": true,
+   "keys_match_base": true,
+   "shapes_match_base": true,
+   "update_digest_matches_payload": true
+  },
+  "SIM_FL_SITE_07": {
+   "dtypes_match_base": true,
+   "envelope_fields_exact": true,
+   "floating_tensors": 77,
+   "integer_buffers": 15,
+   "integer_buffers_zero_delta": true,
+   "keys_match_base": true,
+   "shapes_match_base": true,
+   "update_digest_matches_payload": true
+  }
+ },
+ "produce_update_equals_projection": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ],
+ "submission_projection_map": {
+  "base_state_digest": "base_global_state_sha256",
+  "client_id": "client_id",
+  "examples_seen": "examples_seen",
+  "round_id": "round_id",
+  "update_digest": "update_sha256"
+ }
+}

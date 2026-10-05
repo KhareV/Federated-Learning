@@ -1,0 +1,19 @@
+{
+ "candidate_set_imported": false,
+ "client_uses_the_existing_function_object": true,
+ "function": "federated.model_v2_fedprox.train_local_fedprox_epoch_v2",
+ "mu": 0.1,
+ "mu_source": "artifacts/FEDPROX_MU_V2.lock.json selected_mu",
+ "smoke": {
+  "aggregation_performed": false,
+  "client_id": "SIM_FL_SITE_00",
+  "examples_seen": 93,
+  "local_training_calls": {
+   "train_local_epoch_v2": 0,
+   "train_local_fedprox_epoch_v2": 1
+  },
+  "metrics_computed": false,
+  "mu": 0.1,
+  "update_finite": true
+ }
+}
