@@ -25,7 +25,7 @@ EXPECTED_ENTRY = "9db76b482678114ac5c22f3f91a3f55ccb159e17"
 ADDITIVE_PREFIXES = (
     "manifests/capstone/", "configs/capstone/", "artifacts/capstone/", "docs/capstone/",
     "contracts/capstone/", "reports/capstone/cap_005/", "tests/test_capstone_", "tests/capstone_",
-    "scripts/cap_005_", "scripts/run_capstone_frontend_e2e.py", "frontend/",
+    "scripts/cap_005_", "scripts/run_capstone_frontend_e2e.py", "scripts/verify_capstone_ui_v1.py", "frontend/",
 )
 # existing tracked non-frontend files CAP-005 may modify
 MODIFIABLE = (
