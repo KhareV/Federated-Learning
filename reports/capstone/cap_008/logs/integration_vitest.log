@@ -1,0 +1,11 @@
+
+ RUN  v3.2.7 /Users/Home/Downloads/miniproject/frontend
+
+ ✓ src/lib/product/federation/__tests__/real-backend.integration.test.ts (1 test) 28567ms
+   ✓ frontend federation client against the REAL CAP-007 DEMO backend > overview -> clients -> create -> WebSocket -> start -> 3 rounds -> candidate -> rounds -> models  28566ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  01:49:04
+   Duration  28.74s (transform 27ms, setup 0ms, collect 30ms, tests 28.57s, environment 0ms, prepare 37ms)
+

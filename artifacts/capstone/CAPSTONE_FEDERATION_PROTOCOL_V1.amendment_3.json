@@ -1,0 +1,19 @@
+{
+ "amendment_id": "CAPSTONE_FEDERATION_PROTOCOL_V1_AMENDMENT_3",
+ "change": "test_no_candidate_reference_exists_in_the_frontend_or_the_inference_service_sources scans frontend/src, api and src for CAPSTONE_FL_CANDIDATE. It now skips exactly the CAP-008 federation/model UX paths (frontend/src/lib/product/federation/, frontend/src/lib/components/product/federation/, frontend/src/routes/app/federation/, frontend/src/routes/app/models/), which must name the candidate namespace to display the registry. Every other frontend path (monitoring, CAP-003 client, shell, device, sessions), api/ and src/ are still scanned. No criterion text changed.",
+ "defect": "Historical guard incompatibility found by the CAP-008 full regression: the CAP-007 frontend scan assumed the frontend would never display candidates (CAP-008 is the designated federation-UX owner). Evidence: reports/capstone/cap_008/logs/pytest_full.log (first run).",
+ "files": {
+  "tests/test_capstone_federation_isolation.py": {
+   "new_sha256": "f360e1bb10223de9578f664dfc59fb9cbf5027db9debd6e740b62e094c157e78",
+   "old_sha256": "abfb1acc03e4bc9f95a0c383d60b4d66e98233de247ffa6f4376bcb2a9ae9daf"
+  }
+ },
+ "freeze_commit": "772b178",
+ "made_before": "the recorded CAPG6 criteria evaluation",
+ "made_during": "CAP-008 (after the CAP-007 result commit 711a4a0 and after the CAP-008 method freeze 65fdf6f), in its own commit before the CAP-008 gate evaluation",
+ "previous_amendment": "CAPSTONE_FEDERATION_PROTOCOL_V1_AMENDMENT_2",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical",
+  "capg6_criteria_text": "identical"
+ }
+}

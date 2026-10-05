@@ -1,0 +1,94 @@
+{
+ "auth_mode": "DEMO (explicit, acknowledged); Clerk not initialised",
+ "backend_pid_excluded": 80572,
+ "frontend_build": {
+  "adapter": "@sveltejs/adapter-static (production build served by vite preview)",
+  "build_log_tail": " const W = 600, H = height;\n                               ^\n20:   const PAD = { top: 14, right: 20, bottom: 28, left: 36 };\n21:   const pw = W - PAD.left - PAD.right;\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n",
+  "build_output": {
+   "files": 199,
+   "sha256": "4546936cbb63b7d567b2dd3bd3d14a604a79a6f3c6a3f8876ed3fb667bff2832"
+  },
+  "source": {
+   "files": 206,
+   "sha256": "d7c8258442de084ee8c97e21259773ee0b989da8853a484ae0546b91771c3e99"
+  }
+ },
+ "internet": "blocked by --host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost",
+ "product_backend": {
+  "auth_provider": "DEMO",
+  "demo_mode": true,
+  "federation_runtime": "ENABLED_ENGINEERING",
+  "hardware_mode": "SIMULATED_ONLY",
+  "model_id": "MODEL_V2_FINAL",
+  "persistence_mode": "SQLITE",
+  "physical_hardware_available": false,
+  "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_2",
+  "software_system": "SOFTWARE_SYSTEM_V2"
+ },
+ "replay": {
+  "badge": "REPLAY \u00b7 NO TRAINING IS EXECUTING",
+  "candidateCountAfter": 1,
+  "candidateCountBefore": 1,
+  "final": {
+   "agg": "AUTHORITATIVE AGGREGATE: PLAIN",
+   "candidate": "CandidateCAPSTONE_FL_CANDIDATE_0001ParentFL_INIT_V2State digest3f0b7762\u202670e4copy ValidationPASSEDChecks reported passedSTATE_FINITE, STATE_SPEC_MATCHES_BASE, UPDATE_DIGESTS_RECONCILE, ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE, BASE_STATE_LINEAGE_VERIFIED GovernanceACCEPTED_TO_SANDBOXSandboxIN_SANDBOXproduction_deployedFALSE",
+   "clientStates": [
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED"
+   ],
+   "rounds": [
+    "Round 1: COMPLETED \u00b7 accepted 8/8 \u00b7 authoritative aggregate:",
+    "Round 2: COMPLETED \u00b7 accepted 8/8 \u00b7 authoritative aggregate:",
+    "Round 3: COMPLETED \u00b7 accepted 8/8 \u00b7 authoritative aggregate:"
+   ],
+   "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+   "status": "COMPLETED \u00b7 REPLAY \u00b7 FEDAVG \u00b7 round 3/3 \u00b7 202 events",
+   "streamError": false,
+   "submitted": "24",
+   "submittedClients": 8,
+   "trainingClients": 0,
+   "updates": "24"
+  },
+  "helpSaysNoTraining": true,
+  "historicalCandidate": "HISTORICAL EVENT REPLAY \u2014 NO NEW CANDIDATE CREATED.",
+  "note": "REPLAY \u2014 NO TRAINING IS EXECUTING. The events below are a faithful re-emission of a previous LIVE_RUN.",
+  "overviewCandidateAfter": 1,
+  "overviewCandidateBefore": 1,
+  "replayRunId": "FEDRUN-C66287443671",
+  "replayedEventLabels": true,
+  "run": {
+   "algorithm": "FEDAVG",
+   "base_model_id": "FL_INIT_V2",
+   "candidate_ids": [],
+   "client_ids": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "completed_at_us": 1791231609500150,
+   "current_round": 3,
+   "engineering_only": true,
+   "federation_protocol_id": "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+   "planned_rounds": 3,
+   "run_id": "FEDRUN-C66287443671",
+   "run_type": "REPLAY",
+   "secagg_mode": "SECAGG_SHADOW",
+   "started_at_us": 1791231609474852,
+   "status": "COMPLETED"
+  },
+  "step": "replay",
+  "trainingClaims": false,
+  "updateReady": "24"
+ }
+}

@@ -1,0 +1,15 @@
+EIGHT_HOSPITALS_WORDING True × clients page > shows the eight synthetic logical clients with the synthetic banner and no raw data or labels 11ms
+FAKE_ACCURACY_METRIC True × federation product source audit > has no fake dynamic metric: no accuracy/F1/AUPRC/AUROC/loss, no random or timer-driven progress 4ms
+SMOOTH_PROGRESS_INVENTED True × federation product source audit > has no fake dynamic metric: no accuracy/F1/AUPRC/AUROC/loss, no random or timer-driven progress 3ms
+CANDIDATE_SHOWN_AS_RELEASED_DEFAULT True × rounds, privacy and models pages > models: two separated namespaces, MODEL_V2_FINAL RELEASED_DEFAULT, candidate production_deployed FALSE, no deploy/promote controls 7ms
+DEPLOY_BUTTON_ADDED True × federation product source audit > has no deploy, promote, default, inference or candidate-load control or call 3ms
+CANDIDATE_INFERENCE_REQUEST_ADDED True × federation product source audit > has no deploy, promote, default, inference or candidate-load control or call 3ms
+SECAGG_PAGE_CLAIMS_DIFFERENTIAL_PRIVACY True × rounds, privacy and models pages > privacy: round-1-only shadow wording, plain authoritative aggregation, limitations, no DP/anonymity claim 5ms
+SECAGG_SHOWN_AS_AUTHORITATIVE_AGGREGATION True × live page > renders a full SECAGG_SHADOW run from events only: PLAIN aggregate, shadow verified, 24 updates, candidate sandbox 22ms
+WEBSOCKET_TOKEN_IN_URL True × federation product source audit > never puts a token, cookie, user id or secret in a WebSocket URL 2ms
+RUN_FORM_EXPOSES_MU True × federation product source audit > has no user-editable control for model, base, checkpoint, candidate, hyperparameters or counts 4ms
+REPLAY_UI_SAYS_TRAINING_IN_PROGRESS True × live page > REPLAY: persistent no-training badge, historical candidate wording, no new candidate claim 15ms
+MONITORING_EVENT_ACCEPTED_BY_FEDERATION_REDUCER True × federation live model > rejects sequence gaps, duplicates, foreign run ids and malformed events and then stays failed 3ms
+CANDIDATE_COUNT_INCREMENTED_FROM_REPLAY_EVENT True × federation live model > REPLAY: candidate events are historical and create no new candidate 3ms
+MODEL_V2_FINAL_REPLACED_BY_CANDIDATE_IN_MONITORING_LANE True × federation overview + run configuration > shows real overview values, two-lane architecture and exactly three user-controlled options 23ms
+{"all_caught": true, "all_restored": true}

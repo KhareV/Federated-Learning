@@ -1,0 +1,41 @@
+{
+ "auth_mode": "DEMO (explicit, acknowledged); Clerk not initialised",
+ "backend_pid_excluded": 80572,
+ "console_errors": [],
+ "frontend_build": {
+  "adapter": "@sveltejs/adapter-static (production build served by vite preview)",
+  "build_log_tail": " const W = 600, H = height;\n                               ^\n20:   const PAD = { top: 14, right: 20, bottom: 28, left: 36 };\n21:   const pw = W - PAD.left - PAD.right;\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n",
+  "build_output": {
+   "files": 199,
+   "sha256": "4546936cbb63b7d567b2dd3bd3d14a604a79a6f3c6a3f8876ed3fb667bff2832"
+  },
+  "source": {
+   "files": 206,
+   "sha256": "d7c8258442de084ee8c97e21259773ee0b989da8853a484ae0546b91771c3e99"
+  }
+ },
+ "internet": "blocked by --host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost",
+ "network": {
+  "external": [],
+  "origins": [
+   "http://127.0.0.1:64317"
+  ],
+  "requestCount": 2065,
+  "websockets": [
+   "ws://127.0.0.1:64317/product/v1/federation/runs/FEDRUN-114E9BD88D2C/live",
+   "ws://127.0.0.1:64317/product/v1/federation/runs/FEDRUN-C66287443671/live",
+   "ws://127.0.0.1:64317/product/v1/federation/runs/FEDRUN-BF4C34E5EAA0/live"
+  ]
+ },
+ "product_backend": {
+  "auth_provider": "DEMO",
+  "demo_mode": true,
+  "federation_runtime": "ENABLED_ENGINEERING",
+  "hardware_mode": "SIMULATED_ONLY",
+  "model_id": "MODEL_V2_FINAL",
+  "persistence_mode": "SQLITE",
+  "physical_hardware_available": false,
+  "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_2",
+  "software_system": "SOFTWARE_SYSTEM_V2"
+ }
+}

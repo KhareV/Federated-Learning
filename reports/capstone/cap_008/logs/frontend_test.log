@@ -1,0 +1,37 @@
+
+> nhm-frontend@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /Users/Home/Downloads/miniproject/frontend
+
+ ✓ src/lib/product/federation/__tests__/static-audit.test.ts (8 tests) 10ms
+ ✓ src/lib/product/federation/__tests__/events-model.test.ts (11 tests) 20ms
+ ↓ src/lib/product/federation/__tests__/real-backend.integration.test.ts (1 test | 1 skipped)
+ ✓ src/lib/dashboard/__tests__/legacy-claims.test.ts (8 tests) 70ms
+ ✓ src/lib/product/__tests__/claims-and-copy.test.ts (23 tests) 41ms
+ ✓ src/lib/product/__tests__/api-auth.test.ts (11 tests) 12ms
+ ✓ src/lib/product/__tests__/live-model.test.ts (21 tests) 14ms
+ ✓ src/lib/dashboard/__tests__/state-presentation.test.ts (15 tests) 3ms
+ ✓ src/lib/api/__tests__/nhm-v1.test.ts (11 tests) 5ms
+ ✓ src/lib/dashboard/__tests__/replay.test.ts (22 tests) 32ms
+ ✓ src/lib/dashboard/__tests__/session.test.ts (8 tests) 3ms
+ ✓ src/lib/dashboard/__tests__/model-neutral-copy.test.ts (3 tests) 2ms
+1:51:52 am [vite-plugin-svelte] src/lib/components/dashboard/MultiLine.svelte:19:20 This reference only captures the initial value of `height`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+ ↓ src/lib/product/__tests__/real-backend.integration.test.ts (1 test | 1 skipped)
+ ↓ src/lib/dashboard/__tests__/v2-runtime-e2e.test.ts (1 test | 1 skipped)
+ ✓ src/routes/monitoring/__tests__/page.render.test.ts (1 test) 32ms
+ ✓ src/lib/product/federation/__tests__/components.test.ts (15 tests) 265ms
+ ✓ src/lib/product/__tests__/socket-store.test.ts (7 tests) 719ms
+   ✓ ProductStore flows (fake backend: unit scope only) > live events render into state; reconnect replays from 0 without double counting  702ms
+ ✓ src/lib/product/federation/__tests__/store-api.test.ts (8 tests) 757ms
+   ✓ federation store > consumes a stream, reconnect resets and rebuilds from sequence 0 without double counting  717ms
+ ✓ src/lib/product/__tests__/components.test.ts (15 tests) 137ms
+
+ Test Files  16 passed | 3 skipped (19)
+      Tests  187 passed | 3 skipped (190)
+   Start at  01:51:51
+   Duration  5.45s (transform 3.86s, setup 0ms, collect 8.85s, tests 2.12s, environment 3.40s, prepare 836ms)
+
+exit=0

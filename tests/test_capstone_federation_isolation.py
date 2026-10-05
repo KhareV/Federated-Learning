@@ -24,6 +24,7 @@ from tests.capstone_federation_support import (
     poll_run,
 )
 
+CAP008_FEDERATION_UI = ("/lib/product/federation/", "/lib/components/product/federation/", "/routes/app/federation/", "/routes/app/models/")
 NEW_SOURCES = [
     "product/federation/client_v2.py", "product/federation/service.py", "product/federation/events.py",
     "product/federation/journal.py", "product/federation/recovery.py", "product/federation/execution_binding.py",
@@ -47,7 +48,8 @@ def test_the_released_default_runtime_is_unchanged_and_names_no_candidate() -> N
 def test_no_candidate_reference_exists_in_the_frontend_or_the_inference_service_sources() -> None:
     for tree in ("frontend/src", "api", "src"):
         for source in (ROOT / tree).rglob("*"):
-            if source.is_file() and source.suffix in (".py", ".ts", ".svelte", ".js") and "product_app_v1_2" not in source.name:
+            federation_ui = any(part in source.as_posix() for part in CAP008_FEDERATION_UI)  # CAP-008 federation/model UX (amendment 3)
+            if source.is_file() and source.suffix in (".py", ".ts", ".svelte", ".js") and "product_app_v1_2" not in source.name and not federation_ui:
                 assert "CAPSTONE_FL_CANDIDATE" not in source.read_text(errors="ignore"), source
 
 

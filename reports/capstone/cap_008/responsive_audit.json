@@ -1,0 +1,171 @@
+{
+ "responsive": {
+  "step": "responsive",
+  "widths": {
+   "1024": {
+    "/app/federation": {
+     "fitsViewport": true,
+     "innerWidth": 1024,
+     "overflowing": [],
+     "scrollWidth": 1024
+    },
+    "/app/federation/clients": {
+     "fitsViewport": true,
+     "innerWidth": 1024,
+     "overflowing": [],
+     "scrollWidth": 1024
+    },
+    "/app/federation/live": {
+     "fitsViewport": true,
+     "innerWidth": 1024,
+     "overflowing": [],
+     "scrollWidth": 1024
+    },
+    "/app/federation/privacy": {
+     "fitsViewport": true,
+     "innerWidth": 1024,
+     "overflowing": [],
+     "scrollWidth": 1024
+    },
+    "/app/federation/rounds": {
+     "fitsViewport": true,
+     "innerWidth": 1024,
+     "overflowing": [],
+     "scrollWidth": 1024
+    },
+    "/app/models": {
+     "fitsViewport": true,
+     "innerWidth": 1024,
+     "overflowing": [],
+     "scrollWidth": 1024
+    }
+   },
+   "1440": {
+    "/app/federation": {
+     "fitsViewport": true,
+     "innerWidth": 1440,
+     "overflowing": [],
+     "scrollWidth": 1440
+    },
+    "/app/federation/clients": {
+     "fitsViewport": true,
+     "innerWidth": 1440,
+     "overflowing": [],
+     "scrollWidth": 1440
+    },
+    "/app/federation/live": {
+     "fitsViewport": true,
+     "innerWidth": 1440,
+     "overflowing": [],
+     "scrollWidth": 1440
+    },
+    "/app/federation/privacy": {
+     "fitsViewport": true,
+     "innerWidth": 1440,
+     "overflowing": [],
+     "scrollWidth": 1440
+    },
+    "/app/federation/rounds": {
+     "fitsViewport": true,
+     "innerWidth": 1440,
+     "overflowing": [],
+     "scrollWidth": 1440
+    },
+    "/app/models": {
+     "fitsViewport": true,
+     "innerWidth": 1440,
+     "overflowing": [],
+     "scrollWidth": 1440
+    }
+   },
+   "390": {
+    "/app/federation": {
+     "fitsViewport": true,
+     "innerWidth": 390,
+     "overflowing": [],
+     "scrollWidth": 390
+    },
+    "/app/federation/clients": {
+     "fitsViewport": true,
+     "innerWidth": 390,
+     "overflowing": [],
+     "scrollWidth": 390
+    },
+    "/app/federation/live": {
+     "fitsViewport": true,
+     "innerWidth": 390,
+     "overflowing": [],
+     "scrollWidth": 390
+    },
+    "/app/federation/privacy": {
+     "fitsViewport": true,
+     "innerWidth": 390,
+     "overflowing": [],
+     "scrollWidth": 390
+    },
+    "/app/federation/rounds": {
+     "fitsViewport": true,
+     "innerWidth": 390,
+     "overflowing": [],
+     "scrollWidth": 390
+    },
+    "/app/models": {
+     "fitsViewport": true,
+     "innerWidth": 390,
+     "overflowing": [],
+     "scrollWidth": 390
+    }
+   },
+   "768": {
+    "/app/federation": {
+     "fitsViewport": true,
+     "innerWidth": 768,
+     "overflowing": [],
+     "scrollWidth": 768
+    },
+    "/app/federation/clients": {
+     "fitsViewport": true,
+     "innerWidth": 768,
+     "overflowing": [],
+     "scrollWidth": 768
+    },
+    "/app/federation/live": {
+     "fitsViewport": true,
+     "innerWidth": 768,
+     "overflowing": [],
+     "scrollWidth": 768
+    },
+    "/app/federation/privacy": {
+     "fitsViewport": true,
+     "innerWidth": 768,
+     "overflowing": [],
+     "scrollWidth": 768
+    },
+    "/app/federation/rounds": {
+     "fitsViewport": true,
+     "innerWidth": 768,
+     "overflowing": [],
+     "scrollWidth": 768
+    },
+    "/app/models": {
+     "fitsViewport": true,
+     "innerWidth": 768,
+     "overflowing": [],
+     "scrollWidth": 768
+    }
+   }
+  }
+ },
+ "screenshots": [
+  "app_1440.png",
+  "federation_1440.png",
+  "live_1024.png",
+  "live_1440.png",
+  "live_390.png",
+  "live_768.png",
+  "live_completed_1440.png",
+  "models_1440.png",
+  "privacy_1440.png",
+  "replay_1440.png"
+ ]
+}

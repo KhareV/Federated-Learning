@@ -1,0 +1,22 @@
+{
+ "accessibility": {
+  "buttonsNamed": true,
+  "clientGridLabelled": true,
+  "h1": 1,
+  "headings": 6,
+  "liveRegion": true,
+  "mainLandmark": true,
+  "runningAnimations": 0,
+  "selectsLabelled": true,
+  "skipLink": true,
+  "stateAlsoText": true,
+  "statusRole": true,
+  "step": "accessibility"
+ },
+ "formal_wcag_certification_claimed": false,
+ "keyboard": {
+  "focusVisibleCssRule": true,
+  "focusable": true,
+  "step": "keyboard"
+ }
+}

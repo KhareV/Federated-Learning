@@ -1,0 +1,701 @@
+{
+ "origin": "http://127.0.0.1:64317",
+ "steps": [
+  {
+   "step": "app-overview",
+   "path": "/app",
+   "federationEnabled": true,
+   "notYetEnabled": false,
+   "releasedModel": true,
+   "candidatesOnOverview": "0"
+  },
+  {
+   "step": "federation-overview",
+   "preparingSeen": true,
+   "clientsReady": true,
+   "banners": [
+    [
+     "ENGINEERING FEDERATION DEMO",
+     true
+    ],
+    [
+     "SIMULATED CLIENTS",
+     true
+    ],
+    [
+     "NOT CLINICAL",
+     true
+    ],
+    [
+     "NOT DEPLOYED",
+     true
+    ]
+   ],
+   "lanes": true,
+   "overviewBefore": {
+    "federation_runtime": "ENABLED_ENGINEERING",
+    "engineering_only": true,
+    "scientific_evidence": false,
+    "production_deployed": false,
+    "banner": "FL ENGINEERING DEMO - synthetic virtual clients on one laptop; engineering candidate only; no scientific evidence; nothing is deployed",
+    "client_count": 8,
+    "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+    "active_live_run": false,
+    "candidate_count": 0,
+    "released_model_id": "MODEL_V2_FINAL",
+    "secagg_claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY"
+   }
+  },
+  {
+   "step": "configuration",
+   "selects": 3,
+   "inputs": 0,
+   "runTypes": [
+    "LIVE_RUN",
+    "REPLAY"
+   ],
+   "algorithms": [
+    "FEDAVG",
+    "FEDPROX"
+   ],
+   "modes": [
+    "PLAIN",
+    "SECAGG_SHADOW"
+   ],
+   "fixed": "Scenario\nFL_SINGLE_RUN\nClients\n8\nRounds\n3\nBase\nFL_INIT_V2",
+   "chosen": {
+    "r": "LIVE_RUN",
+    "a": "FEDAVG",
+    "m": "SECAGG_SHADOW"
+   },
+   "roundOneShadowWording": true
+  },
+  {
+   "step": "live-run-1",
+   "runId": "FEDRUN-114E9BD88D2C",
+   "liveUrl": "/app/federation/live?run=FEDRUN-114E9BD88D2C",
+   "final": {
+    "status": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 202 events",
+    "updates": "24",
+    "submitted": "24",
+    "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+    "agg": "AUTHORITATIVE AGGREGATE: PLAIN",
+    "rounds": [
+     "Round 1: COMPLETED · accepted 8/8 · authoritative aggregate:",
+     "Round 2: COMPLETED · accepted 8/8 · authoritative aggregate:",
+     "Round 3: COMPLETED · accepted 8/8 · authoritative aggregate:"
+    ],
+    "clientStates": [
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED"
+    ],
+    "submittedClients": 8,
+    "trainingClients": 0,
+    "candidate": "CandidateCAPSTONE_FL_CANDIDATE_0001ParentFL_INIT_V2State digest3f0b7762…70e4copy ValidationPASSEDChecks reported passedSTATE_FINITE, STATE_SPEC_MATCHES_BASE, UPDATE_DIGESTS_RECONCILE, ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE, BASE_STATE_LINEAGE_VERIFIED GovernanceACCEPTED_TO_SANDBOXSandboxIN_SANDBOXproduction_deployedFALSE",
+    "streamError": false
+   },
+   "samplesCount": 103,
+   "sampleSketch": [
+    {
+     "t": 15511,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 1/3 ",
+     "updates": "0",
+     "submitted": "0",
+     "round": 1
+    },
+    {
+     "t": 16724,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 1/3 ",
+     "updates": "1",
+     "submitted": "1",
+     "round": 1
+    },
+    {
+     "t": 17936,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 1/3 ",
+     "updates": "3",
+     "submitted": "3",
+     "round": 1
+    },
+    {
+     "t": 19148,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 1/3 ",
+     "updates": "5",
+     "submitted": "5",
+     "round": 1
+    },
+    {
+     "t": 20362,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 1/3 ",
+     "updates": "7",
+     "submitted": "7",
+     "round": 1
+    },
+    {
+     "t": 21575,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 2/3 ",
+     "updates": "9",
+     "submitted": "9",
+     "round": 2
+    },
+    {
+     "t": 22788,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 2/3 ",
+     "updates": "11",
+     "submitted": "11",
+     "round": 2
+    },
+    {
+     "t": 23999,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 2/3 ",
+     "updates": "12",
+     "submitted": "12",
+     "round": 2
+    },
+    {
+     "t": 25213,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 2/3 ",
+     "updates": "14",
+     "submitted": "14",
+     "round": 2
+    },
+    {
+     "t": 26425,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 3/3 ",
+     "updates": "16",
+     "submitted": "16",
+     "round": 3
+    },
+    {
+     "t": 27638,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 3/3 ",
+     "updates": "18",
+     "submitted": "18",
+     "round": 3
+    },
+    {
+     "t": 28851,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 3/3 ",
+     "updates": "20",
+     "submitted": "20",
+     "round": 3
+    },
+    {
+     "t": 30066,
+     "status": "RUNNING · LIVE_RUN · FEDAVG · round 3/3 ",
+     "updates": "22",
+     "submitted": "22",
+     "round": 3
+    }
+   ],
+   "sawTraining": true,
+   "maxClientsSubmittedAtOnce": 8,
+   "sawShadowRunningLive": true,
+   "sawShadowVerifiedLive": true,
+   "secagg_sequence_text": "SHADOW_RUNNING → SHADOW_VERIFIED",
+   "roundsSeen": [
+    "Round 1:",
+    "Round 2:",
+    "Round 3:"
+   ],
+   "aggregationModesSeen": [
+    "PLAIN"
+   ],
+   "websocketUrls": [
+    "ws://127.0.0.1:64317/product/v1/federation/runs/FEDRUN-114E9BD88D2C/live"
+   ],
+   "websocketUrlsCarryNoSecret": true,
+   "apiRun": {
+    "run_id": "FEDRUN-114E9BD88D2C",
+    "run_type": "LIVE_RUN",
+    "base_model_id": "FL_INIT_V2",
+    "federation_protocol_id": "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+    "algorithm": "FEDAVG",
+    "client_ids": [
+     "SIM_FL_SITE_00",
+     "SIM_FL_SITE_01",
+     "SIM_FL_SITE_02",
+     "SIM_FL_SITE_03",
+     "SIM_FL_SITE_04",
+     "SIM_FL_SITE_05",
+     "SIM_FL_SITE_06",
+     "SIM_FL_SITE_07"
+    ],
+    "planned_rounds": 3,
+    "current_round": 3,
+    "started_at_us": 1791231592335623,
+    "completed_at_us": 1791231607740138,
+    "status": "COMPLETED",
+    "secagg_mode": "SECAGG_SHADOW",
+    "candidate_ids": [
+     "CAPSTONE_FL_CANDIDATE_0001"
+    ],
+    "engineering_only": true
+   },
+   "apiRounds": [
+    {
+     "run_id": "FEDRUN-114E9BD88D2C",
+     "round_id": 1,
+     "state": "COMPLETED",
+     "participating_client_ids": [
+      "SIM_FL_SITE_00",
+      "SIM_FL_SITE_01",
+      "SIM_FL_SITE_02",
+      "SIM_FL_SITE_03",
+      "SIM_FL_SITE_04",
+      "SIM_FL_SITE_05",
+      "SIM_FL_SITE_06",
+      "SIM_FL_SITE_07"
+     ],
+     "base_state_digest": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+     "algorithm": "FEDAVG",
+     "accepted_update_count": 8,
+     "candidate_id": null
+    },
+    {
+     "run_id": "FEDRUN-114E9BD88D2C",
+     "round_id": 2,
+     "state": "COMPLETED",
+     "participating_client_ids": [
+      "SIM_FL_SITE_00",
+      "SIM_FL_SITE_01",
+      "SIM_FL_SITE_02",
+      "SIM_FL_SITE_03",
+      "SIM_FL_SITE_04",
+      "SIM_FL_SITE_05",
+      "SIM_FL_SITE_06",
+      "SIM_FL_SITE_07"
+     ],
+     "base_state_digest": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+     "algorithm": "FEDAVG",
+     "accepted_update_count": 8,
+     "candidate_id": null
+    },
+    {
+     "run_id": "FEDRUN-114E9BD88D2C",
+     "round_id": 3,
+     "state": "COMPLETED",
+     "participating_client_ids": [
+      "SIM_FL_SITE_00",
+      "SIM_FL_SITE_01",
+      "SIM_FL_SITE_02",
+      "SIM_FL_SITE_03",
+      "SIM_FL_SITE_04",
+      "SIM_FL_SITE_05",
+      "SIM_FL_SITE_06",
+      "SIM_FL_SITE_07"
+     ],
+     "base_state_digest": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+     "algorithm": "FEDAVG",
+     "accepted_update_count": 8,
+     "candidate_id": "CAPSTONE_FL_CANDIDATE_0001"
+    }
+   ]
+  },
+  {
+   "step": "models",
+   "registryApi": {
+    "registry_id": "CAPSTONE_MODEL_REGISTRY_V1",
+    "released_default_model_id": "MODEL_V2_FINAL",
+    "released_scientific": [
+     {
+      "model_id": "MODEL_V2_FINAL",
+      "namespace": "RELEASED_SCIENTIFIC",
+      "role": "RELEASED_DEFAULT"
+     },
+     {
+      "model_id": "MODEL_V1",
+      "namespace": "RELEASED_SCIENTIFIC",
+      "role": "ROLLBACK_REFERENCE"
+     }
+    ],
+    "capstone_fl_candidates": [
+     {
+      "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+      "parent_model_id": "FL_INIT_V2",
+      "federation_run_id": "FEDRUN-114E9BD88D2C",
+      "round": 3,
+      "algorithm": "FEDAVG",
+      "client_count": 8,
+      "created_at_us": 1791231607734842,
+      "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+      "validation_status": "PASSED",
+      "governance_status": "ACCEPTED_TO_SANDBOX",
+      "sandbox_status": "IN_SANDBOX",
+      "production_deployed": false,
+      "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE"
+     }
+    ]
+   },
+   "dom": {
+    "released": "MODEL_V2_FINAL\nrole: RELEASED_DEFAULT\nMODEL_V1\nrole: ROLLBACK_REFERENCE",
+    "candidates": 1,
+    "productionDeployed": [
+     "FALSE"
+    ],
+    "accepted": true,
+    "buttons": []
+   }
+  },
+  {
+   "step": "privacy",
+   "roundOneOnly": true,
+   "shadowWording": true,
+   "authoritativePlain": true,
+   "authoritativeAggregateLine": "AUTHORITATIVE AGGREGATE: PLAIN",
+   "secaggLine": "ROUND-1 SECAGG+ SHADOW (from the event stream): SHADOW_VERIFIED (SHADOW_RUNNING → SHADOW_VERIFIED)",
+   "claims": {
+    "differentialPrivacyClaimed": false,
+    "noDifferentialPrivacyStated": true,
+    "anonymityClaimed": false,
+    "noAnonymityStated": true
+   }
+  },
+  {
+   "step": "reload-persistence",
+   "roundCards": [
+    "Round 1 State COMPLETED Base state digest 6a2923ca…572f copy Algorithm FEDAVG Accepted updates 8 / 8 Candidate NONE",
+    "Round 2 State COMPLETED Base state digest 40cee065…c0a1 copy Algorithm FEDAVG Accepted updates 8 / 8 Candidate NONE",
+    "Round 3 State COMPLETED Base state digest 6237c0b1…d2ef copy Algorithm FEDAVG Accepted updates 8 / 8 Candidate CAPSTONE_FL_CANDIDATE_0001"
+   ],
+   "lineage": "FL_INIT_V2 6a2923ca…572fcopy ROUND 1 GLOBAL STATE 40cee065…c0a1copyROUND 2 GLOBAL STATE 6237c0b1…d2efcopyROUND 3 FINAL STATE (digest shown on the candidate) CAPSTONE_FL_CANDIDATE_0001",
+   "lineageMentionsReleasedModel": false,
+   "candidatesAfterReload": 1,
+   "runStillListed": true
+  },
+  {
+   "step": "replay",
+   "replayRunId": "FEDRUN-C66287443671",
+   "helpSaysNoTraining": true,
+   "badge": "REPLAY · NO TRAINING IS EXECUTING",
+   "note": "REPLAY — NO TRAINING IS EXECUTING. The events below are a faithful re-emission of a previous LIVE_RUN.",
+   "historicalCandidate": "HISTORICAL EVENT REPLAY — NO NEW CANDIDATE CREATED.",
+   "trainingClaims": false,
+   "final": {
+    "status": "COMPLETED · REPLAY · FEDAVG · round 3/3 · 202 events",
+    "updates": "24",
+    "submitted": "24",
+    "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+    "agg": "AUTHORITATIVE AGGREGATE: PLAIN",
+    "rounds": [
+     "Round 1: COMPLETED · accepted 8/8 · authoritative aggregate:",
+     "Round 2: COMPLETED · accepted 8/8 · authoritative aggregate:",
+     "Round 3: COMPLETED · accepted 8/8 · authoritative aggregate:"
+    ],
+    "clientStates": [
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED"
+    ],
+    "submittedClients": 8,
+    "trainingClients": 0,
+    "candidate": "CandidateCAPSTONE_FL_CANDIDATE_0001ParentFL_INIT_V2State digest3f0b7762…70e4copy ValidationPASSEDChecks reported passedSTATE_FINITE, STATE_SPEC_MATCHES_BASE, UPDATE_DIGESTS_RECONCILE, ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE, BASE_STATE_LINEAGE_VERIFIED GovernanceACCEPTED_TO_SANDBOXSandboxIN_SANDBOXproduction_deployedFALSE",
+    "streamError": false
+   },
+   "run": {
+    "run_id": "FEDRUN-C66287443671",
+    "run_type": "REPLAY",
+    "base_model_id": "FL_INIT_V2",
+    "federation_protocol_id": "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+    "algorithm": "FEDAVG",
+    "client_ids": [
+     "SIM_FL_SITE_00",
+     "SIM_FL_SITE_01",
+     "SIM_FL_SITE_02",
+     "SIM_FL_SITE_03",
+     "SIM_FL_SITE_04",
+     "SIM_FL_SITE_05",
+     "SIM_FL_SITE_06",
+     "SIM_FL_SITE_07"
+    ],
+    "planned_rounds": 3,
+    "current_round": 3,
+    "started_at_us": 1791231609474852,
+    "completed_at_us": 1791231609500150,
+    "status": "COMPLETED",
+    "secagg_mode": "SECAGG_SHADOW",
+    "candidate_ids": [],
+    "engineering_only": true
+   },
+   "candidateCountBefore": 1,
+   "candidateCountAfter": 1,
+   "overviewCandidateBefore": 1,
+   "overviewCandidateAfter": 1,
+   "updateReady": "24",
+   "replayedEventLabels": true
+  },
+  {
+   "step": "refresh-during-run",
+   "runId": "FEDRUN-BF4C34E5EAA0",
+   "urlKeptRun": true,
+   "before": {
+    "updates": "9",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · round 2/3 · 85 events"
+   },
+   "afterRefreshEarly": {
+    "updates": "9",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · round 2/3 · 85 events",
+    "authRestored": true
+   },
+   "websocketsCreatedForSecondRun": 2,
+   "final": {
+    "status": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 203 events",
+    "updates": "24",
+    "submitted": "24",
+    "secagg": "SECAGG SHADOW: NOT USED",
+    "agg": "AUTHORITATIVE AGGREGATE: PLAIN",
+    "rounds": [
+     "Round 1: COMPLETED · accepted 8/8 · authoritative aggregate:",
+     "Round 2: COMPLETED · accepted 8/8 · authoritative aggregate:",
+     "Round 3: COMPLETED · accepted 8/8 · authoritative aggregate:"
+    ],
+    "clientStates": [
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED",
+     "SUBMITTED"
+    ],
+    "submittedClients": 8,
+    "trainingClients": 0,
+    "candidate": "CandidateCAPSTONE_FL_CANDIDATE_0002ParentFL_INIT_V2State digest3f0b7762…70e4copy ValidationPASSEDChecks reported passedSTATE_FINITE, STATE_SPEC_MATCHES_BASE, UPDATE_DIGESTS_RECONCILE, ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE, BASE_STATE_LINEAGE_VERIFIED GovernanceACCEPTED_TO_SANDBOXSandboxIN_SANDBOXproduction_deployedFALSE",
+    "streamError": false
+   },
+   "maxUpdateReadyObserved": 24,
+   "doubleCounted": false,
+   "sequenceError": false,
+   "apiRun": {
+    "run_id": "FEDRUN-BF4C34E5EAA0",
+    "run_type": "LIVE_RUN",
+    "base_model_id": "FL_INIT_V2",
+    "federation_protocol_id": "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+    "algorithm": "FEDAVG",
+    "client_ids": [
+     "SIM_FL_SITE_00",
+     "SIM_FL_SITE_01",
+     "SIM_FL_SITE_02",
+     "SIM_FL_SITE_03",
+     "SIM_FL_SITE_04",
+     "SIM_FL_SITE_05",
+     "SIM_FL_SITE_06",
+     "SIM_FL_SITE_07"
+    ],
+    "planned_rounds": 3,
+    "current_round": 3,
+    "started_at_us": 1791231609938123,
+    "completed_at_us": 1791231624649583,
+    "status": "COMPLETED",
+    "secagg_mode": "PLAIN",
+    "candidate_ids": [
+     "CAPSTONE_FL_CANDIDATE_0002"
+    ],
+    "engineering_only": true
+   },
+   "candidateCountAfter": 2
+  },
+  {
+   "step": "responsive",
+   "widths": {
+    "390": {
+     "/app/federation": {
+      "innerWidth": 390,
+      "scrollWidth": 390,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/clients": {
+      "innerWidth": 390,
+      "scrollWidth": 390,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/rounds": {
+      "innerWidth": 390,
+      "scrollWidth": 390,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/live": {
+      "innerWidth": 390,
+      "scrollWidth": 390,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/privacy": {
+      "innerWidth": 390,
+      "scrollWidth": 390,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/models": {
+      "innerWidth": 390,
+      "scrollWidth": 390,
+      "overflowing": [],
+      "fitsViewport": true
+     }
+    },
+    "768": {
+     "/app/federation": {
+      "innerWidth": 768,
+      "scrollWidth": 768,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/clients": {
+      "innerWidth": 768,
+      "scrollWidth": 768,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/rounds": {
+      "innerWidth": 768,
+      "scrollWidth": 768,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/live": {
+      "innerWidth": 768,
+      "scrollWidth": 768,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/privacy": {
+      "innerWidth": 768,
+      "scrollWidth": 768,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/models": {
+      "innerWidth": 768,
+      "scrollWidth": 768,
+      "overflowing": [],
+      "fitsViewport": true
+     }
+    },
+    "1024": {
+     "/app/federation": {
+      "innerWidth": 1024,
+      "scrollWidth": 1024,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/clients": {
+      "innerWidth": 1024,
+      "scrollWidth": 1024,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/rounds": {
+      "innerWidth": 1024,
+      "scrollWidth": 1024,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/live": {
+      "innerWidth": 1024,
+      "scrollWidth": 1024,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/privacy": {
+      "innerWidth": 1024,
+      "scrollWidth": 1024,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/models": {
+      "innerWidth": 1024,
+      "scrollWidth": 1024,
+      "overflowing": [],
+      "fitsViewport": true
+     }
+    },
+    "1440": {
+     "/app/federation": {
+      "innerWidth": 1440,
+      "scrollWidth": 1440,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/clients": {
+      "innerWidth": 1440,
+      "scrollWidth": 1440,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/rounds": {
+      "innerWidth": 1440,
+      "scrollWidth": 1440,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/live": {
+      "innerWidth": 1440,
+      "scrollWidth": 1440,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/federation/privacy": {
+      "innerWidth": 1440,
+      "scrollWidth": 1440,
+      "overflowing": [],
+      "fitsViewport": true
+     },
+     "/app/models": {
+      "innerWidth": 1440,
+      "scrollWidth": 1440,
+      "overflowing": [],
+      "fitsViewport": true
+     }
+    }
+   }
+  },
+  {
+   "step": "accessibility",
+   "h1": 1,
+   "headings": 6,
+   "mainLandmark": true,
+   "skipLink": true,
+   "liveRegion": true,
+   "statusRole": true,
+   "selectsLabelled": true,
+   "buttonsNamed": true,
+   "clientGridLabelled": true,
+   "stateAlsoText": true,
+   "runningAnimations": 0
+  },
+  {
+   "step": "keyboard",
+   "focusable": true,
+   "focusVisibleCssRule": true
+  }
+ ],
+ "network": {
+  "requestCount": 2065,
+  "origins": [
+   "http://127.0.0.1:64317"
+  ],
+  "external": [],
+  "websockets": [
+   "ws://127.0.0.1:64317/product/v1/federation/runs/FEDRUN-114E9BD88D2C/live",
+   "ws://127.0.0.1:64317/product/v1/federation/runs/FEDRUN-C66287443671/live",
+   "ws://127.0.0.1:64317/product/v1/federation/runs/FEDRUN-BF4C34E5EAA0/live"
+  ]
+ },
+ "console_errors": [],
+ "elapsed_s": 101
+}

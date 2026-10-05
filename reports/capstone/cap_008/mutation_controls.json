@@ -1,0 +1,192 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/routes/app/federation/clients/+page.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 clients page > shows the eight synthetic logical clients with the synthetic banner and no raw data or labels 11ms",
+   "git_status_after_restore": "",
+   "mutation": "EIGHT_HOSPITALS_WORDING",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/components.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/routes/app/federation/+page.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 federation product source audit > has no fake dynamic metric: no accuracy/F1/AUPRC/AUROC/loss, no random or timer-driven progress 4ms",
+   "git_status_after_restore": "",
+   "mutation": "FAKE_ACCURACY_METRIC",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/static-audit.test.ts",
+    "frontend/src/lib/product/federation/__tests__/components.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/lib/components/product/federation/ClientGrid.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 federation product source audit > has no fake dynamic metric: no accuracy/F1/AUPRC/AUROC/loss, no random or timer-driven progress 3ms",
+   "git_status_after_restore": "",
+   "mutation": "SMOOTH_PROGRESS_INVENTED",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/static-audit.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/routes/app/models/+page.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 rounds, privacy and models pages > models: two separated namespaces, MODEL_V2_FINAL RELEASED_DEFAULT, candidate production_deployed FALSE, no deploy/promote controls 7ms",
+   "git_status_after_restore": "",
+   "mutation": "CANDIDATE_SHOWN_AS_RELEASED_DEFAULT",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/components.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/lib/components/product/federation/CandidateCard.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 federation product source audit > has no deploy, promote, default, inference or candidate-load control or call 3ms",
+   "git_status_after_restore": "",
+   "mutation": "DEPLOY_BUTTON_ADDED",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/static-audit.test.ts",
+    "frontend/src/lib/product/federation/__tests__/components.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/lib/product/federation/state.svelte.ts"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 federation product source audit > has no deploy, promote, default, inference or candidate-load control or call 3ms",
+   "git_status_after_restore": "",
+   "mutation": "CANDIDATE_INFERENCE_REQUEST_ADDED",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/static-audit.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/routes/app/federation/privacy/+page.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 rounds, privacy and models pages > privacy: round-1-only shadow wording, plain authoritative aggregation, limitations, no DP/anonymity claim 5ms",
+   "git_status_after_restore": "",
+   "mutation": "SECAGG_PAGE_CLAIMS_DIFFERENTIAL_PRIVACY",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/components.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/routes/app/federation/live/+page.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 live page > renders a full SECAGG_SHADOW run from events only: PLAIN aggregate, shadow verified, 24 updates, candidate sandbox 22ms",
+   "git_status_after_restore": "",
+   "mutation": "SECAGG_SHOWN_AS_AUTHORITATIVE_AGGREGATION",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/components.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/lib/product/api.ts"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 federation product source audit > never puts a token, cookie, user id or secret in a WebSocket URL 2ms",
+   "git_status_after_restore": "",
+   "mutation": "WEBSOCKET_TOKEN_IN_URL",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/store-api.test.ts",
+    "frontend/src/lib/product/federation/__tests__/static-audit.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/lib/components/product/federation/RunConfigForm.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 federation product source audit > has no user-editable control for model, base, checkpoint, candidate, hyperparameters or counts 4ms",
+   "git_status_after_restore": "",
+   "mutation": "RUN_FORM_EXPOSES_MU",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/components.test.ts",
+    "frontend/src/lib/product/federation/__tests__/static-audit.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/lib/components/product/federation/FederationBanner.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 live page > REPLAY: persistent no-training badge, historical candidate wording, no new candidate claim 15ms",
+   "git_status_after_restore": "",
+   "mutation": "REPLAY_UI_SAYS_TRAINING_IN_PROGRESS",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/components.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/lib/product/federation/live-model.ts"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 federation live model > rejects sequence gaps, duplicates, foreign run ids and malformed events and then stays failed 3ms",
+   "git_status_after_restore": "",
+   "mutation": "MONITORING_EVENT_ACCEPTED_BY_FEDERATION_REDUCER",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/events-model.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/lib/product/federation/live-model.ts"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 federation live model > REPLAY: candidate events are historical and create no new candidate 3ms",
+   "git_status_after_restore": "",
+   "mutation": "CANDIDATE_COUNT_INCREMENTED_FROM_REPLAY_EVENT",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/events-model.test.ts"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "frontend/src/lib/components/product/federation/ArchitectureLanes.svelte"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "\u00d7 federation overview + run configuration > shows real overview values, two-lane architecture and exactly three user-controlled options 23ms",
+   "git_status_after_restore": "",
+   "mutation": "MODEL_V2_FINAL_REPLACED_BY_CANDIDATE_IN_MONITORING_LANE",
+   "tests_run": [
+    "frontend/src/lib/product/federation/__tests__/components.test.ts"
+   ]
+  }
+ ]
+}
