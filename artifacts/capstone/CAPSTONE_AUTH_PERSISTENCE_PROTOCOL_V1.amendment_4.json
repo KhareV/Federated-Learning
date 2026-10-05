@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_4",
+ "change": "The CAP-004 protected-artifact audit allow-list of modifiable tracked files now includes .env.example (variable names only; explicitly permitted by the CAP-004 prompt: 'possibly an environment example'). Nothing else in the audit changes.",
+ "defect": "The frozen audit's MODIFIABLE list omitted .env.example although the file is tracked, was edited to add variable names only, and the prompt permits that edit; the first final audit flagged it as modified_outside_allowed_control_plane.",
+ "files": {
+  "scripts/cap_004_protected_audit.py": {
+   "new_sha256": "9aefc24a1eb7a84403f2fcdc31d4c041eba9a2528363df3ce5db3b7d8930bf37",
+   "old_sha256": "2c910ccbf427fd205543c003b62702102bccd7eef5d6970783ded2fc55ef9a86"
+  }
+ },
+ "freeze_commit": "1fb3023",
+ "made_before": "the recorded CAPG3 criteria evaluation and the recorded protected_artifact_final.json",
+ "previous_amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_3",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical to amendment 2",
+  "capg3_criteria_text": "identical"
+ }
+}

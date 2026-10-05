@@ -32,7 +32,7 @@ ADDITIVE_PREFIXES = (
 # existing tracked files CAP-004 may modify (the dependency files are NOT among them)
 MODIFIABLE = (
     "manifests/capstone/task_registry_v1.csv", "manifests/capstone/gate_registry_v1.csv",
-    "tests/test_capstone_lifecycle.py",
+    "tests/test_capstone_lifecycle.py", ".env.example",  # .env.example: variable NAMES only
 )
 ALLOWED_DEPENDENCY_ADDITIONS = ("clerk-backend-api==7.0.0", "PyJWT==2.15.1")
 
