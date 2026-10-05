@@ -87,7 +87,9 @@ def test_exactly_one_frontend_application_exists() -> None:
 
 
 def test_backend_and_scientific_trees_are_byte_identical_to_the_entry_commit() -> None:
-    changed = subprocess.run(["git", "diff", "--name-only", ENTRY, "--", "api", "product",
+    # Existing files are byte-identical (no file modified or deleted); later phases may ADD files
+    # (CAP-006 adds client-local modules under product/ - CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 amendment 6).
+    changed = subprocess.run(["git", "diff", "--name-only", "--diff-filter=MD", ENTRY, "--", "api", "product",
                               "capstone_persistence", "simulation", "src", "checkpoints",
                               "contracts", "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json"],
                              cwd=ROOT, check=True, capture_output=True, text=True).stdout.split()

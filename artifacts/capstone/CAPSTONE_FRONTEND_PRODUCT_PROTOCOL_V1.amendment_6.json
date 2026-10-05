@@ -1,0 +1,17 @@
+{
+ "amendment_id": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_6",
+ "change": "tests/test_capstone_frontend.py::test_backend_and_scientific_trees_are_byte_identical_to_the_entry_commit now uses git diff --diff-filter=MD: existing backend/scientific files must still be byte-identical (no modification or deletion), but later phases may ADD files. Nothing else in the test file changes.",
+ "defect": "The CAP-005 guard compared product/ (and other trees) to the CAP-005 entry commit with an unfiltered diff, so any ADDED file counted as a change. CAP-006 legitimately adds client-local modules under product/ (product/edge/*, product/federation/*); the full regression failed on exactly this one test.",
+ "files": {
+  "tests/test_capstone_frontend.py": {
+   "new_sha256": "4ca6a15efe73f7b51b6dfe0b9f39d1ca7543773e9f9ef073a0a58649e884139f",
+   "old_sha256": "88f34e299eadc6453788d6328dcbc666563143a480f3f3f31cd5acff38d2b3a4"
+  }
+ },
+ "freeze_commit": "5cf83da",
+ "made_during": "CAP-006 (after its method freeze a1582da; no CAP-005 criterion text or frontend file changes)",
+ "unchanged": {
+  "cap005_criteria": "identical",
+  "frontend_and_backend_files": "byte-identical"
+ }
+}

@@ -30,6 +30,7 @@ ADDITIVE_PREFIXES = (
 MODIFIABLE = (
     "manifests/capstone/task_registry_v1.csv", "manifests/capstone/gate_registry_v1.csv",
     "tests/test_capstone_lifecycle.py",
+    "tests/test_capstone_frontend.py",  # CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 amendment 6 (CAP-006 adds files)
 )
 
 

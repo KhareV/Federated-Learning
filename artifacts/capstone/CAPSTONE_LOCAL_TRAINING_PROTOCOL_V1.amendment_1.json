@@ -1,0 +1,17 @@
+{
+ "amendment_id": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1_AMENDMENT_1",
+ "change": "The CAP-006 protected audit's MODIFIABLE allow-list includes tests/test_capstone_frontend.py (the file amended by CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 amendment 6).",
+ "defect": "The frozen CAP-006 audit did not anticipate that a CAP-005 guard test forbids added files under product/, which CAP-006 must add; the amendment of that guard must be an allowed modification.",
+ "files": {
+  "scripts/cap_006_protected_audit.py": {
+   "new_sha256": "74660abd2d43eef5cf9b80312ca4f90a2bf4932481ce6f3edac0704fb4d7a36a",
+   "old_sha256": "917e2a86d004e048a2585a67cc1bf725ca73e3e9c2719e203469155e40a58a71"
+  }
+ },
+ "freeze_commit": "a1582da",
+ "made_before": "the recorded CAPG5 criteria evaluation and protected_artifact_final.json",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical to the freeze commit",
+  "capg5_criteria_text": "identical"
+ }
+}
