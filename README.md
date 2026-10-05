@@ -61,3 +61,29 @@ replace an identity that Git inferred previously.
 `make coverage` deterministically rebuilds and audits the T002 registries. `make phase2` runs the
 full lint/test suite, the T001 offline regression smoke, the coverage audit, and T002 evidence
 generation. It does not download datasets or connect to MongoDB.
+
+## Default research runtime (SOFTWARE_SYSTEM_V2)
+
+The normal research-software API is the V2 stack: MODEL_V2_FINAL -> GATEWAY_ARTIFACT_V2 -> CAL_V2
+(MIT-BIH source-domain calibration) -> ALERT_POLICY_V1_MODEL_V2_BINDING over the unchanged
+API_SCHEMA_V1 (`POST /v1/infer-window`; no public model selector). It is a non-diagnostic research
+prototype, not a clinical, medical-device or physical-wearable system. MODEL_V2_FINAL is a centrally
+trained checkpoint; the project additionally contains a federated-learning research lineage for the
+MODEL_V2 architecture that is not deployed.
+
+```bash
+make run-default                                  # == python -m scripts.run_nhm_default
+cd frontend && npm ci && npm run build            # the normal build requests MODEL_V2_FINAL
+```
+
+Explicit operator-only rollback to the preserved V1 stack (MODEL_V1 / GATEWAY_ARTIFACT_V1 / CAL_V1 /
+ALERT_POLICY_V1; the legacy `uvicorn api.app:app` entry is the same V1 stack):
+
+```bash
+make run-rollback-v1                              # == python -m scripts.run_nhm_default --profile rollback-v1
+VITE_NHM_REQUEST_MODEL_ID=MODEL_V1 npm run build  # matching frontend build for the rollback profile
+```
+
+The profile is a launch decision, never a request parameter, and V1/V2 components are never mixed.
+The historical scientific disposition `MODEL_V2_NOT_PROMOTED_RELEASE_CI` is unchanged: the default
+change is a prospective research-software governance decision (`SYSTEM_V2_RELEASE_POLICY_V1`).

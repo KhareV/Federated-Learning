@@ -1,0 +1,63 @@
+{
+  "bound_artifacts": {
+    "artifacts/ALERT_POLICY_V1_MODEL_V2_BINDING.lock.json": "8bb8c6007f40763d907b9567068af2925d801cf2500a1a1b8a5256851bf98d6d",
+    "artifacts/API_RUNTIME_V2_1.lock.json": "25ee35be7855366ffee023fb72b93e3c2d25b2dd3a7355bc60228b69b42c168b",
+    "artifacts/CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "artifacts/DASHBOARD_UI_V1_5.lock.json": "a81cd69c7e964dffd58c1ccff988170efd5891c79478d8f23e5b8eab0d162d54",
+    "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+    "artifacts/E2E_REPLAY_SOFTWARE_V1_4.lock.json": "b58ef7c195202000e3af70cdb851a159e57ebacaa27d267a9de1d1b71b95192a",
+    "artifacts/ECG_HR_CONTEXT_V2.lock.json": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "artifacts/MODEL_V2_COMPLETE_REPRO_V1.lock.json": "79416f3b2aabd7baf8a7ec1961f3ab538e3b79a06899528f58cdf32a2a51157f",
+    "artifacts/ROLLBACK_RUNTIME_BINDING_V1.lock.json": "8f9826b4cc9344889131ecdfe32a3be9fb56427619a480f4667de94257ec7668",
+    "artifacts/SECAGG_METHOD_V2.lock.json": "d0d3cbb96d142d2f5ea63c8692fe587275aeb938c16d23ae1dbe66f6bfa7115f",
+    "artifacts/SYSTEM_V2_RELEASE_DECISION_V1.lock.json": "ff0103e0baf53825c5d242e68a6c0f9bfe295b3dd7e0294ead23502e88601e15",
+    "artifacts/SYSTEM_V2_RELEASE_POLICY_V1.lock.json": "0a3459209aceb3c3c18625c645dd0f5bb143a5e9b951e34c2c39194b8e2bfb9a",
+    "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30",
+    "artifacts/deployment/GATEWAY_ARTIFACT_V2.manifest.json": "7de9190366ba54b454ae3edbc4e66ce16584431050f0d22a96e3cab9c3218edd",
+    "checkpoints/MODEL_V2_FINAL.manifest.json": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+    "configs/model_v2/secagg_v2.yaml": "2742ff3a4f4fc83935148ec6d23f1ab4e0894a2f48ea37ead4f0c5138ec20991",
+    "contracts/API_SCHEMA_V1.json": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+    "manifests/model_v2/MODEL_V2_FL_PROTOCOL_V1.lock.json": "7da5a240eee34db6f889c73b694783cb78389968b9d1cade882ee07fe7e0c5af",
+    "manifests/model_v2/MODEL_V2_FL_PROTOCOL_V2.lock.json": "a72523a5d2ff022130390f153748a4fe84c6e726328a5e4f2b30b906232d9cea",
+    "manifests/model_v2/V2_FL_EVAL_PROTOCOL_V1.lock.json": "fd5ed5ee8a1560fe38e9b146a8eb03ab978faaf28e44ce3e205fa213dedcac50",
+    "manifests/model_v2/WEARABLE_SIM_FL_COHORT_V1.json": "e586b8cb425dfcfb9c5c72222b174477519445f2cc2529a2d11a2ec6e55803dc",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+  },
+  "default": {
+    "api": "API_SCHEMA_V1",
+    "calibration": "CAL_V2",
+    "gateway": "GATEWAY_ARTIFACT_V2",
+    "model": "MODEL_V2_FINAL",
+    "runtime_binding": "DEFAULT_RUNTIME_BINDING_V2"
+  },
+  "federated_checkpoint_deployed": false,
+  "fl_research_lineage_ids": [
+    "FL_INIT_V2",
+    "FL_IID_MODEL_V2_V1",
+    "FL_NON_IID_MODEL_V2_V1",
+    "FEDPROX_METHOD_V2",
+    "FEDPROX_MU_V2",
+    "V2_FL_EVAL_PROTOCOL_V1"
+  ],
+  "hardware": "OUT_OF_SCOPE (T036 not started)",
+  "historical_model_promotion_disposition": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "lock_id": "SOFTWARE_SYSTEM_V2",
+  "new_system_release_disposition": "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED",
+  "owner_task": "V2-REL-001",
+  "quality_v1": "unchanged (known stuck-nonzero limitation carried)",
+  "release_level": "RESEARCH_SOFTWARE_OPERATIONAL_DEFAULT",
+  "rollback": {
+    "binding": "ROLLBACK_RUNTIME_BINDING_V1",
+    "model": "MODEL_V1",
+    "role": "FROZEN_ROLLBACK_REFERENCE",
+    "runtime": "API_RUNTIME_V1_1"
+  },
+  "status": "FROZEN_RESEARCH_SOFTWARE_DEFAULT",
+  "wearable_sim_ids": [
+    "WEARABLE_SIM_FL_COHORT_V1",
+    "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+    "WEARABLE_SIM_FL_SYSTEM_REPLAY_V1",
+    "VIRTUAL_FL_CLIENT_SOURCE_V1",
+    "WEARABLE_SIM_FL_SECAGG_COMPAT_V1"
+  ]
+}

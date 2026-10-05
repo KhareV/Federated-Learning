@@ -59,7 +59,7 @@
 		<div class="signal-grid">
 			<article class="signal-card signal-card--teal">
 				<span>NHM RESEARCH DASHBOARD</span>
-				<strong style="font-size:20px;line-height:1.4">Frozen API_RUNTIME_V1 contract, five monitoring states, no diagnosis claim.</strong>
+				<strong style="font-size:20px;line-height:1.4">Frozen API_SCHEMA_V1 contract, five monitoring states, no diagnosis claim.</strong>
 				<small>No live wearable hardware is connected -- see /monitoring for the real, typed POST /v1/infer-window integration.</small>
 				<a class="metric" style="font-size:16px;text-decoration:none" href="/monitoring">OPEN DASHBOARD →</a>
 			</article>

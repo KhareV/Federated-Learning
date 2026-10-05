@@ -1,0 +1,9 @@
+{
+  "checkpoint": "V2-REL-001",
+  "predecessor_id": "E2E_REPLAY_SOFTWARE_V1_3",
+  "predecessor_preserved_unchanged": true,
+  "predecessor_sha256": "0d27e917212e588d15bd32138ef43f05f00fe15bdb8b343d21c8c2e6e5422d44",
+  "predecessor_status_at_supersession": "FROZEN_ENGINEERING_INTEGRATION",
+  "reason": "re-bind the dashboard route and DASHBOARD_UI_V1_5 after the V2-REL-001 default model-identity change; V1_3 replay digests and reproducibility facts are carried forward unchanged (the recorded MODEL_V1 replay is reproduced via the explicit rollback profile)",
+  "successor_id": "E2E_REPLAY_SOFTWARE_V1_4"
+}

@@ -60,19 +60,19 @@
 			latency: 'See reports/t029/latency_summary.json',
 			dataThroughput: 'One 10-second ECG window per request',
 			security: 'Research prototype -- no clinical-grade security claim',
-			description: 'MODEL_V1 currently runs server-side through the frozen GATEWAY_ARTIFACT_V1 CPU runtime behind the typed /v1/infer-window API -- not on-device. On-device inference is a possible future direction, not an implemented or verified capability.',
+			description: 'The default research runtime (MODEL_V2_FINAL, a centrally trained checkpoint) runs server-side through the frozen GATEWAY_ARTIFACT_V2 CPU runtime with source-domain CAL_V2 behind the typed /v1/infer-window API -- not on-device. The V1 stack remains an explicit rollback profile. On-device inference is a possible future direction, not an implemented or verified capability.',
 			details: ['Server-Side CPU Inference (Current)', 'On-Device Inference: Not Implemented', 'Research-Only Monitoring States, Not a Diagnosis']
 		},
 		{
 			id: 'privacy',
 			index: '05',
-			title: 'Differential Privacy Engine',
+			title: 'Federated Optimization (FedProx)',
 			role: 'FedProx Local Objective (Research Prototype)',
 			protocol: 'FedProx (see artifacts/FEDPROX_METHOD_V1.lock.json)',
 			latency: 'See reports/fedprox.json',
 			dataThroughput: 'Model Weight Updates',
 			security: 'No Formal Differential-Privacy Proof',
-			description: 'Research FedProx comparison against a matched FedAvg baseline. No differential-privacy mechanism or formal privacy guarantee is implemented or claimed.',
+			description: 'The project includes a complete federated-learning research lineage for the MODEL_V2 architecture (FedAvg/FedProx comparisons on MIT-BIH-derived client partitions). The default inference checkpoint is NOT federated-trained. No differential-privacy mechanism or formal privacy guarantee is implemented or claimed.',
 			details: ['Matched FedAvg/FedProx Comparison (T027)', 'No DP Noise Injection', 'No Formal Privacy Proof']
 		},
 		{

@@ -454,7 +454,7 @@
 				<div class="section-kicker section-kicker--dark">08 / SYSTEM ARCHITECTURE</div>
 				<div class="system__intro">
 					<h2>Under the interface is<br /><span>a layered system.</span></h2>
-					<p>From analog microvolt transduction and on-device SIMD feature extraction to differential privacy accounting and global federated consensus.</p>
+					<p>A research layering from concept sensor front-end sketches, through server-side CPU inference and a federated-learning research lineage with a SecAgg+ interface reference, to research-only monitoring states. No on-device inference, differential privacy or deployed system is implemented.</p>
 				</div>
 
 				<div class="system__matrix-wrap">

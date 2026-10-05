@@ -48,7 +48,14 @@ def test_dashboard_ui_v1_3_superseded_by_v1_4_with_preserved_lock() -> None:
         verify_dashboard_ui_v1_3()
     from scripts.verify_dashboard_ui_v1_4_v2013 import verify as verify_v1_4
 
-    result = verify_v1_4()
+    # V2-REL-001 later superseded V1_4 with DASHBOARD_UI_V1_5 (default request model identity):
+    # V1_4's live verifier now reports drift by design, its lock file stays byte-identical, and
+    # V1_5 verifies.
+    with pytest.raises(RuntimeError, match="DASHBOARD_UI_V1_4_TAMPER"):
+        verify_v1_4()
+    from scripts.verify_dashboard_ui_v1_5_v2rel001 import verify as verify_v1_5
+
+    result = verify_v1_5()
     assert result["status"] == "PASS"
     assert result["predecessor_preserved"] is True
 

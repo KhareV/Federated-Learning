@@ -1,0 +1,40 @@
+{
+  "bound_artifacts": {
+    "api/app.py": "f1c662e73bd06e1df360b016b2a17dd944166e466ad367d0499054fa0913d593",
+    "api/app_default.py": "8837e4e3dccb401ee45c84b14308156da735317227dc192f621a60b15e38a167",
+    "api/runtime.py": "5a75cbf574fb3fc0f1043aa634aa33735182f005c7fec06d971361170b1d91b4",
+    "api/schemas.py": "6160ae991ce8ee556a16441f2260f09aeb55586c83d6a6065e374a773a6f5fdb",
+    "api/session.py": "f61286d342459950ce3e8589ad375c1d648785d35254be0b110628e4b0369770",
+    "artifacts/ALERT_POLICY_V1.lock.json": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+    "artifacts/API_RUNTIME_V1_1.lock.json": "7023087dd91eccd4b740a81197d1c8b85dfc6d39ec9bc0a8e962986018c63c6e",
+    "artifacts/CAL_V1.json": "d225b20957913439fd532a4de4d23acf573a88d06366e71bf3b8a7673e63479b",
+    "artifacts/ECG_HR_CONTEXT_V2.lock.json": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "artifacts/GATEWAY_ARTIFACT_V1.lock.json": "cc4fc0fe7ae9f011f0db20305238a3687da36d3491d91248065f9627ca232946",
+    "artifacts/deployment/MODEL_V1_GATEWAY_FP32.ts": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4",
+    "checkpoints/MODEL_V1.manifest.json": "4d65f925d82f4592624927e9a3eec5518d6674bc6042a2601ff3f2783c264619",
+    "checkpoints/MODEL_V1.pt": "021352eb067932015b657f0570ac155f8ef00af2d43864e13a110d0252bc7bfe",
+    "contracts/API_SCHEMA_V1.json": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+    "contracts/openapi_v1.json": "1f5054a2963429458de08a470c56394e0d1b5abe45ec5a134c9a856f88d1836c",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+  },
+  "identity": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V1",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V1",
+    "model_id": "MODEL_V1",
+    "preprocess_id": "PREPROC_V1"
+  },
+  "identity_values": {
+    "cal_v1_threshold": 0.6128035574269627,
+    "gateway_artifact_sha256": "2b3768a7c075d02b19a8db425107970358630e8e4b9cef3ab458fc7c7fcd46a4"
+  },
+  "launch": "python -m scripts.run_nhm_default --profile rollback-v1 (== uvicorn --factory api.app_default:create_rollback_v1_app)",
+  "lock_id": "ROLLBACK_RUNTIME_BINDING_V1",
+  "operator_only": true,
+  "owner_task": "V2-REL-001",
+  "profile": "rollback-v1",
+  "public_model_selector": false,
+  "status": "FROZEN_ROLLBACK_REFERENCE"
+}

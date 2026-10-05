@@ -1,0 +1,47 @@
+{
+  "T036": "NOT_STARTED",
+  "api_schema_sha256": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+  "decision_commit": "211c397080f077b3b39f21f9f9d309becaa253b5",
+  "federated_checkpoint_deployed": false,
+  "gateway_sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+  "hashes": {
+    "CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "DASHBOARD_UI_V1_5.lock.json": "a81cd69c7e964dffd58c1ccff988170efd5891c79478d8f23e5b8eab0d162d54",
+    "DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+    "MODEL_V2_COMPLETE_REPRO_V1.lock.json": "79416f3b2aabd7baf8a7ec1961f3ab538e3b79a06899528f58cdf32a2a51157f",
+    "ROLLBACK_RUNTIME_BINDING_V1.lock.json": "8f9826b4cc9344889131ecdfe32a3be9fb56427619a480f4667de94257ec7668",
+    "SECAGG_METHOD_V2.lock.json": "d0d3cbb96d142d2f5ea63c8692fe587275aeb938c16d23ae1dbe66f6bfa7115f",
+    "SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0",
+    "SYSTEM_V2_RELEASE_DECISION_V1.lock.json": "ff0103e0baf53825c5d242e68a6c0f9bfe295b3dd7e0294ead23502e88601e15",
+    "SYSTEM_V2_RELEASE_POLICY_V1.lock.json": "0a3459209aceb3c3c18625c645dd0f5bb143a5e9b951e34c2c39194b8e2bfb9a",
+    "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30"
+  },
+  "known_limitations": [
+    "MODEL_V2_NOT_PROMOTED_RELEASE_CI remains true: the release-seed paired VALIDATION CI lower bound crossed zero; permanent historical negative finding, not rewritten",
+    "INTERNAL_TEST has only six eligible contributing patient groups",
+    "V2-010 INTERNAL_TEST/INCART/NSTDB evidence is post-freeze second-look evidence, not untouched validation",
+    "INCART FL evaluation is project-exposed external second-look evidence",
+    "QUALITY_V1 does not reliably hard-fail a raw stuck-nonzero ECG source because of the frozen preprocessing composition (not repaired here)",
+    "CAL_V2 is MIT-BIH source-domain calibration only",
+    "No physical wearable validation exists",
+    "SecAgg evidence is a narrow protected-aggregation-interface result, not a complete privacy guarantee",
+    "CLEAN_CLONE_GATING_V1 excluded raw-data-dependent tests from the clean-software claim when their untracked inputs were absent"
+  ],
+  "manifest_id": "SYSTEM_V2_RELEASE_MANIFEST_V1",
+  "model_checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "operational_default": "SOFTWARE_SYSTEM_V2 (MODEL_V2_FINAL)",
+  "policy_commit": "5560c5500f2b62f0c35b9e6b45122c7e215f615b",
+  "release_commit": "recorded by reports/model_v2/v2_rel_001/final/release_commit.json (the cutover result commit cannot contain its own hash)",
+  "release_level": "RESEARCH_SOFTWARE_OPERATIONAL_DEFAULT",
+  "rollback_default": "MODEL_V1 / API_RUNTIME_V1_1 (explicit operator profile)",
+  "unsupported_claims": [
+    "clinical diagnosis",
+    "hospital deployment",
+    "hardware deployment",
+    "differential privacy",
+    "real wearable validation",
+    "federated-trained default checkpoint",
+    "system privacy guarantee",
+    "scientific promotion of MODEL_V2 (MODEL_V2_NOT_PROMOTED_RELEASE_CI stands)"
+  ]
+}

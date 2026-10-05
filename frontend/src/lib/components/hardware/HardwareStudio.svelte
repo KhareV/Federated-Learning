@@ -61,10 +61,10 @@
 			index: '03',
 			name: 'Edge Microcontroller (Concept)',
 			tag: 'FIRMWARE CONCEPT -- NO ON-DEVICE INFERENCE',
-			summary: 'Concept firmware target (ESP32-class). Today, MODEL_V1 inference runs server-side via the frozen GATEWAY_ARTIFACT_V1 CPU runtime behind POST /v1/infer-window -- not on this or any device.',
+			summary: 'Concept firmware target (ESP32-class). Today, inference runs server-side via the frozen GATEWAY_ARTIFACT_V2 CPU runtime (default research runtime) behind POST /v1/infer-window -- not on this or any device.',
 			waveformMode: 'ecg',
 			specs: [
-				{ key: 'ON-DEVICE INFERENCE', val: 'Not Implemented', note: 'Inference is server-side (API_RUNTIME_V1)' },
+				{ key: 'ON-DEVICE INFERENCE', val: 'Not Implemented', note: 'Inference is server-side (default research runtime)' },
 				{ key: 'CLOCK / MEMORY', val: 'Unverified', note: 'Not bench-tested' },
 				{ key: 'INFERENCE TIME', val: 'See reports/t029/latency_summary.json', note: 'Server-side CPU gateway, 1000-window benchmark' },
 				{ key: 'CRYPTO', val: 'Not Implemented', note: 'No device-side crypto claim' }

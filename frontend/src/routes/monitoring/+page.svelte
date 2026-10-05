@@ -16,10 +16,11 @@
 	import { loadReplayBundle, runCanonicalRecordedReplay, type ReplayBundleEvent } from '$lib/dashboard/replay';
 
 	// Request model_id for the manual research-window control. Build-time deployment configuration,
-	// NOT a user-controlled runtime selector: defaults to the operational MODEL_V1; the V2 research
-	// build sets VITE_NHM_REQUEST_MODEL_ID. The API process accepts only the model it is bound to.
+	// NOT a user-controlled runtime selector: defaults to the SOFTWARE_SYSTEM_V2 default research
+	// runtime model (MODEL_V2_FINAL); the explicit V1 rollback build sets VITE_NHM_REQUEST_MODEL_ID=
+	// MODEL_V1. The API process accepts only the model it is bound to.
 	const LIVE_REQUEST_MODEL_ID: string =
-		(import.meta as unknown as { env?: Record<string, string> }).env?.VITE_NHM_REQUEST_MODEL_ID || 'MODEL_V1';
+		(import.meta as unknown as { env?: Record<string, string> }).env?.VITE_NHM_REQUEST_MODEL_ID || 'MODEL_V2_FINAL';
 
 	function newSessionId(): string {
 		return `nhm-dashboard-${Math.random().toString(36).slice(2, 10)}`;
@@ -29,14 +30,14 @@
 	let sending = $state(false);
 	let nextTimestampUs = $state(Date.now() * 1000);
 
-	// RECORDED REPLAY mode: /monitoring?mode=replay&replay=PUBLIC_ECG_REPLAY_V1[&speed=1]
+	// RECORDED REPLAY mode: /monitoring?mode=replay&replay=WEARABLE_SIM_V2_REPLAY_V1[&speed=1]
 	// This is a recorded public-ECG stream (never live hardware, never a real-time feed), fed through
 	// the exact same real typed API client and dashboard session as the manual demo control
 	// above -- see $lib/dashboard/replay.ts::runCanonicalRecordedReplay. speed=1 paces at the
 	// recorded 5-second cadence for a human demo; any other value (default) replays immediately
 	// for fast/test use. Pacing is presentation-only and never alters request timestamps.
 	const replayMode = $derived(page.url.searchParams.get('mode') === 'replay');
-	const replayId = $derived(page.url.searchParams.get('replay') ?? 'PUBLIC_ECG_REPLAY_V1');
+	const replayId = $derived(page.url.searchParams.get('replay') ?? 'WEARABLE_SIM_V2_REPLAY_V1');
 	const replaySpeed = $derived(page.url.searchParams.get('speed') === '1' ? 5000 : 0);
 	let replayRunning = $state(false);
 	let replayCompletedCount = $state(0);
@@ -163,7 +164,7 @@
 					</button>
 					<button type="button" class="ghost" onclick={startNewSession}>NEW SESSION</button>
 				</div>
-				<small>No live wearable hardware is connected (WEARABLE_V1 pending). Each window is a deterministic placeholder sent to the real API -- see $lib/dashboard/demo-window.ts, or <a href="/monitoring?mode=replay&replay=PUBLIC_ECG_REPLAY_V1">play back a recorded public-ECG stream</a>.</small>
+				<small>No live wearable hardware is connected (WEARABLE_V1 pending). Each window is a deterministic placeholder sent to the real API -- see $lib/dashboard/demo-window.ts, or <a href="/monitoring?mode=replay&replay=WEARABLE_SIM_V2_REPLAY_V1">play back a recorded simulated-wearable stream (software replay, not a person)</a>.</small>
 			{/if}
 		</div>
 	</header>

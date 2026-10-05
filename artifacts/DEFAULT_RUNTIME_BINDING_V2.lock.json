@@ -1,0 +1,58 @@
+{
+  "api_schema_changed": false,
+  "bound_artifacts": {
+    "api/app_default.py": "8837e4e3dccb401ee45c84b14308156da735317227dc192f621a60b15e38a167",
+    "api/app_v2.py": "7c9bddcc75018d1366ccb06386f0fd47a2604c6555a1e34ad4e31649754f9ac5",
+    "api/runtime.py": "5a75cbf574fb3fc0f1043aa634aa33735182f005c7fec06d971361170b1d91b4",
+    "api/runtime_v2.py": "3e9333c3ce02df4d89d99fdc5d977ac4db8bb8a9ee7bc7542a530d1f4e1c51a8",
+    "api/schemas.py": "6160ae991ce8ee556a16441f2260f09aeb55586c83d6a6065e374a773a6f5fdb",
+    "api/session.py": "f61286d342459950ce3e8589ad375c1d648785d35254be0b110628e4b0369770",
+    "artifacts/ALERT_POLICY_V1.lock.json": "0f751ec6b66acca547b1a072d3da41284f5a01c72aecff2daccb081ae3521c15",
+    "artifacts/ALERT_POLICY_V1_MODEL_V2_BINDING.lock.json": "8bb8c6007f40763d907b9567068af2925d801cf2500a1a1b8a5256851bf98d6d",
+    "artifacts/API_RUNTIME_V2_1.lock.json": "25ee35be7855366ffee023fb72b93e3c2d25b2dd3a7355bc60228b69b42c168b",
+    "artifacts/CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "artifacts/DASHBOARD_UI_V1_5.lock.json": "a81cd69c7e964dffd58c1ccff988170efd5891c79478d8f23e5b8eab0d162d54",
+    "artifacts/E2E_REPLAY_SOFTWARE_V1_4.lock.json": "b58ef7c195202000e3af70cdb851a159e57ebacaa27d267a9de1d1b71b95192a",
+    "artifacts/ECG_HR_CONTEXT_V2.lock.json": "8ea6203c5a32b9cd951e7cb7dfcd133ca0f7c2ef7441d04cda8c15e72faec6ca",
+    "artifacts/ROLLBACK_RUNTIME_BINDING_V1.lock.json": "8f9826b4cc9344889131ecdfe32a3be9fb56427619a480f4667de94257ec7668",
+    "artifacts/SYSTEM_V2_RELEASE_DECISION_V1.lock.json": "ff0103e0baf53825c5d242e68a6c0f9bfe295b3dd7e0294ead23502e88601e15",
+    "artifacts/SYSTEM_V2_RELEASE_POLICY_V1.lock.json": "0a3459209aceb3c3c18625c645dd0f5bb143a5e9b951e34c2c39194b8e2bfb9a",
+    "artifacts/deployment/GATEWAY_ARTIFACT_V2.manifest.json": "7de9190366ba54b454ae3edbc4e66ce16584431050f0d22a96e3cab9c3218edd",
+    "artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+    "checkpoints/MODEL_V2_FINAL.manifest.json": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+    "checkpoints/MODEL_V2_FINAL.pt": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "configs/model_v2_final_frozen.yaml": "f3bd9179b6896c9e76edfeb7d6e0d4ee8ebc3395dd390dd237490521a76772df",
+    "contracts/API_SCHEMA_V1.json": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+    "contracts/openapi_v1.json": "1f5054a2963429458de08a470c56394e0d1b5abe45ec5a134c9a856f88d1836c",
+    "frontend/src/routes/monitoring/+page.svelte": "69449158324237632b2e1ef4aae6cef60622d088415e5a1c171f4ecf1ee00e40",
+    "manifests/preprocessing/PREPROC_V1.lock.json": "181c567e691bef7ee166b09840a22d21763a809ee04b5e8e3cca41ffb56b4b3c"
+  },
+  "federated_checkpoint_deployed": false,
+  "frontend_default_identity": {
+    "default_request_model_id": "MODEL_V2_FINAL",
+    "lock": "DASHBOARD_UI_V1_5"
+  },
+  "identity": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1"
+  },
+  "identity_values": {
+    "calibration_domain": "MIT-BIH-v1.0.0",
+    "checkpoint_sha256": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+    "gateway_artifact_sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+    "temperature": 52.88261929727761,
+    "threshold": 0.5101937262006424
+  },
+  "launch": "python -m scripts.run_nhm_default (== uvicorn --factory api.app_default:create_default_app)",
+  "lock_id": "DEFAULT_RUNTIME_BINDING_V2",
+  "owner_task": "V2-REL-001",
+  "profile": "default",
+  "public_model_selector": false,
+  "rollback_binding": "ROLLBACK_RUNTIME_BINDING_V1",
+  "status": "FROZEN_OPERATIONAL_RESEARCH_BINDING"
+}

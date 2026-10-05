@@ -78,6 +78,13 @@ def test_e2e_replay_software_v1_2_superseded_by_v1_3_with_preserved_lock() -> No
         verify_e2e_replay_v1_2()
     from scripts.verify_e2e_replay_v1_3_v2013 import verify as verify_v1_3
 
-    result = verify_v1_3()
+    # V2-REL-001 later superseded V1_3 with E2E_REPLAY_SOFTWARE_V1_4 (the route default model
+    # identity changed): V1_3's live verifier now reports drift on that file by design, its lock
+    # file is preserved byte-identical, and V1_4 verifies.
+    with pytest.raises(RuntimeError, match="E2E_REPLAY_SOFTWARE_V1_3_TAMPER"):
+        verify_v1_3()
+    from scripts.verify_e2e_replay_v1_4_v2rel001 import verify as verify_v1_4
+
+    result = verify_v1_4()
     assert result["status"] == "PASS"
     assert result["g21_status"] == "NON_PASS_PENDING_T030_REAL_WEARABLE"

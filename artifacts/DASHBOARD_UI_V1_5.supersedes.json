@@ -1,0 +1,9 @@
+{
+  "checkpoint": "V2-REL-001",
+  "predecessor_id": "DASHBOARD_UI_V1_4",
+  "predecessor_preserved_unchanged": true,
+  "predecessor_sha256": "fe3d4a1544e903e0da66c50df96f713865027f9999fc2a79d411701e4d7acc47",
+  "predecessor_status_at_supersession": "FROZEN_ENGINEERING_INTERFACE",
+  "reason": "V2-REL-001 cutover: the normal build requests MODEL_V2_FINAL (default research runtime) instead of MODEL_V1; the default replay is WEARABLE_SIM_V2_REPLAY_V1; public copy that referenced MODEL_V1/API_RUNTIME_V1 or overstated privacy/on-device capability is corrected. Build-time value, not a runtime selector.",
+  "successor_id": "DASHBOARD_UI_V1_5"
+}
