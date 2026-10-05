@@ -1,0 +1,47 @@
+{
+ "app_overview": {
+  "candidatesOnOverview": "0",
+  "federationEnabled": true,
+  "notYetEnabled": false,
+  "path": "/app",
+  "releasedModel": true,
+  "step": "app-overview"
+ },
+ "overview": {
+  "banners": [
+   [
+    "ENGINEERING FEDERATION DEMO",
+    true
+   ],
+   [
+    "SIMULATED CLIENTS",
+    true
+   ],
+   [
+    "NOT CLINICAL",
+    true
+   ],
+   [
+    "NOT DEPLOYED",
+    true
+   ]
+  ],
+  "clientsReady": true,
+  "lanes": true,
+  "overviewBefore": {
+   "active_live_run": false,
+   "banner": "FL ENGINEERING DEMO - synthetic virtual clients on one laptop; engineering candidate only; no scientific evidence; nothing is deployed",
+   "candidate_count": 0,
+   "client_count": 8,
+   "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+   "engineering_only": true,
+   "federation_runtime": "ENABLED_ENGINEERING",
+   "production_deployed": false,
+   "released_model_id": "MODEL_V2_FINAL",
+   "scientific_evidence": false,
+   "secagg_claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY"
+  },
+  "preparingSeen": true,
+  "step": "federation-overview"
+ }
+}

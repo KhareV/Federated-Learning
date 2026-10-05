@@ -1,0 +1,129 @@
+{
+ "final": {
+  "agg": "AUTHORITATIVE AGGREGATE: PLAIN",
+  "candidate": "CandidateCAPSTONE_FL_CANDIDATE_0001ParentFL_INIT_V2State digest3f0b7762\u202670e4copy ValidationPASSEDChecks reported passedSTATE_FINITE, STATE_SPEC_MATCHES_BASE, UPDATE_DIGESTS_RECONCILE, ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE, BASE_STATE_LINEAGE_VERIFIED GovernanceACCEPTED_TO_SANDBOXSandboxIN_SANDBOXproduction_deployedFALSE",
+  "clientStates": [
+   "SUBMITTED",
+   "SUBMITTED",
+   "SUBMITTED",
+   "SUBMITTED",
+   "SUBMITTED",
+   "SUBMITTED",
+   "SUBMITTED",
+   "SUBMITTED"
+  ],
+  "rounds": [
+   "Round 1: COMPLETED \u00b7 accepted 8/8 \u00b7 authoritative aggregate:",
+   "Round 2: COMPLETED \u00b7 accepted 8/8 \u00b7 authoritative aggregate:",
+   "Round 3: COMPLETED \u00b7 accepted 8/8 \u00b7 authoritative aggregate:"
+  ],
+  "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+  "status": "COMPLETED \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 \u00b7 202 events",
+  "streamError": false,
+  "submitted": "24",
+  "submittedClients": 8,
+  "trainingClients": 0,
+  "updates": "24"
+ },
+ "rounds_seen": [
+  "Round 1:",
+  "Round 2:",
+  "Round 3:"
+ ],
+ "sketch": [
+  {
+   "round": 1,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 1/3 ",
+   "submitted": "0",
+   "t": 15511,
+   "updates": "0"
+  },
+  {
+   "round": 1,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 1/3 ",
+   "submitted": "1",
+   "t": 16724,
+   "updates": "1"
+  },
+  {
+   "round": 1,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 1/3 ",
+   "submitted": "3",
+   "t": 17936,
+   "updates": "3"
+  },
+  {
+   "round": 1,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 1/3 ",
+   "submitted": "5",
+   "t": 19148,
+   "updates": "5"
+  },
+  {
+   "round": 1,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 1/3 ",
+   "submitted": "7",
+   "t": 20362,
+   "updates": "7"
+  },
+  {
+   "round": 2,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 2/3 ",
+   "submitted": "9",
+   "t": 21575,
+   "updates": "9"
+  },
+  {
+   "round": 2,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 2/3 ",
+   "submitted": "11",
+   "t": 22788,
+   "updates": "11"
+  },
+  {
+   "round": 2,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 2/3 ",
+   "submitted": "12",
+   "t": 23999,
+   "updates": "12"
+  },
+  {
+   "round": 2,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 2/3 ",
+   "submitted": "14",
+   "t": 25213,
+   "updates": "14"
+  },
+  {
+   "round": 3,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 ",
+   "submitted": "16",
+   "t": 26425,
+   "updates": "16"
+  },
+  {
+   "round": 3,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 ",
+   "submitted": "18",
+   "t": 27638,
+   "updates": "18"
+  },
+  {
+   "round": 3,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 ",
+   "submitted": "20",
+   "t": 28851,
+   "updates": "20"
+  },
+  {
+   "round": 3,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 ",
+   "submitted": "22",
+   "t": 30066,
+   "updates": "22"
+  }
+ ],
+ "websockets": [
+  "ws://127.0.0.1:64317/product/v1/federation/runs/FEDRUN-114E9BD88D2C/live"
+ ]
+}

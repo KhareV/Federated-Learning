@@ -1,0 +1,12 @@
+{
+ "failed": [],
+ "monitoring_files_unchanged_vs_entry": {
+  "frontend/src/lib/product/events.ts": true,
+  "frontend/src/lib/product/live-model.ts": true,
+  "frontend/src/lib/product/socket.ts": true,
+  "frontend/src/lib/product/state.svelte.ts": true,
+  "frontend/src/lib/product/waveform.ts": true,
+  "frontend/src/routes/app/monitoring/+page.svelte": true
+ },
+ "non_federation_product_frontend_tests": 147
+}

@@ -1,0 +1,40 @@
+{
+ "added_count": 71,
+ "added_outside_additive_namespace": [],
+ "amendment_chains_verified": true,
+ "backend_scientific_fl_cap006_cap007_untouched": true,
+ "baseline_file_count": 3686,
+ "entry_sha": "711a4a0a1233765d6f1200fc2b6d8f3aa62d4743",
+ "frontend_changed_or_added": 31,
+ "frontend_removed": [],
+ "frontend_unaccounted_drift": [],
+ "head_sha": "5b51a2f50759fae7b8cf8920dbb837fffd345ea5",
+ "locks_verified": {
+  "cap001": true,
+  "cap002": true,
+  "cap003": true,
+  "cap004": true,
+  "cap005": true,
+  "cap006": true,
+  "cap007": true,
+  "cap008": true,
+  "capstone_ui_v1": true,
+  "capstone_ui_v1_1": true,
+  "fedprox_mu_v2": true,
+  "fl_init_v2": true,
+  "v2_fl_wearable_system": true
+ },
+ "modified_outside_allowed": [],
+ "modified_since_entry_non_frontend": [
+  "manifests/capstone/gate_registry_v1.csv",
+  "manifests/capstone/task_registry_v1.csv",
+  "scripts/verify_capstone_ui_v1.py",
+  "tests/test_capstone_federation_isolation.py",
+  "tests/test_capstone_frontend.py",
+  "tests/test_capstone_lifecycle.py"
+ ],
+ "named_component_drift": [],
+ "named_components_checked": 58,
+ "protected_artifact_drift": false,
+ "removed_since_entry": []
+}

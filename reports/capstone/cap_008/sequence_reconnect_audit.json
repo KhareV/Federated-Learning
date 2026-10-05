@@ -1,0 +1,79 @@
+{
+ "browser_refresh": {
+  "afterRefreshEarly": {
+   "authRestored": true,
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 2/3 \u00b7 85 events",
+   "updates": "9"
+  },
+  "apiRun": {
+   "algorithm": "FEDAVG",
+   "base_model_id": "FL_INIT_V2",
+   "candidate_ids": [
+    "CAPSTONE_FL_CANDIDATE_0002"
+   ],
+   "client_ids": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "completed_at_us": 1791231624649583,
+   "current_round": 3,
+   "engineering_only": true,
+   "federation_protocol_id": "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+   "planned_rounds": 3,
+   "run_id": "FEDRUN-BF4C34E5EAA0",
+   "run_type": "LIVE_RUN",
+   "secagg_mode": "PLAIN",
+   "started_at_us": 1791231609938123,
+   "status": "COMPLETED"
+  },
+  "before": {
+   "status": "RUNNING \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 2/3 \u00b7 85 events",
+   "updates": "9"
+  },
+  "candidateCountAfter": 2,
+  "doubleCounted": false,
+  "final": {
+   "agg": "AUTHORITATIVE AGGREGATE: PLAIN",
+   "candidate": "CandidateCAPSTONE_FL_CANDIDATE_0002ParentFL_INIT_V2State digest3f0b7762\u202670e4copy ValidationPASSEDChecks reported passedSTATE_FINITE, STATE_SPEC_MATCHES_BASE, UPDATE_DIGESTS_RECONCILE, ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE, BASE_STATE_LINEAGE_VERIFIED GovernanceACCEPTED_TO_SANDBOXSandboxIN_SANDBOXproduction_deployedFALSE",
+   "clientStates": [
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED",
+    "SUBMITTED"
+   ],
+   "rounds": [
+    "Round 1: COMPLETED \u00b7 accepted 8/8 \u00b7 authoritative aggregate:",
+    "Round 2: COMPLETED \u00b7 accepted 8/8 \u00b7 authoritative aggregate:",
+    "Round 3: COMPLETED \u00b7 accepted 8/8 \u00b7 authoritative aggregate:"
+   ],
+   "secagg": "SECAGG SHADOW: NOT USED",
+   "status": "COMPLETED \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 \u00b7 203 events",
+   "streamError": false,
+   "submitted": "24",
+   "submittedClients": 8,
+   "trainingClients": 0,
+   "updates": "24"
+  },
+  "maxUpdateReadyObserved": 24,
+  "runId": "FEDRUN-BF4C34E5EAA0",
+  "sequenceError": false,
+  "step": "refresh-during-run",
+  "urlKeptRun": true,
+  "websocketsCreatedForSecondRun": 2
+ },
+ "integration_resets": 1,
+ "unit_tests": [
+  "rejects sequence gaps, duplicates, foreign run ids and malformed events and then stays failed",
+  "reconnect: reset then replay from 0 rebuilds identically and never double-counts"
+ ]
+}

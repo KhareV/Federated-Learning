@@ -1,0 +1,20 @@
+{
+ "aggregation_modes_seen": [
+  "PLAIN"
+ ],
+ "live_secagg": "SHADOW_RUNNING \u2192 SHADOW_VERIFIED",
+ "privacy_page": {
+  "authoritativeAggregateLine": "AUTHORITATIVE AGGREGATE: PLAIN",
+  "authoritativePlain": true,
+  "claims": {
+   "anonymityClaimed": false,
+   "differentialPrivacyClaimed": false,
+   "noAnonymityStated": true,
+   "noDifferentialPrivacyStated": true
+  },
+  "roundOneOnly": true,
+  "secaggLine": "ROUND-1 SECAGG+ SHADOW (from the event stream): SHADOW_VERIFIED (SHADOW_RUNNING \u2192 SHADOW_VERIFIED)",
+  "shadowWording": true,
+  "step": "privacy"
+ }
+}

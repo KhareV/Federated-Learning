@@ -1,0 +1,118 @@
+{
+ "occurrences": [
+  {
+   "file": "frontend/src/lib/components/product/federation/ArchitectureLanes.svelte",
+   "line": 15,
+   "negated_or_disclaimer": true,
+   "text": "<p>Never automatically deployed. Architecture facts, not live values.</p>",
+   "word": "deployed"
+  },
+  {
+   "file": "frontend/src/lib/components/product/federation/CandidateCard.svelte",
+   "line": 11,
+   "negated_or_disclaimer": true,
+   "text": "<p class=\"ok\" data-testid=\"accepted-copy\"><b>ACCEPTED TO ENGINEERING SANDBOX REGISTRY</b><br />STRUCTURAL CHECKS PASSED \u00b7 NOT A SCIENTIFIC RELEASE \u00b7 NOT DEPLOYE",
+   "word": "DEPLOYED"
+  },
+  {
+   "file": "frontend/src/lib/components/product/federation/CandidateCard.svelte",
+   "line": 13,
+   "negated_or_disclaimer": true,
+   "text": "<p class=\"bad\" data-testid=\"rejected-copy\"><b>REJECTED BY ENGINEERING GOVERNANCE</b><br />NOT IN SANDBOX \u00b7 NOT DEPLOYED.</p>",
+   "word": "DEPLOYED"
+  },
+  {
+   "file": "frontend/src/lib/components/product/federation/CandidateCard.svelte",
+   "line": 20,
+   "negated_or_disclaimer": true,
+   "text": "<div><dt>production_deployed</dt><dd data-testid=\"production-deployed\">{candidate.production_deployed ? 'TRUE' : 'FALSE'}</dd></div>",
+   "word": "production"
+  },
+  {
+   "file": "frontend/src/lib/components/product/federation/CandidateCard.svelte",
+   "line": 20,
+   "negated_or_disclaimer": true,
+   "text": "<div><dt>production_deployed</dt><dd data-testid=\"production-deployed\">{candidate.production_deployed ? 'TRUE' : 'FALSE'}</dd></div>",
+   "word": "deployed"
+  },
+  {
+   "file": "frontend/src/lib/components/product/federation/CandidateCard.svelte",
+   "line": 23,
+   "negated_or_disclaimer": true,
+   "text": "<details><summary>Five frozen structural checks (engineering, not clinical or performance validation)</summary>",
+   "word": "clinical"
+  },
+  {
+   "file": "frontend/src/lib/components/product/federation/FederationBanner.svelte",
+   "line": 9,
+   "negated_or_disclaimer": true,
+   "text": "<span>NOT CLINICAL</span>",
+   "word": "CLINICAL"
+  },
+  {
+   "file": "frontend/src/lib/components/product/federation/FederationBanner.svelte",
+   "line": 10,
+   "negated_or_disclaimer": true,
+   "text": "<span>NOT DEPLOYED</span>",
+   "word": "DEPLOYED"
+  },
+  {
+   "file": "frontend/src/routes/app/federation/clients/+page.svelte",
+   "line": 14,
+   "negated_or_disclaimer": true,
+   "text": "<p class=\"banner\" role=\"note\" data-testid=\"synthetic-banner\">SYNTHETIC RESEARCH PARTITIONS \u2014 NOT HOSPITALS OR INSTITUTIONS.</p>",
+   "word": "HOSPITAL"
+  },
+  {
+   "file": "frontend/src/routes/app/federation/live/+page.svelte",
+   "line": 41,
+   "negated_or_disclaimer": true,
+   "text": "<p class=\"dim\">Protected-aggregation interface only; no differential-privacy or anonymity claim.</p>",
+   "word": "differential"
+  },
+  {
+   "file": "frontend/src/routes/app/federation/live/+page.svelte",
+   "line": 41,
+   "negated_or_disclaimer": true,
+   "text": "<p class=\"dim\">Protected-aggregation interface only; no differential-privacy or anonymity claim.</p>",
+   "word": "anonym"
+  },
+  {
+   "file": "frontend/src/routes/app/federation/live/+page.svelte",
+   "line": 53,
+   "negated_or_disclaimer": true,
+   "text": "{#if v.candidate.governance === 'ACCEPTED_TO_SANDBOX'}<p class=\"ok\">ACCEPTED TO ENGINEERING SANDBOX REGISTRY \u00b7 NOT A SCIENTIFIC RELEASE \u00b7 NOT DEPLOYED</p>{:else",
+   "word": "DEPLOYED"
+  },
+  {
+   "file": "frontend/src/routes/app/federation/live/+page.svelte",
+   "line": 53,
+   "negated_or_disclaimer": true,
+   "text": "{#if v.candidate.governance === 'ACCEPTED_TO_SANDBOX'}<p class=\"ok\">ACCEPTED TO ENGINEERING SANDBOX REGISTRY \u00b7 NOT A SCIENTIFIC RELEASE \u00b7 NOT DEPLOYED</p>{:else",
+   "word": "DEPLOYED"
+  },
+  {
+   "file": "frontend/src/routes/app/federation/privacy/+page.svelte",
+   "line": 27,
+   "negated_or_disclaimer": true,
+   "text": "<ul><li>Logical locality on one laptop (not separate machines or institutions).</li><li>No differential privacy.</li><li>No anonymity guarantee.</li><li>No hosp",
+   "word": "differential"
+  },
+  {
+   "file": "frontend/src/routes/app/federation/privacy/+page.svelte",
+   "line": 27,
+   "negated_or_disclaimer": true,
+   "text": "<ul><li>Logical locality on one laptop (not separate machines or institutions).</li><li>No differential privacy.</li><li>No anonymity guarantee.</li><li>No hosp",
+   "word": "anonym"
+  },
+  {
+   "file": "frontend/src/routes/app/federation/privacy/+page.svelte",
+   "line": 27,
+   "negated_or_disclaimer": true,
+   "text": "<ul><li>Logical locality on one laptop (not separate machines or institutions).</li><li>No differential privacy.</li><li>No anonymity guarantee.</li><li>No hosp",
+   "word": "hospital"
+  }
+ ],
+ "policy": "every occurrence of a watched word must sit in an explicit disclaimer/negation (reviewed semantically below)",
+ "unreviewed_non_disclaimer": []
+}

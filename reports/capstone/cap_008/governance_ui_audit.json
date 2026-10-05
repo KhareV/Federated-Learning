@@ -1,0 +1,45 @@
+{
+ "browser_dom": {
+  "accepted": true,
+  "buttons": [],
+  "candidates": 1,
+  "productionDeployed": [
+   "FALSE"
+  ],
+  "released": "MODEL_V2_FINAL\nrole: RELEASED_DEFAULT\nMODEL_V1\nrole: ROLLBACK_REFERENCE"
+ },
+ "candidate_card_checks_static": "five structural check ids shown; results only when reported",
+ "registry_api": {
+  "capstone_fl_candidates": [
+   {
+    "algorithm": "FEDAVG",
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+    "client_count": 8,
+    "created_at_us": 1791231607734842,
+    "federation_run_id": "FEDRUN-114E9BD88D2C",
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "parent_model_id": "FL_INIT_V2",
+    "production_deployed": false,
+    "round": 3,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  "registry_id": "CAPSTONE_MODEL_REGISTRY_V1",
+  "released_default_model_id": "MODEL_V2_FINAL",
+  "released_scientific": [
+   {
+    "model_id": "MODEL_V2_FINAL",
+    "namespace": "RELEASED_SCIENTIFIC",
+    "role": "RELEASED_DEFAULT"
+   },
+   {
+    "model_id": "MODEL_V1",
+    "namespace": "RELEASED_SCIENTIFIC",
+    "role": "ROLLBACK_REFERENCE"
+   }
+  ]
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "package_json_unchanged": true,
+ "reused": [
+  "Panel",
+  "MetricTile",
+  "ProductShell",
+  "LiveSocket (bounded retry)",
+  "FrontendAuth / DEMO auth",
+  "product client (extended)"
+ ],
+ "single_frontend": "frontend/ (SvelteKit)"
+}

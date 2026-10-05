@@ -1,0 +1,67 @@
+{
+ "api_rounds": [
+  {
+   "accepted_update_count": 8,
+   "algorithm": "FEDAVG",
+   "base_state_digest": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "candidate_id": null,
+   "participating_client_ids": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "round_id": 1,
+   "run_id": "FEDRUN-114E9BD88D2C",
+   "state": "COMPLETED"
+  },
+  {
+   "accepted_update_count": 8,
+   "algorithm": "FEDAVG",
+   "base_state_digest": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "candidate_id": null,
+   "participating_client_ids": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "round_id": 2,
+   "run_id": "FEDRUN-114E9BD88D2C",
+   "state": "COMPLETED"
+  },
+  {
+   "accepted_update_count": 8,
+   "algorithm": "FEDAVG",
+   "base_state_digest": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+   "participating_client_ids": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "round_id": 3,
+   "run_id": "FEDRUN-114E9BD88D2C",
+   "state": "COMPLETED"
+  }
+ ],
+ "lineage": "FL_INIT_V2 6a2923ca\u2026572fcopy ROUND 1 GLOBAL STATE 40cee065\u2026c0a1copyROUND 2 GLOBAL STATE 6237c0b1\u2026d2efcopyROUND 3 FINAL STATE (digest shown on the candidate) CAPSTONE_FL_CANDIDATE_0001",
+ "round_cards": [
+  "Round 1 State COMPLETED Base state digest 6a2923ca\u2026572f copy Algorithm FEDAVG Accepted updates 8 / 8 Candidate NONE",
+  "Round 2 State COMPLETED Base state digest 40cee065\u2026c0a1 copy Algorithm FEDAVG Accepted updates 8 / 8 Candidate NONE",
+  "Round 3 State COMPLETED Base state digest 6237c0b1\u2026d2ef copy Algorithm FEDAVG Accepted updates 8 / 8 Candidate CAPSTONE_FL_CANDIDATE_0001"
+ ]
+}

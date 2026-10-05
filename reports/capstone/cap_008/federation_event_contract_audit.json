@@ -1,0 +1,31 @@
+{
+ "integration_counts_by_kind": {
+  "aggregation.status": 3,
+  "candidate.created": 1,
+  "candidate.governance": 1,
+  "candidate.validation": 2,
+  "client.status": 96,
+  "client.training_progress": 48,
+  "client.update_ready": 24,
+  "federation.completed": 1,
+  "federation.status": 6,
+  "round.status": 18,
+  "secagg.status": 2
+ },
+ "kind_count": 12,
+ "kinds": [
+  "federation.status",
+  "round.status",
+  "client.status",
+  "client.training_progress",
+  "client.update_ready",
+  "aggregation.status",
+  "secagg.status",
+  "candidate.created",
+  "candidate.validation",
+  "candidate.governance",
+  "federation.completed",
+  "federation.error"
+ ],
+ "unit_tests": "events-model.test.ts"
+}

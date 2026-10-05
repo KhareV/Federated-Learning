@@ -1,0 +1,49 @@
+{
+ "browser": {
+  "algorithms": [
+   "FEDAVG",
+   "FEDPROX"
+  ],
+  "chosen": {
+   "a": "FEDAVG",
+   "m": "SECAGG_SHADOW",
+   "r": "LIVE_RUN"
+  },
+  "fixed": "Scenario\nFL_SINGLE_RUN\nClients\n8\nRounds\n3\nBase\nFL_INIT_V2",
+  "inputs": 0,
+  "modes": [
+   "PLAIN",
+   "SECAGG_SHADOW"
+  ],
+  "roundOneShadowWording": true,
+  "runTypes": [
+   "LIVE_RUN",
+   "REPLAY"
+  ],
+  "selects": 3,
+  "step": "configuration"
+ },
+ "forbidden_controls": [
+  "model",
+  "model_id",
+  "base_model_id",
+  "checkpoint",
+  "candidate_id",
+  "learning rate",
+  "batch size",
+  "optimizer",
+  "mu",
+  "calibration",
+  "threshold",
+  "epoch count",
+  "client count",
+  "round count"
+ ],
+ "request_fields": [
+  "run_type",
+  "algorithm",
+  "secagg_mode",
+  "planned_rounds",
+  "scenario_id"
+ ]
+}
