@@ -16,8 +16,7 @@ LOCK = ROOT / "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.lock.jso
 
 def verify() -> dict[str, object]:
     lock = json.loads(LOCK.read_text(encoding="utf-8"))
-    failures = [path for path, digest in lock["bound_files"].items()
-                if hash_file(ROOT / path) != digest]
+    expected = dict(lock["bound_files"])
     for path, key in (
         ("reports/capstone/cap_009/entry_audit.json", "entry_audit_sha256"),
         ("artifacts/capstone/CAPSTONE_UI_V1_2.lock.json", "ui_successor_sha256"),
@@ -27,11 +26,20 @@ def verify() -> dict[str, object]:
             "catalog_lock_sha256",
         ),
     ):
-        if hash_file(ROOT / path) != lock[key]:
-            failures.append(path)
-    for path, digest in lock["research_source_sha256"].items():
-        if hash_file(ROOT / path) != digest:
-            failures.append(path)
+        expected[path] = lock[key]
+    expected.update(lock["research_source_sha256"])
+    chain_failures: list[str] = []
+    for amendment in sorted((ROOT / "artifacts/capstone").glob(
+        "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_*.json"
+    )):
+        data = json.loads(amendment.read_text(encoding="utf-8"))
+        for path, change in data["files"].items():
+            if expected.get(path) != change["old_sha256"]:
+                chain_failures.append(f"{amendment.name}:{path}")
+            expected[path] = change["new_sha256"]
+    failures = [path for path, digest in expected.items()
+                if hash_file(ROOT / path) != digest]
+    failures.extend(chain_failures)
     if not all(item["verified"] for item in all_locks().values()):
         failures.append("prior_lock_chain")
     if verify_ui()["status"] != "PASS":

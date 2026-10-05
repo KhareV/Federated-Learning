@@ -1,0 +1,19 @@
+{
+ "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_1",
+ "owner_phase": "CAP-009",
+ "made_after_method_freeze": true,
+ "failed_attempt_preserved": "reports/capstone/cap_009/browser_raw.json",
+ "defect": "The first canonical browser attempt found /app/research/ml horizontal overflow at 1024, 768, and 390 px. All API and evidence checks reached the responsive gate; the run remains a failed attempt.",
+ "change": "Constrain the ML page grid to minmax(0,1fr), permitting the existing source-fact table to scroll within its bounded container. No scientific fact, API payload, runtime, or evidence source changes.",
+ "files": {
+  "frontend/src/routes/app/research/ml/+page.svelte": {
+   "old_sha256": "fd9d4d7eb4f1e9e6830ae925dadcabb28ee30ff5ffb719ca21a4bb07d0e33e32",
+   "new_sha256": "b1a0a8a1536b03419e500d6657b5d1a0688e4493419710f134dd7e16e2530fa8"
+  },
+  "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json": {
+   "old_sha256": "02d4f438ecb26397616d517d227e76e26d032ca966f16dc97ecc03bfc602c940",
+   "new_sha256": "9d971c7febb56ceb41fab77a182a16272f116e474bb270f84ebbc6a33674a7c2"
+  }
+ },
+ "result_evidence_committed_with_amendment": false
+}
