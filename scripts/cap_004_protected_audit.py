@@ -1,8 +1,9 @@
 """CAP-004 entry/final protection audit (CAP-003 methodology + CAP-003 lock/amendment chain).
 
 ``final`` requires zero modification/removal of any tracked file except the explicit allow-list:
-the capstone task/gate registries, its lifecycle test, and ONLY the Clerk SDK dependency lines in
-pyproject.toml / requirements-dev.lock (verified line-by-line: no existing pin may change).
+the capstone task/gate registries and its lifecycle test. pyproject.toml and requirements-dev.lock
+must stay byte-identical (the frozen V2-014 lock binds them); the Clerk SDK pin lives in the
+additive requirements-capstone-auth.lock, whose only pins must be the explicitly allowed ones.
 """
 
 from __future__ import annotations
@@ -26,11 +27,12 @@ ADDITIVE_PREFIXES = (
     "contracts/capstone/", "reports/capstone/cap_004/", "product/", "api/product_app_v1_1.py",
     "tests/test_capstone_", "tests/capstone_", "scripts/cap_004_", "scripts/capstone_cap004_",
     "scripts/run_capstone_product.py", "scripts/run_capstone_persistent_e2e.py", ".env.example",
+    "capstone_persistence/", "requirements-capstone-auth.lock",
 )
-# existing tracked files CAP-004 may modify; dependency files are further checked line by line
+# existing tracked files CAP-004 may modify (the dependency files are NOT among them)
 MODIFIABLE = (
     "manifests/capstone/task_registry_v1.csv", "manifests/capstone/gate_registry_v1.csv",
-    "tests/test_capstone_lifecycle.py", "pyproject.toml", "requirements-dev.lock",
+    "tests/test_capstone_lifecycle.py",
 )
 ALLOWED_DEPENDENCY_ADDITIONS = ("clerk-backend-api==7.0.0", "PyJWT==2.15.1")
 
@@ -73,18 +75,16 @@ def dependency_delta(path: str) -> dict:
     return {"file": path, "removed_lines": removed, "added_lines": added}
 
 
+PIN_FILE = "requirements-capstone-auth.lock"
+
+
 def dependency_files_ok() -> tuple[bool, list[dict]]:
     deltas = [dependency_delta(p) for p in ("pyproject.toml", "requirements-dev.lock")]
-    ok = True
-    for delta in deltas:
-        if delta["removed_lines"]:
-            ok = False
-        for line in delta["added_lines"]:
-            stripped = line.strip().strip(",").strip('"')
-            if line.startswith("#") or not stripped:
-                continue
-            if stripped not in ALLOWED_DEPENDENCY_ADDITIONS:
-                ok = False
+    ok = all(not d["removed_lines"] and not d["added_lines"] for d in deltas)
+    pins = [ln.strip() for ln in (ROOT / PIN_FILE).read_text().splitlines()
+            if ln.strip() and not ln.startswith("#")]
+    ok = ok and sorted(pins) == sorted(ALLOWED_DEPENDENCY_ADDITIONS)
+    deltas.append({"file": PIN_FILE, "removed_lines": [], "added_lines": pins})
     return ok, deltas
 
 

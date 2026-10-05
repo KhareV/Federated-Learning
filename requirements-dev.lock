@@ -8,8 +8,6 @@
 # runtime dependencies are pinned below without upgrading the existing numerical stack.
 # T024 adds flwr==1.39.0 and its App/runtime dependencies. Flower requires
 # packaging<26, so packaging is resolved to 25.0 without changing scientific packages.
-# CAP-004 adds clerk-backend-api==7.0.0 (official Clerk Python SDK, exact pin; docs/CHANGE_CONTROL.md
-# Class B interface revision) and its only new transitive dependency PyJWT==2.15.1. No existing pin changed.
 aiohappyeyeballs==2.7.1
 aiohttp==3.14.3
 aiosignal==1.4.0
@@ -21,7 +19,6 @@ attrs==26.1.0
 certifi==2026.7.22
 cffi==2.1.1
 charset-normalizer==3.5.1
-clerk-backend-api==7.0.0
 click==8.5.0
 cloudpickle==3.1.2
 contourpy==1.3.3
@@ -71,7 +68,6 @@ pycryptodome==3.23.0
 pydantic==2.13.5
 pydantic_core==2.46.5
 Pygments==2.21.0
-PyJWT==2.15.1
 pyparsing==3.3.3
 pytest==8.4.2
 python-dateutil==2.9.0.post0

@@ -17,11 +17,11 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any
 
+from capstone_persistence.store import CapstoneSqliteStore
 from product.devices.scenarios import TimingMode, load_scenarios
 from product.devices.simulated import SimulatedWearableSource
 from product.edge.virtual import VirtualEdgeNode, monitoring_edge_identity
 from product.monitoring.runtime_state import DeviceEntry, RuntimeState
-from product.persistence.store import CapstoneSqliteStore
 
 LOGGER = logging.getLogger("nhm.product.recovery")
 DEVICE_ID_PREFIX = "NHM_VIRTUAL_WEARABLE_"

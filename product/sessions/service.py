@@ -15,6 +15,7 @@ import uuid
 from collections.abc import Callable
 from typing import Any
 
+from capstone_persistence.store import CapstoneSqliteStore
 from product.api.errors import ProductError, ProductErrorCode
 from product.auth.base import AuthIdentity
 from product.devices.base import DeviceDescriptor, DeviceState
@@ -24,7 +25,6 @@ from product.monitoring.coordinator import MonitoringService
 from product.monitoring.event_adapter import ProductEventAdapter
 from product.monitoring.runtime_state import RuntimeState, SessionEntry
 from product.persistence.bridge import PersistenceBridge, PersistingJournal, SessionMeta
-from product.persistence.store import CapstoneSqliteStore
 from product.session import (
     MonitoringSession,
     SessionState,

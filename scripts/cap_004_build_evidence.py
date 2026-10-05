@@ -31,7 +31,7 @@ OUT = ROOT / "reports/capstone/cap_004"
 LOGS = OUT / "logs"
 PROTOCOL = ROOT / "configs/capstone/cap_004_auth_persistence_protocol_v1.json"
 LOCK = ROOT / "artifacts/capstone/CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.lock.json"
-CODE_DIRS = ("product/auth", "product/persistence", "product/sessions")
+CODE_DIRS = ("product/auth", "product/persistence", "product/sessions", "capstone_persistence")
 CODE_FILES = ("api/product_app_v1_1.py", "product/api/models_v2.py", "scripts/run_capstone_product.py")
 CRITICAL_PACKAGES = ("torch", "numpy", "scipy", "wfdb", "scikit-learn", "flwr", "fastapi", "pydantic",
                      "httpx", "cryptography", "starlette", "uvicorn", "websockets", "pytest", "ruff")
@@ -127,9 +127,19 @@ def freeze_precedes_result() -> dict:
     ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", freeze, "HEAD"], cwd=ROOT).returncode == 0
     lock = json.loads(LOCK.read_text())
     expected = {**lock["bound_files"], **{c["path"]: c["sha256"] for c in lock["components"].values()}}
+    registry = dict(lock["component_registry"])
     for amendment in sorted((ROOT / "artifacts/capstone").glob("CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_*.json")):
-        expected.update({p: v["new_sha256"] for p, v in json.loads(amendment.read_text())["files"].items()})
+        data = json.loads(amendment.read_text())
+        expected.update({p: v["new_sha256"] for p, v in data["files"].items()})
+        for path, move in data.get("moved_files", {}).items():
+            expected.pop(path, None)
+            expected[move["to"]] = move["new_sha256"]
+        expected.update(data.get("added_files", {}))
+        if "component_registry" in data:
+            registry["sha256"] = data["component_registry"]["new_sha256"]
     drift = [p for p, d in expected.items() if hash_file(ROOT / p) != d]
+    if hash_file(ROOT / registry["path"]) != registry["sha256"]:
+        drift.append(registry["path"])
     return {"ok": ancestor and not leaked and not drift, "freeze_commit": freeze,
             "freeze_is_ancestor_of_head": ancestor, "result_files_present_in_freeze": leaked,
             "bound_file_drift_since_freeze": drift}
@@ -144,9 +154,13 @@ def _pins(text: str) -> dict[str, str]:
     return pins
 
 
+PIN_FILE = "requirements-capstone-auth.lock"
+
+
 def dependency_audit() -> dict:
     entry_pins = _pins(_git("show", f"{EXPECTED_ENTRY}:requirements-dev.lock"))
     now_pins = _pins((ROOT / "requirements-dev.lock").read_text())
+    extra_pins = _pins((ROOT / PIN_FILE).read_text())
     ok, deltas = dependency_files_ok()
     installed = {}
     for pkg in (*CRITICAL_PACKAGES, "clerk-backend-api", "pyjwt"):
@@ -156,11 +170,16 @@ def dependency_audit() -> dict:
             installed[pkg] = None
     changed = {p: [entry_pins.get(p), now_pins.get(p)] for p in set(entry_pins) | set(now_pins)
                if entry_pins.get(p) != now_pins.get(p)}
-    return {"entry_commit": EXPECTED_ENTRY, "pins_changed_in_lock": changed,
+    return {"entry_commit": EXPECTED_ENTRY, "pins_changed_in_requirements_dev_lock": changed,
+            "pyproject_and_requirements_dev_lock_byte_identical_to_entry": not any(
+                d["added_lines"] or d["removed_lines"] for d in deltas[:2]),
+            "additive_pin_file": PIN_FILE, "additive_pins": extra_pins,
+            "why_additive": "artifacts/MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1.lock.json binds pyproject.toml and requirements-dev.lock byte-for-byte",
             "critical_pins_entry_vs_now": {p: [entry_pins.get(p), now_pins.get(p)] for p in CRITICAL_PACKAGES},
             "critical_unchanged": all(entry_pins.get(p) == now_pins.get(p) for p in CRITICAL_PACKAGES),
             "critical_installed_equals_pin": {p: installed[p] == now_pins.get(p) for p in CRITICAL_PACKAGES if now_pins.get(p)},
-            "installed": installed, "only_allowed_additions": ok and set(changed) <= {"clerk-backend-api", "pyjwt"},
+            "installed": installed,
+            "only_allowed_additions": ok and not changed and set(extra_pins) == {"clerk-backend-api", "pyjwt"},
             "file_deltas": deltas, "clerk_installed_version": installed["clerk-backend-api"],
             "policy": json.loads(PROTOCOL.read_text())["dependency_policy"]}
 
@@ -320,8 +339,7 @@ def criteria(final: bool) -> None:
     s1v1 = json.loads((ROOT / "contracts/capstone/storage_policy_v1.json").read_text())
     s2 = json.loads((ROOT / "contracts/capstone/storage_policy_v2.json").read_text())
     api2 = json.loads((ROOT / "contracts/capstone/product_api_v2.json").read_text())
-    pyproject = (ROOT / "pyproject.toml").read_text()
-    lock_text = (ROOT / "requirements-dev.lock").read_text()
+    pin_file = (ROOT / PIN_FILE).read_text()
     metric_hits = [w for w in METRIC_WORDS if any(w in json.dumps(r).lower() for r in runs)]
     predeclared_ok = all(
         r["observed"]["windows"] == PREDECLARED["windows"] and r["observed"]["valid"] == PREDECLARED["valid"]
@@ -342,7 +360,7 @@ def criteria(final: bool) -> None:
         "@storage_successor": s2["supersedes"]["sha256"] == hash_file(ROOT / "contracts/capstone/storage_policy_v1.json") and "scenario_id" in next(e for e in s2["entities"] if e["table"] == "devices")["columns"] and "scenario_id" not in next(e for e in s1v1["entities"] if e["table"] == "devices")["columns"],
         "@api_successor": {"auth_provider", "demo_mode"} <= set(api2["system_info_v2"]["added_fields"]) and "SQLITE" in api2["system_info_v2"]["changed_values"]["persistence_mode"],
         "@clerk_sdk_imported": "from clerk_backend_api.security import" in (ROOT / "product/auth/clerk.py").read_text(),
-        "@clerk_exact_pin": "clerk-backend-api==7.0.0" in pyproject and "clerk-backend-api==7.0.0" in lock_text and deps["clerk_installed_version"] == "7.0.0",
+        "@clerk_exact_pin": "clerk-backend-api==7.0.0" in pin_file and ">=" not in pin_file and deps["clerk_installed_version"] == "7.0.0",
         "@dependency_firewall": deps["critical_unchanged"] and all(deps["critical_installed_equals_pin"].values()),
         "@dependency_additions_only": deps["only_allowed_additions"] and dependency_files_ok()[0],
         "@e2e_no_credentials_in_database": all(not a["credential_strings_in_database"] and not b["credential_strings_in_database"] for _r, a, b in both),

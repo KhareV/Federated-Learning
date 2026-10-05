@@ -1,0 +1,95 @@
+{
+ "added_files": {
+  "capstone_persistence/__init__.py": "ce6a5411f2f8c981e3918c59d8d4dab1afd9b4ca648a25720e49c7e0ca81c1ce",
+  "requirements-capstone-auth.lock": "7c75bc14e595af8706f6de3605c7d69ffe5200e43859090d84d0b0b7c20da9e3"
+ },
+ "amendment_id": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_2",
+ "change": "(1) The Clerk SDK pins (clerk-backend-api==7.0.0, PyJWT==2.15.1) are recorded in the additive requirements-capstone-auth.lock; pyproject.toml and requirements-dev.lock are restored byte-identical to the entry commit. (2) The SQLite store module moves from product/persistence/store.py to capstone_persistence/store.py (class and API unchanged; imports updated). Dependent code, the protected-audit allow-list, the evidence evaluator's dependency checks, the mutation-control target path, test imports and the component registry path are updated accordingly. CAPG3 criteria text, the protocol document and every implementation behaviour are unchanged.",
+ "component_registry": {
+  "new_sha256": "d115639853f9fbc045c2c8d6460178d2de4c73c65b688bcb06535f6fd75ac9ce",
+  "old_sha256": "cd785d1ed5d526e48d633fa90a81270ad47fa6f399b2b11af49a4f521329988a",
+  "path": "manifests/capstone/component_registry_cap_004_v1.csv"
+ },
+ "decided_by": "the user (AskUserQuestion): additive pin file (recommended) and move the store out of product/ (recommended)",
+ "defects": [
+  "Defect 1: the frozen implementation edited pyproject.toml and requirements-dev.lock, which artifacts/MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1.lock.json binds byte-for-byte; the frozen V2-014 tests test_lock_binds_method_files_and_excludes_lifecycle_test and test_evidence_verifier_passes_in_current_state failed in the first full regression.",
+  "Defect 2: product/persistence/store.py contains the text 'sqlite3', which the frozen CAP-001 test tests/test_capstone_contracts.py::test_product_package_is_pure_interface_code forbids anywhere under product/; that test failed in the first prior-phase run."
+ ],
+ "files": {
+  "api/product_app_v1_1.py": {
+   "new_sha256": "47ae7b03eb05796ce4d807e641e5adf27f54ceb16c146d62119419c12c9de985",
+   "old_sha256": "3a6f2c110d7a4817e5d06982cbaa0048d29b60bd1eabc69d4acfadf49b7a8a25"
+  },
+  "product/persistence/bridge.py": {
+   "new_sha256": "450f8936f7c1e93a98df04f4938556ee2e23a84784b4999c40516c485374339a",
+   "old_sha256": "15f463ce25dae9dcd04d947d3f9920df4029ece42fc8d8c0b55f1c092388f99c"
+  },
+  "product/persistence/recovery.py": {
+   "new_sha256": "55333a2a717ef9ca6f7ae692d0e044280ba589d8d99270537794bc9480d9ddbc",
+   "old_sha256": "a0262e10947e18d0a4c1e58ec80bc00cd933ef29e57de10d27d8eb6937959bb1"
+  },
+  "product/sessions/service.py": {
+   "new_sha256": "08892ace20ab8c1faed8811a8b65366882e7dbc2b546408a8172c9eeba11bba7",
+   "old_sha256": "fb68fccf28d3c1d972ffd122dc4e659794e6c549d01a7308c838a65a4da84451"
+  },
+  "pyproject.toml": {
+   "new_sha256": "af83432eea745b52acc268ce1040edefd83cc8edc6a94afd9f7e8232aaecab34",
+   "old_sha256": "40a8faa2cf8fccfdcaaf229e1f8790a40852edef3401a9b13a459f0631089961"
+  },
+  "requirements-dev.lock": {
+   "new_sha256": "0d4a0561bfadf89157b9f6f6dfbfa87e885aca2815a45a442e04a98d662f2a0e",
+   "old_sha256": "e070d30a0445649ad5a8e74bd8fb2fc23a2bd8a35f80fa4c0356da803817612c"
+  },
+  "scripts/cap_004_build_evidence.py": {
+   "new_sha256": "faed7c0b536c771523660df3cf451ed60eabbe382c4a5d65558bd37f32375e5f",
+   "old_sha256": "736d4d0666a47dc1baaf83a7a9fa4ff7a22174d7d7df69d6a4973e4cd2fb490c"
+  },
+  "scripts/cap_004_mutation_controls.py": {
+   "new_sha256": "8502d080e29da29631278cf04fb8f1e135cee248a2cc653e15327125720a3183",
+   "old_sha256": "dbcf01ac2880988b62eedbcd51e51e2d180a0360cbdfd2f41e52665be4bbc953"
+  },
+  "scripts/cap_004_protected_audit.py": {
+   "new_sha256": "2c910ccbf427fd205543c003b62702102bccd7eef5d6970783ded2fc55ef9a86",
+   "old_sha256": "ba1d6100700c7edb7ca24bcf90354b3bec43b53f94a4107f0f42482206dfce4e"
+  },
+  "scripts/run_capstone_persistent_e2e.py": {
+   "new_sha256": "62824aba8c8980729102db0dcdb29d29fc84b9d908476b7c4da01a0ae4169134",
+   "old_sha256": "ca4241fff0086ecd569999a5446db709ae092ddef0d26ecad4422fd5eb2aedf9"
+  },
+  "scripts/run_capstone_product.py": {
+   "new_sha256": "1b9065a7e5d0bd8a644bb0f228301df4024d9886a7fa64cd12d98fd149719da4",
+   "old_sha256": "d7b7a3988f2abda0bc46a89d4d7ec85352b519e8831c4d90b5592403128aa5c0"
+  },
+  "tests/capstone_persistent_support.py": {
+   "new_sha256": "c17e4039eb96b9c0faf7a1a220994f1ee92c87962800955f45fbcafe06e07f6a",
+   "old_sha256": "8e7bde9e94251df53a0211fd211d6cb0c4e6f6184842afd2d2003c26bf22a28c"
+  },
+  "tests/test_capstone_persistence.py": {
+   "new_sha256": "e74a3b40aebdf2871f3f94ebedd0c650db8b5bcafd083478222a35589149f88f",
+   "old_sha256": "94745a25d1a065f59eeed324cbbc125c27e51066311e93c6fa4e0b02ad7f9c98"
+  },
+  "tests/test_capstone_restart_recovery.py": {
+   "new_sha256": "06fc1ffbb2657667eb863ecfd98642845a78214f4ecc1ddcdb1ab0f1de5c1c51",
+   "old_sha256": "2a7fe8d528b418abe74eef90375b887edbae187513b082567eb385c0a18e66af"
+  },
+  "tests/test_capstone_session_service.py": {
+   "new_sha256": "5a829b26e555f9c2c271db940c2eb00f539250c0bf9532c85edaeb860f33ec8e",
+   "old_sha256": "e17514f0d98d66cda6aa0776b40dec15970225451e7838dd57e20e4b1da04da4"
+  }
+ },
+ "freeze_commit": "1fb3023",
+ "made_before": "the recorded CAPG3 criteria evaluation. The first-pass canonical runs, crash run, mutation run and test logs (executed on the pre-amendment freeze) were DISCARDED and fully re-executed on the amended freeze; nothing from them tuned any code. First-pass observations (for disclosure): canonical runs 1 and 2 and the crash run met every predeclared invariant, with the projected stream identical to the CAP-003 stream.",
+ "moved_files": {
+  "product/persistence/store.py": {
+   "new_sha256": "38e7bd1f4927c76be7815239cca09c72cbb07f775d08119cb2319b137d7c1717",
+   "old_sha256": "38e7bd1f4927c76be7815239cca09c72cbb07f775d08119cb2319b137d7c1717",
+   "to": "capstone_persistence/store.py"
+  }
+ },
+ "previous_amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_1",
+ "unchanged": {
+  "capg3_criteria_text": "identical",
+  "protocol_document": "byte-identical to the freeze commit",
+  "scientific_and_cap003_files": "byte-identical"
+ }
+}

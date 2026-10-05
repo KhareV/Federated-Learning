@@ -8,9 +8,9 @@ from pathlib import Path
 from typing import Any
 
 from api.product_app_v1_1 import create_product_app_v1_1
+from capstone_persistence.store import CapstoneSqliteStore
 from product.auth.base import AuthProviderDescription, AuthProviderType
 from product.devices.scenarios import TimingMode
-from product.persistence.store import CapstoneSqliteStore
 from scripts.capstone_cap003_test_identity import cap003_test_identity_resolver
 from tests.capstone_product_support import (
     BASE,

@@ -1,0 +1,7 @@
+# CAP-004 additive dependency pins (kept out of pyproject.toml / requirements-dev.lock because
+# artifacts/MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1.lock.json binds those two files byte-for-byte).
+# Install after requirements-dev.lock:  pip install -r requirements-capstone-auth.lock
+# clerk-backend-api is the official Clerk Python SDK (exact pin); PyJWT is its only new transitive
+# dependency. No existing pin in requirements-dev.lock is changed or upgraded.
+clerk-backend-api==7.0.0
+PyJWT==2.15.1

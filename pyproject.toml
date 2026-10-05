@@ -17,7 +17,6 @@ dependencies = [
   "joblib==1.6.0",
   "torch==2.14.0",
   "flwr==1.39.0",
-  "clerk-backend-api==7.0.0",
 ]
 
 [project.optional-dependencies]

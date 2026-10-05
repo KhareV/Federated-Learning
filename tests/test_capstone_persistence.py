@@ -14,14 +14,14 @@ import httpx
 import pytest
 from fastapi.testclient import TestClient
 
-from product.contracts import ROOT, load_contract
-from product.persistence import preview as preview_module
-from product.persistence.schema import RUNTIME_COLUMNS, SCHEMA_VERSION, ddl_statements
-from product.persistence.store import (
+from capstone_persistence.store import (
     FUTURE_TABLES,
     CapstoneSqliteStore,
     SchemaVersionError,
 )
+from product.contracts import ROOT, load_contract
+from product.persistence import preview as preview_module
+from product.persistence.schema import RUNTIME_COLUMNS, SCHEMA_VERSION, ddl_statements
 from tests.capstone_persistent_support import (
     BASE,
     USER_A,

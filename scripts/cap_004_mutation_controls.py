@@ -44,10 +44,10 @@ MUTATIONS = (
      "latency_ms=payload.latency_ms, raw_context=raw)\n",
      'latency_ms=payload.latency_ms, raw_context=(payload.context.model_dump(mode="json") if payload.context else raw))\n',
      [PERSIST_T]),
-    ("STALE_MONITORING_SILENTLY_RESUMED", "product/persistence/store.py",
+    ("STALE_MONITORING_SILENTLY_RESUMED", "capstone_persistence/store.py",
      '                    (SessionState.FAILED.value, now_us, row["session_id"]))\n',
      '                    (row["state"], now_us, row["session_id"]))\n', [RESTART_T]),
-    ("FL_TABLE_RECEIVES_TRUTH_LABELS", "product/persistence/store.py",
+    ("FL_TABLE_RECEIVES_TRUTH_LABELS", "capstone_persistence/store.py",
      "    def insert_context_snapshot(self, *, session_id: str, sequence_index: int, timestamp_us: int,\n"
      "                                context: Mapping[str, Any]) -> None:\n",
      "    def insert_context_snapshot(self, *, session_id: str, sequence_index: int, timestamp_us: int,\n"

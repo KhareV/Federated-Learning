@@ -30,10 +30,10 @@ import httpx
 from websockets.exceptions import ConnectionClosed
 from websockets.sync.client import connect
 
+from capstone_persistence.store import CapstoneSqliteStore
 from product.contracts import load_contract
 from product.devices.replay import canonical_json
 from product.persistence import preview as preview_module
-from product.persistence.store import CapstoneSqliteStore
 from scripts.run_capstone_monitoring_e2e import launch_released_inference
 
 ROOT = Path(__file__).resolve().parents[1]

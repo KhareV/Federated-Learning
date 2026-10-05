@@ -15,10 +15,10 @@ import time
 import httpx
 from fastapi.testclient import TestClient
 
+from capstone_persistence.store import CapstoneSqliteStore
 from product.contracts import ROOT, load_contract
 from product.devices.base import DeviceState
 from product.persistence.recovery import POLICY
-from product.persistence.store import CapstoneSqliteStore
 from scripts.run_capstone_monitoring_e2e import launch_released_inference
 from tests.capstone_persistent_support import (
     BASE,

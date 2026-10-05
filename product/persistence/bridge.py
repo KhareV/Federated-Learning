@@ -21,6 +21,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from api.schemas import InferWindowResponse
+from capstone_persistence.store import CapstoneSqliteStore, StorageIntegrityError
 from product.events import MonitoringLiveEvent
 from product.inference.client import InferenceOutcome, OutcomeKind
 from product.monitoring.event_journal import MonitoringEventJournal
@@ -31,7 +32,6 @@ from product.persistence.preview import (
     PreviewAccumulator,
     encode,
 )
-from product.persistence.store import CapstoneSqliteStore, StorageIntegrityError
 from product.session import SessionState
 
 LOGGER = logging.getLogger("nhm.product.persistence")

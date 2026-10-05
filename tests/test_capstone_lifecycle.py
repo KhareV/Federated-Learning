@@ -205,14 +205,22 @@ def test_cap_004_freeze_lock_binds_every_listed_file_byte_for_byte() -> None:
     assert lock["status"] == "FROZEN_ENGINEERING_PROTOCOL"
     bound = {**lock["bound_files"], **lock["upstream_frozen_identity"]}
     bound.update({c["path"]: c["sha256"] for c in lock["components"].values()})
+    registry = dict(lock["component_registry"])
     for amendment in sorted((ROOT / "artifacts/capstone").glob(
             "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_*.json")):
-        for path, change in json.loads(amendment.read_text())["files"].items():
+        data = json.loads(amendment.read_text())
+        for path, change in data["files"].items():
             assert bound[path] == change["old_sha256"]
             bound[path] = change["new_sha256"]
+        for path, move in data.get("moved_files", {}).items():
+            assert bound.pop(path) == move["old_sha256"]
+            bound[move["to"]] = move["new_sha256"]
+        bound.update(data.get("added_files", {}))
+        if "component_registry" in data:
+            assert registry["sha256"] == data["component_registry"]["old_sha256"]
+            registry["sha256"] = data["component_registry"]["new_sha256"]
     for path, digest in bound.items():
         assert hash_file(ROOT / path) == digest, path
-    registry = lock["component_registry"]
     assert hash_file(ROOT / registry["path"]) == registry["sha256"]
 
 

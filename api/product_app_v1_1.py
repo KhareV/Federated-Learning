@@ -19,6 +19,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.requests import HTTPConnection
 
+from capstone_persistence.store import CapstoneSqliteStore
 from product.api.errors import (
     ProductError,
     ProductErrorBody,
@@ -36,7 +37,6 @@ from product.monitoring.coordinator import MonitoringService
 from product.monitoring.runtime_state import RuntimeState
 from product.persistence.bridge import PersistenceBridge, observing_factory
 from product.persistence.recovery import RecoveryReport, recover
-from product.persistence.store import CapstoneSqliteStore
 from product.session import MonitoringSession, default_runtime_identity
 from product.sessions.service import (
     IdGenerator,

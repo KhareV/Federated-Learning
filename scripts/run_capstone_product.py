@@ -24,11 +24,11 @@ from api.product_app_v1_1 import (
     DEFAULT_INFERENCE_URL,
     create_product_app_v1_1,
 )
+from capstone_persistence.store import DEFAULT_DB_PATH, ENV_DB_PATH, CapstoneSqliteStore
 from product.auth.base import AuthConfigError
 from product.auth.factory import build_auth_provider
 from product.auth.resolver import make_identity_resolver
 from product.devices.scenarios import TimingMode
-from product.persistence.store import DEFAULT_DB_PATH, ENV_DB_PATH, CapstoneSqliteStore
 
 ENV_INFERENCE_URL = "NHM_PRODUCT_INFERENCE_URL"
 ENV_ALLOWED_ORIGINS = "NHM_PRODUCT_ALLOWED_ORIGINS"

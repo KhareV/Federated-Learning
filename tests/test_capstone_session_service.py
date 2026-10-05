@@ -266,7 +266,7 @@ def test_manual_stop_goes_through_the_frozen_stop_and_is_persisted(tmp_path) -> 
         return CapstoneInferenceClient("http://inference.test", transport=httpx.MockTransport(gated))
 
     from api.product_app_v1_1 import create_product_app_v1_1 as build
-    from product.persistence.store import CapstoneSqliteStore
+    from capstone_persistence.store import CapstoneSqliteStore
     store = CapstoneSqliteStore(tmp_path / "ms.sqlite3")
     app = build(store=store, identity_resolver=cap003_test_identity_resolver,
                 auth_description=TEST_DESCRIPTION, inference_client_factory=factory,
@@ -330,7 +330,7 @@ def test_persisted_session_websocket_for_an_earlier_process_closes_cleanly_witho
 
 # ---- CORS --------------------------------------------------------------------------------------
 def test_cors_uses_an_explicit_allow_list_and_never_a_wildcard_with_credentials(tmp_path) -> None:
-    from product.persistence.store import CapstoneSqliteStore
+    from capstone_persistence.store import CapstoneSqliteStore
     store = CapstoneSqliteStore(tmp_path / "cors.sqlite3")
     with pytest.raises(ValueError, match="WILDCARD"):
         create_product_app_v1_1(store=store, identity_resolver=cap003_test_identity_resolver,
@@ -410,7 +410,8 @@ def test_persistence_does_not_alter_or_reorder_the_live_monitoring_stream(tmp_pa
 
 
 def test_cap_004_imports_no_fl_runtime_and_never_writes_fl_or_candidate_tables(tmp_path) -> None:
-    new_code = [p for d in ("product/auth", "product/persistence", "product/sessions")
+    new_code = [p for d in ("product/auth", "product/persistence", "product/sessions",
+                                "capstone_persistence")
                 for p in (ROOT / d).rglob("*.py")] + [
         ROOT / "api/product_app_v1_1.py", ROOT / "scripts/run_capstone_product.py"]
     for path in new_code:
