@@ -52,9 +52,11 @@ MUTATIONS = (
      "                                context: Mapping[str, Any]) -> None:\n",
      "    def insert_context_snapshot(self, *, session_id: str, sequence_index: int, timestamp_us: int,\n"
      "                                context: Mapping[str, Any]) -> None:\n"
-     '        self._run("INSERT OR IGNORE INTO session_summaries (session_id, summary_version, duration_ms,'
-     " windows_inferred, state_counts_json, quality_counts_json, reconnect_count, disconnect_count,"
-     " generated_at_us) VALUES (?, 'X', 0, 0, '{\"truth_label\": 1}', '{}', 0, 0, 0)\", (session_id,))\n",
+     "        self._run(\n"
+     '            "INSERT OR IGNORE INTO session_summaries (session_id, summary_version, duration_ms,"\n'
+     '            " windows_inferred, state_counts_json, quality_counts_json, reconnect_count,"\n'
+     '            " disconnect_count, generated_at_us) VALUES (?, \'truth_label\', 0, 0, \'{}\',"\n'
+     '            " \'{}\', 0, 0, 0)", (session_id,))\n',
      [PERSIST_T, SESSION_T]),
 )
 

@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_1",
+ "change": "Mutation control FL_TABLE_RECEIVES_TRUTH_LABELS rebuilt so the mutated store.py is valid Python and the control is caught behaviourally (a write into the schema-only session_summaries table) instead of by a collection error. Also the first-failure capture counts ERROR lines. Mutation anchors, the other nine controls, the control names and the CAPG3 criteria are unchanged.",
+ "defect": "The frozen mutation text left an unterminated string literal, so the mutated store.py had a SyntaxError and the control was 'caught' only because the persistence test module failed to collect. The pre-freeze rehearsal showed an empty first-failure line for this control and that was not investigated before the freeze.",
+ "files": {
+  "scripts/cap_004_mutation_controls.py": {
+   "new_sha256": "dbcf01ac2880988b62eedbcd51e51e2d180a0360cbdfd2f41e52665be4bbc953",
+   "old_sha256": "ab418f0043a7bbcc30134820f71886fa917c16037bec0c0fe52f2a7e1dbdf2a6"
+  }
+ },
+ "freeze_commit": "1fb3023",
+ "made_before": "the recorded CAPG3 criteria evaluation and before the recorded mutation_controls.json (the first mutation run, with the defective control, was discarded)",
+ "unchanged": {
+  "canonical_runs": "executed on the frozen implementation; independent of this change",
+  "capg3_criteria_text": "identical",
+  "implementation_and_tests": "byte-identical to the freeze commit"
+ }
+}
