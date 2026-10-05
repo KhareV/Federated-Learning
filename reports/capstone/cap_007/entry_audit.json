@@ -1,0 +1,43 @@
+{
+ "all_prior_locks_and_amendment_chains_verified": true,
+ "chronology_disclosure": "no CAP-007 implementation existed before this entry commit; only read-only inspection of contracts and frozen FL modules preceded it",
+ "ci": {
+  "queried": false,
+  "triggered": false
+ },
+ "entry_sha": "651bfa61022cf699a43c0a91cbc43a6486943bcb",
+ "expected_entry_sha": "651bfa61022cf699a43c0a91cbc43a6486943bcb",
+ "gate": "CAPG6",
+ "intervening_commits": [],
+ "later_phases_not_started": true,
+ "matches_expected_entry": true,
+ "origin_main_sha": "651bfa61022cf699a43c0a91cbc43a6486943bcb",
+ "phase": "CAP-007",
+ "preserved_disclosures": [
+  "CAP-001 gate-row wording discrepancy",
+  "CAP-002 code-drafted-before-entry",
+  "CAP-003 LIVE_SPEED bounded-settle limitation",
+  "CAP-003 manual-stop-mid-outage limitation",
+  "CAP-003 context projection",
+  "CAP-003 pre-freeze smoke",
+  "CAP-004 additive Clerk lock",
+  "CAP-004 SQLite store location",
+  "CAP-004 six-amendment chain",
+  "inherited CAP-003 flaky test",
+  "CAP-004 local-only SQLite git exclude",
+  "CAP-004 Clerk local-fixture-only",
+  "CAP-005 Clerk WebSocket cookie path unverified",
+  "CAP-005 no live Clerk-account E2E",
+  "CAP-005 accessibility audit not equivalent to formal WCAG certification",
+  "CAP-005 canonical UI evidence using ACCELERATED simulation",
+  "CAP-006 logical one-laptop locality",
+  "CAP-006 synthetic engineering labels",
+  "CAP-006 FedProx smoke classification"
+ ],
+ "statuses_at_entry": {
+  "CAP-001..006": "PASS",
+  "CAP-007..011": "NOT_STARTED",
+  "CAPG0..5": "PASS"
+ },
+ "working_tree_clean": false
+}
