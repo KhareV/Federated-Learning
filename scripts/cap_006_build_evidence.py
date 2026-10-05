@@ -100,7 +100,8 @@ def code_only(text: str) -> str:
     """Source text without comments and docstrings/long string literals (mentions are not uses)."""
     text = re.sub(r'(?s)(\"\"\"|\'\'\').*?\1', "", text)
     text = re.sub(r"(?m)#.*$", "", text)
-    return re.sub(r"/\*[\s\S]*?\*/|(?m)^\s*//.*$", "", text)
+    text = re.sub(r"/\*[\s\S]*?\*/", "", text)
+    return re.sub(r"(?m)^\s*//.*$", "", text)
 
 
 def new_files(entry_sha: str) -> list[str]:

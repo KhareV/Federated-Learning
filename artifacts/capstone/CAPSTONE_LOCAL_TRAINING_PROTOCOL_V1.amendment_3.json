@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1_AMENDMENT_3",
+ "change": "Fix of amendment 2's code_only helper: the JS line-comment regex had an inline (?m) flag inside an alternation (re.error); the two comment patterns are now applied separately. The helper is verified directly.",
+ "defect": "Amendment 2 introduced a regex that did not compile, so the evaluator crashed before evaluating criteria.",
+ "files": {
+  "scripts/cap_006_build_evidence.py": {
+   "new_sha256": "f58138147c5d0a2de4b20be76102b98dae60c09538bbbf29b16452b257e6ad27",
+   "old_sha256": "41f0bebc285ac40f31b7c128879dd390477919190b36c6d9052aab2783cc5ff9"
+  }
+ },
+ "freeze_commit": "a1582da",
+ "made_before": "the recorded CAPG5 criteria evaluation",
+ "previous_amendment": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1_AMENDMENT_2",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical to the freeze commit",
+  "capg5_criteria_text": "identical"
+ }
+}
