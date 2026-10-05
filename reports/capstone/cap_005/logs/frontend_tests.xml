@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="147" failures="0" errors="0" time="1.016917293">
+    <testsuite name="src/lib/product/__tests__/api-auth.test.ts" timestamp="2026-10-05T15:07:24.117Z" hostname="MacBook-Air.local" tests="11" failures="0" errors="0" skipped="0" time="0.01032875">
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="product client &gt; uses same-origin /product/v1 and implements only CAP-004 routes (no /v1/infer-window, no model field)" time="0.003283959">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="product client &gt; sends Authorization: Bearer only when a token provider yields one, and stores nothing" time="0.004129917">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="product client &gt; maps product errors honestly (401/403/404/409/400/transport)" time="0.000876875">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="product client &gt; builds a same-origin WebSocket URL that carries no token" time="0.000081709">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="CAPSTONE_FRONTEND_AUTH_V1 bootstrap &gt; DEMO backend: never initialises or imports Clerk; /me supplies the demo identity" time="0.000413709">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="CAPSTONE_FRONTEND_AUTH_V1 bootstrap &gt; mode is decided by the backend /system, never by a frontend toggle" time="0.000172583">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="CAPSTONE_FRONTEND_AUTH_V1 bootstrap &gt; CLERK backend: initialises ClerkJS (mocked official boundary) and sends the session token as Bearer" time="0.000217417">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="CAPSTONE_FRONTEND_AUTH_V1 bootstrap &gt; CLERK backend with a missing publishable key shows AUTHENTICATION UNAVAILABLE and does not fall back to Demo" time="0.00012175">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="CAPSTONE_FRONTEND_AUTH_V1 bootstrap &gt; CLERK backend whose Clerk SDK fails to initialise never falls back to Demo" time="0.000113542">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="CAPSTONE_FRONTEND_AUTH_V1 bootstrap &gt; sign-out clears the identity state and signs the Clerk session out" time="0.00010325">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/api-auth.test.ts" name="CAPSTONE_FRONTEND_AUTH_V1 bootstrap &gt; an unreachable backend is reported as such (no identity invented)" time="0.000068417">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/product/__tests__/claims-and-copy.test.ts" timestamp="2026-10-05T15:07:24.118Z" hostname="MacBook-Air.local" tests="23" failures="0" errors="0" skipped="0" time="0.037124709">
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="product source layout &gt; exists: the product shell routes and the typed product layer" time="0.002455875">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="product source layout &gt; every required future destination exists as a clearly marked not-yet-enabled shell" time="0.002393334">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="secrets and dependencies &gt; the frontend source contains no Clerk secret/JWT key or session-token fixture" time="0.010985375">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="secrets and dependencies &gt; only the public publishable key name is read; the deprecated clerk-sveltekit adapter is not used" time="0.0012285">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="secrets and dependencies &gt; Clerk is only imported lazily (dynamic import) from the auth module" time="0.001373166">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="secrets and dependencies &gt; no new frontend dependency category was added (no state/router/chart/websocket library)" time="0.000418083">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="product monitoring path purity &gt; the product never calls the research inference route directly" time="0.002196292">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="product monitoring path purity &gt; the product does not import the legacy dashboard session logic that maps 422 -&gt; RECHECK_SENSOR" time="0.002414333">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="product monitoring path purity &gt; no monitoring state is assigned anywhere in product code except from a monitoring.state event" time="0.003496375">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="product monitoring path purity &gt; the product does not implement threshold / quality / HR / SpO2 / debounce logic" time="0.000807834">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="product monitoring path purity &gt; no model / checkpoint / calibration selector exists in product request code" time="0.000105375">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="product monitoring path purity &gt; the WebSocket URL builder and store never place a token in the URL" time="0.000214167">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="offline product path &gt; /sign-in and /app/* sources, app.html and app.css reference no remote host" time="0.001241625">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="offline product path &gt; the landing page also needs no remote asset (fonts, images)" time="0.000273375">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="landing page product story and claim corrections &gt; primary CTAs go to the product flow, not the legacy /monitor" time="0.000092166">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="landing page product story and claim corrections &gt; frames NHM as a federated physiological monitoring research platform with the three pillars" time="0.000073417">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="landing page product story and claim corrections &gt; no longer claims attached hardware, edge inference, or real participating cities" time="0.000315459">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="landing page product story and claim corrections &gt; legacy /monitor is a redirect/notice (no fake auth-disabled identity) and /monitoring is labelled a research tool" time="0.000098">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="no fake metrics in the product shell &gt; /app pages contain no hard-coded dynamic-looking physiological, FL or session values" time="0.001398666">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="no fake metrics in the product shell &gt; no product file imports the old FL placeholder store/components" time="0.001072792">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="claim wording in product copy &gt; every &quot;diagnos*&quot; occurrence is negated/disclaiming" time="0.000308041">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="claim wording in product copy &gt; product copy never asserts physical hardware, on-device inference, real institutions or a PPG waveform (reviewed, qualification-aware)" time="0.000652125">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/claims-and-copy.test.ts" name="claim wording in product copy &gt; the reviewed qualified occurrences are exactly the expected disclaimers" time="0.000221916">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/product/__tests__/components.test.ts" timestamp="2026-10-05T15:07:24.119Z" hostname="MacBook-Air.local" tests="15" failures="0" errors="0" skipped="0" time="0.121247708">
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="sign-in &gt; DEMO backend: shows NHM OFFLINE FACULTY DEMO, discloses it is not Clerk, no password field, no Clerk init" time="0.018657333">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="sign-in &gt; ENTER DEMO WORKSPACE verifies /me and then navigates to /app" time="0.036249334">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="sign-in &gt; CLERK backend without a publishable key: AUTHENTICATION UNAVAILABLE and no demo entry" time="0.001859125">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="sign-in &gt; unreachable backend: actionable local system error" time="0.001523083">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="product shell + persistent Demo banner &gt; DEMO: the banner reads OFFLINE DEMO IDENTITY / NOT CLERK AUTHENTICATION and the shell shows first-class Federation navigation" time="0.014719292">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="product shell + persistent Demo banner &gt; CLERK mode: no demo banner" time="0.004108583">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="product shell + persistent Demo banner &gt; DemoBanner on its own is a persistent, visible note" time="0.001065375">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="device page &gt; walks NO DEVICE -&gt; attach -&gt; scan -&gt; FOUND -&gt; connect -&gt; CONNECTED with simulation labels and no hardware claim" time="0.012039959">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="monitoring page &gt; creates a session, opens the live socket, starts, and renders only backend events (quality != monitoring state)" time="0.008706">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="monitoring page &gt; shows the backend monitoring.state, the inference technical fields and a research-only probability section" time="0.006827167">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="monitoring page &gt; a device disconnect does not end the session; a system.error is a technical panel; a stream error is visible" time="0.00758975">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="monitoring page &gt; completion shows the persistent session id and View Sessions" time="0.003905208">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="overview + future-phase shells are honest &gt; overview shows real system identity, no fake metrics, and federation as not enabled" time="0.001881">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="overview + future-phase shells are honest &gt; federation page states the runtime is not enabled and shows no data" time="0.000763292">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/components.test.ts" name="WaveformPlot gaps &gt; draws null runs as separate polylines with a visible gap marker (no zero fill)" time="0.000819959">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/product/__tests__/live-model.test.ts" timestamp="2026-10-05T15:07:24.120Z" hostname="MacBook-Air.local" tests="21" failures="0" errors="0" skipped="0" time="0.028583542">
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="LiveModel on the real canonical MIXED stream &gt; consumes every event kind with a contiguous sequence" time="0.001124875">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="LiveModel on the real canonical MIXED stream &gt; records 93 windows as 86 VALID / 7 UNUSABLE and 86 inference results" time="0.000161">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="LiveModel on the real canonical MIXED stream &gt; shows ONLY backend monitoring.state changes: normal -&gt; context unavailable -&gt; normal" time="0.000170917">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="LiveModel on the real canonical MIXED stream &gt; observes the canonical outage as the gap [118800, 124199]" time="0.000085541">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="LiveModel on the real canonical MIXED stream &gt; keeps the rolling waveform buffer bounded (never all 2880 chunks)" time="0.000180583">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="LiveModel on the real canonical MIXED stream &gt; replay from sequence 0 is deterministic: reset + replay rebuilds identical state (no double counting)" time="0.008980125">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="product monitoring state is never fabricated from quality / 422-style windows &gt; quality UNUSABLE with no monitoring.state event leaves the monitoring state untouched" time="0.000182542">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="product monitoring state is never fabricated from quality / 422-style windows &gt; after a real NORMAL state, an UNUSABLE window does not change it to RECHECK_SENSOR" time="0.0000635">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="context and inference are never shown as current when stale &gt; a window waiting for its follow-ups is PENDING (previous values are not current, but no false &quot;unavailable&quot;)" time="0.000120292">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="context and inference are never shown as current when stale &gt; an UNUSABLE window settles immediately: earlier context is unavailable, earlier inference is &quot;none for window&quot;" time="0.000076417">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="context and inference are never shown as current when stale &gt; context_available=false is unavailable even for the latest window" time="0.000029875">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="context and inference are never shown as current when stale &gt; on the real canonical stream the settled states match: 7 UNUSABLE windows end as NONE_FOR_WINDOW, never CURRENT" time="0.015094958">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="typed PRODUCT_LIVE_EVENT_V1 union and sequence integrity &gt; accepts a valid event and rejects malformed / foreign payloads visibly" time="0.000273542">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="typed PRODUCT_LIVE_EVENT_V1 union and sequence integrity &gt; rejects an unavailable context that carries PPG values and a mismatched waveform count" time="0.000072375">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="typed PRODUCT_LIVE_EVENT_V1 union and sequence integrity &gt; requires next = previous + 1 and flags gaps and duplicates" time="0.00009225">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="typed PRODUCT_LIVE_EVENT_V1 union and sequence integrity &gt; a sequence gap puts the model into a visible PRODUCT STREAM ERROR and stops consuming" time="0.000127375">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="typed PRODUCT_LIVE_EVENT_V1 union and sequence integrity &gt; rejects an event from another session and a federation event on the monitoring socket" time="0.000063041">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="typed PRODUCT_LIVE_EVENT_V1 union and sequence integrity &gt; system.error is kept as a technical error, not a monitoring state" time="0.000338125">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="RollingWaveform: bounded, null gaps stay gaps &gt; never grows past capacity and drops the oldest samples" time="0.000093208">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="RollingWaveform: bounded, null gaps stay gaps &gt; keeps null as a gap: never zero-filled, never interpolated, separate segments" time="0.000212334">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/live-model.test.ts" name="RollingWaveform: bounded, null gaps stay gaps &gt; tracks an open gap and refuses an index discontinuity instead of fabricating samples" time="0.000068875">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/product/__tests__/real-backend.integration.test.ts" timestamp="2026-10-05T15:07:24.120Z" hostname="MacBook-Air.local" tests="1" failures="0" errors="0" skipped="1" time="0">
+        <testcase classname="src/lib/product/__tests__/real-backend.integration.test.ts" name="frontend product client against the REAL CAP-004 DEMO backend &gt; system -&gt; me -&gt; device -&gt; scan -&gt; connect -&gt; session -&gt; start -&gt; live WebSocket -&gt; completion -&gt; reload" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/product/__tests__/socket-store.test.ts" timestamp="2026-10-05T15:07:24.121Z" hostname="MacBook-Air.local" tests="7" failures="0" errors="0" skipped="0" time="0.719521917">
+        <testcase classname="src/lib/product/__tests__/socket-store.test.ts" name="LiveSocket bounded reconnect policy &gt; retries at most MAX_RECONNECTS times, resetting derived state on every (re)connect, then reports DISCONNECTED" time="0.000870334">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/socket-store.test.ts" name="LiveSocket bounded reconnect policy &gt; does not retry on a normal journal-complete close or on auth/ownership refusals; explicit reconnect works" time="0.000295208">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/socket-store.test.ts" name="ProductStore flows (fake backend: unit scope only) &gt; device flow: attach -&gt; scan -&gt; FOUND -&gt; connect -&gt; CONNECTED, state taken from the backend" time="0.001641375">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/socket-store.test.ts" name="ProductStore flows (fake backend: unit scope only) &gt; session flow: create opens the same-origin socket (no token in URL); start/stop go through the API" time="0.000625916">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/socket-store.test.ts" name="ProductStore flows (fake backend: unit scope only) &gt; live events render into state; reconnect replays from 0 without double counting" time="0.703124125">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/socket-store.test.ts" name="ProductStore flows (fake backend: unit scope only) &gt; a malformed event stops the stream visibly and never invents state" time="0.000561375">
+        </testcase>
+        <testcase classname="src/lib/product/__tests__/socket-store.test.ts" name="ProductStore flows (fake backend: unit scope only) &gt; a completed session close refreshes the persisted session from the API" time="0.011886042">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/api/__tests__/nhm-v1.test.ts" timestamp="2026-10-05T15:07:24.121Z" hostname="MacBook-Air.local" tests="11" failures="0" errors="0" skipped="0" time="0.003662875">
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: OpenAPI contract parity (Section 9) &gt; InferWindowResponse field names match contracts/openapi_v1.json exactly" time="0.000653041">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: OpenAPI contract parity (Section 9) &gt; InferWindowRequest field names match contracts/openapi_v1.json exactly" time="0.000075458">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: OpenAPI contract parity (Section 9) &gt; ErrorResponse field names match contracts/openapi_v1.json exactly" time="0.00005975">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: OpenAPI contract parity (Section 9) &gt; monitoring_state enum matches contracts/openapi_v1.json exactly (five states)" time="0.000321958">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: OpenAPI contract parity (Section 9) &gt; the route POST /v1/infer-window exists in the frozen OpenAPI contract" time="0.000042167">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: OpenAPI contract parity (Section 9) &gt; CONTRACT_VERSION and TARGET_ID match the OpenAPI info/schema constants" time="0.000087667">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: HTTP status mapping (Section 17) &gt; maps HTTP 200 to a success result" time="0.001291334">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: HTTP status mapping (Section 17) &gt; maps HTTP 400 to a request_error result, never a monitoring state" time="0.0001485">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: HTTP status mapping (Section 17) &gt; maps HTTP 422 to a signal_window_error result" time="0.000125333">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: HTTP status mapping (Section 17) &gt; maps HTTP 500 to a server_error result" time="0.000113875">
+        </testcase>
+        <testcase classname="src/lib/api/__tests__/nhm-v1.test.ts" name="nhm-v1 client: HTTP status mapping (Section 17) &gt; maps a network failure to a transport_error result, never a fabricated success" time="0.000093375">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/dashboard/__tests__/legacy-claims.test.ts" timestamp="2026-10-05T15:07:24.121Z" hostname="MacBook-Air.local" tests="8" failures="0" errors="0" skipped="0" time="0.033075291">
+        <testcase classname="src/lib/dashboard/__tests__/legacy-claims.test.ts" name="legacy claim audit: no unsupported hardware/diagnosis claims in active source &gt; no active file contains an unqualified: 24-bit ADC claim" time="0.007962083">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/legacy-claims.test.ts" name="legacy claim audit: no unsupported hardware/diagnosis claims in active source &gt; no active file contains an unqualified: 360 Hz sampling claim" time="0.003242917">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/legacy-claims.test.ts" name="legacy claim audit: no unsupported hardware/diagnosis claims in active source &gt; no active file contains an unqualified: PTB-XL as current project data" time="0.003075084">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/legacy-claims.test.ts" name="legacy claim audit: no unsupported hardware/diagnosis claims in active source &gt; no active file contains an unqualified: medical-grade claim" time="0.003253">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/legacy-claims.test.ts" name="legacy claim audit: no unsupported hardware/diagnosis claims in active source &gt; no active file contains an unqualified: clinical-grade claim" time="0.003524458">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/legacy-claims.test.ts" name="legacy claim audit: no unsupported hardware/diagnosis claims in active source &gt; no active file contains an unqualified: &quot;arrhythmia detected&quot; claim" time="0.003826333">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/legacy-claims.test.ts" name="legacy claim audit: no unsupported hardware/diagnosis claims in active source &gt; no active file contains an unqualified: &quot;disease risk&quot; claim" time="0.003795291">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/legacy-claims.test.ts" name="legacy claim audit: no unsupported hardware/diagnosis claims in active source &gt; no active file contains an unqualified: &quot;patient is abnormal&quot; claim" time="0.003563208">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/dashboard/__tests__/model-neutral-copy.test.ts" timestamp="2026-10-05T15:07:24.122Z" hostname="MacBook-Air.local" tests="3" failures="0" errors="0" skipped="0" time="0.0014215">
+        <testcase classname="src/lib/dashboard/__tests__/model-neutral-copy.test.ts" name="model-neutral dashboard copy (V2-013 / DASHBOARD_UI_V1_4) &gt; 422 presentation never claims a specific model was or was not run" time="0.000555791">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/model-neutral-copy.test.ts" name="model-neutral dashboard copy (V2-013 / DASHBOARD_UI_V1_4) &gt; exactly five public monitoring states are presented" time="0.000238417">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/model-neutral-copy.test.ts" name="model-neutral dashboard copy (V2-013 / DASHBOARD_UI_V1_4) &gt; route request model id is a build-time value, not a runtime selector" time="0.000242125">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/dashboard/__tests__/replay.test.ts" timestamp="2026-10-05T15:07:24.122Z" hostname="MacBook-Air.local" tests="22" failures="0" errors="0" skipped="0" time="0.026607959">
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay (applyRecordedResponseMetadata): public replay log &gt; the saved replay log has 12 rows" time="0.001120834">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay (applyRecordedResponseMetadata): public replay log &gt; feeding the log through the existing session store reproduces the exact history" time="0.00058325">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay (applyRecordedResponseMetadata): public replay log &gt; the latest outcome matches the last row of the log" time="0.000111833">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay (applyRecordedResponseMetadata): public replay log &gt; technical metadata (model/calibration/policy IDs) is preserved exactly from the log" time="0.000296041">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay (applyRecordedResponseMetadata): public replay log &gt; no gap markers appear for an all-200 replay" time="0.000082625">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay (applyRecordedResponseMetadata): public replay log &gt; does not reimplement monitoring-state computation: it is copied verbatim from the log" time="0.000105958">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay (applyRecordedResponseMetadata): public replay log &gt; this path never populates the waveform (empty samples stub, by design)" time="0.000058167">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay: simulation-engineering replay (context/error plumbing) &gt; has exactly 3 rows: 200, 200, 422" time="0.0000445">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay: simulation-engineering replay (context/error plumbing) &gt; produces the correct gap count: zero gaps for the two 200s, one gap for the 422" time="0.000127833">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay: simulation-engineering replay (context/error plumbing) &gt; no probability point is recorded for the 422 window" time="0.000061583">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay: no diagnosis wording leaks through replayed data &gt; no prohibited phrase appears in any replayed monitoring_state/calibration string field" time="0.000333583">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="offline metadata replay: separate controlled failure sequence &gt; maps 200/422/200/500/200 without probability points for either error" time="0.000146292">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: frontend replay bundle identity &gt; has exactly 12 events, each with exactly 2500 samples, no labels/outcomes/truth" time="0.000475959">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: frontend replay bundle identity &gt; events are ordered and timestamps are exactly 5,000,000us apart" time="0.000126958">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: real API responses drive dashboard state &gt; submits all 12 events in order, full samples, and the API response (not a prerecorded one) drives each history point" time="0.0076205">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: real API responses drive dashboard state &gt; the final ECG waveform carries exactly 2500 real recorded samples matching the sent window" time="0.004536041">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: real API responses drive dashboard state &gt; technical metadata (calibration/policy/model IDs) comes from the API response, not the bundle" time="0.004477792">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: real API responses drive dashboard state &gt; refuses to send a non-2500-sample event (canonical mode never supplies an empty/incomplete window)" time="0.001571708">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: real API responses drive dashboard state &gt; 422/500 from the real API still map to RECHECK_SENSOR/SYSTEM_ERROR with no probability point" time="0.0034175">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: production route wiring &gt; the canonical /monitoring route imports and uses the canonical replay controller" time="0.0001425">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: production route wiring &gt; does not reimplement monitoring-state computation inside the route" time="0.000165958">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/replay.test.ts" name="canonical recorded replay: production route wiring &gt; states PPG is unavailable and labels the mode as recorded replay, never live sensor" time="0.000152916">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/dashboard/__tests__/session.test.ts" timestamp="2026-10-05T15:07:24.122Z" hostname="MacBook-Air.local" tests="8" failures="0" errors="0" skipped="0" time="0.0027035">
+        <testcase classname="src/lib/dashboard/__tests__/session.test.ts" name="dashboard session: authoritative-state tests (Section 46) &gt; a success response sets the ECG window and appends a history point" time="0.001321959">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/session.test.ts" name="dashboard session: authoritative-state tests (Section 46) &gt; high probability with monitoring_state NORMAL renders NORMAL -- state is authoritative, not recomputed from probability" time="0.000076416">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/session.test.ts" name="dashboard session: authoritative-state tests (Section 46) &gt; low probability with monitoring_state POTENTIAL renders POTENTIAL -- state is authoritative, not recomputed from probability" time="0.00006525">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/session.test.ts" name="dashboard session: Section 17/27/41 HTTP outcome handling &gt; 422 does not append a probability point but does leave a gap marker, and does not replace the ECG window" time="0.000143917">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/session.test.ts" name="dashboard session: Section 17/27/41 HTTP outcome handling &gt; 500 does not append a probability point but does leave a gap marker, and does not retain a stale probability as current" time="0.000099291">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/session.test.ts" name="dashboard session: Section 17/27/41 HTTP outcome handling &gt; 400 never appends any history entry at all" time="0.000096625">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/session.test.ts" name="dashboard session: Section 17/27/41 HTTP outcome handling &gt; a transport error never fabricates a monitoring state" time="0.000097125">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/session.test.ts" name="dashboard session: session isolation (Section 46/independent instances) &gt; two independently created sessions never share state" time="0.000092958">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/dashboard/__tests__/state-presentation.test.ts" timestamp="2026-10-05T15:07:24.123Z" hostname="MacBook-Air.local" tests="15" failures="0" errors="0" skipped="0" time="0.006656125">
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; covers exactly the five canonical monitoring states, no more, no fewer" time="0.0018435">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; does not define a sixth state for QUALITY_WARNING" time="0.000355042">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; NORMAL_MONITORED_PATTERN: required wording present, no prohibited wording" time="0.00056975">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; POTENTIAL_ECTOPY_ASSOCIATED_PATTERN: required wording present, no prohibited wording" time="0.000439291">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; RECHECK_SENSOR: required wording present, no prohibited wording" time="0.000359333">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; CONTEXT_UNAVAILABLE: required wording present, no prohibited wording" time="0.00031275">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; SYSTEM_ERROR: required wording present, no prohibited wording" time="0.000301125">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; NORMAL_MONITORED_PATTERN: neutral tone, probability displayable" time="0.000074875">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; POTENTIAL_ECTOPY_ASSOCIATED_PATTERN: says &quot;Not a diagnosis&quot;" time="0.0000825">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; RECHECK_SENSOR: signal/sensor wording, not disease wording" time="0.000156625">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; CONTEXT_UNAVAILABLE: states missing context, keeps probability displayable" time="0.000081834">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="STATE_PRESENTATION: exactly five canonical states (Section 11) &gt; SYSTEM_ERROR: technical wording, probability NOT displayable" time="0.000068209">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="httpErrorPresentation: Section 17 HTTP mapping &gt; 400 maps to no canonical monitoring state and no probability point" time="0.000138333">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="httpErrorPresentation: Section 17 HTTP mapping &gt; 422 maps to RECHECK_SENSOR with no probability point but a history gap" time="0.000769917">
+        </testcase>
+        <testcase classname="src/lib/dashboard/__tests__/state-presentation.test.ts" name="httpErrorPresentation: Section 17 HTTP mapping &gt; 500 maps to SYSTEM_ERROR with no probability point but a history gap" time="0.000108125">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/lib/dashboard/__tests__/v2-runtime-e2e.test.ts" timestamp="2026-10-05T15:07:24.123Z" hostname="MacBook-Air.local" tests="1" failures="0" errors="0" skipped="1" time="0">
+        <testcase classname="src/lib/dashboard/__tests__/v2-runtime-e2e.test.ts" name="V2 research runtime: real replay through the real frontend path &gt; replays the simulated-wearable stream through real HTTP and renders real session state" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/routes/monitoring/__tests__/page.render.test.ts" timestamp="2026-10-05T15:07:24.123Z" hostname="MacBook-Air.local" tests="1" failures="0" errors="0" skipped="0" time="0.025983417">
+        <testcase classname="src/routes/monitoring/__tests__/page.render.test.ts" name="rendered dashboard components: fed with a real post-replay session &gt; renders the real final monitoring state, calibration metadata, and research-only label from an actual canonical replay run" time="0.025615958">
+        </testcase>
+    </testsuite>
+</testsuites>

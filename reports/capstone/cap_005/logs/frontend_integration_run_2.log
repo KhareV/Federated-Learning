@@ -1,0 +1,11 @@
+
+ RUN  v3.2.7 /Users/Home/Downloads/miniproject/frontend
+
+ ✓ src/lib/product/__tests__/real-backend.integration.test.ts (1 test) 3235ms
+   ✓ frontend product client against the REAL CAP-004 DEMO backend > system -> me -> device -> scan -> connect -> session -> start -> live WebSocket -> completion -> reload  3235ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  20:35:12
+   Duration  3.40s (transform 27ms, setup 0ms, collect 29ms, tests 3.24s, environment 0ms, prepare 37ms)
+

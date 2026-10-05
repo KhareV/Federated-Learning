@@ -1,0 +1,73 @@
+{
+ "build": "ok",
+ "canonical_browser_runs": [
+  "canonical_frontend_e2e_run_1.json",
+  "canonical_frontend_e2e_run_2.json"
+ ],
+ "cap005_python": {
+  "files": [
+   "tests/test_capstone_frontend.py",
+   "tests/test_t035_lock_versioning.py",
+   "tests/test_v2_rel_001_results.py"
+  ],
+  "log": "logs/cap005_py_tests.log",
+  "passed": 32
+ },
+ "environment": "Python 3.11 venv outside the repo; Node 26.5 / npm 11.17; system Google Chrome headless (CDP, no dependency); CI neither queried nor triggered",
+ "frontend_vitest": {
+  "files_passed": 12,
+  "files_skipped": 2,
+  "junit": "logs/frontend_tests.xml",
+  "log": "logs/frontend_test.log",
+  "product_suites": [
+   "live-model.test.ts (19)",
+   "api-auth.test.ts (11)",
+   "socket-store.test.ts (7)",
+   "components.test.ts (15 rendered-component tests)",
+   "claims-and-copy.test.ts (23 static guards)",
+   "real-backend.integration.test.ts (skipped unless a real backend URL is provided; executed by the canonical runs)"
+  ],
+  "tests_passed": 145,
+  "tests_skipped": 2
+ },
+ "mutation_controls": "10/10 caught by the relevant behavioural/static tests and restored byte-identically (mutation_controls.json)",
+ "pip_check": "No broken requirements found",
+ "prior_phase_subset": {
+  "failed": 1,
+  "log": "logs/prior_phase_tests.log",
+  "note": "the single failure is the inherited intermittent CAP-003 test test_monitoring_completes_with_zero_subscribers (see ../cap_004/preexisting_cap003_flake.json); the full regression on the same state had 0 failures",
+  "passed": 411
+ },
+ "python_regression": {
+  "failed": 0,
+  "log": "logs/pytest_full.log",
+  "passed": 2819,
+  "skipped": 1
+ },
+ "real_backend_frontend_integration": {
+  "evidence": [
+   "frontend_integration_run_1.json",
+   "frontend_integration_run_2.json"
+  ],
+  "runs": 2,
+  "what": "actual frontend client + strict parser + LiveModel vs the real CAP-004 DEMO backend and a fresh SOFTWARE_SYSTEM_V2 (3157 events)"
+ },
+ "regression_history_disclosure": {
+  "after_amendment": "2819 passed, 1 skipped, 0 failed (twice)",
+  "first_full_run_on_the_frozen_state": "1 failed (tests/test_capstone_federation_contracts.py::test_existing_sveltekit_frontend_is_unchanged_and_the_only_frontend - the CAP-001 frontend-freeze guard) -> retired by user-approved recorded amendments",
+  "inherited_flake": {
+   "failed": 4,
+   "passed": 8,
+   "runs": 12,
+   "signatures": [
+    "E           AssertionError: assert (789 > 100 and False)"
+   ]
+  }
+ },
+ "ruff": "All checks passed",
+ "svelte_check": {
+  "baseline_warnings_at_entry": 118,
+  "errors": 0,
+  "warnings": 112
+ }
+}

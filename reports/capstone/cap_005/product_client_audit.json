@@ -1,0 +1,48 @@
+{
+ "any_types": 0,
+ "base": "/product/v1",
+ "browser_infer_window_requests": [
+  false,
+  false
+ ],
+ "interface": "ProductClient",
+ "observed_browser_requests": [
+  [
+   "/product/v1/devices",
+   "/product/v1/devices/simulated",
+   "/product/v1/devices/{device}/connect",
+   "/product/v1/devices/{device}/scan",
+   "/product/v1/me",
+   "/product/v1/sessions",
+   "/product/v1/sessions/{session}",
+   "/product/v1/sessions/{session}/start",
+   "/product/v1/system"
+  ],
+  [
+   "/product/v1/devices",
+   "/product/v1/devices/simulated",
+   "/product/v1/devices/{device}/connect",
+   "/product/v1/devices/{device}/scan",
+   "/product/v1/me",
+   "/product/v1/sessions",
+   "/product/v1/sessions/{session}",
+   "/product/v1/sessions/{session}/start",
+   "/product/v1/system"
+  ]
+ ],
+ "proxy": " the CAP-004 product API (scripts/run_capstone_product.py, default port 8002) is reached\n// same-origin at /product (HTTP + WebSocket). It is SEPARATE from the /v1 research-runtime proxy above,\n// which is not repointed. NHM_PRODUCT_API_PORT lets the canonical E2E use an ephemeral port.\nconst productApiPort = process.env.NHM_PRODUCT_API_PORT ?? '8002';\nconst productProxy: ProxyOptions = {\n\ttarget: `http://127.0.0.1:${productApiPort}`,\n\tchangeOrigin: true,\n\tws: true\n};\n\n// The official ClerkJS browser SDK lives in the additive frontend/clerk-sdk package (exact pin; the\n// frozen V2-014 lock bin",
+ "routes": [
+  "GET /system",
+  "GET /me",
+  "GET /devices",
+  "POST /devices/simulated",
+  "POST /devices/{id}/scan",
+  "POST /devices/{id}/connect",
+  "POST /devices/{id}/disconnect",
+  "POST /sessions",
+  "GET /sessions",
+  "GET /sessions/{id}",
+  "POST /sessions/{id}/start",
+  "POST /sessions/{id}/stop"
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "browser_gap_text": [
+  "Source gaps observed (sample indices): [118800, 124199]",
+  "Source gaps observed (sample indices): [118800, 124199]"
+ ],
+ "browser_gap_visible_frames": [
+  2,
+  4
+ ],
+ "buffer_capacity_samples": 3600,
+ "canonical_gap_expected": [
+  118800,
+  124199
+ ],
+ "integration_gaps": [
+  [
+   {
+    "end": 124199,
+    "start": 118800
+   }
+  ],
+  [
+   {
+    "end": 124199,
+    "start": 118800
+   }
+  ]
+ ],
+ "interpolation": false,
+ "tests": [
+  "keeps null as a gap: never zero-filled, never interpolated, separate segments",
+  "draws null runs as separate polylines with a visible gap marker (no zero fill)"
+ ],
+ "waveform_chunks": 2880,
+ "zero_fill": false
+}

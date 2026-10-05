@@ -1,0 +1,80 @@
+{
+ "system": {
+  "auth_provider": "DEMO",
+  "demo_mode": true,
+  "model_id": "MODEL_V2_FINAL",
+  "software_system": "SOFTWARE_SYSTEM_V2",
+  "hardware_mode": "SIMULATED_ONLY"
+ },
+ "identity": "demo:faculty",
+ "device_id": "NHM_VIRTUAL_WEARABLE_01",
+ "device_state_sequence_rest": [
+  "DETACHED",
+  "FOUND",
+  "CONNECTED"
+ ],
+ "session_id": "SESS-3bf58e6d270f415db20058829eb829f4",
+ "session_states_rest": [
+  "DEVICE_READY",
+  "MONITORING",
+  "COMPLETED"
+ ],
+ "event_count": 3157,
+ "counts_by_type": {
+  "session.status": 3,
+  "device.status": 6,
+  "waveform.chunk": 2880,
+  "quality.status": 93,
+  "context.snapshot": 86,
+  "inference.result": 86,
+  "monitoring.state": 3
+ },
+ "sequence_continuous": true,
+ "waveform_chunks": 2880,
+ "gaps": [
+  {
+   "start": 118800,
+   "end": 124199
+  }
+ ],
+ "quality_counts": {
+  "VALID": 86,
+  "DEGRADED": 0,
+  "UNUSABLE": 7
+ },
+ "inference_count": 86,
+ "model_ids": [
+  "MODEL_V2_FINAL"
+ ],
+ "calibration_ids": [
+  "CAL_V2"
+ ],
+ "monitoring_state_changes": [
+  {
+   "sequence_index": 101,
+   "state": "NORMAL_MONITORED_PATTERN",
+   "previous": null
+  },
+  {
+   "sequence_index": 663,
+   "state": "CONTEXT_UNAVAILABLE",
+   "previous": "NORMAL_MONITORED_PATTERN"
+  },
+  {
+   "sequence_index": 1324,
+   "state": "NORMAL_MONITORED_PATTERN",
+   "previous": "CONTEXT_UNAVAILABLE"
+  }
+ ],
+ "device_status_sequence": [
+  "STREAMING",
+  "DISCONNECTED",
+  "RECONNECTING",
+  "CONNECTED",
+  "STREAMING",
+  "STOPPED"
+ ],
+ "socket_resets": 1,
+ "completed": true,
+ "listed_after_completion": true
+}

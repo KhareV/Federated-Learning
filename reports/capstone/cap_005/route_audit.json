@@ -1,0 +1,50 @@
+{
+ "built_pages": {
+  "app.html": true,
+  "app/about.html": true,
+  "app/device.html": true,
+  "app/federation.html": true,
+  "app/history.html": true,
+  "app/models.html": true,
+  "app/monitoring.html": true,
+  "app/system.html": true,
+  "index.html": true,
+  "monitor.html": true,
+  "monitoring.html": true,
+  "sign-in.html": true
+ },
+ "landing_cta_legacy_monitor": 0,
+ "landing_cta_sign_in": 4,
+ "legacy_monitor": "<script lang=\"ts\">\n\t// LEGACY ROUTE (retired as the product monitor in CAP-005): /monitor used to be a placeholder\n\t// shell with a fake \"Authentication disabled\" identity. The product monitor is /app/monitoring.\n\timport { onMount } from 'svelte';\n\timport { goto } from '$app/navigation';\n\tonMount(() => { void goto('/app/monitoring', { replaceState: true }); });\n</script>\n\n<svelte:head>\n\t<title>Mon",
+ "ownership": {
+  "active": [
+   "/",
+   "/sign-in",
+   "/app",
+   "/app/device",
+   "/app/monitoring"
+  ],
+  "informational": [
+   "/app/system",
+   "/app/about"
+  ],
+  "legacy": {
+   "/monitor": "redirect/notice to /app/monitoring",
+   "/monitoring": "retained, labelled RESEARCH RUNTIME TOOL (research replay), logic untouched"
+  },
+  "not_yet_enabled_shells": [
+   "/app/federation",
+   "/app/federation/clients",
+   "/app/federation/rounds",
+   "/app/federation/live",
+   "/app/federation/privacy",
+   "/app/models",
+   "/app/research/ml",
+   "/app/research/fl"
+  ],
+  "operational_list": [
+   "/app/history (GET /sessions list only)"
+  ]
+ },
+ "research_tool_label": true
+}

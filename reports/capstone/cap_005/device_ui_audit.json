@@ -1,0 +1,50 @@
+{
+ "browser_steps": {
+  "device-attached": {
+   "deviceId": "NHM_VIRTUAL_WEARABLE_01",
+   "physical": true,
+   "scenario": "MIXED_MONITORING_SESSION",
+   "step": "device-attached"
+  },
+  "device-connected": {
+   "states": [
+    "DETACHED",
+    "FOUND",
+    "CONNECTED"
+   ],
+   "step": "device-connected"
+  },
+  "device-empty": {
+   "preselected": "MIXED_MONITORING_SESSION",
+   "scenarios": [
+    "NORMAL_MONITORING",
+    "CONTEXT_LOSS",
+    "POOR_SIGNAL",
+    "DISCONNECT_RECONNECT",
+    "MIXED_MONITORING_SESSION"
+   ],
+   "simulationBanner": "SIMULATED WEARABLE NO PHYSICAL HARDWARE CONNECTED RESEARCH PROTOTYPE NOT DIAGNOSTIC",
+   "step": "device-empty"
+  }
+ },
+ "physical_hardware_text": true,
+ "scenarios": [
+  "NORMAL_MONITORING",
+  "CONTEXT_LOSS",
+  "POOR_SIGNAL",
+  "DISCONNECT_RECONNECT",
+  "MIXED_MONITORING_SESSION"
+ ],
+ "states_rest": [
+  [
+   "DETACHED",
+   "FOUND",
+   "CONNECTED"
+  ],
+  [
+   "DETACHED",
+   "FOUND",
+   "CONNECTED"
+  ]
+ ]
+}

@@ -1,0 +1,451 @@
+{
+ "run_1": {
+  "device_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "device_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "device_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "device_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  },
+  "federation_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "federation_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "federation_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "federation_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  },
+  "history_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "history_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "history_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "history_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  },
+  "landing_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [
+    "DIV.absolute top-28 left-1/2 aspect-square o right=2341",
+    "P.absolute bottom-0 left-1/2 line-clamp-3  right=1062",
+    "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=1032",
+    "DIV.h-full w-full bg-[var(--placeholder-line right=1032",
+    "DIV.absolute top-0 left-1/2 -translate-x-1/2 right=1045",
+    "DIV.h-full w-full transition-colors duration right=1045"
+   ],
+   "scrollWidth": 1024
+  },
+  "landing_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [
+    "svg.[object SVGAnimatedString] right=1455",
+    "rect.[object SVGAnimatedString] right=1455",
+    "DIV.watch-scene svelte-ydnqlz right=1593",
+    "DIV.svelte-clyidt right=1593",
+    "CANVAS.svelte-clyidt right=1593",
+    "DIV.absolute top-28 left-1/2 aspect-square o right=2549"
+   ],
+   "scrollWidth": 1440
+  },
+  "landing_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [
+    "DIV.view-switch-pills svelte-yek519 right=406",
+    "BUTTON.pill-btn svelte-yek519 right=399",
+    "DIV.absolute top-28 left-1/2 aspect-square o right=2024",
+    "P.absolute bottom-0 left-1/2 line-clamp-3  right=424",
+    "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=399",
+    "DIV.h-full w-full bg-[var(--placeholder-line right=399"
+   ],
+   "scrollWidth": 390
+  },
+  "landing_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [
+    "DIV.absolute top-28 left-1/2 aspect-square o right=2213",
+    "P.absolute bottom-0 left-1/2 line-clamp-3  right=828",
+    "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=775",
+    "DIV.h-full w-full bg-[var(--placeholder-line right=775",
+    "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=788",
+    "DIV.h-full w-full bg-[var(--placeholder-line right=788"
+   ],
+   "scrollWidth": 768
+  },
+  "monitor_1024": {
+   "bodyScrollWidth": 1024,
+   "createVisible": true,
+   "innerWidth": 1024,
+   "menuVisible": false,
+   "overflowing": [],
+   "plotWidth": 692.5625,
+   "scrollWidth": 1024
+  },
+  "monitor_1440": {
+   "bodyScrollWidth": 1440,
+   "createVisible": true,
+   "innerWidth": 1440,
+   "menuVisible": false,
+   "overflowing": [],
+   "plotWidth": 1090,
+   "scrollWidth": 1440
+  },
+  "monitor_390": {
+   "bodyScrollWidth": 390,
+   "createVisible": true,
+   "innerWidth": 390,
+   "menuVisible": true,
+   "overflowing": [],
+   "plotWidth": 320,
+   "scrollWidth": 390
+  },
+  "monitor_768": {
+   "bodyScrollWidth": 768,
+   "createVisible": true,
+   "innerWidth": 768,
+   "menuVisible": true,
+   "overflowing": [],
+   "plotWidth": 683.9375,
+   "scrollWidth": 768
+  },
+  "overview_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "overview_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "overview_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "overview_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  },
+  "sign_in_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "sign_in_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "sign_in_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "sign_in_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  }
+ },
+ "run_2": {
+  "device_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "device_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "device_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "device_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  },
+  "federation_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "federation_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "federation_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "federation_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  },
+  "history_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "history_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "history_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "history_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  },
+  "landing_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [
+    "svg.[object SVGAnimatedString] right=1039",
+    "rect.[object SVGAnimatedString] right=1039",
+    "rect.[object SVGAnimatedString] right=1039",
+    "DIV.absolute top-28 left-1/2 aspect-square o right=2341",
+    "P.absolute bottom-0 left-1/2 line-clamp-3  right=1062",
+    "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=1032"
+   ],
+   "scrollWidth": 1024
+  },
+  "landing_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [
+    "DIV.watch-scene svelte-ydnqlz right=1593",
+    "DIV.svelte-clyidt right=1593",
+    "CANVAS.svelte-clyidt right=1593",
+    "DIV.absolute top-28 left-1/2 aspect-square o right=2549",
+    "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=1450",
+    "DIV.h-full w-full bg-[var(--placeholder-line right=1450"
+   ],
+   "scrollWidth": 1440
+  },
+  "landing_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [
+    "DIV.view-switch-pills svelte-yek519 right=406",
+    "BUTTON.pill-btn svelte-yek519 right=399",
+    "DIV.absolute top-28 left-1/2 aspect-square o right=2024",
+    "P.absolute bottom-0 left-1/2 line-clamp-3  right=424",
+    "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=399",
+    "DIV.h-full w-full bg-[var(--placeholder-line right=399"
+   ],
+   "scrollWidth": 390
+  },
+  "landing_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [
+    "DIV.absolute top-28 left-1/2 aspect-square o right=2213",
+    "P.absolute bottom-0 left-1/2 line-clamp-3  right=828",
+    "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=775",
+    "DIV.h-full w-full bg-[var(--placeholder-line right=775",
+    "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=788",
+    "DIV.h-full w-full bg-[var(--placeholder-line right=788"
+   ],
+   "scrollWidth": 768
+  },
+  "monitor_1024": {
+   "bodyScrollWidth": 1024,
+   "createVisible": true,
+   "innerWidth": 1024,
+   "menuVisible": false,
+   "overflowing": [],
+   "plotWidth": 692.5625,
+   "scrollWidth": 1024
+  },
+  "monitor_1440": {
+   "bodyScrollWidth": 1440,
+   "createVisible": true,
+   "innerWidth": 1440,
+   "menuVisible": false,
+   "overflowing": [],
+   "plotWidth": 1090,
+   "scrollWidth": 1440
+  },
+  "monitor_390": {
+   "bodyScrollWidth": 390,
+   "createVisible": true,
+   "innerWidth": 390,
+   "menuVisible": true,
+   "overflowing": [],
+   "plotWidth": 320,
+   "scrollWidth": 390
+  },
+  "monitor_768": {
+   "bodyScrollWidth": 768,
+   "createVisible": true,
+   "innerWidth": 768,
+   "menuVisible": true,
+   "overflowing": [],
+   "plotWidth": 683.9375,
+   "scrollWidth": 768
+  },
+  "overview_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "overview_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "overview_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "overview_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  },
+  "sign_in_1024": {
+   "bodyScrollWidth": 1024,
+   "innerWidth": 1024,
+   "overflowing": [],
+   "scrollWidth": 1024
+  },
+  "sign_in_1440": {
+   "bodyScrollWidth": 1440,
+   "innerWidth": 1440,
+   "overflowing": [],
+   "scrollWidth": 1440
+  },
+  "sign_in_390": {
+   "bodyScrollWidth": 390,
+   "innerWidth": 390,
+   "overflowing": [],
+   "scrollWidth": 390
+  },
+  "sign_in_768": {
+   "bodyScrollWidth": 768,
+   "innerWidth": 768,
+   "overflowing": [],
+   "scrollWidth": 768
+  }
+ },
+ "screenshots": [
+  "app_1440.png",
+  "device_1440.png",
+  "device_390.png",
+  "device_connected_1440.png",
+  "device_empty_1440.png",
+  "federation_1440.png",
+  "federation_390.png",
+  "history_1440.png",
+  "history_390.png",
+  "landing_1440.png",
+  "landing_390.png",
+  "monitor_1024.png",
+  "monitor_1440.png",
+  "monitor_390.png",
+  "monitor_768.png",
+  "monitor_complete_1440.png",
+  "overview_1440.png",
+  "overview_390.png",
+  "sign-in_1440.png",
+  "sign_in_1440.png",
+  "sign_in_390.png"
+ ],
+ "widths": [
+  1440,
+  1024,
+  768,
+  390
+ ]
+}

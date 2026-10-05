@@ -1,0 +1,41 @@
+{
+ "added_count": 67,
+ "added_outside_additive_namespace": [],
+ "amendment_chains_verified": true,
+ "backend_dirs_untouched": true,
+ "baseline_file_count": 3386,
+ "cap001_lock_verified": true,
+ "cap002_lock_verified": true,
+ "cap003_lock_verified": true,
+ "cap004_lock_verified": true,
+ "entry_sha": "9db76b482678114ac5c22f3f91a3f55ccb159e17",
+ "frontend_added_count": 41,
+ "frontend_baseline_files": 162,
+ "frontend_modified": [
+  "frontend/src/app.css",
+  "frontend/src/app.html",
+  "frontend/src/lib/dashboard/__tests__/legacy-claims.test.ts",
+  "frontend/src/routes/+layout.svelte",
+  "frontend/src/routes/+page.svelte",
+  "frontend/src/routes/monitor/+page.svelte",
+  "frontend/vite.config.ts",
+  "frontend/vitest.config.ts"
+ ],
+ "frontend_removed": [],
+ "head_sha": "8f47676aac2269dfdf494e66d78b26ba8c3a56aa",
+ "modified_outside_allowed_control_plane": [],
+ "modified_since_entry": [
+  "manifests/capstone/gate_registry_v1.csv",
+  "manifests/capstone/task_registry_v1.csv",
+  "scripts/cap_002_protected_audit.py",
+  "tests/test_capstone_federation_contracts.py",
+  "tests/test_capstone_lifecycle.py",
+  "tests/test_t035_lock_versioning.py",
+  "tests/test_v2_rel_001_results.py"
+ ],
+ "named_component_drift": [],
+ "named_components_checked": 58,
+ "nonfrontend_files_checked": 3224,
+ "protected_artifact_drift": false,
+ "removed_since_entry": []
+}

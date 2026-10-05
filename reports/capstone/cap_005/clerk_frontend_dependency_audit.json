@@ -1,0 +1,17 @@
+{
+ "clerk_sveltekit_used": false,
+ "frontend_package_json_unchanged": true,
+ "frontend_secret_names_present": [],
+ "installed_version": "6.37.0",
+ "integrity": "sha512-MQsjepR/tJ0lqXui/rdCBXDB0weIwGY01Pq29o3H0wPY/na6JTo2PAlY/+36eMr6HXbi7CoXqGDqAyKCqtzAjw==",
+ "location": "frontend/clerk-sdk (additive package)",
+ "locked_version": "6.37.0",
+ "other_auth_libraries": [],
+ "package": "@clerk/clerk-js",
+ "public_config": "VITE_CLERK_PUBLISHABLE_KEY",
+ "range_operators_used": false,
+ "source": "npm registry (official Clerk browser SDK)",
+ "version": "6.37.0",
+ "why_additive": "artifacts/MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1.lock.json binds frontend/package.json and package-lock.json byte-for-byte (user-approved)",
+ "why_selected": "official browser SDK for session UX/token acquisition; the backend validates the token; clerk-sveltekit is deprecated/archived"
+}

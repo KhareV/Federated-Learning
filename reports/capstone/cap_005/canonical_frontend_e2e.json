@@ -1,0 +1,248 @@
+{
+ "predeclared": {
+  "calibration_id": "CAL_V2",
+  "device_states_rest": [
+   "DETACHED",
+   "FOUND",
+   "CONNECTED"
+  ],
+  "event_count": 3157,
+  "inference_results": 86,
+  "model_id": "MODEL_V2_FINAL",
+  "monitoring_state_changes": [
+   "NORMAL_MONITORED_PATTERN",
+   "CONTEXT_UNAVAILABLE",
+   "NORMAL_MONITORED_PATTERN"
+  ],
+  "terminal": "COMPLETED",
+  "unusable": 7,
+  "valid": 86,
+  "waveform_gap": [
+   118800,
+   124199
+  ],
+  "windows": 93
+ },
+ "run_1": {
+  "after_product_restart": {
+   "sessions": [
+    {
+     "session_id": "SESS-3f7a79e4c4bc4432bfa50fa96f400142",
+     "state": "COMPLETED"
+    }
+   ]
+  },
+  "auth_mode": "DEMO (explicit, acknowledged)",
+  "browser_driver_exit": 0,
+  "browser_file": "canonical_frontend_e2e_run_1.json#browser",
+  "database_after_integration_run": {
+   "inference_models": [
+    "MODEL_V2_FINAL"
+   ],
+   "row_counts": {
+    "candidate_models": 0,
+    "context_snapshots": 86,
+    "device_connections": 10,
+    "devices": 1,
+    "federation_rounds": 0,
+    "federation_runs": 0,
+    "fl_client_statuses": 0,
+    "governance_decisions": 0,
+    "inference_events": 86,
+    "monitoring_sessions": 1,
+    "monitoring_state_events": 3,
+    "session_summaries": 0,
+    "signal_quality_events": 8,
+    "users": 1,
+    "waveform_previews": 1
+   },
+   "sessions": [
+    {
+     "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+     "alert_policy_id": "ALERT_POLICY_V1",
+     "api_contract_version": "API_SCHEMA_V1",
+     "calibration_id": "CAL_V2",
+     "device_id": "NHM_VIRTUAL_WEARABLE_01",
+     "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+     "model_id": "MODEL_V2_FINAL",
+     "preprocess_id": "PREPROC_V1",
+     "scenario_id": "MIXED_MONITORING_SESSION",
+     "session_id": "SESS-99907f8907824abda1c5f71b451cddb8",
+     "software_system_id": "SOFTWARE_SYSTEM_V2",
+     "state": "COMPLETED",
+     "user_id": "demo:faculty"
+    }
+   ]
+  },
+  "frontend_build": {
+   "adapter": "@sveltejs/adapter-static (production build served by vite preview)",
+   "build_log_tail": "side a closure instead?\nhttps://svelte.dev/e/state_referenced_locally\n17:   } = $props();\n18: \n19:   const W = 600, H = height;\n                               ^\n20:   const PAD = { top: 14, right: 20, bottom: 28, left: 36 };\n21:   const pw = W - PAD.left - PAD.right;\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n",
+   "build_output": {
+    "files": 184,
+    "sha256": "b225223cf79048e280d55ca4d3be50840f42c1c9b1edadbb09c947a3a4216fac"
+   },
+   "source": {
+    "files": 186,
+    "sha256": "4d8668afebc7276895736620f423f15d2b79a9fdfa6d730837f24cf810dee203"
+   }
+  },
+  "inference_service": {
+   "fresh_process": true,
+   "launcher": "python -m scripts.run_nhm_default",
+   "paths": [
+    "/v1/infer-window"
+   ],
+   "profile": "default",
+   "service_title": "NHM Research Runtime API (SOFTWARE_SYSTEM_V2 default binding)"
+  },
+  "predeclared_invariants": {
+   "calibration_id": "CAL_V2",
+   "event_count": 3157,
+   "gap": [
+    118800,
+    124199
+   ],
+   "inference_results": 86,
+   "model_id": "MODEL_V2_FINAL",
+   "monitoring_states": [
+    "NORMAL_MONITORED_PATTERN",
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "terminal": "COMPLETED",
+   "unusable": 7,
+   "valid": 86,
+   "windows": 93
+  },
+  "product_backend": {
+   "auth_provider": "DEMO",
+   "calibration_id": "CAL_V2",
+   "demo_mode": true,
+   "hardware_mode": "SIMULATED_ONLY",
+   "model_id": "MODEL_V2_FINAL",
+   "persistence_mode": "SQLITE",
+   "physical_hardware_available": false,
+   "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_1",
+   "software_system": "SOFTWARE_SYSTEM_V2"
+  },
+  "product_process_pid_excluded": 68991,
+  "real_backend_integration": {
+   "evidence": "frontend_integration_run_1.json",
+   "exit": 0,
+   "passed": true,
+   "product_base": "real CAP-004 DEMO process (ephemeral port)"
+  },
+  "run": 1
+ },
+ "run_2": {
+  "after_product_restart": {
+   "sessions": [
+    {
+     "session_id": "SESS-c1d9050639314b80995c0cc0475c9811",
+     "state": "COMPLETED"
+    }
+   ]
+  },
+  "auth_mode": "DEMO (explicit, acknowledged)",
+  "browser_driver_exit": 0,
+  "browser_file": "canonical_frontend_e2e_run_2.json#browser",
+  "database_after_integration_run": {
+   "inference_models": [
+    "MODEL_V2_FINAL"
+   ],
+   "row_counts": {
+    "candidate_models": 0,
+    "context_snapshots": 86,
+    "device_connections": 10,
+    "devices": 1,
+    "federation_rounds": 0,
+    "federation_runs": 0,
+    "fl_client_statuses": 0,
+    "governance_decisions": 0,
+    "inference_events": 86,
+    "monitoring_sessions": 1,
+    "monitoring_state_events": 3,
+    "session_summaries": 0,
+    "signal_quality_events": 8,
+    "users": 1,
+    "waveform_previews": 1
+   },
+   "sessions": [
+    {
+     "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+     "alert_policy_id": "ALERT_POLICY_V1",
+     "api_contract_version": "API_SCHEMA_V1",
+     "calibration_id": "CAL_V2",
+     "device_id": "NHM_VIRTUAL_WEARABLE_01",
+     "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+     "model_id": "MODEL_V2_FINAL",
+     "preprocess_id": "PREPROC_V1",
+     "scenario_id": "MIXED_MONITORING_SESSION",
+     "session_id": "SESS-3bf58e6d270f415db20058829eb829f4",
+     "software_system_id": "SOFTWARE_SYSTEM_V2",
+     "state": "COMPLETED",
+     "user_id": "demo:faculty"
+    }
+   ]
+  },
+  "frontend_build": {
+   "adapter": "@sveltejs/adapter-static (production build served by vite preview)",
+   "build_log_tail": "",
+   "build_output": {
+    "files": 184,
+    "sha256": "b225223cf79048e280d55ca4d3be50840f42c1c9b1edadbb09c947a3a4216fac"
+   },
+   "source": {
+    "files": 186,
+    "sha256": "4d8668afebc7276895736620f423f15d2b79a9fdfa6d730837f24cf810dee203"
+   }
+  },
+  "inference_service": {
+   "fresh_process": true,
+   "launcher": "python -m scripts.run_nhm_default",
+   "paths": [
+    "/v1/infer-window"
+   ],
+   "profile": "default",
+   "service_title": "NHM Research Runtime API (SOFTWARE_SYSTEM_V2 default binding)"
+  },
+  "predeclared_invariants": {
+   "calibration_id": "CAL_V2",
+   "event_count": 3157,
+   "gap": [
+    118800,
+    124199
+   ],
+   "inference_results": 86,
+   "model_id": "MODEL_V2_FINAL",
+   "monitoring_states": [
+    "NORMAL_MONITORED_PATTERN",
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "terminal": "COMPLETED",
+   "unusable": 7,
+   "valid": 86,
+   "windows": 93
+  },
+  "product_backend": {
+   "auth_provider": "DEMO",
+   "calibration_id": "CAL_V2",
+   "demo_mode": true,
+   "hardware_mode": "SIMULATED_ONLY",
+   "model_id": "MODEL_V2_FINAL",
+   "persistence_mode": "SQLITE",
+   "physical_hardware_available": false,
+   "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_1",
+   "software_system": "SOFTWARE_SYSTEM_V2"
+  },
+  "product_process_pid_excluded": 69115,
+  "real_backend_integration": {
+   "evidence": "frontend_integration_run_2.json",
+   "exit": 0,
+   "passed": true,
+   "product_base": "real CAP-004 DEMO process (ephemeral port)"
+  },
+  "run": 2
+ }
+}

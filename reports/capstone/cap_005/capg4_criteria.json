@@ -1,0 +1,864 @@
+{
+ "all_decided_pass": true,
+ "criteria": [
+  {
+   "checks": [
+    "@cap001_capg0_pass"
+   ],
+   "criterion": 1,
+   "pass": true,
+   "text": "CAP-001/CAPG0 PASS"
+  },
+  {
+   "checks": [
+    "@cap002_capg1_pass"
+   ],
+   "criterion": 2,
+   "pass": true,
+   "text": "CAP-002/CAPG1 PASS"
+  },
+  {
+   "checks": [
+    "@cap003_capg2_pass"
+   ],
+   "criterion": 3,
+   "pass": true,
+   "text": "CAP-003/CAPG2 PASS"
+  },
+  {
+   "checks": [
+    "@cap004_capg3_pass"
+   ],
+   "criterion": 4,
+   "pass": true,
+   "text": "CAP-004/CAPG3 PASS"
+  },
+  {
+   "checks": [
+    "@cap001_lock",
+    "@cap002_lock_chain",
+    "@cap003_lock_chain",
+    "@cap004_lock_chain"
+   ],
+   "criterion": 5,
+   "pass": true,
+   "text": "all prior locks/amendments verify"
+  },
+  {
+   "checks": [
+    "@drift_nonfrontend"
+   ],
+   "criterion": 6,
+   "pass": true,
+   "text": "protected non-frontend upstream zero drift"
+  },
+  {
+   "checks": [
+    "test_exactly_one_frontend_application_exists",
+    "@sole_frontend"
+   ],
+   "criterion": 7,
+   "pass": true,
+   "text": "existing SvelteKit app remains sole frontend"
+  },
+  {
+   "checks": [
+    "test_exactly_one_frontend_application_exists",
+    "test_package_json_and_lock_are_untouched_and_clerk_js_is_pinned_in_the_additive_package",
+    "no new frontend dependency category was added (no state/router/chart/websocket library)"
+   ],
+   "criterion": 8,
+   "pass": true,
+   "text": "no second frontend scaffold"
+  },
+  {
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ],
+   "criterion": 9,
+   "pass": true,
+   "text": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 frozen before result"
+  },
+  {
+   "checks": [
+    "test_capstone_ui_v1_lock_supersedes_dashboard_ui_v1_5_and_verifies",
+    "@ui_component_registered"
+   ],
+   "criterion": 10,
+   "pass": true,
+   "text": "CAPSTONE_UI_V1 defined"
+  },
+  {
+   "checks": [
+    "@clerk_js_pinned",
+    "Clerk is only imported lazily (dynamic import) from the auth module"
+   ],
+   "criterion": 11,
+   "pass": true,
+   "text": "official ClerkJS frontend package used"
+  },
+  {
+   "checks": [
+    "only the public publishable key name is read; the deprecated clerk-sveltekit adapter is not used",
+    "@no_clerk_sveltekit"
+   ],
+   "criterion": 12,
+   "pass": true,
+   "text": "deprecated clerk-sveltekit not used"
+  },
+  {
+   "checks": [
+    "the frontend source contains no Clerk secret/JWT key or session-token fixture",
+    "@bundle_secret_scan"
+   ],
+   "criterion": 13,
+   "pass": true,
+   "text": "frontend contains no Clerk secret/JWT key"
+  },
+  {
+   "checks": [
+    "mode is decided by the backend /system, never by a frontend toggle"
+   ],
+   "criterion": 14,
+   "pass": true,
+   "text": "auth mode comes from backend /system"
+  },
+  {
+   "checks": [
+    "DEMO backend: never initialises or imports Clerk; /me supplies the demo identity",
+    "DEMO backend: shows NHM OFFLINE FACULTY DEMO, discloses it is not Clerk, no password field, no Clerk init",
+    "@e2e_demo_no_clerk"
+   ],
+   "criterion": 15,
+   "pass": true,
+   "text": "DEMO does not initialize Clerk"
+  },
+  {
+   "checks": [
+    "CLERK backend with a missing publishable key shows AUTHENTICATION UNAVAILABLE and does not fall back to Demo",
+    "CLERK backend whose Clerk SDK fails to initialise never falls back to Demo",
+    "CLERK backend without a publishable key: AUTHENTICATION UNAVAILABLE and no demo entry"
+   ],
+   "criterion": 16,
+   "pass": true,
+   "text": "CLERK never silently falls back to Demo"
+  },
+  {
+   "checks": [
+    "DEMO: the banner reads OFFLINE DEMO IDENTITY / NOT CLERK AUTHENTICATION and the shell shows first-class Federation navigation",
+    "CLERK mode: no demo banner",
+    "@e2e_demo_banner"
+   ],
+   "criterion": 17,
+   "pass": true,
+   "text": "persistent Demo banner shown on /app routes"
+  },
+  {
+   "checks": [
+    "@backend_untouched",
+    "@guard_ux_only_documented"
+   ],
+   "criterion": 18,
+   "pass": true,
+   "text": "backend remains auth authority (route guards are UX only)"
+  },
+  {
+   "checks": [
+    "CLERK backend: initialises ClerkJS (mocked official boundary) and sends the session token as Bearer",
+    "sends Authorization: Bearer only when a token provider yields one, and stores nothing"
+   ],
+   "criterion": 19,
+   "pass": true,
+   "text": "REST bearer token acquired from Clerk session, not stored"
+  },
+  {
+   "checks": [
+    "builds a same-origin WebSocket URL that carries no token",
+    "the WebSocket URL builder and store never place a token in the URL"
+   ],
+   "criterion": 20,
+   "pass": true,
+   "text": "WebSocket token not placed in URL"
+  },
+  {
+   "checks": [
+    "uses same-origin /product/v1 and implements only CAP-004 routes (no /v1/infer-window, no model field)",
+    "@typed_client"
+   ],
+   "criterion": 21,
+   "pass": true,
+   "text": "product API client typed"
+  },
+  {
+   "checks": [
+    "test_vite_proxies_product_separately_from_the_research_runtime"
+   ],
+   "criterion": 22,
+   "pass": true,
+   "text": "product proxy targets CAP-004 backend separately from /v1"
+  },
+  {
+   "checks": [
+    "@route_sign_in",
+    "@e2e_sign_in"
+   ],
+   "criterion": 23,
+   "pass": true,
+   "text": "/sign-in implemented"
+  },
+  {
+   "checks": [
+    "@route_app",
+    "overview shows real system identity, no fake metrics, and federation as not enabled"
+   ],
+   "criterion": 24,
+   "pass": true,
+   "text": "/app implemented"
+  },
+  {
+   "checks": [
+    "@route_device",
+    "walks NO DEVICE -> attach -> scan -> FOUND -> connect -> CONNECTED with simulation labels and no hardware claim"
+   ],
+   "criterion": 25,
+   "pass": true,
+   "text": "/app/device implemented"
+  },
+  {
+   "checks": [
+    "@route_monitoring",
+    "creates a session, opens the live socket, starts, and renders only backend events (quality != monitoring state)"
+   ],
+   "criterion": 26,
+   "pass": true,
+   "text": "/app/monitoring implemented"
+  },
+  {
+   "checks": [
+    "@reuse_dashboard_components"
+   ],
+   "criterion": 27,
+   "pass": true,
+   "text": "existing dashboard components reused"
+  },
+  {
+   "checks": [
+    "primary CTAs go to the product flow, not the legacy /monitor"
+   ],
+   "criterion": 28,
+   "pass": true,
+   "text": "root primary CTA uses product flow"
+  },
+  {
+   "checks": [
+    "legacy /monitor is a redirect/notice (no fake auth-disabled identity) and /monitoring is labelled a research tool"
+   ],
+   "criterion": 29,
+   "pass": true,
+   "text": "/monitor no longer masquerades as primary product monitor"
+  },
+  {
+   "checks": [
+    "@e2e_device_lifecycle",
+    "device flow: attach -> scan -> FOUND -> connect -> CONNECTED, state taken from the backend"
+   ],
+   "criterion": 30,
+   "pass": true,
+   "text": "device page uses real backend lifecycle"
+  },
+  {
+   "checks": [
+    "walks NO DEVICE -> attach -> scan -> FOUND -> connect -> CONNECTED with simulation labels and no hardware claim",
+    "@e2e_simulation_banner"
+   ],
+   "criterion": 31,
+   "pass": true,
+   "text": "virtual wearable clearly labelled simulated"
+  },
+  {
+   "checks": [
+    "@e2e_physical_unavailable",
+    "walks NO DEVICE -> attach -> scan -> FOUND -> connect -> CONNECTED with simulation labels and no hardware claim"
+   ],
+   "criterion": 32,
+   "pass": true,
+   "text": "physical hardware clearly unavailable"
+  },
+  {
+   "checks": [
+    "@e2e_scenarios_only_frozen"
+   ],
+   "criterion": 33,
+   "pass": true,
+   "text": "only frozen monitoring scenarios selectable"
+  },
+  {
+   "checks": [
+    "@e2e_session_created",
+    "@integration_session_created"
+   ],
+   "criterion": 34,
+   "pass": true,
+   "text": "session created through real CAP-004 API"
+  },
+  {
+   "checks": [
+    "@e2e_session_started",
+    "@integration_session_started"
+   ],
+   "criterion": 35,
+   "pass": true,
+   "text": "session started through real CAP-004 API"
+  },
+  {
+   "checks": [
+    "@e2e_live_websocket",
+    "@integration_event_kinds"
+   ],
+   "criterion": 36,
+   "pass": true,
+   "text": "live data arrives over PRODUCT_LIVE_EVENT_V1 WebSocket"
+  },
+  {
+   "checks": [
+    "the product never calls the research inference route directly",
+    "@e2e_no_infer_from_browser"
+   ],
+   "criterion": 37,
+   "pass": true,
+   "text": "no direct /v1/infer-window call from product monitoring page"
+  },
+  {
+   "checks": [
+    "@integration_waveform_chunks",
+    "draws null runs as separate polylines with a visible gap marker (no zero fill)"
+   ],
+   "criterion": 38,
+   "pass": true,
+   "text": "waveform uses real 360-Hz waveform.chunk"
+  },
+  {
+   "checks": [
+    "never grows past capacity and drops the oldest samples",
+    "keeps the rolling waveform buffer bounded (never all 2880 chunks)"
+   ],
+   "criterion": 39,
+   "pass": true,
+   "text": "waveform buffer bounded"
+  },
+  {
+   "checks": [
+    "keeps null as a gap: never zero-filled, never interpolated, separate segments",
+    "@e2e_gap_visible"
+   ],
+   "criterion": 40,
+   "pass": true,
+   "text": "null gaps remain visual gaps"
+  },
+  {
+   "checks": [
+    "@no_ppg_waveform",
+    "@e2e_ppg_note"
+   ],
+   "criterion": 41,
+   "pass": true,
+   "text": "no fake PPG waveform"
+  },
+  {
+   "checks": [
+    "@context_source_audit",
+    "an UNUSABLE window settles immediately: earlier context is unavailable, earlier inference is \"none for window\""
+   ],
+   "criterion": 42,
+   "pass": true,
+   "text": "context uses context.snapshot only"
+  },
+  {
+   "checks": [
+    "@quality_source_audit",
+    "quality UNUSABLE with no monitoring.state event leaves the monitoring state untouched"
+   ],
+   "criterion": 43,
+   "pass": true,
+   "text": "quality uses quality.status only"
+  },
+  {
+   "checks": [
+    "no monitoring state is assigned anywhere in product code except from a monitoring.state event",
+    "shows ONLY backend monitoring.state changes: normal -> context unavailable -> normal"
+   ],
+   "criterion": 44,
+   "pass": true,
+   "text": "monitoring state uses monitoring.state only"
+  },
+  {
+   "checks": [
+    "quality UNUSABLE with no monitoring.state event leaves the monitoring state untouched",
+    "after a real NORMAL state, an UNUSABLE window does not change it to RECHECK_SENSOR",
+    "the product does not import the legacy dashboard session logic that maps 422 -> RECHECK_SENSOR",
+    "@e2e_unusable_no_state"
+   ],
+   "criterion": 45,
+   "pass": true,
+   "text": "UNUSABLE does not locally fabricate monitoring state"
+  },
+  {
+   "checks": [
+    "shows the backend monitoring.state, the inference technical fields and a research-only probability section",
+    "@e2e_inference_fields"
+   ],
+   "criterion": 46,
+   "pass": true,
+   "text": "inference display uses inference.result only"
+  },
+  {
+   "checks": [
+    "the product does not implement threshold / quality / HR / SpO2 / debounce logic"
+   ],
+   "criterion": 47,
+   "pass": true,
+   "text": "no threshold/state logic reimplemented"
+  },
+  {
+   "checks": [
+    "a device disconnect does not end the session; a system.error is a technical panel; a stream error is visible",
+    "@e2e_disconnect_session_continues"
+   ],
+   "criterion": 48,
+   "pass": true,
+   "text": "device disconnect does not locally terminate session"
+  },
+  {
+   "checks": [
+    "retries at most MAX_RECONNECTS times, resetting derived state on every (re)connect, then reports DISCONNECTED",
+    "does not retry on a normal journal-complete close or on auth/ownership refusals; explicit reconnect works"
+   ],
+   "criterion": 49,
+   "pass": true,
+   "text": "reconnect behavior truthful"
+  },
+  {
+   "checks": [
+    "requires next = previous + 1 and flags gaps and duplicates",
+    "a sequence gap puts the model into a visible PRODUCT STREAM ERROR and stops consuming",
+    "@integration_sequence"
+   ],
+   "criterion": 50,
+   "pass": true,
+   "text": "event sequence validated"
+  },
+  {
+   "checks": [
+    "replay from sequence 0 is deterministic: reset + replay rebuilds identical state (no double counting)",
+    "live events render into state; reconnect replays from 0 without double counting"
+   ],
+   "criterion": 51,
+   "pass": true,
+   "text": "replay-from-zero reconnect deduplicated/rebuilt correctly"
+  },
+  {
+   "checks": [
+    "/app pages contain no hard-coded dynamic-looking physiological, FL or session values",
+    "@fake_metric_audit"
+   ],
+   "criterion": 52,
+   "pass": true,
+   "text": "no fake physiological values"
+  },
+  {
+   "checks": [
+    "no product file imports the old FL placeholder store/components",
+    "federation page states the runtime is not enabled and shows no data"
+   ],
+   "criterion": 53,
+   "pass": true,
+   "text": "no fake FL metrics"
+  },
+  {
+   "checks": [
+    "DEMO: the banner reads OFFLINE DEMO IDENTITY / NOT CLERK AUTHENTICATION and the shell shows first-class Federation navigation",
+    "every required future destination exists as a clearly marked not-yet-enabled shell"
+   ],
+   "criterion": 54,
+   "pass": true,
+   "text": "FL remains first-class navigation"
+  },
+  {
+   "checks": [
+    "federation page states the runtime is not enabled and shows no data",
+    "@federation_not_enabled"
+   ],
+   "criterion": 55,
+   "pass": true,
+   "text": "federation runtime clearly not yet enabled"
+  },
+  {
+   "checks": [
+    "no longer claims attached hardware, edge inference, or real participating cities",
+    "@claim_audit_geography"
+   ],
+   "criterion": 56,
+   "pass": true,
+   "text": "no geographic synthetic sites presented as institutions"
+  },
+  {
+   "checks": [
+    "no longer claims attached hardware, edge inference, or real participating cities",
+    "@claim_audit_before_vs_after"
+   ],
+   "criterion": 57,
+   "pass": true,
+   "text": "inaccurate physical-hardware claims removed/corrected"
+  },
+  {
+   "checks": [
+    "@e2e_offline",
+    "@e2e_completed"
+   ],
+   "criterion": 58,
+   "pass": true,
+   "text": "product-critical DEMO route works offline"
+  },
+  {
+   "checks": [
+    "/sign-in and /app/* sources, app.html and app.css reference no remote host",
+    "the landing page also needs no remote asset (fonts, images)",
+    "@e2e_no_remote",
+    "@bundle_no_remote_outside_clerk"
+   ],
+   "criterion": 59,
+   "pass": true,
+   "text": "no required remote asset on /sign-in and /app/*"
+  },
+  {
+   "checks": [
+    "@e2e_real_backend"
+   ],
+   "criterion": 60,
+   "pass": true,
+   "text": "canonical frontend talks to real product backend"
+  },
+  {
+   "checks": [
+    "@e2e_real_inference"
+   ],
+   "criterion": 61,
+   "pass": true,
+   "text": "canonical product backend talks to real SOFTWARE_SYSTEM_V2"
+  },
+  {
+   "checks": [
+    "@e2e_mixed"
+   ],
+   "criterion": 62,
+   "pass": true,
+   "text": "canonical scenario MIXED_MONITORING_SESSION"
+  },
+  {
+   "checks": [
+    "@e2e_invariants"
+   ],
+   "criterion": 63,
+   "pass": true,
+   "text": "canonical scientific invariants unchanged"
+  },
+  {
+   "checks": [
+    "@e2e_event_sequence_rendered"
+   ],
+   "criterion": 64,
+   "pass": true,
+   "text": "canonical monitoring event sequence truthfully rendered"
+  },
+  {
+   "checks": [
+    "@e2e_gap_rendered"
+   ],
+   "criterion": 65,
+   "pass": true,
+   "text": "canonical waveform gap truthfully rendered"
+  },
+  {
+   "checks": [
+    "@e2e_completed"
+   ],
+   "criterion": 66,
+   "pass": true,
+   "text": "canonical session reaches COMPLETED"
+  },
+  {
+   "checks": [
+    "@e2e_persisted_after_reload"
+   ],
+   "criterion": 67,
+   "pass": true,
+   "text": "persisted session remains after reload"
+  },
+  {
+   "checks": [
+    "@frontend_unit"
+   ],
+   "criterion": 68,
+   "pass": true,
+   "text": "frontend unit tests PASS"
+  },
+  {
+   "checks": [
+    "@component_tests"
+   ],
+   "criterion": 69,
+   "pass": true,
+   "text": "component tests PASS"
+  },
+  {
+   "checks": [
+    "@real_backend_integration"
+   ],
+   "criterion": 70,
+   "pass": true,
+   "text": "real-backend frontend integration PASS"
+  },
+  {
+   "checks": [
+    "@responsive"
+   ],
+   "criterion": 71,
+   "pass": true,
+   "text": "responsive checks PASS"
+  },
+  {
+   "checks": [
+    "@accessibility"
+   ],
+   "criterion": 72,
+   "pass": true,
+   "text": "accessibility checks PASS"
+  },
+  {
+   "checks": [
+    "@claim_audit_final"
+   ],
+   "criterion": 73,
+   "pass": true,
+   "text": "claim audit PASS"
+  },
+  {
+   "checks": [
+    "@fake_metric_audit"
+   ],
+   "criterion": 74,
+   "pass": true,
+   "text": "no fake metric audit PASS"
+  },
+  {
+   "checks": [
+    "@no_fl_runtime"
+   ],
+   "criterion": 75,
+   "pass": true,
+   "text": "no FL runtime implementation"
+  },
+  {
+   "checks": [
+    "@no_cap009_analytics"
+   ],
+   "criterion": 76,
+   "pass": true,
+   "text": "no CAP-009 analytics implementation"
+  },
+  {
+   "checks": [
+    "@no_hardware_apis"
+   ],
+   "criterion": 77,
+   "pass": true,
+   "text": "no physical hardware implementation"
+  },
+  {
+   "checks": [
+    "@regression"
+   ],
+   "criterion": 78,
+   "pass": true,
+   "text": "full Python regression passes (subject only to the documented inherited CAP-003 flaky-test policy)"
+  },
+  {
+   "checks": [
+    "@frontend_npm_test"
+   ],
+   "criterion": 79,
+   "pass": true,
+   "text": "frontend npm test passes"
+  },
+  {
+   "checks": [
+    "@svelte_check"
+   ],
+   "criterion": 80,
+   "pass": true,
+   "text": "frontend npm run check has zero errors"
+  },
+  {
+   "checks": [
+    "@frontend_build"
+   ],
+   "criterion": 81,
+   "pass": true,
+   "text": "frontend npm run build passes"
+  },
+  {
+   "checks": [
+    "@ruff"
+   ],
+   "criterion": 82,
+   "pass": true,
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    "@pip"
+   ],
+   "criterion": 83,
+   "pass": true,
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "criterion": 84,
+   "pass": true,
+   "text": "CI not queried"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "criterion": 85,
+   "pass": true,
+   "text": "CI not triggered"
+  },
+  {
+   "checks": [
+    "@registry_cap005"
+   ],
+   "criterion": 86,
+   "pass": true,
+   "text": "CAP-005 PASS"
+  },
+  {
+   "checks": [
+    "@registry_capg4"
+   ],
+   "criterion": 87,
+   "pass": true,
+   "text": "CAPG4 PASS"
+  },
+  {
+   "checks": [
+    "@registry_cap006"
+   ],
+   "criterion": 88,
+   "pass": true,
+   "text": "CAP-006 remains NOT_STARTED"
+  },
+  {
+   "checks": [
+    "@e2e_reproducible"
+   ],
+   "criterion": 89,
+   "pass": true,
+   "text": "canonical frontend E2E is reproducible across two runs (same facts, counts, gap, state changes)"
+  },
+  {
+   "checks": [
+    "@mutation_log"
+   ],
+   "criterion": 90,
+   "pass": true,
+   "text": "ten non-equivalent mutation controls are each caught and restored byte-identically"
+  },
+  {
+   "checks": [
+    "test_the_superseded_dashboard_ui_v1_5_lock_is_byte_identical_and_reports_drift",
+    "test_capstone_ui_v1_detects_tamper_on_any_bound_file",
+    "@predecessor_tests_updated"
+   ],
+   "criterion": 91,
+   "pass": true,
+   "text": "CAPSTONE_UI_V1 lock verifies, DASHBOARD_UI_V1_5 is preserved byte-identical, and the two predecessor tests were updated per the supersession precedent"
+  },
+  {
+   "checks": [
+    "test_package_json_and_lock_are_untouched_and_clerk_js_is_pinned_in_the_additive_package"
+   ],
+   "criterion": 92,
+   "pass": true,
+   "text": "frontend package.json and package-lock.json are byte-identical to entry (V2-014 lock intact)"
+  },
+  {
+   "checks": [
+    "a window waiting for its follow-ups is PENDING (previous values are not current, but no false \"unavailable\")",
+    "on the real canonical stream the settled states match: 7 UNUSABLE windows end as NONE_FOR_WINDOW, never CURRENT"
+   ],
+   "criterion": 93,
+   "pass": true,
+   "text": "the live model never shows stale context or inference as current (PENDING / UNAVAILABLE / NONE_FOR_WINDOW semantics)"
+  },
+  {
+   "checks": [
+    "consumes every event kind with a contiguous sequence",
+    "records 93 windows as 86 VALID / 7 UNUSABLE and 86 inference results",
+    "observes the canonical outage as the gap [118800, 124199]"
+   ],
+   "criterion": 94,
+   "pass": true,
+   "text": "the frontend consumer reproduces the real canonical stream: 3157 events, 86/7 quality, 3 backend state changes, the outage gap"
+  },
+  {
+   "checks": [
+    "@no_artifacts_committed"
+   ],
+   "criterion": 95,
+   "pass": true,
+   "text": "no SQLite/database/build artifacts or secrets are committed"
+  },
+  {
+   "checks": [
+    "@disclosures_preserved"
+   ],
+   "criterion": 96,
+   "pass": true,
+   "text": "preserved disclosures remain recorded"
+  }
+ ],
+ "criteria_count": 96,
+ "decided": 96,
+ "frontend_tests": {
+  "failed": 0,
+  "passed": 145,
+  "skipped": 2
+ },
+ "gate": "CAPG4",
+ "known_preexisting_flake_failures_in_full_run": [],
+ "protocol_freeze": {
+  "bound_file_drift_since_freeze": [],
+  "freeze_commit": "5cf83da21688b399fb6c2d07ea2ccc1999bb2556",
+  "freeze_is_ancestor_of_head": true,
+  "ok": true,
+  "result_files_present_in_freeze": []
+ },
+ "regression_summary": {
+  "passed": 2819,
+  "skipped": 1
+ },
+ "ui_lock": {
+  "bound_artifacts": 200,
+  "lock_id": "CAPSTONE_UI_V1",
+  "lock_sha256": "374f996e3c4cf26d97bee8df68b73239ebb737fcb284e3249dc2466cffd67e1a",
+  "predecessor_id": "DASHBOARD_UI_V1_5",
+  "predecessor_preserved": true,
+  "status": "PASS"
+ },
+ "undecided": []
+}

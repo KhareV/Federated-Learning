@@ -1,0 +1,111 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "file": "frontend/src/lib/product/auth.ts",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 CAPSTONE_FRONTEND_AUTH_V1 bootstrap > DEMO backend: never initialises or imports Clerk; /me supplies the demo identity 3ms",
+    "\u00d7 ProductStore flows (fake backend: unit scope only) > device flow: attach -> scan -> FOUND -> connect -> CONNECTED, state taken from the backend 28ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "DEMO_MODE_INITIALIZES_CLERK",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "frontend/src/lib/product/auth.ts",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 secrets and dependencies > the frontend source contains no Clerk secret/JWT key or session-token fixture 14ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "CLERK_SECRET_INSERTED_INTO_FRONTEND",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "frontend/src/routes/app/monitoring/+page.svelte",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 product monitoring path purity > the product never calls the research inference route directly 6ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "PRODUCT_MONITOR_CALLS_INFER_WINDOW_DIRECTLY",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "frontend/src/lib/product/live-model.ts",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 product monitoring path purity > no monitoring state is assigned anywhere in product code except from a monitoring.state event 9ms",
+    "\u00d7 product monitoring state is never fabricated from quality / 422-style windows > quality UNUSABLE with no monitoring.state event leaves the monitoring state untouched 3ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "UNUSABLE_LOCALLY_CREATES_RECHECK_SENSOR_STATE",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "frontend/src/lib/product/waveform.ts",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 RollingWaveform: bounded, null gaps stay gaps > keeps null as a gap: never zero-filled, never interpolated, separate segments 4ms",
+    "\u00d7 monitoring page > creates a session, opens the live socket, starts, and renders only backend events (quality != monitoring state) 11ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "NULL_WAVEFORM_GAPS_CONVERTED_TO_ZERO",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "frontend/src/lib/product/api.ts",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 product monitoring path purity > no model / checkpoint / calibration selector exists in product request code 5ms",
+    "\u00d7 product client > uses same-origin /product/v1 and implements only CAP-004 routes (no /v1/infer-window, no model field) 7ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "MODEL_SELECTOR_INSERTED",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "frontend/src/routes/app/+page.svelte",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 no fake metrics in the product shell > /app pages contain no hard-coded dynamic-looking physiological, FL or session values 4ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "FAKE_HR_HARD_CODED_INTO_PRODUCT_DASHBOARD",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "frontend/src/lib/product/api.ts",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 product client > builds a same-origin WebSocket URL that carries no token 3ms",
+    "\u00d7 ProductStore flows (fake backend: unit scope only) > session flow: create opens the same-origin socket (no token in URL); start/stop go through the API 3ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "WEBSOCKET_TOKEN_INSERTED_INTO_URL",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "frontend/src/routes/+page.svelte",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 landing page product story and claim corrections > no longer claims attached hardware, edge inference, or real participating cities 3ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "SYNTHETIC_FL_SITE_PRESENTED_AS_REAL_INSTITUTION",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "frontend/src/routes/app/device/+page.svelte",
+   "file_restored_byte_identical": true,
+   "first_failures": [
+    "\u00d7 device page > walks NO DEVICE -> attach -> scan -> FOUND -> connect -> CONNECTED with simulation labels and no hardware claim 9ms"
+   ],
+   "git_status_of_file_after_restore": "",
+   "mutation": "PHYSICAL_WEARABLE_SHOWN_AS_CONNECTED",
+   "suite_failed_as_designed": true
+  }
+ ]
+}

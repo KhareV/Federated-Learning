@@ -1,0 +1,791 @@
+{
+ "checks": [
+  "one h1 and one main per page",
+  "labelled navigation landmarks",
+  "skip link on /app pages",
+  "every button/link named; every select labelled",
+  "live regions on device/monitor",
+  "keyboard Tab reaches focusables and focus is visible",
+  "prefers-reduced-motion: no running animations on product pages"
+ ],
+ "run_1": {
+  "device": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 2,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "federation": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Clients",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "history": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "models": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "monitoring": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 2,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "overview": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "sign_in": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "ENTER DEMO WORKSPACE",
+     "outline": true,
+     "tag": "BUTTON"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "ENTER DEMO WORKSPACE",
+     "outline": true,
+     "tag": "BUTTON"
+    },
+    null,
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "ENTER DEMO WORKSPACE",
+     "outline": true,
+     "tag": "BUTTON"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 7,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": false,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  }
+ },
+ "run_2": {
+  "device": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 2,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "federation": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Clients",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "history": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "models": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "monitoring": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 2,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "overview": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "Skip to content",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Overview",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Device",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Monitor",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "History",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Federation",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "Models",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 8,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": true,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  },
+  "sign_in": {
+   "allFocusVisible": true,
+   "focusSequence": [
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "ENTER DEMO WORKSPACE",
+     "outline": true,
+     "tag": "BUTTON"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "ENTER DEMO WORKSPACE",
+     "outline": true,
+     "tag": "BUTTON"
+    },
+    null,
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    },
+    {
+     "name": "ENTER DEMO WORKSPACE",
+     "outline": true,
+     "tag": "BUTTON"
+    },
+    {
+     "name": "NHM home",
+     "outline": true,
+     "tag": "A"
+    }
+   ],
+   "focusableReached": 7,
+   "h1": 1,
+   "imagesWithoutAlt": 0,
+   "lang": "en",
+   "liveRegions": 1,
+   "main": 1,
+   "nav": true,
+   "runningAnimations": 0,
+   "skipLink": false,
+   "unlabelledSelects": 0,
+   "unnamedButtons": 0
+  }
+ }
+}

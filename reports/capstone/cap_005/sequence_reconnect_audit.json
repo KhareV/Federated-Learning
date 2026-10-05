@@ -1,0 +1,29 @@
+{
+ "policy": {
+  "clerk_mode": "relies on the Clerk session cookie (backend-supported path); not verifiable without a live Clerk account",
+  "no_retry_codes": [
+   1000,
+   4401,
+   4403,
+   4404
+  ],
+  "reconnect": "bounded: 3 retries, delays 500/1000/2000 ms, then LIVE STREAM DISCONNECTED + explicit reconnect",
+  "token_in_url": false,
+  "url": "same-origin /product/v1/sessions/{id}/live"
+ },
+ "sequence_continuous": [
+  true,
+  true
+ ],
+ "socket_resets_real_backend": [
+  1,
+  1
+ ],
+ "unit_tests": [
+  "requires next = previous + 1 and flags gaps and duplicates",
+  "a sequence gap puts the model into a visible PRODUCT STREAM ERROR and stops consuming",
+  "retries at most MAX_RECONNECTS times, resetting derived state on every (re)connect, then reports DISCONNECTED",
+  "live events render into state; reconnect replays from 0 without double counting",
+  "replay from sequence 0 is deterministic: reset + replay rebuilds identical state (no double counting)"
+ ]
+}

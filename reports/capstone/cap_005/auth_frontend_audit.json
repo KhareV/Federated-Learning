@@ -1,0 +1,30 @@
+{
+ "bootstrap": {
+  "CLERK": "lazy ClerkJS; REST Authorization: Bearer <session token> from the active session, never stored",
+  "DEMO": "no Clerk import/initialisation; /me supplies the offline demo identity; persistent banner OFFLINE DEMO IDENTITY / NOT CLERK AUTHENTICATION",
+  "authority": "GET /product/v1/system (auth_provider, demo_mode)",
+  "client_guards": "UX only; FastAPI is the authorization authority",
+  "failure_state": "AUTHENTICATION UNAVAILABLE",
+  "no_silent_fallback": true
+ },
+ "clerk_live_account_tested": false,
+ "demo_banner": "OFFLINE DEMO IDENTITY NOT CLERK AUTHENTICATION",
+ "demo_clerk_initialised": false,
+ "demo_clerk_requests_in_browser": [
+  0,
+  0
+ ],
+ "env_names_referenced": [
+  "VITE_CLERK_PUBLISHABLE_KEY"
+ ],
+ "identity": "DEMOdemo:faculty",
+ "persistence_apis_used_by_auth": [],
+ "unit_tests": [
+  "mode is decided by the backend /system, never by a frontend toggle",
+  "DEMO backend: never initialises or imports Clerk; /me supplies the demo identity",
+  "CLERK backend with a missing publishable key shows AUTHENTICATION UNAVAILABLE and does not fall back to Demo",
+  "CLERK backend whose Clerk SDK fails to initialise never falls back to Demo",
+  "sends Authorization: Bearer only when a token provider yields one, and stores nothing"
+ ],
+ "websocket_clerk_cookie_path_verified": false
+}

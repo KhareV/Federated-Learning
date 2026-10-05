@@ -1,0 +1,46 @@
+{
+ "all_clear": true,
+ "note": "values on /app pages are expressions bound to API/event data; numeric tokens on no-data pages are API-derived counts, versions or ids",
+ "numeric_tokens_in_no_data_pages": {
+  "device": [
+   "01",
+   "360"
+  ],
+  "federation": [
+   "006",
+   "007",
+   "008"
+  ],
+  "history": [
+   "01",
+   "05",
+   "09",
+   "10",
+   "20",
+   "2026",
+   "34"
+  ],
+  "models": [
+   "007",
+   "008"
+  ],
+  "overview": [
+   "0",
+   "01",
+   "02",
+   "03",
+   "1"
+  ],
+  "sign_in": []
+ },
+ "rendered_metric_hits": [],
+ "rendered_pages": [
+  "device",
+  "federation",
+  "history",
+  "models",
+  "overview",
+  "sign_in"
+ ],
+ "static_literal_hits": []
+}

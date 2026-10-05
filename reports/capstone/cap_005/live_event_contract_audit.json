@@ -1,0 +1,25 @@
+{
+ "contract": "PRODUCT_LIVE_EVENT_V1 (monitoring kinds)",
+ "event_counts_real_backend": [
+  {
+   "context.snapshot": 86,
+   "device.status": 6,
+   "inference.result": 86,
+   "monitoring.state": 3,
+   "quality.status": 93,
+   "session.status": 3,
+   "waveform.chunk": 2880
+  },
+  {
+   "context.snapshot": 86,
+   "device.status": 6,
+   "inference.result": 86,
+   "monitoring.state": 3,
+   "quality.status": 93,
+   "session.status": 3,
+   "waveform.chunk": 2880
+  }
+ ],
+ "real_stream_replayed_through_the_frontend_model": "reports/capstone/cap_004/canonical_event_stream_run_1.jsonl (3157 events)",
+ "unit_tests": "live-model.test.ts typed union / malformed / foreign-kind cases"
+}

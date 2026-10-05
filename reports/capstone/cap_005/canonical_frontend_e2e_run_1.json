@@ -1,0 +1,995 @@
+{
+ "after_product_restart": {
+  "sessions": [
+   {
+    "session_id": "SESS-3f7a79e4c4bc4432bfa50fa96f400142",
+    "state": "COMPLETED"
+   }
+  ]
+ },
+ "auth_mode": "DEMO (explicit, acknowledged)",
+ "browser": {
+  "accessibility": {
+   "device": {
+    "allFocusVisible": true,
+    "focusSequence": [
+     {
+      "name": "Skip to content",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Overview",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Device",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Monitor",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "History",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Federation",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Models",
+      "outline": true,
+      "tag": "A"
+     }
+    ],
+    "focusableReached": 8,
+    "h1": 1,
+    "imagesWithoutAlt": 0,
+    "lang": "en",
+    "liveRegions": 2,
+    "main": 1,
+    "nav": true,
+    "runningAnimations": 0,
+    "skipLink": true,
+    "unlabelledSelects": 0,
+    "unnamedButtons": 0
+   },
+   "federation": {
+    "allFocusVisible": true,
+    "focusSequence": [
+     {
+      "name": "Skip to content",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Overview",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Device",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Monitor",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "History",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Federation",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Clients",
+      "outline": true,
+      "tag": "A"
+     }
+    ],
+    "focusableReached": 8,
+    "h1": 1,
+    "imagesWithoutAlt": 0,
+    "lang": "en",
+    "liveRegions": 1,
+    "main": 1,
+    "nav": true,
+    "runningAnimations": 0,
+    "skipLink": true,
+    "unlabelledSelects": 0,
+    "unnamedButtons": 0
+   },
+   "history": {
+    "allFocusVisible": true,
+    "focusSequence": [
+     {
+      "name": "Skip to content",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Overview",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Device",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Monitor",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "History",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Federation",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Models",
+      "outline": true,
+      "tag": "A"
+     }
+    ],
+    "focusableReached": 8,
+    "h1": 1,
+    "imagesWithoutAlt": 0,
+    "lang": "en",
+    "liveRegions": 1,
+    "main": 1,
+    "nav": true,
+    "runningAnimations": 0,
+    "skipLink": true,
+    "unlabelledSelects": 0,
+    "unnamedButtons": 0
+   },
+   "models": {
+    "allFocusVisible": true,
+    "focusSequence": [
+     {
+      "name": "Skip to content",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Overview",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Device",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Monitor",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "History",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Federation",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Models",
+      "outline": true,
+      "tag": "A"
+     }
+    ],
+    "focusableReached": 8,
+    "h1": 1,
+    "imagesWithoutAlt": 0,
+    "lang": "en",
+    "liveRegions": 1,
+    "main": 1,
+    "nav": true,
+    "runningAnimations": 0,
+    "skipLink": true,
+    "unlabelledSelects": 0,
+    "unnamedButtons": 0
+   },
+   "monitoring": {
+    "allFocusVisible": true,
+    "focusSequence": [
+     {
+      "name": "Skip to content",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Overview",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Device",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Monitor",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "History",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Federation",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Models",
+      "outline": true,
+      "tag": "A"
+     }
+    ],
+    "focusableReached": 8,
+    "h1": 1,
+    "imagesWithoutAlt": 0,
+    "lang": "en",
+    "liveRegions": 2,
+    "main": 1,
+    "nav": true,
+    "runningAnimations": 0,
+    "skipLink": true,
+    "unlabelledSelects": 0,
+    "unnamedButtons": 0
+   },
+   "overview": {
+    "allFocusVisible": true,
+    "focusSequence": [
+     {
+      "name": "Skip to content",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Overview",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Device",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Monitor",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "History",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Federation",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "Models",
+      "outline": true,
+      "tag": "A"
+     }
+    ],
+    "focusableReached": 8,
+    "h1": 1,
+    "imagesWithoutAlt": 0,
+    "lang": "en",
+    "liveRegions": 1,
+    "main": 1,
+    "nav": true,
+    "runningAnimations": 0,
+    "skipLink": true,
+    "unlabelledSelects": 0,
+    "unnamedButtons": 0
+   },
+   "sign_in": {
+    "allFocusVisible": true,
+    "focusSequence": [
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "ENTER DEMO WORKSPACE",
+      "outline": true,
+      "tag": "BUTTON"
+     },
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "ENTER DEMO WORKSPACE",
+      "outline": true,
+      "tag": "BUTTON"
+     },
+     null,
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     },
+     {
+      "name": "ENTER DEMO WORKSPACE",
+      "outline": true,
+      "tag": "BUTTON"
+     },
+     {
+      "name": "NHM home",
+      "outline": true,
+      "tag": "A"
+     }
+    ],
+    "focusableReached": 7,
+    "h1": 1,
+    "imagesWithoutAlt": 0,
+    "lang": "en",
+    "liveRegions": 1,
+    "main": 1,
+    "nav": true,
+    "runningAnimations": 0,
+    "skipLink": false,
+    "unlabelledSelects": 0,
+    "unnamedButtons": 0
+   }
+  },
+  "consoleErrors": [],
+  "deviceId": "NHM_VIRTUAL_WEARABLE_01",
+  "landingText": "N\nNHM\nTECHNOLOGY\nSIGNALS\nPRIVACY\nRESEARCH\nOPEN NHM\n\u2197\nNHM / 01\nLIVE MONITORING RESEARCH\nSIMULATED SOURCE \u00b7 ECG + SpO\u2082 CONTEXT\nRESEARCH PLATFORM \u00b7 SIMULATED SOURCE \u00b7 NOT DIAGNOSTIC\nNHM\nFederated physiological\nmonitoring research platform.\n\nLive monitoring with a released model, a federated model-development architecture, and a hardware-ready source boundary. A virtual wearable today; a physical adapter later. A research prototype, not a diagnostic or medical device.\n\nEXPLORE THE SYSTEM\n\u2193\nOPEN NHM\u2197\nLIVE MONITORING\nReleased MODEL_V2, server-side, research states\nFEDERATED MODEL DEVELOPMENT\nArchitecture for synthetic research partitions\nHARDWARE-READY SOURCE ARCHITECTURE\nVirtual wearable now, physical adapter later\nILLUSTRATIVE ECG\nSYNTHETIC WAVEFORM\nNOT LIVE DATA\n02 / THE SAMPLING DILEMMA\nHealthcare often sees\nsnapshots. Disease lives in the gaps.\n\nStandard episodic clinical visits capture only brief, isolated readings months apart. NHM is a research prototype exploring whether continuous, multi-modal research monitoring can observe more of the picture between those visits -- today via server-side research inference, not on-device, and not yet validated on real wearable hardware.\n\nContinuous Neural Stream\n99.8% Coverage\nIntermittent Snapshots\nLegacy Care\nLIVE EDGE SYNAPSE GRAPH\n\nHover any node to inspect real-time feature vectors and cross-modal correlation paths.\n\nSENSOR INPUT\nECG Biopotential\nConcept Front-End (Unverified)\n\nDifferential cardiac electrical vector (illustrative)\n\nSAMPLING FREQUENCY\nIllustrative\nILLUSTRATIVE RANGE\nIllustrative\nILLUSTRATIVE VALUE (NOT LIVE)\nIllustrative (not live)\n03 / RESEARCH EVOLUTION\nFrom sensing to\n\nprivacy-preserving intelligence.\n\nNHM brings together the progression identified in the project literature review rather than treating each technique as an isolated feature.\n\nS\n\nWearable physiological sensing\n\n01\nI\n\nConnected IoMT monitoring\n\nA\n\nAI / machine learning on health signals\n\n02\nF\n\nFederated learning for collaborative training\n\nP\n\nPrivacy-preserving healthcare intelligence\n\n03\nN\n\nNHM: a practical wearable architecture\n\n04 / HARDWARE-READY SOURCE ARCHITECTURE\nHardware-ready by design.\n\nToday the source is a simulated virtual wearable. The architecture defines a source-adapter boundary so a physical wearable can replace it later. The sensor concepts below are unverified design sketches, not an attached device.\n\nNHM-01 CONCEPT MODEL (3D RENDER, NOT A SHIPPING PRODUCT)\nILLUSTRATIVE INDUSTRIAL DESIGN ONLY\n01 \u00b7 ECG\n02 \u00b7 PPG\n03 \u00b7 Edge\n04 \u00b7 Power\n01\nECG\n02\nPPG\n03\nEdge\n04\nPower\nCARDIAC ELECTRICAL SENSING -- UNVERIFIED\nECG Analog Front-End (Concept)\n\nConcept sketch for ECG signal conditioning. The exact front-end chip, gain, filtering, and electrode placement have not been bench-verified against physical hardware.\n\nSIMULATED WAVEFORM // ECG\nILLUSTRATIVE, NOT LIVE HARDWARE\nCMRR\nUnverified\nNot bench-tested\nSAMPLING RATE\nUnverified\nSee HW01 bench verification (BLOCKED)\nADC RESOLUTION\nUnverified\nNot bench-tested\nPOWER DRAW\nUnverified\nNot bench-tested\nENGINEERING ARCHITECTURE\n\u2713\nConcept sketch only -- no physical front-end has been bench-verified\n\u2713\nElectrode placement and lead-off handling remain VERIFICATION_REQUIRED\n\u2713\nT004 bench hardware verification is BLOCKED_HARDWARE\nRESEARCH PROTOTYPE\n\u2022\nCONCEPT HARDWARE (UNVERIFIED)\n\u2022\nSERVER-SIDE CPU INFERENCE\n\u2022\nNO DIAGNOSIS CLAIM\n\u2022\nSOURCE-DOMAIN CALIBRATION ONLY\n\u2022\nWEARABLE VALIDATION PENDING\nRESEARCH PROTOTYPE\n\u2022\nCONCEPT HARDWARE (UNVERIFIED)\n\u2022\nSERVER-SIDE CPU INFERENCE\n\u2022\nNO DIAGNOSIS CLAIM\n\u2022\nSOURCE-DOMAIN CALIBRATION ONLY\n\u2022\nWEARABLE VALIDATION PENDING\nRESEARCH PROTOTYPE\n\u2022\nCONCEPT HARDWARE (UNVERIFIED)\n\u2022\nSERVER-SIDE CPU INFERENCE\n\u2022\nNO DIAGNOSIS CLAIM\n\u2022\nSOURCE-DOMAIN CALIBRATION ONLY\n\u2022\nWEARABLE VALIDATION PENDING\nRESEARCH PROTOTYPE\n\u2022\nCONCEPT HARDWARE (UNVERIFIED)\n\u2022\nSERVER-SIDE CPU INFERENCE\n\u2022\nNO DIAGNOSIS CLAIM\n\u2022\nSOURCE-DOMAIN CALIBRATION ONLY\n\u2022\nWEARABLE VALIDATION PENDING\n05 / SIGNALS (SIMULATED TODAY)\nOne source.\n\nSynchronized signals.\nSENSE\nSYNCHRONIZE\nSIMULATION PRESETS:\nNormal Sinus Rhythm\nPhysical Exertion (Tachycardia)\nDeep Sleep (Bradycardia)\nEctopic PVC Anomaly\nOPTIMAL CARDIAC SYNCHRONY\n\nBalanced autonomic sympathovagal tone. Crisp QRS complexes followed by regular systolic volume ejection waves.\n\nHEART RATE\n72 BPM\nARTERIAL SpO\u2082\n98.4 %\nPULSE TRANSIT (PTT)\n218 ms\nHRV DISPERSION (SDNN)\n54 ms\nPOINCAR\u00c9 AUTONOMIC DISPERSION\n06 / SERVER-SIDE INFERENCE\nReleased inference,\n\nserver-side today.\n\nThe virtual wearable streams to the NHM product API, which calls the released SOFTWARE_SYSTEM_V2 (MODEL_V2_FINAL) over localhost. Nothing runs on a sensor; on-device or edge deployment is not implemented.\n\n01\nVIRTUAL WEARABLE\nSIMULATED SOURCE\n02\nPRODUCT API\nLOCAL SESSION + SQLITE\n03\nSOFTWARE_SYSTEM_V2\nMODEL_V2_FINAL / SERVER-SIDE\nVIRTUAL TODAY. HARDWARE LATER.\n07 / PRIVACY-PRESERVING LEARNING\nLearn together.\nShare less.\n\nFederated learning lets participating clients contribute model updates while raw recordings stay at the client. In this prototype the clients are synthetic research partitions - not hospitals or institutions - and the federation product runtime is not yet enabled.\n\nILLUSTRATIVE NETWORK TOPOLOGY - NOT PARTICIPATING INSTITUTIONS\nSIM_FL_SITE_00\nSIM_FL_SITE_01\nSIM_FL_SITE_02\nSIM_FL_SITE_03\nSIM_FL_SITE_04\nSIM_FL_SITE_05\nSIM_FL_SITE_06\nSIM_FL_SITE_07\nAGGREGATOR\nLOCAL CLIENTS\nMODEL UPDATES\nFEDERATED SERVER\nAGGREGATION\nRAW DATA\nSTAYS LOCAL\nLEARNING\nHAPPENS COLLABORATIVELY\n08 / SYSTEM ARCHITECTURE\nUnder the interface is\n\na layered system.\n\nA research layering from concept sensor front-end sketches, through server-side CPU inference and a federated-learning research lineage with a SecAgg+ interface reference, to research-only monitoring states. No on-device inference, differential privacy or deployed system is implemented.\n\n01\nAnalog Biosensing\nBiopotential & Optical Transduction\n02\nEmbedded Edge Firmware\nHardware FIFO & Noise Filtering\n03\nWavelet Feature Extraction\nCross-Modal Vector Synthesis\n04\nResearch Model Inference\nServer-Side CPU Gateway (Current Implementation)\n05\nFederated Optimization (FedProx)\nFedProx Local Objective (Research Prototype)\n06\nSecAgg+ Interface Prototype\nResearch Secure-Aggregation Reference\nTIER 03 // ARCHITECTURE\nLATENCY: 1.2 ms\nWavelet Feature Extraction\n\nReal-time Pan-Tompkins QRS peak detection, R-R interval HRV extraction, and Pulse Transit Time (PTT) fusion.\n\nPROTOCOL / INTERFACE\nSIMD Vector Floating Point\nTHROUGHPUT / MEMORY\n128-D Feature Embedding\nPRIVACY & SECURITY\nDeterministic In-Memory Transform\nSUBSYSTEM IMPLEMENTATION\n\u25b9\nContinuous Beat-to-Beat PTT Tracking\n\u25b9\nAutonomic Sympathovagal LF/HF Decomposition\n\u25b9\n128-Dimensional Topological Vector Projection\nFEDERATED LEARNING -- ILLUSTRATIVE MAP\nConcept Map, Not Live Deployment Telemetry\nILLUSTRATIVE\nCLIENTS (DEMO)\nIllustrative\nROUND\nSee reports/fl_iid.json\nACCURACY\nSee reports/fl_iid.json\nPRIVACY\nNo Formal DP Proof\n09 / THE PRODUCT\nSee the system\n\nin action.\n\nAn interactive, simulated preview of the research monitoring environment: illustrative multilead waveforms and research-only monitoring states. Not live signals, not a diagnosis.\n\nSESSION // #NHM-DEMO-SIMULATED\nNHM RESEARCH MONITORING ENVIRONMENT (SIMULATED)\nNORMAL SINUS RHYTHM\nTELEMETRY SCENARIO SIMULATOR:\nNormal Sinus (72 BPM)\nBradycardia (48 BPM)\nExertion (118 BPM)\nPVC Arrhythmia\nSIMULATED CARDIAC BIOPOTENTIAL (ILLUSTRATIVE)\nSYNTHETIC WAVEFORM // NOT LIVE HARDWARE\nSIMULATED PHOTOPLETHYSMOGRAM (ILLUSTRATIVE)\nSYNTHETIC WAVEFORM // NOT LIVE HARDWARE\nHEART RATE\n71 BPM\nR-R Variance: 54ms\nBLOOD OXYGEN (SpO\u2082)\n98 %\nCalibrated Optical R: 0.52\nRESPIRATION RATE\n14 BR/MIN\nECG Derived Respiration (EDR)\nEDGE PRIVACY STATUS\nLOCAL ONLY\n0 Bytes Uploaded\nReady to experience the continuous health telemetry environment?\n\nExplore live historical graphs, signal replay, and privacy-preserving federated training logs.\n\nLaunch Full Monitor Environment\n\u2197\nNHM / 10\nFederated physiological\nmonitoring research.\n\nLive monitoring. Federated model development. Hardware-ready source architecture. Research prototype - not diagnostic.\n\nOPEN NHM\n\u2197\nN\nNHM\n\nNon-Invasive Health Monitor\n\nTECHNOLOGY\nPRIVACY\nRESEARCH\nOPEN NHM\nB.TECH FINAL YEAR PROJECT\nVIT CHENNAI",
+  "network": {
+   "clerkRequests": 0,
+   "external": [],
+   "externalInProductPhase": [],
+   "failures": [],
+   "inferWindowFromBrowser": false,
+   "inlineDataRequests": 4,
+   "landingPhaseRequestCount": 172,
+   "origins": [
+    "http://127.0.0.1:59892",
+    "data:",
+    "blob:"
+   ],
+   "productPhaseOrigins": [
+    "http://127.0.0.1:59892"
+   ],
+   "productPhaseRequestCount": 1144,
+   "productRequests": [
+    "/product/v1/devices",
+    "/product/v1/devices/simulated",
+    "/product/v1/devices/{device}/connect",
+    "/product/v1/devices/{device}/scan",
+    "/product/v1/me",
+    "/product/v1/sessions",
+    "/product/v1/sessions/{session}",
+    "/product/v1/sessions/{session}/start",
+    "/product/v1/system"
+   ],
+   "requestCount": 1316,
+   "topProductPaths": [
+    [
+     "/_app/immutable/*",
+     1003
+    ],
+    [
+     "/product/v1/me",
+     31
+    ],
+    [
+     "/product/v1/system",
+     30
+    ],
+    [
+     "/product/v1/sessions",
+     24
+    ],
+    [
+     "/product/v1/devices",
+     18
+    ],
+    [
+     "/sign-in",
+     6
+    ],
+    [
+     "/app",
+     5
+    ],
+    [
+     "/app/device",
+     5
+    ]
+   ],
+   "websockets": [
+    "ws://127.0.0.1:59892/product/v1/sessions/SESS-3f7a79e4c4bc4432bfa50fa96f400142/live"
+   ]
+  },
+  "origin": "http://127.0.0.1:59892",
+  "renderedText": {
+   "device": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / DEVICE\nVirtual wearable\n01 / DEVICE\nNHM Virtual Wearable\nSIMULATED\nSIMULATED\nWEARABLE_SIM_V1\nSYNTHETIC_PHYSIOLOGY\nDEVICE ID\nNHM_VIRTUAL_WEARABLE_01\nPROVENANCE\nWEARABLE_SIM_V1 (software simulation)\nSCENARIO\nMIXED_MONITORING_SESSION\nCONNECTION STATE\nSTOPPED\nCAPABILITIES\nECG yes / PPG waveform unavailable / SpO2 context where emitted / source 360 Hz\nPHYSICAL HARDWARE\nNOT CONNECTED / NOT IMPLEMENTED\nDETACHED\nSCANNING\nFOUND\nPAIRING\nCONNECTED\n\nCurrent state: STOPPED\n\nSCAN\nPAIR / CONNECT\nDISCONNECT\nDevice state: STOPPED",
+   "federation": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNOT YET ENABLED IN THIS PHASE\nFederation\n\nFEDERATION PRODUCT RUNTIME NOT YET ENABLED IN THIS PHASE. Federated model development (local training, aggregation, candidates) is built in later capstone phases. FL client sites will be synthetic research partitions (SIM_FL_SITE_00 ... SIM_FL_SITE_07), not institutions. No training is running; there is no progress to show.\n\nOWNER PHASE\nCAP-006 / CAP-007 / CAP-008\nSTATUS\nNo runtime, no data, no placeholder metrics\nExisting frozen FL research material (legacy research view) \u2192",
+   "history": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / HISTORY\nSessions\n01 / PERSISTED\nMonitoring sessions\nGET /sessions\nPersisted monitoring sessions, newest first\nSession\tState\tCreated\tStarted\tEnded\tDevice\tScenario\tModel\nSESS-3f7a79e4c4bc4432bfa50fa96f400142\tCOMPLETED\t05/10/2026, 20:34:05\t05/10/2026, 20:34:05\t05/10/2026, 20:34:09\tNHM_VIRTUAL_WEARABLE_01\tMIXED_MONITORING_SESSION\tMODEL_V2_FINAL\n\nOperational list only. Session summaries, timelines and research-evidence history are a later capstone phase (not yet enabled).",
+   "models": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNOT YET ENABLED IN THIS PHASE\nModels\n\nReleased monitoring uses MODEL_V2_FINAL in SOFTWARE_SYSTEM_V2. Candidate-model governance is not yet enabled; no candidate models exist.\n\nOWNER PHASE\nCAP-007 / CAP-008\nSTATUS\nNo runtime, no data, no placeholder metrics",
+   "monitoring": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / MONITOR\nLive monitoring\nSession not started. Device STOPPED. Monitoring state none yet.\n01 / SESSION\nMonitoring session\nPERSISTED IN SQLITE\n\nDevice NHM_VIRTUAL_WEARABLE_01 is STOPPED. Scan and connect it first. Device page \u2192\n\n02 / SIMULATED SOURCE ECG\nVirtual wearable ECG\n360 Hz / ADC_COUNTS / rolling 10 s\n\nSimulated device-source ECG transport (not the 250 Hz model-input window, not a physical sensor). PPG waveform is unavailable in the current simulator; SpO2/PPG-derived context appears only where emitted.\n\n03 / QUALITY LABEL\nSignal quality\nquality.status\n\nNo quality.status event yet.\n\n04 / MONITORING STATE\nResearch monitoring state\nmonitoring.state\n\nNo monitoring.state event received yet. The state changes only when the backend sends one.\n\n05 / CONTEXT\nPhysiological context\ncontext.snapshot\n\nUNAVAILABLE\n\nNo current context for the latest window. Earlier values are not shown as current.\n\n06 / INFERENCE\nMODEL_V2_FINAL result\ninference.result\n\nNo inference.result event yet.\n\n07 / DEVICE LINK\nDevice connection\ndevice.status\n\nSTOPPED\n\nA device disconnect does not end the session; the backend session stays authoritative.",
+   "overview": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / OVERVIEW\nProduct workspace\n\nEvery value on this page is read from the local product backend. Nothing is simulated by the browser.\n\nIDENTITY\ndemo:faculty\nAUTH DEMO / OFFLINE DEMO\nRELEASED MODEL\nMODEL_V2_FINAL\nSOFTWARE_SYSTEM_V2 / SERVER-SIDE / CAL_V2\nPERSISTENCE\nSQLITE\nLOCAL DATABASE\nHARDWARE MODE\nSIMULATED_ONLY\nPHYSICAL HARDWARE: NOT CONNECTED\n01 / DEVICE\nVirtual wearable\nSIMULATED\n\n0 connected / 1 attached\n\nNHM_VIRTUAL_WEARABLE_01 STOPPED\nOpen device page \u2192\n02 / SESSIONS\nLatest monitoring session\nPERSISTED\n\nSESS-3f7a79e4c4bc4432bfa50fa96f400142\n\nState COMPLETED / scenario MIXED_MONITORING_SESSION\n\nOpen monitor \u2192\n03 / PRODUCT STORY\nReleased monitoring \u2260 federated development\nReleased monitoring\n\nMODEL_V2_FINAL runs server-side in SOFTWARE_SYSTEM_V2. This is what the Monitor page uses.\n\nFederated development\n\nFederation product runtime: NOT YET ENABLED IN PRODUCT RUNTIME (capstone federation layer). No candidate models exist.\n\nFederation \u2192\n\nresearch prototype; simulated device; not diagnostic; no clinical claim",
+   "sign_in": "N\nNHM\nNHM / FEDERATED PHYSIOLOGICAL MONITORING RESEARCH PLATFORM\nNHM OFFLINE FACULTY DEMO\n\nThis workspace uses an explicit offline demo identity supplied by the local product backend. There is no password and no external sign-in service.\n\nIDENTITY\ndemo:faculty\nAUTH PROVIDER\nDEMO - NOT CLERK\nHARDWARE\nSIMULATED ONLY - no physical wearable\nMODEL\nMODEL_V2_FINAL via SOFTWARE_SYSTEM_V2 (server-side)\n\nResearch prototype. Not diagnostic. Simulated device. Monitoring states are research outputs, not health assessments.\n\nENTER DEMO WORKSPACE"
+  },
+  "responsive": {
+   "device_1024": {
+    "bodyScrollWidth": 1024,
+    "innerWidth": 1024,
+    "overflowing": [],
+    "scrollWidth": 1024
+   },
+   "device_1440": {
+    "bodyScrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflowing": [],
+    "scrollWidth": 1440
+   },
+   "device_390": {
+    "bodyScrollWidth": 390,
+    "innerWidth": 390,
+    "overflowing": [],
+    "scrollWidth": 390
+   },
+   "device_768": {
+    "bodyScrollWidth": 768,
+    "innerWidth": 768,
+    "overflowing": [],
+    "scrollWidth": 768
+   },
+   "federation_1024": {
+    "bodyScrollWidth": 1024,
+    "innerWidth": 1024,
+    "overflowing": [],
+    "scrollWidth": 1024
+   },
+   "federation_1440": {
+    "bodyScrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflowing": [],
+    "scrollWidth": 1440
+   },
+   "federation_390": {
+    "bodyScrollWidth": 390,
+    "innerWidth": 390,
+    "overflowing": [],
+    "scrollWidth": 390
+   },
+   "federation_768": {
+    "bodyScrollWidth": 768,
+    "innerWidth": 768,
+    "overflowing": [],
+    "scrollWidth": 768
+   },
+   "history_1024": {
+    "bodyScrollWidth": 1024,
+    "innerWidth": 1024,
+    "overflowing": [],
+    "scrollWidth": 1024
+   },
+   "history_1440": {
+    "bodyScrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflowing": [],
+    "scrollWidth": 1440
+   },
+   "history_390": {
+    "bodyScrollWidth": 390,
+    "innerWidth": 390,
+    "overflowing": [],
+    "scrollWidth": 390
+   },
+   "history_768": {
+    "bodyScrollWidth": 768,
+    "innerWidth": 768,
+    "overflowing": [],
+    "scrollWidth": 768
+   },
+   "landing_1024": {
+    "bodyScrollWidth": 1024,
+    "innerWidth": 1024,
+    "overflowing": [
+     "DIV.absolute top-28 left-1/2 aspect-square o right=2341",
+     "P.absolute bottom-0 left-1/2 line-clamp-3  right=1062",
+     "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=1032",
+     "DIV.h-full w-full bg-[var(--placeholder-line right=1032",
+     "DIV.absolute top-0 left-1/2 -translate-x-1/2 right=1045",
+     "DIV.h-full w-full transition-colors duration right=1045"
+    ],
+    "scrollWidth": 1024
+   },
+   "landing_1440": {
+    "bodyScrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflowing": [
+     "svg.[object SVGAnimatedString] right=1455",
+     "rect.[object SVGAnimatedString] right=1455",
+     "DIV.watch-scene svelte-ydnqlz right=1593",
+     "DIV.svelte-clyidt right=1593",
+     "CANVAS.svelte-clyidt right=1593",
+     "DIV.absolute top-28 left-1/2 aspect-square o right=2549"
+    ],
+    "scrollWidth": 1440
+   },
+   "landing_390": {
+    "bodyScrollWidth": 390,
+    "innerWidth": 390,
+    "overflowing": [
+     "DIV.view-switch-pills svelte-yek519 right=406",
+     "BUTTON.pill-btn svelte-yek519 right=399",
+     "DIV.absolute top-28 left-1/2 aspect-square o right=2024",
+     "P.absolute bottom-0 left-1/2 line-clamp-3  right=424",
+     "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=399",
+     "DIV.h-full w-full bg-[var(--placeholder-line right=399"
+    ],
+    "scrollWidth": 390
+   },
+   "landing_768": {
+    "bodyScrollWidth": 768,
+    "innerWidth": 768,
+    "overflowing": [
+     "DIV.absolute top-28 left-1/2 aspect-square o right=2213",
+     "P.absolute bottom-0 left-1/2 line-clamp-3  right=828",
+     "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=775",
+     "DIV.h-full w-full bg-[var(--placeholder-line right=775",
+     "DIV.absolute top-0 left-1/2 h-[34px] w-[1px] right=788",
+     "DIV.h-full w-full bg-[var(--placeholder-line right=788"
+    ],
+    "scrollWidth": 768
+   },
+   "monitor_1024": {
+    "bodyScrollWidth": 1024,
+    "createVisible": true,
+    "innerWidth": 1024,
+    "menuVisible": false,
+    "overflowing": [],
+    "plotWidth": 692.5625,
+    "scrollWidth": 1024
+   },
+   "monitor_1440": {
+    "bodyScrollWidth": 1440,
+    "createVisible": true,
+    "innerWidth": 1440,
+    "menuVisible": false,
+    "overflowing": [],
+    "plotWidth": 1090,
+    "scrollWidth": 1440
+   },
+   "monitor_390": {
+    "bodyScrollWidth": 390,
+    "createVisible": true,
+    "innerWidth": 390,
+    "menuVisible": true,
+    "overflowing": [],
+    "plotWidth": 320,
+    "scrollWidth": 390
+   },
+   "monitor_768": {
+    "bodyScrollWidth": 768,
+    "createVisible": true,
+    "innerWidth": 768,
+    "menuVisible": true,
+    "overflowing": [],
+    "plotWidth": 683.9375,
+    "scrollWidth": 768
+   },
+   "overview_1024": {
+    "bodyScrollWidth": 1024,
+    "innerWidth": 1024,
+    "overflowing": [],
+    "scrollWidth": 1024
+   },
+   "overview_1440": {
+    "bodyScrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflowing": [],
+    "scrollWidth": 1440
+   },
+   "overview_390": {
+    "bodyScrollWidth": 390,
+    "innerWidth": 390,
+    "overflowing": [],
+    "scrollWidth": 390
+   },
+   "overview_768": {
+    "bodyScrollWidth": 768,
+    "innerWidth": 768,
+    "overflowing": [],
+    "scrollWidth": 768
+   },
+   "sign_in_1024": {
+    "bodyScrollWidth": 1024,
+    "innerWidth": 1024,
+    "overflowing": [],
+    "scrollWidth": 1024
+   },
+   "sign_in_1440": {
+    "bodyScrollWidth": 1440,
+    "innerWidth": 1440,
+    "overflowing": [],
+    "scrollWidth": 1440
+   },
+   "sign_in_390": {
+    "bodyScrollWidth": 390,
+    "innerWidth": 390,
+    "overflowing": [],
+    "scrollWidth": 390
+   },
+   "sign_in_768": {
+    "bodyScrollWidth": 768,
+    "innerWidth": 768,
+    "overflowing": [],
+    "scrollWidth": 768
+   }
+  },
+  "sessionId": "SESS-3f7a79e4c4bc4432bfa50fa96f400142",
+  "steps": [
+   {
+    "clerkGlobal": false,
+    "notClerk": true,
+    "passwordField": false,
+    "step": "sign-in",
+    "systemRequested": true,
+    "title": true
+   },
+   {
+    "banner": "OFFLINE DEMO IDENTITY NOT CLERK AUTHENTICATION",
+    "identity": "DEMOdemo:faculty",
+    "overview": true,
+    "path": "/app",
+    "step": "app-overview"
+   },
+   {
+    "preselected": "MIXED_MONITORING_SESSION",
+    "scenarios": [
+     "NORMAL_MONITORING",
+     "CONTEXT_LOSS",
+     "POOR_SIGNAL",
+     "DISCONNECT_RECONNECT",
+     "MIXED_MONITORING_SESSION"
+    ],
+    "simulationBanner": "SIMULATED WEARABLE NO PHYSICAL HARDWARE CONNECTED RESEARCH PROTOTYPE NOT DIAGNOSTIC",
+    "step": "device-empty"
+   },
+   {
+    "deviceId": "NHM_VIRTUAL_WEARABLE_01",
+    "physical": true,
+    "scenario": "MIXED_MONITORING_SESSION",
+    "step": "device-attached"
+   },
+   {
+    "states": [
+     "DETACHED",
+     "FOUND",
+     "CONNECTED"
+    ],
+    "step": "device-connected"
+   },
+   {
+    "sessionId": "SESS-3f7a79e4c4bc4432bfa50fa96f400142",
+    "state": "DEVICE_READY",
+    "step": "session-created"
+   },
+   {
+    "facts": {
+     "deviceChanges": [
+      "#1 STREAMING",
+      "#2168 DISCONNECTED (LINK_LOST)",
+      "#2169 RECONNECTING (AUTO_RECONNECT)",
+      "#2260 CONNECTED (LINK_RESTORED)",
+      "#2261 STREAMING (STREAM_RESUMED)",
+      "#3154 STOPPED (SCENARIO_COMPLETE)"
+     ],
+     "footnotes": true,
+     "gapList": "Source gaps observed (sample indices): [118800, 124199]",
+     "infCal": "CAL_V2 (MIT-BIH-v1.0.0)",
+     "infModel": "MODEL_V2_FINAL",
+     "liveDevice": "STOPPED",
+     "ppgNote": true,
+     "qualityNote": "A signal-quality message. It is NOT a monitoring state. ECG windows so far: 86 valid / 0 degraded / 7 unusable.",
+     "sessionComplete": "Session completed Persistent session ID SESS-3f7a79e4c4bc4432bfa50fa96f400142/ ended 05/10/2026, 20:34:09 View sessions \u00b7 Start another session",
+     "sessionState": "COMPLETED",
+     "stateChanges": [
+      "#101 start \u2192 NORMAL_MONITORED_PATTERN",
+      "#663 NORMAL_MONITORED_PATTERN \u2192 CONTEXT_UNAVAILABLE",
+      "#1324 CONTEXT_UNAVAILABLE \u2192 NORMAL_MONITORED_PATTERN"
+     ],
+     "streamError": "",
+     "streamStatus": "LIVE STREAMCLOSED_NORMALEVENTS 3157"
+    },
+    "observed": {
+     "ctxAvailable": 35,
+     "ctxUnavailable": 16,
+     "device": [
+      "CONNECTED",
+      "STREAMING",
+      "RECONNECTING",
+      "STREAMING",
+      "STOPPED"
+     ],
+     "events": 0,
+     "gapVisible": 2,
+     "maxSegmentsWithGap": 1,
+     "monitoring": [
+      "NORMAL_MONITORED_PATTERN",
+      "CONTEXT_UNAVAILABLE",
+      "NORMAL_MONITORED_PATTERN"
+     ],
+     "quality": [
+      "VALID"
+     ],
+     "sessionStates": [
+      "--",
+      "DEVICE_READY",
+      "MONITORING",
+      "COMPLETED"
+     ],
+     "staleInference": 0
+    },
+    "step": "monitoring-complete"
+   },
+   {
+    "api": {
+     "listed": true,
+     "model": "MODEL_V2_FINAL",
+     "state": "COMPLETED",
+     "status": 200
+    },
+    "historyRow": "SESS-3f7a79e4c4bc4432bfa50fa96f400142 COMPLETED 05/10/2026, 20:34:05 05/10/2026, 20:34:05 05/10/2026, 20:34:09 NHM_VIRTUAL_WEARABLE_01 MIXED_MONITORING_SESSION MODEL_V2_FINAL",
+    "step": "reload-persistence"
+   },
+   {
+    "createButtonPresent": false,
+    "deviceStateMessage": "Device NHM_VIRTUAL_WEARABLE_01 is STOPPED",
+    "liveWaveformPoints": 0,
+    "noPastLiveReplay": true,
+    "step": "monitor-after-reload"
+   }
+  ]
+ },
+ "browser_driver_exit": 0,
+ "database_after_browser_run": {
+  "devices": [
+   {
+    "adapter_type": "SIMULATED",
+    "device_id": "NHM_VIRTUAL_WEARABLE_01",
+    "scenario_id": "MIXED_MONITORING_SESSION",
+    "user_id": "demo:faculty"
+   }
+  ],
+  "foreign_key_check": [],
+  "inference_models": [
+   "MODEL_V2_FINAL"
+  ],
+  "integrity_check": [
+   "ok"
+  ],
+  "pragmas": {
+   "foreign_keys": 1,
+   "journal_mode": "wal",
+   "user_version": 1
+  },
+  "quality_rows": 8,
+  "row_counts": {
+   "candidate_models": 0,
+   "context_snapshots": 86,
+   "device_connections": 10,
+   "devices": 1,
+   "federation_rounds": 0,
+   "federation_runs": 0,
+   "fl_client_statuses": 0,
+   "governance_decisions": 0,
+   "inference_events": 86,
+   "monitoring_sessions": 1,
+   "monitoring_state_events": 3,
+   "session_summaries": 0,
+   "signal_quality_events": 8,
+   "users": 1,
+   "waveform_previews": 1
+  },
+  "sessions": [
+   {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "device_id": "NHM_VIRTUAL_WEARABLE_01",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "scenario_id": "MIXED_MONITORING_SESSION",
+    "session_id": "SESS-3f7a79e4c4bc4432bfa50fa96f400142",
+    "software_system_id": "SOFTWARE_SYSTEM_V2",
+    "state": "COMPLETED",
+    "user_id": "demo:faculty"
+   }
+  ],
+  "users": [
+   {
+    "auth_provider": "DEMO",
+    "demo_mode": 1,
+    "display_name": "Faculty Demo User",
+    "user_id": "demo:faculty"
+   }
+  ],
+  "waveform_preview": {
+   "blob_bytes": 6579,
+   "channel": "ECG",
+   "decimation_factor": 44,
+   "decoded_points": 3928,
+   "encoding": "JSON_ZLIB_V1",
+   "null_points": 122,
+   "point_count": 3928,
+   "preview_id": "SESS-3f7a79e4c4bc4432bfa50fa96f400142-WFP-ECG",
+   "session_id": "SESS-3f7a79e4c4bc4432bfa50fa96f400142",
+   "source_rate_hz": 360,
+   "start_timestamp_us": 0
+  },
+  "withheld_context_cases": 8
+ },
+ "database_after_integration_run": {
+  "inference_models": [
+   "MODEL_V2_FINAL"
+  ],
+  "row_counts": {
+   "candidate_models": 0,
+   "context_snapshots": 86,
+   "device_connections": 10,
+   "devices": 1,
+   "federation_rounds": 0,
+   "federation_runs": 0,
+   "fl_client_statuses": 0,
+   "governance_decisions": 0,
+   "inference_events": 86,
+   "monitoring_sessions": 1,
+   "monitoring_state_events": 3,
+   "session_summaries": 0,
+   "signal_quality_events": 8,
+   "users": 1,
+   "waveform_previews": 1
+  },
+  "sessions": [
+   {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "device_id": "NHM_VIRTUAL_WEARABLE_01",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "scenario_id": "MIXED_MONITORING_SESSION",
+    "session_id": "SESS-99907f8907824abda1c5f71b451cddb8",
+    "software_system_id": "SOFTWARE_SYSTEM_V2",
+    "state": "COMPLETED",
+    "user_id": "demo:faculty"
+   }
+  ]
+ },
+ "frontend_build": {
+  "adapter": "@sveltejs/adapter-static (production build served by vite preview)",
+  "build_log_tail": "side a closure instead?\nhttps://svelte.dev/e/state_referenced_locally\n17:   } = $props();\n18: \n19:   const W = 600, H = height;\n                               ^\n20:   const PAD = { top: 14, right: 20, bottom: 28, left: 36 };\n21:   const pw = W - PAD.left - PAD.right;\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n",
+  "build_output": {
+   "files": 184,
+   "sha256": "b225223cf79048e280d55ca4d3be50840f42c1c9b1edadbb09c947a3a4216fac"
+  },
+  "source": {
+   "files": 186,
+   "sha256": "4d8668afebc7276895736620f423f15d2b79a9fdfa6d730837f24cf810dee203"
+  }
+ },
+ "inference_service": {
+  "fresh_process": true,
+  "launcher": "python -m scripts.run_nhm_default",
+  "paths": [
+   "/v1/infer-window"
+  ],
+  "profile": "default",
+  "service_title": "NHM Research Runtime API (SOFTWARE_SYSTEM_V2 default binding)"
+ },
+ "predeclared_invariants": {
+  "calibration_id": "CAL_V2",
+  "event_count": 3157,
+  "gap": [
+   118800,
+   124199
+  ],
+  "inference_results": 86,
+  "model_id": "MODEL_V2_FINAL",
+  "monitoring_states": [
+   "NORMAL_MONITORED_PATTERN",
+   "CONTEXT_UNAVAILABLE",
+   "NORMAL_MONITORED_PATTERN"
+  ],
+  "terminal": "COMPLETED",
+  "unusable": 7,
+  "valid": 86,
+  "windows": 93
+ },
+ "product_backend": {
+  "auth_provider": "DEMO",
+  "calibration_id": "CAL_V2",
+  "demo_mode": true,
+  "hardware_mode": "SIMULATED_ONLY",
+  "model_id": "MODEL_V2_FINAL",
+  "persistence_mode": "SQLITE",
+  "physical_hardware_available": false,
+  "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_1",
+  "software_system": "SOFTWARE_SYSTEM_V2"
+ },
+ "product_process_pid_excluded": 68991,
+ "real_backend_integration": {
+  "evidence": "frontend_integration_run_1.json",
+  "exit": 0,
+  "passed": true,
+  "product_base": "real CAP-004 DEMO process (ephemeral port)"
+ },
+ "run": 1
+}

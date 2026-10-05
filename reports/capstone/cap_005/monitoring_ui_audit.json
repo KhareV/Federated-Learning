@@ -1,0 +1,70 @@
+{
+ "final_facts": {
+  "deviceChanges": [
+   "#1 STREAMING",
+   "#2168 DISCONNECTED (LINK_LOST)",
+   "#2169 RECONNECTING (AUTO_RECONNECT)",
+   "#2260 CONNECTED (LINK_RESTORED)",
+   "#2261 STREAMING (STREAM_RESUMED)",
+   "#3154 STOPPED (SCENARIO_COMPLETE)"
+  ],
+  "footnotes": true,
+  "gapList": "Source gaps observed (sample indices): [118800, 124199]",
+  "infCal": "CAL_V2 (MIT-BIH-v1.0.0)",
+  "infModel": "MODEL_V2_FINAL",
+  "liveDevice": "STOPPED",
+  "ppgNote": true,
+  "qualityNote": "A signal-quality message. It is NOT a monitoring state. ECG windows so far: 86 valid / 0 degraded / 7 unusable.",
+  "sessionComplete": "Session completed Persistent session ID SESS-3f7a79e4c4bc4432bfa50fa96f400142/ ended 05/10/2026, 20:34:09 View sessions \u00b7 Start another session",
+  "sessionState": "COMPLETED",
+  "stateChanges": [
+   "#101 start \u2192 NORMAL_MONITORED_PATTERN",
+   "#663 NORMAL_MONITORED_PATTERN \u2192 CONTEXT_UNAVAILABLE",
+   "#1324 CONTEXT_UNAVAILABLE \u2192 NORMAL_MONITORED_PATTERN"
+  ],
+  "streamError": "",
+  "streamStatus": "LIVE STREAMCLOSED_NORMALEVENTS 3157"
+ },
+ "monitoring_step_after_reload": {
+  "createButtonPresent": false,
+  "deviceStateMessage": "Device NHM_VIRTUAL_WEARABLE_01 is STOPPED",
+  "liveWaveformPoints": 0,
+  "noPastLiveReplay": true,
+  "step": "monitor-after-reload"
+ },
+ "observed_in_dom": {
+  "ctxAvailable": 35,
+  "ctxUnavailable": 16,
+  "device": [
+   "CONNECTED",
+   "STREAMING",
+   "RECONNECTING",
+   "STREAMING",
+   "STOPPED"
+  ],
+  "events": 0,
+  "gapVisible": 2,
+  "maxSegmentsWithGap": 1,
+  "monitoring": [
+   "NORMAL_MONITORED_PATTERN",
+   "CONTEXT_UNAVAILABLE",
+   "NORMAL_MONITORED_PATTERN"
+  ],
+  "quality": [
+   "VALID"
+  ],
+  "sessionStates": [
+   "--",
+   "DEVICE_READY",
+   "MONITORING",
+   "COMPLETED"
+  ],
+  "staleInference": 0
+ },
+ "session": {
+  "sessionId": "SESS-3f7a79e4c4bc4432bfa50fa96f400142",
+  "state": "DEVICE_READY",
+  "step": "session-created"
+ },
+ "technical_probability_section": "details 'RESEARCH / TECHNICAL - not a risk score'"
+}

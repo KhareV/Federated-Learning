@@ -1,0 +1,82 @@
+{
+ "claim_corrections_present": {
+  "federation not enabled": true,
+  "hardware status lines": true,
+  "logical FL topology": true,
+  "no fake attached-device status": true,
+  "server-side inference stated": true,
+  "simulated source in hero": true
+ },
+ "geographic_city_hits": [],
+ "legacy_research_surfaces_phrase_occurrences": {
+  "count": 15,
+  "note": "legacy research routes (not product pages) are recorded, not rewritten",
+  "unqualified": []
+ },
+ "overstatement_source_hits": [],
+ "pass": true,
+ "phrase_occurrences_product": 8,
+ "qualified_occurrences_reviewed": [
+  {
+   "context": "A real wearable is a future source adapter that requires verification",
+   "file": "routes/app/about/+page.svelte",
+   "phrase": "real wearable",
+   "qualified": true
+  },
+  {
+   "context": "It is <b>not diagnostic</b> and not a medical device",
+   "file": "routes/app/about/+page.svelte",
+   "phrase": "medical device",
+   "qualified": true
+  },
+  {
+   "context": "Not a diagnosis, disease probability or clinical confidence",
+   "file": "routes/app/monitoring/+page.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "ARDWARE (UNVERIFIED)</span><i>\u2022</i><span>SERVER-SIDE CPU INFERENCE</span><i>\u2022</i><span>NO DIAGNOSIS CLAIM</span><i>\u2022</i><span>SOURCE-DOMAIN CALIBRATION ONLY</sp",
+   "file": "routes/+page.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "Not live signals, not a diagnosis",
+   "file": "routes/+page.svelte",
+   "phrase": "diagnosis",
+   "qualified": true
+  },
+  {
+   "context": "sits -- today via server-side research inference, not on-device, and not yet validated on real wearable hardware",
+   "file": "routes/+page.svelte",
+   "phrase": "real wearable",
+   "qualified": true
+  },
+  {
+   "context": "A research prototype, not a diagnostic or medical device",
+   "file": "routes/+page.svelte",
+   "phrase": "medical device",
+   "qualified": true
+  },
+  {
+   "context": "No on-device inference, differential privacy or deployed system is implemented",
+   "file": "routes/+page.svelte",
+   "phrase": "differential privacy",
+   "qualified": true
+  }
+ ],
+ "rendered_pages": [
+  "device",
+  "federation",
+  "history",
+  "landing",
+  "models",
+  "monitoring",
+  "overview",
+  "sign_in"
+ ],
+ "rendered_unqualified_or_overstatement_hits": [],
+ "scope": "product source + landing + legacy /monitor + rendered text of every audited page",
+ "unqualified_source_hits": []
+}

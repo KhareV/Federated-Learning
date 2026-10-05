@@ -1,0 +1,129 @@
+{
+ "chrome_policy": "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost (any non-loopback request would fail and be recorded)",
+ "fonts": "local fallbacks",
+ "remote_images": 0,
+ "run_1": {
+  "clerkRequests": 0,
+  "external": [],
+  "externalInProductPhase": [],
+  "failures": [],
+  "landingPhaseRequestCount": 172,
+  "origins": [
+   "http://127.0.0.1:59892",
+   "data:",
+   "blob:"
+  ],
+  "productPhaseRequestCount": 1144,
+  "productRequests": [
+   "/product/v1/devices",
+   "/product/v1/devices/simulated",
+   "/product/v1/devices/{device}/connect",
+   "/product/v1/devices/{device}/scan",
+   "/product/v1/me",
+   "/product/v1/sessions",
+   "/product/v1/sessions/{session}",
+   "/product/v1/sessions/{session}/start",
+   "/product/v1/system"
+  ],
+  "requestCount": 1316,
+  "topProductPaths": [
+   [
+    "/_app/immutable/*",
+    1003
+   ],
+   [
+    "/product/v1/me",
+    31
+   ],
+   [
+    "/product/v1/system",
+    30
+   ],
+   [
+    "/product/v1/sessions",
+    24
+   ],
+   [
+    "/product/v1/devices",
+    18
+   ],
+   [
+    "/sign-in",
+    6
+   ],
+   [
+    "/app",
+    5
+   ],
+   [
+    "/app/device",
+    5
+   ]
+  ],
+  "websockets": [
+   "ws://127.0.0.1:59892/product/v1/sessions/SESS-3f7a79e4c4bc4432bfa50fa96f400142/live"
+  ]
+ },
+ "run_2": {
+  "clerkRequests": 0,
+  "external": [],
+  "externalInProductPhase": [],
+  "failures": [],
+  "landingPhaseRequestCount": 172,
+  "origins": [
+   "http://127.0.0.1:60173",
+   "data:",
+   "blob:"
+  ],
+  "productPhaseRequestCount": 1144,
+  "productRequests": [
+   "/product/v1/devices",
+   "/product/v1/devices/simulated",
+   "/product/v1/devices/{device}/connect",
+   "/product/v1/devices/{device}/scan",
+   "/product/v1/me",
+   "/product/v1/sessions",
+   "/product/v1/sessions/{session}",
+   "/product/v1/sessions/{session}/start",
+   "/product/v1/system"
+  ],
+  "requestCount": 1316,
+  "topProductPaths": [
+   [
+    "/_app/immutable/*",
+    1003
+   ],
+   [
+    "/product/v1/me",
+    31
+   ],
+   [
+    "/product/v1/system",
+    30
+   ],
+   [
+    "/product/v1/sessions",
+    24
+   ],
+   [
+    "/product/v1/devices",
+    18
+   ],
+   [
+    "/sign-in",
+    6
+   ],
+   [
+    "/app",
+    5
+   ],
+   [
+    "/app/device",
+    5
+   ]
+  ],
+  "websockets": [
+   "ws://127.0.0.1:60173/product/v1/sessions/SESS-c1d9050639314b80995c0cc0475c9811/live"
+  ]
+ }
+}
