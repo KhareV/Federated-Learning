@@ -1,0 +1,36 @@
+{
+ "all_prior_locks_and_amendment_chains_verified": true,
+ "ci": {
+  "queried": false,
+  "triggered": false
+ },
+ "entry_sha": "56fc19f69566fd9ead6b509292449d5cd7540adb",
+ "environment": {
+  "new_dependency_plan": "clerk-backend-api==7.0.0 (+ transitive PyJWT==2.15.1); dry-run showed no existing package would change",
+  "python": "3.11 fresh venv outside the repo from requirements-dev.lock"
+ },
+ "expected_entry_sha": "56fc19f69566fd9ead6b509292449d5cd7540adb",
+ "gate": "CAPG3",
+ "intervening_commits": [],
+ "later_phases_not_started": true,
+ "matches_expected_entry": true,
+ "origin_main_sha": "56fc19f69566fd9ead6b509292449d5cd7540adb",
+ "phase": "CAP-004",
+ "preserved_disclosures": [
+  "CAP-003: ACCELERATED determinism; LIVE_SPEED bounded-settle/fail-loud only (no watermark in DEVICE_SOURCE_CONTRACT_V1)",
+  "CAP-003: manual stop during a run-ahead outage leaves the simulated device in its own link state",
+  "CAP-003: context_available=false normalisation withholds PPG-derived values (frozen event mapping, not modified)",
+  "CAP-003: pre-freeze development smoke",
+  "CAP-001 gate-row 33 vs 50; CAP-002 disclosures and amendment chain"
+ ],
+ "statuses_at_entry": {
+  "CAP-001": "PASS",
+  "CAP-002": "PASS",
+  "CAP-003": "PASS",
+  "CAP-004": "NOT_STARTED",
+  "CAPG0": "PASS",
+  "CAPG1": "PASS",
+  "CAPG2": "PASS"
+ },
+ "working_tree_clean": false
+}
