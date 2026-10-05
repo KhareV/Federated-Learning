@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_3",
+ "change": "Formatting only: the additive-prefix tuple line in scripts/cap_005_protected_audit.py is wrapped to satisfy ruff E501 (introduced by amendment 2). No behavioural change.",
+ "defect": "Amendment 2 left a 112-character line; ruff (a CAPG4 criterion) flagged it.",
+ "files": {
+  "scripts/cap_005_protected_audit.py": {
+   "new_sha256": "2a69b3e904a0d64fc7bcc5f642d5c00f8ba547a7be12d68e7ee926add57aff8a",
+   "old_sha256": "85a175c2bd24dc9cec45d3505ee07fd28fb2c3b63b2e1041e9b140690c312ad6"
+  }
+ },
+ "freeze_commit": "5cf83da",
+ "made_before": "the recorded CAPG4 criteria evaluation",
+ "previous_amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_2",
+ "unchanged": {
+  "canonical_runs_and_frontend": "byte-identical to the freeze commit",
+  "capg4_criteria_text": "identical"
+ }
+}
