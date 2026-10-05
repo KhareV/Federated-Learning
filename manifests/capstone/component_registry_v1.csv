@@ -1,0 +1,17 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_PRODUCT_PROTOCOL_V1,PRODUCT_PROTOCOL,CAP-001,FROZEN_PRE_IMPLEMENTATION_PROTOCOL,,artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json,FL-first product protocol: five planes; does not change the frozen NHM science.
+DEVICE_SOURCE_CONTRACT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/device_source_v1.json,"DeviceSource protocol, device lifecycle, descriptor/events; reuses ObservedRecord."
+EDGE_NODE_CONTRACT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/edge_node_v1.json,Edge node: wearable != FL client; live vs training flows; SIM_FL_SITE cohort reuse.
+LOCAL_TRAINING_BUFFER_CONTRACT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/local_training_buffer_v1.json,Local buffer schema; SimulationTruth only via SIMULATION_LABEL_ADAPTER_V1.
+CAPSTONE_FL_CLIENT_CONTRACT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/fl_client_v1.json,FL client adapter over the existing V2 federated modules; no new FL implementation.
+CAPSTONE_FEDERATION_CONTRACT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/federation_v1.json,"Round lifecycle, algorithms (FedAvg/FedProx), SecAgg scope, data locality, events."
+CAPSTONE_FL_RUN_CONTRACT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/fl_run_v1.json,Federation run; 8 clients/3 rounds/24 updates (V2-FL-005 compatible); engineering only.
+CAPSTONE_MODEL_REGISTRY_CONTRACT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/model_registry_v1.json,Released scientific models vs CAPSTONE_FL_CANDIDATE namespace; production_deployed=false.
+CAPSTONE_MODEL_GOVERNANCE_V1,PRODUCT_POLICY,CAP-001,FROZEN_PRODUCT_POLICY,,contracts/capstone/model_governance_v1.json,Candidate lifecycle; no PRODUCTION_DEPLOYED state; sandbox acceptance != promotion.
+PRODUCT_API_CONTRACT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/product_api_v1.json,/product/v1 REST + 2 WebSockets; separate from the frozen /v1/infer-window API.
+PRODUCT_LIVE_EVENT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/live_event_v1.json,Typed monitoring + federation event unions; authority product/events.py.
+CAPSTONE_SESSION_CONTRACT_V1,INTERFACE_CONTRACT,CAP-001,FROZEN_INTERFACE_CONTRACT,,contracts/capstone/session_v1.json,Monitoring-session lifecycle and immutable identity.
+CAPSTONE_AUTH_POLICY_V1,PRODUCT_POLICY,CAP-001,FROZEN_PRODUCT_POLICY,,contracts/capstone/auth_policy_v1.json,AuthProvider: Clerk (planned) + explicit Demo; identity never affects ML.
+CAPSTONE_STORAGE_POLICY_V1,PRODUCT_POLICY,CAP-001,FROZEN_PRODUCT_POLICY,,contracts/capstone/storage_policy_v1.json,SQLite entities incl. federation/candidates; no per-sample rows.
+CAPSTONE_DEMO_SCENARIOS_V1,DEMO_CONTRACT,CAP-001,FROZEN_DEMO_CONTRACT,,contracts/capstone/demo_scenarios_v1.json,"13 deterministic engineering scenarios (monitoring, alert fixture, federation)."
+REAL_HARDWARE_REPLACEMENT_BOUNDARY_V1,PRODUCT_PROTOCOL,CAP-001,FROZEN_PRE_IMPLEMENTATION_PROTOCOL,,contracts/capstone/real_hardware_replacement_v1.json,Source + edge-gateway swap boundary; unknown hardware facts VERIFICATION_REQUIRED.

@@ -1,0 +1,77 @@
+{
+ "contract_id": "CAPSTONE_MODEL_GOVERNANCE_V1",
+ "contract_version": "CAPSTONE_MODEL_GOVERNANCE_V1",
+ "status": "FROZEN_PRODUCT_POLICY",
+ "python_interface": "product/models/registry_contract.py",
+ "candidate_states": [
+  "CREATED",
+  "VALIDATION_PENDING",
+  "VALIDATING",
+  "ACCEPTED_TO_SANDBOX",
+  "REJECTED",
+  "ARCHIVED"
+ ],
+ "candidate_transitions": {
+  "CREATED": [
+   "VALIDATION_PENDING"
+  ],
+  "VALIDATION_PENDING": [
+   "VALIDATING"
+  ],
+  "VALIDATING": [
+   "ACCEPTED_TO_SANDBOX",
+   "REJECTED"
+  ],
+  "ACCEPTED_TO_SANDBOX": [
+   "ARCHIVED"
+  ],
+  "REJECTED": [
+   "ARCHIVED"
+  ],
+  "ARCHIVED": []
+ },
+ "forbidden_states": [
+  "PRODUCTION_DEPLOYED",
+  "DEPLOYED",
+  "PROMOTED",
+  "RELEASED",
+  "DEFAULT"
+ ],
+ "released_default_model_id": "MODEL_V2_FINAL",
+ "acceptance_semantics": {
+  "means": "accepted as a capstone engineering sandbox candidate",
+  "does_not_mean": [
+   "scientific promotion",
+   "production deployment",
+   "clinical superiority",
+   "replacement of MODEL_V2_FINAL"
+  ]
+ },
+ "validation_gate": {
+  "kind": "engineering/validation gate (no held-out scientific inference)",
+  "check_ids": [
+   "STATE_FINITE",
+   "STATE_SPEC_MATCHES_BASE",
+   "UPDATE_DIGESTS_RECONCILE",
+   "ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE",
+   "BASE_STATE_LINEAGE_VERIFIED"
+  ],
+  "forbidden": [
+   "rerunning frozen held-out inference",
+   "efficacy claims from synthetic data"
+  ]
+ },
+ "decision_fields": [
+  "candidate_id",
+  "decision",
+  "checks",
+  "decided_at_us",
+  "scientific_promotion",
+  "production_deployed"
+ ],
+ "no_public_model_selector": {
+  "released_runtime_selector_added": false,
+  "users_may_select": [],
+  "software_system_v2_modified": false
+ }
+}

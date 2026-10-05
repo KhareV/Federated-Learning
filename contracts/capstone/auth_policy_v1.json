@@ -1,0 +1,73 @@
+{
+ "contract_id": "CAPSTONE_AUTH_POLICY_V1",
+ "contract_version": "CAPSTONE_AUTH_V1",
+ "status": "FROZEN_PRODUCT_POLICY",
+ "python_interface": "product/auth/base.py::AuthProvider",
+ "providers": {
+  "CLERK": {
+   "intent": "normal connected product mode",
+   "implemented_in": "CAP-004",
+   "sdk_integrated_now": false,
+   "user_id_prefix": "must NOT start with 'demo:'"
+  },
+  "DEMO": {
+   "intent": "explicit faculty/offline mode",
+   "implemented_in": "CAP-004",
+   "sdk_integrated_now": false
+  }
+ },
+ "demo_provider": {
+  "env_mode_variable": "NHM_PRODUCT_AUTH_MODE",
+  "env_mode_value": "DEMO",
+  "env_ack_variable": "NHM_PRODUCT_DEMO_AUTH_ACK",
+  "acknowledgement_value": "I_UNDERSTAND_THIS_IS_NOT_CLERK",
+  "requires_explicit_configuration": true,
+  "silent_activation_allowed": false,
+  "default_when_unconfigured": "REFUSE_TO_START (AuthConfigError)",
+  "user_id_prefix": "demo:",
+  "identity_demo_mode_flag": true,
+  "ui_visibility": "A persistent banner 'OFFLINE DEMO IDENTITY - not Clerk authentication' on every product page; GET /product/v1/system reports demo_mode=true.",
+  "described_as_clerk_allowed": false,
+  "session_ownership_enforced": true
+ },
+ "identity_fields": [
+  "user_id",
+  "display_name",
+  "email",
+  "auth_provider",
+  "auth_session_id",
+  "roles",
+  "demo_mode"
+ ],
+ "authorization": {
+  "owned_resources": [
+   "devices",
+   "monitoring_sessions",
+   "session_summaries",
+   "timelines",
+   "federation_runs"
+  ],
+  "rule": "a user may access only their own",
+  "research_pages": "federation overview, clients, models registry and research pages are globally readable to any authenticated identity (Clerk or explicit demo); runs are owner-scoped",
+  "ownership_check": "product/auth/base.py::can_access_owned"
+ },
+ "ml_independence": {
+  "identity_may_select": [],
+  "forbidden_selectors": [
+   "model",
+   "checkpoint",
+   "calibration",
+   "threshold",
+   "alert_policy",
+   "federated_algorithm",
+   "scientific_identity"
+  ],
+  "identity_affects_ml": false,
+  "statement": "Authentication controls only user identity, session ownership and device ownership. It MUST NOT control model, threshold, calibration, federated algorithm, candidate selection or scientific identity."
+ },
+ "clerk_constraints": {
+  "CLERK_SECRET_KEY": "server-side only; never in frontend code",
+  "frontend_integration_phase": "CAP-005 inside the existing SvelteKit app (a Svelte-compatible Clerk integration, not Next.js)",
+  "setup_instructions_followed_in_cap_001": false
+ }
+}

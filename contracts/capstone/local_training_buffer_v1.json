@@ -1,0 +1,99 @@
+{
+ "contract_id": "LOCAL_TRAINING_BUFFER_CONTRACT_V1",
+ "contract_version": "LOCAL_TRAINING_BUFFER_V1",
+ "status": "FROZEN_INTERFACE_CONTRACT",
+ "python_interface": "product/edge/buffer.py",
+ "implemented_now": false,
+ "implementation_phase": "CAP-006 (CAP-001 freezes interface/schema only)",
+ "record_fields": [
+  "client_id",
+  "participant_id",
+  "source",
+  "window_id",
+  "model_input_ref",
+  "label",
+  "label_source",
+  "quality_eligible",
+  "timestamp_us",
+  "simulation",
+  "provenance_id",
+  "buffer_batch_id"
+ ],
+ "model_input_ref_rule": "a reference (id/digest) to the local model-input representation; raw samples are never copied into the record or sent to the server",
+ "label_sources": [
+  "SIMULATION_TRUTH_ENGINEERING",
+  "VERIFIED_ANNOTATION",
+  "CLINICIAN_REVIEW",
+  "EXPERT_ADJUDICATION"
+ ],
+ "simulation_label_source": "SIMULATION_TRUTH_ENGINEERING",
+ "simulation_label_source_forbidden_for_real_data": true,
+ "unvalidated_real_label_sources": [
+  "VERIFIED_ANNOTATION",
+  "CLINICIAN_REVIEW",
+  "EXPERT_ADJUDICATION"
+ ],
+ "real_label_source_status": "VERIFICATION_REQUIRED (no validated real-label acquisition protocol exists)",
+ "forbidden_label_sources": [
+  "MODEL_PREDICTION",
+  "SELF_LABEL",
+  "PSEUDO_LABEL",
+  "LIVE_INFERENCE_OUTPUT"
+ ],
+ "label_adapter": {
+  "id": "SIMULATION_LABEL_ADAPTER_V1",
+  "python_protocol": "product/edge/buffer.py::SimulationLabelAdapter",
+  "reuse_candidate": "federated/wearable_sim_local_labels.py (client-local engineering label adapter; label contract WEARABLE_SIM_EVENT_WINDOW_V1)",
+  "only_consumer_of_simulation_truth": true,
+  "sandbox_only": true
+ },
+ "label_semantics": "engineering window labels (positive = scheduled SYNTHETIC / ENGINEERING EVENT inside the window); NOT AAMI_SVF_WINDOW_V1 and no S/V/F equivalence",
+ "eligibility": "quality_eligible mirrors the existing trainable-window rule (federated/virtual_client_source_v1.py::is_trainable)",
+ "storage": "local to the edge node; never uploaded to the federation server (see federation data_locality)",
+ "simulation_truth_boundary": {
+  "never_consumed_by": [
+   "live preprocessing",
+   "QUALITY_V1",
+   "MODEL_V2 inference",
+   "CAL_V2",
+   "alert/state logic",
+   "product monitoring API",
+   "live dashboard",
+   "federation server"
+  ],
+  "forbidden_importer_paths": [
+   "api/",
+   "fusion/",
+   "preprocessing/",
+   "deployment/",
+   "product/",
+   "simulation/stream_runtime_v2013.py",
+   "federated/aggregation.py",
+   "federated/wearable_fl_system_v1.py",
+   "privacy/"
+  ],
+  "truth_modules": [
+   "simulation.truth_v2013",
+   "simulation.fl_cohort_truth_v1"
+  ],
+  "truth_names": [
+   "SimulationTruth",
+   "get_truth"
+  ],
+  "sanctioned_importers": {
+   "producers_of_observed_and_truth": [
+    "simulation/wearable.py"
+   ],
+   "offline_fixture_builder": [
+    "simulation/fixtures.py"
+   ],
+   "label_adapter_consumer": [
+    "federated/wearable_sim_local_labels.py"
+   ]
+  },
+  "planned_additional_consumer": [
+   "product/edge/label_adapter.py (CAP-006; the SIMULATION_LABEL_ADAPTER_V1 product wrapper)"
+  ],
+  "enforcement": "AST import scan in tests/test_capstone_federation_contracts.py"
+ }
+}

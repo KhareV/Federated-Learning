@@ -1,0 +1,403 @@
+{
+ "contract_id": "PRODUCT_API_CONTRACT_V1",
+ "contract_version": "PRODUCT_API_V1",
+ "status": "FROZEN_INTERFACE_CONTRACT",
+ "base_path": "/product/v1",
+ "framework": "FastAPI (separate product app; NOT the frozen inference app)",
+ "frozen_inference_api": {
+  "contract": "API_SCHEMA_V1",
+  "route": "POST /v1/infer-window",
+  "modified_by_product": false,
+  "product_may_add_routes_to_frozen_api": false,
+  "api_schema_v2_created": false
+ },
+ "inference_boundary": {
+  "design": "product inference client -> localhost/internal HTTP -> DEFAULT V2 inference service -> POST /v1/infer-window",
+  "reason": "Exercises the same released API boundary that the existing frontend and replay evidence already validated.",
+  "direct_model_import_allowed": false,
+  "second_inference_implementation_allowed": false,
+  "client_owner_phase": "CAP-003",
+  "internal_only": true
+ },
+ "route_change_policy": "Any route change after CAPG0 requires an additive contract successor (PRODUCT_API_CONTRACT_V2); silent drift is forbidden.",
+ "auth_values": {
+  "PUBLIC": "no identity required",
+  "AUTHENTICATED": "AuthProvider identity required (Clerk or explicit demo)"
+ },
+ "ownership_scopes": {
+  "NONE": "no owned resource",
+  "SELF": "caller's own identity",
+  "OWN": "only resources owned by the caller",
+  "GLOBAL_READ": "any authenticated identity may read; no write"
+ },
+ "forbidden_request_field_names": [
+  "alert_policy",
+  "alert_policy_id",
+  "base_model_id",
+  "calibration",
+  "calibration_id",
+  "candidate_id",
+  "checkpoint",
+  "checkpoint_id",
+  "gateway_artifact_id",
+  "learning_rate",
+  "model",
+  "model_id",
+  "mu",
+  "optimizer",
+  "preprocess_id",
+  "threshold"
+ ],
+ "routes": [
+  {
+   "route_id": "system.get",
+   "method": "GET",
+   "path": "/product/v1/system",
+   "owner_phase": "CAP-003",
+   "auth": "PUBLIC",
+   "ownership_scope": "NONE",
+   "request_fields": [],
+   "response_contract": "SystemInfo",
+   "notes": "Read-only: auth mode (demo banner flag), frozen runtime identity, hardware status (simulated only). Never accepts a model selector."
+  },
+  {
+   "route_id": "me.get",
+   "method": "GET",
+   "path": "/product/v1/me",
+   "owner_phase": "CAP-004",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "SELF",
+   "request_fields": [],
+   "response_contract": "AuthIdentity",
+   "notes": ""
+  },
+  {
+   "route_id": "devices.list",
+   "method": "GET",
+   "path": "/product/v1/devices",
+   "owner_phase": "CAP-003",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "list[DeviceDescriptor]",
+   "notes": ""
+  },
+  {
+   "route_id": "devices.create_simulated",
+   "method": "POST",
+   "path": "/product/v1/devices/simulated",
+   "owner_phase": "CAP-003",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [
+    "display_name",
+    "scenario_id"
+   ],
+   "response_contract": "DeviceDescriptor",
+   "notes": ""
+  },
+  {
+   "route_id": "devices.scan",
+   "method": "POST",
+   "path": "/product/v1/devices/{id}/scan",
+   "owner_phase": "CAP-003",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "DeviceDescriptor",
+   "notes": ""
+  },
+  {
+   "route_id": "devices.connect",
+   "method": "POST",
+   "path": "/product/v1/devices/{id}/connect",
+   "owner_phase": "CAP-003",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "DeviceDescriptor",
+   "notes": ""
+  },
+  {
+   "route_id": "devices.disconnect",
+   "method": "POST",
+   "path": "/product/v1/devices/{id}/disconnect",
+   "owner_phase": "CAP-003",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "DeviceDescriptor",
+   "notes": ""
+  },
+  {
+   "route_id": "sessions.create",
+   "method": "POST",
+   "path": "/product/v1/sessions",
+   "owner_phase": "CAP-004",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [
+    "device_id",
+    "scenario_id"
+   ],
+   "response_contract": "MonitoringSession",
+   "notes": ""
+  },
+  {
+   "route_id": "sessions.list",
+   "method": "GET",
+   "path": "/product/v1/sessions",
+   "owner_phase": "CAP-004",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "list[MonitoringSession]",
+   "notes": ""
+  },
+  {
+   "route_id": "sessions.get",
+   "method": "GET",
+   "path": "/product/v1/sessions/{id}",
+   "owner_phase": "CAP-004",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "MonitoringSession",
+   "notes": ""
+  },
+  {
+   "route_id": "sessions.start",
+   "method": "POST",
+   "path": "/product/v1/sessions/{id}/start",
+   "owner_phase": "CAP-003",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "MonitoringSession",
+   "notes": ""
+  },
+  {
+   "route_id": "sessions.stop",
+   "method": "POST",
+   "path": "/product/v1/sessions/{id}/stop",
+   "owner_phase": "CAP-003",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "MonitoringSession",
+   "notes": ""
+  },
+  {
+   "route_id": "sessions.summary",
+   "method": "GET",
+   "path": "/product/v1/sessions/{id}/summary",
+   "owner_phase": "CAP-009",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "SessionSummary",
+   "notes": ""
+  },
+  {
+   "route_id": "sessions.timeline",
+   "method": "GET",
+   "path": "/product/v1/sessions/{id}/timeline",
+   "owner_phase": "CAP-009",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "SessionTimeline",
+   "notes": ""
+  },
+  {
+   "route_id": "sessions.live",
+   "method": "WS",
+   "path": "/product/v1/sessions/{id}/live",
+   "owner_phase": "CAP-003",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "PRODUCT_LIVE_EVENT_V1 (monitoring events)",
+   "notes": "Server->client monitoring events only. Close codes 4401/4403/4404. Distinct from the legacy frontend ws/live/{clientId} helper."
+  },
+  {
+   "route_id": "federation.get",
+   "method": "GET",
+   "path": "/product/v1/federation",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "GLOBAL_READ",
+   "request_fields": [],
+   "response_contract": "FederationOverview",
+   "notes": "Federation plane overview: clients, active run, candidate count, engineering-only banner."
+  },
+  {
+   "route_id": "federation.clients",
+   "method": "GET",
+   "path": "/product/v1/federation/clients",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "GLOBAL_READ",
+   "request_fields": [],
+   "response_contract": "list[FLClientIdentity]",
+   "notes": "Local data STATUS only (counts/eligibility); never raw data, labels or truth."
+  },
+  {
+   "route_id": "federation.runs_create",
+   "method": "POST",
+   "path": "/product/v1/federation/runs",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [
+    "run_type",
+    "algorithm",
+    "secagg_mode",
+    "planned_rounds",
+    "scenario_id"
+   ],
+   "response_contract": "FederationRun",
+   "notes": "Base model is derived server-side; the request cannot name a model, checkpoint or hyperparameter."
+  },
+  {
+   "route_id": "federation.runs_list",
+   "method": "GET",
+   "path": "/product/v1/federation/runs",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "list[FederationRun]",
+   "notes": ""
+  },
+  {
+   "route_id": "federation.runs_get",
+   "method": "GET",
+   "path": "/product/v1/federation/runs/{id}",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "FederationRun",
+   "notes": ""
+  },
+  {
+   "route_id": "federation.runs_start",
+   "method": "POST",
+   "path": "/product/v1/federation/runs/{id}/start",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "FederationRun",
+   "notes": ""
+  },
+  {
+   "route_id": "federation.runs_rounds",
+   "method": "GET",
+   "path": "/product/v1/federation/runs/{id}/rounds",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "list[FederationRound]",
+   "notes": ""
+  },
+  {
+   "route_id": "federation.live",
+   "method": "WS",
+   "path": "/product/v1/federation/runs/{id}/live",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "OWN",
+   "request_fields": [],
+   "response_contract": "PRODUCT_LIVE_EVENT_V1 (federation events)",
+   "notes": "Server->client federation events only; close codes 4401/4403/4404."
+  },
+  {
+   "route_id": "models.list",
+   "method": "GET",
+   "path": "/product/v1/models",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "GLOBAL_READ",
+   "request_fields": [],
+   "response_contract": "ModelRegistryView",
+   "notes": "Two namespaces: RELEASED_SCIENTIFIC and CAPSTONE_FL_CANDIDATE. Read-only; no promote/deploy route exists."
+  },
+  {
+   "route_id": "models.get",
+   "method": "GET",
+   "path": "/product/v1/models/{id}",
+   "owner_phase": "CAP-007",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "GLOBAL_READ",
+   "request_fields": [],
+   "response_contract": "ReleasedModelRef | CandidateModel",
+   "notes": ""
+  },
+  {
+   "route_id": "research.ml",
+   "method": "GET",
+   "path": "/product/v1/research/ml",
+   "owner_phase": "CAP-009",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "GLOBAL_READ",
+   "request_fields": [],
+   "response_contract": "MlResearchEvidence",
+   "notes": "Frozen ML evidence only (MODEL_V2_NOT_PROMOTED_RELEASE_CI preserved)."
+  },
+  {
+   "route_id": "research.fl",
+   "method": "GET",
+   "path": "/product/v1/research/fl",
+   "owner_phase": "CAP-009",
+   "auth": "AUTHENTICATED",
+   "ownership_scope": "GLOBAL_READ",
+   "request_fields": [],
+   "response_contract": "FlResearchEvidence",
+   "notes": "Frozen V2-FL-001/002/003/EVAL-001/004 evidence; no held-out inference is recomputed."
+  }
+ ],
+ "frontend_routes": {
+  "status": "ROUTE_CONTRACT_ONLY (CAP-001 implements no pages and does not modify frontend/)",
+  "foundation": "existing frontend/ SvelteKit app (mandatory; the only frontend). Planned additive successor identity: CAPSTONE_UI_V1. No new scaffold, no framework migration, no duplicated components.",
+  "successor_identity": "CAPSTONE_UI_V1",
+  "existing_routes_preserved": true,
+  "routes": [
+   "/",
+   "/sign-in",
+   "/app",
+   "/app/device",
+   "/app/monitoring",
+   "/app/history",
+   "/app/history/[session_id]",
+   "/app/federation",
+   "/app/federation/clients",
+   "/app/federation/rounds",
+   "/app/federation/live",
+   "/app/federation/privacy",
+   "/app/models",
+   "/app/research/ml",
+   "/app/research/fl",
+   "/app/system",
+   "/app/about"
+  ],
+  "federation_first_class": "Federation is a top-level section of /app, not only a Research sub-page.",
+  "reuse": {
+   "/app/monitoring": "frontend/src/routes/monitoring + frontend/src/lib/dashboard + components/dashboard (verified V2 dashboard path, DASHBOARD_UI_V1_5)",
+   "/app/device": "frontend/src/lib/components/hardware",
+   "/app/federation/*": "frontend/src/lib/components/federation + existing /fl/* routes and stores/fl.svelte.ts",
+   "/app/research/ml": "existing /research/* and /ai/* route components",
+   "/app/research/fl": "existing /fl/* routes",
+   "/app/system": "existing /system/health"
+  }
+ },
+ "forbidden_route_fragments": [
+  "promote",
+  "deploy",
+  "select_model",
+  "set_default_model",
+  "switch_model"
+ ]
+}

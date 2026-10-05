@@ -1,0 +1,2208 @@
+{
+ "$defs": {
+  "AdapterType": {
+   "enum": [
+    "SIMULATED",
+    "FUTURE_REAL"
+   ],
+   "title": "AdapterType",
+   "type": "string"
+  },
+  "AggregationMode": {
+   "enum": [
+    "PLAIN",
+    "SECAGG_SHADOW"
+   ],
+   "title": "AggregationMode",
+   "type": "string"
+  },
+  "AggregationStatusEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "aggregation.status",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/AggregationStatusPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "AggregationStatusEvent",
+   "type": "object"
+  },
+  "AggregationStatusPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "accepted_updates": {
+     "minimum": 0,
+     "title": "Accepted Updates",
+     "type": "integer"
+    },
+    "aggregation_mode": {
+     "$ref": "#/$defs/AggregationMode"
+    },
+    "algorithm": {
+     "$ref": "#/$defs/Algorithm"
+    },
+    "round_id": {
+     "minimum": 1,
+     "title": "Round Id",
+     "type": "integer"
+    },
+    "state_digest": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "State Digest"
+    }
+   },
+   "required": [
+    "round_id",
+    "algorithm",
+    "aggregation_mode",
+    "accepted_updates"
+   ],
+   "title": "AggregationStatusPayload",
+   "type": "object"
+  },
+  "Algorithm": {
+   "enum": [
+    "FEDAVG",
+    "FEDPROX"
+   ],
+   "title": "Algorithm",
+   "type": "string"
+  },
+  "CandidateCreatedEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "candidate.created",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/CandidateCreatedPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "CandidateCreatedEvent",
+   "type": "object"
+  },
+  "CandidateCreatedPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "candidate_id": {
+     "pattern": "^CAPSTONE_FL_CANDIDATE_\\d{4}$",
+     "title": "Candidate Id",
+     "type": "string"
+    },
+    "parent_model_id": {
+     "title": "Parent Model Id",
+     "type": "string"
+    },
+    "production_deployed": {
+     "const": false,
+     "default": false,
+     "title": "Production Deployed",
+     "type": "boolean"
+    },
+    "round_id": {
+     "minimum": 1,
+     "title": "Round Id",
+     "type": "integer"
+    },
+    "state_digest": {
+     "minLength": 1,
+     "title": "State Digest",
+     "type": "string"
+    }
+   },
+   "required": [
+    "candidate_id",
+    "parent_model_id",
+    "round_id",
+    "state_digest"
+   ],
+   "title": "CandidateCreatedPayload",
+   "type": "object"
+  },
+  "CandidateGovernanceEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "candidate.governance",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/CandidateGovernancePayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "CandidateGovernanceEvent",
+   "type": "object"
+  },
+  "CandidateGovernancePayload": {
+   "additionalProperties": false,
+   "properties": {
+    "candidate_id": {
+     "pattern": "^CAPSTONE_FL_CANDIDATE_\\d{4}$",
+     "title": "Candidate Id",
+     "type": "string"
+    },
+    "governance_status": {
+     "$ref": "#/$defs/CandidateState"
+    },
+    "production_deployed": {
+     "const": false,
+     "default": false,
+     "title": "Production Deployed",
+     "type": "boolean"
+    },
+    "sandbox_status": {
+     "$ref": "#/$defs/SandboxStatus"
+    }
+   },
+   "required": [
+    "candidate_id",
+    "governance_status",
+    "sandbox_status"
+   ],
+   "title": "CandidateGovernancePayload",
+   "type": "object"
+  },
+  "CandidateState": {
+   "enum": [
+    "CREATED",
+    "VALIDATION_PENDING",
+    "VALIDATING",
+    "ACCEPTED_TO_SANDBOX",
+    "REJECTED",
+    "ARCHIVED"
+   ],
+   "title": "CandidateState",
+   "type": "string"
+  },
+  "CandidateValidationEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "candidate.validation",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/CandidateValidationPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "CandidateValidationEvent",
+   "type": "object"
+  },
+  "CandidateValidationPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "candidate_id": {
+     "pattern": "^CAPSTONE_FL_CANDIDATE_\\d{4}$",
+     "title": "Candidate Id",
+     "type": "string"
+    },
+    "checks": {
+     "default": [],
+     "items": {
+      "type": "string"
+     },
+     "title": "Checks",
+     "type": "array"
+    },
+    "validation_status": {
+     "$ref": "#/$defs/ValidationStatus"
+    }
+   },
+   "required": [
+    "candidate_id",
+    "validation_status"
+   ],
+   "title": "CandidateValidationPayload",
+   "type": "object"
+  },
+  "ClientState": {
+   "enum": [
+    "IDLE",
+    "DATA_READY",
+    "TRAINING",
+    "UPDATE_READY",
+    "SUBMITTED",
+    "REJECTED",
+    "FAILED"
+   ],
+   "title": "ClientState",
+   "type": "string"
+  },
+  "ClientStatusEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "client.status",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/ClientStatusPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "ClientStatusEvent",
+   "type": "object"
+  },
+  "ClientStatusPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "client_id": {
+     "minLength": 1,
+     "title": "Client Id",
+     "type": "string"
+    },
+    "client_state": {
+     "$ref": "#/$defs/ClientState"
+    },
+    "local_example_count": {
+     "minimum": 0,
+     "title": "Local Example Count",
+     "type": "integer"
+    },
+    "reason_code": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reason Code"
+    }
+   },
+   "required": [
+    "client_id",
+    "client_state",
+    "local_example_count"
+   ],
+   "title": "ClientStatusPayload",
+   "type": "object"
+  },
+  "ClientTrainingProgressEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "client.training_progress",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/ClientTrainingProgressPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "ClientTrainingProgressEvent",
+   "type": "object"
+  },
+  "ClientTrainingProgressPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "client_id": {
+     "minLength": 1,
+     "title": "Client Id",
+     "type": "string"
+    },
+    "examples_seen": {
+     "minimum": 0,
+     "title": "Examples Seen",
+     "type": "integer"
+    },
+    "progress_fraction": {
+     "maximum": 1,
+     "minimum": 0,
+     "title": "Progress Fraction",
+     "type": "number"
+    },
+    "round_id": {
+     "minimum": 1,
+     "title": "Round Id",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "client_id",
+    "round_id",
+    "progress_fraction",
+    "examples_seen"
+   ],
+   "title": "ClientTrainingProgressPayload",
+   "type": "object"
+  },
+  "ClientUpdateReadyEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "client.update_ready",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/ClientUpdateReadyPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "ClientUpdateReadyEvent",
+   "type": "object"
+  },
+  "ClientUpdateReadyPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "client_id": {
+     "minLength": 1,
+     "title": "Client Id",
+     "type": "string"
+    },
+    "examples_seen": {
+     "minimum": 1,
+     "title": "Examples Seen",
+     "type": "integer"
+    },
+    "round_id": {
+     "minimum": 1,
+     "title": "Round Id",
+     "type": "integer"
+    },
+    "update_digest": {
+     "minLength": 1,
+     "title": "Update Digest",
+     "type": "string"
+    }
+   },
+   "required": [
+    "client_id",
+    "round_id",
+    "update_digest",
+    "examples_seen"
+   ],
+   "title": "ClientUpdateReadyPayload",
+   "type": "object"
+  },
+  "ContextSnapshotEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "context.snapshot",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/ContextSnapshotPayload"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    },
+    "session_id": {
+     "minLength": 1,
+     "title": "Session Id",
+     "type": "string"
+    },
+    "source_timestamp_us": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source Timestamp Us"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "session_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "ContextSnapshotEvent",
+   "type": "object"
+  },
+  "ContextSnapshotPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "context_available": {
+     "title": "Context Available",
+     "type": "boolean"
+    },
+    "hr_ecg_bpm": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Hr Ecg Bpm"
+    },
+    "ppg_quality": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/QualityState"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "pr_ppg_bpm": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Pr Ppg Bpm"
+    },
+    "spo2_pct": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Spo2 Pct"
+    },
+    "spo2_valid": {
+     "title": "Spo2 Valid",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "spo2_valid",
+    "context_available"
+   ],
+   "title": "ContextSnapshotPayload",
+   "type": "object"
+  },
+  "DeviceState": {
+   "enum": [
+    "DETACHED",
+    "SCANNING",
+    "FOUND",
+    "PAIRING",
+    "CONNECTED",
+    "STREAMING",
+    "DISCONNECTED",
+    "RECONNECTING",
+    "STOPPED",
+    "ERROR"
+   ],
+   "title": "DeviceState",
+   "type": "string"
+  },
+  "DeviceStatusEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "device.status",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/DeviceStatusPayload"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    },
+    "session_id": {
+     "minLength": 1,
+     "title": "Session Id",
+     "type": "string"
+    },
+    "source_timestamp_us": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source Timestamp Us"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "session_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "DeviceStatusEvent",
+   "type": "object"
+  },
+  "DeviceStatusPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "adapter_type": {
+     "$ref": "#/$defs/AdapterType"
+    },
+    "device_id": {
+     "minLength": 1,
+     "title": "Device Id",
+     "type": "string"
+    },
+    "device_state": {
+     "$ref": "#/$defs/DeviceState"
+    },
+    "reason_code": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reason Code"
+    },
+    "recoverable": {
+     "title": "Recoverable",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "device_id",
+    "device_state",
+    "adapter_type",
+    "recoverable"
+   ],
+   "title": "DeviceStatusPayload",
+   "type": "object"
+  },
+  "FederationCompletedEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "federation.completed",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/FederationCompletedPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "FederationCompletedEvent",
+   "type": "object"
+  },
+  "FederationCompletedPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "candidate_ids": {
+     "default": [],
+     "items": {
+      "type": "string"
+     },
+     "title": "Candidate Ids",
+     "type": "array"
+    },
+    "production_deployed": {
+     "const": false,
+     "default": false,
+     "title": "Production Deployed",
+     "type": "boolean"
+    },
+    "rounds_completed": {
+     "minimum": 0,
+     "title": "Rounds Completed",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "rounds_completed"
+   ],
+   "title": "FederationCompletedPayload",
+   "type": "object"
+  },
+  "FederationErrorEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "federation.error",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/FederationErrorPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "FederationErrorEvent",
+   "type": "object"
+  },
+  "FederationErrorPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "error_code": {
+     "minLength": 1,
+     "title": "Error Code",
+     "type": "string"
+    },
+    "message": {
+     "maxLength": 300,
+     "title": "Message",
+     "type": "string"
+    },
+    "recoverable": {
+     "title": "Recoverable",
+     "type": "boolean"
+    },
+    "round_id": {
+     "anyOf": [
+      {
+       "minimum": 1,
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Round Id"
+    }
+   },
+   "required": [
+    "error_code",
+    "message",
+    "recoverable"
+   ],
+   "title": "FederationErrorPayload",
+   "type": "object"
+  },
+  "FederationStatusEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "federation.status",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/FederationStatusPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "FederationStatusEvent",
+   "type": "object"
+  },
+  "FederationStatusPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "algorithm": {
+     "$ref": "#/$defs/Algorithm"
+    },
+    "client_count": {
+     "minimum": 1,
+     "title": "Client Count",
+     "type": "integer"
+    },
+    "current_round": {
+     "minimum": 0,
+     "title": "Current Round",
+     "type": "integer"
+    },
+    "engineering_only": {
+     "const": true,
+     "default": true,
+     "title": "Engineering Only",
+     "type": "boolean"
+    },
+    "planned_rounds": {
+     "minimum": 1,
+     "title": "Planned Rounds",
+     "type": "integer"
+    },
+    "run_status": {
+     "$ref": "#/$defs/RunState"
+    },
+    "run_type": {
+     "$ref": "#/$defs/RunType"
+    }
+   },
+   "required": [
+    "run_type",
+    "run_status",
+    "algorithm",
+    "current_round",
+    "planned_rounds",
+    "client_count"
+   ],
+   "title": "FederationStatusPayload",
+   "type": "object"
+  },
+  "InferenceResultEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "inference.result",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/InferenceResultPayload"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    },
+    "session_id": {
+     "minLength": 1,
+     "title": "Session Id",
+     "type": "string"
+    },
+    "source_timestamp_us": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source Timestamp Us"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "session_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "InferenceResultEvent",
+   "type": "object"
+  },
+  "InferenceResultPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "alert_policy_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Alert Policy Id"
+    },
+    "calibration_domain": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Calibration Domain"
+    },
+    "calibration_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Calibration Id"
+    },
+    "context": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/ContextSnapshotPayload"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "ecg_quality": {
+     "$ref": "#/$defs/QualityState"
+    },
+    "latency_ms": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Latency Ms"
+    },
+    "model_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Model Id"
+    },
+    "monitoring_state": {
+     "$ref": "#/$defs/MonitoringState"
+    },
+    "preprocess_version": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "title": "Preprocess Version"
+    },
+    "probability_role": {
+     "const": "RESEARCH_TECHNICAL_METADATA",
+     "default": "RESEARCH_TECHNICAL_METADATA",
+     "title": "Probability Role",
+     "type": "string"
+    },
+    "raw_probability": {
+     "anyOf": [
+      {
+       "maximum": 1,
+       "minimum": 0,
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Raw Probability"
+    },
+    "source_domain_calibrated_probability": {
+     "anyOf": [
+      {
+       "maximum": 1,
+       "minimum": 0,
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source Domain Calibrated Probability"
+    },
+    "threshold": {
+     "anyOf": [
+      {
+       "maximum": 1,
+       "minimum": 0,
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Threshold"
+    },
+    "timestamp_us": {
+     "minimum": 0,
+     "title": "Timestamp Us",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "timestamp_us",
+    "model_id",
+    "calibration_id",
+    "calibration_domain",
+    "preprocess_version",
+    "alert_policy_id",
+    "ecg_quality",
+    "monitoring_state"
+   ],
+   "title": "InferenceResultPayload",
+   "type": "object"
+  },
+  "MonitoringState": {
+   "enum": [
+    "NORMAL_MONITORED_PATTERN",
+    "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+    "RECHECK_SENSOR",
+    "CONTEXT_UNAVAILABLE",
+    "SYSTEM_ERROR"
+   ],
+   "title": "MonitoringState",
+   "type": "string"
+  },
+  "MonitoringStateEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "monitoring.state",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/MonitoringStatePayload"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    },
+    "session_id": {
+     "minLength": 1,
+     "title": "Session Id",
+     "type": "string"
+    },
+    "source_timestamp_us": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source Timestamp Us"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "session_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "MonitoringStateEvent",
+   "type": "object"
+  },
+  "MonitoringStatePayload": {
+   "additionalProperties": false,
+   "properties": {
+    "monitoring_state": {
+     "$ref": "#/$defs/MonitoringState"
+    },
+    "previous_state": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/MonitoringState"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "reason_code": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reason Code"
+    }
+   },
+   "required": [
+    "monitoring_state"
+   ],
+   "title": "MonitoringStatePayload",
+   "type": "object"
+  },
+  "QualityState": {
+   "enum": [
+    "VALID",
+    "DEGRADED",
+    "UNUSABLE"
+   ],
+   "title": "QualityState",
+   "type": "string"
+  },
+  "QualityStatusEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "quality.status",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/QualityStatusPayload"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    },
+    "session_id": {
+     "minLength": 1,
+     "title": "Session Id",
+     "type": "string"
+    },
+    "source_timestamp_us": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source Timestamp Us"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "session_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "QualityStatusEvent",
+   "type": "object"
+  },
+  "QualityStatusPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "ecg_quality": {
+     "$ref": "#/$defs/QualityState"
+    },
+    "ppg_quality": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/QualityState"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "ui_label": {
+     "title": "Ui Label",
+     "type": "string"
+    }
+   },
+   "required": [
+    "ecg_quality",
+    "ui_label"
+   ],
+   "title": "QualityStatusPayload",
+   "type": "object"
+  },
+  "RoundState": {
+   "enum": [
+    "CREATED",
+    "COLLECTING",
+    "LOCAL_TRAINING",
+    "UPDATES_READY",
+    "AGGREGATING",
+    "CANDIDATE_CREATED",
+    "VALIDATING",
+    "ACCEPTED_TO_SANDBOX",
+    "REJECTED",
+    "COMPLETED",
+    "FAILED"
+   ],
+   "title": "RoundState",
+   "type": "string"
+  },
+  "RoundStatusEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "round.status",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/RoundStatusPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "RoundStatusEvent",
+   "type": "object"
+  },
+  "RoundStatusPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "accepted_updates": {
+     "minimum": 0,
+     "title": "Accepted Updates",
+     "type": "integer"
+    },
+    "expected_updates": {
+     "minimum": 1,
+     "title": "Expected Updates",
+     "type": "integer"
+    },
+    "round_id": {
+     "minimum": 1,
+     "title": "Round Id",
+     "type": "integer"
+    },
+    "round_state": {
+     "$ref": "#/$defs/RoundState"
+    }
+   },
+   "required": [
+    "round_id",
+    "round_state",
+    "accepted_updates",
+    "expected_updates"
+   ],
+   "title": "RoundStatusPayload",
+   "type": "object"
+  },
+  "RunState": {
+   "enum": [
+    "CREATED",
+    "RUNNING",
+    "COMPLETED",
+    "FAILED"
+   ],
+   "title": "RunState",
+   "type": "string"
+  },
+  "RunType": {
+   "enum": [
+    "LIVE_RUN",
+    "REPLAY"
+   ],
+   "title": "RunType",
+   "type": "string"
+  },
+  "SandboxStatus": {
+   "enum": [
+    "NOT_IN_SANDBOX",
+    "IN_SANDBOX",
+    "ARCHIVED"
+   ],
+   "title": "SandboxStatus",
+   "type": "string"
+  },
+  "SecAggStatus": {
+   "enum": [
+    "NOT_USED",
+    "SHADOW_RUNNING",
+    "SHADOW_VERIFIED",
+    "SHADOW_FAILED"
+   ],
+   "title": "SecAggStatus",
+   "type": "string"
+  },
+  "SecAggStatusEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "secagg.status",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/SecAggStatusPayload"
+    },
+    "run_id": {
+     "minLength": 1,
+     "title": "Run Id",
+     "type": "string"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "run_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "SecAggStatusEvent",
+   "type": "object"
+  },
+  "SecAggStatusPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "claim_scope": {
+     "const": "PROTECTED_AGGREGATION_INTERFACE_ONLY",
+     "default": "PROTECTED_AGGREGATION_INTERFACE_ONLY",
+     "title": "Claim Scope",
+     "type": "string"
+    },
+    "mode": {
+     "$ref": "#/$defs/AggregationMode"
+    },
+    "round_id": {
+     "minimum": 1,
+     "title": "Round Id",
+     "type": "integer"
+    },
+    "status": {
+     "$ref": "#/$defs/SecAggStatus"
+    }
+   },
+   "required": [
+    "round_id",
+    "mode",
+    "status"
+   ],
+   "title": "SecAggStatusPayload",
+   "type": "object"
+  },
+  "SessionState": {
+   "enum": [
+    "CREATED",
+    "DEVICE_READY",
+    "MONITORING",
+    "STOPPING",
+    "COMPLETED",
+    "FAILED"
+   ],
+   "title": "SessionState",
+   "type": "string"
+  },
+  "SessionStatusEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "session.status",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/SessionStatusPayload"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    },
+    "session_id": {
+     "minLength": 1,
+     "title": "Session Id",
+     "type": "string"
+    },
+    "source_timestamp_us": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source Timestamp Us"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "session_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "SessionStatusEvent",
+   "type": "object"
+  },
+  "SessionStatusPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "elapsed_ms": {
+     "minimum": 0,
+     "title": "Elapsed Ms",
+     "type": "integer"
+    },
+    "reason_code": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reason Code"
+    },
+    "session_state": {
+     "$ref": "#/$defs/SessionState"
+    }
+   },
+   "required": [
+    "session_state",
+    "elapsed_ms"
+   ],
+   "title": "SessionStatusPayload",
+   "type": "object"
+  },
+  "SystemErrorEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "system.error",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/SystemErrorPayload"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    },
+    "session_id": {
+     "minLength": 1,
+     "title": "Session Id",
+     "type": "string"
+    },
+    "source_timestamp_us": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source Timestamp Us"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "session_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "SystemErrorEvent",
+   "type": "object"
+  },
+  "SystemErrorPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "error_code": {
+     "minLength": 1,
+     "title": "Error Code",
+     "type": "string"
+    },
+    "message": {
+     "maxLength": 300,
+     "title": "Message",
+     "type": "string"
+    },
+    "origin": {
+     "enum": [
+      "DEVICE",
+      "STREAM",
+      "INFERENCE",
+      "PRODUCT_API",
+      "STORAGE"
+     ],
+     "title": "Origin",
+     "type": "string"
+    },
+    "recoverable": {
+     "title": "Recoverable",
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "error_code",
+    "message",
+    "recoverable",
+    "origin"
+   ],
+   "title": "SystemErrorPayload",
+   "type": "object"
+  },
+  "ValidationStatus": {
+   "enum": [
+    "PENDING",
+    "RUNNING",
+    "PASSED",
+    "FAILED"
+   ],
+   "title": "ValidationStatus",
+   "type": "string"
+  },
+  "WaveformChunkEvent": {
+   "additionalProperties": false,
+   "properties": {
+    "contract_version": {
+     "const": "PRODUCT_LIVE_EVENT_V1",
+     "default": "PRODUCT_LIVE_EVENT_V1",
+     "title": "Contract Version",
+     "type": "string"
+    },
+    "emitted_at_us": {
+     "minimum": 0,
+     "title": "Emitted At Us",
+     "type": "integer"
+    },
+    "event_id": {
+     "minLength": 1,
+     "title": "Event Id",
+     "type": "string"
+    },
+    "event_type": {
+     "const": "waveform.chunk",
+     "title": "Event Type",
+     "type": "string"
+    },
+    "payload": {
+     "$ref": "#/$defs/WaveformChunkPayload"
+    },
+    "sequence_index": {
+     "minimum": 0,
+     "title": "Sequence Index",
+     "type": "integer"
+    },
+    "session_id": {
+     "minLength": 1,
+     "title": "Session Id",
+     "type": "string"
+    },
+    "source_timestamp_us": {
+     "anyOf": [
+      {
+       "minimum": 0,
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Source Timestamp Us"
+    }
+   },
+   "required": [
+    "event_id",
+    "sequence_index",
+    "emitted_at_us",
+    "session_id",
+    "event_type",
+    "payload"
+   ],
+   "title": "WaveformChunkEvent",
+   "type": "object"
+  },
+  "WaveformChunkPayload": {
+   "additionalProperties": false,
+   "properties": {
+    "channel": {
+     "enum": [
+      "ECG",
+      "PPG_RED",
+      "PPG_IR"
+     ],
+     "title": "Channel",
+     "type": "string"
+    },
+    "first_sample_index": {
+     "minimum": 0,
+     "title": "First Sample Index",
+     "type": "integer"
+    },
+    "first_sample_timestamp_us": {
+     "minimum": 0,
+     "title": "First Sample Timestamp Us",
+     "type": "integer"
+    },
+    "sample_count": {
+     "maximum": 144,
+     "minimum": 1,
+     "title": "Sample Count",
+     "type": "integer"
+    },
+    "samples": {
+     "items": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "title": "Samples",
+     "type": "array"
+    },
+    "source_rate_hz": {
+     "const": 360,
+     "default": 360,
+     "title": "Source Rate Hz",
+     "type": "integer"
+    },
+    "unit": {
+     "const": "ADC_COUNTS",
+     "default": "ADC_COUNTS",
+     "title": "Unit",
+     "type": "string"
+    }
+   },
+   "required": [
+    "channel",
+    "first_sample_index",
+    "first_sample_timestamp_us",
+    "sample_count",
+    "samples"
+   ],
+   "title": "WaveformChunkPayload",
+   "type": "object"
+  }
+ },
+ "discriminator": {
+  "mapping": {
+   "aggregation.status": "#/$defs/AggregationStatusEvent",
+   "candidate.created": "#/$defs/CandidateCreatedEvent",
+   "candidate.governance": "#/$defs/CandidateGovernanceEvent",
+   "candidate.validation": "#/$defs/CandidateValidationEvent",
+   "client.status": "#/$defs/ClientStatusEvent",
+   "client.training_progress": "#/$defs/ClientTrainingProgressEvent",
+   "client.update_ready": "#/$defs/ClientUpdateReadyEvent",
+   "context.snapshot": "#/$defs/ContextSnapshotEvent",
+   "device.status": "#/$defs/DeviceStatusEvent",
+   "federation.completed": "#/$defs/FederationCompletedEvent",
+   "federation.error": "#/$defs/FederationErrorEvent",
+   "federation.status": "#/$defs/FederationStatusEvent",
+   "inference.result": "#/$defs/InferenceResultEvent",
+   "monitoring.state": "#/$defs/MonitoringStateEvent",
+   "quality.status": "#/$defs/QualityStatusEvent",
+   "round.status": "#/$defs/RoundStatusEvent",
+   "secagg.status": "#/$defs/SecAggStatusEvent",
+   "session.status": "#/$defs/SessionStatusEvent",
+   "system.error": "#/$defs/SystemErrorEvent",
+   "waveform.chunk": "#/$defs/WaveformChunkEvent"
+  },
+  "propertyName": "event_type"
+ },
+ "oneOf": [
+  {
+   "$ref": "#/$defs/SessionStatusEvent"
+  },
+  {
+   "$ref": "#/$defs/DeviceStatusEvent"
+  },
+  {
+   "$ref": "#/$defs/WaveformChunkEvent"
+  },
+  {
+   "$ref": "#/$defs/ContextSnapshotEvent"
+  },
+  {
+   "$ref": "#/$defs/QualityStatusEvent"
+  },
+  {
+   "$ref": "#/$defs/InferenceResultEvent"
+  },
+  {
+   "$ref": "#/$defs/MonitoringStateEvent"
+  },
+  {
+   "$ref": "#/$defs/SystemErrorEvent"
+  },
+  {
+   "$ref": "#/$defs/FederationStatusEvent"
+  },
+  {
+   "$ref": "#/$defs/RoundStatusEvent"
+  },
+  {
+   "$ref": "#/$defs/ClientStatusEvent"
+  },
+  {
+   "$ref": "#/$defs/ClientTrainingProgressEvent"
+  },
+  {
+   "$ref": "#/$defs/ClientUpdateReadyEvent"
+  },
+  {
+   "$ref": "#/$defs/AggregationStatusEvent"
+  },
+  {
+   "$ref": "#/$defs/SecAggStatusEvent"
+  },
+  {
+   "$ref": "#/$defs/CandidateCreatedEvent"
+  },
+  {
+   "$ref": "#/$defs/CandidateValidationEvent"
+  },
+  {
+   "$ref": "#/$defs/CandidateGovernanceEvent"
+  },
+  {
+   "$ref": "#/$defs/FederationCompletedEvent"
+  },
+  {
+   "$ref": "#/$defs/FederationErrorEvent"
+  }
+ ]
+}

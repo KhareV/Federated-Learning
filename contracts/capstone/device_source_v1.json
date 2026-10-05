@@ -1,0 +1,232 @@
+{
+ "contract_id": "DEVICE_SOURCE_CONTRACT_V1",
+ "contract_version": "DEVICE_SOURCE_V1",
+ "status": "FROZEN_INTERFACE_CONTRACT",
+ "python_interface": "product/devices/base.py::DeviceSource",
+ "observed_record_binding": {
+  "module": "simulation.types",
+  "class": "ObservedRecord",
+  "sample_contract_version": "SAMPLE_SCHEMA_V1",
+  "schema": "contracts/sample_schema_v1.json",
+  "stream_runtime": "simulation/stream_runtime_v2013.py::WearableStreamRuntime.ingest",
+  "new_record_type_allowed": false,
+  "rule": "Every DeviceSource emits the repository's existing canonical ObservedRecord. An incompatible ObservedRecordV2 must never be created."
+ },
+ "adapter_types": [
+  "SIMULATED",
+  "FUTURE_REAL"
+ ],
+ "adapter_implementations": {
+  "SIMULATED": {
+   "class": "SimulatedWearableSource",
+   "owner_phase": "CAP-002",
+   "implemented_now": false
+  },
+  "FUTURE_REAL": {
+   "class": "RealWearableSource",
+   "owner_phase": "AFTER_HARDWARE_AVAILABLE (outside the capstone lineage)",
+   "implemented_now": false
+  }
+ },
+ "device_states": [
+  "DETACHED",
+  "SCANNING",
+  "FOUND",
+  "PAIRING",
+  "CONNECTED",
+  "STREAMING",
+  "DISCONNECTED",
+  "RECONNECTING",
+  "STOPPED",
+  "ERROR"
+ ],
+ "device_transitions": {
+  "DETACHED": [
+   "SCANNING"
+  ],
+  "SCANNING": [
+   "FOUND",
+   "ERROR",
+   "DETACHED"
+  ],
+  "FOUND": [
+   "PAIRING",
+   "DETACHED"
+  ],
+  "PAIRING": [
+   "CONNECTED",
+   "ERROR",
+   "DETACHED"
+  ],
+  "CONNECTED": [
+   "STREAMING",
+   "DISCONNECTED",
+   "DETACHED"
+  ],
+  "STREAMING": [
+   "DISCONNECTED",
+   "STOPPED",
+   "ERROR"
+  ],
+  "DISCONNECTED": [
+   "RECONNECTING",
+   "DETACHED"
+  ],
+  "RECONNECTING": [
+   "CONNECTED",
+   "ERROR",
+   "DETACHED"
+  ],
+  "STOPPED": [
+   "CONNECTED",
+   "DETACHED"
+  ],
+  "ERROR": [
+   "DETACHED",
+   "SCANNING"
+  ]
+ },
+ "transition_notes": {
+  "reconnect_resume": "After RECONNECTING->CONNECTED a still-open monitoring session resumes via CONNECTED->STREAMING.",
+  "stopped_semantics": "STOPPED = stream ended on purpose while the link is kept; STOPPED->CONNECTED allows a new stream, STOPPED->DETACHED releases the device. STOPPED->STREAMING is illegal (must pass CONNECTED)."
+ },
+ "illegal_transition_behavior": {
+  "exception": "IllegalTransitionError",
+  "message_format": "ILLEGAL_DEVICE_TRANSITION:<from>-><to>",
+  "state_unchanged": true,
+  "silent_coercion_allowed": false,
+  "product_surface": "A rejected transition is reported as a recoverable system.error / HTTP 409 by the product layer (CAP-003)."
+ },
+ "event_types": [
+  "SCAN_STARTED",
+  "DEVICE_DISCOVERED",
+  "PAIRING_STARTED",
+  "DEVICE_CONNECTED",
+  "STREAM_STARTED",
+  "DEVICE_DISCONNECTED",
+  "RECONNECT_STARTED",
+  "DEVICE_RECONNECTED",
+  "STREAM_STOPPED",
+  "DEVICE_DETACHED",
+  "DEVICE_ERROR"
+ ],
+ "event_type_state_effects": {
+  "SCAN_STARTED": "SCANNING",
+  "DEVICE_DISCOVERED": "FOUND",
+  "PAIRING_STARTED": "PAIRING",
+  "DEVICE_CONNECTED": "CONNECTED",
+  "STREAM_STARTED": "STREAMING",
+  "DEVICE_DISCONNECTED": "DISCONNECTED",
+  "RECONNECT_STARTED": "RECONNECTING",
+  "DEVICE_RECONNECTED": "CONNECTED",
+  "STREAM_STOPPED": "STOPPED",
+  "DEVICE_DETACHED": "DETACHED",
+  "DEVICE_ERROR": "ERROR"
+ },
+ "methods": {
+  "scan": {
+   "async": true,
+   "args": [
+    "timeout_s"
+   ],
+   "returns": "Sequence[DeviceDescriptor]"
+  },
+  "connect": {
+   "async": true,
+   "args": [
+    "device_id"
+   ],
+   "returns": "None"
+  },
+  "disconnect": {
+   "async": true,
+   "args": [],
+   "returns": "None"
+  },
+  "start_stream": {
+   "async": true,
+   "args": [
+    "session_id"
+   ],
+   "returns": "None"
+  },
+  "stop_stream": {
+   "async": true,
+   "args": [],
+   "returns": "None"
+  },
+  "records": {
+   "async": false,
+   "args": [],
+   "returns": "AsyncIterator[ObservedRecord]"
+  },
+  "events": {
+   "async": false,
+   "args": [],
+   "returns": "AsyncIterator[DeviceEvent]"
+  }
+ },
+ "properties": [
+  "descriptor",
+  "connection_state"
+ ],
+ "descriptor_fields": [
+  "device_id",
+  "display_name",
+  "adapter_type",
+  "source_dataset_id",
+  "source_mode",
+  "connection_state",
+  "capabilities",
+  "simulation",
+  "simulation_version",
+  "hardware_specific_fields_status"
+ ],
+ "capability_fields": [
+  "supports_ecg",
+  "supports_ppg",
+  "supports_spo2_context",
+  "supports_device_events",
+  "nominal_source_rates_hz"
+ ],
+ "device_event_fields": [
+  "event_version",
+  "event_id",
+  "device_id",
+  "session_id",
+  "sequence_index",
+  "event_type",
+  "device_state",
+  "source",
+  "source_timestamp_us",
+  "product_timestamp_us",
+  "reason_code",
+  "recoverable",
+  "metadata"
+ ],
+ "device_event_rules": {
+  "event_version": "DEVICE_EVENT_V1",
+  "session_id_optional_until_monitoring": true,
+  "device_state_must_equal_event_type_state_effect": true,
+  "metadata_schema": "restricted: scenario_id, attempt, detail (<=200 chars); extra fields forbidden",
+  "physiological_model_output_allowed": false
+ },
+ "hardware_specific_fields": {
+  "policy": "Unknown physical-device facts are VERIFICATION_REQUIRED and are never invented.",
+  "fields": {
+   "transport": "VERIFICATION_REQUIRED",
+   "firmware_version": "VERIFICATION_REQUIRED",
+   "native_sample_rates_hz": "VERIFICATION_REQUIRED",
+   "adc_resolution_bits": "VERIFICATION_REQUIRED",
+   "ble_or_serial_service_identifiers": "VERIFICATION_REQUIRED",
+   "packet_format": "VERIFICATION_REQUIRED",
+   "clock_drift_characteristics": "VERIFICATION_REQUIRED"
+  },
+  "reference": "contracts/HARDWARE_DATA_CONTRACT_V1.md"
+ },
+ "forbidden": [
+  "clinical certification fields",
+  "implying physical hardware is available",
+  "a second ML/preprocessing path inside a source adapter"
+ ]
+}

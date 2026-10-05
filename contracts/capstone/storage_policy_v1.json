@@ -1,0 +1,610 @@
+{
+ "contract_id": "CAPSTONE_STORAGE_POLICY_V1",
+ "contract_version": "CAPSTONE_STORAGE_V1",
+ "status": "FROZEN_PRODUCT_POLICY",
+ "engine": "SQLITE",
+ "mode": "capstone/local (not hospital infrastructure)",
+ "database_server_required": false,
+ "default_path": "data/capstone/product.sqlite3",
+ "pragmas": {
+  "foreign_keys": "ON",
+  "journal_mode": "WAL"
+ },
+ "implemented_now": false,
+ "implementation_phase": "CAP-004 (migrations/runtime); CAP-001 only validates the schema contract in tests",
+ "high_rate_policy": {
+  "per_sample_rows_allowed": false,
+  "raw_360hz_sample_table_allowed": false,
+  "forbidden_entity_name_fragments": [
+   "sample",
+   "raw_ecg",
+   "raw_ppg",
+   "ecg_raw"
+  ],
+  "forbidden_column_names": [
+   "ecg_raw",
+   "ppg_red_raw",
+   "ppg_ir_raw",
+   "sample_index_value"
+  ],
+  "stream_policy": "360 Hz source data is streamed, not stored relationally. Relational rows are bounded: inference <= 1/window, context <= 1/s, state & quality on change only, waveform preview <= max_preview_points per channel.",
+  "max_preview_points_per_channel": 4000
+ },
+ "raw_session_artifact_policy": {
+  "mandatory": false,
+  "simulated_sessions": "Prefer deterministic regeneration from (scenario_id, seed, simulation_version); no raw persistence required.",
+  "engineering_replay_artifact": "If ever persisted, an explicit versioned session artifact file (not SQL rows) with its own schema_version and sha256 recorded on the session row."
+ },
+ "entities": [
+  {
+   "entity": "users",
+   "table": "users",
+   "primary_key": "user_id",
+   "columns": {
+    "user_id": "TEXT",
+    "auth_provider": "TEXT",
+    "display_name": "TEXT?",
+    "email": "TEXT?",
+    "demo_mode": "INTEGER",
+    "created_at_us": "INTEGER"
+   },
+   "foreign_keys": [],
+   "ownership": "SELF",
+   "indexes": [],
+   "retention_intent": "kept until the user is deleted",
+   "max_write_rate": "",
+   "notes": "Mirror of the AuthProvider identity; no credentials stored."
+  },
+  {
+   "entity": "devices",
+   "table": "devices",
+   "primary_key": "device_id",
+   "columns": {
+    "device_id": "TEXT",
+    "user_id": "TEXT",
+    "display_name": "TEXT",
+    "adapter_type": "TEXT",
+    "source_dataset_id": "TEXT?",
+    "source_mode": "TEXT?",
+    "simulation_version": "TEXT?",
+    "capabilities_json": "TEXT",
+    "created_at_us": "INTEGER"
+   },
+   "foreign_keys": [
+    {
+     "column": "user_id",
+     "references": "users.user_id"
+    }
+   ],
+   "ownership": "user_id",
+   "indexes": [
+    {
+     "name": "ix_devices_user",
+     "columns": [
+      "user_id"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept while the owner exists",
+   "max_write_rate": "",
+   "notes": ""
+  },
+  {
+   "entity": "device_connections",
+   "table": "device_connections",
+   "primary_key": "connection_id",
+   "columns": {
+    "connection_id": "TEXT",
+    "device_id": "TEXT",
+    "session_id": "TEXT?",
+    "event_type": "TEXT",
+    "device_state": "TEXT",
+    "sequence_index": "INTEGER",
+    "reason_code": "TEXT?",
+    "recoverable": "INTEGER",
+    "at_us": "INTEGER"
+   },
+   "foreign_keys": [
+    {
+     "column": "device_id",
+     "references": "devices.device_id"
+    },
+    {
+     "column": "session_id",
+     "references": "monitoring_sessions.session_id"
+    }
+   ],
+   "ownership": "devices.user_id",
+   "indexes": [
+    {
+     "name": "ix_conn_device_time",
+     "columns": [
+      "device_id",
+      "at_us"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept with the device",
+   "max_write_rate": "one row per DeviceEvent (state changes only)",
+   "notes": ""
+  },
+  {
+   "entity": "monitoring_sessions",
+   "table": "monitoring_sessions",
+   "primary_key": "session_id",
+   "columns": {
+    "session_id": "TEXT",
+    "user_id": "TEXT",
+    "device_id": "TEXT",
+    "adapter_type": "TEXT",
+    "source_dataset_id": "TEXT?",
+    "source_mode": "TEXT?",
+    "scenario_id": "TEXT?",
+    "scenario_seed": "INTEGER?",
+    "simulation_version": "TEXT?",
+    "state": "TEXT",
+    "created_at_us": "INTEGER",
+    "started_at_us": "INTEGER?",
+    "ended_at_us": "INTEGER?",
+    "model_id": "TEXT",
+    "calibration_id": "TEXT",
+    "preprocess_id": "TEXT",
+    "alert_policy_id": "TEXT",
+    "alert_policy_binding_id": "TEXT",
+    "gateway_artifact_id": "TEXT",
+    "api_contract_version": "TEXT",
+    "software_system_id": "TEXT"
+   },
+   "foreign_keys": [
+    {
+     "column": "user_id",
+     "references": "users.user_id"
+    },
+    {
+     "column": "device_id",
+     "references": "devices.device_id"
+    }
+   ],
+   "ownership": "user_id",
+   "indexes": [
+    {
+     "name": "ix_sessions_user_created",
+     "columns": [
+      "user_id",
+      "created_at_us"
+     ],
+     "unique": false
+    },
+    {
+     "name": "ix_sessions_state",
+     "columns": [
+      "state"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept until user deletes the session",
+   "max_write_rate": "",
+   "notes": "runtime identity columns are written once at creation and never updated"
+  },
+  {
+   "entity": "inference_events",
+   "table": "inference_events",
+   "primary_key": "inference_id",
+   "columns": {
+    "inference_id": "TEXT",
+    "session_id": "TEXT",
+    "sequence_index": "INTEGER",
+    "timestamp_us": "INTEGER",
+    "model_id": "TEXT?",
+    "calibration_domain": "TEXT?",
+    "ecg_quality": "TEXT",
+    "monitoring_state": "TEXT",
+    "raw_probability": "REAL?",
+    "source_domain_calibrated_probability": "REAL?",
+    "threshold": "REAL?",
+    "latency_ms": "REAL?",
+    "context_json": "TEXT?"
+   },
+   "foreign_keys": [
+    {
+     "column": "session_id",
+     "references": "monitoring_sessions.session_id"
+    }
+   ],
+   "ownership": "monitoring_sessions.user_id",
+   "indexes": [
+    {
+     "name": "ux_inference_session_seq",
+     "columns": [
+      "session_id",
+      "sequence_index"
+     ],
+     "unique": true
+    }
+   ],
+   "retention_intent": "kept with the session",
+   "max_write_rate": "<= 1 row per inference window (windowed cadence, never per sample)",
+   "notes": ""
+  },
+  {
+   "entity": "monitoring_state_events",
+   "table": "monitoring_state_events",
+   "primary_key": "event_id",
+   "columns": {
+    "event_id": "TEXT",
+    "session_id": "TEXT",
+    "sequence_index": "INTEGER",
+    "timestamp_us": "INTEGER",
+    "monitoring_state": "TEXT",
+    "previous_state": "TEXT?",
+    "reason_code": "TEXT?"
+   },
+   "foreign_keys": [
+    {
+     "column": "session_id",
+     "references": "monitoring_sessions.session_id"
+    }
+   ],
+   "ownership": "monitoring_sessions.user_id",
+   "indexes": [
+    {
+     "name": "ix_state_session_seq",
+     "columns": [
+      "session_id",
+      "sequence_index"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept with the session",
+   "max_write_rate": "state CHANGES only",
+   "notes": ""
+  },
+  {
+   "entity": "signal_quality_events",
+   "table": "signal_quality_events",
+   "primary_key": "event_id",
+   "columns": {
+    "event_id": "TEXT",
+    "session_id": "TEXT",
+    "sequence_index": "INTEGER",
+    "timestamp_us": "INTEGER",
+    "ecg_quality": "TEXT",
+    "ppg_quality": "TEXT?"
+   },
+   "foreign_keys": [
+    {
+     "column": "session_id",
+     "references": "monitoring_sessions.session_id"
+    }
+   ],
+   "ownership": "monitoring_sessions.user_id",
+   "indexes": [
+    {
+     "name": "ix_quality_session_seq",
+     "columns": [
+      "session_id",
+      "sequence_index"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept with the session",
+   "max_write_rate": "quality CHANGES only",
+   "notes": ""
+  },
+  {
+   "entity": "context_snapshots",
+   "table": "context_snapshots",
+   "primary_key": "snapshot_id",
+   "columns": {
+    "snapshot_id": "TEXT",
+    "session_id": "TEXT",
+    "sequence_index": "INTEGER",
+    "timestamp_us": "INTEGER",
+    "hr_ecg_bpm": "REAL?",
+    "pr_ppg_bpm": "REAL?",
+    "spo2_pct": "REAL?",
+    "spo2_valid": "INTEGER",
+    "context_available": "INTEGER",
+    "ppg_quality": "TEXT?"
+   },
+   "foreign_keys": [
+    {
+     "column": "session_id",
+     "references": "monitoring_sessions.session_id"
+    }
+   ],
+   "ownership": "monitoring_sessions.user_id",
+   "indexes": [
+    {
+     "name": "ix_context_session_seq",
+     "columns": [
+      "session_id",
+      "sequence_index"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept with the session",
+   "max_write_rate": "<= 1 row per second per session",
+   "notes": ""
+  },
+  {
+   "entity": "session_summaries",
+   "table": "session_summaries",
+   "primary_key": "session_id",
+   "columns": {
+    "session_id": "TEXT",
+    "summary_version": "TEXT",
+    "duration_ms": "INTEGER",
+    "windows_inferred": "INTEGER",
+    "state_counts_json": "TEXT",
+    "quality_counts_json": "TEXT",
+    "hr_min": "REAL?",
+    "hr_mean": "REAL?",
+    "hr_max": "REAL?",
+    "spo2_min": "REAL?",
+    "spo2_mean": "REAL?",
+    "spo2_max": "REAL?",
+    "reconnect_count": "INTEGER",
+    "disconnect_count": "INTEGER",
+    "generated_at_us": "INTEGER"
+   },
+   "foreign_keys": [
+    {
+     "column": "session_id",
+     "references": "monitoring_sessions.session_id"
+    }
+   ],
+   "ownership": "monitoring_sessions.user_id",
+   "indexes": [],
+   "retention_intent": "kept with the session",
+   "max_write_rate": "exactly one row per completed session",
+   "notes": ""
+  },
+  {
+   "entity": "waveform_previews",
+   "table": "waveform_previews",
+   "primary_key": "preview_id",
+   "columns": {
+    "preview_id": "TEXT",
+    "session_id": "TEXT",
+    "channel": "TEXT",
+    "source_rate_hz": "INTEGER",
+    "decimation_factor": "INTEGER",
+    "point_count": "INTEGER",
+    "start_timestamp_us": "INTEGER",
+    "encoding": "TEXT",
+    "data": "BLOB"
+   },
+   "foreign_keys": [
+    {
+     "column": "session_id",
+     "references": "monitoring_sessions.session_id"
+    }
+   ],
+   "ownership": "monitoring_sessions.user_id",
+   "indexes": [
+    {
+     "name": "ix_preview_session",
+     "columns": [
+      "session_id",
+      "channel"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept with the session",
+   "max_write_rate": "bounded decimated preview: point_count <= max_preview_points per channel; NOT the raw stream",
+   "notes": ""
+  },
+  {
+   "entity": "federation_runs",
+   "table": "federation_runs",
+   "primary_key": "run_id",
+   "columns": {
+    "run_id": "TEXT",
+    "user_id": "TEXT",
+    "run_type": "TEXT",
+    "base_model_id": "TEXT",
+    "federation_protocol_id": "TEXT",
+    "algorithm": "TEXT",
+    "secagg_mode": "TEXT",
+    "planned_rounds": "INTEGER",
+    "current_round": "INTEGER",
+    "status": "TEXT",
+    "started_at_us": "INTEGER?",
+    "completed_at_us": "INTEGER?",
+    "engineering_only": "INTEGER",
+    "candidate_ids_json": "TEXT"
+   },
+   "foreign_keys": [
+    {
+     "column": "user_id",
+     "references": "users.user_id"
+    }
+   ],
+   "ownership": "user_id",
+   "indexes": [
+    {
+     "name": "ix_fedruns_user_started",
+     "columns": [
+      "user_id",
+      "started_at_us"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept with the user",
+   "max_write_rate": "",
+   "notes": "engineering_only is always 1"
+  },
+  {
+   "entity": "federation_rounds",
+   "table": "federation_rounds",
+   "primary_key": "round_pk",
+   "columns": {
+    "round_pk": "TEXT",
+    "run_id": "TEXT",
+    "round_id": "INTEGER",
+    "state": "TEXT",
+    "base_state_digest": "TEXT",
+    "algorithm": "TEXT",
+    "accepted_update_count": "INTEGER",
+    "candidate_id": "TEXT?",
+    "updated_at_us": "INTEGER"
+   },
+   "foreign_keys": [
+    {
+     "column": "run_id",
+     "references": "federation_runs.run_id"
+    }
+   ],
+   "ownership": "federation_runs.user_id",
+   "indexes": [
+    {
+     "name": "ux_fedrounds_run_round",
+     "columns": [
+      "run_id",
+      "round_id"
+     ],
+     "unique": true
+    }
+   ],
+   "retention_intent": "kept with the run",
+   "max_write_rate": "<= planned_rounds rows per run",
+   "notes": ""
+  },
+  {
+   "entity": "fl_client_statuses",
+   "table": "fl_client_statuses",
+   "primary_key": "status_pk",
+   "columns": {
+    "status_pk": "TEXT",
+    "run_id": "TEXT",
+    "client_id": "TEXT",
+    "round_id": "INTEGER",
+    "client_state": "TEXT",
+    "local_example_count": "INTEGER",
+    "update_digest": "TEXT?",
+    "reason_code": "TEXT?",
+    "updated_at_us": "INTEGER"
+   },
+   "foreign_keys": [
+    {
+     "column": "run_id",
+     "references": "federation_runs.run_id"
+    }
+   ],
+   "ownership": "federation_runs.user_id",
+   "indexes": [
+    {
+     "name": "ix_clientstatus_run_client",
+     "columns": [
+      "run_id",
+      "client_id",
+      "round_id"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept with the run",
+   "max_write_rate": "state-change rows only; holds NO raw data, labels or truth",
+   "notes": ""
+  },
+  {
+   "entity": "candidate_models",
+   "table": "candidate_models",
+   "primary_key": "candidate_id",
+   "columns": {
+    "candidate_id": "TEXT",
+    "parent_model_id": "TEXT",
+    "federation_run_id": "TEXT",
+    "round": "INTEGER",
+    "algorithm": "TEXT",
+    "client_count": "INTEGER",
+    "created_at_us": "INTEGER",
+    "state_digest": "TEXT",
+    "validation_status": "TEXT",
+    "governance_status": "TEXT",
+    "sandbox_status": "TEXT",
+    "production_deployed": "INTEGER",
+    "claim_boundary": "TEXT"
+   },
+   "foreign_keys": [
+    {
+     "column": "federation_run_id",
+     "references": "federation_runs.run_id"
+    }
+   ],
+   "ownership": "federation_runs.user_id",
+   "indexes": [
+    {
+     "name": "ix_candidates_run",
+     "columns": [
+      "federation_run_id"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept with the run",
+   "max_write_rate": "metadata only; production_deployed is always 0 (candidate weights, if kept, are artifact files, never SQL rows)",
+   "notes": ""
+  },
+  {
+   "entity": "governance_decisions",
+   "table": "governance_decisions",
+   "primary_key": "decision_id",
+   "columns": {
+    "decision_id": "TEXT",
+    "candidate_id": "TEXT",
+    "decision": "TEXT",
+    "checks_json": "TEXT",
+    "decided_at_us": "INTEGER",
+    "scientific_promotion": "INTEGER",
+    "production_deployed": "INTEGER"
+   },
+   "foreign_keys": [
+    {
+     "column": "candidate_id",
+     "references": "candidate_models.candidate_id"
+    }
+   ],
+   "ownership": "candidate_models.federation_run_id",
+   "indexes": [
+    {
+     "name": "ix_governance_candidate",
+     "columns": [
+      "candidate_id"
+     ],
+     "unique": false
+    }
+   ],
+   "retention_intent": "kept with the candidate",
+   "max_write_rate": "scientific_promotion and production_deployed are always 0",
+   "notes": ""
+  }
+ ],
+ "ownership_rules": {
+  "root_owner_table": "users",
+  "owner_resolution": "every owned row resolves to users.user_id through its foreign-key chain",
+  "cross_user_reads_allowed": false,
+  "research_demo_runs": "owner-scoped"
+ },
+ "live_fl_separation": {
+  "fl_checkpoints_stored_as_live_model": false,
+  "per_user_model_state_stored": false,
+  "fl_demo_runs_scientific_evidence": false,
+  "candidate_weights_in_sql_rows": false,
+  "raw_or_label_or_truth_data_in_federation_tables": false
+ },
+ "claims": "stored values are research/engineering session records, not clinical records",
+ "data_locality": {
+  "reference": "contracts/capstone/federation_v1.json::data_locality",
+  "federation_tables_hold": "run/round/client-status/candidate/governance metadata only"
+ }
+}

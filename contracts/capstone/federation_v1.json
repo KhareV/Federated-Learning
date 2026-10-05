@@ -1,0 +1,156 @@
+{
+ "contract_id": "CAPSTONE_FEDERATION_CONTRACT_V1",
+ "contract_version": "CAPSTONE_FEDERATION_V1",
+ "status": "FROZEN_INTERFACE_CONTRACT",
+ "python_interface": "product/federation/base.py",
+ "round_states": [
+  "CREATED",
+  "COLLECTING",
+  "LOCAL_TRAINING",
+  "UPDATES_READY",
+  "AGGREGATING",
+  "CANDIDATE_CREATED",
+  "VALIDATING",
+  "ACCEPTED_TO_SANDBOX",
+  "REJECTED",
+  "COMPLETED",
+  "FAILED"
+ ],
+ "round_transitions": {
+  "CREATED": [
+   "COLLECTING",
+   "FAILED"
+  ],
+  "COLLECTING": [
+   "LOCAL_TRAINING",
+   "FAILED"
+  ],
+  "LOCAL_TRAINING": [
+   "UPDATES_READY",
+   "FAILED"
+  ],
+  "UPDATES_READY": [
+   "AGGREGATING",
+   "FAILED"
+  ],
+  "AGGREGATING": [
+   "CANDIDATE_CREATED",
+   "FAILED"
+  ],
+  "CANDIDATE_CREATED": [
+   "VALIDATING",
+   "FAILED"
+  ],
+  "VALIDATING": [
+   "ACCEPTED_TO_SANDBOX",
+   "REJECTED",
+   "FAILED"
+  ],
+  "ACCEPTED_TO_SANDBOX": [
+   "COMPLETED",
+   "FAILED"
+  ],
+  "REJECTED": [
+   "COMPLETED",
+   "FAILED"
+  ],
+  "COMPLETED": [],
+  "FAILED": []
+ },
+ "terminal_states": [
+  "COMPLETED",
+  "FAILED"
+ ],
+ "forbidden_round_states": [
+  "DEPLOYED",
+  "PRODUCTION_DEPLOYED",
+  "PROMOTED"
+ ],
+ "concepts": [
+  "federation run",
+  "round",
+  "participating clients",
+  "base state",
+  "algorithm",
+  "update submission",
+  "aggregation",
+  "candidate output",
+  "failure/rejection states",
+  "event stream"
+ ],
+ "algorithms": {
+  "FEDAVG": {
+   "reuse": "federated/aggregation.py + FL_IID/FL_NON_IID V2 protocols"
+  },
+  "FEDPROX": {
+   "reuse": "federated/model_v2_fedprox.py; mu = frozen FEDPROX_MU_V2 selection (artifacts/FEDPROX_MU_V2.lock.json); no new tuning"
+  }
+ },
+ "aggregation_modes": {
+  "PLAIN": "weighted-delta aggregation of clear model updates (NOT private)",
+  "SECAGG_SHADOW": "SecAgg+ protected-aggregation shadow beside the plain result (V2-FL-005 pattern)"
+ },
+ "forbidden_inventions": [
+  "new optimizer search",
+  "new mu tuning",
+  "new aggregation algorithm",
+  "new privacy mechanism",
+  "new differential-privacy mechanism"
+ ],
+ "secagg_scope": "narrow protected-aggregation-interface engineering result only (docs/MODEL_V2_SECAGG_THREAT_MODEL_V1.md); not anonymity, not differential privacy, not complete privacy, not inference resistance",
+ "candidate_output": "an aggregated global model STATE becomes a CAPSTONE_FL_CANDIDATE_#### (engineering candidate); never 'deployed'",
+ "update_rejection_codes_reuse": "federated/wearable_fl_system_v1.py REJECTION_ORDER (e.g. STALE_ROUND, DUPLICATE_UPDATE, BASE_STATE_MISMATCH, UNKNOWN_CLIENT, NONFINITE_UPDATE)",
+ "coordinator_state_mapping": {
+  "ROUND_OPENED": "COLLECTING",
+  "GLOBAL_STATE_BROADCAST": "LOCAL_TRAINING",
+  "CLIENT_UPDATE_ACCEPTED (all expected)": "UPDATES_READY",
+  "ROUND_AGGREGATED": "AGGREGATING -> CANDIDATE_CREATED",
+  "ROUND_COMMITTED": "VALIDATING..COMPLETED (capstone governance step added by CAP-007)"
+ },
+ "event_stream": {
+  "websocket": "WS /product/v1/federation/runs/{id}/live",
+  "contract": "PRODUCT_LIVE_EVENT_V1 federation events",
+  "kinds": [
+   "federation.status",
+   "round.status",
+   "client.status",
+   "client.training_progress",
+   "client.update_ready",
+   "aggregation.status",
+   "secagg.status",
+   "candidate.created",
+   "candidate.validation",
+   "candidate.governance",
+   "federation.completed",
+   "federation.error"
+  ]
+ },
+ "data_locality": {
+  "server_must_not_receive": [
+   "raw ECG streams",
+   "raw PPG streams",
+   "raw SpO2 streams",
+   "SimulationTruth",
+   "local labels",
+   "local minibatches"
+  ],
+  "server_receives": [
+   "model-update envelopes (metadata + update payload)"
+  ],
+  "enforcement_reuse": "federated/wearable_fl_system_v1.py scan_forbidden / coordinator rejection codes (RAW_DATA_FIELD_PRESENT, LABEL_FIELD_PRESENT, TRUTH_FIELD_PRESENT)",
+  "plain_fedavg": "exposes clear model updates; must not be called private",
+  "secagg_path": "supports only the already-proven narrow protected-aggregation-interface claim",
+  "forbidden_claims": [
+   "anonymity",
+   "differential privacy",
+   "complete privacy",
+   "inference resistance"
+  ]
+ },
+ "execution_modes": {
+  "LIVE_RUN": "genuine local training through the existing FL logic (required by a later phase)",
+  "REPLAY": "instant replay of recorded evidence for reliable faculty demonstration",
+  "visibly_identified": true,
+  "static_or_animation_only_demo_allowed": false
+ }
+}

@@ -1,0 +1,98 @@
+{
+ "contract_id": "CAPSTONE_FL_CLIENT_CONTRACT_V1",
+ "contract_version": "CAPSTONE_FL_CLIENT_V1",
+ "status": "FROZEN_INTERFACE_CONTRACT",
+ "python_interface": "product/federation/base.py::FLClient",
+ "identity_fields": [
+  "client_id",
+  "edge_node_id",
+  "base_model_id",
+  "global_round",
+  "local_example_count",
+  "client_state",
+  "update_digest",
+  "eligible",
+  "ineligible_reason"
+ ],
+ "methods": {
+  "local_train": {
+   "async": true,
+   "args": [
+    "round_id",
+    "base_state_digest"
+   ]
+  },
+  "produce_update": {
+   "async": true,
+   "args": []
+  }
+ },
+ "properties": [
+  "identity"
+ ],
+ "client_states": [
+  "IDLE",
+  "DATA_READY",
+  "TRAINING",
+  "UPDATE_READY",
+  "SUBMITTED",
+  "REJECTED",
+  "FAILED"
+ ],
+ "client_transitions": {
+  "IDLE": [
+   "DATA_READY",
+   "FAILED"
+  ],
+  "DATA_READY": [
+   "TRAINING",
+   "FAILED"
+  ],
+  "TRAINING": [
+   "UPDATE_READY",
+   "FAILED"
+  ],
+  "UPDATE_READY": [
+   "SUBMITTED",
+   "FAILED"
+  ],
+  "SUBMITTED": [
+   "IDLE",
+   "REJECTED"
+  ],
+  "REJECTED": [
+   "IDLE"
+  ],
+  "FAILED": [
+   "IDLE"
+  ]
+ },
+ "update_submission_fields": [
+  "client_id",
+  "round_id",
+  "base_state_digest",
+  "update_digest",
+  "examples_seen"
+ ],
+ "update_envelope_reuse": "federated/wearable_fl_system_v1.py ENVELOPE_FIELDS / make_envelope (V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1); the product UpdateSubmission is the server-visible metadata projection of that envelope under update_submission_envelope_mapping (product names -> existing envelope field names)",
+ "existing_modules_reused": {
+  "client_dataset_and_windows": "federated/virtual_client_source_v1.py",
+  "local_labels": "federated/wearable_sim_local_labels.py",
+  "local_training_epoch": "federated/model_v2_fl.py::train_local_epoch_v2",
+  "fedprox_objective": "federated/model_v2_fedprox.py",
+  "weighted_delta_aggregation": "federated/aggregation.py::aggregate_weighted_deltas",
+  "coordinator_and_round_logic": "federated/wearable_fl_system_v1.py::Coordinator",
+  "round_runner": "federated/wearable_fl_runner_v1.py::execute_round / run_full / run_part1 / run_part2",
+  "secagg": "privacy/secagg_app.py (Flower SecAgg+), federated/wearable_fl_secagg_shadow_v1.py"
+ },
+ "new_fl_implementation_allowed": false,
+ "new_optimizer_search_allowed": false,
+ "eligibility_reason_codes_reuse": "federated/wearable_fl_system_v1.py REJECTION_ORDER",
+ "update_submission_envelope_mapping": {
+  "client_id": "client_id",
+  "round_id": "round_id",
+  "base_state_digest": "base_global_state_sha256",
+  "update_digest": "update_sha256",
+  "examples_seen": "examples_seen"
+ }
+}

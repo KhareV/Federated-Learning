@@ -1,0 +1,78 @@
+{
+ "contract_id": "CAPSTONE_MODEL_REGISTRY_CONTRACT_V1",
+ "contract_version": "CAPSTONE_MODEL_REGISTRY_V1",
+ "status": "FROZEN_INTERFACE_CONTRACT",
+ "python_interface": "product/models/registry_contract.py",
+ "namespaces": {
+  "RELEASED_SCIENTIFIC": {
+   "frozen": true,
+   "members": [
+    "MODEL_V1",
+    "MODEL_V2_FINAL"
+   ]
+  },
+  "CAPSTONE_FL_CANDIDATE": {
+   "id_pattern": "^CAPSTONE_FL_CANDIDATE_\\d{4}$",
+   "examples": [
+    "CAPSTONE_FL_CANDIDATE_0001",
+    "CAPSTONE_FL_CANDIDATE_0002"
+   ],
+   "classification": "engineering/demo federated candidates; not scientific releases; not automatically deployed"
+  }
+ },
+ "released_models": {
+  "MODEL_V2_FINAL": {
+   "role": "RELEASED_DEFAULT"
+  },
+  "MODEL_V1": {
+   "role": "ROLLBACK_REFERENCE"
+  }
+ },
+ "released_default_model_id": "MODEL_V2_FINAL",
+ "candidate_fields": [
+  "candidate_id",
+  "parent_model_id",
+  "federation_run_id",
+  "round",
+  "algorithm",
+  "client_count",
+  "created_at_us",
+  "state_digest",
+  "validation_status",
+  "governance_status",
+  "sandbox_status",
+  "production_deployed",
+  "claim_boundary"
+ ],
+ "validation_statuses": [
+  "PENDING",
+  "RUNNING",
+  "PASSED",
+  "FAILED"
+ ],
+ "sandbox_statuses": [
+  "NOT_IN_SANDBOX",
+  "IN_SANDBOX",
+  "ARCHIVED"
+ ],
+ "production_deployed": false,
+ "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+ "binding_rules": {
+  "candidate_can_bind_into_default_runtime": false,
+  "candidate_can_replace_model_v2_final": false,
+  "default_runtime_binding_unchanged": "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json"
+ },
+ "sandbox_runtime_boundary": {
+  "name": "CAPSTONE_FL_SANDBOX_RUNTIME",
+  "implemented_now": false,
+  "owner_phase": "CAP-008 (only if a candidate is ever exercised for inference)",
+  "properties": [
+   "research/demo only",
+   "isolated from the released monitoring plane",
+   "separate app and port",
+   "never the /app/monitoring path",
+   "explicit sandbox banner on every response"
+  ],
+  "released_runtime_selector_added": false
+ }
+}

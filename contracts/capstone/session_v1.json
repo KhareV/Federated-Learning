@@ -1,0 +1,91 @@
+{
+ "contract_id": "CAPSTONE_SESSION_CONTRACT_V1",
+ "contract_version": "CAPSTONE_SESSION_V1",
+ "status": "FROZEN_INTERFACE_CONTRACT",
+ "python_interface": "product/session.py",
+ "session_states": [
+  "CREATED",
+  "DEVICE_READY",
+  "MONITORING",
+  "STOPPING",
+  "COMPLETED",
+  "FAILED"
+ ],
+ "session_transitions": {
+  "CREATED": [
+   "DEVICE_READY",
+   "FAILED"
+  ],
+  "DEVICE_READY": [
+   "MONITORING",
+   "FAILED"
+  ],
+  "MONITORING": [
+   "STOPPING",
+   "FAILED"
+  ],
+  "STOPPING": [
+   "COMPLETED",
+   "FAILED"
+  ],
+  "COMPLETED": [],
+  "FAILED": []
+ },
+ "terminal_states": [
+  "COMPLETED",
+  "FAILED"
+ ],
+ "pause_state": "NOT_DEFINED (no concrete requirement; a PAUSED state needs an additive contract successor)",
+ "identity_fields": [
+  "session_id",
+  "user_id",
+  "device_id",
+  "device_adapter_type",
+  "source_dataset_id",
+  "source_mode",
+  "created_at_us",
+  "started_at_us",
+  "ended_at_us",
+  "state",
+  "runtime",
+  "simulation_provenance"
+ ],
+ "runtime_identity_fields": [
+  "model_id",
+  "calibration_id",
+  "preprocess_id",
+  "alert_policy_id",
+  "alert_policy_binding_id",
+  "gateway_artifact_id",
+  "api_contract_version",
+  "software_system_id"
+ ],
+ "required_runtime_identity": {
+  "model_id": "MODEL_V2_FINAL",
+  "calibration_id": "CAL_V2",
+  "preprocess_id": "PREPROC_V1",
+  "alert_policy_id": "ALERT_POLICY_V1",
+  "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+  "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+  "api_contract_version": "API_SCHEMA_V1",
+  "software_system_id": "SOFTWARE_SYSTEM_V2"
+ },
+ "runtime_identity_source": "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json identity block (frozen, read-only reference)",
+ "immutability": {
+  "runtime_identity_fixed_at_creation": true,
+  "mid_session_change_allowed": false,
+  "only_state_and_lifecycle_timestamps_change": true,
+  "per_user_runtime_selection_allowed": false
+ },
+ "simulation_provenance_fields": [
+  "scenario_id",
+  "seed",
+  "simulation_version"
+ ],
+ "device_session_relationship": "Device link events (disconnect/reconnect) do NOT change session state; a MONITORING session stays MONITORING while its device reconnects (device.status events carry the link state). Retry exhaustion or an unrecoverable device error moves the session to FAILED.",
+ "timestamps": "microseconds; created/started/ended are product-clock times, event timelines use source_timestamp_us",
+ "runtime_identity_field_notes": {
+  "gateway_artifact_id": "the prompt's gateway_id (GATEWAY_ARTIFACT_V2)",
+  "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING"
+ }
+}

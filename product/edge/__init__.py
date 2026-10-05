@@ -1,0 +1,1 @@
+"""Edge-node abstraction (EDGE_NODE_CONTRACT_V1, LOCAL_TRAINING_BUFFER_CONTRACT_V1)."""

@@ -1,0 +1,408 @@
+{
+ "protocol_id": "CAPSTONE_PRODUCT_PROTOCOL_V1",
+ "status": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL",
+ "owner_task": "CAP-001",
+ "gate": "CAPG0",
+ "purpose": "Freeze the FL-first architecture, contracts and control plane of the faculty-demonstrable NHM federated physiological-monitoring capstone, as an additive layer above the frozen SOFTWARE_SYSTEM_V2.",
+ "science_statement": "CAP-001 DOES NOT change the frozen NHM science, models, calibration, thresholds, preprocessing, alert policy, gateway, API schema, FL lineage or release evidence.",
+ "upstream": {
+  "expected_entry_anchor": "8bbc0e1e17e314748ad7127544e46d8305efeb0c",
+  "software_system": "SOFTWARE_SYSTEM_V2",
+  "default_runtime_binding": "DEFAULT_RUNTIME_BINDING_V2",
+  "rollback_binding": "ROLLBACK_RUNTIME_BINDING_V1",
+  "inference_identity": {
+   "model": "MODEL_V2_FINAL",
+   "calibration": "CAL_V2",
+   "gateway": "GATEWAY_ARTIFACT_V2",
+   "preprocess": "PREPROC_V1",
+   "alert_policy_binding": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+   "api": "API_SCHEMA_V1"
+  },
+  "historical_facts_preserved": {
+   "MODEL_V2_NOT_PROMOTED_RELEASE_CI": true,
+   "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED": true,
+   "relationship": "independent facts; neither replaces the other"
+  }
+ },
+ "protected_components": [
+  "MODEL_V1",
+  "CAL_V1",
+  "GATEWAY_ARTIFACT_V1",
+  "MODEL_V2_FINAL",
+  "CAL_V2",
+  "GAP_POLICY_V1",
+  "GATEWAY_ARTIFACT_V2",
+  "PREPROC_V1",
+  "QUALITY_V1",
+  "ECG_HR_CONTEXT_V2",
+  "ALERT_POLICY_V1",
+  "ALERT_POLICY_V1_MODEL_V2_BINDING",
+  "API_SCHEMA_V1",
+  "API_RUNTIME_V2",
+  "API_RUNTIME_V2_1",
+  "DEFAULT_RUNTIME_BINDING_V2",
+  "ROLLBACK_RUNTIME_BINDING_V1",
+  "SOFTWARE_SYSTEM_V2",
+  "MODEL_V2_FL_PROTOCOL_V1",
+  "MODEL_V2_FL_PROTOCOL_V2",
+  "FL_INIT_V2",
+  "FL_IID_MODEL_V2_V1",
+  "FL_NON_IID_MODEL_V2_V1",
+  "FEDPROX_METHOD_V2",
+  "FEDPROX_MU_V2",
+  "V2_FL_EVAL_PROTOCOL_V1",
+  "V2_FL_TEST_FAMILY_V1",
+  "SECAGG_METHOD_V2",
+  "SECAGG_CONFIG_V2",
+  "WEARABLE_SIM_FL_COHORT_V1",
+  "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+  "WEARABLE_SIM_FL_SYSTEM_REPLAY_V1",
+  "VIRTUAL_FL_CLIENT_SOURCE_V1",
+  "WEARABLE_SIM_FL_SECAGG_COMPAT_V1",
+  "MODEL_V2_COMPLETE_REPRO_PROTOCOL_V1",
+  "MODEL_V2_COMPLETE_REPRO_V1",
+  "SYSTEM_V2_RELEASE_POLICY_V1",
+  "SYSTEM_V2_RELEASE_DECISION_V1",
+  "SYSTEM_V2_RELEASE_MANIFEST_V1"
+ ],
+ "protected_rule": "No byte or semantic change; no in-place regeneration; additive successors only.",
+ "architecture": {
+  "layering": "Browser/product frontend -> CAPSTONE PRODUCT API -> device/session/stream orchestration -> existing source-to-window runtime -> internal inference client -> POST /v1/infer-window -> SOFTWARE_SYSTEM_V2 -> typed response -> product event translation -> WebSocket -> frontend",
+  "device_boundary": "DeviceSource (SimulatedWearableSource | FutureRealWearableSource) -> ObservedRecord -> existing WearableStreamRuntime",
+  "forbidden_paths": [
+   "simulator -> fake dashboard values",
+   "simulator -> separate ML pipeline",
+   "frontend -> locally fabricated model output",
+   "product routes on the frozen inference API",
+   "API_SCHEMA_V2",
+   "direct MODEL_V2 import bypassing /v1/infer-window",
+   "federated candidate -> DEFAULT_RUNTIME_BINDING_V2",
+   "public model/candidate selector on the released runtime",
+   "SimulationTruth -> live inference path",
+   "prediction -> label -> retraining -> automatic deployment"
+  ],
+  "frontend_foundation": "existing frontend/ SvelteKit app is the ONLY frontend foundation; planned additive successor CAPSTONE_UI_V1; no second frontend, no framework migration, no duplicated dashboard components, existing V2 replay integration retained"
+ },
+ "no_per_user_training": {
+  "live_model_for_all_users": "MODEL_V2_FINAL",
+  "user_data": [
+   "account",
+   "devices",
+   "sessions",
+   "history summaries",
+   "preferences"
+  ],
+  "identity_modifies": [],
+  "self_learning": false,
+  "training_on_own_predictions": false
+ },
+ "live_vs_fl": {
+  "live_loop": "Device -> ObservedRecord -> preprocessing/windowing -> MODEL_V2_FINAL -> CAL_V2 -> alert/state logic -> dashboard",
+  "fl_loop": "distributed research clients -> local training -> updates -> aggregation / SecAgg research pathway -> research model state/evidence",
+  "fl_replaces_live_model": false,
+  "fl_checkpoint_deployed": false,
+  "synthetic_trained_state_deployed": false,
+  "device_wearer_becomes_fl_client": false,
+  "fl_views": {
+   "FL_SCIENTIFIC_EVIDENCE": [
+    "V2-FL-001",
+    "V2-FL-002",
+    "V2-FL-003",
+    "V2-FL-EVAL-001",
+    "V2-FL-004"
+   ],
+   "FL_ENGINEERING_DEMO": "V2-FL-005 (8 virtual clients, 3 rounds, 24 canonical local updates, routing, restart/resume, SecAgg shadow)"
+  },
+  "new_fl_experiment_allowed": false,
+  "synthetic_fl_accuracy_reported": false,
+  "no_continual_production_learning": true,
+  "continual_sandbox_allowed": "interactive multi-round federated model-development with new simulated batches and governed candidates",
+  "candidate_deployment_path": "none; a candidate can only be exercised in the isolated CAPSTONE_FL_SANDBOX_RUNTIME (later phase), never /app/monitoring"
+ },
+ "hardware": {
+  "physical_hardware_available": false,
+  "deferred": [
+   "ESP32 firmware",
+   "BLE transport",
+   "serial transport",
+   "WEARABLE_V1 evidence",
+   "T004 closure",
+   "T030",
+   "T036"
+  ],
+  "simulated_source": "genuine DeviceSource implementation emitting ObservedRecord (CAP-002), never fake frontend values",
+  "replacement_boundary_document": "docs/capstone/REAL_HARDWARE_REPLACEMENT_BOUNDARY_V1.md"
+ },
+ "offline_faculty_mode": {
+  "hard_requirement": true,
+  "single_laptop": true,
+  "must_not_depend_on": [
+   "physical hardware",
+   "cloud ML inference",
+   "remote database",
+   "remote federation server",
+   "Clerk availability",
+   "internet access"
+  ],
+  "offline_stack": [
+   "DemoAuthProvider",
+   "SQLite",
+   "SimulatedWearableSource",
+   "VirtualEdgeNode",
+   "local FL clients",
+   "localhost inference service",
+   "localhost product service",
+   "existing SvelteKit frontend"
+  ]
+ },
+ "technology_policy": {
+  "preferred": {
+   "frontend": "existing SvelteKit + TypeScript",
+   "runtime": "existing Python + FastAPI",
+   "product_api": "FastAPI",
+   "live_transport": "WebSocket",
+   "persistence": "SQLite (local)",
+   "ml": "existing TorchScript MODEL_V2 gateway",
+   "simulation": "existing WEARABLE_SIM implementation and successors",
+   "fl": "existing Flower 1.39 / project FL code",
+   "serving": "Uvicorn + existing frontend tooling"
+  },
+  "forbidden_without_demonstrated_necessity": [
+   "Kafka",
+   "Redis",
+   "RabbitMQ",
+   "Celery",
+   "Kubernetes",
+   "Docker Swarm",
+   "microservice orchestration",
+   "new ML framework",
+   "new frontend framework",
+   "new database server"
+  ]
+ },
+ "claim_boundary": {
+  "allowed": [
+   "federated physiological-monitoring research platform",
+   "quality-aware live monitoring",
+   "real local model inference",
+   "real federated local training",
+   "real FedAvg/FedProx research implementation",
+   "SecAgg protected-aggregation engineering path",
+   "simulated wearable",
+   "simulated edge clients",
+   "model governance",
+   "hardware-ready source abstraction",
+   "research prototype"
+  ],
+  "forbidden": [
+   "diagnosis",
+   "clinical decision support",
+   "patient-specific validated model",
+   "continual clinical learning",
+   "real wearable validation",
+   "hospital deployment",
+   "medical-device certification",
+   "differential privacy",
+   "general privacy guarantee",
+   "federated candidate clinically superior",
+   "synthetic efficacy"
+  ]
+ },
+ "phase_sequence": [
+  {
+   "task": "CAP-001",
+   "title": "FL-first product architecture / contract freeze"
+  },
+  {
+   "task": "CAP-002",
+   "title": "Simulated wearable + virtual edge node"
+  },
+  {
+   "task": "CAP-003",
+   "title": "Product API + live monitoring streaming"
+  },
+  {
+   "task": "CAP-004",
+   "title": "Auth + persistence + session lifecycle"
+  },
+  {
+   "task": "CAP-005",
+   "title": "Existing frontend productization"
+  },
+  {
+   "task": "CAP-006",
+   "title": "Local training buffer + federated client product adapter"
+  },
+  {
+   "task": "CAP-007",
+   "title": "Live federation orchestrator + candidate model registry"
+  },
+  {
+   "task": "CAP-008",
+   "title": "Federation dashboard + model governance UX"
+  },
+  {
+   "task": "CAP-009",
+   "title": "Session history + scientific ML/FL evidence experience"
+  },
+  {
+   "task": "CAP-010",
+   "title": "Complete faculty E2E demo"
+  },
+  {
+   "task": "CAP-011",
+   "title": "One-laptop clean capstone release"
+  }
+ ],
+ "only_next_phase_allowed_after_capg0": "CAP-002",
+ "test_strategy": {
+  "cap_001": "contract tests that exercise the production contract definitions (tests/test_capstone_contracts.py, tests/test_capstone_federation_contracts.py)",
+  "later_phases": "each connection-table edge names its own test_strategy; every phase re-runs the protected-artifact audit with zero drift",
+  "ci": "deferred (not queried, not triggered)"
+ },
+ "phase_acceptance_rules": [
+  "method/contract freeze commit precedes result evidence",
+  "protected-artifact audit shows zero drift at entry and result",
+  "targeted tests + full existing regression + ruff + pip check pass",
+  "repository clean and pushed",
+  "no later phase is started or marked PASS",
+  "any contract change after freeze is an additive successor",
+  "frontend tests/check/build run unchanged (CAP-001 modifies no frontend behavior)"
+ ],
+ "contracts": {
+  "CAPSTONE_PRODUCT_PROTOCOL_V1": "configs/capstone/capstone_product_protocol_v1.json",
+  "DEVICE_SOURCE_CONTRACT_V1": "contracts/capstone/device_source_v1.json",
+  "EDGE_NODE_CONTRACT_V1": "contracts/capstone/edge_node_v1.json",
+  "LOCAL_TRAINING_BUFFER_CONTRACT_V1": "contracts/capstone/local_training_buffer_v1.json",
+  "CAPSTONE_FL_CLIENT_CONTRACT_V1": "contracts/capstone/fl_client_v1.json",
+  "CAPSTONE_FEDERATION_CONTRACT_V1": "contracts/capstone/federation_v1.json",
+  "CAPSTONE_FL_RUN_CONTRACT_V1": "contracts/capstone/fl_run_v1.json",
+  "CAPSTONE_MODEL_REGISTRY_CONTRACT_V1": "contracts/capstone/model_registry_v1.json",
+  "CAPSTONE_MODEL_GOVERNANCE_V1": "contracts/capstone/model_governance_v1.json",
+  "PRODUCT_API_CONTRACT_V1": "contracts/capstone/product_api_v1.json",
+  "PRODUCT_LIVE_EVENT_V1": "contracts/capstone/live_event_v1.json",
+  "CAPSTONE_SESSION_CONTRACT_V1": "contracts/capstone/session_v1.json",
+  "CAPSTONE_AUTH_POLICY_V1": "contracts/capstone/auth_policy_v1.json",
+  "CAPSTONE_STORAGE_POLICY_V1": "contracts/capstone/storage_policy_v1.json",
+  "CAPSTONE_DEMO_SCENARIOS_V1": "contracts/capstone/demo_scenarios_v1.json",
+  "REAL_HARDWARE_REPLACEMENT_BOUNDARY_V1": "contracts/capstone/real_hardware_replacement_v1.json",
+  "CAPSTONE_CONNECTION_TABLE_V1": "contracts/capstone/connection_table_v1.json"
+ },
+ "framing": {
+  "is": "a federated physiological-monitoring platform in which local edge nodes perform live monitoring using a released model while participating, separately and under governance, in federated model-development workflows",
+  "is_not": "an ECG monitoring website with an FL research page"
+ },
+ "planes": [
+  {
+   "plane": 1,
+   "id": "PRODUCT_USER_PLANE",
+   "contents": "existing SvelteKit frontend extended additively (CAPSTONE_UI_V1): authentication, device attachment, live monitoring, session history, federation, model registry, research evidence, system/architecture, limitations",
+   "implementation_phases": [
+    "CAP-005",
+    "CAP-008",
+    "CAP-009"
+   ]
+  },
+  {
+   "plane": 2,
+   "id": "EDGE_CLIENT_PLANE",
+   "contents": "DeviceSource -> ObservedRecord -> local stream processing -> live MODEL_V2_FINAL inference -> monitoring events; separately: local training buffer -> federated local trainer -> model update",
+   "inference_and_training_paths_separate": true,
+   "implementation_phases": [
+    "CAP-002",
+    "CAP-006"
+   ]
+  },
+  {
+   "plane": 3,
+   "id": "FEDERATION_PLANE",
+   "contents": "Clients 00..07 -> local training -> update submission -> FedAvg/FedProx -> SecAgg+ protected aggregation where applicable -> candidate global model state",
+   "implementation_phases": [
+    "CAP-007"
+   ]
+  },
+  {
+   "plane": 4,
+   "id": "MODEL_GOVERNANCE_PLANE",
+   "contents": "candidate global model -> candidate registry -> engineering/validation gate -> ACCEPT or REJECT -> sandbox model version / archived candidate",
+   "federated_output_replaces_released_model": false,
+   "implementation_phases": [
+    "CAP-007",
+    "CAP-008"
+   ]
+  },
+  {
+   "plane": 5,
+   "id": "RELEASED_MONITORING_PLANE",
+   "contents": [
+    "SOFTWARE_SYSTEM_V2",
+    "MODEL_V2_FINAL",
+    "GATEWAY_ARTIFACT_V2",
+    "CAL_V2",
+    "PREPROC_V1",
+    "QUALITY_V1",
+    "ECG_HR_CONTEXT_V2",
+    "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "API_SCHEMA_V1"
+   ],
+   "frozen": true
+  }
+ ],
+ "historical_facts_preserved": {
+  "MODEL_V2_NOT_PROMOTED_RELEASE_CI": true,
+  "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED": true,
+  "relationship": "independent facts; neither replaces the other",
+  "MODEL_V2_FINAL_centrally_trained": true,
+  "default_checkpoint_is_federated": false,
+  "v2_fl_lineage_role": "research/model-development evidence",
+  "V2_FL_005_is": "engineering evidence only (synthetic wearable federation)",
+  "secagg_evidence_is": "a narrow protected-aggregation-interface result",
+  "differential_privacy_claim": false,
+  "clinical_deployment_claim": false,
+  "CAL_V2": "source-domain calibration",
+  "QUALITY_V1": "retains its frozen limitations",
+  "physical_WEARABLE_V1_validation": false
+ },
+ "protected_evidence": [
+  "V2-FL-001",
+  "V2-FL-002",
+  "V2-FL-003",
+  "V2-FL-EVAL-001",
+  "V2-FL-004",
+  "V2-FL-005",
+  "V2-014",
+  "V2-REL-001",
+  "all held-out prediction tables",
+  "all one-shot guards",
+  "all historical failures and negative findings"
+ ],
+ "simulation_truth_boundary": {
+  "never_consumed_by": [
+   "live preprocessing",
+   "QUALITY_V1",
+   "MODEL_V2 inference",
+   "CAL_V2",
+   "alert/state logic",
+   "product monitoring API",
+   "live dashboard"
+  ],
+  "may_be_consumed_by": "SIMULATION_LABEL_ADAPTER_V1 only, to build LOCAL training labels in the federated sandbox",
+  "enforced_by": "AST import-boundary test over api/, fusion/, preprocessing/, deployment/, product/ and the live stream runtime",
+  "real_label_limitation": "future real-wearable data has no automatic supervised label; a separately validated label source is VERIFICATION_REQUIRED"
+ },
+ "fl_first_navigation": "Federation is a top-level product section (/app/federation/*), plus /app/models; not buried under Research",
+ "federation_requirements": {
+  "genuine_executable_fl_demo_required": true,
+  "replay_instant_mode_may_coexist": true,
+  "modes_visibly_identified": true,
+  "reuse_existing_v2_fl": true,
+  "new_fl_implementation": false,
+  "eight_client_cohort_reused": true,
+  "four_client_experiment": false
+ },
+ "canonical_representation": {
+  "static vocabularies, transitions, routes, policies, scenarios": "contracts/capstone/*.json (authoritative); product/ enums only name them and tests prove parity",
+  "live event union": "product/events.py (authoritative); contracts/capstone/live_event_v1.schema.json is GENERATED and parity-tested",
+  "typed records (descriptor, event, edge identity, buffer record, FL client identity, run, round, candidate, decision, session, scenario)": "pydantic models in product/ validated against the JSON vocabularies"
+ }
+}

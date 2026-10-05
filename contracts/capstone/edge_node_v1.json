@@ -1,0 +1,117 @@
+{
+ "contract_id": "EDGE_NODE_CONTRACT_V1",
+ "contract_version": "EDGE_NODE_V1",
+ "status": "FROZEN_INTERFACE_CONTRACT",
+ "python_interface": "product/edge/base.py::EdgeNode",
+ "kinds": {
+  "VIRTUAL_EDGE_NODE": {
+   "simulation": true,
+   "implemented_in": "CAP-002"
+  },
+  "REAL_EDGE_GATEWAY": {
+   "simulation": false,
+   "implemented_in": "outside the capstone lineage (after hardware exists)"
+  }
+ },
+ "identity_fields": [
+  "edge_node_id",
+  "kind",
+  "device_id",
+  "fl_client_id",
+  "participant_id",
+  "simulation"
+ ],
+ "owns": [
+  "device source",
+  "stream/session coordinator",
+  "live inference connection",
+  "local training-buffer boundary",
+  "FL client identity"
+ ],
+ "wearable_vs_fl_client": {
+  "wearable": "acquisition source (DeviceSource)",
+  "fl_client": "edge compute entity (EdgeNode hosting the FL client)",
+  "today": "Virtual Wearable -> Virtual Edge Node -> FL Client",
+  "future": "Physical Wearable -> phone / laptop / edge gateway -> FL Client",
+  "sensor_runs_pytorch_training": false,
+  "statement": "An ESP32-class sensor is never architected to execute the PyTorch training stack."
+ },
+ "data_flows": {
+  "live_inference_flow": "DeviceSource -> ObservedRecord -> existing WearableStreamRuntime -> inference client -> POST /v1/infer-window (MODEL_V2_FINAL) -> product monitoring events",
+  "local_training_flow": "ObservedRecord (tee) + SIMULATION_LABEL_ADAPTER_V1 labels -> LOCAL_TRAINING_BUFFER -> federated local trainer -> UpdateSubmission",
+  "shared_mutable_state": false,
+  "training_may_alter_live_session_state": false,
+  "buffer_write_direction": "one-way from the observed stream into the buffer; the live path never reads the buffer",
+  "training_label_input_to_live_path": false
+ },
+ "methods": {
+  "start_live_monitoring": {
+   "async": true,
+   "args": [
+    "session_id"
+   ]
+  },
+  "stop_live_monitoring": {
+   "async": true,
+   "args": []
+  }
+ },
+ "properties": [
+  "identity",
+  "device_source",
+  "training_buffer"
+ ],
+ "simulated_cohort_mapping": {
+  "decision": "REUSE_EXISTING_COHORT_DIRECTLY",
+  "mapping": [
+   {
+    "fl_client_id": "SIM_FL_SITE_00",
+    "participant_id": "SIM_P000101",
+    "edge_node_id": "VIRTUAL_EDGE_NODE_00"
+   },
+   {
+    "fl_client_id": "SIM_FL_SITE_01",
+    "participant_id": "SIM_P000102",
+    "edge_node_id": "VIRTUAL_EDGE_NODE_01"
+   },
+   {
+    "fl_client_id": "SIM_FL_SITE_02",
+    "participant_id": "SIM_P000103",
+    "edge_node_id": "VIRTUAL_EDGE_NODE_02"
+   },
+   {
+    "fl_client_id": "SIM_FL_SITE_03",
+    "participant_id": "SIM_P000104",
+    "edge_node_id": "VIRTUAL_EDGE_NODE_03"
+   },
+   {
+    "fl_client_id": "SIM_FL_SITE_04",
+    "participant_id": "SIM_P000105",
+    "edge_node_id": "VIRTUAL_EDGE_NODE_04"
+   },
+   {
+    "fl_client_id": "SIM_FL_SITE_05",
+    "participant_id": "SIM_P000106",
+    "edge_node_id": "VIRTUAL_EDGE_NODE_05"
+   },
+   {
+    "fl_client_id": "SIM_FL_SITE_06",
+    "participant_id": "SIM_P000107",
+    "edge_node_id": "VIRTUAL_EDGE_NODE_06"
+   },
+   {
+    "fl_client_id": "SIM_FL_SITE_07",
+    "participant_id": "SIM_P000108",
+    "edge_node_id": "VIRTUAL_EDGE_NODE_07"
+   }
+  ],
+  "source_modules": [
+   "simulation/fl_cohort_v1.py (client_id(), client_profile())",
+   "federated/virtual_client_source_v1.py",
+   "manifests/model_v2/WEARABLE_SIM_FL_COHORT_V1.json"
+  ],
+  "evidence": "V2-FL-005 (SIM_FL_SITE_00..07 / SIM_P000101..108, 480 s sessions at 360 Hz)",
+  "additive_capstone_adapter_needed_for": "new local batches only (new seeds via the same generator; CAP-006). The frozen cohort and its manifest are never modified; no second incompatible eight-client universe is created.",
+  "four_client_experiment_allowed": false
+ }
+}

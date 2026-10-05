@@ -8,6 +8,7 @@ byte-identical, and every new file must live inside the additive capstone namesp
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import subprocess
 import sys
@@ -24,7 +25,7 @@ ADDITIVE_PREFIXES = (
 )
 # Named protected components (CAP-001 prompt section 3) -> registry / lock evidence.
 PROTECTED_COMPONENTS = (
-    "MODEL_V1", "CAL_V1", "GATEWAY_ARTIFACT_V1", "MODEL_V2_FINAL", "CAL_V2",
+    "MODEL_V1", "CAL_V1", "GATEWAY_ARTIFACT_V1", "MODEL_V2_FINAL", "CAL_V2", "GAP_POLICY_V1",
     "GATEWAY_ARTIFACT_V2", "PREPROC_V1", "QUALITY_V1", "ECG_HR_CONTEXT_V2", "ALERT_POLICY_V1",
     "ALERT_POLICY_V1_MODEL_V2_BINDING", "API_SCHEMA_V1", "API_RUNTIME_V2", "API_RUNTIME_V2_1",
     "DEFAULT_RUNTIME_BINDING_V2", "ROLLBACK_RUNTIME_BINDING_V1", "SOFTWARE_SYSTEM_V2",
@@ -42,8 +43,15 @@ NAMED_PATH_OVERRIDES = {
     "MODEL_V1": ("checkpoints/MODEL_V1.pt",),
     "PREPROC_V1": ("manifests/preprocessing/PREPROC_V1.lock.json",),
     "QUALITY_V1": ("configs/quality_v1.yaml",),
+    "GAP_POLICY_V1": ("preprocessing/gaps.py",),
     "API_SCHEMA_V1": ("contracts/API_SCHEMA_V1.json",),
 }
+# Frozen evidence directories (V2 FL lineage, reproducibility, release): digest of all file hashes.
+EVIDENCE_DIRECTORIES = (
+    "reports/model_v2/v2_fl_001", "reports/model_v2/v2_fl_002", "reports/model_v2/v2_fl_003",
+    "reports/model_v2/v2_fl_eval_001", "reports/model_v2/v2_fl_004", "reports/model_v2/v2_fl_005",
+    "reports/model_v2/v2_014", "reports/model_v2/v2_rel_001",
+)
 EXTRA_PROTECTED_FILES = (
     "contracts/API_SCHEMA_V1.json", "contracts/openapi_v1.json", "contracts/sample_schema_v1.json",
     "checkpoints/MODEL_V2_FINAL.pt", "artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts",
@@ -85,6 +93,13 @@ def named_components() -> dict[str, dict[str, object]]:
     for extra in EXTRA_PROTECTED_FILES:
         out[extra] = {"path": extra, "sha256": hash_file(ROOT / extra),
                       "in_v2_component_registry": False}
+    for directory in EVIDENCE_DIRECTORIES:
+        files = sorted(p for p in (ROOT / directory).rglob("*") if p.is_file())
+        digest = hashlib.sha256()
+        for path in files:
+            digest.update(f"{path.relative_to(ROOT)}:{hash_file(path)}\n".encode())
+        out[directory] = {"path": directory, "sha256": digest.hexdigest(),
+                          "file_count": len(files), "in_v2_component_registry": False}
     return out
 
 
@@ -97,18 +112,18 @@ def entry() -> None:
         "tracked_files_sha256": tree,
     }
     text = json.dumps(payload, indent=1, sort_keys=True) + "\n"
-    (OUT / "protected_artifact_entry.json").write_text(text)
+    (OUT / "upstream_protection_entry.json").write_text(text)
     unresolved = [k for k, v in payload["named_components"].items() if v["sha256"] is None]
     print(json.dumps({"entry_sha": head, "tracked": len(tree), "unresolved_named": unresolved}))
 
 
 def final() -> int:
-    entry_payload = json.loads((OUT / "protected_artifact_entry.json").read_text())
+    entry_payload = json.loads((OUT / "upstream_protection_entry.json").read_text())
     base: dict[str, str] = entry_payload["tracked_files_sha256"]
     now = tracked_hashes()
     changed = sorted(p for p, h in base.items() if p in now and now[p] != h)
     removed = sorted(p for p in base if p not in now)
-    # protected_artifact_entry.json itself is created in the additive namespace, so it is absent
+    # upstream_protection_entry.json itself is created in the additive namespace, so it is absent
     # from `base`; every added path must be additive-namespace.
     added = sorted(p for p in now if p not in base)
     non_additive = [p for p in added if not p.startswith(ADDITIVE_PREFIXES)]
@@ -124,7 +139,7 @@ def final() -> int:
             changed or removed or non_additive or comp_drift),
     }
     text = json.dumps(result, indent=1, sort_keys=True) + "\n"
-    (OUT / "protected_artifact_final.json").write_text(text)
+    (OUT / "upstream_protection_final.json").write_text(text)
     print(json.dumps({k: v for k, v in result.items()}, indent=1))
     return 1 if result["protected_artifact_drift"] else 0
 

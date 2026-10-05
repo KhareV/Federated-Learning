@@ -72,6 +72,11 @@
    "path": "configs/model_v2/fl_non_iid_model_v2_v1.yaml",
    "sha256": "3901b0ebd8be3b8009fb8a8302e4f6409142f7f78d583f21d1c77a57bfc6977b"
   },
+  "GAP_POLICY_V1": {
+   "in_v2_component_registry": false,
+   "path": "preprocessing/gaps.py",
+   "sha256": "ae97a023b348fb7d6f89f90b15d8a1eacc91e18637b028bdc27d90f286b97830"
+  },
   "GATEWAY_ARTIFACT_V1": {
    "in_v2_component_registry": false,
    "path": "artifacts/GATEWAY_ARTIFACT_V1.lock.json",
@@ -237,6 +242,54 @@
    "path": "contracts/sample_schema_v1.json",
    "sha256": "234b1f49ef6f8581f576e5cb4741c457c0d4703d527f435f0af2974658f4cb38"
   },
+  "reports/model_v2/v2_014": {
+   "file_count": 73,
+   "in_v2_component_registry": false,
+   "path": "reports/model_v2/v2_014",
+   "sha256": "1fce245cdf3590ad131b021dc07bc280ce279fe0193112ee6979753ea44b9f96"
+  },
+  "reports/model_v2/v2_fl_001": {
+   "file_count": 31,
+   "in_v2_component_registry": false,
+   "path": "reports/model_v2/v2_fl_001",
+   "sha256": "d704d43e49bd8fe1408fd6766ac3e3d5badfdba8eb5e70f8a81716efccecd4a0"
+  },
+  "reports/model_v2/v2_fl_002": {
+   "file_count": 50,
+   "in_v2_component_registry": false,
+   "path": "reports/model_v2/v2_fl_002",
+   "sha256": "4bf1a5f079069b81a98aa6aa221001341ac78e253df25238c1233fc0aab37bf2"
+  },
+  "reports/model_v2/v2_fl_003": {
+   "file_count": 67,
+   "in_v2_component_registry": false,
+   "path": "reports/model_v2/v2_fl_003",
+   "sha256": "8d2ad960f0cf6c8338d544ceec427056118b85ae548941e3d552e8373cfaa016"
+  },
+  "reports/model_v2/v2_fl_004": {
+   "file_count": 35,
+   "in_v2_component_registry": false,
+   "path": "reports/model_v2/v2_fl_004",
+   "sha256": "1acadb8a065e8a10ee0b82a765978e7548c290ec093d8dca244cdadae2027f5b"
+  },
+  "reports/model_v2/v2_fl_005": {
+   "file_count": 33,
+   "in_v2_component_registry": false,
+   "path": "reports/model_v2/v2_fl_005",
+   "sha256": "4723c4eff262946ca78091548d8d71ccb613a4b39af6a846d02782d2e7b75e41"
+  },
+  "reports/model_v2/v2_fl_eval_001": {
+   "file_count": 75,
+   "in_v2_component_registry": false,
+   "path": "reports/model_v2/v2_fl_eval_001",
+   "sha256": "b51ddcd49cd727837ce6dbf585e373b1cadd849206ec9159f6dc0500979b34b1"
+  },
+  "reports/model_v2/v2_rel_001": {
+   "file_count": 67,
+   "in_v2_component_registry": false,
+   "path": "reports/model_v2/v2_rel_001",
+   "sha256": "dad12c053cc194cd593a39eb696d466d7d05f064150da2c32803ad648eace7a4"
+  },
   "simulation/stream_runtime_v2013.py": {
    "in_v2_component_registry": false,
    "path": "simulation/stream_runtime_v2013.py",
@@ -248,6 +301,7 @@
    "sha256": "6fea1df3b01ab3a8b39e7af1b6c972bcb1218e19019823cab84fa9b88dad8b43"
   }
  },
+ "named_components_note": "Named-component hashes recomputed after the CAP-001 scope revision (GAP_POLICY_V1 and V2-FL/V2-014/V2-REL evidence-directory digests added). `git diff 8bbc0e1..HEAD` at that time listed only additive capstone paths, so the values equal the anchor state. tracked_files_sha256 is the original anchor-state map.",
  "tracked_file_count": 3094,
  "tracked_files_sha256": {
   ".env.example": "2cda04f860e619d71b17a76fc32d9686ef0086d043dcaf7b5f252d0803f3351b",

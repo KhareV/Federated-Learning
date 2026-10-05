@@ -1,0 +1,150 @@
+{
+ "bound_files": {
+  "contracts/capstone/connection_table_v1.json": "31755461a8abbe439a171749b99f711aa37ecd4a721429fc55fc7ef3c633e0ab",
+  "contracts/capstone/live_event_v1.schema.json": "fb5c920b72debb223a2c9a67a16be9743ad97b7286ab288334dbc49dc3d8cb2b",
+  "docs/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.md": "7a465e3f46ea3cf71e1091fa1c66180c420bd2e685cebc79c0925a7a9b8d6888",
+  "docs/capstone/REAL_HARDWARE_REPLACEMENT_BOUNDARY_V1.md": "28b7b46af2c8c6039dd74c879d0c620ad50be1ce482323df1d9d25587aa64e71",
+  "product/__init__.py": "fa9a9eb73ba6a8b19265f8e48d978216fd7fdc535c1d0e0ba62ee1122cd3a06d",
+  "product/auth/__init__.py": "b1dfb285bb9f337fbe3fbca254f00f36fdf1bb859a603d5955124587abcdf292",
+  "product/auth/base.py": "da5f951c421c2764f887547905faef2c49cd1736d0e400c88ad2c3cffc538883",
+  "product/contracts.py": "9cc14bb7b83fd8aefc8a7bb62428156e0cd4d996c1db691bddc9556ba4254a7d",
+  "product/devices/__init__.py": "77e4d2da28b3809cfc8474286b746fc588f967be7f31880f1ff0dbc8ecc20579",
+  "product/devices/base.py": "f6519fc80b1a3c88e1f4a1a1b373d27c18b502a99ddaf9897e3586ece3a60d0d",
+  "product/edge/__init__.py": "bd8b122448736ad6dee1122bcb4319910ce6fddc101d3a9823718660d56ff6e8",
+  "product/edge/base.py": "d3e54d3ad5d7095e4fa47a6c19d6f5e8b22f6399321a8322818e8acbb40f05b1",
+  "product/edge/buffer.py": "07aa4162fe4e2a9e70f02841f8f49d6f4d2734cc48b0015f863fda31fd8a5da1",
+  "product/events.py": "d345174eb807892554b80ad35394557c254aa794fc11db608dfc9017bad53227",
+  "product/federation/__init__.py": "a73a96007cdeadacca71bf1e8598b8e244da380a7510e8805c68d94247e4d196",
+  "product/federation/base.py": "a797bbcc6cc9aedc497ad9b8cf91d0fdd0d86481dfc382627b456db46a0576fe",
+  "product/models/__init__.py": "2c647831e4af222bfe3e6749adaef0eaafcf78a5c92c79f848243e2390658ddf",
+  "product/models/registry_contract.py": "1269f36e8f033b2e8812095e48299c00d9ba31908c2f56502ae32b7d8a58bf4d",
+  "product/session.py": "ae3cc2d20e7627523fd2005d40959842265ee5eeb2535be820e8021775d8c03c",
+  "reports/capstone/cap_001/architecture_graph.md": "49976f1dbebddf8f0090f6b8ae701343db047e46ab5142e072d0d02bc7a228f0",
+  "scripts/cap_001_generate_contracts.py": "0c2a36dc824c9041ad0f98a46c9f33481ff203b65a80524b0727a8e7fa6abe96",
+  "scripts/cap_001_protected_audit.py": "a6a99216ae5863168dfea5865818a12e188798d9d5904fdfd7e00ef1b7d5f343",
+  "tests/test_capstone_contracts.py": "f46a647f0c59a862bf13dbd97c4b2b8ce501e563cede40caa6e205be32d07ef5",
+  "tests/test_capstone_federation_contracts.py": "2e589e392775c264fb06b6a350db1fb9ddd8ce55c94c36ee49ada6b1692f0933"
+ },
+ "component_registry": {
+  "path": "manifests/capstone/component_registry_v1.csv",
+  "sha256": "d55a209cea554d63394cd4ed1b217067770a9fc6a729edd185b60a1df950a510"
+ },
+ "components": {
+  "CAPSTONE_AUTH_POLICY_V1": {
+   "path": "contracts/capstone/auth_policy_v1.json",
+   "sha256": "3ac629a35431404b3d6e19ba8486218b77a318a902381ac3b0f2be2e9f00d5b6",
+   "status": "FROZEN_PRODUCT_POLICY"
+  },
+  "CAPSTONE_DEMO_SCENARIOS_V1": {
+   "path": "contracts/capstone/demo_scenarios_v1.json",
+   "sha256": "3498194003de926a90e37b4a293100aef0d59e54c41b28de200686b0221ee296",
+   "status": "FROZEN_DEMO_CONTRACT"
+  },
+  "CAPSTONE_FEDERATION_CONTRACT_V1": {
+   "path": "contracts/capstone/federation_v1.json",
+   "sha256": "e0bf46f8678703e8b51dfc292fbb064a16dfd6f345c32645935d8e30dd556359",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "CAPSTONE_FL_CLIENT_CONTRACT_V1": {
+   "path": "contracts/capstone/fl_client_v1.json",
+   "sha256": "c25216aa25505235d3a3937e6ced084a7e9e8edffcd9f5d9c3e46b30bef1eec0",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "CAPSTONE_FL_RUN_CONTRACT_V1": {
+   "path": "contracts/capstone/fl_run_v1.json",
+   "sha256": "82e591f6aad3a3ba4d25b8b2ab5324a641bf0e8dcc5a29ca4c7832e3aac6af28",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "CAPSTONE_MODEL_GOVERNANCE_V1": {
+   "path": "contracts/capstone/model_governance_v1.json",
+   "sha256": "74e768135ce478e5c6fc7f67f3b74b395983711b6505d2354e486e58fd4f1a98",
+   "status": "FROZEN_PRODUCT_POLICY"
+  },
+  "CAPSTONE_MODEL_REGISTRY_CONTRACT_V1": {
+   "path": "contracts/capstone/model_registry_v1.json",
+   "sha256": "fdd4d7947b6642cd1c79d6e05f78eadb4141bf8d33365caee621b263c6121a18",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "CAPSTONE_PRODUCT_PROTOCOL_V1": {
+   "path": "configs/capstone/capstone_product_protocol_v1.json",
+   "sha256": "623cef6e91713df83217578cb665ed06ca330c3a2a5ee9beeeac1d6f1f198b11",
+   "status": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL"
+  },
+  "CAPSTONE_SESSION_CONTRACT_V1": {
+   "path": "contracts/capstone/session_v1.json",
+   "sha256": "c758fe1d204f7fe075c19784a08390306b0d3a2ee3ebbc08f3b819e3f5fa1fec",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "CAPSTONE_STORAGE_POLICY_V1": {
+   "path": "contracts/capstone/storage_policy_v1.json",
+   "sha256": "c929bb0eaa83cd43aec53709bde5b1f574a0c2784a84969fa29a039671a29b22",
+   "status": "FROZEN_PRODUCT_POLICY"
+  },
+  "DEVICE_SOURCE_CONTRACT_V1": {
+   "path": "contracts/capstone/device_source_v1.json",
+   "sha256": "dbc2c9dade04d122c2dd8acb59d45d555f9e3435973eba9bbd0589113015111e",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "EDGE_NODE_CONTRACT_V1": {
+   "path": "contracts/capstone/edge_node_v1.json",
+   "sha256": "ef7a39ef204442a75c9ab54aa6d6a1897e737d8832e36f974b5363ad6ef6b169",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "LOCAL_TRAINING_BUFFER_CONTRACT_V1": {
+   "path": "contracts/capstone/local_training_buffer_v1.json",
+   "sha256": "4baa7eaa82587906e311061d3798d4d67c864145bbd8b0188d05de5c8bcc4cc2",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "PRODUCT_API_CONTRACT_V1": {
+   "path": "contracts/capstone/product_api_v1.json",
+   "sha256": "b9699371047262c7911f51a3159278098e487d863785f5131e2b68be8db3c8e1",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "PRODUCT_LIVE_EVENT_V1": {
+   "path": "contracts/capstone/live_event_v1.json",
+   "sha256": "04fa85aafa2dd522fcf244f8a6b40e184b85bcf2affc648ab773920ad298c54c",
+   "status": "FROZEN_INTERFACE_CONTRACT"
+  },
+  "REAL_HARDWARE_REPLACEMENT_BOUNDARY_V1": {
+   "path": "contracts/capstone/real_hardware_replacement_v1.json",
+   "sha256": "176e279c56efba8cef9cc2a9c5d543e553ea64e87e1ceef9e66706a31062af01",
+   "status": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL"
+  }
+ },
+ "entry_sha": "8bbc0e1e17e314748ad7127544e46d8305efeb0c",
+ "freeze_basis": "method/contract freeze: bound files precede CAPG0 result evidence",
+ "freeze_time_state": {
+  "CAP-001": "IN_PROGRESS",
+  "CAPG0": "NOT_STARTED",
+  "gate_registry_sha256": "236dbe89df31f7fec3dff85c43ce84be922b4c88cfdb7ba6dfac986021454ee0",
+  "note": "informational only; these registries transition at the result commit",
+  "task_registry_sha256": "f663c538b28c6b4555ba9095a80c52bf6b8a3fc19dc23121e994db9a35e46e1d"
+ },
+ "gate": "CAPG0",
+ "lock_id": "CAPSTONE_PRODUCT_PROTOCOL_V1",
+ "mutable_future_implementation_files_bound": false,
+ "owner_task": "CAP-001",
+ "status": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL",
+ "upstream_frozen_identity": {
+  "api/schemas.py": "6160ae991ce8ee556a16441f2260f09aeb55586c83d6a6065e374a773a6f5fdb",
+  "artifacts/CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+  "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+  "artifacts/ROLLBACK_RUNTIME_BINDING_V1.lock.json": "8f9826b4cc9344889131ecdfe32a3be9fb56427619a480f4667de94257ec7668",
+  "artifacts/SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0",
+  "artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+  "checkpoints/MODEL_V2_FINAL.pt": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "contracts/API_SCHEMA_V1.json": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+  "contracts/openapi_v1.json": "1f5054a2963429458de08a470c56394e0d1b5abe45ec5a134c9a856f88d1836c",
+  "contracts/sample_schema_v1.json": "234b1f49ef6f8581f576e5cb4741c457c0d4703d527f435f0af2974658f4cb38",
+  "simulation/stream_runtime_v2013.py": "ad441ed9fc56dcbae4c9789090a20fc2bf3f37ea8c7321abfab6da83d7f24644",
+  "simulation/types.py": "6fea1df3b01ab3a8b39e7af1b6c972bcb1218e19019823cab84fa9b88dad8b43"
+ },
+ "upstream_system": {
+  "api": "API_SCHEMA_V1",
+  "calibration": "CAL_V2",
+  "federated_checkpoint_deployed": false,
+  "gateway": "GATEWAY_ARTIFACT_V2",
+  "model": "MODEL_V2_FINAL",
+  "software_system": "SOFTWARE_SYSTEM_V2"
+ }
+}
