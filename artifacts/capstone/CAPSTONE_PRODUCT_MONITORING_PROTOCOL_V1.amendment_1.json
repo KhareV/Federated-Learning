@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1_AMENDMENT_1",
+ "change": "@binding_frozen now looks the binding config up in the lock's component paths (and still requires the binding document in bound_files and zero protected drift).",
+ "defect": "The frozen evaluator's @binding_frozen check looked for configs/capstone/cap_003_live_stream_binding_v1.json in the lock's bound_files, but the lock lists that file as the CAPSTONE_LIVE_STREAM_BINDING_V1 component (components map). The binding itself was frozen and byte-verified; only the evaluator's lookup was wrong.",
+ "files": {
+  "scripts/cap_003_build_evidence.py": {
+   "new_sha256": "54fa791fb2f2c7e38a2e05d2f67e3bdb05db554c1476acec881dfced5577354a",
+   "old_sha256": "cad4c2c0e9e7712aad3e3cbb31b4058422b7072353148ed1e27cbe191c6941da"
+  }
+ },
+ "freeze_commit": "9719941",
+ "made_before": "the recorded CAPG2 criteria evaluation (a dry evaluation reported criterion 7 failing)",
+ "unchanged": {
+  "canonical_runs": "executed on the frozen implementation; independent of this change",
+  "capg2_criteria_text": "identical",
+  "implementation_and_tests": "byte-identical to the freeze commit"
+ }
+}

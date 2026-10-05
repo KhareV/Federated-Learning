@@ -251,7 +251,7 @@ def criteria(final: bool) -> None:
         "@drift": not drift["protected_artifact_drift"],
         "@drift_frontend": not drift["frontend_drift"] and drift["frontend_files_checked"] > 100,
         "@protocol_freeze_precedes_result": freeze["ok"],
-        "@binding_frozen": "docs/capstone/CAPSTONE_LIVE_STREAM_BINDING_V1.md" in lock["bound_files"] and "configs/capstone/cap_003_live_stream_binding_v1.json" in lock["bound_files"] and not drift["protected_artifact_drift"],
+        "@binding_frozen": "docs/capstone/CAPSTONE_LIVE_STREAM_BINDING_V1.md" in lock["bound_files"] and "configs/capstone/cap_003_live_stream_binding_v1.json" in {c["path"] for c in lock["components"].values()} and not drift["protected_artifact_drift"],
         "@no_auth_provider": not _scan(py_added, r"class\s+\w*(Clerk|Demo)\w*AuthProvider|ClerkAuthProvider\(|DemoAuthProvider\("),
         "@auth_harness_scope": (ROOT / "scripts/capstone_cap003_test_identity.py").is_file() and not [p for p in (ROOT / "product").rglob("*.py") if "cap003_test_identity" in p.read_text().lower() or "x-cap003-test-user" in p.read_text().lower()],
         "@no_database": not _scan(py_added, r"sqlite3|sqlalchemy|aiosqlite") and not [p for p in _git("ls-files").splitlines() if p.endswith((".sqlite", ".sqlite3", ".db"))],
