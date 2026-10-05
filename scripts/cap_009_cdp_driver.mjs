@@ -24,13 +24,24 @@ class Cdp {
 const targets = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`)).json();
 const cdp = new Cdp(targets.find((target) => target.type === 'page').webSocketDebuggerUrl);
 await cdp.ready;
-const requests = [], errors = [];
+const requests = [], errors = [], blockedExternal = [];
 cdp.on((method, params) => {
 	if (method === 'Network.requestWillBeSent') requests.push(params.request.url);
+	if (method === 'Fetch.requestPaused') {
+		const url = params.request.url;
+		let allowed = false;
+		try { allowed = ['127.0.0.1', 'localhost'].includes(new URL(url).hostname); }
+		catch { allowed = /^(data|blob|about):/.test(url); }
+		if (!allowed) blockedExternal.push(url);
+		void cdp.send(allowed ? 'Fetch.continueRequest' : 'Fetch.failRequest',
+			allowed ? { requestId: params.requestId } : { requestId: params.requestId, errorReason: 'BlockedByClient' })
+			.catch((error) => errors.push(`REQUEST_INTERCEPTION:${String(error)}`));
+	}
 	if (method === 'Runtime.exceptionThrown') errors.push(String(params.exceptionDetails?.exception?.description ?? params.exceptionDetails?.text));
 	if (method === 'Runtime.consoleAPICalled' && params.type === 'error') errors.push(params.args.map((arg) => arg.value ?? arg.description).join(' '));
 });
 for (const domain of ['Page','Runtime','Network']) await cdp.send(`${domain}.enable`);
+await cdp.send('Fetch.enable', { patterns: [{ urlPattern: '*' }] });
 async function ev(expression) {
 	const response = await cdp.send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true });
 	if (response.exceptionDetails) throw new Error(`BROWSER_EVAL:${JSON.stringify(response.exceptionDetails).slice(0, 250)}`);
@@ -131,6 +142,7 @@ const external = requests.filter((url) => {
 });
 output.requests = requests;
 output.external_requests = external;
+output.blocked_external_requests = blockedExternal;
 output.console_errors = errors;
 output.session_id = sessionId;
 output.api = { session, summary, timeline, ml, fl };

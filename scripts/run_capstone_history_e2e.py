@@ -248,7 +248,8 @@ def main() -> int:
                 if after != before:
                     raise RuntimeError("HISTORY_RESTART_EVIDENCE_CHANGED")
     steps = {row["name"]: row for row in browser["steps"]}
-    if browser["external_requests"] or browser["console_errors"]:
+    if (browser["external_requests"] or browser["blocked_external_requests"]
+            or browser["console_errors"]):
         raise RuntimeError("BROWSER_EXTERNAL_REQUEST_OR_CONSOLE_ERROR")
     if not all(row["scrollWidth"] <= row["width"] + 1 for row in browser["responsive"].values()):
         raise RuntimeError("CAP009_HORIZONTAL_OVERFLOW")
@@ -286,6 +287,8 @@ def main() -> int:
         {
             "status": "PASS",
             "external_requests": browser["external_requests"],
+            "blocked_external_requests": browser["blocked_external_requests"],
+            "external_network_policy": "ACTIVE_CDP_REQUEST_INTERCEPTION_LOOPBACK_ONLY",
             "request_count": len(browser["requests"]),
             "console_errors": browser["console_errors"],
         },

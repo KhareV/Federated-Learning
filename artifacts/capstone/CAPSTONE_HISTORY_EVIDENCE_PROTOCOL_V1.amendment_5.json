@@ -1,0 +1,19 @@
+{
+ "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_5",
+ "owner_phase": "CAP-009",
+ "made_after_method_freeze": true,
+ "previous_amendment": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_4",
+ "defect": "The passing browser run observed no external requests but did not actively block them. CAPG8 requires offline DEMO execution with external networking blocked.",
+ "change": "Enable Chrome Fetch request interception before navigation. Continue only loopback/data/blob/about requests and fail every external request. Record blocked requests and require zero attempts for canonical PASS. No scientific, runtime, API, or UI fact changes.",
+ "files": {
+  "scripts/cap_009_cdp_driver.mjs": {
+   "old_sha256": "d1a33914c0cc4b7096e4063e588424c4ec2e4085eddad84b3f79f301b7d5f659",
+   "new_sha256": "6b12b5883fe103cfdcb222d5b7b7916566559fce500ba4507ae4a17efb0fce3d"
+  },
+  "scripts/run_capstone_history_e2e.py": {
+   "old_sha256": "9f9db2fd9e91ad396f31cc7435ac5840946ec3725ca0d8247cf9c951e33e8092",
+   "new_sha256": "b7d606f6d5aba36b4a7d85f2ee81ebe5bf89348c3e4541e91852b964c5a3d0f6"
+  }
+ },
+ "result_evidence_committed_with_amendment": false
+}
