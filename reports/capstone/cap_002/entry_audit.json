@@ -1,0 +1,29 @@
+{
+ "cap001_lock_verified": true,
+ "cap001_status": "PASS",
+ "cap002_status_at_entry": "NOT_STARTED",
+ "capg0_status": "PASS",
+ "ci": {
+  "queried": false,
+  "triggered": false
+ },
+ "entry_sha": "44939378e7aee3baa2e92fefdd42fa9d75640a8a",
+ "environment": {
+  "python": "3.11 (homebrew) fresh venv outside the repository from requirements-dev.lock",
+  "repo_local_venv": "stripped Python 3.9 environment, not used, not repaired"
+ },
+ "expected_entry_sha": "44939378e7aee3baa2e92fefdd42fa9d75640a8a",
+ "intervening_commits": [],
+ "known_cap001_disclosure": {
+  "action": "recorded as inherited bookkeeping only; CAP-001 NOT reopened or rewritten",
+  "canonical_evidence": "reports/capstone/cap_001/capg0_criteria.json",
+  "statement": "CAPG0 gate-registry prose says 'All 33 CAPG0 criteria' while the evaluator/result has 50/50 criteria"
+ },
+ "later_phases_not_started": true,
+ "matches_expected_entry": true,
+ "note_on_tree": "CAP-002 implementation files existed as UNTRACKED drafts when this audit ran; `git status --short --branch` printed '## main...origin/main' at session start (clean). Nothing was committed before this entry commit.",
+ "origin_main_sha": "44939378e7aee3baa2e92fefdd42fa9d75640a8a",
+ "phase": "CAP-002",
+ "proposed_gate": "CAPG1",
+ "working_tree_tracked_changes_at_entry": true
+}
