@@ -416,7 +416,7 @@ def criteria(final: bool) -> None:
         "@e2e_future_tables_empty": all(a["row_counts"][t] == 0 and b["row_counts"][t] == 0 for _r, a, b in both for t in FUTURE) and all(crash["database_after_recovery"]["row_counts"][t] == 0 for t in FUTURE),
         "@no_candidate": all(a["row_counts"]["candidate_models"] == 0 for _r, a, _b in both) and not [p for p in added if "candidate" in p.lower() and p.endswith(".py")],
         "@no_per_user_model_state": not [t for t in db1["tables"] if re.search(r"model_state|weights|checkpoint", t)] and "candidate_models" in FUTURE,
-        "@no_hardware_code": not _scan(py_added, r"import\s+(serial|bleak|bluetooth)|from\s+(serial|bleak|bluetooth)|WEARABLE_V1_MANIFEST"),
+        "@no_hardware_code": not _scan([p for p in py_added if p.startswith(("product/", "capstone_persistence/", "api/product_app_v1_1.py", "scripts/run_capstone_"))], r"\b(import|from)\s+(serial|bleak|bluetooth|usb)\b|WEARABLE_V1_MANIFEST"),
         "@e2e_real_inference": all(r["inference_service"]["fresh_process"] and "SOFTWARE_SYSTEM_V2 default binding" in r["inference_service"]["service_title"] and r["inference_service"]["profile"] == "default" for r in runs) and not re.search(r"MockTransport|StrictInferenceDouble", (ROOT / "scripts/run_capstone_persistent_e2e.py").read_text()),
         "@e2e_separate_process": all(r["product_process_separate"] and r["inference_process_separate"] for r in runs) and len({p1["pid_excluded"], p2["pid_excluded"], p3["pid_excluded"], os.getpid()}) == 4,
         "@e2e_demo_explicit": all(r["process_1"]["system"]["auth_provider"] == "DEMO" and r["process_1"]["system"]["demo_mode"] is True and r["process_1"]["system"]["persistence_mode"] == "SQLITE" for r in runs) and "explicit" in r1["auth_mode"],

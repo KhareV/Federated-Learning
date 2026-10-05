@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_6",
+ "change": "The evaluator's @no_hardware_code check now scans only CAP-004 implementation paths (product/, capstone_persistence/, api/product_app_v1_1.py, scripts/run_capstone_*) and uses word boundaries (\\b(import|from)\\s+(serial|bleak|bluetooth|usb)\\b). Criterion 65's text is unchanged.",
+ "defect": "A dry evaluation reported criterion 65 failing on two false positives: the evaluator's own pattern text, and 'from cryptography.hazmat.primitives import serialization' in a test (the unbounded pattern 'import\\s+serial' matched 'import serialization'). No hardware code exists.",
+ "files": {
+  "scripts/cap_004_build_evidence.py": {
+   "new_sha256": "9f0fe1a118c54460870bb7e1b89406ba1f6c2805cafa60fffe9bd9667a4f9a54",
+   "old_sha256": "a7af1f0b14017caf45f1dcf6161822dfd9c78ee324d0835537e0d046108d1e18"
+  }
+ },
+ "freeze_commit": "1fb3023",
+ "made_before": "the recorded CAPG3 criteria evaluation (the failing run was a dry pre-evaluation; capg3_criteria.json is regenerated)",
+ "previous_amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_5",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical to amendment 2",
+  "capg3_criteria_text": "identical"
+ }
+}
