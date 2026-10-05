@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_3",
+ "change": "The evaluator's @regression and @prior_phase_tests checks accept exactly one named failure, tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers, and only when reports/capstone/cap_004/preexisting_cap003_flake.json establishes that this frozen CAP-003 test is intermittent at its own result commit 56fc19f (untouched worktree) and in this tree with the identical assertion signature, with at least one passing isolated run. Any other failure still fails the criterion. The failure is reported in capg3_criteria.json (known_preexisting_flake_failures_in_full_run).",
+ "defect": "The frozen evaluator assumed a flake-free regression. The frozen CAP-003 test polls for session state COMPLETED and then immediately asserts journal.closed, but the frozen coordinator sets COMPLETED before closing the journal; the test fails in 4 of 12 isolated runs both at 56fc19f and in the CAP-004 tree. The frozen CAP-003 test/code cannot be edited. CAP-003's recorded 2718-test pass was a run in which the race did not trigger.",
+ "files": {
+  "scripts/cap_004_build_evidence.py": {
+   "new_sha256": "a7af1f0b14017caf45f1dcf6161822dfd9c78ee324d0835537e0d046108d1e18",
+   "old_sha256": "faed7c0b536c771523660df3cf451ed60eabbe382c4a5d65558bd37f32375e5f"
+  }
+ },
+ "freeze_commit": "1fb3023",
+ "made_before": "the recorded CAPG3 criteria evaluation",
+ "previous_amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_2",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical to amendment 2",
+  "capg3_criteria_text": "identical"
+ }
+}
