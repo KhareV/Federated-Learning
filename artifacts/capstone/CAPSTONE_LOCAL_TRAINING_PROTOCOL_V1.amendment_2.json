@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1_AMENDMENT_2",
+ "change": "Evaluator false positives fixed (criteria text unchanged): (1) @truth_firewall_static scans frontend sources with comments removed (the legacy replay files only MENTION SimulationTruth in comments); (2) @no_aami_claim scans code and the binding doc, not the protocol JSON that merely lists the forbidden claims; (3) @no_candidate ignores comments/docstrings (client.py has a comment 'until a CAPSTONE_FL_CANDIDATE exists').",
+ "defect": "A dry evaluation failed criteria 26, 29 and 47 on mentions in comments/lists, not on uses.",
+ "files": {
+  "scripts/cap_006_build_evidence.py": {
+   "new_sha256": "41f0bebc285ac40f31b7c128879dd390477919190b36c6d9052aab2783cc5ff9",
+   "old_sha256": "20186316ccc4ac759432413586f0653b4237eb7e493ead968d1afae1519eb31e"
+  }
+ },
+ "freeze_commit": "a1582da",
+ "made_before": "the recorded CAPG5 criteria evaluation",
+ "previous_amendment": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1_AMENDMENT_1",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical to the freeze commit",
+  "capg5_criteria_text": "identical"
+ }
+}

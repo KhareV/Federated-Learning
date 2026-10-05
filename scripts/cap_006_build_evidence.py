@@ -96,6 +96,13 @@ def calls(path: str) -> set[str]:
     return out
 
 
+def code_only(text: str) -> str:
+    """Source text without comments and docstrings/long string literals (mentions are not uses)."""
+    text = re.sub(r'(?s)(\"\"\"|\'\'\').*?\1', "", text)
+    text = re.sub(r"(?m)#.*$", "", text)
+    return re.sub(r"/\*[\s\S]*?\*/|(?m)^\s*//.*$", "", text)
+
+
 def new_files(entry_sha: str) -> list[str]:
     added = _git("diff", "--name-only", "--diff-filter=A", entry_sha, "HEAD").splitlines()
     return sorted(set(added) | set(_git("ls-files", "--others", "--exclude-standard").splitlines()))
@@ -182,7 +189,7 @@ def audits() -> None:
         truth["python_files_scanned"] += 1
         if any(i in TRUTH_MODULES for i in imports(rel)):
             truth["truth_importers_outside_sanctioned"].append(rel)
-    fe = [str(p.relative_to(ROOT)) for p in (ROOT / "frontend/src").rglob("*") if p.is_file() and p.suffix in (".ts", ".svelte") and re.search(r"SimulationTruth|fl_cohort_truth|get_truth", p.read_text(errors="ignore")) and "__tests__" not in p.parts]
+    fe = [str(p.relative_to(ROOT)) for p in (ROOT / "frontend/src").rglob("*") if p.is_file() and p.suffix in (".ts", ".svelte") and re.search(r"SimulationTruth|fl_cohort_truth|get_truth", code_only(p.read_text(errors="ignore"))) and "__tests__" not in p.parts]
     _write("truth_firewall_audit.json", {**truth, "frontend_files_naming_truth": fe, "sanctioned_consumer": "federated/wearable_sim_local_labels.py", "product_wrapper": "product/edge/label_adapter.py (no truth import)", "runtime_truth_modules_loaded": [r["environment"]["truth_modules_loaded_via_sanctioned_federated_adapter_only"] for r in (r1, r2)],
                                          "truth_in_envelope_server_objects": [c["server_envelope_forbidden_findings"] for c in r1["clients"]], "clean": not truth["truth_importers_outside_sanctioned"] and not fe})
     _write("cohort_reuse_audit.json", {"cohort_id": ref["cohort"]["cohort_id"], "client_ids": sorted(cohort), "participant_ids": sorted(c["participant_id"] for c in cohort.values()), "run_client_ids": [c["client_id"] for c in r1["clients"]],
@@ -238,7 +245,7 @@ def criteria(final: bool) -> None:
     from product.federation.local_cohort import COHORT_ID
 
     def aami_ok() -> bool:
-        for rel in (*NEW_CODE, "docs/capstone/CAPSTONE_LOCAL_BUFFER_BINDING_V1.md", "configs/capstone/cap_006_local_training_protocol_v1.json"):
+        for rel in (*NEW_CODE, "docs/capstone/CAPSTONE_LOCAL_BUFFER_BINDING_V1.md"):
             text = (ROOT / rel).read_text()
             for m in re.finditer(r"AAMI_SVF", text):
                 if not re.search(r"\bnot\b|NOT|\"not\"|\bnot_claimed|no S/V/F", text[max(0, m.start() - 70): m.start()], re.I):
@@ -276,7 +283,7 @@ def criteria(final: bool) -> None:
         "@no_aggregation": all(r["aggregation_or_coordinator_calls"] == 0 and not r["aggregation_performed"] and not r["coordinator_submit_called"] for r in runs) and smoke["aggregation_or_coordinator_calls"] == 0 and not any(c["aggregation_performed"] for c in every),
         "@no_secagg": all(not r["environment"]["privacy_secagg_app_loaded"] and not r["environment"]["wearable_fl_secagg_shadow_loaded"] and not r["secagg_run"] for r in runs) and not smoke["environment"]["privacy_secagg_app_loaded"],
         "@no_federation_run": all(not r["federation_run_created"] for r in runs) and not any("FederationRun" in calls(m) or "create_run" in calls(m) for m in NEW_CODE),
-        "@no_candidate": all(not r["candidate_created"] for r in runs) and not any("CAPSTONE_FL_CANDIDATE" in t for t in all_code_text.values()),
+        "@no_candidate": all(not r["candidate_created"] for r in runs) and not any("CAPSTONE_FL_CANDIDATE" in code_only(t) for t in all_code_text.values()),
         "@submission_projection": all(set(c["update_submission"]) == set(ENVELOPE_PROJECTION) and c["update_submission"]["client_id"] == c["client_id"] and c["update_submission"]["round_id"] == 1 and c["update_submission"]["base_state_digest"] == c["base_state_sha256"] and c["update_submission"]["update_digest"] == c["update_sha256"] and c["update_submission"]["examples_seen"] == c["examples_seen"] and c["produce_update_equals_envelope_projection"] for c in every),
         "@envelope_reused": all(c["envelope_checks"]["envelope_fields_exact"] for c in every) and "make_envelope" in " ".join(imports("product/federation/client.py")) and "def make_envelope" not in "".join(all_code_text.values()),
         "@envelope_clean": all(c["server_envelope_forbidden_findings"] == [] for c in every),
