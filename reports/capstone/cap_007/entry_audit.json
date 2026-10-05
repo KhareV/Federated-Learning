@@ -39,5 +39,6 @@
   "CAP-007..011": "NOT_STARTED",
   "CAPG0..5": "PASS"
  },
- "working_tree_clean": false
+ "working_tree_clean": true,
+ "working_tree_clean_note": "CORRECTION recorded in the CAP-007 result commit: the entry commit's copy of this file said false because the flag was computed AFTER the entry evidence files (untracked) and the prospective registry edits were already in the working tree. At the actual start of CAP-007 the git status snapshot was '(clean)' on main with HEAD == origin/main == 651bfa6; the value true is that fact."
 }

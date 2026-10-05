@@ -34,6 +34,7 @@ ADDITIVE_PREFIXES = (
 MODIFIABLE = (
     "manifests/capstone/task_registry_v1.csv", "manifests/capstone/gate_registry_v1.csv",
     "tests/test_capstone_lifecycle.py",
+    "tests/test_capstone_session_service.py",  # CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1 amendment 7 (CAP-007 adds capstone_persistence/federation_store.py)
 )
 
 

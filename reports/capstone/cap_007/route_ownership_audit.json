@@ -1,0 +1,88 @@
+{
+ "cap007_routes": [
+  {
+   "auth": "AUTHENTICATED",
+   "method": "GET",
+   "ownership_scope": "GLOBAL_READ",
+   "path": "/product/v1/federation",
+   "route_id": "federation.get"
+  },
+  {
+   "auth": "AUTHENTICATED",
+   "method": "GET",
+   "ownership_scope": "GLOBAL_READ",
+   "path": "/product/v1/federation/clients",
+   "route_id": "federation.clients"
+  },
+  {
+   "auth": "AUTHENTICATED",
+   "method": "GET",
+   "ownership_scope": "OWN",
+   "path": "/product/v1/federation/runs",
+   "route_id": "federation.runs_list"
+  },
+  {
+   "auth": "AUTHENTICATED",
+   "method": "GET",
+   "ownership_scope": "OWN",
+   "path": "/product/v1/federation/runs/{id}",
+   "route_id": "federation.runs_get"
+  },
+  {
+   "auth": "AUTHENTICATED",
+   "method": "GET",
+   "ownership_scope": "OWN",
+   "path": "/product/v1/federation/runs/{id}/rounds",
+   "route_id": "federation.runs_rounds"
+  },
+  {
+   "auth": "AUTHENTICATED",
+   "method": "GET",
+   "ownership_scope": "GLOBAL_READ",
+   "path": "/product/v1/models",
+   "route_id": "models.list"
+  },
+  {
+   "auth": "AUTHENTICATED",
+   "method": "GET",
+   "ownership_scope": "GLOBAL_READ",
+   "path": "/product/v1/models/{id}",
+   "route_id": "models.get"
+  },
+  {
+   "auth": "AUTHENTICATED",
+   "method": "POST",
+   "ownership_scope": "OWN",
+   "path": "/product/v1/federation/runs",
+   "route_id": "federation.runs_create"
+  },
+  {
+   "auth": "AUTHENTICATED",
+   "method": "POST",
+   "ownership_scope": "OWN",
+   "path": "/product/v1/federation/runs/{id}/start",
+   "route_id": "federation.runs_start"
+  },
+  {
+   "auth": "AUTHENTICATED",
+   "method": "WS",
+   "ownership_scope": "OWN",
+   "path": "/product/v1/federation/runs/{id}/live",
+   "route_id": "federation.live"
+  }
+ ],
+ "cap009_or_promotion_routes": [],
+ "contract_equals_implementation": true,
+ "implemented_cap007_routes": [
+  "GET /federation",
+  "GET /federation/clients",
+  "GET /federation/runs",
+  "GET /federation/runs/{id}",
+  "GET /federation/runs/{id}/rounds",
+  "GET /models",
+  "GET /models/{id}",
+  "POST /federation/runs",
+  "POST /federation/runs/{id}/start",
+  "WS /federation/runs/{id}/live"
+ ]
+}

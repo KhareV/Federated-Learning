@@ -1,0 +1,176 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/federation/execution_binding.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_federation_service.py::test_round_two_cannot_start_from_fl_init_and_model_v2_final_is_never_a_base",
+   "git_status_of_files_after_restore": "",
+   "mutation": "ROUND_2_STARTS_FROM_FL_INIT",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_federation_service.py::test_round_two_cannot_start_from_fl_init_and_model_v2_final_is_never_a_base"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/federation/execution_binding.py",
+    "product/federation/service.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_federation_service.py::test_canonical_fedavg_run_shape",
+   "git_status_of_files_after_restore": "",
+   "mutation": "THREE_CANDIDATES_PER_RUN",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_federation_service.py::test_canonical_fedavg_run_shape",
+    "tests/test_capstone_federation_multiround.py::test_each_round_starts_from_the_previous_committed_state_and_the_candidate_is_the_round_3_state"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/federation/execution_binding.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_federation_service.py::test_round_two_cannot_start_from_fl_init_and_model_v2_final_is_never_a_base",
+   "git_status_of_files_after_restore": "",
+   "mutation": "MODEL_V2_FINAL_ACCEPTED_AS_BASE",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_federation_service.py::test_round_two_cannot_start_from_fl_init_and_model_v2_final_is_never_a_base"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/federation/service.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_federation_service.py::test_canonical_fedavg_run_shape",
+   "git_status_of_files_after_restore": "",
+   "mutation": "UPDATE_OMITTED_FROM_ROUND",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_federation_service.py::test_canonical_fedavg_run_shape"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/federation/service.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_federation_service.py::test_canonical_fedavg_run_shape",
+   "git_status_of_files_after_restore": "",
+   "mutation": "LABEL_ADDED_TO_SUBMITTED_ENVELOPE",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_federation_service.py::test_canonical_fedavg_run_shape"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "capstone_persistence/federation_store.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_candidate_registry.py::test_first_candidate_is_0001_with_fl_init_parent_and_sandbox_unreachable_defaults",
+   "git_status_of_files_after_restore": "",
+   "mutation": "PRODUCTION_DEPLOYED_TRUE",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_candidate_registry.py::test_first_candidate_is_0001_with_fl_init_parent_and_sandbox_unreachable_defaults"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/session.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_federation_isolation.py::test_the_released_default_runtime_is_unchanged_and_names_no_candidate",
+   "git_status_of_files_after_restore": "",
+   "mutation": "CANDIDATE_IN_DEFAULT_RUNTIME_BINDING",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_federation_isolation.py::test_the_released_default_runtime_is_unchanged_and_names_no_candidate"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/models/governance.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_candidate_governance.py::test_a_failed_check_rejects_the_candidate_and_it_never_reaches_the_sandbox",
+   "git_status_of_files_after_restore": "",
+   "mutation": "ACCEPT_DESPITE_FAILED_CHECK",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_candidate_governance.py::test_a_failed_check_rejects_the_candidate_and_it_never_reaches_the_sandbox"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/federation/secagg_shadow.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_secagg_integration.py::test_the_frozen_tolerances_and_expectations_are_untouched",
+   "git_status_of_files_after_restore": "",
+   "mutation": "SECAGG_TOLERANCE_WIDENED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_secagg_integration.py::test_the_frozen_tolerances_and_expectations_are_untouched"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/federation/service.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_federation_replay.py::test_replay_reproduces_the_source_stream_with_zero_training_and_zero_new_candidates",
+   "git_status_of_files_after_restore": "",
+   "mutation": "REPLAY_TRAINS",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_federation_replay.py::test_replay_reproduces_the_source_stream_with_zero_training_and_zero_new_candidates"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/federation/service.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_federation_api.py::test_run_ownership_for_get_list_rounds_and_start",
+   "git_status_of_files_after_restore": "",
+   "mutation": "CROSS_USER_ACCESS_ALLOWED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_federation_api.py::test_run_ownership_for_get_list_rounds_and_start"
+   ]
+  },
+  {
+   "caught_by_a_test_not_a_collection_error": true,
+   "files": [
+    "product/federation/service.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_federation_api.py::test_start_returns_promptly_and_a_second_live_run_is_refused_while_one_is_active",
+   "git_status_of_files_after_restore": "",
+   "mutation": "SECOND_SIMULTANEOUS_LIVE_RUN",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_federation_api.py::test_start_returns_promptly_and_a_second_live_run_is_refused_while_one_is_active"
+   ]
+  }
+ ]
+}

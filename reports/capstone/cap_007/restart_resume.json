@@ -1,0 +1,183 @@
+{
+ "candidate_ids": [
+  "CAPSTONE_FL_CANDIDATE_0001"
+ ],
+ "candidates_in_registry": [
+  "CAPSTONE_FL_CANDIDATE_0001"
+ ],
+ "checkpoint_rounds_after_kill": [
+  "round_1",
+  "round_2"
+ ],
+ "db": {
+  "candidates": [
+   {
+    "algorithm": "FEDAVG",
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+    "client_count": 8,
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "parent_model_id": "FL_INIT_V2",
+    "production_deployed": 0,
+    "round": 3,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  "completed_runs": [
+   {
+    "algorithm": "FEDAVG",
+    "base_model_id": "FL_INIT_V2",
+    "candidate_ids_json": "[\"CAPSTONE_FL_CANDIDATE_0001\"]",
+    "current_round": 3,
+    "engineering_only": 1,
+    "federation_protocol_id": "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+    "planned_rounds": 3,
+    "run_type": "LIVE_RUN",
+    "secagg_mode": "PLAIN",
+    "status": "COMPLETED"
+   }
+  ],
+  "counts": {
+   "candidate_models": 1,
+   "federation_rounds": 3,
+   "federation_runs": 1,
+   "fl_client_statuses": 24,
+   "governance_decisions": 1
+  },
+  "decisions": [
+   {
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "checks_json": "[{\"check_id\": \"STATE_FINITE\", \"passed\": true}, {\"check_id\": \"STATE_SPEC_MATCHES_BASE\", \"passed\": true}, {\"check_id\": \"UPDATE_DIGESTS_RECONCILE\", \"passed\": true}, {\"check_id\": \"ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE\", \"passed\": true}, {\"check_id\": \"BASE_STATE_LINEAGE_VERIFIED\", \"passed\": true}]",
+    "decision": "ACCEPTED_TO_SANDBOX",
+    "decision_id": "CAPSTONE_FL_CANDIDATE_0001-GOV01",
+    "production_deployed": 0,
+    "scientific_promotion": 0
+   }
+  ],
+  "foreign_key_check": [],
+  "integrity_check": [
+   "ok"
+  ],
+  "tables": [
+   "candidate_models",
+   "context_snapshots",
+   "device_connections",
+   "devices",
+   "federation_rounds",
+   "federation_runs",
+   "fl_client_statuses",
+   "governance_decisions",
+   "inference_events",
+   "monitoring_sessions",
+   "monitoring_state_events",
+   "session_summaries",
+   "signal_quality_events",
+   "users",
+   "waveform_previews"
+  ]
+ },
+ "equals_canonical_event_stream": true,
+ "equals_canonical_final_digest": true,
+ "event_stream_sha256": "9063772a94a129a335a3404462d191e8b2e858dac79e06a92cbd325da59f7f9c",
+ "events_in_log_at_kill": 130,
+ "final_global_state_sha256": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+ "first_process_exit_code": 86,
+ "first_process_killed_by_fault_injection": true,
+ "fresh_process": true,
+ "mid_round_resume_supported": false,
+ "no_duplicated_decisions": true,
+ "parity": {
+  "any_mismatch": false,
+  "candidate_digest_equals_round_3_state": true,
+  "lineage_equal": true,
+  "mismatches": [],
+  "per_round": {
+   "1": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   },
+   "2": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   },
+   "3": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   }
+  },
+  "reference": "reports/model_v2/v2_fl_005/federation_run.json (read, not copied)",
+  "state_lineage_reference": {
+   "0": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  },
+  "state_lineage_run": {
+   "0": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  },
+  "updates_compared": 24
+ },
+ "pid_first": 76362,
+ "pid_second": 76377,
+ "resumed_events": 203,
+ "round_states": [
+  [
+   1,
+   "COMPLETED",
+   8,
+   null
+  ],
+  [
+   2,
+   "COMPLETED",
+   8,
+   null
+  ],
+  [
+   3,
+   "COMPLETED",
+   8,
+   "CAPSTONE_FL_CANDIDATE_0001"
+  ]
+ ],
+ "run_status_after_resume": "COMPLETED",
+ "scenario": "FL_RESTART_RESUME",
+ "sequence_contiguous": true,
+ "state_after_kill": {
+  "candidates": 0,
+  "client_status_rows": 16,
+  "decisions": 0,
+  "rounds": [
+   [
+    1,
+    "COMPLETED"
+   ],
+   [
+    2,
+    "COMPLETED"
+   ]
+  ],
+  "run_status": "RUNNING"
+ },
+ "supported_boundary": "after a committed non-final round",
+ "unique_round_client_updates": 24,
+ "update_ready_events": 24,
+ "ws_errors": []
+}

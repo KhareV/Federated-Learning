@@ -1,0 +1,58 @@
+{
+ "db_counts_runs": [
+  {
+   "candidate_models": 1,
+   "federation_rounds": 3,
+   "federation_runs": 1,
+   "fl_client_statuses": 24,
+   "governance_decisions": 1
+  },
+  {
+   "candidate_models": 1,
+   "federation_rounds": 3,
+   "federation_runs": 1,
+   "fl_client_statuses": 24,
+   "governance_decisions": 1
+  }
+ ],
+ "foreign_key_check": [
+  [],
+  []
+ ],
+ "foreign_keys_on": true,
+ "integrity": [
+  [
+   "ok"
+  ],
+  [
+   "ok"
+  ]
+ ],
+ "per_event_table": false,
+ "schema_ddl_in_module": false,
+ "separate_connection": true,
+ "tables_in_db": [
+  "candidate_models",
+  "context_snapshots",
+  "device_connections",
+  "devices",
+  "federation_rounds",
+  "federation_runs",
+  "fl_client_statuses",
+  "governance_decisions",
+  "inference_events",
+  "monitoring_sessions",
+  "monitoring_state_events",
+  "session_summaries",
+  "signal_quality_events",
+  "users",
+  "waveform_previews"
+ ],
+ "tables_written": [
+  "candidate_models",
+  "federation_rounds",
+  "federation_runs",
+  "fl_client_statuses",
+  "governance_decisions"
+ ]
+}

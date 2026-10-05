@@ -285,7 +285,7 @@ def criteria(final: bool) -> None:
         committed_by_freeze = tree_has(freeze_commit, "reports/capstone/cap_007/federation_contract_reconciliation.json")
         first = _git("log", "--diff-filter=A", "--format=%H", "--", "reports/capstone/cap_007/federation_contract_reconciliation.json").split()
         introduced_with_or_before_freeze = bool(first) and subprocess.run(["git", "merge-base", "--is-ancestor", first[-1], freeze_commit], cwd=ROOT).returncode == 0
-        delta = reconciliation["delta"]["round_transitions"]["AGGREGATING"]
+        delta = reconciliation["reconciliation_B_candidate_cardinality"]["delta"]["round_transitions"]["AGGREGATING"]
         return committed_by_freeze and introduced_with_or_before_freeze and delta["added"] == ["COMPLETED"] and reconciliation["v1_file_modified"] is False
 
     def progress_ok(r: dict) -> bool:

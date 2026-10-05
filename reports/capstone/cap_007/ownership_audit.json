@@ -1,0 +1,25 @@
+{
+ "a_get_run_of_b": 403,
+ "a_list_runs": [
+  "FEDRUN-1DA76B3F2926",
+  "FEDRUN-C6D4E9196BAB"
+ ],
+ "b_clients_status": 200,
+ "b_get_run_of_a": 403,
+ "b_list_runs": [
+  "FEDRUN-02E2A08D07DB"
+ ],
+ "b_models_status": 200,
+ "b_overview_status": 200,
+ "b_reads_candidate_global": 200,
+ "b_rounds_of_a": 403,
+ "b_start_run_of_a": 403,
+ "b_ws_run_of_a_close_code": 4403,
+ "b_ws_unknown_run_close_code": 4404,
+ "canonical_ws_4401_note": "DEMO auth authenticates every connection; the 4401 path is exercised by tests/test_capstone_federation_websocket.py with the CAP-003 test resolver",
+ "scenario": "OWNERSHIP",
+ "users": [
+  "demo:cap007-a",
+  "demo:cap007-b"
+ ]
+}

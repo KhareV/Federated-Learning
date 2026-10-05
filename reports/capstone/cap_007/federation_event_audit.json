@@ -1,0 +1,48 @@
+{
+ "all_twelve_kinds_seen": [
+  "federation.error"
+ ],
+ "event_count": [
+  203,
+  203
+ ],
+ "kinds_allowed": [
+  "federation.status",
+  "round.status",
+  "client.status",
+  "client.training_progress",
+  "client.update_ready",
+  "aggregation.status",
+  "secagg.status",
+  "candidate.created",
+  "candidate.validation",
+  "candidate.governance",
+  "federation.completed",
+  "federation.error"
+ ],
+ "kinds_outside_allowed": [],
+ "kinds_seen": [
+  "aggregation.status",
+  "candidate.created",
+  "candidate.governance",
+  "candidate.validation",
+  "client.status",
+  "client.training_progress",
+  "client.update_ready",
+  "federation.completed",
+  "federation.status",
+  "round.status",
+  "secagg.status"
+ ],
+ "projection": "PROJECTION_V1: drop run_id, run-derived event_id and emitted_at_us only",
+ "samples_validated": 6,
+ "separate_from_monitoring_journal": "product/federation/journal.py (FederationEventJournal) vs product/monitoring/event_journal.py",
+ "sequence_contiguous": [
+  true,
+  true
+ ],
+ "stream_sha256": [
+  "9063772a94a129a335a3404462d191e8b2e858dac79e06a92cbd325da59f7f9c",
+  "9063772a94a129a335a3404462d191e8b2e858dac79e06a92cbd325da59f7f9c"
+ ]
+}

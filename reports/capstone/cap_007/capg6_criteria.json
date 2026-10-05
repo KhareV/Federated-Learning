@@ -1,0 +1,1062 @@
+{
+ "all_decided_pass": true,
+ "cap007_tests": {
+  "passed": 107,
+  "total": 107
+ },
+ "criteria": [
+  {
+   "checks": [
+    "@cap_pass_1"
+   ],
+   "criterion": 1,
+   "pass": true,
+   "text": "CAP-001/CAPG0 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_2"
+   ],
+   "criterion": 2,
+   "pass": true,
+   "text": "CAP-002/CAPG1 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_3"
+   ],
+   "criterion": 3,
+   "pass": true,
+   "text": "CAP-003/CAPG2 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_4"
+   ],
+   "criterion": 4,
+   "pass": true,
+   "text": "CAP-004/CAPG3 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_5"
+   ],
+   "criterion": 5,
+   "pass": true,
+   "text": "CAP-005/CAPG4 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_6"
+   ],
+   "criterion": 6,
+   "pass": true,
+   "text": "CAP-006/CAPG5 PASS"
+  },
+  {
+   "checks": [
+    "@locks_verified"
+   ],
+   "criterion": 7,
+   "pass": true,
+   "text": "every prior protocol lock and amendment chain verifies (CAP-001..006, CAPSTONE_UI_V1, V2-FL system, FEDPROX_MU_V2, FL_INIT_V2)"
+  },
+  {
+   "checks": [
+    "@frontend_unchanged"
+   ],
+   "criterion": 8,
+   "pass": true,
+   "text": "CAPSTONE_UI_V1 lock verifies and the frontend is byte-identical to the entry commit (Federation pages stay NOT YET ENABLED)"
+  },
+  {
+   "checks": [
+    "@v2fl005_unchanged"
+   ],
+   "criterion": 9,
+   "pass": true,
+   "text": "V2-FL-005 evidence, FL_INIT_V2 and the V2 FL / FedProx / SecAgg bound artifacts are unchanged"
+  },
+  {
+   "checks": [
+    "@no_scientific_drift"
+   ],
+   "criterion": 10,
+   "pass": true,
+   "text": "MODEL_V1/MODEL_V2_FINAL, calibrations, SOFTWARE_SYSTEM_V2, DEFAULT_RUNTIME_BINDING_V2 and every other named protected component are unchanged"
+  },
+  {
+   "checks": [
+    "test_the_frozen_cap_006_client_and_every_protected_file_are_byte_identical_to_the_entry_commit",
+    "@cap006_unchanged"
+   ],
+   "criterion": 11,
+   "pass": true,
+   "text": "the CAP-006 implementation, the CAP-004 store/auth/persistence, api/product_app_v1_1.py and the CAP-003 monitoring path are byte-identical to the entry commit"
+  },
+  {
+   "checks": [
+    "@entry_audit_ok",
+    "@prospective_control_plane"
+   ],
+   "criterion": 12,
+   "pass": true,
+   "text": "the entry commit is recorded, HEAD descends from it and CAP-007 was marked IN_PROGRESS / CAPG6 NOT_STARTED before any implementation"
+  },
+  {
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ],
+   "criterion": 13,
+   "pass": true,
+   "text": "the CAPSTONE_FEDERATION_PROTOCOL_V1 freeze commit precedes every canonical result file and no bound file drifted since the freeze"
+  },
+  {
+   "checks": [
+    "@reconciliation_prospective"
+   ],
+   "criterion": 14,
+   "pass": true,
+   "text": "the contract reconciliation audit was written prospectively and records the exact V1->V2 delta"
+  },
+  {
+   "checks": [
+    "test_contract_v2_is_an_additive_successor_with_exactly_one_transition_delta",
+    "@contract_v1_unchanged"
+   ],
+   "criterion": 15,
+   "pass": true,
+   "text": "CAPSTONE_FEDERATION_CONTRACT_V2 is an additive successor: the V1 file is unchanged and the only delta is AGGREGATING -> COMPLETED for non-final rounds"
+  },
+  {
+   "checks": [
+    "test_non_final_round_may_complete_after_aggregating_and_only_the_final_round_creates_a_candidate"
+   ],
+   "criterion": 16,
+   "pass": true,
+   "text": "non-final rounds complete after aggregation and only the final round creates a candidate"
+  },
+  {
+   "checks": [
+    "test_execution_binding_freezes_one_candidate_and_the_lineage_rules",
+    "@binding_frozen"
+   ],
+   "criterion": 17,
+   "pass": true,
+   "text": "CAPSTONE_FEDERATION_EXECUTION_BINDING_V1 is frozen with one candidate per run, intermediate aggregates as round states and the lineage rules"
+  },
+  {
+   "checks": [
+    "test_client_v2_refuses_unverified_bases_and_reuses_the_v1_training_path",
+    "@client_successor_audit"
+   ],
+   "criterion": 18,
+   "pass": true,
+   "text": "CAPSTONE_FL_CLIENT_ADAPTER_V2 is an additive successor of V1 (V1 unchanged) that inherits, not re-implements, the local training path"
+  },
+  {
+   "checks": [
+    "test_round_two_cannot_start_from_fl_init_and_model_v2_final_is_never_a_base"
+   ],
+   "criterion": 19,
+   "pass": true,
+   "text": "round 1 starts only from FL_INIT_V2"
+  },
+  {
+   "checks": [
+    "test_each_round_starts_from_the_previous_committed_state_and_the_candidate_is_the_round_3_state",
+    "@round_lineage"
+   ],
+   "criterion": 20,
+   "pass": true,
+   "text": "every round N>1 starts from the digest of the immediately preceding committed round state"
+  },
+  {
+   "checks": [
+    "test_round_two_cannot_start_from_fl_init_and_model_v2_final_is_never_a_base",
+    "@no_final_as_base_in_code"
+   ],
+   "criterion": 21,
+   "pass": true,
+   "text": "MODEL_V2_FINAL and candidates are refused as a federation base"
+  },
+  {
+   "checks": [
+    "@canonical_base"
+   ],
+   "criterion": 22,
+   "pass": true,
+   "text": "the canonical run base model is FL_INIT_V2"
+  },
+  {
+   "checks": [
+    "test_a_user_can_never_submit_a_model_or_hyperparameter_field"
+   ],
+   "criterion": 23,
+   "pass": true,
+   "text": "a user cannot submit a model, checkpoint, mu, learning rate, optimizer, batch size, calibration, threshold, base model or candidate id"
+  },
+  {
+   "checks": [
+    "test_request_fields_are_exactly_the_five_frozen_fields"
+   ],
+   "criterion": 24,
+   "pass": true,
+   "text": "the create-run request carries exactly the five frozen request fields"
+  },
+  {
+   "checks": [
+    "test_public_create_run_rejects_every_non_frozen_scenario_and_round_count"
+   ],
+   "criterion": 25,
+   "pass": true,
+   "text": "only FL_SINGLE_RUN is accepted publicly and planned_rounds must be 3"
+  },
+  {
+   "checks": [
+    "test_public_create_run_rejects_every_non_frozen_scenario_and_round_count",
+    "@no_out_of_scope"
+   ],
+   "criterion": 26,
+   "pass": true,
+   "text": "monitoring scenario ids, FL_NEW_LOCAL_BATCH and FL_MULTIRUN_CANDIDATE_HISTORY are rejected publicly"
+  },
+  {
+   "checks": [
+    "@live_run_ok"
+   ],
+   "criterion": 27,
+   "pass": true,
+   "text": "the canonical LIVE_RUN completes through the real CAPSTONE_PRODUCT_API_V1_2 process with explicit DEMO auth and a temporary SQLite file"
+  },
+  {
+   "checks": [
+    "@live_calls_24"
+   ],
+   "criterion": 28,
+   "pass": true,
+   "text": "the canonical run performs exactly 24 genuine local training calls"
+  },
+  {
+   "checks": [
+    "@live_accepted_24",
+    "@live_no_failures"
+   ],
+   "criterion": 29,
+   "pass": true,
+   "text": "the canonical run has 24 accepted and 0 rejected updates"
+  },
+  {
+   "checks": [
+    "@live_rounds_3"
+   ],
+   "criterion": 30,
+   "pass": true,
+   "text": "the canonical run has exactly 3 rounds of 8 accepted updates"
+  },
+  {
+   "checks": [
+    "@live_clients"
+   ],
+   "criterion": 31,
+   "pass": true,
+   "text": "the canonical run uses exactly the eight SIM_FL_SITE_00..07 clients"
+  },
+  {
+   "checks": [
+    "@live_one_candidate"
+   ],
+   "criterion": 32,
+   "pass": true,
+   "text": "the canonical run creates exactly one candidate, CAPSTONE_FL_CANDIDATE_0001, in an empty registry"
+  },
+  {
+   "checks": [
+    "@candidate_parent"
+   ],
+   "criterion": 33,
+   "pass": true,
+   "text": "the candidate parent is FL_INIT_V2"
+  },
+  {
+   "checks": [
+    "@candidate_digest"
+   ],
+   "criterion": 34,
+   "pass": true,
+   "text": "the candidate digest equals the round-3 committed global state"
+  },
+  {
+   "checks": [
+    "test_round_state_paths_match_the_frozen_v2_contract",
+    "@live_round_states"
+   ],
+   "criterion": 35,
+   "pass": true,
+   "text": "round state paths equal the frozen CAPSTONE_FEDERATION_CONTRACT_V2 paths"
+  },
+  {
+   "checks": [
+    "test_events_are_valid_contiguous_federation_only_and_deterministic",
+    "@event_validation"
+   ],
+   "criterion": 36,
+   "pass": true,
+   "text": "every federation event validates against PRODUCT_LIVE_EVENT_V1, the sequence is contiguous and ids are deterministic"
+  },
+  {
+   "checks": [
+    "@progress_policy"
+   ],
+   "criterion": 37,
+   "pass": true,
+   "text": "training progress events carry only the frozen start (0) and completion (1) milestones"
+  },
+  {
+   "checks": [
+    "test_start_returns_promptly_and_a_second_live_run_is_refused_while_one_is_active",
+    "@start_latency"
+   ],
+   "criterion": 38,
+   "pass": true,
+   "text": "POST start returns promptly while the run executes in the background"
+  },
+  {
+   "checks": [
+    "@repro_semantic"
+   ],
+   "criterion": 39,
+   "pass": true,
+   "text": "two canonical runs in fresh processes are semantically identical"
+  },
+  {
+   "checks": [
+    "@repro_fresh_processes"
+   ],
+   "criterion": 40,
+   "pass": true,
+   "text": "the two canonical runs used different server process ids and both created CAPSTONE_FL_CANDIDATE_0001 in their own empty databases"
+  },
+  {
+   "checks": [
+    "@repro_events"
+   ],
+   "criterion": 41,
+   "pass": true,
+   "text": "the two canonical federation event streams are identical after the frozen projection"
+  },
+  {
+   "checks": [
+    "@live_subscribers_identical"
+   ],
+   "criterion": 42,
+   "pass": true,
+   "text": "every subscriber (two live, one late reconnect) received the identical stream"
+  },
+  {
+   "checks": [
+    "test_no_event_or_row_carries_data_labels_truth_or_tensors"
+   ],
+   "criterion": 43,
+   "pass": true,
+   "text": "no federation event or SQL row carries raw data, labels, truth or tensors"
+  },
+  {
+   "checks": [
+    "test_every_submitted_envelope_passes_the_forbidden_field_scan"
+   ],
+   "criterion": 44,
+   "pass": true,
+   "text": "every submitted envelope passes scan_forbidden with zero findings"
+  },
+  {
+   "checks": [
+    "@parity_lineage"
+   ],
+   "criterion": 45,
+   "pass": true,
+   "text": "the V2-FL-005 global state lineage (FL_INIT, round 1, round 2, round 3) is reproduced exactly"
+  },
+  {
+   "checks": [
+    "@parity_clients",
+    "@parity_examples"
+   ],
+   "criterion": 46,
+   "pass": true,
+   "text": "all 24 updates match V2-FL-005: client set, per-round examples_seen"
+  },
+  {
+   "checks": [
+    "@parity_seeds"
+   ],
+   "criterion": 47,
+   "pass": true,
+   "text": "all 24 updates match V2-FL-005 shuffle seeds"
+  },
+  {
+   "checks": [
+    "@parity_update_sha"
+   ],
+   "criterion": 48,
+   "pass": true,
+   "text": "all 24 updates match V2-FL-005 update SHAs"
+  },
+  {
+   "checks": [
+    "@parity_bases"
+   ],
+   "criterion": 49,
+   "pass": true,
+   "text": "per-round base and committed digests match V2-FL-005"
+  },
+  {
+   "checks": [
+    "@parity_candidate"
+   ],
+   "criterion": 50,
+   "pass": true,
+   "text": "the candidate digest equals the V2-FL-005 round-3 state"
+  },
+  {
+   "checks": [
+    "@parity_both",
+    "test_canonical_run_has_exact_v2_fl_005_lineage_and_update_parity"
+   ],
+   "criterion": 51,
+   "pass": true,
+   "text": "the V2-FL-005 parity holds in both canonical runs"
+  },
+  {
+   "checks": [
+    "test_ids_are_allocated_atomically_across_concurrent_creators",
+    "test_first_candidate_is_0001_with_fl_init_parent_and_sandbox_unreachable_defaults"
+   ],
+   "criterion": 52,
+   "pass": true,
+   "text": "candidate IDs are allocated atomically and the first candidate in an empty registry is 0001"
+  },
+  {
+   "checks": [
+    "test_an_existing_artifact_directory_forces_the_next_number"
+   ],
+   "criterion": 53,
+   "pass": true,
+   "text": "an existing artifact directory forces the next candidate number"
+  },
+  {
+   "checks": [
+    "test_artifact_is_written_then_verified_and_tampering_is_detected",
+    "@artifact_files"
+   ],
+   "criterion": 54,
+   "pass": true,
+   "text": "the candidate artifact is serialised, verified, atomically renamed and tampering is detected"
+  },
+  {
+   "checks": [
+    "test_candidate_weights_never_enter_sqlite_and_only_the_five_policy_tables_are_used"
+   ],
+   "criterion": 55,
+   "pass": true,
+   "text": "candidate weights never enter SQLite and only the five policy tables are used"
+  },
+  {
+   "checks": [
+    "test_released_namespace_is_frozen_and_candidates_never_enter_it",
+    "@models_namespaces"
+   ],
+   "criterion": 56,
+   "pass": true,
+   "text": "the released and candidate model namespaces never mix"
+  },
+  {
+   "checks": [
+    "@artifact_hash"
+   ],
+   "criterion": 57,
+   "pass": true,
+   "text": "the candidate state file digest matches its metadata and the registry row"
+  },
+  {
+   "checks": [
+    "test_global_read_routes_and_the_models_namespaces"
+   ],
+   "criterion": 58,
+   "pass": true,
+   "text": "GET /models and GET /models/{id} are authenticated read-only GLOBAL_READ routes"
+  },
+  {
+   "checks": [
+    "test_the_successor_exposes_exactly_the_ten_cap_007_routes_and_no_later_phase_route",
+    "test_the_api_module_adds_no_cap_009_or_promotion_surface"
+   ],
+   "criterion": 59,
+   "pass": true,
+   "text": "no promote, deploy, set-default or select-model route exists"
+  },
+  {
+   "checks": [
+    "@no_deployment"
+   ],
+   "criterion": 60,
+   "pass": true,
+   "text": "production_deployed is false and scientific_promotion is false everywhere"
+  },
+  {
+   "checks": [
+    "test_only_the_five_frozen_checks_exist_and_all_pass_for_the_canonical_candidate"
+   ],
+   "criterion": 61,
+   "pass": true,
+   "text": "only the five frozen structural validation checks exist and all pass for the canonical candidate"
+  },
+  {
+   "checks": [
+    "test_each_check_fails_for_its_own_defect"
+   ],
+   "criterion": 62,
+   "pass": true,
+   "text": "each validation check fails for its own defect"
+  },
+  {
+   "checks": [
+    "test_accept_requires_all_checks_and_yields_sandbox_only_never_promotion"
+   ],
+   "criterion": 63,
+   "pass": true,
+   "text": "acceptance requires every check and yields sandbox-only status"
+  },
+  {
+   "checks": [
+    "test_a_failed_check_rejects_the_candidate_and_it_never_reaches_the_sandbox"
+   ],
+   "criterion": 64,
+   "pass": true,
+   "text": "a failed check rejects the candidate and it never reaches the sandbox"
+  },
+  {
+   "checks": [
+    "test_governance_state_machine_is_the_frozen_one_and_cannot_skip_validation",
+    "test_incomplete_or_reordered_check_lists_never_accept"
+   ],
+   "criterion": 65,
+   "pass": true,
+   "text": "the governance state machine is the frozen one and cannot skip validation"
+  },
+  {
+   "checks": [
+    "@governance_persisted"
+   ],
+   "criterion": 66,
+   "pass": true,
+   "text": "the governance decision is persisted with scientific_promotion=false and production_deployed=false"
+  },
+  {
+   "checks": [
+    "test_the_canonical_run_persisted_one_accepted_decision_and_no_inference_surface",
+    "@no_sandbox_runtime"
+   ],
+   "criterion": 67,
+   "pass": true,
+   "text": "no inference runs on a candidate and no CAPSTONE_FL_SANDBOX_RUNTIME exists"
+  },
+  {
+   "checks": [
+    "@fedprox_run"
+   ],
+   "criterion": 68,
+   "pass": true,
+   "text": "a full temporary FedProx 3-round product run completes with 24 calls and 24 accepted updates"
+  },
+  {
+   "checks": [
+    "test_full_fedprox_run_uses_the_frozen_mu_and_creates_one_finite_candidate",
+    "@fedprox_mu"
+   ],
+   "criterion": 69,
+   "pass": true,
+   "text": "FedProx uses the frozen mu 0.1 and produces one finite candidate"
+  },
+  {
+   "checks": [
+    "@fedprox_clean"
+   ],
+   "criterion": 70,
+   "pass": true,
+   "text": "the FedProx run computes no metrics, tunes nothing and deploys nothing"
+  },
+  {
+   "checks": [
+    "test_invalid_update_probe_uses_the_existing_rejection_logic_and_creates_nothing",
+    "@invalid_codes"
+   ],
+   "criterion": 71,
+   "pass": true,
+   "text": "the invalid-update scenario produces STALE_ROUND, DUPLICATE_UPDATE, BASE_STATE_MISMATCH and UNKNOWN_CLIENT through the existing coordinator logic"
+  },
+  {
+   "checks": [
+    "@invalid_no_candidate",
+    "@no_injected_updates"
+   ],
+   "criterion": 72,
+   "pass": true,
+   "text": "the invalid-update scenario is separate: normal runs inject nothing and no run, round or candidate is created"
+  },
+  {
+   "checks": [
+    "test_shadow_run_verifies_round_one_only_and_the_authoritative_result_stays_plain",
+    "test_plain_runs_report_not_used_each_round_and_aggregation_is_plain"
+   ],
+   "criterion": 73,
+   "pass": true,
+   "text": "the SecAgg shadow verifies round 1 only and aggregation stays PLAIN"
+  },
+  {
+   "checks": [
+    "@secagg_expected"
+   ],
+   "criterion": 74,
+   "pass": true,
+   "text": "the shadow run matched the expectations 8 clients, max_weight 256, 8 plain clear updates, 0 protected clear updates"
+  },
+  {
+   "checks": [
+    "test_the_frozen_tolerances_and_expectations_are_untouched"
+   ],
+   "criterion": 75,
+   "pass": true,
+   "text": "the frozen SecAgg tolerances are untouched and never widened"
+  },
+  {
+   "checks": [
+    "test_a_failed_shadow_fails_the_run_loudly_without_a_candidate"
+   ],
+   "criterion": 76,
+   "pass": true,
+   "text": "a failed shadow fails the run loudly without a candidate"
+  },
+  {
+   "checks": [
+    "@secagg_claim_scope"
+   ],
+   "criterion": 77,
+   "pass": true,
+   "text": "the SecAgg claim scope is PROTECTED_AGGREGATION_INTERFACE_ONLY with no DP or anonymity claim"
+  },
+  {
+   "checks": [
+    "@db_counts"
+   ],
+   "criterion": 78,
+   "pass": true,
+   "text": "only the five federation policy tables are populated with the exact expected counts"
+  },
+  {
+   "checks": [
+    "@db_integrity"
+   ],
+   "criterion": 79,
+   "pass": true,
+   "text": "SQLite integrity and foreign-key checks pass and a separate connection is used"
+  },
+  {
+   "checks": [
+    "@schema_unchanged"
+   ],
+   "criterion": 80,
+   "pass": true,
+   "text": "the SQLite schema and storage policy are unchanged"
+  },
+  {
+   "checks": [
+    "@restart_ok",
+    "test_restart_after_round_two_resumes_round_three_with_the_identical_final_digest"
+   ],
+   "criterion": 81,
+   "pass": true,
+   "text": "a killed server restarted in a fresh process resumes round 3 after the round-2 checkpoint"
+  },
+  {
+   "checks": [
+    "@restart_digest"
+   ],
+   "criterion": 82,
+   "pass": true,
+   "text": "the resumed run ends with the identical final digest and the canonical event stream"
+  },
+  {
+   "checks": [
+    "@restart_no_dupes"
+   ],
+   "criterion": 83,
+   "pass": true,
+   "text": "the resumed run has one candidate and no duplicated updates or decisions"
+  },
+  {
+   "checks": [
+    "test_a_running_run_without_a_valid_checkpoint_is_marked_failed_never_fabricated",
+    "test_corrupt_or_mismatched_checkpoints_fail_the_run"
+   ],
+   "criterion": 84,
+   "pass": true,
+   "text": "a RUNNING run without a valid checkpoint or with inconsistent metadata is marked FAILED, never fabricated"
+  },
+  {
+   "checks": [
+    "test_recovery_is_a_no_op_for_finished_runs_and_for_runs_owned_by_this_process"
+   ],
+   "criterion": 85,
+   "pass": true,
+   "text": "recovery leaves finished runs untouched"
+  },
+  {
+   "checks": [
+    "@replay_ok"
+   ],
+   "criterion": 86,
+   "pass": true,
+   "text": "a REPLAY run replays a real prior completed LIVE_RUN and is visibly run_type REPLAY"
+  },
+  {
+   "checks": [
+    "test_replay_reproduces_the_source_stream_with_zero_training_and_zero_new_candidates",
+    "@replay_no_work"
+   ],
+   "criterion": 87,
+   "pass": true,
+   "text": "a REPLAY performs zero training, submission, aggregation, SecAgg, candidate or governance work"
+  },
+  {
+   "checks": [
+    "@replay_parity"
+   ],
+   "criterion": 88,
+   "pass": true,
+   "text": "the REPLAY stream has semantic parity with its source"
+  },
+  {
+   "checks": [
+    "test_replay_without_a_completed_source_fails_clearly_and_creates_no_run"
+   ],
+   "criterion": 89,
+   "pass": true,
+   "text": "a REPLAY without a completed source fails clearly and creates no run"
+  },
+  {
+   "checks": [
+    "test_replay_does_not_use_another_users_run_or_a_different_configuration",
+    "test_replay_is_visibly_replay_in_every_status_event"
+   ],
+   "criterion": 90,
+   "pass": true,
+   "text": "a REPLAY never uses another user's run or a different configuration"
+  },
+  {
+   "checks": [
+    "test_the_successor_exposes_exactly_the_ten_cap_007_routes_and_no_later_phase_route"
+   ],
+   "criterion": 91,
+   "pass": true,
+   "text": "exactly the ten CAP-007 routes exist and no CAP-008/CAP-009 route"
+  },
+  {
+   "checks": [
+    "test_system_reports_engineering_federation_and_the_unchanged_released_model",
+    "@system_info"
+   ],
+   "criterion": 92,
+   "pass": true,
+   "text": "system info reports CAPSTONE_PRODUCT_API_V1_2, federation_runtime ENABLED_ENGINEERING, simulated-only hardware and MODEL_V2_FINAL"
+  },
+  {
+   "checks": [
+    "test_all_federation_routes_require_authentication"
+   ],
+   "criterion": 93,
+   "pass": true,
+   "text": "every federation and model route requires authentication"
+  },
+  {
+   "checks": [
+    "test_run_ownership_for_get_list_rounds_and_start",
+    "@ownership_ok"
+   ],
+   "criterion": 94,
+   "pass": true,
+   "text": "run create/list/get/start/rounds/WS are owner-only; overview, clients and models are authenticated GLOBAL_READ"
+  },
+  {
+   "checks": [
+    "test_close_codes_4401_4403_4404",
+    "@ws_codes"
+   ],
+   "criterion": 95,
+   "pass": true,
+   "text": "WS closes with 4401 / 4403 / 4404 for unauthenticated / foreign / unknown runs"
+  },
+  {
+   "checks": [
+    "test_a_finished_run_replays_from_sequence_zero_identically_to_every_subscriber",
+    "test_live_tail_reconnect_and_multiple_concurrent_subscribers_on_a_running_run"
+   ],
+   "criterion": 96,
+   "pass": true,
+   "text": "the WebSocket replays from sequence 0 then tails, supports reconnect, zero and multiple subscribers"
+  },
+  {
+   "checks": [
+    "test_the_channel_is_server_to_client_only"
+   ],
+   "criterion": 97,
+   "pass": true,
+   "text": "the federation channel is server-to-client only"
+  },
+  {
+   "checks": [
+    "test_start_returns_promptly_and_a_second_live_run_is_refused_while_one_is_active",
+    "@concurrency_ok"
+   ],
+   "criterion": 98,
+   "pass": true,
+   "text": "at most one LIVE run is active globally and a second start is refused with FEDERATION_RUN_ALREADY_ACTIVE"
+  },
+  {
+   "checks": [
+    "test_the_released_default_runtime_is_unchanged_and_names_no_candidate"
+   ],
+   "criterion": 99,
+   "pass": true,
+   "text": "the released default runtime is unchanged and references no candidate"
+  },
+  {
+   "checks": [
+    "test_no_candidate_reference_exists_in_the_frontend_or_the_inference_service_sources"
+   ],
+   "criterion": 100,
+   "pass": true,
+   "text": "no candidate reference exists in the frontend, the CAP-003 client or the inference service sources"
+  },
+  {
+   "checks": [
+    "test_new_modules_import_no_truth_data_loader_or_scientific_runtime_module"
+   ],
+   "criterion": 101,
+   "pass": true,
+   "text": "the new modules import no truth, data-loader or scientific-runtime module"
+  },
+  {
+   "checks": [
+    "test_new_modules_never_compute_efficacy_metrics_or_run_inference",
+    "@no_metrics"
+   ],
+   "criterion": 102,
+   "pass": true,
+   "text": "no efficacy metric is computed and no inference is run by the new modules"
+  },
+  {
+   "checks": [
+    "test_the_central_database_holds_only_federation_metadata_no_data_labels_or_tensors"
+   ],
+   "criterion": 103,
+   "pass": true,
+   "text": "the central database holds only federation metadata, never data, labels or tensors"
+  },
+  {
+   "checks": [
+    "test_cross_user_access_is_refused_and_no_user_data_reaches_federation",
+    "@no_monitoring_data"
+   ],
+   "criterion": 104,
+   "pass": true,
+   "text": "cross-user access is refused and no monitoring or user data reaches federation"
+  },
+  {
+   "checks": [
+    "test_the_claims_in_the_overview_are_bounded",
+    "@locality_claim"
+   ],
+   "criterion": 105,
+   "pass": true,
+   "text": "claims stay bounded to engineering and one-laptop logical isolation"
+  },
+  {
+   "checks": [
+    "@no_heldout"
+   ],
+   "criterion": 106,
+   "pass": true,
+   "text": "no held-out data is loaded"
+  },
+  {
+   "checks": [
+    "@no_cap008_scope"
+   ],
+   "criterion": 107,
+   "pass": true,
+   "text": "no FL_NEW_LOCAL_BATCH, multi-run history, personalised model or hardware code exists"
+  },
+  {
+   "checks": [
+    "@targeted_tests"
+   ],
+   "criterion": 108,
+   "pass": true,
+   "text": "the targeted CAP-007 tests pass"
+  },
+  {
+   "checks": [
+    "@prior_capstone_tests"
+   ],
+   "criterion": 109,
+   "pass": true,
+   "text": "the CAP-001..006 capstone tests pass"
+  },
+  {
+   "checks": [
+    "@regression"
+   ],
+   "criterion": 110,
+   "pass": true,
+   "text": "the full local regression passes"
+  },
+  {
+   "checks": [
+    "@frontend_npm_test"
+   ],
+   "criterion": 111,
+   "pass": true,
+   "text": "frontend npm test passes"
+  },
+  {
+   "checks": [
+    "@svelte_check"
+   ],
+   "criterion": 112,
+   "pass": true,
+   "text": "svelte-check passes"
+  },
+  {
+   "checks": [
+    "@frontend_build"
+   ],
+   "criterion": 113,
+   "pass": true,
+   "text": "the frontend build passes"
+  },
+  {
+   "checks": [
+    "@ruff"
+   ],
+   "criterion": 114,
+   "pass": true,
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    "@pip"
+   ],
+   "criterion": 115,
+   "pass": true,
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "criterion": 116,
+   "pass": true,
+   "text": "CI was neither queried nor triggered"
+  },
+  {
+   "checks": [
+    "@mutation_log"
+   ],
+   "criterion": 117,
+   "pass": true,
+   "text": "all twelve mutation controls were caught by a test and restored"
+  },
+  {
+   "checks": [
+    "@protected_final"
+   ],
+   "criterion": 118,
+   "pass": true,
+   "text": "the final protected-artifact audit shows no drift and new files only in explicit CAP-007 namespaces"
+  },
+  {
+   "checks": [
+    "@no_large_artifacts"
+   ],
+   "criterion": 119,
+   "pass": true,
+   "text": "no state file, checkpoint, tensor, SQLite database or runtime event journal was committed"
+  },
+  {
+   "checks": [
+    "@components_registered"
+   ],
+   "criterion": 120,
+   "pass": true,
+   "text": "the CAP-007 components are registered and locked"
+  },
+  {
+   "checks": [
+    "@registry_cap007"
+   ],
+   "criterion": 121,
+   "pass": true,
+   "text": "CAP-007 is PASS in the task registry (final)"
+  },
+  {
+   "checks": [
+    "@registry_capg6"
+   ],
+   "criterion": 122,
+   "pass": true,
+   "text": "CAPG6 is PASS in the gate registry (final)"
+  },
+  {
+   "checks": [
+    "@registry_cap008"
+   ],
+   "criterion": 123,
+   "pass": true,
+   "text": "CAP-008 is NOT_STARTED and no CAP-008 artifact exists"
+  },
+  {
+   "checks": [
+    "@disclosures_preserved"
+   ],
+   "criterion": 124,
+   "pass": true,
+   "text": "all preserved disclosures are carried forward"
+  },
+  {
+   "checks": [
+    "@handoff_sections"
+   ],
+   "criterion": 125,
+   "pass": true,
+   "text": "the final handoff uses the exact required section list"
+  }
+ ],
+ "criteria_count": 125,
+ "decided": 125,
+ "gate": "CAPG6",
+ "known_preexisting_flake_failures_in_full_run": [],
+ "protocol_freeze": {
+  "bound_file_drift_since_freeze": [],
+  "freeze_commit": "772b1788e3e65e732578ff1dbb1b405c11f94fbc",
+  "freeze_is_ancestor_of_head": true,
+  "ok": true,
+  "result_files_present_in_freeze": []
+ },
+ "regression_summary": {
+  "passed": 2942,
+  "skipped": 1
+ },
+ "undecided": [],
+ "unknown_special_checks": []
+}

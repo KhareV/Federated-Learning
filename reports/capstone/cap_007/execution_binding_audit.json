@@ -1,0 +1,82 @@
+{
+ "binding_id": "CAPSTONE_FEDERATION_EXECUTION_BINDING_V1",
+ "candidate_parent": "FL_INIT_V2 (the run-level base), never an intermediate aggregate",
+ "concurrency": {
+  "active_live_runs_globally": 1,
+  "blocking_work": "each local epoch / aggregation / SecAgg shadow runs in a worker thread so the event loop stays responsive",
+  "replay_counts_as_active": false,
+  "second_start": "409 INVALID_STATE FEDERATION_RUN_ALREADY_ACTIVE",
+  "start_returns": "promptly; the run executes in a background task"
+ },
+ "forbidden_request_fields": [
+  "mu",
+  "learning_rate",
+  "optimizer",
+  "batch_size",
+  "model_id",
+  "checkpoint",
+  "calibration",
+  "threshold",
+  "base_model_id",
+  "candidate_id"
+ ],
+ "intermediate_aggregates_are_round_states": true,
+ "locality_claim": "one-laptop logical isolation only: no hospital, hardware, VM, enclave or privacy claim",
+ "one_candidate_per_run": true,
+ "public_request_fields": [
+  "run_type",
+  "algorithm",
+  "secagg_mode",
+  "planned_rounds",
+  "scenario_id"
+ ],
+ "public_scenario": "FL_SINGLE_RUN",
+ "replay": {
+  "no_source": "409 INVALID_STATE NO_COMPLETED_SOURCE_RUN_FOR_REPLAY at create",
+  "parity": "payloads and event kinds equal to the source stream excluding run_id, event ids and timestamps",
+  "source": "most recent COMPLETED LIVE_RUN of the same owner with the same scenario/algorithm/secagg_mode/planned_rounds",
+  "source_recorded_in": "artifact run.json (replay_source_run_id); not a request field",
+  "work": "zero training / submit / aggregate / SecAgg / candidate / governance"
+ },
+ "restart_resume": {
+  "checkpoint": "round boundary after each non-final committed round; binds run id, protocol id, cohort identity, algorithm, last committed round, state sha, state file sha, event count",
+  "invalid": "RUNNING run without a valid checkpoint or with inconsistent metadata is marked FAILED (never fabricated)",
+  "mid_round_resume": "unsupported",
+  "orphan_candidate_artifacts": "candidate artifacts of the run without a database row are removed before resume",
+  "resume": "RUNNING run with a valid checkpoint is resumed from the next round by the recovering process"
+ },
+ "round_level_base_digests": {
+  "round_1": "FL_INIT_V2 round-0 state digest (frozen)",
+  "round_N_gt_1": "digest of the immediately preceding committed round global state"
+ },
+ "run_level_base": "FL_INIT_V2 (the only allowed run base in CAP-007; MODEL_V2_FINAL and CAPSTONE_FL_CANDIDATE_* are refused)",
+ "secagg_shadow": {
+  "authoritative_aggregation": "PLAIN",
+  "claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY",
+  "expected": {
+   "clients": 8,
+   "max_weight": 256,
+   "plain_clear_update_count": 8,
+   "protected_clear_update_count": 0
+  },
+  "implementation": "federated.wearable_fl_secagg_shadow_v1.run_shadow (unchanged)",
+  "on_failure": "run FAILED loudly; tolerances never widened",
+  "scope": "round 1 only"
+ },
+ "training_progress_policy": {
+  "completion": {
+   "examples_seen": "result.examples_seen",
+   "progress_fraction": 1.0
+  },
+  "events": "client.training_progress",
+  "intermediate_progress": "never invented",
+  "milestones": [
+   0.0,
+   1.0
+  ],
+  "start": {
+   "examples_seen": 0,
+   "progress_fraction": 0.0
+  }
+ }
+}

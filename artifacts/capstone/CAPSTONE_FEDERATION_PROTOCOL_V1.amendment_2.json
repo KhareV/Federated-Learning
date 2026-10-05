@@ -1,0 +1,19 @@
+{
+ "amendment_id": "CAPSTONE_FEDERATION_PROTOCOL_V1_AMENDMENT_2",
+ "change": "The @reconciliation_prospective evaluator reads the V1->V2 delta from reconciliation_B_candidate_cardinality.delta (where the prospective audit records it) instead of a non-existent top-level 'delta' key. Criterion text unchanged.",
+ "defect": "The first recorded criteria evaluation raised KeyError: 'delta' (the dry run never reached that line because the freeze commit did not exist yet).",
+ "files": {
+  "scripts/cap_007_build_evidence.py": {
+   "new_sha256": "f05c8f3c75ac29c678a672193bccf2b82f99af9a2a7a92f606b9877be8c02c24",
+   "old_sha256": "0c73d619ca0bd1bc38b5a7dc03d3996625e57c7d0ea65dd3742f8548fb8e0fc6"
+  }
+ },
+ "freeze_commit": "772b178",
+ "made_before": "the recorded CAPG6 criteria evaluation",
+ "made_during": "CAP-007 after its method freeze and the recorded canonical runs (criteria text, canonical runs and implementation unchanged)",
+ "previous_amendment": "CAPSTONE_FEDERATION_PROTOCOL_V1_AMENDMENT_1",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical",
+  "capg6_criteria_text": "identical"
+ }
+}

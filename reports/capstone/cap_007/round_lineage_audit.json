@@ -1,0 +1,45 @@
+{
+ "candidate_dirs": [
+  [
+   "CAPSTONE_FL_CANDIDATE_0001"
+  ],
+  [
+   "CAPSTONE_FL_CANDIDATE_0001"
+  ]
+ ],
+ "intermediate_aggregates_are_registry_candidates": false,
+ "runs": {
+  "run_1": {
+   "candidate_is_round3_state": true,
+   "committed_digests": {
+    "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+    "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+    "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+   },
+   "round1_base_is_fl_init": true,
+   "round2_base_equals_round1_committed": true,
+   "round3_base_equals_round2_committed": true,
+   "round_base_digests": {
+    "1": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+    "2": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+    "3": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef"
+   }
+  },
+  "run_2": {
+   "candidate_is_round3_state": true,
+   "committed_digests": {
+    "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+    "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+    "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+   },
+   "round1_base_is_fl_init": true,
+   "round2_base_equals_round1_committed": true,
+   "round3_base_equals_round2_committed": true,
+   "round_base_digests": {
+    "1": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+    "2": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+    "3": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef"
+   }
+  }
+ }
+}

@@ -1,0 +1,82 @@
+{
+ "candidate_dirs_after_replay": [
+  "CAPSTONE_FL_CANDIDATE_0001"
+ ],
+ "candidate_ids_of_replay_run": [],
+ "candidates_in_registry": [
+  "CAPSTONE_FL_CANDIDATE_0001"
+ ],
+ "db_counts_after_replay": {
+  "candidate_models": 1,
+  "federation_rounds": 6,
+  "federation_runs": 2,
+  "fl_client_statuses": 48,
+  "governance_decisions": 1
+ },
+ "db_counts_before_replay": {
+  "candidate_models": 1,
+  "federation_rounds": 3,
+  "federation_runs": 1,
+  "fl_client_statuses": 24,
+  "governance_decisions": 1
+ },
+ "event_count_replay": 203,
+ "event_count_source": 203,
+ "event_kinds_equal": true,
+ "extra_request_field_for_source": false,
+ "no_new_candidate": true,
+ "no_new_governance_decision": true,
+ "replay_checkpoints_written": false,
+ "replay_duration_s": 0.042,
+ "replay_pid": 76404,
+ "replay_run_id_differs": true,
+ "replay_training_record_present": false,
+ "replay_work": {
+  "aggregate": 0,
+  "candidate": 0,
+  "governance": 0,
+  "secagg": 0,
+  "submit": 0,
+  "training": 0
+ },
+ "request_fields": [
+  "algorithm",
+  "planned_rounds",
+  "run_type",
+  "scenario_id",
+  "secagg_mode"
+ ],
+ "round_states": [
+  [
+   1,
+   "COMPLETED",
+   8,
+   null
+  ],
+  [
+   2,
+   "COMPLETED",
+   8,
+   null
+  ],
+  [
+   3,
+   "COMPLETED",
+   8,
+   null
+  ]
+ ],
+ "run_status": "COMPLETED",
+ "run_type": "REPLAY",
+ "scenario": "REPLAY",
+ "semantic_parity_with_source": true,
+ "source_candidate_ids": [
+  "CAPSTONE_FL_CANDIDATE_0001"
+ ],
+ "source_pid": 76391,
+ "source_run_id_recorded_in_artifact_meta": true,
+ "status_event_run_types": [
+  "REPLAY"
+ ],
+ "ws_errors": []
+}

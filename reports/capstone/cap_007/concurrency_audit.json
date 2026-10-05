@@ -1,0 +1,23 @@
+{
+ "first_run_final_status": "COMPLETED",
+ "first_start_run_status": "RUNNING",
+ "first_start_status": 200,
+ "only_one_candidate_in_registry": true,
+ "overview_active_live_run_after_finish": false,
+ "overview_active_live_run_seen_by_other_process": true,
+ "scenario": "ONE_ACTIVE_LIVE_RUN",
+ "second_start_other_process_body": {
+  "error": {
+   "code": "INVALID_STATE",
+   "message": "FEDERATION_RUN_ALREADY_ACTIVE"
+  }
+ },
+ "second_start_other_process_status": 409,
+ "second_start_same_user_body": {
+  "error": {
+   "code": "INVALID_STATE",
+   "message": "FEDERATION_RUN_ALREADY_ACTIVE"
+  }
+ },
+ "second_start_same_user_status": 409
+}

@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_FEDERATION_PROTOCOL_V1_AMENDMENT_1",
+ "change": "The CAP-007 protected audit's MODIFIABLE allow-list includes tests/test_capstone_session_service.py (the file amended by CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1 amendment 7). New files remain constrained to the explicit CAP-007 additive namespaces (no blanket allowance).",
+ "defect": "The frozen CAP-004 guard test scans capstone_persistence/ for FL tokens and therefore failed on the new CAP-007 file capstone_persistence/federation_store.py (it names the frozen federation column 'secagg_mode'); its recorded amendment is an allowed modification.",
+ "files": {
+  "scripts/cap_007_protected_audit.py": {
+   "new_sha256": "b7f046f1a7d271b08eb652aae80fe74bbd865d1a2e754e11a582c9cfe856cc9f",
+   "old_sha256": "b5db769efe2ed31078e7ffa61651790314eac565da22fdbf2605c6f5b7cfe654"
+  }
+ },
+ "freeze_commit": "772b178",
+ "made_before": "the recorded CAPG6 criteria evaluation and protected_artifact_final.json",
+ "made_during": "CAP-007 after its method freeze and after the recorded canonical runs and mutation controls (no CAPG6 criterion text, canonical run or implementation file changes)",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical",
+  "capg6_criteria_text": "identical"
+ }
+}

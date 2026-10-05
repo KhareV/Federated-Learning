@@ -1,0 +1,41 @@
+{
+ "candidate_references": [],
+ "files_checked": [
+  "api/product_app_v1_1.py",
+  "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json",
+  "artifacts/SOFTWARE_SYSTEM_V2.lock.json",
+  "product/inference/client.py",
+  "product/session.py"
+ ],
+ "frontend_candidate_references": [],
+ "released_default": [
+  "MODEL_V2_FINAL",
+  "MODEL_V2_FINAL"
+ ],
+ "system_info": [
+  {
+   "auth_provider": "DEMO",
+   "calibration_id": "CAL_V2",
+   "demo_mode": true,
+   "federation_runtime": "ENABLED_ENGINEERING",
+   "hardware_mode": "SIMULATED_ONLY",
+   "model_id": "MODEL_V2_FINAL",
+   "persistence_mode": "SQLITE",
+   "physical_hardware_available": false,
+   "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_2",
+   "software_system": "SOFTWARE_SYSTEM_V2"
+  },
+  {
+   "auth_provider": "DEMO",
+   "calibration_id": "CAL_V2",
+   "demo_mode": true,
+   "federation_runtime": "ENABLED_ENGINEERING",
+   "hardware_mode": "SIMULATED_ONLY",
+   "model_id": "MODEL_V2_FINAL",
+   "persistence_mode": "SQLITE",
+   "physical_hardware_available": false,
+   "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_2",
+   "software_system": "SOFTWARE_SYSTEM_V2"
+  }
+ ]
+}

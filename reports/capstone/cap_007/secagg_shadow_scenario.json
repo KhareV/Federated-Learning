@@ -1,0 +1,494 @@
+{
+ "accepted_updates": 24,
+ "aggregation_modes": [
+  "PLAIN"
+ ],
+ "algorithm": "FEDAVG",
+ "artifacts": {
+  "candidate_dirs_total": [
+   "CAPSTONE_FL_CANDIDATE_0001"
+  ],
+  "candidates": {
+   "CAPSTONE_FL_CANDIDATE_0001": {
+    "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+    "files": [
+     "metadata.json",
+     "state.bin"
+    ],
+    "parent_model_id": "FL_INIT_V2",
+    "production_deployed": false,
+    "state_bytes": 240828,
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "state_file_sha256_matches_metadata": true
+   }
+  },
+  "checkpoint_rounds": [
+   "round_1",
+   "round_2"
+  ],
+  "run_files": [
+   "checkpoints/round_1/checkpoint.json",
+   "checkpoints/round_1/state.bin",
+   "checkpoints/round_2/checkpoint.json",
+   "checkpoints/round_2/state.bin",
+   "events.jsonl",
+   "run.json"
+  ]
+ },
+ "base_model_id": "FL_INIT_V2",
+ "candidate_ids": [
+  "CAPSTONE_FL_CANDIDATE_0001"
+ ],
+ "clients": [
+  "SIM_FL_SITE_00",
+  "SIM_FL_SITE_01",
+  "SIM_FL_SITE_02",
+  "SIM_FL_SITE_03",
+  "SIM_FL_SITE_04",
+  "SIM_FL_SITE_05",
+  "SIM_FL_SITE_06",
+  "SIM_FL_SITE_07"
+ ],
+ "clients_before": [
+  {
+   "client_id": "SIM_FL_SITE_00",
+   "client_state": "IDLE",
+   "eligible": true,
+   "local_example_count": 93
+  },
+  {
+   "client_id": "SIM_FL_SITE_01",
+   "client_state": "IDLE",
+   "eligible": true,
+   "local_example_count": 91
+  },
+  {
+   "client_id": "SIM_FL_SITE_02",
+   "client_state": "IDLE",
+   "eligible": true,
+   "local_example_count": 91
+  },
+  {
+   "client_id": "SIM_FL_SITE_03",
+   "client_state": "IDLE",
+   "eligible": true,
+   "local_example_count": 89
+  },
+  {
+   "client_id": "SIM_FL_SITE_04",
+   "client_state": "IDLE",
+   "eligible": true,
+   "local_example_count": 90
+  },
+  {
+   "client_id": "SIM_FL_SITE_05",
+   "client_state": "IDLE",
+   "eligible": true,
+   "local_example_count": 93
+  },
+  {
+   "client_id": "SIM_FL_SITE_06",
+   "client_state": "IDLE",
+   "eligible": true,
+   "local_example_count": 93
+  },
+  {
+   "client_id": "SIM_FL_SITE_07",
+   "client_state": "IDLE",
+   "eligible": true,
+   "local_example_count": 83
+  }
+ ],
+ "committed_digests": {
+  "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+  "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+  "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+ },
+ "current_round": 3,
+ "db": {
+  "candidates": [
+   {
+    "algorithm": "FEDAVG",
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+    "client_count": 8,
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "parent_model_id": "FL_INIT_V2",
+    "production_deployed": 0,
+    "round": 3,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  "completed_runs": [
+   {
+    "algorithm": "FEDAVG",
+    "base_model_id": "FL_INIT_V2",
+    "candidate_ids_json": "[\"CAPSTONE_FL_CANDIDATE_0001\"]",
+    "current_round": 3,
+    "engineering_only": 1,
+    "federation_protocol_id": "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1",
+    "planned_rounds": 3,
+    "run_type": "LIVE_RUN",
+    "secagg_mode": "SECAGG_SHADOW",
+    "status": "COMPLETED"
+   }
+  ],
+  "counts": {
+   "candidate_models": 1,
+   "federation_rounds": 3,
+   "federation_runs": 1,
+   "fl_client_statuses": 24,
+   "governance_decisions": 1
+  },
+  "decisions": [
+   {
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "checks_json": "[{\"check_id\": \"STATE_FINITE\", \"passed\": true}, {\"check_id\": \"STATE_SPEC_MATCHES_BASE\", \"passed\": true}, {\"check_id\": \"UPDATE_DIGESTS_RECONCILE\", \"passed\": true}, {\"check_id\": \"ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE\", \"passed\": true}, {\"check_id\": \"BASE_STATE_LINEAGE_VERIFIED\", \"passed\": true}]",
+    "decision": "ACCEPTED_TO_SANDBOX",
+    "decision_id": "CAPSTONE_FL_CANDIDATE_0001-GOV01",
+    "production_deployed": 0,
+    "scientific_promotion": 0
+   }
+  ],
+  "foreign_key_check": [],
+  "integrity_check": [
+   "ok"
+  ],
+  "tables": [
+   "candidate_models",
+   "context_snapshots",
+   "device_connections",
+   "devices",
+   "federation_rounds",
+   "federation_runs",
+   "fl_client_statuses",
+   "governance_decisions",
+   "inference_events",
+   "monitoring_sessions",
+   "monitoring_state_events",
+   "session_summaries",
+   "signal_quality_events",
+   "users",
+   "waveform_previews"
+  ]
+ },
+ "engineering_only": true,
+ "event_count": 202,
+ "event_kinds": {
+  "aggregation.status": 3,
+  "candidate.created": 1,
+  "candidate.governance": 1,
+  "candidate.validation": 2,
+  "client.status": 96,
+  "client.training_progress": 48,
+  "client.update_ready": 24,
+  "federation.completed": 1,
+  "federation.status": 6,
+  "round.status": 18,
+  "secagg.status": 2
+ },
+ "event_stream_sha256": "8f68ef1c3694ef880e098a4202814764728d41692f3b027d4d49b4c77a236531",
+ "events_sample": [
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791228012230595,
+   "event_id": "FEDRUN-9A59C3E2F876-FEV000000",
+   "event_type": "federation.status",
+   "payload": {
+    "algorithm": "FEDAVG",
+    "client_count": 8,
+    "current_round": 0,
+    "engineering_only": true,
+    "planned_rounds": 3,
+    "run_status": "CREATED",
+    "run_type": "LIVE_RUN"
+   },
+   "run_id": "FEDRUN-9A59C3E2F876",
+   "sequence_index": 0
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791228013238915,
+   "event_id": "FEDRUN-9A59C3E2F876-FEV000001",
+   "event_type": "federation.status",
+   "payload": {
+    "algorithm": "FEDAVG",
+    "client_count": 8,
+    "current_round": 0,
+    "engineering_only": true,
+    "planned_rounds": 3,
+    "run_status": "RUNNING",
+    "run_type": "LIVE_RUN"
+   },
+   "run_id": "FEDRUN-9A59C3E2F876",
+   "sequence_index": 1
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791228013252627,
+   "event_id": "FEDRUN-9A59C3E2F876-FEV000002",
+   "event_type": "federation.status",
+   "payload": {
+    "algorithm": "FEDAVG",
+    "client_count": 8,
+    "current_round": 1,
+    "engineering_only": true,
+    "planned_rounds": 3,
+    "run_status": "RUNNING",
+    "run_type": "LIVE_RUN"
+   },
+   "run_id": "FEDRUN-9A59C3E2F876",
+   "sequence_index": 2
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791228028020547,
+   "event_id": "FEDRUN-9A59C3E2F876-FEV000199",
+   "event_type": "round.status",
+   "payload": {
+    "accepted_updates": 8,
+    "expected_updates": 8,
+    "round_id": 3,
+    "round_state": "COMPLETED"
+   },
+   "run_id": "FEDRUN-9A59C3E2F876",
+   "sequence_index": 199
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791228028021160,
+   "event_id": "FEDRUN-9A59C3E2F876-FEV000200",
+   "event_type": "federation.status",
+   "payload": {
+    "algorithm": "FEDAVG",
+    "client_count": 8,
+    "current_round": 3,
+    "engineering_only": true,
+    "planned_rounds": 3,
+    "run_status": "COMPLETED",
+    "run_type": "LIVE_RUN"
+   },
+   "run_id": "FEDRUN-9A59C3E2F876",
+   "sequence_index": 200
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791228028021274,
+   "event_id": "FEDRUN-9A59C3E2F876-FEV000201",
+   "event_type": "federation.completed",
+   "payload": {
+    "candidate_ids": [
+     "CAPSTONE_FL_CANDIDATE_0001"
+    ],
+    "production_deployed": false,
+    "rounds_completed": 3
+   },
+   "run_id": "FEDRUN-9A59C3E2F876",
+   "sequence_index": 201
+  }
+ ],
+ "final_global_state_sha256": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+ "local_training_calls": 24,
+ "models_after": {
+  "candidates": [
+   {
+    "algorithm": "FEDAVG",
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+    "client_count": 8,
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "parent_model_id": "FL_INIT_V2",
+    "production_deployed": false,
+    "round": 3,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  "released": [
+   "MODEL_V2_FINAL",
+   "MODEL_V1"
+  ],
+  "released_default": "MODEL_V2_FINAL"
+ },
+ "models_before_candidates": 0,
+ "overview_after": {
+  "active_live_run": false,
+  "banner": "FL ENGINEERING DEMO - synthetic virtual clients on one laptop; engineering candidate only; no scientific evidence; nothing is deployed",
+  "candidate_count": 1,
+  "client_count": 8,
+  "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+  "engineering_only": true,
+  "federation_runtime": "ENABLED_ENGINEERING",
+  "production_deployed": false,
+  "released_model_id": "MODEL_V2_FINAL",
+  "scientific_evidence": false,
+  "secagg_claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY"
+ },
+ "parity": {
+  "any_mismatch": false,
+  "candidate_digest_equals_round_3_state": true,
+  "lineage_equal": true,
+  "mismatches": [],
+  "per_round": {
+   "1": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   },
+   "2": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   },
+   "3": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   }
+  },
+  "reference": "reports/model_v2/v2_fl_005/federation_run.json (read, not copied)",
+  "state_lineage_reference": {
+   "0": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  },
+  "state_lineage_run": {
+   "0": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  },
+  "updates_compared": 24
+ },
+ "pid_excluded_from_digest": 76305,
+ "planned_rounds": 3,
+ "progress_fractions": [
+  0.0,
+  1.0
+ ],
+ "rejected_updates": 0,
+ "round_base_digests": {
+  "1": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "2": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+  "3": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef"
+ },
+ "round_states": [
+  [
+   1,
+   "COMPLETED",
+   8,
+   null
+  ],
+  [
+   2,
+   "COMPLETED",
+   8,
+   null
+  ],
+  [
+   3,
+   "COMPLETED",
+   8,
+   "CAPSTONE_FL_CANDIDATE_0001"
+  ]
+ ],
+ "round_status_paths": {
+  "1": [
+   "COLLECTING",
+   "LOCAL_TRAINING",
+   "UPDATES_READY",
+   "AGGREGATING",
+   "COMPLETED"
+  ],
+  "2": [
+   "COLLECTING",
+   "LOCAL_TRAINING",
+   "UPDATES_READY",
+   "AGGREGATING",
+   "COMPLETED"
+  ],
+  "3": [
+   "COLLECTING",
+   "LOCAL_TRAINING",
+   "UPDATES_READY",
+   "AGGREGATING",
+   "CANDIDATE_CREATED",
+   "VALIDATING",
+   "ACCEPTED_TO_SANDBOX",
+   "COMPLETED"
+  ]
+ },
+ "run_status": "COMPLETED",
+ "run_type": "LIVE_RUN",
+ "scenario": "SECAGG_SHADOW_RUN",
+ "secagg_events": [
+  {
+   "claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY",
+   "mode": "SECAGG_SHADOW",
+   "round_id": 1,
+   "status": "SHADOW_RUNNING"
+  },
+  {
+   "claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY",
+   "mode": "SECAGG_SHADOW",
+   "round_id": 1,
+   "status": "SHADOW_VERIFIED"
+  }
+ ],
+ "secagg_mode": "SECAGG_SHADOW",
+ "secagg_shadow_summary": {
+  "authoritative_aggregation": "PLAIN",
+  "claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY",
+  "clients": 8,
+  "max_weight": 256.0,
+  "maximum_absolute_difference": 6.348358397662013e-06,
+  "plain_clear_update_count": 8,
+  "protected_aggregate_available": true,
+  "protected_clear_update_count": 0,
+  "relative_L2_difference": 1.3513456498808712e-05,
+  "round": 1,
+  "status": "PASS",
+  "tolerance": {
+   "maximum_absolute_parameter_difference": 0.0001,
+   "relative_l2_difference": 0.0001
+  }
+ },
+ "semantic_sha256": "6617804bf5b9b32e6621e8300c55e16ddef31130765342698f286946c2651c66",
+ "sequence_contiguous": true,
+ "start_latency_s": 0.005,
+ "start_response_run_status": "RUNNING",
+ "start_response_status": 200,
+ "subscribers_identical": true,
+ "system": {
+  "auth_provider": "DEMO",
+  "calibration_id": "CAL_V2",
+  "demo_mode": true,
+  "federation_runtime": "ENABLED_ENGINEERING",
+  "hardware_mode": "SIMULATED_ONLY",
+  "model_id": "MODEL_V2_FINAL",
+  "persistence_mode": "SQLITE",
+  "physical_hardware_available": false,
+  "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_2",
+  "software_system": "SOFTWARE_SYSTEM_V2"
+ },
+ "temp_root_excluded": true,
+ "ws_close_codes": {
+  "reconnect": 1000,
+  "subscriber_1": 1000,
+  "subscriber_2": 1000
+ },
+ "ws_errors": []
+}

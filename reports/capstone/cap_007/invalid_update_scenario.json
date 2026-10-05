@@ -1,0 +1,54 @@
+{
+ "accepted_after": 1,
+ "candidate_created": false,
+ "db_counts": {
+  "candidate_models": 0,
+  "federation_rounds": 0,
+  "federation_runs": 0,
+  "fl_client_statuses": 0,
+  "governance_decisions": 0
+ },
+ "expected_codes": [
+  "STALE_ROUND",
+  "DUPLICATE_UPDATE",
+  "BASE_STATE_MISMATCH",
+  "UNKNOWN_CLIENT"
+ ],
+ "modules_loaded": {
+  "held_out_loaders": [],
+  "monitoring_or_inference": []
+ },
+ "normal_runs_inject_bad_updates": false,
+ "pid": 76320,
+ "rejection_logic": "federated.wearable_fl_system_v1.Coordinator.decide (unchanged)",
+ "results": [
+  {
+   "case": "VALID",
+   "code": null,
+   "decision": "ACCEPTED"
+  },
+  {
+   "case": "DUPLICATE_UPDATE",
+   "code": "DUPLICATE_UPDATE",
+   "decision": "REJECTED"
+  },
+  {
+   "case": "STALE_ROUND",
+   "code": "STALE_ROUND",
+   "decision": "REJECTED"
+  },
+  {
+   "case": "BASE_STATE_MISMATCH",
+   "code": "BASE_STATE_MISMATCH",
+   "decision": "REJECTED"
+  },
+  {
+   "case": "UNKNOWN_CLIENT",
+   "code": "UNKNOWN_CLIENT",
+   "decision": "REJECTED"
+  }
+ ],
+ "round_complete": false,
+ "run_rows_created": false,
+ "scenario": "FL_REJECT_INVALID_UPDATE"
+}

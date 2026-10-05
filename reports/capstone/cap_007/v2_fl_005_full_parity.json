@@ -1,0 +1,105 @@
+{
+ "any_mismatch": false,
+ "intentionally_not_compared": [
+  "mean_loss",
+  "update_norm",
+  "payload_bytes (diagnostics_not_in_digest in the frozen report)"
+ ],
+ "reference": "reports/model_v2/v2_fl_005/federation_run.json (read, not copied)",
+ "run_1": {
+  "any_mismatch": false,
+  "candidate_digest_equals_round_3_state": true,
+  "lineage_equal": true,
+  "mismatches": [],
+  "per_round": {
+   "1": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   },
+   "2": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   },
+   "3": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   }
+  },
+  "reference": "reports/model_v2/v2_fl_005/federation_run.json (read, not copied)",
+  "state_lineage_reference": {
+   "0": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  },
+  "state_lineage_run": {
+   "0": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  },
+  "updates_compared": 24
+ },
+ "run_2": {
+  "any_mismatch": false,
+  "candidate_digest_equals_round_3_state": true,
+  "lineage_equal": true,
+  "mismatches": [],
+  "per_round": {
+   "1": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   },
+   "2": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   },
+   "3": {
+    "base_digest_equal": true,
+    "clients_equal": true,
+    "committed_digest_equal": true,
+    "examples_equal": true,
+    "shuffle_seeds_equal": true,
+    "update_sha256_equal": true
+   }
+  },
+  "reference": "reports/model_v2/v2_fl_005/federation_run.json (read, not copied)",
+  "state_lineage_reference": {
+   "0": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  },
+  "state_lineage_run": {
+   "0": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  },
+  "updates_compared": 24
+ },
+ "updates_compared_per_run": [
+  24,
+  24
+ ]
+}

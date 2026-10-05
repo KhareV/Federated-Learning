@@ -1,0 +1,58 @@
+{
+ "candidates": [
+  [
+   {
+    "algorithm": "FEDAVG",
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+    "client_count": 8,
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "parent_model_id": "FL_INIT_V2",
+    "production_deployed": 0,
+    "round": 3,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  [
+   {
+    "algorithm": "FEDAVG",
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+    "client_count": 8,
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "parent_model_id": "FL_INIT_V2",
+    "production_deployed": 0,
+    "round": 3,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ]
+ ],
+ "decisions": [
+  [
+   {
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "checks_json": "[{\"check_id\": \"STATE_FINITE\", \"passed\": true}, {\"check_id\": \"STATE_SPEC_MATCHES_BASE\", \"passed\": true}, {\"check_id\": \"UPDATE_DIGESTS_RECONCILE\", \"passed\": true}, {\"check_id\": \"ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE\", \"passed\": true}, {\"check_id\": \"BASE_STATE_LINEAGE_VERIFIED\", \"passed\": true}]",
+    "decision": "ACCEPTED_TO_SANDBOX",
+    "decision_id": "CAPSTONE_FL_CANDIDATE_0001-GOV01",
+    "production_deployed": 0,
+    "scientific_promotion": 0
+   }
+  ],
+  [
+   {
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "checks_json": "[{\"check_id\": \"STATE_FINITE\", \"passed\": true}, {\"check_id\": \"STATE_SPEC_MATCHES_BASE\", \"passed\": true}, {\"check_id\": \"UPDATE_DIGESTS_RECONCILE\", \"passed\": true}, {\"check_id\": \"ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE\", \"passed\": true}, {\"check_id\": \"BASE_STATE_LINEAGE_VERIFIED\", \"passed\": true}]",
+    "decision": "ACCEPTED_TO_SANDBOX",
+    "decision_id": "CAPSTONE_FL_CANDIDATE_0001-GOV01",
+    "production_deployed": 0,
+    "scientific_promotion": 0
+   }
+  ]
+ ],
+ "production_deployed": 0,
+ "scientific_promotion": 0
+}

@@ -1,0 +1,28 @@
+{
+ "canonical_close_codes": [
+  {
+   "reconnect": 1000,
+   "subscriber_1": 1000,
+   "subscriber_2": 1000
+  },
+  {
+   "reconnect": 1000,
+   "subscriber_1": 1000,
+   "subscriber_2": 1000
+  }
+ ],
+ "foreign_user_and_unknown_run": {
+  "b_ws_run_of_a_close_code": 4403,
+  "b_ws_unknown_run_close_code": 4404
+ },
+ "server_to_client_only": "tests/test_capstone_federation_websocket.py::test_the_channel_is_server_to_client_only",
+ "subscribers_identical": [
+  true,
+  true
+ ],
+ "unauthenticated_4401": "tests/test_capstone_federation_websocket.py::test_close_codes_4401_4403_4404 (DEMO auth authenticates every connection)",
+ "ws_errors": [
+  [],
+  []
+ ]
+}

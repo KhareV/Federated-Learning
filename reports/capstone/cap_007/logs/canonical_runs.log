@@ -1,0 +1,17 @@
+=== live 1
+{"scenario": "CANONICAL_FEDAVG_PLAIN_LIVE_RUN", "run_status": "COMPLETED", "candidate_ids": ["CAPSTONE_FL_CANDIDATE_0001"], "accepted_updates": 24, "semantic_sha256": "8ffa1865ca01a10e77354db388b1c2cfac43aa2c9ccde8eed8800872c0867c16"}
+=== live 2
+{"scenario": "CANONICAL_FEDAVG_PLAIN_LIVE_RUN", "run_status": "COMPLETED", "candidate_ids": ["CAPSTONE_FL_CANDIDATE_0001"], "accepted_updates": 24, "semantic_sha256": "8ffa1865ca01a10e77354db388b1c2cfac43aa2c9ccde8eed8800872c0867c16"}
+=== fedprox
+{"scenario": "FEDPROX_PRODUCT_RUN", "run_status": "COMPLETED", "candidate_ids": ["CAPSTONE_FL_CANDIDATE_0001"], "accepted_updates": 24, "semantic_sha256": "c563294676c45f81ae98229ce8a727ae7ab840948c9bd0743ad71095e29fc123"}
+=== secagg
+{"scenario": "SECAGG_SHADOW_RUN", "run_status": "COMPLETED", "candidate_ids": ["CAPSTONE_FL_CANDIDATE_0001"], "accepted_updates": 24, "semantic_sha256": "6617804bf5b9b32e6621e8300c55e16ddef31130765342698f286946c2651c66"}
+=== invalid
+{"results": [["VALID", null], ["DUPLICATE_UPDATE", "DUPLICATE_UPDATE"], ["STALE_ROUND", "STALE_ROUND"], ["BASE_STATE_MISMATCH", "BASE_STATE_MISMATCH"], ["UNKNOWN_CLIENT", "UNKNOWN_CLIENT"]]}
+=== restart
+{"first_process_exit_code": 86, "run_status_after_resume": "COMPLETED", "candidate_ids": ["CAPSTONE_FL_CANDIDATE_0001"], "equals_canonical_final_digest": true}
+=== replay
+{"run_type": "REPLAY", "run_status": "COMPLETED", "semantic_parity_with_source": true, "no_new_candidate": true}
+=== multiuser
+{"ownership": {"b_get_run_of_a": 403, "b_rounds_of_a": 403, "b_start_run_of_a": 403, "a_get_run_of_b": 403, "b_list_runs": ["FEDRUN-02E2A08D07DB"], "a_list_runs": ["FEDRUN-1DA76B3F2926", "FEDRUN-C6D4E9196BAB"], "b_ws_run_of_a_close_code": 4403, "b_ws_unknown_run_close_code": 4404, "b_overview_status": 200, "b_clients_status": 200, "b_models_status": 200, "b_reads_candidate_global": 200}, "concurrency": {"second_start_same_user_status": 409, "second_start_other_process_status": 409}}
+ALLDONE

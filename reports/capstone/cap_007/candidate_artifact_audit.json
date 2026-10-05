@@ -1,0 +1,68 @@
+{
+ "committed_to_git": false,
+ "format": "state.bin + metadata.json under <root>/<candidate_id>/",
+ "runs": {
+  "run_1": {
+   "candidate_dirs_total": [
+    "CAPSTONE_FL_CANDIDATE_0001"
+   ],
+   "candidates": {
+    "CAPSTONE_FL_CANDIDATE_0001": {
+     "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+     "files": [
+      "metadata.json",
+      "state.bin"
+     ],
+     "parent_model_id": "FL_INIT_V2",
+     "production_deployed": false,
+     "state_bytes": 240828,
+     "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+     "state_file_sha256_matches_metadata": true
+    }
+   },
+   "checkpoint_rounds": [
+    "round_1",
+    "round_2"
+   ],
+   "run_files": [
+    "checkpoints/round_1/checkpoint.json",
+    "checkpoints/round_1/state.bin",
+    "checkpoints/round_2/checkpoint.json",
+    "checkpoints/round_2/state.bin",
+    "events.jsonl",
+    "run.json"
+   ]
+  },
+  "run_2": {
+   "candidate_dirs_total": [
+    "CAPSTONE_FL_CANDIDATE_0001"
+   ],
+   "candidates": {
+    "CAPSTONE_FL_CANDIDATE_0001": {
+     "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+     "files": [
+      "metadata.json",
+      "state.bin"
+     ],
+     "parent_model_id": "FL_INIT_V2",
+     "production_deployed": false,
+     "state_bytes": 240828,
+     "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+     "state_file_sha256_matches_metadata": true
+    }
+   },
+   "checkpoint_rounds": [
+    "round_1",
+    "round_2"
+   ],
+   "run_files": [
+    "checkpoints/round_1/checkpoint.json",
+    "checkpoints/round_1/state.bin",
+    "checkpoints/round_2/checkpoint.json",
+    "checkpoints/round_2/state.bin",
+    "events.jsonl",
+    "run.json"
+   ]
+  }
+ }
+}

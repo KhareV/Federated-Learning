@@ -1,0 +1,144 @@
+{
+ "candidate_bytes_in_sql": false,
+ "central_db_columns_checked_in_tests": "test_the_central_database_holds_only_federation_metadata_no_data_labels_or_tensors",
+ "claim": {
+  "allowed": "eight logically isolated local client datasets on one demonstration machine; the federation server receives model updates rather than raw local training examples",
+  "not_claimed": [
+   "hospital deployment",
+   "separate machines",
+   "VM or enclave isolation",
+   "network-level isolation",
+   "privacy guarantees"
+  ]
+ },
+ "events_carry_only": [
+  "aggregation.status",
+  "candidate.created",
+  "candidate.governance",
+  "candidate.validation",
+  "client.status",
+  "client.training_progress",
+  "client.update_ready",
+  "federation.completed",
+  "federation.status",
+  "round.status",
+  "secagg.status"
+ ],
+ "forbidden_findings_checked_in_tests": "test_every_submitted_envelope_passes_the_forbidden_field_scan",
+ "sample_events": [
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791227918029597,
+   "event_id": "FEDRUN-372E1E640BD8-FEV000000",
+   "event_type": "federation.status",
+   "payload": {
+    "algorithm": "FEDAVG",
+    "client_count": 8,
+    "current_round": 0,
+    "engineering_only": true,
+    "planned_rounds": 3,
+    "run_status": "CREATED",
+    "run_type": "LIVE_RUN"
+   },
+   "run_id": "FEDRUN-372E1E640BD8",
+   "sequence_index": 0
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791227919034342,
+   "event_id": "FEDRUN-372E1E640BD8-FEV000001",
+   "event_type": "federation.status",
+   "payload": {
+    "algorithm": "FEDAVG",
+    "client_count": 8,
+    "current_round": 0,
+    "engineering_only": true,
+    "planned_rounds": 3,
+    "run_status": "RUNNING",
+    "run_type": "LIVE_RUN"
+   },
+   "run_id": "FEDRUN-372E1E640BD8",
+   "sequence_index": 1
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791227919048972,
+   "event_id": "FEDRUN-372E1E640BD8-FEV000002",
+   "event_type": "federation.status",
+   "payload": {
+    "algorithm": "FEDAVG",
+    "client_count": 8,
+    "current_round": 1,
+    "engineering_only": true,
+    "planned_rounds": 3,
+    "run_status": "RUNNING",
+    "run_type": "LIVE_RUN"
+   },
+   "run_id": "FEDRUN-372E1E640BD8",
+   "sequence_index": 2
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791227933692065,
+   "event_id": "FEDRUN-372E1E640BD8-FEV000200",
+   "event_type": "round.status",
+   "payload": {
+    "accepted_updates": 8,
+    "expected_updates": 8,
+    "round_id": 3,
+    "round_state": "COMPLETED"
+   },
+   "run_id": "FEDRUN-372E1E640BD8",
+   "sequence_index": 200
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791227933692688,
+   "event_id": "FEDRUN-372E1E640BD8-FEV000201",
+   "event_type": "federation.status",
+   "payload": {
+    "algorithm": "FEDAVG",
+    "client_count": 8,
+    "current_round": 3,
+    "engineering_only": true,
+    "planned_rounds": 3,
+    "run_status": "COMPLETED",
+    "run_type": "LIVE_RUN"
+   },
+   "run_id": "FEDRUN-372E1E640BD8",
+   "sequence_index": 201
+  },
+  {
+   "contract_version": "PRODUCT_LIVE_EVENT_V1",
+   "emitted_at_us": 1791227933692794,
+   "event_id": "FEDRUN-372E1E640BD8-FEV000202",
+   "event_type": "federation.completed",
+   "payload": {
+    "candidate_ids": [
+     "CAPSTONE_FL_CANDIDATE_0001"
+    ],
+    "production_deployed": false,
+    "rounds_completed": 3
+   },
+   "run_id": "FEDRUN-372E1E640BD8",
+   "sequence_index": 202
+  }
+ ],
+ "sql_tables": [
+  "candidate_models",
+  "context_snapshots",
+  "device_connections",
+  "devices",
+  "federation_rounds",
+  "federation_runs",
+  "fl_client_statuses",
+  "governance_decisions",
+  "inference_events",
+  "monitoring_sessions",
+  "monitoring_state_events",
+  "session_summaries",
+  "signal_quality_events",
+  "users",
+  "waveform_previews"
+ ]
+}

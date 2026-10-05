@@ -1,0 +1,19 @@
+{
+ "amendment_id": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_7",
+ "change": "tests/test_capstone_session_service.py::test_cap_004_imports_no_fl_runtime_and_never_writes_fl_or_candidate_tables scans CAP-004's own persistence/auth/session code for FL tokens. Its scan now skips exactly one file, capstone_persistence/federation_store.py - the CAP-007 additive federation store, which must name the frozen federation columns (e.g. secagg_mode) that CAP-001 froze in storage_policy_v2. Every CAP-004 module is still scanned unchanged.",
+ "defect": "The CAP-007 full regression failed on exactly this one test: the directory scan of capstone_persistence/ now also sees the new CAP-007 file capstone_persistence/federation_store.py, whose INSERT into federation_runs necessarily contains the column name 'secagg_mode'. The guard's intent (CAP-004 code never touches FL) is unaffected.",
+ "files": {
+  "tests/test_capstone_session_service.py": {
+   "new_sha256": "83a9c3ded57e034a15e435c39d7b190d2ddc20801deed1a9f2109318d132389b",
+   "old_sha256": "5a829b26e555f9c2c271db940c2eb00f539250c0bf9532c85edaeb860f33ec8e"
+  }
+ },
+ "freeze_commit": "1fb3023",
+ "made_before": "the recorded CAPG6 criteria evaluation",
+ "made_during": "CAP-007 (after its method freeze 772b178; no CAP-004 criterion text, canonical run or implementation file changes)",
+ "previous_amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_6",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical",
+  "capg3_criteria_text": "identical"
+ }
+}

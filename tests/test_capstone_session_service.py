@@ -412,7 +412,8 @@ def test_persistence_does_not_alter_or_reorder_the_live_monitoring_stream(tmp_pa
 def test_cap_004_imports_no_fl_runtime_and_never_writes_fl_or_candidate_tables(tmp_path) -> None:
     new_code = [p for d in ("product/auth", "product/persistence", "product/sessions",
                                 "capstone_persistence")
-                for p in (ROOT / d).rglob("*.py")] + [
+                for p in (ROOT / d).rglob("*.py")
+                if p.name != "federation_store.py"] + [
         ROOT / "api/product_app_v1_1.py", ROOT / "scripts/run_capstone_product.py"]
     for path in new_code:
         for node in ast.walk(ast.parse(path.read_text())):

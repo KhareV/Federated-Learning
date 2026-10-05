@@ -1,0 +1,53 @@
+{
+ "first_id": "CAPSTONE_FL_CANDIDATE_0001",
+ "namespaces": [
+  "RELEASED_SCIENTIFIC",
+  "CAPSTONE_FL_CANDIDATE"
+ ],
+ "runs": {
+  "run_1": {
+   "candidates": [
+    {
+     "algorithm": "FEDAVG",
+     "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+     "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+     "client_count": 8,
+     "governance_status": "ACCEPTED_TO_SANDBOX",
+     "parent_model_id": "FL_INIT_V2",
+     "production_deployed": false,
+     "round": 3,
+     "sandbox_status": "IN_SANDBOX",
+     "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+     "validation_status": "PASSED"
+    }
+   ],
+   "released": [
+    "MODEL_V2_FINAL",
+    "MODEL_V1"
+   ],
+   "released_default": "MODEL_V2_FINAL"
+  },
+  "run_2": {
+   "candidates": [
+    {
+     "algorithm": "FEDAVG",
+     "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+     "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+     "client_count": 8,
+     "governance_status": "ACCEPTED_TO_SANDBOX",
+     "parent_model_id": "FL_INIT_V2",
+     "production_deployed": false,
+     "round": 3,
+     "sandbox_status": "IN_SANDBOX",
+     "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+     "validation_status": "PASSED"
+    }
+   ],
+   "released": [
+    "MODEL_V2_FINAL",
+    "MODEL_V1"
+   ],
+   "released_default": "MODEL_V2_FINAL"
+  }
+ }
+}
