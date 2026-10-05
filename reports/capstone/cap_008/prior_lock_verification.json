@@ -1,0 +1,311 @@
+{
+ "cap001": {
+  "amendment_chain": [
+   {
+    "amendment": "CAPSTONE_PRODUCT_PROTOCOL_V1.amendment_1.json",
+    "path": "tests/test_capstone_federation_contracts.py"
+   }
+  ],
+  "broken_chain_links": [],
+  "entries_checked": 53,
+  "lock": "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json",
+  "lock_sha256": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "mismatches": [],
+  "status": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL",
+  "verified": true
+ },
+ "cap002": {
+  "amendment_chain": [
+   {
+    "amendment": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_1.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_002_build_evidence.py"
+   },
+   {
+    "amendment": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_1.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_002_mutation_controls.py"
+   },
+   {
+    "amendment": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_002_build_evidence.py"
+   },
+   {
+    "amendment": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_3.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_002_build_evidence.py"
+   },
+   {
+    "amendment": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_4.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_002_protected_audit.py"
+   }
+  ],
+  "broken_chain_links": [],
+  "entries_checked": 27,
+  "lock": "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json",
+  "lock_sha256": "3eb5ee97665b006088b15b021b484a5e5ac6f4174f58051d97aacfed0ae0be7d",
+  "mismatches": [],
+  "status": "FROZEN_ENGINEERING_PROTOCOL",
+  "verified": true
+ },
+ "cap003": {
+  "amendment_chain": [
+   {
+    "amendment": "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1.amendment_1.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_003_build_evidence.py"
+   }
+  ],
+  "broken_chain_links": [],
+  "entries_checked": 43,
+  "lock": "artifacts/capstone/CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1.lock.json",
+  "lock_sha256": "70e9488a2530bbb3593cc39200e947250bf7f83f8a5a3ba0b205b33387c80597",
+  "mismatches": [],
+  "status": "FROZEN_ENGINEERING_PROTOCOL",
+  "verified": true
+ },
+ "cap004": {
+  "amendment_chain": [
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_1.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_004_mutation_controls.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "api/product_app_v1_1.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "product/persistence/bridge.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "product/persistence/recovery.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "product/sessions/service.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "pyproject.toml"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "requirements-dev.lock"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_004_build_evidence.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_004_mutation_controls.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_004_protected_audit.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/run_capstone_persistent_e2e.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/run_capstone_product.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "tests/capstone_persistent_support.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "tests/test_capstone_persistence.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "tests/test_capstone_restart_recovery.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "tests/test_capstone_session_service.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "moved_to": "capstone_persistence/store.py",
+    "old_matches_previous_link": true,
+    "path": "product/persistence/store.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "manifests/capstone/component_registry_cap_004_v1.csv"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_3.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_004_build_evidence.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_4.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_004_protected_audit.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_5.json",
+    "old_matches_previous_link": true,
+    "path": ".env.example"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_6.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_004_build_evidence.py"
+   },
+   {
+    "amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.amendment_7.json",
+    "old_matches_previous_link": true,
+    "path": "tests/test_capstone_session_service.py"
+   }
+  ],
+  "amendments": 7,
+  "broken_chain_links": [],
+  "entries_checked": 57,
+  "lock": "artifacts/capstone/CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.lock.json",
+  "lock_sha256": "a125a60edb7343004280d48bf1e75ab1163eec1a6da998f8a022789be1ee9c8e",
+  "mismatches": [],
+  "status": "FROZEN_ENGINEERING_PROTOCOL",
+  "verified": true
+ },
+ "cap005": {
+  "amendment_chain": [
+   {
+    "amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_1.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_005_protected_audit.py"
+   },
+   {
+    "amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_005_protected_audit.py"
+   },
+   {
+    "amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_3.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_005_protected_audit.py"
+   },
+   {
+    "amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_4.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_005_build_evidence.py"
+   },
+   {
+    "amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_5.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_005_build_evidence.py"
+   },
+   {
+    "amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_6.json",
+    "old_matches_previous_link": true,
+    "path": "tests/test_capstone_frontend.py"
+   }
+  ],
+  "amendments": 6,
+  "broken_chain_links": [],
+  "entries_checked": 34,
+  "lock": "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.lock.json",
+  "lock_sha256": "6cae0d1e71ba742b1a6dfafbc5f435466343637b1be841e124d31092464be8aa",
+  "mismatches": [],
+  "verified": true
+ },
+ "cap006": {
+  "amendment_chain": [
+   {
+    "amendment": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.amendment_1.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_006_protected_audit.py"
+   },
+   {
+    "amendment": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_006_build_evidence.py"
+   },
+   {
+    "amendment": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.amendment_3.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_006_build_evidence.py"
+   }
+  ],
+  "amendments": 3,
+  "broken_chain_links": [],
+  "entries_checked": 49,
+  "lock": "artifacts/capstone/CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.lock.json",
+  "lock_sha256": "b368254e568fe4636ee37bd71ea26c3843b83a1a04d8f85e5b5fb98989e1922d",
+  "mismatches": [],
+  "verified": true
+ },
+ "cap007": {
+  "amendment_chain": [
+   {
+    "amendment": "CAPSTONE_FEDERATION_PROTOCOL_V1.amendment_1.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_007_protected_audit.py"
+   },
+   {
+    "amendment": "CAPSTONE_FEDERATION_PROTOCOL_V1.amendment_2.json",
+    "old_matches_previous_link": true,
+    "path": "scripts/cap_007_build_evidence.py"
+   }
+  ],
+  "amendments": 2,
+  "broken_chain_links": [],
+  "entries_checked": 79,
+  "lock": "artifacts/capstone/CAPSTONE_FEDERATION_PROTOCOL_V1.lock.json",
+  "lock_sha256": "9bd126be587561358cfabdf4a3bf484552d558ef0bfa5aa6c136bb26a3229cb5",
+  "mismatches": [],
+  "verified": true
+ },
+ "capstone_ui_v1": {
+  "bound_artifacts": 200,
+  "broken_chain_links": [],
+  "lock_id": "CAPSTONE_UI_V1",
+  "lock_sha256": "374f996e3c4cf26d97bee8df68b73239ebb737fcb284e3249dc2466cffd67e1a",
+  "predecessor_id": "DASHBOARD_UI_V1_5",
+  "predecessor_preserved": true,
+  "status": "PASS",
+  "verified": true
+ },
+ "fedprox_mu_v2": {
+  "broken_chain_links": [],
+  "selected_mu": 0.1,
+  "verified": true
+ },
+ "fl_init_v2": {
+  "broken_chain_links": [],
+  "verified": true
+ },
+ "v2_fl_wearable_system": {
+  "broken_chain_links": [],
+  "entries_checked": 38,
+  "lock": "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json",
+  "mismatches": [],
+  "verified": true
+ }
+}

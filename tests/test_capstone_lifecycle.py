@@ -20,10 +20,11 @@ EXPECTED_TASKS = {
     "CAP-005": "PASS",
     "CAP-006": "PASS",
     "CAP-007": "PASS",
-    **{f"CAP-{n:03d}": "NOT_STARTED" for n in range(8, 12)},
+    "CAP-008": "IN_PROGRESS",
+    **{f"CAP-{n:03d}": "NOT_STARTED" for n in range(9, 12)},
 }
 EXPECTED_GATES = {"CAPG0": "PASS", "CAPG1": "PASS", "CAPG2": "PASS", "CAPG3": "PASS",
-                  "CAPG4": "PASS", "CAPG5": "PASS", "CAPG6": "PASS"}
+                  "CAPG4": "PASS", "CAPG5": "PASS", "CAPG6": "PASS", "CAPG7": "NOT_STARTED"}
 EXPECTED_COMPONENTS = {
     "CAPSTONE_PRODUCT_PROTOCOL_V1": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL",
     "DEVICE_SOURCE_CONTRACT_V1": "FROZEN_INTERFACE_CONTRACT",
@@ -64,7 +65,7 @@ def test_capstone_components_are_exactly_the_sixteen_cap_001_components() -> Non
 
 def test_task_prerequisite_chain_is_linear_and_later_phases_have_no_evidence() -> None:
     tasks = {r["task_id"]: r for r in _rows("task")}
-    for n in range(8, 12):
+    for n in range(9, 12):
         assert tasks[f"CAP-{n:03d}"]["prerequisites"] == f"CAP-{n - 1:03d}"
         assert tasks[f"CAP-{n:03d}"]["evidence_path"] == ""
         assert tasks[f"CAP-{n:03d}"]["implemented_at_commit"] == ""

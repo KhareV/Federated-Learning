@@ -1,0 +1,30 @@
+{
+ "accepted_cap007_limitations_preserved": [
+  "eight logical clients on one laptop",
+  "one-active-run is not an atomic distributed lock",
+  "SecAgg+ round-1 shadow, PROTECTED_AGGREGATION_INTERFACE_ONLY, authoritative aggregation PLAIN",
+  "REPLAY re-emits a prior LIVE_RUN, no training/aggregation/SecAgg/candidate/governance",
+  "ACCEPTED_TO_SANDBOX is not promotion/deployment",
+  "Clerk-authenticated WebSocket unverified with a real account (canonical evidence uses DEMO)"
+ ],
+ "ci": {
+  "queried": false,
+  "triggered": false
+ },
+ "entry_sha": "711a4a0a1233765d6f1200fc2b6d8f3aa62d4743",
+ "expected_entry_sha": "711a4a0a1233765d6f1200fc2b6d8f3aa62d4743",
+ "gate": "CAPG7",
+ "intervening_commits": [],
+ "later_phases_not_started": true,
+ "matches_expected_entry": true,
+ "origin_main_sha": "711a4a0a1233765d6f1200fc2b6d8f3aa62d4743",
+ "phase": "CAP-008",
+ "statuses_at_entry": {
+  "CAP-001..007": "PASS",
+  "CAP-008..011": "NOT_STARTED",
+  "CAPG0..6": "PASS"
+ },
+ "tracked_dirty_or_other_untracked_entries_now": [],
+ "working_tree_clean": true,
+ "working_tree_clean_basis": "git status was clean ('## main...origin/main') BEFORE the entry evidence files and the audit script were created; those untracked files are the only entries now"
+}
