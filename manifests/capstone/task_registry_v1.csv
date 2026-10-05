@@ -1,0 +1,10 @@
+task_id,phase_family,task_name,prerequisites,gate_impact,status,implemented_at_commit,evidence_path,notes
+CAP-001,ARCHITECTURE,Product architecture / contract / control-plane freeze,,CAPG0,IN_PROGRESS,,reports/capstone/cap_001/,Architecture and contract foundation ONLY. Additive capstone namespace above SOFTWARE_SYSTEM_V2; no frozen scientific/runtime artifact is touched. Hardware remains deferred (no T004/T030/T036).
+CAP-002,DEVICE_SIMULATION,Simulated wearable device / hardware abstraction,CAP-001,TBD_BY_PHASE_PROTOCOL,NOT_STARTED,,,Roadmap row; allowed only after CAPG0 PASS.
+CAP-003,PRODUCT_API,Product API / streaming coordinator,CAP-002,TBD_BY_PHASE_PROTOCOL,NOT_STARTED,,,Roadmap row.
+CAP-004,AUTH_PERSISTENCE,Auth / persistence / session lifecycle,CAP-003,TBD_BY_PHASE_PROTOCOL,NOT_STARTED,,,"Roadmap row. Clerk integration belongs here, behind the frozen AuthProvider abstraction."
+CAP-005,FRONTEND,Product frontend (additive extension of the existing SvelteKit frontend),CAP-004,TBD_BY_PHASE_PROTOCOL,NOT_STARTED,,,"Roadmap row. The existing frontend/ SvelteKit app is the mandatory foundation; no second frontend, no framework migration, no duplication of existing monitoring/dashboard components."
+CAP-006,HISTORY_ANALYTICS,Session history / personal analytics,CAP-005,TBD_BY_PHASE_PROTOCOL,NOT_STARTED,,,Roadmap row.
+CAP-007,RESEARCH_EXPERIENCE,ML + FL research experience,CAP-006,TBD_BY_PHASE_PROTOCOL,NOT_STARTED,,,Roadmap row.
+CAP-008,FACULTY_DEMO,Deterministic faculty end-to-end demo,CAP-007,TBD_BY_PHASE_PROTOCOL,NOT_STARTED,,,Roadmap row.
+CAP-009,RELEASE,Final capstone release / one-laptop reproduction,CAP-008,TBD_BY_PHASE_PROTOCOL,NOT_STARTED,,,Roadmap row.

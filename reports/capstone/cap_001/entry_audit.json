@@ -1,0 +1,31 @@
+{
+ "branch": "main",
+ "ci": {
+  "queried": false,
+  "triggered": false
+ },
+ "conflicting_assumptions": [],
+ "entry_sha": "8bbc0e1e17e314748ad7127544e46d8305efeb0c",
+ "environment": {
+  "flwr": "1.39.0",
+  "note": "The repository-local .venv is a stripped Python 3.9 environment (no pydantic/torch) and cannot run the project (requires-python >=3.11,<3.12). All CAP-001 verification used a fresh Python 3.11 venv built OUTSIDE the repository from requirements-dev.lock (scratchpad), matching the V2-014 clean-clone discipline.",
+  "pydantic": "2.13.5",
+  "python": "3.11 (homebrew)"
+ },
+ "expected_anchor": "8bbc0e1e17e314748ad7127544e46d8305efeb0c",
+ "gate": "CAPG0",
+ "historical_facts_checked": {
+  "MODEL_V2_NOT_PROMOTED_RELEASE_CI": "preserved in SYSTEM_V2_RELEASE_DECISION_V1 / SOFTWARE_SYSTEM_V2 lock (historical_model_promotion_disposition)",
+  "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED": "true (SOFTWARE_SYSTEM_V2 / V2-REL-001 PASS); independent of the former"
+ },
+ "intervening_commits_since_anchor": [],
+ "matches_expected_anchor": true,
+ "origin_main_sha": "8bbc0e1e17e314748ad7127544e46d8305efeb0c",
+ "phase": "CAP-001",
+ "registry_state_at_entry": {
+  "v2_gate_V2RELG0": "PASS",
+  "v2_tasks_all_pass_or_skipped_by_protocol": true
+ },
+ "working_tree_clean": true,
+ "working_tree_clean_note": "`git status --short --branch` printed '## main...origin/main' with no entries at session start, before any CAP-001 file was created."
+}
