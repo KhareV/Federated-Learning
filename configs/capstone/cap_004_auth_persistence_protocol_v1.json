@@ -1,0 +1,1006 @@
+{
+ "auth": {
+  "clerk": {
+   "accepts_token": [
+    "session_token"
+   ],
+   "authorized_parties": "explicit, never '*'",
+   "custom_jwt": false,
+   "entry": "clerk_backend_api.security.authenticate_request_async",
+   "fallback_to_demo": false,
+   "pin": "clerk-backend-api==7.0.0",
+   "sdk": "clerk-backend-api",
+   "test_boundary": "local RS256 keypair fixtures and a mocked SDK boundary; no real account, secret or network"
+  },
+  "credential_storage": "none (no token, JWT, cookie, password or secret is persisted or logged)",
+  "default": null,
+  "demo": {
+   "ack_env": "NHM_PRODUCT_DEMO_AUTH_ACK",
+   "ack_value": "I_UNDERSTAND_THIS_IS_NOT_CLERK",
+   "demo_mode": true,
+   "user_id_prefix": "demo:"
+  },
+  "mode_env": "NHM_PRODUCT_AUTH_MODE",
+  "unset_behaviour": "refuse to start (exit 2)",
+  "values": [
+   "CLERK",
+   "DEMO"
+  ]
+ },
+ "canonical_e2e": {
+  "crash_run": "kill -9 a product process mid-session (LIVE_SPEED, engineering evidence only) and restart on the same DB",
+  "predeclared_invariants": {
+   "attempts": 93,
+   "calibration_id": "CAL_V2",
+   "http_200": 86,
+   "http_422": 7,
+   "model_id": "MODEL_V2_FINAL",
+   "terminal": "COMPLETED",
+   "unusable": 7,
+   "valid": 86,
+   "windows": 93
+  },
+  "processes": "fresh released SOFTWARE_SYSTEM_V2 inference service + separate product process in explicit DEMO mode + temporary real SQLite; second process on the same DB (restart); third demo user (ownership)",
+  "runs": 2,
+  "scenario": "MIXED_MONITORING_SESSION",
+  "timing": "ACCELERATED"
+ },
+ "capg3_criteria": [
+  {
+   "checks": [
+    "@cap001_capg0_pass"
+   ],
+   "id": 1,
+   "text": "CAP-001 = PASS and CAPG0 = PASS"
+  },
+  {
+   "checks": [
+    "@cap002_capg1_pass"
+   ],
+   "id": 2,
+   "text": "CAP-002 = PASS and CAPG1 = PASS"
+  },
+  {
+   "checks": [
+    "@cap003_capg2_pass"
+   ],
+   "id": 3,
+   "text": "CAP-003 = PASS and CAPG2 = PASS"
+  },
+  {
+   "checks": [
+    "@cap001_lock",
+    "@cap002_lock_chain",
+    "@cap003_lock_chain"
+   ],
+   "id": 4,
+   "text": "all three prior lock chains verify"
+  },
+  {
+   "checks": [
+    "@drift"
+   ],
+   "id": 5,
+   "text": "protected upstream zero drift"
+  },
+  {
+   "checks": [
+    "@drift_frontend"
+   ],
+   "id": 6,
+   "text": "frontend zero drift"
+  },
+  {
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ],
+   "id": 7,
+   "text": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1 frozen before results"
+  },
+  {
+   "checks": [
+    "test_storage_policy_v2_is_a_narrow_additive_successor_of_v1",
+    "@storage_successor"
+   ],
+   "id": 8,
+   "text": "storage-policy gap handled by additive successor, not hidden hack"
+  },
+  {
+   "checks": [
+    "test_system_info_v2_reports_auth_demo_and_sqlite_truthfully",
+    "@api_successor"
+   ],
+   "id": 9,
+   "text": "product-system auth metadata gap handled additively"
+  },
+  {
+   "checks": [
+    "test_clerk_provider_uses_the_official_sdk_function_by_default",
+    "@clerk_sdk_imported"
+   ],
+   "id": 10,
+   "text": "official Clerk Python SDK used"
+  },
+  {
+   "checks": [
+    "test_there_is_no_custom_jwt_or_crypto_code_in_the_auth_package",
+    "test_unsigned_and_tampered_tokens_are_rejected_not_trusted"
+   ],
+   "id": 11,
+   "text": "no custom JWT verification"
+  },
+  {
+   "checks": [
+    "@clerk_exact_pin"
+   ],
+   "id": 12,
+   "text": "Clerk dependency exactly pinned"
+  },
+  {
+   "checks": [
+    "@dependency_firewall"
+   ],
+   "id": 13,
+   "text": "existing scientific dependency versions unchanged"
+  },
+  {
+   "checks": [
+    "test_unset_or_invalid_auth_mode_refuses_to_start",
+    "test_the_launcher_refuses_to_start_without_a_valid_explicit_auth_configuration"
+   ],
+   "id": 14,
+   "text": "auth mode has no silent default"
+  },
+  {
+   "checks": [
+    "test_demo_mode_requires_the_exact_acknowledgement",
+    "test_explicit_valid_demo_mode_builds_the_demo_provider",
+    "test_demo_identity_is_prefixed_flagged_and_credential_free"
+   ],
+   "id": 15,
+   "text": "DemoAuth requires exact acknowledgement"
+  },
+  {
+   "checks": [
+    "test_clerk_mode_with_incomplete_config_fails_and_never_falls_back_to_demo",
+    "test_a_clerk_app_rejects_bad_tokens_over_rest_and_websocket_without_any_fallback",
+    "test_a_clerk_subject_can_never_use_the_demo_prefix_or_miss_its_session"
+   ],
+   "id": 16,
+   "text": "Clerk never falls back to DemoAuth"
+  },
+  {
+   "checks": [
+    "test_only_session_tokens_are_accepted_machine_and_api_tokens_are_not",
+    "test_a_validly_signed_session_token_yields_the_verified_identity",
+    "test_invalid_or_unverifiable_credentials_are_rejected"
+   ],
+   "id": 17,
+   "text": "Clerk accepts only intended user session authentication"
+  },
+  {
+   "checks": [
+    "test_the_sdk_boundary_receives_session_only_authorized_parties_and_the_key",
+    "test_clerk_mode_with_incomplete_config_fails_and_never_falls_back_to_demo"
+   ],
+   "id": 18,
+   "text": "authorized parties enforced/configured"
+  },
+  {
+   "checks": [
+    "test_no_credential_is_ever_written_to_the_database",
+    "test_the_environment_example_contains_names_only",
+    "@e2e_no_credentials_in_database"
+   ],
+   "id": 19,
+   "text": "no credentials persisted"
+  },
+  {
+   "checks": [
+    "test_me_returns_the_verified_identity_and_requires_authentication",
+    "@e2e_me"
+   ],
+   "id": 20,
+   "text": "/me works"
+  },
+  {
+   "checks": [
+    "test_completed_sessions_devices_and_users_survive_a_restart",
+    "@e2e_users_persisted"
+   ],
+   "id": 21,
+   "text": "users persisted"
+  },
+  {
+   "checks": [
+    "test_database_is_created_from_scratch_with_pragmas_and_schema_version",
+    "@e2e_pragmas_fk"
+   ],
+   "id": 22,
+   "text": "SQLite initialized with foreign_keys ON"
+  },
+  {
+   "checks": [
+    "test_database_is_created_from_scratch_with_pragmas_and_schema_version",
+    "@e2e_pragmas_wal"
+   ],
+   "id": 23,
+   "text": "SQLite WAL enabled"
+  },
+  {
+   "checks": [
+    "test_database_is_created_from_scratch_with_pragmas_and_schema_version",
+    "test_unknown_schema_versions_and_unversioned_databases_are_refused",
+    "@e2e_pragmas_version"
+   ],
+   "id": 24,
+   "text": "schema version recorded"
+  },
+  {
+   "checks": [
+    "test_schema_matches_the_storage_policy_successor_exactly",
+    "@e2e_tables"
+   ],
+   "id": 25,
+   "text": "all required schema tables exist"
+  },
+  {
+   "checks": [
+    "test_a_simulated_device_cannot_be_stored_without_its_scenario",
+    "test_a_restored_device_must_be_scanned_and_connected_again_and_ids_do_not_collide",
+    "@e2e_device_scenario"
+   ],
+   "id": 26,
+   "text": "devices persist scenario_id"
+  },
+  {
+   "checks": [
+    "test_the_schema_has_no_raw_sample_table_or_per_user_model_state_or_credentials",
+    "@e2e_no_raw_table"
+   ],
+   "id": 27,
+   "text": "no raw sample table exists"
+  },
+  {
+   "checks": [
+    "test_no_per_sample_sql_writes_happen_during_a_full_session",
+    "@e2e_row_counts_bounded"
+   ],
+   "id": 28,
+   "text": "no per-sample SQL writes"
+  },
+  {
+   "checks": [
+    "test_completed_sessions_devices_and_users_survive_a_restart",
+    "@e2e_device_metadata"
+   ],
+   "id": 29,
+   "text": "device metadata persists"
+  },
+  {
+   "checks": [
+    "test_every_live_event_kind_maps_to_its_table_with_the_real_sequence",
+    "@e2e_connection_history"
+   ],
+   "id": 30,
+   "text": "device connection history persists"
+  },
+  {
+   "checks": [
+    "test_a_restored_device_must_be_scanned_and_connected_again_and_ids_do_not_collide",
+    "@e2e_restart_detached"
+   ],
+   "id": 31,
+   "text": "reconstructed device starts DETACHED"
+  },
+  {
+   "checks": [
+    "test_session_creation_persists_a_device_ready_session_with_the_frozen_runtime",
+    "test_session_creation_validates_ownership_connection_and_scenario",
+    "@e2e_session_create"
+   ],
+   "id": 32,
+   "text": "public session create works"
+  },
+  {
+   "checks": [
+    "test_session_list_is_caller_scoped_and_ordered_newest_first_with_a_stable_tiebreak",
+    "@e2e_session_list"
+   ],
+   "id": 33,
+   "text": "public session list works"
+  },
+  {
+   "checks": [
+    "test_session_get_and_start_stop_enforce_ownership_and_hide_nothing_by_listing",
+    "@e2e_session_get"
+   ],
+   "id": 34,
+   "text": "public session get works"
+  },
+  {
+   "checks": [
+    "test_session_get_and_start_stop_enforce_ownership_and_hide_nothing_by_listing",
+    "@e2e_ownership"
+   ],
+   "id": 35,
+   "text": "session ownership enforced"
+  },
+  {
+   "checks": [
+    "test_session_runtime_identity_cannot_be_changed_after_creation",
+    "test_the_persisted_runtime_identity_is_the_frozen_default_binding"
+   ],
+   "id": 36,
+   "text": "session runtime identity fixed"
+  },
+  {
+   "checks": [
+    "test_completed_sessions_devices_and_users_survive_a_restart",
+    "@e2e_runtime_identity_restart"
+   ],
+   "id": 37,
+   "text": "runtime identity survives restart"
+  },
+  {
+   "checks": [
+    "test_the_successor_reuses_the_frozen_cap_003_services_instead_of_copying_them",
+    "test_start_and_natural_completion_persist_through_the_frozen_monitoring_service",
+    "test_manual_stop_goes_through_the_frozen_stop_and_is_persisted"
+   ],
+   "id": 38,
+   "text": "start/stop reuse unchanged CAP-003 monitoring implementation"
+  },
+  {
+   "checks": [
+    "@drift",
+    "@cap003_lock_unchanged",
+    "test_persistence_does_not_alter_or_reorder_the_live_monitoring_stream"
+   ],
+   "id": 39,
+   "text": "CAP-003 scientific path unchanged"
+  },
+  {
+   "checks": [
+    "@e2e_93_windows"
+   ],
+   "id": 40,
+   "text": "MIXED windows remain 93"
+  },
+  {
+   "checks": [
+    "@e2e_quality_counts"
+   ],
+   "id": 41,
+   "text": "quality remains 86 VALID / 7 UNUSABLE"
+  },
+  {
+   "checks": [
+    "@e2e_inference_counts"
+   ],
+   "id": 42,
+   "text": "inference remains 86 x 200 / 7 x 422"
+  },
+  {
+   "checks": [
+    "@e2e_model_only"
+   ],
+   "id": 43,
+   "text": "successful model only MODEL_V2_FINAL"
+  },
+  {
+   "checks": [
+    "@e2e_calibration_only"
+   ],
+   "id": 44,
+   "text": "calibration only CAL_V2"
+  },
+  {
+   "checks": [
+    "test_persistence_does_not_alter_or_reorder_the_live_monitoring_stream",
+    "@e2e_projected_stream_identical"
+   ],
+   "id": 45,
+   "text": "live WebSocket semantics remain compatible"
+  },
+  {
+   "checks": [
+    "test_persistence_does_not_alter_or_reorder_the_live_monitoring_stream",
+    "@e2e_sequence_contiguous"
+   ],
+   "id": 46,
+   "text": "persistence does not reorder monitoring events"
+  },
+  {
+   "checks": [
+    "test_normal_available_context_is_stored_identically_in_both_places",
+    "@e2e_projected_stream_identical"
+   ],
+   "id": 47,
+   "text": "product-facing context remains CAP-003 normalized"
+  },
+  {
+   "checks": [
+    "test_raw_response_context_is_preserved_separately_from_the_product_projection",
+    "@e2e_raw_context_separate"
+   ],
+   "id": 48,
+   "text": "raw typed API context is preserved separately in inference evidence"
+  },
+  {
+   "checks": [
+    "test_every_context_withholding_case_is_auditable",
+    "@e2e_withheld_auditable"
+   ],
+   "id": 49,
+   "text": "all context-withholding cases auditable"
+  },
+  {
+   "checks": [
+    "test_signal_quality_rows_are_written_on_change_only",
+    "test_quality_deduplication_on_a_simple_sequence",
+    "@e2e_quality_change_only"
+   ],
+   "id": 50,
+   "text": "quality DB writes are change-only"
+  },
+  {
+   "checks": [
+    "test_context_snapshots_respect_the_bounded_cadence_and_none_exist_for_422_windows",
+    "@e2e_context_cadence"
+   ],
+   "id": 51,
+   "text": "context writes respect bounded cadence"
+  },
+  {
+   "checks": [
+    "test_waveform_preview_is_bounded_ecg_only_and_keeps_the_gap_as_null",
+    "@e2e_preview_bounded"
+   ],
+   "id": 52,
+   "text": "waveform preview <=4000 points"
+  },
+  {
+   "checks": [
+    "test_preview_code_is_not_reachable_from_the_scientific_or_monitoring_path"
+   ],
+   "id": 53,
+   "text": "waveform preview not used by scientific runtime"
+  },
+  {
+   "checks": [
+    "test_waveform_preview_is_deterministic_and_never_substitutes_zero",
+    "@e2e_no_raw_waveform"
+   ],
+   "id": 54,
+   "text": "no full raw waveform persisted"
+  },
+  {
+   "checks": [
+    "test_completed_sessions_devices_and_users_survive_a_restart",
+    "@e2e_completed_survives"
+   ],
+   "id": 55,
+   "text": "completed session survives restart"
+  },
+  {
+   "checks": [
+    "test_stale_nonterminal_sessions_are_failed_not_resumed",
+    "test_the_recovery_policy_never_touches_terminal_sessions"
+   ],
+   "id": 56,
+   "text": "nonterminal session does not silently resume after restart"
+  },
+  {
+   "checks": [
+    "test_a_killed_product_process_leaves_a_stale_session_that_is_failed_not_resumed",
+    "@crash_recovery"
+   ],
+   "id": 57,
+   "text": "crash recovery marks stale session safely"
+  },
+  {
+   "checks": [
+    "test_a_restored_device_must_be_scanned_and_connected_again_and_ids_do_not_collide",
+    "@crash_devices_detached"
+   ],
+   "id": 58,
+   "text": "device does not pretend to remain connected after process restart"
+  },
+  {
+   "checks": [
+    "@crash_no_fake_events"
+   ],
+   "id": 59,
+   "text": "no fake post-crash inference events"
+  },
+  {
+   "checks": [
+    "test_cap_004_imports_no_fl_runtime_and_never_writes_fl_or_candidate_tables",
+    "@fl_firewall"
+   ],
+   "id": 60,
+   "text": "no FL runtime execution"
+  },
+  {
+   "checks": [
+    "test_future_tables_exist_but_stay_empty_and_the_database_is_clean",
+    "@e2e_future_tables_empty"
+   ],
+   "id": 61,
+   "text": "FL metadata tables remain empty"
+  },
+  {
+   "checks": [
+    "@no_candidate"
+   ],
+   "id": 62,
+   "text": "no candidate model exists"
+  },
+  {
+   "checks": [
+    "test_the_schema_has_no_raw_sample_table_or_per_user_model_state_or_credentials",
+    "@no_per_user_model_state"
+   ],
+   "id": 63,
+   "text": "no per-user model state exists"
+  },
+  {
+   "checks": [
+    "@drift_frontend"
+   ],
+   "id": 64,
+   "text": "no frontend modification"
+  },
+  {
+   "checks": [
+    "@no_hardware_code"
+   ],
+   "id": 65,
+   "text": "no physical hardware implementation"
+  },
+  {
+   "checks": [
+    "@e2e_real_inference"
+   ],
+   "id": 66,
+   "text": "canonical persistent E2E uses real SOFTWARE_SYSTEM_V2"
+  },
+  {
+   "checks": [
+    "@e2e_separate_process"
+   ],
+   "id": 67,
+   "text": "product API canonical run is a separate process"
+  },
+  {
+   "checks": [
+    "@e2e_demo_explicit"
+   ],
+   "id": 68,
+   "text": "canonical auth mode is explicit DEMO"
+  },
+  {
+   "checks": [
+    "@e2e_restart_two_process",
+    "test_a_killed_product_process_leaves_a_stale_session_that_is_failed_not_resumed"
+   ],
+   "id": 69,
+   "text": "two-process persistence/restart test passes"
+  },
+  {
+   "checks": [
+    "@all_cap004_tests"
+   ],
+   "id": 70,
+   "text": "targeted CAP-004 tests pass"
+  },
+  {
+   "checks": [
+    "@prior_phase_tests"
+   ],
+   "id": 71,
+   "text": "CAP-001/CAP-002/CAP-003 tests pass"
+  },
+  {
+   "checks": [
+    "@regression"
+   ],
+   "id": 72,
+   "text": "full Python regression passes"
+  },
+  {
+   "checks": [
+    "@frontend"
+   ],
+   "id": 73,
+   "text": "frontend test/check/build pass"
+  },
+  {
+   "checks": [
+    "@ruff"
+   ],
+   "id": 74,
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    "@pip"
+   ],
+   "id": 75,
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "id": 76,
+   "text": "CI not queried"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "id": 77,
+   "text": "CI not triggered"
+  },
+  {
+   "checks": [
+    "@registry_cap004"
+   ],
+   "id": 78,
+   "text": "CAP-004 PASS"
+  },
+  {
+   "checks": [
+    "@registry_capg3"
+   ],
+   "id": 79,
+   "text": "CAPG3 PASS"
+  },
+  {
+   "checks": [
+    "@registry_cap005"
+   ],
+   "id": 80,
+   "text": "CAP-005 remains NOT_STARTED"
+  },
+  {
+   "checks": [
+    "@e2e_reproducible"
+   ],
+   "id": 81,
+   "text": "canonical persistent E2E is reproducible: two runs give identical projected streams and observed invariants"
+  },
+  {
+   "checks": [
+    "@e2e_predeclared"
+   ],
+   "id": 82,
+   "text": "canonical invariants equal the values predeclared in this protocol"
+  },
+  {
+   "checks": [
+    "@mutation_log"
+   ],
+   "id": 83,
+   "text": "ten non-equivalent mutation controls are each caught and restored byte-identically"
+  },
+  {
+   "checks": [
+    "@no_db_file_committed"
+   ],
+   "id": 84,
+   "text": "no SQLite database file is tracked or committed"
+  },
+  {
+   "checks": [
+    "test_unrecoverable_storage_failure_fails_the_session_without_altering_inference"
+   ],
+   "id": 85,
+   "text": "storage failure fails the session loudly without altering the inference result"
+  },
+  {
+   "checks": [
+    "test_session_lifecycle_rows_use_utc_lifecycle_time_not_source_time"
+   ],
+   "id": 86,
+   "text": "lifecycle timestamps use the UTC-microsecond persistence clock, separate from source time"
+  },
+  {
+   "checks": [
+    "test_the_successor_exposes_the_nine_cap_003_routes_plus_exactly_the_four_cap_004_routes",
+    "@route_parity"
+   ],
+   "id": 87,
+   "text": "the successor exposes the 9 CAP-003 routes plus exactly the 4 CAP-004 routes and no CAP-007/009 route"
+  },
+  {
+   "checks": [
+    "test_the_frozen_cap_003_app_file_is_untouched_and_not_imported_by_the_successor",
+    "@drift"
+   ],
+   "id": 88,
+   "text": "api/product_app.py is untouched and not imported by the successor"
+  },
+  {
+   "checks": [
+    "test_no_model_selector_exists_on_any_successor_route_or_body",
+    "test_identity_fields_cannot_select_any_model_or_scientific_configuration"
+   ],
+   "id": 89,
+   "text": "no model selector exists on any route, body or identity field"
+  },
+  {
+   "checks": [
+    "test_cors_uses_an_explicit_allow_list_and_never_a_wildcard_with_credentials"
+   ],
+   "id": 90,
+   "text": "CORS uses an explicit allow-list, never a wildcard with credentials"
+  },
+  {
+   "checks": [
+    "test_persisted_session_websocket_for_an_earlier_process_closes_cleanly_without_events",
+    "@e2e_ws_past_session"
+   ],
+   "id": 91,
+   "text": "past-process session sockets close cleanly without replaying events"
+  },
+  {
+   "checks": [
+    "@e2e_integrity"
+   ],
+   "id": 92,
+   "text": "database integrity_check is ok and foreign_key_check is empty after every canonical stage"
+  },
+  {
+   "checks": [
+    "@e2e_projected_stream_identical"
+   ],
+   "id": 93,
+   "text": "the full projected canonical stream is identical to the CAP-003 canonical stream under PROJECTION_V1"
+  },
+  {
+   "checks": [
+    "@dependency_additions_only"
+   ],
+   "id": 94,
+   "text": "dependency changes are limited to the clerk-backend-api pin and its transitive PyJWT pin"
+  },
+  {
+   "checks": [
+    "@no_efficacy_metrics"
+   ],
+   "id": 95,
+   "text": "no efficacy metrics or clinical claims are made"
+  },
+  {
+   "checks": [
+    "@disclosures_preserved"
+   ],
+   "id": 96,
+   "text": "CAP-001..003 preserved disclosures remain recorded"
+  },
+  {
+   "checks": [
+    "@e2e_ownership"
+   ],
+   "id": 97,
+   "text": "canonical E2E session ownership is enforced across processes"
+  }
+ ],
+ "capg3_criteria_note": "Criteria 1-80 are the 80 prompt-mandated criteria; 81-97 are implementation-specific integrity criteria added before any result evidence.",
+ "claim_boundary": {
+  "allowed": [
+   "systems/product integration evidence",
+   "simulated device",
+   "deterministic simulation",
+   "research prototype"
+  ],
+  "forbidden": [
+   "clinical evidence",
+   "model efficacy metrics from simulation",
+   "candidate comparison",
+   "physical hardware claim"
+  ]
+ },
+ "components": [
+  "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1",
+  "CAPSTONE_STORAGE_POLICY_V2",
+  "PRODUCT_API_CONTRACT_V2",
+  "CLERK_AUTH_PROVIDER_V1",
+  "DEMO_AUTH_PROVIDER_V1",
+  "CAPSTONE_SQLITE_STORE_V1",
+  "CAPSTONE_PERSISTENCE_BRIDGE_V1",
+  "CAPSTONE_SESSION_SERVICE_V1",
+  "CAPSTONE_PRODUCT_API_V1_1",
+  "CAPSTONE_RESTART_RECOVERY_V1",
+  "CAPSTONE_WAVEFORM_PREVIEW_V1"
+ ],
+ "contract_successors": {
+  "CAPSTONE_STORAGE_POLICY_V2": {
+   "delta": "devices.scenario_id (required for SIMULATED); schema_version via PRAGMA user_version; lifecycle clock; restart semantics; immutability; preview policy",
+   "path": "contracts/capstone/storage_policy_v2.json",
+   "supersedes": "contracts/capstone/storage_policy_v1.json"
+  },
+  "PRODUCT_API_CONTRACT_V2": {
+   "delta": "system auth_provider, demo_mode, persistence_mode=SQLITE; GET /me; POST/GET /sessions; GET /sessions/{id}",
+   "path": "contracts/capstone/product_api_v2.json",
+   "supersedes": "contracts/capstone/product_api_v1.json"
+  },
+  "v1_files_modified": false
+ },
+ "control_plane": {
+  "component_registry": "manifests/capstone/component_registry_cap_004_v1.csv",
+  "gate_registry": "manifests/capstone/gate_registry_v1.csv",
+  "task_registry": "manifests/capstone/task_registry_v1.csv"
+ },
+ "cors": {
+  "env": "NHM_PRODUCT_ALLOWED_ORIGINS",
+  "wildcard_with_credentials": false
+ },
+ "dependency_policy": {
+  "allowed_additions": [
+   "clerk-backend-api==7.0.0",
+   "PyJWT==2.15.1"
+  ],
+  "if_violated": "STOP and report",
+  "removed_lines_allowed": 0,
+  "unchanged_required": [
+   "torch",
+   "numpy",
+   "scipy",
+   "wfdb",
+   "scikit-learn",
+   "flwr",
+   "fastapi",
+   "pydantic",
+   "httpx",
+   "cryptography"
+  ]
+ },
+ "entry": {
+  "entry_commit_with_control_plane": "c1b9b1a",
+  "expected_entry_sha": "56fc19f69566fd9ead6b509292449d5cd7540adb"
+ },
+ "environment": "Python 3.11 venv outside the repo from requirements-dev.lock plus the two allowed pins; no CI",
+ "event_mapping": {
+  "context.snapshot": "context_snapshots (normalized)",
+  "device.status": "device_connections",
+  "inference.result": "inference_events",
+  "monitoring.state": "monitoring_state_events",
+  "quality.status": "signal_quality_events (change-only)",
+  "session.status": "monitoring_sessions.state/started/ended",
+  "waveform.chunk": "folded in memory into one bounded preview blob"
+ },
+ "gate": "CAPG3",
+ "mutation_controls": [
+  "DEMO_ACTIVATES_WITHOUT_ACK",
+  "CLERK_INVALID_TOKEN_ACCEPTED",
+  "CROSS_USER_SESSION_READ_ACCEPTED",
+  "DEVICE_SCENARIO_LOST_ON_RESTART",
+  "RUNTIME_IDENTITY_MUTABLE_IN_SQL",
+  "RAW_360HZ_TABLE_INTRODUCED",
+  "QUALITY_WRITTEN_EVERY_WINDOW",
+  "RAW_CONTEXT_OVERWRITTEN_BY_NORMALIZED",
+  "STALE_MONITORING_SILENTLY_RESUMED",
+  "FL_TABLE_RECEIVES_TRUTH_LABELS"
+ ],
+ "out_of_scope": [
+  "frontend changes",
+  "Clerk UI / sign-in UI",
+  "session history UI",
+  "local training buffer",
+  "FedAvg/FedProx/SecAgg",
+  "FL candidates",
+  "physical hardware",
+  "CAP-005",
+  "CAP-007/009 routes"
+ ],
+ "owner_task": "CAP-004",
+ "persistence": {
+  "lifecycle_clock": "UTC microseconds, separate from source time",
+  "persisted": [
+   "users",
+   "devices (incl. scenario_id)",
+   "device_connections",
+   "monitoring_sessions"
+  ],
+  "runtime_identity": "immutable after creation (trigger)"
+ },
+ "preserved_disclosures": [
+  "CAP-001 gate-row 33 vs 50",
+  "CAP-002 code-drafted-before-entry",
+  "CAP-002 amendment chain",
+  "CAP-002 intermediate added-file-count reporting discrepancy",
+  "CAP-003 ACCELERATED-only determinism with LIVE_SPEED bounded-settle/fail-loud",
+  "CAP-003 manual stop mid-outage leaves the device in its link state",
+  "CAP-003 context_available=false withholding",
+  "CAP-003 pre-freeze smoke"
+ ],
+ "projection": {
+  "defined_before_execution": true,
+  "drops": [
+   "session_id",
+   "session-derived event_id",
+   "wall-clock latency_ms"
+  ],
+  "id": "PROJECTION_V1",
+  "keeps": "every other field including all scientific values",
+  "pass_condition": "projected CAP-004 stream == projected CAP-003 stream; a scientific difference is a FAIL, not a tolerance",
+  "reference": "reports/capstone/cap_003/canonical_event_stream_run_1.jsonl"
+ },
+ "protocol_id": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1",
+ "purpose": "Authenticated, persistent product backend (Clerk session provider through the official SDK, explicit DemoAuth, stdlib SQLite, public session lifecycle, restart/crash recovery) as an additive successor over the frozen CAP-003 monitoring services.",
+ "raw_vs_product_context": {
+  "context_snapshots": "CAP-003 normalized product projection",
+  "inference_events.context_json": "raw typed InferWindowResponse.context",
+  "withholding": "context_available=false cases keep the raw PPG-derived values only in inference evidence and are auditable"
+ },
+ "restart_recovery": {
+  "device_after_restart": "DETACHED",
+  "fake_events": false,
+  "policy": "FAIL_STALE_NONTERMINAL_SESSIONS_RECONSTRUCT_DEVICES_DETACHED",
+  "resume": false,
+  "stale_states": [
+   "CREATED",
+   "DEVICE_READY",
+   "MONITORING",
+   "STOPPING"
+  ],
+  "terminal_sessions": "unchanged"
+ },
+ "schema": {
+  "database_committed": false,
+  "default_path": "data/capstone/product.sqlite3",
+  "engine": "stdlib sqlite3",
+  "future_tables_must_stay_empty": [
+   "federation_runs",
+   "federation_rounds",
+   "fl_client_statuses",
+   "candidate_models",
+   "governance_decisions",
+   "session_summaries"
+  ],
+  "override_env": "NHM_PRODUCT_DB_PATH",
+  "pragmas": {
+   "foreign_keys": "ON",
+   "journal_mode": "wal",
+   "user_version": 1
+  },
+  "raw_360hz_table": false,
+  "tables": 15
+ },
+ "session_lifecycle": {
+  "cap003_routes_preserved": true,
+  "public_routes": [
+   "GET /me",
+   "POST /sessions",
+   "GET /sessions",
+   "GET /sessions/{id}"
+  ],
+  "start_stop": "delegated to the frozen CAP-003 MonitoringService",
+  "storage_failure": "session FAILED, loud, never silently degraded"
+ },
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "upstream": {
+  "amendment_chains": {
+   "CAP-002": 3,
+   "CAP-003": 1
+  },
+  "frozen_files_modified": false,
+  "locks": [
+   "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json",
+   "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json",
+   "artifacts/capstone/CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1.lock.json"
+  ]
+ },
+ "waveform_preview": {
+  "channel": "ECG",
+  "component": "CAPSTONE_WAVEFORM_PREVIEW_V1",
+  "encoding": "JSON_ZLIB_V1",
+  "gap": "null",
+  "max_points": 4000,
+  "never_read_by_scientific_runtime": true
+ }
+}

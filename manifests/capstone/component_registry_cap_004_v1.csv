@@ -1,0 +1,12 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1,ENGINEERING_PROTOCOL,CAP-004,FROZEN_ENGINEERING_PROTOCOL,,artifacts/capstone/CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.lock.json,CAP-004 method protocol incl. the frozen CAPG3 criteria.
+CAPSTONE_STORAGE_POLICY_V2,PRODUCT_POLICY,CAP-004,FROZEN_PRODUCT_POLICY,CAPSTONE_STORAGE_POLICY_V1,contracts/capstone/storage_policy_v2.json,"Additive successor: devices.scenario_id, schema version, lifecycle clock, restart semantics."
+PRODUCT_API_CONTRACT_V2,INTERFACE_CONTRACT,CAP-004,FROZEN_INTERFACE_CONTRACT,PRODUCT_API_CONTRACT_V1,contracts/capstone/product_api_v2.json,Additive successor: system auth_provider/demo_mode/persistence_mode; /me and session routes.
+CLERK_AUTH_PROVIDER_V1,ENGINEERING_IMPLEMENTATION,CAP-004,FROZEN_ENGINEERING_IMPLEMENTATION,,product/auth/clerk.py,Clerk session auth through the official clerk-backend-api SDK; no custom JWT; no fallback.
+DEMO_AUTH_PROVIDER_V1,ENGINEERING_IMPLEMENTATION,CAP-004,FROZEN_ENGINEERING_IMPLEMENTATION,,product/auth/demo.py,Explicit offline faculty demo identity behind the exact acknowledgement.
+CAPSTONE_SQLITE_STORE_V1,ENGINEERING_IMPLEMENTATION,CAP-004,FROZEN_ENGINEERING_IMPLEMENTATION,,product/persistence/store.py,"Stdlib SQLite store: 15 policy tables, WAL, foreign keys, schema version, immutability."
+CAPSTONE_PERSISTENCE_BRIDGE_V1,ENGINEERING_IMPLEMENTATION,CAP-004,FROZEN_ENGINEERING_IMPLEMENTATION,,product/persistence/bridge.py,Observes the unchanged live stream; bounded writes; raw vs product context.
+CAPSTONE_SESSION_SERVICE_V1,ENGINEERING_IMPLEMENTATION,CAP-004,FROZEN_ENGINEERING_IMPLEMENTATION,,product/sessions/service.py,Public session create/list/get and persistent device service over the frozen services.
+CAPSTONE_PRODUCT_API_V1_1,ENGINEERING_IMPLEMENTATION,CAP-004,FROZEN_ENGINEERING_IMPLEMENTATION,CAPSTONE_PRODUCT_API_V1,api/product_app_v1_1.py,"Additive successor app: CAP-003 routes + /me + session routes, CORS, recovery."
+CAPSTONE_RESTART_RECOVERY_V1,ENGINEERING_IMPLEMENTATION,CAP-004,FROZEN_ENGINEERING_IMPLEMENTATION,,product/persistence/recovery.py,"Restart: devices reconstructed DETACHED; stale nonterminal sessions FAILED, never resumed."
+CAPSTONE_WAVEFORM_PREVIEW_V1,ENGINEERING_IMPLEMENTATION,CAP-004,FROZEN_ENGINEERING_IMPLEMENTATION,,product/persistence/preview.py,Bounded (<=4000 point) ECG preview; not the raw stream.
