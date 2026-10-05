@@ -1,0 +1,53 @@
+{
+ "cap003_reference_stream": "reports/capstone/cap_003/canonical_event_stream_run_1.jsonl",
+ "projected_stream_sha256": [
+  "96d741b906b599966b9a8b7cb7bd332c2158bc0ebcae9a67447ff95fb4c1d26e",
+  "96d741b906b599966b9a8b7cb7bd332c2158bc0ebcae9a67447ff95fb4c1d26e"
+ ],
+ "projection": {
+  "defined_before_execution": true,
+  "drops": [
+   "session_id",
+   "session-derived event_id",
+   "wall-clock latency_ms"
+  ],
+  "id": "PROJECTION_V1",
+  "keeps": "every other field including all scientific values",
+  "pass_condition": "projected CAP-004 stream == projected CAP-003 stream; a scientific difference is a FAIL, not a tolerance",
+  "reference": "reports/capstone/cap_003/canonical_event_stream_run_1.jsonl"
+ },
+ "protected_audit": "reports/capstone/cap_004/protected_artifact_final.json",
+ "runs": {
+  "run_1": {
+   "cap003_context_values_withheld": 8,
+   "cap004_withheld_cases_in_database": 8,
+   "device_states_equal": true,
+   "event_count_equal": true,
+   "full_projected_stream_identical_to_cap003_canonical_run_1": true,
+   "kind_order_equal": true,
+   "model_calibration_equal": true,
+   "monitoring_state_changes_equal": true,
+   "quality_sequence_equal": true,
+   "raw_and_calibrated_probabilities_equal": true,
+   "session_states_equal": true,
+   "waveform_null_interval_equal": true,
+   "window_timestamps_equal": true
+  },
+  "run_2": {
+   "cap003_context_values_withheld": 8,
+   "cap004_withheld_cases_in_database": 8,
+   "device_states_equal": true,
+   "event_count_equal": true,
+   "full_projected_stream_identical_to_cap003_canonical_run_1": true,
+   "kind_order_equal": true,
+   "model_calibration_equal": true,
+   "monitoring_state_changes_equal": true,
+   "quality_sequence_equal": true,
+   "raw_and_calibrated_probabilities_equal": true,
+   "session_states_equal": true,
+   "waveform_null_interval_equal": true,
+   "window_timestamps_equal": true
+  }
+ },
+ "scientific_modules_modified": false
+}

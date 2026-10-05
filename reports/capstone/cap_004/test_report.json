@@ -1,0 +1,69 @@
+{
+ "canonical_runs": [
+  "canonical_persistent_e2e_run_1.json",
+  "canonical_persistent_e2e_run_2.json",
+  "crash_recovery.json"
+ ],
+ "cap001_cap002_cap003_and_lifecycle": {
+  "junit": "logs/prior_phase_tests.xml",
+  "lifecycle_tests": 15,
+  "log": "logs/prior_phase_tests.log",
+  "passed": 322
+ },
+ "cap004_targeted": {
+  "files": [
+   "tests/test_capstone_auth.py",
+   "tests/test_capstone_persistence.py",
+   "tests/test_capstone_session_service.py",
+   "tests/test_capstone_restart_recovery.py"
+  ],
+  "includes_real_process_tests": "tests/test_capstone_restart_recovery.py::test_a_killed_product_process_leaves_a_stale_session_that_is_failed_not_resumed (real killed product process + real released inference service)",
+  "junit": "logs/cap004_tests.xml",
+  "log": "logs/cap004_tests.log",
+  "tests_passed": 87
+ },
+ "environment": "Python 3.11 venv outside the repo from requirements-dev.lock plus requirements-capstone-auth.lock; CI neither queried nor triggered",
+ "frontend": {
+  "npm_run_build": {
+   "done": true,
+   "exit": 0
+  },
+  "npm_run_check": {
+   "errors": 0,
+   "exit": 0,
+   "files": 5671,
+   "warnings": 118
+  },
+  "npm_test": {
+   "exit": 0,
+   "files_passed": 7,
+   "files_skipped": 1,
+   "tests_passed": 68,
+   "tests_skipped": 1
+  }
+ },
+ "mutation_controls": "10/10 caught behaviourally and restored byte-identically (mutation_controls.json)",
+ "pip_check": "No broken requirements found (logs/pip_check.log)",
+ "python_regression": {
+  "failed": 0,
+  "log": "logs/pytest_full.log",
+  "passed": 2808,
+  "skipped": 1
+ },
+ "regression_history_disclosure": {
+  "evidence": "preexisting_cap003_flake.json",
+  "final_full_run_on_the_final_state": "2808 passed, 1 skipped, 0 failed; no exception from the evaluator's known-flake clause was needed",
+  "first_full_run_on_the_pre_amendment_freeze": "4 failed (2 V2-014 lock tests because pyproject.toml/requirements-dev.lock were edited; 1 CAP-001 product-package guard because product/ contained 'sqlite3'; 1 intermittent CAP-003 test) - first three fixed by user-approved amendment 2",
+  "known_flake": {
+   "failed": 4,
+   "passed": 8,
+   "runs": 12,
+   "signatures": [
+    "E           AssertionError: assert (789 > 100 and False)"
+   ],
+   "test": "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers"
+  },
+  "second_full_run": "1 failed (the intermittent CAP-003 test only)"
+ },
+ "ruff": "All checks passed (logs/ruff.log)"
+}

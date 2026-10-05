@@ -1,0 +1,23 @@
+{
+ "cap003_context_values_withheld": 8,
+ "product_context_rows": 86,
+ "raw_context_rows": 86,
+ "semantics": {
+  "context_snapshots": "CAP-003 normalized product projection",
+  "inference_events.context_json": "raw typed InferWindowResponse.context",
+  "withholding": "context_available=false cases keep the raw PPG-derived values only in inference evidence and are auditable"
+ },
+ "withheld_context_cases": 8,
+ "withheld_product_values_null": true,
+ "withheld_raw_has_ppg_values": true,
+ "withheld_timestamps": [
+  160000000,
+  165000000,
+  170000000,
+  175000000,
+  180000000,
+  185000000,
+  190000000,
+  195000000
+ ]
+}

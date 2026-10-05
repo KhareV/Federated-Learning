@@ -1,0 +1,294 @@
+{
+ "database_after": {
+  "credential_strings_in_database": [],
+  "devices": [
+   {
+    "adapter_type": "SIMULATED",
+    "device_id": "NHM_VIRTUAL_WEARABLE_01",
+    "scenario_id": "MIXED_MONITORING_SESSION",
+    "user_id": "demo:faculty"
+   }
+  ],
+  "foreign_key_check": [],
+  "inference_models": [
+   "MODEL_V2_FINAL"
+  ],
+  "integrity_check": [
+   "ok"
+  ],
+  "pragmas": {
+   "foreign_keys": 1,
+   "journal_mode": "wal",
+   "user_version": 1
+  },
+  "product_context_rows": 86,
+  "quality_change_sequence": [
+   [
+    "VALID",
+    "VALID"
+   ],
+   [
+    "VALID",
+    null
+   ],
+   [
+    "VALID",
+    "VALID"
+   ],
+   [
+    "UNUSABLE",
+    "VALID"
+   ],
+   [
+    "VALID",
+    "VALID"
+   ],
+   [
+    "UNUSABLE",
+    null
+   ],
+   [
+    "UNUSABLE",
+    "VALID"
+   ],
+   [
+    "VALID",
+    "VALID"
+   ]
+  ],
+  "quality_rows": 8,
+  "raw_context_rows": 86,
+  "row_counts": {
+   "candidate_models": 0,
+   "context_snapshots": 86,
+   "device_connections": 10,
+   "devices": 1,
+   "federation_rounds": 0,
+   "federation_runs": 0,
+   "fl_client_statuses": 0,
+   "governance_decisions": 0,
+   "inference_events": 86,
+   "monitoring_sessions": 1,
+   "monitoring_state_events": 3,
+   "session_summaries": 0,
+   "signal_quality_events": 8,
+   "users": 1,
+   "waveform_previews": 1
+  },
+  "schema_sha256": "673c30db61e4030790124d705f2ac5b43edc85e93783b61e81e60d3281d91657",
+  "schema_sql": [
+   "CREATE INDEX ix_candidates_run ON candidate_models (federation_run_id)",
+   "CREATE INDEX ix_clientstatus_run_client ON fl_client_statuses (run_id, client_id, round_id)",
+   "CREATE INDEX ix_conn_device_time ON device_connections (device_id, at_us)",
+   "CREATE INDEX ix_context_session_seq ON context_snapshots (session_id, sequence_index)",
+   "CREATE INDEX ix_devices_user ON devices (user_id)",
+   "CREATE INDEX ix_fedruns_user_started ON federation_runs (user_id, started_at_us)",
+   "CREATE INDEX ix_governance_candidate ON governance_decisions (candidate_id)",
+   "CREATE INDEX ix_preview_session ON waveform_previews (session_id, channel)",
+   "CREATE INDEX ix_quality_session_seq ON signal_quality_events (session_id, sequence_index)",
+   "CREATE INDEX ix_sessions_state ON monitoring_sessions (state)",
+   "CREATE INDEX ix_sessions_user_created ON monitoring_sessions (user_id, created_at_us)",
+   "CREATE INDEX ix_state_session_seq ON monitoring_state_events (session_id, sequence_index)",
+   "CREATE UNIQUE INDEX ux_fedrounds_run_round ON federation_rounds (run_id, round_id)",
+   "CREATE UNIQUE INDEX ux_inference_session_seq ON inference_events (session_id, sequence_index)",
+   "CREATE TABLE candidate_models (candidate_id TEXT NOT NULL, parent_model_id TEXT NOT NULL, federation_run_id TEXT NOT NULL, round INTEGER NOT NULL, algorithm TEXT NOT NULL, client_count INTEGER NOT NULL, created_at_us INTEGER NOT NULL, state_digest TEXT NOT NULL, validation_status TEXT NOT NULL, governance_status TEXT NOT NULL, sandbox_status TEXT NOT NULL, production_deployed INTEGER NOT NULL, claim_boundary TEXT NOT NULL, PRIMARY KEY (candidate_id), FOREIGN KEY (federation_run_id) REFERENCES federation_runs(run_id))",
+   "CREATE TABLE context_snapshots (snapshot_id TEXT NOT NULL, session_id TEXT NOT NULL, sequence_index INTEGER NOT NULL, timestamp_us INTEGER NOT NULL, hr_ecg_bpm REAL, pr_ppg_bpm REAL, spo2_pct REAL, spo2_valid INTEGER NOT NULL, context_available INTEGER NOT NULL, ppg_quality TEXT, PRIMARY KEY (snapshot_id), FOREIGN KEY (session_id) REFERENCES monitoring_sessions(session_id))",
+   "CREATE TABLE device_connections (connection_id TEXT NOT NULL, device_id TEXT NOT NULL, session_id TEXT, event_type TEXT NOT NULL, device_state TEXT NOT NULL, sequence_index INTEGER NOT NULL, reason_code TEXT, recoverable INTEGER NOT NULL, at_us INTEGER NOT NULL, PRIMARY KEY (connection_id), FOREIGN KEY (device_id) REFERENCES devices(device_id), FOREIGN KEY (session_id) REFERENCES monitoring_sessions(session_id), CHECK (recoverable IN (0, 1)))",
+   "CREATE TABLE devices (device_id TEXT NOT NULL, user_id TEXT NOT NULL, display_name TEXT NOT NULL, adapter_type TEXT NOT NULL, source_dataset_id TEXT, source_mode TEXT, simulation_version TEXT, capabilities_json TEXT NOT NULL, created_at_us INTEGER NOT NULL, scenario_id TEXT, PRIMARY KEY (device_id), FOREIGN KEY (user_id) REFERENCES users(user_id), CHECK (adapter_type <> 'SIMULATED' OR scenario_id IS NOT NULL))",
+   "CREATE TABLE federation_rounds (round_pk TEXT NOT NULL, run_id TEXT NOT NULL, round_id INTEGER NOT NULL, state TEXT NOT NULL, base_state_digest TEXT NOT NULL, algorithm TEXT NOT NULL, accepted_update_count INTEGER NOT NULL, candidate_id TEXT, updated_at_us INTEGER NOT NULL, PRIMARY KEY (round_pk), FOREIGN KEY (run_id) REFERENCES federation_runs(run_id))",
+   "CREATE TABLE federation_runs (run_id TEXT NOT NULL, user_id TEXT NOT NULL, run_type TEXT NOT NULL, base_model_id TEXT NOT NULL, federation_protocol_id TEXT NOT NULL, algorithm TEXT NOT NULL, secagg_mode TEXT NOT NULL, planned_rounds INTEGER NOT NULL, current_round INTEGER NOT NULL, status TEXT NOT NULL, started_at_us INTEGER, completed_at_us INTEGER, engineering_only INTEGER NOT NULL, candidate_ids_json TEXT NOT NULL, PRIMARY KEY (run_id), FOREIGN KEY (user_id) REFERENCES users(user_id))",
+   "CREATE TABLE fl_client_statuses (status_pk TEXT NOT NULL, run_id TEXT NOT NULL, client_id TEXT NOT NULL, round_id INTEGER NOT NULL, client_state TEXT NOT NULL, local_example_count INTEGER NOT NULL, update_digest TEXT, reason_code TEXT, updated_at_us INTEGER NOT NULL, PRIMARY KEY (status_pk), FOREIGN KEY (run_id) REFERENCES federation_runs(run_id))",
+   "CREATE TABLE governance_decisions (decision_id TEXT NOT NULL, candidate_id TEXT NOT NULL, decision TEXT NOT NULL, checks_json TEXT NOT NULL, decided_at_us INTEGER NOT NULL, scientific_promotion INTEGER NOT NULL, production_deployed INTEGER NOT NULL, PRIMARY KEY (decision_id), FOREIGN KEY (candidate_id) REFERENCES candidate_models(candidate_id))",
+   "CREATE TABLE inference_events (inference_id TEXT NOT NULL, session_id TEXT NOT NULL, sequence_index INTEGER NOT NULL, timestamp_us INTEGER NOT NULL, model_id TEXT, calibration_domain TEXT, ecg_quality TEXT NOT NULL, monitoring_state TEXT NOT NULL, raw_probability REAL, source_domain_calibrated_probability REAL, threshold REAL, latency_ms REAL, context_json TEXT, PRIMARY KEY (inference_id), FOREIGN KEY (session_id) REFERENCES monitoring_sessions(session_id))",
+   "CREATE TABLE monitoring_sessions (session_id TEXT NOT NULL, user_id TEXT NOT NULL, device_id TEXT NOT NULL, adapter_type TEXT NOT NULL, source_dataset_id TEXT, source_mode TEXT, scenario_id TEXT, scenario_seed INTEGER, simulation_version TEXT, state TEXT NOT NULL, created_at_us INTEGER NOT NULL, started_at_us INTEGER, ended_at_us INTEGER, model_id TEXT NOT NULL, calibration_id TEXT NOT NULL, preprocess_id TEXT NOT NULL, alert_policy_id TEXT NOT NULL, alert_policy_binding_id TEXT NOT NULL, gateway_artifact_id TEXT NOT NULL, api_contract_version TEXT NOT NULL, software_system_id TEXT NOT NULL, PRIMARY KEY (session_id), FOREIGN KEY (user_id) REFERENCES users(user_id), FOREIGN KEY (device_id) REFERENCES devices(device_id))",
+   "CREATE TABLE monitoring_state_events (event_id TEXT NOT NULL, session_id TEXT NOT NULL, sequence_index INTEGER NOT NULL, timestamp_us INTEGER NOT NULL, monitoring_state TEXT NOT NULL, previous_state TEXT, reason_code TEXT, PRIMARY KEY (event_id), FOREIGN KEY (session_id) REFERENCES monitoring_sessions(session_id))",
+   "CREATE TABLE session_summaries (session_id TEXT NOT NULL, summary_version TEXT NOT NULL, duration_ms INTEGER NOT NULL, windows_inferred INTEGER NOT NULL, state_counts_json TEXT NOT NULL, quality_counts_json TEXT NOT NULL, hr_min REAL, hr_mean REAL, hr_max REAL, spo2_min REAL, spo2_mean REAL, spo2_max REAL, reconnect_count INTEGER NOT NULL, disconnect_count INTEGER NOT NULL, generated_at_us INTEGER NOT NULL, PRIMARY KEY (session_id), FOREIGN KEY (session_id) REFERENCES monitoring_sessions(session_id))",
+   "CREATE TABLE signal_quality_events (event_id TEXT NOT NULL, session_id TEXT NOT NULL, sequence_index INTEGER NOT NULL, timestamp_us INTEGER NOT NULL, ecg_quality TEXT NOT NULL, ppg_quality TEXT, PRIMARY KEY (event_id), FOREIGN KEY (session_id) REFERENCES monitoring_sessions(session_id))",
+   "CREATE TABLE users (user_id TEXT NOT NULL, auth_provider TEXT NOT NULL, display_name TEXT, email TEXT, demo_mode INTEGER NOT NULL, created_at_us INTEGER NOT NULL, PRIMARY KEY (user_id), CHECK (demo_mode IN (0, 1)))",
+   "CREATE TABLE waveform_previews (preview_id TEXT NOT NULL, session_id TEXT NOT NULL, channel TEXT NOT NULL, source_rate_hz INTEGER NOT NULL, decimation_factor INTEGER NOT NULL, point_count INTEGER NOT NULL, start_timestamp_us INTEGER NOT NULL, encoding TEXT NOT NULL, data BLOB NOT NULL, PRIMARY KEY (preview_id), FOREIGN KEY (session_id) REFERENCES monitoring_sessions(session_id))",
+   "CREATE TRIGGER trg_devices_scenario_immutable BEFORE UPDATE OF scenario_id, user_id ON devices BEGIN SELECT RAISE(ABORT, 'DEVICE_SCENARIO_AND_OWNER_IMMUTABLE'); END",
+   "CREATE TRIGGER trg_sessions_runtime_identity_immutable BEFORE UPDATE OF model_id, calibration_id, preprocess_id, alert_policy_id, alert_policy_binding_id, gateway_artifact_id, api_contract_version, software_system_id ON monitoring_sessions BEGIN SELECT RAISE(ABORT, 'RUNTIME_IDENTITY_IMMUTABLE'); END"
+  ],
+  "sessions": [
+   {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "device_id": "NHM_VIRTUAL_WEARABLE_01",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "scenario_id": "MIXED_MONITORING_SESSION",
+    "session_id": "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb",
+    "software_system_id": "SOFTWARE_SYSTEM_V2",
+    "state": "COMPLETED",
+    "user_id": "demo:faculty"
+   }
+  ],
+  "tables": [
+   "candidate_models",
+   "context_snapshots",
+   "device_connections",
+   "devices",
+   "federation_rounds",
+   "federation_runs",
+   "fl_client_statuses",
+   "governance_decisions",
+   "inference_events",
+   "monitoring_sessions",
+   "monitoring_state_events",
+   "session_summaries",
+   "signal_quality_events",
+   "users",
+   "waveform_previews"
+  ],
+  "users": [
+   {
+    "auth_provider": "DEMO",
+    "demo_mode": 1,
+    "display_name": "Faculty Demo User",
+    "user_id": "demo:faculty"
+   }
+  ],
+  "waveform_preview": {
+   "blob_bytes": 6579,
+   "channel": "ECG",
+   "decimation_factor": 44,
+   "decoded_points": 3928,
+   "encoding": "JSON_ZLIB_V1",
+   "null_points": 122,
+   "point_count": 3928,
+   "preview_id": "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb-WFP-ECG",
+   "session_id": "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb",
+   "source_rate_hz": 360,
+   "start_timestamp_us": 0
+  },
+  "withheld_context_cases": 8,
+  "withheld_product_values_null": true,
+  "withheld_raw_has_ppg_values": true,
+  "withheld_timestamps": [
+   160000000,
+   165000000,
+   170000000,
+   175000000,
+   180000000,
+   185000000,
+   190000000,
+   195000000
+  ]
+ },
+ "process": {
+  "connect_state": "CONNECTED",
+  "device_created": {
+   "adapter_type": "SIMULATED",
+   "capabilities": {
+    "nominal_source_rates_hz": {
+     "ECG_SIMULATION_CONVENTION": 360
+    },
+    "supports_device_events": true,
+    "supports_ecg": true,
+    "supports_ppg": false,
+    "supports_spo2_context": true
+   },
+   "connection_state": "DETACHED",
+   "device_id": "NHM_VIRTUAL_WEARABLE_01",
+   "display_name": "NHM Virtual Wearable",
+   "hardware_specific_fields_status": "NOT_APPLICABLE",
+   "simulation": true,
+   "simulation_version": "WEARABLE_SIM_V1",
+   "source_dataset_id": "WEARABLE_SIM_V1",
+   "source_mode": "SYNTHETIC_PHYSIOLOGY"
+  },
+  "final_session": {
+   "created_at_us": 1791208319253497,
+   "device_adapter_type": "SIMULATED",
+   "device_id": "NHM_VIRTUAL_WEARABLE_01",
+   "ended_at_us": 1791208322126512,
+   "runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "session_id": "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb",
+   "simulation_provenance": {
+    "scenario_id": "MIXED_MONITORING_SESSION",
+    "seed": 20261005,
+    "simulation_version": "WEARABLE_SIM_V1"
+   },
+   "source_dataset_id": "WEARABLE_SIM_V1",
+   "source_mode": "SYNTHETIC_PHYSIOLOGY",
+   "started_at_us": 1791208319284081,
+   "state": "COMPLETED",
+   "user_id": "demo:faculty"
+  },
+  "late_start_status": 409,
+  "me": {
+   "auth_provider": "DEMO",
+   "auth_session_id": "DEMO_OFFLINE_SESSION",
+   "demo_mode": true,
+   "display_name": "Faculty Demo User",
+   "email": null,
+   "roles": [],
+   "user_id": "demo:faculty"
+  },
+  "pid_excluded": 62998,
+  "process": 1,
+  "scan_state": "FOUND",
+  "session_created": {
+   "created_at_us": 1791208319253497,
+   "device_adapter_type": "SIMULATED",
+   "device_id": "NHM_VIRTUAL_WEARABLE_01",
+   "ended_at_us": null,
+   "runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "session_id": "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb",
+   "simulation_provenance": {
+    "scenario_id": "MIXED_MONITORING_SESSION",
+    "seed": 20261005,
+    "simulation_version": "WEARABLE_SIM_V1"
+   },
+   "source_dataset_id": "WEARABLE_SIM_V1",
+   "source_mode": "SYNTHETIC_PHYSIOLOGY",
+   "started_at_us": null,
+   "state": "DEVICE_READY",
+   "user_id": "demo:faculty"
+  },
+  "session_get_state": "DEVICE_READY",
+  "session_list_ids": [
+   "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb"
+  ],
+  "start_response_state": "MONITORING",
+  "system": {
+   "api_contract_version": "API_SCHEMA_V1",
+   "auth_provider": "DEMO",
+   "auth_status": "CONFIGURED",
+   "calibration_id": "CAL_V2",
+   "capstone_protocol": "CAPSTONE_PRODUCT_PROTOCOL_V1",
+   "claim": "research prototype; simulated device; not diagnostic; no clinical claim",
+   "demo_mode": true,
+   "federation_runtime": "NOT_IMPLEMENTED",
+   "hardware_mode": "SIMULATED_ONLY",
+   "model_id": "MODEL_V2_FINAL",
+   "monitoring_protocol": "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1",
+   "persistence_mode": "SQLITE",
+   "physical_hardware_available": false,
+   "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_1",
+   "product_api_version": "PRODUCT_API_V2",
+   "software_system": "SOFTWARE_SYSTEM_V2"
+  }
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "cap003_result_commit_56fc19f_untouched_worktree": {
+  "failed": 4,
+  "passed": 8,
+  "runs": 12,
+  "signatures": [
+   "E           AssertionError: assert (789 > 100 and False)"
+  ]
+ },
+ "cap003_worktree_runs": [
+  {
+   "passed": false,
+   "signature": "E           AssertionError: assert (789 > 100 and False)"
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": false,
+   "signature": "E           AssertionError: assert (789 > 100 and False)"
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": false,
+   "signature": "E           AssertionError: assert (789 > 100 and False)"
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": false,
+   "signature": "E           AssertionError: assert (789 > 100 and False)"
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": true,
+   "signature": null
+  }
+ ],
+ "cap004_code_involved": false,
+ "cap004_runs": [
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": false,
+   "signature": "E           AssertionError: assert (789 > 100 and False)"
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": false,
+   "signature": "E           AssertionError: assert (789 > 100 and False)"
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": false,
+   "signature": "E           AssertionError: assert (789 > 100 and False)"
+  },
+  {
+   "passed": false,
+   "signature": "E           AssertionError: assert (789 > 100 and False)"
+  },
+  {
+   "passed": true,
+   "signature": null
+  },
+  {
+   "passed": true,
+   "signature": null
+  }
+ ],
+ "cap004_tree": {
+  "failed": 4,
+  "passed": 8,
+  "runs": 12,
+  "signatures": [
+   "E           AssertionError: assert (789 > 100 and False)"
+  ]
+ },
+ "frozen_files_involved": [
+  "tests/test_capstone_monitoring_websocket.py",
+  "api/product_app.py",
+  "product/monitoring/coordinator.py"
+ ],
+ "handling": "the frozen test cannot be edited; CAPG3 evaluator accepts exactly this one test failing with this signature in the full run only if both trees reproduce the intermittency and the isolated reruns pass",
+ "method": "12 isolated pytest invocations of the single test per tree, same venv",
+ "nature": "intermittent race inside the frozen CAP-003 test/app: the test polls until session.state == COMPLETED and then immediately asserts journal.closed, but the frozen coordinator sets COMPLETED before closing the journal",
+ "test": "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers"
+}

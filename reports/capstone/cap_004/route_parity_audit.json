@@ -1,0 +1,36 @@
+{
+ "exact_match": true,
+ "expected_cap003_plus_cap004": [
+  "GET /product/v1/devices",
+  "GET /product/v1/me",
+  "GET /product/v1/sessions",
+  "GET /product/v1/sessions/{id}",
+  "GET /product/v1/system",
+  "POST /product/v1/devices/simulated",
+  "POST /product/v1/devices/{id}/connect",
+  "POST /product/v1/devices/{id}/disconnect",
+  "POST /product/v1/devices/{id}/scan",
+  "POST /product/v1/sessions",
+  "POST /product/v1/sessions/{id}/start",
+  "POST /product/v1/sessions/{id}/stop",
+  "WS /product/v1/sessions/{id}/live"
+ ],
+ "frozen_cap003_app_sha256": "496ce89a91f233e3dfb5c9473c4ce456d6fc53d8680393fe748e93cbd6ca8657",
+ "implemented_routes": [
+  "GET /product/v1/devices",
+  "GET /product/v1/me",
+  "GET /product/v1/sessions",
+  "GET /product/v1/sessions/{id}",
+  "GET /product/v1/system",
+  "POST /product/v1/devices/simulated",
+  "POST /product/v1/devices/{id}/connect",
+  "POST /product/v1/devices/{id}/disconnect",
+  "POST /product/v1/devices/{id}/scan",
+  "POST /product/v1/sessions",
+  "POST /product/v1/sessions/{id}/start",
+  "POST /product/v1/sessions/{id}/stop",
+  "WS /product/v1/sessions/{id}/live"
+ ],
+ "later_phase_routes_implemented": [],
+ "v1_contract_cap003_routes_all_preserved": true
+}

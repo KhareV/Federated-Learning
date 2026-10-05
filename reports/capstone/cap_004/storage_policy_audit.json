@@ -1,0 +1,108 @@
+{
+ "devices_columns_added": [
+  "scenario_id"
+ ],
+ "high_rate_policy": {
+  "forbidden_column_names": [
+   "ecg_raw",
+   "ppg_red_raw",
+   "ppg_ir_raw",
+   "sample_index_value"
+  ],
+  "forbidden_entity_name_fragments": [
+   "sample",
+   "raw_ecg",
+   "raw_ppg",
+   "ecg_raw"
+  ],
+  "max_preview_points_per_channel": 4000,
+  "per_sample_rows_allowed": false,
+  "raw_360hz_sample_table_allowed": false,
+  "stream_policy": "360 Hz source data is streamed, not stored relationally. Relational rows are bounded: inference <= 1/window, context <= 1/s, state & quality on change only, waveform preview <= max_preview_points per channel."
+ },
+ "immutability": {
+  "enforced_by": [
+   "repository API exposes no update path for them",
+   "SQLite BEFORE UPDATE triggers abort any change"
+  ],
+  "monitoring_sessions_runtime_identity_columns": [
+   "model_id",
+   "calibration_id",
+   "preprocess_id",
+   "alert_policy_id",
+   "alert_policy_binding_id",
+   "gateway_artifact_id",
+   "api_contract_version",
+   "software_system_id"
+  ]
+ },
+ "other_entities_identical": true,
+ "population_rules": {
+  "populated": [
+   "users",
+   "devices",
+   "device_connections",
+   "monitoring_sessions",
+   "inference_events",
+   "monitoring_state_events",
+   "signal_quality_events",
+   "context_snapshots",
+   "waveform_previews"
+  ],
+  "schema_only_empty": [
+   "session_summaries",
+   "federation_runs",
+   "federation_rounds",
+   "fl_client_statuses",
+   "candidate_models",
+   "governance_decisions"
+  ]
+ },
+ "quality_events_policy": "signal_quality_events rows are written on CHANGE of (ecg_quality, ppg_quality) only",
+ "restart_semantics": {
+  "devices": "reconstructed from devices row + scenario_id + frozen scenario contract; connection state starts DETACHED; history stays in device_connections",
+  "sessions": "terminal sessions unchanged; any persisted CREATED/DEVICE_READY/MONITORING/STOPPING session is set to FAILED at startup (never resumed)"
+ },
+ "same_table_set": true,
+ "tables_v1": [
+  "users",
+  "devices",
+  "device_connections",
+  "monitoring_sessions",
+  "inference_events",
+  "monitoring_state_events",
+  "signal_quality_events",
+  "context_snapshots",
+  "session_summaries",
+  "waveform_previews",
+  "federation_runs",
+  "federation_rounds",
+  "fl_client_statuses",
+  "candidate_models",
+  "governance_decisions"
+ ],
+ "tables_v2": [
+  "users",
+  "devices",
+  "device_connections",
+  "monitoring_sessions",
+  "inference_events",
+  "monitoring_state_events",
+  "signal_quality_events",
+  "context_snapshots",
+  "session_summaries",
+  "waveform_previews",
+  "federation_runs",
+  "federation_rounds",
+  "fl_client_statuses",
+  "candidate_models",
+  "governance_decisions"
+ ],
+ "waveform_previews_policy": {
+  "channel": "ECG only",
+  "decimation": "deterministic bucket decimation; all-missing buckets stored as null; never 0",
+  "encoding": "JSON_ZLIB_V1 (JSON array of int|null, zlib-compressed)",
+  "max_points": 4000,
+  "raw_stream_stored": false
+ }
+}

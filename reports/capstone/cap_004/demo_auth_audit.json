@@ -1,0 +1,36 @@
+{
+ "ack_value": "I_UNDERSTAND_THIS_IS_NOT_CLERK",
+ "canonical_me": {
+  "auth_provider": "DEMO",
+  "auth_session_id": "DEMO_OFFLINE_SESSION",
+  "demo_mode": true,
+  "display_name": "Faculty Demo User",
+  "email": null,
+  "roles": [],
+  "user_id": "demo:faculty"
+ },
+ "canonical_system": {
+  "api_contract_version": "API_SCHEMA_V1",
+  "auth_provider": "DEMO",
+  "auth_status": "CONFIGURED",
+  "calibration_id": "CAL_V2",
+  "capstone_protocol": "CAPSTONE_PRODUCT_PROTOCOL_V1",
+  "claim": "research prototype; simulated device; not diagnostic; no clinical claim",
+  "demo_mode": true,
+  "federation_runtime": "NOT_IMPLEMENTED",
+  "hardware_mode": "SIMULATED_ONLY",
+  "model_id": "MODEL_V2_FINAL",
+  "monitoring_protocol": "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1",
+  "persistence_mode": "SQLITE",
+  "physical_hardware_available": false,
+  "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_1",
+  "product_api_version": "PRODUCT_API_V2",
+  "software_system": "SOFTWARE_SYSTEM_V2"
+ },
+ "describe": {
+  "demo_mode": true,
+  "provider": "DEMO",
+  "ui_banner": "OFFLINE DEMO IDENTITY - not Clerk authentication"
+ },
+ "user_id": "DEMO"
+}

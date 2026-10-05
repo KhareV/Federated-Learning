@@ -1,0 +1,46 @@
+{
+ "context_rows_equal_events": true,
+ "inference_rows_equal_inference_events": true,
+ "live_event_counts": {
+  "context.snapshot": 86,
+  "device.status": 6,
+  "inference.result": 86,
+  "monitoring.state": 3,
+  "quality.status": 93,
+  "session.status": 3,
+  "waveform.chunk": 2880
+ },
+ "mapping": {
+  "context.snapshot": "context_snapshots (normalized)",
+  "device.status": "device_connections",
+  "inference.result": "inference_events",
+  "monitoring.state": "monitoring_state_events",
+  "quality.status": "signal_quality_events (change-only)",
+  "session.status": "monitoring_sessions.state/started/ended",
+  "waveform.chunk": "folded in memory into one bounded preview blob"
+ },
+ "monitoring_state_rows_equal_events": true,
+ "per_sample_rows": 0,
+ "quality_events_seen": 93,
+ "quality_rows_written": 8,
+ "quality_state_changes_in_stream": 8,
+ "row_counts": {
+  "candidate_models": 0,
+  "context_snapshots": 86,
+  "device_connections": 10,
+  "devices": 1,
+  "federation_rounds": 0,
+  "federation_runs": 0,
+  "fl_client_statuses": 0,
+  "governance_decisions": 0,
+  "inference_events": 86,
+  "monitoring_sessions": 1,
+  "monitoring_state_events": 3,
+  "session_summaries": 0,
+  "signal_quality_events": 8,
+  "users": 1,
+  "waveform_previews": 1
+ },
+ "waveform_chunks_seen": 2880,
+ "waveform_rows": 1
+}

@@ -1,0 +1,71 @@
+{
+ "hidden_hack": false,
+ "mechanism": "additive successor contracts; v1 contracts are protected-artifact files and unmodified",
+ "product_api_v2": {
+  "delta": {
+   "added_system_info_fields": [
+    "product_api_implementation",
+    "auth_provider",
+    "demo_mode"
+   ],
+   "changed_system_info_values": [
+    "persistence_mode",
+    "auth_status",
+    "product_api_version"
+   ],
+   "forbidden_request_field_names": "unchanged",
+   "routes": "unchanged (same base path /product/v1, same paths, same methods, same request semantics)",
+   "scientific_effect": "none"
+  },
+  "path": "contracts/capstone/product_api_v2.json",
+  "sha256": "4d39fae9e43841decb7297c5e22a180852096e4e8fe429e5723728e2fc8cfa0f",
+  "system_info_v2": {
+   "added_fields": {
+    "auth_provider": "CLERK | DEMO",
+    "demo_mode": "boolean; true only for the explicit offline faculty DemoAuth identity",
+    "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_1"
+   },
+   "base": "SystemInfo of CAPSTONE_PRODUCT_API_V1 (every V1 field retained with the same name and meaning)",
+   "changed_values": {
+    "auth_status": "CONFIGURED (was INJECTED | NOT_CONFIGURED)",
+    "persistence_mode": "SQLITE (was EPHEMERAL_CAP003)",
+    "product_api_version": "PRODUCT_API_V2"
+   },
+   "forbidden": "no scientific, model, calibration or threshold selector may appear in SystemInfo"
+  },
+  "v1_sha256_now": "b9699371047262c7911f51a3159278098e487d863785f5131e2b68be8db3c8e1"
+ },
+ "storage_policy_v2": {
+  "delta": {
+   "added_columns": [
+    {
+     "column": "scenario_id",
+     "entity": "devices",
+     "rule": "required for SIMULATED",
+     "type": "TEXT?"
+    }
+   ],
+   "added_rules": [
+    "schema_version via PRAGMA user_version",
+    "lifecycle clock representation",
+    "restart semantics",
+    "runtime-identity immutability",
+    "raw-vs-product context separation",
+    "quality change-only",
+    "waveform preview encoding"
+   ],
+   "scientific_effect": "none",
+   "unchanged": "every other V1 entity, column, key, index, retention and high-rate rule is carried forward verbatim"
+  },
+  "path": "contracts/capstone/storage_policy_v2.json",
+  "sha256": "85a45f6eff634ce756beabf6c7816c4310ecd8b825882196aa666e2b3b9214e5",
+  "supersedes": {
+   "contract_id": "CAPSTONE_STORAGE_POLICY_V1",
+   "path": "contracts/capstone/storage_policy_v1.json",
+   "sha256": "c929bb0eaa83cd43aec53709bde5b1f574a0c2784a84969fa29a039671a29b22",
+   "v1_modified": false
+  },
+  "v1_sha256_now": "c929bb0eaa83cd43aec53709bde5b1f574a0c2784a84969fa29a039671a29b22",
+  "v1_unchanged": true
+ }
+}

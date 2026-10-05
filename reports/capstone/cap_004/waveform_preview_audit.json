@@ -1,0 +1,26 @@
+{
+ "max_points": 4000,
+ "policy": {
+  "channel": "ECG",
+  "component": "CAPSTONE_WAVEFORM_PREVIEW_V1",
+  "encoding": "JSON_ZLIB_V1",
+  "gap": "null",
+  "max_points": 4000,
+  "never_read_by_scientific_runtime": true
+ },
+ "preview": {
+  "blob_bytes": 6579,
+  "channel": "ECG",
+  "decimation_factor": 44,
+  "decoded_points": 3928,
+  "encoding": "JSON_ZLIB_V1",
+  "null_points": 122,
+  "point_count": 3928,
+  "preview_id": "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb-WFP-ECG",
+  "session_id": "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb",
+  "source_rate_hz": 360,
+  "start_timestamp_us": 0
+ },
+ "raw_waveform_table": false,
+ "read_by_scientific_runtime": false
+}

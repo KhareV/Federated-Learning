@@ -1,0 +1,45 @@
+{
+ "added_count": 42,
+ "added_outside_additive_namespace": [],
+ "amendment_chains_verified": true,
+ "baseline_file_count": 3302,
+ "cap001_lock_verified": true,
+ "cap002_lock_verified": true,
+ "cap003_lock_verified": true,
+ "dependency_deltas": [
+  {
+   "added_lines": [],
+   "file": "pyproject.toml",
+   "removed_lines": []
+  },
+  {
+   "added_lines": [],
+   "file": "requirements-dev.lock",
+   "removed_lines": []
+  },
+  {
+   "added_lines": [
+    "clerk-backend-api==7.0.0",
+    "PyJWT==2.15.1"
+   ],
+   "file": "requirements-capstone-auth.lock",
+   "removed_lines": []
+  }
+ ],
+ "dependency_file_changes_only_the_approved_clerk_sdk_lines": true,
+ "entry_sha": "56fc19f69566fd9ead6b509292449d5cd7540adb",
+ "frontend_drift": [],
+ "frontend_files_checked": 162,
+ "head_sha": "5b65cffe69070d94814af2c667f645114fd20f60",
+ "modified_outside_allowed_control_plane": [],
+ "modified_since_entry": [
+  ".env.example",
+  "manifests/capstone/gate_registry_v1.csv",
+  "manifests/capstone/task_registry_v1.csv",
+  "tests/test_capstone_lifecycle.py"
+ ],
+ "named_component_drift": [],
+ "named_components_checked": 58,
+ "protected_artifact_drift": false,
+ "removed_since_entry": []
+}

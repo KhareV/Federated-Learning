@@ -1,0 +1,223 @@
+{
+ "crash": {
+  "at_crash_database": {
+   "counts": {
+    "candidate_models": 0,
+    "context_snapshots": 1,
+    "device_connections": 5,
+    "devices": 1,
+    "federation_rounds": 0,
+    "federation_runs": 0,
+    "fl_client_statuses": 0,
+    "governance_decisions": 0,
+    "inference_events": 1,
+    "monitoring_sessions": 1,
+    "monitoring_state_events": 1,
+    "session_summaries": 0,
+    "signal_quality_events": 1,
+    "users": 1,
+    "waveform_previews": 0
+   },
+   "session_state": "MONITORING"
+  },
+  "auth_mode": "DEMO",
+  "before_crash": {
+   "inference_rows": 1,
+   "session_state_via_api": "MONITORING"
+  },
+  "database": "temporary real SQLite file",
+  "database_after_recovery": {
+   "foreign_key_check": [],
+   "integrity_check": [
+    "ok"
+   ],
+   "row_counts": {
+    "candidate_models": 0,
+    "context_snapshots": 1,
+    "device_connections": 5,
+    "devices": 1,
+    "federation_rounds": 0,
+    "federation_runs": 0,
+    "fl_client_statuses": 0,
+    "governance_decisions": 0,
+    "inference_events": 1,
+    "monitoring_sessions": 1,
+    "monitoring_state_events": 1,
+    "session_summaries": 0,
+    "signal_quality_events": 1,
+    "users": 1,
+    "waveform_previews": 0
+   },
+   "sessions": [
+    {
+     "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+     "alert_policy_id": "ALERT_POLICY_V1",
+     "api_contract_version": "API_SCHEMA_V1",
+     "calibration_id": "CAL_V2",
+     "device_id": "NHM_VIRTUAL_WEARABLE_01",
+     "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+     "model_id": "MODEL_V2_FINAL",
+     "preprocess_id": "PREPROC_V1",
+     "scenario_id": "NORMAL_MONITORING",
+     "session_id": "SESS-7d18adecfd1240f69f48f4287bfa6197",
+     "software_system_id": "SOFTWARE_SYSTEM_V2",
+     "state": "FAILED",
+     "user_id": "demo:faculty"
+    }
+   ]
+  },
+  "database_unchanged_while_product_down": true,
+  "devices_after_restart": [
+   {
+    "connection_state": "DETACHED",
+    "device_id": "NHM_VIRTUAL_WEARABLE_01"
+   }
+  ],
+  "devices_detached": true,
+  "engineering_evidence_only": true,
+  "no_fake_post_crash_context": true,
+  "no_fake_post_crash_inference": true,
+  "recovered_session": {
+   "created_at_us": 1791208342246662,
+   "device_adapter_type": "SIMULATED",
+   "device_id": "NHM_VIRTUAL_WEARABLE_01",
+   "ended_at_us": 1791208364189673,
+   "runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "session_id": "SESS-7d18adecfd1240f69f48f4287bfa6197",
+   "simulation_provenance": {
+    "scenario_id": "NORMAL_MONITORING",
+    "seed": 20261001,
+    "simulation_version": "WEARABLE_SIM_V1"
+   },
+   "source_dataset_id": "WEARABLE_SIM_V1",
+   "source_mode": "SYNTHETIC_PHYSIOLOGY",
+   "started_at_us": 1791208342261628,
+   "state": "FAILED",
+   "user_id": "demo:faculty"
+  },
+  "stale_session_failed_not_resumed": true,
+  "timing_mode": "LIVE_SPEED (engineering: keeps a session in flight long enough to crash)"
+ },
+ "database_unchanged_across_restart": true,
+ "policy": "FAIL_STALE_NONTERMINAL_SESSIONS_RECONSTRUCT_DEVICES_DETACHED",
+ "restart_run_process_2": {
+  "devices": [
+   {
+    "adapter_type": "SIMULATED",
+    "capabilities": {
+     "nominal_source_rates_hz": {
+      "ECG_SIMULATION_CONVENTION": 360
+     },
+     "supports_device_events": true,
+     "supports_ecg": true,
+     "supports_ppg": false,
+     "supports_spo2_context": true
+    },
+    "connection_state": "DETACHED",
+    "device_id": "NHM_VIRTUAL_WEARABLE_01",
+    "display_name": "NHM Virtual Wearable",
+    "hardware_specific_fields_status": "NOT_APPLICABLE",
+    "simulation": true,
+    "simulation_version": "WEARABLE_SIM_V1",
+    "source_dataset_id": "WEARABLE_SIM_V1",
+    "source_mode": "SYNTHETIC_PHYSIOLOGY"
+   }
+  ],
+  "late_start_status": 409,
+  "me": {
+   "auth_provider": "DEMO",
+   "auth_session_id": "DEMO_OFFLINE_SESSION",
+   "demo_mode": true,
+   "display_name": "Faculty Demo User",
+   "email": null,
+   "roles": [],
+   "user_id": "demo:faculty"
+  },
+  "pid_excluded": 62999,
+  "process": 2,
+  "session": {
+   "created_at_us": 1791208319253497,
+   "device_adapter_type": "SIMULATED",
+   "device_id": "NHM_VIRTUAL_WEARABLE_01",
+   "ended_at_us": 1791208322126512,
+   "runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "session_id": "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb",
+   "simulation_provenance": {
+    "scenario_id": "MIXED_MONITORING_SESSION",
+    "seed": 20261005,
+    "simulation_version": "WEARABLE_SIM_V1"
+   },
+   "source_dataset_id": "WEARABLE_SIM_V1",
+   "source_mode": "SYNTHETIC_PHYSIOLOGY",
+   "started_at_us": 1791208319284081,
+   "state": "COMPLETED",
+   "user_id": "demo:faculty"
+  },
+  "sessions": [
+   {
+    "created_at_us": 1791208319253497,
+    "device_adapter_type": "SIMULATED",
+    "device_id": "NHM_VIRTUAL_WEARABLE_01",
+    "ended_at_us": 1791208322126512,
+    "runtime": {
+     "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+     "alert_policy_id": "ALERT_POLICY_V1",
+     "api_contract_version": "API_SCHEMA_V1",
+     "calibration_id": "CAL_V2",
+     "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+     "model_id": "MODEL_V2_FINAL",
+     "preprocess_id": "PREPROC_V1",
+     "software_system_id": "SOFTWARE_SYSTEM_V2"
+    },
+    "session_id": "SESS-e1ce344769c3436bb2cd3a24f6a9c4eb",
+    "simulation_provenance": {
+     "scenario_id": "MIXED_MONITORING_SESSION",
+     "seed": 20261005,
+     "simulation_version": "WEARABLE_SIM_V1"
+    },
+    "source_dataset_id": "WEARABLE_SIM_V1",
+    "source_mode": "SYNTHETIC_PHYSIOLOGY",
+    "started_at_us": 1791208319284081,
+    "state": "COMPLETED",
+    "user_id": "demo:faculty"
+   }
+  ],
+  "system": {
+   "api_contract_version": "API_SCHEMA_V1",
+   "auth_provider": "DEMO",
+   "auth_status": "CONFIGURED",
+   "calibration_id": "CAL_V2",
+   "capstone_protocol": "CAPSTONE_PRODUCT_PROTOCOL_V1",
+   "claim": "research prototype; simulated device; not diagnostic; no clinical claim",
+   "demo_mode": true,
+   "federation_runtime": "NOT_IMPLEMENTED",
+   "hardware_mode": "SIMULATED_ONLY",
+   "model_id": "MODEL_V2_FINAL",
+   "monitoring_protocol": "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1",
+   "persistence_mode": "SQLITE",
+   "physical_hardware_available": false,
+   "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_1",
+   "product_api_version": "PRODUCT_API_V2",
+   "software_system": "SOFTWARE_SYSTEM_V2"
+  },
+  "websocket_close_code_for_past_process_session": 1000
+ }
+}

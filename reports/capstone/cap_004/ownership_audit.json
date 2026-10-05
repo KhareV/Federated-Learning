@@ -1,0 +1,17 @@
+{
+ "cross_user_results": {
+  "devices_listed": [],
+  "get_session_status": 403,
+  "other_user": "demo:other",
+  "pid_excluded": 63000,
+  "scan_other_users_device_status": 403,
+  "sessions_listed": [],
+  "start_status": 403,
+  "unknown_session_status": 404,
+  "websocket_close_code": 4403
+ },
+ "enforced_at": [
+  "REST",
+  "WebSocket close 4403"
+ ]
+}

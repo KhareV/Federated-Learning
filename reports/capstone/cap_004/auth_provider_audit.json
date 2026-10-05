@@ -1,0 +1,39 @@
+{
+ "clerk_cases_never_build_demo": true,
+ "factory_cases": {
+  "clerk_no_config": {
+   "reason": "CLERK_REQUIRES_CLERK_JWT_KEY_OR_CLERK_SECRET_KEY",
+   "result": "REFUSED"
+  },
+  "clerk_no_parties": {
+   "reason": "CLERK_REQUIRES_NHM_CLERK_AUTHORIZED_PARTIES",
+   "result": "REFUSED"
+  },
+  "clerk_wildcard_party": {
+   "reason": "CLERK_AUTHORIZED_PARTIES_MUST_BE_EXPLICIT_ORIGINS",
+   "result": "REFUSED"
+  },
+  "demo_ack": {
+   "provider": "DEMO",
+   "result": "BUILT"
+  },
+  "demo_without_ack": {
+   "reason": "DEMO_AUTH_REQUIRES_EXPLICIT_ACKNOWLEDGEMENT",
+   "result": "REFUSED"
+  },
+  "demo_wrong_ack": {
+   "reason": "DEMO_AUTH_REQUIRES_EXPLICIT_ACKNOWLEDGEMENT",
+   "result": "REFUSED"
+  },
+  "invalid": {
+   "reason": "AUTH_MODE_INVALID:demo",
+   "result": "REFUSED"
+  },
+  "unset": {
+   "reason": "AUTH_MODE_NOT_CONFIGURED",
+   "result": "REFUSED"
+  }
+ },
+ "mode_env": "NHM_PRODUCT_AUTH_MODE",
+ "silent_default": false
+}

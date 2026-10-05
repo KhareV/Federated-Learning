@@ -1,0 +1,50 @@
+{
+ "connection_history_rows": 10,
+ "credential_strings_in_database": [],
+ "devices": [
+  {
+   "adapter_type": "SIMULATED",
+   "device_id": "NHM_VIRTUAL_WEARABLE_01",
+   "scenario_id": "MIXED_MONITORING_SESSION",
+   "user_id": "demo:faculty"
+  }
+ ],
+ "devices_after_restart": [
+  {
+   "adapter_type": "SIMULATED",
+   "device_id": "NHM_VIRTUAL_WEARABLE_01",
+   "scenario_id": "MIXED_MONITORING_SESSION",
+   "user_id": "demo:faculty"
+  }
+ ],
+ "process_2_devices_via_api": [
+  {
+   "adapter_type": "SIMULATED",
+   "capabilities": {
+    "nominal_source_rates_hz": {
+     "ECG_SIMULATION_CONVENTION": 360
+    },
+    "supports_device_events": true,
+    "supports_ecg": true,
+    "supports_ppg": false,
+    "supports_spo2_context": true
+   },
+   "connection_state": "DETACHED",
+   "device_id": "NHM_VIRTUAL_WEARABLE_01",
+   "display_name": "NHM Virtual Wearable",
+   "hardware_specific_fields_status": "NOT_APPLICABLE",
+   "simulation": true,
+   "simulation_version": "WEARABLE_SIM_V1",
+   "source_dataset_id": "WEARABLE_SIM_V1",
+   "source_mode": "SYNTHETIC_PHYSIOLOGY"
+  }
+ ],
+ "users": [
+  {
+   "auth_provider": "DEMO",
+   "demo_mode": 1,
+   "display_name": "Faculty Demo User",
+   "user_id": "demo:faculty"
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "accepts_token": "session_token",
+ "authorized_parties_required": true,
+ "custom_jwt_or_crypto_imports": [],
+ "decode_and_trust": false,
+ "installed_sdk_version": "7.0.0",
+ "pin": "clerk-backend-api==7.0.0",
+ "real_account_or_secret_used": false,
+ "sdk_import": true,
+ "test_boundary": "local RS256 keypair fixtures and a mocked SDK boundary; no real account, secret or network",
+ "tests": [
+  "test_a_validly_signed_session_token_yields_the_verified_identity",
+  "test_unsigned_and_tampered_tokens_are_rejected_not_trusted",
+  "test_only_session_tokens_are_accepted_machine_and_api_tokens_are_not"
+ ]
+}

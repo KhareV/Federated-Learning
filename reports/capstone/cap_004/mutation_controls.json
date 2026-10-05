@@ -1,0 +1,117 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "file": "product/auth/base.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_auth.py::test_demo_mode_requires_the_exact_acknowledgement[None]",
+   "git_status_of_file_after_restore": "",
+   "mutation": "DEMO_ACTIVATES_WITHOUT_ACK",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_auth.py"
+   ]
+  },
+  {
+   "file": "product/auth/clerk.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_auth.py::test_invalid_or_unverifiable_credentials_are_rejected[<lambda>0]",
+   "git_status_of_file_after_restore": "",
+   "mutation": "CLERK_INVALID_TOKEN_ACCEPTED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_auth.py"
+   ]
+  },
+  {
+   "file": "product/sessions/service.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_session_service.py::test_session_get_and_start_stop_enforce_ownership_and_hide_nothing_by_listing",
+   "git_status_of_file_after_restore": "",
+   "mutation": "CROSS_USER_SESSION_READ_ACCEPTED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_session_service.py"
+   ]
+  },
+  {
+   "file": "product/persistence/recovery.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_restart_recovery.py::test_completed_sessions_devices_and_users_survive_a_restart",
+   "git_status_of_file_after_restore": "",
+   "mutation": "DEVICE_SCENARIO_LOST_ON_RESTART",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_restart_recovery.py"
+   ]
+  },
+  {
+   "file": "product/persistence/schema.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_persistence.py::test_session_runtime_identity_cannot_be_changed_after_creation",
+   "git_status_of_file_after_restore": "",
+   "mutation": "RUNTIME_IDENTITY_MUTABLE_IN_SQL",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_persistence.py"
+   ]
+  },
+  {
+   "file": "product/persistence/schema.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_persistence.py::test_database_is_created_from_scratch_with_pragmas_and_schema_version",
+   "git_status_of_file_after_restore": "",
+   "mutation": "RAW_360HZ_TABLE_INTRODUCED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_persistence.py"
+   ]
+  },
+  {
+   "file": "product/persistence/bridge.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_persistence.py::test_signal_quality_rows_are_written_on_change_only",
+   "git_status_of_file_after_restore": "",
+   "mutation": "QUALITY_WRITTEN_EVERY_WINDOW",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_persistence.py"
+   ]
+  },
+  {
+   "file": "product/persistence/bridge.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_persistence.py::test_raw_response_context_is_preserved_separately_from_the_product_projection",
+   "git_status_of_file_after_restore": "",
+   "mutation": "RAW_CONTEXT_OVERWRITTEN_BY_NORMALIZED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_persistence.py"
+   ]
+  },
+  {
+   "file": "capstone_persistence/store.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_restart_recovery.py::test_stale_nonterminal_sessions_are_failed_not_resumed",
+   "git_status_of_file_after_restore": "",
+   "mutation": "STALE_MONITORING_SILENTLY_RESUMED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_restart_recovery.py"
+   ]
+  },
+  {
+   "file": "capstone_persistence/store.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_persistence.py::test_future_tables_exist_but_stay_empty_and_the_database_is_clean",
+   "git_status_of_file_after_restore": "",
+   "mutation": "FL_TABLE_RECEIVES_TRUTH_LABELS",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_persistence.py",
+    "tests/test_capstone_session_service.py"
+   ]
+  }
+ ]
+}
