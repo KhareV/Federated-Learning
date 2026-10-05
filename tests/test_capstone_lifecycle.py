@@ -21,10 +21,12 @@ EXPECTED_TASKS = {
     "CAP-006": "PASS",
     "CAP-007": "PASS",
     "CAP-008": "PASS",
-    **{f"CAP-{n:03d}": "NOT_STARTED" for n in range(9, 12)},
+    "CAP-009": "IN_PROGRESS",
+    **{f"CAP-{n:03d}": "NOT_STARTED" for n in range(10, 12)},
 }
 EXPECTED_GATES = {"CAPG0": "PASS", "CAPG1": "PASS", "CAPG2": "PASS", "CAPG3": "PASS",
-                  "CAPG4": "PASS", "CAPG5": "PASS", "CAPG6": "PASS", "CAPG7": "PASS"}
+                  "CAPG4": "PASS", "CAPG5": "PASS", "CAPG6": "PASS", "CAPG7": "PASS",
+                  "CAPG8": "NOT_STARTED"}
 EXPECTED_COMPONENTS = {
     "CAPSTONE_PRODUCT_PROTOCOL_V1": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL",
     "DEVICE_SOURCE_CONTRACT_V1": "FROZEN_INTERFACE_CONTRACT",
@@ -67,6 +69,9 @@ def test_task_prerequisite_chain_is_linear_and_later_phases_have_no_evidence() -
     tasks = {r["task_id"]: r for r in _rows("task")}
     for n in range(9, 12):
         assert tasks[f"CAP-{n:03d}"]["prerequisites"] == f"CAP-{n - 1:03d}"
+    assert tasks["CAP-009"]["evidence_path"] == "reports/capstone/cap_009/entry_audit.json"
+    assert tasks["CAP-009"]["implemented_at_commit"] == ""
+    for n in range(10, 12):
         assert tasks[f"CAP-{n:03d}"]["evidence_path"] == ""
         assert tasks[f"CAP-{n:03d}"]["implemented_at_commit"] == ""
 

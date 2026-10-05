@@ -1,0 +1,15 @@
+{
+ "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_4",
+ "owner_phase": "CAP-009",
+ "made_after_method_freeze": true,
+ "previous_amendment": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_3",
+ "defect": "The inherited CAP-001 lifecycle test still expected CAP-009 NOT_STARTED and no CAPG8 row, so the first full Python regression failed three control-plane assertions despite the prospectively committed CAP-009 IN_PROGRESS registry state.",
+ "change": "Update only the lifecycle test's exact current-state expectations to the already-committed CAP-009 IN_PROGRESS/CAPG8 NOT_STARTED state and entry evidence path. No scientific or runtime code changes.",
+ "files": {
+  "tests/test_capstone_lifecycle.py": {
+   "old_sha256": "df83ed9d6b7bbdc885d6ee664af01cf87e3706742f30ceacec5f5768e403e85d",
+   "new_sha256": "996ea6155cee7372e8a03aa3659cba1d8ebd735e2d138df98c79c7d4e7530039"
+  }
+ },
+ "result_evidence_committed_with_amendment": false
+}
