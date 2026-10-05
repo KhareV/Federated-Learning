@@ -1,0 +1,626 @@
+{
+ "protocol_id": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1",
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "owner_task": "CAP-002",
+ "gate": "CAPG1",
+ "purpose": "Implement the first executable layer of the FL-first capstone: SimulatedWearableSource -> DeviceSource -> VirtualEdgeNode -> ObservedRecord, preserving the exact CAP-001 contracts and the whole frozen NHM lineage.",
+ "upstream": {
+  "cap001_lock": "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json",
+  "cap001_lock_sha256": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "cap001_component_sha256": {
+   "CAPSTONE_AUTH_POLICY_V1": "3ac629a35431404b3d6e19ba8486218b77a318a902381ac3b0f2be2e9f00d5b6",
+   "CAPSTONE_DEMO_SCENARIOS_V1": "3498194003de926a90e37b4a293100aef0d59e54c41b28de200686b0221ee296",
+   "CAPSTONE_FEDERATION_CONTRACT_V1": "e0bf46f8678703e8b51dfc292fbb064a16dfd6f345c32645935d8e30dd556359",
+   "CAPSTONE_FL_CLIENT_CONTRACT_V1": "c25216aa25505235d3a3937e6ced084a7e9e8edffcd9f5d9c3e46b30bef1eec0",
+   "CAPSTONE_FL_RUN_CONTRACT_V1": "82e591f6aad3a3ba4d25b8b2ab5324a641bf0e8dcc5a29ca4c7832e3aac6af28",
+   "CAPSTONE_MODEL_GOVERNANCE_V1": "74e768135ce478e5c6fc7f67f3b74b395983711b6505d2354e486e58fd4f1a98",
+   "CAPSTONE_MODEL_REGISTRY_CONTRACT_V1": "fdd4d7947b6642cd1c79d6e05f78eadb4141bf8d33365caee621b263c6121a18",
+   "CAPSTONE_PRODUCT_PROTOCOL_V1": "623cef6e91713df83217578cb665ed06ca330c3a2a5ee9beeeac1d6f1f198b11",
+   "CAPSTONE_SESSION_CONTRACT_V1": "c758fe1d204f7fe075c19784a08390306b0d3a2ee3ebbc08f3b819e3f5fa1fec",
+   "CAPSTONE_STORAGE_POLICY_V1": "c929bb0eaa83cd43aec53709bde5b1f574a0c2784a84969fa29a039671a29b22",
+   "DEVICE_SOURCE_CONTRACT_V1": "dbc2c9dade04d122c2dd8acb59d45d555f9e3435973eba9bbd0589113015111e",
+   "EDGE_NODE_CONTRACT_V1": "ef7a39ef204442a75c9ab54aa6d6a1897e737d8832e36f974b5363ad6ef6b169",
+   "LOCAL_TRAINING_BUFFER_CONTRACT_V1": "4baa7eaa82587906e311061d3798d4d67c864145bbd8b0188d05de5c8bcc4cc2",
+   "PRODUCT_API_CONTRACT_V1": "b9699371047262c7911f51a3159278098e487d863785f5131e2b68be8db3c8e1",
+   "PRODUCT_LIVE_EVENT_V1": "04fa85aafa2dd522fcf244f8a6b40e184b85bcf2affc648ab773920ad298c54c",
+   "REAL_HARDWARE_REPLACEMENT_BOUNDARY_V1": "176e279c56efba8cef9cc2a9c5d543e553ea64e87e1ceef9e66706a31062af01"
+  },
+  "expected_entry_sha": "44939378e7aee3baa2e92fefdd42fa9d75640a8a",
+  "implements_contracts": [
+   "DEVICE_SOURCE_CONTRACT_V1",
+   "EDGE_NODE_CONTRACT_V1",
+   "CAPSTONE_DEMO_SCENARIOS_V1 (5 monitoring scenarios)",
+   "REAL_HARDWARE_REPLACEMENT_BOUNDARY_V1 (compatibility only)"
+  ],
+  "frozen_contracts_modified": false
+ },
+ "components": {
+  "SIMULATED_WEARABLE_SOURCE_V1": {
+   "path": "product/devices/simulated.py",
+   "implements": "DeviceSource (DEVICE_SOURCE_CONTRACT_V1)"
+  },
+  "VIRTUAL_EDGE_NODE_V1": {
+   "path": "product/edge/virtual.py",
+   "implements": "EdgeNode (EDGE_NODE_CONTRACT_V1)"
+  },
+  "CAPSTONE_DEVICE_SCENARIO_RUNTIME_V1": {
+   "path": "product/devices/scenarios.py",
+   "role": "frozen monitoring scenarios -> existing simulation/profile_v2013.py IntegrationProfile"
+  },
+  "CAPSTONE_DEVICE_REPLAY_V1": {
+   "path": "product/devices/replay.py",
+   "role": "deterministic semantic replay + existing WearableStreamRuntime compatibility summary"
+  },
+  "additional_components": "none"
+ },
+ "scenario_ownership": {
+  "implemented_now": [
+   "NORMAL_MONITORING",
+   "CONTEXT_LOSS",
+   "POOR_SIGNAL",
+   "DISCONNECT_RECONNECT",
+   "MIXED_MONITORING_SESSION"
+  ],
+  "not_implemented_contract_untouched": [
+   "ALERT_POLICY_ENGINEERING_FIXTURE",
+   "FL_SINGLE_RUN",
+   "FL_NEW_LOCAL_BATCH",
+   "FL_MULTIRUN_CANDIDATE_HISTORY",
+   "FL_RESTART_RESUME",
+   "FL_REJECT_INVALID_UPDATE",
+   "FL_SECAGG_SHADOW",
+   "FULL_CAPSTONE_DEMO"
+  ],
+  "mapping": "scenario segments -> existing IntegrationProfile FaultSegment/ContextSegment; TRANSPORT_DROPPED_CHUNK segments are the device link outages",
+  "outcome_tuning_forbidden": true,
+  "model_output_asserted": false
+ },
+ "reuse": [
+  "simulation/types.py (ObservedRecord)",
+  "simulation/wearable.py",
+  "simulation/profile_v2013.py (generator, fault and context vocabulary)",
+  "simulation/stream_runtime_v2013.py (WearableStreamRuntime, unchanged)",
+  "simulation/fl_cohort_v1.py (identity mapping only)",
+  "no parallel simulator"
+ ],
+ "device_semantics": {
+  "states_and_transitions": "exactly contracts/capstone/device_source_v1.json; illegal transition => IllegalTransitionError, state and event log unchanged",
+  "attach_flow": "scan(): SCAN_STARTED->SCANNING, DEVICE_DISCOVERED->FOUND; connect(): PAIRING_STARTED->PAIRING, DEVICE_CONNECTED->CONNECTED; start_stream(): STREAM_STARTED->STREAMING",
+  "link_outage": "DEVICE_DISCONNECTED->DISCONNECTED, RECONNECT_STARTED->RECONNECTING at outage start; DEVICE_RECONNECTED->CONNECTED, STREAM_STARTED->STREAMING at outage end. NO record is delivered, buffered or fabricated during the outage.",
+  "post_reconnect_clock": "the source clock keeps running during an outage: sample_index and timestamp_us continue from the generator timeline and skip the outage; nothing is replayed",
+  "end_of_scenario": "STREAM_STOPPED (reason SCENARIO_COMPLETE) -> STOPPED",
+  "user_stop": "stop_stream(): STREAMING->STOPPED (STREAM_STOPPED, reason USER_STOP); STOPPED->CONNECTED via connect() (link kept) or STOPPED->DETACHED via disconnect(); STOPPED->STREAMING is illegal; a restarted stream is a fresh deterministic stream of the same scenario",
+  "user_disconnect_while_streaming": "STREAMING->DISCONNECTED->DETACHED (two events)",
+  "device_error": "simulate_error() raises DEVICE_ERROR only where the frozen lifecycle allows ->ERROR",
+  "events": "typed DeviceEvent (DEVICE_EVENT_V1); sequence_index 0..n contiguous; event_id '<device_id>-EV<seq:06d>'; state must equal the frozen event->state effect; session_id None until start_stream; no physiological/model fields",
+  "timestamp_semantics": "source_timestamp_us = ObservedRecord timeline microseconds (None for attach events); product_timestamp_us = deterministic LOGICAL product clock (pre-stream: sequence*1000 us; in-stream: 1_000_000 + source_timestamp_us); no wall clock enters any event",
+  "descriptor": "adapter_type SIMULATED; dataset WEARABLE_SIM_V1; source_mode SYNTHETIC_PHYSIOLOGY; simulation true; capability nominal rate key ECG_SIMULATION_CONVENTION=360 (simulation convention, not hardware evidence); supports_ppg=false (no PPG waveform is emitted), supports_spo2_context=true; hardware_specific_fields_status NOT_APPLICABLE",
+  "not_claimed": [
+   "physical device",
+   "BLE",
+   "battery accuracy",
+   "clinical sensor",
+   "verified hardware source rate",
+   "WEARABLE_V1"
+  ]
+ },
+ "timing_modes": {
+  "names": [
+   "LIVE_SPEED",
+   "ACCELERATED"
+  ],
+  "equivalence": "identical ordered records and events; only wall-clock pacing differs",
+  "live_speed": "paces delivery to source timestamps via an injectable async sleep/clock",
+  "accelerated": "no pacing",
+  "tests_use_injected_clock": true
+ },
+ "edge_node": {
+  "identities": {
+   "monitoring": "VIRTUAL_EDGE_NODE_00 (no FL cohort participant)",
+   "fl_compatible": "edge_identity_for_site(i) = frozen CAP-001 mapping SIM_FL_SITE_0i / SIM_P0001(0i+1) / VIRTUAL_EDGE_NODE_0i; identity only"
+  },
+  "live_flow": "attach -> start_live_monitoring -> live_records()/live_events()",
+  "training_boundary": "DisabledTrainingBuffer: satisfies LocalTrainingBuffer, stores nothing, append_batch raises (CAP-006 owns the buffer)",
+  "no_training_surface": true,
+  "no_fl_runtime_import": true
+ },
+ "truth_firewall": {
+  "forbidden_in": [
+   "product/devices/*",
+   "product/edge/*",
+   "live record iterator",
+   "device event iterator",
+   "stream-runtime compatibility path"
+  ],
+  "enforcement": [
+   "AST import scan of all CAP-002 modules",
+   "fresh-process sys.modules check (no simulation truth modules, federated, privacy, flwr, torch, api)",
+   "extends the CAP-001 repo-wide truth-importer scan",
+   "scanner negative controls"
+  ],
+  "reserved_for": "SIMULATION_LABEL_ADAPTER_V1 (CAP-006)"
+ },
+ "determinism": {
+  "digest": "sha256 of canonical JSON of the semantic replay (events, record statistics incl. per-record canonical sha256, gap/context intervals, runtime window summaries)",
+  "excluded": [
+   "wall-clock",
+   "pid",
+   "temp paths",
+   "pacing sleeps"
+  ],
+  "fresh_process_reproduction": 2,
+  "no_global_random_state": true
+ },
+ "stream_runtime_compatibility_proof": {
+  "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged, sha-verified)",
+  "scope": "boundary compatibility only: records -> windows; no V2 inference API, no MODEL_V2",
+  "model_id_label": "NONE",
+  "quality_source": "QUALITY_V1 path via the runtime (device record quality field proven irrelevant)",
+  "context_source": "ObservedRecord context fields via the runtime's causal alignment"
+ },
+ "hardware_replacement_boundary": "SimulatedWearableSource is not WEARABLE_V1; a FutureRealWearableSource is NOT implemented; an interface-shape test double proves protocol parity; all unknown hardware facts stay VERIFICATION_REQUIRED (CAP-001 REAL_HARDWARE_REPLACEMENT_BOUNDARY_V1)",
+ "claim_boundary": {
+  "allowed": [
+   "deterministic hardware simulation",
+   "simulated wearable",
+   "engineering device/edge simulation",
+   "hardware-ready source abstraction"
+  ],
+  "forbidden": [
+   "physiological validation",
+   "real wearable validation",
+   "clinical sensor claim",
+   "physical device claim",
+   "model efficacy from the simulation",
+   "human subject"
+  ]
+ },
+ "out_of_scope": [
+  "product FastAPI server / routes",
+  "monitoring or federation WebSocket",
+  "Clerk",
+  "SQLite/persistence",
+  "frontend changes",
+  "local FL training buffer runtime",
+  "federation orchestration",
+  "model candidates",
+  "physical hardware",
+  "CAP-003",
+  "V2 inference/API calls"
+ ],
+ "control_plane": {
+  "task_registry": "manifests/capstone/task_registry_v1.csv",
+  "gate_registry": "manifests/capstone/gate_registry_v1.csv",
+  "component_registry": "manifests/capstone/component_registry_cap_002_v1.csv",
+  "why_separate_component_registry": "CAP-001's lock binds component_registry_v1.csv byte-for-byte; CAP-001 files are not modified, so CAP-002 components get an additive registry"
+ },
+ "environment": "fresh Python 3.11 venv outside the repository from requirements-dev.lock; repo-local .venv (stripped 3.9) neither used nor repaired",
+ "chronology": [
+  "entry audit + prospective control plane",
+  "implementation + targeted tests",
+  "protocol freeze commit (this protocol, lock, registry, implementation, tests)",
+  "canonical replays x2 (fresh processes)",
+  "full regression + frontend + lint + pip",
+  "final protection audit",
+  "CAPG1 evaluation (criteria below, frozen)",
+  "registry PASS transition",
+  "result commit"
+ ],
+ "capg1_criteria": [
+  {
+   "id": 1,
+   "text": "CAP-001 = PASS and CAPG0 = PASS",
+   "checks": [
+    "@cap001_capg0_pass"
+   ]
+  },
+  {
+   "id": 2,
+   "text": "CAP-001 protocol lock verifies byte-for-byte",
+   "checks": [
+    "@cap001_lock"
+   ]
+  },
+  {
+   "id": 3,
+   "text": "Protected upstream (scientific/runtime, existing FL, frontend, CAP-001 files) has zero drift",
+   "checks": [
+    "@drift"
+   ]
+  },
+  {
+   "id": 4,
+   "text": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1 was frozen in a commit that precedes all result evidence",
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ]
+  },
+  {
+   "id": 5,
+   "text": "SimulatedWearableSource implements the frozen DeviceSource protocol exactly",
+   "checks": [
+    "test_simulated_wearable_implements_the_frozen_device_source_protocol",
+    "test_simulated_source_and_future_real_double_share_one_interface_boundary"
+   ]
+  },
+  {
+   "id": 6,
+   "text": "VirtualEdgeNode implements the frozen EdgeNode contract",
+   "checks": [
+    "test_virtual_edge_node_implements_the_frozen_edge_contract",
+    "test_edge_identities_reuse_the_frozen_eight_client_cohort_mapping"
+   ]
+  },
+  {
+   "id": 7,
+   "text": "ObservedRecord is reused unchanged",
+   "checks": [
+    "test_records_are_observed_records_only_ordered_and_synthetic",
+    "test_existing_stream_runtime_and_generator_are_unchanged"
+   ]
+  },
+  {
+   "id": 8,
+   "text": "No ObservedRecordV2 / replacement record type exists",
+   "checks": [
+    "@no_observed_record_v2"
+   ]
+  },
+  {
+   "id": 9,
+   "text": "No SimulationTruth in the live path",
+   "checks": [
+    "test_simulation_truth_is_never_imported_by_the_cap_002_modules",
+    "test_live_edge_path_does_not_import_fl_server_truth_or_inference_modules",
+    "test_cap_001_truth_boundary_still_holds_with_the_new_modules",
+    "test_live_records_expose_no_truth_label_or_model_fields",
+    "test_truth_scanner_negative_controls_detect_planted_leakage"
+   ]
+  },
+  {
+   "id": 10,
+   "text": "No model inference in the device layer",
+   "checks": [
+    "test_replay_never_calls_a_model_or_the_inference_api",
+    "test_live_edge_path_does_not_import_fl_server_truth_or_inference_modules"
+   ]
+  },
+  {
+   "id": 11,
+   "text": "Device lifecycle transitions are legal",
+   "checks": [
+    "test_attachment_flow_scan_pair_connect_start_and_stop",
+    "test_stopped_may_return_to_connected_or_detached_per_the_frozen_contract"
+   ]
+  },
+  {
+   "id": 12,
+   "text": "Illegal lifecycle transitions fail closed",
+   "checks": [
+    "test_illegal_commands_fail_closed_without_state_or_event_change"
+   ]
+  },
+  {
+   "id": 13,
+   "text": "scan / pair / connect / start works",
+   "checks": [
+    "test_attachment_flow_scan_pair_connect_start_and_stop",
+    "test_live_flow_runs_the_attachment_then_streams_observed_records"
+   ]
+  },
+  {
+   "id": 14,
+   "text": "Disconnect actually interrupts data delivery",
+   "checks": [
+    "test_disconnect_actually_interrupts_delivery_and_nothing_is_fabricated",
+    "test_no_record_is_delivered_between_disconnect_and_reconnect",
+    "test_negative_controls_the_invariant_checkers_detect_corruption"
+   ]
+  },
+  {
+   "id": 15,
+   "text": "Reconnect resumes deterministically",
+   "checks": [
+    "test_post_reconnect_indices_and_timestamps_follow_the_source_clock",
+    "test_disconnect_actually_interrupts_delivery_and_nothing_is_fabricated"
+   ]
+  },
+  {
+   "id": 16,
+   "text": "Stop semantics are correct",
+   "checks": [
+    "test_user_stop_halts_record_delivery",
+    "test_stopped_may_return_to_connected_or_detached_per_the_frozen_contract",
+    "test_stopping_early_still_produces_a_consistent_prefix"
+   ]
+  },
+  {
+   "id": 17,
+   "text": "DeviceEvents are typed and deterministic",
+   "checks": [
+    "test_every_accepted_transition_emits_one_typed_deterministic_event",
+    "test_device_error_follows_the_frozen_lifecycle"
+   ]
+  },
+  {
+   "id": 18,
+   "text": "NORMAL_MONITORING deterministic",
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[NORMAL_MONITORING]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[NORMAL_MONITORING]",
+    "test_normal_monitoring_is_continuous_with_context_and_no_faults"
+   ]
+  },
+  {
+   "id": 19,
+   "text": "CONTEXT_LOSS deterministic",
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[CONTEXT_LOSS]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[CONTEXT_LOSS]",
+    "test_context_loss_removes_ppg_context_but_keeps_ecg_flowing"
+   ]
+  },
+  {
+   "id": 20,
+   "text": "POOR_SIGNAL deterministic",
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[POOR_SIGNAL]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[POOR_SIGNAL]",
+    "test_poor_signal_uses_existing_source_faults_and_no_outage_events"
+   ]
+  },
+  {
+   "id": 21,
+   "text": "DISCONNECT_RECONNECT deterministic",
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[DISCONNECT_RECONNECT]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[DISCONNECT_RECONNECT]"
+   ]
+  },
+  {
+   "id": 22,
+   "text": "MIXED_MONITORING_SESSION deterministic",
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[MIXED_MONITORING_SESSION]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[MIXED_MONITORING_SESSION]",
+    "test_mixed_session_sequences_context_loss_fault_disconnect_and_recovery"
+   ]
+  },
+  {
+   "id": 23,
+   "text": "LIVE_SPEED and ACCELERATED are semantically identical",
+   "checks": [
+    "test_live_speed_and_accelerated_are_semantically_identical",
+    "test_live_speed_pacing_follows_source_timestamps_including_the_outage"
+   ]
+  },
+  {
+   "id": 24,
+   "text": "Source provenance is explicitly synthetic",
+   "checks": [
+    "test_descriptor_is_deterministic_synthetic_and_claims_no_hardware",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[NORMAL_MONITORING]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[CONTEXT_LOSS]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[POOR_SIGNAL]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[DISCONNECT_RECONNECT]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[MIXED_MONITORING_SESSION]"
+   ]
+  },
+  {
+   "id": 25,
+   "text": "Virtual participants are never represented as human subjects",
+   "checks": [
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[NORMAL_MONITORING]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[MIXED_MONITORING_SESSION]"
+   ]
+  },
+  {
+   "id": 26,
+   "text": "Existing WearableStreamRuntime consumes the source output unchanged",
+   "checks": [
+    "test_existing_stream_runtime_and_generator_are_unchanged",
+    "test_normal_source_feeds_the_existing_runtime_and_yields_canonical_windows"
+   ]
+  },
+  {
+   "id": 27,
+   "text": "Windows remain compatible with the 10 s / 2500-sample / 250 Hz path",
+   "checks": [
+    "test_every_scenario_remains_compatible_with_the_ten_second_2500_sample_path",
+    "test_normal_source_feeds_the_existing_runtime_and_yields_canonical_windows"
+   ]
+  },
+  {
+   "id": 28,
+   "text": "Quality remains downstream QUALITY_V1 output",
+   "checks": [
+    "test_quality_is_computed_downstream_not_taken_from_the_device_records"
+   ]
+  },
+  {
+   "id": 29,
+   "text": "Context remains downstream-aligned context",
+   "checks": [
+    "test_context_comes_from_observed_records_and_is_never_fabricated"
+   ]
+  },
+  {
+   "id": 30,
+   "text": "No V2 inference/API required in CAP-002",
+   "checks": [
+    "test_replay_never_calls_a_model_or_the_inference_api"
+   ]
+  },
+  {
+   "id": 31,
+   "text": "No frontend changed",
+   "checks": [
+    "@drift_frontend"
+   ]
+  },
+  {
+   "id": 32,
+   "text": "No product API implemented",
+   "checks": [
+    "@no_product_api"
+   ]
+  },
+  {
+   "id": 33,
+   "text": "No auth implemented",
+   "checks": [
+    "@no_auth"
+   ]
+  },
+  {
+   "id": 34,
+   "text": "No database implemented",
+   "checks": [
+    "@no_database"
+   ]
+  },
+  {
+   "id": 35,
+   "text": "No FL training executed",
+   "checks": [
+    "@no_fl_training",
+    "test_edge_node_has_no_fl_or_training_surface"
+   ]
+  },
+  {
+   "id": 36,
+   "text": "No federated candidate created",
+   "checks": [
+    "@no_candidate"
+   ]
+  },
+  {
+   "id": 37,
+   "text": "No SecAgg run added",
+   "checks": [
+    "@no_fl_training"
+   ]
+  },
+  {
+   "id": 38,
+   "text": "No physical hardware code",
+   "checks": [
+    "test_no_real_hardware_adapter_or_wearable_v1_artifact_exists"
+   ]
+  },
+  {
+   "id": 39,
+   "text": "Future real adapter remains interface-compatible",
+   "checks": [
+    "test_simulated_source_and_future_real_double_share_one_interface_boundary"
+   ]
+  },
+  {
+   "id": 40,
+   "text": "Unknown hardware facts remain VERIFICATION_REQUIRED",
+   "checks": [
+    "test_no_real_hardware_adapter_or_wearable_v1_artifact_exists",
+    "test_real_hardware_replacement_boundary_keeps_downstream_unchanged"
+   ]
+  },
+  {
+   "id": 41,
+   "text": "Targeted tests pass",
+   "checks": [
+    "@all_cap002_tests"
+   ]
+  },
+  {
+   "id": 42,
+   "text": "Existing Python regression passes",
+   "checks": [
+    "@regression"
+   ]
+  },
+  {
+   "id": 43,
+   "text": "Frontend tests/check/build still pass (frontend tree additionally hash-verified)",
+   "checks": [
+    "@frontend"
+   ]
+  },
+  {
+   "id": 44,
+   "text": "ruff passes",
+   "checks": [
+    "@ruff"
+   ]
+  },
+  {
+   "id": 45,
+   "text": "pip check passes",
+   "checks": [
+    "@pip"
+   ]
+  },
+  {
+   "id": 46,
+   "text": "CI neither queried nor triggered",
+   "checks": [
+    "@ci"
+   ]
+  },
+  {
+   "id": 47,
+   "text": "CAP-002 = PASS",
+   "checks": [
+    "@registry_cap002"
+   ]
+  },
+  {
+   "id": 48,
+   "text": "CAPG1 = PASS",
+   "checks": [
+    "@registry_capg1"
+   ]
+  },
+  {
+   "id": 49,
+   "text": "CAP-003 remains NOT_STARTED",
+   "checks": [
+    "@registry_cap003"
+   ]
+  },
+  {
+   "id": 50,
+   "text": "Mutation / negative controls each failed the test suite as designed and left no repository mutation",
+   "checks": [
+    "@mutation_log"
+   ]
+  },
+  {
+   "id": 51,
+   "text": "Canonical replay digests are identical across two fresh-process executions",
+   "checks": [
+    "@reproducibility",
+    "test_replay_digest_reproduces_in_a_fresh_process"
+   ]
+  },
+  {
+   "id": 52,
+   "text": "Edge training boundary is a disabled placeholder; no TrainingBufferRecord persisted",
+   "checks": [
+    "test_training_boundary_is_a_disabled_placeholder_that_persists_nothing",
+    "test_edge_node_has_no_fl_or_training_surface"
+   ]
+  },
+  {
+   "id": 53,
+   "text": "Inherited CAP-001 bookkeeping discrepancy (33 vs 50 criteria) recorded without reopening CAP-001",
+   "checks": [
+    "@cap001_disclosure_recorded"
+   ]
+  }
+ ],
+ "capg1_criteria_note": "Frozen before canonical result evaluation. Checks named test_* are exact test function names (or full parametrised ids); '@name' are programmatic checks in scripts/cap_002_build_evidence.py.",
+ "inherited_cap001_disclosure": {
+  "statement": "CAPG0 registry prose says 'All 33 CAPG0 criteria' while the final CAPG0 evaluator/result has 50/50 criteria",
+  "canonical": "reports/capstone/cap_001/capg0_criteria.json",
+  "action": "inherited bookkeeping only; CAP-001 not reopened"
+ }
+}

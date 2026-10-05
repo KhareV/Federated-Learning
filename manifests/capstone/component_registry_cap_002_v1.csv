@@ -1,0 +1,6 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_DEVICE_EDGE_PROTOCOL_V1,ENGINEERING_PROTOCOL,CAP-002,FROZEN_ENGINEERING_PROTOCOL,,artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json,CAP-002 method protocol incl. the 53 frozen CAPG1 criteria.
+SIMULATED_WEARABLE_SOURCE_V1,ENGINEERING_IMPLEMENTATION,CAP-002,FROZEN_ENGINEERING_IMPLEMENTATION,,product/devices/simulated.py,Concrete DeviceSource over the existing WEARABLE_SIM generator; not WEARABLE_V1.
+VIRTUAL_EDGE_NODE_V1,ENGINEERING_IMPLEMENTATION,CAP-002,FROZEN_ENGINEERING_IMPLEMENTATION,,product/edge/virtual.py,EdgeNode (live path only; disabled training-buffer boundary).
+CAPSTONE_DEVICE_SCENARIO_RUNTIME_V1,ENGINEERING_IMPLEMENTATION,CAP-002,FROZEN_ENGINEERING_IMPLEMENTATION,,product/devices/scenarios.py,Five frozen monitoring scenarios -> existing IntegrationProfile.
+CAPSTONE_DEVICE_REPLAY_V1,ENGINEERING_REPLAY,CAP-002,FROZEN_ENGINEERING_REPLAY,,product/devices/replay.py,Deterministic semantic replay + existing WearableStreamRuntime compatibility summary.

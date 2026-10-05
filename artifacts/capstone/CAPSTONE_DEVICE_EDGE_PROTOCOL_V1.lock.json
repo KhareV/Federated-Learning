@@ -1,0 +1,72 @@
+{
+ "bound_files": {
+  "scripts/cap_002_build_evidence.py": "6b43190f0873933f21544294d8127306297fcc92ff7450a225d1d683d584c63a",
+  "scripts/cap_002_mutation_controls.py": "ab788fef4dd32592d8d50755aecbd2b3af5fed810f818ceef322434e6288dfc4",
+  "scripts/cap_002_protected_audit.py": "7131c235c58b5cb33da197783f27900348a2dc9caacd2fd6e8af6a3b95147efe",
+  "scripts/run_capstone_device_demo.py": "d0948e5a0d8dd0d87c6bb020fdfada57e5c918a3cef3ec859d54be3b85ab8d66",
+  "scripts/verify_capstone_device_edge.py": "e378244a4de6b765a2bf1f7342698037aab3a086b2e74180c8f84402618bb97a",
+  "tests/capstone_device_support.py": "6dbd172b78257665e3d09319dacca5921d9692c0276b5e97924ebd7ca54d9029",
+  "tests/test_capstone_device_replay.py": "5e0904c07cf1333237ecbdcf998b8e4811eb151c9d7a7a4b66f0590e80e5513f",
+  "tests/test_capstone_simulated_device.py": "c01e1aa555db0ebc6bd8295cf0285fcb159eca7eb0ec0266b595a42f197bd9db",
+  "tests/test_capstone_virtual_edge.py": "3b5f4463f2505671ae714d5ad16dd4f79f3bab60fdfcfa6c876d1e023a92bfe5"
+ },
+ "component_registry": {
+  "path": "manifests/capstone/component_registry_cap_002_v1.csv",
+  "sha256": "a21fc2d0b702151f22982bcaea7ce69edc61b29c2d285c355092977817928408"
+ },
+ "components": {
+  "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1": {
+   "path": "configs/capstone/cap_002_device_edge_protocol_v1.json",
+   "sha256": "4cce45048487e4235c21308dc1565d313b401c4b0b3a868e9a2c7c16560d80aa",
+   "status": "FROZEN_ENGINEERING_PROTOCOL"
+  },
+  "CAPSTONE_DEVICE_REPLAY_V1": {
+   "path": "product/devices/replay.py",
+   "sha256": "ef9fa408a4b57971b1083b94b701809535efb45f315f130201511e91d3d46f93",
+   "status": "FROZEN_ENGINEERING_REPLAY"
+  },
+  "CAPSTONE_DEVICE_SCENARIO_RUNTIME_V1": {
+   "path": "product/devices/scenarios.py",
+   "sha256": "91cf4654045813a52df7f881fe47bb598a2ee181a78234fecb7210077886be9a",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "SIMULATED_WEARABLE_SOURCE_V1": {
+   "path": "product/devices/simulated.py",
+   "sha256": "16ddfb6fb1ae830c178c40c2a1ab7a8da9665a94c07a1e041fec0ec9a799892b",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "VIRTUAL_EDGE_NODE_V1": {
+   "path": "product/edge/virtual.py",
+   "sha256": "08855b4358f94122445a38d9f01e362cf7bd74105731c6c9a7c6cabb056422e6",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  }
+ },
+ "entry_sha": "44939378e7aee3baa2e92fefdd42fa9d75640a8a",
+ "freeze_basis": "method/protocol freeze: bound files precede CAPG1 result evidence",
+ "freeze_time_state": {
+  "CAP-002": "IN_PROGRESS",
+  "CAPG1": "NOT_STARTED",
+  "gate_registry_sha256": "80e69bbc7353e0bcd08a90a3793f9717af21045f06f87771187270a7f39049dd",
+  "note": "informational; these registries transition at the result commit",
+  "task_registry_sha256": "50bd28054057af7866567e1d9e0a92814657031baef8307aa27fcb07fa263913"
+ },
+ "gate": "CAPG1",
+ "lock_id": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1",
+ "mutable_future_implementation_files_bound": false,
+ "owner_task": "CAP-002",
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "upstream_frozen_identity": {
+  "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+  "artifacts/SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0",
+  "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "contracts/API_SCHEMA_V1.json": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+  "contracts/sample_schema_v1.json": "234b1f49ef6f8581f576e5cb4741c457c0d4703d527f435f0af2974658f4cb38",
+  "product/devices/base.py": "f6519fc80b1a3c88e1f4a1a1b373d27c18b502a99ddaf9897e3586ece3a60d0d",
+  "product/edge/base.py": "d3e54d3ad5d7095e4fa47a6c19d6f5e8b22f6399321a8322818e8acbb40f05b1",
+  "simulation/fl_cohort_v1.py": "bf6e66ac81fa8aaa9c49d22d0d2c07e2b60f11106341fad37bc252b8b9d2069b",
+  "simulation/profile_v2013.py": "8153a9ec30e6665ca5dadd8c118332cb2085c2f4c4179f5016acd3ad3b9c267b",
+  "simulation/stream_runtime_v2013.py": "ad441ed9fc56dcbae4c9789090a20fc2bf3f37ea8c7321abfab6da83d7f24644",
+  "simulation/types.py": "6fea1df3b01ab3a8b39e7af1b6c972bcb1218e19019823cab84fa9b88dad8b43",
+  "simulation/wearable.py": "87d9ac41464e0e154765e610042139695e6da6cfdb4eb73f8813edecd75aaf6e"
+ }
+}
