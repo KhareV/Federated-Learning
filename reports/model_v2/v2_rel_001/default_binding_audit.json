@@ -1,0 +1,81 @@
+{
+  "audit_id": "DEFAULT_BINDING_AUDIT_V2_REL_001",
+  "default_after_plan": "MODEL_V2_FINAL via api.app_default:create_default_app",
+  "default_before": "MODEL_V1 (api.app:app)",
+  "entry_points": [
+    {
+      "action": "KEEP unchanged as the legacy/rollback V1 stack; documented as rollback alias",
+      "bound_by": "API_RUNTIME_V1_1 lock (must not be edited)",
+      "current_stack": "MODEL_V1/GATEWAY_ARTIFACT_V1/CAL_V1/ALERT_POLICY_V1 (ProductionRuntime constructed at import)",
+      "id": "E1",
+      "launch": "uvicorn api.app:app",
+      "what": "ASGI app module api.app:app"
+    },
+    {
+      "action": "KEEP unchanged; wrapped additively",
+      "bound_by": "API_RUNTIME_V2_1 lock",
+      "current_stack": "MODEL_V2_FINAL stack (API_RUNTIME_V2_1)",
+      "id": "E2",
+      "launch": "uvicorn --factory api.app_v2:create_default_research_app",
+      "what": "V2 research factory"
+    },
+    {
+      "action": "ADD one documented default launcher (scripts/run_nhm_default.py, Makefile run-default) yielding V2; explicit rollback profile rollback-v1",
+      "current": "none documented in README/Makefile; vite.config.ts comment names `uvicorn api.app:app` as the dev API",
+      "id": "E3",
+      "what": "documented/normal launch command"
+    },
+    {
+      "action": "additive DASHBOARD_UI_V1_5 + E2E_REPLAY_SOFTWARE_V1_4 successors; default MODEL_V2_FINAL",
+      "bound_by": "DASHBOARD_UI_V1_4 and E2E_REPLAY_SOFTWARE_V1_3 locks",
+      "id": "E4",
+      "what": "frontend request identity default",
+      "where": "frontend/src/routes/monitoring/+page.svelte (VITE_NHM_REQUEST_MODEL_ID || 'MODEL_V1')"
+    },
+    {
+      "action": "KEEP (frozen/bound); add default-path replay script scripts/run_v2_rel_001_default_replay.py",
+      "files": [
+        "scripts/run_replay.py (imports api.app V1)",
+        "scripts/run_e2e_dashboard_demo_c034.py (V1)",
+        "scripts/run_research_v2_demo.py (V2 research)",
+        "scripts/_v2_013_lib.py launch_api profiles v1/v2"
+      ],
+      "id": "E5",
+      "what": "demo/replay launchers"
+    },
+    {
+      "action": "none (selector forbidden)",
+      "finding": "no env var selects the model; no public selector exists",
+      "id": "E6",
+      "what": "environment/default configuration"
+    },
+    {
+      "action": "add a 'Default research runtime' section",
+      "finding": "README documents environment and make targets only (no runtime launch)",
+      "id": "E7",
+      "what": "README/developer commands"
+    }
+  ],
+  "frontend_default_before": [
+    "frontend/src/routes/monitoring/+page.svelte:20",
+    "frontend/src/routes/monitoring/+page.svelte:22"
+  ],
+  "head": "211c397080f077b3b39f21f9f9d309becaa253b5",
+  "performed_before_any_cutover_edit": true,
+  "references_to_api_app_app_in_tests": 8,
+  "stale_public_copy_candidates": {
+    "HardwareStudio.svelte": [
+      "frontend/src/lib/components/hardware/HardwareStudio.svelte:67"
+    ],
+    "SystemArchitecture.svelte": [
+      "frontend/src/lib/components/landing/SystemArchitecture.svelte:63"
+    ],
+    "monitor/+page.svelte": [
+      "frontend/src/routes/monitor/+page.svelte:62"
+    ],
+    "root +page.svelte": [
+      "frontend/src/routes/+page.svelte:457"
+    ]
+  },
+  "status": "PASS"
+}

@@ -20,7 +20,8 @@ def main() -> None:
                           check=True).stdout.strip()
     lock = {
         "lock_id": "SYSTEM_V2_RELEASE_DECISION_V1", "status": "FROZEN_RELEASE_DECISION",
-        "owner_task": "V2-REL-001", "policy_lock": "artifacts/SYSTEM_V2_RELEASE_POLICY_V1.lock.json",
+        "owner_task": "V2-REL-001",
+        "policy_lock": "artifacts/SYSTEM_V2_RELEASE_POLICY_V1.lock.json",
         "policy_lock_sha256": hash_file(ROOT / "artifacts/SYSTEM_V2_RELEASE_POLICY_V1.lock.json"),
         "SYSTEM_V2_RELEASE_DECISION": decision["SYSTEM_V2_RELEASE_DECISION"],
         "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED": decision["SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED"],
