@@ -1,0 +1,15 @@
+{
+ "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_2",
+ "owner_phase": "CAP-009",
+ "made_after_method_freeze": true,
+ "previous_amendment": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_1",
+ "defect": "The amendment-1 verifier incorrectly required a frontend file to be directly listed in the protocol lock. Frontend files are transitively bound by the UI successor lock; the protocol binds that lock hash.",
+ "change": "For paths absent from the protocol's direct binding, defer the predecessor-file proof to the UI successor lock chain. Still verify the amended current file hash and both old/new UI lock hashes.",
+ "files": {
+  "scripts/verify_capstone_history_evidence_protocol_v1.py": {
+   "old_sha256": "fa13da4d64cd69e8481b71fd9ead57128a81eb8ae0b7210f3614a03e9ef012a8",
+   "new_sha256": "a080697b7828e8c509946316a435737af4243ccd89be19692743077027518ee6"
+  }
+ },
+ "result_evidence_committed_with_amendment": false
+}

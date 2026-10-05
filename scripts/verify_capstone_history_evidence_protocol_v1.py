@@ -34,7 +34,9 @@ def verify() -> dict[str, object]:
     )):
         data = json.loads(amendment.read_text(encoding="utf-8"))
         for path, change in data["files"].items():
-            if expected.get(path) != change["old_sha256"]:
+            # Individual frontend files are transitively bound by the UI successor
+            # lock. The protocol binds that lock's SHA, not every frontend path.
+            if path in expected and expected[path] != change["old_sha256"]:
                 chain_failures.append(f"{amendment.name}:{path}")
             expected[path] = change["new_sha256"]
     failures = [path for path, digest in expected.items()
