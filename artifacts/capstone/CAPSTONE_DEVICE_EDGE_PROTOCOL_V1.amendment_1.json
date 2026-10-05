@@ -1,0 +1,25 @@
+{
+ "amendment_id": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1_AMENDMENT_1",
+ "applies_to_lock": "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json",
+ "change": "The mutation was replaced by one that really reorders delivered records (swaps each even/odd sample pair in the timeline). The evaluator's bound-file drift check was extended to honour this amendment's override hashes.",
+ "defect": "Mutation control NON_MONOTONIC_RECORD_SEQUENCE (deque.appendleft in SimulatedWearableSource._advance) is an EQUIVALENT mutant: the consumer drains the one-element buffer after every append, so the mutation cannot change observable behaviour and no test can fail on it. Discovered when the first mutation run reported 5/6 caught.",
+ "files": {
+  "scripts/cap_002_build_evidence.py": {
+   "new_sha256": "0ab7be00d2e8c8e5a51ea47ee4dd4229099644ba83c620445b32ae4a18385538",
+   "old_sha256": "6b43190f0873933f21544294d8127306297fcc92ff7450a225d1d683d584c63a"
+  },
+  "scripts/cap_002_mutation_controls.py": {
+   "new_sha256": "65665f5f29ac87effcacbd0a56e93f056c297b170c159f06d79c25173757197b",
+   "old_sha256": "ab788fef4dd32592d8d50755aecbd2b3af5fed810f818ceef322434e6288dfc4"
+  }
+ },
+ "first_mutation_run_result": "5 of 6 caught; the sixth was the equivalent mutant (recorded in this amendment, superseded by the rerun)",
+ "freeze_commit": "51cab3c",
+ "made_before": "any CAPG1 criteria evaluation and before the result commit",
+ "unchanged": {
+  "canonical_replays": "already executed on the frozen implementation; independent of this change",
+  "capg1_criteria_text": "identical (protocol JSON unchanged)",
+  "implementation_and_tests": "byte-identical to the freeze commit",
+  "protocol_json_sha256": "4cce45048487e4235c21308dc1565d313b401c4b0b3a868e9a2c7c16560d80aa"
+ }
+}

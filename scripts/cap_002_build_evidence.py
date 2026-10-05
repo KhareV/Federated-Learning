@@ -102,8 +102,11 @@ def freeze_precedes_result() -> dict:
     ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", freeze, "HEAD"],
                               cwd=ROOT).returncode == 0
     lock = json.loads(LOCK.read_text())
-    drift = [p for p, d in {**lock["bound_files"], **{c["path"]: c["sha256"] for c in lock["components"].values()}}.items()
-             if hash_file(ROOT / p) != d]
+    expected = {**lock["bound_files"], **{c["path"]: c["sha256"] for c in lock["components"].values()}}
+    amendment = ROOT / "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_1.json"
+    if amendment.is_file():
+        expected.update({p: v["new_sha256"] for p, v in json.loads(amendment.read_text())["files"].items()})
+    drift = [p for p, d in expected.items() if hash_file(ROOT / p) != d]
     return {"ok": ancestor and not leaked and not drift, "freeze_commit": freeze,
             "freeze_is_ancestor_of_head": ancestor, "result_files_present_in_freeze": leaked,
             "bound_file_drift_since_freeze": drift}

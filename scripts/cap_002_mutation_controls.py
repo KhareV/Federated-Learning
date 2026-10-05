@@ -30,8 +30,13 @@ MUTATIONS = (
      " timestamp_us=record.timestamp_us + 3000), record.timestamp_us)\n"),
     ("WRONG_OBSERVED_RECORD_TYPE", SIM, "            self._records.append(payload)",
      "            self._records.append(payload.to_canonical_dict())"),
-    ("NON_MONOTONIC_RECORD_SEQUENCE", SIM, "            self._records.append(payload)",
-     "            self._records.appendleft(payload)"),
+    ("NON_MONOTONIC_RECORD_SEQUENCE", SIM,
+     '            yield ("record", record, record.timestamp_us)\n',
+     "            if record.sample_index % 2 == 0:\n"
+     "                held = record\n"
+     "                continue\n"
+     '            yield ("record", record, record.timestamp_us)\n'
+     '            yield ("record", held, held.timestamp_us)\n'),
 )
 
 

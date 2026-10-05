@@ -109,7 +109,12 @@ def test_cap_002_freeze_lock_binds_every_listed_file_byte_for_byte() -> None:
     for cid, entry in lock["components"].items():
         assert entry["status"] == EXPECTED_CAP002_COMPONENTS[cid]
         assert hash_file(ROOT / entry["path"]) == entry["sha256"], cid
-    for path, digest in {**lock["bound_files"], **lock["upstream_frozen_identity"]}.items():
+    bound = {**lock["bound_files"], **lock["upstream_frozen_identity"]}
+    amendment = ROOT / "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_1.json"
+    for path, change in json.loads(amendment.read_text())["files"].items():
+        assert bound[path] == change["old_sha256"]  # the amendment supersedes exactly this hash
+        bound[path] = change["new_sha256"]
+    for path, digest in bound.items():
         assert hash_file(ROOT / path) == digest, path
     registry = lock["component_registry"]
     assert hash_file(ROOT / registry["path"]) == registry["sha256"]
