@@ -1,0 +1,36 @@
+{
+ "all_prior_locks_and_amendment_chains_verified": true,
+ "chronology_disclosure": "the CAP-006 implementation (label adapter, local buffer, FL client adapter, update bridge, cohort builder) was drafted and probed (one client reproduced the frozen round-1 update SHA) BEFORE this entry commit; it is NOT in the entry commit and is committed only with the method freeze",
+ "ci": {
+  "queried": false,
+  "triggered": false
+ },
+ "entry_sha": "b8a6c70ed6b77a38273cb8bdb6659452dfe26f83",
+ "expected_entry_sha": "b8a6c70ed6b77a38273cb8bdb6659452dfe26f83",
+ "gate": "CAPG5",
+ "intervening_commits": [],
+ "later_phases_not_started": true,
+ "matches_expected_entry": true,
+ "origin_main_sha": "b8a6c70ed6b77a38273cb8bdb6659452dfe26f83",
+ "phase": "CAP-006",
+ "preserved_disclosures": [
+  "CAP-001 gate-row wording discrepancy",
+  "CAP-002 code-drafted-before-entry",
+  "CAP-003 LIVE_SPEED bounded-settle limitation",
+  "CAP-003 manual-stop-mid-outage limitation",
+  "CAP-003 context projection",
+  "CAP-004 additive Clerk lock",
+  "CAP-004 SQLite store location",
+  "inherited CAP-003 flaky test",
+  "CAP-005 Clerk WebSocket cookie path unverified",
+  "CAP-005 no live Clerk-account E2E",
+  "CAP-005 accessibility audit not equivalent to formal WCAG certification",
+  "CAP-005 canonical UI evidence using ACCELERATED simulation"
+ ],
+ "statuses_at_entry": {
+  "CAP-001..005": "PASS",
+  "CAP-006..011": "NOT_STARTED",
+  "CAPG0..4": "PASS"
+ },
+ "working_tree_clean": true
+}

@@ -1,0 +1,40 @@
+{
+ "bound_artifacts_checked": 38,
+ "clients": [
+  "SIM_FL_SITE_00",
+  "SIM_FL_SITE_01",
+  "SIM_FL_SITE_02",
+  "SIM_FL_SITE_03",
+  "SIM_FL_SITE_04",
+  "SIM_FL_SITE_05",
+  "SIM_FL_SITE_06",
+  "SIM_FL_SITE_07"
+ ],
+ "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+ "label_contract": "WEARABLE_SIM_EVENT_WINDOW_V1",
+ "lock": "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json",
+ "lock_sha256": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30",
+ "mismatches": [],
+ "participants": [
+  "SIM_P000101",
+  "SIM_P000102",
+  "SIM_P000103",
+  "SIM_P000104",
+  "SIM_P000105",
+  "SIM_P000106",
+  "SIM_P000107",
+  "SIM_P000108"
+ ],
+ "reference_files": {
+  "cohort_manifest_run.json": "e586b8cb425dfcfb9c5c72222b174477519445f2cc2529a2d11a2ec6e55803dc",
+  "federation_run.json": "6ef1a3152fca1af74a4b131760af6c5163f63087c01f64ae347e0cd54d81451e"
+ },
+ "round1_reference_fields": [
+  "examples_seen",
+  "shuffle_seeds",
+  "update_sha256",
+  "base_global_state_sha256"
+ ],
+ "values_are_read_from_frozen_evidence_not_copied": true,
+ "verified": true
+}

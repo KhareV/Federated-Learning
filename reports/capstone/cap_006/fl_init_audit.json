@@ -1,0 +1,15 @@
+{
+ "initialization_id": "FL_INIT_V2",
+ "frozen_sources": {
+  "V2-FL-005 federation_run.state_progression.0": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "artifacts/FEDPROX_MU_V2.lock.json": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "artifacts/MODEL_V2_COMPLETE_REPRO_V1.lock.json": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f"
+ },
+ "all_frozen_sources_agree": true,
+ "regenerated_via": "federated.wearable_fl_runner_v1.new_session() -> fresh_initial_state_v2(BASE_SEED)",
+ "regenerated_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+ "regenerated_equals_frozen": true,
+ "no_new_seed": true,
+ "base_model_id_for_cap006": "FL_INIT_V2",
+ "model_v2_final_used_as_base": false
+}
