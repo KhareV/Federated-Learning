@@ -1,0 +1,630 @@
+{
+  "protocol_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1",
+  "status": "PROSPECTIVE_METHOD_FREEZE",
+  "owner_phase": "CAP-009",
+  "entry_sha": "bdc16611290d371abbcca582920086dcfe4d49a8",
+  "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_3",
+  "routes": [
+    "GET /product/v1/sessions/{id}/summary",
+    "GET /product/v1/sessions/{id}/timeline",
+    "GET /product/v1/research/ml",
+    "GET /product/v1/research/fl"
+  ],
+  "summary": {
+    "version": "SESSION_SUMMARY_V1_INFERRED_WINDOWS",
+    "completion_required": "COMPLETED",
+    "duration_basis": "PRODUCT_LIFECYCLE_CLOCK",
+    "windows_basis": "PERSISTED_INFERENCE_EVENTS",
+    "state_counts_basis": "PERSISTED_INFERENCE_EVENTS",
+    "quality_counts_basis": "PERSISTED_INFERENCE_EVENTS",
+    "context_basis": "PROJECTED_CONTEXT_SNAPSHOTS_ONLY",
+    "materialization": "BEGIN IMMEDIATE; exactly one immutable summary row"
+  },
+  "timeline": {
+    "source_order": "sequence_index then stable kind tie",
+    "source_domain": "SOURCE_TIMELINE",
+    "device_domain": "PRODUCT_CLOCK",
+    "raw_context_json_exposed": false,
+    "preview": "CAPSTONE_WAVEFORM_PREVIEW_V1 <=4000 points; null gaps retained"
+  },
+  "research": {
+    "catalog_id": "CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1",
+    "scientific_fl_phases": [
+      "V2-FL-001",
+      "V2-FL-002",
+      "V2-FL-003",
+      "V2-FL-EVAL-001",
+      "V2-FL-004"
+    ],
+    "v2_fl_005": "ENGINEERING_DEMO_ONLY_NOT_EFFICACY",
+    "promotion_history": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+    "later_system_release": "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED",
+    "scientific_recomputation": false
+  },
+  "ui_successor": "CAPSTONE_UI_V1_2",
+  "offline_demo": true,
+  "hardware": "OUT_OF_SCOPE_NO_PHYSICAL_WEARABLE",
+  "ci": "DEFERRED_NOT_QUERIED_NOT_TRIGGERED",
+  "capg8_criteria": [
+    {
+      "id": "CAPG8-001",
+      "requirement": "CAP-001/CAPG0 PASS"
+    },
+    {
+      "id": "CAPG8-002",
+      "requirement": "CAP-002/CAPG1 PASS"
+    },
+    {
+      "id": "CAPG8-003",
+      "requirement": "CAP-003/CAPG2 PASS"
+    },
+    {
+      "id": "CAPG8-004",
+      "requirement": "CAP-004/CAPG3 PASS"
+    },
+    {
+      "id": "CAPG8-005",
+      "requirement": "CAP-005/CAPG4 PASS"
+    },
+    {
+      "id": "CAPG8-006",
+      "requirement": "CAP-006/CAPG5 PASS"
+    },
+    {
+      "id": "CAPG8-007",
+      "requirement": "CAP-007/CAPG6 PASS"
+    },
+    {
+      "id": "CAPG8-008",
+      "requirement": "CAP-008/CAPG7 PASS"
+    },
+    {
+      "id": "CAPG8-009",
+      "requirement": "all prior locks/amendments verify"
+    },
+    {
+      "id": "CAPG8-010",
+      "requirement": "entry audit immutable"
+    },
+    {
+      "id": "CAPG8-011",
+      "requirement": "scientific artifacts zero drift"
+    },
+    {
+      "id": "CAPG8-012",
+      "requirement": "released runtime zero drift"
+    },
+    {
+      "id": "CAPG8-013",
+      "requirement": "CAP-006 zero drift"
+    },
+    {
+      "id": "CAPG8-014",
+      "requirement": "CAP-007 zero drift"
+    },
+    {
+      "id": "CAPG8-015",
+      "requirement": "CAP-008 federation behavior zero drift"
+    },
+    {
+      "id": "CAPG8-016",
+      "requirement": "API V1_2 untouched"
+    },
+    {
+      "id": "CAPG8-017",
+      "requirement": "additive V1_3 implemented"
+    },
+    {
+      "id": "CAPG8-018",
+      "requirement": "exactly four CAP-009 routes added"
+    },
+    {
+      "id": "CAPG8-019",
+      "requirement": "no schema change"
+    },
+    {
+      "id": "CAPG8-020",
+      "requirement": "summary uses existing session_summaries table"
+    },
+    {
+      "id": "CAPG8-021",
+      "requirement": "summary only COMPLETED"
+    },
+    {
+      "id": "CAPG8-022",
+      "requirement": "noncompleted summary 409"
+    },
+    {
+      "id": "CAPG8-023",
+      "requirement": "cross-user summary 403"
+    },
+    {
+      "id": "CAPG8-024",
+      "requirement": "unknown summary 404"
+    },
+    {
+      "id": "CAPG8-025",
+      "requirement": "summary materialization atomic/idempotent"
+    },
+    {
+      "id": "CAPG8-026",
+      "requirement": "exactly one summary row after repeated reads"
+    },
+    {
+      "id": "CAPG8-027",
+      "requirement": "summary survives restart"
+    },
+    {
+      "id": "CAPG8-028",
+      "requirement": "duration basis = PRODUCT_LIFECYCLE_CLOCK"
+    },
+    {
+      "id": "CAPG8-029",
+      "requirement": "windows_inferred = inference-event count"
+    },
+    {
+      "id": "CAPG8-030",
+      "requirement": "state counts based on inference events"
+    },
+    {
+      "id": "CAPG8-031",
+      "requirement": "quality counts based on inference events"
+    },
+    {
+      "id": "CAPG8-032",
+      "requirement": "quality-change rows not misused as window counts"
+    },
+    {
+      "id": "CAPG8-033",
+      "requirement": "HR stats from valid persisted ECG HR only"
+    },
+    {
+      "id": "CAPG8-034",
+      "requirement": "SpO2 stats from spo2_valid rows only"
+    },
+    {
+      "id": "CAPG8-035",
+      "requirement": "disconnect count exact"
+    },
+    {
+      "id": "CAPG8-036",
+      "requirement": "reconnect count exact"
+    },
+    {
+      "id": "CAPG8-037",
+      "requirement": "missing HR/SpO2 remains null"
+    },
+    {
+      "id": "CAPG8-038",
+      "requirement": "timeline owner-only"
+    },
+    {
+      "id": "CAPG8-039",
+      "requirement": "source timeline typed"
+    },
+    {
+      "id": "CAPG8-040",
+      "requirement": "source timeline sequence ordered"
+    },
+    {
+      "id": "CAPG8-041",
+      "requirement": "device lifecycle separate"
+    },
+    {
+      "id": "CAPG8-042",
+      "requirement": "source/product time domains never merged"
+    },
+    {
+      "id": "CAPG8-043",
+      "requirement": "raw inference context_json never exposed"
+    },
+    {
+      "id": "CAPG8-044",
+      "requirement": "projected context_snapshots used instead"
+    },
+    {
+      "id": "CAPG8-045",
+      "requirement": "bounded waveform preview returned"
+    },
+    {
+      "id": "CAPG8-046",
+      "requirement": "preview <=4000 points"
+    },
+    {
+      "id": "CAPG8-047",
+      "requirement": "preview gaps remain null"
+    },
+    {
+      "id": "CAPG8-048",
+      "requirement": "preview labelled non-raw"
+    },
+    {
+      "id": "CAPG8-049",
+      "requirement": "history never enters FL buffer"
+    },
+    {
+      "id": "CAPG8-050",
+      "requirement": "no personal-model feature"
+    },
+    {
+      "id": "CAPG8-051",
+      "requirement": "research catalog deterministic"
+    },
+    {
+      "id": "CAPG8-052",
+      "requirement": "research catalog byte-identical across two builds"
+    },
+    {
+      "id": "CAPG8-053",
+      "requirement": "every displayed research fact has source provenance"
+    },
+    {
+      "id": "CAPG8-054",
+      "requirement": "every catalog source hash verified"
+    },
+    {
+      "id": "CAPG8-055",
+      "requirement": "no held-out prediction tables read"
+    },
+    {
+      "id": "CAPG8-056",
+      "requirement": "no raw biomedical data read"
+    },
+    {
+      "id": "CAPG8-057",
+      "requirement": "no model loading"
+    },
+    {
+      "id": "CAPG8-058",
+      "requirement": "no inference"
+    },
+    {
+      "id": "CAPG8-059",
+      "requirement": "no training"
+    },
+    {
+      "id": "CAPG8-060",
+      "requirement": "no bootstrap recomputation"
+    },
+    {
+      "id": "CAPG8-061",
+      "requirement": "no calibration fitting"
+    },
+    {
+      "id": "CAPG8-062",
+      "requirement": "no FL execution"
+    },
+    {
+      "id": "CAPG8-063",
+      "requirement": "ML route typed"
+    },
+    {
+      "id": "CAPG8-064",
+      "requirement": "FL route typed"
+    },
+    {
+      "id": "CAPG8-065",
+      "requirement": "research routes authenticated GLOBAL_READ"
+    },
+    {
+      "id": "CAPG8-066",
+      "requirement": "identity does not alter evidence"
+    },
+    {
+      "id": "CAPG8-067",
+      "requirement": "MODEL_V2_NOT_PROMOTED_RELEASE_CI preserved"
+    },
+    {
+      "id": "CAPG8-068",
+      "requirement": "promotion_eligible false preserved"
+    },
+    {
+      "id": "CAPG8-069",
+      "requirement": "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED preserved"
+    },
+    {
+      "id": "CAPG8-070",
+      "requirement": "historical promotion and later release explicitly separated"
+    },
+    {
+      "id": "CAPG8-071",
+      "requirement": "MODEL_V2_FINAL current released default correctly shown"
+    },
+    {
+      "id": "CAPG8-072",
+      "requirement": "MODEL_V2_FINAL not described as federated checkpoint"
+    },
+    {
+      "id": "CAPG8-073",
+      "requirement": "CAL_V2 source-domain caveat visible"
+    },
+    {
+      "id": "CAPG8-074",
+      "requirement": "V2-010 second-look role visible"
+    },
+    {
+      "id": "CAPG8-075",
+      "requirement": "internal-test six-group limitation visible"
+    },
+    {
+      "id": "CAPG8-076",
+      "requirement": "no physical wearable validation claim"
+    },
+    {
+      "id": "CAPG8-077",
+      "requirement": "V2-FL-001 scientific evidence present"
+    },
+    {
+      "id": "CAPG8-078",
+      "requirement": "V2-FL-002 scientific evidence present"
+    },
+    {
+      "id": "CAPG8-079",
+      "requirement": "V2-FL-003 scientific evidence present"
+    },
+    {
+      "id": "CAPG8-080",
+      "requirement": "V2-FL-EVAL-001 scientific evidence present"
+    },
+    {
+      "id": "CAPG8-081",
+      "requirement": "V2-FL-004 scientific evidence present"
+    },
+    {
+      "id": "CAPG8-082",
+      "requirement": "V2-FL-005 excluded from scientific efficacy metrics"
+    },
+    {
+      "id": "CAPG8-083",
+      "requirement": "V2-FL-005 labelled engineering demo if referenced"
+    },
+    {
+      "id": "CAPG8-084",
+      "requirement": "FedProx mixed/no-general-promotion conclusion preserved"
+    },
+    {
+      "id": "CAPG8-085",
+      "requirement": "SecAgg supported claim exact"
+    },
+    {
+      "id": "CAPG8-086",
+      "requirement": "no DP claim"
+    },
+    {
+      "id": "CAPG8-087",
+      "requirement": "no anonymity claim"
+    },
+    {
+      "id": "CAPG8-088",
+      "requirement": "no hospital claim"
+    },
+    {
+      "id": "CAPG8-089",
+      "requirement": "SecAgg overhead accounting boundary exact"
+    },
+    {
+      "id": "CAPG8-090",
+      "requirement": "CAPSTONE_UI_V1_1 preserved"
+    },
+    {
+      "id": "CAPG8-091",
+      "requirement": "CAPSTONE_UI_V1_2 successor frozen"
+    },
+    {
+      "id": "CAPG8-092",
+      "requirement": "no unaccounted frontend drift"
+    },
+    {
+      "id": "CAPG8-093",
+      "requirement": "/app/history real"
+    },
+    {
+      "id": "CAPG8-094",
+      "requirement": "/app/history/[session_id] real"
+    },
+    {
+      "id": "CAPG8-095",
+      "requirement": "/app/research/ml real"
+    },
+    {
+      "id": "CAPG8-096",
+      "requirement": "/app/research/fl real"
+    },
+    {
+      "id": "CAPG8-097",
+      "requirement": "session summary UI basis labels correct"
+    },
+    {
+      "id": "CAPG8-098",
+      "requirement": "timeline time-domain disclosure visible"
+    },
+    {
+      "id": "CAPG8-099",
+      "requirement": "probability labelled research technical metadata"
+    },
+    {
+      "id": "CAPG8-100",
+      "requirement": "waveform preview real persisted preview"
+    },
+    {
+      "id": "CAPG8-101",
+      "requirement": "canonical history uses real monitoring flow"
+    },
+    {
+      "id": "CAPG8-102",
+      "requirement": "canonical summary equals DB evidence"
+    },
+    {
+      "id": "CAPG8-103",
+      "requirement": "canonical timeline equals DB evidence"
+    },
+    {
+      "id": "CAPG8-104",
+      "requirement": "history persists after backend restart"
+    },
+    {
+      "id": "CAPG8-105",
+      "requirement": "raw context withholding regression passes"
+    },
+    {
+      "id": "CAPG8-106",
+      "requirement": "cross-user history isolation passes"
+    },
+    {
+      "id": "CAPG8-107",
+      "requirement": "research APIs use real catalog"
+    },
+    {
+      "id": "CAPG8-108",
+      "requirement": "research browser pages use real APIs"
+    },
+    {
+      "id": "CAPG8-109",
+      "requirement": "no hard-coded scientific dynamic metrics in frontend"
+    },
+    {
+      "id": "CAPG8-110",
+      "requirement": "research provenance visible"
+    },
+    {
+      "id": "CAPG8-111",
+      "requirement": "negative findings visible"
+    },
+    {
+      "id": "CAPG8-112",
+      "requirement": "no deploy/promote/model-selector controls"
+    },
+    {
+      "id": "CAPG8-113",
+      "requirement": "no candidate inference"
+    },
+    {
+      "id": "CAPG8-114",
+      "requirement": "no CAPSTONE_FL_SANDBOX_RUNTIME"
+    },
+    {
+      "id": "CAPG8-115",
+      "requirement": "no new FL experiment"
+    },
+    {
+      "id": "CAPG8-116",
+      "requirement": "no candidate metric"
+    },
+    {
+      "id": "CAPG8-117",
+      "requirement": "no session retraining"
+    },
+    {
+      "id": "CAPG8-118",
+      "requirement": "no personalized model"
+    },
+    {
+      "id": "CAPG8-119",
+      "requirement": "no hardware"
+    },
+    {
+      "id": "CAPG8-120",
+      "requirement": "offline DEMO history works"
+    },
+    {
+      "id": "CAPG8-121",
+      "requirement": "offline DEMO research works"
+    },
+    {
+      "id": "CAPG8-122",
+      "requirement": "external network requests zero"
+    },
+    {
+      "id": "CAPG8-123",
+      "requirement": "no new npm dependency"
+    },
+    {
+      "id": "CAPG8-124",
+      "requirement": "responsive checks pass"
+    },
+    {
+      "id": "CAPG8-125",
+      "requirement": "accessibility engineering checks pass"
+    },
+    {
+      "id": "CAPG8-126",
+      "requirement": "mutation controls all caught"
+    },
+    {
+      "id": "CAPG8-127",
+      "requirement": "targeted backend tests pass"
+    },
+    {
+      "id": "CAPG8-128",
+      "requirement": "targeted frontend tests pass"
+    },
+    {
+      "id": "CAPG8-129",
+      "requirement": "real-backend integration passes"
+    },
+    {
+      "id": "CAPG8-130",
+      "requirement": "canonical browser history E2E passes"
+    },
+    {
+      "id": "CAPG8-131",
+      "requirement": "canonical research browser E2E passes"
+    },
+    {
+      "id": "CAPG8-132",
+      "requirement": "CAP-008 regression passes"
+    },
+    {
+      "id": "CAPG8-133",
+      "requirement": "monitoring regression passes"
+    },
+    {
+      "id": "CAPG8-134",
+      "requirement": "prior capstone tests pass subject only to inherited documented flake policy"
+    },
+    {
+      "id": "CAPG8-135",
+      "requirement": "full Python regression passes subject only to inherited documented flake policy"
+    },
+    {
+      "id": "CAPG8-136",
+      "requirement": "npm test passes"
+    },
+    {
+      "id": "CAPG8-137",
+      "requirement": "svelte-check zero errors"
+    },
+    {
+      "id": "CAPG8-138",
+      "requirement": "frontend build passes"
+    },
+    {
+      "id": "CAPG8-139",
+      "requirement": "ruff passes"
+    },
+    {
+      "id": "CAPG8-140",
+      "requirement": "pip check passes"
+    },
+    {
+      "id": "CAPG8-141",
+      "requirement": "CI not queried"
+    },
+    {
+      "id": "CAPG8-142",
+      "requirement": "CI not triggered"
+    },
+    {
+      "id": "CAPG8-143",
+      "requirement": "CAP-009 PASS"
+    },
+    {
+      "id": "CAPG8-144",
+      "requirement": "CAPG8 PASS"
+    },
+    {
+      "id": "CAPG8-145",
+      "requirement": "CAP-010 NOT_STARTED"
+    }
+  ]
+}

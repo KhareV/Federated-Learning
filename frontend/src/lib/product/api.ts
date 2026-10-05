@@ -27,6 +27,8 @@ import {
 	type ReleasedModelRef,
 	type RunType
 } from './federation/types';
+import { parseSessionSummary, parseSessionTimeline, type SessionSummary, type SessionTimeline } from './history/types';
+import { parseFlResearchEvidence, parseMlResearchEvidence, type FlResearchEvidence, type MlResearchEvidence } from './research/types';
 
 export const PRODUCT_BASE = '/product/v1';
 
@@ -92,6 +94,10 @@ export interface ProductClient {
 	createSession(deviceId: string, scenarioId: ScenarioId): Promise<MonitoringSession>;
 	sessions(): Promise<MonitoringSession[]>;
 	session(sessionId: string): Promise<MonitoringSession>;
+	sessionSummary(sessionId: string): Promise<SessionSummary>;
+	sessionTimeline(sessionId: string): Promise<SessionTimeline>;
+	researchMl(): Promise<MlResearchEvidence>;
+	researchFl(): Promise<FlResearchEvidence>;
 	startSession(sessionId: string): Promise<MonitoringSession>;
 	stopSession(sessionId: string): Promise<MonitoringSession>;
 	// CAPSTONE_FEDERATION_PRODUCT_CLIENT_V1 (CAP-008): CAP-007 routes only
@@ -179,6 +185,10 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 			call('POST', '/sessions', { device_id: deviceId, scenario_id: scenarioId }),
 		sessions: () => call('GET', '/sessions'),
 		session: (id) => call('GET', `/sessions/${enc(id)}`),
+		sessionSummary: async (id) => parseSessionSummary(await call<unknown>('GET', `/sessions/${enc(id)}/summary`)),
+		sessionTimeline: async (id) => parseSessionTimeline(await call<unknown>('GET', `/sessions/${enc(id)}/timeline`)),
+		researchMl: async () => parseMlResearchEvidence(await call<unknown>('GET', '/research/ml')),
+		researchFl: async () => parseFlResearchEvidence(await call<unknown>('GET', '/research/fl')),
 		startSession: (id) => call('POST', `/sessions/${enc(id)}/start`),
 		stopSession: (id) => call('POST', `/sessions/${enc(id)}/stop`),
 		federationOverview: () => call('GET', '/federation'),

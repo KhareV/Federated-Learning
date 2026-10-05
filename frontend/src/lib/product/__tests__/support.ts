@@ -130,6 +130,12 @@ export function fakeBackend(system: SystemInfoV2 = systemInfo({ federation_runti
 		federationRounds: () => rec('federationRounds', roundsFixture()),
 		models: () => rec('models', fed.registry),
 		model: (id) => rec('model', fed.registry.released_scientific.find((m) => m.model_id === id) ?? candidateFixture()),
+		// Unit-test backend intentionally has no CAP-009 evidence fixture. Canonical evidence
+		// flows use the real V1_3 backend; accidental fake-history use must fail visibly.
+		sessionSummary: () => Promise.reject(new Error('NO_FAKE_HISTORY_EVIDENCE')),
+		sessionTimeline: () => Promise.reject(new Error('NO_FAKE_HISTORY_EVIDENCE')),
+		researchMl: () => Promise.reject(new Error('NO_FAKE_RESEARCH_EVIDENCE')),
+		researchFl: () => Promise.reject(new Error('NO_FAKE_RESEARCH_EVIDENCE')),
 		setState: (state) => (dev = device(state)),
 		system: () => rec('system', system),
 		me: () => rec('me', DEMO_IDENTITY),

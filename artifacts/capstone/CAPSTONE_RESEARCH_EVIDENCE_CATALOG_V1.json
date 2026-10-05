@@ -1,0 +1,779 @@
+{
+  "catalog_id": "CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1",
+  "claim_boundary": "READ_ONLY_NON_DIAGNOSTIC_RESEARCH_EVIDENCE",
+  "evidence_version": "FROZEN_SUMMARY_PROJECTION_V1",
+  "fl_facts": [
+    {
+      "fact_id": "heldout_threshold_rule",
+      "interpretation": "Direct frozen summary value; role ONE_SHOT_HELD_OUT_EVALUATION_RULE.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "ONE_SHOT_HELD_OUT_EVALUATION_RULE",
+      "source_locator": [
+        "line",
+        16
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/final_handoff.md",
+      "source_sha256": "51ec142692f2775c5b57a1657dc33abcbb6c8c135ad4d122dde6d42b57f52cb1",
+      "unit": null,
+      "value": "Raw `sigmoid(raw_logit)`, threshold 0.5 (`>=`, `FL_EVAL_RAW_THRESHOLD_0P5_V1`), PER_WINDOW_ZSCORE_V1 → float32 [1,2500]; **no CAL_V1/CAL_V2/temperature/threshold fitting; CALIBRATION not accessed**. Patient-cluster bootstrap B=2000, seed 20260927, PCG64, multiplicity preserved (6 slots/replicate INTERNAL_TEST; 32 INCART), no redraw, shared draws for every model and paired contrast; draws reproduce the frozen T018/T020 npz exactly; nominal 95% percentile CIs, no p-values, no multiplicity adjustment. One orchestration command, one guarded invocation per dataset (guards COMPLETED; a second begin raises `ALREADY_CONSUMED`; historical guards untouched)."
+    },
+    {
+      "fact_id": "iid_best_round",
+      "interpretation": "Direct frozen summary value; role VALIDATION_SELECTION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-001",
+      "role": "VALIDATION_SELECTION",
+      "source_locator": [
+        "best_round"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_001/fl_iid_model_v2_result.json",
+      "source_sha256": "33004eccf78507a31c5870e622512f69493d03b4e14ee0dbed8013af5076e5a4",
+      "unit": "ROUND",
+      "value": 38
+    },
+    {
+      "fact_id": "iid_best_auprc",
+      "interpretation": "Direct frozen summary value; role VALIDATION_SELECTION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-001",
+      "role": "VALIDATION_SELECTION",
+      "source_locator": [
+        "best_validation",
+        "AUPRC"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_001/fl_iid_model_v2_result.json",
+      "source_sha256": "33004eccf78507a31c5870e622512f69493d03b4e14ee0dbed8013af5076e5a4",
+      "unit": "AUPRC",
+      "value": 0.8669476403992936
+    },
+    {
+      "fact_id": "iid_initial_auprc",
+      "interpretation": "Direct frozen summary value; role VALIDATION_SELECTION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-001",
+      "role": "VALIDATION_SELECTION",
+      "source_locator": [
+        "round_0_validation",
+        "AUPRC"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_001/fl_iid_model_v2_result.json",
+      "source_sha256": "33004eccf78507a31c5870e622512f69493d03b4e14ee0dbed8013af5076e5a4",
+      "unit": "AUPRC",
+      "value": 0.25769234928353735
+    },
+    {
+      "fact_id": "iid_v2_minus_v1_auprc",
+      "interpretation": "Direct frozen summary value; role PAIRED_RESEARCH_COMPARISON.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-001",
+      "role": "PAIRED_RESEARCH_COMPARISON",
+      "source_locator": [
+        "best_AUPRC",
+        "delta_V2_minus_V1"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_001/v1_vs_v2_iid_comparison.json",
+      "source_sha256": "6ecde676c7d9249e4848af3ab6edb4a05ef5bf00dc35d8e5b525035e3c1e3595",
+      "unit": "AUPRC_DELTA",
+      "value": 0.36072579405513583
+    },
+    {
+      "fact_id": "iid_v2_minus_v1_auprc_ci_lower",
+      "interpretation": "Direct frozen summary value; role PAIRED_RESEARCH_COMPARISON.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-001",
+      "role": "PAIRED_RESEARCH_COMPARISON",
+      "source_locator": [
+        "paired_bootstrap",
+        "ci95",
+        0
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_001/v1_vs_v2_iid_comparison.json",
+      "source_sha256": "6ecde676c7d9249e4848af3ab6edb4a05ef5bf00dc35d8e5b525035e3c1e3595",
+      "unit": "AUPRC_DELTA",
+      "value": 0.1750145605302984
+    },
+    {
+      "fact_id": "iid_v2_minus_v1_auprc_ci_upper",
+      "interpretation": "Direct frozen summary value; role PAIRED_RESEARCH_COMPARISON.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-001",
+      "role": "PAIRED_RESEARCH_COMPARISON",
+      "source_locator": [
+        "paired_bootstrap",
+        "ci95",
+        1
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_001/v1_vs_v2_iid_comparison.json",
+      "source_sha256": "6ecde676c7d9249e4848af3ab6edb4a05ef5bf00dc35d8e5b525035e3c1e3595",
+      "unit": "AUPRC_DELTA",
+      "value": 0.4563441637280621
+    },
+    {
+      "fact_id": "iid_best_auprc",
+      "interpretation": "Direct frozen summary value; role SYNTHETIC_PARTITION_VALIDATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-002",
+      "role": "SYNTHETIC_PARTITION_VALIDATION",
+      "source_locator": [
+        "conditions",
+        "IID",
+        "best_AUPRC"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_002/results_table.json",
+      "source_sha256": "eb778ef499d7f707766e475d8dcadb3d8dfc28f1ab3c394cbbc8ff4a0da2b3c1",
+      "unit": "AUPRC",
+      "value": 0.8669476403992936
+    },
+    {
+      "fact_id": "label_best_auprc",
+      "interpretation": "Direct frozen summary value; role SYNTHETIC_PARTITION_VALIDATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-002",
+      "role": "SYNTHETIC_PARTITION_VALIDATION",
+      "source_locator": [
+        "conditions",
+        "label",
+        "best_AUPRC"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_002/results_table.json",
+      "source_sha256": "eb778ef499d7f707766e475d8dcadb3d8dfc28f1ab3c394cbbc8ff4a0da2b3c1",
+      "unit": "AUPRC",
+      "value": 0.8066305693453126
+    },
+    {
+      "fact_id": "quantity_best_auprc",
+      "interpretation": "Direct frozen summary value; role SYNTHETIC_PARTITION_VALIDATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-002",
+      "role": "SYNTHETIC_PARTITION_VALIDATION",
+      "source_locator": [
+        "conditions",
+        "quantity",
+        "best_AUPRC"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_002/results_table.json",
+      "source_sha256": "eb778ef499d7f707766e475d8dcadb3d8dfc28f1ab3c394cbbc8ff4a0da2b3c1",
+      "unit": "AUPRC",
+      "value": 0.8873612543728578
+    },
+    {
+      "fact_id": "feature_best_auprc",
+      "interpretation": "Direct frozen summary value; role SYNTHETIC_PARTITION_VALIDATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-002",
+      "role": "SYNTHETIC_PARTITION_VALIDATION",
+      "source_locator": [
+        "conditions",
+        "feature",
+        "best_AUPRC"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_002/results_table.json",
+      "source_sha256": "eb778ef499d7f707766e475d8dcadb3d8dfc28f1ab3c394cbbc8ff4a0da2b3c1",
+      "unit": "AUPRC",
+      "value": 0.8501518854463859
+    },
+    {
+      "fact_id": "combined_best_auprc",
+      "interpretation": "Direct frozen summary value; role SYNTHETIC_PARTITION_VALIDATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-002",
+      "role": "SYNTHETIC_PARTITION_VALIDATION",
+      "source_locator": [
+        "conditions",
+        "combined",
+        "best_AUPRC"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_002/results_table.json",
+      "source_sha256": "eb778ef499d7f707766e475d8dcadb3d8dfc28f1ab3c394cbbc8ff4a0da2b3c1",
+      "unit": "AUPRC",
+      "value": 0.8202489560000589
+    },
+    {
+      "fact_id": "fedprox_mu",
+      "interpretation": "Direct frozen summary value; role SELECTED_CONFIGURATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-003",
+      "role": "SELECTED_CONFIGURATION",
+      "source_locator": [
+        "lock_selected_mu"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_003/selection_audit.json",
+      "source_sha256": "76366787f79e0b6293f963315f5cca2c0d66e124ca80ff9ad6ba9cbe68308d68",
+      "unit": null,
+      "value": 0.1
+    },
+    {
+      "fact_id": "fedprox_no_general_win",
+      "interpretation": "Direct frozen summary value; role MIXED_TRANSFER.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-003",
+      "role": "MIXED_TRANSFER",
+      "source_locator": [
+        "no_claim_that_fedprox_wins"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_003/fedavg_vs_fedprox_comparison.json",
+      "source_sha256": "8b0b2181ac874500c13cd36c6e2ecb544865f87d61a8729e9a942e4a7f73ffad",
+      "unit": null,
+      "value": true
+    },
+    {
+      "fact_id": "internal_claim_label",
+      "interpretation": "Direct frozen summary value; role ONE_SHOT_HELD_OUT.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "ONE_SHOT_HELD_OUT",
+      "source_locator": [
+        "claim_label"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json",
+      "source_sha256": "b5364f1a84e9f981f1f07572838fe06f67e1e8396923ca0d81d506f5a8206d7d",
+      "unit": null,
+      "value": "FL-LINEAGE HELD-OUT (not project-globally unseen)"
+    },
+    {
+      "fact_id": "internal_groups",
+      "interpretation": "Direct frozen summary value; role ONE_SHOT_HELD_OUT.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "ONE_SHOT_HELD_OUT",
+      "source_locator": [
+        "clusters"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json",
+      "source_sha256": "b5364f1a84e9f981f1f07572838fe06f67e1e8396923ca0d81d506f5a8206d7d",
+      "unit": "PATIENT_GROUPS",
+      "value": 6
+    },
+    {
+      "fact_id": "internal_iid_auprc",
+      "interpretation": "Direct frozen summary value; role ONE_SHOT_HELD_OUT.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "ONE_SHOT_HELD_OUT",
+      "source_locator": [
+        "models",
+        "V2_FEDAVG_IID",
+        "bootstrap_95",
+        "AUPRC",
+        "point_estimate"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json",
+      "source_sha256": "b5364f1a84e9f981f1f07572838fe06f67e1e8396923ca0d81d506f5a8206d7d",
+      "unit": "AUPRC",
+      "value": 0.9989312905254022
+    },
+    {
+      "fact_id": "internal_iid_auprc_ci_lower",
+      "interpretation": "Direct frozen summary value; role ONE_SHOT_HELD_OUT.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "ONE_SHOT_HELD_OUT",
+      "source_locator": [
+        "models",
+        "V2_FEDAVG_IID",
+        "bootstrap_95",
+        "AUPRC",
+        "ci_lower_95"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json",
+      "source_sha256": "b5364f1a84e9f981f1f07572838fe06f67e1e8396923ca0d81d506f5a8206d7d",
+      "unit": "AUPRC",
+      "value": 0.9961825883847816
+    },
+    {
+      "fact_id": "internal_iid_auprc_ci_upper",
+      "interpretation": "Direct frozen summary value; role ONE_SHOT_HELD_OUT.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "ONE_SHOT_HELD_OUT",
+      "source_locator": [
+        "models",
+        "V2_FEDAVG_IID",
+        "bootstrap_95",
+        "AUPRC",
+        "ci_upper_95"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json",
+      "source_sha256": "b5364f1a84e9f981f1f07572838fe06f67e1e8396923ca0d81d506f5a8206d7d",
+      "unit": "AUPRC",
+      "value": 0.9999514139968478
+    },
+    {
+      "fact_id": "incart_claim_label",
+      "interpretation": "Direct frozen summary value; role POST_FREEZE_SECOND_LOOK.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "POST_FREEZE_SECOND_LOOK",
+      "source_locator": [
+        "claim_label"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/incart_statistics.json",
+      "source_sha256": "cb181f645900770e5e1ca70c9a9248b342e95527430f0abaf2e1bf350eec6264",
+      "unit": null,
+      "value": "POST-FREEZE EXTERNAL FL SECOND-LOOK -- NOT PROJECT-BLIND"
+    },
+    {
+      "fact_id": "incart_iid_auprc",
+      "interpretation": "Direct frozen summary value; role POST_FREEZE_SECOND_LOOK.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "POST_FREEZE_SECOND_LOOK",
+      "source_locator": [
+        "models",
+        "V2_FEDAVG_IID",
+        "bootstrap_95",
+        "AUPRC",
+        "point_estimate"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/incart_statistics.json",
+      "source_sha256": "cb181f645900770e5e1ca70c9a9248b342e95527430f0abaf2e1bf350eec6264",
+      "unit": "AUPRC",
+      "value": 0.9766042635693575
+    },
+    {
+      "fact_id": "incart_iid_auprc_ci_lower",
+      "interpretation": "Direct frozen summary value; role POST_FREEZE_SECOND_LOOK.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "POST_FREEZE_SECOND_LOOK",
+      "source_locator": [
+        "models",
+        "V2_FEDAVG_IID",
+        "bootstrap_95",
+        "AUPRC",
+        "ci_lower_95"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/incart_statistics.json",
+      "source_sha256": "cb181f645900770e5e1ca70c9a9248b342e95527430f0abaf2e1bf350eec6264",
+      "unit": "AUPRC",
+      "value": 0.9437761642879596
+    },
+    {
+      "fact_id": "incart_iid_auprc_ci_upper",
+      "interpretation": "Direct frozen summary value; role POST_FREEZE_SECOND_LOOK.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-EVAL-001",
+      "role": "POST_FREEZE_SECOND_LOOK",
+      "source_locator": [
+        "models",
+        "V2_FEDAVG_IID",
+        "bootstrap_95",
+        "AUPRC",
+        "ci_upper_95"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_eval_001/incart_statistics.json",
+      "source_sha256": "cb181f645900770e5e1ca70c9a9248b342e95527430f0abaf2e1bf350eec6264",
+      "unit": "AUPRC",
+      "value": 0.993642404149773
+    },
+    {
+      "fact_id": "secagg_max_abs_difference",
+      "interpretation": "Direct frozen summary value; role AGGREGATION_INTERFACE_ONLY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-004",
+      "role": "AGGREGATION_INTERFACE_ONLY",
+      "source_locator": [
+        "MODEL_V2_shaped",
+        "maximum_absolute_difference"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_004/aggregate_correctness.json",
+      "source_sha256": "81cb7ba1e717c3cc48433f5b431271fbbbbe4ddc2f76dec167a0ed98e518086e",
+      "unit": null,
+      "value": 7.180101768447696e-06
+    },
+    {
+      "fact_id": "plain_clear_updates",
+      "interpretation": "Direct frozen summary value; role AGGREGATION_INTERFACE_ONLY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-004",
+      "role": "AGGREGATION_INTERFACE_ONLY",
+      "source_locator": [
+        "plain_clear_update_count"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_004/server_visibility_audit.json",
+      "source_sha256": "900960f6a674426c7c3cea477540e8f865eda37ef542edc31dccfd17c77820fc",
+      "unit": "UPDATES",
+      "value": 8
+    },
+    {
+      "fact_id": "protected_clear_updates",
+      "interpretation": "Direct frozen summary value; role AGGREGATION_INTERFACE_ONLY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-004",
+      "role": "AGGREGATION_INTERFACE_ONLY",
+      "source_locator": [
+        "protected_clear_update_count"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_004/server_visibility_audit.json",
+      "source_sha256": "900960f6a674426c7c3cea477540e8f865eda37ef542edc31dccfd17c77820fc",
+      "unit": "UPDATES",
+      "value": 0
+    },
+    {
+      "fact_id": "masked_vectors_visible",
+      "interpretation": "Direct frozen summary value; role AGGREGATION_INTERFACE_ONLY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-004",
+      "role": "AGGREGATION_INTERFACE_ONLY",
+      "source_locator": [
+        "protected_interface",
+        "masked_vectors_visible"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_004/server_visibility_audit.json",
+      "source_sha256": "900960f6a674426c7c3cea477540e8f865eda37ef542edc31dccfd17c77820fc",
+      "unit": "VECTORS",
+      "value": 8
+    },
+    {
+      "fact_id": "secagg_overhead_boundary",
+      "interpretation": "Direct frozen summary value; role AGGREGATION_PROTOCOL_ONLY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-004",
+      "role": "AGGREGATION_PROTOCOL_ONLY",
+      "source_locator": [
+        "accounting_boundary"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_004/overhead_summary.json",
+      "source_sha256": "face2227a069e76ba4f27d1b2e3b53012b2f8fa73810ee645a78d63f2c899537",
+      "unit": null,
+      "value": "aggregation protocol only; local training excluded"
+    },
+    {
+      "fact_id": "secagg_network_bytes_exact",
+      "interpretation": "Direct frozen summary value; role AGGREGATION_PROTOCOL_ONLY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-004",
+      "role": "AGGREGATION_PROTOCOL_ONLY",
+      "source_locator": [
+        "application_payload_bytes",
+        "exact_network_bytes"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_004/overhead_summary.json",
+      "source_sha256": "face2227a069e76ba4f27d1b2e3b53012b2f8fa73810ee645a78d63f2c899537",
+      "unit": null,
+      "value": false
+    },
+    {
+      "fact_id": "secagg_supported_claim",
+      "interpretation": "Direct frozen summary value; role AGGREGATION_INTERFACE_ONLY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-004",
+      "role": "AGGREGATION_INTERFACE_ONLY",
+      "source_locator": [
+        "supported_claim"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_004/privacy_claim_audit.json",
+      "source_sha256": "c128fe3a81b4dd083b61ed9fa22dda04688e92a342b384274aeaaf6b4fe523a0",
+      "unit": null,
+      "value": "Within the configured Flower SecAgg+ controlled simulation, the protected application-level server aggregation interface does not receive an individual participating client's clear model-update array while forming the aggregate, and the protected aggregate matches the unprotected reference within the predeclared numerical tolerance."
+    },
+    {
+      "fact_id": "secagg_unsupported_claims",
+      "interpretation": "Direct frozen summary value; role AGGREGATION_INTERFACE_ONLY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-FL-004",
+      "role": "AGGREGATION_INTERFACE_ONLY",
+      "source_locator": [
+        "unsupported_claims"
+      ],
+      "source_relative_path": "reports/model_v2/v2_fl_004/privacy_claim_audit.json",
+      "source_sha256": "c128fe3a81b4dd083b61ed9fa22dda04688e92a342b384274aeaaf6b4fe523a0",
+      "unit": null,
+      "value": [
+        "anonymity",
+        "differential privacy",
+        "model-inversion resistance",
+        "membership-inference resistance",
+        "malicious-client resistance",
+        "transport security",
+        "TLS guarantees",
+        "authentication",
+        "authorization",
+        "OS/process isolation",
+        "host isolation",
+        "HIPAA compliance",
+        "hospital privacy",
+        "institution-scale security",
+        "production security certification"
+      ]
+    }
+  ],
+  "generated_from_frozen_sources": true,
+  "ml_facts": [
+    {
+      "fact_id": "promotion_decision",
+      "interpretation": "Direct frozen summary value; role HISTORICAL_MODEL_PROMOTION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-007",
+      "role": "HISTORICAL_MODEL_PROMOTION",
+      "source_locator": [
+        "decision"
+      ],
+      "source_relative_path": "reports/model_v2/v2_007/promotion_decision.json",
+      "source_sha256": "cc2013973752923db9d6477dc9ba7273b661a0b72a5e1ddcc2cdb9892fd2cf29",
+      "unit": null,
+      "value": "MODEL_V2_NOT_PROMOTED_RELEASE_CI"
+    },
+    {
+      "fact_id": "promotion_eligible",
+      "interpretation": "Direct frozen summary value; role HISTORICAL_MODEL_PROMOTION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-007",
+      "role": "HISTORICAL_MODEL_PROMOTION",
+      "source_locator": [
+        "promotion_eligible"
+      ],
+      "source_relative_path": "reports/model_v2/v2_007/promotion_decision.json",
+      "source_sha256": "cc2013973752923db9d6477dc9ba7273b661a0b72a5e1ddcc2cdb9892fd2cf29",
+      "unit": null,
+      "value": false
+    },
+    {
+      "fact_id": "release_ci_lower",
+      "interpretation": "Direct frozen summary value; role HISTORICAL_MODEL_PROMOTION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-007",
+      "role": "HISTORICAL_MODEL_PROMOTION",
+      "source_locator": [
+        "release_ci",
+        "lower"
+      ],
+      "source_relative_path": "reports/model_v2/v2_007/promotion_decision.json",
+      "source_sha256": "cc2013973752923db9d6477dc9ba7273b661a0b72a5e1ddcc2cdb9892fd2cf29",
+      "unit": "AUPRC_DELTA",
+      "value": -0.052370174725249
+    },
+    {
+      "fact_id": "release_ci_upper",
+      "interpretation": "Direct frozen summary value; role HISTORICAL_MODEL_PROMOTION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-007",
+      "role": "HISTORICAL_MODEL_PROMOTION",
+      "source_locator": [
+        "release_ci",
+        "upper"
+      ],
+      "source_relative_path": "reports/model_v2/v2_007/promotion_decision.json",
+      "source_sha256": "cc2013973752923db9d6477dc9ba7273b661a0b72a5e1ddcc2cdb9892fd2cf29",
+      "unit": "AUPRC_DELTA",
+      "value": 0.5310360993345348
+    },
+    {
+      "fact_id": "v1_reference_auprc",
+      "interpretation": "Direct frozen summary value; role HISTORICAL_REFERENCE.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-007",
+      "role": "HISTORICAL_REFERENCE",
+      "source_locator": [
+        "v1_release_seed_auprc"
+      ],
+      "source_relative_path": "reports/model_v2/v2_007/historical_reference_metrics.json",
+      "source_sha256": "404105557630e1ceefa228338fa8269dcbd4b6e99bcc8ea07b68a7c8f305e555",
+      "unit": "AUPRC",
+      "value": 0.5328607838787021
+    },
+    {
+      "fact_id": "model_id",
+      "interpretation": "Direct frozen summary value; role CENTRAL_MODEL_IDENTITY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-008",
+      "role": "CENTRAL_MODEL_IDENTITY",
+      "source_locator": [
+        "model_id"
+      ],
+      "source_relative_path": "reports/model_v2/v2_008/model_v2_final_verification.json",
+      "source_sha256": "9fd6ece1c47e7654e6ff1661f42f34ee508f4ac2184f201484350437d446f670",
+      "unit": null,
+      "value": "MODEL_V2_FINAL"
+    },
+    {
+      "fact_id": "checkpoint_sha256",
+      "interpretation": "Direct frozen summary value; role CENTRAL_MODEL_IDENTITY.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-008",
+      "role": "CENTRAL_MODEL_IDENTITY",
+      "source_locator": [
+        "checkpoint_sha256"
+      ],
+      "source_relative_path": "reports/model_v2/v2_008/model_v2_final_verification.json",
+      "source_sha256": "9fd6ece1c47e7654e6ff1661f42f34ee508f4ac2184f201484350437d446f670",
+      "unit": null,
+      "value": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b"
+    },
+    {
+      "fact_id": "temperature",
+      "interpretation": "Direct frozen summary value; role MIT_BIH_SOURCE_DOMAIN_CALIBRATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-009",
+      "role": "MIT_BIH_SOURCE_DOMAIN_CALIBRATION",
+      "source_locator": [
+        "temperature"
+      ],
+      "source_relative_path": "artifacts/CAL_V2.json",
+      "source_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+      "unit": null,
+      "value": 52.88261929727761
+    },
+    {
+      "fact_id": "threshold",
+      "interpretation": "Direct frozen summary value; role MIT_BIH_SOURCE_DOMAIN_CALIBRATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-009",
+      "role": "MIT_BIH_SOURCE_DOMAIN_CALIBRATION",
+      "source_locator": [
+        "threshold"
+      ],
+      "source_relative_path": "artifacts/CAL_V2.json",
+      "source_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+      "unit": null,
+      "value": 0.5101937262006424
+    },
+    {
+      "fact_id": "calibration_domain",
+      "interpretation": "Direct frozen summary value; role MIT_BIH_SOURCE_DOMAIN_CALIBRATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-009",
+      "role": "MIT_BIH_SOURCE_DOMAIN_CALIBRATION",
+      "source_locator": [
+        "calibration_domain"
+      ],
+      "source_relative_path": "artifacts/CAL_V2.json",
+      "source_sha256": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+      "unit": null,
+      "value": "MIT-BIH-v1.0.0"
+    },
+    {
+      "fact_id": "calibrated_ece",
+      "interpretation": "Direct frozen summary value; role MIT_BIH_SOURCE_DOMAIN_CALIBRATION.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-009",
+      "role": "MIT_BIH_SOURCE_DOMAIN_CALIBRATION",
+      "source_locator": [
+        "calibrated_ece"
+      ],
+      "source_relative_path": "reports/model_v2/v2_009/calibration_metrics.json",
+      "source_sha256": "84af1cd41f80a9428aca4de7fcc51bda5c5b73a6ca04e44f9a4f13291cde431d",
+      "unit": "ECE",
+      "value": 0.1720347716359628
+    },
+    {
+      "fact_id": "runtime_acceptance",
+      "interpretation": "Direct frozen summary value; role POST_FREEZE_RUNTIME.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-010",
+      "role": "POST_FREEZE_RUNTIME",
+      "source_locator": [
+        "MODEL_V2_RUNTIME_ACCEPTED"
+      ],
+      "source_relative_path": "reports/model_v2/v2_010/runtime_acceptance_decision.json",
+      "source_sha256": "edd768c1cfe10424423b6710c06fde20d5b14d26b97d3b54933e12af01c755e1",
+      "unit": null,
+      "value": "ACCEPTED"
+    },
+    {
+      "fact_id": "internal_test_hard_gate",
+      "interpretation": "Direct frozen summary value; role POST_FREEZE_RUNTIME.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-010",
+      "role": "POST_FREEZE_RUNTIME",
+      "source_locator": [
+        "internal_test_participates_in_decision"
+      ],
+      "source_relative_path": "reports/model_v2/v2_010/runtime_acceptance_decision.json",
+      "source_sha256": "edd768c1cfe10424423b6710c06fde20d5b14d26b97d3b54933e12af01c755e1",
+      "unit": null,
+      "value": false
+    },
+    {
+      "fact_id": "internal_test_auprc",
+      "interpretation": "Direct frozen summary value; role POST_FREEZE_SECOND_LOOK.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-010",
+      "role": "POST_FREEZE_SECOND_LOOK",
+      "source_locator": [
+        "v2_point_metrics",
+        "AUPRC"
+      ],
+      "source_relative_path": "reports/model_v2/v2_010/internal_comparison.json",
+      "source_sha256": "a46f493bc33ecc891a834665ee95715c5db503b63f2c352ec33bdaf8ee49b84e",
+      "unit": "AUPRC",
+      "value": 0.9994730838739116
+    },
+    {
+      "fact_id": "incart_auprc",
+      "interpretation": "Direct frozen summary value; role POST_FREEZE_EXTERNAL_DOMAIN.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-010",
+      "role": "POST_FREEZE_EXTERNAL_DOMAIN",
+      "source_locator": [
+        "v2_point_metrics",
+        "AUPRC"
+      ],
+      "source_relative_path": "reports/model_v2/v2_010/incart_comparison.json",
+      "source_sha256": "cacca7173a6109c76b594378c09c71605f4786574338886ecca1d4e34a380aa3",
+      "unit": "AUPRC",
+      "value": 0.970004055260483
+    },
+    {
+      "fact_id": "operational_default",
+      "interpretation": "Direct frozen summary value; role LATER_SOFTWARE_RELEASE.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-REL-001",
+      "role": "LATER_SOFTWARE_RELEASE",
+      "source_locator": [
+        "operational_default"
+      ],
+      "source_relative_path": "reports/model_v2/v2_rel_001/system_v2_release_manifest.json",
+      "source_sha256": "97de2601701e9f869d6742b74cbb5dc935a621e6c4c59f5e9c52d8ff6ff4a445",
+      "unit": null,
+      "value": "SOFTWARE_SYSTEM_V2 (MODEL_V2_FINAL)"
+    },
+    {
+      "fact_id": "known_limitations",
+      "interpretation": "Direct frozen summary value; role LATER_SOFTWARE_RELEASE.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-REL-001",
+      "role": "LATER_SOFTWARE_RELEASE",
+      "source_locator": [
+        "known_limitations"
+      ],
+      "source_relative_path": "reports/model_v2/v2_rel_001/system_v2_release_manifest.json",
+      "source_sha256": "97de2601701e9f869d6742b74cbb5dc935a621e6c4c59f5e9c52d8ff6ff4a445",
+      "unit": null,
+      "value": [
+        "MODEL_V2_NOT_PROMOTED_RELEASE_CI remains true: the release-seed paired VALIDATION CI lower bound crossed zero; permanent historical negative finding, not rewritten",
+        "INTERNAL_TEST has only six eligible contributing patient groups",
+        "V2-010 INTERNAL_TEST/INCART/NSTDB evidence is post-freeze second-look evidence, not untouched validation",
+        "INCART FL evaluation is project-exposed external second-look evidence",
+        "QUALITY_V1 does not reliably hard-fail a raw stuck-nonzero ECG source because of the frozen preprocessing composition (not repaired here)",
+        "CAL_V2 is MIT-BIH source-domain calibration only",
+        "No physical wearable validation exists",
+        "SecAgg evidence is a narrow protected-aggregation-interface result, not a complete privacy guarantee",
+        "CLEAN_CLONE_GATING_V1 excluded raw-data-dependent tests from the clean-software claim when their untracked inputs were absent"
+      ]
+    },
+    {
+      "fact_id": "system_release_accepted",
+      "interpretation": "Direct frozen summary value; role LATER_SOFTWARE_RELEASE.",
+      "limitations": "Research/engineering evidence only; not diagnostic or clinical efficacy.",
+      "phase": "V2-REL-001",
+      "role": "LATER_SOFTWARE_RELEASE",
+      "source_locator": [
+        "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED"
+      ],
+      "source_relative_path": "reports/model_v2/v2_rel_001/system_v2_release_decision.json",
+      "source_sha256": "69a7bcdc43670c52dcdbb9e3e4a9795ebb79366081850a7325abee00e0ce9185",
+      "unit": null,
+      "value": true
+    }
+  ],
+  "scientific_fl_phases": [
+    "V2-FL-001",
+    "V2-FL-002",
+    "V2-FL-003",
+    "V2-FL-EVAL-001",
+    "V2-FL-004"
+  ],
+  "v2_fl_005_role": "FL_ENGINEERING_DEMO_NOT_SCIENTIFIC_EFFICACY"
+}
