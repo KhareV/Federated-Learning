@@ -1,0 +1,17 @@
+{
+ "amendment_id": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1_AMENDMENT_4",
+ "change": "verify_cap001_lock() in scripts/cap_002_protected_audit.py now applies CAPSTONE_PRODUCT_PROTOCOL_V1 amendments (per-path old->new sha chain, broken links reported). Nothing else in the script changes.",
+ "decided_by": "the user (AskUserQuestion): retire via recorded amendments (recommended)",
+ "defect": "The CAP-001 lock verifier had no amendment mechanism; amending a CAP-001-bound file (CAPSTONE_PRODUCT_PROTOCOL_V1 amendment 1, user-approved) would have made the CAP-001 lock fail verification.",
+ "files": {
+  "scripts/cap_002_protected_audit.py": {
+   "new_sha256": "754a4bb208c550bc2b117001b51950bf047c3a921f54611e0988d0357a556d78",
+   "old_sha256": "7131c235c58b5cb33da197783f27900348a2dc9caacd2fd6e8af6a3b95147efe"
+  }
+ },
+ "made_during": "CAP-005 (after its method freeze 5cf83da, before the recorded CAPG4 evaluation)",
+ "unchanged": {
+  "cap002_components_and_implementation": "byte-identical",
+  "cap002_criteria": "identical"
+ }
+}

@@ -72,10 +72,17 @@ def test_freeze_lock_binds_every_listed_file_byte_for_byte() -> None:
     lock = json.loads(LOCK.read_text())
     assert lock["status"] == "FROZEN_PRE_IMPLEMENTATION_PROTOCOL"
     assert lock["mutable_future_implementation_files_bound"] is False
+    expected = {entry["path"]: entry["sha256"] for entry in lock["components"].values()}
+    expected.update({**lock["bound_files"], **lock["upstream_frozen_identity"]})
+    # CAPSTONE_PRODUCT_PROTOCOL_V1 amendments (CAP-005: the frontend-freeze guard test was retired)
+    for amendment in sorted((ROOT / "artifacts/capstone").glob(
+            "CAPSTONE_PRODUCT_PROTOCOL_V1.amendment_*.json")):
+        for path, change in json.loads(amendment.read_text())["files"].items():
+            assert expected[path] == change["old_sha256"]  # supersedes exactly the previous hash
+            expected[path] = change["new_sha256"]
     for cid, entry in lock["components"].items():
         assert entry["status"] == EXPECTED_COMPONENTS[cid]
-        assert hash_file(ROOT / entry["path"]) == entry["sha256"], cid
-    for path, digest in {**lock["bound_files"], **lock["upstream_frozen_identity"]}.items():
+    for path, digest in expected.items():
         assert hash_file(ROOT / path) == digest, path
     registry = lock["component_registry"]
     assert hash_file(ROOT / registry["path"]) == registry["sha256"]

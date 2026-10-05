@@ -37,18 +37,41 @@ def _git(*args: str) -> str:
                           text=True).stdout.strip()
 
 
+def _cap001_amendments() -> tuple[dict[str, list[dict]], list[dict]]:
+    """CAPSTONE_PRODUCT_PROTOCOL_V1 amendments (old -> new sha chain per path), oldest first."""
+    per_path: dict[str, list[dict]] = {}
+    chain: list[dict] = []
+    for amendment in sorted((ROOT / "artifacts/capstone").glob(
+            "CAPSTONE_PRODUCT_PROTOCOL_V1.amendment_*.json")):
+        for path, change in json.loads(amendment.read_text())["files"].items():
+            per_path.setdefault(path, []).append(change)
+            chain.append({"amendment": amendment.name, "path": path})
+    return per_path, chain
+
+
 def verify_cap001_lock() -> dict:
     lock = json.loads(CAP001_LOCK.read_text())
-    mismatches = []
+    per_path, chain = _cap001_amendments()
+    mismatches: list[str] = []
+    broken: list[dict] = []
     checked = 0
+
+    def current_expected(path: str, digest: str) -> str:
+        for change in per_path.get(path, []):
+            if change["old_sha256"] != digest:
+                broken.append({"path": path, "expected_old": digest,
+                               "amendment_old": change["old_sha256"]})
+            digest = change["new_sha256"]
+        return digest
+
     for cid, entry in lock["components"].items():
         checked += 1
-        if hash_file(ROOT / entry["path"]) != entry["sha256"]:
+        if hash_file(ROOT / entry["path"]) != current_expected(entry["path"], entry["sha256"]):
             mismatches.append(cid)
     for group in ("bound_files", "upstream_frozen_identity"):
         for path, digest in lock[group].items():
             checked += 1
-            if hash_file(ROOT / path) != digest:
+            if hash_file(ROOT / path) != current_expected(path, digest):
                 mismatches.append(path)
     registry = lock["component_registry"]
     checked += 1
@@ -56,7 +79,8 @@ def verify_cap001_lock() -> dict:
         mismatches.append(registry["path"])
     return {"lock": str(CAP001_LOCK.relative_to(ROOT)), "lock_sha256": hash_file(CAP001_LOCK),
             "status": lock["status"], "entries_checked": checked, "mismatches": mismatches,
-            "verified": not mismatches}
+            "amendment_chain": chain, "broken_chain_links": broken,
+            "verified": not mismatches and not broken}
 
 
 def snapshot() -> dict:

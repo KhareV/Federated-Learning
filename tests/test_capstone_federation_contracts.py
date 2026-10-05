@@ -530,15 +530,32 @@ def test_released_runtime_source_has_no_public_model_selector_and_no_capstone_de
 
 
 def test_existing_sveltekit_frontend_is_unchanged_and_the_only_frontend() -> None:
+    """CAP-001..CAP-004 froze the frontend byte-for-byte. CAP-005 (CAPSTONE_UI_V1) became the
+    frontend owner, so this guard now reads: every baseline frontend file is either UNCHANGED or
+    accounted for (and byte-verified) by the CAPSTONE_UI_V1 lock; frontend/package.json and
+    package-lock.json stay untouched (the frozen V2-014 lock binds them); the SvelteKit app is still
+    the only frontend. Recorded as CAPSTONE_PRODUCT_PROTOCOL_V1 amendment 1."""
     entry = json.loads(
         (ROOT / "reports/capstone/cap_001/upstream_protection_entry.json").read_text())
     frontend = {p: h for p, h in entry["tracked_files_sha256"].items() if p.startswith("frontend/")}
     assert frontend and "frontend/package.json" in frontend
+    ui_lock = ROOT / "artifacts/capstone/CAPSTONE_UI_V1.lock.json"
+    accounted: set[str] = set()
+    if ui_lock.exists():
+        from scripts.verify_capstone_ui_v1 import verify as verify_capstone_ui
+
+        assert verify_capstone_ui()["status"] == "PASS"
+        accounted = set(json.loads(ui_lock.read_text())["bound_artifacts"])
     for path, digest in frontend.items():
-        assert hash_file(ROOT / path) == digest, path
+        if hash_file(ROOT / path) != digest:
+            assert path in accounted, f"{path} changed without CAPSTONE_UI_V1 accounting"
+    for path in ("frontend/package.json", "frontend/package-lock.json"):
+        assert hash_file(ROOT / path) == frontend[path], path
     tracked = subprocess.run(["git", "ls-files"], cwd=ROOT, check=True, capture_output=True,
                              text=True).stdout.split()
-    assert [p for p in tracked if p.endswith("package.json")] == ["frontend/package.json"]
+    manifests = [p for p in tracked if p.endswith("package.json")]
+    assert manifests in (["frontend/package.json"],
+                         ["frontend/clerk-sdk/package.json", "frontend/package.json"])
     package = json.loads((ROOT / "frontend/package.json").read_text())
     deps = {**package.get("dependencies", {}), **package.get("devDependencies", {})}
     assert "@sveltejs/kit" in deps and "svelte" in deps

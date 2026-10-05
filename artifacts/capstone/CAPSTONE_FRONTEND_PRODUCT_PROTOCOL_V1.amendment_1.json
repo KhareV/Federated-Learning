@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_1",
+ "change": "The CAP-005 protected audit's allow-list of modifiable existing non-frontend files now includes tests/test_capstone_federation_contracts.py and scripts/cap_002_protected_audit.py (the two files amended by CAPSTONE_PRODUCT_PROTOCOL_V1 amendment 1 and CAPSTONE_DEVICE_EDGE_PROTOCOL_V1 amendment 4), and amendment_chains_verified also covers the CAP-001 chain.",
+ "decided_by": "the user (AskUserQuestion): retire via recorded amendments (recommended)",
+ "defect": "The frozen audit did not anticipate that retiring the CAP-001 frontend-freeze guard test (user-approved after the first full CAP-005 regression showed exactly that one failure) requires amending those two frozen files.",
+ "files": {
+  "scripts/cap_005_protected_audit.py": {
+   "new_sha256": "b8927256505fea536b409b91fb432908b7666d356f3aa50dfd6ebe31c2d50901",
+   "old_sha256": "f8e9d3f9ced700bd0a99e58d8774beec58d91f432277ccc8f00eff40dae5ee35"
+  }
+ },
+ "freeze_commit": "5cf83da",
+ "made_before": "the recorded CAPG4 criteria evaluation",
+ "unchanged": {
+  "canonical_runs_and_frontend": "byte-identical to the freeze commit (the canonical runs executed on the frozen frontend)",
+  "capg4_criteria_text": "identical"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_PRODUCT_PROTOCOL_V1_AMENDMENT_1",
+ "change": "tests/test_capstone_federation_contracts.py::test_existing_sveltekit_frontend_is_unchanged_and_the_only_frontend now asserts that every baseline frontend file is either unchanged or accounted for and byte-verified by the CAPSTONE_UI_V1 lock (CAP-005), that frontend/package.json and package-lock.json are untouched, and that the allowed package.json set is frontend/package.json (+ the additive frontend/clerk-sdk/package.json). The rest of the CAP-001 test file is unchanged.",
+ "decided_by": "the user (AskUserQuestion): retire via recorded amendments (recommended)",
+ "defect": "The frozen CAP-001 guard pinned every entry-time frontend file byte-for-byte and required frontend/package.json to be the only package.json. That was correct for CAP-001..CAP-004, but CAP-005 is the explicit frontend owner (its prompt: 'frontend is now legitimately mutable'); the guard made any frontend change impossible. The full regression had exactly this one failure.",
+ "files": {
+  "tests/test_capstone_federation_contracts.py": {
+   "new_sha256": "86a37f3cd1384bf6e0b1c3e3f0013354228227add8dd8f56c16c5a11737e549e",
+   "old_sha256": "2e589e392775c264fb06b6a350db1fb9ddd8ce55c94c36ee49ada6b1692f0933"
+  }
+ },
+ "made_during": "CAP-005 (after its method freeze 5cf83da, before the recorded CAPG4 evaluation)",
+ "unchanged": {
+  "cap001_contracts_and_components": "byte-identical",
+  "cap001_lock_file": "byte-identical",
+  "verification": "scripts/cap_002_protected_audit.verify_cap001_lock now applies CAP-001 amendments (see CAP-002 amendment 4)"
+ }
+}

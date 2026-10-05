@@ -33,6 +33,8 @@ MODIFIABLE = (
     "tests/test_capstone_lifecycle.py",
     # DASHBOARD_UI_V1_5 supersession (same mechanism as V1_1..V1_5): predecessor-lock tests
     "tests/test_t035_lock_versioning.py", "tests/test_v2_rel_001_results.py",
+    # CAPSTONE_PRODUCT_PROTOCOL_V1 amendment 1 / CAPSTONE_DEVICE_EDGE_PROTOCOL_V1 amendment 4
+    "tests/test_capstone_federation_contracts.py", "scripts/cap_002_protected_audit.py",
 )
 
 
@@ -133,7 +135,7 @@ def final() -> int:
         "cap003_lock_verified": locks["cap003"]["verified"],
         "cap004_lock_verified": locks["cap004"]["verified"],
         "amendment_chains_verified": not any(
-            locks[k].get("broken_chain_links") for k in ("cap002", "cap003", "cap004")),
+            locks[k].get("broken_chain_links") for k in ("cap001", "cap002", "cap003", "cap004")),
         "protected_artifact_drift": bool(
             illegal or removed or non_additive or comp_drift
             or not all(v["verified"] for v in locks.values())),
