@@ -1,6 +1,8 @@
 // Test helpers: an in-memory product backend (unit/component tests ONLY - the canonical proof uses the
 // real CAP-004 backend, see scripts/run_capstone_frontend_e2e.py) and a scriptable fake socket.
-import type { ProductClient } from '../api';
+import { ProductApiError, federationRunBody, type ProductClient } from '../api';
+import { candidateFixture, clientsFixture, overviewFixture, registryFixture, roundsFixture, runFixture } from '../federation/__tests__/fixtures';
+import type { FederationOverview, FederationRun, ModelRegistryView } from '../federation/types';
 import type { SocketLike } from '../socket';
 import type {
 	AuthIdentity,
@@ -92,10 +94,14 @@ export function session(state: MonitoringSession['state'] = 'DEVICE_READY', id =
 
 export interface FakeBackend extends ProductClient {
 	calls: string[];
+	federationBodies: unknown[];
+	fed: { overview: FederationOverview; runs: FederationRun[]; registry: ModelRegistryView; createError: ProductApiError | null; clientsDelayMs: number };
 	setState(state: DeviceState): void;
 }
 
-export function fakeBackend(system: SystemInfoV2 = systemInfo()): FakeBackend {
+export function fakeBackend(system: SystemInfoV2 = systemInfo({ federation_runtime: 'ENABLED_ENGINEERING' })): FakeBackend {
+	const federationBodies: unknown[] = [];
+	const fed = { overview: overviewFixture(), runs: [] as FederationRun[], registry: registryFixture(), createError: null as ProductApiError | null, clientsDelayMs: 0 };
 	let dev = device('DETACHED');
 	let created = false;
 	let sess = session('DEVICE_READY');
@@ -106,6 +112,24 @@ export function fakeBackend(system: SystemInfoV2 = systemInfo()): FakeBackend {
 	};
 	return {
 		calls,
+		federationBodies,
+		fed,
+		federationOverview: () => rec('federationOverview', fed.overview),
+		federationClients: () => { calls.push('federationClients'); return new Promise((resolve) => setTimeout(() => resolve(clientsFixture()), fed.clientsDelayMs)); },
+		createFederationRun: (choice) => {
+			calls.push('createFederationRun');
+			federationBodies.push(federationRunBody(choice));
+			if (fed.createError) return Promise.reject(fed.createError);
+			const run = runFixture({ run_type: choice.run_type, algorithm: choice.algorithm, secagg_mode: choice.secagg_mode });
+			fed.runs = [run, ...fed.runs.filter((r) => r.run_id !== run.run_id)];
+			return Promise.resolve(run);
+		},
+		federationRuns: () => rec('federationRuns', fed.runs),
+		federationRun: (id) => rec('federationRun', fed.runs.find((r) => r.run_id === id) ?? runFixture({ run_id: id })),
+		startFederationRun: (id) => rec('startFederationRun', runFixture({ run_id: id, status: 'RUNNING' })),
+		federationRounds: () => rec('federationRounds', roundsFixture()),
+		models: () => rec('models', fed.registry),
+		model: (id) => rec('model', fed.registry.released_scientific.find((m) => m.model_id === id) ?? candidateFixture()),
 		setState: (state) => (dev = device(state)),
 		system: () => rec('system', system),
 		me: () => rec('me', DEMO_IDENTITY),

@@ -12,6 +12,21 @@ import type {
 	ScenarioId,
 	SystemInfoV2
 } from './types';
+import {
+	FROZEN_ROUNDS,
+	FROZEN_SCENARIO,
+	type AggregationMode,
+	type Algorithm,
+	type CandidateModel,
+	type CreateFederationRunRequest,
+	type FederationOverview,
+	type FederationRound,
+	type FederationRun,
+	type FLClientIdentity,
+	type ModelRegistryView,
+	type ReleasedModelRef,
+	type RunType
+} from './federation/types';
 
 export const PRODUCT_BASE = '/product/v1';
 
@@ -79,6 +94,34 @@ export interface ProductClient {
 	session(sessionId: string): Promise<MonitoringSession>;
 	startSession(sessionId: string): Promise<MonitoringSession>;
 	stopSession(sessionId: string): Promise<MonitoringSession>;
+	// CAPSTONE_FEDERATION_PRODUCT_CLIENT_V1 (CAP-008): CAP-007 routes only
+	federationOverview(): Promise<FederationOverview>;
+	federationClients(): Promise<FLClientIdentity[]>;
+	createFederationRun(choice: FederationRunChoice): Promise<FederationRun>;
+	federationRuns(): Promise<FederationRun[]>;
+	federationRun(runId: string): Promise<FederationRun>;
+	startFederationRun(runId: string): Promise<FederationRun>;
+	federationRounds(runId: string): Promise<FederationRound[]>;
+	models(): Promise<ModelRegistryView>;
+	model(modelId: string): Promise<ReleasedModelRef | CandidateModel>;
+}
+
+/** The only three user-controlled run options; scenario and rounds are frozen constants. */
+export interface FederationRunChoice {
+	run_type: RunType;
+	algorithm: Algorithm;
+	secagg_mode: AggregationMode;
+}
+
+/** Exactly the five frozen request fields - no model, checkpoint, mu, learning rate, optimizer, batch size. */
+export function federationRunBody(choice: FederationRunChoice): CreateFederationRunRequest {
+	return {
+		run_type: choice.run_type,
+		algorithm: choice.algorithm,
+		secagg_mode: choice.secagg_mode,
+		planned_rounds: FROZEN_ROUNDS,
+		scenario_id: FROZEN_SCENARIO
+	};
 }
 
 export function createProductClient(options: ProductClientOptions = {}): ProductClient {
@@ -137,7 +180,16 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		sessions: () => call('GET', '/sessions'),
 		session: (id) => call('GET', `/sessions/${enc(id)}`),
 		startSession: (id) => call('POST', `/sessions/${enc(id)}/start`),
-		stopSession: (id) => call('POST', `/sessions/${enc(id)}/stop`)
+		stopSession: (id) => call('POST', `/sessions/${enc(id)}/stop`),
+		federationOverview: () => call('GET', '/federation'),
+		federationClients: () => call('GET', '/federation/clients'),
+		createFederationRun: (choice) => call('POST', '/federation/runs', federationRunBody(choice)),
+		federationRuns: () => call('GET', '/federation/runs'),
+		federationRun: (id) => call('GET', `/federation/runs/${enc(id)}`),
+		startFederationRun: (id) => call('POST', `/federation/runs/${enc(id)}/start`),
+		federationRounds: (id) => call('GET', `/federation/runs/${enc(id)}/rounds`),
+		models: () => call('GET', '/models'),
+		model: (id) => call('GET', `/models/${enc(id)}`)
 	};
 }
 
@@ -146,4 +198,10 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 export function liveSocketUrl(sessionId: string, location: { protocol: string; host: string }): string {
 	const scheme = location.protocol === 'https:' ? 'wss:' : 'ws:';
 	return `${scheme}//${location.host}${PRODUCT_BASE}/sessions/${encodeURIComponent(sessionId)}/live`;
+}
+
+/** Same-origin federation WebSocket URL. NEVER carries a token, cookie, user id or secret. */
+export function federationSocketUrl(runId: string, location: { protocol: string; host: string }): string {
+	const scheme = location.protocol === 'https:' ? 'wss:' : 'ws:';
+	return `${scheme}//${location.host}${PRODUCT_BASE}/federation/runs/${encodeURIComponent(runId)}/live`;
 }

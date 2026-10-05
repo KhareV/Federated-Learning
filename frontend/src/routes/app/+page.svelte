@@ -3,13 +3,16 @@
 	import Panel from '$lib/components/dashboard/Panel.svelte';
 	import MetricTile from '$lib/components/dashboard/MetricTile.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
+	import { FederationStore, useFederation } from '$lib/product/federation/state.svelte';
 
 	const store = getProductStore();
 	const system = $derived(store.authState.system);
 	const identity = $derived(store.authState.identity);
 	const latest = $derived(store.sessions[0] ?? null);
 	const connected = $derived(store.devices.filter((d) => d.connection_state === 'CONNECTED' || d.connection_state === 'STREAMING'));
-	onMount(() => { void store.loadDevices(); void store.loadSessions(); });
+	const fed = useFederation();
+	const fedEnabled = $derived(FederationStore.backendEnabled(system?.federation_runtime));
+	onMount(() => { void store.loadDevices(); void store.loadSessions(); void (async () => { if (FederationStore.backendEnabled(store.authState.system?.federation_runtime)) await fed.loadOverview(); })(); });
 </script>
 
 <svelte:head><title>Overview | NHM</title></svelte:head>
@@ -40,7 +43,7 @@
 	<Panel eyebrow="03 / PRODUCT STORY" title="Released monitoring ≠ federated development">
 		<div class="two">
 			<div><b>Released monitoring</b><p class="dim">{system?.model_id ?? 'MODEL_V2_FINAL'} runs server-side in {system?.software_system ?? 'SOFTWARE_SYSTEM_V2'}. This is what the Monitor page uses.</p></div>
-			<div><b>Federated development</b><p class="dim">Federation product runtime: <span class="badge warn">NOT YET ENABLED IN PRODUCT RUNTIME</span> (capstone federation layer). No candidate models exist.</p><a class="go" href="/app/federation">Federation →</a></div>
+			<div><b>Federated development</b>{#if fedEnabled}<p class="dim">Federated development: <span class="badge">ENGINEERING RUNTIME ENABLED</span> · engineering candidates: <b data-testid="overview-candidate-count">{fed.overview ? fed.overview.candidate_count : '--'}</b> · never automatically deployed.</p>{:else}<p class="dim">Federated development: <span class="badge warn">FEDERATION BACKEND NOT ENABLED</span></p>{/if}<a class="go" href="/app/federation">Federation →</a></div>
 		</div>
 	</Panel>
 </div>

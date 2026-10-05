@@ -1,0 +1,26 @@
+{
+ "amendment_id": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_7",
+ "change": "CAP-008 is the designated federation-UX owner and changes frontend files, so the CAP-005 invariant 'the frontend is byte-identical to CAPSTONE_UI_V1' cannot remain a future invariant. (1) scripts/verify_capstone_ui_v1.py now accepts a changed UI_V1-bound file ONLY if the CAPSTONE_UI_V1_1 successor lock (artifacts/capstone/CAPSTONE_UI_V1_1.lock.json) binds exactly the current bytes; every other deviation still raises CAPSTONE_UI_V1_TAMPER. (2) tests/test_capstone_frontend.py: the tamper test shadows the successor lock too, and the shell test now requires the federation/models pages to exist (real) while the research pages remain placeholders. (3) frontend/src/lib/product/api.ts (a CAP-005-bound file) gains the nine CAP-007 client methods. The CAPSTONE_UI_V1 lock file itself is NOT modified; CAPSTONE_UI_V1_1 binds every frontend file and scripts/verify_capstone_ui_v1_1.py fails on any unaccounted frontend drift.",
+ "defect": "Historical guard incompatibility (not an implementation defect): the CAP-005 verifier/tests assume the frontend never changes after CAP-005.",
+ "files": {
+  "frontend/src/lib/product/api.ts": {
+   "new_sha256": "ab92ab1a700cbbffd05f3e2d4825758cfea9e3c33e006b97caf9e9fdd8e3036d",
+   "old_sha256": "70501d50fc4a6a75ef4d05b511d26a2aeee6331a15749fa2aa49067c3d70af0b"
+  },
+  "scripts/verify_capstone_ui_v1.py": {
+   "new_sha256": "56f62051465226e529108f23144eaa8c68d992fa3d111c6979d61542d9ea4833",
+   "old_sha256": "1c0e8942dd4f784f729e70be93fdf93637a3579af902a0e884bf92ece6c8f6b6"
+  },
+  "tests/test_capstone_frontend.py": {
+   "new_sha256": "0f3eb470c39f63975f4dc6a3df957b6fb498e58583e53c9d9c50e6081216506b",
+   "old_sha256": "4ca6a15efe73f7b51b6dfe0b9f39d1ca7543773e9f9ef073a0a58649e884139f"
+  }
+ },
+ "freeze_commit": "(CAP-005 freeze: see the CAP-005 lock)",
+ "made_during": "CAP-008, in its own commit before the CAP-008 method freeze and before gate evaluation",
+ "previous_amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_6",
+ "unchanged": {
+  "capg4_criteria_text": "identical",
+  "capstone_ui_v1_lock_file": "byte-identical"
+ }
+}

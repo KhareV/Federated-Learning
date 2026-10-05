@@ -190,21 +190,24 @@ describe('monitoring page', () => {
 	});
 });
 
-describe('overview + future-phase shells are honest', () => {
-	it('overview shows real system identity, no fake metrics, and federation as not enabled', async () => {
+describe('overview + backend guard are honest', () => {
+	it('overview shows real system identity, real federation status and no fake metrics', async () => {
+		boot(systemInfo({ federation_runtime: 'ENABLED_ENGINEERING' }));
 		await store.init();
 		render(OverviewPage);
 		expect(document.body.textContent).toContain('MODEL_V2_FINAL');
 		expect(document.body.textContent).toContain('SIMULATED_ONLY');
-		expect(document.body.textContent).toContain('NOT YET ENABLED IN PRODUCT RUNTIME');
+		expect(document.body.textContent).toContain('ENGINEERING RUNTIME ENABLED');
+		expect(document.body.textContent).not.toContain('NOT YET ENABLED');
+		await waitFor(() => expect(screen.getByTestId('overview-candidate-count').textContent).toBe('0'));
 		expect(document.body.textContent).not.toMatch(/accuracy|F1|hospital|patients?\b/i);
 	});
-	it('federation page states the runtime is not enabled and shows no data', () => {
+	it('an older backend reporting NOT_IMPLEMENTED disables federation and floods no routes', async () => {
+		await store.init();
+		backend.calls.length = 0;
 		render(FederationPage);
-		const text = document.body.textContent ?? '';
-		expect(text).toContain('FEDERATION PRODUCT RUNTIME NOT YET ENABLED IN THIS PHASE');
-		expect(text).toContain('SIM_FL_SITE_00');
-		expect(text).not.toMatch(/Delhi|Mumbai|Chennai|London|New York|Tokyo|Singapore/);
+		expect(screen.getByTestId('backend-not-enabled').textContent).toContain('FEDERATION BACKEND NOT ENABLED');
+		expect(backend.calls.filter((c) => c.startsWith('federation') || c === 'models')).toEqual([]);
 	});
 });
 

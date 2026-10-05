@@ -47,7 +47,7 @@ def test_capstone_ui_v1_detects_tamper_on_any_bound_file(tmp_path: Path, monkeyp
     lock = json.loads(UI_LOCK.read_text())
     shadow = tmp_path / "repo"
     for rel in [*lock["bound_artifacts"], "artifacts/DASHBOARD_UI_V1_5.lock.json",
-                "artifacts/capstone/CAPSTONE_UI_V1.lock.json"]:
+                "artifacts/capstone/CAPSTONE_UI_V1.lock.json", "artifacts/capstone/CAPSTONE_UI_V1_1.lock.json"]:  # CAP-008: successor-aware
         (shadow / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / rel, shadow / rel)
     monkeypatch.setattr(module, "ROOT", shadow)
@@ -100,6 +100,7 @@ def test_product_routes_exist_and_future_destinations_are_shells_only() -> None:
     routes = ROOT / "frontend/src/routes"
     for rel in ("sign-in", "app", "app/device", "app/monitoring"):
         assert (routes / rel / "+page.svelte").is_file(), rel
-    for rel in ("federation", "federation/clients", "federation/rounds", "federation/live",
-                "federation/privacy", "models", "research/ml", "research/fl"):
+    for rel in ("research/ml", "research/fl"):  # CAP-008 replaced the federation/models placeholders; CAP-009 owns research
         assert "FuturePhase" in (routes / "app" / rel / "+page.svelte").read_text(), rel
+    for rel in ("federation", "federation/clients", "federation/rounds", "federation/live", "federation/privacy", "models"):
+        assert (routes / "app" / rel / "+page.svelte").is_file(), rel

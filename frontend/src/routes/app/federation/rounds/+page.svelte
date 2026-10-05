@@ -1,5 +1,44 @@
 <script lang="ts">
-	import FuturePhase from '$lib/components/product/FuturePhase.svelte';
+	import { onMount } from 'svelte';
+	import { page } from '$app/state';
+	import Panel from '$lib/components/dashboard/Panel.svelte';
+	import FederationBanner from '$lib/components/product/federation/FederationBanner.svelte';
+	import RunSelector from '$lib/components/product/federation/RunSelector.svelte';
+	import DigestText from '$lib/components/product/federation/DigestText.svelte';
+	import { bootRun, chooseRun } from '$lib/components/product/federation/useRunParam';
+	import { useFederation } from '$lib/product/federation/state.svelte';
+	const fed = useFederation();
+	onMount(() => { void bootRun(fed, page.url.searchParams.get('run')); return () => fed.closeLive(); });
+	const finalCandidate = $derived(fed.run?.candidate_ids[0] ?? null);
 </script>
 <svelte:head><title>Federation rounds | NHM</title></svelte:head>
-<FuturePhase title="Federation rounds" owner="CAP-007 / CAP-008" note="Not yet enabled. No federation run exists; no round data is shown." links={[]} />
+<div class="head"><div class="eyebrow">NHM / FEDERATION / ROUNDS</div><h1>Rounds</h1></div>
+<FederationBanner runType={fed.run?.run_type ?? null} />
+<RunSelector runs={fed.runs} selected={fed.run?.run_id ?? null} onSelect={(id) => chooseRun(fed, page.url.pathname, id)} />
+{#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
+{#if fed.run}
+	<Panel eyebrow="LINEAGE" title="Global-state lineage" note="DIGESTS FROM THE BACKEND">
+		<ol class="lin" data-testid="lineage">
+			<li>FL_INIT_V2 <DigestText value={fed.rounds[0]?.base_state_digest} label="FL_INIT_V2 digest" /></li>
+			{#each fed.rounds as r, i}
+				<li>{i + 1 < fed.rounds.length ? `ROUND ${i + 1} GLOBAL STATE` : `ROUND ${r.round_id} FINAL STATE`} {#if fed.rounds[i + 1]}<DigestText value={fed.rounds[i + 1].base_state_digest} label="round global state digest" />{:else}<span class="dim">(digest shown on the candidate)</span>{/if}</li>
+			{/each}
+			<li>{finalCandidate ?? 'NO CANDIDATE'}</li>
+		</ol>
+		<p class="dim">Released monitoring (MODEL_V2_FINAL) is a separate lane and is not part of this lineage. Intermediate aggregates are round states, not candidates.</p>
+	</Panel>
+	<div class="gap"></div>
+	<ul class="rounds" data-testid="round-cards">
+		{#each fed.rounds as r}
+			<li data-round={r.round_id}><h3>Round {r.round_id}</h3>
+				<dl><div><dt>State</dt><dd>{r.state}</dd></div><div><dt>Base state digest</dt><dd><DigestText value={r.base_state_digest} label="base state digest" /></dd></div><div><dt>Algorithm</dt><dd>{r.algorithm}</dd></div>
+					<div><dt>Accepted updates</dt><dd>{r.accepted_update_count} / {r.participating_client_ids.length}</dd></div><div><dt>Candidate</dt><dd>{r.candidate_id ?? 'NONE'}</dd></div></dl></li>
+		{/each}
+	</ul>
+{:else}<p class="dim">Select a run to see its persisted rounds.</p>{/if}
+<style>
+	.eyebrow { color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; letter-spacing: .14em; } h1 { margin: 10px 0 14px; font: 500 clamp(26px, 3.6vw, 38px) 'Space Grotesk', sans-serif; } .gap { height: 12px; } .dim { color: #94a3b8; font-size: 13px; line-height: 1.6; } .warn { color: #fbbf24; font: 12px 'JetBrains Mono', monospace; }
+	.lin { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 4px; font: 11px 'JetBrains Mono', monospace; } .lin li { padding: 5px 9px; border-left: 2px solid rgba(43,184,176,.5); background: rgba(43,184,176,.06); overflow-wrap: anywhere; }
+	.rounds { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 8px; } .rounds li { border: 1px solid rgba(148,163,184,.16); padding: 10px 12px; min-width: 0; } h3 { margin: 0 0 6px; font: 500 15px 'Space Grotesk', sans-serif; }
+	dl { display: grid; gap: 4px; margin: 0; } dl div { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; } dt { color: #71829a; } dd { margin: 0; font: 11px 'JetBrains Mono', monospace; text-align: right; overflow-wrap: anywhere; }
+</style>
