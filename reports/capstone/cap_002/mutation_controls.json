@@ -1,0 +1,59 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "file": "product/devices/simulated.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_simulated_device.py::test_illegal_commands_fail_closed_without_state_or_event_change[connect]",
+   "git_status_of_file_after_restore": "",
+   "mutation": "ILLEGAL_LIFECYCLE_TRANSITION_ACCEPTED",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "product/devices/simulated.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_virtual_edge.py::test_simulation_truth_is_never_imported_by_the_cap_002_modules",
+   "git_status_of_file_after_restore": "",
+   "mutation": "SIMULATION_TRUTH_LEAKAGE",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "product/devices/simulated.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_simulated_device.py::test_every_accepted_transition_emits_one_typed_deterministic_event",
+   "git_status_of_file_after_restore": "",
+   "mutation": "SCENARIO_NONDETERMINISM",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "product/devices/simulated.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_simulated_device.py::test_disconnect_actually_interrupts_delivery_and_nothing_is_fabricated",
+   "git_status_of_file_after_restore": "",
+   "mutation": "RECORD_DELIVERED_DURING_OUTAGE",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "product/devices/simulated.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_simulated_device.py::test_records_are_observed_records_only_ordered_and_synthetic",
+   "git_status_of_file_after_restore": "",
+   "mutation": "WRONG_OBSERVED_RECORD_TYPE",
+   "suite_failed_as_designed": true
+  },
+  {
+   "file": "product/devices/simulated.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_simulated_device.py::test_records_are_observed_records_only_ordered_and_synthetic",
+   "git_status_of_file_after_restore": "",
+   "mutation": "NON_MONOTONIC_RECORD_SEQUENCE",
+   "suite_failed_as_designed": true
+  }
+ ],
+ "in_test_controls": [
+  "checker negative controls (ordering, types, outage delivery)",
+  "truth scanner planted-leakage cases",
+  "replay-digest event-order sensitivity"
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "future_real_adapter_implemented": false,
+ "future_real_descriptor_hardware_status": "VERIFICATION_REQUIRED",
+ "hardware_replacement_contract": "contracts/capstone/real_hardware_replacement_v1.json",
+ "interface_shape_test": "test_simulated_source_and_future_real_double_share_one_interface_boundary",
+ "physical_facts_invented": false,
+ "simulated_descriptor_hardware_status": "NOT_APPLICABLE",
+ "verification_required_fields": {
+  "adc_scaling": "VERIFICATION_REQUIRED",
+  "ble_packet_format": "VERIFICATION_REQUIRED",
+  "clock_drift": "VERIFICATION_REQUIRED",
+  "packet_latency": "VERIFICATION_REQUIRED",
+  "real_source_rate": "VERIFICATION_REQUIRED",
+  "real_training_label_source": "VERIFICATION_REQUIRED",
+  "signal_units": "VERIFICATION_REQUIRED"
+ }
+}

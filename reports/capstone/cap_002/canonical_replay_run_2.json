@@ -1,0 +1,3378 @@
+{
+ "digests": {
+  "CONTEXT_LOSS": "15d2cf11e293edfc5ef545df9d7bc11a1bbdf98820e223c0d44ccd15903f7439",
+  "DISCONNECT_RECONNECT": "6829e84f000c9e0673f2f28ac18f7d5a53f9092feeb25d2f41b752ef99ade638",
+  "MIXED_MONITORING_SESSION": "077a892641c02673e030c4b7729a5c82aef9f0d66d9ca42976c648a55ca3db9b",
+  "NORMAL_MONITORING": "acfc7b4d6db153fb6bce714ec048a6b426e3fa02d2da3de18295a37d3ce2097a",
+  "POOR_SIGNAL": "76e491c1a2727be73e9d472720d0bb7a5425533909eab3cc0030abc8a6e07c30"
+ },
+ "replay_id": "CAPSTONE_DEVICE_REPLAY_V1",
+ "run": 2,
+ "scenarios": {
+  "CONTEXT_LOSS": {
+   "semantic": {
+    "device_descriptor_at_end": {
+     "adapter_type": "SIMULATED",
+     "capabilities": {
+      "nominal_source_rates_hz": {
+       "ECG_SIMULATION_CONVENTION": 360
+      },
+      "supports_device_events": true,
+      "supports_ecg": true,
+      "supports_ppg": false,
+      "supports_spo2_context": true
+     },
+     "connection_state": "STOPPED",
+     "device_id": "NHM_VIRTUAL_WEARABLE_00",
+     "display_name": "NHM Virtual Wearable",
+     "hardware_specific_fields_status": "NOT_APPLICABLE",
+     "simulation": true,
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_dataset_id": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY"
+    },
+    "device_event_sequence": [
+     "SCAN_STARTED",
+     "DEVICE_DISCOVERED",
+     "PAIRING_STARTED",
+     "DEVICE_CONNECTED",
+     "STREAM_STARTED",
+     "STREAM_STOPPED"
+    ],
+    "device_events": [
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "SCANNING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000000",
+      "event_type": "SCAN_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "CONTEXT_LOSS"
+      },
+      "product_timestamp_us": 0,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 0,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "FOUND",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000001",
+      "event_type": "DEVICE_DISCOVERED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "CONTEXT_LOSS"
+      },
+      "product_timestamp_us": 1000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 1,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "PAIRING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000002",
+      "event_type": "PAIRING_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "CONTEXT_LOSS"
+      },
+      "product_timestamp_us": 2000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 2,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "CONNECTED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000003",
+      "event_type": "DEVICE_CONNECTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "CONTEXT_LOSS"
+      },
+      "product_timestamp_us": 3000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 3,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STREAMING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000004",
+      "event_type": "STREAM_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "CONTEXT_LOSS"
+      },
+      "product_timestamp_us": 1000000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 4,
+      "session_id": "SIM_S_CAP002_CONTEXT_LOSS",
+      "source": "SIMULATED",
+      "source_timestamp_us": 0
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STOPPED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000005",
+      "event_type": "STREAM_STOPPED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "CONTEXT_LOSS"
+      },
+      "product_timestamp_us": 181000000,
+      "reason_code": "SCENARIO_COMPLETE",
+      "recoverable": true,
+      "sequence_index": 5,
+      "session_id": "SIM_S_CAP002_CONTEXT_LOSS",
+      "source": "SIMULATED",
+      "source_timestamp_us": 180000000
+     }
+    ],
+    "duration_s": 180,
+    "expected_outage_index_intervals": [],
+    "provenance": {
+     "dataset_id": "WEARABLE_SIM_V1",
+     "engineering_only": true,
+     "nominal_source_rate_hz": 360,
+     "nominal_source_rate_is": "SIMULATION convention, not a hardware measurement",
+     "scenario_id": "CONTEXT_LOSS",
+     "scientific_evidence": false,
+     "seed": 20261002,
+     "session_id": "SIM_S_CAP002_CONTEXT_LOSS",
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY",
+     "virtual_participant_is_human": false,
+     "wearable_v1": false
+    },
+    "records": {
+     "context_absent_index_intervals": [
+      [
+       21600,
+       43199
+      ]
+     ],
+     "delivery_gap_index_intervals": [],
+     "ecg_sensor_dropout_index_intervals": [],
+     "first_sample_index": 0,
+     "first_timestamp_us": 0,
+     "last_sample_index": 64799,
+     "last_timestamp_us": 179997222,
+     "monotonic_sample_index": true,
+     "monotonic_timestamp": true,
+     "participant_ids": [
+      "SIM_P000013"
+     ],
+     "record_count": 64800,
+     "record_sources": [
+      "SYNTHETIC_PHYSIOLOGY"
+     ],
+     "records_sha256": "887fddbfae1c7d7da229a6f8894deb9e1c5c2f27bf0e84485d5e7fdb5771bfab"
+    },
+    "replay_id": "CAPSTONE_DEVICE_REPLAY_V1",
+    "scenario_id": "CONTEXT_LOSS",
+    "seed": 20261002,
+    "source_rate_hz_simulation_convention": 360,
+    "stream_runtime": {
+     "all_windows_2500_samples_250hz_10s": true,
+     "gap_events_seen_by_runtime": 0,
+     "quality_counts": {
+      "VALID": 33
+     },
+     "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+     "window_count": 33,
+     "windows": [
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 15000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 20000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 25000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 30000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 35000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 40000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 45000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 50000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 55000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 60000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 65000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 70000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 75000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 80000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 85000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 90000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 95000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 100000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 105000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 110000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 115000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 120000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 125000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 130000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 135000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 140000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 145000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 150000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 155000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 160000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 165000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 170000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 175000000,
+       "window_seconds": 10
+      }
+     ],
+     "windows_samples_sha256": "174127bff766d48efcfa4da35a014cc83e26131062742105d079cb1d008f9c3f",
+     "windows_with_context": 21
+    }
+   },
+   "semantic_digest": "15d2cf11e293edfc5ef545df9d7bc11a1bbdf98820e223c0d44ccd15903f7439",
+   "timing_mode": "ACCELERATED"
+  },
+  "DISCONNECT_RECONNECT": {
+   "semantic": {
+    "device_descriptor_at_end": {
+     "adapter_type": "SIMULATED",
+     "capabilities": {
+      "nominal_source_rates_hz": {
+       "ECG_SIMULATION_CONVENTION": 360
+      },
+      "supports_device_events": true,
+      "supports_ecg": true,
+      "supports_ppg": false,
+      "supports_spo2_context": true
+     },
+     "connection_state": "STOPPED",
+     "device_id": "NHM_VIRTUAL_WEARABLE_00",
+     "display_name": "NHM Virtual Wearable",
+     "hardware_specific_fields_status": "NOT_APPLICABLE",
+     "simulation": true,
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_dataset_id": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY"
+    },
+    "device_event_sequence": [
+     "SCAN_STARTED",
+     "DEVICE_DISCOVERED",
+     "PAIRING_STARTED",
+     "DEVICE_CONNECTED",
+     "STREAM_STARTED",
+     "DEVICE_DISCONNECTED",
+     "RECONNECT_STARTED",
+     "DEVICE_RECONNECTED",
+     "STREAM_STARTED",
+     "STREAM_STOPPED"
+    ],
+    "device_events": [
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "SCANNING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000000",
+      "event_type": "SCAN_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 0,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 0,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "FOUND",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000001",
+      "event_type": "DEVICE_DISCOVERED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 1000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 1,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "PAIRING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000002",
+      "event_type": "PAIRING_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 2000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 2,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "CONNECTED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000003",
+      "event_type": "DEVICE_CONNECTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 3000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 3,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STREAMING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000004",
+      "event_type": "STREAM_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 1000000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 4,
+      "session_id": "SIM_S_CAP002_DISCONNECT_RECONNECT",
+      "source": "SIMULATED",
+      "source_timestamp_us": 0
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "DISCONNECTED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000005",
+      "event_type": "DEVICE_DISCONNECTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 71000000,
+      "reason_code": "LINK_LOST",
+      "recoverable": true,
+      "sequence_index": 5,
+      "session_id": "SIM_S_CAP002_DISCONNECT_RECONNECT",
+      "source": "SIMULATED",
+      "source_timestamp_us": 70000000
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "RECONNECTING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000006",
+      "event_type": "RECONNECT_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 71000000,
+      "reason_code": "AUTO_RECONNECT",
+      "recoverable": true,
+      "sequence_index": 6,
+      "session_id": "SIM_S_CAP002_DISCONNECT_RECONNECT",
+      "source": "SIMULATED",
+      "source_timestamp_us": 70000000
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "CONNECTED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000007",
+      "event_type": "DEVICE_RECONNECTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 86000000,
+      "reason_code": "LINK_RESTORED",
+      "recoverable": true,
+      "sequence_index": 7,
+      "session_id": "SIM_S_CAP002_DISCONNECT_RECONNECT",
+      "source": "SIMULATED",
+      "source_timestamp_us": 85000000
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STREAMING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000008",
+      "event_type": "STREAM_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 86000000,
+      "reason_code": "STREAM_RESUMED",
+      "recoverable": true,
+      "sequence_index": 8,
+      "session_id": "SIM_S_CAP002_DISCONNECT_RECONNECT",
+      "source": "SIMULATED",
+      "source_timestamp_us": 85000000
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STOPPED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000009",
+      "event_type": "STREAM_STOPPED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "DISCONNECT_RECONNECT"
+      },
+      "product_timestamp_us": 181000000,
+      "reason_code": "SCENARIO_COMPLETE",
+      "recoverable": true,
+      "sequence_index": 9,
+      "session_id": "SIM_S_CAP002_DISCONNECT_RECONNECT",
+      "source": "SIMULATED",
+      "source_timestamp_us": 180000000
+     }
+    ],
+    "duration_s": 180,
+    "expected_outage_index_intervals": [
+     [
+      25200,
+      30600
+     ]
+    ],
+    "provenance": {
+     "dataset_id": "WEARABLE_SIM_V1",
+     "engineering_only": true,
+     "nominal_source_rate_hz": 360,
+     "nominal_source_rate_is": "SIMULATION convention, not a hardware measurement",
+     "scenario_id": "DISCONNECT_RECONNECT",
+     "scientific_evidence": false,
+     "seed": 20261004,
+     "session_id": "SIM_S_CAP002_DISCONNECT_RECONNECT",
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY",
+     "virtual_participant_is_human": false,
+     "wearable_v1": false
+    },
+    "records": {
+     "context_absent_index_intervals": [],
+     "delivery_gap_index_intervals": [
+      [
+       25200,
+       30599
+      ]
+     ],
+     "ecg_sensor_dropout_index_intervals": [],
+     "first_sample_index": 0,
+     "first_timestamp_us": 0,
+     "last_sample_index": 64799,
+     "last_timestamp_us": 179997222,
+     "monotonic_sample_index": true,
+     "monotonic_timestamp": true,
+     "participant_ids": [
+      "SIM_P000013"
+     ],
+     "record_count": 59400,
+     "record_sources": [
+      "SYNTHETIC_PHYSIOLOGY"
+     ],
+     "records_sha256": "e47a4feddab84deaac6e49fff811d6fd44c15bf3ca36323bc030d205c50a4be6"
+    },
+    "replay_id": "CAPSTONE_DEVICE_REPLAY_V1",
+    "scenario_id": "DISCONNECT_RECONNECT",
+    "seed": 20261004,
+    "source_rate_hz_simulation_convention": 360,
+    "stream_runtime": {
+     "all_windows_2500_samples_250hz_10s": true,
+     "gap_events_seen_by_runtime": 1,
+     "quality_counts": {
+      "UNUSABLE": 4,
+      "VALID": 29
+     },
+     "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+     "window_count": 33,
+     "windows": [
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 15000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 20000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 25000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 30000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 35000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 40000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 45000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 50000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 55000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 60000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 65000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 70000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 1250,
+       "quality_reasons": [
+        "LONG_GAP_SPAN"
+       ],
+       "timestamp_us": 75000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 2500,
+       "quality_reasons": [
+        "LONG_GAP_SPAN",
+        "FLATLINE"
+       ],
+       "timestamp_us": 80000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 2500,
+       "quality_reasons": [
+        "LONG_GAP_SPAN",
+        "FLATLINE"
+       ],
+       "timestamp_us": 85000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 1250,
+       "quality_reasons": [
+        "LONG_GAP_SPAN"
+       ],
+       "timestamp_us": 90000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 95000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 100000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 105000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 110000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 115000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 120000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 125000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 130000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 135000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 140000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 145000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 150000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 155000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 160000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 165000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 170000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 175000000,
+       "window_seconds": 10
+      }
+     ],
+     "windows_samples_sha256": "1eb0092303083dc12aa81330071d8f616d2c112c9f596a6f5db0130b0e28fc62",
+     "windows_with_context": 31
+    }
+   },
+   "semantic_digest": "6829e84f000c9e0673f2f28ac18f7d5a53f9092feeb25d2f41b752ef99ade638",
+   "timing_mode": "ACCELERATED"
+  },
+  "MIXED_MONITORING_SESSION": {
+   "semantic": {
+    "device_descriptor_at_end": {
+     "adapter_type": "SIMULATED",
+     "capabilities": {
+      "nominal_source_rates_hz": {
+       "ECG_SIMULATION_CONVENTION": 360
+      },
+      "supports_device_events": true,
+      "supports_ecg": true,
+      "supports_ppg": false,
+      "supports_spo2_context": true
+     },
+     "connection_state": "STOPPED",
+     "device_id": "NHM_VIRTUAL_WEARABLE_00",
+     "display_name": "NHM Virtual Wearable",
+     "hardware_specific_fields_status": "NOT_APPLICABLE",
+     "simulation": true,
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_dataset_id": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY"
+    },
+    "device_event_sequence": [
+     "SCAN_STARTED",
+     "DEVICE_DISCOVERED",
+     "PAIRING_STARTED",
+     "DEVICE_CONNECTED",
+     "STREAM_STARTED",
+     "DEVICE_DISCONNECTED",
+     "RECONNECT_STARTED",
+     "DEVICE_RECONNECTED",
+     "STREAM_STARTED",
+     "STREAM_STOPPED"
+    ],
+    "device_events": [
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "SCANNING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000000",
+      "event_type": "SCAN_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 0,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 0,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "FOUND",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000001",
+      "event_type": "DEVICE_DISCOVERED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 1000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 1,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "PAIRING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000002",
+      "event_type": "PAIRING_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 2000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 2,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "CONNECTED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000003",
+      "event_type": "DEVICE_CONNECTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 3000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 3,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STREAMING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000004",
+      "event_type": "STREAM_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 1000000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 4,
+      "session_id": "SIM_S_CAP002_MIXED_MONITORING_SESSION",
+      "source": "SIMULATED",
+      "source_timestamp_us": 0
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "DISCONNECTED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000005",
+      "event_type": "DEVICE_DISCONNECTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 331000000,
+      "reason_code": "LINK_LOST",
+      "recoverable": true,
+      "sequence_index": 5,
+      "session_id": "SIM_S_CAP002_MIXED_MONITORING_SESSION",
+      "source": "SIMULATED",
+      "source_timestamp_us": 330000000
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "RECONNECTING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000006",
+      "event_type": "RECONNECT_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 331000000,
+      "reason_code": "AUTO_RECONNECT",
+      "recoverable": true,
+      "sequence_index": 6,
+      "session_id": "SIM_S_CAP002_MIXED_MONITORING_SESSION",
+      "source": "SIMULATED",
+      "source_timestamp_us": 330000000
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "CONNECTED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000007",
+      "event_type": "DEVICE_RECONNECTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 346000000,
+      "reason_code": "LINK_RESTORED",
+      "recoverable": true,
+      "sequence_index": 7,
+      "session_id": "SIM_S_CAP002_MIXED_MONITORING_SESSION",
+      "source": "SIMULATED",
+      "source_timestamp_us": 345000000
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STREAMING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000008",
+      "event_type": "STREAM_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 346000000,
+      "reason_code": "STREAM_RESUMED",
+      "recoverable": true,
+      "sequence_index": 8,
+      "session_id": "SIM_S_CAP002_MIXED_MONITORING_SESSION",
+      "source": "SIMULATED",
+      "source_timestamp_us": 345000000
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STOPPED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000009",
+      "event_type": "STREAM_STOPPED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "MIXED_MONITORING_SESSION"
+      },
+      "product_timestamp_us": 481000000,
+      "reason_code": "SCENARIO_COMPLETE",
+      "recoverable": true,
+      "sequence_index": 9,
+      "session_id": "SIM_S_CAP002_MIXED_MONITORING_SESSION",
+      "source": "SIMULATED",
+      "source_timestamp_us": 480000000
+     }
+    ],
+    "duration_s": 480,
+    "expected_outage_index_intervals": [
+     [
+      118800,
+      124200
+     ]
+    ],
+    "provenance": {
+     "dataset_id": "WEARABLE_SIM_V1",
+     "engineering_only": true,
+     "nominal_source_rate_hz": 360,
+     "nominal_source_rate_is": "SIMULATION convention, not a hardware measurement",
+     "scenario_id": "MIXED_MONITORING_SESSION",
+     "scientific_evidence": false,
+     "seed": 20261005,
+     "session_id": "SIM_S_CAP002_MIXED_MONITORING_SESSION",
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY",
+     "virtual_participant_is_human": false,
+     "wearable_v1": false
+    },
+    "records": {
+     "context_absent_index_intervals": [
+      [
+       36000,
+       57599
+      ]
+     ],
+     "delivery_gap_index_intervals": [
+      [
+       118800,
+       124199
+      ]
+     ],
+     "ecg_sensor_dropout_index_intervals": [],
+     "first_sample_index": 0,
+     "first_timestamp_us": 0,
+     "last_sample_index": 172799,
+     "last_timestamp_us": 479997222,
+     "monotonic_sample_index": true,
+     "monotonic_timestamp": true,
+     "participant_ids": [
+      "SIM_P000013"
+     ],
+     "record_count": 167400,
+     "record_sources": [
+      "SYNTHETIC_PHYSIOLOGY"
+     ],
+     "records_sha256": "bdf21ce367db90e7c01f26cb56bb55aa29257746b6e0f2d09a0adbf1bae86cf0"
+    },
+    "replay_id": "CAPSTONE_DEVICE_REPLAY_V1",
+    "scenario_id": "MIXED_MONITORING_SESSION",
+    "seed": 20261005,
+    "source_rate_hz_simulation_convention": 360,
+    "stream_runtime": {
+     "all_windows_2500_samples_250hz_10s": true,
+     "gap_events_seen_by_runtime": 1,
+     "quality_counts": {
+      "UNUSABLE": 7,
+      "VALID": 86
+     },
+     "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+     "window_count": 93,
+     "windows": [
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 15000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 20000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 25000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 30000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 35000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 40000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 45000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 50000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 55000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 60000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 65000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 70000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 75000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 80000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 85000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 90000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 95000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 100000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 105000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 110000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 115000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 120000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 125000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 130000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 135000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 140000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 145000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 150000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 155000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 160000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 165000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 170000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 175000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 180000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 185000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 190000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 195000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 200000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 205000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 210000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 215000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 220000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 225000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 230000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 235000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 240000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 245000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 250000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [
+        "CLIPPING"
+       ],
+       "timestamp_us": 255000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [
+        "CLIPPING"
+       ],
+       "timestamp_us": 260000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [
+        "CLIPPING"
+       ],
+       "timestamp_us": 265000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 270000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 275000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 280000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 285000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 290000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 295000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 300000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 305000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 310000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 315000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 320000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 325000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 330000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 1250,
+       "quality_reasons": [
+        "LONG_GAP_SPAN"
+       ],
+       "timestamp_us": 335000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": false,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 2500,
+       "quality_reasons": [
+        "LONG_GAP_SPAN",
+        "FLATLINE"
+       ],
+       "timestamp_us": 340000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 2500,
+       "quality_reasons": [
+        "LONG_GAP_SPAN",
+        "FLATLINE"
+       ],
+       "timestamp_us": 345000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 1250,
+       "quality_reasons": [
+        "LONG_GAP_SPAN"
+       ],
+       "timestamp_us": 350000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 355000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 360000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 365000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 370000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 375000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 380000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 385000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 390000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 395000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 400000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 405000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 410000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 415000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 420000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 425000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 430000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 435000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 440000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 445000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 450000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 455000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 460000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 465000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 470000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 475000000,
+       "window_seconds": 10
+      }
+     ],
+     "windows_samples_sha256": "8909761da50601bd4711a553b925581039610a8df7fb97016b2e0bb8ca62c571",
+     "windows_with_context": 79
+    }
+   },
+   "semantic_digest": "077a892641c02673e030c4b7729a5c82aef9f0d66d9ca42976c648a55ca3db9b",
+   "timing_mode": "ACCELERATED"
+  },
+  "NORMAL_MONITORING": {
+   "semantic": {
+    "device_descriptor_at_end": {
+     "adapter_type": "SIMULATED",
+     "capabilities": {
+      "nominal_source_rates_hz": {
+       "ECG_SIMULATION_CONVENTION": 360
+      },
+      "supports_device_events": true,
+      "supports_ecg": true,
+      "supports_ppg": false,
+      "supports_spo2_context": true
+     },
+     "connection_state": "STOPPED",
+     "device_id": "NHM_VIRTUAL_WEARABLE_00",
+     "display_name": "NHM Virtual Wearable",
+     "hardware_specific_fields_status": "NOT_APPLICABLE",
+     "simulation": true,
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_dataset_id": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY"
+    },
+    "device_event_sequence": [
+     "SCAN_STARTED",
+     "DEVICE_DISCOVERED",
+     "PAIRING_STARTED",
+     "DEVICE_CONNECTED",
+     "STREAM_STARTED",
+     "STREAM_STOPPED"
+    ],
+    "device_events": [
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "SCANNING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000000",
+      "event_type": "SCAN_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "NORMAL_MONITORING"
+      },
+      "product_timestamp_us": 0,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 0,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "FOUND",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000001",
+      "event_type": "DEVICE_DISCOVERED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "NORMAL_MONITORING"
+      },
+      "product_timestamp_us": 1000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 1,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "PAIRING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000002",
+      "event_type": "PAIRING_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "NORMAL_MONITORING"
+      },
+      "product_timestamp_us": 2000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 2,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "CONNECTED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000003",
+      "event_type": "DEVICE_CONNECTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "NORMAL_MONITORING"
+      },
+      "product_timestamp_us": 3000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 3,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STREAMING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000004",
+      "event_type": "STREAM_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "NORMAL_MONITORING"
+      },
+      "product_timestamp_us": 1000000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 4,
+      "session_id": "SIM_S_CAP002_NORMAL_MONITORING",
+      "source": "SIMULATED",
+      "source_timestamp_us": 0
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STOPPED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000005",
+      "event_type": "STREAM_STOPPED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "NORMAL_MONITORING"
+      },
+      "product_timestamp_us": 121000000,
+      "reason_code": "SCENARIO_COMPLETE",
+      "recoverable": true,
+      "sequence_index": 5,
+      "session_id": "SIM_S_CAP002_NORMAL_MONITORING",
+      "source": "SIMULATED",
+      "source_timestamp_us": 120000000
+     }
+    ],
+    "duration_s": 120,
+    "expected_outage_index_intervals": [],
+    "provenance": {
+     "dataset_id": "WEARABLE_SIM_V1",
+     "engineering_only": true,
+     "nominal_source_rate_hz": 360,
+     "nominal_source_rate_is": "SIMULATION convention, not a hardware measurement",
+     "scenario_id": "NORMAL_MONITORING",
+     "scientific_evidence": false,
+     "seed": 20261001,
+     "session_id": "SIM_S_CAP002_NORMAL_MONITORING",
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY",
+     "virtual_participant_is_human": false,
+     "wearable_v1": false
+    },
+    "records": {
+     "context_absent_index_intervals": [],
+     "delivery_gap_index_intervals": [],
+     "ecg_sensor_dropout_index_intervals": [],
+     "first_sample_index": 0,
+     "first_timestamp_us": 0,
+     "last_sample_index": 43199,
+     "last_timestamp_us": 119997222,
+     "monotonic_sample_index": true,
+     "monotonic_timestamp": true,
+     "participant_ids": [
+      "SIM_P000013"
+     ],
+     "record_count": 43200,
+     "record_sources": [
+      "SYNTHETIC_PHYSIOLOGY"
+     ],
+     "records_sha256": "653c63ead2bf458bba80aa2939c195fef9e38d72b34dcc1ff0be7de3f279eb96"
+    },
+    "replay_id": "CAPSTONE_DEVICE_REPLAY_V1",
+    "scenario_id": "NORMAL_MONITORING",
+    "seed": 20261001,
+    "source_rate_hz_simulation_convention": 360,
+    "stream_runtime": {
+     "all_windows_2500_samples_250hz_10s": true,
+     "gap_events_seen_by_runtime": 0,
+     "quality_counts": {
+      "VALID": 21
+     },
+     "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+     "window_count": 21,
+     "windows": [
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 15000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 20000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 25000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 30000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 35000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 40000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 45000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 50000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 55000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 60000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 65000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 70000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 75000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 80000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 85000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 90000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 95000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 100000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 105000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 110000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 115000000,
+       "window_seconds": 10
+      }
+     ],
+     "windows_samples_sha256": "1276f9a76063326d1cb21cdf186776314ffdc0894653f8c88beaad470bbe9a02",
+     "windows_with_context": 21
+    }
+   },
+   "semantic_digest": "acfc7b4d6db153fb6bce714ec048a6b426e3fa02d2da3de18295a37d3ce2097a",
+   "timing_mode": "ACCELERATED"
+  },
+  "POOR_SIGNAL": {
+   "semantic": {
+    "device_descriptor_at_end": {
+     "adapter_type": "SIMULATED",
+     "capabilities": {
+      "nominal_source_rates_hz": {
+       "ECG_SIMULATION_CONVENTION": 360
+      },
+      "supports_device_events": true,
+      "supports_ecg": true,
+      "supports_ppg": false,
+      "supports_spo2_context": true
+     },
+     "connection_state": "STOPPED",
+     "device_id": "NHM_VIRTUAL_WEARABLE_00",
+     "display_name": "NHM Virtual Wearable",
+     "hardware_specific_fields_status": "NOT_APPLICABLE",
+     "simulation": true,
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_dataset_id": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY"
+    },
+    "device_event_sequence": [
+     "SCAN_STARTED",
+     "DEVICE_DISCOVERED",
+     "PAIRING_STARTED",
+     "DEVICE_CONNECTED",
+     "STREAM_STARTED",
+     "STREAM_STOPPED"
+    ],
+    "device_events": [
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "SCANNING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000000",
+      "event_type": "SCAN_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "POOR_SIGNAL"
+      },
+      "product_timestamp_us": 0,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 0,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "FOUND",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000001",
+      "event_type": "DEVICE_DISCOVERED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "POOR_SIGNAL"
+      },
+      "product_timestamp_us": 1000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 1,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "PAIRING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000002",
+      "event_type": "PAIRING_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "POOR_SIGNAL"
+      },
+      "product_timestamp_us": 2000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 2,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "CONNECTED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000003",
+      "event_type": "DEVICE_CONNECTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "POOR_SIGNAL"
+      },
+      "product_timestamp_us": 3000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 3,
+      "session_id": null,
+      "source": "SIMULATED",
+      "source_timestamp_us": null
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STREAMING",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000004",
+      "event_type": "STREAM_STARTED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "POOR_SIGNAL"
+      },
+      "product_timestamp_us": 1000000,
+      "reason_code": null,
+      "recoverable": true,
+      "sequence_index": 4,
+      "session_id": "SIM_S_CAP002_POOR_SIGNAL",
+      "source": "SIMULATED",
+      "source_timestamp_us": 0
+     },
+     {
+      "device_id": "NHM_VIRTUAL_WEARABLE_00",
+      "device_state": "STOPPED",
+      "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000005",
+      "event_type": "STREAM_STOPPED",
+      "event_version": "DEVICE_EVENT_V1",
+      "metadata": {
+       "attempt": null,
+       "detail": null,
+       "scenario_id": "POOR_SIGNAL"
+      },
+      "product_timestamp_us": 181000000,
+      "reason_code": "SCENARIO_COMPLETE",
+      "recoverable": true,
+      "sequence_index": 5,
+      "session_id": "SIM_S_CAP002_POOR_SIGNAL",
+      "source": "SIMULATED",
+      "source_timestamp_us": 180000000
+     }
+    ],
+    "duration_s": 180,
+    "expected_outage_index_intervals": [],
+    "provenance": {
+     "dataset_id": "WEARABLE_SIM_V1",
+     "engineering_only": true,
+     "nominal_source_rate_hz": 360,
+     "nominal_source_rate_is": "SIMULATION convention, not a hardware measurement",
+     "scenario_id": "POOR_SIGNAL",
+     "scientific_evidence": false,
+     "seed": 20261003,
+     "session_id": "SIM_S_CAP002_POOR_SIGNAL",
+     "simulation_version": "WEARABLE_SIM_V1",
+     "source_mode": "SYNTHETIC_PHYSIOLOGY",
+     "virtual_participant_is_human": false,
+     "wearable_v1": false
+    },
+    "records": {
+     "context_absent_index_intervals": [],
+     "delivery_gap_index_intervals": [],
+     "ecg_sensor_dropout_index_intervals": [],
+     "first_sample_index": 0,
+     "first_timestamp_us": 0,
+     "last_sample_index": 64799,
+     "last_timestamp_us": 179997222,
+     "monotonic_sample_index": true,
+     "monotonic_timestamp": true,
+     "participant_ids": [
+      "SIM_P000013"
+     ],
+     "record_count": 64800,
+     "record_sources": [
+      "SYNTHETIC_PHYSIOLOGY"
+     ],
+     "records_sha256": "cab7d34a84c74151f336654e5941c147649ab8cb6fab5cf2c3de407da16f157e"
+    },
+    "replay_id": "CAPSTONE_DEVICE_REPLAY_V1",
+    "scenario_id": "POOR_SIGNAL",
+    "seed": 20261003,
+    "source_rate_hz_simulation_convention": 360,
+    "stream_runtime": {
+     "all_windows_2500_samples_250hz_10s": true,
+     "gap_events_seen_by_runtime": 0,
+     "quality_counts": {
+      "UNUSABLE": 3,
+      "VALID": 30
+     },
+     "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+     "window_count": 33,
+     "windows": [
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 15000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 20000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 25000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 30000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 35000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 40000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 45000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 50000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 55000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 60000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 65000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 70000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 75000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 80000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 85000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 90000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 95000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 100000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 105000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 110000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 115000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 120000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [
+        "CLIPPING"
+       ],
+       "timestamp_us": 125000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [
+        "CLIPPING"
+       ],
+       "timestamp_us": 130000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "UNUSABLE",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [
+        "CLIPPING"
+       ],
+       "timestamp_us": 135000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 140000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 145000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 150000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 155000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 160000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 165000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 170000000,
+       "window_seconds": 10
+      },
+      {
+       "context_present": true,
+       "ecg_quality": "VALID",
+       "ecg_sample_count": 2500,
+       "ecg_target_hz": 250,
+       "missing_slots": 0,
+       "quality_reasons": [],
+       "timestamp_us": 175000000,
+       "window_seconds": 10
+      }
+     ],
+     "windows_samples_sha256": "790e0b1d261df71e05697e2a558c48bc7c014ea31c7d4707b7809df663ba938b",
+     "windows_with_context": 33
+    }
+   },
+   "semantic_digest": "76e491c1a2727be73e9d472720d0bb7a5425533909eab3cc0030abc8a6e07c30",
+   "timing_mode": "ACCELERATED"
+  }
+ }
+}

@@ -1,0 +1,486 @@
+{
+ "all_decided_pass": true,
+ "cap002_tests": {
+  "count": 67,
+  "passed": 67
+ },
+ "criteria": [
+  {
+   "checks": [
+    "@cap001_capg0_pass"
+   ],
+   "criterion": 1,
+   "pass": true,
+   "text": "CAP-001 = PASS and CAPG0 = PASS"
+  },
+  {
+   "checks": [
+    "@cap001_lock"
+   ],
+   "criterion": 2,
+   "pass": true,
+   "text": "CAP-001 protocol lock verifies byte-for-byte"
+  },
+  {
+   "checks": [
+    "@drift"
+   ],
+   "criterion": 3,
+   "pass": true,
+   "text": "Protected upstream (scientific/runtime, existing FL, frontend, CAP-001 files) has zero drift"
+  },
+  {
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ],
+   "criterion": 4,
+   "pass": true,
+   "text": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1 was frozen in a commit that precedes all result evidence"
+  },
+  {
+   "checks": [
+    "test_simulated_wearable_implements_the_frozen_device_source_protocol",
+    "test_simulated_source_and_future_real_double_share_one_interface_boundary"
+   ],
+   "criterion": 5,
+   "pass": true,
+   "text": "SimulatedWearableSource implements the frozen DeviceSource protocol exactly"
+  },
+  {
+   "checks": [
+    "test_virtual_edge_node_implements_the_frozen_edge_contract",
+    "test_edge_identities_reuse_the_frozen_eight_client_cohort_mapping"
+   ],
+   "criterion": 6,
+   "pass": true,
+   "text": "VirtualEdgeNode implements the frozen EdgeNode contract"
+  },
+  {
+   "checks": [
+    "test_records_are_observed_records_only_ordered_and_synthetic",
+    "test_existing_stream_runtime_and_generator_are_unchanged"
+   ],
+   "criterion": 7,
+   "pass": true,
+   "text": "ObservedRecord is reused unchanged"
+  },
+  {
+   "checks": [
+    "@no_observed_record_v2"
+   ],
+   "criterion": 8,
+   "pass": true,
+   "text": "No ObservedRecordV2 / replacement record type exists"
+  },
+  {
+   "checks": [
+    "test_simulation_truth_is_never_imported_by_the_cap_002_modules",
+    "test_live_edge_path_does_not_import_fl_server_truth_or_inference_modules",
+    "test_cap_001_truth_boundary_still_holds_with_the_new_modules",
+    "test_live_records_expose_no_truth_label_or_model_fields",
+    "test_truth_scanner_negative_controls_detect_planted_leakage"
+   ],
+   "criterion": 9,
+   "pass": true,
+   "text": "No SimulationTruth in the live path"
+  },
+  {
+   "checks": [
+    "test_replay_never_calls_a_model_or_the_inference_api",
+    "test_live_edge_path_does_not_import_fl_server_truth_or_inference_modules"
+   ],
+   "criterion": 10,
+   "pass": true,
+   "text": "No model inference in the device layer"
+  },
+  {
+   "checks": [
+    "test_attachment_flow_scan_pair_connect_start_and_stop",
+    "test_stopped_may_return_to_connected_or_detached_per_the_frozen_contract"
+   ],
+   "criterion": 11,
+   "pass": true,
+   "text": "Device lifecycle transitions are legal"
+  },
+  {
+   "checks": [
+    "test_illegal_commands_fail_closed_without_state_or_event_change"
+   ],
+   "criterion": 12,
+   "pass": true,
+   "text": "Illegal lifecycle transitions fail closed"
+  },
+  {
+   "checks": [
+    "test_attachment_flow_scan_pair_connect_start_and_stop",
+    "test_live_flow_runs_the_attachment_then_streams_observed_records"
+   ],
+   "criterion": 13,
+   "pass": true,
+   "text": "scan / pair / connect / start works"
+  },
+  {
+   "checks": [
+    "test_disconnect_actually_interrupts_delivery_and_nothing_is_fabricated",
+    "test_no_record_is_delivered_between_disconnect_and_reconnect",
+    "test_negative_controls_the_invariant_checkers_detect_corruption"
+   ],
+   "criterion": 14,
+   "pass": true,
+   "text": "Disconnect actually interrupts data delivery"
+  },
+  {
+   "checks": [
+    "test_post_reconnect_indices_and_timestamps_follow_the_source_clock",
+    "test_disconnect_actually_interrupts_delivery_and_nothing_is_fabricated"
+   ],
+   "criterion": 15,
+   "pass": true,
+   "text": "Reconnect resumes deterministically"
+  },
+  {
+   "checks": [
+    "test_user_stop_halts_record_delivery",
+    "test_stopped_may_return_to_connected_or_detached_per_the_frozen_contract",
+    "test_stopping_early_still_produces_a_consistent_prefix"
+   ],
+   "criterion": 16,
+   "pass": true,
+   "text": "Stop semantics are correct"
+  },
+  {
+   "checks": [
+    "test_every_accepted_transition_emits_one_typed_deterministic_event",
+    "test_device_error_follows_the_frozen_lifecycle"
+   ],
+   "criterion": 17,
+   "pass": true,
+   "text": "DeviceEvents are typed and deterministic"
+  },
+  {
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[NORMAL_MONITORING]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[NORMAL_MONITORING]",
+    "test_normal_monitoring_is_continuous_with_context_and_no_faults"
+   ],
+   "criterion": 18,
+   "pass": true,
+   "text": "NORMAL_MONITORING deterministic"
+  },
+  {
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[CONTEXT_LOSS]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[CONTEXT_LOSS]",
+    "test_context_loss_removes_ppg_context_but_keeps_ecg_flowing"
+   ],
+   "criterion": 19,
+   "pass": true,
+   "text": "CONTEXT_LOSS deterministic"
+  },
+  {
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[POOR_SIGNAL]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[POOR_SIGNAL]",
+    "test_poor_signal_uses_existing_source_faults_and_no_outage_events"
+   ],
+   "criterion": 20,
+   "pass": true,
+   "text": "POOR_SIGNAL deterministic"
+  },
+  {
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[DISCONNECT_RECONNECT]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[DISCONNECT_RECONNECT]"
+   ],
+   "criterion": 21,
+   "pass": true,
+   "text": "DISCONNECT_RECONNECT deterministic"
+  },
+  {
+   "checks": [
+    "test_scenario_is_deterministic_across_fresh_runs[MIXED_MONITORING_SESSION]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[MIXED_MONITORING_SESSION]",
+    "test_mixed_session_sequences_context_loss_fault_disconnect_and_recovery"
+   ],
+   "criterion": 22,
+   "pass": true,
+   "text": "MIXED_MONITORING_SESSION deterministic"
+  },
+  {
+   "checks": [
+    "test_live_speed_and_accelerated_are_semantically_identical",
+    "test_live_speed_pacing_follows_source_timestamps_including_the_outage"
+   ],
+   "criterion": 23,
+   "pass": true,
+   "text": "LIVE_SPEED and ACCELERATED are semantically identical"
+  },
+  {
+   "checks": [
+    "test_descriptor_is_deterministic_synthetic_and_claims_no_hardware",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[NORMAL_MONITORING]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[CONTEXT_LOSS]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[POOR_SIGNAL]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[DISCONNECT_RECONNECT]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[MIXED_MONITORING_SESSION]"
+   ],
+   "criterion": 24,
+   "pass": true,
+   "text": "Source provenance is explicitly synthetic"
+  },
+  {
+   "checks": [
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[NORMAL_MONITORING]",
+    "test_scenario_matches_the_frozen_cap001_contract_and_is_engineering_only[MIXED_MONITORING_SESSION]"
+   ],
+   "criterion": 25,
+   "pass": true,
+   "text": "Virtual participants are never represented as human subjects"
+  },
+  {
+   "checks": [
+    "test_existing_stream_runtime_and_generator_are_unchanged",
+    "test_normal_source_feeds_the_existing_runtime_and_yields_canonical_windows"
+   ],
+   "criterion": 26,
+   "pass": true,
+   "text": "Existing WearableStreamRuntime consumes the source output unchanged"
+  },
+  {
+   "checks": [
+    "test_every_scenario_remains_compatible_with_the_ten_second_2500_sample_path",
+    "test_normal_source_feeds_the_existing_runtime_and_yields_canonical_windows"
+   ],
+   "criterion": 27,
+   "pass": true,
+   "text": "Windows remain compatible with the 10 s / 2500-sample / 250 Hz path"
+  },
+  {
+   "checks": [
+    "test_quality_is_computed_downstream_not_taken_from_the_device_records"
+   ],
+   "criterion": 28,
+   "pass": true,
+   "text": "Quality remains downstream QUALITY_V1 output"
+  },
+  {
+   "checks": [
+    "test_context_comes_from_observed_records_and_is_never_fabricated"
+   ],
+   "criterion": 29,
+   "pass": true,
+   "text": "Context remains downstream-aligned context"
+  },
+  {
+   "checks": [
+    "test_replay_never_calls_a_model_or_the_inference_api"
+   ],
+   "criterion": 30,
+   "pass": true,
+   "text": "No V2 inference/API required in CAP-002"
+  },
+  {
+   "checks": [
+    "@drift_frontend"
+   ],
+   "criterion": 31,
+   "pass": true,
+   "text": "No frontend changed"
+  },
+  {
+   "checks": [
+    "@no_product_api"
+   ],
+   "criterion": 32,
+   "pass": true,
+   "text": "No product API implemented"
+  },
+  {
+   "checks": [
+    "@no_auth"
+   ],
+   "criterion": 33,
+   "pass": true,
+   "text": "No auth implemented"
+  },
+  {
+   "checks": [
+    "@no_database"
+   ],
+   "criterion": 34,
+   "pass": true,
+   "text": "No database implemented"
+  },
+  {
+   "checks": [
+    "@no_fl_training",
+    "test_edge_node_has_no_fl_or_training_surface"
+   ],
+   "criterion": 35,
+   "pass": true,
+   "text": "No FL training executed"
+  },
+  {
+   "checks": [
+    "@no_candidate"
+   ],
+   "criterion": 36,
+   "pass": true,
+   "text": "No federated candidate created"
+  },
+  {
+   "checks": [
+    "@no_fl_training"
+   ],
+   "criterion": 37,
+   "pass": true,
+   "text": "No SecAgg run added"
+  },
+  {
+   "checks": [
+    "test_no_real_hardware_adapter_or_wearable_v1_artifact_exists"
+   ],
+   "criterion": 38,
+   "pass": true,
+   "text": "No physical hardware code"
+  },
+  {
+   "checks": [
+    "test_simulated_source_and_future_real_double_share_one_interface_boundary"
+   ],
+   "criterion": 39,
+   "pass": true,
+   "text": "Future real adapter remains interface-compatible"
+  },
+  {
+   "checks": [
+    "test_no_real_hardware_adapter_or_wearable_v1_artifact_exists",
+    "test_real_hardware_replacement_boundary_keeps_downstream_unchanged"
+   ],
+   "criterion": 40,
+   "pass": true,
+   "text": "Unknown hardware facts remain VERIFICATION_REQUIRED"
+  },
+  {
+   "checks": [
+    "@all_cap002_tests"
+   ],
+   "criterion": 41,
+   "pass": true,
+   "text": "Targeted tests pass"
+  },
+  {
+   "checks": [
+    "@regression"
+   ],
+   "criterion": 42,
+   "pass": true,
+   "text": "Existing Python regression passes"
+  },
+  {
+   "checks": [
+    "@frontend"
+   ],
+   "criterion": 43,
+   "pass": true,
+   "text": "Frontend tests/check/build still pass (frontend tree additionally hash-verified)"
+  },
+  {
+   "checks": [
+    "@ruff"
+   ],
+   "criterion": 44,
+   "pass": true,
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    "@pip"
+   ],
+   "criterion": 45,
+   "pass": true,
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "criterion": 46,
+   "pass": true,
+   "text": "CI neither queried nor triggered"
+  },
+  {
+   "checks": [
+    "@registry_cap002"
+   ],
+   "criterion": 47,
+   "pass": true,
+   "text": "CAP-002 = PASS"
+  },
+  {
+   "checks": [
+    "@registry_capg1"
+   ],
+   "criterion": 48,
+   "pass": true,
+   "text": "CAPG1 = PASS"
+  },
+  {
+   "checks": [
+    "@registry_cap003"
+   ],
+   "criterion": 49,
+   "pass": true,
+   "text": "CAP-003 remains NOT_STARTED"
+  },
+  {
+   "checks": [
+    "@mutation_log"
+   ],
+   "criterion": 50,
+   "pass": true,
+   "text": "Mutation / negative controls each failed the test suite as designed and left no repository mutation"
+  },
+  {
+   "checks": [
+    "@reproducibility",
+    "test_replay_digest_reproduces_in_a_fresh_process"
+   ],
+   "criterion": 51,
+   "pass": true,
+   "text": "Canonical replay digests are identical across two fresh-process executions"
+  },
+  {
+   "checks": [
+    "test_training_boundary_is_a_disabled_placeholder_that_persists_nothing",
+    "test_edge_node_has_no_fl_or_training_surface"
+   ],
+   "criterion": 52,
+   "pass": true,
+   "text": "Edge training boundary is a disabled placeholder; no TrainingBufferRecord persisted"
+  },
+  {
+   "checks": [
+    "@cap001_disclosure_recorded"
+   ],
+   "criterion": 53,
+   "pass": true,
+   "text": "Inherited CAP-001 bookkeeping discrepancy (33 vs 50 criteria) recorded without reopening CAP-001"
+  }
+ ],
+ "criteria_count": 53,
+ "decided": 53,
+ "gate": "CAPG1",
+ "protocol_freeze": {
+  "bound_file_drift_since_freeze": [],
+  "freeze_commit": "51cab3cef447f0be463a9bd942ea860bc50e0b49",
+  "freeze_is_ancestor_of_head": true,
+  "ok": true,
+  "result_files_present_in_freeze": []
+ },
+ "regression_summary": {
+  "passed": 2590,
+  "skipped": 1
+ },
+ "undecided": []
+}

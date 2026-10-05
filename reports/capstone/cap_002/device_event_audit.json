@@ -1,0 +1,24 @@
+{
+ "event_types_emitted": [
+  "DEVICE_CONNECTED",
+  "DEVICE_DISCONNECTED",
+  "DEVICE_DISCOVERED",
+  "DEVICE_RECONNECTED",
+  "PAIRING_STARTED",
+  "RECONNECT_STARTED",
+  "SCAN_STARTED",
+  "STREAM_STARTED",
+  "STREAM_STOPPED"
+ ],
+ "event_version": [
+  "DEVICE_EVENT_V1"
+ ],
+ "forbidden_physiological_keys_present": [],
+ "sequence_contiguous_per_scenario": true,
+ "session_none_before_stream_started": true,
+ "sources": [
+  "SIMULATED"
+ ],
+ "state_effect_matches_frozen_contract": true,
+ "timestamp_semantics": "source_timestamp_us = ObservedRecord timeline microseconds (None for attach events); product_timestamp_us = deterministic LOGICAL product clock (pre-stream: sequence*1000 us; in-stream: 1_000_000 + source_timestamp_us); no wall clock enters any event"
+}

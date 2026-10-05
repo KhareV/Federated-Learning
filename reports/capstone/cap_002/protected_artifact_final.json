@@ -1,0 +1,27 @@
+{
+ "added_count": 23,
+ "added_outside_additive_namespace": [],
+ "baseline_file_count": 3175,
+ "cap001_lock_verification": {
+  "entries_checked": 53,
+  "lock": "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json",
+  "lock_sha256": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "mismatches": [],
+  "status": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL",
+  "verified": true
+ },
+ "entry_sha": "44939378e7aee3baa2e92fefdd42fa9d75640a8a",
+ "frontend_drift": [],
+ "frontend_files_checked": 162,
+ "head_sha": "6aa118bb0a17908185feff1c98ddc4334d4300f2",
+ "modified_outside_allowed_control_plane": [],
+ "modified_since_entry": [
+  "manifests/capstone/gate_registry_v1.csv",
+  "manifests/capstone/task_registry_v1.csv",
+  "tests/test_capstone_lifecycle.py"
+ ],
+ "named_component_drift": [],
+ "named_components_checked": 58,
+ "protected_artifact_drift": false,
+ "removed_since_entry": []
+}

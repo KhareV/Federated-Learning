@@ -1,0 +1,21 @@
+{
+ "cap002_modules_importing_truth": [
+  "product/devices/simulated.py",
+  "product/edge/virtual.py"
+ ],
+ "enforcement": [
+  "AST import scan of all CAP-002 modules",
+  "fresh-process sys.modules check (no simulation truth modules, federated, privacy, flwr, torch, api)",
+  "extends the CAP-001 repo-wide truth-importer scan",
+  "scanner negative controls"
+ ],
+ "forbidden_in": [
+  "product/devices/*",
+  "product/edge/*",
+  "live record iterator",
+  "device event iterator",
+  "stream-runtime compatibility path"
+ ],
+ "label_adapter_used": false,
+ "reserved_for": "SIMULATION_LABEL_ADAPTER_V1 (CAP-006)"
+}

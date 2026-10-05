@@ -1,0 +1,218 @@
+{
+ "device_event_sequence": [
+  "SCAN_STARTED",
+  "DEVICE_DISCOVERED",
+  "PAIRING_STARTED",
+  "DEVICE_CONNECTED",
+  "STREAM_STARTED",
+  "STREAM_STOPPED"
+ ],
+ "device_events": [
+  {
+   "device_id": "NHM_VIRTUAL_WEARABLE_00",
+   "device_state": "SCANNING",
+   "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000000",
+   "event_type": "SCAN_STARTED",
+   "event_version": "DEVICE_EVENT_V1",
+   "metadata": {
+    "attempt": null,
+    "detail": null,
+    "scenario_id": "CONTEXT_LOSS"
+   },
+   "product_timestamp_us": 0,
+   "reason_code": null,
+   "recoverable": true,
+   "sequence_index": 0,
+   "session_id": null,
+   "source": "SIMULATED",
+   "source_timestamp_us": null
+  },
+  {
+   "device_id": "NHM_VIRTUAL_WEARABLE_00",
+   "device_state": "FOUND",
+   "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000001",
+   "event_type": "DEVICE_DISCOVERED",
+   "event_version": "DEVICE_EVENT_V1",
+   "metadata": {
+    "attempt": null,
+    "detail": null,
+    "scenario_id": "CONTEXT_LOSS"
+   },
+   "product_timestamp_us": 1000,
+   "reason_code": null,
+   "recoverable": true,
+   "sequence_index": 1,
+   "session_id": null,
+   "source": "SIMULATED",
+   "source_timestamp_us": null
+  },
+  {
+   "device_id": "NHM_VIRTUAL_WEARABLE_00",
+   "device_state": "PAIRING",
+   "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000002",
+   "event_type": "PAIRING_STARTED",
+   "event_version": "DEVICE_EVENT_V1",
+   "metadata": {
+    "attempt": null,
+    "detail": null,
+    "scenario_id": "CONTEXT_LOSS"
+   },
+   "product_timestamp_us": 2000,
+   "reason_code": null,
+   "recoverable": true,
+   "sequence_index": 2,
+   "session_id": null,
+   "source": "SIMULATED",
+   "source_timestamp_us": null
+  },
+  {
+   "device_id": "NHM_VIRTUAL_WEARABLE_00",
+   "device_state": "CONNECTED",
+   "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000003",
+   "event_type": "DEVICE_CONNECTED",
+   "event_version": "DEVICE_EVENT_V1",
+   "metadata": {
+    "attempt": null,
+    "detail": null,
+    "scenario_id": "CONTEXT_LOSS"
+   },
+   "product_timestamp_us": 3000,
+   "reason_code": null,
+   "recoverable": true,
+   "sequence_index": 3,
+   "session_id": null,
+   "source": "SIMULATED",
+   "source_timestamp_us": null
+  },
+  {
+   "device_id": "NHM_VIRTUAL_WEARABLE_00",
+   "device_state": "STREAMING",
+   "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000004",
+   "event_type": "STREAM_STARTED",
+   "event_version": "DEVICE_EVENT_V1",
+   "metadata": {
+    "attempt": null,
+    "detail": null,
+    "scenario_id": "CONTEXT_LOSS"
+   },
+   "product_timestamp_us": 1000000,
+   "reason_code": null,
+   "recoverable": true,
+   "sequence_index": 4,
+   "session_id": "SIM_S_CAP002_CONTEXT_LOSS",
+   "source": "SIMULATED",
+   "source_timestamp_us": 0
+  },
+  {
+   "device_id": "NHM_VIRTUAL_WEARABLE_00",
+   "device_state": "STOPPED",
+   "event_id": "NHM_VIRTUAL_WEARABLE_00-EV000005",
+   "event_type": "STREAM_STOPPED",
+   "event_version": "DEVICE_EVENT_V1",
+   "metadata": {
+    "attempt": null,
+    "detail": null,
+    "scenario_id": "CONTEXT_LOSS"
+   },
+   "product_timestamp_us": 181000000,
+   "reason_code": "SCENARIO_COMPLETE",
+   "recoverable": true,
+   "sequence_index": 5,
+   "session_id": "SIM_S_CAP002_CONTEXT_LOSS",
+   "source": "SIMULATED",
+   "source_timestamp_us": 180000000
+  }
+ ],
+ "duration_s": 180,
+ "engineering_only": true,
+ "expected_outage_index_intervals": [],
+ "model_output_asserted": false,
+ "provenance": {
+  "dataset_id": "WEARABLE_SIM_V1",
+  "engineering_only": true,
+  "nominal_source_rate_hz": 360,
+  "nominal_source_rate_is": "SIMULATION convention, not a hardware measurement",
+  "scenario_id": "CONTEXT_LOSS",
+  "scientific_evidence": false,
+  "seed": 20261002,
+  "session_id": "SIM_S_CAP002_CONTEXT_LOSS",
+  "simulation_version": "WEARABLE_SIM_V1",
+  "source_mode": "SYNTHETIC_PHYSIOLOGY",
+  "virtual_participant_is_human": false,
+  "wearable_v1": false
+ },
+ "records": {
+  "context_absent_index_intervals": [
+   [
+    21600,
+    43199
+   ]
+  ],
+  "delivery_gap_index_intervals": [],
+  "ecg_sensor_dropout_index_intervals": [],
+  "first_sample_index": 0,
+  "first_timestamp_us": 0,
+  "last_sample_index": 64799,
+  "last_timestamp_us": 179997222,
+  "monotonic_sample_index": true,
+  "monotonic_timestamp": true,
+  "participant_ids": [
+   "SIM_P000013"
+  ],
+  "record_count": 64800,
+  "record_sources": [
+   "SYNTHETIC_PHYSIOLOGY"
+  ],
+  "records_sha256": "887fddbfae1c7d7da229a6f8894deb9e1c5c2f27bf0e84485d5e7fdb5771bfab"
+ },
+ "scenario_id": "CONTEXT_LOSS",
+ "scientific_evidence": false,
+ "seed": 20261002,
+ "semantic_digest": "15d2cf11e293edfc5ef545df9d7bc11a1bbdf98820e223c0d44ccd15903f7439",
+ "stream_runtime": {
+  "all_windows_2500_samples_250hz_10s": true,
+  "gap_events_seen_by_runtime": 0,
+  "quality_counts": {
+   "VALID": 33
+  },
+  "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+  "window_count": 33,
+  "windows_samples_sha256": "174127bff766d48efcfa4da35a014cc83e26131062742105d079cb1d008f9c3f",
+  "windows_with_context": 21
+ },
+ "stream_runtime_window_timestamps_us": [
+  15000000,
+  20000000,
+  25000000,
+  30000000,
+  35000000,
+  40000000,
+  45000000,
+  50000000,
+  55000000,
+  60000000,
+  65000000,
+  70000000,
+  75000000,
+  80000000,
+  85000000,
+  90000000,
+  95000000,
+  100000000,
+  105000000,
+  110000000,
+  115000000,
+  120000000,
+  125000000,
+  130000000,
+  135000000,
+  140000000,
+  145000000,
+  150000000,
+  155000000,
+  160000000,
+  165000000,
+  170000000,
+  175000000
+ ]
+}

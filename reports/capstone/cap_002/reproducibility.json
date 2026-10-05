@@ -1,0 +1,26 @@
+{
+ "excluded_nondeterminism": [
+  "wall-clock",
+  "pid",
+  "temp paths",
+  "pacing sleeps"
+ ],
+ "fresh_processes": true,
+ "full_semantic_equality": true,
+ "identical": true,
+ "run1_digests": {
+  "CONTEXT_LOSS": "15d2cf11e293edfc5ef545df9d7bc11a1bbdf98820e223c0d44ccd15903f7439",
+  "DISCONNECT_RECONNECT": "6829e84f000c9e0673f2f28ac18f7d5a53f9092feeb25d2f41b752ef99ade638",
+  "MIXED_MONITORING_SESSION": "077a892641c02673e030c4b7729a5c82aef9f0d66d9ca42976c648a55ca3db9b",
+  "NORMAL_MONITORING": "acfc7b4d6db153fb6bce714ec048a6b426e3fa02d2da3de18295a37d3ce2097a",
+  "POOR_SIGNAL": "76e491c1a2727be73e9d472720d0bb7a5425533909eab3cc0030abc8a6e07c30"
+ },
+ "run2_digests": {
+  "CONTEXT_LOSS": "15d2cf11e293edfc5ef545df9d7bc11a1bbdf98820e223c0d44ccd15903f7439",
+  "DISCONNECT_RECONNECT": "6829e84f000c9e0673f2f28ac18f7d5a53f9092feeb25d2f41b752ef99ade638",
+  "MIXED_MONITORING_SESSION": "077a892641c02673e030c4b7729a5c82aef9f0d66d9ca42976c648a55ca3db9b",
+  "NORMAL_MONITORING": "acfc7b4d6db153fb6bce714ec048a6b426e3fa02d2da3de18295a37d3ce2097a",
+  "POOR_SIGNAL": "76e491c1a2727be73e9d472720d0bb7a5425533909eab3cc0030abc8a6e07c30"
+ },
+ "runs": 2
+}

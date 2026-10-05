@@ -1,0 +1,66 @@
+{
+ "implemented": [
+  "NORMAL_MONITORING",
+  "CONTEXT_LOSS",
+  "POOR_SIGNAL",
+  "DISCONNECT_RECONNECT",
+  "MIXED_MONITORING_SESSION"
+ ],
+ "not_implemented_contract_untouched": [
+  "ALERT_POLICY_ENGINEERING_FIXTURE",
+  "FL_SINGLE_RUN",
+  "FL_NEW_LOCAL_BATCH",
+  "FL_MULTIRUN_CANDIDATE_HISTORY",
+  "FL_RESTART_RESUME",
+  "FL_REJECT_INVALID_UPDATE",
+  "FL_SECAGG_SHADOW",
+  "FULL_CAPSTONE_DEMO"
+ ],
+ "scenarios": [
+  {
+   "engineering_only": true,
+   "event_count": 6,
+   "record_count": 43200,
+   "scenario_id": "NORMAL_MONITORING",
+   "seed": 20261001,
+   "semantic_digest": "acfc7b4d6db153fb6bce714ec048a6b426e3fa02d2da3de18295a37d3ce2097a",
+   "window_count": 21
+  },
+  {
+   "engineering_only": true,
+   "event_count": 6,
+   "record_count": 64800,
+   "scenario_id": "CONTEXT_LOSS",
+   "seed": 20261002,
+   "semantic_digest": "15d2cf11e293edfc5ef545df9d7bc11a1bbdf98820e223c0d44ccd15903f7439",
+   "window_count": 33
+  },
+  {
+   "engineering_only": true,
+   "event_count": 6,
+   "record_count": 64800,
+   "scenario_id": "POOR_SIGNAL",
+   "seed": 20261003,
+   "semantic_digest": "76e491c1a2727be73e9d472720d0bb7a5425533909eab3cc0030abc8a6e07c30",
+   "window_count": 33
+  },
+  {
+   "engineering_only": true,
+   "event_count": 10,
+   "record_count": 59400,
+   "scenario_id": "DISCONNECT_RECONNECT",
+   "seed": 20261004,
+   "semantic_digest": "6829e84f000c9e0673f2f28ac18f7d5a53f9092feeb25d2f41b752ef99ade638",
+   "window_count": 33
+  },
+  {
+   "engineering_only": true,
+   "event_count": 10,
+   "record_count": 167400,
+   "scenario_id": "MIXED_MONITORING_SESSION",
+   "seed": 20261005,
+   "semantic_digest": "077a892641c02673e030c4b7729a5c82aef9f0d66d9ca42976c648a55ca3db9b",
+   "window_count": 93
+  }
+ ]
+}

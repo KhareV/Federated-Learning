@@ -1,0 +1,19 @@
+{
+ "component": "VIRTUAL_EDGE_NODE_V1",
+ "contract": "EDGE_NODE_CONTRACT_V1",
+ "fl_modules_imported_on_live_path": false,
+ "fl_training_executed": false,
+ "identities": {
+  "fl_compatible": "edge_identity_for_site(i) = frozen CAP-001 mapping SIM_FL_SITE_0i / SIM_P0001(0i+1) / VIRTUAL_EDGE_NODE_0i; identity only",
+  "monitoring": "VIRTUAL_EDGE_NODE_00 (no FL cohort participant)"
+ },
+ "path": "product/edge/virtual.py",
+ "tests": [
+  "test_virtual_edge_node_implements_the_frozen_edge_contract",
+  "test_training_boundary_is_a_disabled_placeholder_that_persists_nothing",
+  "test_edge_node_has_no_fl_or_training_surface",
+  "test_live_edge_path_does_not_import_fl_server_truth_or_inference_modules"
+ ],
+ "training_boundary": "DisabledTrainingBuffer: satisfies LocalTrainingBuffer, stores nothing, append_batch raises (CAP-006 owns the buffer)",
+ "training_buffer_records_persisted": 0
+}

@@ -1,0 +1,14 @@
+{
+ "accelerated_semantic_digest": "40eb7217cdbce39979f9fbec65929079ed0c6ec9d00b4ac6fe7de48dc646446b",
+ "excerpt_scenario": {
+  "duration_s": 20,
+  "id": "TEST_SHORT",
+  "seed": 20269999
+ },
+ "identical": true,
+ "injected_clock_total_paced_seconds": 20.0,
+ "live_speed_semantic_digest": "40eb7217cdbce39979f9fbec65929079ed0c6ec9d00b4ac6fe7de48dc646446b",
+ "longest_single_wait_s": 2.0,
+ "note": "pacing measured on an injectable clock (no real waiting); semantic content excludes pacing",
+ "pacing_events": 6481
+}

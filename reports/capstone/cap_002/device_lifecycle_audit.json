@@ -1,0 +1,109 @@
+{
+ "all_exercised_transitions_are_frozen_legal": true,
+ "disconnect_semantics": "DEVICE_DISCONNECTED->DISCONNECTED, RECONNECT_STARTED->RECONNECTING at outage start; DEVICE_RECONNECTED->CONNECTED, STREAM_STARTED->STREAMING at outage end. NO record is delivered, buffered or fabricated during the outage.",
+ "frozen_transitions": {
+  "CONNECTED": [
+   "STREAMING",
+   "DISCONNECTED",
+   "DETACHED"
+  ],
+  "DETACHED": [
+   "SCANNING"
+  ],
+  "DISCONNECTED": [
+   "RECONNECTING",
+   "DETACHED"
+  ],
+  "ERROR": [
+   "DETACHED",
+   "SCANNING"
+  ],
+  "FOUND": [
+   "PAIRING",
+   "DETACHED"
+  ],
+  "PAIRING": [
+   "CONNECTED",
+   "ERROR",
+   "DETACHED"
+  ],
+  "RECONNECTING": [
+   "CONNECTED",
+   "ERROR",
+   "DETACHED"
+  ],
+  "SCANNING": [
+   "FOUND",
+   "ERROR",
+   "DETACHED"
+  ],
+  "STOPPED": [
+   "CONNECTED",
+   "DETACHED"
+  ],
+  "STREAMING": [
+   "DISCONNECTED",
+   "STOPPED",
+   "ERROR"
+  ]
+ },
+ "illegal_transition_behavior": {
+  "exception": "IllegalTransitionError",
+  "message_format": "ILLEGAL_DEVICE_TRANSITION:<from>-><to>",
+  "product_surface": "A rejected transition is reported as a recoverable system.error / HTTP 409 by the product layer (CAP-003).",
+  "silent_coercion_allowed": false,
+  "state_unchanged": true
+ },
+ "reconnect_clock": "the source clock keeps running during an outage: sample_index and timestamp_us continue from the generator timeline and skip the outage; nothing is replayed",
+ "states": [
+  "DETACHED",
+  "SCANNING",
+  "FOUND",
+  "PAIRING",
+  "CONNECTED",
+  "STREAMING",
+  "DISCONNECTED",
+  "RECONNECTING",
+  "STOPPED",
+  "ERROR"
+ ],
+ "stop_semantics": "stop_stream(): STREAMING->STOPPED (STREAM_STOPPED, reason USER_STOP); STOPPED->CONNECTED via connect() (link kept) or STOPPED->DETACHED via disconnect(); STOPPED->STREAMING is illegal; a restarted stream is a fresh deterministic stream of the same scenario",
+ "tests": [
+  "test_illegal_commands_fail_closed_without_state_or_event_change",
+  "test_attachment_flow_scan_pair_connect_start_and_stop"
+ ],
+ "transitions_exercised_by_canonical_scenarios": [
+  [
+   "CONNECTED",
+   "STREAMING"
+  ],
+  [
+   "DISCONNECTED",
+   "RECONNECTING"
+  ],
+  [
+   "FOUND",
+   "PAIRING"
+  ],
+  [
+   "PAIRING",
+   "CONNECTED"
+  ],
+  [
+   "RECONNECTING",
+   "CONNECTED"
+  ],
+  [
+   "SCANNING",
+   "FOUND"
+  ],
+  [
+   "STREAMING",
+   "DISCONNECTED"
+  ],
+  [
+   "STREAMING",
+   "STOPPED"
+  ]
+ ]
+}

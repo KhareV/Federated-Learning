@@ -1,0 +1,54 @@
+{
+ "cap002_targeted": {
+  "files": [
+   "tests/test_capstone_simulated_device.py",
+   "tests/test_capstone_virtual_edge.py",
+   "tests/test_capstone_device_replay.py"
+  ],
+  "unique_tests": 67,
+  "passed": 67,
+  "log": "logs/cap002_tests.log",
+  "junit": "logs/cap002_tests.xml"
+ },
+ "cap001_and_lifecycle": {
+  "passed": 124,
+  "log": "logs/cap001_and_lifecycle_tests.log"
+ },
+ "python_regression": {
+  "passed": 2590,
+  "skipped": 1,
+  "failed": 0,
+  "skip_reason": "tests/test_v2_fl_eval_method.py:246 post-exposure state (pre-existing)",
+  "log": "logs/pytest_full.log",
+  "earlier_run_at_freeze_commit": "logs/pytest_full_at_freeze_51cab3c.log (2590 passed, 1 skipped)"
+ },
+ "ruff": "All checks passed",
+ "pip_check": "No broken requirements found",
+ "frontend": {
+  "npm_test": {
+   "files_passed": 7,
+   "files_skipped": 1,
+   "tests_passed": 68,
+   "tests_skipped": 1,
+   "exit": 0
+  },
+  "npm_run_check": {
+   "files": 5671,
+   "errors": 0,
+   "warnings": 118,
+   "exit": 0
+  },
+  "npm_run_build": {
+   "exit": 0,
+   "done": true
+  }
+ },
+ "mutation_controls": {
+  "controls": 6,
+  "all_caught": true,
+  "all_restored": true
+ },
+ "environment": "fresh Python 3.11 venv outside the repository from requirements-dev.lock",
+ "ci_queried": false,
+ "ci_triggered": false
+}

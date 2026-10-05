@@ -1,0 +1,72 @@
+{
+ "context_source": "ObservedRecord context fields via the runtime's causal alignment",
+ "model_or_inference_api_called": false,
+ "per_scenario": {
+  "CONTEXT_LOSS": {
+   "all_windows_2500_samples_250hz_10s": true,
+   "gap_events_seen_by_runtime": 0,
+   "quality_counts": {
+    "VALID": 33
+   },
+   "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+   "window_count": 33,
+   "windows_samples_sha256": "174127bff766d48efcfa4da35a014cc83e26131062742105d079cb1d008f9c3f",
+   "windows_with_context": 21
+  },
+  "DISCONNECT_RECONNECT": {
+   "all_windows_2500_samples_250hz_10s": true,
+   "gap_events_seen_by_runtime": 1,
+   "quality_counts": {
+    "UNUSABLE": 4,
+    "VALID": 29
+   },
+   "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+   "window_count": 33,
+   "windows_samples_sha256": "1eb0092303083dc12aa81330071d8f616d2c112c9f596a6f5db0130b0e28fc62",
+   "windows_with_context": 31
+  },
+  "MIXED_MONITORING_SESSION": {
+   "all_windows_2500_samples_250hz_10s": true,
+   "gap_events_seen_by_runtime": 1,
+   "quality_counts": {
+    "UNUSABLE": 7,
+    "VALID": 86
+   },
+   "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+   "window_count": 93,
+   "windows_samples_sha256": "8909761da50601bd4711a553b925581039610a8df7fb97016b2e0bb8ca62c571",
+   "windows_with_context": 79
+  },
+  "NORMAL_MONITORING": {
+   "all_windows_2500_samples_250hz_10s": true,
+   "gap_events_seen_by_runtime": 0,
+   "quality_counts": {
+    "VALID": 21
+   },
+   "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+   "window_count": 21,
+   "windows_samples_sha256": "1276f9a76063326d1cb21cdf186776314ffdc0894653f8c88beaad470bbe9a02",
+   "windows_with_context": 21
+  },
+  "POOR_SIGNAL": {
+   "all_windows_2500_samples_250hz_10s": true,
+   "gap_events_seen_by_runtime": 0,
+   "quality_counts": {
+    "UNUSABLE": 3,
+    "VALID": 30
+   },
+   "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)",
+   "window_count": 33,
+   "windows_samples_sha256": "790e0b1d261df71e05697e2a558c48bc7c014ea31c7d4707b7809df663ba938b",
+   "windows_with_context": 33
+  }
+ },
+ "quality_source": "QUALITY_V1 path via the runtime (device record quality field proven irrelevant)",
+ "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged; sha verified against the CAP-002 entry baseline)",
+ "runtime_sha256": "ad441ed9fc56dcbae4c9789090a20fc2bf3f37ea8c7321abfab6da83d7f24644",
+ "tests": [
+  "test_quality_is_computed_downstream_not_taken_from_the_device_records",
+  "test_context_comes_from_observed_records_and_is_never_fabricated",
+  "test_disconnect_outage_delivers_no_records_and_the_gap_is_observable_downstream"
+ ]
+}
