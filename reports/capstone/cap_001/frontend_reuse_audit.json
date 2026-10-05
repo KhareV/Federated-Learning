@@ -1,0 +1,142 @@
+{
+ "cap_001_frontend_change": "NONE",
+ "cap_001_verification": {
+  "npm_run_build": {
+   "adapter": "@sveltejs/adapter-static",
+   "done": true,
+   "exit": 0
+  },
+  "npm_run_check": {
+   "errors": 0,
+   "exit": 0,
+   "files": 5671,
+   "note": "warnings pre-existing (unused CSS selectors etc.); no frontend file modified by CAP-001",
+   "warnings": 118
+  },
+  "npm_test": {
+   "exit": 0,
+   "files_passed": 7,
+   "files_skipped": 1,
+   "tests_passed": 68,
+   "tests_skipped": 1
+  }
+ },
+ "clerk_dependency_present": false,
+ "existing_components": {
+  "dashboard": [
+   "BarContrib.svelte",
+   "DashboardShell.svelte",
+   "DeferredPage.svelte",
+   "GaugeRing.svelte",
+   "InsightGraph.svelte",
+   "MetricTile.svelte",
+   "MiniSpark.svelte",
+   "MultiLine.svelte",
+   "Panel.svelte",
+   "RadarPlot.svelte",
+   "ScatterField.svelte",
+   "SectionPage.svelte",
+   "SignalRibbon.svelte",
+   "TelemetryPlot.svelte",
+   "WorkbenchPage.svelte"
+  ],
+  "federation": [
+   "DeviceNetwork.svelte",
+   "FederationFlow.svelte"
+  ],
+  "hardware": [
+   "DeviceExplorer.svelte",
+   "HardwareStudio.svelte",
+   "SensorHotspots.svelte",
+   "Wearable.svelte"
+  ],
+  "signals": [
+   "ECGWaveform.svelte",
+   "MultimodalStudio.svelte",
+   "PPGWaveform.svelte",
+   "SignalPanel.svelte"
+  ]
+ },
+ "existing_lib": {
+  "api": [
+   "nhm-v1.ts"
+  ],
+  "dashboard": [
+   "demo-window.ts",
+   "fixtures.ts",
+   "replay.ts",
+   "session.svelte.ts",
+   "state-presentation.ts"
+  ],
+  "services": [
+   "api.ts",
+   "websocket.ts"
+  ],
+  "stores": [
+   "fl.svelte.ts",
+   "monitoring.svelte.ts",
+   "notifications.svelte.ts",
+   "settings.svelte.ts"
+  ]
+ },
+ "existing_live_transport": "frontend/src/lib/services/websocket.ts connects ws://host/ws/live/{clientId} (legacy; separate from the product WS route /product/v1/sessions/{session_id}/live)",
+ "existing_routes": [
+  ".",
+  "[...path]",
+  "ai/anomaly",
+  "ai/baseline",
+  "ai/confidence",
+  "ai/explainability",
+  "ai/insights",
+  "alerts",
+  "fl/aggregation",
+  "fl/clients",
+  "fl/global-model",
+  "fl/overview",
+  "fl/personal-models",
+  "fl/privacy",
+  "fl/rounds",
+  "monitor",
+  "monitoring",
+  "overview",
+  "patients",
+  "reports",
+  "research/ablation",
+  "research/analytics",
+  "research/comparison",
+  "research/experiments",
+  "research/results",
+  "research/robustness",
+  "signals/dashboard",
+  "signals/ecg",
+  "signals/ppg",
+  "signals/quality",
+  "signals/spo2",
+  "system/data",
+  "system/devices",
+  "system/health",
+  "system/notifications",
+  "system/settings",
+  "trends"
+ ],
+ "existing_signal_replay": "frontend/src/lib/dashboard/replay.ts (canonical replay requires 2500 samples at 250 Hz)",
+ "framework": "SvelteKit 2 + Svelte 5 + TypeScript + Tailwind 4 (adapter-static)",
+ "frontend_package_json_count": 1,
+ "modified_by_cap_001": false,
+ "planned_additive_successor": "CAPSTONE_UI_V1",
+ "react_vue_next_dependency_present": false,
+ "reuse_plan": {
+  "/app/device": "extend components/hardware (Wearable, DeviceExplorer, HardwareStudio)",
+  "/app/monitoring": "reuse monitoring page logic + lib/dashboard + components/dashboard (SignalRibbon, TelemetryPlot, GaugeRing, MetricTile, Panel); add product live-event store",
+  "/app/research/fl": "reuse components/federation + existing /fl/* routes",
+  "/app/research/ml": "reuse existing /research/* and /ai/* routes' components",
+  "/app/system": "reuse /system/health"
+ },
+ "tracked_frontend_files_unchanged_since_entry": true,
+ "verified_v2_dashboard_path": {
+  "default_request_model_id": "MODEL_V2_FINAL",
+  "lock": "DASHBOARD_UI_V1_5",
+  "page": "frontend/src/routes/monitoring/+page.svelte",
+  "sha256": "69449158324237632b2e1ef4aae6cef60622d088415e5a1c171f4ecf1ee00e40"
+ }
+}

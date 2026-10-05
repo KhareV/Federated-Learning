@@ -1,0 +1,102 @@
+{
+ "adapter_types": [
+  "SIMULATED",
+  "FUTURE_REAL"
+ ],
+ "contract": "DEVICE_SOURCE_CONTRACT_V1",
+ "device_states": [
+  "DETACHED",
+  "SCANNING",
+  "FOUND",
+  "PAIRING",
+  "CONNECTED",
+  "STREAMING",
+  "DISCONNECTED",
+  "RECONNECTING",
+  "STOPPED",
+  "ERROR"
+ ],
+ "event_types": [
+  "SCAN_STARTED",
+  "DEVICE_DISCOVERED",
+  "PAIRING_STARTED",
+  "DEVICE_CONNECTED",
+  "STREAM_STARTED",
+  "DEVICE_DISCONNECTED",
+  "RECONNECT_STARTED",
+  "DEVICE_RECONNECTED",
+  "STREAM_STOPPED",
+  "DEVICE_DETACHED",
+  "DEVICE_ERROR"
+ ],
+ "hardware_assumptions_invented": false,
+ "implemented_now": {
+  "FUTURE_REAL": false,
+  "SIMULATED": false
+ },
+ "methods": [
+  "scan",
+  "connect",
+  "disconnect",
+  "start_stream",
+  "stop_stream",
+  "records",
+  "events"
+ ],
+ "observed_record_reused": true,
+ "transitions": {
+  "CONNECTED": [
+   "STREAMING",
+   "DISCONNECTED",
+   "DETACHED"
+  ],
+  "DETACHED": [
+   "SCANNING"
+  ],
+  "DISCONNECTED": [
+   "RECONNECTING",
+   "DETACHED"
+  ],
+  "ERROR": [
+   "DETACHED",
+   "SCANNING"
+  ],
+  "FOUND": [
+   "PAIRING",
+   "DETACHED"
+  ],
+  "PAIRING": [
+   "CONNECTED",
+   "ERROR",
+   "DETACHED"
+  ],
+  "RECONNECTING": [
+   "CONNECTED",
+   "ERROR",
+   "DETACHED"
+  ],
+  "SCANNING": [
+   "FOUND",
+   "ERROR",
+   "DETACHED"
+  ],
+  "STOPPED": [
+   "CONNECTED",
+   "DETACHED"
+  ],
+  "STREAMING": [
+   "DISCONNECTED",
+   "STOPPED",
+   "ERROR"
+  ]
+ },
+ "verification_required_fields": [
+  "adc_resolution_bits",
+  "ble_or_serial_service_identifiers",
+  "clock_drift_characteristics",
+  "firmware_version",
+  "native_sample_rates_hz",
+  "packet_format",
+  "transport"
+ ]
+}

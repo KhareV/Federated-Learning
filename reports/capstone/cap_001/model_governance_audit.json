@@ -1,0 +1,60 @@
+{
+ "acceptance_semantics": {
+  "does_not_mean": [
+   "scientific promotion",
+   "production deployment",
+   "clinical superiority",
+   "replacement of MODEL_V2_FINAL"
+  ],
+  "means": "accepted as a capstone engineering sandbox candidate"
+ },
+ "candidate_states": [
+  "CREATED",
+  "VALIDATION_PENDING",
+  "VALIDATING",
+  "ACCEPTED_TO_SANDBOX",
+  "REJECTED",
+  "ARCHIVED"
+ ],
+ "contract": "CAPSTONE_MODEL_GOVERNANCE_V1",
+ "forbidden_states": [
+  "PRODUCTION_DEPLOYED",
+  "DEPLOYED",
+  "PROMOTED",
+  "RELEASED",
+  "DEFAULT"
+ ],
+ "transitions": {
+  "ACCEPTED_TO_SANDBOX": [
+   "ARCHIVED"
+  ],
+  "ARCHIVED": [],
+  "CREATED": [
+   "VALIDATION_PENDING"
+  ],
+  "REJECTED": [
+   "ARCHIVED"
+  ],
+  "VALIDATING": [
+   "ACCEPTED_TO_SANDBOX",
+   "REJECTED"
+  ],
+  "VALIDATION_PENDING": [
+   "VALIDATING"
+  ]
+ },
+ "validation_gate": {
+  "check_ids": [
+   "STATE_FINITE",
+   "STATE_SPEC_MATCHES_BASE",
+   "UPDATE_DIGESTS_RECONCILE",
+   "ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE",
+   "BASE_STATE_LINEAGE_VERIFIED"
+  ],
+  "forbidden": [
+   "rerunning frozen held-out inference",
+   "efficacy claims from synthetic data"
+  ],
+  "kind": "engineering/validation gate (no held-out scientific inference)"
+ }
+}

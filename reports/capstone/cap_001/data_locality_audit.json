@@ -1,0 +1,28 @@
+{
+ "enforcement_reuse": "federated/wearable_fl_system_v1.py scan_forbidden / coordinator rejection codes (RAW_DATA_FIELD_PRESENT, LABEL_FIELD_PRESENT, TRUTH_FIELD_PRESENT)",
+ "existing_evidence": "reports/model_v2/v2_fl_005/server_data_locality_audit.json",
+ "existing_evidence_sha256": "afcd0e6238e2574a2bb8ca2fb8cb896cdfe5ce07bc2aa66535e5263e010d29ac",
+ "policy": {
+  "enforcement_reuse": "federated/wearable_fl_system_v1.py scan_forbidden / coordinator rejection codes (RAW_DATA_FIELD_PRESENT, LABEL_FIELD_PRESENT, TRUTH_FIELD_PRESENT)",
+  "forbidden_claims": [
+   "anonymity",
+   "differential privacy",
+   "complete privacy",
+   "inference resistance"
+  ],
+  "plain_fedavg": "exposes clear model updates; must not be called private",
+  "secagg_path": "supports only the already-proven narrow protected-aggregation-interface claim",
+  "server_must_not_receive": [
+   "raw ECG streams",
+   "raw PPG streams",
+   "raw SpO2 streams",
+   "SimulationTruth",
+   "local labels",
+   "local minibatches"
+  ],
+  "server_receives": [
+   "model-update envelopes (metadata + update payload)"
+  ]
+ },
+ "storage_federation_tables_hold_no_raw_label_truth": true
+}

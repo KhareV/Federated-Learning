@@ -1,0 +1,28 @@
+{
+ "contract": "CAPSTONE_STORAGE_POLICY_V1",
+ "engine": "SQLITE",
+ "entities": [
+  "users",
+  "devices",
+  "device_connections",
+  "monitoring_sessions",
+  "inference_events",
+  "monitoring_state_events",
+  "signal_quality_events",
+  "context_snapshots",
+  "session_summaries",
+  "waveform_previews",
+  "federation_runs",
+  "federation_rounds",
+  "fl_client_statuses",
+  "candidate_models",
+  "governance_decisions"
+ ],
+ "implemented_now": false,
+ "per_sample_rows_allowed": false,
+ "raw_session_artifact_policy": {
+  "engineering_replay_artifact": "If ever persisted, an explicit versioned session artifact file (not SQL rows) with its own schema_version and sha256 recorded on the session row.",
+  "mandatory": false,
+  "simulated_sessions": "Prefer deterministic regeneration from (scenario_id, seed, simulation_version); no raw persistence required."
+ }
+}

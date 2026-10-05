@@ -1,0 +1,201 @@
+{
+ "contract": "CAPSTONE_DEMO_SCENARIOS_V1",
+ "genuine_fl_requirement": {
+  "live_run_required_in_later_phase": true,
+  "modes_visibly_identified": true,
+  "replay_mode_may_coexist": true,
+  "static_charts_or_animation_only_allowed": false
+ },
+ "scenarios": [
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "VIRTUAL_EDGE_NODE_00"
+   ],
+   "live_inference_runs": true,
+   "local_fl_training_runs": false,
+   "scenario_id": "NORMAL_MONITORING",
+   "seed": 20261001,
+   "simulation_truth_used": false
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "VIRTUAL_EDGE_NODE_00"
+   ],
+   "live_inference_runs": true,
+   "local_fl_training_runs": false,
+   "scenario_id": "CONTEXT_LOSS",
+   "seed": 20261002,
+   "simulation_truth_used": false
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "VIRTUAL_EDGE_NODE_00"
+   ],
+   "live_inference_runs": true,
+   "local_fl_training_runs": false,
+   "scenario_id": "POOR_SIGNAL",
+   "seed": 20261003,
+   "simulation_truth_used": false
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "VIRTUAL_EDGE_NODE_00"
+   ],
+   "live_inference_runs": true,
+   "local_fl_training_runs": false,
+   "scenario_id": "DISCONNECT_RECONNECT",
+   "seed": 20261004,
+   "simulation_truth_used": false
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "VIRTUAL_EDGE_NODE_00"
+   ],
+   "live_inference_runs": true,
+   "local_fl_training_runs": false,
+   "scenario_id": "MIXED_MONITORING_SESSION",
+   "seed": 20261005,
+   "simulation_truth_used": false
+  },
+  {
+   "classification": "ENGINEERING_STATE_MACHINE_DEMONSTRATION",
+   "clients": [],
+   "live_inference_runs": false,
+   "local_fl_training_runs": false,
+   "scenario_id": "ALERT_POLICY_ENGINEERING_FIXTURE",
+   "seed": 20261006,
+   "simulation_truth_used": false
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "live_inference_runs": false,
+   "local_fl_training_runs": true,
+   "scenario_id": "FL_SINGLE_RUN",
+   "seed": 20260927,
+   "simulation_truth_used": true
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "live_inference_runs": false,
+   "local_fl_training_runs": true,
+   "scenario_id": "FL_NEW_LOCAL_BATCH",
+   "seed": 20261101,
+   "simulation_truth_used": true
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "live_inference_runs": false,
+   "local_fl_training_runs": true,
+   "scenario_id": "FL_MULTIRUN_CANDIDATE_HISTORY",
+   "seed": 20261102,
+   "simulation_truth_used": true
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "live_inference_runs": false,
+   "local_fl_training_runs": true,
+   "scenario_id": "FL_RESTART_RESUME",
+   "seed": 20260927,
+   "simulation_truth_used": true
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "live_inference_runs": false,
+   "local_fl_training_runs": true,
+   "scenario_id": "FL_REJECT_INVALID_UPDATE",
+   "seed": 20260927,
+   "simulation_truth_used": true
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "live_inference_runs": false,
+   "local_fl_training_runs": true,
+   "scenario_id": "FL_SECAGG_SHADOW",
+   "seed": 20260927,
+   "simulation_truth_used": true
+  },
+  {
+   "classification": "ENGINEERING_DEMO",
+   "clients": [
+    "SIM_FL_SITE_00",
+    "SIM_FL_SITE_01",
+    "SIM_FL_SITE_02",
+    "SIM_FL_SITE_03",
+    "SIM_FL_SITE_04",
+    "SIM_FL_SITE_05",
+    "SIM_FL_SITE_06",
+    "SIM_FL_SITE_07"
+   ],
+   "live_inference_runs": true,
+   "local_fl_training_runs": true,
+   "scenario_id": "FULL_CAPSTONE_DEMO",
+   "seed": 20261103,
+   "simulation_truth_used": true
+  }
+ ]
+}

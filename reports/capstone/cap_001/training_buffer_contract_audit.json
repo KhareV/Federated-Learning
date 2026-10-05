@@ -1,0 +1,77 @@
+{
+ "contract": "LOCAL_TRAINING_BUFFER_CONTRACT_V1",
+ "forbidden_label_sources": [
+  "MODEL_PREDICTION",
+  "SELF_LABEL",
+  "PSEUDO_LABEL",
+  "LIVE_INFERENCE_OUTPUT"
+ ],
+ "implemented_now": false,
+ "label_sources": [
+  "SIMULATION_TRUTH_ENGINEERING",
+  "VERIFIED_ANNOTATION",
+  "CLINICIAN_REVIEW",
+  "EXPERT_ADJUDICATION"
+ ],
+ "real_label_source_status": "VERIFICATION_REQUIRED (no validated real-label acquisition protocol exists)",
+ "record_fields": [
+  "client_id",
+  "participant_id",
+  "source",
+  "window_id",
+  "model_input_ref",
+  "label",
+  "label_source",
+  "quality_eligible",
+  "timestamp_us",
+  "simulation",
+  "provenance_id",
+  "buffer_batch_id"
+ ],
+ "simulation_truth_boundary": {
+  "enforcement": "AST import scan in tests/test_capstone_federation_contracts.py",
+  "forbidden_importer_paths": [
+   "api/",
+   "fusion/",
+   "preprocessing/",
+   "deployment/",
+   "product/",
+   "simulation/stream_runtime_v2013.py",
+   "federated/aggregation.py",
+   "federated/wearable_fl_system_v1.py",
+   "privacy/"
+  ],
+  "never_consumed_by": [
+   "live preprocessing",
+   "QUALITY_V1",
+   "MODEL_V2 inference",
+   "CAL_V2",
+   "alert/state logic",
+   "product monitoring API",
+   "live dashboard",
+   "federation server"
+  ],
+  "planned_additional_consumer": [
+   "product/edge/label_adapter.py (CAP-006; the SIMULATION_LABEL_ADAPTER_V1 product wrapper)"
+  ],
+  "sanctioned_importers": {
+   "label_adapter_consumer": [
+    "federated/wearable_sim_local_labels.py"
+   ],
+   "offline_fixture_builder": [
+    "simulation/fixtures.py"
+   ],
+   "producers_of_observed_and_truth": [
+    "simulation/wearable.py"
+   ]
+  },
+  "truth_modules": [
+   "simulation.truth_v2013",
+   "simulation.fl_cohort_truth_v1"
+  ],
+  "truth_names": [
+   "SimulationTruth",
+   "get_truth"
+  ]
+ }
+}

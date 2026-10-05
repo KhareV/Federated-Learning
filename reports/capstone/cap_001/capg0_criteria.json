@@ -1,0 +1,439 @@
+{
+ "all_decided_pass": true,
+ "capstone_tests": {
+  "count": 74,
+  "passed": 74
+ },
+ "criteria": [
+  {
+   "criterion": 1,
+   "evidence": [
+    "@entry"
+   ],
+   "pass": true,
+   "text": "Entry repository understood"
+  },
+  {
+   "criterion": 2,
+   "evidence": [
+    "@drift"
+   ],
+   "pass": true,
+   "text": "Protected frozen upstream has zero drift"
+  },
+  {
+   "criterion": 3,
+   "evidence": [
+    "test_existing_sveltekit_frontend_is_unchanged_and_the_only_frontend"
+   ],
+   "pass": true,
+   "text": "Existing SvelteKit frontend mandated as the foundation"
+  },
+  {
+   "criterion": 4,
+   "evidence": [
+    "test_existing_sveltekit_frontend_is_unchanged_and_the_only_frontend"
+   ],
+   "pass": true,
+   "text": "No second frontend exists"
+  },
+  {
+   "criterion": 5,
+   "evidence": [
+    "test_protocol_freezes_offline_mode_claims_and_phase_sequence",
+    "test_product_api_routes_are_unique_additive_and_separate_from_the_frozen_api"
+   ],
+   "pass": true,
+   "text": "Product architected as FL-first"
+  },
+  {
+   "criterion": 6,
+   "evidence": [
+    "test_protocol_freezes_offline_mode_claims_and_phase_sequence"
+   ],
+   "pass": true,
+   "text": "Five product planes explicitly separated"
+  },
+  {
+   "criterion": 7,
+   "evidence": [
+    "test_device_source_protocol_shape_matches_contract"
+   ],
+   "pass": true,
+   "text": "DeviceSource frozen"
+  },
+  {
+   "criterion": 8,
+   "evidence": [
+    "test_edge_node_protocol_shape_matches_contract_and_separates_flows",
+    "test_edge_identity_kind_matches_simulation_flag"
+   ],
+   "pass": true,
+   "text": "EdgeNode frozen"
+  },
+  {
+   "criterion": 9,
+   "evidence": [
+    "test_wearable_is_an_acquisition_source_distinct_from_the_fl_client"
+   ],
+   "pass": true,
+   "text": "Wearable != FL compute client distinction frozen"
+  },
+  {
+   "criterion": 10,
+   "evidence": [
+    "test_observed_record_reference_is_the_existing_canonical_type"
+   ],
+   "pass": true,
+   "text": "ObservedRecord reused"
+  },
+  {
+   "criterion": 11,
+   "evidence": [
+    "test_simulation_truth_is_never_imported_by_the_live_or_federation_server_paths"
+   ],
+   "pass": true,
+   "text": "SimulationTruth cannot reach live inference"
+  },
+  {
+   "criterion": 12,
+   "evidence": [
+    "test_simulation_truth_importers_are_exactly_the_sanctioned_set"
+   ],
+   "pass": true,
+   "text": "SimulationTruth may feed only sandbox training-label construction"
+  },
+  {
+   "criterion": 13,
+   "evidence": [
+    "test_label_source_rules_for_simulated_versus_real_data",
+    "test_real_hardware_replacement_boundary_keeps_downstream_unchanged"
+   ],
+   "pass": true,
+   "text": "Real future labels explicitly unresolved/verification-required"
+  },
+  {
+   "criterion": 14,
+   "evidence": [
+    "test_training_buffer_schema_matches_contract"
+   ],
+   "pass": true,
+   "text": "Training-buffer contract frozen"
+  },
+  {
+   "criterion": 15,
+   "evidence": [
+    "test_fl_client_contract_reuses_existing_v2_fl_modules",
+    "test_update_submission_is_a_metadata_projection_of_the_existing_envelope"
+   ],
+   "pass": true,
+   "text": "FL-client contract reuses/adapts existing V2 FL"
+  },
+  {
+   "criterion": 16,
+   "evidence": [
+    "test_federation_run_contract_and_state_machine",
+    "test_round_lifecycle_matches_contract_and_has_no_deployed_state"
+   ],
+   "pass": true,
+   "text": "Federation-run contract frozen"
+  },
+  {
+   "criterion": 17,
+   "evidence": [
+    "test_algorithms_and_secagg_scope_reuse_frozen_methods_without_inventions"
+   ],
+   "pass": true,
+   "text": "Real FedAvg/FedProx reused"
+  },
+  {
+   "criterion": 18,
+   "evidence": [
+    "test_algorithms_and_secagg_scope_reuse_frozen_methods_without_inventions",
+    "test_invalid_live_events_are_rejected"
+   ],
+   "pass": true,
+   "text": "SecAgg scope remains narrow"
+  },
+  {
+   "criterion": 19,
+   "evidence": [
+    "test_candidate_schema_matches_registry_contract_and_is_never_production",
+    "test_registry_keeps_released_models_and_candidates_in_separate_namespaces"
+   ],
+   "pass": true,
+   "text": "Candidate registry frozen"
+  },
+  {
+   "criterion": 20,
+   "evidence": [
+    "test_governance_lifecycle_has_no_production_deployed_state"
+   ],
+   "pass": true,
+   "text": "Candidate governance frozen"
+  },
+  {
+   "criterion": 21,
+   "evidence": [
+    "test_candidate_schema_matches_registry_contract_and_is_never_production",
+    "test_no_federated_candidate_can_bind_into_the_released_runtime"
+   ],
+   "pass": true,
+   "text": "FL candidates cannot deploy automatically"
+  },
+  {
+   "criterion": 22,
+   "evidence": [
+    "test_registry_keeps_released_models_and_candidates_in_separate_namespaces",
+    "test_session_runtime_identity_is_immutable_and_pinned_to_the_default_binding"
+   ],
+   "pass": true,
+   "text": "MODEL_V2_FINAL remains released default"
+  },
+  {
+   "criterion": 23,
+   "evidence": [
+    "test_no_public_model_selector_in_any_product_contract_surface",
+    "test_released_runtime_source_has_no_public_model_selector_and_no_capstone_dependency"
+   ],
+   "pass": true,
+   "text": "No public selector added to released runtime"
+  },
+  {
+   "criterion": 24,
+   "evidence": [
+    "test_product_api_routes_are_unique_additive_and_separate_from_the_frozen_api"
+   ],
+   "pass": true,
+   "text": "Product API contract is additive"
+  },
+  {
+   "criterion": 25,
+   "evidence": [
+    "@drift",
+    "test_product_api_routes_are_unique_additive_and_separate_from_the_frozen_api"
+   ],
+   "pass": true,
+   "text": "API_SCHEMA_V1 unchanged"
+  },
+  {
+   "criterion": 26,
+   "evidence": [
+    "test_live_event_kinds_match_contract_and_every_kind_validates",
+    "test_waveform_transport_policy_is_ui_only_and_not_per_sample",
+    "test_inference_event_mirrors_the_frozen_response_without_new_scientific_fields"
+   ],
+   "pass": true,
+   "text": "Live monitoring contract frozen"
+  },
+  {
+   "criterion": 27,
+   "evidence": [
+    "test_monitoring_and_federation_streams_do_not_accept_each_others_events",
+    "test_live_event_schema_is_generated_from_the_authoritative_python_union"
+   ],
+   "pass": true,
+   "text": "FL live-event contract frozen"
+  },
+  {
+   "criterion": 28,
+   "evidence": [
+    "test_auth_provider_contract_for_clerk_and_demo",
+    "test_demo_auth_requires_explicit_configuration_and_never_silently_activates",
+    "test_authorization_is_owner_only"
+   ],
+   "pass": true,
+   "text": "Authentication policy frozen"
+  },
+  {
+   "criterion": 29,
+   "evidence": [
+    "test_storage_policy_schema_is_executable_sqlite_with_enforced_foreign_keys",
+    "test_storage_policy_forbids_per_sample_relational_rows",
+    "test_storage_ownership_resolves_to_a_user_and_no_ml_selection_is_persisted"
+   ],
+   "pass": true,
+   "text": "Storage policy frozen"
+  },
+  {
+   "criterion": 30,
+   "evidence": [
+    "test_data_locality_policy_is_enforced_by_existing_server_side_scanning"
+   ],
+   "pass": true,
+   "text": "Data-locality policy frozen"
+  },
+  {
+   "criterion": 31,
+   "evidence": [
+    "test_protocol_freezes_offline_mode_claims_and_phase_sequence"
+   ],
+   "pass": true,
+   "text": "Offline one-laptop faculty mode required"
+  },
+  {
+   "criterion": 32,
+   "evidence": [
+    "test_the_existing_eight_client_cohort_is_reused_not_reinvented",
+    "test_fl_scenarios_reuse_the_existing_eight_client_cohort"
+   ],
+   "pass": true,
+   "text": "Existing eight-client FL concepts reused"
+  },
+  {
+   "criterion": 33,
+   "evidence": [
+    "test_fl_scenarios_reuse_the_existing_eight_client_cohort",
+    "test_initial_demo_target_is_compatible_with_the_v2_fl_005_evidence"
+   ],
+   "pass": true,
+   "text": "No four-client replacement experiment invented"
+  },
+  {
+   "criterion": 34,
+   "evidence": [
+    "test_demo_scenarios_are_deterministic_engineering_only_and_honest",
+    "test_simulation_truth_usage_is_declared_per_scenario_and_confined"
+   ],
+   "pass": true,
+   "text": "Demo scenario contract frozen"
+  },
+  {
+   "criterion": 35,
+   "evidence": [
+    "test_alert_fixture_is_separated_from_model_efficacy_evidence"
+   ],
+   "pass": true,
+   "text": "Abnormal model demo separated from alert-policy fixture"
+  },
+  {
+   "criterion": 36,
+   "evidence": [
+    "test_demo_scenarios_are_deterministic_engineering_only_and_honest"
+   ],
+   "pass": true,
+   "text": "Genuine executable FL demo required later"
+  },
+  {
+   "criterion": 37,
+   "evidence": [
+    "test_demo_scenarios_are_deterministic_engineering_only_and_honest"
+   ],
+   "pass": true,
+   "text": "Replay/instant FL mode may coexist with live-run mode"
+  },
+  {
+   "criterion": 38,
+   "evidence": [
+    "test_claim_boundary_and_continual_learning_rules_are_frozen"
+   ],
+   "pass": true,
+   "text": "Continual federated model-development sandbox allowed"
+  },
+  {
+   "criterion": 39,
+   "evidence": [
+    "test_claim_boundary_and_continual_learning_rules_are_frozen"
+   ],
+   "pass": true,
+   "text": "Continual production learning forbidden"
+  },
+  {
+   "criterion": 40,
+   "evidence": [
+    "test_real_hardware_replacement_boundary_keeps_downstream_unchanged",
+    "test_future_real_adapter_is_compatible_with_the_same_edge_and_fl_contracts"
+   ],
+   "pass": true,
+   "text": "Real-hardware swap boundary frozen"
+  },
+  {
+   "criterion": 41,
+   "evidence": [
+    "test_real_hardware_replacement_boundary_keeps_downstream_unchanged",
+    "test_descriptor_rules_and_no_clinical_or_hardware_availability_claims"
+   ],
+   "pass": true,
+   "text": "Unknown physical hardware fields remain VERIFICATION_REQUIRED"
+  },
+  {
+   "criterion": 42,
+   "evidence": [
+    "test_claim_boundary_and_continual_learning_rules_are_frozen"
+   ],
+   "pass": true,
+   "text": "Product claims bounded"
+  },
+  {
+   "criterion": 43,
+   "evidence": [
+    "@all_capstone"
+   ],
+   "pass": true,
+   "text": "Targeted tests pass"
+  },
+  {
+   "criterion": 44,
+   "evidence": [
+    "@regression"
+   ],
+   "pass": true,
+   "text": "Existing regression passes"
+  },
+  {
+   "criterion": 45,
+   "evidence": [
+    "@ruff"
+   ],
+   "pass": true,
+   "text": "Ruff/lint passes"
+  },
+  {
+   "criterion": 46,
+   "evidence": [
+    "@pip"
+   ],
+   "pass": true,
+   "text": "pip check passes"
+  },
+  {
+   "criterion": 47,
+   "evidence": [
+    "@ci"
+   ],
+   "pass": true,
+   "text": "CI was not queried or triggered"
+  },
+  {
+   "criterion": 48,
+   "evidence": [
+    "@registry_cap001"
+   ],
+   "pass": true,
+   "text": "CAP-001 PASS"
+  },
+  {
+   "criterion": 49,
+   "evidence": [
+    "@registry_capg0"
+   ],
+   "pass": true,
+   "text": "CAPG0 PASS"
+  },
+  {
+   "criterion": 50,
+   "evidence": [
+    "@registry_cap002"
+   ],
+   "pass": true,
+   "text": "CAP-002 remains NOT_STARTED"
+  }
+ ],
+ "decided": 50,
+ "gate": "CAPG0",
+ "regression_summary": {
+  "passed": 2520,
+  "skipped": 1
+ },
+ "undecided": []
+}

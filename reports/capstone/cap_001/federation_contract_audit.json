@@ -1,0 +1,101 @@
+{
+ "aggregation_modes": [
+  "PLAIN",
+  "SECAGG_SHADOW"
+ ],
+ "algorithms": [
+  "FEDAVG",
+  "FEDPROX"
+ ],
+ "continual_sandbox": {
+  "allowed": true,
+  "description_forbidden": [
+   "continual clinical learning",
+   "automatic production adaptation"
+  ],
+  "flow": "new simulated local batch -> federated run -> candidate N -> another batch -> federated run -> candidate N+1",
+  "forbidden": [
+   "wearable sample -> model prediction -> prediction becomes label -> local retraining -> automatic production deployment",
+   "self-labeling",
+   "uncontrolled online learning",
+   "silent replacement of MODEL_V2_FINAL"
+  ],
+  "name": "continual federated model-development sandbox"
+ },
+ "federation": "CAPSTONE_FEDERATION_CONTRACT_V1",
+ "forbidden_round_states": [
+  "DEPLOYED",
+  "PRODUCTION_DEPLOYED",
+  "PROMOTED"
+ ],
+ "initial_demonstration_target": {
+  "canonical_updates": 24,
+  "clients": 8,
+  "compatible_with": "V2-FL-005",
+  "evidence": "reports/model_v2/v2_fl_005/federation_run.json",
+  "rounds": 3,
+  "scientific_outcome_frozen": false
+ },
+ "round_states": [
+  "CREATED",
+  "COLLECTING",
+  "LOCAL_TRAINING",
+  "UPDATES_READY",
+  "AGGREGATING",
+  "CANDIDATE_CREATED",
+  "VALIDATING",
+  "ACCEPTED_TO_SANDBOX",
+  "REJECTED",
+  "COMPLETED",
+  "FAILED"
+ ],
+ "round_transitions": {
+  "ACCEPTED_TO_SANDBOX": [
+   "COMPLETED",
+   "FAILED"
+  ],
+  "AGGREGATING": [
+   "CANDIDATE_CREATED",
+   "FAILED"
+  ],
+  "CANDIDATE_CREATED": [
+   "VALIDATING",
+   "FAILED"
+  ],
+  "COLLECTING": [
+   "LOCAL_TRAINING",
+   "FAILED"
+  ],
+  "COMPLETED": [],
+  "CREATED": [
+   "COLLECTING",
+   "FAILED"
+  ],
+  "FAILED": [],
+  "LOCAL_TRAINING": [
+   "UPDATES_READY",
+   "FAILED"
+  ],
+  "REJECTED": [
+   "COMPLETED",
+   "FAILED"
+  ],
+  "UPDATES_READY": [
+   "AGGREGATING",
+   "FAILED"
+  ],
+  "VALIDATING": [
+   "ACCEPTED_TO_SANDBOX",
+   "REJECTED",
+   "FAILED"
+  ]
+ },
+ "run": "CAPSTONE_FL_RUN_CONTRACT_V1",
+ "run_states": [
+  "CREATED",
+  "RUNNING",
+  "COMPLETED",
+  "FAILED"
+ ],
+ "secagg_scope": "narrow protected-aggregation-interface engineering result only (docs/MODEL_V2_SECAGG_THREAT_MODEL_V1.md); not anonymity, not differential privacy, not complete privacy, not inference resistance"
+}

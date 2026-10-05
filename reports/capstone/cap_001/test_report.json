@@ -1,0 +1,54 @@
+{
+ "targeted": {
+  "files": [
+   "tests/test_capstone_contracts.py",
+   "tests/test_capstone_federation_contracts.py",
+   "tests/test_capstone_lifecycle.py"
+  ],
+  "tests_passed": 121,
+  "unique_test_functions": 74,
+  "log": "logs/capstone_tests.log",
+  "junit": "logs/capstone_tests.xml",
+  "mutation_checks": [
+   "transition mutated (STOPPED->STREAMING) -> failed",
+   "ARRHYTHMIA_DETECTED added to monitoring vocabulary -> failed",
+   "session runtime model pinned to MODEL_V1 -> failed",
+   "SimulationTruth import planted in api/runtime.py (restored via git checkout) -> 2 tests failed",
+   "PRODUCTION_DEPLOYED added to governance states -> failed"
+  ]
+ },
+ "python_regression": {
+  "passed": 2520,
+  "skipped": 1,
+  "failed": 0,
+  "skip_reason": "tests/test_v2_fl_eval_method.py:246 post-exposure state (pre-existing)",
+  "log": "logs/pytest_full.log",
+  "earlier_pre_freeze_run_of_prior_scope": "2476 passed, 1 skipped"
+ },
+ "ruff": "All checks passed (Makefile lint directories + product + federated + privacy)",
+ "pip_check": "No broken requirements found",
+ "frontend": {
+  "npm_test": {
+   "files_passed": 7,
+   "files_skipped": 1,
+   "tests_passed": 68,
+   "tests_skipped": 1,
+   "exit": 0
+  },
+  "npm_run_check": {
+   "files": 5671,
+   "errors": 0,
+   "warnings": 118,
+   "exit": 0,
+   "note": "warnings pre-existing (unused CSS selectors etc.); no frontend file modified by CAP-001"
+  },
+  "npm_run_build": {
+   "adapter": "@sveltejs/adapter-static",
+   "exit": 0,
+   "done": true
+  }
+ },
+ "environment": "fresh Python 3.11 venv outside the repository from requirements-dev.lock (repo-local .venv is a stripped 3.9 environment)",
+ "ci_queried": false,
+ "ci_triggered": false
+}

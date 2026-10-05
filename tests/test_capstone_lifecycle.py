@@ -13,10 +13,10 @@ from src.nhm.hashing import hash_file
 ROOT = Path(__file__).resolve().parents[1]
 
 EXPECTED_TASKS = {
-    "CAP-001": "IN_PROGRESS",
+    "CAP-001": "PASS",
     **{f"CAP-{n:03d}": "NOT_STARTED" for n in range(2, 12)},
 }
-EXPECTED_GATES = {"CAPG0": "NOT_STARTED"}
+EXPECTED_GATES = {"CAPG0": "PASS"}
 EXPECTED_COMPONENTS = {
     "CAPSTONE_PRODUCT_PROTOCOL_V1": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL",
     "DEVICE_SOURCE_CONTRACT_V1": "FROZEN_INTERFACE_CONTRACT",

@@ -1,0 +1,112 @@
+{
+ "capstone_adapters_planned": {
+  "CAP-006": "product adapter over virtual_client_source_v1 + model_v2_fl",
+  "CAP-007": "thin orchestration adapter over wearable_fl_system_v1.Coordinator and wearable_fl_runner_v1"
+ },
+ "cohort": "SIM_FL_SITE_00..07 / SIM_P000101..108 reused directly (edge_node_v1.json)",
+ "frozen_evidence_directories_sample": {
+  "v2_fl_001": [
+   "aggregation_parity.json",
+   "artifact_hashes.json",
+   "client_manifest_audit.json",
+   "client_rounds.csv",
+   "decision.json",
+   "final_handoff.md"
+  ],
+  "v2_fl_002": [
+   "accounting_audit.json",
+   "artifact_hashes.json",
+   "bootstrap_draws_pin.json",
+   "checkpoint_tracking_audit.json",
+   "combined_client_rounds.csv",
+   "combined_result.json"
+  ],
+  "v2_fl_003": [
+   "accounting_audit.json",
+   "artifact_hashes.json",
+   "candidates",
+   "checkpoint_tracking_audit.json",
+   "chronology_audit.json",
+   "communication_compute.json"
+  ],
+  "v2_fl_004": [
+   "aggregate_correctness.json",
+   "artifact_hashes.json",
+   "canonical_preflight",
+   "client_data_locality_audit.json",
+   "entry_lifecycle_governance_audit.json",
+   "final_handoff.md"
+  ],
+  "v2_fl_005": [
+   "artifact_hashes.json",
+   "claim_audit.json",
+   "cohort_manifest_candidate.json",
+   "cohort_manifest_run.json",
+   "cohort_preflight.json",
+   "efficacy_metric_audit.json"
+  ],
+  "v2_fl_eval_001": [
+   "artifact_hashes.json",
+   "assembly_provenance.json",
+   "final_handoff.md",
+   "firewall_audit.json",
+   "historical_frozen_centralized_references.json",
+   "incart_statistics.json"
+  ]
+ },
+ "modules_reused_unchanged": {
+  "client_dataset_and_windows": {
+   "exists": true,
+   "path": "federated/virtual_client_source_v1.py",
+   "sha256": "cc469d5a16d8500490f497ab32dc59d2795dc310692caa2cb0974322273e4f37"
+  },
+  "coordinator_and_round_logic": {
+   "exists": true,
+   "path": "federated/wearable_fl_system_v1.py",
+   "sha256": "1e78748c7c2d0041a71cc3a5a9cef7fa68102b7b68adc0a05828215f0865e914"
+  },
+  "fedprox_objective": {
+   "exists": true,
+   "path": "federated/model_v2_fedprox.py",
+   "sha256": "1b2e71027ff27530c0e27bf5f9f42d0c06d6847301e2934e0bcc80e804d2dce4"
+  },
+  "local_labels": {
+   "exists": true,
+   "path": "federated/wearable_sim_local_labels.py",
+   "sha256": "eb894fd88ea2e23704561740a0347e0fe75a12da63f135f6db22dc6b168a5e3a"
+  },
+  "local_training_epoch": {
+   "exists": true,
+   "path": "federated/model_v2_fl.py",
+   "sha256": "0554ec13d0bba870f726b936dde5567552939687c25745803634ba4e6d4fc2b1"
+  },
+  "round_runner": {
+   "exists": true,
+   "path": "federated/wearable_fl_runner_v1.py",
+   "sha256": "6166141182e977cce79f4865e9bd5b9a4b29656086f11a6f3ab243bacf59966d"
+  },
+  "secagg": {
+   "exists": true,
+   "path": "privacy/secagg_app.py",
+   "sha256": "96e45efccb200b3c0b526ebbf11a1ea326f69e40408687f10917ed4735fee6d2"
+  },
+  "weighted_delta_aggregation": {
+   "exists": true,
+   "path": "federated/aggregation.py",
+   "sha256": "902a72b976399afe85a512ecb83897a80a483e6b541d5dbc544acbe654660920"
+  }
+ },
+ "new_fl_implementation_created": false,
+ "v2_fl_005_digests": {
+  "digest": "e234b755f1d90eb9bc3d9ae4d437904d32b6e453dc476187238191cf409a352e",
+  "excluded": [
+   "wall-clock",
+   "process IDs",
+   "timings",
+   "diagnostic losses/norms",
+   "cryptographic randomness"
+  ],
+  "replay_id": "WEARABLE_SIM_FL_SYSTEM_REPLAY_V1",
+  "run_2_digest": "e234b755f1d90eb9bc3d9ae4d437904d32b6e453dc476187238191cf409a352e"
+ }
+}

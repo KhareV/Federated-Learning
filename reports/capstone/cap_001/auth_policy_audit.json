@@ -1,0 +1,36 @@
+{
+ "clerk_sdk_integrated_now": false,
+ "contract": "CAPSTONE_AUTH_POLICY_V1",
+ "demo_provider": {
+  "acknowledgement_value": "I_UNDERSTAND_THIS_IS_NOT_CLERK",
+  "default_when_unconfigured": "REFUSE_TO_START (AuthConfigError)",
+  "described_as_clerk_allowed": false,
+  "env_ack_variable": "NHM_PRODUCT_DEMO_AUTH_ACK",
+  "env_mode_value": "DEMO",
+  "env_mode_variable": "NHM_PRODUCT_AUTH_MODE",
+  "identity_demo_mode_flag": true,
+  "requires_explicit_configuration": true,
+  "session_ownership_enforced": true,
+  "silent_activation_allowed": false,
+  "ui_visibility": "A persistent banner 'OFFLINE DEMO IDENTITY - not Clerk authentication' on every product page; GET /product/v1/system reports demo_mode=true.",
+  "user_id_prefix": "demo:"
+ },
+ "ml_independence": {
+  "forbidden_selectors": [
+   "model",
+   "checkpoint",
+   "calibration",
+   "threshold",
+   "alert_policy",
+   "federated_algorithm",
+   "scientific_identity"
+  ],
+  "identity_affects_ml": false,
+  "identity_may_select": [],
+  "statement": "Authentication controls only user identity, session ownership and device ownership. It MUST NOT control model, threshold, calibration, federated algorithm, candidate selection or scientific identity."
+ },
+ "providers": [
+  "CLERK",
+  "DEMO"
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "contract": "REAL_HARDWARE_REPLACEMENT_BOUNDARY_V1",
+ "future": [
+  "PhysicalWearableSource",
+  "RealEdgeGateway",
+  "same DeviceSource / ObservedRecord",
+  "same runtime",
+  "same FL client contract"
+ ],
+ "label_boundary": "New physiological data has no supervised label automatically. Future physical FL needs an explicitly validated label source (verified annotation, clinician review, expert adjudication or another separately validated protocol); unlabeled live streams cannot continuously train supervised FL.",
+ "replaced_components": [
+  "PhysicalWearableSource (adapter + transport)",
+  "RealEdgeGateway (phone/laptop/edge gateway host)"
+ ],
+ "today": [
+  "SimulatedWearableSource",
+  "VirtualEdgeNode",
+  "DeviceSource / ObservedRecord",
+  "existing runtime (WearableStreamRuntime -> /v1/infer-window)",
+  "FL client"
+ ],
+ "unchanged_downstream": [
+  "ObservedRecord (SAMPLE_SCHEMA_V1)",
+  "WearableStreamRuntime",
+  "PREPROC_V1",
+  "GAP_POLICY_V1",
+  "QUALITY_V1",
+  "MODEL_V2_FINAL",
+  "GATEWAY_ARTIFACT_V2",
+  "CAL_V2",
+  "ALERT_POLICY_V1_MODEL_V2_BINDING",
+  "API_SCHEMA_V1",
+  "product session semantics",
+  "PRODUCT_LIVE_EVENT_V1",
+  "CAPSTONE_FL_CLIENT_CONTRACT_V1",
+  "CAPSTONE_FEDERATION_CONTRACT_V1",
+  "model governance"
+ ],
+ "verification_required_fields": {
+  "adc_scaling": "VERIFICATION_REQUIRED",
+  "ble_packet_format": "VERIFICATION_REQUIRED",
+  "clock_drift": "VERIFICATION_REQUIRED",
+  "packet_latency": "VERIFICATION_REQUIRED",
+  "real_source_rate": "VERIFICATION_REQUIRED",
+  "real_training_label_source": "VERIFICATION_REQUIRED",
+  "signal_units": "VERIFICATION_REQUIRED"
+ }
+}

@@ -1,0 +1,54 @@
+{
+ "binding_rules": {
+  "candidate_can_bind_into_default_runtime": false,
+  "candidate_can_replace_model_v2_final": false,
+  "default_runtime_binding_unchanged": "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json"
+ },
+ "candidate_fields": [
+  "candidate_id",
+  "parent_model_id",
+  "federation_run_id",
+  "round",
+  "algorithm",
+  "client_count",
+  "created_at_us",
+  "state_digest",
+  "validation_status",
+  "governance_status",
+  "sandbox_status",
+  "production_deployed",
+  "claim_boundary"
+ ],
+ "contract": "CAPSTONE_MODEL_REGISTRY_CONTRACT_V1",
+ "namespaces": {
+  "CAPSTONE_FL_CANDIDATE": {
+   "classification": "engineering/demo federated candidates; not scientific releases; not automatically deployed",
+   "examples": [
+    "CAPSTONE_FL_CANDIDATE_0001",
+    "CAPSTONE_FL_CANDIDATE_0002"
+   ],
+   "id_pattern": "^CAPSTONE_FL_CANDIDATE_\\d{4}$"
+  },
+  "RELEASED_SCIENTIFIC": {
+   "frozen": true,
+   "members": [
+    "MODEL_V1",
+    "MODEL_V2_FINAL"
+   ]
+  }
+ },
+ "production_deployed": false,
+ "sandbox_runtime_boundary": {
+  "implemented_now": false,
+  "name": "CAPSTONE_FL_SANDBOX_RUNTIME",
+  "owner_phase": "CAP-008 (only if a candidate is ever exercised for inference)",
+  "properties": [
+   "research/demo only",
+   "isolated from the released monitoring plane",
+   "separate app and port",
+   "never the /app/monitoring path",
+   "explicit sandbox banner on every response"
+  ],
+  "released_runtime_selector_added": false
+ }
+}

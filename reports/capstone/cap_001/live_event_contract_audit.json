@@ -1,0 +1,67 @@
+{
+ "contract": "PRODUCT_LIVE_EVENT_V1",
+ "federation_invariants": {
+  "engineering_only": true,
+  "production_deployed_field_always_false": true,
+  "secagg_claim_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY"
+ },
+ "federation_kinds": [
+  "federation.status",
+  "round.status",
+  "client.status",
+  "client.training_progress",
+  "client.update_ready",
+  "aggregation.status",
+  "secagg.status",
+  "candidate.created",
+  "candidate.validation",
+  "candidate.governance",
+  "federation.completed",
+  "federation.error"
+ ],
+ "monitoring_kinds": [
+  "device.status",
+  "session.status",
+  "waveform.chunk",
+  "context.snapshot",
+  "quality.status",
+  "inference.result",
+  "monitoring.state",
+  "system.error"
+ ],
+ "monitoring_state_vocabulary": [
+  "NORMAL_MONITORED_PATTERN",
+  "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+  "RECHECK_SENSOR",
+  "CONTEXT_UNAVAILABLE",
+  "SYSTEM_ERROR"
+ ],
+ "quality_mapping": {
+  "DEGRADED": "Signal Degraded",
+  "UNUSABLE": "Recheck Sensor",
+  "VALID": "Signal Good",
+  "canonical_value_always_present": true,
+  "new_quality_algorithm": false
+ },
+ "waveform_transport_policy": {
+  "channels": [
+   "ECG",
+   "PPG_RED",
+   "PPG_IR"
+  ],
+  "chunks_contiguous": "next first_sample_index == previous first_sample_index + sample_count (enforced by the CAP-003 coordinator)",
+  "hard_max_samples_per_chunk": 144,
+  "independence": "Waveform UI transport is independent of the scientific 360->250 Hz PREPROC_V1 model path, which is unchanged.",
+  "nominal_samples_per_chunk": {
+   "max": 72,
+   "min": 36
+  },
+  "per_sample_websocket_messages_allowed": false,
+  "scientific_source_rate_hz": 360,
+  "ui_updates_per_second": {
+   "max": 10,
+   "min": 5
+  },
+  "unit": "ADC_COUNTS"
+ }
+}

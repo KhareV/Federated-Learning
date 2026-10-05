@@ -1,0 +1,41 @@
+{
+ "client_states": [
+  "IDLE",
+  "DATA_READY",
+  "TRAINING",
+  "UPDATE_READY",
+  "SUBMITTED",
+  "REJECTED",
+  "FAILED"
+ ],
+ "contract": "CAPSTONE_FL_CLIENT_CONTRACT_V1",
+ "existing_modules_reused": {
+  "client_dataset_and_windows": "federated/virtual_client_source_v1.py",
+  "coordinator_and_round_logic": "federated/wearable_fl_system_v1.py::Coordinator",
+  "fedprox_objective": "federated/model_v2_fedprox.py",
+  "local_labels": "federated/wearable_sim_local_labels.py",
+  "local_training_epoch": "federated/model_v2_fl.py::train_local_epoch_v2",
+  "round_runner": "federated/wearable_fl_runner_v1.py::execute_round / run_full / run_part1 / run_part2",
+  "secagg": "privacy/secagg_app.py (Flower SecAgg+), federated/wearable_fl_secagg_shadow_v1.py",
+  "weighted_delta_aggregation": "federated/aggregation.py::aggregate_weighted_deltas"
+ },
+ "identity_fields": [
+  "client_id",
+  "edge_node_id",
+  "base_model_id",
+  "global_round",
+  "local_example_count",
+  "client_state",
+  "update_digest",
+  "eligible",
+  "ineligible_reason"
+ ],
+ "new_fl_implementation_created": false,
+ "update_submission_envelope_mapping": {
+  "base_state_digest": "base_global_state_sha256",
+  "client_id": "client_id",
+  "examples_seen": "examples_seen",
+  "round_id": "round_id",
+  "update_digest": "update_sha256"
+ }
+}
