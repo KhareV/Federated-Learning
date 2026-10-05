@@ -1,0 +1,19 @@
+{
+ "amendment_id": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_1",
+ "change": "The CAP-008 protected audit's AMENDED_HISTORICAL allow-list now also contains tests/test_capstone_federation_isolation.py (the file amended by CAPSTONE_FEDERATION_PROTOCOL_V1 amendment 3). New non-frontend files remain constrained to explicit CAP-008 namespaces; frontend changes remain constrained to CAPSTONE_UI_V1_1.",
+ "defect": "Evaluator/audit omission: the first final protected-artifact audit flagged exactly this one amended historical guard test as an unallowed modification. Evidence: reports/capstone/cap_008/protected_artifact_final.json (first run).",
+ "files": {
+  "scripts/cap_008_protected_audit.py": {
+   "new_sha256": "fbcbb5c43eea0fabd6950a4e13d7ab6dc542d13e92f9c3d8622d3ea55d321b36",
+   "old_sha256": "96f2201f085f56da07b5f1026e43fa26258f150dd8aa26b06c1f93dfbc7a4a82"
+  }
+ },
+ "freeze_commit": "65fdf6f",
+ "made_before": "the recorded CAPG7 criteria evaluation",
+ "made_during": "CAP-008 after its method freeze and the recorded canonical runs (criteria text, canonical runs and implementation unchanged), in its own commit",
+ "previous_amendment": "none",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical",
+  "capg7_criteria_text": "identical"
+ }
+}
