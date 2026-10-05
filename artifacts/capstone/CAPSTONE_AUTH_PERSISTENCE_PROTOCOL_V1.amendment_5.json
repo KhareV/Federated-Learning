@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_5",
+ "change": ".env.example restored to be purely additive: the three pre-existing variable names (MONGODB_URI, MONGODB_DATABASE, MONGODB_COLLECTION) that the frozen edit had deleted are kept; the CAP-004 variable names remain. Names only; no value.",
+ "defect": "The frozen edit of .env.example replaced the file instead of appending to it, deleting three unrelated pre-existing names; the deletion had no justification in CAP-004 and was found while reviewing the final protected-audit diff.",
+ "files": {
+  ".env.example": {
+   "new_sha256": "aebf5ebaf0e836af8a5afd71c670f5087e1e69de0f47d0a5df830f65ec391f38",
+   "old_sha256": "2285e5a057c9e3fc2db8e52eebf405f4b3a8562d0fcbf13f576d7a922998fc25"
+  }
+ },
+ "freeze_commit": "1fb3023",
+ "made_before": "the recorded CAPG3 criteria evaluation and the recorded protected_artifact_final.json",
+ "previous_amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_4",
+ "unchanged": {
+  "canonical_runs_and_implementation": "byte-identical to amendment 2 (the product reads environment variables, never this file)",
+  "capg3_criteria_text": "identical"
+ }
+}
