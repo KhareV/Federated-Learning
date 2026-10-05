@@ -1,0 +1,15 @@
+{
+  "bound_system_artifacts": 22,
+  "checks": {
+    "decision_accept": true,
+    "decision_binds_policy": true,
+    "default_selector_false": true,
+    "fl_checkpoint_not_deployed": true,
+    "historical_disposition": true,
+    "rollback_operator_only": true,
+    "system_status": true
+  },
+  "default_lock_sha256": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+  "rollback_lock_sha256": "8f9826b4cc9344889131ecdfe32a3be9fb56427619a480f4667de94257ec7668",
+  "status": "PASS"
+}

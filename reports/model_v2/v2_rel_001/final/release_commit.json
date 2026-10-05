@@ -1,0 +1,10 @@
+{
+  "policy_commit": "5560c5500f2b62f0c35b9e6b45122c7e215f615b",
+  "decision_commit": "211c397080f077b3b39f21f9f9d309becaa253b5",
+  "default_binding_audit_commit": "1c0ec0ec89547b8d5556267c58a1680dbe397cc6",
+  "cutover_implementation_commit": "f8373b2faae15b4e30ece23398c6da9949c4a2f5",
+  "cutover_result_commit_and_release_commit": "8f9ef9909afa9dda07094631cb5151e12742e109",
+  "clean_release_clone_target": "8f9ef9909afa9dda07094631cb5151e12742e109",
+  "note": "The clean release clone verified the cutover RESULT commit. This final commit adds the clone evidence and the release-smoke harness script only (no runtime, frontend, lock or registry change).",
+  "T036": "NOT_STARTED"
+}

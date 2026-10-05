@@ -1,0 +1,495 @@
+{
+  "A_official_validation_history": {
+    "observed": {
+      "converted_to_pass": false,
+      "decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+      "promotion_eligible": false,
+      "reason": "release-seed paired VALIDATION CI lower bound crossed zero",
+      "release_ci": {
+        "invalid_count": 0,
+        "lower": -0.052370174725249,
+        "upper": 0.5310360993345348,
+        "valid_count": 2000
+      },
+      "release_point_delta_vs_v1": 0.2116981636869386
+    },
+    "source": "reports/model_v2/v2_007/promotion_decision.json"
+  },
+  "B_central_model_improvement_evidence": {
+    "official_validation": {
+      "observed": {
+        "LR_AUPRC_descriptive": 0.6458789355593425,
+        "MODEL_V1_release_seed_AUPRC": 0.5328607838787021,
+        "MODEL_V1_three_seed_mean_AUPRC": 0.49827972496232814,
+        "MODEL_V2_three_seed_mean_AUPRC": 0.8086192899710433,
+        "RF_AUPRC_descriptive": 0.799672173430413,
+        "three_seed_CI": {
+          "invalid_count": 0,
+          "lower": 0.053446951777224694,
+          "upper": 0.504733599544611,
+          "valid_count": 2000
+        },
+        "three_seed_delta": 0.2753374992819335
+      },
+      "source": "reports/model_v2/v2_007"
+    },
+    "post_freeze_second_look_NOT_untouched_validation": {
+      "observed": {
+        "INCART_AUPRC": {
+          "ci_lower_95": 0.09655372530653342,
+          "ci_upper_95": 0.30150964285904336,
+          "invalid_replicates": 0,
+          "point_delta": 0.1808275586804573,
+          "v1_point": 0.7891764965800256,
+          "v2_point": 0.970004055260483,
+          "valid_replicates": 2000
+        },
+        "INTERNAL_TEST_AUPRC": {
+          "ci_lower_95": 0.016018780251196237,
+          "ci_upper_95": 0.258606193931996,
+          "invalid_replicates": 0,
+          "point_delta": 0.09057758958303141,
+          "v1_point": 0.9088954942908802,
+          "v2_point": 0.9994730838739116,
+          "valid_replicates": 2000
+        },
+        "NSTDB_delta_auprc_by_snr": {
+          "-6": 0.05515998019553758,
+          "0": 0.05829180517223931,
+          "12": 0.025856351756317175,
+          "18": 0.035120204607134387,
+          "24": 0.0480831205130845,
+          "6": 0.03948969728479468
+        }
+      },
+      "source": "reports/model_v2/v2_010"
+    }
+  },
+  "C_runtime_acceptance": {
+    "observed": {
+      "INCART_AUROC_RUNTIME_GUARD_PASS": true,
+      "MODEL_V2_RUNTIME_ACCEPTED": "ACCEPTED",
+      "NSTDB_NO_COLLAPSE_PASS": true,
+      "internal_test_participates_in_decision": false,
+      "method_integrity_pass": true,
+      "operational_lineage": "MODEL_V1",
+      "subjective_override_applied": false
+    },
+    "source": "reports/model_v2/v2_010/runtime_acceptance_decision.json"
+  },
+  "D_gateway": {
+    "observed": {
+      "artifact": {
+        "byte_reproducible": false,
+        "bytes": 294959,
+        "format": "TORCHSCRIPT_SCRIPT",
+        "path": "artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts",
+        "precision": "FP32",
+        "semantic_reproducibility": true,
+        "sha256": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+        "torch_version": "2.14.0"
+      },
+      "task": "PASS"
+    },
+    "source": "artifacts/deployment/GATEWAY_ARTIFACT_V2.manifest.json"
+  },
+  "E_software_integration": {
+    "observed": {
+      "flatline_replay": {
+        "digest": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+        "flatline_windows": 6,
+        "replay_id": "WEARABLE_SIM_V2_REPLAY_V2_FLATLINE",
+        "runs_identical": true,
+        "window_count": 17
+      },
+      "lock_status": "FROZEN_RESEARCH_RUNTIME",
+      "software_replay": {
+        "live_speed_equals_accelerated": true,
+        "replay_id": "WEARABLE_SIM_V2_REPLAY_V1",
+        "runs_identical": true,
+        "semantic_digest_sha256": "7ef39ae96a6d240677b44d3384cc054a37e4c90add6b9ffabd6d21e9df9201c7",
+        "status": "FROZEN_COMPLETE",
+        "window_count": 93
+      },
+      "task": "PASS"
+    },
+    "source": "artifacts/API_RUNTIME_V2_1.lock.json"
+  },
+  "F_real_data_federated_program": {
+    "observed": {
+      "V2-FL-001": "PASS",
+      "V2-FL-002": "PASS",
+      "V2-FL-003": "PASS"
+    },
+    "source": "V2-FL-001..003"
+  },
+  "G_federated_heldout_evaluation": {
+    "all_architecture_effect_point_estimates_positive_for_AUPRC_and_patient_macro_F1": true,
+    "labels": "FL-lineage held-out (INTERNAL_TEST) / project-exposed external second look (INCART); no new promotion gate",
+    "observed": {
+      "incart": {
+        "AUPRC_point_delta_positive": 10,
+        "claim_label": "POST-FREEZE EXTERNAL FL SECOND-LOOK -- NOT PROJECT-BLIND",
+        "comparisons": 10,
+        "deltas_with_exact_95CI": {
+          "V2_FEDAVG_COMBINED": {
+            "AUPRC": {
+              "ci_lower_95": 0.2208561447340503,
+              "ci_upper_95": 0.4370005270166288,
+              "invalid_replicates": 0,
+              "point_delta": 0.33950908942270064,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.6783930159024169,
+              "ci_upper_95": 0.8594248437326392,
+              "invalid_replicates": 0,
+              "point_delta": 0.7734871286711187,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDAVG_FEATURE": {
+            "AUPRC": {
+              "ci_lower_95": 0.16849948949580448,
+              "ci_upper_95": 0.4949784759355334,
+              "invalid_replicates": 0,
+              "point_delta": 0.33262394539126683,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.22965897017677855,
+              "ci_upper_95": 0.41953322143442073,
+              "invalid_replicates": 0,
+              "point_delta": 0.32493051863149436,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDAVG_IID": {
+            "AUPRC": {
+              "ci_lower_95": 0.18350471880251978,
+              "ci_upper_95": 0.4801132239206648,
+              "invalid_replicates": 0,
+              "point_delta": 0.33683310280347856,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.19129810854120013,
+              "ci_upper_95": 0.37227822461203547,
+              "invalid_replicates": 0,
+              "point_delta": 0.2821542300563712,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDAVG_LABEL": {
+            "AUPRC": {
+              "ci_lower_95": 0.1583065871718264,
+              "ci_upper_95": 0.40817178963247397,
+              "invalid_replicates": 0,
+              "point_delta": 0.2876075952878241,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.41507718765866597,
+              "ci_upper_95": 0.6468091342918021,
+              "invalid_replicates": 0,
+              "point_delta": 0.5324719171065044,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDAVG_QUANTITY": {
+            "AUPRC": {
+              "ci_lower_95": 0.10512518282370246,
+              "ci_upper_95": 0.3986380118594015,
+              "invalid_replicates": 0,
+              "point_delta": 0.23121501931915356,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.2093870634087048,
+              "ci_upper_95": 0.41214357352520825,
+              "invalid_replicates": 0,
+              "point_delta": 0.31058605207217527,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_COMBINED": {
+            "AUPRC": {
+              "ci_lower_95": 0.20811203506421339,
+              "ci_upper_95": 0.4135321800876894,
+              "invalid_replicates": 0,
+              "point_delta": 0.3224246751612978,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.6569524842747856,
+              "ci_upper_95": 0.8479454681744992,
+              "invalid_replicates": 0,
+              "point_delta": 0.7571690905367822,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_FEATURE": {
+            "AUPRC": {
+              "ci_lower_95": 0.16361965461155945,
+              "ci_upper_95": 0.49174206028370615,
+              "invalid_replicates": 0,
+              "point_delta": 0.32798018199971823,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.21996097342536033,
+              "ci_upper_95": 0.40783678934410417,
+              "invalid_replicates": 0,
+              "point_delta": 0.3150943353642558,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_IID": {
+            "AUPRC": {
+              "ci_lower_95": 0.17700055639413892,
+              "ci_upper_95": 0.4751041100950454,
+              "invalid_replicates": 0,
+              "point_delta": 0.33171445576791203,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.1885139356868127,
+              "ci_upper_95": 0.3748588448549445,
+              "invalid_replicates": 0,
+              "point_delta": 0.28174447325674423,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_LABEL": {
+            "AUPRC": {
+              "ci_lower_95": 0.15439047584588528,
+              "ci_upper_95": 0.42372640771786013,
+              "invalid_replicates": 0,
+              "point_delta": 0.3000510439833032,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.4492695147193346,
+              "ci_upper_95": 0.6761539871998632,
+              "invalid_replicates": 0,
+              "point_delta": 0.5658785880846471,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_QUANTITY": {
+            "AUPRC": {
+              "ci_lower_95": 0.10110509031956992,
+              "ci_upper_95": 0.3948865521705065,
+              "invalid_replicates": 0,
+              "point_delta": 0.22819285538492662,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.21605395054257498,
+              "ci_upper_95": 0.42966393062091207,
+              "invalid_replicates": 0,
+              "point_delta": 0.3225344290417018,
+              "valid_replicates": 2000
+            }
+          }
+        },
+        "patient_macro_F1_point_delta_positive": 10
+      },
+      "internal_test": {
+        "AUPRC_point_delta_positive": 10,
+        "claim_label": "FL-LINEAGE HELD-OUT (not project-globally unseen)",
+        "comparisons": 10,
+        "deltas_with_exact_95CI": {
+          "V2_FEDAVG_COMBINED": {
+            "AUPRC": {
+              "ci_lower_95": 0.006873877953627039,
+              "ci_upper_95": 0.22286600133044557,
+              "invalid_replicates": 0,
+              "point_delta": 0.06896882051213238,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.41688433460585356,
+              "ci_upper_95": 0.9807773799172765,
+              "invalid_replicates": 0,
+              "point_delta": 0.7437925077211367,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDAVG_FEATURE": {
+            "AUPRC": {
+              "ci_lower_95": 0.005618611150743247,
+              "ci_upper_95": 0.2699841688516811,
+              "invalid_replicates": 0,
+              "point_delta": 0.1431586240461009,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.024015022192924947,
+              "ci_upper_95": 0.5223081881265632,
+              "invalid_replicates": 0,
+              "point_delta": 0.23076702782718583,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDAVG_IID": {
+            "AUPRC": {
+              "ci_lower_95": 0.003060888336329226,
+              "ci_upper_95": 0.23095629822663855,
+              "invalid_replicates": 0,
+              "point_delta": 0.12148856409439823,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.023660597581334316,
+              "ci_upper_95": 0.5397405915124371,
+              "invalid_replicates": 0,
+              "point_delta": 0.2351068832944907,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDAVG_LABEL": {
+            "AUPRC": {
+              "ci_lower_95": 0.013832098107891433,
+              "ci_upper_95": 0.4502840582237932,
+              "invalid_replicates": 0,
+              "point_delta": 0.15939685630255462,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.23762646905113205,
+              "ci_upper_95": 0.8554949947210322,
+              "invalid_replicates": 0,
+              "point_delta": 0.5600309820955619,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDAVG_QUANTITY": {
+            "AUPRC": {
+              "ci_lower_95": 0.03325128052403347,
+              "ci_upper_95": 0.40875917473306345,
+              "invalid_replicates": 0,
+              "point_delta": 0.17115999003828442,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.12663520570085884,
+              "ci_upper_95": 0.6979391469309618,
+              "invalid_replicates": 0,
+              "point_delta": 0.3994228421362268,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_COMBINED": {
+            "AUPRC": {
+              "ci_lower_95": 0.0075142577615679995,
+              "ci_upper_95": 0.22260631012179666,
+              "invalid_replicates": 0,
+              "point_delta": 0.06442543281238233,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.4037430478606949,
+              "ci_upper_95": 0.983720464093022,
+              "invalid_replicates": 0,
+              "point_delta": 0.7322115890961602,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_FEATURE": {
+            "AUPRC": {
+              "ci_lower_95": 0.005682883139448203,
+              "ci_upper_95": 0.2739572265796306,
+              "invalid_replicates": 0,
+              "point_delta": 0.14464220108362735,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.02396253332809328,
+              "ci_upper_95": 0.522011110781849,
+              "invalid_replicates": 0,
+              "point_delta": 0.23071453896235405,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_IID": {
+            "AUPRC": {
+              "ci_lower_95": 0.003949541872694584,
+              "ci_upper_95": 0.2386395044785492,
+              "invalid_replicates": 0,
+              "point_delta": 0.12459229331425092,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.024216573799689663,
+              "ci_upper_95": 0.5405461795730786,
+              "invalid_replicates": 0,
+              "point_delta": 0.23616613809645126,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_LABEL": {
+            "AUPRC": {
+              "ci_lower_95": 0.013206427270589183,
+              "ci_upper_95": 0.6832954312229522,
+              "invalid_replicates": 0,
+              "point_delta": 0.26449888181552883,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.21472078196920796,
+              "ci_upper_95": 0.8508204057181534,
+              "invalid_replicates": 0,
+              "point_delta": 0.5378044827002699,
+              "valid_replicates": 2000
+            }
+          },
+          "V2_FEDPROX_QUANTITY": {
+            "AUPRC": {
+              "ci_lower_95": 0.030582834577715677,
+              "ci_upper_95": 0.3267498529417582,
+              "invalid_replicates": 0,
+              "point_delta": 0.14107235404923557,
+              "valid_replicates": 2000
+            },
+            "patient_macro_F1": {
+              "ci_lower_95": 0.09695108243225425,
+              "ci_upper_95": 0.6654894079760353,
+              "invalid_replicates": 0,
+              "point_delta": 0.3580847401850113,
+              "valid_replicates": 2000
+            }
+          }
+        },
+        "patient_macro_F1_point_delta_positive": 10
+      }
+    },
+    "source": "reports/model_v2/v2_fl_eval_001/*_statistics.json"
+  },
+  "H_privacy_protocol_engineering": {
+    "observed": {
+      "V2FLG3": "PASS",
+      "claim": "narrow protected-aggregation-interface result",
+      "differential_privacy_claim": false
+    },
+    "source": "reports/model_v2/v2_fl_004"
+  },
+  "I_synthetic_wearable_system": {
+    "observed": {
+      "V2FLG4": "PASS",
+      "clinical_or_wearable_efficacy_claim": false,
+      "engineering_only": true
+    },
+    "source": "reports/model_v2/v2_fl_005"
+  },
+  "J_complete_reproducibility": {
+    "observed": {
+      "clone1_target": "daf905306620cbb01f04e644809ccdb2e684b4a8",
+      "component": "FROZEN_REPRODUCIBILITY_EVIDENCE",
+      "result": "PASS"
+    },
+    "source": "reports/model_v2/v2_014"
+  },
+  "matrix_id": "SYSTEM_V2_RELEASE_EVIDENCE_MATRIX_V1",
+  "rewrites_history": false
+}

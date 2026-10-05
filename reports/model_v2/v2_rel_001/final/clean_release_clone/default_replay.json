@@ -1,0 +1,108 @@
+{
+  "comparisons": {
+    "flatline": {
+      "all_four_identical": true,
+      "api_model": "API_RUNTIME_V2_1",
+      "digest_matches_expected_constant": true,
+      "digests": {
+        "run_1_direct_http": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+        "run_1_frontend_path": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+        "run_2_direct_http": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+        "run_2_frontend_path": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e"
+      },
+      "digests_equal_frozen": true,
+      "flatline_http_422": 6,
+      "flatline_windows": 6,
+      "http_status_counts": {
+        "200": 11,
+        "422": 6
+      },
+      "kind": "flatline",
+      "lock_flatline_digest": "0a2c5e6c8fc1dd28fe1464b48d01781246aa010a3a161cce82ac901bb1aea99e",
+      "model_inference_suppressed": true,
+      "real_waveform_dataset_used": false,
+      "replay_status": "PASS",
+      "status": "PASS",
+      "window_count": 17
+    },
+    "v2013": {
+      "all_four_identical": true,
+      "api_model": "API_RUNTIME_V2_1",
+      "digest_prefix_ok": true,
+      "digests": {
+        "run_1_direct_http": "7ef39ae96a6d240677b44d3384cc054a37e4c90add6b9ffabd6d21e9df9201c7",
+        "run_1_frontend_path": "7ef39ae96a6d240677b44d3384cc054a37e4c90add6b9ffabd6d21e9df9201c7",
+        "run_2_direct_http": "7ef39ae96a6d240677b44d3384cc054a37e4c90add6b9ffabd6d21e9df9201c7",
+        "run_2_frontend_path": "7ef39ae96a6d240677b44d3384cc054a37e4c90add6b9ffabd6d21e9df9201c7"
+      },
+      "digests_equal_frozen": true,
+      "http_status_counts": {
+        "200": 80,
+        "422": 13
+      },
+      "kind": "v2013",
+      "lock_semantic_digest_sha256": "7ef39ae96a6d240677b44d3384cc054a37e4c90add6b9ffabd6d21e9df9201c7",
+      "real_waveform_dataset_used": false,
+      "replay_status": "PASS",
+      "status": "PASS",
+      "window_count": 93
+    }
+  },
+  "frontend_e2e": {
+    "build": {
+      "build_exit_code": 0,
+      "built_default_request_model_id": {
+        "default_is_MODEL_V2_FINAL": true,
+        "no_hardcoded_MODEL_V1_request": true
+      },
+      "model_neutral_strings_present_in_built_bundle": {
+        "No model inference was run": true,
+        "model interface window": true
+      },
+      "request_model_id_build_config": "VITE_NHM_REQUEST_MODEL_ID UNSET (default build)",
+      "v1_specific_strings_absent_from_built_bundle": {
+        "MODEL_V1 interface window": true,
+        "MODEL_V1 was not run": true
+      }
+    },
+    "identities_rendered": {
+      "alert_policy_id": "alert_policy_id ALERT_POLICY_V1",
+      "calibration_domain": "calibration_domain MIT-BIH-v1.0.0",
+      "calibration_id": "calibration_id CAL_V2",
+      "model_id": "model_id MODEL_V2_FINAL",
+      "preprocess_version": "preprocess_version PREPROC_V1"
+    },
+    "runs": [
+      {
+        "monitoring_route_http_status": 200
+      },
+      {
+        "monitoring_route_http_status": 200
+      }
+    ],
+    "status": "PASS",
+    "waveform": {
+      "all_requests_carried_full_waveform": true,
+      "empty_waveform_shortcut": false,
+      "polyline_points_rendered": 2500,
+      "samples_per_window": 2500
+    }
+  },
+  "launch_path": "python -m scripts.run_nhm_default (default profile)",
+  "real_waveform_dataset": false,
+  "research_launcher_used": false,
+  "runs": {
+    "flatline": {
+      "exit_code": 0,
+      "stderr_tail": "",
+      "stdout_tail": "{\"digest\": \"PASS\", \"e2e\": \"PASS\", \"invariance\": \"PASS\"}\n{\"kind\": \"flatline\", \"out\": \"/private/tmp/claude-501/-Users-Home-Downloads-miniproject/0dd0ada2-96d7-46cd-8738-8741285d54fd/scratchpad/relclone/ev/default_replay_raw/flatline\"}\n"
+    },
+    "v2013": {
+      "exit_code": 0,
+      "stderr_tail": "",
+      "stdout_tail": "{\"digest\": \"PASS\", \"e2e\": \"PASS\", \"invariance\": \"PASS\"}\n{\"kind\": \"v2013\", \"out\": \"/private/tmp/claude-501/-Users-Home-Downloads-miniproject/0dd0ada2-96d7-46cd-8738-8741285d54fd/scratchpad/relclone/ev/default_replay_raw/v2013\"}\n"
+    }
+  },
+  "scientific_metrics": false,
+  "status": "PASS"
+}

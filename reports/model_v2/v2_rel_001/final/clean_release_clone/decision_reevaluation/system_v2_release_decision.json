@@ -1,0 +1,365 @@
+{
+  "SYSTEM_V2_RELEASE_DECISION": "ACCEPT",
+  "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED": true,
+  "criteria": [
+    {
+      "id": "H01",
+      "observed": "PASS",
+      "requirement": "MODEL_V2_FINAL hash valid",
+      "source": "models.model_v2_final_freeze.verify_model_v2_final",
+      "status": "PASS"
+    },
+    {
+      "id": "H02",
+      "observed": "PASS",
+      "requirement": "CAL_V2 valid",
+      "source": "models.cal_v2_verify.verify_cal_v2",
+      "status": "PASS"
+    },
+    {
+      "id": "H03",
+      "observed": "PASS",
+      "requirement": "GATEWAY_ARTIFACT_V2 valid",
+      "source": "models.gateway_artifact_v2_verify.verify_gateway_artifact_v2",
+      "status": "PASS"
+    },
+    {
+      "id": "H04",
+      "observed": {
+        "INCART_AUROC_RUNTIME_GUARD_PASS": true,
+        "MODEL_V2_RUNTIME_ACCEPTED": "ACCEPTED",
+        "NSTDB_NO_COLLAPSE_PASS": true,
+        "subjective_override_applied": false
+      },
+      "requirement": "runtime acceptance ACCEPTED + INCART guard + NSTDB guard",
+      "source": "reports/model_v2/v2_010/runtime_acceptance_decision.json",
+      "status": "PASS"
+    },
+    {
+      "id": "H05",
+      "observed": {
+        "gate": "PASS",
+        "task": "PASS"
+      },
+      "requirement": "V2-012 PASS and gate V2G11 PASS",
+      "source": "manifests/model_v2/{task,gate}_registry_v1.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "H06",
+      "observed": {
+        "gate": "PASS",
+        "task": "PASS"
+      },
+      "requirement": "V2-013 PASS and gate V2G12 PASS",
+      "source": "manifests/model_v2/{task,gate}_registry_v1.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "H07",
+      "observed": {
+        "gate": "PASS",
+        "task": "PASS"
+      },
+      "requirement": "V2-FL-001 PASS and gate V2FLG0 PASS",
+      "source": "manifests/model_v2/{task,gate}_registry_v1.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "H08",
+      "observed": {
+        "gate": "PASS",
+        "task": "PASS"
+      },
+      "requirement": "V2-FL-002 PASS and gate V2FLG1 PASS",
+      "source": "manifests/model_v2/{task,gate}_registry_v1.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "H09",
+      "observed": {
+        "gate": "PASS",
+        "task": "PASS"
+      },
+      "requirement": "V2-FL-003 PASS and gate V2FLG2 PASS",
+      "source": "manifests/model_v2/{task,gate}_registry_v1.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "H10",
+      "observed": {
+        "gate": "PASS",
+        "task": "PASS"
+      },
+      "requirement": "V2-FL-EVAL-001 PASS and gate V2FLEG0 PASS",
+      "source": "manifests/model_v2/{task,gate}_registry_v1.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "H11",
+      "observed": {
+        "gate": "PASS",
+        "task": "PASS"
+      },
+      "requirement": "V2-FL-004 PASS and gate V2FLG3 PASS",
+      "source": "manifests/model_v2/{task,gate}_registry_v1.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "H12",
+      "observed": {
+        "gate": "PASS",
+        "task": "PASS"
+      },
+      "requirement": "V2-FL-005 PASS and gate V2FLG4 PASS",
+      "source": "manifests/model_v2/{task,gate}_registry_v1.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "H13",
+      "observed": {
+        "gate": "PASS",
+        "task": "PASS"
+      },
+      "requirement": "V2-014 PASS and gate V2G13 PASS",
+      "source": "manifests/model_v2/{task,gate}_registry_v1.csv",
+      "status": "PASS"
+    },
+    {
+      "id": "H13b",
+      "observed": {
+        "component": "FROZEN_REPRODUCIBILITY_EVIDENCE",
+        "packages": [
+          "clone1",
+          "clone2"
+        ],
+        "verifier": "PASS"
+      },
+      "requirement": "V2-014 evidence (clone 1 and clone 2) re-verified from committed files",
+      "source": "scripts.verify_v2_014_evidence.verify",
+      "status": "PASS"
+    },
+    {
+      "id": "H14",
+      "observed": {
+        "api_schema_sha256": "4e3a01e7b83964138e7c7a307aabd0a1da3b7d414b6263ae8e838a4c628827a9",
+        "openapi_sha256": "1f5054a2963429458de08a470c56394e0d1b5abe45ec5a134c9a856f88d1836c"
+      },
+      "requirement": "API_SCHEMA_V1 contract/OpenAPI hashes unchanged",
+      "source": "contracts/*",
+      "status": "PASS"
+    },
+    {
+      "id": "H15",
+      "observed": {
+        "dashboard_lock": false,
+        "route_signature_payload_only": true,
+        "runtime_lock": false
+      },
+      "requirement": "no public model/checkpoint/threshold selector",
+      "source": "API_RUNTIME_V2_1 lock + api/app_v2.py",
+      "status": "PASS"
+    },
+    {
+      "id": "H16",
+      "observed": [
+        "CONTEXT_UNAVAILABLE",
+        "NORMAL_MONITORED_PATTERN",
+        "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN",
+        "RECHECK_SENSOR",
+        "SYSTEM_ERROR"
+      ],
+      "requirement": "five non-diagnostic monitoring states preserved",
+      "source": "api.schemas.MonitoringState",
+      "status": "PASS"
+    },
+    {
+      "id": "H17",
+      "observed": "PASS",
+      "requirement": "PREPROC_V1 normalization boundary preserved",
+      "source": "preprocessing.freeze",
+      "status": "PASS"
+    },
+    {
+      "id": "H18",
+      "observed": {
+        "normalize_window_zscore_calls_in_estimate_ecg_hr": 0,
+        "normalize_window_zscore_calls_in_infer": 1,
+        "status": "PASS"
+      },
+      "requirement": "HR branch amplitude-preserving",
+      "source": "reports/model_v2/v2_013/normalization_branch_audit.json",
+      "status": "PASS"
+    },
+    {
+      "id": "H19",
+      "observed": {
+        "calibration_domain": "MIT-BIH-v1.0.0",
+        "calibration_id": "CAL_V2",
+        "patients": 3
+      },
+      "requirement": "source-domain CAL_V2 labeling preserved",
+      "source": "artifacts/CAL_V2.json",
+      "status": "PASS"
+    },
+    {
+      "id": "H20",
+      "observed": {
+        "api_runtime_v1_1": "PASS",
+        "files_present": true,
+        "model_v1": "verified"
+      },
+      "requirement": "V1 rollback components present and verifying",
+      "source": "models.model_freeze + scripts.verify_api_runtime_v1_1_c032",
+      "status": "PASS"
+    },
+    {
+      "id": "H21",
+      "observed": {
+        "decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+        "decision_file_sha256_matches_lock": true,
+        "promotion_eligible": false,
+        "release_ci_lower": -0.052370174725249
+      },
+      "requirement": "MODEL_V2_NOT_PROMOTED_RELEASE_CI immutable and unchanged",
+      "source": "reports/model_v2/v2_007/promotion_decision.json + validation decision lock",
+      "status": "PASS"
+    },
+    {
+      "id": "H22",
+      "observed": {
+        "dirty_protected": [],
+        "modified_or_deleted_since_entry": []
+      },
+      "requirement": "no protected-artifact drift since entry",
+      "source": "git diff entry..HEAD",
+      "status": "PASS"
+    },
+    {
+      "id": "H23",
+      "observed": {
+        "DATA_GATED_SKIPPED": 14,
+        "failed": 0,
+        "nodes": 2343
+      },
+      "requirement": "full regression passes (frozen V2-014 clean-clone evidence)",
+      "source": "reports/model_v2/v2_014/clone1/regression.json",
+      "status": "PASS"
+    },
+    {
+      "id": "H24",
+      "observed": {
+        "V2-FL-001": {
+          "heldout_firewall": "PASS",
+          "run_manifest": "PASS"
+        },
+        "V2-FL-002": {
+          "heldout_firewall": "PASS",
+          "run_manifest": "PASS"
+        },
+        "V2-FL-003": {
+          "heldout_firewall": "PASS",
+          "run_manifest": "PASS"
+        }
+      },
+      "requirement": "V2 real-data FL program complete without integrity failure",
+      "source": "reports/model_v2/v2_fl_00{1,2,3}/run_manifest.json + heldout_firewall_audit.json",
+      "status": "PASS"
+    }
+  ],
+  "decision_id": "SYSTEM_V2_RELEASE_DECISION_V1",
+  "decision_wording": "SOFTWARE_SYSTEM_V2 is accepted as the default NHM research-software runtime based on the complete frozen evidence lineage, runtime acceptance, real-data federated evaluation, software integration and clean reproducibility. This is a prospective system-level operational decision and does not alter the historical MODEL_V2_NOT_PROMOTED_RELEASE_CI scientific-validation disposition. The system remains a non-diagnostic research prototype and has not been validated as a physical wearable or clinical device.",
+  "evidence_timing_disclosure": "This policy is created AFTER the scientific and engineering evidence exists. It is NOT a preregistered scientific hypothesis test and NOT a prospective validation-performance gate. It is a prospective SOFTWARE-GOVERNANCE decision made before the operational default changes. No new scientific p-value or performance threshold is invented. The frozen evidence may legitimately inform the decision.",
+  "failed_criteria": [],
+  "federated_checkpoint_deployed": false,
+  "historical_model_promotion_disposition": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "known_limitations": [
+    {
+      "blocks_release": false,
+      "id": "L01",
+      "observed": {
+        "decision": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+        "release_ci": {
+          "invalid_count": 0,
+          "lower": -0.052370174725249,
+          "upper": 0.5310360993345348,
+          "valid_count": 2000
+        }
+      },
+      "text": "MODEL_V2_NOT_PROMOTED_RELEASE_CI remains true: the release-seed paired VALIDATION CI lower bound crossed zero; permanent historical negative finding, not rewritten"
+    },
+    {
+      "blocks_release": false,
+      "id": "L02",
+      "observed": {
+        "contributing_clusters": 6,
+        "frozen_groups": 7
+      },
+      "text": "INTERNAL_TEST has only six eligible contributing patient groups"
+    },
+    {
+      "blocks_release": false,
+      "id": "L03",
+      "observed": {
+        "classification": "post-freeze second look (reports/model_v2/v2_010)"
+      },
+      "text": "V2-010 INTERNAL_TEST/INCART/NSTDB evidence is post-freeze second-look evidence, not untouched validation"
+    },
+    {
+      "blocks_release": false,
+      "id": "L04",
+      "observed": {
+        "claim": "POST-FREEZE EXTERNAL FL SECOND-LOOK on a previously project-exposed dataset; NOT project-blind; NOT untouched external validation"
+      },
+      "text": "INCART FL evaluation is project-exposed external second-look evidence"
+    },
+    {
+      "blocks_release": false,
+      "id": "L05",
+      "observed": {
+        "source": "reports/model_v2/c_v2_013_quality_flatline/classification.json"
+      },
+      "text": "QUALITY_V1 does not reliably hard-fail a raw stuck-nonzero ECG source because of the frozen preprocessing composition (not repaired here)"
+    },
+    {
+      "blocks_release": false,
+      "id": "L06",
+      "observed": {
+        "calibration_domain": "MIT-BIH-v1.0.0"
+      },
+      "text": "CAL_V2 is MIT-BIH source-domain calibration only"
+    },
+    {
+      "blocks_release": false,
+      "id": "L07",
+      "observed": {
+        "WEARABLE_V1": "no physical wearable data exists; hardware out of scope"
+      },
+      "text": "No physical wearable validation exists"
+    },
+    {
+      "blocks_release": false,
+      "id": "L08",
+      "observed": {
+        "source": "docs/MODEL_V2_SECAGG_THREAT_MODEL_V1.md"
+      },
+      "text": "SecAgg evidence is a narrow protected-aggregation-interface result, not a complete privacy guarantee"
+    },
+    {
+      "blocks_release": false,
+      "id": "L09",
+      "observed": {
+        "DATA_GATED_SKIPPED": 14
+      },
+      "text": "CLEAN_CLONE_GATING_V1 excluded raw-data-dependent tests from the clean-software claim when their untracked inputs were absent"
+    }
+  ],
+  "manual_override": false,
+  "new_scientific_evidence_generated": false,
+  "new_system_release_disposition": "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED",
+  "policy_id": "SYSTEM_V2_RELEASE_POLICY_V1",
+  "release_level": "RESEARCH_SOFTWARE_OPERATIONAL_DEFAULT",
+  "scientific_preregistration_claim": false,
+  "unresolved_integrity_defects": [],
+  "waveform_datasets_accessed": false
+}

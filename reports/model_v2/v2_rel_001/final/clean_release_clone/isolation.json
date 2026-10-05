@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "default_identity": true,
+    "default_rejects_v1_model_id": true,
+    "default_session_state_independent_nonmonotonic": true,
+    "different_processes": true,
+    "rollback_identity": true,
+    "rollback_rejects_v2_model_id": true,
+    "rollback_session_unaffected_by_default_session": true
+  },
+  "status": "PASS"
+}

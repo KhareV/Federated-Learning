@@ -1,0 +1,104 @@
+{
+  "browser_automation_present_in_repository": false,
+  "frontend_build": {
+    "build_exit_code": 0,
+    "built_default_request_model_id": {
+      "default_is_MODEL_V2_FINAL": true,
+      "no_hardcoded_MODEL_V1_request": true
+    },
+    "model_neutral_strings_present_in_built_bundle": {
+      "No model inference was run": true,
+      "model interface window": true
+    },
+    "request_model_id_build_config": "VITE_NHM_REQUEST_MODEL_ID UNSET (default build)",
+    "v1_specific_strings_absent_from_built_bundle": {
+      "MODEL_V1 interface window": true,
+      "MODEL_V1 was not run": true
+    }
+  },
+  "identities_rendered": {
+    "alert_policy_id": "alert_policy_id ALERT_POLICY_V1",
+    "calibration_domain": "calibration_domain MIT-BIH-v1.0.0",
+    "calibration_id": "calibration_id CAL_V2",
+    "model_id": "model_id MODEL_V2_FINAL",
+    "preprocess_version": "preprocess_version PREPROC_V1"
+  },
+  "limitation": "Vitest cannot mount the SvelteKit route component (recorded since C034) and the repository has no Playwright/Selenium stack; the route is verified reachable and built, and every component the route composes is rendered from real session state",
+  "mechanism": "real vitest-driven real typed client over real HTTP to the real built frontend preview server (proxy to a real API_RUNTIME_V2 uvicorn process); shared dashboard components rendered from the real session state",
+  "panels_exercised": [
+    "live waveform",
+    "signal quality (via session)",
+    "episode monitoring state",
+    "technical metadata",
+    "research-only probability/history"
+  ],
+  "research_only_non_diagnostic_wording_checked": true,
+  "runs": [
+    {
+      "dom": {
+        "rendered_tiles": {
+          "alert_policy_id": "alert_policy_id ALERT_POLICY_V1",
+          "calibration_domain": "calibration_domain MIT-BIH-v1.0.0",
+          "calibration_id": "calibration_id CAL_V2",
+          "model_id": "model_id MODEL_V2_FINAL",
+          "preprocess_version": "preprocess_version PREPROC_V1"
+        },
+        "research_panel_eyebrow_present": true,
+        "state_panel_title": "Normal monitored pattern",
+        "state_text_contains_not_a_diagnosis": true,
+        "unusable_text_model_neutral": "Unusable or incomplete signal window -- No model inference was run for this window: UNUSABLE_SIGNAL_WINDOW: 2500 samples, ecg_quality=UNUSABLE",
+        "waveform_polyline_points": 2500
+      },
+      "monitoring_route_http_status": 200,
+      "session": {
+        "final_state": "NORMAL_MONITORED_PATTERN",
+        "gap_markers": 13,
+        "history_length": 93,
+        "latest_ecg_equals_last_accepted_request_window": true,
+        "latest_ecg_window_length": 2500,
+        "request_count": 93
+      },
+      "vitest": [
+        " Test Files  1 passed (1)",
+        "      Tests  1 passed (1)"
+      ]
+    },
+    {
+      "dom": {
+        "rendered_tiles": {
+          "alert_policy_id": "alert_policy_id ALERT_POLICY_V1",
+          "calibration_domain": "calibration_domain MIT-BIH-v1.0.0",
+          "calibration_id": "calibration_id CAL_V2",
+          "model_id": "model_id MODEL_V2_FINAL",
+          "preprocess_version": "preprocess_version PREPROC_V1"
+        },
+        "research_panel_eyebrow_present": true,
+        "state_panel_title": "Normal monitored pattern",
+        "state_text_contains_not_a_diagnosis": true,
+        "unusable_text_model_neutral": "Unusable or incomplete signal window -- No model inference was run for this window: UNUSABLE_SIGNAL_WINDOW: 2500 samples, ecg_quality=UNUSABLE",
+        "waveform_polyline_points": 2500
+      },
+      "monitoring_route_http_status": 200,
+      "session": {
+        "final_state": "NORMAL_MONITORED_PATTERN",
+        "gap_markers": 13,
+        "history_length": 93,
+        "latest_ecg_equals_last_accepted_request_window": true,
+        "latest_ecg_window_length": 2500,
+        "request_count": 93
+      },
+      "vitest": [
+        " Test Files  1 passed (1)",
+        "      Tests  1 passed (1)"
+      ]
+    }
+  ],
+  "status": "PASS",
+  "sveltekit_route_component_rendered_in_a_browser": false,
+  "waveform": {
+    "all_requests_carried_full_waveform": true,
+    "empty_waveform_shortcut": false,
+    "polyline_points_rendered": 2500,
+    "samples_per_window": 2500
+  }
+}

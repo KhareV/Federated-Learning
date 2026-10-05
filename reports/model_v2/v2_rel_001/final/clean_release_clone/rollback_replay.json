@@ -1,0 +1,33 @@
+{
+  "gateway": "GATEWAY_ARTIFACT_V1",
+  "http_statuses": [
+    200
+  ],
+  "identities": [
+    [
+      "MODEL_V1",
+      "CAL_V1",
+      "PREPROC_V1",
+      "ALERT_POLICY_V1"
+    ]
+  ],
+  "launch_path": "python -m scripts.run_nhm_default --profile rollback-v1",
+  "new_v1_science": false,
+  "states": [
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE",
+    "CONTEXT_UNAVAILABLE"
+  ],
+  "status": "PASS",
+  "two_fresh_processes_identical": true,
+  "windows": 12
+}
