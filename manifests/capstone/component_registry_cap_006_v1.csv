@@ -1,0 +1,8 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1,ENGINEERING_PROTOCOL,CAP-006,FROZEN_ENGINEERING_PROTOCOL,,artifacts/capstone/CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.lock.json,CAP-006 method protocol incl. the frozen CAPG5 criteria.
+CAPSTONE_LOCAL_BUFFER_BINDING_V1,IMPLEMENTATION_BINDING,CAP-006,FROZEN_IMPLEMENTATION_BINDING,,docs/capstone/CAPSTONE_LOCAL_BUFFER_BINDING_V1.md,How the frozen LOCAL_TRAINING_BUFFER_CONTRACT_V1 is bound for the simulated capstone.
+SIMULATION_LABEL_ADAPTER_V1,ENGINEERING_IMPLEMENTATION,CAP-006,FROZEN_ENGINEERING_IMPLEMENTATION,,product/edge/label_adapter.py,Thin product wrapper over the existing client-local label adapter (WEARABLE_SIM_EVENT_WINDOW_V1).
+LOCAL_TRAINING_BUFFER_V1,ENGINEERING_IMPLEMENTATION,CAP-006,FROZEN_ENGINEERING_IMPLEMENTATION,,product/edge/local_training_buffer.py,Client-local in-memory training buffer with private owner-only model-input store.
+CAPSTONE_FL_CLIENT_ADAPTER_V1,ENGINEERING_IMPLEMENTATION,CAP-006,FROZEN_ENGINEERING_IMPLEMENTATION,,product/federation/client.py,FLClient adapter over the existing V2 local FedAvg/FedProx epoch; local training only.
+CAPSTONE_FL_UPDATE_BRIDGE_V1,ENGINEERING_IMPLEMENTATION,CAP-006,FROZEN_ENGINEERING_IMPLEMENTATION,,product/federation/update_bridge.py,Exposes the EXISTING V2 update envelope after locality/validity checks.
+CAPSTONE_FL_CLIENT_COHORT_V1,ENGINEERING_IMPLEMENTATION,CAP-006,FROZEN_ENGINEERING_IMPLEMENTATION,,product/federation/local_cohort.py,The eight frozen V2-FL-005 clients as capstone FL clients (no second universe).

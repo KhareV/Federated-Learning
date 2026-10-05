@@ -1,0 +1,102 @@
+{
+ "bound_files": {
+  "scripts/cap_006_build_evidence.py": "20186316ccc4ac759432413586f0653b4237eb7e493ead968d1afae1519eb31e",
+  "scripts/cap_006_build_freeze.py": "9da38f2d34777a9ffb716d804d2be4f3d8411e2466c9f72579f23c896e118d1a",
+  "scripts/cap_006_mutation_controls.py": "2abcd46c2acf727b76dfac06503fbd7edbb624e06fc554048e7d59f52166faa9",
+  "scripts/cap_006_protected_audit.py": "917e2a86d004e048a2585a67cc1bf725ca73e3e9c2719e203469155e40a58a71",
+  "scripts/run_capstone_local_training.py": "98e3e5c2f4e8c858b702bee015baa0e0885902402d0d31c570c9ae4907f27c5f",
+  "tests/capstone_local_support.py": "c7a7352ce1aff3cfd6ba36666e64813b5fae67fa83e6c78205e20de06081c4aa",
+  "tests/test_capstone_fl_client_adapter.py": "d804f4bf44aefaf3a9f93268dece16deb9b6c4024ed5f184d3909bec98b5b3ca",
+  "tests/test_capstone_local_training_buffer.py": "27b4dc53341b5885d26cdf98c9a3d5d80f560109bcc7db5fc814a894f12408b7",
+  "tests/test_capstone_local_training_repro.py": "821598c5a19747b11c23855205c2c2a64d1e9d3ce3206e35183fb4519fde36b4",
+  "tests/test_capstone_local_update_bridge.py": "17b143001d39ce563269fed60fd5367c5e50f51c59fc759ee9773563b903150f"
+ },
+ "component_registry": {
+  "path": "manifests/capstone/component_registry_cap_006_v1.csv",
+  "sha256": "2ef8ef16f23661968482afdcd672d06a5747bcc20fee6c078bcad12df25cd75b"
+ },
+ "components": {
+  "CAPSTONE_FL_CLIENT_ADAPTER_V1": {
+   "path": "product/federation/client.py",
+   "sha256": "1cc185f6c495e707f16fc4cef9cd74923383614e68c0e5b4fe1234ca65f19f68",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_FL_CLIENT_COHORT_V1": {
+   "path": "product/federation/local_cohort.py",
+   "sha256": "330dd02c3b6abfcef6e560eda977d2b1bb44d1e64e3eaed3a7ff6c8f1fe2c695",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_FL_UPDATE_BRIDGE_V1": {
+   "path": "product/federation/update_bridge.py",
+   "sha256": "292e8ab3f32136947261792b5aa4723b0e22ffa0a55a8793f59fb3e8a4408dd3",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_LOCAL_BUFFER_BINDING_V1": {
+   "path": "docs/capstone/CAPSTONE_LOCAL_BUFFER_BINDING_V1.md",
+   "sha256": "2eaf589a23b1f91ca7502b3f1f3a7aa184cea2a787f2653db55a1f390a056330",
+   "status": "FROZEN_IMPLEMENTATION_BINDING"
+  },
+  "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1": {
+   "path": "configs/capstone/cap_006_local_training_protocol_v1.json",
+   "sha256": "4f7a8196f085694c1f77fd7277a60499829b0e7388e9b22db4f2957544a4ea0e",
+   "status": "FROZEN_ENGINEERING_PROTOCOL"
+  },
+  "LOCAL_TRAINING_BUFFER_V1": {
+   "path": "product/edge/local_training_buffer.py",
+   "sha256": "08284f1de98180c61325123d00fb6c45534959be874ee8b8dc68394c9c650dc5",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "SIMULATION_LABEL_ADAPTER_V1": {
+   "path": "product/edge/label_adapter.py",
+   "sha256": "5fa7dca470b68ab85f8d84748b0f0584e763299599a4e8191bc325f2eeb3dae1",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  }
+ },
+ "entry_sha": "b8a6c70ed6b77a38273cb8bdb6659452dfe26f83",
+ "freeze_basis": "method/local-training freeze: bound files precede CAPG5 result evidence",
+ "freeze_time_state": {
+  "CAP-006": "IN_PROGRESS",
+  "CAPG5": "NOT_STARTED",
+  "gate_registry_sha256": "9fe222531a4e9d1c9d21f91e052425d2a58c54375cf44dd6d414ac70e47b3a81",
+  "note": "informational; these registries transition at the result commit",
+  "task_registry_sha256": "90115751d5b3f767e439335efbfe7d9e1f6fbbf89d1d7bf1249df8c493973596"
+ },
+ "gate": "CAPG5",
+ "lock_id": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1",
+ "mutable_future_implementation_files_bound": false,
+ "owner_task": "CAP-006",
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "upstream_frozen_identity": {
+  "api/product_app.py": "496ce89a91f233e3dfb5c9473c4ce456d6fc53d8680393fe748e93cbd6ca8657",
+  "api/product_app_v1_1.py": "47ae7b03eb05796ce4d807e641e5adf27f54ceb16c146d62119419c12c9de985",
+  "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+  "artifacts/FEDPROX_MU_V2.lock.json": "a95e44cdef9295a68c217138a02eada69eda86f701eb4c87dd0f67cd7c7ed023",
+  "artifacts/SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0",
+  "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30",
+  "artifacts/capstone/CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.lock.json": "a125a60edb7343004280d48bf1e75ab1163eec1a6da998f8a022789be1ee9c8e",
+  "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json": "3eb5ee97665b006088b15b021b484a5e5ac6f4174f58051d97aacfed0ae0be7d",
+  "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.lock.json": "6cae0d1e71ba742b1a6dfafbc5f435466343637b1be841e124d31092464be8aa",
+  "artifacts/capstone/CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1.lock.json": "70e9488a2530bbb3593cc39200e947250bf7f83f8a5a3ba0b205b33387c80597",
+  "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "artifacts/capstone/CAPSTONE_UI_V1.lock.json": "374f996e3c4cf26d97bee8df68b73239ebb737fcb284e3249dc2466cffd67e1a",
+  "capstone_persistence/store.py": "38e7bd1f4927c76be7815239cca09c72cbb07f775d08119cb2319b137d7c1717",
+  "contracts/capstone/edge_node_v1.json": "ef7a39ef204442a75c9ab54aa6d6a1897e737d8832e36f974b5363ad6ef6b169",
+  "contracts/capstone/fl_client_v1.json": "c25216aa25505235d3a3937e6ced084a7e9e8edffcd9f5d9c3e46b30bef1eec0",
+  "contracts/capstone/fl_run_v1.json": "82e591f6aad3a3ba4d25b8b2ab5324a641bf0e8dcc5a29ca4c7832e3aac6af28",
+  "contracts/capstone/local_training_buffer_v1.json": "4baa7eaa82587906e311061d3798d4d67c864145bbd8b0188d05de5c8bcc4cc2",
+  "federated/aggregation.py": "902a72b976399afe85a512ecb83897a80a483e6b541d5dbc544acbe654660920",
+  "federated/model_v2_fedprox.py": "1b2e71027ff27530c0e27bf5f9f42d0c06d6847301e2934e0bcc80e804d2dce4",
+  "federated/model_v2_fl.py": "0554ec13d0bba870f726b936dde5567552939687c25745803634ba4e6d4fc2b1",
+  "federated/virtual_client_source_v1.py": "cc469d5a16d8500490f497ab32dc59d2795dc310692caa2cb0974322273e4f37",
+  "federated/wearable_fl_runner_v1.py": "6166141182e977cce79f4865e9bd5b9a4b29656086f11a6f3ab243bacf59966d",
+  "federated/wearable_fl_system_v1.py": "1e78748c7c2d0041a71cc3a5a9cef7fa68102b7b68adc0a05828215f0865e914",
+  "federated/wearable_sim_local_labels.py": "eb894fd88ea2e23704561740a0347e0fe75a12da63f135f6db22dc6b168a5e3a",
+  "product/edge/buffer.py": "07aa4162fe4e2a9e70f02841f8f49d6f4d2734cc48b0015f863fda31fd8a5da1",
+  "product/edge/virtual.py": "08855b4358f94122445a38d9f01e362cf7bd74105731c6c9a7c6cabb056422e6",
+  "product/federation/base.py": "a797bbcc6cc9aedc497ad9b8cf91d0fdd0d86481dfc382627b456db46a0576fe",
+  "reports/model_v2/v2_fl_005/cohort_manifest_run.json": "e586b8cb425dfcfb9c5c72222b174477519445f2cc2529a2d11a2ec6e55803dc",
+  "reports/model_v2/v2_fl_005/federation_run.json": "6ef1a3152fca1af74a4b131760af6c5163f63087c01f64ae347e0cd54d81451e",
+  "simulation/fl_cohort_truth_v1.py": "2aee5a447affd664fcd1559d4c5c1930e43f57848ee7fb1e949100d2570dd14d",
+  "simulation/fl_cohort_v1.py": "bf6e66ac81fa8aaa9c49d22d0d2c07e2b60f11106341fad37bc252b8b9d2069b"
+ }
+}

@@ -284,3 +284,48 @@ def test_cap_005_freeze_lock_binds_every_listed_file_byte_for_byte() -> None:
 def test_cap_001_to_004_locks_remain_verified_during_cap_005() -> None:
     from scripts.cap_005_protected_audit import all_locks
     assert all(v["verified"] is True for v in all_locks().values())
+
+
+CAP006_LOCK = ROOT / "artifacts/capstone/CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.lock.json"
+EXPECTED_CAP006_COMPONENTS = {
+    "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1": "FROZEN_ENGINEERING_PROTOCOL",
+    "CAPSTONE_LOCAL_BUFFER_BINDING_V1": "FROZEN_IMPLEMENTATION_BINDING",
+    "SIMULATION_LABEL_ADAPTER_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+    "LOCAL_TRAINING_BUFFER_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+    "CAPSTONE_FL_CLIENT_ADAPTER_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+    "CAPSTONE_FL_UPDATE_BRIDGE_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+    "CAPSTONE_FL_CLIENT_COHORT_V1": "FROZEN_ENGINEERING_IMPLEMENTATION",
+}
+
+
+def test_cap_006_components_are_exactly_the_seven_registered_components() -> None:
+    with (ROOT / "manifests/capstone/component_registry_cap_006_v1.csv").open(newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    assert {r["component_id"]: r["status"] for r in rows} == EXPECTED_CAP006_COMPONENTS
+    assert {r["owner_task"] for r in rows} == {"CAP-006"}
+
+
+def test_cap_006_freeze_lock_binds_every_listed_file_byte_for_byte() -> None:
+    lock = json.loads(CAP006_LOCK.read_text())
+    assert lock["status"] == "FROZEN_ENGINEERING_PROTOCOL"
+    bound = {**lock["bound_files"], **lock["upstream_frozen_identity"]}
+    bound.update({c["path"]: c["sha256"] for c in lock["components"].values()})
+    registry = dict(lock["component_registry"])
+    for amendment in sorted((ROOT / "artifacts/capstone").glob(
+            "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.amendment_*.json")):
+        data = json.loads(amendment.read_text())
+        for path, change in data["files"].items():
+            assert bound[path] == change["old_sha256"]
+            bound[path] = change["new_sha256"]
+        bound.update(data.get("added_files", {}))
+        if "component_registry" in data:
+            assert registry["sha256"] == data["component_registry"]["old_sha256"]
+            registry["sha256"] = data["component_registry"]["new_sha256"]
+    for path, digest in bound.items():
+        assert hash_file(ROOT / path) == digest, path
+    assert hash_file(ROOT / registry["path"]) == registry["sha256"]
+
+
+def test_cap_001_to_005_locks_remain_verified_during_cap_006() -> None:
+    from scripts.cap_006_protected_audit import all_locks
+    assert all(v["verified"] is True for v in all_locks().values())

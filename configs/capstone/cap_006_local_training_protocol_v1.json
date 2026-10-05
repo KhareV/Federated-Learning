@@ -1,0 +1,910 @@
+{
+ "buffer_interpretation": {
+  "batch_id": "WEARABLE_SIM_FL_BATCH_0001__<client_id>__<dataset_sha[:12]>",
+  "binding": "CAPSTONE_LOCAL_BUFFER_BINDING_V1 (docs/capstone/CAPSTONE_LOCAL_BUFFER_BINDING_V1.md)",
+  "model_input_ref": "LOCALREF:<dataset_sha[:16]>:<position>:<input_digest[:16]> (opaque; tensor in private store; owner-only reads)",
+  "provenance_id": "WEARABLE_SIM_FL_COHORT_V1/WEARABLE_SIM_V1/<client>/<participant>/<dataset_sha[:16]>",
+  "records": "only TRAINABLE windows; quality_eligible always true",
+  "semantic_digest": "sha256 over canonical JSON of the record metadata + batch ids (no object ids/addresses)",
+  "storage_mode": "DETERMINISTIC_LOCAL_IN_MEMORY_REGENERATION",
+  "window_id": "<client_id>-W<right_edge_us:012d>"
+ },
+ "canonical_parity_protocol": {
+  "compare_to_frozen": [
+   "dataset counts and dataset_sha256",
+   "examples_seen",
+   "shuffle_seeds",
+   "update_sha256",
+   "base_global_state_sha256",
+   "payload_bytes"
+  ],
+  "fedprox": "scripts/run_capstone_local_training.py fedprox",
+  "mismatch": "FAIL (no tuning)",
+  "run": "scripts/run_capstone_local_training.py run N (fresh process): 8 clients, FedAvg, round 1, FL_INIT_V2, exactly 8 local-training calls, runtime tripwires on aggregation/coordinator",
+  "runs": 2
+ },
+ "capg5_criteria": [
+  {
+   "checks": [
+    "@cap_pass_1"
+   ],
+   "id": 1,
+   "text": "CAP-001/CAPG0 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_2"
+   ],
+   "id": 2,
+   "text": "CAP-002/CAPG1 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_3"
+   ],
+   "id": 3,
+   "text": "CAP-003/CAPG2 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_4"
+   ],
+   "id": 4,
+   "text": "CAP-004/CAPG3 PASS"
+  },
+  {
+   "checks": [
+    "@cap_pass_5"
+   ],
+   "id": 5,
+   "text": "CAP-005/CAPG4 PASS"
+  },
+  {
+   "checks": [
+    "@locks_verified"
+   ],
+   "id": 6,
+   "text": "all prior amendment chains verify"
+  },
+  {
+   "checks": [
+    "@ui_lock_verified",
+    "@frontend_unchanged"
+   ],
+   "id": 7,
+   "text": "CAPSTONE_UI_V1 verifies unchanged"
+  },
+  {
+   "checks": [
+    "@v2fl005_unchanged"
+   ],
+   "id": 8,
+   "text": "V2-FL-005 frozen evidence verifies unchanged"
+  },
+  {
+   "checks": [
+    "@fl_init_unchanged"
+   ],
+   "id": 9,
+   "text": "FL_INIT_V2 verifies unchanged"
+  },
+  {
+   "checks": [
+    "@no_scientific_drift"
+   ],
+   "id": 10,
+   "text": "no scientific/runtime drift"
+  },
+  {
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ],
+   "id": 11,
+   "text": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1 frozen before canonical runs"
+  },
+  {
+   "checks": [
+    "test_all_eight_frozen_clients_are_reused_with_exact_v2_fl_005_counts_and_dataset_shas",
+    "test_window_ids_batch_ids_and_provenance_are_deterministic_and_bound",
+    "@buffer_implements_contract"
+   ],
+   "id": 12,
+   "text": "LOCAL_TRAINING_BUFFER_V1 implements the frozen protocol"
+  },
+  {
+   "checks": [
+    "test_the_buffer_semantic_digest_is_deterministic_and_metadata_only",
+    "@storage_mode_regeneration"
+   ],
+   "id": 13,
+   "text": "buffer uses deterministic local regeneration"
+  },
+  {
+   "checks": [
+    "test_no_new_module_writes_to_central_storage_or_depends_on_the_product_database",
+    "@central_db_untouched"
+   ],
+   "id": 14,
+   "text": "no training tensors written to central SQLite"
+  },
+  {
+   "checks": [
+    "test_no_new_module_writes_to_central_storage_or_depends_on_the_product_database",
+    "@central_db_untouched"
+   ],
+   "id": 15,
+   "text": "no labels written to central SQLite"
+  },
+  {
+   "checks": [
+    "test_no_new_module_writes_to_central_storage_or_depends_on_the_product_database",
+    "@central_db_untouched"
+   ],
+   "id": 16,
+   "text": "no SimulationTruth written to central SQLite"
+  },
+  {
+   "checks": [
+    "test_only_trainable_windows_become_records_and_all_are_quality_eligible",
+    "@buffer_counts_match_trainable"
+   ],
+   "id": 17,
+   "text": "only trainable windows become canonical training records"
+  },
+  {
+   "checks": [
+    "@buffer_counts_match_trainable"
+   ],
+   "id": 18,
+   "text": "buffer record count matches existing trainable count for each client"
+  },
+  {
+   "checks": [
+    "test_only_trainable_windows_become_records_and_all_are_quality_eligible",
+    "@all_records_eligible"
+   ],
+   "id": 19,
+   "text": "every stored canonical record has quality_eligible=true"
+  },
+  {
+   "checks": [
+    "test_model_input_refs_are_opaque_references_not_sample_arrays",
+    "@refs_opaque"
+   ],
+   "id": 20,
+   "text": "all model_input_ref values are references, not sample arrays"
+  },
+  {
+   "checks": [
+    "test_model_input_lookup_is_client_local_and_cross_client_access_fails"
+   ],
+   "id": 21,
+   "text": "model-input lookup is client-local"
+  },
+  {
+   "checks": [
+    "test_model_input_lookup_is_client_local_and_cross_client_access_fails",
+    "test_a_cross_client_buffer_read_is_refused_by_the_buffer"
+   ],
+   "id": 22,
+   "text": "cross-client model-input lookup fails"
+  },
+  {
+   "checks": [
+    "test_duplicate_batch_cross_client_record_and_missing_private_tensor_fail_closed"
+   ],
+   "id": 23,
+   "text": "duplicate batch fails"
+  },
+  {
+   "checks": [
+    "test_window_ids_batch_ids_and_provenance_are_deterministic_and_bound",
+    "@provenance_synthetic"
+   ],
+   "id": 24,
+   "text": "source provenance is synthetic"
+  },
+  {
+   "checks": [
+    "test_the_label_adapter_wraps_the_existing_adapter_and_keeps_engineering_semantics",
+    "@label_semantics"
+   ],
+   "id": 25,
+   "text": "engineering label semantics remain WEARABLE_SIM_EVENT_WINDOW_V1"
+  },
+  {
+   "checks": [
+    "@no_aami_claim"
+   ],
+   "id": 26,
+   "text": "no AAMI_SVF equivalence is claimed"
+  },
+  {
+   "checks": [
+    "test_the_label_adapter_wraps_the_existing_adapter_and_keeps_engineering_semantics"
+   ],
+   "id": 27,
+   "text": "SIMULATION_LABEL_ADAPTER_V1 reuses the existing label adapter"
+  },
+  {
+   "checks": [
+    "test_product_wrappers_do_not_import_truth_modules_or_names_anywhere_under_product",
+    "test_simulation_truth_is_never_imported_by_the_live_or_federation_server_paths",
+    "test_simulation_truth_importers_are_exactly_the_sanctioned_set"
+   ],
+   "id": 28,
+   "text": "product wrapper does not directly import truth modules"
+  },
+  {
+   "checks": [
+    "@truth_firewall_static",
+    "@runtime_truth_only_sanctioned"
+   ],
+   "id": 29,
+   "text": "SimulationTruth remains absent from monitoring/server/frontend paths"
+  },
+  {
+   "checks": [
+    "@clients_frozen_eight"
+   ],
+   "id": 30,
+   "text": "all eight frozen clients reused"
+  },
+  {
+   "checks": [
+    "@no_second_universe"
+   ],
+   "id": 31,
+   "text": "no second client universe introduced"
+  },
+  {
+   "checks": [
+    "@dataset_counts_parity"
+   ],
+   "id": 32,
+   "text": "all eight regenerated datasets exactly match V2-FL-005 counts"
+  },
+  {
+   "checks": [
+    "@dataset_sha_parity"
+   ],
+   "id": 33,
+   "text": "all eight regenerated dataset SHA256 values match V2-FL-005"
+  },
+  {
+   "checks": [
+    "test_the_adapter_satisfies_the_frozen_flclient_protocol_without_altering_it"
+   ],
+   "id": 34,
+   "text": "CAPSTONE_FL_CLIENT_ADAPTER_V1 satisfies FLClient protocol"
+  },
+  {
+   "checks": [
+    "test_edge_identities_come_from_the_frozen_mapping_for_all_eight_clients"
+   ],
+   "id": 35,
+   "text": "edge identities match frozen SIM_FL mappings"
+  },
+  {
+   "checks": [
+    "@canonical_base_fl_init"
+   ],
+   "id": 36,
+   "text": "canonical base is FL_INIT_V2"
+  },
+  {
+   "checks": [
+    "test_only_fl_init_v2_is_accepted_as_the_base_never_model_v2_final",
+    "@canonical_base_fl_init"
+   ],
+   "id": 37,
+   "text": "MODEL_V2_FINAL is not used as the FL starting state"
+  },
+  {
+   "checks": [
+    "test_fedavg_mode_calls_the_existing_fedavg_epoch_and_never_the_fedprox_one",
+    "@fedavg_calls_existing"
+   ],
+   "id": 38,
+   "text": "FedAvg local training calls existing train_local_epoch_v2"
+  },
+  {
+   "checks": [
+    "test_local_training_hyperparameters_are_the_frozen_v2_fl_005_constants",
+    "@frozen_modules_unchanged"
+   ],
+   "id": 39,
+   "text": "optimizer/hyperparameters unchanged"
+  },
+  {
+   "checks": [
+    "@eight_calls_per_run"
+   ],
+   "id": 40,
+   "text": "exactly eight canonical FedAvg local-training calls occur per run"
+  },
+  {
+   "checks": [
+    "@no_aggregation",
+    "test_the_bridge_and_client_never_call_any_coordinator_or_aggregation_or_secagg_function",
+    "test_eight_local_trainings_from_fl_init_v2_with_no_aggregation_or_coordinator_call"
+   ],
+   "id": 41,
+   "text": "no aggregation occurs"
+  },
+  {
+   "checks": [
+    "@no_aggregation",
+    "test_the_bridge_and_client_never_call_any_coordinator_or_aggregation_or_secagg_function"
+   ],
+   "id": 42,
+   "text": "no Coordinator.submit occurs"
+  },
+  {
+   "checks": [
+    "@no_aggregation",
+    "test_the_bridge_and_client_never_call_any_coordinator_or_aggregation_or_secagg_function"
+   ],
+   "id": 43,
+   "text": "no Coordinator.aggregate occurs"
+  },
+  {
+   "checks": [
+    "@no_aggregation",
+    "test_the_bridge_and_client_never_call_any_coordinator_or_aggregation_or_secagg_function"
+   ],
+   "id": 44,
+   "text": "no Coordinator.commit occurs"
+  },
+  {
+   "checks": [
+    "@no_secagg"
+   ],
+   "id": 45,
+   "text": "no SecAgg run occurs"
+  },
+  {
+   "checks": [
+    "@no_federation_run"
+   ],
+   "id": 46,
+   "text": "no federation run is created"
+  },
+  {
+   "checks": [
+    "@no_candidate"
+   ],
+   "id": 47,
+   "text": "no candidate model is created"
+  },
+  {
+   "checks": [
+    "test_the_submission_projection_has_exactly_the_five_frozen_fields_and_cannot_carry_labels",
+    "test_the_server_visible_projection_equals_the_frozen_field_mapping_and_the_client_projection",
+    "@submission_projection"
+   ],
+   "id": 48,
+   "text": "UpdateSubmission matches frozen metadata projection"
+  },
+  {
+   "checks": [
+    "test_the_bridge_exposes_exactly_the_existing_v2_envelope_with_zero_forbidden_findings",
+    "@envelope_reused"
+   ],
+   "id": 49,
+   "text": "existing V2 full envelope is reused"
+  },
+  {
+   "checks": [
+    "test_object_structure_contains_no_raw_samples_labels_truth_or_minibatches",
+    "@envelope_clean"
+   ],
+   "id": 50,
+   "text": "server-visible envelope contains no raw data"
+  },
+  {
+   "checks": [
+    "test_object_structure_contains_no_raw_samples_labels_truth_or_minibatches",
+    "@envelope_clean"
+   ],
+   "id": 51,
+   "text": "server-visible envelope contains no labels"
+  },
+  {
+   "checks": [
+    "test_object_structure_contains_no_raw_samples_labels_truth_or_minibatches",
+    "@envelope_clean"
+   ],
+   "id": 52,
+   "text": "server-visible envelope contains no truth"
+  },
+  {
+   "checks": [
+    "test_every_update_is_finite_valid_and_contains_no_forbidden_data",
+    "@deltas_finite"
+   ],
+   "id": 53,
+   "text": "all local deltas finite"
+  },
+  {
+   "checks": [
+    "test_delta_validity_keys_shapes_dtypes_finiteness_and_integer_buffers",
+    "@deltas_valid"
+   ],
+   "id": 54,
+   "text": "all local state shapes/dtypes valid"
+  },
+  {
+   "checks": [
+    "test_a_tampered_payload_or_digest_makes_the_bridge_refuse_the_update",
+    "@deltas_valid"
+   ],
+   "id": 55,
+   "text": "update digest reconciles with payload"
+  },
+  {
+   "checks": [
+    "@examples_match_eligible"
+   ],
+   "id": 56,
+   "text": "examples_seen matches local eligible examples"
+  },
+  {
+   "checks": [
+    "test_round_one_examples_shuffle_seeds_and_update_shas_equal_the_frozen_v2_fl_005_evidence",
+    "@parity_examples"
+   ],
+   "id": 57,
+   "text": "CAP-006 FedAvg round-1 examples match V2-FL-005"
+  },
+  {
+   "checks": [
+    "test_round_one_examples_shuffle_seeds_and_update_shas_equal_the_frozen_v2_fl_005_evidence",
+    "@parity_seeds"
+   ],
+   "id": 58,
+   "text": "CAP-006 FedAvg round-1 shuffle seeds match V2-FL-005"
+  },
+  {
+   "checks": [
+    "test_round_one_examples_shuffle_seeds_and_update_shas_equal_the_frozen_v2_fl_005_evidence",
+    "@parity_update_sha"
+   ],
+   "id": 59,
+   "text": "CAP-006 FedAvg round-1 update SHA values match V2-FL-005"
+  },
+  {
+   "checks": [
+    "@repro_buffer"
+   ],
+   "id": 60,
+   "text": "run 1 and run 2 buffer digests match"
+  },
+  {
+   "checks": [
+    "@repro_updates"
+   ],
+   "id": 61,
+   "text": "run 1 and run 2 update digests match"
+  },
+  {
+   "checks": [
+    "@repro_submissions"
+   ],
+   "id": 62,
+   "text": "run 1 and run 2 UpdateSubmission objects match"
+  },
+  {
+   "checks": [
+    "test_fedprox_mode_calls_the_existing_fedprox_epoch_once_with_the_frozen_mu_only",
+    "@fedprox_existing"
+   ],
+   "id": 63,
+   "text": "FedProx local smoke uses existing implementation"
+  },
+  {
+   "checks": [
+    "test_fedprox_mode_calls_the_existing_fedprox_epoch_once_with_the_frozen_mu_only",
+    "@fedprox_mu_frozen"
+   ],
+   "id": 64,
+   "text": "FedProx local smoke uses frozen mu only"
+  },
+  {
+   "checks": [
+    "@fedprox_no_tuning"
+   ],
+   "id": 65,
+   "text": "FedProx performs no tuning"
+  },
+  {
+   "checks": [
+    "@fedprox_no_aggregation"
+   ],
+   "id": 66,
+   "text": "FedProx smoke performs no aggregation"
+  },
+  {
+   "checks": [
+    "@no_metrics"
+   ],
+   "id": 67,
+   "text": "no classification/efficacy metric is computed"
+  },
+  {
+   "checks": [
+    "@no_heldout"
+   ],
+   "id": 68,
+   "text": "no held-out inference is rerun"
+  },
+  {
+   "checks": [
+    "test_local_fl_code_does_not_import_or_touch_the_monitoring_product",
+    "test_local_training_has_zero_effect_on_an_existing_monitoring_state_object",
+    "@no_monitoring_data"
+   ],
+   "id": 69,
+   "text": "no user monitoring data enters training"
+  },
+  {
+   "checks": [
+    "@no_personalized"
+   ],
+   "id": 70,
+   "text": "no personalized model exists"
+  },
+  {
+   "checks": [
+    "@no_new_routes"
+   ],
+   "id": 71,
+   "text": "no product API routes added"
+  },
+  {
+   "checks": [
+    "@backend_untouched"
+   ],
+   "id": 72,
+   "text": "no product backend modified"
+  },
+  {
+   "checks": [
+    "@frontend_unchanged"
+   ],
+   "id": 73,
+   "text": "no frontend modified"
+  },
+  {
+   "checks": [
+    "@central_db_untouched"
+   ],
+   "id": 74,
+   "text": "no federation SQLite rows written"
+  },
+  {
+   "checks": [
+    "@central_db_untouched"
+   ],
+   "id": 75,
+   "text": "no candidate/governance rows written"
+  },
+  {
+   "checks": [
+    "@no_hardware_code"
+   ],
+   "id": 76,
+   "text": "no physical hardware code"
+  },
+  {
+   "checks": [
+    "@targeted_tests"
+   ],
+   "id": 77,
+   "text": "targeted CAP-006 tests pass"
+  },
+  {
+   "checks": [
+    "@prior_capstone_tests"
+   ],
+   "id": 78,
+   "text": "all prior capstone tests pass (subject only to the inherited documented flake policy)"
+  },
+  {
+   "checks": [
+    "@regression"
+   ],
+   "id": 79,
+   "text": "full Python regression passes (subject only to the inherited documented flake policy)"
+  },
+  {
+   "checks": [
+    "@frontend_npm_test"
+   ],
+   "id": 80,
+   "text": "frontend npm test passes"
+  },
+  {
+   "checks": [
+    "@svelte_check"
+   ],
+   "id": 81,
+   "text": "frontend svelte-check has zero errors"
+  },
+  {
+   "checks": [
+    "@frontend_build"
+   ],
+   "id": 82,
+   "text": "frontend build passes"
+  },
+  {
+   "checks": [
+    "@ruff"
+   ],
+   "id": 83,
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    "@pip"
+   ],
+   "id": 84,
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "id": 85,
+   "text": "CI not queried"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "id": 86,
+   "text": "CI not triggered"
+  },
+  {
+   "checks": [
+    "@registry_cap006"
+   ],
+   "id": 87,
+   "text": "CAP-006 PASS"
+  },
+  {
+   "checks": [
+    "@registry_capg5"
+   ],
+   "id": 88,
+   "text": "CAPG5 PASS"
+  },
+  {
+   "checks": [
+    "@registry_cap007"
+   ],
+   "id": 89,
+   "text": "CAP-007 remains NOT_STARTED"
+  },
+  {
+   "checks": [
+    "@mutation_log"
+   ],
+   "id": 90,
+   "text": "ten non-equivalent mutation controls are each caught and restored byte-identically"
+  },
+  {
+   "checks": [
+    "@repro_semantic"
+   ],
+   "id": 91,
+   "text": "the two fresh-process canonical runs have identical semantic digests"
+  },
+  {
+   "checks": [
+    "@no_large_artifacts"
+   ],
+   "id": 92,
+   "text": "no tensors, datasets or checkpoints are committed (bounded metadata evidence only)"
+  },
+  {
+   "checks": [
+    "test_eight_local_trainings_from_fl_init_v2_with_no_aggregation_or_coordinator_call"
+   ],
+   "id": 93,
+   "text": "the first-pass buffer, client, bridge and repro tests reproduce the frozen V2-FL-005 round-1 evidence in-process"
+  },
+  {
+   "checks": [
+    "@disclosures_preserved"
+   ],
+   "id": 94,
+   "text": "preserved disclosures remain recorded"
+  }
+ ],
+ "capg5_criteria_note": "Criteria 1-89 are the 89 prompt-mandated criteria; 90-94 are implementation-specific integrity criteria added before any result evidence.",
+ "claim_boundary": {
+  "allowed": [
+   "systems/engineering evidence",
+   "synthetic engineering labels",
+   "deterministic simulation",
+   "research prototype"
+  ],
+  "forbidden": [
+   "model efficacy or any classification metric",
+   "clinical or diagnostic claims",
+   "AAMI_SVF equivalence",
+   "candidate comparison",
+   "privacy guarantee"
+  ]
+ },
+ "client_lifecycle": "IDLE -> (prepare) DATA_READY -> (local_train) TRAINING -> UPDATE_READY -> (produce_update returns the metadata projection) ; SUBMITTED is reserved for the CAP-007 coordinator and is never reached by CAP-006 runs; failures -> FAILED; validation failures raise without damaging DATA_READY",
+ "components": [
+  "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1",
+  "CAPSTONE_LOCAL_BUFFER_BINDING_V1",
+  "SIMULATION_LABEL_ADAPTER_V1",
+  "LOCAL_TRAINING_BUFFER_V1",
+  "CAPSTONE_FL_CLIENT_ADAPTER_V1",
+  "CAPSTONE_FL_UPDATE_BRIDGE_V1",
+  "CAPSTONE_FL_CLIENT_COHORT_V1"
+ ],
+ "control_plane": {
+  "component_registry": "manifests/capstone/component_registry_cap_006_v1.csv",
+  "gate_registry": "manifests/capstone/gate_registry_v1.csv",
+  "task_registry": "manifests/capstone/task_registry_v1.csv"
+ },
+ "entry": {
+  "entry_commit_with_control_plane": "fa96457",
+  "expected_entry_sha": "b8a6c70ed6b77a38273cb8bdb6659452dfe26f83"
+ },
+ "environment": "Python 3.11 venv outside the repo; no GPU; CI neither queried nor triggered",
+ "failure_tests": [
+  "wrong base_state_digest",
+  "wrong round",
+  "zero-example buffer",
+  "cross-client buffer",
+  "duplicate batch",
+  "forbidden label source",
+  "simulation label on real-data record",
+  "prediction-derived label attempt",
+  "nonfinite local input",
+  "update digest mismatch",
+  "cross-client model_input_ref access"
+ ],
+ "fedavg_mapping": {
+  "base_seed": 20260927,
+  "batch_size": 64,
+  "experiment_id": "WEARABLE_SIM_FL_SYSTEM_V1",
+  "function": "federated.model_v2_fl.train_local_epoch_v2",
+  "imported_from": "federated.wearable_fl_runner_v1 constants (no copy)",
+  "learning_rate": 0.001,
+  "pos_weight": 1.7157717177396683,
+  "round": 1,
+  "weight_decay": 0.0001
+ },
+ "fedprox_mapping": {
+  "canonical_scope": "one-client local smoke (SIM_FL_SITE_00, round 1, FL_INIT_V2), separate from the FedAvg parity digest",
+  "function": "federated.model_v2_fedprox.train_local_fedprox_epoch_v2",
+  "mu": "FEDPROX_MU_V2 selected_mu (0.1) read from artifacts/FEDPROX_MU_V2.lock.json",
+  "no_comparison": true,
+  "no_mu_search": true
+ },
+ "fl_init_v2": {
+  "frozen_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "only_accepted_base": "FL_INIT_V2 (MODEL_V2_FINAL as base fails closed)",
+  "regeneration": "federated.wearable_fl_runner_v1.new_session() (fresh_initial_state_v2(BASE_SEED))"
+ },
+ "gate": "CAPG5",
+ "label_semantics": {
+  "contract": "WEARABLE_SIM_EVENT_WINDOW_V1",
+  "forbidden_sources": [
+   "MODEL_PREDICTION",
+   "SELF_LABEL",
+   "PSEUDO_LABEL",
+   "LIVE_INFERENCE_OUTPUT"
+  ],
+  "meaning": "positive = at least one scheduled SYNTHETIC / ENGINEERING EVENT inside the 10 s window",
+  "not": [
+   "AAMI_SVF_WINDOW_V1",
+   "S/V/F beats",
+   "arrhythmia diagnosis",
+   "clinical event"
+  ],
+  "source": "SIMULATION_TRUTH_ENGINEERING"
+ },
+ "locality_claim": {
+  "allowed": "eight logically isolated local client datasets on one demonstration machine; the (future) federation server receives model updates rather than raw local training examples",
+  "not_claimed": [
+   "hardware isolation",
+   "VM isolation",
+   "secure enclave",
+   "hospital-grade host isolation",
+   "cryptographic local-data secrecy",
+   "differential privacy",
+   "privacy guarantee"
+  ]
+ },
+ "mutation_controls": [
+  "MODEL_PREDICTION_LABEL_ACCEPTED",
+  "SIMULATION_TRUTH_ADDED_TO_UPDATE_ENVELOPE",
+  "LABEL_ADDED_TO_UPDATE_SUBMISSION",
+  "RAW_ECG_ARRAY_ADDED_TO_SERVER_ENVELOPE",
+  "CROSS_CLIENT_MODEL_INPUT_LOOKUP_ALLOWED",
+  "MODEL_V2_FINAL_ACCEPTED_AS_FL_BASE",
+  "WRONG_BASE_STATE_DIGEST_ACCEPTED",
+  "UPDATE_DIGEST_MISMATCH_ACCEPTED",
+  "FEDPROX_MU_CHANGED_FROM_FROZEN_VALUE",
+  "AGGREGATE_WEIGHTED_DELTAS_INVOKED_DURING_LOCAL_TRAINING"
+ ],
+ "out_of_scope": [
+  "aggregation (FedAvg/FedProx server)",
+  "Coordinator.submit/aggregate/commit",
+  "SecAgg",
+  "federation runs",
+  "candidate models / governance",
+  "frontend or backend change",
+  "personalised models / continual production learning",
+  "physical hardware",
+  "CAP-007"
+ ],
+ "owner_task": "CAP-006",
+ "preserved_disclosures": [
+  "CAP-001 gate-row wording discrepancy",
+  "CAP-002 code-drafted-before-entry",
+  "CAP-003 LIVE_SPEED bounded-settle limitation",
+  "CAP-003 manual-stop-mid-outage limitation",
+  "CAP-003 context projection",
+  "CAP-004 additive Clerk lock",
+  "CAP-004 SQLite store location",
+  "inherited CAP-003 flaky test",
+  "CAP-005 Clerk WebSocket cookie path unverified",
+  "CAP-005 no live Clerk-account E2E",
+  "CAP-005 accessibility audit not equivalent to formal WCAG certification",
+  "CAP-005 canonical UI evidence using ACCELERATED simulation"
+ ],
+ "product_meaning": "clients are SIM_FL_SITE_00..07 (SIM_P000101..108); NOT the logged-in user, a patient, or a personalised model; /app/monitoring data never enters FL training",
+ "protocol_id": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1",
+ "purpose": "LOCAL TRAINING ONLY: turn the frozen V2-FL-005 synthetic client cohort into first-class capstone federated clients (local training buffer, simulation label adapter, FL client adapter, update bridge) that genuinely train locally from FL_INIT_V2 through the existing V2 code and produce the existing V2 update envelope, with exact V2-FL-005 round-1 parity. No aggregation, no coordinator submission, no SecAgg, no federation run, no candidate.",
+ "server_visible_boundary": {
+  "internal_bridge": "CAPSTONE_FL_UPDATE_BRIDGE_V1 exposes the EXISTING V2 envelope (federated.wearable_fl_system_v1.make_envelope) after scan_forbidden == [] plus structure checks",
+  "new_wire_format": false,
+  "projection": "UpdateSubmission(client_id, round_id, base_state_digest, update_digest, examples_seen) mapped per CAPSTONE_FL_CLIENT_CONTRACT_V1.update_submission_envelope_mapping"
+ },
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "truth_firewall": {
+  "enforcement": "static AST scans + frozen CAP-001 importer tests + runtime sys.modules audit",
+  "forbidden_in": [
+   "live monitoring",
+   "product API",
+   "frontend",
+   "SQLite",
+   "federation coordinator/server",
+   "update envelope",
+   "UpdateSubmission",
+   "model delta"
+  ],
+  "product_wrapper": "product/edge/label_adapter.py imports no truth module",
+  "sanctioned_consumer": "federated/wearable_sim_local_labels.py only"
+ },
+ "upstream": {
+  "frontend_and_product_backend": "frozen during CAP-006 (zero change)",
+  "locks": [
+   "CAPSTONE_PRODUCT_PROTOCOL_V1 (+1 amendment)",
+   "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1 (+4)",
+   "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1 (+1)",
+   "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1 (+6)",
+   "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 (+5)",
+   "CAPSTONE_UI_V1"
+  ]
+ },
+ "v2_fl_005_reference": {
+  "cohort_id": "WEARABLE_SIM_FL_COHORT_V1",
+  "evidence_dir": "reports/model_v2/v2_fl_005",
+  "lock": "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json",
+  "read_not_copied": [
+   "cohort_manifest_run.json (counts, dataset_sha256, participants)",
+   "federation_run.json (round_reports.1: examples_seen, shuffle_seeds, update_sha256, base_global_state_sha256; state_progression.0 = FL_INIT_V2)"
+  ]
+ }
+}
