@@ -1,0 +1,19 @@
+{
+  "SYSTEM_V2_RELEASE_DECISION": "ACCEPT",
+  "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED": true,
+  "criteria_passed": 25,
+  "criteria_total": 25,
+  "decision_sha256": "69a7bcdc43670c52dcdbb9e3e4a9795ebb79366081850a7325abee00e0ce9185",
+  "evidence_matrix_sha256": "aba41d47e80ec8618ad923b8cade2e9e31ca7dc0e0ba669e39c1fee3f4287ec5",
+  "frozen_before_cutover": true,
+  "head_at_decision_freeze": "5560c5500f2b62f0c35b9e6b45122c7e215f615b",
+  "historical_model_promotion_disposition": "MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+  "lock_id": "SYSTEM_V2_RELEASE_DECISION_V1",
+  "manual_override": false,
+  "new_system_release_disposition": "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED",
+  "operational_default_at_freeze": "MODEL_V1",
+  "owner_task": "V2-REL-001",
+  "policy_lock": "artifacts/SYSTEM_V2_RELEASE_POLICY_V1.lock.json",
+  "policy_lock_sha256": "0a3459209aceb3c3c18625c645dd0f5bb143a5e9b951e34c2c39194b8e2bfb9a",
+  "status": "FROZEN_RELEASE_DECISION"
+}
