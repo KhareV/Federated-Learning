@@ -27,13 +27,15 @@ describe('product source layout', () => {
 			expect(() => read(p)).not.toThrow();
 		}
 	});
-	it('every product destination exists; only the CAP-009 research pages remain not-yet-enabled shells', () => {
+	it('every product destination exists; CAP-009 research routes use the real evidence API', () => {
 		for (const p of ['federation', 'federation/clients', 'federation/rounds', 'federation/live', 'federation/privacy', 'models', 'research/ml', 'research/fl', 'system', 'about', 'history']) {
 			expect(() => read(`routes/app/${p}/+page.svelte`)).not.toThrow();
 		}
-		for (const p of ['research/ml', 'research/fl']) {
-			expect(read(`routes/app/${p}/+page.svelte`)).toContain('FuturePhase'); // CAP-009 still owns these
-		}
+	for (const [route, method] of [['research/ml', 'researchMl'], ['research/fl', 'researchFl']]) {
+		const page = read(`routes/app/${route}/+page.svelte`);
+		expect(page).not.toContain('FuturePhase');
+		expect(page).toContain(`product.api.${method}()`);
+	}
 		for (const p of ['federation', 'federation/clients', 'federation/rounds', 'federation/live', 'federation/privacy', 'models']) {
 			expect(read(`routes/app/${p}/+page.svelte`)).not.toContain('FuturePhase'); // CAP-008: real CAP-007-backed pages
 		}

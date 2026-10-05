@@ -24,6 +24,15 @@ def frontend_files() -> list[str]:
 
 
 def bound_map(lock: dict) -> dict[str, str]:
+    # CAP-009 successor: current frontend bytes are governed by UI_V1_2, while
+    # the historical UI_V1_1 lock remains byte-identical and its claims remain scoped.
+    successor_path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json"
+    if successor_path.exists():
+        successor = json.loads(successor_path.read_text(encoding="utf-8"))
+        if successor.get("predecessor_id") != "CAPSTONE_UI_V1_1" or successor.get(
+                "predecessor_sha256") != hash_file(ROOT / LOCK):
+            raise RuntimeError("CAPSTONE_UI_V1_1_SUCCESSOR_CHAIN_BROKEN")
+        return dict(successor["bound_artifacts"])
     expected = dict(lock["bound_artifacts"])
     for amendment in sorted((ROOT / "artifacts/capstone").glob("CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_*.json")):
         data = json.loads(amendment.read_text(encoding="utf-8"))

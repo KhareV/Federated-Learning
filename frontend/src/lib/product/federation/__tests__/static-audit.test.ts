@@ -71,8 +71,12 @@ describe('federation product source audit', () => {
 			expect(/HIPAA|fully private|data can never leak|cryptographically confidential|SECURE FEDERATION|PRIVATE FEDERATION|ANONYMOUS TRAINING|differentially private|world map/i.test(t), f).toBe(false);
 		}
 	});
-	it('federation pages are not placeholders and the research pages still are', () => {
+	it('federation pages remain real and CAP-009 research pages consume evidence routes', () => {
 		for (const r of ['federation', 'federation/clients', 'federation/rounds', 'federation/live', 'federation/privacy', 'models']) expect(text(join(SRC, `routes/app/${r}/+page.svelte`))).not.toContain('FuturePhase');
-		for (const r of ['research/ml', 'research/fl']) expect(text(join(SRC, `routes/app/${r}/+page.svelte`))).toContain('FuturePhase');
+		for (const [route, method] of [['research/ml', 'researchMl'], ['research/fl', 'researchFl']]) {
+			const page = text(join(SRC, `routes/app/${route}/+page.svelte`));
+			expect(page).not.toContain('FuturePhase');
+			expect(page).toContain(`product.api.${method}()`);
+		}
 	});
 });

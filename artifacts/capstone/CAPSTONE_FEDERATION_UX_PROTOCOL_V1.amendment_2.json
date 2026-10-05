@@ -1,0 +1,39 @@
+{
+ "amendment_id": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_2",
+ "made_during": "CAP-009 before CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1 method/UI freeze and before canonical browser evidence",
+ "previous_amendment": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_1",
+ "defect": "The CAP-008 historical UI verifier and guard assumed the CAP-009 research pages would remain placeholders and that no later additive API/history implementation would exist.",
+ "change": "The CAP-008 verifier accepts current frontend bytes only through the hash-bound CAPSTONE_UI_V1_2 successor; the CAP-008 tests preserve federation byte/behavior immutability while allowing CAP-009-only additive backend files and real research views. No CAP-007 federation or CAP-008 UX implementation changes.",
+ "files": {
+  "scripts/verify_capstone_ui_v1_1.py": {
+   "old_sha256": "1748cec8136885bde56f10c92e3231d258c1099a21c7f6969c08c9a939b71f3c",
+   "new_sha256": "c3800c2b84162ba0e61cc06804156f76772b44da00aa769f6ffa35b2602af8da"
+  },
+  "tests/test_capstone_federation_ui.py": {
+   "old_sha256": "e7ddb88ce2148e9a33cf26c2c57496edd0188c9f55a0ca101005dff1f82acfde",
+   "new_sha256": "d05b59b9d186f2c142104bed8247a000dac0ae50d22f455ff3fb1a3ff40b0147"
+  },
+  "scripts/verify_capstone_ui_v1.py": {
+   "old_sha256": "56f62051465226e529108f23144eaa8c68d992fa3d111c6979d61542d9ea4833",
+   "new_sha256": "fc96a96284d5e8ec613ec83cf6794806fd8d1bc8ea2d6db01196c13810fd39e4"
+  },
+  "tests/test_capstone_frontend.py": {
+   "old_sha256": "0f3eb470c39f63975f4dc6a3df957b6fb498e58583e53c9d9c50e6081216506b",
+   "new_sha256": "51d550c852a0d76e51137706573b70a286a7391cffc66897601683c73e6080a7"
+  },
+  "frontend/src/lib/product/api.ts": {
+   "old_sha256": "ab92ab1a700cbbffd05f3e2d4825758cfea9e3c33e006b97caf9e9fdd8e3036d",
+   "new_sha256": "766041b0cdef1be9d314adea1797a978ade88548b657732f86f1f232741927fd"
+  }
+ },
+ "successor_bound_frontend_guard": {
+  "path": "frontend/src/lib/product/federation/__tests__/static-audit.test.ts",
+  "old_sha256": "d95595ab0d721b3a3fbc9cc45d6e1ed77c33b0e6080d774d0b978dfdc4ad8e7c",
+  "new_sha256": "16ae443e5ee725e3d8ea6d333ab02c36a9f00afcc07198ac956b851ca986ec8b"
+ },
+ "unchanged": {
+  "CAPSTONE_UI_V1_1.lock.json": "byte-identical",
+  "CAPG7_criteria": "historical result unchanged",
+  "federation_implementation": "byte-identical"
+ }
+}

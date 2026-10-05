@@ -17,6 +17,14 @@ LOCK = "artifacts/capstone/CAPSTONE_UI_V1.lock.json"
 
 
 def _successor_bound() -> dict[str, str]:
+    cap009 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json"
+    if cap009.exists():
+        successor = json.loads(cap009.read_text(encoding="utf-8"))
+        predecessor = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_1.lock.json"
+        if successor.get("predecessor_id") != "CAPSTONE_UI_V1_1" or successor.get(
+                "predecessor_sha256") != hash_file(predecessor):
+            raise RuntimeError("CAPSTONE_UI_V1_2_SUCCESSOR_CHAIN_BROKEN")
+        return dict(successor["bound_artifacts"])
     lock_path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_1.lock.json"
     if not lock_path.exists():
         return {}

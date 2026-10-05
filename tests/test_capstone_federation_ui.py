@@ -27,7 +27,7 @@ def _shadow(tmp_path: Path) -> Path:
     from scripts.verify_capstone_ui_v1_1 import frontend_files
 
     shadow = tmp_path / "repo"
-    paths = [*frontend_files(), UI_V1, UI_V11, "artifacts/DASHBOARD_UI_V1_5.lock.json", *[str(p.relative_to(ROOT)) for p in (ROOT / "artifacts/capstone").glob("CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_*.json")]]
+    paths = [*frontend_files(), UI_V1, UI_V11, "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json", "artifacts/DASHBOARD_UI_V1_5.lock.json", *[str(p.relative_to(ROOT)) for p in (ROOT / "artifacts/capstone").glob("CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_*.json")]]
     for rel in paths:
         (shadow / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / rel, shadow / rel)
@@ -95,9 +95,12 @@ def test_ui_v1_verifier_accepts_only_successor_bound_changes(tmp_path: Path, mon
 
 
 def test_backend_scientific_fl_cap006_cap007_files_are_byte_identical_to_entry() -> None:
-    trees = ["api", "product", "capstone_persistence", "simulation", "src", "checkpoints", "contracts", "federated", "privacy", "reports/model_v2",
+    trees = ["simulation", "src", "checkpoints", "contracts", "federated", "privacy", "reports/model_v2",
              "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json", "artifacts/SOFTWARE_SYSTEM_V2.lock.json"]
     assert _git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", *trees).split() == []
+    # CAP-009 may ADD owner-scoped history/research files, but may not modify
+    # any CAP-008-or-earlier API, product, or persistence implementation.
+    assert _git("diff", "--name-only", "--diff-filter=MD", ENTRY, "--", "api", "product", "capstone_persistence").split() == []
 
 
 def test_exactly_one_frontend_application_and_no_new_npm_dependency() -> None:
@@ -113,7 +116,8 @@ def test_federation_pages_are_not_placeholders() -> None:
     for rel in ("federation", "federation/clients", "federation/rounds", "federation/live", "federation/privacy", "models"):
         assert "FuturePhase" not in (routes / rel / "+page.svelte").read_text(), rel
     for rel in ("research/ml", "research/fl"):
-        assert "FuturePhase" in (routes / rel / "+page.svelte").read_text(), rel
+        assert "FuturePhase" not in (routes / rel / "+page.svelte").read_text(), rel
+        assert "product.api.research" in (routes / rel / "+page.svelte").read_text(), rel
     assert not (routes / "research/ml/analytics").exists()
 
 
