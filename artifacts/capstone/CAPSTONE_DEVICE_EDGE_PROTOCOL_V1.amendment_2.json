@@ -1,0 +1,19 @@
+{
+ "amendment_id": "CAPSTONE_DEVICE_EDGE_PROTOCOL_V1_AMENDMENT_2",
+ "change": "Scans now cover implementation code under product/ only; test results are merged from cap001_tests.xml (CAP-001 contract tests) and cap002_tests.xml; @all_cap002_tests still requires every CAP-002 test to pass. No criterion text, implementation file or test changed.",
+ "defect": "The frozen evaluator's out-of-scope scans (@no_product_api, @no_auth, @no_database, @no_fl_training, @no_candidate) also scanned scripts/ and therefore matched the regex text inside scripts/cap_002_build_evidence.py itself (criteria 32-35, 37). Criterion 40 named a CAP-001 test that the evaluator did not load (only CAP-002 junit was read).",
+ "files": {
+  "scripts/cap_002_build_evidence.py": {
+   "new_sha256": "03e98b10bed60947bb5966f1991f9911cde540c6fcb8ab1107691495236814b1",
+   "old_sha256": "0ab7be00d2e8c8e5a51ea47ee4dd4229099644ba83c620445b32ae4a18385538"
+  }
+ },
+ "freeze_commit": "51cab3c",
+ "made_before": "any CAPG1 criteria evaluation recorded as a result (a first dry evaluation produced false failures, described below)",
+ "supersedes_hash_chain_of": "amendment_1",
+ "unchanged": {
+  "capg1_criteria_text": "identical",
+  "implementation_and_tests": "byte-identical to the freeze commit",
+  "protocol_json_sha256": "4cce45048487e4235c21308dc1565d313b401c4b0b3a868e9a2c7c16560d80aa"
+ }
+}

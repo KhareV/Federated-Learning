@@ -80,7 +80,7 @@ def _scan(paths: list[str], pattern: str, *, only_py: bool = True) -> list[str]:
     for path in paths:
         if only_py and not path.endswith(".py"):
             continue
-        if not path.startswith(("product/", "scripts/")) or path.startswith("tests/"):
+        if not path.startswith("product/"):  # implementation code only; tooling quotes the patterns
             continue
         file = ROOT / path
         if file.is_file() and re.search(pattern, file.read_text(), re.I | re.M):
@@ -103,8 +103,7 @@ def freeze_precedes_result() -> dict:
                               cwd=ROOT).returncode == 0
     lock = json.loads(LOCK.read_text())
     expected = {**lock["bound_files"], **{c["path"]: c["sha256"] for c in lock["components"].values()}}
-    amendment = ROOT / "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_1.json"
-    if amendment.is_file():
+    for amendment in sorted((ROOT / "artifacts/capstone").glob("CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_*.json")):
         expected.update({p: v["new_sha256"] for p, v in json.loads(amendment.read_text())["files"].items()})
     drift = [p for p, d in expected.items() if hash_file(ROOT / p) != d]
     return {"ok": ancestor and not leaked and not drift, "freeze_commit": freeze,
@@ -209,7 +208,8 @@ def audits() -> None:
 
 def criteria(final: bool) -> None:
     protocol = json.loads(PROTOCOL.read_text())
-    results = junit()
+    cap002_results = junit()
+    results = {**junit("cap001_tests.xml"), **cap002_results}
     tasks, gates = _registry("task", "task_id"), _registry("gate", "gate_id")
     drift = _load("protected_artifact_final.json")
     entry = _load("entry_audit.json")
@@ -233,7 +233,7 @@ def criteria(final: bool) -> None:
         "@no_database": not _scan(py_added, r"sqlite3|sqlalchemy|aiosqlite") and not [p for p in _git("ls-files").splitlines() if p.endswith((".sqlite", ".sqlite3", ".db"))],
         "@no_fl_training": not _scan(py_added, r"^\s*(import|from)\s+(federated|privacy|flwr)\b|local_train|fedavg|fedprox|secagg"),
         "@no_candidate": not _scan(py_added, r"CAPSTONE_FL_CANDIDATE_\d{4}") and not [p for p in added if "candidate" in p.lower()],
-        "@all_cap002_tests": bool(results) and all(v == "passed" for v in results.values()),
+        "@all_cap002_tests": bool(cap002_results) and all(v == "passed" for v in cap002_results.values()),
         "@regression": bool(re.search(r"\d+ passed", last)) and "failed" not in last and "error" not in last,
         "@frontend": all(frontend[k]["exit"] == 0 for k in frontend) and frontend["npm_run_check"]["errors"] == 0,
         "@ruff": "All checks passed" in (LOGS / "ruff.log").read_text(), "@pip": "No broken requirements found" in (LOGS / "pip_check.log").read_text(),
@@ -254,7 +254,7 @@ def criteria(final: bool) -> None:
     payload = {"gate": "CAPG1", "protocol_freeze": freeze, "criteria": rows, "criteria_count": len(rows), "decided": len(decided),
                "all_decided_pass": all(decided), "undecided": [r["criterion"] for r in rows if r["pass"] is None],
                "regression_summary": {"passed": int(summary.group(1)) if summary else None, "skipped": int(summary.group(2) or 0) if summary else None},
-               "cap002_tests": {"count": len(results), "passed": sum(1 for v in results.values() if v == "passed")}}
+               "cap002_tests": {"count": len(cap002_results), "passed": sum(1 for v in cap002_results.values() if v == "passed")}}
     _write("capg1_criteria.json", payload)
     print(json.dumps({k: payload[k] for k in ("criteria_count", "decided", "all_decided_pass", "undecided", "regression_summary", "cap002_tests")}))
     failed = [r["criterion"] for r in rows if r["pass"] is False]
