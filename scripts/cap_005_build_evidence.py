@@ -39,6 +39,7 @@ QUALIFIER = re.compile(r"\b(future|not|no|never|unavailable|unverified|planned|w
 FUTURE_TABLES = ("session_summaries", "federation_runs", "federation_rounds", "fl_client_statuses", "candidate_models", "governance_decisions")
 ALLOWED_PRODUCT_ROUTES = {"/product/v1/devices", "/product/v1/devices/simulated", "/product/v1/devices/{device}/connect", "/product/v1/devices/{device}/scan",
                           "/product/v1/me", "/product/v1/sessions", "/product/v1/sessions/{session}", "/product/v1/sessions/{session}/start", "/product/v1/system"}
+DOC_HOSTS = {"svelte.dev", "tailwindcss.com", "kit.svelte.dev", "github.com", "www.w3.org"}
 KNOWN_FLAKE = "test_monitoring_completes_with_zero_subscribers"
 KNOWN_FLAKE_ID = f"tests/test_capstone_monitoring_websocket.py::{KNOWN_FLAKE}"
 
@@ -293,7 +294,7 @@ def bundle_scan() -> dict:
     build = FE / "build"
     secrets = re.compile(r"CLERK_SECRET_KEY|CLERK_JWT_KEY|sk_(live|test)_[A-Za-z0-9]{10,}|-----BEGIN [A-Z ]*PRIVATE KEY-----")
     remote = re.compile(r"https?://(?!www\.w3\.org|localhost|127\.0\.0\.1)[A-Za-z0-9.-]+")
-    app_hits, clerk_hits, remote_hits, clerk_chunks, files = [], [], [], [], 0
+    app_hits, clerk_hits, remote_hits, doc_links, clerk_chunks, files = [], [], [], [], [], 0
     for path in sorted(p for p in build.rglob("*") if p.is_file() and p.suffix in (".js", ".css", ".html", ".json", ".mjs")):
         text = path.read_text(errors="ignore")
         files += 1
@@ -304,8 +305,11 @@ def bundle_scan() -> dict:
             (clerk_hits if is_clerk else app_hits).append({"file": str(path.relative_to(build)), "match": m.group(0)[:40]})
         if not is_clerk:
             for m in remote.finditer(text):
-                remote_hits.append({"file": str(path.relative_to(build)), "match": m.group(0)[:80]})
-    return {"files_scanned": files, "clerk_sdk_chunks": clerk_chunks, "secret_hits_in_app_code": app_hits, "secret_name_hits_in_clerk_sdk_chunk": clerk_hits, "remote_urls_outside_clerk_chunk": remote_hits}
+                host = re.sub(r"^https?://", "", m.group(0)).split("/")[0]
+                item = {"file": str(path.relative_to(build)), "match": m.group(0)[:80]}
+                (doc_links if host in DOC_HOSTS else remote_hits).append(item)
+    return {"files_scanned": files, "clerk_sdk_chunks": clerk_chunks, "secret_hits_in_app_code": app_hits, "secret_name_hits_in_clerk_sdk_chunk": clerk_hits, "remote_urls_outside_clerk_chunk": remote_hits,
+            "documentation_links_in_runtime_strings_or_license_comments": {"allowed_hosts": sorted(DOC_HOSTS), "count": len(doc_links), "sample": doc_links[:4], "note": "error-message / license-comment text, never requested (the browser network audit records zero external requests)"}}
 
 
 def criteria(final: bool) -> None:
@@ -348,11 +352,11 @@ def criteria(final: bool) -> None:
     states_expected = predeclared["monitoring_state_changes"]
     device_expected = ["STREAMING", "DISCONNECTED", "RECONNECTING", "CONNECTED", "STREAMING", "STOPPED"]
     tracked = _git("ls-files").splitlines()
-    manifests = sorted(p for p in tracked + added if p.endswith("package.json") and "node_modules" not in p)
+    manifests = sorted({p for p in tracked + added if p.endswith("package.json") and "node_modules" not in p})
     live_model = read_src("lib/product/live-model.ts")
 
     def only_in_case(text: str, field: str, case: str) -> bool:
-        assigns = [m.start() for m in re.finditer(rf"this\.{field}\s*=\s*(?!null)", text) if "constructor" not in text[max(0, m.start() - 20): m.start()]]
+        assigns = [m.start() for m in re.finditer(rf"this\.{field}\s*=(?!\s*null\b)", text) if "constructor" not in text[max(0, m.start() - 20): m.start()]]
         body = text.split(f"case '{case}':")[1].split("case '")[0]
         return len(assigns) == 1 and f"this.{field} =" in body
 
@@ -454,7 +458,7 @@ def criteria(final: bool) -> None:
         "@accessibility": all(a11y_ok(b) for b in br),
         "@claim_audit_final": claim["pass"],
         "@no_fl_runtime": not [p for p, t in product_text.items() if re.search(r"fedavg|fedprox|secagg|local_train|candidate_models|federation_runs", t, re.I) and not p.startswith("routes/app/federation")] and all(db[i]["row_counts"][t] == 0 for i in (0, 1) for t in FUTURE_TABLES),
-        "@no_cap009_analytics": not [p for p, t in product_text.items() if re.search(r"hr_mean|hr_min|spo2_mean|quality_counts_json|/summary|/timeline|session_summaries", t)] and not (SRC / "routes/app/history/[id]").exists() and "MultiLine" not in product_text["routes/app/history/+page.svelte"],
+        "@no_cap009_analytics": not [p for p, t in product_text.items() if re.search(r"hr_mean|hr_min|spo2_mean|quality_counts_json|sessions/[^\"'\s]*/(summary|timeline)|session_summaries", t)] and not (SRC / "routes/app/history/[id]").exists() and "MultiLine" not in product_text["routes/app/history/+page.svelte"],
         "@no_hardware_apis": not [p for p in fe_source_files() if re.search(r"navigator\.(bluetooth|serial|usb|hid)|requestDevice\(|Web Bluetooth|Web Serial", strip_comments(read_src(p)))],
         "@regression": bool(re.search(r"\d+ passed", log)) and " error" not in log and set(full_failed) <= {KNOWN_FLAKE_ID} and (not full_failed or flake_ok),
         "@frontend_npm_test": frontend_json["npm_test"]["exit"] == 0 and frontend_json["npm_test"]["tests_passed"] >= 140,

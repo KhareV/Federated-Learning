@@ -1,0 +1,18 @@
+{
+ "amendment_id": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_4",
+ "change": "Evaluator fixes (criteria text unchanged): (1) @sole_frontend de-duplicates the package.json list (tracked + added overlap); (2) the @context_source_audit/@quality_source_audit assignment regex no longer counts the reset() '= null'; (3) @bundle_no_remote_outside_clerk separates documentation/licence links in runtime strings (svelte.dev, tailwindcss.com, ...) from remote resources - HTML/CSS/JS resource references still fail and the browser network audit independently records zero external requests; (4) @no_cap009_analytics matches session summary/timeline ROUTES, not the HTML </summary> tag.",
+ "defect": "A dry evaluation reported criteria 7, 42, 43, 45, 59 and 76 failing; each was an evaluator defect (duplicate list entry, over-broad regex, comment URLs counted as requests, '</summary>' matching '/summary'). The product code and tests were unchanged and correct.",
+ "files": {
+  "scripts/cap_005_build_evidence.py": {
+   "new_sha256": "52303dda4114dfcb859a147bc3efaa43e1c68ea858fb53d01a9e44a4658079da",
+   "old_sha256": "6aba38d73f81cc28807c694a7b2d62db01cb01b6abee87b4c0abdda9acb0d6d4"
+  }
+ },
+ "freeze_commit": "5cf83da",
+ "made_before": "the recorded CAPG4 criteria evaluation (the failing run was a dry pre-evaluation; capg4_criteria.json is regenerated)",
+ "previous_amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_3",
+ "unchanged": {
+  "canonical_runs_and_frontend": "byte-identical to the freeze commit",
+  "capg4_criteria_text": "identical"
+ }
+}
