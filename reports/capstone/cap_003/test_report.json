@@ -1,0 +1,55 @@
+{
+ "cap003_targeted": {
+  "files": [
+   "tests/test_capstone_product_api.py",
+   "tests/test_capstone_monitoring_coordinator.py",
+   "tests/test_capstone_inference_client.py",
+   "tests/test_capstone_monitoring_websocket.py",
+   "tests/test_capstone_monitoring_e2e.py"
+  ],
+  "tests_passed": 125,
+  "log": "logs/cap003_tests.log",
+  "junit": "logs/cap003_tests.xml",
+  "includes_real_inference_tests": "tests/test_capstone_monitoring_e2e.py (fresh released process, module-scoped)"
+ },
+ "cap001_cap002_and_lifecycle": {
+  "passed": 194,
+  "log": "logs/prior_phase_tests.log"
+ },
+ "python_regression": {
+  "passed": 2718,
+  "skipped": 1,
+  "failed": 0,
+  "skip_reason": "tests/test_v2_fl_eval_method.py:246 post-exposure state (pre-existing)",
+  "log": "logs/pytest_full.log"
+ },
+ "mutation_controls": {
+  "controls": 7,
+  "all_caught": true,
+  "all_restored": true
+ },
+ "frontend": {
+  "npm_test": {
+   "files_passed": 7,
+   "files_skipped": 1,
+   "tests_passed": 68,
+   "tests_skipped": 1,
+   "exit": 0
+  },
+  "npm_run_check": {
+   "files": 5671,
+   "errors": 0,
+   "warnings": 118,
+   "exit": 0
+  },
+  "npm_run_build": {
+   "exit": 0,
+   "done": true
+  }
+ },
+ "ruff": "All checks passed",
+ "pip_check": "No broken requirements found",
+ "ci_queried": false,
+ "ci_triggered": false,
+ "environment": "fresh Python 3.11 venv outside the repository from requirements-dev.lock; no new dependency"
+}

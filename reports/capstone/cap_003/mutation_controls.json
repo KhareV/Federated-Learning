@@ -1,0 +1,84 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "file": "product/api/models.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_product_api.py::test_no_client_controlled_model_selector_exists_anywhere_on_the_product_api",
+   "git_status_of_file_after_restore": "",
+   "mutation": "PUBLIC_MODEL_SELECTOR_INSERTED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_product_api.py"
+   ]
+  },
+  {
+   "file": "product/monitoring/coordinator.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_monitoring_coordinator.py::test_none_placeholders_never_enter_the_scientific_runtime",
+   "git_status_of_file_after_restore": "",
+   "mutation": "NONE_GAP_PLACEHOLDER_PASSED_TO_SCIENTIFIC_RUNTIME",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_monitoring_coordinator.py"
+   ]
+  },
+  {
+   "file": "product/monitoring/coordinator.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_monitoring_coordinator.py::test_a_422_yields_quality_but_never_a_fabricated_inference_or_state",
+   "git_status_of_file_after_restore": "",
+   "mutation": "HTTP_422_CONVERTED_INTO_FAKE_INFERENCE_RESULT",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_monitoring_coordinator.py"
+   ]
+  },
+  {
+   "file": "product/monitoring/event_adapter.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_monitoring_coordinator.py::test_multiplexer_matches_the_cap_002_event_sequence_for_every_scenario",
+   "git_status_of_file_after_restore": "",
+   "mutation": "DUPLICATE_PRODUCT_SEQUENCE_INDEX",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_monitoring_coordinator.py"
+   ]
+  },
+  {
+   "file": "product/devices/manager.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_product_api.py::test_device_commands_reject_other_users_and_unknown_devices[scan]",
+   "git_status_of_file_after_restore": "",
+   "mutation": "WRONG_OWNER_ACCEPTED",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_product_api.py"
+   ]
+  },
+  {
+   "file": "product/inference/client.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_inference_client.py::test_the_client_imports_no_model_gateway_runtime_or_training_code",
+   "git_status_of_file_after_restore": "",
+   "mutation": "DIRECT_RUNTIME_IMPORT_IN_INFERENCE_CLIENT",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_inference_client.py"
+   ]
+  },
+  {
+   "file": "product/monitoring/coordinator.py",
+   "file_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_product_api.py::test_recoverable_device_disconnect_does_not_change_the_session_state",
+   "git_status_of_file_after_restore": "",
+   "mutation": "LOST_DEVICE_DISCONNECT_EVENT",
+   "suite_failed_as_designed": true,
+   "tests_run": [
+    "tests/test_capstone_product_api.py",
+    "tests/test_capstone_monitoring_coordinator.py"
+   ]
+  }
+ ]
+}

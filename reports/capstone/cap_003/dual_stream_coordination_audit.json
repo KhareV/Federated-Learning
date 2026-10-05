@@ -1,0 +1,45 @@
+{
+ "all_identical_to_unshaken_baseline_accelerated": true,
+ "events_lost_or_duplicated": 0,
+ "excerpt_scenario": "CAP003_SHORT",
+ "guarantee": {
+  "accelerated": "blocking lookahead: order is a pure function of the source timeline under ANY scheduling",
+  "interface": "frozen public DeviceSource only (no private fields)",
+  "limitation": "the frozen DeviceSource interface offers no watermark/heartbeat; a future DeviceSource contract version should add one",
+  "live_speed": "bounded settle (8 loop turns); a slower event view yields a loud MuxOrderError (session FAILED), never a silently different order",
+  "module": "product/monitoring/mux.py",
+  "order_rule": "event.source_timestamp_us <= record.timestamp_us precedes that record",
+  "stop_semantics": "manual stop stops consuming at the next record; run-ahead source events the product never reached are discarded (counted); a source mid-outage is left in its own link state for the owner to disconnect"
+ },
+ "items_per_run": 7570,
+ "loud_failure_on_violation": "MuxOrderError (LATE_EVENT / EVENT_SEQUENCE_GAP)",
+ "module": "product/monitoring/mux.py",
+ "private_source_internals_used": false,
+ "randomised_scheduling_seeds": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15
+ ],
+ "records_lost_or_duplicated": 0,
+ "tasks_leaked": 0,
+ "tests": [
+  "test_multiplexer_delivers_every_record_and_event_exactly_once_in_causal_order",
+  "test_multiplexer_is_deterministic_under_aggressive_task_scheduling",
+  "test_paced_mode_multiplexer_is_deterministic_or_fails_loudly_never_silently_different",
+  "test_multiplexer_fails_loudly_instead_of_misordering",
+  "test_multiplexer_leaks_no_tasks_and_terminates"
+ ]
+}

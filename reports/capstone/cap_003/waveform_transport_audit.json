@@ -1,0 +1,43 @@
+{
+ "canonical_mixed": {
+  "channels": [
+   "ECG"
+  ],
+  "chunk_count": 2880,
+  "chunk_sample_count": [
+   60
+  ],
+  "first_sample_indices_contiguous": true,
+  "null_intervals": [
+   [
+    118800,
+    124199
+   ]
+  ],
+  "rate_hz": [
+   360
+  ],
+  "samples_covered": 172800,
+  "units": [
+   "ADC_COUNTS"
+  ]
+ },
+ "chunks_per_source_second": 6,
+ "gap_policy": {
+  "gap_fill_trigger": "record index jump or a source event with a source timestamp (outage chunks precede the reconnect device.status)",
+  "none_reaches_scientific_runtime": false,
+  "ui_missing_sample": "None (waveform.chunk only); never 0/hold/interpolation"
+ },
+ "none_intervals_equal_cap002_outage": true,
+ "per_sample_messages": false,
+ "policy": {
+  "channel": "ECG",
+  "chunk_samples": 60,
+  "per_sample_messages": false,
+  "ppg_waveform": false,
+  "rate_hz": 360,
+  "unit": "ADC_COUNTS",
+  "updates_per_second": 6
+ },
+ "ppg_waveform_fabricated": false
+}

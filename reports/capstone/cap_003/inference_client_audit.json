@@ -1,0 +1,25 @@
+{
+ "canonical_attempts": 93,
+ "canonical_http_status_counts": {
+  "200": 86,
+  "422": 7
+ },
+ "component": "CAPSTONE_INFERENCE_CLIENT_V1",
+ "direct_model_import": false,
+ "path": "product/inference/client.py",
+ "released_service": {
+  "fresh_process": true,
+  "launcher": "python -m scripts.run_nhm_default",
+  "paths": [
+   "/v1/infer-window"
+  ],
+  "profile": "default",
+  "service_title": "NHM Research Runtime API (SOFTWARE_SYSTEM_V2 default binding)"
+ },
+ "repository_imports": [
+  "api.schemas",
+  "product.session"
+ ],
+ "retry": "none",
+ "transport": "httpx.AsyncClient over localhost HTTP"
+}

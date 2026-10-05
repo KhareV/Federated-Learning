@@ -1,0 +1,14 @@
+{
+ "cap004_boundary_preserved": true,
+ "fail_closed_without_resolver": true,
+ "injected_resolver": "identity_resolver(HTTPConnection) -> AuthIdentity|None",
+ "production_auth_implemented": false,
+ "test_identity": "scripts/capstone_cap003_test_identity.py (CAP003_TEST_IDENTITY_ONLY), never under product/, never a default",
+ "test_identity_file": "scripts/capstone_cap003_test_identity.py",
+ "test_identity_under_product": [],
+ "ws_close_codes": {
+  "unauthenticated": 4401,
+  "unknown_session": 4404,
+  "wrong_owner": 4403
+ }
+}

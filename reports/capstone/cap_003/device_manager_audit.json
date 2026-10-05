@@ -1,0 +1,11 @@
+{
+ "cap002_source_reused_unchanged": true,
+ "component": "CAPSTONE_DEVICE_MANAGER_V1",
+ "ownership": "owner_user_id per device; cross-user 403; unknown 404; illegal lifecycle -> 409 INVALID_STATE",
+ "path": "product/devices/manager.py",
+ "tests": [
+  "test_device_manager_full_flow_and_owner_scoping",
+  "test_device_commands_reject_other_users_and_unknown_devices",
+  "test_illegal_lifecycle_commands_map_to_a_deterministic_product_error"
+ ]
+}

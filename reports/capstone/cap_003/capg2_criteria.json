@@ -1,0 +1,664 @@
+{
+ "all_decided_pass": true,
+ "cap003_tests": {
+  "count": 125,
+  "passed": 125
+ },
+ "criteria": [
+  {
+   "checks": [
+    "@cap001_capg0_pass"
+   ],
+   "criterion": 1,
+   "pass": true,
+   "text": "CAP-001 = PASS and CAPG0 = PASS"
+  },
+  {
+   "checks": [
+    "@cap002_capg1_pass"
+   ],
+   "criterion": 2,
+   "pass": true,
+   "text": "CAP-002 = PASS and CAPG1 = PASS"
+  },
+  {
+   "checks": [
+    "@cap001_lock"
+   ],
+   "criterion": 3,
+   "pass": true,
+   "text": "CAP-001 lock verifies"
+  },
+  {
+   "checks": [
+    "@cap002_lock_chain"
+   ],
+   "criterion": 4,
+   "pass": true,
+   "text": "CAP-002 lock + full amendment hash chain verifies"
+  },
+  {
+   "checks": [
+    "@drift"
+   ],
+   "criterion": 5,
+   "pass": true,
+   "text": "Protected upstream has zero drift"
+  },
+  {
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ],
+   "criterion": 6,
+   "pass": true,
+   "text": "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1 frozen before any result evidence"
+  },
+  {
+   "checks": [
+    "@binding_frozen",
+    "test_waveform_policy_is_six_updates_per_second_within_frozen_limits"
+   ],
+   "criterion": 7,
+   "pass": true,
+   "text": "Live-stream binding clarification frozen (tee at the coordinator; CAP-001 unmodified)"
+  },
+  {
+   "checks": [
+    "@drift_frontend"
+   ],
+   "criterion": 8,
+   "pass": true,
+   "text": "Existing frontend unchanged"
+  },
+  {
+   "checks": [
+    "test_product_app_implements_exactly_the_cap_003_route_subset",
+    "test_the_contract_marks_exactly_the_system_route_public"
+   ],
+   "criterion": 9,
+   "pass": true,
+   "text": "Exact CAP-003 route subset implemented"
+  },
+  {
+   "checks": [
+    "test_no_later_phase_route_is_implemented_early",
+    "test_seeding_a_session_is_python_only_and_validates_ownership"
+   ],
+   "criterion": 10,
+   "pass": true,
+   "text": "No CAP-004+ route implemented early"
+  },
+  {
+   "checks": [
+    "test_product_api_is_separate_from_the_frozen_inference_api",
+    "test_product_app_import_does_not_load_a_model_or_the_inference_runtime"
+   ],
+   "criterion": 11,
+   "pass": true,
+   "text": "Product API is separate from the frozen inference API"
+  },
+  {
+   "checks": [
+    "@drift",
+    "test_the_service_under_test_is_the_released_software_system_v2_default"
+   ],
+   "criterion": 12,
+   "pass": true,
+   "text": "No API_SCHEMA_V1 change"
+  },
+  {
+   "checks": [
+    "test_the_client_imports_no_model_gateway_runtime_or_training_code",
+    "test_product_app_import_does_not_load_a_model_or_the_inference_runtime"
+   ],
+   "criterion": 13,
+   "pass": true,
+   "text": "No second inference implementation"
+  },
+  {
+   "checks": [
+    "test_no_client_controlled_model_selector_exists_anywhere_on_the_product_api",
+    "test_a_window_cannot_smuggle_a_different_model_id",
+    "test_query_parameters_cannot_select_a_model_on_the_socket",
+    "test_session_runtime_identity_is_pinned_and_not_overridable"
+   ],
+   "criterion": 14,
+   "pass": true,
+   "text": "No public model selector"
+  },
+  {
+   "checks": [
+    "test_authenticated_routes_fail_closed_without_an_injected_resolver",
+    "test_authenticated_routes_reject_requests_without_an_identity"
+   ],
+   "criterion": 15,
+   "pass": true,
+   "text": "Auth dependency fails closed"
+  },
+  {
+   "checks": [
+    "test_no_production_auth_provider_or_bypass_exists",
+    "@no_auth_provider"
+   ],
+   "criterion": 16,
+   "pass": true,
+   "text": "No production Clerk/DemoAuth implementation"
+  },
+  {
+   "checks": [
+    "@auth_harness_scope",
+    "test_no_production_auth_provider_or_bypass_exists"
+   ],
+   "criterion": 17,
+   "pass": true,
+   "text": "Test identity exists only in test/harness scope"
+  },
+  {
+   "checks": [
+    "test_state_is_ephemeral_in_memory_only_and_no_database_exists"
+   ],
+   "criterion": 18,
+   "pass": true,
+   "text": "Ephemeral state only"
+  },
+  {
+   "checks": [
+    "test_state_is_ephemeral_in_memory_only_and_no_database_exists",
+    "@no_database"
+   ],
+   "criterion": 19,
+   "pass": true,
+   "text": "No SQLite/database"
+  },
+  {
+   "checks": [
+    "test_device_manager_reuses_the_cap_002_source_unchanged",
+    "test_cap_002_implementation_files_are_not_modified_by_cap_003"
+   ],
+   "criterion": 20,
+   "pass": true,
+   "text": "Device manager reuses the CAP-002 source unchanged"
+  },
+  {
+   "checks": [
+    "test_device_commands_reject_other_users_and_unknown_devices",
+    "test_session_routes_enforce_ownership_and_unknown_sessions",
+    "test_close_codes_for_unauthenticated_unknown_and_wrong_owner"
+   ],
+   "criterion": 21,
+   "pass": true,
+   "text": "Ownership enforced"
+  },
+  {
+   "checks": [
+    "test_the_coordinator_is_the_only_live_consumer_of_the_device_source"
+   ],
+   "criterion": 22,
+   "pass": true,
+   "text": "Coordinator is the sole live source consumer/orchestrator"
+  },
+  {
+   "checks": [
+    "test_no_private_source_internals_are_used_by_the_cap_003_runtime"
+   ],
+   "criterion": 23,
+   "pass": true,
+   "text": "No private source internals used"
+  },
+  {
+   "checks": [
+    "test_multiplexer_delivers_every_record_and_event_exactly_once_in_causal_order",
+    "test_multiplexer_is_deterministic_under_aggressive_task_scheduling",
+    "test_paced_mode_multiplexer_is_deterministic_or_fails_loudly_never_silently_different",
+    "test_multiplexer_leaks_no_tasks_and_terminates",
+    "test_multiplexer_fails_loudly_instead_of_misordering"
+   ],
+   "criterion": 24,
+   "pass": true,
+   "text": "Dual record/event stream has no loss, duplication or deadlock"
+  },
+  {
+   "checks": [
+    "test_multiplexer_matches_the_cap_002_event_sequence_for_every_scenario",
+    "test_recoverable_device_disconnect_does_not_change_the_session_state"
+   ],
+   "criterion": 25,
+   "pass": true,
+   "text": "Device event order preserved"
+  },
+  {
+   "checks": [
+    "test_waveform_policy_is_six_updates_per_second_within_frozen_limits",
+    "test_waveform_events_are_frozen_shape_ecg_only_and_never_per_sample"
+   ],
+   "criterion": 26,
+   "pass": true,
+   "text": "Waveform policy is 5-10 updates/sec"
+  },
+  {
+   "checks": [
+    "test_waveform_events_are_frozen_shape_ecg_only_and_never_per_sample"
+   ],
+   "criterion": 27,
+   "pass": true,
+   "text": "No per-sample WebSocket traffic"
+  },
+  {
+   "checks": [
+    "test_waveform_gaps_are_none_only_in_the_ui_transport_and_stay_contiguous"
+   ],
+   "criterion": 28,
+   "pass": true,
+   "text": "Waveform gaps use None only in UI transport"
+  },
+  {
+   "checks": [
+    "test_none_placeholders_never_enter_the_scientific_runtime",
+    "test_product_pipeline_preserves_the_cap_002_scientific_stream_exactly"
+   ],
+   "criterion": 29,
+   "pass": true,
+   "text": "None placeholders never enter the scientific runtime"
+  },
+  {
+   "checks": [
+    "test_waveform_events_are_frozen_shape_ecg_only_and_never_per_sample",
+    "@canonical_ecg_only"
+   ],
+   "criterion": 30,
+   "pass": true,
+   "text": "No fake PPG waveform"
+  },
+  {
+   "checks": [
+    "@drift",
+    "test_product_pipeline_preserves_the_cap_002_scientific_stream_exactly"
+   ],
+   "criterion": 31,
+   "pass": true,
+   "text": "WearableStreamRuntime unchanged"
+  },
+  {
+   "checks": [
+    "test_mixed_scenario_scientific_input_counts_are_exactly_cap_002s",
+    "@canonical_93_windows"
+   ],
+   "criterion": 32,
+   "pass": true,
+   "text": "Pre-inference MIXED runtime parity = 93 windows"
+  },
+  {
+   "checks": [
+    "test_mixed_scenario_scientific_input_counts_are_exactly_cap_002s",
+    "@canonical_quality_counts"
+   ],
+   "criterion": 33,
+   "pass": true,
+   "text": "MIXED quality parity = 86 VALID / 7 UNUSABLE"
+  },
+  {
+   "checks": [
+    "@e2e_real_http",
+    "test_mixed_scenario_matches_the_predeclared_real_inference_invariants"
+   ],
+   "criterion": 34,
+   "pass": true,
+   "text": "Inference crosses real localhost HTTP"
+  },
+  {
+   "checks": [
+    "@e2e_fresh_process",
+    "test_the_service_under_test_is_the_released_software_system_v2_default"
+   ],
+   "criterion": 35,
+   "pass": true,
+   "text": "Fresh SOFTWARE_SYSTEM_V2 process used"
+  },
+  {
+   "checks": [
+    "@canonical_93_attempts",
+    "test_mixed_scenario_matches_the_predeclared_real_inference_invariants"
+   ],
+   "criterion": 36,
+   "pass": true,
+   "text": "93 inference attempts"
+  },
+  {
+   "checks": [
+    "@canonical_86_200"
+   ],
+   "criterion": 37,
+   "pass": true,
+   "text": "86 HTTP 200"
+  },
+  {
+   "checks": [
+    "@canonical_7_422"
+   ],
+   "criterion": 38,
+   "pass": true,
+   "text": "7 HTTP 422"
+  },
+  {
+   "checks": [
+    "test_a_422_yields_quality_but_never_a_fabricated_inference_or_state",
+    "test_422_windows_have_quality_but_no_inference_result_against_the_real_api",
+    "@canonical_422_no_inference"
+   ],
+   "criterion": 39,
+   "pass": true,
+   "text": "422 creates no fake inference result"
+  },
+  {
+   "checks": [
+    "@canonical_model_ids",
+    "test_a_200_is_parsed_into_the_typed_response_and_identity_checked"
+   ],
+   "criterion": 40,
+   "pass": true,
+   "text": "All successful model IDs = MODEL_V2_FINAL"
+  },
+  {
+   "checks": [
+    "@canonical_calibration_ids",
+    "test_a_response_with_a_different_released_identity_is_rejected"
+   ],
+   "criterion": 41,
+   "pass": true,
+   "text": "All successful calibration IDs = CAL_V2"
+  },
+  {
+   "checks": [
+    "test_context_probability_and_state_come_only_from_the_response",
+    "test_context_loss_keeps_ecg_inference_running_with_unavailable_context"
+   ],
+   "criterion": 42,
+   "pass": true,
+   "text": "Context snapshots come from actual response context"
+  },
+  {
+   "checks": [
+    "test_monitoring_state_events_follow_changes_only",
+    "test_a_422_yields_quality_but_never_a_fabricated_inference_or_state",
+    "@canonical_state_from_responses"
+   ],
+   "criterion": 43,
+   "pass": true,
+   "text": "monitoring.state comes only from an actual successful response"
+  },
+  {
+   "checks": [
+    "test_every_emitted_event_validates_is_monitoring_only_and_globally_contiguous",
+    "@canonical_sequence_contiguous"
+   ],
+   "criterion": 44,
+   "pass": true,
+   "text": "Event sequence globally contiguous per session"
+  },
+  {
+   "checks": [
+    "test_every_emitted_event_validates_is_monitoring_only_and_globally_contiguous",
+    "test_a_subscriber_receives_a_valid_monitoring_only_stream"
+   ],
+   "criterion": 45,
+   "pass": true,
+   "text": "All events validate PRODUCT_LIVE_EVENT_V1"
+  },
+  {
+   "checks": [
+    "test_session_start_runs_to_natural_completion_and_rejects_a_second_start"
+   ],
+   "criterion": 46,
+   "pass": true,
+   "text": "Session start semantics correct"
+  },
+  {
+   "checks": [
+    "test_manual_stop_goes_monitoring_stopping_completed_and_halts_the_device",
+    "test_unrecoverable_inference_failure_fails_the_session_without_retry"
+   ],
+   "criterion": 47,
+   "pass": true,
+   "text": "Session stop semantics correct"
+  },
+  {
+   "checks": [
+    "test_session_start_runs_to_natural_completion_and_rejects_a_second_start",
+    "@canonical_completed"
+   ],
+   "criterion": 48,
+   "pass": true,
+   "text": "Natural completion correct"
+  },
+  {
+   "checks": [
+    "test_recoverable_device_disconnect_does_not_change_the_session_state",
+    "test_disconnect_reconnect_keeps_the_session_monitoring_with_a_ui_gap"
+   ],
+   "criterion": 49,
+   "pass": true,
+   "text": "Recoverable device disconnect does not terminate the session"
+  },
+  {
+   "checks": [
+    "test_close_codes_for_unauthenticated_unknown_and_wrong_owner"
+   ],
+   "criterion": 50,
+   "pass": true,
+   "text": "WebSocket 4401/4403/4404 correct"
+  },
+  {
+   "checks": [
+    "test_client_messages_are_rejected_and_cannot_control_monitoring",
+    "test_query_parameters_cannot_select_a_model_on_the_socket"
+   ],
+   "criterion": 51,
+   "pass": true,
+   "text": "WebSocket does not control scientific configuration"
+  },
+  {
+   "checks": [
+    "test_monitoring_completes_with_zero_subscribers",
+    "test_a_subscriber_disconnecting_does_not_stop_monitoring"
+   ],
+   "criterion": 52,
+   "pass": true,
+   "text": "Monitoring continues with zero subscribers"
+  },
+  {
+   "checks": [
+    "@no_mock_in_e2e",
+    "test_the_service_under_test_is_the_released_software_system_v2_default"
+   ],
+   "criterion": 53,
+   "pass": true,
+   "text": "Canonical E2E uses no mock model"
+  },
+  {
+   "checks": [
+    "test_truth_firewall_extends_to_every_cap_003_module_and_the_event_stream",
+    "@canonical_claims"
+   ],
+   "criterion": 54,
+   "pass": true,
+   "text": "Canonical E2E uses no SimulationTruth"
+  },
+  {
+   "checks": [
+    "test_fl_firewall_the_monitoring_runtime_imports_and_runs_no_fl_code",
+    "@canonical_claims"
+   ],
+   "criterion": 55,
+   "pass": true,
+   "text": "Canonical E2E uses no FL training"
+  },
+  {
+   "checks": [
+    "@e2e_reproducible"
+   ],
+   "criterion": 56,
+   "pass": true,
+   "text": "Two fresh E2E semantic digests identical"
+  },
+  {
+   "checks": [
+    "@no_efficacy_metrics"
+   ],
+   "criterion": 57,
+   "pass": true,
+   "text": "No model efficacy claim generated"
+  },
+  {
+   "checks": [
+    "@drift_frontend"
+   ],
+   "criterion": 58,
+   "pass": true,
+   "text": "No frontend modification"
+  },
+  {
+   "checks": [
+    "@no_hardware_code"
+   ],
+   "criterion": 59,
+   "pass": true,
+   "text": "No physical hardware code"
+  },
+  {
+   "checks": [
+    "@all_cap003_tests"
+   ],
+   "criterion": 60,
+   "pass": true,
+   "text": "Targeted tests pass"
+  },
+  {
+   "checks": [
+    "@prior_phase_tests"
+   ],
+   "criterion": 61,
+   "pass": true,
+   "text": "CAP-001/CAP-002 regression tests pass"
+  },
+  {
+   "checks": [
+    "@regression"
+   ],
+   "criterion": 62,
+   "pass": true,
+   "text": "Full Python regression passes"
+  },
+  {
+   "checks": [
+    "@frontend"
+   ],
+   "criterion": 63,
+   "pass": true,
+   "text": "Frontend test/check/build pass"
+  },
+  {
+   "checks": [
+    "@ruff"
+   ],
+   "criterion": 64,
+   "pass": true,
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    "@pip"
+   ],
+   "criterion": 65,
+   "pass": true,
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "criterion": 66,
+   "pass": true,
+   "text": "CI not queried"
+  },
+  {
+   "checks": [
+    "@ci"
+   ],
+   "criterion": 67,
+   "pass": true,
+   "text": "CI not triggered"
+  },
+  {
+   "checks": [
+    "@registry_cap003"
+   ],
+   "criterion": 68,
+   "pass": true,
+   "text": "CAP-003 = PASS"
+  },
+  {
+   "checks": [
+    "@registry_capg2"
+   ],
+   "criterion": 69,
+   "pass": true,
+   "text": "CAPG2 = PASS"
+  },
+  {
+   "checks": [
+    "@registry_cap004"
+   ],
+   "criterion": 70,
+   "pass": true,
+   "text": "CAP-004 remains NOT_STARTED"
+  },
+  {
+   "checks": [
+    "@mutation_log"
+   ],
+   "criterion": 71,
+   "pass": true,
+   "text": "Mutation / negative controls each failed the targeted suite as designed and left no mutation"
+  },
+  {
+   "checks": [
+    "@context_clarification"
+   ],
+   "criterion": 72,
+   "pass": true,
+   "text": "Live-stream binding records the context-snapshot clarification and every withholding is counted"
+  },
+  {
+   "checks": [
+    "test_multiplexer_fails_loudly_instead_of_misordering",
+    "@mux_guarantee_documented"
+   ],
+   "criterion": 73,
+   "pass": true,
+   "text": "Multiplexer guarantee is stated precisely and violations fail loudly"
+  },
+  {
+   "checks": [
+    "@disclosures_preserved"
+   ],
+   "criterion": 74,
+   "pass": true,
+   "text": "Preserved CAP-001/CAP-002 disclosures untouched (gate-row wording, amendment chain)"
+  }
+ ],
+ "criteria_count": 74,
+ "decided": 74,
+ "gate": "CAPG2",
+ "protocol_freeze": {
+  "bound_file_drift_since_freeze": [],
+  "freeze_commit": "971994189b82263875a28796b5357a82c4687ade",
+  "freeze_is_ancestor_of_head": true,
+  "ok": true,
+  "result_files_present_in_freeze": []
+ },
+ "regression_summary": {
+  "passed": 2718,
+  "skipped": 1
+ },
+ "undecided": []
+}

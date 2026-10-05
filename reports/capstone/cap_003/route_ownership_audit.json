@@ -1,0 +1,46 @@
+{
+ "cap003_routes_in_frozen_contract": [
+  "GET /product/v1/devices",
+  "GET /product/v1/system",
+  "POST /product/v1/devices/simulated",
+  "POST /product/v1/devices/{id}/connect",
+  "POST /product/v1/devices/{id}/disconnect",
+  "POST /product/v1/devices/{id}/scan",
+  "POST /product/v1/sessions/{id}/start",
+  "POST /product/v1/sessions/{id}/stop",
+  "WS /product/v1/sessions/{id}/live"
+ ],
+ "exact_match": true,
+ "forbidden_request_field_names": [
+  "alert_policy",
+  "alert_policy_id",
+  "base_model_id",
+  "calibration",
+  "calibration_id",
+  "candidate_id",
+  "checkpoint",
+  "checkpoint_id",
+  "gateway_artifact_id",
+  "learning_rate",
+  "model",
+  "model_id",
+  "mu",
+  "optimizer",
+  "preprocess_id",
+  "threshold"
+ ],
+ "implemented_routes": [
+  "GET /product/v1/devices",
+  "GET /product/v1/system",
+  "POST /product/v1/devices/simulated",
+  "POST /product/v1/devices/{id}/connect",
+  "POST /product/v1/devices/{id}/disconnect",
+  "POST /product/v1/devices/{id}/scan",
+  "POST /product/v1/sessions/{id}/start",
+  "POST /product/v1/sessions/{id}/stop",
+  "WS /product/v1/sessions/{id}/live"
+ ],
+ "later_phase_routes_implemented": [],
+ "openapi_docs_disabled": true,
+ "separate_app": "api/product_app.py (frozen inference API files unmodified)"
+}

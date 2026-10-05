@@ -1,0 +1,22 @@
+{
+ "added_count": 36,
+ "added_outside_additive_namespace": [],
+ "baseline_file_count": 3232,
+ "cap001_lock_verified": true,
+ "cap002_amendment_chain_verified": true,
+ "cap002_lock_verified": true,
+ "entry_sha": "9f49b0c52fd93f7a28aff9ef67407fa9c56976df",
+ "frontend_drift": [],
+ "frontend_files_checked": 162,
+ "head_sha": "2a49f20eceeabbb19757380ee0c07286f0c307fc",
+ "modified_outside_allowed_control_plane": [],
+ "modified_since_entry": [
+  "manifests/capstone/gate_registry_v1.csv",
+  "manifests/capstone/task_registry_v1.csv",
+  "tests/test_capstone_lifecycle.py"
+ ],
+ "named_component_drift": [],
+ "named_components_checked": 58,
+ "protected_artifact_drift": false,
+ "removed_since_entry": []
+}

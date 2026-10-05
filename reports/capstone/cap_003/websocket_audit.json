@@ -1,0 +1,23 @@
+{
+ "close_codes": {
+  "unauthenticated": 4401,
+  "unknown_session": 4404,
+  "wrong_owner": 4403
+ },
+ "policy": {
+  "client_frames": "rejected (close 1008); never control monitoring",
+  "direction": "server -> client monitoring events only",
+  "query_parameters": "ignored; cannot select a model",
+  "reconnect_policy": "on connect replay the in-memory journal from sequence 0, then tail"
+ },
+ "route": "WS /product/v1/sessions/{id}/live",
+ "tests": [
+  "test_close_codes_for_unauthenticated_unknown_and_wrong_owner",
+  "test_reconnect_replays_the_journal_from_sequence_zero",
+  "test_multiple_concurrent_subscribers_receive_identical_semantic_events",
+  "test_client_messages_are_rejected_and_cannot_control_monitoring",
+  "test_monitoring_completes_with_zero_subscribers",
+  "test_a_subscriber_disconnecting_does_not_stop_monitoring",
+  "test_query_parameters_cannot_select_a_model_on_the_socket"
+ ]
+}

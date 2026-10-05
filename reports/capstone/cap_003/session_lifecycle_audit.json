@@ -1,0 +1,30 @@
+{
+ "canonical_device_state_sequence": [
+  "STREAMING",
+  "DISCONNECTED",
+  "RECONNECTING",
+  "CONNECTED",
+  "STREAMING",
+  "STOPPED"
+ ],
+ "canonical_session_state_sequence": [
+  "MONITORING",
+  "STOPPING",
+  "COMPLETED"
+ ],
+ "canonical_terminal": "COMPLETED",
+ "late_stop_status": 409,
+ "lifecycle": {
+  "failure": "inference failure / unrecoverable device error / internal error -> FAILED with system.error",
+  "manual_stop": "MONITORING -> STOPPING -> COMPLETED (reason USER_STOP)",
+  "natural_completion": "MONITORING -> STOPPING -> COMPLETED",
+  "recoverable_disconnect": "session stays MONITORING",
+  "start": "DEVICE_READY -> MONITORING (REST); owner; device CONNECTED; second start -> 409"
+ },
+ "tests": [
+  "test_session_start_runs_to_natural_completion_and_rejects_a_second_start",
+  "test_manual_stop_goes_monitoring_stopping_completed_and_halts_the_device",
+  "test_recoverable_device_disconnect_does_not_change_the_session_state",
+  "test_unrecoverable_inference_failure_fails_the_session_without_retry"
+ ]
+}

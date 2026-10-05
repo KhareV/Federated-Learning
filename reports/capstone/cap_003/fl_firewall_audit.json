@@ -1,0 +1,20 @@
+{
+ "candidates_created": 0,
+ "fl_imports": [],
+ "fl_tokens": [],
+ "fl_training_used": false,
+ "fresh_process_sys_modules_check": "test_fl_firewall_the_monitoring_runtime_imports_and_runs_no_fl_code",
+ "scanned": [
+  "api/product_app.py",
+  "product/api/errors.py",
+  "product/api/models.py",
+  "product/devices/manager.py",
+  "product/inference/client.py",
+  "product/monitoring/coordinator.py",
+  "product/monitoring/event_adapter.py",
+  "product/monitoring/event_journal.py",
+  "product/monitoring/mux.py",
+  "product/monitoring/runtime_state.py",
+  "product/monitoring/waveform.py"
+ ]
+}

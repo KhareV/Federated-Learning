@@ -1,0 +1,26 @@
+{
+ "canonical_claims": {
+  "fl_training_used": false,
+  "mock_model_used": false,
+  "model_efficacy_claimed": false,
+  "note": "systems/product integration evidence; not clinical evidence",
+  "physical_hardware_used": false,
+  "simulation_truth_used": false
+ },
+ "events_with_truth_or_label_keys": 0,
+ "importing_truth": [],
+ "label_adapter_used": false,
+ "scanned": [
+  "api/product_app.py",
+  "product/api/errors.py",
+  "product/api/models.py",
+  "product/devices/manager.py",
+  "product/inference/client.py",
+  "product/monitoring/coordinator.py",
+  "product/monitoring/event_adapter.py",
+  "product/monitoring/event_journal.py",
+  "product/monitoring/mux.py",
+  "product/monitoring/runtime_state.py",
+  "product/monitoring/waveform.py"
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "422_windows": 7,
+ "canonical_event_kind_counts": {
+  "context.snapshot": 86,
+  "device.status": 6,
+  "inference.result": 86,
+  "monitoring.state": 3,
+  "quality.status": 93,
+  "session.status": 3,
+  "waveform.chunk": 2880
+ },
+ "context_values_withheld_in_canonical_run": 8,
+ "inference_results_for_422": 0,
+ "mapping": {
+  "200": "quality.status, context.snapshot (response context), inference.result, monitoring.state on first/change",
+  "400": "integration defect -> system.error origin INFERENCE + session FAILED",
+  "422_unusable": "quality.status only; telemetry EXPECTED_UNUSABLE_WINDOW; NO inference.result / monitoring.state / probability",
+  "5xx_or_network": "system.error origin INFERENCE + session FAILED",
+  "context_snapshot_clarification": "when the released response has context_available=false but PPG-derived values present, those three values are withheld (frozen validator forbids the combination); counted in telemetry; context_available is never altered"
+ },
+ "monitoring_state_change_events": [
+  "NORMAL_MONITORED_PATTERN",
+  "CONTEXT_UNAVAILABLE",
+  "NORMAL_MONITORED_PATTERN"
+ ],
+ "monitoring_state_sequence_from_responses_distinct": [
+  "CONTEXT_UNAVAILABLE",
+  "NORMAL_MONITORED_PATTERN"
+ ]
+}

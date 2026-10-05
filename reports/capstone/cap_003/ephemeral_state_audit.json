@@ -1,0 +1,14 @@
+{
+ "component": "CAPSTONE_EPHEMERAL_RUNTIME_STATE_V1 (product/monitoring/runtime_state.py)",
+ "database_or_file_persistence": false,
+ "db_files_tracked": [],
+ "holds": [
+  "devices",
+  "device ownership",
+  "MonitoringSession",
+  "tasks",
+  "event journals"
+ ],
+ "session_seeding": "Python-only seed_engineering_session(); not an HTTP route",
+ "sqlite_imports_in_cap003_code": []
+}
