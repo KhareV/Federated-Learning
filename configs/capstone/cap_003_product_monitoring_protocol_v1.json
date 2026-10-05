@@ -1,0 +1,794 @@
+{
+ "protocol_id": "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1",
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "owner_task": "CAP-003",
+ "gate": "CAPG2",
+ "purpose": "First complete executable product backend monitoring path: simulated device -> virtual edge -> monitoring coordinator -> unchanged WearableStreamRuntime -> HTTP -> real fresh SOFTWARE_SYSTEM_V2 -> PRODUCT_LIVE_EVENT_V1 -> monitoring WebSocket.",
+ "entry": {
+  "expected_entry_sha": "9f49b0c52fd93f7a28aff9ef67407fa9c56976df",
+  "entry_commit_with_control_plane": "f3f400d"
+ },
+ "upstream": {
+  "cap001_lock": "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json",
+  "cap001_lock_sha256": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "cap002_lock": "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json",
+  "cap002_lock_sha256": "3eb5ee97665b006088b15b021b484a5e5ac6f4174f58051d97aacfed0ae0be7d",
+  "cap002_amendments": [
+   "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_1.json",
+   "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_2.json",
+   "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.amendment_3.json"
+  ],
+  "frozen_files_modified": false
+ },
+ "live_stream_binding": {
+  "document": "docs/capstone/CAPSTONE_LIVE_STREAM_BINDING_V1.md",
+  "config": "configs/capstone/cap_003_live_stream_binding_v1.json",
+  "tee": "ObservedRecord -> (A) WaveformChunker 360 Hz ADC_COUNTS UI chunks ; (B) the SAME record -> unchanged WearableStreamRuntime -> 250 Hz scientific window",
+  "cap001_modified": false
+ },
+ "components": {
+  "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1": "configs/capstone/cap_003_product_monitoring_protocol_v1.json",
+  "CAPSTONE_LIVE_STREAM_BINDING_V1": "configs/capstone/cap_003_live_stream_binding_v1.json",
+  "CAPSTONE_PRODUCT_API_V1": "api/product_app.py",
+  "CAPSTONE_DEVICE_MANAGER_V1": "product/devices/manager.py",
+  "CAPSTONE_MONITORING_COORDINATOR_V1": "product/monitoring/coordinator.py (+ mux.py, waveform.py, runtime_state.py)",
+  "CAPSTONE_INFERENCE_CLIENT_V1": "product/inference/client.py",
+  "CAPSTONE_PRODUCT_EVENT_ADAPTER_V1": "product/monitoring/event_adapter.py",
+  "CAPSTONE_MONITORING_EVENT_JOURNAL_V1": "product/monitoring/event_journal.py"
+ },
+ "additional_components": "none (mux.py, waveform.py and runtime_state.py are parts of the coordinator component; CAPSTONE_EPHEMERAL_RUNTIME_STATE_V1 is runtime_state.py)",
+ "route_ownership": {
+  "implemented": [
+   "GET /product/v1/system",
+   "GET /product/v1/devices",
+   "POST /product/v1/devices/simulated",
+   "POST /product/v1/devices/{id}/scan",
+   "POST /product/v1/devices/{id}/connect",
+   "POST /product/v1/devices/{id}/disconnect",
+   "POST /product/v1/sessions/{id}/start",
+   "POST /product/v1/sessions/{id}/stop",
+   "WS /product/v1/sessions/{id}/live"
+  ],
+  "rule": "exactly the PRODUCT_API_CONTRACT_V1 routes with owner_phase CAP-003",
+  "not_implemented": [
+   "/me",
+   "public session create/list/get",
+   "summary/timeline",
+   "federation",
+   "models",
+   "research"
+  ]
+ },
+ "auth_boundary": {
+  "injected_resolver": "identity_resolver(HTTPConnection) -> AuthIdentity|None",
+  "no_resolver": "AUTHENTICATED routes fail closed (HTTP 401 / WS 4401); no debug or no-token bypass",
+  "test_identity": "scripts/capstone_cap003_test_identity.py (CAP003_TEST_IDENTITY_ONLY), never under product/, never a default",
+  "ws_close_codes": {
+   "unauthenticated": 4401,
+   "wrong_owner": 4403,
+   "unknown_session": 4404
+  }
+ },
+ "ephemeral_state": {
+  "component": "CAPSTONE_EPHEMERAL_RUNTIME_STATE_V1 (product/monitoring/runtime_state.py)",
+  "marker": "EPHEMERAL ENGINEERING STATE - replaced/backed by CAP-004 persistence",
+  "database": false,
+  "session_seeding": "Python-only seed_engineering_session(); not an HTTP route"
+ },
+ "session_runtime_identity": "product.session.default_runtime_identity() (MODEL_V2_FINAL, CAL_V2, PREPROC_V1, ALERT_POLICY_V1, ALERT_POLICY_V1_MODEL_V2_BINDING, GATEWAY_ARTIFACT_V2, API_SCHEMA_V1, SOFTWARE_SYSTEM_V2); never overridable",
+ "waveform_policy": {
+  "chunk_samples": 60,
+  "updates_per_second": 6,
+  "rate_hz": 360,
+  "unit": "ADC_COUNTS",
+  "channel": "ECG",
+  "per_sample_messages": false,
+  "ppg_waveform": false
+ },
+ "waveform_gap_policy": {
+  "ui_missing_sample": "None (waveform.chunk only); never 0/hold/interpolation",
+  "none_reaches_scientific_runtime": false,
+  "gap_fill_trigger": "record index jump or a source event with a source timestamp (outage chunks precede the reconnect device.status)"
+ },
+ "dual_stream_policy": {
+  "module": "product/monitoring/mux.py",
+  "interface": "frozen public DeviceSource only (no private fields)",
+  "order_rule": "event.source_timestamp_us <= record.timestamp_us precedes that record",
+  "accelerated": "blocking lookahead: order is a pure function of the source timeline under ANY scheduling",
+  "live_speed": "bounded settle (8 loop turns); a slower event view yields a loud MuxOrderError (session FAILED), never a silently different order",
+  "limitation": "the frozen DeviceSource interface offers no watermark/heartbeat; a future DeviceSource contract version should add one",
+  "stop_semantics": "manual stop stops consuming at the next record; run-ahead source events the product never reached are discarded (counted); a source mid-outage is left in its own link state for the owner to disconnect"
+ },
+ "inference_boundary": {
+  "client": "product/inference/client.py",
+  "transport": "localhost HTTP POST /v1/infer-window (API_SCHEMA_V1)",
+  "imports": "api.schemas only (typed contract)",
+  "direct_model_import": false,
+  "retry": "none in CAP-003 (needs separately governed policy)",
+  "identity_check": "every 200 asserts MODEL_V2_FINAL / CAL_V2 / PREPROC_V1 / ALERT_POLICY_V1"
+ },
+ "response_semantics": {
+  "200": "quality.status, context.snapshot (response context), inference.result, monitoring.state on first/change",
+  "422_unusable": "quality.status only; telemetry EXPECTED_UNUSABLE_WINDOW; NO inference.result / monitoring.state / probability",
+  "400": "integration defect -> system.error origin INFERENCE + session FAILED",
+  "5xx_or_network": "system.error origin INFERENCE + session FAILED",
+  "context_snapshot_clarification": "when the released response has context_available=false but PPG-derived values present, those three values are withheld (frozen validator forbids the combination); counted in telemetry; context_available is never altered"
+ },
+ "events": {
+  "sequencer": "one centralised counter across all monitoring event kinds",
+  "event_id": "<session_id>-PEV<sequence:06d>",
+  "clock": "injectable; LogicalClock (deterministic) for canonical runs",
+  "monitoring_state_policy": "first observation, then on change only"
+ },
+ "session_lifecycle": {
+  "start": "DEVICE_READY -> MONITORING (REST); owner; device CONNECTED; second start -> 409",
+  "natural_completion": "MONITORING -> STOPPING -> COMPLETED",
+  "manual_stop": "MONITORING -> STOPPING -> COMPLETED (reason USER_STOP)",
+  "recoverable_disconnect": "session stays MONITORING",
+  "failure": "inference failure / unrecoverable device error / internal error -> FAILED with system.error"
+ },
+ "websocket": {
+  "direction": "server -> client monitoring events only",
+  "reconnect_policy": "on connect replay the in-memory journal from sequence 0, then tail",
+  "client_frames": "rejected (close 1008); never control monitoring",
+  "query_parameters": "ignored; cannot select a model"
+ },
+ "reproducibility": {
+  "runs": 2,
+  "each": "fresh real released inference process + fresh product runtime state + fresh virtual wearable",
+  "product_process": "in-process (TestClient) because CAP-003 has no production auth provider; stated precisely",
+  "digest_includes": [
+   "scenario identity",
+   "session runtime identity",
+   "device event semantics",
+   "window timestamps and quality",
+   "HTTP status sequence",
+   "successful model/calibration ids",
+   "raw and calibrated probabilities",
+   "monitoring states from responses",
+   "product event kinds/order",
+   "waveform coverage and None intervals",
+   "context availability",
+   "terminal session state"
+  ],
+  "digest_excludes": [
+   "wall-clock",
+   "latency_ms",
+   "pid",
+   "port",
+   "temp paths",
+   "OS scheduling"
+  ]
+ },
+ "canonical_mixed_invariants": {
+  "scenario": "MIXED_MONITORING_SESSION",
+  "mode": "ACCELERATED",
+  "runtime_windows": 93,
+  "quality": {
+   "VALID": 86,
+   "UNUSABLE": 7
+  },
+  "inference_attempts": 93,
+  "http_200": 86,
+  "http_422": 7,
+  "successful_model_id": "MODEL_V2_FINAL",
+  "successful_calibration_id": "CAL_V2",
+  "terminal": "COMPLETED",
+  "physical_hardware_used": false,
+  "simulation_truth_used": false,
+  "fl_training_used": false,
+  "not_predeclared": [
+   "probability values",
+   "positive-window count",
+   "episode count"
+  ],
+  "exploratory_note": "a development smoke of the canonical path ran before this freeze and matched 86/7; counts were not adjusted"
+ },
+ "claim_boundary": {
+  "allowed": [
+   "systems/product integration evidence",
+   "simulated device",
+   "deterministic simulation",
+   "research prototype"
+  ],
+  "forbidden": [
+   "clinical evidence",
+   "model efficacy (accuracy/sensitivity/specificity/AUPRC/AUROC/F1) from simulation",
+   "candidate comparison",
+   "physical hardware claim"
+  ]
+ },
+ "out_of_scope": [
+  "Clerk",
+  "DemoAuth provider",
+  "SQLite",
+  "frontend changes",
+  "local FL training",
+  "federation",
+  "candidates",
+  "physical hardware",
+  "CAP-004"
+ ],
+ "preserved_disclosures": [
+  "CAP-001 gate-row 33 vs 50",
+  "CAP-002 code-drafted-before-entry",
+  "CAP-002 amendment chain",
+  "CAP-002 intermediate added-file-count reporting discrepancy"
+ ],
+ "control_plane": {
+  "task_registry": "manifests/capstone/task_registry_v1.csv",
+  "gate_registry": "manifests/capstone/gate_registry_v1.csv",
+  "component_registry": "manifests/capstone/component_registry_cap_003_v1.csv",
+  "why_separate_component_registry": "the CAP-001 lock binds component_registry_v1.csv"
+ },
+ "environment": "fresh Python 3.11 venv outside the repo from requirements-dev.lock; no new dependency",
+ "capg2_criteria": [
+  {
+   "id": 1,
+   "text": "CAP-001 = PASS and CAPG0 = PASS",
+   "checks": [
+    "@cap001_capg0_pass"
+   ]
+  },
+  {
+   "id": 2,
+   "text": "CAP-002 = PASS and CAPG1 = PASS",
+   "checks": [
+    "@cap002_capg1_pass"
+   ]
+  },
+  {
+   "id": 3,
+   "text": "CAP-001 lock verifies",
+   "checks": [
+    "@cap001_lock"
+   ]
+  },
+  {
+   "id": 4,
+   "text": "CAP-002 lock + full amendment hash chain verifies",
+   "checks": [
+    "@cap002_lock_chain"
+   ]
+  },
+  {
+   "id": 5,
+   "text": "Protected upstream has zero drift",
+   "checks": [
+    "@drift"
+   ]
+  },
+  {
+   "id": 6,
+   "text": "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1 frozen before any result evidence",
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ]
+  },
+  {
+   "id": 7,
+   "text": "Live-stream binding clarification frozen (tee at the coordinator; CAP-001 unmodified)",
+   "checks": [
+    "@binding_frozen",
+    "test_waveform_policy_is_six_updates_per_second_within_frozen_limits"
+   ]
+  },
+  {
+   "id": 8,
+   "text": "Existing frontend unchanged",
+   "checks": [
+    "@drift_frontend"
+   ]
+  },
+  {
+   "id": 9,
+   "text": "Exact CAP-003 route subset implemented",
+   "checks": [
+    "test_product_app_implements_exactly_the_cap_003_route_subset",
+    "test_the_contract_marks_exactly_the_system_route_public"
+   ]
+  },
+  {
+   "id": 10,
+   "text": "No CAP-004+ route implemented early",
+   "checks": [
+    "test_no_later_phase_route_is_implemented_early",
+    "test_seeding_a_session_is_python_only_and_validates_ownership"
+   ]
+  },
+  {
+   "id": 11,
+   "text": "Product API is separate from the frozen inference API",
+   "checks": [
+    "test_product_api_is_separate_from_the_frozen_inference_api",
+    "test_product_app_import_does_not_load_a_model_or_the_inference_runtime"
+   ]
+  },
+  {
+   "id": 12,
+   "text": "No API_SCHEMA_V1 change",
+   "checks": [
+    "@drift",
+    "test_the_service_under_test_is_the_released_software_system_v2_default"
+   ]
+  },
+  {
+   "id": 13,
+   "text": "No second inference implementation",
+   "checks": [
+    "test_the_client_imports_no_model_gateway_runtime_or_training_code",
+    "test_product_app_import_does_not_load_a_model_or_the_inference_runtime"
+   ]
+  },
+  {
+   "id": 14,
+   "text": "No public model selector",
+   "checks": [
+    "test_no_client_controlled_model_selector_exists_anywhere_on_the_product_api",
+    "test_a_window_cannot_smuggle_a_different_model_id",
+    "test_query_parameters_cannot_select_a_model_on_the_socket",
+    "test_session_runtime_identity_is_pinned_and_not_overridable"
+   ]
+  },
+  {
+   "id": 15,
+   "text": "Auth dependency fails closed",
+   "checks": [
+    "test_authenticated_routes_fail_closed_without_an_injected_resolver",
+    "test_authenticated_routes_reject_requests_without_an_identity"
+   ]
+  },
+  {
+   "id": 16,
+   "text": "No production Clerk/DemoAuth implementation",
+   "checks": [
+    "test_no_production_auth_provider_or_bypass_exists",
+    "@no_auth_provider"
+   ]
+  },
+  {
+   "id": 17,
+   "text": "Test identity exists only in test/harness scope",
+   "checks": [
+    "@auth_harness_scope",
+    "test_no_production_auth_provider_or_bypass_exists"
+   ]
+  },
+  {
+   "id": 18,
+   "text": "Ephemeral state only",
+   "checks": [
+    "test_state_is_ephemeral_in_memory_only_and_no_database_exists"
+   ]
+  },
+  {
+   "id": 19,
+   "text": "No SQLite/database",
+   "checks": [
+    "test_state_is_ephemeral_in_memory_only_and_no_database_exists",
+    "@no_database"
+   ]
+  },
+  {
+   "id": 20,
+   "text": "Device manager reuses the CAP-002 source unchanged",
+   "checks": [
+    "test_device_manager_reuses_the_cap_002_source_unchanged",
+    "test_cap_002_implementation_files_are_not_modified_by_cap_003"
+   ]
+  },
+  {
+   "id": 21,
+   "text": "Ownership enforced",
+   "checks": [
+    "test_device_commands_reject_other_users_and_unknown_devices",
+    "test_session_routes_enforce_ownership_and_unknown_sessions",
+    "test_close_codes_for_unauthenticated_unknown_and_wrong_owner"
+   ]
+  },
+  {
+   "id": 22,
+   "text": "Coordinator is the sole live source consumer/orchestrator",
+   "checks": [
+    "test_the_coordinator_is_the_only_live_consumer_of_the_device_source"
+   ]
+  },
+  {
+   "id": 23,
+   "text": "No private source internals used",
+   "checks": [
+    "test_no_private_source_internals_are_used_by_the_cap_003_runtime"
+   ]
+  },
+  {
+   "id": 24,
+   "text": "Dual record/event stream has no loss, duplication or deadlock",
+   "checks": [
+    "test_multiplexer_delivers_every_record_and_event_exactly_once_in_causal_order",
+    "test_multiplexer_is_deterministic_under_aggressive_task_scheduling",
+    "test_paced_mode_multiplexer_is_deterministic_or_fails_loudly_never_silently_different",
+    "test_multiplexer_leaks_no_tasks_and_terminates",
+    "test_multiplexer_fails_loudly_instead_of_misordering"
+   ]
+  },
+  {
+   "id": 25,
+   "text": "Device event order preserved",
+   "checks": [
+    "test_multiplexer_matches_the_cap_002_event_sequence_for_every_scenario",
+    "test_recoverable_device_disconnect_does_not_change_the_session_state"
+   ]
+  },
+  {
+   "id": 26,
+   "text": "Waveform policy is 5-10 updates/sec",
+   "checks": [
+    "test_waveform_policy_is_six_updates_per_second_within_frozen_limits",
+    "test_waveform_events_are_frozen_shape_ecg_only_and_never_per_sample"
+   ]
+  },
+  {
+   "id": 27,
+   "text": "No per-sample WebSocket traffic",
+   "checks": [
+    "test_waveform_events_are_frozen_shape_ecg_only_and_never_per_sample"
+   ]
+  },
+  {
+   "id": 28,
+   "text": "Waveform gaps use None only in UI transport",
+   "checks": [
+    "test_waveform_gaps_are_none_only_in_the_ui_transport_and_stay_contiguous"
+   ]
+  },
+  {
+   "id": 29,
+   "text": "None placeholders never enter the scientific runtime",
+   "checks": [
+    "test_none_placeholders_never_enter_the_scientific_runtime",
+    "test_product_pipeline_preserves_the_cap_002_scientific_stream_exactly"
+   ]
+  },
+  {
+   "id": 30,
+   "text": "No fake PPG waveform",
+   "checks": [
+    "test_waveform_events_are_frozen_shape_ecg_only_and_never_per_sample",
+    "@canonical_ecg_only"
+   ]
+  },
+  {
+   "id": 31,
+   "text": "WearableStreamRuntime unchanged",
+   "checks": [
+    "@drift",
+    "test_product_pipeline_preserves_the_cap_002_scientific_stream_exactly"
+   ]
+  },
+  {
+   "id": 32,
+   "text": "Pre-inference MIXED runtime parity = 93 windows",
+   "checks": [
+    "test_mixed_scenario_scientific_input_counts_are_exactly_cap_002s",
+    "@canonical_93_windows"
+   ]
+  },
+  {
+   "id": 33,
+   "text": "MIXED quality parity = 86 VALID / 7 UNUSABLE",
+   "checks": [
+    "test_mixed_scenario_scientific_input_counts_are_exactly_cap_002s",
+    "@canonical_quality_counts"
+   ]
+  },
+  {
+   "id": 34,
+   "text": "Inference crosses real localhost HTTP",
+   "checks": [
+    "@e2e_real_http",
+    "test_mixed_scenario_matches_the_predeclared_real_inference_invariants"
+   ]
+  },
+  {
+   "id": 35,
+   "text": "Fresh SOFTWARE_SYSTEM_V2 process used",
+   "checks": [
+    "@e2e_fresh_process",
+    "test_the_service_under_test_is_the_released_software_system_v2_default"
+   ]
+  },
+  {
+   "id": 36,
+   "text": "93 inference attempts",
+   "checks": [
+    "@canonical_93_attempts",
+    "test_mixed_scenario_matches_the_predeclared_real_inference_invariants"
+   ]
+  },
+  {
+   "id": 37,
+   "text": "86 HTTP 200",
+   "checks": [
+    "@canonical_86_200"
+   ]
+  },
+  {
+   "id": 38,
+   "text": "7 HTTP 422",
+   "checks": [
+    "@canonical_7_422"
+   ]
+  },
+  {
+   "id": 39,
+   "text": "422 creates no fake inference result",
+   "checks": [
+    "test_a_422_yields_quality_but_never_a_fabricated_inference_or_state",
+    "test_422_windows_have_quality_but_no_inference_result_against_the_real_api",
+    "@canonical_422_no_inference"
+   ]
+  },
+  {
+   "id": 40,
+   "text": "All successful model IDs = MODEL_V2_FINAL",
+   "checks": [
+    "@canonical_model_ids",
+    "test_a_200_is_parsed_into_the_typed_response_and_identity_checked"
+   ]
+  },
+  {
+   "id": 41,
+   "text": "All successful calibration IDs = CAL_V2",
+   "checks": [
+    "@canonical_calibration_ids",
+    "test_a_response_with_a_different_released_identity_is_rejected"
+   ]
+  },
+  {
+   "id": 42,
+   "text": "Context snapshots come from actual response context",
+   "checks": [
+    "test_context_probability_and_state_come_only_from_the_response",
+    "test_context_loss_keeps_ecg_inference_running_with_unavailable_context"
+   ]
+  },
+  {
+   "id": 43,
+   "text": "monitoring.state comes only from an actual successful response",
+   "checks": [
+    "test_monitoring_state_events_follow_changes_only",
+    "test_a_422_yields_quality_but_never_a_fabricated_inference_or_state",
+    "@canonical_state_from_responses"
+   ]
+  },
+  {
+   "id": 44,
+   "text": "Event sequence globally contiguous per session",
+   "checks": [
+    "test_every_emitted_event_validates_is_monitoring_only_and_globally_contiguous",
+    "@canonical_sequence_contiguous"
+   ]
+  },
+  {
+   "id": 45,
+   "text": "All events validate PRODUCT_LIVE_EVENT_V1",
+   "checks": [
+    "test_every_emitted_event_validates_is_monitoring_only_and_globally_contiguous",
+    "test_a_subscriber_receives_a_valid_monitoring_only_stream"
+   ]
+  },
+  {
+   "id": 46,
+   "text": "Session start semantics correct",
+   "checks": [
+    "test_session_start_runs_to_natural_completion_and_rejects_a_second_start"
+   ]
+  },
+  {
+   "id": 47,
+   "text": "Session stop semantics correct",
+   "checks": [
+    "test_manual_stop_goes_monitoring_stopping_completed_and_halts_the_device",
+    "test_unrecoverable_inference_failure_fails_the_session_without_retry"
+   ]
+  },
+  {
+   "id": 48,
+   "text": "Natural completion correct",
+   "checks": [
+    "test_session_start_runs_to_natural_completion_and_rejects_a_second_start",
+    "@canonical_completed"
+   ]
+  },
+  {
+   "id": 49,
+   "text": "Recoverable device disconnect does not terminate the session",
+   "checks": [
+    "test_recoverable_device_disconnect_does_not_change_the_session_state",
+    "test_disconnect_reconnect_keeps_the_session_monitoring_with_a_ui_gap"
+   ]
+  },
+  {
+   "id": 50,
+   "text": "WebSocket 4401/4403/4404 correct",
+   "checks": [
+    "test_close_codes_for_unauthenticated_unknown_and_wrong_owner"
+   ]
+  },
+  {
+   "id": 51,
+   "text": "WebSocket does not control scientific configuration",
+   "checks": [
+    "test_client_messages_are_rejected_and_cannot_control_monitoring",
+    "test_query_parameters_cannot_select_a_model_on_the_socket"
+   ]
+  },
+  {
+   "id": 52,
+   "text": "Monitoring continues with zero subscribers",
+   "checks": [
+    "test_monitoring_completes_with_zero_subscribers",
+    "test_a_subscriber_disconnecting_does_not_stop_monitoring"
+   ]
+  },
+  {
+   "id": 53,
+   "text": "Canonical E2E uses no mock model",
+   "checks": [
+    "@no_mock_in_e2e",
+    "test_the_service_under_test_is_the_released_software_system_v2_default"
+   ]
+  },
+  {
+   "id": 54,
+   "text": "Canonical E2E uses no SimulationTruth",
+   "checks": [
+    "test_truth_firewall_extends_to_every_cap_003_module_and_the_event_stream",
+    "@canonical_claims"
+   ]
+  },
+  {
+   "id": 55,
+   "text": "Canonical E2E uses no FL training",
+   "checks": [
+    "test_fl_firewall_the_monitoring_runtime_imports_and_runs_no_fl_code",
+    "@canonical_claims"
+   ]
+  },
+  {
+   "id": 56,
+   "text": "Two fresh E2E semantic digests identical",
+   "checks": [
+    "@e2e_reproducible"
+   ]
+  },
+  {
+   "id": 57,
+   "text": "No model efficacy claim generated",
+   "checks": [
+    "@no_efficacy_metrics"
+   ]
+  },
+  {
+   "id": 58,
+   "text": "No frontend modification",
+   "checks": [
+    "@drift_frontend"
+   ]
+  },
+  {
+   "id": 59,
+   "text": "No physical hardware code",
+   "checks": [
+    "@no_hardware_code"
+   ]
+  },
+  {
+   "id": 60,
+   "text": "Targeted tests pass",
+   "checks": [
+    "@all_cap003_tests"
+   ]
+  },
+  {
+   "id": 61,
+   "text": "CAP-001/CAP-002 regression tests pass",
+   "checks": [
+    "@prior_phase_tests"
+   ]
+  },
+  {
+   "id": 62,
+   "text": "Full Python regression passes",
+   "checks": [
+    "@regression"
+   ]
+  },
+  {
+   "id": 63,
+   "text": "Frontend test/check/build pass",
+   "checks": [
+    "@frontend"
+   ]
+  },
+  {
+   "id": 64,
+   "text": "ruff passes",
+   "checks": [
+    "@ruff"
+   ]
+  },
+  {
+   "id": 65,
+   "text": "pip check passes",
+   "checks": [
+    "@pip"
+   ]
+  },
+  {
+   "id": 66,
+   "text": "CI not queried",
+   "checks": [
+    "@ci"
+   ]
+  },
+  {
+   "id": 67,
+   "text": "CI not triggered",
+   "checks": [
+    "@ci"
+   ]
+  },
+  {
+   "id": 68,
+   "text": "CAP-003 = PASS",
+   "checks": [
+    "@registry_cap003"
+   ]
+  },
+  {
+   "id": 69,
+   "text": "CAPG2 = PASS",
+   "checks": [
+    "@registry_capg2"
+   ]
+  },
+  {
+   "id": 70,
+   "text": "CAP-004 remains NOT_STARTED",
+   "checks": [
+    "@registry_cap004"
+   ]
+  },
+  {
+   "id": 71,
+   "text": "Mutation / negative controls each failed the targeted suite as designed and left no mutation",
+   "checks": [
+    "@mutation_log"
+   ]
+  },
+  {
+   "id": 72,
+   "text": "Live-stream binding records the context-snapshot clarification and every withholding is counted",
+   "checks": [
+    "@context_clarification"
+   ]
+  },
+  {
+   "id": 73,
+   "text": "Multiplexer guarantee is stated precisely and violations fail loudly",
+   "checks": [
+    "test_multiplexer_fails_loudly_instead_of_misordering",
+    "@mux_guarantee_documented"
+   ]
+  },
+  {
+   "id": 74,
+   "text": "Preserved CAP-001/CAP-002 disclosures untouched (gate-row wording, amendment chain)",
+   "checks": [
+    "@disclosures_preserved"
+   ]
+  }
+ ],
+ "capg2_criteria_note": "Frozen before canonical result evaluation. Plain names are exact test function names (or full parametrised ids); '@name' are programmatic checks in scripts/cap_003_build_evidence.py."
+}

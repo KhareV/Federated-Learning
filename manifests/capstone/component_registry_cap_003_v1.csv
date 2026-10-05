@@ -1,0 +1,9 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1,ENGINEERING_PROTOCOL,CAP-003,FROZEN_ENGINEERING_PROTOCOL,,artifacts/capstone/CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1.lock.json,CAP-003 method protocol incl. the frozen CAPG2 criteria.
+CAPSTONE_LIVE_STREAM_BINDING_V1,IMPLEMENTATION_BINDING,CAP-003,FROZEN_IMPLEMENTATION_BINDING,,configs/capstone/cap_003_live_stream_binding_v1.json,Tee at the coordinator: 360 Hz UI vs unchanged 250 Hz scientific path.
+CAPSTONE_PRODUCT_API_V1,ENGINEERING_IMPLEMENTATION,CAP-003,FROZEN_ENGINEERING_IMPLEMENTATION,,api/product_app.py,Separate product FastAPI app: 9 CAP-003 routes; fail-closed auth.
+CAPSTONE_DEVICE_MANAGER_V1,ENGINEERING_IMPLEMENTATION,CAP-003,FROZEN_ENGINEERING_IMPLEMENTATION,,product/devices/manager.py,In-memory device service over the unchanged CAP-002 source.
+CAPSTONE_MONITORING_COORDINATOR_V1,ENGINEERING_IMPLEMENTATION,CAP-003,FROZEN_ENGINEERING_IMPLEMENTATION,,product/monitoring/coordinator.py,"Sole live-source orchestrator (+ mux, waveform, ephemeral state)."
+CAPSTONE_INFERENCE_CLIENT_V1,ENGINEERING_IMPLEMENTATION,CAP-003,FROZEN_ENGINEERING_IMPLEMENTATION,,product/inference/client.py,Async HTTP client to the released /v1/infer-window; no model import.
+CAPSTONE_PRODUCT_EVENT_ADAPTER_V1,ENGINEERING_IMPLEMENTATION,CAP-003,FROZEN_ENGINEERING_IMPLEMENTATION,,product/monitoring/event_adapter.py,Real upstream values -> PRODUCT_LIVE_EVENT_V1 with one global sequencer.
+CAPSTONE_MONITORING_EVENT_JOURNAL_V1,ENGINEERING_IMPLEMENTATION,CAP-003,FROZEN_ENGINEERING_IMPLEMENTATION,,product/monitoring/event_journal.py,In-memory append-only journal; replay from 0 then tail.

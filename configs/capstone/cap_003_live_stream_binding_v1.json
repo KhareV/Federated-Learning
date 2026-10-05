@@ -1,0 +1,67 @@
+{
+ "binding_id": "CAPSTONE_LIVE_STREAM_BINDING_V1",
+ "status": "FROZEN_IMPLEMENTATION_BINDING",
+ "owner_task": "CAP-003",
+ "document": "docs/capstone/CAPSTONE_LIVE_STREAM_BINDING_V1.md",
+ "clarifies": {
+  "contract": "PRODUCT_LIVE_EVENT_V1.waveform.chunk",
+  "connection_table_edge": "WearableStreamRuntime -> Product Event Adapter (CAP-001 E12/M14)"
+ },
+ "cap001_modified": false,
+ "model_path_changed": false,
+ "tee": {
+  "point": "MonitoringCoordinator._on_record",
+  "branch_a": "ObservedRecord -> WaveformChunker -> waveform.chunk (360 Hz, ADC_COUNTS)",
+  "branch_b": "the SAME ObservedRecord -> unchanged WearableStreamRuntime -> 250 Hz scientific window -> inference"
+ },
+ "scientific_path": {
+  "rate_hz": 250,
+  "window_samples": 2500,
+  "window_seconds": 10,
+  "runtime": "simulation.stream_runtime_v2013.WearableStreamRuntime (unchanged)"
+ },
+ "ui_path": {
+  "rate_hz": 360,
+  "unit": "ADC_COUNTS",
+  "channel": "ECG",
+  "chunk_samples": 60,
+  "updates_per_second": 6,
+  "frozen_limits": {
+   "updates_per_second": [
+    5,
+    10
+   ],
+   "nominal_samples": [
+    36,
+    72
+   ],
+   "hard_max_samples": 144
+  },
+  "per_sample_messages": false,
+  "ppg_waveform": false
+ },
+ "gap_policy": {
+  "ui_missing_sample": "None (waveform.chunk only)",
+  "forbidden_substitutes": [
+   "0",
+   "last-value hold",
+   "interpolation"
+  ],
+  "none_reaches_scientific_runtime": false,
+  "none_reaches_inference_api": false,
+  "contiguity": "chunks cover contiguous sample-index positions including null positions",
+  "gap_fill_trigger": "record with index jump, or a source event carrying a source timestamp"
+ },
+ "dual_stream_policy": {
+  "mechanism": "product/monitoring/mux.py",
+  "uses_private_source_internals": false,
+  "order_rule": "event.source_timestamp_us <= record.timestamp_us precedes the record; None-timestamp events first",
+  "violation": "MuxOrderError (fail loudly)"
+ },
+ "context_snapshot_clarification": {
+  "issue": "released response may report context_available=false with PPG-derived values present; frozen validator forbids that combination",
+  "cap001_modified": false,
+  "policy": "withhold pr_ppg_bpm/spo2_pct/spo2_valid (null/false) when context_available is false; never alter context_available; count occurrences (telemetry.context_values_withheld)",
+  "values_invented": false
+ }
+}
