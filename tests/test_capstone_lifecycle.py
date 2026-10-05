@@ -54,11 +54,16 @@ def _rows(name: str) -> list[dict]:
 
 
 def test_capstone_task_registry_is_exactly_the_current_state() -> None:
-    assert {r["task_id"]: r["status"] for r in _rows("task")} == EXPECTED_TASKS
+    actual = {r["task_id"]: r["status"] for r in _rows("task")}
+    assert actual["CAP-009"] in {"IN_PROGRESS", "PASS"}
+    assert actual == {**EXPECTED_TASKS, "CAP-009": actual["CAP-009"]}
 
 
 def test_capstone_gate_registry_is_exactly_the_current_state() -> None:
-    assert {r["gate_id"]: r["status"] for r in _rows("gate")} == EXPECTED_GATES
+    actual = {r["gate_id"]: r["status"] for r in _rows("gate")}
+    tasks = {r["task_id"]: r["status"] for r in _rows("task")}
+    expected = "PASS" if tasks["CAP-009"] == "PASS" else "NOT_STARTED"
+    assert actual == {**EXPECTED_GATES, "CAPG8": expected}
 
 
 def test_capstone_components_are_exactly_the_sixteen_cap_001_components() -> None:
@@ -69,8 +74,12 @@ def test_task_prerequisite_chain_is_linear_and_later_phases_have_no_evidence() -
     tasks = {r["task_id"]: r for r in _rows("task")}
     for n in range(9, 12):
         assert tasks[f"CAP-{n:03d}"]["prerequisites"] == f"CAP-{n - 1:03d}"
-    assert tasks["CAP-009"]["evidence_path"] == "reports/capstone/cap_009/entry_audit.json"
-    assert tasks["CAP-009"]["implemented_at_commit"] == ""
+    if tasks["CAP-009"]["status"] == "IN_PROGRESS":
+        assert tasks["CAP-009"]["evidence_path"] == "reports/capstone/cap_009/entry_audit.json"
+        assert tasks["CAP-009"]["implemented_at_commit"] == ""
+    else:
+        assert tasks["CAP-009"]["evidence_path"] == "reports/capstone/cap_009/final_handoff.md"
+        assert tasks["CAP-009"]["implemented_at_commit"]
     for n in range(10, 12):
         assert tasks[f"CAP-{n:03d}"]["evidence_path"] == ""
         assert tasks[f"CAP-{n:03d}"]["implemented_at_commit"] == ""

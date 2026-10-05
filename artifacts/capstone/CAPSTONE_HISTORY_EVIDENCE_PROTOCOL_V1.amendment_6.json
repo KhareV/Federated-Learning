@@ -1,0 +1,15 @@
+{
+ "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_6",
+ "owner_phase": "CAP-009",
+ "made_after_method_freeze": true,
+ "previous_amendment": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_5",
+ "defect": "The lifecycle guard repaired in amendment 4 only accepted CAP-009 IN_PROGRESS, which would fail the required CAP-009 PASS/CAPG8 PASS result transition.",
+ "change": "Accept only the two governed CAP-009 states, IN_PROGRESS with CAPG8 NOT_STARTED and entry evidence, or PASS with CAPG8 PASS, final handoff evidence, and a nonempty implementation commit. All other prior and future phase assertions remain exact.",
+ "files": {
+  "tests/test_capstone_lifecycle.py": {
+   "old_sha256": "996ea6155cee7372e8a03aa3659cba1d8ebd735e2d138df98c79c7d4e7530039",
+   "new_sha256": "c981bd0449fa5b43395ecd0ed4dba05bed7313ad968ad0f9f3e305185ffc483b"
+  }
+ },
+ "result_evidence_committed_with_amendment": false
+}
