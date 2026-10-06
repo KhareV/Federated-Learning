@@ -22,7 +22,7 @@ RELEASE_TARGET = "3ad1b07408a0c3556fbc5039f1a7a4fee824db96"
 TAG = "capstone-release-v1"
 ADDITIVE_PREFIXES = (
     "manifests/clerk_connected/", "configs/clerk_connected/", "artifacts/clerk_connected/", "docs/capstone/CLERK_CONNECTED", "reports/clerk_connected/",
-    "scripts/clerk_live_001_", "scripts/run_capstone_clerk_connected", "scripts/verify_clerk_connected.py", "scripts/clerk_connected_", "tests/test_clerk_connected_", "tests/clerk_connected_",
+    "artifacts/capstone/CLERK_LIVE_001_PROTOCOL_V1.amendment_", "scripts/clerk_live_001_", "scripts/run_capstone_clerk_connected", "scripts/verify_clerk_connected.py", "scripts/clerk_connected_", "tests/test_clerk_connected_", "tests/clerk_connected_",
 )
 # The ONLY pre-existing files this successor may change: the authorised UI-loader compatibility commit (CAPSTONE_UI_V1_3 successor,
 # successor-aware historical UI verifiers, the CAP-010/CAP-008 frontend-pin guards) - every other tracked file must be byte-identical.
