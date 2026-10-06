@@ -1,0 +1,133 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "helper_audit:['qualifying_rule_not_CLERK_AND_LIVE_RUN']",
+   "mutation": "BINDING_APPEARS_IN_DEMO_MODE",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "helper_audit:['qualifying_rule_not_CLERK_AND_LIVE_RUN']",
+   "mutation": "BINDING_APPEARS_ON_REPLAY",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "global_page_ok:False",
+   "mutation": "GLOBAL_CLIENTS_PAGE_SHOWS_MY_EDGE_CLIENT",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "helper_audit:['owner_slot_not_SIM_FL_SITE_00']",
+   "mutation": "SITE_01_ACCIDENTALLY_OWNER_BOUND",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "grid_audit:['owner_label_not_exactly_one_guarded_by_role', 'peer_label']",
+   "mutation": "TWO_CLIENTS_SHOW_MY_EDGE_CLIENT",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "grid_audit:['technical_id_not_displayed_unchanged']",
+   "mutation": "SITE_00_TECHNICAL_ID_RENAMED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "helper_audit:['ownerBoundClientId_signature']",
+   "mutation": "USER_ID_OR_EMAIL_ENTERS_BINDING_INPUT",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "live_audit:['summary_not_event_derived']",
+   "mutation": "LOCAL_EXAMPLE_COUNT_HARDCODED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "live_audit:['summary_not_event_derived']",
+   "mutation": "UPDATE_COUNT_FABRICATED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "text_audit:['frontend/src/routes/app/federation/live/+page.svelte']",
+   "mutation": "CONTRIBUTION_PERCENTAGE_ADDED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "cohort_ok:client_count_not_8",
+   "mutation": "CLIENT_COUNT_BECOMES_9",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "candidate_digest_ok",
+   "mutation": "CANDIDATE_DIGEST_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:product/federation/service.py",
+   "mutation": "FEDERATION_RUNTIME_FILE_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:api/product_app_v1_3.py",
+   "mutation": "API_SCHEMA_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:capstone_persistence/federation_store.py",
+   "mutation": "SQLITE_SCHEMA_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "hash_drift:auth:product/auth/clerk.py",
+   "mutation": "CLERK_AUTH_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "verify_capstone_ui_v1_4:CAPSTONE_UI_V1_4_PREDECESSOR_DRIFT",
+   "mutation": "PREDECESSOR_UI_LOCK_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "failing_check": "verify_capstone_ui_v1_4:CAPSTONE_UI_V1_4_UNBOUND_OR_MISSING_FRONTEND_FILE",
+   "mutation": "UNBOUND_FRONTEND_DRIFT_ESCAPES_UI_LOCK",
+   "restored": true
+  }
+ ],
+ "count": 18
+}

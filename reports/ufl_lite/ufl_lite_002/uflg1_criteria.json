@@ -1,0 +1,610 @@
+{
+ "all_decided_pass": true,
+ "criteria": [
+  {
+   "checks": [
+    {
+     "check": "entry_audited",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-001",
+   "pass": true,
+   "text": "entry audited (immutable)"
+  },
+  {
+   "checks": [
+    {
+     "check": "uflg0_preserved",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-002",
+   "pass": true,
+   "text": "UFLG0 PASS preserved (registry + lock)"
+  },
+  {
+   "checks": [
+    {
+     "check": "tags_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-003",
+   "pass": true,
+   "text": "historical tags unchanged (release, clerk-connected)"
+  },
+  {
+   "checks": [
+    {
+     "check": "locks_verify",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-004",
+   "pass": true,
+   "text": "prior capstone/Clerk/UFL locks verify"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_backend_change",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-005",
+   "pass": true,
+   "text": "no backend changes"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_api_change",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-006",
+   "pass": true,
+   "text": "no API changes (schemas, routes)"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_db_change",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-007",
+   "pass": true,
+   "text": "no database/schema changes"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_fl_change",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-008",
+   "pass": true,
+   "text": "no FL runtime changes"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_auth_change",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-009",
+   "pass": true,
+   "text": "no Clerk auth changes"
+  },
+  {
+   "checks": [
+    {
+     "check": "helper_pure",
+     "pass": true
+    },
+    {
+     "check": "V:helper_has_no_identity_parameter",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-010",
+   "pass": true,
+   "text": "participation helper is pure (no network, storage, Svelte state, identity)"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:helper_clerk_live",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-011",
+   "pass": true,
+   "text": "CLERK + LIVE_RUN binds SIM_FL_SITE_00"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:helper_demo_none",
+     "pass": true
+    },
+    {
+     "check": "V:demo_no_binding",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-012",
+   "pass": true,
+   "text": "DEMO has no binding"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:helper_replay_none",
+     "pass": true
+    },
+    {
+     "check": "V:replay_no_binding",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-013",
+   "pass": true,
+   "text": "REPLAY has no binding"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:global_clients_unbound",
+     "pass": true
+    },
+    {
+     "check": "global_page_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-014",
+   "pass": true,
+   "text": "global clients view has no binding"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:one_owner_card",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-015",
+   "pass": true,
+   "text": "exactly one owner card"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:seven_peer_cards",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-016",
+   "pass": true,
+   "text": "exactly seven peer cards"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:technical_ids_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-017",
+   "pass": true,
+   "text": "technical client ids unchanged (SIM_FL_SITE_00 stays technically named)"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:owner_examples_event_derived",
+     "pass": true
+    },
+    {
+     "check": "b_site00_93",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-018",
+   "pass": true,
+   "text": "SITE_00 shows its 93 local examples from existing telemetry"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:synthetic_qualification",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-019",
+   "pass": true,
+   "text": "synthetic-data qualification visible"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:not_your_physiology",
+     "pass": true
+    },
+    {
+     "check": "claims_clean",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-020",
+   "pass": true,
+   "text": "authenticated user's physiology not claimed"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:owner_state_milestone_digest",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-021",
+   "pass": true,
+   "text": "owner telemetry (state, milestone, update digest) is event-derived"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:summary_derivation",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-022",
+   "pass": true,
+   "text": "updates produced derived from updateDigests only; completed rounds from milestones only"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:no_contribution_percentage",
+     "pass": true
+    },
+    {
+     "check": "no_contribution_in_source",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-023",
+   "pass": true,
+   "text": "no contribution percentage / influence score"
+  },
+  {
+   "checks": [
+    {
+     "check": "claims_clean",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-024",
+   "pass": true,
+   "text": "no personal-model claim and no personalized-FL claim"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_consent_ui",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-025",
+   "pass": true,
+   "text": "no consent / opt-in UI"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:locality_wording",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-026",
+   "pass": true,
+   "text": "data-locality wording is precise (logical local buffer; one demonstration machine)"
+  },
+  {
+   "checks": [
+    {
+     "check": "V:unbound_grid_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-027",
+   "pass": true,
+   "text": "existing unbound ClientGrid behaviour remains valid"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_client_count",
+     "pass": true
+    },
+    {
+     "check": "P:test_cohort_and_baseline_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-028",
+   "pass": true,
+   "text": "client count 8"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_rounds",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-029",
+   "pass": true,
+   "text": "rounds 3"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_updates",
+     "pass": true
+    },
+    {
+     "check": "P:test_completed_run_reproduces_baseline",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-030",
+   "pass": true,
+   "text": "updates 24 (8/8/8)"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_digest",
+     "pass": true
+    },
+    {
+     "check": "P:test_completed_run_reproduces_baseline",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-031",
+   "pass": true,
+   "text": "canonical candidate digest unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_candidate",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-032",
+   "pass": true,
+   "text": "candidate sandbox-only (ACCEPTED_TO_SANDBOX / IN_SANDBOX / not deployed)"
+  },
+  {
+   "checks": [
+    {
+     "check": "h_scientific",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-033",
+   "pass": true,
+   "text": "MODEL_V2_FINAL and CAL_V2 unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "demo_digest",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-034",
+   "pass": true,
+   "text": "offline demo semantic digest identical (3a57614e...)"
+  },
+  {
+   "checks": [
+    {
+     "check": "demo_regression",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-035",
+   "pass": true,
+   "text": "DemoAuth works, owner binding absent, zero Clerk traffic"
+  },
+  {
+   "checks": [
+    {
+     "check": "ui14_ok",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-036",
+   "pass": true,
+   "text": "CAPSTONE_UI_V1_4 verifies (whole frontend, predecessor V1_3)"
+  },
+  {
+   "checks": [
+    {
+     "check": "ui_locks_identical",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-037",
+   "pass": true,
+   "text": "predecessor UI lock files V1/V1_1/V1_2/V1_3 byte-identical"
+  },
+  {
+   "checks": [
+    {
+     "check": "amendments_pure",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-038",
+   "pass": true,
+   "text": "successor amendments pure (SUCCESSOR_COMPATIBILITY_ONLY, old/new SHA, no results)"
+  },
+  {
+   "checks": [
+    {
+     "check": "frontend_scope_exact",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-039",
+   "pass": true,
+   "text": "frontend drift is exactly the registered change (helper, grid, live page, rounds note, tests)"
+  },
+  {
+   "checks": [
+    {
+     "check": "fe_tests",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-040",
+   "pass": true,
+   "text": "full frontend tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "fe_check",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-041",
+   "pass": true,
+   "text": "svelte-check zero errors"
+  },
+  {
+   "checks": [
+    {
+     "check": "fe_build",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-042",
+   "pass": true,
+   "text": "frontend build passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "py_targeted",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-043",
+   "pass": true,
+   "text": "targeted Python tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "py_full",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-044",
+   "pass": true,
+   "text": "full Python regression passes (inherited CAP-003 policy)"
+  },
+  {
+   "checks": [
+    {
+     "check": "lint",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-045",
+   "pass": true,
+   "text": "ruff and pip check pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "mutation_log",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-046",
+   "pass": true,
+   "text": "mutation controls caught and restored (18)"
+  },
+  {
+   "checks": [
+    {
+     "check": "ci_untouched",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-047",
+   "pass": true,
+   "text": "CI untouched"
+  },
+  {
+   "checks": [
+    {
+     "check": "protected_final",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-048",
+   "pass": true,
+   "text": "protected artifact audit clean"
+  },
+  {
+   "checks": [
+    {
+     "check": "lock_ok",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-049",
+   "pass": true,
+   "text": "frozen method lock verifies"
+  },
+  {
+   "checks": [
+    {
+     "check": "task_pass",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-050",
+   "pass": true,
+   "text": "UFL-LITE-002 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "gate_pass",
+     "pass": true
+    }
+   ],
+   "id": "UFLG1-051",
+   "pass": true,
+   "text": "UFLG1 PASS"
+  }
+ ],
+ "criteria_count": 51,
+ "failed": [],
+ "gate": "UFLG1",
+ "mode": "FINAL"
+}
