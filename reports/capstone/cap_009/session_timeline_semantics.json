@@ -1,0 +1,14 @@
+{
+  "device_event_count": 6,
+  "not_websocket_byte_replay": true,
+  "sequence_ordered": true,
+  "source_event_count": 183,
+  "source_kinds": [
+    "CONTEXT_SNAPSHOT",
+    "INFERENCE",
+    "MONITORING_STATE_CHANGE",
+    "QUALITY_CHANGE"
+  ],
+  "status": "PASS",
+  "timeline_version": "CAPSTONE_SESSION_TIMELINE_V1"
+}

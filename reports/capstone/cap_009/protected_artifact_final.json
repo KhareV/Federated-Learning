@@ -1,0 +1,52 @@
+{
+  "changed_frontend_files": [
+    "frontend/src/lib/components/product/research/FactTable.svelte",
+    "frontend/src/lib/product/__tests__/claims-and-copy.test.ts",
+    "frontend/src/lib/product/__tests__/support.ts",
+    "frontend/src/lib/product/api.ts",
+    "frontend/src/lib/product/evidence-validation.ts",
+    "frontend/src/lib/product/federation/__tests__/static-audit.test.ts",
+    "frontend/src/lib/product/history/__tests__/evidence.test.ts",
+    "frontend/src/lib/product/history/types.ts",
+    "frontend/src/lib/product/research/__tests__/evidence.test.ts",
+    "frontend/src/lib/product/research/types.ts",
+    "frontend/src/routes/app/history/+page.svelte",
+    "frontend/src/routes/app/history/[session_id]/+page.svelte",
+    "frontend/src/routes/app/research/fl/+page.svelte",
+    "frontend/src/routes/app/research/ml/+page.svelte"
+  ],
+  "entry_audit_unchanged": true,
+  "entry_sha": "bdc16611290d371abbcca582920086dcfe4d49a8",
+  "frontend_predecessor_lock_drift": [],
+  "head_sha": "b0e33e1029431432d6ea368755c2a3583dfd2b8e",
+  "named_component_drift": [],
+  "prior_locks_verified": {
+    "cap001": true,
+    "cap002": true,
+    "cap003": true,
+    "cap004": true,
+    "cap005": true,
+    "cap006": true,
+    "cap007": true,
+    "cap008": true,
+    "capstone_ui_v1": true,
+    "capstone_ui_v1_1": true,
+    "fedprox_mu_v2": true,
+    "fl_init_v2": true,
+    "v2_fl_wearable_system": true
+  },
+  "protected_drift": [],
+  "protocol": {
+    "bound_files": 27,
+    "failures": [],
+    "lock_sha256": "3928739b0e81b1693c00a13a2bc60eec93edf58eaa6a04fb8f53bfbfb127e705",
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "ui_successor": {
+    "bound_files": 230,
+    "changed_files": 14,
+    "lock_sha256": "07537fdcff516cd0659f959e7b85f03178f6de70877abd41d448b2911789e0e2",
+    "status": "PASS"
+  }
+}

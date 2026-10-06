@@ -1,0 +1,11 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1,ENGINEERING_PROTOCOL,CAP-009,FROZEN_ENGINEERING_PROTOCOL,,artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.lock.json,Prospective CAPG8 method with 145 frozen criteria and eight pure post-freeze amendments.
+CAPSTONE_PRODUCT_API_V1_3,ADDITIVE_API_SUCCESSOR,CAP-009,FROZEN_ENGINEERING_IMPLEMENTATION,CAPSTONE_PRODUCT_API_V1_2,api/product_app_v1_3.py,Exactly four owner-scoped/read-only evidence GET routes; V1_2 unchanged.
+CAPSTONE_SESSION_EVIDENCE_STORE_V1,ENGINEERING_IMPLEMENTATION,CAP-009,FROZEN_ENGINEERING_IMPLEMENTATION,,capstone_persistence/session_evidence_store.py,Companion connection to existing SQLite schema; only summary rows writable.
+CAPSTONE_SESSION_SUMMARY_V1,ENGINEERING_EVIDENCE_MODEL,CAP-009,FROZEN_ENGINEERING_INTERFACE,,product/history/models.py,Version SESSION_SUMMARY_V1_INFERRED_WINDOWS with persisted-inference count bases.
+CAPSTONE_SESSION_TIMELINE_V1,ENGINEERING_EVIDENCE_MODEL,CAP-009,FROZEN_ENGINEERING_INTERFACE,,product/history/models.py,Typed source and product-clock timelines; projected context only.
+CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1,FROZEN_PRESENTATION_CATALOG,CAP-009,FROZEN_READ_ONLY_PRESENTATION,,artifacts/capstone/CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1.lock.json,Hash-bound exact facts copied from 22 frozen summary sources.
+CAPSTONE_RESEARCH_EVIDENCE_SERVICE_V1,READ_ONLY_SERVICE,CAP-009,FROZEN_ENGINEERING_IMPLEMENTATION,,product/research/service.py,Typed ML and FL views; no scientific execution.
+CAPSTONE_UI_V1_2,UI_SUCCESSOR_LOCK,CAP-009,FROZEN_ENGINEERING_INTERFACE,CAPSTONE_UI_V1_1,artifacts/capstone/CAPSTONE_UI_V1_2.lock.json,Binds complete existing SvelteKit frontend including history and research additions.
+CAPSTONE_HISTORY_UI_V1,ENGINEERING_IMPLEMENTATION,CAP-009,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/routes/app/history/[session_id]/+page.svelte,Owner-scoped persisted session evidence view; no personal training.
+CAPSTONE_RESEARCH_UI_V1,ENGINEERING_IMPLEMENTATION,CAP-009,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/routes/app/research/ml/+page.svelte,Read-only ML and FL research pages bound by UI successor.

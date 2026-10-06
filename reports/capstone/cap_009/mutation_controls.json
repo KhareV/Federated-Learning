@@ -1,0 +1,79 @@
+{
+  "control_count": 18,
+  "controls": [
+    {
+      "caught": true,
+      "mutation": "quality_change_count_as_window_count"
+    },
+    {
+      "caught": true,
+      "mutation": "total_windows_label_static_guard_probe"
+    },
+    {
+      "caught": true,
+      "mutation": "raw_context_projection_probe"
+    },
+    {
+      "caught": true,
+      "mutation": "merged_product_and_source_clock_probe"
+    },
+    {
+      "caught": true,
+      "mutation": "null_preview_gap_to_zero_probe"
+    },
+    {
+      "caught": true,
+      "mutation": "failed_session_summary_guard"
+    },
+    {
+      "caught": true,
+      "mutation": "cross_user_summary_guard"
+    },
+    {
+      "caught": true,
+      "mutation": "model_promotion_rewrite"
+    },
+    {
+      "caught": true,
+      "mutation": "release_overwrites_historical_negative"
+    },
+    {
+      "caught": true,
+      "mutation": "engineering_demo_inserted_in_scientific_series"
+    },
+    {
+      "caught": true,
+      "mutation": "fedprox_generally_superior_copy"
+    },
+    {
+      "caught": true,
+      "mutation": "secagg_dp_claim"
+    },
+    {
+      "caught": true,
+      "mutation": "candidate_deployed_copy"
+    },
+    {
+      "caught": true,
+      "mutation": "hardcoded_scientific_metric"
+    },
+    {
+      "caught": true,
+      "mutation": "research_service_torch_import"
+    },
+    {
+      "caught": true,
+      "mutation": "heldout_prediction_csv_access"
+    },
+    {
+      "caught": true,
+      "mutation": "federated_default_rewrite"
+    },
+    {
+      "caught": true,
+      "mutation": "personal_model_button"
+    }
+  ],
+  "scope": "in-memory negative probes plus named behavioral tests; no tracked artifact mutated",
+  "status": "PASS"
+}

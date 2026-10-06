@@ -1,0 +1,83 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "known_signature": true,
+      "passed": false,
+      "returncode": 1
+    },
+    {
+      "attempt": 2,
+      "known_signature": true,
+      "passed": false,
+      "returncode": 1
+    },
+    {
+      "attempt": 3,
+      "known_signature": true,
+      "passed": false,
+      "returncode": 1
+    },
+    {
+      "attempt": 4,
+      "known_signature": false,
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "attempt": 5,
+      "known_signature": false,
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "attempt": 6,
+      "known_signature": true,
+      "passed": false,
+      "returncode": 1
+    },
+    {
+      "attempt": 7,
+      "known_signature": false,
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "attempt": 8,
+      "known_signature": true,
+      "passed": false,
+      "returncode": 1
+    },
+    {
+      "attempt": 9,
+      "known_signature": false,
+      "passed": true,
+      "returncode": 0
+    },
+    {
+      "attempt": 10,
+      "known_signature": true,
+      "passed": false,
+      "returncode": 1
+    },
+    {
+      "attempt": 11,
+      "known_signature": true,
+      "passed": false,
+      "returncode": 1
+    },
+    {
+      "attempt": 12,
+      "known_signature": false,
+      "passed": true,
+      "returncode": 0
+    }
+  ],
+  "frozen_monitoring_files_modified": false,
+  "full_suite_signature": "AssertionError: assert (789 > 100 and False)",
+  "isolated_pass_observed": true,
+  "only_known_failure_signature": true,
+  "prior_documentation": "reports/capstone/cap_004/preexisting_cap003_flake.json",
+  "status": "PASS_INHERITED_FLAKE_POLICY",
+  "test": "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers"
+}

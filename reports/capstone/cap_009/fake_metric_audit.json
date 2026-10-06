@@ -1,0 +1,9 @@
+{
+  "dynamic_numeric_values_in_frontend": false,
+  "fact_table_source": "GET /product/v1/research/ml|fl",
+  "runtime_fact_parsers": [
+    "frontend/src/lib/product/research/types.ts",
+    "frontend/src/lib/product/evidence-validation.ts"
+  ],
+  "status": "PASS"
+}

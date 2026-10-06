@@ -1,0 +1,35 @@
+{
+  "scientific_fl_phases": [
+    "V2-FL-001",
+    "V2-FL-002",
+    "V2-FL-003",
+    "V2-FL-EVAL-001",
+    "V2-FL-004"
+  ],
+  "source_count": 22,
+  "sources": {
+    "artifacts/CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+    "reports/model_v2/v2_007/historical_reference_metrics.json": "404105557630e1ceefa228338fa8269dcbd4b6e99bcc8ea07b68a7c8f305e555",
+    "reports/model_v2/v2_007/promotion_decision.json": "cc2013973752923db9d6477dc9ba7273b661a0b72a5e1ddcc2cdb9892fd2cf29",
+    "reports/model_v2/v2_008/model_v2_final_verification.json": "9fd6ece1c47e7654e6ff1661f42f34ee508f4ac2184f201484350437d446f670",
+    "reports/model_v2/v2_009/calibration_metrics.json": "84af1cd41f80a9428aca4de7fcc51bda5c5b73a6ca04e44f9a4f13291cde431d",
+    "reports/model_v2/v2_010/incart_comparison.json": "cacca7173a6109c76b594378c09c71605f4786574338886ecca1d4e34a380aa3",
+    "reports/model_v2/v2_010/internal_comparison.json": "a46f493bc33ecc891a834665ee95715c5db503b63f2c352ec33bdaf8ee49b84e",
+    "reports/model_v2/v2_010/runtime_acceptance_decision.json": "edd768c1cfe10424423b6710c06fde20d5b14d26b97d3b54933e12af01c755e1",
+    "reports/model_v2/v2_fl_001/fl_iid_model_v2_result.json": "33004eccf78507a31c5870e622512f69493d03b4e14ee0dbed8013af5076e5a4",
+    "reports/model_v2/v2_fl_001/v1_vs_v2_iid_comparison.json": "6ecde676c7d9249e4848af3ab6edb4a05ef5bf00dc35d8e5b525035e3c1e3595",
+    "reports/model_v2/v2_fl_002/results_table.json": "eb778ef499d7f707766e475d8dcadb3d8dfc28f1ab3c394cbbc8ff4a0da2b3c1",
+    "reports/model_v2/v2_fl_003/fedavg_vs_fedprox_comparison.json": "8b0b2181ac874500c13cd36c6e2ecb544865f87d61a8729e9a942e4a7f73ffad",
+    "reports/model_v2/v2_fl_003/selection_audit.json": "76366787f79e0b6293f963315f5cca2c0d66e124ca80ff9ad6ba9cbe68308d68",
+    "reports/model_v2/v2_fl_004/aggregate_correctness.json": "81cb7ba1e717c3cc48433f5b431271fbbbbe4ddc2f76dec167a0ed98e518086e",
+    "reports/model_v2/v2_fl_004/overhead_summary.json": "face2227a069e76ba4f27d1b2e3b53012b2f8fa73810ee645a78d63f2c899537",
+    "reports/model_v2/v2_fl_004/privacy_claim_audit.json": "c128fe3a81b4dd083b61ed9fa22dda04688e92a342b384274aeaaf6b4fe523a0",
+    "reports/model_v2/v2_fl_004/server_visibility_audit.json": "900960f6a674426c7c3cea477540e8f865eda37ef542edc31dccfd17c77820fc",
+    "reports/model_v2/v2_fl_eval_001/final_handoff.md": "51ec142692f2775c5b57a1657dc33abcbb6c8c135ad4d122dde6d42b57f52cb1",
+    "reports/model_v2/v2_fl_eval_001/incart_statistics.json": "cb181f645900770e5e1ca70c9a9248b342e95527430f0abaf2e1bf350eec6264",
+    "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json": "b5364f1a84e9f981f1f07572838fe06f67e1e8396923ca0d81d506f5a8206d7d",
+    "reports/model_v2/v2_rel_001/system_v2_release_decision.json": "69a7bcdc43670c52dcdbb9e3e4a9795ebb79366081850a7325abee00e0ce9185",
+    "reports/model_v2/v2_rel_001/system_v2_release_manifest.json": "97de2601701e9f869d6742b74cbb5dc935a621e6c4c59f5e9c52d8ff6ff4a445"
+  },
+  "status": "PASS"
+}

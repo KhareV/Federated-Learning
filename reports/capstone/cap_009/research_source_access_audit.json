@@ -1,0 +1,31 @@
+{
+  "catalog_builder_allowlist": [
+    "artifacts/CAL_V2.json",
+    "reports/model_v2/v2_007/historical_reference_metrics.json",
+    "reports/model_v2/v2_007/promotion_decision.json",
+    "reports/model_v2/v2_008/model_v2_final_verification.json",
+    "reports/model_v2/v2_009/calibration_metrics.json",
+    "reports/model_v2/v2_010/incart_comparison.json",
+    "reports/model_v2/v2_010/internal_comparison.json",
+    "reports/model_v2/v2_010/runtime_acceptance_decision.json",
+    "reports/model_v2/v2_fl_001/fl_iid_model_v2_result.json",
+    "reports/model_v2/v2_fl_001/v1_vs_v2_iid_comparison.json",
+    "reports/model_v2/v2_fl_002/results_table.json",
+    "reports/model_v2/v2_fl_003/fedavg_vs_fedprox_comparison.json",
+    "reports/model_v2/v2_fl_003/selection_audit.json",
+    "reports/model_v2/v2_fl_004/aggregate_correctness.json",
+    "reports/model_v2/v2_fl_004/overhead_summary.json",
+    "reports/model_v2/v2_fl_004/privacy_claim_audit.json",
+    "reports/model_v2/v2_fl_004/server_visibility_audit.json",
+    "reports/model_v2/v2_fl_eval_001/final_handoff.md",
+    "reports/model_v2/v2_fl_eval_001/incart_statistics.json",
+    "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json",
+    "reports/model_v2/v2_rel_001/system_v2_release_decision.json",
+    "reports/model_v2/v2_rel_001/system_v2_release_manifest.json"
+  ],
+  "named_test": "test_catalog_builder_only_reads_approved_summary_files",
+  "prediction_csv_accessed": false,
+  "raw_biomedical_data_accessed": false,
+  "scientific_execution": false,
+  "status": "PASS"
+}

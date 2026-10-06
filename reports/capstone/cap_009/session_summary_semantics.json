@@ -1,0 +1,46 @@
+{
+  "database_relational_checks": {
+    "completed": true,
+    "disconnects": true,
+    "duration": true,
+    "hr_stats": true,
+    "one_summary_row": true,
+    "preview_stored": true,
+    "quality_counts": true,
+    "reconnects": true,
+    "source_timeline_count": true,
+    "spo2_stats": true,
+    "state_counts": true,
+    "windows_inferred": true
+  },
+  "quality_change_rows_not_used_as_window_count": 8,
+  "status": "PASS",
+  "summary": {
+    "claim_boundary": "PERSISTED_RESEARCH_ENGINEERING_SESSION_SUMMARY_NOT_CLINICAL",
+    "disconnect_count": 1,
+    "duration_basis": "PRODUCT_LIFECYCLE_CLOCK",
+    "duration_ms": 3887,
+    "generated_at_us": 1791237199471467,
+    "hr_max": 73.89162561576354,
+    "hr_mean": 72.0523009106951,
+    "hr_min": 70.09345794392523,
+    "quality_counts": {
+      "VALID": 86
+    },
+    "quality_counts_basis": "PERSISTED_INFERENCE_EVENTS",
+    "reconnect_count": 1,
+    "session_id": "SESS-940efa58882243eeb5d96179fa2dea66",
+    "spo2_max": 97.9,
+    "spo2_mean": 97.89999999999989,
+    "spo2_min": 97.9,
+    "state_counts": {
+      "CONTEXT_UNAVAILABLE": 20,
+      "NORMAL_MONITORED_PATTERN": 66
+    },
+    "state_counts_basis": "PERSISTED_INFERENCE_EVENTS",
+    "summary_version": "SESSION_SUMMARY_V1_INFERRED_WINDOWS",
+    "windows_inferred": 86,
+    "windows_inferred_basis": "PERSISTED_INFERENCE_EVENTS"
+  },
+  "summary_row_count": 1
+}

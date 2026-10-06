@@ -1,0 +1,29 @@
+{
+  "added_routes": [
+    "GET /product/v1/sessions/{id}/summary",
+    "GET /product/v1/sessions/{id}/timeline",
+    "GET /product/v1/research/ml",
+    "GET /product/v1/research/fl"
+  ],
+  "implementation": "CAPSTONE_PRODUCT_API_V1_3",
+  "status": "PASS",
+  "system_identity": {
+    "api_contract_version": "API_SCHEMA_V1",
+    "auth_provider": "DEMO",
+    "auth_status": "CONFIGURED",
+    "calibration_id": "CAL_V2",
+    "capstone_protocol": "CAPSTONE_PRODUCT_PROTOCOL_V1",
+    "claim": "research prototype; simulated device; not diagnostic; no clinical claim",
+    "demo_mode": true,
+    "federation_runtime": "ENABLED_ENGINEERING",
+    "hardware_mode": "SIMULATED_ONLY",
+    "model_id": "MODEL_V2_FINAL",
+    "monitoring_protocol": "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1",
+    "persistence_mode": "SQLITE",
+    "physical_hardware_available": false,
+    "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_3",
+    "product_api_version": "PRODUCT_API_V2",
+    "software_system": "SOFTWARE_SYSTEM_V2"
+  },
+  "v1_2_sha256": "409b0e28257a555ac0e300c7c3f2ea8ccd4e3743f84fd2feab2bae2279b724d0"
+}

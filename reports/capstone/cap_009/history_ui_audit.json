@@ -1,0 +1,23 @@
+{
+  "count_basis": "PERSISTED_INFERENCE_EVENTS",
+  "detail": {
+    "count_basis_visible": true,
+    "name": "history-detail",
+    "preview_count": 1,
+    "preview_svg_paths": 34,
+    "probability_copy": true,
+    "summary_status": 200,
+    "time_domain_separate": true,
+    "timeline_status": 200
+  },
+  "list": {
+    "listed": true,
+    "name": "history-list",
+    "session_id": "SESS-940efa58882243eeb5d96179fa2dea66"
+  },
+  "status": "PASS",
+  "time_domain_separation": {
+    "device_lifecycle": "PRODUCT_CLOCK",
+    "source_timeline": "SOURCE_TIMELINE"
+  }
+}

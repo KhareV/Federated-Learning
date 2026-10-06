@@ -1,0 +1,22 @@
+{
+  "catalog_digest_fl": "42c95668ded5a864be6af8a46cf0fd4e122c817c791173fb7be5e5fa372f88d7",
+  "catalog_digest_ml": "04fa41fd91ca9c7899ae52c29052dc648624914bedffc8e84b97712832511608",
+  "fl": {
+    "engineering_separate": true,
+    "fedprox_caveat": true,
+    "name": "research-fl",
+    "phases": true,
+    "provenance": true,
+    "secagg_caveat": true,
+    "status": 200
+  },
+  "ml": {
+    "calibration_caveat": true,
+    "name": "research-ml",
+    "promotion": true,
+    "provenance": true,
+    "software_release": true,
+    "status": 200
+  },
+  "status": "PASS"
+}

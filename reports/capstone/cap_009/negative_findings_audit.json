@@ -1,0 +1,33 @@
+{
+  "fedprox_no_general_win": true,
+  "ml_limitations": [
+    "MODEL_V2_NOT_PROMOTED_RELEASE_CI remains true: the release-seed paired VALIDATION CI lower bound crossed zero; permanent historical negative finding, not rewritten",
+    "INTERNAL_TEST has only six eligible contributing patient groups",
+    "V2-010 INTERNAL_TEST/INCART/NSTDB evidence is post-freeze second-look evidence, not untouched validation",
+    "INCART FL evaluation is project-exposed external second-look evidence",
+    "QUALITY_V1 does not reliably hard-fail a raw stuck-nonzero ECG source because of the frozen preprocessing composition (not repaired here)",
+    "CAL_V2 is MIT-BIH source-domain calibration only",
+    "No physical wearable validation exists",
+    "SecAgg evidence is a narrow protected-aggregation-interface result, not a complete privacy guarantee",
+    "CLEAN_CLONE_GATING_V1 excluded raw-data-dependent tests from the clean-software claim when their untracked inputs were absent"
+  ],
+  "no_physical_wearable": true,
+  "secagg_unsupported_claims": [
+    "anonymity",
+    "differential privacy",
+    "model-inversion resistance",
+    "membership-inference resistance",
+    "malicious-client resistance",
+    "transport security",
+    "TLS guarantees",
+    "authentication",
+    "authorization",
+    "OS/process isolation",
+    "host isolation",
+    "HIPAA compliance",
+    "hospital privacy",
+    "institution-scale security",
+    "production security certification"
+  ],
+  "status": "PASS"
+}

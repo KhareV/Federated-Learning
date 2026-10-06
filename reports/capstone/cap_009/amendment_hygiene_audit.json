@@ -1,0 +1,51 @@
+{
+  "canonical_result_evidence_in_amendment_commit": false,
+  "dedicated_commits": {
+    "14c9a37": [
+      "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_6.json",
+      "tests/test_capstone_lifecycle.py"
+    ],
+    "36ff4fad77ed1ea39ff5878ba6e84a359560bf3c": [
+      "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_7.json",
+      "scripts/cap_009_build_evidence.py",
+      "scripts/cap_009_evaluate_gate.py",
+      "scripts/cap_009_flake_probe.py",
+      "scripts/cap_009_mutation_controls.py",
+      "scripts/cap_009_test_report.py",
+      "scripts/verify_capstone_history_evidence_protocol_v1.py"
+    ],
+    "40b9f43": [
+      "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_1.json",
+      "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json",
+      "frontend/src/routes/app/research/ml/+page.svelte",
+      "scripts/verify_capstone_history_evidence_protocol_v1.py"
+    ],
+    "b0e33e1029431432d6ea368755c2a3583dfd2b8e": [
+      "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_8.json",
+      "scripts/cap_009_build_evidence.py"
+    ],
+    "d7b6e8f": [
+      "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_2.json",
+      "scripts/verify_capstone_history_evidence_protocol_v1.py"
+    ],
+    "dbe1c05": [
+      "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_3.json",
+      "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json",
+      "frontend/src/routes/app/research/ml/+page.svelte"
+    ],
+    "ed12ff7": [
+      "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_4.json",
+      "tests/test_capstone_lifecycle.py"
+    ],
+    "f269860": [
+      "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_5.json",
+      "scripts/cap_009_cdp_driver.mjs",
+      "scripts/run_capstone_history_e2e.py"
+    ]
+  },
+  "failed_browser_attempts_preserved": [
+    "browser_failed_attempt_1.json",
+    "browser_failed_attempt_2.json"
+  ],
+  "status": "PASS"
+}

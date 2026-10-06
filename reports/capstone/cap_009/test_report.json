@@ -1,0 +1,36 @@
+{
+  "ci_queried": false,
+  "ci_triggered": false,
+  "frontend": {
+    "build": "PASS",
+    "new_dependencies": 0,
+    "npm_ci": "PASS",
+    "svelte_check": "PASS",
+    "svelte_warnings": 112,
+    "vitest_passed": 18,
+    "vitest_skipped": 3
+  },
+  "pip_check": "No broken requirements found.",
+  "python_final_policy_run": {
+    "isolated_flake_attempts": 12,
+    "isolated_flake_passes": 5,
+    "known_flake_deselected": 1,
+    "passed": 2958,
+    "skipped": 1
+  },
+  "python_full_attempt_1": {
+    "cause": "CAP-001 lifecycle guard expected CAP-009 NOT_STARTED",
+    "log_verified": true,
+    "result": "3 failed, 2956 passed, 1 skipped"
+  },
+  "python_full_attempt_2": {
+    "cause": "documented inherited CAP-003 journal-close timing race",
+    "log_verified": true,
+    "result": "1 failed, 2958 passed, 1 skipped"
+  },
+  "ruff": "All checks passed!",
+  "status": "PASS",
+  "targeted_backend": "25 passed",
+  "targeted_lifecycle_after_amendments": "21 passed",
+  "targeted_monitoring_regression": "14 passed"
+}

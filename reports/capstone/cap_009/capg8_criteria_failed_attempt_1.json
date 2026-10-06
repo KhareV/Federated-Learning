@@ -1,0 +1,1521 @@
+{
+  "all_decided_pass": false,
+  "criteria": [
+    {
+      "category": "prior",
+      "criterion": 1,
+      "evidence": [
+        "prior_lock_verification.json"
+      ],
+      "pass": true,
+      "text": "CAP-001/CAPG0 PASS"
+    },
+    {
+      "category": "prior",
+      "criterion": 2,
+      "evidence": [
+        "prior_lock_verification.json"
+      ],
+      "pass": true,
+      "text": "CAP-002/CAPG1 PASS"
+    },
+    {
+      "category": "prior",
+      "criterion": 3,
+      "evidence": [
+        "prior_lock_verification.json"
+      ],
+      "pass": true,
+      "text": "CAP-003/CAPG2 PASS"
+    },
+    {
+      "category": "prior",
+      "criterion": 4,
+      "evidence": [
+        "prior_lock_verification.json"
+      ],
+      "pass": true,
+      "text": "CAP-004/CAPG3 PASS"
+    },
+    {
+      "category": "prior",
+      "criterion": 5,
+      "evidence": [
+        "prior_lock_verification.json"
+      ],
+      "pass": true,
+      "text": "CAP-005/CAPG4 PASS"
+    },
+    {
+      "category": "prior",
+      "criterion": 6,
+      "evidence": [
+        "prior_lock_verification.json"
+      ],
+      "pass": true,
+      "text": "CAP-006/CAPG5 PASS"
+    },
+    {
+      "category": "prior",
+      "criterion": 7,
+      "evidence": [
+        "prior_lock_verification.json"
+      ],
+      "pass": true,
+      "text": "CAP-007/CAPG6 PASS"
+    },
+    {
+      "category": "prior",
+      "criterion": 8,
+      "evidence": [
+        "prior_lock_verification.json"
+      ],
+      "pass": true,
+      "text": "CAP-008/CAPG7 PASS"
+    },
+    {
+      "category": "prior",
+      "criterion": 9,
+      "evidence": [
+        "prior_lock_verification.json"
+      ],
+      "pass": true,
+      "text": "all prior locks/amendments verify"
+    },
+    {
+      "category": "protect",
+      "criterion": 10,
+      "evidence": [
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "entry audit immutable"
+    },
+    {
+      "category": "protect",
+      "criterion": 11,
+      "evidence": [
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "scientific artifacts zero drift"
+    },
+    {
+      "category": "protect",
+      "criterion": 12,
+      "evidence": [
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "released runtime zero drift"
+    },
+    {
+      "category": "protect",
+      "criterion": 13,
+      "evidence": [
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "CAP-006 zero drift"
+    },
+    {
+      "category": "protect",
+      "criterion": 14,
+      "evidence": [
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "CAP-007 zero drift"
+    },
+    {
+      "category": "protect",
+      "criterion": 15,
+      "evidence": [
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "CAP-008 federation behavior zero drift"
+    },
+    {
+      "category": "api",
+      "criterion": 16,
+      "evidence": [
+        "api_route_audit.json",
+        "canonical_history_browser_e2e.json"
+      ],
+      "pass": true,
+      "text": "API V1_2 untouched"
+    },
+    {
+      "category": "api",
+      "criterion": 17,
+      "evidence": [
+        "api_route_audit.json",
+        "canonical_history_browser_e2e.json"
+      ],
+      "pass": true,
+      "text": "additive V1_3 implemented"
+    },
+    {
+      "category": "api",
+      "criterion": 18,
+      "evidence": [
+        "api_route_audit.json",
+        "canonical_history_browser_e2e.json"
+      ],
+      "pass": true,
+      "text": "exactly four CAP-009 routes added"
+    },
+    {
+      "category": "summary",
+      "criterion": 19,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "no schema change"
+    },
+    {
+      "category": "summary",
+      "criterion": 20,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "summary uses existing session_summaries table"
+    },
+    {
+      "category": "summary",
+      "criterion": 21,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "summary only COMPLETED"
+    },
+    {
+      "category": "summary",
+      "criterion": 22,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "noncompleted summary 409"
+    },
+    {
+      "category": "summary",
+      "criterion": 23,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "cross-user summary 403"
+    },
+    {
+      "category": "summary",
+      "criterion": 24,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "unknown summary 404"
+    },
+    {
+      "category": "summary",
+      "criterion": 25,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "summary materialization atomic/idempotent"
+    },
+    {
+      "category": "summary",
+      "criterion": 26,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "exactly one summary row after repeated reads"
+    },
+    {
+      "category": "summary",
+      "criterion": 27,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "summary survives restart"
+    },
+    {
+      "category": "summary",
+      "criterion": 28,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "duration basis = PRODUCT_LIFECYCLE_CLOCK"
+    },
+    {
+      "category": "summary",
+      "criterion": 29,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "windows_inferred = inference-event count"
+    },
+    {
+      "category": "summary",
+      "criterion": 30,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "state counts based on inference events"
+    },
+    {
+      "category": "summary",
+      "criterion": 31,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "quality counts based on inference events"
+    },
+    {
+      "category": "summary",
+      "criterion": 32,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "quality-change rows not misused as window counts"
+    },
+    {
+      "category": "summary",
+      "criterion": 33,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "HR stats from valid persisted ECG HR only"
+    },
+    {
+      "category": "summary",
+      "criterion": 34,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "SpO2 stats from spo2_valid rows only"
+    },
+    {
+      "category": "summary",
+      "criterion": 35,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "disconnect count exact"
+    },
+    {
+      "category": "summary",
+      "criterion": 36,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "reconnect count exact"
+    },
+    {
+      "category": "summary",
+      "criterion": 37,
+      "evidence": [
+        "session_summary_semantics.json"
+      ],
+      "pass": true,
+      "text": "missing HR/SpO2 remains null"
+    },
+    {
+      "category": "timeline",
+      "criterion": 38,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "timeline owner-only"
+    },
+    {
+      "category": "timeline",
+      "criterion": 39,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "source timeline typed"
+    },
+    {
+      "category": "timeline",
+      "criterion": 40,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "source timeline sequence ordered"
+    },
+    {
+      "category": "timeline",
+      "criterion": 41,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "device lifecycle separate"
+    },
+    {
+      "category": "timeline",
+      "criterion": 42,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "source/product time domains never merged"
+    },
+    {
+      "category": "timeline",
+      "criterion": 43,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "raw inference context_json never exposed"
+    },
+    {
+      "category": "timeline",
+      "criterion": 44,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "projected context_snapshots used instead"
+    },
+    {
+      "category": "timeline",
+      "criterion": 45,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "bounded waveform preview returned"
+    },
+    {
+      "category": "timeline",
+      "criterion": 46,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "preview <=4000 points"
+    },
+    {
+      "category": "timeline",
+      "criterion": 47,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "preview gaps remain null"
+    },
+    {
+      "category": "timeline",
+      "criterion": 48,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "preview labelled non-raw"
+    },
+    {
+      "category": "timeline",
+      "criterion": 49,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "history never enters FL buffer"
+    },
+    {
+      "category": "timeline",
+      "criterion": 50,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "no personal-model feature"
+    },
+    {
+      "category": "catalog",
+      "criterion": 51,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "research catalog deterministic"
+    },
+    {
+      "category": "catalog",
+      "criterion": 52,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "research catalog byte-identical across two builds"
+    },
+    {
+      "category": "catalog",
+      "criterion": 53,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "every displayed research fact has source provenance"
+    },
+    {
+      "category": "catalog",
+      "criterion": 54,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "every catalog source hash verified"
+    },
+    {
+      "category": "catalog",
+      "criterion": 55,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "no held-out prediction tables read"
+    },
+    {
+      "category": "catalog",
+      "criterion": 56,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "no raw biomedical data read"
+    },
+    {
+      "category": "catalog",
+      "criterion": 57,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "no model loading"
+    },
+    {
+      "category": "catalog",
+      "criterion": 58,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "no inference"
+    },
+    {
+      "category": "catalog",
+      "criterion": 59,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "no training"
+    },
+    {
+      "category": "catalog",
+      "criterion": 60,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "no bootstrap recomputation"
+    },
+    {
+      "category": "catalog",
+      "criterion": 61,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "no calibration fitting"
+    },
+    {
+      "category": "catalog",
+      "criterion": 62,
+      "evidence": [
+        "research_catalog_verification.json",
+        "research_catalog_build_1.json",
+        "research_catalog_build_2.json",
+        "research_source_access_audit.json"
+      ],
+      "pass": true,
+      "text": "no FL execution"
+    },
+    {
+      "category": "api",
+      "criterion": 63,
+      "evidence": [
+        "api_route_audit.json",
+        "canonical_history_browser_e2e.json"
+      ],
+      "pass": true,
+      "text": "ML route typed"
+    },
+    {
+      "category": "api",
+      "criterion": 64,
+      "evidence": [
+        "api_route_audit.json",
+        "canonical_history_browser_e2e.json"
+      ],
+      "pass": true,
+      "text": "FL route typed"
+    },
+    {
+      "category": "api",
+      "criterion": 65,
+      "evidence": [
+        "api_route_audit.json",
+        "canonical_history_browser_e2e.json"
+      ],
+      "pass": true,
+      "text": "research routes authenticated GLOBAL_READ"
+    },
+    {
+      "category": "api",
+      "criterion": 66,
+      "evidence": [
+        "api_route_audit.json",
+        "canonical_history_browser_e2e.json"
+      ],
+      "pass": true,
+      "text": "identity does not alter evidence"
+    },
+    {
+      "category": "ml",
+      "criterion": 67,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "MODEL_V2_NOT_PROMOTED_RELEASE_CI preserved"
+    },
+    {
+      "category": "ml",
+      "criterion": 68,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "promotion_eligible false preserved"
+    },
+    {
+      "category": "ml",
+      "criterion": 69,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED preserved"
+    },
+    {
+      "category": "ml",
+      "criterion": 70,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "historical promotion and later release explicitly separated"
+    },
+    {
+      "category": "ml",
+      "criterion": 71,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "MODEL_V2_FINAL current released default correctly shown"
+    },
+    {
+      "category": "ml",
+      "criterion": 72,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "MODEL_V2_FINAL not described as federated checkpoint"
+    },
+    {
+      "category": "ml",
+      "criterion": 73,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "CAL_V2 source-domain caveat visible"
+    },
+    {
+      "category": "ml",
+      "criterion": 74,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "V2-010 second-look role visible"
+    },
+    {
+      "category": "ml",
+      "criterion": 75,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "internal-test six-group limitation visible"
+    },
+    {
+      "category": "ml",
+      "criterion": 76,
+      "evidence": [
+        "ml_evidence_parity.json",
+        "promotion_release_reconciliation.json",
+        "negative_findings_audit.json"
+      ],
+      "pass": true,
+      "text": "no physical wearable validation claim"
+    },
+    {
+      "category": "fl",
+      "criterion": 77,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "V2-FL-001 scientific evidence present"
+    },
+    {
+      "category": "fl",
+      "criterion": 78,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "V2-FL-002 scientific evidence present"
+    },
+    {
+      "category": "fl",
+      "criterion": 79,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "V2-FL-003 scientific evidence present"
+    },
+    {
+      "category": "fl",
+      "criterion": 80,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "V2-FL-EVAL-001 scientific evidence present"
+    },
+    {
+      "category": "fl",
+      "criterion": 81,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "V2-FL-004 scientific evidence present"
+    },
+    {
+      "category": "fl",
+      "criterion": 82,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "V2-FL-005 excluded from scientific efficacy metrics"
+    },
+    {
+      "category": "fl",
+      "criterion": 83,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "V2-FL-005 labelled engineering demo if referenced"
+    },
+    {
+      "category": "fl",
+      "criterion": 84,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "FedProx mixed/no-general-promotion conclusion preserved"
+    },
+    {
+      "category": "fl",
+      "criterion": 85,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "SecAgg supported claim exact"
+    },
+    {
+      "category": "fl",
+      "criterion": 86,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "no DP claim"
+    },
+    {
+      "category": "fl",
+      "criterion": 87,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "no anonymity claim"
+    },
+    {
+      "category": "fl",
+      "criterion": 88,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "no hospital claim"
+    },
+    {
+      "category": "fl",
+      "criterion": 89,
+      "evidence": [
+        "fl_evidence_parity.json",
+        "v2_fl_005_separation_audit.json"
+      ],
+      "pass": true,
+      "text": "SecAgg overhead accounting boundary exact"
+    },
+    {
+      "category": "ui",
+      "criterion": 90,
+      "evidence": [
+        "ui_successor_audit.json"
+      ],
+      "pass": true,
+      "text": "CAPSTONE_UI_V1_1 preserved"
+    },
+    {
+      "category": "ui",
+      "criterion": 91,
+      "evidence": [
+        "ui_successor_audit.json"
+      ],
+      "pass": true,
+      "text": "CAPSTONE_UI_V1_2 successor frozen"
+    },
+    {
+      "category": "ui",
+      "criterion": 92,
+      "evidence": [
+        "ui_successor_audit.json"
+      ],
+      "pass": true,
+      "text": "no unaccounted frontend drift"
+    },
+    {
+      "category": "history_ui",
+      "criterion": 93,
+      "evidence": [
+        "history_ui_audit.json"
+      ],
+      "pass": true,
+      "text": "/app/history real"
+    },
+    {
+      "category": "history_ui",
+      "criterion": 94,
+      "evidence": [
+        "history_ui_audit.json"
+      ],
+      "pass": true,
+      "text": "/app/history/[session_id] real"
+    },
+    {
+      "category": "research_ui",
+      "criterion": 95,
+      "evidence": [
+        "research_ml_ui_audit.json",
+        "research_fl_ui_audit.json"
+      ],
+      "pass": false,
+      "text": "/app/research/ml real"
+    },
+    {
+      "category": "research_ui",
+      "criterion": 96,
+      "evidence": [
+        "research_ml_ui_audit.json",
+        "research_fl_ui_audit.json"
+      ],
+      "pass": false,
+      "text": "/app/research/fl real"
+    },
+    {
+      "category": "history_ui",
+      "criterion": 97,
+      "evidence": [
+        "history_ui_audit.json"
+      ],
+      "pass": true,
+      "text": "session summary UI basis labels correct"
+    },
+    {
+      "category": "timeline",
+      "criterion": 98,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "timeline time-domain disclosure visible"
+    },
+    {
+      "category": "timeline",
+      "criterion": 99,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "probability labelled research technical metadata"
+    },
+    {
+      "category": "timeline",
+      "criterion": 100,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "waveform preview real persisted preview"
+    },
+    {
+      "category": "history_e2e",
+      "criterion": 101,
+      "evidence": [
+        "canonical_history_browser_e2e.json",
+        "history_restart_e2e.json"
+      ],
+      "pass": true,
+      "text": "canonical history uses real monitoring flow"
+    },
+    {
+      "category": "history_e2e",
+      "criterion": 102,
+      "evidence": [
+        "canonical_history_browser_e2e.json",
+        "history_restart_e2e.json"
+      ],
+      "pass": true,
+      "text": "canonical summary equals DB evidence"
+    },
+    {
+      "category": "history_e2e",
+      "criterion": 103,
+      "evidence": [
+        "canonical_history_browser_e2e.json",
+        "history_restart_e2e.json"
+      ],
+      "pass": true,
+      "text": "canonical timeline equals DB evidence"
+    },
+    {
+      "category": "history_e2e",
+      "criterion": 104,
+      "evidence": [
+        "canonical_history_browser_e2e.json",
+        "history_restart_e2e.json"
+      ],
+      "pass": true,
+      "text": "history persists after backend restart"
+    },
+    {
+      "category": "timeline",
+      "criterion": 105,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "raw context withholding regression passes"
+    },
+    {
+      "category": "timeline",
+      "criterion": 106,
+      "evidence": [
+        "session_timeline_semantics.json",
+        "time_domain_audit.json",
+        "context_withholding_audit.json",
+        "waveform_preview_audit.json",
+        "history_ownership_audit.json"
+      ],
+      "pass": true,
+      "text": "cross-user history isolation passes"
+    },
+    {
+      "category": "research_e2e",
+      "criterion": 107,
+      "evidence": [
+        "canonical_research_browser_e2e.json"
+      ],
+      "pass": true,
+      "text": "research APIs use real catalog"
+    },
+    {
+      "category": "research_ui",
+      "criterion": 108,
+      "evidence": [
+        "research_ml_ui_audit.json",
+        "research_fl_ui_audit.json"
+      ],
+      "pass": false,
+      "text": "research browser pages use real APIs"
+    },
+    {
+      "category": "research_ui",
+      "criterion": 109,
+      "evidence": [
+        "research_ml_ui_audit.json",
+        "research_fl_ui_audit.json"
+      ],
+      "pass": false,
+      "text": "no hard-coded scientific dynamic metrics in frontend"
+    },
+    {
+      "category": "research_ui",
+      "criterion": 110,
+      "evidence": [
+        "research_ml_ui_audit.json",
+        "research_fl_ui_audit.json"
+      ],
+      "pass": false,
+      "text": "research provenance visible"
+    },
+    {
+      "category": "research_ui",
+      "criterion": 111,
+      "evidence": [
+        "research_ml_ui_audit.json",
+        "research_fl_ui_audit.json"
+      ],
+      "pass": false,
+      "text": "negative findings visible"
+    },
+    {
+      "category": "scope",
+      "criterion": 112,
+      "evidence": [
+        "claim_audit.json",
+        "fake_metric_audit.json",
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "no deploy/promote/model-selector controls"
+    },
+    {
+      "category": "scope",
+      "criterion": 113,
+      "evidence": [
+        "claim_audit.json",
+        "fake_metric_audit.json",
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "no candidate inference"
+    },
+    {
+      "category": "scope",
+      "criterion": 114,
+      "evidence": [
+        "claim_audit.json",
+        "fake_metric_audit.json",
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "no CAPSTONE_FL_SANDBOX_RUNTIME"
+    },
+    {
+      "category": "scope",
+      "criterion": 115,
+      "evidence": [
+        "claim_audit.json",
+        "fake_metric_audit.json",
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "no new FL experiment"
+    },
+    {
+      "category": "scope",
+      "criterion": 116,
+      "evidence": [
+        "claim_audit.json",
+        "fake_metric_audit.json",
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "no candidate metric"
+    },
+    {
+      "category": "scope",
+      "criterion": 117,
+      "evidence": [
+        "claim_audit.json",
+        "fake_metric_audit.json",
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "no session retraining"
+    },
+    {
+      "category": "scope",
+      "criterion": 118,
+      "evidence": [
+        "claim_audit.json",
+        "fake_metric_audit.json",
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "no personalized model"
+    },
+    {
+      "category": "scope",
+      "criterion": 119,
+      "evidence": [
+        "claim_audit.json",
+        "fake_metric_audit.json",
+        "protected_artifact_final.json"
+      ],
+      "pass": true,
+      "text": "no hardware"
+    },
+    {
+      "category": "offline",
+      "criterion": 120,
+      "evidence": [
+        "offline_network_audit.json",
+        "responsive_audit.json",
+        "accessibility_audit.json"
+      ],
+      "pass": true,
+      "text": "offline DEMO history works"
+    },
+    {
+      "category": "offline",
+      "criterion": 121,
+      "evidence": [
+        "offline_network_audit.json",
+        "responsive_audit.json",
+        "accessibility_audit.json"
+      ],
+      "pass": true,
+      "text": "offline DEMO research works"
+    },
+    {
+      "category": "offline",
+      "criterion": 122,
+      "evidence": [
+        "offline_network_audit.json",
+        "responsive_audit.json",
+        "accessibility_audit.json"
+      ],
+      "pass": true,
+      "text": "external network requests zero"
+    },
+    {
+      "category": "offline",
+      "criterion": 123,
+      "evidence": [
+        "offline_network_audit.json",
+        "responsive_audit.json",
+        "accessibility_audit.json"
+      ],
+      "pass": true,
+      "text": "no new npm dependency"
+    },
+    {
+      "category": "offline",
+      "criterion": 124,
+      "evidence": [
+        "offline_network_audit.json",
+        "responsive_audit.json",
+        "accessibility_audit.json"
+      ],
+      "pass": true,
+      "text": "responsive checks pass"
+    },
+    {
+      "category": "offline",
+      "criterion": 125,
+      "evidence": [
+        "offline_network_audit.json",
+        "responsive_audit.json",
+        "accessibility_audit.json"
+      ],
+      "pass": true,
+      "text": "accessibility engineering checks pass"
+    },
+    {
+      "category": "mutations",
+      "criterion": 126,
+      "evidence": [
+        "mutation_controls.json"
+      ],
+      "pass": true,
+      "text": "mutation controls all caught"
+    },
+    {
+      "category": "python",
+      "criterion": 127,
+      "evidence": [
+        "test_report.json",
+        "inherited_cap003_flake.json"
+      ],
+      "pass": true,
+      "text": "targeted backend tests pass"
+    },
+    {
+      "category": "frontend",
+      "criterion": 128,
+      "evidence": [
+        "test_report.json"
+      ],
+      "pass": true,
+      "text": "targeted frontend tests pass"
+    },
+    {
+      "category": "history_e2e",
+      "criterion": 129,
+      "evidence": [
+        "canonical_history_browser_e2e.json",
+        "history_restart_e2e.json"
+      ],
+      "pass": true,
+      "text": "real-backend integration passes"
+    },
+    {
+      "category": "history_e2e",
+      "criterion": 130,
+      "evidence": [
+        "canonical_history_browser_e2e.json",
+        "history_restart_e2e.json"
+      ],
+      "pass": true,
+      "text": "canonical browser history E2E passes"
+    },
+    {
+      "category": "research_e2e",
+      "criterion": 131,
+      "evidence": [
+        "canonical_research_browser_e2e.json"
+      ],
+      "pass": true,
+      "text": "canonical research browser E2E passes"
+    },
+    {
+      "category": "frontend",
+      "criterion": 132,
+      "evidence": [
+        "test_report.json"
+      ],
+      "pass": true,
+      "text": "CAP-008 regression passes"
+    },
+    {
+      "category": "python",
+      "criterion": 133,
+      "evidence": [
+        "test_report.json",
+        "inherited_cap003_flake.json"
+      ],
+      "pass": true,
+      "text": "monitoring regression passes"
+    },
+    {
+      "category": "python",
+      "criterion": 134,
+      "evidence": [
+        "test_report.json",
+        "inherited_cap003_flake.json"
+      ],
+      "pass": true,
+      "text": "prior capstone tests pass subject only to inherited documented flake policy"
+    },
+    {
+      "category": "python",
+      "criterion": 135,
+      "evidence": [
+        "test_report.json",
+        "inherited_cap003_flake.json"
+      ],
+      "pass": true,
+      "text": "full Python regression passes subject only to inherited documented flake policy"
+    },
+    {
+      "category": "frontend",
+      "criterion": 136,
+      "evidence": [
+        "test_report.json"
+      ],
+      "pass": true,
+      "text": "npm test passes"
+    },
+    {
+      "category": "frontend",
+      "criterion": 137,
+      "evidence": [
+        "test_report.json"
+      ],
+      "pass": true,
+      "text": "svelte-check zero errors"
+    },
+    {
+      "category": "frontend",
+      "criterion": 138,
+      "evidence": [
+        "test_report.json"
+      ],
+      "pass": true,
+      "text": "frontend build passes"
+    },
+    {
+      "category": "ruff",
+      "criterion": 139,
+      "evidence": [
+        "test_report.json"
+      ],
+      "pass": true,
+      "text": "ruff passes"
+    },
+    {
+      "category": "pip",
+      "criterion": 140,
+      "evidence": [
+        "test_report.json"
+      ],
+      "pass": true,
+      "text": "pip check passes"
+    },
+    {
+      "category": "ci",
+      "criterion": 141,
+      "evidence": [
+        "entry_audit.json",
+        "test_report.json"
+      ],
+      "pass": true,
+      "text": "CI not queried"
+    },
+    {
+      "category": "ci",
+      "criterion": 142,
+      "evidence": [
+        "entry_audit.json",
+        "test_report.json"
+      ],
+      "pass": true,
+      "text": "CI not triggered"
+    },
+    {
+      "category": "method",
+      "criterion": 143,
+      "evidence": [
+        "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.lock.json"
+      ],
+      "pass": true,
+      "text": "CAP-009 PASS"
+    },
+    {
+      "category": "method",
+      "criterion": 144,
+      "evidence": [
+        "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.lock.json"
+      ],
+      "pass": true,
+      "text": "CAPG8 PASS"
+    },
+    {
+      "category": "cap010",
+      "criterion": 145,
+      "evidence": [
+        "entry_audit.json"
+      ],
+      "pass": true,
+      "text": "CAP-010 NOT_STARTED"
+    }
+  ],
+  "criteria_count": 145,
+  "decided": 145,
+  "frontend_test_summary": {
+    "passed": 18,
+    "skipped": 3
+  },
+  "gate": "CAPG8",
+  "known_preexisting_flake_failures_in_full_run": [
+    "test_monitoring_completes_with_zero_subscribers"
+  ],
+  "regression_summary": {
+    "deselected_known_flake": 1,
+    "isolated_flake_passes": 5,
+    "passed": 2958,
+    "skipped": 1
+  },
+  "self_transition_note": "Criteria 143-144 authorize the result transition; the final registry is checked after committing PASS."
+}

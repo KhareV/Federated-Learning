@@ -1,0 +1,23 @@
+{
+  "bound_files": 230,
+  "changed_files": [
+    "frontend/src/lib/components/product/research/FactTable.svelte",
+    "frontend/src/lib/product/__tests__/claims-and-copy.test.ts",
+    "frontend/src/lib/product/__tests__/support.ts",
+    "frontend/src/lib/product/api.ts",
+    "frontend/src/lib/product/evidence-validation.ts",
+    "frontend/src/lib/product/federation/__tests__/static-audit.test.ts",
+    "frontend/src/lib/product/history/__tests__/evidence.test.ts",
+    "frontend/src/lib/product/history/types.ts",
+    "frontend/src/lib/product/research/__tests__/evidence.test.ts",
+    "frontend/src/lib/product/research/types.ts",
+    "frontend/src/routes/app/history/+page.svelte",
+    "frontend/src/routes/app/history/[session_id]/+page.svelte",
+    "frontend/src/routes/app/research/fl/+page.svelte",
+    "frontend/src/routes/app/research/ml/+page.svelte"
+  ],
+  "lock_sha256": "07537fdcff516cd0659f959e7b85f03178f6de70877abd41d448b2911789e0e2",
+  "new_npm_dependencies": [],
+  "predecessor_sha256": "4800834867d9c4f1dbc7a1e48d9d178f25cb2bc9f303d82daa98f65948f3cec4",
+  "status": "PASS"
+}
