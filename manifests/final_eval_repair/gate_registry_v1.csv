@@ -1,0 +1,2 @@
+gate_id,gate_name,purpose,prerequisite_tasks,required_tests,required_artifacts,pass_criteria,fail_criteria,recovery_action,blocks_tasks,status,evidence_path
+FERG0,Final Evaluator Presentation Repair Gate,Close the audit findings F-01..F-07 with permanent guards while leaving every backend/API/DB/FL/auth/scientific surface byte-identical.,FINAL-EVAL-REPAIR-001,TBD,TBD,TBD,TBD,TBD,NONE,NOT_STARTED,reports/final_eval_repair/fer_001/

@@ -1,0 +1,2 @@
+task_id,phase_family,task_name,prerequisites,gate_impact,status,implemented_at_commit,evidence_path,notes
+FINAL-EVAL-REPAIR-001,FINAL_EVALUATOR_READINESS_REPAIR,Evaluator-facing presentation / route-hygiene / documentation / guard repair,UFL-LITE-003,FERG0,IN_PROGRESS,,reports/final_eval_repair/fer_001/entry_audit.json,Bounded repair of FINAL_EVALUATOR_AUDIT_V1 findings F-01..F-07. Does NOT establish evaluator readiness; the unchanged audit must be rerun.

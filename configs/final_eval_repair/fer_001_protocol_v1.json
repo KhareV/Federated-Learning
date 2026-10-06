@@ -1,0 +1,450 @@
+{
+ "check_prefixes": {
+  "(none)": "evaluator check"
+ },
+ "ci": "not queried, not triggered",
+ "criteria_count": 51,
+ "entry": {
+  "entry_commit": "def8464",
+  "entry_sha": "5d40752442fd1a05dd2459dd216aff51fe4c022c"
+ },
+ "ferg0_criteria": [
+  {
+   "checks": [
+    "entry_audited"
+   ],
+   "id": "C01",
+   "text": "Entry audited at 5d40752: origin/main==HEAD, tags, UFL, UI V1..V1_4, Clerk and capstone locks verified"
+  },
+  {
+   "checks": [
+    "tags_unchanged"
+   ],
+   "id": "C02",
+   "text": "Historical tags unchanged (user-bound-fl-lite-v1, capstone-release-v1, capstone-clerk-connected-v1); no final/release/evaluator-ready tag created"
+  },
+  {
+   "checks": [
+    "ufl_state_preserved"
+   ],
+   "id": "C03",
+   "text": "UFL-LITE-001..003 PASS, UFLG0..2 PASS and their locks verify (with pure successor amendments only)"
+  },
+  {
+   "checks": [
+    "capstone_locks_verify"
+   ],
+   "id": "C04",
+   "text": "All capstone protocol locks and Clerk lineage verify"
+  },
+  {
+   "checks": [
+    "ui_predecessor_locks_identical"
+   ],
+   "id": "C05",
+   "text": "CAPSTONE_UI V1..V1_4 lock files byte-identical to entry"
+  },
+  {
+   "checks": [
+    "ui_v15_verifies"
+   ],
+   "id": "C06",
+   "text": "CAPSTONE_UI_V1_5 verifies (chains to V1_4, binds every frontend file) and V1..V1_4 verifiers pass successor-aware"
+  },
+  {
+   "checks": [
+    "no_new_dependency"
+   ],
+   "id": "C07",
+   "text": "No new npm dependency; package files unchanged"
+  },
+  {
+   "checks": [
+    "amendments_pure"
+   ],
+   "id": "C08",
+   "text": "Historical amendments are pure SUCCESSOR_COMPATIBILITY_ONLY with exact old/new SHA and no result evidence"
+  },
+  {
+   "checks": [
+    "f01_about_closed"
+   ],
+   "id": "C09",
+   "text": "F-01 CLOSED: About states the current engineering federation truth, no 'not yet enabled'"
+  },
+  {
+   "checks": [
+    "f02_landing_closed"
+   ],
+   "id": "C10",
+   "text": "F-02 CLOSED: landing preloader and federation section state engineering federation enabled with qualifications"
+  },
+  {
+   "checks": [
+    "landing_claim_sweep"
+   ],
+   "id": "C11",
+   "text": "Landing claim sweep: no hospital/production/personalized/diagnostic/deployed/anonymity overclaim"
+  },
+  {
+   "checks": [
+    "landing_no_owner_binding_overreach"
+   ],
+   "id": "C12",
+   "text": "Landing does not imply every visitor has an owner-bound client"
+  },
+  {
+   "checks": [
+    "routes_all_classified"
+   ],
+   "id": "C13",
+   "text": "F-03: every discovered route is classified; zero unclassified"
+  },
+  {
+   "checks": [
+    "redirect_policy_safe"
+   ],
+   "id": "C14",
+   "text": "F-03: redirect policy is exact, same-origin, loop-free, non-substring"
+  },
+  {
+   "checks": [
+    "current_routes_not_retired"
+   ],
+   "id": "C15",
+   "text": "F-03: no current product/research/public route is retired or redirected"
+  },
+  {
+   "checks": [
+    "known_bad_routes_redirect"
+   ],
+   "id": "C16",
+   "text": "F-03: /fl/overview, /fl/personal-models, /ai/insights, /overview redirect to truthful current routes"
+  },
+  {
+   "checks": [
+    "monitoring_decision_documented"
+   ],
+   "id": "C17",
+   "text": "F-03: /monitoring decision documented and consistent with layout/links"
+  },
+  {
+   "checks": [
+    "crawl_final_clean"
+   ],
+   "id": "C18",
+   "text": "F-03 (browser): crawl of every route renders zero stale legacy page, no fabricated metric, no 500"
+  },
+  {
+   "checks": [
+    "runbook_successor_truthful"
+   ],
+   "id": "C19",
+   "text": "F-04: current connected runbook (V1_1) documents the owner-bound difference and every denial"
+  },
+  {
+   "checks": [
+    "runbook_historical_preserved"
+   ],
+   "id": "C20",
+   "text": "F-04: historical runbook V1 and its lock bytes are unchanged"
+  },
+  {
+   "checks": [
+    "truth_contract_matches_backend"
+   ],
+   "id": "C21",
+   "text": "F-05: truth contract matches backend /system truth and frozen constants"
+  },
+  {
+   "checks": [
+    "presentation_verifier_passes"
+   ],
+   "id": "C22",
+   "text": "F-05: current-presentation verifier passes on the repaired tree"
+  },
+  {
+   "checks": [
+    "no_stale_feature_status"
+   ],
+   "id": "C23",
+   "text": "F-05: no stale feature-status copy anywhere in current routes/components"
+  },
+  {
+   "checks": [
+    "truth_matrix_final"
+   ],
+   "id": "C24",
+   "text": "F-05 (browser): final cross-page truth matrix has zero contradictions"
+  },
+  {
+   "checks": [
+    "no_lastoria_reference"
+   ],
+   "id": "C25",
+   "text": "F-06: no reference to the missing Lastoria font remains in frontend source"
+  },
+  {
+   "checks": [
+    "landing_network_clean"
+   ],
+   "id": "C26",
+   "text": "F-06 (browser): landing makes zero failed/404 requests"
+  },
+  {
+   "checks": [
+    "f07_disposition"
+   ],
+   "id": "C27",
+   "text": "F-07: deep-link status disposition documented and proven evaluator-safe"
+  },
+  {
+   "checks": [
+    "no_backend_drift"
+   ],
+   "id": "C28",
+   "text": "Zero backend drift"
+  },
+  {
+   "checks": [
+    "no_api_drift"
+   ],
+   "id": "C29",
+   "text": "Zero API/contract drift"
+  },
+  {
+   "checks": [
+    "no_db_drift"
+   ],
+   "id": "C30",
+   "text": "Zero DB/persistence drift"
+  },
+  {
+   "checks": [
+    "no_fl_drift"
+   ],
+   "id": "C31",
+   "text": "Zero FL runtime drift"
+  },
+  {
+   "checks": [
+    "no_auth_drift"
+   ],
+   "id": "C32",
+   "text": "Zero auth drift"
+  },
+  {
+   "checks": [
+    "no_scientific_drift"
+   ],
+   "id": "C33",
+   "text": "Zero scientific artifact drift (MODEL_V2_FINAL, CAL_V2, locks)"
+  },
+  {
+   "checks": [
+    "candidate_digest_unchanged"
+   ],
+   "id": "C34",
+   "text": "Canonical candidate digest and sandbox status unchanged"
+  },
+  {
+   "checks": [
+    "owner_binding_connected_regression"
+   ],
+   "id": "C35",
+   "text": "Connected real-Clerk owner-binding regression: one MY EDGE CLIENT, 7 peers, 8 clients, 93, 3 rounds, 24 updates, canonical digest"
+  },
+  {
+   "checks": [
+    "demo_replay_global_unbound"
+   ],
+   "id": "C36",
+   "text": "DEMO, REPLAY and global clients remain unbound"
+  },
+  {
+   "checks": [
+    "offline_demo_digest"
+   ],
+   "id": "C37",
+   "text": "Offline DemoAuth regression digest 3a57614e... unchanged, no Clerk traffic"
+  },
+  {
+   "checks": [
+    "fe_tests"
+   ],
+   "id": "C38",
+   "text": "Frontend tests pass (>= 210 plus new)"
+  },
+  {
+   "checks": [
+    "fe_check_build"
+   ],
+   "id": "C39",
+   "text": "svelte-check and production build pass"
+  },
+  {
+   "checks": [
+    "py_targeted"
+   ],
+   "id": "C40",
+   "text": "Targeted Python tests pass"
+  },
+  {
+   "checks": [
+    "py_full"
+   ],
+   "id": "C41",
+   "text": "Full Python suite passes under the CAP-003 race policy"
+  },
+  {
+   "checks": [
+    "lint"
+   ],
+   "id": "C42",
+   "text": "ruff and pip check clean"
+  },
+  {
+   "checks": [
+    "ci_untouched"
+   ],
+   "id": "C43",
+   "text": "CI neither queried nor triggered"
+  },
+  {
+   "checks": [
+    "mutation_log"
+   ],
+   "id": "C44",
+   "text": "35 frozen mutation controls all caught and restored"
+  },
+  {
+   "checks": [
+    "clean_clone"
+   ],
+   "id": "C45",
+   "text": "Clean clone of the repair target passes"
+  },
+  {
+   "checks": [
+    "repair_target_recorded"
+   ],
+   "id": "C46",
+   "text": "FINAL_EVAL_REPAIR_TARGET_SHA recorded before canonical evidence"
+  },
+  {
+   "checks": [
+    "protected_final"
+   ],
+   "id": "C47",
+   "text": "Final protected-artifact audit shows no drift"
+  },
+  {
+   "checks": [
+    "lock_ok"
+   ],
+   "id": "C48",
+   "text": "Protocol lock verifies"
+  },
+  {
+   "checks": [
+    "task_pass"
+   ],
+   "id": "C49",
+   "text": "Task registry FINAL-EVAL-REPAIR-001 PASS"
+  },
+  {
+   "checks": [
+    "gate_pass"
+   ],
+   "id": "C50",
+   "text": "Gate registry FERG0 PASS"
+  },
+  {
+   "checks": [
+    "no_new_phase"
+   ],
+   "id": "C51",
+   "text": "No new phase (no CAP-012, UFL-LITE-004, FER-002) and no evaluator-ready claim"
+  }
+ ],
+ "findings": {
+  "F-01": "BLOCKER About stale federation status",
+  "F-02": "BLOCKER landing stale federation status",
+  "F-03": "MAJOR reachable legacy routes",
+  "F-04": "MAJOR connected runbook stale",
+  "F-05": "MAJOR no whole-application presentation guard",
+  "F-06": "MINOR missing font request",
+  "F-07": "OBSERVATION deep-link HTTP 404 / SPA fallback"
+ },
+ "gate": "FERG0",
+ "mutation_control_count": 35,
+ "mutation_controls": [
+  "ABOUT_RESTORED_NOT_YET_ENABLED",
+  "LANDING_PRELOADER_NOT_YET_ENABLED",
+  "LANDING_PARAGRAPH_DISABLED_WORDING",
+  "FL_OVERVIEW_RENDERS_OLD_CONTENT",
+  "FL_PERSONAL_MODELS_RENDERS_PERSONALIZATION",
+  "AI_INSIGHTS_RENDERS_FABRICATED_METRICS",
+  "OVERVIEW_RENDERS_OBSOLETE_WORKBENCH",
+  "LEGACY_ROUTE_OMITTED_FROM_POLICY",
+  "CURRENT_ROUTE_CLASSIFIED_LEGACY",
+  "REDIRECT_LOOP",
+  "REDIRECT_TO_EXTERNAL_ORIGIN",
+  "RUNBOOK_OMITS_MY_EDGE_CLIENT",
+  "RUNBOOK_CLAIMS_PHYSIOLOGY_TRAINS_FL",
+  "RUNBOOK_CLAIMS_PERSONAL_MODEL",
+  "DEMO_GAINS_OWNER_BINDING",
+  "REPLAY_GAINS_OWNER_BINDING",
+  "GLOBAL_CLIENTS_GAINS_OWNER_BINDING",
+  "FEDERATION_RUNTIME_TRUTH_DISABLED",
+  "MODEL_V2_FINAL_CHANGED",
+  "CAL_V2_CHANGED",
+  "CANDIDATE_DIGEST_CHANGED",
+  "BACKEND_FILE_DRIFT",
+  "API_DRIFT",
+  "DB_DRIFT",
+  "FL_RUNTIME_DRIFT",
+  "AUTH_DRIFT",
+  "PREDECESSOR_UI_LOCK_DRIFT",
+  "UI_V1_5_UNBOUND_FILE",
+  "LASTORIA_REFERENCE_RESTORED",
+  "HOSPITAL_INSTITUTION_CLAIM_INTRODUCED",
+  "PRODUCTION_CLAIM_INTRODUCED",
+  "PERSONALIZED_FL_CLAIM_INTRODUCED",
+  "CANDIDATE_CALLED_DEPLOYED",
+  "SECAGG_CALLED_DP_OR_ANONYMITY",
+  "CURRENT_ROUTE_UNCLASSIFIED"
+ ],
+ "no_visual_redesign": true,
+ "outcome_on_pass": {
+  "FERG0": "PASS",
+  "FINAL-EVAL-REPAIR-001": "PASS",
+  "FINAL_EVALUATOR_AUDIT_RERUN": "AUTHORIZED",
+  "not_established": "NHM evaluator readiness (only the unchanged FINAL_EVALUATOR_AUDIT_V1 rerun may)"
+ },
+ "owner_task": "FINAL-EVAL-REPAIR-001",
+ "phase_type": "BOUNDED PRESENTATION / ROUTE-HYGIENE / DOCUMENTATION / ANTI-REGRESSION REPAIR",
+ "protected_surface": [
+  "api/",
+  "product/",
+  "capstone_persistence/",
+  "federated/",
+  "privacy/",
+  "simulation/",
+  "src/",
+  "checkpoints/",
+  "contracts/"
+ ],
+ "protocol_id": "FINAL_EVAL_REPAIR_001_PROTOCOL_V1",
+ "route_classes": [
+  "CURRENT_PRODUCT",
+  "CURRENT_PUBLIC",
+  "CURRENT_RESEARCH",
+  "CURRENT_COMPATIBILITY",
+  "LEGACY_REDIRECT",
+  "LEGACY_RETAINED_RESEARCH_TOOL",
+  "INTERNAL_DYNAMIC",
+  "CATCH_ALL"
+ ],
+ "status": "FROZEN_REPAIR_PROTOCOL"
+}

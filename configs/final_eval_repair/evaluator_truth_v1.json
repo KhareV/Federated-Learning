@@ -1,0 +1,32 @@
+{
+ "contract_id": "EVALUATOR_TRUTH_V1",
+ "purpose": "Machine-readable current evaluator-facing truth used ONLY by presentation guards; it changes no backend behavior.",
+ "facts": {
+  "research_prototype": true,
+  "diagnostic": false,
+  "medical_device": false,
+  "physical_hardware_connected": false,
+  "hardware_mode": "SIMULATED_ONLY",
+  "released_model": "MODEL_V2_FINAL",
+  "calibration": "CAL_V2",
+  "software_system": "SOFTWARE_SYSTEM_V2",
+  "federation_runtime": "ENABLED_ENGINEERING",
+  "federation_client_count": 8,
+  "federation_clients": "SYNTHETIC_LOGICAL",
+  "federation_execution": "ONE_DEMONSTRATION_MACHINE",
+  "owner_binding_auth": "CLERK",
+  "owner_binding_run_type": "LIVE_RUN",
+  "owner_binding_client": "SIM_FL_SITE_00",
+  "demo_owner_binding": false,
+  "replay_owner_binding": false,
+  "global_clients_owner_binding": false,
+  "monitoring_data_used_for_fl": false,
+  "personalized_fl": false,
+  "personal_model": false,
+  "candidate_deployed": false,
+  "candidate_namespace": "ENGINEERING_SANDBOX",
+  "secagg_scope": "PROTECTED_AGGREGATION_INTERFACE_ONLY",
+  "canonical_candidate_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+  "offline_demo_semantic_digest": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726"
+ }
+}
