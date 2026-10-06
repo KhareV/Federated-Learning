@@ -1,0 +1,128 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "cohort_ok:client_count_not_8",
+   "mutation": "CLIENT_COUNT_BECOMES_9",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "cohort_ok:client_ids_changed",
+   "mutation": "CLIENT_IDS_CHANGE",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "site00_ok:site00_dataset_changed",
+   "mutation": "SITE_00_DATASET_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "site00_ok:site00_example_count_changed",
+   "mutation": "SITE_00_EXAMPLE_COUNT_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "identity_in_payload",
+   "mutation": "CLERK_ID_ENTERS_MODEL_OR_UPDATE_PAYLOAD",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "monitoring_isolation_audit",
+   "mutation": "MONITORING_SESSION_ENTERS_LOCAL_BUFFER",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "candidate_digest_ok",
+   "mutation": "CANDIDATE_DIGEST_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "hash_drift:reused_unchanged:federated/aggregation.py",
+   "mutation": "AGGREGATION_IMPLEMENTATION_CHANGES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "class_audit:new_client_class",
+   "mutation": "OWNER_BOUND_CLIENT_BECOMES_A_NEW_CLASS",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "class_audit:new_training_buffer",
+   "mutation": "NEW_TRAINING_BUFFER_INTRODUCED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "candidate_state_ok",
+   "mutation": "CANDIDATE_BECOMES_DEPLOYED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "hash_drift:auth:product/auth/clerk.py",
+   "mutation": "AUTH_IMPLEMENTATION_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "hash_drift:scientific:artifacts/CAL_V2.json",
+   "mutation": "SCIENTIFIC_ARTIFACT_DRIFTS",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "tags_ok",
+   "mutation": "RELEASE_TAG_MOVES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic input",
+   "caught": true,
+   "executed_now": true,
+   "failing_check": "global_view_binding_audit",
+   "mutation": "USER_BINDING_SHOWN_GLOBALLY",
+   "restored": true
+  }
+ ],
+ "count": 15,
+ "note": "controls 1-15 of the specification; all are static and executed in UFL-LITE-001; runtime ones (digest, updates) are additionally asserted by tests/test_ufl_lite_contract.py"
+}
