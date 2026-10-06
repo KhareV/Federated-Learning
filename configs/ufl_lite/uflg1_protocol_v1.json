@@ -1,0 +1,454 @@
+{
+ "check_prefixes": {
+  "(none)": "evaluator check",
+  "P:": "Python test title (pytest junit)",
+  "V:": "vitest test title (frontend test report)"
+ },
+ "ci": "not queried, not triggered",
+ "criteria_count": 51,
+ "entry": {
+  "control_commit": "e48a921",
+  "entry_audit_commit": "e48a921~1",
+  "entry_sha": "6871e0891ad697dab3f122afaba2d331a279ec8c"
+ },
+ "expected_change_surface": {
+  "governance": [
+   "CAPSTONE_UI_V1_4",
+   "successor-aware verifier amendments"
+  ],
+  "modify": [
+   "frontend/src/lib/components/product/federation/ClientGrid.svelte",
+   "frontend/src/routes/app/federation/live/+page.svelte",
+   "frontend/src/routes/app/federation/rounds/+page.svelte (narrow note)"
+  ],
+  "new": [
+   "frontend/src/lib/product/federation/participation.ts"
+  ],
+  "tests": [
+   "frontend federation/component tests",
+   "tests/test_ufl_lite_presentation.py"
+  ]
+ },
+ "gate": "UFLG1",
+ "must_not_change": [
+  "api/",
+  "product/",
+  "capstone_persistence/",
+  "federated/",
+  "privacy/",
+  "simulation/",
+  "src/",
+  "checkpoints/",
+  "contracts/",
+  "frontend/src/lib/product/federation/types.ts",
+  "live-model.ts",
+  "state.svelte.ts",
+  "frontend/src/lib/product/auth.ts",
+  "frontend/src/routes/app/federation/clients/+page.svelte",
+  "package dependencies"
+ ],
+ "mutation_controls": [
+  "BINDING_APPEARS_IN_DEMO_MODE",
+  "BINDING_APPEARS_ON_REPLAY",
+  "GLOBAL_CLIENTS_PAGE_SHOWS_MY_EDGE_CLIENT",
+  "SITE_01_ACCIDENTALLY_OWNER_BOUND",
+  "TWO_CLIENTS_SHOW_MY_EDGE_CLIENT",
+  "SITE_00_TECHNICAL_ID_RENAMED",
+  "USER_ID_OR_EMAIL_ENTERS_BINDING_INPUT",
+  "LOCAL_EXAMPLE_COUNT_HARDCODED",
+  "UPDATE_COUNT_FABRICATED",
+  "CONTRIBUTION_PERCENTAGE_ADDED",
+  "CLIENT_COUNT_BECOMES_9",
+  "CANDIDATE_DIGEST_CHANGES",
+  "FEDERATION_RUNTIME_FILE_CHANGES",
+  "API_SCHEMA_CHANGES",
+  "SQLITE_SCHEMA_CHANGES",
+  "CLERK_AUTH_CHANGES",
+  "PREDECESSOR_UI_LOCK_CHANGES",
+  "UNBOUND_FRONTEND_DRIFT_ESCAPES_UI_LOCK"
+ ],
+ "owner_task": "UFL-LITE-002",
+ "phase_scope": "thin frontend presentation only; Phase 3 (real Clerk E2E + final acceptance) NOT implemented",
+ "presentation_rule": {
+  "owner_bound_client_id": "SIM_FL_SITE_00",
+  "owner_label": "MY EDGE CLIENT",
+  "peer_label": "SYNTHETIC PEER",
+  "qualifying_auth_provider": "CLERK",
+  "qualifying_run_type": "LIVE_RUN",
+  "roles": [
+   "AUTHENTICATED_OWNER",
+   "SYNTHETIC_PEER"
+  ]
+ },
+ "protocol_id": "UFL_LITE_002_PROTOCOL_V1",
+ "status": "FROZEN_PRE_IMPLEMENTATION_PROTOCOL",
+ "uflg1_criteria": [
+  {
+   "checks": [
+    "entry_audited"
+   ],
+   "id": "UFLG1-001",
+   "text": "entry audited (immutable)"
+  },
+  {
+   "checks": [
+    "uflg0_preserved"
+   ],
+   "id": "UFLG1-002",
+   "text": "UFLG0 PASS preserved (registry + lock)"
+  },
+  {
+   "checks": [
+    "tags_unchanged"
+   ],
+   "id": "UFLG1-003",
+   "text": "historical tags unchanged (release, clerk-connected)"
+  },
+  {
+   "checks": [
+    "locks_verify"
+   ],
+   "id": "UFLG1-004",
+   "text": "prior capstone/Clerk/UFL locks verify"
+  },
+  {
+   "checks": [
+    "no_backend_change"
+   ],
+   "id": "UFLG1-005",
+   "text": "no backend changes"
+  },
+  {
+   "checks": [
+    "no_api_change"
+   ],
+   "id": "UFLG1-006",
+   "text": "no API changes (schemas, routes)"
+  },
+  {
+   "checks": [
+    "no_db_change"
+   ],
+   "id": "UFLG1-007",
+   "text": "no database/schema changes"
+  },
+  {
+   "checks": [
+    "no_fl_change"
+   ],
+   "id": "UFLG1-008",
+   "text": "no FL runtime changes"
+  },
+  {
+   "checks": [
+    "no_auth_change"
+   ],
+   "id": "UFLG1-009",
+   "text": "no Clerk auth changes"
+  },
+  {
+   "checks": [
+    "helper_pure",
+    "V:helper_has_no_identity_parameter"
+   ],
+   "id": "UFLG1-010",
+   "text": "participation helper is pure (no network, storage, Svelte state, identity)"
+  },
+  {
+   "checks": [
+    "V:helper_clerk_live"
+   ],
+   "id": "UFLG1-011",
+   "text": "CLERK + LIVE_RUN binds SIM_FL_SITE_00"
+  },
+  {
+   "checks": [
+    "V:helper_demo_none",
+    "V:demo_no_binding"
+   ],
+   "id": "UFLG1-012",
+   "text": "DEMO has no binding"
+  },
+  {
+   "checks": [
+    "V:helper_replay_none",
+    "V:replay_no_binding"
+   ],
+   "id": "UFLG1-013",
+   "text": "REPLAY has no binding"
+  },
+  {
+   "checks": [
+    "V:global_clients_unbound",
+    "global_page_unchanged"
+   ],
+   "id": "UFLG1-014",
+   "text": "global clients view has no binding"
+  },
+  {
+   "checks": [
+    "V:one_owner_card"
+   ],
+   "id": "UFLG1-015",
+   "text": "exactly one owner card"
+  },
+  {
+   "checks": [
+    "V:seven_peer_cards"
+   ],
+   "id": "UFLG1-016",
+   "text": "exactly seven peer cards"
+  },
+  {
+   "checks": [
+    "V:technical_ids_unchanged"
+   ],
+   "id": "UFLG1-017",
+   "text": "technical client ids unchanged (SIM_FL_SITE_00 stays technically named)"
+  },
+  {
+   "checks": [
+    "V:owner_examples_event_derived",
+    "b_site00_93"
+   ],
+   "id": "UFLG1-018",
+   "text": "SITE_00 shows its 93 local examples from existing telemetry"
+  },
+  {
+   "checks": [
+    "V:synthetic_qualification"
+   ],
+   "id": "UFLG1-019",
+   "text": "synthetic-data qualification visible"
+  },
+  {
+   "checks": [
+    "V:not_your_physiology",
+    "claims_clean"
+   ],
+   "id": "UFLG1-020",
+   "text": "authenticated user's physiology not claimed"
+  },
+  {
+   "checks": [
+    "V:owner_state_milestone_digest"
+   ],
+   "id": "UFLG1-021",
+   "text": "owner telemetry (state, milestone, update digest) is event-derived"
+  },
+  {
+   "checks": [
+    "V:summary_derivation"
+   ],
+   "id": "UFLG1-022",
+   "text": "updates produced derived from updateDigests only; completed rounds from milestones only"
+  },
+  {
+   "checks": [
+    "V:no_contribution_percentage",
+    "no_contribution_in_source"
+   ],
+   "id": "UFLG1-023",
+   "text": "no contribution percentage / influence score"
+  },
+  {
+   "checks": [
+    "claims_clean"
+   ],
+   "id": "UFLG1-024",
+   "text": "no personal-model claim and no personalized-FL claim"
+  },
+  {
+   "checks": [
+    "no_consent_ui"
+   ],
+   "id": "UFLG1-025",
+   "text": "no consent / opt-in UI"
+  },
+  {
+   "checks": [
+    "V:locality_wording"
+   ],
+   "id": "UFLG1-026",
+   "text": "data-locality wording is precise (logical local buffer; one demonstration machine)"
+  },
+  {
+   "checks": [
+    "V:unbound_grid_unchanged"
+   ],
+   "id": "UFLG1-027",
+   "text": "existing unbound ClientGrid behaviour remains valid"
+  },
+  {
+   "checks": [
+    "b_client_count",
+    "P:test_cohort_and_baseline_unchanged"
+   ],
+   "id": "UFLG1-028",
+   "text": "client count 8"
+  },
+  {
+   "checks": [
+    "b_rounds"
+   ],
+   "id": "UFLG1-029",
+   "text": "rounds 3"
+  },
+  {
+   "checks": [
+    "b_updates",
+    "P:test_completed_run_reproduces_baseline"
+   ],
+   "id": "UFLG1-030",
+   "text": "updates 24 (8/8/8)"
+  },
+  {
+   "checks": [
+    "b_digest",
+    "P:test_completed_run_reproduces_baseline"
+   ],
+   "id": "UFLG1-031",
+   "text": "canonical candidate digest unchanged"
+  },
+  {
+   "checks": [
+    "b_candidate"
+   ],
+   "id": "UFLG1-032",
+   "text": "candidate sandbox-only (ACCEPTED_TO_SANDBOX / IN_SANDBOX / not deployed)"
+  },
+  {
+   "checks": [
+    "h_scientific"
+   ],
+   "id": "UFLG1-033",
+   "text": "MODEL_V2_FINAL and CAL_V2 unchanged"
+  },
+  {
+   "checks": [
+    "demo_digest"
+   ],
+   "id": "UFLG1-034",
+   "text": "offline demo semantic digest identical (3a57614e...)"
+  },
+  {
+   "checks": [
+    "demo_regression"
+   ],
+   "id": "UFLG1-035",
+   "text": "DemoAuth works, owner binding absent, zero Clerk traffic"
+  },
+  {
+   "checks": [
+    "ui14_ok"
+   ],
+   "id": "UFLG1-036",
+   "text": "CAPSTONE_UI_V1_4 verifies (whole frontend, predecessor V1_3)"
+  },
+  {
+   "checks": [
+    "ui_locks_identical"
+   ],
+   "id": "UFLG1-037",
+   "text": "predecessor UI lock files V1/V1_1/V1_2/V1_3 byte-identical"
+  },
+  {
+   "checks": [
+    "amendments_pure"
+   ],
+   "id": "UFLG1-038",
+   "text": "successor amendments pure (SUCCESSOR_COMPATIBILITY_ONLY, old/new SHA, no results)"
+  },
+  {
+   "checks": [
+    "frontend_scope_exact"
+   ],
+   "id": "UFLG1-039",
+   "text": "frontend drift is exactly the registered change (helper, grid, live page, rounds note, tests)"
+  },
+  {
+   "checks": [
+    "fe_tests"
+   ],
+   "id": "UFLG1-040",
+   "text": "full frontend tests pass"
+  },
+  {
+   "checks": [
+    "fe_check"
+   ],
+   "id": "UFLG1-041",
+   "text": "svelte-check zero errors"
+  },
+  {
+   "checks": [
+    "fe_build"
+   ],
+   "id": "UFLG1-042",
+   "text": "frontend build passes"
+  },
+  {
+   "checks": [
+    "py_targeted"
+   ],
+   "id": "UFLG1-043",
+   "text": "targeted Python tests pass"
+  },
+  {
+   "checks": [
+    "py_full"
+   ],
+   "id": "UFLG1-044",
+   "text": "full Python regression passes (inherited CAP-003 policy)"
+  },
+  {
+   "checks": [
+    "lint"
+   ],
+   "id": "UFLG1-045",
+   "text": "ruff and pip check pass"
+  },
+  {
+   "checks": [
+    "mutation_log"
+   ],
+   "id": "UFLG1-046",
+   "text": "mutation controls caught and restored (18)"
+  },
+  {
+   "checks": [
+    "ci_untouched"
+   ],
+   "id": "UFLG1-047",
+   "text": "CI untouched"
+  },
+  {
+   "checks": [
+    "protected_final"
+   ],
+   "id": "UFLG1-048",
+   "text": "protected artifact audit clean"
+  },
+  {
+   "checks": [
+    "lock_ok"
+   ],
+   "id": "UFLG1-049",
+   "text": "frozen method lock verifies"
+  },
+  {
+   "checks": [
+    "task_pass"
+   ],
+   "id": "UFLG1-050",
+   "text": "UFL-LITE-002 PASS"
+  },
+  {
+   "checks": [
+    "gate_pass"
+   ],
+   "id": "UFLG1-051",
+   "text": "UFLG1 PASS"
+  }
+ ]
+}
