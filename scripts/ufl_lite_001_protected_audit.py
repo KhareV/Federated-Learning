@@ -22,7 +22,7 @@ CLERK_TAG, CLERK_TARGET = "capstone-clerk-connected-v1", "4cb20ec1093f3a8697827a
 RELEASE_TARGET = "3ad1b07408a0c3556fbc5039f1a7a4fee824db96"
 TAG = "capstone-release-v1"
 ADDITIVE_PREFIXES = (
-    "manifests/ufl_lite/", "configs/ufl_lite/", "contracts/ufl_lite/", "docs/ufl_lite/", "artifacts/ufl_lite/", "reports/ufl_lite/", "scripts/ufl_lite_", "tests/test_ufl_lite_",
+    "manifests/ufl_lite/", "configs/ufl_lite/", "configs/ufl_lite/", "docs/ufl_lite/", "artifacts/ufl_lite/", "reports/ufl_lite/", "scripts/ufl_lite_", "tests/test_ufl_lite_",
 )
 MODIFIABLE: tuple[str, ...] = ()
 PROTECTED_PREFIXES = ("api/", "product/", "capstone_persistence/", "federated/", "privacy/", "simulation/", "src/", "checkpoints/", "frontend/", "reports/model_v2/", "reports/capstone/", "reports/clerk_connected/", "release/", "scripts/run_capstone", "scripts/clerk_")

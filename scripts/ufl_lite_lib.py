@@ -12,7 +12,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = "reports/ufl_lite/ufl_lite_001/zero_drift_baseline.json"
-CONTRACT = "contracts/ufl_lite/user_bound_fl_participation_v1.json"
+CONTRACT = "configs/ufl_lite/user_bound_fl_participation_v1.json"
 CANONICAL_CANDIDATE_DIGEST = "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
 CLIENT_IDS = tuple(f"SIM_FL_SITE_{i:02d}" for i in range(8))
 RELEASE_TAGS = {"capstone-release-v1": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96", "capstone-clerk-connected-v1": "4cb20ec1093f3a8697827abfffc1e5c1fd787055"}

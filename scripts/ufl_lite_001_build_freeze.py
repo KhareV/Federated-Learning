@@ -10,7 +10,7 @@ from scripts import ufl_lite_lib as lib
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCK = ROOT / "artifacts/ufl_lite/UFL_LITE_001_PROTOCOL_V1.lock.json"
-BOUND = ("contracts/ufl_lite/user_bound_fl_participation_v1.json", "docs/ufl_lite/USER_BOUND_FL_PARTICIPATION_V1.md", "configs/ufl_lite/uflg0_protocol_v1.json", "reports/ufl_lite/ufl_lite_001/zero_drift_baseline.json",
+BOUND = ("configs/ufl_lite/user_bound_fl_participation_v1.json", "docs/ufl_lite/USER_BOUND_FL_PARTICIPATION_V1.md", "configs/ufl_lite/uflg0_protocol_v1.json", "reports/ufl_lite/ufl_lite_001/zero_drift_baseline.json",
          "reports/ufl_lite/ufl_lite_001/architecture_audit.json", "reports/ufl_lite/ufl_lite_001/change_surface.json", "scripts/ufl_lite_lib.py", "scripts/ufl_lite_001_evaluate_gate.py", "scripts/ufl_lite_001_mutation_controls.py",
          "scripts/ufl_lite_001_build_evidence.py", "scripts/ufl_lite_001_build_freeze.py", "scripts/ufl_lite_001_protected_audit.py", "tests/test_ufl_lite_contract.py")
 
