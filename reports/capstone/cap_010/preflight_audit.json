@@ -1,0 +1,18 @@
+{
+ "launcher_build_returncode": 0,
+ "real_preflight_output_tail": [
+  "{\"preflight\": {\"demo_auth_acknowledgement\": true, \"workspace\": true, \"port_inference\": true, \"port_product\": true, \"port_frontend\": true, \"python_version\": true, \"required_imports\": true, \"prior_locks_and_amendments\": true, \"phase_state\": true, \"runtime_binding\": true, \"product_api_import\": true, \"ui_successor\": true, \"research_catalog\": true, \"frontend_dependencies\": true, \"frontend_build\": true}}"
+ ],
+ "real_preflight_returncode": 0,
+ "status": "PASS",
+ "tests": {
+  "tests.test_capstone_demo_preflight::test_a_healthy_environment_passes_and_executes_no_science": "passed",
+  "tests.test_capstone_demo_preflight::test_an_occupied_port_fails_and_names_the_service_without_touching_the_occupant": "passed",
+  "tests.test_capstone_demo_preflight::test_every_verifier_failure_fails_the_whole_preflight": "passed",
+  "tests.test_capstone_demo_preflight::test_missing_acknowledgement_or_invalid_workspace_fails": "passed",
+  "tests.test_capstone_demo_preflight::test_missing_frontend_dependencies_report_the_exact_setup_command_and_never_install": "passed",
+  "tests.test_capstone_demo_preflight::test_preflight_module_runs_no_science_by_construction": "passed",
+  "tests.test_capstone_demo_preflight::test_stale_or_missing_frontend_build_fails": "passed",
+  "tests.test_capstone_demo_preflight::test_the_real_environment_passes_the_real_preflight": "passed"
+ }
+}

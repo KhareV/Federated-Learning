@@ -1,0 +1,20 @@
+{
+ "status": "PASS",
+ "tests": {
+  "tests.test_capstone_demo_workspace::test_a_workspace_inside_the_repository_is_refused": "passed",
+  "tests.test_capstone_demo_workspace::test_default_fresh_workspace_is_a_system_temp_directory": "passed",
+  "tests.test_capstone_demo_workspace::test_fresh_mode_never_silently_erases_an_existing_workspace": "passed",
+  "tests.test_capstone_demo_workspace::test_fresh_workspace_is_outside_the_repository_and_carries_a_sentinel": "passed",
+  "tests.test_capstone_demo_workspace::test_log_secret_scan_detects_secrets_and_passes_clean_logs": "passed",
+  "tests.test_capstone_demo_workspace::test_reset_deletes_only_the_validated_workspace": "passed",
+  "tests.test_capstone_demo_workspace::test_resume_requires_a_valid_sentinel": "passed",
+  "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[/]": "passed",
+  "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[/tmp]": "passed",
+  "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[/usr]": "passed",
+  "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[HOME]": "passed",
+  "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[RANDOM_NO_SENTINEL]": "passed",
+  "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[ROOT]": "passed",
+  "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[ROOT_CHILD]": "passed",
+  "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[ROOT_PARENT]": "passed"
+ }
+}

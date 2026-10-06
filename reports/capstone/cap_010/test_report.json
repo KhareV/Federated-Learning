@@ -1,0 +1,148 @@
+{
+ "ci_queried": false,
+ "ci_triggered": false,
+ "commands": {
+  "build": {
+   "returncode": 0,
+   "seconds_machine_specific": 8.0,
+   "tail": "21:   const pw = W - PAD.left - PAD.right;\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+  },
+  "npm_test": {
+   "returncode": 0,
+   "seconds_machine_specific": 5.8,
+   "tail": " \u2713 src/lib/product/__tests__/components.test.ts (15 tests) 121ms\n\n Test Files  18 passed | 3 skipped (21)\n      Tests  193 passed | 3 skipped (196)\n   Start at  12:16:04\n   Duration  5.11s (transform 3.90s, setup 0ms, collect 8.65s, tests 2.11s, environment 3.45s, prepare 789ms)"
+  },
+  "pip_check": {
+   "output": "No broken requirements found.",
+   "returncode": 0
+  },
+  "ruff": {
+   "output": "All checks passed!",
+   "returncode": 0
+  },
+  "svelte_check": {
+   "returncode": 0,
+   "seconds_machine_specific": 3.7,
+   "tail": "1791269173800 WARNING \"src/routes/[...path]/+page.svelte\" 24:500 \"Unused CSS selector \\\"pre\\\"\\nhttps://svelte.dev/e/css_unused_selector\"\n1791269173800 WARNING \"src/routes/[...path]/+page.svelte\" 24:705 \"Unused CSS selector \\\".data-state\\\"\\nhttps://svelte.dev/e/css_unused_selector\"\n1791269173800 WARNING \"src/routes/[...path]/+page.svelte\" 24:816 \"Unused CSS selector \\\".data-state--error\\\"\\nhttps://svelte.dev/e/css_unused_selector\"\n1791269173800 WARNING \"src/routes/ai/insights/+page.svelte\" 13:1428 \"Unused CSS selector \\\".grid.top>:first-child\\\"\\nhttps://svelte.dev/e/css_unused_selector\"\n1791269173800 WARNING \"src/routes/ai/insights/+page.svelte\" 13:1552 \"Unused CSS selector \\\".grid.top>:first-child\\\"\\nhttps://svelte.dev/e/css_unused_selector\"\n1791269173800 COMPLETED 5751 FILES 0 ERRORS 112 WARNINGS 6 FILES_WITH_PROBLEMS"
+  }
+ },
+ "frontend_summary": {
+  "build_done": true,
+  "svelte_check_zero_errors": true,
+  "vitest": [
+   "18",
+   "193"
+  ]
+ },
+ "full_regression": {
+  "counts": {
+   "deselected": 1,
+   "passed": 3016,
+   "skipped": 1
+  },
+  "failed": [],
+  "known_flake_deselected": "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers",
+  "returncode": 0,
+  "seconds_machine_specific": 434.8,
+  "tests_total": 3017
+ },
+ "inherited_flake": {
+  "attempts": 12,
+  "isolated_passes": 6,
+  "status": "PASS_INHERITED_FLAKE_POLICY"
+ },
+ "post_hoc_note": "svelte-check summary line is upper-case (0 ERRORS); the recorder compared case-sensitively, so its first FAIL was a recorder defect. Fields recomputed from the saved logs; commands themselves all returned 0.",
+ "prior_capstone_tests": {
+  "failed": [],
+  "total": 541
+ },
+ "status": "PASS",
+ "targeted": {
+  "counts": {
+   "passed": 79
+  },
+  "returncode": 0,
+  "seconds_machine_specific": 43.5,
+  "tests": {
+   "tests.test_capstone_demo_orchestrator::test_a_broken_precondition_fails_preflight_and_starts_nothing[frontend_dependencies]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_a_broken_precondition_fails_preflight_and_starts_nothing[prior_locks_and_amendments]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_a_broken_precondition_fails_preflight_and_starts_nothing[research_catalog]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_a_broken_precondition_fails_preflight_and_starts_nothing[ui_successor]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_a_child_that_exits_before_ready_fails_the_stack_and_never_reports_ready": "passed",
+   "tests.test_capstone_demo_orchestrator::test_a_service_that_never_becomes_ready_times_out_and_stops_everything": "passed",
+   "tests.test_capstone_demo_orchestrator::test_an_occupied_port_fails_with_port_in_use_and_never_kills_the_occupant[frontend]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_an_occupied_port_fails_with_port_in_use_and_never_kills_the_occupant[inference]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_an_occupied_port_fails_with_port_in_use_and_never_kills_the_occupant[product]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_an_unexpected_child_death_stops_the_whole_stack[frontend]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_an_unexpected_child_death_stops_the_whole_stack[inference]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_an_unexpected_child_death_stops_the_whole_stack[product]": "passed",
+   "tests.test_capstone_demo_orchestrator::test_ctrl_c_style_stop_terminates_children_and_never_signals_unrelated_processes": "passed",
+   "tests.test_capstone_demo_orchestrator::test_default_ports_and_explicit_overrides": "passed",
+   "tests.test_capstone_demo_orchestrator::test_grandchildren_of_a_service_are_reaped_with_their_own_process_group": "passed",
+   "tests.test_capstone_demo_orchestrator::test_invalid_workspaces_fail_clearly_before_any_service_starts": "passed",
+   "tests.test_capstone_demo_orchestrator::test_missing_acknowledgement_refuses_even_in_preflight_only_mode": "passed",
+   "tests.test_capstone_demo_orchestrator::test_missing_demo_auth_acknowledgement_refuses_to_start": "passed",
+   "tests.test_capstone_demo_orchestrator::test_prewarm_is_a_read_only_preparation_with_an_audited_zero_side_effect_report": "passed",
+   "tests.test_capstone_demo_orchestrator::test_product_readiness_probe_demands_the_exact_identity": "passed",
+   "tests.test_capstone_demo_orchestrator::test_ready_only_after_every_service_answers_and_shutdown_is_reverse_ordered": "passed",
+   "tests.test_capstone_demo_orchestrator::test_the_cli_subprocess_refuses_without_acknowledgement": "passed",
+   "tests.test_capstone_demo_orchestrator::test_the_faculty_stack_is_exactly_three_services_with_the_default_runtime_only": "passed",
+   "tests.test_capstone_demo_orchestrator::test_the_launcher_has_no_profile_or_timing_option": "passed",
+   "tests.test_capstone_demo_orchestrator::test_the_launcher_never_issues_a_write_request_and_has_no_package_manager_calls": "passed",
+   "tests.test_capstone_demo_orchestrator::test_the_ready_block_is_honest_and_secret_free": "passed",
+   "tests.test_capstone_demo_orchestrator::test_unsafe_reset_is_refused_by_the_cli": "passed",
+   "tests.test_capstone_demo_preflight::test_a_healthy_environment_passes_and_executes_no_science": "passed",
+   "tests.test_capstone_demo_preflight::test_an_occupied_port_fails_and_names_the_service_without_touching_the_occupant": "passed",
+   "tests.test_capstone_demo_preflight::test_every_verifier_failure_fails_the_whole_preflight": "passed",
+   "tests.test_capstone_demo_preflight::test_missing_acknowledgement_or_invalid_workspace_fails": "passed",
+   "tests.test_capstone_demo_preflight::test_missing_frontend_dependencies_report_the_exact_setup_command_and_never_install": "passed",
+   "tests.test_capstone_demo_preflight::test_preflight_module_runs_no_science_by_construction": "passed",
+   "tests.test_capstone_demo_preflight::test_stale_or_missing_frontend_build_fails": "passed",
+   "tests.test_capstone_demo_preflight::test_the_real_environment_passes_the_real_preflight": "passed",
+   "tests.test_capstone_demo_workspace::test_a_workspace_inside_the_repository_is_refused": "passed",
+   "tests.test_capstone_demo_workspace::test_default_fresh_workspace_is_a_system_temp_directory": "passed",
+   "tests.test_capstone_demo_workspace::test_fresh_mode_never_silently_erases_an_existing_workspace": "passed",
+   "tests.test_capstone_demo_workspace::test_fresh_workspace_is_outside_the_repository_and_carries_a_sentinel": "passed",
+   "tests.test_capstone_demo_workspace::test_log_secret_scan_detects_secrets_and_passes_clean_logs": "passed",
+   "tests.test_capstone_demo_workspace::test_reset_deletes_only_the_validated_workspace": "passed",
+   "tests.test_capstone_demo_workspace::test_resume_requires_a_valid_sentinel": "passed",
+   "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[/]": "passed",
+   "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[/tmp]": "passed",
+   "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[/usr]": "passed",
+   "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[HOME]": "passed",
+   "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[RANDOM_NO_SENTINEL]": "passed",
+   "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[ROOT]": "passed",
+   "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[ROOT_CHILD]": "passed",
+   "tests.test_capstone_demo_workspace::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[ROOT_PARENT]": "passed",
+   "tests.test_capstone_full_demo::test_full_demo_binding_matches_the_frozen_contract": "passed",
+   "tests.test_capstone_full_demo::test_hero_path_uses_the_real_stack_without_mocks": "passed",
+   "tests.test_capstone_full_demo::test_no_new_python_or_npm_dependency": "passed",
+   "tests.test_capstone_full_demo::test_no_outcome_tuning_or_hardcoded_model_output": "passed",
+   "tests.test_capstone_full_demo::test_product_api_frontend_and_backend_are_byte_identical_to_entry": "passed",
+   "tests.test_capstone_full_demo::test_runbook_claim_audit_finds_no_overclaim": "passed",
+   "tests.test_capstone_full_demo::test_runbook_claim_audit_rejects_every_overclaim_mutation": "passed",
+   "tests.test_capstone_full_demo::test_runbook_has_required_statements_and_both_paths": "passed",
+   "tests.test_capstone_lifecycle::test_cap_001_002_003_locks_remain_verified_during_cap_004": "passed",
+   "tests.test_capstone_lifecycle::test_cap_001_and_cap_002_locks_remain_verified_during_cap_003": "passed",
+   "tests.test_capstone_lifecycle::test_cap_001_components_and_lock_are_unchanged_by_cap_002": "passed",
+   "tests.test_capstone_lifecycle::test_cap_001_to_004_locks_remain_verified_during_cap_005": "passed",
+   "tests.test_capstone_lifecycle::test_cap_001_to_005_locks_remain_verified_during_cap_006": "passed",
+   "tests.test_capstone_lifecycle::test_cap_002_components_are_exactly_the_five_registered_components": "passed",
+   "tests.test_capstone_lifecycle::test_cap_002_freeze_lock_binds_every_listed_file_byte_for_byte": "passed",
+   "tests.test_capstone_lifecycle::test_cap_003_components_are_exactly_the_eight_registered_components": "passed",
+   "tests.test_capstone_lifecycle::test_cap_003_freeze_lock_binds_every_listed_file_byte_for_byte": "passed",
+   "tests.test_capstone_lifecycle::test_cap_004_components_are_exactly_the_eleven_registered_components": "passed",
+   "tests.test_capstone_lifecycle::test_cap_004_freeze_lock_binds_every_listed_file_byte_for_byte": "passed",
+   "tests.test_capstone_lifecycle::test_cap_005_components_are_exactly_the_seven_registered_components": "passed",
+   "tests.test_capstone_lifecycle::test_cap_005_freeze_lock_binds_every_listed_file_byte_for_byte": "passed",
+   "tests.test_capstone_lifecycle::test_cap_006_components_are_exactly_the_seven_registered_components": "passed",
+   "tests.test_capstone_lifecycle::test_cap_006_freeze_lock_binds_every_listed_file_byte_for_byte": "passed",
+   "tests.test_capstone_lifecycle::test_capstone_components_are_exactly_the_sixteen_cap_001_components": "passed",
+   "tests.test_capstone_lifecycle::test_capstone_gate_registry_is_exactly_the_current_state": "passed",
+   "tests.test_capstone_lifecycle::test_capstone_task_registry_is_exactly_the_current_state": "passed",
+   "tests.test_capstone_lifecycle::test_freeze_lock_binds_every_listed_file_byte_for_byte": "passed",
+   "tests.test_capstone_lifecycle::test_task_prerequisite_chain_is_linear_and_later_phases_have_no_evidence": "passed",
+   "tests.test_capstone_lifecycle::test_v2_control_plane_is_untouched_by_the_capstone_lineage": "passed"
+  }
+ }
+}

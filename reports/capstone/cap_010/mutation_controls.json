@@ -1,0 +1,222 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/run_capstone_faculty_demo.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_demo_orchestrator.py::test_the_faculty_stack_is_exactly_three_services_with_the_default_runtime_only",
+   "git_status_after_restore": "",
+   "mutation": "LAUNCHER_USES_ROLLBACK_V1",
+   "tests_run": [
+    "tests/test_capstone_demo_orchestrator.py::test_the_faculty_stack_is_exactly_three_services_with_the_default_runtime_only"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/run_capstone_faculty_demo.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_demo_orchestrator.py::test_missing_acknowledgement_refuses_even_in_preflight_only_mode",
+   "git_status_after_restore": "",
+   "mutation": "START_WITHOUT_DEMO_ACK",
+   "tests_run": [
+    "tests/test_capstone_demo_orchestrator.py::test_missing_acknowledgement_refuses_even_in_preflight_only_mode"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/run_capstone_faculty_demo.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_demo_orchestrator.py::test_ready_only_after_every_service_answers_and_shutdown_is_reverse_ordered",
+   "git_status_after_restore": "",
+   "mutation": "READY_BEFORE_SERVICE_READINESS",
+   "tests_run": [
+    "tests/test_capstone_demo_orchestrator.py::test_ready_only_after_every_service_answers_and_shutdown_is_reverse_ordered"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/capstone_demo_workspace.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_demo_workspace.py::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[RANDOM_NO_SENTINEL]",
+   "git_status_after_restore": "",
+   "mutation": "RESET_WITHOUT_SENTINEL",
+   "tests_run": [
+    "tests/test_capstone_demo_workspace.py::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[RANDOM_NO_SENTINEL]"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/capstone_demo_workspace.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_demo_workspace.py::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[ROOT]",
+   "git_status_after_restore": "",
+   "mutation": "REPO_ROOT_ACCEPTED_AS_RESET_TARGET",
+   "tests_run": [
+    "tests/test_capstone_demo_workspace.py::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[ROOT]",
+    "tests/test_capstone_demo_workspace.py::test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted[ROOT_PARENT]"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/run_capstone_faculty_demo.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_demo_orchestrator.py::test_prewarm_is_a_read_only_preparation_with_an_audited_zero_side_effect_report",
+   "git_status_after_restore": "",
+   "mutation": "PREWARM_CREATES_FEDERATION_RUN",
+   "tests_run": [
+    "tests/test_capstone_demo_orchestrator.py::test_prewarm_is_a_read_only_preparation_with_an_audited_zero_side_effect_report"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/run_capstone_faculty_demo.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_demo_orchestrator.py::test_prewarm_is_a_read_only_preparation_with_an_audited_zero_side_effect_report",
+   "git_status_after_restore": "",
+   "mutation": "PREWARM_STARTS_A_RUN",
+   "tests_run": [
+    "tests/test_capstone_demo_orchestrator.py::test_prewarm_is_a_read_only_preparation_with_an_audited_zero_side_effect_report",
+    "tests/test_capstone_demo_orchestrator.py::test_the_launcher_never_issues_a_write_request_and_has_no_package_manager_calls"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+   "git_status_after_restore": "",
+   "mutation": "RUNBOOK_SAYS_PHYSICAL_HARDWARE_CONNECTED",
+   "tests_run": [
+    "tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+    "tests/test_capstone_full_demo.py::test_runbook_has_required_statements_and_both_paths"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+   "git_status_after_restore": "",
+   "mutation": "RUNBOOK_SAYS_EIGHT_HOSPITALS",
+   "tests_run": [
+    "tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+    "tests/test_capstone_full_demo.py::test_runbook_has_required_statements_and_both_paths"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+   "git_status_after_restore": "",
+   "mutation": "RUNBOOK_SAYS_SECAGG_PROVIDES_DP",
+   "tests_run": [
+    "tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+    "tests/test_capstone_full_demo.py::test_runbook_has_required_statements_and_both_paths"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+   "git_status_after_restore": "",
+   "mutation": "RUNBOOK_SAYS_CANDIDATE_DEPLOYED",
+   "tests_run": [
+    "tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+    "tests/test_capstone_full_demo.py::test_runbook_has_required_statements_and_both_paths"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+   "git_status_after_restore": "",
+   "mutation": "RUNBOOK_SAYS_USER_SESSION_TRAINS_PERSONAL_MODEL",
+   "tests_run": [
+    "tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+    "tests/test_capstone_full_demo.py::test_runbook_has_required_statements_and_both_paths"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+   "git_status_after_restore": "",
+   "mutation": "RUNBOOK_DESCRIBES_REPLAY_AS_TRAINING",
+   "tests_run": [
+    "tests/test_capstone_full_demo.py::test_runbook_claim_audit_finds_no_overclaim",
+    "tests/test_capstone_full_demo.py::test_runbook_has_required_statements_and_both_paths"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/run_capstone_faculty_demo.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_demo_orchestrator.py::test_product_readiness_probe_demands_the_exact_identity",
+   "git_status_after_restore": "",
+   "mutation": "CANDIDATE_BECOMES_MONITORING_DEFAULT",
+   "tests_run": [
+    "tests/test_capstone_demo_orchestrator.py::test_product_readiness_probe_demands_the_exact_identity"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/cap_010_cdp_driver.mjs"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_full_demo.py::test_hero_path_uses_the_real_stack_without_mocks",
+   "git_status_after_restore": "",
+   "mutation": "HERO_PATH_USES_FAKE_BACKEND",
+   "tests_run": [
+    "tests/test_capstone_full_demo.py::test_hero_path_uses_the_real_stack_without_mocks"
+   ]
+  },
+  {
+   "caught_by_a_failing_test": true,
+   "files": [
+    "scripts/run_capstone_full_demo_e2e.py"
+   ],
+   "files_restored_byte_identical": true,
+   "first_failing_test": "FAILED tests/test_capstone_full_demo.py::test_no_outcome_tuning_or_hardcoded_model_output",
+   "git_status_after_restore": "",
+   "mutation": "MODEL_OUTCOME_HARDCODED_INTO_EXPECTATION",
+   "tests_run": [
+    "tests/test_capstone_full_demo.py::test_no_outcome_tuning_or_hardcoded_model_output"
+   ]
+  }
+ ]
+}

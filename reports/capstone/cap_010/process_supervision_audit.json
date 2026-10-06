@@ -1,0 +1,13 @@
+{
+ "status": "PASS",
+ "tests": {
+  "tests.test_capstone_demo_orchestrator::test_a_child_that_exits_before_ready_fails_the_stack_and_never_reports_ready": "passed",
+  "tests.test_capstone_demo_orchestrator::test_a_service_that_never_becomes_ready_times_out_and_stops_everything": "passed",
+  "tests.test_capstone_demo_orchestrator::test_an_unexpected_child_death_stops_the_whole_stack[frontend]": "passed",
+  "tests.test_capstone_demo_orchestrator::test_an_unexpected_child_death_stops_the_whole_stack[inference]": "passed",
+  "tests.test_capstone_demo_orchestrator::test_an_unexpected_child_death_stops_the_whole_stack[product]": "passed",
+  "tests.test_capstone_demo_orchestrator::test_ctrl_c_style_stop_terminates_children_and_never_signals_unrelated_processes": "passed",
+  "tests.test_capstone_demo_orchestrator::test_grandchildren_of_a_service_are_reaped_with_their_own_process_group": "passed",
+  "tests.test_capstone_demo_orchestrator::test_ready_only_after_every_service_answers_and_shutdown_is_reverse_ordered": "passed"
+ }
+}

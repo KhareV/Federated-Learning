@@ -1,0 +1,30 @@
+{
+ "canonical_prewarm": {
+  "after": {
+   "active_live_run": false,
+   "candidate_count_overview": 0,
+   "candidates": 0,
+   "federation_runs": 0,
+   "released_default": "MODEL_V2_FINAL"
+  },
+  "before": {
+   "active_live_run": false,
+   "candidate_count_overview": 0,
+   "candidates": 0,
+   "federation_runs": 0,
+   "released_default": "MODEL_V2_FINAL"
+  },
+  "candidates_created": 0,
+  "clients": 8,
+  "elapsed_s_engineering_telemetry_only": 12.403,
+  "enabled": true,
+  "federation_runs_created": 0,
+  "released_binding_changed": false,
+  "side_effect_free": true,
+  "training_calls": 0
+ },
+ "status": "PASS",
+ "tests": {
+  "tests.test_capstone_demo_orchestrator::test_prewarm_is_a_read_only_preparation_with_an_audited_zero_side_effect_report": "passed"
+ }
+}

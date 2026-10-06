@@ -1,0 +1,47 @@
+{
+ "classification": "ENGINEERING_DEMO",
+ "composes": [
+  "NORMAL_MONITORING",
+  "CONTEXT_LOSS",
+  "POOR_SIGNAL",
+  "DISCONNECT_RECONNECT",
+  "FL_SINGLE_RUN",
+  "FL_SECAGG_SHADOW"
+ ],
+ "coverage": {
+  "CONTEXT_LOSS": {
+   "exercised_by": "real product path via the faculty launcher (headless API/WebSocket harness)",
+   "status": "PASS"
+  },
+  "DISCONNECT_RECONNECT": {
+   "exercised_by": "real product path via the faculty launcher (headless API/WebSocket harness)",
+   "status": "PASS"
+  },
+  "FL_SECAGG_SHADOW": {
+   "exercised_by": "genuine LIVE_RUN through the product federation API (FEDAVG, 3 rounds, 24 updates)",
+   "status": "PASS"
+  },
+  "FL_SINGLE_RUN": {
+   "exercised_by": "genuine LIVE_RUN through the product federation API (FEDAVG, 3 rounds, 24 updates)",
+   "status": "PASS"
+  },
+  "NORMAL_MONITORING": {
+   "exercised_by": "real product path via the faculty launcher (headless API/WebSocket harness)",
+   "status": "PASS"
+  },
+  "POOR_SIGNAL": {
+   "exercised_by": "real product path via the faculty launcher (headless API/WebSocket harness)",
+   "status": "PASS"
+  }
+ },
+ "faculty_hero": {
+  "note": "presentation convenience; does not replace the four monitoring coverage runs",
+  "pass": true,
+  "role": "FACULTY_HERO_MONITORING",
+  "scenario": "MIXED_MONITORING_SESSION"
+ },
+ "model_outcome_required": false,
+ "outcome_tuning": false,
+ "scenario_id": "FULL_CAPSTONE_DEMO",
+ "scientific_evidence": false
+}

@@ -1,0 +1,16 @@
+{
+ "blocked_external_attempts": [],
+ "claim_limit": "NHM demo processes and the demo browser journey only",
+ "clerk_global_initialised": [
+  false,
+  false
+ ],
+ "external_network_policy": "ACTIVE_CDP_REQUEST_INTERCEPTION_LOOPBACK_ONLY",
+ "external_requests": [],
+ "origins": [
+  "http://127.0.0.1:4173"
+ ],
+ "request_count_run_1": 280,
+ "request_count_run_2": 280,
+ "status": "PASS"
+}

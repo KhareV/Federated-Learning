@@ -1,0 +1,1299 @@
+{
+ "all_decided_pass": true,
+ "criteria": [
+  {
+   "checks": [
+    {
+     "check": "@cap_pass_1",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-001",
+   "pass": true,
+   "text": "CAP-001/CAPG0 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "@cap_pass_2",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-002",
+   "pass": true,
+   "text": "CAP-002/CAPG1 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "@cap_pass_3",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-003",
+   "pass": true,
+   "text": "CAP-003/CAPG2 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "@cap_pass_4",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-004",
+   "pass": true,
+   "text": "CAP-004/CAPG3 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "@cap_pass_5",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-005",
+   "pass": true,
+   "text": "CAP-005/CAPG4 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "@cap_pass_6",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-006",
+   "pass": true,
+   "text": "CAP-006/CAPG5 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "@cap_pass_7",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-007",
+   "pass": true,
+   "text": "CAP-007/CAPG6 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "@cap_pass_8",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-008",
+   "pass": true,
+   "text": "CAP-008/CAPG7 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "@cap_pass_9",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-009",
+   "pass": true,
+   "text": "CAP-009/CAPG8 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "@locks_verified",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-010",
+   "pass": true,
+   "text": "all prior locks and amendments verify (CAP-001..009, UI V1/V1_1/V1_2, catalog, FL locks)"
+  },
+  {
+   "checks": [
+    {
+     "check": "@entry_audit_immutable",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-011",
+   "pass": true,
+   "text": "the entry audit is immutable (unchanged since its commit)"
+  },
+  {
+   "checks": [
+    {
+     "check": "@no_scientific_drift",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-012",
+   "pass": true,
+   "text": "scientific artifacts show zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "@released_runtime_zero_drift",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-013",
+   "pass": true,
+   "text": "released runtime and DEFAULT_RUNTIME_BINDING_V2 show zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "@v2fl_zero_drift",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-014",
+   "pass": true,
+   "text": "V2-FL artifacts show zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "@cap006_007_zero_drift",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-015",
+   "pass": true,
+   "text": "CAP-006 and CAP-007 implementation show zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "@api_zero_drift",
+     "pass": true
+    },
+    {
+     "check": "T:test_product_api_frontend_and_backend_are_byte_identical_to_entry",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-016",
+   "pass": true,
+   "text": "CAPSTONE_PRODUCT_API_V1_3 shows zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "@ui_zero_drift",
+     "pass": true
+    },
+    {
+     "check": "T:test_product_api_frontend_and_backend_are_byte_identical_to_entry",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-017",
+   "pass": true,
+   "text": "CAPSTONE_UI_V1_2 and the whole frontend show zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "@history_research_zero_drift",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-018",
+   "pass": true,
+   "text": "history and research behaviour show zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "T:test_no_new_python_or_npm_dependency",
+     "pass": true
+    },
+    {
+     "check": "@no_new_deps",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-019",
+   "pass": true,
+   "text": "no new Python or npm dependency was added"
+  },
+  {
+   "checks": [
+    {
+     "check": "@protocol_freeze_precedes_result",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-020",
+   "pass": true,
+   "text": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1 was frozen before any canonical demonstration"
+  },
+  {
+   "checks": [
+    {
+     "check": "T:test_full_demo_binding_matches_the_frozen_contract",
+     "pass": true
+    },
+    {
+     "check": "@binding_audit",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-021",
+   "pass": true,
+   "text": "the FULL_CAPSTONE_DEMO binding is frozen and matches the frozen contract"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_the_faculty_stack_is_exactly_three_services_with_the_default_runtime_only",
+     "pass": true
+    },
+    {
+     "check": "@launcher_audit",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-022",
+   "pass": true,
+   "text": "one governed faculty launcher exists with one obvious command"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_missing_demo_auth_acknowledgement_refuses_to_start",
+     "pass": true
+    },
+    {
+     "check": "S:test_the_cli_subprocess_refuses_without_acknowledgement",
+     "pass": true
+    },
+    {
+     "check": "@launcher_negative",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-023",
+   "pass": true,
+   "text": "explicit DemoAuth acknowledgement is required and nothing starts without it"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_fresh_workspace_is_outside_the_repository_and_carries_a_sentinel",
+     "pass": true
+    },
+    {
+     "check": "S:test_a_workspace_inside_the_repository_is_refused",
+     "pass": true
+    },
+    {
+     "check": "@workspace_outside_repo",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-024",
+   "pass": true,
+   "text": "the workspace lives outside the Git tree"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_resume_requires_a_valid_sentinel",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-025",
+   "pass": true,
+   "text": "a workspace sentinel is required"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted",
+     "pass": true
+    },
+    {
+     "check": "S:test_unsafe_reset_is_refused_by_the_cli",
+     "pass": true
+    },
+    {
+     "check": "S:test_reset_deletes_only_the_validated_workspace",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-026",
+   "pass": true,
+   "text": "unsafe reset targets are rejected"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_fresh_mode_never_silently_erases_an_existing_workspace",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-027",
+   "pass": true,
+   "text": "FRESH mode never silently deletes an existing workspace"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_resume_requires_a_valid_sentinel",
+     "pass": true
+    },
+    {
+     "check": "@restart_ok",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-028",
+   "pass": true,
+   "text": "RESUME requires a valid sentinel and reuses the same workspace"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_an_occupied_port_fails_with_port_in_use_and_never_kills_the_occupant",
+     "pass": true
+    },
+    {
+     "check": "S:test_an_occupied_port_fails_and_names_the_service_without_touching_the_occupant",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-029",
+   "pass": true,
+   "text": "an occupied port fails with PORT_IN_USE and kills nothing"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_the_launcher_has_no_profile_or_timing_option",
+     "pass": true
+    },
+    {
+     "check": "S:test_the_faculty_stack_is_exactly_three_services_with_the_default_runtime_only",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-030",
+   "pass": true,
+   "text": "the launcher always starts the default V2 runtime and never exposes rollback-v1"
+  },
+  {
+   "checks": [
+    {
+     "check": "@identity_inference",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-031",
+   "pass": true,
+   "text": "the actual inference service identity is verified"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_product_readiness_probe_demands_the_exact_identity",
+     "pass": true
+    },
+    {
+     "check": "@identity_product",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-032",
+   "pass": true,
+   "text": "the actual product API identity is verified"
+  },
+  {
+   "checks": [
+    {
+     "check": "@identity_frontend",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-033",
+   "pass": true,
+   "text": "the actual frontend build/identity is verified"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_ready_only_after_every_service_answers_and_shutdown_is_reverse_ordered",
+     "pass": true
+    },
+    {
+     "check": "@launcher_ready_order",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-034",
+   "pass": true,
+   "text": "READY is printed only after all three services are ready"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_an_unexpected_child_death_stops_the_whole_stack",
+     "pass": true
+    },
+    {
+     "check": "S:test_a_child_that_exits_before_ready_fails_the_stack_and_never_reports_ready",
+     "pass": true
+    },
+    {
+     "check": "S:test_a_service_that_never_becomes_ready_times_out_and_stops_everything",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-035",
+   "pass": true,
+   "text": "a child failure fails the whole stack"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_ctrl_c_style_stop_terminates_children_and_never_signals_unrelated_processes",
+     "pass": true
+    },
+    {
+     "check": "@sigint_shutdown",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-036",
+   "pass": true,
+   "text": "Ctrl+C performs a graceful reverse-ordered shutdown"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_grandchildren_of_a_service_are_reaped_with_their_own_process_group",
+     "pass": true
+    },
+    {
+     "check": "@no_orphans",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-037",
+   "pass": true,
+   "text": "no launched child is orphaned and unrelated processes are never signalled"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_log_secret_scan_detects_secrets_and_passes_clean_logs",
+     "pass": true
+    },
+    {
+     "check": "@log_scan_clean",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-038",
+   "pass": true,
+   "text": "no secret or token is logged"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_ready_only_after_every_service_answers_and_shutdown_is_reverse_ordered",
+     "pass": true
+    },
+    {
+     "check": "@logs_in_workspace",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-039",
+   "pass": true,
+   "text": "each service has its own log in the workspace"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_a_healthy_environment_passes_and_executes_no_science",
+     "pass": true
+    },
+    {
+     "check": "S:test_preflight_module_runs_no_science_by_construction",
+     "pass": true
+    },
+    {
+     "check": "@preflight_audit",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-040",
+   "pass": true,
+   "text": "preflight verifies identities/artifacts and runs no science"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_every_verifier_failure_fails_the_whole_preflight",
+     "pass": true
+    },
+    {
+     "check": "S:test_a_broken_precondition_fails_preflight_and_starts_nothing",
+     "pass": true
+    },
+    {
+     "check": "S:test_missing_frontend_dependencies_report_the_exact_setup_command_and_never_install",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-041",
+   "pass": true,
+   "text": "every preflight failure path fails clearly"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_the_real_environment_passes_the_real_preflight",
+     "pass": true
+    },
+    {
+     "check": "@preflight_real",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-042",
+   "pass": true,
+   "text": "the real environment passes the real preflight"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_prewarm_is_a_read_only_preparation_with_an_audited_zero_side_effect_report",
+     "pass": true
+    },
+    {
+     "check": "@prewarm_audit",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-043",
+   "pass": true,
+   "text": "the optional prewarm trains nothing and creates no run or candidate and changes no binding"
+  },
+  {
+   "checks": [
+    {
+     "check": "S:test_the_launcher_never_issues_a_write_request_and_has_no_package_manager_calls",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-044",
+   "pass": true,
+   "text": "the launcher issues no write request and installs no package"
+  },
+  {
+   "checks": [
+    {
+     "check": "T:test_runbook_has_required_statements_and_both_paths",
+     "pass": true
+    },
+    {
+     "check": "@runbook_audit",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-045",
+   "pass": true,
+   "text": "the faculty runbook exists with a short and a full path"
+  },
+  {
+   "checks": [
+    {
+     "check": "T:test_runbook_has_required_statements_and_both_paths",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-046",
+   "pass": true,
+   "text": "the runbook states accelerated timing, simulated-only hardware, non-diagnostic role, no personal model, logical one-laptop FL, narrow SecAgg and candidate not deployed"
+  },
+  {
+   "checks": [
+    {
+     "check": "T:test_runbook_has_required_statements_and_both_paths",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-047",
+   "pass": true,
+   "text": "the runbook preserves the promotion-versus-release distinction and answers the personalization question"
+  },
+  {
+   "checks": [
+    {
+     "check": "T:test_runbook_claim_audit_finds_no_overclaim",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-048",
+   "pass": true,
+   "text": "the runbook claim audit finds no overclaim"
+  },
+  {
+   "checks": [
+    {
+     "check": "T:test_runbook_claim_audit_rejects_every_overclaim_mutation",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-049",
+   "pass": true,
+   "text": "a runbook claiming physical hardware, hospitals, DP, deployment, personal models or training replay fails the audit"
+  },
+  {
+   "checks": [
+    {
+     "check": "@coverage_real",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-050",
+   "pass": true,
+   "text": "FULL_CAPSTONE_DEMO monitoring coverage ran against the real SOFTWARE_SYSTEM_V2"
+  },
+  {
+   "checks": [
+    {
+     "check": "@coverage_NORMAL_MONITORING",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-051",
+   "pass": true,
+   "text": "NORMAL_MONITORING is covered and passes its engineering invariants"
+  },
+  {
+   "checks": [
+    {
+     "check": "@coverage_CONTEXT_LOSS",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-052",
+   "pass": true,
+   "text": "CONTEXT_LOSS is covered and passes its engineering invariants"
+  },
+  {
+   "checks": [
+    {
+     "check": "@coverage_POOR_SIGNAL",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-053",
+   "pass": true,
+   "text": "POOR_SIGNAL is covered and passes its engineering invariants"
+  },
+  {
+   "checks": [
+    {
+     "check": "@coverage_DISCONNECT_RECONNECT",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-054",
+   "pass": true,
+   "text": "DISCONNECT_RECONNECT is covered and passes its engineering invariants"
+  },
+  {
+   "checks": [
+    {
+     "check": "@coverage_FL_SINGLE_RUN",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-055",
+   "pass": true,
+   "text": "FL_SINGLE_RUN is covered and passes its engineering invariants"
+  },
+  {
+   "checks": [
+    {
+     "check": "@coverage_FL_SECAGG_SHADOW",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-056",
+   "pass": true,
+   "text": "FL_SECAGG_SHADOW is covered and passes its engineering invariants"
+  },
+  {
+   "checks": [
+    {
+     "check": "T:test_no_outcome_tuning_or_hardcoded_model_output",
+     "pass": true
+    },
+    {
+     "check": "@no_outcome_tuning",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-057",
+   "pass": true,
+   "text": "scenario coverage uses no model-outcome tuning and asserts no model output"
+  },
+  {
+   "checks": [
+    {
+     "check": "@hero_mixed",
+     "pass": true
+    },
+    {
+     "check": "T:test_hero_path_uses_the_real_stack_without_mocks",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-058",
+   "pass": true,
+   "text": "the hero browser journey uses MIXED_MONITORING_SESSION through the real device/product/runtime path"
+  },
+  {
+   "checks": [
+    {
+     "check": "@hero_complete",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-059",
+   "pass": true,
+   "text": "the hero session completes with MODEL_V2_FINAL and CAL_V2 and a simulated disconnect/gap"
+  },
+  {
+   "checks": [
+    {
+     "check": "@history_loads",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-060",
+   "pass": true,
+   "text": "history loads the persisted summary, timeline and bounded preview"
+  },
+  {
+   "checks": [
+    {
+     "check": "@history_semantics",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-061",
+   "pass": true,
+   "text": "history keeps the CAP-009 count-basis, time-domain and probability-label semantics"
+  },
+  {
+   "checks": [
+    {
+     "check": "@fl_config",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-062",
+   "pass": true,
+   "text": "the faculty federation uses LIVE_RUN, FEDAVG and SECAGG_SHADOW"
+  },
+  {
+   "checks": [
+    {
+     "check": "@fl_counts",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-063",
+   "pass": true,
+   "text": "exactly eight logical clients, three rounds and 24 genuine updates"
+  },
+  {
+   "checks": [
+    {
+     "check": "@fl_secagg",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-064",
+   "pass": true,
+   "text": "authoritative aggregation remains PLAIN and the round-1 shadow is verified"
+  },
+  {
+   "checks": [
+    {
+     "check": "@candidate_ok",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-065",
+   "pass": true,
+   "text": "exactly one canonical-run candidate is created, validated, ACCEPTED_TO_SANDBOX, IN_SANDBOX and production_deployed=false"
+  },
+  {
+   "checks": [
+    {
+     "check": "@released_default",
+     "pass": true
+    },
+    {
+     "check": "@models_page",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-066",
+   "pass": true,
+   "text": "MODEL_V2_FINAL remains RELEASED_DEFAULT and no candidate inference or control exists"
+  },
+  {
+   "checks": [
+    {
+     "check": "@research_ml",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-067",
+   "pass": true,
+   "text": "the ML research page shows the frozen evidence and the promotion/release distinction"
+  },
+  {
+   "checks": [
+    {
+     "check": "@research_fl",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-068",
+   "pass": true,
+   "text": "the FL research page shows frozen evidence, FedProx/SecAgg limits and V2-FL-005 as engineering-only"
+  },
+  {
+   "checks": [
+    {
+     "check": "@no_science",
+     "pass": true
+    },
+    {
+     "check": "T:test_preflight_module_runs_no_science_by_construction",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-069",
+   "pass": true,
+   "text": "no scientific recomputation and no held-out access occurred"
+  },
+  {
+   "checks": [
+    {
+     "check": "@hardware_visible",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-070",
+   "pass": true,
+   "text": "simulated-only hardware and physical_hardware_available=false are visible"
+  },
+  {
+   "checks": [
+    {
+     "check": "@browser_real_stack",
+     "pass": true
+    },
+    {
+     "check": "@browser_complete",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-071",
+   "pass": true,
+   "text": "the canonical browser used the real frontend, product backend, inference runtime and FL runtime and completed the full journey"
+  },
+  {
+   "checks": [
+    {
+     "check": "@offline_ok",
+     "pass": true
+    },
+    {
+     "check": "@clerk_not_initialised",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-072",
+   "pass": true,
+   "text": "external required network destinations are zero and Clerk is not initialised"
+  },
+  {
+   "checks": [
+    {
+     "check": "@restart_preserves",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-073",
+   "pass": true,
+   "text": "the canonical restart preserves session, history, federation run, candidate and governance without rerunning monitoring or FL"
+  },
+  {
+   "checks": [
+    {
+     "check": "@restart_catalog",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-074",
+   "pass": true,
+   "text": "the research catalog is unchanged after restart"
+  },
+  {
+   "checks": [
+    {
+     "check": "@run1_ok",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-075",
+   "pass": true,
+   "text": "full fresh demo run 1 completes"
+  },
+  {
+   "checks": [
+    {
+     "check": "@run2_ok",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-076",
+   "pass": true,
+   "text": "full fresh demo run 2 completes"
+  },
+  {
+   "checks": [
+    {
+     "check": "@reproducible",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-077",
+   "pass": true,
+   "text": "the semantic digests of run 1 and run 2 are identical"
+  },
+  {
+   "checks": [
+    {
+     "check": "@exclusions_documented",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-078",
+   "pass": true,
+   "text": "runtime/log nondeterminism exclusions are documented"
+  },
+  {
+   "checks": [
+    {
+     "check": "@no_fakery",
+     "pass": true
+    },
+    {
+     "check": "T:test_hero_path_uses_the_real_stack_without_mocks",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-079",
+   "pass": true,
+   "text": "no fake live, FL or scientific values and no user-session FL training or personal model exist"
+  },
+  {
+   "checks": [
+    {
+     "check": "@out_of_scope",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-080",
+   "pass": true,
+   "text": "no candidate deployment and no backend, frontend, API route, sandbox runtime, FL_NEW_LOCAL_BATCH, FL_MULTIRUN or hardware work was added"
+  },
+  {
+   "checks": [
+    {
+     "check": "@launcher_negative",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-081",
+   "pass": true,
+   "text": "launcher negative tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "@workspace_tests",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-082",
+   "pass": true,
+   "text": "workspace safety tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "@supervision_tests",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-083",
+   "pass": true,
+   "text": "process supervision tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "@mutation_log",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-084",
+   "pass": true,
+   "text": "all sixteen mutation controls were caught and restored"
+  },
+  {
+   "checks": [
+    {
+     "check": "@targeted_tests",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-085",
+   "pass": true,
+   "text": "targeted CAP-010 tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "@prior_capstone_tests",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-086",
+   "pass": true,
+   "text": "prior capstone tests pass under the documented inherited-flake policy"
+  },
+  {
+   "checks": [
+    {
+     "check": "@regression",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-087",
+   "pass": true,
+   "text": "the full Python regression passes under the documented inherited-flake policy"
+  },
+  {
+   "checks": [
+    {
+     "check": "@frontend_npm_test",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-088",
+   "pass": true,
+   "text": "frontend npm test passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "@svelte_check",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-089",
+   "pass": true,
+   "text": "svelte-check reports zero errors"
+  },
+  {
+   "checks": [
+    {
+     "check": "@frontend_build",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-090",
+   "pass": true,
+   "text": "the frontend build passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "@ruff",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-091",
+   "pass": true,
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "@pip",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-092",
+   "pass": true,
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "@ci",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-093",
+   "pass": true,
+   "text": "CI was neither queried nor triggered"
+  },
+  {
+   "checks": [
+    {
+     "check": "@resource_audit",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-094",
+   "pass": true,
+   "text": "resource observations are recorded as machine-specific telemetry, not requirements"
+  },
+  {
+   "checks": [
+    {
+     "check": "@readiness_clean",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-095",
+   "pass": true,
+   "text": "the readiness artifact is bounded and contains no secret, token, waveform, candidate weights or training examples"
+  },
+  {
+   "checks": [
+    {
+     "check": "@protected_final",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-096",
+   "pass": true,
+   "text": "the final protected-artifact audit shows zero drift apart from the control plane and new CAP-010 files"
+  },
+  {
+   "checks": [
+    {
+     "check": "@no_large_artifacts",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-097",
+   "pass": true,
+   "text": "no state file, SQLite database or large artifact was committed"
+  },
+  {
+   "checks": [
+    {
+     "check": "@amendment_hygiene",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-098",
+   "pass": true,
+   "text": "post-freeze amendments (if any) were dedicated pure commits"
+  },
+  {
+   "checks": [
+    {
+     "check": "@components_registered",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-099",
+   "pass": true,
+   "text": "the CAP-010 components are registered and locked"
+  },
+  {
+   "checks": [
+    {
+     "check": "@registry_cap010",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-100",
+   "pass": true,
+   "text": "CAP-010 is PASS (final)"
+  },
+  {
+   "checks": [
+    {
+     "check": "@registry_capg9",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-101",
+   "pass": true,
+   "text": "CAPG9 is PASS (final)"
+  },
+  {
+   "checks": [
+    {
+     "check": "@registry_cap011",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-102",
+   "pass": true,
+   "text": "CAP-011 is NOT_STARTED and no CAP-011 artifact exists"
+  },
+  {
+   "checks": [
+    {
+     "check": "@disclosures_preserved",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-103",
+   "pass": true,
+   "text": "all preserved disclosures are carried forward"
+  },
+  {
+   "checks": [
+    {
+     "check": "@handoff_sections",
+     "pass": true
+    }
+   ],
+   "id": "CAPG9-104",
+   "pass": true,
+   "text": "the final handoff uses the exact required section list"
+  }
+ ],
+ "criteria_count": 104,
+ "decided": 104,
+ "failed": [],
+ "gate": "CAPG9",
+ "mode": "FINAL",
+ "self_transition_note": "Registry CAP-010/CAPG9 PASS, the handoff sections and the disclosures are authorised by this gate; the pre-transition run defers exactly those checks, the final run requires them."
+}

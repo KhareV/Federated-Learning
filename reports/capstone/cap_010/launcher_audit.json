@@ -1,0 +1,19 @@
+{
+ "command": "python -m scripts.run_capstone_faculty_demo --acknowledge-demo-auth --build --prewarm-federation --workspace <fresh temp> (default ports 8001/8002/4173)",
+ "default_ports": [
+  8001,
+  8002,
+  4173
+ ],
+ "services": [
+  "inference",
+  "product",
+  "frontend"
+ ],
+ "status": "PASS",
+ "tests": {
+  "tests.test_capstone_demo_orchestrator::test_the_faculty_stack_is_exactly_three_services_with_the_default_runtime_only": "passed",
+  "tests.test_capstone_demo_orchestrator::test_the_launcher_has_no_profile_or_timing_option": "passed",
+  "tests.test_capstone_demo_orchestrator::test_the_launcher_never_issues_a_write_request_and_has_no_package_manager_calls": "passed"
+ }
+}

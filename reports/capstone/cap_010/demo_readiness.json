@@ -1,0 +1,20 @@
+{
+ "candidate_deployed": false,
+ "capg9_all_other_criteria_pass": true,
+ "claim_allowed_only_if_capg9_pass": "The NHM capstone product is ready for an offline one-laptop faculty demonstration using simulated device input, released research monitoring, genuine engineering federation, persistent history, and frozen research-evidence views.",
+ "gate": "CAPG9",
+ "hardware": "SIMULATED_ONLY",
+ "launch_command": "python -m scripts.run_capstone_faculty_demo --acknowledge-demo-auth --mode FRESH --workspace <path outside the repository>",
+ "not_claimed": [
+  "clean-machine release",
+  "physical wearable readiness",
+  "clinical readiness",
+  "production deployment",
+  "security certification",
+  "scientific efficacy"
+ ],
+ "readiness_id": "CAPSTONE_DEMO_READINESS_V1",
+ "released_default": "MODEL_V2_FINAL",
+ "runbook": "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md",
+ "timing": "ACCELERATED_FOR_PRESENTATION"
+}

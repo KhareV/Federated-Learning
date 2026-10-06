@@ -1,0 +1,529 @@
+{
+ "launcher_stop": {
+  "child_pids_still_alive": [],
+  "launcher_exit_code": 0,
+  "launcher_reported_orphans": [],
+  "secret_scan": {
+   "clean": true,
+   "logs_scanned": [
+    "frontend.log",
+    "inference.log",
+    "product.log"
+   ],
+   "secret_pattern_hits": []
+  },
+  "stopped_in_reverse_order_log": true
+ },
+ "mocks_used": false,
+ "real_components": [
+  "SimulatedWearableSource",
+  "monitoring coordinator",
+  "SOFTWARE_SYSTEM_V2 inference process",
+  "federation runtime"
+ ],
+ "scenarios": {
+  "CONTEXT_LOSS": {
+   "calibration_ids": [
+    "CAL_V2"
+   ],
+   "connection_events_as_expected": true,
+   "context_available_false": 12,
+   "context_available_true": 21,
+   "device_lifecycle": [
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "ecg_index_discontinuities": 0,
+   "ecg_null_samples": 0,
+   "ecg_quality_counts": {
+    "VALID": 33
+   },
+   "elapsed_s_accelerated": 0.87,
+   "event_kinds": {
+    "context.snapshot": 33,
+    "device.status": 2,
+    "inference.result": 33,
+    "monitoring.state": 3,
+    "quality.status": 33,
+    "session.status": 3,
+    "waveform.chunk": 1080
+   },
+   "expected_connection_events": [
+    "SCAN_STARTED",
+    "DEVICE_DISCOVERED",
+    "PAIRING_STARTED",
+    "DEVICE_CONNECTED",
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "inference_results": 33,
+   "invariants": {
+    "completed": true,
+    "connection_events_as_expected": true,
+    "context_unavailable_interval": true,
+    "contiguous_events": true,
+    "inference_ran": true,
+    "released_model": true
+   },
+   "model_ids": [
+    "MODEL_V2_FINAL"
+   ],
+   "model_outcome_asserted": false,
+   "monitoring_state_changes": [
+    "NORMAL_MONITORED_PATTERN",
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "monitoring_states_observed": [
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "outcome_tuned": false,
+   "pass": true,
+   "pre_session_device_states": [
+    "FOUND",
+    "CONNECTED"
+   ],
+   "scenario": "CONTEXT_LOSS",
+   "sequence_contiguous": true,
+   "session_runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "session_state": "COMPLETED",
+   "timeline_source_entries": 72
+  },
+  "DISCONNECT_RECONNECT": {
+   "calibration_ids": [
+    "CAL_V2"
+   ],
+   "connection_events_as_expected": true,
+   "context_available_false": 0,
+   "context_available_true": 29,
+   "device_lifecycle": [
+    "STREAM_STARTED",
+    "DEVICE_DISCONNECTED",
+    "RECONNECT_STARTED",
+    "DEVICE_RECONNECTED",
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "ecg_index_discontinuities": 0,
+   "ecg_null_samples": 5400,
+   "ecg_quality_counts": {
+    "UNUSABLE": 4,
+    "VALID": 29
+   },
+   "elapsed_s_accelerated": 0.84,
+   "event_kinds": {
+    "context.snapshot": 29,
+    "device.status": 6,
+    "inference.result": 29,
+    "monitoring.state": 1,
+    "quality.status": 33,
+    "session.status": 3,
+    "waveform.chunk": 1080
+   },
+   "expected_connection_events": [
+    "SCAN_STARTED",
+    "DEVICE_DISCOVERED",
+    "PAIRING_STARTED",
+    "DEVICE_CONNECTED",
+    "STREAM_STARTED",
+    "DEVICE_DISCONNECTED",
+    "RECONNECT_STARTED",
+    "DEVICE_RECONNECTED",
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "inference_results": 29,
+   "invariants": {
+    "completed": true,
+    "connection_events_as_expected": true,
+    "contiguous_events": true,
+    "disconnect_and_reconnect": true,
+    "inference_ran": true,
+    "released_model": true,
+    "source_delivery_gap_without_fabrication": true
+   },
+   "model_ids": [
+    "MODEL_V2_FINAL"
+   ],
+   "model_outcome_asserted": false,
+   "monitoring_state_changes": [
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "monitoring_states_observed": [
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "outcome_tuned": false,
+   "pass": true,
+   "pre_session_device_states": [
+    "FOUND",
+    "CONNECTED"
+   ],
+   "scenario": "DISCONNECT_RECONNECT",
+   "sequence_contiguous": true,
+   "session_runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "session_state": "COMPLETED",
+   "timeline_source_entries": 63
+  },
+  "FL_SECAGG_SHADOW": {
+   "aggregation_modes": [
+    "PLAIN"
+   ],
+   "candidate_ids": [
+    "CAPSTONE_FL_CANDIDATE_0002"
+   ],
+   "clients": 8,
+   "event_kinds": {
+    "aggregation.status": 3,
+    "candidate.created": 1,
+    "candidate.governance": 1,
+    "candidate.validation": 2,
+    "client.status": 96,
+    "client.training_progress": 48,
+    "client.update_ready": 24,
+    "federation.completed": 1,
+    "federation.status": 6,
+    "round.status": 18,
+    "secagg.status": 2
+   },
+   "pass": true,
+   "rounds": [
+    [
+     "COMPLETED",
+     8
+    ],
+    [
+     "COMPLETED",
+     8
+    ],
+    [
+     "COMPLETED",
+     8
+    ]
+   ],
+   "run_status": "COMPLETED",
+   "secagg_events": [
+    [
+     1,
+     "SHADOW_RUNNING"
+    ],
+    [
+     1,
+     "SHADOW_VERIFIED"
+    ]
+   ],
+   "secagg_mode": "SECAGG_SHADOW",
+   "update_ready_events": 24
+  },
+  "FL_SINGLE_RUN": {
+   "aggregation_modes": [
+    "PLAIN"
+   ],
+   "candidate_ids": [
+    "CAPSTONE_FL_CANDIDATE_0001"
+   ],
+   "clients": 8,
+   "event_kinds": {
+    "aggregation.status": 3,
+    "candidate.created": 1,
+    "candidate.governance": 1,
+    "candidate.validation": 2,
+    "client.status": 96,
+    "client.training_progress": 48,
+    "client.update_ready": 24,
+    "federation.completed": 1,
+    "federation.status": 6,
+    "round.status": 18,
+    "secagg.status": 3
+   },
+   "pass": true,
+   "rounds": [
+    [
+     "COMPLETED",
+     8
+    ],
+    [
+     "COMPLETED",
+     8
+    ],
+    [
+     "COMPLETED",
+     8
+    ]
+   ],
+   "run_status": "COMPLETED",
+   "secagg_events": [
+    [
+     1,
+     "NOT_USED"
+    ],
+    [
+     2,
+     "NOT_USED"
+    ],
+    [
+     3,
+     "NOT_USED"
+    ]
+   ],
+   "secagg_mode": "PLAIN",
+   "update_ready_events": 24
+  },
+  "MIXED_MONITORING_SESSION": {
+   "calibration_ids": [
+    "CAL_V2"
+   ],
+   "connection_events_as_expected": true,
+   "context_available_false": 20,
+   "context_available_true": 66,
+   "device_lifecycle": [
+    "STREAM_STARTED",
+    "DEVICE_DISCONNECTED",
+    "RECONNECT_STARTED",
+    "DEVICE_RECONNECTED",
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "ecg_index_discontinuities": 0,
+   "ecg_null_samples": 5400,
+   "ecg_quality_counts": {
+    "UNUSABLE": 7,
+    "VALID": 86
+   },
+   "elapsed_s_accelerated": 2.86,
+   "event_kinds": {
+    "context.snapshot": 86,
+    "device.status": 6,
+    "inference.result": 86,
+    "monitoring.state": 3,
+    "quality.status": 93,
+    "session.status": 3,
+    "waveform.chunk": 2880
+   },
+   "expected_connection_events": [
+    "SCAN_STARTED",
+    "DEVICE_DISCOVERED",
+    "PAIRING_STARTED",
+    "DEVICE_CONNECTED",
+    "STREAM_STARTED",
+    "DEVICE_DISCONNECTED",
+    "RECONNECT_STARTED",
+    "DEVICE_RECONNECTED",
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "inference_results": 86,
+   "invariants": {
+    "completed": true,
+    "connection_events_as_expected": true,
+    "contiguous_events": true,
+    "disconnect_and_reconnect": true,
+    "inference_ran": true,
+    "released_model": true,
+    "source_delivery_gap_without_fabrication": true
+   },
+   "model_ids": [
+    "MODEL_V2_FINAL"
+   ],
+   "model_outcome_asserted": false,
+   "monitoring_state_changes": [
+    "NORMAL_MONITORED_PATTERN",
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "monitoring_states_observed": [
+    "CONTEXT_UNAVAILABLE",
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "outcome_tuned": false,
+   "pass": true,
+   "pre_session_device_states": [
+    "FOUND",
+    "CONNECTED"
+   ],
+   "scenario": "MIXED_MONITORING_SESSION",
+   "sequence_contiguous": true,
+   "session_runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "session_state": "COMPLETED",
+   "timeline_source_entries": 183
+  },
+  "NORMAL_MONITORING": {
+   "calibration_ids": [
+    "CAL_V2"
+   ],
+   "connection_events_as_expected": true,
+   "context_available_false": 0,
+   "context_available_true": 21,
+   "device_lifecycle": [
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "ecg_index_discontinuities": 0,
+   "ecg_null_samples": 0,
+   "ecg_quality_counts": {
+    "VALID": 21
+   },
+   "elapsed_s_accelerated": 0.62,
+   "event_kinds": {
+    "context.snapshot": 21,
+    "device.status": 2,
+    "inference.result": 21,
+    "monitoring.state": 1,
+    "quality.status": 21,
+    "session.status": 3,
+    "waveform.chunk": 720
+   },
+   "expected_connection_events": [
+    "SCAN_STARTED",
+    "DEVICE_DISCOVERED",
+    "PAIRING_STARTED",
+    "DEVICE_CONNECTED",
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "inference_results": 21,
+   "invariants": {
+    "completed": true,
+    "connection_events_as_expected": true,
+    "context_available_throughout": true,
+    "contiguous_events": true,
+    "inference_ran": true,
+    "quality_valid_throughout": true,
+    "released_model": true
+   },
+   "model_ids": [
+    "MODEL_V2_FINAL"
+   ],
+   "model_outcome_asserted": false,
+   "monitoring_state_changes": [
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "monitoring_states_observed": [
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "outcome_tuned": false,
+   "pass": true,
+   "pre_session_device_states": [
+    "FOUND",
+    "CONNECTED"
+   ],
+   "scenario": "NORMAL_MONITORING",
+   "sequence_contiguous": true,
+   "session_runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "session_state": "COMPLETED",
+   "timeline_source_entries": 44
+  },
+  "POOR_SIGNAL": {
+   "calibration_ids": [
+    "CAL_V2"
+   ],
+   "connection_events_as_expected": true,
+   "context_available_false": 0,
+   "context_available_true": 30,
+   "device_lifecycle": [
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "ecg_index_discontinuities": 0,
+   "ecg_null_samples": 0,
+   "ecg_quality_counts": {
+    "UNUSABLE": 3,
+    "VALID": 30
+   },
+   "elapsed_s_accelerated": 0.83,
+   "event_kinds": {
+    "context.snapshot": 30,
+    "device.status": 2,
+    "inference.result": 30,
+    "monitoring.state": 1,
+    "quality.status": 33,
+    "session.status": 3,
+    "waveform.chunk": 1080
+   },
+   "expected_connection_events": [
+    "SCAN_STARTED",
+    "DEVICE_DISCOVERED",
+    "PAIRING_STARTED",
+    "DEVICE_CONNECTED",
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "inference_results": 30,
+   "invariants": {
+    "completed": true,
+    "connection_events_as_expected": true,
+    "contiguous_events": true,
+    "inference_ran": true,
+    "quality_degraded_or_unusable_reported": true,
+    "released_model": true
+   },
+   "model_ids": [
+    "MODEL_V2_FINAL"
+   ],
+   "model_outcome_asserted": false,
+   "monitoring_state_changes": [
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "monitoring_states_observed": [
+    "NORMAL_MONITORED_PATTERN"
+   ],
+   "outcome_tuned": false,
+   "pass": true,
+   "pre_session_device_states": [
+    "FOUND",
+    "CONNECTED"
+   ],
+   "scenario": "POOR_SIGNAL",
+   "sequence_contiguous": true,
+   "session_runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "session_state": "COMPLETED",
+   "timeline_source_entries": 64
+  }
+ },
+ "workspace": "separate temporary workspace (not the visible faculty workspace)"
+}

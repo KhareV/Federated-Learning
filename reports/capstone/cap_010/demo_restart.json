@@ -1,0 +1,193 @@
+{
+ "browser_steps": {
+  "about": {
+   "noPhysicalWearable": true,
+   "step": "about"
+  },
+  "federation-reload": {
+   "roundCards": 3,
+   "runStatus": "COMPLETED",
+   "step": "federation-reload"
+  },
+  "history": {
+   "countBasis": true,
+   "listed": true,
+   "previewIsBounded": true,
+   "previews": 1,
+   "probabilityLabel": true,
+   "sessionId": "SESS-8bec8cbe7b9b45e9b57a8ac76205a938",
+   "step": "history",
+   "summaryStatus": 200,
+   "timeDomains": true,
+   "timelineStatus": 200
+  },
+  "models": {
+   "acceptedCopy": true,
+   "candidates": 1,
+   "controls": [],
+   "productionDeployed": [
+    "FALSE"
+   ],
+   "released": "MODEL_V2_FINALrole: RELEASED_DEFAULTMODEL_V1role: ROLLBACK_REFERENCE",
+   "step": "models"
+  },
+  "overview": {
+   "federationEnabled": true,
+   "hardwareSimulated": true,
+   "identity": "DEMOdemo:faculty",
+   "initial": {
+    "candidates": 1,
+    "runs": 1,
+    "sessions": 1
+   },
+   "notConnected": true,
+   "releasedModel": true,
+   "step": "overview"
+  },
+  "research-fl": {
+   "engineeringSeparate": true,
+   "fedproxCaveat": true,
+   "phases": true,
+   "provenance": true,
+   "secaggCaveat": true,
+   "status": 200,
+   "step": "research-fl"
+  },
+  "research-ml": {
+   "calibrationCaveat": true,
+   "promotion": true,
+   "provenance": true,
+   "softwareRelease": true,
+   "status": 200,
+   "step": "research-ml"
+  },
+  "sign-in": {
+   "clerkGlobal": false,
+   "notClerk": true,
+   "offlineDemoBanner": true,
+   "step": "sign-in"
+  },
+  "system": {
+   "hardwareMode": "SIMULATED_ONLY",
+   "pageShowsNoHardware": true,
+   "pageShowsSimulatedOnly": true,
+   "physicalHardwareAvailable": false,
+   "step": "system"
+  }
+ },
+ "byte_equal_payloads": {
+  "fl": true,
+  "ml": true,
+  "summary": true,
+  "timeline": true
+ },
+ "console_errors": [],
+ "counts_unchanged": true,
+ "db_after": {
+  "candidate_dirs": [
+   "CAPSTONE_FL_CANDIDATE_0001"
+  ],
+  "candidates": [
+   {
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "production_deployed": 0,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  "db_counts": {
+   "candidate_models": 1,
+   "devices": 1,
+   "federation_rounds": 3,
+   "federation_runs": 1,
+   "governance_decisions": 1,
+   "inference_events": 86,
+   "monitoring_sessions": 1,
+   "users": 1
+  },
+  "federation_run_files": [
+   "FEDRUN-988FCF26E647"
+  ]
+ },
+ "db_before": {
+  "candidate_dirs": [
+   "CAPSTONE_FL_CANDIDATE_0001"
+  ],
+  "candidates": [
+   {
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "production_deployed": 0,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  "db_counts": {
+   "candidate_models": 1,
+   "devices": 1,
+   "federation_rounds": 3,
+   "federation_runs": 1,
+   "governance_decisions": 1,
+   "inference_events": 86,
+   "monitoring_sessions": 1,
+   "users": 1
+  },
+  "federation_run_files": [
+   "FEDRUN-988FCF26E647"
+  ]
+ },
+ "device_runtime_connection_state_note": "device connection state is runtime-only and reconstructed according to the CAP-004 restart policy (not asserted by this phase)",
+ "driver_exit": 0,
+ "fl_rerun": false,
+ "mode": "RESUME",
+ "monitoring_rerun": false,
+ "network": {
+  "blockedExternal": [],
+  "external": [],
+  "frontendHost": "127.0.0.1:4173",
+  "origins": [
+   "http://127.0.0.1:4173"
+  ],
+  "requestCount": 296,
+  "websockets": [
+   "ws://127.0.0.1:4173/product/v1/federation/runs/FEDRUN-988FCF26E647/live"
+  ]
+ },
+ "no_new_candidate": true,
+ "no_new_federation_run": true,
+ "released_default": "MODEL_V2_FINAL",
+ "research_catalog_file_unchanged": true,
+ "same_projection_per_api": {
+  "fl": true,
+  "ml": true,
+  "models": true,
+  "rounds": true,
+  "run": true,
+  "session": true,
+  "summary": true,
+  "system": true,
+  "timeline": true
+ },
+ "same_workspace": true,
+ "semantic_identical": true,
+ "semantic_sha256_after": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "semantic_sha256_before": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "stopped": {
+  "child_pids_still_alive": [],
+  "launcher_exit_code": 0,
+  "launcher_reported_orphans": [],
+  "secret_scan": {
+   "clean": true,
+   "logs_scanned": [
+    "frontend.log",
+    "inference.log",
+    "product.log"
+   ],
+   "secret_pattern_hits": []
+  },
+  "stopped_in_reverse_order_log": true
+ }
+}

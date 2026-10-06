@@ -1,0 +1,12 @@
+{
+ "status": "PASS",
+ "tests": {
+  "tests.test_capstone_demo_orchestrator::test_an_occupied_port_fails_with_port_in_use_and_never_kills_the_occupant[frontend]": "passed",
+  "tests.test_capstone_demo_orchestrator::test_an_occupied_port_fails_with_port_in_use_and_never_kills_the_occupant[inference]": "passed",
+  "tests.test_capstone_demo_orchestrator::test_an_occupied_port_fails_with_port_in_use_and_never_kills_the_occupant[product]": "passed",
+  "tests.test_capstone_demo_orchestrator::test_missing_demo_auth_acknowledgement_refuses_to_start": "passed",
+  "tests.test_capstone_demo_orchestrator::test_the_cli_subprocess_refuses_without_acknowledgement": "passed",
+  "tests.test_capstone_demo_orchestrator::test_unsafe_reset_is_refused_by_the_cli": "passed",
+  "tests.test_capstone_demo_preflight::test_an_occupied_port_fails_and_names_the_service_without_touching_the_occupant": "passed"
+ }
+}

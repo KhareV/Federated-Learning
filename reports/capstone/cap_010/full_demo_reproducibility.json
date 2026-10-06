@@ -1,0 +1,29 @@
+{
+ "excluded_from_digest": [
+  "session ids",
+  "federation run ids",
+  "timestamps",
+  "latency/elapsed seconds",
+  "ports are fixed defaults",
+  "process ids",
+  "log text",
+  "workspace path",
+  "screenshots",
+  "machine-specific wall-clock telemetry",
+  "device connection state after restart (runtime-only by the CAP-004 restart policy)"
+ ],
+ "fresh_workspaces": true,
+ "included_in_digest": [
+  "runtime identity",
+  "session/summary/timeline projections",
+  "federation config and rounds",
+  "update digests",
+  "candidate digests",
+  "research payload hashes",
+  "research catalog file sha256"
+ ],
+ "projections_equal": true,
+ "run_1_semantic_sha256": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "run_2_semantic_sha256": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "status": "PASS"
+}

@@ -1,0 +1,19 @@
+{
+ "claim_allowed": "The NHM capstone product is ready for an offline one-laptop faculty demonstration using simulated device input, released research monitoring, genuine engineering federation, persistent history, and frozen research-evidence views.",
+ "hardware_status": "VERIFICATION_REQUIRED",
+ "mutation_tests": {
+  "tests.test_capstone_full_demo::test_runbook_claim_audit_rejects_every_overclaim_mutation": "passed"
+ },
+ "not_claimed": [
+  "clean-machine release",
+  "physical wearable readiness",
+  "clinical readiness",
+  "production deployment",
+  "security certification",
+  "scientific efficacy"
+ ],
+ "personalization_answer": "NO",
+ "runbook_missing_required": [],
+ "runbook_violations": [],
+ "status": "PASS"
+}
