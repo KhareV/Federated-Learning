@@ -1,0 +1,22 @@
+{
+ "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_7",
+ "owner_phase": "CAP-009",
+ "made_after_method_freeze": true,
+ "previous_amendment": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_6",
+ "defect": "The frozen protocol listed all 145 CAPG8 criteria but did not yet bind the result-only audit/evaluator helpers needed to report failed attempts, the inherited CAP-003 flake policy, mutation probes, and gate decisions. These helpers do not alter production behavior or scientific values.",
+ "change": "Bind five additive result-evaluation scripts through this pure amendment and extend the verifier to hash-check added files. Canonical browser evidence, screenshots, mutation results, and test logs are excluded from this amendment commit. All affected evidence is rerun afterward.",
+ "files": {
+  "scripts/verify_capstone_history_evidence_protocol_v1.py": {
+   "old_sha256": "a080697b7828e8c509946316a435737af4243ccd89be19692743077027518ee6",
+   "new_sha256": "f5fd659bb245b7d6b344860ea5a0b182844da7815101c8e5a55633f9c581a6eb"
+  }
+ },
+ "added_files": {
+  "scripts/cap_009_build_evidence.py": "1c48b71c57919213ac57f22236b3946626b28f705bf85fd0c6c5899b533988f8",
+  "scripts/cap_009_mutation_controls.py": "56b08084f7209d3bce7430b2502ff169779516187c4956fb223ce04d0d9ceb34",
+  "scripts/cap_009_flake_probe.py": "0030aa3b546e1f588fc255ba0b5bde17409ac08250fb51a5a16509a5de538dc5",
+  "scripts/cap_009_test_report.py": "bf683201417606ca503d4f3bf65f362b825bd4c799293ca3bb263303b93d5eed",
+  "scripts/cap_009_evaluate_gate.py": "fd5c057f44c99fbe11dd5a5bfc88fecbc4811272c0d568713d3937d834a3209e"
+ },
+ "result_evidence_committed_with_amendment": false
+}

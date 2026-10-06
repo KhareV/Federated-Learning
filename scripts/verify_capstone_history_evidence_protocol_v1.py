@@ -39,6 +39,10 @@ def verify() -> dict[str, object]:
             if path in expected and expected[path] != change["old_sha256"]:
                 chain_failures.append(f"{amendment.name}:{path}")
             expected[path] = change["new_sha256"]
+        for path, digest in data.get("added_files", {}).items():
+            if path in expected:
+                chain_failures.append(f"{amendment.name}:duplicate-added:{path}")
+            expected[path] = digest
     failures = [path for path, digest in expected.items()
                 if hash_file(ROOT / path) != digest]
     failures.extend(chain_failures)
