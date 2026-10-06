@@ -1,0 +1,72 @@
+{
+ "all_reproduced": true,
+ "entry_sha": "3402dc1da1c6d5c029903a9a51a74e4ecc427ec8",
+ "findings": {
+  "F2-01": {
+   "neuralgraph": [
+    {
+     "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+     "line": 41,
+     "text": "{ id: 'qrs_morph', name: 'QRS Morphology', layer: 1, x: 0.38, y: 0.18, category: 'Waveform Feature', clinicalRole: 'Ventricular depolarization duration & axis', signalSource: 'Pan-Tompkins Filter', sa"
+    },
+    {
+     "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+     "line": 332,
+     "text": "<small>99.8% Coverage</small>"
+    },
+    {
+     "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+     "line": 348,
+     "text": "<span class=\"caption-tag\">LIVE EDGE SYNAPSE GRAPH</span>"
+    },
+    {
+     "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+     "line": 349,
+     "text": "<p>Hover any node to inspect real-time feature vectors and cross-modal correlation paths.</p>"
+    },
+    {
+     "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+     "line": 352,
+     "text": "<p>Illustrates the 99.8% unmonitored blind intervals between sporadic clinic visits.</p>"
+    }
+   ],
+   "scan_hits_by_rule": {
+    "clinical_monitoring": 0,
+    "detection_claim": 2,
+    "edge_inference": 3,
+    "file_reference": 11,
+    "live_or_realtime": 6,
+    "normal_label": 8,
+    "optimal_or_nominal": 2,
+    "percentage": 3,
+    "physiological_value": 13,
+    "quantified_duration": 3,
+    "score_with_number": 1
+   }
+  },
+  "F2-02": {
+   "landing_nav_labelled": false,
+   "raf_loops_without_reduced_motion_guard": [
+    "landing/NeuralGraph.svelte",
+    "landing/WatchScene.svelte",
+    "signals/MultimodalStudio.svelte",
+    "magic/globe/globe.svelte"
+   ],
+   "skip_link_present": false
+  },
+  "F2-03": {
+   "source": "FINAL_EVALUATOR_AUDIT_V1 rerun: 0-5 interactive targets below 24px per page at 390px (measured; entry browser audit re-measures them)"
+  },
+  "candidate_observation": {
+   "candidate_identity_and_digest_are_separate_fields": true,
+   "misleading_phrases_found": []
+  },
+  "loader_observation": [
+   {
+    "file": "frontend/src/routes/app/+layout.svelte",
+    "line": 30,
+    "text": "<main class=\"boot\" role=\"status\"><p>Opening the NHM workspace\u2026</p></main>"
+   }
+  ]
+ }
+}

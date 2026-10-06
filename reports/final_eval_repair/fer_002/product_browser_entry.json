@@ -1,0 +1,1542 @@
+{
+ "who": "A",
+ "routes": [
+  {
+   "route": "/sign-in",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 16,
+     "under24": [
+      {
+       "tag": "A",
+       "text": "Open device page \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 142.6,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Open monitor \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 110.9,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Federation \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 95.1,
+       "h": 14,
+       "inline": false
+      }
+     ],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 16,
+     "under24": [
+      {
+       "tag": "A",
+       "text": "Open device page \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 142.6,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Open monitor \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 110.9,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Federation \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 95.1,
+       "h": 14,
+       "inline": false
+      }
+     ],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 15,
+     "under24": [
+      {
+       "tag": "A",
+       "text": "Open device page \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 142.6,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Open monitor \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 110.9,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Federation \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 95.1,
+       "h": 14,
+       "inline": false
+      }
+     ],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 15,
+     "under24": [
+      {
+       "tag": "A",
+       "text": "Open device page \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 142.6,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Open monitor \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 110.9,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Federation \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 95.1,
+       "h": 14,
+       "inline": false
+      }
+     ],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Overview | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:Product workspace",
+    "H2:Virtual wearable",
+    "H2:Latest monitoring session",
+    "H2:Released monitoring \u2260 federated developm"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nNHM / OVERVIEW\nProduct workspace\n\nEvery value on this page is read from the local product backend. Nothing is simulated by the browser.\n\nIDENTITY\nuser_<REDACTED>\nAUTH CLERK\nRELEASED MODEL\nMODEL_V2_FINAL\nSOFTWARE_SYSTEM_V2 / SERVER-SIDE / CAL_V2\nPERSISTENCE\nSQLITE\nLOCAL DATABASE\nHARDWARE MODE\nSIMULATED_ONLY\nPHYSICAL HARDWARE: NOT CONNECTED\n01 / DEVICE\nVirtual wearable\nSIMULATED\n\nNo device attached yet.\n\nOpen device page \u2192\n02 / SESSIONS\nLatest monitoring session\nPERSISTED\n\nNo session yet.\n\nOpen monitor \u2192\n03 / PRODUCT STORY\nReleased monitoring \u2260 federated development\nReleased monitoring\n\nMODEL_V2_FINAL runs server-side in SOFTWARE_SYSTEM_V2. This is what the Monitor page uses.\n\nFederated development\n\nFederated development: ENGINEERING RUNTIME ENABLED \u00b7 engineering candidates: 0 \u00b7 never automatically deployed.\n\nFederation \u2192\n\nresearch prototype; simulated device; not diagnostic; no clinical claim\n\nOverview | NHM",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 1120,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 16,
+     "under24": [
+      {
+       "tag": "A",
+       "text": "Open device page \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 142.6,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Open monitor \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 110.9,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Federation \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 95.1,
+       "h": 14,
+       "inline": false
+      }
+     ],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 16,
+     "under24": [
+      {
+       "tag": "A",
+       "text": "Open device page \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 142.6,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Open monitor \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 110.9,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Federation \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 95.1,
+       "h": 14,
+       "inline": false
+      }
+     ],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 15,
+     "under24": [
+      {
+       "tag": "A",
+       "text": "Open device page \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 142.6,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Open monitor \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 110.9,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Federation \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 95.1,
+       "h": 14,
+       "inline": false
+      }
+     ],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 15,
+     "under24": [
+      {
+       "tag": "A",
+       "text": "Open device page \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 142.6,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Open monitor \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 110.9,
+       "h": 14,
+       "inline": false
+      },
+      {
+       "tag": "A",
+       "text": "Federation \u2192",
+       "cls": "go svelte-2j7mc4",
+       "w": 95.1,
+       "h": 14,
+       "inline": false
+      }
+     ],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Overview | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:Product workspace",
+    "H2:Virtual wearable",
+    "H2:Latest monitoring session",
+    "H2:Released monitoring \u2260 federated developm"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nNHM / OVERVIEW\nProduct workspace\n\nEvery value on this page is read from the local product backend. Nothing is simulated by the browser.\n\nIDENTITY\nuser_<REDACTED>\nAUTH CLERK\nRELEASED MODEL\nMODEL_V2_FINAL\nSOFTWARE_SYSTEM_V2 / SERVER-SIDE / CAL_V2\nPERSISTENCE\nSQLITE\nLOCAL DATABASE\nHARDWARE MODE\nSIMULATED_ONLY\nPHYSICAL HARDWARE: NOT CONNECTED\n01 / DEVICE\nVirtual wearable\nSIMULATED\n\nNo device attached yet.\n\nOpen device page \u2192\n02 / SESSIONS\nLatest monitoring session\nPERSISTED\n\nNo session yet.\n\nOpen monitor \u2192\n03 / PRODUCT STORY\nReleased monitoring \u2260 federated development\nReleased monitoring\n\nMODEL_V2_FINAL runs server-side in SOFTWARE_SYSTEM_V2. This is what the Monitor page uses.\n\nFederated development\n\nFederated development: ENGINEERING RUNTIME ENABLED \u00b7 engineering candidates: 0 \u00b7 never automatically deployed.\n\nFederation \u2192\n\nresearch prototype; simulated device; not diagnostic; no clinical claim",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 1104,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/device",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 15,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 15,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 14,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 14,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Device | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:Virtual wearable",
+    "H2:No device"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / DEVICE\nVirtual wearable\n01 / ATTACH\nNo device\n\nNo device is attached. Attach the NHM Virtual Wearable - a software source (WEARABLE_SIM_V1). It is not a physical device.\n\nMonitoring scenario\nNormal monitoring - NORMAL_MONITORING\nContext loss - CONTEXT_LOSS\nPoor signal - POOR_SIGNAL\nDisconnect / reconnect - DISCONNECT_RECONNECT\nMixed monitoring session (recommended for the faculty demo) - MIXED_MONITORING_SESSION\n\nRecommended for the faculty demo: MIXED_MONITORING_SESSION (streaming, context loss, quality degradation, disconnect, reconnect).\n\nATTACH NHM VIRTUAL WEARABLE",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 848,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/monitoring",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 14,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 14,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "Attach one on the Device page \u2192",
+       "cls": "",
+       "w": 180.7,
+       "h": 14,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "Attach one on the Device page \u2192",
+       "cls": "",
+       "w": 180.7,
+       "h": 14,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "Attach one on the Device page \u2192",
+       "cls": "",
+       "w": 180.7,
+       "h": 14,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Monitor | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:Live monitoring",
+    "H2:Monitoring session",
+    "H2:Virtual wearable ECG",
+    "H2:Signal quality",
+    "H2:Research monitoring state",
+    "H2:Physiological context",
+    "H2:MODEL_V2_FINAL result",
+    "H2:Device connection"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / MONITOR\nLive monitoring\nSession not started. Device none. Monitoring state none yet.\n01 / SESSION\nMonitoring session\nPERSISTED IN SQLITE\n\nNo virtual wearable is attached. Attach one on the Device page \u2192\n\n02 / SIMULATED SOURCE ECG\nVirtual wearable ECG\n360 Hz / ADC_COUNTS / rolling 10 s\n\nSimulated device-source ECG transport (not the 250 Hz model-input window, not a physical sensor). PPG waveform is unavailable in the current simulator; SpO2/PPG-derived context appears only where emitted.\n\n03 / QUALITY LABEL\nSignal quality\nquality.status\n\nNo quality.status event yet.\n\n04 / MONITORING STATE\nResearch monitoring state\nmonitoring.state\n\nNo monitoring.state event received yet. The state changes only when the backend sends one.\n\n05 / CONTEXT\nPhysiological context\ncontext.snapshot\n\nUNAVAILABLE\n\nNo current context for the latest window. Earlier values are not shown as current.\n\n06 / INFERENCE\nMODEL_V2_FINAL result\ninference.result\n\nNo inference.result event yet.\n\n07 / DEVICE LINK\nDevice connection\ndevice.status\n\n--\n\nA device disconnect does not end the session; the backend session stays authoritative.",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 1381,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/history",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 14,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "Run a monitoring  e ion \u2192",
+       "cls": "svelte-1ieoo1n",
+       "w": 164,
+       "h": 15,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 14,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "Run a monitoring  e ion \u2192",
+       "cls": "svelte-1ieoo1n",
+       "w": 164,
+       "h": 15,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "Run a monitoring  e ion \u2192",
+       "cls": "svelte-1ieoo1n",
+       "w": 164,
+       "h": 15,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "Run a monitoring  e ion \u2192",
+       "cls": "svelte-1ieoo1n",
+       "w": 164,
+       "h": 15,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "History | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:Research monitoring history",
+    "H2:Monitoring sessions"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nNHM / HISTORY\nResearch monitoring history\n01 / PERSISTED\nMonitoring sessions\nGET /sessions\n\nNo sessions yet. Run a monitoring session \u2192\n\nCompleted sessions have a deterministic summary. Failed or unfinished sessions may show partial persisted evidence, but no completed-session summary. The history is engineering monitoring evidence, not a diagnosis or training dataset.",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 554,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/federation",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 22,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "view client  \u2192",
+       "cls": "svelte-jl8k72",
+       "w": 84,
+       "h": 15,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 21,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 20,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 20,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Federation | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:Federated development",
+    "H2:Two separate lanes",
+    "H3:Lane A \u00b7 Released monitoring",
+    "H3:Lane B \u00b7 Federated development",
+    "H2:Configure a federation run",
+    "H2:Logical local clients",
+    "H2:Your federation runs"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nNHM / FEDERATION\nFederated development\n\nThe federation run executes on the product backend; this dashboard is an observer. Every value below is read from the backend.\n\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\nFEDERATION RUNTIME\nENABLED_ENGINEERING\nENGINEERING ONLY\nLOGICAL CLIENTS\n8\nWEARABLE_SIM_FL_COHORT_V1\nACTIVE LIVE RUN\nNO\nONE AT A TIME (ONE-LAPTOP DEMO)\nENGINEERING CANDIDATES\n0\nSANDBOX REGISTRY ONLY\nRELEASED MONITORING MODEL\nMODEL_V2_FINAL\nUNCHANGED BY FEDERATION\n01 / ARCHITECTURE\nTwo separate lanes\nLane A \u00b7 Released monitoring\nMODEL_V2_FINAL\nSOFTWARE_SYSTEM_V2\nLive monitoring\n\nRELEASED RESEARCH DEFAULT \u2014 unchanged by federation.\n\nLane B \u00b7 Federated development\nFL_INIT_V2\nSIM_FL_SITE_00..07 (synthetic)\nLocal training\nModel updates only\nFedAvg / FedProx\nCandidate\nStructural governance\nSandbox-only status\n\nNever automatically deployed. Architecture facts, not live values.\n\n02 / RUN\nConfigure a federation run\nFL_SINGLE_RUN\nRun mode\nLIVE_RUN\nREPLAY\n\nLIVE_RUN performs genuine local optimization and federation.\n\nAlgorithm\nFEDAVG \u2014 Federated averaging baseline.\nFEDPROX \u2014 Frozen federated proximal configuration.\nAggregation / protection mode\nPLAIN\nSECAGG_SHADOW\n\nAuthoritative weighted aggregation only.\n\nScenario\nFL_SINGLE_RUN\nClients\n8\nRounds\n3\nBase\nFL_INIT_V2\nCreate and start live run\n03 / CLIENTS\nLogical local clients\nSYNTHETIC RESEARCH PARTITIONS\n\nPREPARING 8 SYNTHETIC LOCAL CLIENT DATASETS. This can take several seconds on first use.\n\nAll eight logical clients currently execute on one demonstration machine.\n\n04 / RUNS\nYour federation runs\n\nNo federation runs yet.",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 1802,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/federation/clients",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 17,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 17,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 16,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 16,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Federation clients | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:Logical local clients",
+    "H2:What stays local"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nNHM / FEDERATION / CLIENTS\nLogical local clients\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\n\nSYNTHETIC RESEARCH PARTITIONS \u2014 NOT HOSPITALS OR INSTITUTIONS.\n\nLOCALITY\nWhat stays local\n\nEach client keeps its local training examples inside its logical client buffer. The federation coordinator receives model updates and metadata rather than those local training examples.\n\nAll eight logical clients currently execute on one demonstration machine.\n\nSIM_FL_SITE_00\nEdge node\nVIRTUAL_EDGE_NODE_00\nGlobal round\n0\nLocal examples\n93\nEligibility\nELIGIBLE\nState\nWAITING\nUpdate digest\n--\nSIM_FL_SITE_01\nEdge node\nVIRTUAL_EDGE_NODE_01\nGlobal round\n0\nLocal examples\n91\nEligibility\nELIGIBLE\nState\nWAITING\nUpdate digest\n--\nSIM_FL_SITE_02\nEdge node\nVIRTUAL_EDGE_NODE_02\nGlobal round\n0\nLocal examples\n91\nEligibility\nELIGIBLE\nState\nWAITING\nUpdate digest\n--\nSIM_FL_SITE_03\nEdge node\nVIRTUAL_EDGE_NODE_03\nGlobal round\n0\nLocal examples\n89\nEligibility\nELIGIBLE\nState\nWAITING\nUpdate digest\n--\nSIM_FL_SITE_04\nEdge node\nVIRTUAL_EDGE_NODE_04\nGlobal round\n0\nLocal examples\n90\nEligibility\nELIGIBLE\nState\nWAITING\nUpdate digest\n--\nSIM_FL_SITE_05\nEdge node\nVIRTUAL_EDGE_NODE_05\nGlobal round\n0\nLocal examples\n93\nEligibility\nELIGIBLE\nState\nWAITING\nUpdate digest\n--\nSIM_FL_SITE_06\nEdge node\nVIRTUAL_EDGE_NODE_06\nGlobal round\n0\nLocal examples\n93\nEligibility\nELIGIBLE\nState\nWAITING\nUpdate digest\n--\nSIM_FL_SITE_07\nEdge node\nVIRTUAL_EDGE_NODE_07\nGlobal round\n0\nLocal examples\n83\nEligibility\nELIGIBLE\nState\nWAITING\nUpdate digest\n--",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 1752,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/federation/privacy",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 18,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 18,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 17,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 17,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Federation privacy boundary | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:The implemented privacy boundary",
+    "H2:Local-data boundary",
+    "H2:SecAgg+ shadow",
+    "H2:Limitations"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nNHM / FEDERATION / PRIVACY\nThe implemented privacy boundary\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\n01\nLocal-data boundary\n\nEach client keeps its local training examples inside its logical client buffer. The federation coordinator receives model updates and metadata rather than those local training examples.\n\nAll eight logical clients currently execute on one demonstration machine.\n\n02\nSecAgg+ shadow\nROUND 1 ONLY\n\nROUND-1 PROTECTED-AGGREGATION SHADOW: a Flower SecAgg+ shadow is executed for round 1 only and compared with the plain aggregate under the frozen tolerance.\n\nAuthoritative aggregation remains PLAIN in every run, including SECAGG_SHADOW runs. Scope: PROTECTED_AGGREGATION_INTERFACE_ONLY.\n\n03\nLimitations\nLogical locality on one laptop (not separate machines or institutions).\nNo differential privacy.\nNo anonymity guarantee.\nNo hospital deployment.\nNo network or host isolation claim.\nFederation run\nNo runs yet",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 1190,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/models",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 12,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 12,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Models | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:Model registry",
+    "H2:RELEASED SCIENTIFIC",
+    "H2:ENGINEERING FEDERATED CANDIDATES"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nNHM / MODELS\nModel registry\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\nNAMESPACE 1\nRELEASED SCIENTIFIC\nFROZEN\nMODEL_V2_FINAL\nrole: RELEASED_DEFAULT\nMODEL_V1\nrole: ROLLBACK_REFERENCE\n\nThe released default is MODEL_V2_FINAL. Federation never changes it.\n\nNAMESPACE 2\nENGINEERING FEDERATED CANDIDATES\nSANDBOX REGISTRY\n\nNo engineering candidates yet.\n\nCandidates are engineering sandbox entries. They are never used for live monitoring and no candidate inference runtime is enabled.",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 709,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/research/ml",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 446,
+     "innerW": 446,
+     "targets": 15,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 15,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 14,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 14,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Research ML evidence | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:ML research evidence",
+    "H2:MODEL_V2_NOT_PROMOTED_RELEASE_CI",
+    "H2:SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED",
+    "H2:Centrally trained released default",
+    "H2:CAL_V2 source-domain calibration",
+    "H2:Second-look / runtime evidence",
+    "H2:Negative findings remain visible",
+    "H2:Exact frozen values and provenance"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nML research evidence\n\nRead-only, non-diagnostic research summaries. This page does not run a model or change the monitoring runtime.\n\nV2-007 / HISTORICAL MODEL PROMOTION GATE\nMODEL_V2_NOT_PROMOTED_RELEASE_CI\nPREDECLARED PAIRED RELEASE-SEED CI\n\nPromotion eligible: false. The release-seed paired AUPRC-delta confidence interval [-0.052370174725249, 0.5310360993345348] crossed zero. This historical negative finding remains true.\n\nV2-REL-001 / LATER RESEARCH SOFTWARE RELEASE\nSYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED\nDecision: true\n\nCurrent research software default: SOFTWARE_SYSTEM_V2 (MODEL_V2_FINAL). Different questions; the later software decision does not rewrite the earlier model-promotion result.\n\n01 / MODEL LINEAGE\nCentrally trained released default\n\nMODEL_V2_FINAL is centrally trained, not a federated checkpoint. Checkpoint SHA256: 89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b.\n\nMODEL_V1 remains the historical reference and explicit rollback lineage, not the current operational default.\n\n02 / CALIBRATION\nCAL_V2 source-domain calibration\n\nMIT-BIH SOURCE-DOMAIN CALIBRATION ONLY. Domain: MIT-BIH-v1.0.0. Temperature: 52.88261929727761. Threshold: 0.5101937262006424. Calibrated ECE: 0.1720347716359628.\n\nNo cross-domain, wearable, personal, or clinical calibration is established.\n\n03 / POST-FREEZE\nSecond-look / runtime evidence\n\nV2-010 runtime acceptance: ACCEPTED. INTERNAL_TEST did not participate in the hard runtime decision (false). INTERNAL_TEST and INCART metrics below are POST-FREEZE SECOND-LOOK / RUNTIME EVIDENCE, not untouched validation.\n\nThe small INTERNAL_TEST contributing-group limitation is listed below. INCART is external-domain, project-exposed second-look evidence.\n\n04 / LIMITATIONS\nNegative findings remain visible\nMODEL_V2_NOT_PROMOTED_RELEASE_CI remains true: the release-seed paired VALIDATION CI lower bound crossed zero; permanent historical negative finding, not rewritten\nINTERNAL_TEST has only six eligible contributing patient groups\nV2-010 INTERNAL_TEST/INCART/NSTDB evidence is post-freeze second-look evidence, not untouched validation\nINCART FL evaluation is project-exposed external second-look evidence\nQUALITY_V1 does not reliably hard-fail a raw stuck-nonzero ECG source because of the frozen preprocessing composition (not repaired here)\nCAL_V2 is MIT-BIH source-domain calibration only\nNo physical wearable validation exists\nSecAgg evidence is a narrow protected-aggregation-interface result, not a complete privacy guarantee\nCLEAN_CLONE_GATING_V1 excluded raw-data-dependent tests from the clean-software claim when their untracked inputs were absent\n\nNo physical wearable validation exists. QUALITY_V1 retains the known stuck-nonzero limitation. SecAgg supports only a narrow protected-aggregation-interface claim.\n\n05 / SOURCE FACTS\nExact frozen values and provenance\nFrozen facts copied from source summaries, with their research role\nFact\tExact frozen value\tRole\tSource phase\npromotion_decision\tMODEL_V2_NOT_PROMOTED_RELEASE_CI\tHISTORICAL_MODEL_PROMOTION\tV2-007\npromotion_eligible\tfalse\tHISTORICAL_MODEL_PROMOTION\tV2-007\nrelease_ci_lower\t-0.052370174725249 AUPRC_DELTA\tHISTORICAL_MODEL_PROMOTION\tV2-007\nrelease_ci_upper\t0.5310360993345348 AUPRC_DELTA\tHISTORICAL_MODEL_PROMOTION\tV2-007\nv1_reference_auprc\t0.5328607838787021 AUPRC\tHISTORICAL_REFERENCE\tV2-007\nmodel_id\tMODEL_V2_FINAL\tCENTRAL_MODEL_IDENTITY\tV2-008\ncheckpoint_sha256\t89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b\tCENTRAL_MODEL_IDENTITY\tV2-008\ntemperature\t52.88261929727761\tMIT_BIH_SOURCE_DOMAIN_CALIBRATION\tV2-009\nthreshold\t0.5101937262006424\tMIT_BIH_SOURCE_DOMAIN_CALIBRATION\tV2-009\ncalibration_domain\tMIT-BIH-v1.0.0\tMIT_BIH_SOURCE_DOMAIN_CALIBRATION\tV2-009\ncalibrated_ece\t0.1720347716359628 ECE\tMIT_BIH_SOURCE_DOMAIN_CALIBRATION\tV2-009\nruntime_acceptance\tACCEPTED\tPOST_FREEZE_RUNTIME\tV2-010\ninternal_test_hard_gate\tfalse\tPOST_FREEZE_RUNTIME\tV2-010\ninternal_test_auprc\t0.9994730838739116 AUPRC\tPOST_FREEZE_SECOND_LOOK\tV2-010\nincart_auprc\t0.970004055260483 AUPRC\tPOST_FREEZE_EXTERNAL_DOMAIN\tV2-010\noperational_default\tSOFTWARE_SYSTEM_V2 (MODEL_V2_FINAL)\tLATER_SOFTWARE_RELEASE\tV2-REL-001\nknown_limitations\tMODEL_V2_NOT_PROMOTED_RELEASE_CI remains true: the release-seed paired VALIDATION CI lower bound crossed zero; permanent historical negative finding, not rewritten \u2022 INTERNAL_TEST has only six eligible contributing patient groups \u2022 V2-010 INTERNAL_TEST/INCART/NSTDB evidence is post-freeze second-look evidence, not untouched validation \u2022 INCART FL evaluation is project-exposed external second-look evidence \u2022 QUALITY_V1 does not reliably hard-fail a raw stuck-nonzero ECG source because of the frozen preprocessing composition (not repaired here) \u2022 CAL_V2 is MIT-BIH source-domain calibration only \u2022 No physical wearable validation exists \u2022 SecAgg evidence is a narrow protected-aggregation-interface result, not a complete privacy guarantee \u2022 CLEAN_CLONE_GATING_V1 excluded raw-data-dependent tests from the clean-software claim when their untracked inputs were absent\tLATER_SOFTWARE_RELEASE\tV2-REL-001\nsystem_release_accepted\ttrue\tLATER_SOFTWARE_RELEASE\tV2-REL-001\nEVIDENCE PROVENANCE",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 5395,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/research/fl",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 16,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "See Federation \u2192",
+       "cls": "svelte-16ryo6v",
+       "w": 104.7,
+       "h": 15,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 16,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "See Federation \u2192",
+       "cls": "svelte-16ryo6v",
+       "w": 104.7,
+       "h": 15,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 15,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "See Federation \u2192",
+       "cls": "svelte-16ryo6v",
+       "w": 104.7,
+       "h": 15,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 15,
+     "under24": [],
+     "under24_inline": [
+      {
+       "tag": "A",
+       "text": "See Federation \u2192",
+       "cls": "svelte-16ryo6v",
+       "w": 104.7,
+       "h": 15,
+       "inline": true
+      }
+     ],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "Research FL evidence | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:FL research evidence",
+    "H2:Frozen validation result",
+    "H2:Synthetic research partitions",
+    "H2:Mixed transfer, no general promotion",
+    "H2:Held-out FL-lineage evidence",
+    "H2:Protected aggregation interface only",
+    "H2:V2-FL-005 is not scientific efficacy",
+    "H2:Exact frozen values and provenance"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nFL research evidence\n\nRead-only scientific research summaries, separate from the current product federation engineering demo. The federation clients are logical clients on one laptop, not hospitals or institutions.\n\nV2-FL-001 / IID FEDAVG\nFrozen validation result\n\nInitial AUPRC: 0.25769234928353735; best validation AUPRC: 0.8669476403992936 at round 38. V2-minus-V1 paired AUPRC result: 0.36072579405513583 [0.1750145605302984, 0.4563441637280621]. These are frozen validation-selection facts, not a new evaluation.\n\nV2-FL-002 / NON-IID\nSynthetic research partitions\n\nIID, LABEL, QUANTITY, FEATURE and COMBINED conditions use synthetic research partitions, not institutions. Values are descriptive; not all differences are statistically significant.\n\nIID\nBest validation AUPRC: 0.8669476403992936\nLABEL\nBest validation AUPRC: 0.8066305693453126\nQUANTITY\nBest validation AUPRC: 0.8873612543728578\nFEATURE\nBest validation AUPRC: 0.8501518854463859\nCOMBINED\nBest validation AUPRC: 0.8202489560000589\nV2-FL-003 / FEDPROX\nMixed transfer, no general promotion\n\nFEDPROX_MU_V2 = 0.1 was the selected frozen configuration. Transfer was mixed; FedProx was NOT promoted as a generally superior method.\n\nV2-FL-EVAL-001 / ONE-SHOT\nHeld-out FL-lineage evidence\n\nINTERNAL_TEST: FL-LINEAGE HELD-OUT (not project-globally unseen) (6 eligible contributing groups). Frozen V2 FedAvg IID AUPRC: 0.9989312905254022 [0.9961825883847816, 0.9999514139968478], nominal 95% patient-cluster interval. It was held out from V2 FL development, but not globally unseen by the project.\n\nINCART: POST-FREEZE EXTERNAL FL SECOND-LOOK -- NOT PROJECT-BLIND. Frozen V2 FedAvg IID AUPRC: 0.9766042635693575 [0.9437761642879596, 0.993642404149773], nominal 95% patient-cluster interval. This is post-freeze/project-exposed external-domain second-look evidence.\n\nFrozen evaluation rule: Raw `sigmoid(raw_logit)`, threshold 0.5 (`>=`, `FL_EVAL_RAW_THRESHOLD_0P5_V1`), PER_WINDOW_ZSCORE_V1 \u2192 float32 [1,2500]; **no CAL_V1/CAL_V2/temperature/threshold fitting; CALIBRATION not accessed**. Patient-cluster bootstrap B=2000, seed 20260927, PCG64, multiplicity preserved (6 slots/replicate INTERNAL_TEST; 32 INCART), no redraw, shared draws for every model and paired contrast; draws reproduce the frozen T018/T020 npz exactly; nominal 95% percentile CIs, no p-values, no multiplicity adjustment. One orchestration command, one guarded invocation per dataset (guards COMPLETED; a second begin raises `ALREADY_CONSUMED`; historical guards untouched).\n\nThis page does not reconstruct a threshold or compare the raw-sigmoid FL F1 to CAL_V2-thresholded results.\n\nV2-FL-004 / SECAGG+\nProtected aggregation interface only\n\nWithin the configured Flower SecAgg+ controlled simulation, the protected application-level server aggregation interface does not receive an individual participating client's clear model-update array while forming the aggregate, and the protected aggregate matches the unprotected reference within the predeclared numerical tolerance.\n\nPlain clear updates: 8; protected clear updates: 0; masked vectors visible: 8. The authoritative product aggregation remains PLAIN; SecAgg is a round-1 shadow.\n\nOverhead accounting: aggregation protocol only; local training excluded. Application payload bytes are not exact network bytes (false). No end-to-end deployment latency was measured.\n\nUnsupported claims include: anonymity, differential privacy, model-inversion resistance, membership-inference resistance, malicious-client resistance, transport security, TLS guarantees, authentication, authorization, OS/process isolation, host isolation, HIPAA compliance, hospital privacy, institution-scale security, production security certification. This is not differential privacy, anonymity, hospital privacy, TLS assurance, or production-security certification.\n\nENGINEERING DEMO SEPARATION\nV2-FL-005 is not scientific efficacy\n\nThe current product federation demo derives from V2-FL-005 engineering lineage. It is not part of the five scientific evidence phases above. No synthetic demo accuracy is reported here. See Federation \u2192\n\nSOURCE FACTS\nExact frozen values and provenance\nFrozen facts copied from source summaries, with their research role\nFact\tExact frozen value\tRole\tSource phase\nheldout_threshold_rule\tRaw `sigmoid(raw_logit)`, threshold 0.5 (`>=`, `FL_EVAL_RAW_THRESHOLD_0P5_V1`), PER_WINDOW_ZSCORE_V1 \u2192 float32 [1,2500]; **no CAL_V1/CAL_V2/temperature/threshold fitting; CALIBRATION not accessed**. Patient-cluster bootstrap B=2000, seed 20260927, PCG64, multiplicity preserved (6 slots/replicate INTERNAL_TEST; 32 INCART), no redraw, shared draws for every model and paired contrast; draws reproduce the frozen T018/T020 npz exactly; nominal 95% percentile CIs, no p-values, no multiplicity adjustment. One orchestration command, one guarded invocation per dataset (guards COMPLETED; a second begin raises `ALREADY_CONSUMED`; historical guards untouched).\tONE_SHOT_HELD_OUT_EVALUATION_RULE\tV2-FL-EVAL-001\niid_best_round\t38 ROUND\tVALIDATION_SELECTION\tV2-FL-001\niid_best_auprc\t0.8669476403992936 AUPRC\tVALIDATION_SELECTION\tV2-FL-001\niid_initial_auprc\t0.25769234928353735 AUPRC\tVALIDATION_SELECTION\tV2-FL-001\niid_v2_minus_v1_auprc\t0.36072579405513583 AUPRC_DELTA\tPAIRED_RESEARCH_COMPARISON\tV2-FL-001\niid_v2_minus_v1_auprc_ci_lower\t0.1750145605302984 AUPRC_DELTA\tPAIRED_RESEARCH_COMPARISON\tV2-FL-001\niid_v2_minus_v1_auprc_ci_upper\t0.4563441637280621 AUPRC_DELTA\tPAIRED_RESEARCH_COMPARISON\tV2-FL-001\niid_best_auprc\t0.8669476403992936 AUPRC\tSYNTHETIC_PARTITION_VALIDATION\tV2-FL-002\nlabel_best_auprc\t0.8066305693453126 AUPRC\tSYNTHETIC_PARTITION_VALIDATION\tV2-FL-002\nquantity_best_auprc\t0.8873612543728578 AUPRC\tSYNTHETIC_PARTITION_VALIDATION\tV2-FL-002\nfeature_best_auprc\t0.8501518854463859 AUPRC\tSYNTHETIC_PARTITION_VALIDATION\tV2-FL-002\ncombined_best_auprc\t0.8202489560000589 AUPRC\tSYNTHETIC_PARTITION_VALIDATION\tV2-FL-002\nfedprox_mu\t0.1\tSELECTED_CONFIGURATION\tV2-FL-003\nfedprox_no_general_win\ttrue\tMIXED_TRANSFER\tV2-FL-003\ninternal_claim_label\tFL-LINEAGE HELD-OUT (not project-globally unseen)\tONE_SHOT_HELD_OUT\tV2-FL-EVAL-001\ninternal_groups\t6 PATIENT_GROUPS\tONE_SHOT_HELD_OUT\tV2-FL-EVAL-001\ninternal_iid_auprc\t0.9989312905254022 AUPRC\tONE_SHOT_HELD_OUT\tV2-FL-EVAL-001\ninternal_iid_auprc_ci_lower\t0.9961825883847816 AUPRC\tONE_SHOT_HELD_OUT\tV2-FL-EVAL-001\ninternal_iid_auprc_ci_upper\t0.9999514139968478 AUPRC\tONE_SHOT_HELD_OUT\tV2-FL-EVAL-001\nincart_claim_label\tPOST-FREEZE EXTERNAL FL SECOND-LOOK -- NOT PROJECT-BLIND\tPOST_FREEZE_SECOND_LOOK\tV2-FL-EVAL-001\nincart_iid_auprc\t0.9766042635693575 AUPRC\tPOST_FREEZE_SECOND_LOOK\tV2-FL-EVAL-001\nincart_iid_auprc_ci_lower\t0.9437761642879596 AUPRC\tPOST_FREEZE_SECOND_LOOK\tV2-FL-EVAL-001\nincart_iid_auprc_ci_upper\t0.993642404149773 AUPRC\tPOST_FREEZE_SECOND_LOOK\tV2-FL-EVAL-001\nsecagg_max_abs_difference\t0.000007180101768447696\tAGGREGATION_INTERFACE_ONLY\tV2-FL-004\nplain_clear_updates\t8 UPDATES\tAGGREGATION_INTERFACE_ONLY\tV2-FL-004\nprotected_clear_updates\t0 UPDATES\tAGGREGATION_INTERFACE_ONLY\tV2-FL-004\nmasked_vectors_visible\t8 VECTORS\tAGGREGATION_INTERFACE_ONLY\tV2-FL-004\nsecagg_overhead_boundary\taggregation protocol only; local training excluded\tAGGREGATION_PROTOCOL_ONLY\tV2-FL-004\nsecagg_network_bytes_exact\tfalse\tAGGREGATION_PROTOCOL_ONLY\tV2-FL-004\nsecagg_supported_claim\tWithin the configured Flower SecAgg+ controlled simulation, the protected application-level server aggregation interface does not receive an individual participating client's clear model-update array while forming the aggregate, and the protected aggregate matches the unprotected reference within the predeclared numerical tolerance.\tAGGREGATION_INTERFACE_ONLY\tV2-FL-004\nsecagg_unsupported_claims\tanonymity \u2022 differential privacy \u2022 model-inversion resistance \u2022 membership-inference resistance \u2022 malicious-client resistance \u2022 transport security \u2022 TLS guarantees \u2022 authentication \u2022 authorization \u2022 OS/process isolation \u2022 host isolation \u2022 HIPAA compliance \u2022 hospital privacy \u2022 institution-scale security \u2022 production security certification\tAGGREGATION_INTERFACE_ONLY\tV2-FL-004\nEVIDENCE PROVENANCE",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 8321,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/system",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 12,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 12,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "System | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:System",
+    "H2:GET /product/v1/system"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nNHM / SYSTEM\nSystem\n01 / BACKEND\nGET /product/v1/system\nREAD FROM THE PRODUCT API\nproduct_api_version\nPRODUCT_API_V2\ncapstone_protocol\nCAPSTONE_PRODUCT_PROTOCOL_V1\nmonitoring_protocol\nCAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1\nsoftware_system\nSOFTWARE_SYSTEM_V2\nmodel_id\nMODEL_V2_FINAL\ncalibration_id\nCAL_V2\napi_contract_version\nAPI_SCHEMA_V1\nhardware_mode\nSIMULATED_ONLY\nphysical_hardware_available\nfalse\npersistence_mode\nSQLITE\nfederation_runtime\nENABLED_ENGINEERING\nauth_status\nCONFIGURED\nclaim\nresearch prototype; simulated device; not diagnostic; no clinical claim\nproduct_api_implementation\nCAPSTONE_PRODUCT_API_V1_3\nauth_provider\nCLERK\ndemo_mode\nfalse",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 838,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  },
+  {
+   "route": "/app/about",
+   "widths": {
+    "390": {
+     "overflow": false,
+     "scrollW": 390,
+     "innerW": 390,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "768": {
+     "overflow": false,
+     "scrollW": 768,
+     "innerW": 768,
+     "targets": 13,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1024": {
+     "overflow": false,
+     "scrollW": 1024,
+     "innerW": 1024,
+     "targets": 12,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    },
+    "1440": {
+     "overflow": false,
+     "scrollW": 1440,
+     "innerW": 1440,
+     "targets": 12,
+     "under24": [],
+     "under24_inline": [],
+     "errors": 0,
+     "failed": [],
+     "bad": []
+    }
+   },
+   "title": "About | NHM",
+   "lang": "en",
+   "main": 1,
+   "navs": [
+    "Product sections"
+   ],
+   "headings": [
+    "H1:About this prototype",
+    "H2:What this is - and is not"
+   ],
+   "skipLinkPresent": true,
+   "imgNoAlt": 0,
+   "consoleErrors": [],
+   "textSample": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_<REDACTED>\nSign out\nNHM / ABOUT\nAbout this prototype\n01 / SCOPE\nWhat this is - and is not\nNHM is a research prototype for physiological monitoring and federated model development. It is not diagnostic and not a medical device.\nHardware today is SIMULATED ONLY (virtual wearable, WEARABLE_SIM_V1). No physical wearable is connected. A real wearable is a future source adapter that requires verification.\nInference is server-side: MODEL_V2_FINAL in SOFTWARE_SYSTEM_V2. Nothing runs on a sensor.\nThe waveform is a simulated source ECG. A PPG waveform is unavailable in the current simulator; SpO2/PPG-derived context is shown where the backend emits it.\nThe engineering federation runtime is enabled. It runs eight logical, synthetic research clients (not hospitals or institutions) on one demonstration machine; each performs genuine local optimization and the coordinator receives model updates rather than local examples.\nIn a connected (Clerk) live run only, one existing synthetic client, SIM_FL_SITE_00, is shown as MY EDGE CLIENT - a presentation binding to the signed-in owner. Its training data is still synthetic engineering data: your physiology does not train any model, no personal or personalized model exists, and monitoring sessions are never federation data.\nA federation run produces an engineering candidate that stays in a sandbox. It is never automatically deployed and does not replace the released MODEL_V2_FINAL.\nMonitoring states are research outputs, not health assessments.",
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "delicate-civet-2247.clerk.accounts.dev"
+   ],
+   "keyboard": {
+    "firstFocus": {
+     "text": "Skip to content",
+     "href": "#main-content",
+     "visible": true,
+     "top": 8
+    },
+    "afterActivate": {
+     "tag": "MAIN",
+     "id": "main-content",
+     "isMain": true
+    }
+   },
+   "reducedMotion": {
+    "rafDelta3s": 0,
+    "intervalsCreated": 0,
+    "runningAnimations": 0,
+    "runningNames": [],
+    "textLen": 1660,
+    "blankCanvases": 0
+   },
+   "normalMotion": {
+    "rafDelta2s": 0
+   }
+  }
+ ],
+ "signin": {
+  "ok": true
+ }
+}
