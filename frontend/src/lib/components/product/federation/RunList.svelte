@@ -14,4 +14,5 @@
 <style>
 	.runs { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; } li { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; border: 1px solid rgba(148,163,184,.12); padding: 6px 9px; font-size: 12px; } code { font: 11px 'JetBrains Mono', monospace; } a { color: #2bb8b0; }
 	.b { padding: 1px 6px; border: 1px solid rgba(148,163,184,.3); font: 10px 'JetBrains Mono', monospace; } .st { color: #2bb8b0; } .t { color: #71829a; font: 10px 'JetBrains Mono', monospace; } .dim { color: #94a3b8; font-size: 13px; }
+	li a { display: inline-flex; align-items: center; min-height: 24px; }
 </style>

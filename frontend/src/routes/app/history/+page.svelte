@@ -21,5 +21,5 @@
 <style>
 	.eyebrow { color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; letter-spacing: .14em; } h1 { margin: 10px 0 18px; font: 500 clamp(26px, 4vw, 40px) 'Space Grotesk', sans-serif; } .dim { color: #94a3b8; font-size: 13px; line-height: 1.6; } .err { color: #fecdd3; padding: 10px; border: 1px solid rgba(251,113,133,.4); }
 	.scroll { overflow-x: auto; } table { border-collapse: collapse; width: 100%; font-size: 12px; } th, td { padding: 9px 10px; border-bottom: 1px solid var(--nhm-border); text-align: left; white-space: nowrap; } th { color: #71829a; font: 10px 'JetBrains Mono', monospace; letter-spacing: .1em; font-weight: 500; }
-	code { font: 11px 'JetBrains Mono', monospace; } .badge { padding: 2px 7px; border: 1px solid rgba(43,184,176,.5); color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; } a { color: #2bb8b0; } .sr { position: absolute; left: -9999px; }
+	code { font: 11px 'JetBrains Mono', monospace; } .badge { padding: 2px 7px; border: 1px solid rgba(43,184,176,.5); color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; } a { color: #2bb8b0; display: inline-flex; align-items: center; min-height: 24px; } .sr { position: absolute; left: -9999px; }
 </style>

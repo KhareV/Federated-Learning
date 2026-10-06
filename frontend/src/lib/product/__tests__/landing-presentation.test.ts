@@ -28,6 +28,11 @@ describe('FER-002 public landing presentation', () => {
 		expect(ws).toContain('SERVER-SIDE');
 		expect(ws).toContain('Resting scenario (72 BPM, synthetic)');
 	});
+	it('data-driven actionable controls (digest copy button, run and evidence links) keep a 24px minimum target', () => {
+		expect(read('lib/components/product/federation/DigestText.svelte')).toContain('min-width: 24px; min-height: 24px');
+		expect(read('lib/components/product/federation/RunList.svelte')).toContain('li a { display: inline-flex; align-items: center; min-height: 24px; }');
+		expect(read('routes/app/history/+page.svelte')).toContain('min-height: 24px');
+	});
 	it('the transient workspace loader is a main landmark with a heading and a status region', () => {
 		const boot = read('routes/app/+layout.svelte');
 		expect(boot).toContain('<main class="boot"><div role="status"><h1>Opening the NHM workspace…</h1></div></main>');

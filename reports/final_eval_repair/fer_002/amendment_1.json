@@ -1,0 +1,9 @@
+{
+ "amendment": 1,
+ "scope": "FER-002 own surface (CSS sizing of three data-driven actionable controls) + re-freeze",
+ "reason": "attempt_1_FAIL: the frozen product browser audit found sub-24px actionable targets (history evidence link, federation run link, digest copy buttons) that exist only with session/run data",
+ "changes": ["frontend/src/routes/app/history/+page.svelte (link min-height 24px)", "frontend/src/lib/components/product/federation/RunList.svelte (link min-height 24px)", "frontend/src/lib/components/product/federation/DigestText.svelte (copy button min 24x24)", "authorised surface + method-lock bound list extended by exactly these three files", "record_target ignores attempt_* preserved-failure directories"],
+ "criteria_unchanged": true,
+ "failed_evidence_preserved_at": "reports/final_eval_repair/fer_002/attempt_1_FAIL/",
+ "no_backend_api_db_fl_auth_scientific_change": true
+}

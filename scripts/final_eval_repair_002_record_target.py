@@ -28,7 +28,7 @@ def main() -> int:
     delta = delta_outside_authorised(sha)
     existing = g("ls-tree", "-r", "--name-only", sha, "--", "reports/final_eval_repair/fer_002").split()
     pre_existing_ok = {f"reports/final_eval_repair/fer_002/{n}" for n in ("entry_audit.json", "protected_artifact_entry.json", "prior_lock_verification.json", "failed_findings_reproduction.json", "landing_claim_inventory_entry.json", "landing_browser_entry.json", "product_browser_entry.json")}
-    canonical_present = sorted(p for p in existing if p not in pre_existing_ok and any(Path(p).name.startswith(c) or c in p for c in CANONICAL))
+    canonical_present = sorted(p for p in existing if p not in pre_existing_ok and "/attempt_" not in p and any(Path(p).name.startswith(c) or c in p for c in CANONICAL))
     facts = {"repair_target_sha": sha, "entry_sha": ENTRY, "pushed_to_origin_main_at_record": g("rev-parse", "origin/main") == sha, "working_tree_clean_at_record": g("status", "--porcelain") == "", "unauthorised_delta_from_entry": delta, "canonical_evidence_existed_at_target": bool(canonical_present),
              "canonical_evidence_paths_at_target": canonical_present, "commit_subject": g("log", "-1", "--format=%s", sha), "release_vehicle": "the exact Git repository state at repair_target_sha (no archive)", "note": "candidate build for the unchanged FINAL_EVALUATOR_AUDIT_V1 rerun; NOT an evaluator-ready release"}
     print(json.dumps(facts, indent=1, sort_keys=True))

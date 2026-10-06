@@ -26,7 +26,10 @@
   "frontend/src/app.html",
   "frontend/src/lib/components/magic/morphing-text/morphing-text.svelte",
   "frontend/src/lib/components/magic/animated-beam/animated-beam.svelte",
-  "frontend/src/lib/components/magic/animated-grid-pattern/animated-grid-pattern.svelte"
+  "frontend/src/lib/components/magic/animated-grid-pattern/animated-grid-pattern.svelte",
+  "frontend/src/routes/app/history/+page.svelte",
+  "frontend/src/lib/components/product/federation/RunList.svelte",
+  "frontend/src/lib/components/product/federation/DigestText.svelte"
  ],
  "authorised_new_files": [
   "artifacts/capstone/CAPSTONE_UI_V1_6.lock.json",

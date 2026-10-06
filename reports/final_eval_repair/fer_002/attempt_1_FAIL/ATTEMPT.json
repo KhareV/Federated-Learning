@@ -1,0 +1,10 @@
+{
+ "attempt": 1,
+ "status": "FAIL",
+ "target_sha": "5ba64a7a71252aa043503ba2dc832bbc0437d4cc",
+ "failure": "PRODUCT PRESENTATION DEFECT (F2-03 class): the canonical real-browser product audit at 390px found data-driven actionable targets below 24x24 CSS px that the pre-freeze diagnostic (run without session/run data) could not see: /app/history 'VIEW EVIDENCE' link (90x14), /app/federation run-id link (125x18), digest 'copy' buttons on /app/models and /app/federation/live (34x14).",
+ "classification": "product/frontend presentation defect found by the frozen audit; repaired additively (CSS only) with a new freeze/target; this evidence is preserved, not edited",
+ "criteria_failed_by_this_attempt": ["f203_touch_targets (product pages)"],
+ "everything_else_in_this_attempt": "landing browser audit ALL PASS, route crawl PASS, truth matrix consistent, owner-binding regression PASS, secrets clean",
+ "offline_demo_and_test_suite": "not run for this target (stopped when the defect was found)"
+}
