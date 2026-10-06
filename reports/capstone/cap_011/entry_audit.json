@@ -1,0 +1,103 @@
+{
+ "cap_011_not_started": true,
+ "capg10_absent": true,
+ "ci_queried": false,
+ "ci_triggered": false,
+ "entry_is_expected_prior_result": false,
+ "entry_sha": "af60c1e2bc6a645852d0826815ff16a678c9d0d1",
+ "expected_prior_result_sha": "f0bcc1693a75155b41ec9a3cd2abd994c5e88029",
+ "gate": "CAPG10",
+ "historical_release_lineage_snapshot_sha256": "8331dad070d3e8c748bb497f194f2dbbd171c4d24b8251375c49193a5ff3b112",
+ "intervening_commits_authorised_explanation": {
+  "7360cee": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1 amendment 1 (successor-compatible phase-state predicate)",
+  "af60c1e": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1 amendment 9_2 (lifecycle guard governs CAP-011/CAPG10)"
+ },
+ "intervening_commits_since_expected": [
+  "af60c1e amend(cap-009): CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1 amendment 9_2 - historical lifecycle guard governs the CAP-011/CAPG10 transition (pure; named 9_2 to keep lexicographic chain order)",
+  "7360cee amend(cap-010): CAPSTONE_FACULTY_DEMO_PROTOCOL_V1 amendment 1 - successor-compatible phase-state predicate in the faculty preflight (CAP-011 may be NOT_STARTED/IN_PROGRESS/PASS, only once CAP-010 and CAPG9 are PASS); authorised before the CAP-011 release freeze; pure, no behaviour change elsewhere"
+ ],
+ "intervening_files_changed": [
+  "artifacts/capstone/CAPSTONE_FACULTY_DEMO_PROTOCOL_V1.amendment_1.json",
+  "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_9_2.json",
+  "scripts/capstone_demo_preflight.py",
+  "tests/test_capstone_demo_preflight.py",
+  "tests/test_capstone_lifecycle.py"
+ ],
+ "intervening_scope_note": "Only the user-authorised release-enabling compatibility amendments (CAP-010 preflight phase-state predicate; historical lifecycle guard) separate this entry from the expected f0bcc16; no scientific, runtime, frontend, API, monitoring, history/research, FL or governance file changed.",
+ "locks": [
+  "cap001",
+  "cap002",
+  "cap003",
+  "cap004",
+  "cap005",
+  "cap006",
+  "cap007",
+  "cap008",
+  "cap009",
+  "cap010",
+  "capstone_ui_v1",
+  "capstone_ui_v1_1",
+  "capstone_ui_v1_2",
+  "fedprox_mu_v2",
+  "fl_init_v2",
+  "research_catalog",
+  "v2_fl_wearable_system"
+ ],
+ "origin_main_sha": "af60c1e2bc6a645852d0826815ff16a678c9d0d1",
+ "phase": "CAP-011",
+ "prior_gates": {
+  "CAPG0": "PASS",
+  "CAPG1": "PASS",
+  "CAPG2": "PASS",
+  "CAPG3": "PASS",
+  "CAPG4": "PASS",
+  "CAPG5": "PASS",
+  "CAPG6": "PASS",
+  "CAPG7": "PASS",
+  "CAPG8": "PASS",
+  "CAPG9": "PASS"
+ },
+ "prior_locks_verified": true,
+ "prior_tasks": {
+  "CAP-001": "PASS",
+  "CAP-002": "PASS",
+  "CAP-003": "PASS",
+  "CAP-004": "PASS",
+  "CAP-005": "PASS",
+  "CAP-006": "PASS",
+  "CAP-007": "PASS",
+  "CAP-008": "PASS",
+  "CAP-009": "PASS",
+  "CAP-010": "PASS",
+  "CAP-011": "NOT_STARTED"
+ },
+ "protected_tracked_file_count": 3959,
+ "remote": "git@github.com:KhareV/Federated-Learning.git",
+ "upstream_named_lock_inventory": {
+  "DEFAULT_RUNTIME_BINDING_V2": {
+   "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7"
+  },
+  "FEDPROX_MU_V2": {
+   "artifacts/FEDPROX_MU_V2.lock.json": "a95e44cdef9295a68c217138a02eada69eda86f701eb4c87dd0f67cd7c7ed023"
+  },
+  "FL_INIT_V2": {
+   "artifacts/FEDPROX_MU_V2.lock.json#FL_INIT_V2_round_0_state_sha256": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f"
+  },
+  "MODEL_V2_COMPLETE_REPRO_V1": {
+   "artifacts/MODEL_V2_COMPLETE_REPRO_V1.lock.json": "79416f3b2aabd7baf8a7ec1961f3ab538e3b79a06899528f58cdf32a2a51157f"
+  },
+  "ROLLBACK_RUNTIME_BINDING_V1": {
+   "artifacts/ROLLBACK_RUNTIME_BINDING_V1.lock.json": "8f9826b4cc9344889131ecdfe32a3be9fb56427619a480f4667de94257ec7668"
+  },
+  "SOFTWARE_SYSTEM_V2": {
+   "artifacts/SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0"
+  },
+  "V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1": {
+   "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30"
+  },
+  "WEARABLE_SIM_FL_SECAGG_COMPAT_V1": {
+   "configs/model_v2/wearable_sim_fl_secagg_compat_v1.yaml": "214e3baf39f734f9b051e4cf7ef761b8cf2e333ea39b117db12ca404679c6c24"
+  }
+ },
+ "working_tree_clean_before_entry": true
+}
