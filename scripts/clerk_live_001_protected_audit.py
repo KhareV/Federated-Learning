@@ -24,7 +24,17 @@ ADDITIVE_PREFIXES = (
     "manifests/clerk_connected/", "configs/clerk_connected/", "artifacts/clerk_connected/", "docs/capstone/CLERK_CONNECTED", "reports/clerk_connected/",
     "scripts/clerk_live_001_", "scripts/run_capstone_clerk_connected.py", "scripts/clerk_connected_", "tests/test_clerk_connected_", "tests/clerk_connected_",
 )
-MODIFIABLE: tuple[str, ...] = ()
+# The ONLY pre-existing files this successor may change: the authorised UI-loader compatibility commit (CAPSTONE_UI_V1_3 successor,
+# successor-aware historical UI verifiers, the CAP-010/CAP-008 frontend-pin guards) - every other tracked file must be byte-identical.
+MODIFIABLE: tuple[str, ...] = (
+    "frontend/src/lib/product/auth.ts", "scripts/verify_capstone_ui_v1.py", "scripts/verify_capstone_ui_v1_1.py", "scripts/verify_capstone_ui_v1_2.py",
+    "tests/test_capstone_full_demo.py", "tests/test_capstone_federation_ui.py",
+)
+ADDITIVE_EXACT = (
+    "frontend/src/lib/product/__tests__/clerk-ui-loader.test.ts", "scripts/freeze_capstone_ui_v1_3.py", "scripts/verify_capstone_ui_v1_3.py", "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json",
+    "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_9.json", "artifacts/capstone/CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_3.json",
+    "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_9_3.json", "artifacts/capstone/CAPSTONE_FACULTY_DEMO_PROTOCOL_V1.amendment_2.json",
+)
 PROTECTED_PREFIXES = ("api/", "product/", "capstone_persistence/", "federated/", "privacy/", "simulation/", "src/", "checkpoints/", "contracts/", "frontend/", "reports/model_v2/", "reports/capstone/", "release/")
 SECRET_ENV = "CLERK_SECRET_KEY"
 
@@ -56,6 +66,12 @@ def secret_in_tracked() -> bool:
         if subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True).stdout.strip():
             return True
     return False
+
+
+def ui13_ok() -> bool:
+    from scripts.verify_capstone_ui_v1_3 import verify
+
+    return verify()["status"] == "PASS"
 
 
 def entry() -> dict:
@@ -97,14 +113,14 @@ def final() -> int:
     removed = sorted(p for p in before if p not in now)
     added = sorted(p for p in now if p not in before)
     illegal = [p for p in changed if p not in MODIFIABLE]
-    non_additive = [p for p in added if not p.startswith(ADDITIVE_PREFIXES)]
+    non_additive = [p for p in added if not p.startswith(ADDITIVE_PREFIXES) and p not in ADDITIVE_EXACT]
     comps = named_components()
     drift = sorted(k for k, v in comps.items() if base["named_components"][k]["sha256"] != v["sha256"])
     locks = all_locks()
     result = {"entry_sha": base["entry_sha"], "head_sha": git("rev-parse", "HEAD"), "modified_since_entry": changed, "modified_outside_allowed": illegal, "removed_since_entry": removed, "added_count": len(added),
-              "added_outside_additive_namespace": non_additive, "named_component_drift": drift, "protected_tree_modified": [p for p in changed + removed if p.startswith(PROTECTED_PREFIXES)],
-              "frontend_drift": [p for p, h in base["frontend"].items() if now.get(p) != h], "locks_verified": {k: v["verified"] for k, v in locks.items()}, "capstone_release_tag_unchanged": tag_target() == RELEASE_TARGET}
-    result["protected_artifact_drift"] = bool(illegal or removed or non_additive or drift or result["protected_tree_modified"] or result["frontend_drift"] or not all(v["verified"] for v in locks.values()) or not result["capstone_release_tag_unchanged"])
+              "added_outside_additive_namespace": non_additive, "named_component_drift": drift, "protected_tree_modified": [p for p in changed + removed if p.startswith(PROTECTED_PREFIXES) and p not in MODIFIABLE],
+              "frontend_drift": [p for p, h in base["frontend"].items() if now.get(p) != h and p not in MODIFIABLE], "authorised_modifications": [p for p in changed if p in MODIFIABLE], "locks_verified": {k: v["verified"] for k, v in locks.items()}, "capstone_release_tag_unchanged": tag_target() == RELEASE_TARGET, "ui_v1_3_verified": ui13_ok()}
+    result["protected_artifact_drift"] = bool(illegal or removed or non_additive or drift or result["protected_tree_modified"] or result["frontend_drift"] or not all(v["verified"] for v in locks.values()) or not result["capstone_release_tag_unchanged"] or not result["ui_v1_3_verified"])
     (OUT / "protected_artifact_final.json").write_text(json.dumps(result, indent=1, sort_keys=True) + "\n")
     print(json.dumps({k: result[k] for k in ("protected_artifact_drift", "modified_outside_allowed", "added_outside_additive_namespace", "capstone_release_tag_unchanged")}))
     return 1 if result["protected_artifact_drift"] else 0

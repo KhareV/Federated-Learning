@@ -1,0 +1,672 @@
+{
+ "ci": "not queried, not triggered",
+ "claim": "NHM's existing capstone product has been verified with real Clerk test-instance authentication for browser sign-in, REST authorization, monitoring WebSockets, federation WebSockets and owner isolation, while preserving the offline DemoAuth mode and all scientific/runtime bindings.",
+ "claim_not": [
+  "production-auth certification",
+  "security certification",
+  "penetration test",
+  "compliance",
+  "production Clerk deployment",
+  "offline Clerk operation"
+ ],
+ "clerkg0_criteria": [
+  {
+   "checks": [
+    "closed_lineage"
+   ],
+   "id": "CLERKG0-001",
+   "text": "capstone software lineage remains closed (CAP-001..011 PASS, CAPG0..10 PASS, no CAP-012)"
+  },
+  {
+   "checks": [
+    "release_untouched"
+   ],
+   "id": "CLERKG0-002",
+   "text": "CAPSTONE_RELEASE_V1 untouched"
+  },
+  {
+   "checks": [
+    "tag_unchanged"
+   ],
+   "id": "CLERKG0-003",
+   "text": "historical release tag unchanged (capstone-release-v1 -> 3ad1b07)"
+  },
+  {
+   "checks": [
+    "no_sci_drift"
+   ],
+   "id": "CLERKG0-004",
+   "text": "scientific artifacts zero drift"
+  },
+  {
+   "checks": [
+    "no_runtime_drift"
+   ],
+   "id": "CLERKG0-005",
+   "text": "runtime bindings zero drift"
+  },
+  {
+   "checks": [
+    "no_fl_drift"
+   ],
+   "id": "CLERKG0-006",
+   "text": "FL scientific implementation zero drift"
+  },
+  {
+   "checks": [
+    "no_personal_model"
+   ],
+   "id": "CLERKG0-007",
+   "text": "no personal model"
+  },
+  {
+   "checks": [
+    "fl_isolation"
+   ],
+   "id": "CLERKG0-008",
+   "text": "no user-session FL training"
+  },
+  {
+   "checks": [
+    "keys_not_committed"
+   ],
+   "id": "CLERKG0-009",
+   "text": "supplied test keys never committed"
+  },
+  {
+   "checks": [
+    "no_key_rotation"
+   ],
+   "id": "CLERKG0-010",
+   "text": "no key rotation/revocation performed"
+  },
+  {
+   "checks": [
+    "key_mapping"
+   ],
+   "id": "CLERKG0-011",
+   "text": "publishable key mapped to VITE_CLERK_PUBLISHABLE_KEY (frontend never reads NEXT_PUBLIC)"
+  },
+  {
+   "checks": [
+    "backend_secret_var"
+   ],
+   "id": "CLERKG0-012",
+   "text": "backend uses CLERK_SECRET_KEY and never passes it to the frontend"
+  },
+  {
+   "checks": [
+    "parties_explicit"
+   ],
+   "id": "CLERKG0-013",
+   "text": "explicit authorized parties configured"
+  },
+  {
+   "checks": [
+    "no_wildcard_party"
+   ],
+   "id": "CLERKG0-014",
+   "text": "wildcard authorized party absent and rejected"
+  },
+  {
+   "checks": [
+    "official_clerkjs"
+   ],
+   "id": "CLERKG0-015",
+   "text": "official ClerkJS used"
+  },
+  {
+   "checks": [
+    "official_sdk"
+   ],
+   "id": "CLERKG0-016",
+   "text": "official Clerk Python SDK used"
+  },
+  {
+   "checks": [
+    "no_custom_crypto"
+   ],
+   "id": "CLERKG0-017",
+   "text": "no custom JWT crypto"
+  },
+  {
+   "checks": [
+    "real_instance"
+   ],
+   "id": "CLERKG0-018",
+   "text": "real Clerk test instance used"
+  },
+  {
+   "checks": [
+    "signin_pass"
+   ],
+   "id": "CLERKG0-019",
+   "text": "real browser sign-in passes"
+  },
+  {
+   "checks": [
+    "system_clerk"
+   ],
+   "id": "CLERKG0-020",
+   "text": "/system reports CLERK"
+  },
+  {
+   "checks": [
+    "demo_false"
+   ],
+   "id": "CLERKG0-021",
+   "text": "demo_mode=false"
+  },
+  {
+   "checks": [
+    "me_real"
+   ],
+   "id": "CLERKG0-022",
+   "text": "/me returns real Clerk identity"
+  },
+  {
+   "checks": [
+    "no_demo_fallback"
+   ],
+   "id": "CLERKG0-023",
+   "text": "no DemoAuth fallback"
+  },
+  {
+   "checks": [
+    "rest_bearer"
+   ],
+   "id": "CLERKG0-024",
+   "text": "real REST token verification passes"
+  },
+  {
+   "checks": [
+    "invalid_rejected"
+   ],
+   "id": "CLERKG0-025",
+   "text": "invalid bearer rejected"
+  },
+  {
+   "checks": [
+    "monitoring_rest"
+   ],
+   "id": "CLERKG0-026",
+   "text": "monitoring REST flow passes"
+  },
+  {
+   "checks": [
+    "monitoring_ws_auth"
+   ],
+   "id": "CLERKG0-027",
+   "text": "monitoring WebSocket real Clerk auth passes"
+  },
+  {
+   "checks": [
+    "monitoring_ws_no_token"
+   ],
+   "id": "CLERKG0-028",
+   "text": "monitoring WebSocket token absent from URL"
+  },
+  {
+   "checks": [
+    "federation_rest"
+   ],
+   "id": "CLERKG0-029",
+   "text": "federation REST flow passes"
+  },
+  {
+   "checks": [
+    "federation_ws_auth"
+   ],
+   "id": "CLERKG0-030",
+   "text": "federation WebSocket real Clerk auth passes"
+  },
+  {
+   "checks": [
+    "federation_ws_no_token"
+   ],
+   "id": "CLERKG0-031",
+   "text": "federation WS token absent from URL"
+  },
+  {
+   "checks": [
+    "logout_ok"
+   ],
+   "id": "CLERKG0-032",
+   "text": "logout invalidates product access"
+  },
+  {
+   "checks": [
+    "refresh_ok"
+   ],
+   "id": "CLERKG0-033",
+   "text": "browser refresh restores the Clerk session"
+  },
+  {
+   "checks": [
+    "no_token_localstorage"
+   ],
+   "id": "CLERKG0-034",
+   "text": "NHM stores no bearer token in localStorage"
+  },
+  {
+   "checks": [
+    "no_token_sessionstorage"
+   ],
+   "id": "CLERKG0-035",
+   "text": "NHM stores no bearer token in sessionStorage"
+  },
+  {
+   "checks": [
+    "no_token_indexeddb"
+   ],
+   "id": "CLERKG0-036",
+   "text": "NHM stores no bearer token in IndexedDB"
+  },
+  {
+   "checks": [
+    "secret_absent_frontend_src"
+   ],
+   "id": "CLERKG0-037",
+   "text": "actual secret absent from frontend source"
+  },
+  {
+   "checks": [
+    "secret_absent_build"
+   ],
+   "id": "CLERKG0-038",
+   "text": "actual secret absent from frontend build"
+  },
+  {
+   "checks": [
+    "secret_absent_logs"
+   ],
+   "id": "CLERKG0-039",
+   "text": "actual secret absent from logs"
+  },
+  {
+   "checks": [
+    "secret_absent_sqlite"
+   ],
+   "id": "CLERKG0-040",
+   "text": "actual secret absent from SQLite"
+  },
+  {
+   "checks": [
+    "secret_absent_artifacts"
+   ],
+   "id": "CLERKG0-041",
+   "text": "actual secret absent from artifacts"
+  },
+  {
+   "checks": [
+    "secret_absent_evidence"
+   ],
+   "id": "CLERKG0-042",
+   "text": "actual secret absent from committed evidence"
+  },
+  {
+   "checks": [
+    "ownership_rest"
+   ],
+   "id": "CLERKG0-043",
+   "text": "cross-user REST ownership enforced"
+  },
+  {
+   "checks": [
+    "ownership_monitoring_ws"
+   ],
+   "id": "CLERKG0-044",
+   "text": "cross-user monitoring WS ownership enforced"
+  },
+  {
+   "checks": [
+    "ownership_federation"
+   ],
+   "id": "CLERKG0-045",
+   "text": "cross-user federation ownership enforced (REST control + WS)"
+  },
+  {
+   "checks": [
+    "persistence_ok"
+   ],
+   "id": "CLERKG0-046",
+   "text": "product persistence survives restart"
+  },
+  {
+   "checks": [
+    "identity_stable"
+   ],
+   "id": "CLERKG0-047",
+   "text": "Clerk identity stable after restart/sign-in"
+  },
+  {
+   "checks": [
+    "model_unchanged"
+   ],
+   "id": "CLERKG0-048",
+   "text": "MODEL_V2_FINAL unchanged"
+  },
+  {
+   "checks": [
+    "cal_unchanged"
+   ],
+   "id": "CLERKG0-049",
+   "text": "CAL_V2 unchanged"
+  },
+  {
+   "checks": [
+    "identity_no_ml_selection"
+   ],
+   "id": "CLERKG0-050",
+   "text": "Clerk identity cannot select ML configuration"
+  },
+  {
+   "checks": [
+    "fl_unchanged"
+   ],
+   "id": "CLERKG0-051",
+   "text": "FL clients unchanged (8 logical, 3 rounds, 24 updates)"
+  },
+  {
+   "checks": [
+    "candidate_sandbox"
+   ],
+   "id": "CLERKG0-052",
+   "text": "candidate remains sandbox-only"
+  },
+  {
+   "checks": [
+    "not_deployed"
+   ],
+   "id": "CLERKG0-053",
+   "text": "production_deployed=false"
+  },
+  {
+   "checks": [
+    "demo_works"
+   ],
+   "id": "CLERKG0-054",
+   "text": "DemoAuth mode still works"
+  },
+  {
+   "checks": [
+    "demo_no_clerk"
+   ],
+   "id": "CLERKG0-055",
+   "text": "DemoAuth mode initializes no Clerk"
+  },
+  {
+   "checks": [
+    "demo_zero_clerk_traffic"
+   ],
+   "id": "CLERKG0-056",
+   "text": "offline DemoAuth still has zero required Clerk network traffic"
+  },
+  {
+   "checks": [
+    "connected_needs_clerk_network"
+   ],
+   "id": "CLERKG0-057",
+   "text": "connected mode correctly requires Clerk network"
+  },
+  {
+   "checks": [
+    "research_unchanged"
+   ],
+   "id": "CLERKG0-058",
+   "text": "scientific/research evidence unchanged (same candidate digest and research views)"
+  },
+  {
+   "checks": [
+    "journey_ok"
+   ],
+   "id": "CLERKG0-059",
+   "text": "current frontend product journey works"
+  },
+  {
+   "checks": [
+    "history_ok"
+   ],
+   "id": "CLERKG0-060",
+   "text": "current history works"
+  },
+  {
+   "checks": [
+    "federation_ok"
+   ],
+   "id": "CLERKG0-061",
+   "text": "current federation works"
+  },
+  {
+   "checks": [
+    "models_ok"
+   ],
+   "id": "CLERKG0-062",
+   "text": "current models page works"
+  },
+  {
+   "checks": [
+    "research_ok"
+   ],
+   "id": "CLERKG0-063",
+   "text": "current research pages work"
+  },
+  {
+   "checks": [
+    "no_new_science"
+   ],
+   "id": "CLERKG0-064",
+   "text": "no new scientific result"
+  },
+  {
+   "checks": [
+    "no_heldout"
+   ],
+   "id": "CLERKG0-065",
+   "text": "no held-out inference"
+  },
+  {
+   "checks": [
+    "no_retrain"
+   ],
+   "id": "CLERKG0-066",
+   "text": "no retraining/recalibration"
+  },
+  {
+   "checks": [
+    "no_hardware"
+   ],
+   "id": "CLERKG0-067",
+   "text": "no physical hardware"
+  },
+  {
+   "checks": [
+    "clone_ok"
+   ],
+   "id": "CLERKG0-068",
+   "text": "clean connected clone succeeds"
+  },
+  {
+   "checks": [
+    "clone_fresh_browser"
+   ],
+   "id": "CLERKG0-069",
+   "text": "clean connected clone uses a fresh browser profile and a fresh real Clerk session"
+  },
+  {
+   "checks": [
+    "clone_no_session_copied"
+   ],
+   "id": "CLERKG0-070",
+   "text": "no developer Clerk cookie/session copied"
+  },
+  {
+   "checks": [
+    "clone_no_db_copied"
+   ],
+   "id": "CLERKG0-071",
+   "text": "no developer DB copied"
+  },
+  {
+   "checks": [
+    "clone_no_env_copied"
+   ],
+   "id": "CLERKG0-072",
+   "text": "no developer env file copied"
+  },
+  {
+   "checks": [
+    "target_clean_pushed"
+   ],
+   "id": "CLERKG0-073",
+   "text": "connected target clean and pushed"
+  },
+  {
+   "checks": [
+    "protected_final"
+   ],
+   "id": "CLERKG0-074",
+   "text": "protected artifact audit passes"
+  },
+  {
+   "checks": [
+    "dev_regression"
+   ],
+   "id": "CLERKG0-075",
+   "text": "full regression passes"
+  },
+  {
+   "checks": [
+    "dev_frontend_tests"
+   ],
+   "id": "CLERKG0-076",
+   "text": "frontend tests pass"
+  },
+  {
+   "checks": [
+    "dev_svelte"
+   ],
+   "id": "CLERKG0-077",
+   "text": "svelte-check zero errors"
+  },
+  {
+   "checks": [
+    "dev_build"
+   ],
+   "id": "CLERKG0-078",
+   "text": "build passes"
+  },
+  {
+   "checks": [
+    "dev_ruff"
+   ],
+   "id": "CLERKG0-079",
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    "dev_pip"
+   ],
+   "id": "CLERKG0-080",
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    "mutation_log"
+   ],
+   "id": "CLERKG0-081",
+   "text": "all 20 mutation controls caught and restored"
+  },
+  {
+   "checks": [
+    "wrong_party_rejected"
+   ],
+   "id": "CLERKG0-082",
+   "text": "wrong authorized party rejects the real Clerk session"
+  },
+  {
+   "checks": [
+    "ui_chain_ok"
+   ],
+   "id": "CLERKG0-083",
+   "text": "UI successor chain verified (CAPSTONE_UI_V1_3; V1/V1_1/V1_2 historical locks unchanged)"
+  },
+  {
+   "checks": [
+    "frontend_scope_exact"
+   ],
+   "id": "CLERKG0-084",
+   "text": "frontend drift is exactly the UI_V1_3-accounted change (loader + its test)"
+  },
+  {
+   "checks": [
+    "ci_untouched"
+   ],
+   "id": "CLERKG0-085",
+   "text": "CI not queried and not triggered"
+  },
+  {
+   "checks": [
+    "task_pass"
+   ],
+   "id": "CLERKG0-086",
+   "text": "CLERK-LIVE-001 PASS"
+  },
+  {
+   "checks": [
+    "gate_pass"
+   ],
+   "id": "CLERKG0-087",
+   "text": "CLERKG0 PASS"
+  },
+  {
+   "checks": [
+    "decision_accept"
+   ],
+   "id": "CLERKG0-088",
+   "text": "CAPSTONE_CLERK_CONNECTED_V1 ACCEPT"
+  }
+ ],
+ "criteria_count": 88,
+ "entry": {
+  "compatibility_commit": "3518265",
+  "control_commit": "69e9983",
+  "entry_audit_commit": "6475280",
+  "entry_sha": "be2e4473223876699e74b64adc72672453ebc34b"
+ },
+ "final_component": "CAPSTONE_CLERK_CONNECTED_V1",
+ "gate": "CLERKG0",
+ "limitations": [
+  "Clerk TEST credentials / development instance: integration behaviour, not production-account operation",
+  "connected mode requires Internet access to Clerk",
+  "offline DemoAuth is a separate mode",
+  "all capstone scientific, FL and hardware limitations carry forward"
+ ],
+ "manual_steps": "none expected; if Clerk requires human verification the boundary is disclosed",
+ "mutation_controls": [
+  "SECRET_IN_FRONTEND_SOURCE",
+  "SECRET_IN_FRONTEND_BUILD",
+  "SECRET_PRINTED_IN_LOG",
+  "SECRET_WRITTEN_TO_SQLITE",
+  "FRONTEND_USES_NEXT_PUBLIC_DIRECTLY",
+  "CLERK_MODE_FALLS_BACK_TO_DEMO",
+  "WILDCARD_AUTHORIZED_PARTY_ACCEPTED",
+  "WEBSOCKET_TOKEN_IN_URL",
+  "MONITORING_WS_ACCEPTS_UNAUTHENTICATED",
+  "FEDERATION_WS_ACCEPTS_UNAUTHENTICATED",
+  "USER_B_READS_USER_A_SESSION",
+  "USER_B_CONNECTS_TO_USER_A_MONITORING_WS",
+  "USER_B_CONTROLS_USER_A_FEDERATION_RUN",
+  "USER_B_CONNECTS_TO_USER_A_FEDERATION_WS",
+  "CLERK_IDENTITY_CHANGES_MODEL_OR_CHECKPOINT",
+  "MONITORING_SESSION_FEEDS_FL",
+  "CONNECTED_INTEGRATION_BREAKS_DEMOAUTH",
+  "CANDIDATE_BECOMES_DEPLOYED",
+  "CUSTOM_JWT_VERIFICATION_ADDED",
+  "HISTORICAL_RELEASE_TAG_MOVED"
+ ],
+ "owner_task": "CLERK-LIVE-001",
+ "protocol_id": "CLERK_LIVE_001_PROTOCOL_V1",
+ "status": "FROZEN_PRE_RESULT_PROTOCOL",
+ "test_users": "TEST_USER_A and TEST_USER_B (two clearly labelled Clerk test users; credentials never committed)"
+}

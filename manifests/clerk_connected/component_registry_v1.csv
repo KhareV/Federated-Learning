@@ -1,0 +1,8 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CLERK_LIVE_001_PROTOCOL_V1,ENGINEERING_PROTOCOL,CLERK-LIVE-001,FROZEN_PRE_RESULT_PROTOCOL,,configs/clerk_connected/clerk_live_001_protocol_v1.json,"88 CLERKG0 criteria, 20 mutation controls; lock binds the connected layer."
+CAPSTONE_UI_V1_3,UI_SUCCESSOR_LOCK,CLERK-LIVE-001,FROZEN_ENGINEERING_INTERFACE,,artifacts/capstone/CAPSTONE_UI_V1_3.lock.json,Whole-frontend successor lock; V1/V1_1/V1_2 lock bytes unchanged.
+CAPSTONE_FRONTEND_AUTH_V2,ENGINEERING_IMPLEMENTATION,CLERK-LIVE-001,FROZEN_ENGINEERING_IMPLEMENTATION,,frontend/src/lib/product/auth.ts,Official ClerkJS 6.x @clerk/ui bundle loader (CLERK mode only); no new dependency.
+CAPSTONE_CLERK_CONNECTED_LAUNCHER_V1,ENGINEERING_IMPLEMENTATION,CLERK-LIVE-001,FROZEN_ENGINEERING_IMPLEMENTATION,,scripts/run_capstone_clerk_connected.py,Same three services as the faculty launcher; CLERK auth; env-only credentials; no DemoAuth fallback.
+CAPSTONE_CLERK_CONNECTED_E2E_V1,ENGINEERING_IMPLEMENTATION,CLERK-LIVE-001,FROZEN_ENGINEERING_IMPLEMENTATION,,scripts/run_capstone_clerk_connected_e2e.py,Real Chrome + real Clerk TEST sign-in; two users; WebSockets; ownership; logout/refresh/restart.
+CAPSTONE_CLERK_CONNECTED_RUNBOOK_V1,DOCUMENTATION,CLERK-LIVE-001,FROZEN_ENGINEERING_INTERFACE,,docs/capstone/CLERK_CONNECTED_RUNBOOK_V1.md,Placeholders only; offline DemoAuth distinction.
+CAPSTONE_CLERK_CONNECTED_V1,CONNECTED_SYSTEM,CLERK-LIVE-001,PROSPECTIVE_UNTIL_CLERKG0,,reports/clerk_connected/clerk_live_001/connected_decision.json,Successor of CAPSTONE_RELEASE_V1; decision recorded as evidence only.

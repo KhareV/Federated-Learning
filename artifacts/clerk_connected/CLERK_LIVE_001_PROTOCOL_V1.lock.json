@@ -1,0 +1,98 @@
+{
+ "bound_files": {
+  "configs/clerk_connected/clerk_live_001_protocol_v1.json": "2d51c67886ec83955f744e18b206687ae838355de1e64727ac95fe144ed1cf41",
+  "docs/capstone/CLERK_CONNECTED_RUNBOOK_V1.md": "8afd38c53ce86833270bdcf9acfa474e00e5c23fab38a2b754a03a4ab368038f",
+  "frontend/src/lib/product/__tests__/clerk-ui-loader.test.ts": "a14cadec254aaa9e394c8a74950e2302eefa6ccabac551e6eb4a9fbe85f088be",
+  "frontend/src/lib/product/auth.ts": "2a4116b40747ba66af58839d2c78839532a88257088380de8a5a187419633408",
+  "scripts/clerk_connected_cdp_driver.mjs": "d55d8dfb61df323cff125c029bbc38e8ce0f185e17376e4447e2c0e44e71757a",
+  "scripts/clerk_connected_lib.py": "3f99ae6e94ffd83d29f19e94d43bde00d394697d3bbaf2b060d005a8b3b32469",
+  "scripts/clerk_live_001_build_evidence.py": "ff9d99d2fdea07cf3d1bf2bdf9f7d05263de59f7e4bc276479b5fdd4a939427e",
+  "scripts/clerk_live_001_build_freeze.py": "0d6c4b2656259a90920d9040464c977e37797b8be0d6392d8368781a726ae9b4",
+  "scripts/clerk_live_001_evaluate_gate.py": "ea1a77e908b035f7086bab746e6149c9b299a4b0f66e29e0de8fb80f8da3f79f",
+  "scripts/clerk_live_001_mutation_controls.py": "21ce7d965a2882ac9f21e021fbfd1a9b4e3fed53468abcfff4f51d0f78e1eb32",
+  "scripts/clerk_live_001_protected_audit.py": "809cf60e9743b23e0a2c98e36497ad910c64a90602d33a9076eecbc7d850e319",
+  "scripts/run_capstone_clerk_connected.py": "2181b3016d076b517c5d645bf21dec60ad19d478dd4ff7f5eb4c828dd465dd11",
+  "scripts/run_capstone_clerk_connected_clean_clone.py": "3bbd1e929fc8788f5fb95d445acd5537ebd023193afed04f73f2751bf862e005",
+  "scripts/run_capstone_clerk_connected_e2e.py": "628d109da1204a168b3cb76913ead9ee7683e27f9d4b626bea9612adbc26e92b",
+  "scripts/verify_clerk_connected.py": "db683cbc4294a89f288bec84ebe2b448e5855d90b3f510034d5ac072a14c9029",
+  "tests/test_clerk_connected_launcher.py": "a32cc27831d91981ad09cd3bdeecc0a9289dc7fbe49c83f402dcfb7198be5ff9",
+  "tests/test_clerk_connected_lib.py": "fa99343b62473e573c85f2547ee63a321490836fae9b2e7c4502d5cb1eefbfa4"
+ },
+ "claim_boundary": "REAL_CLERK_TEST_INSTANCE_INTEGRATION_ONLY",
+ "component_registry": {
+  "path": "manifests/clerk_connected/component_registry_v1.csv",
+  "sha256": "75e29bada046ebdcf14317a2f7b5ff1a5c73c7bf9f002a0568d096fd2ff8d2f5"
+ },
+ "components": {
+  "CAPSTONE_CLERK_CONNECTED_E2E_V1": {
+   "path": "scripts/run_capstone_clerk_connected_e2e.py",
+   "sha256": "628d109da1204a168b3cb76913ead9ee7683e27f9d4b626bea9612adbc26e92b",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_CLERK_CONNECTED_LAUNCHER_V1": {
+   "path": "scripts/run_capstone_clerk_connected.py",
+   "sha256": "2181b3016d076b517c5d645bf21dec60ad19d478dd4ff7f5eb4c828dd465dd11",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_CLERK_CONNECTED_RUNBOOK_V1": {
+   "path": "docs/capstone/CLERK_CONNECTED_RUNBOOK_V1.md",
+   "sha256": "8afd38c53ce86833270bdcf9acfa474e00e5c23fab38a2b754a03a4ab368038f",
+   "status": "FROZEN_ENGINEERING_INTERFACE"
+  },
+  "CAPSTONE_FRONTEND_AUTH_V2": {
+   "path": "frontend/src/lib/product/auth.ts",
+   "sha256": "2a4116b40747ba66af58839d2c78839532a88257088380de8a5a187419633408",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_UI_V1_3": {
+   "path": "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json",
+   "sha256": "07ec081ac863ea067ac89b7833e177d2ef9a3100692fcfd79def220db57e7c37",
+   "status": "FROZEN_ENGINEERING_INTERFACE"
+  },
+  "CLERK_LIVE_001_PROTOCOL_V1": {
+   "path": "configs/clerk_connected/clerk_live_001_protocol_v1.json",
+   "sha256": "2d51c67886ec83955f744e18b206687ae838355de1e64727ac95fe144ed1cf41",
+   "status": "FROZEN_PRE_RESULT_PROTOCOL"
+  }
+ },
+ "criteria_count": 88,
+ "entry_audit_sha256": "3cc2991dc971130fbf152ac191191022d22c36844976a2a4a7f778389a0b2ff6",
+ "entry_sha": "be2e4473223876699e74b64adc72672453ebc34b",
+ "freeze_basis": "before the canonical real-Clerk E2E; the connected evaluator, E2E orchestrator/driver, launcher, mutation controls and criteria are frozen here",
+ "gate": "CLERKG0",
+ "lock_id": "CLERK_LIVE_001_PROTOCOL_V1",
+ "mutation_controls": 20,
+ "owner_phase": "CLERK-LIVE-001",
+ "status": "FROZEN_PRE_RESULT_PROTOCOL",
+ "unbound_prospective_components": [
+  "CAPSTONE_CLERK_CONNECTED_V1"
+ ],
+ "upstream_frozen_identity": {
+  "api/product_app_v1_3.py": "d47d22a78d1dedeaa533c7339c87a03ed20a514471061e5235d94483c62cb015",
+  "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+  "artifacts/SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0",
+  "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30",
+  "artifacts/capstone/CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.lock.json": "a125a60edb7343004280d48bf1e75ab1163eec1a6da998f8a022789be1ee9c8e",
+  "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json": "3eb5ee97665b006088b15b021b484a5e5ac6f4174f58051d97aacfed0ae0be7d",
+  "artifacts/capstone/CAPSTONE_FACULTY_DEMO_PROTOCOL_V1.lock.json": "995ce7f1d92a671049663559a67d87665808d06a68d52dea76c1f5176a63e50b",
+  "artifacts/capstone/CAPSTONE_FEDERATION_PROTOCOL_V1.lock.json": "9bd126be587561358cfabdf4a3bf484552d558ef0bfa5aa6c136bb26a3229cb5",
+  "artifacts/capstone/CAPSTONE_FEDERATION_UX_PROTOCOL_V1.lock.json": "efda39c855c953a108be5b44eaa0543259a179be3df96b451a44e3d4ac814450",
+  "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.lock.json": "6cae0d1e71ba742b1a6dfafbc5f435466343637b1be841e124d31092464be8aa",
+  "artifacts/capstone/CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.lock.json": "b368254e568fe4636ee37bd71ea26c3843b83a1a04d8f85e5b5fb98989e1922d",
+  "artifacts/capstone/CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1.lock.json": "70e9488a2530bbb3593cc39200e947250bf7f83f8a5a3ba0b205b33387c80597",
+  "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "artifacts/capstone/CAPSTONE_RELEASE_MANIFEST_V1.json": "6b0acbd8c5c699c53e5e5e7ef660c2faafe4bf82ffb71c1cf5f564fa38667d26",
+  "artifacts/capstone/CAPSTONE_RELEASE_PROTOCOL_V1.lock.json": "4fa7be5b44b5d8b2f40708888258b0f35a0854df56cbe7094672af8705f20804",
+  "artifacts/capstone/CAPSTONE_UI_V1.lock.json": "374f996e3c4cf26d97bee8df68b73239ebb737fcb284e3249dc2466cffd67e1a",
+  "artifacts/capstone/CAPSTONE_UI_V1_1.lock.json": "4800834867d9c4f1dbc7a1e48d9d178f25cb2bc9f303d82daa98f65948f3cec4",
+  "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json": "07537fdcff516cd0659f959e7b85f03178f6de70877abd41d448b2911789e0e2",
+  "frontend/clerk-sdk/package-lock.json": "f948b4759a819f768885da5129a078513ac5942fa778c37a8c45691081bf8f5e",
+  "frontend/clerk-sdk/package.json": "a31971f9db734cdc439ae79a43da28d09711daa21440f314acdd97e7423fb2bd",
+  "frontend/package-lock.json": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae",
+  "product/auth/clerk.py": "be3560bbf640683cd8700aabbdedf1786a18c57e05806c88cfac0caabeff7e14",
+  "product/auth/resolver.py": "705960c7d832a5cf4b6992cf33e00f5e598231143b003125f0c3d3cc268138b3",
+  "pyproject.toml": "af83432eea745b52acc268ce1040edefd83cc8edc6a94afd9f7e8232aaecab34",
+  "requirements-capstone-auth.lock": "7c75bc14e595af8706f6de3605c7d69ffe5200e43859090d84d0b0b7c20da9e3",
+  "requirements-dev.lock": "0d4a0561bfadf89157b9f6f6dfbfa87e885aca2815a45a442e04a98d662f2a0e"
+ }
+}
