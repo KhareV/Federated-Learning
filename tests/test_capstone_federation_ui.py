@@ -27,7 +27,7 @@ def _shadow(tmp_path: Path) -> Path:
     from scripts.verify_capstone_ui_v1_1 import frontend_files
 
     shadow = tmp_path / "repo"
-    paths = [*frontend_files(), UI_V1, UI_V11, "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json", *(["artifacts/capstone/CAPSTONE_UI_V1_3.lock.json"] if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json").exists() else []), "artifacts/DASHBOARD_UI_V1_5.lock.json", *[str(p.relative_to(ROOT)) for p in (ROOT / "artifacts/capstone").glob("CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_*.json")]]
+    paths = [*frontend_files(), UI_V1, UI_V11, "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json", *(["artifacts/capstone/CAPSTONE_UI_V1_3.lock.json"] if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json").exists() else []), *(["artifacts/capstone/CAPSTONE_UI_V1_4.lock.json"] if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_4.lock.json").exists() else []), "artifacts/DASHBOARD_UI_V1_5.lock.json", *[str(p.relative_to(ROOT)) for p in (ROOT / "artifacts/capstone").glob("CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_*.json")]]
     for rel in paths:
         (shadow / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / rel, shadow / rel)
