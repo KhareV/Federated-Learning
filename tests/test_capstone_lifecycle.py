@@ -57,7 +57,8 @@ def _rows(name: str) -> list[dict]:
 def test_capstone_task_registry_is_exactly_the_current_state() -> None:
     actual = {r["task_id"]: r["status"] for r in _rows("task")}
     assert actual["CAP-010"] in {"NOT_STARTED", "IN_PROGRESS", "PASS"}
-    assert actual == {**EXPECTED_TASKS, "CAP-010": actual["CAP-010"]}
+    assert actual["CAP-011"] in {"NOT_STARTED", "IN_PROGRESS", "PASS"}
+    assert actual == {**EXPECTED_TASKS, "CAP-010": actual["CAP-010"], "CAP-011": actual["CAP-011"]}
 
 
 def test_capstone_gate_registry_is_exactly_the_current_state() -> None:
@@ -66,6 +67,9 @@ def test_capstone_gate_registry_is_exactly_the_current_state() -> None:
     expected = dict(EXPECTED_GATES)
     if tasks["CAP-010"] != "NOT_STARTED":  # governed CAP-010 transition: CAPG9 appears
         expected["CAPG9"] = "PASS" if tasks["CAP-010"] == "PASS" else "NOT_STARTED"
+    if tasks["CAP-011"] != "NOT_STARTED":  # governed CAP-011 transition: CAPG10 appears
+        assert tasks["CAP-010"] == "PASS"
+        expected["CAPG10"] = "PASS" if tasks["CAP-011"] == "PASS" else "NOT_STARTED"
     assert actual == expected
 
 
@@ -88,8 +92,16 @@ def test_task_prerequisite_chain_is_linear_and_later_phases_have_no_evidence() -
     else:
         assert tasks["CAP-010"]["evidence_path"] == ""
         assert tasks["CAP-010"]["implemented_at_commit"] == ""
-    assert tasks["CAP-011"]["evidence_path"] == ""
-    assert tasks["CAP-011"]["implemented_at_commit"] == ""
+    cap011 = tasks["CAP-011"]
+    if cap011["status"] == "IN_PROGRESS":
+        assert cap011["evidence_path"] == "reports/capstone/cap_011/entry_audit.json"
+        assert cap011["implemented_at_commit"] == ""
+    elif cap011["status"] == "PASS":
+        assert cap011["evidence_path"] == "reports/capstone/cap_011/final_handoff.md"
+        assert cap011["implemented_at_commit"]
+    else:
+        assert cap011["evidence_path"] == ""
+        assert cap011["implemented_at_commit"] == ""
 
 
 def test_freeze_lock_binds_every_listed_file_byte_for_byte() -> None:

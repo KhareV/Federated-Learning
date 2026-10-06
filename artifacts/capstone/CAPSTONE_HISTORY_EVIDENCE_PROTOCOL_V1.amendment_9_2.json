@@ -1,0 +1,15 @@
+{
+ "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_9_2",
+ "change": "Guard extended to the governed CAP-011 transition (CAPG10 appears only once CAP-011 has begun and CAP-010 is PASS; evidence_path / implemented_at_commit rules per status). Named 9_2 to preserve lexicographic chain order.",
+ "defect": "The historical lifecycle guard allowed only the CAP-010 governed transition; CAP-011/CAPG10 could not move NOT_STARTED -> IN_PROGRESS -> PASS.",
+ "files": {
+  "tests/test_capstone_lifecycle.py": {
+   "new_sha256": "551be6c497e10b7d21fa9be2e078eb59c8ae1ac61660d1a1ff91ee3d6166760b",
+   "old_sha256": "87f2977e21e8a70731ef67f465b51bd3de5a0517e1d6cffa9585daa75e0c7264"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAP-009 (historical guard governed for CAP-011)",
+ "previous_amendment": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_9_1",
+ "result_evidence_committed_with_amendment": false
+}
