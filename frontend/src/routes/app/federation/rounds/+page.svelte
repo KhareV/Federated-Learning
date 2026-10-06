@@ -7,7 +7,11 @@
 	import DigestText from '$lib/components/product/federation/DigestText.svelte';
 	import { bootRun, chooseRun } from '$lib/components/product/federation/useRunParam';
 	import { useFederation } from '$lib/product/federation/state.svelte';
+	import { getProductStore } from '$lib/product/state.svelte';
+	import { ownerBoundClientId } from '$lib/product/federation/participation';
 	const fed = useFederation();
+	const product = getProductStore();
+	const ownerBound = $derived(ownerBoundClientId(product.authState.system?.auth_provider, fed.run?.run_type));
 	onMount(() => { void bootRun(fed, page.url.searchParams.get('run')); return () => fed.closeLive(); });
 	const finalCandidate = $derived(fed.run?.candidate_ids[0] ?? null);
 </script>
@@ -17,6 +21,7 @@
 <RunSelector runs={fed.runs} selected={fed.run?.run_id ?? null} onSelect={(id) => chooseRun(fed, page.url.pathname, id)} />
 {#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
 {#if fed.run}
+	{#if ownerBound}<p class="dim" data-testid="rounds-owner-note">MY EDGE CLIENT: {ownerBound}. Presentation-bound to the authenticated run owner; training data remains synthetic engineering data.</p>{/if}
 	<Panel eyebrow="LINEAGE" title="Global-state lineage" note="DIGESTS FROM THE BACKEND">
 		<ol class="lin" data-testid="lineage">
 			<li>FL_INIT_V2 <DigestText value={fed.rounds[0]?.base_state_digest} label="FL_INIT_V2 digest" /></li>
