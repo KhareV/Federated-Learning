@@ -1,0 +1,43 @@
+{
+ "backend": {
+  "conclusion": "backend verification path works",
+  "garbage_bearer": 401,
+  "no_token": 401,
+  "real_session_token_minted_by_official_backend_sdk": {
+   "token_value_recorded": false,
+   "verified_by_official_sdk_without_authorized_parties": "SIGNED_IN",
+   "with_authorized_parties": "TOKEN_INVALID_AUTHORIZED_PARTIES (the SDK-minted token has no azp; real browser tokens carry azp) - correct behaviour"
+  },
+  "system_endpoint": {
+   "auth_provider": "CLERK",
+   "demo_mode": false
+  }
+ },
+ "code_change_required": true,
+ "decision": "Genuine incompatibility demonstrated; minimal officially documented successor change authorised by the operator (CAPSTONE_UI_V1_3). No dependency change, no backend/provider/resolver change.",
+ "environment": {
+  "auth_mode": "CLERK",
+  "clerk_instance": "real Clerk development (TEST) instance",
+  "frontend_built_with": "VITE_CLERK_PUBLISHABLE_KEY (mapped from the supplied NEXT_PUBLIC name)",
+  "launcher": "scripts/run_capstone_clerk_connected.py (additive; created before the baseline)"
+ },
+ "federation_websocket_result": "NOT_REACHABLE",
+ "frontend_sign_in": {
+  "cause": "ClerkJS 6.x ships without prebuilt UI; the @clerk/ui bundle must be loaded and passed as clerk.load({ui:{ClerkUI}})",
+  "console_error": "Clerk was not loaded with Ui components (Sn.assertComponentsReady in mountSignIn)",
+  "hosts_contacted": [
+   "127.0.0.1:4173",
+   "delicate-civet-2247.clerk.accounts.dev"
+  ],
+  "inputs_rendered": 0,
+  "result": "FAILED",
+  "sign_in_form_rendered": false,
+  "url": "/sign-in"
+ },
+ "implementation": "CAPSTONE_FRONTEND_AUTH_V1 (lazy @clerk/clerk-js 6.37.0) + CLERK_AUTH_PROVIDER_V1 + resolver (entry be2e447)",
+ "monitoring_websocket_result": "NOT_REACHABLE",
+ "name": "CURRENT_IMPLEMENTATION_REAL_CLERK_BASELINE",
+ "rest_result": "NOT_REACHABLE_FROM_BROWSER (no sign-in possible)",
+ "status": "FAIL_AS_FOUND",
+ "tested_before_any_auth_code_change": true
+}

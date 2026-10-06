@@ -1,0 +1,2 @@
+task_id,phase_family,task_name,prerequisites,gate_impact,status,implemented_at_commit,evidence_path,notes
+CLERK-LIVE-001,CONNECTED_AUTH,Real Clerk test-instance integration and final connected system,CAP-011,CLERKG0,IN_PROGRESS,,reports/clerk_connected/clerk_live_001/entry_audit.json,"Separate successor lineage: real Clerk TEST-instance browser sign-in, REST, monitoring/federation WebSockets and owner isolation; offline DemoAuth preserved; scientific/runtime/FL unchanged. CAPSTONE_RELEASE_V1 untouched."

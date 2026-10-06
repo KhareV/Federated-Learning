@@ -1,0 +1,32 @@
+{
+ "audit_date": "2026-10-06",
+ "decisions_taken_from_docs": [
+  "load @clerk/ui from the Frontend API domain (no new npm dependency)",
+  "use the documented 424242 test code for Clerk client-trust verification of +clerk_test users (no bypass)",
+  "keep official backend verification with explicit authorized parties (no custom crypto)"
+ ],
+ "note": "Official Clerk documentation consulted before the compatibility change; excerpts summarised, not copied.",
+ "sources": [
+  {
+   "finding": "ClerkJS from npm must load the separate @clerk/ui browser bundle from the instance Frontend API domain (https://<domain>/npm/@clerk/ui@1/dist/ui.browser.js, crossOrigin anonymous) and call clerk.load({ ui: { ClerkUI: window.__internal_ClerkUICtor } }) before mountSignIn; the domain is derived from the publishable key.",
+   "title": "JavaScript Quickstart",
+   "url": "https://clerk.com/docs/js-frontend/getting-started/quickstart"
+  },
+  {
+   "finding": "Development instances accept +clerk_test email subaddresses and +1 (XXX) 555-0100..0199 phone numbers; both use the fixed verification code 424242.",
+   "title": "Test emails and phones",
+   "url": "https://clerk.com/docs/guides/development/testing/test-emails-and-phones"
+  },
+  {
+   "finding": "Verifies session tokens from the Authorization header or the __session cookie; authorizedParties checks the azp claim and is strongly recommended; needs jwtKey or secretKey.",
+   "title": "authenticateRequest()",
+   "url": "https://clerk.com/docs/reference/backend/authenticate-request"
+  },
+  {
+   "finding": "Session tokens are short-lived JWTs with claims including sub, sid and azp (origin of the frontend request).",
+   "title": "Session tokens",
+   "url": "https://clerk.com/docs/guides/sessions/session-tokens"
+  }
+ ],
+ "status": "PASS"
+}
