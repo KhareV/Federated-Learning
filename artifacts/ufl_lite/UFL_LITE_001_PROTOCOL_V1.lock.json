@@ -1,0 +1,24 @@
+{
+ "bound_files": {
+  "configs/ufl_lite/uflg0_protocol_v1.json": "abd41f1d0cfa8bb74c53ff032569ed7482090fe1b30f6ff8c156ebcbab609fa6",
+  "contracts/ufl_lite/user_bound_fl_participation_v1.json": "6a2375f107e58142d780b442581a4c2e4bdf97c1e9b83c1021c666f511bb554c",
+  "docs/ufl_lite/USER_BOUND_FL_PARTICIPATION_V1.md": "38174e6d9d22063ecee55d75e72b4808eb0518fc6158ba803be7d703be00f72c",
+  "reports/ufl_lite/ufl_lite_001/architecture_audit.json": "7b282e9163c99441a684113a9ef34612096145953aadc46cb23185a64e09dc85",
+  "reports/ufl_lite/ufl_lite_001/change_surface.json": "9738451e340cb0460dff4cb53960e2d74ce0014b932d86c6a2e0ac03b021d831",
+  "reports/ufl_lite/ufl_lite_001/zero_drift_baseline.json": "1825be1ab992b086cc21509ec9b746be2a6d3a7eb86af73e02a719028436bb1d",
+  "scripts/ufl_lite_001_build_evidence.py": "86e10435f510721ea1a193d547375b771cccc0cab5146300dd8a6b5274584619",
+  "scripts/ufl_lite_001_build_freeze.py": "75b5016c4b77d17108c38821bfda1745bdeac01a124616ddcd9400d6c8b3a5f3",
+  "scripts/ufl_lite_001_evaluate_gate.py": "b8e9285a61ce8b722ed8fe7f586d2bc1cbee23fbebe9c5dfeca9a978e075f428",
+  "scripts/ufl_lite_001_mutation_controls.py": "c75b0c16b39f1200596143591e60e29fdd78210443d1e0c4d8686f41e3b21209",
+  "scripts/ufl_lite_001_protected_audit.py": "1f539c1d958f4765ac795533391a173ac49f89b9db492529f6c7b49da94ece46",
+  "scripts/ufl_lite_lib.py": "aefba855e29a2f9455b3cd70322fd5487db9f43e8923026c7031755471c12604",
+  "tests/test_ufl_lite_contract.py": "ac79bd54f79b561e3bc323b092e435b8c53b241e93aca4a6b46f095135e291e4"
+ },
+ "criteria_count": 43,
+ "entry_sha": "af1df702c1881ef4f0e52616680c6b2c54044eaf",
+ "freeze_basis": "before UFLG0 evaluation; architecture/contract only; Phase 2 not implemented",
+ "gate": "UFLG0",
+ "lock_id": "UFL_LITE_001_PROTOCOL_V1",
+ "owner_phase": "UFL-LITE-001",
+ "status": "FROZEN_ARCHITECTURE_PROTOCOL"
+}

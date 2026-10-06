@@ -1,0 +1,124 @@
+{
+ "accepted_updates_per_round": [
+  8,
+  8,
+  8
+ ],
+ "aggregation_unchanged": true,
+ "algorithm_orthogonality": "the binding is independent of FEDAVG vs FEDPROX",
+ "allowed_claim": "One existing federated edge client is bound to the authenticated user for the demonstration. It performs genuine local training on its private synthetic labelled dataset, while seven synthetic peers participate in the same live federation.",
+ "binding_decision": "DERIVED_AT_PRESENTATION_TIME (option A): role = f(backend auth_provider, run.run_type, client_id) with the owner implied by run ownership; NOT persisted. No database migration, no artifact metadata, no API field, no schema change.",
+ "binding_decision_rationale": [
+  "fewest changes: FLClientIdentity and FederationRun are extra='forbid' frozen contracts (fl_client_v1, fl_run_v1) behind a frozen API; a persisted/serialised field would force contract and API amendments",
+  "restart-correct: depends only on persisted run.user_id/run_type and the backend auth mode",
+  "replay-correct: REPLAY is excluded by rule",
+  "digest-safe: nothing in the binding reaches an update, round state or candidate",
+  "auditable: the rule and constants are frozen here and asserted by tests"
+ ],
+ "binding_scope": "RUN_SCOPED_PRESENTATION_ONLY (never the global client list)",
+ "candidate_deployed": false,
+ "candidate_governance": "ACCEPTED_TO_SANDBOX / IN_SANDBOX / production_deployed=false (unchanged)",
+ "canonical_candidate_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+ "canonical_candidate_scope": "8 clients, 3 rounds, FEDAVG, SecAgg shadow (authoritative aggregation PLAIN); any UFL-LITE implementation MUST reproduce this digest exactly",
+ "canonical_round_state_digests_ref": "reports/ufl_lite/ufl_lite_001/zero_drift_baseline.json",
+ "clerk_identity_never_enters": [
+  "CNN input",
+  "local optimizer",
+  "label",
+  "training tensor",
+  "loss",
+  "aggregation weight",
+  "model state",
+  "update digest",
+  "candidate digest",
+  "federation artifacts (no email, name or raw Clerk id)"
+ ],
+ "client_count": 8,
+ "contract_id": "USER_BOUND_FL_PARTICIPATION_V1",
+ "contract_version": "1.0.0",
+ "expected_updates": 24,
+ "fl_init_unchanged": true,
+ "forbidden_claims": [
+  "My real ECG trains the model",
+  "My monitoring data trains the global model",
+  "personalized federated learning",
+  "personal model",
+  "user-specific threshold"
+ ],
+ "future_seam": "existing LocalTrainingBufferV1 interface -> a future validated real-labelled local dataset (NOT implemented, NOT defined here; no hardware, no BLE, no label acquisition)",
+ "monitoring_data_used_for_training": false,
+ "monitoring_session_feeds_local_buffer": false,
+ "no_dynamic_hash_of_user_to_client": true,
+ "no_new_client_ids": true,
+ "no_ninth_client": true,
+ "non_qualifying": {
+  "DEMO": "no binding: the offline DemoAuth presentation (CAP-010/CAP-011) is preserved exactly",
+  "REPLAY": "no owner binding: a replay is presented as historical engineering replay; the binding never alters replay events or digests",
+  "global_clients_view": "GET /federation/clients is a GLOBAL cohort view and must never show SIM_FL_SITE_00 as 'MY EDGE CLIENT'"
+ },
+ "owner_bound_client_id": "SIM_FL_SITE_00",
+ "owner_phase": "UFL-LITE-001",
+ "personal_model": false,
+ "personalized_fl_claim": false,
+ "planned_rounds": 3,
+ "prediction_as_label": false,
+ "preferred_name": "USER_BOUND_FL_PARTICIPATION_V1",
+ "presentation_vocabulary": {
+  "data_origin": "SYNTHETIC_ENGINEERING (constant for every client; not a per-client field)",
+  "display_owner": "MY EDGE CLIENT",
+  "display_peer": "SYNTHETIC PEER",
+  "do_not_overload": [
+   "client_id",
+   "participant_id",
+   "client_state",
+   "simulation"
+  ],
+  "participation_role": [
+   "AUTHENTICATED_OWNER",
+   "SYNTHETIC_PEER"
+  ]
+ },
+ "principle": "One existing synthetic FL cohort member is PRESENTATION-BOUND to the authenticated Clerk owner of a federation run. The binding changes identity/presentation semantics only; it changes no training data, client computation, aggregation, model state, or scientific result.",
+ "qualifying_auth_mode": "CLERK",
+ "qualifying_context": "the run is owner-scoped (every /federation/runs* read returns only the caller's runs; others get 403) and the backend /system reports auth_provider=CLERK",
+ "qualifying_run_type": "LIVE_RUN",
+ "real_user_physiology_claimed_as_training_data": false,
+ "reuse": {
+  "client_adapter": "CapstoneFlClientAdapterV2",
+  "cohort": "product/federation/local_cohort.py build_client",
+  "coordinator": "federated.wearable_fl_system_v1.Coordinator",
+  "db_migration": false,
+  "new_client_class": false,
+  "new_fl_pipeline": false,
+  "new_training_buffer": false,
+  "service": "product/federation/service.py",
+  "training_buffer": "LocalTrainingBufferV1"
+ },
+ "secagg_claim": "unchanged: protected-aggregation-interface only; the binding adds no privacy guarantee",
+ "secagg_unchanged": true,
+ "site_00": {
+  "client_id": "SIM_FL_SITE_00",
+  "data_origin": "SYNTHETIC_ENGINEERING",
+  "dataset_represents_user_physiology": false,
+  "dataset_sha256": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+  "edge_node_id": "VIRTUAL_EDGE_NODE_00",
+  "label_source": "SIMULATION_TRUTH via SimulationLabelAdapterV1 (existing)",
+  "local_example_count": 93,
+  "participant_id": "SIM_P000101",
+  "session_id": "SIM_S_FL_00_000001"
+ },
+ "status": "FROZEN_ARCHITECTURE_CONTRACT",
+ "synthetic_peer_client_ids": [
+  "SIM_FL_SITE_01",
+  "SIM_FL_SITE_02",
+  "SIM_FL_SITE_03",
+  "SIM_FL_SITE_04",
+  "SIM_FL_SITE_05",
+  "SIM_FL_SITE_06",
+  "SIM_FL_SITE_07"
+ ],
+ "synthetic_peer_count": 7,
+ "training_algorithm_unchanged": true,
+ "underlying_client_identity_unchanged": true,
+ "underlying_dataset_unchanged": true
+}

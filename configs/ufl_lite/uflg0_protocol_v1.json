@@ -1,0 +1,356 @@
+{
+ "ci": "not queried, not triggered",
+ "contract": "contracts/ufl_lite/user_bound_fl_participation_v1.json",
+ "criteria_count": 43,
+ "entry": {
+  "control_commit": "b1c92a7",
+  "entry_audit_commit": "a6e0726",
+  "entry_sha": "af1df702c1881ef4f0e52616680c6b2c54044eaf"
+ },
+ "gate": "UFLG0",
+ "mutation_controls": [
+  "CLIENT_COUNT_BECOMES_9",
+  "CLIENT_IDS_CHANGE",
+  "SITE_00_DATASET_CHANGES",
+  "SITE_00_EXAMPLE_COUNT_CHANGES",
+  "CLERK_ID_ENTERS_MODEL_OR_UPDATE_PAYLOAD",
+  "MONITORING_SESSION_ENTERS_LOCAL_BUFFER",
+  "CANDIDATE_DIGEST_CHANGES",
+  "AGGREGATION_IMPLEMENTATION_CHANGES",
+  "OWNER_BOUND_CLIENT_BECOMES_A_NEW_CLASS",
+  "NEW_TRAINING_BUFFER_INTRODUCED",
+  "CANDIDATE_BECOMES_DEPLOYED",
+  "AUTH_IMPLEMENTATION_CHANGED",
+  "SCIENTIFIC_ARTIFACT_DRIFTS",
+  "RELEASE_TAG_MOVES",
+  "USER_BINDING_SHOWN_GLOBALLY"
+ ],
+ "owner_task": "UFL-LITE-001",
+ "phase_scope": "architecture/contract/non-interference only; Phase 2 (identity/presentation layer) is NOT implemented",
+ "protocol_id": "UFL_LITE_001_PROTOCOL_V1",
+ "status": "FROZEN_ARCHITECTURE_PROTOCOL",
+ "uflg0_criteria": [
+  {
+   "checks": [
+    "entry_audited"
+   ],
+   "id": "UFLG0-001",
+   "text": "entry SHA audited (entry audit immutable)"
+  },
+  {
+   "checks": [
+    "tags_unchanged"
+   ],
+   "id": "UFLG0-002",
+   "text": "prior release tags unchanged (capstone-release-v1, capstone-clerk-connected-v1)"
+  },
+  {
+   "checks": [
+    "locks_verify"
+   ],
+   "id": "UFLG0-003",
+   "text": "prior capstone and Clerk locks verify"
+  },
+  {
+   "checks": [
+    "c_client_count",
+    "T:test_current_cohort_has_exactly_eight_clients_with_the_frozen_ids_and_datasets"
+   ],
+   "id": "UFLG0-004",
+   "text": "client count = 8"
+  },
+  {
+   "checks": [
+    "c_owner_slot"
+   ],
+   "id": "UFLG0-005",
+   "text": "owner-bound slot frozen as SIM_FL_SITE_00"
+  },
+  {
+   "checks": [
+    "c_peers"
+   ],
+   "id": "UFLG0-006",
+   "text": "peers = SIM_FL_SITE_01..07"
+  },
+  {
+   "checks": [
+    "b_cohort",
+    "T:test_current_cohort_has_exactly_eight_clients_with_the_frozen_ids_and_datasets"
+   ],
+   "id": "UFLG0-007",
+   "text": "current cohort unchanged (ids, participants, edge nodes, cohort identity)"
+  },
+  {
+   "checks": [
+    "b_dataset_shas"
+   ],
+   "id": "UFLG0-008",
+   "text": "current dataset SHAs unchanged"
+  },
+  {
+   "checks": [
+    "b_example_counts"
+   ],
+   "id": "UFLG0-009",
+   "text": "current example counts unchanged"
+  },
+  {
+   "checks": [
+    "c_reuse_buffer",
+    "T:test_site_00_uses_the_existing_buffer_and_synthetic_engineering_data"
+   ],
+   "id": "UFLG0-010",
+   "text": "LocalTrainingBufferV1 reused"
+  },
+  {
+   "checks": [
+    "c_reuse_adapter",
+    "a_adapter"
+   ],
+   "id": "UFLG0-011",
+   "text": "CapstoneFlClientAdapterV2 reused"
+  },
+  {
+   "checks": [
+    "c_reuse_coordinator",
+    "a_coordinator"
+   ],
+   "id": "UFLG0-012",
+   "text": "coordinator reused"
+  },
+  {
+   "checks": [
+    "h_reused_unchanged",
+    "b_algorithms"
+   ],
+   "id": "UFLG0-013",
+   "text": "FedAvg unchanged"
+  },
+  {
+   "checks": [
+    "h_reused_unchanged",
+    "b_algorithms"
+   ],
+   "id": "UFLG0-014",
+   "text": "FedProx unchanged"
+  },
+  {
+   "checks": [
+    "h_reused_unchanged",
+    "b_secagg"
+   ],
+   "id": "UFLG0-015",
+   "text": "SecAgg shadow unchanged"
+  },
+  {
+   "checks": [
+    "b_fl_init",
+    "h_scientific"
+   ],
+   "id": "UFLG0-016",
+   "text": "FL_INIT_V2 unchanged"
+  },
+  {
+   "checks": [
+    "b_rounds",
+    "T:test_completed_canonical_run_reproduces_the_frozen_digest_updates_and_sandbox_only_candidate"
+   ],
+   "id": "UFLG0-017",
+   "text": "3 rounds unchanged"
+  },
+  {
+   "checks": [
+    "b_updates",
+    "T:test_completed_canonical_run_reproduces_the_frozen_digest_updates_and_sandbox_only_candidate"
+   ],
+   "id": "UFLG0-018",
+   "text": "24 updates unchanged"
+  },
+  {
+   "checks": [
+    "b_candidate_digest",
+    "T:test_completed_canonical_run_reproduces_the_frozen_digest_updates_and_sandbox_only_candidate"
+   ],
+   "id": "UFLG0-019",
+   "text": "canonical candidate digest frozen"
+  },
+  {
+   "checks": [
+    "c_monitoring_excluded",
+    "T:test_no_monitoring_or_identity_source_feeds_federation_training_and_no_new_class_or_buffer"
+   ],
+   "id": "UFLG0-020",
+   "text": "monitoring data excluded from FL"
+  },
+  {
+   "checks": [
+    "c_no_physiology_claim"
+   ],
+   "id": "UFLG0-021",
+   "text": "real user physiology not claimed as training data"
+  },
+  {
+   "checks": [
+    "c_no_personal"
+   ],
+   "id": "UFLG0-022",
+   "text": "no personal model / no personalized-FL claim"
+  },
+  {
+   "checks": [
+    "c_no_ninth"
+   ],
+   "id": "UFLG0-023",
+   "text": "no ninth client"
+  },
+  {
+   "checks": [
+    "c_no_migration",
+    "a_no_migration"
+   ],
+   "id": "UFLG0-024",
+   "text": "no DB migration planned (derived design) and no API field"
+  },
+  {
+   "checks": [
+    "a_ownership",
+    "T:test_current_run_is_owned_by_its_user_and_the_clients_endpoint_is_global"
+   ],
+   "id": "UFLG0-025",
+   "text": "run ownership reuse documented and tested"
+  },
+  {
+   "checks": [
+    "c_identity_excluded",
+    "T:test_identity_leak_scanner_catches_clerk_identity_in_a_payload"
+   ],
+   "id": "UFLG0-026",
+   "text": "Clerk identity excluded from ML math"
+  },
+  {
+   "checks": [
+    "c_context",
+    "T:test_current_run_is_owned_by_its_user_and_the_clients_endpoint_is_global"
+   ],
+   "id": "UFLG0-027",
+   "text": "qualifying binding context frozen (CLERK + LIVE_RUN, run-scoped, not global)"
+  },
+  {
+   "checks": [
+    "c_replay"
+   ],
+   "id": "UFLG0-028",
+   "text": "replay policy frozen"
+  },
+  {
+   "checks": [
+    "h_scientific",
+    "no_sci_drift"
+   ],
+   "id": "UFLG0-029",
+   "text": "no scientific changes"
+  },
+  {
+   "checks": [
+    "no_hardware"
+   ],
+   "id": "UFLG0-030",
+   "text": "no hardware changes"
+  },
+  {
+   "checks": [
+    "no_runtime_drift",
+    "h_reused_unchanged",
+    "h_auth"
+   ],
+   "id": "UFLG0-031",
+   "text": "no runtime behaviour changed in this phase"
+  },
+  {
+   "checks": [
+    "contract_exists"
+   ],
+   "id": "UFLG0-032",
+   "text": "contract created"
+  },
+  {
+   "checks": [
+    "note_exists"
+   ],
+   "id": "UFLG0-033",
+   "text": "architecture note created"
+  },
+  {
+   "checks": [
+    "change_surface_ok"
+   ],
+   "id": "UFLG0-034",
+   "text": "change-surface report created"
+  },
+  {
+   "checks": [
+    "baseline_exists"
+   ],
+   "id": "UFLG0-035",
+   "text": "zero-drift baseline created"
+  },
+  {
+   "checks": [
+    "mutation_log"
+   ],
+   "id": "UFLG0-036",
+   "text": "mutation controls defined and executed (15/15 caught, restored)"
+  },
+  {
+   "checks": [
+    "targeted_ok"
+   ],
+   "id": "UFLG0-037",
+   "text": "targeted tests pass"
+  },
+  {
+   "checks": [
+    "full_ok"
+   ],
+   "id": "UFLG0-038",
+   "text": "relevant full regression passes"
+  },
+  {
+   "checks": [
+    "b_model",
+    "T:test_released_monitoring_model_and_calibration_are_unchanged"
+   ],
+   "id": "UFLG0-039",
+   "text": "released monitoring model MODEL_V2_FINAL and candidate sandbox-only"
+  },
+  {
+   "checks": [
+    "c_decision"
+   ],
+   "id": "UFLG0-040",
+   "text": "derived-versus-persisted decision documented (derived)"
+  },
+  {
+   "checks": [
+    "lock_ok"
+   ],
+   "id": "UFLG0-041",
+   "text": "frozen method (lock) verifies"
+  },
+  {
+   "checks": [
+    "task_pass"
+   ],
+   "id": "UFLG0-042",
+   "text": "UFL-LITE-001 PASS (registry)"
+  },
+  {
+   "checks": [
+    "gate_pass"
+   ],
+   "id": "UFLG0-043",
+   "text": "UFLG0 PASS (registry)"
+  }
+ ]
+}
