@@ -1,0 +1,567 @@
+{
+ "all_decided_pass": true,
+ "criteria": [
+  {
+   "checks": [
+    {
+     "check": "entry_audited",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-001",
+   "pass": true,
+   "text": "entry SHA audited (entry audit immutable)"
+  },
+  {
+   "checks": [
+    {
+     "check": "tags_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-002",
+   "pass": true,
+   "text": "prior release tags unchanged (capstone-release-v1, capstone-clerk-connected-v1)"
+  },
+  {
+   "checks": [
+    {
+     "check": "locks_verify",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-003",
+   "pass": true,
+   "text": "prior capstone and Clerk locks verify"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_client_count",
+     "pass": true
+    },
+    {
+     "check": "T:test_current_cohort_has_exactly_eight_clients_with_the_frozen_ids_and_datasets",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-004",
+   "pass": true,
+   "text": "client count = 8"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_owner_slot",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-005",
+   "pass": true,
+   "text": "owner-bound slot frozen as SIM_FL_SITE_00"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_peers",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-006",
+   "pass": true,
+   "text": "peers = SIM_FL_SITE_01..07"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_cohort",
+     "pass": true
+    },
+    {
+     "check": "T:test_current_cohort_has_exactly_eight_clients_with_the_frozen_ids_and_datasets",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-007",
+   "pass": true,
+   "text": "current cohort unchanged (ids, participants, edge nodes, cohort identity)"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_dataset_shas",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-008",
+   "pass": true,
+   "text": "current dataset SHAs unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_example_counts",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-009",
+   "pass": true,
+   "text": "current example counts unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_reuse_buffer",
+     "pass": true
+    },
+    {
+     "check": "T:test_site_00_uses_the_existing_buffer_and_synthetic_engineering_data",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-010",
+   "pass": true,
+   "text": "LocalTrainingBufferV1 reused"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_reuse_adapter",
+     "pass": true
+    },
+    {
+     "check": "a_adapter",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-011",
+   "pass": true,
+   "text": "CapstoneFlClientAdapterV2 reused"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_reuse_coordinator",
+     "pass": true
+    },
+    {
+     "check": "a_coordinator",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-012",
+   "pass": true,
+   "text": "coordinator reused"
+  },
+  {
+   "checks": [
+    {
+     "check": "h_reused_unchanged",
+     "pass": true
+    },
+    {
+     "check": "b_algorithms",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-013",
+   "pass": true,
+   "text": "FedAvg unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "h_reused_unchanged",
+     "pass": true
+    },
+    {
+     "check": "b_algorithms",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-014",
+   "pass": true,
+   "text": "FedProx unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "h_reused_unchanged",
+     "pass": true
+    },
+    {
+     "check": "b_secagg",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-015",
+   "pass": true,
+   "text": "SecAgg shadow unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_fl_init",
+     "pass": true
+    },
+    {
+     "check": "h_scientific",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-016",
+   "pass": true,
+   "text": "FL_INIT_V2 unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_rounds",
+     "pass": true
+    },
+    {
+     "check": "T:test_completed_canonical_run_reproduces_the_frozen_digest_updates_and_sandbox_only_candidate",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-017",
+   "pass": true,
+   "text": "3 rounds unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_updates",
+     "pass": true
+    },
+    {
+     "check": "T:test_completed_canonical_run_reproduces_the_frozen_digest_updates_and_sandbox_only_candidate",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-018",
+   "pass": true,
+   "text": "24 updates unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_candidate_digest",
+     "pass": true
+    },
+    {
+     "check": "T:test_completed_canonical_run_reproduces_the_frozen_digest_updates_and_sandbox_only_candidate",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-019",
+   "pass": true,
+   "text": "canonical candidate digest frozen"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_monitoring_excluded",
+     "pass": true
+    },
+    {
+     "check": "T:test_no_monitoring_or_identity_source_feeds_federation_training_and_no_new_class_or_buffer",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-020",
+   "pass": true,
+   "text": "monitoring data excluded from FL"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_no_physiology_claim",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-021",
+   "pass": true,
+   "text": "real user physiology not claimed as training data"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_no_personal",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-022",
+   "pass": true,
+   "text": "no personal model / no personalized-FL claim"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_no_ninth",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-023",
+   "pass": true,
+   "text": "no ninth client"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_no_migration",
+     "pass": true
+    },
+    {
+     "check": "a_no_migration",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-024",
+   "pass": true,
+   "text": "no DB migration planned (derived design) and no API field"
+  },
+  {
+   "checks": [
+    {
+     "check": "a_ownership",
+     "pass": true
+    },
+    {
+     "check": "T:test_current_run_is_owned_by_its_user_and_the_clients_endpoint_is_global",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-025",
+   "pass": true,
+   "text": "run ownership reuse documented and tested"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_identity_excluded",
+     "pass": true
+    },
+    {
+     "check": "T:test_identity_leak_scanner_catches_clerk_identity_in_a_payload",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-026",
+   "pass": true,
+   "text": "Clerk identity excluded from ML math"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_context",
+     "pass": true
+    },
+    {
+     "check": "T:test_current_run_is_owned_by_its_user_and_the_clients_endpoint_is_global",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-027",
+   "pass": true,
+   "text": "qualifying binding context frozen (CLERK + LIVE_RUN, run-scoped, not global)"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_replay",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-028",
+   "pass": true,
+   "text": "replay policy frozen"
+  },
+  {
+   "checks": [
+    {
+     "check": "h_scientific",
+     "pass": true
+    },
+    {
+     "check": "no_sci_drift",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-029",
+   "pass": true,
+   "text": "no scientific changes"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_hardware",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-030",
+   "pass": true,
+   "text": "no hardware changes"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_runtime_drift",
+     "pass": true
+    },
+    {
+     "check": "h_reused_unchanged",
+     "pass": true
+    },
+    {
+     "check": "h_auth",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-031",
+   "pass": true,
+   "text": "no runtime behaviour changed in this phase"
+  },
+  {
+   "checks": [
+    {
+     "check": "contract_exists",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-032",
+   "pass": true,
+   "text": "contract created"
+  },
+  {
+   "checks": [
+    {
+     "check": "note_exists",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-033",
+   "pass": true,
+   "text": "architecture note created"
+  },
+  {
+   "checks": [
+    {
+     "check": "change_surface_ok",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-034",
+   "pass": true,
+   "text": "change-surface report created"
+  },
+  {
+   "checks": [
+    {
+     "check": "baseline_exists",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-035",
+   "pass": true,
+   "text": "zero-drift baseline created"
+  },
+  {
+   "checks": [
+    {
+     "check": "mutation_log",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-036",
+   "pass": true,
+   "text": "mutation controls defined and executed (15/15 caught, restored)"
+  },
+  {
+   "checks": [
+    {
+     "check": "targeted_ok",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-037",
+   "pass": true,
+   "text": "targeted tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "full_ok",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-038",
+   "pass": true,
+   "text": "relevant full regression passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_model",
+     "pass": true
+    },
+    {
+     "check": "T:test_released_monitoring_model_and_calibration_are_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-039",
+   "pass": true,
+   "text": "released monitoring model MODEL_V2_FINAL and candidate sandbox-only"
+  },
+  {
+   "checks": [
+    {
+     "check": "c_decision",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-040",
+   "pass": true,
+   "text": "derived-versus-persisted decision documented (derived)"
+  },
+  {
+   "checks": [
+    {
+     "check": "lock_ok",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-041",
+   "pass": true,
+   "text": "frozen method (lock) verifies"
+  },
+  {
+   "checks": [
+    {
+     "check": "task_pass",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-042",
+   "pass": true,
+   "text": "UFL-LITE-001 PASS (registry)"
+  },
+  {
+   "checks": [
+    {
+     "check": "gate_pass",
+     "pass": true
+    }
+   ],
+   "id": "UFLG0-043",
+   "pass": true,
+   "text": "UFLG0 PASS (registry)"
+  }
+ ],
+ "criteria_count": 43,
+ "failed": [],
+ "gate": "UFLG0",
+ "mode": "FINAL",
+ "protected_artifact_drift_false": true
+}
