@@ -44,6 +44,12 @@ def test_product_api_frontend_and_backend_are_byte_identical_to_entry() -> None:
 
             assert verify_ui15()["status"] == "PASS"
             accounted |= set(json.loads(successor15.read_text())["changed_from_predecessor"])
+        successor16 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_6.lock.json"       # FINAL-EVAL-REPAIR-002 (CAP-010 amendment 5): V1_6 accounts for its own delta
+        if successor16.exists():
+            from scripts.verify_capstone_ui_v1_6 import verify as verify_ui16
+
+            assert verify_ui16()["status"] == "PASS"
+            accounted |= set(json.loads(successor16.read_text())["changed_from_predecessor"])
         drift = [p for p in drift if not (p.startswith("frontend/") and p in accounted)]
     assert drift == []
 

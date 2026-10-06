@@ -1,0 +1,21 @@
+{
+ "amendment_id": "UFL_LITE_002_PROTOCOL_V1_AMENDMENT_2",
+ "change": "Successor awareness / governed presentation edit only: files whose bytes changed under FINAL-EVAL-REPAIR-002 (public landing presentation, accessibility, CAPSTONE_UI_V1_6 successor awareness) are re-pinned old->new. Historical lock files V1..V1_5 are unchanged; without a V1_6 lock the verifiers behave byte-identically to before.",
+ "defect": "FINAL-EVAL-REPAIR-002 repairs the public landing presentation (second final audit F2-01..F2-03). The frozen UI-lock chain needs a registered CAPSTONE_UI_V1_6 successor and the frozen method locks must follow the governed file changes.",
+ "files": {
+  "scripts/verify_capstone_ui_v1_4.py": {
+   "new_sha256": "4422eaa2bb3e9cf5f0ed4ffff3517c7147a63c4f171760fe4c94600cb6eedffe",
+   "old_sha256": "eeb4a4f935cf91e5bb546df7de4e8032ecd00f468d7bfc51bef4e11a3d901594"
+  },
+  "tests/test_ufl_lite_presentation.py": {
+   "new_sha256": "2c86dea7a107c8fccf9ec655e3122508cecab1ffe4b6dc48dc3f13505f885ed8",
+   "old_sha256": "ff825cff3375a9e55b28df7a6dc39fe6e7fc117bbd6d783a77e039e131e88104"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "UFL-LITE-002 (frozen verifier/test/UI file governed for FINAL-EVAL-REPAIR-002)",
+ "previous_amendment": "UFL_LITE_002_PROTOCOL_V1_AMENDMENT_1",
+ "reason": "FINAL_PUBLIC_PRESENTATION_REPAIR_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}
