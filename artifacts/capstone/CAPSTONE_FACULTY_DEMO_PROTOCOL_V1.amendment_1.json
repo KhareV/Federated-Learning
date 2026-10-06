@@ -1,0 +1,19 @@
+{
+ "amendment_id": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1_AMENDMENT_1",
+ "change": "Only the phase-state predicate: CAP-011 may be NOT_STARTED, IN_PROGRESS or PASS, but may only have begun once CAP-010 and CAPG9 are PASS; every other CAP-010 check is byte-identical. Three focused tests added to the preflight test file. No product, runtime, API, frontend, FL or scientific behaviour changes.",
+ "defect": "scripts/capstone_demo_preflight.py (phase_state check) hard-required CAP-011 == NOT_STARTED. That lifecycle predicate was correct for CAP-010 but makes the faculty preflight impossible at the CAP-011 release target, where CAP-011 is IN_PROGRESS, and in the released repository (CAP-011 PASS).",
+ "files": {
+  "scripts/capstone_demo_preflight.py": {
+   "new_sha256": "bdf5426d8b4d652274dae5f786d41e815343513f7ed0845511c987cbe8979b2c",
+   "old_sha256": "ad382e3e7ad98e323de0b0f7e1b82c7802420a6725d115b7ffd5f7bac670d219"
+  },
+  "tests/test_capstone_demo_preflight.py": {
+   "new_sha256": "4887794cb0c13bb1643bbd473ca73097cecd7b282e5efda4c77460983218e61f",
+   "old_sha256": "86ff7fad8abc132b0faa2f8e3c7209bee135678741d00c3a15220916acf443ab"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAP-010 (successor-compatibility, authorised before the CAP-011 release freeze)",
+ "previous_amendment": null,
+ "result_evidence_committed_with_amendment": false
+}

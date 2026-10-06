@@ -92,3 +92,33 @@ def test_preflight_module_runs_no_science_by_construction() -> None:
             imported |= {a.name for a in node.names}
     assert not called & {"train_local_epoch_v2", "train_local_fedprox_epoch_v2", "infer_window", "run_flower_secaggplus", "run_shadow", "create_candidate", "post", "put", "fit", "backward"}
     assert not any(m.startswith(("federated", "privacy", "training", "evaluation", "product.federation", "simulation")) for m in imported)
+
+
+BASE = {"CAP-009": "PASS", "CAP-010": "PASS", "CAP-011": "NOT_STARTED"}
+GATES = {"CAPG8": "PASS", "CAPG9": "PASS"}
+
+
+def _phase(**tasks) -> bool:
+    gates = tasks.pop("gates", GATES)
+    return pre.phase_state_result({**BASE, **tasks}, gates)["ok"]
+
+
+def test_phase_state_accepts_every_governed_successor_state() -> None:
+    assert _phase()                                    # after CAP-010, before CAP-011
+    assert _phase(**{"CAP-011": "IN_PROGRESS"})        # the CAP-011 release target
+    assert _phase(**{"CAP-011": "PASS"})               # the released repository
+    assert _phase(**{"CAP-010": "IN_PROGRESS"}, gates={"CAPG8": "PASS"})   # historical CAP-010 execution
+
+
+def test_phase_state_rejects_a_successor_that_starts_before_cap_010_is_closed() -> None:
+    for status in ("IN_PROGRESS", "PASS"):
+        assert not _phase(**{"CAP-010": "IN_PROGRESS", "CAP-011": status}, gates={"CAPG8": "PASS", "CAPG9": "NOT_STARTED"})
+        assert not _phase(**{"CAP-011": status}, gates={"CAPG8": "PASS", "CAPG9": "NOT_STARTED"})
+    assert not _phase(**{"CAP-011": "IN_PROGRESS"}, gates={"CAPG8": "PASS"})
+
+
+def test_phase_state_still_rejects_unknown_or_unfinished_predecessors() -> None:
+    assert not _phase(**{"CAP-009": "IN_PROGRESS"})
+    assert not _phase(**{"CAP-010": "NOT_STARTED"})
+    assert not _phase(**{"CAP-011": "FAILED"})
+    assert not _phase(gates={"CAPG8": "NOT_STARTED", "CAPG9": "PASS"})

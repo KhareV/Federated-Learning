@@ -63,8 +63,18 @@ def v_prior_locks() -> dict[str, Any]:
 
 def v_phase_state() -> dict[str, Any]:
     t, g = _registry("task", "task_id"), _registry("gate", "gate_id")
-    ok = t.get("CAP-009") == "PASS" and g.get("CAPG8") == "PASS" and t.get("CAP-010") in {"IN_PROGRESS", "PASS"} and t.get("CAP-011") == "NOT_STARTED"
-    return {"ok": ok, "detail": f"CAP-009={t.get('CAP-009')} CAPG8={g.get('CAPG8')} CAP-010={t.get('CAP-010')} CAP-011={t.get('CAP-011')}"}
+    return phase_state_result(t, g)
+
+
+def phase_state_result(t: dict[str, str], g: dict[str, str]) -> dict[str, Any]:
+    """CAP-010 phase predicate, successor-compatible (amendment 1): CAP-011 may be NOT_STARTED, IN_PROGRESS or
+    PASS, but it may only have begun once CAP-010 and CAPG9 are fully closed."""
+    cap010, cap011 = t.get("CAP-010"), t.get("CAP-011")
+    cap010_ok = cap010 in {"IN_PROGRESS", "PASS"}
+    cap011_ok = cap011 in {"NOT_STARTED", "IN_PROGRESS", "PASS"}
+    successor_order_ok = cap011 == "NOT_STARTED" or (cap010 == "PASS" and g.get("CAPG9") == "PASS")
+    ok = t.get("CAP-009") == "PASS" and g.get("CAPG8") == "PASS" and cap010_ok and cap011_ok and successor_order_ok
+    return {"ok": ok, "detail": f"CAP-009={t.get('CAP-009')} CAPG8={g.get('CAPG8')} CAP-010={cap010} CAPG9={g.get('CAPG9')} CAP-011={cap011}"}
 
 
 def v_runtime_binding() -> dict[str, Any]:
