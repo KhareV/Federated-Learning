@@ -214,8 +214,8 @@ def main() -> None:
         "count_basis": summary["windows_inferred_basis"],
         "time_domain_separation": timeline["time_domains"],
     })
-    write("research_ml_ui_audit.json", {"status": "PASS", **research["ml"]})
-    write("research_fl_ui_audit.json", {"status": "PASS", **research["fl"]})
+    write("research_ml_ui_audit.json", {**research["ml"], "status": "PASS"})
+    write("research_fl_ui_audit.json", {**research["fl"], "status": "PASS"})
     write("claim_audit.json", {
         "status": "PASS", "non_diagnostic": True,
         "historical_negative_findings_visible": research["ml"]["promotion"],
@@ -240,6 +240,12 @@ def main() -> None:
     )
     if evaluator_amendment:
         amendment_commits.append(evaluator_amendment)
+    result_amendment = git(
+        "log", "-1", "--format=%H", "--",
+        "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_8.json",
+    )
+    if result_amendment:
+        amendment_commits.append(result_amendment)
     amendment_files = {
         commit: git("show", "--pretty=format:", "--name-only", commit).splitlines()
         for commit in amendment_commits

@@ -1,0 +1,16 @@
+{
+ "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_8",
+ "owner_phase": "CAP-009",
+ "made_after_method_freeze": true,
+ "previous_amendment": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_7",
+ "failed_gate_attempt_preserved": "reports/capstone/cap_009/capg8_criteria_failed_attempt_1.json",
+ "defect": "The first CAPG8 evaluator run correctly refused six research-UI criteria because result report construction spread an HTTP status 200 over its own PASS status field. Browser research checks and APIs had passed; only the report status key was wrong.",
+ "change": "Write the result-report PASS status after the browser step fields for both research pages; leave the actual HTTP status in the canonical browser evidence. No UI, catalog, API, science, or runtime change.",
+ "files": {
+  "scripts/cap_009_build_evidence.py": {
+   "old_sha256": "1c48b71c57919213ac57f22236b3946626b28f705bf85fd0c6c5899b533988f8",
+   "new_sha256": "f69738a127937746493c614973421e4cb2b48e1436579cffd6c41190c8a6eeb0"
+  }
+ },
+ "result_evidence_committed_with_amendment": false
+}
