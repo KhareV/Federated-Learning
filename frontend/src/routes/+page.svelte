@@ -17,8 +17,6 @@
 	import BlurFade from '$lib/components/magic/blur-fade/blur-fade.svelte';
 	import NumberTicker from '$lib/components/magic/number-ticker/number-ticker.svelte';
 	
-	// Import the Signature component you provided
-	import { Signature } from "$lib/components/spell/signature";
 
 	import WatchScene from '$lib/components/landing/WatchScene.svelte';
 	import PhysiologicalWaveform from '$lib/components/landing/PhysiologicalWaveform.svelte';
@@ -40,7 +38,7 @@
 		'PRODUCT API / LOCAL',
 		'SOFTWARE_SYSTEM_V2 / SERVER-SIDE',
 		'PHYSICAL HARDWARE / NOT CONNECTED',
-		'FEDERATION RUNTIME / NOT YET ENABLED'
+		'FEDERATION RUNTIME / ENGINEERING ENABLED'
 	];
 
 	const timelineData = [
@@ -75,7 +73,7 @@
 
 <svelte:head>
 	<title>NHM — Federated Physiological Monitoring Research Platform</title>
-	<meta name="description" content="NHM: a research platform for live physiological monitoring with a released model, federated model development architecture and a hardware-ready source. Virtual wearable today. Research prototype, not diagnostic." />
+	<meta name="description" content="NHM: a research platform for live physiological monitoring with a released model, an engineering federated-learning runtime with synthetic clients and a hardware-ready source. Virtual wearable today. Research prototype, not diagnostic." />
 	<meta name="theme-color" content="#030712" />
 	
 </svelte:head>
@@ -106,9 +104,6 @@
 						/>
 					</div>
 
-					<div class="mt-6">
-						<Signature once={false} inView class="dark:invert-100" text="NHM" fontSize={16} color="#1D1D1F" />
-					</div>
 				</div>
 			</div>
 
@@ -187,7 +182,7 @@
 								<span>monitoring research platform.</span>
 							</h1>
 							<p class="hero__lede">
-								Live monitoring with a released model, a federated model-development architecture, and a hardware-ready source boundary. A virtual wearable today; a physical adapter later. A research prototype, not a diagnostic or medical device.
+								Live monitoring with a released model, an engineering federated-learning runtime (synthetic clients), and a hardware-ready source boundary. A virtual wearable today; a physical adapter later. A research prototype, not a diagnostic or medical device.
 							</p>
 							<div class="hero__actions">
 								<a class="button button--light" href="#technology">
@@ -235,10 +230,6 @@
 							<h2>Healthcare often sees<br /><span>snapshots.</span> <em class="text-slate-400">Disease lives in the gaps.</em></h2>
 						</BlurFade>
 						
-						<!-- Signature component integrated cleanly here -->
-						<div class="mt-6 hidden md:block">
-							<Signature once={false} inView text="Context is everything." fontSize={26} color="#64748b" />
-						</div>
 					</div>
 
 					<div class="problem__intro-copy">
@@ -263,7 +254,7 @@
 				<div class="section-kicker">03 / RESEARCH EVOLUTION</div>
 				<div class="research__heading">
 					<BlurFade inView={true} direction="up" offset={18} blur="8px">
-						<h2>From sensing to<br /><span>privacy-preserving intelligence.</span></h2>
+						<h2>From sensing to<br /><span>federated model development.</span></h2>
 					</BlurFade>
 					<BlurFade inView={true} direction="up" offset={18} delay={0.12} blur="6px">
 						<p>NHM brings together the progression identified in the project literature review rather than treating each technique as an isolated feature.</p>
@@ -388,10 +379,10 @@
 			</div>
 
 			<div class="container relative z-10">
-				<div class="section-kicker section-kicker--dark">07 / PRIVACY-PRESERVING LEARNING</div>
+				<div class="section-kicker section-kicker--dark">07 / FEDERATED MODEL DEVELOPMENT</div>
 				<div class="federation__heading">
 					<h2>Learn together.<br /><em>Share less.</em></h2>
-					<p>Federated learning lets participating clients contribute model updates while raw recordings stay at the client. In this prototype the clients are synthetic research partitions - not hospitals or institutions - and the federation product runtime is not yet enabled.</p>
+					<p>Federated learning lets participating clients contribute model updates instead of sharing their local training examples. In NHM the engineering federation runtime is enabled: eight logical synthetic clients on one demonstration machine perform genuine local optimization, and the coordinator receives model updates rather than local examples. The resulting engineering candidate stays in a sandbox and never replaces the released MODEL_V2_FINAL. The clients are synthetic research partitions - not hospitals or institutions - and this is not personalized federated learning. SecAgg+ is a narrow protected-aggregation interface, not differential privacy or anonymity.</p>
 				</div>
 
 				<div class="federation__stage">
@@ -421,8 +412,8 @@
 
 					<div class="federation__rule glass-panel">
 						<div class="federation__rule-col">
-							<span class="rule-bad">RAW DATA</span>
-							<strong>STAYS LOCAL</strong>
+							<span class="rule-bad">LOCAL EXAMPLES</span>
+							<strong>STAY IN CLIENT BUFFERS</strong>
 						</div>
 						<div class="federation__rule-divider"></div>
 						<div class="federation__rule-col">

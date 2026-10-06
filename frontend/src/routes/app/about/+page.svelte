@@ -9,7 +9,9 @@
 		<li>Hardware today is <b>SIMULATED ONLY</b> (virtual wearable, WEARABLE_SIM_V1). No physical wearable is connected. A real wearable is a future source adapter that requires verification.</li>
 		<li>Inference is server-side: MODEL_V2_FINAL in SOFTWARE_SYSTEM_V2. Nothing runs on a sensor.</li>
 		<li>The waveform is a simulated source ECG. A PPG waveform is unavailable in the current simulator; SpO2/PPG-derived context is shown where the backend emits it.</li>
-		<li>Federated-learning client sites are synthetic research partitions, not institutions. The federation product runtime is not yet enabled.</li>
+		<li>The <b>engineering federation runtime is enabled</b>. It runs eight logical, synthetic research clients (not hospitals or institutions) on one demonstration machine; each performs genuine local optimization and the coordinator receives model updates rather than local examples.</li>
+		<li>In a connected (Clerk) live run only, one existing synthetic client, SIM_FL_SITE_00, is shown as <b>MY EDGE CLIENT</b> - a presentation binding to the signed-in owner. Its training data is still synthetic engineering data: your physiology does not train any model, no personal or personalized model exists, and monitoring sessions are never federation data.</li>
+		<li>A federation run produces an engineering candidate that stays in a sandbox. It is never automatically deployed and does not replace the released MODEL_V2_FINAL.</li>
 		<li>Monitoring states are research outputs, not health assessments.</li>
 	</ul>
 </Panel>
