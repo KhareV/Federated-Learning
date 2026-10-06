@@ -1,0 +1,595 @@
+{
+ "acceptance": {
+  "on_pass": [
+   "UFL-LITE-003=PASS",
+   "UFLG2=PASS",
+   "USER_BOUND_FL_LITE_V1=ACCEPT"
+  ],
+  "optional_tag": "user-bound-fl-lite-v1 at UFL_LITE_ACCEPTANCE_TARGET_SHA"
+ },
+ "check_prefixes": {
+  "(none)": "evaluator check",
+  "G:": "analyzer check re-derived by the evaluator from the sanitized real-Clerk observations (group.check)"
+ },
+ "ci": "not queried, not triggered",
+ "criteria_count": 65,
+ "defect_policy": {
+  "harness_defect": "additive repair in the UFL-LITE-003 namespace with amendment, failed evidence preserved, rerun",
+  "product_defect": "FAIL / REPAIR REQUIRED, stop without repairing"
+ },
+ "entry": {
+  "control_commit": "14ea7c3",
+  "entry_sha": "9324ef40ecb8fdecfc4880aa827bc68b45e4f9a0"
+ },
+ "gate": "UFLG2",
+ "mutation_control_count": 35,
+ "mutation_controls": [
+  "REPLAY_SHOWS_OWNER_CARD",
+  "REPLAY_SHOWS_PARTICIPATION_SUMMARY",
+  "GLOBAL_CLIENTS_VIEW_SHOWS_OWNER",
+  "SECOND_OWNER_CARD",
+  "OWNER_ON_SITE_01",
+  "NINTH_CLIENT_CARD",
+  "PEER_COUNT_NOT_7",
+  "OWNER_EXAMPLES_NOT_93",
+  "OWNER_EXAMPLES_NOT_EVENT_DERIVED",
+  "UPDATE_COUNT_NOT_24",
+  "ROUNDS_NOT_3",
+  "UPDATES_PER_ROUND_NOT_8",
+  "OWNER_UPDATES_UI_NOT_3",
+  "RAW_EXAMPLES_SENT_NONZERO",
+  "CONTRIBUTION_WORDING_PRESENT",
+  "PERSONALIZED_WORDING_PRESENT",
+  "CONSENT_CONTROL_PRESENT",
+  "SYNTHETIC_WORDING_MISSING",
+  "CANDIDATE_DIGEST_CHANGED",
+  "CANDIDATE_PRODUCTION_DEPLOYED",
+  "REFRESH_LOSES_OWNER_CARD",
+  "RESTART_LOSES_OWNER_CARD",
+  "RESTART_CHANGES_CANDIDATE",
+  "USER_B_READS_A_RUN",
+  "USER_B_WS_ACCEPTED",
+  "USER_B_SEES_OWNER_ON_A_RUN",
+  "TOKEN_IN_WS_URL",
+  "DEMO_FALLBACK_IN_CLERK_MODE",
+  "SECRET_IN_EVIDENCE",
+  "CLERK_TRAFFIC_IN_DEMO_REGRESSION",
+  "DEMO_SEMANTIC_DIGEST_CHANGED",
+  "PRODUCT_BACKEND_CODE_CHANGED",
+  "FRONTEND_FEATURE_CODE_CHANGED",
+  "CLEAN_CLONE_TARGET_SHA_MISMATCH",
+  "UI_V1_4_LOCK_CHANGED"
+ ],
+ "owner_task": "UFL-LITE-003",
+ "phase_scope": "verification-only; zero product-feature delta; final phase of USER_BOUND_FL_LITE",
+ "protocol_id": "UFL_LITE_003_PROTOCOL_V1",
+ "rehearsal_note": "non-canonical rehearsals against scratch output were used to debug the harness before the freeze; they are not evidence and are not committed",
+ "status": "FROZEN_VERIFICATION_PROTOCOL",
+ "uflg2_criteria": [
+  {
+   "checks": [
+    "entry_audited"
+   ],
+   "id": "U01",
+   "text": "Entry audited: HEAD==origin/main==9324ef4, UFLG0+UFLG1 PASS, locks verified"
+  },
+  {
+   "checks": [
+    "prior_phases_preserved"
+   ],
+   "id": "U02",
+   "text": "UFL-LITE-001 and UFL-LITE-002 evidence, contract and locks preserved"
+  },
+  {
+   "checks": [
+    "tags_unchanged"
+   ],
+   "id": "U03",
+   "text": "Release and clerk-connected tags unchanged"
+  },
+  {
+   "checks": [
+    "locks_verify"
+   ],
+   "id": "U04",
+   "text": "All protocol locks and Clerk lineage verify"
+  },
+  {
+   "checks": [
+    "acceptance_target_recorded"
+   ],
+   "id": "U05",
+   "text": "UFL_LITE_ACCEPTANCE_TARGET_SHA recorded before canonical evidence; ancestor of the result commit; pushed to main"
+  },
+  {
+   "checks": [
+    "no_product_delta_at_target"
+   ],
+   "id": "U06",
+   "text": "Zero product-feature delta from entry to the acceptance target (additive verification material only)"
+  },
+  {
+   "checks": [
+    "no_product_delta_at_head"
+   ],
+   "id": "U07",
+   "text": "Zero product-feature delta from entry to the result commit"
+  },
+  {
+   "checks": [
+    "ui_locks_identical",
+    "ui14_ok"
+   ],
+   "id": "U08",
+   "text": "CAPSTONE_UI V1..V1_4 locks and verifiers unchanged and verified"
+  },
+  {
+   "checks": [
+    "no_new_amendments"
+   ],
+   "id": "U09",
+   "text": "No amendment to any historical protocol in this phase"
+  },
+  {
+   "checks": [
+    "G:identity.auth_provider_clerk",
+    "G:identity.not_demo_mode"
+   ],
+   "id": "U10",
+   "text": "Real Clerk TEST sign-in: backend reports CLERK, not DEMO"
+  },
+  {
+   "checks": [
+    "G:identity.me_200_clerk_user",
+    "G:identity.model_v2_final"
+   ],
+   "id": "U11",
+   "text": "Authenticated /me is a Clerk-shaped user, released model MODEL_V2_FINAL"
+  },
+  {
+   "checks": [
+    "G:clerk_network.clerk_hosts_contacted",
+    "G:clerk_network.no_console_errors"
+   ],
+   "id": "U12",
+   "text": "Real Clerk-owned hosts contacted and no browser console errors"
+  },
+  {
+   "checks": [
+    "e2e_real_clerk_flags"
+   ],
+   "id": "U13",
+   "text": "Evidence is from a real browser against the real Clerk instance: no mock, no DemoAuth fallback, no manual step"
+  },
+  {
+   "checks": [
+    "G:live.one_owner_card",
+    "G:live.owner_is_site00",
+    "G:live.one_my_edge_label"
+   ],
+   "id": "U14",
+   "text": "Exactly one owner card (MY EDGE CLIENT), bound to SIM_FL_SITE_00"
+  },
+  {
+   "checks": [
+    "G:live.seven_peer_cards",
+    "G:live.client_ids_exact_8",
+    "G:live.no_ninth_client",
+    "G:live.technical_id_unchanged"
+   ],
+   "id": "U15",
+   "text": "Seven synthetic peers; exactly eight clients; no ninth client; technical ids unchanged"
+  },
+  {
+   "checks": [
+    "G:live.owner_card_synthetic_wording",
+    "G:live.synthetic_summary_wording",
+    "G:live.owner_participants_title"
+   ],
+   "id": "U16",
+   "text": "Owner card and summary carry synthetic-engineering / not-your-physiology wording"
+  },
+  {
+   "checks": [
+    "G:live.examples_93_ui",
+    "G:live.examples_93_rest",
+    "G:live.examples_event_derived",
+    "b_site00_93"
+   ],
+   "id": "U17",
+   "text": "Owner local examples 93 in UI, REST and baseline, derived from events"
+  },
+  {
+   "checks": [
+    "G:live.owner_state_submitted",
+    "G:live.rounds_3_ui",
+    "G:live.updates_3_ui",
+    "G:live.summary_not_updates_submitted_label"
+   ],
+   "id": "U18",
+   "text": "Owner state, completed rounds 3/3 and updates 3/3 derived from state/milestones/updateDigests"
+  },
+  {
+   "checks": [
+    "G:live.raw_examples_sent_zero",
+    "G:live.locality_wording"
+   ],
+   "id": "U19",
+   "text": "Raw examples sent to coordinator 0; locality wording present"
+  },
+  {
+   "checks": [
+    "G:live.no_contribution_or_personalization_wording",
+    "G:live.no_consent_ui"
+   ],
+   "id": "U20",
+   "text": "No contribution percentage, personalization or personal-model wording; no consent UI"
+  },
+  {
+   "checks": [
+    "G:live.status_completed",
+    "G:live.no_stream_error"
+   ],
+   "id": "U21",
+   "text": "Live run completed with no stream error"
+  },
+  {
+   "checks": [
+    "G:live.rounds_3",
+    "G:live.updates_24",
+    "G:live.updates_8_8_8",
+    "G:live.every_round_has_all_8"
+   ],
+   "id": "U22",
+   "text": "3 rounds, 24 update-ready events, 8/8/8 per round, all eight clients every round"
+  },
+  {
+   "checks": [
+    "G:live.site00_93_examples_each_update",
+    "G:live.sequence_contiguous",
+    "G:live.update_digests_64hex"
+   ],
+   "id": "U23",
+   "text": "SITE_00 update carries 93 examples each round; sequence contiguous; update digests are sha256"
+  },
+  {
+   "checks": [
+    "b_client_count",
+    "b_rounds",
+    "b_updates"
+   ],
+   "id": "U24",
+   "text": "Baseline: 8 clients, 3 rounds, 24 updates (8/8/8)"
+  },
+  {
+   "checks": [
+    "G:candidate.candidate_digest_canonical",
+    "G:candidate.candidate_event_digest_canonical",
+    "b_digest"
+   ],
+   "id": "U25",
+   "text": "Candidate digest equals the frozen canonical digest (REST and event)"
+  },
+  {
+   "checks": [
+    "G:candidate.candidate_accepted_to_sandbox",
+    "G:candidate.candidate_in_sandbox",
+    "G:candidate.candidate_not_deployed",
+    "G:candidate.released_default_v2_final",
+    "G:candidate.one_candidate"
+   ],
+   "id": "U26",
+   "text": "Candidate ACCEPTED_TO_SANDBOX, IN_SANDBOX, not deployed; released default MODEL_V2_FINAL; one candidate"
+  },
+  {
+   "checks": [
+    "b_candidate",
+    "h_scientific"
+   ],
+   "id": "U27",
+   "text": "Candidate state valid per baseline; MODEL_V2_FINAL / CAL_V2 scientific artifacts unchanged"
+  },
+  {
+   "checks": [
+    "G:refresh.refresh_keeps_one_owner",
+    "G:refresh.refresh_keeps_seven_peers",
+    "G:refresh.refresh_keeps_8_ids",
+    "G:refresh.refresh_no_stream_error"
+   ],
+   "id": "U28",
+   "text": "Refresh mid-run restores the owner card, seven peers and eight ids"
+  },
+  {
+   "checks": [
+    "G:websocket.ws_present",
+    "G:websocket.ws_handshake_101",
+    "G:websocket.ws_cookie_transport",
+    "G:websocket.ws_events_received"
+   ],
+   "id": "U29",
+   "text": "Federation WebSocket: 101 handshake, cookie transport, events received"
+  },
+  {
+   "checks": [
+    "G:websocket.ws_no_token_in_url",
+    "G:websocket.ws_reconnected_after_refresh"
+   ],
+   "id": "U30",
+   "text": "No token in any WebSocket URL; reconnect after refresh"
+  },
+  {
+   "checks": [
+    "G:rounds_page.rounds_note_owner",
+    "G:rounds_page.rounds_one_my_edge"
+   ],
+   "id": "U31",
+   "text": "Rounds page carries the owner note and exactly one MY EDGE CLIENT"
+  },
+  {
+   "checks": [
+    "G:global.global_view_8_ids",
+    "G:global.global_view_unbound"
+   ],
+   "id": "U32",
+   "text": "Global clients view shows eight clients and no owner binding"
+  },
+  {
+   "checks": [
+    "G:replay.replay_distinct_run",
+    "G:replay.replay_completed",
+    "G:replay.replay_type"
+   ],
+   "id": "U33",
+   "text": "REPLAY run: distinct, completed, typed REPLAY"
+  },
+  {
+   "checks": [
+    "G:replay.replay_no_owner_card",
+    "G:replay.replay_no_participation_summary",
+    "G:replay.replay_8_ids",
+    "G:replay.replay_title_unbound"
+   ],
+   "id": "U34",
+   "text": "REPLAY run shows no owner card, no participation summary, unbound title"
+  },
+  {
+   "checks": [
+    "G:replay.replay_candidate_unchanged"
+   ],
+   "id": "U35",
+   "text": "REPLAY leaves the candidate set unchanged"
+  },
+  {
+   "checks": [
+    "G:isolation.b_rest_a_run_403",
+    "G:isolation.b_control_nonexistent_404",
+    "G:isolation.b_control_global_200"
+   ],
+   "id": "U36",
+   "text": "User B REST access to A's run is 403 with B's own bearer; controls prove the probe reaches the target"
+  },
+  {
+   "checks": [
+    "G:isolation.b_ws_4403"
+   ],
+   "id": "U37",
+   "text": "User B WebSocket to A's run is rejected with 4403"
+  },
+  {
+   "checks": [
+    "G:isolation.b_no_owner_card_on_a_run",
+    "G:isolation.b_own_runs_exclude_a"
+   ],
+   "id": "U38",
+   "text": "User B sees no owner card on A's run and no A runs in B's list"
+  },
+  {
+   "checks": [
+    "G:isolation.b_global_clients_unbound",
+    "G:isolation.b_distinct_run_id"
+   ],
+   "id": "U39",
+   "text": "User B's global clients view unbound"
+  },
+  {
+   "checks": [
+    "G:restart.restart_signin_clerk",
+    "G:restart.restart_one_owner",
+    "G:restart.restart_seven_peers",
+    "G:restart.restart_8_ids"
+   ],
+   "id": "U40",
+   "text": "After backend restart (same SQLite) A returns with a fresh profile: owner card, seven peers, eight ids"
+  },
+  {
+   "checks": [
+    "G:restart.restart_examples_93",
+    "G:restart.restart_rounds_3_updates_3",
+    "G:restart.restart_24_updates_8_8_8"
+   ],
+   "id": "U41",
+   "text": "After restart: 93 examples, 3/3 rounds and updates, 24 updates 8/8/8"
+  },
+  {
+   "checks": [
+    "G:restart.restart_same_update_digests",
+    "G:restart.restart_same_state_digests"
+   ],
+   "id": "U42",
+   "text": "After restart: update digests and round state digests identical to before"
+  },
+  {
+   "checks": [
+    "G:restart.restart_candidate_unchanged",
+    "G:restart.restart_candidate_canonical",
+    "G:restart.restart_ws_ok"
+   ],
+   "id": "U43",
+   "text": "After restart: candidate unchanged and canonical; WebSocket reconnects"
+  },
+  {
+   "checks": [
+    "demo_digest"
+   ],
+   "id": "U44",
+   "text": "Offline DemoAuth regression: semantic digest 3a57614e... equals CAP-010 canonical"
+  },
+  {
+   "checks": [
+    "demo_regression"
+   ],
+   "id": "U45",
+   "text": "DemoAuth works, no Clerk global, no external/Clerk network traffic"
+  },
+  {
+   "checks": [
+    "secret_audit_clean"
+   ],
+   "id": "U46",
+   "text": "No secret, token or JWT in evidence, logs, build, frontend source, SQLite or repo files"
+  },
+  {
+   "checks": [
+    "owner_not_persisted",
+    "G:websocket.ws_no_token_in_url"
+   ],
+   "id": "U47",
+   "text": "Owner binding is not persisted in SQLite; no token in WebSocket URL"
+  },
+  {
+   "checks": [
+    "credentials_external"
+   ],
+   "id": "U48",
+   "text": "Credentials only external; .env untracked and git-ignored; nothing staged"
+  },
+  {
+   "checks": [
+    "no_backend_change",
+    "no_api_change",
+    "no_db_change",
+    "no_fl_change",
+    "no_auth_change"
+   ],
+   "id": "U49",
+   "text": "No backend / API / DB / FL / auth drift against the entry baseline hashes"
+  },
+  {
+   "checks": [
+    "frontend_unchanged",
+    "global_page_unchanged",
+    "helper_pure",
+    "claims_clean"
+   ],
+   "id": "U50",
+   "text": "Frontend unchanged from entry; global clients page unchanged; presentation audits pass"
+  },
+  {
+   "checks": [
+    "h_scientific",
+    "monitoring_unchanged"
+   ],
+   "id": "U51",
+   "text": "Monitoring and release invariants unchanged (MODEL_V2_FINAL, CAL_V2, SOFTWARE_SYSTEM_V2)"
+  },
+  {
+   "checks": [
+    "clean_clone_a"
+   ],
+   "id": "U52",
+   "text": "Clean clone (proof A): fresh clone at the acceptance target SHA, fresh venv and npm ci, clean tree, frozen verifiers + targeted tests pass"
+  },
+  {
+   "checks": [
+    "clean_clone_b"
+   ],
+   "id": "U53",
+   "text": "Clean-clone connected proof (B): real-Clerk E2E in the clone, all analyzer checks pass"
+  },
+  {
+   "checks": [
+    "clean_clone_target_matches"
+   ],
+   "id": "U54",
+   "text": "Clean clone is of exactly the recorded acceptance target and did not modify tracked files"
+  },
+  {
+   "checks": [
+    "fe_tests"
+   ],
+   "id": "U55",
+   "text": "Frontend tests pass (at least 210, none failing)"
+  },
+  {
+   "checks": [
+    "fe_check",
+    "fe_build"
+   ],
+   "id": "U56",
+   "text": "svelte-check and production build pass"
+  },
+  {
+   "checks": [
+    "py_targeted"
+   ],
+   "id": "U57",
+   "text": "Targeted Python tests pass"
+  },
+  {
+   "checks": [
+    "py_full"
+   ],
+   "id": "U58",
+   "text": "Full Python suite passes under the CAP-003 race policy (deselect + isolated probe)"
+  },
+  {
+   "checks": [
+    "lint"
+   ],
+   "id": "U59",
+   "text": "ruff and pip check clean"
+  },
+  {
+   "checks": [
+    "ci_untouched"
+   ],
+   "id": "U60",
+   "text": "CI neither queried nor triggered"
+  },
+  {
+   "checks": [
+    "mutation_log"
+   ],
+   "id": "U61",
+   "text": "35 mutation controls: all caught, all restored, exact frozen names"
+  },
+  {
+   "checks": [
+    "protected_final"
+   ],
+   "id": "U62",
+   "text": "Final protected-artifact audit shows no drift"
+  },
+  {
+   "checks": [
+    "lock_ok"
+   ],
+   "id": "U63",
+   "text": "Protocol lock verifies (bound files, criteria count)"
+  },
+  {
+   "checks": [
+    "task_pass"
+   ],
+   "id": "U64",
+   "text": "Task registry UFL-LITE-003 PASS"
+  },
+  {
+   "checks": [
+    "gate_pass"
+   ],
+   "id": "U65",
+   "text": "Gate registry UFLG2 PASS"
+  }
+ ]
+}

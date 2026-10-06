@@ -1,0 +1,28 @@
+{
+ "bound_files": {
+  "configs/ufl_lite/uflg2_protocol_v1.json": "afb230951c5bd9069df3bb1dbb315521deda63c08c549fd14b2336ed90a43ff1",
+  "scripts/run_capstone_clerk_connected_clean_clone.py": "3bbd1e929fc8788f5fb95d445acd5537ebd023193afed04f73f2751bf862e005",
+  "scripts/run_capstone_clerk_connected_e2e.py": "628d109da1204a168b3cb76913ead9ee7683e27f9d4b626bea9612adbc26e92b",
+  "scripts/ufl_lite_002_lib.py": "fa9cfebf353e4d776aaf0e9a1bd26951c01eff5f2c9a21fd0f7e27424d2ce092",
+  "scripts/ufl_lite_003_build_evidence.py": "96e2e28f86e9da5dc6bc8f35944454ab6b1e56635deef9b3f332a149d09f1fdc",
+  "scripts/ufl_lite_003_build_freeze.py": "f2f7cee0e551b796bed0525a4eb369b5e960197c1c2fc9a3f973b112da23ca91",
+  "scripts/ufl_lite_003_cdp_driver.mjs": "57c6aa32225113f3d66a7c81ebe37bf105d4dffba07d72752476199a0e7304d1",
+  "scripts/ufl_lite_003_clean_clone.py": "ecbc70f8a2370b8ad8eb9a85a06013d24c677d365c8962755b526de69fd91cd3",
+  "scripts/ufl_lite_003_e2e.py": "efef8e15c8378550fc2c301d02aa38d66f98efe9c7d4bdbefd48b098d53d851e",
+  "scripts/ufl_lite_003_evaluate_gate.py": "42e8dc2e23f229145b14e6ff7ad1dda79e114545b5c57224a21d0e7e62daef80",
+  "scripts/ufl_lite_003_lib.py": "ca9ec7ac3923779fd36b076578670c402d1c0149bac7b4af12516fa3f60e38c7",
+  "scripts/ufl_lite_003_mutation_controls.py": "5fa1008b7bf7798b14d96ea9fa33526231c598b9bca29262c216da52df02dd52",
+  "scripts/ufl_lite_003_protected_audit.py": "2e63d4926a5f91a836b9a450a6d39cbfbcede68200c72c4bb1ec1ad0d30d419d",
+  "scripts/ufl_lite_003_record_target.py": "fdbc9c506b5dbf866bd1c67e5c6d0f5d7373010ba84463a7adeb6c1e27a5e07d",
+  "scripts/ufl_lite_lib.py": "ec931ba85478f2dd5916b09a1f58279e5b186b3beea0a3714f186fded158442d",
+  "tests/test_ufl_lite_003_machinery.py": "7b92554621c08d5a882f39655e115947c1dacc59006fc5bef15a4816f1ea992b"
+ },
+ "criteria_count": 65,
+ "entry_sha": "9324ef40ecb8fdecfc4880aa827bc68b45e4f9a0",
+ "freeze_basis": "verification protocol, machinery, evaluator and mutation-control definitions frozen before any canonical evidence; zero product-feature delta",
+ "gate": "UFLG2",
+ "lock_id": "UFL_LITE_003_PROTOCOL_V1",
+ "mutation_control_count": 35,
+ "owner_phase": "UFL-LITE-003",
+ "status": "FROZEN_VERIFICATION_PROTOCOL"
+}
