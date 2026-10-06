@@ -4,10 +4,14 @@
 	import { onMount } from 'svelte';
 
 	// Gentle, continuous rotation for an ultra-premium feel
+	// prefers-reduced-motion: show the static poster instead of a perpetual WebGL frame loop
+	const reducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	let rotY = 0;
 	let rotX = 0.15;
 	
 	onMount(() => {
+		// prefers-reduced-motion: keep the static model, run no perpetual animation loop
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 		let animationId: number;
 		const animate = () => {
 			rotY -= 0.002; // Smooth slow rotation
@@ -20,6 +24,9 @@
 </script>
 
 <div class="watch-scene">
+	{#if reducedMotion}
+		<img class="watch-poster" src="/models/watch-poster.jpg" alt="Concept render of the NHM virtual wearable (static preview)" />
+	{:else}
 	<Canvas dpr={[1, 2]}>
 		<!-- Camera positioned so the full watch unibody and straps fit gracefully -->
 		<T.PerspectiveCamera makeDefault position={[0, 0.2, 9.8]} fov={32} />
@@ -36,6 +43,7 @@
 			<GLTF url="/models/nhm-watch.glb" />
 		</T.Group>
 	</Canvas>
+	{/if}
 </div>
 
 <style>
@@ -53,6 +61,8 @@
 		pointer-events: none;
 		overflow: visible;
 	}
+
+	.watch-poster { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 	.watch-scene :global(canvas) {
 		display: block;

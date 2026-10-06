@@ -26,6 +26,9 @@
 		endYOffset = 0,
 	}: AnimatedBeamProps = $props();
 
+	// prefers-reduced-motion: no perpetual gradient sweep
+	const reduceMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 	// Generate unique ID for gradient
 	// let id = $state(`gradient-${Math.random().toString(36).substring(2, 11)}`);
 	let id = $props.id();
@@ -100,9 +103,9 @@
 			}}
 			transition={{
 				delay,
-				duration,
+				duration: reduceMotion ? 0 : duration,
 				ease: [0.16, 1, 0.3, 1],
-				repeat: Infinity,
+				repeat: reduceMotion ? 0 : Infinity,
 				repeatDelay: 0,
 			}}
 		>

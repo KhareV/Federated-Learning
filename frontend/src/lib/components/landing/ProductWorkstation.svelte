@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import PhysiologicalWaveform from '$lib/components/landing/PhysiologicalWaveform.svelte';
 
 	type SimMode = 'normal' | 'brady' | 'tachy' | 'pvc';
@@ -8,7 +7,7 @@
 	let bpm = $state(72);
 	let spo2 = $state(98);
 	let respRate = $state(14);
-	let statusText = $state('NORMAL SINUS RHYTHM');
+	let statusText = $state('ILLUSTRATIVE SCENARIO // RESTING (SYNTHETIC)');
 	let statusColor = $state('#0d9488');
 
 	function setMode(mode: SimMode) {
@@ -17,37 +16,29 @@
 			bpm = 72;
 			spo2 = 98;
 			respRate = 14;
-			statusText = 'NORMAL SINUS RHYTHM // OPTIMAL';
+			statusText = 'ILLUSTRATIVE SCENARIO // RESTING (SYNTHETIC)';
 			statusColor = '#0d9488';
 		} else if (mode === 'brady') {
 			bpm = 48;
 			spo2 = 97;
 			respRate = 10;
-			statusText = 'NOCTURNAL BRADYCARDIA // STABLE';
+			statusText = 'ILLUSTRATIVE SCENARIO // SLOW RATE (SYNTHETIC)';
 			statusColor = '#6366f1';
 		} else if (mode === 'tachy') {
 			bpm = 118;
 			spo2 = 97;
 			respRate = 22;
-			statusText = 'EXERTIONAL TACHYCARDIA // ELEVATED';
+			statusText = 'ILLUSTRATIVE SCENARIO // EXERTION (SYNTHETIC)';
 			statusColor = '#0284c7';
 		} else if (mode === 'pvc') {
 			bpm = 84;
 			spo2 = 95;
 			respRate = 16;
-			statusText = 'ECTOPIC PVC BEAT DETECTED';
+			statusText = 'ILLUSTRATIVE SCENARIO // ECTOPIC-BEAT PATTERN (SYNTHETIC)';
 			statusColor = '#e11d48';
 		}
 	}
 
-	onMount(() => {
-		const timer = setInterval(() => {
-			if (simMode === 'normal') {
-				bpm = 70 + Math.floor(Math.sin(Date.now() * 0.002) * 3);
-			}
-		}, 1500);
-		return () => clearInterval(timer);
-	});
 </script>
 
 <div class="workstation-frame">
@@ -76,19 +67,19 @@
 	<div class="workstation-body">
 		<!-- Top Row: Interactive State Controller -->
 		<div class="workstation-toolbar">
-			<span class="toolbar-label">TELEMETRY SCENARIO SIMULATOR:</span>
+			<span class="toolbar-label">ILLUSTRATIVE SCENARIO SELECTOR (SYNTHETIC):</span>
 			<div class="toolbar-btns">
 				<button class="t-btn" class:t-btn--active={simMode === 'normal'} onclick={() => setMode('normal')} type="button">
-					Normal Sinus (72 BPM)
+					Resting scenario (72 BPM, synthetic)
 				</button>
 				<button class="t-btn" class:t-btn--active={simMode === 'brady'} onclick={() => setMode('brady')} type="button">
-					Bradycardia (48 BPM)
+					Slow-rate scenario (48 BPM, synthetic)
 				</button>
 				<button class="t-btn" class:t-btn--active={simMode === 'tachy'} onclick={() => setMode('tachy')} type="button">
-					Exertion (118 BPM)
+					Exertion scenario (118 BPM, synthetic)
 				</button>
 				<button class="t-btn" class:t-btn--active={simMode === 'pvc'} onclick={() => setMode('pvc')} type="button">
-					PVC Arrhythmia
+					Ectopic-beat scenario (synthetic)
 				</button>
 			</div>
 		</div>
@@ -116,41 +107,41 @@
 			</div>
 		</div>
 
-		<!-- Bottom: Real-Time Vitals Cards -->
+		<!-- Bottom: synthetic scenario parameter cards (not measurements) -->
 		<div class="vitals-dashboard-row">
 			<div class="vital-tile">
-				<span class="v-label">HEART RATE</span>
+				<span class="v-label">HEART RATE (SYNTHETIC SCENARIO)</span>
 				<strong class="v-val">{bpm} <small>BPM</small></strong>
-				<span class="v-sub">R-R Variance: 54ms</span>
+				<span class="v-sub">Scenario parameter - not a measurement</span>
 			</div>
 
 			<div class="vital-tile">
-				<span class="v-label">BLOOD OXYGEN (SpO₂)</span>
+				<span class="v-label">SpO₂ (SYNTHETIC SCENARIO)</span>
 				<strong class="v-val">{spo2} <small>%</small></strong>
-				<span class="v-sub">Calibrated Optical R: 0.52</span>
+				<span class="v-sub">Scenario parameter - not a measurement</span>
 			</div>
 
 			<div class="vital-tile">
-				<span class="v-label">RESPIRATION RATE</span>
+				<span class="v-label">RESPIRATION (SYNTHETIC SCENARIO)</span>
 				<strong class="v-val">{respRate} <small>BR/MIN</small></strong>
-				<span class="v-sub">ECG Derived Respiration (EDR)</span>
+				<span class="v-sub">Scenario parameter - not a measurement</span>
 			</div>
 
 			<div class="vital-tile">
-				<span class="v-label">EDGE PRIVACY STATUS</span>
-				<strong class="v-val text-teal">LOCAL ONLY</strong>
-				<span class="v-sub">0 Bytes Uploaded</span>
+				<span class="v-label">INFERENCE LOCATION</span>
+				<strong class="v-val text-teal">SERVER-SIDE</strong>
+				<span class="v-sub">Nothing runs on a sensor; no on-device inference</span>
 			</div>
 		</div>
 
 		<!-- Footer CTA bar -->
 		<div class="workstation-cta-bar">
 			<div class="cta-left-copy">
-				<strong>Ready to experience the continuous health telemetry environment?</strong>
-				<p>Explore live historical graphs, signal replay, and privacy-preserving federated training logs.</p>
+				<strong>Ready to open the research workspace?</strong>
+				<p>Sign in to run a simulated-wearable monitoring session, review its persisted history, and explore the engineering federation demo.</p>
 			</div>
-			<a href="/monitor" class="enter-monitor-btn">
-				<span>Launch Full Monitor Environment</span>
+			<a href="/sign-in" class="enter-monitor-btn">
+				<span>Open the NHM workspace</span>
 				<span>↗</span>
 			</a>
 		</div>

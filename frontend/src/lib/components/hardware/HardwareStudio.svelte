@@ -66,7 +66,7 @@
 			specs: [
 				{ key: 'ON-DEVICE INFERENCE', val: 'Not Implemented', note: 'Inference is server-side (default research runtime)' },
 				{ key: 'CLOCK / MEMORY', val: 'Unverified', note: 'Not bench-tested' },
-				{ key: 'INFERENCE TIME', val: 'See reports/t029/latency_summary.json', note: 'Server-side CPU gateway, 1000-window benchmark' },
+				{ key: 'INFERENCE TIME', val: 'Server-side only', note: 'Frozen CPU-gateway benchmark evidence; nothing is measured live here' },
 				{ key: 'CRYPTO', val: 'Not Implemented', note: 'No device-side crypto claim' }
 			],
 			highlights: [

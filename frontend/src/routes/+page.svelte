@@ -82,6 +82,8 @@
 	 PRELOADER
 ========================================================= -->
 
+<a class="skip-link" href="#top">Skip to main content</a>
+
 {#if preloaderMounted}
 	<div class:preloader--closing={ready} class="preloader" aria-label="Initializing NHM">
 		<div class="preloader__orb"></div>
@@ -136,7 +138,7 @@
 	<!-- =========================================================
 		 NAVIGATION
 	========================================================= -->
-	<nav class="nav">
+	<nav class="nav" aria-label="NHM landing navigation">
 		<a class="brand" href="#top" aria-label="NHM home">
 			<span class="brand__mark">N</span>
 			<span class="brand__name">NHM</span>
@@ -155,7 +157,7 @@
 		</a>
 	</nav>
 
-	<main id="top">
+	<main id="top" tabindex="-1">
 		<!-- =====================================================
 			 01 — HERO
 		====================================================== -->
@@ -190,13 +192,14 @@
 								</a>
 								<a class="text-link" href="/sign-in">OPEN NHM<span>↗</span></a>
 							</div>
-							<ul class="pillars" aria-label="Product pillars"><li><b>LIVE MONITORING</b><span>Released MODEL_V2, server-side, research states</span></li><li><b>FEDERATED MODEL DEVELOPMENT</b><span>Architecture for synthetic research partitions</span></li><li><b>HARDWARE-READY SOURCE ARCHITECTURE</b><span>Virtual wearable now, physical adapter later</span></li></ul>
+							<ul class="pillars" aria-label="Product pillars"><li><b>LIVE MONITORING SESSIONS</b><span>Simulated wearable, accelerated timing; released MODEL_V2, server-side, research states</span></li><li><b>FEDERATED MODEL DEVELOPMENT</b><span>Architecture for synthetic research partitions</span></li><li><b>HARDWARE-READY SOURCE ARCHITECTURE</b><span>Virtual wearable now, physical adapter later</span></li></ul>
 							</div>
 						</BlurFade>
 					</div>
 
 					<div class="hero__device">
 						<WatchScene />
+						<p class="hero__device-note">Concept render of a virtual wearable. Text on the model is illustrative - not live data, not connected hardware.</p>
 					</div>
 				</div>
 			</div>
@@ -595,7 +598,7 @@
 	.button--glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-dark); color: var(--text-main); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; padding: 12px 20px; border-radius: 999px; display: inline-flex; align-items: center; gap: 12px; transition: all 0.3s; }
 	.button--glass:hover { background: var(--text-main); color: var(--bg-dark); transform: translateY(-1px); }
 
-	.text-link { color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+	.text-link { display: inline-flex; align-items: center; min-height: 24px; color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
 	.text-link span { display: inline-block; margin-left: 6px; transition: transform 0.3s; }
 	.text-link:hover { color: var(--text-main); }
 	.text-link:hover span { transform: translate(3px, -3px); }
@@ -609,7 +612,7 @@
 	.brand__name { font-size: 20px; }
 	.nav__links { display: flex; gap: 40px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
 	.nav__links a:hover { color: var(--text-main); }
-	.nav__cta { justify-self: end; }
+	.nav__cta { justify-self: end; min-height: 28px; display: inline-flex; align-items: center; }
 
 	/* =========================================================
 	   PRELOADER
@@ -890,6 +893,7 @@
 	.footer { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 40px; padding: 60px clamp(24px, 5vw, 64px); border-top: 1px solid var(--border-dark); background: var(--bg-dark); color: var(--text-muted); }
 	.footer__brand p { margin: 12px 0 0; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; }
 	.footer__links { display: flex; gap: 40px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+	.footer__links a { display: inline-flex; align-items: center; min-height: 24px; }
 	.footer__links a:hover { color: var(--text-main); }
 	.footer__meta { justify-self: end; display: flex; flex-direction: column; gap: 8px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-align: right; margin: 0; }
 
@@ -971,6 +975,12 @@
 	@media (prefers-reduced-motion: reduce) {
 		.site-shell, .site-shell :global(*) { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 		.preloader, .preloader__orb, .preloader__system, .preloader__progress span, .preloader__ready { animation: none !important; }
+		.federation-path-line span { animation: none !important; opacity: 1 !important; transform: none !important; }
+		.site-shell :global(*::before), .site-shell :global(*::after) { animation: none !important; }
 	}
+	.hero__device-note { position: absolute; left: 0; right: 0; bottom: -6px; z-index: 40; margin: 0; text-align: center; font: 10px/1.4 var(--font-mono, monospace); letter-spacing: 0.08em; color: var(--text-muted, #94a3b8); pointer-events: none; }
+	.skip-link { position: absolute; top: -64px; left: 12px; z-index: 100000; padding: 10px 16px; border-radius: 6px; background: #0f172a; color: #fff; font: 600 14px/1.2 var(--font-sans, system-ui, sans-serif); text-decoration: none; }
+	.skip-link:focus, .skip-link:focus-visible { top: 12px; outline: 2px solid #2dd4bf; outline-offset: 2px; }
+	main:focus { outline: none; }
 	.pillars { position: relative; z-index: 30; display: grid; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; max-width: 560px; } .pillars li { display: grid; gap: 2px; padding: 8px 14px; border-left: 2px solid var(--accent, #2bb8b0); background: rgba(5,10,21,.92); } .pillars b { font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: .12em; } .pillars span { font-size: 13px; opacity: .75; }
 </style>

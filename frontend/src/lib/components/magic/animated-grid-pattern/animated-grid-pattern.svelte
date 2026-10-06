@@ -73,7 +73,9 @@
 
 	$effect(() => {
 		if (dimensions.width && dimensions.height) {
-			squares = generateSquares(numSquares);
+			// prefers-reduced-motion: keep the static grid, no endlessly re-triggering blinking squares
+			const reduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+			squares = reduced ? [] : generateSquares(numSquares);
 		}
 	});
 

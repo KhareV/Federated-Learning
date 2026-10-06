@@ -18,40 +18,40 @@
 	const states: StateConfig[] = [
 		{
 			id: 'normal',
-			label: 'Normal Sinus Rhythm',
+			label: 'Resting scenario',
 			bpm: 72,
 			spo2: 98.4,
 			ptt: 218,
 			hrv: 54,
-			status: 'OPTIMAL CARDIAC SYNCHRONY',
+			status: 'ILLUSTRATIVE SCENARIO (SYNTHETIC VALUES)',
 			statusColor: '#0d9488',
-			description: 'Balanced autonomic sympathovagal tone. Crisp QRS complexes followed by regular systolic volume ejection waves.'
+			description: 'Synthetic illustration: regular QRS complexes followed by regular pulse waves. Values are scenario parameters, not measurements.'
 		},
 		{
 			id: 'exertion',
-			label: 'Physical Exertion (Tachycardia)',
+			label: 'Exertion scenario',
 			bpm: 116,
 			spo2: 97.2,
 			ptt: 172,
 			hrv: 24,
-			status: 'ELEVATED SYMPATHETIC DRIVE',
+			status: 'ILLUSTRATIVE SCENARIO (SYNTHETIC VALUES)',
 			statusColor: '#0284c7',
-			description: 'Shortened R-R intervals with accelerated arterial pulse wave velocity and elevated cardiac output demand.'
+			description: 'Synthetic illustration: shorter R-R intervals and faster pulse waves. Values are scenario parameters, not measurements.'
 		},
 		{
 			id: 'nocturnal',
-			label: 'Deep Sleep (Bradycardia)',
+			label: 'Sleep scenario',
 			bpm: 48,
 			spo2: 96.1,
 			ptt: 264,
 			hrv: 78,
-			status: 'PARASYMPATHETIC DOMINANCE',
+			status: 'ILLUSTRATIVE SCENARIO (SYNTHETIC VALUES)',
 			statusColor: '#6366f1',
-			description: 'Prominent sinus respiratory arrhythmia with extended diastolic intervals and vascular relaxation.'
+			description: 'Synthetic illustration: longer R-R intervals and slower pulse waves. Values are scenario parameters, not measurements.'
 		},
 		{
 			id: 'pvc',
-			label: 'Ectopic PVC Anomaly',
+			label: 'Ectopic-beat scenario',
 			bpm: 84,
 			spo2: 94.8,
 			ptt: 290,
@@ -66,6 +66,7 @@
 	let canvasOsc: HTMLCanvasElement | null = $state(null);
 	let canvasPoincare: HTMLCanvasElement | null = $state(null);
 	let animId: number;
+	let reducedMotion = $state(false);   // prefers-reduced-motion: draw one static frame per scenario, no perpetual rAF loop
 	let time = 0;
 
 	// Draw Synchronized Multi-Channel Oscilloscope
@@ -171,7 +172,7 @@
 		ctx.stroke();
 
 		time += 0.02;
-		animId = requestAnimationFrame(drawOscilloscope);
+		if (!reducedMotion) animId = requestAnimationFrame(drawOscilloscope);
 	}
 
 	// Draw Poincaré Scatter Plot for HRV Autonomic Tone
@@ -238,9 +239,15 @@
 			canvasPoincare.width = 240;
 			canvasPoincare.height = 240;
 		}
-		animId = requestAnimationFrame(drawOscilloscope);
+		reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		drawOscilloscope();
 		drawPoincare();
 		return () => cancelAnimationFrame(animId);
+	});
+
+	$effect(() => {
+		void currentState;
+		if (reducedMotion && canvasOsc) drawOscilloscope();   // static redraw when the illustrative scenario changes
 	});
 </script>
 
@@ -284,22 +291,22 @@
 		<div class="telemetry-panel">
 			<div class="vitals-metrics-column">
 				<div class="metric-card">
-					<span class="metric-label">HEART RATE</span>
+					<span class="metric-label">HEART RATE (SYNTHETIC)</span>
 					<strong class="metric-value">{currentState.bpm} <small>BPM</small></strong>
 				</div>
 
 				<div class="metric-card">
-					<span class="metric-label">ARTERIAL SpO₂</span>
+					<span class="metric-label">SpO₂ (SYNTHETIC)</span>
 					<strong class="metric-value">{currentState.spo2} <small>%</small></strong>
 				</div>
 
 				<div class="metric-card">
-					<span class="metric-label">PULSE TRANSIT (PTT)</span>
+					<span class="metric-label">PULSE TRANSIT (SYNTHETIC)</span>
 					<strong class="metric-value">{currentState.ptt} <small>ms</small></strong>
 				</div>
 
 				<div class="metric-card">
-					<span class="metric-label">HRV DISPERSION (SDNN)</span>
+					<span class="metric-label">HRV (SYNTHETIC)</span>
 					<strong class="metric-value">{currentState.hrv} <small>ms</small></strong>
 				</div>
 			</div>

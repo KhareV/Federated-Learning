@@ -29,6 +29,7 @@
 	let canvasElement: HTMLCanvasElement | null = $state(null);
 	let animId: number;
 	let animTime = 0;
+	let reducedMotion = $state(false);   // prefers-reduced-motion: draw one static frame, never run a perpetual rAF loop
 
 	// Curated authentic physiological nodes across 4 architectural tiers
 	const nodes: SignalNode[] = [
@@ -38,19 +39,19 @@
 		{ id: 'ppg_ir', name: 'PPG 880nm (IR)', layer: 0, x: 0.12, y: 0.78, category: 'Sensor Input', clinicalRole: 'Deoxygenated infrared tissue transmission (illustrative)', signalSource: 'Concept Optical Sensor (Unverified)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
 
 		// Tier 1: Morphological Features
-		{ id: 'qrs_morph', name: 'QRS Morphology', layer: 1, x: 0.38, y: 0.18, category: 'Waveform Feature', clinicalRole: 'Ventricular depolarization duration & axis', signalSource: 'Pan-Tompkins Filter', samplingRate: 'Real-time', normalRange: '80 – 120 ms', currentValue: '92 ms (Normal)' },
-		{ id: 'hrv_sdnn', name: 'HRV (SDNN)', layer: 1, x: 0.38, y: 0.44, category: 'Waveform Feature', clinicalRole: 'Standard deviation of R-R intervals', signalSource: 'Edge Peak Detector', samplingRate: '5-Min Window', normalRange: '35 – 80 ms', currentValue: '54.2 ms' },
-		{ id: 'ptt_calc', name: 'Pulse Transit Time', layer: 1, x: 0.38, y: 0.70, category: 'Waveform Feature', clinicalRole: 'ECG R-peak to PPG foot interval', signalSource: 'Cross-Modal Sync', samplingRate: 'Beat-to-Beat', normalRange: '180 – 260 ms', currentValue: '218 ms' },
-		{ id: 'spo2_ratio', name: 'Optical Delta (R)', layer: 1, x: 0.38, y: 0.88, category: 'Waveform Feature', clinicalRole: 'Ratio-of-ratios oxygen saturation proxy', signalSource: 'Red/IR AC-DC Demod', samplingRate: 'Continuous', normalRange: '0.4 – 1.0 R', currentValue: '0.52 R (98% SpO₂)' },
+		{ id: 'qrs_morph', name: 'QRS Morphology', layer: 1, x: 0.38, y: 0.18, category: 'Waveform Feature', clinicalRole: 'Ventricular depolarization duration & axis (illustrative concept)', signalSource: 'Concept feature (illustrative)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
+		{ id: 'hrv_sdnn', name: 'HRV (SDNN)', layer: 1, x: 0.38, y: 0.44, category: 'Waveform Feature', clinicalRole: 'Standard deviation of R-R intervals (illustrative concept)', signalSource: 'Concept feature (illustrative)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
+		{ id: 'ptt_calc', name: 'Pulse Transit Time', layer: 1, x: 0.38, y: 0.70, category: 'Waveform Feature', clinicalRole: 'ECG R-peak to PPG foot interval (illustrative concept)', signalSource: 'Concept feature (illustrative)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
+		{ id: 'spo2_ratio', name: 'Optical Delta (R)', layer: 1, x: 0.38, y: 0.88, category: 'Waveform Feature', clinicalRole: 'Ratio-of-ratios oxygen saturation proxy (illustrative concept)', signalSource: 'Concept feature (illustrative)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
 
 		// Tier 2: Latent Physiological Space
-		{ id: 'cardiac_state', name: 'Cardiac Embedding', layer: 2, x: 0.65, y: 0.28, category: 'Autonomic / Context', clinicalRole: 'Multi-beat topological vector space', signalSource: '128-D Edge Latent', samplingRate: 'Continuous', normalRange: 'Cosine Sim > 0.92', currentValue: '0.96 (Nominal)' },
-		{ id: 'autonomic_tone', name: 'Autonomic Balance', layer: 2, x: 0.65, y: 0.62, category: 'Autonomic / Context', clinicalRole: 'Sympathovagal circadian balance (LF/HF)', signalSource: 'Spectral Fusion', samplingRate: 'Continuous', normalRange: '0.8 – 2.2 LF/HF', currentValue: '1.24 LF/HF' },
+		{ id: 'cardiac_state', name: 'Cardiac Embedding', layer: 2, x: 0.65, y: 0.28, category: 'Autonomic / Context', clinicalRole: 'Multi-beat topological vector space (illustrative concept)', signalSource: 'Concept latent (illustrative)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
+		{ id: 'autonomic_tone', name: 'Autonomic Balance', layer: 2, x: 0.65, y: 0.62, category: 'Autonomic / Context', clinicalRole: 'Sympathovagal circadian balance (illustrative concept)', signalSource: 'Concept latent (illustrative)', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
 
 		// Tier 3: Continuous Clinical Output
 		{ id: 'arrhythmia_out', name: 'Research Monitoring State (Illustrative)', layer: 3, x: 0.88, y: 0.24, category: 'Illustrative Output', clinicalRole: 'Concept node -- not an implemented diagnostic feature', signalSource: 'Illustrative Concept', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live, not a diagnosis)' },
 		{ id: 'vital_stability', name: 'Context Fusion (Illustrative)', layer: 3, x: 0.88, y: 0.52, category: 'Illustrative Output', clinicalRole: 'Concept node -- not an implemented scoring feature', signalSource: 'Illustrative Concept', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' },
-		{ id: 'federated_grad', name: 'FedProx Gradient (Illustrative)', layer: 3, x: 0.88, y: 0.80, category: 'Illustrative Output', clinicalRole: 'Research FedProx local-objective weight update (no formal DP proof)', signalSource: 'Illustrative Concept', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'See reports/fedprox.json' }
+		{ id: 'federated_grad', name: 'FedProx Gradient (Illustrative)', layer: 3, x: 0.88, y: 0.80, category: 'Illustrative Output', clinicalRole: 'Research FedProx local-objective weight update (no formal DP proof)', signalSource: 'Illustrative Concept', samplingRate: 'Illustrative', normalRange: 'Illustrative', currentValue: 'Illustrative (not live)' }
 	];
 
 	// Synapses connecting the layers
@@ -90,7 +91,7 @@
 			nhmStatus: 'Hypothetical: a continuous research window would exist here'
 		},
 		{
-			hour: '18:15 PM',
+			hour: '18:15',
 			title: 'Illustrative post-activity window (hypothetical)',
 			severity: 'Illustrative only -- not a detection claim',
 			snapshotStatus: 'Outside a periodic spot-check window',
@@ -115,7 +116,7 @@
 		}
 
 		animTime += 0.018;
-		animId = requestAnimationFrame(drawGraph);
+		if (!reducedMotion) animId = requestAnimationFrame(drawGraph);
 	}
 
 	function drawContinuousNeuralMesh(ctx: CanvasRenderingContext2D, w: number, h: number) {
@@ -214,9 +215,9 @@
 
 		// 3 Blind Spot Zones
 		const zones = [
-			{ x1: 0.15, x2: 0.38, hours: '4.5 Hours Unmonitored' },
-			{ x1: 0.38, x2: 0.62, hours: '4.5 Hours Unmonitored' },
-			{ x1: 0.62, x2: 0.85, hours: '4.5 Hours Unmonitored' }
+			{ x1: 0.15, x2: 0.38, hours: 'Gap (illustrative)' },
+			{ x1: 0.38, x2: 0.62, hours: 'Gap (illustrative)' },
+			{ x1: 0.62, x2: 0.85, hours: 'Gap (illustrative)' }
 		];
 
 		for (const z of zones) {
@@ -241,10 +242,10 @@
 
 		// Sporadic Checkpoints
 		const checkpoints = [
-			{ x: 0.15, time: '08:30 AM', label: 'Clinic ECG Test', val: 'Normal 72 BPM' },
-			{ x: 0.38, time: '13:00 PM', label: 'Follow-Up Check', val: 'Normal 76 BPM' },
-			{ x: 0.62, time: '17:30 PM', label: 'Pharmacy Cuff', val: 'Normal 74 BPM' },
-			{ x: 0.85, time: '22:00 PM', label: 'Evening Log', val: 'Normal 70 BPM' }
+			{ x: 0.15, time: 'Spot-check 1', label: 'Illustrative visit', val: 'Value not shown' },
+			{ x: 0.38, time: 'Spot-check 2', label: 'Illustrative visit', val: 'Value not shown' },
+			{ x: 0.62, time: 'Spot-check 3', label: 'Illustrative visit', val: 'Value not shown' },
+			{ x: 0.85, time: 'Spot-check 4', label: 'Illustrative visit', val: 'Value not shown' }
 		];
 
 		for (const cp of checkpoints) {
@@ -312,8 +313,24 @@
 			canvasElement.width = 1100;
 			canvasElement.height = 420;
 		}
-		animId = requestAnimationFrame(drawGraph);
-		return () => cancelAnimationFrame(animId);
+		const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const sync = () => {
+			reducedMotion = query.matches;
+			cancelAnimationFrame(animId);
+			drawGraph();
+		};
+		query.addEventListener('change', sync);
+		sync();
+		return () => {
+			query.removeEventListener('change', sync);
+			cancelAnimationFrame(animId);
+		};
+	});
+
+	$effect(() => {
+		void activeView;
+		void hoveredNode;
+		if (reducedMotion) drawGraph();    // static redraw when the conceptual view changes
 	});
 </script>
 
@@ -328,8 +345,8 @@
 				type="button"
 			>
 				<span class="pill-dot pill-dot--teal"></span>
-				<span>Continuous Neural Stream</span>
-				<small>99.8% Coverage</small>
+				<span>Conceptual continuous view</span>
+				<small>Illustrative</small>
 			</button>
 			<button
 				class="pill-btn"
@@ -338,18 +355,18 @@
 				type="button"
 			>
 				<span class="pill-dot pill-dot--amber"></span>
-				<span>Intermittent Snapshots</span>
-				<small>Legacy Care</small>
+				<span>Conceptual snapshot view</span>
+				<small>Illustrative</small>
 			</button>
 		</div>
 
 		<div class="header-caption">
 			{#if activeView === 'continuous'}
-				<span class="caption-tag">LIVE EDGE SYNAPSE GRAPH</span>
-				<p>Hover any node to inspect real-time feature vectors and cross-modal correlation paths.</p>
+				<span class="caption-tag">ILLUSTRATIVE SIGNAL-FLOW GRAPH</span>
+				<p>Hover any node for a conceptual description of a feature path. All values are illustrative - not live telemetry.</p>
 			{:else}
-				<span class="caption-tag caption-tag--warn">EPISODIC SAMPLING GAP</span>
-				<p>Illustrates the 99.8% unmonitored blind intervals between sporadic clinic visits.</p>
+				<span class="caption-tag caption-tag--warn">ILLUSTRATIVE SAMPLING GAP</span>
+				<p>Conceptual illustration only: spot-checks leave gaps that continuous research monitoring could explore. No measured percentage is claimed.</p>
 			{/if}
 		</div>
 	</div>
@@ -382,7 +399,7 @@
 
 				<div class="profile-meta-row">
 					<div class="meta-item">
-						<span>SAMPLING FREQUENCY</span>
+						<span>SAMPLING (ILLUSTRATIVE)</span>
 						<strong>{activeNode.samplingRate}</strong>
 					</div>
 					<div class="meta-item">

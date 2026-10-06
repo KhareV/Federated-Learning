@@ -18,38 +18,38 @@
 		{
 			id: 'sensing',
 			index: '01',
-			title: 'Analog Biosensing',
+			title: 'Analog Biosensing (Concept)',
 			role: 'Biopotential & Optical Transduction',
 			protocol: 'Analog Microvolt Differential / I2C',
-			latency: '< 0.2 ms',
-			dataThroughput: '14.4 kbps raw',
-			security: 'Direct Skin Contact Guard',
-			description: 'Concept sensing stage for electrical cardiac potentials and optical pulsatile absorption. Exact front-end hardware and electrode placement are unverified (see docs/LEGACY_FIRMWARE_V0_FINDINGS.md: VERIFICATION_REQUIRED).',
+			latency: 'Concept - not measured',
+			dataThroughput: 'Concept - not measured',
+			security: 'Concept only - no security claim',
+			description: 'Concept sensing stage for electrical cardiac potentials and optical pulsatile absorption. Exact front-end hardware and electrode placement are unverified (verification required).',
 			details: ['ECG Front-End: Unverified', 'PPG Front-End: Unverified', 'Concept Only -- Not Bench-Tested']
 		},
 		{
 			id: 'embedded',
 			index: '02',
-			title: 'Embedded Edge Firmware',
+			title: 'Embedded Edge Firmware (Concept)',
 			role: 'Hardware FIFO & Noise Filtering',
 			protocol: 'FreeRTOS DMA / Ring Buffer',
-			latency: '0.6 ms',
-			dataThroughput: '512 KB Internal SRAM',
-			security: 'Isolated Local Ring Buffer',
-			description: 'Concept firmware sketch for ADC sampling, baseline wander removal, and buffer storage on an ESP32-class board. ADC resolution, sampling rate, and filtering are unverified pending bench testing (see docs/LEGACY_FIRMWARE_V0_FINDINGS.md).',
+			latency: 'Concept - not measured',
+			dataThroughput: 'Concept - unverified',
+			security: 'Concept only - no security claim',
+			description: 'Concept firmware sketch for ADC sampling, baseline wander removal, and buffer storage on an ESP32-class board. ADC resolution, sampling rate, and filtering are unverified pending bench testing.',
 			details: ['ADC Resolution: Unverified', 'Sampling Rate: Unverified', 'Concept Only -- Not Bench-Tested']
 		},
 		{
 			id: 'features',
 			index: '03',
-			title: 'Wavelet Feature Extraction',
+			title: 'Wavelet Feature Extraction (Concept)',
 			role: 'Cross-Modal Vector Synthesis',
 			protocol: 'SIMD Vector Floating Point',
-			latency: '1.2 ms',
-			dataThroughput: '128-D Feature Embedding',
-			security: 'Deterministic In-Memory Transform',
-			description: 'Real-time Pan-Tompkins QRS peak detection, R-R interval HRV extraction, and Pulse Transit Time (PTT) fusion.',
-			details: ['Continuous Beat-to-Beat PTT Tracking', 'Autonomic Sympathovagal LF/HF Decomposition', '128-Dimensional Topological Vector Projection']
+			latency: 'Concept - not measured',
+			dataThroughput: 'Concept feature vector (illustrative)',
+			security: 'Concept only - no security claim',
+			description: 'Concept feature-extraction stage (not implemented on any wearable): QRS peak detection, R-R interval HRV extraction and pulse-transit-time fusion are candidate future steps. No feature extraction runs on a sensor today.',
+			details: ['Concept Only -- Not Implemented', 'No on-device feature extraction exists', 'Features below this tier are illustrative']
 		},
 		{
 			id: 'inference',
@@ -57,7 +57,7 @@
 			title: 'Research Model Inference',
 			role: 'Server-Side CPU Gateway (Current Implementation)',
 			protocol: 'TorchScript CPU Gateway via POST /v1/infer-window',
-			latency: 'See reports/t029/latency_summary.json',
+			latency: 'Not shown here (frozen research evidence only)',
 			dataThroughput: 'One 10-second ECG window per request',
 			security: 'Research prototype -- no clinical-grade security claim',
 			description: 'The default research runtime (MODEL_V2_FINAL, a centrally trained checkpoint) runs server-side through the frozen GATEWAY_ARTIFACT_V2 CPU runtime with source-domain CAL_V2 behind the typed /v1/infer-window API -- not on-device. The V1 stack remains an explicit rollback profile. On-device inference is a possible future direction, not an implemented or verified capability.',
@@ -68,8 +68,8 @@
 			index: '05',
 			title: 'Federated Optimization (FedProx)',
 			role: 'FedProx Local Objective (Research Prototype)',
-			protocol: 'FedProx (see artifacts/FEDPROX_METHOD_V1.lock.json)',
-			latency: 'See reports/fedprox.json',
+			protocol: 'FedProx (frozen research method)',
+			latency: 'Not shown here (frozen research evidence only)',
 			dataThroughput: 'Model Weight Updates',
 			security: 'No Formal Differential-Privacy Proof',
 			description: 'The project includes a complete federated-learning research lineage for the MODEL_V2 architecture (FedAvg/FedProx comparisons on MIT-BIH-derived client partitions). The default inference checkpoint is NOT federated-trained. No differential-privacy mechanism or formal privacy guarantee is implemented or claimed.',
@@ -80,8 +80,8 @@
 			index: '06',
 			title: 'SecAgg+ Interface Prototype',
 			role: 'Research Secure-Aggregation Reference',
-			protocol: 'SecAgg+ (see artifacts/SECAGG_METHOD_V1.lock.json)',
-			latency: 'See reports/privacy_secagg/report.json',
+			protocol: 'SecAgg+ (frozen research interface reference)',
+			latency: 'Not shown here (frozen research evidence only)',
 			dataThroughput: 'Model Weight Updates',
 			security: 'Single-Host Application-Interface Evidence Only -- No DP/Security Proof',
 			description: 'A single-host SecAgg+ application-interface reference showing that the server-visible aggregation interface never exposes an individual clear client update. This is not a deployed multi-host security system and carries no formal privacy or security guarantee.',
@@ -164,7 +164,7 @@
 		<div class="federated-globe-card">
 			<div class="globe-top-bar">
 				<div>
-					<span class="globe-tag">FEDERATED LEARNING -- ILLUSTRATIVE MAP</span>
+					<span class="globe-tag">FEDERATED LEARNING -- ILLUSTRATIVE MAP (DECORATIVE MARKERS)</span>
 					<h4>Concept Map, Not Live Deployment Telemetry</h4>
 				</div>
 				<span class="globe-status-pill"><span class="globe-dot"></span> ILLUSTRATIVE</span>
@@ -175,6 +175,8 @@
 				<Globe config={{ width: 520, height: 520, dark: 1, diffuse: 1.8, mapSamples: 12000, mapBrightness: 4.5, baseColor: [0.04, 0.12, 0.18], markerColor: [0.17, 0.83, 0.75], glowColor: [0.05, 0.25, 0.28], markers: federationMarkers.map(m => ({ location: [m.lat, m.lng], size: m.size * 0.05 })) }} />
 			</div>
 
+			<p class="globe-note">Marker positions are decorative. NHM's eight synthetic federation clients run on one demonstration machine - not in these cities.</p>
+
 			<div class="globe-stats-dock">
 				<div class="g-stat">
 					<span>CLIENTS (DEMO)</span>
@@ -182,11 +184,11 @@
 				</div>
 				<div class="g-stat">
 					<span>ROUND</span>
-					<strong>See reports/fl_iid.json</strong>
+					<strong>Illustrative</strong>
 				</div>
 				<div class="g-stat">
 					<span>ACCURACY</span>
-					<strong class="text-teal">See reports/fl_iid.json</strong>
+					<strong class="text-teal">Not shown (illustrative)</strong>
 				</div>
 				<div class="g-stat">
 					<span>PRIVACY</span>
@@ -440,6 +442,8 @@
 		overflow: hidden;
 		margin: 10px 0;
 	}
+
+	.globe-note { margin: 0 0 10px; font-size: 12px; line-height: 1.5; color: #94a3b8; }
 
 	.globe-stats-dock {
 		display: grid;

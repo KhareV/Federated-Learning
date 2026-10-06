@@ -164,7 +164,7 @@
 			<div
 				class={cn(
 					"absolute top-0 left-1/2 -translate-x-1/2 cursor-pointer transition-all duration-200",
-					active ? "h-[120px] w-[2px]" : "h-16 w-[1.5px]"
+					active ? "h-[120px] w-6" : "h-16 w-6"
 				)}
 				role="button"
 				tabindex="0"
@@ -175,7 +175,8 @@
 			>
 				<div
 					class={cn(
-						"h-full w-full transition-colors duration-200",
+						"mx-auto h-full transition-colors duration-200",
+						active ? "w-[2px]" : "w-[1.5px]",
 						active
 							? "bg-[var(--step-line-active-color,#888888)] dark:bg-[var(--step-line-active-color,#9780ff)]"
 							: "bg-[var(--step-line-inactive-color,#b1b1b1)] dark:bg-[var(--step-line-inactive-color,#737373)]"

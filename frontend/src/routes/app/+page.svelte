@@ -55,6 +55,6 @@
 	.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; margin-bottom: 14px; } .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
 	.big { margin: 0 0 6px; font: 500 18px 'Space Grotesk', sans-serif; overflow-wrap: anywhere; } .dim { color: #94a3b8; font-size: 13px; line-height: 1.6; } ul { margin: 8px 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 12px; } code { font: 12px 'JetBrains Mono', monospace; overflow-wrap: anywhere; }
 	.badge { padding: 2px 7px; border: 1px solid rgba(43,184,176,.5); color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; letter-spacing: .08em; } .badge.warn { border-color: rgba(251,191,36,.6); color: #fbbf24; }
-	.go { display: inline-block; margin-top: 10px; color: #2bb8b0; font: 12px 'JetBrains Mono', monospace; text-decoration: none; letter-spacing: .06em; } .go:hover { text-decoration: underline; }
+	.go { display: inline-flex; align-items: center; min-height: 24px; margin-top: 10px; color: #2bb8b0; font: 12px 'JetBrains Mono', monospace; text-decoration: none; letter-spacing: .06em; } .go:hover { text-decoration: underline; }
 	.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; } .claim { margin-top: 18px; color: #71829a; font: 11px 'JetBrains Mono', monospace; letter-spacing: .06em; }
 </style>

@@ -81,6 +81,16 @@
 	};
 
 	onMount(() => {
+		// prefers-reduced-motion: show the first phrase statically; no auto-cycling loop
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+			if (text1Ref && text2Ref) {
+				text1Ref.textContent = texts[0] ?? "";
+				text1Ref.style.opacity = "100%";
+				text1Ref.style.filter = "none";
+				text2Ref.textContent = "";
+			}
+			return;
+		}
 		animate();
 	});
 

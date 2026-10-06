@@ -183,6 +183,11 @@
 			theta: initialTheta + thetaOffset.current,
 		});
 
+		// prefers-reduced-motion: draw a static globe, run no perpetual animation loop
+		if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+			frame = 0;
+			return;
+		}
 		frame = requestAnimationFrame(animate);
 	}
 

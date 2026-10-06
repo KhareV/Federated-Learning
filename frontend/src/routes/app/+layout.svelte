@@ -27,9 +27,10 @@
 {#if checked && auth.phase === 'AUTHENTICATED'}
 	<ProductShell>{@render children?.()}</ProductShell>
 {:else}
-	<main class="boot" role="status"><p>Opening the NHM workspace…</p></main>
+	<main class="boot"><div role="status"><h1>Opening the NHM workspace…</h1></div></main>
 {/if}
 
 <style>
 	.boot { min-height: 100vh; display: grid; place-items: center; background: #030712; color: #94a3b8; font: 12px 'JetBrains Mono', monospace; letter-spacing: .1em; }
+	.boot h1 { margin: 0; font: inherit; letter-spacing: inherit; color: inherit; }
 </style>
