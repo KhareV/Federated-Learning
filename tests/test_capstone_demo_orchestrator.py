@@ -30,6 +30,11 @@ def test_missing_demo_auth_acknowledgement_refuses_to_start(capsys) -> None:
     assert "DEMO_AUTH_ACKNOWLEDGEMENT_REQUIRED" in capsys.readouterr().err
 
 
+def test_missing_acknowledgement_refuses_even_in_preflight_only_mode() -> None:
+    assert demo.main(["--preflight-only", *_ports()]) == demo.EXIT["REFUSED"]
+    assert demo.main(["--preflight-only", "--acknowledge-demo-auth", *_ports(), "--build"]) in {demo.EXIT["OK"], demo.EXIT["PREFLIGHT_FAILED"]}
+
+
 @pytest.mark.parametrize("service", ["inference", "product", "frontend"])
 def test_an_occupied_port_fails_with_port_in_use_and_never_kills_the_occupant(service, capsys, tmp_path) -> None:
     ports = {"inference": free_port(), "product": free_port(), "frontend": free_port()}

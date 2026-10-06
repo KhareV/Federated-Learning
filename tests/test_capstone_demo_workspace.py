@@ -91,6 +91,8 @@ def test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted(tmp_path, targ
     with pytest.raises(WorkspaceError) as error:
         Workspace.reset(resolved)
     assert error.value.code in {"UNSAFE_RESET_TARGET", "WORKSPACE_SENTINEL_MISSING"}
+    if target in {"/", "HOME", "ROOT", "ROOT_PARENT", "ROOT_CHILD"}:
+        assert error.value.code == "UNSAFE_RESET_TARGET"   # refused by path policy, not merely for lacking a sentinel
     if target == "RANDOM_NO_SENTINEL":
         assert error.value.code == "WORKSPACE_SENTINEL_MISSING"
         assert (resolved / "keep.txt").exists()

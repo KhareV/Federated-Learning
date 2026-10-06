@@ -1,0 +1,102 @@
+{
+ "bound_files": {
+  "configs/capstone/cap_010_faculty_demo_protocol_v1.json": "011046875ebdb176c643d508f4b7588923e7c1c333a765db18fa2f86057ebb0b",
+  "configs/capstone/cap_010_full_demo_binding_v1.json": "3fd0774068753870e5df04cc988aa04dc03d837c7a2926b3c4809d65062a7d6b",
+  "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md": "4d4043268e0fe0f611b881d5537b5902b227df5428575f43a0512861a91274aa",
+  "scripts/cap_010_build_freeze.py": "ab3b3077254731e55af25337ddfea12eaed15035d3b36ea9538920f57b77e8cb",
+  "scripts/cap_010_cdp_driver.mjs": "7165020ca0c2a8122233ff62b1e4bd2f5e41090e8772a65df04fe9b55f7fb6bf",
+  "scripts/cap_010_mutation_controls.py": "ccfc195ce2791161c39d6710c0b14d4a35d9b1b31e4886e394727ba0dfe60197",
+  "scripts/cap_010_protected_audit.py": "641dbd9edd8c9081f126fe6a5337100bbb78b7dc99e69d706dc40c1c0485d35c",
+  "scripts/cap_010_runbook_audit.py": "5f00d6a99123fb90e2b81ef74a5dae5db6562c0d0594081b67e66946477a8111",
+  "scripts/capstone_demo_preflight.py": "ad382e3e7ad98e323de0b0f7e1b82c7802420a6725d115b7ffd5f7bac670d219",
+  "scripts/capstone_demo_workspace.py": "65540adedcbf0dd11ae71302d61f4716ea4aa32f81abff6df0fcee31f98b4d69",
+  "scripts/run_capstone_faculty_demo.py": "d08c2c8f0cb9f2bb3ecd2cad56b7ec929be8935a0859437253cbcde8398fc776",
+  "scripts/run_capstone_full_demo_e2e.py": "df829c91802f0b1db8626af08c24b8929ae40a7ab7c87c3afdc789fb7e1b0ce7",
+  "scripts/verify_capstone_faculty_demo.py": "90e17033e6ea1e1d3001764827ad320598d34bfa0d61db65e1e169f9bd47110f",
+  "tests/capstone_demo_support.py": "f45ec3dd3335a261c3224c7adff56a7b56e8cede0b4a88ba205a5eba83d774ea",
+  "tests/test_capstone_demo_orchestrator.py": "edf2442bbfea97ebd04148d9ffc46b47d4800d139ce2d1d8b979c3efb102af99",
+  "tests/test_capstone_demo_preflight.py": "86ff7fad8abc132b0faa2f8e3c7209bee135678741d00c3a15220916acf443ab",
+  "tests/test_capstone_demo_workspace.py": "615082976290911099cdc1b432485a1815801de3d0956580dc4f7224eed9040a",
+  "tests/test_capstone_full_demo.py": "4ca39cc9c2c90714752b446b6f42098241717582c67ae33d5e257000a3d5fd80"
+ },
+ "claim_boundary": "OFFLINE_ONE_LAPTOP_FACULTY_DEMONSTRATION_READINESS_ONLY",
+ "component_registry": {
+  "path": "manifests/capstone/component_registry_cap_010_v1.csv",
+  "sha256": "168296cce9c254193ed8b6933423af78499d2751a35c6c2003fb90cc2d46aaa8"
+ },
+ "components": {
+  "CAPSTONE_DEMO_ORCHESTRATOR_V1": {
+   "path": "scripts/run_capstone_faculty_demo.py",
+   "sha256": "d08c2c8f0cb9f2bb3ecd2cad56b7ec929be8935a0859437253cbcde8398fc776",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_DEMO_PREFLIGHT_V1": {
+   "path": "scripts/capstone_demo_preflight.py",
+   "sha256": "ad382e3e7ad98e323de0b0f7e1b82c7802420a6725d115b7ffd5f7bac670d219",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_DEMO_RUNBOOK_V1": {
+   "path": "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md",
+   "sha256": "4d4043268e0fe0f611b881d5537b5902b227df5428575f43a0512861a91274aa",
+   "status": "FROZEN_ENGINEERING_INTERFACE"
+  },
+  "CAPSTONE_DEMO_WORKSPACE_V1": {
+   "path": "scripts/capstone_demo_workspace.py",
+   "sha256": "65540adedcbf0dd11ae71302d61f4716ea4aa32f81abff6df0fcee31f98b4d69",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  },
+  "CAPSTONE_FULL_DEMO_BINDING_V1": {
+   "path": "configs/capstone/cap_010_full_demo_binding_v1.json",
+   "sha256": "3fd0774068753870e5df04cc988aa04dc03d837c7a2926b3c4809d65062a7d6b",
+   "status": "FROZEN_ENGINEERING_INTERFACE"
+  }
+ },
+ "criteria_count": 104,
+ "entry_audit_sha256": "123b209fed87a841415facd71c94217337b6fc774fbc50c168e55cbc9877977a",
+ "entry_sha": "be778d4ced186639155064e94516ff096751a81f",
+ "freeze_basis": "before CAP-010 canonical demo runs and gate-result execution",
+ "gate": "CAPG9",
+ "lock_id": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1",
+ "mutation_controls": 16,
+ "owner_phase": "CAP-010",
+ "prior_locks_verified": [
+  "cap001",
+  "cap002",
+  "cap003",
+  "cap004",
+  "cap005",
+  "cap006",
+  "cap007",
+  "cap008",
+  "capstone_ui_v1",
+  "capstone_ui_v1_1",
+  "fedprox_mu_v2",
+  "fl_init_v2",
+  "v2_fl_wearable_system"
+ ],
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "unbound_prospective_components": [
+  "CAPSTONE_DEMO_READINESS_V1"
+ ],
+ "upstream_frozen_identity": {
+  "api/product_app_v1_2.py": "409b0e28257a555ac0e300c7c3f2ea8ccd4e3743f84fd2feab2bae2279b724d0",
+  "api/product_app_v1_3.py": "d47d22a78d1dedeaa533c7339c87a03ed20a514471061e5235d94483c62cb015",
+  "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+  "artifacts/SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0",
+  "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30",
+  "artifacts/capstone/CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.lock.json": "a125a60edb7343004280d48bf1e75ab1163eec1a6da998f8a022789be1ee9c8e",
+  "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json": "3eb5ee97665b006088b15b021b484a5e5ac6f4174f58051d97aacfed0ae0be7d",
+  "artifacts/capstone/CAPSTONE_FEDERATION_PROTOCOL_V1.lock.json": "9bd126be587561358cfabdf4a3bf484552d558ef0bfa5aa6c136bb26a3229cb5",
+  "artifacts/capstone/CAPSTONE_FEDERATION_UX_PROTOCOL_V1.lock.json": "efda39c855c953a108be5b44eaa0543259a179be3df96b451a44e3d4ac814450",
+  "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.lock.json": "6cae0d1e71ba742b1a6dfafbc5f435466343637b1be841e124d31092464be8aa",
+  "artifacts/capstone/CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.lock.json": "b368254e568fe4636ee37bd71ea26c3843b83a1a04d8f85e5b5fb98989e1922d",
+  "artifacts/capstone/CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1.lock.json": "70e9488a2530bbb3593cc39200e947250bf7f83f8a5a3ba0b205b33387c80597",
+  "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "artifacts/capstone/CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1.lock.json": "de632e499e70d53f3f288538a0c8b06c1ab96e3dc653d28c4629dcd8cbfd7cd8",
+  "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json": "07537fdcff516cd0659f959e7b85f03178f6de70877abd41d448b2911789e0e2",
+  "capstone_persistence/federation_store.py": "fdcb0131b943b87add60c0218c44cab5349c78e1192468c6a1764b4555a72929",
+  "capstone_persistence/session_evidence_store.py": "cf752c033d72e98e218aa1d5ea12837fabb45e66d735a9df27b04e6040c9e133",
+  "product/federation/service.py": "5477da5f178ffe63a4a4fe88dafee1c993624d141e9cda13701a9b73c11b97f2",
+  "product/research/service.py": "bb910c26694074bbedd95dbdc1597c169ca17e70b90ae92d2f601d9648a5d129"
+ }
+}

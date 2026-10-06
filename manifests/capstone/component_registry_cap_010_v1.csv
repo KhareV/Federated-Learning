@@ -1,0 +1,8 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_FACULTY_DEMO_PROTOCOL_V1,ENGINEERING_PROTOCOL,CAP-010,FROZEN_ENGINEERING_PROTOCOL,,artifacts/capstone/CAPSTONE_FACULTY_DEMO_PROTOCOL_V1.lock.json,104 consolidated CAPG9 criteria.
+CAPSTONE_FULL_DEMO_BINDING_V1,DEMO_BINDING,CAP-010,FROZEN_ENGINEERING_INTERFACE,,configs/capstone/cap_010_full_demo_binding_v1.json,FULL_CAPSTONE_DEMO scenario coverage + hero path binding.
+CAPSTONE_DEMO_PREFLIGHT_V1,ENGINEERING_IMPLEMENTATION,CAP-010,FROZEN_ENGINEERING_IMPLEMENTATION,,scripts/capstone_demo_preflight.py,Identity/artifact checks only; no science.
+CAPSTONE_DEMO_WORKSPACE_V1,ENGINEERING_IMPLEMENTATION,CAP-010,FROZEN_ENGINEERING_IMPLEMENTATION,,scripts/capstone_demo_workspace.py,Outside-Git workspace with sentinel; safe reset.
+CAPSTONE_DEMO_ORCHESTRATOR_V1,ENGINEERING_IMPLEMENTATION,CAP-010,FROZEN_ENGINEERING_IMPLEMENTATION,,scripts/run_capstone_faculty_demo.py,Exactly three services; readiness; reverse-order shutdown.
+CAPSTONE_DEMO_RUNBOOK_V1,DOCUMENTATION,CAP-010,FROZEN_ENGINEERING_INTERFACE,,docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md,Short and full paths; claim-audited.
+CAPSTONE_DEMO_READINESS_V1,READINESS_CLAIM,CAP-010,PROSPECTIVE_UNTIL_CAPG9,,reports/capstone/cap_010/final_handoff.md,Offline one-laptop faculty demonstration readiness only.
