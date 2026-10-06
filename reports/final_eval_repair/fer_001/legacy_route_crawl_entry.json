@@ -1,0 +1,833 @@
+{
+ "raw_sha256": "a166a50ef7ca0576f78cf2bf7826a56b1d4d37c03b4b15c520512ceeb2f7438d",
+ "routes": [
+  {
+   "bad_requests": [
+    {
+     "status": 404,
+     "url": "/LastoriaBoldRegular.otf"
+    },
+    {
+     "status": 404,
+     "url": "/LastoriaBoldRegular.otf"
+    }
+   ],
+   "h1": [
+    "NHM Federated physiological monitoring research platform."
+   ],
+   "route": "/",
+   "stale_hits": [
+    "not yet enabled"
+   ],
+   "status": 200,
+   "title": "NHM \u2014 Federated Physiological Monitoring Research Platform"
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Find the break in pattern."
+   ],
+   "route": "/ai/anomaly",
+   "stale_hits": [
+    "anomaly score",
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Normal is individual."
+   ],
+   "route": "/ai/baseline",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Uncertainty belongs in the interface."
+   ],
+   "route": "/ai/confidence",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Show the reasoning."
+   ],
+   "route": "/ai/explainability",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Make uncertainty legible."
+   ],
+   "route": "/ai/insights",
+   "stale_hits": [
+    "anomaly score",
+    "deferred",
+    "personaliz"
+   ],
+   "status": 200,
+   "title": "Intelligence | NHM"
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Attention, with context."
+   ],
+   "route": "/alerts",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Product workspace"
+   ],
+   "route": "/app",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Overview | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "About this prototype"
+   ],
+   "route": "/app/about",
+   "stale_hits": [
+    "not yet enabled"
+   ],
+   "status": 200,
+   "title": "About | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Virtual wearable"
+   ],
+   "route": "/app/device",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Device | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Federated development"
+   ],
+   "route": "/app/federation",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Federation | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Logical local clients"
+   ],
+   "route": "/app/federation/clients",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Federation clients | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Live federation"
+   ],
+   "route": "/app/federation/live",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Live federation | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "The implemented privacy boundary"
+   ],
+   "route": "/app/federation/privacy",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Federation privacy boundary | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Rounds"
+   ],
+   "route": "/app/federation/rounds",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Federation rounds | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Research monitoring history"
+   ],
+   "route": "/app/history",
+   "stale_hits": [],
+   "status": 200,
+   "title": "History | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Model registry"
+   ],
+   "route": "/app/models",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Models | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Live monitoring"
+   ],
+   "route": "/app/monitoring",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Monitor | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "FL research evidence"
+   ],
+   "route": "/app/research/fl",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Research FL evidence | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "ML research evidence"
+   ],
+   "route": "/app/research/ml",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Research ML evidence | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "System"
+   ],
+   "route": "/app/system",
+   "stale_hits": [],
+   "status": 200,
+   "title": "System | NHM"
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Aggregate without centralizing."
+   ],
+   "route": "/fl/aggregation",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Every device keeps its context."
+   ],
+   "route": "/fl/clients",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "A shared intelligence layer."
+   ],
+   "route": "/fl/global-model",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Federated learning is intentionally deferred."
+   ],
+   "route": "/fl/overview",
+   "stale_hits": [
+    "deferred",
+    "intentionally deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Personalization at the edge."
+   ],
+   "route": "/fl/personal-models",
+   "stale_hits": [
+    "deferred",
+    "personaliz"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Privacy is architecture."
+   ],
+   "route": "/fl/privacy",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "The model evolves in rounds."
+   ],
+   "route": "/fl/rounds",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Live monitoring"
+   ],
+   "route": "/monitor",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Monitor | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Monitoring, as the API decided it."
+   ],
+   "route": "/monitoring",
+   "stale_hits": [],
+   "status": 200,
+   "title": "NHM Research Dashboard"
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    },
+    {
+     "status": 500,
+     "url": "/api/monitoring/sessions"
+    },
+    {
+     "status": 500,
+     "url": "/api/system/model"
+    }
+   ],
+   "h1": [
+    "Research monitoring, honestly."
+   ],
+   "route": "/overview",
+   "stale_hits": [
+    "deferred",
+    "request failed with status 500"
+   ],
+   "status": 200,
+   "title": "Centralized ECG Monitor | NHM"
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "The baseline is personal."
+   ],
+   "route": "/patients",
+   "stale_hits": [
+    "baseline is personal",
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Make the signal legible."
+   ],
+   "route": "/reports",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Know what each layer contributes."
+   ],
+   "route": "/research/ablation",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Research analytics are evidence-backed only."
+   ],
+   "route": "/research/analytics",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Compare the intelligence."
+   ],
+   "route": "/research/comparison",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Turn hypotheses into runs."
+   ],
+   "route": "/research/experiments",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Evidence, not decoration."
+   ],
+   "route": "/research/results",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Test the signal under pressure."
+   ],
+   "route": "/research/robustness",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Product workspace"
+   ],
+   "route": "/sign-in",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Overview | NHM"
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Signal dashboard moved to central monitoring."
+   ],
+   "route": "/signals/dashboard",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Read the electrical rhythm."
+   ],
+   "route": "/signals/ecg",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": "ECG Analysis | NHM"
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Read the optical pulse."
+   ],
+   "route": "/signals/ppg",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Trust the measurement."
+   ],
+   "route": "/signals/quality",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Oxygenation, continuously."
+   ],
+   "route": "/signals/spo2",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Data should have a visible boundary."
+   ],
+   "route": "/system/data",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "The hardware is part of the model."
+   ],
+   "route": "/system/devices",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    },
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Know whether the system is listening."
+   ],
+   "route": "/system/health",
+   "stale_hits": [
+    "deferred",
+    "request failed with status 500"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Keep the system's voice close."
+   ],
+   "route": "/system/notifications",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    }
+   ],
+   "h1": [
+    "Tune the environment."
+   ],
+   "route": "/system/settings",
+   "stale_hits": [
+    "deferred"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 500,
+     "url": "/api/system/health"
+    },
+    {
+     "status": 500,
+     "url": "/api/monitoring/sessions"
+    }
+   ],
+   "h1": [
+    "Patterns emerge over time."
+   ],
+   "route": "/trends",
+   "stale_hits": [
+    "deferred",
+    "request failed with status 500"
+   ],
+   "status": 200,
+   "title": ""
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 404,
+     "url": "/app/history/SESS-0223dd519ae94ee38539e36fbd2e13f8"
+    }
+   ],
+   "h1": [
+    "Session evidence"
+   ],
+   "route": "/app/history/SESS-0223dd519ae94ee38539e36fbd2e13f8",
+   "stale_hits": [],
+   "status": 404,
+   "title": "Session evidence | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Live federation"
+   ],
+   "route": "/app/federation/live?run=FEDRUN-B2FA106D1F0F",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Live federation | NHM"
+  },
+  {
+   "bad_requests": [],
+   "h1": [
+    "Rounds"
+   ],
+   "route": "/app/federation/rounds?run=FEDRUN-B2FA106D1F0F",
+   "stale_hits": [],
+   "status": 200,
+   "title": "Federation rounds | NHM"
+  },
+  {
+   "bad_requests": [
+    {
+     "status": 404,
+     "url": "/this-route-does-not-exist"
+    }
+   ],
+   "h1": [],
+   "route": "/this-route-does-not-exist",
+   "stale_hits": [],
+   "status": 404,
+   "title": ""
+  }
+ ],
+ "source": "FINAL_EVALUATOR_AUDIT_V1 real-browser crawl of this exact entry SHA (raw file not committed; sha256 recorded)"
+}

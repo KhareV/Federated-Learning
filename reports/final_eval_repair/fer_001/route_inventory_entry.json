@@ -1,0 +1,272 @@
+{
+ "dynamic_count": 2,
+ "entry_sha": "5d40752442fd1a05dd2459dd216aff51fe4c022c",
+ "route_count": 53,
+ "routes": [
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/+page.svelte",
+   "pattern": "/"
+  },
+  {
+   "dynamic": true,
+   "file": "frontend/src/routes/[...path]/+page.svelte",
+   "pattern": "/[...path]"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/ai/anomaly/+page.svelte",
+   "pattern": "/ai/anomaly"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/ai/baseline/+page.svelte",
+   "pattern": "/ai/baseline"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/ai/confidence/+page.svelte",
+   "pattern": "/ai/confidence"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/ai/explainability/+page.svelte",
+   "pattern": "/ai/explainability"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/ai/insights/+page.svelte",
+   "pattern": "/ai/insights"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/alerts/+page.svelte",
+   "pattern": "/alerts"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/+page.svelte",
+   "pattern": "/app"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/about/+page.svelte",
+   "pattern": "/app/about"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/device/+page.svelte",
+   "pattern": "/app/device"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/federation/+page.svelte",
+   "pattern": "/app/federation"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/federation/clients/+page.svelte",
+   "pattern": "/app/federation/clients"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/federation/live/+page.svelte",
+   "pattern": "/app/federation/live"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/federation/privacy/+page.svelte",
+   "pattern": "/app/federation/privacy"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/federation/rounds/+page.svelte",
+   "pattern": "/app/federation/rounds"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/history/+page.svelte",
+   "pattern": "/app/history"
+  },
+  {
+   "dynamic": true,
+   "file": "frontend/src/routes/app/history/[session_id]/+page.svelte",
+   "pattern": "/app/history/[session_id]"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/models/+page.svelte",
+   "pattern": "/app/models"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/monitoring/+page.svelte",
+   "pattern": "/app/monitoring"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/research/fl/+page.svelte",
+   "pattern": "/app/research/fl"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/research/ml/+page.svelte",
+   "pattern": "/app/research/ml"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/app/system/+page.svelte",
+   "pattern": "/app/system"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/fl/aggregation/+page.svelte",
+   "pattern": "/fl/aggregation"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/fl/clients/+page.svelte",
+   "pattern": "/fl/clients"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/fl/global-model/+page.svelte",
+   "pattern": "/fl/global-model"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/fl/overview/+page.svelte",
+   "pattern": "/fl/overview"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/fl/personal-models/+page.svelte",
+   "pattern": "/fl/personal-models"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/fl/privacy/+page.svelte",
+   "pattern": "/fl/privacy"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/fl/rounds/+page.svelte",
+   "pattern": "/fl/rounds"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/monitor/+page.svelte",
+   "pattern": "/monitor"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/monitoring/+page.svelte",
+   "pattern": "/monitoring"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/overview/+page.svelte",
+   "pattern": "/overview"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/patients/+page.svelte",
+   "pattern": "/patients"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/reports/+page.svelte",
+   "pattern": "/reports"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/research/ablation/+page.svelte",
+   "pattern": "/research/ablation"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/research/analytics/+page.svelte",
+   "pattern": "/research/analytics"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/research/comparison/+page.svelte",
+   "pattern": "/research/comparison"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/research/experiments/+page.svelte",
+   "pattern": "/research/experiments"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/research/results/+page.svelte",
+   "pattern": "/research/results"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/research/robustness/+page.svelte",
+   "pattern": "/research/robustness"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/sign-in/+page.svelte",
+   "pattern": "/sign-in"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/signals/dashboard/+page.svelte",
+   "pattern": "/signals/dashboard"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/signals/ecg/+page.svelte",
+   "pattern": "/signals/ecg"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/signals/ppg/+page.svelte",
+   "pattern": "/signals/ppg"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/signals/quality/+page.svelte",
+   "pattern": "/signals/quality"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/signals/spo2/+page.svelte",
+   "pattern": "/signals/spo2"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/system/data/+page.svelte",
+   "pattern": "/system/data"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/system/devices/+page.svelte",
+   "pattern": "/system/devices"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/system/health/+page.svelte",
+   "pattern": "/system/health"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/system/notifications/+page.svelte",
+   "pattern": "/system/notifications"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/system/settings/+page.svelte",
+   "pattern": "/system/settings"
+  },
+  {
+   "dynamic": false,
+   "file": "frontend/src/routes/trends/+page.svelte",
+   "pattern": "/trends"
+  }
+ ]
+}

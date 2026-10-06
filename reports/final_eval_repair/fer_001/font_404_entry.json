@@ -1,0 +1,18 @@
+{
+ "initiator": "frontend/src/lib/components/spell/signature/signature.svelte fetch(); used by <Signature> twice on the landing page (decorative handwriting animation: 'NHM', 'Context is everything.')",
+ "landing_usages": [
+  {
+   "file": "frontend/src/routes/+page.svelte",
+   "line": 110,
+   "text": "<Signature once={false} inView class=\"dark:invert-100\" text=\"NHM\" fontSize={16} color=\"#1D1D1F\" />"
+  },
+  {
+   "file": "frontend/src/routes/+page.svelte",
+   "line": 240,
+   "text": "<Signature once={false} inView text=\"Context is everything.\" fontSize={26} color=\"#64748b\" />"
+  }
+ ],
+ "missing_asset": "/LastoriaBoldRegular.otf",
+ "network_observation": "audit crawl: two 404 requests on /",
+ "present_in_static_or_src": false
+}

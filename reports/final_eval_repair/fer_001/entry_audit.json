@@ -1,0 +1,22 @@
+{
+ "capstone_lock_count": 18,
+ "capstone_locks_verified": true,
+ "ci_queried": false,
+ "ci_triggered": false,
+ "clerk_connected_ok": true,
+ "entry_is_expected": true,
+ "entry_sha": "5d40752442fd1a05dd2459dd216aff51fe4c022c",
+ "gate": "FERG0",
+ "origin_main_sha": "5d40752442fd1a05dd2459dd216aff51fe4c022c",
+ "phase": "FINAL-EVAL-REPAIR-001",
+ "tags": {
+  "capstone-clerk-connected-v1": "4cb20ec1093f3a8697827abfffc1e5c1fd787055",
+  "capstone-release-v1": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+  "user-bound-fl-lite-v1": "cf18cba4d7891c514553a1702e227f28dbe26f7c"
+ },
+ "tags_ok": true,
+ "ufl_acceptance_target_reachable": true,
+ "ufl_tasks_gates_and_locks_ok": true,
+ "ui_v1_through_v1_4_verified": true,
+ "working_tree_clean_before_entry": true
+}

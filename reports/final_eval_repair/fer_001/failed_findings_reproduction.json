@@ -1,0 +1,81 @@
+{
+ "all_reproduced": true,
+ "entry_sha": "5d40752442fd1a05dd2459dd216aff51fe4c022c",
+ "findings": {
+  "F-01": [
+   {
+    "file": "frontend/src/routes/app/about/+page.svelte",
+    "line": 12,
+    "text": "<li>Federated-learning client sites are synthetic research partitions, not institutions. The federation product runtime is not yet enabled.</li>"
+   }
+  ],
+  "F-02": [
+   {
+    "file": "frontend/src/routes/+page.svelte",
+    "line": 43,
+    "text": "'FEDERATION RUNTIME / NOT YET ENABLED'"
+   },
+   {
+    "file": "frontend/src/routes/+page.svelte",
+    "line": 394,
+    "text": "<p>Federated learning lets participating clients contribute model updates while raw recordings stay at the client. In this prototype the clients are synthetic research partitions - not hospitals or institutions - and the federation product "
+   }
+  ],
+  "F-03": {
+   "examples": {
+    "/ai/insights": [
+     "anomaly score",
+     "deferred",
+     "personaliz"
+    ],
+    "/fl/overview": [
+     "deferred",
+     "intentionally deferred"
+    ],
+    "/fl/personal-models": [
+     "deferred",
+     "personaliz"
+    ],
+    "/overview": [
+     "deferred",
+     "request failed with status 500"
+    ]
+   },
+   "legacy_namespaces_rendering_stale_content": [
+    "",
+    "ai",
+    "alerts",
+    "fl",
+    "overview",
+    "patients",
+    "reports",
+    "research",
+    "signals",
+    "system",
+    "trends"
+   ],
+   "routable_page_files": 53
+  },
+  "F-04": [
+   {
+    "file": "docs/capstone/CLERK_CONNECTED_RUNBOOK_V1.md",
+    "line": 33,
+    "text": "4. Device, monitoring, history, federation, models and research pages behave exactly as in the offline mode. The released monitoring model is still the common MODEL_V2_FINAL. No personal model is trained, and a user's session history does n"
+   }
+  ],
+  "F-05": {
+   "finding": "no frozen guard evaluates current evaluator-facing feature-status copy; UFLG2 65/65 PASS with F-01/F-02 present"
+  },
+  "F-06": [
+   {
+    "file": "frontend/src/lib/components/spell/signature/signature.svelte",
+    "line": 108,
+    "text": "let response = await fetch(\"/LastoriaBoldRegular.otf\");"
+   }
+  ],
+  "F-07": {
+   "adapter": "frontend/svelte.config.js adapter-static fallback=index.html, handleUnseenRoutes=ignore; launcher serves frontend with `npm run preview` (vite preview)",
+   "observation_source": "audit crawl: /app/history/<id> document status 404 with SPA content rendered"
+  }
+ }
+}
