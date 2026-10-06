@@ -1,0 +1,16 @@
+{
+ "amendment_id": "CLERK_LIVE_001_PROTOCOL_V1_AMENDMENT_1",
+ "change": "Additive-prefix allow-list in scripts/clerk_live_001_protected_audit.py only; criteria text, evaluator and canonical runs unchanged.",
+ "defect": "The first final protected-artifact audit flagged three additive CLERK-LIVE-001 scripts (run_capstone_clerk_connected_e2e.py, run_capstone_clerk_connected_clean_clone.py, verify_clerk_connected.py) as outside the additive namespace because the allow-list named only the launcher file; found before the recorded CLERKG0 evaluation.",
+ "files": {
+  "scripts/clerk_live_001_protected_audit.py": {
+   "new_sha256": "f1363ef749287e1065e1c9013fe01bb11eb77b52695254f7e78fd028399dc3ec",
+   "old_sha256": "809cf60e9743b23e0a2c98e36497ad910c64a90602d33a9076eecbc7d850e319"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CLERK-LIVE-001",
+ "previous_amendment": null,
+ "result_evidence_committed_with_amendment": false,
+ "scope": "AUDIT_ALLOW_LIST_ONLY"
+}
