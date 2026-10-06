@@ -64,7 +64,7 @@ def test_capstone_gate_registry_is_exactly_the_current_state() -> None:
     actual = {r["gate_id"]: r["status"] for r in _rows("gate")}
     tasks = {r["task_id"]: r["status"] for r in _rows("task")}
     expected = dict(EXPECTED_GATES)
-    if tasks["CAP-010"] != "NOT_STARTED":  # CAP-010 governed transition: CAPG9 appears prospectively
+    if tasks["CAP-010"] != "NOT_STARTED":  # governed CAP-010 transition: CAPG9 appears
         expected["CAPG9"] = "PASS" if tasks["CAP-010"] == "PASS" else "NOT_STARTED"
     assert actual == expected
 
@@ -86,8 +86,10 @@ def test_task_prerequisite_chain_is_linear_and_later_phases_have_no_evidence() -
         assert tasks["CAP-010"]["evidence_path"] == "reports/capstone/cap_010/final_handoff.md"
         assert tasks["CAP-010"]["implemented_at_commit"]
     else:
-        assert tasks["CAP-010"]["evidence_path"] == "" and tasks["CAP-010"]["implemented_at_commit"] == ""
-    assert tasks["CAP-011"]["evidence_path"] == "" and tasks["CAP-011"]["implemented_at_commit"] == ""
+        assert tasks["CAP-010"]["evidence_path"] == ""
+        assert tasks["CAP-010"]["implemented_at_commit"] == ""
+    assert tasks["CAP-011"]["evidence_path"] == ""
+    assert tasks["CAP-011"]["implemented_at_commit"] == ""
 
 
 def test_freeze_lock_binds_every_listed_file_byte_for_byte() -> None:

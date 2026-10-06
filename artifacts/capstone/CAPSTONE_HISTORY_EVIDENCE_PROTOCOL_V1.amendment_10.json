@@ -1,0 +1,15 @@
+{
+  "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_10",
+  "change": "Re-wrap those three statements only; no assertion changes.",
+  "defect": "Amendment 9's lifecycle guard introduced three lines longer than the repository's 100-column ruff limit, so `ruff check .` failed.",
+  "files": {
+    "tests/test_capstone_lifecycle.py": {
+      "new_sha256": "87f2977e21e8a70731ef67f465b51bd3de5a0517e1d6cffa9585daa75e0c7264",
+      "old_sha256": "fb8e31b21606e57d8e70373bf1abd3bbc00d1cc18888608c3206e04b8858d740"
+    }
+  },
+  "made_after_method_freeze": true,
+  "owner_phase": "CAP-009 (historical guard governed for CAP-010)",
+  "previous_amendment": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_9",
+  "result_evidence_committed_with_amendment": false
+}
