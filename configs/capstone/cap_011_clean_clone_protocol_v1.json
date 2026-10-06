@@ -1,0 +1,235 @@
+{
+ "clone_a_extra": [
+  "restart"
+ ],
+ "commands": [
+  {
+   "argv": null,
+   "display": "git clone <REMOTE_URL> nhm-capstone",
+   "id": "clone"
+  },
+  {
+   "argv": null,
+   "display": "git -C nhm-capstone checkout --detach <RELEASE_TARGET_SHA>",
+   "id": "checkout"
+  },
+  {
+   "argv": [
+    "python3.11",
+    "-m",
+    "venv",
+    ".venv"
+   ],
+   "display": "python3.11 -m venv .venv",
+   "id": "venv"
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pip",
+    "install",
+    "-r",
+    "requirements-dev.lock"
+   ],
+   "display": ".venv/bin/python -m pip install -r requirements-dev.lock",
+   "id": "pip_dev"
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pip",
+    "install",
+    "-r",
+    "requirements-capstone-auth.lock"
+   ],
+   "display": ".venv/bin/python -m pip install -r requirements-capstone-auth.lock",
+   "id": "pip_auth"
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pip",
+    "check"
+   ],
+   "display": ".venv/bin/python -m pip check",
+   "id": "pip_check"
+  },
+  {
+   "argv": [
+    "npm",
+    "ci",
+    "--prefix",
+    "frontend/clerk-sdk"
+   ],
+   "display": "npm ci --prefix frontend/clerk-sdk",
+   "id": "npm_clerk"
+  },
+  {
+   "argv": [
+    "npm",
+    "ci",
+    "--prefix",
+    "frontend"
+   ],
+   "display": "npm ci --prefix frontend",
+   "id": "npm_app"
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "scripts.verify_capstone_release_v1"
+   ],
+   "display": ".venv/bin/python -m scripts.verify_capstone_release_v1",
+   "id": "verifier"
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_capstone_release_lib.py",
+    "tests/test_capstone_release_harness.py",
+    "tests/test_capstone_release_guide.py",
+    "tests/test_capstone_release_target.py",
+    "-q",
+    "-rA",
+    "-p",
+    "no:cacheprovider"
+   ],
+   "display": ".venv/bin/python -m pytest tests/test_capstone_release_lib.py tests/test_capstone_release_harness.py tests/test_capstone_release_guide.py tests/test_capstone_release_target.py -q -rA -p no:cacheprovider",
+   "id": "targeted"
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "tests",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--deselect",
+    "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers"
+   ],
+   "display": ".venv/bin/python -m pytest tests -q -p no:cacheprovider --deselect tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers",
+   "id": "regression"
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+   ],
+   "display": ".venv/bin/python -m pytest tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers -q -p no:cacheprovider",
+   "id": "cap003_isolated"
+  },
+  {
+   "argv": [
+    "npm",
+    "test",
+    "--prefix",
+    "frontend"
+   ],
+   "display": "npm test --prefix frontend",
+   "id": "npm_test"
+  },
+  {
+   "argv": [
+    "npm",
+    "run",
+    "check",
+    "--prefix",
+    "frontend"
+   ],
+   "display": "npm run check --prefix frontend",
+   "id": "npm_check"
+  },
+  {
+   "argv": [
+    "npm",
+    "run",
+    "build",
+    "--prefix",
+    "frontend"
+   ],
+   "display": "npm run build --prefix frontend",
+   "id": "npm_build"
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "scripts.run_capstone_faculty_demo",
+    "--preflight-only",
+    "--acknowledge-demo-auth",
+    "--build"
+   ],
+   "display": ".venv/bin/python -m scripts.run_capstone_faculty_demo --preflight-only --acknowledge-demo-auth --build",
+   "id": "preflight"
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "scripts.run_capstone_full_demo_e2e",
+    "run",
+    "1",
+    "--restart"
+   ],
+   "display": ".venv/bin/python -m scripts.run_capstone_full_demo_e2e run 1 --restart",
+   "id": "demo"
+  },
+  {
+   "argv": null,
+   "display": ".venv/bin/python -m scripts.run_capstone_faculty_demo --acknowledge-demo-auth --build --prewarm-federation --workspace <WORKSPACE_OUTSIDE_REPO>",
+   "id": "launch"
+  }
+ ],
+ "contamination_rule": "A clone that received any manually copied repository/source/data file is CONTAMINATED_DISCARDED and can never become canonical evidence. Never clean and reuse it.",
+ "environment": {
+  "PYTHONPATH": "src:. (set by the harness for in-clone commands only; none inherited)",
+  "browser": "real headless Google Chrome via CDP (same automation class as CAP-010)",
+  "home": "isolated temporary HOME",
+  "node": "system Node/npm; fresh npm cache in the isolated HOME",
+  "python": "newly created Python 3.11 venv at <clone>/.venv (git-ignored) created by the run; never the development .venv",
+  "tmpdir": "isolated TMPDIR outside the clone"
+ },
+ "evidence_files_per_clone": [
+  "environment",
+  "install",
+  "tests",
+  "frontend",
+  "demo",
+  "git_audit"
+ ],
+ "failed_attempt_rule": "every failed canonical attempt is preserved as attempt_N_FAIL_*.json with target SHA, stage, failure code, contamination flag and discarded flag",
+ "no_rescue_rule": "On any failure the harness stops; it has no copy-in or rescue-install path. A release-layer defect requires a new RELEASE_TARGET_SHA and a completely new clone.",
+ "only_source_of_repository_bytes": "the remote Git repository at the exact RELEASE_TARGET_SHA (full 40-hex SHA; branch-name-only acceptance is forbidden)",
+ "owner_task": "CAP-011",
+ "pre_install_audit": "git status --porcelain and --ignored must be empty immediately after checkout; no .venv, node_modules, build output, .env, SQLite, candidate or raw-data path may exist",
+ "prohibited": [
+  "cp from the original checkout",
+  "rsync from the original checkout",
+  "manual file copying",
+  "copying .venv",
+  "copying node_modules",
+  "copying frontend build output",
+  "copying SQLite files",
+  "copying candidate artifacts",
+  "copying raw datasets",
+  "copying hidden config (.env)",
+  "copying generated evidence needed to make tests pass",
+  "rescue-installing a missing dependency"
+ ],
+ "protocol_id": "CAPSTONE_CLEAN_CLONE_PROTOCOL_V1",
+ "result_import": "a clone result JSON may be copied back as evidence only after verify_clone_result confirms release_target_sha == RELEASE_TARGET_SHA; inputs are never copied in",
+ "status": "FROZEN_PRE_RELEASE_PROTOCOL"
+}

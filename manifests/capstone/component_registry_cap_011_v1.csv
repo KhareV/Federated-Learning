@@ -1,0 +1,8 @@
+component_id,component_type,owner_task,status,predecessor_id,lock_path,notes
+CAPSTONE_RELEASE_PROTOCOL_V1,ENGINEERING_PROTOCOL,CAP-011,FROZEN_PRE_RELEASE_PROTOCOL,,configs/capstone/cap_011_release_protocol_v1.json,"136 CAPG10 criteria, 20 mutation controls; lock binds the whole release layer."
+CAPSTONE_RELEASE_POLICY_V1,RELEASE_POLICY,CAP-011,FROZEN_PRE_RELEASE_POLICY,,configs/capstone/cap_011_release_policy_v1.json,"23 hard blockers; manual_override_allowed=false; claim, limitations, test gating."
+CAPSTONE_CLEAN_CLONE_PROTOCOL_V1,CLEAN_CLONE_PROTOCOL,CAP-011,FROZEN_PRE_RELEASE_PROTOCOL,,configs/capstone/cap_011_clean_clone_protocol_v1.json,"Remote-only source, prohibitions, ordered command set."
+CAPSTONE_RELEASE_MANIFEST_V1,RELEASE_MANIFEST,CAP-011,FROZEN_PRE_RELEASE_MANIFEST,,artifacts/capstone/CAPSTONE_RELEASE_MANIFEST_V1.json,Key artifact and dependency-lock hashes; no model bytes.
+CAPSTONE_RELEASE_VERIFIER_V1,RELEASE_VERIFIER,CAP-011,FROZEN_ENGINEERING_IMPLEMENTATION,,scripts/verify_capstone_release_v1.py,No training/inference/FL/science; library in capstone_release_lib.py.
+CAPSTONE_RELEASE_GUIDE_V1,DOCUMENTATION,CAP-011,FROZEN_PRE_RELEASE_GUIDE,,docs/capstone/CAPSTONE_RELEASE_GUIDE_V1.md,Commands equal the tested clean-clone commands.
+CAPSTONE_RELEASE_V1,RELEASE,CAP-011,PROSPECTIVE_UNTIL_CAPG10,,reports/capstone/cap_011/release_decision.json,The release is the exact RELEASE_TARGET_SHA; decision recorded as evidence only.

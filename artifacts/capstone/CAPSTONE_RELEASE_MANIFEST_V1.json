@@ -1,0 +1,147 @@
+{
+ "candidate": {
+  "governance": "ACCEPTED_TO_SANDBOX",
+  "id_in_demo_workspace": "CAPSTONE_FL_CANDIDATE_0001",
+  "production_deployed": false,
+  "sandbox": "IN_SANDBOX"
+ },
+ "ci": "not queried, not triggered",
+ "clean_clone_claim": "CLEAN-CLONE SOFTWARE / ARTIFACT / PRODUCT DEMO REPRODUCIBILITY; it is NOT full raw-data scientific re-execution from an empty machine.",
+ "components": [
+  "CAPSTONE_RELEASE_PROTOCOL_V1",
+  "CAPSTONE_RELEASE_POLICY_V1",
+  "CAPSTONE_RELEASE_MANIFEST_V1",
+  "CAPSTONE_RELEASE_VERIFIER_V1",
+  "CAPSTONE_CLEAN_CLONE_PROTOCOL_V1",
+  "CAPSTONE_RELEASE_GUIDE_V1",
+  "CAPSTONE_RELEASE_V1"
+ ],
+ "decision_separation": {
+  "CAPSTONE_RELEASE_V1": "answers a third question: is the finished capstone software/demo package clean-clone reproducible and faculty-ready",
+  "MODEL_V2_NOT_PROMOTED_RELEASE_CI": "preserved",
+  "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED": "preserved"
+ },
+ "dependency_locks": {
+  "frontend/clerk-sdk/package-lock.json": "f948b4759a819f768885da5129a078513ac5942fa778c37a8c45691081bf8f5e",
+  "frontend/clerk-sdk/package.json": "a31971f9db734cdc439ae79a43da28d09711daa21440f314acdd97e7423fb2bd",
+  "frontend/package-lock.json": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae",
+  "frontend/package.json": "cb5318e33c5aea08eaa722fb4eafc3971e33e899a06869f3774ce75a866ae8e9",
+  "pyproject.toml": "af83432eea745b52acc268ce1040edefd83cc8edc6a94afd9f7e8232aaecab34",
+  "requirements-capstone-auth.lock": "7c75bc14e595af8706f6de3605c7d69ffe5200e43859090d84d0b0b7c20da9e3",
+  "requirements-dev.lock": "0d4a0561bfadf89157b9f6f6dfbfa87e885aca2815a45a442e04a98d662f2a0e"
+ },
+ "hardware": {
+  "future_physical_hardware": "VERIFICATION_REQUIRED",
+  "hardware_mode": "SIMULATED_ONLY",
+  "physical_hardware_available": false
+ },
+ "installation_claim": "Initial dependency installation may require Internet access (public Python and npm registries); no air-gapped installation and no vendored dependencies are claimed.",
+ "key_artifacts": {
+  "api/product_app_v1_3.py": "d47d22a78d1dedeaa533c7339c87a03ed20a514471061e5235d94483c62cb015",
+  "artifacts/CAL_V2.json": "349a886acb7fcb1362da5b13f4eea568b0a36e10a07b7a8c00beabcb86282fe7",
+  "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+  "artifacts/FEDPROX_MU_V2.lock.json": "a95e44cdef9295a68c217138a02eada69eda86f701eb4c87dd0f67cd7c7ed023",
+  "artifacts/MODEL_V2_COMPLETE_REPRO_V1.lock.json": "79416f3b2aabd7baf8a7ec1961f3ab538e3b79a06899528f58cdf32a2a51157f",
+  "artifacts/ROLLBACK_RUNTIME_BINDING_V1.lock.json": "8f9826b4cc9344889131ecdfe32a3be9fb56427619a480f4667de94257ec7668",
+  "artifacts/SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0",
+  "artifacts/SYSTEM_V2_RELEASE_DECISION_V1.lock.json": "ff0103e0baf53825c5d242e68a6c0f9bfe295b3dd7e0294ead23502e88601e15",
+  "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30",
+  "artifacts/capstone/CAPSTONE_FACULTY_DEMO_PROTOCOL_V1.amendment_1.json": "9cf2e63a9e0b1b406a669b97beb29fce05732f9fbc1d22fcb654a76c6e34c8b7",
+  "artifacts/capstone/CAPSTONE_FACULTY_DEMO_PROTOCOL_V1.lock.json": "995ce7f1d92a671049663559a67d87665808d06a68d52dea76c1f5176a63e50b",
+  "artifacts/capstone/CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1.json": "2c3d2d153515563122bdc7e019ae233bc1e4a274d4f1846b718baf82776c983f",
+  "artifacts/capstone/CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1.lock.json": "de632e499e70d53f3f288538a0c8b06c1ab96e3dc653d28c4629dcd8cbfd7cd8",
+  "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json": "07537fdcff516cd0659f959e7b85f03178f6de70877abd41d448b2911789e0e2",
+  "artifacts/deployment/GATEWAY_ARTIFACT_V2.manifest.json": "7de9190366ba54b454ae3edbc4e66ce16584431050f0d22a96e3cab9c3218edd",
+  "artifacts/deployment/MODEL_V2_GATEWAY_FP32.ts": "25ec0eed4dc9e2b4603229243d538ee58d33bcd8f8fe88efac681e94eb06b11f",
+  "checkpoints/MODEL_V2_FINAL.manifest.json": "8924e5e8e84f5e02951c4a72a8692d1e5459aabf922efb166c1b80a910669253",
+  "checkpoints/MODEL_V2_FINAL.pt": "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b",
+  "configs/capstone/cap_010_full_demo_binding_v1.json": "3fd0774068753870e5df04cc988aa04dc03d837c7a2926b3c4809d65062a7d6b",
+  "configs/model_v2/fl_init_v2.yaml": "0efaad5da0c5d8eccb19d9d357eec2b3e9eb8e5e58cd1f152cb86b4f60f51ba8",
+  "configs/model_v2/wearable_sim_fl_secagg_compat_v1.yaml": "214e3baf39f734f9b051e4cf7ef761b8cf2e333ea39b117db12ca404679c6c24",
+  "docs/capstone/FACULTY_DEMO_RUNBOOK_V1.md": "4d4043268e0fe0f611b881d5537b5902b227df5428575f43a0512861a91274aa",
+  "scripts/capstone_demo_preflight.py": "bdf5426d8b4d652274dae5f786d41e815343513f7ed0845511c987cbe8979b2c",
+  "scripts/capstone_demo_workspace.py": "65540adedcbf0dd11ae71302d61f4716ea4aa32f81abff6df0fcee31f98b4d69",
+  "scripts/run_capstone_faculty_demo.py": "d08c2c8f0cb9f2bb3ecd2cad56b7ec929be8935a0859437253cbcde8398fc776",
+  "scripts/run_capstone_full_demo_e2e.py": "df829c91802f0b1db8626af08c24b8929ae40a7ab7c87c3afdc789fb7e1b0ce7"
+ },
+ "launch_command": ".venv/bin/python -m scripts.run_capstone_faculty_demo --acknowledge-demo-auth --build --prewarm-federation --workspace <WORKSPACE_OUTSIDE_REPO>",
+ "limitations": [
+  "non-diagnostic research prototype",
+  "physical wearable absent",
+  "WEARABLE_V1 validation absent",
+  "simulation-only device path",
+  "accelerated demo timing",
+  "MODEL_V2 historical release-seed promotion CI crossed zero",
+  "only six eligible INTERNAL_TEST groups",
+  "CAL_V2 source-domain only",
+  "V2-010 / INCART second-look caveats",
+  "QUALITY_V1 stuck-nonzero limitation",
+  "SecAgg narrow protected-aggregation-interface claim",
+  "no differential privacy",
+  "logical one-laptop FL clients",
+  "candidate sandbox has no inference runtime",
+  "candidate not deployed",
+  "Clerk real-account WebSocket path not verified",
+  "one-active-FL-run is not distributed locking",
+  "CAP-003 inherited timing race",
+  "npm dependency advisories already disclosed",
+  "installation may need public package-registry network access",
+  "clean release is not raw-data scientific re-execution"
+ ],
+ "manifest_id": "CAPSTONE_RELEASE_MANIFEST_V1",
+ "manual_override_allowed": false,
+ "no_security_overclaim": "not security audited, not penetration tested, not HIPAA compliant, not privacy certified, not production hardened",
+ "raw_data_boundary": "No raw biomedical dataset download is required; MIT-BIH, INCART, NSTDB and BIDMC belong to historical scientific reproducibility and are never copied into a clean clone.",
+ "release_claim": "CAPSTONE_RELEASE_V1 is a clean-clone reproducible, one-laptop research-software/faculty-demonstration release of the NHM capstone product using simulated device input, released MODEL_V2_FINAL monitoring, genuine engineering federation, persistent history, and frozen research-evidence views.",
+ "release_claim_excludes": [
+  "physical wearable validation",
+  "clinical use",
+  "medical-device status",
+  "production deployment",
+  "security certification",
+  "hospital deployment",
+  "differential privacy",
+  "anonymous federation",
+  "clean-room raw-dataset scientific reproduction"
+ ],
+ "release_id": "CAPSTONE_RELEASE_V1",
+ "release_scope": "ONE-LAPTOP CAPSTONE SOFTWARE / FACULTY-DEMO RELEASE (not the historical RELEASE_V1 / T036 / G22 / F15 lineage)",
+ "release_vehicle": "the exact Git repository state at RELEASE_TARGET_SHA (recorded in the release decision evidence; this manifest cannot contain its own commit SHA)",
+ "released_monitoring": {
+  "alert_policy": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+  "api_schema": "API_SCHEMA_V1",
+  "binding": "DEFAULT_RUNTIME_BINDING_V2",
+  "calibration": "CAL_V2",
+  "candidate_inference": false,
+  "candidate_used_for_monitoring": false,
+  "default_model": "MODEL_V2_FINAL",
+  "gateway": "GATEWAY_ARTIFACT_V2",
+  "software_system": "SOFTWARE_SYSTEM_V2"
+ },
+ "required_environment_family": {
+  "browser": "Google Chrome (browser verification only)",
+  "node_npm": "Node.js with npm; tested versions recorded in the clean-clone environment inventory",
+  "python": "3.11.x (pyproject: >=3.11,<3.12)",
+  "tested_platform": "recorded per clone in the environment inventory (expected: macOS/Darwin arm64); no other OS is claimed"
+ },
+ "runtime_offline_claim": "After installation the demonstration runtime requires only loopback networking and was verified with non-loopback browser requests blocked (CAP-010 mechanism).",
+ "scientific_boundary": "frozen scientific artifacts and evidence are tracked; no raw-data retraining/evaluation is claimed from a clean clone",
+ "service_identities": {
+  "frontend": {
+   "command": "npm run preview after npm run build",
+   "identity": "CAPSTONE_UI_V1_2",
+   "port": 4173
+  },
+  "inference": {
+   "command": "run_nhm_default --profile default",
+   "identity": "SOFTWARE_SYSTEM_V2 default binding",
+   "port": 8001
+  },
+  "product": {
+   "command": "run_capstone_product_v1_3",
+   "identity": "CAPSTONE_PRODUCT_API_V1_3 / PRODUCT_API_V2",
+   "port": 8002
+  }
+ },
+ "status": "FROZEN_PRE_RELEASE_MANIFEST"
+}

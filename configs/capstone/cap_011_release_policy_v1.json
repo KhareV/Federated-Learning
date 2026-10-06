@@ -1,0 +1,247 @@
+{
+ "ci": "NOT queried, NOT triggered, NOT polled",
+ "clean_clone_claim": "CLEAN-CLONE SOFTWARE / ARTIFACT / PRODUCT DEMO REPRODUCIBILITY; it is NOT full raw-data scientific re-execution from an empty machine.",
+ "clean_clone_test_gating": {
+  "allowed_skip_categories": [
+   {
+    "id": "DATA_GATED",
+    "match": "reason starts with CLEAN_CLONE_DATA_GATED: untracked input absent",
+    "note": "untracked raw biomedical/processed/candidate inputs; never copied in"
+   },
+   {
+    "id": "UNTRACKED_ARTIFACT_GATED",
+    "match": "tests/test_model_v1_freeze.py skip with reason starting 'CANDIDATE_CHECKPOINT_NOT_TRACKED: untracked T015 artifact absent'",
+    "note": "the repository's existing explicit gate for an untracked, never-committed MODEL_V1 candidate checkpoint; never copied in (added to the frozen policy after the pre-freeze preparation run, before any canonical clone)"
+   },
+   {
+    "id": "DOCUMENTED_INHERITED_POST_EXPOSURE",
+    "match": "tests/test_v2_fl_eval_method.py skip with reason 'post-exposure state'",
+    "note": "the single skip already present in every prior full regression (V2-FL-EVAL method test)"
+   }
+  ],
+  "cap003_policy": {
+   "decided_before_any_clean_clone": true,
+   "full_run": "deselected from the full regression (frozen CAP-003 test is not repaired)",
+   "isolated_run": "executed in isolation up to 5 attempts, stopping at the first pass",
+   "pass_rule": "isolated pass observed AND every failed attempt carries the known signature 'AssertionError: assert (789 > 100 and False)'",
+   "test": "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers"
+  },
+  "data_gated_skip_reason_prefix": "CLEAN_CLONE_DATA_GATED",
+  "failures_allowed": 0,
+  "frontend": "npm test, npm run check (zero errors; warnings are disclosures), npm run build must all return 0",
+  "policy_id": "CLEAN_CLONE_GATING_V1 (existing, tests/conftest.py) as applied by CAPSTONE_CLEAN_CLONE_PROTOCOL_V1",
+  "unexpected_skips_allowed": 0
+ },
+ "decision_separation": {
+  "CAPSTONE_RELEASE_V1": "answers a third question: is the finished capstone software/demo package clean-clone reproducible and faculty-ready",
+  "MODEL_V2_NOT_PROMOTED_RELEASE_CI": "preserved",
+  "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED": "preserved"
+ },
+ "gate": "CAPG10",
+ "hard_blockers": [
+  {
+   "id": "B01",
+   "text": "all CAP-001..010 PASS"
+  },
+  {
+   "id": "B02",
+   "text": "all CAPG0..9 PASS"
+  },
+  {
+   "id": "B03",
+   "text": "all prior locks verify"
+  },
+  {
+   "id": "B04",
+   "text": "zero protected product drift"
+  },
+  {
+   "id": "B05",
+   "text": "release protocol frozen"
+  },
+  {
+   "id": "B06",
+   "text": "release target clean"
+  },
+  {
+   "id": "B07",
+   "text": "release target pushed"
+  },
+  {
+   "id": "B08",
+   "text": "fresh clone contains no copied files"
+  },
+  {
+   "id": "B09",
+   "text": "fresh Python environment used"
+  },
+  {
+   "id": "B10",
+   "text": "frontend installed from committed locks"
+  },
+  {
+   "id": "B11",
+   "text": "ClerkJS installed from committed lock"
+  },
+  {
+   "id": "B12",
+   "text": "no hidden/untracked dependency"
+  },
+  {
+   "id": "B13",
+   "text": "clean-clone tests pass under the declared data-gated policy"
+  },
+  {
+   "id": "B14",
+   "text": "frontend test/check/build pass"
+  },
+  {
+   "id": "B15",
+   "text": "faculty launcher preflight passes"
+  },
+  {
+   "id": "B16",
+   "text": "clean-clone full product demonstration passes"
+  },
+  {
+   "id": "B17",
+   "text": "runtime remains offline"
+  },
+  {
+   "id": "B18",
+   "text": "candidate remains not deployed"
+  },
+  {
+   "id": "B19",
+   "text": "MODEL_V2_FINAL remains default"
+  },
+  {
+   "id": "B20",
+   "text": "no raw-data scientific execution"
+  },
+  {
+   "id": "B21",
+   "text": "second independent fresh clone succeeds"
+  },
+  {
+   "id": "B22",
+   "text": "release limitations frozen"
+  },
+  {
+   "id": "B23",
+   "text": "CAPG10 passes"
+  }
+ ],
+ "installation_vs_runtime": {
+  "installation": "Initial dependency installation may require Internet access (public Python and npm registries); no air-gapped installation and no vendored dependencies are claimed.",
+  "runtime": "After installation the demonstration runtime requires only loopback networking and was verified with non-loopback browser requests blocked (CAP-010 mechanism)."
+ },
+ "limitations": [
+  {
+   "id": "non_diagnostic",
+   "text": "non-diagnostic research prototype"
+  },
+  {
+   "id": "physical_wearable_absent",
+   "text": "physical wearable absent"
+  },
+  {
+   "id": "wearable_v1_unvalidated",
+   "text": "WEARABLE_V1 validation absent"
+  },
+  {
+   "id": "simulation_only_device",
+   "text": "simulation-only device path"
+  },
+  {
+   "id": "accelerated_timing",
+   "text": "accelerated demo timing"
+  },
+  {
+   "id": "model_v2_promotion_ci",
+   "text": "MODEL_V2 historical release-seed promotion CI crossed zero"
+  },
+  {
+   "id": "six_internal_groups",
+   "text": "only six eligible INTERNAL_TEST groups"
+  },
+  {
+   "id": "cal_v2_source_domain",
+   "text": "CAL_V2 source-domain only"
+  },
+  {
+   "id": "incart_second_look",
+   "text": "V2-010 / INCART second-look caveats"
+  },
+  {
+   "id": "quality_v1_stuck_nonzero",
+   "text": "QUALITY_V1 stuck-nonzero limitation"
+  },
+  {
+   "id": "secagg_narrow",
+   "text": "SecAgg narrow protected-aggregation-interface claim"
+  },
+  {
+   "id": "no_dp",
+   "text": "no differential privacy"
+  },
+  {
+   "id": "logical_clients",
+   "text": "logical one-laptop FL clients"
+  },
+  {
+   "id": "candidate_no_inference_runtime",
+   "text": "candidate sandbox has no inference runtime"
+  },
+  {
+   "id": "candidate_not_deployed",
+   "text": "candidate not deployed"
+  },
+  {
+   "id": "clerk_ws_unverified",
+   "text": "Clerk real-account WebSocket path not verified"
+  },
+  {
+   "id": "one_active_run_not_lock",
+   "text": "one-active-FL-run is not distributed locking"
+  },
+  {
+   "id": "cap003_race",
+   "text": "CAP-003 inherited timing race"
+  },
+  {
+   "id": "npm_advisories",
+   "text": "npm dependency advisories already disclosed"
+  },
+  {
+   "id": "install_network",
+   "text": "installation may need public package-registry network access"
+  },
+  {
+   "id": "not_raw_data_reexecution",
+   "text": "clean release is not raw-data scientific re-execution"
+  }
+ ],
+ "manual_override_allowed": false,
+ "no_security_overclaim": "not security audited, not penetration tested, not HIPAA compliant, not privacy certified, not production hardened",
+ "owner_task": "CAP-011",
+ "platform_policy": "The release claim is limited to the actually tested OS/toolchain recorded in the clean-clone environment inventory; no other OS is claimed.",
+ "policy_id": "CAPSTONE_RELEASE_POLICY_V1",
+ "raw_data_boundary": "No raw biomedical dataset download is required; MIT-BIH, INCART, NSTDB and BIDMC belong to historical scientific reproducibility and are never copied into a clean clone.",
+ "release_claim": "CAPSTONE_RELEASE_V1 is a clean-clone reproducible, one-laptop research-software/faculty-demonstration release of the NHM capstone product using simulated device input, released MODEL_V2_FINAL monitoring, genuine engineering federation, persistent history, and frozen research-evidence views.",
+ "release_claim_excludes": [
+  "physical wearable validation",
+  "clinical use",
+  "medical-device status",
+  "production deployment",
+  "security certification",
+  "hospital deployment",
+  "differential privacy",
+  "anonymous federation",
+  "clean-room raw-dataset scientific reproduction"
+ ],
+ "release_id": "CAPSTONE_RELEASE_V1",
+ "release_meaning": "ONE-LAPTOP CAPSTONE SOFTWARE / FACULTY-DEMO RELEASE; the historical RELEASE_V1 / T036 / G22 / F15 lineage is not owned, completed or modified by this release.",
+ "status": "FROZEN_PRE_RELEASE_POLICY",
+ "waivers_allowed": false
+}

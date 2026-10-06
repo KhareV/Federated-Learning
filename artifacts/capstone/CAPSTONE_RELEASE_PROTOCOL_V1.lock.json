@@ -1,0 +1,117 @@
+{
+ "bound_files": {
+  "artifacts/capstone/CAPSTONE_RELEASE_MANIFEST_V1.json": "6b0acbd8c5c699c53e5e5e7ef660c2faafe4bf82ffb71c1cf5f564fa38667d26",
+  "configs/capstone/cap_011_clean_clone_protocol_v1.json": "8f872be755a4ef591db16ae38d533ac9575389c5cf60368c5615960e70e9d6ae",
+  "configs/capstone/cap_011_release_policy_v1.json": "2da7b54509d9e9e758376f44d7cc08bf59d39378d381521b6931d85b86604dbc",
+  "configs/capstone/cap_011_release_protocol_v1.json": "ece174bd1363cff6071528c31b783208a327fb8b7bf059d5ca17951d9da6509b",
+  "docs/capstone/CAPSTONE_RELEASE_GUIDE_V1.md": "d75190bcc6563d336c505c24753e294b5bb8d274218b3d7c3ba5abd9ed8a0951",
+  "scripts/cap_011_build_evidence.py": "6c32777e4e201f39ccf304e99633a3d5be4fddcd68be965666792ff561f09928",
+  "scripts/cap_011_build_freeze.py": "b2d67fbede968972d1fb6b7af431bdc7940ec7251414e76c4821a843e0c9e9f1",
+  "scripts/cap_011_build_manifest.py": "b52e71181e5f0831f2bba19d6f614eb38bb45a2dab658c4fe8214595aab92907",
+  "scripts/cap_011_evaluate_gate.py": "eff3af7a77a5f3b5a64bf5a4ffa2c457046d4b2fc114a9d39d0fbef14ee2b25d",
+  "scripts/cap_011_mutation_controls.py": "b3694cbc005f0e2f32d04d577b327ec43a994d1519ba4645152b6306f63f1e1e",
+  "scripts/cap_011_protected_audit.py": "86f9c5e8f8bcf50b119bb82ebce3de54236a0cc665f008341f13adc5103cc91b",
+  "scripts/cap_011_test_report.py": "38a61fc246523789b736743e02889d18bcacd45faf1a7139cfc2efeb9a237c8b",
+  "scripts/capstone_release_lib.py": "1b448431956ae900678fa73e241b9ad9869ec4581f79d91bceb008434a10324b",
+  "scripts/run_capstone_clean_release.py": "23632d536c475d4c89e4fe66b392d7de87d512022b3920ebd29bf38ee7769a64",
+  "scripts/verify_capstone_release_v1.py": "b3871716d392f9c7b7a71367995df382859befd8daf4780373b38e9ce6b3de15",
+  "tests/test_capstone_release_guide.py": "bcdd23e7005c2196283a2ec66cd2cb322d7c8778191ffd7d605fe57c59693192",
+  "tests/test_capstone_release_harness.py": "90b41d290253ad22b43f9c3489fe9bf089c295ef9e345405605470c8daa7c3f8",
+  "tests/test_capstone_release_lib.py": "43bed4308666be65f423b5f052f0daf19e11988697bfa00f081c26296f4489ea",
+  "tests/test_capstone_release_target.py": "f4568f33122f265340e72d0bcf7f58c975719eb748d8b0e5bfff1bc1e3708fe2"
+ },
+ "claim_boundary": "CLEAN_CLONE_SOFTWARE_ARTIFACT_PRODUCT_DEMO_REPRODUCIBILITY_ONE_LAPTOP",
+ "component_registry": {
+  "path": "manifests/capstone/component_registry_cap_011_v1.csv",
+  "sha256": "7b500ecbbd5b7dd587a16f9ff1878b412bf13c37cc8d698b86a21587f80563c2"
+ },
+ "components": {
+  "CAPSTONE_CLEAN_CLONE_PROTOCOL_V1": {
+   "path": "configs/capstone/cap_011_clean_clone_protocol_v1.json",
+   "sha256": "8f872be755a4ef591db16ae38d533ac9575389c5cf60368c5615960e70e9d6ae",
+   "status": "FROZEN_PRE_RELEASE_PROTOCOL"
+  },
+  "CAPSTONE_RELEASE_GUIDE_V1": {
+   "path": "docs/capstone/CAPSTONE_RELEASE_GUIDE_V1.md",
+   "sha256": "d75190bcc6563d336c505c24753e294b5bb8d274218b3d7c3ba5abd9ed8a0951",
+   "status": "FROZEN_PRE_RELEASE_GUIDE"
+  },
+  "CAPSTONE_RELEASE_MANIFEST_V1": {
+   "path": "artifacts/capstone/CAPSTONE_RELEASE_MANIFEST_V1.json",
+   "sha256": "6b0acbd8c5c699c53e5e5e7ef660c2faafe4bf82ffb71c1cf5f564fa38667d26",
+   "status": "FROZEN_PRE_RELEASE_MANIFEST"
+  },
+  "CAPSTONE_RELEASE_POLICY_V1": {
+   "path": "configs/capstone/cap_011_release_policy_v1.json",
+   "sha256": "2da7b54509d9e9e758376f44d7cc08bf59d39378d381521b6931d85b86604dbc",
+   "status": "FROZEN_PRE_RELEASE_POLICY"
+  },
+  "CAPSTONE_RELEASE_PROTOCOL_V1": {
+   "path": "configs/capstone/cap_011_release_protocol_v1.json",
+   "sha256": "ece174bd1363cff6071528c31b783208a327fb8b7bf059d5ca17951d9da6509b",
+   "status": "FROZEN_PRE_RELEASE_PROTOCOL"
+  },
+  "CAPSTONE_RELEASE_VERIFIER_V1": {
+   "path": "scripts/verify_capstone_release_v1.py",
+   "sha256": "b3871716d392f9c7b7a71367995df382859befd8daf4780373b38e9ce6b3de15",
+   "status": "FROZEN_ENGINEERING_IMPLEMENTATION"
+  }
+ },
+ "criteria_count": 136,
+ "entry_audit_sha256": "794f8a03595191c5d9331dc8d2da785be6085c041d123f325a82b34c53ca2e16",
+ "entry_sha": "af60c1e2bc6a645852d0826815ff16a678c9d0d1",
+ "freeze_basis": "before the RELEASE_TARGET commit and any canonical clean clone; the clean-clone harness, the CAPG10 evaluator, the verifier and the criteria are frozen here",
+ "gate": "CAPG10",
+ "hard_blockers": 23,
+ "lock_id": "CAPSTONE_RELEASE_PROTOCOL_V1",
+ "mutation_controls": 20,
+ "owner_phase": "CAP-011",
+ "prior_locks_verified": [
+  "cap001",
+  "cap002",
+  "cap003",
+  "cap004",
+  "cap005",
+  "cap006",
+  "cap007",
+  "cap008",
+  "cap009",
+  "cap010",
+  "capstone_ui_v1",
+  "capstone_ui_v1_1",
+  "capstone_ui_v1_2",
+  "fedprox_mu_v2",
+  "fl_init_v2",
+  "research_catalog",
+  "v2_fl_wearable_system"
+ ],
+ "status": "FROZEN_PRE_RELEASE_PROTOCOL",
+ "unbound_prospective_components": [
+  "CAPSTONE_RELEASE_V1"
+ ],
+ "upstream_frozen_identity": {
+  "api/product_app_v1_3.py": "d47d22a78d1dedeaa533c7339c87a03ed20a514471061e5235d94483c62cb015",
+  "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json": "34a7e5c746f058077cee5555725a1a00560dda8a1b0a047fdd45caf7f27c13d7",
+  "artifacts/ROLLBACK_RUNTIME_BINDING_V1.lock.json": "8f9826b4cc9344889131ecdfe32a3be9fb56427619a480f4667de94257ec7668",
+  "artifacts/SOFTWARE_SYSTEM_V2.lock.json": "a989d61fee71622da3e7cd7d29dea6d7583379dc21e9938dd813c267771088c0",
+  "artifacts/V2_FL_WEARABLE_SYSTEM_PROTOCOL_V1.lock.json": "b4d7970dea75000817345fe9edcdd71502298cd9ced71f47757449b6fc102b30",
+  "artifacts/capstone/CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1.lock.json": "a125a60edb7343004280d48bf1e75ab1163eec1a6da998f8a022789be1ee9c8e",
+  "artifacts/capstone/CAPSTONE_DEVICE_EDGE_PROTOCOL_V1.lock.json": "3eb5ee97665b006088b15b021b484a5e5ac6f4174f58051d97aacfed0ae0be7d",
+  "artifacts/capstone/CAPSTONE_FACULTY_DEMO_PROTOCOL_V1.lock.json": "995ce7f1d92a671049663559a67d87665808d06a68d52dea76c1f5176a63e50b",
+  "artifacts/capstone/CAPSTONE_FEDERATION_PROTOCOL_V1.lock.json": "9bd126be587561358cfabdf4a3bf484552d558ef0bfa5aa6c136bb26a3229cb5",
+  "artifacts/capstone/CAPSTONE_FEDERATION_UX_PROTOCOL_V1.lock.json": "efda39c855c953a108be5b44eaa0543259a179be3df96b451a44e3d4ac814450",
+  "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.lock.json": "6cae0d1e71ba742b1a6dfafbc5f435466343637b1be841e124d31092464be8aa",
+  "artifacts/capstone/CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1.lock.json": "b368254e568fe4636ee37bd71ea26c3843b83a1a04d8f85e5b5fb98989e1922d",
+  "artifacts/capstone/CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1.lock.json": "70e9488a2530bbb3593cc39200e947250bf7f83f8a5a3ba0b205b33387c80597",
+  "artifacts/capstone/CAPSTONE_PRODUCT_PROTOCOL_V1.lock.json": "0f3131d44b4a19953318ea37f988464c2f24043eaeb93e39421663506add56b8",
+  "artifacts/capstone/CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1.lock.json": "de632e499e70d53f3f288538a0c8b06c1ab96e3dc653d28c4629dcd8cbfd7cd8",
+  "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json": "07537fdcff516cd0659f959e7b85f03178f6de70877abd41d448b2911789e0e2",
+  "frontend/clerk-sdk/package-lock.json": "f948b4759a819f768885da5129a078513ac5942fa778c37a8c45691081bf8f5e",
+  "frontend/package-lock.json": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae",
+  "pyproject.toml": "af83432eea745b52acc268ce1040edefd83cc8edc6a94afd9f7e8232aaecab34",
+  "requirements-capstone-auth.lock": "7c75bc14e595af8706f6de3605c7d69ffe5200e43859090d84d0b0b7c20da9e3",
+  "requirements-dev.lock": "0d4a0561bfadf89157b9f6f6dfbfa87e885aca2815a45a442e04a98d662f2a0e",
+  "scripts/capstone_demo_preflight.py": "bdf5426d8b4d652274dae5f786d41e815343513f7ed0845511c987cbe8979b2c",
+  "scripts/run_capstone_faculty_demo.py": "d08c2c8f0cb9f2bb3ecd2cad56b7ec929be8935a0859437253cbcde8398fc776"
+ }
+}
