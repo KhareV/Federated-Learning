@@ -1,0 +1,142 @@
+{
+ "label": "CANONICAL",
+ "observations": {
+  "routes": [
+   {
+    "consoleErrors": [],
+    "headings": [
+     "H1:NHM Federated physiological monitoring r",
+     "H2:Healthcare often seessnapshots. Disease ",
+     "H2:From sensing tofederated model developme",
+     "H3:ECG Analog Front-End (Concept)",
+     "H2:One source.Synchronized signals.",
+     "H2:Released inference,server-side today.",
+     "H2:Learn together.Share less.",
+     "H2:Under the interface isa layered system.",
+     "H3:Wavelet Feature Extraction (Concept)",
+     "H2:See the systemin action."
+    ],
+    "hosts": [
+     "",
+     "127.0.0.1:4173"
+    ],
+    "imgNoAlt": 0,
+    "keyboard": {
+     "afterActivate": {
+      "id": "top",
+      "isMain": true,
+      "tag": "MAIN"
+     },
+     "firstFocus": {
+      "href": "#top",
+      "text": "Skip to main content",
+      "top": 12,
+      "visible": true
+     }
+    },
+    "lang": "en",
+    "main": 1,
+    "navs": [
+     "NHM landing navigation"
+    ],
+    "normalMotion": {
+     "rafDelta2s": 1800
+    },
+    "reducedMotion": {
+     "blankCanvases": 0,
+     "intervalsCreated": 0,
+     "rafCallers": {},
+     "rafDelta3s": 0,
+     "runningAnimations": 0,
+     "runningNames": [],
+     "textLen": 9380
+    },
+    "route": "/",
+    "skipLinkPresent": true,
+    "textSample": "Skip to main content\nN\nNHM\nTECHNOLOGY\nSIGNALS\nPRIVACY\nRESEARCH\nOPEN NHM\n\u2197\nNHM / 01\nLIVE MONITORING RESEARCH\nSIMULATED SOURCE \u00b7 ECG + SpO\u2082 CONTEXT\nRESEARCH PLATFORM \u00b7 SIMULATED SOURCE \u00b7 NOT DIAGNOSTIC\nNHM\nFederated physiological\nmonitoring research platform.\n\nLive monitoring with a released model, an engineering federated-learning runtime (synthetic clients), and a hardware-ready source boundary. A virtual wearable today; a physical adapter later. A research prototype, not a diagnostic or medical device.\n\nEXPLORE THE SYSTEM\n\u2193\nOPEN NHM\n\u2197\nLIVE MONITORING SESSIONS\nSimulated wearable, accelerated timing; released MODEL_V2, server-side, research states\nFEDERATED MODEL DEVELOPMENT\nArchitecture for synthetic research partitions\nHARDWARE-READY SOURCE ARCHITECTURE\nVirtual wearable now, physical adapter later\n\nConcept render of a virtual wearable. Text on the model is illustrative - not live data, not connected hardware.\n\nILLUSTRATIVE ECG\nSYNTHETIC WAVEFORM\nNOT LIVE DATA\n02 / THE SAMPLING DILEMMA\nHealthcare often sees\nsnapshots. Disease lives in the gaps.\n\nStandard episodic clinical visits capture only brief, isolated readings months apart. NHM is a research prototype exploring whether continuous, multi-modal research monitoring can observe more of the picture between those visits -- today via server-side research inference, not on-device, and not yet validated on real wearable hardware.\n\nConceptual continuous view\nIllustrative\nConceptual snapshot view\nIllustrative\nILLUSTRATIVE SIGNAL-FLOW GRAPH\n\nHover any node for a conceptual description of a feature path. All values are illustrative - not live telemetry.\n\nSENSOR INPUT\nECG Biopotential\nConcept Front-End (Unverified)\n\nDifferential cardiac electrical vector (illustrative)\n\nSAMPLING (ILLUSTRATIVE)\nIllustrative\nILLUSTRATIVE RANGE\nIllustrative\nILLUSTRATIVE VALUE (NOT LIVE)\nIllustrative (not live)\n03 / RESEARCH EVOLUTION\nFrom sensing to\n\nfederated model development.\n\nNHM brings together the progression identified in the project literature review rather than treating each technique as an isolated feature.\n\nS\n\nWearable physiological sensing\n\n01\nI\n\nConnected IoMT monitoring\n\nA\n\nAI / machine learning on health signals\n\n02\nF\n\nFederated learning for collaborative training\n\nP\n\nPrivacy-preserving healthcare intelligence\n\n03\nN\n\nNHM: a practical wearable architecture\n\n04 / HARDWARE-READY SOURCE ARCHITECTURE\nHardware-ready by design.\n\nToday the source is a simulated virtual wearable. The architecture defines a source-adapter boundary so a physical wearable can replace it later. The sensor concepts below are unverified design sketches, not an attached device.\n\nNHM-01 CONCEPT MODEL (3D RENDER, NOT A SHIPPING PRODUCT)\nILLUSTRATIVE INDUSTRIAL DESIGN ONLY\n01 \u00b7 ECG\n02 \u00b7 PPG\n03 \u00b7 Edge\n04 \u00b7 Power\n01\nECG\n02\nPPG\n03\nEdge\n04\nPower\nCARDIAC ELECTRICAL SENSING -- UNVERIFIED\nECG Analog Front-End (Concept)\n\nConcept sketch for ECG signal conditioning. The exact front-end chip, gain, filtering, and electrode placement have not been bench-verified against physical hardware.\n\nSIMULATED WAVEFORM // ECG\nILLUSTRATIVE, NOT LIVE HARDWARE\nCMRR\nUnverified\nNot bench-tested\nSAMPLING RATE\nUnverified\nSee HW01 bench verification (BLOCKED)\nADC RESOLUTION\nUnverified\nNot bench-tested\nPOWER DRAW\nUnverified\nNot bench-tested\nENGINEERING ARCHITECTURE\n\u2713\nConcept sketch only -- no physical front-end has been bench-verified\n\u2713\nElectrode placement and lead-off handling remain VERIFICATION_REQUIRED\n\u2713\nT004 bench hardware verification is BLOCKED_HARDWARE\nRESEARCH PROTOTYPE\n\u2022\nCONCEPT HARDWARE (UNVERIFIED)\n\u2022\nSERVER-SIDE CPU INFERENCE\n\u2022\nNO DIAGNOSIS CLAIM\n\u2022\nSOURCE-DOMAIN CALIBRATION ONLY\n\u2022\nWEARABLE VALIDATION PENDING\nRESEARCH PROTOTYPE\n\u2022\nCONCEPT HARDWARE (UNVERIFIED)\n\u2022\nSERVER-SIDE CPU INFERENCE\n\u2022\nNO DIAGNOSIS CLAIM\n\u2022\nSOURCE-DOMAIN CALIBRATION ONLY\n\u2022\nWEARABLE VALIDATION PENDING\nRESEARCH PROTOTYPE\n\u2022\nCONCEPT HARDWARE (UNVERIFIED)\n\u2022\nSERVER-SIDE CPU INFERENCE\n\u2022\nNO DIAGNOSIS CLAIM\n\u2022\nSOURCE-DOMAIN CALIBRATION ONLY\n\u2022\nWEARABLE VALIDATION PENDING\nRESEARCH PROTOTYPE\n\u2022\nCONCEPT HARDWARE (UNVERIFIED)\n\u2022\nSERVER-SIDE CPU INFERENCE\n\u2022\nNO DIAGNOSIS CLAIM\n\u2022\nSOURCE-DOMAIN CALIBRATION ONLY\n\u2022\nWEARABLE VALIDATION PENDING\n05 / SIGNALS (SIMULATED TODAY)\nOne source.\n\nSynchronized signals.\nSENSE\nSYNCHRONIZE\nSIMULATION PRESETS:\nResting scenario\nExertion scenario\nSleep scenario\nEctopic-beat scenario\nILLUSTRATIVE SCENARIO (SYNTHETIC VALUES)\n\nSynthetic illustration: regular QRS complexes followed by regular pulse waves. Values are scenario parameters, not measurements.\n\nHEART RATE (SYNTHETIC)\n72 BPM\nSpO\u2082 (SYNTHETIC)\n98.4 %\nPULSE TRANSIT (SYNTHETIC)\n218 ms\nHRV (SYNTHETIC)\n54 ms\nPOINCAR\u00c9 AUTONOMIC DISPERSION\n06 / SERVER-SIDE INFERENCE\nReleased inference,\n\nserver-side today.\n\nThe virtual wearable streams to the NHM product API, which calls the released SOFTWARE_SYSTEM_V2 (MODEL_V2_FINAL) over localhost. Nothing runs on a sensor; on-device or edge deployment is not implemented.\n\n01\nVIRTUAL WEARABLE\nSIMULATED SOURCE\n02\nPRODUCT API\nLOCAL SESSION + SQLITE\n03\nSOFTWARE_SYSTEM_V2\nMODEL_V2_FINAL / SERVER-SIDE\nVIRTUAL TODAY. HARDWARE LATER.\n07 / FEDERATED MODEL DEVELOPMENT\nLearn together.\nShare less.\n\nFederated learning lets participating clients contribute model updates instead of sharing their local training examples. In NHM the engineering federation runtime is enabled: eight logical synthetic clients on one demonstration machine perform genuine local optimization, and the coordinator receives model updates rather than local examples. The resulting engineering candidate stays in a sandbox and never replaces the released MODEL_V2_FINAL. The clients are synthetic research partitions - not hospitals or institutions - and this is not personalized federated learning. SecAgg+ is a narrow protected-aggregation interface, not differential privacy or anonymity.\n\nILLUSTRATIVE NETWORK TOPOLOGY - NOT PARTICIPATING INSTITUTIONS\nSIM_FL_SITE_00\nSIM_FL_SITE_01\nSIM_FL_SITE_02\nSIM_FL_SITE_03\nSIM_FL_SITE_04\nSIM_FL_SITE_05\nSIM_FL_SITE_06\nSIM_FL_SITE_07\nAGGREGATOR\nLOCAL CLIENTS\nMODEL UPDATES\nFEDERATED SERVER\nAGGREGATION\nLOCAL EXAMPLES\nSTAY IN CLIENT BUFFERS\nLEARNING\nHAPPENS COLLABORATIVELY\n08 / SYSTEM ARCHITECTURE\nUnder the interface is\n\na layered system.\n\nA research layering from concept sensor front-end sketches, through server-side CPU inference and a federated-learning research lineage with a SecAgg+ interface reference, to research-only monitoring states. No on-device inference, differential privacy or deployed system is implemented.\n\n01\nAnalog Biosensing (Concept)\nBiopotential & Optical Transduction\n02\nEmbedded Edge Firmware (Concept)\nHardware FIFO & Noise Filtering\n03\nWavelet Feature Extraction (Concept)\nCross-Modal Vector Synthesis\n04\nResearch Model Inference\nServer-Side CPU Gateway (Current Implementation)\n05\nFederated Optimization (FedProx)\nFedProx Local Objective (Research Prototype)\n06\nSecAgg+ Interface Prototype\nResearch Secure-Aggregation Reference\nTIER 03 // ARCHITECTURE\nLATENCY: Concept - not measured\nWavelet Feature Extraction (Concept)\n\nConcept feature-extraction stage (not implemented on any wearable): QRS peak detection, R-R interval HRV extraction and pulse-transit-time fusion are candidate future steps. No feature extraction runs on a sensor today.\n\nPROTOCOL / INTERFACE\nSIMD Vector Floating Point\nTHROUGHPUT / MEMORY\nConcept feature vector (illustrative)\nPRIVACY & SECURITY\nConcept only - no security claim\nSUBSYSTEM IMPLEMENTATION\n\u25b9\nConcept Only -- Not Implemented\n\u25b9\nNo on-device feature extraction exists\n\u25b9\nFeatures below this tier are illustrative\nFEDERATED LEARNING -- ILLUSTRATIVE MAP (DECORATIVE MARKERS)\nConcept Map, Not Live Deployment Telemetry\nILLUSTRATIVE\n\nMarker positions are decorative. NHM's eight synthetic federation clients run on one demonstration machine - not in these cities.\n\nCLIENTS (DEMO)\nIllustrative\nROUND\nIllustrative\nACCURACY\nNot shown (illustrative)\nPRIVACY\nNo Formal DP Proof\n09 / THE PRODUCT\nSee the system\n\nin action.\n\nAn interactive, simulated preview of the research monitoring environment: illustrative multilead waveforms and research-only monitoring states. Not live signals, not a diagnosis.\n\nSESSION // #NHM-DEMO-SIMULATED\nNHM RESEARCH MONITORING ENVIRONMENT (SIMULATED)\nILLUSTRATIVE SCENARIO // RESTING (SYNTHETIC)\nILLUSTRATIVE SCENARIO SELECTOR (SYNTHETIC):\nResting scenario (72 BPM, synthetic)\nSlow-rate scenario (48 BPM, synthetic)\nExertion scenario (118 BPM, synthetic)\nEctopic-beat scenario (synthetic)\nSIMULATED CARDIAC BIOPOTENTIAL (ILLUSTRATIVE)\nSYNTHETIC WAVEFORM // NOT LIVE HARDWARE\nSIMULATED PHOTOPLETHYSMOGRAM (ILLUSTRATIVE)\nSYNTHETIC WAVEFORM // NOT LIVE HARDWARE\nHEART RATE (SYNTHETIC SCENARIO)\n72 BPM\nScenario parameter - not a measurement\nSpO\u2082 (SYNTHETIC SCENARIO)\n98 %\nScenario parameter - not a measurement\nRESPIRATION (SYNTHETIC SCENARIO)\n14 BR/MIN\nScenario parameter - not a measurement\nINFERENCE LOCATION\nSERVER-SIDE\nNothing runs on a sensor; no on-device inference\nReady to open the research workspace?\n\nSign in to run a simulated-wearable monitoring session, review its persisted history, and explore the engineering federation demo.\n\nOpen the NHM workspace\n\u2197\nNHM / 10\nFederated physiological\nmonitoring research.\n\nLive monitoring. Federated model development. Hardware-ready source architecture. Research prototype - not diagnostic.\n\nOPEN NHM\n\u2197\nN\nNHM\n\nNon-Invasive Health Monitor\n\nTECHNOLOGY\nPRIVACY\nRESEARCH\nOPEN NHM\nB.TECH FINAL YEAR PROJECT\nVIT CHENNAI",
+    "title": "NHM \u2014 Federated Physiological Monitoring Research Platform",
+    "widths": {
+     "1024": {
+      "bad": [],
+      "errors": 0,
+      "failed": [],
+      "innerW": 1024,
+      "overflow": false,
+      "scrollW": 1024,
+      "targets": 41,
+      "under24": [],
+      "under24_inline": []
+     },
+     "1440": {
+      "bad": [],
+      "errors": 0,
+      "failed": [],
+      "innerW": 1440,
+      "overflow": false,
+      "scrollW": 1440,
+      "targets": 45,
+      "under24": [
+       {
+        "cls": "svelte-1uha8ag",
+        "h": 18,
+        "inline": false,
+        "tag": "A",
+        "text": "Technology",
+        "w": 84
+       },
+       {
+        "cls": "svelte-1uha8ag",
+        "h": 18,
+        "inline": false,
+        "tag": "A",
+        "text": "Signal ",
+        "w": 58.8
+       },
+       {
+        "cls": "svelte-1uha8ag",
+        "h": 18,
+        "inline": false,
+        "tag": "A",
+        "text": "Privacy",
+        "w": 58.8
+       },
+       {
+        "cls": "svelte-1uha8ag",
+        "h": 18,
+        "inline": false,
+        "tag": "A",
+        "text": "Re earch",
+        "w": 67.2
+       }
+      ],
+      "under24_inline": []
+     },
+     "390": {
+      "bad": [],
+      "errors": 0,
+      "failed": [],
+      "innerW": 390,
+      "overflow": false,
+      "scrollW": 390,
+      "targets": 41,
+      "under24": [],
+      "under24_inline": []
+     },
+     "768": {
+      "bad": [],
+      "errors": 0,
+      "failed": [],
+      "innerW": 768,
+      "overflow": false,
+      "scrollW": 768,
+      "targets": 41,
+      "under24": [],
+      "under24_inline": []
+     }
+    }
+   }
+  ],
+  "signin": null,
+  "who": "-"
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "consistent": true,
+ "contradictions": [],
+ "label": "CLEAN_CLONE",
+ "pages_stating_federation_enabled": [
+  "/",
+  "/app",
+  "/app/about",
+  "/app/system"
+ ],
+ "rows": [
+  {
+   "mentions_one_machine": true,
+   "mentions_synthetic_clients": true,
+   "page": "/",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": true,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": false,
+   "mentions_synthetic_clients": false,
+   "page": "/app",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": true,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": true,
+   "mentions_synthetic_clients": true,
+   "page": "/app/about",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": true,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": false,
+   "mentions_synthetic_clients": false,
+   "page": "/app/system",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": true,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": true,
+   "mentions_synthetic_clients": true,
+   "page": "/app/federation",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": false,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": true,
+   "mentions_synthetic_clients": true,
+   "page": "/app/federation/clients",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": false,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": true,
+   "mentions_synthetic_clients": true,
+   "page": "/app/federation/live",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": false,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": true,
+   "mentions_synthetic_clients": false,
+   "page": "/app/federation/privacy",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": false,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": false,
+   "mentions_synthetic_clients": false,
+   "page": "/app/models",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": false,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": false,
+   "mentions_synthetic_clients": false,
+   "page": "/app/research/ml",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": false,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  },
+  {
+   "mentions_one_machine": false,
+   "mentions_synthetic_clients": true,
+   "page": "/app/research/fl",
+   "present": true,
+   "says_candidate_deployed": false,
+   "says_diagnostic": false,
+   "says_federation_disabled": false,
+   "says_federation_enabled": false,
+   "says_hospitals_real": false,
+   "says_personalized_fl": false
+  }
+ ]
+}

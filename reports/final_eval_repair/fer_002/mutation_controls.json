@@ -1,0 +1,273 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/NeuralGraph.svelte\", \"rule\": \"percentage\", ",
+   "mutation": "RESTORE_99_8_COVERAGE",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/NeuralGraph.svelte\", \"rule\": \"percentage\", ",
+   "mutation": "RESTORE_99_8_BLIND_INTERVALS",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/NeuralGraph.svelte\", \"rule\": \"live_or_realt",
+   "mutation": "RESTORE_LIVE_EDGE_SYNAPSE_GRAPH",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/NeuralGraph.svelte\", \"rule\": \"live_or_realt",
+   "mutation": "RESTORE_REALTIME_FEATURE_VECTORS",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/NeuralGraph.svelte\", \"rule\": \"percentage\", ",
+   "mutation": "INTRODUCE_STATIC_91_CONFIDENCE",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/NeuralGraph.svelte\", \"rule\": \"score_with_nu",
+   "mutation": "INTRODUCE_STATIC_0_08_ANOMALY_SCORE",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/ProductWorkstation.svelte\", \"rule\": \"percen",
+   "mutation": "INTRODUCE_CURRENT_SPO2_98",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/ProductWorkstation.svelte\", \"rule\": \"normal",
+   "mutation": "INTRODUCE_NORMAL_ECG",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/ProductWorkstation.svelte\", \"rule\": \"live_o",
+   "mutation": "INTRODUCE_LIVE_PATIENT_DATA",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/ProductWorkstation.svelte\", \"rule\": \"patien",
+   "mutation": "INTRODUCE_REAL_WEARABLE_STREAM",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/ProductWorkstation.svelte\", \"rule\": \"edge_i",
+   "mutation": "INTRODUCE_ON_DEVICE_INFERENCE",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/ProductWorkstation.svelte\", \"rule\": \"edge_i",
+   "mutation": "INTRODUCE_EDGE_MODEL_ON_WEARABLE",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/NeuralGraph.svelte\", \"rule\": \"percentage\", ",
+   "mutation": "INTRODUCE_UNSOURCED_PERCENT_ACCURACY",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/NeuralGraph.svelte\", \"rule\": \"percentage\", ",
+   "mutation": "INTRODUCE_UNSOURCED_PERCENT_COVERAGE",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/ProductWorkstation.svelte\", \"rule\": \"clinic",
+   "mutation": "INTRODUCE_CLINICAL_MONITORING",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"file\": \"frontend/src/lib/components/landing/ProductWorkstation.svelte\", \"rule\": \"physio",
+   "mutation": "REMOVE_ILLUSTRATIVE_QUALIFICATION",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "a11y:['landing_skip_link_first']",
+   "mutation": "REMOVE_LANDING_SKIP_LINK",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "a11y:['landing_nav_labelled']",
+   "mutation": "UNNAME_LANDING_NAV",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "a11y:['neural_graph_reduced_motion']",
+   "mutation": "NEURALGRAPH_RAF_IGNORES_REDUCED_MOTION",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "a11y:['globe_reduced_motion']",
+   "mutation": "GLOBE_IGNORES_REDUCED_MOTION",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "a11y:['boot_loader_has_heading']",
+   "mutation": "LOADER_LOSES_HEADING",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify:[{\"claim\": \"LANDING-LIVE-PILLAR\", \"problem\": \"qualification_missing\", \"qualification\": \"Si",
+   "mutation": "PROVENANCE_QUALIFICATION_REMOVED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "about:{\"missing\": [\"engineering federation runtime is enabled\"], \"stale\": [\"federation product r",
+   "mutation": "ABOUT_RESTORED_NOT_YET_ENABLED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "landing:{\"missing\": [\"FEDERATION RUNTIME / ENGINEERING ENABLED\"], \"stale\": [\"FEDERATION RUNTIME / ",
+   "mutation": "LANDING_PRELOADER_NOT_YET_ENABLED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [], \"stale_entries\": [], \"bad_class\": [], \"loops\": [], \"external\": [], \"d",
+   "mutation": "FL_OVERVIEW_RENDERS_OLD_CONTENT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "unbound:{\"helper\": false, \"grid\": true, \"live\": true, \"global_page_unbound\": true}",
+   "mutation": "DEMO_GAINS_OWNER_BINDING",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "runbook:{\"missing\": [\"MY EDGE CLIENT\"], \"stale_sentence_positions\": [], \"claims\": []}",
+   "mutation": "RUNBOOK_OMITS_MY_EDGE_CLIENT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "landing:{\"missing\": [], \"stale\": [], \"owner_binding_overreach\": [], \"font_refs\": [\"<Signature\"], \"",
+   "mutation": "LASTORIA_REFERENCE_RESTORED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:product/edge/local_training_buffer.py",
+   "mutation": "BACKEND_FILE_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:api/product_app_v1_3.py",
+   "mutation": "API_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:capstone_persistence/federation_store.py",
+   "mutation": "DB_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:product/federation/service.py",
+   "mutation": "FL_RUNTIME_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:auth:product/auth/clerk.py",
+   "mutation": "AUTH_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:scientific:checkpoints/MODEL_V2_FINAL.pt",
+   "mutation": "MODEL_V2_FINAL_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:scientific:artifacts/CAL_V2.json",
+   "mutation": "CAL_V2_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "truth:{\"checks\": {\"federation_runtime_backend\": true, \"hardware_backend\": true, \"model\": true, \"",
+   "mutation": "CANDIDATE_DIGEST_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify_capstone_ui_v1_6:CAPSTONE_UI_V1_6_PREDECESSOR_DRIFT",
+   "mutation": "PREDECESSOR_UI_LOCK_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify_capstone_ui_v1_6:CAPSTONE_UI_V1_6_UNBOUND_OR_MISSING_FRONTEND_FILE",
+   "mutation": "UI_V1_6_UNBOUND_FILE",
+   "restored": true
+  }
+ ],
+ "count": 38
+}

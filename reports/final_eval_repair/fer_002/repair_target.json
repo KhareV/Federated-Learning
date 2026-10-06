@@ -1,0 +1,12 @@
+{
+ "canonical_evidence_existed_at_target": false,
+ "canonical_evidence_paths_at_target": [],
+ "commit_subject": "fix+freeze(final-eval-repair-002): hardened owner-journey driver copy (retry for the clients REST capture race; attempt_2_FAIL evidence preserved, target b822044); method lock re-frozen before any new canonical evidence; no product change",
+ "entry_sha": "3402dc1da1c6d5c029903a9a51a74e4ecc427ec8",
+ "note": "candidate build for the unchanged FINAL_EVALUATOR_AUDIT_V1 rerun; NOT an evaluator-ready release",
+ "pushed_to_origin_main_at_record": true,
+ "release_vehicle": "the exact Git repository state at repair_target_sha (no archive)",
+ "repair_target_sha": "b549f9915d91d960c949941b9341004152e5f5d1",
+ "unauthorised_delta_from_entry": [],
+ "working_tree_clean_at_record": true
+}

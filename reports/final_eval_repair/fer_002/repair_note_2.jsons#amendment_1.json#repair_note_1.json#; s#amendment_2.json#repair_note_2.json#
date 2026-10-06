@@ -1,0 +1,9 @@
+{
+ "amendment": 2,
+ "scope": "FER-002 verification harness only (no product file changed)",
+ "reason": "attempt_2_FAIL: observation-capture race in the reused owner-journey driver (clients REST body not recorded in one run)",
+ "changes": ["scripts/final_eval_repair_002_owner_driver.mjs (hardened copy of the UFL-LITE-003 driver; bounded retry that re-requests the clients REST response until it is recorded; nothing is fabricated)", "scripts/final_eval_repair_002_e2e.py uses the hardened driver", "method-lock bound list extended by the driver"],
+ "criteria_unchanged": true,
+ "failed_evidence_preserved_at": "reports/final_eval_repair/fer_002/attempt_2_FAIL/",
+ "no_product_change": true
+}

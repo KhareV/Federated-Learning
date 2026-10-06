@@ -1,0 +1,8 @@
+{
+ "note": 3,
+ "scope": "FER-002 method-lock re-issue (configuration omission); no product file and no evidence-producing machinery changed",
+ "reason": "pre-transition evaluation found (a) the frozen authorised-surface config omitted the two FER registry CSVs that this phase must update (task/gate rows), and (b) evidence notes were named amendment_*.json and matched the evaluator's amendment scan",
+ "changes": ["configs/final_eval_repair/fer_002_authorised_surface_v1.json: authorised_modifications += the two FER registry CSVs", "reports/final_eval_repair/fer_002/amendment_{1,2}.json renamed repair_note_{1,2}.json", "method lock FINAL_EVAL_REPAIR_002_PROTOCOL_V1 re-issued over the same bound-file list (only the surface config hash differs)"],
+ "unchanged": ["repair target b549f9915d91d960c949941b9341004152e5f5d1 (implementation, V1_6 lock, e2e/browser/owner drivers, analysis, evaluator logic, mutation controls)", "all canonical evidence (produced before this note by the unchanged machinery)"],
+ "criteria_unchanged": true
+}

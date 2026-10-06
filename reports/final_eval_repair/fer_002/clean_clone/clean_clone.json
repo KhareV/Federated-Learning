@@ -1,0 +1,116 @@
+{
+ "clone_source": "remote git repository (git clone at the exact SHA)",
+ "commands": [
+  {
+   "id": "clone",
+   "returncode": 0,
+   "seconds": 25.5
+  },
+  {
+   "id": "checkout",
+   "returncode": 0,
+   "seconds": 0.7
+  },
+  {
+   "id": "venv",
+   "returncode": 0,
+   "seconds": 1.0
+  },
+  {
+   "id": "pip_dev",
+   "returncode": 0,
+   "seconds": 60.0
+  },
+  {
+   "id": "pip_auth",
+   "returncode": 0,
+   "seconds": 1.3
+  },
+  {
+   "id": "pip_check",
+   "returncode": 0,
+   "seconds": 0.2
+  },
+  {
+   "id": "npm_clerk",
+   "returncode": 0,
+   "seconds": 2.3
+  },
+  {
+   "id": "npm_app",
+   "returncode": 0,
+   "seconds": 4.2
+  },
+  {
+   "id": "verifier_clerk",
+   "returncode": 0,
+   "seconds": 0.3
+  },
+  {
+   "id": "verifier_ui16",
+   "returncode": 0,
+   "seconds": 0.0
+  },
+  {
+   "id": "targeted",
+   "returncode": 0,
+   "seconds": 47.6
+  },
+  {
+   "id": "e2e",
+   "returncode": 0,
+   "seconds": 1489.6
+  },
+  {
+   "id": "presentation_verifier",
+   "returncode": 0,
+   "seconds": 0.2
+  },
+  {
+   "id": "provenance_verifier",
+   "returncode": 0,
+   "seconds": 0.1
+  }
+ ],
+ "credentials_supplied_as": "external file paths outside the repository",
+ "developer_env_or_db_or_cookie_copied": false,
+ "manual_steps": "none",
+ "network": "installation and Clerk authentication require Internet access",
+ "proof_a_clean_clone": {
+  "checkout_matches_target": true,
+  "checkout_sha": "b549f9915d91d960c949941b9341004152e5f5d1",
+  "fresh_venv_created_by_run": true,
+  "frozen_verifiers": {
+   "verify_capstone_ui_v1_6": true,
+   "verify_clerk_connected": true
+  },
+  "harness_matches_clone": true,
+  "npm_installs": [
+   "frontend/clerk-sdk",
+   "frontend"
+  ],
+  "pre_install_audit_ok": true,
+  "status": "PASS",
+  "target_reachable_from_remote_main": true,
+  "targeted_tests_returncode": 0,
+  "tracked_files": 4298,
+  "tree_clean_after_checkout": true
+ },
+ "proof_b_browser_in_clone": {
+  "browser_audits_present": true,
+  "crawl_all_pass": true,
+  "e2e_returncode": 0,
+  "fresh_browser_profile": true,
+  "owner_binding_all_pass": true,
+  "presentation_verifier_returncode": 0,
+  "provenance_verifier_returncode": 0,
+  "real_clerk_session": true,
+  "secrets_clean": true,
+  "status": "PASS"
+ },
+ "release_target_sha": "b549f9915d91d960c949941b9341004152e5f5d1",
+ "secret_in_clone_tree": false,
+ "status": "PASS",
+ "target_sha": "b549f9915d91d960c949941b9341004152e5f5d1",
+ "tracked_modified_after_execution": []
+}

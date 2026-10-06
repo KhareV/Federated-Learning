@@ -1,0 +1,378 @@
+{
+ "by_classification": {
+  "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED": 31,
+  "MISLEADING_LIVE_STATE_ASSERTION": 2,
+  "STALE_PRODUCT_ASSERTION": 1,
+  "SUPPORTED_CURRENT_PRODUCT_FACT": 4,
+  "UNSUPPORTED_QUANTITATIVE_ASSERTION": 2
+ },
+ "high_risk_strings": 40,
+ "label": "CLEAN_CLONE",
+ "landing_file_count": 42,
+ "landing_import_graph": [
+  "frontend/src/lib/components/hardware/HardwareStudio.svelte",
+  "frontend/src/lib/components/landing/NeuralGraph.svelte",
+  "frontend/src/lib/components/landing/PhysiologicalWaveform.svelte",
+  "frontend/src/lib/components/landing/ProductWorkstation.svelte",
+  "frontend/src/lib/components/landing/SystemArchitecture.svelte",
+  "frontend/src/lib/components/landing/WatchScene.svelte",
+  "frontend/src/lib/components/magic/animated-beam/animated-beam.svelte",
+  "frontend/src/lib/components/magic/animated-beam/index.ts",
+  "frontend/src/lib/components/magic/animated-beam/types.ts",
+  "frontend/src/lib/components/magic/animated-beam/use-gradient-coordinates.svelte.ts",
+  "frontend/src/lib/components/magic/animated-beam/use-path-calculator.svelte.ts",
+  "frontend/src/lib/components/magic/animated-beam/use-resize-observer.svelte.ts",
+  "frontend/src/lib/components/magic/animated-grid-pattern/animated-grid-pattern.svelte",
+  "frontend/src/lib/components/magic/animated-grid-pattern/index.ts",
+  "frontend/src/lib/components/magic/animated-list/animated-list.svelte",
+  "frontend/src/lib/components/magic/animated-list/index.ts",
+  "frontend/src/lib/components/magic/arc-timeline/arc-timeline.svelte",
+  "frontend/src/lib/components/magic/arc-timeline/index.ts",
+  "frontend/src/lib/components/magic/arc-timeline/types.ts",
+  "frontend/src/lib/components/magic/blur-fade/blur-fade.svelte",
+  "frontend/src/lib/components/magic/dia-text-reveal/dia-text-reveal.svelte",
+  "frontend/src/lib/components/magic/dia-text-reveal/index.ts",
+  "frontend/src/lib/components/magic/globe/globe.svelte",
+  "frontend/src/lib/components/magic/globe/index.ts",
+  "frontend/src/lib/components/magic/lens/index.ts",
+  "frontend/src/lib/components/magic/lens/lens.svelte",
+  "frontend/src/lib/components/magic/line-shadow-text/index.ts",
+  "frontend/src/lib/components/magic/line-shadow-text/line-shadow-text.svelte",
+  "frontend/src/lib/components/magic/marquee/index.ts",
+  "frontend/src/lib/components/magic/marquee/marquee.svelte",
+  "frontend/src/lib/components/magic/morphing-text/index.ts",
+  "frontend/src/lib/components/magic/morphing-text/morphing-text.svelte",
+  "frontend/src/lib/components/magic/number-ticker/number-ticker.svelte",
+  "frontend/src/lib/components/magic/pixel-image/index.ts",
+  "frontend/src/lib/components/magic/pixel-image/pixel-image.svelte",
+  "frontend/src/lib/components/magic/progressive-blur/index.ts",
+  "frontend/src/lib/components/magic/progressive-blur/progressive-blur.svelte",
+  "frontend/src/lib/components/magic/typing-animation/index.ts",
+  "frontend/src/lib/components/magic/typing-animation/typing-animation.svelte",
+  "frontend/src/lib/components/signals/MultimodalStudio.svelte",
+  "frontend/src/lib/utils.ts",
+  "frontend/src/routes/+page.svelte"
+ ],
+ "rows": [
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/hardware/HardwareStudio.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "ILLUSTRATIVE, NOT LIVE HARDWARE"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/hardware/HardwareStudio.svelte",
+   "rules": [
+    "edge_inference"
+   ],
+   "text": "FIRMWARE CONCEPT -- NO ON-DEVICE INFERENCE"
+  },
+  {
+   "classification": "STALE_PRODUCT_ASSERTION",
+   "file": "frontend/src/lib/components/hardware/HardwareStudio.svelte",
+   "rules": [
+    "edge_inference"
+   ],
+   "text": "ON-DEVICE INFERENCE"
+  },
+  {
+   "classification": "SUPPORTED_CURRENT_PRODUCT_FACT",
+   "file": "frontend/src/lib/components/hardware/HardwareStudio.svelte",
+   "rules": [
+    "edge_inference"
+   ],
+   "text": "No on-device/edge ML inference is implemented anywhere in this project"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Hover any node for a conceptual description of a feature path. All values are illustrative - not live telemetry."
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "ILLUSTRATIVE VALUE (NOT LIVE)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "UNSUPPORTED_QUANTITATIVE_ASSERTION",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "physiological_value"
+   ],
+   "text": "PPG 660nm (Red)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "UNSUPPORTED_QUANTITATIVE_ASSERTION",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "physiological_value"
+   ],
+   "text": "PPG 880nm (IR)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live, not a diagnosis)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Illustrative (not live)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "detection_claim"
+   ],
+   "text": "Illustrative only -- not a detection claim"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "detection_claim"
+   ],
+   "text": "Illustrative only -- not a detection claim"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "rules": [
+    "detection_claim"
+   ],
+   "text": "Illustrative only -- not a detection claim"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/ProductWorkstation.svelte",
+   "rules": [
+    "physiological_value"
+   ],
+   "text": "Resting scenario (72 BPM, synthetic)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/ProductWorkstation.svelte",
+   "rules": [
+    "physiological_value"
+   ],
+   "text": "Slow-rate scenario (48 BPM, synthetic)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/ProductWorkstation.svelte",
+   "rules": [
+    "physiological_value"
+   ],
+   "text": "Exertion scenario (118 BPM, synthetic)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/SystemArchitecture.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Concept Map, Not Live Deployment Telemetry"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/SystemArchitecture.svelte",
+   "rules": [
+    "edge_inference"
+   ],
+   "text": "Embedded Edge Firmware (Concept)"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/lib/components/landing/SystemArchitecture.svelte",
+   "rules": [
+    "detection_claim"
+   ],
+   "text": "Concept feature-extraction stage (not implemented on any wearable): QRS peak detection, R-R interval HRV extraction and pulse-transit-time fusion are candidate "
+  },
+  {
+   "classification": "SUPPORTED_CURRENT_PRODUCT_FACT",
+   "file": "frontend/src/lib/components/landing/SystemArchitecture.svelte",
+   "rules": [
+    "clinical_monitoring"
+   ],
+   "text": "Research prototype -- no clinical-grade security claim"
+  },
+  {
+   "classification": "SUPPORTED_CURRENT_PRODUCT_FACT",
+   "file": "frontend/src/lib/components/landing/SystemArchitecture.svelte",
+   "rules": [
+    "edge_inference"
+   ],
+   "text": "On-Device Inference: Not Implemented"
+  },
+  {
+   "classification": "MISLEADING_LIVE_STATE_ASSERTION",
+   "file": "frontend/src/routes/+page.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "LIVE MONITORING RESEARCH"
+  },
+  {
+   "classification": "MISLEADING_LIVE_STATE_ASSERTION",
+   "file": "frontend/src/routes/+page.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "LIVE MONITORING SESSIONS"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/routes/+page.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Concept render of a virtual wearable. Text on the model is illustrative - not live data, not connected hardware."
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/routes/+page.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "NOT LIVE DATA"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/routes/+page.svelte",
+   "rules": [
+    "edge_inference"
+   ],
+   "text": "A research layering from concept sensor front-end sketches, through server-side CPU inference and a federated-learning research lineage with a SecAgg+ interface"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/routes/+page.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "An interactive, simulated preview of the research monitoring environment: illustrative multilead waveforms and research-only monitoring states. Not live signals"
+  },
+  {
+   "classification": "SUPPORTED_CURRENT_PRODUCT_FACT",
+   "file": "frontend/src/routes/+page.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "Live monitoring. Federated model development. Hardware-ready source architecture. Research prototype - not diagnostic."
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/routes/+page.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "NHM: a research platform for live physiological monitoring with a released model, an engineering federated-learning runtime with synthetic clients and a hardwar"
+  },
+  {
+   "classification": "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+   "file": "frontend/src/routes/+page.svelte",
+   "rules": [
+    "live_or_realtime"
+   ],
+   "text": "NHM: a research platform for live physiological monitoring with a released model, an engineering federated-learning runtime with synthetic clients and a hardwar"
+  }
+ ]
+}
