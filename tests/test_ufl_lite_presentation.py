@@ -68,15 +68,31 @@ def test_ui_v1_4_chain_verifies_and_predecessor_locks_are_byte_identical() -> No
     lock = json.loads((ROOT / "artifacts/capstone/CAPSTONE_UI_V1_4.lock.json").read_text())
     assert lock["predecessor_id"] == "CAPSTONE_UI_V1_3" and lock["owner_phase"] == "UFL-LITE-002" and lock["reason"] == "USER_BOUND_FL_PRESENTATION_SUCCESSOR" and lock["npm_dependencies_added"] == []
     changed = sorted(set(git("diff", "--name-only", "--diff-filter=AM", ENTRY, "--", "frontend").split()))
-    assert changed == sorted(lock["changed_from_predecessor"]), changed
+    accounted = set(lock["changed_from_predecessor"])
+    successor15 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_5.lock.json"       # FINAL-EVAL-REPAIR-001: V1_5 accounts for its own, separately governed delta
+    if successor15.exists():
+        accounted |= set(json.loads(successor15.read_text())["changed_from_predecessor"])
+    assert changed == sorted(accounted), changed
+
+
+def _with_v15(then=lambda s: None):
+    """The shadow copies the CURRENT frontend, which FINAL-EVAL-REPAIR-001 governs through its V1_5 successor lock: register that lock in the shadow too."""
+    def mutate(s):
+        import shutil
+
+        v15 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_5.lock.json"
+        if v15.exists():
+            shutil.copyfile(v15, s / "artifacts/capstone/CAPSTONE_UI_V1_5.lock.json")
+        then(s)
+    return mutate
 
 
 def test_ui_v1_4_verifier_fails_closed_on_unbound_missing_wrong_digest_and_modified_predecessor() -> None:
-    assert plib.shadow_ui14(lambda s: None) is None
-    assert "UNBOUND_OR_MISSING" in (plib.shadow_ui14(lambda s: (s / "frontend/src/lib/product/federation/unbound_extra.ts").write_text("x")) or "")
-    assert "UNBOUND_OR_MISSING" in (plib.shadow_ui14(lambda s: (s / "frontend/src/lib/product/federation/participation.ts").unlink()) or "")
-    assert "TAMPER" in (plib.shadow_ui14(lambda s: (s / "frontend/src/lib/product/federation/participation.ts").write_text("export const x = 1;\n")) or "")
-    assert "PREDECESSOR_DRIFT" in (plib.shadow_ui14(lambda s: (s / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json").write_text("{}\n")) or "")
+    assert plib.shadow_ui14(_with_v15()) is None
+    assert "UNBOUND_OR_MISSING" in (plib.shadow_ui14(_with_v15(lambda s: (s / "frontend/src/lib/product/federation/unbound_extra.ts").write_text("x"))) or "")
+    assert "UNBOUND_OR_MISSING" in (plib.shadow_ui14(_with_v15(lambda s: (s / "frontend/src/lib/product/federation/participation.ts").unlink())) or "")
+    assert "TAMPER" in (plib.shadow_ui14(_with_v15(lambda s: (s / "frontend/src/lib/product/federation/participation.ts").write_text("export const x = 1;\n"))) or "")
+    assert "PREDECESSOR_DRIFT" in (plib.shadow_ui14(_with_v15(lambda s: (s / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json").write_text("{}\n"))) or "")
 
 
 def test_compatibility_amendments_are_pure_successor_records() -> None:

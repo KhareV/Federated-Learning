@@ -1,0 +1,25 @@
+{
+ "amendment_id": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_5",
+ "change": "Successor awareness only: when the registered CAPSTONE_UI_V1_5 lock exists and chains to CAPSTONE_UI_V1_4 (predecessor sha verified) the current frontend bytes are governed by it; without a V1_5 lock behaviour is byte-identical to before. Unaccounted frontend drift still fails. Historical lock files V1..V1_4 are unchanged. Named with a _ suffix where a numeric amendment would mis-sort lexicographically.",
+ "defect": "FINAL-EVAL-REPAIR-001 repairs evaluator-facing frontend presentation (landing, About, legacy-route retirement). The frozen UI-lock chain needs a registered CAPSTONE_UI_V1_5 successor, and the historical UI verifiers / frontend-pin guards must understand it.",
+ "files": {
+  "scripts/verify_capstone_ui_v1.py": {
+   "new_sha256": "1d8f7445367399d24a66b793a408d0c76df879b19605f638cad6fee72186f737",
+   "old_sha256": "4b9f23f461e467badaef02190d75ca39232b95e81a5126bc5a3b967fef991b87"
+  },
+  "scripts/verify_capstone_ui_v1_1.py": {
+   "new_sha256": "fd5ed84081c64b2b607639c5e5229d00f6dd2d8b6abcac6f9453e4960b642a3d",
+   "old_sha256": "99c443b1daeeb9f4b64e2398827806125cc821f27a21e774cf6d81c75ccf4e20"
+  },
+  "tests/test_capstone_federation_ui.py": {
+   "new_sha256": "125e740e6eed9c84cde0a3f3f276e77fa439d729d7bbee485b557dcff0e05ba5",
+   "old_sha256": "720fdbfe75f51782222c71ef1820bc56545315a42762492751f87eafc668b03f"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAP-008 (historical UI verifiers/tests governed for FINAL-EVAL-REPAIR-001)",
+ "previous_amendment": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_4",
+ "reason": "EVALUATOR_PRESENTATION_REPAIR_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

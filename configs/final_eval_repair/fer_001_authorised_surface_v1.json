@@ -1,0 +1,30 @@
+{
+ "surface_id": "FER_001_AUTHORISED_SURFACE_V1",
+ "note": "The ONLY pre-existing files FINAL-EVAL-REPAIR-001 may modify, and the ONLY new files it may add outside its own namespaces. Everything else (backend, API, DB, FL, auth, scientific, contracts, checkpoints) must stay byte-identical.",
+ "authorised_modifications": [
+  "frontend/src/routes/+layout.ts",
+  "frontend/src/routes/+page.svelte",
+  "frontend/src/routes/app/about/+page.svelte",
+  "scripts/verify_capstone_ui_v1.py",
+  "scripts/verify_capstone_ui_v1_1.py",
+  "scripts/verify_capstone_ui_v1_2.py",
+  "scripts/verify_capstone_ui_v1_3.py",
+  "scripts/verify_capstone_ui_v1_4.py",
+  "tests/test_capstone_federation_ui.py",
+  "tests/test_capstone_full_demo.py",
+  "tests/test_ufl_lite_presentation.py"
+ ],
+ "authorised_new_files": [
+  "frontend/src/lib/product/route-policy.ts",
+  "frontend/src/lib/product/__tests__/route-policy.test.ts",
+  "docs/capstone/CLERK_CONNECTED_RUNBOOK_V1_1.md",
+  "artifacts/capstone/CAPSTONE_UI_V1_5.lock.json",
+  "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_9_2.json",
+  "artifacts/capstone/CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_5.json",
+  "artifacts/capstone/CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1.amendment_9_5.json",
+  "artifacts/capstone/CAPSTONE_FACULTY_DEMO_PROTOCOL_V1.amendment_4.json",
+  "artifacts/ufl_lite/UFL_LITE_002_PROTOCOL_V1.amendment_1.json",
+  "scripts/freeze_capstone_ui_v1_5.py",
+  "scripts/verify_capstone_ui_v1_5.py"
+ ]
+}

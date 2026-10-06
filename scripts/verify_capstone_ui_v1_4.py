@@ -9,6 +9,19 @@ from nhm.hashing import hash_file
 from scripts.freeze_capstone_ui_v1_4 import LOCK_PATH, PREDECESSOR, ROOT, frontend_files
 
 
+def _v15_bound() -> dict[str, str] | None:
+    """FINAL-EVAL-REPAIR-001 successor: a V1_5 lock chained to V1_4 governs the current bytes."""
+    path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_5.lock.json"
+    if not path.exists():
+        return None
+    lock = json.loads(path.read_text(encoding="utf-8"))
+    v14 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_4.lock.json"
+    chained = lock.get("predecessor_id") == "CAPSTONE_UI_V1_4"
+    if not chained or lock.get("predecessor_sha256") != hash_file(v14):
+        raise RuntimeError("CAPSTONE_UI_V1_5_SUCCESSOR_CHAIN_BROKEN")
+    return dict(lock["bound_artifacts"])
+
+
 def verify() -> dict[str, object]:
     lock = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
     if lock["lock_id"] != "CAPSTONE_UI_V1_4" or lock["status"] != "FROZEN_ENGINEERING_INTERFACE":
@@ -17,7 +30,7 @@ def verify() -> dict[str, object]:
         raise RuntimeError("CAPSTONE_UI_V1_4_PREDECESSOR_DRIFT")
     if lock["npm_dependencies_added"] or lock["api_contract_changed"] or lock["scientific_state_semantics_changed"] or lock["backend_modified"]:
         raise RuntimeError("CAPSTONE_UI_V1_4_SCOPE_DRIFT")
-    expected, actual = lock["bound_artifacts"], frontend_files()
+    expected, actual = _v15_bound() or lock["bound_artifacts"], frontend_files()
     if set(actual) != set(expected):
         raise RuntimeError("CAPSTONE_UI_V1_4_UNBOUND_OR_MISSING_FRONTEND_FILE")
     for path, digest in expected.items():

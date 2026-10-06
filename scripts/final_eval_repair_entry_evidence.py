@@ -38,7 +38,7 @@ def main(audit_raw: str) -> None:
     }
     wr("failed_findings_reproduction.json", {"entry_sha": lib.git("rev-parse", "HEAD"), "findings": f, "all_reproduced": bool(f["F-01"] and f["F-02"] and f["F-03"]["legacy_namespaces_rendering_stale_content"] and f["F-04"] and f["F-06"])})
     wr("font_404_entry.json", {"missing_asset": "/LastoriaBoldRegular.otf", "present_in_static_or_src": (ROOT / "frontend/static/LastoriaBoldRegular.otf").exists(), "initiator": "frontend/src/lib/components/spell/signature/signature.svelte fetch(); used by <Signature> twice on the landing page (decorative handwriting animation: 'NHM', 'Context is everything.')", "landing_usages": lines_matching("frontend/src/routes/+page.svelte", r"<Signature"), "network_observation": "audit crawl: two 404 requests on /"})
-    print(json.dumps({"routes": len(routes), "reproduced": json.load(open(OUT / "failed_findings_reproduction.json"))["all_reproduced"]}))
+    print(json.dumps({"routes": len(routes), "reproduced": json.loads((OUT / "failed_findings_reproduction.json").read_text())["all_reproduced"]}))
 
 
 if __name__ == "__main__":

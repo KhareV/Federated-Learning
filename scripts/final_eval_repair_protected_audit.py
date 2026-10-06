@@ -6,14 +6,13 @@ from __future__ import annotations
 
 import json
 import sys
-from pathlib import Path
 
 from scripts import final_eval_repair_lib as lib
 from scripts.cap_001_protected_audit import named_components, tracked_hashes
 from scripts.cap_011_protected_audit import all_locks
 
 ROOT, OUT, ENTRY = lib.ROOT, lib.ROOT / "reports/final_eval_repair/fer_001", lib.ENTRY
-PROTOCOL = ROOT / "configs/final_eval_repair/fer_001_protocol_v1.json"
+PROTOCOL = ROOT / "configs/final_eval_repair/fer_001_authorised_surface_v1.json"
 ADDITIVE = ("manifests/final_eval_repair/", "configs/final_eval_repair/", "docs/final_eval_repair/", "artifacts/final_eval_repair/", "reports/final_eval_repair/", "scripts/final_eval_repair_", "tests/test_final_eval_repair_")
 PROTECTED = ("api/", "product/", "capstone_persistence/", "federated/", "privacy/", "simulation/", "src/", "checkpoints/", "contracts/", "reports/model_v2/", "reports/capstone/", "reports/clerk_connected/", "reports/ufl_lite/", "release/", "configs/ufl_lite/", "configs/model_v2/", "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json", "artifacts/SOFTWARE_SYSTEM_V2.lock.json", "artifacts/CAL_V2.json")
 

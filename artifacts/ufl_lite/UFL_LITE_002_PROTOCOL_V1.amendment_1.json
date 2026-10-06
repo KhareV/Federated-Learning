@@ -1,0 +1,20 @@
+{
+ "amendment_id": "UFL_LITE_002_PROTOCOL_V1_AMENDMENT_1",
+ "change": "Successor awareness only: when the registered CAPSTONE_UI_V1_5 lock exists and chains to CAPSTONE_UI_V1_4 (predecessor sha verified) the current frontend bytes are governed by it; without a V1_5 lock behaviour is byte-identical to before. Unaccounted frontend drift still fails. Historical lock files V1..V1_4 are unchanged. Named with a _ suffix where a numeric amendment would mis-sort lexicographically.",
+ "defect": "FINAL-EVAL-REPAIR-001 repairs evaluator-facing frontend presentation (landing, About, legacy-route retirement). The frozen UI-lock chain needs a registered CAPSTONE_UI_V1_5 successor, and the historical UI verifiers / frontend-pin guards must understand it.",
+ "files": {
+  "scripts/verify_capstone_ui_v1_4.py": {
+   "new_sha256": "eeb4a4f935cf91e5bb546df7de4e8032ecd00f468d7bfc51bef4e11a3d901594",
+   "old_sha256": "16aa2d958890089740ea9eae5fef8e7255d2450a1a937e63cfe9cf70d508f5d7"
+  },
+  "tests/test_ufl_lite_presentation.py": {
+   "new_sha256": "ff825cff3375a9e55b28df7a6dc39fe6e7fc117bbd6d783a77e039e131e88104",
+   "old_sha256": "7fbcbb6e61d32fb32e82e788807c08799bbef76002434cedd0f2709f8449df31"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "UFL-LITE-002 (frozen verifier/test governed for FINAL-EVAL-REPAIR-001)",
+ "reason": "EVALUATOR_PRESENTATION_REPAIR_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}
