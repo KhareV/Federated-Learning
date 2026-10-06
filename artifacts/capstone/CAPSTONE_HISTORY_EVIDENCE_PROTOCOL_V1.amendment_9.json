@@ -1,0 +1,15 @@
+{
+  "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_9",
+  "change": "CAP-009 is now exactly PASS/CAPG8 PASS with final-handoff evidence; CAP-010 accepts only its governed states (NOT_STARTED with no CAPG9 row, IN_PROGRESS with CAPG9 NOT_STARTED and entry-audit evidence, or PASS with CAPG9 PASS, final-handoff evidence and a nonempty implementation commit); CAP-011 stays exactly NOT_STARTED with no evidence. Every other assertion is unchanged.",
+  "defect": "The strict lifecycle guard pins CAP-009 to a governed pair of states and CAP-010/CAP-011 to NOT_STARTED, so the prospective CAP-010 IN_PROGRESS / CAPG9 transition cannot be recorded.",
+  "files": {
+    "tests/test_capstone_lifecycle.py": {
+      "new_sha256": "fb8e31b21606e57d8e70373bf1abd3bbc00d1cc18888608c3206e04b8858d740",
+      "old_sha256": "c981bd0449fa5b43395ecd0ed4dba05bed7313ad968ad0f9f3e305185ffc483b"
+    }
+  },
+  "made_after_method_freeze": true,
+  "owner_phase": "CAP-009 (historical guard governed for CAP-010)",
+  "previous_amendment": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_8",
+  "result_evidence_committed_with_amendment": false
+}
