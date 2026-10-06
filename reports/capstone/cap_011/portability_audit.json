@@ -1,0 +1,16 @@
+{
+ "case_sensitivity": {
+  "case_collisions": [],
+  "note": "no two tracked paths differ only by case; release imports use exact-case paths on the tested platform",
+  "ok": true,
+  "tracked_files": 3983
+ },
+ "portability": {
+  "files_scanned": 817,
+  "hits": [],
+  "ok": true,
+  "scope": "release-facing executable/config files (historical task-evidence generators and prior-phase evidence scripts excluded)"
+ },
+ "status": "PASS",
+ "tested_os": "recorded per clone in clean_clone_*_environment.json"
+}

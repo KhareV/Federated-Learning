@@ -1,0 +1,26 @@
+{
+ "limitations": [
+  "non-diagnostic research prototype",
+  "physical wearable absent",
+  "WEARABLE_V1 validation absent",
+  "simulation-only device path",
+  "accelerated demo timing",
+  "MODEL_V2 historical release-seed promotion CI crossed zero",
+  "only six eligible INTERNAL_TEST groups",
+  "CAL_V2 source-domain only",
+  "V2-010 / INCART second-look caveats",
+  "QUALITY_V1 stuck-nonzero limitation",
+  "SecAgg narrow protected-aggregation-interface claim",
+  "no differential privacy",
+  "logical one-laptop FL clients",
+  "candidate sandbox has no inference runtime",
+  "candidate not deployed",
+  "Clerk real-account WebSocket path not verified",
+  "one-active-FL-run is not distributed locking",
+  "CAP-003 inherited timing race",
+  "npm dependency advisories already disclosed",
+  "installation may need public package-registry network access",
+  "clean release is not raw-data scientific re-execution"
+ ],
+ "status": "PASS"
+}

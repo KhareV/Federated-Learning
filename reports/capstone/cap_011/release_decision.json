@@ -1,0 +1,77 @@
+{
+ "candidate_deployed": false,
+ "clean_clone_a": "PASS",
+ "clean_clone_b": "PASS",
+ "clean_clone_claim": "CLEAN-CLONE SOFTWARE / ARTIFACT / PRODUCT DEMO REPRODUCIBILITY; it is NOT full raw-data scientific re-execution from an empty machine.",
+ "decision": "ACCEPT",
+ "decision_id": "CAPSTONE_RELEASE_DECISION_V1",
+ "decision_separation": {
+  "CAPSTONE_RELEASE_V1": "answers a third question: is the finished capstone software/demo package clean-clone reproducible and faculty-ready",
+  "MODEL_V2_NOT_PROMOTED_RELEASE_CI": "preserved",
+  "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED": "preserved"
+ },
+ "hard_blockers_evaluated": 23,
+ "hard_blockers_passed": 23,
+ "installation_claim": "Initial dependency installation may require Internet access (public Python and npm registries); no air-gapped installation and no vendored dependencies are claimed.",
+ "limitations": [
+  "non-diagnostic research prototype",
+  "physical wearable absent",
+  "WEARABLE_V1 validation absent",
+  "simulation-only device path",
+  "accelerated demo timing",
+  "MODEL_V2 historical release-seed promotion CI crossed zero",
+  "only six eligible INTERNAL_TEST groups",
+  "CAL_V2 source-domain only",
+  "V2-010 / INCART second-look caveats",
+  "QUALITY_V1 stuck-nonzero limitation",
+  "SecAgg narrow protected-aggregation-interface claim",
+  "no differential privacy",
+  "logical one-laptop FL clients",
+  "candidate sandbox has no inference runtime",
+  "candidate not deployed",
+  "Clerk real-account WebSocket path not verified",
+  "one-active-FL-run is not distributed locking",
+  "CAP-003 inherited timing race",
+  "npm dependency advisories already disclosed",
+  "installation may need public package-registry network access",
+  "clean release is not raw-data scientific re-execution"
+ ],
+ "manual_override": false,
+ "note": "This decision is about the software/demo package only. It does not promote any model and does not alter MODEL_V2_NOT_PROMOTED_RELEASE_CI or SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED.",
+ "policy": "CAPSTONE_RELEASE_POLICY_V1",
+ "release_claim": "CAPSTONE_RELEASE_V1 is a clean-clone reproducible, one-laptop research-software/faculty-demonstration release of the NHM capstone product using simulated device input, released MODEL_V2_FINAL monitoring, genuine engineering federation, persistent history, and frozen research-evidence views.",
+ "release_claim_excludes": [
+  "physical wearable validation",
+  "clinical use",
+  "medical-device status",
+  "production deployment",
+  "security certification",
+  "hospital deployment",
+  "differential privacy",
+  "anonymous federation",
+  "clean-room raw-dataset scientific reproduction"
+ ],
+ "release_id": "CAPSTONE_RELEASE_V1",
+ "release_scope": "ONE-LAPTOP CAPSTONE SOFTWARE / FACULTY-DEMO RELEASE (not the historical RELEASE_V1 / T036 / G22 / F15 lineage)",
+ "release_target_sha": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+ "released_default_model": "MODEL_V2_FINAL",
+ "runtime_offline_claim": "After installation the demonstration runtime requires only loopback networking and was verified with non-loopback browser requests blocked (CAP-010 mechanism).",
+ "tested_platform": {
+  "clone_a": {
+   "architecture": "arm64",
+   "browser": "Google Chrome 154.0.8037.98",
+   "node": "v26.5.0",
+   "npm": "11.17.0",
+   "platform": "macOS-27.0.1-arm64-arm-64bit",
+   "python": "Python 3.11.16"
+  },
+  "clone_b": {
+   "architecture": "arm64",
+   "browser": "Google Chrome 154.0.8037.98",
+   "node": "v26.5.0",
+   "npm": "11.17.0",
+   "platform": "macOS-27.0.1-arm64-arm-64bit",
+   "python": "Python 3.11.16"
+  }
+ }
+}

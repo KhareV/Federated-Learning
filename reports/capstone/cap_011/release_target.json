@@ -1,0 +1,10 @@
+{
+ "commit_subject": "freeze(cap-011): RELEASE TARGET - CAPSTONE_RELEASE_PROTOCOL_V1 (136 CAPG10 criteria, 20 mutation controls) + CAPSTONE_RELEASE_POLICY_V1 (23 hard blockers, manual_override_allowed=false) + CAPSTONE_CLEAN_CLONE_PROTOCOL_V1 + CAPSTONE_RELEASE_MANIFEST_V1 + CAPSTONE_RELEASE_GUIDE_V1 + release verifier, clean-clone harness and frozen CAPG10 evaluator + targeted tests + lock/component registry; frozen BEFORE any canonical clean clone; release layer only, no product change",
+ "local_head": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+ "ok": true,
+ "origin_main": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+ "pushed": true,
+ "release_target_sha": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+ "release_vehicle": "the exact Git repository state at RELEASE_TARGET_SHA (no archive, no installer)",
+ "working_tree_clean": true
+}

@@ -1,0 +1,63 @@
+{
+ "NODE_PATH_inherited": false,
+ "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+ "PYTHONPATH_inherited": false,
+ "VIRTUAL_ENV_inherited": false,
+ "architecture": "arm64",
+ "browser": "Google Chrome 154.0.8037.98",
+ "clone": {
+  "alternates_present": false,
+  "checkout_matches_target": true,
+  "checkout_sha": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+  "clone_inside_development_checkout": false,
+  "clone_root_is_new_temp_dir": true,
+  "clone_source": "remote git repository (git clone over the configured origin URL)",
+  "git_dir_is_directory": true,
+  "harness_matches_clone": true,
+  "harness_sha256_clone": "23632d536c475d4c89e4fe66b392d7de87d512022b3920ebd29bf38ee7769a64",
+  "harness_sha256_dev": "23632d536c475d4c89e4fe66b392d7de87d512022b3920ebd29bf38ee7769a64",
+  "ignored_paths_after_checkout": [],
+  "manual_copies": false,
+  "pre_install_audit": {
+   "ok": true,
+   "violations": []
+  },
+  "remote_main_sha_at_clone": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+  "target_reachable_from_remote_main": true,
+  "tracked_files": 3983,
+  "tracked_raw_biomedical_files": [],
+  "tracked_symlinks": [],
+  "tree_clean_after_checkout": true,
+  "worktree_used": false
+ },
+ "clone_root_id": "8b4a1607ebcdacb3",
+ "environment_secrets_recorded": false,
+ "git": "git version 2.54.0 (Apple Git-157)",
+ "isolated_home": true,
+ "kind": "environment",
+ "label": "A",
+ "lock_sha256": {
+  "frontend/clerk-sdk/package-lock.json": "f948b4759a819f768885da5129a078513ac5942fa778c37a8c45691081bf8f5e",
+  "frontend/clerk-sdk/package.json": "a31971f9db734cdc439ae79a43da28d09711daa21440f314acdd97e7423fb2bd",
+  "frontend/package-lock.json": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae",
+  "frontend/package.json": "cb5318e33c5aea08eaa722fb4eafc3971e33e899a06869f3774ce75a866ae8e9",
+  "pyproject.toml": "af83432eea745b52acc268ce1040edefd83cc8edc6a94afd9f7e8232aaecab34",
+  "requirements-capstone-auth.lock": "7c75bc14e595af8706f6de3605c7d69ffe5200e43859090d84d0b0b7c20da9e3",
+  "requirements-dev.lock": "0d4a0561bfadf89157b9f6f6dfbfa87e885aca2815a45a442e04a98d662f2a0e"
+ },
+ "node": "v26.5.0",
+ "note": "inventory is evidence, not a minimum performance requirement",
+ "npm": "11.17.0",
+ "pip": "pip 26.2.1 from /private/tmp/claude-501/-Users-Home-Downloads-miniproject/0dd0ada2-96d7-46cd-8738-8741285d54fd/scratchpad/cloneA/base/capclean_a_c1lmnv9v/nhm-capstone/.venv/lib/python3.11/site-packages/pip (python 3.11)",
+ "platform": "macOS-27.0.1-arm64-arm-64bit",
+ "python": "Python 3.11.16",
+ "release_target_sha": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+ "status": "PASS",
+ "system": "Darwin",
+ "venv": {
+  "created_by_this_run": true,
+  "development_venv_used": false,
+  "location": "<clone>/.venv",
+  "python_executable_inside_clone_venv": true
+ }
+}

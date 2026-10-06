@@ -1,0 +1,26 @@
+{
+ "approved_exclusions": [
+  "session ids",
+  "federation run ids",
+  "timestamps",
+  "latencies",
+  "pids",
+  "temporary paths",
+  "machine-time telemetry",
+  "log text",
+  "screenshots"
+ ],
+ "clone_a_semantic_sha256": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "clone_b_semantic_sha256": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "identical": true,
+ "included": [
+  "runtime identity (model/calibration/system)",
+  "monitoring semantic projection",
+  "FL update digests",
+  "round global-state digests",
+  "candidate state digest",
+  "governance result",
+  "research payload hashes and catalog digest"
+ ],
+ "status": "PASS"
+}

@@ -1,0 +1,2093 @@
+{
+ "all_decided_pass": true,
+ "all_hard_blockers_pass": true,
+ "criteria": [
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_1",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-001",
+   "pass": true,
+   "text": "CAP-001/CAPG0 PASS"
+  },
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_2",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-002",
+   "pass": true,
+   "text": "CAP-002/CAPG1 PASS"
+  },
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_3",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-003",
+   "pass": true,
+   "text": "CAP-003/CAPG2 PASS"
+  },
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_4",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-004",
+   "pass": true,
+   "text": "CAP-004/CAPG3 PASS"
+  },
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_5",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-005",
+   "pass": true,
+   "text": "CAP-005/CAPG4 PASS"
+  },
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_6",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-006",
+   "pass": true,
+   "text": "CAP-006/CAPG5 PASS"
+  },
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_7",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-007",
+   "pass": true,
+   "text": "CAP-007/CAPG6 PASS"
+  },
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_8",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-008",
+   "pass": true,
+   "text": "CAP-008/CAPG7 PASS"
+  },
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_9",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-009",
+   "pass": true,
+   "text": "CAP-009/CAPG8 PASS"
+  },
+  {
+   "blockers": [
+    "B01",
+    "B02"
+   ],
+   "checks": [
+    {
+     "check": "cap_pass_10",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-010",
+   "pass": true,
+   "text": "CAP-010/CAPG9 PASS"
+  },
+  {
+   "blockers": [
+    "B03"
+   ],
+   "checks": [
+    {
+     "check": "locks_verified",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-011",
+   "pass": true,
+   "text": "all prior locks/amendments verify"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "entry_audit_immutable",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-012",
+   "pass": true,
+   "text": "CAP-011 entry audit immutable"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "historical_untouched",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-013",
+   "pass": true,
+   "text": "historical RELEASE_V1/T036/G22/F15 untouched"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "no_sci_drift",
+     "pass": true
+    },
+    {
+     "check": "protected_final_clean",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-014",
+   "pass": true,
+   "text": "scientific artifacts zero drift"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "no_runtime_drift",
+     "pass": true
+    },
+    {
+     "check": "protected_final_clean",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-015",
+   "pass": true,
+   "text": "released runtime zero drift"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "no_fl_drift",
+     "pass": true
+    },
+    {
+     "check": "protected_final_clean",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-016",
+   "pass": true,
+   "text": "V2-FL zero drift"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "no_frontend_drift",
+     "pass": true
+    },
+    {
+     "check": "protected_final_clean",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-017",
+   "pass": true,
+   "text": "frontend zero drift"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "no_backend_drift",
+     "pass": true
+    },
+    {
+     "check": "protected_final_clean",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-018",
+   "pass": true,
+   "text": "product backend zero drift"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "no_cap010_drift",
+     "pass": true
+    },
+    {
+     "check": "protected_final_clean",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-019",
+   "pass": true,
+   "text": "CAP-010 demo implementation zero drift"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "no_new_functionality",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-020",
+   "pass": true,
+   "text": "no new product functionality"
+  },
+  {
+   "blockers": [
+    "B05"
+   ],
+   "checks": [
+    {
+     "check": "policy_frozen",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-021",
+   "pass": true,
+   "text": "CAPSTONE_RELEASE_POLICY_V1 frozen"
+  },
+  {
+   "blockers": [
+    "B05"
+   ],
+   "checks": [
+    {
+     "check": "override_false",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-022",
+   "pass": true,
+   "text": "manual_override_allowed=false"
+  },
+  {
+   "blockers": [
+    "B05"
+   ],
+   "checks": [
+    {
+     "check": "protocol_frozen",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-023",
+   "pass": true,
+   "text": "CAPSTONE_RELEASE_PROTOCOL_V1 frozen"
+  },
+  {
+   "blockers": [
+    "B05"
+   ],
+   "checks": [
+    {
+     "check": "cc_protocol_frozen",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-024",
+   "pass": true,
+   "text": "CAPSTONE_CLEAN_CLONE_PROTOCOL_V1 frozen"
+  },
+  {
+   "blockers": [
+    "B05"
+   ],
+   "checks": [
+    {
+     "check": "manifest_frozen",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-025",
+   "pass": true,
+   "text": "CAPSTONE_RELEASE_MANIFEST_V1 frozen"
+  },
+  {
+   "blockers": [
+    "B05"
+   ],
+   "checks": [
+    {
+     "check": "verifier_frozen",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-026",
+   "pass": true,
+   "text": "release verifier frozen before the canonical clone"
+  },
+  {
+   "blockers": [
+    "B05"
+   ],
+   "checks": [
+    {
+     "check": "harness_frozen",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-027",
+   "pass": true,
+   "text": "clean-clone harness frozen before the canonical clone"
+  },
+  {
+   "blockers": [
+    "B05"
+   ],
+   "checks": [
+    {
+     "check": "criteria_frozen",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-028",
+   "pass": true,
+   "text": "CAPG10 criteria and evaluator frozen before the canonical clone"
+  },
+  {
+   "blockers": [
+    "B06"
+   ],
+   "checks": [
+    {
+     "check": "target_clean",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-029",
+   "pass": true,
+   "text": "RELEASE_TARGET_SHA clean before push"
+  },
+  {
+   "blockers": [
+    "B07"
+   ],
+   "checks": [
+    {
+     "check": "target_pushed",
+     "pass": true
+    },
+    {
+     "check": "target_equals_clone_origin",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-030",
+   "pass": true,
+   "text": "RELEASE_TARGET_SHA equals the origin state used by the clones"
+  },
+  {
+   "blockers": [
+    "B08"
+   ],
+   "checks": [
+    {
+     "check": "a_from_remote",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-031",
+   "pass": true,
+   "text": "Clone A obtained from the remote"
+  },
+  {
+   "blockers": [
+    "B08"
+   ],
+   "checks": [
+    {
+     "check": "a_exact_sha",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-032",
+   "pass": true,
+   "text": "Clone A exact checkout SHA correct"
+  },
+  {
+   "blockers": [
+    "B08"
+   ],
+   "checks": [
+    {
+     "check": "a_no_manual_copy",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-033",
+   "pass": true,
+   "text": "Clone A had no manual copied inputs"
+  },
+  {
+   "blockers": [
+    "B09"
+   ],
+   "checks": [
+    {
+     "check": "a_fresh_python",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-034",
+   "pass": true,
+   "text": "Clone A used a fresh Python environment"
+  },
+  {
+   "blockers": [
+    "B10"
+   ],
+   "checks": [
+    {
+     "check": "a_clean_npm",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-035",
+   "pass": true,
+   "text": "Clone A used a clean frontend npm installation"
+  },
+  {
+   "blockers": [
+    "B11"
+   ],
+   "checks": [
+    {
+     "check": "a_clean_clerk",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-036",
+   "pass": true,
+   "text": "Clone A used a clean ClerkJS npm installation"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "a_no_dotenv",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-037",
+   "pass": true,
+   "text": "Clone A required no developer .env"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "a_no_dev_venv",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-038",
+   "pass": true,
+   "text": "Clone A required no developer .venv"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "a_no_dev_node_modules",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-039",
+   "pass": true,
+   "text": "Clone A required no developer node_modules"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "a_no_dev_build",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-040",
+   "pass": true,
+   "text": "Clone A required no developer frontend build"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "a_no_dev_sqlite",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-041",
+   "pass": true,
+   "text": "Clone A required no developer SQLite"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "a_no_dev_candidate",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-042",
+   "pass": true,
+   "text": "Clone A required no developer candidate artifacts"
+  },
+  {
+   "blockers": [
+    "B20"
+   ],
+   "checks": [
+    {
+     "check": "a_no_raw_data",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-043",
+   "pass": true,
+   "text": "Clone A required no raw biomedical datasets for the product demo"
+  },
+  {
+   "blockers": [
+    "B13"
+   ],
+   "checks": [
+    {
+     "check": "a_verifier",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-044",
+   "pass": true,
+   "text": "Clone A release verifier passes"
+  },
+  {
+   "blockers": [
+    "B13"
+   ],
+   "checks": [
+    {
+     "check": "a_lineage",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-045",
+   "pass": true,
+   "text": "Clone A prior lineage verification passes"
+  },
+  {
+   "blockers": [
+    "B13"
+   ],
+   "checks": [
+    {
+     "check": "a_targeted",
+     "pass": true
+    },
+    {
+     "check": "T:test_release_manifest_verifies_against_the_tracked_artifacts",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-046",
+   "pass": true,
+   "text": "Clone A targeted release tests pass"
+  },
+  {
+   "blockers": [
+    "B13"
+   ],
+   "checks": [
+    {
+     "check": "a_regression",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-047",
+   "pass": true,
+   "text": "Clone A Python regression passes under the frozen clean-clone gating policy"
+  },
+  {
+   "blockers": [
+    "B13"
+   ],
+   "checks": [
+    {
+     "check": "a_unexpected_skips",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-048",
+   "pass": true,
+   "text": "Clone A unexpected clean-clone test skip count = 0"
+  },
+  {
+   "blockers": [
+    "B13"
+   ],
+   "checks": [
+    {
+     "check": "a_cap003",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-049",
+   "pass": true,
+   "text": "Clone A CAP-003 race handled only by the frozen policy"
+  },
+  {
+   "blockers": [
+    "B13"
+   ],
+   "checks": [
+    {
+     "check": "a_pip_check",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-050",
+   "pass": true,
+   "text": "Clone A pip check passes"
+  },
+  {
+   "blockers": [
+    "B14"
+   ],
+   "checks": [
+    {
+     "check": "a_npm_test",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-051",
+   "pass": true,
+   "text": "Clone A npm test passes"
+  },
+  {
+   "blockers": [
+    "B14"
+   ],
+   "checks": [
+    {
+     "check": "a_svelte",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-052",
+   "pass": true,
+   "text": "Clone A svelte-check has zero errors"
+  },
+  {
+   "blockers": [
+    "B14"
+   ],
+   "checks": [
+    {
+     "check": "a_build",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-053",
+   "pass": true,
+   "text": "Clone A frontend build passes"
+  },
+  {
+   "blockers": [
+    "B15"
+   ],
+   "checks": [
+    {
+     "check": "a_preflight",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-054",
+   "pass": true,
+   "text": "Clone A faculty preflight passes"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_demo_complete",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-055",
+   "pass": true,
+   "text": "Clone A full real browser demo completes"
+  },
+  {
+   "blockers": [
+    "B19"
+   ],
+   "checks": [
+    {
+     "check": "a_model",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-056",
+   "pass": true,
+   "text": "Clone A monitoring uses MODEL_V2_FINAL"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_cal",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-057",
+   "pass": true,
+   "text": "Clone A monitoring uses CAL_V2"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_history",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-058",
+   "pass": true,
+   "text": "Clone A history works"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_clients8",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-059",
+   "pass": true,
+   "text": "Clone A federation uses 8 clients"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_rounds3",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-060",
+   "pass": true,
+   "text": "Clone A federation uses 3 rounds"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_updates24",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-061",
+   "pass": true,
+   "text": "Clone A federation has 24 genuine updates"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_plain",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-062",
+   "pass": true,
+   "text": "Clone A authoritative aggregation is PLAIN"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_secagg",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-063",
+   "pass": true,
+   "text": "Clone A round-1 SecAgg shadow verifies"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_one_candidate",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-064",
+   "pass": true,
+   "text": "Clone A has exactly one candidate"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_candidate_sandbox",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-065",
+   "pass": true,
+   "text": "Clone A candidate is ACCEPTED_TO_SANDBOX"
+  },
+  {
+   "blockers": [
+    "B18"
+   ],
+   "checks": [
+    {
+     "check": "a_not_deployed",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-066",
+   "pass": true,
+   "text": "Clone A candidate has production_deployed=false"
+  },
+  {
+   "blockers": [
+    "B19"
+   ],
+   "checks": [
+    {
+     "check": "a_default",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-067",
+   "pass": true,
+   "text": "Clone A MODEL_V2_FINAL remains the released default"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_catalog",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-068",
+   "pass": true,
+   "text": "Clone A research catalog verifies"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_hardware",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-069",
+   "pass": true,
+   "text": "Clone A hardware mode is SIMULATED_ONLY"
+  },
+  {
+   "blockers": [
+    "B17"
+   ],
+   "checks": [
+    {
+     "check": "a_offline",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-070",
+   "pass": true,
+   "text": "Clone A runtime browser external requests = 0"
+  },
+  {
+   "blockers": [
+    "B17"
+   ],
+   "checks": [
+    {
+     "check": "a_clerk_off",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-071",
+   "pass": true,
+   "text": "Clone A Clerk is not initialized in DEMO"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_restart",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-072",
+   "pass": true,
+   "text": "Clone A restart preserves state without rerun"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "a_tracked_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-073",
+   "pass": true,
+   "text": "Clone A tracked files unchanged after execution"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "a_no_leak",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-074",
+   "pass": true,
+   "text": "Clone A no runtime artifact leaked into the repository"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_no_secret",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-075",
+   "pass": true,
+   "text": "Clone A no secret in logs"
+  },
+  {
+   "blockers": [
+    "B16"
+   ],
+   "checks": [
+    {
+     "check": "a_no_orphan",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-076",
+   "pass": true,
+   "text": "Clone A no orphaned service"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_from_remote",
+     "pass": true
+    },
+    {
+     "check": "b_distinct",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-077",
+   "pass": true,
+   "text": "Clone B is a distinct fresh remote clone"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_exact_sha",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-078",
+   "pass": true,
+   "text": "Clone B checks out the same RELEASE_TARGET_SHA"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_fresh_python",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-079",
+   "pass": true,
+   "text": "Clone B uses a distinct fresh Python environment"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_clean_npm",
+     "pass": true
+    },
+    {
+     "check": "b_clean_clerk",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-080",
+   "pass": true,
+   "text": "Clone B uses distinct fresh npm installations"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_distinct",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-081",
+   "pass": true,
+   "text": "Clone B uses a distinct runtime workspace"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_verifier",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-082",
+   "pass": true,
+   "text": "Clone B release verifier passes"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_npm_test",
+     "pass": true
+    },
+    {
+     "check": "b_svelte",
+     "pass": true
+    },
+    {
+     "check": "b_build",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-083",
+   "pass": true,
+   "text": "Clone B frontend tests/check/build pass"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_preflight",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-084",
+   "pass": true,
+   "text": "Clone B faculty preflight passes"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_demo_complete",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-085",
+   "pass": true,
+   "text": "Clone B real browser demo completes"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_default",
+     "pass": true
+    },
+    {
+     "check": "b_model",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-086",
+   "pass": true,
+   "text": "Clone B MODEL_V2_FINAL remains the released default"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_not_deployed",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-087",
+   "pass": true,
+   "text": "Clone B candidate remains not deployed"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "b_offline",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-088",
+   "pass": true,
+   "text": "Clone B runtime remains offline"
+  },
+  {
+   "blockers": [
+    "B21"
+   ],
+   "checks": [
+    {
+     "check": "ab_identical",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-089",
+   "pass": true,
+   "text": "Clone A/B stable semantic release projections are identical"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "no_rescue",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-090",
+   "pass": true,
+   "text": "no hidden-file rescue occurred"
+  },
+  {
+   "blockers": [
+    "B08"
+   ],
+   "checks": [
+    {
+     "check": "no_manual_copy_both",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-091",
+   "pass": true,
+   "text": "no source/data copy into either canonical clone occurred"
+  },
+  {
+   "blockers": [
+    "B20"
+   ],
+   "checks": [
+    {
+     "check": "no_raw_execution",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-092",
+   "pass": true,
+   "text": "no raw-data scientific execution occurred"
+  },
+  {
+   "blockers": [
+    "B20"
+   ],
+   "checks": [
+    {
+     "check": "no_heldout",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-093",
+   "pass": true,
+   "text": "no held-out inference occurred"
+  },
+  {
+   "blockers": [
+    "B20"
+   ],
+   "checks": [
+    {
+     "check": "no_retrain",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-094",
+   "pass": true,
+   "text": "no retraining/recalibration occurred outside the engineering FL demo"
+  },
+  {
+   "blockers": [
+    "B20"
+   ],
+   "checks": [
+    {
+     "check": "no_candidate_eval",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-095",
+   "pass": true,
+   "text": "no candidate scientific evaluation occurred"
+  },
+  {
+   "blockers": [
+    "B22"
+   ],
+   "checks": [
+    {
+     "check": "guide_commands_tested",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-096",
+   "pass": true,
+   "text": "release guide commands equal the tested commands"
+  },
+  {
+   "blockers": [
+    "B22"
+   ],
+   "checks": [
+    {
+     "check": "guide_network",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-097",
+   "pass": true,
+   "text": "release guide distinguishes install-network from runtime-offline"
+  },
+  {
+   "blockers": [
+    "B22"
+   ],
+   "checks": [
+    {
+     "check": "guide_scope",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-098",
+   "pass": true,
+   "text": "release guide distinguishes clean product reproduction from raw scientific reproduction"
+  },
+  {
+   "blockers": [
+    "B22"
+   ],
+   "checks": [
+    {
+     "check": "guide_claims",
+     "pass": true
+    },
+    {
+     "check": "T:test_release_claim_audit_rejects_every_overclaim",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-099",
+   "pass": true,
+   "text": "release guide contains no hardware/clinical/security overclaim"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "manifest_hashes",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-100",
+   "pass": true,
+   "text": "release manifest key hashes verify"
+  },
+  {
+   "blockers": [
+    "B22"
+   ],
+   "checks": [
+    {
+     "check": "limitations_complete",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-101",
+   "pass": true,
+   "text": "release limitations complete"
+  },
+  {
+   "blockers": [
+    "B22"
+   ],
+   "checks": [
+    {
+     "check": "env_inventory",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-102",
+   "pass": true,
+   "text": "release environment inventory recorded for both clones"
+  },
+  {
+   "blockers": [
+    "B22"
+   ],
+   "checks": [
+    {
+     "check": "tested_platform",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-103",
+   "pass": true,
+   "text": "actual tested platform stated"
+  },
+  {
+   "blockers": [
+    "B22"
+   ],
+   "checks": [
+    {
+     "check": "no_xplat_claim",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-104",
+   "pass": true,
+   "text": "no unsupported cross-platform claim"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "no_new_py_dep",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-105",
+   "pass": true,
+   "text": "no new Python dependency"
+  },
+  {
+   "blockers": [
+    "B04"
+   ],
+   "checks": [
+    {
+     "check": "no_new_npm_dep",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-106",
+   "pass": true,
+   "text": "no new npm dependency"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "no_large_artifacts",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-107",
+   "pass": true,
+   "text": "no large runtime artifact committed"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "no_archive",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-108",
+   "pass": true,
+   "text": "no binary/source duplicate archive committed"
+  },
+  {
+   "blockers": [
+    "B23"
+   ],
+   "checks": [
+    {
+     "check": "decision_accept",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-109",
+   "pass": true,
+   "text": "release decision ACCEPT"
+  },
+  {
+   "blockers": [
+    "B23"
+   ],
+   "checks": [
+    {
+     "check": "decision_override_false",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-110",
+   "pass": true,
+   "text": "manual override false in the decision"
+  },
+  {
+   "blockers": [
+    "B23"
+   ],
+   "checks": [
+    {
+     "check": "final_evidence_only",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-111",
+   "pass": true,
+   "text": "final result commit evidence-only"
+  },
+  {
+   "blockers": [
+    "B23"
+   ],
+   "checks": [
+    {
+     "check": "final_diff_ok",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-112",
+   "pass": true,
+   "text": "RELEASE_TARGET_SHA..FINAL_MAIN_SHA diff within the allowed result namespace"
+  },
+  {
+   "blockers": [
+    "B22"
+   ],
+   "checks": [
+    {
+     "check": "claim_exact",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-113",
+   "pass": true,
+   "text": "CAPSTONE_RELEASE_V1 claim exact"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "promotion_preserved",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-114",
+   "pass": true,
+   "text": "historical MODEL_V2_NOT_PROMOTED_RELEASE_CI preserved"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "system_release_preserved",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-115",
+   "pass": true,
+   "text": "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED preserved"
+  },
+  {
+   "blockers": [
+    "B18"
+   ],
+   "checks": [
+    {
+     "check": "candidate_not_deployed_all",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-116",
+   "pass": true,
+   "text": "candidate not deployed (decision and manifest)"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "no_personal_model",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-117",
+   "pass": true,
+   "text": "no personal model"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "no_hardware",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-118",
+   "pass": true,
+   "text": "no physical hardware"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "no_candidate_runtime",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-119",
+   "pass": true,
+   "text": "no candidate inference runtime"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "no_new_local_batch",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-120",
+   "pass": true,
+   "text": "no FL_NEW_LOCAL_BATCH"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "no_multirun",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-121",
+   "pass": true,
+   "text": "no FL_MULTIRUN"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "dev_targeted",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-122",
+   "pass": true,
+   "text": "targeted CAP-011 tests pass in the development checkout"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "dev_regression",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-123",
+   "pass": true,
+   "text": "final local regression passes under the documented policies"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "dev_ruff",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-124",
+   "pass": true,
+   "text": "ruff passes"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "dev_pip",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-125",
+   "pass": true,
+   "text": "pip check passes"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "ci_not_queried",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-126",
+   "pass": true,
+   "text": "CI not queried"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "ci_not_triggered",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-127",
+   "pass": true,
+   "text": "CI not triggered"
+  },
+  {
+   "blockers": [
+    "B23"
+   ],
+   "checks": [
+    {
+     "check": "cap011_pass",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-128",
+   "pass": true,
+   "text": "CAP-011 PASS"
+  },
+  {
+   "blockers": [
+    "B23"
+   ],
+   "checks": [
+    {
+     "check": "capg10_pass",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-129",
+   "pass": true,
+   "text": "CAPG10 PASS"
+  },
+  {
+   "blockers": [
+    "B23"
+   ],
+   "checks": [
+    {
+     "check": "all_tasks_pass",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-130",
+   "pass": true,
+   "text": "all CAP-001..011 are PASS"
+  },
+  {
+   "blockers": [
+    "B23"
+   ],
+   "checks": [
+    {
+     "check": "all_gates_pass",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-131",
+   "pass": true,
+   "text": "all CAPG0..10 are PASS"
+  },
+  {
+   "blockers": [
+    "B23"
+   ],
+   "checks": [
+    {
+     "check": "no_cap012",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-132",
+   "pass": true,
+   "text": "no further capstone software phase is required (no CAP-012 exists)"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "portability",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-133",
+   "pass": true,
+   "text": "release-facing executables contain no absolute developer path"
+  },
+  {
+   "blockers": [],
+   "checks": [
+    {
+     "check": "case_audit",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-134",
+   "pass": true,
+   "text": "no tracked path collision differs only by case"
+  },
+  {
+   "blockers": [
+    "B12"
+   ],
+   "checks": [
+    {
+     "check": "harness_static_audit",
+     "pass": true
+    },
+    {
+     "check": "T:test_harness_reads_nothing_from_the_development_checkout_and_has_no_rescue_path",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-135",
+   "pass": true,
+   "text": "the clean-clone harness has no copy-in or rescue path (static)"
+  },
+  {
+   "blockers": [
+    "B05"
+   ],
+   "checks": [
+    {
+     "check": "mutation_log",
+     "pass": true
+    }
+   ],
+   "id": "CAPG10-136",
+   "pass": true,
+   "text": "all twenty release mutation controls were caught and restored"
+  }
+ ],
+ "criteria_count": 136,
+ "failed": [],
+ "gate": "CAPG10",
+ "hard_blockers": [
+  {
+   "criteria": 10,
+   "id": "B01",
+   "pass": true,
+   "text": "all CAP-001..010 PASS"
+  },
+  {
+   "criteria": 10,
+   "id": "B02",
+   "pass": true,
+   "text": "all CAPG0..9 PASS"
+  },
+  {
+   "criteria": 1,
+   "id": "B03",
+   "pass": true,
+   "text": "all prior locks verify"
+  },
+  {
+   "criteria": 10,
+   "id": "B04",
+   "pass": true,
+   "text": "zero protected product drift"
+  },
+  {
+   "criteria": 9,
+   "id": "B05",
+   "pass": true,
+   "text": "release protocol frozen"
+  },
+  {
+   "criteria": 1,
+   "id": "B06",
+   "pass": true,
+   "text": "release target clean"
+  },
+  {
+   "criteria": 1,
+   "id": "B07",
+   "pass": true,
+   "text": "release target pushed"
+  },
+  {
+   "criteria": 4,
+   "id": "B08",
+   "pass": true,
+   "text": "fresh clone contains no copied files"
+  },
+  {
+   "criteria": 1,
+   "id": "B09",
+   "pass": true,
+   "text": "fresh Python environment used"
+  },
+  {
+   "criteria": 1,
+   "id": "B10",
+   "pass": true,
+   "text": "frontend installed from committed locks"
+  },
+  {
+   "criteria": 1,
+   "id": "B11",
+   "pass": true,
+   "text": "ClerkJS installed from committed lock"
+  },
+  {
+   "criteria": 13,
+   "id": "B12",
+   "pass": true,
+   "text": "no hidden/untracked dependency"
+  },
+  {
+   "criteria": 7,
+   "id": "B13",
+   "pass": true,
+   "text": "clean-clone tests pass under the declared data-gated policy"
+  },
+  {
+   "criteria": 3,
+   "id": "B14",
+   "pass": true,
+   "text": "frontend test/check/build pass"
+  },
+  {
+   "criteria": 1,
+   "id": "B15",
+   "pass": true,
+   "text": "faculty launcher preflight passes"
+  },
+  {
+   "criteria": 15,
+   "id": "B16",
+   "pass": true,
+   "text": "clean-clone full product demonstration passes"
+  },
+  {
+   "criteria": 2,
+   "id": "B17",
+   "pass": true,
+   "text": "runtime remains offline"
+  },
+  {
+   "criteria": 2,
+   "id": "B18",
+   "pass": true,
+   "text": "candidate remains not deployed"
+  },
+  {
+   "criteria": 2,
+   "id": "B19",
+   "pass": true,
+   "text": "MODEL_V2_FINAL remains default"
+  },
+  {
+   "criteria": 5,
+   "id": "B20",
+   "pass": true,
+   "text": "no raw-data scientific execution"
+  },
+  {
+   "criteria": 13,
+   "id": "B21",
+   "pass": true,
+   "text": "second independent fresh clone succeeds"
+  },
+  {
+   "criteria": 9,
+   "id": "B22",
+   "pass": true,
+   "text": "release limitations frozen"
+  },
+  {
+   "criteria": 9,
+   "id": "B23",
+   "pass": true,
+   "text": "CAPG10 passes"
+  }
+ ],
+ "manual_override": false,
+ "mode": "FINAL"
+}

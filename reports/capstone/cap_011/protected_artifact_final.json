@@ -1,0 +1,38 @@
+{
+ "added_count": 24,
+ "added_outside_additive_namespace": [],
+ "amendment_chains_verified": true,
+ "entry_sha": "af60c1e2bc6a645852d0826815ff16a678c9d0d1",
+ "frontend_drift": [],
+ "head_sha": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+ "historical_release_lineage_unchanged": true,
+ "locks_verified": {
+  "cap001": true,
+  "cap002": true,
+  "cap003": true,
+  "cap004": true,
+  "cap005": true,
+  "cap006": true,
+  "cap007": true,
+  "cap008": true,
+  "cap009": true,
+  "cap010": true,
+  "cap011": true,
+  "capstone_ui_v1": true,
+  "capstone_ui_v1_1": true,
+  "capstone_ui_v1_2": true,
+  "fedprox_mu_v2": true,
+  "fl_init_v2": true,
+  "research_catalog": true,
+  "v2_fl_wearable_system": true
+ },
+ "modified_outside_allowed": [],
+ "modified_since_entry": [
+  "manifests/capstone/gate_registry_v1.csv",
+  "manifests/capstone/task_registry_v1.csv"
+ ],
+ "named_component_drift": [],
+ "protected_artifact_drift": false,
+ "protected_tree_modified": [],
+ "removed_since_entry": []
+}

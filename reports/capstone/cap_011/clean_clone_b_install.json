@@ -1,0 +1,94 @@
+{
+ "clerk_sdk_installed_from_committed_lock": true,
+ "commands": [
+  {
+   "argv": [
+    "python3.11",
+    "-m",
+    "venv",
+    ".venv"
+   ],
+   "id": "venv",
+   "returncode": 0,
+   "seconds": 1.0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pip",
+    "install",
+    "-r",
+    "requirements-dev.lock"
+   ],
+   "id": "pip_dev",
+   "returncode": 0,
+   "seconds": 629.39
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pip",
+    "install",
+    "-r",
+    "requirements-capstone-auth.lock"
+   ],
+   "id": "pip_auth",
+   "returncode": 0,
+   "seconds": 2.1
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pip",
+    "check"
+   ],
+   "id": "pip_check",
+   "returncode": 0,
+   "seconds": 0.17
+  },
+  {
+   "argv": [
+    "npm",
+    "ci",
+    "--prefix",
+    "frontend/clerk-sdk"
+   ],
+   "id": "npm_clerk",
+   "returncode": 0,
+   "seconds": 3.53
+  },
+  {
+   "argv": [
+    "npm",
+    "ci",
+    "--prefix",
+    "frontend"
+   ],
+   "id": "npm_app",
+   "returncode": 0,
+   "seconds": 7.34
+  }
+ ],
+ "dotenv_present_in_clone": false,
+ "frontend_installed_from_committed_lock": true,
+ "install_network": "required: public Python and npm registries (not air-gapped; not vendored)",
+ "kind": "install",
+ "label": "B",
+ "lock_sha256": {
+  "frontend/clerk-sdk/package-lock.json": "f948b4759a819f768885da5129a078513ac5942fa778c37a8c45691081bf8f5e",
+  "frontend/clerk-sdk/package.json": "a31971f9db734cdc439ae79a43da28d09711daa21440f314acdd97e7423fb2bd",
+  "frontend/package-lock.json": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae",
+  "frontend/package.json": "cb5318e33c5aea08eaa722fb4eafc3971e33e899a06869f3774ce75a866ae8e9",
+  "pyproject.toml": "af83432eea745b52acc268ce1040edefd83cc8edc6a94afd9f7e8232aaecab34",
+  "requirements-capstone-auth.lock": "7c75bc14e595af8706f6de3605c7d69ffe5200e43859090d84d0b0b7c20da9e3",
+  "requirements-dev.lock": "0d4a0561bfadf89157b9f6f6dfbfa87e885aca2815a45a442e04a98d662f2a0e"
+ },
+ "manual_npm_install": false,
+ "manual_rescue_install": false,
+ "pip_check_output": "No broken requirements found.",
+ "release_target_sha": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+ "status": "PASS"
+}

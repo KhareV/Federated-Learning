@@ -1,0 +1,99 @@
+{
+ "ci_queried": false,
+ "ci_triggered": false,
+ "commands": {
+  "pip_check": {
+   "output": "No broken requirements found.",
+   "returncode": 0
+  },
+  "ruff": {
+   "output": "All checks passed!",
+   "returncode": 0
+  }
+ },
+ "full_regression": {
+  "counts": {
+   "deselected": 1,
+   "passed": 3057,
+   "skipped": 1
+  },
+  "failed": [],
+  "known_flake_deselected": "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers",
+  "returncode": 0,
+  "seconds_machine_specific": 416.5,
+  "tests_total": 3058
+ },
+ "inherited_flake": {
+  "attempts": [
+   {
+    "attempt": 1,
+    "known_signature": false,
+    "passed": true
+   },
+   {
+    "attempt": 2,
+    "known_signature": false,
+    "passed": true
+   },
+   {
+    "attempt": 3,
+    "known_signature": false,
+    "passed": true
+   },
+   {
+    "attempt": 4,
+    "known_signature": false,
+    "passed": true
+   },
+   {
+    "attempt": 5,
+    "known_signature": false,
+    "passed": true
+   },
+   {
+    "attempt": 6,
+    "known_signature": true,
+    "passed": false
+   },
+   {
+    "attempt": 7,
+    "known_signature": true,
+    "passed": false
+   },
+   {
+    "attempt": 8,
+    "known_signature": false,
+    "passed": true
+   },
+   {
+    "attempt": 9,
+    "known_signature": false,
+    "passed": true
+   },
+   {
+    "attempt": 10,
+    "known_signature": true,
+    "passed": false
+   },
+   {
+    "attempt": 11,
+    "known_signature": false,
+    "passed": true
+   },
+   {
+    "attempt": 12,
+    "known_signature": false,
+    "passed": true
+   }
+  ],
+  "status": "PASS_INHERITED_FLAKE_POLICY",
+  "test": "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers"
+ },
+ "targeted": {
+  "counts": {
+   "passed": 70
+  },
+  "returncode": 0,
+  "seconds_machine_specific": 3.9
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "guide_claims",
+   "mutation": "RELEASE_CLAIMS_PHYSICAL_WEARABLE_VALIDATED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "guide_claims",
+   "mutation": "RELEASE_CLAIMS_CLINICAL_READINESS",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "guide_claims",
+   "mutation": "RELEASE_CLAIMS_AIR_GAPPED_INSTALLATION",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "guide_claims",
+   "mutation": "RELEASE_CLAIMS_RAW_DATA_SCIENTIFIC_REPRODUCTION",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "manifest_candidate_deployed",
+   "mutation": "RELEASE_MARKS_CANDIDATE_DEPLOYED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "manifest_default_model",
+   "mutation": "RELEASE_CHANGES_DEFAULT_MODEL_TO_CANDIDATE",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "key_artifacts:hash:checkpoints/MODEL_V2_FINAL.pt",
+   "mutation": "RELEASE_CHANGES_MODEL_V2_FINAL_HASH",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "key_artifacts:hash:artifacts/CAL_V2.json",
+   "mutation": "RELEASE_CHANGES_CAL_V2_HASH",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "key_artifacts:hash:artifacts/capstone/CAPSTONE_UI_V1_2.lock.json",
+   "mutation": "RELEASE_CHANGES_UI_V1_2_LOCK",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "key_artifacts:hash:artifacts/capstone/CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1.lock.json",
+   "mutation": "RELEASE_CHANGES_RESEARCH_CATALOG_HASH",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "wrong_checkout_sha",
+   "mutation": "CLEAN_CLONE_CHECKS_OUT_WRONG_SHA",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "untracked_file_manual_injection",
+   "mutation": "CLEAN_CLONE_IMPORTS_MANUAL_SOURCE_FILE",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "python_not_in_clone_venv,python_in_development_checkout",
+   "mutation": "CLEAN_CLONE_REUSES_DEVELOPER_VENV",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "copied_node_modules,untracked_file_manual_injection",
+   "mutation": "CLEAN_CLONE_REUSES_DEVELOPER_NODE_MODULES",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "copied_frontend_build,untracked_file_manual_injection",
+   "mutation": "CLEAN_CLONE_REUSES_DEVELOPER_FRONTEND_BUILD",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "developer_dotenv,untracked_file_manual_injection",
+   "mutation": "CLEAN_CLONE_USES_DEVELOPER_DOTENV",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "copied_runtime_state,copied_candidate_artifact",
+   "mutation": "CLEAN_CLONE_IMPORTS_DEVELOPER_SQLITE_OR_CANDIDATE",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "copied_raw_data",
+   "mutation": "CLEAN_CLONE_COPIES_RAW_BIOMEDICAL_DATA",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "release_target_sha_mismatch",
+   "mutation": "CLEAN_CLONE_RESULT_HAS_WRONG_TARGET_SHA",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic repository",
+   "caught": true,
+   "failing_check": "M:frontend/src/a.svelte",
+   "mutation": "FINAL_RESULT_COMMIT_MODIFIES_A_RELEASE_EXECUTABLE",
+   "restored": true
+  }
+ ],
+ "count": 20
+}

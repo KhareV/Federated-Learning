@@ -1,0 +1,214 @@
+{
+ "executed_commands": [
+  {
+   "argv": [
+    "git",
+    "clone",
+    "git@github.com:KhareV/Federated-Learning.git",
+    "<ROOT>/nhm-capstone"
+   ],
+   "id": "clone",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    "git",
+    "-C",
+    "<ROOT>/nhm-capstone",
+    "checkout",
+    "--detach",
+    "3ad1b07408a0c3556fbc5039f1a7a4fee824db96"
+   ],
+   "id": "checkout",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    "python3.11",
+    "-m",
+    "venv",
+    ".venv"
+   ],
+   "id": "venv",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pip",
+    "install",
+    "-r",
+    "requirements-dev.lock"
+   ],
+   "id": "pip_dev",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pip",
+    "install",
+    "-r",
+    "requirements-capstone-auth.lock"
+   ],
+   "id": "pip_auth",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pip",
+    "check"
+   ],
+   "id": "pip_check",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    "npm",
+    "ci",
+    "--prefix",
+    "frontend/clerk-sdk"
+   ],
+   "id": "npm_clerk",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    "npm",
+    "ci",
+    "--prefix",
+    "frontend"
+   ],
+   "id": "npm_app",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "scripts.verify_capstone_release_v1"
+   ],
+   "id": "verifier",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_capstone_release_lib.py",
+    "tests/test_capstone_release_harness.py",
+    "tests/test_capstone_release_guide.py",
+    "tests/test_capstone_release_target.py",
+    "-q",
+    "-rA",
+    "-p",
+    "no:cacheprovider"
+   ],
+   "id": "targeted",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "tests",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--deselect",
+    "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers"
+   ],
+   "id": "regression",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "pytest",
+    "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+   ],
+   "id": "cap003_isolated_1",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    "npm",
+    "test",
+    "--prefix",
+    "frontend"
+   ],
+   "id": "npm_test",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    "npm",
+    "run",
+    "check",
+    "--prefix",
+    "frontend"
+   ],
+   "id": "npm_check",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    "npm",
+    "run",
+    "build",
+    "--prefix",
+    "frontend"
+   ],
+   "id": "npm_build",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "scripts.run_capstone_faculty_demo",
+    "--preflight-only",
+    "--acknowledge-demo-auth",
+    "--build"
+   ],
+   "id": "preflight",
+   "returncode": 0
+  },
+  {
+   "argv": [
+    ".venv/bin/python",
+    "-m",
+    "scripts.run_capstone_full_demo_e2e",
+    "run",
+    "1",
+    "--restart"
+   ],
+   "id": "demo",
+   "returncode": 0
+  }
+ ],
+ "files": {
+  "clean_clone_b_demo.json": "ef6598290b437c26d1d26723b21eea589d2bb49fb12a1be625db4530b1a0849b",
+  "clean_clone_b_environment.json": "9de035dd3ee7eed260e0fe591f8f4bc77752ff88286aa3139383371a02c93d8e",
+  "clean_clone_b_frontend.json": "110979f168a0480f990ff48351bea84227f8699cc18d1426b673f87b074fb8aa",
+  "clean_clone_b_git_audit.json": "c71e392e44657f4b39ba39ec06cb0602e6acc971c2f033b93c128bb5ae402c7f",
+  "clean_clone_b_install.json": "7eebc22337e8f73e72ff2b71e96fb9c5517c9e1d81ba18e6bc81b30edc91c0b0",
+  "clean_clone_b_tests.json": "9875ee158dc0a8854cac313e6dea40d74e3504f0ffe784c84099040a17f98edb"
+ },
+ "kind": "bundle",
+ "label": "B",
+ "release_target_sha": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+ "status": "PASS",
+ "steps": 17,
+ "total_seconds_machine_specific": 1266.3
+}

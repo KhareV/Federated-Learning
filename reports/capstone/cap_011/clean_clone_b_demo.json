@@ -1,0 +1,3066 @@
+{
+ "browser": {
+  "console_errors": [],
+  "driver_exit": 0,
+  "driver_wall_s": 31.44,
+  "elapsed_s": 30,
+  "mode": "full",
+  "network": {
+   "blockedExternal": [],
+   "external": [],
+   "frontendHost": "127.0.0.1:4173",
+   "origins": [
+    "http://127.0.0.1:4173"
+   ],
+   "requestCount": 280,
+   "websockets": [
+    "ws://127.0.0.1:4173/product/v1/sessions/SESS-b1f2741c399b491a98ffc029716fc9d7/live",
+    "ws://127.0.0.1:4173/product/v1/federation/runs/FEDRUN-470085A3D42B/live"
+   ]
+  },
+  "runId": "FEDRUN-470085A3D42B",
+  "sessionId": "SESS-b1f2741c399b491a98ffc029716fc9d7",
+  "steps": [
+   {
+    "clerkGlobal": false,
+    "notClerk": true,
+    "offlineDemoBanner": true,
+    "step": "sign-in"
+   },
+   {
+    "federationEnabled": true,
+    "hardwareSimulated": true,
+    "identity": "DEMOdemo:faculty",
+    "initial": {
+     "candidates": 0,
+     "runs": 0,
+     "sessions": 0
+    },
+    "notConnected": true,
+    "releasedModel": true,
+    "step": "overview"
+   },
+   {
+    "deviceId": "NHM_VIRTUAL_WEARABLE_01",
+    "scenario": "MIXED_MONITORING_SESSION",
+    "scenarioShown": "MIXED_MONITORING_SESSION",
+    "simulatedVisible": true,
+    "step": "device"
+   },
+   {
+    "calibrations": [
+     "CAL_V2 (MIT-BIH-v1.0.0)"
+    ],
+    "complete": true,
+    "contextUnavailableSeen": true,
+    "deviceStatesSeen": [
+     "CONNECTED",
+     "STREAMING",
+     "STOPPED"
+    ],
+    "finalState": "COMPLETED",
+    "gapSeen": true,
+    "models": [
+     "MODEL_V2_FINAL"
+    ],
+    "monitoringStatesSeen": [
+     "NORMAL_MONITORED_PATTERN",
+     "CONTEXT_UNAVAILABLE"
+    ],
+    "qualitySeen": [
+     "VALID",
+     "UNUSABLE"
+    ],
+    "sessionId": "SESS-b1f2741c399b491a98ffc029716fc9d7",
+    "simulationVisible": true,
+    "step": "monitoring"
+   },
+   {
+    "countBasis": true,
+    "listed": true,
+    "previewIsBounded": true,
+    "previews": 1,
+    "probabilityLabel": true,
+    "sessionId": "SESS-b1f2741c399b491a98ffc029716fc9d7",
+    "step": "history",
+    "summaryStatus": 200,
+    "timeDomains": true,
+    "timelineStatus": 200
+   },
+   {
+    "aggregationSeen": [
+     "PLAIN"
+    ],
+    "bannersOnFederationPage": true,
+    "final": {
+     "agg": "AUTHORITATIVE AGGREGATE: PLAIN",
+     "candidate": "CandidateCAPSTONE_FL_CANDIDATE_0001ParentFL_INIT_V2State digest3f0b7762\u202670e4copy ValidationPASSEDChecks reported passedSTATE_FINITE, STATE_SPEC_MATCHES_BASE, UPDATE_DIGESTS_RECONCILE, ROUND_ACCEPTED_UPDATE_COUNT_COMPLETE, BASE_STATE_LINEAGE_VERIFIED GovernanceACCEPTED_TO_SANDBOXSandboxIN_SANDBOXproduction_deployedFALSE",
+     "rounds": [
+      "Round 1: COMPLETED \u00b7 accepted 8/8 \u00b7 auth",
+      "Round 2: COMPLETED \u00b7 accepted 8/8 \u00b7 auth",
+      "Round 3: COMPLETED \u00b7 accepted 8/8 \u00b7 auth"
+     ],
+     "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+     "status": "COMPLETED \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 \u00b7 202 events",
+     "streamError": false,
+     "submitted": "24",
+     "submittedClients": 8,
+     "updates": "24"
+    },
+    "localityOnFederationPage": true,
+    "maxClientsSubmittedAtOnce": 8,
+    "roundsSeen": [
+     "Round 1:",
+     "Round 2:",
+     "Round 3:"
+    ],
+    "runId": "FEDRUN-470085A3D42B",
+    "shadowRunningSeen": true,
+    "shadowSequenceText": "SHADOW_RUNNING \u2192 SHADOW_VERIFIED",
+    "shadowVerifiedSeen": true,
+    "step": "federation"
+   },
+   {
+    "acceptedCopy": true,
+    "candidates": 1,
+    "controls": [],
+    "productionDeployed": [
+     "FALSE"
+    ],
+    "released": "MODEL_V2_FINALrole: RELEASED_DEFAULTMODEL_V1role: ROLLBACK_REFERENCE",
+    "step": "models"
+   },
+   {
+    "calibrationCaveat": true,
+    "promotion": true,
+    "provenance": true,
+    "softwareRelease": true,
+    "status": 200,
+    "step": "research-ml"
+   },
+   {
+    "engineeringSeparate": true,
+    "fedproxCaveat": true,
+    "phases": true,
+    "provenance": true,
+    "secaggCaveat": true,
+    "status": 200,
+    "step": "research-fl"
+   },
+   {
+    "hardwareMode": "SIMULATED_ONLY",
+    "pageShowsNoHardware": true,
+    "pageShowsSimulatedOnly": true,
+    "physicalHardwareAvailable": false,
+    "step": "system"
+   },
+   {
+    "noPhysicalWearable": true,
+    "step": "about"
+   }
+  ]
+ },
+ "demo_returncode": 0,
+ "development_artifacts_required": false,
+ "driver_exit": 0,
+ "kind": "demo",
+ "label": "B",
+ "launcher_command": "python -m scripts.run_capstone_faculty_demo --acknowledge-demo-auth --build --prewarm-federation --workspace <fresh temp> (default ports 8001/8002/4173)",
+ "ports": [
+  8001,
+  8002,
+  4173
+ ],
+ "post_run_snapshot": {
+  "candidate_dirs": [
+   "CAPSTONE_FL_CANDIDATE_0001"
+  ],
+  "candidates": [
+   {
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "production_deployed": 0,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  "db_counts": {
+   "candidate_models": 1,
+   "devices": 1,
+   "federation_rounds": 3,
+   "federation_runs": 1,
+   "governance_decisions": 1,
+   "inference_events": 86,
+   "monitoring_sessions": 1,
+   "users": 1
+  },
+  "federation_run_files": [
+   "FEDRUN-470085A3D42B"
+  ]
+ },
+ "preflight": {
+  "output_tail": [
+   "{\"preflight\": {\"demo_auth_acknowledgement\": true, \"workspace\": true, \"port_inference\": true, \"port_product\": true, \"port_frontend\": true, \"python_version\": true, \"required_imports\": true, \"prior_locks_and_amendments\": true, \"phase_state\": true, \"runtime_binding\": true, \"product_api_import\": true, \"ui_successor\": true, \"research_catalog\": true, \"frontend_dependencies\": true, \"frontend_build\": true}}"
+  ],
+  "parsed": {
+   "preflight": {
+    "demo_auth_acknowledgement": true,
+    "frontend_build": true,
+    "frontend_dependencies": true,
+    "phase_state": true,
+    "port_frontend": true,
+    "port_inference": true,
+    "port_product": true,
+    "prior_locks_and_amendments": true,
+    "product_api_import": true,
+    "python_version": true,
+    "required_imports": true,
+    "research_catalog": true,
+    "runtime_binding": true,
+    "ui_successor": true,
+    "workspace": true
+   }
+  },
+  "returncode": 0
+ },
+ "prewarm": {
+  "after": {
+   "active_live_run": false,
+   "candidate_count_overview": 0,
+   "candidates": 0,
+   "federation_runs": 0,
+   "released_default": "MODEL_V2_FINAL"
+  },
+  "before": {
+   "active_live_run": false,
+   "candidate_count_overview": 0,
+   "candidates": 0,
+   "federation_runs": 0,
+   "released_default": "MODEL_V2_FINAL"
+  },
+  "candidates_created": 0,
+  "clients": 8,
+  "elapsed_s_engineering_telemetry_only": 13.233,
+  "enabled": true,
+  "federation_runs_created": 0,
+  "released_binding_changed": false,
+  "side_effect_free": true,
+  "training_calls": 0
+ },
+ "raw_biomedical_data_required": false,
+ "release_target_sha": "3ad1b07408a0c3556fbc5039f1a7a4fee824db96",
+ "semantic_projection": {
+  "candidates": [
+   {
+    "algorithm": "FEDAVG",
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "claim_boundary": "CAPSTONE_ENGINEERING_SANDBOX_CANDIDATE_NOT_SCIENTIFIC_RELEASE",
+    "client_count": 8,
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "parent_model_id": "FL_INIT_V2",
+    "production_deployed": false,
+    "round": 3,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  "federation": {
+   "committed_digests": {
+    "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+    "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+    "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+   },
+   "config": {
+    "algorithm": "FEDAVG",
+    "base_model_id": "FL_INIT_V2",
+    "candidate_ids": [
+     "CAPSTONE_FL_CANDIDATE_0001"
+    ],
+    "client_ids": [
+     "SIM_FL_SITE_00",
+     "SIM_FL_SITE_01",
+     "SIM_FL_SITE_02",
+     "SIM_FL_SITE_03",
+     "SIM_FL_SITE_04",
+     "SIM_FL_SITE_05",
+     "SIM_FL_SITE_06",
+     "SIM_FL_SITE_07"
+    ],
+    "planned_rounds": 3,
+    "run_type": "LIVE_RUN",
+    "secagg_mode": "SECAGG_SHADOW",
+    "status": "COMPLETED"
+   },
+   "rounds": [
+    {
+     "accepted_update_count": 8,
+     "base_state_digest": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+     "candidate_id": null,
+     "round_id": 1,
+     "state": "COMPLETED"
+    },
+    {
+     "accepted_update_count": 8,
+     "base_state_digest": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+     "candidate_id": null,
+     "round_id": 2,
+     "state": "COMPLETED"
+    },
+    {
+     "accepted_update_count": 8,
+     "base_state_digest": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+     "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+     "round_id": 3,
+     "state": "COMPLETED"
+    }
+   ],
+   "secagg": "PASS",
+   "update_digests": {
+    "1": {
+     "SIM_FL_SITE_00": {
+      "examples_seen": 93,
+      "shuffle_seed": "15954055098236359270",
+      "update_sha256": "65a450bcb58909e7fb5d90fdd9a4c1a862420466bba3a67268a8ef32f4bcc984"
+     },
+     "SIM_FL_SITE_01": {
+      "examples_seen": 91,
+      "shuffle_seed": "1554967202167589070",
+      "update_sha256": "b85a168f3e46294d4af4ed917ba5eeda2bb7947475b30ee6e0cba1364246be17"
+     },
+     "SIM_FL_SITE_02": {
+      "examples_seen": 91,
+      "shuffle_seed": "12016259852863132162",
+      "update_sha256": "3f647063e665f8ab2dcf3a6ad29ef735258aa098ea704f88fcbf38bd36afec8f"
+     },
+     "SIM_FL_SITE_03": {
+      "examples_seen": 89,
+      "shuffle_seed": "2953672053291423430",
+      "update_sha256": "d8314e85938ae85d3f5774121ca8f7bfbafe6211a33788fb7fe101bcdec7ecc1"
+     },
+     "SIM_FL_SITE_04": {
+      "examples_seen": 90,
+      "shuffle_seed": "15416725177561341277",
+      "update_sha256": "fb45a4b14bcef54445d1824ffb9356b732becbf669f573f45902855b371556ce"
+     },
+     "SIM_FL_SITE_05": {
+      "examples_seen": 93,
+      "shuffle_seed": "8741149866217350431",
+      "update_sha256": "dfb7fb732ed4160e56318bacf11e31f0bdded7aea22eb3de48fcfdab9f4ff15a"
+     },
+     "SIM_FL_SITE_06": {
+      "examples_seen": 93,
+      "shuffle_seed": "7298880200851000603",
+      "update_sha256": "1ea50b682620877f1addaa60a0f79203ad617eff88d40af31af87a26f68e101e"
+     },
+     "SIM_FL_SITE_07": {
+      "examples_seen": 83,
+      "shuffle_seed": "16159835302290860133",
+      "update_sha256": "bfd0eff8cea69c436265e844dd477a1b5ba34bbc787a4ed7b45112e2e22535ec"
+     }
+    },
+    "2": {
+     "SIM_FL_SITE_00": {
+      "examples_seen": 93,
+      "shuffle_seed": "17787714987982501186",
+      "update_sha256": "56f06ab063fea222a811408d689bb23600e7b443db091c42c7d6ce5caf665097"
+     },
+     "SIM_FL_SITE_01": {
+      "examples_seen": 91,
+      "shuffle_seed": "8925142294439536583",
+      "update_sha256": "1a2d5d2c60cc549cb762e283345a75f5639d401cec3fd8f70a2787834ddf3f92"
+     },
+     "SIM_FL_SITE_02": {
+      "examples_seen": 91,
+      "shuffle_seed": "15329738370230118845",
+      "update_sha256": "22148fb1bd16d1f239742c400721f2527b88da73040f884d75c5a70a1afab902"
+     },
+     "SIM_FL_SITE_03": {
+      "examples_seen": 89,
+      "shuffle_seed": "17016253701626501763",
+      "update_sha256": "495eba4739b4d47a4917eb76b715cd0a9015ca8f47ea0d933b94ee8b056dc886"
+     },
+     "SIM_FL_SITE_04": {
+      "examples_seen": 90,
+      "shuffle_seed": "3545035127337493148",
+      "update_sha256": "2c0e05ffeea50934213984e37c0ad22bf5c39173ad54c565a10097088fdd5db3"
+     },
+     "SIM_FL_SITE_05": {
+      "examples_seen": 93,
+      "shuffle_seed": "17017139818246606736",
+      "update_sha256": "23d9e92416e6c1994f5153ac113bbf12c870c3316878c5eca3a639707eec5dd9"
+     },
+     "SIM_FL_SITE_06": {
+      "examples_seen": 93,
+      "shuffle_seed": "18155695028264679949",
+      "update_sha256": "a29a823afbf8117059fecae77302f5f1f092de81522929d8455090bc2b2471fd"
+     },
+     "SIM_FL_SITE_07": {
+      "examples_seen": 83,
+      "shuffle_seed": "2823371321150985731",
+      "update_sha256": "b4cb3bc0218fa3b26d35ec8c2d85392ebe62ea7fd44680096930dea7b4678c4a"
+     }
+    },
+    "3": {
+     "SIM_FL_SITE_00": {
+      "examples_seen": 93,
+      "shuffle_seed": "11295175845878697379",
+      "update_sha256": "99b6dfc36ee8429f5d671a052ffe28590a3b6aef48b0f19e4cc866d2c979e402"
+     },
+     "SIM_FL_SITE_01": {
+      "examples_seen": 91,
+      "shuffle_seed": "15629121027532081324",
+      "update_sha256": "dc5161e0211b31b8b3371808fa852d31be2f4f8ed5d262404e59cb0abb7b9b47"
+     },
+     "SIM_FL_SITE_02": {
+      "examples_seen": 91,
+      "shuffle_seed": "17450977076440884721",
+      "update_sha256": "6d8169b7c32970b9801bee5f82d324a1979a27b62f0f8bd99689909acd278330"
+     },
+     "SIM_FL_SITE_03": {
+      "examples_seen": 89,
+      "shuffle_seed": "10316728100989712496",
+      "update_sha256": "f715be51ccf23d5e6512af5f05d4eb0f891c7a970f8427705469c9bd5af14ab8"
+     },
+     "SIM_FL_SITE_04": {
+      "examples_seen": 90,
+      "shuffle_seed": "3071033041889952780",
+      "update_sha256": "7813f237e8a987009c76934d5f05e3974ba287adbcc3b45353e02fb8e8d9f08c"
+     },
+     "SIM_FL_SITE_05": {
+      "examples_seen": 93,
+      "shuffle_seed": "17121961187721293774",
+      "update_sha256": "ae3baf64d49d5bf84ba828e53f121df82b552d9736020401550ed7c5a76602da"
+     },
+     "SIM_FL_SITE_06": {
+      "examples_seen": 93,
+      "shuffle_seed": "7548718137931454069",
+      "update_sha256": "d478af7a964d90c0acc1663c98f13becf800ee320717c1368db668670592742a"
+     },
+     "SIM_FL_SITE_07": {
+      "examples_seen": 83,
+      "shuffle_seed": "8417913359722302793",
+      "update_sha256": "a2a671e9fafac9ec85e86e3ec0c691082a5a87848aae0d2283b63a0b993e1a0e"
+     }
+    }
+   }
+  },
+  "released": "MODEL_V2_FINAL",
+  "research": {
+   "catalog_file_sha256": "2c3d2d153515563122bdc7e019ae233bc1e4a274d4f1846b718baf82776c983f",
+   "fl": "42c95668ded5a864be6af8a46cf0fd4e122c817c791173fb7be5e5fa372f88d7",
+   "ml": "04fa41fd91ca9c7899ae52c29052dc648624914bedffc8e84b97712832511608"
+  },
+  "runtime": {
+   "auth_provider": "DEMO",
+   "calibration_id": "CAL_V2",
+   "demo_mode": true,
+   "federation_runtime": "ENABLED_ENGINEERING",
+   "hardware_mode": "SIMULATED_ONLY",
+   "model_id": "MODEL_V2_FINAL",
+   "persistence_mode": "SQLITE",
+   "physical_hardware_available": false,
+   "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_3",
+   "product_api_version": "PRODUCT_API_V2",
+   "software_system": "SOFTWARE_SYSTEM_V2"
+  },
+  "session": {
+   "runtime": {
+    "alert_policy_binding_id": "ALERT_POLICY_V1_MODEL_V2_BINDING",
+    "alert_policy_id": "ALERT_POLICY_V1",
+    "api_contract_version": "API_SCHEMA_V1",
+    "calibration_id": "CAL_V2",
+    "gateway_artifact_id": "GATEWAY_ARTIFACT_V2",
+    "model_id": "MODEL_V2_FINAL",
+    "preprocess_id": "PREPROC_V1",
+    "software_system_id": "SOFTWARE_SYSTEM_V2"
+   },
+   "scenario": "MIXED_MONITORING_SESSION",
+   "state": "COMPLETED"
+  },
+  "summary": {
+   "claim_boundary": "PERSISTED_RESEARCH_ENGINEERING_SESSION_SUMMARY_NOT_CLINICAL",
+   "disconnect_count": 1,
+   "duration_basis": "PRODUCT_LIFECYCLE_CLOCK",
+   "hr_max": 73.89162561576354,
+   "hr_mean": 72.0523009106951,
+   "hr_min": 70.09345794392523,
+   "quality_counts": {
+    "VALID": 86
+   },
+   "quality_counts_basis": "PERSISTED_INFERENCE_EVENTS",
+   "reconnect_count": 1,
+   "spo2_max": 97.9,
+   "spo2_mean": 97.89999999999989,
+   "spo2_min": 97.9,
+   "state_counts": {
+    "CONTEXT_UNAVAILABLE": 20,
+    "NORMAL_MONITORED_PATTERN": 66
+   },
+   "state_counts_basis": "PERSISTED_INFERENCE_EVENTS",
+   "summary_version": "SESSION_SUMMARY_V1_INFERRED_WINDOWS",
+   "windows_inferred": 86,
+   "windows_inferred_basis": "PERSISTED_INFERENCE_EVENTS"
+  },
+  "timeline": {
+   "device_lifecycle": [
+    "STREAM_STARTED",
+    "DEVICE_DISCONNECTED",
+    "RECONNECT_STARTED",
+    "DEVICE_RECONNECTED",
+    "STREAM_STARTED",
+    "STREAM_STOPPED"
+   ],
+   "source_timeline": [
+    {
+     "kind": "QUALITY_CHANGE",
+     "payload": {
+      "ecg_quality": "VALID",
+      "ppg_quality": "VALID",
+      "storage_basis": "CHANGE_ONLY"
+     },
+     "sequence_index": 98,
+     "source_timestamp_us": 15000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 73.52941176470588,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 99,
+     "source_timestamp_us": 15000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0020118647805759627,
+      "source_domain_calibrated_probability": 0.4706918621908981,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 100,
+     "source_timestamp_us": 15000000
+    },
+    {
+     "kind": "MONITORING_STATE_CHANGE",
+     "payload": {
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "previous_state": null,
+      "reason_code": null
+     },
+     "sequence_index": 101,
+     "source_timestamp_us": 15000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 133,
+     "source_timestamp_us": 20000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0023608710669924893,
+      "source_domain_calibrated_probability": 0.4714472219777319,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 134,
+     "source_timestamp_us": 20000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 166,
+     "source_timestamp_us": 25000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0020506118023166445,
+      "source_domain_calibrated_probability": 0.47078191775404216,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 167,
+     "source_timestamp_us": 25000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 199,
+     "source_timestamp_us": 30000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.001487668210820068,
+      "source_domain_calibrated_probability": 0.46926754268371795,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 200,
+     "source_timestamp_us": 30000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 232,
+     "source_timestamp_us": 35000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002081133964413224,
+      "source_domain_calibrated_probability": 0.4708516707312095,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 233,
+     "source_timestamp_us": 35000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 265,
+     "source_timestamp_us": 40000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002818770195153097,
+      "source_domain_calibrated_probability": 0.47228476739347147,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 266,
+     "source_timestamp_us": 40000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 298,
+     "source_timestamp_us": 45000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0035701137951105358,
+      "source_domain_calibrated_probability": 0.47340210593268783,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 299,
+     "source_timestamp_us": 45000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 331,
+     "source_timestamp_us": 50000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.003819160828144134,
+      "source_domain_calibrated_probability": 0.4737211804216156,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 332,
+     "source_timestamp_us": 50000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 364,
+     "source_timestamp_us": 55000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0027797496252755334,
+      "source_domain_calibrated_probability": 0.4722188860827611,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 365,
+     "source_timestamp_us": 55000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 397,
+     "source_timestamp_us": 60000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002173539578394757,
+      "source_domain_calibrated_probability": 0.4710567936195784,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 398,
+     "source_timestamp_us": 60000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 430,
+     "source_timestamp_us": 65000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002428507720029649,
+      "source_domain_calibrated_probability": 0.47158064110097764,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 431,
+     "source_timestamp_us": 65000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 463,
+     "source_timestamp_us": 70000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002269077832669269,
+      "source_domain_calibrated_probability": 0.47125992665200306,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 464,
+     "source_timestamp_us": 70000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 496,
+     "source_timestamp_us": 75000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0028597711166528017,
+      "source_domain_calibrated_probability": 0.47235302060442497,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 497,
+     "source_timestamp_us": 75000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 529,
+     "source_timestamp_us": 80000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0026032075689712874,
+      "source_domain_calibrated_probability": 0.47190882143148627,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 530,
+     "source_timestamp_us": 80000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 562,
+     "source_timestamp_us": 85000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002532115538113863,
+      "source_domain_calibrated_probability": 0.4717780011710151,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 563,
+     "source_timestamp_us": 85000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 595,
+     "source_timestamp_us": 90000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.003499131188171392,
+      "source_domain_calibrated_probability": 0.47330709946357513,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 596,
+     "source_timestamp_us": 90000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 73.89162561576354,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 628,
+     "source_timestamp_us": 95000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.004080619686776497,
+      "source_domain_calibrated_probability": 0.4740346065490709,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 629,
+     "source_timestamp_us": 95000000
+    },
+    {
+     "kind": "QUALITY_CHANGE",
+     "payload": {
+      "ecg_quality": "VALID",
+      "ppg_quality": null,
+      "storage_basis": "CHANGE_ONLY"
+     },
+     "sequence_index": 660,
+     "source_timestamp_us": 100000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.94244604316548,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 661,
+     "source_timestamp_us": 100000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0031014641269143505,
+      "source_domain_calibrated_probability": 0.47273655758004524,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 662,
+     "source_timestamp_us": 100000000
+    },
+    {
+     "kind": "MONITORING_STATE_CHANGE",
+     "payload": {
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "previous_state": "NORMAL_MONITORED_PATTERN",
+      "reason_code": null
+     },
+     "sequence_index": 663,
+     "source_timestamp_us": 100000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 72.28915662650603,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 695,
+     "source_timestamp_us": 105000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.003370978304661678,
+      "source_domain_calibrated_probability": 0.4731306100663774,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 696,
+     "source_timestamp_us": 105000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.59904534606206,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 728,
+     "source_timestamp_us": 110000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0027103814622617827,
+      "source_domain_calibrated_probability": 0.4720994590118992,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 729,
+     "source_timestamp_us": 110000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.25890736342043,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 761,
+     "source_timestamp_us": 115000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0022833429745750485,
+      "source_domain_calibrated_probability": 0.47128952353975523,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 762,
+     "source_timestamp_us": 115000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.25890736342043,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 794,
+     "source_timestamp_us": 120000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0032493439958444286,
+      "source_domain_calibrated_probability": 0.472956806558041,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 795,
+     "source_timestamp_us": 120000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 827,
+     "source_timestamp_us": 125000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0023133591238109815,
+      "source_domain_calibrated_probability": 0.47135120290697735,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 828,
+     "source_timestamp_us": 125000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 860,
+     "source_timestamp_us": 130000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0019333969056195052,
+      "source_domain_calibrated_probability": 0.4705040674301951,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 861,
+     "source_timestamp_us": 130000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 893,
+     "source_timestamp_us": 135000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.004021528839978727,
+      "source_domain_calibrated_probability": 0.4739655552671795,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 894,
+     "source_timestamp_us": 135000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 926,
+     "source_timestamp_us": 140000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002758038084136965,
+      "source_domain_calibrated_probability": 0.4721818288323714,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 927,
+     "source_timestamp_us": 140000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 72.63922518159806,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 959,
+     "source_timestamp_us": 145000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0020266223112852724,
+      "source_domain_calibrated_probability": 0.4707263637578165,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 960,
+     "source_timestamp_us": 145000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 992,
+     "source_timestamp_us": 150000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.004079220797160881,
+      "source_domain_calibrated_probability": 0.4740329833885325,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 993,
+     "source_timestamp_us": 150000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.59904534606206,
+      "ppg_quality": null,
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 1025,
+     "source_timestamp_us": 155000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002645580474160983,
+      "source_domain_calibrated_probability": 0.47198511143797334,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1026,
+     "source_timestamp_us": 155000000
+    },
+    {
+     "kind": "QUALITY_CHANGE",
+     "payload": {
+      "ecg_quality": "VALID",
+      "ppg_quality": "VALID",
+      "storage_basis": "CHANGE_ONLY"
+     },
+     "sequence_index": 1057,
+     "source_timestamp_us": 160000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 1058,
+     "source_timestamp_us": 160000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0027146936980485194,
+      "source_domain_calibrated_probability": 0.4721069714254071,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1059,
+     "source_timestamp_us": 160000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 70.92198581560284,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 1091,
+     "source_timestamp_us": 165000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002376185490851048,
+      "source_domain_calibrated_probability": 0.4714777615857923,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1092,
+     "source_timestamp_us": 165000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 1124,
+     "source_timestamp_us": 170000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0020409633442038558,
+      "source_domain_calibrated_probability": 0.47075965248622026,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1125,
+     "source_timestamp_us": 170000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 1157,
+     "source_timestamp_us": 175000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0027201573220289954,
+      "source_domain_calibrated_probability": 0.4721164726353355,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1158,
+     "source_timestamp_us": 175000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 1190,
+     "source_timestamp_us": 180000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0021338825745420556,
+      "source_domain_calibrated_probability": 0.47096984833711547,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1191,
+     "source_timestamp_us": 180000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 1223,
+     "source_timestamp_us": 185000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.004951487543369641,
+      "source_domain_calibrated_probability": 0.47495082557872165,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1224,
+     "source_timestamp_us": 185000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 1256,
+     "source_timestamp_us": 190000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.004288879933506666,
+      "source_domain_calibrated_probability": 0.4742702808775793,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1257,
+     "source_timestamp_us": 190000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": false,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": null,
+      "spo2_pct": null,
+      "spo2_valid": false
+     },
+     "sequence_index": 1289,
+     "source_timestamp_us": 195000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "CONTEXT_UNAVAILABLE",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.003628333451528111,
+      "source_domain_calibrated_probability": 0.4734786367011762,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1290,
+     "source_timestamp_us": 195000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1322,
+     "source_timestamp_us": 200000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0038880797845244315,
+      "source_domain_calibrated_probability": 0.4738058227786217,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1323,
+     "source_timestamp_us": 200000000
+    },
+    {
+     "kind": "MONITORING_STATE_CHANGE",
+     "payload": {
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "previous_state": "CONTEXT_UNAVAILABLE",
+      "reason_code": null
+     },
+     "sequence_index": 1324,
+     "source_timestamp_us": 200000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1356,
+     "source_timestamp_us": 205000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0031146383334182846,
+      "source_domain_calibrated_probability": 0.47275659877906473,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1357,
+     "source_timestamp_us": 205000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 73.17073170731707,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1389,
+     "source_timestamp_us": 210000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.003752886660198078,
+      "source_domain_calibrated_probability": 0.47363834018909123,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1390,
+     "source_timestamp_us": 210000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.99270072992701,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1422,
+     "source_timestamp_us": 215000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0029393826378607386,
+      "source_domain_calibrated_probability": 0.47248280815548954,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1423,
+     "source_timestamp_us": 215000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1455,
+     "source_timestamp_us": 220000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.004455011155125762,
+      "source_domain_calibrated_probability": 0.4744502570269727,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1456,
+     "source_timestamp_us": 220000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1488,
+     "source_timestamp_us": 225000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.006330625536190542,
+      "source_domain_calibrated_probability": 0.4761161715772978,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1489,
+     "source_timestamp_us": 225000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1521,
+     "source_timestamp_us": 230000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002621624220933545,
+      "source_domain_calibrated_probability": 0.47194213045341804,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1522,
+     "source_timestamp_us": 230000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1554,
+     "source_timestamp_us": 235000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0017830702881794754,
+      "source_domain_calibrated_probability": 0.4701220587318931,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1555,
+     "source_timestamp_us": 235000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1587,
+     "source_timestamp_us": 240000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0020267698714310288,
+      "source_domain_calibrated_probability": 0.47072670747193035,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1588,
+     "source_timestamp_us": 240000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1620,
+     "source_timestamp_us": 245000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0016451009463072492,
+      "source_domain_calibrated_probability": 0.4697420592425344,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1621,
+     "source_timestamp_us": 245000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1653,
+     "source_timestamp_us": 250000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.00246581219226559,
+      "source_domain_calibrated_probability": 0.4716526516823493,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1654,
+     "source_timestamp_us": 250000000
+    },
+    {
+     "kind": "QUALITY_CHANGE",
+     "payload": {
+      "ecg_quality": "UNUSABLE",
+      "ppg_quality": "VALID",
+      "storage_basis": "CHANGE_ONLY"
+     },
+     "sequence_index": 1685,
+     "source_timestamp_us": 255000000
+    },
+    {
+     "kind": "QUALITY_CHANGE",
+     "payload": {
+      "ecg_quality": "VALID",
+      "ppg_quality": "VALID",
+      "storage_basis": "CHANGE_ONLY"
+     },
+     "sequence_index": 1778,
+     "source_timestamp_us": 270000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1779,
+     "source_timestamp_us": 270000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.008479075395991402,
+      "source_domain_calibrated_probability": 0.4775047821541792,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1780,
+     "source_timestamp_us": 270000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1812,
+     "source_timestamp_us": 275000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.00247756072882898,
+      "source_domain_calibrated_probability": 0.4716751057973317,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1813,
+     "source_timestamp_us": 275000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1845,
+     "source_timestamp_us": 280000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0013319522366968296,
+      "source_domain_calibrated_probability": 0.4687461297492483,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1846,
+     "source_timestamp_us": 280000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1878,
+     "source_timestamp_us": 285000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0012086349061737073,
+      "source_domain_calibrated_probability": 0.46828807774709325,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1879,
+     "source_timestamp_us": 285000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1911,
+     "source_timestamp_us": 290000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0011036909264220667,
+      "source_domain_calibrated_probability": 0.46785993188090824,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1912,
+     "source_timestamp_us": 290000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 70.75471698113208,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1944,
+     "source_timestamp_us": 295000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0010348087776773328,
+      "source_domain_calibrated_probability": 0.4675562254536079,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1945,
+     "source_timestamp_us": 295000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.09004739336493,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 1977,
+     "source_timestamp_us": 300000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0010514034870649997,
+      "source_domain_calibrated_probability": 0.4676311980298619,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 1978,
+     "source_timestamp_us": 300000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2010,
+     "source_timestamp_us": 305000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0014698571552803038,
+      "source_domain_calibrated_probability": 0.46921073340534786,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2011,
+     "source_timestamp_us": 305000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 73.17073170731707,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2043,
+     "source_timestamp_us": 310000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0014870698004866097,
+      "source_domain_calibrated_probability": 0.46926564506084956,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2044,
+     "source_timestamp_us": 310000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2076,
+     "source_timestamp_us": 315000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0014458561831450145,
+      "source_domain_calibrated_probability": 0.4691330853933403,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2077,
+     "source_timestamp_us": 315000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 73.17073170731707,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2109,
+     "source_timestamp_us": 320000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0014319889664297456,
+      "source_domain_calibrated_probability": 0.46908763402989373,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2110,
+     "source_timestamp_us": 320000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2142,
+     "source_timestamp_us": 325000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0016638197061001276,
+      "source_domain_calibrated_probability": 0.46979543953416875,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2143,
+     "source_timestamp_us": 325000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2269,
+     "source_timestamp_us": 330000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.001145098756150294,
+      "source_domain_calibrated_probability": 0.468033527924818,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2270,
+     "source_timestamp_us": 330000000
+    },
+    {
+     "kind": "QUALITY_CHANGE",
+     "payload": {
+      "ecg_quality": "UNUSABLE",
+      "ppg_quality": null,
+      "storage_basis": "CHANGE_ONLY"
+     },
+     "sequence_index": 2271,
+     "source_timestamp_us": 335000000
+    },
+    {
+     "kind": "QUALITY_CHANGE",
+     "payload": {
+      "ecg_quality": "UNUSABLE",
+      "ppg_quality": "VALID",
+      "storage_basis": "CHANGE_ONLY"
+     },
+     "sequence_index": 2273,
+     "source_timestamp_us": 345000000
+    },
+    {
+     "kind": "QUALITY_CHANGE",
+     "payload": {
+      "ecg_quality": "VALID",
+      "ppg_quality": "VALID",
+      "storage_basis": "CHANGE_ONLY"
+     },
+     "sequence_index": 2335,
+     "source_timestamp_us": 355000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2336,
+     "source_timestamp_us": 355000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0011879190725443934,
+      "source_domain_calibrated_probability": 0.46820657941025434,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2337,
+     "source_timestamp_us": 355000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2369,
+     "source_timestamp_us": 360000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0016257695035494962,
+      "source_domain_calibrated_probability": 0.4696862922097909,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2370,
+     "source_timestamp_us": 360000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2402,
+     "source_timestamp_us": 365000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.001773444693824858,
+      "source_domain_calibrated_probability": 0.47009651530726987,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2403,
+     "source_timestamp_us": 365000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.09004739336493,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2435,
+     "source_timestamp_us": 370000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.004376172268787361,
+      "source_domain_calibrated_probability": 0.47436569551085667,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2436,
+     "source_timestamp_us": 370000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.77033492822967,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2468,
+     "source_timestamp_us": 375000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.004463893874144834,
+      "source_domain_calibrated_probability": 0.4744596910633563,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2469,
+     "source_timestamp_us": 375000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2501,
+     "source_timestamp_us": 380000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0017539639117834173,
+      "source_domain_calibrated_probability": 0.4700443934605791,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2502,
+     "source_timestamp_us": 380000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2534,
+     "source_timestamp_us": 385000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0015105746314350358,
+      "source_domain_calibrated_probability": 0.46933961483302317,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2535,
+     "source_timestamp_us": 385000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2567,
+     "source_timestamp_us": 390000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0029157776662338806,
+      "source_domain_calibrated_probability": 0.47244469471327183,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2568,
+     "source_timestamp_us": 390000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.09004739336493,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2600,
+     "source_timestamp_us": 395000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.003181769745795386,
+      "source_domain_calibrated_probability": 0.4728574286698914,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2601,
+     "source_timestamp_us": 395000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 70.75471698113208,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2633,
+     "source_timestamp_us": 400000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.007953867544955482,
+      "source_domain_calibrated_probability": 0.47720061605021274,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2634,
+     "source_timestamp_us": 400000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2666,
+     "source_timestamp_us": 405000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0028498648426995886,
+      "source_domain_calibrated_probability": 0.4723366196034194,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2667,
+     "source_timestamp_us": 405000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2699,
+     "source_timestamp_us": 410000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0014485484224160353,
+      "source_domain_calibrated_probability": 0.46914185909249595,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2700,
+     "source_timestamp_us": 410000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2732,
+     "source_timestamp_us": 415000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0015483135794724305,
+      "source_domain_calibrated_probability": 0.46945601136971615,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2733,
+     "source_timestamp_us": 415000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 73.17073170731707,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2765,
+     "source_timestamp_us": 420000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0014966298054021093,
+      "source_domain_calibrated_probability": 0.46929587014420454,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2766,
+     "source_timestamp_us": 420000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2798,
+     "source_timestamp_us": 425000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0013638279771392952,
+      "source_domain_calibrated_probability": 0.4688576476797966,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2799,
+     "source_timestamp_us": 425000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2831,
+     "source_timestamp_us": 430000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0019967469328791795,
+      "source_domain_calibrated_probability": 0.47065625564541086,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2832,
+     "source_timestamp_us": 430000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2864,
+     "source_timestamp_us": 435000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0017975894370239572,
+      "source_domain_calibrated_probability": 0.47016032923833756,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2865,
+     "source_timestamp_us": 435000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.46376811594203,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2897,
+     "source_timestamp_us": 440000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0018935853291301215,
+      "source_domain_calibrated_probability": 0.4704058613506052,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2898,
+     "source_timestamp_us": 440000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 73.89162561576354,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2930,
+     "source_timestamp_us": 445000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0023426575606697326,
+      "source_domain_calibrated_probability": 0.4714106430345865,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2931,
+     "source_timestamp_us": 445000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.81553398058253,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2963,
+     "source_timestamp_us": 450000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0019823253790599727,
+      "source_domain_calibrated_probability": 0.4706220376996314,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2964,
+     "source_timestamp_us": 450000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 2996,
+     "source_timestamp_us": 455000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0015118301736788344,
+      "source_domain_calibrated_probability": 0.4693435336651032,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 2997,
+     "source_timestamp_us": 455000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 70.4225352112676,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 3029,
+     "source_timestamp_us": 460000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002029896227445565,
+      "source_domain_calibrated_probability": 0.4707339838837683,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 3030,
+     "source_timestamp_us": 460000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 70.09345794392523,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 3062,
+     "source_timestamp_us": 465000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.001962101252271817,
+      "source_domain_calibrated_probability": 0.47057363163931215,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 3063,
+     "source_timestamp_us": 465000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 71.42857142857143,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 3095,
+     "source_timestamp_us": 470000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.0013972237443600369,
+      "source_domain_calibrated_probability": 0.4689717286394262,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 3096,
+     "source_timestamp_us": 470000000
+    },
+    {
+     "kind": "CONTEXT_SNAPSHOT",
+     "payload": {
+      "context_available": true,
+      "hr_ecg_bpm": 72.11538461538461,
+      "ppg_quality": "VALID",
+      "pr_ppg_bpm": 71.5,
+      "spo2_pct": 97.9,
+      "spo2_valid": true
+     },
+     "sequence_index": 3128,
+     "source_timestamp_us": 475000000
+    },
+    {
+     "kind": "INFERENCE",
+     "payload": {
+      "calibration_domain": "MIT-BIH-v1.0.0",
+      "ecg_quality": "VALID",
+      "model_id": "MODEL_V2_FINAL",
+      "monitoring_state": "NORMAL_MONITORED_PATTERN",
+      "probability_role": "RESEARCH_TECHNICAL_METADATA",
+      "raw_probability": 0.002120253578970007,
+      "source_domain_calibrated_probability": 0.47093959538629593,
+      "threshold": 0.5101937262006424
+     },
+     "sequence_index": 3129,
+     "source_timestamp_us": 475000000
+    }
+   ],
+   "waveform_previews": [
+    {
+     "decimation_factor": 44,
+     "point_count": 3928,
+     "points_sha256": "b2cfa4be3488a4d38cb1911908edba2a9e5d15d8a34b6ee96a3a7e5939ff41a7"
+    }
+   ]
+  }
+ },
+ "semantic_sha256": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "status": "PASS",
+ "stopped": {
+  "child_pids_still_alive": [],
+  "launcher_exit_code": 0,
+  "launcher_reported_orphans": [],
+  "secret_scan": {
+   "clean": true,
+   "logs_scanned": [
+    "frontend.log",
+    "inference.log",
+    "product.log"
+   ],
+   "secret_pattern_hits": []
+  },
+  "stopped_in_reverse_order_log": true
+ },
+ "timings_machine_specific_seconds": {
+  "startup_incl_build_prewarm": 28.768,
+  "total": 61.4
+ },
+ "workspace_outside_repository": true
+}
