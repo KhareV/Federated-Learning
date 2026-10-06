@@ -1,0 +1,24 @@
+{
+ "demo_fallback": false,
+ "me": {
+  "auth_provider": "CLERK",
+  "demo_mode": false,
+  "status": 200,
+  "user_id_is_clerk_shaped": true,
+  "user_id_is_demo": false,
+  "user_id_label": "TEST_USER_A"
+ },
+ "status": "PASS",
+ "system": {
+  "auth_provider": "CLERK",
+  "demo_mode": false,
+  "federation_runtime": "ENABLED_ENGINEERING",
+  "hardware_mode": "SIMULATED_ONLY",
+  "model_id": "MODEL_V2_FINAL",
+  "physical_hardware_available": false,
+  "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_3",
+  "software_system": "SOFTWARE_SYSTEM_V2",
+  "status": 200
+ },
+ "user_pseudonym": "PSEUDONYM:0df39d581434"
+}

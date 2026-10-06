@@ -1,0 +1,17 @@
+{
+ "auth_mode_env": "NHM_PRODUCT_AUTH_MODE=CLERK",
+ "authorized_parties_variable": "NHM_CLERK_AUTHORIZED_PARTIES (explicit origins; default http://127.0.0.1:4173; wildcard refused)",
+ "backend_static_audit": {
+  "failures": [],
+  "ok": true
+ },
+ "clerk_backend_api_version": "7.0.0",
+ "clerk_js_version": "6.37.0",
+ "custom_jwt_crypto": false,
+ "demo_fallback_in_clerk_mode": false,
+ "dependency_files_changed_since_entry": [],
+ "official_backend_sdk": "clerk_backend_api.security.authenticate_request_async",
+ "secret_variable": "CLERK_SECRET_KEY (server only; product API process environment only)",
+ "status": "PASS",
+ "wildcard_authorized_party_rejected": true
+}

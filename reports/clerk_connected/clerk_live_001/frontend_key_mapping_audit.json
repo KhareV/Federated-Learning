@@ -1,0 +1,13 @@
+{
+ "frontend_reads_next_public": false,
+ "frontend_variable": "VITE_CLERK_PUBLISHABLE_KEY",
+ "mapping": "launcher maps NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY -> VITE_CLERK_PUBLISHABLE_KEY for the Vite build/preview only",
+ "operator_supplied_name": "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+ "publishable_key_committed": false,
+ "secret_passed_to_frontend_build": false,
+ "static_audit": {
+  "failures": [],
+  "ok": true
+ },
+ "status": "PASS"
+}

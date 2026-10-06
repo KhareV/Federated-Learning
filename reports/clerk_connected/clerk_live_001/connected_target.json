@@ -1,0 +1,10 @@
+{
+ "commit_subject": "freeze(clerk-live-001): CONNECTED TARGET - CLERK_LIVE_001_PROTOCOL_V1 (88 CLERKG0 criteria, 20 mutation controls) + Clerk-connected launcher + real-browser E2E orchestrator/driver (two real Clerk test users, REST, monitoring/federation WebSockets, ownership, logout/refresh/restart, wrong authorized party) + frozen CLERKG0 evaluator + clean connected-clone harness + connected runbook + lock/component registry; frozen BEFORE the canonical real-Clerk E2E; no secret committed",
+ "connected_target_sha": "4cb20ec1093f3a8697827abfffc1e5c1fd787055",
+ "local_head": "4cb20ec1093f3a8697827abfffc1e5c1fd787055",
+ "ok": true,
+ "origin_main": "4cb20ec1093f3a8697827abfffc1e5c1fd787055",
+ "pushed": true,
+ "release_vehicle": "the exact Git repository state at connected_target_sha (no archive)",
+ "working_tree_clean": true
+}

@@ -1,0 +1,21 @@
+{
+ "clerk_global": false,
+ "clerk_ui_rendered": true,
+ "client_trust_note": "Clerk's documented test verification code for +clerk_test addresses; no bypass, no forged token",
+ "client_trust_verification_used": true,
+ "demo_button_present_in_clerk_mode": false,
+ "development_mode_badge": true,
+ "manual_steps": "none (fully automated)",
+ "mocked_clerk": false,
+ "post_signin_landing": "/",
+ "real_browser": "headless Google Chrome via CDP, fresh profile",
+ "real_clerk_test_instance": true,
+ "session_cookie_names": [
+  "__session",
+  "__session_-dErM9Xt",
+  "__client_uat_-dErM9Xt",
+  "__client_uat"
+ ],
+ "status": "PASS",
+ "user": "TEST_USER_A"
+}

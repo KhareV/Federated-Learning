@@ -1,0 +1,134 @@
+{
+ "b_global_read": {
+  "research_ml_status": 200,
+  "step": "b-global-read"
+ },
+ "b_own_list": {
+  "contains_a_session": false,
+  "count": 0,
+  "status": 200,
+  "step": "b-own-list"
+ },
+ "b_rest": {
+  "probes": [
+   {
+    "app_bearer_kept": true,
+    "label": "read A session",
+    "method": "GET",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 403
+   },
+   {
+    "app_bearer_kept": true,
+    "label": "read A summary",
+    "method": "GET",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 403
+   },
+   {
+    "app_bearer_kept": true,
+    "label": "read A timeline",
+    "method": "GET",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 403
+   },
+   {
+    "app_bearer_kept": true,
+    "label": "read A run",
+    "method": "GET",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 403
+   },
+   {
+    "app_bearer_kept": true,
+    "label": "read A rounds",
+    "method": "GET",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 403
+   },
+   {
+    "app_bearer_kept": true,
+    "label": "start A run (control)",
+    "method": "POST",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 403
+   },
+   {
+    "app_bearer_kept": true,
+    "label": "start A monitoring session (control)",
+    "method": "POST",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 403
+   },
+   {
+    "app_bearer_kept": true,
+    "label": "stop A monitoring session (control)",
+    "method": "POST",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 403
+   },
+   {
+    "app_bearer_kept": true,
+    "label": "CONTROL: nonexistent session (must be 404, proving the rewrite reaches the target and 403 is ownership)",
+    "method": "GET",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 404
+   },
+   {
+    "app_bearer_kept": true,
+    "label": "CONTROL: global research view (must be 200)",
+    "method": "GET",
+    "response_path": "/product/v1/devices",
+    "rewritten": true,
+    "status": 200
+   }
+  ],
+  "ui_navigation": [
+   {
+    "status": null,
+    "target": "summary"
+   },
+   {
+    "status": null,
+    "target": "timeline"
+   },
+   {
+    "status": 403,
+    "target": "session"
+   }
+  ]
+ },
+ "b_websockets": {
+  "federation": {
+   "closeCode": 4403,
+   "frames": 0,
+   "opened": true,
+   "path": "/product/v1/federation/runs/FEDRUN-1766FBB32736/live"
+  },
+  "monitoring": {
+   "closeCode": 4403,
+   "frames": 0,
+   "opened": true,
+   "path": "/product/v1/sessions/SESS-818e2d23cb8f49b0a45faddeb9b4d114/live"
+  },
+  "step": "b-websockets"
+ },
+ "expected": {
+  "rest": 403,
+  "websocket": 4403
+ },
+ "probe_method": "one app request (carrying B's real bearer) rewritten at the browser Fetch layer to the A-owned target; the token is never read",
+ "status": "PASS",
+ "two_distinct_real_clerk_users": true,
+ "user_a": "TEST_USER_A",
+ "user_b": "TEST_USER_B"
+}

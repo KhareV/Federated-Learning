@@ -1,0 +1,147 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "frontend_source_contains_secret",
+   "mutation": "SECRET_IN_FRONTEND_SOURCE",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "frontend_bundle_secret_audit",
+   "mutation": "SECRET_IN_FRONTEND_BUILD",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "secret_leak_audit",
+   "mutation": "SECRET_PRINTED_IN_LOG",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "sqlite_secret_audit",
+   "mutation": "SECRET_WRITTEN_TO_SQLITE",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "frontend_reads_NEXT_PUBLIC",
+   "mutation": "FRONTEND_USES_NEXT_PUBLIC_DIRECTLY",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "clerk_probe_product (readiness)",
+   "mutation": "CLERK_MODE_FALLS_BACK_TO_DEMO",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "resolve_config:AUTHORIZED_PARTIES_MUST_BE_EXPLICIT_ORIGINS (no wildcard)",
+   "mutation": "WILDCARD_AUTHORIZED_PARTY_ACCEPTED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "monitoring_ws_no_token",
+   "mutation": "WEBSOCKET_TOKEN_IN_URL",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "logout_ok (monitoring socket after logout)",
+   "mutation": "MONITORING_WS_ACCEPTS_UNAUTHENTICATED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "logout_ok (federation socket after logout)",
+   "mutation": "FEDERATION_WS_ACCEPTS_UNAUTHENTICATED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "ownership_rest",
+   "mutation": "USER_B_READS_USER_A_SESSION",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "ownership_monitoring_ws",
+   "mutation": "USER_B_CONNECTS_TO_USER_A_MONITORING_WS",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "ownership_federation",
+   "mutation": "USER_B_CONTROLS_USER_A_FEDERATION_RUN",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "ownership_federation",
+   "mutation": "USER_B_CONNECTS_TO_USER_A_FEDERATION_WS",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "identity_no_ml_selection",
+   "mutation": "CLERK_IDENTITY_CHANGES_MODEL_OR_CHECKPOINT",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "fl_isolation",
+   "mutation": "MONITORING_SESSION_FEEDS_FL",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "demo_no_clerk",
+   "mutation": "CONNECTED_INTEGRATION_BREAKS_DEMOAUTH",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "not_deployed",
+   "mutation": "CANDIDATE_BECOMES_DEPLOYED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "no_custom_crypto",
+   "mutation": "CUSTOM_JWT_VERIFICATION_ADDED",
+   "restored": true
+  },
+  {
+   "applied_to": "temporary copy / synthetic evidence",
+   "caught": true,
+   "failing_check": "tag_unchanged",
+   "mutation": "HISTORICAL_RELEASE_TAG_MOVED",
+   "restored": true
+  }
+ ],
+ "count": 20
+}

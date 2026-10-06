@@ -1,0 +1,21 @@
+{
+ "accepted_updates": [
+  8,
+  8,
+  8
+ ],
+ "algorithm": "FEDAVG",
+ "base_model_id": "FL_INIT_V2",
+ "candidate_digest_equals_offline_demo": true,
+ "clients": 8,
+ "federation_code_changed_since_entry": [],
+ "fl_isolation_static": {
+  "failures": [],
+  "ok": true
+ },
+ "monitoring_session_data_enters_fl": false,
+ "rounds": 3,
+ "secagg_mode": "SECAGG_SHADOW",
+ "status": "PASS",
+ "updates_total": 24
+}

@@ -1,0 +1,28 @@
+{
+ "candidate_deployed": false,
+ "capstone_release_v1_untouched": true,
+ "claim": "NHM's existing capstone product has been verified with real Clerk test-instance authentication for browser sign-in, REST authorization, monitoring WebSockets, federation WebSockets and owner isolation, while preserving the offline DemoAuth mode and all scientific/runtime bindings.",
+ "claim_not": [
+  "production-auth certification",
+  "security certification",
+  "penetration test",
+  "compliance",
+  "production Clerk deployment",
+  "offline Clerk operation"
+ ],
+ "connected_profile": "CLERK (real TEST instance verified)",
+ "connected_target_sha": "4cb20ec1093f3a8697827abfffc1e5c1fd787055",
+ "decision": "ACCEPT",
+ "decision_id": "CAPSTONE_CLERK_CONNECTED_DECISION_V1",
+ "limitations": [
+  "Clerk TEST credentials / development instance: integration behaviour, not production-account operation",
+  "connected mode requires Internet access to Clerk",
+  "offline DemoAuth is a separate mode",
+  "all capstone scientific, FL and hardware limitations carry forward"
+ ],
+ "note": "Successor to the offline capstone release; does not modify CAPSTONE_RELEASE_V1 or its tag.",
+ "offline_profile": "DEMO (preserved, unchanged)",
+ "physical_hardware": false,
+ "release_id": "CAPSTONE_CLERK_CONNECTED_V1",
+ "released_monitoring_model": "MODEL_V2_FINAL"
+}

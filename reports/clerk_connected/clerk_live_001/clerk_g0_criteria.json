@@ -1,0 +1,977 @@
+{
+ "all_decided_pass": true,
+ "criteria": [
+  {
+   "checks": [
+    {
+     "check": "closed_lineage",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-001",
+   "pass": true,
+   "text": "capstone software lineage remains closed (CAP-001..011 PASS, CAPG0..10 PASS, no CAP-012)"
+  },
+  {
+   "checks": [
+    {
+     "check": "release_untouched",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-002",
+   "pass": true,
+   "text": "CAPSTONE_RELEASE_V1 untouched"
+  },
+  {
+   "checks": [
+    {
+     "check": "tag_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-003",
+   "pass": true,
+   "text": "historical release tag unchanged (capstone-release-v1 -> 3ad1b07)"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_sci_drift",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-004",
+   "pass": true,
+   "text": "scientific artifacts zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_runtime_drift",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-005",
+   "pass": true,
+   "text": "runtime bindings zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_fl_drift",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-006",
+   "pass": true,
+   "text": "FL scientific implementation zero drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_personal_model",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-007",
+   "pass": true,
+   "text": "no personal model"
+  },
+  {
+   "checks": [
+    {
+     "check": "fl_isolation",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-008",
+   "pass": true,
+   "text": "no user-session FL training"
+  },
+  {
+   "checks": [
+    {
+     "check": "keys_not_committed",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-009",
+   "pass": true,
+   "text": "supplied test keys never committed"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_key_rotation",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-010",
+   "pass": true,
+   "text": "no key rotation/revocation performed"
+  },
+  {
+   "checks": [
+    {
+     "check": "key_mapping",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-011",
+   "pass": true,
+   "text": "publishable key mapped to VITE_CLERK_PUBLISHABLE_KEY (frontend never reads NEXT_PUBLIC)"
+  },
+  {
+   "checks": [
+    {
+     "check": "backend_secret_var",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-012",
+   "pass": true,
+   "text": "backend uses CLERK_SECRET_KEY and never passes it to the frontend"
+  },
+  {
+   "checks": [
+    {
+     "check": "parties_explicit",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-013",
+   "pass": true,
+   "text": "explicit authorized parties configured"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_wildcard_party",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-014",
+   "pass": true,
+   "text": "wildcard authorized party absent and rejected"
+  },
+  {
+   "checks": [
+    {
+     "check": "official_clerkjs",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-015",
+   "pass": true,
+   "text": "official ClerkJS used"
+  },
+  {
+   "checks": [
+    {
+     "check": "official_sdk",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-016",
+   "pass": true,
+   "text": "official Clerk Python SDK used"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_custom_crypto",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-017",
+   "pass": true,
+   "text": "no custom JWT crypto"
+  },
+  {
+   "checks": [
+    {
+     "check": "real_instance",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-018",
+   "pass": true,
+   "text": "real Clerk test instance used"
+  },
+  {
+   "checks": [
+    {
+     "check": "signin_pass",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-019",
+   "pass": true,
+   "text": "real browser sign-in passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "system_clerk",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-020",
+   "pass": true,
+   "text": "/system reports CLERK"
+  },
+  {
+   "checks": [
+    {
+     "check": "demo_false",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-021",
+   "pass": true,
+   "text": "demo_mode=false"
+  },
+  {
+   "checks": [
+    {
+     "check": "me_real",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-022",
+   "pass": true,
+   "text": "/me returns real Clerk identity"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_demo_fallback",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-023",
+   "pass": true,
+   "text": "no DemoAuth fallback"
+  },
+  {
+   "checks": [
+    {
+     "check": "rest_bearer",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-024",
+   "pass": true,
+   "text": "real REST token verification passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "invalid_rejected",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-025",
+   "pass": true,
+   "text": "invalid bearer rejected"
+  },
+  {
+   "checks": [
+    {
+     "check": "monitoring_rest",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-026",
+   "pass": true,
+   "text": "monitoring REST flow passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "monitoring_ws_auth",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-027",
+   "pass": true,
+   "text": "monitoring WebSocket real Clerk auth passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "monitoring_ws_no_token",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-028",
+   "pass": true,
+   "text": "monitoring WebSocket token absent from URL"
+  },
+  {
+   "checks": [
+    {
+     "check": "federation_rest",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-029",
+   "pass": true,
+   "text": "federation REST flow passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "federation_ws_auth",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-030",
+   "pass": true,
+   "text": "federation WebSocket real Clerk auth passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "federation_ws_no_token",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-031",
+   "pass": true,
+   "text": "federation WS token absent from URL"
+  },
+  {
+   "checks": [
+    {
+     "check": "logout_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-032",
+   "pass": true,
+   "text": "logout invalidates product access"
+  },
+  {
+   "checks": [
+    {
+     "check": "refresh_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-033",
+   "pass": true,
+   "text": "browser refresh restores the Clerk session"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_token_localstorage",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-034",
+   "pass": true,
+   "text": "NHM stores no bearer token in localStorage"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_token_sessionstorage",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-035",
+   "pass": true,
+   "text": "NHM stores no bearer token in sessionStorage"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_token_indexeddb",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-036",
+   "pass": true,
+   "text": "NHM stores no bearer token in IndexedDB"
+  },
+  {
+   "checks": [
+    {
+     "check": "secret_absent_frontend_src",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-037",
+   "pass": true,
+   "text": "actual secret absent from frontend source"
+  },
+  {
+   "checks": [
+    {
+     "check": "secret_absent_build",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-038",
+   "pass": true,
+   "text": "actual secret absent from frontend build"
+  },
+  {
+   "checks": [
+    {
+     "check": "secret_absent_logs",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-039",
+   "pass": true,
+   "text": "actual secret absent from logs"
+  },
+  {
+   "checks": [
+    {
+     "check": "secret_absent_sqlite",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-040",
+   "pass": true,
+   "text": "actual secret absent from SQLite"
+  },
+  {
+   "checks": [
+    {
+     "check": "secret_absent_artifacts",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-041",
+   "pass": true,
+   "text": "actual secret absent from artifacts"
+  },
+  {
+   "checks": [
+    {
+     "check": "secret_absent_evidence",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-042",
+   "pass": true,
+   "text": "actual secret absent from committed evidence"
+  },
+  {
+   "checks": [
+    {
+     "check": "ownership_rest",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-043",
+   "pass": true,
+   "text": "cross-user REST ownership enforced"
+  },
+  {
+   "checks": [
+    {
+     "check": "ownership_monitoring_ws",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-044",
+   "pass": true,
+   "text": "cross-user monitoring WS ownership enforced"
+  },
+  {
+   "checks": [
+    {
+     "check": "ownership_federation",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-045",
+   "pass": true,
+   "text": "cross-user federation ownership enforced (REST control + WS)"
+  },
+  {
+   "checks": [
+    {
+     "check": "persistence_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-046",
+   "pass": true,
+   "text": "product persistence survives restart"
+  },
+  {
+   "checks": [
+    {
+     "check": "identity_stable",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-047",
+   "pass": true,
+   "text": "Clerk identity stable after restart/sign-in"
+  },
+  {
+   "checks": [
+    {
+     "check": "model_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-048",
+   "pass": true,
+   "text": "MODEL_V2_FINAL unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "cal_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-049",
+   "pass": true,
+   "text": "CAL_V2 unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "identity_no_ml_selection",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-050",
+   "pass": true,
+   "text": "Clerk identity cannot select ML configuration"
+  },
+  {
+   "checks": [
+    {
+     "check": "fl_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-051",
+   "pass": true,
+   "text": "FL clients unchanged (8 logical, 3 rounds, 24 updates)"
+  },
+  {
+   "checks": [
+    {
+     "check": "candidate_sandbox",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-052",
+   "pass": true,
+   "text": "candidate remains sandbox-only"
+  },
+  {
+   "checks": [
+    {
+     "check": "not_deployed",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-053",
+   "pass": true,
+   "text": "production_deployed=false"
+  },
+  {
+   "checks": [
+    {
+     "check": "demo_works",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-054",
+   "pass": true,
+   "text": "DemoAuth mode still works"
+  },
+  {
+   "checks": [
+    {
+     "check": "demo_no_clerk",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-055",
+   "pass": true,
+   "text": "DemoAuth mode initializes no Clerk"
+  },
+  {
+   "checks": [
+    {
+     "check": "demo_zero_clerk_traffic",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-056",
+   "pass": true,
+   "text": "offline DemoAuth still has zero required Clerk network traffic"
+  },
+  {
+   "checks": [
+    {
+     "check": "connected_needs_clerk_network",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-057",
+   "pass": true,
+   "text": "connected mode correctly requires Clerk network"
+  },
+  {
+   "checks": [
+    {
+     "check": "research_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-058",
+   "pass": true,
+   "text": "scientific/research evidence unchanged (same candidate digest and research views)"
+  },
+  {
+   "checks": [
+    {
+     "check": "journey_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-059",
+   "pass": true,
+   "text": "current frontend product journey works"
+  },
+  {
+   "checks": [
+    {
+     "check": "history_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-060",
+   "pass": true,
+   "text": "current history works"
+  },
+  {
+   "checks": [
+    {
+     "check": "federation_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-061",
+   "pass": true,
+   "text": "current federation works"
+  },
+  {
+   "checks": [
+    {
+     "check": "models_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-062",
+   "pass": true,
+   "text": "current models page works"
+  },
+  {
+   "checks": [
+    {
+     "check": "research_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-063",
+   "pass": true,
+   "text": "current research pages work"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_new_science",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-064",
+   "pass": true,
+   "text": "no new scientific result"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_heldout",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-065",
+   "pass": true,
+   "text": "no held-out inference"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_retrain",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-066",
+   "pass": true,
+   "text": "no retraining/recalibration"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_hardware",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-067",
+   "pass": true,
+   "text": "no physical hardware"
+  },
+  {
+   "checks": [
+    {
+     "check": "clone_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-068",
+   "pass": true,
+   "text": "clean connected clone succeeds"
+  },
+  {
+   "checks": [
+    {
+     "check": "clone_fresh_browser",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-069",
+   "pass": true,
+   "text": "clean connected clone uses a fresh browser profile and a fresh real Clerk session"
+  },
+  {
+   "checks": [
+    {
+     "check": "clone_no_session_copied",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-070",
+   "pass": true,
+   "text": "no developer Clerk cookie/session copied"
+  },
+  {
+   "checks": [
+    {
+     "check": "clone_no_db_copied",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-071",
+   "pass": true,
+   "text": "no developer DB copied"
+  },
+  {
+   "checks": [
+    {
+     "check": "clone_no_env_copied",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-072",
+   "pass": true,
+   "text": "no developer env file copied"
+  },
+  {
+   "checks": [
+    {
+     "check": "target_clean_pushed",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-073",
+   "pass": true,
+   "text": "connected target clean and pushed"
+  },
+  {
+   "checks": [
+    {
+     "check": "protected_final",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-074",
+   "pass": true,
+   "text": "protected artifact audit passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "dev_regression",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-075",
+   "pass": true,
+   "text": "full regression passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "dev_frontend_tests",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-076",
+   "pass": true,
+   "text": "frontend tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "dev_svelte",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-077",
+   "pass": true,
+   "text": "svelte-check zero errors"
+  },
+  {
+   "checks": [
+    {
+     "check": "dev_build",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-078",
+   "pass": true,
+   "text": "build passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "dev_ruff",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-079",
+   "pass": true,
+   "text": "ruff passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "dev_pip",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-080",
+   "pass": true,
+   "text": "pip check passes"
+  },
+  {
+   "checks": [
+    {
+     "check": "mutation_log",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-081",
+   "pass": true,
+   "text": "all 20 mutation controls caught and restored"
+  },
+  {
+   "checks": [
+    {
+     "check": "wrong_party_rejected",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-082",
+   "pass": true,
+   "text": "wrong authorized party rejects the real Clerk session"
+  },
+  {
+   "checks": [
+    {
+     "check": "ui_chain_ok",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-083",
+   "pass": true,
+   "text": "UI successor chain verified (CAPSTONE_UI_V1_3; V1/V1_1/V1_2 historical locks unchanged)"
+  },
+  {
+   "checks": [
+    {
+     "check": "frontend_scope_exact",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-084",
+   "pass": true,
+   "text": "frontend drift is exactly the UI_V1_3-accounted change (loader + its test)"
+  },
+  {
+   "checks": [
+    {
+     "check": "ci_untouched",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-085",
+   "pass": true,
+   "text": "CI not queried and not triggered"
+  },
+  {
+   "checks": [
+    {
+     "check": "task_pass",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-086",
+   "pass": true,
+   "text": "CLERK-LIVE-001 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "gate_pass",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-087",
+   "pass": true,
+   "text": "CLERKG0 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "decision_accept",
+     "pass": true
+    }
+   ],
+   "id": "CLERKG0-088",
+   "pass": true,
+   "text": "CAPSTONE_CLERK_CONNECTED_V1 ACCEPT"
+  }
+ ],
+ "criteria_count": 88,
+ "failed": [],
+ "gate": "CLERKG0",
+ "mode": "FINAL"
+}

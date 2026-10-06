@@ -1,0 +1,32 @@
+{
+ "logout": {
+  "appRedirectsToSignIn": true,
+  "demoFallback": false,
+  "identityChipVisibleAfter": false,
+  "redirectedToSignIn": true,
+  "sessionCookiePresentAfter": false,
+  "step": "logout"
+ },
+ "relogin_fresh_browser_profile": true,
+ "relogin_identity": {
+  "auth_provider": "CLERK",
+  "demo_mode": false,
+  "status": 200,
+  "user_id_is_clerk_shaped": true,
+  "user_id_is_demo": false,
+  "user_id_label": "TEST_USER_A"
+ },
+ "rest_without_token_after_logout": {
+  "status": 401,
+  "step": "logout-rest-no-token"
+ },
+ "status": "PASS",
+ "websocket_after_logout": {
+  "closeCode": 4401,
+  "expected": 4401,
+  "frames": 0,
+  "opened": true,
+  "path": "/product/v1/sessions/SESS-eb1b3f7eab43406d8d1c60e7e9c58680/live",
+  "step": "logout-websocket"
+ }
+}

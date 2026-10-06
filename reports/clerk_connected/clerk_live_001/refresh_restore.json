@@ -1,0 +1,25 @@
+{
+ "nhm_persists_token": false,
+ "refresh": {
+  "auth_provider": "CLERK",
+  "identityRestored": true,
+  "me_status": 200,
+  "same_user_id": true,
+  "step": "refresh"
+ },
+ "status": "PASS",
+ "storage_scan": {
+  "indexedDB": {
+   "databases": 0,
+   "jwtLike": false
+  },
+  "localStorage": {
+   "jwtLike": false,
+   "keys": 2
+  },
+  "sessionStorage": {
+   "jwtLike": false,
+   "keys": 2
+  }
+ }
+}

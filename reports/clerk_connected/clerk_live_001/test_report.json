@@ -1,0 +1,67 @@
+{
+ "ci_queried": false,
+ "ci_triggered": false,
+ "commands": {
+  "build": {
+   "returncode": 0,
+   "seconds_machine_specific": 8.6,
+   "summary": "(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+  },
+  "pip_check": {
+   "output": "No broken requirements found.",
+   "returncode": 0
+  },
+  "ruff": {
+   "output": "All checks passed!",
+   "returncode": 0
+  },
+  "svelte_check": {
+   "returncode": 0,
+   "seconds_machine_specific": 3.8,
+   "summary": "or\"\n1791287571216 WARNING \"src/routes/ai/insights/+page.svelte\" 13:1428 \"Unused CSS selector \\\".grid.top>:first-child\\\"\\nhttps://svelte.dev/e/css_unused_selector\"\n1791287571216 WARNING \"src/routes/ai/insights/+page.svelte\" 13:1552 \"Unused CSS selector \\\".grid.top>:first-child\\\"\\nhttps://svelte.dev/e/css_unused_selector\"\n1791287571216 COMPLETED 5752 FILES 0 ERRORS 112 WARNINGS 6 FILES_WITH_PROBLEMS"
+  },
+  "vitest": {
+   "returncode": 0,
+   "seconds_machine_specific": 6.5,
+   "summary": " Test Files  19 passed | 3 skipped (22)\n      Tests  197 passed | 3 skipped (200)\n   Start at  17:22:41\n   Duration  5.76s (transform 4.42s, setup 0ms, collect 11.05s, tests 2.31s, environment 4.07s, prepare 933ms)"
+  }
+ },
+ "frontend_summary": {
+  "svelte_check_zero_errors": true,
+  "vitest_summary": " Test Files  19 passed | 3 skipped (22)\n      Tests  197 passed | 3 skipped (200)\n   Start at  17:22:41\n   Duration  5.76s (transform 4.42s, setup 0ms, collect 11.05s, tests 2.31s, environment 4.07s, prepare 933ms)"
+ },
+ "full_regression": {
+  "counts": {
+   "deselected": 1,
+   "passed": 3082,
+   "skipped": 1
+  },
+  "failed": [],
+  "known_flake_deselected": "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers",
+  "returncode": 0,
+  "seconds_machine_specific": 423.9
+ },
+ "inherited_flake": {
+  "attempts": [
+   {
+    "attempt": 1,
+    "known_signature": true,
+    "passed": false
+   },
+   {
+    "attempt": 2,
+    "known_signature": false,
+    "passed": true
+   }
+  ],
+  "status": "PASS_INHERITED_FLAKE_POLICY"
+ },
+ "targeted": {
+  "counts": {
+   "deselected": 1,
+   "passed": 97
+  },
+  "returncode": 0,
+  "seconds_machine_specific": 48.4
+ }
+}

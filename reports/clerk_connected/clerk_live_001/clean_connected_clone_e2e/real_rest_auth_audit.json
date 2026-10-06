@@ -1,0 +1,53 @@
+{
+ "app_rest_calls": [
+  {
+   "bearer_jwt_shaped": null,
+   "bearer_present": null,
+   "path": "/product/v1/system",
+   "status": 200
+  },
+  {
+   "bearer_jwt_shaped": false,
+   "bearer_present": false,
+   "path": "/product/v1/system",
+   "status": 200
+  },
+  {
+   "bearer_jwt_shaped": true,
+   "bearer_present": true,
+   "path": "/product/v1/me",
+   "status": 200
+  },
+  {
+   "bearer_jwt_shaped": true,
+   "bearer_present": true,
+   "path": "/product/v1/devices",
+   "status": 200
+  },
+  {
+   "bearer_jwt_shaped": true,
+   "bearer_present": true,
+   "path": "/product/v1/sessions",
+   "status": 200
+  },
+  {
+   "bearer_jwt_shaped": true,
+   "bearer_present": true,
+   "path": "/product/v1/federation",
+   "status": 200
+  }
+ ],
+ "backend_verification": "official clerk_backend_api.security.authenticate_request_async",
+ "bearer_obtained_from": "clerk.session.getToken() by the app (observed as request headers; value never recorded)",
+ "demo_acknowledgement_creates_identity": false,
+ "status": "PASS",
+ "token_value_recorded": false,
+ "unauthenticated_and_invalid": {
+  "demo_acknowledgement_as_bearer": 401,
+  "demo_identity_header": 401,
+  "garbage_bearer": 401,
+  "jwt_shaped_garbage": 401,
+  "no_token": 401,
+  "protected_sessions_no_token": 401
+ }
+}

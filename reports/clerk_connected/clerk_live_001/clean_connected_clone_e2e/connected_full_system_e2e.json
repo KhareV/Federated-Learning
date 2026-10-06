@@ -1,0 +1,169 @@
+{
+ "auth_provider": "CLERK",
+ "clerk_owned_hosts": [
+  "clerk-telemetry.com",
+  "delicate-civet-2247.clerk.accounts.dev",
+  "img.clerk.com"
+ ],
+ "console_errors": [],
+ "demo_mode": false,
+ "elapsed_s_machine_specific": 68,
+ "federation": {
+  "aggregationPlainSeen": true,
+  "maxClientsSubmittedAtOnce": 8,
+  "preRunRest": [
+   {
+    "bearer_present": true,
+    "path": "/product/v1/federation",
+    "status": 200
+   },
+   {
+    "bearer_present": null,
+    "path": "/product/v1/federation",
+    "status": 200
+   },
+   {
+    "bearer_present": null,
+    "path": "/product/v1/federation/runs",
+    "status": 200
+   },
+   {
+    "bearer_present": null,
+    "path": "/product/v1/federation/clients",
+    "status": 200
+   }
+  ],
+  "runStatusText": "COMPLETED \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 \u00b7 202 events",
+  "secaggShadowVerifiedSeen": true,
+  "step": "federation",
+  "updatesText": "24"
+ },
+ "federation_run_rest": {
+  "accepted_updates": [
+   8,
+   8,
+   8
+  ],
+  "algorithm": "FEDAVG",
+  "base_model_id": "FL_INIT_V2",
+  "candidate_count": 1,
+  "client_count": 8,
+  "planned_rounds": 3,
+  "round_states": [
+   "COMPLETED",
+   "COMPLETED",
+   "COMPLETED"
+  ],
+  "rounds_status": 200,
+  "run_status": "COMPLETED",
+  "run_type": "LIVE_RUN",
+  "secagg_mode": "SECAGG_SHADOW",
+  "status": 200,
+  "step": "federation-run-rest"
+ },
+ "history": {
+  "completed": null,
+  "listed": true,
+  "previews": 1,
+  "step": "history",
+  "summaryStatus": 200,
+  "timelineStatus": 200
+ },
+ "invariants_evaluated_by_frozen_evaluator": true,
+ "model_id": "MODEL_V2_FINAL",
+ "models": {
+  "candidate": [
+   {
+    "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "parent_model_id": "FL_INIT_V2",
+    "production_deployed": false,
+    "sandbox_status": "IN_SANDBOX",
+    "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "validation_status": "PASSED"
+   }
+  ],
+  "candidates": 1,
+  "controls": [],
+  "productionDeployed": [
+   "FALSE"
+  ],
+  "released_default": "MODEL_V2_FINAL",
+  "step": "models"
+ },
+ "monitoring": {
+  "calibrations": [
+   "CAL_V2 (MIT-BIH-v1.0.0)"
+  ],
+  "complete": true,
+  "deviceStatesSeen": [
+   "CONNECTED",
+   "STREAMING",
+   "RECONNECTING",
+   "STOPPED"
+  ],
+  "finalState": "COMPLETED",
+  "gapSeen": true,
+  "models": [
+   "MODEL_V2_FINAL"
+  ],
+  "monitoringStatesSeen": [
+   "NORMAL_MONITORED_PATTERN",
+   "CONTEXT_UNAVAILABLE"
+  ],
+  "step": "monitoring"
+ },
+ "network_hosts": [
+  "",
+  "127.0.0.1:4173",
+  "clerk-telemetry.com",
+  "delicate-civet-2247.clerk.accounts.dev",
+  "img.clerk.com"
+ ],
+ "network_note": "CONNECTED mode requires Internet access to Clerk-owned origins (not an offline claim)",
+ "product_api": "CAPSTONE_PRODUCT_API_V1_3",
+ "research_fl": {
+  "engineeringSeparate": true,
+  "status": 200,
+  "step": "research-fl"
+ },
+ "research_ml": {
+  "promotionDistinction": true,
+  "status": 200,
+  "step": "research-ml"
+ },
+ "software_system": "SOFTWARE_SYSTEM_V2",
+ "status": "PASS",
+ "system_page": {
+  "simulatedOnly": true,
+  "step": "system-page"
+ },
+ "user_a_storage_scan": {
+  "indexedDB": {
+   "databases": 0,
+   "jwtLike": false
+  },
+  "localStorage": {
+   "jwtLike": false,
+   "keys": 2
+  },
+  "sessionStorage": {
+   "jwtLike": false,
+   "keys": 2
+  }
+ },
+ "user_b_storage_scan": {
+  "indexedDB": {
+   "databases": 0,
+   "jwtLike": false
+  },
+  "localStorage": {
+   "jwtLike": false,
+   "keys": 2
+  },
+  "sessionStorage": {
+   "jwtLike": false,
+   "keys": 2
+  }
+ }
+}

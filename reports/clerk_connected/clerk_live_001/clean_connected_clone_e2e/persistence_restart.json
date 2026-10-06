@@ -1,0 +1,38 @@
+{
+ "backend_restarted_same_sqlite": true,
+ "federation": {
+  "roundCards": 3,
+  "run_status": "COMPLETED",
+  "run_type": "LIVE_RUN",
+  "step": "return-federation"
+ },
+ "history": {
+  "listed": true,
+  "previews": 1,
+  "step": "return-history",
+  "summaryStatus": 200,
+  "summary_digest": 750,
+  "timelineStatus": 200
+ },
+ "models": {
+  "candidates": [
+   {
+    "governance_status": "ACCEPTED_TO_SANDBOX",
+    "production_deployed": false,
+    "sandbox_status": "IN_SANDBOX"
+   }
+  ],
+  "released_default": "MODEL_V2_FINAL",
+  "step": "return-models"
+ },
+ "same_owner_after_restart": true,
+ "status": "PASS",
+ "stop_1": {
+  "launcher_exit_code": 0,
+  "orphans": []
+ },
+ "stop_2": {
+  "launcher_exit_code": 0,
+  "orphans": []
+ }
+}

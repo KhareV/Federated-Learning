@@ -1,0 +1,62 @@
+{
+ "ci_queried": false,
+ "ci_triggered": false,
+ "commands": {
+  "build": {
+   "returncode": 0,
+   "seconds_machine_specific": 8.3,
+   "summary": "(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+  },
+  "pip_check": {
+   "output": "No broken requirements found.",
+   "returncode": 0
+  },
+  "ruff": {
+   "output": "All checks passed!",
+   "returncode": 0
+  },
+  "svelte_check": {
+   "returncode": 0,
+   "seconds_machine_specific": 3.6,
+   "summary": "or\"\n1791286890849 WARNING \"src/routes/ai/insights/+page.svelte\" 13:1428 \"Unused CSS selector \\\".grid.top>:first-child\\\"\\nhttps://svelte.dev/e/css_unused_selector\"\n1791286890849 WARNING \"src/routes/ai/insights/+page.svelte\" 13:1552 \"Unused CSS selector \\\".grid.top>:first-child\\\"\\nhttps://svelte.dev/e/css_unused_selector\"\n1791286890849 COMPLETED 5752 FILES 0 ERRORS 112 WARNINGS 6 FILES_WITH_PROBLEMS"
+  },
+  "vitest": {
+   "returncode": 1,
+   "seconds_machine_specific": 7.1,
+   "summary": "     59|   expect(screen.queryByRole('button', { name: 'ENTER DEMO WORKSPACE' }\u2026\n     60|   expect(screen.queryByText('NHM OFFLINE FACULTY DEMO')).toBeNull();\n\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af[1/1]\u23af"
+  }
+ },
+ "frontend_summary": {
+  "svelte_check_zero_errors": true,
+  "vitest_summary": "     59|   expect(screen.queryByRole('button', { name: 'ENTER DEMO WORKSPACE' }\u2026\n     60|   expect(screen.queryByText('NHM OFFLINE FACULTY DEMO')).toBeNull();\n\n\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af\u23af[1/1]\u23af"
+ },
+ "full_regression": {
+  "counts": {
+   "deselected": 1,
+   "passed": 3082,
+   "skipped": 1
+  },
+  "failed": [],
+  "known_flake_deselected": "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers",
+  "returncode": 0,
+  "seconds_machine_specific": 412.3
+ },
+ "inherited_flake": {
+  "attempts": [
+   {
+    "attempt": 1,
+    "known_signature": false,
+    "passed": true
+   }
+  ],
+  "status": "PASS_INHERITED_FLAKE_POLICY"
+ },
+ "targeted": {
+  "counts": {
+   "deselected": 1,
+   "passed": 97
+  },
+  "returncode": 0,
+  "seconds_machine_specific": 48.8
+ }
+}

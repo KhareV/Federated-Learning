@@ -1,0 +1,50 @@
+{
+ "added_count": 33,
+ "added_outside_additive_namespace": [],
+ "authorised_modifications": [
+  "frontend/src/lib/product/auth.ts",
+  "scripts/verify_capstone_ui_v1.py",
+  "scripts/verify_capstone_ui_v1_1.py",
+  "scripts/verify_capstone_ui_v1_2.py",
+  "tests/test_capstone_federation_ui.py",
+  "tests/test_capstone_full_demo.py"
+ ],
+ "capstone_release_tag_unchanged": true,
+ "entry_sha": "be2e4473223876699e74b64adc72672453ebc34b",
+ "frontend_drift": [],
+ "head_sha": "b4076fb41fbbe241acdd0b3a10236d01cd726a0c",
+ "locks_verified": {
+  "cap001": true,
+  "cap002": true,
+  "cap003": true,
+  "cap004": true,
+  "cap005": true,
+  "cap006": true,
+  "cap007": true,
+  "cap008": true,
+  "cap009": true,
+  "cap010": true,
+  "cap011": true,
+  "capstone_ui_v1": true,
+  "capstone_ui_v1_1": true,
+  "capstone_ui_v1_2": true,
+  "fedprox_mu_v2": true,
+  "fl_init_v2": true,
+  "research_catalog": true,
+  "v2_fl_wearable_system": true
+ },
+ "modified_outside_allowed": [],
+ "modified_since_entry": [
+  "frontend/src/lib/product/auth.ts",
+  "scripts/verify_capstone_ui_v1.py",
+  "scripts/verify_capstone_ui_v1_1.py",
+  "scripts/verify_capstone_ui_v1_2.py",
+  "tests/test_capstone_federation_ui.py",
+  "tests/test_capstone_full_demo.py"
+ ],
+ "named_component_drift": [],
+ "protected_artifact_drift": false,
+ "protected_tree_modified": [],
+ "removed_since_entry": [],
+ "ui_v1_3_verified": true
+}

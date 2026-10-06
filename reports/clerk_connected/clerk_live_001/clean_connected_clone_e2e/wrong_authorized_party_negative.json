@@ -1,0 +1,19 @@
+{
+ "authorized_parties_configured": [
+  "http://127.0.0.1:9999"
+ ],
+ "demo_fallback": false,
+ "identity_chip_visible": false,
+ "me_statuses": [
+  401,
+  401
+ ],
+ "real_clerk_session_established": true,
+ "real_origin": "http://127.0.0.1:4173",
+ "status": "PASS",
+ "stop": {
+  "launcher_exit_code": 0,
+  "orphans": []
+ },
+ "wildcard_used": false
+}

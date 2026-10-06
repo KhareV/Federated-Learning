@@ -1,0 +1,38 @@
+{
+ "connected": {
+  "calibrations": [
+   "CAL_V2 (MIT-BIH-v1.0.0)"
+  ],
+  "candidate_state_digest": [
+   "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  ],
+  "model_id": "MODEL_V2_FINAL",
+  "monitoring_models": [
+   "MODEL_V2_FINAL"
+  ],
+  "software_system": "SOFTWARE_SYSTEM_V2"
+ },
+ "demo": {
+  "candidate_state_digest": [
+   "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  ],
+  "runtime": {
+   "auth_provider": "DEMO",
+   "calibration_id": "CAL_V2",
+   "demo_mode": true,
+   "federation_runtime": "ENABLED_ENGINEERING",
+   "hardware_mode": "SIMULATED_ONLY",
+   "model_id": "MODEL_V2_FINAL",
+   "persistence_mode": "SQLITE",
+   "physical_hardware_available": false,
+   "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_3",
+   "product_api_version": "PRODUCT_API_V2",
+   "software_system": "SOFTWARE_SYSTEM_V2"
+  }
+ },
+ "failures": [],
+ "identity_selects_model": false,
+ "personal_model": false,
+ "scientific_files_changed_since_entry": [],
+ "status": "PASS"
+}

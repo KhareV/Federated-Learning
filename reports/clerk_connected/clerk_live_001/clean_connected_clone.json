@@ -1,0 +1,110 @@
+{
+ "browser_profile_note": "the E2E creates a new temporary Chrome profile for every browser run and deletes it",
+ "checkout_matches_target": true,
+ "checkout_sha": "4cb20ec1093f3a8697827abfffc1e5c1fd787055",
+ "clone_inside_development_checkout": false,
+ "clone_source": "remote git repository (git clone at the exact SHA)",
+ "commands": [
+  {
+   "id": "clone",
+   "returncode": 0,
+   "seconds": 39.2
+  },
+  {
+   "id": "checkout",
+   "returncode": 0,
+   "seconds": 0.4
+  },
+  {
+   "id": "venv",
+   "returncode": 0,
+   "seconds": 1.0
+  },
+  {
+   "id": "pip_dev",
+   "returncode": 0,
+   "seconds": 85.1
+  },
+  {
+   "id": "pip_auth",
+   "returncode": 0,
+   "seconds": 2.0
+  },
+  {
+   "id": "pip_check",
+   "returncode": 0,
+   "seconds": 0.1
+  },
+  {
+   "id": "npm_clerk",
+   "returncode": 0,
+   "seconds": 6.7
+  },
+  {
+   "id": "npm_app",
+   "returncode": 0,
+   "seconds": 4.8
+  },
+  {
+   "id": "verifier",
+   "returncode": 0,
+   "seconds": 0.3
+  },
+  {
+   "id": "targeted",
+   "returncode": 0,
+   "seconds": 0.4
+  },
+  {
+   "id": "e2e",
+   "returncode": 0,
+   "seconds": 254.6
+  }
+ ],
+ "credentials_supplied_as": "external file paths outside the repository (publishable key, secret key, test-user credentials)",
+ "credentials_supplied_externally": true,
+ "developer_browser_session_copied": false,
+ "developer_clerk_cookie_copied": false,
+ "developer_db_copied": false,
+ "developer_env_copied": false,
+ "development_venv_used": false,
+ "e2e_evidence_statuses": {
+  "connected_full_system_e2e.json": "PASS",
+  "cross_user_ownership.json": "PASS",
+  "federation_websocket_real_clerk.json": "PASS",
+  "frontend_bundle_secret_audit.json": "PASS",
+  "logout_relogin.json": "PASS",
+  "monitoring_websocket_real_clerk.json": "PASS",
+  "persistence_restart.json": "PASS",
+  "real_me_audit.json": "PASS",
+  "real_rest_auth_audit.json": "PASS",
+  "real_signin_e2e.json": "PASS",
+  "refresh_restore.json": "PASS",
+  "secret_leak_audit.json": "PASS",
+  "sqlite_secret_audit.json": "PASS",
+  "wrong_authorized_party_negative.json": "PASS"
+ },
+ "e2e_returncode": 0,
+ "fresh_browser_profile": true,
+ "harness_matches_clone": true,
+ "label": "CLONE",
+ "manual_steps": "none",
+ "network": "installation and Clerk authentication require Internet access",
+ "npm_installs": [
+  "frontend/clerk-sdk",
+  "frontend"
+ ],
+ "pre_install_audit": {
+  "ok": true,
+  "violations": []
+ },
+ "python_venv_created_by_run": true,
+ "real_clerk_session": true,
+ "release_target_sha": "4cb20ec1093f3a8697827abfffc1e5c1fd787055",
+ "secret_in_clone_tree": false,
+ "status": "PASS",
+ "target_reachable_from_remote_main": true,
+ "tracked_files": 4049,
+ "tracked_modified_after_execution": [],
+ "tree_clean_after_checkout": true
+}

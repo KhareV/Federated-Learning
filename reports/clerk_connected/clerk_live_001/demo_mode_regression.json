@@ -1,0 +1,50 @@
+{
+ "blocked_external_requests": [],
+ "cap_010_canonical_digest": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "clerk_global_in_browser": false,
+ "clerk_origins_contacted": [],
+ "demo_auth_works": true,
+ "demo_projection": {
+  "candidate_state_digest": [
+   "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+  ],
+  "runtime": {
+   "auth_provider": "DEMO",
+   "calibration_id": "CAL_V2",
+   "demo_mode": true,
+   "federation_runtime": "ENABLED_ENGINEERING",
+   "hardware_mode": "SIMULATED_ONLY",
+   "model_id": "MODEL_V2_FINAL",
+   "persistence_mode": "SQLITE",
+   "physical_hardware_available": false,
+   "product_api_implementation": "CAPSTONE_PRODUCT_API_V1_3",
+   "product_api_version": "PRODUCT_API_V2",
+   "software_system": "SOFTWARE_SYSTEM_V2"
+  }
+ },
+ "elapsed_s_machine_specific": 52.9,
+ "equals_cap_010_canonical_digest": true,
+ "external_requests": [],
+ "launcher": "scripts.run_capstone_faculty_demo (unchanged)",
+ "not_clerk_banner": true,
+ "request_origins": [
+  "http://127.0.0.1:4173"
+ ],
+ "semantic_sha256": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "status": "PASS",
+ "stopped": {
+  "child_pids_still_alive": [],
+  "launcher_exit_code": 0,
+  "launcher_reported_orphans": [],
+  "secret_scan": {
+   "clean": true,
+   "logs_scanned": [
+    "frontend.log",
+    "inference.log",
+    "product.log"
+   ],
+   "secret_pattern_hits": []
+  },
+  "stopped_in_reverse_order_log": true
+ }
+}

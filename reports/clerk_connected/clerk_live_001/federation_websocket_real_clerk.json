@@ -1,0 +1,32 @@
+{
+ "aggregation_plain_seen": true,
+ "authenticated_handshake_101": true,
+ "events_received": 202,
+ "real_clerk_browser_session": true,
+ "run_status_text": "COMPLETED \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 \u00b7 202 events",
+ "same_origin_proxy": true,
+ "secagg_shadow_verified_seen": true,
+ "session_cookie_transport": true,
+ "status": "PASS",
+ "token_in_url": false,
+ "unauthenticated_after_logout": {
+  "closeCode": 4401,
+  "expected": 4401,
+  "frames": 0,
+  "opened": true,
+  "path": "/product/v1/sessions/SESS-eb1b3f7eab43406d8d1c60e7e9c58680/live",
+  "step": "logout-websocket"
+ },
+ "updates_text": "24",
+ "websocket": {
+  "closed": true,
+  "cookieSessionSent": true,
+  "firstFrameKind": null,
+  "framesReceived": 202,
+  "handshakeStatus": 101,
+  "pathname": "/product/v1/federation/runs/FEDRUN-062DFEC3931C/live",
+  "runIdInPathIsOwned": true,
+  "url": "ws://127.0.0.1:4173/product/v1/federation/runs/FEDRUN-062DFEC3931C/live",
+  "urlHasToken": false
+ }
+}

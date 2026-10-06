@@ -1,0 +1,35 @@
+{
+ "authenticated_handshake_101": true,
+ "calibration": [
+  "CAL_V2 (MIT-BIH-v1.0.0)"
+ ],
+ "events_received": 3157,
+ "model": [
+  "MODEL_V2_FINAL"
+ ],
+ "real_clerk_browser_session": true,
+ "same_origin_proxy": true,
+ "session_completed": true,
+ "session_cookie_transport": true,
+ "status": "PASS",
+ "token_in_url": false,
+ "unauthenticated_after_logout": {
+  "closeCode": 4401,
+  "expected": 4401,
+  "frames": 0,
+  "opened": true,
+  "path": "/product/v1/sessions/SESS-818e2d23cb8f49b0a45faddeb9b4d114/live",
+  "step": "logout-websocket"
+ },
+ "websocket": {
+  "closed": true,
+  "cookieSessionSent": true,
+  "firstFrameKind": null,
+  "framesReceived": 3157,
+  "handshakeStatus": 101,
+  "pathname": "/product/v1/sessions/SESS-818e2d23cb8f49b0a45faddeb9b4d114/live",
+  "sessionIdInPathIsOwned": true,
+  "url": "ws://127.0.0.1:4173/product/v1/sessions/SESS-818e2d23cb8f49b0a45faddeb9b4d114/live",
+  "urlHasToken": false
+ }
+}
