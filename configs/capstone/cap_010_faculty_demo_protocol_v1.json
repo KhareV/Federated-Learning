@@ -1,0 +1,928 @@
+{
+ "protocol_id": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1",
+ "status": "FROZEN_ENGINEERING_PROTOCOL",
+ "owner_task": "CAP-010",
+ "gate": "CAPG9",
+ "phase_type": "FULL-SYSTEM ORCHESTRATION / DEMONSTRATION READINESS",
+ "purpose": "One governed, offline, one-laptop faculty demonstration of the already-complete product: launcher, isolated workspace, preflight, runbook, one coherent real-browser journey, reproducibility and restart evidence - with zero scientific, runtime, FL, API or frontend change. Not CAP-011 (clean-machine release).",
+ "entry": {
+  "expected_entry_sha": "be778d4ced186639155064e94516ff096751a81f",
+  "entry_audit_commit": "a7bd1a7",
+  "control_commit": "42d235d"
+ },
+ "full_demo_binding": "configs/capstone/cap_010_full_demo_binding_v1.json",
+ "services": {
+  "inference": {
+   "command": "python -m scripts.run_nhm_default --profile default",
+   "default_port": 8001,
+   "identity": "SOFTWARE_SYSTEM_V2 / MODEL_V2_FINAL"
+  },
+  "product": {
+   "command": "python -m scripts.run_capstone_product_v1_3",
+   "default_port": 8002,
+   "identity": "CAPSTONE_PRODUCT_API_V1_3"
+  },
+  "frontend": {
+   "command": "npm run preview (after npm run build)",
+   "default_port": 4173,
+   "identity": "CAPSTONE_UI_V1_2 production build"
+  }
+ },
+ "startup_order": [
+  "inference",
+  "product",
+  "frontend"
+ ],
+ "shutdown_order": [
+  "frontend",
+  "product",
+  "inference"
+ ],
+ "launcher": "python -m scripts.run_capstone_faculty_demo --acknowledge-demo-auth [--build] [--prewarm-federation]",
+ "auth": {
+  "mode": "DEMO",
+  "acknowledgement": "explicit --acknowledge-demo-auth (sets the existing I_UNDERSTAND_THIS_IS_NOT_CLERK)",
+  "identity": "demo:faculty",
+  "clerk_initialised": false
+ },
+ "workspace": {
+  "outside_git_tree": true,
+  "sentinel": "CAPSTONE_DEMO_WORKSPACE_V1.json",
+  "modes": [
+   "FRESH",
+   "RESUME"
+  ],
+  "reset": "validated demo workspace only"
+ },
+ "preflight": "scripts/capstone_demo_preflight.py (identities/artifacts only; no installs; no science)",
+ "readiness_probes": {
+  "inference": "GET /openapi.json title contains 'SOFTWARE_SYSTEM_V2 default binding'",
+  "product": "GET /product/v1/system exact identity incl. CAPSTONE_PRODUCT_API_V1_3, MODEL_V2_FINAL, DEMO, ENABLED_ENGINEERING, SIMULATED_ONLY",
+  "frontend": "GET /sign-in 200"
+ },
+ "prewarm_policy": {
+  "request": "GET /product/v1/federation/clients",
+  "training": 0,
+  "runs_created": 0,
+  "candidates_created": 0
+ },
+ "browser_journey": [
+  "sign-in OFFLINE DEMO",
+  "overview",
+  "device (MIXED) create/scan/connect",
+  "monitor create/start/complete",
+  "history summary+timeline+bounded preview",
+  "federation (8 clients ready) live run",
+  "models (one candidate, released default unchanged)",
+  "research ML",
+  "research FL",
+  "system/about simulated-only hardware"
+ ],
+ "scenario_coverage": [
+  "NORMAL_MONITORING",
+  "CONTEXT_LOSS",
+  "POOR_SIGNAL",
+  "DISCONNECT_RECONNECT",
+  "FL_SINGLE_RUN",
+  "FL_SECAGG_SHADOW"
+ ],
+ "restart": "stop the stack with Ctrl+C, RESUME the same workspace, reload the product in the browser, compare every API payload and the semantic digest; no monitoring or FL rerun",
+ "offline_network_policy": "browser requests intercepted: only 127.0.0.1/localhost continue, everything else is failed and recorded; Clerk never initialised in DEMO; the claim is limited to the NHM demo processes and browser journey",
+ "failure_handling": "runbook sections 7 (service/port/monitoring/federation failures: keep failed evidence, create new sessions/runs, never fake completion)",
+ "claim_boundary": {
+  "allowed": "The NHM capstone product is ready for an offline one-laptop faculty demonstration using simulated device input, released research monitoring, genuine engineering federation, persistent history, and frozen research-evidence views.",
+  "not_claimed": [
+   "clean-machine release",
+   "physical wearable readiness",
+   "clinical readiness",
+   "production deployment",
+   "security certification",
+   "scientific efficacy"
+  ]
+ },
+ "mutation_controls": [
+  "LAUNCHER_USES_ROLLBACK_V1",
+  "START_WITHOUT_DEMO_ACK",
+  "READY_BEFORE_SERVICE_READINESS",
+  "RESET_WITHOUT_SENTINEL",
+  "REPO_ROOT_ACCEPTED_AS_RESET_TARGET",
+  "PREWARM_CREATES_FEDERATION_RUN",
+  "PREWARM_STARTS_A_RUN",
+  "RUNBOOK_SAYS_PHYSICAL_HARDWARE_CONNECTED",
+  "RUNBOOK_SAYS_EIGHT_HOSPITALS",
+  "RUNBOOK_SAYS_SECAGG_PROVIDES_DP",
+  "RUNBOOK_SAYS_CANDIDATE_DEPLOYED",
+  "RUNBOOK_SAYS_USER_SESSION_TRAINS_PERSONAL_MODEL",
+  "RUNBOOK_DESCRIBES_REPLAY_AS_TRAINING",
+  "CANDIDATE_BECOMES_MONITORING_DEFAULT",
+  "HERO_PATH_USES_FAKE_BACKEND",
+  "MODEL_OUTCOME_HARDCODED_INTO_EXPECTATION"
+ ],
+ "preserved_disclosures": [
+  "accelerated simulation timing",
+  "logical one-laptop FL clients",
+  "SecAgg round-1 shadow",
+  "candidate not deployed",
+  "physical wearable absent",
+  "Clerk live WebSocket limitation",
+  "CAP-003 inherited timing race",
+  "machine-specific demo timing",
+  "CAP-008 amendment 85fe0b3 included unrelated result evidence",
+  "CAP-007 one-active-run is not a distributed lock",
+  "candidate sandbox has no inference runtime",
+  "CAP-009 npm ci dependency advisories"
+ ],
+ "out_of_scope": [
+  "CAP-011 / clean-machine release / installer / archive / release manifest",
+  "frontend or product API change",
+  "backend/FL/scientific change",
+  "candidate inference / CAPSTONE_FL_SANDBOX_RUNTIME / deployment",
+  "held-out evaluation, retraining, recalibration",
+  "FL_NEW_LOCAL_BATCH, FL_MULTIRUN_CANDIDATE_HISTORY",
+  "training on user monitoring data / personal models",
+  "physical hardware",
+  "new dependencies"
+ ],
+ "components": [
+  "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1",
+  "CAPSTONE_FULL_DEMO_BINDING_V1",
+  "CAPSTONE_DEMO_PREFLIGHT_V1",
+  "CAPSTONE_DEMO_WORKSPACE_V1",
+  "CAPSTONE_DEMO_ORCHESTRATOR_V1",
+  "CAPSTONE_DEMO_RUNBOOK_V1",
+  "CAPSTONE_DEMO_READINESS_V1"
+ ],
+ "control_plane": {
+  "component_registry": "manifests/capstone/component_registry_cap_010_v1.csv",
+  "gate_registry": "manifests/capstone/gate_registry_v1.csv",
+  "task_registry": "manifests/capstone/task_registry_v1.csv"
+ },
+ "chronology_disclosure": "The launcher, workspace, preflight, runbook, tests and the canonical runner/driver were written and unit-tested before the freeze commit. Before the freeze the real launcher was started and stopped by hand once (default ports, prewarm), and the coverage harness plus one full journey with restart were dry-run end to end into a scratch directory outside the repository to find defects (a fake-service test helper defect, a wrong argv slice in a test, and a missing federation-page locality capture were fixed). None of that output is committed; all recorded results come after the freeze commit.",
+ "capg9_criteria": [
+  {
+   "id": "CAPG9-001",
+   "text": "CAP-001/CAPG0 PASS",
+   "checks": [
+    "@cap_pass_1"
+   ]
+  },
+  {
+   "id": "CAPG9-002",
+   "text": "CAP-002/CAPG1 PASS",
+   "checks": [
+    "@cap_pass_2"
+   ]
+  },
+  {
+   "id": "CAPG9-003",
+   "text": "CAP-003/CAPG2 PASS",
+   "checks": [
+    "@cap_pass_3"
+   ]
+  },
+  {
+   "id": "CAPG9-004",
+   "text": "CAP-004/CAPG3 PASS",
+   "checks": [
+    "@cap_pass_4"
+   ]
+  },
+  {
+   "id": "CAPG9-005",
+   "text": "CAP-005/CAPG4 PASS",
+   "checks": [
+    "@cap_pass_5"
+   ]
+  },
+  {
+   "id": "CAPG9-006",
+   "text": "CAP-006/CAPG5 PASS",
+   "checks": [
+    "@cap_pass_6"
+   ]
+  },
+  {
+   "id": "CAPG9-007",
+   "text": "CAP-007/CAPG6 PASS",
+   "checks": [
+    "@cap_pass_7"
+   ]
+  },
+  {
+   "id": "CAPG9-008",
+   "text": "CAP-008/CAPG7 PASS",
+   "checks": [
+    "@cap_pass_8"
+   ]
+  },
+  {
+   "id": "CAPG9-009",
+   "text": "CAP-009/CAPG8 PASS",
+   "checks": [
+    "@cap_pass_9"
+   ]
+  },
+  {
+   "id": "CAPG9-010",
+   "text": "all prior locks and amendments verify (CAP-001..009, UI V1/V1_1/V1_2, catalog, FL locks)",
+   "checks": [
+    "@locks_verified"
+   ]
+  },
+  {
+   "id": "CAPG9-011",
+   "text": "the entry audit is immutable (unchanged since its commit)",
+   "checks": [
+    "@entry_audit_immutable"
+   ]
+  },
+  {
+   "id": "CAPG9-012",
+   "text": "scientific artifacts show zero drift",
+   "checks": [
+    "@no_scientific_drift"
+   ]
+  },
+  {
+   "id": "CAPG9-013",
+   "text": "released runtime and DEFAULT_RUNTIME_BINDING_V2 show zero drift",
+   "checks": [
+    "@released_runtime_zero_drift"
+   ]
+  },
+  {
+   "id": "CAPG9-014",
+   "text": "V2-FL artifacts show zero drift",
+   "checks": [
+    "@v2fl_zero_drift"
+   ]
+  },
+  {
+   "id": "CAPG9-015",
+   "text": "CAP-006 and CAP-007 implementation show zero drift",
+   "checks": [
+    "@cap006_007_zero_drift"
+   ]
+  },
+  {
+   "id": "CAPG9-016",
+   "text": "CAPSTONE_PRODUCT_API_V1_3 shows zero drift",
+   "checks": [
+    "@api_zero_drift",
+    "T:test_product_api_frontend_and_backend_are_byte_identical_to_entry"
+   ]
+  },
+  {
+   "id": "CAPG9-017",
+   "text": "CAPSTONE_UI_V1_2 and the whole frontend show zero drift",
+   "checks": [
+    "@ui_zero_drift",
+    "T:test_product_api_frontend_and_backend_are_byte_identical_to_entry"
+   ]
+  },
+  {
+   "id": "CAPG9-018",
+   "text": "history and research behaviour show zero drift",
+   "checks": [
+    "@history_research_zero_drift"
+   ]
+  },
+  {
+   "id": "CAPG9-019",
+   "text": "no new Python or npm dependency was added",
+   "checks": [
+    "T:test_no_new_python_or_npm_dependency",
+    "@no_new_deps"
+   ]
+  },
+  {
+   "id": "CAPG9-020",
+   "text": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1 was frozen before any canonical demonstration",
+   "checks": [
+    "@protocol_freeze_precedes_result"
+   ]
+  },
+  {
+   "id": "CAPG9-021",
+   "text": "the FULL_CAPSTONE_DEMO binding is frozen and matches the frozen contract",
+   "checks": [
+    "T:test_full_demo_binding_matches_the_frozen_contract",
+    "@binding_audit"
+   ]
+  },
+  {
+   "id": "CAPG9-022",
+   "text": "one governed faculty launcher exists with one obvious command",
+   "checks": [
+    "S:test_the_faculty_stack_is_exactly_three_services_with_the_default_runtime_only",
+    "@launcher_audit"
+   ]
+  },
+  {
+   "id": "CAPG9-023",
+   "text": "explicit DemoAuth acknowledgement is required and nothing starts without it",
+   "checks": [
+    "S:test_missing_demo_auth_acknowledgement_refuses_to_start",
+    "S:test_the_cli_subprocess_refuses_without_acknowledgement",
+    "@launcher_negative"
+   ]
+  },
+  {
+   "id": "CAPG9-024",
+   "text": "the workspace lives outside the Git tree",
+   "checks": [
+    "S:test_fresh_workspace_is_outside_the_repository_and_carries_a_sentinel",
+    "S:test_a_workspace_inside_the_repository_is_refused",
+    "@workspace_outside_repo"
+   ]
+  },
+  {
+   "id": "CAPG9-025",
+   "text": "a workspace sentinel is required",
+   "checks": [
+    "S:test_resume_requires_a_valid_sentinel"
+   ]
+  },
+  {
+   "id": "CAPG9-026",
+   "text": "unsafe reset targets are rejected",
+   "checks": [
+    "S:test_unsafe_reset_targets_are_rejected_and_nothing_is_deleted",
+    "S:test_unsafe_reset_is_refused_by_the_cli",
+    "S:test_reset_deletes_only_the_validated_workspace"
+   ]
+  },
+  {
+   "id": "CAPG9-027",
+   "text": "FRESH mode never silently deletes an existing workspace",
+   "checks": [
+    "S:test_fresh_mode_never_silently_erases_an_existing_workspace"
+   ]
+  },
+  {
+   "id": "CAPG9-028",
+   "text": "RESUME requires a valid sentinel and reuses the same workspace",
+   "checks": [
+    "S:test_resume_requires_a_valid_sentinel",
+    "@restart_ok"
+   ]
+  },
+  {
+   "id": "CAPG9-029",
+   "text": "an occupied port fails with PORT_IN_USE and kills nothing",
+   "checks": [
+    "S:test_an_occupied_port_fails_with_port_in_use_and_never_kills_the_occupant",
+    "S:test_an_occupied_port_fails_and_names_the_service_without_touching_the_occupant"
+   ]
+  },
+  {
+   "id": "CAPG9-030",
+   "text": "the launcher always starts the default V2 runtime and never exposes rollback-v1",
+   "checks": [
+    "S:test_the_launcher_has_no_profile_or_timing_option",
+    "S:test_the_faculty_stack_is_exactly_three_services_with_the_default_runtime_only"
+   ]
+  },
+  {
+   "id": "CAPG9-031",
+   "text": "the actual inference service identity is verified",
+   "checks": [
+    "@identity_inference"
+   ]
+  },
+  {
+   "id": "CAPG9-032",
+   "text": "the actual product API identity is verified",
+   "checks": [
+    "S:test_product_readiness_probe_demands_the_exact_identity",
+    "@identity_product"
+   ]
+  },
+  {
+   "id": "CAPG9-033",
+   "text": "the actual frontend build/identity is verified",
+   "checks": [
+    "@identity_frontend"
+   ]
+  },
+  {
+   "id": "CAPG9-034",
+   "text": "READY is printed only after all three services are ready",
+   "checks": [
+    "S:test_ready_only_after_every_service_answers_and_shutdown_is_reverse_ordered",
+    "@launcher_ready_order"
+   ]
+  },
+  {
+   "id": "CAPG9-035",
+   "text": "a child failure fails the whole stack",
+   "checks": [
+    "S:test_an_unexpected_child_death_stops_the_whole_stack",
+    "S:test_a_child_that_exits_before_ready_fails_the_stack_and_never_reports_ready",
+    "S:test_a_service_that_never_becomes_ready_times_out_and_stops_everything"
+   ]
+  },
+  {
+   "id": "CAPG9-036",
+   "text": "Ctrl+C performs a graceful reverse-ordered shutdown",
+   "checks": [
+    "S:test_ctrl_c_style_stop_terminates_children_and_never_signals_unrelated_processes",
+    "@sigint_shutdown"
+   ]
+  },
+  {
+   "id": "CAPG9-037",
+   "text": "no launched child is orphaned and unrelated processes are never signalled",
+   "checks": [
+    "S:test_grandchildren_of_a_service_are_reaped_with_their_own_process_group",
+    "@no_orphans"
+   ]
+  },
+  {
+   "id": "CAPG9-038",
+   "text": "no secret or token is logged",
+   "checks": [
+    "S:test_log_secret_scan_detects_secrets_and_passes_clean_logs",
+    "@log_scan_clean"
+   ]
+  },
+  {
+   "id": "CAPG9-039",
+   "text": "each service has its own log in the workspace",
+   "checks": [
+    "S:test_ready_only_after_every_service_answers_and_shutdown_is_reverse_ordered",
+    "@logs_in_workspace"
+   ]
+  },
+  {
+   "id": "CAPG9-040",
+   "text": "preflight verifies identities/artifacts and runs no science",
+   "checks": [
+    "S:test_a_healthy_environment_passes_and_executes_no_science",
+    "S:test_preflight_module_runs_no_science_by_construction",
+    "@preflight_audit"
+   ]
+  },
+  {
+   "id": "CAPG9-041",
+   "text": "every preflight failure path fails clearly",
+   "checks": [
+    "S:test_every_verifier_failure_fails_the_whole_preflight",
+    "S:test_a_broken_precondition_fails_preflight_and_starts_nothing",
+    "S:test_missing_frontend_dependencies_report_the_exact_setup_command_and_never_install"
+   ]
+  },
+  {
+   "id": "CAPG9-042",
+   "text": "the real environment passes the real preflight",
+   "checks": [
+    "S:test_the_real_environment_passes_the_real_preflight",
+    "@preflight_real"
+   ]
+  },
+  {
+   "id": "CAPG9-043",
+   "text": "the optional prewarm trains nothing and creates no run or candidate and changes no binding",
+   "checks": [
+    "S:test_prewarm_is_a_read_only_preparation_with_an_audited_zero_side_effect_report",
+    "@prewarm_audit"
+   ]
+  },
+  {
+   "id": "CAPG9-044",
+   "text": "the launcher issues no write request and installs no package",
+   "checks": [
+    "S:test_the_launcher_never_issues_a_write_request_and_has_no_package_manager_calls"
+   ]
+  },
+  {
+   "id": "CAPG9-045",
+   "text": "the faculty runbook exists with a short and a full path",
+   "checks": [
+    "T:test_runbook_has_required_statements_and_both_paths",
+    "@runbook_audit"
+   ]
+  },
+  {
+   "id": "CAPG9-046",
+   "text": "the runbook states accelerated timing, simulated-only hardware, non-diagnostic role, no personal model, logical one-laptop FL, narrow SecAgg and candidate not deployed",
+   "checks": [
+    "T:test_runbook_has_required_statements_and_both_paths"
+   ]
+  },
+  {
+   "id": "CAPG9-047",
+   "text": "the runbook preserves the promotion-versus-release distinction and answers the personalization question",
+   "checks": [
+    "T:test_runbook_has_required_statements_and_both_paths"
+   ]
+  },
+  {
+   "id": "CAPG9-048",
+   "text": "the runbook claim audit finds no overclaim",
+   "checks": [
+    "T:test_runbook_claim_audit_finds_no_overclaim"
+   ]
+  },
+  {
+   "id": "CAPG9-049",
+   "text": "a runbook claiming physical hardware, hospitals, DP, deployment, personal models or training replay fails the audit",
+   "checks": [
+    "T:test_runbook_claim_audit_rejects_every_overclaim_mutation"
+   ]
+  },
+  {
+   "id": "CAPG9-050",
+   "text": "FULL_CAPSTONE_DEMO monitoring coverage ran against the real SOFTWARE_SYSTEM_V2",
+   "checks": [
+    "@coverage_real"
+   ]
+  },
+  {
+   "id": "CAPG9-051",
+   "text": "NORMAL_MONITORING is covered and passes its engineering invariants",
+   "checks": [
+    "@coverage_NORMAL_MONITORING"
+   ]
+  },
+  {
+   "id": "CAPG9-052",
+   "text": "CONTEXT_LOSS is covered and passes its engineering invariants",
+   "checks": [
+    "@coverage_CONTEXT_LOSS"
+   ]
+  },
+  {
+   "id": "CAPG9-053",
+   "text": "POOR_SIGNAL is covered and passes its engineering invariants",
+   "checks": [
+    "@coverage_POOR_SIGNAL"
+   ]
+  },
+  {
+   "id": "CAPG9-054",
+   "text": "DISCONNECT_RECONNECT is covered and passes its engineering invariants",
+   "checks": [
+    "@coverage_DISCONNECT_RECONNECT"
+   ]
+  },
+  {
+   "id": "CAPG9-055",
+   "text": "FL_SINGLE_RUN is covered and passes its engineering invariants",
+   "checks": [
+    "@coverage_FL_SINGLE_RUN"
+   ]
+  },
+  {
+   "id": "CAPG9-056",
+   "text": "FL_SECAGG_SHADOW is covered and passes its engineering invariants",
+   "checks": [
+    "@coverage_FL_SECAGG_SHADOW"
+   ]
+  },
+  {
+   "id": "CAPG9-057",
+   "text": "scenario coverage uses no model-outcome tuning and asserts no model output",
+   "checks": [
+    "T:test_no_outcome_tuning_or_hardcoded_model_output",
+    "@no_outcome_tuning"
+   ]
+  },
+  {
+   "id": "CAPG9-058",
+   "text": "the hero browser journey uses MIXED_MONITORING_SESSION through the real device/product/runtime path",
+   "checks": [
+    "@hero_mixed",
+    "T:test_hero_path_uses_the_real_stack_without_mocks"
+   ]
+  },
+  {
+   "id": "CAPG9-059",
+   "text": "the hero session completes with MODEL_V2_FINAL and CAL_V2 and a simulated disconnect/gap",
+   "checks": [
+    "@hero_complete"
+   ]
+  },
+  {
+   "id": "CAPG9-060",
+   "text": "history loads the persisted summary, timeline and bounded preview",
+   "checks": [
+    "@history_loads"
+   ]
+  },
+  {
+   "id": "CAPG9-061",
+   "text": "history keeps the CAP-009 count-basis, time-domain and probability-label semantics",
+   "checks": [
+    "@history_semantics"
+   ]
+  },
+  {
+   "id": "CAPG9-062",
+   "text": "the faculty federation uses LIVE_RUN, FEDAVG and SECAGG_SHADOW",
+   "checks": [
+    "@fl_config"
+   ]
+  },
+  {
+   "id": "CAPG9-063",
+   "text": "exactly eight logical clients, three rounds and 24 genuine updates",
+   "checks": [
+    "@fl_counts"
+   ]
+  },
+  {
+   "id": "CAPG9-064",
+   "text": "authoritative aggregation remains PLAIN and the round-1 shadow is verified",
+   "checks": [
+    "@fl_secagg"
+   ]
+  },
+  {
+   "id": "CAPG9-065",
+   "text": "exactly one canonical-run candidate is created, validated, ACCEPTED_TO_SANDBOX, IN_SANDBOX and production_deployed=false",
+   "checks": [
+    "@candidate_ok"
+   ]
+  },
+  {
+   "id": "CAPG9-066",
+   "text": "MODEL_V2_FINAL remains RELEASED_DEFAULT and no candidate inference or control exists",
+   "checks": [
+    "@released_default",
+    "@models_page"
+   ]
+  },
+  {
+   "id": "CAPG9-067",
+   "text": "the ML research page shows the frozen evidence and the promotion/release distinction",
+   "checks": [
+    "@research_ml"
+   ]
+  },
+  {
+   "id": "CAPG9-068",
+   "text": "the FL research page shows frozen evidence, FedProx/SecAgg limits and V2-FL-005 as engineering-only",
+   "checks": [
+    "@research_fl"
+   ]
+  },
+  {
+   "id": "CAPG9-069",
+   "text": "no scientific recomputation and no held-out access occurred",
+   "checks": [
+    "@no_science",
+    "T:test_preflight_module_runs_no_science_by_construction"
+   ]
+  },
+  {
+   "id": "CAPG9-070",
+   "text": "simulated-only hardware and physical_hardware_available=false are visible",
+   "checks": [
+    "@hardware_visible"
+   ]
+  },
+  {
+   "id": "CAPG9-071",
+   "text": "the canonical browser used the real frontend, product backend, inference runtime and FL runtime and completed the full journey",
+   "checks": [
+    "@browser_real_stack",
+    "@browser_complete"
+   ]
+  },
+  {
+   "id": "CAPG9-072",
+   "text": "external required network destinations are zero and Clerk is not initialised",
+   "checks": [
+    "@offline_ok",
+    "@clerk_not_initialised"
+   ]
+  },
+  {
+   "id": "CAPG9-073",
+   "text": "the canonical restart preserves session, history, federation run, candidate and governance without rerunning monitoring or FL",
+   "checks": [
+    "@restart_preserves"
+   ]
+  },
+  {
+   "id": "CAPG9-074",
+   "text": "the research catalog is unchanged after restart",
+   "checks": [
+    "@restart_catalog"
+   ]
+  },
+  {
+   "id": "CAPG9-075",
+   "text": "full fresh demo run 1 completes",
+   "checks": [
+    "@run1_ok"
+   ]
+  },
+  {
+   "id": "CAPG9-076",
+   "text": "full fresh demo run 2 completes",
+   "checks": [
+    "@run2_ok"
+   ]
+  },
+  {
+   "id": "CAPG9-077",
+   "text": "the semantic digests of run 1 and run 2 are identical",
+   "checks": [
+    "@reproducible"
+   ]
+  },
+  {
+   "id": "CAPG9-078",
+   "text": "runtime/log nondeterminism exclusions are documented",
+   "checks": [
+    "@exclusions_documented"
+   ]
+  },
+  {
+   "id": "CAPG9-079",
+   "text": "no fake live, FL or scientific values and no user-session FL training or personal model exist",
+   "checks": [
+    "@no_fakery",
+    "T:test_hero_path_uses_the_real_stack_without_mocks"
+   ]
+  },
+  {
+   "id": "CAPG9-080",
+   "text": "no candidate deployment and no backend, frontend, API route, sandbox runtime, FL_NEW_LOCAL_BATCH, FL_MULTIRUN or hardware work was added",
+   "checks": [
+    "@out_of_scope"
+   ]
+  },
+  {
+   "id": "CAPG9-081",
+   "text": "launcher negative tests pass",
+   "checks": [
+    "@launcher_negative"
+   ]
+  },
+  {
+   "id": "CAPG9-082",
+   "text": "workspace safety tests pass",
+   "checks": [
+    "@workspace_tests"
+   ]
+  },
+  {
+   "id": "CAPG9-083",
+   "text": "process supervision tests pass",
+   "checks": [
+    "@supervision_tests"
+   ]
+  },
+  {
+   "id": "CAPG9-084",
+   "text": "all sixteen mutation controls were caught and restored",
+   "checks": [
+    "@mutation_log"
+   ]
+  },
+  {
+   "id": "CAPG9-085",
+   "text": "targeted CAP-010 tests pass",
+   "checks": [
+    "@targeted_tests"
+   ]
+  },
+  {
+   "id": "CAPG9-086",
+   "text": "prior capstone tests pass under the documented inherited-flake policy",
+   "checks": [
+    "@prior_capstone_tests"
+   ]
+  },
+  {
+   "id": "CAPG9-087",
+   "text": "the full Python regression passes under the documented inherited-flake policy",
+   "checks": [
+    "@regression"
+   ]
+  },
+  {
+   "id": "CAPG9-088",
+   "text": "frontend npm test passes",
+   "checks": [
+    "@frontend_npm_test"
+   ]
+  },
+  {
+   "id": "CAPG9-089",
+   "text": "svelte-check reports zero errors",
+   "checks": [
+    "@svelte_check"
+   ]
+  },
+  {
+   "id": "CAPG9-090",
+   "text": "the frontend build passes",
+   "checks": [
+    "@frontend_build"
+   ]
+  },
+  {
+   "id": "CAPG9-091",
+   "text": "ruff passes",
+   "checks": [
+    "@ruff"
+   ]
+  },
+  {
+   "id": "CAPG9-092",
+   "text": "pip check passes",
+   "checks": [
+    "@pip"
+   ]
+  },
+  {
+   "id": "CAPG9-093",
+   "text": "CI was neither queried nor triggered",
+   "checks": [
+    "@ci"
+   ]
+  },
+  {
+   "id": "CAPG9-094",
+   "text": "resource observations are recorded as machine-specific telemetry, not requirements",
+   "checks": [
+    "@resource_audit"
+   ]
+  },
+  {
+   "id": "CAPG9-095",
+   "text": "the readiness artifact is bounded and contains no secret, token, waveform, candidate weights or training examples",
+   "checks": [
+    "@readiness_clean"
+   ]
+  },
+  {
+   "id": "CAPG9-096",
+   "text": "the final protected-artifact audit shows zero drift apart from the control plane and new CAP-010 files",
+   "checks": [
+    "@protected_final"
+   ]
+  },
+  {
+   "id": "CAPG9-097",
+   "text": "no state file, SQLite database or large artifact was committed",
+   "checks": [
+    "@no_large_artifacts"
+   ]
+  },
+  {
+   "id": "CAPG9-098",
+   "text": "post-freeze amendments (if any) were dedicated pure commits",
+   "checks": [
+    "@amendment_hygiene"
+   ]
+  },
+  {
+   "id": "CAPG9-099",
+   "text": "the CAP-010 components are registered and locked",
+   "checks": [
+    "@components_registered"
+   ]
+  },
+  {
+   "id": "CAPG9-100",
+   "text": "CAP-010 is PASS (final)",
+   "checks": [
+    "@registry_cap010"
+   ]
+  },
+  {
+   "id": "CAPG9-101",
+   "text": "CAPG9 is PASS (final)",
+   "checks": [
+    "@registry_capg9"
+   ]
+  },
+  {
+   "id": "CAPG9-102",
+   "text": "CAP-011 is NOT_STARTED and no CAP-011 artifact exists",
+   "checks": [
+    "@registry_cap011"
+   ]
+  },
+  {
+   "id": "CAPG9-103",
+   "text": "all preserved disclosures are carried forward",
+   "checks": [
+    "@disclosures_preserved"
+   ]
+  },
+  {
+   "id": "CAPG9-104",
+   "text": "the final handoff uses the exact required section list",
+   "checks": [
+    "@handoff_sections"
+   ]
+  }
+ ],
+ "capg9_criteria_note": "All CAPG9 criteria are frozen before any canonical result. Check prefixes: T: python test title in tests/test_capstone_full_demo.py; S: python test title in the other CAP-010 test files; @name: evidence evaluator."
+}

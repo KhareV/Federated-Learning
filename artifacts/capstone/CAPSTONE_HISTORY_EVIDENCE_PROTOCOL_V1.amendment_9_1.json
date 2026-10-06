@@ -1,6 +1,6 @@
 {
-  "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_10",
-  "change": "Re-wrap those three statements only; no assertion changes.",
+  "amendment_id": "CAPSTONE_HISTORY_EVIDENCE_PROTOCOL_V1_AMENDMENT_9_1",
+  "change": "Re-wrap those three statements only; no assertion changes. (Named 9_1 so the verifier's lexicographic amendment ordering stays correct: amendment_10 would sort before amendment_2.)",
   "defect": "Amendment 9's lifecycle guard introduced three lines longer than the repository's 100-column ruff limit, so `ruff check .` failed.",
   "files": {
     "tests/test_capstone_lifecycle.py": {

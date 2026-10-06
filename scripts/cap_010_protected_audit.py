@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 """CAP-010 entry/final protection audit. CAP-010 is integration/demonstration only: every file tracked at
 entry must be byte-identical at final except the control-plane registries and the lifecycle test; every new
 file must live in an explicit CAP-010 additive namespace. Frontend, API, backend and FL are protected."""
@@ -13,7 +14,6 @@ from pathlib import Path
 from scripts.cap_001_protected_audit import named_components, tracked_hashes
 from scripts.cap_006_protected_audit import verify_amended_lock
 from scripts.cap_008_protected_audit import all_locks as locks_to_cap008
-from src.nhm.hashing import hash_file
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "reports/capstone/cap_010"
@@ -63,7 +63,7 @@ def all_locks() -> dict:
 def entry() -> dict:
     OUT.mkdir(parents=True, exist_ok=True)
     head, origin = git("rev-parse", "HEAD"), git("rev-parse", "origin/main")
-    dirty = [l for l in git("status", "--porcelain").splitlines() if "cap_010" not in l]
+    dirty = [ln for ln in git("status", "--porcelain").splitlines() if "cap_010" not in ln]
     if head != ENTRY or origin != head or dirty:
         raise RuntimeError("CAP010_ENTRY_STATE_CONFLICT")
     st = statuses()

@@ -1,0 +1,161 @@
+{
+ "binding_id": "CAPSTONE_FULL_DEMO_BINDING_V1",
+ "owner_task": "CAP-010",
+ "status": "FROZEN_DEMO_BINDING",
+ "contract": "contracts/capstone/demo_scenarios_v1.json#FULL_CAPSTONE_DEMO",
+ "classification": "ENGINEERING_DEMO",
+ "offline_one_laptop": true,
+ "scientific_evidence": false,
+ "production_deployed": false,
+ "outcome_tuning_forbidden": true,
+ "A_contract_coverage": {
+  "composes": [
+   "NORMAL_MONITORING",
+   "CONTEXT_LOSS",
+   "POOR_SIGNAL",
+   "DISCONNECT_RECONNECT",
+   "FL_SINGLE_RUN",
+   "FL_SECAGG_SHADOW"
+  ],
+  "monitoring_scenarios": {
+   "how": "headless real product path (device -> session -> WebSocket -> SOFTWARE_SYSTEM_V2) through the faculty launcher in a SEPARATE temporary workspace",
+   "runner": "scripts/run_capstone_full_demo_e2e.py coverage",
+   "invariants": {
+    "NORMAL_MONITORING": [
+     "COMPLETED",
+     "expected connection events",
+     "ecg quality VALID throughout",
+     "context available throughout",
+     "MODEL_V2_FINAL/CAL_V2"
+    ],
+    "CONTEXT_LOSS": [
+     "COMPLETED",
+     "context unavailable interval and available otherwise"
+    ],
+    "POOR_SIGNAL": [
+     "COMPLETED",
+     "DEGRADED or UNUSABLE quality reported by the frozen quality path"
+    ],
+    "DISCONNECT_RECONNECT": [
+     "COMPLETED",
+     "disconnect and reconnect device events",
+     "source delivery gap without fabricated samples"
+    ]
+   },
+   "model_outcome_asserted": false
+  },
+  "federation_scenarios": {
+   "FL_SINGLE_RUN": "LIVE_RUN FEDAVG PLAIN, 8 clients, 3 rounds, 24 updates, one candidate",
+   "FL_SECAGG_SHADOW": "LIVE_RUN FEDAVG SECAGG_SHADOW, round-1 shadow verified, authoritative aggregation PLAIN"
+  }
+ },
+ "B_faculty_hero_journey": {
+  "monitoring_scenario": "MIXED_MONITORING_SESSION",
+  "timing": "ACCELERATED",
+  "role": "presentation convenience; does not replace the frozen scenario-coverage verification in A",
+  "federation": {
+   "run_type": "LIVE_RUN",
+   "scenario": "FL_SINGLE_RUN",
+   "algorithm": "FEDAVG",
+   "secagg_mode": "SECAGG_SHADOW",
+   "rounds": 3,
+   "clients": 8,
+   "updates": 24,
+   "authoritative_aggregation": "PLAIN"
+  },
+  "browser_sequence": [
+   "sign-in OFFLINE DEMO",
+   "overview",
+   "device (MIXED) create/scan/connect",
+   "monitor create/start/complete",
+   "history summary+timeline+bounded preview",
+   "federation (8 clients ready) live run",
+   "models (one candidate, released default unchanged)",
+   "research ML",
+   "research FL",
+   "system/about simulated-only hardware"
+  ]
+ },
+ "services": {
+  "inference": {
+   "command": "python -m scripts.run_nhm_default --profile default",
+   "default_port": 8001,
+   "identity": "SOFTWARE_SYSTEM_V2 / MODEL_V2_FINAL"
+  },
+  "product": {
+   "command": "python -m scripts.run_capstone_product_v1_3",
+   "default_port": 8002,
+   "identity": "CAPSTONE_PRODUCT_API_V1_3"
+  },
+  "frontend": {
+   "command": "npm run preview (after npm run build)",
+   "default_port": 4173,
+   "identity": "CAPSTONE_UI_V1_2 production build"
+  }
+ },
+ "startup_order": [
+  "inference",
+  "product",
+  "frontend"
+ ],
+ "shutdown_order": [
+  "frontend",
+  "product",
+  "inference"
+ ],
+ "launcher": "python -m scripts.run_capstone_faculty_demo --acknowledge-demo-auth [--build] [--prewarm-federation]",
+ "auth": {
+  "mode": "DEMO",
+  "acknowledgement": "explicit --acknowledge-demo-auth (sets the existing I_UNDERSTAND_THIS_IS_NOT_CLERK)",
+  "identity": "demo:faculty",
+  "clerk_initialised": false
+ },
+ "workspace": {
+  "outside_git_tree": true,
+  "sentinel": "CAPSTONE_DEMO_WORKSPACE_V1.json",
+  "modes": [
+   "FRESH",
+   "RESUME"
+  ],
+  "reset": "validated demo workspace only"
+ },
+ "prewarm": {
+  "request": "GET /product/v1/federation/clients",
+  "training": 0,
+  "runs_created": 0,
+  "candidates_created": 0
+ },
+ "semantic_digest": {
+  "includes": [
+   "runtime identities",
+   "session scenario/state/runtime ids",
+   "session summary projection",
+   "source timeline projection + device lifecycle order + preview digest",
+   "federation config",
+   "round base/committed digests",
+   "24 update digests/examples/seeds",
+   "candidate id/digest/statuses",
+   "research ml/fl payload digests",
+   "research catalog file sha"
+  ],
+  "excludes": [
+   "wall times",
+   "pids",
+   "session/run/device ids",
+   "latency",
+   "product-clock timestamps",
+   "temporary paths"
+  ]
+ },
+ "claims": {
+  "allowed": "The NHM capstone product is ready for an offline one-laptop faculty demonstration using simulated device input, released research monitoring, genuine engineering federation, persistent history, and frozen research-evidence views.",
+  "not_claimed": [
+   "clean-machine release",
+   "physical wearable readiness",
+   "clinical readiness",
+   "production deployment",
+   "security certification",
+   "scientific efficacy"
+  ]
+ }
+}
