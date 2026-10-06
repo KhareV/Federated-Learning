@@ -1,0 +1,437 @@
+{
+ "ci": "not queried, not triggered",
+ "claim_classes": [
+  "SUPPORTED_CURRENT_PRODUCT_FACT",
+  "SUPPORTED_FROZEN_RESEARCH_FACT",
+  "ILLUSTRATIVE_AND_EXPLICITLY_QUALIFIED",
+  "LITERATURE/BACKGROUND_STATEMENT_WITH_SOURCE",
+  "UNSUPPORTED_QUANTITATIVE_ASSERTION",
+  "MISLEADING_LIVE_STATE_ASSERTION",
+  "STALE_PRODUCT_ASSERTION",
+  "MARKETING_METAPHOR"
+ ],
+ "criteria_count": 51,
+ "entry": {
+  "entry_sha": "3402dc1da1c6d5c029903a9a51a74e4ecc427ec8"
+ },
+ "ferg1_criteria": [
+  {
+   "checks": [
+    "entry_audited"
+   ],
+   "id": "G01",
+   "text": "Entry audited at 3402dc1: origin/main==HEAD, tags, FER-001/UFL state, UI V1..V1_5, Clerk and capstone locks verified; F2-01/F2-02 reproduced"
+  },
+  {
+   "checks": [
+    "tags_unchanged"
+   ],
+   "id": "G02",
+   "text": "Historical tags unchanged; no final/release/evaluator-ready tag created"
+  },
+  {
+   "checks": [
+    "prior_phases_preserved"
+   ],
+   "id": "G03",
+   "text": "FINAL-EVAL-REPAIR-001 PASS / FERG0 PASS, UFL-LITE-001..003 PASS and every frozen method lock verify (pure successor amendments only)"
+  },
+  {
+   "checks": [
+    "capstone_locks_verify"
+   ],
+   "id": "G04",
+   "text": "All capstone protocol locks and Clerk lineage verify"
+  },
+  {
+   "checks": [
+    "ui_predecessor_locks_identical"
+   ],
+   "id": "G05",
+   "text": "CAPSTONE_UI V1..V1_5 lock files byte-identical to entry"
+  },
+  {
+   "checks": [
+    "ui_v16_verifies"
+   ],
+   "id": "G06",
+   "text": "CAPSTONE_UI_V1_6 verifies (chains to V1_5, binds every frontend file); V1..V1_5 verifiers pass successor-aware"
+  },
+  {
+   "checks": [
+    "no_new_dependency"
+   ],
+   "id": "G07",
+   "text": "No new npm or Python dependency"
+  },
+  {
+   "checks": [
+    "amendments_pure"
+   ],
+   "id": "G08",
+   "text": "Historical amendments are pure SUCCESSOR_COMPATIBILITY_ONLY with exact old/new SHA and no result evidence"
+  },
+  {
+   "checks": [
+    "f201_neuralgraph_closed"
+   ],
+   "id": "G09",
+   "text": "F2-01 CLOSED: no 99.8% statistic, no LIVE/real-time wording on the illustrative NeuralGraph; graph labelled illustrative/not live telemetry"
+  },
+  {
+   "checks": [
+    "landing_inventory_complete"
+   ],
+   "id": "G10",
+   "text": "All landing imported components audited: full landing claim inventory recorded at entry and final, every high-risk string classified"
+  },
+  {
+   "checks": [
+    "no_unsourced_quantitative_claims"
+   ],
+   "id": "G11",
+   "text": "No unsourced quantitative claim (percentage, duration, score, physiological value) survives on any current surface"
+  },
+  {
+   "checks": [
+    "no_misleading_live_claims"
+   ],
+   "id": "G12",
+   "text": "No misleading live/real-time/edge/patient-data claim survives on any current surface"
+  },
+  {
+   "checks": [
+    "provenance_contract_valid"
+   ],
+   "id": "G13",
+   "text": "Presentation provenance contract is valid; every surviving high-risk claim has provenance and keeps its qualification"
+  },
+  {
+   "checks": [
+    "new_guards_pass"
+   ],
+   "id": "G14",
+   "text": "New guard classes (live-state, percentages, scores, status labels, edge/on-device, patient-data, file references) pass on the repaired tree"
+  },
+  {
+   "checks": [
+    "fer1_presentation_verifier_passes"
+   ],
+   "id": "G15",
+   "text": "FER-001 presentation verifier still passes (About, landing federation truth, legacy routes, runbook, truth contract)"
+  },
+  {
+   "checks": [
+    "f202_skip_link"
+   ],
+   "id": "G16",
+   "text": "F2-02 skip link: first focusable item, hidden until focus, moves focus to main (static + real-browser keyboard test)"
+  },
+  {
+   "checks": [
+    "f202_nav_labelled"
+   ],
+   "id": "G17",
+   "text": "F2-02 landing navigation has an accessible name (static + browser)"
+  },
+  {
+   "checks": [
+    "f202_reduced_motion"
+   ],
+   "id": "G18",
+   "text": "F2-02 reduced motion: zero perpetual decorative rAF loops and zero running decorative animations under prefers-reduced-motion in a real browser; text and layout retained"
+  },
+  {
+   "checks": [
+    "f203_touch_targets"
+   ],
+   "id": "G19",
+   "text": "F2-03 touch targets: zero non-inline interactive targets below 24x24 CSS px at 390px on the landing page and the evaluator product pages"
+  },
+  {
+   "checks": [
+    "loader_disposition"
+   ],
+   "id": "G20",
+   "text": "Transient loader has a heading, status region and main landmark"
+  },
+  {
+   "checks": [
+    "candidate_observation_disposition"
+   ],
+   "id": "G21",
+   "text": "Candidate observation: UI distinguishes candidate identity from state digest and never implies duplicate/deployed twice (no change)"
+  },
+  {
+   "checks": [
+    "landing_browser_audit_clean"
+   ],
+   "id": "G22",
+   "text": "Public landing real-browser audit at 1440/1024/768/390: zero console errors, zero failed assets, zero overflow, one h1, one main, no F2-01 wording"
+  },
+  {
+   "checks": [
+    "route_crawl_final_clean"
+   ],
+   "id": "G23",
+   "text": "Full route crawl of every route is clean (legacy routes retired, no stale content, no 5xx, no errors)"
+  },
+  {
+   "checks": [
+    "truth_matrix_final"
+   ],
+   "id": "G24",
+   "text": "Final cross-page truth matrix has zero contradictions"
+  },
+  {
+   "checks": [
+    "fer1_findings_stay_closed"
+   ],
+   "id": "G25",
+   "text": "FER-001 findings stay closed: About truthful, federation enabled everywhere, legacy routes retired, font 404 closed, runbook V1_1 current"
+  },
+  {
+   "checks": [
+    "route_policy_unchanged"
+   ],
+   "id": "G26",
+   "text": "Route policy and redirect map byte-identical to entry"
+  },
+  {
+   "checks": [
+    "landing_network_clean"
+   ],
+   "id": "G27",
+   "text": "Landing makes zero failed/404 requests (font 404 stays closed)"
+  },
+  {
+   "checks": [
+    "no_backend_drift"
+   ],
+   "id": "G28",
+   "text": "Zero backend drift"
+  },
+  {
+   "checks": [
+    "no_api_drift"
+   ],
+   "id": "G29",
+   "text": "Zero API/contract drift"
+  },
+  {
+   "checks": [
+    "no_db_drift"
+   ],
+   "id": "G30",
+   "text": "Zero DB/persistence drift"
+  },
+  {
+   "checks": [
+    "no_fl_drift"
+   ],
+   "id": "G31",
+   "text": "Zero FL runtime drift"
+  },
+  {
+   "checks": [
+    "no_auth_drift"
+   ],
+   "id": "G32",
+   "text": "Zero auth drift"
+  },
+  {
+   "checks": [
+    "no_scientific_drift"
+   ],
+   "id": "G33",
+   "text": "Zero scientific artifact drift (MODEL_V2_FINAL, CAL_V2, locks)"
+  },
+  {
+   "checks": [
+    "candidate_digest_unchanged"
+   ],
+   "id": "G34",
+   "text": "Canonical candidate digest and sandbox status unchanged"
+  },
+  {
+   "checks": [
+    "owner_binding_connected_regression"
+   ],
+   "id": "G35",
+   "text": "Connected real-Clerk owner-binding regression: one MY EDGE CLIENT, 7 peers, 8 clients, 93, 3 rounds, 24 updates, canonical digest"
+  },
+  {
+   "checks": [
+    "demo_replay_global_unbound"
+   ],
+   "id": "G36",
+   "text": "DEMO, REPLAY and global clients remain unbound"
+  },
+  {
+   "checks": [
+    "offline_demo_digest"
+   ],
+   "id": "G37",
+   "text": "Offline DemoAuth regression digest 3a57614e... unchanged, no Clerk traffic"
+  },
+  {
+   "checks": [
+    "fe_tests"
+   ],
+   "id": "G38",
+   "text": "Frontend tests pass (at least 218, none failing)"
+  },
+  {
+   "checks": [
+    "fe_check_build"
+   ],
+   "id": "G39",
+   "text": "svelte-check and production build pass"
+  },
+  {
+   "checks": [
+    "py_targeted"
+   ],
+   "id": "G40",
+   "text": "Targeted Python tests pass"
+  },
+  {
+   "checks": [
+    "py_full"
+   ],
+   "id": "G41",
+   "text": "Full Python suite passes under the CAP-003 race policy"
+  },
+  {
+   "checks": [
+    "lint"
+   ],
+   "id": "G42",
+   "text": "ruff and pip check clean"
+  },
+  {
+   "checks": [
+    "ci_untouched"
+   ],
+   "id": "G43",
+   "text": "CI neither queried nor triggered"
+  },
+  {
+   "checks": [
+    "mutation_log"
+   ],
+   "id": "G44",
+   "text": "38 frozen mutation controls all caught and restored"
+  },
+  {
+   "checks": [
+    "clean_clone"
+   ],
+   "id": "G45",
+   "text": "Clean clone of the repair target passes (proof A clean clone + proof B browser/crawl/regression in the clone)"
+  },
+  {
+   "checks": [
+    "repair_target_recorded"
+   ],
+   "id": "G46",
+   "text": "FINAL_EVAL_REPAIR_002_TARGET_SHA recorded before canonical evidence"
+  },
+  {
+   "checks": [
+    "protected_final"
+   ],
+   "id": "G47",
+   "text": "Final protected-artifact audit shows no drift"
+  },
+  {
+   "checks": [
+    "lock_ok"
+   ],
+   "id": "G48",
+   "text": "Protocol lock verifies"
+  },
+  {
+   "checks": [
+    "task_pass"
+   ],
+   "id": "G49",
+   "text": "Task registry FINAL-EVAL-REPAIR-002 PASS"
+  },
+  {
+   "checks": [
+    "gate_pass"
+   ],
+   "id": "G50",
+   "text": "Gate registry FERG1 PASS"
+  },
+  {
+   "checks": [
+    "no_new_phase"
+   ],
+   "id": "G51",
+   "text": "No new phase (no FER-003, CAP-012, UFL-LITE-004) and no evaluator-ready claim"
+  }
+ ],
+ "findings": {
+  "F2-01": "MAJOR landing/NeuralGraph claim integrity",
+  "F2-02": "MINOR landing accessibility (skip link, nav name, reduced motion)",
+  "F2-03": "MINOR small touch targets",
+  "candidates": "OBSERVATION multiple LIVE-run candidates",
+  "loader": "OBSERVATION transient loader without heading"
+ },
+ "gate": "FERG1",
+ "mutation_control_count": 38,
+ "mutation_controls": [
+  "RESTORE_99_8_COVERAGE",
+  "RESTORE_99_8_BLIND_INTERVALS",
+  "RESTORE_LIVE_EDGE_SYNAPSE_GRAPH",
+  "RESTORE_REALTIME_FEATURE_VECTORS",
+  "INTRODUCE_STATIC_91_CONFIDENCE",
+  "INTRODUCE_STATIC_0_08_ANOMALY_SCORE",
+  "INTRODUCE_CURRENT_SPO2_98",
+  "INTRODUCE_NORMAL_ECG",
+  "INTRODUCE_LIVE_PATIENT_DATA",
+  "INTRODUCE_REAL_WEARABLE_STREAM",
+  "INTRODUCE_ON_DEVICE_INFERENCE",
+  "INTRODUCE_EDGE_MODEL_ON_WEARABLE",
+  "INTRODUCE_UNSOURCED_PERCENT_ACCURACY",
+  "INTRODUCE_UNSOURCED_PERCENT_COVERAGE",
+  "INTRODUCE_CLINICAL_MONITORING",
+  "REMOVE_ILLUSTRATIVE_QUALIFICATION",
+  "REMOVE_LANDING_SKIP_LINK",
+  "UNNAME_LANDING_NAV",
+  "NEURALGRAPH_RAF_IGNORES_REDUCED_MOTION",
+  "GLOBE_IGNORES_REDUCED_MOTION",
+  "LOADER_LOSES_HEADING",
+  "PROVENANCE_QUALIFICATION_REMOVED",
+  "ABOUT_RESTORED_NOT_YET_ENABLED",
+  "LANDING_PRELOADER_NOT_YET_ENABLED",
+  "FL_OVERVIEW_RENDERS_OLD_CONTENT",
+  "DEMO_GAINS_OWNER_BINDING",
+  "RUNBOOK_OMITS_MY_EDGE_CLIENT",
+  "LASTORIA_REFERENCE_RESTORED",
+  "BACKEND_FILE_DRIFT",
+  "API_DRIFT",
+  "DB_DRIFT",
+  "FL_RUNTIME_DRIFT",
+  "AUTH_DRIFT",
+  "MODEL_V2_FINAL_CHANGED",
+  "CAL_V2_CHANGED",
+  "CANDIDATE_DIGEST_CHANGED",
+  "PREDECESSOR_UI_LOCK_DRIFT",
+  "UI_V1_6_UNBOUND_FILE"
+ ],
+ "no_visual_redesign": true,
+ "outcome_on_pass": {
+  "FERG1": "PASS",
+  "FINAL-EVAL-REPAIR-002": "PASS",
+  "FINAL_EVALUATOR_AUDIT_RERUN": "AUTHORIZED",
+  "not_established": "NHM evaluator readiness"
+ },
+ "owner_task": "FINAL-EVAL-REPAIR-002",
+ "phase_type": "FINAL PUBLIC-PRESENTATION TRUTH + ACCESSIBILITY/PRESENTATION-POLISH REPAIR",
+ "protocol_id": "FINAL_EVAL_REPAIR_002_PROTOCOL_V1",
+ "status": "FROZEN_REPAIR_PROTOCOL",
+ "touch_target_minimum_css_px": 24
+}

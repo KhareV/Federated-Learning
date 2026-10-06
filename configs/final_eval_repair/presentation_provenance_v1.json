@@ -1,0 +1,82 @@
+{
+ "contract_id": "EVALUATOR_PRESENTATION_PROVENANCE_V1",
+ "purpose": "Every high-risk quantitative / live-state / technical claim on a current evaluator surface that survives the claim scan must have an entry here (and keep its required qualification in its surface file). Nothing is invented: ILLUSTRATIVE entries assert only that a value is decorative and qualified; RUNTIME entries name the runtime source; FROZEN/EXTERNAL entries must reference a verifiable source (none are claimed).",
+ "claims": [
+  {
+   "claim_id": "HW-ONDEVICE-ROW",
+   "surface": "frontend/src/lib/components/hardware/HardwareStudio.svelte",
+   "claim_type": "EDGE_INFERENCE",
+   "text_pattern": "ON-DEVICE INFERENCE",
+   "provenance_type": "ILLUSTRATIVE",
+   "source": "",
+   "required_qualification": [
+    "val: 'Not Implemented'",
+    "No on-device/edge ML inference is implemented"
+   ],
+   "allowed_context": "concept hardware table row whose value is 'Not Implemented'"
+  },
+  {
+   "claim_id": "NG-PPG-WAVELENGTH-RED",
+   "surface": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "claim_type": "QUANTITATIVE",
+   "text_pattern": "PPG 660nm",
+   "provenance_type": "ILLUSTRATIVE",
+   "source": "",
+   "required_qualification": [
+    "Concept Optical Sensor \\(Unverified\\)",
+    "ILLUSTRATIVE SIGNAL-FLOW GRAPH"
+   ],
+   "allowed_context": "illustrative node name in a conceptual signal-flow graph; no measurement implied"
+  },
+  {
+   "claim_id": "NG-PPG-WAVELENGTH-IR",
+   "surface": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "claim_type": "QUANTITATIVE",
+   "text_pattern": "PPG 880nm",
+   "provenance_type": "ILLUSTRATIVE",
+   "source": "",
+   "required_qualification": [
+    "Concept Optical Sensor \\(Unverified\\)",
+    "ILLUSTRATIVE SIGNAL-FLOW GRAPH"
+   ],
+   "allowed_context": "illustrative node name in a conceptual signal-flow graph; no measurement implied"
+  },
+  {
+   "claim_id": "FED-CLIENT-MILESTONE",
+   "surface": "frontend/src/lib/components/product/federation/ClientGrid.svelte",
+   "claim_type": "PERCENTAGE",
+   "text_pattern": "(100|0)% \\((completed|started)\\)",
+   "provenance_type": "RUNTIME",
+   "source": "federation live events: client milestone derived by the frontend live model from backend events",
+   "required_qualification": [
+    "milestone"
+   ],
+   "allowed_context": "event-derived milestone state of a logical client, not a clinical value"
+  },
+  {
+   "claim_id": "LANDING-LIVE-KICKER",
+   "surface": "frontend/src/routes/+page.svelte",
+   "claim_type": "LIVE_STATE",
+   "text_pattern": "LIVE MONITORING RESEARCH",
+   "provenance_type": "RUNTIME",
+   "source": "WebSocket /product/v1/sessions/{id}/live (simulated source, accelerated timing)",
+   "required_qualification": [
+    "SIMULATED SOURCE",
+    "NOT DIAGNOSTIC"
+   ],
+   "allowed_context": "names the product's live monitoring session stream; the source is simulated"
+  },
+  {
+   "claim_id": "LANDING-LIVE-PILLAR",
+   "surface": "frontend/src/routes/+page.svelte",
+   "claim_type": "LIVE_STATE",
+   "text_pattern": "LIVE MONITORING SESSIONS",
+   "provenance_type": "RUNTIME",
+   "source": "WebSocket /product/v1/sessions/{id}/live (simulated source, accelerated timing)",
+   "required_qualification": [
+    "Simulated wearable, accelerated timing"
+   ],
+   "allowed_context": "names the product's live monitoring session stream; the source is simulated"
+  }
+ ]
+}
