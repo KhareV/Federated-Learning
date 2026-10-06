@@ -1,0 +1,27 @@
+{
+ "bound_files": {
+  "artifacts/capstone/CAPSTONE_UI_V1_4.lock.json": "581534b82d1958a52827423e358b621dc935c95b90f33bf6f49a867f19a27cd5",
+  "configs/ufl_lite/uflg1_protocol_v1.json": "055c80576ae994e44c8bef07f63a48c2186a03e28a6bdc7d6f345877ad1db423",
+  "frontend/src/lib/components/product/federation/ClientGrid.svelte": "f96ca970f95b3b75f00916216f12927e869f3830261ec90afc0488e9ca46b0c5",
+  "frontend/src/lib/product/federation/__tests__/participation.test.ts": "863668f589d377e4cffb350c8310083f6f1da9e456e8b7e3852190e05c4c42dc",
+  "frontend/src/lib/product/federation/participation.ts": "687a12c90561ce9d2e6b2327787b319b8d572c9409d7df6c68bce051b3486cf8",
+  "frontend/src/routes/app/federation/live/+page.svelte": "b6e62b0f2b758ce80fe29162b3f5d3b127c34ddbc5fab5df8b52db2c870e3af7",
+  "frontend/src/routes/app/federation/rounds/+page.svelte": "ca0a28c46ea7ab08f66f3162eec27cc37a61093ed6db18664c0e798e204412a0",
+  "scripts/freeze_capstone_ui_v1_4.py": "106c686b8b0364510737fa615e8d3ee687a94e3c6e0be882bd906178e8c9c99e",
+  "scripts/ufl_lite_002_build_evidence.py": "1c94000f2ab25d02c191e2837d2cbb8815d0209a714bd154919a1da05c0bb6d3",
+  "scripts/ufl_lite_002_build_freeze.py": "55f5148059f4ca98395d00b6b251672cb2de949f3d77bfe7eab33f870bd10cf3",
+  "scripts/ufl_lite_002_evaluate_gate.py": "5056242eea49811ffecba3f535f683eaad7ac52a07f8d7f645b8f39c48e26fe7",
+  "scripts/ufl_lite_002_lib.py": "fa9cfebf353e4d776aaf0e9a1bd26951c01eff5f2c9a21fd0f7e27424d2ce092",
+  "scripts/ufl_lite_002_mutation_controls.py": "8275861ae57c4c89a7d36ab1cd70fd539c8480e87adab950d2de0d4fe0422ca9",
+  "scripts/ufl_lite_002_protected_audit.py": "28155178ba44943907b24d3d2f353442ba9dec4c53d67ace837d16e96856bf23",
+  "scripts/verify_capstone_ui_v1_4.py": "16aa2d958890089740ea9eae5fef8e7255d2450a1a937e63cfe9cf70d508f5d7",
+  "tests/test_ufl_lite_presentation.py": "7fbcbb6e61d32fb32e82e788807c08799bbef76002434cedd0f2709f8449df31"
+ },
+ "criteria_count": 51,
+ "entry_sha": "6871e0891ad697dab3f122afaba2d331a279ec8c",
+ "freeze_basis": "implementation, UI successor lock and evaluator frozen before the final evidence run; Phase 3 not implemented",
+ "gate": "UFLG1",
+ "lock_id": "UFL_LITE_002_PROTOCOL_V1",
+ "owner_phase": "UFL-LITE-002",
+ "status": "FROZEN_IMPLEMENTATION_PROTOCOL"
+}
