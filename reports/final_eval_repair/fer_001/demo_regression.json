@@ -1,0 +1,20 @@
+{
+ "blocked_external_requests": [],
+ "candidate_state_digests": [
+  "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+ ],
+ "cap_010_canonical_digest": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "clerk_global_in_browser": false,
+ "clerk_origins_contacted": [],
+ "demo_auth_works": true,
+ "elapsed_s_machine_specific": 51.7,
+ "equals_canonical": true,
+ "external_requests": [],
+ "federation_run": {
+  "maxClientsSubmittedAtOnce": 8,
+  "updates": "24"
+ },
+ "owner_binding_in_demo": "ABSENT (DEMO provider never qualifies; asserted by frontend tests and the unchanged semantic digest)",
+ "semantic_sha256": "3a57614e15264f3cd7661a016a30d033aab78647d57be04273c386cc9d048726",
+ "status": "PASS"
+}

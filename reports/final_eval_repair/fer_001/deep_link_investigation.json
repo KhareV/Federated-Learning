@@ -1,0 +1,101 @@
+{
+ "all_deep_links_reload_clean": true,
+ "also_observed": "adapter-static warns 'Overwriting build/index.html with fallback page': the landing document is the SPA shell (client-rendered); legacy-route redirects therefore run in the client load function.",
+ "deep_links": [
+  {
+   "after_reload": {
+    "errors": [],
+    "h1": 1,
+    "identityChip": true,
+    "main": 1,
+    "path": "/app",
+    "textLen": 1212,
+    "title": "Overview | NHM",
+    "visibleError": false
+   },
+   "document_status": 200,
+   "landed": "/app",
+   "route": "/app"
+  },
+  {
+   "after_reload": {
+    "errors": [],
+    "h1": 1,
+    "identityChip": true,
+    "main": 1,
+    "path": "/app/about",
+    "textLen": 1660,
+    "title": "About | NHM",
+    "visibleError": false
+   },
+   "document_status": 200,
+   "landed": "/app/about",
+   "route": "/app/about"
+  },
+  {
+   "after_reload": {
+    "errors": [],
+    "h1": 1,
+    "identityChip": true,
+    "main": 1,
+    "path": "/app/federation/live",
+    "textLen": 4835,
+    "title": "Live federation | NHM",
+    "visibleError": false
+   },
+   "document_status": 200,
+   "landed": "/app/federation/live",
+   "route": "/app/federation/live?run=FEDRUN-A50EED375CA4"
+  },
+  {
+   "after_reload": {
+    "errors": [],
+    "h1": 1,
+    "identityChip": true,
+    "main": 1,
+    "path": "/app/history",
+    "textLen": 809,
+    "title": "History | NHM",
+    "visibleError": false
+   },
+   "document_status": 200,
+   "landed": "/app/history",
+   "route": "/app/history"
+  },
+  {
+   "after_reload": {
+    "errors": [],
+    "h1": 1,
+    "identityChip": true,
+    "main": 1,
+    "path": "/app/history/SESS-3105cbd29d4b4932a52473ac14960747",
+    "textLen": 58723,
+    "title": "Session evidence | NHM",
+    "visibleError": false
+   },
+   "document_status": 404,
+   "landed": "/app/history/SESS-3105cbd29d4b4932a52473ac14960747",
+   "route": "/app/history/SESS-3105cbd29d4b4932a52473ac14960747"
+  },
+  {
+   "after_reload": {
+    "errors": [],
+    "h1": 1,
+    "identityChip": true,
+    "main": 1,
+    "path": "/app/research/ml",
+    "textLen": 5395,
+    "title": "Research ML evidence | NHM",
+    "visibleError": false
+   },
+   "document_status": 200,
+   "landed": "/app/research/ml",
+   "route": "/app/research/ml"
+  }
+ ],
+ "disposition": "KNOWN STATIC-HOST FALLBACK SEMANTIC (no change)",
+ "label": "CANONICAL",
+ "not_changed": "adapter, fallback and routing architecture (risky; cosmetic status only)",
+ "root_cause": "adapter-static with fallback 'index.html' and handleUnseenRoutes=ignore; the launcher serves the build with `vite preview`, which answers a non-prerendered dynamic path (/app/history/<id>) with the SvelteKit bootstrap shell and HTTP 404. The shell boots the client router, which renders the correct page.",
+ "why_safe": "navigation and reload render the correct page with the authenticated identity, no visible error, no console error; auth is enforced by the API/Clerk, not by the static host; no ownership boundary depends on this status."
+}

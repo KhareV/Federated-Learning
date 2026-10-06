@@ -1,0 +1,12 @@
+{
+ "canonical_evidence_existed_at_target": false,
+ "canonical_evidence_paths_at_target": [],
+ "commit_subject": "freeze(final-eval-repair-001): CAPSTONE_UI_V1_5 successor lock (whole frontend; predecessor V1_4) + successor-aware historical verifiers V1..V1_4 + pure SUCCESSOR_COMPATIBILITY_ONLY amendments (FRONTEND_PRODUCT 9_2, FEDERATION_UX 5, HISTORY 9_5, FACULTY_DEMO 4, UFL_LITE_002 1); FINAL_EVALUATOR_PRESENTATION_V1 guard, route-policy/claim/runbook verifiers, 35 mutation controls, frozen FERG0 evaluator, real-Clerk crawl harness, clean-clone harness, authorised surface and method lock bound before any canonical evidence",
+ "entry_sha": "5d40752442fd1a05dd2459dd216aff51fe4c022c",
+ "note": "candidate build for the unchanged FINAL_EVALUATOR_AUDIT_V1 rerun; NOT an evaluator-ready release",
+ "pushed_to_origin_main_at_record": true,
+ "release_vehicle": "the exact Git repository state at repair_target_sha (no archive)",
+ "repair_target_sha": "ce6fe2b10b13fbe494f5f531a8ac953a7b958f73",
+ "unauthorised_delta_from_entry": [],
+ "working_tree_clean_at_record": true
+}

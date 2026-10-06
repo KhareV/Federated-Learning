@@ -1,0 +1,60 @@
+{
+ "added_count": 40,
+ "added_outside_authorised": [],
+ "capstone_locks_verified": {
+  "cap001": true,
+  "cap002": true,
+  "cap003": true,
+  "cap004": true,
+  "cap005": true,
+  "cap006": true,
+  "cap007": true,
+  "cap008": true,
+  "cap009": true,
+  "cap010": true,
+  "cap011": true,
+  "capstone_ui_v1": true,
+  "capstone_ui_v1_1": true,
+  "capstone_ui_v1_2": true,
+  "fedprox_mu_v2": true,
+  "fl_init_v2": true,
+  "research_catalog": true,
+  "v2_fl_wearable_system": true
+ },
+ "clerk_ok": true,
+ "entry_sha": "5d40752442fd1a05dd2459dd216aff51fe4c022c",
+ "frontend_changed": [
+  "frontend/src/lib/product/__tests__/route-policy.test.ts",
+  "frontend/src/lib/product/route-policy.ts",
+  "frontend/src/routes/+layout.ts",
+  "frontend/src/routes/+page.svelte",
+  "frontend/src/routes/app/about/+page.svelte"
+ ],
+ "frontend_unaccounted_by_ui_v1_5": [],
+ "head_sha": "ce6fe2b10b13fbe494f5f531a8ac953a7b958f73",
+ "modified_outside_authorised": [],
+ "modified_since_entry": [
+  "frontend/src/routes/+layout.ts",
+  "frontend/src/routes/+page.svelte",
+  "frontend/src/routes/app/about/+page.svelte",
+  "scripts/verify_capstone_ui_v1.py",
+  "scripts/verify_capstone_ui_v1_1.py",
+  "scripts/verify_capstone_ui_v1_2.py",
+  "scripts/verify_capstone_ui_v1_3.py",
+  "scripts/verify_capstone_ui_v1_4.py",
+  "tests/test_capstone_federation_ui.py",
+  "tests/test_capstone_full_demo.py",
+  "tests/test_ufl_lite_presentation.py"
+ ],
+ "protected_artifact_drift": false,
+ "protected_tree_touched": [],
+ "removed_since_entry": [],
+ "tags_unchanged": true,
+ "ufl_locks_verified": {
+  "UFL_LITE_001": true,
+  "UFL_LITE_002": true,
+  "UFL_LITE_003": true
+ },
+ "ufl_ok": true,
+ "ui_chain_verified": true
+}

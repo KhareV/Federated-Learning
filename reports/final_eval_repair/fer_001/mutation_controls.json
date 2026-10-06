@@ -1,0 +1,252 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "about:{\"missing\": [\"engineering federation runtime is enabled\"], \"stale\": [\"federation product r",
+   "mutation": "ABOUT_RESTORED_NOT_YET_ENABLED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "landing:{\"missing\": [\"FEDERATION RUNTIME / ENGINEERING ENABLED\"], \"stale\": [\"FEDERATION RUNTIME / ",
+   "mutation": "LANDING_PRELOADER_NOT_YET_ENABLED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "landing:{\"missing\": [\"engineering federation runtime is enabled\"], \"stale\": [\"federation product r",
+   "mutation": "LANDING_PARAGRAPH_DISABLED_WORDING",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [], \"stale_entries\": [], \"bad_class\": [], \"loops\": [], \"external\": [], \"d",
+   "mutation": "FL_OVERVIEW_RENDERS_OLD_CONTENT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [], \"stale_entries\": [], \"bad_class\": [], \"loops\": [], \"external\": [], \"d",
+   "mutation": "FL_PERSONAL_MODELS_RENDERS_PERSONALIZATION",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [], \"stale_entries\": [], \"bad_class\": [], \"loops\": [], \"external\": [], \"d",
+   "mutation": "AI_INSIGHTS_RENDERS_FABRICATED_METRICS",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [], \"stale_entries\": [], \"bad_class\": [], \"loops\": [], \"external\": [], \"d",
+   "mutation": "OVERVIEW_RENDERS_OBSOLETE_WORKBENCH",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [\"/trends\"], \"stale_entries\": [], \"bad_class\": [], \"loops\": [], \"external",
+   "mutation": "LEGACY_ROUTE_OMITTED_FROM_POLICY",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [], \"stale_entries\": [], \"bad_class\": [], \"loops\": [\"/fl/global-model\"], ",
+   "mutation": "CURRENT_ROUTE_CLASSIFIED_LEGACY",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [], \"stale_entries\": [], \"bad_class\": [], \"loops\": [\"/overview\"], \"extern",
+   "mutation": "REDIRECT_LOOP",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [], \"stale_entries\": [], \"bad_class\": [], \"loops\": [], \"external\": [\"/ove",
+   "mutation": "REDIRECT_TO_EXTERNAL_ORIGIN",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "runbook:{\"missing\": [\"MY EDGE CLIENT\"], \"stale_sentence_positions\": [], \"claims\": []}",
+   "mutation": "RUNBOOK_OMITS_MY_EDGE_CLIENT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "runbook:{\"missing\": [], \"stale_sentence_positions\": [], \"claims\": [{\"claim\": \"personalized_fl\", \"t",
+   "mutation": "RUNBOOK_CLAIMS_PHYSIOLOGY_TRAINS_FL",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "runbook:{\"missing\": [], \"stale_sentence_positions\": [], \"claims\": [{\"claim\": \"personalized_fl\", \"t",
+   "mutation": "RUNBOOK_CLAIMS_PERSONAL_MODEL",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "unbound:{\"helper\": false, \"grid\": true, \"live\": true, \"global_page_unbound\": true}",
+   "mutation": "DEMO_GAINS_OWNER_BINDING",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "unbound:{\"helper\": false, \"grid\": true, \"live\": true, \"global_page_unbound\": true}",
+   "mutation": "REPLAY_GAINS_OWNER_BINDING",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "unbound:{\"helper\": true, \"grid\": true, \"live\": true, \"global_page_unbound\": false}",
+   "mutation": "GLOBAL_CLIENTS_GAINS_OWNER_BINDING",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "truth:{\"checks\": {\"federation_runtime_backend\": false, \"hardware_backend\": true, \"model\": true, ",
+   "mutation": "FEDERATION_RUNTIME_TRUTH_DISABLED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:scientific:checkpoints/MODEL_V2_FINAL.pt",
+   "mutation": "MODEL_V2_FINAL_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:scientific:artifacts/CAL_V2.json",
+   "mutation": "CAL_V2_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "truth:{\"checks\": {\"federation_runtime_backend\": true, \"hardware_backend\": true, \"model\": true, \"",
+   "mutation": "CANDIDATE_DIGEST_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:product/edge/local_training_buffer.py",
+   "mutation": "BACKEND_FILE_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:api/product_app_v1_3.py",
+   "mutation": "API_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:capstone_persistence/federation_store.py",
+   "mutation": "DB_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:product/federation/service.py",
+   "mutation": "FL_RUNTIME_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "hash_drift:auth:product/auth/clerk.py",
+   "mutation": "AUTH_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify_capstone_ui_v1_5:CAPSTONE_UI_V1_5_PREDECESSOR_DRIFT",
+   "mutation": "PREDECESSOR_UI_LOCK_DRIFT",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "verify_capstone_ui_v1_5:CAPSTONE_UI_V1_5_UNBOUND_OR_MISSING_FRONTEND_FILE",
+   "mutation": "UI_V1_5_UNBOUND_FILE",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "landing:{\"missing\": [], \"stale\": [], \"owner_binding_overreach\": [], \"font_refs\": [\"<Signature\"], \"",
+   "mutation": "LASTORIA_REFERENCE_RESTORED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "about:{\"missing\": [], \"stale\": [], \"claims\": [{\"claim\": \"hospital_or_institution\", \"text\": \"ed M",
+   "mutation": "HOSPITAL_INSTITUTION_CLAIM_INTRODUCED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "about:{\"missing\": [], \"stale\": [], \"claims\": [{\"claim\": \"production\", \"text\": \"the released MODE",
+   "mutation": "PRODUCTION_CLAIM_INTRODUCED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "about:{\"missing\": [], \"stale\": [], \"claims\": [{\"claim\": \"personalized_fl\", \"text\": \"released MOD",
+   "mutation": "PERSONALIZED_FL_CLAIM_INTRODUCED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "about:{\"missing\": [], \"stale\": [], \"claims\": [{\"claim\": \"candidate_deployed\", \"text\": \"eleased M",
+   "mutation": "CANDIDATE_CALLED_DEPLOYED",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "about:{\"missing\": [], \"stale\": [], \"claims\": [{\"claim\": \"dp_or_anonymity\", \"text\": \"eleased MODE",
+   "mutation": "SECAGG_CALLED_DP_OR_ANONYMITY",
+   "restored": true
+  },
+  {
+   "applied_to": "disposable shadow copy",
+   "caught": true,
+   "failing_check": "routes:{\"unclassified\": [\"/app/newpage\"], \"stale_entries\": [], \"bad_class\": [], \"loops\": [], \"ext",
+   "mutation": "CURRENT_ROUTE_UNCLASSIFIED",
+   "restored": true
+  }
+ ],
+ "count": 35
+}
