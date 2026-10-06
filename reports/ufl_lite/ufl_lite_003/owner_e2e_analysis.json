@@ -1,0 +1,159 @@
+{
+ "all_pass": true,
+ "clerk_hosts_contacted": true,
+ "demo_fallback": false,
+ "elapsed_s_machine_specific": 134.1,
+ "groups": {
+  "candidate": {
+   "all_pass": true,
+   "checks": {
+    "candidate_accepted_to_sandbox": true,
+    "candidate_digest_canonical": true,
+    "candidate_event_digest_canonical": true,
+    "candidate_in_sandbox": true,
+    "candidate_not_deployed": true,
+    "one_candidate": true,
+    "released_default_v2_final": true
+   }
+  },
+  "global": {
+   "all_pass": true,
+   "checks": {
+    "global_view_8_ids": true,
+    "global_view_unbound": true
+   }
+  },
+  "identity": {
+   "all_pass": true,
+   "checks": {
+    "auth_provider_clerk": true,
+    "me_200_clerk_user": true,
+    "model_v2_final": true,
+    "not_demo_mode": true
+   }
+  },
+  "isolation": {
+   "all_pass": true,
+   "checks": {
+    "b_control_global_200": true,
+    "b_control_nonexistent_404": true,
+    "b_distinct_run_id": true,
+    "b_global_clients_unbound": true,
+    "b_no_owner_card_on_a_run": true,
+    "b_own_runs_exclude_a": true,
+    "b_rest_a_run_403": true,
+    "b_ws_4403": true
+   }
+  },
+  "live": {
+   "all_pass": true,
+   "checks": {
+    "client_ids_exact_8": true,
+    "every_round_has_all_8": true,
+    "examples_93_rest": true,
+    "examples_93_ui": true,
+    "examples_event_derived": true,
+    "locality_wording": true,
+    "no_consent_ui": true,
+    "no_contribution_or_personalization_wording": true,
+    "no_ninth_client": true,
+    "no_stream_error": true,
+    "one_my_edge_label": true,
+    "one_owner_card": true,
+    "owner_card_synthetic_wording": true,
+    "owner_is_site00": true,
+    "owner_participants_title": true,
+    "owner_state_submitted": true,
+    "raw_examples_sent_zero": true,
+    "rounds_3": true,
+    "rounds_3_ui": true,
+    "sequence_contiguous": true,
+    "seven_peer_cards": true,
+    "site00_93_examples_each_update": true,
+    "status_completed": true,
+    "summary_not_updates_submitted_label": true,
+    "synthetic_summary_wording": true,
+    "technical_id_unchanged": true,
+    "update_digests_64hex": true,
+    "updates_24": true,
+    "updates_3_ui": true,
+    "updates_8_8_8": true
+   }
+  },
+  "refresh": {
+   "all_pass": true,
+   "checks": {
+    "refresh_keeps_8_ids": true,
+    "refresh_keeps_one_owner": true,
+    "refresh_keeps_seven_peers": true,
+    "refresh_no_stream_error": true
+   }
+  },
+  "replay": {
+   "all_pass": true,
+   "checks": {
+    "replay_8_ids": true,
+    "replay_candidate_unchanged": true,
+    "replay_completed": true,
+    "replay_distinct_run": true,
+    "replay_no_owner_card": true,
+    "replay_no_participation_summary": true,
+    "replay_title_unbound": true,
+    "replay_type": true
+   }
+  },
+  "restart": {
+   "all_pass": true,
+   "checks": {
+    "restart_24_updates_8_8_8": true,
+    "restart_8_ids": true,
+    "restart_candidate_canonical": true,
+    "restart_candidate_unchanged": true,
+    "restart_examples_93": true,
+    "restart_one_owner": true,
+    "restart_rounds_3_updates_3": true,
+    "restart_same_state_digests": true,
+    "restart_same_update_digests": true,
+    "restart_seven_peers": true,
+    "restart_signin_clerk": true,
+    "restart_ws_ok": true
+   }
+  },
+  "rounds_page": {
+   "all_pass": true,
+   "checks": {
+    "rounds_note_owner": true,
+    "rounds_one_my_edge": true
+   }
+  },
+  "websocket": {
+   "all_pass": true,
+   "checks": {
+    "ws_cookie_transport": true,
+    "ws_events_received": true,
+    "ws_handshake_101": true,
+    "ws_no_token_in_url": true,
+    "ws_present": true,
+    "ws_reconnected_after_refresh": true
+   }
+  }
+ },
+ "label": "CANONICAL",
+ "live_run_id": "FEDRUN-D1340DC2BDFD",
+ "manual_steps": "none (fully automated)",
+ "mocked_clerk": false,
+ "no_console_errors": true,
+ "real_browser": "headless Google Chrome via CDP, fresh profile per run",
+ "real_clerk_test_instance": true,
+ "replay_run_id": "FEDRUN-7BC8C18412F1",
+ "restart_startup_s_machine_specific": 6.0,
+ "startup_s_machine_specific": 15.1,
+ "stop_1": {
+  "launcher_exit_code": 0,
+  "orphans": []
+ },
+ "stop_2": {
+  "launcher_exit_code": 0,
+  "orphans": []
+ }
+}

@@ -1,0 +1,1004 @@
+{
+ "all_decided_pass": true,
+ "criteria": [
+  {
+   "checks": [
+    {
+     "check": "entry_audited",
+     "pass": true
+    }
+   ],
+   "id": "U01",
+   "pass": true,
+   "text": "Entry audited: HEAD==origin/main==9324ef4, UFLG0+UFLG1 PASS, locks verified"
+  },
+  {
+   "checks": [
+    {
+     "check": "prior_phases_preserved",
+     "pass": true
+    }
+   ],
+   "id": "U02",
+   "pass": true,
+   "text": "UFL-LITE-001 and UFL-LITE-002 evidence, contract and locks preserved"
+  },
+  {
+   "checks": [
+    {
+     "check": "tags_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "U03",
+   "pass": true,
+   "text": "Release and clerk-connected tags unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "locks_verify",
+     "pass": true
+    }
+   ],
+   "id": "U04",
+   "pass": true,
+   "text": "All protocol locks and Clerk lineage verify"
+  },
+  {
+   "checks": [
+    {
+     "check": "acceptance_target_recorded",
+     "pass": true
+    }
+   ],
+   "id": "U05",
+   "pass": true,
+   "text": "UFL_LITE_ACCEPTANCE_TARGET_SHA recorded before canonical evidence; ancestor of the result commit; pushed to main"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_product_delta_at_target",
+     "pass": true
+    }
+   ],
+   "id": "U06",
+   "pass": true,
+   "text": "Zero product-feature delta from entry to the acceptance target (additive verification material only)"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_product_delta_at_head",
+     "pass": true
+    }
+   ],
+   "id": "U07",
+   "pass": true,
+   "text": "Zero product-feature delta from entry to the result commit"
+  },
+  {
+   "checks": [
+    {
+     "check": "ui_locks_identical",
+     "pass": true
+    },
+    {
+     "check": "ui14_ok",
+     "pass": true
+    }
+   ],
+   "id": "U08",
+   "pass": true,
+   "text": "CAPSTONE_UI V1..V1_4 locks and verifiers unchanged and verified"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_new_amendments",
+     "pass": true
+    }
+   ],
+   "id": "U09",
+   "pass": true,
+   "text": "No amendment to any historical protocol in this phase"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:identity.auth_provider_clerk",
+     "pass": true
+    },
+    {
+     "check": "G:identity.not_demo_mode",
+     "pass": true
+    }
+   ],
+   "id": "U10",
+   "pass": true,
+   "text": "Real Clerk TEST sign-in: backend reports CLERK, not DEMO"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:identity.me_200_clerk_user",
+     "pass": true
+    },
+    {
+     "check": "G:identity.model_v2_final",
+     "pass": true
+    }
+   ],
+   "id": "U11",
+   "pass": true,
+   "text": "Authenticated /me is a Clerk-shaped user, released model MODEL_V2_FINAL"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:clerk_network.clerk_hosts_contacted",
+     "pass": true
+    },
+    {
+     "check": "G:clerk_network.no_console_errors",
+     "pass": true
+    }
+   ],
+   "id": "U12",
+   "pass": true,
+   "text": "Real Clerk-owned hosts contacted and no browser console errors"
+  },
+  {
+   "checks": [
+    {
+     "check": "e2e_real_clerk_flags",
+     "pass": true
+    }
+   ],
+   "id": "U13",
+   "pass": true,
+   "text": "Evidence is from a real browser against the real Clerk instance: no mock, no DemoAuth fallback, no manual step"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.one_owner_card",
+     "pass": true
+    },
+    {
+     "check": "G:live.owner_is_site00",
+     "pass": true
+    },
+    {
+     "check": "G:live.one_my_edge_label",
+     "pass": true
+    }
+   ],
+   "id": "U14",
+   "pass": true,
+   "text": "Exactly one owner card (MY EDGE CLIENT), bound to SIM_FL_SITE_00"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.seven_peer_cards",
+     "pass": true
+    },
+    {
+     "check": "G:live.client_ids_exact_8",
+     "pass": true
+    },
+    {
+     "check": "G:live.no_ninth_client",
+     "pass": true
+    },
+    {
+     "check": "G:live.technical_id_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "U15",
+   "pass": true,
+   "text": "Seven synthetic peers; exactly eight clients; no ninth client; technical ids unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.owner_card_synthetic_wording",
+     "pass": true
+    },
+    {
+     "check": "G:live.synthetic_summary_wording",
+     "pass": true
+    },
+    {
+     "check": "G:live.owner_participants_title",
+     "pass": true
+    }
+   ],
+   "id": "U16",
+   "pass": true,
+   "text": "Owner card and summary carry synthetic-engineering / not-your-physiology wording"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.examples_93_ui",
+     "pass": true
+    },
+    {
+     "check": "G:live.examples_93_rest",
+     "pass": true
+    },
+    {
+     "check": "G:live.examples_event_derived",
+     "pass": true
+    },
+    {
+     "check": "b_site00_93",
+     "pass": true
+    }
+   ],
+   "id": "U17",
+   "pass": true,
+   "text": "Owner local examples 93 in UI, REST and baseline, derived from events"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.owner_state_submitted",
+     "pass": true
+    },
+    {
+     "check": "G:live.rounds_3_ui",
+     "pass": true
+    },
+    {
+     "check": "G:live.updates_3_ui",
+     "pass": true
+    },
+    {
+     "check": "G:live.summary_not_updates_submitted_label",
+     "pass": true
+    }
+   ],
+   "id": "U18",
+   "pass": true,
+   "text": "Owner state, completed rounds 3/3 and updates 3/3 derived from state/milestones/updateDigests"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.raw_examples_sent_zero",
+     "pass": true
+    },
+    {
+     "check": "G:live.locality_wording",
+     "pass": true
+    }
+   ],
+   "id": "U19",
+   "pass": true,
+   "text": "Raw examples sent to coordinator 0; locality wording present"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.no_contribution_or_personalization_wording",
+     "pass": true
+    },
+    {
+     "check": "G:live.no_consent_ui",
+     "pass": true
+    }
+   ],
+   "id": "U20",
+   "pass": true,
+   "text": "No contribution percentage, personalization or personal-model wording; no consent UI"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.status_completed",
+     "pass": true
+    },
+    {
+     "check": "G:live.no_stream_error",
+     "pass": true
+    }
+   ],
+   "id": "U21",
+   "pass": true,
+   "text": "Live run completed with no stream error"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.rounds_3",
+     "pass": true
+    },
+    {
+     "check": "G:live.updates_24",
+     "pass": true
+    },
+    {
+     "check": "G:live.updates_8_8_8",
+     "pass": true
+    },
+    {
+     "check": "G:live.every_round_has_all_8",
+     "pass": true
+    }
+   ],
+   "id": "U22",
+   "pass": true,
+   "text": "3 rounds, 24 update-ready events, 8/8/8 per round, all eight clients every round"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:live.site00_93_examples_each_update",
+     "pass": true
+    },
+    {
+     "check": "G:live.sequence_contiguous",
+     "pass": true
+    },
+    {
+     "check": "G:live.update_digests_64hex",
+     "pass": true
+    }
+   ],
+   "id": "U23",
+   "pass": true,
+   "text": "SITE_00 update carries 93 examples each round; sequence contiguous; update digests are sha256"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_client_count",
+     "pass": true
+    },
+    {
+     "check": "b_rounds",
+     "pass": true
+    },
+    {
+     "check": "b_updates",
+     "pass": true
+    }
+   ],
+   "id": "U24",
+   "pass": true,
+   "text": "Baseline: 8 clients, 3 rounds, 24 updates (8/8/8)"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:candidate.candidate_digest_canonical",
+     "pass": true
+    },
+    {
+     "check": "G:candidate.candidate_event_digest_canonical",
+     "pass": true
+    },
+    {
+     "check": "b_digest",
+     "pass": true
+    }
+   ],
+   "id": "U25",
+   "pass": true,
+   "text": "Candidate digest equals the frozen canonical digest (REST and event)"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:candidate.candidate_accepted_to_sandbox",
+     "pass": true
+    },
+    {
+     "check": "G:candidate.candidate_in_sandbox",
+     "pass": true
+    },
+    {
+     "check": "G:candidate.candidate_not_deployed",
+     "pass": true
+    },
+    {
+     "check": "G:candidate.released_default_v2_final",
+     "pass": true
+    },
+    {
+     "check": "G:candidate.one_candidate",
+     "pass": true
+    }
+   ],
+   "id": "U26",
+   "pass": true,
+   "text": "Candidate ACCEPTED_TO_SANDBOX, IN_SANDBOX, not deployed; released default MODEL_V2_FINAL; one candidate"
+  },
+  {
+   "checks": [
+    {
+     "check": "b_candidate",
+     "pass": true
+    },
+    {
+     "check": "h_scientific",
+     "pass": true
+    }
+   ],
+   "id": "U27",
+   "pass": true,
+   "text": "Candidate state valid per baseline; MODEL_V2_FINAL / CAL_V2 scientific artifacts unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:refresh.refresh_keeps_one_owner",
+     "pass": true
+    },
+    {
+     "check": "G:refresh.refresh_keeps_seven_peers",
+     "pass": true
+    },
+    {
+     "check": "G:refresh.refresh_keeps_8_ids",
+     "pass": true
+    },
+    {
+     "check": "G:refresh.refresh_no_stream_error",
+     "pass": true
+    }
+   ],
+   "id": "U28",
+   "pass": true,
+   "text": "Refresh mid-run restores the owner card, seven peers and eight ids"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:websocket.ws_present",
+     "pass": true
+    },
+    {
+     "check": "G:websocket.ws_handshake_101",
+     "pass": true
+    },
+    {
+     "check": "G:websocket.ws_cookie_transport",
+     "pass": true
+    },
+    {
+     "check": "G:websocket.ws_events_received",
+     "pass": true
+    }
+   ],
+   "id": "U29",
+   "pass": true,
+   "text": "Federation WebSocket: 101 handshake, cookie transport, events received"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:websocket.ws_no_token_in_url",
+     "pass": true
+    },
+    {
+     "check": "G:websocket.ws_reconnected_after_refresh",
+     "pass": true
+    }
+   ],
+   "id": "U30",
+   "pass": true,
+   "text": "No token in any WebSocket URL; reconnect after refresh"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:rounds_page.rounds_note_owner",
+     "pass": true
+    },
+    {
+     "check": "G:rounds_page.rounds_one_my_edge",
+     "pass": true
+    }
+   ],
+   "id": "U31",
+   "pass": true,
+   "text": "Rounds page carries the owner note and exactly one MY EDGE CLIENT"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:global.global_view_8_ids",
+     "pass": true
+    },
+    {
+     "check": "G:global.global_view_unbound",
+     "pass": true
+    }
+   ],
+   "id": "U32",
+   "pass": true,
+   "text": "Global clients view shows eight clients and no owner binding"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:replay.replay_distinct_run",
+     "pass": true
+    },
+    {
+     "check": "G:replay.replay_completed",
+     "pass": true
+    },
+    {
+     "check": "G:replay.replay_type",
+     "pass": true
+    }
+   ],
+   "id": "U33",
+   "pass": true,
+   "text": "REPLAY run: distinct, completed, typed REPLAY"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:replay.replay_no_owner_card",
+     "pass": true
+    },
+    {
+     "check": "G:replay.replay_no_participation_summary",
+     "pass": true
+    },
+    {
+     "check": "G:replay.replay_8_ids",
+     "pass": true
+    },
+    {
+     "check": "G:replay.replay_title_unbound",
+     "pass": true
+    }
+   ],
+   "id": "U34",
+   "pass": true,
+   "text": "REPLAY run shows no owner card, no participation summary, unbound title"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:replay.replay_candidate_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "U35",
+   "pass": true,
+   "text": "REPLAY leaves the candidate set unchanged"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:isolation.b_rest_a_run_403",
+     "pass": true
+    },
+    {
+     "check": "G:isolation.b_control_nonexistent_404",
+     "pass": true
+    },
+    {
+     "check": "G:isolation.b_control_global_200",
+     "pass": true
+    }
+   ],
+   "id": "U36",
+   "pass": true,
+   "text": "User B REST access to A's run is 403 with B's own bearer; controls prove the probe reaches the target"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:isolation.b_ws_4403",
+     "pass": true
+    }
+   ],
+   "id": "U37",
+   "pass": true,
+   "text": "User B WebSocket to A's run is rejected with 4403"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:isolation.b_no_owner_card_on_a_run",
+     "pass": true
+    },
+    {
+     "check": "G:isolation.b_own_runs_exclude_a",
+     "pass": true
+    }
+   ],
+   "id": "U38",
+   "pass": true,
+   "text": "User B sees no owner card on A's run and no A runs in B's list"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:isolation.b_global_clients_unbound",
+     "pass": true
+    },
+    {
+     "check": "G:isolation.b_distinct_run_id",
+     "pass": true
+    }
+   ],
+   "id": "U39",
+   "pass": true,
+   "text": "User B's global clients view unbound"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:restart.restart_signin_clerk",
+     "pass": true
+    },
+    {
+     "check": "G:restart.restart_one_owner",
+     "pass": true
+    },
+    {
+     "check": "G:restart.restart_seven_peers",
+     "pass": true
+    },
+    {
+     "check": "G:restart.restart_8_ids",
+     "pass": true
+    }
+   ],
+   "id": "U40",
+   "pass": true,
+   "text": "After backend restart (same SQLite) A returns with a fresh profile: owner card, seven peers, eight ids"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:restart.restart_examples_93",
+     "pass": true
+    },
+    {
+     "check": "G:restart.restart_rounds_3_updates_3",
+     "pass": true
+    },
+    {
+     "check": "G:restart.restart_24_updates_8_8_8",
+     "pass": true
+    }
+   ],
+   "id": "U41",
+   "pass": true,
+   "text": "After restart: 93 examples, 3/3 rounds and updates, 24 updates 8/8/8"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:restart.restart_same_update_digests",
+     "pass": true
+    },
+    {
+     "check": "G:restart.restart_same_state_digests",
+     "pass": true
+    }
+   ],
+   "id": "U42",
+   "pass": true,
+   "text": "After restart: update digests and round state digests identical to before"
+  },
+  {
+   "checks": [
+    {
+     "check": "G:restart.restart_candidate_unchanged",
+     "pass": true
+    },
+    {
+     "check": "G:restart.restart_candidate_canonical",
+     "pass": true
+    },
+    {
+     "check": "G:restart.restart_ws_ok",
+     "pass": true
+    }
+   ],
+   "id": "U43",
+   "pass": true,
+   "text": "After restart: candidate unchanged and canonical; WebSocket reconnects"
+  },
+  {
+   "checks": [
+    {
+     "check": "demo_digest",
+     "pass": true
+    }
+   ],
+   "id": "U44",
+   "pass": true,
+   "text": "Offline DemoAuth regression: semantic digest 3a57614e... equals CAP-010 canonical"
+  },
+  {
+   "checks": [
+    {
+     "check": "demo_regression",
+     "pass": true
+    }
+   ],
+   "id": "U45",
+   "pass": true,
+   "text": "DemoAuth works, no Clerk global, no external/Clerk network traffic"
+  },
+  {
+   "checks": [
+    {
+     "check": "secret_audit_clean",
+     "pass": true
+    }
+   ],
+   "id": "U46",
+   "pass": true,
+   "text": "No secret, token or JWT in evidence, logs, build, frontend source, SQLite or repo files"
+  },
+  {
+   "checks": [
+    {
+     "check": "owner_not_persisted",
+     "pass": true
+    },
+    {
+     "check": "G:websocket.ws_no_token_in_url",
+     "pass": true
+    }
+   ],
+   "id": "U47",
+   "pass": true,
+   "text": "Owner binding is not persisted in SQLite; no token in WebSocket URL"
+  },
+  {
+   "checks": [
+    {
+     "check": "credentials_external",
+     "pass": true
+    }
+   ],
+   "id": "U48",
+   "pass": true,
+   "text": "Credentials only external; .env untracked and git-ignored; nothing staged"
+  },
+  {
+   "checks": [
+    {
+     "check": "no_backend_change",
+     "pass": true
+    },
+    {
+     "check": "no_api_change",
+     "pass": true
+    },
+    {
+     "check": "no_db_change",
+     "pass": true
+    },
+    {
+     "check": "no_fl_change",
+     "pass": true
+    },
+    {
+     "check": "no_auth_change",
+     "pass": true
+    }
+   ],
+   "id": "U49",
+   "pass": true,
+   "text": "No backend / API / DB / FL / auth drift against the entry baseline hashes"
+  },
+  {
+   "checks": [
+    {
+     "check": "frontend_unchanged",
+     "pass": true
+    },
+    {
+     "check": "global_page_unchanged",
+     "pass": true
+    },
+    {
+     "check": "helper_pure",
+     "pass": true
+    },
+    {
+     "check": "claims_clean",
+     "pass": true
+    }
+   ],
+   "id": "U50",
+   "pass": true,
+   "text": "Frontend unchanged from entry; global clients page unchanged; presentation audits pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "h_scientific",
+     "pass": true
+    },
+    {
+     "check": "monitoring_unchanged",
+     "pass": true
+    }
+   ],
+   "id": "U51",
+   "pass": true,
+   "text": "Monitoring and release invariants unchanged (MODEL_V2_FINAL, CAL_V2, SOFTWARE_SYSTEM_V2)"
+  },
+  {
+   "checks": [
+    {
+     "check": "clean_clone_a",
+     "pass": true
+    }
+   ],
+   "id": "U52",
+   "pass": true,
+   "text": "Clean clone (proof A): fresh clone at the acceptance target SHA, fresh venv and npm ci, clean tree, frozen verifiers + targeted tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "clean_clone_b",
+     "pass": true
+    }
+   ],
+   "id": "U53",
+   "pass": true,
+   "text": "Clean-clone connected proof (B): real-Clerk E2E in the clone, all analyzer checks pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "clean_clone_target_matches",
+     "pass": true
+    }
+   ],
+   "id": "U54",
+   "pass": true,
+   "text": "Clean clone is of exactly the recorded acceptance target and did not modify tracked files"
+  },
+  {
+   "checks": [
+    {
+     "check": "fe_tests",
+     "pass": true
+    }
+   ],
+   "id": "U55",
+   "pass": true,
+   "text": "Frontend tests pass (at least 210, none failing)"
+  },
+  {
+   "checks": [
+    {
+     "check": "fe_check",
+     "pass": true
+    },
+    {
+     "check": "fe_build",
+     "pass": true
+    }
+   ],
+   "id": "U56",
+   "pass": true,
+   "text": "svelte-check and production build pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "py_targeted",
+     "pass": true
+    }
+   ],
+   "id": "U57",
+   "pass": true,
+   "text": "Targeted Python tests pass"
+  },
+  {
+   "checks": [
+    {
+     "check": "py_full",
+     "pass": true
+    }
+   ],
+   "id": "U58",
+   "pass": true,
+   "text": "Full Python suite passes under the CAP-003 race policy (deselect + isolated probe)"
+  },
+  {
+   "checks": [
+    {
+     "check": "lint",
+     "pass": true
+    }
+   ],
+   "id": "U59",
+   "pass": true,
+   "text": "ruff and pip check clean"
+  },
+  {
+   "checks": [
+    {
+     "check": "ci_untouched",
+     "pass": true
+    }
+   ],
+   "id": "U60",
+   "pass": true,
+   "text": "CI neither queried nor triggered"
+  },
+  {
+   "checks": [
+    {
+     "check": "mutation_log",
+     "pass": true
+    }
+   ],
+   "id": "U61",
+   "pass": true,
+   "text": "35 mutation controls: all caught, all restored, exact frozen names"
+  },
+  {
+   "checks": [
+    {
+     "check": "protected_final",
+     "pass": true
+    }
+   ],
+   "id": "U62",
+   "pass": true,
+   "text": "Final protected-artifact audit shows no drift"
+  },
+  {
+   "checks": [
+    {
+     "check": "lock_ok",
+     "pass": true
+    }
+   ],
+   "id": "U63",
+   "pass": true,
+   "text": "Protocol lock verifies (bound files, criteria count)"
+  },
+  {
+   "checks": [
+    {
+     "check": "task_pass",
+     "pass": true
+    }
+   ],
+   "id": "U64",
+   "pass": true,
+   "text": "Task registry UFL-LITE-003 PASS"
+  },
+  {
+   "checks": [
+    {
+     "check": "gate_pass",
+     "pass": true
+    }
+   ],
+   "id": "U65",
+   "pass": true,
+   "text": "Gate registry UFLG2 PASS"
+  }
+ ],
+ "criteria_count": 65,
+ "failed": [],
+ "gate": "UFLG2",
+ "mode": "FINAL"
+}

@@ -1,0 +1,46 @@
+{
+ "added_count": 16,
+ "added_outside_additive_namespace": [],
+ "authorised_modifications": [
+  "manifests/ufl_lite/gate_registry_v1.csv",
+  "manifests/ufl_lite/task_registry_v1.csv"
+ ],
+ "capstone_release_tag_unchanged": true,
+ "clerk_connected_tag_unchanged": true,
+ "clerk_lineage_ok": true,
+ "entry_sha": "9324ef40ecb8fdecfc4880aa827bc68b45e4f9a0",
+ "frontend_drift": [],
+ "head_sha": "cf18cba4d7891c514553a1702e227f28dbe26f7c",
+ "locks_verified": {
+  "cap001": true,
+  "cap002": true,
+  "cap003": true,
+  "cap004": true,
+  "cap005": true,
+  "cap006": true,
+  "cap007": true,
+  "cap008": true,
+  "cap009": true,
+  "cap010": true,
+  "cap011": true,
+  "capstone_ui_v1": true,
+  "capstone_ui_v1_1": true,
+  "capstone_ui_v1_2": true,
+  "fedprox_mu_v2": true,
+  "fl_init_v2": true,
+  "research_catalog": true,
+  "v2_fl_wearable_system": true
+ },
+ "modified_outside_allowed": [],
+ "modified_since_entry": [
+  "manifests/ufl_lite/gate_registry_v1.csv",
+  "manifests/ufl_lite/task_registry_v1.csv"
+ ],
+ "named_component_drift": [],
+ "protected_artifact_drift": false,
+ "protected_tree_modified": [],
+ "removed_since_entry": [],
+ "uflg0_ok": true,
+ "uflg1_ok": true,
+ "ui_v1_3_verified": true
+}

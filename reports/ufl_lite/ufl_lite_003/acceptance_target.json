@@ -1,0 +1,12 @@
+{
+ "acceptance_target_sha": "cf18cba4d7891c514553a1702e227f28dbe26f7c",
+ "canonical_evidence_existed_at_target": false,
+ "canonical_evidence_paths_at_target": [],
+ "commit_subject": "freeze(ufl-lite-003): UFLG2 method lock - 65 criteria, 35 mutation controls, real-Clerk CDP driver, analyzers, E2E orchestrator, clean-clone harness, frozen evaluator bound before any canonical evidence; verification-only, zero product delta",
+ "entry_sha": "9324ef40ecb8fdecfc4880aa827bc68b45e4f9a0",
+ "product_feature_delta": "none: additive verification material only",
+ "protected_tree_delta_from_entry": [],
+ "pushed_to_origin_main_at_record": true,
+ "release_vehicle": "the exact Git repository state at acceptance_target_sha (no archive)",
+ "working_tree_clean_at_record": true
+}

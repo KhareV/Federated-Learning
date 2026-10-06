@@ -1,0 +1,907 @@
+{
+ "A": {
+  "console_errors": [],
+  "elapsed_s": 54,
+  "liveRunId": "FEDRUN-CE118028FCE1",
+  "mode": "owner-live",
+  "network": {
+   "clerkOwnedHosts": [
+    "clerk-telemetry.com",
+    "delicate-civet-2247.clerk.accounts.dev",
+    "img.clerk.com"
+   ],
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "clerk-telemetry.com",
+    "delicate-civet-2247.clerk.accounts.dev",
+    "img.clerk.com"
+   ]
+  },
+  "replayRunId": "FEDRUN-C2B09676E1C2",
+  "steps": [
+   {
+    "clerkGlobal": false,
+    "clientTrustVerificationUsed": true,
+    "me": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "status": 200,
+     "user_id_is_clerk_shaped": true,
+     "user_id_is_demo": false
+    },
+    "step": "signin",
+    "system": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "model_id": "MODEL_V2_FINAL"
+    }
+   },
+   {
+    "count": 8,
+    "ids": [
+     "SIM_FL_SITE_00",
+     "SIM_FL_SITE_01",
+     "SIM_FL_SITE_02",
+     "SIM_FL_SITE_03",
+     "SIM_FL_SITE_04",
+     "SIM_FL_SITE_05",
+     "SIM_FL_SITE_06",
+     "SIM_FL_SITE_07"
+    ],
+    "site00": {
+     "edge_node_id": "VIRTUAL_EDGE_NODE_00",
+     "local_example_count": 93
+    },
+    "status": 200,
+    "step": "clients-rest"
+   },
+   {
+    "after_clientIds": [
+     "SIM_FL_SITE_00",
+     "SIM_FL_SITE_01",
+     "SIM_FL_SITE_02",
+     "SIM_FL_SITE_03",
+     "SIM_FL_SITE_04",
+     "SIM_FL_SITE_05",
+     "SIM_FL_SITE_06",
+     "SIM_FL_SITE_07"
+    ],
+    "after_ownerCards": 1,
+    "after_ownerClient": "SIM_FL_SITE_00",
+    "after_peerCards": 7,
+    "after_streamError": false,
+    "before_ownerCards": 1,
+    "sockets_after_refresh": 2,
+    "step": "refresh-mid-run",
+    "update_ready_after": "10",
+    "update_ready_before": "8"
+   },
+   {
+    "authenticatedOwnerMentions": 1,
+    "clientIds": [
+     "SIM_FL_SITE_00",
+     "SIM_FL_SITE_01",
+     "SIM_FL_SITE_02",
+     "SIM_FL_SITE_03",
+     "SIM_FL_SITE_04",
+     "SIM_FL_SITE_05",
+     "SIM_FL_SITE_06",
+     "SIM_FL_SITE_07"
+    ],
+    "eightLogicalTitle": false,
+    "federatedParticipantsTitle": true,
+    "forbiddenWords": [],
+    "interactiveConsentControls": 0,
+    "myEdgeMentions": 1,
+    "myExamples": "93",
+    "myParticipation": "MY FEDERATED PARTICIPATION Client: SIM_FL_SITE_00 \u00b7 authenticated owner-bound participation \u00b7 data source: SYNTHETIC ENGINEERING FIXTURE (not the authenticated user's physiology) Local examples in buffer: 93 Completed local-training rounds: 3 / 3 Updates produced: 3 / 3 Raw training examples sent to the federation coordinator: 0 Training examples remain in this client's logical local buffer; the federation coordinator receives model updates and metadata rather than those local training examples. All clients execute on one demonstration machine.",
+    "myRounds": "3 / 3",
+    "myUpdates": "3 / 3",
+    "ownerCards": 1,
+    "ownerClient": "SIM_FL_SITE_00",
+    "ownerRole": "AUTHENTICATED_OWNER",
+    "ownerState": "SUBMITTED",
+    "ownerText": "\u2605 MY EDGE CLIENT SIM_FL_SITE_00SUBMITTED AUTHENTICATED OWNER-BOUND PARTICIPATION \u00b7 training data: SYNTHETIC ENGINEERING \u00b7 NOT YOUR PHYSIOLOGY local examples: 93 milestone: 100% (completed) update: 99b6dfc3\u2026e402",
+    "participantsNote": "1 authenticated owner-bound client \u00b7 7 synthetic peers \u00b7 ALL TRAINING DATA IN THIS DEMO IS SYNTHETIC ENGINEERING DATA and does not represent the authenticated user's physiology.",
+    "peerCards": 7,
+    "rawSent": "0",
+    "replayNote": false,
+    "runStatus": "COMPLETED \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 \u00b7 202 events",
+    "step": "live-completed",
+    "streamError": false,
+    "syntheticPeerMentions": 7,
+    "updateReady": "24",
+    "updatesSubmittedLabelForOwner": false
+   },
+   {
+    "candidate_state_digest_event": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "event_count": 202,
+    "round_state_digests": {
+     "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+     "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+     "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+    },
+    "rounds": {
+     "accepted": [
+      8,
+      8,
+      8
+     ],
+     "states": [
+      "COMPLETED",
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "status": 200
+    },
+    "run": {
+     "algorithm": "FEDAVG",
+     "candidate_ids": [
+      "CAPSTONE_FL_CANDIDATE_0001"
+     ],
+     "client_ids": [
+      "SIM_FL_SITE_00",
+      "SIM_FL_SITE_01",
+      "SIM_FL_SITE_02",
+      "SIM_FL_SITE_03",
+      "SIM_FL_SITE_04",
+      "SIM_FL_SITE_05",
+      "SIM_FL_SITE_06",
+      "SIM_FL_SITE_07"
+     ],
+     "planned_rounds": 3,
+     "run_type": "LIVE_RUN",
+     "secagg_mode": "SECAGG_SHADOW",
+     "status": "COMPLETED"
+    },
+    "sequence_contiguous": true,
+    "step": "live-authoritative",
+    "update_digests": {
+     "1": {
+      "SIM_FL_SITE_00": {
+       "examples_seen": 93,
+       "update_sha256": "65a450bcb58909e7fb5d90fdd9a4c1a862420466bba3a67268a8ef32f4bcc984"
+      },
+      "SIM_FL_SITE_01": {
+       "examples_seen": 91,
+       "update_sha256": "b85a168f3e46294d4af4ed917ba5eeda2bb7947475b30ee6e0cba1364246be17"
+      },
+      "SIM_FL_SITE_02": {
+       "examples_seen": 91,
+       "update_sha256": "3f647063e665f8ab2dcf3a6ad29ef735258aa098ea704f88fcbf38bd36afec8f"
+      },
+      "SIM_FL_SITE_03": {
+       "examples_seen": 89,
+       "update_sha256": "d8314e85938ae85d3f5774121ca8f7bfbafe6211a33788fb7fe101bcdec7ecc1"
+      },
+      "SIM_FL_SITE_04": {
+       "examples_seen": 90,
+       "update_sha256": "fb45a4b14bcef54445d1824ffb9356b732becbf669f573f45902855b371556ce"
+      },
+      "SIM_FL_SITE_05": {
+       "examples_seen": 93,
+       "update_sha256": "dfb7fb732ed4160e56318bacf11e31f0bdded7aea22eb3de48fcfdab9f4ff15a"
+      },
+      "SIM_FL_SITE_06": {
+       "examples_seen": 93,
+       "update_sha256": "1ea50b682620877f1addaa60a0f79203ad617eff88d40af31af87a26f68e101e"
+      },
+      "SIM_FL_SITE_07": {
+       "examples_seen": 83,
+       "update_sha256": "bfd0eff8cea69c436265e844dd477a1b5ba34bbc787a4ed7b45112e2e22535ec"
+      }
+     },
+     "2": {
+      "SIM_FL_SITE_00": {
+       "examples_seen": 93,
+       "update_sha256": "56f06ab063fea222a811408d689bb23600e7b443db091c42c7d6ce5caf665097"
+      },
+      "SIM_FL_SITE_01": {
+       "examples_seen": 91,
+       "update_sha256": "1a2d5d2c60cc549cb762e283345a75f5639d401cec3fd8f70a2787834ddf3f92"
+      },
+      "SIM_FL_SITE_02": {
+       "examples_seen": 91,
+       "update_sha256": "22148fb1bd16d1f239742c400721f2527b88da73040f884d75c5a70a1afab902"
+      },
+      "SIM_FL_SITE_03": {
+       "examples_seen": 89,
+       "update_sha256": "495eba4739b4d47a4917eb76b715cd0a9015ca8f47ea0d933b94ee8b056dc886"
+      },
+      "SIM_FL_SITE_04": {
+       "examples_seen": 90,
+       "update_sha256": "2c0e05ffeea50934213984e37c0ad22bf5c39173ad54c565a10097088fdd5db3"
+      },
+      "SIM_FL_SITE_05": {
+       "examples_seen": 93,
+       "update_sha256": "23d9e92416e6c1994f5153ac113bbf12c870c3316878c5eca3a639707eec5dd9"
+      },
+      "SIM_FL_SITE_06": {
+       "examples_seen": 93,
+       "update_sha256": "a29a823afbf8117059fecae77302f5f1f092de81522929d8455090bc2b2471fd"
+      },
+      "SIM_FL_SITE_07": {
+       "examples_seen": 83,
+       "update_sha256": "b4cb3bc0218fa3b26d35ec8c2d85392ebe62ea7fd44680096930dea7b4678c4a"
+      }
+     },
+     "3": {
+      "SIM_FL_SITE_00": {
+       "examples_seen": 93,
+       "update_sha256": "99b6dfc36ee8429f5d671a052ffe28590a3b6aef48b0f19e4cc866d2c979e402"
+      },
+      "SIM_FL_SITE_01": {
+       "examples_seen": 91,
+       "update_sha256": "dc5161e0211b31b8b3371808fa852d31be2f4f8ed5d262404e59cb0abb7b9b47"
+      },
+      "SIM_FL_SITE_02": {
+       "examples_seen": 91,
+       "update_sha256": "6d8169b7c32970b9801bee5f82d324a1979a27b62f0f8bd99689909acd278330"
+      },
+      "SIM_FL_SITE_03": {
+       "examples_seen": 89,
+       "update_sha256": "f715be51ccf23d5e6512af5f05d4eb0f891c7a970f8427705469c9bd5af14ab8"
+      },
+      "SIM_FL_SITE_04": {
+       "examples_seen": 90,
+       "update_sha256": "7813f237e8a987009c76934d5f05e3974ba287adbcc3b45353e02fb8e8d9f08c"
+      },
+      "SIM_FL_SITE_05": {
+       "examples_seen": 93,
+       "update_sha256": "ae3baf64d49d5bf84ba828e53f121df82b552d9736020401550ed7c5a76602da"
+      },
+      "SIM_FL_SITE_06": {
+       "examples_seen": 93,
+       "update_sha256": "d478af7a964d90c0acc1663c98f13becf800ee320717c1368db668670592742a"
+      },
+      "SIM_FL_SITE_07": {
+       "examples_seen": 83,
+       "update_sha256": "a2a671e9fafac9ec85e86e3ec0c691082a5a87848aae0d2283b63a0b993e1a0e"
+      }
+     }
+    },
+    "update_ready_events": 24
+   },
+   {
+    "myEdgeMentions": 1,
+    "ownerNote": "MY EDGE CLIENT: SIM_FL_SITE_00. Presentation-bound to the authenticated run owner; training data remains synthetic engineering data.",
+    "step": "rounds-page"
+   },
+   {
+    "candidates": [
+     {
+      "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+      "governance_status": "ACCEPTED_TO_SANDBOX",
+      "parent_model_id": "FL_INIT_V2",
+      "production_deployed": false,
+      "sandbox_status": "IN_SANDBOX",
+      "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+     }
+    ],
+    "released_default": "MODEL_V2_FINAL",
+    "status": 200,
+    "step": "models-after-live"
+   },
+   {
+    "authenticatedOwnerMentions": 0,
+    "clientIdsShown": 8,
+    "myEdgeMentions": 0,
+    "ownerBoundMentions": 0,
+    "step": "global-clients-view",
+    "syntheticPeerMentions": 0
+   },
+   {
+    "authoritative": {
+     "candidate_state_digest_event": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+     "event_count": 202,
+     "round_state_digests": {
+      "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+      "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+      "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+     },
+     "rounds": {
+      "accepted": [
+       8,
+       8,
+       8
+      ],
+      "states": [
+       "COMPLETED",
+       "COMPLETED",
+       "COMPLETED"
+      ],
+      "status": 200
+     },
+     "run": {
+      "algorithm": "FEDAVG",
+      "candidate_ids": [],
+      "client_ids": [
+       "SIM_FL_SITE_00",
+       "SIM_FL_SITE_01",
+       "SIM_FL_SITE_02",
+       "SIM_FL_SITE_03",
+       "SIM_FL_SITE_04",
+       "SIM_FL_SITE_05",
+       "SIM_FL_SITE_06",
+       "SIM_FL_SITE_07"
+      ],
+      "planned_rounds": 3,
+      "run_type": "REPLAY",
+      "secagg_mode": "SECAGG_SHADOW",
+      "status": "COMPLETED"
+     },
+     "sequence_contiguous": true,
+     "update_digests": {
+      "1": {
+       "SIM_FL_SITE_00": {
+        "examples_seen": 93,
+        "update_sha256": "65a450bcb58909e7fb5d90fdd9a4c1a862420466bba3a67268a8ef32f4bcc984"
+       },
+       "SIM_FL_SITE_01": {
+        "examples_seen": 91,
+        "update_sha256": "b85a168f3e46294d4af4ed917ba5eeda2bb7947475b30ee6e0cba1364246be17"
+       },
+       "SIM_FL_SITE_02": {
+        "examples_seen": 91,
+        "update_sha256": "3f647063e665f8ab2dcf3a6ad29ef735258aa098ea704f88fcbf38bd36afec8f"
+       },
+       "SIM_FL_SITE_03": {
+        "examples_seen": 89,
+        "update_sha256": "d8314e85938ae85d3f5774121ca8f7bfbafe6211a33788fb7fe101bcdec7ecc1"
+       },
+       "SIM_FL_SITE_04": {
+        "examples_seen": 90,
+        "update_sha256": "fb45a4b14bcef54445d1824ffb9356b732becbf669f573f45902855b371556ce"
+       },
+       "SIM_FL_SITE_05": {
+        "examples_seen": 93,
+        "update_sha256": "dfb7fb732ed4160e56318bacf11e31f0bdded7aea22eb3de48fcfdab9f4ff15a"
+       },
+       "SIM_FL_SITE_06": {
+        "examples_seen": 93,
+        "update_sha256": "1ea50b682620877f1addaa60a0f79203ad617eff88d40af31af87a26f68e101e"
+       },
+       "SIM_FL_SITE_07": {
+        "examples_seen": 83,
+        "update_sha256": "bfd0eff8cea69c436265e844dd477a1b5ba34bbc787a4ed7b45112e2e22535ec"
+       }
+      },
+      "2": {
+       "SIM_FL_SITE_00": {
+        "examples_seen": 93,
+        "update_sha256": "56f06ab063fea222a811408d689bb23600e7b443db091c42c7d6ce5caf665097"
+       },
+       "SIM_FL_SITE_01": {
+        "examples_seen": 91,
+        "update_sha256": "1a2d5d2c60cc549cb762e283345a75f5639d401cec3fd8f70a2787834ddf3f92"
+       },
+       "SIM_FL_SITE_02": {
+        "examples_seen": 91,
+        "update_sha256": "22148fb1bd16d1f239742c400721f2527b88da73040f884d75c5a70a1afab902"
+       },
+       "SIM_FL_SITE_03": {
+        "examples_seen": 89,
+        "update_sha256": "495eba4739b4d47a4917eb76b715cd0a9015ca8f47ea0d933b94ee8b056dc886"
+       },
+       "SIM_FL_SITE_04": {
+        "examples_seen": 90,
+        "update_sha256": "2c0e05ffeea50934213984e37c0ad22bf5c39173ad54c565a10097088fdd5db3"
+       },
+       "SIM_FL_SITE_05": {
+        "examples_seen": 93,
+        "update_sha256": "23d9e92416e6c1994f5153ac113bbf12c870c3316878c5eca3a639707eec5dd9"
+       },
+       "SIM_FL_SITE_06": {
+        "examples_seen": 93,
+        "update_sha256": "a29a823afbf8117059fecae77302f5f1f092de81522929d8455090bc2b2471fd"
+       },
+       "SIM_FL_SITE_07": {
+        "examples_seen": 83,
+        "update_sha256": "b4cb3bc0218fa3b26d35ec8c2d85392ebe62ea7fd44680096930dea7b4678c4a"
+       }
+      },
+      "3": {
+       "SIM_FL_SITE_00": {
+        "examples_seen": 93,
+        "update_sha256": "99b6dfc36ee8429f5d671a052ffe28590a3b6aef48b0f19e4cc866d2c979e402"
+       },
+       "SIM_FL_SITE_01": {
+        "examples_seen": 91,
+        "update_sha256": "dc5161e0211b31b8b3371808fa852d31be2f4f8ed5d262404e59cb0abb7b9b47"
+       },
+       "SIM_FL_SITE_02": {
+        "examples_seen": 91,
+        "update_sha256": "6d8169b7c32970b9801bee5f82d324a1979a27b62f0f8bd99689909acd278330"
+       },
+       "SIM_FL_SITE_03": {
+        "examples_seen": 89,
+        "update_sha256": "f715be51ccf23d5e6512af5f05d4eb0f891c7a970f8427705469c9bd5af14ab8"
+       },
+       "SIM_FL_SITE_04": {
+        "examples_seen": 90,
+        "update_sha256": "7813f237e8a987009c76934d5f05e3974ba287adbcc3b45353e02fb8e8d9f08c"
+       },
+       "SIM_FL_SITE_05": {
+        "examples_seen": 93,
+        "update_sha256": "ae3baf64d49d5bf84ba828e53f121df82b552d9736020401550ed7c5a76602da"
+       },
+       "SIM_FL_SITE_06": {
+        "examples_seen": 93,
+        "update_sha256": "d478af7a964d90c0acc1663c98f13becf800ee320717c1368db668670592742a"
+       },
+       "SIM_FL_SITE_07": {
+        "examples_seen": 83,
+        "update_sha256": "a2a671e9fafac9ec85e86e3ec0c691082a5a87848aae0d2283b63a0b993e1a0e"
+       }
+      }
+     },
+     "update_ready_events": 24
+    },
+    "facts": {
+     "authenticatedOwnerMentions": 0,
+     "clientIds": [
+      "SIM_FL_SITE_00",
+      "SIM_FL_SITE_01",
+      "SIM_FL_SITE_02",
+      "SIM_FL_SITE_03",
+      "SIM_FL_SITE_04",
+      "SIM_FL_SITE_05",
+      "SIM_FL_SITE_06",
+      "SIM_FL_SITE_07"
+     ],
+     "eightLogicalTitle": true,
+     "federatedParticipantsTitle": false,
+     "forbiddenWords": [],
+     "interactiveConsentControls": 0,
+     "myEdgeMentions": 0,
+     "myExamples": "",
+     "myParticipation": "",
+     "myRounds": "",
+     "myUpdates": "",
+     "ownerCards": 0,
+     "ownerClient": null,
+     "ownerRole": null,
+     "ownerState": null,
+     "ownerText": "",
+     "participantsNote": "",
+     "peerCards": 0,
+     "rawSent": "",
+     "replayNote": true,
+     "runStatus": "COMPLETED \u00b7 REPLAY \u00b7 FEDAVG \u00b7 round 3/3 \u00b7 202 events",
+     "streamError": false,
+     "syntheticPeerMentions": 0,
+     "updateReady": "24",
+     "updatesSubmittedLabelForOwner": false
+    },
+    "runId_differs_from_live": true,
+    "step": "replay"
+   },
+   {
+    "candidates": [
+     {
+      "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+      "governance_status": "ACCEPTED_TO_SANDBOX",
+      "parent_model_id": "FL_INIT_V2",
+      "production_deployed": false,
+      "sandbox_status": "IN_SANDBOX",
+      "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+     }
+    ],
+    "released_default": "MODEL_V2_FINAL",
+    "status": 200,
+    "step": "models-after-replay"
+   }
+  ],
+  "websockets": [
+   {
+    "cookieSessionSent": true,
+    "framesReceived": 64,
+    "handshakeStatus": 101,
+    "pathname": "/product/v1/federation/runs/FEDRUN-CE118028FCE1/live",
+    "urlHasToken": false
+   },
+   {
+    "cookieSessionSent": true,
+    "framesReceived": 202,
+    "handshakeStatus": 101,
+    "pathname": "/product/v1/federation/runs/FEDRUN-CE118028FCE1/live",
+    "urlHasToken": false
+   },
+   {
+    "cookieSessionSent": true,
+    "framesReceived": 72,
+    "handshakeStatus": 101,
+    "pathname": "/product/v1/federation/runs/FEDRUN-CE118028FCE1/live",
+    "urlHasToken": false
+   },
+   {
+    "cookieSessionSent": true,
+    "framesReceived": 202,
+    "handshakeStatus": 101,
+    "pathname": "/product/v1/federation/runs/FEDRUN-C2B09676E1C2/live",
+    "urlHasToken": false
+   }
+  ],
+  "who": "A"
+ },
+ "A_return": {
+  "console_errors": [],
+  "elapsed_s": 17,
+  "liveRunId": "FEDRUN-CE118028FCE1",
+  "mode": "a-return",
+  "network": {
+   "clerkOwnedHosts": [
+    "clerk-telemetry.com",
+    "delicate-civet-2247.clerk.accounts.dev",
+    "img.clerk.com"
+   ],
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "clerk-telemetry.com",
+    "delicate-civet-2247.clerk.accounts.dev",
+    "img.clerk.com"
+   ]
+  },
+  "steps": [
+   {
+    "clerkGlobal": false,
+    "clientTrustVerificationUsed": true,
+    "me": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "status": 200,
+     "user_id_is_clerk_shaped": true,
+     "user_id_is_demo": false
+    },
+    "step": "signin",
+    "system": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "model_id": "MODEL_V2_FINAL"
+    }
+   },
+   {
+    "authenticatedOwnerMentions": 1,
+    "clientIds": [
+     "SIM_FL_SITE_00",
+     "SIM_FL_SITE_01",
+     "SIM_FL_SITE_02",
+     "SIM_FL_SITE_03",
+     "SIM_FL_SITE_04",
+     "SIM_FL_SITE_05",
+     "SIM_FL_SITE_06",
+     "SIM_FL_SITE_07"
+    ],
+    "eightLogicalTitle": false,
+    "federatedParticipantsTitle": true,
+    "forbiddenWords": [],
+    "interactiveConsentControls": 0,
+    "myEdgeMentions": 1,
+    "myExamples": "93",
+    "myParticipation": "MY FEDERATED PARTICIPATION Client: SIM_FL_SITE_00 \u00b7 authenticated owner-bound participation \u00b7 data source: SYNTHETIC ENGINEERING FIXTURE (not the authenticated user's physiology) Local examples in buffer: 93 Completed local-training rounds: 3 / 3 Updates produced: 3 / 3 Raw training examples sent to the federation coordinator: 0 Training examples remain in this client's logical local buffer; the federation coordinator receives model updates and metadata rather than those local training examples. All clients execute on one demonstration machine.",
+    "myRounds": "3 / 3",
+    "myUpdates": "3 / 3",
+    "ownerCards": 1,
+    "ownerClient": "SIM_FL_SITE_00",
+    "ownerRole": "AUTHENTICATED_OWNER",
+    "ownerState": "SUBMITTED",
+    "ownerText": "\u2605 MY EDGE CLIENT SIM_FL_SITE_00SUBMITTED AUTHENTICATED OWNER-BOUND PARTICIPATION \u00b7 training data: SYNTHETIC ENGINEERING \u00b7 NOT YOUR PHYSIOLOGY local examples: 93 milestone: 100% (completed) update: 99b6dfc3\u2026e402",
+    "participantsNote": "1 authenticated owner-bound client \u00b7 7 synthetic peers \u00b7 ALL TRAINING DATA IN THIS DEMO IS SYNTHETIC ENGINEERING DATA and does not represent the authenticated user's physiology.",
+    "peerCards": 7,
+    "rawSent": "0",
+    "replayNote": false,
+    "runStatus": "COMPLETED \u00b7 LIVE_RUN \u00b7 FEDAVG \u00b7 round 3/3 \u00b7 202 events",
+    "step": "live-reconstructed",
+    "streamError": false,
+    "syntheticPeerMentions": 7,
+    "updateReady": "24",
+    "updatesSubmittedLabelForOwner": false
+   },
+   {
+    "candidate_state_digest_event": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+    "event_count": 202,
+    "round_state_digests": {
+     "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+     "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+     "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+    },
+    "rounds": {
+     "accepted": [
+      8,
+      8,
+      8
+     ],
+     "states": [
+      "COMPLETED",
+      "COMPLETED",
+      "COMPLETED"
+     ],
+     "status": 200
+    },
+    "run": {
+     "algorithm": "FEDAVG",
+     "candidate_ids": [
+      "CAPSTONE_FL_CANDIDATE_0001"
+     ],
+     "client_ids": [
+      "SIM_FL_SITE_00",
+      "SIM_FL_SITE_01",
+      "SIM_FL_SITE_02",
+      "SIM_FL_SITE_03",
+      "SIM_FL_SITE_04",
+      "SIM_FL_SITE_05",
+      "SIM_FL_SITE_06",
+      "SIM_FL_SITE_07"
+     ],
+     "planned_rounds": 3,
+     "run_type": "LIVE_RUN",
+     "secagg_mode": "SECAGG_SHADOW",
+     "status": "COMPLETED"
+    },
+    "sequence_contiguous": true,
+    "step": "live-authoritative",
+    "update_digests": {
+     "1": {
+      "SIM_FL_SITE_00": {
+       "examples_seen": 93,
+       "update_sha256": "65a450bcb58909e7fb5d90fdd9a4c1a862420466bba3a67268a8ef32f4bcc984"
+      },
+      "SIM_FL_SITE_01": {
+       "examples_seen": 91,
+       "update_sha256": "b85a168f3e46294d4af4ed917ba5eeda2bb7947475b30ee6e0cba1364246be17"
+      },
+      "SIM_FL_SITE_02": {
+       "examples_seen": 91,
+       "update_sha256": "3f647063e665f8ab2dcf3a6ad29ef735258aa098ea704f88fcbf38bd36afec8f"
+      },
+      "SIM_FL_SITE_03": {
+       "examples_seen": 89,
+       "update_sha256": "d8314e85938ae85d3f5774121ca8f7bfbafe6211a33788fb7fe101bcdec7ecc1"
+      },
+      "SIM_FL_SITE_04": {
+       "examples_seen": 90,
+       "update_sha256": "fb45a4b14bcef54445d1824ffb9356b732becbf669f573f45902855b371556ce"
+      },
+      "SIM_FL_SITE_05": {
+       "examples_seen": 93,
+       "update_sha256": "dfb7fb732ed4160e56318bacf11e31f0bdded7aea22eb3de48fcfdab9f4ff15a"
+      },
+      "SIM_FL_SITE_06": {
+       "examples_seen": 93,
+       "update_sha256": "1ea50b682620877f1addaa60a0f79203ad617eff88d40af31af87a26f68e101e"
+      },
+      "SIM_FL_SITE_07": {
+       "examples_seen": 83,
+       "update_sha256": "bfd0eff8cea69c436265e844dd477a1b5ba34bbc787a4ed7b45112e2e22535ec"
+      }
+     },
+     "2": {
+      "SIM_FL_SITE_00": {
+       "examples_seen": 93,
+       "update_sha256": "56f06ab063fea222a811408d689bb23600e7b443db091c42c7d6ce5caf665097"
+      },
+      "SIM_FL_SITE_01": {
+       "examples_seen": 91,
+       "update_sha256": "1a2d5d2c60cc549cb762e283345a75f5639d401cec3fd8f70a2787834ddf3f92"
+      },
+      "SIM_FL_SITE_02": {
+       "examples_seen": 91,
+       "update_sha256": "22148fb1bd16d1f239742c400721f2527b88da73040f884d75c5a70a1afab902"
+      },
+      "SIM_FL_SITE_03": {
+       "examples_seen": 89,
+       "update_sha256": "495eba4739b4d47a4917eb76b715cd0a9015ca8f47ea0d933b94ee8b056dc886"
+      },
+      "SIM_FL_SITE_04": {
+       "examples_seen": 90,
+       "update_sha256": "2c0e05ffeea50934213984e37c0ad22bf5c39173ad54c565a10097088fdd5db3"
+      },
+      "SIM_FL_SITE_05": {
+       "examples_seen": 93,
+       "update_sha256": "23d9e92416e6c1994f5153ac113bbf12c870c3316878c5eca3a639707eec5dd9"
+      },
+      "SIM_FL_SITE_06": {
+       "examples_seen": 93,
+       "update_sha256": "a29a823afbf8117059fecae77302f5f1f092de81522929d8455090bc2b2471fd"
+      },
+      "SIM_FL_SITE_07": {
+       "examples_seen": 83,
+       "update_sha256": "b4cb3bc0218fa3b26d35ec8c2d85392ebe62ea7fd44680096930dea7b4678c4a"
+      }
+     },
+     "3": {
+      "SIM_FL_SITE_00": {
+       "examples_seen": 93,
+       "update_sha256": "99b6dfc36ee8429f5d671a052ffe28590a3b6aef48b0f19e4cc866d2c979e402"
+      },
+      "SIM_FL_SITE_01": {
+       "examples_seen": 91,
+       "update_sha256": "dc5161e0211b31b8b3371808fa852d31be2f4f8ed5d262404e59cb0abb7b9b47"
+      },
+      "SIM_FL_SITE_02": {
+       "examples_seen": 91,
+       "update_sha256": "6d8169b7c32970b9801bee5f82d324a1979a27b62f0f8bd99689909acd278330"
+      },
+      "SIM_FL_SITE_03": {
+       "examples_seen": 89,
+       "update_sha256": "f715be51ccf23d5e6512af5f05d4eb0f891c7a970f8427705469c9bd5af14ab8"
+      },
+      "SIM_FL_SITE_04": {
+       "examples_seen": 90,
+       "update_sha256": "7813f237e8a987009c76934d5f05e3974ba287adbcc3b45353e02fb8e8d9f08c"
+      },
+      "SIM_FL_SITE_05": {
+       "examples_seen": 93,
+       "update_sha256": "ae3baf64d49d5bf84ba828e53f121df82b552d9736020401550ed7c5a76602da"
+      },
+      "SIM_FL_SITE_06": {
+       "examples_seen": 93,
+       "update_sha256": "d478af7a964d90c0acc1663c98f13becf800ee320717c1368db668670592742a"
+      },
+      "SIM_FL_SITE_07": {
+       "examples_seen": 83,
+       "update_sha256": "a2a671e9fafac9ec85e86e3ec0c691082a5a87848aae0d2283b63a0b993e1a0e"
+      }
+     }
+    },
+    "update_ready_events": 24
+   },
+   {
+    "ownerNote": "MY EDGE CLIENT: SIM_FL_SITE_00. Presentation-bound to the authenticated run owner; training data remains synthetic engineering data.",
+    "step": "rounds-page"
+   },
+   {
+    "candidates": [
+     {
+      "candidate_id": "CAPSTONE_FL_CANDIDATE_0001",
+      "governance_status": "ACCEPTED_TO_SANDBOX",
+      "parent_model_id": "FL_INIT_V2",
+      "production_deployed": false,
+      "sandbox_status": "IN_SANDBOX",
+      "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+     }
+    ],
+    "released_default": "MODEL_V2_FINAL",
+    "status": 200,
+    "step": "models-after-restart"
+   }
+  ],
+  "websockets": [
+   {
+    "cookieSessionSent": true,
+    "framesReceived": 202,
+    "handshakeStatus": 101,
+    "pathname": "/product/v1/federation/runs/FEDRUN-CE118028FCE1/live",
+    "urlHasToken": false
+   },
+   {
+    "cookieSessionSent": true,
+    "framesReceived": 202,
+    "handshakeStatus": 101,
+    "pathname": "/product/v1/federation/runs/FEDRUN-CE118028FCE1/live",
+    "urlHasToken": false
+   }
+  ],
+  "who": "A"
+ },
+ "B": {
+  "console_errors": [
+   "TypeError: this.devices.find is not a function\n    at get selectedDevice (http://127.0.0.1:4173/_app/immutable/chunks/7YYvmvCc.js:1:31359)\n    at http://127.0.0.1:4173/_app/immutable/nodes/13.Bb2uXymY"
+  ],
+  "elapsed_s": 41,
+  "mode": "b-isolation",
+  "network": {
+   "clerkOwnedHosts": [
+    "clerk-telemetry.com",
+    "delicate-civet-2247.clerk.accounts.dev",
+    "img.clerk.com"
+   ],
+   "hosts": [
+    "",
+    "127.0.0.1:4173",
+    "clerk-telemetry.com",
+    "delicate-civet-2247.clerk.accounts.dev",
+    "img.clerk.com"
+   ]
+  },
+  "steps": [
+   {
+    "clerkGlobal": false,
+    "clientTrustVerificationUsed": true,
+    "me": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "status": 200,
+     "user_id_is_clerk_shaped": true,
+     "user_id_is_demo": false
+    },
+    "step": "signin",
+    "system": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "model_id": "MODEL_V2_FINAL"
+    }
+   },
+   {
+    "authenticatedOwnerMentions": 0,
+    "clientIdsShown": 8,
+    "myEdgeMentions": 0,
+    "step": "global-clients-view"
+   },
+   {
+    "results": [
+     {
+      "app_bearer_kept": true,
+      "label": "read A run",
+      "method": "GET",
+      "rewritten": true,
+      "status": 403
+     },
+     {
+      "app_bearer_kept": true,
+      "label": "read A rounds",
+      "method": "GET",
+      "rewritten": true,
+      "status": 403
+     },
+     {
+      "app_bearer_kept": true,
+      "label": "start A run (control)",
+      "method": "POST",
+      "rewritten": true,
+      "status": 403
+     },
+     {
+      "app_bearer_kept": true,
+      "label": "CONTROL: nonexistent run (must be 404: proves the rewrite reaches the target)",
+      "method": "GET",
+      "rewritten": true,
+      "status": 404
+     },
+     {
+      "app_bearer_kept": true,
+      "label": "CONTROL: global research view (must be 200)",
+      "method": "GET",
+      "rewritten": true,
+      "status": 200
+     }
+    ],
+    "step": "b-rest-probes"
+   },
+   {
+    "federation": {
+     "closeCode": 4403,
+     "frames": 0,
+     "opened": true,
+     "path": "/product/v1/federation/runs/FEDRUN-CE118028FCE1/live"
+    },
+    "step": "b-websocket"
+   },
+   {
+    "myEdgeMentions": 0,
+    "myParticipation": "",
+    "ownerCards": 0,
+    "step": "b-views-a-live-page"
+   },
+   {
+    "contains_a_run": false,
+    "count": 0,
+    "status": 200,
+    "step": "b-own-runs"
+   }
+  ],
+  "websockets": [
+   {
+    "cookieSessionSent": true,
+    "framesReceived": 0,
+    "handshakeStatus": 101,
+    "pathname": "/product/v1/federation/runs/FEDRUN-CE118028FCE1/live",
+    "urlHasToken": false
+   }
+  ],
+  "who": "B"
+ },
+ "label": "CLEAN_CLONE"
+}

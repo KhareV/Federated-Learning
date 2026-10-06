@@ -1,0 +1,252 @@
+{
+ "all_caught": true,
+ "all_restored": true,
+ "controls": [
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "replay:['replay_no_owner_card']",
+   "mutation": "REPLAY_SHOWS_OWNER_CARD",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "replay:['replay_no_participation_summary']",
+   "mutation": "REPLAY_SHOWS_PARTICIPATION_SUMMARY",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "global:['global_view_unbound']",
+   "mutation": "GLOBAL_CLIENTS_VIEW_SHOWS_OWNER",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['one_my_edge_label', 'one_owner_card']",
+   "mutation": "SECOND_OWNER_CARD",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['owner_is_site00']",
+   "mutation": "OWNER_ON_SITE_01",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['client_ids_exact_8', 'no_ninth_client']",
+   "mutation": "NINTH_CLIENT_CARD",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['seven_peer_cards']",
+   "mutation": "PEER_COUNT_NOT_7",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['examples_93_ui', 'examples_event_derived']",
+   "mutation": "OWNER_EXAMPLES_NOT_93",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['examples_event_derived', 'site00_93_examples_each_update']",
+   "mutation": "OWNER_EXAMPLES_NOT_EVENT_DERIVED",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['updates_24']",
+   "mutation": "UPDATE_COUNT_NOT_24",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['every_round_has_all_8', 'rounds_3', 'site00_93_examples_each_update', 'updates_8_8_8']",
+   "mutation": "ROUNDS_NOT_3",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['every_round_has_all_8', 'updates_8_8_8']",
+   "mutation": "UPDATES_PER_ROUND_NOT_8",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['updates_3_ui']",
+   "mutation": "OWNER_UPDATES_UI_NOT_3",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['raw_examples_sent_zero']",
+   "mutation": "RAW_EXAMPLES_SENT_NONZERO",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['no_contribution_or_personalization_wording']",
+   "mutation": "CONTRIBUTION_WORDING_PRESENT",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['no_contribution_or_personalization_wording']",
+   "mutation": "PERSONALIZED_WORDING_PRESENT",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['no_consent_ui']",
+   "mutation": "CONSENT_CONTROL_PRESENT",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "live:['owner_card_synthetic_wording']",
+   "mutation": "SYNTHETIC_WORDING_MISSING",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "candidate:['candidate_digest_canonical']",
+   "mutation": "CANDIDATE_DIGEST_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "candidate:['candidate_not_deployed']",
+   "mutation": "CANDIDATE_PRODUCTION_DEPLOYED",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "refresh:['refresh_keeps_one_owner']",
+   "mutation": "REFRESH_LOSES_OWNER_CARD",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "restart:['restart_one_owner']",
+   "mutation": "RESTART_LOSES_OWNER_CARD",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "restart:['restart_candidate_canonical', 'restart_candidate_unchanged']",
+   "mutation": "RESTART_CHANGES_CANDIDATE",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "isolation:['b_rest_a_run_403']",
+   "mutation": "USER_B_READS_A_RUN",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "isolation:['b_ws_4403']",
+   "mutation": "USER_B_WS_ACCEPTED",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "isolation:['b_no_owner_card_on_a_run']",
+   "mutation": "USER_B_SEES_OWNER_ON_A_RUN",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "websocket:['ws_no_token_in_url']",
+   "mutation": "TOKEN_IN_WS_URL",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "identity:['auth_provider_clerk']",
+   "mutation": "DEMO_FALLBACK_IN_CLERK_MODE",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "scan_tree:secret_prefix",
+   "mutation": "SECRET_IN_EVIDENCE",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "evaluator:demo_regression:True->False",
+   "mutation": "CLERK_TRAFFIC_IN_DEMO_REGRESSION",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "evaluator:demo_digest:True->False",
+   "mutation": "DEMO_SEMANTIC_DIGEST_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "hash_drift:reused_unchanged:product/federation/service.py",
+   "mutation": "PRODUCT_BACKEND_CODE_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "verify_capstone_ui_v1_4:CAPSTONE_UI_V1_4_TAMPER:frontend/src/lib/components/product/federation/ClientGrid.svel",
+   "mutation": "FRONTEND_FEATURE_CODE_CHANGED",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "evaluator:clean_clone_target_matches:True->False",
+   "mutation": "CLEAN_CLONE_TARGET_SHA_MISMATCH",
+   "restored": true
+  },
+  {
+   "applied_to": "copy of sanitized observations / evidence / source tree",
+   "caught": true,
+   "failing_check": "verify_capstone_ui_v1_4:CAPSTONE_UI_V1_4_IDENTITY_DRIFT",
+   "mutation": "UI_V1_4_LOCK_CHANGED",
+   "restored": true
+  }
+ ],
+ "count": 35
+}

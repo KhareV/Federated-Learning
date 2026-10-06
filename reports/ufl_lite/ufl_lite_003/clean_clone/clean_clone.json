@@ -1,0 +1,101 @@
+{
+ "clone_source": "remote git repository (git clone at the exact SHA)",
+ "commands": [
+  {
+   "id": "clone",
+   "returncode": 0,
+   "seconds": 32.7
+  },
+  {
+   "id": "checkout",
+   "returncode": 0,
+   "seconds": 0.6
+  },
+  {
+   "id": "venv",
+   "returncode": 0,
+   "seconds": 1.0
+  },
+  {
+   "id": "pip_dev",
+   "returncode": 0,
+   "seconds": 97.2
+  },
+  {
+   "id": "pip_auth",
+   "returncode": 0,
+   "seconds": 2.8
+  },
+  {
+   "id": "pip_check",
+   "returncode": 0,
+   "seconds": 0.1
+  },
+  {
+   "id": "npm_clerk",
+   "returncode": 0,
+   "seconds": 2.9
+  },
+  {
+   "id": "npm_app",
+   "returncode": 0,
+   "seconds": 4.6
+  },
+  {
+   "id": "verifier_clerk",
+   "returncode": 0,
+   "seconds": 0.3
+  },
+  {
+   "id": "verifier_ui14",
+   "returncode": 0,
+   "seconds": 0.0
+  },
+  {
+   "id": "targeted",
+   "returncode": 0,
+   "seconds": 50.1
+  },
+  {
+   "id": "e2e",
+   "returncode": 0,
+   "seconds": 143.8
+  }
+ ],
+ "credentials_supplied_as": "external file paths outside the repository",
+ "developer_env_or_db_or_cookie_copied": false,
+ "manual_steps": "none",
+ "network": "installation and Clerk authentication require Internet access",
+ "proof_a_clean_clone": {
+  "checkout_matches_target": true,
+  "checkout_sha": "cf18cba4d7891c514553a1702e227f28dbe26f7c",
+  "fresh_venv_created_by_run": true,
+  "frozen_verifiers": {
+   "verify_capstone_ui_v1_4": true,
+   "verify_clerk_connected": true
+  },
+  "harness_matches_clone": true,
+  "npm_installs": [
+   "frontend/clerk-sdk",
+   "frontend"
+  ],
+  "pre_install_audit_ok": true,
+  "status": "PASS",
+  "target_reachable_from_remote_main": true,
+  "targeted_tests_returncode": 0,
+  "tracked_files": 4162,
+  "tree_clean_after_checkout": true
+ },
+ "proof_b_connected_in_clone": {
+  "analysis_all_pass": true,
+  "e2e_returncode": 0,
+  "fresh_browser_profile": true,
+  "real_clerk_session": true,
+  "status": "PASS"
+ },
+ "release_target_sha": "cf18cba4d7891c514553a1702e227f28dbe26f7c",
+ "secret_in_clone_tree": false,
+ "status": "PASS",
+ "target_sha": "cf18cba4d7891c514553a1702e227f28dbe26f7c",
+ "tracked_modified_after_execution": []
+}
