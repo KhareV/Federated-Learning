@@ -36,6 +36,7 @@ from scripts.run_capstone_clerk_connected_e2e import (
 
 ROOT = lib.ROOT
 BROWSER = ROOT / "scripts/final_eval_repair_002_browser.mjs"
+ufl.DRIVER = ROOT / "scripts/final_eval_repair_002_owner_driver.mjs"      # hardened copy of the owner-journey driver (clients REST capture retry)
 PRODUCT_PAGES = ("/sign-in", "/app", "/app/device", "/app/monitoring", "/app/history", "/app/federation", "/app/federation/clients", "/app/federation/privacy", "/app/models", "/app/research/ml", "/app/research/fl", "/app/system", "/app/about")
 
 

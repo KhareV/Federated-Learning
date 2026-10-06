@@ -1,0 +1,9 @@
+{
+ "attempt": 2,
+ "status": "FAIL",
+ "target_sha": "b822044ad323d11208e82fd71910fbfc971de9f4",
+ "failure": "HARNESS DEFECT (observation-capture race): in the reused owner-journey driver the browser did not record the GET /product/v1/federation/clients response body in this run, so the analyzer check live.examples_93_rest could not be evaluated (step 'clients-rest' empty). The UI and event facts of the same run are correct (1 owner card, 7 peers, 93 examples, 3/3 rounds, 24 updates, canonical digest).",
+ "classification": "verification-harness defect; repaired additively in the FER-002 namespace (hardened owner driver copy retries until the response body is captured); evidence preserved, not edited",
+ "criteria_failed_by_this_attempt": ["owner_binding_connected_regression (examples_93_rest not captured)"],
+ "everything_else_in_this_attempt": "attempt 2 product audit (incl. 24px touch targets), landing audit, route crawl, truth matrix: PASS; secrets clean; no product change was made after attempt 1"
+}

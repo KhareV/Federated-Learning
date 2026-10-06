@@ -11,7 +11,7 @@ ROOT = lib.ROOT
 LOCK = ROOT / "artifacts/final_eval_repair/FINAL_EVAL_REPAIR_002_PROTOCOL_V1.lock.json"
 BOUND = (
     "configs/final_eval_repair/fer_002_protocol_v1.json", "configs/final_eval_repair/fer_002_authorised_surface_v1.json", "configs/final_eval_repair/presentation_provenance_v1.json", "configs/final_eval_repair/evaluator_truth_v1.json",
-    "scripts/final_eval_repair_002_lib.py", "scripts/final_eval_repair_002_provenance.py", "scripts/final_eval_repair_002_browser_analysis.py", "scripts/final_eval_repair_002_browser.mjs", "scripts/final_eval_repair_002_e2e.py", "scripts/final_eval_repair_002_clean_clone.py",
+    "scripts/final_eval_repair_002_lib.py", "scripts/final_eval_repair_002_provenance.py", "scripts/final_eval_repair_002_browser_analysis.py", "scripts/final_eval_repair_002_browser.mjs", "scripts/final_eval_repair_002_owner_driver.mjs", "scripts/final_eval_repair_002_e2e.py", "scripts/final_eval_repair_002_clean_clone.py",
     "scripts/final_eval_repair_002_build_evidence.py", "scripts/final_eval_repair_002_mutation_controls.py", "scripts/final_eval_repair_002_evaluate_gate.py", "scripts/final_eval_repair_002_record_target.py", "scripts/final_eval_repair_002_build_freeze.py", "scripts/final_eval_repair_002_protected_audit.py",
     "scripts/final_eval_repair_002_entry_evidence.py", "scripts/final_eval_repair_002_amend.py", "tests/test_final_eval_repair_002_presentation.py", "frontend/src/lib/product/__tests__/landing-presentation.test.ts",
     "artifacts/capstone/CAPSTONE_UI_V1_6.lock.json", "scripts/freeze_capstone_ui_v1_6.py", "scripts/verify_capstone_ui_v1_6.py",
