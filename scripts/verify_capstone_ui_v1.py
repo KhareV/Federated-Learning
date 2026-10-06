@@ -16,7 +16,21 @@ ROOT = Path(__file__).resolve().parents[1]
 LOCK = "artifacts/capstone/CAPSTONE_UI_V1.lock.json"
 
 
+def _v13_bound() -> dict[str, str] | None:
+    """CLERK-LIVE-001 successor: when CAPSTONE_UI_V1_3 exists and chains to V1_2 it governs the current frontend bytes."""
+    path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json"
+    if not path.exists():
+        return None
+    lock = json.loads(path.read_text(encoding="utf-8"))
+    if lock.get("predecessor_id") != "CAPSTONE_UI_V1_2" or lock.get("predecessor_sha256") != hash_file(ROOT / "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json"):
+        raise RuntimeError("CAPSTONE_UI_V1_3_SUCCESSOR_CHAIN_BROKEN")
+    return dict(lock["bound_artifacts"])
+
+
 def _successor_bound() -> dict[str, str]:
+    v13 = _v13_bound()
+    if v13 is not None:
+        return v13
     cap009 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json"
     if cap009.exists():
         successor = json.loads(cap009.read_text(encoding="utf-8"))

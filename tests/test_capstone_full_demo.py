@@ -23,7 +23,17 @@ def _git(*args: str) -> str:
 def test_product_api_frontend_and_backend_are_byte_identical_to_entry() -> None:
     trees = ["api", "product", "capstone_persistence", "frontend", "federated", "privacy", "simulation", "src", "checkpoints", "contracts", "reports/model_v2",
              "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json", "artifacts/SOFTWARE_SYSTEM_V2.lock.json", "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json", "artifacts/capstone/CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1.json"]
-    assert _git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", *trees).split() == []
+    drift = _git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", *trees).split()
+    # CLERK-LIVE-001 successor awareness (CAP-010 amendment 2): frontend drift is legal ONLY if it is completely accounted for by the
+    # registered, verifying CAPSTONE_UI_V1_3 lock; any other drift (and any unaccounted frontend change) still fails.
+    successor = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json"
+    if successor.exists():
+        from scripts.verify_capstone_ui_v1_3 import verify as verify_ui13
+
+        assert verify_ui13()["status"] == "PASS"
+        accounted = set(json.loads(successor.read_text())["changed_from_predecessor"])
+        drift = [p for p in drift if not (p.startswith("frontend/") and p in accounted)]
+    assert drift == []
 
 
 def test_no_new_python_or_npm_dependency() -> None:

@@ -46,6 +46,48 @@ export interface FrontendAuthOptions {
 	publishableKey?: string | null;
 }
 
+/**
+ * Clerk Frontend API domain derived from the publishable key, as in the official ClerkJS quickstart
+ * (https://clerk.com/docs/js-frontend/getting-started/quickstart): pk_test_<base64(domain + '$')>.
+ * Returns null for anything that does not decode to a plain hostname.
+ */
+export function clerkFrontendApiDomain(publishableKey: string): string | null {
+	const part = publishableKey.split('_')[2];
+	if (!part) return null;
+	try {
+		const decoded = atob(part);
+		const domain = decoded.endsWith('$') ? decoded.slice(0, -1) : '';
+		return /^[A-Za-z0-9.-]+$/.test(domain) && domain.includes('.') ? domain : null;
+	} catch {
+		return null;
+	}
+}
+
+type ClerkUiWindow = Window & { __internal_ClerkUICtor?: unknown };
+
+/**
+ * ClerkJS 6.x ships WITHOUT its prebuilt UI components; the official quickstart loads the separate `@clerk/ui`
+ * browser bundle from the instance's own Frontend API domain and hands its constructor to `clerk.load`. Without it
+ * `mountSignIn` throws "Clerk was not loaded with Ui components". Only ever invoked in CLERK mode.
+ */
+export async function loadClerkUiBundle(publishableKey: string): Promise<unknown> {
+	const win = window as ClerkUiWindow;
+	if (win.__internal_ClerkUICtor) return win.__internal_ClerkUICtor;
+	const domain = clerkFrontendApiDomain(publishableKey);
+	if (!domain) throw new Error('Clerk publishable key does not encode a Frontend API domain');
+	await new Promise<void>((resolve, reject) => {
+		const script = document.createElement('script');
+		script.src = `https://${domain}/npm/@clerk/ui@1/dist/ui.browser.js`;
+		script.async = true;
+		script.crossOrigin = 'anonymous';
+		script.onload = () => resolve();
+		script.onerror = () => reject(new Error('Failed to load the Clerk UI bundle'));
+		document.head.appendChild(script);
+	});
+	if (!win.__internal_ClerkUICtor) throw new Error('Clerk UI bundle did not register its constructor');
+	return win.__internal_ClerkUICtor;
+}
+
 /** Lazy official-ClerkJS loader: only ever invoked in CLERK mode. */
 export const defaultClerkLoader: ClerkLoader = async (publishableKey) => {
 	const module = (await import('@clerk/clerk-js')) as unknown as {
@@ -54,8 +96,9 @@ export const defaultClerkLoader: ClerkLoader = async (publishableKey) => {
 	};
 	const ClerkCtor = module.Clerk ?? module.default;
 	if (!ClerkCtor) throw new Error('ClerkJS export not found');
+	const ClerkUI = await loadClerkUiBundle(publishableKey);
 	const clerk = new ClerkCtor(publishableKey);
-	await clerk.load();
+	await clerk.load({ ui: { ClerkUI } });
 	return clerk;
 };
 

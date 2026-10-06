@@ -23,7 +23,21 @@ def frontend_files() -> list[str]:
     return sorted(set(p for p in out if (ROOT / p).is_file()))
 
 
+def _v13_bound() -> dict[str, str] | None:
+    """CLERK-LIVE-001 successor: when CAPSTONE_UI_V1_3 exists and chains to V1_2 it governs the current frontend bytes."""
+    path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json"
+    if not path.exists():
+        return None
+    lock = json.loads(path.read_text(encoding="utf-8"))
+    if lock.get("predecessor_id") != "CAPSTONE_UI_V1_2" or lock.get("predecessor_sha256") != hash_file(ROOT / "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json"):
+        raise RuntimeError("CAPSTONE_UI_V1_3_SUCCESSOR_CHAIN_BROKEN")
+    return dict(lock["bound_artifacts"])
+
+
 def bound_map(lock: dict) -> dict[str, str]:
+    v13 = _v13_bound()
+    if v13 is not None:
+        return v13
     # CAP-009 successor: current frontend bytes are governed by UI_V1_2, while
     # the historical UI_V1_1 lock remains byte-identical and its claims remain scoped.
     successor_path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json"
