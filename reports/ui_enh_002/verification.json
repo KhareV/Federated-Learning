@@ -1,0 +1,45 @@
+{
+  "phase": "UI-ENH-002",
+  "status": "PASS",
+  "entry_sha": "491178583e0256b7e10c88fbdee82af4ea26e3ea",
+  "method_freeze_commit": "c74c0b2",
+  "pure_successor_amendment_commit": "6beb02a",
+  "ui_lock": "CAPSTONE_UI_V1_8",
+  "ui_lock_sha256": "4c969f3b5753709dca10087d69ae345b242fba5cbb92761085d7c39c4e4e3590",
+  "ui_bound_frontend_files": 251,
+  "ui_changed_frontend_files": 11,
+  "frontend_vitest": {
+    "passed": 234,
+    "skipped": 3
+  },
+  "svelte_check": {
+    "errors": 0,
+    "warnings": 112,
+    "warning_count_same_as_entry": true
+  },
+  "frontend_production_build": "PASS",
+  "targeted_python_after_commit": {
+    "passed": 43,
+    "failed": 0
+  },
+  "browser_smoke": "PASS",
+  "browser_widths_px": [1440, 1024, 768, 390],
+  "browser_pages": ["/app", "/app/models", "/app/monitoring", "/app/research/ml", "/app/research/fl", "/app/federation"],
+  "monitoring_smoke": {
+    "auth": "DEMO",
+    "scenario": "MIXED_MONITORING_SESSION",
+    "session_state": "COMPLETED",
+    "model": "MODEL_V2_FINAL",
+    "calibration": "CAL_V2 (MIT-BIH-v1.0.0)"
+  },
+  "external_browser_hosts": [],
+  "browser_console_errors": [],
+  "browser_network_failures": [],
+  "protected_implementation_diff": [],
+  "new_npm_dependencies": [],
+  "all_prior_governance_locks_verified": true,
+  "ci_queried": false,
+  "ci_triggered": false,
+  "full_python_suite_run": false,
+  "precommit_test_disclosure": "One historical Git accounting test failed before the four newly created UI files were committed because git diff omits untracked files; the same selected suite passed 43/43 after the commit."
+}

@@ -1,0 +1,13 @@
+# UI-ENH-002 handoff
+
+PASS. Entry `491178583e0256b7e10c88fbdee82af4ea26e3ea`; UI successor `CAPSTONE_UI_V1_8`, predecessor `CAPSTONE_UI_V1_7`, owner `UI-ENH-002`. The lock binds 251 frontend files and accounts for 11 changed files. Freeze commit: `c74c0b2`; seven successor-compatibility amendments were committed separately and purely in `6beb02a`.
+
+Overview now explains the released monitoring and federated-development lanes, with clear evaluator actions. Models contrasts `MODEL_V2_FINAL` with engineering candidates by role and governance, without candidate performance claims. Monitoring separates virtual source transport, server-side model input, signal quality, and research monitoring state. ML research foregrounds the historical NOT_PROMOTED model decision versus the later ACCEPTED software-system decision. FL research separates five frozen scientific phases from the current 8-client engineering demo, with FedAvg/FedProx comparison and no general FedProx superiority claim. Candidate cards retain exact governance evidence under disclosure. A restrained Federation Studio link leads back to frozen FL research evidence.
+
+Final local verification: frontend Vitest 234 passed, 3 skipped; Svelte check 0 errors and 112 unchanged warnings; production build PASS; targeted Python/governance tests 43 passed; all 17 prior governance chains verified; V1_8 lock verifier PASS; Ruff and `git diff --check` PASS. Real offline DEMO Chrome covered `/app`, `/app/models`, `/app/monitoring`, `/app/research/ml`, `/app/research/fl`, and `/app/federation` at 1440/1024/768/390 px. No horizontal overflow, console errors, network failures, or external hosts were recorded. The real simulated monitoring flow completed with `MODEL_V2_FINAL` and `CAL_V2` displayed.
+
+Screenshots: `screenshots/{overview,models,monitoring,research_ml,research_fl,federation}_{1440,390}.png` and `screenshots/monitoring_completed_1440.png`. Machine-readable details are in `browser_smoke.json` and `verification.json`.
+
+Protected backend/API/FL/auth/scientific and npm dependency surfaces had zero drift. The full historical Python suite was intentionally not rerun under the UI-only verification policy. One precommit Git accounting test initially failed because four newly created UI files were untracked and therefore absent from `git diff`; after the freeze commit the selected suite passed 43/43. No CI was queried or triggered. Physical hardware remains absent. UI-ENH-003 was not started.
+
+Deferred to UI-ENH-003: remaining Privacy, History, Device, and federation run-list polish; whole-app consistency and full visual/reduced-motion sweep.

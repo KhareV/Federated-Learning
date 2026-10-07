@@ -1,0 +1,312 @@
+{
+  "auth": "DEMO",
+  "pages": [
+    {
+      "name": "overview",
+      "path": "/app",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "NHM research system"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "NHM research system"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "NHM research system"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "NHM research system"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        }
+      }
+    },
+    {
+      "name": "models",
+      "path": "/app/models",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Model governance & comparison"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Model governance & comparison"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Model governance & comparison"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Model governance & comparison"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        }
+      }
+    },
+    {
+      "name": "monitoring",
+      "path": "/app/monitoring",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Live monitoring"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Live monitoring"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Live monitoring"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Live monitoring"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        }
+      }
+    },
+    {
+      "name": "research_ml",
+      "path": "/app/research/ml",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "ML research evidence"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "ML research evidence"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "ML research evidence"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "ML research evidence"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        }
+      }
+    },
+    {
+      "name": "research_fl",
+      "path": "/app/research/fl",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "FL research evidence"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "FL research evidence"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "FL research evidence"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "FL research evidence"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        }
+      }
+    },
+    {
+      "name": "federation",
+      "path": "/app/federation",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Federation Studio"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Federation Studio"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Federation Studio"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Federation Studio"
+          ],
+          "main": 1,
+          "keyText": true,
+          "authDemo": true
+        }
+      }
+    }
+  ],
+  "monitoring": {
+    "sessionId": "SESS-2e286f21d8aa4cb8b38f73aaada7b8ab",
+    "state": "COMPLETED",
+    "model": "MODEL_V2_FINAL",
+    "calibration": "CAL_V2 (MIT-BIH-v1.0.0)",
+    "qualityVisible": true,
+    "researchStateVisible": true,
+    "flow": "✓VIRTUAL WEARABLEsimulated sourcedone✓SIGNALsource ECGdone✓QUALITYsignal qualitydone✓MODEL_V2_FINALserver-side inferencedone✓MONITORING STATEresearch statedone✓ALERT / HISTORYpersisteddone"
+  },
+  "federationNavigation": {
+    "name": "federation",
+    "path": "/app/federation",
+    "widths": {
+      "390": {
+        "overflow": false,
+        "h1": [
+          "Federation Studio"
+        ],
+        "main": 1,
+        "keyText": true,
+        "authDemo": true
+      },
+      "768": {
+        "overflow": false,
+        "h1": [
+          "Federation Studio"
+        ],
+        "main": 1,
+        "keyText": true,
+        "authDemo": true
+      },
+      "1024": {
+        "overflow": false,
+        "h1": [
+          "Federation Studio"
+        ],
+        "main": 1,
+        "keyText": true,
+        "authDemo": true
+      },
+      "1440": {
+        "overflow": false,
+        "h1": [
+          "Federation Studio"
+        ],
+        "main": 1,
+        "keyText": true,
+        "authDemo": true
+      }
+    }
+  },
+  "externalHosts": [],
+  "consoleErrors": [],
+  "networkFailures": [],
+  "passed": true
+}
