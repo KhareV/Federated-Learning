@@ -80,6 +80,9 @@ def test_ui_v1_4_chain_verifies_and_predecessor_locks_are_byte_identical() -> No
     successor18 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_8.lock.json"
     if successor18.exists():
         accounted |= set(json.loads(successor18.read_text())["changed_from_predecessor"])
+    successor19 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_9.lock.json"
+    if successor19.exists():
+        accounted |= set(json.loads(successor19.read_text())["changed_from_predecessor"])
     assert changed == sorted(accounted), changed
 
 
@@ -100,6 +103,9 @@ def _with_v15(then=lambda s: None):
         v18 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_8.lock.json"
         if v18.exists():
             shutil.copyfile(v18, s / "artifacts/capstone/CAPSTONE_UI_V1_8.lock.json")
+        v19 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_9.lock.json"
+        if v19.exists():
+            shutil.copyfile(v19, s / "artifacts/capstone/CAPSTONE_UI_V1_9.lock.json")
         then(s)
     return mutate
 

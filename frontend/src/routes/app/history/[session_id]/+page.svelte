@@ -56,7 +56,7 @@
 	{#if error}<p class="error" role="alert">{error}</p>{/if}
 	{#if session}
 		<Panel eyebrow="01 / SESSION" title={session.session_id} note={session.state}>
-			<p>Research/engineering monitoring history. Runtime identity was fixed at session creation.</p>
+			<p class="overview">Research/engineering monitoring history — not a diagnosis. Runtime identity was fixed at session creation.</p>
 			<dl class="facts"><div><dt>State</dt><dd>{session.state}</dd></div><div><dt>Device adapter</dt><dd>{session.device_adapter_type}</dd></div>
 				<div><dt>Scenario provenance</dt><dd>{session.simulation_provenance?.scenario_id ?? 'Unavailable'}</dd></div>
 				<div><dt>Created</dt><dd>{when(session.created_at_us)}</dd></div><div><dt>Started</dt><dd>{when(session.started_at_us)}</dd></div>
@@ -84,6 +84,7 @@
 		{#if timeline}
 			<Panel eyebrow="03 / SOURCE DOMAIN" title="Source-timeline evidence" note={timeline.timeline_version}>
 				<p>Persisted evidence view, not a byte-for-byte WebSocket replay. Source timestamps are not product-clock timestamps.</p>
+				<p class="count">{timeline.source_timeline.length} persisted source events · {visible.length} shown</p>
 				<label for="kind-filter">Filter event kind</label><select id="kind-filter" bind:value={filter}>
 					<option value="ALL">All kinds</option><option value="INFERENCE">Inference</option>
 					<option value="MONITORING_STATE_CHANGE">Monitoring state change</option>
@@ -91,11 +92,13 @@
 				</select>
 				<p>Inference probabilities below are RESEARCH TECHNICAL METADATA, not clinical or diagnostic probabilities. Quality-change rows are change-only events.</p>
 				<ol class="events">{#each visible as item}<li><strong>{item.kind}</strong> · sequence {item.sequence_index} · source {item.source_timestamp_us} µs
-					<pre>{JSON.stringify(item.payload, null, 2)}</pre></li>{/each}</ol>
+					<details><summary>TECHNICAL EVENT DETAILS</summary><pre>{JSON.stringify(item.payload, null, 2)}</pre></details></li>{/each}</ol>
+				{#if visible.length === 0}<p>No persisted source events match this filter.</p>{/if}
 			</Panel>
 			<Panel eyebrow="04 / PRODUCT CLOCK" title="Device lifecycle" note="SEPARATE TIME DOMAIN">
 				<p>{timeline.time_domain_explanation} Device events below use PRODUCT_CLOCK; source events above use SOURCE_TIMELINE.</p>
 				<ol class="events">{#each timeline.device_lifecycle as item}<li>{item.event_type} · {item.device_state} · {when(item.at_us)} · {item.reason_code ?? 'No reason code'}</li>{/each}</ol>
+				{#if timeline.device_lifecycle.length === 0}<p>No device lifecycle events were persisted for this session.</p>{/if}
 			</Panel>
 			<Panel eyebrow="05 / PREVIEW" title="Bounded decimated ECG preview" note="NOT RAW STREAM STORAGE">
 				{#each timeline.waveform_previews as preview}<div><p>{preview.channel} · {preview.point_count} points · {preview.source_rate_hz} Hz source · decimation {preview.decimation_factor}×</p>
@@ -108,5 +111,5 @@
 	{/if}
 </div>
 <style>
-	.evidence { display:grid; gap:16px; min-width:0; max-width:100%; } .eyebrow{font:11px 'JetBrains Mono',monospace;color:#2bb8b0;letter-spacing:.12em} h1{font:500 clamp(26px,4vw,40px) 'Space Grotesk',sans-serif;margin:0} h2{font-size:15px;margin:20px 0 8px} p,li,dd{color:#a7b8c9;line-height:1.55;font-size:13px;overflow-wrap:anywhere} a{color:#2bb8b0}.error{color:#fecdd3}.notice{padding:12px;border:1px solid #fbbf24;color:#fbbf24}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}.facts div{min-width:0}dt{font:10px 'JetBrains Mono',monospace;color:#71829a}dd{margin:4px 0 0}.events{max-height:500px;overflow:auto;padding-left:20px}.events li{padding:8px;border-bottom:1px solid var(--nhm-border)}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px}select{margin:8px;padding:8px;background:#0f172a;color:#dce9e8;border:1px solid #64748b}select:focus-visible,a:focus-visible{outline:2px solid #fbbf24;outline-offset:3px}svg{display:block;width:100%;height:180px;background:#07101d;border:1px solid var(--nhm-border)}
+	.evidence { display:grid; gap:16px; min-width:0; max-width:100%; } .eyebrow{font:11px 'JetBrains Mono',monospace;color:#2bb8b0;letter-spacing:.12em} h1{font:500 clamp(26px,4vw,40px) 'Space Grotesk',sans-serif;margin:0} h2{font-size:15px;margin:20px 0 8px} p,li,dd{color:#a7b8c9;line-height:1.55;font-size:13px;overflow-wrap:anywhere} a{color:#2bb8b0}.error{color:#fecdd3}.notice{padding:12px;border:1px solid #fbbf24;color:#fbbf24}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}.facts div{min-width:0}dt{font:10px 'JetBrains Mono',monospace;color:#71829a}dd{margin:4px 0 0}.events{max-height:500px;overflow:auto;padding-left:20px}.events li{padding:8px;border-bottom:1px solid var(--nhm-border)}.events details{margin-top:7px}.events summary{cursor:pointer;color:#2bb8b0;font:11px 'JetBrains Mono',monospace;letter-spacing:.06em}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px}.overview{border-left:3px solid #2bb8b0;padding-left:12px}.count{color:#9fe8e3;font:11px 'JetBrains Mono',monospace}select{margin:8px;padding:8px;background:#0f172a;color:#dce9e8;border:1px solid #64748b}select:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #fbbf24;outline-offset:3px}svg{display:block;width:100%;height:180px;background:#07101d;border:1px solid var(--nhm-border)}
 </style>

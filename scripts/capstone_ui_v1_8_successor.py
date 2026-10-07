@@ -27,4 +27,14 @@ def v18_bound(root: Path) -> dict[str, str] | None:
         or previous.get("predecessor_sha256") != hash_file(v16)
     ):
         raise RuntimeError("CAPSTONE_UI_V1_7_SUCCESSOR_CHAIN_BROKEN")
+    v19 = root / "artifacts/capstone/CAPSTONE_UI_V1_9.lock.json"
+    if v19.exists():
+        successor = json.loads(v19.read_text(encoding="utf-8"))
+        if (
+            successor.get("lock_id") != "CAPSTONE_UI_V1_9"
+            or successor.get("predecessor_id") != "CAPSTONE_UI_V1_8"
+            or successor.get("predecessor_sha256") != hash_file(path)
+        ):
+            raise RuntimeError("CAPSTONE_UI_V1_9_SUCCESSOR_CHAIN_BROKEN")
+        return dict(successor["bound_artifacts"])
     return dict(lock["bound_artifacts"])

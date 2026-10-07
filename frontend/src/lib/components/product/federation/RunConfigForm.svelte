@@ -12,15 +12,15 @@
 </script>
 <form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onSubmit({ run_type: runType, algorithm, secagg_mode: mode }); }} aria-label="Federation run configuration">
 	{#if !backendEnabled}<p class="warn" role="alert">FEDERATION BACKEND NOT ENABLED</p>{/if}
-	<label>Run mode
+	<label><span>Run mode</span>
 		<select bind:value={runType} data-testid="cfg-run-type">{#each RUN_TYPES as t}<option value={t}>{t}</option>{/each}</select>
 	</label>
 	<p class="help">{runType === 'LIVE_RUN' ? 'LIVE_RUN performs genuine local optimization and federation.' : 'REPLAY re-emits a previously completed compatible LIVE_RUN. No training is executed.'}</p>
-	<label>Algorithm
+	<label><span>Algorithm</span>
 		<select bind:value={algorithm} data-testid="cfg-algorithm">{#each ALGORITHMS as a}<option value={a}>{ALGORITHM_LABEL[a].name} — {ALGORITHM_LABEL[a].text}</option>{/each}</select>
 	</label>
 	{#if algorithm === 'FEDPROX'}<p class="help">The server uses the frozen FedProx configuration.</p>{/if}
-	<label>Aggregation / protection mode
+	<label><span>Aggregation / protection mode</span>
 		<select bind:value={mode} data-testid="cfg-mode">{#each AGGREGATION_MODES as m}<option value={m}>{MODE_LABEL[m].name}</option>{/each}</select>
 	</label>
 	<p class="help">{MODE_LABEL[mode].text}{mode === 'SECAGG_SHADOW' ? ' ROUND-1 PROTECTED-AGGREGATION SHADOW.' : ''}</p>
@@ -38,7 +38,7 @@
 	<button type="submit" disabled={blocked} data-testid="cfg-submit">{runType === 'LIVE_RUN' ? 'Create and start live run' : 'Create and start replay'}</button>
 </form>
 <style>
-	.cfg { display: grid; gap: 10px; max-width: 560px; min-width: 0; } select { width: 100%; min-width: 0; } label { display: grid; gap: 4px; font: 11px 'JetBrains Mono', monospace; letter-spacing: .06em; color: #94a3b8; }
+	.cfg { display: grid; gap: 10px; max-width: 560px; min-width: 0; } select { width: 100%; min-width: 0; } label { display: flex; flex-direction: column; gap: 7px; min-width: 0; font: 11px 'JetBrains Mono', monospace; letter-spacing: .06em; color: #94a3b8; }
 	select, button { max-width: 100%; box-sizing: border-box; font: 13px Inter, sans-serif; padding: 8px 10px; background: #07101e; color: #e5f1f0; border: 1px solid rgba(148,163,184,.3); } select:focus-visible, button:focus-visible { outline: 2px solid #2bb8b0; }
 	button { background: #2bb8b0; color: #030712; font-weight: 600; cursor: pointer; } button:disabled { opacity: .45; cursor: not-allowed; }
 	.help { margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.5; } .warn { margin: 0; color: #fbbf24; font: 11px 'JetBrains Mono', monospace; }

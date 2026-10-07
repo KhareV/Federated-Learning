@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 
 from nhm.hashing import hash_file
+from scripts.capstone_ui_v1_8_successor import v18_bound
 from scripts.freeze_capstone_ui_v1_8 import LOCK_PATH, PREDECESSOR, ROOT, frontend_files
 
 
@@ -32,14 +33,15 @@ def verify() -> dict[str, object]:
     ):
         raise RuntimeError("CAPSTONE_UI_V1_8_SCOPE_DRIFT")
     actual = frontend_files()
-    expected = lock["bound_artifacts"]
+    expected = v18_bound(ROOT) or lock["bound_artifacts"]
     if set(actual) != set(expected):
         raise RuntimeError("CAPSTONE_UI_V1_8_UNBOUND_OR_MISSING_FRONTEND_FILE")
     for path, digest in expected.items():
         if hash_file(ROOT / path) != digest:
             raise RuntimeError(f"CAPSTONE_UI_V1_8_TAMPER:{path}")
     predecessor = json.loads(PREDECESSOR.read_text(encoding="utf-8"))["bound_artifacts"]
-    changed = sorted(path for path, digest in expected.items() if predecessor.get(path) != digest)
+    changed = sorted(path for path, digest in lock["bound_artifacts"].items()
+                     if predecessor.get(path) != digest)
     if changed != lock["changed_from_predecessor"]:
         raise RuntimeError("CAPSTONE_UI_V1_8_CHANGED_FILE_ACCOUNTING_DRIFT")
     return {"status": "PASS", "bound_files": len(actual), "changed_files": len(changed),

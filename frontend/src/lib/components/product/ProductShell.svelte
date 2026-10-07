@@ -1,6 +1,5 @@
 <script lang="ts">
-	// CAPSTONE_UI_V1 product shell: one navigation system for the whole product. Federation is
-	// first-class navigation (not buried under Research); it is a not-yet-enabled shell in CAP-005.
+	// One navigation system for the product. The backend remains the auth authority.
 	import { page } from '$app/state';
 	import type { Snippet } from 'svelte';
 	import { LayoutDashboard, Watch, Activity, History, Network, Boxes, FlaskConical, Server, Info, LogOut, Menu, X } from '@lucide/svelte';
@@ -10,6 +9,7 @@
 	let { children }: { children?: Snippet } = $props();
 	const store = getProductStore();
 	let open = $state(false);
+	let menuButton: HTMLButtonElement;
 
 	const NAV = [
 		{ label: 'Overview', href: '/app', icon: LayoutDashboard, exact: true },
@@ -30,13 +30,17 @@
 	const identity = $derived(store.authState.identity);
 	const system = $derived(store.authState.system);
 	async function signOut() { await store.auth.signOut(); location.assign('/sign-in'); }
+	function onKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && open) { open = false; menuButton?.focus(); }
+	}
 </script>
 
+<svelte:window onkeydown={onKeydown} />
 <a class="skip" href="#main-content">Skip to content</a>
 {#if system?.demo_mode}<DemoBanner />{/if}
 <div class="shell" class:open>
 	<button class="scrim" aria-label="Close navigation" tabindex="-1" onclick={() => (open = false)}></button>
-	<aside class="side" aria-label="Product navigation">
+	<aside id="product-navigation" class="side" aria-label="Product navigation">
 		<a class="brand" href="/" aria-label="NHM home"><span>N</span>NHM</a>
 		<nav aria-label="Product sections">
 			{#each NAV as item}
@@ -51,7 +55,7 @@
 	</aside>
 	<div class="main">
 		<header>
-			<button class="menu" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onclick={() => (open = !open)}>{#if open}<X size={19} />{:else}<Menu size={19} />{/if}</button>
+			<button bind:this={menuButton} class="menu" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls="product-navigation" onclick={() => (open = !open)}>{#if open}<X size={19} />{:else}<Menu size={19} />{/if}</button>
 			<div class="who" data-testid="identity-chip">
 				{#if identity}<span class="mode">{identity.auth_provider}</span><strong>{identity.user_id}</strong>{:else}<span class="mode">NOT SIGNED IN</span>{/if}
 			</div>
@@ -85,4 +89,6 @@
 		.menu { display: inline-flex; } .out span { display: none; } .out { padding: 8px 10px; }
 	}
 	@media (prefers-reduced-motion: reduce) { .side { transition: none; } }
+	.who{max-width:min(60vw,600px)}.who strong{min-width:0}.out:focus-visible,.menu:focus-visible,.brand:focus-visible,.item:focus-visible,.sub a:focus-visible{outline:2px solid #fbbf24;outline-offset:2px}
+	@media(max-width:390px){.who{max-width:calc(100vw - 165px)}.who .mode{flex-shrink:0}.out,.menu{min-width:36px;justify-content:center}}
 </style>
