@@ -4,6 +4,7 @@
 	import Panel from '$lib/components/dashboard/Panel.svelte';
 	import FederationBanner from '$lib/components/product/federation/FederationBanner.svelte';
 	import RunSelector from '$lib/components/product/federation/RunSelector.svelte';
+	import TechnicalEvidence from '$lib/components/product/federation/TechnicalEvidence.svelte';
 	import DigestText from '$lib/components/product/federation/DigestText.svelte';
 	import { bootRun, chooseRun } from '$lib/components/product/federation/useRunParam';
 	import { useFederation } from '$lib/product/federation/state.svelte';
@@ -22,6 +23,17 @@
 {#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
 {#if fed.run}
 	{#if ownerBound}<p class="dim" data-testid="rounds-owner-note">MY EDGE CLIENT: {ownerBound}. Presentation-bound to the authenticated run owner; training data remains synthetic engineering data.</p>{/if}
+	<Panel eyebrow="MODEL STATE TIMELINE" title="How the global model state moved" note="NO PERFORMANCE CLAIM">
+		<ol class="tl" data-testid="state-timeline">
+			<li class="n0"><span class="dot" aria-hidden="true">●</span><b>FL_INIT_V2</b><span class="dim">Initial federated state</span></li>
+			{#each fed.rounds as r}<li class="n1" data-round={r.round_id}><span class="dot" aria-hidden="true">●</span><b>Round {r.round_id}</b><span class="dim">{r.accepted_update_count} of {r.participating_client_ids.length} client updates accepted · {r.state}</span></li>{/each}
+			<li class="n2"><span class="dot" aria-hidden="true">◆</span><b>{finalCandidate ?? 'NO CANDIDATE'}</b><span class="dim">{finalCandidate ? 'Engineering candidate' : 'No candidate for this run'}</span></li>
+			<li class="n3"><span class="dot" aria-hidden="true">■</span><b>ENGINEERING SANDBOX</b><span class="dim">NOT DEPLOYED · NO AUTOMATIC PROMOTION</span></li>
+		</ol>
+		<p class="dim">Digests are the technical evidence of each state and sit below. Released monitoring is a separate lane and is not part of this timeline.</p>
+	</Panel>
+	<div class="gap"></div>
+	<TechnicalEvidence label="TECHNICAL EVIDENCE (digests and round records)" testid="rounds-evidence" open>
 	<Panel eyebrow="LINEAGE" title="Global-state lineage" note="DIGESTS FROM THE BACKEND">
 		<ol class="lin" data-testid="lineage">
 			<li>FL_INIT_V2 <DigestText value={fed.rounds[0]?.base_state_digest} label="FL_INIT_V2 digest" /></li>
@@ -40,9 +52,11 @@
 					<div><dt>Accepted updates</dt><dd>{r.accepted_update_count} / {r.participating_client_ids.length}</dd></div><div><dt>Candidate</dt><dd>{r.candidate_id ?? 'NONE'}</dd></div></dl></li>
 		{/each}
 	</ul>
+	</TechnicalEvidence>
 {:else}<p class="dim">Select a run to see its persisted rounds.</p>{/if}
 <style>
 	.eyebrow { color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; letter-spacing: .14em; } h1 { margin: 10px 0 14px; font: 500 clamp(26px, 3.6vw, 38px) 'Space Grotesk', sans-serif; } .gap { height: 12px; } .dim { color: #94a3b8; font-size: 13px; line-height: 1.6; } .warn { color: #fbbf24; font: 12px 'JetBrains Mono', monospace; }
+	.tl { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 0; } .tl li { display: grid; grid-template-columns: 22px auto 1fr; gap: 8px; align-items: baseline; padding: 8px 0 8px 4px; border-left: 2px solid rgba(148,163,184,.3); margin-left: 8px; } .tl b { font: 500 14px 'Space Grotesk', sans-serif; } .tl .dim { margin: 0; font-size: 12px; } .n0 .dot, .n1 .dot { color: #a78bfa; } .n2 .dot, .n3 .dot { color: #fbbf24; } .dot { margin-left: -14px; background: #0b1220; }
 	.lin { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 4px; font: 11px 'JetBrains Mono', monospace; } .lin li { padding: 5px 9px; border-left: 2px solid rgba(43,184,176,.5); background: rgba(43,184,176,.06); overflow-wrap: anywhere; }
 	.rounds { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 8px; } .rounds li { border: 1px solid rgba(148,163,184,.16); padding: 10px 12px; min-width: 0; } h3 { margin: 0 0 6px; font: 500 15px 'Space Grotesk', sans-serif; }
 	dl { display: grid; gap: 4px; margin: 0; } dl div { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; } dt { color: #71829a; } dd { margin: 0; font: 11px 'JetBrains Mono', monospace; text-align: right; overflow-wrap: anywhere; }

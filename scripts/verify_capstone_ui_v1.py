@@ -16,6 +16,19 @@ ROOT = Path(__file__).resolve().parents[1]
 LOCK = "artifacts/capstone/CAPSTONE_UI_V1.lock.json"
 
 
+def _v17_bound() -> dict[str, str] | None:
+    """UI-ENH-001 successor: a V1_7 lock chained to V1_6 governs the current bytes."""
+    path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_7.lock.json"
+    if not path.exists():
+        return None
+    lock = json.loads(path.read_text(encoding="utf-8"))
+    v16 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_6.lock.json"
+    chained = lock.get("predecessor_id") == "CAPSTONE_UI_V1_6"
+    if not chained or lock.get("predecessor_sha256") != hash_file(v16):
+        raise RuntimeError("CAPSTONE_UI_V1_7_SUCCESSOR_CHAIN_BROKEN")
+    return dict(lock["bound_artifacts"])
+
+
 def _v16_bound() -> dict[str, str] | None:
     """FINAL-EVAL-REPAIR-002 successor: a V1_6 lock chained to V1_5 governs the current bytes."""
     path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_6.lock.json"
@@ -65,6 +78,9 @@ def _v13_bound() -> dict[str, str] | None:
 
 
 def _successor_bound() -> dict[str, str]:
+    v17 = _v17_bound()
+    if v17 is not None:
+        return v17
     v16 = _v16_bound()
     if v16 is not None:
         return v16

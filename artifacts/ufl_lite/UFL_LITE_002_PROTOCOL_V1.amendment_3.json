@@ -1,0 +1,33 @@
+{
+ "amendment_id": "UFL_LITE_002_PROTOCOL_V1_AMENDMENT_3",
+ "change": "Successor awareness / governed presentation edit only: files whose bytes changed under UI-ENH-001 (Federation visualization and UX, CAPSTONE_UI_V1_7 successor awareness) are re-pinned old->new. Historical lock files V1..V1_6 are unchanged; without a V1_7 lock the verifiers behave byte-identically to before.",
+ "defect": "UI-ENH-001 redesigns the Federation presentation (visual implementation and UX only). The frozen UI-lock chain needs a registered CAPSTONE_UI_V1_7 successor and the frozen method locks must follow the governed file changes.",
+ "files": {
+  "frontend/src/lib/components/product/federation/ClientGrid.svelte": {
+   "new_sha256": "8beede95e69f55b046c9af2c5f5bbd3b5ba6b08565187516fb34d8374563041d",
+   "old_sha256": "f96ca970f95b3b75f00916216f12927e869f3830261ec90afc0488e9ca46b0c5"
+  },
+  "frontend/src/routes/app/federation/live/+page.svelte": {
+   "new_sha256": "8d35db68e95d010c67c52426eb5c58d6e66de9ba2136325c81509abc8d6a841e",
+   "old_sha256": "b6e62b0f2b758ce80fe29162b3f5d3b127c34ddbc5fab5df8b52db2c870e3af7"
+  },
+  "frontend/src/routes/app/federation/rounds/+page.svelte": {
+   "new_sha256": "8e3245a432dad7cb148b3c46c879bcd96ed1f9ba5d4d72643a4a614ba9bedd30",
+   "old_sha256": "ca0a28c46ea7ab08f66f3162eec27cc37a61093ed6db18664c0e798e204412a0"
+  },
+  "scripts/verify_capstone_ui_v1_4.py": {
+   "new_sha256": "7a152d5fee8464f59200cc8ac68f9959ab8371e569475f60a3516a66d924e125",
+   "old_sha256": "4422eaa2bb3e9cf5f0ed4ffff3517c7147a63c4f171760fe4c94600cb6eedffe"
+  },
+  "tests/test_ufl_lite_presentation.py": {
+   "new_sha256": "7e809d1cb1f2bf6558f778d0709a9b48cb29db3574740ca29ad28bf526ca7f63",
+   "old_sha256": "2c86dea7a107c8fccf9ec655e3122508cecab1ffe4b6dc48dc3f13505f885ed8"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "UFL-LITE-002 (frozen files governed for UI-ENH-001)",
+ "previous_amendment": "UFL_LITE_002_PROTOCOL_V1_AMENDMENT_2",
+ "reason": "FEDERATION_VISUALIZATION_AND_UX_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

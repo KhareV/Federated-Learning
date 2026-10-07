@@ -1,0 +1,17 @@
+{
+ "amendment_id": "FINAL_EVAL_REPAIR_001_PROTOCOL_V1_AMENDMENT_2",
+ "change": "Successor awareness / governed presentation edit only: files whose bytes changed under UI-ENH-001 (Federation visualization and UX, CAPSTONE_UI_V1_7 successor awareness) are re-pinned old->new. Historical lock files V1..V1_6 are unchanged; without a V1_7 lock the verifiers behave byte-identically to before.",
+ "defect": "UI-ENH-001 redesigns the Federation presentation (visual implementation and UX only). The frozen UI-lock chain needs a registered CAPSTONE_UI_V1_7 successor and the frozen method locks must follow the governed file changes.",
+ "files": {
+  "scripts/verify_capstone_ui_v1_5.py": {
+   "new_sha256": "91db33f4aaa5a879c3d696be7f6974fa4896a33f92534722b5bf97f7f1760e0a",
+   "old_sha256": "ba09d6889a57d8b79c610904e371aff114bb0b43de1f9bc78821e59d2ddf87e0"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "FINAL-EVAL-REPAIR-001 (frozen files governed for UI-ENH-001)",
+ "previous_amendment": "FINAL_EVAL_REPAIR_001_PROTOCOL_V1_AMENDMENT_1",
+ "reason": "FEDERATION_VISUALIZATION_AND_UX_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}
