@@ -1,0 +1,599 @@
+{
+  "stage": "final",
+  "auth": "DEMO",
+  "sessionId": "SESS-2d9397a59f0c464a9ac41d110bf820e4",
+  "monitoring": {
+    "state": "COMPLETED",
+    "model": "MODEL_V2_FINAL",
+    "calibration": "CAL_V2 (MIT-BIH-v1.0.0)"
+  },
+  "pages": [
+    {
+      "name": "overview",
+      "path": "/app",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "NHM research system"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / OVERVIEW\nNHM research system\n\nA simulated-wearable monitoring system and a separate federated-learning development lane. Research prototype: not diagnostic, not clinical. Status and session values are read from the local product backend; the system map is explanatory.\n\nMONITORING\n\nMODEL_V2_FIN"
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "NHM research system"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / OVERVIEW\nNHM research system\n\nA simulated-wearable monitoring system and a separate federated-learning development lane. Research prototype: not diagnostic, not clinical. Status and session values are read from the local product backend; the system map is explanatory.\n\nMONITORING\n\nMODEL_V2_FIN"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "NHM research system"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / OVERVIEW\nNHM research system\n\nA simulated-wearable monitoring system and a separate federated-learning development lane. Research prototype: not diagnostic, not clinical. Status and session values are read from the local product backend; the system map is explanatory.\n\nMONITORING\n\nMOD"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "NHM research system"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / OVERVIEW\nNHM research system\n\nA simulated-wearable monitoring system and a separate federated-learning development lane. Research prototype: not diagnostic, not clinical. Status and session values are read from the local product backend; the system map is explanatory.\n\nMONITORING\n\nMOD"
+        }
+      }
+    },
+    {
+      "name": "device",
+      "path": "/app/device",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Virtual wearable"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / DEVICE\nVirtual wearable\n\nA simulated ECG source for research monitoring. This lifecycle is software-only; no Bluetooth or physical sensor is connected.\n\nSIMULATED ONLY\nPHYSICAL HARDWARE: NOT CONNECTED / NOT IMP"
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Virtual wearable"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / DEVICE\nVirtual wearable\n\nA simulated ECG source for research monitoring. This lifecycle is software-only; no Bluetooth or physical sensor is connected.\n\nSIMULATED ONLY\nPHYSICAL HARDWARE: NOT CONNECTED / NOT IMP"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Virtual wearable"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / DEVICE\nVirtual wearable\n\nA simulated ECG source for research monitoring. This lifecycle is software-only; no Bluetooth or physical sensor is connected.\n\nSIMULATED ONLY\nPHYSICAL HARDWARE: NOT CONNECTED "
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Virtual wearable"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / DEVICE\nVirtual wearable\n\nA simulated ECG source for research monitoring. This lifecycle is software-only; no Bluetooth or physical sensor is connected.\n\nSIMULATED ONLY\nPHYSICAL HARDWARE: NOT CONNECTED "
+        }
+      }
+    },
+    {
+      "name": "monitoring",
+      "path": "/app/monitoring",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Live monitoring"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / MONITOR\nLive monitoring\nSession not started. Device STOPPED. Monitoring state none yet.\n\nA simulated wearable streams ECG to the backend. The server checks signal quality, runs MODEL_V2_FINAL with CAL_V2, and r"
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Live monitoring"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / MONITOR\nLive monitoring\nSession not started. Device STOPPED. Monitoring state none yet.\n\nA simulated wearable streams ECG to the backend. The server checks signal quality, runs MODEL_V2_FINAL with CAL_V2, and r"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Live monitoring"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / MONITOR\nLive monitoring\nSession not started. Device STOPPED. Monitoring state none yet.\n\nA simulated wearable streams ECG to the backend. The server checks signal quality, runs MODEL_V2_FINAL with CAL_"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Live monitoring"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nSIMULATED WEARABLE\nNO PHYSICAL HARDWARE CONNECTED\nRESEARCH PROTOTYPE\nNOT DIAGNOSTIC\nNHM / MONITOR\nLive monitoring\nSession not started. Device STOPPED. Monitoring state none yet.\n\nA simulated wearable streams ECG to the backend. The server checks signal quality, runs MODEL_V2_FINAL with CAL_"
+        }
+      }
+    },
+    {
+      "name": "history",
+      "path": "/app/history",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Research monitoring history"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / HISTORY\nResearch monitoring history\n01 / PERSISTED\nMonitoring sessions\nOWNER-SCOPED HISTORY\nCOMPLETED\n07/10/2026, 22:35:54\nSESS-2d9397a59f0c464a9ac41d110bf820e4\nScenario\nMIXED_MONITORING_SESSION\nModel\nMODEL_V2_FINAL\nDevice\nNHM_VIRTUAL_WEARABLE_01\nStarted\n07/10/2026, 22:35:54\nEnded\n07/10/2026, "
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Research monitoring history"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / HISTORY\nResearch monitoring history\n01 / PERSISTED\nMonitoring sessions\nOWNER-SCOPED HISTORY\nPersisted monitoring sessions, newest first\nSession\tState\tEvidence\tCreated\tScenario\tModel\tStarted\tEnded\tDevice\nSESS-2d9397a59f0c464a9ac41d110bf820e4\tCOMPLETED\tVIEW EVIDENCE\t07/10/2026, 22:35:54\tMIXED_MO"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Research monitoring history"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / HISTORY\nResearch monitoring history\n01 / PERSISTED\nMonitoring sessions\nOWNER-SCOPED HISTORY\nPersisted monitoring sessions, newest first\nSession\tState\tEvidence\tCreated\tScenario\tModel\tStarted\tEnded\tDevice\nSESS-2d9397a59f0c464a9ac41d110bf820e4\tCOMPLETED\tVIEW EVIDENCE\t07/10/2026, 22:35:54"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Research monitoring history"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / HISTORY\nResearch monitoring history\n01 / PERSISTED\nMonitoring sessions\nOWNER-SCOPED HISTORY\nPersisted monitoring sessions, newest first\nSession\tState\tEvidence\tCreated\tScenario\tModel\tStarted\tEnded\tDevice\nSESS-2d9397a59f0c464a9ac41d110bf820e4\tCOMPLETED\tVIEW EVIDENCE\t07/10/2026, 22:35:54"
+        }
+      }
+    },
+    {
+      "name": "history_detail",
+      "path": "/app/history/SESS-2d9397a59f0c464a9ac41d110bf820e4",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Session evidence"
+          ],
+          "focusable": 185,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\n\nHISTORY / SESSION EVIDENCE\n\nSession evidence\n01 / SESSION\nSESS-2d9397a59f0c464a9ac41d110bf820e4\nCOMPLETED\n\nResearch/engineering monitoring history — not a diagnosis. Runtime identity was fixed at session creation.\n\nState\nCOMPLETED\nDevice adapter\nSIMULATED\nScenario provenance\nMIXED_MONITORING_SESSIO"
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Session evidence"
+          ],
+          "focusable": 185,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\n\nHISTORY / SESSION EVIDENCE\n\nSession evidence\n01 / SESSION\nSESS-2d9397a59f0c464a9ac41d110bf820e4\nCOMPLETED\n\nResearch/engineering monitoring history — not a diagnosis. Runtime identity was fixed at session creation.\n\nState\nCOMPLETED\nDevice adapter\nSIMULATED\nScenario provenance\nMIXED_MONITORING_SESSIO"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Session evidence"
+          ],
+          "focusable": 185,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\n\nHISTORY / SESSION EVIDENCE\n\nSession evidence\n01 / SESSION\nSESS-2d9397a59f0c464a9ac41d110bf820e4\nCOMPLETED\n\nResearch/engineering monitoring history — not a diagnosis. Runtime identity was fixed at session creation.\n\nState\nCOMPLETED\nDevice adapter\nSIMULATED\nScenario provenance\nMIXED_MONITORI"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Session evidence"
+          ],
+          "focusable": 185,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\n\nHISTORY / SESSION EVIDENCE\n\nSession evidence\n01 / SESSION\nSESS-2d9397a59f0c464a9ac41d110bf820e4\nCOMPLETED\n\nResearch/engineering monitoring history — not a diagnosis. Runtime identity was fixed at session creation.\n\nState\nCOMPLETED\nDevice adapter\nSIMULATED\nScenario provenance\nMIXED_MONITORI"
+        }
+      }
+    },
+    {
+      "name": "federation",
+      "path": "/app/federation",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Federation Studio"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / FEDERATION\nFederation Studio\n\nWatch real federated training happen: eight synthetic clients each train locally, send only model updates, and a coordinator combines them into a new global state - three times in a row.\n\n8 synthetic clients\n3 rounds\nLocal training\nFedA"
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Federation Studio"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / FEDERATION\nFederation Studio\n\nWatch real federated training happen: eight synthetic clients each train locally, send only model updates, and a coordinator combines them into a new global state - three times in a row.\n\n8 synthetic clients\n3 rounds\nLocal training\nFedA"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Federation Studio"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / FEDERATION\nFederation Studio\n\nWatch real federated training happen: eight synthetic clients each train locally, send only model updates, and a coordinator combines them into a new global state - three times in a row.\n\n8 synthetic clients\n3 rounds\nLocal trai"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Federation Studio"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / FEDERATION\nFederation Studio\n\nWatch real federated training happen: eight synthetic clients each train locally, send only model updates, and a coordinator combines them into a new global state - three times in a row.\n\n8 synthetic clients\n3 rounds\nLocal trai"
+        }
+      }
+    },
+    {
+      "name": "federation_live",
+      "path": "/app/federation/live",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Live federation"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / FEDERATION / LIVE\nLive federation\n\nThe run executes on the product backend; closing this page does not stop it. Returning rebuilds this view from the event journal (sequence 0).\n\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLO"
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Live federation"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / FEDERATION / LIVE\nLive federation\n\nThe run executes on the product backend; closing this page does not stop it. Returning rebuilds this view from the event journal (sequence 0).\n\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLO"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Live federation"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / FEDERATION / LIVE\nLive federation\n\nThe run executes on the product backend; closing this page does not stop it. Returning rebuilds this view from the event journal (sequence 0).\n\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\n"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Live federation"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / FEDERATION / LIVE\nLive federation\n\nThe run executes on the product backend; closing this page does not stop it. Returning rebuilds this view from the event journal (sequence 0).\n\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\n"
+        }
+      }
+    },
+    {
+      "name": "federation_clients",
+      "path": "/app/federation/clients",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Logical local clients"
+          ],
+          "focusable": 0,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / FEDERATION / CLIENTS\nLogical local clients\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\n\nSYNTHETIC RESEARCH PARTITIONS — NOT HOSPITALS OR INSTITUTIONS.\n\nLOCALITY\nWhat stays local\n\nEach client keeps its local training exa"
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Logical local clients"
+          ],
+          "focusable": 0,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / FEDERATION / CLIENTS\nLogical local clients\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\n\nSYNTHETIC RESEARCH PARTITIONS — NOT HOSPITALS OR INSTITUTIONS.\n\nLOCALITY\nWhat stays local\n\nEach client keeps its local training exa"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Logical local clients"
+          ],
+          "focusable": 0,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / FEDERATION / CLIENTS\nLogical local clients\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\n\nSYNTHETIC RESEARCH PARTITIONS — NOT HOSPITALS OR INSTITUTIONS.\n\nLOCALITY\nWhat stays local\n\nEach client keeps its local tra"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Logical local clients"
+          ],
+          "focusable": 0,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / FEDERATION / CLIENTS\nLogical local clients\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\n\nSYNTHETIC RESEARCH PARTITIONS — NOT HOSPITALS OR INSTITUTIONS.\n\nLOCALITY\nWhat stays local\n\nEach client keeps its local tra"
+        }
+      }
+    },
+    {
+      "name": "federation_rounds",
+      "path": "/app/federation/rounds",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Rounds"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / FEDERATION / ROUNDS\nRounds\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\nFederation run\nNo runs yet\n\nSelect a run to see its persisted rounds."
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Rounds"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / FEDERATION / ROUNDS\nRounds\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\nFederation run\nNo runs yet\n\nSelect a run to see its persisted rounds."
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Rounds"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / FEDERATION / ROUNDS\nRounds\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\nFederation run\nNo runs yet\n\nSelect a run to see its persisted rounds."
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Rounds"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / FEDERATION / ROUNDS\nRounds\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\nFederation run\nNo runs yet\n\nSelect a run to see its persisted rounds."
+        }
+      }
+    },
+    {
+      "name": "federation_privacy",
+      "path": "/app/federation/privacy",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "The implemented privacy boundary"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / FEDERATION / PRIVACY\nThe implemented privacy boundary\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\n\nA narrow engineering claim about what the aggregation interface receives. It is not a general privacy or security guaran"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "The implemented privacy boundary"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nClients\nRounds\nLive\nPrivacy\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / FEDERATION / PRIVACY\nThe implemented privacy boundary\nENGINEERING FEDERATION DEMO\nRESEARCH PROTOTYPE\nSIMULATED CLIENTS\nNOT CLINICAL\nNOT DEPLOYED\n\nA narrow engineering claim about what the aggregation interface receives. It is not a general privacy or securi"
+        }
+      }
+    },
+    {
+      "name": "models",
+      "path": "/app/models",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "Model governance & comparison"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / MODELS\nModel governance & comparison\n\nOne model runs the live research monitoring. A separate federated engineering candidate exists only in a sandbox. They are compared here by role and status, not by performance: no candidate performance is claimed.\n\nENGINEERING FEDERATION DEMO\nRESEARCH PROT"
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "Model governance & comparison"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / MODELS\nModel governance & comparison\n\nOne model runs the live research monitoring. A separate federated engineering candidate exists only in a sandbox. They are compared here by role and status, not by performance: no candidate performance is claimed.\n\nENGINEERING FEDERATION DEMO\nRESEARCH PROT"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "Model governance & comparison"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / MODELS\nModel governance & comparison\n\nOne model runs the live research monitoring. A separate federated engineering candidate exists only in a sandbox. They are compared here by role and status, not by performance: no candidate performance is claimed.\n\nENGINEERING FEDERATION DEMO\nRESE"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "Model governance & comparison"
+          ],
+          "focusable": 2,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / MODELS\nModel governance & comparison\n\nOne model runs the live research monitoring. A separate federated engineering candidate exists only in a sandbox. They are compared here by role and status, not by performance: no candidate performance is claimed.\n\nENGINEERING FEDERATION DEMO\nRESE"
+        }
+      }
+    },
+    {
+      "name": "research_ml",
+      "path": "/app/research/ml",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "ML research evidence"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nML research evidence\n\nRead-only, non-diagnostic research summaries. This page does not run a model or change the monitoring runtime.\n\nMODEL_V2_FINAL · FROZEN RESEARCH EVIDENCE\n\nQUESTION 1\n\nWas MODEL_V2 promoted by the original model-promotion "
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "ML research evidence"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nML research evidence\n\nRead-only, non-diagnostic research summaries. This page does not run a model or change the monitoring runtime.\n\nMODEL_V2_FINAL · FROZEN RESEARCH EVIDENCE\n\nQUESTION 1\n\nWas MODEL_V2 promoted by the original model-promotion "
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "ML research evidence"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nML research evidence\n\nRead-only, non-diagnostic research summaries. This page does not run a model or change the monitoring runtime.\n\nMODEL_V2_FINAL · FROZEN RESEARCH EVIDENCE\n\nQUESTION 1\n\nWas MODEL_V2 promoted by the original model-p"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "ML research evidence"
+          ],
+          "focusable": 7,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nML research evidence\n\nRead-only, non-diagnostic research summaries. This page does not run a model or change the monitoring runtime.\n\nMODEL_V2_FINAL · FROZEN RESEARCH EVIDENCE\n\nQUESTION 1\n\nWas MODEL_V2 promoted by the original model-p"
+        }
+      }
+    },
+    {
+      "name": "research_fl",
+      "path": "/app/research/fl",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "FL research evidence"
+          ],
+          "focusable": 5,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nFL research evidence\n\nRead-only scientific research summaries, separate from the current product federation engineering demo. The federation clients are logical clients on one laptop, not hospitals or institutions.\n\nSCIENTIFIC FL EXPERIMENTS\n\n"
+        },
+        "768": {
+          "overflow": false,
+          "h1": [
+            "FL research evidence"
+          ],
+          "focusable": 5,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nFL research evidence\n\nRead-only scientific research summaries, separate from the current product federation engineering demo. The federation clients are logical clients on one laptop, not hospitals or institutions.\n\nSCIENTIFIC FL EXPERIMENTS\n\n"
+        },
+        "1024": {
+          "overflow": false,
+          "h1": [
+            "FL research evidence"
+          ],
+          "focusable": 5,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nFL research evidence\n\nRead-only scientific research summaries, separate from the current product federation engineering demo. The federation clients are logical clients on one laptop, not hospitals or institutions.\n\nSCIENTIFIC FL EXPE"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "FL research evidence"
+          ],
+          "focusable": 5,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nML evidence\nFL evidence\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\n\nNHM / FROZEN RESEARCH EVIDENCE\n\nFL research evidence\n\nRead-only scientific research summaries, separate from the current product federation engineering demo. The federation clients are logical clients on one laptop, not hospitals or institutions.\n\nSCIENTIFIC FL EXPE"
+        }
+      }
+    },
+    {
+      "name": "system",
+      "path": "/app/system",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "System"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / SYSTEM\nSystem\n\nCurrent research product identity from the authenticated product API. This is configuration evidence, not a health score.\n\nAUTHENTICATION\nDEMO\n\nOffline DEMO workspace\n\nMONITORING RUNTIME\nSOFTWARE_SYSTEM_V2\n\nAPI_SCHEMA_V1 · PRODUCT_API_V2\n\nMODEL / CALIBRATION\nMODEL_V2_FINAL\n\nCAL_"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "System"
+          ],
+          "focusable": 1,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / SYSTEM\nSystem\n\nCurrent research product identity from the authenticated product API. This is configuration evidence, not a health score.\n\nAUTHENTICATION\nDEMO\n\nOffline DEMO workspace\n\nMONITORING RUNTIME\nSOFTWARE_SYSTEM_V2\n\nAPI_SCHEMA_V1 · PRODUCT_API_V2\n\nMODEL / CALIBRATION\nMODEL_V2_FI"
+        }
+      }
+    },
+    {
+      "name": "about",
+      "path": "/app/about",
+      "widths": {
+        "390": {
+          "overflow": false,
+          "h1": [
+            "About this prototype"
+          ],
+          "focusable": 0,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nNHM / ABOUT\nAbout this prototype\n\nA research monitoring prototype and a separate federated-development demonstration. These are engineering and scientific evidence boundaries, not medical claims.\n\n01 / SCOPE\nWhat NHM is\nNHM is a research prototype for physiological monitoring and federated model dev"
+        },
+        "1440": {
+          "overflow": false,
+          "h1": [
+            "About this prototype"
+          ],
+          "focusable": 0,
+          "bodyExcerpt": "Skip to content\nOFFLINE DEMO IDENTITY\nNOT CLERK AUTHENTICATION\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED ONLY\nRESEARCH / NOT DIAGNOSTIC\nDEMO\ndemo:faculty\nSign out\nNHM / ABOUT\nAbout this prototype\n\nA research monitoring prototype and a separate federated-development demonstration. These are engineering and scientific evidence boundaries, not medical claims.\n\n01 / SCOPE\nWhat NHM is\nNHM is a research prototype for physiological monitoring and federated "
+        }
+      }
+    }
+  ],
+  "reduced": [
+    {
+      "name": "landing",
+      "matches": true,
+      "visible": true
+    },
+    {
+      "name": "overview",
+      "matches": true,
+      "visible": true
+    },
+    {
+      "name": "monitoring",
+      "matches": true,
+      "visible": true
+    },
+    {
+      "name": "federation",
+      "matches": true,
+      "visible": true
+    },
+    {
+      "name": "live",
+      "matches": true,
+      "visible": true
+    },
+    {
+      "name": "models",
+      "matches": true,
+      "visible": true
+    },
+    {
+      "name": "ml",
+      "matches": true,
+      "visible": true
+    },
+    {
+      "name": "fl",
+      "matches": true,
+      "visible": true
+    }
+  ],
+  "keyboard": {
+    "menuExpanded": "true",
+    "skipLink": true,
+    "positiveTabindex": 0,
+    "menuFocused": true,
+    "escapeClosesAndRestoresFocus": true,
+    "historyEvidenceFocusable": {
+      "passed": true,
+      "found": true,
+      "active": "<a class=\"cta svelte-1ieoo1n\" href=\"/app/history/SESS-2d9397a59f0c464a9ac41d110bf820e4\">VIEW EVIDENCE →</a>",
+      "link": "<a class=\"cta svelte-1ieoo1n\" href=\"/app/history/SESS-2d9397a59f0c464a9ac41d110bf820e4\">VIEW EVIDENCE →</a>"
+    },
+    "disclosureFocusable": true,
+    "signOutFocusable": true
+  },
+  "visualChecks": {
+    "formLabelsSeparated": true,
+    "historyEvidenceVisible": true
+  },
+  "externalHosts": [],
+  "consoleErrors": [],
+  "networkFailures": [],
+  "passed": true
+}
