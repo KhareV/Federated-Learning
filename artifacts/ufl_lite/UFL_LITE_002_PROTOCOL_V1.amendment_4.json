@@ -1,0 +1,21 @@
+{
+ "amendment_id": "UFL_LITE_002_PROTOCOL_V1_AMENDMENT_4",
+ "change": "Re-pin only the listed presentation/verifier/accounting-test files to the CAPSTONE_UI_V1_8-governed bytes. Predecessor locks and frozen scientific evidence remain unchanged.",
+ "defect": "UI-ENH-002 changes governed frontend presentation and requires CAPSTONE_UI_V1_8 successor awareness in historical verifiers.",
+ "files": {
+  "scripts/verify_capstone_ui_v1_4.py": {
+   "new_sha256": "3679d5d21d937ded0c60245408f8a95f0652805467ecee0d5ebdecec1d17f36f",
+   "old_sha256": "7a152d5fee8464f59200cc8ac68f9959ab8371e569475f60a3516a66d924e125"
+  },
+  "tests/test_ufl_lite_presentation.py": {
+   "new_sha256": "67b5163d13a0626d0ee74af6a56f7052441cdde43d0c821378dee79b78658a5a",
+   "old_sha256": "7e809d1cb1f2bf6558f778d0709a9b48cb29db3574740ca29ad28bf526ca7f63"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "UFL_LITE_002_PROTOCOL_V1 (historical files governed for UI-ENH-002)",
+ "previous_amendment": "UFL_LITE_002_PROTOCOL_V1_AMENDMENT_3",
+ "reason": "PRODUCT_STORY_COMPARISON_AND_RESEARCH_VISUALIZATION_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

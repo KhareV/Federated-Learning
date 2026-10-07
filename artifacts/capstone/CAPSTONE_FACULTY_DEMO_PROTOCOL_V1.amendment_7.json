@@ -1,0 +1,17 @@
+{
+ "amendment_id": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1_AMENDMENT_7",
+ "change": "Re-pin only the listed presentation/verifier/accounting-test files to the CAPSTONE_UI_V1_8-governed bytes. Predecessor locks and frozen scientific evidence remain unchanged.",
+ "defect": "UI-ENH-002 changes governed frontend presentation and requires CAPSTONE_UI_V1_8 successor awareness in historical verifiers.",
+ "files": {
+  "tests/test_capstone_full_demo.py": {
+   "new_sha256": "ff8126c1cd5905b8f2518f9296b6b9b13c3958758e8c1379dc0b3ad08a8780fa",
+   "old_sha256": "677f240f70917fd6c1fb1b833024d9e92d083512115d2855a23100edbbd01550"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1 (historical files governed for UI-ENH-002)",
+ "previous_amendment": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1_AMENDMENT_6",
+ "reason": "PRODUCT_STORY_COMPARISON_AND_RESEARCH_VISUALIZATION_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

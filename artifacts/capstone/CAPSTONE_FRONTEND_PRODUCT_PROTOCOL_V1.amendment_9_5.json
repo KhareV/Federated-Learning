@@ -1,0 +1,21 @@
+{
+ "amendment_id": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_9_5",
+ "change": "Re-pin only the listed presentation/verifier/accounting-test files to the CAPSTONE_UI_V1_8-governed bytes. Predecessor locks and frozen scientific evidence remain unchanged.",
+ "defect": "UI-ENH-002 changes governed frontend presentation and requires CAPSTONE_UI_V1_8 successor awareness in historical verifiers.",
+ "files": {
+  "frontend/src/routes/app/monitoring/+page.svelte": {
+   "new_sha256": "24bb079eecc1a8f1fb517c057fced887e24940560843bbf815d7a02fe60b3bc4",
+   "old_sha256": "b8de1d01383cc4132980fb59c037ec44cde85626f879b4da2380bd2d89515c33"
+  },
+  "scripts/verify_capstone_ui_v1.py": {
+   "new_sha256": "2de6dc63cdafa27b8bcf866cd635509d461218ea7765b33fb984dc8f4e96615c",
+   "old_sha256": "010771db7f243c04084472e1b90963bcf3fdd48cfd32ac837cdf646048c851dd"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 (historical files governed for UI-ENH-002)",
+ "previous_amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_9_4",
+ "reason": "PRODUCT_STORY_COMPARISON_AND_RESEARCH_VISUALIZATION_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

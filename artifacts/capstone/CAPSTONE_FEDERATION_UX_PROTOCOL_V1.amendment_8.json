@@ -1,0 +1,29 @@
+{
+ "amendment_id": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_8",
+ "change": "Re-pin only the listed presentation/verifier/accounting-test files to the CAPSTONE_UI_V1_8-governed bytes. Predecessor locks and frozen scientific evidence remain unchanged.",
+ "defect": "UI-ENH-002 changes governed frontend presentation and requires CAPSTONE_UI_V1_8 successor awareness in historical verifiers.",
+ "files": {
+  "frontend/src/lib/components/product/federation/CandidateCard.svelte": {
+   "new_sha256": "a68d31b3e26213e414d4b73b9547c02d8b0d1bf4ef2d5a4864a0e3d2a59a8e73",
+   "old_sha256": "f26c8ee6e7a881de8c6a6c131215c68c4a622b1b0f85a2d12c6c268348cf3648"
+  },
+  "scripts/verify_capstone_ui_v1.py": {
+   "new_sha256": "2de6dc63cdafa27b8bcf866cd635509d461218ea7765b33fb984dc8f4e96615c",
+   "old_sha256": "010771db7f243c04084472e1b90963bcf3fdd48cfd32ac837cdf646048c851dd"
+  },
+  "scripts/verify_capstone_ui_v1_1.py": {
+   "new_sha256": "7ab337b012369704a1d470481e985e799948eefa9a3a67ef7e16a30a6ea491e0",
+   "old_sha256": "b2873784165424714dc2747ceae57edd4921ffd3f7fb550ccf606ced04203ffa"
+  },
+  "tests/test_capstone_federation_ui.py": {
+   "new_sha256": "5aebe8c245b585f2381ef1fd9eb6cc73c918561b3343b8a5180d88aeef563235",
+   "old_sha256": "fb6851ce7f7bfdd9dfababfcb04a3a96b8e7fc241f399a0c1ce2d113f82c584e"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1 (historical files governed for UI-ENH-002)",
+ "previous_amendment": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_7",
+ "reason": "PRODUCT_STORY_COMPARISON_AND_RESEARCH_VISUALIZATION_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}
