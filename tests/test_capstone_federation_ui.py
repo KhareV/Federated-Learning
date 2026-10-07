@@ -28,6 +28,8 @@ def _shadow(tmp_path: Path) -> Path:
 
     shadow = tmp_path / "repo"
     paths = [*frontend_files(), UI_V1, UI_V11, "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json", *(["artifacts/capstone/CAPSTONE_UI_V1_3.lock.json"] if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json").exists() else []), *(["artifacts/capstone/CAPSTONE_UI_V1_4.lock.json"] if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_4.lock.json").exists() else []), *(["artifacts/capstone/CAPSTONE_UI_V1_5.lock.json"] if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_5.lock.json").exists() else []), *(["artifacts/capstone/CAPSTONE_UI_V1_6.lock.json"] if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_6.lock.json").exists() else []), *(["artifacts/capstone/CAPSTONE_UI_V1_7.lock.json"] if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_7.lock.json").exists() else []), "artifacts/DASHBOARD_UI_V1_5.lock.json", *[str(p.relative_to(ROOT)) for p in (ROOT / "artifacts/capstone").glob("CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_*.json")]]
+    if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_8.lock.json").exists():
+        paths.append("artifacts/capstone/CAPSTONE_UI_V1_8.lock.json")
     for rel in paths:
         (shadow / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / rel, shadow / rel)

@@ -77,6 +77,9 @@ def test_ui_v1_4_chain_verifies_and_predecessor_locks_are_byte_identical() -> No
     successor17 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_7.lock.json"       # UI-ENH-001: V1_7 accounts for its own, separately governed delta
     if successor17.exists():
         accounted |= set(json.loads(successor17.read_text())["changed_from_predecessor"])
+    successor18 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_8.lock.json"
+    if successor18.exists():
+        accounted |= set(json.loads(successor18.read_text())["changed_from_predecessor"])
     assert changed == sorted(accounted), changed
 
 
@@ -94,6 +97,9 @@ def _with_v15(then=lambda s: None):
         v17 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_7.lock.json"
         if v17.exists():
             shutil.copyfile(v17, s / "artifacts/capstone/CAPSTONE_UI_V1_7.lock.json")
+        v18 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_8.lock.json"
+        if v18.exists():
+            shutil.copyfile(v18, s / "artifacts/capstone/CAPSTONE_UI_V1_8.lock.json")
         then(s)
     return mutate
 

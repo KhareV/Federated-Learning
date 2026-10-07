@@ -56,6 +56,12 @@ def test_product_api_frontend_and_backend_are_byte_identical_to_entry() -> None:
 
             assert verify_ui17()["status"] == "PASS"
             accounted |= set(json.loads(successor17.read_text())["changed_from_predecessor"])
+        successor18 = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_8.lock.json"
+        if successor18.exists():
+            from scripts.verify_capstone_ui_v1_8 import verify as verify_ui18
+
+            assert verify_ui18()["status"] == "PASS"
+            accounted |= set(json.loads(successor18.read_text())["changed_from_predecessor"])
         drift = [p for p in drift if not (p.startswith("frontend/") and p in accounted)]
     assert drift == []
 

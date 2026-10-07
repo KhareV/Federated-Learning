@@ -30,7 +30,7 @@
 <div class="head"><div class="eyebrow">NHM / FEDERATION</div><h1>Federation Studio</h1>
 	<p class="lead">Watch real federated training happen: eight synthetic clients each train locally, send only model updates, and a coordinator combines them into a new global state - three times in a row.</p>
 	<ul class="facts" aria-label="Federation run at a glance"><li><b>8</b> synthetic clients</li><li><b>3</b> rounds</li><li><b>Local</b> training</li><li><b>FedAvg</b> aggregation</li><li><b>Engineering</b> candidate</li></ul>
-	<p class="dim">Real local optimization on synthetic data, on one demonstration machine. This screen makes no performance claim.</p></div>
+	<p class="dim">Real local optimization on synthetic data, on one demonstration machine. This screen makes no performance claim. <a href="/app/research/fl">View frozen FL research evidence →</a></p></div>
 <FederationBanner />
 {#if !enabled}
 	<p class="warn" role="alert" data-testid="backend-not-enabled">FEDERATION BACKEND NOT ENABLED</p>

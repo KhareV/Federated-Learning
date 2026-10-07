@@ -12,6 +12,7 @@ import subprocess
 from pathlib import Path
 
 from nhm.hashing import hash_file
+from scripts.capstone_ui_v1_8_successor import v18_bound
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCK = "artifacts/capstone/CAPSTONE_UI_V1_1.lock.json"
@@ -25,6 +26,9 @@ def frontend_files() -> list[str]:
 
 def _v17_bound() -> dict[str, str] | None:
     """UI-ENH-001 successor: a V1_7 lock chained to V1_6 governs the current bytes."""
+    latest = v18_bound(ROOT)
+    if latest is not None:
+        return latest
     path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_7.lock.json"
     if not path.exists():
         return None

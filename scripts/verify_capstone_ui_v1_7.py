@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 
 from nhm.hashing import hash_file
+from scripts.capstone_ui_v1_8_successor import v18_bound
 from scripts.freeze_capstone_ui_v1_7 import LOCK_PATH, PREDECESSOR, ROOT, frontend_files
 
 
@@ -17,7 +18,7 @@ def verify() -> dict[str, object]:
         raise RuntimeError("CAPSTONE_UI_V1_7_PREDECESSOR_DRIFT")
     if lock["npm_dependencies_added"] or lock["api_contract_changed"] or lock["scientific_state_semantics_changed"] or lock["backend_modified"]:
         raise RuntimeError("CAPSTONE_UI_V1_7_SCOPE_DRIFT")
-    expected, actual = lock["bound_artifacts"], frontend_files()
+    expected, actual = v18_bound(ROOT) or lock["bound_artifacts"], frontend_files()
     if set(actual) != set(expected):
         raise RuntimeError("CAPSTONE_UI_V1_7_UNBOUND_OR_MISSING_FRONTEND_FILE")
     for path, digest in expected.items():

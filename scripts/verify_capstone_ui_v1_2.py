@@ -5,11 +5,15 @@ from __future__ import annotations
 import json
 
 from nhm.hashing import hash_file
+from scripts.capstone_ui_v1_8_successor import v18_bound
 from scripts.freeze_capstone_ui_v1_2 import LOCK_PATH, PREDECESSOR, ROOT, frontend_files
 
 
 def _v17_bound() -> dict[str, str] | None:
     """UI-ENH-001 successor: a V1_7 lock chained to V1_6 governs the current bytes."""
+    latest = v18_bound(ROOT)
+    if latest is not None:
+        return latest
     path = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_7.lock.json"
     if not path.exists():
         return None
@@ -84,7 +88,12 @@ def verify() -> dict[str, object]:
     if lock["npm_dependencies_added"] or lock["api_contract_changed"]:
         raise RuntimeError("CAPSTONE_UI_V1_2_SCOPE_DRIFT")
     expected = (
-        _v17_bound() or _v16_bound() or _v15_bound() or _v14_bound() or _v13_bound() or lock["bound_artifacts"]
+        _v17_bound()
+        or _v16_bound()
+        or _v15_bound()
+        or _v14_bound()
+        or _v13_bound()
+        or lock["bound_artifacts"]
     )
     actual = frontend_files()
     if set(actual) != set(expected):

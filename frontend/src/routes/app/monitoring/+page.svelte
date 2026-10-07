@@ -5,6 +5,9 @@
 	import Panel from '$lib/components/dashboard/Panel.svelte';
 	import MetricTile from '$lib/components/dashboard/MetricTile.svelte';
 	import WaveformPlot from '$lib/components/product/WaveformPlot.svelte';
+	import FlowDiagram from '$lib/components/product/story/FlowDiagram.svelte';
+	import ComparisonPanel from '$lib/components/product/story/ComparisonPanel.svelte';
+	import TechnicalEvidence from '$lib/components/product/federation/TechnicalEvidence.svelte';
 	import SimulationBanner from '$lib/components/product/SimulationBanner.svelte';
 	import { STATE_PRESENTATION } from '$lib/dashboard/state-presentation';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -28,6 +31,16 @@
 	const ts = (us: number | null) => (us === null ? '--' : new Date(us / 1000).toLocaleString());
 	const announce = $derived(`Session ${sessState ?? 'not started'}. Device ${live.deviceState ?? device?.connection_state ?? 'none'}. Monitoring state ${live.monitoringState ?? 'none yet'}.`);
 
+	const sys = $derived(store.authState.system);
+	const modelId = $derived(live.inference?.model_id ?? sys?.model_id ?? 'MODEL_V2_FINAL');
+	const calId = $derived(live.inference?.calibration_id ?? sys?.calibration_id ?? 'CAL_V2');
+	// Pipeline progress is derived ONLY from events already received (never from the browser running anything).
+	const flow = $derived.by(() => {
+		const done = [connected || !!session, live.segments.length > 0, !!live.quality, !!live.inference, !!live.monitoringState, finished];
+		const firstOpen = done.indexOf(false);
+		const names: [string, string][] = [['VIRTUAL WEARABLE', 'simulated source'], ['SIGNAL', 'source ECG'], ['QUALITY', 'signal quality'], [`${modelId}`, 'server-side inference'], ['MONITORING STATE', 'research state'], ['ALERT / HISTORY', 'persisted']];
+		return names.map(([label, sub], i) => ({ label, sub, tone: (i === 3 ? 'released' : 'neutral') as 'released' | 'neutral', mark: done[i] ? '✓' : i === firstOpen && active ? '●' : '○', status: (done[i] ? 'done' : i === firstOpen && active ? 'active' : 'pending') as 'done' | 'active' | 'pending' }));
+	});
 	onMount(() => { void store.loadDevices(); void store.loadSessions(); });
 	onDestroy(() => { if (!active) store.closeLive(); });
 </script>
@@ -38,6 +51,8 @@
 <div class="eyebrow">NHM / MONITOR</div>
 <h1>Live monitoring</h1>
 <div class="sr" role="status" aria-live="polite">{announce}</div>
+<p class="lead">A simulated wearable streams ECG to the backend. The server checks signal quality, runs {modelId} with {calId}, and reports a research monitoring state. The browser only displays what the backend sends.</p>
+<div class="flowbox" data-testid="monitoring-flow"><FlowDiagram label="Monitoring pipeline" steps={flow} /></div>
 
 {#if store.error}<p class="err" role="alert">{store.error}</p>{/if}
 
@@ -67,6 +82,7 @@
 			<span><a href="/app/history">View sessions</a> · <button class="link" onclick={() => { store.resetLive(); }}>Start another session</button></span>
 		</div>
 	{/if}
+	<dl class="facts" data-testid="session-facts"><div><dt>DEVICE</dt><dd>{device?.device_id ?? '--'}</dd></div><div><dt>SCENARIO</dt><dd>{known ?? (pickedScenario || RECOMMENDED_SCENARIO)}</dd></div><div><dt>MODEL</dt><dd>{modelId} · server-side</dd></div><div><dt>CALIBRATION</dt><dd>{calId}</dd></div></dl>
 </Panel>
 
 {#if store.socketStatus !== 'IDLE' || live.eventCount > 0}
@@ -79,37 +95,50 @@
 {#if live.streamError}<p class="err" role="alert" data-testid="stream-error">{live.streamError.message}</p>{/if}
 
 <div class="wave">
-	<Panel eyebrow="02 / SIMULATED SOURCE ECG" title="Virtual wearable ECG" note="360 Hz / ADC_COUNTS / rolling 10 s">
+	<Panel eyebrow="02 / SIMULATED SOURCE ECG" title="Virtual wearable ECG · MODEL SIGNAL" note="360 Hz / ADC_COUNTS / rolling 10 s">
 		<WaveformPlot segments={live.segments} start={live.waveformStart} end={live.waveformEnd} capacity={live.waveformCapacity || 3600} gaps={live.gaps} openGap={live.openGap} />
 		<p class="foot">Simulated device-source ECG transport (not the 250 Hz model-input window, not a physical sensor). PPG waveform is unavailable in the current simulator; SpO2/PPG-derived context appears only where emitted.</p>
 		{#if live.gaps.length || live.openGap}
-			<p class="foot" data-testid="gap-list">Source gaps observed (sample indices): {#each [...live.gaps, ...(live.openGap ? [live.openGap] : [])] as g}<code>[{g.start}, {g.end}]</code> {/each}</p>
+			<p class="warn" role="status">Source gaps were observed in this stream.</p>
+			<TechnicalEvidence label="TECHNICAL EVIDENCE (gap ranges)" testid="gap-evidence"><p class="foot" data-testid="gap-list">Source gaps observed (sample indices): {#each [...live.gaps, ...(live.openGap ? [live.openGap] : [])] as g}<code>[{g.start}, {g.end}]</code> {/each}</p></TechnicalEvidence>
 		{/if}
 	</Panel>
 </div>
+<div class="wave">
+	<Panel eyebrow="SOURCE VS MODEL INPUT" title="What is drawn is not what the model reads" note="SERVER-SIDE INFERENCE">
+		<ComparisonPanel testid="source-vs-model" leftTitle="SIMULATED SOURCE ECG" leftSub="what the waveform shows" leftTone="neutral" rightTitle="MODEL INPUT" rightSub={modelId} rightTone="released" rows={[
+			{ label: 'Form', left: '360 Hz transport', right: 'Causally prepared 10 s ECG window' },
+			{ label: 'Prepared where', left: 'Streamed by the virtual wearable', right: 'On the server, from the source stream' },
+			{ label: 'Browser role', left: 'Draws it', right: 'None: the browser never runs preprocessing or inference' }
+		]} />
+	</Panel>
+</div>
 
-<div class="grid">
-	<Panel eyebrow="03 / QUALITY LABEL" title="Signal quality" note="quality.status">
+<p class="sep" data-testid="quality-vs-state">SIGNAL QUALITY (is the signal usable?) is not the same thing as MONITORING STATE (the model-derived research state).</p>
+<div class="pair">
+	<Panel eyebrow="03 / SIGNAL QUALITY" title="Signal quality · is the signal usable?" note="quality.status">
 		{#if live.quality}
 			<p class="big" data-testid="quality-state">{live.quality.ecg_quality}</p>
 			<p class="label" data-testid="quality-label">{live.quality.ui_label}</p>
 			<p class="foot">A signal-quality message. It is NOT a monitoring state. ECG windows so far: {live.qualityCounts.VALID} valid / {live.qualityCounts.DEGRADED} degraded / {live.qualityCounts.UNUSABLE} unusable.</p>
 		{:else}<p class="dim">No quality.status event yet.</p>{/if}
 	</Panel>
-	<Panel eyebrow="04 / MONITORING STATE" title="Research monitoring state" note="monitoring.state">
+	<Panel eyebrow="04 / MONITORING STATE" title="Research monitoring state · model-derived" note="monitoring.state">
 		{#if live.monitoringState && stateText}
 			<p class="big" data-testid="monitoring-state">{live.monitoringState}</p>
 			<p class="label">{stateText.title}</p><p class="foot">{stateText.text}</p>
 		{:else}<p class="dim" data-testid="monitoring-state-none">No monitoring.state event received yet. The state changes only when the backend sends one.</p>{/if}
-		{#if live.monitoringChanges.length}<ol class="changes" data-testid="state-changes">{#each live.monitoringChanges as c}<li><code>#{c.sequence_index}</code> {c.previous ?? 'start'} → <b>{c.state}</b></li>{/each}</ol>{/if}
+		{#if live.monitoringChanges.length}<TechnicalEvidence label="TECHNICAL EVIDENCE (state-change log)" testid="state-changes-evidence"><ol class="changes" data-testid="state-changes">{#each live.monitoringChanges as c}<li><code>#{c.sequence_index}</code> {c.previous ?? 'start'} → <b>{c.state}</b></li>{/each}</ol></TechnicalEvidence>{/if}
 	</Panel>
-	<Panel eyebrow="05 / CONTEXT" title="Physiological context" note="context.snapshot">
+</div>
+<div class="grid">
+	<Panel eyebrow="05 / CONTEXT" title="PPG / SpO2 · context and quality" note="CONTEXT, NOT A MODEL SIGNAL">
 		{#if (live.contextState === 'CURRENT' || live.contextState === 'PENDING') && live.context}
 			{#if live.contextState === 'PENDING'}<p class="dim" data-testid="context-pending">Updating… (values below are from the previous window)</p>{/if}
 			<div class="kv" class:fade={live.contextState === 'PENDING'}><MetricTile label="ECG HR" value={pct(live.context.hr_ecg_bpm, 1)} unit="bpm" /><MetricTile label="PPG pulse rate" value={pct(live.context.pr_ppg_bpm, 1)} unit="bpm" tone="cyan" /><MetricTile label="SpO2" value={live.context.spo2_valid ? pct(live.context.spo2_pct, 1) : '--'} unit="%" tone="cyan" detail={live.context.spo2_valid ? 'VALID' : 'NOT VALID'} /></div>
 			<p class="foot">PPG quality: {live.context.ppg_quality ?? 'n/a'}</p>
 		{:else if live.contextState === 'PENDING'}<p class="dim" data-testid="context-pending">Waiting for the first context for this window…</p>
-		{:else}<p class="big" data-testid="context-unavailable">UNAVAILABLE</p><p class="foot">No current context for the latest window{live.context && !live.context.context_available ? ' (the backend reported context_available = false)' : ''}. Earlier values are not shown as current.</p>{/if}
+		{:else}<p class="big" data-testid="context-unavailable">CONTEXT NOT AVAILABLE FOR THIS WINDOW</p><p class="foot">No current context for the latest window{live.context && !live.context.context_available ? ' (the backend reported context_available = false)' : ''}. Earlier values are not shown as current.</p>{/if}
 	</Panel>
 	<Panel eyebrow="06 / INFERENCE" title="MODEL_V2_FINAL result" note="inference.result">
 		{#if live.inference}
@@ -153,4 +182,6 @@
 	.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; } .changes { margin: 10px 0 0; padding-left: 18px; font-size: 12px; color: #cbd5e1; display: grid; gap: 3px; }
 	.research { margin-top: 8px; padding: 8px 10px; border: 1px solid var(--nhm-border); background: rgba(5,10,21,.7); } summary { cursor: pointer; color: #fbbf24; font: 11px 'JetBrains Mono', monospace; letter-spacing: .08em; }
 	@media (max-width: 560px) { dl { grid-template-columns: 1fr; gap: 1px; } dd { margin-bottom: 8px; } .actions button { flex: 1 1 100%; } }
+.lead { color: #94a3b8; font-size: 14px; line-height: 1.6; max-width: 760px; margin: -8px 0 14px; } .flowbox { margin: 0 0 16px; } .facts { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 6px; margin: 14px 0 0; } .facts div { border: 1px solid rgba(148,163,184,.16); padding: 6px 9px; min-width: 0; } .facts dd { font-size: 12px; }
+	.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 10px; margin-bottom: 10px; } .sep { margin: 14px 0 8px; padding: 8px 12px; border-left: 3px solid #fbbf24; color: #fde68a; font: 12px/1.5 'JetBrains Mono', monospace; background: rgba(251,191,36,.05); }
 </style>
