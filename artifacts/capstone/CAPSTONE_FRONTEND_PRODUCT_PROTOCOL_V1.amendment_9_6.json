@@ -1,0 +1,17 @@
+{
+ "amendment_id": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_9_6",
+ "change": "Re-pin only the listed presentation/verifier/accounting-test files to the CAPSTONE_UI_V1_9-governed bytes. Predecessor locks and frozen scientific evidence remain unchanged.",
+ "defect": "UI-ENH-003 changes governed frontend presentation and requires CAPSTONE_UI_V1_9 successor awareness in historical verifiers.",
+ "files": {
+  "frontend/src/routes/app/device/+page.svelte": {
+   "new_sha256": "4456038fce7accad3408afd49a2a00076e5ced1af3247ca88b212e83bb62ad81",
+   "old_sha256": "74df49697ef4097685c2ad34b625ffb1c95164679ef370d2503ded8ad3c36b38"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 (historical files governed for UI-ENH-003)",
+ "previous_amendment": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_9_5",
+ "reason": "FINAL_UI_POLISH_AND_BUG_FIX_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}
