@@ -80,10 +80,12 @@ def test_tamper_controls_on_the_final_lock(tmp_path, monkeypatch):
     with pytest.raises(RuntimeError, match="REPIN_SET_MISMATCH"):
         vf.verify_lock()
     _tampered(tmp_path, monkeypatch, lambda lock: lock["bound_artifacts"].__setitem__(sorted(lock["bound_artifacts"])[0], "0" * 64))
-    with pytest.raises(RuntimeError, match="FRONTEND_BINDING_DRIFT"):
+    # A substituted historical lock cannot inherit FL10 re-pins, so it fails
+    # earlier on the first changed bound API file; either way it fails closed.
+    with pytest.raises(RuntimeError, match=r"FINAL_SHOWCASE_TAMPER|FRONTEND_BINDING_DRIFT"):
         vf.verify_lock()
     _tampered(tmp_path, monkeypatch, lambda lock: lock.__setitem__("candidate_promoted_or_deployed", True))
-    with pytest.raises(RuntimeError, match="SCOPE_DRIFT"):
+    with pytest.raises(RuntimeError, match=r"FINAL_SHOWCASE_TAMPER|SCOPE_DRIFT"):
         vf.verify_lock()
 
 

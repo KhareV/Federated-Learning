@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "scope": "FL10 targeted backend, historical successor regression, frontend, browser and protected-surface checks",
+  "backend_fl10": {
+    "combined_run": "30 passed, 2 warnings in 517.70 seconds",
+    "mode_b_api_live_monitoring": "included in combined run"
+  },
+  "predecessor_and_successor": "41 passed, 3 warnings in 33.68 seconds",
+  "frontend_vitest": "259 passed, 3 skipped",
+  "svelte_check": "0 errors, 123 warnings",
+  "frontend_build": "PASS",
+  "browser_smoke": "PASS at 1440, 1024, 768 and 390 pixels; DemoAuth only",
+  "protected_baseline_hashes": "92/92 unchanged",
+  "ruff": "PASS on changed Python surfaces",
+  "scientific_claim": "synthetic engineering event evaluation, not AAMI-SVF or clinical",
+  "connected_clerk_e2e": "NOT RUN: two Clerk TEST user credentials unavailable; API two-identity ownership test passed"
+}

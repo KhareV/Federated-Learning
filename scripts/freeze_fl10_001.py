@@ -24,7 +24,7 @@ BOUND_EXACT = {
     "scripts/verify_obs_diag_001.py", "scripts/verify_observatory_v1.py",
     "tests/test_fl10_api.py", "tests/test_fl10_evaluation.py",
     "tests/test_fl10_training.py", "tests/test_final_showcase_audit.py",
-    "tests/test_observatory_pipeline.py",
+    "tests/test_observatory_pipeline.py", "tests/test_fl10_successor.py",
     "artifacts/capstone/CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_9_1_1_2.json",
     "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_9_6_1_1_2.json",
 }

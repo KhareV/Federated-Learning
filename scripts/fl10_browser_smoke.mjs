@@ -35,7 +35,8 @@ const evaluate = async (expression) => {
 const wait = async (expression, timeout = 45000) => {
   const end = Date.now() + timeout;
   while (Date.now() < end) { if (await evaluate(expression)) return; await sleep(150); }
-  throw new Error(`WAIT_TIMEOUT:${expression}`);
+  const state = await evaluate(`({path:location.pathname,body:document.body?.innerText?.slice(0,400)})`);
+  throw new Error(`WAIT_TIMEOUT:${expression}:${JSON.stringify(state)}:${JSON.stringify(errors)}`);
 };
 const navigate = async (path) => {
   await send('Page.navigate', { url: origin + path });
@@ -50,8 +51,10 @@ const viewport = (width) => send('Emulation.setDeviceMetricsOverride', {
 });
 await viewport(1440);
 await navigate('/sign-in');
-await wait(`document.body.innerText.includes('ENTER DEMO WORKSPACE')`);
-await evaluate(`([...document.querySelectorAll('button,a')].find(x=>x.textContent.trim()==='ENTER DEMO WORKSPACE')).click()`);
+await wait(`document.body.innerText.includes('ENTER DEMO WORKSPACE') || location.pathname==='/app'`);
+if (await evaluate(`document.body.innerText.includes('ENTER DEMO WORKSPACE')`)) {
+  await evaluate(`([...document.querySelectorAll('button,a')].find(x=>x.textContent.trim()==='ENTER DEMO WORKSPACE')).click()`);
+}
 await wait(`location.pathname==='/app'`);
 await navigate('/app/observatory/fl10');
 await wait(`document.querySelectorAll('[data-testid^="chart-FL10_FIG"]').length>=3`, 60000);
