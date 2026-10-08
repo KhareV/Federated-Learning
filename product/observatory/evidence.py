@@ -378,3 +378,80 @@ def explainability_case(case_type: str) -> dict[str, Any]:
         "source": {"attribution_sha256": case["attribution_sha256"], "raw_sha256": case["raw_sha256"],
                    "annotations_sha256": case["annotations_sha256"]},
     }
+
+
+def _yaml_scalars(relative: str, keys: tuple[str, ...]) -> dict[str, str]:
+    found: dict[str, str] = {}
+    for line in (ROOT / relative).read_text().splitlines():
+        stripped = line.strip()
+        for key in keys:
+            if stripped.startswith(f"{key}:") and key not in found:
+                found[key] = stripped.split(":", 1)[1].strip()
+    return found
+
+
+def _role_blocks() -> dict[str, dict[str, str]]:
+    blocks: dict[str, dict[str, str]] = {}
+    current: dict[str, str] | None = None
+    for line in (ROOT / "manifests/datasets/dataset_roles_v1.yaml").read_text().splitlines():
+        if line and not line.startswith((" ", "#")) and line.endswith(":"):
+            current = blocks.setdefault(line[:-1], {})
+        elif current is not None and ":" in line and line.startswith("  ") and not line.startswith("   "):
+            key, _, value = line.strip().partition(":")
+            if value.strip() and value.strip() != ">":
+                current[key] = value.strip()
+    return blocks
+
+
+def causality_demonstration(resampler_id: str) -> dict[str, Any]:
+    """Deterministic demonstration on the REAL causal resampler with a synthetic test signal (not ECG data)."""
+    from preprocessing.resample import StatefulRationalResampler, load_resampler_spec
+
+    spec = load_resampler_spec(resampler_id)
+    n = spec.input_rate_hz * 4
+    t = np.arange(n) / spec.input_rate_hz
+    base = np.sin(2 * np.pi * 3.0 * t)
+    changed = base.copy()
+    cut = n // 2
+    changed[cut:] += 5.0        # alter only samples that arrive AFTER the cut
+    first = StatefulRationalResampler(spec).process(base, 0).values
+    second = StatefulRationalResampler(spec).process(changed, 0).values
+    differ = np.flatnonzero(first != second)
+    first_diff = int(differ[0]) if differ.size else None
+    return {"synthetic_test_signal": "3 Hz sine, 4 s (not research data)", "altered_from_source_sample": cut,
+            "output_samples": int(first.size), "first_output_index_that_changed": first_diff,
+            "outputs_before_alteration_identical": bool(first_diff is None or np.array_equal(first[:first_diff], second[:first_diff])),
+            "meaning": "Altering later input samples never changes earlier causal outputs."}
+
+
+def dataset_preprocessing() -> dict[str, Any]:
+    from preprocessing.resample import load_resampler_spec
+
+    lock_raw = (ROOT / "manifests/preprocessing/PREPROC_V1.lock.json").read_bytes()
+    lock = json.loads(lock_raw)
+    roles = _role_blocks()
+    entries = []
+    for dataset, resampler_id, manifest in (("MITDB", "MITDB_360_TO_250_V1", "manifests/datasets/mitdb_v1.yaml"),
+                                            ("INCART", "INCART_257_TO_250_V1", "manifests/datasets/incart_v1.yaml")):
+        spec = load_resampler_spec(resampler_id)
+        facts = _yaml_scalars(manifest, ("sampling_rate_hz", "lead_policy_id", "eligible_record_count", "provider"))
+        role = roles.get(dataset, {})
+        entries.append({
+            "dataset": dataset, "native_rate_hz": spec.input_rate_hz, "target_rate_hz": spec.output_rate_hz,
+            "resampler_id": resampler_id, "up": spec.up, "down": spec.down, "taps": spec.num_taps,
+            "group_delay_seconds": spec.group_delay_seconds, "startup_transient_output_samples": spec.startup_transient_output_span,
+            "coefficient_sha256": spec.coefficient_sha256, "lead_policy": facts.get("lead_policy_id"),
+            "role": role.get("role"), "allowed_for_training": role.get("allowed_for_training"),
+            "external_evaluation_only": role.get("external_evaluation_only"),
+            "access_rule": "Availability never implies permission outside the locked role; INCART is evaluation-only and was already used for the post-freeze second look.",
+            "causality": causality_demonstration(resampler_id)})
+    contract = lock["semantic_contract"]
+    return {"schema_version": SCHEMA, "classification": "FROZEN_METHOD_PLUS_DETERMINISTIC_DEMONSTRATION",
+            "datasets": entries,
+            "contract": {k: contract[k] for k in ("signal_interval", "annotation_interval", "ecg_rate_hz", "window_samples", "stride_samples", "normalization_id", "normalization_epsilon", "gap_policy_id", "quality_id", "windowing_id", "resampler_delay_us", "timestamp_backdating")},
+            "annotation_time_mapping": lock["annotation_time_mapping"], "causal_iir_phase": lock["causal_iir_phase"],
+            "label_contracts": [
+                {"id": "AAMI_SVF_WINDOW_V1", "kind": "SCIENTIFIC_ECG_CLASSIFICATION", "rule": "At least five mapped eligible beats; positive = any mapped S/V/F beat; negative = only mapped N beats; Q or unmappable beats exclude the window."},
+                {"id": "WEARABLE_SIM_EVENT_WINDOW_V1", "kind": "SYNTHETIC_ENGINEERING_EVENT", "rule": "Deterministic scheduled synthetic events; not the AAMI-SVF target and not a medical annotation."}],
+            "raw_recordings": "NOT_PRESENT_IN_THIS_CHECKOUT: beat positions on the waveform are unavailable; no synthetic signal is ever shown as a MIT-BIH or INCART record.",
+            "source": {"lock_path": "manifests/preprocessing/PREPROC_V1.lock.json", "lock_sha256": _sha(lock_raw)}}

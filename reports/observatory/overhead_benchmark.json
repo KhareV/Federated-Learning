@@ -1,0 +1,25 @@
+{
+ "scenario": "NORMAL_MONITORING",
+ "source_duration_s": 120,
+ "windows_emitted": 21,
+ "repeats": 5,
+ "plain_seconds": [
+  0.17123862507287413,
+  0.17225675005465746,
+  0.17324825003743172,
+  0.17272770800627768,
+  0.17344050004612654
+ ],
+ "with_capture_seconds": [
+  0.19889141607563943,
+  0.19086729199625552,
+  0.20229912491049618,
+  0.1917764589888975,
+  0.20434041693806648
+ ],
+ "median_plain_s": 0.17272770800627768,
+ "median_with_capture_s": 0.19889141607563943,
+ "median_overhead_pct": 15.15,
+ "machine": "Darwin arm64 Python 3.11.16",
+ "note": "Wall-clock of canonical ingestion of simulated source; capture is opt-in and bounded to one window. Not a latency claim for any deployment."
+}

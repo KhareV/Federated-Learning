@@ -1,10 +1,10 @@
 {
  "a": {
   "console_errors": [],
-  "elapsed_s": 64,
+  "elapsed_s": 79,
   "known": {
-   "run_id": "FEDRUN-DE0EEAA1121C",
-   "session_id": "SESS-dbf9efd3c2594fcca16464ffbd74e091"
+   "run_id": "FEDRUN-C3D2CA1137C9",
+   "session_id": "SESS-45ab7179db3742ffbde0dddc18877297"
   },
   "mode": "a-journey",
   "steps": [
@@ -111,6 +111,29 @@
     "step": "global-clients-unbound"
    },
    {
+    "controls": 5,
+    "noRerun": true,
+    "overflow": false,
+    "step": "session-replay",
+    "transitions": true
+   },
+   {
+    "candidateShown": true,
+    "clients": 8,
+    "firstEvent": "Latest journal entry: federation.status \u2014 run CREATED / round 0",
+    "firstRoundText": "WAITING FOR ROUND 1 Local training complete 0 / 8 Updates re",
+    "firstStateNotFinal": true,
+    "label": "REPLAY \u2014 NO LOCAL TRAINING EXECUTING",
+    "noTraining": true,
+    "overflow": false,
+    "step": "federation-replay"
+   },
+   {
+    "cards": 2,
+    "incartOwnPath": true,
+    "step": "dataset-preprocessing"
+   },
+   {
     "anonymous_observatory_status": 401,
     "clicked": true,
     "path": "/sign-in",
@@ -121,7 +144,7 @@
  },
  "b": {
   "console_errors": [],
-  "elapsed_s": 20,
+  "elapsed_s": 21,
   "mode": "b-isolation",
   "steps": [
    {
@@ -167,5 +190,5 @@
    "UNKNOWN"
   ]
  },
- "startup_s": 17.1
+ "startup_s": 16.1
 }

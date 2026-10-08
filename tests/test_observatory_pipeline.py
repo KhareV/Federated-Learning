@@ -502,6 +502,7 @@ def test_api_extension_adds_only_the_documented_observatory_routes(tmp_path: Pat
         ("/product/v1/observatory/evidence/fl-eval", ("GET",)),
         ("/product/v1/observatory/evidence/fl-eval/curves/{dataset}/{model_id}", ("GET",)),
         ("/product/v1/observatory/evidence/boundaries", ("GET",)),
+        ("/product/v1/observatory/research/preprocessing", ("GET",)),
         ("/product/v1/observatory/evidence/explainability", ("GET",)),
         ("/product/v1/observatory/evidence/explainability/{case_type}", ("GET",)),
         ("/product/v1/observatory/model/architecture", ("GET",)),
@@ -570,3 +571,20 @@ def test_explainability_cases_are_hash_verified_and_labeled_non_causal() -> None
     assert len(case["model_input"]) == 2500 and case["classification"] == "FROZEN_RESEARCH_EVIDENCE"
     with pytest.raises(evidence.EvidenceError, match="UNKNOWN_EVIDENCE_CASE"):
         evidence.explainability_case("../../etc/passwd")
+
+
+def test_each_dataset_has_its_own_locked_resampler_and_causality_holds() -> None:
+    from product.observatory import evidence
+
+    body = evidence.dataset_preprocessing()
+    by_name = {item["dataset"]: item for item in body["datasets"]}
+    assert (by_name["MITDB"]["native_rate_hz"], by_name["INCART"]["native_rate_hz"]) == (360, 257)
+    assert by_name["MITDB"]["resampler_id"] != by_name["INCART"]["resampler_id"]
+    assert by_name["INCART"]["allowed_for_training"] == "false"
+    for item in body["datasets"]:
+        assert item["causality"]["outputs_before_alteration_identical"] is True
+        assert item["causality"]["first_output_index_that_changed"] is not None
+    contract = body["contract"]
+    assert contract["signal_interval"] == "[t-10s,t)"
+    assert contract["annotation_interval"] == "[t-10s,t]"
+    assert body["raw_recordings"].startswith("NOT_PRESENT")

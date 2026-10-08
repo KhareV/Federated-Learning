@@ -188,13 +188,20 @@ await viewport(390); await sleep(400);
 const labMobile = await evaluate(`document.documentElement.scrollWidth>innerWidth`);
 await screenshot('c_scenario_lab_390');
 await viewport(1440);
+
+// Automated accessibility smoke (names, labels, landmarks, target sizes, keyboard reachability). Not a WCAG conformance audit.
+const a11y = [];
+for (const route of ['/app/observatory', '/app/observatory/federation', '/app/observatory/research', '/app/observatory/tour', '/app/observatory/evidence', '/app/observatory/model', '/app/observatory/provenance', '/app/observatory/scenarios', '/app/observatory/replay', '/app/observatory/federation-replay']) {
+  await navigate(route); await sleep(2500);
+  a11y.push({ route, ...(await evaluate(`(()=>{const vis=(e)=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0};const name=(e)=>(e.getAttribute('aria-label')||e.textContent||e.getAttribute('title')||'').trim();const labelled=(e)=>e.getAttribute('aria-label')||e.id&&document.querySelector('label[for="'+e.id+'"]')||e.closest('label');const small=[...document.querySelectorAll('main button, main a, main summary, main select, main input')].filter((e)=>vis(e)&&(e.getBoundingClientRect().height<24||e.getBoundingClientRect().width<24)&&!e.closest('label')&&e.type!=='range').map((e)=>name(e).slice(0,30));return {h1:document.querySelectorAll('h1').length,main:document.querySelectorAll('main').length,lang:!!document.documentElement.lang,unnamedButtons:[...document.querySelectorAll('button')].filter((b)=>vis(b)&&!name(b)).length,unlabelledFields:[...document.querySelectorAll('select,input,textarea')].filter((e)=>vis(e)&&!labelled(e)).length,svgWithoutName:[...document.querySelectorAll('svg')].filter((s)=>vis(s)&&!s.getAttribute('aria-hidden')&&!s.getAttribute('aria-label')&&!s.querySelector('title')&&!s.closest('button,a')).length,smallTargets:small.length,smallNames:small.slice(0,3),focusable:document.querySelectorAll('main button:not([disabled]), main a[href], main select, main input, main summary').length};})()`)) });
+}
 await cdp.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
 await viewport(390);
 await navigate('/app/observatory/tour');
 await wait(`document.body.innerText.includes('Follow the evidence, end to end')`);
 const reducedMotion = await evaluate(`matchMedia('(prefers-reduced-motion: reduce)').matches && !(document.documentElement.scrollWidth>innerWidth)`);
 const externalHosts = [...hosts].filter((x) => x !== '127.0.0.1' && x !== 'localhost');
-const report = { evidencePage, incart, evidenceMobile, modelPage, modelMobile, provenance, provenanceMobile, lab, labMobile, clean, ownedSession, capturedSession, gap, mobile, federation, matrix, federationMobile, flWindow, flWindowMobile, researchRecord, researchRecordMobile, tour, tourMobile, responsive, reducedMotion, externalHosts, errors,
+const report = { a11y, evidencePage, incart, evidenceMobile, modelPage, modelMobile, provenance, provenanceMobile, lab, labMobile, clean, ownedSession, capturedSession, gap, mobile, federation, matrix, federationMobile, flWindow, flWindowMobile, researchRecord, researchRecordMobile, tour, tourMobile, responsive, reducedMotion, externalHosts, errors,
   passed: clean.h1 === 'Follow one signal through the system' && clean.stages === 5 && clean.cursors === 5 && clean.pinnedCodeRefs === 5 && clean.commit === 'dff28f6a7b7bd527def21cb9fd95d682aa60a667' && clean.quality && !clean.overflow
     && (!sessionAvailable || (ownedSession.model && ownedSession.calibration && ownedSession.technical && !ownedSession.withheld))
     && (!captureSession || (capturedSession?.classification && capturedSession?.model && capturedSession?.stages === 5 && !capturedSession?.overflow && !capturedSession?.mobileOverflow))
@@ -211,6 +218,7 @@ const report = { evidencePage, incart, evidenceMobile, modelPage, modelMobile, p
     && modelPage.xai && modelPage.xaiLabel && modelPage.params && modelPage.calibration && modelPage.temperature && modelPage.hypothetical && modelPage.reliability === 2 && !modelPage.overflow && !modelMobile
     && provenance.commit && provenance.chronology === 7 && provenance.boundaries === 10 && !provenance.missing && provenance.bothDecisions && !provenance.overflow && !provenanceMobile
     && lab.segments === 6 && lab.sourceTime && lab.quality && lab.notControlled && !lab.overflow && !labMobile
+    && a11y.every((x) => x.h1 === 1 && x.main >= 1 && x.lang && x.unnamedButtons === 0 && x.unlabelledFields === 0 && x.svgWithoutName === 0 && x.smallTargets === 0 && x.focusable > 0)
     && responsive.every((item) => !item.overflow) && reducedMotion
     && !externalHosts.length && !errors.length };
 writeFileSync(`${output}/browser_smoke.json`, JSON.stringify(report, null, 2) + '\n');

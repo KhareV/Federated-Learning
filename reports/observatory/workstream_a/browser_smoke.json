@@ -1,4 +1,126 @@
 {
+  "a11y": [
+    {
+      "route": "/app/observatory",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 20
+    },
+    {
+      "route": "/app/observatory/federation",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 13
+    },
+    {
+      "route": "/app/observatory/research",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 6
+    },
+    {
+      "route": "/app/observatory/tour",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 19
+    },
+    {
+      "route": "/app/observatory/evidence",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 28
+    },
+    {
+      "route": "/app/observatory/model",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 10
+    },
+    {
+      "route": "/app/observatory/provenance",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 3
+    },
+    {
+      "route": "/app/observatory/scenarios",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 11
+    },
+    {
+      "route": "/app/observatory/replay",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 4
+    },
+    {
+      "route": "/app/observatory/federation-replay",
+      "h1": 1,
+      "main": 1,
+      "lang": true,
+      "unnamedButtons": 0,
+      "unlabelledFields": 0,
+      "svgWithoutName": 0,
+      "smallTargets": 0,
+      "smallNames": [],
+      "focusable": 3
+    }
+  ],
   "evidencePage": {
     "rows": 20,
     "frozen": true,

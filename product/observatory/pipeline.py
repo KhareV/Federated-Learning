@@ -261,3 +261,23 @@ def reconstruct_window(
             "Synthetic mV is a generator convention, not physical wearable calibration.",
         ],
     )
+
+
+def canonical_emitted_window(scenario: ScenarioSpec, window_index: int) -> dict[str, Any]:
+    """The canonical runtime's own emitted window (unobserved, unmodified path) for parity audits."""
+    runtime = WearableStreamRuntime(session_id=f"AUDIT_{scenario.scenario_id}",
+                                    model_id="MODEL_V2_FINAL", replay_id=TRACE_VERSION)
+    batch = []
+    for record in iter_observed_records(scenario.profile()):
+        batch.append(record)
+        if len(batch) < CHUNK_RECORDS:
+            continue
+        emitted = runtime.ingest(batch)
+        batch = []
+        window = next((w for w in emitted if w["sequence_index"] == window_index), None)
+        if window is not None:
+            return window
+    window = next((w for w in runtime.ingest(batch) if w["sequence_index"] == window_index), None)
+    if window is None:
+        raise RuntimeError("CANONICAL_WINDOW_NOT_EMITTED")
+    return window

@@ -31,4 +31,5 @@
 	dl{display:grid;gap:4px}dl div{display:flex;gap:10px;flex-wrap:wrap}dt{color:#71829a;font:11px 'JetBrains Mono',monospace;min-width:180px}dd{margin:0}.warn{border-left:3px solid #fbbf24;background:rgba(251,191,36,.06);padding:8px 12px;color:#fde68a}
 	.time{list-style:none;margin:0;padding:0 0 0 12px;border-left:2px solid rgba(43,184,176,.4);display:grid;gap:14px}.time li{display:grid;gap:3px}.time b{font:500 15px 'Space Grotesk',sans-serif}.dec{font:600 12px 'JetBrains Mono',monospace;color:#c4b5fd}.time p{margin:0}
 	.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}.cards li{border:1px solid rgba(251,191,36,.35);padding:12px 14px;display:grid;gap:6px;min-width:0}.cards b{font:500 14px 'Space Grotesk',sans-serif}.cards p{margin:0}
+	a{display:inline-block;min-height:24px;line-height:24px}
 </style>

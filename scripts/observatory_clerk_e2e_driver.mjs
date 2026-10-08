@@ -99,6 +99,18 @@ if (MODE === 'a-journey') {
 	step('aggregation-views', { math: await ev(`!!document.querySelector('[data-testid="fedavg-math"]')`), chained: await ev(`document.querySelectorAll('[data-testid="state-lineage"] li').length`), chainedOk: await ev(`(document.querySelector('[data-testid="state-lineage"]')?.innerText.match(/starts from the committed state/g) || []).length`), whyFast: await ev(`(document.querySelector('[data-testid="why-fast"]')?.innerText ?? '').includes('24 local training calls')`), unchainedMarks: await ev(`(document.body.innerText.match(/does not match the previous committed state/g) || []).length`) }); await shot('observatory_aggregation_1440');
 	await goto('/app/federation/clients'); await waitFor(`document.querySelectorAll('[data-client]').length === 8`, 60000);
 	step('global-clients-unbound', { myEdge: await ev(`(document.body.innerText.match(/MY EDGE CLIENT/g) || []).length`) });
+	await goto('/app/observatory/replay'); await waitFor(`document.querySelectorAll('select option').length > 1`, 60000);
+	await ev(`(() => { const s = document.querySelector('select'); s.value = ${JSON.stringify(sid)}; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+	await waitFor(`!!document.querySelector('[data-testid="replay-chart"]')`, 60000); await ev(`document.querySelectorAll('[data-testid="replay-controls"] button')[1]?.click()`);
+	step('session-replay', { controls: await ev(`document.querySelectorAll('[data-testid="replay-controls"] button').length`), transitions: await ev(`!!document.querySelector('[data-testid="replay-transitions"]')`), noRerun: await ev(`document.body.innerText.includes('NO NEW INFERENCE')`), overflow: await ev('document.documentElement.scrollWidth > innerWidth') }); await shot('session_replay_1440');
+	await goto('/app/observatory/federation-replay'); await waitFor(`document.querySelectorAll('select option').length > 1`, 60000);
+	await ev(`(() => { const s = document.querySelector('select'); s.value = ${JSON.stringify(rid)}; s.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+	await waitFor(`!!document.querySelector('[data-testid="fed-replay-state"]')`, 90000);
+	const firstEvent = await ev(`document.querySelector('[data-testid="fed-replay-event"]')?.innerText ?? ''`); const firstRound = await ev(`document.querySelector('[data-testid="round-progress"]')?.innerText ?? ''`);
+	await ev(`[...document.querySelectorAll('[data-testid="fed-replay-controls"] button')].find((b) => b.textContent.includes('Jump to candidate'))?.click()`); await sleep(500);
+	step('federation-replay', { firstEvent: firstEvent.slice(0, 80), firstStateNotFinal: !firstEvent.includes('federation.completed'), firstRoundText: firstRound.replace(/\s+/g, ' ').slice(0, 60), label: await ev(`document.querySelector('[data-testid="replay-label"]')?.innerText`), clients: await ev(`document.querySelectorAll('[data-client]').length`), candidateShown: await ev(`document.body.innerText.includes('NOT DEPLOYED')`), noTraining: await ev(`document.body.innerText.includes('NO TRAINING')`), overflow: await ev('document.documentElement.scrollWidth > innerWidth') }); await shot('federation_replay_1440');
+	await goto('/app/observatory/research'); await waitFor(`!!document.querySelector('[data-testid="dataset-preprocessing"] article')`, 60000);
+	step('dataset-preprocessing', { cards: await ev(`document.querySelectorAll('[data-testid="dataset-preprocessing"] article').length`), incartOwnPath: await ev(`document.body.innerText.includes('INCART_257_TO_250_V1')`) });
 	// Sign-out must end backend access; no silent DemoAuth fallback.
 	await goto('/app'); await waitFor(`!!document.querySelector('[data-testid="identity-chip"]')`, 60000);
 	const signedOut = await click('Sign out'); await sleep(3000);

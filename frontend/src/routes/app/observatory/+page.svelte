@@ -138,7 +138,7 @@
 <p><a href="/app/observatory/federation">Inspect all eight synthetic federation participants and their recorded contributions →</a></p>
 <p><a href="/app/observatory/research">Inspect an authorized MIT-BIH TRAIN research window →</a></p>
 <p><a href="/app/observatory/tour">Start the guided evidence journey →</a></p>
-<nav class="explore" aria-label="More Observatory views"><a href="/app/observatory/scenarios">Scenario and fault lab →</a><a href="/app/observatory/model">Model architecture and calibration →</a><a href="/app/observatory/evidence">Scientific evidence explorer (frozen metrics, curves, uncertainty) →</a><a href="/app/observatory/provenance">Provenance, decision history and known boundaries →</a></nav>
+<nav class="explore" aria-label="More Observatory views"><a href="/app/observatory/scenarios">Scenario and fault lab →</a><a href="/app/observatory/replay">Session replay and monitoring-policy trace →</a><a href="/app/observatory/federation-replay">Federation event-journal replay scrubber →</a><a href="/app/observatory/model">Model architecture and calibration →</a><a href="/app/observatory/evidence">Scientific evidence explorer (frozen metrics, curves, uncertainty) →</a><a href="/app/observatory/provenance">Provenance, decision history and known boundaries →</a></nav>
 
 <section class="controls" aria-label="Trace selection">
 	<label>SCENARIO
@@ -210,4 +210,5 @@
 	@media(max-width:620px){.controls,.facts,.summary{grid-template-columns:1fr}.window-control{grid-column:auto}.section-head{display:block}.stepper{flex-wrap:wrap}.stepper output{width:100%}.evidence dl div{grid-template-columns:1fr;gap:2px}}
 .explore{display:grid;gap:2px;margin:10px 0}.explore a{display:inline-flex;align-items:center;min-height:28px;color:#2bb8b0}
 .exp button{background:#0a0f1f;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);padding:6px 12px;min-height:32px;font:12px 'JetBrains Mono',monospace;cursor:pointer}
+	a{display:inline-block;min-height:24px;line-height:24px}summary{min-height:24px}
 </style>

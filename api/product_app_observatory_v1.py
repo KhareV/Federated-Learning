@@ -378,6 +378,11 @@ def create_product_app_observatory_v1(
         await identity(request)
         return await asyncio.to_thread(_evidence_call, evidence.explainability_case, case_type)
 
+    @app.get(f"{PREFIX}/research/preprocessing")
+    async def research_preprocessing(request: Request) -> dict[str, Any]:
+        await identity(request)
+        return await asyncio.to_thread(_evidence_call, evidence.dataset_preprocessing)
+
     @app.get(f"{PREFIX}/evidence/boundaries")
     async def evidence_boundaries(request: Request) -> dict[str, Any]:
         await identity(request)

@@ -1,0 +1,61 @@
+{
+ "status": "PASS",
+ "scenario": "NORMAL_MONITORING",
+ "session_state": "COMPLETED",
+ "windows_compared": 4,
+ "rows": [
+  {
+   "window_index": 0,
+   "quality": "VALID",
+   "tensor_digest_matches_trace": true,
+   "persisted_present": true,
+   "persisted_raw_probability": 0.0014907376863542833,
+   "runtime_raw_probability": 0.0014907376863542833,
+   "raw_abs_diff": 0.0,
+   "persisted_calibrated": 0.469277264365581,
+   "runtime_calibrated": 0.469277264365581,
+   "calibrated_abs_diff": 0.0,
+   "model_id": "MODEL_V2_FINAL"
+  },
+  {
+   "window_index": 1,
+   "quality": "VALID",
+   "tensor_digest_matches_trace": true,
+   "persisted_present": true,
+   "persisted_raw_probability": 0.0014931855909576701,
+   "runtime_raw_probability": 0.0014931855909576701,
+   "raw_abs_diff": 0.0,
+   "persisted_calibrated": 0.46928500310151505,
+   "runtime_calibrated": 0.46928500310151505,
+   "calibrated_abs_diff": 0.0,
+   "model_id": "MODEL_V2_FINAL"
+  },
+  {
+   "window_index": 2,
+   "quality": "VALID",
+   "tensor_digest_matches_trace": true,
+   "persisted_present": true,
+   "persisted_raw_probability": 0.001759096773332379,
+   "runtime_raw_probability": 0.001759096773332379,
+   "raw_abs_diff": 0.0,
+   "persisted_calibrated": 0.4700581824949658,
+   "runtime_calibrated": 0.4700581824949658,
+   "calibrated_abs_diff": 0.0,
+   "model_id": "MODEL_V2_FINAL"
+  },
+  {
+   "window_index": 3,
+   "quality": "VALID",
+   "tensor_digest_matches_trace": true,
+   "persisted_present": true,
+   "persisted_raw_probability": 0.001911518255359945,
+   "runtime_raw_probability": 0.001911518255359945,
+   "raw_abs_diff": 0.0,
+   "persisted_calibrated": 0.4704503500970056,
+   "runtime_calibrated": 0.4704503500970056,
+   "calibrated_abs_diff": 0.0,
+   "model_id": "MODEL_V2_FINAL"
+  }
+ ],
+ "note": "The persisted result comes from the product backend calling the inference service; the local result calls ResearchRuntimeV2 directly on the independently re-derived canonical window. Agreement shows the reconstructed model input is the runtime's input; it is not a new scientific evaluation."
+}

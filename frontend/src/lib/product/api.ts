@@ -33,7 +33,8 @@ import { parseCaptureArm, parseScenarioTimeline, parseScenarioList, parseWindowT
 	type CaptureArm, type ScenarioInfo, type ScenarioTimeline, type WindowTrace } from './observatory/types';
 import { parseFlClientWindowTrace, parseFrozenCohort, parseRunContributions,
 	type FlClientWindowTrace, type FrozenCohort, type RunContributions } from './observatory/federation';
-import { parseArchitecture, parseBoundaries, parseCalibration, parseFlCurves, parseFlEval, parseReproducibility, parseXaiCase, parseXaiIndex,
+import { parseArchitecture, parseBoundaries, parseCalibration, parseFlCurves, parseFlEval, parseReproducibility, parseXaiCase, parseXaiIndex, parseDatasetPreprocessing,
+	type DatasetPreprocessing,
 	type XaiCase, type XaiIndex, type Architecture, type Boundaries, type Calibration, type FlCurves, type FlEval, type Reproducibility } from './observatory/evidence';
 import { parseResearchRecords, parseResearchWindow,
 	type ResearchRecord, type ResearchWindow } from './observatory/research';
@@ -121,6 +122,7 @@ export interface ProductClient {
 	observatoryFlCurves(dataset: string, modelId: string): Promise<FlCurves>;
 	observatoryExplainability(): Promise<XaiIndex>;
 	observatoryExplainabilityCase(caseType: string): Promise<XaiCase>;
+	observatoryDatasetPreprocessing(): Promise<DatasetPreprocessing>;
 	observatoryArchitecture(): Promise<Architecture>;
 	observatoryCalibration(): Promise<Calibration>;
 	observatoryBoundaries(): Promise<Boundaries>;
@@ -240,6 +242,7 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 			`/observatory/evidence/fl-eval/curves/${enc(dataset)}/${enc(modelId)}`)),
 		observatoryExplainability: async () => parseXaiIndex(await call<unknown>('GET', '/observatory/evidence/explainability')),
 		observatoryExplainabilityCase: async (c) => parseXaiCase(await call<unknown>('GET', `/observatory/evidence/explainability/${enc(c)}`)),
+		observatoryDatasetPreprocessing: async () => parseDatasetPreprocessing(await call<unknown>('GET', '/observatory/research/preprocessing')),
 		observatoryArchitecture: async () => parseArchitecture(await call<unknown>('GET', '/observatory/model/architecture')),
 		observatoryCalibration: async () => parseCalibration(await call<unknown>('GET', '/observatory/model/calibration')),
 		observatoryBoundaries: async () => parseBoundaries(await call<unknown>('GET', '/observatory/evidence/boundaries')),

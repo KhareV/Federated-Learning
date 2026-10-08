@@ -127,3 +127,19 @@ export function parseXaiCase(value: unknown): XaiCase {
 		model_input: arr(r.model_input).map((p) => { const a = arr(p); return [num(a[0]), num(a[1]), num(a[2]), num(a[3])] as [number, number, number, number]; }),
 		annotations: arr(r.annotations).map((a) => { const x = obj(a); return { time_s: num(x.time_s), symbol: str(x.symbol), aami_class: str(x.aami_class), position: str(x.position) }; }) };
 }
+
+export interface DatasetPreprocessing {
+	datasets: { dataset: string; native_rate_hz: number; target_rate_hz: number; resampler_id: string; up: number; down: number; taps: number; group_delay_seconds: number; role: string | null; allowed_for_training: string | null; access_rule: string; coefficient_sha256: string;
+		causality: { first_output_index_that_changed: number | null; altered_from_source_sample: number; output_samples: number; outputs_before_alteration_identical: boolean; synthetic_test_signal: string } }[];
+	contract: Record<string, unknown>; label_contracts: { id: string; kind: string; rule: string }[]; raw_recordings: string; annotation_time_mapping: string;
+}
+export function parseDatasetPreprocessing(value: unknown): DatasetPreprocessing {
+	const r = obj(value);
+	if (r.classification !== 'FROZEN_METHOD_PLUS_DETERMINISTIC_DEMONSTRATION') bad();
+	return { contract: obj(r.contract), raw_recordings: str(r.raw_recordings), annotation_time_mapping: str(r.annotation_time_mapping),
+		label_contracts: arr(r.label_contracts).map((l) => { const x = obj(l); return { id: str(x.id), kind: str(x.kind), rule: str(x.rule) }; }),
+		datasets: arr(r.datasets).map((d) => { const x = obj(d); const c = obj(x.causality);
+			return { dataset: str(x.dataset), native_rate_hz: num(x.native_rate_hz), target_rate_hz: num(x.target_rate_hz), resampler_id: str(x.resampler_id), up: num(x.up), down: num(x.down), taps: num(x.taps), group_delay_seconds: num(x.group_delay_seconds),
+				role: nstr(x.role), allowed_for_training: nstr(x.allowed_for_training), access_rule: str(x.access_rule), coefficient_sha256: str(x.coefficient_sha256),
+				causality: { first_output_index_that_changed: c.first_output_index_that_changed === null ? null : num(c.first_output_index_that_changed), altered_from_source_sample: num(c.altered_from_source_sample), output_samples: num(c.output_samples), outputs_before_alteration_identical: c.outputs_before_alteration_identical === true, synthetic_test_signal: str(c.synthetic_test_signal) } }; }) };
+}
