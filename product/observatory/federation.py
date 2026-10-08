@@ -18,6 +18,7 @@ from capstone_persistence.federation_store import FederationStore
 from federated.wearable_sim_local_labels import SyntheticEventLabelProvider
 from product.federation.artifact_store import FederationArtifactStore
 from product.federation.base import FederationRound, FederationRun, RunState, RunType
+from product.observatory.acceptance_capture import read_verified as read_acceptance_capture
 from product.observatory.models import WindowTrace
 from product.observatory.pipeline import reconstruct_window
 from simulation.fl_cohort_v1 import DURATION_S, ClientProfile, cohort_profiles
@@ -75,7 +76,7 @@ class ClientContribution(BaseModel):
     weight: float | None = Field(default=None, ge=0, le=1)
     evidence_state: Literal[
         "NOT_RECORDED", "TRAINED_ACCEPTANCE_NOT_RECORDED", "NOT_ACCEPTED", "ACCEPTED",
-        "GOVERNANCE_ATTESTED_ACCEPTED",
+        "GOVERNANCE_ATTESTED_ACCEPTED", "DIRECT_OBSERVED_ACCEPTED",
     ]
 
 
@@ -89,7 +90,8 @@ class RoundContribution(BaseModel):
     reported_accepted_update_count: int | None
     accepted_example_total: int | None
     acceptance_basis: Literal[
-        "DIRECT_COORDINATOR_MAP", "GOVERNANCE_ATTESTED_SERVER_JOURNAL", "NOT_RECORDED"
+        "DIRECT_COORDINATOR_MAP", "DIRECT_OBSERVED_COORDINATOR_MAP",
+        "GOVERNANCE_ATTESTED_SERVER_JOURNAL", "NOT_RECORDED"
     ]
     clients: tuple[ClientContribution, ...]
 
@@ -299,6 +301,36 @@ def run_contributions(run: FederationRun, artifacts: FederationArtifactStore,
         accepted.update(checkpoint.get("coordinator_digests", {}))
     bases = meta.get("round_base_digests", {})
     committed = meta.get("committed_digests", {})
+    observed = read_acceptance_capture(artifacts, run.run_id)
+    if observed is not None:
+        if (run.status is not RunState.COMPLETED
+                or observed.get("candidate_id") not in run.candidate_ids
+                or observed.get("planned_rounds") != run.planned_rounds
+                or set(observed.get("rounds", {})) != {
+                    str(index) for index in range(1, run.planned_rounds + 1)
+                }):
+            raise ValueError("OBSERVATORY_ACCEPTANCE_CAPTURE_RUN_MISMATCH")
+        if federation_store is not None:
+            candidate = federation_store.get_candidate(observed["candidate_id"])
+            if (candidate is None or candidate["federation_run_id"] != run.run_id
+                    or candidate["state_digest"] != committed.get(str(run.planned_rounds))):
+                raise ValueError("OBSERVATORY_ACCEPTANCE_CAPTURE_CANDIDATE_MISMATCH")
+        for key, item in observed["rounds"].items():
+            digests = item["accepted_updates"]
+            if (item["base_state_digest"] != bases.get(key)
+                    or item["committed_state_digest"] != committed.get(key)
+                    or (key in accepted and accepted[key] != digests)
+                    or set(item["training"]) != set(digests)):
+                raise ValueError("OBSERVATORY_ACCEPTANCE_CAPTURE_LINEAGE_MISMATCH")
+            for client_id, digest in digests.items():
+                record = training.get(key, {}).get(client_id)
+                if (record is None or digest != record.get("update_sha256")
+                        or item["training"][client_id] != {
+                            "examples_seen": int(record["examples_seen"]),
+                            "update_sha256": digest,
+                        }):
+                    raise ValueError("OBSERVATORY_ACCEPTANCE_CAPTURE_TRAINING_MISMATCH")
+            accepted[key] = digests
     round_ids = sorted({int(k) for k in (*training, *accepted, *bases, *committed)}
                        | set(round_reports))
     result: list[RoundContribution] = []
@@ -352,7 +384,9 @@ def run_contributions(run: FederationRun, artifacts: FederationArtifactStore,
                 (False if record and acceptance_recorded else None),
                 accepted_examples=accepted_count,
                 weight=accepted_count / total if accepted_count is not None and total else None,
-                evidence_state=("GOVERNANCE_ATTESTED_ACCEPTED" if attested
+                evidence_state=("DIRECT_OBSERVED_ACCEPTED" if observed is not None
+                                and accepted_count is not None else
+                                "GOVERNANCE_ATTESTED_ACCEPTED" if attested
                                 and accepted_count is not None else
                                 "ACCEPTED" if accepted_count is not None else
                                 "NOT_ACCEPTED" if record and acceptance_recorded else
@@ -364,7 +398,8 @@ def run_contributions(run: FederationRun, artifacts: FederationArtifactStore,
             accepted_update_count=len(accepted_digests) if acceptance_recorded else None,
             reported_accepted_update_count=reported_count,
             accepted_example_total=total if acceptance_recorded else None,
-            acceptance_basis=("GOVERNANCE_ATTESTED_SERVER_JOURNAL" if attested else
+            acceptance_basis=("DIRECT_OBSERVED_COORDINATOR_MAP" if observed is not None else
+                              "GOVERNANCE_ATTESTED_SERVER_JOURNAL" if attested else
                               "DIRECT_COORDINATOR_MAP" if key in accepted else "NOT_RECORDED"),
             clients=tuple(clients),
         ))

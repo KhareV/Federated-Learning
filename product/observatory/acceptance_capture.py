@@ -1,0 +1,78 @@
+"""Small post-run snapshot of the coordinator maps already held by CAP-007.
+
+This is a separate Observatory sidecar. It does not enter the FL event journal, run
+metadata, model state, candidate artifact, or governance inputs. A write failure cannot
+change the outcome of a completed federation run.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from contextlib import suppress
+from pathlib import Path
+from typing import Any
+
+from product.federation.artifact_store import FederationArtifactStore, atomic_write
+from product.federation.base import RunType
+from product.federation.service import FederationService, RunContext
+
+CAPTURE_ID = "NHM_OBSERVATORY_DIRECT_ACCEPTANCE_V1"
+FILENAME = "observatory_acceptance_v1.json"
+
+
+def _canonical(payload: dict[str, Any]) -> bytes:
+    return json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+
+
+def capture_file(artifacts: FederationArtifactStore, run_id: str) -> Path:
+    return artifacts.run_dir(run_id) / FILENAME
+
+
+def snapshot(ctx: RunContext, artifacts: FederationArtifactStore) -> None:
+    if ctx.run_type is not RunType.LIVE_RUN or ctx.candidate_id is None:
+        return
+    payload: dict[str, Any] = {
+        "capture_id": CAPTURE_ID,
+        "run_id": ctx.run_id,
+        "candidate_id": ctx.candidate_id,
+        "planned_rounds": ctx.planned_rounds,
+        "rounds": {
+            str(round_id): {
+                "base_state_digest": ctx.round_bases[round_id],
+                "committed_state_digest": ctx.committed[round_id],
+                "accepted_updates": dict(sorted(ctx.coordinator_digests[round_id].items())),
+                "training": {client_id: {
+                    "examples_seen": int(ctx.training_record[round_id][client_id]["examples_seen"]),
+                    "update_sha256": ctx.training_record[round_id][client_id]["update_sha256"],
+                } for client_id in sorted(ctx.coordinator_digests[round_id])},
+            } for round_id in range(1, ctx.planned_rounds + 1)
+        },
+    }
+    payload["content_sha256"] = hashlib.sha256(_canonical(payload)).hexdigest()
+    atomic_write(capture_file(artifacts, ctx.run_id),
+                 (json.dumps(payload, sort_keys=True, indent=2) + "\n").encode())
+
+
+def read_verified(artifacts: FederationArtifactStore, run_id: str) -> dict[str, Any] | None:
+    path = capture_file(artifacts, run_id)
+    if not path.exists():
+        return None
+    data = json.loads(path.read_text())
+    expected = data.pop("content_sha256", None)
+    if (data.get("capture_id") != CAPTURE_ID or data.get("run_id") != run_id
+            or hashlib.sha256(_canonical(data)).hexdigest() != expected):
+        raise ValueError("OBSERVATORY_ACCEPTANCE_CAPTURE_HASH_MISMATCH")
+    return data
+
+
+def install(service: FederationService) -> None:
+    original_finish = service._finish
+
+    def observing_finish(ctx: RunContext) -> None:
+        original_finish(ctx)
+        # Diagnostic sidecar failure must not change the already completed FL run.
+        with suppress(Exception):
+            snapshot(ctx, service.artifacts)
+
+    service._finish = observing_finish  # type: ignore[method-assign]

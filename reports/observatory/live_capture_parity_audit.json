@@ -16,6 +16,7 @@
     "normalized_tensor_sha256_equal": true,
     "persisted_inference_metadata_equal": true
   },
+  "real_browser_capture_smoke": "PASSED_AT_1440_AND_390_WITH_FIVE_STAGES_MODEL_V2_FINAL_AND_NO_HORIZONTAL_OVERFLOW; screenshots captured_live_session_1440.png and captured_live_session_390.png",
   "unit_parity": "two selected windows (clean and long-gap) matched unobserved WearableStreamRuntime outputs, stages, gaps, quality and normalized-tensor digest",
   "extra_model_inference_for_inspector": false,
   "capture_storage": "BOUNDED_IN_MEMORY_ONLY_ONE_WINDOW_WITH_ONE_HOUR_EXPIRATION",

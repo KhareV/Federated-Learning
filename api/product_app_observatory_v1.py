@@ -24,6 +24,7 @@ from product.devices.scenarios import TimingMode, load_scenarios
 from product.federation.artifact_store import DEFAULT_ROOT as DEFAULT_FEDERATION_ROOT
 from product.history.models import ContextSnapshotPayload, InferencePayload
 from product.models.candidate_artifacts import DEFAULT_ROOT as DEFAULT_CANDIDATE_ROOT
+from product.observatory.acceptance_capture import install as install_acceptance_capture
 from product.observatory.federation import (
     FlClientWindowTrace,
     FrozenCohort,
@@ -126,6 +127,7 @@ def create_product_app_observatory_v1(
         return result
 
     monitoring.start = observing_start
+    install_acceptance_capture(app.state.federation_service)
 
     async def bounded_call(operation: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
         if trace_slots.locked():

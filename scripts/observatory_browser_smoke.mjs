@@ -102,10 +102,10 @@ const mobile = await evaluate(`(()=>({overflow:document.documentElement.scrollWi
 await screenshot('long_gap_390');
 await viewport(1440);
 await navigate('/app/observatory/federation');
-await wait(`document.body.innerText.includes('SIM_FL_SITE_07') && document.body.innerText.includes('723') && (document.body.innerText.includes('Accepted by coordinator') || document.body.innerText.includes('No owned run selected'))`);
-const federation = await evaluate(`(()=>({clients:document.querySelectorAll('.roster button').length,cohort:document.body.innerText.includes('WEARABLE_SIM_EVENT_WINDOW_V1'),runEvidence:document.body.innerText.includes('Accepted by coordinator')||document.body.innerText.includes('No owned run selected'),overflow:document.documentElement.scrollWidth>innerWidth}))()`);
+await wait(`document.body.innerText.includes('SIM_FL_SITE_07') && document.body.innerText.includes('723') && (document.body.innerText.includes('Accepted by coordinator') || document.body.innerText.includes('Accepted · directly observed') || document.body.innerText.includes('No owned run selected'))`);
+const federation = await evaluate(`(()=>({clients:document.querySelectorAll('.roster button').length,cohort:document.body.innerText.includes('WEARABLE_SIM_EVENT_WINDOW_V1'),runEvidence:document.body.innerText.includes('Accepted by coordinator')||document.body.innerText.includes('Accepted · directly observed')||document.body.innerText.includes('No owned run selected'),overflow:document.documentElement.scrollWidth>innerWidth}))()`);
 await screenshot('federation_cohort_1440');
-const matrix = await evaluate(`(()=>{const panel=document.querySelector('details.matrix');if(!panel)return {available:false};panel.open=true;return {available:true,rows:panel.querySelectorAll('tbody tr').length,rounds:panel.querySelectorAll('thead th').length-1,attested:panel.innerText.includes('Accepted · governance-attested'),unknown:panel.innerText.includes('Trained · acceptance unavailable')}})()`);
+const matrix = await evaluate(`(()=>{const panel=document.querySelector('details.matrix');if(!panel)return {available:false};panel.open=true;return {available:true,rows:panel.querySelectorAll('tbody tr').length,rounds:panel.querySelectorAll('thead th').length-1,attested:panel.innerText.includes('Accepted · governance-attested'),direct:panel.innerText.includes('Accepted · directly observed'),unknown:panel.innerText.includes('Trained · acceptance unavailable')}})()`);
 if (matrix.available) await screenshot('federation_round_matrix_1440');
 await viewport(390); await sleep(350);
 const federationMobile = await evaluate(`(()=>({overflow:document.documentElement.scrollWidth>innerWidth,clients:document.querySelectorAll('.roster button').length}))()`);
@@ -164,7 +164,7 @@ const report = { clean, ownedSession, capturedSession, gap, mobile, federation, 
     && gap.quality && gap.longGap && gap.notApplied && !gap.overflow
     && !mobile.overflow && mobile.h1 === 1 && mobile.charts === 4
     && federation.clients === 8 && federation.cohort && federation.runEvidence && !federation.overflow
-    && (!matrix.available || (matrix.rows === 8 && matrix.rounds === 3 && (matrix.attested || matrix.unknown)))
+    && (!matrix.available || (matrix.rows === 8 && matrix.rounds === 3 && (matrix.attested || matrix.direct || matrix.unknown)))
     && federationMobile.clients === 8 && !federationMobile.overflow
     && flWindow.excluded && flWindow.unusable && flWindow.labelWithheld && flWindow.noTraining
     && !flWindow.overflow && !flWindowMobile

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import tempfile
 from pathlib import Path
@@ -20,7 +21,8 @@ def main() -> None:
           chrome(port, profile)):
         subprocess.run(
             ["node", str(ROOT / "scripts/observatory_browser_smoke.mjs"), str(port),
-             "http://127.0.0.1:5173", str(out)], cwd=ROOT, check=True,
+            os.environ.get("NHM_OBSERVATORY_FRONTEND_URL", "http://127.0.0.1:5173"),
+            str(out)], cwd=ROOT, check=True,
         )
 
 

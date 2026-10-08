@@ -23,6 +23,8 @@ from product.devices.scenarios import ScenarioSegment, ScenarioSpec, load_scenar
 from product.federation.artifact_store import FederationArtifactStore
 from product.federation.base import AggregationMode, Algorithm, FederationRun, RunState, RunType
 from product.federation.execution_binding import PROTOCOL_ID
+from product.federation.service import RunContext
+from product.observatory.acceptance_capture import capture_file, read_verified, snapshot
 from product.observatory.federation import (
     _attested_final_updates,
     fl_client_window,
@@ -269,6 +271,44 @@ def test_frozen_cohort_counts_and_direct_acceptance_only(tmp_path: Path) -> None
                            "update_sha256": "digest0"}}},
         "coordinator_digests": {"1": {"SIM_FL_SITE_00": "tampered"}}})
     with pytest.raises(ValueError, match="ACCEPTED_UPDATE_TRAINING_DIGEST_MISMATCH"):
+        run_contributions(run, artifacts)
+
+
+def test_post_run_observer_preserves_direct_final_round_acceptance(tmp_path: Path) -> None:
+    artifacts = FederationArtifactStore(tmp_path / "federation")
+    client_id = "SIM_FL_SITE_00"
+    run = FederationRun(
+        run_id="RUN_OBSERVED_FINAL", run_type=RunType.LIVE_RUN,
+        base_model_id="FL_INIT_V2", federation_protocol_id=PROTOCOL_ID,
+        algorithm=Algorithm.FEDAVG, client_ids=(client_id,), planned_rounds=1,
+        current_round=1, started_at_us=1, completed_at_us=2, status=RunState.COMPLETED,
+        secagg_mode=AggregationMode.PLAIN, candidate_ids=("CANDIDATE_FINAL",),
+    )
+    training = {"examples_seen": 93, "shuffle_seed": 42, "update_sha256": "digest0"}
+    artifacts.write_run_meta(run.run_id, {
+        "training_record": {"1": {client_id: training}},
+        "round_base_digests": {"1": "base-1"},
+        "committed_digests": {"1": "global-1"},
+    })
+    context = RunContext(
+        run_id=run.run_id, user_id="owner", run_type=RunType.LIVE_RUN,
+        algorithm=Algorithm.FEDAVG, secagg_mode=AggregationMode.PLAIN, planned_rounds=1,
+        journal=SimpleNamespace(), emitter=SimpleNamespace(), candidate_id="CANDIDATE_FINAL",
+        round_bases={1: "base-1"}, committed={1: "global-1"},
+        coordinator_digests={1: {client_id: "digest0"}},
+        training_record={1: {client_id: training}},
+    )
+    snapshot(context, artifacts)
+    observed = read_verified(artifacts, run.run_id)
+    assert observed is not None
+    assert observed["rounds"]["1"]["accepted_updates"] == {client_id: "digest0"}
+    round_one = run_contributions(run, artifacts).rounds[0]
+    assert round_one.acceptance_basis == "DIRECT_OBSERVED_COORDINATOR_MAP"
+    assert round_one.clients[0].accepted_examples == 93
+    assert round_one.clients[0].weight == 1.0
+    path = capture_file(artifacts, run.run_id)
+    path.write_text(path.read_text().replace("digest0", "tampered"))
+    with pytest.raises(ValueError, match="OBSERVATORY_ACCEPTANCE_CAPTURE_HASH_MISMATCH"):
         run_contributions(run, artifacts)
 
 

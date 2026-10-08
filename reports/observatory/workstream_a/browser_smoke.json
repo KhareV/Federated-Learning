@@ -8,19 +8,8 @@
     "quality": true,
     "overflow": false
   },
-  "ownedSession": {
-    "model": true,
-    "calibration": true,
-    "technical": true,
-    "withheld": false
-  },
-  "capturedSession": {
-    "classification": true,
-    "model": true,
-    "stages": 5,
-    "overflow": false,
-    "mobileOverflow": false
-  },
+  "ownedSession": null,
+  "capturedSession": null,
   "gap": {
     "quality": true,
     "longGap": true,
@@ -42,7 +31,8 @@
     "available": true,
     "rows": 8,
     "rounds": 3,
-    "attested": true,
+    "attested": false,
+    "direct": true,
     "unknown": false
   },
   "federationMobile": {
