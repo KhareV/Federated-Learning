@@ -14,10 +14,32 @@ export interface ComparabilityRow { dataset: string; centralized_V2_AUPRC: numbe
 export interface Comparability { rows: ComparabilityRow[]; checks: { item: string; status: string; detail: string }[]; interpretations: { id: string; reading: string; support: string; limit: string }[]; verdict: string }
 export interface SynthState { pooled: Record<string, number | null>; undefined: Record<string, string>; participant_macro_F1: number | null; uncertainty: Record<string, unknown>; per_participant: Record<string, Record<string, number | null>> }
 export interface Synthetic { boundary_label: string; protocol_sha256: string; method_freeze_commit: string; candidate_digest: string; state_digests: Record<string, string>; holdout_windows: number; source: string; sha256: string; states: Record<string, SynthState> }
+export interface LiveLinkParity { records_identical: boolean; window_count_identical: boolean; window_samples_and_timestamps_identical: boolean; dataset_identical_to_canonical: boolean; windows_monitored: number; dataset_sha256_live: string; dataset_sha256_canonical_site00: string; records_sha256_monitored: string }
+export interface LiveLinkStatus {
+	link_id: string; phase: string; link_label: string; run_id: string | null; status: string | null; candidate_ids: string[] | null; candidate_state_digest: string | null;
+	candidate_digest_equals_canonical: boolean | null; parity: LiveLinkParity | null; blocked: { code: string; detail: string } | null; note: string | null; inference_http_statuses: Record<string, number> | null;
+}
 export interface ShowcaseBundle {
 	lanes: Record<string, string>; datasets: Record<string, { claim_label: string; clusters: number; windows: number }>;
 	models: BundleModel[]; round_logs: Record<string, RoundLog>; comparability: Comparability; limitations: string[];
-	historical: Record<string, { AUPRC: number; AUROC: number }>; synthetic: Synthetic | null;
+	historical: Record<string, { AUPRC: number; AUROC: number }>; synthetic: Synthetic | null; live_link: LiveLinkStatus | null;
+}
+const sOrNull = (v: unknown): string | null => (v === null || v === undefined ? null : str(v));
+export function parseLiveLink(value: unknown): LiveLinkStatus {
+	const r = obj(value);
+	let parity: LiveLinkParity | null = null;
+	if (r.parity) {
+		const p = obj(r.parity); const b = (v: unknown): boolean => (typeof v === 'boolean' ? v : bad());
+		parity = { records_identical: b(p.records_identical), window_count_identical: b(p.window_count_identical), window_samples_and_timestamps_identical: b(p.window_samples_and_timestamps_identical),
+			dataset_identical_to_canonical: b(p.dataset_identical_to_canonical), windows_monitored: num(p.windows_monitored), dataset_sha256_live: str(p.dataset_sha256_live),
+			dataset_sha256_canonical_site00: str(p.dataset_sha256_canonical_site00), records_sha256_monitored: str(p.records_sha256_monitored) };
+	}
+	const mon = r.monitoring ? obj(r.monitoring) : null;
+	const statuses = mon && mon.inference_http_statuses ? Object.fromEntries(Object.entries(obj(mon.inference_http_statuses)).map(([k, v]) => [k, num(v)])) : null;
+	const blocked = r.blocked ? { code: str(obj(r.blocked).code), detail: String(obj(r.blocked).detail ?? '') } : null;
+	return { link_id: typeof r.link_id === 'string' ? r.link_id : 'RECORDED', phase: str(r.phase), link_label: str(r.link_label), run_id: sOrNull(r.run_id), status: sOrNull(r.status),
+		candidate_ids: Array.isArray(r.candidate_ids) ? r.candidate_ids.map(str) : null, candidate_state_digest: sOrNull(r.candidate_state_digest),
+		candidate_digest_equals_canonical: typeof r.candidate_digest_equals_canonical === 'boolean' ? r.candidate_digest_equals_canonical : null, parity, blocked, note: sOrNull(r.note), inference_http_statuses: statuses };
 }
 const nrec = (v: unknown): Record<string, number | null> => Object.fromEntries(Object.entries(obj(v)).map(([k, x]) => [k, nnum(x)]));
 
@@ -56,6 +78,6 @@ export function parseShowcase(value: unknown): ShowcaseBundle {
 				AUROC_difference_federated_minus_centralized: num(r.AUROC_difference_federated_minus_centralized) }; }),
 			checks: arr(c.checks).map((raw) => { const r = obj(raw); return { item: str(r.item), status: str(r.status), detail: str(r.detail) }; }),
 			interpretations: arr(c.interpretations).map((raw) => { const r = obj(raw); return { id: str(r.id), reading: str(r.reading), support: str(r.support), limit: str(r.limit) }; }), verdict: str(c.verdict) },
-		limitations: arr(root.limitations).map(str), historical, synthetic
+		limitations: arr(root.limitations).map(str), historical, synthetic, live_link: root.live_link ? parseLiveLink(root.live_link) : null
 	};
 }

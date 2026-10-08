@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseShowcase } from '../showcase';
+import { parseLiveLink, parseShowcase } from '../showcase';
 
 const base = () => ({
 	schema_version: 'NHM_FINAL_SHOWCASE_RESEARCH_BUNDLE_V1', lanes: { A: 'a', B: 'b', C: 'c', H: 'h' },
@@ -25,5 +25,13 @@ describe('showcase bundle parser', () => {
 	});
 	it('accepts a bundle without the synthetic section', () => {
 		expect(parseShowcase({ ...base(), synthetic: null }).synthetic).toBeNull();
+	});
+	it('parses a blocked live link truthfully and rejects non-boolean parity flags', () => {
+		const blocked = parseLiveLink({ phase: 'BLOCKED', link_label: 'L', blocked: { code: 'MONITORING_SESSION_FAILED', detail: 'x' }, note: 'nothing fabricated' });
+		expect(blocked.blocked?.code).toBe('MONITORING_SESSION_FAILED');
+		expect(blocked.candidate_state_digest).toBeNull();
+		expect(blocked.parity).toBeNull();
+		const parity = { records_identical: 'yes', window_count_identical: true, window_samples_and_timestamps_identical: true, dataset_identical_to_canonical: true, windows_monitored: 1, dataset_sha256_live: 'a', dataset_sha256_canonical_site00: 'a', records_sha256_monitored: 'r' };
+		expect(() => parseLiveLink({ phase: 'COMPLETED', link_label: 'L', parity })).toThrow('MALFORMED_SHOWCASE_BUNDLE');
 	});
 });

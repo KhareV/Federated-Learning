@@ -1,12 +1,30 @@
 <script lang="ts">
 	import { focusHeading } from '$lib/product/observatory/focus';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
-	import type { ShowcaseBundle } from '$lib/product/observatory/showcase';
+	import type { LiveLinkStatus, ShowcaseBundle } from '$lib/product/observatory/showcase';
 	const store = getProductStore();
 	let bundle = $state<ShowcaseBundle | null>(null);
 	let error = $state<string | null>(null);
 	let step = $state(0);
+	let live = $state<LiveLinkStatus | null>(null);
+	let liveError = $state<string | null>(null);
+	let timer: ReturnType<typeof setInterval> | null = null;
+	const recorded = $derived(bundle?.live_link ?? null);
+	const shown = $derived(live ?? recorded);
+	const running = $derived(live !== null && !['COMPLETED', 'BLOCKED'].includes(live.phase) && !live.phase.startsWith('RUN_'));
+	async function startLive() {
+		liveError = null;
+		try {
+			live = await store.api.observatoryLiveLinkStart();
+			timer = setInterval(async () => {
+				if (!live) return;
+				try { live = await store.api.observatoryLiveLinkStatus(live.link_id); } catch (c) { liveError = c instanceof Error ? c.message : String(c); }
+				if (live && (['COMPLETED', 'BLOCKED'].includes(live.phase) || live.phase.startsWith('RUN_')) && timer) { clearInterval(timer); timer = null; }
+			}, 1500);
+		} catch (c) { liveError = c instanceof Error ? c.message : String(c); }
+	}
+	onDestroy(() => { if (timer) clearInterval(timer); });
 	const fmt = (v: number | null | undefined, d = 4) => (v === null || v === undefined ? 'UNDEFINED' : v.toFixed(d));
 	const syn = $derived(bundle?.synthetic ?? null);
 	const final = $derived(syn?.states['round_3_candidate'] ?? null);
@@ -37,6 +55,19 @@
 	{#if STEPS[step].lane === 'C' && step >= 6}<p class="syn">{syn?.boundary_label}</p>{/if}
 	<div class="nav"><button disabled={step===0} onclick={() => (step -= 1)}>← Previous</button><button disabled={step===STEPS.length - 1} onclick={() => (step += 1)}>Next →</button></div>
 </article>
+<section class="card" aria-label="Live-monitored SITE_00" data-testid="live-link">
+	<span class="lane lC">C · OPT-IN LIVE-MONITORED SITE_00</span>
+	<h2>Live-monitored participant</h2>
+	<p>Opt-in mode: a new simulated monitoring session streams real records through the monitoring runtime (real inference); the windows it actually emitted become SITE_00's training buffer, combined with the seven existing synthetic peers through the original coordinator. The default product federation is unchanged. {shown?.link_label ?? ''}</p>
+	<button disabled={running} onclick={() => void startLive()}>{running ? 'Running…' : 'Start live-monitored SITE_00 run'}</button>
+	{#if liveError}<p role="alert" class="err">{liveError}</p>{/if}
+	{#if shown}
+	<p class="dim" data-testid="live-phase">{live ? 'This session' : 'Recorded verified run'}: phase <b>{shown.phase}</b>{#if shown.run_id} · run {shown.run_id}{/if}{#if shown.inference_http_statuses} · inference HTTP {JSON.stringify(shown.inference_http_statuses)}{/if}</p>
+	{#if shown.blocked}<p class="err" role="alert" data-testid="live-blocked">BLOCKED: {shown.blocked.code} {shown.blocked.detail}. {shown.note ?? ''}</p>{/if}
+	{#if shown.parity}<ul data-testid="live-parity"><li>Records identical to an independent regeneration: <b>{shown.parity.records_identical ? 'yes' : 'NO'}</b></li><li>Monitored windows: {shown.parity.windows_monitored}; window samples/timestamps identical: <b>{shown.parity.window_samples_and_timestamps_identical ? 'yes' : 'NO'}</b></li><li>Dataset identical to the canonical SITE_00 dataset: <b>{shown.parity.dataset_identical_to_canonical ? 'yes (observed)' : 'NO (reported as observed)'}</b> <code>{shown.parity.dataset_sha256_live.slice(0, 16)}…</code></li></ul>{/if}
+	{#if shown.candidate_state_digest}<p class="dim">Separate sandbox candidate {shown.candidate_ids?.join(', ')} · digest <code>{shown.candidate_state_digest.slice(0, 16)}…</code> · equals the canonical candidate digest: <b>{shown.candidate_digest_equals_canonical === null ? 'n/a' : shown.candidate_digest_equals_canonical ? 'yes (observed, not assumed)' : 'no'}</b> · not deployed.</p>{/if}
+	{/if}
+</section>
 <ul class="lanes">{#each Object.entries(LANE) as [k, v]}<li><b>{k}</b> {v}</li>{/each}</ul>
 <p class="dim"><a href="/app/observatory/outcomes">Scientific outcomes</a> · <a href="/app/observatory/federation">Federation contributions</a> · <a href="/app/observatory">Observatory</a></p>
 {/if}

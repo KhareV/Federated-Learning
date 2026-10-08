@@ -106,6 +106,28 @@ def comparability_audit(index: dict[str, Any], hist: dict[str, Any]) -> dict[str
     return {"rows": rows, "checks": checks, "interpretations": interpretations, "verdict": "DESCRIPTIVE POINT COMPARISON ONLY — NO SUPERIORITY OR NON-INFERIORITY CLAIM"}
 
 
+LIVE = "reports/final_showcase/live_link"
+
+
+def live_link_summary() -> dict[str, Any] | None:
+    """Recorded evidence of the opt-in live-monitored SITE_00 run (and its separate synthetic evaluation), if present."""
+    result_path, eval_path = ROOT / LIVE / "live_link_result.json", ROOT / LIVE / "synth_eval/synth_fl_eval_results.json"
+    if not result_path.exists():
+        return None
+    result = json.loads(result_path.read_text())
+    summary: dict[str, Any] = {"source": f"{LIVE}/live_link_result.json", "sha256": _sha(result_path.read_bytes()), "phase": result["phase"], "status": result.get("status"), "run_id": result.get("run_id"),
+                               "candidate_ids": result.get("candidate_ids"), "candidate_state_digest": result.get("candidate_state_digest"), "canonical_candidate_digest": result.get("canonical_candidate_digest"),
+                               "candidate_digest_equals_canonical": result.get("candidate_digest_equals_canonical"), "parity": result.get("parity"), "monitoring": result.get("monitoring"),
+                               "blocked": result.get("blocked"), "link_label": result.get("link_label"), "inference_service": result.get("inference_service")}
+    if eval_path.exists():
+        live, canon = json.loads(eval_path.read_text()), json.loads((ROOT / SYNTH).read_text())
+        summary["synthetic_evaluation"] = {"source": f"{LIVE}/synth_eval/synth_fl_eval_results.json", "sha256": _sha(eval_path.read_bytes()), "evaluated_source": live["evaluated_source"],
+                                           "state_digests": live["state_digests"], "state_digests_equal_canonical": live["state_digests_equal_canonical"],
+                                           "pooled_metrics_equal_canonical_run": all(live["results"][k]["pooled"] == canon["results"][k]["pooled"] for k in live["results"]),
+                                           "round_3_AUPRC": live["results"]["round_3_candidate"]["pooled"]["AUPRC"], "round_3_AUROC": live["results"]["round_3_candidate"]["pooled"]["AUROC"]}
+    return summary
+
+
 @lru_cache(maxsize=1)
 def bundle() -> dict[str, Any]:
     index = evidence.fl_eval_index()
@@ -119,7 +141,7 @@ def bundle() -> dict[str, Any]:
             models.append({"dataset": dataset, **{k: m[k] for k in ("model_id", "generation", "algorithm", "condition", "mu", "checkpoint_sha256")}, "point": m["point"], "ci_95": m["ci_95"]})
     return {"schema_version": SCHEMA, "lanes": LANES, "datasets": {n: _dataset_note(index, n) for n in index["datasets"]}, "models": models,
             "comparisons": {n: d["comparisons"] for n, d in index["datasets"].items()}, "historical_centralized": hist, "round_logs": logs,
-            "comparability": comparability_audit(index, hist), "limitations": index["limitations"],
+            "comparability": comparability_audit(index, hist), "limitations": index["limitations"], "live_link": live_link_summary(),
             "synthetic": {"source": SYNTH, "sha256": _sha(synth_path.read_bytes()), "boundary_label": synth["boundary_label"], "protocol_sha256": synth["protocol_sha256"],
                           "method_freeze_commit": synth["method_freeze_commit"], "candidate_digest": synth["candidate_digest"], "state_digests": synth["state_digests"],
                           "holdout_windows": synth["holdout_windows"],

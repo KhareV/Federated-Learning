@@ -47,6 +47,7 @@ def main() -> int:
     ap.add_argument("--run-id")
     ap.add_argument("--candidate-id")
     ap.add_argument("--candidate-digest")
+    ap.add_argument("--live-source", action="store_true", help="evaluate a live-monitored-SITE_00 run: round digests come from that run's own metadata (equality with the canonical run is reported, not required)")
     a = ap.parse_args()
     freeze = ev.verify_method_freeze(a.method_commit)
     protocol = json.loads(ev.PROTOCOL.read_text())
@@ -57,7 +58,11 @@ def main() -> int:
     for r in (1, 2):
         states[f"round_{r}"] = store.read_checkpoint(run_id, r)[1]
     states["round_3_candidate"] = CandidateArtifactStore(root / "candidates").load_verified(cid, cdig)
-    digests = {k: ev.digest_check(k, states[k], ev_states[k]["digest"]) for k in ev.STATE_KEYS}
+    expected = {k: ev_states[k]["digest"] for k in ev.STATE_KEYS}
+    if a.live_source:
+        committed = store.read_run_meta(run_id)["committed_digests"]
+        expected.update({"round_1": committed["1"], "round_2": committed["2"], "round_3_candidate": cdig})
+    digests = {k: ev.digest_check(k, states[k], expected[k]) for k in ev.STATE_KEYS}
     _, training, _ = build_cohort()
     holdout = [build_holdout_dataset(p) for p in holdout_profiles()]
     sep = ev.check_manifest(protocol, holdout, training)
@@ -79,7 +84,8 @@ def main() -> int:
         for n, row in enumerate(rows):
             w.writerow([*row, *[f"{preds[k][n]:.9g}" for k in ev.STATE_KEYS]])
     report = {"boundary_label": ev.label_banner(), "status": "COMPLETED", "protocol_sha256": ev.sha256_file(ev.PROTOCOL), "manifest_sha256": ev.sha256_file(ev.MANIFEST), "method_freeze_commit": a.method_commit,
-              "method_freeze_verified": freeze, "run_id": run_id, "candidate_id": cid, "candidate_digest": cdig, "state_digests": digests, "separation": sep,
+              "method_freeze_verified": freeze, "run_id": run_id, "candidate_id": cid, "candidate_digest": cdig, "state_digests": digests, "evaluated_source": "LIVE_MONITORED_SITE_00_RUN" if a.live_source else "CANONICAL_SYNTHETIC_RUN",
+              "state_digests_equal_canonical": {k: digests[k] == ev_states[k]["digest"] for k in ev.STATE_KEYS}, "separation": sep,
               "holdout_windows": len(labels), "results": results, "predictions_file": "holdout_predictions.csv",
               "note": "No retraining, no threshold tuning, no CAL_V2. Training-buffer metrics are secondary and are NOT generalisation."}
     (out / "synth_fl_eval_results.json").write_text(json.dumps(report, indent=1, sort_keys=True, default=float) + "\n")

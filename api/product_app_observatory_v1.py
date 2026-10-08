@@ -80,6 +80,10 @@ def create_product_app_observatory_v1(
     acceptance_sidecar: bool = True,
     batch_capture: bool = False,
 ) -> FastAPI:
+    from final_showcase.live_link import LiveLinkCohortProvider
+    from product.federation.service import get_cohort
+
+    live_provider = LiveLinkCohortProvider(cohort_provider or get_cohort)  # disarmed == the canonical cohort, unchanged
     app = create_product_app_v1_3(
         store=store, identity_resolver=identity_resolver,
         auth_description=auth_description,
@@ -90,8 +94,9 @@ def create_product_app_observatory_v1(
         federation_artifact_root=federation_artifact_root,
         candidate_root=candidate_root, run_id_generator=run_id_generator,
         checkpoint_hook=checkpoint_hook, replay_pace_s=replay_pace_s,
-        auto_resume=auto_resume, cohort_provider=cohort_provider,
+        auto_resume=auto_resume, cohort_provider=live_provider,
     )
+    app.state.live_link_provider = live_provider
     app.state.observatory_id = OBSERVATORY_ID
     trace_slots = asyncio.Semaphore(MAX_ACTIVE_RECONSTRUCTIONS)
     scenarios = load_scenarios()
@@ -433,6 +438,8 @@ def create_product_app_observatory_v1(
         return await asyncio.to_thread(_evidence_call, evidence.reproducibility)
 
     from api.observatory_showcase import register as register_showcase
+    from api.observatory_showcase import register_live_link
 
     register_showcase(app, PREFIX, identity)
+    register_live_link(app, PREFIX, identity, artifact_root=Path(federation_artifact_root), store=store, identity_resolver=identity_resolver)
     return app

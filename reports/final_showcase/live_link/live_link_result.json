@@ -1,0 +1,76 @@
+{
+ "candidate_digest_equals_canonical": true,
+ "candidate_ids": [
+  "CAPSTONE_FL_CANDIDATE_0001"
+ ],
+ "candidate_state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+ "canonical_candidate_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+ "committed_digests": {
+  "1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+  "2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+  "3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+ },
+ "disarmed_after_run": true,
+ "inference_service": {
+  "fresh_process": true,
+  "profile": "default",
+  "service_title": "NHM Research Runtime API (SOFTWARE_SYSTEM_V2 default binding)"
+ },
+ "link_id": "LL0001",
+ "link_label": "SYNTHETIC LIVE-MONITORED SITE_00 \u2014 ENGINEERING LINK, NOT CLINICAL EVIDENCE",
+ "mode": "OPT_IN_LIVE_MONITORED_SITE_00",
+ "monitoring": {
+  "device_id": "NHM_LIVELINK_WEARABLE_00",
+  "inference_http_statuses": {
+   "200": 93
+  },
+  "records_seen": 172800,
+  "scenario_id": "FL_SITE_00_LIVE_LINK",
+  "scientific_trace": {
+   "record_count": 172800,
+   "records_sha256": "a12156b71113df951f3c63be1b64fd1e08ed37490de15a9a30714c24b282b0f4",
+   "window_count": 93,
+   "windows_samples_sha256": "27b0248c582fd7ed391be674d9c2c7c7c581581194e0a38328ba276931392016"
+  },
+  "session_id": "LIVELINK-LL0001",
+  "session_state": "COMPLETED"
+ },
+ "parity": {
+  "counts": {
+   "DEGRADED": 0,
+   "UNUSABLE": 0,
+   "VALID": 93,
+   "excluded_not_valid": 0,
+   "excluded_valid_but_incomplete": 0,
+   "source_records": null,
+   "synthetic_negative": 73,
+   "synthetic_positive": 20,
+   "trainable": 93,
+   "windows_emitted": 93
+  },
+  "dataset_identical_to_canonical": true,
+  "dataset_sha256_canonical_site00": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+  "dataset_sha256_live": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+  "label_contract": "WEARABLE_SIM_EVENT_WINDOW_V1",
+  "note": "Equality is an observation of this run, not an assumption; a mismatch would be reported, never hidden.",
+  "records_identical": true,
+  "records_sha256_monitored": "a12156b71113df951f3c63be1b64fd1e08ed37490de15a9a30714c24b282b0f4",
+  "records_sha256_regenerated": "a12156b71113df951f3c63be1b64fd1e08ed37490de15a9a30714c24b282b0f4",
+  "window_count_identical": true,
+  "window_samples_and_timestamps_identical": true,
+  "windows_monitored": 93,
+  "windows_regenerated": 93
+ },
+ "peers": "SEVEN_EXISTING_SYNTHETIC_CLIENTS",
+ "phase": "COMPLETED",
+ "production_deployed": false,
+ "round_base_digests": {
+  "1": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+  "2": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+  "3": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef"
+ },
+ "run_id": "FEDRUN-LIVE0001",
+ "run_root": "/var/folders/jn/5rd8jh716_5dzryg15sbx7340000gn/T/live-link-a_0qxkct",
+ "site00_source": "LIVE_MONITORED_WINDOWS",
+ "status": "COMPLETED"
+}
