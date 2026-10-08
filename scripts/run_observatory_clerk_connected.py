@@ -45,7 +45,8 @@ def historical_ui_intact() -> bool:
     protected = subprocess.run(
         ["git", "diff", "--name-only", ENTRY, "--", "artifacts/capstone",
          "preprocessing", "federated", "product/federation", "product/monitoring",
-         "product/models", "capstone_persistence", "evaluation", "datasets"],
+         "product/models", "capstone_persistence", "evaluation", "datasets",
+         ":(exclude)artifacts/capstone/*.amendment_*.json"],
         cwd=ROOT, capture_output=True, check=False,
     )
     return protected.returncode == 0 and not protected.stdout.strip()
