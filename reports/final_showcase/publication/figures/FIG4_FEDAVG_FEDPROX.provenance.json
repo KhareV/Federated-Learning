@@ -1,0 +1,11 @@
+{
+ "bundle_schema": "NHM_FINAL_SHOWCASE_RESEARCH_BUNDLE_V1",
+ "caption": "Paired point estimates with nominal 95% patient-cluster intervals; no significance test was computed.",
+ "figure_id": "FIG4_FEDAVG_FEDPROX",
+ "lane": "B",
+ "sources": [
+  "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json",
+  "reports/model_v2/v2_fl_eval_001/incart_statistics.json"
+ ],
+ "title": "FedAvg vs FedProx"
+}

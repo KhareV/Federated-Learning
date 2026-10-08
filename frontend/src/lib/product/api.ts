@@ -3,6 +3,7 @@
 // never sends scientific configuration. A bearer token (CLERK mode) is obtained per request from
 // the injected provider and is never stored by this module.
 
+import { parseShowcase, type ShowcaseBundle } from './observatory/showcase';
 import type {
 	AuthIdentity,
 	DeviceDescriptor,
@@ -119,6 +120,7 @@ export interface ProductClient {
 	observatoryCapturedSessionWindow(sessionId: string): Promise<WindowTrace>;
 	observatoryScenarioTimeline(scenarioId: string): Promise<ScenarioTimeline>;
 	observatoryFlEval(): Promise<FlEval>;
+	observatoryShowcase(): Promise<ShowcaseBundle>;
 	observatoryFlCurves(dataset: string, modelId: string): Promise<FlCurves>;
 	observatoryExplainability(): Promise<XaiIndex>;
 	observatoryExplainabilityCase(caseType: string): Promise<XaiCase>;
@@ -238,6 +240,7 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		observatoryCapturedSessionWindow: async (id) => parseWindowTrace(await call<unknown>('GET',
 			`/observatory/sessions/${enc(id)}/capture`)),
 		observatoryScenarioTimeline: async (id) => parseScenarioTimeline(await call<unknown>('GET', `/observatory/scenarios/${enc(id)}/timeline`)),
+		observatoryShowcase: async () => parseShowcase(await call<unknown>('GET', '/observatory/showcase/bundle')),
 		observatoryFlEval: async () => parseFlEval(await call<unknown>('GET', '/observatory/evidence/fl-eval')),
 		observatoryFlCurves: async (dataset, modelId) => parseFlCurves(await call<unknown>('GET',
 			`/observatory/evidence/fl-eval/curves/${enc(dataset)}/${enc(modelId)}`)),

@@ -1,0 +1,39 @@
+{
+ "caption": "Point values from frozen artifacts; differences are simple subtractions with no paired interval. Descriptive only.",
+ "columns": [
+  "dataset",
+  "centralized_AUPRC",
+  "federated_AUPRC",
+  "AUPRC_difference",
+  "centralized_AUROC",
+  "federated_AUROC",
+  "AUROC_difference"
+ ],
+ "lane": "B+H",
+ "rows": [
+  [
+   "INTERNAL_TEST",
+   0.9994730838739116,
+   0.9989312905254022,
+   -0.0005417933485094562,
+   0.9993803774080591,
+   0.9983277967707034,
+   -0.0010525806373556934
+  ],
+  [
+   "INCART",
+   0.970004055260483,
+   0.9766042635693575,
+   0.006600208308874533,
+   0.9676821484566808,
+   0.9757749387558767,
+   0.008092790299195962
+  ]
+ ],
+ "sources": [
+  "reports/model_v2/v2_fl_eval_001/historical_frozen_centralized_references.json"
+ ],
+ "table_id": "TAB2_MAIN_COMPARISON",
+ "title": "Historical centralized V2 vs federated V2 (FedAvg, IID)",
+ "undefined_policy": "null = not defined / not available (never zero)"
+}

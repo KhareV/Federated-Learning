@@ -1,0 +1,148 @@
+{
+ "bundle_schema": "NHM_FINAL_SHOWCASE_RESEARCH_BUNDLE_V1",
+ "figures": {
+  "FIG1_ARCHITECTURE": {
+   "png": {
+    "path": "reports/final_showcase/publication/figures/FIG1_ARCHITECTURE.png",
+    "sha256": "d57e6e19ae4b06f0d4f0460daf2f59a57365ae74686729b3d744479866cd1f62"
+   },
+   "provenance": {
+    "path": "reports/final_showcase/publication/figures/FIG1_ARCHITECTURE.provenance.json",
+    "sha256": "7fe05df50f753a8d3a5b09095f27f7a9bf24236d1589a9163534bf917262de7e"
+   },
+   "svg": {
+    "path": "reports/final_showcase/publication/figures/FIG1_ARCHITECTURE.svg",
+    "sha256": "6bc536aafdcdd0a3e5e2b416d05564220eacad39937166ee31c7de105b84932a"
+   }
+  },
+  "FIG2_CONVERGENCE": {
+   "png": {
+    "path": "reports/final_showcase/publication/figures/FIG2_CONVERGENCE.png",
+    "sha256": "3d7b30f55df2b2c9e7683e9c9649debe425d66ab4bab247265f5961faa30637e"
+   },
+   "provenance": {
+    "path": "reports/final_showcase/publication/figures/FIG2_CONVERGENCE.provenance.json",
+    "sha256": "dac656df78e0fec773e7e1ff6f22d71327f48d33ea99fc59d2ca78d310c81ed3"
+   },
+   "svg": {
+    "path": "reports/final_showcase/publication/figures/FIG2_CONVERGENCE.svg",
+    "sha256": "411afe35188c2ea82628e367ce2571386de1aca7aa6d901cb13bb83e839ee86e"
+   }
+  },
+  "FIG3_HETEROGENEITY": {
+   "png": {
+    "path": "reports/final_showcase/publication/figures/FIG3_HETEROGENEITY.png",
+    "sha256": "089dacf4538108a38a2f1fa8b4c9b05293d211ab2bff04045e3c8ba2d6336a84"
+   },
+   "provenance": {
+    "path": "reports/final_showcase/publication/figures/FIG3_HETEROGENEITY.provenance.json",
+    "sha256": "c98406bc9dd5ad93b0448b67b6c0066b42cb599b792b4be51ae763dc73b6e342"
+   },
+   "svg": {
+    "path": "reports/final_showcase/publication/figures/FIG3_HETEROGENEITY.svg",
+    "sha256": "555e452ec0a7799cc1774d1cc12bdf3b1219fceb9fe20959d41a6f50c5a6bf94"
+   }
+  },
+  "FIG4_FEDAVG_FEDPROX": {
+   "png": {
+    "path": "reports/final_showcase/publication/figures/FIG4_FEDAVG_FEDPROX.png",
+    "sha256": "7e973df41662d2ccc56dc49b8466e6184fadae21f4f4d00cbd5b7369991abe87"
+   },
+   "provenance": {
+    "path": "reports/final_showcase/publication/figures/FIG4_FEDAVG_FEDPROX.provenance.json",
+    "sha256": "16ec485c97812d5ad4003f7122cb81a679204e76ecb3558d80fc3d2b0ea46fc4"
+   },
+   "svg": {
+    "path": "reports/final_showcase/publication/figures/FIG4_FEDAVG_FEDPROX.svg",
+    "sha256": "b3d70b6dec42d2b49bb7ea9cc30c46d07cbc802e49c053fc56c9ae869b796c2d"
+   }
+  },
+  "FIG5_PERFORMANCE": {
+   "png": {
+    "path": "reports/final_showcase/publication/figures/FIG5_PERFORMANCE.png",
+    "sha256": "e07c10808cd33bcdf747271ffc07db57256cf75f704d441edf014b0f52619b7c"
+   },
+   "provenance": {
+    "path": "reports/final_showcase/publication/figures/FIG5_PERFORMANCE.provenance.json",
+    "sha256": "d0f3eaeeb11d15b1a604dd1a9a591400f77632b9bbed6434a4f2cb68afeff5ae"
+   },
+   "svg": {
+    "path": "reports/final_showcase/publication/figures/FIG5_PERFORMANCE.svg",
+    "sha256": "ae4801ea56bb393ad6c04ed519e1a14ad7b897a048d47c2bef0cd01f29399530"
+   }
+  },
+  "FIG6_SYNTHETIC": {
+   "png": {
+    "path": "reports/final_showcase/publication/figures/FIG6_SYNTHETIC.png",
+    "sha256": "a9963f27b485c8cf85f31e40b34f2981afe189a99a6d3c28292f7004f897093e"
+   },
+   "provenance": {
+    "path": "reports/final_showcase/publication/figures/FIG6_SYNTHETIC.provenance.json",
+    "sha256": "57a3dc673627c08c580e1a1efaede31fa2daddde449a786381045e551bc502bc"
+   },
+   "svg": {
+    "path": "reports/final_showcase/publication/figures/FIG6_SYNTHETIC.svg",
+    "sha256": "e034bc924b998c0f61742a5cab7e22f5cdd8128bbe5f435fcbd0496bbe9b9ba7"
+   }
+  }
+ },
+ "schema_version": "NHM_FINAL_SHOWCASE_EXPORT_MANIFEST_V1",
+ "tables": {
+  "TAB1_ALL_MODELS": {
+   "csv": {
+    "path": "reports/final_showcase/publication/tables/TAB1_ALL_MODELS.csv",
+    "sha256": "dfdd13d05e4c92fdc220b68374dd33030cc78f0e87100455d86efe2c46de1d23"
+   },
+   "json": {
+    "path": "reports/final_showcase/publication/tables/TAB1_ALL_MODELS.json",
+    "sha256": "5767fca52c8dac625ea4ccd7aa6efabf7b38fd91c423d30b8c5f5026a3f35138"
+   },
+   "md": {
+    "path": "reports/final_showcase/publication/tables/TAB1_ALL_MODELS.md",
+    "sha256": "08e327e60d2e9313dba8fdfe0b7c9ff3090e08b92785473125293ffa6053f27b"
+   }
+  },
+  "TAB2_MAIN_COMPARISON": {
+   "csv": {
+    "path": "reports/final_showcase/publication/tables/TAB2_MAIN_COMPARISON.csv",
+    "sha256": "cd39eed231295b92110f7eca135234b998dccb7a02632d76e582c0f4156dbbb4"
+   },
+   "json": {
+    "path": "reports/final_showcase/publication/tables/TAB2_MAIN_COMPARISON.json",
+    "sha256": "1c72b343a32c9f159ad8fa3e204ea7f78278bc44cf7485c630e2b83434d31fd0"
+   },
+   "md": {
+    "path": "reports/final_showcase/publication/tables/TAB2_MAIN_COMPARISON.md",
+    "sha256": "799e9b9551988e6cdf1d3c1b2d41c4198f9403075ccabf305a4fb95ce8234e0e"
+   }
+  },
+  "TAB3_SYNTHETIC_GLOBAL": {
+   "csv": {
+    "path": "reports/final_showcase/publication/tables/TAB3_SYNTHETIC_GLOBAL.csv",
+    "sha256": "0e61d340a4542176bc8e9805e028c2310bc4e174e1d64ba5ccffae021c88938c"
+   },
+   "json": {
+    "path": "reports/final_showcase/publication/tables/TAB3_SYNTHETIC_GLOBAL.json",
+    "sha256": "59a91defb1ed47bcd9c8039cbe36da13d3fe8d164f408a9cfb584cee5dd1a6e3"
+   },
+   "md": {
+    "path": "reports/final_showcase/publication/tables/TAB3_SYNTHETIC_GLOBAL.md",
+    "sha256": "e9646679cd3a783dc33c9a01dc00d9202e3e148174b5a0a5b4922792336ed132"
+   }
+  },
+  "TAB4_SYNTHETIC_PER_CLIENT": {
+   "csv": {
+    "path": "reports/final_showcase/publication/tables/TAB4_SYNTHETIC_PER_CLIENT.csv",
+    "sha256": "30585017c8458641f9adddc249b21c3fb439eb9781544b3d517fd772b2f26a25"
+   },
+   "json": {
+    "path": "reports/final_showcase/publication/tables/TAB4_SYNTHETIC_PER_CLIENT.json",
+    "sha256": "5389087e32d573405b00fee0f1df454c5a209d9f224c245dc3165c658e878842"
+   },
+   "md": {
+    "path": "reports/final_showcase/publication/tables/TAB4_SYNTHETIC_PER_CLIENT.md",
+    "sha256": "af93cce827053986abf8c3c1ebd93bc88ed6798842cce97039fef3c6a5ab8739"
+   }
+  }
+ }
+}

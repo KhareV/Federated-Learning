@@ -1,0 +1,10 @@
+{
+ "bundle_schema": "NHM_FINAL_SHOWCASE_RESEARCH_BUNDLE_V1",
+ "caption": "Eight clients keep raw data local; the coordinator receives updates only, aggregates by weighted FedAvg and broadcasts the new global state.",
+ "figure_id": "FIG1_ARCHITECTURE",
+ "lane": "B",
+ "sources": [
+  "reports/model_v2/v2_fl_004/client_data_locality_audit.json"
+ ],
+ "title": "FL architecture and data locality"
+}

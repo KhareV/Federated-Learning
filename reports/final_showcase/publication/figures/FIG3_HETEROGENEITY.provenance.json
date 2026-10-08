@@ -1,0 +1,11 @@
+{
+ "bundle_schema": "NHM_FINAL_SHOWCASE_RESEARCH_BUNDLE_V1",
+ "caption": "V2 FedAvg AUPRC under IID, label, feature, quantity and combined heterogeneity on the two frozen evaluation datasets.",
+ "figure_id": "FIG3_HETEROGENEITY",
+ "lane": "B",
+ "sources": [
+  "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json",
+  "reports/model_v2/v2_fl_eval_001/incart_statistics.json"
+ ],
+ "title": "Heterogeneity effect"
+}

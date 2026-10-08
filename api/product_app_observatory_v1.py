@@ -432,4 +432,7 @@ def create_product_app_observatory_v1(
         await identity(request)
         return await asyncio.to_thread(_evidence_call, evidence.reproducibility)
 
+    from api.observatory_showcase import register as register_showcase
+
+    register_showcase(app, PREFIX, identity)
     return app

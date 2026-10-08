@@ -1,0 +1,12 @@
+{
+ "bundle_schema": "NHM_FINAL_SHOWCASE_RESEARCH_BUNDLE_V1",
+ "caption": "Development-validation AUPRC per communication round for each controlled heterogeneity condition, from the frozen round logs.",
+ "figure_id": "FIG2_CONVERGENCE",
+ "lane": "B",
+ "sources": [
+  "reports/model_v2/v2_fl_001/round_log.csv",
+  "reports/model_v2/v2_fl_002/*_round_log.csv",
+  "reports/model_v2/v2_fl_003/**/round_log.csv"
+ ],
+ "title": "Scientific convergence"
+}

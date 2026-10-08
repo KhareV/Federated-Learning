@@ -1,0 +1,12 @@
+{
+ "bundle_schema": "NHM_FINAL_SHOWCASE_RESEARCH_BUNDLE_V1",
+ "caption": "Federated V1/V2 (with intervals) against the historical frozen centralized references (no interval available).",
+ "figure_id": "FIG5_PERFORMANCE",
+ "lane": "B+H",
+ "sources": [
+  "reports/model_v2/v2_fl_eval_001/historical_frozen_centralized_references.json",
+  "reports/model_v2/v2_fl_eval_001/internal_test_statistics.json",
+  "reports/model_v2/v2_fl_eval_001/incart_statistics.json"
+ ],
+ "title": "Scientific performance incl. historical centralized reference"
+}
