@@ -1,0 +1,50 @@
+{
+  "origin": "http://127.0.0.1:5186",
+  "captured": {
+    "entry_1440": {
+      "overflow": false
+    },
+    "entry_1024": {
+      "overflow": false
+    },
+    "entry_768": {
+      "overflow": false
+    },
+    "entry_390": {
+      "overflow": false
+    },
+    "live_1440": {
+      "overflow": false,
+      "clients": 8,
+      "status": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 203 events",
+      "star": false
+    },
+    "live_1024": {
+      "overflow": false,
+      "clients": 8,
+      "status": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 203 events",
+      "star": false
+    },
+    "live_768": {
+      "overflow": false,
+      "clients": 8,
+      "status": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 203 events",
+      "star": false
+    },
+    "live_390": {
+      "overflow": false,
+      "clients": 8,
+      "status": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 203 events",
+      "star": false
+    }
+  },
+  "widths": [
+    1440,
+    1024,
+    768,
+    390
+  ],
+  "run": "FEDRUN-D4C404C2AB81",
+  "firstClientTestId": "Show details for SIM_FL_SITE_00",
+  "errors": []
+}
