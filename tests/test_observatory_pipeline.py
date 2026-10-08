@@ -506,6 +506,7 @@ def test_api_extension_adds_only_the_documented_observatory_routes(tmp_path: Pat
         ("/product/v1/observatory/evidence/explainability", ("GET",)),
         ("/product/v1/observatory/evidence/explainability/{case_type}", ("GET",)),
         ("/product/v1/observatory/model/architecture", ("GET",)),
+        ("/product/v1/observatory/model/activations/{scenario_id}/{window_index}", ("GET",)),
         ("/product/v1/observatory/model/calibration", ("GET",)),
         ("/product/v1/observatory/reproducibility", ("GET",)),
     }

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import SignalStageChart from '$lib/components/product/observatory/SignalStageChart.svelte';
@@ -49,7 +50,7 @@
 </script>
 <svelte:head><title>Research-record inspection | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / SCIENTIFIC RECORD</div>
-<h1>Inspect an authorized research window</h1>
+<h1 tabindex="-1" use:focusHeading>Inspect an authorized research window</h1>
 <p class="lead">This is an actual frozen, processed MIT-BIH <b>TRAIN</b> ECG window, not the signed-in user's signal. It is a different data source and target from the eight synthetic federation clients. No held-out inference or new scientific metric runs when you inspect it.</p>
 <p><a href="/app/observatory">← Synthetic signal journey</a> · <a href="/app/research/ml">Frozen ML evidence →</a></p>
 <div class="boundary"><b>Access boundary</b><p>Only hash-verified MIT-BIH TRAIN caches are served. INTERNAL_TEST, calibration, validation, and INCART waveforms are not exposed by this inspector. The raw WFDB recordings and beat-position files are not present locally; exact annotation symbols and positions cannot be plotted here.</p></div>
@@ -76,4 +77,5 @@
 	.eyebrow,.facts span{color:#2bb8b0;font:10px 'JetBrains Mono',monospace;letter-spacing:.13em}h1{font:500 clamp(28px,4vw,42px) 'Space Grotesk',sans-serif;margin:8px 0}.lead,.notice,.boundary p,.counts p{color:#a7b8c9;line-height:1.6;max-width:920px}.lead b{color:#fbbf24}a{color:#2bb8b0}.boundary{border:1px solid #805e2b;background:#1b1711;padding:16px;margin:20px 0}.boundary b{color:#fbbf24}.boundary p{margin:7px 0 0}.controls{display:flex;gap:20px;flex-wrap:wrap;margin:20px 0}.controls label{display:grid;gap:8px;color:#94a3b8;font:11px 'JetBrains Mono',monospace;min-width:min(100%,280px)}select,input{min-height:38px;max-width:100%;background:#071421;color:#e5f1f0;border:1px solid #475569;padding:7px}input{accent-color:#2bb8b0}.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}.facts div{display:grid;gap:7px;padding:14px;border:1px solid #334155;background:#071421;min-width:0}.facts strong{font-size:15px;overflow-wrap:anywhere}.facts small{color:#94a3b8}.counts{border:1px solid #334155;padding:16px;margin:15px 0}.counts h2{font:500 18px 'Space Grotesk',sans-serif;margin:0}details{border:1px solid #334155;padding:12px;color:#a7b8c9}summary{color:#2bb8b0;cursor:pointer}code{overflow-wrap:anywhere}.error{color:#f87171}a:focus-visible,summary:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #fbbf24;outline-offset:2px}@media(max-width:700px){.facts{grid-template-columns:1fr}.controls{display:grid}}
 .prepgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:10px}.prep article{border:1px solid rgba(148,163,184,.25);padding:10px 12px;min-width:0}.prep p,.prep li{color:#a7b8c9;font-size:13px;line-height:1.6;overflow-wrap:anywhere}.prep .demo{color:#e9e3ff;border-left:3px solid #a78bfa;padding-left:8px}.prep .note{border-left:3px solid #fbbf24;padding-left:8px;color:#fde68a}
 	a{display:inline-block;min-height:24px;line-height:24px}summary{min-height:24px}
+	h1:focus{outline:none}
 </style>

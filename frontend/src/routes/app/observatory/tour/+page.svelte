@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	const store = getProductStore();
@@ -32,7 +33,7 @@
 </script>
 <svelte:head><title>Guided Research Observatory | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / GUIDED</div>
-<h1>Follow the evidence, end to end</h1>
+<h1 tabindex="-1" use:focusHeading>Follow the evidence, end to end</h1>
 <p class="lead">A faculty-friendly path through the real implementation. Each step links to the live product or frozen evidence; the tour itself does not run a model or training job.</p>
 <div class="layout"><nav aria-label="Tour steps"><ol>{#each steps as item, index}<li><button class:active={step===index} aria-current={step===index ? 'step' : undefined} onclick={()=>step=index}><small>{String(index+1).padStart(2,'0')}</small>{item.title}</button></li>{/each}</ol></nav>
 	<section class="tour-main"><div class="progress">STEP {step+1} / {steps.length} <span>{Math.round((step+1)/steps.length*100)}% of guide</span></div><div class="progress-track"><i style={`width:${(step+1)/steps.length*100}%`}></i></div>
@@ -43,4 +44,5 @@
 <style>
 	.eyebrow,.progress,article>span{color:#2bb8b0;font:10px 'JetBrains Mono',monospace;letter-spacing:.14em}h1{font:500 clamp(28px,4vw,42px) 'Space Grotesk',sans-serif;margin:8px 0}.lead{max-width:800px;color:#a7b8c9;line-height:1.6}.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:22px;margin-top:25px;min-width:0}.layout>.tour-main{min-width:0}nav{border:1px solid #334155;background:#071421;align-self:start;min-width:0;max-width:100%;overflow-x:auto}ol{list-style:none;margin:0;padding:8px}li button{display:flex;gap:10px;align-items:center;width:100%;background:none;border:1px solid transparent;color:#a7b8c9;text-align:left;min-height:36px;padding:7px;cursor:pointer;font-size:12px}li button.active{border-color:#2bb8b0;background:#0b262b;color:#fff}li small{font:10px 'JetBrains Mono',monospace;color:#2bb8b0}.progress{display:flex;justify-content:space-between}.progress span{color:#94a3b8}.progress-track{height:3px;background:#1e293b;margin:9px 0 18px}.progress-track i{display:block;height:100%;background:#2bb8b0}article{border:1px solid #334155;padding:22px;background:#071421}h2{font:500 clamp(24px,3vw,32px) 'Space Grotesk',sans-serif;margin:8px 0 20px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cards section{border:1px solid #334155;padding:15px;min-height:110px}.cards .limit{border-color:#885f22;background:#1b1711}h3{font:11px 'JetBrains Mono',monospace;color:#2bb8b0;margin:0 0 10px}.limit h3{color:#fbbf24}.cards p{margin:0;color:#b9cad7;line-height:1.6;font-size:14px}.action{display:inline-block;margin-top:18px;border:1px solid #2bb8b0;padding:11px 14px;color:#7ee4dc;text-decoration:none}.status,.error{font:12px 'JetBrains Mono',monospace;color:#94a3b8}.error{color:#f87171}.controls{display:flex;gap:9px;align-items:center;margin-top:20px}.controls button{min-height:38px;padding:8px 12px;background:#0b262b;border:1px solid #2bb8b0;color:#e5f1f0;cursor:pointer}.controls button:disabled{opacity:.4;cursor:not-allowed}.controls a{color:#2bb8b0;margin-left:auto}button:focus-visible,a:focus-visible{outline:2px solid #fbbf24;outline-offset:2px}@media(max-width:800px){.layout{grid-template-columns:minmax(0,1fr)}nav ol{display:flex;width:max-content}li button{min-width:130px;height:50px}}@media(max-width:550px){.cards{grid-template-columns:1fr}article{padding:14px}.controls{flex-wrap:wrap}.controls a{margin-left:0;width:100%}}
 	a{display:inline-block;min-height:24px;line-height:24px}
+	h1:focus{outline:none}
 </style>

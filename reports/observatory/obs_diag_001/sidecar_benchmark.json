@@ -1,0 +1,186 @@
+{
+ "status": "PASS",
+ "all_trials_identical_outcome": true,
+ "trials_per_config": 5,
+ "protocol": {
+  "run_type": "LIVE_RUN",
+  "algorithm": "FEDAVG",
+  "secagg_mode": "PLAIN",
+  "planned_rounds": 3,
+  "scenario_id": "FL_SINGLE_RUN"
+ },
+ "machine": "Darwin arm64 Python 3.11.16, one machine, loopback HTTP, one backend process per trial",
+ "wall_seconds": {
+  "OFF": {
+   "n": 5,
+   "median": 27.6734051250387,
+   "mean": 27.671597966412083,
+   "min": 27.07460729102604,
+   "max": 28.315561083029024,
+   "stdev": 0.5295015583996016
+  },
+  "SIDECAR": {
+   "n": 5,
+   "median": 27.855414667050354,
+   "mean": 27.705847817030737,
+   "min": 27.362805459066294,
+   "max": 28.011083457968198,
+   "stdev": 0.28668641816330026
+  },
+  "SIDECAR_BATCH": {
+   "n": 5,
+   "median": 28.071347791003063,
+   "mean": 27.968584058596754,
+   "min": 27.33506716694683,
+   "max": 28.938208334031515,
+   "stdev": 0.6484143113140658
+  }
+ },
+ "server_peak_rss_mb": {
+  "OFF": {
+   "n": 5,
+   "median": 996.7,
+   "mean": 946.6,
+   "min": 761.1,
+   "max": 1008.7,
+   "stdev": 105.58318994991579
+  },
+  "SIDECAR": {
+   "n": 5,
+   "median": 995.8,
+   "mean": 919.6,
+   "min": 795.4,
+   "max": 1006.2,
+   "stdev": 111.39674591297542
+  },
+  "SIDECAR_BATCH": {
+   "n": 5,
+   "median": 870.6,
+   "mean": 888.1600000000001,
+   "min": 767.7,
+   "max": 997.1,
+   "stdev": 102.43362729104147
+  }
+ },
+ "median_overhead_vs_off_pct": {
+  "SIDECAR": 0.66,
+  "SIDECAR_BATCH": 1.44
+ },
+ "reference_outcome": {
+  "candidate_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+  "governance": "ACCEPTED_TO_SANDBOX",
+  "sandbox": "IN_SANDBOX",
+  "deployed": false,
+  "accepted_updates": 24,
+  "accepted_examples": [
+   723,
+   723,
+   723
+  ]
+ },
+ "trials": [
+  {
+   "config": "OFF",
+   "run_wall_seconds": 27.07460729102604,
+   "server_peak_rss_mb": 959.5,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR",
+   "run_wall_seconds": 27.855414667050354,
+   "server_peak_rss_mb": 799.9,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR_BATCH",
+   "run_wall_seconds": 28.071347791003063,
+   "server_peak_rss_mb": 870.6,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR",
+   "run_wall_seconds": 27.86126629204955,
+   "server_peak_rss_mb": 795.4,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR_BATCH",
+   "run_wall_seconds": 27.40754545899108,
+   "server_peak_rss_mb": 767.7,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "OFF",
+   "run_wall_seconds": 28.065064750029705,
+   "server_peak_rss_mb": 761.1,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR_BATCH",
+   "run_wall_seconds": 28.938208334031515,
+   "server_peak_rss_mb": 816.5,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "OFF",
+   "run_wall_seconds": 28.315561083029024,
+   "server_peak_rss_mb": 1008.7,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR",
+   "run_wall_seconds": 28.011083457968198,
+   "server_peak_rss_mb": 1000.7,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "OFF",
+   "run_wall_seconds": 27.6734051250387,
+   "server_peak_rss_mb": 1007.0,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR",
+   "run_wall_seconds": 27.362805459066294,
+   "server_peak_rss_mb": 1006.2,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR_BATCH",
+   "run_wall_seconds": 28.090751542011276,
+   "server_peak_rss_mb": 988.9,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR",
+   "run_wall_seconds": 27.43866920901928,
+   "server_peak_rss_mb": 995.8,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "SIDECAR_BATCH",
+   "run_wall_seconds": 27.33506716694683,
+   "server_peak_rss_mb": 997.1,
+   "status": "COMPLETED"
+  },
+  {
+   "config": "OFF",
+   "run_wall_seconds": 27.229351582936943,
+   "server_peak_rss_mb": 996.7,
+   "status": "COMPLETED"
+  }
+ ],
+ "limitations": [
+  "One machine and loopback HTTP: these numbers say nothing about network or distributed-deployment performance.",
+  "Wall-clock includes the 100 ms poll granularity; peak RSS covers the whole backend process (imports, runtime, run), so small differences are within noise.",
+  "Synthetic cohort and engineering protocol only; no scientific or latency claim for any deployment."
+ ],
+ "interpretation_post_hoc_from_trial_data": {
+  "sidecar_median_wall_difference_s": 0.182,
+  "sidecar_batch_median_wall_difference_s": 0.398,
+  "baseline_trial_stdev_s": 0.53,
+  "wall_difference_within_one_baseline_stdev": true,
+  "memory": "Peak RSS varied by about 250 MB between trials of the SAME configuration (OFF: 761 to 1009 MB), so no sidecar memory effect can be resolved from these measurements; the sidecar stores a few kilobytes per run.",
+  "reading": "The sidecar and per-batch capture added well under 2 percent median wall-clock on a 27 to 28 second run, comparable to trial-to-trial noise; this is a one-machine measurement, not a network or deployment claim."
+ }
+}

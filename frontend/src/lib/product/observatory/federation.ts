@@ -40,7 +40,9 @@ export interface ClientContribution {
 export interface LocalTrainingDiagnostic {
 	examples_seen: number; batch_count: number; shuffle_seed: string; update_bytes: number;
 	mean_local_loss: number; update_norm: number;
+	per_batch: { batches: BatchRow[]; dropped_beyond_bound: number; loss_term: string } | null;
 }
+export interface BatchRow { batch_index: number; batch_size: number; loss: number; learning_rate: number; gradient_l2_norm: number; optimizer_step: number }
 export interface RoundContribution {
 	round_id: number; base_state_digest: string | null; committed_state_digest: string | null;
 	accepted_update_count: number | null; reported_accepted_update_count: number | null;
@@ -119,7 +121,14 @@ export function parseRunContributions(value: unknown): RunContributions {
 							return { examples_seen: number(d.examples_seen), batch_count: number(d.batch_count),
 								shuffle_seed: string(d.shuffle_seed), update_bytes: number(d.update_bytes),
 								mean_local_loss: number(d.mean_loss_diagnostic_only),
-								update_norm: number(d.update_norm_diagnostic_only) };
+								update_norm: number(d.update_norm_diagnostic_only),
+								per_batch: d.per_batch == null ? null : (() => {
+									const pb = object(d.per_batch);
+									return { loss_term: string(pb.loss_term), dropped_beyond_bound: number(pb.dropped_beyond_bound),
+										batches: array(pb.batches).map((raw) => { const b = object(raw);
+											return { batch_index: number(b.batch_index), batch_size: number(b.batch_size), loss: number(b.loss), learning_rate: number(b.learning_rate),
+												gradient_l2_norm: number(b.gradient_l2_norm), optimizer_step: number(b.optimizer_step) }; }) };
+								})() };
 						})(),
 						evidence_state: string(c.evidence_state) };
 				}) };

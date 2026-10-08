@@ -143,3 +143,22 @@ export function parseDatasetPreprocessing(value: unknown): DatasetPreprocessing 
 				role: nstr(x.role), allowed_for_training: nstr(x.allowed_for_training), access_rule: str(x.access_rule), coefficient_sha256: str(x.coefficient_sha256),
 				causality: { first_output_index_that_changed: c.first_output_index_that_changed === null ? null : num(c.first_output_index_that_changed), altered_from_source_sample: num(c.altered_from_source_sample), output_samples: num(c.output_samples), outputs_before_alteration_identical: c.outputs_before_alteration_identical === true, synthetic_test_signal: str(c.synthetic_test_signal) } }; }) };
 }
+
+export interface ActivationInspection {
+	scenario_id: string; window_index: number; window_quality: string; model_id: string; parameter_count: number; raw_logit: number; raw_probability: number;
+	parity: { logit_bit_identical_with_and_without_hooks: boolean; hooks_remaining_after_inspection: number };
+	layers: { name: string; type: string; output_shape: number[]; mean: number; std: number; min: number; max: number; l2_norm: number; fraction_exactly_zero: number }[];
+	selected_layer: string; heatmap: { channels: number; time_bins: number; source_time_steps: number; values: number[][] } | null; caveats: string[];
+}
+export function parseActivationInspection(value: unknown): ActivationInspection {
+	const r = obj(value);
+	if (r.classification !== 'ON_DEMAND_FORWARD_HOOK_OBSERVATION_RELEASED_CHECKPOINT_ON_SYNTHETIC_WINDOW') bad();
+	const p = obj(r.parity);
+	if (p.logit_bit_identical_with_and_without_hooks !== true || num(p.hooks_remaining_after_inspection) !== 0) bad();   // never display an unverified inspection
+	const h = r.selected_layer_heatmap === null ? null : obj(r.selected_layer_heatmap);
+	return { scenario_id: str(r.scenario_id), window_index: num(r.window_index), window_quality: str(r.window_quality), model_id: str(r.model_id), parameter_count: num(r.parameter_count), raw_logit: num(r.raw_logit), raw_probability: num(r.raw_probability),
+		parity: { logit_bit_identical_with_and_without_hooks: true, hooks_remaining_after_inspection: 0 },
+		layers: arr(r.layers).map((l) => { const x = obj(l); return { name: str(x.name), type: str(x.type), output_shape: arr(x.output_shape).map(num), mean: num(x.mean), std: num(x.std), min: num(x.min), max: num(x.max), l2_norm: num(x.l2_norm), fraction_exactly_zero: num(x.fraction_exactly_zero) }; }),
+		selected_layer: str(r.selected_layer), caveats: arr(r.caveats).map(str),
+		heatmap: h === null ? null : { channels: num(h.channels), time_bins: num(h.time_bins), source_time_steps: num(h.source_time_steps), values: arr(h.mean_pooled_values).map((row) => arr(row).map(num)) } };
+}

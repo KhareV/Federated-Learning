@@ -59,6 +59,25 @@ class FrozenCohort(BaseModel):
     clients: tuple[FrozenClient, ...]
 
 
+class BatchRecord(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    batch_index: int = Field(ge=0)
+    batch_size: int = Field(ge=1)
+    loss: float = Field(ge=0)
+    learning_rate: float = Field(gt=0)
+    gradient_l2_norm: float = Field(ge=0)
+    optimizer_step: int = Field(ge=1)
+
+
+class PerBatchCapture(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    batches: tuple[BatchRecord, ...]
+    dropped_beyond_bound: int = Field(ge=0)
+    loss_term: str
+
+
 class LocalTrainingDiagnostic(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
@@ -68,6 +87,7 @@ class LocalTrainingDiagnostic(BaseModel):
     update_bytes: int = Field(ge=1)
     mean_loss_diagnostic_only: float = Field(ge=0)
     update_norm_diagnostic_only: float = Field(ge=0)
+    per_batch: PerBatchCapture | None = None
 
 
 class ClientContribution(BaseModel):

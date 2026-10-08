@@ -8,6 +8,7 @@ federation routes project frozen/read-only evidence. No route trains or infers.
 from __future__ import annotations
 
 import asyncio
+import json
 import time
 from collections.abc import Callable
 from pathlib import Path
@@ -76,6 +77,8 @@ def create_product_app_observatory_v1(
     replay_pace_s: float = 0.0,
     auto_resume: bool = True,
     cohort_provider: Callable[[], Any] | None = None,
+    acceptance_sidecar: bool = True,
+    batch_capture: bool = False,
 ) -> FastAPI:
     app = create_product_app_v1_3(
         store=store, identity_resolver=identity_resolver,
@@ -129,7 +132,11 @@ def create_product_app_observatory_v1(
         return result
 
     monitoring.start = observing_start
-    install_acceptance_capture(app.state.federation_service)
+    if acceptance_sidecar:   # default on (V1 behavior); off only as the benchmark control
+        factory = None
+        if batch_capture:   # opt-in; imported lazily (no torch hooks by default)
+            from api.observatory_batch_capture import BatchCapture as factory
+        install_acceptance_capture(app.state.federation_service, factory)
 
     async def bounded_call(operation: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
         if trace_slots.locked():
@@ -388,6 +395,27 @@ def create_product_app_observatory_v1(
     async def evidence_boundaries(request: Request) -> dict[str, Any]:
         await identity(request)
         return evidence.boundaries()
+
+    @app.get(f"{PREFIX}/model/activations/{{scenario_id}}/{{window_index}}")
+    async def model_activations(request: Request, scenario_id: str, window_index: int,
+                                layer: str | None = None) -> dict[str, Any]:
+        await identity(request)
+        spec = scenarios.get(scenario_id)
+        if spec is None:
+            raise ProductError(ProductErrorCode.NOT_FOUND, "scenario not found")
+        if trace_slots.locked():
+            raise ProductError(ProductErrorCode.INVALID_STATE,
+                               "Observatory trace capacity busy; retry after a trace completes")
+        from api.observatory_activation import inspect_activations
+
+        async with trace_slots:
+            try:
+                body = await asyncio.to_thread(inspect_activations, spec, window_index, layer)
+            except ValueError as error:
+                raise ProductError(ProductErrorCode.NOT_FOUND, str(error)) from error
+        if len(json.dumps(body).encode()) > MAX_TRACE_RESPONSE_BYTES:
+            raise ProductError(ProductErrorCode.INTERNAL_PRODUCT_ERROR, "activation response size limit exceeded")
+        return body
 
     @app.get(f"{PREFIX}/model/architecture")
     async def model_architecture(request: Request) -> dict[str, Any]:

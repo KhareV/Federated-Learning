@@ -1,0 +1,26 @@
+{
+ "browsers_tested": [
+  "chrome_stable",
+  "chrome_for_testing"
+ ],
+ "browsers_not_tested": {
+  "firefox": "not installed in this environment",
+  "webkit_safari": "Safari 'Allow remote automation' is disabled; enabling it requires a manual settings change"
+ },
+ "chrome_stable:diag_smoke": {
+  "exit_code": 0,
+  "tail": "perBatch\":{\"present\":true,\"rows\":2,\"text\":\"PER-BATCH CAPTURE (opt-in, read-only observation) \u00b7 loss term: BCE_WITH_LOGITS_MEAN_OVER_B\",\"exactSummaryNote\":true,\"overflow\":false},\"perBatchMobileOverflow\":false,\"activation\":{\"parity\":true,\"heatmap\":true,\"cells\":1536,\"hooksZero\":true,\"notExplanation\":true,\"overflow\":false},\"activationMobileOverflow\":false,\"externalHosts\":[],\"errors\":[],\"passed\":true}\n"
+ },
+ "chrome_stable:a11y": {
+  "exit_code": 0,
+  "tail": ""
+ },
+ "chrome_for_testing:diag_smoke": {
+  "exit_code": 0,
+  "tail": "perBatch\":{\"present\":true,\"rows\":2,\"text\":\"PER-BATCH CAPTURE (opt-in, read-only observation) \u00b7 loss term: BCE_WITH_LOGITS_MEAN_OVER_B\",\"exactSummaryNote\":true,\"overflow\":false},\"perBatchMobileOverflow\":false,\"activation\":{\"parity\":true,\"heatmap\":true,\"cells\":1536,\"hooksZero\":true,\"notExplanation\":true,\"overflow\":false},\"activationMobileOverflow\":false,\"externalHosts\":[],\"errors\":[],\"passed\":true}\n"
+ },
+ "chrome_for_testing:a11y": {
+  "exit_code": 0,
+  "tail": ""
+ }
+}

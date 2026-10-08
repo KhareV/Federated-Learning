@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import type { Boundaries, Reproducibility } from '$lib/product/observatory/evidence';
@@ -13,7 +14,7 @@
 </script>
 <svelte:head><title>Provenance and known boundaries | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / PROVENANCE</div>
-<h1>Provenance, history and known boundaries</h1>
+<h1 tabindex="-1" use:focusHeading>Provenance, history and known boundaries</h1>
 <p class="lead">Each statement below points to a committed evidence file and shows its current SHA-256. A listed report is evidence of a result, not proof that this session re-ran it.</p>
 {#if error}<p role="alert" class="err">Unavailable: {error}</p>{:else if !repro || !gallery}<p class="dim" role="status">Loading…</p>{:else}
 <section aria-label="Reproducibility console" data-testid="reproducibility"><h2>Reproducibility console</h2>
@@ -32,4 +33,5 @@
 	.time{list-style:none;margin:0;padding:0 0 0 12px;border-left:2px solid rgba(43,184,176,.4);display:grid;gap:14px}.time li{display:grid;gap:3px}.time b{font:500 15px 'Space Grotesk',sans-serif}.dec{font:600 12px 'JetBrains Mono',monospace;color:#c4b5fd}.time p{margin:0}
 	.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}.cards li{border:1px solid rgba(251,191,36,.35);padding:12px 14px;display:grid;gap:6px;min-width:0}.cards b{font:500 14px 'Space Grotesk',sans-serif}.cards p{margin:0}
 	a{display:inline-block;min-height:24px;line-height:24px}
+	h1:focus{outline:none}
 </style>

@@ -39,6 +39,8 @@ def build_app_from_env(env: Mapping[str, str]):
         candidate_root=env.get(ENV_CAND_ROOT, str(CAND_ROOT)),
         checkpoint_hook=crash_hook(env),
         auto_resume=env.get("NHM_FEDERATION_AUTO_RESUME", "1") != "0",
+        acceptance_sidecar=env.get("NHM_OBSERVATORY_ACCEPTANCE_SIDECAR", "1") != "0",
+        batch_capture=env.get("NHM_OBSERVATORY_BATCH_CAPTURE", "0") == "1",
     )
 
 

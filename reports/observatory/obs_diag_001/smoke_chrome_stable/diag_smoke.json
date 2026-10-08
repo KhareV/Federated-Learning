@@ -1,0 +1,23 @@
+{
+ "steps": [],
+ "perBatch": {
+  "present": true,
+  "rows": 2,
+  "text": "PER-BATCH CAPTURE (opt-in, read-only observation) · loss term: BCE_WITH_LOGITS_MEAN_OVER_B",
+  "exactSummaryNote": true,
+  "overflow": false
+ },
+ "perBatchMobileOverflow": false,
+ "activation": {
+  "parity": true,
+  "heatmap": true,
+  "cells": 1536,
+  "hooksZero": true,
+  "notExplanation": true,
+  "overflow": false
+ },
+ "activationMobileOverflow": false,
+ "externalHosts": [],
+ "errors": [],
+ "passed": true
+}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import type { EvalModel, FlCurves, FlEval } from '$lib/product/observatory/evidence';
@@ -33,7 +34,7 @@
 </script>
 <svelte:head><title>Scientific evidence explorer | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / SCIENTIFIC EVIDENCE</div>
-<h1>Frozen scientific FL evidence</h1>
+<h1 tabindex="-1" use:focusHeading>Frozen scientific FL evidence</h1>
 <p class="lead">Every value here is read from the committed V2-FL-EVAL-001 evidence after a SHA-256 check. Nothing is trained, tuned or re-evaluated. These are the scientific FL experiments (AAMI_SVF_WINDOW_V1), <b>not</b> the product's three-round engineering candidate, which has no established efficacy.</p>
 <p class="tag" data-testid="frozen-label">FROZEN RESEARCH EVIDENCE</p>
 {#if error}<p role="alert" class="err">Evidence unavailable: {error}</p>{:else if !data}<p class="dim" role="status">Loading frozen evidence…</p>{:else}
@@ -97,4 +98,5 @@
 	.detail{border:1px solid rgba(148,163,184,.2);padding:14px 16px;margin-top:18px}.detail h2{margin-top:0}.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}figure{margin:0;display:grid;gap:6px}figcaption{font:10px 'JetBrains Mono',monospace;color:#71829a}svg{width:100%;max-width:320px;height:auto;background:#050a15}.frame{fill:none;stroke:rgba(148,163,184,.35)}.line{fill:none;stroke:#a78bfa;stroke-width:1.6;vector-effect:non-scaling-stroke}.diag{stroke:rgba(148,163,184,.4);stroke-dasharray:3 3;fill:none}
 	.cm{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font:12px 'JetBrains Mono',monospace}.cm b{font-size:10px;color:#71829a;align-self:center}.cm span{border:1px solid rgba(148,163,184,.3);padding:12px 8px;text-align:center}.tp,.tn{border-color:rgba(167,139,250,.6)!important}.fp,.fn{border-color:rgba(251,191,36,.6)!important}.cond{display:grid;gap:4px;padding-left:18px}
 	a{display:inline-block;min-height:24px;line-height:24px}
+	h1:focus{outline:none}
 </style>

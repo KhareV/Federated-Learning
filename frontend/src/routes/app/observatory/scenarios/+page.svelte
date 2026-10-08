@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import SignalStageChart from '$lib/components/product/observatory/SignalStageChart.svelte';
@@ -42,7 +43,7 @@
 </script>
 <svelte:head><title>Scenario and fault lab | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / SCENARIO AND FAULT LAB</div>
-<h1>Scenario and fault lab</h1>
+<h1 tabindex="-1" use:focusHeading>Scenario and fault lab</h1>
 <p class="lead">Existing deterministic simulated-wearable scenarios, shown in <b>simulated source time</b> (not wall-clock). Fault schedules come from the frozen scenario definitions; each selected window is reconstructed with the canonical operators. This does not show real-world hardware robustness.</p>
 <label class="pick">Scenario <select bind:value={scenarioId} onchange={loadTimeline}>{#each scenarios as s (s.scenario_id)}<option value={s.scenario_id}>{s.scenario_id} · {s.duration_s} s</option>{/each}</select></label>
 {#if error}<p role="alert" class="err">{error}</p>{/if}
@@ -79,4 +80,5 @@
 	.scrub{display:flex;flex-wrap:wrap;gap:10px;align-items:end}.scrub input{width:min(60vw,360px)}.ctx-list{padding-left:18px}.q{font:600 13px 'JetBrains Mono',monospace;padding:2px 8px;border:1px solid}.q-valid{color:#2bb8b0}.q-degraded{color:#fbbf24}.q-unusable{color:#f87171}.charts,.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:12px}.cmp article{border:1px solid rgba(148,163,184,.2);padding:10px 12px;min-width:0}.cmp-controls{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}
 	@media (max-width: 760px) { .bar { flex-direction: column; } .bar div { flex: none !important; } }
 	a{display:inline-block;min-height:24px;line-height:24px}
+	h1:focus{outline:none}
 </style>

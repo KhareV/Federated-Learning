@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import { downloadExport } from '$lib/product/observatory/export';
@@ -133,7 +134,7 @@
 <svelte:head><title>Research Observatory | NHM</title></svelte:head>
 
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY</div>
-<h1>Follow one signal through the system</h1>
+<h1 tabindex="-1" use:focusHeading>Follow one signal through the system</h1>
 <p class="lead">Inspect a deterministic synthetic window through the unchanged gap controller, causal resampler, ECG filter and normalization. Existing sessions default to bounded reconstruction; a new session can explicitly capture one window from its actual live preprocessing runtime.</p>
 <p><a href="/app/observatory/federation">Inspect all eight synthetic federation participants and their recorded contributions →</a></p>
 <p><a href="/app/observatory/research">Inspect an authorized MIT-BIH TRAIN research window →</a></p>
@@ -211,4 +212,5 @@
 .explore{display:grid;gap:2px;margin:10px 0}.explore a{display:inline-flex;align-items:center;min-height:28px;color:#2bb8b0}
 .exp button{background:#0a0f1f;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);padding:6px 12px;min-height:32px;font:12px 'JetBrains Mono',monospace;cursor:pointer}
 	a{display:inline-block;min-height:24px;line-height:24px}summary{min-height:24px}
+	h1:focus{outline:none}
 </style>

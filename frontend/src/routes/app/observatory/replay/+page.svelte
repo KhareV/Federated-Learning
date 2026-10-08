@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import type { SessionTimeline, SourceTimelineItem } from '$lib/product/history/types';
@@ -46,7 +47,7 @@
 </script>
 <svelte:head><title>Session replay and policy trace | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / SESSION REPLAY</div>
-<h1>Session replay and monitoring-policy trace</h1>
+<h1 tabindex="-1" use:focusHeading>Session replay and monitoring-policy trace</h1>
 <p class="lead">Step through the <b>persisted</b> evidence of one owned, completed session in source time. Nothing is re-run: each step reveals records that were stored by the monitoring runtime (quality, calibrated score against the frozen threshold, policy state and its reason codes). Playback speed is presentation only, not real-time acquisition.</p>
 <p class="tag">PERSISTED EVIDENCE REPLAY · NO NEW INFERENCE</p>
 <label class="pick">Completed session <select bind:value={sessionId} onchange={load}><option value="">— choose an owned session —</option>{#each done as s (s.session_id)}<option value={s.session_id}>{s.session_id}</option>{/each}</select></label>
@@ -78,4 +79,5 @@
 	.lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px}.lanes article{border:1px solid rgba(148,163,184,.25);padding:10px 12px;display:grid;gap:4px;min-width:0}.lanes span{font:10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#71829a}.lanes b{font:500 16px 'Space Grotesk',sans-serif;color:#e2e8f0;overflow-wrap:anywhere}
 	svg{width:100%;height:200px;background:#050a15}.frame{fill:none;stroke:rgba(148,163,184,.35)}.thr{stroke:#fbbf24;stroke-dasharray:2 2;fill:none;vector-effect:non-scaling-stroke}.cur{stroke:#a78bfa;fill:none;stroke-width:1.5;vector-effect:non-scaling-stroke}.pt{fill:#2bb8b0}.pt.s-degraded{fill:#fbbf24}.pt.s-unusable{fill:#f87171}.tr{padding-left:18px;display:grid;gap:4px}.tr li{opacity:.55}.tr li.now{opacity:1;color:#e2e8f0}
 	a{display:inline-block;min-height:24px;line-height:24px}
+	h1:focus{outline:none}
 </style>

@@ -1,0 +1,25 @@
+{
+ "status": "PASS",
+ "checks": {
+  "both_completed": true,
+  "update_digests_and_examples_identical": true,
+  "round_base_digests_identical": true,
+  "committed_digests_identical": true,
+  "candidate_identical": true,
+  "event_semantics_identical": true,
+  "event_count": 203,
+  "per_batch_rows_total": 48,
+  "per_batch_reproduces_epoch_summary": true,
+  "capture_off_run_has_no_per_batch": true,
+  "accepted_contributions_identical": true
+ },
+ "candidate": {
+  "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+  "governance_status": "ACCEPTED_TO_SANDBOX",
+  "sandbox_status": "IN_SANDBOX",
+  "production_deployed": false,
+  "client_count": 8,
+  "algorithm": "FEDAVG"
+ },
+ "note": "Same protocol and run id; only the Observatory observers differ. A PASS shows observation did not change update digests, round states, the candidate digest or event semantics."
+}

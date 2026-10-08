@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import { federationSocketUrl } from '$lib/product/api';
@@ -51,7 +52,7 @@
 </script>
 <svelte:head><title>Federation journal replay | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / FEDERATION REPLAY</div>
-<h1>Federation event-journal replay</h1>
+<h1 tabindex="-1" use:focusHeading>Federation event-journal replay</h1>
 <p class="tag" data-testid="replay-label">REPLAY — NO LOCAL TRAINING EXECUTING</p>
 <p class="lead">Step through the persisted event journal of one owned, completed run. The journal is read from sequence 0 and every step is derived by the same validated view model as the live page. Nothing trains, no candidate is created, and pace is presentation only.</p>
 <label class="pick">Completed run <select bind:value={runId} onchange={load}><option value="">— choose an owned run —</option>{#each runs as r (r.run_id)}<option value={r.run_id}>{r.run_id} · {r.run_type} · {r.algorithm}</option>{/each}</select></label>
@@ -74,4 +75,5 @@
 	.eyebrow{color:#2bb8b0;font:10px 'JetBrains Mono',monospace;letter-spacing:.14em}h1{font:500 clamp(26px,4vw,40px) 'Space Grotesk',sans-serif;margin:8px 0}h2{font:500 16px 'Space Grotesk',sans-serif;margin:18px 0 8px}.tag{display:inline-block;margin:0 0 10px;border:1px solid rgba(148,163,184,.6);padding:6px 12px;color:#e5e7eb;font:12px 'JetBrains Mono',monospace;letter-spacing:.1em}.lead{max-width:860px;color:#a7b8c9;line-height:1.6}.dim,p{color:#94a3b8;font-size:13px;line-height:1.6;overflow-wrap:anywhere}.err{color:#fecdd3}a{color:#2bb8b0}.gap{height:10px}
 	.pick,.scrub{display:grid;gap:4px;font:10px 'JetBrains Mono',monospace;color:#71829a;margin:8px 0}select,button{background:#0a0f1f;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);padding:6px 10px;min-height:32px;font:12px 'JetBrains Mono',monospace}button:disabled{opacity:.4}.controls{display:flex;flex-wrap:wrap;gap:8px}.scrub input{width:100%;max-width:640px}
 	a{display:inline-block;min-height:24px;line-height:24px}
+	h1:focus{outline:none}
 </style>

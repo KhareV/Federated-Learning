@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
-	import type { Architecture, Calibration, XaiCase, XaiIndex } from '$lib/product/observatory/evidence';
+	import type { ActivationInspection, Architecture, Calibration, XaiCase, XaiIndex } from '$lib/product/observatory/evidence';
 	const store = getProductStore();
 	let arch = $state<Architecture | null>(null);
 	let cal = $state<Calibration | null>(null);
@@ -11,6 +12,20 @@
 	let xaiError = $state<string | null>(null);
 	let caseType = $state('TP');
 	let xaiRequest = 0;
+	let actScenario = $state('NORMAL_MONITORING');
+	let actWindow = $state(2);
+	let actLayer = $state('');
+	let actBody = $state<ActivationInspection | null>(null);
+	let actError = $state<string | null>(null);
+	let actLoading = $state(false);
+	async function inspectActivations() {
+		actLoading = true; actError = null;
+		try { actBody = await store.api.observatoryActivations(actScenario, actWindow, actLayer || undefined); }
+		catch (c) { actBody = null; actError = c instanceof Error ? c.message : String(c); }
+		finally { actLoading = false; }
+	}
+	const cell = (v: number, lo: number, hi: number) => { const t = hi === lo ? 0.5 : (v - lo) / (hi - lo); return `rgb(${Math.round(20 + 140 * t)},${Math.round(25 + 110 * t)},${Math.round(60 + 190 * t)})`; };
+	const heatRange = $derived.by(() => { const v = actBody?.heatmap?.values.flat() ?? [0, 1]; return [Math.min(...v), Math.max(...v)] as const; });
 	let logit = $state(0);
 	const T = $derived(Number(cal?.constants.temperature ?? NaN));
 	const threshold = $derived(Number(cal?.constants.threshold ?? NaN));
@@ -43,7 +58,7 @@
 </script>
 <svelte:head><title>Model and calibration explorer | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / MODEL</div>
-<h1>MODEL_V2_FINAL: architecture and calibration</h1>
+<h1 tabindex="-1" use:focusHeading>MODEL_V2_FINAL: architecture and calibration</h1>
 <p class="lead">The architecture is derived by running an all-zero tensor through the real module (no weights, no data, no inference). Calibration constants are the frozen CAL_V2 values. The federated engineering candidate shares this architecture but is never calibrated by CAL_V2.</p>
 {#if error}<p role="alert" class="err">Unavailable: {error}</p>{:else if !arch || !cal}<p class="dim" role="status">Loading…</p>{:else}
 <section aria-label="Architecture"><h2>{arch.architecture_id} · {arch.parameter_count.toLocaleString()} parameters</h2>
@@ -65,6 +80,17 @@
 	<details><summary>TECHNICAL EVIDENCE · frozen constants and hashes</summary><dl>{#each Object.entries(cal.constants) as [k, v] (k)}<div><dt>{k}</dt><dd>{typeof v === 'object' ? JSON.stringify(v) : String(v)}</dd></div>{/each}<div><dt>CAL_V2.json SHA256</dt><dd>{cal.source.calibration_sha256}</dd></div><div><dt>reliability.json SHA256</dt><dd>{cal.source.reliability_sha256}</dd></div></dl></details></section>
 {/if}
 
+
+<section aria-label="Activation inspection" data-testid="activation-inspection"><h2>Forward-activation inspection (opt-in, server-side)</h2>
+	<p class="tag">READ-ONLY FORWARD HOOKS · RELEASED CHECKPOINT · ONE SYNTHETIC WINDOW · NOT AN EXPLANATION METHOD</p>
+	<p class="dim">Runs the checksum-verified MODEL_V2_FINAL weights on a fresh isolated copy for the one synthetic scenario window you choose, with hooks that only read layer outputs. The logit with hooks must be bit-identical to the logit without them, otherwise nothing is shown. It is never applied to research recordings or federated candidates, and layer activations are not clinical explanations.</p>
+	<div class="act-controls"><label>Scenario <input aria-label="Scenario id" bind:value={actScenario} /></label><label>Window index <input type="number" min="0" max="200" bind:value={actWindow} /></label><label>Layer (optional) <input aria-label="Layer name" placeholder="backbone.blocks.6.relu2" bind:value={actLayer} /></label><button onclick={inspectActivations} disabled={actLoading}>{actLoading ? 'Inspecting…' : 'Inspect activations'}</button></div>
+	{#if actError}<p role="alert" class="err">{actError}</p>{/if}
+	{#if actBody}<p data-testid="activation-parity">Parity: logit with hooks is bit-identical to the logit without hooks ✓ · hooks remaining after inspection: {actBody.parity.hooks_remaining_after_inspection} · window quality {actBody.window_quality} · raw logit {actBody.raw_logit.toFixed(4)} (raw probability {actBody.raw_probability.toFixed(6)})</p>
+		{#if actBody.heatmap}{@const hm = actBody.heatmap}<figure><figcaption>{actBody.selected_layer}: {hm.channels} channels × {hm.time_bins} time bins (mean-pooled from {hm.source_time_steps} steps). Brighter = larger mean activation within the bin.</figcaption>
+			<svg viewBox={`0 0 ${hm.time_bins} ${hm.channels}`} preserveAspectRatio="none" role="img" aria-label={`Activation heatmap of ${actBody.selected_layer}, ${hm.channels} channels by ${hm.time_bins} time bins, values from ${heatRange[0].toFixed(3)} to ${heatRange[1].toFixed(3)}`}>{#each hm.values as row, c}{#each row as v, t}<rect x={t} y={c} width="1" height="1" fill={cell(v, heatRange[0], heatRange[1])} />{/each}{/each}</svg></figure>{/if}
+		<details><summary>TECHNICAL EVIDENCE · per-layer statistics</summary><div class="scroll"><table><caption>Statistics over the full output of each leaf layer for this window</caption><thead><tr><th>Layer</th><th>Shape</th><th>Mean</th><th>Std</th><th>Min</th><th>Max</th><th>L2</th><th>Exactly zero</th></tr></thead><tbody>{#each actBody.layers as l (l.name)}<tr><th scope="row">{l.name}</th><td>{l.output_shape.join(' × ')}</td><td>{l.mean.toFixed(4)}</td><td>{l.std.toFixed(4)}</td><td>{l.min.toFixed(3)}</td><td>{l.max.toFixed(3)}</td><td>{l.l2_norm.toFixed(2)}</td><td>{(l.fraction_exactly_zero).toFixed(3)}</td></tr>{/each}</tbody></table></div></details>
+		<p class="dim">{actBody.caveats.join(' ')}</p>{/if}</section>
 <section aria-label="Explainability" data-testid="explainability"><h2>Frozen explainability examples (Integrated Gradients)</h2>
 	<p class="tag">FROZEN RESEARCH EVIDENCE · MODEL_V2_FINAL · zero-baseline signed Integrated Gradients</p>
 	{#if xaiError}<p role="alert" class="err">{xaiError}</p>{:else if !xai}<p class="dim" role="status">Loading…</p>{:else}
@@ -82,4 +108,6 @@
 	.rel{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}figure{margin:0;display:grid;gap:6px}figcaption{font:10px 'JetBrains Mono',monospace;color:#71829a}svg{width:100%;max-width:320px;height:auto;background:#050a15}.frame{fill:none;stroke:rgba(148,163,184,.35)}.diag{stroke:rgba(148,163,184,.4);stroke-dasharray:3 3;fill:none}.pt{fill:#a78bfa;opacity:.85}
 	.cases{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.cases button{background:#0a0f1f;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);padding:6px 10px;min-height:32px;font:12px 'JetBrains Mono',monospace}.cases button.on{border-color:#2bb8b0;color:#9fe8e3}svg[aria-label^='Attribution']{width:100%;height:220px;background:#050a15}.inp{fill:none;stroke:#2bb8b0;stroke-width:1;vector-effect:non-scaling-stroke}.up{fill:#a78bfa}.down{fill:#fbbf24}
 	a{display:inline-block;min-height:24px;line-height:24px}summary{min-height:24px}
+.act-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:8px 0}.act-controls label{display:grid;gap:4px;font:10px 'JetBrains Mono',monospace;color:#71829a}.act-controls input,.act-controls button{background:#0a0f1f;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);padding:6px 10px;min-height:32px;font:12px 'JetBrains Mono',monospace}svg[aria-label^='Activation']{width:100%;max-width:640px;height:220px;background:#050a15}
+	h1:focus{outline:none}
 </style>

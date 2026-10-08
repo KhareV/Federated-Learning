@@ -70,14 +70,29 @@ def read_verified(artifacts: FederationArtifactStore, run_id: str) -> dict[str, 
     return data
 
 
-def install(service: FederationService) -> None:
+def consistent(batches: list[dict[str, Any]], record: dict[str, Any]) -> bool:
+    """Per-batch rows are kept only if they reproduce the end-of-epoch summary."""
+    total = sum(b["batch_size"] for b in batches)
+    if len(batches) != record["batch_count"] or total != record["examples_seen"]:
+        return False
+    weighted = sum(b["loss"] * b["batch_size"] for b in batches) / record["examples_seen"]
+    return abs(weighted - record["mean_loss_diagnostic_only"]) <= 1e-9
+
+
+def install(service: FederationService, batch_capture: Any = None) -> None:
+    """``batch_capture``: optional factory of a context manager exposing ``batches``."""
     original_finish = service._finish
     original_train = service._train_sync
     original_fail = service._fail
     diagnostics_by_run: dict[str, dict[str, dict[str, dict[str, Any]]]] = {}
 
     def observing_train(adapter: Any, round_id: int, digest: str) -> None:
-        original_train(adapter, round_id, digest)
+        capture = batch_capture() if batch_capture is not None else None
+        if capture is None:
+            original_train(adapter, round_id, digest)
+        else:
+            with capture:
+                original_train(adapter, round_id, digest)
         try:
             raw = adapter.diagnostics()
             mean_loss = float(raw["mean_loss_diagnostic_only"])
@@ -86,9 +101,7 @@ def install(service: FederationService) -> None:
                 return
             run_id = service._active
             if run_id is not None:
-                diagnostics_by_run.setdefault(run_id, {}).setdefault(str(round_id), {})[
-                    adapter._buffer.client_id
-                ] = {
+                record = {
                     "examples_seen": int(raw["examples_seen"]),
                     "batch_count": int(raw["batch_count"]),
                     "shuffle_seed": str(raw["shuffle_seed"]),
@@ -96,6 +109,12 @@ def install(service: FederationService) -> None:
                     "mean_loss_diagnostic_only": mean_loss,
                     "update_norm_diagnostic_only": update_norm,
                 }
+                if capture is not None and capture.batches and consistent(capture.batches, record):
+                    record["per_batch"] = {
+                        "batches": capture.batches, "dropped_beyond_bound": capture.dropped,
+                        "loss_term": "BCE_WITH_LOGITS_MEAN_OVER_BATCH"}
+                diagnostics_by_run.setdefault(run_id, {}).setdefault(str(round_id), {})[
+                    adapter._buffer.client_id] = record
         except Exception:
             # An observer failure does not change a completed optimizer call.
             return

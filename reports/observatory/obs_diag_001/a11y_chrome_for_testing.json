@@ -1,0 +1,572 @@
+{
+ "browser": "Chrome/153.0.8010.12",
+ "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+ "routes": [
+  {
+   "route": "/app/observatory",
+   "structure": {
+    "title": "Research Observatory | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 125,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 5,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 5,
+    "fields": 8,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 6,
+    "sliderNoValueText": 5,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 33,
+    "focusableInMain": 20,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 2
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 322
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/federation",
+   "structure": {
+    "title": "Federation Observatory | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 268,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 0,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 0,
+    "fields": 1,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 0,
+    "sliderNoValueText": 0,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 28,
+    "focusableInMain": 28,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 0
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 323
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/federation/SIM_FL_SITE_07",
+   "structure": {
+    "title": "SIM_FL_SITE_07 signal inspection | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 77,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 5,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 5,
+    "fields": 6,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 6,
+    "sliderNoValueText": 5,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 9,
+    "focusableInMain": 9,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 0
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 320
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/research",
+   "structure": {
+    "title": "Research-record inspection | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 76,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 1,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 1,
+    "fields": 3,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 2,
+    "sliderNoValueText": 1,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 19,
+    "focusableInMain": 6,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 2
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 320
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/tour",
+   "structure": {
+    "title": "Guided Research Observatory | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 68,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 0,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 0,
+    "fields": 0,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 0,
+    "sliderNoValueText": 0,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 19,
+    "focusableInMain": 19,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 1
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 320
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/evidence",
+   "structure": {
+    "title": "Scientific evidence explorer | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 321,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 2,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 0,
+    "fields": 3,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 0,
+    "sliderNoValueText": 0,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 28,
+    "focusableInMain": 28,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 0
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 320
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/model",
+   "structure": {
+    "title": "Model and calibration explorer | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 329,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 3,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 3,
+    "fields": 4,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 1,
+    "sliderNoValueText": 0,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 27,
+    "focusableInMain": 14,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 2
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 320
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/provenance",
+   "structure": {
+    "title": "Provenance and known boundaries | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 130,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 0,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 0,
+    "fields": 0,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 0,
+    "sliderNoValueText": 0,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 16,
+    "focusableInMain": 3,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 2
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 320
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/scenarios",
+   "structure": {
+    "title": "Scenario and fault lab | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 77,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 3,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 3,
+    "fields": 7,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 4,
+    "sliderNoValueText": 3,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 11,
+    "focusableInMain": 11,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 0
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 425
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/replay",
+   "structure": {
+    "title": "Session replay and policy trace | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 26,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 0,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 0,
+    "fields": 1,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 0,
+    "sliderNoValueText": 0,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 17,
+    "focusableInMain": 4,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 2
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 320
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  },
+  {
+   "route": "/app/observatory/federation-replay",
+   "structure": {
+    "title": "Federation journal replay | NHM",
+    "lang": "en",
+    "h1": 1,
+    "main": 1,
+    "headingOrder": true
+   },
+   "contrast": {
+    "checked": 23,
+    "failingDistinct": 0,
+    "worst": []
+   },
+   "semantics": {
+    "svgCount": 0,
+    "svgNoName": 0,
+    "chartsWithTextSummary": 0,
+    "fields": 1,
+    "unlabelled": 0,
+    "unnamedControls": 0,
+    "targetsUnder24px": 0,
+    "smallTargetNames": [],
+    "sliders": 0,
+    "sliderNoValueText": 0,
+    "tablesWithoutHeaders": 0
+   },
+   "keyboard": {
+    "tabStopsReached": 16,
+    "focusableInMain": 3,
+    "keyboardTrapSuspected": false,
+    "noIndicator": 0,
+    "obscuredWhenFocused": 0,
+    "orderInversions": 2
+   },
+   "reflow320": {
+    "horizontalScroll": false,
+    "scrollWidth": 339
+   },
+   "textSpacing": {
+    "horizontalScroll": false
+   },
+   "reducedMotion": {
+    "matches": true,
+    "runningAnimations": 0
+   }
+  }
+ ],
+ "criteria_tested": [
+  "1.1.1 Non-text Content (chart names and text summaries)",
+  "1.3.1 Info and Relationships (headings, table headers, labels)",
+  "1.4.3 Contrast (Minimum) (computed text vs effective background)",
+  "1.4.10 Reflow (320 CSS px)",
+  "1.4.12 Text Spacing (overflow only)",
+  "2.1.1 Keyboard (real Tab key events)",
+  "2.1.2 No Keyboard Trap (heuristic)",
+  "2.3.3-style motion: prefers-reduced-motion respected for infinite animations",
+  "2.4.2 Page Titled",
+  "2.4.3 Focus Order (vertical-order heuristic)",
+  "2.4.7 Focus Visible",
+  "2.4.11 Focus Not Obscured (Minimum)",
+  "2.5.8 Target Size (Minimum) 24x24",
+  "3.1.1 Language of Page",
+  "3.3.2 Labels or Instructions",
+  "4.1.2 Name, Role, Value (names and states, static check)"
+ ],
+ "focusAfterNavigation": {
+  "path": "/app/observatory/tour",
+  "activeTag": "H1",
+  "activeIsBody": false,
+  "activeIsHeading": true,
+  "h1": "Follow the evidence, end to end"
+ },
+ "summary": {
+  "routes": 11,
+  "contrastFailingDistinctTotal": 0,
+  "contrastChecked": 1520,
+  "svgNoName": 0,
+  "unlabelledFields": 0,
+  "unnamedControls": 0,
+  "targetsUnder24px": 0,
+  "tablesWithoutHeaders": 0,
+  "noFocusIndicator": 0,
+  "focusObscured": 0,
+  "reflow320Failures": 0,
+  "textSpacingFailures": 0,
+  "reducedMotionInfiniteAnimations": 0,
+  "routesWithoutSingleH1": 0,
+  "routesWithoutLang": 0
+ },
+ "not_tested": [
+  "1.4.11 Non-text Contrast of graphics and component boundaries",
+  "1.2.x time-based media (none present)",
+  "2.4.5 multiple ways, 3.2.x consistency, 3.3.x error handling beyond labels",
+  "screen-reader output with real assistive technology (VoiceOver/NVDA/JAWS)",
+  "Firefox and WebKit engines (not available in this environment)"
+ ]
+}
