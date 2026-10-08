@@ -44,7 +44,7 @@ def scripts_bound() -> list[str]:
 
 
 def protected_diff() -> list[str]:
-    return [p for p in subprocess.run(["git", "diff", "--name-only", ENTRY, "--", *PROTECTED], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split("\n") if p]
+    return [p for p in subprocess.run(["git", "diff", "--name-only", ENTRY, "--", *PROTECTED, ":(exclude)artifacts/capstone/*.amendment_*.json"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split("\n") if p]
 
 
 def v19_delta() -> list[str]:

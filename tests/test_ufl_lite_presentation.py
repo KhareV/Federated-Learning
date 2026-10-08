@@ -43,7 +43,7 @@ def test_completed_run_reproduces_baseline() -> None:
 
 def test_backend_api_db_fl_and_auth_are_byte_identical_to_the_entry() -> None:
     assert git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", "api", "product", "capstone_persistence", "federated", "privacy", "simulation", "src", "checkpoints", "contracts", "frontend/package.json", "frontend/package-lock.json",
-               "frontend/clerk-sdk", "frontend/src/lib/product/auth.ts", "frontend/src/lib/product/federation/types.ts", "frontend/src/lib/product/federation/live-model.ts", "frontend/src/lib/product/federation/state.svelte.ts", ":(exclude)product/observatory", ":(exclude)api/product_app_observatory_v1.py") == ""  # UI-ENH-001: the clients page is redesigned; its unbound-global-view audit remains in ufl_lite_002_lib.global_page_audit
+               "frontend/clerk-sdk", "frontend/src/lib/product/auth.ts", "frontend/src/lib/product/federation/types.ts", "frontend/src/lib/product/federation/live-model.ts", "frontend/src/lib/product/federation/state.svelte.ts", ":(exclude)product/observatory", ":(exclude)api/product_app_observatory_v1.py", ":(exclude)api/observatory_model_inspect.py") == ""  # UI-ENH-001: the clients page is redesigned; its unbound-global-view audit remains in ufl_lite_002_lib.global_page_audit
     for group in ("reused_unchanged", "scientific", "auth"):
         assert lib.hash_drift(ROOT, BASELINE, group) == [], group
     assert lib.monitoring_isolation_audit(ROOT)["ok"] and lib.class_audit(ROOT)["ok"]

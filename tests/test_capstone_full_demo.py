@@ -25,7 +25,7 @@ def test_product_api_frontend_and_backend_are_byte_identical_to_entry() -> None:
              "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json", "artifacts/SOFTWARE_SYSTEM_V2.lock.json", "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json", "artifacts/capstone/CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1.json"]
     drift = _git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", *trees).split()
     # NHM_RESEARCH_OBSERVATORY_V1 adds read-only observability files; they are verified by scripts.verify_observatory_v1, not treated as drift.
-    drift = [p for p in drift if p != "api/product_app_observatory_v1.py" and not p.startswith("product/observatory/")]
+    drift = [p for p in drift if p not in {"api/product_app_observatory_v1.py", "api/observatory_model_inspect.py"} and not p.startswith("product/observatory/")]
     # CLERK-LIVE-001 successor awareness (CAP-010 amendment 2): frontend drift is legal ONLY if it is completely accounted for by the
     # registered, verifying CAPSTONE_UI_V1_3 lock; any other drift (and any unaccounted frontend change) still fails.
     successor = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json"
