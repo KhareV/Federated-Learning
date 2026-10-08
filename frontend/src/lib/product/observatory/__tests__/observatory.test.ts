@@ -19,8 +19,16 @@ describe('Observatory evidence validation', () => {
 					shuffle_seed: '11295175845878697379', update_digest: 'digest',
 					training_completed: true, update_produced: true, update_submitted: null,
 					accepted: null, aggregated: null,
-					accepted_examples: null, weight: null, evidence_state: 'TRAINED_ACCEPTANCE_NOT_RECORDED' }] }]
+					accepted_examples: null, weight: null, evidence_state: 'TRAINED_ACCEPTANCE_NOT_RECORDED',
+					training_diagnostic: { examples_seen: 93, batch_count: 2, shuffle_seed: '1', update_bytes: 10,
+						mean_loss_diagnostic_only: 0.5, update_norm_diagnostic_only: 1.5 } },
+					{ client_id: 'SIM_FL_SITE_01', local_trainable_windows: 91, examples_seen: null, shuffle_seed: null,
+						update_digest: null, training_completed: null, update_produced: null, update_submitted: null,
+						accepted: null, aggregated: null, accepted_examples: null, weight: null, evidence_state: 'NOT_RECORDED' }] }]
 		});
+		expect(view.rounds[0].clients[0].training_readout?.batch_count).toBe(2);
+		expect(view.rounds[0].clients[0].training_readout?.mean_local_loss).toBe(0.5);
+		expect(view.rounds[0].clients[1].training_readout).toBeNull();
 		expect(view.rounds[0].reported_accepted_update_count).toBe(8);
 		expect(view.rounds[0].clients[0].accepted).toBeNull();
 		expect(view.rounds[0].clients[0].weight).toBeNull();

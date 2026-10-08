@@ -1,0 +1,23 @@
+{
+ "status": "PARTIAL_CONNECTED_E2E_USER_A_PASS_USER_B_ISOLATION_NOT_EXERCISED",
+ "credential_source": "ignored repository-root .env / external untracked users file; key values and passwords never logged or committed",
+ "launcher": "scripts.run_observatory_clerk_connected (additive; accepted V1_9 bytes verified at entry commit dff28f6; legacy launcher UI preflight is expected to reject unaccepted Observatory frontend files)",
+ "driver": "scripts/run_observatory_clerk_e2e.py",
+ "real_clerk_test_signin_user_a": "PASS (client-trust verification used; user id Clerk-shaped; auth_provider CLERK; demo_mode false)",
+ "user_a_journey": {
+  "system": "MODEL_V2_FINAL / CAL_V2 / SIMULATED hardware",
+  "monitoring": "owned SIMULATED session COMPLETED; explicit live capture CAPTURED_LIVE_PREPROCESSING with 5 stages; persisted inference MODEL_V2_FINAL",
+  "observatory_page": "5 signal charts; no horizontal overflow",
+  "federation_live_run": "COMPLETED; 3 rounds; 8 accepted updates and 723 accepted examples per round (24 total); DIRECT_OBSERVED_COORDINATOR_MAP for all rounds; 8/8 local training diagnostics per round",
+  "candidate": "state digest 3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4; production_deployed false; released default MODEL_V2_FINAL",
+  "owner_bound_live_page": "1 MY EDGE CLIENT (SIM_FL_SITE_00) + 7 SYNTHETIC PEER",
+  "observatory_federation_page": "8-client roster; direct-evidence label; no overflow",
+  "global_clients_page": "0 MY EDGE CLIENT (unbound)",
+  "sign_out": "returned to /sign-in; anonymous Observatory request 401; no DemoAuth fallback",
+  "console_errors": 0,
+  "evidence_file": "reports/observatory/clerk_e2e/user_a_journey.json"
+ },
+ "user_b_isolation": "NOT_EXERCISED: the stored TEST user B credential was rejected by Clerk ('Password is incorrect'); retries were stopped immediately to avoid account lockout. Cross-user denial is covered by API-level tests (403/404) but not by a connected browser journey.",
+ "two_user_ownership_connected": false,
+ "connected_e2e_pass": false
+}

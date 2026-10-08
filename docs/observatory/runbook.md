@@ -30,4 +30,12 @@ For browser verification against this already-running stack:
 .venv-t032/bin/python -m scripts.run_observatory_browser_smoke
 ```
 
-For connected Clerk evaluation, use the existing accepted Clerk-connected launcher/runbook and an appropriately configured Observatory product successor only after credentials and authorization checks are available. The commands above do **not** verify Clerk.
+For connected Clerk TEST evaluation, the additive launcher reuses the accepted Clerk configuration, frontend public-key build, and three-service orchestration while substituting the Observatory API successor. Keep keys in the ignored `.env` file or an external untracked file; never print or commit them:
+
+```sh
+.venv-t032/bin/python -m scripts.run_observatory_clerk_connected \
+  --env-file .env --inference-port 8011 --product-port 8012 \
+  --frontend-port 5183 --build
+```
+
+The accepted legacy launcher’s current-tree UI preflight rejects Observatory frontend changes bound by the historical UI lock. The additive launcher discloses that expected successor mismatch, verifies the accepted V1_9 files at the entry commit and the unchanged protected surfaces, then runs the other applicable preflights. It does not alter old locks. Open `http://127.0.0.1:5183/sign-in`. The authenticated two-user journey is automated by `scripts.run_observatory_clerk_e2e --env-file <env> --users-file <json outside Git> --out <dir>` (real Chrome, real Clerk TEST sign-in; evidence holds booleans, statuses, counts and digests only). Do not substitute DemoAuth results.

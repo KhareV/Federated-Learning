@@ -298,7 +298,9 @@ def test_post_run_observer_preserves_direct_final_round_acceptance(tmp_path: Pat
         coordinator_digests={1: {client_id: "digest0"}},
         training_record={1: {client_id: training}},
     )
-    snapshot(context, artifacts)
+    diagnostic = {"examples_seen": 93, "batch_count": 2, "shuffle_seed": "42", "update_bytes": 10,
+                  "mean_loss_diagnostic_only": 0.5, "update_norm_diagnostic_only": 1.5}
+    snapshot(context, artifacts, {"1": {client_id: diagnostic}})
     observed = read_verified(artifacts, run.run_id)
     assert observed is not None
     assert observed["rounds"]["1"]["accepted_updates"] == {client_id: "digest0"}
@@ -306,6 +308,9 @@ def test_post_run_observer_preserves_direct_final_round_acceptance(tmp_path: Pat
     assert round_one.acceptance_basis == "DIRECT_OBSERVED_COORDINATOR_MAP"
     assert round_one.clients[0].accepted_examples == 93
     assert round_one.clients[0].weight == 1.0
+    recorded = round_one.clients[0].training_diagnostic
+    assert recorded is not None and recorded.batch_count == 2
+    assert recorded.mean_loss_diagnostic_only == 0.5
     path = capture_file(artifacts, run.run_id)
     path.write_text(path.read_text().replace("digest0", "tampered"))
     with pytest.raises(ValueError, match="OBSERVATORY_ACCEPTANCE_CAPTURE_HASH_MISMATCH"):

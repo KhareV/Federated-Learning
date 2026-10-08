@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from contextlib import suppress
 from pathlib import Path
 from typing import Any
@@ -29,7 +30,8 @@ def capture_file(artifacts: FederationArtifactStore, run_id: str) -> Path:
     return artifacts.run_dir(run_id) / FILENAME
 
 
-def snapshot(ctx: RunContext, artifacts: FederationArtifactStore) -> None:
+def snapshot(ctx: RunContext, artifacts: FederationArtifactStore,
+             diagnostics: dict[str, dict[str, dict[str, Any]]] | None = None) -> None:
     if ctx.run_type is not RunType.LIVE_RUN or ctx.candidate_id is None:
         return
     payload: dict[str, Any] = {
@@ -49,6 +51,8 @@ def snapshot(ctx: RunContext, artifacts: FederationArtifactStore) -> None:
             } for round_id in range(1, ctx.planned_rounds + 1)
         },
     }
+    if diagnostics:
+        payload["local_training_diagnostics"] = diagnostics
     payload["content_sha256"] = hashlib.sha256(_canonical(payload)).hexdigest()
     atomic_write(capture_file(artifacts, ctx.run_id),
                  (json.dumps(payload, sort_keys=True, indent=2) + "\n").encode())
@@ -68,11 +72,47 @@ def read_verified(artifacts: FederationArtifactStore, run_id: str) -> dict[str, 
 
 def install(service: FederationService) -> None:
     original_finish = service._finish
+    original_train = service._train_sync
+    original_fail = service._fail
+    diagnostics_by_run: dict[str, dict[str, dict[str, dict[str, Any]]]] = {}
+
+    def observing_train(adapter: Any, round_id: int, digest: str) -> None:
+        original_train(adapter, round_id, digest)
+        try:
+            raw = adapter.diagnostics()
+            mean_loss = float(raw["mean_loss_diagnostic_only"])
+            update_norm = float(raw["update_norm_diagnostic_only"])
+            if not math.isfinite(mean_loss) or not math.isfinite(update_norm):
+                return
+            run_id = service._active
+            if run_id is not None:
+                diagnostics_by_run.setdefault(run_id, {}).setdefault(str(round_id), {})[
+                    adapter._buffer.client_id
+                ] = {
+                    "examples_seen": int(raw["examples_seen"]),
+                    "batch_count": int(raw["batch_count"]),
+                    "shuffle_seed": str(raw["shuffle_seed"]),
+                    "update_bytes": int(raw["update_bytes"]),
+                    "mean_loss_diagnostic_only": mean_loss,
+                    "update_norm_diagnostic_only": update_norm,
+                }
+        except Exception:
+            # An observer failure does not change a completed optimizer call.
+            return
 
     def observing_finish(ctx: RunContext) -> None:
         original_finish(ctx)
         # Diagnostic sidecar failure must not change the already completed FL run.
         with suppress(Exception):
-            snapshot(ctx, service.artifacts)
+            snapshot(ctx, service.artifacts, diagnostics_by_run.get(ctx.run_id))
+        diagnostics_by_run.pop(ctx.run_id, None)
 
+    def observing_fail(ctx: RunContext, tracker: Any, error: Exception) -> None:
+        try:
+            original_fail(ctx, tracker, error)
+        finally:
+            diagnostics_by_run.pop(ctx.run_id, None)
+
+    service._train_sync = observing_train  # type: ignore[method-assign]
     service._finish = observing_finish  # type: ignore[method-assign]
+    service._fail = observing_fail  # type: ignore[method-assign]

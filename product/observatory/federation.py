@@ -59,6 +59,17 @@ class FrozenCohort(BaseModel):
     clients: tuple[FrozenClient, ...]
 
 
+class LocalTrainingDiagnostic(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    examples_seen: int = Field(ge=1)
+    batch_count: int = Field(ge=1)
+    shuffle_seed: str
+    update_bytes: int = Field(ge=1)
+    mean_loss_diagnostic_only: float = Field(ge=0)
+    update_norm_diagnostic_only: float = Field(ge=0)
+
+
 class ClientContribution(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
@@ -74,6 +85,7 @@ class ClientContribution(BaseModel):
     aggregated: bool | None = None
     accepted_examples: int | None = None
     weight: float | None = Field(default=None, ge=0, le=1)
+    training_diagnostic: LocalTrainingDiagnostic | None = None
     evidence_state: Literal[
         "NOT_RECORDED", "TRAINED_ACCEPTANCE_NOT_RECORDED", "NOT_ACCEPTED", "ACCEPTED",
         "GOVERNANCE_ATTESTED_ACCEPTED", "DIRECT_OBSERVED_ACCEPTED",
@@ -302,6 +314,7 @@ def run_contributions(run: FederationRun, artifacts: FederationArtifactStore,
     bases = meta.get("round_base_digests", {})
     committed = meta.get("committed_digests", {})
     observed = read_acceptance_capture(artifacts, run.run_id)
+    captured_diagnostics: dict[str, dict[str, LocalTrainingDiagnostic]] = {}
     if observed is not None:
         if (run.status is not RunState.COMPLETED
                 or observed.get("candidate_id") not in run.candidate_ids
@@ -331,6 +344,19 @@ def run_contributions(run: FederationRun, artifacts: FederationArtifactStore,
                         }):
                     raise ValueError("OBSERVATORY_ACCEPTANCE_CAPTURE_TRAINING_MISMATCH")
             accepted[key] = digests
+        for key, by_client in observed.get("local_training_diagnostics", {}).items():
+            if key not in observed["rounds"] or not isinstance(by_client, dict):
+                raise ValueError("OBSERVATORY_TRAINING_DIAGNOSTIC_ROUND_MISMATCH")
+            captured_diagnostics[key] = {}
+            for client_id, raw in by_client.items():
+                record = training.get(key, {}).get(client_id)
+                if record is None or client_id not in observed["rounds"][key]["training"]:
+                    raise ValueError("OBSERVATORY_TRAINING_DIAGNOSTIC_CLIENT_MISMATCH")
+                diagnostic = LocalTrainingDiagnostic.model_validate(raw)
+                if (diagnostic.examples_seen != int(record["examples_seen"])
+                        or diagnostic.shuffle_seed != str(record["shuffle_seed"])):
+                    raise ValueError("OBSERVATORY_TRAINING_DIAGNOSTIC_RECORD_MISMATCH")
+                captured_diagnostics[key][client_id] = diagnostic
     round_ids = sorted({int(k) for k in (*training, *accepted, *bases, *committed)}
                        | set(round_reports))
     result: list[RoundContribution] = []
@@ -384,6 +410,7 @@ def run_contributions(run: FederationRun, artifacts: FederationArtifactStore,
                 (False if record and acceptance_recorded else None),
                 accepted_examples=accepted_count,
                 weight=accepted_count / total if accepted_count is not None and total else None,
+                training_diagnostic=captured_diagnostics.get(key, {}).get(client.client_id),
                 evidence_state=("DIRECT_OBSERVED_ACCEPTED" if observed is not None
                                 and accepted_count is not None else
                                 "GOVERNANCE_ATTESTED_ACCEPTED" if attested

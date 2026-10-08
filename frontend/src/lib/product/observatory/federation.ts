@@ -35,6 +35,11 @@ export interface ClientContribution {
 	training_completed: boolean | null; update_produced: boolean | null;
 	update_submitted: boolean | null; accepted: boolean | null; aggregated: boolean | null;
 	accepted_examples: number | null; weight: number | null; evidence_state: string;
+	training_readout: LocalTrainingDiagnostic | null;
+}
+export interface LocalTrainingDiagnostic {
+	examples_seen: number; batch_count: number; shuffle_seed: string; update_bytes: number;
+	mean_local_loss: number; update_norm: number;
 }
 export interface RoundContribution {
 	round_id: number; base_state_digest: string | null; committed_state_digest: string | null;
@@ -109,6 +114,13 @@ export function parseRunContributions(value: unknown): RunContributions {
 						update_submitted: c.update_submitted as boolean | null,
 						accepted: c.accepted as boolean | null, aggregated: c.aggregated as boolean | null,
 						accepted_examples: nullable(c.accepted_examples, number), weight: nullable(c.weight, number),
+						training_readout: c.training_diagnostic == null ? null : (() => {
+							const d = object(c.training_diagnostic);
+							return { examples_seen: number(d.examples_seen), batch_count: number(d.batch_count),
+								shuffle_seed: string(d.shuffle_seed), update_bytes: number(d.update_bytes),
+								mean_local_loss: number(d.mean_loss_diagnostic_only),
+								update_norm: number(d.update_norm_diagnostic_only) };
+						})(),
 						evidence_state: string(c.evidence_state) };
 				}) };
 		}) };
