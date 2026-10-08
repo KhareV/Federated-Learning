@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import math
 from contextlib import suppress
 from pathlib import Path
@@ -69,6 +70,8 @@ def read_verified(artifacts: FederationArtifactStore, run_id: str) -> dict[str, 
         raise ValueError("OBSERVATORY_ACCEPTANCE_CAPTURE_HASH_MISMATCH")
     return data
 
+LOG = logging.getLogger("nhm.observatory.fl")
+
 
 def consistent(batches: list[dict[str, Any]], record: dict[str, Any]) -> bool:
     """Per-batch rows are kept only if they reproduce the end-of-epoch summary."""
@@ -88,6 +91,8 @@ def install(service: FederationService, batch_capture: Any = None) -> None:
 
     def observing_train(adapter: Any, round_id: int, digest: str) -> None:
         capture = batch_capture() if batch_capture is not None else None
+        client = getattr(getattr(adapter, "_buffer", None), "client_id", "?")
+        LOG.info("FL round %s | %s | local training started", round_id, client)
         if capture is None:
             original_train(adapter, round_id, digest)
         else:
@@ -113,6 +118,14 @@ def install(service: FederationService, batch_capture: Any = None) -> None:
                     record["per_batch"] = {
                         "batches": capture.batches, "dropped_beyond_bound": capture.dropped,
                         "loss_term": "BCE_WITH_LOGITS_MEAN_OVER_BATCH"}
+                LOG.info(
+                    "FL round %s | %s | local training done: %d examples, %d batches, "
+                    "mean loss %.4f, update norm %.4f", round_id, client,
+                    record["examples_seen"], record["batch_count"], mean_loss, update_norm)
+                for b in record.get("per_batch", {}).get("batches", []):
+                    LOG.info("FL round %s | %s |   batch %d: size %d, loss %.4f, grad norm %.4f",
+                             round_id, client, b["batch_index"] + 1, b["batch_size"],
+                             b["loss"], b["gradient_l2_norm"])
                 diagnostics_by_run.setdefault(run_id, {}).setdefault(str(round_id), {})[
                     adapter._buffer.client_id] = record
         except Exception:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import logging
 import os
 import sys
 from collections.abc import Mapping
@@ -49,6 +50,10 @@ def main() -> None:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8002)
     args = parser.parse_args()
+    logging.basicConfig(level=logging.WARNING, format="%(asctime)s %(message)s",
+                        datefmt="%H:%M:%S", force=True)
+    # One console line per client-round (start/finish, plus batches when capture is on).
+    logging.getLogger("nhm.observatory.fl").setLevel(logging.INFO)
     try:
         app = build_app_from_env(os.environ)
     except AuthConfigError as error:
