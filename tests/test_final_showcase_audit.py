@@ -125,7 +125,7 @@ def test_new_amendments_are_pure_successor_compatibility_with_continuous_digests
     from scripts.observatory_amend import authorised
 
     new = _new_amendments()
-    assert len(new) == 6, new
+    assert len(new) == 8, new  # six accepted predecessors + two pure FL10 successor-compatibility amendments
     for path in new:
         doc = json.loads(path.read_text())
         assert doc["scope"] == "SUCCESSOR_COMPATIBILITY_ONLY" and doc["result_evidence_committed_with_amendment"] is False and doc["made_after_method_freeze"] is True

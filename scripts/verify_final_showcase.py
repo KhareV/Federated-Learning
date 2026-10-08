@@ -87,6 +87,9 @@ def protected() -> dict:
 def verify_lock() -> dict:
     """Chain + bytes. Independent of any re-freeze of an earlier lock: the predecessor must be byte-identical to the recorded pushed commit."""
     lock = json.loads(LOCK.read_text())
+    from scripts.fl10_successor_compat import accepted_successor
+
+    fl10 = accepted_successor(LOCK)
     diag_path = DIAG_LOCK
     if lock["lock_id"] != "NHM_FINAL_SHOWCASE_001" or lock["predecessor_id"] != "NHM_OBS_DIAG_001" or lock["predecessor_lock_edited"] is not False:
         raise RuntimeError("FINAL_SHOWCASE_IDENTITY_DRIFT")
@@ -96,15 +99,24 @@ def verify_lock() -> dict:
     if hashlib.sha256(blob).hexdigest() != lock["predecessor_sha256"]:
         raise RuntimeError("FINAL_SHOWCASE_PREDECESSOR_NOT_BYTE_IDENTICAL_TO_PUSHED_COMMIT")
     diag = json.loads(diag_path.read_text())
-    differing = sorted(p for p, d in diag["bound_files"].items() if sha(ROOT / p) != d)
+    # The historical FINAL-SHOWCASE re-pin is checked at its accepted entry commit.
+    # Current bytes may additionally be re-pinned by the separate FL10 successor.
+    differing = sorted(p for p, d in diag["bound_files"].items()
+                       if hashlib.sha256(git_show(
+                           "274323730d1c7355f688ad4c9ff01ecbfb746501", p
+                       )).hexdigest() != d)
     if differing != sorted(lock["repins_predecessor_files"]):
         raise RuntimeError(f"FINAL_SHOWCASE_REPIN_SET_MISMATCH:{differing}")
     for path, digest in lock["bound_files"].items():
-        if not (ROOT / path).is_file() or sha(ROOT / path) != digest:
+        accepted = {digest}
+        if fl10 and path in fl10["repins_predecessor_files"]:
+            accepted.add(fl10["bound_files"][path])
+        if not (ROOT / path).is_file() or sha(ROOT / path) not in accepted:
             raise RuntimeError(f"FINAL_SHOWCASE_TAMPER:{path}")
     from scripts.freeze_observatory_v1 import frontend_files
 
-    if set(frontend_files()) != set(lock["bound_artifacts"]) or any(sha(ROOT / p) != d for p, d in lock["bound_artifacts"].items()):
+    expected_frontend = fl10["frontend_files"] if fl10 else lock["bound_artifacts"]
+    if set(frontend_files()) != set(expected_frontend) or any(sha(ROOT / p) != d for p, d in expected_frontend.items()):
         raise RuntimeError("FINAL_SHOWCASE_FRONTEND_BINDING_DRIFT")
     for flag in ("scientific_state_semantics_changed", "model_calibration_or_fl_math_changed", "frozen_evidence_edited", "historical_locks_edited", "candidate_promoted_or_deployed", "hardware_work_performed", "automatically_pushed"):
         if lock[flag] is not False:

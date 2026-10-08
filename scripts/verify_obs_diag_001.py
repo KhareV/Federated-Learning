@@ -33,6 +33,9 @@ def _successor() -> dict | None:
 def verify() -> dict[str, object]:
     lock = json.loads(LOCK_PATH.read_text())
     successor = _successor()
+    from scripts.fl10_successor_compat import accepted_successor
+
+    fl10 = accepted_successor(FINAL_PATH)
     repinned = set(successor["repins_predecessor_files"]) if successor else set()
     if lock["lock_id"] != "NHM_OBS_DIAG_001" or lock["predecessor_id"] != "NHM_RESEARCH_OBSERVATORY_V1":
         raise RuntimeError("OBS_DIAG_IDENTITY_DRIFT")
@@ -50,9 +53,12 @@ def verify() -> dict[str, object]:
             raise RuntimeError(f"OBS_DIAG_SCOPE_DRIFT:{flag}")
     for path, digest in lock["bound_files"].items():
         accepted = {digest} | ({successor["bound_files"][path]} if path in repinned else set())
+        if fl10 and path in fl10["repins_predecessor_files"]:
+            accepted.add(fl10["bound_files"][path])
         if not (ROOT / path).is_file() or sha(ROOT / path) not in accepted:
             raise RuntimeError(f"OBS_DIAG_TAMPER:{path}")
-    expected_frontend = successor["bound_artifacts"] if successor else lock["bound_artifacts"]
+    expected_frontend = (fl10["frontend_files"] if fl10 else
+                         successor["bound_artifacts"] if successor else lock["bound_artifacts"])
     if set(frontend_files()) != set(expected_frontend) or any(sha(ROOT / p) != d for p, d in expected_frontend.items()):
         raise RuntimeError("OBS_DIAG_FRONTEND_BINDING_DRIFT")
     if protected_diff():

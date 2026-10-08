@@ -514,6 +514,15 @@ def test_api_extension_adds_only_the_documented_observatory_routes(tmp_path: Pat
         ("/product/v1/observatory/model/activations/{scenario_id}/{window_index}", ("GET",)),
         ("/product/v1/observatory/model/calibration", ("GET",)),
         ("/product/v1/observatory/reproducibility", ("GET",)),
+        # NHM-FL10-001 adds exactly these owner-scoped opt-in/read-only routes.
+        ("/product/v1/observatory/fl10/recorded", ("GET",)),
+        ("/product/v1/observatory/fl10/recorded/{run_key}", ("GET",)),
+        ("/product/v1/observatory/fl10/recorded/{run_key}/exports", ("GET",)),
+        ("/product/v1/observatory/fl10/recorded/{run_key}/exports/{item_id}/{fmt}", ("GET",)),
+        ("/product/v1/observatory/fl10/runs", ("POST",)),
+        ("/product/v1/observatory/fl10/runs/{job_id}", ("GET",)),
+        ("/product/v1/observatory/fl10/runs/{job_id}/bundle", ("GET",)),
+        ("/product/v1/observatory/fl10/runs/{job_id}/exports/{item_id}/{fmt}", ("GET",)),
     }
 
 

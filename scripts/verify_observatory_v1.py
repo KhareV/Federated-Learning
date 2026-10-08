@@ -9,7 +9,6 @@ import subprocess
 
 from scripts.freeze_observatory_v1 import (
     ENTRY,
-    INTEGRATION,
     LOCK_PATH,
     ROOT,
     UI_LOCK,
@@ -49,6 +48,9 @@ def verify() -> dict[str, object]:
     lock = json.loads(LOCK_PATH.read_text())
     successor = _successor()
     final = _final(successor)
+    from scripts.fl10_successor_compat import accepted_successor
+
+    fl10 = accepted_successor(FINAL_PATH)
     if lock["lock_id"] != "NHM_RESEARCH_OBSERVATORY_V1" or lock["full_master_prompt_acceptance"] is not False:
         raise RuntimeError("OBSERVATORY_LOCK_IDENTITY_DRIFT")
     if lock["predecessor_id"] != "CAPSTONE_UI_V1_9" or sha(UI_LOCK) != lock["predecessor_sha256"]:
@@ -66,18 +68,24 @@ def verify() -> dict[str, object]:
         accepted = {digest} | ({successor["bound_files"].get(path)} if successor and path in repinned else set())
         if final and path in final["repins_predecessor_files"]:
             accepted |= {final["bound_files"][path]}
+        if fl10 and path in fl10["repins_predecessor_files"]:
+            accepted.add(fl10["bound_files"][path])
         if sha(ROOT / path) not in accepted:
             raise RuntimeError(f"OBSERVATORY_TAMPER:{path}")
     actual_frontend = frontend_files()
-    expected_frontend = final["bound_artifacts"] if final else successor["bound_artifacts"] if successor else lock["bound_artifacts"]
+    expected_frontend = (fl10["frontend_files"] if fl10 else
+                         final["bound_artifacts"] if final else
+                         successor["bound_artifacts"] if successor else lock["bound_artifacts"])
     if set(actual_frontend) != set(expected_frontend):
         raise RuntimeError("OBSERVATORY_UNBOUND_OR_MISSING_FRONTEND_FILE")
     for path, digest in expected_frontend.items():
         if sha(ROOT / path) != digest:
             raise RuntimeError(f"OBSERVATORY_FRONTEND_TAMPER:{path}")
     delta = v19_delta()
-    unexpected = sorted(set(delta) - set(INTEGRATION))
-    if delta != lock["predecessor_frontend_files_changed"] or unexpected:
+    historical = set(lock["predecessor_frontend_files_changed"])
+    fl10_repins = set(fl10["repins_predecessor_files"]) if fl10 else set()
+    unexpected = sorted(set(delta) - historical - fl10_repins)
+    if not historical.issubset(delta) or unexpected or (not fl10 and delta != sorted(historical)):
         raise RuntimeError(f"OBSERVATORY_PREDECESSOR_DELTA_DRIFT:{unexpected}")
     if protected_diff():
         raise RuntimeError(f"OBSERVATORY_PROTECTED_SURFACE_DRIFT:{protected_diff()[:3]}")

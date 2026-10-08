@@ -1,0 +1,13 @@
+{
+  "amendment_id": "NHM_FL10_001_FRONTEND_PRODUCT_SUCCESSOR_COMPATIBILITY",
+  "scope": "SUCCESSOR_COMPATIBILITY_ONLY",
+  "made_after_method_freeze": true,
+  "result_evidence_committed_with_amendment": false,
+  "reason": "The additive FL10 product client adds opt-in routes and export methods; no frozen frontend product behavior or historical lock is edited.",
+  "files": {
+    "frontend/src/lib/product/api.ts": {
+      "old_sha256": "87a9202f3c0ddb42bffb1738d085c1eafd9df246bb9008854b46981507d49a22",
+      "new_sha256": "d3fdba4cae774f9f0ef2ecefadc8e666e386a0521ed7b3366ac4b48fe819bddf"
+    }
+  }
+}
