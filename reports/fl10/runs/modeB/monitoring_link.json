@@ -1,0 +1,192 @@
+{
+ "buffer_reused_for_rounds": 10,
+ "label": "LIVE-MONITORED SIMULATED ECG \u2014 NOT A REAL PHYSIOLOGICAL PATIENT",
+ "monitoring": {
+  "device_id": "NHM_LIVELINK_WEARABLE_00",
+  "inference_http_statuses": {
+   "200": 93
+  },
+  "records_seen": 172800,
+  "scenario_id": "FL_SITE_00_LIVE_LINK",
+  "scientific_trace": {
+   "record_count": 172800,
+   "records_sha256": "a12156b71113df951f3c63be1b64fd1e08ed37490de15a9a30714c24b282b0f4",
+   "window_count": 93,
+   "windows_samples_sha256": "27b0248c582fd7ed391be674d9c2c7c7c581581194e0a38328ba276931392016"
+  },
+  "session_id": "LIVELINK-FL10_MODE_B_RUN_01",
+  "session_state": "COMPLETED"
+ },
+ "monitoring_sessions_executed": 1,
+ "parity": {
+  "counts": {
+   "DEGRADED": 0,
+   "UNUSABLE": 0,
+   "VALID": 93,
+   "excluded_not_valid": 0,
+   "excluded_valid_but_incomplete": 0,
+   "source_records": null,
+   "synthetic_negative": 73,
+   "synthetic_positive": 20,
+   "trainable": 93,
+   "windows_emitted": 93
+  },
+  "dataset_identical_to_canonical": true,
+  "dataset_sha256_canonical_site00": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+  "dataset_sha256_live": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+  "label_contract": "WEARABLE_SIM_EVENT_WINDOW_V1",
+  "note": "Equality is an observation of this run, not an assumption; a mismatch would be reported, never hidden.",
+  "records_identical": true,
+  "records_sha256_monitored": "a12156b71113df951f3c63be1b64fd1e08ed37490de15a9a30714c24b282b0f4",
+  "records_sha256_regenerated": "a12156b71113df951f3c63be1b64fd1e08ed37490de15a9a30714c24b282b0f4",
+  "window_count_identical": true,
+  "window_samples_and_timestamps_identical": true,
+  "windows_monitored": 93,
+  "windows_regenerated": 93
+ },
+ "prefix_equals_frozen_reference": {
+  "1": true,
+  "2": true,
+  "3": true
+ },
+ "site00_source": "LIVE_MONITORED_WINDOWS",
+ "states_equal_mode_a": {
+  "0": true,
+  "1": true,
+  "10": true,
+  "2": true,
+  "3": true,
+  "4": true,
+  "5": true,
+  "6": true,
+  "7": true,
+  "8": true,
+  "9": true
+ },
+ "trace": {
+  "client_id": "SIM_FL_SITE_00",
+  "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+  "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+  "peers_trained": [
+   "SIM_FL_SITE_01",
+   "SIM_FL_SITE_02",
+   "SIM_FL_SITE_03",
+   "SIM_FL_SITE_04",
+   "SIM_FL_SITE_05",
+   "SIM_FL_SITE_06",
+   "SIM_FL_SITE_07"
+  ],
+  "rounds_traced": 10,
+  "trainer_calls": [
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 1,
+    "site_id": "SIM_FL_SITE_00"
+   },
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 2,
+    "site_id": "SIM_FL_SITE_00"
+   },
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 3,
+    "site_id": "SIM_FL_SITE_00"
+   },
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 4,
+    "site_id": "SIM_FL_SITE_00"
+   },
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 5,
+    "site_id": "SIM_FL_SITE_00"
+   },
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 6,
+    "site_id": "SIM_FL_SITE_00"
+   },
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 7,
+    "site_id": "SIM_FL_SITE_00"
+   },
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 8,
+    "site_id": "SIM_FL_SITE_00"
+   },
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 9,
+    "site_id": "SIM_FL_SITE_00"
+   },
+   {
+    "examples": 93,
+    "examples_seen": 93,
+    "inputs_sha256": "91f604f57290d24c2610ec04e36340b981ada9719a480215554fdb53f774e921",
+    "labels_sha256": "2eef6b2e0861407d35092010e5aebe9f752b7a46237b0ef4e6d1cdc22a359470",
+    "round_number": 10,
+    "site_id": "SIM_FL_SITE_00"
+   }
+  ],
+  "verified": true,
+  "window_identities": [
+   {
+    "input_digest": "bd361131d282f3a6cf45182d20b61af1dcd5c7118889b4dd11d015907f696d12",
+    "label": 0,
+    "model_input_ref": "LOCALREF:fca4470983fef23d:0000:bd361131d282f3a6",
+    "position": 0,
+    "right_edge_us": 15000000,
+    "window_id": "SIM_FL_SITE_00-W000015000000"
+   },
+   {
+    "input_digest": "5c0b1ffe4edc0f2a0a6010cd5c6b8f0d173939a448757b68be988102ce6dcf32",
+    "label": 0,
+    "model_input_ref": "LOCALREF:fca4470983fef23d:0001:5c0b1ffe4edc0f2a",
+    "position": 1,
+    "right_edge_us": 20000000,
+    "window_id": "SIM_FL_SITE_00-W000020000000"
+   },
+   {
+    "input_digest": "7970dcc1481981f906316184e0ebc4916d3dd83ad63aaf113354105e7a3a4b64",
+    "label": 0,
+    "model_input_ref": "LOCALREF:fca4470983fef23d:0002:7970dcc1481981f9",
+    "position": 2,
+    "right_edge_us": 25000000,
+    "window_id": "SIM_FL_SITE_00-W000025000000"
+   }
+  ],
+  "window_identity_count": 93,
+  "windows": 93
+ }
+}
