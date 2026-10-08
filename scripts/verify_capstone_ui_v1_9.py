@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 
 from nhm.hashing import hash_file
+from scripts.capstone_ui_v1_8_successor import v18_bound
 from scripts.freeze_capstone_ui_v1_9 import LOCK_PATH, PREDECESSOR, ROOT, frontend_files
 
 
@@ -25,7 +26,8 @@ def verify() -> dict[str, object]:
             raise RuntimeError(f"CAPSTONE_UI_V1_9_SCOPE_DRIFT:{field}")
     if lock.get("npm_dependencies_added") != []:
         raise RuntimeError("CAPSTONE_UI_V1_9_DEPENDENCY_DRIFT")
-    expected = lock["bound_artifacts"]
+    # NHM_RESEARCH_OBSERVATORY_V1 is the registered successor tip when present.
+    expected = v18_bound(ROOT) or lock["bound_artifacts"]
     actual = frontend_files()
     if set(actual) != set(expected):
         raise RuntimeError("CAPSTONE_UI_V1_9_UNBOUND_OR_MISSING_FRONTEND_FILE")
@@ -33,7 +35,8 @@ def verify() -> dict[str, object]:
         if hash_file(ROOT / path) != digest:
             raise RuntimeError(f"CAPSTONE_UI_V1_9_TAMPER:{path}")
     predecessor = json.loads(PREDECESSOR.read_text(encoding="utf-8"))["bound_artifacts"]
-    changed = sorted(path for path, digest in expected.items() if predecessor.get(path) != digest)
+    changed = sorted(path for path, digest in lock["bound_artifacts"].items()
+                     if predecessor.get(path) != digest)
     if changed != lock["changed_from_predecessor"]:
         raise RuntimeError("CAPSTONE_UI_V1_9_ACCOUNTING_DRIFT")
     return {"status": "PASS", "bound_files": len(actual), "changed_files": len(changed),

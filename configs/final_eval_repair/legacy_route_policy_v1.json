@@ -10,7 +10,7 @@
   "INTERNAL_DYNAMIC",
   "CATCH_ALL"
  ],
- "route_file_count": 53,
+ "route_file_count": 64,
  "legacy_redirect_count": 33,
  "retained_legacy_tool_count": 1,
  "monitoring_decision": "/monitoring is RETAINED as LEGACY_RETAINED_RESEARCH_TOOL: layout renders a RESEARCH RUNTIME TOOL banner linking to /app/monitoring, /monitor links to it, its copy is non-diagnostic and makes no federation/personalization claim.",
@@ -121,6 +121,61 @@
    "pattern": "/app/monitoring",
    "file": "frontend/src/routes/app/monitoring/+page.svelte",
    "class": "CURRENT_PRODUCT"
+  },
+  {
+   "pattern": "/app/observatory",
+   "file": "frontend/src/routes/app/observatory/+page.svelte",
+   "class": "CURRENT_PRODUCT"
+  },
+  {
+   "pattern": "/app/observatory/evidence",
+   "file": "frontend/src/routes/app/observatory/evidence/+page.svelte",
+   "class": "CURRENT_RESEARCH"
+  },
+  {
+   "pattern": "/app/observatory/federation",
+   "file": "frontend/src/routes/app/observatory/federation/+page.svelte",
+   "class": "CURRENT_PRODUCT"
+  },
+  {
+   "pattern": "/app/observatory/federation-replay",
+   "file": "frontend/src/routes/app/observatory/federation-replay/+page.svelte",
+   "class": "CURRENT_PRODUCT"
+  },
+  {
+   "pattern": "/app/observatory/federation/[client_id]",
+   "file": "frontend/src/routes/app/observatory/federation/[client_id]/+page.svelte",
+   "class": "CURRENT_PRODUCT"
+  },
+  {
+   "pattern": "/app/observatory/model",
+   "file": "frontend/src/routes/app/observatory/model/+page.svelte",
+   "class": "CURRENT_RESEARCH"
+  },
+  {
+   "pattern": "/app/observatory/provenance",
+   "file": "frontend/src/routes/app/observatory/provenance/+page.svelte",
+   "class": "CURRENT_RESEARCH"
+  },
+  {
+   "pattern": "/app/observatory/replay",
+   "file": "frontend/src/routes/app/observatory/replay/+page.svelte",
+   "class": "CURRENT_PRODUCT"
+  },
+  {
+   "pattern": "/app/observatory/research",
+   "file": "frontend/src/routes/app/observatory/research/+page.svelte",
+   "class": "CURRENT_RESEARCH"
+  },
+  {
+   "pattern": "/app/observatory/scenarios",
+   "file": "frontend/src/routes/app/observatory/scenarios/+page.svelte",
+   "class": "CURRENT_RESEARCH"
+  },
+  {
+   "pattern": "/app/observatory/tour",
+   "file": "frontend/src/routes/app/observatory/tour/+page.svelte",
+   "class": "CURRENT_RESEARCH"
   },
   {
    "pattern": "/app/research/fl",

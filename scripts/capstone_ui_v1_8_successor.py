@@ -36,5 +36,15 @@ def v18_bound(root: Path) -> dict[str, str] | None:
             or successor.get("predecessor_sha256") != hash_file(path)
         ):
             raise RuntimeError("CAPSTONE_UI_V1_9_SUCCESSOR_CHAIN_BROKEN")
+        observatory = root / "artifacts/observatory/NHM_RESEARCH_OBSERVATORY_V1.lock.json"
+        if observatory.exists():
+            tip = json.loads(observatory.read_text(encoding="utf-8"))
+            if (
+                tip.get("lock_id") != "NHM_RESEARCH_OBSERVATORY_V1"
+                or tip.get("predecessor_id") != "CAPSTONE_UI_V1_9"
+                or tip.get("predecessor_sha256") != hash_file(v19)
+            ):
+                raise RuntimeError("NHM_RESEARCH_OBSERVATORY_V1_SUCCESSOR_CHAIN_BROKEN")
+            return dict(tip["bound_artifacts"])
         return dict(successor["bound_artifacts"])
     return dict(lock["bound_artifacts"])

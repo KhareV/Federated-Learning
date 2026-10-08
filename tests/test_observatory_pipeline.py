@@ -526,7 +526,9 @@ def test_frozen_evidence_is_verified_recomputable_and_not_about_the_candidate(mo
     assert sum(curves["confusion_at_0_5"].values()) == curves["windows"]
     with pytest.raises(evidence.EvidenceError, match="UNKNOWN_EVIDENCE_MODEL"):
         evidence.fl_eval_curves("INTERNAL_TEST", "CAPSTONE_FL_CANDIDATE_0001")
-    architecture = evidence.architecture()
+    from api.observatory_model_inspect import architecture as inspect_architecture
+
+    architecture = inspect_architecture()
     assert architecture["parameter_count"] == 57_553 and architecture["output_shape"] == [1, 1]
     calibration = evidence.calibration()
     assert calibration["constants"]["temperature"] == 52.88261929727761
@@ -588,3 +590,19 @@ def test_each_dataset_has_its_own_locked_resampler_and_causality_holds() -> None
     assert contract["signal_interval"] == "[t-10s,t)"
     assert contract["annotation_interval"] == "[t-10s,t]"
     assert body["raw_recordings"].startswith("NOT_PRESENT")
+
+
+def test_observatory_lock_verifies_and_detects_tamper(tmp_path: Path, monkeypatch) -> None:
+    import json as _json
+
+    from scripts import verify_observatory_v1 as verifier
+
+    assert verifier.verify()["status"] == "PASS"
+    lock = _json.loads(verifier.LOCK_PATH.read_text())
+    first = sorted(lock["bound_files"])[0]
+    lock["bound_files"][first] = "0" * 64
+    tampered = tmp_path / "lock.json"
+    tampered.write_text(_json.dumps(lock))
+    monkeypatch.setattr(verifier, "LOCK_PATH", tampered)
+    with pytest.raises(RuntimeError, match="OBSERVATORY_TAMPER"):
+        verifier.verify()

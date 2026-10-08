@@ -1,6 +1,6 @@
 # NHM Research Observatory — implementation checkpoint
 
-Status: **substantial partial implementation across Workstreams A, B and C; initiative not accepted as V1**. Entry was clean `dff28f6a7b7bd527def21cb9fd95d682aa60a667`, equal to `origin/main`; `CAPSTONE_UI_V1_9` verified before edits. No prior lock or protected scientific/runtime/FL implementation was edited. No CI was queried or run.
+Status: **Observatory V1 implemented-scope lock issued (`artifacts/observatory/NHM_RESEARCH_OBSERVATORY_V1.lock.json`, verifier `scripts/verify_observatory_v1.py`); full master-prompt acceptance is NOT claimed** — see the not-delivered list. `CAPSTONE_UI_V1_9` and all historical locks are untouched; the lock records the exact three-file frontend integration delta against V1_9. Entry was clean `dff28f6a7b7bd527def21cb9fd95d682aa60a667`, equal to `origin/main`; `CAPSTONE_UI_V1_9` verified before edits. No prior lock or protected scientific/runtime/FL implementation was edited. No CI was queried or run.
 
 ## Working capabilities
 
@@ -50,6 +50,13 @@ Screenshot index (`reports/observatory/workstream_a/` and `reports/observatory/c
 - **Measured diagnostic overhead** (`scripts/observatory_overhead_benchmark.py`, `overhead_benchmark.json`): with the armed live-capture observer the canonical ingestion of a 120 s simulated scenario took a median 0.199 s versus 0.173 s without it (about 26 ms absolute, same process and machine, 5 repeats, identical window count). Capture is opt-in and bounded to one window. The federation sidecar was not benchmarked separately.
 - **Automated accessibility smoke** over all ten Observatory routes: one `h1`, one `main`, named buttons and fields, named SVGs, no target under 24 px, keyboard-reachable controls. This is not a WCAG conformance audit. A nested `main` on the tour page and several undersized inline links found by this smoke were fixed.
 - Real Clerk two-user E2E re-run after these additions: all steps pass (two infrastructure flakes during development, a Clerk sign-in form timeout and a page wait timeout, passed unchanged on re-run and are recorded here rather than hidden).
+
+## Governance integration
+
+- `artifacts/observatory/NHM_RESEARCH_OBSERVATORY_V1.lock.json` (status `FROZEN_IMPLEMENTED_SCOPE_NOT_FULL_MASTER_PROMPT_ACCEPTANCE`) binds 94 Observatory files plus every frontend file, chains to the byte-identical `CAPSTONE_UI_V1_9` lock, records the exact frontend delta against V1_9, and records an empty protected-surface diff against the entry commit. `scripts/verify_observatory_v1.py` re-checks all of it.
+- The historical UI verifiers v1..v1_9 stay green through the existing narrow successor resolver (`scripts/capstone_ui_v1_8_successor.py`), now aware of the Observatory tip. Pure `SUCCESSOR_COMPATIBILITY_ONLY` amendments (named so they sort last in the lexicographic amendment chains) re-pin the changed historical files for FEDERATION_UX, FACULTY_DEMO, FRONTEND_PRODUCT, UFL_LITE_002, FER_001 and FER_002; no historical lock file was edited.
+- Four historical presentation-guard tests that were already failing at the entry commit (stale-status wording on the Overview, Models namespace labels, route classification) were repaired by minimal copy changes and by classifying the new routes in the route policy. The `product/` pure-interface test caught a torch import in the Observatory evidence module; the architecture trace now lives in `api/observatory_model_inspect.py`.
+- Final regression (capstone, clerk, ufl, final-eval, observatory test families): 824+ tests pass; frontend 249 passed, 3 skipped; `svelte-check` 0 errors; build passes.
 
 ## Not delivered — full master-prompt acceptance is NOT claimed
 

@@ -15,6 +15,7 @@ from typing import Any
 
 from fastapi import FastAPI, Request
 
+from api.observatory_model_inspect import architecture as inspect_architecture
 from api.product_app_v1_1 import DEFAULT_DEV_ORIGINS, DEFAULT_INFERENCE_URL, IdentityResolver
 from api.product_app_v1_3 import create_product_app_v1_3
 from capstone_persistence.store import CapstoneSqliteStore
@@ -391,7 +392,7 @@ def create_product_app_observatory_v1(
     @app.get(f"{PREFIX}/model/architecture")
     async def model_architecture(request: Request) -> dict[str, Any]:
         await identity(request)
-        return await asyncio.to_thread(_evidence_call, evidence.architecture)
+        return await asyncio.to_thread(_evidence_call, inspect_architecture)
 
     @app.get(f"{PREFIX}/model/calibration")
     async def model_calibration(request: Request) -> dict[str, Any]:

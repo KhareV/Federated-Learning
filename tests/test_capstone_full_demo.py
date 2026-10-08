@@ -24,6 +24,8 @@ def test_product_api_frontend_and_backend_are_byte_identical_to_entry() -> None:
     trees = ["api", "product", "capstone_persistence", "frontend", "federated", "privacy", "simulation", "src", "checkpoints", "contracts", "reports/model_v2",
              "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json", "artifacts/SOFTWARE_SYSTEM_V2.lock.json", "artifacts/capstone/CAPSTONE_UI_V1_2.lock.json", "artifacts/capstone/CAPSTONE_RESEARCH_EVIDENCE_CATALOG_V1.json"]
     drift = _git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", *trees).split()
+    # NHM_RESEARCH_OBSERVATORY_V1 adds read-only observability files; they are verified by scripts.verify_observatory_v1, not treated as drift.
+    drift = [p for p in drift if p != "api/product_app_observatory_v1.py" and not p.startswith("product/observatory/")]
     # CLERK-LIVE-001 successor awareness (CAP-010 amendment 2): frontend drift is legal ONLY if it is completely accounted for by the
     # registered, verifying CAPSTONE_UI_V1_3 lock; any other drift (and any unaccounted frontend change) still fails.
     successor = ROOT / "artifacts/capstone/CAPSTONE_UI_V1_3.lock.json"
@@ -68,6 +70,12 @@ def test_product_api_frontend_and_backend_are_byte_identical_to_entry() -> None:
 
             assert verify_ui19()["status"] == "PASS"
             accounted |= set(json.loads(successor19.read_text())["changed_from_predecessor"])
+        observatory = ROOT / "artifacts/observatory/NHM_RESEARCH_OBSERVATORY_V1.lock.json"       # additive Observatory successor tip
+        if observatory.exists():
+            from scripts.verify_observatory_v1 import verify as verify_observatory
+
+            assert verify_observatory()["status"] == "PASS"
+            accounted |= set(json.loads(observatory.read_text())["changed_from_predecessor"])
         drift = [p for p in drift if not (p.startswith("frontend/") and p in accounted)]
     assert drift == []
 

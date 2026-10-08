@@ -46,7 +46,7 @@
 </section>
 <p class="warn" data-testid="population-note"><b>{data.claim_label}</b> · {data.windows.toLocaleString()} eligible windows · {data.clusters} patient clusters. {dataset === 'INTERNAL_TEST' ? 'Six contributing clusters: intervals are wide and unstable.' : 'Post-freeze second look on a project-exposed dataset, not untouched validation.'}</p>
 <section aria-label="Experiment matrix">
-	<h2>Experiment matrix · AUPRC with nominal 95% patient-cluster interval</h2>
+	<h2>Experiment matrix · AUPRC with the nominal 95 percent patient-cluster interval</h2>
 	<div class="scroll"><table data-testid="experiment-matrix"><thead><tr><th>Model</th><th>Algorithm</th><th>Condition</th><th>Dev. round</th><th>AUPRC</th><th>Interval (0 to 1 scale)</th><th>AUROC</th><th>Pooled F1</th><th>Patient-macro F1</th></tr></thead>
 		<tbody>{#each rows as m (m.model_id)}{@const ci = m.ci_95.AUPRC}<tr class:sel={m.model_id===modelId}><th scope="row"><button class="link" onclick={() => pick(m)}>{m.model_id}</button></th><td>{m.algorithm}{m.mu !== null ? ` (μ=${m.mu})` : ''}</td><td>{m.condition}</td><td>{m.development_round}</td><td>{fmt(m.point.AUPRC)}</td>
 			<td>{#if ci}<span class="range" role="img" aria-label={`AUPRC interval ${fmt(ci.lower, 3)} to ${fmt(ci.upper, 3)}`}><i style={`left:${ci.lower * 100}%;width:${Math.max(0.6, (ci.upper - ci.lower) * 100)}%`}></i><b style={`left:${m.point.AUPRC * 100}%`}></b></span> <small>[{fmt(ci.lower, 3)}, {fmt(ci.upper, 3)}]</small>{:else}—{/if}</td><td>{fmt(m.point.AUROC)}</td><td>{fmt(m.point.pooled_F1)}</td><td>{fmt(m.point.patient_macro_F1)}</td></tr>{/each}</tbody></table></div>

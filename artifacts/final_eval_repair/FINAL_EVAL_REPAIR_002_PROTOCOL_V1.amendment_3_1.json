@@ -1,0 +1,17 @@
+{
+ "amendment_id": "FINAL_EVAL_REPAIR_002_PROTOCOL_V1_AMENDMENT_3_1",
+ "change": "Re-pin only the listed successor-aware verifier/resolver/route-policy/accounting-test/presentation files. Predecessor locks, CAPSTONE_UI_V1_9 and frozen scientific evidence are unchanged.",
+ "defect": "NHM_RESEARCH_OBSERVATORY_V1 adds read-only Observatory frontend routes and needs successor awareness in historical UI verifiers, route classification and frontend-drift accounting.",
+ "files": {
+  "frontend/src/routes/app/+page.svelte": {
+   "new_sha256": "a11e527ae04fbdb2c5e93e3fcde1beea3e252cae8a7eeb6cd9749c1b196e7439",
+   "old_sha256": "7599fd5d354a7f0b4acfe3e93eb6c6e07e31023e43953cad2bf40b099c7033bd"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "FINAL_EVAL_REPAIR_002_PROTOCOL_V1 (historical files governed for NHM_RESEARCH_OBSERVATORY_V1)",
+ "previous_amendment": "FINAL_EVAL_REPAIR_002_PROTOCOL_V1_AMENDMENT_3",
+ "reason": "RESEARCH_OBSERVATORY_ADDITIVE_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

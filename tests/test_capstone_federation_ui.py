@@ -32,6 +32,8 @@ def _shadow(tmp_path: Path) -> Path:
         paths.append("artifacts/capstone/CAPSTONE_UI_V1_8.lock.json")
     if (ROOT / "artifacts/capstone/CAPSTONE_UI_V1_9.lock.json").exists():
         paths.append("artifacts/capstone/CAPSTONE_UI_V1_9.lock.json")
+    if (ROOT / "artifacts/observatory/NHM_RESEARCH_OBSERVATORY_V1.lock.json").exists():
+        paths.append("artifacts/observatory/NHM_RESEARCH_OBSERVATORY_V1.lock.json")
     for rel in paths:
         (shadow / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / rel, shadow / rel)

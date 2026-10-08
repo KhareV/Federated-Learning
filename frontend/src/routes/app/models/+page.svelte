@@ -36,14 +36,14 @@
 	<div class="wall" role="note"><span>SCIENTIFIC EVALUATION REQUIRED BEFORE ANY FUTURE PROMOTION</span><small>No promotion exists today; nothing moves a candidate into monitoring automatically.</small></div>
 </Panel>
 <div class="gap"></div>
-<Panel eyebrow="CANDIDATES" title="Engineering federated candidates" note="SANDBOX REGISTRY">
+<Panel eyebrow="ENGINEERING FEDERATED CANDIDATES" title="Engineering federated candidates" note="SANDBOX REGISTRY">
 	{#if !fed.registry}<p class="dim" role="status">Loading registry…</p>
 	{:else if fed.candidates.length === 0}<p class="dim" data-testid="no-candidates">No engineering candidates yet. Run federated training in the <a href="/app/federation">Federation Studio</a> to create one.</p>
 	{:else}<div class="cands" data-testid="candidates">{#each fed.candidates as c}<CandidateCard candidate={c} />{/each}</div>{/if}
 	<p class="dim">Candidates are engineering sandbox entries. They are never used for live monitoring and no candidate inference runtime is enabled.</p>
 </Panel>
 <div class="gap"></div>
-<TechnicalEvidence label="TECHNICAL EVIDENCE (released scientific registry)" testid="models-evidence">
+<TechnicalEvidence label="TECHNICAL EVIDENCE (RELEASED SCIENTIFIC registry)" testid="models-evidence">
 	{#if fed.registry}
 		<ul class="rel" data-testid="released-models">{#each fed.registry.released_scientific as m}<li data-model={m.model_id}><b>{m.model_id}</b><span>role: {m.role}</span></li>{/each}</ul>
 		<p class="dim">The released default is <b>{fed.registry.released_default_model_id}</b>. Federation never changes it.</p>
