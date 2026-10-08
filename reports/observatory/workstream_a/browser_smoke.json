@@ -1,0 +1,123 @@
+{
+  "clean": {
+    "h1": "Follow one signal through the system",
+    "stages": 5,
+    "cursors": 5,
+    "pinnedCodeRefs": 5,
+    "commit": "dff28f6a7b7bd527def21cb9fd95d682aa60a667",
+    "quality": true,
+    "overflow": false
+  },
+  "ownedSession": {
+    "model": true,
+    "calibration": true,
+    "technical": true,
+    "withheld": false
+  },
+  "gap": {
+    "quality": true,
+    "longGap": true,
+    "notApplied": true,
+    "overflow": false
+  },
+  "mobile": {
+    "overflow": false,
+    "h1": 1,
+    "charts": 4
+  },
+  "federation": {
+    "clients": 8,
+    "cohort": true,
+    "runEvidence": true,
+    "overflow": false
+  },
+  "matrix": {
+    "available": true,
+    "rows": 8,
+    "rounds": 3,
+    "attested": true,
+    "unknown": false
+  },
+  "federationMobile": {
+    "overflow": false,
+    "clients": 8
+  },
+  "flWindow": {
+    "excluded": true,
+    "unusable": true,
+    "labelWithheld": true,
+    "noTraining": true,
+    "overflow": false
+  },
+  "flWindowMobile": false,
+  "researchRecord": {
+    "train": true,
+    "actualSignal": true,
+    "annotationUnavailable": true,
+    "splitBoundary": true,
+    "overflow": false
+  },
+  "researchRecordMobile": false,
+  "tour": {
+    "steps": 16,
+    "loaded": true,
+    "overflow": false
+  },
+  "tourMobile": false,
+  "responsive": [
+    {
+      "width": 1024,
+      "route": "/app/observatory",
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "route": "/app/observatory/federation",
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "route": "/app/observatory/federation/SIM_FL_SITE_07",
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "route": "/app/observatory/research",
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "route": "/app/observatory/tour",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "route": "/app/observatory",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "route": "/app/observatory/federation",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "route": "/app/observatory/federation/SIM_FL_SITE_07",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "route": "/app/observatory/research",
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "route": "/app/observatory/tour",
+      "overflow": false
+    }
+  ],
+  "reducedMotion": true,
+  "externalHosts": [],
+  "errors": [],
+  "passed": true
+}

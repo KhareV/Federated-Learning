@@ -1,0 +1,26 @@
+{
+  "status": "PARTIAL_OBSERVATORY_CHECKPOINT_NOT_V1_ACCEPTANCE",
+  "run_id": "FEDRUN-2BFCE430FDF2",
+  "source": "isolated local DEMO LIVE_RUN in /tmp/nhm-observatory-dev.SluX7T",
+  "rounds": [
+    {"round_id": 1, "acceptance_basis": "DIRECT_COORDINATOR_MAP", "accepted_updates": 8, "accepted_examples": 723},
+    {"round_id": 2, "acceptance_basis": "DIRECT_COORDINATOR_MAP", "accepted_updates": 8, "accepted_examples": 723},
+    {"round_id": 3, "acceptance_basis": "GOVERNANCE_ATTESTED_SERVER_JOURNAL", "accepted_updates": 8, "accepted_examples": 723}
+  ],
+  "client_examples_each_round": {
+    "SIM_FL_SITE_00": 93,
+    "SIM_FL_SITE_01": 91,
+    "SIM_FL_SITE_02": 91,
+    "SIM_FL_SITE_03": 89,
+    "SIM_FL_SITE_04": 90,
+    "SIM_FL_SITE_05": 93,
+    "SIM_FL_SITE_06": 93,
+    "SIM_FL_SITE_07": 83
+  },
+  "weight_rule": "client accepted examples / 723 within the selected round",
+  "final_round_qualification": "The final coordinator map itself was not directly persisted. Accepted client identities are recovered only when the ordered server journal, recorded update digests and examples, final round count, candidate state digest, and all five persisted governance checks reconcile. The governance checks consumed the actual in-memory coordinator accepted map. SUBMITTED alone is insufficient.",
+  "candidate_state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+  "candidate_role": "SANDBOX_ONLY_ENGINEERING",
+  "scientific_efficacy_claim": false,
+  "connected_clerk_run": false
+}

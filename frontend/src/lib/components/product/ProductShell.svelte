@@ -2,7 +2,7 @@
 	// One navigation system for the product. The backend remains the auth authority.
 	import { page } from '$app/state';
 	import type { Snippet } from 'svelte';
-	import { LayoutDashboard, Watch, Activity, History, Network, Boxes, FlaskConical, Server, Info, LogOut, Menu, X } from '@lucide/svelte';
+	import { LayoutDashboard, Watch, Activity, History, Network, Boxes, FlaskConical, ScanSearch, Server, Info, LogOut, Menu, X } from '@lucide/svelte';
 	import DemoBanner from './DemoBanner.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 
@@ -16,6 +16,7 @@
 		{ label: 'Device', href: '/app/device', icon: Watch },
 		{ label: 'Monitor', href: '/app/monitoring', icon: Activity },
 		{ label: 'History', href: '/app/history', icon: History },
+		{ label: 'Observatory', href: '/app/observatory', icon: ScanSearch },
 		{ label: 'Federation', href: '/app/federation', icon: Network, children: [
 			{ label: 'Clients', href: '/app/federation/clients' }, { label: 'Rounds', href: '/app/federation/rounds' },
 			{ label: 'Live', href: '/app/federation/live' }, { label: 'Privacy', href: '/app/federation/privacy' }] },

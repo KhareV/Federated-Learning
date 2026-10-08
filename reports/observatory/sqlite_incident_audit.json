@@ -1,0 +1,27 @@
+{
+  "incident": "OBSERVATORY_WRONG_DB_ENV_VAR_RESTART",
+  "status": "INVESTIGATED_WITH_BASELINE_LIMITATION",
+  "incorrect_environment_variable": "NHM_CAPSTONE_DB_PATH",
+  "actual_environment_variable": "NHM_PRODUCT_DB_PATH",
+  "fallback_database": "data/capstone/product.sqlite3",
+  "fallback_file_birth_local": "2026-10-08 18:23:52",
+  "fallback_file_modified_local": "2026-10-08 18:23:57",
+  "fallback_file_size_bytes": 196608,
+  "fallback_sha256": "fb15e73754414cd6db59de6d47c615fe705a331ed8ff624400f7d6205a9b66a2",
+  "preserved_copy": "/tmp/nhm-sqlite-incident.Wud886/product.sqlite3.post_incident",
+  "preserved_copy_sha256": "fb15e73754414cd6db59de6d47c615fe705a331ed8ff624400f7d6205a9b66a2",
+  "associated_wal_or_shm_at_preservation": false,
+  "sqlite_integrity_check": "ok",
+  "sqlite_user_version": 1,
+  "table_count": 15,
+  "all_table_row_counts_zero": true,
+  "pre_incident_baseline_found": false,
+  "baseline_search": [
+    "git ls-files data/capstone/product.sqlite3 (untracked/ignored)",
+    "repository data/reports filename search (no pre-incident database copy)",
+    "repository report/hash search (no pre-incident database hash)"
+  ],
+  "interpretation": "The file's filesystem creation time coincides with the mistaken launch, and the store constructor initializes a new empty schema at the fallback path. No persisted application rows are present. Without a pre-incident byte-level baseline, a byte-for-byte before/after claim is unavailable; the evidence supports creation of an empty fallback database, not a finding that an earlier database was unchanged.",
+  "actions_not_taken": ["delete", "restore", "overwrite", "reset"],
+  "active_observatory_database": "/tmp/nhm-observatory-dev.SluX7T/product.sqlite3"
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PARTIAL_OBSERVATORY_CHECKPOINT_NOT_V1_ACCEPTANCE",
+  "dataset_role_source": "manifests/datasets/dataset_roles_v1.yaml",
+  "split_role_source": "manifests/splits/partition_roles_v1.yaml",
+  "mitdb_split_manifest_sha256": "00c61f7ebd6b48b153029402d5fdac80031802fbaa700773eef4dcbc65162a4c",
+  "window_manifest_sha256": "1a68da870c129d77c438a2254fdbfa4eac71181a1a10cf30076ec9e9109d0f4a",
+  "cache_manifest_sha256": "35610daa9e0611cca9976664af0e37492011637e085ba866806f378092c6fe4d",
+  "inspector_partition_allowlist": ["MITDB/TRAIN"],
+  "train_cache_record_count_including_zero_eligible": 27,
+  "verified_example": "MITDB record 101, eligible window 0, 2500 actual filtered samples, 11 mapped N beats, frozen label 0",
+  "raw_mitdb_record_files_present": false,
+  "raw_incart_record_files_present": false,
+  "exact_raw_beat_symbols_and_positions_available": false,
+  "internal_test_waveform_access": false,
+  "incart_waveform_access": false,
+  "new_model_inference": false,
+  "new_scientific_metric": false,
+  "claim_boundary": "PROCESSED_TRAIN_WINDOW_NOT_HELD_OUT_INFERENCE"
+}

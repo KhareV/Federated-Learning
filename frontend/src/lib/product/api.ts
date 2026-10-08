@@ -29,6 +29,11 @@ import {
 } from './federation/types';
 import { parseSessionSummary, parseSessionTimeline, type SessionSummary, type SessionTimeline } from './history/types';
 import { parseFlResearchEvidence, parseMlResearchEvidence, type FlResearchEvidence, type MlResearchEvidence } from './research/types';
+import { parseScenarioList, parseWindowTrace, type ScenarioInfo, type WindowTrace } from './observatory/types';
+import { parseFlClientWindowTrace, parseFrozenCohort, parseRunContributions,
+	type FlClientWindowTrace, type FrozenCohort, type RunContributions } from './observatory/federation';
+import { parseResearchRecords, parseResearchWindow,
+	type ResearchRecord, type ResearchWindow } from './observatory/research';
 
 export const PRODUCT_BASE = '/product/v1';
 
@@ -98,6 +103,14 @@ export interface ProductClient {
 	sessionTimeline(sessionId: string): Promise<SessionTimeline>;
 	researchMl(): Promise<MlResearchEvidence>;
 	researchFl(): Promise<FlResearchEvidence>;
+	observatoryScenarios(): Promise<ScenarioInfo[]>;
+	observatoryScenarioWindow(scenarioId: string, windowIndex: number): Promise<WindowTrace>;
+	observatorySessionWindow(sessionId: string, windowIndex: number): Promise<WindowTrace>;
+	observatoryCohort(): Promise<FrozenCohort>;
+	observatoryRunContributions(runId: string): Promise<RunContributions>;
+	observatoryFlClientWindow(clientId: string, windowIndex: number): Promise<FlClientWindowTrace>;
+	observatoryResearchRecords(): Promise<ResearchRecord[]>;
+	observatoryResearchWindow(recordId: string, windowIndex: number): Promise<ResearchWindow>;
 	startSession(sessionId: string): Promise<MonitoringSession>;
 	stopSession(sessionId: string): Promise<MonitoringSession>;
 	// CAPSTONE_FEDERATION_PRODUCT_CLIENT_V1 (CAP-008): CAP-007 routes only
@@ -189,6 +202,20 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		sessionTimeline: async (id) => parseSessionTimeline(await call<unknown>('GET', `/sessions/${enc(id)}/timeline`)),
 		researchMl: async () => parseMlResearchEvidence(await call<unknown>('GET', '/research/ml')),
 		researchFl: async () => parseFlResearchEvidence(await call<unknown>('GET', '/research/fl')),
+		observatoryScenarios: async () => parseScenarioList(await call<unknown>('GET', '/observatory/scenarios')),
+		observatoryScenarioWindow: async (id, index) => parseWindowTrace(await call<unknown>('GET',
+			`/observatory/scenarios/${enc(id)}/windows/${enc(String(index))}`)),
+		observatorySessionWindow: async (id, index) => parseWindowTrace(await call<unknown>('GET',
+			`/observatory/sessions/${enc(id)}/windows/${enc(String(index))}`)),
+		observatoryCohort: async () => parseFrozenCohort(await call<unknown>('GET', '/observatory/federation/cohort')),
+		observatoryRunContributions: async (id) => parseRunContributions(await call<unknown>('GET',
+			`/observatory/federation/runs/${enc(id)}/contributions`)),
+		observatoryFlClientWindow: async (id, index) => parseFlClientWindowTrace(await call<unknown>('GET',
+			`/observatory/federation/clients/${enc(id)}/windows/${enc(String(index))}`)),
+		observatoryResearchRecords: async () => parseResearchRecords(await call<unknown>('GET',
+			'/observatory/research/records')),
+		observatoryResearchWindow: async (id, index) => parseResearchWindow(await call<unknown>('GET',
+			`/observatory/research/records/${enc(id)}/windows/${enc(String(index))}`)),
 		startSession: (id) => call('POST', `/sessions/${enc(id)}/start`),
 		stopSession: (id) => call('POST', `/sessions/${enc(id)}/stop`),
 		federationOverview: () => call('GET', '/federation'),
