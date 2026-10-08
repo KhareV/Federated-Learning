@@ -1,0 +1,42 @@
+{
+ "caption": "Confusion matrices at the fixed 0.5 rule on the independent holdout (raw counts; row-normalised view available). Population size shown.",
+ "evaluation_cohort": "16 independent synthetic participants",
+ "exported_views": [
+  "r3_r10"
+ ],
+ "figure_id": "FL10_FIG09",
+ "mode": "A",
+ "run_id": "FL10_MODE_A_RUN_01",
+ "source_hashes": {
+  "batches.csv": "766937653c851951a6b6fad95b05ca9ef9c757e3dac34b9b71ca13e58c23c9cf",
+  "client_rounds.csv": "43b0d60573b2286317924b6db58949c069b807a670ab20e749516b482f035d3f",
+  "evaluation_results.json": "1cbf0a434cb68fbbf7aae020b8130e1b4f80a2b48488f51dc7962e957f43d044",
+  "holdout_predictions.csv": "8047cf0d0798dd440ede2398cc1ba0489a4374e0f20093a1ba3e6875bcba4c4d",
+  "participant_metrics.csv": "8480766f33b10af8f7125ea724b0f227dc3f2b3d09d628cd90482ef0265d3c7b",
+  "rounds.csv": "386d18e5153ac5a6df2b9fb6777bd872a477fb134d61ba710f938366a700ef4e",
+  "run_report.json": "fa4ef7bebdbfdc9e052df18051e39948839f2521215a3904bf68bc7db572a32d",
+  "updates.csv": "4d3a33ee1172eb9f9334f7f6d1c05a561047ceb446db4ca1fe848db899daf1e2"
+ },
+ "sources": [
+  "evaluation_results.json"
+ ],
+ "spec_sha256": "a350fa7eb018983b0c2d57aa9e8d878d459a698adacea60245059956fdb1da41",
+ "synthetic_label": "SYNTHETIC ENGINEERING-EVENT CLASSIFICATION \u2014 NOT AAMI-SVF OR CLINICAL VALIDATION",
+ "threshold": "raw sigmoid >= 0.5 where applicable",
+ "title": "Confusion-matrix comparison",
+ "training_vs_evaluation": "evaluation",
+ "views": [
+  "r3_r10",
+  "R00",
+  "R01",
+  "R02",
+  "R03",
+  "R04",
+  "R05",
+  "R06",
+  "R07",
+  "R08",
+  "R09",
+  "R10"
+ ]
+}

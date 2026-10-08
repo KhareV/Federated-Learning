@@ -83,7 +83,8 @@ def create_product_app_observatory_v1(
     from final_showcase.live_link import LiveLinkCohortProvider
     from product.federation.service import get_cohort
 
-    live_provider = LiveLinkCohortProvider(cohort_provider or get_cohort)  # disarmed == the canonical cohort, unchanged
+    # Disarmed provider delegates to the unchanged canonical cohort.
+    live_provider = LiveLinkCohortProvider(cohort_provider or get_cohort)
     app = create_product_app_v1_3(
         store=store, identity_resolver=identity_resolver,
         auth_description=auth_description,
@@ -419,7 +420,9 @@ def create_product_app_observatory_v1(
             except ValueError as error:
                 raise ProductError(ProductErrorCode.NOT_FOUND, str(error)) from error
         if len(json.dumps(body).encode()) > MAX_TRACE_RESPONSE_BYTES:
-            raise ProductError(ProductErrorCode.INTERNAL_PRODUCT_ERROR, "activation response size limit exceeded")
+            raise ProductError(
+                ProductErrorCode.INTERNAL_PRODUCT_ERROR, "activation response size limit exceeded"
+            )
         return body
 
     @app.get(f"{PREFIX}/model/architecture")
@@ -441,5 +444,14 @@ def create_product_app_observatory_v1(
     from api.observatory_showcase import register_live_link
 
     register_showcase(app, PREFIX, identity)
-    register_live_link(app, PREFIX, identity, artifact_root=Path(federation_artifact_root), store=store, identity_resolver=identity_resolver)
+    register_live_link(
+        app, PREFIX, identity, artifact_root=Path(federation_artifact_root),
+        store=store, identity_resolver=identity_resolver,
+    )
+    from api.observatory_fl10 import register as register_fl10
+
+    register_fl10(
+        app, PREFIX, identity, artifact_root=Path(federation_artifact_root),
+        store=store, identity_resolver=identity_resolver,
+    )
     return app

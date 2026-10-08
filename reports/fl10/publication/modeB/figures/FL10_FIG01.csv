@@ -1,0 +1,14 @@
+figure,view,node,label
+FL10_FIG01,diagram,SIM_FL_SITE_00,SITE_00: local data stays here
+FL10_FIG01,diagram,SIM_FL_SITE_01,SITE_01: local data stays here
+FL10_FIG01,diagram,SIM_FL_SITE_02,SITE_02: local data stays here
+FL10_FIG01,diagram,SIM_FL_SITE_03,SITE_03: local data stays here
+FL10_FIG01,diagram,SIM_FL_SITE_04,SITE_04: local data stays here
+FL10_FIG01,diagram,SIM_FL_SITE_05,SITE_05: local data stays here
+FL10_FIG01,diagram,SIM_FL_SITE_06,SITE_06: local data stays here
+FL10_FIG01,diagram,SIM_FL_SITE_07,SITE_07: local data stays here
+FL10_FIG01,diagram,stage0,"local optimizer (AdamW, 1 epoch)"
+FL10_FIG01,diagram,stage1,"update submission (digest, example count)"
+FL10_FIG01,diagram,stage2,weighted FedAvg (Coordinator)
+FL10_FIG01,diagram,stage3,global model R00 -> R10
+FL10_FIG01,diagram,stage4,final engineering candidate (not promoted)

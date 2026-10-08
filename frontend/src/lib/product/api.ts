@@ -3,6 +3,7 @@
 // never sends scientific configuration. A bearer token (CLERK mode) is obtained per request from
 // the injected provider and is never stored by this module.
 
+import { parseFl10, parseFl10Job, parseFl10Recorded, type Fl10Job, type Fl10Payload, type Fl10Recorded } from './observatory/fl10';
 import { parseLiveLink, parseShowcase, type LiveLinkStatus, type ShowcaseBundle } from './observatory/showcase';
 import type {
 	AuthIdentity,
@@ -121,6 +122,12 @@ export interface ProductClient {
 	observatoryScenarioTimeline(scenarioId: string): Promise<ScenarioTimeline>;
 	observatoryFlEval(): Promise<FlEval>;
 	observatoryShowcase(): Promise<ShowcaseBundle>;
+	fl10Recorded(): Promise<Fl10Recorded[]>;
+	fl10RecordedBundle(key: string): Promise<Fl10Payload>;
+	fl10Start(mode: 'A' | 'B'): Promise<Fl10Job>;
+	fl10Status(id: string): Promise<Fl10Job>;
+	fl10JobBundle(id: string): Promise<Fl10Payload>;
+	fl10ExportFile(key: string, item: string, fmt: string): Promise<{ blob: Blob; sha256: string | null }>;
 	observatoryLiveLinkStart(): Promise<LiveLinkStatus>;
 	observatoryLiveLinkStatus(id: string): Promise<LiveLinkStatus>;
 	observatoryFlCurves(dataset: string, modelId: string): Promise<FlCurves>;
@@ -244,6 +251,22 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		observatoryScenarioTimeline: async (id) => parseScenarioTimeline(await call<unknown>('GET', `/observatory/scenarios/${enc(id)}/timeline`)),
 		observatoryLiveLinkStart: async () => parseLiveLink(await call<unknown>('POST', '/observatory/live-link/runs')),
 		observatoryLiveLinkStatus: async (id) => parseLiveLink(await call<unknown>('GET', `/observatory/live-link/runs/${enc(id)}`)),
+		fl10Recorded: async () => parseFl10Recorded(await call<unknown>('GET', '/observatory/fl10/recorded')),
+		fl10RecordedBundle: async (key) => parseFl10(await call<unknown>('GET', `/observatory/fl10/recorded/${enc(key)}`)),
+		fl10Start: async (mode) => parseFl10Job(await call<unknown>('POST', '/observatory/fl10/runs', { mode })),
+		fl10Status: async (id) => parseFl10Job(await call<unknown>('GET', `/observatory/fl10/runs/${enc(id)}`)),
+		fl10JobBundle: async (id) => parseFl10(await call<unknown>('GET', `/observatory/fl10/runs/${enc(id)}/bundle`)),
+		fl10ExportFile: async (key, item, fmt) => {
+			const headers: Record<string, string> = {};
+			const token = options.getToken ? await options.getToken() : null;
+			if (token) headers.Authorization = `Bearer ${token}`;
+			const path = key.startsWith('recorded-')
+				? `/observatory/fl10/recorded/${enc(key)}/exports/${enc(item)}/${enc(fmt)}`
+				: `/observatory/fl10/runs/${enc(key)}/exports/${enc(item)}/${enc(fmt)}`;
+			const response = await doFetch(`${base}${path}`, { method: 'GET', headers, credentials: 'same-origin' });
+			if (!response.ok) throw new ProductApiError(response.status, kindForStatus(response.status), null, 'export failed');
+			return { blob: await response.blob(), sha256: response.headers.get('X-Content-SHA256') };
+		},
 		observatoryShowcase: async () => parseShowcase(await call<unknown>('GET', '/observatory/showcase/bundle')),
 		observatoryFlEval: async () => parseFlEval(await call<unknown>('GET', '/observatory/evidence/fl-eval')),
 		observatoryFlCurves: async (dataset, modelId) => parseFlCurves(await call<unknown>('GET',

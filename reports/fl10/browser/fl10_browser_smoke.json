@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "desktop": {
+    "source": "RECORDED VERIFIED RUN",
+    "updates": "80",
+    "charts": 3,
+    "overflow": false,
+    "warning": true
+  },
+  "intermediate": {
+    "768": {
+      "overflow": false,
+      "visibleTabs": 8,
+      "chart": 3
+    },
+    "1024": {
+      "overflow": false,
+      "visibleTabs": 8,
+      "chart": 3
+    }
+  },
+  "mobile": {
+    "overflow": false,
+    "visibleTabs": 8,
+    "chart": 3
+  },
+  "reducedMotion": {
+    "matches": true,
+    "charts": 3,
+    "controls": 8,
+    "overflow": false
+  },
+  "keyboard": {
+    "focusVisible": true,
+    "accessibleName": true
+  },
+  "tabs": {
+    "overview": {
+      "charts": 3,
+      "tables": 3,
+      "overflow": false
+    },
+    "training": {
+      "charts": 5,
+      "tables": 5,
+      "overflow": false
+    },
+    "classification": {
+      "charts": 7,
+      "tables": 7,
+      "overflow": false
+    },
+    "clients": {
+      "charts": 4,
+      "tables": 4,
+      "overflow": false
+    },
+    "comparisons": {
+      "charts": 3,
+      "tables": 3,
+      "overflow": false
+    },
+    "internals": {
+      "charts": 4,
+      "tables": 4,
+      "overflow": false
+    },
+    "bridge": {
+      "charts": 0,
+      "tables": 0,
+      "overflow": false
+    },
+    "exports": {
+      "charts": 0,
+      "tables": 0,
+      "overflow": false
+    }
+  },
+  "errors": [],
+  "source": "http://127.0.0.1:5185",
+  "note": "DEMO browser smoke; Clerk ownership not claimed"
+}

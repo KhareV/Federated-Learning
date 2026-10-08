@@ -1,0 +1,47 @@
+{
+ "caption": "Evidence-boundary matrix.",
+ "columns": [
+  "evidence_lane",
+  "data",
+  "label_semantics",
+  "use",
+  "must_not_be_compared_with"
+ ],
+ "lane": "C",
+ "rows": [
+  [
+   "C: synthetic engineering FL (this experiment)",
+   "simulated wearable windows, 8 training clients, 16 holdout participants",
+   "WEARABLE_SIM_EVENT_WINDOW_V1 synthetic engineering events",
+   "optimization/communication-round behaviour of a sandbox candidate",
+   "AAMI-SVF scientific metrics, clinical performance"
+  ],
+  [
+   "B: scientific federated learning (frozen)",
+   "real research ECG partitions",
+   "AAMI_SVF_WINDOW_V1",
+   "controlled heterogeneity, FedAvg vs FedProx",
+   "synthetic engineering metrics"
+  ],
+  [
+   "H: historical centralized references (frozen)",
+   "centralized V1/V2 models evaluated earlier",
+   "AAMI_SVF_WINDOW_V1",
+   "descriptive reference only (no paired interval)",
+   "federated results as superiority claims"
+  ],
+  [
+   "A: released monitoring model",
+   "MODEL_V2_FINAL + CAL_V2 (unchanged)",
+   "AAMI_SVF_WINDOW_V1",
+   "live monitoring",
+   "the FL10 candidate (not promoted, not deployed)"
+  ]
+ ],
+ "sources": [
+  "protocol_v1.json"
+ ],
+ "table_id": "FL10_TAB10",
+ "title": "Synthetic versus scientific evidence boundaries",
+ "undefined_policy": "null = not defined / not available (never zero)"
+}

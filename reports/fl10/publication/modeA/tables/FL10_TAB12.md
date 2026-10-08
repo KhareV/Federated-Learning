@@ -1,0 +1,20 @@
+**Reproducibility and acceptance matrix**
+
+| check | status | evidence |
+|---|---|---|
+| Exactly ten committed rounds | PASS | computed from this run's bundle |
+| 80 accepted updates | PASS | computed from this run's bundle |
+| eight accepted updates in every round | PASS | computed from this run's bundle |
+| R1-R3 equal frozen canonical digests | PASS | computed from this run's bundle |
+| eleven states evaluated | PASS | computed from this run's bundle |
+| same holdout for R03 and R10 | PASS | computed from this run's bundle |
+| zero overlap with every excluded population | PASS | computed from this run's bundle |
+| confusion matrices reconcile | PASS | computed from this run's bundle |
+| no round selected on the holdout | PASS | computed from this run's bundle |
+| fixed threshold 0.5, no calibration | PASS | computed from this run's bundle |
+| paired bootstrap valid replicates reported | PASS | computed from this run's bundle |
+| per-batch diagnostics captured | PASS | computed from this run's bundle |
+| timing captured | PASS | computed from this run's bundle |
+| candidate not promoted or deployed | PASS | computed from this run's bundle |
+
+*Bundle-level acceptance checks (export hashes and regression gates are verified separately in the lock verifier).*

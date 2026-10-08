@@ -1,0 +1,29 @@
+{
+ "caption": "Example-weighted mean of the eight clients' actual local training losses per round (training data, not independent evaluation).",
+ "evaluation_cohort": null,
+ "exported_views": "all",
+ "figure_id": "FL10_FIG02",
+ "mode": "B",
+ "run_id": "FL10_MODE_B_RUN_01",
+ "source_hashes": {
+  "batches.csv": "a53826821f2a38695cb7f6e325f6e3171738557aed39f0734ffa8a48df8978cc",
+  "client_rounds.csv": "f4fa7af25f26c7374d67fa9c5a45b36e165d89243c92cd14d1993b6c8e829c9a",
+  "evaluation_results.json": "a62a56568a3c3b3712214bcce096d22d424dba88763e15b6d1ed8283a4cdb487",
+  "holdout_predictions.csv": "8047cf0d0798dd440ede2398cc1ba0489a4374e0f20093a1ba3e6875bcba4c4d",
+  "participant_metrics.csv": "8480766f33b10af8f7125ea724b0f227dc3f2b3d09d628cd90482ef0265d3c7b",
+  "rounds.csv": "546736cff2e035efab8fcdda3254d51f6c9223dc62c47c11fe60607bfcd18a99",
+  "run_report.json": "d630bf9a5b0bfb6b0148cb68f7303b3564410d8fce8a7855a438b917d5fefc95",
+  "updates.csv": "206883f3781c41d3ba9980197a8c998f04870a7d6207688bdeda96569728b8a1"
+ },
+ "sources": [
+  "rounds.csv"
+ ],
+ "spec_sha256": "893d9896d601b5db2c7e01f084d687fb77de5747174368184c9ae7f6a4eacd27",
+ "synthetic_label": "SYNTHETIC ENGINEERING-EVENT CLASSIFICATION \u2014 NOT AAMI-SVF OR CLINICAL VALIDATION",
+ "threshold": "raw sigmoid >= 0.5 where applicable",
+ "title": "Global training loss versus round",
+ "training_vs_evaluation": "training/federation",
+ "views": [
+  "loss"
+ ]
+}

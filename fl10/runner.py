@@ -118,6 +118,8 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
     if state_sha(state) != frozen["0"]:
         raise Fl10Error("WRONG_INITIAL_STATE", state_sha(state))
     coord = Coordinator(manifest, spec_sha)
+    if out_dir.exists() and any(out_dir.iterdir()):
+        raise Fl10Error("RUN_ARTIFACT_DIRECTORY_NOT_EMPTY", str(out_dir))
     out_dir.mkdir(parents=True, exist_ok=True)
     atomic_write(out_dir / "states/R00.bin", serialize_state(state))
     started = datetime.now(UTC).isoformat()
@@ -265,7 +267,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                   candidate={"candidate_id": f"FL10_CANDIDATE_{run_id}", "state_sha256": final_sha, "rounds": rounds, "round": rounds, "released_model_changed": False, "promoted": False, "deployed": False,
                              "registered_in_product_registry": False, "label": "ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL"},
                   coordinator_identity=coord.identity(), cohort_manifest_sha256=hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest(),
-                  prefix_equals_frozen_reference={str(r): report["rounds"][r - 1]["parity"]["equals_frozen_reference"] for r in range(1, MAX_PARITY_ROUNDS + 1)})
+                  prefix_equals_frozen_reference={str(r): report["rounds"][r - 1]["parity"]["equals_frozen_reference"] for r in range(1, min(rounds, MAX_PARITY_ROUNDS) + 1)})
     atomic_write(out_dir / "run_report.json", (json.dumps(report, indent=1, sort_keys=True, default=str) + "\n").encode())
     (out_dir / "run_report.partial.json").unlink(missing_ok=True)
     write_tables(out_dir, report)
