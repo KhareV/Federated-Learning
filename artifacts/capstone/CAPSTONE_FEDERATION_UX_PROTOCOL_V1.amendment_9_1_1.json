@@ -1,0 +1,21 @@
+{
+ "amendment_id": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_9_1_1",
+ "change": "Re-pin only the listed successor-aware verifier/resolver/route-policy/accounting-test/presentation files. Predecessor locks, CAPSTONE_UI_V1_9 and frozen scientific evidence are unchanged.",
+ "defect": "NHM_RESEARCH_OBSERVATORY_V1 adds read-only Observatory frontend routes and needs successor awareness in historical UI verifiers, route classification and frontend-drift accounting.",
+ "files": {
+  "frontend/src/lib/product/api.ts": {
+   "new_sha256": "d47dfb08ca2c3be90cc3b67afb8de5ea328fcbf32057de0ee1cc2fa945557296",
+   "old_sha256": "639606fb2ab7db6267dabae414808eacd629796bd3f723fad9cb6c19cfef24cc"
+  },
+  "tests/test_capstone_federation_ui.py": {
+   "new_sha256": "93658e6b17c4c4abe821eb8cd3c814f777c6528609d3d6509127fc4d20c1474f",
+   "old_sha256": "c19cafa28080a896d5b30c1f7d8f267afced4bb9b612f5238f5fdb75ff5b162f"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1 (historical files governed for NHM_RESEARCH_OBSERVATORY_V1)",
+ "previous_amendment": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_9_1",
+ "reason": "RESEARCH_OBSERVATORY_ADDITIVE_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

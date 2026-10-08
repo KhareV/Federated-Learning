@@ -104,3 +104,22 @@ def test_activation_inspection_is_bit_identical_isolated_bounded_and_matches_the
     with pytest.raises(ValueError, match="WINDOW_UNUSABLE_NO_MODEL_INPUT"):
         for index in range(65, 69):
             inspect_activations(unusable, index)
+
+
+def test_obs_diag_lock_chains_to_the_immutable_v1_lock_and_detects_tamper(tmp_path, monkeypatch) -> None:
+    import json as _json
+
+    from scripts import verify_obs_diag_001 as verifier
+    from scripts import verify_observatory_v1 as v1
+
+    assert verifier.verify()["status"] == "PASS"
+    assert v1.verify()["status"] == "PASS"                      # V1 verifier accepts the successor-repinned files only through the chained lock
+    lock = _json.loads(verifier.LOCK_PATH.read_text())
+    assert lock["status"] == "FROZEN_DELIVERED_CAPABILITIES_ONLY"
+    assert _json.loads(verifier.V1_LOCK.read_text())["status"] == "FROZEN_IMPLEMENTED_SCOPE_NOT_FULL_MASTER_PROMPT_ACCEPTANCE"
+    lock["bound_files"][sorted(lock["bound_files"])[0]] = "0" * 64
+    tampered = tmp_path / "lock.json"
+    tampered.write_text(_json.dumps(lock))
+    monkeypatch.setattr(verifier, "LOCK_PATH", tampered)
+    with pytest.raises(RuntimeError, match="OBS_DIAG_TAMPER"):
+        verifier.verify()

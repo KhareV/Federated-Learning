@@ -19,9 +19,22 @@ from scripts.freeze_observatory_v1 import (
     v19_delta,
 )
 
+SUCCESSOR_PATH = ROOT / "artifacts/observatory/NHM_OBS_DIAG_001.lock.json"
+
+
+def _successor() -> dict | None:
+    """The accepted successor NHM_OBS_DIAG_001 may re-pin V1-bound files; it must chain to this lock's exact bytes."""
+    if not SUCCESSOR_PATH.exists():
+        return None
+    successor = json.loads(SUCCESSOR_PATH.read_text())
+    if successor.get("lock_id") != "NHM_OBS_DIAG_001" or successor.get("predecessor_sha256") != sha(LOCK_PATH):
+        raise RuntimeError("OBSERVATORY_SUCCESSOR_CHAIN_BROKEN")
+    return successor
+
 
 def verify() -> dict[str, object]:
     lock = json.loads(LOCK_PATH.read_text())
+    successor = _successor()
     if lock["lock_id"] != "NHM_RESEARCH_OBSERVATORY_V1" or lock["full_master_prompt_acceptance"] is not False:
         raise RuntimeError("OBSERVATORY_LOCK_IDENTITY_DRIFT")
     if lock["predecessor_id"] != "CAPSTONE_UI_V1_9" or sha(UI_LOCK) != lock["predecessor_sha256"]:
@@ -32,13 +45,18 @@ def verify() -> dict[str, object]:
     for flag in ("scientific_state_semantics_changed", "model_calibration_or_fl_math_changed", "new_scientific_experiment_run", "released_model_binding_changed", "candidate_promoted_or_deployed", "hardware_work_performed"):
         if lock[flag] is not False:
             raise RuntimeError(f"OBSERVATORY_SCOPE_DRIFT:{flag}")
+    repinned = successor["changed_from_predecessor_files"] if successor else []
     for path, digest in lock["bound_files"].items():
-        if not (ROOT / path).is_file() or sha(ROOT / path) != digest:
+        if not (ROOT / path).is_file():
+            raise RuntimeError(f"OBSERVATORY_TAMPER:{path}")
+        accepted = {digest} | ({successor["bound_files"].get(path)} if successor and path in repinned else set())
+        if sha(ROOT / path) not in accepted:
             raise RuntimeError(f"OBSERVATORY_TAMPER:{path}")
     actual_frontend = frontend_files()
-    if set(actual_frontend) != set(lock["bound_artifacts"]):
+    expected_frontend = successor["bound_artifacts"] if successor else lock["bound_artifacts"]
+    if set(actual_frontend) != set(expected_frontend):
         raise RuntimeError("OBSERVATORY_UNBOUND_OR_MISSING_FRONTEND_FILE")
-    for path, digest in lock["bound_artifacts"].items():
+    for path, digest in expected_frontend.items():
         if sha(ROOT / path) != digest:
             raise RuntimeError(f"OBSERVATORY_FRONTEND_TAMPER:{path}")
     delta = v19_delta()

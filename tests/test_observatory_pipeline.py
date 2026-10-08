@@ -605,5 +605,7 @@ def test_observatory_lock_verifies_and_detects_tamper(tmp_path: Path, monkeypatc
     tampered = tmp_path / "lock.json"
     tampered.write_text(_json.dumps(lock))
     monkeypatch.setattr(verifier, "LOCK_PATH", tampered)
+    # Judge the tampered V1 copy on its own, without the chained successor.
+    monkeypatch.setattr(verifier, "SUCCESSOR_PATH", tmp_path / "none.json")
     with pytest.raises(RuntimeError, match="OBSERVATORY_TAMPER"):
         verifier.verify()

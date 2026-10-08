@@ -1,6 +1,10 @@
 {
  "browser": "Chrome/154.0.8037.98",
  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+ "contrastNegativeControl": {
+  "ratio": 1.28,
+  "flaggedAsFailing": true
+ },
  "routes": [
   {
    "route": "/app/observatory",

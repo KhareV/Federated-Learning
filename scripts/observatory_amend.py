@@ -25,7 +25,7 @@ def lock_files() -> list:
     found = []
     for path in sorted(ROOT.glob("artifacts/**/*.lock.json")):
         name = path.name
-        if "CAPSTONE_UI_V1" in name or name.startswith(("NHM_RESEARCH_OBSERVATORY", "CLERK_LIVE")):
+        if "CAPSTONE_UI_V1" in name or name.startswith(("NHM_", "CLERK_LIVE")):
             continue
         try:
             expected_map(path)
