@@ -1,0 +1,412 @@
+{
+ "base_seed": 20261009,
+ "cohort_id": "WEARABLE_SIM_FL_EVAL_HOLDOUT_V1",
+ "generator": "simulation.fl_cohort_v1 (unmodified) via final_showcase.holdout",
+ "label_contract": "WEARABLE_SIM_EVENT_WINDOW_V1",
+ "participants": [
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "clean signal"
+   ],
+   "dataset_sha256": "6d369bea7187802fa0823946ea6daa4fd494e926cac5617532fdd37097a01d11",
+   "event_kinds": [
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like"
+   ],
+   "event_times_s": [
+    128.69,
+    163.232,
+    191.146,
+    218.79,
+    252.92,
+    282.08,
+    343.413,
+    366.805,
+    399.518,
+    430.82
+   ],
+   "holdout_id": "SIM_FL_EVAL_00",
+   "mirrors_training_site_condition": "SIM_FL_SITE_00",
+   "participant_id": "SIM_P000201",
+   "seed": 20261009,
+   "session_id": "SIM_S_FLEVAL_00_000001"
+  },
+  {
+   "counts": {
+    "DEGRADED": 2,
+    "UNUSABLE": 0,
+    "VALID": 91,
+    "excluded_not_valid": 2,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 71,
+    "synthetic_positive": 20,
+    "trainable": 91,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "short gap"
+   ],
+   "dataset_sha256": "a9abaf70af17684e88c1e12b4a3a48d0c17095fd591534db0a221ca86a5980e4",
+   "event_kinds": [
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like"
+   ],
+   "event_times_s": [
+    71.572,
+    129.733,
+    158.101,
+    193.587,
+    252.142,
+    308.74,
+    337.79,
+    366.686,
+    430.288,
+    463.931
+   ],
+   "holdout_id": "SIM_FL_EVAL_01",
+   "mirrors_training_site_condition": "SIM_FL_SITE_01",
+   "participant_id": "SIM_P000202",
+   "seed": 20261010,
+   "session_id": "SIM_S_FLEVAL_01_000001"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 2,
+    "VALID": 91,
+    "excluded_not_valid": 2,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 72,
+    "synthetic_positive": 19,
+    "trainable": 91,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "long gap"
+   ],
+   "dataset_sha256": "6947dbbeafa2c896a849e62131becac5c62265dae73e85ac8e1ea7fa98645179",
+   "event_kinds": [
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like"
+   ],
+   "event_times_s": [
+    39.713,
+    69.08,
+    101.73,
+    130.724,
+    218.869,
+    249.571,
+    276.386,
+    403.125,
+    432.706,
+    457.243
+   ],
+   "holdout_id": "SIM_FL_EVAL_02",
+   "mirrors_training_site_condition": "SIM_FL_SITE_02",
+   "participant_id": "SIM_P000203",
+   "seed": 20261011,
+   "session_id": "SIM_S_FLEVAL_02_000001"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 4,
+    "VALID": 89,
+    "excluded_not_valid": 4,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 69,
+    "synthetic_positive": 20,
+    "trainable": 89,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "sensor dropout"
+   ],
+   "dataset_sha256": "bb6641c48785abbd40561b875ba87527ecf0717a159366a1885703cdfafcbca0",
+   "event_kinds": [
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like"
+   ],
+   "event_times_s": [
+    38.733,
+    66.925,
+    130.569,
+    163.326,
+    192.462,
+    223.726,
+    278.208,
+    312.042,
+    367.792,
+    398.444
+   ],
+   "holdout_id": "SIM_FL_EVAL_03",
+   "mirrors_training_site_condition": "SIM_FL_SITE_03",
+   "participant_id": "SIM_P000204",
+   "seed": 20261012,
+   "session_id": "SIM_S_FLEVAL_03_000001"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 3,
+    "VALID": 90,
+    "excluded_not_valid": 3,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 72,
+    "synthetic_positive": 18,
+    "trainable": 90,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "clipping"
+   ],
+   "dataset_sha256": "d490f5e931426f5cff3e137ee91608514f5c1fb54f2ea5db18eee7081deb27b5",
+   "event_kinds": [
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like"
+   ],
+   "event_times_s": [
+    43.854,
+    70.266,
+    97.537,
+    222.231,
+    283.137,
+    311.506,
+    341.661,
+    368.78,
+    402.701,
+    461.838
+   ],
+   "holdout_id": "SIM_FL_EVAL_04",
+   "mirrors_training_site_condition": "SIM_FL_SITE_04",
+   "participant_id": "SIM_P000205",
+   "seed": 20261013,
+   "session_id": "SIM_S_FLEVAL_04_000001"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "missing PPG/context"
+   ],
+   "dataset_sha256": "3bbbb9b29cd1146bfabb97cfc46ca26bc99c080b8d1319ad63bcc30489f4fc8f",
+   "event_kinds": [
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like"
+   ],
+   "event_times_s": [
+    41.013,
+    67.015,
+    97.752,
+    189.929,
+    219.86,
+    276.52,
+    306.827,
+    339.218,
+    372.796,
+    457.082
+   ],
+   "holdout_id": "SIM_FL_EVAL_05",
+   "mirrors_training_site_condition": "SIM_FL_SITE_05",
+   "participant_id": "SIM_P000206",
+   "seed": 20261014,
+   "session_id": "SIM_S_FLEVAL_05_000001"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "invalid SpO2/context",
+    "ECG/PPG rate disagreement"
+   ],
+   "dataset_sha256": "48e044768d9919baec29111a24f843b18085f07e025d3a2c9bb1274c4206a02a",
+   "event_kinds": [
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like"
+   ],
+   "event_times_s": [
+    38.621,
+    70.63,
+    131.9,
+    158.04,
+    189.47,
+    220.944,
+    276.971,
+    313.986,
+    399.44,
+    459.305
+   ],
+   "holdout_id": "SIM_FL_EVAL_06",
+   "mirrors_training_site_condition": "SIM_FL_SITE_06",
+   "participant_id": "SIM_P000207",
+   "seed": 20261015,
+   "session_id": "SIM_S_FLEVAL_06_000001"
+  },
+  {
+   "counts": {
+    "DEGRADED": 2,
+    "UNUSABLE": 8,
+    "VALID": 83,
+    "excluded_not_valid": 10,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 67,
+    "synthetic_positive": 16,
+    "trainable": 83,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "mixed fault/context session",
+    "short gap",
+    "long gap",
+    "sensor dropout",
+    "clipping",
+    "missing PPG/context",
+    "invalid SpO2/context",
+    "ECG/PPG rate disagreement"
+   ],
+   "dataset_sha256": "059fe4a7391ddd1b2166bd9e4300e705d7736527ed4adc88edf115f980181b97",
+   "event_kinds": [
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like",
+    "F-like",
+    "S-like",
+    "V-like"
+   ],
+   "event_times_s": [
+    67.041,
+    98.554,
+    126.843,
+    217.256,
+    253.222,
+    277.161,
+    308.646,
+    401.534,
+    430.839,
+    456.65
+   ],
+   "holdout_id": "SIM_FL_EVAL_07",
+   "mirrors_training_site_condition": "SIM_FL_SITE_07",
+   "participant_id": "SIM_P000208",
+   "seed": 20261016,
+   "session_id": "SIM_S_FLEVAL_07_000001"
+  }
+ ],
+ "training_participants_excluded": [
+  "SIM_P000101",
+  "SIM_P000102",
+  "SIM_P000103",
+  "SIM_P000104",
+  "SIM_P000105",
+  "SIM_P000106",
+  "SIM_P000107",
+  "SIM_P000108"
+ ],
+ "training_seeds_excluded": [
+  20260927,
+  20260928,
+  20260929,
+  20260930,
+  20260931,
+  20260932,
+  20260933,
+  20260934
+ ]
+}
