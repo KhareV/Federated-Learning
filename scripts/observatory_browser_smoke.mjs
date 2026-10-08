@@ -151,13 +151,50 @@ for (const width of [1024, 768]) {
     responsive.push({ width, route, overflow: await evaluate(`document.documentElement.scrollWidth>innerWidth`) });
   }
 }
+
+// Workstream C: frozen scientific evidence, model/calibration, provenance and scenario lab.
+await viewport(1440);
+await navigate('/app/observatory/evidence');
+await wait(`document.querySelectorAll('[data-testid="experiment-matrix"] tbody tr').length === 20 && document.body.innerText.includes('matching')`, 90000);
+const evidencePage = await evaluate(`(()=>({rows:document.querySelectorAll('[data-testid="experiment-matrix"] tbody tr').length,frozen:document.body.innerText.includes('FROZEN RESEARCH EVIDENCE'),curves:document.querySelectorAll('figure svg').length,confusion:!!document.querySelector('[data-testid="confusion"]'),pairs:document.querySelectorAll('[data-testid="fedprox-pairs"] tbody tr').length,noPValues:document.body.innerText.includes('NOT_COMPUTED'),notCandidate:!/CAPSTONE_FL_CANDIDATE/.test(document.body.innerText),workbench:!!document.querySelector('[data-testid="model-workbench"]'),overflow:document.documentElement.scrollWidth>innerWidth}))()`);
+await screenshot('c_scientific_evidence_1440');
+await evaluate(`document.querySelectorAll('.controls button')[1]?.click()`); await wait(`document.body.innerText.includes('POST-FREEZE EXTERNAL FL SECOND-LOOK') && document.body.innerText.includes('matching')`, 60000);
+const incart = await evaluate(`document.querySelector('[data-testid="population-note"]')?.innerText.includes('not untouched validation')`);
+await viewport(390); await sleep(400);
+const evidenceMobile = await evaluate(`document.documentElement.scrollWidth>innerWidth`);
+await screenshot('c_scientific_evidence_390');
+await viewport(1440);
+await navigate('/app/observatory/model');
+await wait(`!!document.querySelector('[data-testid="architecture-flow"]') && !!document.querySelector('[data-testid="calibration-flow"]') && !!document.querySelector('[data-testid="explainability"] svg')`, 90000);
+const modelPage = await evaluate(`(()=>({xai:!!document.querySelector('[data-testid="explainability"] svg'),xaiLabel:document.body.innerText.includes('never a confirmed clinical cause')||document.body.innerText.includes('not a causal'),params:document.body.innerText.includes('57,553'),calibration:document.body.innerText.includes('MIT-BIH SOURCE-DOMAIN CALIBRATION ONLY'),temperature:document.body.innerText.includes('52.882619'),hypothetical:document.body.innerText.includes('HYPOTHETICAL ARITHMETIC'),reliability:document.querySelectorAll('.rel svg').length,overflow:document.documentElement.scrollWidth>innerWidth}))()`);
+await screenshot('c_model_calibration_1440');
+await viewport(390); await sleep(400);
+const modelMobile = await evaluate(`document.documentElement.scrollWidth>innerWidth`);
+await screenshot('c_model_calibration_390');
+await viewport(1440);
+await navigate('/app/observatory/provenance');
+await wait(`!!document.querySelector('[data-testid="reproducibility"]') && document.querySelectorAll('[data-testid="boundaries"] li').length >= 10`, 90000);
+const provenance = await evaluate(`(()=>({commit:/[0-9a-f]{40}/.test(document.querySelector('[data-testid="reproducibility"]').innerText),chronology:document.querySelectorAll('[data-testid="chronology"] li').length,boundaries:document.querySelectorAll('[data-testid="boundaries"] li').length,missing:document.body.innerText.includes('MISSING'),bothDecisions:document.body.innerText.includes('MODEL_V2_NOT_PROMOTED_RELEASE_CI')&&document.body.innerText.includes('SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED'),overflow:document.documentElement.scrollWidth>innerWidth}))()`);
+await screenshot('c_provenance_1440');
+await viewport(390); await sleep(400);
+const provenanceMobile = await evaluate(`document.documentElement.scrollWidth>innerWidth`);
+await screenshot('c_provenance_390');
+await viewport(1440);
+await navigate('/app/observatory/scenarios');
+await wait(`!!document.querySelector('[data-testid="fault-timeline"]') && !!document.querySelector('[data-testid="lab-window"]')`, 120000);
+const lab = await evaluate(`(()=>({segments:document.querySelectorAll('[data-testid="fault-timeline"] .bar > div').length,sourceTime:document.body.innerText.includes('simulated source time'),quality:!!document.querySelector('.q'),notControlled:document.body.innerText.includes('not a controlled before/after'),overflow:document.documentElement.scrollWidth>innerWidth}))()`);
+await screenshot('c_scenario_lab_1440');
+await viewport(390); await sleep(400);
+const labMobile = await evaluate(`document.documentElement.scrollWidth>innerWidth`);
+await screenshot('c_scenario_lab_390');
+await viewport(1440);
 await cdp.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
 await viewport(390);
 await navigate('/app/observatory/tour');
 await wait(`document.body.innerText.includes('Follow the evidence, end to end')`);
 const reducedMotion = await evaluate(`matchMedia('(prefers-reduced-motion: reduce)').matches && !(document.documentElement.scrollWidth>innerWidth)`);
 const externalHosts = [...hosts].filter((x) => x !== '127.0.0.1' && x !== 'localhost');
-const report = { clean, ownedSession, capturedSession, gap, mobile, federation, matrix, federationMobile, flWindow, flWindowMobile, researchRecord, researchRecordMobile, tour, tourMobile, responsive, reducedMotion, externalHosts, errors,
+const report = { evidencePage, incart, evidenceMobile, modelPage, modelMobile, provenance, provenanceMobile, lab, labMobile, clean, ownedSession, capturedSession, gap, mobile, federation, matrix, federationMobile, flWindow, flWindowMobile, researchRecord, researchRecordMobile, tour, tourMobile, responsive, reducedMotion, externalHosts, errors,
   passed: clean.h1 === 'Follow one signal through the system' && clean.stages === 5 && clean.cursors === 5 && clean.pinnedCodeRefs === 5 && clean.commit === 'dff28f6a7b7bd527def21cb9fd95d682aa60a667' && clean.quality && !clean.overflow
     && (!sessionAvailable || (ownedSession.model && ownedSession.calibration && ownedSession.technical && !ownedSession.withheld))
     && (!captureSession || (capturedSession?.classification && capturedSession?.model && capturedSession?.stages === 5 && !capturedSession?.overflow && !capturedSession?.mobileOverflow))
@@ -170,6 +207,10 @@ const report = { clean, ownedSession, capturedSession, gap, mobile, federation, 
     && !flWindow.overflow && !flWindowMobile
     && researchRecord.train && researchRecord.actualSignal && researchRecord.annotationUnavailable && researchRecord.splitBoundary && !researchRecord.overflow && !researchRecordMobile
     && tour.steps === 16 && tour.loaded && !tour.overflow && !tourMobile
+    && evidencePage.rows === 20 && evidencePage.frozen && evidencePage.curves >= 2 && evidencePage.confusion && evidencePage.pairs > 0 && evidencePage.noPValues && evidencePage.notCandidate && evidencePage.workbench && !evidencePage.overflow && incart && !evidenceMobile
+    && modelPage.xai && modelPage.xaiLabel && modelPage.params && modelPage.calibration && modelPage.temperature && modelPage.hypothetical && modelPage.reliability === 2 && !modelPage.overflow && !modelMobile
+    && provenance.commit && provenance.chronology === 7 && provenance.boundaries === 10 && !provenance.missing && provenance.bothDecisions && !provenance.overflow && !provenanceMobile
+    && lab.segments === 6 && lab.sourceTime && lab.quality && lab.notControlled && !lab.overflow && !labMobile
     && responsive.every((item) => !item.overflow) && reducedMotion
     && !externalHosts.length && !errors.length };
 writeFileSync(`${output}/browser_smoke.json`, JSON.stringify(report, null, 2) + '\n');

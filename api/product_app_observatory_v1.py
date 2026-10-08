@@ -24,6 +24,7 @@ from product.devices.scenarios import TimingMode, load_scenarios
 from product.federation.artifact_store import DEFAULT_ROOT as DEFAULT_FEDERATION_ROOT
 from product.history.models import ContextSnapshotPayload, InferencePayload
 from product.models.candidate_artifacts import DEFAULT_ROOT as DEFAULT_CANDIDATE_ROOT
+from product.observatory import evidence
 from product.observatory.acceptance_capture import install as install_acceptance_capture
 from product.observatory.federation import (
     FlClientWindowTrace,
@@ -155,6 +156,27 @@ def create_product_app_observatory_v1(
                                    spec.duration_s * 1_000_000 - EMIT_MARGIN_US,
                                    CADENCE_US)),
         ) for key, spec in sorted(scenarios.items())]
+
+    @app.get(f"{PREFIX}/scenarios/{{scenario_id}}/timeline")
+    async def scenario_timeline(request: Request, scenario_id: str) -> dict[str, Any]:
+        await identity(request)
+        spec = scenarios.get(scenario_id)
+        if spec is None:
+            raise ProductError(ProductErrorCode.NOT_FOUND, "scenario not found")
+        edges = list(range(FIRST_RIGHT_EDGE_US, spec.duration_s * 1_000_000 - EMIT_MARGIN_US,
+                           CADENCE_US))
+        return {
+            "schema_version": "NHM_OBSERVATORY_SCENARIO_TIMELINE_V1",
+            "classification": "FROZEN_SCENARIO_DEFINITION",
+            "scenario_id": scenario_id, "duration_s": spec.duration_s,
+            "time_basis": "SIMULATED_SOURCE_TIME_NOT_WALL_CLOCK",
+            "segments": [{"name": seg.name, "start_s": seg.start_s, "end_s": seg.end_s,
+                          "ecg_fault": seg.ecg_fault, "context_mode": seg.context_mode}
+                         for seg in spec.segments],
+            "connection_events": list(spec.expected_connection_events),
+            "window_right_edges_s": [edge / 1_000_000 for edge in edges],
+            "window_length_s": 10, "window_cadence_s": CADENCE_US / 1_000_000,
+        }
 
     @app.get(f"{PREFIX}/scenarios/{{scenario_id}}/windows/{{window_index}}",
              response_model=WindowTrace)
@@ -327,5 +349,53 @@ def create_product_app_observatory_v1(
             return await bounded_call(inspect_train_window, record_id, window_index)
         except ValueError as error:
             raise ProductError(ProductErrorCode.NOT_FOUND, str(error)) from error
+
+    def _evidence_call(function: Callable[..., Any], *args: Any) -> Any:
+        try:
+            return function(*args)
+        except evidence.EvidenceError as error:
+            code = (ProductErrorCode.NOT_FOUND if str(error).startswith("UNKNOWN_")
+                    else ProductErrorCode.INTERNAL_PRODUCT_ERROR)
+            raise ProductError(code, str(error)) from error
+
+    @app.get(f"{PREFIX}/evidence/fl-eval")
+    async def evidence_fl_eval(request: Request) -> dict[str, Any]:
+        await identity(request)
+        return await asyncio.to_thread(_evidence_call, evidence.fl_eval_index)
+
+    @app.get(f"{PREFIX}/evidence/fl-eval/curves/{{dataset}}/{{model_id}}")
+    async def evidence_fl_curves(request: Request, dataset: str, model_id: str) -> dict[str, Any]:
+        await identity(request)
+        return await asyncio.to_thread(_evidence_call, evidence.fl_eval_curves, dataset, model_id)
+
+    @app.get(f"{PREFIX}/evidence/explainability")
+    async def evidence_explainability(request: Request) -> dict[str, Any]:
+        await identity(request)
+        return await asyncio.to_thread(_evidence_call, evidence.explainability_index)
+
+    @app.get(f"{PREFIX}/evidence/explainability/{{case_type}}")
+    async def evidence_explainability_case(request: Request, case_type: str) -> dict[str, Any]:
+        await identity(request)
+        return await asyncio.to_thread(_evidence_call, evidence.explainability_case, case_type)
+
+    @app.get(f"{PREFIX}/evidence/boundaries")
+    async def evidence_boundaries(request: Request) -> dict[str, Any]:
+        await identity(request)
+        return evidence.boundaries()
+
+    @app.get(f"{PREFIX}/model/architecture")
+    async def model_architecture(request: Request) -> dict[str, Any]:
+        await identity(request)
+        return await asyncio.to_thread(_evidence_call, evidence.architecture)
+
+    @app.get(f"{PREFIX}/model/calibration")
+    async def model_calibration(request: Request) -> dict[str, Any]:
+        await identity(request)
+        return await asyncio.to_thread(_evidence_call, evidence.calibration)
+
+    @app.get(f"{PREFIX}/reproducibility")
+    async def reproducibility(request: Request) -> dict[str, Any]:
+        await identity(request)
+        return await asyncio.to_thread(_evidence_call, evidence.reproducibility)
 
     return app

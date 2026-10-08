@@ -472,7 +472,7 @@ def test_frozen_cohort_hash_fails_closed_on_tamper(tmp_path: Path, monkeypatch) 
         federation.frozen_cohort()
 
 
-def test_api_extension_adds_eight_read_only_and_two_opt_in_capture_routes(tmp_path: Path) -> None:
+def test_api_extension_adds_only_the_documented_observatory_routes(tmp_path: Path) -> None:
     shared = dict(
         store=CapstoneSqliteStore(tmp_path / "product.sqlite3"),
         identity_resolver=cap003_test_identity_resolver, auth_description=DESCRIPTION,
@@ -498,4 +498,75 @@ def test_api_extension_adds_eight_read_only_and_two_opt_in_capture_routes(tmp_pa
          ("GET",)),
         ("/product/v1/observatory/sessions/{session_id}/capture/{window_index}", ("POST",)),
         ("/product/v1/observatory/sessions/{session_id}/capture", ("GET",)),
+        ("/product/v1/observatory/scenarios/{scenario_id}/timeline", ("GET",)),
+        ("/product/v1/observatory/evidence/fl-eval", ("GET",)),
+        ("/product/v1/observatory/evidence/fl-eval/curves/{dataset}/{model_id}", ("GET",)),
+        ("/product/v1/observatory/evidence/boundaries", ("GET",)),
+        ("/product/v1/observatory/evidence/explainability", ("GET",)),
+        ("/product/v1/observatory/evidence/explainability/{case_type}", ("GET",)),
+        ("/product/v1/observatory/model/architecture", ("GET",)),
+        ("/product/v1/observatory/model/calibration", ("GET",)),
+        ("/product/v1/observatory/reproducibility", ("GET",)),
     }
+
+
+def test_frozen_evidence_is_verified_recomputable_and_not_about_the_candidate(monkeypatch) -> None:
+    from product.observatory import evidence
+
+    index = evidence.fl_eval_index()
+    assert {name: len(item["models"]) for name, item in index["datasets"].items()} == {
+        "INTERNAL_TEST": 20, "INCART": 20}
+    internal = index["datasets"]["INTERNAL_TEST"]
+    assert internal["clusters"] == 6 and internal["bootstrap"]["p_values"] == "NOT_COMPUTED"
+    assert all(not model["model_id"].startswith("CAPSTONE_FL_CANDIDATE")
+               for model in internal["models"])
+    curves = evidence.fl_eval_curves("INTERNAL_TEST", "V2_FEDAVG_IID")
+    assert curves["recomputed_matches_frozen_point_metrics"] is True
+    assert sum(curves["confusion_at_0_5"].values()) == curves["windows"]
+    with pytest.raises(evidence.EvidenceError, match="UNKNOWN_EVIDENCE_MODEL"):
+        evidence.fl_eval_curves("INTERNAL_TEST", "CAPSTONE_FL_CANDIDATE_0001")
+    architecture = evidence.architecture()
+    assert architecture["parameter_count"] == 57_553 and architecture["output_shape"] == [1, 1]
+    calibration = evidence.calibration()
+    assert calibration["constants"]["temperature"] == 52.88261929727761
+    assert calibration["constants"]["threshold"] == 0.5101937262006424
+    gallery = evidence.boundaries()
+    assert all(item["exists"] and item["sha256"]
+               for item in (*gallery["boundaries"], *gallery["chronology"]))
+    zeroed = {key: "0" * 64 for key in evidence._hash_manifest()}
+    monkeypatch.setattr(evidence, "_hash_manifest", lambda: zeroed)
+    evidence._statistics.cache_clear()
+    with pytest.raises(evidence.EvidenceError, match="EVIDENCE_HASH_MISMATCH"):
+        evidence.fl_eval_index()
+    evidence._statistics.cache_clear()
+
+
+def test_scenario_timeline_is_the_frozen_definition_in_source_time(tmp_path: Path) -> None:
+    app = create_product_app_observatory_v1(
+        store=CapstoneSqliteStore(tmp_path / "product.sqlite3"),
+        identity_resolver=cap003_test_identity_resolver, auth_description=DESCRIPTION,
+        federation_artifact_root=tmp_path / "federation", candidate_root=tmp_path / "candidates",
+        auto_resume=False)
+    with TestClient(app) as client:
+        url = "/product/v1/observatory/scenarios/MIXED_MONITORING_SESSION/timeline"
+        assert client.get(url).status_code == 401
+        body = client.get(url, headers=USER_A).json()
+        assert body["time_basis"] == "SIMULATED_SOURCE_TIME_NOT_WALL_CLOCK"
+        names = [seg["name"] for seg in body["segments"]]
+        assert names[:3] == ["clean", "ppg_missing", "invalid_spo2"]
+        assert body["window_right_edges_s"][0] == 15.0 and body["window_cadence_s"] == 5.0
+        assert body["window_right_edges_s"][-1] <= body["duration_s"]
+        missing = "/product/v1/observatory/scenarios/NOT_A_SCENARIO/timeline"
+        assert client.get(missing, headers=USER_A).status_code == 404
+
+
+def test_explainability_cases_are_hash_verified_and_labeled_non_causal() -> None:
+    from product.observatory import evidence
+
+    index = evidence.explainability_index()
+    assert {case["case_type"] for case in index["cases"]} == {"TP", "TN", "FP", "FN"}
+    assert "not a causal" in " ".join(index["limitations"])
+    case = evidence.explainability_case("TP")
+    assert len(case["model_input"]) == 2500 and case["classification"] == "FROZEN_RESEARCH_EVIDENCE"
+    with pytest.raises(evidence.EvidenceError, match="UNKNOWN_EVIDENCE_CASE"):
+        evidence.explainability_case("../../etc/passwd")

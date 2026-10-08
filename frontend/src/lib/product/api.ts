@@ -29,10 +29,12 @@ import {
 } from './federation/types';
 import { parseSessionSummary, parseSessionTimeline, type SessionSummary, type SessionTimeline } from './history/types';
 import { parseFlResearchEvidence, parseMlResearchEvidence, type FlResearchEvidence, type MlResearchEvidence } from './research/types';
-import { parseCaptureArm, parseScenarioList, parseWindowTrace,
-	type CaptureArm, type ScenarioInfo, type WindowTrace } from './observatory/types';
+import { parseCaptureArm, parseScenarioTimeline, parseScenarioList, parseWindowTrace,
+	type CaptureArm, type ScenarioInfo, type ScenarioTimeline, type WindowTrace } from './observatory/types';
 import { parseFlClientWindowTrace, parseFrozenCohort, parseRunContributions,
 	type FlClientWindowTrace, type FrozenCohort, type RunContributions } from './observatory/federation';
+import { parseArchitecture, parseBoundaries, parseCalibration, parseFlCurves, parseFlEval, parseReproducibility, parseXaiCase, parseXaiIndex,
+	type XaiCase, type XaiIndex, type Architecture, type Boundaries, type Calibration, type FlCurves, type FlEval, type Reproducibility } from './observatory/evidence';
 import { parseResearchRecords, parseResearchWindow,
 	type ResearchRecord, type ResearchWindow } from './observatory/research';
 
@@ -114,6 +116,15 @@ export interface ProductClient {
 	observatoryResearchWindow(recordId: string, windowIndex: number): Promise<ResearchWindow>;
 	observatoryArmSessionCapture(sessionId: string, windowIndex: number): Promise<CaptureArm>;
 	observatoryCapturedSessionWindow(sessionId: string): Promise<WindowTrace>;
+	observatoryScenarioTimeline(scenarioId: string): Promise<ScenarioTimeline>;
+	observatoryFlEval(): Promise<FlEval>;
+	observatoryFlCurves(dataset: string, modelId: string): Promise<FlCurves>;
+	observatoryExplainability(): Promise<XaiIndex>;
+	observatoryExplainabilityCase(caseType: string): Promise<XaiCase>;
+	observatoryArchitecture(): Promise<Architecture>;
+	observatoryCalibration(): Promise<Calibration>;
+	observatoryBoundaries(): Promise<Boundaries>;
+	observatoryReproducibility(): Promise<Reproducibility>;
 	startSession(sessionId: string): Promise<MonitoringSession>;
 	stopSession(sessionId: string): Promise<MonitoringSession>;
 	// CAPSTONE_FEDERATION_PRODUCT_CLIENT_V1 (CAP-008): CAP-007 routes only
@@ -223,6 +234,16 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 			`/observatory/sessions/${enc(id)}/capture/${enc(String(index))}`)),
 		observatoryCapturedSessionWindow: async (id) => parseWindowTrace(await call<unknown>('GET',
 			`/observatory/sessions/${enc(id)}/capture`)),
+		observatoryScenarioTimeline: async (id) => parseScenarioTimeline(await call<unknown>('GET', `/observatory/scenarios/${enc(id)}/timeline`)),
+		observatoryFlEval: async () => parseFlEval(await call<unknown>('GET', '/observatory/evidence/fl-eval')),
+		observatoryFlCurves: async (dataset, modelId) => parseFlCurves(await call<unknown>('GET',
+			`/observatory/evidence/fl-eval/curves/${enc(dataset)}/${enc(modelId)}`)),
+		observatoryExplainability: async () => parseXaiIndex(await call<unknown>('GET', '/observatory/evidence/explainability')),
+		observatoryExplainabilityCase: async (c) => parseXaiCase(await call<unknown>('GET', `/observatory/evidence/explainability/${enc(c)}`)),
+		observatoryArchitecture: async () => parseArchitecture(await call<unknown>('GET', '/observatory/model/architecture')),
+		observatoryCalibration: async () => parseCalibration(await call<unknown>('GET', '/observatory/model/calibration')),
+		observatoryBoundaries: async () => parseBoundaries(await call<unknown>('GET', '/observatory/evidence/boundaries')),
+		observatoryReproducibility: async () => parseReproducibility(await call<unknown>('GET', '/observatory/reproducibility')),
 		startSession: (id) => call('POST', `/sessions/${enc(id)}/start`),
 		stopSession: (id) => call('POST', `/sessions/${enc(id)}/stop`),
 		federationOverview: () => call('GET', '/federation'),

@@ -1,5 +1,5 @@
 {
- "status": "PARTIAL_CONNECTED_E2E_USER_A_PASS_USER_B_ISOLATION_NOT_EXERCISED",
+ "status": "CONNECTED_CLERK_E2E_PASS_TWO_USERS",
  "credential_source": "ignored repository-root .env / external untracked users file; key values and passwords never logged or committed",
  "launcher": "scripts.run_observatory_clerk_connected (additive; accepted V1_9 bytes verified at entry commit dff28f6; legacy launcher UI preflight is expected to reject unaccepted Observatory frontend files)",
  "driver": "scripts/run_observatory_clerk_e2e.py",
@@ -15,9 +15,10 @@
   "global_clients_page": "0 MY EDGE CLIENT (unbound)",
   "sign_out": "returned to /sign-in; anonymous Observatory request 401; no DemoAuth fallback",
   "console_errors": 0,
-  "evidence_file": "reports/observatory/clerk_e2e/user_a_journey.json"
+  "evidence_file": "reports/observatory/clerk_e2e/observatory_clerk_e2e.json"
  },
- "user_b_isolation": "NOT_EXERCISED: the stored TEST user B credential was rejected by Clerk ('Password is incorrect'); retries were stopped immediately to avoid account lockout. Cross-user denial is covered by API-level tests (403/404) but not by a connected browser journey.",
- "two_user_ownership_connected": false,
- "connected_e2e_pass": false
+ "user_b_isolation": "PASS: fresh Clerk TEST user B (created through the Clerk backend API with the supplied TEST secret key, at the owner's request, after the previously stored B credential was rejected) got 403 on A's session capture, session window, capture arm, run and run contributions; A's run absent from B's run list; B's own cohort 200; B sees 0 MY EDGE CLIENT; no console errors.",
+ "two_user_ownership_connected": true,
+ "connected_e2e_pass": true,
+ "scope_note": "Covers the Observatory additive routes, owned live capture, LIVE_RUN accounting, owner binding, ownership isolation and sign-out. Not penetration testing or production security."
 }

@@ -158,3 +158,20 @@ export function parseWindowTrace(value: unknown): WindowTrace {
 		inference_evidence_status: string(o.inference_evidence_status, 'inference_evidence_status'),
 		claim_boundary: string(o.claim_boundary, 'claim_boundary'), limitations: array(o.limitations, string, 'limitations') };
 }
+
+export interface ScenarioTimeline {
+	scenario_id: string; duration_s: number; time_basis: string;
+	segments: { name: string; start_s: number; end_s: number; ecg_fault: string | null; context_mode: string }[];
+	connection_events: string[]; window_right_edges_s: number[]; window_length_s: number; window_cadence_s: number;
+}
+export function parseScenarioTimeline(value: unknown): ScenarioTimeline {
+	const bad = (): never => { throw new Error('MALFORMED_OBSERVATORY_TIMELINE'); };
+	const r = (value ?? bad()) as Record<string, unknown>;
+	if (r.classification !== 'FROZEN_SCENARIO_DEFINITION' || r.time_basis !== 'SIMULATED_SOURCE_TIME_NOT_WALL_CLOCK') bad();
+	const list = (v: unknown): unknown[] => (Array.isArray(v) ? v : bad());
+	const n = (v: unknown): number => (typeof v === 'number' && Number.isFinite(v) ? v : bad());
+	const t = (v: unknown): string => (typeof v === 'string' ? v : bad());
+	return { scenario_id: t(r.scenario_id), duration_s: n(r.duration_s), time_basis: t(r.time_basis),
+		segments: list(r.segments).map((x) => { const g = x as Record<string, unknown>; return { name: t(g.name), start_s: n(g.start_s), end_s: n(g.end_s), ecg_fault: g.ecg_fault === null ? null : t(g.ecg_fault), context_mode: t(g.context_mode) }; }),
+		connection_events: list(r.connection_events).map(t), window_right_edges_s: list(r.window_right_edges_s).map(n), window_length_s: n(r.window_length_s), window_cadence_s: n(r.window_cadence_s) };
+}

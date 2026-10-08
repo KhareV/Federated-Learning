@@ -95,6 +95,8 @@ if (MODE === 'a-journey') {
 	await goto('/app/observatory/federation'); await waitFor(`document.querySelectorAll('.roster button').length === 8`, 90000);
 	await ev(`(() => { const d = document.querySelector('details.matrix'); if (d) d.open = true; })()`); await sleep(800);
 	step('observatory-federation', { roster: await ev(`document.querySelectorAll('.roster button').length`), directLabel: await ev(`document.body.innerText.includes('directly observed')`), overflow: await ev('document.documentElement.scrollWidth > innerWidth') }); await shot('observatory_federation_1440');
+	await ev(`document.querySelector('[data-testid="fedavg-math"]')?.scrollIntoView()`);
+	step('aggregation-views', { math: await ev(`!!document.querySelector('[data-testid="fedavg-math"]')`), chained: await ev(`document.querySelectorAll('[data-testid="state-lineage"] li').length`), chainedOk: await ev(`(document.querySelector('[data-testid="state-lineage"]')?.innerText.match(/starts from the committed state/g) || []).length`), whyFast: await ev(`(document.querySelector('[data-testid="why-fast"]')?.innerText ?? '').includes('24 local training calls')`), unchainedMarks: await ev(`(document.body.innerText.match(/does not match the previous committed state/g) || []).length`) }); await shot('observatory_aggregation_1440');
 	await goto('/app/federation/clients'); await waitFor(`document.querySelectorAll('[data-client]').length === 8`, 60000);
 	step('global-clients-unbound', { myEdge: await ev(`(document.body.innerText.match(/MY EDGE CLIENT/g) || []).length`) });
 	// Sign-out must end backend access; no silent DemoAuth fallback.

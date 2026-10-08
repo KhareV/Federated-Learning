@@ -1,0 +1,171 @@
+{
+ "a": {
+  "console_errors": [],
+  "elapsed_s": 64,
+  "known": {
+   "run_id": "FEDRUN-DE0EEAA1121C",
+   "session_id": "SESS-dbf9efd3c2594fcca16464ffbd74e091"
+  },
+  "mode": "a-journey",
+  "steps": [
+   {
+    "clerkGlobal": false,
+    "clientTrustVerificationUsed": true,
+    "me": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "status": 200,
+     "user_id_is_clerk_shaped": true,
+     "user_id_is_demo": false
+    },
+    "step": "signin",
+    "system": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "model_id": "MODEL_V2_FINAL"
+    }
+   },
+   {
+    "auth_provider": "CLERK",
+    "calibration_id": "CAL_V2",
+    "demo_mode": false,
+    "model_id": "MODEL_V2_FINAL",
+    "step": "system"
+   },
+   {
+    "arm_status": 200,
+    "capture_status": 200,
+    "classification": "CAPTURED_LIVE_PREPROCESSING",
+    "persisted_model": "MODEL_V2_FINAL",
+    "session_state": "COMPLETED",
+    "stages": 5,
+    "step": "monitoring"
+   },
+   {
+    "charts": 5,
+    "overflow": false,
+    "step": "observatory-page"
+   },
+   {
+    "per_round": [
+     {
+      "accepted": 8,
+      "basis": "DIRECT_OBSERVED_COORDINATOR_MAP",
+      "clients": 8,
+      "diagnostics": 8,
+      "examples": 723
+     },
+     {
+      "accepted": 8,
+      "basis": "DIRECT_OBSERVED_COORDINATOR_MAP",
+      "clients": 8,
+      "diagnostics": 8,
+      "examples": 723
+     },
+     {
+      "accepted": 8,
+      "basis": "DIRECT_OBSERVED_COORDINATOR_MAP",
+      "clients": 8,
+      "diagnostics": 8,
+      "examples": 723
+     }
+    ],
+    "rounds": 3,
+    "run_status": "COMPLETED",
+    "step": "federation",
+    "total_accepted": 24
+   },
+   {
+    "deployed": [
+     false
+    ],
+    "digests": [
+     "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
+    ],
+    "released": "MODEL_V2_FINAL",
+    "step": "candidate"
+   },
+   {
+    "myEdge": 1,
+    "owner": "SIM_FL_SITE_00",
+    "ownerCards": 1,
+    "peers": 7,
+    "step": "owner-bound-live"
+   },
+   {
+    "directLabel": true,
+    "overflow": false,
+    "roster": 8,
+    "step": "observatory-federation"
+   },
+   {
+    "chained": 5,
+    "chainedOk": 2,
+    "math": true,
+    "step": "aggregation-views",
+    "unchainedMarks": 0,
+    "whyFast": true
+   },
+   {
+    "myEdge": 0,
+    "step": "global-clients-unbound"
+   },
+   {
+    "anonymous_observatory_status": 401,
+    "clicked": true,
+    "path": "/sign-in",
+    "step": "sign-out"
+   }
+  ],
+  "who": "A"
+ },
+ "b": {
+  "console_errors": [],
+  "elapsed_s": 20,
+  "mode": "b-isolation",
+  "steps": [
+   {
+    "clerkGlobal": false,
+    "clientTrustVerificationUsed": true,
+    "me": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "status": 200,
+     "user_id_is_clerk_shaped": true,
+     "user_id_is_demo": false
+    },
+    "step": "signin",
+    "system": {
+     "auth_provider": "CLERK",
+     "demo_mode": false,
+     "model_id": "MODEL_V2_FINAL"
+    }
+   },
+   {
+    "a_run_visible_in_b_list": false,
+    "b_is_clerk": true,
+    "own_cohort_status": 200,
+    "probes": {
+     "arm_capture": 403,
+     "run": 403,
+     "run_contributions": 403,
+     "session_capture": 403,
+     "session_window": 403
+    },
+    "step": "isolation"
+   },
+   {
+    "myEdge": 0,
+    "step": "b-federation-page"
+   }
+  ],
+  "who": "B"
+ },
+ "shutdown": {
+  "launcher_exit_code": 0,
+  "orphans": [
+   "UNKNOWN"
+  ]
+ },
+ "startup_s": 17.1
+}

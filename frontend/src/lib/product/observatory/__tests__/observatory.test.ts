@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { parseFlClientWindowTrace, parseFrozenCohort, parseRunContributions } from '../federation';
 import { parseResearchRecords } from '../research';
+import { parseCalibration, parseFlCurves, parseFlEval } from '../evidence';
 
 describe('Observatory evidence validation', () => {
 	it('rejects malformed cohort and run metadata instead of treating it as evidence', () => {
@@ -48,5 +49,19 @@ describe('Observatory evidence validation', () => {
 			source_kind: 'FROZEN_PROCESSED_RESEARCH_CACHE' };
 		expect(parseResearchRecords([item])).toHaveLength(1);
 		expect(() => parseResearchRecords([{ ...item, partition: 'INTERNAL_TEST' }])).toThrow();
+	});
+	it('parses frozen calibration with empty reliability bins and refuses unlabeled calibration', () => {
+		const bin = (count: number) => ({ lower: 0, upper: 0.1, count, mean_probability: count ? 0.05 : null, observed_positive_fraction: count ? 0.1 : null });
+		const base = { label: 'MIT-BIH SOURCE-DOMAIN CALIBRATION ONLY', constants: { temperature: 52.88, threshold: 0.51 }, probability_semantics: { raw_probability: 'r', source_domain_calibrated_probability: 'c' },
+			reliability: { method: 'EQUAL_WIDTH_10_BINS_V1', raw: [bin(0), bin(4)], temperature_scaled: [bin(2)] }, not_applicable_to: 'candidate', source: { calibration_sha256: 'a', reliability_sha256: 'b' } };
+		const parsed = parseCalibration(base);
+		expect(parsed.raw[0].observed_positive_fraction).toBe(0);
+		expect(parsed.raw[1].count).toBe(4);
+		expect(() => parseCalibration({ ...base, label: 'CALIBRATED FOR EVERYONE' })).toThrow('MALFORMED_OBSERVATORY_EVIDENCE');
+	});
+	it('only accepts evidence that declares its classification', () => {
+		expect(() => parseFlEval({ classification: 'SOMETHING_ELSE', datasets: {}, limitations: [] })).toThrow('MALFORMED_OBSERVATORY_EVIDENCE');
+		expect(parseFlEval({ classification: 'FROZEN_RESEARCH_EVIDENCE', datasets: {}, limitations: ['x'] }).limitations).toEqual(['x']);
+		expect(() => parseFlCurves({ classification: 'INVENTED_CURVE' })).toThrow('MALFORMED_OBSERVATORY_EVIDENCE');
 	});
 });

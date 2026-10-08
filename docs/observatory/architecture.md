@@ -29,3 +29,15 @@ Entry: `dff28f6a7b7bd527def21cb9fd95d682aa60a667` (clean and equal to `origin/ma
 `MODEL_V2_FINAL` is centrally trained and remains the monitoring default inside `SOFTWARE_SYSTEM_V2`. FL starts from `FL_INIT_V2` and creates sandbox-only engineering candidates. `AAMI_SVF_WINDOW_V1` scientific labels and `WEARABLE_SIM_EVENT_WINDOW_V1` synthetic engineering labels are different targets. `MODEL_V2_NOT_PROMOTED_RELEASE_CI` and `SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED` remain distinct decisions. `CAL_V2` is MIT-BIH source-domain only; SecAgg supports `PROTECTED_AGGREGATION_INTERFACE_ONLY`. No hardware, clinical, patient-specific, DP, anonymity, or hospital claim is introduced.
 
 The normal FL update envelope carries no raw ECG training tensor. The Observatory's bounded synthetic signal response is a **separate authenticated read-only inspection data flow**, not part of the normal FL update protocol. The original v1.9 UI lock, old scientific reports, and protected runtime/FL algorithms remain byte-identical.
+
+## Workstream C additions
+
+| Capability | Source | Observed kind | Boundary |
+|---|---|---|---|
+| FL metrics, intervals, curves | `reports/model_v2/v2_fl_eval_001/*` via `product/observatory/evidence.py` | Frozen evidence; curves are a descriptive recomputation cross-checked to the frozen point metrics | Scientific FL only; never attributed to the product candidate; no p-values |
+| Architecture shapes | `models/model_v2_architectures.py` | Zero-input shape trace of the real module | No weights or data; not clinical explanation |
+| Calibration | `artifacts/CAL_V2.json`, `reports/model_v2/v2_009/reliability.json` | Frozen evidence | MIT-BIH source domain only; not applied to the candidate |
+| Explainability cases | `reports/model_v2/v2_011/*` | Frozen evidence, hash-verified | Non-causal; four rule-selected cases |
+| Boundaries and chronology | Listed evidence files | Evidence paths with live SHA-256 | A report is evidence of a result, not proof of re-execution |
+| Scenario timeline | `product/devices/scenarios.py` | Frozen scenario definition (simulated source time) | No real-world hardware robustness claim |
+| Local training readouts | `product/observatory/acceptance_capture.py` (post-run sidecar) | Observer record, new LIVE_RUNs only | Not accuracy; absent for older runs |

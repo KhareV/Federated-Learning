@@ -1,4 +1,45 @@
 {
+  "evidencePage": {
+    "rows": 20,
+    "frozen": true,
+    "curves": 2,
+    "confusion": true,
+    "pairs": 5,
+    "noPValues": true,
+    "notCandidate": true,
+    "workbench": true,
+    "overflow": false
+  },
+  "incart": true,
+  "evidenceMobile": false,
+  "modelPage": {
+    "xai": true,
+    "xaiLabel": true,
+    "params": true,
+    "calibration": true,
+    "temperature": true,
+    "hypothetical": true,
+    "reliability": 2,
+    "overflow": false
+  },
+  "modelMobile": false,
+  "provenance": {
+    "commit": true,
+    "chronology": 7,
+    "boundaries": 10,
+    "missing": false,
+    "bothDecisions": true,
+    "overflow": false
+  },
+  "provenanceMobile": false,
+  "lab": {
+    "segments": 6,
+    "sourceTime": true,
+    "quality": true,
+    "notControlled": true,
+    "overflow": false
+  },
+  "labMobile": false,
   "clean": {
     "h1": "Follow one signal through the system",
     "stages": 5,
@@ -28,12 +69,7 @@
     "overflow": false
   },
   "matrix": {
-    "available": true,
-    "rows": 8,
-    "rounds": 3,
-    "attested": false,
-    "direct": true,
-    "unknown": false
+    "available": false
   },
   "federationMobile": {
     "overflow": false,

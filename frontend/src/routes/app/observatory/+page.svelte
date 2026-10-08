@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
+	import { downloadExport } from '$lib/product/observatory/export';
 	import { ProductApiError } from '$lib/product/api';
 	import type { ScenarioInfo, WindowTrace } from '$lib/product/observatory/types';
 	import SignalStageChart from '$lib/components/product/observatory/SignalStageChart.svelte';
@@ -15,6 +16,11 @@
 	let error = $state<string | null>(null);
 	let requestNumber = 0;
 	let captureRequested = $state(false);
+	let exportDigest = $state<string | null>(null);
+	async function exportTrace() {
+		if (!trace) return;
+		exportDigest = await downloadExport('window-trace', `${trace.window_id}`, trace.claim_boundary, 'Bounded copy of the displayed stage points (decimated for display); the underlying scientific arrays are not exported. No identities, tokens or research recordings are included.', trace);
+	}
 	const scenario = $derived(scenarios.find((s) => s.scenario_id === scenarioId) ?? null);
 	const selectedSession = $derived(store.sessions.find((s) => s.session_id === sessionId));
 	const maximum = $derived(Math.max(0, (scenario?.window_count ?? 1) - 1));
@@ -132,6 +138,7 @@
 <p><a href="/app/observatory/federation">Inspect all eight synthetic federation participants and their recorded contributions →</a></p>
 <p><a href="/app/observatory/research">Inspect an authorized MIT-BIH TRAIN research window →</a></p>
 <p><a href="/app/observatory/tour">Start the guided evidence journey →</a></p>
+<nav class="explore" aria-label="More Observatory views"><a href="/app/observatory/scenarios">Scenario and fault lab →</a><a href="/app/observatory/model">Model architecture and calibration →</a><a href="/app/observatory/evidence">Scientific evidence explorer (frozen metrics, curves, uncertainty) →</a><a href="/app/observatory/provenance">Provenance, decision history and known boundaries →</a></nav>
 
 <section class="controls" aria-label="Trace selection">
 	<label>SCENARIO
@@ -182,6 +189,7 @@
 		<article><span>05 / NORMALIZATION</span><h2>{trace.normalization.identity}</h2><p>Status: {trace.normalization.status}. {#if trace.normalization.mean !== null}Mean {trace.normalization.mean.toPrecision(7)}, population standard deviation {trace.normalization.std?.toPrecision(7)}, epsilon {trace.normalization.epsilon}.{:else}An unusable window is rejected before model input normalization.{/if}</p></article>
 	</section>
 	{#if trace.persisted_inference}<section class="inference"><span>06 / PERSISTED MODEL RESULT</span><h2>{trace.persisted_inference.monitoring_state}</h2><p>MODEL_V2_FINAL · CAL_V2 · {trace.persisted_inference.calibration_domain}. Raw sigmoid probability {trace.persisted_inference.raw_probability ?? 'unavailable'}; source-domain calibrated probability {trace.persisted_inference.source_domain_calibrated_probability ?? 'unavailable'}; fixed threshold {trace.persisted_inference.threshold ?? 'unavailable'}.</p><p><strong>RESEARCH TECHNICAL METADATA</strong> — not disease probability, diagnosis, or personal risk. The Observatory did not rerun inference.</p></section>{:else}<p class="not-available">No persisted model result is attached to this scenario-only reconstruction. Select an owned inferred session window to inspect its recorded result.</p>{/if}
+	<p class="exp"><button onclick={exportTrace}>Export this window as evidence JSON</button>{#if exportDigest} <small>Exported · SHA256 <code>{exportDigest.slice(0, 16)}…</code></small>{/if}</p>
 	<details class="evidence"><summary>TECHNICAL EVIDENCE & LIMITATIONS</summary><dl><div><dt>Trace classification</dt><dd>{trace.classification}</dd></div><div><dt>Source</dt><dd>{trace.source_kind} / {trace.scenario_id}</dd></div><div><dt>Normalization tensor digest</dt><dd>{trace.normalization.tensor_sha256 ?? 'NOT APPLIED'}</dd></div><div><dt>Context/inference basis</dt><dd>{trace.inference_evidence_status}</dd></div><div><dt>Claim boundary</dt><dd>{trace.claim_boundary}</dd></div></dl><p>Canonical source-code references at accepted entry commit <code>{sourceCommit}</code> (offline path references; no external link):</p><ul>{#each codeLinks as item}<li>{item.label} · <code>{item.path}</code></li>{/each}</ul><ul>{#each trace.limitations as item}<li>{item}</li>{/each}</ul></details>
 {/if}
 
@@ -200,4 +208,6 @@
 	select:focus-visible,input:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #fbbf24;outline-offset:2px}
 	@media(max-width:900px){.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.signal-grid{grid-template-columns:1fr}}
 	@media(max-width:620px){.controls,.facts,.summary{grid-template-columns:1fr}.window-control{grid-column:auto}.section-head{display:block}.stepper{flex-wrap:wrap}.stepper output{width:100%}.evidence dl div{grid-template-columns:1fr;gap:2px}}
+.explore{display:grid;gap:2px;margin:10px 0}.explore a{display:inline-flex;align-items:center;min-height:28px;color:#2bb8b0}
+.exp button{background:#0a0f1f;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);padding:6px 12px;min-height:32px;font:12px 'JetBrains Mono',monospace;cursor:pointer}
 </style>
