@@ -1,0 +1,107 @@
+{
+ "boundary_label": "SYNTHETIC ENGINEERING-EVENT CLASSIFICATION \u2014 NOT AAMI-SVF OR CLINICAL VALIDATION",
+ "label": "RECORDED VERIFIED RUN",
+ "live_link": {
+  "candidate_digest_equals_canonical": true,
+  "candidate_ids": [
+   "CAPSTONE_FL_CANDIDATE_0001"
+  ],
+  "candidate_state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+  "monitoring": {
+   "device_id": "NHM_LIVELINK_WEARABLE_00",
+   "inference_http_statuses": {
+    "200": 93
+   },
+   "records_seen": 172800,
+   "scenario_id": "FL_SITE_00_LIVE_LINK",
+   "scientific_trace": {
+    "record_count": 172800,
+    "records_sha256": "a12156b71113df951f3c63be1b64fd1e08ed37490de15a9a30714c24b282b0f4",
+    "window_count": 93,
+    "windows_samples_sha256": "27b0248c582fd7ed391be674d9c2c7c7c581581194e0a38328ba276931392016"
+   },
+   "session_id": "LIVELINK-LL0001",
+   "session_state": "COMPLETED"
+  },
+  "parity": {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "dataset_identical_to_canonical": true,
+   "dataset_sha256_canonical_site00": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+   "dataset_sha256_live": "fca4470983fef23dc5b90e760bd881325206c506e1518d266bba4fcd1bcdaf1a",
+   "label_contract": "WEARABLE_SIM_EVENT_WINDOW_V1",
+   "note": "Equality is an observation of this run, not an assumption; a mismatch would be reported, never hidden.",
+   "records_identical": true,
+   "records_sha256_monitored": "a12156b71113df951f3c63be1b64fd1e08ed37490de15a9a30714c24b282b0f4",
+   "records_sha256_regenerated": "a12156b71113df951f3c63be1b64fd1e08ed37490de15a9a30714c24b282b0f4",
+   "window_count_identical": true,
+   "window_samples_and_timestamps_identical": true,
+   "windows_monitored": 93,
+   "windows_regenerated": 93
+  },
+  "phase": "COMPLETED",
+  "run_id": "FEDRUN-LIVE0001",
+  "status": "COMPLETED"
+ },
+ "note": "Recorded output of an earlier verified execution; replayed for demonstration, not a fresh run.",
+ "sources": [
+  "reports/final_showcase/live_link/live_link_result.json",
+  "reports/final_showcase/synth_fl_eval/synth_fl_eval_results.json"
+ ],
+ "synthetic_states": {
+  "round_0": {
+   "AUPRC": 0.6355272222521033,
+   "AUROC": 0.738218094255246,
+   "F1": 0.0,
+   "FN": 153,
+   "FP": 0,
+   "TN": 570,
+   "TP": 0,
+   "recall": 0.0,
+   "specificity": 1.0
+  },
+  "round_1": {
+   "AUPRC": 0.6708242190797727,
+   "AUROC": 0.769613576424722,
+   "F1": 0.0,
+   "FN": 153,
+   "FP": 0,
+   "TN": 570,
+   "TP": 0,
+   "recall": 0.0,
+   "specificity": 1.0
+  },
+  "round_2": {
+   "AUPRC": 0.67564278938146,
+   "AUROC": 0.7834422657952069,
+   "F1": 0.0,
+   "FN": 153,
+   "FP": 0,
+   "TN": 570,
+   "TP": 0,
+   "recall": 0.0,
+   "specificity": 1.0
+  },
+  "round_3_candidate": {
+   "AUPRC": 0.6952567940769844,
+   "AUROC": 0.8134502923976608,
+   "F1": 0.3493150684931507,
+   "FN": 0,
+   "FP": 570,
+   "TN": 0,
+   "TP": 153,
+   "recall": 1.0,
+   "specificity": 0.0
+  }
+ }
+}

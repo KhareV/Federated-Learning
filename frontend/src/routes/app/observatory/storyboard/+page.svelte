@@ -68,7 +68,7 @@
 	{#if shown.candidate_state_digest}<p class="dim">Separate sandbox candidate {shown.candidate_ids?.join(', ')} · digest <code>{shown.candidate_state_digest.slice(0, 16)}…</code> · equals the canonical candidate digest: <b>{shown.candidate_digest_equals_canonical === null ? 'n/a' : shown.candidate_digest_equals_canonical ? 'yes (observed, not assumed)' : 'no'}</b> · not deployed.</p>{/if}
 	{/if}
 </section>
-<ul class="lanes">{#each Object.entries(LANE) as [k, v]}<li><b>{k}</b> {v}</li>{/each}</ul>
+<ul class="lanes">{#each Object.entries(LANE) as [k, v]}<li>{v}</li>{/each}</ul>
 <p class="dim"><a href="/app/observatory/outcomes">Scientific outcomes</a> · <a href="/app/observatory/federation">Federation contributions</a> · <a href="/app/observatory">Observatory</a></p>
 {/if}
 <style>

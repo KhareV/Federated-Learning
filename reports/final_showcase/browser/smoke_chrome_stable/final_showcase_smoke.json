@@ -1,0 +1,58 @@
+{
+ "outcomes": {
+  "matrixRows": 2,
+  "interpretations": 4,
+  "label": "SYNTHETIC ENGINEERING-EVENT CLASSIFICATION — NOT AAMI-SVF OR CLINICAL VALIDATION",
+  "frozen": "FROZEN RESEARCH EVIDENCE · SCIENTIFIC LANE B",
+  "evolutionPath": true,
+  "noSuperiority": true
+ },
+ "selectorChangesEvolution": true,
+ "fedproxRows": 1,
+ "outcomesMobileOverflow": false,
+ "steps": [
+  {
+   "lane": "A · MODEL_V2_FINAL + CAL_V2 monitoring",
+   "title": "1. Monitoring"
+  },
+  {
+   "lane": "C · Synthetic engineering FL (WEARABLE_SIM_EVENT_WINDOW_V1)",
+   "title": "2. SITE_00 eligible windows"
+  },
+  {
+   "lane": "C · Synthetic engineering FL (WEARABLE_SIM_EVENT_WINDOW_V1)",
+   "title": "3. Local batches"
+  },
+  {
+   "lane": "C · Synthetic engineering FL (WEARABLE_SIM_EVENT_WINDOW_V1)",
+   "title": "4. Eight updates"
+  },
+  {
+   "lane": "C · Synthetic engineering FL (WEARABLE_SIM_EVENT_WINDOW_V1)",
+   "title": "5. Weighted FedAvg"
+  },
+  {
+   "lane": "C · Synthetic engineering FL (WEARABLE_SIM_EVENT_WINDOW_V1)",
+   "title": "6. Global state"
+  },
+  {
+   "lane": "C · Synthetic engineering FL (WEARABLE_SIM_EVENT_WINDOW_V1)",
+   "title": "7. Measured synthetic metrics"
+  },
+  {
+   "lane": "B · Scientific FL (AAMI_SVF_WINDOW_V1)",
+   "title": "8. Frozen scientific outcomes"
+  }
+ ],
+ "recordedShown": "Recorded verified run: phase COMPLETED· run FEDRUN-LIVE0001· inference HTTP {\"200\":93}",
+ "live": {
+  "phase": "This session: phase COMPLETED· run FEDRUN-C1354CB477D3· inference HTTP {\"200\":93}",
+  "parity": "Records identical to an independent regeneration: yesMonitored windows: 93; window samples/timestamps identical: yesDataset identical to the canonical SITE_00 dataset: yes (observed) fca4470983fef23d…",
+  "blocked": "",
+  "card": "· run FEDRUN-C1354CB477D3· inference HTTP {\"200\":93}  Records identical to an independent regeneration: yesMonitored windows: 93; window samples/timestamps identical: yesDataset identical to the canonical SITE_00 dataset: yes (observed) fca4470983fef23d… Separate sandbox candidate CAPSTONE_FL_CANDIDATE_0001 · digest 3f0b7762ae7e05f2… · equals the canonical candidate digest: yes (observed, not assumed) · not deployed."
+ },
+ "storyboardMobileOverflow": false,
+ "externalHosts": [],
+ "errors": [],
+ "passed": true
+}

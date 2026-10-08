@@ -1,0 +1,67 @@
+{
+ "gates": {
+  "A_live_monitored_site00": {
+   "blocked_state_tested": true,
+   "candidate_digest_observed_equal_canonical": true,
+   "candidate_separate_id": true,
+   "completed": true,
+   "dataset_identity_observed": true,
+   "disabled_mode_digest_tested": true,
+   "inference_200_all_windows": true,
+   "records_identical": true,
+   "windows_identical": true
+  },
+  "B_synthetic_evaluation": {
+   "all_four_states_evaluated": true,
+   "boundary_label": true,
+   "digests_match_frozen_progression": true,
+   "holdout_windows": 723,
+   "negative_tests_present": true,
+   "protocol_matches_method_freeze_commit": true,
+   "results_after_method_freeze": true,
+   "separation_zero": true,
+   "undefined_reported_as_null": true
+  },
+  "C_scientific_outcomes": {
+   "four_interpretations": true,
+   "models": 40,
+   "no_superiority_verdict": true,
+   "round_logs_50_rounds": true,
+   "targets": true
+  },
+  "D_exports": {
+   "all_hashes_match": true,
+   "figures": 6,
+   "tables": 4
+  },
+  "E_browser": {
+   "chrome_for_testing": {
+    "errors": 0,
+    "external_hosts": 0,
+    "live_completed": true,
+    "passed": true
+   },
+   "chrome_stable": {
+    "errors": 0,
+    "external_hosts": 0,
+    "live_completed": true,
+    "passed": true
+   },
+   "not_tested": [
+    "firefox (not installed)",
+    "webkit/safari (remote automation disabled)"
+   ]
+  },
+  "F_documentation": {
+   "documents_present": true,
+   "recorded_run_present": true,
+   "reference_required_markers": 3,
+   "traceability_rows": 15
+  },
+  "protected_surface": {
+   "canonical_candidate_digest_in_frozen_progression": true,
+   "protected_surface_diff_against_entry": []
+  }
+ },
+ "status": "PASS"
+}

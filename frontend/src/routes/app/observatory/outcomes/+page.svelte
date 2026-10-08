@@ -75,7 +75,7 @@
 {/if}
 <section aria-label="Limitations"><h2>Preserved limitations</h2><ul>{#each bundle.limitations as l}<li>{l}</li>{/each}</ul></section>
 <p class="exp"><button onclick={() => void exportView()}>Export this view as evidence JSON</button>{#if exportDigest} <small>Exported · SHA256 <code>{exportDigest.slice(0, 16)}…</code></small>{/if}</p>
-<p class="dim">Publication figures and tables (SVG, PNG, CSV, JSON, hashes) are produced by <code>python -m final_showcase.figures</code> into <code>reports/final_showcase/publication/</code>. <a href="/app/observatory/evidence">Evidence explorer</a> · <a href="/app/observatory/storyboard">FL storyboard</a> · <a href="/app/observatory">Observatory</a></p>
+<p class="dim">Publication figures and tables (SVG, PNG, CSV, JSON provenance and hashes) are produced by the export command listed in the demo runbook. <a href="/app/observatory/evidence">Evidence explorer</a> · <a href="/app/observatory/storyboard">FL storyboard</a> · <a href="/app/observatory">Observatory</a></p>
 {/if}
 <style>
 	.eyebrow{color:#2bb8b0;font:10px 'JetBrains Mono',monospace;letter-spacing:.14em}h1{font:500 clamp(28px,4vw,42px) 'Space Grotesk',sans-serif;margin:8px 0}h2{font:500 18px 'Space Grotesk',sans-serif;margin:22px 0 8px}h3{font:500 14px 'Space Grotesk',sans-serif;margin:14px 0 6px}.lead{max-width:860px;color:#a7b8c9;line-height:1.6}.tag{display:inline-block;margin:0 0 10px;border:1px solid rgba(43,184,176,.5);padding:5px 10px;color:#9fe8e3;font:11px 'JetBrains Mono',monospace;letter-spacing:.1em}

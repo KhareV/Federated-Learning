@@ -1,0 +1,18 @@
+{
+ "browsers_tested": [
+  "chrome_stable",
+  "chrome_for_testing"
+ ],
+ "browsers_not_tested": {
+  "firefox": "not installed in this environment",
+  "webkit_safari": "Safari 'Allow remote automation' is disabled; enabling it requires a manual settings change"
+ },
+ "chrome_stable:final_showcase_smoke": {
+  "exit_code": 0,
+  "tail": ": yesMonitored windows: 93; window samples/timestamps identical: yesDataset identical to the canonical SITE_00 dataset: yes (observed) fca4470983fef23d\u2026 Separate sandbox candidate CAPSTONE_FL_CANDIDATE_0001 \u00b7 digest 3f0b7762ae7e05f2\u2026 \u00b7 equals the canonical candidate digest: yes (observed, not assumed) \u00b7 not deployed.\"},\"storyboardMobileOverflow\":false,\"externalHosts\":[],\"errors\":[],\"passed\":true}\n"
+ },
+ "chrome_for_testing:final_showcase_smoke": {
+  "exit_code": 0,
+  "tail": ": yesMonitored windows: 93; window samples/timestamps identical: yesDataset identical to the canonical SITE_00 dataset: yes (observed) fca4470983fef23d\u2026 Separate sandbox candidate CAPSTONE_FL_CANDIDATE_0002 \u00b7 digest 3f0b7762ae7e05f2\u2026 \u00b7 equals the canonical candidate digest: yes (observed, not assumed) \u00b7 not deployed.\"},\"storyboardMobileOverflow\":false,\"externalHosts\":[],\"errors\":[],\"passed\":true}\n"
+ }
+}

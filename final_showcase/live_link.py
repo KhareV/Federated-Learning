@@ -14,8 +14,10 @@ from __future__ import annotations
 import asyncio
 import dataclasses
 import hashlib
+import json
 import threading
 from collections.abc import Callable, Iterator
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -49,6 +51,10 @@ LABEL_CONTRACT = "WEARABLE_SIM_EVENT_WINDOW_V1"
 LINK_LABEL = "SYNTHETIC LIVE-MONITORED SITE_00 — ENGINEERING LINK, NOT CLINICAL EVIDENCE"
 DEVICE_ID = "NHM_LIVELINK_WEARABLE_00"
 OWNER = "LIVELINK_OWNER"
+
+
+def research_root() -> Path:
+    return Path(__file__).resolve().parents[1]
 
 
 class LiveLinkBlocked(RuntimeError):
@@ -230,7 +236,8 @@ async def run_live_link(*, service: Any, provider: LiveLinkCohortProvider, infer
         digest = service.registry.get_candidate(candidates[0]).state_digest if candidates else None
     finally:
         provider.disarm()
+    frozen = json.loads((research_root() / "reports/model_v2/v2_fl_005/federation_run.json").read_text())["state_progression"]["3"]["sha256"]
     return {"link_id": link_id, "link_label": LINK_LABEL, "status": str(final.status.value if hasattr(final.status, "value") else final.status), "run_id": run.run_id,
             "monitoring": {k: v for k, v in monitored.items() if k != "windows"}, "parity": evidence, "committed_digests": meta.get("committed_digests"),
             "round_base_digests": meta.get("round_base_digests"), "candidate_ids": candidates, "candidate_state_digest": digest,
-            "site00_source": "LIVE_MONITORED_WINDOWS", "peers": "SEVEN_EXISTING_SYNTHETIC_CLIENTS", "production_deployed": False}
+            "canonical_candidate_digest": frozen, "candidate_digest_equals_canonical": (digest == frozen) if digest else None, "site00_source": "LIVE_MONITORED_WINDOWS", "peers": "SEVEN_EXISTING_SYNTHETIC_CLIENTS", "production_deployed": False}
