@@ -1,0 +1,484 @@
+{
+ "boundary_label": "SYNTHETIC ENGINEERING-EVENT CLASSIFICATION \u2014 NOT AAMI-SVF OR CLINICAL VALIDATION",
+ "decision_threshold": {
+  "CAL_V2": "NOT APPLIED",
+  "calibrated": false,
+  "predeclared": true,
+  "rule": "positive iff raw sigmoid(logit) >= 0.5",
+  "tuned": false
+ },
+ "descriptive": "R00 is the initial reference; R01-R09 are descriptive training-duration trajectories",
+ "eligibility": "trainable per federated.virtual_client_source_v1.is_trainable (VALID, 2500 samples, no missing slots, finite); excluded windows are counted and reported",
+ "experiment_id": "NHM_FL10_SYNTHETIC_ENGINEERING_V1",
+ "export_schema": {
+  "figure": [
+   "svg",
+   "png_300dpi",
+   "csv_source_data",
+   "json_provenance"
+  ],
+  "table": [
+   "csv",
+   "json",
+   "md"
+  ],
+  "unrounded_values_in_machine_readable_outputs": true
+ },
+ "figure_inventory": [
+  {
+   "group": "architecture",
+   "id": "FL10_FIG01",
+   "title": "Ten-round FL architecture"
+  },
+  {
+   "group": "evolution",
+   "id": "FL10_FIG02",
+   "title": "Global training loss versus round"
+  },
+  {
+   "group": "evolution",
+   "id": "FL10_FIG03",
+   "title": "Per-client training loss"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG04",
+   "title": "AUPRC and AUROC evolution (independent holdout)"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG05",
+   "title": "Threshold-dependent performance R0-R10"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG06",
+   "title": "BCE and Brier evolution"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG07",
+   "title": "ROC curves"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG08",
+   "title": "Precision-recall curves"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG09",
+   "title": "Confusion-matrix comparison"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG10",
+   "title": "Predicted-probability distributions"
+  },
+  {
+   "group": "federation",
+   "id": "FL10_FIG11",
+   "title": "Client-by-round contribution matrix"
+  },
+  {
+   "group": "federation",
+   "id": "FL10_FIG12",
+   "title": "Client-by-round training heatmap"
+  },
+  {
+   "group": "federation",
+   "id": "FL10_FIG13",
+   "title": "FedAvg aggregation weights"
+  },
+  {
+   "group": "data",
+   "id": "FL10_FIG14",
+   "title": "Dataset composition and quality"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG15",
+   "title": "Participant-level evaluation comparison"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG16",
+   "title": "Paired R10 minus R3 effects"
+  },
+  {
+   "group": "federation",
+   "id": "FL10_FIG17",
+   "title": "Communication and execution evidence"
+  },
+  {
+   "group": "federation",
+   "id": "FL10_FIG18",
+   "title": "Model-state evolution lineage"
+  },
+  {
+   "group": "diagnostics",
+   "id": "FL10_FIG19",
+   "title": "Per-batch optimizer diagnostics"
+  },
+  {
+   "group": "evaluation",
+   "id": "FL10_FIG20",
+   "title": "Final research comparison summary"
+  }
+ ],
+ "forbidden": [
+  "modifying MODEL_V2_FINAL, FL_INIT_V2, scientific checkpoints, CAL_V2, FedAvg/FedProx math",
+  "re-freezing an accepted lock in place",
+  "threshold optimisation",
+  "hardware",
+  "new clinical data",
+  "automatic push"
+ ],
+ "holdout": {
+  "base_seed": 20261201,
+  "cohort_id": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1",
+  "design": "two independent profiles for each of the eight established site conditions",
+  "excluded_windows_by_reason": {
+   "DEGRADED": 8,
+   "UNUSABLE": 34
+  },
+  "manifest_file": "configs/fl10/holdout_manifest_v1.json",
+  "manifest_sha256": "d4bc3c2adb555e9b7c01b032edd3ef9d7d9eb19e48f6e75fed477ad35d4c6e3c",
+  "modified_after_predictions": false,
+  "never_enters_training": true,
+  "participant_count": 16,
+  "participants": [
+   "SIM_P000301",
+   "SIM_P000302",
+   "SIM_P000303",
+   "SIM_P000304",
+   "SIM_P000305",
+   "SIM_P000306",
+   "SIM_P000307",
+   "SIM_P000308",
+   "SIM_P000309",
+   "SIM_P000310",
+   "SIM_P000311",
+   "SIM_P000312",
+   "SIM_P000313",
+   "SIM_P000314",
+   "SIM_P000315",
+   "SIM_P000316"
+  ],
+  "seeds": [
+   20261201,
+   20261202,
+   20261203,
+   20261204,
+   20261205,
+   20261206,
+   20261207,
+   20261208,
+   20261301,
+   20261302,
+   20261303,
+   20261304,
+   20261305,
+   20261306,
+   20261307,
+   20261308
+  ],
+  "sessions": [
+   "SIM_S_FL10_EVAL_00_000001",
+   "SIM_S_FL10_EVAL_01_000001",
+   "SIM_S_FL10_EVAL_02_000001",
+   "SIM_S_FL10_EVAL_03_000001",
+   "SIM_S_FL10_EVAL_04_000001",
+   "SIM_S_FL10_EVAL_05_000001",
+   "SIM_S_FL10_EVAL_06_000001",
+   "SIM_S_FL10_EVAL_07_000001",
+   "SIM_S_FL10_EVAL_08_000001",
+   "SIM_S_FL10_EVAL_09_000001",
+   "SIM_S_FL10_EVAL_10_000001",
+   "SIM_S_FL10_EVAL_11_000001",
+   "SIM_S_FL10_EVAL_12_000001",
+   "SIM_S_FL10_EVAL_13_000001",
+   "SIM_S_FL10_EVAL_14_000001",
+   "SIM_S_FL10_EVAL_15_000001"
+  ],
+  "total_positive": 307,
+  "total_trainable_windows": 1446
+ },
+ "interpretation_boundaries": [
+  "improvement in ranking does not imply usable classification at the fixed threshold",
+  "16 independent synthetic participants: all intervals are nominal",
+  "a negative or flat result is a valid completed experiment",
+  "no extra training run, round selection or threshold change is permitted after seeing results"
+ ],
+ "labels": "WEARABLE_SIM_EVENT_WINDOW_V1: positive iff a scheduled synthetic engineering event lies in [t-10 s, t]",
+ "lane": "C - synthetic engineering FL (WEARABLE_SIM_EVENT_WINDOW_V1)",
+ "live_label": "LIVE-MONITORED SIMULATED ECG \u2014 NOT A REAL PHYSIOLOGICAL PATIENT",
+ "metrics": {
+  "definitions": {
+   "AUPRC": {
+    "definition": "average precision = sum_n (R_n - R_{n-1}) P_n (sklearn average_precision_score, non-interpolated)",
+    "undefined_when": "needs both classes"
+   },
+   "AUROC": {
+    "definition": "area under the ROC curve (sklearn roc_auc_score)",
+    "undefined_when": "needs both classes"
+   },
+   "BCE": {
+    "definition": "mean unweighted binary cross-entropy from raw logits",
+    "undefined_when": "never undefined"
+   },
+   "Brier": {
+    "definition": "mean (sigmoid(logit) - label)^2",
+    "undefined_when": "never undefined"
+   },
+   "F1": {
+    "definition": "2TP / (2TP + FP + FN), positive class",
+    "undefined_when": "2TP+FP+FN = 0"
+   },
+   "MCC": {
+    "definition": "(TP*TN - FP*FN) / sqrt((TP+FP)(TP+FN)(TN+FP)(TN+FN))",
+    "undefined_when": "any marginal total is zero"
+   },
+   "accuracy": {
+    "definition": "(TP+TN) / N",
+    "undefined_when": "never undefined for N > 0"
+   },
+   "balanced_accuracy": {
+    "definition": "(recall + specificity) / 2",
+    "undefined_when": "recall or specificity undefined"
+   },
+   "false_discovery_rate": {
+    "definition": "FP / (FP+TP) = 1 - precision",
+    "undefined_when": "no predicted positives"
+   },
+   "false_negative_rate": {
+    "definition": "FN / (FN+TP)",
+    "undefined_when": "no actual positives"
+   },
+   "false_omission_rate": {
+    "definition": "FN / (FN+TN) = 1 - NPV",
+    "undefined_when": "no predicted negatives"
+   },
+   "false_positive_rate": {
+    "definition": "FP / (FP+TN)",
+    "undefined_when": "no actual negatives"
+   },
+   "negative_predictive_value": {
+    "definition": "TN / (TN+FN)",
+    "undefined_when": "no predicted negatives"
+   },
+   "participant_macro_F1": {
+    "definition": "mean of per-participant F1 over participants where F1 is defined; the contributing count is reported",
+    "undefined_when": "no participant has defined F1"
+   },
+   "precision": {
+    "definition": "TP / (TP+FP) = PPV",
+    "undefined_when": "no predicted positives"
+   },
+   "recall": {
+    "definition": "TP / (TP+FN) = sensitivity = TPR",
+    "undefined_when": "no actual positives"
+   },
+   "specificity": {
+    "definition": "TN / (TN+FP) = TNR",
+    "undefined_when": "no actual negatives"
+   }
+  },
+  "global": [
+   "AUPRC",
+   "AUROC",
+   "F1",
+   "accuracy",
+   "precision",
+   "recall",
+   "specificity",
+   "balanced_accuracy",
+   "negative_predictive_value",
+   "false_positive_rate",
+   "false_negative_rate",
+   "false_discovery_rate",
+   "false_omission_rate",
+   "MCC",
+   "TP",
+   "FP",
+   "TN",
+   "FN",
+   "total_predictions",
+   "predicted_positives",
+   "predicted_negatives",
+   "windows",
+   "positives",
+   "negatives",
+   "prevalence",
+   "BCE",
+   "Brier",
+   "mean_predicted_probability",
+   "mean_score_positive_class",
+   "mean_score_negative_class",
+   "score_min",
+   "score_max",
+   "score_quantiles"
+  ],
+  "participant_level": [
+   "AUPRC",
+   "AUROC",
+   "F1",
+   "precision",
+   "recall",
+   "specificity",
+   "TP",
+   "FP",
+   "TN",
+   "FN",
+   "participant_macro_F1"
+  ],
+  "probability_histogram": {
+   "bins": 20,
+   "predeclared": true,
+   "range": [
+    0.0,
+    1.0
+   ]
+  },
+  "score_quantiles": [
+   0.05,
+   0.25,
+   0.5,
+   0.75,
+   0.95
+  ],
+  "undefined_policy": "a metric whose denominator is zero or whose classes are missing is reported as null/UNDEFINED with a reason, never zero"
+ },
+ "non_clinical_boundary": "Synthetic engineering-event classification on simulated wearable windows. Not AAMI-SVF, not a diagnosis, not clinical/device validation. The scientific real-ECG FL results are separate and unchanged.",
+ "predecessor": {
+  "commit": "274323730d1c7355f688ad4c9ff01ecbfb746501",
+  "id": "NHM_FINAL_SHOWCASE_001"
+ },
+ "preprocessing": "per-window z-score exactly as the training dataset builder",
+ "previously_exposed_holdout": "shown only in a separate historical panel labelled PREVIOUSLY EXPOSED SYNTHETIC EVALUATION; never used for decisions",
+ "primary_comparison": {
+  "comparator": "R03",
+  "endpoint": "R10",
+  "rule": "R10 is the predetermined endpoint regardless of performance; no best-round selection"
+ },
+ "protocol_id": "NHM_FL10_SYNTHETIC_EVALUATION_V1",
+ "reproduce": [
+  "python -m scripts.freeze_fl10_protocol",
+  "python -m scripts.run_fl10 --mode A --out reports/fl10/runs/modeA",
+  "python -m scripts.run_fl10 --mode B --out reports/fl10/runs/modeB",
+  "python -m scripts.evaluate_fl10 --method-commit <sha>",
+  "python -m fl10.figures"
+ ],
+ "research_question": "How does increasing the number of federated communication rounds from three to ten affect optimization behaviour, ranking discrimination and fixed-threshold classification on an independent synthetic engineering-event cohort?",
+ "separation_rules": [
+  "no participant id, session id or seed equals any training client, previous-holdout participant or live-session identity",
+  "no holdout window input digest equals any training, previous-holdout or live-monitored window",
+  "participant boundaries are preserved: resampling is by participant cluster"
+ ],
+ "states_evaluated": [
+  "R00",
+  "R01",
+  "R02",
+  "R03",
+  "R04",
+  "R05",
+  "R06",
+  "R07",
+  "R08",
+  "R09",
+  "R10"
+ ],
+ "table_inventory": [
+  {
+   "id": "FL10_TAB01",
+   "title": "Full R0-R10 global classification metrics"
+  },
+  {
+   "id": "FL10_TAB02",
+   "title": "R3 versus R10 paired differences"
+  },
+  {
+   "id": "FL10_TAB03",
+   "title": "Full training diagnostics (client x round)"
+  },
+  {
+   "id": "FL10_TAB04",
+   "title": "Per-batch diagnostics"
+  },
+  {
+   "id": "FL10_TAB05",
+   "title": "Per-participant independent evaluation (16 participants x 11 states)"
+  },
+  {
+   "id": "FL10_TAB06",
+   "title": "Holdout composition and leakage audit"
+  },
+  {
+   "id": "FL10_TAB07",
+   "title": "Federation and aggregation evidence"
+  },
+  {
+   "id": "FL10_TAB08",
+   "title": "Candidate and state lineage"
+  },
+  {
+   "id": "FL10_TAB09",
+   "title": "Metric definitions and undefined-value policy"
+  },
+  {
+   "id": "FL10_TAB10",
+   "title": "Synthetic versus scientific evidence boundaries"
+  },
+  {
+   "id": "FL10_TAB11",
+   "title": "Historical exposed-holdout results (continuity only)"
+  },
+  {
+   "id": "FL10_TAB12",
+   "title": "Reproducibility and acceptance matrix"
+  }
+ ],
+ "training": {
+  "accepted_updates_per_round": 8,
+  "aggregation": "weighted FedAvg (federated.wearable_fl_system_v1.Coordinator)",
+  "clients": 8,
+  "cohort": "WEARABLE_SIM_FL_COHORT_V1 (existing eight synthetic clients)",
+  "expected_example_exposures": "723 trainable windows x 10 rounds = 7230 repeated exposures (recomputed from execution evidence, not taken from this line)",
+  "expected_total_accepted_updates": 80,
+  "initial_state": "FL_INIT_V2 (R0 digest 6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f)",
+  "local_epochs": 1,
+  "modes": {
+   "A": "canonical eight-client synthetic cohort",
+   "B": "live-monitored SITE_00 (one monitoring session, one verified buffer reused for all ten rounds) + seven synthetic peers"
+  },
+  "note": "same trainable windows are revisited every round: example exposures are repeated, not independent",
+  "prefix_parity": {
+   "R1": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "R2": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "R3": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+   "rule": "Mode A must reproduce R0-R3 exactly or training stops; no seed or parameter changes"
+  },
+  "rounds": 10,
+  "settings": "frozen: AdamW lr 0.001 wd 0.0001 batch 64 pos_weight 1.7157717177396683 base seed 20260927"
+ },
+ "uncertainty": {
+  "clusters": 16,
+  "method": "paired participant-cluster percentile bootstrap (one draw applied to both states; difference = R10 - R03)",
+  "metrics": [
+   "AUPRC",
+   "AUROC",
+   "F1",
+   "accuracy",
+   "balanced_accuracy",
+   "recall",
+   "specificity",
+   "precision",
+   "BCE",
+   "Brier"
+  ],
+  "multiplicity": "none; no significance claim; undefined replicates are counted, never redrawn",
+  "replicates": 2000,
+  "seed": 20261201,
+  "status": "NOMINAL ONLY"
+ }
+}
