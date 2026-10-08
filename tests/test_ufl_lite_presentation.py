@@ -89,6 +89,9 @@ def test_ui_v1_4_chain_verifies_and_predecessor_locks_are_byte_identical() -> No
     diag = ROOT / "artifacts/observatory/NHM_OBS_DIAG_001.lock.json"
     if diag.exists():
         accounted |= set(json.loads(diag.read_text())["changed_from_predecessor"])
+    final = ROOT / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
+    if final.exists():
+        accounted |= set(json.loads(final.read_text())["changed_from_predecessor"])
     assert changed == sorted(accounted), changed
 
 
@@ -119,6 +122,10 @@ def _with_v15(then=lambda s: None):
         diag = ROOT / "artifacts/observatory/NHM_OBS_DIAG_001.lock.json"
         if diag.exists():
             shutil.copyfile(diag, s / "artifacts/observatory/NHM_OBS_DIAG_001.lock.json")
+        final = ROOT / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
+        if final.exists():
+            (s / "artifacts/final_showcase").mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(final, s / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json")
         then(s)
     return mutate
 

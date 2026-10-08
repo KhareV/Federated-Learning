@@ -7,11 +7,19 @@ from __future__ import annotations
 import json
 import subprocess
 
-from scripts.freeze_observatory_v1 import ROOT, protected_diff, sha, tracked
+from scripts.freeze_observatory_v1 import (
+    ROOT,
+    UI_LOCK,
+    frontend_files,
+    protected_diff,
+    sha,
+    tracked,
+)
 from scripts.verify_final_showcase import ENTRY, METHOD_COMMIT
 
 OBS_DIAG_LOCK = ROOT / "artifacts/observatory/NHM_OBS_DIAG_001.lock.json"
 LOCK_PATH = ROOT / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
+OBS_DIAG_COMMIT = "aa36f53b26834f88e6ac41482e7190f1fa2086d8"   # the pushed origin/main tip whose NHM_OBS_DIAG_001 bytes this lock chains to
 PATTERNS = ("final_showcase", "configs/final_showcase", "reports/final_showcase", "docs/final_showcase", "tests/test_final_showcase_eval.py", "tests/test_final_showcase_research.py", "tests/test_final_showcase_live_link.py",
             "api/observatory_showcase.py", "api/product_app_observatory_v1.py", "frontend/src/routes/app/observatory/outcomes", "frontend/src/routes/app/observatory/storyboard",
             "frontend/src/lib/product/observatory/showcase.ts", "frontend/src/lib/product/observatory/__tests__/showcase.test.ts", "frontend/src/lib/product/api.ts", "frontend/src/lib/product/__tests__/support.ts")
@@ -29,10 +37,18 @@ NOT_DELIVERED = [
 
 
 def freeze() -> dict[str, object]:
-    files = sorted(set(tracked(PATTERNS)) | set(SCRIPTS))
+    diag = json.loads(OBS_DIAG_LOCK.read_text())
+    repins = sorted(p for p, d in diag["bound_files"].items() if sha(ROOT / p) != d)      # files NHM_OBS_DIAG_001 binds whose bytes this successor changed
+    files = sorted(set(tracked(PATTERNS)) | set(SCRIPTS) | set(repins))
     bound = {p: sha(ROOT / p) for p in files if (ROOT / p).is_file()}
+    front = {p: sha(ROOT / p) for p in frontend_files()}
+    v19 = json.loads(UI_LOCK.read_text())["bound_artifacts"]
     lock = {
-        "lock_id": "NHM_FINAL_SHOWCASE_001", "status": "FROZEN_DELIVERED_CAPABILITIES_ONLY", "predecessor_id": "NHM_OBS_DIAG_001", "predecessor_sha256": sha(OBS_DIAG_LOCK),
+        "lock_id": "NHM_FINAL_SHOWCASE_001", "status": "FROZEN_DELIVERED_CAPABILITIES_ONLY", "predecessor_id": "NHM_OBS_DIAG_001", "predecessor_sha256": sha(OBS_DIAG_LOCK), "predecessor_commit": OBS_DIAG_COMMIT,
+        "predecessor_status": diag["status"], "predecessor_lock_edited": False,
+        "predecessor_governance_note": "NHM_OBS_DIAG_001 bytes were re-frozen in place at 7debd49 and aa36f53 (disclosed in those pushed commits). This lock chains to the aa36f53 bytes and repins later changes additively; the predecessor file is not edited here.",
+        "repins_predecessor_files": repins, "bound_artifacts": front, "changed_from_predecessor": sorted(p for p, d in front.items() if v19.get(p) != d),
+        "ui_baseline_id": "CAPSTONE_UI_V1_9", "ui_baseline_sha256": sha(UI_LOCK),
         "entry_commit": ENTRY, "stated_starting_reference": "7d8a90a (two later pushed commits of the same line of work precede the actual start; see docs/final_showcase/implementation_map.md)",
         "synthetic_evaluation_method_freeze_commit": METHOD_COMMIT, "protocol_sha256": sha(ROOT / "configs/final_showcase/synth_fl_eval_protocol_v1.json"), "holdout_manifest_sha256": sha(ROOT / "configs/final_showcase/synth_fl_eval_holdout_manifest_v1.json"),
         "bound_files": bound, "protected_surface_diff_against_entry": protected_diff(),

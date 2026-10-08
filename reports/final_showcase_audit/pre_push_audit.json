@@ -1,0 +1,69 @@
+{
+ "ahead_behind_vs_origin": "0\t5",
+ "bibliography": "UNVERIFIED: manuscript is not reference-complete; all citation slots are REFERENCE_REQUIRED",
+ "current_verification": {
+  "lock": {
+   "bound_files": 91,
+   "obs_diag_chain_verified": true,
+   "repinned_predecessor_files": 8,
+   "status": "FROZEN_DELIVERED_CAPABILITIES_ONLY",
+   "v1_chain_verified": true
+  },
+  "status": "PASS"
+ },
+ "default_sqlite": {
+  "git_tracked": false,
+  "mtime_epoch": 1791464037,
+  "path": "data/capstone/product.sqlite3",
+  "size": 196608
+ },
+ "final_lock_sha256": "64aeea5b59301d131ec771e61b50a41ed41795effe71b0a36e416fe5c7d7386d",
+ "frozen_evidence_diff_vs_aa36f53": [],
+ "head": "3713c202306a818e8268c2cc339fef58c225ce84",
+ "historical_verification": {
+  "7d8a90a": {
+   "verify_obs_diag_001": {
+    "exit": 0,
+    "tail": "{\"bound_files\": 122, \"changed_from_v1\": 50, \"lock_sha256\": \"8feab01a860b1293da232ab2c9cadb4ee8adda6f6d583cfe6ef4cbbbe51e9db0\", \"status\": \"PASS\"}"
+   },
+   "verify_observatory_v1": {
+    "exit": 0,
+    "tail": "{\"bound_files\": 94, \"lock_sha256\": \"392cbf1c183ef1557598e766b6bfc26e7967199dc7ab720f362f7cc0fdbb24df\", \"predecessor_files_changed\": [\"frontend/src/lib/component"
+   }
+  },
+  "aa36f53": {
+   "verify_obs_diag_001": {
+    "exit": 0,
+    "tail": "{\"bound_files\": 122, \"changed_from_v1\": 51, \"lock_sha256\": \"e1cce0c8a5875550c99cd0474e648653092c72dae9abc81aa6490aa0fa45f4ca\", \"status\": \"PASS\"}"
+   },
+   "verify_observatory_v1": {
+    "exit": 0,
+    "tail": "{\"bound_files\": 94, \"lock_sha256\": \"392cbf1c183ef1557598e766b6bfc26e7967199dc7ab720f362f7cc0fdbb24df\", \"predecessor_files_changed\": [\"frontend/src/lib/component"
+   }
+  }
+ },
+ "obs_diag_lock_commits": [
+  "3713c20",
+  "aa36f53",
+  "7debd49",
+  "7d8a90a"
+ ],
+ "obs_diag_lock_sha256_by_commit": {
+  "3713c20": "22d9105c429bf9cd81c7830c4b644691a3057f0d4de701382f0c091e6e076b01",
+  "7d8a90a": "8feab01a860b1293da232ab2c9cadb4ee8adda6f6d583cfe6ef4cbbbe51e9db0",
+  "7debd49": "38a4ad47125878aaf78b05108b14fc42e9e5a8f3c314ce85e6838c983573c286",
+  "aa36f53": "e1cce0c8a5875550c99cd0474e648653092c72dae9abc81aa6490aa0fa45f4ca"
+ },
+ "obs_diag_lock_sha256_working_tree": "e1cce0c8a5875550c99cd0474e648653092c72dae9abc81aa6490aa0fa45f4ca",
+ "origin_main": "aa36f53b26834f88e6ac41482e7190f1fa2086d8",
+ "protected_surface_diff_vs_aa36f53": [],
+ "tests": "full suite 3261 passed, 1 skipped, 1 failed (tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers: pre-existing intermittent race, fails 6/8 at pushed aa36f53, product/monitoring unchanged)",
+ "v1_lock_sha256_by_commit": {
+  "3713c20": "392cbf1c183ef1557598e766b6bfc26e7967199dc7ab720f362f7cc0fdbb24df",
+  "7d8a90a": "392cbf1c183ef1557598e766b6bfc26e7967199dc7ab720f362f7cc0fdbb24df",
+  "7debd49": "392cbf1c183ef1557598e766b6bfc26e7967199dc7ab720f362f7cc0fdbb24df",
+  "7e91690": "392cbf1c183ef1557598e766b6bfc26e7967199dc7ab720f362f7cc0fdbb24df",
+  "aa36f53": "392cbf1c183ef1557598e766b6bfc26e7967199dc7ab720f362f7cc0fdbb24df"
+ },
+ "v1_lock_sha256_working_tree": "392cbf1c183ef1557598e766b6bfc26e7967199dc7ab720f362f7cc0fdbb24df"
+}

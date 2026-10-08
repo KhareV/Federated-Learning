@@ -18,11 +18,16 @@ ROOT = Path(__file__).resolve().parents[1]
 ENTRY = "aa36f53b26834f88e6ac41482e7190f1fa2086d8"
 METHOD_COMMIT = "6d79274c0ca4f159d210c69411a68238be3d2112"
 LOCK = ROOT / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
+DIAG_LOCK = ROOT / "artifacts/observatory/NHM_OBS_DIAG_001.lock.json"
 CANONICAL = "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4"
 
 
 def sha(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def git_show(commit: str, path: str) -> bytes:
+    return subprocess.run(["git", "show", f"{commit}:{path}"], cwd=ROOT, capture_output=True, check=True).stdout
 
 
 def gate_a() -> dict:
@@ -80,14 +85,35 @@ def protected() -> dict:
 
 
 def verify_lock() -> dict:
+    """Chain + bytes. Independent of any re-freeze of an earlier lock: the predecessor must be byte-identical to the recorded pushed commit."""
     lock = json.loads(LOCK.read_text())
+    diag_path = DIAG_LOCK
+    if lock["lock_id"] != "NHM_FINAL_SHOWCASE_001" or lock["predecessor_id"] != "NHM_OBS_DIAG_001" or lock["predecessor_lock_edited"] is not False:
+        raise RuntimeError("FINAL_SHOWCASE_IDENTITY_DRIFT")
+    if sha(diag_path) != lock["predecessor_sha256"]:
+        raise RuntimeError("FINAL_SHOWCASE_PREDECESSOR_LOCK_MUTATED")
+    blob = subprocess.run(["git", "show", f"{lock['predecessor_commit']}:artifacts/observatory/NHM_OBS_DIAG_001.lock.json"], cwd=ROOT, capture_output=True, check=True).stdout
+    if hashlib.sha256(blob).hexdigest() != lock["predecessor_sha256"]:
+        raise RuntimeError("FINAL_SHOWCASE_PREDECESSOR_NOT_BYTE_IDENTICAL_TO_PUSHED_COMMIT")
+    diag = json.loads(diag_path.read_text())
+    differing = sorted(p for p, d in diag["bound_files"].items() if sha(ROOT / p) != d)
+    if differing != sorted(lock["repins_predecessor_files"]):
+        raise RuntimeError(f"FINAL_SHOWCASE_REPIN_SET_MISMATCH:{differing}")
     for path, digest in lock["bound_files"].items():
-        if sha(ROOT / path) != digest:
+        if not (ROOT / path).is_file() or sha(ROOT / path) != digest:
             raise RuntimeError(f"FINAL_SHOWCASE_TAMPER:{path}")
-    from scripts import verify_obs_diag_001
+    from scripts.freeze_observatory_v1 import frontend_files
+
+    if set(frontend_files()) != set(lock["bound_artifacts"]) or any(sha(ROOT / p) != d for p, d in lock["bound_artifacts"].items()):
+        raise RuntimeError("FINAL_SHOWCASE_FRONTEND_BINDING_DRIFT")
+    for flag in ("scientific_state_semantics_changed", "model_calibration_or_fl_math_changed", "frozen_evidence_edited", "historical_locks_edited", "candidate_promoted_or_deployed", "hardware_work_performed", "automatically_pushed"):
+        if lock[flag] is not False:
+            raise RuntimeError(f"FINAL_SHOWCASE_SCOPE_DRIFT:{flag}")
+    from scripts import verify_obs_diag_001, verify_observatory_v1
 
     verify_obs_diag_001.verify()
-    return {"bound_files": len(lock["bound_files"]), "status": lock["status"], "obs_diag_chain_verified": True}
+    verify_observatory_v1.verify()
+    return {"bound_files": len(lock["bound_files"]), "status": lock["status"], "obs_diag_chain_verified": True, "v1_chain_verified": True, "repinned_predecessor_files": len(differing)}
 
 
 def main() -> int:

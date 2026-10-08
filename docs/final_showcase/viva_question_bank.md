@@ -10,7 +10,7 @@ Artifacts are hash-verified before display; locks and historical evidence are ne
 
 **Q3. Why does the synthetic round-3 model predict everything positive?**
 
-At the fixed 0.5 threshold its recall is 1.0000 and specificity 0.0000. Threshold-free AUPRC/AUROC improved (0.6355→0.6953, 0.7382→0.8135), so ranking improved but the uncalibrated operating point is poor. We did not tune the threshold or retrain, by protocol.
+(SYNTHETIC ENGINEERING-EVENT CLASSIFICATION — NOT AAMI-SVF OR CLINICAL VALIDATION) At the fixed 0.5 threshold its recall is 1.0000 and specificity 0.0000. Threshold-free AUPRC/AUROC improved (0.6355→0.6953, 0.7382→0.8135), so ranking improved but the uncalibrated operating point is poor. We did not tune the threshold or retrain, by protocol.
 
 **Q4. Is the synthetic evaluation clinical validation?**
 

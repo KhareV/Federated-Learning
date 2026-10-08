@@ -17,9 +17,23 @@ from scripts.freeze_obs_diag_001 import (
     sha,
 )
 
+FINAL_PATH = ROOT / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
+
+
+def _successor() -> dict | None:
+    """NHM_FINAL_SHOWCASE_001 may re-pin files this lock binds, but only if it chains to THIS lock's exact bytes. This lock itself is never edited."""
+    if not FINAL_PATH.exists():
+        return None
+    final = json.loads(FINAL_PATH.read_text())
+    if final.get("lock_id") != "NHM_FINAL_SHOWCASE_001" or final.get("predecessor_sha256") != sha(LOCK_PATH):
+        raise RuntimeError("OBS_DIAG_SUCCESSOR_CHAIN_BROKEN")
+    return final
+
 
 def verify() -> dict[str, object]:
     lock = json.loads(LOCK_PATH.read_text())
+    successor = _successor()
+    repinned = set(successor["repins_predecessor_files"]) if successor else set()
     if lock["lock_id"] != "NHM_OBS_DIAG_001" or lock["predecessor_id"] != "NHM_RESEARCH_OBSERVATORY_V1":
         raise RuntimeError("OBS_DIAG_IDENTITY_DRIFT")
     if sha(V1_LOCK) != lock["predecessor_sha256"]:
@@ -35,9 +49,11 @@ def verify() -> dict[str, object]:
         if lock[flag] is not False:
             raise RuntimeError(f"OBS_DIAG_SCOPE_DRIFT:{flag}")
     for path, digest in lock["bound_files"].items():
-        if not (ROOT / path).is_file() or sha(ROOT / path) != digest:
+        accepted = {digest} | ({successor["bound_files"][path]} if path in repinned else set())
+        if not (ROOT / path).is_file() or sha(ROOT / path) not in accepted:
             raise RuntimeError(f"OBS_DIAG_TAMPER:{path}")
-    if set(frontend_files()) != set(lock["bound_artifacts"]) or any(sha(ROOT / p) != d for p, d in lock["bound_artifacts"].items()):
+    expected_frontend = successor["bound_artifacts"] if successor else lock["bound_artifacts"]
+    if set(frontend_files()) != set(expected_frontend) or any(sha(ROOT / p) != d for p, d in expected_frontend.items()):
         raise RuntimeError("OBS_DIAG_FRONTEND_BINDING_DRIFT")
     if protected_diff():
         raise RuntimeError(f"OBS_DIAG_PROTECTED_SURFACE_DRIFT:{protected_diff()[:3]}")

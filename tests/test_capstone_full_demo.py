@@ -82,6 +82,12 @@ def test_product_api_frontend_and_backend_are_byte_identical_to_entry() -> None:
 
             assert verify_diag()["status"] == "PASS"
             accounted |= set(json.loads(diag.read_text())["changed_from_predecessor"])
+        final = ROOT / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"       # additive successor tip (chained to the exact NHM_OBS_DIAG_001 bytes)
+        if final.exists():
+            from scripts.verify_final_showcase import verify_lock as verify_final
+
+            assert verify_final()["status"] == "FROZEN_DELIVERED_CAPABILITIES_ONLY"
+            accounted |= set(json.loads(final.read_text())["changed_from_predecessor"])
         drift = [p for p in drift if not (p.startswith("frontend/") and p in accounted)]
     assert drift == []
 

@@ -121,5 +121,6 @@ def test_obs_diag_lock_chains_to_the_immutable_v1_lock_and_detects_tamper(tmp_pa
     tampered = tmp_path / "lock.json"
     tampered.write_text(_json.dumps(lock))
     monkeypatch.setattr(verifier, "LOCK_PATH", tampered)
+    monkeypatch.setattr(verifier, "FINAL_PATH", tmp_path / "none-final.json")      # judge the tampered copy on its own (the successor chains to the ORIGINAL bytes)
     with pytest.raises(RuntimeError, match="OBS_DIAG_TAMPER"):
         verifier.verify()

@@ -43,6 +43,13 @@ def v18_bound(root: Path) -> dict[str, str] | None:
             if (tip.get("lock_id") != "NHM_OBS_DIAG_001"
                     or tip.get("predecessor_sha256") != hash_file(observatory)):
                 raise RuntimeError("NHM_OBS_DIAG_001_SUCCESSOR_CHAIN_BROKEN")
+            final = root / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
+            if final.exists():
+                top = json.loads(final.read_text(encoding="utf-8"))
+                if (top.get("lock_id") != "NHM_FINAL_SHOWCASE_001"
+                        or top.get("predecessor_sha256") != hash_file(diag)):
+                    raise RuntimeError("NHM_FINAL_SHOWCASE_001_SUCCESSOR_CHAIN_BROKEN")
+                return dict(top["bound_artifacts"])
             return dict(tip["bound_artifacts"])
         if observatory.exists():
             tip = json.loads(observatory.read_text(encoding="utf-8"))

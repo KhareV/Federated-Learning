@@ -22,3 +22,6 @@ Unchanged vs `aa36f53`: `federated/`, `product/federation`, `product/monitoring`
 
 ## Stop rule
 Workstream A did **not** hit the stop rule: captured windows reach the FL boundary through the existing `cohort_provider` seam without modifying frozen code. One disclosed limitation: the monitored session is hosted by the Observatory with in-memory session/device entries (the frozen scenario registry would reject a persisted product session with an unknown scenario id on restart), so it is not written to SQLite history.
+
+## Bibliography status
+The bibliography is **unverified** and the manuscript is **not reference-complete**: every citation slot is marked `REFERENCE_REQUIRED` and no reference was invented or checked.

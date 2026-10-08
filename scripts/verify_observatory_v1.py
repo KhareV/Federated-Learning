@@ -32,9 +32,23 @@ def _successor() -> dict | None:
     return successor
 
 
+FINAL_PATH = ROOT / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
+
+
+def _final(diag: dict | None) -> dict | None:
+    """NHM_FINAL_SHOWCASE_001 (chained to the exact NHM_OBS_DIAG_001 bytes) may re-pin files further; it never edits this lock."""
+    if not FINAL_PATH.exists():
+        return None
+    final = json.loads(FINAL_PATH.read_text())
+    if final.get("lock_id") != "NHM_FINAL_SHOWCASE_001" or diag is None or final.get("predecessor_sha256") != sha(SUCCESSOR_PATH):
+        raise RuntimeError("OBSERVATORY_FINAL_CHAIN_BROKEN")
+    return final
+
+
 def verify() -> dict[str, object]:
     lock = json.loads(LOCK_PATH.read_text())
     successor = _successor()
+    final = _final(successor)
     if lock["lock_id"] != "NHM_RESEARCH_OBSERVATORY_V1" or lock["full_master_prompt_acceptance"] is not False:
         raise RuntimeError("OBSERVATORY_LOCK_IDENTITY_DRIFT")
     if lock["predecessor_id"] != "CAPSTONE_UI_V1_9" or sha(UI_LOCK) != lock["predecessor_sha256"]:
@@ -50,10 +64,12 @@ def verify() -> dict[str, object]:
         if not (ROOT / path).is_file():
             raise RuntimeError(f"OBSERVATORY_TAMPER:{path}")
         accepted = {digest} | ({successor["bound_files"].get(path)} if successor and path in repinned else set())
+        if final and path in final["repins_predecessor_files"]:
+            accepted |= {final["bound_files"][path]}
         if sha(ROOT / path) not in accepted:
             raise RuntimeError(f"OBSERVATORY_TAMPER:{path}")
     actual_frontend = frontend_files()
-    expected_frontend = successor["bound_artifacts"] if successor else lock["bound_artifacts"]
+    expected_frontend = final["bound_artifacts"] if final else successor["bound_artifacts"] if successor else lock["bound_artifacts"]
     if set(actual_frontend) != set(expected_frontend):
         raise RuntimeError("OBSERVATORY_UNBOUND_OR_MISSING_FRONTEND_FILE")
     for path, digest in expected_frontend.items():

@@ -31,6 +31,7 @@ from federated.virtual_client_source_v1 import (
 )
 from federated.wearable_fl_system_v1 import semantic_digest
 from federated.wearable_sim_local_labels import SyntheticObservedSource
+from final_showcase import link_trace
 from product.devices.replay import canonical_json
 from product.devices.scenarios import ScenarioSegment, ScenarioSpec, TimingMode
 from product.devices.simulated import SimulatedWearableSource
@@ -225,19 +226,27 @@ async def run_live_link(*, service: Any, provider: LiveLinkCohortProvider, infer
     on_phase("CAPTURED", {"parity": evidence})
     cohort = live_cohort(await asyncio.to_thread(provider.base), dataset)
     provider.arm(cohort, link_id)
+    expected = link_trace.expected_trace(dataset)
+    buffered = link_trace.buffer_trace(cohort.clients[SITE_INDEX].buffer)
+    tap = link_trace.TrainerTap()
     try:
         run = service.create_run(user_id, run_type="LIVE_RUN", algorithm="FEDAVG", secagg_mode="PLAIN", planned_rounds=3, scenario_id="FL_SINGLE_RUN")
         on_phase("FL_RUNNING", {"run_id": run.run_id})
-        await service.start_run(user_id, run.run_id)
-        await service.wait(run.run_id)
+        with tap:
+            await service.start_run(user_id, run.run_id)
+            await service.wait(run.run_id)
         final = service.get_run(user_id, run.run_id)
         meta = service.artifacts.read_run_meta(run.run_id) or {}
         candidates = list(service.store.candidate_ids_for_run(run.run_id))
         digest = service.registry.get_candidate(candidates[0]).state_digest if candidates else None
     finally:
         provider.disarm()
+    try:
+        trace = link_trace.verify_trace(expected, buffered, tap.calls, client_id=cohort.clients[SITE_INDEX].client_id, rounds=3)
+    except link_trace.LinkTraceError as error:
+        raise LiveLinkBlocked(error.code, error.detail) from error
     frozen = json.loads((research_root() / "reports/model_v2/v2_fl_005/federation_run.json").read_text())["state_progression"]["3"]["sha256"]
     return {"link_id": link_id, "link_label": LINK_LABEL, "status": str(final.status.value if hasattr(final.status, "value") else final.status), "run_id": run.run_id,
-            "monitoring": {k: v for k, v in monitored.items() if k != "windows"}, "parity": evidence, "committed_digests": meta.get("committed_digests"),
+            "monitoring": {k: v for k, v in monitored.items() if k != "windows"}, "parity": evidence, "trace": {k: v for k, v in trace.items()} | {"window_identities": expected["windows"][:3], "window_identity_count": len(expected["windows"]), "buffer_dataset_sha256": buffered["dataset_sha256"]}, "committed_digests": meta.get("committed_digests"),
             "round_base_digests": meta.get("round_base_digests"), "candidate_ids": candidates, "candidate_state_digest": digest,
             "canonical_candidate_digest": frozen, "candidate_digest_equals_canonical": (digest == frozen) if digest else None, "site00_source": "LIVE_MONITORED_WINDOWS", "peers": "SEVEN_EXISTING_SYNTHETIC_CLIENTS", "production_deployed": False}
