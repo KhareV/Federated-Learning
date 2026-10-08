@@ -8,6 +8,7 @@ federation routes project frozen/read-only evidence. No route trains or infers.
 from __future__ import annotations
 
 import asyncio
+import time
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -31,7 +32,13 @@ from product.observatory.federation import (
     frozen_cohort,
     run_contributions,
 )
-from product.observatory.models import PersistedInference, ScenarioInfo, WindowTrace
+from product.observatory.live_capture import LiveWindowCapture
+from product.observatory.models import (
+    CaptureArmResult,
+    PersistedInference,
+    ScenarioInfo,
+    WindowTrace,
+)
 from product.observatory.pipeline import reconstruct_window
 from product.observatory.research_record import (
     ResearchRecord,
@@ -39,13 +46,16 @@ from product.observatory.research_record import (
     inspect_train_window,
     list_train_records,
 )
+from product.session import SessionState
 from product.sessions.service import IdGenerator, default_session_id
 from simulation.stream_runtime_v2013 import CADENCE_US, EMIT_MARGIN_US, FIRST_RIGHT_EDGE_US
 
-OBSERVATORY_ID = "NHM_RESEARCH_OBSERVATORY_V1"
+OBSERVATORY_ID = "NHM_RESEARCH_OBSERVATORY_V1_CANDIDATE"
 PREFIX = "/product/v1/observatory"
 MAX_ACTIVE_RECONSTRUCTIONS = 2
 MAX_TRACE_RESPONSE_BYTES = 750_000
+MAX_ACTIVE_LIVE_CAPTURES = 2
+LIVE_CAPTURE_TTL_S = 3600
 
 
 def create_product_app_observatory_v1(
@@ -79,6 +89,43 @@ def create_product_app_observatory_v1(
     app.state.observatory_id = OBSERVATORY_ID
     trace_slots = asyncio.Semaphore(MAX_ACTIVE_RECONSTRUCTIONS)
     scenarios = load_scenarios()
+    armed: dict[str, tuple[str, int]] = {}
+    captured: dict[str, LiveWindowCapture] = {}
+    capture_errors: dict[str, str] = {}
+
+    def expire_captures() -> None:
+        now = time.monotonic()
+        for sid, capture in list(captured.items()):
+            if now - capture.created_monotonic > LIVE_CAPTURE_TTL_S:
+                del captured[sid]
+        for sid in list(capture_errors):
+            if sid not in armed and sid not in captured:
+                del capture_errors[sid]
+
+    monitoring = app.state.session_service._monitoring
+    original_start = monitoring.start
+
+    async def observing_start(owner_user_id: str, session_id: str) -> Any:
+        result = await original_start(owner_user_id, session_id)
+        config = armed.pop(session_id, None)
+        if config is not None and config[0] == owner_user_id:
+            try:
+                entry = app.state.runtime_state.sessions[session_id]
+                coordinator = entry.coordinator
+                if coordinator is None or coordinator.telemetry["scientific_record_count"] != 0:
+                    raise RuntimeError("CAPTURE_MISSED_FIRST_SOURCE_BATCH")
+                provenance = entry.session.simulation_provenance
+                if provenance is None:
+                    raise RuntimeError("CAPTURE_SOURCE_PROVENANCE_MISSING")
+                captured[session_id] = LiveWindowCapture(
+                    coordinator._runtime, scenario_id=provenance.scenario_id,
+                    session_id=session_id, window_index=config[1],
+                )
+            except Exception as error:  # observability must not change monitoring success
+                capture_errors[session_id] = f"CAPTURE_ATTACH_FAILED:{type(error).__name__}"
+        return result
+
+    monitoring.start = observing_start
 
     async def bounded_call(operation: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
         if trace_slots.locked():
@@ -168,6 +215,78 @@ def create_product_app_observatory_v1(
             ),
             "inference_evidence_status": "PERSISTED_INFERENCE_METADATA_MATCHED_BY_SOURCE_TIMESTAMP",
         })
+
+    @app.post(f"{PREFIX}/sessions/{{session_id}}/capture/{{window_index}}",
+              response_model=CaptureArmResult)
+    async def arm_live_capture(request: Request, session_id: str,
+                               window_index: int) -> CaptureArmResult:
+        user_id = await identity(request)
+        session = store.get_session(session_id)
+        if session is None:
+            raise ProductError(ProductErrorCode.NOT_FOUND, "session not found")
+        if session.user_id != user_id:
+            raise ProductError(ProductErrorCode.FORBIDDEN, "session belongs to another user")
+        if session.state is not SessionState.DEVICE_READY:
+            raise ProductError(ProductErrorCode.INVALID_STATE,
+                               "capture must be armed before monitoring starts")
+        provenance = session.simulation_provenance
+        scenario = scenarios.get(provenance.scenario_id) if provenance else None
+        if scenario is None or provenance.seed != scenario.seed:
+            raise ProductError(ProductErrorCode.INVALID_STATE,
+                               "capture requires a frozen synthetic scenario")
+        right_us = FIRST_RIGHT_EDGE_US + window_index * CADENCE_US
+        if window_index < 0 or right_us + EMIT_MARGIN_US >= scenario.duration_s * 1_000_000:
+            raise ProductError(ProductErrorCode.INVALID_REQUEST,
+                               "capture window index is outside the scenario")
+        expire_captures()
+        if session_id not in armed and len(armed) + len(captured) >= MAX_ACTIVE_LIVE_CAPTURES:
+            raise ProductError(ProductErrorCode.INVALID_STATE,
+                               "live capture capacity busy")
+        armed[session_id] = (user_id, window_index)
+        capture_errors.pop(session_id, None)
+        return CaptureArmResult(session_id=session_id, window_index=window_index)
+
+    @app.get(f"{PREFIX}/sessions/{{session_id}}/capture", response_model=WindowTrace)
+    async def owned_live_capture(request: Request, session_id: str) -> WindowTrace:
+        user_id = await identity(request)
+        session = store.get_session(session_id)
+        if session is None:
+            raise ProductError(ProductErrorCode.NOT_FOUND, "session not found")
+        if session.user_id != user_id:
+            raise ProductError(ProductErrorCode.FORBIDDEN, "session belongs to another user")
+        expire_captures()
+        capture = captured.get(session_id)
+        if capture is None:
+            reason = capture_errors.get(session_id, "NO_LIVE_CAPTURE_FOR_SESSION")
+            raise ProductError(ProductErrorCode.NOT_FOUND, reason)
+        if capture.error is not None:
+            raise ProductError(ProductErrorCode.INVALID_STATE, capture.error)
+        if capture.trace is None:
+            raise ProductError(ProductErrorCode.INVALID_STATE,
+                               "selected live window has not been emitted")
+        trace = capture.trace
+        timeline = app.state.session_evidence_store.timeline(session_id, user_id)
+        inference_items = [item for item in timeline.source_timeline
+                           if item.kind == "INFERENCE"
+                           and item.source_timestamp_us == trace.right_timestamp_us]
+        if len(inference_items) == 1 and isinstance(inference_items[0].payload, InferencePayload):
+            payload = inference_items[0].payload
+            if trace.quality_state != payload.ecg_quality:
+                raise RuntimeError("CAPTURED_QUALITY_PERSISTENCE_MISMATCH")
+            trace = trace.model_copy(update={
+                "persisted_inference": PersistedInference(
+                    model_id=payload.model_id, calibration_domain=payload.calibration_domain,
+                    raw_probability=payload.raw_probability,
+                    source_domain_calibrated_probability=(
+                        payload.source_domain_calibrated_probability),
+                    threshold=payload.threshold, monitoring_state=payload.monitoring_state,
+                    ecg_quality=payload.ecg_quality),
+                "inference_evidence_status": "PERSISTED_INFERENCE_MATCHED_TO_CAPTURED_SOURCE_TIME",
+            })
+        if len(trace.model_dump_json().encode()) > MAX_TRACE_RESPONSE_BYTES:
+            raise ProductError(ProductErrorCode.INTERNAL_PRODUCT_ERROR,
+                               "live capture response size limit exceeded")
+        return trace
 
     @app.get(f"{PREFIX}/federation/cohort", response_model=FrozenCohort)
     async def federation_cohort(request: Request) -> FrozenCohort:

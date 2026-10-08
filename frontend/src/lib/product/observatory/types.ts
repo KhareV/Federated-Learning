@@ -5,6 +5,18 @@ export interface ScenarioInfo {
 	source_kind: 'SYNTHETIC_VIRTUAL_WEARABLE';
 	trace_classification: 'DETERMINISTIC_LOCAL_RECONSTRUCTION';
 }
+export interface CaptureArm {
+	session_id: string; window_index: number;
+	status: 'ARMED_BEFORE_START'; storage: 'BOUNDED_IN_MEMORY_ONLY';
+}
+export function parseCaptureArm(value: unknown): CaptureArm {
+	const o = object(value, 'capture_arm');
+	fields(o, ['session_id','window_index','status','storage'], 'capture_arm');
+	return { session_id: string(o.session_id, 'capture_arm.session_id'),
+		window_index: integer(o.window_index, 'capture_arm.window_index'),
+		status: literal(o.status, 'ARMED_BEFORE_START', 'capture_arm.status'),
+		storage: literal(o.storage, 'BOUNDED_IN_MEMORY_ONLY', 'capture_arm.storage') };
+}
 export function parseScenarioList(value: unknown): ScenarioInfo[] {
 	return array(value, (entry, label) => {
 		const o = object(entry, label);
@@ -41,7 +53,7 @@ export interface PersistedInference {
 }
 export interface WindowTrace {
 	trace_version: 'NHM_PIPELINE_TRACE_V1';
-	classification: 'DETERMINISTIC_LOCAL_RECONSTRUCTION';
+	classification: 'DETERMINISTIC_LOCAL_RECONSTRUCTION' | 'CAPTURED_LIVE_PREPROCESSING';
 	source_kind: 'SYNTHETIC_VIRTUAL_WEARABLE';
 	scenario_id: string; session_id: string | null; window_index: number; window_id: string;
 	left_timestamp_us: number; right_timestamp_us: number;
@@ -127,7 +139,8 @@ export function parseWindowTrace(value: unknown): WindowTrace {
 	const right = integer(o.right_timestamp_us, 'right_timestamp_us');
 	if (right - left !== 10_000_000) throw new Error('MALFORMED_EVIDENCE:window_duration');
 	return { trace_version: literal(o.trace_version, 'NHM_PIPELINE_TRACE_V1', 'trace_version'),
-		classification: literal(o.classification, 'DETERMINISTIC_LOCAL_RECONSTRUCTION', 'classification'),
+		classification: oneOf(o.classification,
+			['DETERMINISTIC_LOCAL_RECONSTRUCTION', 'CAPTURED_LIVE_PREPROCESSING'], 'classification'),
 		source_kind: literal(o.source_kind, 'SYNTHETIC_VIRTUAL_WEARABLE', 'source_kind'),
 		scenario_id: string(o.scenario_id, 'scenario_id'), session_id: nullable(o.session_id, string, 'session_id'),
 		window_index: integer(o.window_index, 'window_index'), window_id: string(o.window_id, 'window_id'),

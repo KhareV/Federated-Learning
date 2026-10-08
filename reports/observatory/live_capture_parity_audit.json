@@ -1,0 +1,24 @@
+{
+  "status": "PARTIAL_OBSERVATORY_CHECKPOINT_NOT_V1_ACCEPTANCE",
+  "session_id": "SESS-45fd861ed6c64f0fa479aca0243b3860",
+  "source": "isolated local DEMO NORMAL_MONITORING run in /tmp/nhm-observatory-dev.SluX7T",
+  "session_state": "COMPLETED",
+  "capture_classification": "CAPTURED_LIVE_PREPROCESSING",
+  "selected_window_index": 0,
+  "captured_live_stages": ["SOURCE_OBSERVED", "GAP_POLICY_V1", "MITDB_360_TO_250_V1", "PREPROC_V1_ECG_FILTER_V1"],
+  "emitted_window_and_quality": "captured from the same live runtime instance",
+  "normalization": "RECONSTRUCTED_MODEL_INPUT_FROM_CAPTURED_EMITTED_FILTERED_WINDOW_NOT_GATEWAY_HOOK",
+  "persisted_inference": "MODEL_V2_FINAL output matched to captured source timestamp",
+  "local_http_parity": {
+    "captured_vs_deterministic_reconstruction_stage_points_equal": true,
+    "gap_events_equal": true,
+    "quality_equal": true,
+    "normalized_tensor_sha256_equal": true,
+    "persisted_inference_metadata_equal": true
+  },
+  "unit_parity": "two selected windows (clean and long-gap) matched unobserved WearableStreamRuntime outputs, stages, gaps, quality and normalized-tensor digest",
+  "extra_model_inference_for_inspector": false,
+  "capture_storage": "BOUNDED_IN_MEMORY_ONLY_ONE_WINDOW_WITH_ONE_HOUR_EXPIRATION",
+  "connected_clerk_e2e": false,
+  "limitation": "No direct hook inside the released gateway normalization/logit path; model-input normalization is reconstructed from the captured emitted window and final inference is attached only from persisted evidence."
+}

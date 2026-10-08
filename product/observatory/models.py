@@ -21,6 +21,13 @@ class ScenarioInfo(StrictModel):
     )
 
 
+class CaptureArmResult(StrictModel):
+    session_id: str
+    window_index: int
+    status: Literal["ARMED_BEFORE_START"] = "ARMED_BEFORE_START"
+    storage: Literal["BOUNDED_IN_MEMORY_ONLY"] = "BOUNDED_IN_MEMORY_ONLY"
+
+
 class SignalPoint(StrictModel):
     timestamp_us: int
     value: float | None
@@ -73,7 +80,9 @@ class PersistedInference(StrictModel):
 
 class WindowTrace(StrictModel):
     trace_version: Literal["NHM_PIPELINE_TRACE_V1"] = "NHM_PIPELINE_TRACE_V1"
-    classification: Literal["DETERMINISTIC_LOCAL_RECONSTRUCTION"] = (
+    classification: Literal[
+        "DETERMINISTIC_LOCAL_RECONSTRUCTION", "CAPTURED_LIVE_PREPROCESSING"
+    ] = (
         "DETERMINISTIC_LOCAL_RECONSTRUCTION"
     )
     source_kind: Literal["SYNTHETIC_VIRTUAL_WEARABLE"] = "SYNTHETIC_VIRTUAL_WEARABLE"

@@ -29,7 +29,8 @@ import {
 } from './federation/types';
 import { parseSessionSummary, parseSessionTimeline, type SessionSummary, type SessionTimeline } from './history/types';
 import { parseFlResearchEvidence, parseMlResearchEvidence, type FlResearchEvidence, type MlResearchEvidence } from './research/types';
-import { parseScenarioList, parseWindowTrace, type ScenarioInfo, type WindowTrace } from './observatory/types';
+import { parseCaptureArm, parseScenarioList, parseWindowTrace,
+	type CaptureArm, type ScenarioInfo, type WindowTrace } from './observatory/types';
 import { parseFlClientWindowTrace, parseFrozenCohort, parseRunContributions,
 	type FlClientWindowTrace, type FrozenCohort, type RunContributions } from './observatory/federation';
 import { parseResearchRecords, parseResearchWindow,
@@ -111,6 +112,8 @@ export interface ProductClient {
 	observatoryFlClientWindow(clientId: string, windowIndex: number): Promise<FlClientWindowTrace>;
 	observatoryResearchRecords(): Promise<ResearchRecord[]>;
 	observatoryResearchWindow(recordId: string, windowIndex: number): Promise<ResearchWindow>;
+	observatoryArmSessionCapture(sessionId: string, windowIndex: number): Promise<CaptureArm>;
+	observatoryCapturedSessionWindow(sessionId: string): Promise<WindowTrace>;
 	startSession(sessionId: string): Promise<MonitoringSession>;
 	stopSession(sessionId: string): Promise<MonitoringSession>;
 	// CAPSTONE_FEDERATION_PRODUCT_CLIENT_V1 (CAP-008): CAP-007 routes only
@@ -216,6 +219,10 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 			'/observatory/research/records')),
 		observatoryResearchWindow: async (id, index) => parseResearchWindow(await call<unknown>('GET',
 			`/observatory/research/records/${enc(id)}/windows/${enc(String(index))}`)),
+		observatoryArmSessionCapture: async (id, index) => parseCaptureArm(await call<unknown>('POST',
+			`/observatory/sessions/${enc(id)}/capture/${enc(String(index))}`)),
+		observatoryCapturedSessionWindow: async (id) => parseWindowTrace(await call<unknown>('GET',
+			`/observatory/sessions/${enc(id)}/capture`)),
 		startSession: (id) => call('POST', `/sessions/${enc(id)}/start`),
 		stopSession: (id) => call('POST', `/sessions/${enc(id)}/stop`),
 		federationOverview: () => call('GET', '/federation'),

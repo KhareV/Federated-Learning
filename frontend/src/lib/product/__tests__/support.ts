@@ -144,6 +144,8 @@ export function fakeBackend(system: SystemInfoV2 = systemInfo({ federation_runti
 		observatoryFlClientWindow: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_CLIENT_WINDOW')),
 		observatoryResearchRecords: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_RESEARCH_RECORDS')),
 		observatoryResearchWindow: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_RESEARCH_WINDOW')),
+		observatoryArmSessionCapture: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_LIVE_CAPTURE')),
+		observatoryCapturedSessionWindow: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_LIVE_CAPTURE')),
 		setState: (state) => (dev = device(state)),
 		system: () => rec('system', system),
 		me: () => rec('me', DEMO_IDENTITY),

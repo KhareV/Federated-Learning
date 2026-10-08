@@ -29,6 +29,7 @@ from product.observatory.federation import (
     frozen_cohort,
     run_contributions,
 )
+from product.observatory.live_capture import LiveWindowCapture
 from product.observatory.pipeline import reconstruct_window
 from product.observatory.research_record import inspect_train_window, list_train_records
 from scripts.capstone_cap003_test_identity import cap003_test_identity_resolver
@@ -36,6 +37,7 @@ from simulation.fl_cohort_v1 import client_profile
 from simulation.profile_v2013 import iter_observed_records
 from simulation.stream_runtime_v2013 import CHUNK_RECORDS, WearableStreamRuntime
 from tests.capstone_federation_support import DESCRIPTION, SINGLE_RUN, USER_A, USER_B
+from tests.capstone_persistent_support import StrictInferenceDouble, collect_ws, provisioned_session
 from tests.test_capstone_history_evidence import seed
 
 
@@ -79,6 +81,39 @@ def test_observer_delegates_to_canonical_pipeline_without_output_drift() -> None
         assert all(stage.displayed_point_count <= 1200 for stage in trace.stages)
 
 
+@pytest.mark.parametrize("scenario_id,window_index", [
+    ("NORMAL_MONITORING", 0), ("DISCONNECT_RECONNECT", 12),
+])
+def test_opt_in_live_capture_parity_with_unobserved_runtime(scenario_id: str,
+                                                             window_index: int) -> None:
+    scenario = load_scenarios()[scenario_id]
+    observed = WearableStreamRuntime(session_id="LIVE_CAPTURE_TEST", model_id="MODEL_V2_FINAL",
+                                     replay_id="PARITY")
+    plain = WearableStreamRuntime(session_id="LIVE_CAPTURE_TEST", model_id="MODEL_V2_FINAL",
+                                  replay_id="PARITY")
+    capture = LiveWindowCapture(observed, scenario_id=scenario.scenario_id,
+                                session_id="LIVE_CAPTURE_TEST", window_index=window_index)
+    batch = []
+    for record in iter_observed_records(scenario.profile()):
+        batch.append(record)
+        if len(batch) < CHUNK_RECORDS:
+            continue
+        observed_windows = observed.ingest(batch)
+        plain_windows = plain.ingest(batch)
+        assert observed_windows == plain_windows
+        batch = []
+        if capture.trace is not None:
+            break
+    assert capture.error is None and capture.trace is not None
+    assert capture.trace.classification == "CAPTURED_LIVE_PREPROCESSING"
+    reconstruction = reconstruct_window(scenario, window_index, session_id="LIVE_CAPTURE_TEST")
+    assert capture.trace.quality_state == reconstruction.quality_state
+    assert capture.trace.quality_reasons == reconstruction.quality_reasons
+    assert capture.trace.gaps == reconstruction.gaps
+    assert capture.trace.stages == reconstruction.stages
+    assert capture.trace.normalization == reconstruction.normalization
+
+
 def test_short_gap_trace_shows_causal_fill_without_future_value() -> None:
     scenario = ScenarioSpec(
         scenario_id="TEST_SHORT_GAP", seed=20260927, duration_s=45,
@@ -118,6 +153,77 @@ def test_authenticated_session_trace_owner_and_projected_context_only(tmp_path: 
         assert "666.0" not in owned.text
         assert client.get(f"/product/v1/observatory/sessions/{sid}/windows/6",
                           headers=USER_A).status_code == 404
+
+
+def test_live_capture_arm_requires_owner_and_prestart_state(tmp_path: Path) -> None:
+    store = CapstoneSqliteStore(tmp_path / "product.sqlite3")
+    app = create_product_app_observatory_v1(
+        store=store, identity_resolver=cap003_test_identity_resolver,
+        auth_description=DESCRIPTION, federation_artifact_root=tmp_path / "federation",
+        candidate_root=tmp_path / "candidates", auto_resume=False,
+    )
+    base = "/product/v1"
+    with TestClient(app) as client:
+        device = client.post(f"{base}/devices/simulated",
+                             json={"scenario_id": "NORMAL_MONITORING"},
+                             headers=USER_A).json()
+        device_id = device["device_id"]
+        assert client.post(f"{base}/devices/{device_id}/scan", headers=USER_A).status_code == 200
+        assert client.post(f"{base}/devices/{device_id}/connect", headers=USER_A).status_code == 200
+        session = client.post(f"{base}/sessions",
+                              json={"device_id": device_id,
+                                    "scenario_id": "NORMAL_MONITORING"},
+                              headers=USER_A).json()
+        path = f"{base}/observatory/sessions/{session['session_id']}/capture/0"
+        assert client.post(path).status_code == 401
+        assert client.post(path, headers=USER_B).status_code == 403
+        assert client.post(path.replace("/capture/0", "/capture/9999"),
+                           headers=USER_A).status_code == 400
+        response = client.post(path, headers=USER_A)
+        assert response.status_code == 200, response.text
+        assert response.json()["status"] == "ARMED_BEFORE_START"
+        assert client.get(path.rsplit("/", 1)[0], headers=USER_B).status_code == 403
+
+
+def test_opt_in_capture_of_real_session_preserves_inference_and_source_parity(tmp_path: Path
+                                                                             ) -> None:
+    double = StrictInferenceDouble()
+    store = CapstoneSqliteStore(tmp_path / "product.sqlite3")
+    app = create_product_app_observatory_v1(
+        store=store, identity_resolver=cap003_test_identity_resolver,
+        auth_description=DESCRIPTION, inference_client_factory=double.client,
+        federation_artifact_root=tmp_path / "federation", candidate_root=tmp_path / "candidates",
+        auto_resume=False,
+    )
+    with TestClient(app) as client:
+        _, sid = provisioned_session(client, "NORMAL_MONITORING")
+        capture_url = f"/product/v1/observatory/sessions/{sid}/capture"
+        assert client.post(f"{capture_url}/0", headers=USER_A).status_code == 200
+        assert client.post(f"/product/v1/sessions/{sid}/start", headers=USER_A).status_code == 200
+        collect_ws(client, sid)
+        captured = client.get(capture_url, headers=USER_A)
+        assert captured.status_code == 200, captured.text
+        body = captured.json()
+        assert body["classification"] == "CAPTURED_LIVE_PREPROCESSING"
+        assert body["persisted_inference"]["model_id"] == "MODEL_V2_FINAL"
+        rebuilt = client.get(f"/product/v1/observatory/sessions/{sid}/windows/0",
+                             headers=USER_A).json()
+        for field in ("stages", "gaps", "quality_state", "quality_reasons", "normalization",
+                      "persisted_inference"):
+            assert body[field] == rebuilt[field]
+        assert client.get(capture_url, headers=USER_B).status_code == 403
+        assert len(double.requests) == len(store.rows("inference_events")) == 21
+    restarted = create_product_app_observatory_v1(
+        store=store, identity_resolver=cap003_test_identity_resolver,
+        auth_description=DESCRIPTION, inference_client_factory=double.client,
+        federation_artifact_root=tmp_path / "federation", candidate_root=tmp_path / "candidates",
+        auto_resume=False,
+    )
+    with TestClient(restarted) as client:
+        assert client.get(capture_url, headers=USER_A).status_code == 404
+        assert client.get(f"/product/v1/observatory/sessions/{sid}/windows/0",
+                          headers=USER_A).status_code == 200
+        assert len(double.requests) == 21
 
 
 def test_frozen_cohort_counts_and_direct_acceptance_only(tmp_path: Path) -> None:
@@ -321,7 +427,7 @@ def test_frozen_cohort_hash_fails_closed_on_tamper(tmp_path: Path, monkeypatch) 
         federation.frozen_cohort()
 
 
-def test_api_extension_adds_only_eight_read_only_routes(tmp_path: Path) -> None:
+def test_api_extension_adds_eight_read_only_and_two_opt_in_capture_routes(tmp_path: Path) -> None:
     shared = dict(
         store=CapstoneSqliteStore(tmp_path / "product.sqlite3"),
         identity_resolver=cap003_test_identity_resolver, auth_description=DESCRIPTION,
@@ -345,4 +451,6 @@ def test_api_extension_adds_only_eight_read_only_routes(tmp_path: Path) -> None:
         ("/product/v1/observatory/research/records", ("GET",)),
         ("/product/v1/observatory/research/records/{record_id}/windows/{window_index}",
          ("GET",)),
+        ("/product/v1/observatory/sessions/{session_id}/capture/{window_index}", ("POST",)),
+        ("/product/v1/observatory/sessions/{session_id}/capture", ("GET",)),
     }
