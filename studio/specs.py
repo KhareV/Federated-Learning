@@ -24,7 +24,7 @@ def figure_title(fid: str, n: int) -> str:
     base = next(t for i, t, _ in FIGURES if i == fid)
     word = {3: "Three", 10: "Ten"}.get(n, str(n))
     cmp_a, cmp_b = comparison_pair(n)
-    return (base.replace("Ten-round", f"{word}-round").replace("R0-R10", f"R0-R{n}")
+    return (base.replace("independent holdout", "reused diagnostic holdout").replace("Ten-round", f"{word}-round").replace("R0-R10", f"R0-R{n}")
             .replace("R10 minus R3", f"R{cmp_b} minus R{cmp_a}"))
 
 

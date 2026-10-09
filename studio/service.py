@@ -48,6 +48,7 @@ class StudioService:
         self.runner10 = StudioFl10Service(root=self.root, observer=self.observer, inference_factory=inference_factory,
                                           other_run_active=lambda: bool(other_run_active()) or federation.active_live_run(), finalize=self._finalize_10)
         self._exports: dict[str, dict[str, Any]] = {}
+        self._recorded_journals: dict[str, Any] = {}
         self._bundles: OrderedDict[tuple[Any, ...], dict[str, Any]] = OrderedDict()
         self._lock = threading.RLock()
         self._wrap_finish_for_exports()
@@ -124,6 +125,13 @@ class StudioService:
             raise ProductError(ProductErrorCode.FORBIDDEN, "not the owner of this run")
 
     def journal_for(self, run_id: str) -> Any:
+        if self.is_recorded(run_id):
+            with self._lock:
+                if run_id not in self._recorded_journals:
+                    from studio.recorded_events import build_recorded_journal
+
+                    self._recorded_journals[run_id] = build_recorded_journal(run_id, recorded_bundle(run_id))
+                return self._recorded_journals[run_id]
         return self.runner10.journal_for(run_id) if run_id.startswith("FL10RUN-") else self.federation.journal_for(run_id)
 
     # ---- descriptors ---------------------------------------------------------------------------------------------------

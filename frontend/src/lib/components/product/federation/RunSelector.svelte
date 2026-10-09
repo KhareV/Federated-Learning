@@ -5,7 +5,7 @@
 <label class="sel">Federation run
 	<select value={selected ?? ''} onchange={(e) => onSelect((e.currentTarget as HTMLSelectElement).value)} data-testid="run-selector">
 		<option value="" disabled>{runs.length ? 'Select a run' : 'No runs yet'}</option>
-		{#each runs as r}<option value={r.run_id}>{r.run_id} · {r.run_type} · {r.algorithm} · {r.secagg_mode} · {r.status}</option>{/each}
+		{#each runs as r}<option value={r.run_id}>{r.run_id} · {r.run_type} · {r.algorithm} · {r.secagg_mode} · {r.planned_rounds} rounds · {r.status}</option>{/each}
 	</select>
 </label>
 <style>

@@ -19,13 +19,13 @@ CLIENT_COUNT = 8
 class Fl10EventTranslator:
     """``post(fn)`` runs ``fn`` on the thread that owns the journal (the event loop); order of calls is preserved."""
 
-    def __init__(self, emitter: FederationEmitter, post: Callable[[Callable[[], None]], None], *, planned_rounds: int, client_ids: tuple[str, ...], local_examples: dict[str, int]) -> None:
-        self.em, self._post = emitter, post
+    def __init__(self, emitter: FederationEmitter, post: Callable[[Callable[[], None]], None], *, planned_rounds: int, client_ids: tuple[str, ...], local_examples: dict[str, int], run_type: RunType = RunType.LIVE_RUN) -> None:
+        self.em, self._post, self.run_type = emitter, post, run_type
         self.planned, self.clients, self.examples = planned_rounds, client_ids, local_examples
         self.round = 0
 
     def _status(self, status: RunState, round_id: int) -> None:
-        self.em.federation_status(run_type=RunType.LIVE_RUN, run_status=status, algorithm=Algorithm.FEDAVG, current_round=round_id, planned_rounds=self.planned, client_count=CLIENT_COUNT, engineering_only=True)
+        self.em.federation_status(run_type=self.run_type, run_status=status, algorithm=Algorithm.FEDAVG, current_round=round_id, planned_rounds=self.planned, client_count=CLIENT_COUNT, engineering_only=True)
 
     def created(self) -> None:
         self._post(lambda: self._status(RunState.CREATED, 0))

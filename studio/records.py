@@ -68,6 +68,5 @@ class EvaluationRecord(BaseModel):
     def light(self) -> dict[str, Any]:
         """Summary for polling: no curves, no per-participant detail, no histogram."""
         data = self.model_dump(mode="json", exclude={"participant_metrics", "metric_result"})
-        if self.metric_result is not None:
-            data["metric_result"] = {k: v for k, v in self.metric_result.items() if k not in ("histogram",)}
+        data["metric_result"] = None if self.metric_result is None else {k: v for k, v in self.metric_result.items() if k not in ("histogram",)}
         return data

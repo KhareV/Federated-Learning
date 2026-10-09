@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { cell, type Fl10Spec, type Fl10View } from '$lib/product/observatory/fl10';
-	let { spec, initialView = null }: { spec: Fl10Spec; initialView?: string | null } = $props();
+	// selectedX / onPickX / pending markers are additive Studio features: the selected round is highlighted, a pending (not yet evaluated) round is marked as pending and never drawn as a value.
+	let { spec, initialView = null, selectedX = null, onPickX = undefined }: { spec: Fl10Spec; initialView?: string | null; selectedX?: number | null; onPickX?: (x: number) => void } = $props();
 	const W = 640, H = 340, L = 60, R = 16, T = 14, B = 52;
 	const COLORS = ['#4ea1ff', '#f59e0b', '#34d399', '#c084fc', '#f87171', '#2dd4bf', '#d6b36a', '#cbd5e1', '#f472b6', '#22d3ee', '#a3e635'];
 	let viewId = $state<string | null>(initialView);
@@ -31,6 +32,8 @@
 		const lo = Math.min(...all), hi = Math.max(...all); const pad = (hi - lo || 1) * 0.06;
 		return [view.kind === 'curves' || view.kind === 'bars' || view.kind === 'stacked' ? Math.min(lo, 0) : lo - pad, hi + pad];
 	});
+	const pointRole = $derived<{ role: string }>(onPickX ? { role: 'button' } : { role: 'img' });   // dynamic: a plot point is a button only when it can select a round
+	const pendingMarks = $derived<{ x: number; state: string; status: string }[]>(Array.isArray(view.pending) ? (view.pending as { x: number; state: string; status: string }[]) : []);
 	const px = (x: number) => L + ((x - xr[0]) / (xr[1] - xr[0] || 1)) * (W - L - R);
 	const py = (y: number) => H - B - ((y - yr[0]) / (yr[1] - yr[0] || 1)) * (H - B - T);
 	function path(s: { x?: number[]; y?: (number | null)[] }): string {
@@ -57,7 +60,10 @@
 	const ir = $derived.by<[number, number]>(() => { const a = nums(iv.flatMap((r) => [r.point, r.lo, r.hi, 0])); return a.length ? [Math.min(...a), Math.max(...a)] : [-1, 1]; });
 	const ix = (v: number) => L + 90 + ((v - ir[0]) / (ir[1] - ir[0] || 1)) * (W - L - R - 90);
 	const rows = $derived.by<string[][]>(() => {
-		if (view.kind === 'lines' || view.kind === 'curves') return visible.flatMap((s) => (s.x ?? []).slice(0, view.kind === 'curves' ? 400 : 200).map((x, i) => [s.name, cell(x, 6), cell(s.y?.[i] ?? null, 6)]));
+		if (view.kind === 'lines' || view.kind === 'curves') return visible.flatMap((s) => (s.x ?? []).slice(0, view.kind === 'curves' ? 400 : 200).map((x, i) => {
+			const pend = view.kind === 'lines' ? pendingMarks.find((m) => m.x === x) : undefined;
+			return [s.name, cell(x, 6), (s.y?.[i] ?? null) === null && pend ? `${pend.status} (no measured value yet)` : cell(s.y?.[i] ?? null, 6)];
+		}));
 		if (view.kind === 'bars' || view.kind === 'stacked') return series.flatMap((s) => cats.map((c, i) => [s.name, c, cell(s.values?.[i] ?? null, 6)]));
 		if (view.kind === 'heatmap') return (view.rows as string[]).flatMap((r, i) => (view.cols as string[]).map((c, j) => [r, c, view.values[i][j] === null ? 'NOT CAPTURED' : cell(view.values[i][j], 6)]));
 		if (view.kind === 'intervals') return iv.map((r) => [r.label, cell(r.point), cell(r.lo), cell(r.hi), `${r.valid} valid / ${r.invalid} invalid`]);
@@ -84,11 +90,13 @@
 			<text transform={`translate(14 ${(T + H - B) / 2}) rotate(-90)`} class="label" text-anchor="middle">{view.y_label}</text>
 			{#if view.diagonal}<line x1={px(0)} y1={py(0)} x2={px(1)} y2={py(1)} class="diag" />{/if}
 			{#if typeof view.hline === 'number'}<line x1={L} x2={W - R} y1={py(view.hline)} y2={py(view.hline)} class="diag" /><text x={W - R} y={py(view.hline) - 3} class="tick" text-anchor="end">{view.hline_label}</text>{/if}
+			{#if view.kind === 'lines' && selectedX !== null && selectedX >= xr[0] && selectedX <= xr[1]}<line x1={px(selectedX)} x2={px(selectedX)} y1={T} y2={H - B} class="sel" data-testid="selected-round-marker" /><text x={px(selectedX)} y={T + 8} class="tick" text-anchor="middle">selected</text>{/if}
+			{#if view.kind === 'lines'}{#each pendingMarks as m (m.state)}{#if m.x >= xr[0] && m.x <= xr[1]}<circle cx={px(m.x)} cy={H - B - 8} r="4.5" class="pend" data-testid={`pending-${m.state}`} role="img" aria-label={`${m.state} ${m.status}: no measured value yet`}><title>{`${m.state}: ${m.status} - no measured value yet`}</title></circle>{/if}{/each}{/if}
 			{#each series as s, i (s.name)}{#if !isHidden(s.name)}
 				<path d={path(s)} fill="none" stroke={COLORS[i % COLORS.length]} stroke-width="1.6" stroke-dasharray={s.dashed ? '5 4' : undefined} />
 				{#if view.kind === 'lines'}{#each s.x ?? [] as x, k}{#if s.y?.[k] !== null && s.y?.[k] !== undefined}
-					<circle cx={px(x)} cy={py(s.y[k] as number)} r="3.2" fill={COLORS[i % COLORS.length]} tabindex="0" role="img" aria-label={`${s.name}, x ${x}, value ${cell(s.y[k])}`}
-						onfocus={() => say(`${s.name} · x ${x} · ${cell(s.y?.[k])}`)} onmouseenter={() => say(`${s.name} · x ${x} · ${cell(s.y?.[k])}`)}><title>{`${s.name}: x ${x}, ${cell(s.y[k])}`}</title></circle>
+					<circle cx={px(x)} cy={py(s.y[k] as number)} r="3.2" fill={COLORS[i % COLORS.length]} tabindex="0" {...pointRole} aria-label={`${s.name}, x ${x}, value ${cell(s.y[k])}${onPickX ? ' (activate to select this round)' : ''}`}
+						onfocus={() => say(`${s.name} · x ${x} · ${cell(s.y?.[k])}`)} onmouseenter={() => say(`${s.name} · x ${x} · ${cell(s.y?.[k])}`)} onclick={() => onPickX?.(x)} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPickX?.(x); } }} style:cursor={onPickX ? 'pointer' : undefined}><title>{`${s.name}: x ${x}, ${cell(s.y[k])}`}</title></circle>
 				{:else}<text x={px(x)} y={H - B - 4} class="undef" text-anchor="middle">U</text>{/if}{/each}{/if}
 			{/if}{/each}
 		</svg>
@@ -167,7 +175,7 @@
 </figure>
 <style>
 	.chart{margin:0;display:grid;gap:8px;padding:12px;border:1px solid rgba(148,163,184,.22);background:rgba(10,15,31,.5);min-width:0}figcaption{font:13px 'Space Grotesk',sans-serif;color:#e2e8f0}svg{width:100%;height:auto;background:#050a15;max-width:100%}
-	.grid{stroke:rgba(148,163,184,.14)}.axis{stroke:rgba(148,163,184,.55)}.diag{stroke:rgba(148,163,184,.5);stroke-dasharray:4 4}.thr{stroke:#e2e8f0;stroke-dasharray:5 4}.tick{fill:#94a3b8;font:10px 'JetBrains Mono',monospace}.label{fill:#a7b8c9;font:11px 'Space Grotesk',sans-serif}.undef{fill:#f87171;font:9px 'JetBrains Mono',monospace}.cellv{fill:#fff;font:10px 'JetBrains Mono',monospace}
+	.sel{stroke:#2bb8b0;stroke-width:1.4;stroke-dasharray:3 3}.pend{fill:none;stroke:#fbbf24;stroke-width:1.6;stroke-dasharray:2 2}.grid{stroke:rgba(148,163,184,.14)}.axis{stroke:rgba(148,163,184,.55)}.diag{stroke:rgba(148,163,184,.5);stroke-dasharray:4 4}.thr{stroke:#e2e8f0;stroke-dasharray:5 4}.tick{fill:#94a3b8;font:10px 'JetBrains Mono',monospace}.label{fill:#a7b8c9;font:11px 'Space Grotesk',sans-serif}.undef{fill:#f87171;font:9px 'JetBrains Mono',monospace}.cellv{fill:#fff;font:10px 'JetBrains Mono',monospace}
 	.views,.legend{display:flex;flex-wrap:wrap;gap:6px}button{background:#0a0f1f;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);padding:4px 9px;min-height:28px;font:11px 'JetBrains Mono',monospace;cursor:pointer}button.on{border-color:#2bb8b0;color:#9fe8e3}button.off{opacity:.45;text-decoration:line-through}.legend i{display:inline-block;width:10px;height:10px;margin-right:6px}
 	.tip{font:11px 'JetBrains Mono',monospace;color:#9fe8e3;min-height:16px;overflow-wrap:anywhere}.cap{color:#a7b8c9;font-size:12px;line-height:1.5;margin:0}.syn{display:inline-block;width:fit-content;border:1px solid rgba(167,139,250,.55);padding:3px 8px;color:#d8ccff;font:10px 'JetBrains Mono',monospace;margin:0}.dim{color:#94a3b8;font-size:12px;margin:0}
 	.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:10px}.cm{border:1px solid rgba(148,163,184,.25);padding:8px}.grid2{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;margin-top:6px;font:12px 'JetBrains Mono',monospace}.grid2 b{font-size:10px;color:#71829a;align-self:center}.grid2 span{border:1px solid rgba(148,163,184,.3);padding:10px 6px;text-align:center}.tp,.tn{border-color:rgba(167,139,250,.6)!important}.fp,.fn{border-color:rgba(251,191,36,.6)!important}.norm{font-size:12px;color:#a7b8c9}

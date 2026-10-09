@@ -51,6 +51,7 @@ class Job:
     failure: dict[str, str] | None = None
     candidate: dict[str, Any] | None = None
     export_status: str = "NOT_STARTED"            # NOT_STARTED | PREPARING | READY | FAILED
+    cancelled: bool = False
     journal: FederationEventJournal | None = None
     emitter: FederationEmitter | None = None
     translator: Fl10EventTranslator | None = None
@@ -120,6 +121,18 @@ class StudioFl10Service:
 
     def active(self) -> bool:
         return any(j.status == "RUNNING" for j in self.jobs.values())
+
+    def cancel_all(self) -> None:
+        for job in self.jobs.values():
+            if job.status == "RUNNING":
+                job.cancelled = True
+
+    async def shutdown(self, timeout: float = 120.0) -> None:
+        """Called from the application lifespan: stop running jobs at their next progress event and wait for their threads (bounded)."""
+        self.cancel_all()
+        tasks = [j.task for j in self.jobs.values() if j.task is not None and not j.task.done()]
+        if tasks:
+            await asyncio.wait(tasks, timeout=timeout)
 
     async def create(self, owner: str, mode: str) -> Job:
         if mode not in MODES:
@@ -198,6 +211,8 @@ class StudioFl10Service:
         self.observer.declare_pair(job.run_id, 3, 10)
 
         def progress(event: dict[str, Any]) -> None:
+            if job.cancelled:      # cooperative stop (application shutdown): the runner fails closed, the run is never a candidate
+                raise StudioRunError("CANCELLED", "the server is shutting down")
             job.translator.on_progress(event)  # type: ignore[union-attr]
             kind, r = event["event"], event.get("round", 0)
             if kind == "ROUND_OPENED":

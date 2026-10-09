@@ -41,7 +41,7 @@ def test_completed_bundle_figures_equal_delivered_fl10_figures():
     assert sorted(live) == sorted(reference)
     for fid, spec in reference.items():
         mine = live[fid]
-        assert mine["title"] == spec["title"], fid
+        assert mine["title"] == spec["title"].replace("independent holdout", "reused diagnostic holdout"), fid
         assert [strip(v) for v in mine["views"]] == [strip(v) for v in spec["views"]], fid
 
 
@@ -52,6 +52,7 @@ def test_completed_bundle_tables_equal_delivered_fl10_tables():
     assert sorted(live) == sorted(reference)
     for tid, table in reference.items():
         assert live[tid]["columns"] == table["columns"], tid
+        assert live[tid]["title"] == table["title"].replace("independent evaluation", "diagnostic evaluation"), tid
         if tid == "FL10_TAB12":
             continue   # check wording is generalized; statuses are asserted below
         if tid == "FL10_TAB10":   # deliberate wording (this run / diagnostic holdout); same four evidence lanes in the same order

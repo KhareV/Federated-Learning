@@ -5,6 +5,8 @@
 
 import { parseFl10, parseFl10Job, parseFl10Recorded, type Fl10Job, type Fl10Payload, type Fl10Recorded } from './observatory/fl10';
 import { parseLiveLink, parseShowcase, type LiveLinkStatus, type ShowcaseBundle } from './observatory/showcase';
+import { parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
+import type { EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
 import type {
 	AuthIdentity,
 	DeviceDescriptor,
@@ -128,6 +130,18 @@ export interface ProductClient {
 	fl10Status(id: string): Promise<Fl10Job>;
 	fl10JobBundle(id: string): Promise<Fl10Payload>;
 	fl10ExportFile(key: string, item: string, fmt: string): Promise<{ blob: Blob; sha256: string | null }>;
+	// NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001: unified, owner-scoped run observation (3-round runs are still created through the frozen federation routes)
+	studioCapabilities(): Promise<StudioCapabilities>;
+	studioRuns(): Promise<StudioRun[]>;
+	studioRun(runId: string): Promise<StudioRun>;
+	studioStartTenRound(choice: StudioRunChoice): Promise<StudioRun>;
+	studioEvaluation(runId: string): Promise<EvalSummary>;
+	studioEvaluationRound(runId: string, round: number): Promise<EvalRoundDetail>;
+	studioRoundDetail(runId: string, round: number): Promise<RoundDetail>;
+	studioFigures(runId: string, round?: number | null): Promise<StudioFigures>;
+	studioTables(runId: string): Promise<StudioTables>;
+	studioExports(runId: string): Promise<StudioExports>;
+	studioExportFile(runId: string, item: string, fmt: string): Promise<{ blob: Blob; sha256: string | null }>;
 	observatoryLiveLinkStart(): Promise<LiveLinkStatus>;
 	observatoryLiveLinkStatus(id: string): Promise<LiveLinkStatus>;
 	observatoryFlCurves(dataset: string, modelId: string): Promise<FlCurves>;
@@ -267,6 +281,24 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 			if (!response.ok) throw new ProductApiError(response.status, kindForStatus(response.status), null, 'export failed');
 			return { blob: await response.blob(), sha256: response.headers.get('X-Content-SHA256') };
 		},
+		studioCapabilities: async () => parseCapabilities(await call<unknown>('GET', '/studio/capabilities')),
+		studioRuns: async () => parseStudioRuns(await call<unknown>('GET', '/studio/runs')),
+		studioRun: async (id) => parseStudioRun(await call<unknown>('GET', `/studio/runs/${enc(id)}`)),
+		studioStartTenRound: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/runs', { run_length: choice.run_length, source_mode: choice.source_mode })),
+		studioEvaluation: async (id) => parseEvalSummary(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation`)),
+		studioEvaluationRound: async (id, round) => parseEvalRound(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation/${round}`)),
+		studioRoundDetail: async (id, round) => parseRoundDetail(await call<unknown>('GET', `/studio/runs/${enc(id)}/rounds/${round}`)),
+		studioFigures: async (id, round) => parseFigures(await call<unknown>('GET', `/studio/runs/${enc(id)}/figures${round === null || round === undefined ? '' : `?round=${round}`}`)),
+		studioTables: async (id) => parseTables(await call<unknown>('GET', `/studio/runs/${enc(id)}/tables`)),
+		studioExports: async (id) => parseExports(await call<unknown>('GET', `/studio/runs/${enc(id)}/exports`)),
+		studioExportFile: async (id, item, fmt) => {
+			const headers: Record<string, string> = {};
+			const token = options.getToken ? await options.getToken() : null;
+			if (token) headers.Authorization = `Bearer ${token}`;
+			const response = await doFetch(`${base}/studio/runs/${enc(id)}/exports/${enc(item)}/${enc(fmt)}`, { method: 'GET', headers, credentials: 'same-origin' });
+			if (!response.ok) throw new ProductApiError(response.status, kindForStatus(response.status), null, 'export failed');
+			return { blob: await response.blob(), sha256: response.headers.get('X-Content-SHA256') };
+		},
 		observatoryShowcase: async () => parseShowcase(await call<unknown>('GET', '/observatory/showcase/bundle')),
 		observatoryFlEval: async () => parseFlEval(await call<unknown>('GET', '/observatory/evidence/fl-eval')),
 		observatoryFlCurves: async (dataset, modelId) => parseFlCurves(await call<unknown>('GET',
@@ -303,5 +335,7 @@ export function liveSocketUrl(sessionId: string, location: { protocol: string; h
 /** Same-origin federation WebSocket URL. NEVER carries a token, cookie, user id or secret. */
 export function federationSocketUrl(runId: string, location: { protocol: string; host: string }): string {
 	const scheme = location.protocol === 'https:' ? 'wss:' : 'ws:';
+	// 10-round Studio runs have their own typed event journal; every 3-round run keeps the original product route unchanged.
+	if (runId.startsWith('FL10RUN-') || runId.startsWith('recorded-')) return `${scheme}//${location.host}${PRODUCT_BASE}/studio/runs/${encodeURIComponent(runId)}/live`;
 	return `${scheme}//${location.host}${PRODUCT_BASE}/federation/runs/${encodeURIComponent(runId)}/live`;
 }

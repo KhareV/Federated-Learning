@@ -21,7 +21,7 @@ def _undef(m: dict[str, Any]) -> str:
 def table_title(tid: str, n: int) -> str:
     base = next(t for i, t in TABLES if i == tid)
     a, b = comparison_pair(n)
-    return base.replace("R0-R10", f"R0-R{n}").replace("R3 versus R10", f"R{a} versus R{b}").replace("11 states", f"{n + 1} states")
+    return base.replace("independent evaluation", "diagnostic evaluation").replace("R0-R10", f"R0-R{n}").replace("R3 versus R10", f"R{a} versus R{b}").replace("11 states", f"{n + 1} states")
 
 
 def build_tables(b: dict[str, Any]) -> dict[str, dict[str, Any]]:

@@ -11,6 +11,7 @@ import asyncio
 import hashlib
 import json
 from collections.abc import Awaitable, Callable
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any
 
@@ -40,6 +41,18 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
 
     service = StudioService(root=Path(artifact_root), federation=app.state.federation_service, inference_factory=inference_factory, other_run_active=other_active)
     app.state.studio_service = service
+    inner_lifespan = app.router.lifespan_context
+
+    @asynccontextmanager
+    async def studio_lifespan(application: FastAPI) -> Any:
+        async with inner_lifespan(application):
+            try:
+                yield
+            finally:        # a running 10-round job is stopped (fail closed) and the evaluation worker is released when the application stops
+                await service.runner10.shutdown()
+                service.observer.close()
+
+    app.router.lifespan_context = studio_lifespan
 
     @app.middleware("http")
     async def one_federation_run_at_a_time(request: Request, call_next: Any) -> Response:
@@ -137,13 +150,14 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
             await websocket.close(code=WS_UNAUTHENTICATED)
             return
         owner = service.owner_of(run_id)
-        if owner is None:
-            await websocket.close(code=WS_NOT_FOUND)
-            return
-        if owner != resolved.user_id:
-            await websocket.close(code=WS_FORBIDDEN)
-            return
-        journal = service.journal_for(run_id)
+        if not service.is_recorded(run_id):         # recorded FL10 evidence is a global read-only reference; every live run is owner-scoped
+            if owner is None:
+                await websocket.close(code=WS_NOT_FOUND)
+                return
+            if owner != resolved.user_id:
+                await websocket.close(code=WS_FORBIDDEN)
+                return
+        journal = await asyncio.to_thread(service.journal_for, run_id)
         if journal is None:
             await websocket.close(code=WS_NOT_FOUND)
             return

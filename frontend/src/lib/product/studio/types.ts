@@ -88,7 +88,7 @@ export interface EvalSummary {
 	revision: number;
 }
 
-export interface EvalRoundDetail extends Partial<EvalRecord> {
+export interface EvalRoundDetail extends Omit<Partial<EvalRecord>, 'evaluation_status'> {
 	run_id: string;
 	round_id: number;
 	evaluation_status: RoundEvalStatus;
