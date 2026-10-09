@@ -1,0 +1,21 @@
+# Governance repair: successor-aware UI verification and the `--demo` launcher preflight
+
+**Pre-existing defect (found at clean `06bd9a0`, before any Studio code):** `python -m scripts.run_nhm --demo` failed preflight (`prior_locks_and_amendments`, `ui_successor`): `verify_capstone_ui_v1` → `CAPSTONE_UI_V1_TAMPER:frontend/src/lib/product/__tests__/support.ts`, `verify_capstone_ui_v1_2…v1_9` → `UNBOUND_OR_MISSING_FRONTEND_FILE`. The successor chain verifiers (`observatory`, `obs_diag`, `final_showcase`, `fl10`) passed.
+
+## Audit
+1. **Original accepted commits:** every verifier `CAPSTONE_UI_V1 … V1_9` PASSES at the commit that introduced its lock (`governance_original_commit_results.txt`, run in throw-away worktrees). The old locks and verifiers are sound.
+2. **Cause:** the resolver all of them share (`scripts/capstone_ui_v1_8_successor.py::v18_bound`) walks `V1_8 → V1_9 → NHM_RESEARCH_OBSERVATORY_V1 → NHM_OBS_DIAG_001 → NHM_FINAL_SHOWCASE_001` and stops there. The additive successor `NHM_FL10_001` (which re-pinned 5 existing and added 3 frontend files in commit `cbc2cf5`) was never added to that chain.
+3. **File-by-file reconciliation** (`governance_reconciliation.json`, produced by `scripts/reconcile_ui_lock_chain.py`): 285 frontend files; 277 byte-identical to the accepted tip; 8 differ, all touched only by `cbc2cf5` and each equal to the digest bound by `NHM_FL10_001.frontend_files`: `Fl10Chart.svelte`, `Fl10Table.svelte`, `__tests__/support.ts`, `api.ts`, `observatory/__tests__/fl10.test.ts`, `observatory/fl10.ts`, `observatory/+page.svelte`, `observatory/fl10/+page.svelte`. **0 unauthorized.** Nothing required a stop.
+
+## Correction (additive, no lock or verifier semantic touched)
+- New `scripts/successor_chain.py`: ordered, append-only registry of additive successors. A link is honoured only if the lock id and PASS status match, its recorded predecessor digest equals the predecessor lock bytes on disk, those bytes equal the bytes at the recorded immutable predecessor commit (`274323730d…`), scope flags are false (no historical lock edited, no push, no promotion, no hardware, no model/calibration change) and it carries a frontend binding. A present-but-invalid link raises; it never falls back to an older tip. Every file must still equal the tip's digest and the file set must match exactly.
+- `scripts/capstone_ui_v1_8_successor.py` (not bound by any lock) now delegates the post-FINAL_SHOWCASE step to that registry. All historical lock bytes, amendments, accepted verifiers and `capstone_demo_preflight.py` are unchanged.
+- Result: all ten UI verifiers + observatory/obs-diag/final-showcase/FL10 verifiers PASS at HEAD; `python -m scripts.run_nhm --demo --preflight-only` all 15 checks true; a full `run_nhm --demo` launch reached READY (frontend 200, product `/system` OK) and stopped cleanly.
+
+## Negative controls (`tests/test_successor_chain_governance.py`, 19 tests)
+Real verifiers run in a worktree: unmutated PASS; unauthorized edit of a V1-bound file rejected by V1, V1_2 and V1_9; further edit of an FL10-re-pinned file rejected; new unbound frontend file rejected; deleted successor lock does not authorize changes; forged successor (wrong predecessor digest, wrong commit, wrong id, non-PASS status, `historical_locks_edited`/`automatically_pushed`/`candidate_promoted_or_deployed` true) rejected with `SUCCESSOR_CHAIN_BROKEN`; mutated FINAL_SHOWCASE and V1_8 lock bytes rejected; reconciliation has zero unauthorized files. Related existing suites: 97 passed (fl10_successor, demo preflight/orchestrator/workspace, final-showcase) and 25 passed (observatory pipeline/diag).
+
+## For the final successor lock
+`NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001` must (a) be appended to `successor_chain.LINKS` (predecessor `NHM_FL10_001`), (b) bind this repair (`scripts/successor_chain.py`, `scripts/capstone_ui_v1_8_successor.py`, `scripts/reconcile_ui_lock_chain.py`, the test file, this document) and (c) record this pre-existing preflight defect and its additive correction.
+
+Observation recorded for Phase 2: the `--demo` launcher serves `run_capstone_product_v1_3` (no Observatory/FL10 routes); the Studio's 10-round backend therefore needs an additive, governance-compatible way to be served by the default launchers.

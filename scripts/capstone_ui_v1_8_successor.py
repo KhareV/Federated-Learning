@@ -49,7 +49,10 @@ def v18_bound(root: Path) -> dict[str, str] | None:
                 if (top.get("lock_id") != "NHM_FINAL_SHOWCASE_001"
                         or top.get("predecessor_sha256") != hash_file(diag)):
                     raise RuntimeError("NHM_FINAL_SHOWCASE_001_SUCCESSOR_CHAIN_BROKEN")
-                return dict(top["bound_artifacts"])
+                # Additive successors after the final showcase (NHM_FL10_001, ...) are resolved by the exact-identity chain registry.
+                from scripts.successor_chain import tip_frontend_map
+
+                return tip_frontend_map(root) or dict(top["bound_artifacts"])
             return dict(tip["bound_artifacts"])
         if observatory.exists():
             tip = json.loads(observatory.read_text(encoding="utf-8"))

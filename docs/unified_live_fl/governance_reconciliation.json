@@ -1,0 +1,2877 @@
+{
+ "files": [
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f72023407e0a9ecc27db4b0cdb8667a42cfc99ca51624ad5b53330429537bb78",
+   "path": "frontend/.env.example",
+   "successor_sha256": {
+    "NHM_FL10_001": "f72023407e0a9ecc27db4b0cdb8667a42cfc99ca51624ad5b53330429537bb78"
+   },
+   "tip_sha256": "f72023407e0a9ecc27db4b0cdb8667a42cfc99ca51624ad5b53330429537bb78",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "38a46f42041a549e379c81e5ae2f5ee208a200313cb5c32ca5b353c322b68c30",
+   "path": "frontend/README.md",
+   "successor_sha256": {
+    "NHM_FL10_001": "38a46f42041a549e379c81e5ae2f5ee208a200313cb5c32ca5b353c322b68c30"
+   },
+   "tip_sha256": "38a46f42041a549e379c81e5ae2f5ee208a200313cb5c32ca5b353c322b68c30",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "4d56952b0fb13bf8f9b6c13a6d4c34a075bac3af447636a1df4335d7576e2f97",
+   "path": "frontend/clerk-sdk/.gitignore",
+   "successor_sha256": {
+    "NHM_FL10_001": "4d56952b0fb13bf8f9b6c13a6d4c34a075bac3af447636a1df4335d7576e2f97"
+   },
+   "tip_sha256": "4d56952b0fb13bf8f9b6c13a6d4c34a075bac3af447636a1df4335d7576e2f97",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f948b4759a819f768885da5129a078513ac5942fa778c37a8c45691081bf8f5e",
+   "path": "frontend/clerk-sdk/package-lock.json",
+   "successor_sha256": {
+    "NHM_FL10_001": "f948b4759a819f768885da5129a078513ac5942fa778c37a8c45691081bf8f5e"
+   },
+   "tip_sha256": "f948b4759a819f768885da5129a078513ac5942fa778c37a8c45691081bf8f5e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a31971f9db734cdc439ae79a43da28d09711daa21440f314acdd97e7423fb2bd",
+   "path": "frontend/clerk-sdk/package.json",
+   "successor_sha256": {
+    "NHM_FL10_001": "a31971f9db734cdc439ae79a43da28d09711daa21440f314acdd97e7423fb2bd"
+   },
+   "tip_sha256": "a31971f9db734cdc439ae79a43da28d09711daa21440f314acdd97e7423fb2bd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "9f67d2b4c696eb7e1c32042d299ad72a6aaccebf704cce256b1a5671a85a0a0d",
+   "path": "frontend/components.json",
+   "successor_sha256": {
+    "NHM_FL10_001": "9f67d2b4c696eb7e1c32042d299ad72a6aaccebf704cce256b1a5671a85a0a0d"
+   },
+   "tip_sha256": "9f67d2b4c696eb7e1c32042d299ad72a6aaccebf704cce256b1a5671a85a0a0d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae",
+   "path": "frontend/package-lock.json",
+   "successor_sha256": {
+    "NHM_FL10_001": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae"
+   },
+   "tip_sha256": "a249684c6fa944356f472afedf8bbb1f238c4c8ccbc8df43cf230eb0991680ae",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "cb5318e33c5aea08eaa722fb4eafc3971e33e899a06869f3774ce75a866ae8e9",
+   "path": "frontend/package.json",
+   "successor_sha256": {
+    "NHM_FL10_001": "cb5318e33c5aea08eaa722fb4eafc3971e33e899a06869f3774ce75a866ae8e9"
+   },
+   "tip_sha256": "cb5318e33c5aea08eaa722fb4eafc3971e33e899a06869f3774ce75a866ae8e9",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f2be17b1e5c8b56bf4ff572394c62389b7a31227493bc22608bac7396cab0ee0",
+   "path": "frontend/src/app.css",
+   "successor_sha256": {
+    "NHM_FL10_001": "f2be17b1e5c8b56bf4ff572394c62389b7a31227493bc22608bac7396cab0ee0"
+   },
+   "tip_sha256": "f2be17b1e5c8b56bf4ff572394c62389b7a31227493bc22608bac7396cab0ee0",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "079c6506bf4f568f9d0412989b69bbc5d8e83deec23d5cf7baec2d215e01c230",
+   "path": "frontend/src/app.html",
+   "successor_sha256": {
+    "NHM_FL10_001": "079c6506bf4f568f9d0412989b69bbc5d8e83deec23d5cf7baec2d215e01c230"
+   },
+   "tip_sha256": "079c6506bf4f568f9d0412989b69bbc5d8e83deec23d5cf7baec2d215e01c230",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+   "path": "frontend/src/lib/animations/scroll.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+   },
+   "tip_sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+   "path": "frontend/src/lib/animations/waveform.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+   },
+   "tip_sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "71ccb1dd9bf8c9b21fb29cb4e76ece3830dd11b2a95701d9885a4a2a137e8010",
+   "path": "frontend/src/lib/api/__tests__/nhm-v1.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "71ccb1dd9bf8c9b21fb29cb4e76ece3830dd11b2a95701d9885a4a2a137e8010"
+   },
+   "tip_sha256": "71ccb1dd9bf8c9b21fb29cb4e76ece3830dd11b2a95701d9885a4a2a137e8010",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "faff73e43c5230d3ae7f1dd8c54d8fbe5123be0272671f9e4a3d693963441a21",
+   "path": "frontend/src/lib/api/nhm-v1.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "faff73e43c5230d3ae7f1dd8c54d8fbe5123be0272671f9e4a3d693963441a21"
+   },
+   "tip_sha256": "faff73e43c5230d3ae7f1dd8c54d8fbe5123be0272671f9e4a3d693963441a21",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "path": "frontend/src/lib/components/brand/.gitkeep",
+   "successor_sha256": {
+    "NHM_FL10_001": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   },
+   "tip_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "088e9e97393c025dd620c59655573e3c2f9face925c5d07d34fe733489d8b4ef",
+   "path": "frontend/src/lib/components/dashboard/BarContrib.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "088e9e97393c025dd620c59655573e3c2f9face925c5d07d34fe733489d8b4ef"
+   },
+   "tip_sha256": "088e9e97393c025dd620c59655573e3c2f9face925c5d07d34fe733489d8b4ef",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3374bf6f04bc1e613709600e74f907a3fdf74f163d01952381c09dfda5b041c5",
+   "path": "frontend/src/lib/components/dashboard/DashboardShell.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "3374bf6f04bc1e613709600e74f907a3fdf74f163d01952381c09dfda5b041c5"
+   },
+   "tip_sha256": "3374bf6f04bc1e613709600e74f907a3fdf74f163d01952381c09dfda5b041c5",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "70114d59dd047427b8dffc7d56832700937f3e5511eab323c3cf7e32e37d08f7",
+   "path": "frontend/src/lib/components/dashboard/DeferredPage.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "70114d59dd047427b8dffc7d56832700937f3e5511eab323c3cf7e32e37d08f7"
+   },
+   "tip_sha256": "70114d59dd047427b8dffc7d56832700937f3e5511eab323c3cf7e32e37d08f7",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "4b52e0c5e264d72a03cc65305b1a3b2dd2dfc5b695680518ded457c00a0477e2",
+   "path": "frontend/src/lib/components/dashboard/GaugeRing.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "4b52e0c5e264d72a03cc65305b1a3b2dd2dfc5b695680518ded457c00a0477e2"
+   },
+   "tip_sha256": "4b52e0c5e264d72a03cc65305b1a3b2dd2dfc5b695680518ded457c00a0477e2",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5caf47a4f330764282395a71ce263d6c3eeb89c84386c19554c58b2adf45513b",
+   "path": "frontend/src/lib/components/dashboard/InsightGraph.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "5caf47a4f330764282395a71ce263d6c3eeb89c84386c19554c58b2adf45513b"
+   },
+   "tip_sha256": "5caf47a4f330764282395a71ce263d6c3eeb89c84386c19554c58b2adf45513b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "be80a61a0613b5fca603ca44fc8f9d82aa8ab3c8f07cb222e1563a45e73d6514",
+   "path": "frontend/src/lib/components/dashboard/MetricTile.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "be80a61a0613b5fca603ca44fc8f9d82aa8ab3c8f07cb222e1563a45e73d6514"
+   },
+   "tip_sha256": "be80a61a0613b5fca603ca44fc8f9d82aa8ab3c8f07cb222e1563a45e73d6514",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3e13c3b58afdd0ea2737dcff7b1a2dfcc21ba7efa47324eeac046fcce79205e9",
+   "path": "frontend/src/lib/components/dashboard/MiniSpark.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "3e13c3b58afdd0ea2737dcff7b1a2dfcc21ba7efa47324eeac046fcce79205e9"
+   },
+   "tip_sha256": "3e13c3b58afdd0ea2737dcff7b1a2dfcc21ba7efa47324eeac046fcce79205e9",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "b510def06872a4ca96c102c2c638a1ec4ca085ef38172bf0a3574a2a9edf5df0",
+   "path": "frontend/src/lib/components/dashboard/MultiLine.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "b510def06872a4ca96c102c2c638a1ec4ca085ef38172bf0a3574a2a9edf5df0"
+   },
+   "tip_sha256": "b510def06872a4ca96c102c2c638a1ec4ca085ef38172bf0a3574a2a9edf5df0",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "b38b4336ad7e30e0b91f9633bf0bac103b84ffa54435caf7437c3658febfc87f",
+   "path": "frontend/src/lib/components/dashboard/Panel.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "b38b4336ad7e30e0b91f9633bf0bac103b84ffa54435caf7437c3658febfc87f"
+   },
+   "tip_sha256": "b38b4336ad7e30e0b91f9633bf0bac103b84ffa54435caf7437c3658febfc87f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "9dc55e607b066c7894a84ef25e5e15a2a337f20bebdde9e184c9787489be0cd8",
+   "path": "frontend/src/lib/components/dashboard/RadarPlot.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "9dc55e607b066c7894a84ef25e5e15a2a337f20bebdde9e184c9787489be0cd8"
+   },
+   "tip_sha256": "9dc55e607b066c7894a84ef25e5e15a2a337f20bebdde9e184c9787489be0cd8",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "32245e79df3526d9d3d0ca67b5de62ebf522ddb3d519669dd8fc75a542730a79",
+   "path": "frontend/src/lib/components/dashboard/ScatterField.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "32245e79df3526d9d3d0ca67b5de62ebf522ddb3d519669dd8fc75a542730a79"
+   },
+   "tip_sha256": "32245e79df3526d9d3d0ca67b5de62ebf522ddb3d519669dd8fc75a542730a79",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f1dc2cab7d588aafec5c6ede7cb87dad5811846488992e96952cbe1e42c1ffcc",
+   "path": "frontend/src/lib/components/dashboard/SectionPage.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "f1dc2cab7d588aafec5c6ede7cb87dad5811846488992e96952cbe1e42c1ffcc"
+   },
+   "tip_sha256": "f1dc2cab7d588aafec5c6ede7cb87dad5811846488992e96952cbe1e42c1ffcc",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "eca73dd6f023fe6cddb860ba677652d78d86e1bf8448ba6769552dd441c56bd0",
+   "path": "frontend/src/lib/components/dashboard/SignalRibbon.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "eca73dd6f023fe6cddb860ba677652d78d86e1bf8448ba6769552dd441c56bd0"
+   },
+   "tip_sha256": "eca73dd6f023fe6cddb860ba677652d78d86e1bf8448ba6769552dd441c56bd0",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "94b6d0ac41a18edbe3dce0552cc5de0286c574f03fd37197b67c3fb1983a4c77",
+   "path": "frontend/src/lib/components/dashboard/TelemetryPlot.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "94b6d0ac41a18edbe3dce0552cc5de0286c574f03fd37197b67c3fb1983a4c77"
+   },
+   "tip_sha256": "94b6d0ac41a18edbe3dce0552cc5de0286c574f03fd37197b67c3fb1983a4c77",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "b8212a233a9a229386b8b61690177a43d896cf67e8f73b2ea9bebc10e85b0bf1",
+   "path": "frontend/src/lib/components/dashboard/WorkbenchPage.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "b8212a233a9a229386b8b61690177a43d896cf67e8f73b2ea9bebc10e85b0bf1"
+   },
+   "tip_sha256": "b8212a233a9a229386b8b61690177a43d896cf67e8f73b2ea9bebc10e85b0bf1",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/federation/DeviceNetwork.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/federation/FederationFlow.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/hardware/DeviceExplorer.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "eca9da6cb8ee5db27930cc693a9d19aa402bfcef0f20ba6ab38fedc30021002b",
+   "path": "frontend/src/lib/components/hardware/HardwareStudio.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "eca9da6cb8ee5db27930cc693a9d19aa402bfcef0f20ba6ab38fedc30021002b"
+   },
+   "tip_sha256": "eca9da6cb8ee5db27930cc693a9d19aa402bfcef0f20ba6ab38fedc30021002b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/hardware/SensorHotspots.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/hardware/Wearable.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/hero/Hero.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/hero/PhysiologicalWaveform.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "80b45785b96e2720e131307b4630d1c96f4d6b572765b2de309a692f7d350cd5",
+   "path": "frontend/src/lib/components/landing/NeuralGraph.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "80b45785b96e2720e131307b4630d1c96f4d6b572765b2de309a692f7d350cd5"
+   },
+   "tip_sha256": "80b45785b96e2720e131307b4630d1c96f4d6b572765b2de309a692f7d350cd5",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ec40095410a593732df4ddb89e4a7738931267fe5abc4c7e57362285e1938535",
+   "path": "frontend/src/lib/components/landing/PhysiologicalWaveform.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "ec40095410a593732df4ddb89e4a7738931267fe5abc4c7e57362285e1938535"
+   },
+   "tip_sha256": "ec40095410a593732df4ddb89e4a7738931267fe5abc4c7e57362285e1938535",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "49c054539bd47c22ed422f41e526efecd27187dd9e2480bf45f888502ddaee04",
+   "path": "frontend/src/lib/components/landing/ProductWorkstation.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "49c054539bd47c22ed422f41e526efecd27187dd9e2480bf45f888502ddaee04"
+   },
+   "tip_sha256": "49c054539bd47c22ed422f41e526efecd27187dd9e2480bf45f888502ddaee04",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d25e244a3133384b8bc83716131704d2ebaf3a9881c77044cd37af8971a99ed8",
+   "path": "frontend/src/lib/components/landing/SystemArchitecture.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "d25e244a3133384b8bc83716131704d2ebaf3a9881c77044cd37af8971a99ed8"
+   },
+   "tip_sha256": "d25e244a3133384b8bc83716131704d2ebaf3a9881c77044cd37af8971a99ed8",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "faaf1e54daf95fd9b2cd5ed6bf5517b14f2b5e5e48500632097dd2d31db7accd",
+   "path": "frontend/src/lib/components/landing/WatchScene.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "faaf1e54daf95fd9b2cd5ed6bf5517b14f2b5e5e48500632097dd2d31db7accd"
+   },
+   "tip_sha256": "faaf1e54daf95fd9b2cd5ed6bf5517b14f2b5e5e48500632097dd2d31db7accd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "31052a75ce3f12c69765a911a19b3c05af493549b5273759acc38212c78f282c",
+   "path": "frontend/src/lib/components/magic/animated-beam/animated-beam.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "31052a75ce3f12c69765a911a19b3c05af493549b5273759acc38212c78f282c"
+   },
+   "tip_sha256": "31052a75ce3f12c69765a911a19b3c05af493549b5273759acc38212c78f282c",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0296723d130982d4f27851c6f18942b85d8e9211a34cc2af5415b6a42b0545cf",
+   "path": "frontend/src/lib/components/magic/animated-beam/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "0296723d130982d4f27851c6f18942b85d8e9211a34cc2af5415b6a42b0545cf"
+   },
+   "tip_sha256": "0296723d130982d4f27851c6f18942b85d8e9211a34cc2af5415b6a42b0545cf",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "539690efe97ecf5967f8d1e5135369c9ab9c8bfcd86f76e72e4dd3a0837fe745",
+   "path": "frontend/src/lib/components/magic/animated-beam/types.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "539690efe97ecf5967f8d1e5135369c9ab9c8bfcd86f76e72e4dd3a0837fe745"
+   },
+   "tip_sha256": "539690efe97ecf5967f8d1e5135369c9ab9c8bfcd86f76e72e4dd3a0837fe745",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "53add01f9d77d41ce8942f0b48ef62e1bcdaf7d3c2d368ce6a2b5694c40336fd",
+   "path": "frontend/src/lib/components/magic/animated-beam/use-gradient-coordinates.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "53add01f9d77d41ce8942f0b48ef62e1bcdaf7d3c2d368ce6a2b5694c40336fd"
+   },
+   "tip_sha256": "53add01f9d77d41ce8942f0b48ef62e1bcdaf7d3c2d368ce6a2b5694c40336fd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ef4df03a4c0a55251991278deacef7b0cbcce3cca473b3da219ddc75e237ce94",
+   "path": "frontend/src/lib/components/magic/animated-beam/use-path-calculator.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "ef4df03a4c0a55251991278deacef7b0cbcce3cca473b3da219ddc75e237ce94"
+   },
+   "tip_sha256": "ef4df03a4c0a55251991278deacef7b0cbcce3cca473b3da219ddc75e237ce94",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3f4b890a0e8d75b31a47ac66c696b9d6f19d264e07efb549340a66fce6e12df4",
+   "path": "frontend/src/lib/components/magic/animated-beam/use-resize-observer.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "3f4b890a0e8d75b31a47ac66c696b9d6f19d264e07efb549340a66fce6e12df4"
+   },
+   "tip_sha256": "3f4b890a0e8d75b31a47ac66c696b9d6f19d264e07efb549340a66fce6e12df4",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6316e367bab3a35d355cb7d2d7b3d1130cb37422d8c476f2edf4c951f8f18623",
+   "path": "frontend/src/lib/components/magic/animated-grid-pattern/animated-grid-pattern.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6316e367bab3a35d355cb7d2d7b3d1130cb37422d8c476f2edf4c951f8f18623"
+   },
+   "tip_sha256": "6316e367bab3a35d355cb7d2d7b3d1130cb37422d8c476f2edf4c951f8f18623",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "9fdc64ecd79e919262eb7472da3a5da221a3165b43dfcb79be14b999ad8609f3",
+   "path": "frontend/src/lib/components/magic/animated-grid-pattern/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "9fdc64ecd79e919262eb7472da3a5da221a3165b43dfcb79be14b999ad8609f3"
+   },
+   "tip_sha256": "9fdc64ecd79e919262eb7472da3a5da221a3165b43dfcb79be14b999ad8609f3",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3f6e11b74178e0ed23d9759a28fb3ef3cb5773e0840d80911f3fa7f9db1084bf",
+   "path": "frontend/src/lib/components/magic/animated-list/animated-list.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "3f6e11b74178e0ed23d9759a28fb3ef3cb5773e0840d80911f3fa7f9db1084bf"
+   },
+   "tip_sha256": "3f6e11b74178e0ed23d9759a28fb3ef3cb5773e0840d80911f3fa7f9db1084bf",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f76bd33173fc3a6116c383638e9bcc90ecd9f721d61f94cdfec3c2f3fd9e1ccc",
+   "path": "frontend/src/lib/components/magic/animated-list/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "f76bd33173fc3a6116c383638e9bcc90ecd9f721d61f94cdfec3c2f3fd9e1ccc"
+   },
+   "tip_sha256": "f76bd33173fc3a6116c383638e9bcc90ecd9f721d61f94cdfec3c2f3fd9e1ccc",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "69697b64aee3f2b301d53b3707d939278f431110da709b834cf2824cab310718",
+   "path": "frontend/src/lib/components/magic/arc-timeline/arc-timeline.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "69697b64aee3f2b301d53b3707d939278f431110da709b834cf2824cab310718"
+   },
+   "tip_sha256": "69697b64aee3f2b301d53b3707d939278f431110da709b834cf2824cab310718",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0058d91ef14cd40ed0e316369b59c7f73b20741061e4c65429862ae16e24b1cb",
+   "path": "frontend/src/lib/components/magic/arc-timeline/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "0058d91ef14cd40ed0e316369b59c7f73b20741061e4c65429862ae16e24b1cb"
+   },
+   "tip_sha256": "0058d91ef14cd40ed0e316369b59c7f73b20741061e4c65429862ae16e24b1cb",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "1976a36af406df17448b04d5a83b70bac77c46889ac026af73ad16d6321c307e",
+   "path": "frontend/src/lib/components/magic/arc-timeline/types.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "1976a36af406df17448b04d5a83b70bac77c46889ac026af73ad16d6321c307e"
+   },
+   "tip_sha256": "1976a36af406df17448b04d5a83b70bac77c46889ac026af73ad16d6321c307e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f4c17920714d8fbfe9b9beed531944fd9a2a6e935277e50efec1150db1579d16",
+   "path": "frontend/src/lib/components/magic/blur-fade/blur-fade.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "f4c17920714d8fbfe9b9beed531944fd9a2a6e935277e50efec1150db1579d16"
+   },
+   "tip_sha256": "f4c17920714d8fbfe9b9beed531944fd9a2a6e935277e50efec1150db1579d16",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "9f079dccba01b61d68f5db80fc0f366ce150c6b908f2d207dc8713a847e9973d",
+   "path": "frontend/src/lib/components/magic/blur-fade/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "9f079dccba01b61d68f5db80fc0f366ce150c6b908f2d207dc8713a847e9973d"
+   },
+   "tip_sha256": "9f079dccba01b61d68f5db80fc0f366ce150c6b908f2d207dc8713a847e9973d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "641bcbcb73a6b84e2dce57824cca01c458433bfcdc7d3d39c196b48b6d0d0872",
+   "path": "frontend/src/lib/components/magic/dia-text-reveal/dia-text-reveal.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "641bcbcb73a6b84e2dce57824cca01c458433bfcdc7d3d39c196b48b6d0d0872"
+   },
+   "tip_sha256": "641bcbcb73a6b84e2dce57824cca01c458433bfcdc7d3d39c196b48b6d0d0872",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "20c4b8e00a9b73ebb13f7aa8b45e69b68e34c6c80caff5ef03635634e040a93c",
+   "path": "frontend/src/lib/components/magic/dia-text-reveal/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "20c4b8e00a9b73ebb13f7aa8b45e69b68e34c6c80caff5ef03635634e040a93c"
+   },
+   "tip_sha256": "20c4b8e00a9b73ebb13f7aa8b45e69b68e34c6c80caff5ef03635634e040a93c",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a3bed3c6e7b2e9b339e4566f4704477fd8f3ca095fbff97308afc188c2b0b9cd",
+   "path": "frontend/src/lib/components/magic/dotted-map/dotted-map.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "a3bed3c6e7b2e9b339e4566f4704477fd8f3ca095fbff97308afc188c2b0b9cd"
+   },
+   "tip_sha256": "a3bed3c6e7b2e9b339e4566f4704477fd8f3ca095fbff97308afc188c2b0b9cd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6f9839d0317fd6179f20da88cb8a125f1625915d70e7012369c549611df0ae0b",
+   "path": "frontend/src/lib/components/magic/dotted-map/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "6f9839d0317fd6179f20da88cb8a125f1625915d70e7012369c549611df0ae0b"
+   },
+   "tip_sha256": "6f9839d0317fd6179f20da88cb8a125f1625915d70e7012369c549611df0ae0b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "15357271716263668941c7b23b1f65a1847dce0f694ab67778ba2ad3ad7dd847",
+   "path": "frontend/src/lib/components/magic/globe/globe.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "15357271716263668941c7b23b1f65a1847dce0f694ab67778ba2ad3ad7dd847"
+   },
+   "tip_sha256": "15357271716263668941c7b23b1f65a1847dce0f694ab67778ba2ad3ad7dd847",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e81ebad04c5a65b0dabf21ab1e4213f99c97ec9a1f505b1c73c85dd5b7c2bfca",
+   "path": "frontend/src/lib/components/magic/globe/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "e81ebad04c5a65b0dabf21ab1e4213f99c97ec9a1f505b1c73c85dd5b7c2bfca"
+   },
+   "tip_sha256": "e81ebad04c5a65b0dabf21ab1e4213f99c97ec9a1f505b1c73c85dd5b7c2bfca",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d9307d67ffb2f2175393bd9ed209aaa5e840acea86c797e6c654746d7f12cd0d",
+   "path": "frontend/src/lib/components/magic/lens/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "d9307d67ffb2f2175393bd9ed209aaa5e840acea86c797e6c654746d7f12cd0d"
+   },
+   "tip_sha256": "d9307d67ffb2f2175393bd9ed209aaa5e840acea86c797e6c654746d7f12cd0d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ce01170512b1419af4139fd2bebc79ef697cddc06a54bb898d77ca6ce4f59bc0",
+   "path": "frontend/src/lib/components/magic/lens/lens.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "ce01170512b1419af4139fd2bebc79ef697cddc06a54bb898d77ca6ce4f59bc0"
+   },
+   "tip_sha256": "ce01170512b1419af4139fd2bebc79ef697cddc06a54bb898d77ca6ce4f59bc0",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "70de528b37cc0a023e08e8d2b8f49930b50a323a71b7039a58ff1aa19cd5edd4",
+   "path": "frontend/src/lib/components/magic/line-shadow-text/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "70de528b37cc0a023e08e8d2b8f49930b50a323a71b7039a58ff1aa19cd5edd4"
+   },
+   "tip_sha256": "70de528b37cc0a023e08e8d2b8f49930b50a323a71b7039a58ff1aa19cd5edd4",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "c9ecf7edabd2258ed336ad7843529086ef99b663984546598636ed32e623568e",
+   "path": "frontend/src/lib/components/magic/line-shadow-text/line-shadow-text.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "c9ecf7edabd2258ed336ad7843529086ef99b663984546598636ed32e623568e"
+   },
+   "tip_sha256": "c9ecf7edabd2258ed336ad7843529086ef99b663984546598636ed32e623568e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f081a52d908c587e01e271dfbecb01ad5b398f6e9d61aa58475fba68b7dcec57",
+   "path": "frontend/src/lib/components/magic/marquee/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "f081a52d908c587e01e271dfbecb01ad5b398f6e9d61aa58475fba68b7dcec57"
+   },
+   "tip_sha256": "f081a52d908c587e01e271dfbecb01ad5b398f6e9d61aa58475fba68b7dcec57",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "76a9c0a0e874d7f3f370d0475bb7b8661313987d53f1c88aa1585cff56aed40d",
+   "path": "frontend/src/lib/components/magic/marquee/marquee.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "76a9c0a0e874d7f3f370d0475bb7b8661313987d53f1c88aa1585cff56aed40d"
+   },
+   "tip_sha256": "76a9c0a0e874d7f3f370d0475bb7b8661313987d53f1c88aa1585cff56aed40d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5cc3342958bd227c970a82c51c1ed3b2b3d6ff0cb9581528e03f9741aa076d19",
+   "path": "frontend/src/lib/components/magic/meteors/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "5cc3342958bd227c970a82c51c1ed3b2b3d6ff0cb9581528e03f9741aa076d19"
+   },
+   "tip_sha256": "5cc3342958bd227c970a82c51c1ed3b2b3d6ff0cb9581528e03f9741aa076d19",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ac96e97add86b3d43d61456e45ffc3b4e7eb63f95d0d587a39969a059ad43d99",
+   "path": "frontend/src/lib/components/magic/meteors/meteors.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "ac96e97add86b3d43d61456e45ffc3b4e7eb63f95d0d587a39969a059ad43d99"
+   },
+   "tip_sha256": "ac96e97add86b3d43d61456e45ffc3b4e7eb63f95d0d587a39969a059ad43d99",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3c28fd9a36b8e411799d4c44eb51287d8ef82b3f901555f4e58c3d0bb37a2d74",
+   "path": "frontend/src/lib/components/magic/morphing-text/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "3c28fd9a36b8e411799d4c44eb51287d8ef82b3f901555f4e58c3d0bb37a2d74"
+   },
+   "tip_sha256": "3c28fd9a36b8e411799d4c44eb51287d8ef82b3f901555f4e58c3d0bb37a2d74",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "b869f6f3cd2733325e007b92f6befed5bebe1200a3d7fcec9f5b54d41eac16b0",
+   "path": "frontend/src/lib/components/magic/morphing-text/morphing-text.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "b869f6f3cd2733325e007b92f6befed5bebe1200a3d7fcec9f5b54d41eac16b0"
+   },
+   "tip_sha256": "b869f6f3cd2733325e007b92f6befed5bebe1200a3d7fcec9f5b54d41eac16b0",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0db9cd54254c624ee8d173b9939ac498fa5ecc593a92658edeaad8b7699b57c4",
+   "path": "frontend/src/lib/components/magic/number-ticker/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "0db9cd54254c624ee8d173b9939ac498fa5ecc593a92658edeaad8b7699b57c4"
+   },
+   "tip_sha256": "0db9cd54254c624ee8d173b9939ac498fa5ecc593a92658edeaad8b7699b57c4",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "9d14344abb73e8f6240a45a74d5632277e80c28bda4f94a1c4e94285603af71c",
+   "path": "frontend/src/lib/components/magic/number-ticker/number-ticker.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "9d14344abb73e8f6240a45a74d5632277e80c28bda4f94a1c4e94285603af71c"
+   },
+   "tip_sha256": "9d14344abb73e8f6240a45a74d5632277e80c28bda4f94a1c4e94285603af71c",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e14c6f19852c7f007afcf8cfb3472589d1ada8582edf683ab90b2f7124f4f98f",
+   "path": "frontend/src/lib/components/magic/pixel-image/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "e14c6f19852c7f007afcf8cfb3472589d1ada8582edf683ab90b2f7124f4f98f"
+   },
+   "tip_sha256": "e14c6f19852c7f007afcf8cfb3472589d1ada8582edf683ab90b2f7124f4f98f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ff847d9e0a4e33d606cd631e471199c91cb741239d6ed0fe09f26528a1dbdbcd",
+   "path": "frontend/src/lib/components/magic/pixel-image/pixel-image.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "ff847d9e0a4e33d606cd631e471199c91cb741239d6ed0fe09f26528a1dbdbcd"
+   },
+   "tip_sha256": "ff847d9e0a4e33d606cd631e471199c91cb741239d6ed0fe09f26528a1dbdbcd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0646a8c7750fe464fe02ddf585263e4a1fb01bcd1ea9b432e59bc7103c5e7dfd",
+   "path": "frontend/src/lib/components/magic/progressive-blur/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "0646a8c7750fe464fe02ddf585263e4a1fb01bcd1ea9b432e59bc7103c5e7dfd"
+   },
+   "tip_sha256": "0646a8c7750fe464fe02ddf585263e4a1fb01bcd1ea9b432e59bc7103c5e7dfd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "dd48ad59ef98f929c3f93829c2b423eff30337a9a364f322bc14ed390dac9957",
+   "path": "frontend/src/lib/components/magic/progressive-blur/progressive-blur.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "dd48ad59ef98f929c3f93829c2b423eff30337a9a364f322bc14ed390dac9957"
+   },
+   "tip_sha256": "dd48ad59ef98f929c3f93829c2b423eff30337a9a364f322bc14ed390dac9957",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5a4a0ecb75860b16833597c6cb9c5e20c2a59bd1f4fb8489c9b6d7c4270debd3",
+   "path": "frontend/src/lib/components/magic/smooth-cursor/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "5a4a0ecb75860b16833597c6cb9c5e20c2a59bd1f4fb8489c9b6d7c4270debd3"
+   },
+   "tip_sha256": "5a4a0ecb75860b16833597c6cb9c5e20c2a59bd1f4fb8489c9b6d7c4270debd3",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a896f51334d255faff1231b1c7b7e1439dc71d58dd7948d0a3dbe2271283f51",
+   "path": "frontend/src/lib/components/magic/smooth-cursor/smooth-cursor.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a896f51334d255faff1231b1c7b7e1439dc71d58dd7948d0a3dbe2271283f51"
+   },
+   "tip_sha256": "6a896f51334d255faff1231b1c7b7e1439dc71d58dd7948d0a3dbe2271283f51",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "cf58cc23f7c65f08fe28a1d71b1dbffa6a5452b231dbaf4423df0408cbc57d32",
+   "path": "frontend/src/lib/components/magic/typing-animation/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "cf58cc23f7c65f08fe28a1d71b1dbffa6a5452b231dbaf4423df0408cbc57d32"
+   },
+   "tip_sha256": "cf58cc23f7c65f08fe28a1d71b1dbffa6a5452b231dbaf4423df0408cbc57d32",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5768be29bf41624b83c80170f9fa49bf4b6cc8dbf256e15fd1c54344f8943638",
+   "path": "frontend/src/lib/components/magic/typing-animation/typing-animation.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "5768be29bf41624b83c80170f9fa49bf4b6cc8dbf256e15fd1c54344f8943638"
+   },
+   "tip_sha256": "5768be29bf41624b83c80170f9fa49bf4b6cc8dbf256e15fd1c54344f8943638",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "path": "frontend/src/lib/components/navigation/.gitkeep",
+   "successor_sha256": {
+    "NHM_FL10_001": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   },
+   "tip_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/preloader/NHMPreloader.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "98e8f5827e7a40a732e2f6564c0a588fb388454025dc5537f706d7c3ad659a5e",
+   "path": "frontend/src/lib/components/product/DemoBanner.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "98e8f5827e7a40a732e2f6564c0a588fb388454025dc5537f706d7c3ad659a5e"
+   },
+   "tip_sha256": "98e8f5827e7a40a732e2f6564c0a588fb388454025dc5537f706d7c3ad659a5e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "93fa490928eef8b27b2e21078efcaebb8d45976770a433a16a57ce3cf6ae4752",
+   "path": "frontend/src/lib/components/product/FuturePhase.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "93fa490928eef8b27b2e21078efcaebb8d45976770a433a16a57ce3cf6ae4752"
+   },
+   "tip_sha256": "93fa490928eef8b27b2e21078efcaebb8d45976770a433a16a57ce3cf6ae4752",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8a9b0743b0b38ca5283fafc099636cc7539599cfe67ecf2f14201fcba2589bfd",
+   "path": "frontend/src/lib/components/product/ProductShell.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "8a9b0743b0b38ca5283fafc099636cc7539599cfe67ecf2f14201fcba2589bfd"
+   },
+   "tip_sha256": "8a9b0743b0b38ca5283fafc099636cc7539599cfe67ecf2f14201fcba2589bfd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "094130ec6f8982c718a7bc53e4261eb51a91b4a7dc2eaad3984b3ecc9dedacf5",
+   "path": "frontend/src/lib/components/product/SimulationBanner.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "094130ec6f8982c718a7bc53e4261eb51a91b4a7dc2eaad3984b3ecc9dedacf5"
+   },
+   "tip_sha256": "094130ec6f8982c718a7bc53e4261eb51a91b4a7dc2eaad3984b3ecc9dedacf5",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3b1d9ef4325b77c329fea8fc3fc279c6a5b3285ca1efc6267298c700a1f278d1",
+   "path": "frontend/src/lib/components/product/WaveformPlot.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "3b1d9ef4325b77c329fea8fc3fc279c6a5b3285ca1efc6267298c700a1f278d1"
+   },
+   "tip_sha256": "3b1d9ef4325b77c329fea8fc3fc279c6a5b3285ca1efc6267298c700a1f278d1",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "046260a5917ed8f6bed17d91ded7c8d9c4e01bfc7a9cd72fd9d3b0d31f49bff0",
+   "path": "frontend/src/lib/components/product/federation/ArchitectureLanes.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "046260a5917ed8f6bed17d91ded7c8d9c4e01bfc7a9cd72fd9d3b0d31f49bff0"
+   },
+   "tip_sha256": "046260a5917ed8f6bed17d91ded7c8d9c4e01bfc7a9cd72fd9d3b0d31f49bff0",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a68d31b3e26213e414d4b73b9547c02d8b0d1bf4ef2d5a4864a0e3d2a59a8e73",
+   "path": "frontend/src/lib/components/product/federation/CandidateCard.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "a68d31b3e26213e414d4b73b9547c02d8b0d1bf4ef2d5a4864a0e3d2a59a8e73"
+   },
+   "tip_sha256": "a68d31b3e26213e414d4b73b9547c02d8b0d1bf4ef2d5a4864a0e3d2a59a8e73",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "bdbb99ace6cd1831a9b3ce5cb39ff25601b901db724c6b8eac112e7fbeada219",
+   "path": "frontend/src/lib/components/product/federation/CandidateLifecycle.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "bdbb99ace6cd1831a9b3ce5cb39ff25601b901db724c6b8eac112e7fbeada219"
+   },
+   "tip_sha256": "bdbb99ace6cd1831a9b3ce5cb39ff25601b901db724c6b8eac112e7fbeada219",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "9cccd6ea1b7d39d9a1cd5b97ac270569aea8c43cd59e23dcea145f408dc05bab",
+   "path": "frontend/src/lib/components/product/federation/ClientDetailPanel.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "9cccd6ea1b7d39d9a1cd5b97ac270569aea8c43cd59e23dcea145f408dc05bab"
+   },
+   "tip_sha256": "9cccd6ea1b7d39d9a1cd5b97ac270569aea8c43cd59e23dcea145f408dc05bab",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8beede95e69f55b046c9af2c5f5bbd3b5ba6b08565187516fb34d8374563041d",
+   "path": "frontend/src/lib/components/product/federation/ClientGrid.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "8beede95e69f55b046c9af2c5f5bbd3b5ba6b08565187516fb34d8374563041d"
+   },
+   "tip_sha256": "8beede95e69f55b046c9af2c5f5bbd3b5ba6b08565187516fb34d8374563041d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0311ce9b5ae708bbde96c7e4bb4bdebca3694c5fe37d34e0e8f486273df72fbf",
+   "path": "frontend/src/lib/components/product/federation/DigestText.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "0311ce9b5ae708bbde96c7e4bb4bdebca3694c5fe37d34e0e8f486273df72fbf"
+   },
+   "tip_sha256": "0311ce9b5ae708bbde96c7e4bb4bdebca3694c5fe37d34e0e8f486273df72fbf",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8709f641a9486461cb85a9762d6ad59ff52153c2d25954df8d261d916dbb9aaf",
+   "path": "frontend/src/lib/components/product/federation/FederationBanner.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "8709f641a9486461cb85a9762d6ad59ff52153c2d25954df8d261d916dbb9aaf"
+   },
+   "tip_sha256": "8709f641a9486461cb85a9762d6ad59ff52153c2d25954df8d261d916dbb9aaf",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "35dc0d62d1e6b1835220780234864f1c1a28ec29557fc45131612bce68abf1ea",
+   "path": "frontend/src/lib/components/product/federation/FederationPipeline.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "35dc0d62d1e6b1835220780234864f1c1a28ec29557fc45131612bce68abf1ea"
+   },
+   "tip_sha256": "35dc0d62d1e6b1835220780234864f1c1a28ec29557fc45131612bce68abf1ea",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "332cfa52dde0de2bcfeb4f85b5725ffb6feffc88590492b0f88e939347f2887a",
+   "path": "frontend/src/lib/components/product/federation/FederationTimeline.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "332cfa52dde0de2bcfeb4f85b5725ffb6feffc88590492b0f88e939347f2887a"
+   },
+   "tip_sha256": "332cfa52dde0de2bcfeb4f85b5725ffb6feffc88590492b0f88e939347f2887a",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e1403621632760f46645e01290731217255af909bf1eb33a264badc67653bfc9",
+   "path": "frontend/src/lib/components/product/federation/LiveVsReplay.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "e1403621632760f46645e01290731217255af909bf1eb33a264badc67653bfc9"
+   },
+   "tip_sha256": "e1403621632760f46645e01290731217255af909bf1eb33a264badc67653bfc9",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3093f5d449b45cf1b8beeb47de763139fbcd273c5d1b5f32a3c57e222d2e6885",
+   "path": "frontend/src/lib/components/product/federation/ModelStateTransition.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "3093f5d449b45cf1b8beeb47de763139fbcd273c5d1b5f32a3c57e222d2e6885"
+   },
+   "tip_sha256": "3093f5d449b45cf1b8beeb47de763139fbcd273c5d1b5f32a3c57e222d2e6885",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "963470becd30af330d52ff7d7654ab6d38b24b8955aec807624f5d5b5fc1c2cf",
+   "path": "frontend/src/lib/components/product/federation/ProcessStepper.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "963470becd30af330d52ff7d7654ab6d38b24b8955aec807624f5d5b5fc1c2cf"
+   },
+   "tip_sha256": "963470becd30af330d52ff7d7654ab6d38b24b8955aec807624f5d5b5fc1c2cf",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0c58cfbb89dd8b8b98592583c0d2e268bf2864e809bf8f9d1566ac817af91093",
+   "path": "frontend/src/lib/components/product/federation/RoundProgress.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "0c58cfbb89dd8b8b98592583c0d2e268bf2864e809bf8f9d1566ac817af91093"
+   },
+   "tip_sha256": "0c58cfbb89dd8b8b98592583c0d2e268bf2864e809bf8f9d1566ac817af91093",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "10dad0201ac4861961f157b3c469cca7b0e5c2fc88bfa5d72ba006f4cd35b06d",
+   "path": "frontend/src/lib/components/product/federation/RunConfigForm.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "10dad0201ac4861961f157b3c469cca7b0e5c2fc88bfa5d72ba006f4cd35b06d"
+   },
+   "tip_sha256": "10dad0201ac4861961f157b3c469cca7b0e5c2fc88bfa5d72ba006f4cd35b06d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "43fccdb052aa66a7e61c3dea52f80f7dc323addb8e534ad2be7486005678e148",
+   "path": "frontend/src/lib/components/product/federation/RunList.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "43fccdb052aa66a7e61c3dea52f80f7dc323addb8e534ad2be7486005678e148"
+   },
+   "tip_sha256": "43fccdb052aa66a7e61c3dea52f80f7dc323addb8e534ad2be7486005678e148",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "227d4404212311883d562fe0001acfbdefa6c8ea5cb89370e2d23ab5cd5256ed",
+   "path": "frontend/src/lib/components/product/federation/RunSelector.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "227d4404212311883d562fe0001acfbdefa6c8ea5cb89370e2d23ab5cd5256ed"
+   },
+   "tip_sha256": "227d4404212311883d562fe0001acfbdefa6c8ea5cb89370e2d23ab5cd5256ed",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "cfba68cb07dfbc4d9d277f53f373208210b81e7f81fe4cd4f9f707cab76db5b3",
+   "path": "frontend/src/lib/components/product/federation/TechnicalEvidence.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "cfba68cb07dfbc4d9d277f53f373208210b81e7f81fe4cd4f9f707cab76db5b3"
+   },
+   "tip_sha256": "cfba68cb07dfbc4d9d277f53f373208210b81e7f81fe4cd4f9f707cab76db5b3",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ff0f294a0d43be2a0c6730ae9755f5489b9ca90cd461be2e4a71a2a4f25f6497",
+   "path": "frontend/src/lib/components/product/federation/useRunParam.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "ff0f294a0d43be2a0c6730ae9755f5489b9ca90cd461be2e4a71a2a4f25f6497"
+   },
+   "tip_sha256": "ff0f294a0d43be2a0c6730ae9755f5489b9ca90cd461be2e4a71a2a4f25f6497",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [
+    "cbc2cf5 NHM-FL10-001 observatory: measured figures, tables, owner-scoped opt-in API and fr"
+   ],
+   "current_sha256": "cb08cda56923dd81d54e8e7d0f5e177a80665779d76b8c2c59c9b3525e6301d5",
+   "path": "frontend/src/lib/components/product/observatory/Fl10Chart.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "cb08cda56923dd81d54e8e7d0f5e177a80665779d76b8c2c59c9b3525e6301d5"
+   },
+   "tip_sha256": null,
+   "verdict": "AUTHORIZED_BY_SUCCESSOR"
+  },
+  {
+   "commits_since_tip": [
+    "cbc2cf5 NHM-FL10-001 observatory: measured figures, tables, owner-scoped opt-in API and fr"
+   ],
+   "current_sha256": "f9a293a9bb3a07b7ab16aced3b62ab39375beec147dca4eaf7cdd1ada9ccbd88",
+   "path": "frontend/src/lib/components/product/observatory/Fl10Table.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "f9a293a9bb3a07b7ab16aced3b62ab39375beec147dca4eaf7cdd1ada9ccbd88"
+   },
+   "tip_sha256": null,
+   "verdict": "AUTHORIZED_BY_SUCCESSOR"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "4685f99fc2a47c6c4d872a4a24c9707d4d532fd44df4d13c84eadcb73e62ab29",
+   "path": "frontend/src/lib/components/product/observatory/SignalStageChart.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "4685f99fc2a47c6c4d872a4a24c9707d4d532fd44df4d13c84eadcb73e62ab29"
+   },
+   "tip_sha256": "4685f99fc2a47c6c4d872a4a24c9707d4d532fd44df4d13c84eadcb73e62ab29",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d05c139aa163a5ffe814908689687e67d34d93ea198dbe5fdee51002558c1582",
+   "path": "frontend/src/lib/components/product/research/FactTable.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "d05c139aa163a5ffe814908689687e67d34d93ea198dbe5fdee51002558c1582"
+   },
+   "tip_sha256": "d05c139aa163a5ffe814908689687e67d34d93ea198dbe5fdee51002558c1582",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "15f6008b1084e425b9c4c5b4e24ec0ef17efa6d442dac3495bf177313a2bb30e",
+   "path": "frontend/src/lib/components/product/story/ComparisonPanel.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "15f6008b1084e425b9c4c5b4e24ec0ef17efa6d442dac3495bf177313a2bb30e"
+   },
+   "tip_sha256": "15f6008b1084e425b9c4c5b4e24ec0ef17efa6d442dac3495bf177313a2bb30e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "74a7c9e3017884bc2b749a0d5150358836bcf2aa7046f53b940bd257c9a4670a",
+   "path": "frontend/src/lib/components/product/story/FlowDiagram.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "74a7c9e3017884bc2b749a0d5150358836bcf2aa7046f53b940bd257c9a4670a"
+   },
+   "tip_sha256": "74a7c9e3017884bc2b749a0d5150358836bcf2aa7046f53b940bd257c9a4670a",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "4cce72f11dd7d5ea359bdd3eae06ccc2ebff39d235bec5436e4e85668396434c",
+   "path": "frontend/src/lib/components/product/story/QuestionCard.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "4cce72f11dd7d5ea359bdd3eae06ccc2ebff39d235bec5436e4e85668396434c"
+   },
+   "tip_sha256": "4cce72f11dd7d5ea359bdd3eae06ccc2ebff39d235bec5436e4e85668396434c",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/sections/CTA.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/sections/Privacy.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/sections/Problem.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/sections/Research.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/sections/Technology.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/signals/ECGWaveform.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f2523b4e2540171634c59f77c7283455209053b82e3b9a0d05a4e9aa980a0723",
+   "path": "frontend/src/lib/components/signals/MultimodalStudio.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "f2523b4e2540171634c59f77c7283455209053b82e3b9a0d05a4e9aa980a0723"
+   },
+   "tip_sha256": "f2523b4e2540171634c59f77c7283455209053b82e3b9a0d05a4e9aa980a0723",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/signals/PPGWaveform.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "path": "frontend/src/lib/components/signals/SignalPanel.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce"
+   },
+   "tip_sha256": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f377d96cc917e27ddd0485812da44d10efa4d28bf4d53f8bf45a2056cfaa1fb2",
+   "path": "frontend/src/lib/components/spell/signature/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "f377d96cc917e27ddd0485812da44d10efa4d28bf4d53f8bf45a2056cfaa1fb2"
+   },
+   "tip_sha256": "f377d96cc917e27ddd0485812da44d10efa4d28bf4d53f8bf45a2056cfaa1fb2",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "4f4f39b0948e049021173430db79715ed27fe5a3e1c2525cf0ef2e41ec7dc315",
+   "path": "frontend/src/lib/components/spell/signature/signature.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "4f4f39b0948e049021173430db79715ed27fe5a3e1c2525cf0ef2e41ec7dc315"
+   },
+   "tip_sha256": "4f4f39b0948e049021173430db79715ed27fe5a3e1c2525cf0ef2e41ec7dc315",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d178c1895cf9395ff2d9074380292e23d22d35be1a58fb5b00e134afa7a65db4",
+   "path": "frontend/src/lib/dashboard/__tests__/legacy-claims.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "d178c1895cf9395ff2d9074380292e23d22d35be1a58fb5b00e134afa7a65db4"
+   },
+   "tip_sha256": "d178c1895cf9395ff2d9074380292e23d22d35be1a58fb5b00e134afa7a65db4",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2c467040f100ae8b90ae1385b1d2900663c14753953632a14a965db2b8612a87",
+   "path": "frontend/src/lib/dashboard/__tests__/model-neutral-copy.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "2c467040f100ae8b90ae1385b1d2900663c14753953632a14a965db2b8612a87"
+   },
+   "tip_sha256": "2c467040f100ae8b90ae1385b1d2900663c14753953632a14a965db2b8612a87",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0f4593ac7fd99dad6ab746570ed14ee0f707bb95b743dbaa862d34ec6c67490c",
+   "path": "frontend/src/lib/dashboard/__tests__/replay.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "0f4593ac7fd99dad6ab746570ed14ee0f707bb95b743dbaa862d34ec6c67490c"
+   },
+   "tip_sha256": "0f4593ac7fd99dad6ab746570ed14ee0f707bb95b743dbaa862d34ec6c67490c",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5d88d299df603e99b4804ad718bd6f028f7d7bb3f93d34d4745f997bfcb4f12b",
+   "path": "frontend/src/lib/dashboard/__tests__/session.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "5d88d299df603e99b4804ad718bd6f028f7d7bb3f93d34d4745f997bfcb4f12b"
+   },
+   "tip_sha256": "5d88d299df603e99b4804ad718bd6f028f7d7bb3f93d34d4745f997bfcb4f12b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "09e96fbb0ecd2ae8a1fb3429f9829d168aac0b1f86b8209e7aec0a8e9aad6922",
+   "path": "frontend/src/lib/dashboard/__tests__/state-presentation.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "09e96fbb0ecd2ae8a1fb3429f9829d168aac0b1f86b8209e7aec0a8e9aad6922"
+   },
+   "tip_sha256": "09e96fbb0ecd2ae8a1fb3429f9829d168aac0b1f86b8209e7aec0a8e9aad6922",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "1cbc7345701f780d02e6be644cbd8866f7852233b2aa8440a66a590d79c0a7ba",
+   "path": "frontend/src/lib/dashboard/__tests__/v2-runtime-e2e.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "1cbc7345701f780d02e6be644cbd8866f7852233b2aa8440a66a590d79c0a7ba"
+   },
+   "tip_sha256": "1cbc7345701f780d02e6be644cbd8866f7852233b2aa8440a66a590d79c0a7ba",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f58564ba6f5dde84b83001cb9d2ab0239d047cda13657ae7503a0900f703b222",
+   "path": "frontend/src/lib/dashboard/demo-window.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "f58564ba6f5dde84b83001cb9d2ab0239d047cda13657ae7503a0900f703b222"
+   },
+   "tip_sha256": "f58564ba6f5dde84b83001cb9d2ab0239d047cda13657ae7503a0900f703b222",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5813f5ad233588f3648ef71f9005fd7aa844a259e11ccc148803909b44d60567",
+   "path": "frontend/src/lib/dashboard/fixtures.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "5813f5ad233588f3648ef71f9005fd7aa844a259e11ccc148803909b44d60567"
+   },
+   "tip_sha256": "5813f5ad233588f3648ef71f9005fd7aa844a259e11ccc148803909b44d60567",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6ab1c9bc7776522693f008ffcae4f3b20eb8a34f2ce40737c797f94c061f68c1",
+   "path": "frontend/src/lib/dashboard/replay.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "6ab1c9bc7776522693f008ffcae4f3b20eb8a34f2ce40737c797f94c061f68c1"
+   },
+   "tip_sha256": "6ab1c9bc7776522693f008ffcae4f3b20eb8a34f2ce40737c797f94c061f68c1",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "c683282ba0164f939adf5e3270f6d70d97836ac2bed8928eb4e41509946b156c",
+   "path": "frontend/src/lib/dashboard/session.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "c683282ba0164f939adf5e3270f6d70d97836ac2bed8928eb4e41509946b156c"
+   },
+   "tip_sha256": "c683282ba0164f939adf5e3270f6d70d97836ac2bed8928eb4e41509946b156c",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e856df8f14e3ddd004e56245ace45b8071881e34e06d425195cbc5ef706561c0",
+   "path": "frontend/src/lib/dashboard/state-presentation.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "e856df8f14e3ddd004e56245ace45b8071881e34e06d425195cbc5ef706561c0"
+   },
+   "tip_sha256": "e856df8f14e3ddd004e56245ace45b8071881e34e06d425195cbc5ef706561c0",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2244c80a299b509080fdffc64bb627657db0ddbc7126f767b03c65ef60c79719",
+   "path": "frontend/src/lib/product/__tests__/api-auth.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "2244c80a299b509080fdffc64bb627657db0ddbc7126f767b03c65ef60c79719"
+   },
+   "tip_sha256": "2244c80a299b509080fdffc64bb627657db0ddbc7126f767b03c65ef60c79719",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "43a86722965c1640ac4c13b5f3b2d3d0668dd32b7cb83acf337f69c40af6c1b5",
+   "path": "frontend/src/lib/product/__tests__/claims-and-copy.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "43a86722965c1640ac4c13b5f3b2d3d0668dd32b7cb83acf337f69c40af6c1b5"
+   },
+   "tip_sha256": "43a86722965c1640ac4c13b5f3b2d3d0668dd32b7cb83acf337f69c40af6c1b5",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a14cadec254aaa9e394c8a74950e2302eefa6ccabac551e6eb4a9fbe85f088be",
+   "path": "frontend/src/lib/product/__tests__/clerk-ui-loader.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "a14cadec254aaa9e394c8a74950e2302eefa6ccabac551e6eb4a9fbe85f088be"
+   },
+   "tip_sha256": "a14cadec254aaa9e394c8a74950e2302eefa6ccabac551e6eb4a9fbe85f088be",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0f561914acaef48706afa70f34a4e0625f4ffba7bdd5d9bb5169fd663698c0d3",
+   "path": "frontend/src/lib/product/__tests__/components.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "0f561914acaef48706afa70f34a4e0625f4ffba7bdd5d9bb5169fd663698c0d3"
+   },
+   "tip_sha256": "0f561914acaef48706afa70f34a4e0625f4ffba7bdd5d9bb5169fd663698c0d3",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "027f11a086d8f32f4237d5e738995fe3a95711d9755e19c5e3498958b7fcd68f",
+   "path": "frontend/src/lib/product/__tests__/landing-presentation.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "027f11a086d8f32f4237d5e738995fe3a95711d9755e19c5e3498958b7fcd68f"
+   },
+   "tip_sha256": "027f11a086d8f32f4237d5e738995fe3a95711d9755e19c5e3498958b7fcd68f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "b2e58cb6edc85fa031fe74339fea09230dd0c27d39038b16addda3f56cab257f",
+   "path": "frontend/src/lib/product/__tests__/live-model.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "b2e58cb6edc85fa031fe74339fea09230dd0c27d39038b16addda3f56cab257f"
+   },
+   "tip_sha256": "b2e58cb6edc85fa031fe74339fea09230dd0c27d39038b16addda3f56cab257f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "219970cf991cac20e6ae38c937742a99f4f8b98bd1be03fb0813f5a68a6d722e",
+   "path": "frontend/src/lib/product/__tests__/real-backend.integration.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "219970cf991cac20e6ae38c937742a99f4f8b98bd1be03fb0813f5a68a6d722e"
+   },
+   "tip_sha256": "219970cf991cac20e6ae38c937742a99f4f8b98bd1be03fb0813f5a68a6d722e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f737032075694497e7a1403d65891af5160547a24faa28309610c74435398e86",
+   "path": "frontend/src/lib/product/__tests__/route-policy.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "f737032075694497e7a1403d65891af5160547a24faa28309610c74435398e86"
+   },
+   "tip_sha256": "f737032075694497e7a1403d65891af5160547a24faa28309610c74435398e86",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ce8250784f2193a0e7a3ca9334d0f6452d074a66a3af305f762f1d3be94c4f8f",
+   "path": "frontend/src/lib/product/__tests__/socket-store.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "ce8250784f2193a0e7a3ca9334d0f6452d074a66a3af305f762f1d3be94c4f8f"
+   },
+   "tip_sha256": "ce8250784f2193a0e7a3ca9334d0f6452d074a66a3af305f762f1d3be94c4f8f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [
+    "cbc2cf5 NHM-FL10-001 observatory: measured figures, tables, owner-scoped opt-in API and fr"
+   ],
+   "current_sha256": "56a248179066478de1c6fb226886e795c194c237e59ab114f3066fbfca9a7c2c",
+   "path": "frontend/src/lib/product/__tests__/support.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "56a248179066478de1c6fb226886e795c194c237e59ab114f3066fbfca9a7c2c"
+   },
+   "tip_sha256": "a32e39ae118cee245469ce20d2dc1355f78095eebcb927184d339596dd256ed7",
+   "verdict": "AUTHORIZED_BY_SUCCESSOR"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "53ab991cd46fa7358ac7e8697da409e770506eb9624103ae307da4b4c2e6a5e1",
+   "path": "frontend/src/lib/product/__tests__/ui-enh-002.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "53ab991cd46fa7358ac7e8697da409e770506eb9624103ae307da4b4c2e6a5e1"
+   },
+   "tip_sha256": "53ab991cd46fa7358ac7e8697da409e770506eb9624103ae307da4b4c2e6a5e1",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e4d9391c167e2bc9639466c4d664da4f7a6464a81ceb156b2d8559f75fb81ab4",
+   "path": "frontend/src/lib/product/__tests__/ui-enh-003.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "e4d9391c167e2bc9639466c4d664da4f7a6464a81ceb156b2d8559f75fb81ab4"
+   },
+   "tip_sha256": "e4d9391c167e2bc9639466c4d664da4f7a6464a81ceb156b2d8559f75fb81ab4",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [
+    "cbc2cf5 NHM-FL10-001 observatory: measured figures, tables, owner-scoped opt-in API and fr"
+   ],
+   "current_sha256": "d3fdba4cae774f9f0ef2ecefadc8e666e386a0521ed7b3366ac4b48fe819bddf",
+   "path": "frontend/src/lib/product/api.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "d3fdba4cae774f9f0ef2ecefadc8e666e386a0521ed7b3366ac4b48fe819bddf"
+   },
+   "tip_sha256": "87a9202f3c0ddb42bffb1738d085c1eafd9df246bb9008854b46981507d49a22",
+   "verdict": "AUTHORIZED_BY_SUCCESSOR"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2a4116b40747ba66af58839d2c78839532a88257088380de8a5a187419633408",
+   "path": "frontend/src/lib/product/auth.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "2a4116b40747ba66af58839d2c78839532a88257088380de8a5a187419633408"
+   },
+   "tip_sha256": "2a4116b40747ba66af58839d2c78839532a88257088380de8a5a187419633408",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "1832cac0d864259fe07d060f4e16542b925dfac0c06b0f5fe0c543208d9c71e7",
+   "path": "frontend/src/lib/product/clerk-module.d.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "1832cac0d864259fe07d060f4e16542b925dfac0c06b0f5fe0c543208d9c71e7"
+   },
+   "tip_sha256": "1832cac0d864259fe07d060f4e16542b925dfac0c06b0f5fe0c543208d9c71e7",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2f112118109539950b02ad590571c6d7a222dd092fab183f3a7855597477b38a",
+   "path": "frontend/src/lib/product/events.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "2f112118109539950b02ad590571c6d7a222dd092fab183f3a7855597477b38a"
+   },
+   "tip_sha256": "2f112118109539950b02ad590571c6d7a222dd092fab183f3a7855597477b38a",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f188caa8520ad512d8cf88402664e077364823f3ebb021e31949a251d23319bc",
+   "path": "frontend/src/lib/product/evidence-validation.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "f188caa8520ad512d8cf88402664e077364823f3ebb021e31949a251d23319bc"
+   },
+   "tip_sha256": "f188caa8520ad512d8cf88402664e077364823f3ebb021e31949a251d23319bc",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a958cfdc32a8fcc9e0bddbbcc3f3b5f91484455ac172a9e6420c46b0ecea4b7e",
+   "path": "frontend/src/lib/product/federation/__tests__/components.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "a958cfdc32a8fcc9e0bddbbcc3f3b5f91484455ac172a9e6420c46b0ecea4b7e"
+   },
+   "tip_sha256": "a958cfdc32a8fcc9e0bddbbcc3f3b5f91484455ac172a9e6420c46b0ecea4b7e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d3f788d23457ec05428b022a80a66a3f1f037357ab2a4a06bece6b5c622abe3f",
+   "path": "frontend/src/lib/product/federation/__tests__/events-model.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "d3f788d23457ec05428b022a80a66a3f1f037357ab2a4a06bece6b5c622abe3f"
+   },
+   "tip_sha256": "d3f788d23457ec05428b022a80a66a3f1f037357ab2a4a06bece6b5c622abe3f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "78e1977998b00e548d761a6a6093a00f3012e58339666da38dda4cce9f1929b2",
+   "path": "frontend/src/lib/product/federation/__tests__/fixtures.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "78e1977998b00e548d761a6a6093a00f3012e58339666da38dda4cce9f1929b2"
+   },
+   "tip_sha256": "78e1977998b00e548d761a6a6093a00f3012e58339666da38dda4cce9f1929b2",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "863668f589d377e4cffb350c8310083f6f1da9e456e8b7e3852190e05c4c42dc",
+   "path": "frontend/src/lib/product/federation/__tests__/participation.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "863668f589d377e4cffb350c8310083f6f1da9e456e8b7e3852190e05c4c42dc"
+   },
+   "tip_sha256": "863668f589d377e4cffb350c8310083f6f1da9e456e8b7e3852190e05c4c42dc",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2a1b87fb735818108938ddfc2e55b36da7d4a28c5db4c424c20009c0e673fdae",
+   "path": "frontend/src/lib/product/federation/__tests__/presentation.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "2a1b87fb735818108938ddfc2e55b36da7d4a28c5db4c424c20009c0e673fdae"
+   },
+   "tip_sha256": "2a1b87fb735818108938ddfc2e55b36da7d4a28c5db4c424c20009c0e673fdae",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "190263629b17a7e4935ac881e160696b398e311f51efe361ca072b7bc41b41d3",
+   "path": "frontend/src/lib/product/federation/__tests__/real-backend.integration.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "190263629b17a7e4935ac881e160696b398e311f51efe361ca072b7bc41b41d3"
+   },
+   "tip_sha256": "190263629b17a7e4935ac881e160696b398e311f51efe361ca072b7bc41b41d3",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "16ae443e5ee725e3d8ea6d333ab02c36a9f00afcc07198ac956b851ca986ec8b",
+   "path": "frontend/src/lib/product/federation/__tests__/static-audit.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "16ae443e5ee725e3d8ea6d333ab02c36a9f00afcc07198ac956b851ca986ec8b"
+   },
+   "tip_sha256": "16ae443e5ee725e3d8ea6d333ab02c36a9f00afcc07198ac956b851ca986ec8b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "79f6e497e23a6249a7031042f5927f68d3039e313af943c525904ab69a65a4df",
+   "path": "frontend/src/lib/product/federation/__tests__/store-api.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "79f6e497e23a6249a7031042f5927f68d3039e313af943c525904ab69a65a4df"
+   },
+   "tip_sha256": "79f6e497e23a6249a7031042f5927f68d3039e313af943c525904ab69a65a4df",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2d690f68e93c2ab6d35786c46f978609fe0cc54c47fbfac8aea6198560b945f4",
+   "path": "frontend/src/lib/product/federation/events.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "2d690f68e93c2ab6d35786c46f978609fe0cc54c47fbfac8aea6198560b945f4"
+   },
+   "tip_sha256": "2d690f68e93c2ab6d35786c46f978609fe0cc54c47fbfac8aea6198560b945f4",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "132c20bdd6a43330cc184e3fb674ed2ed08f1d5afbdcecee9a8846ba20b95730",
+   "path": "frontend/src/lib/product/federation/labels.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "132c20bdd6a43330cc184e3fb674ed2ed08f1d5afbdcecee9a8846ba20b95730"
+   },
+   "tip_sha256": "132c20bdd6a43330cc184e3fb674ed2ed08f1d5afbdcecee9a8846ba20b95730",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "11a4960f8b0470cd6a14bdff17d2a6c7668d1d6e0adc873099c80e28d1df9890",
+   "path": "frontend/src/lib/product/federation/live-model.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "11a4960f8b0470cd6a14bdff17d2a6c7668d1d6e0adc873099c80e28d1df9890"
+   },
+   "tip_sha256": "11a4960f8b0470cd6a14bdff17d2a6c7668d1d6e0adc873099c80e28d1df9890",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "687a12c90561ce9d2e6b2327787b319b8d572c9409d7df6c68bce051b3486cf8",
+   "path": "frontend/src/lib/product/federation/participation.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "687a12c90561ce9d2e6b2327787b319b8d572c9409d7df6c68bce051b3486cf8"
+   },
+   "tip_sha256": "687a12c90561ce9d2e6b2327787b319b8d572c9409d7df6c68bce051b3486cf8",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "bf888a4b2f406652eb6e35af7b96f7c5cff0fc43c1fee6b0908cd06df7ddeda5",
+   "path": "frontend/src/lib/product/federation/presentation.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "bf888a4b2f406652eb6e35af7b96f7c5cff0fc43c1fee6b0908cd06df7ddeda5"
+   },
+   "tip_sha256": "bf888a4b2f406652eb6e35af7b96f7c5cff0fc43c1fee6b0908cd06df7ddeda5",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "1e813c1c66dc36a4b31c3ea94297ae69fac8e79232961dc0337e6fc9101f6756",
+   "path": "frontend/src/lib/product/federation/state.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "1e813c1c66dc36a4b31c3ea94297ae69fac8e79232961dc0337e6fc9101f6756"
+   },
+   "tip_sha256": "1e813c1c66dc36a4b31c3ea94297ae69fac8e79232961dc0337e6fc9101f6756",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5f5d0c7abdacabbc78d18f37868ac9c342d47bcdf3fc16bdb5e7ecdf2e744546",
+   "path": "frontend/src/lib/product/federation/types.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "5f5d0c7abdacabbc78d18f37868ac9c342d47bcdf3fc16bdb5e7ecdf2e744546"
+   },
+   "tip_sha256": "5f5d0c7abdacabbc78d18f37868ac9c342d47bcdf3fc16bdb5e7ecdf2e744546",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "77f42ce4f0177a5bf6d4d04a25fb0984df664cf591af26f9f959abd9864e7096",
+   "path": "frontend/src/lib/product/history/__tests__/evidence.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "77f42ce4f0177a5bf6d4d04a25fb0984df664cf591af26f9f959abd9864e7096"
+   },
+   "tip_sha256": "77f42ce4f0177a5bf6d4d04a25fb0984df664cf591af26f9f959abd9864e7096",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2a3d644170fa0a6534937716a5fd90200e38c133572d9cf50ce8508f4edb596d",
+   "path": "frontend/src/lib/product/history/types.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "2a3d644170fa0a6534937716a5fd90200e38c133572d9cf50ce8508f4edb596d"
+   },
+   "tip_sha256": "2a3d644170fa0a6534937716a5fd90200e38c133572d9cf50ce8508f4edb596d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "074a78089a80170fc34a6e3014b3b8e3d16c75dfa813dea7c05dd375b00ed707",
+   "path": "frontend/src/lib/product/live-model.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "074a78089a80170fc34a6e3014b3b8e3d16c75dfa813dea7c05dd375b00ed707"
+   },
+   "tip_sha256": "074a78089a80170fc34a6e3014b3b8e3d16c75dfa813dea7c05dd375b00ed707",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e25642b316cac3e7e88cf377850728f4ba642e7b22bd4aec8d6f2dde94ae5464",
+   "path": "frontend/src/lib/product/observatory/__tests__/export.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "e25642b316cac3e7e88cf377850728f4ba642e7b22bd4aec8d6f2dde94ae5464"
+   },
+   "tip_sha256": "e25642b316cac3e7e88cf377850728f4ba642e7b22bd4aec8d6f2dde94ae5464",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [
+    "cbc2cf5 NHM-FL10-001 observatory: measured figures, tables, owner-scoped opt-in API and fr"
+   ],
+   "current_sha256": "a0a8efde6881031077722f74baf58b998fdf8ad1717969a9109ef94ddcbccee2",
+   "path": "frontend/src/lib/product/observatory/__tests__/fl10.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "a0a8efde6881031077722f74baf58b998fdf8ad1717969a9109ef94ddcbccee2"
+   },
+   "tip_sha256": null,
+   "verdict": "AUTHORIZED_BY_SUCCESSOR"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "7e018217ebd9f17b5d1de033a5049657922a252a01247c2d24b4b3c4465dd7b6",
+   "path": "frontend/src/lib/product/observatory/__tests__/obs_diag.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "7e018217ebd9f17b5d1de033a5049657922a252a01247c2d24b4b3c4465dd7b6"
+   },
+   "tip_sha256": "7e018217ebd9f17b5d1de033a5049657922a252a01247c2d24b4b3c4465dd7b6",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "4466b0b188f3e15067e708608e7e69ff340e6b13d0dd4f68842095dda475f8c0",
+   "path": "frontend/src/lib/product/observatory/__tests__/observatory.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "4466b0b188f3e15067e708608e7e69ff340e6b13d0dd4f68842095dda475f8c0"
+   },
+   "tip_sha256": "4466b0b188f3e15067e708608e7e69ff340e6b13d0dd4f68842095dda475f8c0",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ded5fda6bcd7bed121993999b81944f932eab33adf195468e37e91b185c518ff",
+   "path": "frontend/src/lib/product/observatory/__tests__/replay.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "ded5fda6bcd7bed121993999b81944f932eab33adf195468e37e91b185c518ff"
+   },
+   "tip_sha256": "ded5fda6bcd7bed121993999b81944f932eab33adf195468e37e91b185c518ff",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "35a761735fa126c0b8a6119b4dc40bcbf996698f1ef11ddf6329cc34aa1c955f",
+   "path": "frontend/src/lib/product/observatory/__tests__/showcase.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "35a761735fa126c0b8a6119b4dc40bcbf996698f1ef11ddf6329cc34aa1c955f"
+   },
+   "tip_sha256": "35a761735fa126c0b8a6119b4dc40bcbf996698f1ef11ddf6329cc34aa1c955f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "bc531d161ad50ec305dbf1f069857fc6156478fe2e072b5bed85d9d3a9506815",
+   "path": "frontend/src/lib/product/observatory/__tests__/signal-stage.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "bc531d161ad50ec305dbf1f069857fc6156478fe2e072b5bed85d9d3a9506815"
+   },
+   "tip_sha256": "bc531d161ad50ec305dbf1f069857fc6156478fe2e072b5bed85d9d3a9506815",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "fdcca0341e5ab932f20e2e46e7361ab62aa10371cdd7bb06036689b65d1d1bdf",
+   "path": "frontend/src/lib/product/observatory/evidence.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "fdcca0341e5ab932f20e2e46e7361ab62aa10371cdd7bb06036689b65d1d1bdf"
+   },
+   "tip_sha256": "fdcca0341e5ab932f20e2e46e7361ab62aa10371cdd7bb06036689b65d1d1bdf",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "75ceeba75c0fe712875721839b43cf4c86b7c7b0e0f7162b98a0cb017ab7f20b",
+   "path": "frontend/src/lib/product/observatory/export.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "75ceeba75c0fe712875721839b43cf4c86b7c7b0e0f7162b98a0cb017ab7f20b"
+   },
+   "tip_sha256": "75ceeba75c0fe712875721839b43cf4c86b7c7b0e0f7162b98a0cb017ab7f20b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "fd2c22fe56a86a37a696bbbbb745ede78ee5316bbe4995f2cc384c01a4e4f4ab",
+   "path": "frontend/src/lib/product/observatory/federation.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "fd2c22fe56a86a37a696bbbbb745ede78ee5316bbe4995f2cc384c01a4e4f4ab"
+   },
+   "tip_sha256": "fd2c22fe56a86a37a696bbbbb745ede78ee5316bbe4995f2cc384c01a4e4f4ab",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [
+    "cbc2cf5 NHM-FL10-001 observatory: measured figures, tables, owner-scoped opt-in API and fr"
+   ],
+   "current_sha256": "53636a3199efbcf993ed4989945f530ec8ab9588ab7b57c601fe2bf8b66cc2b9",
+   "path": "frontend/src/lib/product/observatory/fl10.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "53636a3199efbcf993ed4989945f530ec8ab9588ab7b57c601fe2bf8b66cc2b9"
+   },
+   "tip_sha256": null,
+   "verdict": "AUTHORIZED_BY_SUCCESSOR"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8decf99518633c8525ca65b49d9a0338ea28f6f66e29599b12cf679dc721e478",
+   "path": "frontend/src/lib/product/observatory/focus.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "8decf99518633c8525ca65b49d9a0338ea28f6f66e29599b12cf679dc721e478"
+   },
+   "tip_sha256": "8decf99518633c8525ca65b49d9a0338ea28f6f66e29599b12cf679dc721e478",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5b320826859c3d1f355bf5dd655f9f806ff3bcfc07d5cca03acefcf388473864",
+   "path": "frontend/src/lib/product/observatory/replay.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "5b320826859c3d1f355bf5dd655f9f806ff3bcfc07d5cca03acefcf388473864"
+   },
+   "tip_sha256": "5b320826859c3d1f355bf5dd655f9f806ff3bcfc07d5cca03acefcf388473864",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2e42b1c8f7ca9c2c7632ac9c246f1733e353a108d72bf6703a92267c267321c8",
+   "path": "frontend/src/lib/product/observatory/research.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "2e42b1c8f7ca9c2c7632ac9c246f1733e353a108d72bf6703a92267c267321c8"
+   },
+   "tip_sha256": "2e42b1c8f7ca9c2c7632ac9c246f1733e353a108d72bf6703a92267c267321c8",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8dd956630f6120a6fe2612fe668ce9f5104fb4503ec1ab54befca5322251468a",
+   "path": "frontend/src/lib/product/observatory/showcase.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "8dd956630f6120a6fe2612fe668ce9f5104fb4503ec1ab54befca5322251468a"
+   },
+   "tip_sha256": "8dd956630f6120a6fe2612fe668ce9f5104fb4503ec1ab54befca5322251468a",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "bfc04a33eae255c8d0664c062a07fdc5af48879f604995467d3c87688f5cd651",
+   "path": "frontend/src/lib/product/observatory/types.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "bfc04a33eae255c8d0664c062a07fdc5af48879f604995467d3c87688f5cd651"
+   },
+   "tip_sha256": "bfc04a33eae255c8d0664c062a07fdc5af48879f604995467d3c87688f5cd651",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3b856f308da17a3ac5f0267d778345f3463ee40f7443dcb6e7d404400ca4df47",
+   "path": "frontend/src/lib/product/research/__tests__/evidence.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "3b856f308da17a3ac5f0267d778345f3463ee40f7443dcb6e7d404400ca4df47"
+   },
+   "tip_sha256": "3b856f308da17a3ac5f0267d778345f3463ee40f7443dcb6e7d404400ca4df47",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e65e5f169c7921d239ccf4bc76c1062d386d2a4d8d17b37dc0d01ebf0f38166b",
+   "path": "frontend/src/lib/product/research/types.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "e65e5f169c7921d239ccf4bc76c1062d386d2a4d8d17b37dc0d01ebf0f38166b"
+   },
+   "tip_sha256": "e65e5f169c7921d239ccf4bc76c1062d386d2a4d8d17b37dc0d01ebf0f38166b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "087b95e2930a579c130b0f19f4bbea54a0b8b5a2e9a2d859a827e5b164ec8e3f",
+   "path": "frontend/src/lib/product/route-policy.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "087b95e2930a579c130b0f19f4bbea54a0b8b5a2e9a2d859a827e5b164ec8e3f"
+   },
+   "tip_sha256": "087b95e2930a579c130b0f19f4bbea54a0b8b5a2e9a2d859a827e5b164ec8e3f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "cf47269cf1c764e94ef323e20b691835fb4d44850291a91bbc83a81de1253a87",
+   "path": "frontend/src/lib/product/socket.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "cf47269cf1c764e94ef323e20b691835fb4d44850291a91bbc83a81de1253a87"
+   },
+   "tip_sha256": "cf47269cf1c764e94ef323e20b691835fb4d44850291a91bbc83a81de1253a87",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a77d7713cb49217f1df3f9290bfe1a6d130e9933b3d20a540db39685378eb3f3",
+   "path": "frontend/src/lib/product/state.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "a77d7713cb49217f1df3f9290bfe1a6d130e9933b3d20a540db39685378eb3f3"
+   },
+   "tip_sha256": "a77d7713cb49217f1df3f9290bfe1a6d130e9933b3d20a540db39685378eb3f3",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a29dfa473bf071f4eae37f7aa88b73a7c80ec17b61b88cc0ce8c5e4135749b4e",
+   "path": "frontend/src/lib/product/types.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "a29dfa473bf071f4eae37f7aa88b73a7c80ec17b61b88cc0ce8c5e4135749b4e"
+   },
+   "tip_sha256": "a29dfa473bf071f4eae37f7aa88b73a7c80ec17b61b88cc0ce8c5e4135749b4e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "1dd742048beff2075a97e6d4cc0d41b04aa4d6b896a4f7d86fe572cdeb54a3db",
+   "path": "frontend/src/lib/product/waveform.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "1dd742048beff2075a97e6d4cc0d41b04aa4d6b896a4f7d86fe572cdeb54a3db"
+   },
+   "tip_sha256": "1dd742048beff2075a97e6d4cc0d41b04aa4d6b896a4f7d86fe572cdeb54a3db",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0362a1cf6274db5c72b8ef5a73b6dab54dd3911769dadc18798172c20cbaa69c",
+   "path": "frontend/src/lib/services/api.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "0362a1cf6274db5c72b8ef5a73b6dab54dd3911769dadc18798172c20cbaa69c"
+   },
+   "tip_sha256": "0362a1cf6274db5c72b8ef5a73b6dab54dd3911769dadc18798172c20cbaa69c",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "64c1cd7a1615358fd611cb07850b9fe6d7877ca9348354b5a2093ad40757343e",
+   "path": "frontend/src/lib/services/websocket.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "64c1cd7a1615358fd611cb07850b9fe6d7877ca9348354b5a2093ad40757343e"
+   },
+   "tip_sha256": "64c1cd7a1615358fd611cb07850b9fe6d7877ca9348354b5a2093ad40757343e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2ce00f11ee3d293da5cb89df2b96942fbf067283c1185c1ca251e162d68ae68b",
+   "path": "frontend/src/lib/stores/fl.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "2ce00f11ee3d293da5cb89df2b96942fbf067283c1185c1ca251e162d68ae68b"
+   },
+   "tip_sha256": "2ce00f11ee3d293da5cb89df2b96942fbf067283c1185c1ca251e162d68ae68b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3432184e9cdb8e65c04b54001b997207a67cbc4c4ceb426d108a8c8ec279e5a9",
+   "path": "frontend/src/lib/stores/monitoring.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "3432184e9cdb8e65c04b54001b997207a67cbc4c4ceb426d108a8c8ec279e5a9"
+   },
+   "tip_sha256": "3432184e9cdb8e65c04b54001b997207a67cbc4c4ceb426d108a8c8ec279e5a9",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "4aaafc9de1d0d0e68f030bb2e34aa79d501f47eb082fe13d0a6b8d10e6514d81",
+   "path": "frontend/src/lib/stores/notifications.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "4aaafc9de1d0d0e68f030bb2e34aa79d501f47eb082fe13d0a6b8d10e6514d81"
+   },
+   "tip_sha256": "4aaafc9de1d0d0e68f030bb2e34aa79d501f47eb082fe13d0a6b8d10e6514d81",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "34249ad261d025faf521b74e44485f52cd09d27214a70e0ff83d3a3a7e5c75b1",
+   "path": "frontend/src/lib/stores/settings.svelte.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "34249ad261d025faf521b74e44485f52cd09d27214a70e0ff83d3a3a7e5c75b1"
+   },
+   "tip_sha256": "34249ad261d025faf521b74e44485f52cd09d27214a70e0ff83d3a3a7e5c75b1",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d6a76357d8d41494de946829480bf064f21626370849f1821c1d8921a4b62af7",
+   "path": "frontend/src/lib/types/index.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "d6a76357d8d41494de946829480bf064f21626370849f1821c1d8921a4b62af7"
+   },
+   "tip_sha256": "d6a76357d8d41494de946829480bf064f21626370849f1821c1d8921a4b62af7",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "97d136e64b4db75064bcc44f3bff64293818f504e2c29524bac813ec425a1d63",
+   "path": "frontend/src/lib/utils.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "97d136e64b4db75064bcc44f3bff64293818f504e2c29524bac813ec425a1d63"
+   },
+   "tip_sha256": "97d136e64b4db75064bcc44f3bff64293818f504e2c29524bac813ec425a1d63",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8d609bec531a0bb35d2d056946bf24b40236babf6d4f6a5b41146b8b4ee8d46d",
+   "path": "frontend/src/opentype.d.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "8d609bec531a0bb35d2d056946bf24b40236babf6d4f6a5b41146b8b4ee8d46d"
+   },
+   "tip_sha256": "8d609bec531a0bb35d2d056946bf24b40236babf6d4f6a5b41146b8b4ee8d46d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "198905c495c9bf4c1c51dae7d3b2d687f94127cd3bb20b993fc0178fba862e93",
+   "path": "frontend/src/routes/+layout.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "198905c495c9bf4c1c51dae7d3b2d687f94127cd3bb20b993fc0178fba862e93"
+   },
+   "tip_sha256": "198905c495c9bf4c1c51dae7d3b2d687f94127cd3bb20b993fc0178fba862e93",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "dafb7d726c8609d906ce1601378533d8f829e2fb4bf7a1911d03210bc4041902",
+   "path": "frontend/src/routes/+layout.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "dafb7d726c8609d906ce1601378533d8f829e2fb4bf7a1911d03210bc4041902"
+   },
+   "tip_sha256": "dafb7d726c8609d906ce1601378533d8f829e2fb4bf7a1911d03210bc4041902",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2155d4235b14d3a953f2dc06a6914b4b7b1541b45300910fce902f7f6ce6aa3d",
+   "path": "frontend/src/routes/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "2155d4235b14d3a953f2dc06a6914b4b7b1541b45300910fce902f7f6ce6aa3d"
+   },
+   "tip_sha256": "2155d4235b14d3a953f2dc06a6914b4b7b1541b45300910fce902f7f6ce6aa3d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ff8fca5f6903f30ca23fa6bc6f5a3bfd333e63f3a9ee869fc6c3728d5c4ccecd",
+   "path": "frontend/src/routes/[...path]/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "ff8fca5f6903f30ca23fa6bc6f5a3bfd333e63f3a9ee869fc6c3728d5c4ccecd"
+   },
+   "tip_sha256": "ff8fca5f6903f30ca23fa6bc6f5a3bfd333e63f3a9ee869fc6c3728d5c4ccecd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "435b6cb34717023a1e9bdd23a3b15346e8d4f3291727f56559b9805e96b045f4",
+   "path": "frontend/src/routes/ai/anomaly/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "435b6cb34717023a1e9bdd23a3b15346e8d4f3291727f56559b9805e96b045f4"
+   },
+   "tip_sha256": "435b6cb34717023a1e9bdd23a3b15346e8d4f3291727f56559b9805e96b045f4",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a07ae71ebfefeb49afb9f48170dd235b297ea4de0a03898a2d5f36f05584bc49",
+   "path": "frontend/src/routes/ai/baseline/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "a07ae71ebfefeb49afb9f48170dd235b297ea4de0a03898a2d5f36f05584bc49"
+   },
+   "tip_sha256": "a07ae71ebfefeb49afb9f48170dd235b297ea4de0a03898a2d5f36f05584bc49",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "1e737a2632652d3ff810902ffd6ff7af31754d244c40eb573e3c2dbce6fdadfd",
+   "path": "frontend/src/routes/ai/confidence/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "1e737a2632652d3ff810902ffd6ff7af31754d244c40eb573e3c2dbce6fdadfd"
+   },
+   "tip_sha256": "1e737a2632652d3ff810902ffd6ff7af31754d244c40eb573e3c2dbce6fdadfd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ee478bef5cec0d7817df03cd8a6e5a9771397216a4c542bbeb365da4ebf91fac",
+   "path": "frontend/src/routes/ai/explainability/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "ee478bef5cec0d7817df03cd8a6e5a9771397216a4c542bbeb365da4ebf91fac"
+   },
+   "tip_sha256": "ee478bef5cec0d7817df03cd8a6e5a9771397216a4c542bbeb365da4ebf91fac",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f8f6537a0e83a20321b8d1a999ed1617883fa497650f1818b7c21a878a3697df",
+   "path": "frontend/src/routes/ai/insights/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "f8f6537a0e83a20321b8d1a999ed1617883fa497650f1818b7c21a878a3697df"
+   },
+   "tip_sha256": "f8f6537a0e83a20321b8d1a999ed1617883fa497650f1818b7c21a878a3697df",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f9cd8ec333ba70a751301015c17be54bace2d3f4135e6c13c864cec6f34aa810",
+   "path": "frontend/src/routes/alerts/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "f9cd8ec333ba70a751301015c17be54bace2d3f4135e6c13c864cec6f34aa810"
+   },
+   "tip_sha256": "f9cd8ec333ba70a751301015c17be54bace2d3f4135e6c13c864cec6f34aa810",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "7ac3de92fe15463240a4bec81a3e29a25935a70fda0c77d6c42ecbd1b3758aac",
+   "path": "frontend/src/routes/app/+layout.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "7ac3de92fe15463240a4bec81a3e29a25935a70fda0c77d6c42ecbd1b3758aac"
+   },
+   "tip_sha256": "7ac3de92fe15463240a4bec81a3e29a25935a70fda0c77d6c42ecbd1b3758aac",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a11e527ae04fbdb2c5e93e3fcde1beea3e252cae8a7eeb6cd9749c1b196e7439",
+   "path": "frontend/src/routes/app/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "a11e527ae04fbdb2c5e93e3fcde1beea3e252cae8a7eeb6cd9749c1b196e7439"
+   },
+   "tip_sha256": "a11e527ae04fbdb2c5e93e3fcde1beea3e252cae8a7eeb6cd9749c1b196e7439",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "eddd97eea92b8347a0435c0467c7cad5689723af59c6513c66a1d5f162b3df74",
+   "path": "frontend/src/routes/app/about/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "eddd97eea92b8347a0435c0467c7cad5689723af59c6513c66a1d5f162b3df74"
+   },
+   "tip_sha256": "eddd97eea92b8347a0435c0467c7cad5689723af59c6513c66a1d5f162b3df74",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "4456038fce7accad3408afd49a2a00076e5ced1af3247ca88b212e83bb62ad81",
+   "path": "frontend/src/routes/app/device/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "4456038fce7accad3408afd49a2a00076e5ced1af3247ca88b212e83bb62ad81"
+   },
+   "tip_sha256": "4456038fce7accad3408afd49a2a00076e5ced1af3247ca88b212e83bb62ad81",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "c0fafab86b4883b0c8389dcdb246c802902e6ab2dc83c59e29cccd261de8fbfd",
+   "path": "frontend/src/routes/app/federation/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "c0fafab86b4883b0c8389dcdb246c802902e6ab2dc83c59e29cccd261de8fbfd"
+   },
+   "tip_sha256": "c0fafab86b4883b0c8389dcdb246c802902e6ab2dc83c59e29cccd261de8fbfd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "ecf0636ba5eac9a7327b290826ad943917826a02cba7869fa95bda6edd23f72d",
+   "path": "frontend/src/routes/app/federation/clients/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "ecf0636ba5eac9a7327b290826ad943917826a02cba7869fa95bda6edd23f72d"
+   },
+   "tip_sha256": "ecf0636ba5eac9a7327b290826ad943917826a02cba7869fa95bda6edd23f72d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8d35db68e95d010c67c52426eb5c58d6e66de9ba2136325c81509abc8d6a841e",
+   "path": "frontend/src/routes/app/federation/live/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "8d35db68e95d010c67c52426eb5c58d6e66de9ba2136325c81509abc8d6a841e"
+   },
+   "tip_sha256": "8d35db68e95d010c67c52426eb5c58d6e66de9ba2136325c81509abc8d6a841e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "0101686408173b4b10b62e0492a3a64db7c4649236669cf57e9cca957d383fb9",
+   "path": "frontend/src/routes/app/federation/privacy/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "0101686408173b4b10b62e0492a3a64db7c4649236669cf57e9cca957d383fb9"
+   },
+   "tip_sha256": "0101686408173b4b10b62e0492a3a64db7c4649236669cf57e9cca957d383fb9",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8e3245a432dad7cb148b3c46c879bcd96ed1f9ba5d4d72643a4a614ba9bedd30",
+   "path": "frontend/src/routes/app/federation/rounds/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "8e3245a432dad7cb148b3c46c879bcd96ed1f9ba5d4d72643a4a614ba9bedd30"
+   },
+   "tip_sha256": "8e3245a432dad7cb148b3c46c879bcd96ed1f9ba5d4d72643a4a614ba9bedd30",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d4b7b3fd9c81d5dbe87004cefb9c6c7a7a0fc0b33e2e9c73702243a7a7922570",
+   "path": "frontend/src/routes/app/history/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "d4b7b3fd9c81d5dbe87004cefb9c6c7a7a0fc0b33e2e9c73702243a7a7922570"
+   },
+   "tip_sha256": "d4b7b3fd9c81d5dbe87004cefb9c6c7a7a0fc0b33e2e9c73702243a7a7922570",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "c37725191d11d273b268a2ce10a5c9578cca586776c899e676bd3c635cb5e30f",
+   "path": "frontend/src/routes/app/history/[session_id]/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "c37725191d11d273b268a2ce10a5c9578cca586776c899e676bd3c635cb5e30f"
+   },
+   "tip_sha256": "c37725191d11d273b268a2ce10a5c9578cca586776c899e676bd3c635cb5e30f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5f472e9d9bfce3db4821d6db20bb02cdd11def75afb51b57b21c85ea2854c562",
+   "path": "frontend/src/routes/app/models/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "5f472e9d9bfce3db4821d6db20bb02cdd11def75afb51b57b21c85ea2854c562"
+   },
+   "tip_sha256": "5f472e9d9bfce3db4821d6db20bb02cdd11def75afb51b57b21c85ea2854c562",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "24bb079eecc1a8f1fb517c057fced887e24940560843bbf815d7a02fe60b3bc4",
+   "path": "frontend/src/routes/app/monitoring/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "24bb079eecc1a8f1fb517c057fced887e24940560843bbf815d7a02fe60b3bc4"
+   },
+   "tip_sha256": "24bb079eecc1a8f1fb517c057fced887e24940560843bbf815d7a02fe60b3bc4",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [
+    "cbc2cf5 NHM-FL10-001 observatory: measured figures, tables, owner-scoped opt-in API and fr"
+   ],
+   "current_sha256": "50287791c8fef908914e4c714faec434c612f89dd99e6de2cc20660a4eac6449",
+   "path": "frontend/src/routes/app/observatory/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "50287791c8fef908914e4c714faec434c612f89dd99e6de2cc20660a4eac6449"
+   },
+   "tip_sha256": "d3bd5f10af263041f533c08ebdfc2bd00dd1fe4b574f8165d4b9fdfcdda4a9e9",
+   "verdict": "AUTHORIZED_BY_SUCCESSOR"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "722ff84ced69b6696204c48b5f22eddfdbf7e3927eb14279028b1ed5f2b5af7b",
+   "path": "frontend/src/routes/app/observatory/evidence/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "722ff84ced69b6696204c48b5f22eddfdbf7e3927eb14279028b1ed5f2b5af7b"
+   },
+   "tip_sha256": "722ff84ced69b6696204c48b5f22eddfdbf7e3927eb14279028b1ed5f2b5af7b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "b042edbe61c1a07a34e30215dd34ab554c5fe471adc5fb8346f4738d92f2ffdb",
+   "path": "frontend/src/routes/app/observatory/federation-replay/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "b042edbe61c1a07a34e30215dd34ab554c5fe471adc5fb8346f4738d92f2ffdb"
+   },
+   "tip_sha256": "b042edbe61c1a07a34e30215dd34ab554c5fe471adc5fb8346f4738d92f2ffdb",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "42739d7a10cd9b22256fd10c152cfc18ca341155eda017276e2ae36327d438da",
+   "path": "frontend/src/routes/app/observatory/federation/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "42739d7a10cd9b22256fd10c152cfc18ca341155eda017276e2ae36327d438da"
+   },
+   "tip_sha256": "42739d7a10cd9b22256fd10c152cfc18ca341155eda017276e2ae36327d438da",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f68932e178366a1364d6657e8489d3e2f3a978ac19884b0894347b17dcb51cff",
+   "path": "frontend/src/routes/app/observatory/federation/[client_id]/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "f68932e178366a1364d6657e8489d3e2f3a978ac19884b0894347b17dcb51cff"
+   },
+   "tip_sha256": "f68932e178366a1364d6657e8489d3e2f3a978ac19884b0894347b17dcb51cff",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [
+    "cbc2cf5 NHM-FL10-001 observatory: measured figures, tables, owner-scoped opt-in API and fr"
+   ],
+   "current_sha256": "7c619b05eb9b22f22fdbd4e163b46513f8fad5acba3645afc8bb4e7094d2167d",
+   "path": "frontend/src/routes/app/observatory/fl10/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "7c619b05eb9b22f22fdbd4e163b46513f8fad5acba3645afc8bb4e7094d2167d"
+   },
+   "tip_sha256": null,
+   "verdict": "AUTHORIZED_BY_SUCCESSOR"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "068f77a509db956db01bdcf54475f4a109569a022b3971cd1ea4eb2216f95dd4",
+   "path": "frontend/src/routes/app/observatory/model/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "068f77a509db956db01bdcf54475f4a109569a022b3971cd1ea4eb2216f95dd4"
+   },
+   "tip_sha256": "068f77a509db956db01bdcf54475f4a109569a022b3971cd1ea4eb2216f95dd4",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2d477af5fa6767ac81f5a7c19f83f6a0b0155c439f25878c1dcb3f42b141c08b",
+   "path": "frontend/src/routes/app/observatory/outcomes/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "2d477af5fa6767ac81f5a7c19f83f6a0b0155c439f25878c1dcb3f42b141c08b"
+   },
+   "tip_sha256": "2d477af5fa6767ac81f5a7c19f83f6a0b0155c439f25878c1dcb3f42b141c08b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "078d7601ac7ef5d779922a1cb4bf3abb406615f0da70d81f2c358d4e5e27612b",
+   "path": "frontend/src/routes/app/observatory/provenance/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "078d7601ac7ef5d779922a1cb4bf3abb406615f0da70d81f2c358d4e5e27612b"
+   },
+   "tip_sha256": "078d7601ac7ef5d779922a1cb4bf3abb406615f0da70d81f2c358d4e5e27612b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "f364005625587fbc05aebb8830f99701267bd31e4ea20135779760cc333273a2",
+   "path": "frontend/src/routes/app/observatory/replay/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "f364005625587fbc05aebb8830f99701267bd31e4ea20135779760cc333273a2"
+   },
+   "tip_sha256": "f364005625587fbc05aebb8830f99701267bd31e4ea20135779760cc333273a2",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "7903de6156de879f8e09321a23bed89f0d4ba5d684203b59c17266edbff3228b",
+   "path": "frontend/src/routes/app/observatory/research/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "7903de6156de879f8e09321a23bed89f0d4ba5d684203b59c17266edbff3228b"
+   },
+   "tip_sha256": "7903de6156de879f8e09321a23bed89f0d4ba5d684203b59c17266edbff3228b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "aff31a7f2bc2ca1a7ec7082573a0a80d09d042c50978f21b2c76850554c00cbf",
+   "path": "frontend/src/routes/app/observatory/scenarios/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "aff31a7f2bc2ca1a7ec7082573a0a80d09d042c50978f21b2c76850554c00cbf"
+   },
+   "tip_sha256": "aff31a7f2bc2ca1a7ec7082573a0a80d09d042c50978f21b2c76850554c00cbf",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "cec00f9a41510eb75201f82cccf85a4a64033f244159ebe1bf522cf6b241af95",
+   "path": "frontend/src/routes/app/observatory/storyboard/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "cec00f9a41510eb75201f82cccf85a4a64033f244159ebe1bf522cf6b241af95"
+   },
+   "tip_sha256": "cec00f9a41510eb75201f82cccf85a4a64033f244159ebe1bf522cf6b241af95",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "23f770b2c7cbd9740154f51a7c2b1f919feddd012dace24c521364d060b91096",
+   "path": "frontend/src/routes/app/observatory/tour/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "23f770b2c7cbd9740154f51a7c2b1f919feddd012dace24c521364d060b91096"
+   },
+   "tip_sha256": "23f770b2c7cbd9740154f51a7c2b1f919feddd012dace24c521364d060b91096",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "206a1cab9f1d51a9fbbcd4c0532e2c0448c8a3977566c132b7f5219562e0f8fa",
+   "path": "frontend/src/routes/app/research/fl/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "206a1cab9f1d51a9fbbcd4c0532e2c0448c8a3977566c132b7f5219562e0f8fa"
+   },
+   "tip_sha256": "206a1cab9f1d51a9fbbcd4c0532e2c0448c8a3977566c132b7f5219562e0f8fa",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "94a37f90d42457fd4fe37d2c63c48d1af94945bd34ef7a18b43cb360ad65932d",
+   "path": "frontend/src/routes/app/research/ml/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "94a37f90d42457fd4fe37d2c63c48d1af94945bd34ef7a18b43cb360ad65932d"
+   },
+   "tip_sha256": "94a37f90d42457fd4fe37d2c63c48d1af94945bd34ef7a18b43cb360ad65932d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "b656e6bf4f11d35d3803ed7bfce16c3b7a382abc821e6fc9bb4e85985cb48335",
+   "path": "frontend/src/routes/app/system/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "b656e6bf4f11d35d3803ed7bfce16c3b7a382abc821e6fc9bb4e85985cb48335"
+   },
+   "tip_sha256": "b656e6bf4f11d35d3803ed7bfce16c3b7a382abc821e6fc9bb4e85985cb48335",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "26fcc6270d66076a06c7c1f52bf1137c42f103d6f87f5dc4752957865d972531",
+   "path": "frontend/src/routes/fl/aggregation/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "26fcc6270d66076a06c7c1f52bf1137c42f103d6f87f5dc4752957865d972531"
+   },
+   "tip_sha256": "26fcc6270d66076a06c7c1f52bf1137c42f103d6f87f5dc4752957865d972531",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "54b11aa7a9f1b618f809673579945d7e0b8ffbf512fd4a89306047121bd93e29",
+   "path": "frontend/src/routes/fl/clients/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "54b11aa7a9f1b618f809673579945d7e0b8ffbf512fd4a89306047121bd93e29"
+   },
+   "tip_sha256": "54b11aa7a9f1b618f809673579945d7e0b8ffbf512fd4a89306047121bd93e29",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "b7af064ad37292fc3198d3a3038965513ef273c84882a0f36bc97a40b78a0a5a",
+   "path": "frontend/src/routes/fl/global-model/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "b7af064ad37292fc3198d3a3038965513ef273c84882a0f36bc97a40b78a0a5a"
+   },
+   "tip_sha256": "b7af064ad37292fc3198d3a3038965513ef273c84882a0f36bc97a40b78a0a5a",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d6ca57c08b94ce1bdb281a1b9afd2eb5caede7e745ce00df2b84cdbf7f0c3674",
+   "path": "frontend/src/routes/fl/overview/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "d6ca57c08b94ce1bdb281a1b9afd2eb5caede7e745ce00df2b84cdbf7f0c3674"
+   },
+   "tip_sha256": "d6ca57c08b94ce1bdb281a1b9afd2eb5caede7e745ce00df2b84cdbf7f0c3674",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2d64825d038cd11e932adc0a56c6d6d3d0e4da0ec106b71ebac4c36975bfea32",
+   "path": "frontend/src/routes/fl/personal-models/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "2d64825d038cd11e932adc0a56c6d6d3d0e4da0ec106b71ebac4c36975bfea32"
+   },
+   "tip_sha256": "2d64825d038cd11e932adc0a56c6d6d3d0e4da0ec106b71ebac4c36975bfea32",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "cc3e012baee98529a210f415873dc86748380127990386779034a8e68b8ab439",
+   "path": "frontend/src/routes/fl/privacy/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "cc3e012baee98529a210f415873dc86748380127990386779034a8e68b8ab439"
+   },
+   "tip_sha256": "cc3e012baee98529a210f415873dc86748380127990386779034a8e68b8ab439",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "8bae72cf6a64a4d0d11b8488ff223e1b51d29c44c2537b47ad93793ec88f572f",
+   "path": "frontend/src/routes/fl/rounds/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "8bae72cf6a64a4d0d11b8488ff223e1b51d29c44c2537b47ad93793ec88f572f"
+   },
+   "tip_sha256": "8bae72cf6a64a4d0d11b8488ff223e1b51d29c44c2537b47ad93793ec88f572f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "64a8a4f70431ae421b672cf46bc69eabff732efc64078102e06dde58496d28ff",
+   "path": "frontend/src/routes/monitor/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "64a8a4f70431ae421b672cf46bc69eabff732efc64078102e06dde58496d28ff"
+   },
+   "tip_sha256": "64a8a4f70431ae421b672cf46bc69eabff732efc64078102e06dde58496d28ff",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "69449158324237632b2e1ef4aae6cef60622d088415e5a1c171f4ecf1ee00e40",
+   "path": "frontend/src/routes/monitoring/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "69449158324237632b2e1ef4aae6cef60622d088415e5a1c171f4ecf1ee00e40"
+   },
+   "tip_sha256": "69449158324237632b2e1ef4aae6cef60622d088415e5a1c171f4ecf1ee00e40",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "00de5f8750a4efe4c201b6db034f491cb5ba29820852bfc3c22468659edcf2b6",
+   "path": "frontend/src/routes/monitoring/__tests__/page.render.test.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "00de5f8750a4efe4c201b6db034f491cb5ba29820852bfc3c22468659edcf2b6"
+   },
+   "tip_sha256": "00de5f8750a4efe4c201b6db034f491cb5ba29820852bfc3c22468659edcf2b6",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6bd6f16be7eb0634d9a22126d4de068ebc7e2732637df3f5a3b705a483d60016",
+   "path": "frontend/src/routes/overview/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6bd6f16be7eb0634d9a22126d4de068ebc7e2732637df3f5a3b705a483d60016"
+   },
+   "tip_sha256": "6bd6f16be7eb0634d9a22126d4de068ebc7e2732637df3f5a3b705a483d60016",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "5449b694b3b455207f762e29465ea1be33c276746ad62e0184027c1ffa27abe5",
+   "path": "frontend/src/routes/patients/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "5449b694b3b455207f762e29465ea1be33c276746ad62e0184027c1ffa27abe5"
+   },
+   "tip_sha256": "5449b694b3b455207f762e29465ea1be33c276746ad62e0184027c1ffa27abe5",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e73909647a913e94c264a63996855b53b8e6fb45c760388ff16278ddd142f344",
+   "path": "frontend/src/routes/reports/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "e73909647a913e94c264a63996855b53b8e6fb45c760388ff16278ddd142f344"
+   },
+   "tip_sha256": "e73909647a913e94c264a63996855b53b8e6fb45c760388ff16278ddd142f344",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2067d78d7486a0f02fe26097bcc55a767b40c06b2adc864cb07fb77c68d48b6c",
+   "path": "frontend/src/routes/research/ablation/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "2067d78d7486a0f02fe26097bcc55a767b40c06b2adc864cb07fb77c68d48b6c"
+   },
+   "tip_sha256": "2067d78d7486a0f02fe26097bcc55a767b40c06b2adc864cb07fb77c68d48b6c",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "28c0f0e1c8b3da5e5654488ce3ce8a9839a1994d0acf70742e0e580e81ae072c",
+   "path": "frontend/src/routes/research/analytics/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "28c0f0e1c8b3da5e5654488ce3ce8a9839a1994d0acf70742e0e580e81ae072c"
+   },
+   "tip_sha256": "28c0f0e1c8b3da5e5654488ce3ce8a9839a1994d0acf70742e0e580e81ae072c",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "a5ca3cc713f67b17c4754d5078d0371b60d9e73fce99e7a8385443af89921ddb",
+   "path": "frontend/src/routes/research/comparison/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "a5ca3cc713f67b17c4754d5078d0371b60d9e73fce99e7a8385443af89921ddb"
+   },
+   "tip_sha256": "a5ca3cc713f67b17c4754d5078d0371b60d9e73fce99e7a8385443af89921ddb",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "e5a28409ef886501a76d8216e30a4fc5781b86ce57662636561218268c7b3502",
+   "path": "frontend/src/routes/research/experiments/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "e5a28409ef886501a76d8216e30a4fc5781b86ce57662636561218268c7b3502"
+   },
+   "tip_sha256": "e5a28409ef886501a76d8216e30a4fc5781b86ce57662636561218268c7b3502",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "9905587f5ea987edea2daa537ffc62d9ef1ad25548e7a5c5953f19a5d4700751",
+   "path": "frontend/src/routes/research/results/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "9905587f5ea987edea2daa537ffc62d9ef1ad25548e7a5c5953f19a5d4700751"
+   },
+   "tip_sha256": "9905587f5ea987edea2daa537ffc62d9ef1ad25548e7a5c5953f19a5d4700751",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6eea91c3ce62ec4c78c82fed8ebac2887be2222f03fd78f1aff72e4bc33bed14",
+   "path": "frontend/src/routes/research/robustness/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "6eea91c3ce62ec4c78c82fed8ebac2887be2222f03fd78f1aff72e4bc33bed14"
+   },
+   "tip_sha256": "6eea91c3ce62ec4c78c82fed8ebac2887be2222f03fd78f1aff72e4bc33bed14",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "3f9fbf056773f6891a53979b97bad0afc35d405f63c0f57f549141a03b13969d",
+   "path": "frontend/src/routes/sign-in/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "3f9fbf056773f6891a53979b97bad0afc35d405f63c0f57f549141a03b13969d"
+   },
+   "tip_sha256": "3f9fbf056773f6891a53979b97bad0afc35d405f63c0f57f549141a03b13969d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "506af2612bd73aa77243dd0bd194403b7013321e99e29fd1228669c8da853eaa",
+   "path": "frontend/src/routes/signals/dashboard/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "506af2612bd73aa77243dd0bd194403b7013321e99e29fd1228669c8da853eaa"
+   },
+   "tip_sha256": "506af2612bd73aa77243dd0bd194403b7013321e99e29fd1228669c8da853eaa",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "00ef1fd761698e5af3c3572376639e1aa6401e1d8ccd0f78a32b553452862245",
+   "path": "frontend/src/routes/signals/ecg/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "00ef1fd761698e5af3c3572376639e1aa6401e1d8ccd0f78a32b553452862245"
+   },
+   "tip_sha256": "00ef1fd761698e5af3c3572376639e1aa6401e1d8ccd0f78a32b553452862245",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "896d1f494392d8ad9768ee3b6a6e3a664d3ddcc668a0c2d7f7317af45414c68b",
+   "path": "frontend/src/routes/signals/ppg/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "896d1f494392d8ad9768ee3b6a6e3a664d3ddcc668a0c2d7f7317af45414c68b"
+   },
+   "tip_sha256": "896d1f494392d8ad9768ee3b6a6e3a664d3ddcc668a0c2d7f7317af45414c68b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "37246336b2fc3770dcd48e7a96844bb5d8e8a34b030044d715a45028aefb2e60",
+   "path": "frontend/src/routes/signals/quality/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "37246336b2fc3770dcd48e7a96844bb5d8e8a34b030044d715a45028aefb2e60"
+   },
+   "tip_sha256": "37246336b2fc3770dcd48e7a96844bb5d8e8a34b030044d715a45028aefb2e60",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2a4a0019d2abd51550a10584f6a879598da888183d9ed61805d08f091212dffd",
+   "path": "frontend/src/routes/signals/spo2/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "2a4a0019d2abd51550a10584f6a879598da888183d9ed61805d08f091212dffd"
+   },
+   "tip_sha256": "2a4a0019d2abd51550a10584f6a879598da888183d9ed61805d08f091212dffd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "2fb6648d7cbe7bc8598cb4a8a63992730fe7ae99c0c85613aba9154d537b56b5",
+   "path": "frontend/src/routes/system/data/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "2fb6648d7cbe7bc8598cb4a8a63992730fe7ae99c0c85613aba9154d537b56b5"
+   },
+   "tip_sha256": "2fb6648d7cbe7bc8598cb4a8a63992730fe7ae99c0c85613aba9154d537b56b5",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "dd5ccc3bac7f8730c76124cafc769570a0ee69a5ecfddea6b702ef74ed72f88b",
+   "path": "frontend/src/routes/system/devices/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "dd5ccc3bac7f8730c76124cafc769570a0ee69a5ecfddea6b702ef74ed72f88b"
+   },
+   "tip_sha256": "dd5ccc3bac7f8730c76124cafc769570a0ee69a5ecfddea6b702ef74ed72f88b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "76e89ab6c290547ee98677ff7407dfd0183637fc69b7901b22c535428f98ae13",
+   "path": "frontend/src/routes/system/health/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "76e89ab6c290547ee98677ff7407dfd0183637fc69b7901b22c535428f98ae13"
+   },
+   "tip_sha256": "76e89ab6c290547ee98677ff7407dfd0183637fc69b7901b22c535428f98ae13",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "82afe30c74bfe3b7b00d9612df87ed869e8190def8b10e00b36ba06e7931c69b",
+   "path": "frontend/src/routes/system/notifications/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "82afe30c74bfe3b7b00d9612df87ed869e8190def8b10e00b36ba06e7931c69b"
+   },
+   "tip_sha256": "82afe30c74bfe3b7b00d9612df87ed869e8190def8b10e00b36ba06e7931c69b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "fac63b808f6c78a52700a938ffff99f71c26df7a09f47198238c144e71ca511f",
+   "path": "frontend/src/routes/system/settings/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "fac63b808f6c78a52700a938ffff99f71c26df7a09f47198238c144e71ca511f"
+   },
+   "tip_sha256": "fac63b808f6c78a52700a938ffff99f71c26df7a09f47198238c144e71ca511f",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "693e077d2955ae3a2e9654caa7f1f0516a4a6002538a80abc9a1f63783b69398",
+   "path": "frontend/src/routes/trends/+page.svelte",
+   "successor_sha256": {
+    "NHM_FL10_001": "693e077d2955ae3a2e9654caa7f1f0516a4a6002538a80abc9a1f63783b69398"
+   },
+   "tip_sha256": "693e077d2955ae3a2e9654caa7f1f0516a4a6002538a80abc9a1f63783b69398",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d06f2c3680fbfbcf1ba26606ac7ac804623c06b4553f13d15ff77cd63110f0dd",
+   "path": "frontend/static/models/nhm-watch.glb",
+   "successor_sha256": {
+    "NHM_FL10_001": "d06f2c3680fbfbcf1ba26606ac7ac804623c06b4553f13d15ff77cd63110f0dd"
+   },
+   "tip_sha256": "d06f2c3680fbfbcf1ba26606ac7ac804623c06b4553f13d15ff77cd63110f0dd",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "d96ba0faa2b48fe649e8050d4bb43c6af6d2884dc69baa0eb161b87fd4cf6c1b",
+   "path": "frontend/static/models/watch-poster.jpg",
+   "successor_sha256": {
+    "NHM_FL10_001": "d96ba0faa2b48fe649e8050d4bb43c6af6d2884dc69baa0eb161b87fd4cf6c1b"
+   },
+   "tip_sha256": "d96ba0faa2b48fe649e8050d4bb43c6af6d2884dc69baa0eb161b87fd4cf6c1b",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "6b7ca9d7dfd23c7814ebce4da4a1ac97b1c04c2b3111fff3acdc3c73c7975cb3",
+   "path": "frontend/static/replay/PUBLIC_ECG_REPLAY_V1.json",
+   "successor_sha256": {
+    "NHM_FL10_001": "6b7ca9d7dfd23c7814ebce4da4a1ac97b1c04c2b3111fff3acdc3c73c7975cb3"
+   },
+   "tip_sha256": "6b7ca9d7dfd23c7814ebce4da4a1ac97b1c04c2b3111fff3acdc3c73c7975cb3",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "46836bd61305ac6f3be95a57c4fad14ee5a310ac6626b1def1f4fe542f7e8659",
+   "path": "frontend/static/replay/WEARABLE_SIM_V2_REPLAY_V1.json",
+   "successor_sha256": {
+    "NHM_FL10_001": "46836bd61305ac6f3be95a57c4fad14ee5a310ac6626b1def1f4fe542f7e8659"
+   },
+   "tip_sha256": "46836bd61305ac6f3be95a57c4fad14ee5a310ac6626b1def1f4fe542f7e8659",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "43059391099344cb00edb6e7c741007864d178bb305215429b045a09f8438dc0",
+   "path": "frontend/static/replay/WEARABLE_SIM_V2_REPLAY_V2_FLATLINE.json",
+   "successor_sha256": {
+    "NHM_FL10_001": "43059391099344cb00edb6e7c741007864d178bb305215429b045a09f8438dc0"
+   },
+   "tip_sha256": "43059391099344cb00edb6e7c741007864d178bb305215429b045a09f8438dc0",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "1b7d9f5dfc980799a5b778657a651887bdbb56ceef9ec0126b0401c15aa5c56d",
+   "path": "frontend/svelte.config.js",
+   "successor_sha256": {
+    "NHM_FL10_001": "1b7d9f5dfc980799a5b778657a651887bdbb56ceef9ec0126b0401c15aa5c56d"
+   },
+   "tip_sha256": "1b7d9f5dfc980799a5b778657a651887bdbb56ceef9ec0126b0401c15aa5c56d",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "7c46e5fc665b2429eb8d4e66f493141a8a210d2fbf42e42a94f96771d6b7141e",
+   "path": "frontend/tsconfig.json",
+   "successor_sha256": {
+    "NHM_FL10_001": "7c46e5fc665b2429eb8d4e66f493141a8a210d2fbf42e42a94f96771d6b7141e"
+   },
+   "tip_sha256": "7c46e5fc665b2429eb8d4e66f493141a8a210d2fbf42e42a94f96771d6b7141e",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "7fdd254faf234a938aac185131884ce82b8ff8e851310a581ab3c471d656cc71",
+   "path": "frontend/vite.config.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "7fdd254faf234a938aac185131884ce82b8ff8e851310a581ab3c471d656cc71"
+   },
+   "tip_sha256": "7fdd254faf234a938aac185131884ce82b8ff8e851310a581ab3c471d656cc71",
+   "verdict": "UNCHANGED"
+  },
+  {
+   "commits_since_tip": [],
+   "current_sha256": "1a6d3a74c4184f31f1e6f052be77e482200d8e54d2a0fda8e5acecff911a7507",
+   "path": "frontend/vitest.config.ts",
+   "successor_sha256": {
+    "NHM_FL10_001": "1a6d3a74c4184f31f1e6f052be77e482200d8e54d2a0fda8e5acecff911a7507"
+   },
+   "tip_sha256": "1a6d3a74c4184f31f1e6f052be77e482200d8e54d2a0fda8e5acecff911a7507",
+   "verdict": "UNCHANGED"
+  }
+ ],
+ "since": "274323730d1c7355f688ad4c9ff01ecbfb746501",
+ "summary": {
+  "AUTHORIZED_BY_SUCCESSOR": 8,
+  "UNCHANGED": 277
+ },
+ "tip": "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json",
+ "tip_lock_sha256": "64aeea5b59301d131ec771e61b50a41ed41795effe71b0a36e416fe5c7d7386d"
+}
