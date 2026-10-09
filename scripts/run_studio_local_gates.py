@@ -51,6 +51,10 @@ def pytest_chunks() -> dict:
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     report: dict = {"started": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "environment": {"python": platform.python_version(), "platform": platform.platform()}, "steps": {}}
+    code, out, sec = run(["npm", "run", "build"], ROOT / "frontend")
+    report["steps"]["frontend_build"] = {"returncode": code, "seconds": round(sec, 1), "tail": out.strip().splitlines()[-1][:160] if out.strip() else ""}
+    stamp_code, stamp_out, _ = run([sys.executable, "-c", "from scripts.run_capstone_faculty_demo import build_frontend; print(build_frontend())"])   # writes the build stamp the launcher preflight checks
+    report["steps"]["frontend_build"]["stamp_returncode"] = stamp_code
     py = pytest_chunks()
     report["steps"]["backend_pytest"] = py
     code, out, sec = run(["npx", "vitest", "run"], ROOT / "frontend")
@@ -59,9 +63,6 @@ def main() -> int:
     code, out, sec = run(["npx", "svelte-check", "--tsconfig", "./tsconfig.json", "--output", "machine"], ROOT / "frontend")
     m = re.search(r"COMPLETED (\d+) FILES (\d+) ERRORS (\d+) WARNINGS", out)
     report["steps"]["svelte_check"] = {"files": int(m.group(1)), "errors": int(m.group(2)), "warnings": int(m.group(3)), "baseline_warnings": BASELINE_SVELTE_WARNINGS} if m else {"errors": None}
-    code, out, sec = run(["npm", "run", "build"], ROOT / "frontend")
-    report["steps"]["frontend_build"] = {"returncode": code, "seconds": round(sec, 1), "tail": out.strip().splitlines()[-1][:160] if out.strip() else ""}
-    code, out, sec = run([sys.executable, "-c", "from scripts.run_capstone_faculty_demo import build_frontend; print(build_frontend())"])
     code2, out2, _ = run([sys.executable, "-m", "scripts.run_nhm", "--demo", "--preflight-only"])
     try:
         checks = json.loads(out2.strip().splitlines()[-1])["preflight"]
@@ -72,7 +73,7 @@ def main() -> int:
     report["steps"]["launcher_preflight"] = launcher
     steps = report["steps"]
     report["passed"] = bool(not py["failures"] and py["failed"] == 0 and py["errors"] == 0 and steps["frontend_vitest"]["failed"] == 0 and steps["frontend_vitest"]["returncode"] == 0 and steps["svelte_check"].get("errors") == 0
-                            and steps["svelte_check"].get("warnings", 10**6) <= BASELINE_SVELTE_WARNINGS and steps["frontend_build"]["returncode"] == 0 and launcher["passed"])
+                            and steps["svelte_check"].get("warnings", 10**6) <= BASELINE_SVELTE_WARNINGS and steps["frontend_build"]["returncode"] == 0 and steps["frontend_build"]["stamp_returncode"] == 0 and launcher["passed"])
     report["finished"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
     report["note"] = "Any failing test is listed by name under backend_pytest.failures; none is allow-listed. A pre-existing monitoring race flake, if it appears, is reported there and judged separately."
     (OUT / "local_test_report.json").write_text(json.dumps(report, indent=1, sort_keys=True) + "\n")
