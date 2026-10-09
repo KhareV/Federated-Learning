@@ -1,0 +1,65 @@
+// Real Chrome check of the collapsible sidebar against a running isolated stack (DemoAuth). No mocked response.
+// Usage: node studio_sidebar_verify.mjs <debugPort> <origin> <outputDir>
+import { writeFileSync } from 'node:fs';
+import { connect, sleep } from './studio_cdp.mjs';
+
+const [, , debugPort, origin, output] = process.argv;
+const b = await connect(debugPort, origin, output);
+const checks = [];
+const check = (name, ok, detail = '') => { checks.push({ name, ok: !!ok, detail: String(detail).slice(0, 300) }); console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${ok ? '' : '  :: ' + String(detail).slice(0, 300)}`); };
+const T = (id) => `document.querySelector('[data-testid="${id}"]')`;
+const click = (id) => b.evaluate(`(()=>{const e=${T(id)};if(!e)return false;e.click();return true})()`);
+const painted = () => b.evaluate(`(()=>{const t=document.querySelector('[data-testid="sidebar-toggle"]');const cs=getComputedStyle(t);const r=t.getBoundingClientRect();const v=t.querySelector('svg').getBoundingClientRect();return cs.visibility==='visible'&&cs.display!=='none'&&Number(cs.opacity)>0&&r.width>=28&&r.height>=28&&v.width>=14&&v.height>=14&&r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight})()`);
+const geom = () => b.evaluate(`(()=>{const s=document.querySelector('aside.side').getBoundingClientRect();const m=document.querySelector('main#main-content').getBoundingClientRect();return {side:Math.round(s.width),mainLeft:Math.round(m.left),mainWidth:Math.round(m.width),sw:document.documentElement.scrollWidth,iw:innerWidth,collapsed:document.querySelector('.shell').classList.contains('collapsed'),stored:localStorage.getItem('nhm.sidebar.collapsed')}})()`);
+
+await b.viewport(1440);
+await b.navigate('/app/federation', `!!${T('sidebar-toggle')}`);
+await b.evaluate(`localStorage.removeItem('nhm.sidebar.collapsed')`);
+await b.navigate('/app/federation', `!!${T('sidebar-toggle')}`);
+await sleep(400);
+const open = await geom();
+check('expanded by default: full-width sidebar with labels', open.side >= 220 && !open.collapsed, JSON.stringify(open));
+check('expanded: toggle is labelled "Collapse sidebar" and aria-expanded=true', (await b.evaluate(`${T('sidebar-toggle')}.getAttribute('aria-label')`)) === 'Collapse sidebar' && (await b.evaluate(`${T('sidebar-toggle')}.getAttribute('aria-expanded')`)) === 'true');
+check('expanded: the toggle is actually visible (not hidden by a global style) and fully inside the viewport', await painted());
+await b.screenshot('sidebar_expanded');
+await click('sidebar-toggle');
+await sleep(500);
+const rail = await geom();
+check('collapsed: an icon rail (narrow) and the content area grew by the freed width', rail.side <= 80 && rail.collapsed && rail.mainWidth > open.mainWidth + 100, JSON.stringify(rail));
+check('collapsed: no horizontal overflow', rail.sw <= rail.iw, JSON.stringify(rail));
+check('collapsed: labels and sub-pages are hidden, every destination still has an accessible name and tooltip', await b.evaluate(`(()=>{const links=[...document.querySelectorAll('#product-nav-list a.item')];const hidden=links.every(a=>getComputedStyle(a.querySelector('.lbl')).display==='none');const named=links.every(a=>a.getAttribute('aria-label')&&a.getAttribute('title')===a.getAttribute('aria-label'));return links.length===10&&hidden&&named&&!document.querySelector('#product-nav-list .sub')})()`));
+check('collapsed: preference is remembered', rail.stored === '1', rail.stored);
+check('collapsed: toggle is labelled "Expand sidebar" and aria-expanded=false', (await b.evaluate(`${T('sidebar-toggle')}.getAttribute('aria-label')`)) === 'Expand sidebar' && (await b.evaluate(`${T('sidebar-toggle')}.getAttribute('aria-expanded')`)) === 'false');
+check('collapsed: the simulation notice is still present (compact tag + tooltip)', await b.evaluate(`document.querySelector('.foot').getAttribute('title')==='SIMULATED ONLY · RESEARCH / NOT DIAGNOSTIC' && getComputedStyle(document.querySelector('.foot .mini')).display!=='none'`));
+check('collapsed: the expand toggle is actually visible and fully inside the viewport', await painted());
+await b.screenshot('sidebar_collapsed');
+await b.navigate('/app/federation', `!!${T('sidebar-toggle')}`);
+await sleep(400);
+check('a reload keeps the sidebar collapsed', (await geom()).collapsed);
+await b.evaluate(`document.querySelector('#product-nav-list a.item[href="/app/models"]').click()`);
+await sleep(900);
+check('navigating by an icon works and the rail stays collapsed', (await b.evaluate('location.pathname')).startsWith('/app/models') && (await geom()).collapsed);
+await b.evaluate(`window.dispatchEvent(new KeyboardEvent('keydown',{key:'b',ctrlKey:true,bubbles:true}))`);
+await sleep(500);
+check('Ctrl+B expands it again and the width is restored', (await geom()).side >= 220 && !(await geom()).collapsed);
+await b.evaluate(`window.dispatchEvent(new KeyboardEvent('keydown',{key:'b',metaKey:true,bubbles:true}))`);
+await sleep(500);
+check('Cmd+B collapses it', (await geom()).collapsed);
+await click('sidebar-toggle');
+await sleep(500);
+check('the toggle expands it', !(await geom()).collapsed && (await b.evaluate('document.activeElement?.getAttribute("data-testid")||""')) === 'sidebar-toggle' || !(await geom()).collapsed);
+for (const w of [1024, 768]) { await b.viewport(w); await sleep(400); const g = await geom(); check(`expanded at ${w}px: no overflow`, g.sw <= g.iw, JSON.stringify(g)); }
+await b.viewport(390);
+await sleep(500);
+const mobile = await b.evaluate(`(()=>{const s=document.querySelector('aside.side').getBoundingClientRect();return {left:Math.round(s.left),right:Math.round(s.right),toggleShown:getComputedStyle(${T('sidebar-toggle')}).display!=='none',menuShown:getComputedStyle(document.querySelector('button.menu')).display!=='none',sw:document.documentElement.scrollWidth,iw:innerWidth}})()`);
+check('390px: the rail toggle is hidden, the drawer is off-canvas and the menu button is shown, no overflow', !mobile.toggleShown && mobile.menuShown && mobile.right <= 0 && mobile.sw <= mobile.iw, JSON.stringify(mobile));
+await b.evaluate(`document.querySelector('button.menu').click()`);
+await sleep(500);
+const drawer = await b.evaluate(`(()=>{const s=document.querySelector('aside.side').getBoundingClientRect();return {left:Math.round(s.left),width:Math.round(s.width),labels:[...document.querySelectorAll('#product-nav-list .lbl')].every(e=>getComputedStyle(e).display!=='none')}})()`);
+check('390px: opening the drawer shows the full labelled navigation even when the desktop preference is collapsed', drawer.left >= 0 && drawer.width >= 220 && drawer.labels, JSON.stringify(drawer));
+await b.screenshot('sidebar_mobile_drawer');
+await b.evaluate(`localStorage.removeItem('nhm.sidebar.collapsed')`);
+const failed = checks.filter((c) => !c.ok).map((c) => c.name);
+writeFileSync(`${output}/sidebar_verification.json`, JSON.stringify({ passed: failed.length === 0, total: checks.length, failed, checks }, null, 1) + '\n');
+console.log(JSON.stringify({ passed: failed.length === 0, total: checks.length, failed }));
+process.exit(failed.length ? 1 : 0);

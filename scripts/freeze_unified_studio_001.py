@@ -25,7 +25,7 @@ BOUND_EXACT = {
     "api/observatory_studio.py", "api/observatory_fl10.py", "api/product_app_observatory_v1.py", "fl10/runner.py",
     "scripts/successor_chain.py", "scripts/studio_successor_compat.py", "scripts/fl10_successor_compat.py", "scripts/capstone_ui_v1_8_successor.py", "scripts/reconcile_ui_lock_chain.py",
     "scripts/verify_fl10_001.py", "scripts/verify_unified_studio_001.py", "scripts/freeze_unified_studio_001.py", "scripts/run_studio_local_gates.py",
-    "scripts/studio_cdp.mjs", "scripts/studio_baseline_capture.mjs", "scripts/studio_browser_verify.mjs", "scripts/run_studio_browser.py", "scripts/studio_collect_evidence.py",
+    "scripts/studio_cdp.mjs", "scripts/studio_baseline_capture.mjs", "scripts/studio_browser_verify.mjs", "scripts/studio_sidebar_verify.mjs", "scripts/run_studio_browser.py", "scripts/studio_collect_evidence.py",
     "scripts/studio_amend.py", "configs/final_eval_repair/legacy_route_policy_v1.json",
     "tests/test_capstone_federation_ui.py", "tests/test_capstone_full_demo.py", "tests/test_final_showcase_audit.py", "tests/test_observatory_pipeline.py", "tests/test_ufl_lite_presentation.py",
     "tests/test_studio_generalisation.py", "tests/test_studio_specs.py", "tests/test_studio_isolation.py", "tests/test_studio_observer.py", "tests/test_studio_api.py", "tests/test_studio_successor.py", "tests/test_successor_chain_governance.py",

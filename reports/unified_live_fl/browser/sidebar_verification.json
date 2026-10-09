@@ -1,0 +1,102 @@
+{
+ "passed": true,
+ "total": 19,
+ "failed": [],
+ "checks": [
+  {
+   "name": "expanded by default: full-width sidebar with labels",
+   "ok": true,
+   "detail": "{\"side\":232,\"mainLeft\":232,\"mainWidth\":1208,\"sw\":1440,\"iw\":1440,\"collapsed\":false,\"stored\":null}"
+  },
+  {
+   "name": "expanded: toggle is labelled \"Collapse sidebar\" and aria-expanded=true",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "expanded: the toggle is actually visible (not hidden by a global style) and fully inside the viewport",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "collapsed: an icon rail (narrow) and the content area grew by the freed width",
+   "ok": true,
+   "detail": "{\"side\":68,\"mainLeft\":68,\"mainWidth\":1372,\"sw\":1440,\"iw\":1440,\"collapsed\":true,\"stored\":\"1\"}"
+  },
+  {
+   "name": "collapsed: no horizontal overflow",
+   "ok": true,
+   "detail": "{\"side\":68,\"mainLeft\":68,\"mainWidth\":1372,\"sw\":1440,\"iw\":1440,\"collapsed\":true,\"stored\":\"1\"}"
+  },
+  {
+   "name": "collapsed: labels and sub-pages are hidden, every destination still has an accessible name and tooltip",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "collapsed: preference is remembered",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "name": "collapsed: toggle is labelled \"Expand sidebar\" and aria-expanded=false",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "collapsed: the simulation notice is still present (compact tag + tooltip)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "collapsed: the expand toggle is actually visible and fully inside the viewport",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "a reload keeps the sidebar collapsed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "navigating by an icon works and the rail stays collapsed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Ctrl+B expands it again and the width is restored",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Cmd+B collapses it",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "the toggle expands it",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "expanded at 1024px: no overflow",
+   "ok": true,
+   "detail": "{\"side\":232,\"mainLeft\":232,\"mainWidth\":792,\"sw\":1024,\"iw\":1024,\"collapsed\":false,\"stored\":\"0\"}"
+  },
+  {
+   "name": "expanded at 768px: no overflow",
+   "ok": true,
+   "detail": "{\"side\":232,\"mainLeft\":0,\"mainWidth\":768,\"sw\":768,\"iw\":768,\"collapsed\":false,\"stored\":\"0\"}"
+  },
+  {
+   "name": "390px: the rail toggle is hidden, the drawer is off-canvas and the menu button is shown, no overflow",
+   "ok": true,
+   "detail": "{\"left\":-237,\"right\":-5,\"toggleShown\":false,\"menuShown\":true,\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "390px: opening the drawer shows the full labelled navigation even when the desktop preference is collapsed",
+   "ok": true,
+   "detail": "{\"left\":0,\"width\":232,\"labels\":true}"
+  }
+ ]
+}

@@ -86,6 +86,10 @@ def verify_evidence() -> dict[str, Any]:
             raise ValueError(f"PRETRAINED_GENERALISATION_EVIDENCE_FAILED:{label}")
         pretrained[label] = {"R0_equals_frozen_v2": True, "rounds": count, f"R{count - 1}_AUPRC": gen["rounds"][count - 1]["AUPRC"], "frozen_v2_AUPRC": gen["baseline"]["AUPRC"]}
     out["pretrained_generalisation"] = pretrained
+    sidebar = json.loads((ROOT / EVIDENCE / "browser" / "sidebar_verification.json").read_text())
+    if not sidebar["passed"] or sidebar["failed"] or sidebar["total"] < 19:
+        raise ValueError("SIDEBAR_BROWSER_VERIFICATION_NOT_PASSED")
+    out["sidebar_checks"] = sidebar["total"]
     tests = json.loads((ROOT / EVIDENCE / "local_test_report.json").read_text())
     if not tests["passed"]:
         raise ValueError("LOCAL_TEST_REPORT_NOT_PASSED")
