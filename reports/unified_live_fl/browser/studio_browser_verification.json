@@ -46,7 +46,7 @@
   {
    "name": "3-round live: selecting R1 while the run executes switches the network to round 1 and stops following live",
    "ok": true,
-   "detail": "{\"follow\":\"INSPECTING ROUND 1: new events keep arriving but do not move your selection. Evaluation of a round starts only after its state is committed.\",\"mround\":\"ROUND R1 COMPLETED\",\"banner\":true,\"title\":\"Eight logical clients (round 1)\"}"
+   "detail": "{\"follow\":\"INSPECTING ROUND 1: new events keep arriving but do not move your selection. Evaluation of a round starts only after its state is committed.\",\"mround\":\"ROUND R1 QUEUED\",\"banner\":true,\"title\":\"Eight logical clients (round 1)\"}"
   },
   {
    "name": "3-round live: new events do not overwrite the historical selection",
@@ -61,7 +61,7 @@
   {
    "name": "3-round live: a round was shown as committed while later evaluations were still pending (no invented points)",
    "ok": true,
-   "detail": "[{\"t\":0,\"accepted\":\"0/24\",\"stage\":\"Current stage: LOCAL TRAINING\",\"status\":\"RUNNING · LIVE_RUN · FEDAVG · \",\"mstatus\":\"NOT YET AVAILABLE\",\"mround\":\"ROUND R1 NOT Y\",\"pendingMarks\":12,\"follow\":\"FOLLOWING LIVE: panels\",\"hist\":false},{\"t\":1,\"accepted\":\"0/24\",\"stage\":\"Current stage: LOCAL TRAINING\",\"stat"
+   "detail": "[{\"t\":0,\"accepted\":\"0/24\",\"stage\":\"Current stage: RUNNING\",\"status\":\"RUNNING · LIVE_RUN · FEDAVG · \",\"pendingMarks\":0,\"follow\":\"FOLLOWING LIVE: panels\",\"hist\":false},{\"t\":1,\"accepted\":\"0/24\",\"stage\":\"Current stage: RUNNING\",\"status\":\"RUNNING · LIVE_RUN · FEDAVG · \",\"pendingMarks\":0,\"follow\":\"FOLLOWI"
   },
   {
    "name": "3-round live: the counter reached 24/24 accepted updates from backend events",
@@ -376,7 +376,7 @@
   {
    "name": "3-round: export-FL10_FIG07-svg downloads and verifies against the manifest",
    "ok": true,
-   "detail": "FL10_FIG07.svg · sha256 226ae0811092892c… verified against the export manifest"
+   "detail": "FL10_FIG07.svg · sha256 22bd946189b8c5ab… verified against the export manifest"
   },
   {
    "name": "3-round: export-FL10_TAB01-csv downloads and verifies against the manifest",
@@ -386,17 +386,17 @@
   {
    "name": "3-round: export-evaluation_records-json downloads and verifies against the manifest",
    "ok": true,
-   "detail": "evaluation_records.json · sha256 52c7f51da4397a24… verified against the export manifest"
+   "detail": "evaluation_records.json · sha256 f9847fda634acb46… verified against the export manifest"
   },
   {
    "name": "3-round: the verification manifest downloads with its sha256",
    "ok": true,
-   "detail": "verification manifest saved · sha256 ccba73c944c15665…"
+   "detail": "verification manifest saved · sha256 12bf5df8bb1845fe…"
   },
   {
    "name": "3-round: export manifest is run-specific (20 figures, 12 tables, this run id)",
    "ok": true,
-   "detail": "FEDRUN-EBB97B033D57"
+   "detail": "FEDRUN-5B950C6FC9BB"
   },
   {
    "name": "3-round: exported provenance names this run and a live source",
@@ -786,7 +786,7 @@
   {
    "name": "10-round: export-FL10_FIG07-svg downloads and verifies against the manifest",
    "ok": true,
-   "detail": "FL10_FIG07.svg · sha256 b87c5c83279ad5e5… verified against the export manifest"
+   "detail": "FL10_FIG07.svg · sha256 d09ecd5e0e5e52b2… verified against the export manifest"
   },
   {
    "name": "10-round: export-FL10_TAB01-csv downloads and verifies against the manifest",
@@ -796,17 +796,17 @@
   {
    "name": "10-round: export-evaluation_records-json downloads and verifies against the manifest",
    "ok": true,
-   "detail": "evaluation_records.json · sha256 65880f93142f1a7a… verified against the export manifest"
+   "detail": "evaluation_records.json · sha256 532f962b9806b0f6… verified against the export manifest"
   },
   {
    "name": "10-round: the verification manifest downloads with its sha256",
    "ok": true,
-   "detail": "verification manifest saved · sha256 256723f395b1d429…"
+   "detail": "verification manifest saved · sha256 436910c6e255f467…"
   },
   {
    "name": "10-round: export manifest is run-specific (20 figures, 12 tables, this run id)",
    "ok": true,
-   "detail": "FL10RUN-C4151052717A"
+   "detail": "FL10RUN-3E905D7DFDF4"
   },
   {
    "name": "10-round: exported provenance names this run and a live source",
@@ -1041,7 +1041,7 @@
   {
    "name": "pretrained 10-round: export-FL10_FIG07-svg downloads and verifies against the manifest",
    "ok": true,
-   "detail": "FL10_FIG07.svg · sha256 aa1df9135bba0152… verified against the export manifest"
+   "detail": "FL10_FIG07.svg · sha256 575e6071879e7074… verified against the export manifest"
   },
   {
    "name": "pretrained 10-round: export-FL10_TAB01-csv downloads and verifies against the manifest",
@@ -1051,17 +1051,17 @@
   {
    "name": "pretrained 10-round: export-evaluation_records-json downloads and verifies against the manifest",
    "ok": true,
-   "detail": "evaluation_records.json · sha256 be3efde4d1f64431… verified against the export manifest"
+   "detail": "evaluation_records.json · sha256 7bbdfcdbc84e783e… verified against the export manifest"
   },
   {
    "name": "pretrained 10-round: the verification manifest downloads with its sha256",
    "ok": true,
-   "detail": "verification manifest saved · sha256 1a84d666201a6629…"
+   "detail": "verification manifest saved · sha256 363f9d300aaa1c3f…"
   },
   {
    "name": "pretrained 10-round: export manifest is run-specific (20 figures, 12 tables, this run id)",
    "ok": true,
-   "detail": "FL10RUN-55648D5FAA67"
+   "detail": "FL10RUN-FF513D412C4A"
   },
   {
    "name": "pretrained 10-round: exported provenance names this run and a live source",
@@ -1126,7 +1126,7 @@
   {
    "name": "retained route /app/observatory/federation loads without errors or overflow",
    "ok": true,
-   "detail": "{\"len\":6316,\"h1\":\"Who contributed to federation?\",\"overflow\":false,\"notFound\":false}"
+   "detail": "{\"len\":6273,\"h1\":\"Who contributed to federation?\",\"overflow\":false,\"notFound\":false}"
   },
   {
    "name": "retained route /app/observatory/federation/SIM_FL_SITE_00 loads without errors or overflow",
@@ -1136,7 +1136,7 @@
   {
    "name": "retained route /app/observatory/federation-replay loads without errors or overflow",
    "ok": true,
-   "detail": "{\"len\":761,\"h1\":\"Federation event-journal replay\",\"overflow\":false,\"notFound\":false}"
+   "detail": "{\"len\":721,\"h1\":\"Federation event-journal replay\",\"overflow\":false,\"notFound\":false}"
   },
   {
    "name": "retained route /app/observatory/model loads without errors or overflow",
@@ -1181,12 +1181,12 @@
   {
    "name": "retained route /app/federation loads without errors or overflow",
    "ok": true,
-   "detail": "{\"len\":3746,\"h1\":\"Federation Studio\",\"overflow\":false,\"notFound\":false}"
+   "detail": "{\"len\":3482,\"h1\":\"Federation Studio\",\"overflow\":false,\"notFound\":false}"
   },
   {
    "name": "retained route /app/federation/rounds loads without errors or overflow",
    "ok": true,
-   "detail": "{\"len\":999,\"h1\":\"Rounds\",\"overflow\":false,\"notFound\":false}"
+   "detail": "{\"len\":782,\"h1\":\"Rounds\",\"overflow\":false,\"notFound\":false}"
   },
   {
    "name": "retained route /app/federation/clients loads without errors or overflow",
@@ -1196,12 +1196,12 @@
   {
    "name": "retained route /app/federation/privacy loads without errors or overflow",
    "ok": true,
-   "detail": "{\"len\":2001,\"h1\":\"The implemented privacy boundary\",\"overflow\":false,\"notFound\":false}"
+   "detail": "{\"len\":1784,\"h1\":\"The implemented privacy boundary\",\"overflow\":false,\"notFound\":false}"
   },
   {
    "name": "retained route /app/federation/live loads without errors or overflow",
    "ok": true,
-   "detail": "{\"len\":1401,\"h1\":\"Live federation\",\"overflow\":false,\"notFound\":false}"
+   "detail": "{\"len\":1184,\"h1\":\"Live federation\",\"overflow\":false,\"notFound\":false}"
   },
   {
    "name": "protected scientific outcomes page still shows the frozen evidence label and comparison matrix",
@@ -1220,32 +1220,100 @@
   }
  ],
  "evidence": {
-  "run3": "FEDRUN-EBB97B033D57",
+  "run3": "FEDRUN-5B950C6FC9BB",
   "series3": [
    {
     "t": 0,
     "accepted": "0/24",
-    "stage": "Current stage: LOCAL TRAINING",
+    "stage": "Current stage: RUNNING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "NOT YET AVAILABLE",
-    "mround": "ROUND R1 NOT Y",
-    "pendingMarks": 12,
+    "pendingMarks": 0,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
    {
     "t": 1,
     "accepted": "0/24",
-    "stage": "Current stage: LOCAL TRAINING",
+    "stage": "Current stage: RUNNING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "NOT YET AVAILABLE",
-    "mround": "ROUND R1 NOT Y",
-    "pendingMarks": 12,
+    "pendingMarks": 0,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
    {
     "t": 2,
+    "accepted": "0/24",
+    "stage": "Current stage: RUNNING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 3,
+    "accepted": "0/24",
+    "stage": "Current stage: RUNNING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 4,
+    "accepted": "0/24",
+    "stage": "Current stage: RUNNING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 5,
+    "accepted": "0/24",
+    "stage": "Current stage: RUNNING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 6,
+    "accepted": "0/24",
+    "stage": "Current stage: RUNNING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 7,
+    "accepted": "0/24",
+    "stage": "Current stage: RUNNING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 8,
+    "accepted": "0/24",
+    "stage": "Current stage: RUNNING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 9,
+    "accepted": "0/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 10,
     "accepted": "1/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -1256,7 +1324,7 @@
     "hist": false
    },
    {
-    "t": 3,
+    "t": 11,
     "accepted": "2/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -1267,18 +1335,7 @@
     "hist": false
    },
    {
-    "t": 4,
-    "accepted": "2/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "NOT YET AVAILABLE",
-    "mround": "ROUND R1 NOT Y",
-    "pendingMarks": 12,
-    "follow": "FOLLOWING LIVE: panels",
-    "hist": false
-   },
-   {
-    "t": 5,
+    "t": 12,
     "accepted": "3/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -1289,7 +1346,7 @@
     "hist": false
    },
    {
-    "t": 6,
+    "t": 13,
     "accepted": "4/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -1300,7 +1357,7 @@
     "hist": false
    },
    {
-    "t": 7,
+    "t": 14,
     "accepted": "5/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -1311,7 +1368,7 @@
     "hist": false
    },
    {
-    "t": 8,
+    "t": 15,
     "accepted": "6/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -1322,18 +1379,7 @@
     "hist": false
    },
    {
-    "t": 9,
-    "accepted": "6/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "NOT YET AVAILABLE",
-    "mround": "ROUND R1 NOT Y",
-    "pendingMarks": 12,
-    "follow": "FOLLOWING LIVE: panels",
-    "hist": false
-   },
-   {
-    "t": 10,
+    "t": 16,
     "accepted": "7/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -1344,207 +1390,124 @@
     "hist": false
    },
    {
-    "t": 11,
-    "accepted": "8/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
-    "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
-    "hist": false
-   },
-   {
-    "t": 12,
-    "accepted": "9/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
-    "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
-    "hist": false
-   },
-   {
-    "t": 13,
-    "accepted": "9/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
-    "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
-    "hist": false
-   },
-   {
-    "t": 14,
-    "accepted": "10/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
-    "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
-    "hist": false
-   },
-   {
-    "t": 15,
-    "accepted": "11/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
-    "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
-    "hist": false
-   },
-   {
-    "t": 16,
-    "accepted": "11/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
-    "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
-    "hist": false
-   },
-   {
     "t": 17,
-    "accepted": "12/24",
+    "accepted": "9/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R2 NOT Y",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
     "hist": false
    },
    {
     "t": 18,
-    "accepted": "13/24",
+    "accepted": "10/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R2 NOT Y",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
     "hist": false
    },
    {
     "t": 19,
-    "accepted": "14/24",
+    "accepted": "11/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R2 NOT Y",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
     "hist": false
    },
    {
     "t": 20,
-    "accepted": "14/24",
+    "accepted": "12/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R2 NOT Y",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
     "hist": false
    },
    {
     "t": 21,
+    "accepted": "13/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R2 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 22,
+    "accepted": "14/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R2 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 23,
+    "accepted": "15/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R2 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 24,
     "accepted": "16/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 9,
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R3 NOT Y",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
-    "hist": false
-   },
-   {
-    "t": 27,
-    "accepted": "19/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 6,
-    "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R1. It",
-    "hist": false
-   },
-   {
-    "t": 28,
-    "accepted": "20/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 6,
-    "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R1. It",
-    "hist": false
-   },
-   {
-    "t": 29,
-    "accepted": "21/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 6,
-    "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R1. It",
     "hist": false
    },
    {
     "t": 30,
-    "accepted": "22/24",
+    "accepted": "23/24",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 6,
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R3 NOT Y",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R1. It",
     "hist": false
    },
    {
     "t": 31,
-    "accepted": "22/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 6,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R1. It",
     "hist": false
    },
    {
     "t": 32,
-    "accepted": "23/24",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 6,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R1. It",
     "hist": false
    },
    {
@@ -1552,11 +1515,10 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 3,
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
     "hist": false
    },
    {
@@ -1564,11 +1526,10 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 3,
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
     "hist": false
    },
    {
@@ -1576,11 +1537,10 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 3,
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
     "hist": false
    },
    {
@@ -1588,11 +1548,10 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 3,
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
     "hist": false
    },
    {
@@ -1600,11 +1559,10 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 3,
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
     "hist": false
    },
    {
@@ -1612,11 +1570,10 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 3,
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
     "hist": false
    },
    {
@@ -1624,11 +1581,10 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 3,
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
     "hist": false
    },
    {
@@ -1636,11 +1592,10 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 3,
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
-    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
     "hist": false
    },
    {
@@ -1648,9 +1603,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1659,9 +1614,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1670,9 +1625,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1681,9 +1636,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1692,9 +1647,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1703,9 +1658,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1714,9 +1669,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1725,9 +1680,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1736,9 +1691,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1747,9 +1702,9 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
@@ -1758,14 +1713,705 @@
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
+    "mstatus": "QUEUED",
     "mround": "ROUND R3· FINA",
-    "pendingMarks": 0,
+    "pendingMarks": 12,
     "follow": "FOLLOWING LIVE: panels",
     "hist": false
    },
    {
     "t": 52,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 53,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 54,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 55,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 56,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 57,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 58,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 59,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 60,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 61,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 62,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 63,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 64,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 65,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 66,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 67,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 68,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 69,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 70,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 71,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 73,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 74,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 75,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 76,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 77,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 78,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 79,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 80,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 81,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 82,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 83,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 84,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 85,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 86,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 87,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 88,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 89,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 90,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 91,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 92,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 93,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "QUEUED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 94,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R0. Its values be",
+    "hist": false
+   },
+   {
+    "t": 95,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R0. Its values be",
+    "hist": false
+   },
+   {
+    "t": 96,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R0. Its values be",
+    "hist": false
+   },
+   {
+    "t": 97,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R0. Its values be",
+    "hist": false
+   },
+   {
+    "t": 98,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R0. Its values be",
+    "hist": false
+   },
+   {
+    "t": 99,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R0. Its values be",
+    "hist": false
+   },
+   {
+    "t": 100,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R1. Its values be",
+    "hist": false
+   },
+   {
+    "t": 101,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R1. Its values be",
+    "hist": false
+   },
+   {
+    "t": 102,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R1. Its values be",
+    "hist": false
+   },
+   {
+    "t": 103,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R1. Its values be",
+    "hist": false
+   },
+   {
+    "t": 104,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R1. Its values be",
+    "hist": false
+   },
+   {
+    "t": 105,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R1. Its values be",
+    "hist": false
+   },
+   {
+    "t": 106,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R1. Its values be",
+    "hist": false
+   },
+   {
+    "t": 107,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION QUEUED — showing the latest evaluated round R1. Its values be",
+    "hist": false
+   },
+   {
+    "t": 108,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 109,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 110,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 111,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 112,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 113,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 114,
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -1776,7 +2422,458 @@
     "hist": false
    },
    {
-    "t": 53,
+    "t": 115,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 116,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 117,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 118,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 119,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 120,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 121,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 122,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 123,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 124,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 125,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 126,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 127,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 128,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 129,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 130,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 131,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 132,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 133,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 134,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 135,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 136,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 137,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 138,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 139,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 140,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 141,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 142,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 143,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 144,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 145,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 146,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 147,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 149,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 150,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 151,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 152,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 153,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 154,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 155,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 156,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 157,
     "accepted": "24/24",
     "stage": "Current stage: COMPLETE",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -1931,11 +3028,11 @@
    },
    "interpretation": [
     "R03 versus frozen V2 on the unseen cohort (fixed 0.5 threshold, no calibration):",
-    "AUPRC: round 0.678 vs V2 0.890 (-0.212, lower). Nominal 95% participant-cluster interval of the difference [-0.248, -0.167], not a significance test.",
-    "AUROC: round 0.782 vs V2 0.919 (-0.137, lower). Nominal 95% participant-cluster interval of the difference [-0.169, -0.108], not a significance test.",
-    "specificity: round 0.000 vs V2 1.000 (-1.000, lower). Nominal 95% participant-cluster interval of the difference [-1.000, -1.000], not a significance test.",
-    "BCE: round 0.728 vs V2 0.238 (+0.490, higher). Nominal 95% participant-cluster interval of the difference [0.446, 0.535], not a significance test.",
-    "Brier: round 0.267 vs V2 0.049 (+0.218, higher). Nominal 95% participant-cluster interval of the difference [0.209, 0.226], not a significance test.",
+    "AUPRC: round 0.678 vs V2 0.890 (-0.212, lower). Nominal participant-cluster interval (95 percent) of the difference [-0.248, -0.167], not a significance test.",
+    "AUROC: round 0.782 vs V2 0.919 (-0.137, lower). Nominal participant-cluster interval (95 percent) of the difference [-0.169, -0.108], not a significance test.",
+    "specificity: round 0.000 vs V2 1.000 (-1.000, lower). Nominal participant-cluster interval (95 percent) of the difference [-1.000, -1.000], not a significance test.",
+    "BCE: round 0.728 vs V2 0.238 (+0.490, higher). Nominal participant-cluster interval (95 percent) of the difference [0.446, 0.535], not a significance test.",
+    "Brier: round 0.267 vs V2 0.049 (+0.218, higher). Nominal participant-cluster interval (95 percent) of the difference [0.209, 0.226], not a significance test.",
     "This measures the synthetic engineering-event task on unseen synthetic participants. It is not AAMI-SVF performance and not clinical evidence."
    ],
    "rounds": [
@@ -2021,7 +3118,7 @@
     "cards": 12
    }
   },
-  "run10": "FL10RUN-C4151052717A",
+  "run10": "FL10RUN-3E905D7DFDF4",
   "series10": [
    {
     "t": 0,
@@ -2221,36 +3318,36 @@
    },
    {
     "t": 24,
-    "accepted": "8/80",
+    "accepted": "0/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 30,
-    "sub": true,
-    "committed": 1
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 33,
+    "sub": false,
+    "committed": 0
    },
    {
     "t": 25,
-    "accepted": "8/80",
+    "accepted": "0/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 30,
-    "sub": true,
-    "committed": 1
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 33,
+    "sub": false,
+    "committed": 0
    },
    {
     "t": 27,
-    "accepted": "8/80",
+    "accepted": "0/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R0 COMPL",
-    "pendingMarks": 30,
-    "sub": true,
-    "committed": 1
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 33,
+    "sub": false,
+    "committed": 0
    },
    {
     "t": 28,
@@ -2331,58 +3428,58 @@
    },
    {
     "t": 36,
-    "accepted": "16/80",
+    "accepted": "8/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 27,
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
     "sub": true,
-    "committed": 2
+    "committed": 1
    },
    {
-    "t": 37,
-    "accepted": "16/80",
+    "t": 38,
+    "accepted": "8/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 27,
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
     "sub": true,
-    "committed": 2
+    "committed": 1
    },
    {
     "t": 39,
-    "accepted": "16/80",
+    "accepted": "8/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 27,
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
     "sub": true,
-    "committed": 2
+    "committed": 1
    },
    {
     "t": 40,
-    "accepted": "16/80",
+    "accepted": "8/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 27,
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
     "sub": true,
-    "committed": 2
+    "committed": 1
    },
    {
     "t": 41,
-    "accepted": "16/80",
+    "accepted": "8/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R1 COMPL",
-    "pendingMarks": 27,
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
     "sub": true,
-    "committed": 2
+    "committed": 1
    },
    {
     "t": 42,
@@ -2396,7 +3493,7 @@
     "committed": 2
    },
    {
-    "t": 43,
+    "t": 44,
     "accepted": "16/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -2430,91 +3527,91 @@
    },
    {
     "t": 47,
-    "accepted": "24/80",
+    "accepted": "16/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 24,
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
     "sub": true,
-    "committed": 3
+    "committed": 2
    },
    {
     "t": 48,
-    "accepted": "24/80",
+    "accepted": "16/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 24,
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
     "sub": true,
-    "committed": 3
+    "committed": 2
    },
    {
     "t": 50,
-    "accepted": "24/80",
+    "accepted": "16/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 24,
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
     "sub": true,
-    "committed": 3
+    "committed": 2
    },
    {
     "t": 51,
-    "accepted": "24/80",
+    "accepted": "16/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 24,
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
     "sub": true,
-    "committed": 3
+    "committed": 2
    },
    {
     "t": 52,
-    "accepted": "24/80",
+    "accepted": "16/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 24,
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
     "sub": true,
-    "committed": 3
+    "committed": 2
    },
    {
     "t": 53,
-    "accepted": "24/80",
+    "accepted": "16/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 24,
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
     "sub": true,
-    "committed": 3
+    "committed": 2
    },
    {
     "t": 54,
-    "accepted": "24/80",
+    "accepted": "16/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 24,
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
     "sub": true,
-    "committed": 3
+    "committed": 2
    },
    {
     "t": 56,
-    "accepted": "24/80",
+    "accepted": "16/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R2 COMPL",
-    "pendingMarks": 24,
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
     "sub": true,
-    "committed": 3
+    "committed": 2
    },
    {
     "t": 57,
@@ -2540,72 +3637,127 @@
    },
    {
     "t": 59,
-    "accepted": "32/80",
+    "accepted": "24/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R3 COMPL",
-    "pendingMarks": 21,
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
     "sub": true,
-    "committed": 4
+    "committed": 3
+   },
+   {
+    "t": 60,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 62,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 63,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
    },
    {
     "t": 64,
-    "accepted": "32/80",
+    "accepted": "24/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R3 COMPL",
-    "pendingMarks": 21,
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
     "sub": true,
-    "committed": 4
+    "committed": 3
    },
    {
     "t": 65,
-    "accepted": "32/80",
+    "accepted": "24/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R3 COMPL",
-    "pendingMarks": 21,
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
     "sub": true,
-    "committed": 4
+    "committed": 3
    },
    {
     "t": 67,
-    "accepted": "32/80",
+    "accepted": "24/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R3 COMPL",
-    "pendingMarks": 21,
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
     "sub": true,
-    "committed": 4
+    "committed": 3
    },
    {
     "t": 68,
-    "accepted": "32/80",
+    "accepted": "24/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R3 COMPL",
-    "pendingMarks": 21,
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
     "sub": true,
-    "committed": 4
+    "committed": 3
    },
    {
     "t": 69,
-    "accepted": "32/80",
+    "accepted": "24/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R3 COMPL",
-    "pendingMarks": 21,
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
     "sub": true,
-    "committed": 4
+    "committed": 3
    },
    {
     "t": 70,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 71,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 73,
     "accepted": "32/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -2616,95 +3768,95 @@
     "committed": 4
    },
    {
-    "t": 71,
-    "accepted": "40/80",
+    "t": 78,
+    "accepted": "32/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R4 COMPL",
-    "pendingMarks": 18,
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
     "sub": true,
-    "committed": 5
-   },
-   {
-    "t": 73,
-    "accepted": "40/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R4 COMPL",
-    "pendingMarks": 18,
-    "sub": true,
-    "committed": 5
-   },
-   {
-    "t": 74,
-    "accepted": "40/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R4 COMPL",
-    "pendingMarks": 18,
-    "sub": true,
-    "committed": 5
-   },
-   {
-    "t": 75,
-    "accepted": "40/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R4 COMPL",
-    "pendingMarks": 18,
-    "sub": true,
-    "committed": 5
-   },
-   {
-    "t": 76,
-    "accepted": "40/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R4 COMPL",
-    "pendingMarks": 18,
-    "sub": true,
-    "committed": 5
-   },
-   {
-    "t": 77,
-    "accepted": "40/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R4 COMPL",
-    "pendingMarks": 18,
-    "sub": true,
-    "committed": 5
+    "committed": 4
    },
    {
     "t": 79,
-    "accepted": "40/80",
+    "accepted": "32/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R4 COMPL",
-    "pendingMarks": 18,
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
     "sub": true,
-    "committed": 5
+    "committed": 4
    },
    {
     "t": 80,
-    "accepted": "40/80",
+    "accepted": "32/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R4 COMPL",
-    "pendingMarks": 18,
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
     "sub": true,
-    "committed": 5
+    "committed": 4
    },
    {
     "t": 81,
+    "accepted": "32/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 4
+   },
+   {
+    "t": 82,
+    "accepted": "32/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 4
+   },
+   {
+    "t": 84,
+    "accepted": "32/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 4
+   },
+   {
+    "t": 85,
+    "accepted": "32/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 4
+   },
+   {
+    "t": 86,
+    "accepted": "32/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 4
+   },
+   {
+    "t": 87,
     "accepted": "40/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -2715,106 +3867,128 @@
     "committed": 5
    },
    {
-    "t": 82,
-    "accepted": "48/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R5 COMPL",
-    "pendingMarks": 15,
-    "sub": true,
-    "committed": 6
-   },
-   {
-    "t": 83,
-    "accepted": "48/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R5 COMPL",
-    "pendingMarks": 15,
-    "sub": true,
-    "committed": 6
-   },
-   {
-    "t": 85,
-    "accepted": "48/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R5 COMPL",
-    "pendingMarks": 15,
-    "sub": true,
-    "committed": 6
-   },
-   {
-    "t": 86,
-    "accepted": "48/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R5 COMPL",
-    "pendingMarks": 15,
-    "sub": true,
-    "committed": 6
-   },
-   {
-    "t": 87,
-    "accepted": "48/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R5 COMPL",
-    "pendingMarks": 15,
-    "sub": true,
-    "committed": 6
-   },
-   {
     "t": 88,
-    "accepted": "48/80",
+    "accepted": "40/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R5 COMPL",
-    "pendingMarks": 15,
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
     "sub": true,
-    "committed": 6
+    "committed": 5
    },
    {
     "t": 90,
-    "accepted": "48/80",
+    "accepted": "40/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R5 COMPL",
-    "pendingMarks": 15,
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
     "sub": true,
-    "committed": 6
+    "committed": 5
    },
    {
     "t": 91,
-    "accepted": "48/80",
+    "accepted": "40/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R5 COMPL",
-    "pendingMarks": 15,
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
     "sub": true,
-    "committed": 6
+    "committed": 5
    },
    {
     "t": 92,
-    "accepted": "48/80",
+    "accepted": "40/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R5 COMPL",
-    "pendingMarks": 15,
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
     "sub": true,
-    "committed": 6
+    "committed": 5
    },
    {
     "t": 93,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 94,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 96,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 97,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 98,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 99,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 101,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 102,
     "accepted": "48/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -2825,106 +3999,139 @@
     "committed": 6
    },
    {
-    "t": 94,
-    "accepted": "56/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R6 COMPL",
-    "pendingMarks": 12,
-    "sub": true,
-    "committed": 7
-   },
-   {
-    "t": 96,
-    "accepted": "56/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R6 COMPL",
-    "pendingMarks": 12,
-    "sub": true,
-    "committed": 7
-   },
-   {
-    "t": 97,
-    "accepted": "56/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R6 COMPL",
-    "pendingMarks": 12,
-    "sub": true,
-    "committed": 7
-   },
-   {
-    "t": 98,
-    "accepted": "56/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R6 COMPL",
-    "pendingMarks": 12,
-    "sub": true,
-    "committed": 7
-   },
-   {
-    "t": 99,
-    "accepted": "56/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R6 COMPL",
-    "pendingMarks": 12,
-    "sub": true,
-    "committed": 7
-   },
-   {
-    "t": 100,
-    "accepted": "56/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R6 COMPL",
-    "pendingMarks": 12,
-    "sub": true,
-    "committed": 7
-   },
-   {
-    "t": 102,
-    "accepted": "56/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R6 COMPL",
-    "pendingMarks": 12,
-    "sub": true,
-    "committed": 7
-   },
-   {
     "t": 103,
-    "accepted": "56/80",
+    "accepted": "48/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R6 COMPL",
-    "pendingMarks": 12,
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
     "sub": true,
-    "committed": 7
+    "committed": 6
    },
    {
     "t": 104,
-    "accepted": "56/80",
+    "accepted": "48/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R6 COMPL",
-    "pendingMarks": 12,
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
     "sub": true,
-    "committed": 7
+    "committed": 6
    },
    {
     "t": 105,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 107,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 108,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 109,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 110,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 111,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 113,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 114,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 115,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 116,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 117,
     "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
@@ -2935,304 +4142,414 @@
     "committed": 7
    },
    {
-    "t": 106,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
-    "t": 108,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
-    "t": 109,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
-    "t": 110,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
-    "t": 111,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
-    "t": 112,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
-    "t": 114,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
-    "t": 115,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
-    "t": 116,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
-    "t": 117,
-    "accepted": "64/80",
-    "stage": "Current stage: LOCAL TRAINING",
-    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R7 COMPL",
-    "pendingMarks": 9,
-    "sub": true,
-    "committed": 8
-   },
-   {
     "t": 119,
-    "accepted": "72/80",
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
     "t": 120,
-    "accepted": "72/80",
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
     "t": 121,
-    "accepted": "72/80",
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
     "t": 122,
-    "accepted": "72/80",
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
     "t": 123,
-    "accepted": "72/80",
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
     "t": 125,
-    "accepted": "72/80",
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
     "t": 126,
-    "accepted": "72/80",
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
     "t": 127,
-    "accepted": "72/80",
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
     "t": 128,
-    "accepted": "72/80",
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
-    "t": 129,
-    "accepted": "72/80",
+    "t": 130,
+    "accepted": "56/80",
     "stage": "Current stage: LOCAL TRAINING",
     "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R8 COMPL",
-    "pendingMarks": 6,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 9
+    "committed": 7
    },
    {
     "t": 131,
-    "accepted": "80/80",
-    "stage": "Current stage: ROUND COMMITTED",
-    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R9 COMPL",
-    "pendingMarks": 3,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 10
+    "committed": 7
    },
    {
     "t": 132,
-    "accepted": "80/80",
-    "stage": "Current stage: ROUND COMMITTED",
-    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R9 COMPL",
-    "pendingMarks": 3,
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
     "sub": true,
-    "committed": 10
+    "committed": 7
    },
    {
     "t": 133,
-    "accepted": "80/80",
-    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
-    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R9 COMPL",
-    "pendingMarks": 3,
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
     "sub": true,
-    "committed": 10
+    "committed": 8
    },
    {
     "t": 134,
-    "accepted": "80/80",
-    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
-    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R9 COMPL",
-    "pendingMarks": 3,
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
     "sub": true,
-    "committed": 10
+    "committed": 8
    },
    {
-    "t": 135,
-    "accepted": "80/80",
-    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
-    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "t": 136,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R9 COMPL",
-    "pendingMarks": 3,
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
     "sub": true,
-    "committed": 10
+    "committed": 8
    },
    {
     "t": 137,
-    "accepted": "80/80",
-    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
-    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R9 COMPL",
-    "pendingMarks": 3,
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
     "sub": true,
-    "committed": 10
+    "committed": 8
    },
    {
     "t": 138,
-    "accepted": "80/80",
-    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
-    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
     "mstatus": "COMPLETED",
-    "mround": "ROUND R9 COMPL",
-    "pendingMarks": 3,
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
     "sub": true,
-    "committed": 10
+    "committed": 8
    },
    {
     "t": 139,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 140,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 142,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 143,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 144,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 145,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 146,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 148,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 149,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 150,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 151,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 153,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 154,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 155,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 156,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 157,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 159,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 160,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 161,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 162,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 163,
     "accepted": "80/80",
     "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3243,7 +4560,106 @@
     "committed": 10
    },
    {
-    "t": 140,
+    "t": 165,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 166,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 167,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 168,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 169,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 171,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 172,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 173,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 174,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 175,
     "accepted": "80/80",
     "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3254,7 +4670,7 @@
     "committed": 10
    },
    {
-    "t": 141,
+    "t": 177,
     "accepted": "80/80",
     "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3265,7 +4681,7 @@
     "committed": 10
    },
    {
-    "t": 143,
+    "t": 178,
     "accepted": "80/80",
     "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3276,7 +4692,7 @@
     "committed": 10
    },
    {
-    "t": 144,
+    "t": 179,
     "accepted": "80/80",
     "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3287,7 +4703,7 @@
     "committed": 10
    },
    {
-    "t": 145,
+    "t": 180,
     "accepted": "80/80",
     "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3298,7 +4714,7 @@
     "committed": 10
    },
    {
-    "t": 146,
+    "t": 182,
     "accepted": "80/80",
     "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3309,18 +4725,7 @@
     "committed": 10
    },
    {
-    "t": 147,
-    "accepted": "80/80",
-    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
-    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
-    "mstatus": "COMPLETED",
-    "mround": "ROUND R10· FIN",
-    "pendingMarks": 0,
-    "sub": false,
-    "committed": 10
-   },
-   {
-    "t": 149,
+    "t": 183,
     "accepted": "80/80",
     "stage": "Current stage: EXPORT PREPARING",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3331,7 +4736,7 @@
     "committed": 10
    },
    {
-    "t": 150,
+    "t": 184,
     "accepted": "80/80",
     "stage": "Current stage: EXPORT PREPARING",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3342,7 +4747,7 @@
     "committed": 10
    },
    {
-    "t": 151,
+    "t": 185,
     "accepted": "80/80",
     "stage": "Current stage: EXPORT PREPARING",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3353,7 +4758,7 @@
     "committed": 10
    },
    {
-    "t": 152,
+    "t": 186,
     "accepted": "80/80",
     "stage": "Current stage: EXPORT PREPARING",
     "status": "COMPLETED · LIVE_RUN · FEDAVG ",
@@ -3508,11 +4913,11 @@
    },
    "interpretation": [
     "R10 versus frozen V2 on the unseen cohort (fixed 0.5 threshold, no calibration):",
-    "AUPRC: round 0.943 vs V2 0.890 (+0.053, higher; favourable direction). Nominal 95% participant-cluster interval of the difference [0.015, 0.096], not a significance test.",
-    "AUROC: round 0.977 vs V2 0.919 (+0.058, higher; favourable direction). Nominal 95% participant-cluster interval of the difference [0.038, 0.074], not a significance test.",
-    "specificity: round 0.000 vs V2 1.000 (-1.000, lower). Nominal 95% participant-cluster interval of the difference [-1.000, -1.000], not a significance test.",
-    "BCE: round 3.475 vs V2 0.238 (+3.237, higher). Nominal 95% participant-cluster interval of the difference [3.143, 3.350], not a significance test.",
-    "Brier: round 0.771 vs V2 0.049 (+0.722, higher). Nominal 95% participant-cluster interval of the difference [0.709, 0.735], not a significance test.",
+    "AUPRC: round 0.943 vs V2 0.890 (+0.053, higher; favourable direction). Nominal participant-cluster interval (95 percent) of the difference [0.015, 0.096], not a significance test.",
+    "AUROC: round 0.977 vs V2 0.919 (+0.058, higher; favourable direction). Nominal participant-cluster interval (95 percent) of the difference [0.038, 0.074], not a significance test.",
+    "specificity: round 0.000 vs V2 1.000 (-1.000, lower). Nominal participant-cluster interval (95 percent) of the difference [-1.000, -1.000], not a significance test.",
+    "BCE: round 3.475 vs V2 0.238 (+3.237, higher). Nominal participant-cluster interval (95 percent) of the difference [3.143, 3.350], not a significance test.",
+    "Brier: round 0.771 vs V2 0.049 (+0.722, higher). Nominal participant-cluster interval (95 percent) of the difference [0.709, 0.735], not a significance test.",
     "This measures the synthetic engineering-event task on unseen synthetic participants. It is not AAMI-SVF performance and not clinical evidence."
    ],
    "rounds": [
@@ -3668,7 +5073,7 @@
     "cards": 12
    }
   },
-  "runV2": "FL10RUN-55648D5FAA67",
+  "runV2": "FL10RUN-FF513D412C4A",
   "pretrained 10-round_tabs": {
    "overview": {
     "charts": [
@@ -3818,11 +5223,11 @@
    },
    "interpretation": [
     "R10 versus frozen V2 on the unseen cohort (fixed 0.5 threshold, no calibration):",
-    "AUPRC: round 0.992 vs V2 0.890 (+0.101, higher; favourable direction). Nominal 95% participant-cluster interval of the difference [0.077, 0.122], not a significance test.",
-    "AUROC: round 0.996 vs V2 0.919 (+0.077, higher; favourable direction). Nominal 95% participant-cluster interval of the difference [0.060, 0.089], not a significance test.",
-    "specificity: round 0.997 vs V2 1.000 (-0.003, lower). Nominal 95% participant-cluster interval of the difference [-0.005, 0.000], not a significance test.",
-    "BCE: round 0.230 vs V2 0.238 (-0.007, lower; favourable direction). Nominal 95% participant-cluster interval of the difference [-0.077, 0.064], not a significance test.",
-    "Brier: round 0.054 vs V2 0.049 (+0.005, higher). Nominal 95% participant-cluster interval of the difference [-0.011, 0.020], not a significance test.",
+    "AUPRC: round 0.992 vs V2 0.890 (+0.101, higher; favourable direction). Nominal participant-cluster interval (95 percent) of the difference [0.077, 0.122], not a significance test.",
+    "AUROC: round 0.996 vs V2 0.919 (+0.077, higher; favourable direction). Nominal participant-cluster interval (95 percent) of the difference [0.060, 0.089], not a significance test.",
+    "specificity: round 0.997 vs V2 1.000 (-0.003, lower). Nominal participant-cluster interval (95 percent) of the difference [-0.005, 0.000], not a significance test.",
+    "BCE: round 0.230 vs V2 0.238 (-0.007, lower; favourable direction). Nominal participant-cluster interval (95 percent) of the difference [-0.077, 0.064], not a significance test.",
+    "Brier: round 0.054 vs V2 0.049 (+0.005, higher). Nominal participant-cluster interval (95 percent) of the difference [-0.011, 0.020], not a significance test.",
     "R0 predictions are identical to frozen V2 (the run started from the pretrained weights).",
     "This measures the synthetic engineering-event task on unseen synthetic participants. It is not AAMI-SVF performance and not clinical evidence."
    ],
@@ -3965,7 +5370,7 @@
     "notFound": false
    },
    "/app/observatory/federation": {
-    "len": 6316,
+    "len": 6273,
     "h1": "Who contributed to federation?",
     "overflow": false,
     "notFound": false
@@ -3977,7 +5382,7 @@
     "notFound": false
    },
    "/app/observatory/federation-replay": {
-    "len": 761,
+    "len": 721,
     "h1": "Federation event-journal replay",
     "overflow": false,
     "notFound": false
@@ -4031,13 +5436,13 @@
     "notFound": false
    },
    "/app/federation": {
-    "len": 3746,
+    "len": 3482,
     "h1": "Federation Studio",
     "overflow": false,
     "notFound": false
    },
    "/app/federation/rounds": {
-    "len": 999,
+    "len": 782,
     "h1": "Rounds",
     "overflow": false,
     "notFound": false
@@ -4049,13 +5454,13 @@
     "notFound": false
    },
    "/app/federation/privacy": {
-    "len": 2001,
+    "len": 1784,
     "h1": "The implemented privacy boundary",
     "overflow": false,
     "notFound": false
    },
    "/app/federation/live": {
-    "len": 1401,
+    "len": 1184,
     "h1": "Live federation",
     "overflow": false,
     "notFound": false
