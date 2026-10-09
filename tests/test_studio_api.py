@@ -126,6 +126,18 @@ def test_real_three_round_run_is_evaluated_per_checkpoint_and_isolated_between_u
             assert r.status_code == 200 and hashlib.sha256(r.content).hexdigest() == r.headers["x-content-sha256"] and r.headers["x-export-run-id"] == run_id, (item, fmt)
         prov = json.loads(c.get(f"{S}/runs/{run_id}/exports/FL10_FIG04/provenance", headers=USER_A).content)
         assert prov["run_id"] == run_id and prov["source_label"] == "LIVE RUN (this session)" and "recorded" not in prov["source_label"].lower()
+        # historical replay: no training, evaluation is the SOURCE run's recorded evaluation, clearly labelled, and still owner-scoped
+        replay = c.post(f"{BASE}/federation/runs", json={**SINGLE_RUN, "run_type": "REPLAY"}, headers=USER_A)
+        assert replay.status_code == 200, replay.text
+        replay_id = replay.json()["run_id"]
+        assert c.post(f"{BASE}/federation/runs/{replay_id}/start", headers=USER_A).status_code == 200
+        replayed = _poll(c, replay_id, USER_A, lambda d: d["status"] == "COMPLETED")
+        assert replayed["origin"] == "REPLAY" and replayed["replay_of"] == run_id and replayed["evaluation"]["source"] == "RECORDED_FROM_SOURCE_RUN" and replayed["evaluation"]["evaluation_run_id"] == run_id
+        replay_summary = c.get(f"{S}/runs/{replay_id}/evaluation", headers=USER_A).json()
+        assert [r["global_state_digest"] for r in replay_summary["records"]] == [r["global_state_digest"] for r in summary["records"]] and "REPLAY" in replay_summary["source_label"]
+        assert "REPLAY" in c.get(f"{S}/runs/{replay_id}/figures", headers=USER_A).json()["source_label"]
+        assert c.get(f"{S}/runs/{replay_id}/evaluation", headers=USER_B).status_code == 403
+        assert len(c.get(f"{S}/runs/{run_id}/evaluation", headers=USER_A).json()["records"]) == 4        # replaying created no new evaluation of the source
         # the live journal is the unchanged product journal, replayed from sequence 0
         with c.websocket_connect(f"{S}/runs/{run_id}/live", headers=USER_A) as ws:
             events = []

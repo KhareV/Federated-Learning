@@ -111,7 +111,7 @@
 			{#each cats as c, i}
 				{#if view.kind === 'stacked'}
 					{#each visible as s, k}{@const below = visible.slice(0, k).reduce((a, q) => a + (q.values?.[i] ?? 0), 0)}{@const v = s.values?.[i] ?? 0}{@const colorIndex = series.findIndex((q) => q.name === s.name)}
-						<rect x={bx(i)} width={bw} y={bpy(below + v)} height={Math.max(0, bpy(below) - bpy(below + v))} fill={COLORS[colorIndex % COLORS.length]} tabindex="0" role="img" aria-label={`${s.name} ${c} ${cell(v)}`} onfocus={() => say(`${s.name} · ${c} · ${cell(v)}`)} onmouseenter={() => say(`${s.name} · ${c} · ${cell(v)}`)}><title>{`${s.name} ${c}: ${cell(v)}`}</title></rect>{/each}
+						<rect x={bx(i)} width={bw} y={bpy(below + v)} height={Math.max(0, bpy(below) - bpy(below + v))} fill={COLORS[colorIndex % COLORS.length]} stroke={selectedX !== null && c === `R${selectedX}` ? '#2bb8b0' : 'none'} stroke-width="2" tabindex="0" role="img" aria-label={`${s.name} ${c} ${cell(v)}`} onfocus={() => say(`${s.name} · ${c} · ${cell(v)}`)} onmouseenter={() => say(`${s.name} · ${c} · ${cell(v)}`)}><title>{`${s.name} ${c}: ${cell(v)}`}</title></rect>{/each}
 				{:else}
 					{@const vs = series.filter((s) => !isHidden(s.name))}
 					{#each vs as s, k}{@const v = s.values?.[i] ?? null}{@const w = bw / Math.max(1, vs.length)}{@const idx = series.findIndex((q) => q.name === s.name)}
@@ -129,7 +129,7 @@
 			{#each cl as c, j}<text x={80 + j * ((W - 90) / cl.length) + (W - 90) / cl.length / 2} y="14" class="tick" text-anchor="middle">{c}</text>{/each}
 			{#each rl as r, i}<text x="74" y={44 + i * 30} class="tick" text-anchor="end">{r}</text>
 				{#each cl as c, j}{@const v = view.values[i][j]}{@const cw = (W - 90) / cl.length}
-					<rect x={80 + j * cw} y={26 + i * 30} width={cw - 2} height="27" fill={v === null ? '#1f2937' : heat(v)} tabindex="0" role="img" aria-label={`${r} ${c} ${v === null ? 'NOT CAPTURED' : cell(v)}`} onfocus={() => say(`${r} · ${c} · ${v === null ? 'NOT CAPTURED' : cell(v)}`)} onmouseenter={() => say(`${r} · ${c} · ${v === null ? 'NOT CAPTURED' : cell(v)}`)}><title>{`${r} ${c}: ${v === null ? 'NOT CAPTURED' : cell(v)}`}</title></rect>
+					<rect x={80 + j * cw} y={26 + i * 30} width={cw - 2} height="27" fill={v === null ? '#1f2937' : heat(v)} stroke={selectedX !== null && c === `R${selectedX}` ? '#2bb8b0' : 'none'} stroke-width="2" data-selected={selectedX !== null && c === `R${selectedX}` ? 'true' : undefined} tabindex="0" role="img" aria-label={`${r} ${c} ${v === null ? 'NOT CAPTURED' : cell(v)}`} onfocus={() => say(`${r} · ${c} · ${v === null ? 'NOT CAPTURED' : cell(v)}`)} onmouseenter={() => say(`${r} · ${c} · ${v === null ? 'NOT CAPTURED' : cell(v)}`)}><title>{`${r} ${c}: ${v === null ? 'NOT CAPTURED' : cell(v)}`}</title></rect>
 					<text x={80 + j * cw + cw / 2} y={44 + i * 30} class="cellv" text-anchor="middle">{v === null ? 'NC' : Math.abs(v) >= 100 ? Math.round(v) : v.toPrecision(3)}</text>{/each}{/each}
 		</svg>
 		<p class="dim">Colour scale: {view.value_label}; min {fmt(Math.min(...hv))}, max {fmt(Math.max(...hv))}. NC = NOT CAPTURED.</p>

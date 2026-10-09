@@ -175,6 +175,18 @@ describe('selected-round metric cards never invent values', () => {
 	});
 });
 
+describe('shared selected metric', () => {
+	it('activating a metric card selects it for the whole page (the comparison follows it)', async () => {
+		const s = storeWith((st) => { st.run = run(); st.summary = summary([record(0, 'COMPLETED'), record(1, 'COMPLETED')]); st.followLive = false; st.manualRound = 0; });
+		render(MetricCards, { props: { studio: s } });
+		expect(s.selectedMetric).toBe('AUPRC');
+		await fireEvent.click(screen.getByTestId('metric-BCE'));
+		expect(s.selectedMetric).toBe('BCE');
+		expect(screen.getByTestId('metric-BCE').getAttribute('aria-pressed')).toBe('true');
+		expect(screen.getByTestId('metric-AUPRC').getAttribute('aria-pressed')).toBe('false');
+	});
+});
+
 describe('run status strip, tabs and the owner-bound star', () => {
 	function liveView(n: number) {
 		const model = new FederationLiveModel(RUN_ID);

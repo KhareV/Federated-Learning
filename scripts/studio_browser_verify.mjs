@@ -292,6 +292,7 @@ await b.evaluate(`(()=>{const s=document.querySelector('[data-testid="run-select
 await waitFor(`new URL(location.href).searchParams.get('run')==='${run3}'`, 20000);
 await waitFor(`${T('metric-round')}?.textContent.includes('ROUND R3')`, 30000);
 check('switching 10-round -> 3-round clears the previous run: no R10 control, 3-round values only', !(await exists('round-btn-R10')) && (await exists('round-btn-R3')) && (await text('metric-AUPRC')).endsWith(six(run3rec[3].metric_result.AUPRC)));
+await waitFor(`${T('accepted-counter')}?.textContent==='24/24'`, 30000).catch(() => {});   // the new run's journal replays from sequence 0
 check('switching runs shows the 3-round run\'s own accepted counter', (await text('accepted-counter')) === '24/24', await text('accepted-counter'));
 await b.navigate(`/app/federation/live?run=recorded-A`, `!!${T('run-status-strip')}`);
 await waitFor(`${T('metric-round')}?.textContent.includes('ROUND R10')`, 60000);

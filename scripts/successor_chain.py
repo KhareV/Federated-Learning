@@ -67,10 +67,11 @@ def _broken(link: Link, why: str) -> RuntimeError:
     return RuntimeError(f"{link.lock_id}_SUCCESSOR_CHAIN_BROKEN:{why}")
 
 
-def validate_link(link: Link, root: Path, links: tuple[Link, ...] = LINKS) -> dict[str, Any]:
-    """Validate one additive successor against the exact predecessor identity; return the successor lock."""
+def validate_link(link: Link, root: Path, links: tuple[Link, ...] = LINKS, *, lock_override: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Validate one additive successor against the exact predecessor identity; return the successor lock.
+    ``lock_override`` checks the same rules against an in-memory copy (used by verifiers and tamper controls)."""
     lock_file, predecessor_file = root / link.path, root / link.predecessor_path
-    lock = json.loads(lock_file.read_text(encoding="utf-8"))
+    lock = lock_override if lock_override is not None else json.loads(lock_file.read_text(encoding="utf-8"))
     if lock.get("lock_id") != link.lock_id or lock.get("status") != "PASS":
         raise _broken(link, "IDENTITY_OR_STATUS")
     if not predecessor_file.is_file():

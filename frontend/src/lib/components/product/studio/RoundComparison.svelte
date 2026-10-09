@@ -6,7 +6,7 @@
 	const done = $derived(studio.records.filter((r) => r.evaluation_status === 'COMPLETED').map((r) => r.round_id));
 	let a = $state<number | null>(null);
 	let b = $state<number | null>(null);
-	let metric = $state('AUPRC');
+	const metric = $derived(studio.selectedMetric);
 	const pair = $derived(studio.summary?.comparison);
 	const A = $derived(a ?? (pair && done.includes(pair.comparator_round) ? pair.comparator_round : (done[0] ?? 0)));
 	const B = $derived(b ?? (pair && done.includes(pair.endpoint_round) ? pair.endpoint_round : (done.at(-1) ?? 0)));
@@ -19,7 +19,7 @@
 <div class="rc" data-testid="round-comparison">
 	<div class="sel"><label>Compare round <select value={A} onchange={(e) => { a = Number((e.currentTarget as HTMLSelectElement).value); }} data-testid="cmp-a">{#each done as r}<option value={r}>R{r}</option>{/each}</select></label>
 		<label>with round <select value={B} onchange={(e) => { b = Number((e.currentTarget as HTMLSelectElement).value); }} data-testid="cmp-b">{#each done as r}<option value={r}>R{r}</option>{/each}</select></label>
-		<label>metric across rounds <select value={metric} onchange={(e) => { metric = (e.currentTarget as HTMLSelectElement).value; }} data-testid="cmp-metric">{#each KEYS as k}<option>{k}</option>{/each}</select></label></div>
+		<label>metric across rounds <select value={metric} onchange={(e) => { studio.selectedMetric = (e.currentTarget as HTMLSelectElement).value; }} data-testid="cmp-metric">{#each KEYS as k}<option>{k}</option>{/each}</select></label></div>
 	{#if done.length < 2}<p class="dim" role="status">Comparison needs at least two evaluated rounds; evaluated so far: {done.length}.</p>
 	{:else}
 		<div class="scroll" tabindex="-1"><table data-testid="cmp-table"><thead><tr><th scope="col">Metric</th><th scope="col">R{A}</th><th scope="col">R{B}</th><th scope="col">Difference (R{B} − R{A})</th></tr></thead>

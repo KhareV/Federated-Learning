@@ -60,7 +60,7 @@
 			<div class="grid">
 				{#each FIGS[tab] as id (id)}{@const s = spec(id)}{#if s}
 					<div class="one" data-testid={`fig-${id}`} data-availability={s.availability}>
-						<Fl10Chart spec={s as unknown as Fl10Spec} selectedX={['FL10_FIG02', 'FL10_FIG03', 'FL10_FIG04', 'FL10_FIG05', 'FL10_FIG06', 'FL10_FIG17'].includes(id) && studio.selectedRound >= (id === 'FL10_FIG02' || id === 'FL10_FIG03' || id === 'FL10_FIG17' ? 1 : 0) ? studio.selectedRound : null} onPickX={['FL10_FIG04', 'FL10_FIG05', 'FL10_FIG06'].includes(id) ? (x) => studio.selectRound(x) : undefined} />
+						<Fl10Chart spec={s as unknown as Fl10Spec} selectedX={['FL10_FIG02', 'FL10_FIG03', 'FL10_FIG04', 'FL10_FIG05', 'FL10_FIG06', 'FL10_FIG11', 'FL10_FIG12', 'FL10_FIG13', 'FL10_FIG17'].includes(id) && studio.selectedRound >= (['FL10_FIG04', 'FL10_FIG05', 'FL10_FIG06'].includes(id) ? 0 : 1) ? studio.selectedRound : null} onPickX={['FL10_FIG04', 'FL10_FIG05', 'FL10_FIG06'].includes(id) ? (x) => studio.selectRound(x) : undefined} />
 						{#if s.availability !== 'AVAILABLE'}<p class="avail" data-testid={`avail-${id}`}>{s.availability}: {s.availability_detail}</p>{/if}
 					</div>{/if}{/each}
 			</div>

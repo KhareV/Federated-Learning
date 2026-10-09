@@ -1,0 +1,2666 @@
+{
+ "passed": false,
+ "total": 173,
+ "failed": [
+  {
+   "name": "switching runs shows the 3-round run's own accepted counter",
+   "ok": false,
+   "detail": "0/24"
+  }
+ ],
+ "checks": [
+  {
+   "name": "entry: 3 rounds is the default selection",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "entry: expected accepted updates are 24 and 80 and labelled as expectations",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "entry: the original three-round form is still the default form",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "entry: no overflow at 1440px",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "entry: no overflow at 1024px",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "entry: no overflow at 768px",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "entry: no overflow at 390px",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "entry: choosing 10 rounds explains disabled FedProx and SecAgg",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "3-round live: selecting R1 while the run executes switches the network to round 1 and stops following live",
+   "ok": true,
+   "detail": "{\"follow\":\"INSPECTING ROUND 1: new events keep arriving but do not move your selection. Evaluation of a round starts only after its state is committed.\",\"mround\":\"ROUND R1 COMPLETED\",\"banner\":true,\"title\":\"Eight logical clients (round 1)\"}"
+  },
+  {
+   "name": "3-round live: new events do not overwrite the historical selection",
+   "ok": true,
+   "detail": "INSPECTING ROUND 1: new events keep arriving but do not move your selection. Evaluation of a round starts only after its state is committed."
+  },
+  {
+   "name": "3-round live: RETURN TO LIVE restores following",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "3-round live: a round was shown as committed while later evaluations were still pending (no invented points)",
+   "ok": true,
+   "detail": "[{\"t\":0,\"accepted\":\"0/24\",\"stage\":\"Current stage: LOCAL TRAINING\",\"status\":\"RUNNING · LIVE_RUN · FEDAVG · \",\"mstatus\":\"NOT YET AVAILABLE\",\"mround\":\"ROUND R1 NOT Y\",\"pendingMarks\":12,\"follow\":\"FOLLOWING LIVE: panels\",\"hist\":false},{\"t\":1,\"accepted\":\"1/24\",\"stage\":\"Current stage: LOCAL TRAINING\",\"stat"
+  },
+  {
+   "name": "3-round live: the counter reached 24/24 accepted updates from backend events",
+   "ok": true,
+   "detail": "24/24"
+  },
+  {
+   "name": "3-round: R0 metric cards equal the stored record",
+   "ok": true,
+   "detail": "{\"AUPRC\":\"AUPRC0.628671\",\"AUROC\":\"AUROC0.726971\",\"F1\":\"F10\",\"specificity\":\"Specificity1\",\"recall\":\"Recall0\",\"accuracy\":\"Accuracy0.787690\",\"BCE\":\"BCE0.650140\",\"Brier\":\"Brier0.228541\"} vs 0.628671"
+  },
+  {
+   "name": "3-round: R0 confusion counts reconcile with the population",
+   "ok": true,
+   "detail": "{\"TP\":0,\"FP\":0,\"TN\":1139,\"FN\":307,\"predicted_positives\":0,\"predicted_negatives\":1446}"
+  },
+  {
+   "name": "3-round: R0 confusion count cards show the stored counts",
+   "ok": true,
+   "detail": "TP0"
+  },
+  {
+   "name": "3-round: R0 committed state digest of the record is displayed",
+   "ok": true,
+   "detail": "6a2923ca"
+  },
+  {
+   "name": "3-round: R1 metric cards equal the stored record",
+   "ok": true,
+   "detail": "{\"AUPRC\":\"AUPRC0.650689\",\"AUROC\":\"AUROC0.753869\",\"F1\":\"F10\",\"specificity\":\"Specificity1\",\"recall\":\"Recall0\",\"accuracy\":\"Accuracy0.787690\",\"BCE\":\"BCE0.651131\",\"Brier\":\"Brier0.229032\"} vs 0.650689"
+  },
+  {
+   "name": "3-round: R1 confusion counts reconcile with the population",
+   "ok": true,
+   "detail": "{\"TP\":0,\"FP\":0,\"TN\":1139,\"FN\":307,\"predicted_positives\":0,\"predicted_negatives\":1446}"
+  },
+  {
+   "name": "3-round: R1 confusion count cards show the stored counts",
+   "ok": true,
+   "detail": "TP0"
+  },
+  {
+   "name": "3-round: R1 committed state digest of the record is displayed",
+   "ok": true,
+   "detail": "40cee065"
+  },
+  {
+   "name": "3-round: R2 metric cards equal the stored record",
+   "ok": true,
+   "detail": "{\"AUPRC\":\"AUPRC0.653923\",\"AUROC\":\"AUROC0.768804\",\"F1\":\"F10.006494\",\"specificity\":\"Specificity1\",\"recall\":\"Recall0.003257\",\"accuracy\":\"Accuracy0.788382\",\"BCE\":\"BCE0.640362\",\"Brier\":\"Brier0.223684\"} vs 0.653923"
+  },
+  {
+   "name": "3-round: R2 confusion counts reconcile with the population",
+   "ok": true,
+   "detail": "{\"TP\":1,\"FP\":0,\"TN\":1139,\"FN\":306,\"predicted_positives\":1,\"predicted_negatives\":1445}"
+  },
+  {
+   "name": "3-round: R2 confusion count cards show the stored counts",
+   "ok": true,
+   "detail": "TP1"
+  },
+  {
+   "name": "3-round: R2 committed state digest of the record is displayed",
+   "ok": true,
+   "detail": "6237c0b1"
+  },
+  {
+   "name": "3-round: R3 metric cards equal the stored record",
+   "ok": true,
+   "detail": "{\"AUPRC\":\"AUPRC0.676186\",\"AUROC\":\"AUROC0.802847\",\"F1\":\"F10.350257\",\"specificity\":\"Specificity0\",\"recall\":\"Recall1\",\"accuracy\":\"Accuracy0.212310\",\"BCE\":\"BCE0.724338\",\"Brier\":\"Brier0.265607\"} vs 0.676186"
+  },
+  {
+   "name": "3-round: R3 confusion counts reconcile with the population",
+   "ok": true,
+   "detail": "{\"TP\":307,\"FP\":1139,\"TN\":0,\"FN\":0,\"predicted_positives\":1446,\"predicted_negatives\":0}"
+  },
+  {
+   "name": "3-round: R3 confusion count cards show the stored counts",
+   "ok": true,
+   "detail": "TP307"
+  },
+  {
+   "name": "3-round: R3 committed state digest of the record is displayed",
+   "ok": true,
+   "detail": "3f0b7762"
+  },
+  {
+   "name": "3-round: states equal the frozen canonical digests (R1-R3)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "3-round: rapid round switching ends on the last selection with that round's values",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "3-round: client network heading reflects the selected historical round",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "3-round: client card of the selected round shows that round's update digest",
+   "ok": true,
+   "detail": " SIM_FL_SITE_00✓ ACCEPTED(SUBMITTED)  local examples: 93 milestone: 100% (completed) update: 56f06ab063… produced"
+  },
+  {
+   "name": "3-round: the confusion matrix shows the comparison endpoint counts",
+   "ok": true,
+   "detail": "R03 N = 1446 · actual + 307 · actual − 1139 pred +pred − actual +TP 307FN 0 actual −FP 1139TN 0"
+  },
+  {
+   "name": "3-round: tab overview has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG01\",\"FIG18\"],\"tables\":[\"TAB08\",\"TAB10\",\"TAB12\"],\"overflow\":false}"
+  },
+  {
+   "name": "3-round: tab performance has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG04\",\"FIG05\",\"FIG06\",\"FIG15\",\"FIG20\"],\"tables\":[\"TAB01\",\"TAB05\"],\"overflow\":false}"
+  },
+  {
+   "name": "3-round: tab training has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG02\",\"FIG03\",\"FIG12\",\"FIG17\",\"FIG19\"],\"tables\":[\"TAB03\",\"TAB04\",\"TAB07\"],\"overflow\":false}"
+  },
+  {
+   "name": "3-round: tab clients has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG11\",\"FIG13\",\"FIG14\"],\"tables\":[\"TAB06\"],\"overflow\":false}"
+  },
+  {
+   "name": "3-round: tab matrices has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG07\",\"FIG08\",\"FIG09\",\"FIG10\"],\"tables\":[],\"overflow\":false}"
+  },
+  {
+   "name": "3-round: tab comparison has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG16\",\"FIG20\"],\"tables\":[\"TAB02\",\"TAB11\"],\"overflow\":false}"
+  },
+  {
+   "name": "3-round: tab figures has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\"],\"tables\":[\"TAB01\",\"TAB02\",\"TAB03\",\"TAB04\",\"TAB05\",\"TAB06\",\"TAB07\",\"TAB08\",\"TAB09\",\"TAB10\",\"TAB11\",\"TAB12\"],\"overflow\":false}"
+  },
+  {
+   "name": "3-round: all 20 figures are reachable from the tabs",
+   "ok": true,
+   "detail": "FIG01,FIG02,FIG03,FIG04,FIG05,FIG06,FIG07,FIG08,FIG09,FIG10,FIG11,FIG12,FIG13,FIG14,FIG15,FIG16,FIG17,FIG18,FIG19,FIG20"
+  },
+  {
+   "name": "3-round: all 12 tables are reachable from the tabs",
+   "ok": true,
+   "detail": "TAB01,TAB02,TAB03,TAB04,TAB05,TAB06,TAB07,TAB08,TAB09,TAB10,TAB11,TAB12"
+  },
+  {
+   "name": "3-round: analysis tabs are keyboard operable",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "3-round: overview facts show the run's own source, accepted updates and limits",
+   "ok": true,
+   "detail": "24"
+  },
+  {
+   "name": "3-round: overview names the cohort reuse and the synthetic boundary",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "3-round: comparison defaults to the predeclared same-cohort pair",
+   "ok": true,
+   "detail": "{\"a\":\"0\",\"b\":\"3\"}"
+  },
+  {
+   "name": "3-round: comparison difference equals the stored point difference",
+   "ok": true,
+   "detail": "0.047515 vs 0.047515"
+  },
+  {
+   "name": "3-round: choosing another round updates the comparison",
+   "ok": true,
+   "detail": "0.025497"
+  },
+  {
+   "name": "3-round: the scientific research bridge is shown as a separate frozen lane",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "3-round: client history lists every committed round for the selected client",
+   "ok": true,
+   "detail": "3"
+  },
+  {
+   "name": "3-round: the two holdout participants of the matching site condition are listed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "3-round: tab overview fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "3-round: tab performance fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "3-round: tab training fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "3-round: tab clients fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "3-round: tab matrices fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "3-round: tab comparison fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "3-round: tab figures fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "3-round: export-FL10_FIG04-csv downloads and verifies against the manifest",
+   "ok": true,
+   "detail": "FL10_FIG04.csv · sha256 bbca178a5cdf774f… verified against the export manifest"
+  },
+  {
+   "name": "3-round: export-FL10_FIG07-svg downloads and verifies against the manifest",
+   "ok": true,
+   "detail": "FL10_FIG07.svg · sha256 f0a94dc98a7deb0c… verified against the export manifest"
+  },
+  {
+   "name": "3-round: export-FL10_TAB01-csv downloads and verifies against the manifest",
+   "ok": true,
+   "detail": "FL10_TAB01.csv · sha256 04d5cb577aa5e7aa… verified against the export manifest"
+  },
+  {
+   "name": "3-round: export-evaluation_records-json downloads and verifies against the manifest",
+   "ok": true,
+   "detail": "evaluation_records.json · sha256 ac6f0751c9dccece… verified against the export manifest"
+  },
+  {
+   "name": "3-round: the verification manifest downloads with its sha256",
+   "ok": true,
+   "detail": "verification manifest saved · sha256 7d4c50c305d12ce3…"
+  },
+  {
+   "name": "3-round: export manifest is run-specific (20 figures, 12 tables, this run id)",
+   "ok": true,
+   "detail": "FEDRUN-B95B3668D38C"
+  },
+  {
+   "name": "3-round: exported provenance names this run and a live source",
+   "ok": true,
+   "detail": "LIVE RUN (this session)"
+  },
+  {
+   "name": "studio_run3: no horizontal overflow at 1440px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run3: network, status strip, tabs and charts render at 1440px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run3: no horizontal overflow at 1024px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run3: network, status strip, tabs and charts render at 1024px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run3: no horizontal overflow at 768px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run3: network, status strip, tabs and charts render at 768px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run3: no horizontal overflow at 390px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run3: network, status strip, tabs and charts render at 390px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "3-round: reduced motion leaves no running animation on a finished run",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round live: selecting R3 while R5+ executes shows R3 and does not follow live",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round live: execution continued in the background while a historical round was selected",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round live: the selected-round view stays on R3",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round: run reached DONE",
+   "ok": true,
+   "detail": "null"
+  },
+  {
+   "name": "10-round live: accepted updates counter reached 80/80 from backend events",
+   "ok": true,
+   "detail": "80"
+  },
+  {
+   "name": "10-round live: evaluation lagged training and pending rounds were marked (never drawn as values)",
+   "ok": true,
+   "detail": "[{\"t\":4,\"accepted\":\"0/80\",\"stage\":\"Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS\",\"status\":\"RUNNING · LIVE_RUN · FEDAVG · \",\"pendingMarks\":0,\"sub\":false,\"committed\":0},{\"t\":5,\"accepted\":\"0/80\",\"stage\":\"Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS\",\"status\":\"RUNNING · LIVE_RUN · FEDAVG"
+  },
+  {
+   "name": "10-round: R0 metric cards equal the stored record",
+   "ok": true,
+   "detail": "{\"AUPRC\":\"AUPRC0.628671\",\"AUROC\":\"AUROC0.726971\",\"F1\":\"F10\",\"specificity\":\"Specificity1\",\"recall\":\"Recall0\",\"accuracy\":\"Accuracy0.787690\",\"BCE\":\"BCE0.650140\",\"Brier\":\"Brier0.228541\"} vs 0.628671"
+  },
+  {
+   "name": "10-round: R0 confusion counts reconcile with the population",
+   "ok": true,
+   "detail": "{\"TP\":0,\"FP\":0,\"TN\":1139,\"FN\":307,\"predicted_positives\":0,\"predicted_negatives\":1446}"
+  },
+  {
+   "name": "10-round: R0 confusion count cards show the stored counts",
+   "ok": true,
+   "detail": "TP0"
+  },
+  {
+   "name": "10-round: R0 committed state digest of the record is displayed",
+   "ok": true,
+   "detail": "6a2923ca"
+  },
+  {
+   "name": "10-round: R3 metric cards equal the stored record",
+   "ok": true,
+   "detail": "{\"AUPRC\":\"AUPRC0.676186\",\"AUROC\":\"AUROC0.802847\",\"F1\":\"F10.350257\",\"specificity\":\"Specificity0\",\"recall\":\"Recall1\",\"accuracy\":\"Accuracy0.212310\",\"BCE\":\"BCE0.724338\",\"Brier\":\"Brier0.265607\"} vs 0.676186"
+  },
+  {
+   "name": "10-round: R3 confusion counts reconcile with the population",
+   "ok": true,
+   "detail": "{\"TP\":307,\"FP\":1139,\"TN\":0,\"FN\":0,\"predicted_positives\":1446,\"predicted_negatives\":0}"
+  },
+  {
+   "name": "10-round: R3 confusion count cards show the stored counts",
+   "ok": true,
+   "detail": "TP307"
+  },
+  {
+   "name": "10-round: R3 committed state digest of the record is displayed",
+   "ok": true,
+   "detail": "3f0b7762"
+  },
+  {
+   "name": "10-round: R6 metric cards equal the stored record",
+   "ok": true,
+   "detail": "{\"AUPRC\":\"AUPRC0.865008\",\"AUROC\":\"AUROC0.933801\",\"F1\":\"F10.350257\",\"specificity\":\"Specificity0\",\"recall\":\"Recall1\",\"accuracy\":\"Accuracy0.212310\",\"BCE\":\"BCE2.483803\",\"Brier\":\"Brier0.721445\"} vs 0.865008"
+  },
+  {
+   "name": "10-round: R6 confusion counts reconcile with the population",
+   "ok": true,
+   "detail": "{\"TP\":307,\"FP\":1139,\"TN\":0,\"FN\":0,\"predicted_positives\":1446,\"predicted_negatives\":0}"
+  },
+  {
+   "name": "10-round: R6 confusion count cards show the stored counts",
+   "ok": true,
+   "detail": "TP307"
+  },
+  {
+   "name": "10-round: R6 committed state digest of the record is displayed",
+   "ok": true,
+   "detail": "819fb528"
+  },
+  {
+   "name": "10-round: R10 metric cards equal the stored record",
+   "ok": true,
+   "detail": "{\"AUPRC\":\"AUPRC0.911570\",\"AUROC\":\"AUROC0.966171\",\"F1\":\"F10.350257\",\"specificity\":\"Specificity0\",\"recall\":\"Recall1\",\"accuracy\":\"Accuracy0.212310\",\"BCE\":\"BCE3.499216\",\"Brier\":\"Brier0.768504\"} vs 0.911570"
+  },
+  {
+   "name": "10-round: R10 confusion counts reconcile with the population",
+   "ok": true,
+   "detail": "{\"TP\":307,\"FP\":1139,\"TN\":0,\"FN\":0,\"predicted_positives\":1446,\"predicted_negatives\":0}"
+  },
+  {
+   "name": "10-round: R10 confusion count cards show the stored counts",
+   "ok": true,
+   "detail": "TP307"
+  },
+  {
+   "name": "10-round: R10 committed state digest of the record is displayed",
+   "ok": true,
+   "detail": "5ae2c3a4"
+  },
+  {
+   "name": "10-round: this new run reproduces the recorded FL10 states and metrics (equal digests; not preloaded)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round: ROC legend lists the genuinely evaluated states including R06",
+   "ok": true,
+   "detail": "R00 (AUROC 0.7270)|R01 (AUROC 0.7539)|R02 (AUROC 0.7688)|R03 (AUROC 0.8028)|R04 (AUROC 0.8209)|R05 (AUROC 0.8767)|R06 (AUROC 0.9338)|R07 (AUROC 0.9636)|R08 (AUROC 0.9530)|R09 (AUROC 0.9456)|R10 (AUROC 0.9662)"
+  },
+  {
+   "name": "10-round: client contributions of the selected round sum to weight 1 with 8/8 accepted",
+   "ok": true,
+   "detail": "Aggregation weights sum to 1.000000000000 · 8/8 updates accepted by the coordinator · round digest 819fb528…a9d8copy"
+  },
+  {
+   "name": "10-round: the same-cohort R3-to-R10 paired comparison is available",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round: the final candidate is the server-generated FL10 candidate, not promoted or deployed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round: tab overview has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG01\",\"FIG18\"],\"tables\":[\"TAB08\",\"TAB10\",\"TAB12\"],\"overflow\":false}"
+  },
+  {
+   "name": "10-round: tab performance has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG04\",\"FIG05\",\"FIG06\",\"FIG15\",\"FIG20\"],\"tables\":[\"TAB01\",\"TAB05\"],\"overflow\":false}"
+  },
+  {
+   "name": "10-round: tab training has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG02\",\"FIG03\",\"FIG12\",\"FIG17\",\"FIG19\"],\"tables\":[\"TAB03\",\"TAB04\",\"TAB07\"],\"overflow\":false}"
+  },
+  {
+   "name": "10-round: tab clients has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG11\",\"FIG13\",\"FIG14\"],\"tables\":[\"TAB06\"],\"overflow\":false}"
+  },
+  {
+   "name": "10-round: tab matrices has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG07\",\"FIG08\",\"FIG09\",\"FIG10\"],\"tables\":[],\"overflow\":false}"
+  },
+  {
+   "name": "10-round: tab comparison has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\",\"FIG16\",\"FIG20\"],\"tables\":[\"TAB02\",\"TAB11\"],\"overflow\":false}"
+  },
+  {
+   "name": "10-round: tab figures has no overflow and renders its content",
+   "ok": true,
+   "detail": "{\"charts\":[\"FIG04\",\"FIG05\",\"FIG06\",\"FIG02\"],\"tables\":[\"TAB01\",\"TAB02\",\"TAB03\",\"TAB04\",\"TAB05\",\"TAB06\",\"TAB07\",\"TAB08\",\"TAB09\",\"TAB10\",\"TAB11\",\"TAB12\"],\"overflow\":false}"
+  },
+  {
+   "name": "10-round: all 20 figures are reachable from the tabs",
+   "ok": true,
+   "detail": "FIG01,FIG02,FIG03,FIG04,FIG05,FIG06,FIG07,FIG08,FIG09,FIG10,FIG11,FIG12,FIG13,FIG14,FIG15,FIG16,FIG17,FIG18,FIG19,FIG20"
+  },
+  {
+   "name": "10-round: all 12 tables are reachable from the tabs",
+   "ok": true,
+   "detail": "TAB01,TAB02,TAB03,TAB04,TAB05,TAB06,TAB07,TAB08,TAB09,TAB10,TAB11,TAB12"
+  },
+  {
+   "name": "10-round: analysis tabs are keyboard operable",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round: overview facts show the run's own source, accepted updates and limits",
+   "ok": true,
+   "detail": "80"
+  },
+  {
+   "name": "10-round: overview names the cohort reuse and the synthetic boundary",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round: comparison defaults to the predeclared same-cohort pair",
+   "ok": true,
+   "detail": "{\"a\":\"3\",\"b\":\"10\"}"
+  },
+  {
+   "name": "10-round: comparison difference equals the stored point difference",
+   "ok": true,
+   "detail": "0.235384 vs 0.235384"
+  },
+  {
+   "name": "10-round: choosing another round updates the comparison",
+   "ok": true,
+   "detail": "0.260881"
+  },
+  {
+   "name": "10-round: the scientific research bridge is shown as a separate frozen lane",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round: client history lists every committed round for the selected client",
+   "ok": true,
+   "detail": "10"
+  },
+  {
+   "name": "10-round: the two holdout participants of the matching site condition are listed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "10-round: tab overview fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "10-round: tab performance fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "10-round: tab training fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "10-round: tab clients fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "10-round: tab matrices fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "10-round: tab comparison fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "10-round: tab figures fits a 390px viewport without horizontal scroll",
+   "ok": true,
+   "detail": "{\"sw\":390,\"iw\":390}"
+  },
+  {
+   "name": "10-round: export-FL10_FIG04-csv downloads and verifies against the manifest",
+   "ok": true,
+   "detail": "FL10_FIG04.csv · sha256 4d9287437a569852… verified against the export manifest"
+  },
+  {
+   "name": "10-round: export-FL10_FIG07-svg downloads and verifies against the manifest",
+   "ok": true,
+   "detail": "FL10_FIG07.svg · sha256 57736c889637da78… verified against the export manifest"
+  },
+  {
+   "name": "10-round: export-FL10_TAB01-csv downloads and verifies against the manifest",
+   "ok": true,
+   "detail": "FL10_TAB01.csv · sha256 9a703c7dc9aa46ca… verified against the export manifest"
+  },
+  {
+   "name": "10-round: export-evaluation_records-json downloads and verifies against the manifest",
+   "ok": true,
+   "detail": "evaluation_records.json · sha256 0fca622cfb1a71c6… verified against the export manifest"
+  },
+  {
+   "name": "10-round: the verification manifest downloads with its sha256",
+   "ok": true,
+   "detail": "verification manifest saved · sha256 7f0374be84248c7c…"
+  },
+  {
+   "name": "10-round: export manifest is run-specific (20 figures, 12 tables, this run id)",
+   "ok": true,
+   "detail": "FL10RUN-2948C22AF83B"
+  },
+  {
+   "name": "10-round: exported provenance names this run and a live source",
+   "ok": true,
+   "detail": "LIVE RUN (this session)"
+  },
+  {
+   "name": "studio_run10: no horizontal overflow at 1440px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run10: network, status strip, tabs and charts render at 1440px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run10: no horizontal overflow at 1024px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run10: network, status strip, tabs and charts render at 1024px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run10: no horizontal overflow at 768px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run10: network, status strip, tabs and charts render at 768px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run10: no horizontal overflow at 390px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "studio_run10: network, status strip, tabs and charts render at 390px",
+   "ok": true,
+   "detail": "{\"overflow\":false,\"charts\":4,\"grid\":8,\"tabs\":7,\"strip\":true,\"cards\":12}"
+  },
+  {
+   "name": "switching 10-round -> 3-round clears the previous run: no R10 control, 3-round values only",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "switching runs shows the 3-round run's own accepted counter",
+   "ok": false,
+   "detail": "0/24"
+  },
+  {
+   "name": "recorded FL10 run opens as labelled historical evidence with no training",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "recorded run shows the recorded R10 values and the same reuse label",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "recorded run: eight-client network and no owner-bound star under DemoAuth",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "a completed run that predates the observer says so and shows no metrics",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "the original eight-client network, stepper and timeline remain on that run",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "retired FL10 Observatory route redirects into the Studio and preserves ?run=",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "retired route without a run parameter opens the recorded Mode A run",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "Observatory home links to the Studio and no longer to the retired page",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "retained route /app/observatory loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":1424,\"h1\":\"Follow one signal through the system\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/evidence loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":6717,\"h1\":\"Frozen scientific FL evidence\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/federation loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":6445,\"h1\":\"Who contributed to federation?\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/federation/SIM_FL_SITE_00 loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":2971,\"h1\":\"SIM_FL_SITE_00: inspect one local window\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/federation-replay loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":881,\"h1\":\"Federation event-journal replay\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/model loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":4398,\"h1\":\"MODEL_V2_FINAL: architecture and calibration\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/outcomes loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":5700,\"h1\":\"Federated learning research outcomes\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/provenance loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":5652,\"h1\":\"Provenance, history and known boundaries\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/replay loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":813,\"h1\":\"Session replay and monitoring-policy trace\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/research loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":4727,\"h1\":\"Inspect an authorized research window\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/scenarios loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":2928,\"h1\":\"Scenario and fault lab\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/storyboard loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":2066,\"h1\":\"Federated learning storyboard\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/observatory/tour loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":1473,\"h1\":\"Follow the evidence, end to end\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/federation loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":4099,\"h1\":\"Federation Studio\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/federation/rounds loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":1282,\"h1\":\"Rounds\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/federation/clients loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":2390,\"h1\":\"Logical local clients\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/federation/privacy loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":2284,\"h1\":\"The implemented privacy boundary\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "retained route /app/federation/live loads without errors or overflow",
+   "ok": true,
+   "detail": "{\"len\":1684,\"h1\":\"Live federation\",\"overflow\":false,\"notFound\":false}"
+  },
+  {
+   "name": "protected scientific outcomes page still shows the frozen evidence label and comparison matrix",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "storyboard keeps its guided steps and links to the Studio",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "no console errors or uncaught exceptions during the whole journey",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "evidence": {
+  "run3": "FEDRUN-B95B3668D38C",
+  "series3": [
+   {
+    "t": 0,
+    "accepted": "0/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 1,
+    "accepted": "1/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 2,
+    "accepted": "2/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 3,
+    "accepted": "3/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 4,
+    "accepted": "4/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 5,
+    "accepted": "5/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 6,
+    "accepted": "7/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 12,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 7,
+    "accepted": "8/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
+    "hist": false
+   },
+   {
+    "t": 8,
+    "accepted": "9/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
+    "hist": false
+   },
+   {
+    "t": 9,
+    "accepted": "10/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
+    "hist": false
+   },
+   {
+    "t": 10,
+    "accepted": "11/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
+    "hist": false
+   },
+   {
+    "t": 11,
+    "accepted": "12/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
+    "hist": false
+   },
+   {
+    "t": 12,
+    "accepted": "13/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
+    "hist": false
+   },
+   {
+    "t": 13,
+    "accepted": "15/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 9,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 2 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R0. It",
+    "hist": false
+   },
+   {
+    "t": 14,
+    "accepted": "16/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R1. It",
+    "hist": false
+   },
+   {
+    "t": 20,
+    "accepted": "22/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R1. It",
+    "hist": false
+   },
+   {
+    "t": 21,
+    "accepted": "23/24",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 6,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION NOT YET AVAILABLE — showing the latest evaluated round R1. It",
+    "hist": false
+   },
+   {
+    "t": 22,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 23,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 24,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 25,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 26,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 27,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "banner": "ROUND 3 EVALUATION EVALUATING — showing the latest evaluated round R2. Its value",
+    "hist": false
+   },
+   {
+    "t": 28,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 29,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 3,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 30,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 31,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 32,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 33,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   },
+   {
+    "t": 34,
+    "accepted": "24/24",
+    "stage": "Current stage: COMPLETE",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3· FINA",
+    "pendingMarks": 0,
+    "follow": "FOLLOWING LIVE: panels",
+    "hist": false
+   }
+  ],
+  "3-round_tabs": {
+   "overview": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG01",
+     "FIG18"
+    ],
+    "tables": [
+     "TAB08",
+     "TAB10",
+     "TAB12"
+    ],
+    "overflow": false
+   },
+   "performance": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG15",
+     "FIG20"
+    ],
+    "tables": [
+     "TAB01",
+     "TAB05"
+    ],
+    "overflow": false
+   },
+   "training": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG02",
+     "FIG03",
+     "FIG12",
+     "FIG17",
+     "FIG19"
+    ],
+    "tables": [
+     "TAB03",
+     "TAB04",
+     "TAB07"
+    ],
+    "overflow": false
+   },
+   "clients": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG11",
+     "FIG13",
+     "FIG14"
+    ],
+    "tables": [
+     "TAB06"
+    ],
+    "overflow": false
+   },
+   "matrices": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG07",
+     "FIG08",
+     "FIG09",
+     "FIG10"
+    ],
+    "tables": [],
+    "overflow": false
+   },
+   "comparison": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG16",
+     "FIG20"
+    ],
+    "tables": [
+     "TAB02",
+     "TAB11"
+    ],
+    "overflow": false
+   },
+   "figures": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02"
+    ],
+    "tables": [
+     "TAB01",
+     "TAB02",
+     "TAB03",
+     "TAB04",
+     "TAB05",
+     "TAB06",
+     "TAB07",
+     "TAB08",
+     "TAB09",
+     "TAB10",
+     "TAB11",
+     "TAB12"
+    ],
+    "overflow": false
+   }
+  },
+  "widths3": {
+   "390": {
+    "overflow": false,
+    "charts": 4,
+    "grid": 8,
+    "tabs": 7,
+    "strip": true,
+    "cards": 12
+   },
+   "768": {
+    "overflow": false,
+    "charts": 4,
+    "grid": 8,
+    "tabs": 7,
+    "strip": true,
+    "cards": 12
+   },
+   "1024": {
+    "overflow": false,
+    "charts": 4,
+    "grid": 8,
+    "tabs": 7,
+    "strip": true,
+    "cards": 12
+   },
+   "1440": {
+    "overflow": false,
+    "charts": 4,
+    "grid": 8,
+    "tabs": 7,
+    "strip": true,
+    "cards": 12
+   }
+  },
+  "run10": "FL10RUN-2948C22AF83B",
+  "series10": [
+   {
+    "t": 0,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 1,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 2,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 4,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 5,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 6,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 7,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 8,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 10,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 11,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 12,
+    "accepted": "0/80",
+    "stage": "Current stage: PREPARING 8 SYNTHETIC CLIENT DATASETS",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 13,
+    "accepted": "0/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 15,
+    "accepted": "0/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 33,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 16,
+    "accepted": "0/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 33,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 17,
+    "accepted": "0/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 33,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 18,
+    "accepted": "0/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 33,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 19,
+    "accepted": "0/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "NOT YET AVAILABLE",
+    "mround": "ROUND R1 NOT Y",
+    "pendingMarks": 33,
+    "sub": false,
+    "committed": 0
+   },
+   {
+    "t": 21,
+    "accepted": "8/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
+    "sub": true,
+    "committed": 1
+   },
+   {
+    "t": 22,
+    "accepted": "8/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
+    "sub": true,
+    "committed": 1
+   },
+   {
+    "t": 23,
+    "accepted": "8/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
+    "sub": true,
+    "committed": 1
+   },
+   {
+    "t": 24,
+    "accepted": "8/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
+    "sub": true,
+    "committed": 1
+   },
+   {
+    "t": 25,
+    "accepted": "8/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
+    "sub": true,
+    "committed": 1
+   },
+   {
+    "t": 27,
+    "accepted": "8/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
+    "sub": true,
+    "committed": 1
+   },
+   {
+    "t": 28,
+    "accepted": "16/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R0 COMPL",
+    "pendingMarks": 30,
+    "sub": true,
+    "committed": 2
+   },
+   {
+    "t": 29,
+    "accepted": "16/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
+    "sub": true,
+    "committed": 2
+   },
+   {
+    "t": 30,
+    "accepted": "16/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
+    "sub": true,
+    "committed": 2
+   },
+   {
+    "t": 31,
+    "accepted": "16/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
+    "sub": true,
+    "committed": 2
+   },
+   {
+    "t": 33,
+    "accepted": "16/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
+    "sub": true,
+    "committed": 2
+   },
+   {
+    "t": 34,
+    "accepted": "16/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
+    "sub": true,
+    "committed": 2
+   },
+   {
+    "t": 35,
+    "accepted": "16/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R1 COMPL",
+    "pendingMarks": 27,
+    "sub": true,
+    "committed": 2
+   },
+   {
+    "t": 36,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 37,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 39,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 40,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 41,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 42,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 43,
+    "accepted": "24/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R2 COMPL",
+    "pendingMarks": 24,
+    "sub": true,
+    "committed": 3
+   },
+   {
+    "t": 45,
+    "accepted": "32/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 4
+   },
+   {
+    "t": 50,
+    "accepted": "32/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 4
+   },
+   {
+    "t": 51,
+    "accepted": "32/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R3 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 4
+   },
+   {
+    "t": 52,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 53,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 55,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 56,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 21,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 57,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 58,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 59,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 61,
+    "accepted": "40/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R4 COMPL",
+    "pendingMarks": 18,
+    "sub": true,
+    "committed": 5
+   },
+   {
+    "t": 62,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 63,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 64,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 66,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 67,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 68,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 69,
+    "accepted": "48/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R5 COMPL",
+    "pendingMarks": 15,
+    "sub": true,
+    "committed": 6
+   },
+   {
+    "t": 70,
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
+    "sub": true,
+    "committed": 7
+   },
+   {
+    "t": 72,
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
+    "sub": true,
+    "committed": 7
+   },
+   {
+    "t": 73,
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
+    "sub": true,
+    "committed": 7
+   },
+   {
+    "t": 74,
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
+    "sub": true,
+    "committed": 7
+   },
+   {
+    "t": 75,
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
+    "sub": true,
+    "committed": 7
+   },
+   {
+    "t": 76,
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
+    "sub": true,
+    "committed": 7
+   },
+   {
+    "t": 78,
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
+    "sub": true,
+    "committed": 7
+   },
+   {
+    "t": 79,
+    "accepted": "56/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R6 COMPL",
+    "pendingMarks": 12,
+    "sub": true,
+    "committed": 7
+   },
+   {
+    "t": 80,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 81,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 82,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 84,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 85,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 86,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 87,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 88,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 90,
+    "accepted": "64/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R7 COMPL",
+    "pendingMarks": 9,
+    "sub": true,
+    "committed": 8
+   },
+   {
+    "t": 91,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 92,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 93,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 95,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 96,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 97,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 98,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 99,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 101,
+    "accepted": "72/80",
+    "stage": "Current stage: LOCAL TRAINING",
+    "status": "RUNNING · LIVE_RUN · FEDAVG · ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R8 COMPL",
+    "pendingMarks": 6,
+    "sub": true,
+    "committed": 9
+   },
+   {
+    "t": 102,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 103,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 104,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 105,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 107,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 108,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R9 COMPL",
+    "pendingMarks": 3,
+    "sub": true,
+    "committed": 10
+   },
+   {
+    "t": 109,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R10· FIN",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 10
+   },
+   {
+    "t": 110,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R10· FIN",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 10
+   },
+   {
+    "t": 111,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R10· FIN",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 10
+   },
+   {
+    "t": 113,
+    "accepted": "80/80",
+    "stage": "Current stage: EVALUATING COMMITTED CHECKPOINTS",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R10· FIN",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 10
+   },
+   {
+    "t": 114,
+    "accepted": "80/80",
+    "stage": "Current stage: EXPORT PREPARING",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R10· FIN",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 10
+   },
+   {
+    "t": 115,
+    "accepted": "80/80",
+    "stage": "Current stage: EXPORT PREPARING",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R10· FIN",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 10
+   },
+   {
+    "t": 116,
+    "accepted": "80/80",
+    "stage": "Current stage: EXPORT PREPARING",
+    "status": "COMPLETED · LIVE_RUN · FEDAVG ",
+    "mstatus": "COMPLETED",
+    "mround": "ROUND R10· FIN",
+    "pendingMarks": 0,
+    "sub": false,
+    "committed": 10
+   }
+  ],
+  "10-round_tabs": {
+   "overview": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG01",
+     "FIG18"
+    ],
+    "tables": [
+     "TAB08",
+     "TAB10",
+     "TAB12"
+    ],
+    "overflow": false
+   },
+   "performance": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG15",
+     "FIG20"
+    ],
+    "tables": [
+     "TAB01",
+     "TAB05"
+    ],
+    "overflow": false
+   },
+   "training": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG02",
+     "FIG03",
+     "FIG12",
+     "FIG17",
+     "FIG19"
+    ],
+    "tables": [
+     "TAB03",
+     "TAB04",
+     "TAB07"
+    ],
+    "overflow": false
+   },
+   "clients": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG11",
+     "FIG13",
+     "FIG14"
+    ],
+    "tables": [
+     "TAB06"
+    ],
+    "overflow": false
+   },
+   "matrices": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG07",
+     "FIG08",
+     "FIG09",
+     "FIG10"
+    ],
+    "tables": [],
+    "overflow": false
+   },
+   "comparison": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02",
+     "FIG16",
+     "FIG20"
+    ],
+    "tables": [
+     "TAB02",
+     "TAB11"
+    ],
+    "overflow": false
+   },
+   "figures": {
+    "charts": [
+     "FIG04",
+     "FIG05",
+     "FIG06",
+     "FIG02"
+    ],
+    "tables": [
+     "TAB01",
+     "TAB02",
+     "TAB03",
+     "TAB04",
+     "TAB05",
+     "TAB06",
+     "TAB07",
+     "TAB08",
+     "TAB09",
+     "TAB10",
+     "TAB11",
+     "TAB12"
+    ],
+    "overflow": false
+   }
+  },
+  "widths10": {
+   "390": {
+    "overflow": false,
+    "charts": 4,
+    "grid": 8,
+    "tabs": 7,
+    "strip": true,
+    "cards": 12
+   },
+   "768": {
+    "overflow": false,
+    "charts": 4,
+    "grid": 8,
+    "tabs": 7,
+    "strip": true,
+    "cards": 12
+   },
+   "1024": {
+    "overflow": false,
+    "charts": 4,
+    "grid": 8,
+    "tabs": 7,
+    "strip": true,
+    "cards": 12
+   },
+   "1440": {
+    "overflow": false,
+    "charts": 4,
+    "grid": 8,
+    "tabs": 7,
+    "strip": true,
+    "cards": 12
+   }
+  },
+  "retainedRoutes": {
+   "/app/observatory": {
+    "len": 1424,
+    "h1": "Follow one signal through the system",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/evidence": {
+    "len": 6717,
+    "h1": "Frozen scientific FL evidence",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/federation": {
+    "len": 6445,
+    "h1": "Who contributed to federation?",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/federation/SIM_FL_SITE_00": {
+    "len": 2971,
+    "h1": "SIM_FL_SITE_00: inspect one local window",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/federation-replay": {
+    "len": 881,
+    "h1": "Federation event-journal replay",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/model": {
+    "len": 4398,
+    "h1": "MODEL_V2_FINAL: architecture and calibration",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/outcomes": {
+    "len": 5700,
+    "h1": "Federated learning research outcomes",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/provenance": {
+    "len": 5652,
+    "h1": "Provenance, history and known boundaries",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/replay": {
+    "len": 813,
+    "h1": "Session replay and monitoring-policy trace",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/research": {
+    "len": 4727,
+    "h1": "Inspect an authorized research window",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/scenarios": {
+    "len": 2928,
+    "h1": "Scenario and fault lab",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/storyboard": {
+    "len": 2066,
+    "h1": "Federated learning storyboard",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/observatory/tour": {
+    "len": 1473,
+    "h1": "Follow the evidence, end to end",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/federation": {
+    "len": 4099,
+    "h1": "Federation Studio",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/federation/rounds": {
+    "len": 1282,
+    "h1": "Rounds",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/federation/clients": {
+    "len": 2390,
+    "h1": "Logical local clients",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/federation/privacy": {
+    "len": 2284,
+    "h1": "The implemented privacy boundary",
+    "overflow": false,
+    "notFound": false
+   },
+   "/app/federation/live": {
+    "len": 1684,
+    "h1": "Live federation",
+    "overflow": false,
+    "notFound": false
+   }
+  },
+  "errors": []
+ },
+ "note": "DemoAuth browser journey; connected Clerk ownership is NOT claimed"
+}

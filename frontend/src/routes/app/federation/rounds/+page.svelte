@@ -7,13 +7,14 @@
 	import TechnicalEvidence from '$lib/components/product/federation/TechnicalEvidence.svelte';
 	import DigestText from '$lib/components/product/federation/DigestText.svelte';
 	import { bootRun, chooseRun } from '$lib/components/product/federation/useRunParam';
-	import { useFederation } from '$lib/product/federation/state.svelte';
+	import { isStudioRunId, useFederation } from '$lib/product/federation/state.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import { ownerBoundClientId } from '$lib/product/federation/participation';
 	const fed = useFederation();
 	const product = getProductStore();
 	const ownerBound = $derived(ownerBoundClientId(product.authState.system?.auth_provider, fed.run?.run_type));
 	onMount(() => { void bootRun(fed, page.url.searchParams.get('run')); return () => fed.closeLive(); });
+	const studioRun = $derived(fed.run ? isStudioRunId(fed.run.run_id) : false);
 	const finalCandidate = $derived(fed.run?.candidate_ids[0] ?? null);
 </script>
 <svelte:head><title>Federation rounds | NHM</title></svelte:head>
@@ -21,7 +22,11 @@
 <FederationBanner runType={fed.run?.run_type ?? null} />
 <RunSelector runs={fed.runs} selected={fed.run?.run_id ?? null} onSelect={(id) => chooseRun(fed, page.url.pathname, id)} />
 {#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
-{#if fed.run}
+{#if fed.run && studioRun}
+	<Panel eyebrow="10-ROUND / RECORDED RUN" title="Round-by-round state lives in the Federation Studio" note="SAME EVIDENCE, RUN-SCOPED">
+		<p class="dim" data-testid="rounds-studio-note">Round state, lineage digests, per-round client contributions and evaluation of {fed.run.run_id} are shown, synchronized and exportable, in the <a href={`/app/federation/live?run=${encodeURIComponent(fed.run.run_id)}`}>Federation Studio</a>. This page lists the persisted rounds of 3-round product runs.</p>
+	</Panel>
+{:else if fed.run}
 	{#if ownerBound}<p class="dim" data-testid="rounds-owner-note">MY EDGE CLIENT: {ownerBound}. Presentation-bound to the authenticated run owner; training data remains synthetic engineering data.</p>{/if}
 	<Panel eyebrow="MODEL STATE TIMELINE" title="How the global model state moved" note="NO PERFORMANCE CLAIM">
 		<ol class="tl" data-testid="state-timeline">
