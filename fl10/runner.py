@@ -170,7 +170,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                 results[client] = result
                 envelopes[client] = make_envelope(round_id=round_id, client_id=client, participant_id=d.participant_id, session_id=d.session_id, base_sha=base_sha, dataset_sha=d.dataset_sha256,
                                                   spec_sha=spec_sha, examples=result.examples_seen, delta=dict(result.update.delta))
-                emit({"event": "CLIENT_TRAINING_FINISHED", "round": round_id, "client_id": client, "mean_loss": result.mean_loss, "examples": result.examples_seen})
+                emit({"event": "CLIENT_TRAINING_FINISHED", "round": round_id, "client_id": client, "mean_loss": result.mean_loss, "examples": result.examples_seen, "update_sha256": envelopes[client]["update_sha256"]})
             decisions: dict[str, dict[str, Any]] = {}
             injected: list[dict[str, Any]] = []
             order = canonical_order(list(envelopes))
@@ -192,6 +192,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                         raise Fl10Error("INJECTED_UPDATE_NOT_REJECTED_AS_EXPECTED", f"{kind}:{decision['code']}")
             if len(coord.accepted) != 8 or sorted(coord.accepted) != order:
                 raise Fl10Error("INCOMPLETE_OR_UNEXPECTED_ACCEPTANCE", str(sorted(coord.accepted)))
+            emit({"event": "UPDATES_ACCEPTED", "round": round_id, "accepted_clients": order, "accepted_updates": len(coord.accepted)})
             probe = Coordinator(coord.manifest, coord.spec_sha)           # missing-client probe: the unchanged coordinator refuses to aggregate seven updates
             probe.open_round, probe.base_sha = round_id, base_sha
             probe.accepted = {c: coord.accepted[c] for c in order[:-1]}
@@ -201,6 +202,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                 raise Fl10Error("MISSING_CLIENT_NOT_REFUSED")
             except CoordinatorError as error:
                 missing_probe = error.code
+            emit({"event": "AGGREGATION_STARTED", "round": round_id, "accepted_updates": len(coord.accepted)})
             new_state = coord.aggregate(state)
             info = state_info(new_state)
             if not info["finite"]:

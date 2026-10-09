@@ -454,4 +454,7 @@ def create_product_app_observatory_v1(
         app, PREFIX, identity, artifact_root=Path(federation_artifact_root),
         store=store, identity_resolver=identity_resolver,
     )
+    from api.observatory_studio import register_studio
+
+    register_studio(app, identity, identity_resolver=identity_resolver, artifact_root=Path(federation_artifact_root), store=store)
     return app

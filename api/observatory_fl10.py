@@ -28,6 +28,7 @@ def register(app: FastAPI, prefix: str, identity: Callable[[Request], Awaitable[
     jobs: dict[str, dict[str, Any]] = {}
     tasks: dict[str, asyncio.Task[None]] = {}
     counter = {"n": 0}
+    app.state.fl10_job_active = lambda: any(not task.done() for task in tasks.values())   # read by the unified Studio's one-run-at-a-time guard
     start_lock = asyncio.Lock()
     root = Path(artifact_root) / "fl10_runs"
 
@@ -185,7 +186,8 @@ def register(app: FastAPI, prefix: str, identity: Callable[[Request], Awaitable[
         async with start_lock:
             if any(not task.done() for task in tasks.values()):
                 raise ProductError(ProductErrorCode.INVALID_STATE, "FL10_RUN_ALREADY_ACTIVE")
-            if app.state.federation_service.active_live_run() or app.state.live_link_provider.armed:
+            studio = getattr(app.state, "studio_service", None)
+            if app.state.federation_service.active_live_run() or app.state.live_link_provider.armed or (studio is not None and studio.runner10.active()):
                 raise ProductError(ProductErrorCode.INVALID_STATE, "FEDERATION_RUN_ALREADY_ACTIVE")
             resolved = await identity_resolver(request)
             store.upsert_user(resolved)
