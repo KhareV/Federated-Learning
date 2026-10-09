@@ -5,8 +5,8 @@
 
 import { parseFl10, parseFl10Job, parseFl10Recorded, type Fl10Job, type Fl10Payload, type Fl10Recorded } from './observatory/fl10';
 import { parseLiveLink, parseShowcase, type LiveLinkStatus, type ShowcaseBundle } from './observatory/showcase';
-import { parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
-import type { EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
+import { parseOverview, parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
+import type { StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
 import type {
 	AuthIdentity,
 	DeviceDescriptor,
@@ -135,6 +135,7 @@ export interface ProductClient {
 	studioRuns(): Promise<StudioRun[]>;
 	studioRun(runId: string): Promise<StudioRun>;
 	studioStartTenRound(choice: StudioRunChoice): Promise<StudioRun>;
+	studioOverview(runId: string): Promise<StudioOverview>;
 	studioEvaluation(runId: string): Promise<EvalSummary>;
 	studioEvaluationRound(runId: string, round: number): Promise<EvalRoundDetail>;
 	studioRoundDetail(runId: string, round: number): Promise<RoundDetail>;
@@ -285,6 +286,7 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		studioRuns: async () => parseStudioRuns(await call<unknown>('GET', '/studio/runs')),
 		studioRun: async (id) => parseStudioRun(await call<unknown>('GET', `/studio/runs/${enc(id)}`)),
 		studioStartTenRound: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/runs', { run_length: choice.run_length, source_mode: choice.source_mode })),
+		studioOverview: async (id) => parseOverview(await call<unknown>('GET', `/studio/runs/${enc(id)}/overview`)),
 		studioEvaluation: async (id) => parseEvalSummary(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation`)),
 		studioEvaluationRound: async (id, round) => parseEvalRound(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation/${round}`)),
 		studioRoundDetail: async (id, round) => parseRoundDetail(await call<unknown>('GET', `/studio/runs/${enc(id)}/rounds/${round}`)),

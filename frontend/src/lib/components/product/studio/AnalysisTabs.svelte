@@ -5,6 +5,10 @@
 	import Fl10Table from '$lib/components/product/observatory/Fl10Table.svelte';
 	import ExportPanel from './ExportPanel.svelte';
 	import RoundClientPanel from './RoundClientPanel.svelte';
+	import RunOverview from './RunOverview.svelte';
+	import RoundComparison from './RoundComparison.svelte';
+	import ClientHistory from './ClientHistory.svelte';
+	import ResearchBridge from './ResearchBridge.svelte';
 	import { ANALYSIS_TABS, type AnalysisTab, type StudioStore } from '$lib/product/studio/store.svelte';
 	import type { Fl10Spec, Fl10Table as Table } from '$lib/product/observatory/fl10';
 	let { studio }: { studio: StudioStore } = $props();
@@ -19,7 +23,7 @@
 	};
 	const tab = $derived(studio.analysisTab);
 	const available = $derived(studio.run?.evaluation.available === true);
-	$effect(() => { if (available) { void studio.ensureFigures(); if (TABS_OF[tab].length) void studio.ensureTables(); } });
+	$effect(() => { if (available) { void studio.ensureFigures(); void studio.ensureOverview(); if (TABS_OF[tab].length || tab === 'clients') void studio.ensureTables(); } });
 	const spec = (id: string) => studio.figures?.specs[id];
 	const table = (id: string) => studio.tables?.tables[id];
 	function key(e: KeyboardEvent, i: number) {
@@ -42,10 +46,13 @@
 		{:else}
 			{#if tab === 'overview'}
 				<p class="dim" data-testid="overview-summary">{studio.run?.label} · {studio.run?.source_label} · evaluated rounds {studio.records.filter((r) => r.evaluation_status === 'COMPLETED').length}/{studio.rounds.length} · {studio.summary?.cohort_use}</p>
+				<RunOverview {studio} />
 			{/if}
-			{#if tab === 'clients'}<RoundClientPanel {studio} />{/if}
+			{#if tab === 'clients'}<RoundClientPanel {studio} /><ClientHistory {studio} />{/if}
 			{#if tab === 'comparison'}
 				<p class="dim">Same-cohort paired comparison: round {studio.summary?.comparison.comparator_round} → round {studio.summary?.comparison.endpoint_round} ({studio.summary?.comparison.paired_available ? 'both evaluated' : 'pending until both states are evaluated'}). It is an exploratory effect on a reused cohort with nominal intervals, not a significance test, and the same run's states are never compared with a different run's.</p>
+				<RoundComparison {studio} />
+				<ResearchBridge {studio} />
 				<ul class="refs" data-testid="recorded-refs">{#each recorded as r (r.id)}<li><a href={`/app/federation/live?run=${r.id}`}>{r.label}</a> — frozen NHM_FL10_001 evidence (R0–R10), opened read-only as a historical run.</li>{/each}</ul>
 			{/if}
 			{#if tab === 'figures'}<ExportPanel {studio} />{/if}
@@ -65,7 +72,8 @@
 	</div>
 </div>
 <style>
-	.at { display: grid; gap: 10px; min-width: 0; } .tabs { display: flex; flex-wrap: wrap; gap: 2px; border-bottom: 1px solid rgba(148,163,184,.25); } .tabs button { background: transparent; color: #94a3b8; border: 1px solid transparent; border-bottom: 0; padding: 8px 12px; min-height: 40px; font: 11px 'JetBrains Mono', monospace; letter-spacing: .08em; cursor: pointer; } .tabs button.on { color: #9fe8e3; border-color: rgba(148,163,184,.25); background: rgba(43,184,176,.07); box-shadow: inset 0 -2px 0 #2bb8b0; } .tabs button:focus-visible { outline: 2px solid #2bb8b0; outline-offset: -2px; }
-	.panel { display: grid; gap: 10px; min-width: 0; } .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 10px; min-width: 0; } .one { min-width: 0; display: grid; gap: 4px; } .tbls { display: grid; gap: 8px; min-width: 0; } .dim { margin: 0; color: #94a3b8; font-size: 12.5px; line-height: 1.6; } .avail { margin: 0; font: 11px 'JetBrains Mono', monospace; color: #fbbf24; } .refs { margin: 0; padding-left: 18px; font-size: 12.5px; color: #cbd5e1; display: grid; gap: 3px; } .refs a { color: #2bb8b0; }
+	.at { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-width: 0; } .tabs { display: flex; flex-wrap: wrap; gap: 2px; border-bottom: 1px solid rgba(148,163,184,.25); } .tabs button { background: transparent; color: #94a3b8; border: 1px solid transparent; border-bottom: 0; padding: 8px 12px; min-height: 40px; font: 11px 'JetBrains Mono', monospace; letter-spacing: .08em; cursor: pointer; } .tabs button.on { color: #9fe8e3; border-color: rgba(148,163,184,.25); background: rgba(43,184,176,.07); box-shadow: inset 0 -2px 0 #2bb8b0; } .tabs button:focus-visible { outline: 2px solid #2bb8b0; outline-offset: -2px; }
+	.panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-width: 0; } .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 10px; min-width: 0; } .one { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; } .tbls { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; min-width: 0; } .dim { margin: 0; color: #94a3b8; font-size: 12.5px; line-height: 1.6; } .avail { margin: 0; font: 11px 'JetBrains Mono', monospace; color: #fbbf24; } .refs { margin: 0; padding-left: 18px; font-size: 12.5px; color: #cbd5e1; display: grid; gap: 3px; } .refs a { color: #2bb8b0; }
 	@media (max-width: 520px) { .tabs button { padding: 8px 8px; font-size: 10px; } }
+	p, li, button { overflow-wrap: anywhere; }
 </style>

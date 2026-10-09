@@ -143,10 +143,13 @@ def verify_lock(path: Path = LOCK_PATH) -> dict[str, Any]:
     if lock["repins_predecessor_files"] != repins:
         raise ValueError("FL10_PREDECESSOR_REPIN_SET_MISMATCH")
     from scripts.freeze_observatory_v1 import frontend_files
+    from scripts.studio_successor_compat import accepted_successor as studio_successor
 
-    if set(lock["frontend_files"]) != set(frontend_files()) or any(
+    studio = studio_successor(path)         # None unless this is the canonical lock and a valid additive Studio successor exists
+    expected_frontend = studio["frontend_files"] if studio else lock["frontend_files"]
+    if set(expected_frontend) != set(frontend_files()) or any(
         sha(ROOT / relative) != digest
-        for relative, digest in lock["frontend_files"].items()
+        for relative, digest in expected_frontend.items()
     ):
         raise ValueError("FL10_FRONTEND_BINDING_DRIFT")
     for key in ("released_model_changed", "calibration_applied_to_candidate",
@@ -158,7 +161,10 @@ def verify_lock(path: Path = LOCK_PATH) -> dict[str, Any]:
         raise ValueError("FL10_UNVERIFIED_ACCEPTANCE")
     for relative, expected in lock["bound_files"].items():
         target = ROOT / relative
-        if not target.is_file() or sha(target) != expected:
+        accepted = {expected}
+        if studio and relative in studio["repins_predecessor_files"]:
+            accepted.add(studio["bound_files"][relative])
+        if not target.is_file() or sha(target) not in accepted:
             raise ValueError(f"FL10_LOCK_BOUND_FILE_TAMPER:{relative}")
     return {"status": "PASS", "bound_files": len(lock["bound_files"]),
             "modes": {key: {"candidate_digest": value["candidate_digest"],

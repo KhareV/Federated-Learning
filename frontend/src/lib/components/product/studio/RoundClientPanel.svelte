@@ -26,6 +26,7 @@
 	{/if}
 </div>
 <style>
-	.rc { display: grid; gap: 8px; min-width: 0; } h4 { margin: 0; font: 500 14px 'Space Grotesk', sans-serif; color: #e5f1f0; } .dim { margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.55; } .scroll { overflow: auto; max-height: 320px; } table { border-collapse: collapse; font-size: 11.5px; width: 100%; } th, td { border-bottom: 1px solid rgba(148,163,184,.15); padding: 5px 9px; text-align: left; white-space: nowrap; color: #cbd5e1; } thead th { position: sticky; top: 0; background: #0a0f1f; color: #71829a; font: 10px 'JetBrains Mono', monospace; letter-spacing: .06em; } tr.sel { background: rgba(43,184,176,.1); }
+	.rc { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; min-width: 0; } h4 { margin: 0; font: 500 14px 'Space Grotesk', sans-serif; color: #e5f1f0; } .dim { margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.55; } .scroll { overflow: auto; max-height: 320px; } table { border-collapse: collapse; font-size: 11.5px; width: 100%; } th, td { border-bottom: 1px solid rgba(148,163,184,.15); padding: 5px 9px; text-align: left; white-space: nowrap; color: #cbd5e1; } thead th { position: sticky; top: 0; background: #0a0f1f; color: #71829a; font: 10px 'JetBrains Mono', monospace; letter-spacing: .06em; } tr.sel { background: rgba(43,184,176,.1); }
 	th button { background: none; border: 1px solid rgba(148,163,184,.3); color: #e2e8f0; padding: 2px 8px; min-height: 24px; cursor: pointer; font: 11px 'JetBrains Mono', monospace; } button:focus-visible { outline: 2px solid #2bb8b0; }
+	p, h4, button { overflow-wrap: anywhere; }
 </style>

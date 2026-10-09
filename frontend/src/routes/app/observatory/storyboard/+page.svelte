@@ -69,7 +69,7 @@
 	{/if}
 </section>
 <ul class="lanes">{#each Object.entries(LANE) as [k, v]}<li>{v}</li>{/each}</ul>
-<p class="dim"><a href="/app/observatory/outcomes">Scientific outcomes</a> · <a href="/app/observatory/federation">Federation contributions</a> · <a href="/app/observatory">Observatory</a></p>
+<p class="dim"><a href="/app/federation">Federation Studio (run it live)</a> · <a href="/app/observatory/outcomes">Scientific outcomes</a> · <a href="/app/observatory/federation">Federation contributions</a> · <a href="/app/observatory">Observatory</a></p>
 {/if}
 <style>
 	.eyebrow{color:#2bb8b0;font:10px 'JetBrains Mono',monospace;letter-spacing:.14em}h1{font:500 clamp(28px,4vw,42px) 'Space Grotesk',sans-serif;margin:8px 0}h2{font:500 20px 'Space Grotesk',sans-serif;margin:10px 0}.lead,.card p{max-width:820px;color:#a7b8c9;line-height:1.6;overflow-wrap:anywhere}.dim,li{color:#94a3b8;font-size:13px}.err{color:#fecdd3}a{color:#2bb8b0;display:inline-block;min-height:24px;line-height:24px}

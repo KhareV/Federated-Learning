@@ -1,5 +1,5 @@
 // Fail-closed parsers for the Studio REST payloads (no value is cast blindly; a malformed or foreign payload throws).
-import type { EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
+import type { StudioOverview, EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
 
 type Rec = Record<string, unknown>;
 export class StudioParseError extends Error {
@@ -144,6 +144,19 @@ export function parseExports(value: unknown): StudioExports {
 	const status = oneOf(r.status, ['NOT_STARTED', 'PREPARING', 'READY', 'FAILED'] as const, 'status');
 	return { status, message: typeof r.message === 'string' ? r.message : undefined, run_id: str(r.run_id, 'run_id'), figures: r.figures ? entries(r.figures) : undefined, tables: r.tables ? entries(r.tables) : undefined,
 		data: r.data ? entries(r.data) : undefined, source_label: typeof r.source_label === 'string' ? r.source_label : undefined, cohort_use: typeof r.cohort_use === 'string' ? r.cohort_use : undefined };
+}
+
+export function parseOverview(value: unknown): StudioOverview {
+	const r = obj(value, 'overview');
+	const bridge = obj(r.scientific_bridge, 'scientific_bridge');
+	const length = int(r.run_length, 'run_length');
+	if (length !== 3 && length !== 10) bad('BAD_RUN_LENGTH');
+	arr(obj(r.protocol, 'protocol').interpretation_boundaries ?? [], 'boundaries').map((x) => str(x, 'boundary'));
+	arr(bridge.comparability_rows, 'rows').map((x) => obj(x, 'bridge row'));
+	return { ...r, run_id: str(r.run_id, 'run_id'), run_length: length, source_label: str(r.source_label, 'source_label'), synthetic_label: str(r.synthetic_label, 'synthetic_label'), live_label: strOrNull(r.live_label, 'live_label'),
+		run: obj(r.run, 'run'), protocol: obj(r.protocol, 'protocol'), evaluation: obj(r.evaluation, 'evaluation'), rounds: arr(r.rounds, 'rounds').map((x) => obj(x, 'round')),
+		state_progression: obj(r.state_progression, 'state_progression'), monitoring_link: r.monitoring_link ? obj(r.monitoring_link, 'monitoring_link') : null,
+		scientific_bridge: { comparability_rows: bridge.comparability_rows, verdict: str(bridge.verdict, 'verdict'), limitations: arr(bridge.limitations, 'limitations').map((x) => str(x, 'limitation')), route: str(bridge.route, 'route'), note: str(bridge.note, 'note') } } as unknown as StudioOverview;
 }
 
 export function parseRoundDetail(value: unknown): RoundDetail {

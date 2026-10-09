@@ -34,7 +34,7 @@ def from_fl10_bundle(b: dict[str, Any], *, source_label: str = RECORDED_LABEL) -
                        "separation_source": "FL10_FROZEN_EVIDENCE", "threshold": ev["threshold"], "calibration": ev["calibration"], "round_selection": ev["round_selection"], "paired": ev["paired"], "comparator": "R03", "endpoint": "R10",
                        "cohort_use": "RECORDED FRESH 16-PARTICIPANT HOLDOUT EVALUATION (NHM_FL10_001) — the cohort has since been exposed; later live scores are diagnostic only", "cohort_use_detail": COHORT_USE_DETAIL, "cohort_id": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1",
                        "protocol_sha256": ev["protocol_sha256"], "holdout_manifest_sha256": ev["holdout_manifest_sha256"], "method_freeze_commit": ev["method_freeze_commit"]},
-        "historical_exposed": b["historical_exposed"], "revision": 0}
+        "historical_exposed": b["historical_exposed"], "scientific_bridge": b["scientific_bridge"], "revision": 0}
 
 
 def recorded_bundle(key: str) -> dict[str, Any]:

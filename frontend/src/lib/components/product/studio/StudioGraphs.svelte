@@ -23,5 +23,6 @@
 	{/if}
 </div>
 <style>
-	.g { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 10px; min-width: 0; } .one { min-width: 0; display: grid; gap: 4px; } .dim { margin: 0; color: #94a3b8; font-size: 13px; } .avail { margin: 0; font: 11px 'JetBrains Mono', monospace; color: #fbbf24; }
+	.g { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 10px; min-width: 0; } .one { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; } .dim { margin: 0; color: #94a3b8; font-size: 13px; } .avail { margin: 0; font: 11px 'JetBrains Mono', monospace; color: #fbbf24; }
+	p { overflow-wrap: anywhere; }
 </style>

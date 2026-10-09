@@ -48,7 +48,8 @@ export async function connect(debugPort, origin, output) {
     const { data } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: full });
     writeFileSync(`${output}/${name}.png`, Buffer.from(data, 'base64'));
   };
-  const viewport = (width, height = 900) => send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: width < 700 });
+  // mobile=false on purpose: mobile emulation silently widens the layout viewport to fit overflowing content, which would hide real horizontal overflow.
+  const viewport = (width, height = 900) => send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
   const demoSignIn = async () => {
     await navigate('/sign-in');
     await wait(`document.body.innerText.includes('ENTER DEMO WORKSPACE') || location.pathname==='/app'`);

@@ -24,6 +24,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 FINAL_SHOWCASE = "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
 BASELINE_COMMIT = "274323730d1c7355f688ad4c9ff01ecbfb746501"
+FL10_COMMIT = "e129a76e1f29d574d733ecf18d3fd686da28d47d"      # the commit that introduced the NHM_FL10_001 lock bytes
 
 
 @dataclass(frozen=True)
@@ -43,6 +44,9 @@ LINKS: tuple[Link, ...] = (
     Link("NHM_FL10_001", "artifacts/fl10/NHM_FL10_001.lock.json", FINAL_SHOWCASE, "predecessor_lock_sha256", "predecessor_commit", BASELINE_COMMIT,
          "frontend_files", ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "hardware_work_performed",
                             "historical_locks_edited", "automatically_pushed")),
+    Link("NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001", "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json", "artifacts/fl10/NHM_FL10_001.lock.json", "predecessor_lock_sha256",
+         "predecessor_commit", FL10_COMMIT, "frontend_files", ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "hardware_work_performed",
+                                                                "historical_locks_edited", "automatically_pushed", "frozen_scientific_evidence_edited")),
 )
 
 

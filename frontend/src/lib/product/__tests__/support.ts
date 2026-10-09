@@ -155,6 +155,7 @@ export function fakeBackend(system: SystemInfoV2 = systemInfo({ federation_runti
 		fl10Status: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_EVIDENCE')),
 		fl10JobBundle: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_EVIDENCE')),
 		fl10ExportFile: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_EVIDENCE')),
+		studioOverview: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
 		studioCapabilities: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
 		studioRuns: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
 		studioRun: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),

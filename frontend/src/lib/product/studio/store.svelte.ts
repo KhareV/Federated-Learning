@@ -4,7 +4,7 @@
 
 import { ProductApiError, type ProductClient } from '../api';
 import { getProductStore } from '../state.svelte';
-import type { EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioTables } from './types';
+import type { StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioTables } from './types';
 import { statusFor } from './metrics';
 
 export const ANALYSIS_TABS = ['overview', 'performance', 'training', 'clients', 'matrices', 'comparison', 'figures'] as const;
@@ -21,6 +21,7 @@ export class StudioStore {
 	figures = $state.raw<StudioFigures | null>(null);
 	tables = $state.raw<StudioTables | null>(null);
 	exports = $state<StudioExports | null>(null);
+	overview = $state.raw<StudioOverview | null>(null);
 	roundEval = $state.raw<Record<number, EvalRoundDetail>>({});
 	roundDetail = $state.raw<Record<number, RoundDetail>>({});
 	error = $state<string | null>(null);
@@ -41,6 +42,7 @@ export class StudioStore {
 	private timer: ReturnType<typeof setTimeout> | null = null;
 	private figuresAt = 0;
 	private figuresKey = '';
+	private overviewKey = '';
 
 	constructor(private readonly getApi: () => ProductClient) {}
 
@@ -117,7 +119,7 @@ export class StudioStore {
 		this.seq += 1;
 		this.stopPolling();
 		this.runId = runId;
-		this.run = null; this.summary = null; this.figures = null; this.tables = null; this.exports = null;
+		this.run = null; this.summary = null; this.figures = null; this.tables = null; this.exports = null; this.overview = null; this.overviewKey = '';
 		this.roundEval = {}; this.roundDetail = {};
 		this.error = null; this.followLive = true; this.manualRound = null; this.selectedClientId = null;
 		this.executingRound = 0; this.latestCommittedRound = 0; this.figuresKey = ''; this.figuresAt = 0;
@@ -204,6 +206,23 @@ export class StudioStore {
 			this.figures = figures;
 		} catch (cause) {
 			if (token === this.seq) { this.error = describe(cause); this.figuresKey = ''; }
+		}
+	}
+
+	/** Run facts / limits / evidence boundary: refetched only when the run's status or committed round count changes. */
+	async ensureOverview(): Promise<void> {
+		const id = this.runId;
+		if (!id || this.run?.evaluation.available === false) return;
+		const key = `${id}|${this.run?.status}|${this.latestCommittedRound}|${this.run?.phase}`;
+		if (key === this.overviewKey && this.overview) return;
+		this.overviewKey = key;
+		const token = this.seq;
+		try {
+			const overview = await this.api.studioOverview(id);
+			if (token !== this.seq) return;
+			this.overview = overview;
+		} catch (cause) {
+			if (token === this.seq) { this.error = describe(cause); this.overviewKey = ''; }
 		}
 	}
 

@@ -52,6 +52,11 @@ def _static() -> dict[str, Any]:
         historical = _json(ROOT / HISTORICAL)
         keys = ("AUPRC", "AUROC", "F1", "accuracy", "precision", "recall", "specificity", "balanced_accuracy", "BCE", "TP", "FP", "TN", "FN", "windows")
         _STATIC["protocol"] = protocol
+        from final_showcase import research
+
+        sci = research.bundle()
+        _STATIC["bridge"] = {"comparability_rows": sci["comparability"]["rows"], "verdict": sci["comparability"]["verdict"], "limitations": sci["limitations"], "route": "/app/observatory/outcomes",
+                             "note": "Scientific real-ECG FL results (lane B) and historical centralized references (lane H) are unchanged and are NOT comparable to the synthetic engineering metrics of a Studio run."}
         _STATIC["historical"] = {"label": "PREVIOUSLY EXPOSED SYNTHETIC EVALUATION", "caveat": "8-participant holdout already examined by NHM_FINAL_SHOWCASE_001; continuity only, never used for decisions", "source": str(HISTORICAL),
                                  "sha256": hashlib.sha256((ROOT / HISTORICAL).read_bytes()).hexdigest(), "states": {k: {m: v["pooled"][m] for m in keys} for k, v in historical["results"].items()}}
     return _STATIC
@@ -89,11 +94,12 @@ def build_live_bundle(*, run_id: str, run_length: int, run_dir: Path, observer: 
         "schema_version": SCHEMA, "source_label": source_label, "run_id": run_id, "run_length": run_length, "planned_rounds": run_length, "engine": engine, "mode": mode, "replay_of": replay_of,
         "synthetic_label": protocol["boundary_label"], "live_label": protocol["live_label"] if mode == "B" else None,
         "protocol": {"id": protocol["protocol_id"], "evaluation_protocol_id": EVAL_PROTOCOL_ID, "sha256": info["protocol_sha256"], "holdout_manifest_sha256": info["manifest_sha256"], "uncertainty": protocol["uncertainty"], "threshold": protocol["decision_threshold"],
-                     "metric_definitions": protocol["metrics"], "probability_histogram": protocol["metrics"]["probability_histogram"]},
+                     "metric_definitions": protocol["metrics"], "probability_histogram": protocol["metrics"]["probability_histogram"],
+                     "interpretation_boundaries": protocol["interpretation_boundaries"], "research_question": protocol["research_question"], "primary_comparison": protocol["primary_comparison"]},
         "run": run, "state_progression": report.get("state_progression", {}), "rounds": report.get("rounds", []), "client_rounds": report.get("client_rounds", []), "batches": report.get("batches", []), "updates": report.get("updates", []),
         "training_cohort": cohort, "monitoring_link": _json(link) if link.exists() else None,
         "evaluation": {"states": states, "status": statuses, "failures": failures, "state_digests": digests, "windows": info["windows"], "holdout_participants": info["entries"], "separation": info["separation"], "separation_source": info["separation_source"],
                        "threshold": 0.5, "calibration": "NONE", "round_selection": "NONE - no round, threshold or candidate is selected from diagnostic evaluation", "paired": paired, "comparator": f"R{a:02d}", "endpoint": f"R{e:02d}",
                        "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "cohort_id": fl10_holdout.COHORT_ID, "protocol_sha256": info["protocol_sha256"], "holdout_manifest_sha256": info["manifest_sha256"],
                        "method_freeze_commit": "f91a96a6c5a38432e4fc84f7e760c21874ce2d40"},
-        "historical_exposed": static["historical"], "revision": observer.revision(eval_id)}
+        "historical_exposed": static["historical"], "scientific_bridge": static["bridge"], "revision": observer.revision(eval_id)}

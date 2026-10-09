@@ -106,6 +106,11 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         user = await identity(request)
         return await asyncio.to_thread(service.describe, user, run_id)
 
+    @app.get(STUDIO + "/runs/{run_id}/overview")
+    async def overview(request: Request, run_id: str) -> dict[str, Any]:
+        user = await identity(request)
+        return await asyncio.to_thread(service.overview, user, run_id)
+
     @app.get(STUDIO + "/runs/{run_id}/evaluation")
     async def evaluation(request: Request, run_id: str) -> dict[str, Any]:
         user = await identity(request)

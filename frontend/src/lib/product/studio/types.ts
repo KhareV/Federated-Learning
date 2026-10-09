@@ -126,4 +126,17 @@ export interface RoundDetail {
 	state: Record<string, unknown> | null;
 }
 
+export interface BridgeRow { dataset: string; [key: string]: unknown }
+export interface StudioOverview {
+	run_id: string; run_length: RunLength; engine: string; origin: RunOrigin; source_label: string; mode: string; source_mode: SourceMode; synthetic_label: string; live_label: string | null; status: string;
+	run: Record<string, unknown>;
+	protocol: { id?: string; evaluation_protocol_id?: string; sha256?: string; holdout_manifest_sha256?: string; interpretation_boundaries?: string[]; research_question?: string; primary_comparison?: unknown };
+	evaluation: { windows: number; threshold: number; calibration: string; round_selection: string; method_freeze_commit: string; separation: Record<string, unknown>; separation_source: string; cohort_use: string; cohort_use_detail: string; comparator: string; endpoint: string; holdout_participants: { holdout_id: string; participant_id: string; site_condition: string }[] };
+	rounds: { round: number; accepted_updates: number; rejected_updates: number; weighted_mean_training_loss: number | null; round_duration_seconds: number | null; global_state_sha256: string; base_state_sha256: string; candidate_status: string; aggregated_update_norm: number | null }[];
+	state_progression: Record<string, string>;
+	monitoring_link: { label: string; site00_source: string; monitoring_sessions_executed: number; buffer_reused_for_rounds: number } | null;
+	scientific_bridge: { comparability_rows: BridgeRow[]; verdict: string; limitations: string[]; route: string; note: string };
+	historical_exposed: string;
+}
+
 export interface StudioRunChoice { run_length: RunLength; source_mode: SourceMode }

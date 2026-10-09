@@ -255,6 +255,22 @@ class StudioService:
         bundle = self.bundle(user_id, run_id)
         return {"run_id": run_id, "revision": bundle.get("revision"), "tables": build_tables(bundle), "source_label": bundle["source_label"]}
 
+    def overview(self, user_id: str, run_id: str) -> dict[str, Any]:
+        """Run-level facts, interpretation limits and the scientific-evidence boundary of THIS run (what the retired FL10 overview page showed, for every run)."""
+        d = self.describe(user_id, run_id)
+        bundle = self.bundle(user_id, run_id)
+        run = bundle["run"]
+        return {"run_id": run_id, "run_length": bundle["run_length"], "engine": bundle["engine"], "origin": d["origin"], "source_label": bundle["source_label"], "mode": bundle["mode"], "source_mode": d["source_mode"],
+                "synthetic_label": bundle["synthetic_label"], "live_label": bundle["live_label"], "status": d["status"],
+                "run": {k: run.get(k) for k in ("status", "started_at", "finished_at", "total_seconds", "accepted_updates_total", "example_exposures_total", "unique_training_windows", "candidate", "git_commit", "settings", "federation_engine",
+                                                "prefix_equals_frozen_reference", "coordinator_identity", "rounds_committed", "failure")},
+                "protocol": {k: bundle["protocol"].get(k) for k in ("id", "evaluation_protocol_id", "sha256", "holdout_manifest_sha256", "interpretation_boundaries", "research_question", "primary_comparison")},
+                "evaluation": {k: bundle["evaluation"].get(k) for k in ("windows", "threshold", "calibration", "round_selection", "method_freeze_commit", "separation", "separation_source", "cohort_use", "cohort_use_detail", "comparator", "endpoint")}
+                | {"holdout_participants": [{"holdout_id": h["holdout_id"], "participant_id": h["participant_id"], "site_condition": h["site_condition"], "counts": h["counts"]} for h in bundle["evaluation"]["holdout_participants"]]},
+                "rounds": [{k: r.get(k) for k in ("round", "accepted_updates", "rejected_updates", "weighted_mean_training_loss", "round_duration_seconds", "global_state_sha256", "base_state_sha256", "candidate_status", "aggregated_update_norm")} for r in bundle["rounds"]],
+                "state_progression": {k: v.get("sha256") for k, v in bundle["state_progression"].items()}, "monitoring_link": ({k: bundle["monitoring_link"].get(k) for k in ("label", "site00_source", "monitoring_sessions_executed", "buffer_reused_for_rounds")} if bundle.get("monitoring_link") else None),
+                "scientific_bridge": bundle["scientific_bridge"], "historical_exposed": bundle["historical_exposed"]["label"]}
+
     def round_detail(self, user_id: str, run_id: str, round_id: int) -> dict[str, Any]:
         bundle = self.bundle(user_id, run_id)
         row = next((r for r in bundle["rounds"] if r["round"] == round_id), None)

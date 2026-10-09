@@ -26,6 +26,19 @@
 			note = `export failed: ${cause instanceof Error ? cause.message : String(cause)}`;
 		} finally { busy = false; }
 	}
+	async function manifestDownload() {
+		const ov = studio.overview, run = studio.run;
+		if (!ov || !run || !ex) return;
+		note = null;
+		const text = JSON.stringify({ run_id: run.run_id, run_length: run.run_length, engine: run.engine, source_label: ov.source_label, protocol_sha256: ov.protocol.sha256, holdout_manifest_sha256: ov.protocol.holdout_manifest_sha256,
+			state_digests: ov.state_progression, candidate: run.candidate, method_freeze_commit: ov.evaluation.method_freeze_commit, cohort_use: ov.evaluation.cohort_use, export_files: { figures: ex.figures, tables: ex.tables, data: ex.data } }, null, 1) + '\n';
+		const hash = hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
+		const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+		const a = document.createElement('a'); a.href = url; a.download = `studio-verification-manifest-${run.run_id}.json`; a.click();
+		setTimeout(() => URL.revokeObjectURL(url), 1000);
+		note = `verification manifest saved · sha256 ${hash.slice(0, 16)}…`;
+	}
+	const title = (id: string) => studio.figures?.specs[id]?.title ?? studio.tables?.tables[id]?.title ?? '';
 	const figures = $derived(ex?.figures ? Object.entries(ex.figures) : []);
 	const tables = $derived(ex?.tables ? Object.entries(ex.tables) : []);
 	const data = $derived(ex?.data ? Object.entries(ex.data) : []);
@@ -36,16 +49,18 @@
 	{:else}
 		<p class="ok" data-testid="export-status">EXPORT READY · {ex.source_label ?? ''} · run {ex.run_id}</p>
 		<p class="dim">Every file below was generated from this run's verified bundle ({figures.length} figures, {tables.length} tables, {data.length} evidence files). Cohort: {ex.cohort_use}.</p>
+		<button type="button" onclick={() => void manifestDownload()} data-testid="export-manifest" disabled={!studio.overview}>Download verification manifest (JSON)</button>
 		<h4>Figures</h4>
-		<ul>{#each figures as [id, files] (id)}<li><b>{id.replace('FL10_', '')}</b>{#each FIG_FORMATS as [fmt, label] (fmt)}{#if files[fmt]}<button type="button" disabled={busy} onclick={() => void get(id, fmt, files[fmt].sha256)} data-testid={`export-${id}-${fmt}`}>{label}</button>{/if}{/each}</li>{/each}</ul>
+		<ul>{#each figures as [id, files] (id)}<li><b>{id.replace('FL10_', '')}</b><span class="t">{title(id)}</span>{#each FIG_FORMATS as [fmt, label] (fmt)}{#if files[fmt]}<button type="button" disabled={busy} onclick={() => void get(id, fmt, files[fmt].sha256)} data-testid={`export-${id}-${fmt}`}>{label}</button>{/if}{/each}</li>{/each}</ul>
 		<h4>Tables</h4>
-		<ul>{#each tables as [id, files] (id)}<li><b>{id.replace('FL10_', '')}</b>{#each TAB_FORMATS as [fmt, label] (fmt)}{#if files[fmt]}<button type="button" disabled={busy} onclick={() => void get(id, fmt, files[fmt].sha256)} data-testid={`export-${id}-${fmt}`}>{label}</button>{/if}{/each}</li>{/each}</ul>
+		<ul>{#each tables as [id, files] (id)}<li><b>{id.replace('FL10_', '')}</b><span class="t">{title(id)}</span>{#each TAB_FORMATS as [fmt, label] (fmt)}{#if files[fmt]}<button type="button" disabled={busy} onclick={() => void get(id, fmt, files[fmt].sha256)} data-testid={`export-${id}-${fmt}`}>{label}</button>{/if}{/each}</li>{/each}</ul>
 		<h4>Evidence data (full precision)</h4>
 		<ul>{#each data as [id, files] (id)}<li><b>{id}</b>{#each Object.keys(files) as fmt (fmt)}<button type="button" disabled={busy} onclick={() => void get(id, fmt, files[fmt].sha256)} data-testid={`export-${id}-${fmt}`}>{fmt.toUpperCase()}</button>{/each}</li>{/each}</ul>
 	{/if}
 	{#if note}<p class="dim" role="status" data-testid="export-note">{note}</p>{/if}
 </div>
 <style>
-	.ep { display: grid; gap: 8px; min-width: 0; } h4 { margin: 8px 0 2px; font: 11px 'JetBrains Mono', monospace; letter-spacing: .1em; color: #a78bfa; } ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; } li { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12px; color: #cbd5e1; } li b { min-width: 6.5em; font: 11px 'JetBrains Mono', monospace; color: #e2e8f0; }
-	button { background: #0a0f1f; color: #e2e8f0; border: 1px solid rgba(148,163,184,.35); padding: 4px 9px; min-height: 28px; font: 11px 'JetBrains Mono', monospace; cursor: pointer; } button:disabled { opacity: .5; cursor: wait; } button:focus-visible { outline: 2px solid #2bb8b0; } .dim { margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.5; } .prep { margin: 0; border: 1px solid rgba(251,191,36,.5); padding: 8px 12px; color: #fde68a; font: 12px 'JetBrains Mono', monospace; } .ok { margin: 0; color: #86efac; font: 12px 'JetBrains Mono', monospace; }
+	.ep { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; min-width: 0; } h4 { margin: 8px 0 2px; font: 11px 'JetBrains Mono', monospace; letter-spacing: .1em; color: #a78bfa; } ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; } li { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12px; color: #cbd5e1; } li b { min-width: 6.5em; font: 11px 'JetBrains Mono', monospace; color: #e2e8f0; }
+	button { background: #0a0f1f; color: #e2e8f0; border: 1px solid rgba(148,163,184,.35); padding: 4px 9px; min-height: 28px; font: 11px 'JetBrains Mono', monospace; cursor: pointer; } button:disabled { opacity: .5; cursor: wait; } button:focus-visible { outline: 2px solid #2bb8b0; } .t { flex: 1 1 14em; color: #94a3b8; } .dim { margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.5; } .prep { margin: 0; border: 1px solid rgba(251,191,36,.5); padding: 8px 12px; color: #fde68a; font: 12px 'JetBrains Mono', monospace; } .ok { margin: 0; color: #86efac; font: 12px 'JetBrains Mono', monospace; }
+	p, li, h4, button { overflow-wrap: anywhere; }
 </style>
