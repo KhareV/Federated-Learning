@@ -69,21 +69,21 @@ Each run exports 20×(SVG, PNG 300 dpi, CSV, JSON provenance), 12×(CSV, JSON, M
 `dependency_audit_before.md`, `dependency_audit_after.md`. Retained (KEEP): all federation pages and every Observatory research page; **redirected:** `/app/observatory/fl10` (→ Studio, `?run=` preserved); **removed:** none; **protected:** `/app/observatory/outcomes`, `/app/observatory/federation/[client_id]`; storyboard retained (unique content) and cross-linked. Links/tests migrated as listed in the audit.
 
 ## 26. Authentication
-DemoAuth browser journey (173 checks). Two-identity isolation tested at API and WebSocket level (another user receives 403 / close 4403 on every run-scoped route; recorded evidence is global read-only). **Connected Clerk two-user E2E: NOT EXECUTED** (two Clerk TEST user credentials are not available); DemoAuth never shows an authenticated owner.
+DemoAuth browser journey (243 checks, one explicit SKIP for a fixture run that existed only in an earlier workspace). Two-identity isolation tested at API and WebSocket level (another user receives 403 / close 4403 on every run-scoped route; recorded evidence is global read-only). **Connected Clerk two-user E2E: NOT EXECUTED** (two Clerk TEST user credentials are not available); DemoAuth never shows an authenticated owner.
 
 ## 27. Regression output
 Full gates (`python -m scripts.run_studio_local_gates`, evidence `reports/unified_live_fl/local_test_report.json`):
-- Backend: **3348 passed, 0 failed, 1 skipped** (10 chunks); `tests/test_studio_successor.py` validates the final lock separately.
-- Frontend: vitest **326 passed, 0 failed, 3 skipped**; production build + stamp OK; svelte-check **0 errors**, 121 warnings (baseline 123).
-- Launcher: `run_nhm --demo --preflight-only` passes. Real-browser journey: **173/173**.
-- **Pre-existing monitoring race flake (reported separately):** `tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers` is intermittent on the pristine baseline `06bd9a0` as well (measured 8/12 isolated failures there, 4/12 at the Studio tip). It failed in two earlier full runs and passed in the final one; the gate runner retries only that named test in isolation and records every attempt (`flaky_retries`); no other failure is tolerated.
+- Backend: **3359 passed, 0 failed, 1 skipped** (10 chunks); `tests/test_studio_successor.py` validates the final lock separately.
+- Frontend: vitest **337 passed, 0 failed, 3 skipped**; production build + stamp OK; svelte-check **0 errors**, 121 warnings (baseline 123).
+- Launcher: `run_nhm --demo --preflight-only` passes. Real-browser journey: **243/243**.
+- **Pre-existing monitoring race flake (reported separately):** `tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers` is intermittent on the pristine baseline `06bd9a0` as well (measured 8/12 isolated failures there, 4/12 at the Studio tip). It failed in several earlier full runs and in the first attempt of the final one (it passed on the recorded isolated retry); the gate runner retries only that named test in isolation and records every attempt (`flaky_retries`); no other failure is tolerated.
 - Earlier-run failures that were caused by this work (route count 66→67, amendment/lock accounting, reconciliation link) were fixed through the governed additive mechanism, not by weakening tests.
 
 ## 28. Historical preservation
 Every older verifier passes against the current tree through the additive chain (`CAPSTONE_UI_V1…V1_9`, `NHM_RESEARCH_OBSERVATORY_V1`, `NHM_OBS_DIAG_001`, `NHM_FINAL_SHOWCASE_001`, `NHM_FL10_001`, and the CAP-001…010 amended-lock audits); no historical lock or amendment was modified (only new compatibility amendments added); frozen scientific evidence, the recorded FL10 runs and the 3-round backend are byte-identical (`verify_unified_studio_001`). Pre-existing defects found and corrected additively are listed in the lock (`pre_existing_defects_corrected`) and `governance_repair.md`.
 
 ## 29. Successor lock
-`artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json` — additive successor of `NHM_FL10_001` (status PASS, non-provisional); binds 489 files incl. 307 frontend files; verified by `python -m scripts.verify_unified_studio_001 --lock` and `tests/test_studio_successor.py`. No historical lock was edited; nothing pushed.
+`artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json` — additive successor of `NHM_FL10_001` (status PASS, non-provisional); binds 503 files incl. 311 frontend files; verified by `python -m scripts.verify_unified_studio_001 --lock` and `tests/test_studio_successor.py`. No historical lock was edited; nothing pushed.
 
 ## 31. Addendum — V2-initialised federated fine-tuning and the Generalisation tab
 Delivered after first acceptance, inside the same Studio (`generalisation_protocol.md` has the design, decisions, measured results and limits):
