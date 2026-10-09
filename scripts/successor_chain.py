@@ -61,7 +61,12 @@ def _git_bytes(git_root: Path, commit: str, path: str) -> bytes | None:
 
 
 def _git_root(root: Path) -> Path:
-    return Path(os.environ.get("NHM_GOVERNANCE_GIT_ROOT", str(root)))
+    """Where immutable predecessor commits are looked up: an explicit override, the tree itself when it is a repository, else the repository this module lives in
+    (shadow trees built by older tests copy locks and frontend files but have no .git)."""
+    override = os.environ.get("NHM_GOVERNANCE_GIT_ROOT")
+    if override:
+        return Path(override)
+    return root if (root / ".git").exists() else ROOT
 
 
 def _broken(link: Link, why: str) -> RuntimeError:
@@ -111,3 +116,17 @@ def tip_frontend_map(root: Path, links: tuple[Link, ...] = LINKS) -> dict[str, s
         tip = dict(validate_link(link, root, links)[link.frontend_map_key])
         previous_path = link.path
     return tip
+
+
+def accounted_changes(root: Path = ROOT, links: tuple[Link, ...] = LINKS) -> set[str]:
+    """Frontend files whose bytes changed (or that were added) by the registered, validly chained additive successors after NHM_FINAL_SHOWCASE_001.
+    Used by the historical accounting tests: drift is legal only when completely accounted for here. An invalid link raises; there is no fallback."""
+    previous = dict(json.loads((root / FINAL_SHOWCASE).read_text())["bound_artifacts"])
+    changed: set[str] = set()
+    for link in links:
+        if not (root / link.path).exists():
+            break
+        current = dict(validate_link(link, root, links)[link.frontend_map_key])
+        changed |= {p for p, d in current.items() if previous.get(p) != d}
+        previous = current
+    return changed

@@ -45,7 +45,7 @@ def verify_evidence() -> dict[str, Any]:
     historical = []
     for line in git("diff", "--name-status", FL10_COMMIT, "--", "artifacts").splitlines():
         code, _, path = line.partition("\t")
-        additive_amendment = code == "A" and re.fullmatch(r"artifacts/capstone/CAPSTONE_[A-Z_]+_PROTOCOL_V1\.amendment_[0-9_]+\.json", path) is not None
+        additive_amendment = code == "A" and re.fullmatch(r"artifacts/(?:capstone|final_eval_repair|ufl_lite)/[A-Z]+(?:_[A-Z0-9]+)*_PROTOCOL_V1\.amendment_[0-9_]+\.json", path) is not None
         if path and not path.startswith(ALLOWED_ARTIFACT_PREFIX) and not additive_amendment:      # only NEW compatibility amendments (FL10's mechanism) may appear; no historical file is modified or deleted
             historical.append(line)
     if historical:

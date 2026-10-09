@@ -127,7 +127,8 @@ def test_new_amendments_are_pure_successor_compatibility_with_continuous_digests
     from scripts.observatory_amend import authorised
 
     new = _new_amendments()
-    assert len(new) == 8, new  # six accepted predecessors + two pure FL10 successor-compatibility amendments
+    studio = [path for path in new if json.loads(path.read_text()).get("amendment_id", "").startswith("NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001")]
+    assert len(new) - len(studio) == 8, new  # six accepted predecessors + two pure FL10 successor-compatibility amendments; the Studio's own pure compatibility amendments are checked by the same loop below
     for path in new:
         doc = json.loads(path.read_text())
         assert doc["scope"] == "SUCCESSOR_COMPATIBILITY_ONLY" and doc["result_evidence_committed_with_amendment"] is False and doc["made_after_method_freeze"] is True

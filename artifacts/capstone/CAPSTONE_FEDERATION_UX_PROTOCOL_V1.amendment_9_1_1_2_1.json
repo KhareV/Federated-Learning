@@ -1,0 +1,25 @@
+{
+ "amendment_id": "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001_CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_9_1_1_2_1",
+ "change": "Re-pin only the listed frontend files, accounting tests and route-policy classification. Predecessor locks, CAPSTONE_UI_V1_9, NHM_FL10_001 and frozen scientific evidence are unchanged.",
+ "defect": "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001 extends the product frontend (Studio client methods, run-scoped stores and components) and the federation store, and needs successor awareness in the frontend-accounting tests and the legacy route classification.",
+ "files": {
+  "frontend/src/lib/product/api.ts": {
+   "new_sha256": "afef0a6cee17291ae46ad6df1f2bcddd2d286e60cc119d305d5c890e95a6a43b",
+   "old_sha256": "d3fdba4cae774f9f0ef2ecefadc8e666e386a0521ed7b3366ac4b48fe819bddf"
+  },
+  "frontend/src/lib/product/federation/state.svelte.ts": {
+   "new_sha256": "6233dcb7d6c8495c1768d0f64abd2a324291a2d4754f63047607931a934b4d97",
+   "old_sha256": "1e813c1c66dc36a4b31c3ea94297ae69fac8e79232961dc0337e6fc9101f6756"
+  },
+  "tests/test_capstone_federation_ui.py": {
+   "new_sha256": "458fc75d075ba14e7e28c5af9869154e20597bde0cd0f67258dbb5255edaac3b",
+   "old_sha256": "1b649eafa4bdaf202a27d5b3086dd31fac44840601e9f77a9d35a974646fb3cb"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1 (historical files governed for NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001)",
+ "previous_amendment": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_9_1_1_2",
+ "reason": "UNIFIED_LIVE_FEDERATION_STUDIO_ADDITIVE_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

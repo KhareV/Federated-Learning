@@ -1,0 +1,25 @@
+{
+ "amendment_id": "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001_UFL_LITE_002_PROTOCOL_V1_AMENDMENT_5_1_1_1_1_1",
+ "change": "Re-pin only the listed frontend files, accounting tests and route-policy classification. Predecessor locks, CAPSTONE_UI_V1_9, NHM_FL10_001 and frozen scientific evidence are unchanged.",
+ "defect": "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001 extends the product frontend (Studio client methods, run-scoped stores and components) and the federation store, and needs successor awareness in the frontend-accounting tests and the legacy route classification.",
+ "files": {
+  "frontend/src/routes/app/federation/live/+page.svelte": {
+   "new_sha256": "8d0e8c5f5a236929ba8ec421672f95264e72a3ec871cd791b05abcd953832278",
+   "old_sha256": "8d35db68e95d010c67c52426eb5c58d6e66de9ba2136325c81509abc8d6a841e"
+  },
+  "frontend/src/routes/app/federation/rounds/+page.svelte": {
+   "new_sha256": "ba4371be925a626b2dbd7725840f06fc8d99d4b3512f707b91bba5afa8a4cc39",
+   "old_sha256": "8e3245a432dad7cb148b3c46c879bcd96ed1f9ba5d4d72643a4a614ba9bedd30"
+  },
+  "tests/test_ufl_lite_presentation.py": {
+   "new_sha256": "00fa255bd5985660a51359187ef2763abb5afa3d036db44213e5db3f18ae0e6c",
+   "old_sha256": "070830adbf28c6e86aa4c165f5bcbde14f07ecd3e1bc8e5a719e2e5dc1a34667"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "UFL_LITE_002_PROTOCOL_V1 (historical files governed for NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001)",
+ "previous_amendment": "UFL_LITE_002_PROTOCOL_V1_AMENDMENT_5_1_1_1_1",
+ "reason": "UNIFIED_LIVE_FEDERATION_STUDIO_ADDITIVE_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

@@ -148,6 +148,11 @@
    "class": "CURRENT_PRODUCT"
   },
   {
+   "pattern": "/app/observatory/fl10",
+   "file": "frontend/src/routes/app/observatory/fl10/+page.svelte",
+   "class": "CURRENT_RESEARCH"
+  },
+  {
    "pattern": "/app/observatory/model",
    "file": "frontend/src/routes/app/observatory/model/+page.svelte",
    "class": "CURRENT_RESEARCH"

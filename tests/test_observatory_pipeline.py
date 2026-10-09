@@ -523,6 +523,20 @@ def test_api_extension_adds_only_the_documented_observatory_routes(tmp_path: Pat
         ("/product/v1/observatory/fl10/runs/{job_id}", ("GET",)),
         ("/product/v1/observatory/fl10/runs/{job_id}/bundle", ("GET",)),
         ("/product/v1/observatory/fl10/runs/{job_id}/exports/{item_id}/{fmt}", ("GET",)),
+        # NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001 adds exactly these owner-scoped routes (read-only except the 10-round start); the frozen 3-round /federation routes are unchanged.
+        ("/product/v1/studio/capabilities", ("GET",)),
+        ("/product/v1/studio/runs", ("GET",)),
+        ("/product/v1/studio/runs", ("POST",)),
+        ("/product/v1/studio/runs/{run_id}", ("GET",)),
+        ("/product/v1/studio/runs/{run_id}/evaluation", ("GET",)),
+        ("/product/v1/studio/runs/{run_id}/evaluation/{round_id}", ("GET",)),
+        ("/product/v1/studio/runs/{run_id}/exports", ("GET",)),
+        ("/product/v1/studio/runs/{run_id}/exports/{item_id}/{fmt}", ("GET",)),
+        ("/product/v1/studio/runs/{run_id}/figures", ("GET",)),
+        ("/product/v1/studio/runs/{run_id}/live", ()),
+        ("/product/v1/studio/runs/{run_id}/overview", ("GET",)),
+        ("/product/v1/studio/runs/{run_id}/rounds/{round_id}", ("GET",)),
+        ("/product/v1/studio/runs/{run_id}/tables", ("GET",)),
     }
 
 

@@ -88,6 +88,9 @@ def test_product_api_frontend_and_backend_are_byte_identical_to_entry() -> None:
 
             assert verify_final()["status"] == "FROZEN_DELIVERED_CAPABILITIES_ONLY"
             accounted |= set(json.loads(final.read_text())["changed_from_predecessor"])
+        from scripts.successor_chain import accounted_changes     # NHM_FL10_001 and NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001: exact-identity additive successors (raises on a broken link)
+
+        accounted |= accounted_changes(ROOT)
         drift = [p for p in drift if not (p.startswith("frontend/") and p in accounted)]
     assert drift == []
 

@@ -8,8 +8,8 @@ export interface MetricGroup { id: string; title: string; items: MetricDef[] }
 
 export const HEADLINE: MetricDef[] = [
 	{ key: 'AUPRC', label: 'AUPRC', hint: 'average precision (non-interpolated)' }, { key: 'AUROC', label: 'AUROC', hint: 'area under the ROC curve' },
-	{ key: 'F1', label: 'F1', hint: 'at the fixed 0.5 rule' }, { key: 'specificity', label: 'Specificity', hint: 'true-negative rate at 0.5' },
-	{ key: 'recall', label: 'Recall', hint: 'sensitivity at 0.5' }, { key: 'accuracy', label: 'Accuracy', hint: 'at 0.5' },
+	{ key: 'F1', label: 'F1', hint: 'at the fixed decision rule' }, { key: 'specificity', label: 'Specificity', hint: 'true-negative rate at the fixed rule' },
+	{ key: 'recall', label: 'Recall', hint: 'sensitivity at the fixed rule' }, { key: 'accuracy', label: 'Accuracy', hint: 'at the fixed rule' },
 	{ key: 'BCE', label: 'BCE', hint: 'unweighted binary cross-entropy (lower is better)', format: 'loss' }, { key: 'Brier', label: 'Brier', hint: 'mean squared probability error (lower is better)', format: 'loss' }
 ];
 

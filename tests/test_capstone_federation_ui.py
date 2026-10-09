@@ -38,6 +38,9 @@ def _shadow(tmp_path: Path) -> Path:
         paths.append("artifacts/observatory/NHM_OBS_DIAG_001.lock.json")
     if (ROOT / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json").exists():
         paths.append("artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json")
+    for rel in ("artifacts/fl10/NHM_FL10_001.lock.json", "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json"):   # the additive successors after NHM_FINAL_SHOWCASE_001
+        if (ROOT / rel).exists():
+            paths.append(rel)
     for rel in paths:
         (shadow / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / rel, shadow / rel)

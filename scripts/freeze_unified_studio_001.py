@@ -26,14 +26,15 @@ BOUND_EXACT = {
     "scripts/successor_chain.py", "scripts/studio_successor_compat.py", "scripts/fl10_successor_compat.py", "scripts/capstone_ui_v1_8_successor.py", "scripts/reconcile_ui_lock_chain.py",
     "scripts/verify_fl10_001.py", "scripts/verify_unified_studio_001.py", "scripts/freeze_unified_studio_001.py", "scripts/run_studio_local_gates.py",
     "scripts/studio_cdp.mjs", "scripts/studio_baseline_capture.mjs", "scripts/studio_browser_verify.mjs", "scripts/run_studio_browser.py", "scripts/studio_collect_evidence.py",
-    "scripts/studio_amendments.py", "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_9_6_1_1_3.json", "artifacts/capstone/CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_9_1_1_3.json",
+    "scripts/studio_amend.py", "configs/final_eval_repair/legacy_route_policy_v1.json",
+    "tests/test_capstone_federation_ui.py", "tests/test_capstone_full_demo.py", "tests/test_final_showcase_audit.py", "tests/test_observatory_pipeline.py", "tests/test_ufl_lite_presentation.py",
     "tests/test_studio_specs.py", "tests/test_studio_isolation.py", "tests/test_studio_observer.py", "tests/test_studio_api.py", "tests/test_studio_successor.py", "tests/test_successor_chain_governance.py",
 }
 
 
 def tracked_files() -> list[str]:
     paths = subprocess.run(["git", "ls-files", "--cached", "--others", "--exclude-standard"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.splitlines()
-    return sorted(p for p in paths if p != str(LOCK_PATH.relative_to(ROOT)) and (p in BOUND_EXACT or p.startswith(BOUND_PREFIXES)) and (ROOT / p).is_file())
+    return sorted(p for p in paths if p != str(LOCK_PATH.relative_to(ROOT)) and (p in BOUND_EXACT or p.startswith(BOUND_PREFIXES) or ("amendment_" in p and p.endswith(".json") and p.startswith("artifacts/"))) and (ROOT / p).is_file())
 
 
 def freeze(provisional: bool = False) -> dict:
@@ -51,7 +52,7 @@ def freeze(provisional: bool = False) -> dict:
             raise ValueError("STUDIO_GATE_NOT_PASSED")
     predecessor = json.loads((ROOT / PREDECESSOR).read_text())
     repins = sorted(path for path, old in predecessor["bound_files"].items() if (ROOT / path).is_file() and sha(ROOT / path) != old)
-    files = tracked_files()
+    files = sorted(set(tracked_files()) | set(repins))      # every file the predecessor pinned and that changed is re-pinned by this lock
     if len(files) < 100:
         raise ValueError("STUDIO_BOUND_FILE_INVENTORY_TOO_SMALL")
     lock = {

@@ -53,7 +53,7 @@ def main() -> int:
     report: dict = {"started": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "environment": {"python": platform.python_version(), "platform": platform.platform()}, "steps": {}}
     code, out, sec = run(["npm", "run", "build"], ROOT / "frontend")
     report["steps"]["frontend_build"] = {"returncode": code, "seconds": round(sec, 1), "tail": out.strip().splitlines()[-1][:160] if out.strip() else ""}
-    stamp_code, stamp_out, _ = run([sys.executable, "-c", "from scripts.run_capstone_faculty_demo import build_frontend; print(build_frontend())"])   # writes the build stamp the launcher preflight checks
+    stamp_code, _stamp_out, _ = run([sys.executable, "-c", "from scripts.run_capstone_faculty_demo import build_frontend; print(build_frontend())"])   # writes the build stamp the launcher preflight checks
     report["steps"]["frontend_build"]["stamp_returncode"] = stamp_code
     py = pytest_chunks()
     report["steps"]["backend_pytest"] = py

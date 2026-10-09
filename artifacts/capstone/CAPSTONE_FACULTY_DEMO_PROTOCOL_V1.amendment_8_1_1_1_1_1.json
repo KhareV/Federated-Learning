@@ -1,0 +1,17 @@
+{
+ "amendment_id": "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001_CAPSTONE_FACULTY_DEMO_PROTOCOL_V1_AMENDMENT_8_1_1_1_1_1",
+ "change": "Re-pin only the listed frontend files, accounting tests and route-policy classification. Predecessor locks, CAPSTONE_UI_V1_9, NHM_FL10_001 and frozen scientific evidence are unchanged.",
+ "defect": "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001 extends the product frontend (Studio client methods, run-scoped stores and components) and the federation store, and needs successor awareness in the frontend-accounting tests and the legacy route classification.",
+ "files": {
+  "tests/test_capstone_full_demo.py": {
+   "new_sha256": "d68f5f0a13113b53c9b20a41cd94eb33e56d3bfb00a9085088f785986ce1afb5",
+   "old_sha256": "f38004f2810d7dbc6c98176bb7f0048a55c06728da818768d507d19d6b07fd0f"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1 (historical files governed for NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001)",
+ "previous_amendment": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1_AMENDMENT_8_1_1_1_1",
+ "reason": "UNIFIED_LIVE_FEDERATION_STUDIO_ADDITIVE_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

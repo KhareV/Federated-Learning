@@ -42,8 +42,12 @@ def test_completed_run_reproduces_baseline() -> None:
 
 
 def test_backend_api_db_fl_and_auth_are_byte_identical_to_the_entry() -> None:
-    assert git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", "api", "product", "capstone_persistence", "federated", "privacy", "simulation", "src", "checkpoints", "contracts", "frontend/package.json", "frontend/package-lock.json",
-               "frontend/clerk-sdk", "frontend/src/lib/product/auth.ts", "frontend/src/lib/product/federation/types.ts", "frontend/src/lib/product/federation/live-model.ts", "frontend/src/lib/product/federation/state.svelte.ts", ":(exclude)product/observatory", ":(exclude)api/product_app_observatory_v1.py", ":(exclude)api/observatory_*.py") == ""  # UI-ENH-001: the clients page is redesigned; its unbound-global-view audit remains in ufl_lite_002_lib.global_page_audit
+    from scripts.successor_chain import accounted_changes     # the additive successors (NHM_FL10_001, NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001) account for their own frontend delta; anything else still fails
+
+    drift = [p for p in git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", "api", "product", "capstone_persistence", "federated", "privacy", "simulation", "src", "checkpoints", "contracts", "frontend/package.json", "frontend/package-lock.json",
+             "frontend/clerk-sdk", "frontend/src/lib/product/auth.ts", "frontend/src/lib/product/federation/types.ts", "frontend/src/lib/product/federation/live-model.ts", "frontend/src/lib/product/federation/state.svelte.ts", ":(exclude)product/observatory", ":(exclude)api/product_app_observatory_v1.py", ":(exclude)api/observatory_*.py").split()
+             if p not in accounted_changes(ROOT)]
+    assert drift == []  # UI-ENH-001: the clients page is redesigned; its unbound-global-view audit remains in ufl_lite_002_lib.global_page_audit
     for group in ("reused_unchanged", "scientific", "auth"):
         assert lib.hash_drift(ROOT, BASELINE, group) == [], group
     assert lib.monitoring_isolation_audit(ROOT)["ok"] and lib.class_audit(ROOT)["ok"]
@@ -92,6 +96,9 @@ def test_ui_v1_4_chain_verifies_and_predecessor_locks_are_byte_identical() -> No
     final = ROOT / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
     if final.exists():
         accounted |= set(json.loads(final.read_text())["changed_from_predecessor"])
+    from scripts.successor_chain import accounted_changes     # NHM_FL10_001 / NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001 account for their own delta (exact-identity chain)
+
+    accounted |= accounted_changes(ROOT)
     assert changed == sorted(accounted), changed
 
 
@@ -126,6 +133,10 @@ def _with_v15(then=lambda s: None):
         if final.exists():
             (s / "artifacts/final_showcase").mkdir(parents=True, exist_ok=True)
             shutil.copyfile(final, s / "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json")
+        for rel in ("artifacts/fl10/NHM_FL10_001.lock.json", "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json"):      # the additive successors after the final showcase
+            if (ROOT / rel).exists():
+                (s / rel).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / rel, s / rel)
         then(s)
     return mutate
 

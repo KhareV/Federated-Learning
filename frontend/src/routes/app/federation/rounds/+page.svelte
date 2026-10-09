@@ -24,7 +24,7 @@
 {#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
 {#if fed.run && studioRun}
 	<Panel eyebrow="10-ROUND / RECORDED RUN" title="Round-by-round state lives in the Federation Studio" note="SAME EVIDENCE, RUN-SCOPED">
-		<p class="dim" data-testid="rounds-studio-note">Round state, lineage digests, per-round client contributions and evaluation of {fed.run.run_id} are shown, synchronized and exportable, in the <a href={`/app/federation/live?run=${encodeURIComponent(fed.run.run_id)}`}>Federation Studio</a>. This page lists the persisted rounds of 3-round product runs.</p>
+		<p class="dim" data-testid="rounds-studio-note">Round state, lineage digests, per-round client updates and evaluation of {fed.run.run_id} are shown, synchronized and exportable, in the <a href={`/app/federation/live?run=${encodeURIComponent(fed.run.run_id)}`}>Federation Studio</a>. This page lists the persisted rounds of 3-round product runs.</p>
 	</Panel>
 {:else if fed.run}
 	{#if ownerBound}<p class="dim" data-testid="rounds-owner-note">MY EDGE CLIENT: {ownerBound}. Presentation-bound to the authenticated run owner; training data remains synthetic engineering data.</p>{/if}
