@@ -7,8 +7,7 @@
 
 	let { children }: { children?: Snippet } = $props();
 	const path = $derived(page.url.pathname);
-	// The decorative cursor belongs to the landing/legacy surfaces only, never the product workspace.
-	const decorative = $derived(!path.startsWith('/app') && !path.startsWith('/sign-in'));
+	// The landing page's smooth cursor is the site-wide pointer: it is mounted on every page, including the product workspace and sign-in.
 	// /monitoring is the legacy research-runtime replay tool, NOT the product live monitor.
 	const researchTool = $derived(path === '/monitoring' || path.startsWith('/monitoring/'));
 
@@ -19,7 +18,7 @@
 	});
 </script>
 
-{#if decorative}<SmoothCursor />{/if}
+<SmoothCursor />
 {#if researchTool}
 	<div class="research-tool" role="note" data-testid="research-tool-banner">
 		<b>RESEARCH RUNTIME TOOL</b> - recorded-replay technical view of the frozen POST /v1/infer-window contract. It is not the product live monitor.
