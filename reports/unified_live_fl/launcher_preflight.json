@@ -1,0 +1,22 @@
+{
+ "checks": {
+  "demo_auth_acknowledgement": true,
+  "frontend_build": true,
+  "frontend_dependencies": true,
+  "phase_state": true,
+  "port_frontend": true,
+  "port_inference": true,
+  "port_product": true,
+  "prior_locks_and_amendments": true,
+  "product_api_import": true,
+  "python_version": true,
+  "required_imports": true,
+  "research_catalog": true,
+  "runtime_binding": true,
+  "ui_successor": true,
+  "workspace": true
+ },
+ "command": "python -m scripts.run_nhm --demo --preflight-only",
+ "passed": true,
+ "returncode": 0
+}
