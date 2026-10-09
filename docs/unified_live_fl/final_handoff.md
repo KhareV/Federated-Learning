@@ -74,7 +74,7 @@ DemoAuth browser journey (281 checks, one explicit SKIP for a fixture run that e
 ## 27. Regression output
 Full gates (`python -m scripts.run_studio_local_gates`, evidence `reports/unified_live_fl/local_test_report.json`):
 - Backend: **3364 passed, 0 failed, 1 skipped** (10 chunks); `tests/test_studio_successor.py` validates the final lock separately.
-- Frontend: vitest **343 passed, 0 failed, 3 skipped**; production build + stamp OK; svelte-check **0 errors**, 121 warnings (baseline 123).
+- Frontend: vitest **349 passed, 0 failed, 3 skipped**; production build + stamp OK; svelte-check **0 errors**, 121 warnings (baseline 123).
 - Launcher: `run_nhm --demo --preflight-only` passes. Real-browser journey: **281/281**.
 - **Pre-existing monitoring race flake (reported separately):** `tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers` is intermittent on the pristine baseline `06bd9a0` as well (measured 8/12 isolated failures there, 4/12 at the Studio tip). It failed in several earlier full runs and in the first attempt of the final one (it passed on the recorded isolated retry); the gate runner retries only that named test in isolation and records every attempt (`flaky_retries`); no other failure is tolerated.
 - Earlier-run failures that were caused by this work (route count 66→67, amendment/lock accounting, reconciliation link) were fixed through the governed additive mechanism, not by weakening tests.
@@ -83,7 +83,7 @@ Full gates (`python -m scripts.run_studio_local_gates`, evidence `reports/unifie
 Every older verifier passes against the current tree through the additive chain (`CAPSTONE_UI_V1…V1_9`, `NHM_RESEARCH_OBSERVATORY_V1`, `NHM_OBS_DIAG_001`, `NHM_FINAL_SHOWCASE_001`, `NHM_FL10_001`, and the CAP-001…010 amended-lock audits); no historical lock or amendment was modified (only new compatibility amendments added); frozen scientific evidence, the recorded FL10 runs and the 3-round backend are byte-identical (`verify_unified_studio_001`). Pre-existing defects found and corrected additively are listed in the lock (`pre_existing_defects_corrected`) and `governance_repair.md`.
 
 ## 29. Successor lock
-`artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json` — additive successor of `NHM_FL10_001` (status PASS, non-provisional); binds 506 files incl. 312 frontend files; verified by `python -m scripts.verify_unified_studio_001 --lock` and `tests/test_studio_successor.py`. No historical lock was edited; nothing pushed.
+`artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json` — additive successor of `NHM_FL10_001` (status PASS, non-provisional); binds 512 files incl. 313 frontend files; verified by `python -m scripts.verify_unified_studio_001 --lock` and `tests/test_studio_successor.py`. No historical lock was edited; nothing pushed.
 
 ## 31. Addendum — V2-initialised federated fine-tuning and the Generalisation tab
 Delivered after first acceptance, inside the same Studio (`generalisation_protocol.md` has the design, decisions, measured results and limits):
@@ -93,6 +93,9 @@ Delivered after first acceptance, inside the same Studio (`generalisation_protoc
 - **Measured (synthetic, unseen participants):** pretrained start R0 = frozen V2 exactly (AUPRC 0.8902) → R10 0.9915 with specificity 0.997 and BCE/Brier not improved reliably; untrained start reaches AUPRC 0.943 at R10 but specificity is 0 from R3 and BCE 3.47 (the earlier negative finding reproduced on a never-used cohort).
 - **3 rounds from the pretrained start** run on the extended engine (FedAvg, plain; the frozen 3-round product contract only accepts the untrained start, so FedProx and the protected-aggregation shadow exist only on the untrained 3-round path).
 - **Not done:** real-ECG AAMI-SVF retention (G2) is NOT EXECUTED; nothing here is clinical or a significance claim.
+
+## 32. Addendum — collapsible sidebar
+The desktop sidebar can be collapsed to an icon rail (toggle in the sidebar header, Ctrl/⌘+B, preference remembered per browser, tooltips and accessible names kept, sub-pages and long labels hidden, the simulation notice kept as a compact tag). Below 861 px the existing drawer is unchanged. Evidence: `frontend/src/lib/product/__tests__/shell-sidebar.test.ts` (6 tests) and `reports/unified_live_fl/browser/sidebar_verification.json` (19 real-Chrome checks, including that the toggle is actually painted; an earlier class name collided with Tailwind's `collapse` utility and was caught by looking at the screenshot, then fixed and guarded).
 
 ## 30. Undelivered / residual risks
 See `known_limitations` in the lock. In short: connected Clerk two-user E2E not executed; the 16-participant cohort is reused (diagnostic only); 10-round supports FedAvg/plain only; runs started before the observer carry no metrics; the offline `--demo` launcher serves the older app (10-round disabled there with an explanation); an interrupted 10-round run fails closed and restarts from R0; the pre-existing monitoring race flake is untouched (see §27). Not claimed: any clinical validity, hardware, or an untouched final test.

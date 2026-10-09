@@ -127,7 +127,7 @@
   "docs/unified_live_fl/dependency_audit_after.md": "3e53a29f656435fb47ca88986b6cec1c76ad9774786c646af5ef09b0061eae36",
   "docs/unified_live_fl/dependency_audit_before.md": "510467791cbd5432442fc57465c19d837e13e8c88ffe09e13ef34ed6f577154d",
   "docs/unified_live_fl/evaluation_policy.md": "3935bed36bc154837b8660af14eab0ada3c8cb84c57fc2f1890aefeaeeb28c02",
-  "docs/unified_live_fl/final_handoff.md": "637ccb64d8136b0ec9c83d56ae1961462334b00682cfc784f99b0ec2051bd30e",
+  "docs/unified_live_fl/final_handoff.md": "4737e6d37b57db5086e16be396574cb541a052a46b56a8788e416226843ffb98",
   "docs/unified_live_fl/generalisation_protocol.md": "ec310433984b0fec2c76fa152e4c6f39e061f0350157fb63bc7290e4bb28b9fc",
   "docs/unified_live_fl/governance_original_commit_results.txt": "9376554aa97fec80c1879bb1a159cbc1fbb58f0a2fc8c9fc77d79dfea4308d6a",
   "docs/unified_live_fl/governance_reconciliation.json": "a244a0ea0a7755e3d015d35f1454eafc1e128cae2c56f835a87a8bd5f452676b",
@@ -215,7 +215,7 @@
   "frontend/src/lib/components/preloader/NHMPreloader.svelte": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
   "frontend/src/lib/components/product/DemoBanner.svelte": "98e8f5827e7a40a732e2f6564c0a588fb388454025dc5537f706d7c3ad659a5e",
   "frontend/src/lib/components/product/FuturePhase.svelte": "93fa490928eef8b27b2e21078efcaebb8d45976770a433a16a57ce3cf6ae4752",
-  "frontend/src/lib/components/product/ProductShell.svelte": "8a9b0743b0b38ca5283fafc099636cc7539599cfe67ecf2f14201fcba2589bfd",
+  "frontend/src/lib/components/product/ProductShell.svelte": "df1bcdafb7a043e50568560265e4ee997df88ee1c75855bc8a857b52bd1da2a0",
   "frontend/src/lib/components/product/SimulationBanner.svelte": "094130ec6f8982c718a7bc53e4261eb51a91b4a7dc2eaad3984b3ecc9dedacf5",
   "frontend/src/lib/components/product/WaveformPlot.svelte": "3b1d9ef4325b77c329fea8fc3fc279c6a5b3285ca1efc6267298c700a1f278d1",
   "frontend/src/lib/components/product/federation/ArchitectureLanes.svelte": "046260a5917ed8f6bed17d91ded7c8d9c4e01bfc7a9cd72fd9d3b0d31f49bff0",
@@ -289,6 +289,7 @@
   "frontend/src/lib/product/__tests__/live-model.test.ts": "b2e58cb6edc85fa031fe74339fea09230dd0c27d39038b16addda3f56cab257f",
   "frontend/src/lib/product/__tests__/real-backend.integration.test.ts": "219970cf991cac20e6ae38c937742a99f4f8b98bd1be03fb0813f5a68a6d722e",
   "frontend/src/lib/product/__tests__/route-policy.test.ts": "f737032075694497e7a1403d65891af5160547a24faa28309610c74435398e86",
+  "frontend/src/lib/product/__tests__/shell-sidebar.test.ts": "6756f8e5af1a7cfecff4188bb59c31dda5150d2f2165be5a33eced6a957d2096",
   "frontend/src/lib/product/__tests__/socket-store.test.ts": "ce8250784f2193a0e7a3ca9334d0f6452d074a66a3af305f762f1d3be94c4f8f",
   "frontend/src/lib/product/__tests__/support.ts": "6e11e216f3b4a9036f3e279d59b669cf4812a04cfeed89b327efc380be6cb024",
   "frontend/src/lib/product/__tests__/ui-enh-002.test.ts": "53ab991cd46fa7358ac7e8697da409e770506eb9624103ae307da4b4c2e6a5e1",
@@ -430,6 +431,10 @@
   "frontend/src/routes/system/notifications/+page.svelte": "82afe30c74bfe3b7b00d9612df87ed869e8190def8b10e00b36ba06e7931c69b",
   "frontend/src/routes/system/settings/+page.svelte": "fac63b808f6c78a52700a938ffff99f71c26df7a09f47198238c144e71ca511f",
   "frontend/src/routes/trends/+page.svelte": "693e077d2955ae3a2e9654caa7f1f0516a4a6002538a80abc9a1f63783b69398",
+  "reports/unified_live_fl/browser/sidebar_collapsed.png": "3f550edc72374bfd85a6bc5d369867a0d684fbf162ecb29b669d8a5780fceef0",
+  "reports/unified_live_fl/browser/sidebar_expanded.png": "42e6fe80327cb4760084070812e334b5f13bf2eb80ed87e3324f11882e374e63",
+  "reports/unified_live_fl/browser/sidebar_mobile_drawer.png": "0e88e55b11c8f818a7e3d0a1a4158a79d1439c9b97ce127f01a35d5d7ff8f4a0",
+  "reports/unified_live_fl/browser/sidebar_verification.json": "6904f411d439be1f1654fdf61e42cd5d159ec8fc9a281c1843b5366557665683",
   "reports/unified_live_fl/browser/studio_browser_verification.json": "51c50bf5e72c070b95154208b3bff000985da07ac48bcb686b23ce37dad0b60a",
   "reports/unified_live_fl/browser/studio_entry_1024.png": "330080b1652a8df555cbb842c81afa20a2c12bc6215223f8fc2d34fbffd14764",
   "reports/unified_live_fl/browser/studio_entry_1440.png": "8c494f7db1cab0e21be1ba45dcf4ae7cfe7234019065d320525b9dd4b1a8f86b",
@@ -454,7 +459,7 @@
   "reports/unified_live_fl/browser/studio_run3_completed.png": "7eb2dd94efe964cc247222366a60e639a1cf6947b79646f9fbd76d3660c56a75",
   "reports/unified_live_fl/browser/studio_run3_pretrained_completed.png": "4165935fe19f3e204ded3bd3460cbf24aaed98e7ce98a3ad585d4a10384324d0",
   "reports/unified_live_fl/launcher_preflight.json": "34dfe45abf08a9542b32f970144de9d70c7baeac9f3f7fd7d2c0f749aef87ebb",
-  "reports/unified_live_fl/local_test_report.json": "9dd4d92fd32252149b1bb901ae451ad49a6f129e72f5cf0635066e2257eecacf",
+  "reports/unified_live_fl/local_test_report.json": "cd743ee3136509e12db2d5ccadc844a9128dd2a864ef39bbfbe6cfbde1aa76ca",
   "reports/unified_live_fl/run_evidence_10round.json": "cac4644608a0333fc802eb3f7bf8dd31ad530bd7757268f5ae515e3e75d8eb85",
   "reports/unified_live_fl/run_evidence_10round.md": "9792bd64814e6c73b0829de2736712e00841c327d49f576dc9189fcce3b1e086",
   "reports/unified_live_fl/run_evidence_10round_modeB.json": "c624b88541b830864a99e22d1f615727e377e372a2a903b4221c4ecdc2da39d4",
@@ -463,7 +468,7 @@
   "reports/unified_live_fl/run_evidence_3round.md": "91c00b484dabfb3af830ce9a0ec2e3bc787b11a91ca8afd0eb78658ddb29199b",
   "scripts/capstone_ui_v1_8_successor.py": "e3eae86f621248d4b74d6202d65d7971524948e598245ced375f3ddc92fa5c8f",
   "scripts/fl10_successor_compat.py": "f0d7a563f9f2529b35cc7af7b33381c9da5e977b1a889c38088963598e9b6861",
-  "scripts/freeze_unified_studio_001.py": "c777d5d696490027ad6e8862e5e2614cb4c7ba146438cf59c896a985a36f4cd0",
+  "scripts/freeze_unified_studio_001.py": "c03a28802365f8c8ee2c5aa10b659f3aa48573ca3744d24ecbf3efdf4eab2dee",
   "scripts/reconcile_ui_lock_chain.py": "789bfd09295993c50c929a233c0fff03a0ef328ce604ad618096abaf2968a97d",
   "scripts/run_studio_browser.py": "522664a7b046778e8a0a8167a4e3f21632d4a1e8e92871b9ae973367975314fd",
   "scripts/run_studio_local_gates.py": "af3cc835776239a42c2a418f5abd4e3d7922b4201c25298b5d84fd6fa42e3c09",
@@ -472,10 +477,11 @@
   "scripts/studio_browser_verify.mjs": "6c984e33e730475f4162dde0c5e977947913fb710bc0918be7df730b81bdb4df",
   "scripts/studio_cdp.mjs": "0bbbe491b30eb8da9194dd6d58beaa37a8153ba782f9c392c38128394dab79d4",
   "scripts/studio_collect_evidence.py": "2c99056a17bb8d834573c1348c16194b7ad231220da58753d26c1c0aa3db949b",
+  "scripts/studio_sidebar_verify.mjs": "b4003251a4cb234ce895cbebf9200743e6a2fb9d1f7124cf480ac1ed444c65a3",
   "scripts/studio_successor_compat.py": "a26e5d0cb3b6ae8a406f18e218139d5225616e6de2e1c2f3eb43ae1e0f8c601a",
   "scripts/successor_chain.py": "e9204638c10950840da1cadd9f28f8e7ddc80161b53f747ff4d36fbfea8e08c0",
   "scripts/verify_fl10_001.py": "bb2c3e0752089e00a538079197754be636ee33e8e3799c49c94e4e85777f8302",
-  "scripts/verify_unified_studio_001.py": "0f39ce4a66fd51eb551c8c628eee2e146900d37e733c91522ab0c7a501cf343b",
+  "scripts/verify_unified_studio_001.py": "f93e49d10f0f355f7877b2367cf0fd2a5dbbb81dce482551a53e0a173d4b6125",
   "studio/__init__.py": "a09f6b77b749d988d8d6cc2713e70078b219b611e51012d3a01f91b3663760ab",
   "studio/bundle.py": "713d3c12cb145dc09f4e50522e46e02e4e9217e3fa647927395289436a4740c0",
   "studio/capture3.py": "1850f1c4a908f56db9fb3c2474c2833d137f50cfab1aa7412a559e349d435878",
@@ -521,7 +527,7 @@
  "evidence": {
   "browser_report_sha256": "51c50bf5e72c070b95154208b3bff000985da07ac48bcb686b23ce37dad0b60a",
   "launcher_preflight_sha256": "34dfe45abf08a9542b32f970144de9d70c7baeac9f3f7fd7d2c0f749aef87ebb",
-  "tests_sha256": "9dd4d92fd32252149b1bb901ae451ad49a6f129e72f5cf0635066e2257eecacf"
+  "tests_sha256": "cd743ee3136509e12db2d5ccadc844a9128dd2a864ef39bbfbe6cfbde1aa76ca"
  },
  "frontend_files": {
   "frontend/.env.example": "f72023407e0a9ecc27db4b0cdb8667a42cfc99ca51624ad5b53330429537bb78",
@@ -612,7 +618,7 @@
   "frontend/src/lib/components/preloader/NHMPreloader.svelte": "6a65f16c6cffd90ddf514e6b575ba7be6e07c3eb5aafc4e80822f3d9fea146ce",
   "frontend/src/lib/components/product/DemoBanner.svelte": "98e8f5827e7a40a732e2f6564c0a588fb388454025dc5537f706d7c3ad659a5e",
   "frontend/src/lib/components/product/FuturePhase.svelte": "93fa490928eef8b27b2e21078efcaebb8d45976770a433a16a57ce3cf6ae4752",
-  "frontend/src/lib/components/product/ProductShell.svelte": "8a9b0743b0b38ca5283fafc099636cc7539599cfe67ecf2f14201fcba2589bfd",
+  "frontend/src/lib/components/product/ProductShell.svelte": "df1bcdafb7a043e50568560265e4ee997df88ee1c75855bc8a857b52bd1da2a0",
   "frontend/src/lib/components/product/SimulationBanner.svelte": "094130ec6f8982c718a7bc53e4261eb51a91b4a7dc2eaad3984b3ecc9dedacf5",
   "frontend/src/lib/components/product/WaveformPlot.svelte": "3b1d9ef4325b77c329fea8fc3fc279c6a5b3285ca1efc6267298c700a1f278d1",
   "frontend/src/lib/components/product/federation/ArchitectureLanes.svelte": "046260a5917ed8f6bed17d91ded7c8d9c4e01bfc7a9cd72fd9d3b0d31f49bff0",
@@ -686,6 +692,7 @@
   "frontend/src/lib/product/__tests__/live-model.test.ts": "b2e58cb6edc85fa031fe74339fea09230dd0c27d39038b16addda3f56cab257f",
   "frontend/src/lib/product/__tests__/real-backend.integration.test.ts": "219970cf991cac20e6ae38c937742a99f4f8b98bd1be03fb0813f5a68a6d722e",
   "frontend/src/lib/product/__tests__/route-policy.test.ts": "f737032075694497e7a1403d65891af5160547a24faa28309610c74435398e86",
+  "frontend/src/lib/product/__tests__/shell-sidebar.test.ts": "6756f8e5af1a7cfecff4188bb59c31dda5150d2f2165be5a33eced6a957d2096",
   "frontend/src/lib/product/__tests__/socket-store.test.ts": "ce8250784f2193a0e7a3ca9334d0f6452d074a66a3af305f762f1d3be94c4f8f",
   "frontend/src/lib/product/__tests__/support.ts": "6e11e216f3b4a9036f3e279d59b669cf4812a04cfeed89b327efc380be6cb024",
   "frontend/src/lib/product/__tests__/ui-enh-002.test.ts": "53ab991cd46fa7358ac7e8697da409e770506eb9624103ae307da4b4c2e6a5e1",
@@ -975,6 +982,7 @@
   "api/observatory_fl10.py",
   "api/product_app_observatory_v1.py",
   "fl10/runner.py",
+  "frontend/src/lib/components/product/ProductShell.svelte",
   "frontend/src/lib/components/product/federation/RunSelector.svelte",
   "frontend/src/lib/components/product/observatory/Fl10Chart.svelte",
   "frontend/src/lib/product/__tests__/support.ts",
@@ -998,10 +1006,10 @@
    "platform": "macOS-27.0.1-arm64-arm-64bit",
    "python": "3.11.16"
   },
-  "finished": "2026-10-10T00:40:11+0530",
+  "finished": "2026-10-10T01:24:59+0530",
   "note": "Any failing test is listed by name under backend_pytest.failures; none is allow-listed. The one known baseline-flaky monitoring test is retried in isolation and every attempt is recorded under backend_pytest.flaky_retries (reported separately).",
   "passed": true,
-  "started": "2026-10-10T00:09:09+0530",
+  "started": "2026-10-10T00:52:00+0530",
   "steps": {
    "backend_pytest": {
     "chunks": 10,
@@ -1010,20 +1018,20 @@
     "failures": [],
     "flaky_retries": {},
     "passed": 3364,
-    "seconds": 1829.3496429920197,
+    "seconds": 1942.428168296814,
     "skipped": 1
    },
    "frontend_build": {
     "returncode": 0,
-    "seconds": 8.8,
+    "seconds": 8.5,
     "stamp_returncode": 0,
     "tail": "- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
    },
    "frontend_vitest": {
     "failed": 0,
-    "passed": 343,
+    "passed": 349,
     "returncode": 0,
-    "seconds": 9.3,
+    "seconds": 11.2,
     "skipped": 3
    },
    "launcher_preflight": {
@@ -1051,7 +1059,7 @@
    "svelte_check": {
     "baseline_warnings": 123,
     "errors": 0,
-    "files": 5847,
+    "files": 5848,
     "warnings": 121
    }
   }
