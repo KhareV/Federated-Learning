@@ -74,7 +74,7 @@ def export_run(b: dict[str, Any], out: Path, *, eval_dir: Path | None = None, ru
             if (run_dir / name).exists():
                 source_hashes[name] = _sha((run_dir / name).read_bytes())
     if eval_dir is not None and eval_dir.is_dir():
-        for path in sorted(eval_dir.glob("R*/*")) + [eval_dir / "paired.json"]:
+        for path in [*sorted(eval_dir.glob("R*/*")), eval_dir / "paired.json"]:
             if path.is_file():
                 source_hashes[str(path.relative_to(eval_dir))] = _sha(path.read_bytes())
     manifest: dict[str, Any] = {"schema_version": SCHEMA, "run_id": b["run_id"], "run_length": b["run_length"], "engine": b["engine"], "mode": b["mode"], "source_label": b["source_label"], "bundle_schema": b["schema_version"],

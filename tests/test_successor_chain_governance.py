@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 """Negative controls for the successor-aware UI lock chain.
 
 Each test runs the REAL accepted verifiers (``python -m scripts.verify_capstone_ui_v1_9`` etc.) inside a throw-away ``git worktree`` of HEAD
@@ -130,3 +131,30 @@ def test_reconciliation_has_no_unauthorized_file() -> None:
     result = reconcile()
     assert result["summary"].get("UNAUTHORIZED", 0) == 0, result["summary"]
     assert result["summary"]["AUTHORIZED_BY_SUCCESSOR"] > 0
+
+
+STUDIO_LOCK = "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json"
+
+
+@pytest.mark.skipif(not (ROOT / STUDIO_LOCK).exists(), reason="the Studio lock is created at the end of the work")
+@pytest.mark.parametrize(("field", "value", "reason"), [
+    ("predecessor_lock_sha256", "0" * 64, "PREDECESSOR_DIGEST_MISMATCH"),
+    ("predecessor_commit", "0" * 40, "PREDECESSOR_COMMIT_MISMATCH"),
+    ("lock_id", "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_FORGED", "IDENTITY_OR_STATUS"),
+    ("historical_locks_edited", True, "SCOPE_DRIFT"),
+    ("frozen_scientific_evidence_edited", True, "SCOPE_DRIFT"),
+])
+def test_forged_studio_successor_lock_is_rejected_by_the_old_verifiers(clean: Path, field: str, value: object, reason: str) -> None:
+    lock = json.loads((clean / STUDIO_LOCK).read_text())
+    lock[field] = value
+    (clean / STUDIO_LOCK).write_text(json.dumps(lock, indent=1, sort_keys=True) + "\n")
+    code, out = run(clean, "scripts.verify_capstone_ui_v1_9")
+    assert code != 0 and "SUCCESSOR_CHAIN_BROKEN" in out and reason in out, out[-600:]
+
+
+@pytest.mark.skipif(not (ROOT / STUDIO_LOCK).exists(), reason="the Studio lock is created at the end of the work")
+def test_edit_after_the_studio_lock_is_rejected(clean: Path) -> None:
+    target = clean / "frontend/src/lib/product/studio/store.svelte.ts"       # bound by the Studio successor: a further edit must not be accepted
+    target.write_text(target.read_text() + "\n// edit after the Studio lock\n")
+    code, out = run(clean, "scripts.verify_capstone_ui_v1_9")
+    assert code != 0 and ("TAMPER" in out or "UNBOUND" in out), out[-600:]

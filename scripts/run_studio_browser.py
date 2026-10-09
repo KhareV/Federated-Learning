@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 """Run a Studio CDP browser script (scripts/*.mjs) against an already-running stack in real headless Chrome."""
 
 from __future__ import annotations

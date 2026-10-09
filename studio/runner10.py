@@ -204,7 +204,7 @@ class StudioFl10Service:
             parity = ll.parity(monitored, live, profile, datasets[0].dataset_sha256) | {"inference_http_statuses": monitored["inference_http_statuses"]}
             datasets = [live, *datasets[1:]]
             manifest = manifest_for(datasets)
-        examples = {d.client_id: int(len(d.labels)) for d in datasets}
+        examples = {d.client_id: len(d.labels) for d in datasets}
         job.translator.examples = examples  # type: ignore[union-attr]
         atomic_write(directory / "training_cohort.json", (json.dumps([{"client_id": d.client_id, "participant_id": d.participant_id, "session_id": d.session_id, "dataset_sha256": d.dataset_sha256,
                                                                        "counts": d.counts} for d in datasets], indent=1, sort_keys=True) + "\n").encode())
@@ -230,8 +230,8 @@ class StudioFl10Service:
             report = runner.run_training(mode="A", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, require_prefix_parity=True, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha())
         else:
             from final_showcase import link_trace
-            from product.edge.local_training_buffer import LocalTrainingBufferV1
             from fl10.trace import Fl10TrainerTap
+            from product.edge.local_training_buffer import LocalTrainingBufferV1
 
             with Fl10TrainerTap() as tap:
                 report = runner.run_training(mode="B", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, require_prefix_parity=False, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha())

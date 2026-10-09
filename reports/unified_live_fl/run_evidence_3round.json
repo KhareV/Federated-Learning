@@ -1,0 +1,268 @@
+{
+ "accepted_updates_total": 24,
+ "calibration": "NONE",
+ "candidate": {
+  "candidate_id": "CAPSTONE_FL_CANDIDATE_0006",
+  "deployed": false,
+  "promoted": false
+ },
+ "cohort_use": "REUSED SYNTHETIC DIAGNOSTIC EVALUATION \u2014 NOT A NEW UNTOUCHED FINAL TEST",
+ "engine": "PRODUCT_3R",
+ "evaluation_protocol_id": "NHM_FL10_SYNTHETIC_EVALUATION_V1",
+ "evaluation_timing": [
+  {
+   "completed_at": "2026-10-09T08:38:45.881486+00:00",
+   "queued_at": "2026-10-09T08:38:39.427580+00:00",
+   "round": 0,
+   "started_at": "2026-10-09T08:38:39.428097+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:38:52.743438+00:00",
+   "queued_at": "2026-10-09T08:38:46.206433+00:00",
+   "round": 1,
+   "started_at": "2026-10-09T08:38:46.206783+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:38:59.899121+00:00",
+   "queued_at": "2026-10-09T08:38:53.113461+00:00",
+   "round": 2,
+   "started_at": "2026-10-09T08:38:53.113805+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:39:04.609736+00:00",
+   "queued_at": "2026-10-09T08:39:00.316923+00:00",
+   "round": 3,
+   "started_at": "2026-10-09T08:39:00.317161+00:00"
+  }
+ ],
+ "export_counts": {
+  "data": 6,
+  "figures": 20,
+  "tables": 12
+ },
+ "export_manifest_sha256": "e786aee0ea9eccfe9a8a43d1326d5c2597a91b29d950ca5d948f7f0f8452f24e",
+ "figures": {
+  "FL10_FIG01": "AVAILABLE",
+  "FL10_FIG02": "AVAILABLE",
+  "FL10_FIG03": "AVAILABLE",
+  "FL10_FIG04": "AVAILABLE",
+  "FL10_FIG05": "AVAILABLE",
+  "FL10_FIG06": "AVAILABLE",
+  "FL10_FIG07": "AVAILABLE",
+  "FL10_FIG08": "AVAILABLE",
+  "FL10_FIG09": "AVAILABLE",
+  "FL10_FIG10": "AVAILABLE",
+  "FL10_FIG11": "AVAILABLE",
+  "FL10_FIG12": "AVAILABLE",
+  "FL10_FIG13": "AVAILABLE",
+  "FL10_FIG14": "AVAILABLE",
+  "FL10_FIG15": "AVAILABLE",
+  "FL10_FIG16": "AVAILABLE",
+  "FL10_FIG17": "AVAILABLE",
+  "FL10_FIG18": "AVAILABLE",
+  "FL10_FIG19": "AVAILABLE",
+  "FL10_FIG20": "AVAILABLE"
+ },
+ "lineage_vs_recorded": [
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 0
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 1
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 2
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 3
+  }
+ ],
+ "metric_table": [
+  {
+   "AUPRC": 0.628670718664115,
+   "AUROC": 0.7269706268427931,
+   "BCE": 0.650140193429412,
+   "Brier": 0.2285406276543958,
+   "F1": 0.0,
+   "FN": 307,
+   "FP": 0,
+   "TN": 1139,
+   "TP": 0,
+   "accuracy": 0.7876901798063624,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": null,
+   "predicted_negatives": 1446,
+   "predicted_positives": 0,
+   "recall": 0.0,
+   "round": 0,
+   "specificity": 1.0,
+   "state_digest": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.6506894376420321,
+   "AUROC": 0.7538686143911597,
+   "BCE": 0.651130601723202,
+   "Brier": 0.22903184613578137,
+   "F1": 0.0,
+   "FN": 307,
+   "FP": 0,
+   "TN": 1139,
+   "TP": 0,
+   "accuracy": 0.7876901798063624,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": null,
+   "predicted_negatives": 1446,
+   "predicted_positives": 0,
+   "recall": 0.0,
+   "round": 1,
+   "specificity": 1.0,
+   "state_digest": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.6539230651358623,
+   "AUROC": 0.7688039968770823,
+   "BCE": 0.6403623873060557,
+   "Brier": 0.22368408134321602,
+   "F1": 0.006493506493506494,
+   "FN": 306,
+   "FP": 0,
+   "TN": 1139,
+   "TP": 1,
+   "accuracy": 0.7883817427385892,
+   "balanced_accuracy": 0.501628664495114,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 1.0,
+   "predicted_negatives": 1445,
+   "predicted_positives": 1,
+   "recall": 0.003257328990228013,
+   "round": 2,
+   "specificity": 1.0,
+   "state_digest": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.6761861110494672,
+   "AUROC": 0.8028472315563397,
+   "BCE": 0.7243380441302709,
+   "Brier": 0.26560679998091247,
+   "F1": 0.3502567027952082,
+   "FN": 0,
+   "FP": 1139,
+   "TN": 0,
+   "TP": 307,
+   "accuracy": 0.21230982019363762,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 0.21230982019363762,
+   "predicted_negatives": 0,
+   "predicted_positives": 1446,
+   "recall": 1.0,
+   "round": 3,
+   "specificity": 0.0,
+   "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+   "status": "COMPLETED",
+   "windows": 1446
+  }
+ ],
+ "paired_available": true,
+ "round_accounting": [
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": true,
+   "round": 1,
+   "weighted_mean_training_loss": 0.7145994498521955,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": true,
+   "round": 2,
+   "weighted_mean_training_loss": 0.6442454972949759,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": true,
+   "round": 3,
+   "weighted_mean_training_loss": 0.4919274533025786,
+   "weights_sum": 1.0
+  }
+ ],
+ "run_id": "FEDRUN-FC8010F1CB54",
+ "run_length": 3,
+ "source_mode": "CANONICAL_SYNTHETIC",
+ "status": "COMPLETED",
+ "tables": {
+  "FL10_TAB01": {
+   "availability": "AVAILABLE",
+   "rows": 4
+  },
+  "FL10_TAB02": {
+   "availability": "AVAILABLE",
+   "rows": 10
+  },
+  "FL10_TAB03": {
+   "availability": "AVAILABLE",
+   "rows": 24
+  },
+  "FL10_TAB04": {
+   "availability": "AVAILABLE",
+   "rows": 48
+  },
+  "FL10_TAB05": {
+   "availability": "AVAILABLE",
+   "rows": 64
+  },
+  "FL10_TAB06": {
+   "availability": "AVAILABLE",
+   "rows": 16
+  },
+  "FL10_TAB07": {
+   "availability": "AVAILABLE",
+   "rows": 3
+  },
+  "FL10_TAB08": {
+   "availability": "AVAILABLE",
+   "rows": 4
+  },
+  "FL10_TAB09": {
+   "availability": "AVAILABLE",
+   "rows": 17
+  },
+  "FL10_TAB10": {
+   "availability": "AVAILABLE",
+   "rows": 4
+  },
+  "FL10_TAB11": {
+   "availability": "AVAILABLE",
+   "rows": 4
+  },
+  "FL10_TAB12": {
+   "availability": "AVAILABLE",
+   "rows": 11
+  }
+ },
+ "threshold": 0.5
+}

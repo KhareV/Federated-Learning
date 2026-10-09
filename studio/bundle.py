@@ -11,7 +11,7 @@ from typing import Any
 
 from fl10 import holdout as fl10_holdout
 from fl10.bundle import HISTORICAL
-from fl10.evaluate import MANIFEST, PROTOCOL, ROOT
+from fl10.evaluate import PROTOCOL, ROOT
 from studio import holdout_cache
 from studio.constants import COHORT_USE_DETAIL, COHORT_USE_LABEL, EVAL_PROTOCOL_ID
 from studio.observer import EvaluationObserver, round_key

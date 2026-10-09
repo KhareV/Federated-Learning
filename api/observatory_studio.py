@@ -21,7 +21,14 @@ from fastapi.responses import JSONResponse, Response
 from api.product_app_v1_1 import WS_FORBIDDEN, WS_NOT_FOUND, WS_POLICY_VIOLATION, WS_UNAUTHENTICATED
 from product.api.errors import ProductError, ProductErrorCode
 from studio import STUDIO_ID
-from studio.constants import CLAIM_BOUNDARY, COHORT_USE_DETAIL, COHORT_USE_LABEL, EVAL_PROTOCOL_ID, OBSERVER_ID, RUN_LENGTHS
+from studio.constants import (
+    CLAIM_BOUNDARY,
+    COHORT_USE_DETAIL,
+    COHORT_USE_LABEL,
+    EVAL_PROTOCOL_ID,
+    OBSERVER_ID,
+    RUN_LENGTHS,
+)
 from studio.runner10 import MODES, StudioRunError
 from studio.service import StudioService, _as_product_error
 

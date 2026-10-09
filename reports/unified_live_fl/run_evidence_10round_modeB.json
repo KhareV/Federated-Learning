@@ -1,0 +1,575 @@
+{
+ "accepted_updates_total": 80,
+ "calibration": "NONE",
+ "candidate": {
+  "candidate_id": "FL10_CANDIDATE_FL10RUN-A6B027257A1B",
+  "deployed": false,
+  "label": "ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL",
+  "promoted": false,
+  "registered_in_product_registry": false,
+  "released_model_changed": false,
+  "round": 10,
+  "rounds": 10,
+  "state_sha256": "5ae2c3a44eb5ac1ce70108fb06e23fa695359dbb42349af6dde0b0b29723355f"
+ },
+ "cohort_use": "REUSED SYNTHETIC DIAGNOSTIC EVALUATION \u2014 NOT A NEW UNTOUCHED FINAL TEST",
+ "engine": "FL10_10R",
+ "evaluation_protocol_id": "NHM_FL10_SYNTHETIC_EVALUATION_V1",
+ "evaluation_timing": [
+  {
+   "completed_at": "2026-10-09T08:34:56.362301+00:00",
+   "queued_at": "2026-10-09T08:34:49.945372+00:00",
+   "round": 0,
+   "started_at": "2026-10-09T08:34:49.945953+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:35:03.006179+00:00",
+   "queued_at": "2026-10-09T08:34:56.458082+00:00",
+   "round": 1,
+   "started_at": "2026-10-09T08:34:56.458668+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:35:10.056145+00:00",
+   "queued_at": "2026-10-09T08:35:03.361177+00:00",
+   "round": 2,
+   "started_at": "2026-10-09T08:35:03.362079+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:35:17.285207+00:00",
+   "queued_at": "2026-10-09T08:35:10.360892+00:00",
+   "round": 3,
+   "started_at": "2026-10-09T08:35:10.362109+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:35:25.546825+00:00",
+   "queued_at": "2026-10-09T08:35:17.750414+00:00",
+   "round": 4,
+   "started_at": "2026-10-09T08:35:17.751935+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:35:32.911807+00:00",
+   "queued_at": "2026-10-09T08:35:25.926756+00:00",
+   "round": 5,
+   "started_at": "2026-10-09T08:35:25.928602+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:35:40.402520+00:00",
+   "queued_at": "2026-10-09T08:35:33.221255+00:00",
+   "round": 6,
+   "started_at": "2026-10-09T08:35:33.223382+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:35:47.881918+00:00",
+   "queued_at": "2026-10-09T08:35:40.520898+00:00",
+   "round": 7,
+   "started_at": "2026-10-09T08:35:40.523452+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:35:55.906897+00:00",
+   "queued_at": "2026-10-09T08:35:48.196401+00:00",
+   "round": 8,
+   "started_at": "2026-10-09T08:35:48.199137+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:36:04.536429+00:00",
+   "queued_at": "2026-10-09T08:35:56.281808+00:00",
+   "round": 9,
+   "started_at": "2026-10-09T08:35:56.285018+00:00"
+  },
+  {
+   "completed_at": "2026-10-09T08:36:10.251662+00:00",
+   "queued_at": "2026-10-09T08:36:04.934166+00:00",
+   "round": 10,
+   "started_at": "2026-10-09T08:36:04.937903+00:00"
+  }
+ ],
+ "export_counts": {
+  "data": 13,
+  "figures": 20,
+  "tables": 12
+ },
+ "export_manifest_sha256": "95d4cb7886b65475c2bdeb39f3a16ff69584f18312d7337a4d01e4a7658bf96b",
+ "figures": {
+  "FL10_FIG01": "AVAILABLE",
+  "FL10_FIG02": "AVAILABLE",
+  "FL10_FIG03": "AVAILABLE",
+  "FL10_FIG04": "AVAILABLE",
+  "FL10_FIG05": "AVAILABLE",
+  "FL10_FIG06": "AVAILABLE",
+  "FL10_FIG07": "AVAILABLE",
+  "FL10_FIG08": "AVAILABLE",
+  "FL10_FIG09": "AVAILABLE",
+  "FL10_FIG10": "AVAILABLE",
+  "FL10_FIG11": "AVAILABLE",
+  "FL10_FIG12": "AVAILABLE",
+  "FL10_FIG13": "AVAILABLE",
+  "FL10_FIG14": "AVAILABLE",
+  "FL10_FIG15": "AVAILABLE",
+  "FL10_FIG16": "AVAILABLE",
+  "FL10_FIG17": "AVAILABLE",
+  "FL10_FIG18": "AVAILABLE",
+  "FL10_FIG19": "AVAILABLE",
+  "FL10_FIG20": "AVAILABLE"
+ },
+ "lineage_vs_recorded": [
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 0
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 1
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 2
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 3
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 4
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 5
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 6
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 7
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 8
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 9
+  },
+  {
+   "equals_recorded_fl10_digest": true,
+   "equals_recorded_fl10_metrics": true,
+   "round": 10
+  }
+ ],
+ "metric_table": [
+  {
+   "AUPRC": 0.628670718664115,
+   "AUROC": 0.7269706268427931,
+   "BCE": 0.650140193429412,
+   "Brier": 0.2285406276543958,
+   "F1": 0.0,
+   "FN": 307,
+   "FP": 0,
+   "TN": 1139,
+   "TP": 0,
+   "accuracy": 0.7876901798063624,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": null,
+   "predicted_negatives": 1446,
+   "predicted_positives": 0,
+   "recall": 0.0,
+   "round": 0,
+   "specificity": 1.0,
+   "state_digest": "6a2923ca87793fb78571b4cffad4026f8b4ce99d9dfcb3abe885e259c68a572f",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.6506894376420321,
+   "AUROC": 0.7538686143911597,
+   "BCE": 0.651130601723202,
+   "Brier": 0.22903184613578137,
+   "F1": 0.0,
+   "FN": 307,
+   "FP": 0,
+   "TN": 1139,
+   "TP": 0,
+   "accuracy": 0.7876901798063624,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": null,
+   "predicted_negatives": 1446,
+   "predicted_positives": 0,
+   "recall": 0.0,
+   "round": 1,
+   "specificity": 1.0,
+   "state_digest": "40cee0654e1a05eb76f3e6a4d177be1953add71b7fcdad07c6e8d8f2d974c0a1",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.6539230651358623,
+   "AUROC": 0.7688039968770823,
+   "BCE": 0.6403623873060557,
+   "Brier": 0.22368408134321602,
+   "F1": 0.006493506493506494,
+   "FN": 306,
+   "FP": 0,
+   "TN": 1139,
+   "TP": 1,
+   "accuracy": 0.7883817427385892,
+   "balanced_accuracy": 0.501628664495114,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 1.0,
+   "predicted_negatives": 1445,
+   "predicted_positives": 1,
+   "recall": 0.003257328990228013,
+   "round": 2,
+   "specificity": 1.0,
+   "state_digest": "6237c0b1752c58daedcbd6e9456ab349c35318d513e706bd8bec36941ee7d2ef",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.6761861110494672,
+   "AUROC": 0.8028472315563397,
+   "BCE": 0.7243380441302709,
+   "Brier": 0.26560679998091247,
+   "F1": 0.3502567027952082,
+   "FN": 0,
+   "FP": 1139,
+   "TN": 0,
+   "TP": 307,
+   "accuracy": 0.21230982019363762,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 0.21230982019363762,
+   "predicted_negatives": 0,
+   "predicted_positives": 1446,
+   "recall": 1.0,
+   "round": 3,
+   "specificity": 0.0,
+   "state_digest": "3f0b7762ae7e05f21eb1709521404ed4d7968cae34f89e1797a0cbabd47c70e4",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.6870190142867147,
+   "AUROC": 0.8209012420175421,
+   "BCE": 1.115109553130243,
+   "Brier": 0.44184745981516665,
+   "F1": 0.3502567027952082,
+   "FN": 0,
+   "FP": 1139,
+   "TN": 0,
+   "TP": 307,
+   "accuracy": 0.21230982019363762,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 0.21230982019363762,
+   "predicted_negatives": 0,
+   "predicted_positives": 1446,
+   "recall": 1.0,
+   "round": 4,
+   "specificity": 0.0,
+   "state_digest": "5904292f8ce36ea15877ca4e588ca56fe243a1cec12afb0ab2890a6143cb1d54",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.7765812545058811,
+   "AUROC": 0.8766619098414805,
+   "BCE": 1.7516840127002824,
+   "Brier": 0.6241505253541448,
+   "F1": 0.3502567027952082,
+   "FN": 0,
+   "FP": 1139,
+   "TN": 0,
+   "TP": 307,
+   "accuracy": 0.21230982019363762,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 0.21230982019363762,
+   "predicted_negatives": 0,
+   "predicted_positives": 1446,
+   "recall": 1.0,
+   "round": 5,
+   "specificity": 0.0,
+   "state_digest": "b734e5244040216601e44b8a8024a48a845d64b5256edb91bfbcda11e81d6001",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.8650082938816039,
+   "AUROC": 0.9338010083706778,
+   "BCE": 2.4838025772254166,
+   "Brier": 0.7214450342723494,
+   "F1": 0.3502567027952082,
+   "FN": 0,
+   "FP": 1139,
+   "TN": 0,
+   "TP": 307,
+   "accuracy": 0.21230982019363762,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 0.21230982019363762,
+   "predicted_negatives": 0,
+   "predicted_positives": 1446,
+   "recall": 1.0,
+   "round": 6,
+   "specificity": 0.0,
+   "state_digest": "819fb528e418adb39aa0c02aeebcac39b44339f344e2081ac956473c4717a9d8",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.9151943649891683,
+   "AUROC": 0.9636088574182164,
+   "BCE": 3.110791986543474,
+   "Brier": 0.7575272968533103,
+   "F1": 0.3502567027952082,
+   "FN": 0,
+   "FP": 1139,
+   "TN": 0,
+   "TP": 307,
+   "accuracy": 0.21230982019363762,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 0.21230982019363762,
+   "predicted_negatives": 0,
+   "predicted_positives": 1446,
+   "recall": 1.0,
+   "round": 7,
+   "specificity": 0.0,
+   "state_digest": "19e05fd0ef4bf6e408d30c1cca4c18df5e003885e46fe37a469c59e21309399e",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.8931616169634325,
+   "AUROC": 0.9529674867662074,
+   "BCE": 3.702153004250136,
+   "Brier": 0.7733439523148267,
+   "F1": 0.3502567027952082,
+   "FN": 0,
+   "FP": 1139,
+   "TN": 0,
+   "TP": 307,
+   "accuracy": 0.21230982019363762,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 0.21230982019363762,
+   "predicted_negatives": 0,
+   "predicted_positives": 1446,
+   "recall": 1.0,
+   "round": 8,
+   "specificity": 0.0,
+   "state_digest": "ba3b95ef5b739e089df5dbd42176c779de73d827fea2acc194bffb27047b7b96",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.8787120265644718,
+   "AUROC": 0.9456034638076145,
+   "BCE": 4.001970521492165,
+   "Brier": 0.7777983875478918,
+   "F1": 0.3502567027952082,
+   "FN": 0,
+   "FP": 1139,
+   "TN": 0,
+   "TP": 307,
+   "accuracy": 0.21230982019363762,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 0.21230982019363762,
+   "predicted_negatives": 0,
+   "predicted_positives": 1446,
+   "recall": 1.0,
+   "round": 9,
+   "specificity": 0.0,
+   "state_digest": "4f8bac97d0983703016830e3e86b79e063102cbf27f74ec914cb07aa8fe57158",
+   "status": "COMPLETED",
+   "windows": 1446
+  },
+  {
+   "AUPRC": 0.9115704339868804,
+   "AUROC": 0.9661712514263325,
+   "BCE": 3.4992161221242637,
+   "Brier": 0.7685038112968194,
+   "F1": 0.3502567027952082,
+   "FN": 0,
+   "FP": 1139,
+   "TN": 0,
+   "TP": 307,
+   "accuracy": 0.21230982019363762,
+   "balanced_accuracy": 0.5,
+   "negatives": 1139,
+   "positives": 307,
+   "precision": 0.21230982019363762,
+   "predicted_negatives": 0,
+   "predicted_positives": 1446,
+   "recall": 1.0,
+   "round": 10,
+   "specificity": 0.0,
+   "state_digest": "5ae2c3a44eb5ac1ce70108fb06e23fa695359dbb42349af6dde0b0b29723355f",
+   "status": "COMPLETED",
+   "windows": 1446
+  }
+ ],
+ "paired_available": true,
+ "round_accounting": [
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": true,
+   "round": 1,
+   "weighted_mean_training_loss": 0.7145994498521955,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": true,
+   "round": 2,
+   "weighted_mean_training_loss": 0.6442454972949759,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": true,
+   "round": 3,
+   "weighted_mean_training_loss": 0.4919274533025786,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": null,
+   "round": 4,
+   "weighted_mean_training_loss": 0.3892864259488026,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": null,
+   "round": 5,
+   "weighted_mean_training_loss": 0.28078990964474027,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": null,
+   "round": 6,
+   "weighted_mean_training_loss": 0.2589039004731145,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": null,
+   "round": 7,
+   "weighted_mean_training_loss": 0.24320030516402513,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": null,
+   "round": 8,
+   "weighted_mean_training_loss": 0.19970180051991224,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": null,
+   "round": 9,
+   "weighted_mean_training_loss": 0.19009845480219786,
+   "weights_sum": 1.0
+  },
+  {
+   "accepted_updates": 8,
+   "clients": 8,
+   "parity_with_frozen": null,
+   "round": 10,
+   "weighted_mean_training_loss": 0.15869885374164597,
+   "weights_sum": 1.0
+  }
+ ],
+ "run_id": "FL10RUN-A6B027257A1B",
+ "run_length": 10,
+ "source_mode": "LIVE_MONITORED_SITE_00",
+ "status": "COMPLETED",
+ "tables": {
+  "FL10_TAB01": {
+   "availability": "AVAILABLE",
+   "rows": 11
+  },
+  "FL10_TAB02": {
+   "availability": "AVAILABLE",
+   "rows": 10
+  },
+  "FL10_TAB03": {
+   "availability": "AVAILABLE",
+   "rows": 80
+  },
+  "FL10_TAB04": {
+   "availability": "AVAILABLE",
+   "rows": 160
+  },
+  "FL10_TAB05": {
+   "availability": "AVAILABLE",
+   "rows": 176
+  },
+  "FL10_TAB06": {
+   "availability": "AVAILABLE",
+   "rows": 16
+  },
+  "FL10_TAB07": {
+   "availability": "AVAILABLE",
+   "rows": 10
+  },
+  "FL10_TAB08": {
+   "availability": "AVAILABLE",
+   "rows": 11
+  },
+  "FL10_TAB09": {
+   "availability": "AVAILABLE",
+   "rows": 17
+  },
+  "FL10_TAB10": {
+   "availability": "AVAILABLE",
+   "rows": 4
+  },
+  "FL10_TAB11": {
+   "availability": "AVAILABLE",
+   "rows": 4
+  },
+  "FL10_TAB12": {
+   "availability": "AVAILABLE",
+   "rows": 11
+  }
+ },
+ "threshold": 0.5
+}

@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 """Accept only an exact-identity NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001 successor of the frozen NHM_FL10_001 lock.
 
 Historical locks remain untouched. Mutation tests that substitute a historical lock path do not inherit the successor's re-pins, so their tamper controls stay meaningful.
@@ -5,7 +6,6 @@ The chain check (lock id, PASS, predecessor digest, bytes at the immutable prede
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 

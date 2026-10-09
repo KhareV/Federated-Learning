@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 """Collect run-specific evidence of the genuinely executed 3-round and 10-round Studio runs from a running isolated stack (DemoAuth).
 Writes full per-round metric tables (JSON + Markdown), evaluation timing behaviour, state-digest lineage, update accounting, export manifest hashes and the comparison with the
 recorded NHM_FL10_001 evidence. Reads only; evidence contains digests, counts and metrics, no credential."""
@@ -60,15 +61,17 @@ def main() -> int:
     ap.add_argument("--base", default="http://127.0.0.1:8102/product/v1")
     ap.add_argument("--run3", required=True)
     ap.add_argument("--run10", required=True)
+    ap.add_argument("--run10-b", help="a 10-round run in source mode LIVE_MONITORED_SITE_00")
     ap.add_argument("--out", default="reports/unified_live_fl")
     a = ap.parse_args()
     out = ROOT / a.out
     out.mkdir(parents=True, exist_ok=True)
-    for run_id, rounds in ((a.run3, 3), (a.run10, 10)):
+    jobs = [(a.run3, 3, ""), (a.run10, 10, "")] + ([(a.run10_b, 10, "_modeB")] if a.run10_b else [])
+    for run_id, rounds, suffix in jobs:
         evidence = run_evidence(a.base, run_id, rounds)
-        (out / f"run_evidence_{rounds}round.json").write_text(json.dumps(evidence, indent=1, sort_keys=True) + "\n")
-        (out / f"run_evidence_{rounds}round.md").write_text(markdown(evidence))
-        print(rounds, run_id, evidence["accepted_updates_total"], sum(1 for x in evidence["lineage_vs_recorded"] if x["equals_recorded_fl10_digest"]))
+        (out / f"run_evidence_{rounds}round{suffix}.json").write_text(json.dumps(evidence, indent=1, sort_keys=True) + "\n")
+        (out / f"run_evidence_{rounds}round{suffix}.md").write_text(markdown(evidence))
+        print(rounds, suffix or "A", run_id, evidence["accepted_updates_total"], sum(1 for x in evidence["lineage_vs_recorded"] if x["equals_recorded_fl10_digest"]))
     return 0
 
 

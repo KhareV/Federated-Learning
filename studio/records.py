@@ -7,7 +7,13 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from studio.constants import CLAIM_BOUNDARY, COHORT_USE_LABEL, EVAL_PROTOCOL_ID, OBSERVER_ID, RECORD_SCHEMA
+from studio.constants import (
+    CLAIM_BOUNDARY,
+    COHORT_USE_LABEL,
+    EVAL_PROTOCOL_ID,
+    OBSERVER_ID,
+    RECORD_SCHEMA,
+)
 
 Status = Literal["QUEUED", "EVALUATING", "COMPLETED", "FAILED"]
 

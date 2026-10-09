@@ -10,7 +10,15 @@ from collections.abc import Callable
 from typing import Any
 
 from product.events import FederationLiveEvent
-from product.federation.base import Algorithm, AggregationMode, ClientState, RoundState, RunState, RunType, SecAggStatus
+from product.federation.base import (
+    AggregationMode,
+    Algorithm,
+    ClientState,
+    RoundState,
+    RunState,
+    RunType,
+    SecAggStatus,
+)
 from product.federation.events import FederationEmitter
 
 CLIENT_COUNT = 8

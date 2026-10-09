@@ -18,14 +18,19 @@ from fl10.constants import RECORDED
 from fl10.evaluate import ROOT
 from product.api.errors import ProductError, ProductErrorCode
 from product.federation.service import FederationService
-from studio import STUDIO_ID
 from studio.bundle import build_live_bundle, read_run_report
 from studio.capture3 import ProductRunCapture
-from studio.constants import CLAIM_BOUNDARY, COHORT_USE_DETAIL, COHORT_USE_LABEL, EVAL_PROTOCOL_ID, OBSERVER_ID, RUN_LENGTHS
+from studio.constants import (
+    CLAIM_BOUNDARY,
+    COHORT_USE_DETAIL,
+    COHORT_USE_LABEL,
+    EVAL_PROTOCOL_ID,
+    OBSERVER_ID,
+)
 from studio.exports import export_run
 from studio.observer import EvaluationObserver
-from studio.recorded import RECORDED_LABEL, from_fl10_bundle, recorded_bundle, recorded_records
-from studio.runner10 import MODES, CLIENT_IDS, StudioFl10Service, StudioRunError
+from studio.recorded import RECORDED_LABEL, recorded_bundle, recorded_records
+from studio.runner10 import CLIENT_IDS, MODES, StudioFl10Service, StudioRunError
 from studio.specs import build_specs
 from studio.tables import build_tables
 
@@ -69,9 +74,9 @@ class StudioService:
         end = time.monotonic() + timeout
         while time.monotonic() < end:
             records = self.observer.records(run_id)
-            if len(records) == n + 1 and all(r.evaluation_status in ("COMPLETED", "FAILED") for r in records):
-                if any(r.evaluation_status == "FAILED" for r in records) or self.observer.paired(run_id) is not None:
-                    return True
+            settled = len(records) == n + 1 and all(r.evaluation_status in ("COMPLETED", "FAILED") for r in records)
+            if settled and (any(r.evaluation_status == "FAILED" for r in records) or self.observer.paired(run_id) is not None):
+                return True
             time.sleep(0.5)
         return False
 

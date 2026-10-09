@@ -8,6 +8,7 @@ The result is a run report in the SAME schema ``fl10.runner`` writes, so one fig
 
 from __future__ import annotations
 
+import contextlib
 import json
 import logging
 import math
@@ -19,10 +20,17 @@ from typing import Any
 
 import numpy as np
 
-from federated.wearable_fl_runner_v1 import BASE_SEED, BATCH_SIZE, LEARNING_RATE, POS_WEIGHT, WEIGHT_DECAY, state_info
+from federated.wearable_fl_runner_v1 import (
+    BASE_SEED,
+    BATCH_SIZE,
+    LEARNING_RATE,
+    POS_WEIGHT,
+    WEIGHT_DECAY,
+    state_info,
+)
 from federated.wearable_fl_system_v1 import EXPERIMENT_ID as FL_EXPERIMENT_ID
 from fl10.runner import aggregate_update_norm, atomic_write, frozen_progression, write_tables
-from product.federation.base import Algorithm, AggregationMode, RunType
+from product.federation.base import AggregationMode, Algorithm, RunType
 from product.federation.service import FederationService, RunContext
 from studio.observer import EvaluationObserver
 
@@ -92,10 +100,8 @@ class ProductRunCapture:
                 original_fail(ctx, tracker, error)
             finally:
                 if ctx.run_type is RunType.LIVE_RUN:
-                    try:
+                    with contextlib.suppress(Exception):
                         capture._fail(ctx, error)
-                    except Exception:
-                        pass
 
         service._round = observing_round  # type: ignore[method-assign]
         service._train_sync = observing_train  # type: ignore[method-assign]

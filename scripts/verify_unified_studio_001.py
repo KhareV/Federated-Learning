@@ -50,8 +50,11 @@ def verify_evidence() -> dict[str, Any]:
         raise ValueError("PREDECESSOR_LOCK_CHANGED")
     out["predecessor_lock_sha256"] = sha(ROOT / PREDECESSOR)
     runs: dict[str, Any] = {}
-    for n, expected_updates in ((3, 24), (10, 80)):
-        ev = json.loads((ROOT / EVIDENCE / f"run_evidence_{n}round.json").read_text())
+    modes = [(3, 24, ""), (10, 80, "")] + ([(10, 80, "_modeB")] if (ROOT / EVIDENCE / "run_evidence_10round_modeB.json").exists() else [])
+    for n, expected_updates, suffix in modes:
+        ev = json.loads((ROOT / EVIDENCE / f"run_evidence_{n}round{suffix}.json").read_text())
+        if suffix and ev["source_mode"] != "LIVE_MONITORED_SITE_00":
+            raise ValueError("MODE_B_EVIDENCE_WRONG_SOURCE_MODE")
         records = ev["metric_table"]
         if (ev["status"] != "COMPLETED" or ev["accepted_updates_total"] != expected_updates or len(records) != n + 1 or any(r["status"] != "COMPLETED" for r in records) or ev["threshold"] != 0.5 or ev["calibration"] != "NONE"
                 or ev["candidate"]["promoted"] or ev["candidate"]["deployed"]):
@@ -62,7 +65,7 @@ def verify_evidence() -> dict[str, Any]:
             raise ValueError(f"LIVE_RUN_FIGURE_TABLE_EXPORT_INVENTORY_FAILED:{n}")
         if not all(a["accepted_updates"] == 8 and abs(a["weights_sum"] - 1) < 1e-12 and a["clients"] == 8 for a in ev["round_accounting"]) or len(ev["round_accounting"]) != n:
             raise ValueError(f"LIVE_RUN_ROUND_ACCOUNTING_FAILED:{n}")
-        runs[str(n)] = {"run_id": ev["run_id"], "evidence_sha256": sha(ROOT / EVIDENCE / f"run_evidence_{n}round.json"), "state_digests": {str(r["round"]): r["state_digest"] for r in records}, "export_manifest_sha256": ev["export_manifest_sha256"]}
+        runs[f"{n}{suffix}"] = {"run_id": ev["run_id"], "evidence_sha256": sha(ROOT / EVIDENCE / f"run_evidence_{n}round{suffix}.json"), "state_digests": {str(r["round"]): r["state_digest"] for r in records}, "export_manifest_sha256": ev["export_manifest_sha256"]}
     out["live_runs"] = runs
     for name in ("studio_browser_verification.json",):
         report = json.loads((ROOT / EVIDENCE / "browser" / name).read_text())
@@ -78,8 +81,22 @@ def verify_evidence() -> dict[str, Any]:
 
 def older_chain() -> dict[str, str]:
     """Every accepted older verifier must still pass against the current tree (successor-aware)."""
-    from scripts import (verify_capstone_ui_v1, verify_capstone_ui_v1_1, verify_capstone_ui_v1_2, verify_capstone_ui_v1_3, verify_capstone_ui_v1_4, verify_capstone_ui_v1_5, verify_capstone_ui_v1_6,
-                         verify_capstone_ui_v1_7, verify_capstone_ui_v1_8, verify_capstone_ui_v1_9, verify_final_showcase, verify_fl10_001, verify_obs_diag_001, verify_observatory_v1)
+    from scripts import (
+        verify_capstone_ui_v1,
+        verify_capstone_ui_v1_1,
+        verify_capstone_ui_v1_2,
+        verify_capstone_ui_v1_3,
+        verify_capstone_ui_v1_4,
+        verify_capstone_ui_v1_5,
+        verify_capstone_ui_v1_6,
+        verify_capstone_ui_v1_7,
+        verify_capstone_ui_v1_8,
+        verify_capstone_ui_v1_9,
+        verify_final_showcase,
+        verify_fl10_001,
+        verify_obs_diag_001,
+        verify_observatory_v1,
+    )
 
     results = {}
     for name, module in (("CAPSTONE_UI_V1", verify_capstone_ui_v1), ("CAPSTONE_UI_V1_1", verify_capstone_ui_v1_1), ("CAPSTONE_UI_V1_2", verify_capstone_ui_v1_2), ("CAPSTONE_UI_V1_3", verify_capstone_ui_v1_3),

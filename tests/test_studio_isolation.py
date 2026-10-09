@@ -11,7 +11,14 @@ import numpy as np
 import pytest
 
 from federated.model_v2_fl import state_sha, train_local_epoch_v2
-from federated.wearable_fl_runner_v1 import BASE_SEED, BATCH_SIZE, LEARNING_RATE, POS_WEIGHT, WEIGHT_DECAY, new_session
+from federated.wearable_fl_runner_v1 import (
+    BASE_SEED,
+    BATCH_SIZE,
+    LEARNING_RATE,
+    POS_WEIGHT,
+    WEIGHT_DECAY,
+    new_session,
+)
 from federated.wearable_fl_system_v1 import EXPERIMENT_ID
 from final_showcase.evaluate import logits_for
 from studio.isolated_eval import isolated_logits, prepare_template

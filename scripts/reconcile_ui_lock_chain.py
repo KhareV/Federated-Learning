@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 """File-by-file reconciliation of the UI lock chain against the current working tree (read-only evidence, never edits a lock).
 
 For every frontend file bound by the V1_9..FINAL_SHOWCASE tip and every file in the current frontend set: the digest the accepted tip

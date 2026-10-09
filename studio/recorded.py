@@ -11,7 +11,7 @@ from fl10.bundle import build_bundle
 from fl10.constants import RECORDED
 from fl10.evaluate import ROOT
 from studio.bundle import SCHEMA
-from studio.constants import COHORT_USE_DETAIL, COHORT_USE_LABEL, EVAL_PROTOCOL_ID
+from studio.constants import COHORT_USE_DETAIL, EVAL_PROTOCOL_ID
 
 RECORDED_LABEL = "RECORDED VERIFIED RUN (NHM_FL10_001, frozen evidence — not a new measurement)"
 _CACHE: dict[str, dict[str, Any]] = {}

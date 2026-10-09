@@ -10,7 +10,15 @@ import json
 import subprocess
 
 from scripts.freeze_observatory_v1 import frontend_files
-from scripts.verify_unified_studio_001 import EVIDENCE, FL10_COMMIT, LOCK_PATH, PREDECESSOR, ROOT, sha, verify_evidence
+from scripts.verify_unified_studio_001 import (
+    EVIDENCE,
+    FL10_COMMIT,
+    LOCK_PATH,
+    PREDECESSOR,
+    ROOT,
+    sha,
+    verify_evidence,
+)
 
 BOUND_PREFIXES = ("studio/", "docs/unified_live_fl/", "reports/unified_live_fl/", "frontend/src/")
 BOUND_EXACT = {

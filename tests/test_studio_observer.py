@@ -64,7 +64,7 @@ def test_metrics_recompute_exactly_from_the_stored_predictions(observer):
     observer.submit(run_id="R", run_length=3, round_id=0, state=state, expected_digest=sha)
     assert observer.wait_idle(120)
     rec = observer.get("R", 0)
-    owners, labels, logits = read_predictions((observer.run_dir("R") / rec.prediction_artifact_reference.path).read_bytes())
+    _owners, labels, logits = read_predictions((observer.run_dir("R") / rec.prediction_artifact_reference.path).read_bytes())
     again = metrics.full_metrics(labels, logits)
     for key in ("AUPRC", "AUROC", "F1", "BCE", "Brier", "TP", "FP", "TN", "FN", "precision", "recall", "specificity"):
         assert again[key] == rec.metric_result[key], key
@@ -74,7 +74,7 @@ def test_metrics_recompute_exactly_from_the_stored_predictions(observer):
 
 
 def test_a_state_that_does_not_match_its_committed_digest_is_never_scored(observer):
-    state, sha = r0()
+    state, _sha = r0()
     rec = observer.submit(run_id="R", run_length=3, round_id=1, state=state, expected_digest="0" * 64)
     assert rec.evaluation_status == "FAILED" and rec.failure.code == "STATE_DIGEST_MISMATCH" and rec.metric_result is None
     assert observer.wait_idle(5) and observer.get("R", 1).metric_result is None
@@ -125,7 +125,7 @@ def test_runs_do_not_share_records(observer):
 
 def test_restart_marks_unfinished_rounds_failed_instead_of_inventing_results(tmp_path):
     obs = EvaluationObserver(tmp_path, holdout_provider=small_holdout)
-    state, sha = r0()
+    _state, sha = r0()
     from studio.records import EvaluationRecord as R
 
     queued = R(run_id="X", run_length=3, round_id=2, global_state_digest=sha, cohort_id="C", evaluation_status="QUEUED", evaluation_queued_at="2026-01-01T00:00:00+00:00")

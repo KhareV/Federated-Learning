@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 """Successor-aware resolution of the frontend binding tip after NHM_FINAL_SHOWCASE_001.
 
 The accepted UI verifiers (CAPSTONE_UI_V1 .. V1_9) accept a changed file only if the tip of the lock chain binds exactly its current bytes.
