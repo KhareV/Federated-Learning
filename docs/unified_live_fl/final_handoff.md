@@ -69,13 +69,13 @@ Each run exports 20×(SVG, PNG 300 dpi, CSV, JSON provenance), 12×(CSV, JSON, M
 `dependency_audit_before.md`, `dependency_audit_after.md`. Retained (KEEP): all federation pages and every Observatory research page; **redirected:** `/app/observatory/fl10` (→ Studio, `?run=` preserved); **removed:** none; **protected:** `/app/observatory/outcomes`, `/app/observatory/federation/[client_id]`; storyboard retained (unique content) and cross-linked. Links/tests migrated as listed in the audit.
 
 ## 26. Authentication
-DemoAuth browser journey (243 checks, one explicit SKIP for a fixture run that existed only in an earlier workspace). Two-identity isolation tested at API and WebSocket level (another user receives 403 / close 4403 on every run-scoped route; recorded evidence is global read-only). **Connected Clerk two-user E2E: NOT EXECUTED** (two Clerk TEST user credentials are not available); DemoAuth never shows an authenticated owner.
+DemoAuth browser journey (281 checks, one explicit SKIP for a fixture run that existed only in an earlier workspace). Two-identity isolation tested at API and WebSocket level (another user receives 403 / close 4403 on every run-scoped route; recorded evidence is global read-only). **Connected Clerk two-user E2E: NOT EXECUTED** (two Clerk TEST user credentials are not available); DemoAuth never shows an authenticated owner.
 
 ## 27. Regression output
 Full gates (`python -m scripts.run_studio_local_gates`, evidence `reports/unified_live_fl/local_test_report.json`):
-- Backend: **3359 passed, 0 failed, 1 skipped** (10 chunks); `tests/test_studio_successor.py` validates the final lock separately.
-- Frontend: vitest **337 passed, 0 failed, 3 skipped**; production build + stamp OK; svelte-check **0 errors**, 121 warnings (baseline 123).
-- Launcher: `run_nhm --demo --preflight-only` passes. Real-browser journey: **243/243**.
+- Backend: **3364 passed, 0 failed, 1 skipped** (10 chunks); `tests/test_studio_successor.py` validates the final lock separately.
+- Frontend: vitest **343 passed, 0 failed, 3 skipped**; production build + stamp OK; svelte-check **0 errors**, 121 warnings (baseline 123).
+- Launcher: `run_nhm --demo --preflight-only` passes. Real-browser journey: **281/281**.
 - **Pre-existing monitoring race flake (reported separately):** `tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers` is intermittent on the pristine baseline `06bd9a0` as well (measured 8/12 isolated failures there, 4/12 at the Studio tip). It failed in several earlier full runs and in the first attempt of the final one (it passed on the recorded isolated retry); the gate runner retries only that named test in isolation and records every attempt (`flaky_retries`); no other failure is tolerated.
 - Earlier-run failures that were caused by this work (route count 66→67, amendment/lock accounting, reconciliation link) were fixed through the governed additive mechanism, not by weakening tests.
 
@@ -83,13 +83,13 @@ Full gates (`python -m scripts.run_studio_local_gates`, evidence `reports/unifie
 Every older verifier passes against the current tree through the additive chain (`CAPSTONE_UI_V1…V1_9`, `NHM_RESEARCH_OBSERVATORY_V1`, `NHM_OBS_DIAG_001`, `NHM_FINAL_SHOWCASE_001`, `NHM_FL10_001`, and the CAP-001…010 amended-lock audits); no historical lock or amendment was modified (only new compatibility amendments added); frozen scientific evidence, the recorded FL10 runs and the 3-round backend are byte-identical (`verify_unified_studio_001`). Pre-existing defects found and corrected additively are listed in the lock (`pre_existing_defects_corrected`) and `governance_repair.md`.
 
 ## 29. Successor lock
-`artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json` — additive successor of `NHM_FL10_001` (status PASS, non-provisional); binds 503 files incl. 311 frontend files; verified by `python -m scripts.verify_unified_studio_001 --lock` and `tests/test_studio_successor.py`. No historical lock was edited; nothing pushed.
+`artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json` — additive successor of `NHM_FL10_001` (status PASS, non-provisional); binds 506 files incl. 312 frontend files; verified by `python -m scripts.verify_unified_studio_001 --lock` and `tests/test_studio_successor.py`. No historical lock was edited; nothing pushed.
 
 ## 31. Addendum — V2-initialised federated fine-tuning and the Generalisation tab
 Delivered after first acceptance, inside the same Studio (`generalisation_protocol.md` has the design, decisions, measured results and limits):
 - **Pretrained start** (`MODEL_V2_FINAL`, now the UI default for 3 and 10 rounds; the untrained `FL_INIT_V2` start is an explicit choice that restores the original frozen 3-round form): strict compatibility audit (digest pin, 92 state entries, 57 553 elements, strict load round trip, logits parity), additive `initial_state` option in `fl10/runner.py`; frozen-FL_INIT parity claims are not made for this mode.
 - **Unseen cohort G1** (16 new synthetic participants, pinned manifest, zero overlap with training, showcase holdout and FL10 holdout) and a **second evaluation lane** that scores every committed round and the unchanged frozen V2 on it, with paired participant-cluster differences (round − V2).
-- **UI/API/exports**: Analysis ▸ GENERALISATION, three read-only owner-scoped routes, hash-verified generalisation exports; browser journey now 243 checks including a genuine pretrained-start 10-round run.
+- **UI/API/exports**: Analysis ▸ GENERALISATION, three read-only owner-scoped routes, hash-verified generalisation exports; browser journey now 281 checks including genuine pretrained-start 3-round and 10-round runs.
 - **Measured (synthetic, unseen participants):** pretrained start R0 = frozen V2 exactly (AUPRC 0.8902) → R10 0.9915 with specificity 0.997 and BCE/Brier not improved reliably; untrained start reaches AUPRC 0.943 at R10 but specificity is 0 from R3 and BCE 3.47 (the earlier negative finding reproduced on a never-used cohort).
 - **3 rounds from the pretrained start** run on the extended engine (FedAvg, plain; the frozen 3-round product contract only accepts the untrained start, so FedProx and the protected-aggregation shadow exist only on the untrained 3-round path).
 - **Not done:** real-ECG AAMI-SVF retention (G2) is NOT EXECUTED; nothing here is clinical or a significance claim.

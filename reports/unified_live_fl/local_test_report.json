@@ -3,26 +3,19 @@
   "platform": "macOS-27.0.1-arm64-arm-64bit",
   "python": "3.11.16"
  },
- "finished": "2026-10-09T21:45:32+0530",
+ "finished": "2026-10-10T00:40:11+0530",
  "note": "Any failing test is listed by name under backend_pytest.failures; none is allow-listed. The one known baseline-flaky monitoring test is retried in isolation and every attempt is recorded under backend_pytest.flaky_retries (reported separately).",
  "passed": true,
- "started": "2026-10-09T21:14:53+0530",
+ "started": "2026-10-10T00:09:09+0530",
  "steps": {
   "backend_pytest": {
    "chunks": 10,
    "errors": 0,
    "failed": 0,
    "failures": [],
-   "flaky_retries": {
-    "tests/test_capstone_monitoring_websocket.py::test_monitoring_completes_with_zero_subscribers": {
-     "first_run": "failed",
-     "retries": [
-      "passed"
-     ]
-    }
-   },
-   "passed": 3359,
-   "seconds": 1806.0970363616943,
+   "flaky_retries": {},
+   "passed": 3364,
+   "seconds": 1829.3496429920197,
    "skipped": 1
   },
   "frontend_build": {
@@ -33,9 +26,9 @@
   },
   "frontend_vitest": {
    "failed": 0,
-   "passed": 337,
+   "passed": 343,
    "returncode": 0,
-   "seconds": 8.9,
+   "seconds": 9.3,
    "skipped": 3
   },
   "launcher_preflight": {
@@ -63,7 +56,7 @@
   "svelte_check": {
    "baseline_warnings": 123,
    "errors": 0,
-   "files": 5846,
+   "files": 5847,
    "warnings": 121
   }
  }
