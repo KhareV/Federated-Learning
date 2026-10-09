@@ -51,7 +51,7 @@
 			{/each}
 			<text x={L} y={H - 6} class="tick">round</text>
 		</svg>
-		<ul class="key">{#each series as s (s.id)}<li><i style={`background:${s.color}`} class:dash={s.dashed}></i>{s.label}</li>{/each}{#if band}<li><i class="bandkey"></i>nominal 95% interval (participant-cluster bootstrap, no significance claim)</li>{/if}</ul>
+		<ul class="key">{#each series as s (s.id)}<li><i style={`background:${s.color}`} class:dash={s.dashed}></i>{s.label}</li>{/each}{#if band}<li><i class="bandkey"></i>nominal two-sided interval, 95 percent (participant-cluster bootstrap, no significance claim)</li>{/if}</ul>
 	{/if}
 </figure>
 <style>

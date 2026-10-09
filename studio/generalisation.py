@@ -212,7 +212,7 @@ def interpret(bundle: dict[str, Any]) -> list[str]:
         if pair is not None:
             iv = pair["metrics"].get(name, {}).get("difference_interval") or {}
             if iv.get("lower") is not None:
-                text += f" Nominal 95% participant-cluster interval of the difference [{_fmt(iv['lower'])}, {_fmt(iv['upper'])}], not a significance test."
+                text += f" Nominal participant-cluster interval (95 percent) of the difference [{_fmt(iv['lower'])}, {_fmt(iv['upper'])}], not a significance test."
         lines.append(text)
     if bundle["integrity"].get("r0_predictions_equal_frozen_v2"):
         lines.append("R0 predictions are identical to frozen V2 (the run started from the pretrained weights).")

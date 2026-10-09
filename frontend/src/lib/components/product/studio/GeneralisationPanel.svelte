@@ -81,7 +81,7 @@
 		<div class="cmp">
 			<table data-testid="generalisation-table">
 				<caption>Round R{shown} against frozen V2, same {g.cohort.windows} windows, same fixed 0.5 rule{shownRecord ? ` · state ${shownRecord.global_state_digest.slice(0, 10)}…` : ''}</caption>
-				<thead><tr><th scope="col">Metric</th><th scope="col">Frozen V2</th><th scope="col">R{shown}</th><th scope="col">Difference</th><th scope="col">Nominal 95% interval</th></tr></thead>
+				<thead><tr><th scope="col">Metric</th><th scope="col">Frozen V2</th><th scope="col">R{shown}</th><th scope="col">Difference</th><th scope="col">Nominal interval (95 percent)</th></tr></thead>
 				<tbody>{#each TABLE_KEYS as key (key)}{@const m = shownRow?.paired_vs_v2?.metrics[key]}
 					<tr data-testid={`generalisation-row-${key}`}><th scope="row">{key}{lower.has(key) ? ' ↓' : ''}</th>
 						<td>{base ? display(base, key).text : '—'}</td><td>{display(shownRecord ?? undefined, key).text}</td>
