@@ -16,7 +16,8 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-OVERLAY_PREFIXES = ("scripts/successor_chain.py", "scripts/capstone_ui_v1_8_successor.py", "scripts/reconcile_ui_lock_chain.py")
+OVERLAY_PREFIXES = ("scripts/successor_chain.py", "scripts/capstone_ui_v1_8_successor.py", "scripts/reconcile_ui_lock_chain.py", "scripts/studio_successor_compat.py", "scripts/fl10_successor_compat.py",
+                    "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json")
 FL10_LOCK = "artifacts/fl10/NHM_FL10_001.lock.json"
 FINAL_LOCK = "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
 
@@ -36,8 +37,9 @@ def run(tree: Path, module: str) -> tuple[int, str]:
 def tree(tmp_path_factory: pytest.TempPathFactory) -> Path:
     path = tmp_path_factory.mktemp("govtree") / "wt"
     git(ROOT, "worktree", "add", "-q", "--detach", str(path), "HEAD")
-    for relative in OVERLAY_PREFIXES:  # the governance code under test may not be committed yet
+    for relative in OVERLAY_PREFIXES:  # the governance code under test (and the not-yet-committed lock) may not be in HEAD
         if (ROOT / relative).is_file():
+            (path / relative).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / relative, path / relative)
     yield path
     git(ROOT, "worktree", "remove", "--force", str(path))
@@ -49,6 +51,7 @@ def clean(tree: Path) -> Path:
     git(tree, "clean", "-fdq", "--", "frontend/src", "artifacts")
     for relative in OVERLAY_PREFIXES:
         if (ROOT / relative).is_file():
+            (tree / relative).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / relative, tree / relative)
     return tree
 

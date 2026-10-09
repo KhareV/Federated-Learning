@@ -27,13 +27,19 @@ def tracked_files() -> list[str]:
     return sorted(p for p in paths if p != str(LOCK_PATH.relative_to(ROOT)) and (p in BOUND_EXACT or p.startswith(BOUND_PREFIXES)) and (ROOT / p).is_file())
 
 
-def freeze() -> dict:
-    evidence = verify_evidence()
-    browser = json.loads((ROOT / EVIDENCE / "browser/studio_browser_verification.json").read_text())
-    tests = json.loads((ROOT / EVIDENCE / "local_test_report.json").read_text())
-    launcher = json.loads((ROOT / EVIDENCE / "launcher_preflight.json").read_text())
-    if not browser["passed"] or not tests["passed"] or not launcher["passed"]:
-        raise ValueError("STUDIO_GATE_NOT_PASSED")
+def freeze(provisional: bool = False) -> dict:
+    """``provisional=True`` writes an UNCOMMITTED chain-valid lock (``provisional: true``, gates not yet passed) so the older lock-verifying tests can run against the final tree;
+    the verifier rejects it. The real lock is written afterwards from the gate results and is the only one ever committed."""
+    if provisional:
+        evidence = {"predecessor_lock_sha256": sha(ROOT / PREDECESSOR), "live_runs": {}, "tests_sha256": "0" * 64}
+        browser, tests, launcher = {"passed": False, "total": 0, "failed": []}, {"passed": False}, {"passed": False}
+    else:
+        evidence = verify_evidence()
+        browser = json.loads((ROOT / EVIDENCE / "browser/studio_browser_verification.json").read_text())
+        tests = json.loads((ROOT / EVIDENCE / "local_test_report.json").read_text())
+        launcher = json.loads((ROOT / EVIDENCE / "launcher_preflight.json").read_text())
+        if not browser["passed"] or not tests["passed"] or not launcher["passed"]:
+            raise ValueError("STUDIO_GATE_NOT_PASSED")
     predecessor = json.loads((ROOT / PREDECESSOR).read_text())
     repins = sorted(path for path, old in predecessor["bound_files"].items() if (ROOT / path).is_file() and sha(ROOT / path) != old)
     files = tracked_files()
@@ -48,7 +54,8 @@ def freeze() -> dict:
         "frontend_files": {path: sha(ROOT / path) for path in frontend_files()},
         "bound_files": {path: sha(ROOT / path) for path in files},
         "live_runs": evidence["live_runs"],
-        "evidence": {"tests_sha256": evidence["tests_sha256"], "browser_report_sha256": sha(ROOT / EVIDENCE / "browser/studio_browser_verification.json"), "launcher_preflight_sha256": sha(ROOT / EVIDENCE / "launcher_preflight.json")},
+        "provisional": provisional,
+        "evidence": {"tests_sha256": evidence["tests_sha256"], "browser_report_sha256": "0" * 64 if provisional else sha(ROOT / EVIDENCE / "browser/studio_browser_verification.json"), "launcher_preflight_sha256": "0" * 64 if provisional else sha(ROOT / EVIDENCE / "launcher_preflight.json")},
         "test_results": tests, "browser_result": {"passed": browser["passed"], "total": browser["total"], "failed": browser["failed"]}, "launcher_preflight": launcher,
         "claim_boundary": "SYNTHETIC_ENGINEERING_EVENT_EVALUATION_ONLY_NOT_AAMI_SVF_OR_CLINICAL",
         "evaluation_cohort_use": "REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST",
@@ -84,4 +91,6 @@ def freeze() -> dict:
 
 
 if __name__ == "__main__":
-    print(json.dumps({"status": freeze()["status"], "lock": str(LOCK_PATH)}))
+    import sys
+
+    print(json.dumps({"status": freeze(provisional="--provisional" in sys.argv)["status"], "lock": str(LOCK_PATH), "provisional": "--provisional" in sys.argv}))

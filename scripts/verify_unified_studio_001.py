@@ -101,6 +101,8 @@ def verify_lock(path: Path = LOCK_PATH, *, with_older_chain: bool = True) -> dic
     lock = json.loads(path.read_text())
     link = successor_chain.LINKS[-1]
     successor_chain.validate_link(link, ROOT, lock_override=lock)           # id, PASS, predecessor digest, bytes at the immutable predecessor commit, scope flags, frontend binding
+    if lock.get("provisional") is not False:
+        raise ValueError("STUDIO_LOCK_IS_PROVISIONAL")
     if lock["predecessor_commit"] != FL10_COMMIT or lock["predecessor_lock_sha256"] != evidence["predecessor_lock_sha256"]:
         raise ValueError("STUDIO_PREDECESSOR_IDENTITY_MISMATCH")
     for flag in FLAGS_FALSE:
