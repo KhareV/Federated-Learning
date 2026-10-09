@@ -69,7 +69,7 @@
 		if (view.kind === 'intervals') return iv.map((r) => [r.label, cell(r.point), cell(r.lo), cell(r.hi), `${r.valid} valid / ${r.invalid} invalid`]);
 		if (view.kind === 'confusion') return view.matrices.map((m: Record<string, number | string>) => [String(m.label), `TP ${m.TP}`, `FP ${m.FP}`, `TN ${m.TN}`, `FN ${m.FN}`, `N ${m.n}`]);
 		if (view.kind === 'hist') return view.panels.flatMap((p: { name: string; edges: number[]; positive: number[]; negative: number[] }) => p.positive.map((v, i) => [p.name, `${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)}`, `positive ${v}`, `negative ${p.negative[i]}`]));
-		if (view.kind === 'lineage') return view.states.map((s: Record<string, unknown>) => [String(s.state), String(s.sha256), String(s.previous ?? 'FL_INIT_V2'), String(s.accepted_updates), String(s.status), s.equals_frozen_reference === null ? 'n/a' : String(s.equals_frozen_reference)]);
+		if (view.kind === 'lineage') return view.states.map((s: Record<string, unknown>) => [String(s.state), String(s.sha256), String(s.previous ?? s.origin ?? 'FL_INIT_V2'), String(s.accepted_updates), String(s.status), s.equals_frozen_reference === null ? 'n/a' : String(s.equals_frozen_reference)]);
 		if (view.kind === 'diagram') return view.nodes.map((n: { label: string }) => [n.label]);
 		return [];
 	});
@@ -164,7 +164,7 @@
 		<div class="diagram"><div class="col">{#each view.nodes as n}<span class="node">{n.label}</span>{/each}</div><div class="arrow" aria-hidden="true">→</div><div class="col">{#each view.stages as st}<span class="stage">{st}</span>{/each}</div></div>
 		<p class="dim">{view.monitoring}</p>
 	{:else if view.kind === 'lineage'}
-		<ol class="lineage">{#each view.states as s (s.state)}<li><b>{s.state}</b> <code>{s.sha256.slice(0, 20)}…</code> ← <code>{(s.previous ?? 'FL_INIT_V2').slice(0, 12)}…</code> · accepted {s.accepted_updates} · {s.status}{#if s.equals_frozen_reference === true} · <span class="ok">= frozen reference</span>{:else if s.equals_frozen_reference === false} · <span class="bad">DIFFERS</span>{/if}</li>{/each}</ol>
+		<ol class="lineage">{#each view.states as s (s.state)}<li><b>{s.state}</b> <code>{s.sha256.slice(0, 20)}…</code> ← <code>{(s.previous ?? s.origin ?? 'FL_INIT_V2').slice(0, 12)}…</code> · accepted {s.accepted_updates} · {s.status}{#if s.equals_frozen_reference === true} · <span class="ok">= frozen reference</span>{:else if s.equals_frozen_reference === false} · <span class="bad">DIFFERS</span>{/if}</li>{/each}</ol>
 	{/if}
 	<div class="tip" aria-live="polite" data-testid="chart-tip">{tip}</div>
 	<p class="cap">{spec.caption}</p>

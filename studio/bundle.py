@@ -87,7 +87,7 @@ def build_live_bundle(*, run_id: str, run_length: int, run_dir: Path, observer: 
     cohort = training_cohort if training_cohort is not None else report.get("training_cohort") or []
     paired = observer.paired(eval_id)
     run = {k: report.get(k) for k in ("run_id", "mode", "status", "planned_rounds", "rounds_committed", "started_at", "finished_at", "settings", "accepted_updates_total", "example_exposures_total", "unique_training_windows", "candidate",
-                                      "coordinator_identity", "prefix_equals_frozen_reference", "federation_engine", "failure")}
+                                      "coordinator_identity", "prefix_equals_frozen_reference", "federation_engine", "failure", "initialisation")}
     run["status"] = report.get("status", status)
     link = run_dir / "monitoring_link.json"
     return {

@@ -228,7 +228,10 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
         none_needed=True, availability_note=f"{len(rr)} of {n} rounds committed")
     # 18 lineage --------------------------------------------------------------------------------------------------------------------
     prog = b["state_progression"]
-    lineage = ([{"state": "R00", "sha256": prog["0"]["sha256"], "previous": None, "accepted_updates": 0, "status": "FL_INIT_V2 (initial state)", "equals_frozen_reference": True}] if "0" in prog else [])
+    base_id = (b["run"].get("initialisation") or {}).get("model_id", "FL_INIT_V2")
+    pretrained = base_id != "FL_INIT_V2"
+    lineage = ([{"state": "R00", "sha256": prog["0"]["sha256"], "previous": None, **({"origin": base_id} if pretrained else {}), "accepted_updates": 0,
+                 "status": (f"{base_id} (pretrained checkpoint, initial state)" if pretrained else "FL_INIT_V2 (initial state)"), "equals_frozen_reference": None if pretrained else True}] if "0" in prog else [])
     for r in rr:
         parity = (r.get("parity") or {}).get("equals_frozen_reference")
         lineage.append({"state": f"R{r['round']:02d}", "sha256": r["global_state_sha256"], "previous": r["base_state_sha256"], "accepted_updates": r["accepted_updates"], "status": r["candidate_status"], "equals_frozen_reference": parity})

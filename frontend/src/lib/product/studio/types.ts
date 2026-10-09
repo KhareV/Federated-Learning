@@ -13,7 +13,7 @@ export interface StudioCapabilities {
 	studio_id: string;
 	run_lengths: number[];
 	default_run_length: number;
-	ten_round: { available: boolean; initialisations?: { id: Initialisation; label: string; default: boolean }[]; source_modes: SourceMode[]; algorithms: string[]; aggregation_modes: string[]; unsupported: Record<string, string>; expected_updates: number };
+	ten_round: { available: boolean; initialisations?: { id: Initialisation; label: string; default: boolean }[]; rounds_by_initialisation?: Partial<Record<Initialisation, number[]>>; default_initialisation?: Initialisation; source_modes: SourceMode[]; algorithms: string[]; aggregation_modes: string[]; unsupported: Record<string, string>; expected_updates: number };
 	three_round: { available: boolean; expected_updates: number };
 	generalisation?: { cohort_id: string; label: string; claim_boundary: string; baseline: string };
 	evaluation: { observer_id: string; protocol_id: string; threshold: number; calibration: string; cohort_use: string; cohort_use_detail: string; claim_boundary: string };

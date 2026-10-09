@@ -14,7 +14,7 @@ export const isStudioRunId = (runId: string): boolean => runId.startsWith('FL10R
 
 /** Presentation adapter: the Studio descriptor in the shape the original Federation Studio components already consume. No field is invented. */
 export function studioRunToFederationRun(d: StudioRun): FederationRun {
-	return { run_id: d.run_id, run_type: d.run_type, base_model_id: 'FL_INIT_V2', federation_protocol_id: d.engine === 'FL10_10R' ? 'NHM_FL10_SYNTHETIC_ENGINEERING_V1' : 'CAPSTONE_FEDERATION_PROTOCOL_V1',
+	return { run_id: d.run_id, run_type: d.run_type, base_model_id: d.base_model?.model_id ?? 'FL_INIT_V2', federation_protocol_id: d.engine === 'FL10_10R' ? 'NHM_FL10_SYNTHETIC_ENGINEERING_V1' : 'CAPSTONE_FEDERATION_PROTOCOL_V1',
 		algorithm: d.algorithm as FederationRun['algorithm'], client_ids: d.client_ids, planned_rounds: d.planned_rounds, current_round: d.current_round, started_at_us: null, completed_at_us: null, status: d.status,
 		secagg_mode: d.secagg_mode as FederationRun['secagg_mode'], candidate_ids: [], engineering_only: true };
 }

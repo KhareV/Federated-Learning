@@ -1,5 +1,6 @@
 <script lang="ts">
-	// One continuous start workflow for both run lengths. 3 rounds (default) keeps the ORIGINAL run form and the frozen 3-round contract untouched; 10 rounds uses the separate verified engine.
+	// One continuous start workflow for both run lengths and both starting models. The default starting model is the pretrained V2 (MODEL_V2_FINAL, federated fine-tuning); the untrained start stays available.
+	// 3 rounds from the UNTRAINED start keeps the ORIGINAL run form and the frozen 3-round product contract untouched; every other combination uses the verified extended engine (FedAvg, plain aggregation).
 	import RunConfigForm from '$lib/components/product/federation/RunConfigForm.svelte';
 	import type { FederationRunChoice } from '$lib/product/api';
 	import type { Initialisation, RunLength, SourceMode, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
@@ -8,8 +9,14 @@
 		onStartThree: (choice: FederationRunChoice) => void; onStartTen: (choice: StudioRunChoice) => void } = $props();
 	let length = $state<RunLength>(3);              // default stays 3
 	let source = $state<SourceMode>('CANONICAL_SYNTHETIC');
-	let initialisation = $state<Initialisation>('FL_INIT_V2');                      // default keeps the original untrained start; the pretrained V2 start is an explicit choice
+	let initChoice = $state<Initialisation | null>(null);                           // null = follow the backend's default (pretrained V2); the user's choice then overrides it
 	const inits = $derived(capabilities?.ten_round.initialisations ?? []);
+	const defaultInit = $derived<Initialisation>(capabilities?.ten_round.default_initialisation ?? (inits.some((i) => i.id === 'MODEL_V2_FINAL') ? 'MODEL_V2_FINAL' : 'FL_INIT_V2'));
+	const initialisation = $derived<Initialisation>(initChoice ?? defaultInit);
+	const v2Rounds = $derived(capabilities?.ten_round.rounds_by_initialisation?.MODEL_V2_FINAL ?? [10]);
+	const v2ThreeUnsupported = $derived(inits.length > 0 && initialisation === 'MODEL_V2_FINAL' && length === 3 && !v2Rounds.includes(3));
+	/** The original frozen form: 3 rounds from the untrained start (or a backend that offers no starting-model choice). */
+	const original = $derived(length === 3 && (!inits.length || initialisation === 'FL_INIT_V2' || v2ThreeUnsupported));
 	const tenAvailable = $derived(capabilities?.ten_round.available === true);
 	const unsupported = $derived(capabilities?.ten_round.unsupported ?? {});
 	const modes = $derived(capabilities?.ten_round.source_modes ?? ['CANONICAL_SYNTHETIC']);
@@ -34,26 +41,27 @@
 		<table class="exp" aria-label="Expected communication structure"><thead><tr><th scope="col">Choice</th><th scope="col">Clients</th><th scope="col">Rounds</th><th scope="col">Expected accepted updates</th></tr></thead>
 			<tbody><tr class:cur={length === 3}><th scope="row">Default</th><td>8</td><td>3</td><td data-testid="expected-3">24</td></tr><tr class:cur={length === 10}><th scope="row">Extended</th><td>8</td><td>10</td><td data-testid="expected-10">80</td></tr></tbody></table>
 		<p class="dim">These are expected counts, not evidence of completed work. The running page shows only updates the coordinator actually accepted.</p>
+		{#if inits.length}
+			<label><span>Starting model</span><select value={initialisation} onchange={(e) => { initChoice = (e.currentTarget as HTMLSelectElement).value as Initialisation; }} data-testid="cfg10-init">{#each inits as i (i.id)}<option value={i.id}>{i.id === 'FL_INIT_V2' ? 'Untrained V2 architecture — FL_INIT_V2' : 'Pretrained V2 (default) — MODEL_V2_FINAL, federated fine-tuning'}</option>{/each}</select></label>
+			<p class="help" data-testid="cfg10-init-note">{inits.find((i) => i.id === initialisation)?.label}. {initialisation === 'MODEL_V2_FINAL' ? 'R0 is the verified pretrained checkpoint, unchanged; the federated rounds adapt it on the synthetic engineering-event task. The Generalisation tab then compares every round with frozen V2 on an unseen cohort. FedAvg with plain aggregation.' : length === 3 ? 'Original frozen 3-round contract: FedAvg or FedProx, optional protected-aggregation shadow. R0 is a fresh untrained model.' : 'R0 is a fresh untrained model; frozen V2 is shown only as an external reference.'}</p>
+			{#if v2ThreeUnsupported}<p class="warn" role="status" data-testid="v2-three-unsupported">3 rounds from the pretrained start are not offered by the connected backend; the original untrained 3-round form is shown.</p>{/if}
+		{/if}
 	</div>
-	{#if length === 3}
+	{#if original}
 		<RunConfigForm {disabled} {liveBlocked} {backendEnabled} onSubmit={onStartThree} />
 	{:else}
-		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: 10, source_mode: source, ...(inits.length ? { initialisation } : {}) }); }} aria-label="Ten-round federation run configuration">
+		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: length, source_mode: source, ...(inits.length ? { initialisation } : {}) }); }} aria-label={`${length === 3 ? 'Three' : 'Ten'}-round federation run configuration`}>
 			<label><span>Run mode</span><select disabled data-testid="cfg10-run-type"><option>LIVE_RUN</option><option disabled>REPLAY — open a completed run instead</option></select></label>
-			<p class="help">LIVE_RUN performs genuine local optimization and federation for ten rounds. A replay never trains: open a completed 10-round run from “Your federation runs”, or a recorded FL10 run, to replay it.</p>
+			<p class="help">LIVE_RUN performs genuine local optimization and federation for {length} rounds. A replay never trains: open a completed run from “Your federation runs”, or a recorded FL10 run, to replay it.</p>
 			<label><span>Source mode</span><select bind:value={source} data-testid="cfg10-source">{#each modes as m (m)}<option value={m}>{m === 'CANONICAL_SYNTHETIC' ? 'Canonical synthetic cohort' : 'Live-monitored simulated SITE_00'}</option>{/each}</select></label>
 			<p class="help" data-testid="cfg10-source-note">{SOURCE_TEXT[source]}</p>
-			{#if inits.length}
-				<label><span>Starting model</span><select bind:value={initialisation} data-testid="cfg10-init">{#each inits as i (i.id)}<option value={i.id}>{i.id === 'FL_INIT_V2' ? 'Untrained V2 architecture (default) — FL_INIT_V2' : 'Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning'}</option>{/each}</select></label>
-				<p class="help" data-testid="cfg10-init-note">{inits.find((i) => i.id === initialisation)?.label}. {initialisation === 'MODEL_V2_FINAL' ? 'R0 is the verified pretrained checkpoint, unchanged; the federated rounds adapt it on the synthetic engineering-event task. The Generalisation tab then compares every round with frozen V2 on an unseen cohort.' : 'R0 is a fresh untrained model; frozen V2 is shown only as an external reference.'}</p>
-			{/if}
 			<label><span>Algorithm</span><select disabled data-testid="cfg10-algorithm"><option>FedAvg — sample-count-weighted averaging</option><option disabled>FedProx — unavailable</option></select></label>
 			<p class="help" data-testid="cfg10-algorithm-note">{unsupported.FEDPROX ? `FedProx is disabled: ${unsupported.FEDPROX}.` : 'FedAvg only.'}</p>
 			<label><span>Aggregation / protection mode</span><select disabled data-testid="cfg10-mode"><option>Plain aggregation</option><option disabled>SecAgg+ shadow — unavailable</option></select></label>
 			<p class="help" data-testid="cfg10-mode-note">{unsupported.SECAGG_SHADOW ? `SecAgg+ shadow is disabled: ${unsupported.SECAGG_SHADOW}.` : 'Plain aggregation only.'} An unsupported setting is never silently reinterpreted as FedAvg/plain.</p>
-			<dl class="fixed" aria-label="Fixed configuration"><div><dt>Clients</dt><dd>8</dd></div><div><dt>Rounds</dt><dd>10</dd></div><div><dt>Base</dt><dd>{initialisation}</dd></div><div><dt>Evaluation</dt><dd>per committed round</dd></div></dl>
+			<dl class="fixed" aria-label="Fixed configuration"><div><dt>Clients</dt><dd>8</dd></div><div><dt>Rounds</dt><dd>{length}</dd></div><div><dt>Base</dt><dd>{initialisation}</dd></div><div><dt>Evaluation</dt><dd>per committed round</dd></div></dl>
 			{#if liveBlocked}<p class="warn" role="status">ONE LIVE FEDERATION RUN AT A TIME IN THIS ONE-LAPTOP DEMONSTRATION.</p>{/if}
-			<button type="submit" disabled={blocked} data-testid="cfg10-submit">Create and start 10-round live run</button>
+			<button type="submit" disabled={blocked} data-testid="cfg10-submit">Create and start {length}-round live run</button>
 		</form>
 	{/if}
 </div>

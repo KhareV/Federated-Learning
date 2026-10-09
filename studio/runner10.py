@@ -24,6 +24,7 @@ from product.federation.journal import FederationEventJournal
 from studio import v2_init
 from studio.events10 import Fl10EventTranslator
 from studio.observer import EvaluationObserver
+from studio.specs import comparison_pair
 
 CLIENT_IDS = tuple(f"SIM_FL_SITE_{i:02d}" for i in range(8))
 MODES = {"A": "CANONICAL_SYNTHETIC", "B": "LIVE_MONITORED_SITE_00"}
@@ -46,6 +47,7 @@ class Job:
     owner: str
     mode: str
     created_at: str
+    rounds: int = 10                             # 10 (extended) or 3 (only with the pretrained start; the frozen 3-round product contract keeps the untrained start)
     init: str = v2_init.INIT_FRESH               # FL_INIT_V2 (untrained, default) | MODEL_V2_FINAL (pretrained, federated fine-tuning)
     base_audit: dict[str, Any] | None = None     # compatibility audit of the pretrained start (None for FL_INIT_V2)
     status: str = "CREATED"                      # CREATED | RUNNING | COMPLETED | FAILED
@@ -83,13 +85,13 @@ class StudioFl10Service:
 
     def _save(self, job: Job) -> None:
         meta = {"run_id": job.run_id, "owner": job.owner, "mode": job.mode, "init": job.init, "base_audit": job.base_audit, "created_at": job.created_at, "status": job.status, "phase": job.phase, "current_round": job.current_round,
-                "failure": job.failure, "candidate": job.candidate, "export_status": job.export_status, "run_length": 10, "engine": "FL10_10R"}
+                "failure": job.failure, "candidate": job.candidate, "export_status": job.export_status, "run_length": job.rounds, "engine": "FL10_10R"}
         atomic_write(self.job_dir(job.run_id) / "meta.json", (json.dumps(meta, indent=1, sort_keys=True) + "\n").encode())
 
     def _load_existing(self) -> None:
         for path in sorted(self.root.glob("FL10RUN-*/meta.json")):
             meta = json.loads(path.read_text())
-            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
+            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], rounds=int(meta.get("run_length", 10)), init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
                       failure=meta.get("failure"), candidate=meta.get("candidate"), export_status=meta.get("export_status", "NOT_STARTED"))
             journal = FederationEventJournal(job.run_id)
             for event in self.events.read_events(job.run_id):
@@ -137,7 +139,11 @@ class StudioFl10Service:
         if tasks:
             await asyncio.wait(tasks, timeout=timeout)
 
-    async def create(self, owner: str, mode: str, init: str = v2_init.INIT_FRESH) -> Job:
+    async def create(self, owner: str, mode: str, init: str = v2_init.INIT_FRESH, rounds: int = 10) -> Job:
+        if rounds not in (3, 10):
+            raise StudioRunError("INVALID_REQUEST", "the extended engine runs 3 or 10 rounds")
+        if rounds == 3 and init != v2_init.INIT_V2_FINAL:
+            raise StudioRunError("INVALID_REQUEST", "3-round untrained runs use the frozen product contract (POST /product/v1/federation/runs); 3 rounds here start from the pretrained V2 weights")
         if init not in v2_init.INITS:
             raise StudioRunError("INVALID_REQUEST", "initialisation must be FL_INIT_V2 (untrained) or MODEL_V2_FINAL (pretrained)")
         if mode not in MODES:
@@ -145,10 +151,10 @@ class StudioFl10Service:
         if mode == "B" and self._inference_factory is None:
             raise StudioRunError("SOURCE_MODE_UNAVAILABLE", "the live-monitored simulated SITE_00 source needs the monitoring runtime")
         run_id = f"FL10RUN-{secrets.token_hex(6).upper()}"
-        job = Job(run_id=run_id, owner=owner, mode=mode, init=init, created_at=_now(), loop=asyncio.get_running_loop())
+        job = Job(run_id=run_id, owner=owner, mode=mode, rounds=rounds, init=init, created_at=_now(), loop=asyncio.get_running_loop())
         job.journal = FederationEventJournal(run_id)
         job.emitter = FederationEmitter(run_id, lambda: time.time_ns() // 1000, [job.journal.append, lambda e: self.events.append_event(run_id, e)], 0)
-        job.translator = Fl10EventTranslator(job.emitter, lambda fn: job.loop.call_soon_threadsafe(fn), planned_rounds=10, client_ids=CLIENT_IDS, local_examples={c: 0 for c in CLIENT_IDS})
+        job.translator = Fl10EventTranslator(job.emitter, lambda fn: job.loop.call_soon_threadsafe(fn), planned_rounds=rounds, client_ids=CLIENT_IDS, local_examples={c: 0 for c in CLIENT_IDS})
         self.jobs[run_id] = job
         self._save(job)
         job.translator.created()
@@ -218,7 +224,7 @@ class StudioFl10Service:
         job.translator.examples = examples  # type: ignore[union-attr]
         atomic_write(directory / "training_cohort.json", (json.dumps([{"client_id": d.client_id, "participant_id": d.participant_id, "session_id": d.session_id, "dataset_sha256": d.dataset_sha256,
                                                                        "counts": d.counts} for d in datasets], indent=1, sort_keys=True) + "\n").encode())
-        self.observer.declare_pair(job.run_id, 3, 10)
+        self.observer.declare_pair(job.run_id, *comparison_pair(job.rounds))
 
         def progress(event: dict[str, Any]) -> None:
             if job.cancelled:      # cooperative stop (application shutdown): the runner fails closed, the run is never a candidate
@@ -229,34 +235,34 @@ class StudioFl10Service:
                 job.current_round = r
                 if r == 1:       # R0 exists on disk before round 1 opens; its digest is the base of round 1
                     sha = event["base_state_sha256"]
-                    self.observer.submit(run_id=job.run_id, run_length=10, round_id=0, state=load_state(run_dir, 0, sha), expected_digest=sha)
+                    self.observer.submit(run_id=job.run_id, run_length=job.rounds, round_id=0, state=load_state(run_dir, 0, sha), expected_digest=sha)
             elif kind == "ROUND_COMMITTED":
                 sha = event["global_state_sha256"]
-                self.observer.submit(run_id=job.run_id, run_length=10, round_id=r, state=load_state(run_dir, r, sha), expected_digest=sha,
-                                     candidate_id=f"FL10_CANDIDATE_{job.run_id}" if r == 10 else None)
+                self.observer.submit(run_id=job.run_id, run_length=job.rounds, round_id=r, state=load_state(run_dir, r, sha), expected_digest=sha,
+                                     candidate_id=f"FL10_CANDIDATE_{job.run_id}" if r == job.rounds else None)
 
         self._set_phase(job, "TRAINING")
         pretrained = {"initial_state": initial_state, "initialisation": initialisation} if initial_state is not None else {}
         if job.mode == "A":
-            report = runner.run_training(mode="A", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, require_prefix_parity=initial_state is None, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), **pretrained)
+            report = runner.run_training(mode="A", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, rounds=job.rounds, require_prefix_parity=initial_state is None, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), **pretrained)
         else:
             from final_showcase import link_trace
             from fl10.trace import Fl10TrainerTap
             from product.edge.local_training_buffer import LocalTrainingBufferV1
 
             with Fl10TrainerTap() as tap:
-                report = runner.run_training(mode="B", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, require_prefix_parity=False, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), **pretrained)
+                report = runner.run_training(mode="B", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, rounds=job.rounds, require_prefix_parity=False, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), **pretrained)
             expected = link_trace.expected_trace(live)
             buffer = LocalTrainingBufferV1(live.client_id, live.participant_id)
             buffer.ingest_dataset(live)
-            trace = link_trace.verify_trace(expected, link_trace.buffer_trace(buffer), tap.calls, client_id=live.client_id, rounds=10)
+            trace = link_trace.verify_trace(expected, link_trace.buffer_trace(buffer), tap.calls, client_id=live.client_id, rounds=job.rounds)
             link = {"label": "LIVE-MONITORED SIMULATED ECG — NOT A REAL PHYSIOLOGICAL PATIENT", "monitoring": {k: v for k, v in (monitored or {}).items() if k != "windows"}, "parity": parity, "trace": trace,
-                    "monitoring_sessions_executed": 1, "buffer_reused_for_rounds": 10, "site00_source": "LIVE_MONITORED_WINDOWS"}
+                    "monitoring_sessions_executed": 1, "buffer_reused_for_rounds": job.rounds, "site00_source": "LIVE_MONITORED_WINDOWS"}
             atomic_write(run_dir / "monitoring_link.json", (json.dumps(link, sort_keys=True, indent=1) + "\n").encode())
         job.candidate = {**report["candidate"], "candidate_id": f"FL10_CANDIDATE_{job.run_id}"}
-        job.status, job.phase, job.current_round = "COMPLETED", "EVALUATING", 10
+        job.status, job.phase, job.current_round = "COMPLETED", "EVALUATING", job.rounds
         self._save(job)
-        job.translator.completed(10)  # type: ignore[union-attr]
+        job.translator.completed(job.rounds)  # type: ignore[union-attr]
         self._wait_evaluations(job)
         if self._finalize is not None:
             job.export_status = "PREPARING"
@@ -273,8 +279,8 @@ class StudioFl10Service:
         end = time.monotonic() + timeout
         while time.monotonic() < end:
             records = self.observer.records(job.run_id)
-            if len(records) == 11 and all(r.evaluation_status in ("COMPLETED", "FAILED") for r in records) and self.observer.paired(job.run_id) is not None:
+            if len(records) == job.rounds + 1 and all(r.evaluation_status in ("COMPLETED", "FAILED") for r in records) and self.observer.paired(job.run_id) is not None:
                 return
-            if len(records) == 11 and all(r.evaluation_status in ("COMPLETED", "FAILED") for r in records) and any(r.evaluation_status == "FAILED" for r in records):
+            if len(records) == job.rounds + 1 and all(r.evaluation_status in ("COMPLETED", "FAILED") for r in records) and any(r.evaluation_status == "FAILED" for r in records):
                 return
             time.sleep(0.5)

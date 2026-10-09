@@ -80,7 +80,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     async def capabilities(request: Request) -> dict[str, Any]:
         await identity(request)
         return {"studio_id": STUDIO_ID, "run_lengths": list(RUN_LENGTHS), "default_run_length": 3,
-                "ten_round": {"available": True, "engine": "FL10_10R", "initialisations": [{"id": k, "label": v2_init.INIT_LABELS[k], "default": k == v2_init.INIT_FRESH} for k in v2_init.INITS], "source_modes": list(MODES.values()), "algorithms": ["FEDAVG"], "aggregation_modes": ["PLAIN"],
+                "ten_round": {"available": True, "engine": "FL10_10R", "rounds_by_initialisation": {"FL_INIT_V2": [10], "MODEL_V2_FINAL": [3, 10]}, "default_initialisation": v2_init.INIT_V2_FINAL, "initialisations": [{"id": k, "label": v2_init.INIT_LABELS[k], "default": k == v2_init.INIT_V2_FINAL} for k in v2_init.INITS], "source_modes": list(MODES.values()), "algorithms": ["FEDAVG"], "aggregation_modes": ["PLAIN"],
                               "unsupported": {"FEDPROX": "not implemented or verified by the 10-round engine", "SECAGG_SHADOW": "not implemented or verified by the 10-round engine"}, "expected_updates": 80},
                 "three_round": {"available": True, "engine": "PRODUCT_3R", "route": FEDERATION_RUNS, "expected_updates": 24},
                 "generalisation": {"cohort_id": g1_cohort.COHORT_ID, "label": g1_cohort.COHORT_USE_LABEL, "claim_boundary": g1_cohort.CLAIM_BOUNDARY, "baseline": "MODEL_V2_FINAL (unchanged, frozen)"},
@@ -94,17 +94,18 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     @app.post(f"{STUDIO}/runs")
     async def start_ten_round(request: Request, body: dict[str, Any]) -> dict[str, Any]:
         user = await identity(request)
-        if body.get("run_length") == 3:
-            raise ProductError(ProductErrorCode.INVALID_REQUEST, f"3-round runs use the frozen product contract: POST {FEDERATION_RUNS}")
+        rounds = body.get("run_length")
+        if rounds == 3 and body.get("initialisation") != v2_init.INIT_V2_FINAL:
+            raise ProductError(ProductErrorCode.INVALID_REQUEST, f"3-round runs from the untrained start use the frozen product contract: POST {FEDERATION_RUNS}")
         mode_names = {v: k for k, v in MODES.items()}
-        if body.get("run_length") != 10 or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
-            raise ProductError(ProductErrorCode.INVALID_REQUEST, "run_length must be 10 and source_mode CANONICAL_SYNTHETIC or LIVE_MONITORED_SITE_00")
+        if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
+            raise ProductError(ProductErrorCode.INVALID_REQUEST, "run_length must be 10 (or 3 with initialisation MODEL_V2_FINAL) and source_mode CANONICAL_SYNTHETIC or LIVE_MONITORED_SITE_00")
         if body.get("algorithm", "FEDAVG") != "FEDAVG" or body.get("secagg_mode", "PLAIN") != "PLAIN" or body.get("run_type", "LIVE_RUN") != "LIVE_RUN":
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "the 10-round engine supports LIVE_RUN FedAvg with plain aggregation only; an unsupported combination is never reinterpreted")
         resolved = await identity_resolver(request)
         store.upsert_user(resolved)
         try:
-            job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")], body.get("initialisation", "FL_INIT_V2"))
+            job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")], body.get("initialisation", "FL_INIT_V2"), rounds)
             job = await service.runner10.start(user, job.run_id)
         except StudioRunError as error:
             raise _as_product_error(error) from error

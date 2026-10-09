@@ -195,3 +195,72 @@ def test_the_primary_diagnostic_lane_is_unchanged_for_the_pretrained_run(pretrai
     summary = _poll(c, f"{S}/runs/{run_id}/evaluation", USER_A, lambda s: len(s["records"]) == 11 and all(r["evaluation_status"] == "COMPLETED" for r in s["records"]))
     assert all(r["cohort_use"].startswith("REUSED SYNTHETIC DIAGNOSTIC EVALUATION") and r["schema_version"] == "STUDIO_ROUND_EVALUATION_V1" for r in summary["records"])
     assert summary["records"][0]["global_state_digest"] == done["base_model"]["state_sha256"]
+
+
+# ---- 3 rounds from the pretrained start (extended engine) ------------------------------------------------------------------------------
+@pytest.fixture(scope="module")
+def pretrained_three(tmp_path_factory):
+    tmp = tmp_path_factory.mktemp("gen3")
+    with TestClient(_app(tmp)) as c:
+        started = c.post(f"{S}/runs", headers=USER_A, json={"run_length": 3, "initialisation": "MODEL_V2_FINAL"})
+        assert started.status_code == 200, started.text
+        run_id = started.json()["run_id"]
+        done = _poll(c, f"{S}/runs/{run_id}", USER_A, lambda d: d["status"] in ("COMPLETED", "FAILED") and d["phase"] == "DONE" and d["export_status"] in ("READY", "FAILED"))
+        gen = _poll(c, f"{S}/runs/{run_id}/generalisation", USER_A, lambda g: g["baseline"]["record"] and g["baseline"]["record"]["evaluation_status"] == "COMPLETED"
+                    and all(r["record"] and r["record"]["evaluation_status"] in ("COMPLETED", "FAILED") for r in g["rounds"]) and all(r["paired_vs_v2"] for r in g["rounds"]))
+        yield SimpleNamespace(c=c, run_id=run_id, done=done, gen=gen, tmp=tmp)
+
+
+def test_three_round_runs_from_the_untrained_start_stay_on_the_frozen_product_contract(tmp_path):
+    with TestClient(_app(tmp_path)) as c:
+        for body in ({"run_length": 3}, {"run_length": 3, "initialisation": "FL_INIT_V2"}):
+            response = c.post(f"{S}/runs", headers=USER_A, json=body)
+            assert response.status_code in (400, 422) and "frozen product contract" in response.text, (body, response.text)
+        caps = c.get(f"{S}/capabilities", headers=USER_A).json()["ten_round"]
+        assert caps["rounds_by_initialisation"] == {"FL_INIT_V2": [10], "MODEL_V2_FINAL": [3, 10]} and caps["default_initialisation"] == "MODEL_V2_FINAL"
+        assert [i["default"] for i in caps["initialisations"]] == [False, True]
+
+
+def test_three_round_pretrained_run_has_exactly_three_rounds_and_a_verified_start(pretrained_three):
+    done, gen = pretrained_three.done, pretrained_three.gen
+    assert done["status"] == "COMPLETED" and done["run_length"] == 3 and done["planned_rounds"] == 3 and done["current_round"] == 3 and done["label"] == "3-round run — pretrained V2 start"
+    assert done["base_model"]["model_id"] == "MODEL_V2_FINAL" and done["candidate"]["promoted"] is False and done["candidate"]["deployed"] is False
+    assert gen["run_length"] == 3 and [r["round_id"] for r in gen["rounds"]] == [0, 1, 2, 3] and gen["integrity"] == {"r0_digest_equals_frozen_v2": True, "r0_predictions_equal_frozen_v2": True}
+    assert all(r["record"]["evaluation_status"] == "COMPLETED" for r in gen["rounds"]) and gen["rounds"][3]["record"]["candidate_id"].startswith("FL10_CANDIDATE_")
+    assert gen["rounds"][3]["record"]["global_state_digest"] != gen["baseline"]["state_sha256"]
+
+
+def test_three_round_pretrained_run_trains_eight_clients_for_three_rounds_and_is_evaluated_on_both_lanes(pretrained_three):
+    c, run_id, tmp = pretrained_three.c, pretrained_three.run_id, pretrained_three.tmp
+    report = json.loads(next(tmp.rglob(f"{run_id}/run/run_report.json")).read_text())
+    assert report["planned_rounds"] == 3 and report["rounds_committed"] == 3 and report["accepted_updates_total"] == 24 and all(r["accepted_updates"] == 8 for r in report["rounds"])
+    summary = _poll(c, f"{S}/runs/{run_id}/evaluation", USER_A, lambda s: len(s["records"]) == 4 and all(r["evaluation_status"] == "COMPLETED" for r in s["records"]))
+    assert summary["run_length"] == 3 and (summary["comparison"]["comparator_round"], summary["comparison"]["endpoint_round"]) == (0, 3) and summary["comparison"]["paired_available"]
+    assert all(r["cohort_use"].startswith("REUSED SYNTHETIC DIAGNOSTIC EVALUATION") for r in summary["records"])
+
+
+def test_pretrained_run_figures_and_tables_do_not_claim_a_frozen_fl_init_reference(pretrained_three):
+    c, run_id = pretrained_three.c, pretrained_three.run_id
+    figures = c.get(f"{S}/runs/{run_id}/figures", headers=USER_A).json()["specs"]
+    assert len(figures) == 20
+    lineage = next(v for v in figures["FL10_FIG18"]["views"] if v["kind"] == "lineage")["states"]
+    assert lineage[0]["origin"] == "MODEL_V2_FINAL" and "pretrained checkpoint" in lineage[0]["status"] and lineage[0]["equals_frozen_reference"] is None
+    assert all(s["equals_frozen_reference"] is None for s in lineage[1:])
+    tables = c.get(f"{S}/runs/{run_id}/tables", headers=USER_A).json()["tables"]
+    assert len(tables) == 12
+    row = next(r for r in tables["FL10_TAB12"]["rows"] if r[0].startswith("committed R1-R3 equal frozen"))
+    assert row[1] == "NOT APPLICABLE" and "pretrained start" in row[2]
+    assert tables["FL10_TAB08"]["rows"][0][3] == "MODEL_V2_FINAL"
+
+
+def test_three_round_pretrained_exports_are_hash_verified_and_include_the_generalisation_evidence(pretrained_three):
+    c, run_id = pretrained_three.c, pretrained_three.run_id
+    manifest = c.get(f"{S}/runs/{run_id}/exports", headers=USER_A).json()
+    assert manifest["status"] == "READY" and manifest["run_length"] == 3 and len(manifest["figures"]) == 20 and len(manifest["tables"]) == 12
+    assert "generalisation" in manifest["data"] and "generalisation_metrics" in manifest["data"] and {f"generalisation_predictions_R{r:02d}" for r in range(4)} <= set(manifest["data"])
+    import hashlib
+
+    for item in ("generalisation", "generalisation_metrics"):
+        fmt = next(iter(manifest["data"][item]))
+        response = c.get(f"{S}/runs/{run_id}/exports/{item}/{fmt}", headers=USER_A)
+        assert response.status_code == 200 and hashlib.sha256(response.content).hexdigest() == manifest["data"][item][fmt]["sha256"]

@@ -77,12 +77,15 @@ def verify_evidence() -> dict[str, Any]:
         report = json.loads((ROOT / EVIDENCE / "browser" / name).read_text())
         if not report["passed"] or report["failed"]:
             raise ValueError("BROWSER_VERIFICATION_NOT_PASSED")
-    gen = (report.get("evidence") or {}).get("pretrained 10-round_generalisation")
-    if (gen is None or gen["base_model"]["model_id"] != "MODEL_V2_FINAL" or gen["base_model"].get("checkpoint_sha256") not in (None, "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b")
-            or gen["integrity"] != {"r0_digest_equals_frozen_v2": True, "r0_predictions_equal_frozen_v2": True} or len(gen["rounds"]) != 11 or gen["rounds"][0]["digest"] != gen["baseline"]["digest"]
-            or len({r["digest"] for r in gen["rounds"]}) != 11):
-        raise ValueError("PRETRAINED_GENERALISATION_EVIDENCE_FAILED")
-    out["pretrained_generalisation"] = {"R0_equals_frozen_v2": True, "rounds": 11, "R10_AUPRC": gen["rounds"][10]["AUPRC"], "frozen_v2_AUPRC": gen["baseline"]["AUPRC"]}
+    pretrained: dict[str, Any] = {}
+    for label, count in (("pretrained 10-round", 11), ("pretrained 3-round", 4)):
+        gen = (report.get("evidence") or {}).get(f"{label}_generalisation")
+        if (gen is None or gen["base_model"]["model_id"] != "MODEL_V2_FINAL" or gen["base_model"].get("checkpoint_sha256") not in (None, "89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b")
+                or gen["integrity"] != {"r0_digest_equals_frozen_v2": True, "r0_predictions_equal_frozen_v2": True} or len(gen["rounds"]) != count or gen["rounds"][0]["digest"] != gen["baseline"]["digest"]
+                or len({r["digest"] for r in gen["rounds"]}) != count):
+            raise ValueError(f"PRETRAINED_GENERALISATION_EVIDENCE_FAILED:{label}")
+        pretrained[label] = {"R0_equals_frozen_v2": True, "rounds": count, f"R{count - 1}_AUPRC": gen["rounds"][count - 1]["AUPRC"], "frozen_v2_AUPRC": gen["baseline"]["AUPRC"]}
+    out["pretrained_generalisation"] = pretrained
     tests = json.loads((ROOT / EVIDENCE / "local_test_report.json").read_text())
     if not tests["passed"]:
         raise ValueError("LOCAL_TEST_REPORT_NOT_PASSED")

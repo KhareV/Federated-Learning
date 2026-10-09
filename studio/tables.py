@@ -66,7 +66,9 @@ def build_tables(b: dict[str, Any]) -> dict[str, dict[str, Any]]:
         "Round-level federation evidence from coordinator acceptance and aggregation (rejection rows, where present, are adversarial controls refused by the unchanged coordinator).", ["rounds.csv"], empty_note="No round has been committed yet.")
     prog = b["state_progression"]
     parity = {r["round"]: (r.get("parity") or {}) for r in rr}
-    rows8 = ([["R00", prog["0"]["sha256"], None, "FL_INIT_V2", True, "initial state", prog["0"]["finite"]]] if "0" in prog else [])
+    base_id = (b["run"].get("initialisation") or {}).get("model_id", "FL_INIT_V2")
+    rows8 = ([["R00", prog["0"]["sha256"], None, base_id if base_id != "FL_INIT_V2" else "FL_INIT_V2", None if base_id != "FL_INIT_V2" else True, "initial state" if base_id == "FL_INIT_V2" else "initial state (pretrained checkpoint)",
+               prog["0"]["finite"]]] if "0" in prog else [])
     rows8 += [[f"R{r['round']:02d}", r["global_state_sha256"], r["base_state_sha256"], r.get("state_artifact") or f"states/R{r['round']:02d}.bin", parity[r["round"]].get("equals_frozen_reference"), r["candidate_status"], r["state_info"]["finite"]] for r in rr]
     add("FL10_TAB08", ["state", "sha256", "previous_state_sha256", "source_artifact", "equals_frozen_3_round_reference", "status", "finite"], rows8, "State lineage (null = no frozen reference exists for that round).", ["run_report.json"], empty_note="R00 not yet verified.")
     add("FL10_TAB09", ["metric", "definition", "undefined_when", "implementation"], [[k, v[0], v[1], "final_showcase.metrics + fl10.metrics (scikit-learn average_precision_score / roc_auc_score where applicable)"] for k, v in METRIC_DEFINITIONS.items()],
@@ -81,18 +83,19 @@ def build_tables(b: dict[str, Any]) -> dict[str, dict[str, Any]]:
         [[k.replace("round_", "R0").replace("_candidate", ""), *[v[c] for c in ("AUPRC", "AUROC", "F1", "accuracy", "precision", "recall", "specificity", "balanced_accuracy", "BCE", "TP", "FP", "TN", "FN", "windows")], b["historical_exposed"]["label"]] for k, v in hs.items()],
         b["historical_exposed"]["caveat"], [b["historical_exposed"]["source"]])
     prefix = b["run"].get("prefix_equals_frozen_reference") or {}
+    pretrained = (b["run"].get("initialisation") or {}).get("model_id", "FL_INIT_V2") != "FL_INIT_V2"
     done = b["run"].get("status") == "COMPLETED"
     pass_rows = [
         (f"{n} committed rounds" if done else f"{len(rr)} of {n} rounds committed so far", len(rr) == n if done else None),
         (f"{8 * n} accepted updates" if done else f"{sum(r['accepted_updates'] for r in rr)} accepted updates so far", (b["run"].get("accepted_updates_total") == 8 * n) if done else None),
         ("eight accepted updates in every committed round", all(r["accepted_updates"] == 8 for r in rr) if rr else None),
-        ("committed R1-R3 equal frozen canonical digests (FedAvg, where a reference exists)", all(v is True for v in prefix.values()) if prefix else None),
+        ("committed R1-R3 equal frozen canonical digests (FedAvg, where a reference exists)", "NA" if pretrained else (all(v is True for v in prefix.values()) if prefix else None)),
         ("every evaluated state belongs to this run (digest equals committed digest)", all(ev["state_digests"][s] == (prog[str(int(s[1:]))]["sha256"]) for s in evaluated if s in ev["state_digests"])),
         ("same diagnostic holdout for every evaluated state", len({states[s]["pooled"]["windows"] for s in evaluated}) <= 1),
         ("zero overlap with every excluded population", all(v["participant_overlap"] == v["session_overlap"] == v["window_input_overlap"] == 0 for v in sep.values())),
         ("confusion matrices reconcile", all(states[s]["pooled"]["TP"] + states[s]["pooled"]["FN"] == states[s]["pooled"]["positives"] and states[s]["pooled"]["TN"] + states[s]["pooled"]["FP"] == states[s]["pooled"]["negatives"] for s in evaluated)),
         ("no round selected on the holdout", ev["round_selection"].startswith("NONE")), ("fixed threshold 0.5, no calibration", ev["threshold"] == 0.5 and ev["calibration"] == "NONE"),
         ("candidate not promoted or deployed", (not b["run"]["candidate"]["promoted"] and not b["run"]["candidate"]["deployed"]) if b["run"].get("candidate") else None)]
-    add("FL10_TAB12", ["check", "status", "evidence"], [[chk, "PENDING" if ok is None else ("PASS" if ok else "FAIL"), "computed from this run's bundle"] for chk, ok in pass_rows],
+    add("FL10_TAB12", ["check", "status", "evidence"], [[chk, "NOT APPLICABLE" if ok == "NA" else "PENDING" if ok is None else ("PASS" if ok else "FAIL"), "pretrained start: no frozen FL_INIT_V2 reference exists for this run" if ok == "NA" else "computed from this run's bundle"] for chk, ok in pass_rows],
         "Bundle-level acceptance checks (PENDING until the run reaches the state the check needs).", ["run_report.json", "evaluation_results.json"])
     return out

@@ -16,6 +16,7 @@ const api = (path) => b.evaluate(`fetch('/product/v1${path}',{credentials:'same-
 const six = (v) => (typeof v === 'number' ? (Number.isInteger(v) ? String(v) : v.toFixed(6)) : String(v));
 const waitFor = (expr, ms = 60000) => b.wait(expr, ms);
 
+const setInit = async (v) => { await b.evaluate(`(()=>{const s=${T('cfg10-init')};s.value='${v}';s.dispatchEvent(new Event('change',{bubbles:true}))})()`); await sleep(250); };
 async function runIdFromUrl() { return b.evaluate(`new URL(location.href).searchParams.get('run')`); }
 
 async function metricsMatchApi(runId, round, label) {
@@ -183,14 +184,18 @@ await b.demoSignIn();
 
 // ---- A. entry page: selector ------------------------------------------------------------------------------------------------------
 await b.navigate('/app/federation', `!!${T('studio-run-starter')}`);
-await waitFor(`!${T('cfg-submit')}.disabled`, 120000);
+await waitFor(`!!${T('cfg10-submit')} && !${T('cfg10-submit')}.disabled`, 120000);
 check('entry: 3 rounds is the default selection', (await b.evaluate(`${T('rounds-3')}.getAttribute('aria-checked')`)) === 'true');
 check('entry: expected accepted updates are 24 and 80 and labelled as expectations', (await text('expected-3')) === '24' && (await text('expected-10')) === '80' && (await b.evaluate(`document.body.innerText.includes('expected counts, not evidence of completed work')`)));
-check('entry: the original three-round form is still the default form', await exists('cfg-run-type'));
+check('entry: the starting model defaults to the pretrained MODEL_V2_FINAL for 3 rounds, with the untrained start as the other choice', (await b.evaluate(`${T('cfg10-init')}.value`)) === 'MODEL_V2_FINAL' && (await b.evaluate(`[...${T('cfg10-init')}.options].map(o=>o.value).join()`)) === 'FL_INIT_V2,MODEL_V2_FINAL');
+check('entry: the default 3-round form is the extended form (FedAvg, plain) and the original frozen form is NOT shown for the pretrained start', (await exists('cfg10-submit')) && !(await exists('cfg-run-type')) && (await text('cfg10-submit')).includes('3-round'));
+await setInit('FL_INIT_V2');
+check('entry: choosing the untrained start restores the original three-round form unchanged', (await exists('cfg-run-type')) && !(await exists('cfg10-submit')) && (await text('cfg10-init-note')).includes('Original frozen 3-round contract'));
 for (const w of [1440, 1024, 768, 390]) { await b.viewport(w); await sleep(300); await b.screenshot(`studio_entry_${w}`); check(`entry: no overflow at ${w}px`, !(await b.evaluate('document.documentElement.scrollWidth>innerWidth'))); }
 await b.viewport(1440);
 await click('rounds-10');
 await waitFor(`!!${T('cfg10-submit')}`, 10000);
+check('entry: the starting-model choice persists when the round count changes (untrained stays selected)', (await b.evaluate(`${T('cfg10-init')}.value`)) === 'FL_INIT_V2');
 check('entry: choosing 10 rounds explains disabled FedProx and SecAgg', (await text('cfg10-algorithm-note')).includes('FedProx is disabled') && (await text('cfg10-mode-note')).includes('SecAgg+ shadow is disabled'));
 await b.screenshot('studio_entry_ten');
 await click('rounds-3');
@@ -272,6 +277,8 @@ await b.send('Emulation.setEmulatedMedia', { features: [] });
 await b.navigate('/app/federation', `!!${T('studio-run-starter')}`);
 await click('rounds-10');
 await waitFor(`!!${T('cfg10-submit')} && !${T('cfg10-submit')}.disabled`, 120000);
+await setInit('FL_INIT_V2');            // this section verifies the untrained start (the recorded FL10 digests); the default is the pretrained V2
+check('10-round untrained: the choice is applied and described as a fresh untrained model', (await b.evaluate(`${T('cfg10-init')}.value`)) === 'FL_INIT_V2' && (await text('cfg10-init-note')).includes('fresh untrained model'));
 await click('cfg10-submit');
 await waitFor(`location.pathname==='/app/federation/live'`, 60000);
 await waitFor(`!!${T('run-status-strip')}`, 30000);
@@ -336,8 +343,7 @@ evidence.widths10 = await widths('studio_run10', '');
 await b.navigate('/app/federation', `!!${T('studio-run-starter')}`);
 await click('rounds-10');
 await waitFor(`!!${T('cfg10-init')}`, 30000);
-check('entry: the starting-model choice defaults to the untrained FL_INIT_V2 and offers pretrained MODEL_V2_FINAL', (await b.evaluate(`${T('cfg10-init')}.value`)) === 'FL_INIT_V2' && (await b.evaluate(`[...${T('cfg10-init')}.options].map(o=>o.value).join()`)) === 'FL_INIT_V2,MODEL_V2_FINAL');
-await b.evaluate(`(()=>{const s=${T('cfg10-init')};s.value='MODEL_V2_FINAL';s.dispatchEvent(new Event('change',{bubbles:true}))})()`);
+await setInit('MODEL_V2_FINAL');          // the default start, selected explicitly
 check('entry: choosing the pretrained start explains that R0 is the verified checkpoint and that frozen V2 is compared on an unseen cohort', (await text('cfg10-init-note')).includes('R0 is the verified pretrained checkpoint') && (await text('cfg10-init-note')).includes('unseen cohort'));
 await waitFor(`!!${T('cfg10-submit')} && !${T('cfg10-submit')}.disabled`, 120000);
 await b.screenshot('studio_entry_pretrained');
@@ -364,6 +370,31 @@ await narrowTabs('pretrained 10-round');
 await exportsWork(runV2, 'pretrained 10-round');
 const ex = await api(`/studio/runs/${runV2}/exports`);
 check('pretrained run: the verified export manifest includes the generalisation JSON, the metric table and the stored predictions of every round and frozen V2', !!ex.data?.generalisation && !!ex.data?.generalisation_metrics && Object.keys(ex.data).filter((k) => k.startsWith('generalisation_predictions_R')).length === 11 && Object.keys(ex.data).some((k) => k.startsWith('generalisation_predictions_frozen_v2_')), Object.keys(ex.data ?? {}).join(','));
+
+// ---- C3. genuine THREE-round run from the pretrained V2 start (the new default for 3 rounds) -----------------------------------------------
+await b.navigate('/app/federation', `!!${T('studio-run-starter')}`);
+await waitFor(`!!${T('cfg10-submit')} && !${T('cfg10-submit')}.disabled`, 120000);
+check('entry: 3 rounds with the default pretrained start shows the extended form with a 3-round submit', (await text('cfg10-submit')).includes('3-round') && (await b.evaluate(`${T('cfg10-init')}.value`)) === 'MODEL_V2_FINAL' && !(await exists('cfg-run-type')));
+await click('cfg10-submit');
+await waitFor(`location.pathname==='/app/federation/live'`, 60000);
+await waitFor(`!!${T('run-status-strip')}`, 30000);
+const runV23 = await runIdFromUrl();
+evidence.runV23 = runV23;
+const sv3 = await api(`/studio/runs/${runV23}`);
+check('3-round pretrained: the descriptor has 3 planned rounds, the extended engine and MODEL_V2_FINAL as base', sv3.planned_rounds === 3 && sv3.run_length === 3 && sv3.engine === 'FL10_10R' && sv3.base_model?.model_id === 'MODEL_V2_FINAL', JSON.stringify({ p: sv3.planned_rounds, e: sv3.engine, b: sv3.base_model?.model_id }));
+const tv3 = Date.now();
+while (Date.now() - tv3 < 600000) {
+  const d = await api(`/studio/runs/${runV23}`);
+  if (d.phase === 'DONE' || d.phase === 'FAILED') { check('3-round pretrained: reached DONE', d.phase === 'DONE', JSON.stringify(d.failure)); break; }
+  await sleep(1500);
+}
+await waitFor(`${T('accepted-counter')}?.textContent==='24/24'`, 60000).catch(() => {});
+check('3-round pretrained: the accepted-updates counter reached 24/24 from backend events', (await text('accepted-counter')) === '24/24', await text('accepted-counter'));
+check('3-round pretrained: the eight-client network is intact and shows only R0-R3 controls', (await b.evaluate(`document.querySelectorAll('li[data-client]').length`)) === 8 && (await exists('round-btn-R3')) && !(await exists('round-btn-R4')));
+await tabsAndFigures(runV23, 'pretrained 3-round', 3);
+await generalisationChecks(runV23, 'pretrained 3-round', 3, true);
+await exportsWork(runV23, 'pretrained 3-round');
+await b.screenshot('studio_run3_pretrained_completed');
 
 // ---- D. run switching, historical replay, original 3-round page ---------------------------------------------------------------------
 await b.evaluate(`(()=>{const s=document.querySelector('[data-testid="run-selector"]');s.value='${run3}';s.dispatchEvent(new Event('change',{bubbles:true}))})()`);

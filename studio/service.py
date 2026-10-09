@@ -95,7 +95,7 @@ class StudioService:
                 self._exports[run_id] = {"status": "FAILED", "message": str(error)[:300]}
 
     def _finalize_10(self, run_id: str, directory: Path) -> None:
-        self._export(run_id, 10, "FL10_10R", self.runner10.jobs[run_id].mode, directory)
+        self._export(run_id, self.runner10.jobs[run_id].rounds, "FL10_10R", self.runner10.jobs[run_id].mode, directory)
 
     def _export(self, run_id: str, n: int, engine: str, mode: str, directory: Path) -> None:
         bundle = build_live_bundle(run_id=run_id, run_length=n, run_dir=directory / "run", observer=self.observer, mode=mode, engine=engine, status="COMPLETED", training_cohort=self._training_cohort(run_id))
@@ -176,8 +176,9 @@ class StudioService:
                 job = self.runner10.get(user_id, run_id)
             except StudioRunError as error:
                 raise _as_product_error(error) from error
-            return {"run_id": run_id, "run_length": 10, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": "FEDAVG", "secagg_mode": "PLAIN", "source_mode": MODES[job.mode], "status": job.status,
-                    "phase": job.phase, "current_round": job.current_round, "planned_rounds": 10, "client_ids": list(CLIENT_IDS), "candidate": job.candidate, "failure": job.failure, "label": "10-round extended run" if job.init == v2_init.INIT_FRESH else "10-round extended run — pretrained V2 start",
+            return {"run_id": run_id, "run_length": job.rounds, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": "FEDAVG", "secagg_mode": "PLAIN", "source_mode": MODES[job.mode], "status": job.status,
+                    "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds, "client_ids": list(CLIENT_IDS), "candidate": job.candidate, "failure": job.failure,
+                    "label": f"{job.rounds}-round " + ("extended run" if job.init == v2_init.INIT_FRESH else "run — pretrained V2 start"),
                     "base_model": self._base_model(job.init, job.base_audit), "source_label": "LIVE RUN (this session)", "replay_of": None, "evaluation": self._evaluation_state(run_id), "export_status": job.export_status, "created_at": job.created_at}
         run = self.federation.get_run(user_id, run_id)
         meta = self.federation.artifacts.read_run_meta(run_id) or {}
