@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -41,7 +42,12 @@ def verify_evidence() -> dict[str, Any]:
     changed = [p for p in git("diff", "--name-only", FL10_COMMIT, "--", *PROTECTED_SURFACE).splitlines() if p]
     if changed:
         raise ValueError(f"PROTECTED_SURFACE_CHANGED:{changed[:5]}")
-    historical = [p for p in git("diff", "--name-only", FL10_COMMIT, "--", "artifacts").splitlines() if p and not p.startswith(ALLOWED_ARTIFACT_PREFIX)]
+    historical = []
+    for line in git("diff", "--name-status", FL10_COMMIT, "--", "artifacts").splitlines():
+        code, _, path = line.partition("\t")
+        additive_amendment = code == "A" and re.fullmatch(r"artifacts/capstone/CAPSTONE_[A-Z_]+_PROTOCOL_V1\.amendment_[0-9_]+\.json", path) is not None
+        if path and not path.startswith(ALLOWED_ARTIFACT_PREFIX) and not additive_amendment:      # only NEW compatibility amendments (FL10's mechanism) may appear; no historical file is modified or deleted
+            historical.append(line)
     if historical:
         raise ValueError(f"HISTORICAL_LOCK_OR_AMENDMENT_CHANGED:{historical[:5]}")
     if baseline_unchanged()["changed"]:
@@ -111,6 +117,12 @@ def older_chain() -> dict[str, str]:
     if verify_fl10_001.verify_lock()["status"] != "PASS":
         raise ValueError("OLDER_VERIFIER_FAILED:NHM_FL10_001")
     results["NHM_FL10_001"] = "PASS"
+    from scripts.cap_010_protected_audit import all_locks
+
+    unverified = sorted(k for k, v in all_locks().items() if not v.get("verified"))      # CAP-001..010 amended-lock chain, research catalog, history evidence
+    if unverified:
+        raise ValueError(f"OLDER_LOCK_AUDIT_FAILED:{unverified}")
+    results["CAPSTONE_AMENDED_LOCK_AUDITS"] = "PASS"
     return results
 
 

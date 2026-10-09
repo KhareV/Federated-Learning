@@ -15,7 +15,7 @@ REJECT = (ValueError, RuntimeError)
 
 def test_studio_successor_lock_verifies_including_the_whole_older_chain():
     result = verify_lock()
-    assert result["status"] == "PASS" and len(result["older_chain"]) == 14 and set(result["older_chain"].values()) == {"PASS"}
+    assert result["status"] == "PASS" and len(result["older_chain"]) == 15 and set(result["older_chain"].values()) == {"PASS"}
     assert {"3", "10"} <= set(result["live_runs"])
 
 

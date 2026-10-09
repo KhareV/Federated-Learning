@@ -26,6 +26,7 @@ BOUND_EXACT = {
     "scripts/successor_chain.py", "scripts/studio_successor_compat.py", "scripts/fl10_successor_compat.py", "scripts/capstone_ui_v1_8_successor.py", "scripts/reconcile_ui_lock_chain.py",
     "scripts/verify_fl10_001.py", "scripts/verify_unified_studio_001.py", "scripts/freeze_unified_studio_001.py", "scripts/run_studio_local_gates.py",
     "scripts/studio_cdp.mjs", "scripts/studio_baseline_capture.mjs", "scripts/studio_browser_verify.mjs", "scripts/run_studio_browser.py", "scripts/studio_collect_evidence.py",
+    "scripts/studio_amendments.py", "artifacts/capstone/CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1.amendment_9_6_1_1_3.json", "artifacts/capstone/CAPSTONE_FEDERATION_UX_PROTOCOL_V1.amendment_9_1_1_3.json",
     "tests/test_studio_specs.py", "tests/test_studio_isolation.py", "tests/test_studio_observer.py", "tests/test_studio_api.py", "tests/test_studio_successor.py", "tests/test_successor_chain_governance.py",
 }
 
