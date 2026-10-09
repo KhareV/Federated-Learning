@@ -137,15 +137,18 @@ def verify_lock(path: Path = LOCK_PATH) -> dict[str, Any]:
             or lock["mode_evidence"] != evidence["modes"]
             or lock["status"] != "PASS"):
         raise ValueError("FL10_LOCK_IDENTITY_OR_EVIDENCE_MISMATCH")
-    predecessor = json.loads((ROOT / PREDECESSOR).read_text())
-    repins = sorted(relative for relative, digest in predecessor["bound_files"].items()
-                    if (ROOT / relative).is_file() and sha(ROOT / relative) != digest)
-    if lock["repins_predecessor_files"] != repins:
-        raise ValueError("FL10_PREDECESSOR_REPIN_SET_MISMATCH")
     from scripts.freeze_observatory_v1 import frontend_files
     from scripts.studio_successor_compat import accepted_successor as studio_successor
 
     studio = studio_successor(path)         # None unless this is the canonical lock and a valid additive Studio successor exists
+    predecessor = json.loads((ROOT / PREDECESSOR).read_text())
+    repins = sorted(relative for relative, digest in predecessor["bound_files"].items()
+                    if (ROOT / relative).is_file() and sha(ROOT / relative) != digest)
+    expected_repins = set(lock["repins_predecessor_files"])
+    if studio:    # files of the final-showcase lock that the Studio successor (and only it) re-pinned again
+        expected_repins |= {relative for relative in studio["repins_predecessor_files"] if relative in predecessor["bound_files"]}
+    if sorted(expected_repins) != repins:
+        raise ValueError("FL10_PREDECESSOR_REPIN_SET_MISMATCH")
     expected_frontend = studio["frontend_files"] if studio else lock["frontend_files"]
     if set(expected_frontend) != set(frontend_files()) or any(
         sha(ROOT / relative) != digest

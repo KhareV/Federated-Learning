@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "reports/unified_live_fl"
 CHUNK = 30
 BASELINE_SVELTE_WARNINGS = 123           # measured on the clean tree before any Studio change
+EXCLUDED = {"test_studio_successor.py"}   # validates the FINAL lock itself: run right after the freeze (reports/unified_live_fl/successor_gate.json)
 
 
 def run(cmd: list[str], cwd: Path = ROOT, env_extra: dict[str, str] | None = None) -> tuple[int, str, float]:
@@ -28,7 +29,7 @@ def run(cmd: list[str], cwd: Path = ROOT, env_extra: dict[str, str] | None = Non
 
 
 def pytest_chunks() -> dict:
-    files = sorted(p.name for p in (ROOT / "tests").glob("test_*.py"))
+    files = sorted(p.name for p in (ROOT / "tests").glob("test_*.py") if p.name not in EXCLUDED)
     totals = {"passed": 0, "failed": 0, "skipped": 0, "errors": 0, "chunks": 0, "seconds": 0.0, "failures": []}
     for i in range(0, len(files), CHUNK):
         group = [f"tests/{f}" for f in files[i:i + CHUNK]]

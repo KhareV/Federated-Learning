@@ -103,8 +103,9 @@ def older_chain() -> dict[str, str]:
                          ("CAPSTONE_UI_V1_4", verify_capstone_ui_v1_4), ("CAPSTONE_UI_V1_5", verify_capstone_ui_v1_5), ("CAPSTONE_UI_V1_6", verify_capstone_ui_v1_6), ("CAPSTONE_UI_V1_7", verify_capstone_ui_v1_7),
                          ("CAPSTONE_UI_V1_8", verify_capstone_ui_v1_8), ("CAPSTONE_UI_V1_9", verify_capstone_ui_v1_9), ("NHM_RESEARCH_OBSERVATORY_V1", verify_observatory_v1), ("NHM_OBS_DIAG_001", verify_obs_diag_001),
                          ("NHM_FINAL_SHOWCASE_001", verify_final_showcase)):
-        result = module.verify() if hasattr(module, "verify") else module.verify_lock()
-        if result.get("status") != "PASS":
+        result = module.verify_lock() if module is verify_final_showcase else module.verify()      # final showcase: the lock check; the others expose verify()
+        ok = bool(result.get("obs_diag_chain_verified") and result.get("v1_chain_verified")) if module is verify_final_showcase else result.get("status") == "PASS"   # the final-showcase lock carries its own status word
+        if not ok:
             raise ValueError(f"OLDER_VERIFIER_FAILED:{name}")
         results[name] = "PASS"
     if verify_fl10_001.verify_lock()["status"] != "PASS":
