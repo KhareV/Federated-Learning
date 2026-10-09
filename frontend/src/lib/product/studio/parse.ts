@@ -1,5 +1,5 @@
 // Fail-closed parsers for the Studio REST payloads (no value is cast blindly; a malformed or foreign payload throws).
-import type { StudioOverview, EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
+import type { BaseModel, GenCohort, GenCurves, GenInterval, GenPair, GenParticipants, GenRecord, GenRound, Generalisation, Initialisation, StudioOverview, EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
 
 type Rec = Record<string, unknown>;
 export class StudioParseError extends Error {
@@ -21,6 +21,7 @@ const finiteOrNull = (v: unknown): boolean => v === null || (typeof v === 'numbe
 const STATUSES = ['QUEUED', 'EVALUATING', 'COMPLETED', 'FAILED'] as const;
 const ROUND_STATUSES = [...STATUSES, 'NOT_SUBMITTED'] as const;
 const DIGEST = /^[0-9a-f]{64}$/;
+const INITS = ['FL_INIT_V2', 'MODEL_V2_FINAL'] as const;
 
 function availability(raw: unknown): EvaluationAvailability {
 	const r = obj(raw, 'evaluation');
@@ -31,11 +32,19 @@ function availability(raw: unknown): EvaluationAvailability {
 export function parseCapabilities(value: unknown): StudioCapabilities {
 	const r = obj(value, 'capabilities'), t = obj(r.ten_round, 'ten_round'), h = obj(r.three_round, 'three_round'), e = obj(r.evaluation, 'evaluation');
 	return { studio_id: str(r.studio_id, 'studio_id'), run_lengths: arr(r.run_lengths, 'run_lengths').map((x) => int(x, 'run_length')), default_run_length: int(r.default_run_length, 'default'),
-		ten_round: { available: t.available === true, source_modes: arr(t.source_modes, 'modes').map((m) => oneOf(m, ['CANONICAL_SYNTHETIC', 'LIVE_MONITORED_SITE_00'] as const, 'mode')), algorithms: arr(t.algorithms, 'algorithms').map((x) => str(x, 'algorithm')),
+		ten_round: { available: t.available === true, initialisations: Array.isArray(t.initialisations) ? t.initialisations.map((i) => { const o = obj(i, 'initialisation'); return { id: oneOf(o.id, INITS, 'initialisation'), label: str(o.label, 'label'), default: o.default === true }; }) : undefined, source_modes: arr(t.source_modes, 'modes').map((m) => oneOf(m, ['CANONICAL_SYNTHETIC', 'LIVE_MONITORED_SITE_00'] as const, 'mode')), algorithms: arr(t.algorithms, 'algorithms').map((x) => str(x, 'algorithm')),
 			aggregation_modes: arr(t.aggregation_modes, 'agg').map((x) => str(x, 'agg')), unsupported: Object.fromEntries(Object.entries(obj(t.unsupported, 'unsupported')).map(([k, v]) => [k, str(v, 'why')])), expected_updates: int(t.expected_updates, 'expected') },
 		three_round: { available: h.available === true, expected_updates: int(h.expected_updates, 'expected') },
+		generalisation: r.generalisation ? { cohort_id: str(obj(r.generalisation, 'generalisation').cohort_id, 'cohort_id'), label: str(obj(r.generalisation, 'generalisation').label, 'label'), claim_boundary: str(obj(r.generalisation, 'generalisation').claim_boundary, 'claim_boundary'), baseline: str(obj(r.generalisation, 'generalisation').baseline, 'baseline') } : undefined,
 		evaluation: { observer_id: str(e.observer_id, 'observer'), protocol_id: str(e.protocol_id, 'protocol'), threshold: num(e.threshold, 'threshold'), calibration: str(e.calibration, 'calibration'), cohort_use: str(e.cohort_use, 'cohort_use'),
 			cohort_use_detail: str(e.cohort_use_detail, 'cohort_use_detail'), claim_boundary: str(e.claim_boundary, 'claim_boundary') } };
+}
+
+function baseModel(raw: unknown): BaseModel | null {
+	if (raw === null || raw === undefined) return null;
+	const b = obj(raw, 'base_model');
+	return { model_id: oneOf(b.model_id, INITS, 'base model') as Initialisation, label: str(b.label, 'base label'), state_sha256: strOrNull(b.state_sha256, 'state_sha256'), checkpoint_sha256: strOrNull(b.checkpoint_sha256, 'checkpoint_sha256'),
+		state_entries: numOrNull(b.state_entries, 'state_entries'), architecture_id: strOrNull(b.architecture_id, 'architecture_id'), training_target_of_checkpoint: strOrNull(b.training_target_of_checkpoint, 'target') };
 }
 
 export function parseStudioRun(value: unknown): StudioRun {
@@ -50,7 +59,7 @@ export function parseStudioRun(value: unknown): StudioRun {
 		source_mode: oneOf(r.source_mode, ['CANONICAL_SYNTHETIC', 'LIVE_MONITORED_SITE_00'] as const, 'source_mode'), status: oneOf(r.status, ['CREATED', 'RUNNING', 'COMPLETED', 'FAILED'] as const, 'status'), phase: str(r.phase, 'phase'),
 		current_round: int(r.current_round, 'current_round'), planned_rounds: int(r.planned_rounds, 'planned_rounds'), client_ids: arr(r.client_ids, 'client_ids').map((c) => str(c, 'client')),
 		candidate: cand ? { candidate_id: strOrNull(cand.candidate_id, 'candidate_id'), state_sha256: strOrNull(cand.state_sha256, 'state_sha256'), promoted: false, deployed: false, label: typeof cand.label === 'string' ? cand.label : undefined } : null,
-		failure: fail ? { code: str(fail.code, 'code'), message: str(fail.message, 'message') } : null, label: str(r.label, 'label'), source_label: str(r.source_label, 'source_label'), replay_of: strOrNull(r.replay_of, 'replay_of'),
+		failure: fail ? { code: str(fail.code, 'code'), message: str(fail.message, 'message') } : null, label: str(r.label, 'label'), base_model: baseModel(r.base_model), source_label: str(r.source_label, 'source_label'), replay_of: strOrNull(r.replay_of, 'replay_of'),
 		evaluation: availability(r.evaluation), export_status: oneOf(r.export_status, ['NOT_STARTED', 'PREPARING', 'READY', 'FAILED'] as const, 'export_status'), created_at: strOrNull(r.created_at, 'created_at') };
 }
 export const parseStudioRuns = (value: unknown): StudioRun[] => arr(value, 'runs').map(parseStudioRun);
@@ -163,4 +172,58 @@ export function parseRoundDetail(value: unknown): RoundDetail {
 	const r = obj(value, 'round detail');
 	return { run_id: str(r.run_id, 'run_id'), round_id: int(r.round_id, 'round_id'), committed: r.committed === true, round: r.round ? obj(r.round, 'round') : null, client_rounds: arr(r.client_rounds, 'client_rounds').map((x) => obj(x, 'client round')),
 		batches: arr(r.batches, 'batches').map((x) => obj(x, 'batch')), state: r.state ? obj(r.state, 'state') : null };
+}
+
+// ---- Generalisation ------------------------------------------------------------------------------------------------------------
+function genRecord(value: unknown): GenRecord {
+	const record = parseEvalRecord(value);
+	const subject = oneOf(obj(value, 'record').subject, ['FL_ROUND', 'FROZEN_V2_BASELINE'] as const, 'subject');
+	return { ...record, subject };
+}
+const interval = (v: unknown): GenInterval => { const o = obj(v, 'interval'); return { lower: numOrNull(o.lower, 'lower'), upper: numOrNull(o.upper, 'upper'), valid_replicates: int(o.valid_replicates, 'valid') }; };
+function genPair(value: unknown): GenPair {
+	const p = obj(value, 'pair');
+	const m = Object.fromEntries(Object.entries(obj(p.metrics, 'pair metrics')).map(([k, raw]) => {
+		const o = obj(raw, k);
+		return [k, { A_point: numOrNull(o.A_point, 'A'), B_point: numOrNull(o.B_point, 'B'), difference_point: numOrNull(o.difference_point, 'difference'), difference_interval: interval(o.difference_interval), invalid_replicates: int(o.invalid_replicates, 'invalid') }];
+	}));
+	return { clusters: int(p.clusters, 'clusters'), replicates: int(p.replicates, 'replicates'), seed: int(p.seed, 'seed'), method: str(p.method, 'method'), multiplicity: str(p.multiplicity, 'multiplicity'), metrics: m, identical_predictions: p.identical_predictions === true };
+}
+function genCohort(value: unknown): GenCohort {
+	const c = obj(value, 'cohort');
+	return { cohort_id: str(c.cohort_id, 'cohort_id'), label: str(c.label, 'label'), detail: str(c.detail, 'detail'), participants: int(c.participants, 'participants'), windows: int(c.windows, 'windows'), positive_windows: int(c.positive_windows, 'positive'),
+		participant_ids: arr(c.participant_ids, 'ids').map((x) => str(x, 'id')), site_conditions: arr(c.site_conditions, 'sites').map((x) => str(x, 'site')), manifest_sha256: strOrNull(c.manifest_sha256, 'manifest'),
+		separation: c.separation ? (obj(c.separation, 'separation') as GenCohort['separation']) : null, separation_note: strOrNull(c.separation_note, 'note') };
+}
+export function parseGeneralisation(value: unknown): Generalisation {
+	const r = obj(value, 'generalisation');
+	if (r.schema_version !== 'STUDIO_GENERALISATION_V1') bad('BAD_GENERALISATION_SCHEMA');
+	const rounds: GenRound[] = arr(r.rounds, 'rounds').map((raw) => {
+		const o = obj(raw, 'round');
+		const record = o.record ? genRecord(o.record) : null;
+		if (record && record.run_id !== r.run_id) bad('FOREIGN_GENERALISATION_RECORD');
+		return { round_id: int(o.round_id, 'round_id'), record, paired_vs_v2: o.paired_vs_v2 ? genPair(o.paired_vs_v2) : null };
+	});
+	const b = obj(r.baseline, 'baseline'), i = obj(r.integrity, 'integrity');
+	const baseline = b.record ? genRecord(b.record) : null;
+	if (baseline && baseline.subject !== 'FROZEN_V2_BASELINE') bad('BASELINE_SUBJECT_MISMATCH');
+	const triple = (v: unknown): boolean | null => (v === null || v === undefined ? null : v === true ? true : v === false ? false : bad('BAD_BOOL'));
+	return { schema_version: 'STUDIO_GENERALISATION_V1', run_id: str(r.run_id, 'run_id'), run_length: int(r.run_length, 'run_length'), observer_id: str(r.observer_id, 'observer'), claim_boundary: str(r.claim_boundary, 'claim'),
+		threshold: num(r.threshold, 'threshold'), calibration: str(r.calibration, 'calibration'), base_model: baseModel(r.base_model) ?? bad('MISSING_BASE_MODEL'), cohort: genCohort(r.cohort),
+		baseline: { label: str(b.label, 'label'), detail: str(b.detail, 'detail'), record: baseline, state_sha256: strOrNull(b.state_sha256, 'state') }, rounds,
+		integrity: { r0_digest_equals_frozen_v2: triple(i.r0_digest_equals_frozen_v2), r0_predictions_equal_frozen_v2: triple(i.r0_predictions_equal_frozen_v2) }, metrics_order: arr(r.metrics_order, 'order').map((x) => str(x, 'metric')),
+		lower_is_better: arr(r.lower_is_better, 'lower').map((x) => str(x, 'metric')), interpretation: arr(r.interpretation, 'interpretation').map((x) => str(x, 'line')), revision: int(r.revision, 'revision') };
+}
+const curve = (c: unknown) => arr(c, 'curve').map((p) => { const point = arr(p, 'point'); if (point.length !== 2 || !point.every((x) => typeof x === 'number' && Number.isFinite(x))) bad('BAD_CURVE_POINT'); return point as number[]; });
+const curveSet = (v: unknown) => { const o = obj(v, 'curves'); return { roc: curve(o.roc), pr: curve(o.pr) }; };
+export function parseGenCurves(value: unknown): GenCurves {
+	const r = obj(value, 'gen curves');
+	if (r.available !== true) return { run_id: str(r.run_id, 'run_id'), round_id: int(r.round_id, 'round_id'), available: false, reason: typeof r.reason === 'string' ? r.reason : undefined };
+	return { run_id: str(r.run_id, 'run_id'), round_id: int(r.round_id, 'round_id'), available: true, round: curveSet(r.round), baseline: r.baseline ? curveSet(r.baseline) : null };
+}
+export function parseGenParticipants(value: unknown): GenParticipants {
+	const r = obj(value, 'gen participants');
+	if (r.available !== true) return { run_id: str(r.run_id, 'run_id'), round_id: int(r.round_id, 'round_id'), available: false };
+	const set = (v: unknown) => Object.fromEntries(Object.entries(obj(v, 'participants')).map(([k, m]) => [k, metrics(m, k)]));
+	return { run_id: str(r.run_id, 'run_id'), round_id: int(r.round_id, 'round_id'), available: true, round: set(r.round), baseline: r.baseline ? set(r.baseline) : null };
 }

@@ -5,8 +5,8 @@
 
 import { parseFl10, parseFl10Job, parseFl10Recorded, type Fl10Job, type Fl10Payload, type Fl10Recorded } from './observatory/fl10';
 import { parseLiveLink, parseShowcase, type LiveLinkStatus, type ShowcaseBundle } from './observatory/showcase';
-import { parseOverview, parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
-import type { StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
+import { parseGenCurves, parseGenParticipants, parseGeneralisation, parseOverview, parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
+import type { GenCurves, GenParticipants, Generalisation, StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
 import type {
 	AuthIdentity,
 	DeviceDescriptor,
@@ -139,6 +139,9 @@ export interface ProductClient {
 	studioEvaluation(runId: string): Promise<EvalSummary>;
 	studioEvaluationRound(runId: string, round: number): Promise<EvalRoundDetail>;
 	studioRoundDetail(runId: string, round: number): Promise<RoundDetail>;
+	studioGeneralisation(runId: string): Promise<Generalisation>;
+	studioGeneralisationCurves(runId: string, round: number): Promise<GenCurves>;
+	studioGeneralisationParticipants(runId: string, round: number): Promise<GenParticipants>;
 	studioFigures(runId: string, round?: number | null): Promise<StudioFigures>;
 	studioTables(runId: string): Promise<StudioTables>;
 	studioExports(runId: string): Promise<StudioExports>;
@@ -285,10 +288,13 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		studioCapabilities: async () => parseCapabilities(await call<unknown>('GET', '/studio/capabilities')),
 		studioRuns: async () => parseStudioRuns(await call<unknown>('GET', '/studio/runs')),
 		studioRun: async (id) => parseStudioRun(await call<unknown>('GET', `/studio/runs/${enc(id)}`)),
-		studioStartTenRound: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/runs', { run_length: choice.run_length, source_mode: choice.source_mode })),
+		studioStartTenRound: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/runs', { run_length: choice.run_length, source_mode: choice.source_mode, ...(choice.initialisation ? { initialisation: choice.initialisation } : {}) })),
 		studioOverview: async (id) => parseOverview(await call<unknown>('GET', `/studio/runs/${enc(id)}/overview`)),
 		studioEvaluation: async (id) => parseEvalSummary(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation`)),
 		studioEvaluationRound: async (id, round) => parseEvalRound(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation/${round}`)),
+		studioGeneralisation: async (id) => parseGeneralisation(await call<unknown>('GET', `/studio/runs/${enc(id)}/generalisation`)),
+		studioGeneralisationCurves: async (id, round) => parseGenCurves(await call<unknown>('GET', `/studio/runs/${enc(id)}/generalisation/curves/${round}`)),
+		studioGeneralisationParticipants: async (id, round) => parseGenParticipants(await call<unknown>('GET', `/studio/runs/${enc(id)}/generalisation/participants/${round}`)),
 		studioRoundDetail: async (id, round) => parseRoundDetail(await call<unknown>('GET', `/studio/runs/${enc(id)}/rounds/${round}`)),
 		studioFigures: async (id, round) => parseFigures(await call<unknown>('GET', `/studio/runs/${enc(id)}/figures${round === null || round === undefined ? '' : `?round=${round}`}`)),
 		studioTables: async (id) => parseTables(await call<unknown>('GET', `/studio/runs/${enc(id)}/tables`)),

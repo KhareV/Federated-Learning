@@ -5,14 +5,17 @@ export type EvaluationStatus = 'QUEUED' | 'EVALUATING' | 'COMPLETED' | 'FAILED';
 export type RoundEvalStatus = EvaluationStatus | 'NOT_SUBMITTED';
 export type RunOrigin = 'LIVE' | 'REPLAY' | 'RECORDED';
 export type SourceMode = 'CANONICAL_SYNTHETIC' | 'LIVE_MONITORED_SITE_00';
+export type Initialisation = 'FL_INIT_V2' | 'MODEL_V2_FINAL';
+export interface BaseModel { model_id: Initialisation; label: string; state_sha256?: string | null; checkpoint_sha256?: string | null; state_entries?: number | null; architecture_id?: string | null; training_target_of_checkpoint?: string | null }
 export type ExportStatus = 'NOT_STARTED' | 'PREPARING' | 'READY' | 'FAILED';
 
 export interface StudioCapabilities {
 	studio_id: string;
 	run_lengths: number[];
 	default_run_length: number;
-	ten_round: { available: boolean; source_modes: SourceMode[]; algorithms: string[]; aggregation_modes: string[]; unsupported: Record<string, string>; expected_updates: number };
+	ten_round: { available: boolean; initialisations?: { id: Initialisation; label: string; default: boolean }[]; source_modes: SourceMode[]; algorithms: string[]; aggregation_modes: string[]; unsupported: Record<string, string>; expected_updates: number };
 	three_round: { available: boolean; expected_updates: number };
+	generalisation?: { cohort_id: string; label: string; claim_boundary: string; baseline: string };
 	evaluation: { observer_id: string; protocol_id: string; threshold: number; calibration: string; cohort_use: string; cohort_use_detail: string; claim_boundary: string };
 }
 
@@ -35,6 +38,7 @@ export interface StudioRun {
 	candidate: { candidate_id: string | null; state_sha256?: string | null; promoted: boolean; deployed: boolean; label?: string } | null;
 	failure: { code: string; message: string } | null;
 	label: string;
+	base_model: BaseModel | null;
 	source_label: string;
 	replay_of: string | null;
 	evaluation: EvaluationAvailability;
@@ -139,4 +143,27 @@ export interface StudioOverview {
 	historical_exposed: string;
 }
 
-export interface StudioRunChoice { run_length: RunLength; source_mode: SourceMode }
+export interface StudioRunChoice { run_length: RunLength; source_mode: SourceMode; initialisation?: Initialisation }
+
+// ---- Generalisation lane (frozen V2 vs every federated round on the unseen G1 cohort) --------------------------------------------
+export interface GenRecord extends EvalRecord { subject: 'FL_ROUND' | 'FROZEN_V2_BASELINE' }
+export interface GenInterval { lower: number | null; upper: number | null; valid_replicates: number }
+export interface GenPairMetric { A_point: number | null; B_point: number | null; difference_point: number | null; difference_interval: GenInterval; invalid_replicates: number }
+export interface GenPair { clusters: number; replicates: number; seed: number; method: string; multiplicity: string; metrics: Record<string, GenPairMetric>; identical_predictions: boolean }
+export interface GenRound { round_id: number; record: GenRecord | null; paired_vs_v2: GenPair | null }
+export interface GenCohort {
+	cohort_id: string; label: string; detail: string; participants: number; windows: number; positive_windows: number; participant_ids: string[]; site_conditions: string[];
+	manifest_sha256: string | null; separation: Record<string, Record<string, number>> | null; separation_note: string | null;
+}
+export interface Generalisation {
+	schema_version: 'STUDIO_GENERALISATION_V1';
+	run_id: string; run_length: number; observer_id: string; claim_boundary: string; threshold: number; calibration: string;
+	base_model: BaseModel;
+	cohort: GenCohort;
+	baseline: { label: string; detail: string; record: GenRecord | null; state_sha256: string | null };
+	rounds: GenRound[];
+	integrity: { r0_digest_equals_frozen_v2: boolean | null; r0_predictions_equal_frozen_v2: boolean | null };
+	metrics_order: string[]; lower_is_better: string[]; interpretation: string[]; revision: number;
+}
+export interface GenCurves { run_id: string; round_id: number; available: boolean; reason?: string; round?: { roc: number[][]; pr: number[][] }; baseline?: { roc: number[][]; pr: number[][] } | null }
+export interface GenParticipants { run_id: string; round_id: number; available: boolean; round?: Record<string, Metrics>; baseline?: Record<string, Metrics> | null }

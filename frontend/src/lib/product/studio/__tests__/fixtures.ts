@@ -6,7 +6,7 @@ export const METRICS = { windows: 1446, positives: 307, negatives: 1139, prevale
 
 export function run(over: Partial<StudioRun> = {}): StudioRun {
 	return { run_id: 'FL10RUN-AAA', run_length: 10, engine: 'FL10_10R', origin: 'LIVE', run_type: 'LIVE_RUN', algorithm: 'FEDAVG', secagg_mode: 'PLAIN', source_mode: 'CANONICAL_SYNTHETIC', status: 'RUNNING', phase: 'TRAINING', current_round: 2,
-		planned_rounds: 10, client_ids: [], candidate: null, failure: null, label: '10-round extended run', source_label: 'LIVE RUN (this session)', replay_of: null,
+		planned_rounds: 10, client_ids: [], candidate: null, failure: null, label: '10-round extended run', base_model: null, source_label: 'LIVE RUN (this session)', replay_of: null,
 		evaluation: { available: true, source: 'LIVE', evaluation_run_id: over.run_id ?? 'FL10RUN-AAA', reason: null, revision: 1 }, export_status: 'NOT_STARTED', created_at: null, ...over };
 }
 

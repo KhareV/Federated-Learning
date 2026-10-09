@@ -20,7 +20,7 @@ from fastapi.responses import JSONResponse, Response
 
 from api.product_app_v1_1 import WS_FORBIDDEN, WS_NOT_FOUND, WS_POLICY_VIOLATION, WS_UNAUTHENTICATED
 from product.api.errors import ProductError, ProductErrorCode
-from studio import STUDIO_ID
+from studio import STUDIO_ID, g1_cohort, v2_init
 from studio.constants import (
     CLAIM_BOUNDARY,
     COHORT_USE_DETAIL,
@@ -58,6 +58,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
             finally:        # a running 10-round job is stopped (fail closed) and the evaluation worker is released when the application stops
                 await service.runner10.shutdown()
                 service.observer.close()
+                service.generalisation.close()
 
     app.router.lifespan_context = studio_lifespan
 
@@ -79,9 +80,10 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     async def capabilities(request: Request) -> dict[str, Any]:
         await identity(request)
         return {"studio_id": STUDIO_ID, "run_lengths": list(RUN_LENGTHS), "default_run_length": 3,
-                "ten_round": {"available": True, "engine": "FL10_10R", "source_modes": list(MODES.values()), "algorithms": ["FEDAVG"], "aggregation_modes": ["PLAIN"],
+                "ten_round": {"available": True, "engine": "FL10_10R", "initialisations": [{"id": k, "label": v2_init.INIT_LABELS[k], "default": k == v2_init.INIT_FRESH} for k in v2_init.INITS], "source_modes": list(MODES.values()), "algorithms": ["FEDAVG"], "aggregation_modes": ["PLAIN"],
                               "unsupported": {"FEDPROX": "not implemented or verified by the 10-round engine", "SECAGG_SHADOW": "not implemented or verified by the 10-round engine"}, "expected_updates": 80},
                 "three_round": {"available": True, "engine": "PRODUCT_3R", "route": FEDERATION_RUNS, "expected_updates": 24},
+                "generalisation": {"cohort_id": g1_cohort.COHORT_ID, "label": g1_cohort.COHORT_USE_LABEL, "claim_boundary": g1_cohort.CLAIM_BOUNDARY, "baseline": "MODEL_V2_FINAL (unchanged, frozen)"},
                 "evaluation": {"observer_id": OBSERVER_ID, "protocol_id": EVAL_PROTOCOL_ID, "threshold": 0.5, "calibration": "NONE", "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "claim_boundary": CLAIM_BOUNDARY}}
 
     @app.get(f"{STUDIO}/runs")
@@ -95,14 +97,14 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         if body.get("run_length") == 3:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, f"3-round runs use the frozen product contract: POST {FEDERATION_RUNS}")
         mode_names = {v: k for k, v in MODES.items()}
-        if body.get("run_length") != 10 or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
+        if body.get("run_length") != 10 or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "run_length must be 10 and source_mode CANONICAL_SYNTHETIC or LIVE_MONITORED_SITE_00")
         if body.get("algorithm", "FEDAVG") != "FEDAVG" or body.get("secagg_mode", "PLAIN") != "PLAIN" or body.get("run_type", "LIVE_RUN") != "LIVE_RUN":
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "the 10-round engine supports LIVE_RUN FedAvg with plain aggregation only; an unsupported combination is never reinterpreted")
         resolved = await identity_resolver(request)
         store.upsert_user(resolved)
         try:
-            job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")])
+            job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")], body.get("initialisation", "FL_INIT_V2"))
             job = await service.runner10.start(user, job.run_id)
         except StudioRunError as error:
             raise _as_product_error(error) from error
@@ -127,6 +129,21 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     async def evaluation_round(request: Request, run_id: str, round_id: int) -> dict[str, Any]:
         user = await identity(request)
         return await asyncio.to_thread(service.evaluation_round, user, run_id, round_id)
+
+    @app.get(STUDIO + "/runs/{run_id}/generalisation")
+    async def generalisation(request: Request, run_id: str) -> dict[str, Any]:
+        user = await identity(request)
+        return await asyncio.to_thread(service.generalisation_summary, user, run_id)
+
+    @app.get(STUDIO + "/runs/{run_id}/generalisation/curves/{round_id}")
+    async def generalisation_curves(request: Request, run_id: str, round_id: int) -> dict[str, Any]:
+        user = await identity(request)
+        return await asyncio.to_thread(service.generalisation_curves, user, run_id, round_id)
+
+    @app.get(STUDIO + "/runs/{run_id}/generalisation/participants/{round_id}")
+    async def generalisation_participants(request: Request, run_id: str, round_id: int) -> dict[str, Any]:
+        user = await identity(request)
+        return await asyncio.to_thread(service.generalisation_participants, user, run_id, round_id)
 
     @app.get(STUDIO + "/runs/{run_id}/rounds/{round_id}")
     async def round_detail(request: Request, run_id: str, round_id: int) -> dict[str, Any]:

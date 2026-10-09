@@ -208,7 +208,7 @@ describe('run status strip, tabs and the owner-bound star', () => {
 	it('analysis tabs are a keyboard-operable tablist and explain a run without captured data', async () => {
 		const s = storeWith((st) => { st.run = run({ evaluation: { available: false, source: 'LIVE', evaluation_run_id: 'x', reason: 'RUN_PREDATES_LIVE_EVALUATION', revision: 0 } }); });
 		render(AnalysisTabs, { props: { studio: s } });
-		expect(screen.getAllByRole('tab')).toHaveLength(7);
+		expect(screen.getAllByRole('tab')).toHaveLength(8);        // OVERVIEW … COMPARISON, GENERALISATION, FIGURES & EXPORTS
 		expect(screen.getByTestId('atab-overview').getAttribute('aria-selected')).toBe('true');
 		await fireEvent.keyDown(screen.getByTestId('atab-overview'), { key: 'ArrowRight' });
 		expect(s.analysisTab).toBe('performance');

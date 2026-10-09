@@ -85,5 +85,13 @@ Every older verifier passes against the current tree through the additive chain 
 ## 29. Successor lock
 `artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json` — additive successor of `NHM_FL10_001` (status PASS, non-provisional); binds 489 files incl. 307 frontend files; verified by `python -m scripts.verify_unified_studio_001 --lock` and `tests/test_studio_successor.py`. No historical lock was edited; nothing pushed.
 
+## 31. Addendum — V2-initialised federated fine-tuning and the Generalisation tab
+Delivered after first acceptance, inside the same Studio (`generalisation_protocol.md` has the design, decisions, measured results and limits):
+- **Pretrained start** (`MODEL_V2_FINAL`, explicit choice; the untrained `FL_INIT_V2` start stays the default): strict compatibility audit (digest pin, 92 state entries, 57 553 elements, strict load round trip, logits parity), additive `initial_state` option in `fl10/runner.py`; frozen-FL_INIT parity claims are not made for this mode.
+- **Unseen cohort G1** (16 new synthetic participants, pinned manifest, zero overlap with training, showcase holdout and FL10 holdout) and a **second evaluation lane** that scores every committed round and the unchanged frozen V2 on it, with paired participant-cluster differences (round − V2).
+- **UI/API/exports**: Analysis ▸ GENERALISATION, three read-only owner-scoped routes, hash-verified generalisation exports; browser journey now 243 checks including a genuine pretrained-start 10-round run.
+- **Measured (synthetic, unseen participants):** pretrained start R0 = frozen V2 exactly (AUPRC 0.8902) → R10 0.9915 with specificity 0.997 and BCE/Brier not improved reliably; untrained start reaches AUPRC 0.943 at R10 but specificity is 0 from R3 and BCE 3.47 (the earlier negative finding reproduced on a never-used cohort).
+- **Not done:** real-ECG AAMI-SVF retention (G2) is NOT EXECUTED; no 3-round pretrained run (frozen contract); nothing here is clinical or a significance claim.
+
 ## 30. Undelivered / residual risks
 See `known_limitations` in the lock. In short: connected Clerk two-user E2E not executed; the 16-participant cohort is reused (diagnostic only); 10-round supports FedAvg/plain only; runs started before the observer carry no metrics; the offline `--demo` launcher serves the older app (10-round disabled there with an explanation); an interrupted 10-round run fails closed and restarts from R0; the pre-existing monitoring race flake is untouched (see §27). Not claimed: any clinical validity, hardware, or an untouched final test.

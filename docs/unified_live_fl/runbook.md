@@ -14,6 +14,13 @@
 6. **Exports** (after the run completes and every evaluation settles): SVG, 300-dpi PNG, CSV and JSON provenance per figure; CSV/JSON/Markdown per table; full-precision evaluation records, predictions and the run report. Each download is re-hashed in the browser against the manifest.
 7. **Historical runs**: pick any run in the run selector. Recorded NHM_FL10_001 runs open as labelled read-only evidence (a replay reconstructed from the recorded run report). A product REPLAY shows the source run's recorded evaluation. Runs that predate the observer say `RUN_PREDATES_LIVE_EVALUATION` and show no metrics.
 
+## Generalisation (frozen V2 vs every round, unseen cohort)
+- 10 rounds ▸ **Starting model**: *Untrained V2 architecture* (default, unchanged) or *Pretrained V2 — MODEL_V2_FINAL* (R0 is the verified checkpoint; federated fine-tuning on the synthetic engineering-event task).
+- Analysis ▸ **GENERALISATION**: AUPRC/AUROC/F1/specificity/recall/BCE/Brier per round against the dashed frozen-V2 line, the paired difference with a nominal interval, the round-synchronised table, both confusion matrices, ROC/PR overlay and per-participant AUPRC/AUROC. Points appear as each round is scored on the unseen cohort; a pending round shows its status, never a value.
+- The first run after a server start builds the unseen cohort once (about two minutes of CPU) before its first scores appear; the page says "frozen V2 is evaluating" until then.
+- A 3-round pretrained run is not offered (the frozen 3-round contract accepts only `FL_INIT_V2`); R0–R3 of a pretrained 10-round run is its 3-round view.
+- Protocol, measured results and limits: `generalisation_protocol.md`. Real-ECG (AAMI-SVF) retention is not executed.
+
 ## Verify
 - `python -m scripts.verify_unified_studio_001 --lock` — the additive successor lock, the whole older verifier chain and the evidence.
 - `python -m scripts.run_studio_local_gates` — full backend suite (chunked), frontend tests, svelte-check, build and launcher preflight.

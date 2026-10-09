@@ -18,9 +18,11 @@ from fl10.constants import RECORDED
 from fl10.evaluate import ROOT
 from product.api.errors import ProductError, ProductErrorCode
 from product.federation.service import FederationService
+from studio import v2_init
 from studio.bundle import build_live_bundle, read_run_report
 from studio.capture3 import ProductRunCapture
 from studio.constants import (
+    BASELINE_RUN_ID,
     CLAIM_BOUNDARY,
     COHORT_USE_DETAIL,
     COHORT_USE_LABEL,
@@ -28,6 +30,7 @@ from studio.constants import (
     OBSERVER_ID,
 )
 from studio.exports import export_run
+from studio.generalisation import GeneralisationLane
 from studio.observer import EvaluationObserver
 from studio.recorded import RECORDED_LABEL, recorded_bundle, recorded_records
 from studio.runner10 import CLIENT_IDS, MODES, StudioFl10Service, StudioRunError
@@ -48,6 +51,7 @@ class StudioService:
         self.root.mkdir(parents=True, exist_ok=True)
         self.federation = federation
         self.observer = observer or EvaluationObserver(self.root)
+        self.generalisation = GeneralisationLane(self.root, self.observer)       # second lane: unseen G1 cohort + the unchanged frozen V2 baseline (mirrors every submission)
         self.capture = ProductRunCapture(federation, self.observer, self.root)
         self.capture.install()
         self.runner10 = StudioFl10Service(root=self.root, observer=self.observer, inference_factory=inference_factory,
@@ -95,7 +99,11 @@ class StudioService:
 
     def _export(self, run_id: str, n: int, engine: str, mode: str, directory: Path) -> None:
         bundle = build_live_bundle(run_id=run_id, run_length=n, run_dir=directory / "run", observer=self.observer, mode=mode, engine=engine, status="COMPLETED", training_cohort=self._training_cohort(run_id))
-        manifest = export_run(bundle, directory / "export", eval_dir=self.observer.run_dir(run_id), run_dir=directory / "run")
+        self.generalisation.wait_settled(run_id, n)          # the unseen-cohort lane settles after the diagnostic lane; whatever state it reached is exported as it is (failures included)
+        job = self.runner10.jobs.get(run_id)
+        gen = self.generalisation.bundle(run_id, run_length=n, init=self._base_model(job.init, job.base_audit) if job else None)
+        manifest = export_run(bundle, directory / "export", eval_dir=self.observer.run_dir(run_id), run_dir=directory / "run", generalisation=gen, gen_dir=self.generalisation.observer.run_dir(run_id),
+                              baseline_dir=self.generalisation.observer.run_dir(BASELINE_RUN_ID))
         with self._lock:
             self._exports[run_id] = {"status": "READY", "figures": len(manifest["figures"]), "tables": len(manifest["tables"])}
 
@@ -169,8 +177,8 @@ class StudioService:
             except StudioRunError as error:
                 raise _as_product_error(error) from error
             return {"run_id": run_id, "run_length": 10, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": "FEDAVG", "secagg_mode": "PLAIN", "source_mode": MODES[job.mode], "status": job.status,
-                    "phase": job.phase, "current_round": job.current_round, "planned_rounds": 10, "client_ids": list(CLIENT_IDS), "candidate": job.candidate, "failure": job.failure, "label": "10-round extended run",
-                    "source_label": "LIVE RUN (this session)", "replay_of": None, "evaluation": self._evaluation_state(run_id), "export_status": job.export_status, "created_at": job.created_at}
+                    "phase": job.phase, "current_round": job.current_round, "planned_rounds": 10, "client_ids": list(CLIENT_IDS), "candidate": job.candidate, "failure": job.failure, "label": "10-round extended run" if job.init == v2_init.INIT_FRESH else "10-round extended run — pretrained V2 start",
+                    "base_model": self._base_model(job.init, job.base_audit), "source_label": "LIVE RUN (this session)", "replay_of": None, "evaluation": self._evaluation_state(run_id), "export_status": job.export_status, "created_at": job.created_at}
         run = self.federation.get_run(user_id, run_id)
         meta = self.federation.artifacts.read_run_meta(run_id) or {}
         replay = run.run_type.value == "REPLAY"
@@ -180,6 +188,13 @@ class StudioService:
                 "planned_rounds": run.planned_rounds, "client_ids": list(run.client_ids), "candidate": ({"candidate_id": run.candidate_ids[0], "promoted": False, "deployed": False} if run.candidate_ids else None), "failure": None,
                 "label": "3-round default run", "source_label": "REPLAY OF A PREVIOUS RUN" if replay else "LIVE RUN (this session)", "replay_of": meta.get("replay_source_run_id"), "evaluation": self._evaluation_state(run_id),
                 "export_status": export["status"], "created_at": None}
+
+    @staticmethod
+    def _base_model(init: str, audit: dict[str, Any] | None) -> dict[str, Any]:
+        info = {"model_id": init, "label": v2_init.INIT_LABELS[init]}
+        if audit:
+            info |= {k: audit.get(k) for k in ("state_sha256", "checkpoint_sha256", "state_entries", "architecture_id", "training_target_of_checkpoint")}
+        return info
 
     def list_runs(self, user_id: str) -> list[dict[str, Any]]:
         out = [self.describe(user_id, r.run_id) for r in self.federation.list_runs(user_id)]
@@ -251,6 +266,31 @@ class StudioService:
 
             data["curves"] = json.loads((self.observer.run_dir(eval_id) / record.curve_artifact_reference.path).read_text())
         return data
+
+    # ---- generalisation lane ----------------------------------------------------------------------------------------------
+    def _generalisation_run(self, user_id: str, run_id: str) -> tuple[dict[str, Any], str]:
+        d = self.describe(user_id, run_id)
+        if self.is_recorded(run_id):
+            raise ProductError(ProductErrorCode.INVALID_STATE, "GENERALISATION_NOT_AVAILABLE: recorded evidence runs keep their own recorded diagnostic evaluation; start a new run to score the unseen cohort")
+        if not d["evaluation"]["available"]:
+            raise ProductError(ProductErrorCode.INVALID_STATE, "RUN_PREDATES_LIVE_EVALUATION: this run has no committed states scored on the unseen cohort")
+        return d, d["evaluation"]["evaluation_run_id"]
+
+    def generalisation_summary(self, user_id: str, run_id: str) -> dict[str, Any]:
+        d, eval_id = self._generalisation_run(user_id, run_id)
+        return self.generalisation.bundle(eval_id, run_length=d["run_length"], init=d.get("base_model"))
+
+    def generalisation_curves(self, user_id: str, run_id: str, round_id: int) -> dict[str, Any]:
+        d, eval_id = self._generalisation_run(user_id, run_id)
+        if not 0 <= round_id <= d["run_length"]:
+            raise ProductError(ProductErrorCode.NOT_FOUND, "round out of range for this run")
+        return self.generalisation.curves(eval_id, round_id)
+
+    def generalisation_participants(self, user_id: str, run_id: str, round_id: int) -> dict[str, Any]:
+        d, eval_id = self._generalisation_run(user_id, run_id)
+        if not 0 <= round_id <= d["run_length"]:
+            raise ProductError(ProductErrorCode.NOT_FOUND, "round out of range for this run")
+        return self.generalisation.participants(eval_id, round_id)
 
     def figures(self, user_id: str, run_id: str, selected: int | None = None) -> dict[str, Any]:
         bundle = self.bundle(user_id, run_id)

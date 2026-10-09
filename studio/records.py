@@ -11,6 +11,9 @@ from studio.constants import (
     CLAIM_BOUNDARY,
     COHORT_USE_LABEL,
     EVAL_PROTOCOL_ID,
+    G1_CLAIM_BOUNDARY,
+    G1_COHORT_USE_LABEL,
+    GENERALISATION_OBSERVER_ID,
     OBSERVER_ID,
     RECORD_SCHEMA,
 )
@@ -76,3 +79,14 @@ class EvaluationRecord(BaseModel):
         data = self.model_dump(mode="json", exclude={"participant_metrics", "metric_result"})
         data["metric_result"] = None if self.metric_result is None else {k: v for k, v in self.metric_result.items() if k not in ("histogram",)}
         return data
+
+
+class GeneralisationRecord(EvaluationRecord):
+    """Same strict record, scored on the unseen G1 cohort. ``subject`` says whether the state is a federation round or the unchanged frozen V2 baseline (run_length 0)."""
+
+    schema_version: Literal["STUDIO_GENERALISATION_EVALUATION_V1"] = "STUDIO_GENERALISATION_EVALUATION_V1"  # type: ignore[assignment]
+    run_length: int = Field(ge=0)                                              # type: ignore[assignment]
+    subject: Literal["FL_ROUND", "FROZEN_V2_BASELINE"] = "FL_ROUND"
+    observer_id: str = GENERALISATION_OBSERVER_ID
+    cohort_use: str = G1_COHORT_USE_LABEL
+    claim_boundary: str = G1_CLAIM_BOUNDARY

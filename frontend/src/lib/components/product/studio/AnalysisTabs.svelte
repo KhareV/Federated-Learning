@@ -9,16 +9,17 @@
 	import RoundComparison from './RoundComparison.svelte';
 	import ClientHistory from './ClientHistory.svelte';
 	import ResearchBridge from './ResearchBridge.svelte';
+	import GeneralisationPanel from './GeneralisationPanel.svelte';
 	import { ANALYSIS_TABS, type AnalysisTab, type StudioStore } from '$lib/product/studio/store.svelte';
 	import type { Fl10Spec, Fl10Table as Table } from '$lib/product/observatory/fl10';
 	let { studio }: { studio: StudioStore } = $props();
-	const LABEL: Record<AnalysisTab, string> = { overview: 'OVERVIEW', performance: 'PERFORMANCE', training: 'TRAINING', clients: 'CLIENTS', matrices: 'MATRICES', comparison: 'COMPARISON', figures: 'FIGURES & EXPORTS' };
+	const LABEL: Record<AnalysisTab, string> = { overview: 'OVERVIEW', performance: 'PERFORMANCE', training: 'TRAINING', clients: 'CLIENTS', matrices: 'MATRICES', comparison: 'COMPARISON', generalisation: 'GENERALISATION', figures: 'FIGURES & EXPORTS' };
 	const FIGS: Record<AnalysisTab, string[]> = {
 		overview: ['FL10_FIG01', 'FL10_FIG18'], performance: ['FL10_FIG04', 'FL10_FIG05', 'FL10_FIG06', 'FL10_FIG15', 'FL10_FIG20'], training: ['FL10_FIG02', 'FL10_FIG03', 'FL10_FIG12', 'FL10_FIG17', 'FL10_FIG19'],
-		clients: ['FL10_FIG11', 'FL10_FIG13', 'FL10_FIG14'], matrices: ['FL10_FIG07', 'FL10_FIG08', 'FL10_FIG09', 'FL10_FIG10'], comparison: ['FL10_FIG16', 'FL10_FIG20'], figures: []
+		clients: ['FL10_FIG11', 'FL10_FIG13', 'FL10_FIG14'], matrices: ['FL10_FIG07', 'FL10_FIG08', 'FL10_FIG09', 'FL10_FIG10'], comparison: ['FL10_FIG16', 'FL10_FIG20'], generalisation: [], figures: []
 	};
 	const TABS_OF: Record<AnalysisTab, string[]> = {
-		overview: ['FL10_TAB08', 'FL10_TAB10', 'FL10_TAB12'], performance: ['FL10_TAB01', 'FL10_TAB05'], training: ['FL10_TAB03', 'FL10_TAB04', 'FL10_TAB07'], clients: ['FL10_TAB06'], matrices: [], comparison: ['FL10_TAB02', 'FL10_TAB11'],
+		overview: ['FL10_TAB08', 'FL10_TAB10', 'FL10_TAB12'], performance: ['FL10_TAB01', 'FL10_TAB05'], training: ['FL10_TAB03', 'FL10_TAB04', 'FL10_TAB07'], clients: ['FL10_TAB06'], matrices: [], comparison: ['FL10_TAB02', 'FL10_TAB11'], generalisation: [],
 		figures: ['FL10_TAB01', 'FL10_TAB02', 'FL10_TAB03', 'FL10_TAB04', 'FL10_TAB05', 'FL10_TAB06', 'FL10_TAB07', 'FL10_TAB08', 'FL10_TAB09', 'FL10_TAB10', 'FL10_TAB11', 'FL10_TAB12']
 	};
 	const tab = $derived(studio.analysisTab);
@@ -55,6 +56,7 @@
 				<ResearchBridge {studio} />
 				<ul class="refs" data-testid="recorded-refs">{#each recorded as r (r.id)}<li><a href={`/app/federation/live?run=${r.id}`}>{r.label}</a> — frozen NHM_FL10_001 evidence (R0–R10), opened read-only as a historical run.</li>{/each}</ul>
 			{/if}
+			{#if tab === 'generalisation'}<GeneralisationPanel {studio} />{/if}
 			{#if tab === 'figures'}<ExportPanel {studio} />{/if}
 			{#if !studio.figures && FIGS[tab].length}<p class="dim" role="status" data-testid="figures-loading">Loading figures…</p>{/if}
 			<div class="grid">

@@ -22,3 +22,13 @@ One frontend experience, two unchanged execution engines, one evaluation path.
 - **One live run at a time** across both engines and routes (the product `POST /federation/runs` and the old FL10 route return `409` while a Studio run executes).
 - **Shared selected-round state** (`StudioStore`): `followLive`, `selectedRound`, `selectedClientId`, `analysisTab`; historical views are rebuilt only from the current run's validated events (`FederationStore.viewAtRound`). Switching runs clears every run-scoped cache first and drops late responses of the previous run.
 - **Launchers:** the default Clerk launcher (`run_observatory_clerk_connected`) and the Observatory product launcher serve the Studio routes. The offline `--demo` faculty launcher serves the older product app (no Observatory/Studio routes, as before); the Studio entry page then disables the 10-round option with an explanation and the 3-round default is unaffected.
+
+## Generalisation lane (added after first acceptance)
+```
+ committed R_k ──► primary observer (diagnostic cohort, eval/)  ──mirror──►  generalisation observer (unseen G1 cohort, eval_g1/)
+                                                                               ▲ frozen V2 (MODEL_V2_FINAL) scored once, cached (V2FROZEN-BASELINE)
+                    studio/generalisation.py: paired participant-cluster bootstrap, round − frozen V2, per round, from stored predictions
+                    GET /studio/runs/{id}/generalisation[/curves|/participants/{round}]  ─►  Analysis ▸ GENERALISATION
+ start choice: FL_INIT_V2 (default) | MODEL_V2_FINAL  ─► studio/v2_init.py (strict audit) ─► fl10.runner.run_training(initial_state=…)
+```
+The frozen 3-round product contract and the diagnostic lane are unchanged; the new lane only reads committed states.

@@ -8,6 +8,7 @@ unfinished stays QUEUED/EVALUATING; a failure is stored and shown, never replace
 
 from __future__ import annotations
 
+import contextlib
 import csv
 import hashlib
 import io
@@ -66,8 +67,18 @@ def read_predictions(data: bytes) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
 
 class EvaluationObserver:
-    def __init__(self, root: Path, *, holdout_provider: Callable[[], FrozenHoldout] = load_holdout, evaluator: Callable[..., dict[str, Any]] | None = None) -> None:
+    def __init__(self, root: Path, *, holdout_provider: Callable[[], FrozenHoldout] = load_holdout, evaluator: Callable[..., dict[str, Any]] | None = None,
+                 lane_dir: str = "eval", record_cls: type[EvaluationRecord] = EvaluationRecord, cohort_id: str | None = None,
+                 on_complete: Callable[[str, int], None] | None = None, before_submit: Callable[[], None] | None = None) -> None:
+        """``lane_dir`` / ``record_cls`` / ``cohort_id`` let a second observer score the same committed states on a different cohort (the Generalisation lane) with the same
+        isolation, digest verification and fixed threshold. The defaults are the original diagnostic lane, unchanged."""
         self.root = Path(root)
+        self._lane_dir = lane_dir
+        self._record_cls = record_cls
+        self._cohort_id_override = cohort_id
+        self._on_complete = on_complete
+        self._before_submit = before_submit
+        self._mirrors: list[EvaluationObserver] = []
         self._holdout_provider = holdout_provider
         prepare_template()          # the only RNG-consuming model construction happens here, at construction time, before any run can be training
         self._evaluator = evaluator or evaluate_isolated
@@ -83,7 +94,7 @@ class EvaluationObserver:
 
     # ---- paths -------------------------------------------------------------------------------------------------------
     def run_dir(self, run_id: str) -> Path:
-        return self.root / run_id / "eval"
+        return self.root / run_id / self._lane_dir
 
     def _round_dir(self, run_id: str, round_id: int) -> Path:
         return self.run_dir(run_id) / round_key(round_id)
@@ -93,14 +104,23 @@ class EvaluationObserver:
         with self._lock:
             self._pairs[run_id] = (comparator, endpoint)
 
-    def submit(self, *, run_id: str, run_length: int, round_id: int, state: dict[str, np.ndarray], expected_digest: str, candidate_id: str | None = None) -> EvaluationRecord:
+    def add_mirror(self, other: EvaluationObserver) -> None:
+        """Every state submitted here is also submitted (same private copy semantics) to ``other``; a mirror can never change this observer's records or training."""
+        self._mirrors.append(other)
+
+    def submit(self, *, run_id: str, run_length: int, round_id: int, state: dict[str, np.ndarray], expected_digest: str, candidate_id: str | None = None,
+               record_extra: dict[str, Any] | None = None, mirror: bool = True) -> EvaluationRecord:
         """Queue a committed state. The state is serialized (an immutable private copy) before returning, so later mutation by the caller cannot affect scoring."""
+        if self._before_submit is not None:
+            self._before_submit()
         blob = serialize_state(state)
         digest_ok = state_sha(OrderedDict(state)) == expected_digest
-        queued = EvaluationRecord(run_id=run_id, run_length=run_length, round_id=round_id, global_state_digest=expected_digest, candidate_id=candidate_id, cohort_id=_cohort_id(),
-                                  evaluation_status="QUEUED" if digest_ok else "FAILED", evaluation_queued_at=_now(),
+        queued = self._record_cls(run_id=run_id, run_length=run_length, round_id=round_id, global_state_digest=expected_digest, candidate_id=candidate_id, cohort_id=self._cohort(),
+                                  evaluation_status="QUEUED" if digest_ok else "FAILED", evaluation_queued_at=_now(), **(record_extra or {}),
                                   failure=None if digest_ok else Failure(code="STATE_DIGEST_MISMATCH", message="submitted state does not hash to the committed digest; not scored"))
         with self._lock:
+            if run_id not in self._records:
+                self._load_persisted(run_id)
             existing = self._records.get(run_id, {}).get(round_id)
             if existing is not None:
                 if existing.global_state_digest != expected_digest:
@@ -113,6 +133,10 @@ class EvaluationObserver:
                     self._pending += 1
                 except queue.Full:
                     self._store(queued.model_copy(update={"evaluation_status": "FAILED", "failure": Failure(code="EVALUATION_QUEUE_FULL", message="bounded evaluation queue is full")}))
+        if mirror:
+            for other in self._mirrors:
+                with contextlib.suppress(ValueError):       # a mirror that already holds this round with a different state keeps its own record; the primary lane is unaffected
+                    other.submit(run_id=run_id, run_length=run_length, round_id=round_id, state=state, expected_digest=expected_digest, candidate_id=candidate_id)
         return queued
 
     def records(self, run_id: str) -> list[EvaluationRecord]:
@@ -157,7 +181,7 @@ class EvaluationObserver:
         if not base.is_dir():
             return
         for path in sorted(base.glob("R*/record.json")):
-            record = EvaluationRecord.model_validate_json(path.read_text())
+            record = self._record_cls.model_validate_json(path.read_text())
             if record.evaluation_status in ("QUEUED", "EVALUATING"):   # interrupted by a restart: never silently resumed or invented
                 record = record.model_copy(update={"evaluation_status": "FAILED", "failure": Failure(code="INTERRUPTED_BY_RESTART", message="evaluation was interrupted; the state is not re-scored automatically")})
             self._records.setdefault(run_id, {})[record.round_id] = record
@@ -182,6 +206,9 @@ class EvaluationObserver:
                     self._pending -= 1
                     self._idle.notify_all()
             self._maybe_pair(run_id)
+            if self._on_complete is not None:
+                with contextlib.suppress(Exception):       # a derived-comparison failure never touches the stored evaluation records
+                    self._on_complete(run_id, round_id)
 
     def _evaluate(self, run_id: str, round_id: int, blob: bytes) -> None:
         with self._lock:
@@ -235,12 +262,15 @@ class EvaluationObserver:
         with self._lock:
             self._revision[run_id] = self._revision.get(run_id, 0) + 1
 
+    def _cohort(self) -> str:
+        return self._cohort_id_override or _default_cohort_id()
+
     def paired(self, run_id: str) -> dict[str, Any] | None:
         path = self.run_dir(run_id) / "paired.json"
         return json.loads(path.read_text()) if path.exists() else None
 
 
-def _cohort_id() -> str:
+def _default_cohort_id() -> str:
     from fl10 import holdout
 
     return holdout.COHORT_ID

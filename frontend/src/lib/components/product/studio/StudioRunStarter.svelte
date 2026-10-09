@@ -2,12 +2,14 @@
 	// One continuous start workflow for both run lengths. 3 rounds (default) keeps the ORIGINAL run form and the frozen 3-round contract untouched; 10 rounds uses the separate verified engine.
 	import RunConfigForm from '$lib/components/product/federation/RunConfigForm.svelte';
 	import type { FederationRunChoice } from '$lib/product/api';
-	import type { RunLength, SourceMode, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
+	import type { Initialisation, RunLength, SourceMode, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
 	let { disabled = false, liveBlocked = false, backendEnabled = true, capabilities = null, onStartThree, onStartTen }: {
 		disabled?: boolean; liveBlocked?: boolean; backendEnabled?: boolean; capabilities?: StudioCapabilities | null;
 		onStartThree: (choice: FederationRunChoice) => void; onStartTen: (choice: StudioRunChoice) => void } = $props();
 	let length = $state<RunLength>(3);              // default stays 3
 	let source = $state<SourceMode>('CANONICAL_SYNTHETIC');
+	let initialisation = $state<Initialisation>('FL_INIT_V2');                      // default keeps the original untrained start; the pretrained V2 start is an explicit choice
+	const inits = $derived(capabilities?.ten_round.initialisations ?? []);
 	const tenAvailable = $derived(capabilities?.ten_round.available === true);
 	const unsupported = $derived(capabilities?.ten_round.unsupported ?? {});
 	const modes = $derived(capabilities?.ten_round.source_modes ?? ['CANONICAL_SYNTHETIC']);
@@ -36,16 +38,20 @@
 	{#if length === 3}
 		<RunConfigForm {disabled} {liveBlocked} {backendEnabled} onSubmit={onStartThree} />
 	{:else}
-		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: 10, source_mode: source }); }} aria-label="Ten-round federation run configuration">
+		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: 10, source_mode: source, ...(inits.length ? { initialisation } : {}) }); }} aria-label="Ten-round federation run configuration">
 			<label><span>Run mode</span><select disabled data-testid="cfg10-run-type"><option>LIVE_RUN</option><option disabled>REPLAY — open a completed run instead</option></select></label>
 			<p class="help">LIVE_RUN performs genuine local optimization and federation for ten rounds. A replay never trains: open a completed 10-round run from “Your federation runs”, or a recorded FL10 run, to replay it.</p>
 			<label><span>Source mode</span><select bind:value={source} data-testid="cfg10-source">{#each modes as m (m)}<option value={m}>{m === 'CANONICAL_SYNTHETIC' ? 'Canonical synthetic cohort' : 'Live-monitored simulated SITE_00'}</option>{/each}</select></label>
 			<p class="help" data-testid="cfg10-source-note">{SOURCE_TEXT[source]}</p>
+			{#if inits.length}
+				<label><span>Starting model</span><select bind:value={initialisation} data-testid="cfg10-init">{#each inits as i (i.id)}<option value={i.id}>{i.id === 'FL_INIT_V2' ? 'Untrained V2 architecture (default) — FL_INIT_V2' : 'Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning'}</option>{/each}</select></label>
+				<p class="help" data-testid="cfg10-init-note">{inits.find((i) => i.id === initialisation)?.label}. {initialisation === 'MODEL_V2_FINAL' ? 'R0 is the verified pretrained checkpoint, unchanged; the federated rounds adapt it on the synthetic engineering-event task. The Generalisation tab then compares every round with frozen V2 on an unseen cohort.' : 'R0 is a fresh untrained model; frozen V2 is shown only as an external reference.'}</p>
+			{/if}
 			<label><span>Algorithm</span><select disabled data-testid="cfg10-algorithm"><option>FedAvg — sample-count-weighted averaging</option><option disabled>FedProx — unavailable</option></select></label>
 			<p class="help" data-testid="cfg10-algorithm-note">{unsupported.FEDPROX ? `FedProx is disabled: ${unsupported.FEDPROX}.` : 'FedAvg only.'}</p>
 			<label><span>Aggregation / protection mode</span><select disabled data-testid="cfg10-mode"><option>Plain aggregation</option><option disabled>SecAgg+ shadow — unavailable</option></select></label>
 			<p class="help" data-testid="cfg10-mode-note">{unsupported.SECAGG_SHADOW ? `SecAgg+ shadow is disabled: ${unsupported.SECAGG_SHADOW}.` : 'Plain aggregation only.'} An unsupported setting is never silently reinterpreted as FedAvg/plain.</p>
-			<dl class="fixed" aria-label="Fixed configuration"><div><dt>Clients</dt><dd>8</dd></div><div><dt>Rounds</dt><dd>10</dd></div><div><dt>Base</dt><dd>FL_INIT_V2</dd></div><div><dt>Evaluation</dt><dd>per committed round</dd></div></dl>
+			<dl class="fixed" aria-label="Fixed configuration"><div><dt>Clients</dt><dd>8</dd></div><div><dt>Rounds</dt><dd>10</dd></div><div><dt>Base</dt><dd>{initialisation}</dd></div><div><dt>Evaluation</dt><dd>per committed round</dd></div></dl>
 			{#if liveBlocked}<p class="warn" role="status">ONE LIVE FEDERATION RUN AT A TIME IN THIS ONE-LAPTOP DEMONSTRATION.</p>{/if}
 			<button type="submit" disabled={blocked} data-testid="cfg10-submit">Create and start 10-round live run</button>
 		</form>

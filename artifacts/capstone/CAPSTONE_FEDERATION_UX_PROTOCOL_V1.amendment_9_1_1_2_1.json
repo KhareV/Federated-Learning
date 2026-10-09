@@ -4,7 +4,7 @@
  "defect": "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001 extends the product frontend (Studio client methods, run-scoped stores and components) and the federation store, and needs successor awareness in the frontend-accounting tests and the legacy route classification.",
  "files": {
   "frontend/src/lib/product/api.ts": {
-   "new_sha256": "afef0a6cee17291ae46ad6df1f2bcddd2d286e60cc119d305d5c890e95a6a43b",
+   "new_sha256": "a47e19b897f91a422a50e66b2b1e98a32154e12f9a24f3cc81632c14ca20dceb",
    "old_sha256": "d3fdba4cae774f9f0ef2ecefadc8e666e386a0521ed7b3366ac4b48fe819bddf"
   },
   "frontend/src/lib/product/federation/state.svelte.ts": {

@@ -44,21 +44,21 @@ async function widths(prefix, runPath) {
     out[w] = await b.evaluate(`({overflow:document.documentElement.scrollWidth>innerWidth, charts:document.querySelectorAll('[data-testid^="chart-FL10_FIG"]').length, grid:document.querySelectorAll('li[data-client]').length, tabs:document.querySelectorAll('[role="tab"]').length, strip:!!${T('run-status-strip')}, cards:document.querySelectorAll('[data-testid^="metric-"]').length})`);
     await b.screenshot(`${prefix}_${w}`);
     check(`${prefix}: no horizontal overflow at ${w}px`, !out[w].overflow, JSON.stringify(out[w]));
-    check(`${prefix}: network, status strip, tabs and charts render at ${w}px`, out[w].grid === 8 && out[w].strip && out[w].tabs === 7 && out[w].charts >= 3, JSON.stringify(out[w]));
+    check(`${prefix}: network, status strip, tabs and charts render at ${w}px`, out[w].grid === 8 && out[w].strip && out[w].tabs === 8 && out[w].charts >= 3, JSON.stringify(out[w]));
   }
   await b.viewport(1440); await sleep(300);
   return out;
 }
 
 async function tabsAndFigures(runId, label, rounds) {
-  const tabs = ['overview', 'performance', 'training', 'clients', 'matrices', 'comparison', 'figures'];
+  const tabs = ['overview', 'performance', 'training', 'clients', 'matrices', 'comparison', 'generalisation', 'figures'];
   const seen = {};
   for (const t of tabs) {
     await click(`atab-${t}`);
     await waitFor(`${T('apanel-' + t)} && !${T('figures-loading')} && !${T('tables-loading')}`, 60000);
     await sleep(300);
     seen[t] = await b.evaluate(`({charts:[...document.querySelectorAll('[data-testid^="chart-FL10_FIG"]')].map(e=>e.getAttribute('data-testid').replace('chart-FL10_','')), tables:[...document.querySelectorAll('[data-testid^="table-FL10_TAB"]')].map(e=>e.getAttribute('data-testid').replace('table-FL10_','')), overflow:document.documentElement.scrollWidth>innerWidth})`);
-    check(`${label}: tab ${t} has no overflow and renders its content`, !seen[t].overflow && (seen[t].charts.length + seen[t].tables.length > 0 || t === 'figures' || t === 'clients'), JSON.stringify(seen[t]));
+    check(`${label}: tab ${t} has no overflow and renders its content`, !seen[t].overflow && (seen[t].charts.length + seen[t].tables.length > 0 || t === 'figures' || t === 'clients' || t === 'generalisation'), JSON.stringify(seen[t]));
   }
   const figs = new Set(Object.values(seen).flatMap((s) => s.charts));
   const tabsSeen = new Set(Object.values(seen).flatMap((s) => s.tables));
@@ -75,12 +75,54 @@ async function tabsAndFigures(runId, label, rounds) {
 
 async function narrowTabs(label) {
   await b.viewport(390); await sleep(400);
-  for (const t of ['overview', 'performance', 'training', 'clients', 'matrices', 'comparison', 'figures']) {
+  for (const t of ['overview', 'performance', 'training', 'clients', 'matrices', 'comparison', 'generalisation', 'figures']) {
     await click(`atab-${t}`); await sleep(900);
     const w = await b.evaluate('({sw:document.documentElement.scrollWidth, iw:innerWidth})');
     check(`${label}: tab ${t} fits a 390px viewport without horizontal scroll`, w.sw <= w.iw, JSON.stringify(w));
   }
   await b.viewport(1440); await sleep(300);
+}
+
+
+const G1_LABEL = 'UNSEEN SYNTHETIC COHORT — NOT USED FOR TRAINING, ROUND OR THRESHOLD SELECTION';
+async function generalisationChecks(runId, label, n, baseIsV2) {
+  await click('atab-generalisation');
+  await waitFor(`!!${T('generalisation-cohort-label')}`, 60000);
+  // every round and frozen V2 scored, then every paired comparison present (the G1 cohort is built once per server process, then scored round by round)
+  let g = null;
+  for (let i = 0; i < 400; i++) {
+    g = await api(`/studio/runs/${runId}/generalisation`);
+    if (g.baseline?.record?.evaluation_status === 'COMPLETED' && g.rounds.every((r) => r.record?.evaluation_status === 'COMPLETED' && r.paired_vs_v2)) break;
+    await sleep(2000);
+  }
+  evidence[`${label}_generalisation`] = { revision: g.revision, base_model: g.base_model, integrity: g.integrity, interpretation: g.interpretation, rounds: g.rounds.map((r) => ({ round: r.round_id, digest: r.record?.global_state_digest, AUPRC: r.record?.metric_result?.AUPRC, AUROC: r.record?.metric_result?.AUROC, specificity: r.record?.metric_result?.specificity, BCE: r.record?.metric_result?.BCE, Brier: r.record?.metric_result?.Brier, dAUPRC: r.paired_vs_v2?.metrics?.AUPRC?.difference_point })), baseline: { digest: g.baseline.record?.global_state_digest, AUPRC: g.baseline.record?.metric_result?.AUPRC, AUROC: g.baseline.record?.metric_result?.AUROC, specificity: g.baseline.record?.metric_result?.specificity } };
+  check(`${label} generalisation: frozen V2 and all ${n + 1} rounds were scored on the unseen cohort`, g.baseline.record?.evaluation_status === 'COMPLETED' && g.rounds.length === n + 1 && g.rounds.every((r) => r.record?.evaluation_status === 'COMPLETED'), JSON.stringify(g.rounds.map((r) => r.record?.evaluation_status)));
+  await waitFor(`${T('generalisation-progress')}?.textContent.startsWith('${n + 1}/${n + 1} rounds scored')`, 60000);
+  await waitFor(`!!${T('gen-chart-diff-band')} && !!${T('gen-roc-round')}`, 60000);
+  check(`${label} generalisation: the unseen-cohort label is shown verbatim`, (await text('generalisation-cohort-label')) === G1_LABEL, await text('generalisation-cohort-label'));
+  check(`${label} generalisation: the starting model is named (${g.base_model.model_id})`, (await text('generalisation-base-model')).includes(baseIsV2 ? 'MODEL_V2_FINAL' : 'FL_INIT_V2'), await text('generalisation-base-model'));
+  check(`${label} generalisation: R0 identical to frozen V2 is stated exactly when the run started from the pretrained weights`, (await exists('generalisation-r0-identical')) === baseIsV2 && g.integrity.r0_predictions_equal_frozen_v2 === baseIsV2, JSON.stringify(g.integrity));
+  const pts = await b.evaluate(`document.querySelectorAll('[data-testid^="gen-chart-metric-point-fl-"]').length`);
+  check(`${label} generalisation: the chart has one measured point per scored round and a dashed frozen-V2 reference line`, pts === n + 1 && !!(await b.evaluate(`${T('gen-chart-metric-line-v2')}?.getAttribute('stroke-dasharray')`)), pts);
+  check(`${label} generalisation: the difference chart has its zero line and nominal band`, (await exists('gen-chart-diff-zero')) && (await exists('gen-chart-diff-band')));
+  const last = g.rounds[n].record.metric_result, v2 = g.baseline.record.metric_result;
+  if (await exists('return-to-live')) await click('return-to-live');                        // an earlier step of this journey may have left another round selected
+  await waitFor(`${T('generalisation-table')}?.textContent.includes('Round R${n} against frozen V2')`, 20000);
+  const row = await text('generalisation-row-AUPRC');
+  check(`${label} generalisation: the table shows the stored frozen-V2 and R${n} AUPRC exactly`, row.includes(`${six(v2.AUPRC)}${six(last.AUPRC)}`), row);
+  check(`${label} generalisation: the stored difference equals R${n} minus frozen V2`, g.rounds[n].paired_vs_v2.metrics.AUPRC.difference_point === last.AUPRC - v2.AUPRC, `${g.rounds[n].paired_vs_v2.metrics.AUPRC.difference_point}`);
+  const cm = await text('generalisation-cm-fl');
+  check(`${label} generalisation: the confusion counts shown are the stored counts`, [g.rounds[n].record.confusion_counts.TP, g.rounds[n].record.confusion_counts.TN].every((v) => cm.includes(String(v))), cm);
+  await b.evaluate(`document.querySelector('[data-testid="gen-chart-metric"] rect[aria-label="Select round 1"]').dispatchEvent(new MouseEvent('click',{bubbles:true}))`);
+  await waitFor(`${T('generalisation-table')}?.textContent.includes('R1 against frozen V2')`, 20000);
+  const r1row = await text('generalisation-row-AUPRC');
+  check(`${label} generalisation: selecting R1 on the chart shows R1's own stored values, not the final round's`, r1row.includes(`${six(v2.AUPRC)}${six(g.rounds[1].record.metric_result.AUPRC)}`) && (await text('follow-state')).includes('ROUND 1'), r1row);
+  await click('return-to-live');
+  const t = await b.evaluate(`document.querySelector('[data-testid="generalisation-panel"]').innerText`);
+  check(`${label} generalisation: limits are stated (G2 not executed; no selection or tuning) and no superiority wording appears`, /was not executed/.test(t) && /Nothing here selects a round, tunes a threshold, calibrates, or promotes a model/.test(t) && !/superior|outperform|clinically valid|better than/i.test(t));
+  const w = await b.evaluate('({sw:document.documentElement.scrollWidth, iw:innerWidth})');
+  check(`${label} generalisation: no horizontal overflow at the desktop width`, w.sw <= w.iw, JSON.stringify(w));
+  await b.screenshot(`studio_generalisation_${label.replace(/[^a-z0-9]+/gi, '_')}`);
 }
 
 async function migratedFeatures(runId, label, rounds, expectedUpdates) {
@@ -217,6 +259,7 @@ const cm = await b.evaluate(`document.querySelector('[data-testid="cm-R03"]')?.t
 check('3-round: the confusion matrix shows the comparison endpoint counts', cm.includes(`TP ${run3rec[3].confusion_counts.TP}`) && cm.includes(`FP ${run3rec[3].confusion_counts.FP}`), cm);
 await click('round-btn-R3');
 await tabsAndFigures(run3, '3-round', 3);
+await generalisationChecks(run3, '3-round', 3, false);
 await migratedFeatures(run3, '3-round', 3, 24);
 await narrowTabs('3-round');
 await exportsWork(run3, '3-round');
@@ -282,10 +325,45 @@ await waitFor(`!!${T('fig-FL10_FIG16')}`, 30000);
 check('10-round: the same-cohort R3-to-R10 paired comparison is available', (await b.evaluate(`${T('fig-FL10_FIG16')}.getAttribute('data-availability')`)) === 'AVAILABLE');
 check('10-round: the final candidate is the server-generated FL10 candidate, not promoted or deployed', (await text('candidate-id')).startsWith('FL10_CANDIDATE_FL10RUN-') && (await text('candidate-label')).includes('NOT PROMOTED'));
 await tabsAndFigures(run10, '10-round', 10);
+await generalisationChecks(run10, '10-round', 10, false);
 await migratedFeatures(run10, '10-round', 10, 80);
 await narrowTabs('10-round');
 await exportsWork(run10, '10-round');
 evidence.widths10 = await widths('studio_run10', '');
+
+
+// ---- C2. genuine ten-round run STARTED FROM THE PRETRAINED V2 WEIGHTS (the Generalisation lane's main case) --------------------------------------
+await b.navigate('/app/federation', `!!${T('studio-run-starter')}`);
+await click('rounds-10');
+await waitFor(`!!${T('cfg10-init')}`, 30000);
+check('entry: the starting-model choice defaults to the untrained FL_INIT_V2 and offers pretrained MODEL_V2_FINAL', (await b.evaluate(`${T('cfg10-init')}.value`)) === 'FL_INIT_V2' && (await b.evaluate(`[...${T('cfg10-init')}.options].map(o=>o.value).join()`)) === 'FL_INIT_V2,MODEL_V2_FINAL');
+await b.evaluate(`(()=>{const s=${T('cfg10-init')};s.value='MODEL_V2_FINAL';s.dispatchEvent(new Event('change',{bubbles:true}))})()`);
+check('entry: choosing the pretrained start explains that R0 is the verified checkpoint and that frozen V2 is compared on an unseen cohort', (await text('cfg10-init-note')).includes('R0 is the verified pretrained checkpoint') && (await text('cfg10-init-note')).includes('unseen cohort'));
+await waitFor(`!!${T('cfg10-submit')} && !${T('cfg10-submit')}.disabled`, 120000);
+await b.screenshot('studio_entry_pretrained');
+await click('cfg10-submit');
+await waitFor(`location.pathname==='/app/federation/live'`, 60000);
+await waitFor(`!!${T('run-status-strip')}`, 30000);
+const runV2 = await runIdFromUrl();
+evidence.runV2 = runV2;
+const sv2 = await api(`/studio/runs/${runV2}`);
+check('pretrained run: the run descriptor names MODEL_V2_FINAL as the base model with the verified checkpoint digest', sv2.base_model?.model_id === 'MODEL_V2_FINAL' && sv2.base_model.checkpoint_sha256 === '89418edcc2c13f0edd9a36666bac560ad922dd4700b4b6dd19b56d067d4eff9b', JSON.stringify(sv2.base_model));
+let genSeen = { partial: false };
+const tv = Date.now();
+while (Date.now() - tv < 900000) {
+  const d = await api(`/studio/runs/${runV2}`);
+  const g = await api(`/studio/runs/${runV2}/generalisation`).catch(() => null);
+  if (g?.rounds) { const done = g.rounds.filter((r) => r.record?.evaluation_status === 'COMPLETED').length; if (done > 0 && done < 11) genSeen = { partial: true, done }; }
+  if (d.phase === 'DONE' || d.phase === 'FAILED') { check('pretrained run: reached DONE', d.phase === 'DONE', JSON.stringify(d.failure)); break; }
+  await sleep(1500);
+}
+check('pretrained run: unseen-cohort points arrived while the run was still executing (partial results were served, never invented)', genSeen.partial, JSON.stringify(genSeen));
+await tabsAndFigures(runV2, 'pretrained 10-round', 10);
+await generalisationChecks(runV2, 'pretrained 10-round', 10, true);
+await narrowTabs('pretrained 10-round');
+await exportsWork(runV2, 'pretrained 10-round');
+const ex = await api(`/studio/runs/${runV2}/exports`);
+check('pretrained run: the verified export manifest includes the generalisation JSON, the metric table and the stored predictions of every round and frozen V2', !!ex.data?.generalisation && !!ex.data?.generalisation_metrics && Object.keys(ex.data).filter((k) => k.startsWith('generalisation_predictions_R')).length === 11 && Object.keys(ex.data).some((k) => k.startsWith('generalisation_predictions_frozen_v2_')), Object.keys(ex.data ?? {}).join(','));
 
 // ---- D. run switching, historical replay, original 3-round page ---------------------------------------------------------------------
 await b.evaluate(`(()=>{const s=document.querySelector('[data-testid="run-selector"]');s.value='${run3}';s.dispatchEvent(new Event('change',{bubbles:true}))})()`);
@@ -300,10 +378,16 @@ check('recorded FL10 run opens as labelled historical evidence with no training'
 check('recorded run shows the recorded R10 values and the same reuse label', (await text('metric-AUPRC')).endsWith(six(recorded[10].metric_result.AUPRC)) && (await text('cohort-use-label')).includes('RECORDED FRESH 16-PARTICIPANT HOLDOUT') );
 check('recorded run: eight-client network and no owner-bound star under DemoAuth', (await b.evaluate(`document.querySelectorAll('li[data-client]').length`)) === 8 && !(await exists('owner-card-label')));
 await b.screenshot('studio_recorded_A');
-await b.navigate(`/app/federation/live?run=FEDRUN-D4C404C2AB81`, `!!${T('run-status-strip')}`);
-await sleep(1500);
-check('a completed run that predates the observer says so and shows no metrics', (await exists('no-evaluation')) && !(await b.evaluate(`/AUPRC/.test(${T('metric-cards')}.innerText)`)));
-check('the original eight-client network, stepper and timeline remain on that run', (await b.evaluate(`document.querySelectorAll('li[data-client]').length`)) === 8 && (await exists('coordinator')) && (await exists('round-states')));
+const legacyRun = 'FEDRUN-D4C404C2AB81';          // a completed 3-round run created before the observer existed; it lives only in the workspace that produced it
+if (!(await api(`/studio/runs/${legacyRun}`)).error) {
+  await b.navigate(`/app/federation/live?run=${legacyRun}`, `!!${T('run-status-strip')}`);
+  await sleep(1500);
+  check('a completed run that predates the observer says so and shows no metrics', (await exists('no-evaluation')) && !(await b.evaluate(`/AUPRC/.test(${T('metric-cards')}.innerText)`)));
+  check('the original eight-client network, stepper and timeline remain on that run', (await b.evaluate(`document.querySelectorAll('li[data-client]').length`)) === 8 && (await exists('coordinator')) && (await exists('round-states')));
+} else {
+  evidence.skipped = [...(evidence.skipped ?? []), { check: 'run that predates the observer', reason: 'no pre-observer run exists in this workspace' }];
+  console.log('SKIP  run that predates the observer: not present in this workspace');
+}
 
 // ---- E. consolidation: retired route redirects, every retained Observatory page loads, links point at the Studio ---------------------------------------------
 await b.navigate('/app/observatory/fl10?run=recorded-B', `location.pathname==='/app/federation/live' || !!${T('fl10-moved')}`);

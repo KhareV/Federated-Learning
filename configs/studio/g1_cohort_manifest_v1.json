@@ -1,0 +1,601 @@
+{
+ "base_seed": 20270301,
+ "claim_boundary": "SYNTHETIC_ENGINEERING_EVENT_GENERALISATION_ONLY_NOT_AAMI_SVF_OR_CLINICAL",
+ "cohort_id": "WEARABLE_SIM_STUDIO_G1_UNSEEN_V1",
+ "first_participant_index": 401,
+ "label": "UNSEEN SYNTHETIC COHORT \u2014 NOT USED FOR TRAINING, ROUND OR THRESHOLD SELECTION",
+ "participants": [
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "clean signal"
+   ],
+   "dataset_sha256": "a828954e9329a52e9160fc87cfee870ec208f70bcde3c87b8a9d2fbb8a61b495",
+   "event_times_s": [
+    37.12,
+    73.387,
+    100.532,
+    132.537,
+    187.355,
+    220.423,
+    250.193,
+    341.39,
+    403.33,
+    462.298
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_00",
+   "participant_id": "SIM_P000401",
+   "replicate": 0,
+   "seed": 20270301,
+   "session_id": "SIM_S_G1_UNSEEN_00_000001",
+   "site_condition": "SIM_FL_SITE_00"
+  },
+  {
+   "counts": {
+    "DEGRADED": 2,
+    "UNUSABLE": 0,
+    "VALID": 91,
+    "excluded_not_valid": 2,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 71,
+    "synthetic_positive": 20,
+    "trainable": 91,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "short gap"
+   ],
+   "dataset_sha256": "7b76f9ca82b16d324af61678f2fda87b469a2ce022e3b680d025f406cd927961",
+   "event_times_s": [
+    39.532,
+    70.972,
+    159.208,
+    188.512,
+    223.64,
+    246.436,
+    280.025,
+    336.942,
+    371.169,
+    430.817
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_01",
+   "participant_id": "SIM_P000402",
+   "replicate": 0,
+   "seed": 20270302,
+   "session_id": "SIM_S_G1_UNSEEN_01_000001",
+   "site_condition": "SIM_FL_SITE_01"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 2,
+    "VALID": 91,
+    "excluded_not_valid": 2,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 71,
+    "synthetic_positive": 20,
+    "trainable": 91,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "long gap"
+   ],
+   "dataset_sha256": "40c3b125cc700740125c9590e975514ed49322657877608a2f2fbeccef84ee20",
+   "event_times_s": [
+    103.335,
+    126.9,
+    161.129,
+    220.407,
+    281.001,
+    311.276,
+    339.969,
+    367.702,
+    426.746,
+    460.152
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_02",
+   "participant_id": "SIM_P000403",
+   "replicate": 0,
+   "seed": 20270303,
+   "session_id": "SIM_S_G1_UNSEEN_02_000001",
+   "site_condition": "SIM_FL_SITE_02"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 4,
+    "VALID": 89,
+    "excluded_not_valid": 4,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 71,
+    "synthetic_positive": 18,
+    "trainable": 89,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "sensor dropout"
+   ],
+   "dataset_sha256": "135c3a344c45506c27d6d534117ac14c725a926da81a9fe4178e940dab907ed5",
+   "event_times_s": [
+    42.15,
+    70.557,
+    101.691,
+    160.592,
+    187.124,
+    276.33,
+    339.708,
+    373.671,
+    401.414,
+    456.907
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_03",
+   "participant_id": "SIM_P000404",
+   "replicate": 0,
+   "seed": 20270304,
+   "session_id": "SIM_S_G1_UNSEEN_03_000001",
+   "site_condition": "SIM_FL_SITE_03"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 3,
+    "VALID": 90,
+    "excluded_not_valid": 3,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 72,
+    "synthetic_positive": 18,
+    "trainable": 90,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "clipping"
+   ],
+   "dataset_sha256": "9d4972deb80485f70d60477dbc7549c3323b871c747244e447d723a8273dc557",
+   "event_times_s": [
+    72.219,
+    99.923,
+    126.811,
+    159.668,
+    218.153,
+    308.224,
+    337.582,
+    402.97,
+    427.66,
+    461.132
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_04",
+   "participant_id": "SIM_P000405",
+   "replicate": 0,
+   "seed": 20270305,
+   "session_id": "SIM_S_G1_UNSEEN_04_000001",
+   "site_condition": "SIM_FL_SITE_04"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "missing PPG/context"
+   ],
+   "dataset_sha256": "c10f5c7d2d4d40a8ebbfd19b3c28442492fc965e2f8ef41c66a8bab48faa38fb",
+   "event_times_s": [
+    43.498,
+    67.591,
+    99.151,
+    129.631,
+    246.079,
+    281.573,
+    313.102,
+    373.022,
+    399.547,
+    461.371
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_05",
+   "participant_id": "SIM_P000406",
+   "replicate": 0,
+   "seed": 20270306,
+   "session_id": "SIM_S_G1_UNSEEN_05_000001",
+   "site_condition": "SIM_FL_SITE_05"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "invalid SpO2/context",
+    "ECG/PPG rate disagreement"
+   ],
+   "dataset_sha256": "8a95d47ba7e435fc2f52cc1beb42df9613f4f45111e1f08bf1d88d33ecf31dba",
+   "event_times_s": [
+    38.524,
+    126.529,
+    157.58,
+    218.415,
+    276.604,
+    310.238,
+    343.788,
+    373.024,
+    400.561,
+    432.488
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_06",
+   "participant_id": "SIM_P000407",
+   "replicate": 0,
+   "seed": 20270307,
+   "session_id": "SIM_S_G1_UNSEEN_06_000001",
+   "site_condition": "SIM_FL_SITE_06"
+  },
+  {
+   "counts": {
+    "DEGRADED": 2,
+    "UNUSABLE": 8,
+    "VALID": 83,
+    "excluded_not_valid": 10,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 67,
+    "synthetic_positive": 16,
+    "trainable": 83,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "mixed fault/context session",
+    "short gap",
+    "long gap",
+    "sensor dropout",
+    "clipping",
+    "missing PPG/context",
+    "invalid SpO2/context",
+    "ECG/PPG rate disagreement"
+   ],
+   "dataset_sha256": "3720003bfea79288b51372abdf124f7f3b57cf0c8aff38d8a8a0d2d40021beeb",
+   "event_times_s": [
+    42.758,
+    97.551,
+    192.091,
+    221.692,
+    247.769,
+    307.471,
+    337.119,
+    367.945,
+    403.82,
+    457.524
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_07",
+   "participant_id": "SIM_P000408",
+   "replicate": 0,
+   "seed": 20270308,
+   "session_id": "SIM_S_G1_UNSEEN_07_000001",
+   "site_condition": "SIM_FL_SITE_07"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "clean signal"
+   ],
+   "dataset_sha256": "905307b8f8cc1ade36575c7e79ccc1b07a3c0a5fe2ccb5b6b504c7804dfa26b1",
+   "event_times_s": [
+    40.519,
+    72.839,
+    103.98,
+    161.463,
+    250.397,
+    337.266,
+    368.486,
+    400.41,
+    427.118,
+    460.491
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_08",
+   "participant_id": "SIM_P000409",
+   "replicate": 1,
+   "seed": 20270401,
+   "session_id": "SIM_S_G1_UNSEEN_08_000001",
+   "site_condition": "SIM_FL_SITE_00"
+  },
+  {
+   "counts": {
+    "DEGRADED": 2,
+    "UNUSABLE": 0,
+    "VALID": 91,
+    "excluded_not_valid": 2,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 18,
+    "trainable": 91,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "short gap"
+   ],
+   "dataset_sha256": "7c06146b005bc0713d642360ab1d57efa734c8a1aef0ba65d92d37918bbac739",
+   "event_times_s": [
+    38.389,
+    103.308,
+    158.561,
+    188.347,
+    220.097,
+    251.971,
+    279.26,
+    308.597,
+    368.462,
+    432.202
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_09",
+   "participant_id": "SIM_P000410",
+   "replicate": 1,
+   "seed": 20270402,
+   "session_id": "SIM_S_G1_UNSEEN_09_000001",
+   "site_condition": "SIM_FL_SITE_01"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 2,
+    "VALID": 91,
+    "excluded_not_valid": 2,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 72,
+    "synthetic_positive": 19,
+    "trainable": 91,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "long gap"
+   ],
+   "dataset_sha256": "31fb641767e426b581ff688bce8357d67dbfbfec64439441c75f1c1d53a2a331",
+   "event_times_s": [
+    130.752,
+    159.202,
+    192.428,
+    217.184,
+    248.963,
+    282.494,
+    311.814,
+    370.961,
+    426.144,
+    461.098
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_10",
+   "participant_id": "SIM_P000411",
+   "replicate": 1,
+   "seed": 20270403,
+   "session_id": "SIM_S_G1_UNSEEN_10_000001",
+   "site_condition": "SIM_FL_SITE_02"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 4,
+    "VALID": 89,
+    "excluded_not_valid": 4,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 71,
+    "synthetic_positive": 18,
+    "trainable": 89,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "sensor dropout"
+   ],
+   "dataset_sha256": "afd329777f73a7ef707946e8b4308b8846db33cbb18807b08ddb2547521362f4",
+   "event_times_s": [
+    37.13,
+    68.46,
+    99.62,
+    129.561,
+    162.071,
+    247.916,
+    276.501,
+    343.78,
+    403.2,
+    463.564
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_11",
+   "participant_id": "SIM_P000412",
+   "replicate": 1,
+   "seed": 20270404,
+   "session_id": "SIM_S_G1_UNSEEN_11_000001",
+   "site_condition": "SIM_FL_SITE_03"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 3,
+    "VALID": 90,
+    "excluded_not_valid": 3,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 71,
+    "synthetic_positive": 19,
+    "trainable": 90,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "clipping"
+   ],
+   "dataset_sha256": "1875dcc6ad6522564c0d14b27723bb42877ed3e113b362d604ea33b0edab03ed",
+   "event_times_s": [
+    43.799,
+    103.744,
+    158.744,
+    216.109,
+    277.517,
+    308.991,
+    366.656,
+    396.518,
+    432.052,
+    462.251
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_12",
+   "participant_id": "SIM_P000413",
+   "replicate": 1,
+   "seed": 20270405,
+   "session_id": "SIM_S_G1_UNSEEN_12_000001",
+   "site_condition": "SIM_FL_SITE_04"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "missing PPG/context"
+   ],
+   "dataset_sha256": "2047fd74be5c2469637de0467e6c1eaa4a1520d46dcf6b07c1f2db8ad4b90bda",
+   "event_times_s": [
+    41.985,
+    102.423,
+    130.221,
+    218.436,
+    246.159,
+    276.532,
+    306.132,
+    398.33,
+    432.556,
+    460.326
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_13",
+   "participant_id": "SIM_P000414",
+   "replicate": 1,
+   "seed": 20270406,
+   "session_id": "SIM_S_G1_UNSEEN_13_000001",
+   "site_condition": "SIM_FL_SITE_05"
+  },
+  {
+   "counts": {
+    "DEGRADED": 0,
+    "UNUSABLE": 0,
+    "VALID": 93,
+    "excluded_not_valid": 0,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 73,
+    "synthetic_positive": 20,
+    "trainable": 93,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "invalid SpO2/context",
+    "ECG/PPG rate disagreement"
+   ],
+   "dataset_sha256": "e8cb8221f354792a1cd84da58e84b1dfd287231ed0d6c89d984d70d077fe7cb6",
+   "event_times_s": [
+    42.377,
+    68.394,
+    103.876,
+    126.494,
+    163.38,
+    222.222,
+    248.828,
+    283.946,
+    339.544,
+    431.696
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_14",
+   "participant_id": "SIM_P000415",
+   "replicate": 1,
+   "seed": 20270407,
+   "session_id": "SIM_S_G1_UNSEEN_14_000001",
+   "site_condition": "SIM_FL_SITE_06"
+  },
+  {
+   "counts": {
+    "DEGRADED": 2,
+    "UNUSABLE": 8,
+    "VALID": 83,
+    "excluded_not_valid": 10,
+    "excluded_valid_but_incomplete": 0,
+    "source_records": null,
+    "synthetic_negative": 67,
+    "synthetic_positive": 16,
+    "trainable": 83,
+    "windows_emitted": 93
+   },
+   "coverage": [
+    "mixed fault/context session",
+    "short gap",
+    "long gap",
+    "sensor dropout",
+    "clipping",
+    "missing PPG/context",
+    "invalid SpO2/context",
+    "ECG/PPG rate disagreement"
+   ],
+   "dataset_sha256": "11d4a6662c942e31b936d3e238f6221364fb999bd19215b9b8bc4f3a16afafa1",
+   "event_times_s": [
+    42.533,
+    96.142,
+    157.242,
+    191.133,
+    218.217,
+    246.901,
+    282.404,
+    310.477,
+    336.791,
+    461.037
+   ],
+   "holdout_id": "SIM_G1_UNSEEN_15",
+   "participant_id": "SIM_P000416",
+   "replicate": 1,
+   "seed": 20270408,
+   "session_id": "SIM_S_G1_UNSEEN_15_000001",
+   "site_condition": "SIM_FL_SITE_07"
+  }
+ ]
+}

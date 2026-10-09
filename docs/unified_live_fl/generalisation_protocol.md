@@ -1,0 +1,36 @@
+# Generalisation lane: V2-initialised federated fine-tuning and unseen-cohort comparison
+
+Added after the Studio's first acceptance. Nothing in the frozen 3-round contract, the original FL10 modules (except one additive option in `fl10/runner.py`) or the diagnostic lane changed.
+
+## What was added
+| Part | Where | Purpose |
+|---|---|---|
+| Verified pretrained start | `studio/v2_init.py` | Loads `checkpoints/MODEL_V2_FINAL.pt` as R0 after: SHA-256 equals the manifest's pin; keys, order, shapes, dtypes equal the FL state layout (92 entries, 57 553 float elements = manifest parameter count); all finite; strict `load_state_dict` round trip equal; logits equal an independent plain load. |
+| Runner option | `fl10/runner.py` (`initial_state`, `initialisation`) | Default `None` = unchanged `FL_INIT_V2` behaviour. A pretrained start is a separately identified mode: the frozen FL_INIT_V2 digest and prefix-parity claims do not apply to it, so they are skipped there and the report carries `initialisation` and `frozen_reference: null`. Combining it with `require_prefix_parity=True` is refused. |
+| Start choice | `POST /product/v1/studio/runs` `initialisation: FL_INIT_V2 (default) \| MODEL_V2_FINAL` | Explicit user choice; the default is the original untrained start. |
+| Unseen cohort G1 | `studio/g1_cohort.py`, `configs/studio/g1_cohort_manifest_v1.json` | 16 new synthetic participants (ids `SIM_P000401-416`, new seeds/sessions/schedules, two profiles per established site condition) from the existing deterministic generator. Per-dataset digests are pinned; generator drift fails closed. Zero participant, session and window-input overlap with the training cohort, the showcase holdout and the FL10 diagnostic holdout is proved when the cohort is built. |
+| Second evaluation lane | `studio/observer.py` (`lane_dir`, `record_cls`, mirror), `studio/generalisation.py` | A second `EvaluationObserver` mirrors every submission (same isolation, digest verification, fixed 0.5 threshold, no calibration) and scores every committed round on G1. The unchanged frozen V2 checkpoint is scored once, cached on disk, and compared with each round by the protocol's paired participant-cluster bootstrap (comparator = frozen V2, difference = round − V2; replicates and seed are the FL10 protocol's). |
+| Routes | `GET /studio/runs/{id}/generalisation`, `/generalisation/curves/{round}`, `/generalisation/participants/{round}` | Owner-scoped, read-only. Recorded evidence runs return `GENERALISATION_NOT_AVAILABLE` instead of a fabricated lane. |
+| UI | Analysis ▸ **GENERALISATION** | Metric across rounds with the dashed frozen-V2 line, paired difference with nominal band and zero line, round-synchronised table, two confusion matrices, ROC/PR overlay, per-participant table, number-derived statements, limits. |
+| Exports | `data/generalisation.json`, `data/generalisation_metrics.csv`, stored predictions of every round and of frozen V2 | Inside the hash-verified export manifest. |
+
+## Decisions (D1–D3)
+- **D1** Pretrained start is available and explicit; the untrained start stays the default and the historical baseline.
+- **D2** Live comparison uses G1 (synthetic, unseen participants). Real-ECG AAMI-SVF retention (G2) is **not executed**: it needs the governed external-data path (access ledger) and must never be plotted on the same axes as the synthetic-event scores.
+- **D3** Observational only: no calibration, threshold tuning, best-round choice, evaluation-guided training or promotion. Unfavourable outcomes are shown.
+
+## What the comparison means
+Same architecture, different tasks: the V2 checkpoint was trained on the AAMI-SVF real-ECG task; the federated rounds optimise the synthetic engineering-event task. Frozen V2 on G1 is therefore a zero-shot transfer reference. A higher federated score means better recognition of the synthetic event on unseen synthetic participants. It does not mean better arrhythmia classification, and the page says so.
+`R0` of a pretrained run is the checkpoint itself: its state digest and its predictions on every G1 window equal frozen V2's (checked and shown). A 10-round pretrained run's `R0–R3` is its 3-round view (same deterministic coordinator); a separately executed 3-round pretrained run is not offered, because the frozen 3-round product contract rejects any base other than `FL_INIT_V2`.
+
+## Limits
+G1 is synthetic and, once displayed, repeated viewing is diagnostic. Intervals are nominal (16 clusters, no multiplicity adjustment, no significance claim). Eight logical clients on one machine. No hardware. Not clinical.
+
+## Measured results of the verification runs (G1 unseen cohort, fixed 0.5 rule, no calibration)
+Source: `reports/unified_live_fl/browser/studio_browser_verification.json` (`*_generalisation` evidence, 243/243 browser checks), runs `FEDRUN-EBB97B033D57` (3 rounds, untrained start), `FL10RUN-C4151052717A` (10 rounds, untrained start) and `FL10RUN-55648D5FAA67` (10 rounds, pretrained start). Every figure below is a stored record; none is tuned or selected. Frozen V2 on G1: AUPRC 0.8902, AUROC 0.9189, F1 0.8473, specificity 1.000, recall 0.7351, BCE 0.2375, Brier 0.0495.
+
+**Pretrained start (`MODEL_V2_FINAL`, 10 rounds).** R0 equals frozen V2 exactly (same digest, identical predictions). AUPRC rises monotonically except small dips at R6 and R8: R3 0.9606, R5 0.9798, R10 0.9915 (difference to frozen V2 +0.101, nominal 95% interval [0.077, 0.122]). AUROC 0.9189 → 0.9956. Specificity stays 0.997–1.000 at the fixed 0.5 rule. F1 0.847 → 0.975. BCE is *not* monotone: it is worse than V2 for R1–R4 (0.345 at R1), reaches 0.076 at R7 and ends at 0.230 (difference −0.007, interval [−0.077, 0.064] contains 0); Brier ends at 0.0540 against 0.0495 (+0.005, interval contains 0). Ranking improved clearly; probability reliability did not improve reliably.
+
+**Untrained start (`FL_INIT_V2`, 10 rounds).** R0 AUPRC 0.6245. The federated model passes frozen V2's AUPRC only from R7 (R7 0.9220; R10 0.9430). Specificity is 1.0 for R0–R2 and **0.0 from R3 on**: at the fixed 0.5 rule no negative window is classified correctly (true negatives = 0), and BCE rises to 3.47 and Brier to 0.771 at R10. This reproduces, on a cohort that was never used before, the earlier negative finding that ranking improves while the decision-rule and probability quality collapse. The 3-round run (R0–R3) is the same trajectory (R3 AUPRC 0.6785, specificity 0).
+
+**Reading the two together.** The pretrained start reaches high ranking performance without losing the decision rule; the untrained start needs most of the ten rounds to approach frozen V2's ranking and never recovers a usable 0.5 operating point. This concerns the synthetic engineering-event task on unseen synthetic participants only. It is not evidence about AAMI-SVF or real patients, intervals are nominal (16 clusters, no multiplicity adjustment), and no significance claim is made.

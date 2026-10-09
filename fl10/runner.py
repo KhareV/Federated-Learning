@@ -102,8 +102,12 @@ EXPECTED_CODE = {"INJECT_STALE": "STALE_ROUND", "INJECT_DUPLICATE": "DUPLICATE_U
 
 def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalDataset], manifest: dict[str, dict[str, str]], rounds: int = ROUNDS, require_prefix_parity: bool = True,
                  capture_batches: bool = True, progress: Callable[[dict[str, Any]], None] | None = None, git_commit: str = "UNKNOWN", protocol_sha256: str = "UNKNOWN",
-                 tamper_before_round: Callable[[int, dict[str, np.ndarray]], dict[str, np.ndarray]] | None = None) -> dict[str, Any]:
-    """Execute ``rounds`` genuine FedAvg rounds. Fails closed (raises, run marked incomplete) on any parity, digest, acceptance or finiteness violation."""
+                 tamper_before_round: Callable[[int, dict[str, np.ndarray]], dict[str, np.ndarray]] | None = None,
+                 initial_state: dict[str, np.ndarray] | None = None, initialisation: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Execute ``rounds`` genuine FedAvg rounds. Fails closed (raises, run marked incomplete) on any parity, digest, acceptance or finiteness violation.
+
+    ``initial_state`` (additive, default None) starts the rounds from a verified pretrained state instead of ``FL_INIT_V2``. That is a separately identified mode: the frozen
+    FL_INIT_V2 reference (initial digest and prefix parity) does not apply to it, so those checks are skipped and the report carries ``initialisation`` instead."""
     if capture_batches:
         from api.observatory_batch_capture import BatchCapture
     emit = progress or (lambda event: None)
@@ -115,8 +119,15 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
             raise Fl10Error("DATASET_DIGEST_MISMATCH", client)
     frozen = frozen_progression()
     state, spec_sha = new_session()
-    if state_sha(state) != frozen["0"]:
-        raise Fl10Error("WRONG_INITIAL_STATE", state_sha(state))
+    if initial_state is None:
+        if state_sha(state) != frozen["0"]:
+            raise Fl10Error("WRONG_INITIAL_STATE", state_sha(state))
+    else:
+        if require_prefix_parity:
+            raise Fl10Error("PREFIX_PARITY_NOT_DEFINED_FOR_PRETRAINED_START")
+        if list(initial_state) != list(state) or any(initial_state[k].shape != state[k].shape or initial_state[k].dtype != state[k].dtype for k in state):
+            raise Fl10Error("INITIAL_STATE_LAYOUT_MISMATCH")
+        state = OrderedDict(initial_state)       # same layout and spec digest as FL_INIT_V2 (checked above); only the weights differ
     coord = Coordinator(manifest, spec_sha)
     if out_dir.exists() and any(out_dir.iterdir()):
         raise Fl10Error("RUN_ARTIFACT_DIRECTORY_NOT_EMPTY", str(out_dir))
@@ -128,7 +139,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                               "federation_engine": "federated.wearable_fl_system_v1.Coordinator + federated.model_v2_fl.train_local_epoch_v2 (unchanged)", "planned_rounds": rounds, "started_at": started,
                               "settings": {"base_seed": BASE_SEED, "experiment_id_for_seeds": FL_EXPERIMENT_ID, "batch_size": BATCH_SIZE, "learning_rate": LEARNING_RATE, "weight_decay": WEIGHT_DECAY,
                                            "pos_weight": POS_WEIGHT, "optimizer": "AdamW (reset every local epoch)", "local_epochs": 1, "aggregation": "weighted FedAvg by accepted example count"},
-                              "environment": {"python": platform.python_version(), "platform": platform.platform(), "numpy": np.__version__}, "frozen_reference": FROZEN_RUN,
+                              "environment": {"python": platform.python_version(), "platform": platform.platform(), "numpy": np.__version__}, "frozen_reference": FROZEN_RUN if initial_state is None else None, "initialisation": initialisation or {"model_id": "FL_INIT_V2"},
                               "state_progression": {"0": {**state_info(state), "committed_at": started}}, "rounds": [], "client_rounds": [], "batches": [], "updates": []}
     try:
         import sklearn
@@ -223,7 +234,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
             cumulative_updates += len(order)
             cumulative_bytes += round_bytes
             parity = None
-            if round_id <= MAX_PARITY_ROUNDS:
+            if round_id <= MAX_PARITY_ROUNDS and initial_state is None:
                 parity = {"frozen_reference_sha256": frozen[str(round_id)], "equals_frozen_reference": new_sha == frozen[str(round_id)]}
                 if require_prefix_parity and not parity["equals_frozen_reference"]:
                     raise Fl10Error("PREFIX_PARITY_MISMATCH", f"round {round_id}: {new_sha} != {frozen[str(round_id)]}")
@@ -269,7 +280,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                   candidate={"candidate_id": f"FL10_CANDIDATE_{run_id}", "state_sha256": final_sha, "rounds": rounds, "round": rounds, "released_model_changed": False, "promoted": False, "deployed": False,
                              "registered_in_product_registry": False, "label": "ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL"},
                   coordinator_identity=coord.identity(), cohort_manifest_sha256=hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest(),
-                  prefix_equals_frozen_reference={str(r): report["rounds"][r - 1]["parity"]["equals_frozen_reference"] for r in range(1, min(rounds, MAX_PARITY_ROUNDS) + 1)})
+                  prefix_equals_frozen_reference={str(r): report["rounds"][r - 1]["parity"]["equals_frozen_reference"] for r in range(1, min(rounds, MAX_PARITY_ROUNDS) + 1)} if initial_state is None else {})
     atomic_write(out_dir / "run_report.json", (json.dumps(report, indent=1, sort_keys=True, default=str) + "\n").encode())
     (out_dir / "run_report.partial.json").unlink(missing_ok=True)
     write_tables(out_dir, report)

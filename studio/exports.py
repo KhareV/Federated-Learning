@@ -62,7 +62,8 @@ def render(spec: dict[str, Any], b: dict[str, Any]) -> plt.Figure:
     return fig
 
 
-def export_run(b: dict[str, Any], out: Path, *, eval_dir: Path | None = None, run_dir: Path | None = None) -> dict[str, Any]:
+def export_run(b: dict[str, Any], out: Path, *, eval_dir: Path | None = None, run_dir: Path | None = None, generalisation: dict[str, Any] | None = None,
+               gen_dir: Path | None = None, baseline_dir: Path | None = None) -> dict[str, Any]:
     specs, tables = build_specs(b), build_tables(b)
     (out / "figures").mkdir(parents=True, exist_ok=True)
     (out / "tables").mkdir(parents=True, exist_ok=True)
@@ -126,6 +127,42 @@ def export_run(b: dict[str, Any], out: Path, *, eval_dir: Path | None = None, ru
         target = out / "data" / "run_report.json"
         target.write_bytes((run_dir / "run_report.json").read_bytes())
         data["run_report"] = {"json": {"path": "data/run_report.json", "sha256": _sha(target.read_bytes())}}
+    if generalisation is not None:                    # unseen-cohort evidence of THIS run: bundle, long-format metric table, and every stored prediction file
+        blob = (json.dumps(generalisation, indent=1, sort_keys=True) + "\n").encode()
+        (out / "data" / "generalisation.json").write_bytes(blob)
+        data["generalisation"] = {"json": {"path": "data/generalisation.json", "sha256": _sha(blob)}}
+        rows = generalisation_rows(generalisation)
+        buf = io.StringIO()
+        writer = csv.DictWriter(buf, fieldnames=["round", "subject", "state_digest", "status", "metric", "value", "frozen_v2_value", "difference", "difference_lower_nominal", "difference_upper_nominal"], lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+        (out / "data" / "generalisation_metrics.csv").write_bytes(buf.getvalue().encode())
+        data["generalisation_metrics"] = {"csv": {"path": "data/generalisation_metrics.csv", "sha256": _sha(buf.getvalue().encode()), "rows": len(rows)}}
+        sources = [(gen_dir, "generalisation_predictions_{}.csv"), (baseline_dir, "generalisation_predictions_frozen_v2_{}.csv")]
+        for directory, pattern in sources:
+            if directory is not None and directory.is_dir():
+                for path in sorted(directory.glob("R*/predictions.csv")):
+                    target = out / "data" / pattern.format(path.parent.name)
+                    target.write_bytes(path.read_bytes())
+                    data[target.stem] = {"csv": {"path": f"data/{target.name}", "sha256": _sha(target.read_bytes())}}
     manifest["data"] = data
     (out / "export_manifest.json").write_text(json.dumps(manifest, indent=1, sort_keys=True) + "\n")
     return manifest
+
+
+def generalisation_rows(g: dict[str, Any]) -> list[dict[str, Any]]:
+    """Long-format table of every stored metric per round next to frozen V2, from the bundle only (nothing recomputed or filled in)."""
+    base = (g["baseline"]["record"] or {}).get("metric_result") or {}
+    rows: list[dict[str, Any]] = []
+    for row in g["rounds"]:
+        rec = row["record"]
+        if rec is None:
+            continue
+        metrics = rec.get("metric_result") or {}
+        for key in sorted(k for k, v in metrics.items() if isinstance(v, (int, float)) and not isinstance(v, bool)):
+            pair = (row["paired_vs_v2"] or {}).get("metrics", {}).get(key) or {}
+            interval = pair.get("difference_interval") or {}
+            rows.append({"round": row["round_id"], "subject": rec["subject"], "state_digest": rec["global_state_digest"], "status": rec["evaluation_status"], "metric": key, "value": repr(metrics[key]),
+                         "frozen_v2_value": repr(base[key]) if key in base else "", "difference": repr(pair["difference_point"]) if pair.get("difference_point") is not None else "",
+                         "difference_lower_nominal": repr(interval["lower"]) if interval.get("lower") is not None else "", "difference_upper_nominal": repr(interval["upper"]) if interval.get("upper") is not None else ""})
+    return rows
