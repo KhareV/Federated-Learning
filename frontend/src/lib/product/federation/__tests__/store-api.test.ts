@@ -51,6 +51,23 @@ describe('federation store', () => {
 		expect(FakeSocket.last.url).toBe(`ws://localhost:5173/product/v1/federation/runs/${RUN_ID}/live`);
 		expect(backend.federationBodies).toHaveLength(1);
 	});
+	it('authenticates the Studio live stream in its first frame without putting the token in the URL', async () => {
+		const outbound: string[] = [];
+		class AuthSocket extends FakeSocket {
+			override send(data: string): void { outbound.push(data); }
+		}
+		store.closeLive();
+		store = new FederationStore(() => backend, immediate, (url) => new AuthSocket(url),
+			() => async () => 'fresh-session-token');
+		store.openLive('FL10RUN-TEST');
+		expect(FakeSocket.last.url).toBe('ws://localhost:5173/product/v1/studio/runs/FL10RUN-TEST/live');
+		expect(FakeSocket.last.url).not.toContain('fresh-session-token');
+		FakeSocket.last.open();
+		await vi.waitFor(() => expect(outbound).toEqual([
+			JSON.stringify({ type: 'authenticate', token: 'fresh-session-token' })
+		]));
+		expect(store.socketStatus).toBe('OPEN');
+	});
 	it('consumes a stream, reconnect resets and rebuilds from sequence 0 without double counting', async () => {
 		await store.createAndStart({ run_type: 'LIVE_RUN', algorithm: 'FEDAVG', secagg_mode: 'PLAIN' });
 		const evs = eventStream();

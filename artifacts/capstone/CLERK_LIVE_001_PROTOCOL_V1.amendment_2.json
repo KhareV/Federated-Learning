@@ -1,0 +1,16 @@
+{
+ "amendment_id": "CLERK_LIVE_001_PROTOCOL_V1_AMENDMENT_2",
+ "change": "The connected frontend obtains the current Clerk session token for first-frame WebSocket authentication. The token is not persisted and is not placed in the WebSocket URL.",
+ "defect": "Cookie forwarding through the same-origin frontend proxy was not reliable for the backend WebSocket. The authenticated first-frame protocol was verified in a real Clerk browser run, including reconnect and replay.",
+ "files": {
+  "frontend/src/lib/product/auth.ts": {
+   "new_sha256": "4b858c356a601075b70850dc9711a47b29d0e1f7b63679c52b493fb2bf32ebd4",
+   "old_sha256": "2a4116b40747ba66af58839d2c78839532a88257088380de8a5a187419633408"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "NHM-HARDWARE-MONGO-MONITOR-001",
+ "previous_amendment": "CLERK_LIVE_001_PROTOCOL_V1_AMENDMENT_1",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

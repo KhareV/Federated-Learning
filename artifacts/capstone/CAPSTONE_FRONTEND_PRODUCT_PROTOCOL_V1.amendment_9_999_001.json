@@ -1,0 +1,36 @@
+{
+ "amendment_id": "NHM_HARDWARE_MONGO_MONITOR_001_CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_9_999_001",
+ "change": "Exact byte re-pins for reviewed Clerk WebSocket, MongoDB telemetry, UI copy, and timing-test changes. Frozen science and historical lock bytes are unchanged.",
+ "files": {
+  "api/product_app_v1_1.py": {
+   "new_sha256": "7a398a72b60cb218e7b7ff5da685898d7d67547fefc019f49cdf944913bd4cf6",
+   "old_sha256": "47ae7b03eb05796ce4d807e641e5adf27f54ceb16c146d62119419c12c9de985"
+  },
+  "frontend/src/lib/product/api.ts": {
+   "new_sha256": "86624910852f16fcef5dca41b2257f6300e4373692c218931d3a4e5430169589",
+   "old_sha256": "a47e19b897f91a422a50e66b2b1e98a32154e12f9a24f3cc81632c14ca20dceb"
+  },
+  "frontend/src/lib/product/auth.ts": {
+   "new_sha256": "4b858c356a601075b70850dc9711a47b29d0e1f7b63679c52b493fb2bf32ebd4",
+   "old_sha256": "2a4116b40747ba66af58839d2c78839532a88257088380de8a5a187419633408"
+  },
+  "frontend/src/lib/product/state.svelte.ts": {
+   "new_sha256": "4ef5d26e79457071a363262c60e9b4ec7f6ca713f2884b6c6f271fc6a1dcc829",
+   "old_sha256": "a77d7713cb49217f1df3f9290bfe1a6d130e9933b3d20a540db39685378eb3f3"
+  },
+  "frontend/src/routes/app/device/+page.svelte": {
+   "new_sha256": "f1a2ed9264aace94b412aeb09eac0eee77f396d003bc4ae5faa69d3d3007f5a0",
+   "old_sha256": "4456038fce7accad3408afd49a2a00076e5ced1af3247ca88b212e83bb62ad81"
+  },
+  "frontend/src/routes/app/monitoring/+page.svelte": {
+   "new_sha256": "8c61cb073b1233480179d5c62827f9e7af8e63bfc6af8e824d94ce7511de8ec2",
+   "old_sha256": "24bb079eecc1a8f1fb517c057fced887e24940560843bbf815d7a02fe60b3bc4"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1 (historical files governed for NHM_HARDWARE_MONGO_MONITOR_001)",
+ "previous_amendment": "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001_CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1_AMENDMENT_9_6_1_1_2_1",
+ "reason": "HARDWARE_TELEMETRY_AND_CLERK_ADDITIVE_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

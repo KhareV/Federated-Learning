@@ -31,7 +31,7 @@ def build_app_from_env(env: Mapping[str, str]):
     except ValueError as error:
         raise AuthConfigError("INVALID_TIMING_MODE") from error
     store = CapstoneSqliteStore(env.get(ENV_DB_PATH, DEFAULT_DB_PATH))
-    return create_product_app_observatory_v1(
+    app = create_product_app_observatory_v1(
         store=store, identity_resolver=make_identity_resolver(provider),
         auth_description=provider.describe(),
         inference_base_url=env.get("NHM_PRODUCT_INFERENCE_URL", DEFAULT_INFERENCE_URL),
@@ -43,6 +43,10 @@ def build_app_from_env(env: Mapping[str, str]):
         acceptance_sidecar=env.get("NHM_OBSERVATORY_ACCEPTANCE_SIDECAR", "1") != "0",
         batch_capture=env.get("NHM_OBSERVATORY_BATCH_CAPTURE", "0") == "1",
     )
+    if env.get("NHM_HARDWARE_MONGO_ENABLED", "").lower() == "true":
+        from api.hardware_telemetry_routes import install_hardware_routes
+        install_hardware_routes(app, store, make_identity_resolver(provider), env)
+    return app
 
 
 def main() -> None:

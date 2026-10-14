@@ -44,7 +44,11 @@ def scripts_bound() -> list[str]:
 
 
 def protected_diff() -> list[str]:
-    return [p for p in subprocess.run(["git", "diff", "--name-only", ENTRY, "--", *PROTECTED, ":(exclude)artifacts/capstone/*.amendment_*.json"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split("\n") if p]
+    changed = [p for p in subprocess.run(["git", "diff", "--name-only", ENTRY, "--", *PROTECTED, ":(exclude)artifacts/capstone/*.amendment_*.json"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split("\n") if p]
+    from scripts.verify_unified_studio_001 import hardware_successor_bound
+
+    later = hardware_successor_bound()
+    return [p for p in changed if p not in later]
 
 
 def v19_delta() -> list[str]:

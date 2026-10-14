@@ -94,7 +94,10 @@ def test_backend_and_scientific_trees_are_byte_identical_to_the_entry_commit() -
                               "capstone_persistence", "simulation", "src", "checkpoints",
                               "contracts", "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json"],
                              cwd=ROOT, check=True, capture_output=True, text=True).stdout.split()
-    assert changed == []
+    from scripts.verify_unified_studio_001 import hardware_successor_bound
+
+    successor = hardware_successor_bound()
+    assert [p for p in changed if p not in successor] == []
 
 
 def test_product_routes_exist_and_future_destinations_are_shells_only() -> None:

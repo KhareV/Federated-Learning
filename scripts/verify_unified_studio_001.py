@@ -24,6 +24,7 @@ EVIDENCE = "reports/unified_live_fl"
 PROTECTED_SURFACE = ("reports/model_v2", "reports/fl10", "reports/final_showcase", "configs/fl10", "federated", "models", "checkpoints", "training", "preprocessing", "privacy", "simulation", "product", "src", "final_showcase",
                      "fl10/charts.py", "fl10/tables.py", "fl10/figures.py", "fl10/evaluate.py", "fl10/metrics.py", "fl10/bundle.py", "fl10/holdout.py", "capstone_persistence", "contracts")
 ALLOWED_ARTIFACT_PREFIX = "artifacts/unified_studio/"
+HARDWARE_SUCCESSOR = "artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json"
 FLAGS_FALSE = ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "hardware_work_performed", "historical_locks_edited", "automatically_pushed", "frozen_scientific_evidence_edited")
 
 
@@ -35,18 +36,31 @@ def git(*args: str) -> str:
     return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, check=True).stdout
 
 
+def hardware_successor_bound() -> dict[str, str]:
+    """Exact files changed by the later hardware/Clerk successor, if it exists and chains."""
+    if not (ROOT / HARDWARE_SUCCESSOR).is_file():
+        return {}
+    link = next(x for x in successor_chain.LINKS if x.lock_id == "NHM_HARDWARE_MONGO_MONITOR_001")
+    lock = successor_chain.validate_link(link, ROOT)
+    bound = lock.get("bound_files", {})
+    if not isinstance(bound, dict) or any(not (ROOT / p).is_file() or sha(ROOT / p) != d for p, d in bound.items()):
+        raise ValueError("HARDWARE_SUCCESSOR_BOUND_FILE_DRIFT")
+    return bound
+
+
 def verify_evidence() -> dict[str, Any]:
     from fl10.audit import baseline_unchanged
 
     out: dict[str, Any] = {"predecessor_commit": FL10_COMMIT}
-    changed = [p for p in git("diff", "--name-only", FL10_COMMIT, "--", *PROTECTED_SURFACE).splitlines() if p]
+    later = hardware_successor_bound()
+    changed = [p for p in git("diff", "--name-only", FL10_COMMIT, "--", *PROTECTED_SURFACE).splitlines() if p and p not in later]
     if changed:
         raise ValueError(f"PROTECTED_SURFACE_CHANGED:{changed[:5]}")
     historical = []
     for line in git("diff", "--name-status", FL10_COMMIT, "--", "artifacts").splitlines():
         code, _, path = line.partition("\t")
         additive_amendment = code == "A" and re.fullmatch(r"artifacts/(?:capstone|final_eval_repair|ufl_lite)/[A-Z]+(?:_[A-Z0-9]+)*_PROTOCOL_V1\.amendment_[0-9_]+\.json", path) is not None
-        if path and not path.startswith(ALLOWED_ARTIFACT_PREFIX) and not additive_amendment:      # only NEW compatibility amendments (FL10's mechanism) may appear; no historical file is modified or deleted
+        if path and not path.startswith(ALLOWED_ARTIFACT_PREFIX) and not (code == "A" and path == HARDWARE_SUCCESSOR) and not additive_amendment:      # only exact later successor or NEW compatibility amendments; no historical file is modified or deleted
             historical.append(line)
     if historical:
         raise ValueError(f"HISTORICAL_LOCK_OR_AMENDMENT_CHANGED:{historical[:5]}")
@@ -142,7 +156,7 @@ def older_chain() -> dict[str, str]:
 def verify_lock(path: Path = LOCK_PATH, *, with_older_chain: bool = True) -> dict[str, Any]:
     evidence = verify_evidence()
     lock = json.loads(path.read_text())
-    link = successor_chain.LINKS[-1]
+    link = next(link for link in successor_chain.LINKS if link.lock_id == "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001")
     successor_chain.validate_link(link, ROOT, lock_override=lock)           # id, PASS, predecessor digest, bytes at the immutable predecessor commit, scope flags, frontend binding
     if lock.get("provisional") is not False:
         raise ValueError("STUDIO_LOCK_IS_PROVISIONAL")
@@ -152,16 +166,27 @@ def verify_lock(path: Path = LOCK_PATH, *, with_older_chain: bool = True) -> dic
         if lock[flag] is not False:
             raise ValueError(f"STUDIO_SCOPE_DRIFT:{flag}")
     predecessor = json.loads((ROOT / PREDECESSOR).read_text())
-    repins = sorted(relative for relative, digest in predecessor["bound_files"].items() if (ROOT / relative).is_file() and sha(ROOT / relative) != digest)
+    later = hardware_successor_bound()
+    tip = successor_chain.tip_frontend_map(ROOT)
+    # The later hardware tip may govern the current frontend bytes, but a
+    # verifier call on a copied Studio lock must still reject edits to its
+    # historical frontend binding. The canonical lock is itself pinned to the
+    # immutable predecessor commit by the successor-chain validation above.
+    if tip is not None and lock["frontend_files"] != json.loads(LOCK_PATH.read_text())["frontend_files"]:
+        raise ValueError("STUDIO_HISTORICAL_FRONTEND_BINDING_TAMPER")
+    later_frontend = {r for r, d in (tip or {}).items() if (ROOT / r).is_file() and sha(ROOT / r) == d and lock["frontend_files"].get(r) != d}
+    newly_repinned_frontend = later_frontend - set(lock["repins_predecessor_files"])
+    newly_repinned_bound = set(later) - set(lock["repins_predecessor_files"])
+    repins = sorted(relative for relative, digest in predecessor["bound_files"].items() if (ROOT / relative).is_file() and sha(ROOT / relative) != digest and relative not in newly_repinned_bound and relative not in newly_repinned_frontend)
     if lock["repins_predecessor_files"] != repins:
         raise ValueError("STUDIO_PREDECESSOR_REPIN_SET_MISMATCH")
     from scripts.freeze_observatory_v1 import frontend_files
 
-    if set(lock["frontend_files"]) != set(frontend_files()) or any(sha(ROOT / r) != d for r, d in lock["frontend_files"].items()):
+    if set(tip or lock["frontend_files"]) != set(frontend_files()) or any(sha(ROOT / r) != d for r, d in (tip or lock["frontend_files"]).items()):
         raise ValueError("STUDIO_FRONTEND_BINDING_DRIFT")
     for relative, expected in lock["bound_files"].items():
         target = ROOT / relative
-        if not target.is_file() or sha(target) != expected:
+        if not target.is_file() or (sha(target) != expected and relative not in later and relative not in later_frontend):
             raise ValueError(f"STUDIO_LOCK_BOUND_FILE_TAMPER:{relative}")
     if lock["live_runs"] != evidence["live_runs"] or lock["evidence"]["tests_sha256"] != evidence["tests_sha256"]:
         raise ValueError("STUDIO_LOCK_EVIDENCE_MISMATCH")

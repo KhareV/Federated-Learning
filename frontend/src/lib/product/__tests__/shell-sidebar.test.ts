@@ -82,11 +82,11 @@ describe('sidebar collapse', () => {
 		await fireEvent.click(toggle());
 		expect(shell().classList.contains('collapsed')).toBe(true);
 	});
-	it('the simulation and not-diagnostic notices stay available when collapsed', async () => {
+	it('the source and not-diagnostic notices stay available when collapsed', async () => {
 		await mount();
 		await fireEvent.click(toggle());
 		const foot = document.querySelector('.foot') as HTMLElement;
-		expect(foot.getAttribute('title')).toBe('SIMULATED ONLY · RESEARCH / NOT DIAGNOSTIC');
-		expect(foot.textContent).toContain('SIMULATED ONLY');
+		expect(foot.getAttribute('title')).toBe('SIMULATED MODEL · HARDWARE TELEMETRY · NOT DIAGNOSTIC');
+		expect(foot.textContent).toContain('HARDWARE TELEMETRY');
 	});
 });

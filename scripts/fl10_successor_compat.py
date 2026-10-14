@@ -35,4 +35,18 @@ def accepted_successor(historical_path: Path = FINAL) -> dict[str, Any] | None:
         lock["frontend_files"] = dict(studio["frontend_files"])
         lock["bound_files"] = {**lock["bound_files"], **{p: studio["bound_files"][p] for p in studio["repins_predecessor_files"]}}
         lock["repins_predecessor_files"] = sorted(set(lock["repins_predecessor_files"]) | set(studio["repins_predecessor_files"]))
+    from scripts import successor_chain
+
+    hardware_link = next(x for x in successor_chain.LINKS if x.lock_id == "NHM_HARDWARE_MONGO_MONITOR_001")
+    if (ROOT / hardware_link.path).is_file():
+        hardware = successor_chain.validate_link(hardware_link, ROOT)
+        changes = hardware.get("bound_files", {})
+        if not isinstance(changes, dict) or any(not (ROOT / p).is_file() or hashlib.sha256((ROOT / p).read_bytes()).hexdigest() != d for p, d in changes.items()):
+            raise RuntimeError("HARDWARE_SUCCESSOR_BOUND_FILE_DRIFT")
+        previous = dict(lock["bound_files"])
+        changed_frontend = {p: d for p, d in hardware["frontend_files"].items() if p in previous and previous[p] != d}
+        lock = dict(lock)
+        lock["frontend_files"] = dict(hardware["frontend_files"])
+        lock["bound_files"] = {**previous, **changes, **changed_frontend}
+        lock["repins_predecessor_files"] = sorted(set(lock["repins_predecessor_files"]) | {p for p, d in changes.items() if previous.get(p) != d} | set(changed_frontend))
     return lock

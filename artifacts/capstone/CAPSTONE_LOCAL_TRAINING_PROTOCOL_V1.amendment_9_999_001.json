@@ -1,0 +1,16 @@
+{
+ "amendment_id": "NHM_HARDWARE_MONGO_MONITOR_001_CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1_AMENDMENT_9_999_001",
+ "change": "Exact byte re-pins for reviewed Clerk WebSocket, MongoDB telemetry, UI copy, and timing-test changes. Frozen science and historical lock bytes are unchanged.",
+ "files": {
+  "api/product_app_v1_1.py": {
+   "new_sha256": "7a398a72b60cb218e7b7ff5da685898d7d67547fefc019f49cdf944913bd4cf6",
+   "old_sha256": "47ae7b03eb05796ce4d807e641e5adf27f54ceb16c146d62119419c12c9de985"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1 (historical files governed for NHM_HARDWARE_MONGO_MONITOR_001)",
+ "previous_amendment": "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1_AMENDMENT_3",
+ "reason": "HARDWARE_TELEMETRY_AND_CLERK_ADDITIVE_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

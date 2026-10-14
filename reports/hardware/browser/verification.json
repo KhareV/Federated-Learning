@@ -1,0 +1,107 @@
+{
+  "actual_persisted_trace": [
+    {
+      "bpm": 72,
+      "collection": "nhm_integration_test",
+      "ecg": 1000,
+      "id": "6acf7ba68229201574789587",
+      "ingested_at": "2026-10-14T12:55:02.816000+00:00",
+      "ordinal": 1,
+      "spo2": 97
+    },
+    {
+      "bpm": 80,
+      "collection": "nhm_integration_test",
+      "ecg": 3000,
+      "id": "6acf7ba78229201574789588",
+      "ingested_at": "2026-10-14T12:55:03.542000+00:00",
+      "ordinal": 2,
+      "spo2": 98
+    },
+    {
+      "bpm": 76,
+      "collection": "nhm_integration_test",
+      "ecg": 2000,
+      "id": "6acf7ba78229201574789589",
+      "ingested_at": "2026-10-14T12:55:00.722000+00:00",
+      "ordinal": 3,
+      "spo2": null
+    },
+    {
+      "bpm": 84,
+      "collection": "nhm_integration_test",
+      "ecg": 2500,
+      "id": "6acf7baf4417a1f7100e5e31",
+      "ingested_at": "2026-10-14T12:55:11.482000+00:00",
+      "ordinal": 4,
+      "spo2": 96
+    }
+  ],
+  "backend_restart_history": true,
+  "browser_console_errors": [],
+  "checks": {
+    "afterStopExcluded": true,
+    "authenticated": true,
+    "beforeExcluded": true,
+    "history": {
+      "count4": true,
+      "excludedAfterStop": true,
+      "excludedBefore": true,
+      "included": true
+    },
+    "recovered": true,
+    "reloadHistory": true,
+    "stale": true,
+    "testSource": true
+  },
+  "cleanup": {
+    "production_collections_touched": false,
+    "test_ids_deleted": 6
+  },
+  "collection": "health_db.nhm_integration_test",
+  "date_utc": "2026-10-14",
+  "kind": "SYNTHETIC_ATLAS_BROWSER_TEST",
+  "other_clerk_user": {
+    "denied": true,
+    "history_detail_http_status": 403,
+    "history_list_excludes_session": true
+  },
+  "physical_esp32_verified": false,
+  "screenshots": [
+    "reports/hardware/browser/atlas_synthetic_live.png",
+    "reports/hardware/browser/atlas_synthetic_history.png"
+  ],
+  "session_id": "HW-5eb33dd96bef44f5bc02603ff6320758",
+  "vital_display": {
+    "device_reported_spo2": "Unavailable for injected zero",
+    "latest_bpm": 76,
+    "latest_ecg": 2000
+  },
+  "waveform": {
+    "exact_geometry_assertion": "PASS",
+    "gap_line_break_seconds": 1,
+    "ordered_plot_points": [
+      {
+        "id": "6acf7ba78229201574789589",
+        "x": 0.0,
+        "y": 96.7
+      },
+      {
+        "id": "6acf7ba68229201574789587",
+        "x": 742.6,
+        "y": 133.4
+      },
+      {
+        "id": "6acf7ba78229201574789588",
+        "x": 1000.0,
+        "y": 60.1
+      }
+    ],
+    "source_values_are_unmodified_adc_counts": true,
+    "svg_paths": [
+      "M0.0 96.7",
+      "M742.6 133.4 L1000.0 60.1"
+    ],
+    "time_axis_is_stored_bson_date": true
+  }
+}

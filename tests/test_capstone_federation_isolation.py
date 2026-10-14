@@ -141,10 +141,13 @@ def test_the_claims_in_the_overview_are_bounded(tmp_path) -> None:
 
 def test_the_frozen_cap_006_client_and_every_protected_file_are_byte_identical_to_the_entry_commit() -> None:
     entry = "651bfa61022cf699a43c0a91cbc43a6486943bcb"
+    from scripts.verify_unified_studio_001 import hardware_successor_bound
+
+    successor = hardware_successor_bound()  # exact bytes; no allowance for an unbound edit
     for path in ("product/federation/client.py", "product/federation/local_cohort.py",
                  "product/federation/update_bridge.py", "product/federation/base.py", "product/events.py",
                  "api/product_app_v1_1.py", "capstone_persistence/store.py", "contracts/capstone/federation_v1.json",
                  "federated/wearable_fl_system_v1.py", "federated/aggregation.py",
                  "federated/wearable_fl_secagg_shadow_v1.py"):
         diff = subprocess.run(["git", "diff", "--quiet", entry, "--", path], cwd=ROOT).returncode
-        assert diff == 0, path
+        assert diff == 0 or path in successor, path

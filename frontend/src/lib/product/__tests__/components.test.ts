@@ -107,7 +107,7 @@ describe('device page', () => {
 		await screen.findByTestId('device-state');
 		expect(screen.getByTestId('device-state').textContent).toBe('DETACHED');
 		expect(screen.getByTestId('device-scenario').textContent).toBe('MIXED_MONITORING_SESSION');
-		expect(document.body.textContent).toContain('NOT CONNECTED / NOT IMPLEMENTED');
+		expect(document.body.textContent).toContain('NOT USED BY THIS VIRTUAL DEVICE FLOW');
 		expect(document.body.textContent).toContain('SIMULATED');
 		await fireEvent.click(screen.getByRole('button', { name: 'SCAN' }));
 		await waitFor(() => expect(screen.getByTestId('device-state').textContent).toBe('FOUND'));

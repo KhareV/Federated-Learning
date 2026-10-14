@@ -1,0 +1,16 @@
+{
+ "amendment_id": "NHM_HARDWARE_MONGO_MONITOR_001_CAPSTONE_FACULTY_DEMO_PROTOCOL_V1_AMENDMENT_9_999_002",
+ "change": "Keep the historical byte-identity guards for frozen files; account for exact verified additive successor bytes in previously frozen frontend/API tests.",
+ "files": {
+  "tests/test_capstone_full_demo.py": {
+   "new_sha256": "44f2285e5e4ad0343f36e5ae3d209111e859b01e723ff00fa67d78819da952fc",
+   "old_sha256": "d68f5f0a13113b53c9b20a41cd94eb33e56d3bfb00a9085088f785986ce1afb5"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1 (historical tests governed for NHM_HARDWARE_MONGO_MONITOR_001)",
+ "previous_amendment": "NHM_HARDWARE_MONGO_MONITOR_001_CAPSTONE_FACULTY_DEMO_PROTOCOL_V1_AMENDMENT_9_999_001",
+ "reason": "EXACT_SUCCESSOR_AWARE_GOVERNANCE_TESTS",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

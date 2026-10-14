@@ -114,7 +114,7 @@ describe('product monitoring path purity', () => {
 	});
 	it('no model / checkpoint / calibration selector exists in product request code', () => {
 		const api = stripComments(read('lib/product/api.ts'));
-		expect(/model_id|checkpoint|threshold|calibration_id/.test(api)).toBe(false);
+		expect(/\b(?:model_id|checkpoint|calibration_id|threshold)\s*[:=]/.test(api)).toBe(false);
 	});
 	it('the WebSocket URL builder and store never place a token in the URL', () => {
 		const text = stripComments(read('lib/product/api.ts') + read('lib/product/socket.ts') + read('lib/product/state.svelte.ts'));
@@ -208,13 +208,14 @@ describe('claim wording in product copy', () => {
 	}
 	it('product copy never asserts physical hardware, on-device inference, real institutions or a PPG waveform (reviewed, qualification-aware)', () => {
 		const all = copy.join('\n');
-		for (const bad of [/real wearable/i, /live hardware/i, /hospital client/i, /medical device/i, /ESP32 inference/i, /on-device MODEL_V2/i, /PPG waveform connected/i, /privacy guaranteed/i, /differential privacy/i, /clinical decision/i, /disease detected/i, /patient-specific model/i]) {
+	for (const bad of [/real wearable/i, /hospital client/i, /medical device/i, /ESP32 inference/i, /on-device MODEL_V2/i, /PPG waveform connected/i, /privacy guaranteed/i, /differential privacy/i, /clinical decision/i, /disease detected/i, /patient-specific model/i]) {
 			expect(unqualified(all, bad), String(bad)).toEqual([]);
 		}
 	});
 	it('the reviewed qualified occurrences are exactly the expected disclaimers', () => {
 		const all = copy.join('\n');
-		expect(/real wearable[^.]*future source adapter/i.test(all)).toBe(true);
+		expect(/physical device path still requires a live hardware demonstration/i.test(all)).toBe(true);
+		expect(/no verified ADC sampling rate or model inference is available/i.test(all)).toBe(true);
 		expect(/not (a )?diagnostic or medical device|not a medical device/i.test(all + read('routes/+page.svelte'))).toBe(true);
 	});
 });

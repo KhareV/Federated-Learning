@@ -16,7 +16,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 TIP_PATH = "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
 SUCCESSORS = [("NHM_FL10_001", "artifacts/fl10/NHM_FL10_001.lock.json"),
-              ("NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001", "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json")]
+              ("NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001", "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json"),
+              ("NHM_HARDWARE_MONGO_MONITOR_001", "artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json")]
 
 
 def sha(path: Path) -> str:

@@ -1,0 +1,28 @@
+{
+ "amendment_id": "NHM_HARDWARE_MONGO_MONITOR_001_CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_9_999_001",
+ "change": "Exact byte re-pins for reviewed Clerk WebSocket, MongoDB telemetry, UI copy, and timing-test changes. Frozen science and historical lock bytes are unchanged.",
+ "files": {
+  "api/product_app_v1_1.py": {
+   "new_sha256": "7a398a72b60cb218e7b7ff5da685898d7d67547fefc019f49cdf944913bd4cf6",
+   "old_sha256": "47ae7b03eb05796ce4d807e641e5adf27f54ceb16c146d62119419c12c9de985"
+  },
+  "api/product_app_v1_2.py": {
+   "new_sha256": "c9e3a05f00159055b389ba1f418182a11fc2013ee71865fa5fb5819665127fd4",
+   "old_sha256": "409b0e28257a555ac0e300c7c3f2ea8ccd4e3743f84fd2feab2bae2279b724d0"
+  },
+  "frontend/src/lib/product/api.ts": {
+   "new_sha256": "86624910852f16fcef5dca41b2257f6300e4373692c218931d3a4e5430169589",
+   "old_sha256": "a47e19b897f91a422a50e66b2b1e98a32154e12f9a24f3cc81632c14ca20dceb"
+  },
+  "frontend/src/lib/product/federation/state.svelte.ts": {
+   "new_sha256": "79f0372fc37717babb5cf2ec295fc77c7d5f5b0d406a791a2e327cb19c934549",
+   "old_sha256": "18bab9ffd23cc28068f661d10ed147ab371b1a4d0962ab33acf6b46d7f61f961"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_FEDERATION_UX_PROTOCOL_V1 (historical files governed for NHM_HARDWARE_MONGO_MONITOR_001)",
+ "previous_amendment": "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001_CAPSTONE_FEDERATION_UX_PROTOCOL_V1_AMENDMENT_9_1_1_2_1",
+ "reason": "HARDWARE_TELEMETRY_AND_CLERK_ADDITIVE_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

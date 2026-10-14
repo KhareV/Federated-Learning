@@ -1,0 +1,61 @@
+{
+  "browser_checks": {
+    "browser_console_errors": 0,
+    "clerk_login": true,
+    "demo_fallback": false,
+    "federation_round_cards": 3,
+    "federation_status": "COMPLETED",
+    "history_reload": true,
+    "logout_redirect": true,
+    "post_logout_session_http": 401,
+    "research_fl_http": 200,
+    "research_ml_http": 200,
+    "system_and_overview": true
+  },
+  "date_utc": "2026-10-14",
+  "hardware_atlas_browser_session_id": "HW-5eb33dd96bef44f5bc02603ff6320758",
+  "hardware_owner_isolation": {
+    "denied": true,
+    "history_detail_http_status": 403,
+    "history_list_excludes_session": true
+  },
+  "harness_corrections": "Initial connected journey stopped at the retired Studio selector; another run stopped on an outdated Research visible-copy assertion. Final focused journeys passed the current UI, persisted records, and replay. The product failures were not silently ignored.",
+  "kind": "REAL_CLERK_CONNECTED_BROWSER_AND_SIMULATED_REGRESSION",
+  "monitoring_websocket_replay": {
+    "first_events": 3157,
+    "handshake_statuses": [
+      101,
+      101
+    ],
+    "replayed_events": 3157,
+    "socket_count": 2,
+    "token_in_url": false
+  },
+  "run_id": "FEDRUN-19FAFD3F1E6B",
+  "screenshots": [
+    "reports/hardware/browser/clerk_simulated_monitor.png",
+    "reports/hardware/browser/clerk_three_round_federation.png"
+  ],
+  "session_id": "SESS-83fd0dc67c0e4ccd80159fe81b46c823",
+  "test_accounts": "two fresh Clerk TEST instance accounts; credentials and tokens not retained",
+  "three_round_db": {
+    "rounds": [
+      {
+        "accepted_updates": 8,
+        "round": 1,
+        "state": "COMPLETED"
+      },
+      {
+        "accepted_updates": 8,
+        "round": 2,
+        "state": "COMPLETED"
+      },
+      {
+        "accepted_updates": 8,
+        "round": 3,
+        "state": "COMPLETED"
+      }
+    ],
+    "total_accepted_updates": 24
+  }
+}

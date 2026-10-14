@@ -116,7 +116,7 @@ export class FrontendAuth {
 
 	constructor(private readonly options: FrontendAuthOptions = {}) {
 		const make = options.createClient ?? ((getToken) => createProductClient({ getToken }));
-		this.client = make(() => this.token());
+		this.client = make(() => this.getSessionToken());
 	}
 
 	get api(): ProductClient {
@@ -138,7 +138,7 @@ export class FrontendAuth {
 	}
 
 	/** Bearer token for the CURRENT Clerk session; null in DEMO mode. Never persisted. */
-	private async token(): Promise<string | null> {
+	async getSessionToken(): Promise<string | null> {
 		if (this.state.mode !== 'CLERK' || !this.clerk?.session) return null;
 		return (await this.clerk.session.getToken()) ?? null;
 	}

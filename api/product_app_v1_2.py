@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, Request, WebSocket
+from starlette.websockets import WebSocketDisconnect
 
 from api.product_app_v1_1 import (
     API_PREFIX,
@@ -36,6 +37,7 @@ from capstone_persistence.store import CapstoneSqliteStore
 from product.api.errors import ProductError, ProductErrorCode
 from product.api.models_v2 import SystemInfoV2
 from product.auth.base import AuthIdentity, AuthProviderDescription
+from product.auth.websocket import authenticate_live_websocket
 from product.devices.scenarios import TimingMode
 from product.federation.artifact_store import DEFAULT_ROOT as DEFAULT_FEDERATION_ROOT
 from product.federation.artifact_store import FederationArtifactStore
@@ -188,8 +190,10 @@ def create_product_app_v1_2(
     # ---- LIVE: server -> client federation events only --------------------------------------------
     @app.websocket(API_PREFIX + "/federation/runs/{id}/live")
     async def live(websocket: WebSocket, id: str) -> None:
-        await websocket.accept()
-        resolved = await identity_resolver(websocket)
+        try:
+            resolved = await authenticate_live_websocket(websocket, identity_resolver)
+        except WebSocketDisconnect:
+            return
         if resolved is None:
             await websocket.close(code=WS_UNAUTHENTICATED)
             return

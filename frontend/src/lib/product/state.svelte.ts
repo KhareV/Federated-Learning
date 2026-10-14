@@ -229,6 +229,7 @@ export class ProductStore {
 		const url = liveSocketUrl(sessionId, location);
 		this.socket = new LiveSocket({
 			url,
+			getToken: this.authState.mode === 'CLERK' ? () => this.auth.getSessionToken() : undefined,
 			factory: this.socketFactory,
 			handlers: {
 				onReset: () => {

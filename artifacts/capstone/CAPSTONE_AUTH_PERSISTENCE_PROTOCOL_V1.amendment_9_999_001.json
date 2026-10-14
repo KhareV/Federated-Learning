@@ -1,0 +1,24 @@
+{
+ "amendment_id": "NHM_HARDWARE_MONGO_MONITOR_001_CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_9_999_001",
+ "change": "Exact byte re-pins for reviewed Clerk WebSocket, MongoDB telemetry, UI copy, and timing-test changes. Frozen science and historical lock bytes are unchanged.",
+ "files": {
+  ".env.example": {
+   "new_sha256": "c03cd3d943f1ebade5fceae28e8ee879adf826aea65ebe543e7b043d007f51fc",
+   "old_sha256": "aebf5ebaf0e836af8a5afd71c670f5087e1e69de0f47d0a5df830f65ec391f38"
+  },
+  "api/product_app_v1_1.py": {
+   "new_sha256": "7a398a72b60cb218e7b7ff5da685898d7d67547fefc019f49cdf944913bd4cf6",
+   "old_sha256": "47ae7b03eb05796ce4d807e641e5adf27f54ceb16c146d62119419c12c9de985"
+  },
+  "tests/test_capstone_auth.py": {
+   "new_sha256": "0cc808ddb5e023a99fa4cbb3a9af65c5923ddfcc2173addaf796a57bd36e524b",
+   "old_sha256": "67af8d2663140475cf5b2b93e213dd07ce0ec43e8e954997dfdd1557febe0dd2"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1 (historical files governed for NHM_HARDWARE_MONGO_MONITOR_001)",
+ "previous_amendment": "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1_AMENDMENT_7",
+ "reason": "HARDWARE_TELEMETRY_AND_CLERK_ADDITIVE_SUCCESSOR",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

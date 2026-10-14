@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import Panel from '$lib/components/dashboard/Panel.svelte';
+	import type { HardwareSession } from '$lib/product/api';
+	let hardware = $state<HardwareSession | null>(null);
 	import { getProductStore } from '$lib/product/state.svelte';
 	import type { MonitoringSession } from '$lib/product/types';
 	import type { SessionSummary, SessionTimeline, SourceKind, WaveformPreview } from '$lib/product/history/types';
@@ -21,6 +23,7 @@
 		try {
 			const id = page.params.session_id;
 			if (!id) throw new Error('Session ID is missing');
+			if (id.startsWith('HW-')) { hardware = await product.api.hardwareSession(id); return; }
 			session = await product.api.session(id);
 			const work: Promise<unknown>[] = [product.api.sessionTimeline(id).then((v) => { timeline = v; })];
 			if (session.state === 'COMPLETED')
@@ -54,7 +57,13 @@
 	<h1>Session evidence</h1>
 	{#if loading}<p role="status">Loading persisted evidence…</p>{/if}
 	{#if error}<p class="error" role="alert">{error}</p>{/if}
-	{#if session}
+	{#if hardware}
+		<Panel eyebrow="01 / HARDWARE TELEMETRY" title={hardware.session_id} note={hardware.status}>
+			<p>{hardware.source} · {hardware.collection}</p><p>Started {new Date(hardware.started_at).toLocaleString()} · Stopped {hardware.stopped_at ? new Date(hardware.stopped_at).toLocaleString() : 'Interrupted or active'} · {hardware.record_count} actual accepted records</p>
+			<p>Stored trace: last {hardware.trace_limit} readings maximum. Timestamp is server ingestion time. This session has no model inference or clinical classification.</p>
+			<ol class="events">{#each hardware.readings as r}<li><code>{r.id}</code> · {new Date(r.ingested_at).toLocaleString()} · ECG {r.ecg} · BPM {r.bpm ?? 'unavailable'} · SpO₂ {r.spo2 ?? 'unavailable'} (unverified)</li>{/each}</ol>
+		</Panel>
+	{:else if session}
 		<Panel eyebrow="01 / SESSION" title={session.session_id} note={session.state}>
 			<p class="overview">Research/engineering monitoring history — not a diagnosis. Runtime identity was fixed at session creation.</p>
 			<dl class="facts"><div><dt>State</dt><dd>{session.state}</dd></div><div><dt>Device adapter</dt><dd>{session.device_adapter_type}</dd></div>

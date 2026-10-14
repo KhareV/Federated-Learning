@@ -1,9 +1,4 @@
-"""Launch the additive Observatory with the accepted Clerk TEST auth configuration.
-
-The accepted CAPSTONE_UI_V1_9 verifier intentionally rejects the unaccepted Observatory
-successor's new frontend files. This launcher verifies V1_9 at its accepted entry commit
-and checks all non-UI demo preflights without editing or weakening any historical lock.
-"""
+"""Launch the Observatory with Clerk TEST auth and the current additive successor checks."""
 
 from __future__ import annotations
 
@@ -69,16 +64,12 @@ def main() -> int:
     if busy:
         print(f"REFUSING TO START: PORT_IN_USE:{busy}", file=sys.stderr)
         return EXIT["PORT_IN_USE"]
-    # The original current-tree UI preflight is not successor-aware. Keep its failure
-    # disclosed, but verify the accepted V1_9 bytes historically and all safe peers.
     selected = {name: check for name, check in DEFAULT_VERIFIERS.items()
-                if name not in {"prior_locks_and_amendments", "ui_successor", "frontend_build"}}
+                if name != "frontend_build"}  # build_frontend runs after preflight
     checks = {name: check() for name, check in selected.items()}
     checks["historical_ui_v1_9"] = {"ok": historical_ui_intact(),
                                     "detail": "accepted entry bytes and protected diff"}
     print(json.dumps({"preflight": {name: value["ok"] for name, value in checks.items()},
-                      "historical_current_tree_ui_preflight": (
-                          "EXPECTED_FAIL_UNACCEPTED_OBSERVATORY_SUCCESSOR"),
                       "auth": "CLERK_TEST", "secret_key_present": True,
                       "authorized_parties": cfg["authorized_parties"]}), flush=True)
     if not all(value["ok"] for value in checks.values()):
@@ -109,7 +100,7 @@ def main() -> int:
     if not orchestrator.start_and_wait_ready():
         return EXIT["READY_TIMEOUT"] if (orchestrator.failed or "").startswith(
             "READY_TIMEOUT") else EXIT["SERVICE_FAILURE"]
-    print(json.dumps({"status": "OBSERVATORY_CLERK_TEST_READY_NOT_E2E_ACCEPTED",
+    print(json.dumps({"status": "OBSERVATORY_CLERK_TEST_READY",
                       "frontend": f"http://{HOST}:{ports['frontend']}/sign-in",
                       "product": "NHM_RESEARCH_OBSERVATORY_V1_CANDIDATE",
                       "auth": "CLERK", "demo_mode": False,

@@ -1,0 +1,137 @@
+"""Daily collection discovery, midnight rollover, and bounded global cursor order."""
+
+from datetime import UTC, datetime
+
+from bson import ObjectId
+
+from capstone_persistence.store import CapstoneSqliteStore
+from product.hardware_telemetry import MAX_BATCH, HardwareSessions, MongoTelemetry
+
+
+class Cursor:
+    def __init__(self, documents):
+        self.documents = documents
+
+    def sort(self, key, direction):
+        assert key == "_id" and direction == 1
+        self.documents.sort(key=lambda doc: doc["_id"])
+        return self
+
+    def limit(self, count):
+        assert count == MAX_BATCH
+        return self.documents[:count]
+
+
+class Collection:
+    def __init__(self):
+        self.docs = []
+
+    def find_one(self, _query, _projection, *, sort):
+        assert sort == [("_id", -1)]
+        return max(self.docs, key=lambda doc: doc["_id"]) if self.docs else None
+
+    def find(self, query):
+        mark = query.get("_id", {}).get("$gt")
+        return Cursor([dict(doc) for doc in self.docs if mark is None or doc["_id"] > mark])
+
+
+class Database(dict):
+    def __getitem__(self, name):
+        return self.setdefault(name, Collection())
+
+    def list_collection_names(self):
+        return list(self)
+
+
+class Client(dict):
+    def __init__(self):
+        super().__init__()
+        self.db = Database()
+
+    def __getitem__(self, _name):
+        return self.db
+
+    def close(self):
+        pass
+
+
+def oid(n):
+    return ObjectId(f"{n:024x}")
+
+
+def doc(n, ecg):
+    return {
+        "_id": oid(n),
+        "ecg": ecg,
+        "bpm": 72,
+        "spo2": 97,
+        "timestamp": datetime(2026, 10, 14, 0, 0, 0, tzinfo=UTC),
+    }
+
+
+def test_discovery_does_not_assume_utc_and_preserves_rollover_cursor(monkeypatch, tmp_path):
+    client = Client()
+    # Yesterday's older document must never animate at session start.
+    client.db["records_2026-10-13"].docs.append(doc(10, 1900))
+    client.db["records_2026-10-12"].docs.append(doc(5, 1800))
+    # Unrelated collection is never read.
+    client.db["nhm_integration_test"].docs.append(doc(1000, 3000))
+    monkeypatch.setattr("product.hardware_telemetry.MongoClient", lambda *_a, **_k: client)
+    source = MongoTelemetry("mongodb://unused", "health_db", "records_2026-10-13")
+    store = CapstoneSqliteStore(tmp_path / "sessions.sqlite3")
+    sessions = HardwareSessions(store, source)
+    sid = sessions.start("owner")["session_id"]
+    client.db["records_2026-10-13"].docs.append(doc(11, 2001))
+    first = sessions.poll(sid, "owner")
+    assert [x["id"] for x in first["readings"]] == [str(oid(11))]
+    assert first["readings"][0]["collection"] == "records_2026-10-13"
+    # New collection appears at rollover; force the scheduled discovery interval.
+    client.db["records_2026-10-14"].docs.append(doc(13, 2203))
+    client.db["records_2026-10-13"].docs.append(doc(12, 2102))
+    source._discovered_at = 0
+    second = sessions.poll(sid, "owner", 1)
+    assert [(x["id"], x["ecg"], x["collection"]) for x in second["readings"]] == [
+        (str(oid(12)), 2102, "records_2026-10-13"),
+        (str(oid(13)), 2203, "records_2026-10-14"),
+    ]
+    assert sessions.poll(sid, "owner")["record_count"] == 3
+    assert sessions.stop(sid, "owner")["record_count"] == 3
+    # Another session marks all current records as old, including across collections.
+    next_id = sessions.start("owner")["session_id"]
+    assert sessions.poll(next_id, "owner")["record_count"] == 0
+    store.close()
+
+
+def test_global_batch_limit_does_not_skip_older_collection_backlog(monkeypatch):
+    client = Client()
+    monkeypatch.setattr("product.hardware_telemetry.MongoClient", lambda *_a, **_k: client)
+    source = MongoTelemetry("mongodb://unused", "health_db", "records_*")
+    source._collections()
+    for n in range(1, MAX_BATCH + 101):
+        client.db["records_2026-10-13"].docs.append(doc(n, 2000))
+    client.db["records_2026-10-14"].docs.append(doc(MAX_BATCH + 101, 2100))
+    source._discovered_at = 0
+    first = source.after(None)
+    assert len(first) == MAX_BATCH and first[-1]["_id"] == oid(MAX_BATCH)
+    second = source.after(first[-1]["_id"])
+    assert len(second) == 101 and second[-1]["_id"] == oid(MAX_BATCH + 101)
+    assert [d["_id"] for d in first + second] == [oid(n) for n in range(1, MAX_BATCH + 102)]
+
+
+def test_same_mongodb_id_copied_across_daily_collections_counts_once(monkeypatch, tmp_path):
+    client = Client()
+    monkeypatch.setattr("product.hardware_telemetry.MongoClient", lambda *_a, **_k: client)
+    source = MongoTelemetry("mongodb://unused", "health_db", "records_*")
+    client.db["records_2026-10-13"].docs.append(doc(10, 1800))
+    source._collections()
+    store = CapstoneSqliteStore(tmp_path / "dedupe.sqlite3")
+    sessions = HardwareSessions(store, source)
+    sid = sessions.start("owner")["session_id"]
+    same = doc(11, 2100)
+    client.db["records_2026-10-13"].docs.append(same)
+    client.db["records_2026-10-14"].docs.append(dict(same))
+    source._discovered_at = 0
+    result = sessions.poll(sid, "owner")
+    assert result["record_count"] == 1
+    assert [x["id"] for x in result["readings"]] == [str(oid(11))]
+    store.close()

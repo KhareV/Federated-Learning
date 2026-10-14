@@ -23,7 +23,7 @@
 <div class="eyebrow">NHM / DEVICE</div>
 <h1>Virtual wearable</h1>
 <p class="lead">A simulated ECG source for research monitoring. This lifecycle is software-only; no Bluetooth or physical sensor is connected.</p>
-<div class="boundary"><strong>SIMULATED ONLY</strong><span>PHYSICAL HARDWARE: NOT CONNECTED / NOT IMPLEMENTED</span></div>
+<div class="boundary"><strong>THIS PAGE: SIMULATED ONLY</strong><span>Physical telemetry uses the Monitor source selector; it does not pair here.</span></div>
 
 {#if store.error}<p class="err" role="alert">{store.error}</p>{/if}
 
@@ -60,7 +60,7 @@
 			<dt>SCENARIO</dt><dd data-testid="device-scenario">{scenarioOf ?? 'select when creating a session'}</dd>
 			<dt>VERSION / MODE</dt><dd>{device.simulation_version} / {device.source_mode}</dd>
 			<dt>CAPABILITIES</dt><dd>ECG {device.capabilities.supports_ecg ? 'yes' : 'no'} / PPG waveform {device.capabilities.supports_ppg ? 'yes' : 'unavailable'} / SpO2 context {device.capabilities.supports_spo2_context ? 'where emitted' : 'no'} / source {Object.values(device.capabilities.nominal_source_rates_hz).join(', ')} Hz</dd>
-			<dt>PHYSICAL HARDWARE</dt><dd>NOT CONNECTED / NOT IMPLEMENTED</dd>
+			<dt>PHYSICAL HARDWARE</dt><dd>NOT USED BY THIS VIRTUAL DEVICE FLOW</dd>
 		</dl></details>
 		<div class="live" role="status" aria-live="polite">Device state: {device.connection_state}</div>
 	</Panel>

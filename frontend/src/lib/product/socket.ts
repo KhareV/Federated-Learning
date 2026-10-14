@@ -11,6 +11,7 @@ export interface SocketLike {
 	onclose: ((ev: { code?: number }) => void) | null;
 	onerror: ((ev: unknown) => void) | null;
 	close(): void;
+	send?(data: string): void;
 }
 
 export interface LiveSocketHandlers {
@@ -25,6 +26,7 @@ export interface LiveSocketOptions {
 	url: string;
 	handlers: LiveSocketHandlers;
 	factory?: (url: string) => SocketLike;
+	getToken?: () => Promise<string | null>;
 	setTimer?: (fn: () => void, ms: number) => unknown;
 	clearTimer?: (handle: unknown) => void;
 }
@@ -78,18 +80,44 @@ export class LiveSocket {
 	}
 
 	private open(): void {
-		const factory = this.options.factory ?? ((url: string) => new WebSocket(url) as unknown as SocketLike);
+		const factory = this.options.factory ?? ((url: string) =>
+			(this.options.getToken ? new WebSocket(url, ['nhm-auth-v1']) : new WebSocket(url)) as unknown as SocketLike);
 		this.set(this.retries === 0 && !this.everOpened ? 'CONNECTING' : 'RECONNECTING');
 		this.options.handlers.onReset();
 		const socket = factory(this.options.url);
 		this.socket = socket;
-		socket.onopen = () => {
+		let closed = false;
+		socket.onopen = async () => {
+			if (this.options.getToken) {
+				let token: string | null = null;
+				try {
+					token = await this.options.getToken();
+				} catch {
+					// A failed token refresh must not leave an unauthenticated socket looking live.
+				}
+				if (this.stopped || closed || this.socket !== socket) return;
+				if (!token || !socket.send) {
+					socket.onclose = null;
+					socket.close();
+					this.set('DISCONNECTED');
+					return;
+				}
+				try {
+					socket.send(JSON.stringify({ type: 'authenticate', token }));
+				} catch {
+					socket.onclose = null;
+					socket.close();
+					this.set('DISCONNECTED');
+					return;
+				}
+			}
 			this.everOpened = true;
 			this.set('OPEN');
 		};
 		socket.onmessage = (event) => this.options.handlers.onMessage(event.data);
 		socket.onerror = () => {};
 		socket.onclose = (event) => {
+			closed = true;
 			if (this.stopped || this.socket !== socket) return;
 			const code = event?.code;
 			if (code === 1000) return this.set('CLOSED_NORMAL');

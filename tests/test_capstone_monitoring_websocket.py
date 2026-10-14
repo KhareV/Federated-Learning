@@ -178,6 +178,12 @@ def test_monitoring_completes_with_zero_subscribers() -> None:
                 break
             time.sleep(0.01)
         assert entry.session.state.value == "COMPLETED"
+        # COMPLETED is published before run() closes the journal in its finally block.
+        # Wait for the lifecycle boundary instead of racing the cleanup task.
+        for _ in range(100):
+            if entry.journal.closed:
+                break
+            time.sleep(0.01)
         assert len(entry.journal) > 100 and entry.journal.closed
         assert len(collect_ws(client, "W7")) == len(entry.journal)  # replay after the fact
 

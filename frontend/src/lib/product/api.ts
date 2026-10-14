@@ -97,6 +97,11 @@ export interface ProductClientOptions {
 }
 
 export interface ProductClient {
+	hardwareStart(): Promise<HardwareSession>;
+	hardwarePoll(id: string, after: number): Promise<HardwareSession>;
+	hardwareStop(id: string): Promise<HardwareSession>;
+	hardwareSessions(): Promise<HardwareSession[]>;
+	hardwareSession(id: string): Promise<HardwareSession>;
 	system(): Promise<SystemInfoV2>;
 	me(): Promise<AuthIdentity>;
 	devices(): Promise<DeviceDescriptor[]>;
@@ -171,6 +176,16 @@ export interface ProductClient {
 	model(modelId: string): Promise<ReleasedModelRef | CandidateModel>;
 }
 
+export interface HardwareReading {
+	ordinal: number; id: string; ingested_at: string; ecg: number; bpm: number | null; spo2: number | null; collection: string | null;
+}
+export interface HardwareSession {
+	version: 'HARDWARE_TELEMETRY_V1'; session_id: string; source: string; collection: string;
+	started_at: string; stopped_at: string | null; status: string; source_state: string;
+	record_count: number; last_received_at: string | null; readings: HardwareReading[];
+	trace_limit: number; stale_threshold_seconds: number;
+}
+
 /** The only three user-controlled run options; scenario and rounds are frozen constants. */
 export interface FederationRunChoice {
 	run_type: RunType;
@@ -229,6 +244,11 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 
 	const enc = encodeURIComponent;
 	return {
+		hardwareStart: () => call('POST', '/hardware/sessions'),
+		hardwarePoll: (id, after) => call('GET', `/hardware/sessions/${enc(id)}/poll?after=${after}`),
+		hardwareStop: (id) => call('POST', `/hardware/sessions/${enc(id)}/stop`),
+		hardwareSessions: () => call('GET', '/hardware/sessions'),
+		hardwareSession: (id) => call('GET', `/hardware/sessions/${enc(id)}`),
 		system: () => call('GET', '/system'),
 		me: () => call('GET', '/me'),
 		devices: () => call('GET', '/devices'),
@@ -333,14 +353,15 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 	};
 }
 
-/** Same-origin monitoring WebSocket URL. NEVER carries a token (CLERK mode relies on the Clerk
- * session cookie the browser attaches to the same-origin handshake). */
+/** Same-origin monitoring WebSocket URL. NEVER carries a token. CLERK mode sends a fresh
+ * verified session token in the first WebSocket frame, not in the URL. */
 export function liveSocketUrl(sessionId: string, location: { protocol: string; host: string }): string {
 	const scheme = location.protocol === 'https:' ? 'wss:' : 'ws:';
 	return `${scheme}//${location.host}${PRODUCT_BASE}/sessions/${encodeURIComponent(sessionId)}/live`;
 }
 
-/** Same-origin federation WebSocket URL. NEVER carries a token, cookie, user id or secret. */
+/** Same-origin federation WebSocket URL. NEVER carries a token, cookie, user id or secret;
+ * CLERK mode authenticates in the first WebSocket frame. */
 export function federationSocketUrl(runId: string, location: { protocol: string; host: string }): string {
 	const scheme = location.protocol === 'https:' ? 'wss:' : 'ws:';
 	// 10-round Studio runs have their own typed event journal; every 3-round run keeps the original product route unchanged.

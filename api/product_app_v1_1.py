@@ -18,6 +18,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.requests import HTTPConnection
+from starlette.websockets import WebSocketDisconnect
 
 from capstone_persistence.store import CapstoneSqliteStore
 from product.api.errors import (
@@ -29,6 +30,7 @@ from product.api.errors import (
 from product.api.models import CreateSimulatedDeviceRequest
 from product.api.models_v2 import CreateSessionRequest, SystemInfoV2
 from product.auth.base import AuthIdentity, AuthProviderDescription
+from product.auth.websocket import authenticate_live_websocket
 from product.devices.base import DeviceDescriptor
 from product.devices.manager import DeviceManager
 from product.devices.scenarios import TimingMode
@@ -179,8 +181,10 @@ def create_product_app_v1_1(
     # ---- LIVE: server -> client monitoring events only ----------------------------------------
     @app.websocket(API_PREFIX + "/sessions/{id}/live")
     async def live(websocket: WebSocket, id: str) -> None:
-        await websocket.accept()
-        resolved = await identity_resolver(websocket)
+        try:
+            resolved = await authenticate_live_websocket(websocket, identity_resolver)
+        except WebSocketDisconnect:
+            return
         if resolved is None:
             await websocket.close(code=WS_UNAUTHENTICATED)
             return

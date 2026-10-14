@@ -55,7 +55,8 @@ export class FederationStore {
 	constructor(
 		private readonly getApi: () => ProductClient,
 		private readonly frame: Frame = defaultFrame,
-		private readonly socketFactory?: (url: string) => SocketLike
+		private readonly socketFactory?: (url: string) => SocketLike,
+		private readonly getLiveToken?: () => (() => Promise<string | null>) | undefined
 	) {}
 
 	private get api(): ProductClient {
@@ -202,6 +203,7 @@ export class FederationStore {
 		this.flush();
 		this.socket = new LiveSocket({
 			url: federationSocketUrl(runId, location),
+			getToken: this.getLiveToken?.(),
 			factory: this.socketFactory,
 			handlers: {
 				onReset: () => {
@@ -314,7 +316,10 @@ export class FederationStore {
 
 let singleton: FederationStore | null = null;
 export function getFederationStore(getApi: () => ProductClient): FederationStore {
-	singleton ??= new FederationStore(getApi);
+	singleton ??= new FederationStore(getApi, defaultFrame, undefined, () => {
+		const product = getProductStore();
+		return product.authState.mode === 'CLERK' ? () => product.auth.getSessionToken() : undefined;
+	});
 	return singleton;
 }
 export function setFederationStore(store: FederationStore | null): void {

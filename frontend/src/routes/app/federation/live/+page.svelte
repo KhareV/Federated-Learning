@@ -64,6 +64,7 @@
 <FederationBanner runType={v.runType} />
 <RunSelector runs={fed.runs} selected={fed.run?.run_id ?? null} onSelect={(id) => { studio.selectClient(null); void chooseRun(fed, page.url.pathname, id); }} />
 {#if v.streamError}<p class="err" role="alert" data-testid="stream-error">FEDERATION STREAM ERROR ({v.streamError.reason}) — derived progress below is no longer trustworthy. <button type="button" onclick={() => fed.reconnectLive()}>Reconnect</button></p>{/if}
+{#if fed.socketStatus === 'DISCONNECTED' && !v.streamError}<p class="err" role="alert" data-testid="stream-disconnected">LIVE EVENT STREAM DISCONNECTED — round progress, client stages and the timeline below are not current. Analysis panels may still show completed results from the backend. <button type="button" onclick={() => fed.reconnectLive()}>Reconnect live stream</button></p>{/if}
 {#if fed.error}<p class="err" role="alert">{fed.error}</p>{/if}
 {#if replay}<p class="replay" role="status" data-testid="replay-note"><b>REPLAY — NO TRAINING IS EXECUTING.</b> The events below are a faithful re-emission of a previous LIVE_RUN.</p>{/if}
 {#if fed.run}

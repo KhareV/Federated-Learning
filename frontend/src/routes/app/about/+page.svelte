@@ -10,9 +10,9 @@
 		<li>Monitoring states are research outputs, not health assessments.</li>
 	</ul></Panel>
 	<Panel eyebrow="02 / MONITORING" title="What runs today"><ul>
-		<li>Hardware today is <b>SIMULATED ONLY</b> (virtual wearable, WEARABLE_SIM_V1). No physical wearable is connected. A real wearable is a future source adapter that requires verification.</li>
+		<li>For model inference, the wearable source is <b>SIMULATED ONLY</b> (WEARABLE_SIM_V1). No physical wearable is connected to the inference path. A separate, optional MongoDB source displays ESP32 telemetry without model inference. The physical device path still requires a live hardware demonstration.</li>
 		<li>Inference is server-side: MODEL_V2_FINAL in SOFTWARE_SYSTEM_V2. Nothing runs on a sensor.</li>
-		<li>The waveform is a simulated source ECG. A PPG waveform is unavailable in the current simulator; SpO2/PPG-derived context is shown where the backend emits it.</li>
+		<li>The virtual Monitor plots simulated source ECG. A PPG waveform is unavailable in the current simulator. The hardware view plots stored ECG ADC values against server ingestion time; its device-reported SpO₂ is unverified.</li>
 	</ul></Panel>
 	<Panel eyebrow="03 / DEVELOPMENT" title="Federated development"><ul>
 		<li>The <b>engineering federation runtime is enabled</b>. It runs eight logical, synthetic research clients (not hospitals or institutions) on one demonstration machine; each performs genuine local optimization and the coordinator receives model updates rather than local examples.</li>

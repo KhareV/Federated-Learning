@@ -3,6 +3,8 @@
 	// product backend. The browser never calls /v1/infer-window and never derives a monitoring state.
 	import { onDestroy, onMount } from 'svelte';
 	import Panel from '$lib/components/dashboard/Panel.svelte';
+	import HardwareMonitor from '$lib/components/product/HardwareMonitor.svelte';
+	let source = $state<'simulated' | 'hardware'>('simulated');
 	import MetricTile from '$lib/components/dashboard/MetricTile.svelte';
 	import WaveformPlot from '$lib/components/product/WaveformPlot.svelte';
 	import FlowDiagram from '$lib/components/product/story/FlowDiagram.svelte';
@@ -47,6 +49,10 @@
 
 <svelte:head><title>Monitor | NHM</title></svelte:head>
 
+<label class="source-choice" for="monitor-source">Source <select id="monitor-source" bind:value={source}><option value="simulated">Simulated wearable</option><option value="hardware">Live hardware (MongoDB)</option></select></label>
+{#if source === 'hardware'}
+<div class="eyebrow">NHM / MONITOR</div><h1>Live monitoring</h1><HardwareMonitor />
+{:else}
 <SimulationBanner />
 <div class="eyebrow">NHM / MONITOR</div>
 <h1>Live monitoring</h1>
@@ -166,7 +172,9 @@
 	{/if}
 </div>
 
+{/if}
 <style>
+	.source-choice {display:block;margin-bottom:14px;color:#94a3b8;font:12px 'JetBrains Mono',monospace}.source-choice select{margin-left:10px;padding:8px;background:#050a15;color:#eef7f6;border:1px solid var(--nhm-border)}
 	.eyebrow { color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; letter-spacing: .14em; } h1 { margin: 10px 0 18px; font: 500 clamp(26px, 4vw, 40px) 'Space Grotesk', sans-serif; }
 	.sr { position: absolute; left: -9999px; } .dim, .foot { color: #94a3b8; font-size: 12px; line-height: 1.6; } .foot { margin: 10px 0 0; } code { font: 11px 'JetBrains Mono', monospace; color: #9fe7e1; overflow-wrap: anywhere; }
 	.err { color: #fecdd3; padding: 10px 12px; border: 1px solid rgba(251,113,133,.4); background: rgba(127,29,29,.2); overflow-wrap: anywhere; } .warn { color: #fde68a; padding: 8px 10px; border: 1px solid rgba(251,191,36,.4); background: rgba(251,191,36,.06); font-size: 12px; }

@@ -2,15 +2,20 @@
 	// CAP-009: persisted owner-scoped session list; evidence lives on the detail route.
 	import { onMount } from 'svelte';
 	import Panel from '$lib/components/dashboard/Panel.svelte';
+	import type { HardwareSession } from '$lib/product/api';
+	let hardware = $state<HardwareSession[]>([]);
 	import { getProductStore } from '$lib/product/state.svelte';
 	const store = getProductStore();
 	let loaded = $state(false);
 	const when = (us: number | null) => (us === null ? '--' : new Date(us / 1000).toLocaleString());
-	onMount(() => { void store.loadSessions().finally(() => (loaded = true)); });
+	onMount(() => { void Promise.all([store.loadSessions(), store.api.hardwareSessions().then((v) => { hardware = v; }).catch(() => { hardware = []; })]).finally(() => (loaded = true)); });
 </script>
 <svelte:head><title>History | NHM</title></svelte:head>
 <div class="eyebrow">NHM / HISTORY</div><h1>Research monitoring history</h1>
 {#if store.error}<p class="err" role="alert">{store.error}</p>{/if}
+<Panel eyebrow="00 / HARDWARE" title="Hardware telemetry sessions" note="OWNER-SCOPED · NO MODEL INFERENCE">
+	{#if hardware.length}<ul>{#each hardware as h}<li><a href={`/app/history/${encodeURIComponent(h.session_id)}`}>{h.session_id}</a> · {h.status} · {h.record_count} MongoDB readings · {new Date(h.started_at).toLocaleString()} · {h.source}</li>{/each}</ul>{:else}<p class="dim">No saved hardware sessions.</p>{/if}
+</Panel>
 <Panel eyebrow="01 / PERSISTED" title="Monitoring sessions" note="OWNER-SCOPED HISTORY">
 	{#if !loaded}<p role="status" class="dim">Loading persisted monitoring sessions…</p>
 	{:else if store.sessions.length === 0}<div class="empty"><strong>No monitoring sessions yet</strong><p class="dim">This is expected until a simulated wearable session is run and persisted.</p><a class="cta" href="/app/monitoring">RUN A MONITORING SESSION →</a></div>

@@ -17,9 +17,11 @@ from typing import Any
 
 from fastapi import FastAPI, Request, WebSocket
 from fastapi.responses import JSONResponse, Response
+from starlette.websockets import WebSocketDisconnect
 
 from api.product_app_v1_1 import WS_FORBIDDEN, WS_NOT_FOUND, WS_POLICY_VIOLATION, WS_UNAUTHENTICATED
 from product.api.errors import ProductError, ProductErrorCode
+from product.auth.websocket import authenticate_live_websocket
 from studio import STUDIO_ID, g1_cohort, v2_init
 from studio.constants import (
     CLAIM_BOUNDARY,
@@ -174,8 +176,10 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
 
     @app.websocket(STUDIO + "/runs/{run_id}/live")
     async def live(websocket: WebSocket, run_id: str) -> None:
-        await websocket.accept()
-        resolved = await identity_resolver(websocket)
+        try:
+            resolved = await authenticate_live_websocket(websocket, identity_resolver)
+        except WebSocketDisconnect:
+            return
         if resolved is None:
             await websocket.close(code=WS_UNAUTHENTICATED)
             return

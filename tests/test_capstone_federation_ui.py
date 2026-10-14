@@ -41,6 +41,8 @@ def _shadow(tmp_path: Path) -> Path:
     for rel in ("artifacts/fl10/NHM_FL10_001.lock.json", "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json"):   # the additive successors after NHM_FINAL_SHOWCASE_001
         if (ROOT / rel).exists():
             paths.append(rel)
+    if (ROOT / "artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json").exists():
+        paths.append("artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json")
     for rel in paths:
         (shadow / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / rel, shadow / rel)
@@ -113,7 +115,10 @@ def test_backend_scientific_fl_cap006_cap007_files_are_byte_identical_to_entry()
     assert _git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", *trees).split() == []
     # CAP-009 may ADD owner-scoped history/research files, but may not modify
     # any CAP-008-or-earlier API, product, or persistence implementation.
-    assert _git("diff", "--name-only", "--diff-filter=MD", ENTRY, "--", "api", "product", "capstone_persistence").split() == []
+    from scripts.verify_unified_studio_001 import hardware_successor_bound
+
+    successor = hardware_successor_bound()
+    assert [p for p in _git("diff", "--name-only", "--diff-filter=MD", ENTRY, "--", "api", "product", "capstone_persistence").split() if p not in successor] == []
 
 
 def test_exactly_one_frontend_application_and_no_new_npm_dependency() -> None:

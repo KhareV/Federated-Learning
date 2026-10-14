@@ -305,6 +305,60 @@ def test_a_clerk_app_rejects_bad_tokens_over_rest_and_websocket_without_any_fall
                 WebSocketDisconnect) as excinfo:
             ws.receive_json()
         assert excinfo.value.code == 4401
+        # Modern browser clients authenticate in the first frame because WebSocket cannot
+        # attach the same Bearer header used by REST. A verified user reaches resource lookup.
+        with client.websocket_connect(f"{BASE}/sessions/S/live",
+                                      subprotocols=["nhm-auth-v1"],
+                                      headers={"cookie": "__session=stale"}) as ws, pytest.raises(
+                WebSocketDisconnect) as excinfo:
+            assert ws.accepted_subprotocol == "nhm-auth-v1"
+            ws.send_json({"type": "authenticate", "token": _token()})
+            ws.receive_json()
+        assert excinfo.value.code == 4404
+        with client.websocket_connect(f"{BASE}/sessions/S/live",
+                                      subprotocols=["nhm-auth-v1"]) as ws, pytest.raises(
+                WebSocketDisconnect) as excinfo:
+            ws.send_json({"type": "authenticate", "token": "invalid"})
+            ws.receive_json()
+        assert excinfo.value.code == 4401
+
+
+def test_clerk_federation_websockets_accept_verified_first_frame_and_replay(tmp_path) -> None:
+    from starlette.websockets import WebSocketDisconnect
+
+    from api.product_app_observatory_v1 import create_product_app_observatory_v1
+    from capstone_persistence.store import CapstoneSqliteStore
+    from tests.capstone_federation_support import make_fed_app
+
+    resolver = make_identity_resolver(_provider())
+    federation_app, _ = make_fed_app(tmp_path / "federation", resolver=resolver)
+    with TestClient(federation_app) as client:
+        with client.websocket_connect(f"{BASE}/federation/runs/FEDRUN-MISSING/live",
+                                      subprotocols=["nhm-auth-v1"]) as ws, pytest.raises(
+                WebSocketDisconnect) as excinfo:
+            ws.send_json({"type": "authenticate", "token": _token()})
+            ws.receive_json()
+        assert excinfo.value.code == 4404
+
+    studio_app = create_product_app_observatory_v1(
+        store=CapstoneSqliteStore(tmp_path / "studio.sqlite3"),
+        identity_resolver=resolver, auth_description=_provider().describe(),
+        federation_artifact_root=tmp_path / "studio-federation",
+        candidate_root=tmp_path / "studio-candidates",
+        inference_base_url="http://127.0.0.1:8001", auto_resume=False)
+    with TestClient(studio_app) as client:
+        with client.websocket_connect(f"{BASE}/studio/runs/recorded-A/live",
+                                      subprotocols=["nhm-auth-v1"]) as ws:
+            assert ws.accepted_subprotocol == "nhm-auth-v1"
+            ws.send_json({"type": "authenticate", "token": _token()})
+            first = ws.receive_json()
+            assert first["sequence_index"] == 0 and first["run_id"] == "recorded-A"
+        with client.websocket_connect(f"{BASE}/studio/runs/recorded-A/live",
+                                      subprotocols=["nhm-auth-v1"]) as ws, pytest.raises(
+                WebSocketDisconnect) as excinfo:
+            ws.send_json({"type": "authenticate", "token": "invalid"})
+            ws.receive_json()
+        assert excinfo.value.code == 4401
 
 
 # ---- identity never reaches the scientific stack -----------------------------------------------

@@ -19,7 +19,7 @@ STUDIO = ROOT / "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001
 def accepted_successor(historical_path: Path = FL10) -> dict[str, Any] | None:
     if historical_path.resolve() != FL10.resolve() or not STUDIO.exists():
         return None
-    link = successor_chain.LINKS[-1]
+    link = next(link for link in successor_chain.LINKS if link.lock_id == "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001")
     if link.lock_id != "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001":
         raise RuntimeError("STUDIO_SUCCESSOR_NOT_REGISTERED_IN_THE_CHAIN")
     return successor_chain.validate_link(link, ROOT)

@@ -9,7 +9,7 @@ describe('UI-ENH-003 final presentation boundaries', () => {
 	it('device keeps the simulated-only and physical-hardware boundary visible', () => {
 		const text = route('device');
 		expect(text).toContain('SIMULATED ONLY');
-		expect(text).toContain('PHYSICAL HARDWARE: NOT CONNECTED / NOT IMPLEMENTED');
+		expect(text).toContain('Physical telemetry uses the Monitor source selector');
 		expect(text).toContain('CONTINUE TO MONITORING');
 	});
 	it('history preserves the table while offering full-fact mobile cards', () => {

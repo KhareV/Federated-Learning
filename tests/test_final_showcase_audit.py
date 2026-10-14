@@ -128,12 +128,41 @@ def test_new_amendments_are_pure_successor_compatibility_with_continuous_digests
 
     new = _new_amendments()
     studio = [path for path in new if json.loads(path.read_text()).get("amendment_id", "").startswith("NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001")]
-    assert len(new) - len(studio) == 8, new  # six accepted predecessors + two pure FL10 successor-compatibility amendments; the Studio's own pure compatibility amendments are checked by the same loop below
+    hardware = [path for path in new if json.loads(path.read_text()).get("amendment_id", "").startswith("NHM_HARDWARE_MONGO_MONITOR_001")]
+    families = {
+        "CAPSTONE_AUTH_PERSISTENCE_PROTOCOL_V1", "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1",
+        "CAPSTONE_FEDERATION_PROTOCOL_V1", "CAPSTONE_FEDERATION_UX_PROTOCOL_V1",
+        "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1", "CAPSTONE_LOCAL_TRAINING_PROTOCOL_V1",
+        "CAPSTONE_PRODUCT_MONITORING_PROTOCOL_V1",
+    }
+    expected_hardware = {f"{stem}.amendment_9_999_001.json" for stem in families} | {
+        f"{stem}.amendment_9_999_002.json" for stem in (
+            "CAPSTONE_FRONTEND_PRODUCT_PROTOCOL_V1", "CAPSTONE_FEDERATION_PROTOCOL_V1",
+            "CAPSTONE_FEDERATION_UX_PROTOCOL_V1", "CAPSTONE_FACULTY_DEMO_PROTOCOL_V1",
+        )
+    }
+    assert {path.name for path in hardware} == expected_hardware
+    # Eight pre-existing amendments plus the narrow CLERK_LIVE_001 transport
+    # successor added by the hardware-monitor integration.
+    assert len(new) - len(studio) - len(hardware) == 9, new
+    from scripts.verify_unified_studio_001 import hardware_successor_bound
+    from scripts.successor_chain import tip_frontend_map
+
+    hardware_bound = hardware_successor_bound()
+    frontend_bound = tip_frontend_map(vf.ROOT) or {}
+    hardware_extra = {
+        ".env.example", "api/product_app_v1_1.py", "api/product_app_v1_2.py",
+        "tests/test_capstone_auth.py", "tests/test_capstone_monitoring_websocket.py",
+        "tests/test_capstone_frontend.py", "tests/test_capstone_federation_isolation.py",
+        "tests/test_capstone_federation_ui.py", "tests/test_capstone_full_demo.py",
+    }
     for path in new:
         doc = json.loads(path.read_text())
         assert doc["scope"] == "SUCCESSOR_COMPATIBILITY_ONLY" and doc["result_evidence_committed_with_amendment"] is False and doc["made_after_method_freeze"] is True
         for rel, digests in doc["files"].items():
-            assert authorised(rel), rel                                   # frontend / successor-aware verifiers / accounting tests / route policy only
+            assert authorised(rel) or (path in hardware and rel in hardware_extra), rel
+            if path in hardware:
+                assert (frontend_bound if rel.startswith("frontend/") else hardware_bound)[rel] == digests["new_sha256"], rel
             assert not rel.startswith(("reports/", "checkpoints/", "models/", "federated/", "simulation/", "product/federation/", "product/monitoring/", "product/models/"))
             assert digests["old_sha256"] != digests["new_sha256"]
     # the LAST amendment per (lock, file) must name the digest of the file as it is now (chain ends at the present bytes)
@@ -146,4 +175,7 @@ def test_new_amendments_are_pure_successor_compatibility_with_continuous_digests
     for path in new:
         stem = path.name.split(".amendment_")[0]
         for rel in json.loads(path.read_text())["files"]:
-            assert last[(stem, rel)] == sha(Path(rel)), (stem, rel)
+            current = sha(Path(rel))
+            assert last[(stem, rel)] == current or (
+                (frontend_bound if rel.startswith("frontend/") else hardware_bound).get(rel) == current
+            ), (stem, rel)

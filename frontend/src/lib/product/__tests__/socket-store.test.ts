@@ -40,6 +40,29 @@ describe('LiveSocket bounded reconnect policy', () => {
 		FakeSocket.reset(); s.connect(); FakeSocket.last.drop(4403); s.reconnect();
 		expect(FakeSocket.instances).toHaveLength(2);
 	});
+	it('sends a fresh Clerk token in the first frame on every connection, never in the URL', async () => {
+		const outbound: string[] = [];
+		let tokenReads = 0;
+		const socket = new LiveSocket({
+			url: 'ws://localhost:5173/product/v1/sessions/S/live',
+			getToken: async () => `fresh-${++tokenReads}`,
+			factory: (url) => {
+				const fake = new FakeSocket(url);
+				fake.send = (data) => outbound.push(data as string);
+				return fake;
+			},
+			handlers: { onReset: () => {}, onMessage: () => {}, onStatus: () => {} }
+		});
+		socket.connect();
+		FakeSocket.last.open();
+		await vi.waitFor(() => expect(outbound).toHaveLength(1));
+		expect(JSON.parse(outbound[0])).toEqual({ type: 'authenticate', token: 'fresh-1' });
+		expect(FakeSocket.last.url).not.toContain('fresh-1');
+		socket.reconnect();
+		FakeSocket.last.open();
+		await vi.waitFor(() => expect(outbound).toHaveLength(2));
+		expect(JSON.parse(outbound[1]).token).toBe('fresh-2');
+	});
 });
 
 function makeStore(backend = fakeBackend()) {

@@ -139,17 +139,25 @@ def verify_lock(path: Path = LOCK_PATH) -> dict[str, Any]:
         raise ValueError("FL10_LOCK_IDENTITY_OR_EVIDENCE_MISMATCH")
     from scripts.freeze_observatory_v1 import frontend_files
     from scripts.studio_successor_compat import accepted_successor as studio_successor
+    from scripts.successor_chain import tip_frontend_map
+    from scripts.verify_unified_studio_001 import hardware_successor_bound
 
     studio = studio_successor(path)         # None unless this is the canonical lock and a valid additive Studio successor exists
+    later = hardware_successor_bound() if path.resolve() == LOCK_PATH.resolve() else {}
+    tip = tip_frontend_map(ROOT) if later else None
     predecessor = json.loads((ROOT / PREDECESSOR).read_text())
     repins = sorted(relative for relative, digest in predecessor["bound_files"].items()
                     if (ROOT / relative).is_file() and sha(ROOT / relative) != digest)
     expected_repins = set(lock["repins_predecessor_files"])
     if studio:    # files of the final-showcase lock that the Studio successor (and only it) re-pinned again
         expected_repins |= {relative for relative in studio["repins_predecessor_files"] if relative in predecessor["bound_files"]}
+    if later and tip:
+        expected_repins |= {relative for relative, digest in predecessor["bound_files"].items()
+                           if (ROOT / relative).is_file() and sha(ROOT / relative) != digest
+                           and (relative in later or tip.get(relative) == sha(ROOT / relative))}
     if sorted(expected_repins) != repins:
         raise ValueError("FL10_PREDECESSOR_REPIN_SET_MISMATCH")
-    expected_frontend = studio["frontend_files"] if studio else lock["frontend_files"]
+    expected_frontend = tip or (studio["frontend_files"] if studio else lock["frontend_files"])
     if set(expected_frontend) != set(frontend_files()) or any(
         sha(ROOT / relative) != digest
         for relative, digest in expected_frontend.items()
@@ -167,6 +175,10 @@ def verify_lock(path: Path = LOCK_PATH) -> dict[str, Any]:
         accepted = {expected}
         if studio and relative in studio["repins_predecessor_files"]:
             accepted.add(studio["bound_files"][relative])
+        if relative in later:
+            accepted.add(later[relative])
+        if tip and relative in tip:
+            accepted.add(tip[relative])
         if not target.is_file() or sha(target) not in accepted:
             raise ValueError(f"FL10_LOCK_BOUND_FILE_TAMPER:{relative}")
     return {"status": "PASS", "bound_files": len(lock["bound_files"]),
