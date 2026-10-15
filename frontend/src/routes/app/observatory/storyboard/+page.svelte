@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ReadMore from '$lib/components/ui/ReadMore.svelte';
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onDestroy, onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -58,7 +59,7 @@
 <section class="card" aria-label="Live-monitored SITE_00" data-testid="live-link">
 	<span class="lane lC">C · OPT-IN LIVE-MONITORED SITE_00</span>
 	<h2>Live-monitored participant</h2>
-	<p>Opt-in mode: a new simulated monitoring session streams real records through the monitoring runtime (real inference); the windows it actually emitted become SITE_00's training buffer, combined with the seven existing synthetic peers through the original coordinator. The default product federation is unchanged. {shown?.link_label ?? ''}</p>
+	<ReadMore label="How this opt-in mode works"><p>Opt-in mode: a new simulated monitoring session streams real records through the monitoring runtime (real inference); the windows it actually emitted become SITE_00's training buffer, combined with the seven existing synthetic peers through the original coordinator. The default product federation is unchanged. {shown?.link_label ?? ''}</p></ReadMore>
 	<button disabled={running} onclick={() => void startLive()}>{running ? 'Running…' : 'Start live-monitored SITE_00 run'}</button>
 	{#if liveError}<p role="alert" class="err">{liveError}</p>{/if}
 	{#if shown}

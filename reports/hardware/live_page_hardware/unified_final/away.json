@@ -1,0 +1,175 @@
+{
+  "mode": "away",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-AWAY-1792093515968",
+  "init_options": [
+    {
+      "value": "FRESH_SEEDED",
+      "label": "Fresh initialisation (seeded, untrained)",
+      "disabled": false
+    },
+    {
+      "value": "WARM_START",
+      "label": "Pretrained: warm start from an earlier recorded-hardware run",
+      "disabled": false
+    },
+    {
+      "value": "MODEL_V2_FINAL",
+      "label": "Pretrained V2 (MODEL_V2_FINAL) — not applicable",
+      "disabled": true
+    }
+  ],
+  "warm_source_run": "3-round recorded-hardware run — warm start · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+  "warm_result": "{\"run_id\":\"HDFLRUN-6A06875CD52F\",\"status_line\":\"COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 197 events\",\"banner\":\"ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED\",\"chips\":[\"Round 3 of 3\",\"FedAvg\",\"8 logical clients · your recorded windows\",\"one demonstration machine\",\"stream: CLOSED_NORMAL\"],\"client_cards\":8,\"card_tags\":8,\"hw_participation\":\"YOUR RECORDED DATA IN THIS RUN 48 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and ass\",\"hw_total_windows\":\"48\",\"hw_raw_sent\":\"0\",\"metric_auprc\":\"AUPRC0.465512\",\"metric_accuracy\":\"Accuracy0.454545\",\"metric_bce\":\"BCE0.737649\",\"metric_status\":\"COMPLETED\",\"evaluated_graph_points\":23,\"figure_avail\":[\"PARTIAL\",\"PARTIAL\",\"PARTIAL\",\"PENDING\",\"AVAILABLE\",\"PENDING\"],\"final_state\":\"Latest committed global state: 9a86631a…51a8copy\",\"accepted_counter\":\"24/24\",\"alerts\":[],\"run_label_text\":\"3-round recorded-hardware run — warm start · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST\",\"secagg\":\"ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED\",\"init_options\":[{\"value\":\"FRESH_SEEDED\",\"label\":\"Fresh initialisation (seeded, untrained)\",\"disabled\":false},{\"value\":\"WARM_START\",\"label\":\"Pretrained: warm start from an earlier recorded-hardware run\",\"disabled\":false},{\"value\":\"MODEL_V2_FINAL\",\"label\":\"Pretrained V2 (MODEL_V2_FINAL) — not applicable\",\"disabled\":true}],\"v2_note\":\"Pretrained V2 is not offered here: V2 is a 250 Hz ECG-window network; the hardware demo model is a tabular classifier over recorded-window features, so V2 weights cannot be loaded into it and no transfer is claimed.\"}",
+  "v2_note": "Pretrained V2 is not offered here: V2 is a 250 Hz ECG-window network; the hardware demo model is a tabular classifier over recorded-window features, so V2 weights cannot be loaded into it and no transfer is claimed.",
+  "session_id": "HW-81e2c49e1fce431c932cb4b7cb5d6f0c",
+  "session_id_after_return": "HW-81e2c49e1fce431c932cb4b7cb5d6f0c",
+  "away_seconds": 10,
+  "left_at_ms": 1792093520361,
+  "returned_at_ms": 1792093530363,
+  "before_leave": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 51,
+    "bpm": "72",
+    "spo2": "97%",
+    "points": 51,
+    "paths": 1,
+    "latest_id": "6ad12d503bd7c94198260a56",
+    "latest_ecg": 2158,
+    "latest_x": 1000,
+    "latest_y": 90.95238095238095,
+    "expected_y": 90.95238095238095
+  },
+  "history_shows_active_while_away": true,
+  "start_button_enabled_after_return": false,
+  "just_returned": {
+    "state": "STALE DATA",
+    "count": 51,
+    "bpm": "72",
+    "spo2": "97%",
+    "points": 51,
+    "paths": 1,
+    "latest_id": "6ad12d503bd7c94198260a56",
+    "latest_ecg": 2158,
+    "latest_x": 1000,
+    "latest_y": 90.95238095238095,
+    "expected_y": 90.95238095238095
+  },
+  "after_catch_up": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 332,
+    "bpm": "70",
+    "spo2": "96%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad12d603bd7c94198260b6f",
+    "latest_ecg": 2019,
+    "latest_x": 1000,
+    "latest_y": 96.04395604395604,
+    "expected_y": 96.04395604395604
+  },
+  "before_stop": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 1008,
+    "bpm": "68",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad12d883bd7c94198260e13",
+    "latest_ecg": 2018,
+    "latest_x": 1000,
+    "latest_y": 96.08058608058607,
+    "expected_y": 96.08058608058607
+  },
+  "stopped": {
+    "state": "SESSION STOPPED",
+    "count": 1008,
+    "bpm": "68",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad12d883bd7c94198260e13",
+    "latest_ecg": 2018,
+    "latest_x": 1000,
+    "latest_y": 96.08058608058607,
+    "expected_y": 96.08058608058607
+  },
+  "stopped_stable": {
+    "state": "SESSION STOPPED",
+    "count": 1008,
+    "bpm": "68",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad12d883bd7c94198260e13",
+    "latest_ecg": 2018,
+    "latest_x": 1000,
+    "latest_y": 96.08058608058607,
+    "expected_y": 96.08058608058607
+  },
+  "lifecycle_note_visible": true,
+  "history_text_excerpt": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nObservatory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED MODEL / HARDWARE TELEMETRY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_3KhjxqrP8WVKzjFI4SFOX4J8uIy\nSign out\n\nHISTORY / SESSION EVIDENCE\n\nSession evidence\n01 / HARDWARE TELEMETRY\nHW-81e2c49e1fce431c932cb4b7cb5d6f0c\nSTOPPED\n\nESP32 via Render/MongoDB (unverified device provenance) · records_*\n\nStarted 16/10/2026, 01:15:16 · Stopped 16/10/2026, 01:16:19 · 1008 actual accepted records\n\nStored trace: last 2000 readings maximum. Timestamp is server ingestion time. This session has no model inference or clinical classification.\n\n1008 saved points · exact ADC values · no interpolation or resampling.\n\nREADINGS\n1008\nSTORED\n1008\nECG RANGE\n1857–2768\nDEVICE BPM\n69.4\n\nUse this session in a federation run →\n\nShow stored readings (1008; first and last 25 listed)",
+  "demo_fl": {
+    "fedavg": {
+      "run_id": "HDFLRUN-636B9D5FB271",
+      "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 197 events",
+      "banner": "ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED",
+      "chips": [
+        "Round 3 of 3",
+        "FedAvg",
+        "8 logical clients · your recorded windows",
+        "one demonstration machine",
+        "stream: CLOSED_NORMAL"
+      ],
+      "client_cards": 8,
+      "card_tags": 8,
+      "hw_participation": "YOUR RECORDED DATA IN THIS RUN 48 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and ass",
+      "hw_total_windows": "48",
+      "hw_raw_sent": "0",
+      "metric_auprc": "AUPRC0.465512",
+      "metric_accuracy": "Accuracy0.454545",
+      "metric_bce": "BCE0.732584",
+      "metric_status": "COMPLETED",
+      "evaluated_graph_points": 23,
+      "figure_avail": [
+        "PARTIAL",
+        "PARTIAL",
+        "PARTIAL",
+        "PENDING",
+        "AVAILABLE",
+        "PENDING"
+      ],
+      "final_state": "Latest committed global state: 350bc0f4…2be5copy",
+      "accepted_counter": "24/24",
+      "alerts": [],
+      "run_label_text": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+      "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+      "init_options": [
+        {
+          "value": "FRESH_SEEDED",
+          "label": "Fresh initialisation (seeded, untrained)",
+          "disabled": false
+        },
+        {
+          "value": "WARM_START",
+          "label": "Pretrained: warm start from an earlier recorded-hardware run",
+          "disabled": false
+        },
+        {
+          "value": "MODEL_V2_FINAL",
+          "label": "Pretrained V2 (MODEL_V2_FINAL) — not applicable",
+          "disabled": true
+        }
+      ],
+      "v2_note": "Pretrained V2 is not offered here: V2 is a 250 Hz ECG-window network; the hardware demo model is a tabular classifier over recorded-window features, so V2 weights cannot be loaded into it and no transfer is claimed."
+    }
+  }
+}

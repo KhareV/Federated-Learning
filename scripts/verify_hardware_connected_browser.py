@@ -64,6 +64,8 @@ def main() -> int:
     parser.add_argument("--stamp", default=None)
     parser.add_argument("--latency-seconds", type=int, default=0, help="measure Atlas-ack -> browser-display latency for this many seconds")
     parser.add_argument("--away-seconds", type=int, default=0, help="lifecycle audit: leave the Monitor page for this many seconds while the emitter continues")
+    parser.add_argument("--run-switch", action="store_true", help="real-browser run-switch check: hardware <-> recorded synthetic evidence via the selector, back/forward and reload")
+    parser.add_argument("--ui-tour", action="store_true", help="seed a hardware session + run, then tour every route at desktop and phone width")
     parser.add_argument("--soak-seconds", type=int, default=0, help="run only the long browser soak for this many seconds")
     args = parser.parse_args()
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
@@ -107,6 +109,38 @@ def main() -> int:
                        "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA" if ws_mode else "VERIFIED_DIRECT_ATLAS_INJECTION"}
             (out / "browser_latency.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
             print(json.dumps(report))
+            return 0
+        if args.run_switch:
+            running, origin = stack(env, workspace, python)
+            try:
+                sw = drive("switch", origin, Path(args.users_file), out / "switch.json", out / "switch_shots", out / "publisher_logs", env)
+                tags.append(sw["tag"])
+            finally:
+                running.shutdown()
+            steps = sw["steps"]
+            def ok(step):
+                if step.get("expect_path"):
+                    return step.get("path") == step["expect_path"]
+                hw = step["expected_badge"] == "RECORDED HARDWARE"
+                names = [c or "" for c in step["clients"]]
+                right_ns = len(names) == 8 and all(n.startswith("RECORDED_DEMO_CLIENT_" if hw else "SIM_FL_SITE_") for n in names)
+                return (step["url_run"] == step["expected_run"] and step["selector"] == step["expected_run"] and step["badge"] == step["expected_badge"] and right_ns
+                        and step["hw_participation"] == hw and (not hw or (not step["owner_label"] and step["peer_labels"] == 0)) and step["replay_note"] == (not hw))
+            results = [{"step": st["step"], "pass": ok(st), "badge": st.get("badge"), "url_run": st.get("url_run"), "client_namespace": ((st.get("clients") or [""])[0] or "")[:14], "auprc": st.get("auprc")} for st in steps]
+            verdict = {"status": "PASS" if all(r["pass"] for r in results) else "FAIL", "mode": "run_switch", "steps": results,
+                       "hardware_vs_recorded_metric_differs": len({st.get("auprc") for st in steps if st.get("auprc")}) > 1,
+                       "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA" if ws_mode else "VERIFIED_DIRECT_ATLAS_INJECTION"}
+            (out / "run_switch_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
+        if args.ui_tour:
+            running, origin = stack(env, workspace, python)
+            try:
+                tour = drive("tour", origin, Path(args.users_file), out / "tour.json", out / "tour_shots", out / "publisher_logs", env)
+                tags.append(tour["tag"])
+            finally:
+                running.shutdown()
+            print(json.dumps({"status": "TOUR_DONE", "routes": tour["routes_toured"], "hardware_run": tour["hardware_run"]["run_id"]}))
             return 0
         if args.away_seconds:
             running, origin = stack(env, workspace, python)

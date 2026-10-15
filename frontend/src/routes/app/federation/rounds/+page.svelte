@@ -13,17 +13,17 @@
 	const fed = useFederation();
 	const product = getProductStore();
 	const ownerBound = $derived(ownerBoundClientId(product.authState.system?.auth_provider, fed.run?.run_type));
-	onMount(() => { void bootRun(fed, page.url.searchParams.get('run')); return () => fed.closeLive(); });
+	onMount(() => { void bootRun(fed, page.url.searchParams.get('run'), page.url.pathname); return () => fed.closeLive(); });
 	const studioRun = $derived(fed.run ? isStudioRunId(fed.run.run_id) : false);
 	const finalCandidate = $derived(fed.run?.candidate_ids[0] ?? null);
 </script>
 <svelte:head><title>Federation rounds | NHM</title></svelte:head>
 <div class="head"><div class="eyebrow">NHM / FEDERATION / ROUNDS</div><h1>Rounds</h1></div>
-<FederationBanner runType={fed.run?.run_type ?? null} />
-<RunSelector runs={fed.runs} selected={fed.run?.run_id ?? null} onSelect={(id) => chooseRun(fed, page.url.pathname, id)} />
+<FederationBanner runType={fed.run?.run_type ?? null} dataSource={fed.hardwareRun ? 'HARDWARE' : 'SYNTHETIC'} />
+<RunSelector runs={fed.runs} badges={fed.runBadges} selected={fed.run?.run_id ?? null} onSelect={(id) => chooseRun(fed, page.url.pathname, id)} />
 {#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
 {#if fed.run && studioRun}
-	<Panel eyebrow="10-ROUND / RECORDED RUN" title="Round-by-round state lives in the Federation Studio" note="SAME EVIDENCE, RUN-SCOPED">
+	<Panel eyebrow={`${fed.runBadges[fed.run.run_id] ?? 'RUN'} · ${fed.run.planned_rounds} ROUNDS`} title="Round-by-round state lives in the Federation Studio" note="SAME EVIDENCE, RUN-SCOPED">
 		<p class="dim" data-testid="rounds-studio-note">Round state, lineage digests, per-round client updates and evaluation of {fed.run.run_id} are shown, synchronized and exportable, in the <a href={`/app/federation/live?run=${encodeURIComponent(fed.run.run_id)}`}>Federation Studio</a>. This page lists the persisted rounds of 3-round product runs.</p>
 	</Panel>
 {:else if fed.run}

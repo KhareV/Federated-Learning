@@ -5,13 +5,12 @@
 	import HardwareDemoStarter from '$lib/components/product/studio/HardwareDemoStarter.svelte';
 	import type { FederationRunChoice } from '$lib/product/api';
 	import type { Initialisation, RunLength, SourceMode, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
-	let { disabled = false, liveBlocked = false, backendEnabled = true, capabilities = null, onStartThree, onStartTen }: {
-		disabled?: boolean; liveBlocked?: boolean; backendEnabled?: boolean; capabilities?: StudioCapabilities | null;
+	let { disabled = false, liveBlocked = false, backendEnabled = true, capabilities = null, dataSource = $bindable<'SYNTHETIC' | 'HARDWARE'>('SYNTHETIC'), preselectSession = null, onStartThree, onStartTen }: {
+		disabled?: boolean; liveBlocked?: boolean; backendEnabled?: boolean; capabilities?: StudioCapabilities | null; dataSource?: 'SYNTHETIC' | 'HARDWARE'; preselectSession?: string | null;
 		onStartThree: (choice: FederationRunChoice) => void; onStartTen: (choice: StudioRunChoice) => void } = $props();
 	let length = $state<RunLength>(3);              // default stays 3
 	let source = $state<SourceMode>('CANONICAL_SYNTHETIC');
 	// Training data: the synthetic cohort (default, unchanged) or readings recorded from the MongoDB hardware source.
-	let dataSource = $state<'SYNTHETIC' | 'HARDWARE'>('SYNTHETIC');
 	const hardwareOffered = $derived(capabilities?.hardware_demo?.available === true);
 	const hardware = $derived(dataSource === 'HARDWARE' && hardwareOffered);
 	let algorithm = $state<'FEDAVG' | 'FEDPROX'>('FEDAVG');
@@ -65,7 +64,7 @@
 		{/if}
 	</div>
 	{#if hardware}
-		<HardwareDemoStarter {capabilities} {disabled} rounds={length} />
+		<HardwareDemoStarter {capabilities} {disabled} rounds={length} preselect={preselectSession} />
 	{:else if original}
 		<RunConfigForm {disabled} {liveBlocked} {backendEnabled} onSubmit={onStartThree} />
 	{:else}
@@ -78,18 +77,21 @@
 			<p class="help" data-testid="cfg10-algorithm-note">{!fedproxAvailable ? `FedProx is disabled: ${fedproxUnavailable}.` : algorithm === 'FEDPROX' ? 'Genuine proximal local objective against the current round-start global weights; μ 0.1.' : 'Genuine local BCE optimization with weighted FedAvg.'}</p>
 			<label><span>Aggregation / protection mode</span><select bind:value={secaggMode} disabled={!shadowAvailable} data-testid="cfg10-mode"><option value="PLAIN">Plain aggregation</option><option value="SECAGG_SHADOW">Round-1 SecAgg+ shadow verification</option></select></label>
 			<p class="help" data-testid="cfg10-mode-note">{!shadowAvailable ? `SecAgg+ shadow is disabled: ${shadowUnavailable}; an unsupported request is never silently reinterpreted.` : secaggMode === 'SECAGG_SHADOW' ? 'The real protected shadow is compared with the authoritative plain aggregate in round 1. It does not make anonymity or DP claims.' : 'Authoritative sample-count-weighted plain aggregation.'}</p>
-			<dl class="fixed" aria-label="Fixed configuration"><div><dt>Clients</dt><dd>8</dd></div><div><dt>Rounds</dt><dd>{length}</dd></div><div><dt>Base</dt><dd>{initialisation}</dd></div><div><dt>Evaluation</dt><dd>per committed round</dd></div></dl>
+			<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Clients</dt><dd>8</dd></div><div><dt>Rounds</dt><dd>{length}</dd></div><div><dt>Base</dt><dd>{initialisation}</dd></div><div><dt>Evaluation</dt><dd>per committed round</dd></div></dl>
 			{#if liveBlocked}<p class="warn" role="status">ONE LIVE FEDERATION RUN AT A TIME IN THIS ONE-LAPTOP DEMONSTRATION.</p>{/if}
 			<button type="submit" disabled={blocked} data-testid="cfg10-submit">Create and start {length}-round live run</button>
 		</form>
 	{/if}
 </div>
 <style>
+	/* The original run form (RunConfigForm) names a block class="fixed", which Tailwind's global .fixed{position:fixed} pulled out of flow on top of the form. */
+	:global(.cfg dl.fixed) { position: static; }
+	.fixedcfg dd { overflow-wrap: break-word; word-break: normal; }
 	.rs { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; min-width: 0; } .sel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; max-width: 560px; } .cap { font: 11px 'JetBrains Mono', monospace; letter-spacing: .06em; color: #94a3b8; } .opts { display: flex; flex-wrap: wrap; gap: 8px; }
-	.opts button { display: grid; gap: 2px; text-align: left; background: #07101e; color: #e5f1f0; border: 1px solid rgba(148,163,184,.3); padding: 9px 14px; min-height: 48px; cursor: pointer; font: 13px Inter, sans-serif; } .opts button b { font: 600 13px 'Space Grotesk', sans-serif; letter-spacing: .04em; } .opts button small { font: 10px 'JetBrains Mono', monospace; letter-spacing: .12em; color: #71829a; } .opts button.on { border-color: #a78bfa; background: rgba(167,139,250,.1); } .opts button.on small { color: #c4b5fd; } .opts button:disabled { opacity: .45; cursor: not-allowed; } .opts button:focus-visible { outline: 2px solid #2bb8b0; outline-offset: 2px; }
-	.exp { border-collapse: collapse; font-size: 12px; width: 100%; } .exp th, .exp td { border: 1px solid rgba(148,163,184,.18); padding: 5px 9px; text-align: left; color: #cbd5e1; } .exp thead th { color: #71829a; font: 10px 'JetBrains Mono', monospace; letter-spacing: .06em; } .exp tr.cur td, .exp tr.cur th { background: rgba(167,139,250,.08); }
+	.opts button { display: grid; gap: 2px; text-align: left; background: #07101e; color: #e5f1f0; border: 1px solid rgba(148,163,184,.3); padding: 9px 14px; min-height: 48px; cursor: pointer; font: 13px Inter, sans-serif; } .opts button b { font: 600 13px 'Space Grotesk', sans-serif; letter-spacing: .04em; } .opts button small { font: 10.5px 'JetBrains Mono', monospace; letter-spacing: .12em; color: #71829a; } .opts button.on { border-color: #a78bfa; background: rgba(167,139,250,.1); } .opts button.on small { color: #c4b5fd; } .opts button:disabled { opacity: .45; cursor: not-allowed; } .opts button:focus-visible { outline: 2px solid #2bb8b0; outline-offset: 2px; }
+	.exp { border-collapse: collapse; font-size: 12px; width: 100%; } .exp th, .exp td { border: 1px solid rgba(148,163,184,.18); padding: 5px 9px; text-align: left; color: #cbd5e1; } .exp thead th { color: #71829a; font: 10.5px 'JetBrains Mono', monospace; letter-spacing: .06em; } .exp tr.cur td, .exp tr.cur th { background: rgba(167,139,250,.08); }
 	.cfg { display: grid; gap: 10px; max-width: 560px; min-width: 0; } label { display: flex; flex-direction: column; gap: 7px; min-width: 0; font: 11px 'JetBrains Mono', monospace; letter-spacing: .06em; color: #94a3b8; } select, .cfg button { max-width: 100%; box-sizing: border-box; font: 13px Inter, sans-serif; padding: 8px 10px; background: #07101e; color: #e5f1f0; border: 1px solid rgba(148,163,184,.3); } select:disabled { opacity: .7; } select:focus-visible, .cfg button:focus-visible { outline: 2px solid #2bb8b0; }
 	.cfg button { background: #2bb8b0; color: #030712; font-weight: 600; cursor: pointer; } .cfg button:disabled { opacity: .45; cursor: not-allowed; } .help, .dim { margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.5; } .warn { margin: 0; color: #fbbf24; font: 11px 'JetBrains Mono', monospace; }
-	.fixed { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; margin: 0; } .fixed div { border: 1px solid rgba(148,163,184,.16); padding: 6px 8px; } dt { color: #71829a; font: 9px 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; } dd { margin: 3px 0 0; font-size: 13px; color: #e5f1f0; }
+	.fixedcfg { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 6px; margin: 0; } .fixedcfg div { border: 1px solid rgba(148,163,184,.16); padding: 6px 8px; } dt { color: #71829a; font: 10.5px 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; } dd { margin: 3px 0 0; font-size: 13px; color: #e5f1f0; }
 	p, dd, small, label, button { overflow-wrap: anywhere; }
 </style>

@@ -8,13 +8,14 @@ import { FederationLiveModel, type FederationView } from './live-model';
 import type { CandidateModel, FederationOverview, FederationRound, FederationRun, FLClientIdentity, ModelRegistryView } from './types';
 import type { FederationRunChoice } from '../api';
 import type { StudioRun, StudioRunChoice } from '../studio/types';
+import { runContext } from './run-context';
 
 /** Ten-round Studio runs have their own typed journal and descriptor; every other run id keeps the original federation routes untouched. */
-export const isStudioRunId = (runId: string): boolean => runId.startsWith('FL10RUN-') || runId.startsWith('recorded-');
+export const isStudioRunId = (runId: string): boolean => runId.startsWith('FL10RUN-') || runId.startsWith('HDFLRUN-') || runId.startsWith('recorded-');
 
 /** Presentation adapter: the Studio descriptor in the shape the original Federation Studio components already consume. No field is invented. */
 export function studioRunToFederationRun(d: StudioRun): FederationRun {
-	return { run_id: d.run_id, run_type: d.run_type, base_model_id: d.base_model?.model_id ?? 'FL_INIT_V2', federation_protocol_id: d.engine === 'FL10_10R' ? 'NHM_FL10_SYNTHETIC_ENGINEERING_V1' : 'CAPSTONE_FEDERATION_PROTOCOL_V1',
+	return { run_id: d.run_id, run_type: d.run_type, base_model_id: (d.base_model?.model_id ?? 'FL_INIT_V2') as FederationRun['base_model_id'], federation_protocol_id: d.engine === 'FL10_10R' ? 'NHM_FL10_SYNTHETIC_ENGINEERING_V1' : d.engine === 'HARDWARE_DEMO' ? 'NHM_RECORDED_HARDWARE_DEMO_V1' : 'CAPSTONE_FEDERATION_PROTOCOL_V1',
 		algorithm: d.algorithm as FederationRun['algorithm'], client_ids: d.client_ids, planned_rounds: d.planned_rounds, current_round: d.current_round, started_at_us: null, completed_at_us: null, status: d.status,
 		secagg_mode: d.secagg_mode as FederationRun['secagg_mode'], candidate_ids: [], engineering_only: true };
 }
@@ -34,6 +35,12 @@ export class FederationStore {
 	clients = $state<FLClientIdentity[]>([]);
 	clientsPhase = $state<ClientsPhase>('IDLE');
 	runs = $state<FederationRun[]>([]);
+	/** True only when the selected run's validated descriptor is a recorded-hardware run (federation_protocol_id is set from the descriptor's engine). */
+	get hardwareRun(): boolean {
+		return this.run?.federation_protocol_id === 'NHM_RECORDED_HARDWARE_DEMO_V1';
+	}
+	/** Source badge per run id, derived from each validated run descriptor (never from an id prefix). */
+	runBadges = $state<Record<string, string>>({});
 	run = $state<FederationRun | null>(null);
 	rounds = $state<FederationRound[]>([]);
 	registry = $state<ModelRegistryView | null>(null);
@@ -103,11 +110,16 @@ export class FederationStore {
 		try {
 			const product = (await this.api.federationRuns()).slice().reverse();
 			let studio: FederationRun[] = [];
+			const badges: Record<string, string> = {};
 			try {
-				studio = (await this.api.studioRuns()).filter((r) => r.engine === 'FL10_10R').map(studioRunToFederationRun).reverse();
+				const raw = (await this.api.studioRuns()).filter((r) => r.engine === 'FL10_10R' || r.engine === 'HARDWARE_DEMO');
+				for (const r of raw) badges[r.run_id] = runContext(r, r.run_id).badge;
+				studio = raw.map(studioRunToFederationRun).reverse();
 			} catch {
 				studio = [];   // a backend without the Studio routes simply has no 10-round runs
 			}
+			for (const r of product) badges[r.run_id] = r.run_type === 'REPLAY' ? 'REPLAY' : 'SYNTHETIC COHORT';
+			this.runBadges = badges;
 			this.runs = [...studio, ...product];
 		} catch (cause) {
 			this.error = describe(cause);
@@ -122,18 +134,27 @@ export class FederationStore {
 		}
 	}
 
+	/** Increments on every explicit run selection: a late response of a previously selected run can never overwrite the current one. */
+	private selectSeq = 0;
+
 	async loadRun(runId: string): Promise<FederationRun | null> {
+		const token = this.selectSeq;
 		try {
 			if (isStudioRunId(runId)) {
-				this.run = studioRunToFederationRun(await this.api.studioRun(runId));
+				const run = studioRunToFederationRun(await this.api.studioRun(runId));
+				if (token !== this.selectSeq) return null;
+				this.run = run;
 				this.rounds = [];
 				return this.run;
 			}
-			this.run = await this.api.federationRun(runId);
-			this.rounds = await this.api.federationRounds(runId);
+			const run = await this.api.federationRun(runId);
+			const rounds = await this.api.federationRounds(runId);
+			if (token !== this.selectSeq) return null;
+			this.run = run;
+			this.rounds = rounds;
 			return this.run;
 		} catch (cause) {
-			this.error = describe(cause);
+			if (token === this.selectSeq) this.error = describe(cause);
 			return null;
 		}
 	}
@@ -146,6 +167,16 @@ export class FederationStore {
 			await this.loadRun(runId); // the live socket for this run already exists: refresh REST state only
 			return;
 		}
+		// RUN-SWITCH TRANSACTION: nothing of the previously selected run (descriptor, rounds, journal, counters) may remain visible while the new run loads.
+		this.selectSeq += 1;
+		this.closeLive();
+		this.run = null;
+		this.rounds = [];
+		this.model = new FederationLiveModel(runId);
+		this.eventLog = [];
+		this.roundViews.clear();
+		this.finishedRefreshed = false;
+		this.flush();
 		const run = await this.loadRun(runId);
 		if (run) this.openLive(run.run_id);
 	}
@@ -157,6 +188,7 @@ export class FederationStore {
 		this.replayNoSource = false;
 		try {
 			const created = await this.api.createFederationRun(choice);
+			this.selectSeq += 1;
 			this.run = created;
 			this.rounds = [];
 			this.openLive(created.run_id);
@@ -182,6 +214,7 @@ export class FederationStore {
 		this.replayNoSource = false;
 		try {
 			const created = await this.api.studioStartTenRound(choice);
+			this.selectSeq += 1;
 			this.run = studioRunToFederationRun(created);
 			this.rounds = [];
 			this.openLive(created.run_id);

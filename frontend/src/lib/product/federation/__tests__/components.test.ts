@@ -120,6 +120,14 @@ describe('live page', () => {
 		expect(screen.getByTestId('candidate-live').textContent).toContain('FALSE');
 		expect(text()).not.toMatch(/promoted|deployed to|make default|accuracy|AUPRC|F1\b/i);
 	});
+	it('a run that cannot be loaded is an explicit ERROR state with a next action, not the empty "pick a run" page', async () => {
+		backend.fed.runs = [];
+		(backend as unknown as { federationRun: () => Promise<never> }).federationRun = () => Promise.reject(new Error('run not found'));
+		render(LivePage);
+		await waitFor(() => expect(screen.getByTestId('run-load-error')).toBeTruthy());
+		expect(text()).not.toContain('Pick a run to watch');
+		expect(text()).toContain('This is an error, not an empty run');
+	});
 	it('REPLAY: persistent no-training badge, historical candidate wording, no new candidate claim', async () => {
 		await liveWith(eventStream({ runType: 'REPLAY' }), runFixture({ run_type: 'REPLAY' }));
 		await waitFor(() => expect(screen.getByTestId('historical-candidate')).toBeTruthy());

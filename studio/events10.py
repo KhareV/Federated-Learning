@@ -83,10 +83,12 @@ class Fl10EventTranslator:
                 self.em.round_status(round_id=r, round_state=RoundState.AGGREGATING, accepted_updates=len(accepted), expected_updates=CLIENT_COUNT)
                 if self.secagg_mode is AggregationMode.PLAIN or r != 1:
                     self.em.secagg_status(round_id=r, mode=AggregationMode.PLAIN, status=SecAggStatus.NOT_USED)
+                else:           # round-1 shadow: running until the runner reports SECAGG_SHADOW_VERIFIED
+                    self.em.secagg_status(round_id=1, mode=AggregationMode.SECAGG_SHADOW, status=SecAggStatus.SHADOW_RUNNING)
 
             self._post(accept)
         elif kind == "SECAGG_SHADOW_VERIFIED":
-            self._post(lambda: self.em.secagg_status(round_id=1, mode=AggregationMode.SECAGG_SHADOW, status=SecAggStatus.VERIFIED))
+            self._post(lambda: self.em.secagg_status(round_id=1, mode=AggregationMode.SECAGG_SHADOW, status=SecAggStatus.SHADOW_VERIFIED))
         elif kind == "ROUND_COMMITTED":
             digest = event["global_state_sha256"]
 

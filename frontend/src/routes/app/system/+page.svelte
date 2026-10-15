@@ -14,7 +14,7 @@
 		<Panel eyebrow="MODEL / CALIBRATION" title={s.model_id}><p>{s.calibration_id}</p></Panel>
 		<Panel eyebrow="PERSISTENCE" title={s.persistence_mode}><p>Product session and evidence storage.</p></Panel>
 		<Panel eyebrow="FEDERATION RUNTIME" title={s.federation_runtime}><p>Engineering development lane; no automatic candidate promotion.</p></Panel>
-		<Panel eyebrow="HARDWARE MODE" title={s.hardware_mode}><p>Physical hardware available: {s.physical_hardware_available ? 'YES' : 'NO'}</p></Panel>
+		<Panel eyebrow="HARDWARE MODE" title={s.hardware_mode}><p>Physical hardware available to the inference path: {s.physical_hardware_available ? 'YES' : 'NO'}</p><p class="sub">An optional MongoDB telemetry source (ESP32, device provenance unverified) can be recorded in Monitor → “Live hardware (MongoDB)”. It is telemetry only: no validated inference runs on it.</p></Panel>
 	</div>
 	<details class="raw"><summary>RAW SYSTEM RESPONSE · TECHNICAL EVIDENCE</summary><dl>{#each Object.entries(s) as [k, v]}<dt>{k}</dt><dd>{String(v)}</dd>{/each}</dl></details>
 {:else}<p role="status">System response is not available. Return to sign-in if the product backend is unavailable.</p>{/if}

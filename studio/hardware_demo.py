@@ -12,6 +12,7 @@ import json
 import math
 import secrets
 import threading
+import time
 from collections import OrderedDict
 from datetime import UTC, datetime
 from pathlib import Path
@@ -168,11 +169,14 @@ def _local_train(global_state: dict[str, np.ndarray], x: np.ndarray, y: np.ndarr
         losses.append(float(loss.detach()))
         proximal.append(float(penalty.detach()))
     local = _state(model)
+    delta = math.sqrt(sum(float(np.sum((local[k].astype(np.float64) - global_state[k].astype(np.float64)) ** 2)) for k in local))
     return local, {
         "examples": len(y), "optimizer_steps": LOCAL_EPOCHS, "mean_loss": float(np.mean(losses)),
         "final_loss": losses[-1], "final_proximal_penalty": proximal[-1],
         "gradient_norm": gradient_norms[-1], "state_sha256": _state_digest(local),
         "weights_changed": _state_digest(local) != _state_digest(global_state),
+        "step_losses": losses, "step_gradient_norms": gradient_norms, "local_update_l2": delta,
+        "payload_bytes": int(sum(np.asarray(v).nbytes for v in local.values())),
     }
 
 
@@ -271,6 +275,8 @@ class HardwareDemoService:
         if not run_id:
             raise ValueError("WARM_START requires warm_start_run_id")
         previous = self.get(owner, run_id)  # LookupError / PermissionError: owner-scoped
+        if previous.get("status") != "COMPLETED":
+            raise ValueError("warm start source run is not completed")
         if previous.get("model", {}).get("id") != MODEL_ID:
             raise ValueError("warm start source is not a HARDWARE_DEMO_MODEL_V1 run")
         checkpoint = self.root / run_id / "checkpoints" / f"R{int(previous['rounds_planned']):02d}.json"
@@ -285,8 +291,9 @@ class HardwareDemoService:
         return state, {"source_run_id": run_id, "source_round": int(previous["rounds_planned"]),
                        "source_state_sha256": _state_digest(state), "source_algorithm": previous.get("algorithm")}
 
-    def _run(self, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int,
-             initialisation: str = "FRESH_SEEDED", warm_start_run_id: str | None = None) -> dict[str, Any]:
+    def prepare(self, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int,
+                initialisation: str = "FRESH_SEEDED", warm_start_run_id: str | None = None) -> dict[str, Any]:
+        """Validate and build everything that can fail on the caller's thread (data, windows, split, warm start). Nothing is trained."""
         if initialisation not in ("FRESH_SEEDED", "WARM_START"):
             raise ValueError("unsupported starting model for HARDWARE_DEMO_MODEL_V1")
         warm_state, warm_info = (None, None)
@@ -298,8 +305,6 @@ class HardwareDemoService:
             raise ValueError("label_seed must be 0..2147483647")
         records = self._records(owner, session_ids)
         run_id = f"HDFLRUN-{secrets.token_hex(6).upper()}"
-        directory = self.root / run_id
-        directory.mkdir(parents=True)
         snapshot = {"version": DATASET_VERSION, "created_at": _iso_now(), "owner_scope": owner, "session_ids": session_ids, "record_count": len(records), "records": records}
         snapshot["snapshot_sha256"] = canonical_digest(snapshot)
         windows, excluded = build_windows(records)
@@ -335,13 +340,40 @@ class HardwareDemoService:
                 for w in sorted(windows, key=lambda item: (item["started_at"], item["window_id"]))
             ],
         }
+        return {"owner": owner, "run_id": run_id, "session_ids": session_ids, "rounds": rounds, "algorithm": algorithm, "secagg_mode": secagg_mode,
+                "label_seed": label_seed, "initialisation": initialisation, "warm_state": warm_state, "warm_info": warm_info, "records": records,
+                "snapshot": snapshot, "dataset": dataset, "train": train, "holdout": holdout, "clients": clients, "normalized": normalized,
+                "examples": {c: len(clients[c]) for c in CLIENT_IDS}}
+
+    def _run(self, owner: str, **config: Any) -> dict[str, Any]:
+        return self.train(self.prepare(owner, **config))
+
+    def train(self, ctx: dict[str, Any], progress: Any = None) -> dict[str, Any]:
+        """Execute the prepared run. ``progress`` receives the same event vocabulary as the FL10 runner (ROUND_OPENED, CLIENT_TRAINING_STARTED/FINISHED,
+        UPDATES_ACCEPTED, SECAGG_SHADOW_VERIFIED, ROUND_COMMITTED) at the moment each step really happened."""
+        emit = progress or (lambda _event: None)
+        owner, run_id, session_ids, rounds = ctx["owner"], ctx["run_id"], ctx["session_ids"], ctx["rounds"]
+        algorithm, secagg_mode, label_seed = ctx["algorithm"], ctx["secagg_mode"], ctx["label_seed"]
+        initialisation, warm_state, warm_info = ctx["initialisation"], ctx["warm_state"], ctx["warm_info"]
+        records, snapshot, dataset = ctx["records"], ctx["snapshot"], ctx["dataset"]
+        train, holdout, clients, normalized = ctx["train"], ctx["holdout"], ctx["clients"], ctx["normalized"]
+        directory = self.root / run_id
+        directory.mkdir(parents=True, exist_ok=True)
+        started_at = _iso_now()
         torch.use_deterministic_algorithms(True)
         model = _model(label_seed)
         global_state = warm_state if warm_state is not None else _state(model)
         progression = {"0": _state_digest(global_state)}
+        (directory / "checkpoints").mkdir(exist_ok=True)
+        (directory / "snapshot.json").write_text(json.dumps(snapshot, indent=2, sort_keys=True) + "\n")
+        (directory / "dataset.json").write_text(json.dumps(dataset, indent=2, sort_keys=True) + "\n")
+        (directory / "checkpoints" / "R00.json").write_text(json.dumps({k: v.tolist() for k, v in global_state.items()}, sort_keys=True) + "\n")
         round_rows: list[dict[str, Any]] = []
         secagg = None
         for round_id in range(1, rounds + 1):
+            round_t0 = time.perf_counter()
+            round_started = _iso_now()
+            emit({"event": "ROUND_OPENED", "round": round_id, "base_state_sha256": _state_digest(global_state)})
             local_states: dict[str, OrderedDict[str, np.ndarray]] = {}
             diagnostics: dict[str, dict[str, Any]] = {}
             examples: dict[str, int] = {}
@@ -349,10 +381,17 @@ class HardwareDemoService:
                 rows = clients[client]
                 x = np.asarray([normalized[w["window_id"]] for w in rows], dtype=np.float32)
                 y = np.asarray([w["label"] for w in rows], dtype=np.int64)
+                emit({"event": "CLIENT_TRAINING_STARTED", "round": round_id, "client_id": client})
+                t0 = time.perf_counter()
                 local, diag = _local_train(global_state, x, y, algorithm=algorithm, seed=label_seed + round_id * 100 + client_index)
+                diag["duration_seconds"] = time.perf_counter() - t0
                 local_states[client], diagnostics[client], examples[client] = local, diag, len(rows)
+                emit({"event": "CLIENT_TRAINING_FINISHED", "round": round_id, "client_id": client, "mean_loss": diag["mean_loss"], "examples": len(rows), "update_sha256": diag["state_sha256"]})
+            emit({"event": "UPDATES_ACCEPTED", "round": round_id, "accepted_clients": list(CLIENT_IDS), "accepted_updates": len(CLIENT_IDS)})
             if round_id == 1 and secagg_mode == "SECAGG_SHADOW":
                 secagg = run_shadow({c: [np.asarray(v) for v in local_states[c].values()] for c in CLIENT_IDS}, examples)
+                if secagg.get("status") == "PASS":
+                    emit({"event": "SECAGG_SHADOW_VERIFIED", "round": 1})
             committed = _aggregate(local_states, examples)
             if not all(np.isfinite(value).all() for value in committed.values()):
                 raise RuntimeError("nonfinite aggregate")
@@ -369,23 +408,29 @@ class HardwareDemoService:
                 "weighted_mean_training_loss": sum(diagnostics[c]["mean_loss"] * examples[c] for c in CLIENT_IDS) / sum(examples.values()),
                 "optimizer_steps": sum(diagnostics[c]["optimizer_steps"] for c in CLIENT_IDS),
                 "clients": diagnostics, "evaluation": _metrics(global_state, hx, hy),
+                "started_at": round_started, "finished_at": _iso_now(), "round_duration_seconds": time.perf_counter() - round_t0,
+                "update_payload_bytes_total": sum(diagnostics[c]["payload_bytes"] for c in CLIENT_IDS),
             })
-            (directory / "checkpoints").mkdir(exist_ok=True)
             (directory / "checkpoints" / f"R{round_id:02d}.json").write_text(json.dumps({k: v.tolist() for k, v in global_state.items()}, sort_keys=True) + "\n")
-        created = _iso_now()
-        result = {
-            "schema_version": "HARDWARE_DEMO_FL_RUN_V1", "run_id": run_id, "owner": owner,
-            "created_at": created, "completed_at": _iso_now(), "status": "COMPLETED",
-            "source_mode": "RECORDED_HARDWARE_DEMO", "source_session_ids": session_ids,
-            "source_record_count": len(records), "snapshot_sha256": snapshot["snapshot_sha256"],
-            "dataset": dataset, "model": {"id": MODEL_ID, "architecture": f"Linear({len(FEATURES)},1)", "released": False, "v2_initialisation": "NOT_APPLICABLE",
-                      "initialisation": initialisation, "warm_start": warm_info},
-            "algorithm": algorithm, "fedprox_mu": MU if algorithm == "FEDPROX" else None, "secagg_mode": secagg_mode,
-            "aggregation": "PLAIN", "secagg_shadow": secagg, "rounds_planned": rounds,
-            "rounds": round_rows, "state_progression": progression,
-            "claim_boundary": "TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
-        }
-        (directory / "snapshot.json").write_text(json.dumps(snapshot, indent=2, sort_keys=True) + "\n")
-        (directory / "dataset.json").write_text(json.dumps(dataset, indent=2, sort_keys=True) + "\n")
+            partial = self._result(ctx, status="RUNNING", started_at=started_at, completed_at=None, secagg=secagg, round_rows=round_rows, progression=progression)
+            (directory / "run.json").write_text(json.dumps(partial, indent=2, sort_keys=True) + "\n")
+            emit({"event": "ROUND_COMMITTED", "round": round_id, "global_state_sha256": after})
+        result = self._result(ctx, status="COMPLETED", started_at=started_at, completed_at=_iso_now(), secagg=secagg, round_rows=round_rows, progression=progression)
         (directory / "run.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
         return result
+
+    @staticmethod
+    def _result(ctx: dict[str, Any], *, status: str, started_at: str, completed_at: str | None, secagg: Any, round_rows: list[dict[str, Any]],
+                progression: dict[str, str], failure: dict[str, str] | None = None) -> dict[str, Any]:
+        return {
+            "schema_version": "HARDWARE_DEMO_FL_RUN_V1", "run_id": ctx["run_id"], "owner": ctx["owner"],
+            "created_at": started_at, "completed_at": completed_at, "status": status,
+            "source_mode": "RECORDED_HARDWARE_DEMO", "source_session_ids": ctx["session_ids"],
+            "source_record_count": len(ctx["records"]), "snapshot_sha256": ctx["snapshot"]["snapshot_sha256"],
+            "dataset": ctx["dataset"], "model": {"id": MODEL_ID, "architecture": f"Linear({len(FEATURES)},1)", "released": False, "v2_initialisation": "NOT_APPLICABLE",
+                                                 "initialisation": ctx["initialisation"], "warm_start": ctx["warm_info"]},
+            "algorithm": ctx["algorithm"], "fedprox_mu": MU if ctx["algorithm"] == "FEDPROX" else None, "secagg_mode": ctx["secagg_mode"],
+            "aggregation": "PLAIN", "secagg_shadow": secagg, "rounds_planned": ctx["rounds"],
+            "rounds": round_rows, "state_progression": progression, "failure": failure,
+            "claim_boundary": "TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
+        }

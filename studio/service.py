@@ -57,6 +57,8 @@ class StudioService:
         self.runner10 = StudioFl10Service(root=self.root, observer=self.observer, inference_factory=inference_factory,
                                           other_run_active=lambda: bool(other_run_active()) or federation.active_live_run(), finalize=self._finalize_10)
         self._exports: dict[str, dict[str, Any]] = {}
+        self.hardware: Any | None = None         # HardwareRunJobs (attached by register_studio): recorded-hardware runs share every read path below
+        self._hardware_bundles: dict[tuple[Any, ...], dict[str, Any]] = {}
         self._recorded_journals: dict[str, Any] = {}
         self._bundles: OrderedDict[tuple[Any, ...], dict[str, Any]] = OrderedDict()
         self._lock = threading.RLock()
@@ -120,12 +122,59 @@ class StudioService:
     def is_recorded(run_id: str) -> bool:
         return run_id in RECORDED
 
+    @staticmethod
+    def is_hardware(run_id: str) -> bool:
+        return run_id.startswith("HDFLRUN-")
+
+    def _hardware_job(self, run_id: str) -> Any:
+        job = self.hardware.jobs.get(run_id) if self.hardware is not None else None
+        if job is None:
+            raise ProductError(ProductErrorCode.NOT_FOUND, "run not found")
+        return job
+
+    def _hardware_bundle(self, run_id: str) -> dict[str, Any]:
+        import json
+
+        from studio.hardware_bundle import build_hardware_bundle
+
+        job = self._hardware_job(run_id)
+        directory = self.hardware.demo.root / run_id
+        key = (run_id, job.status, job.current_round)
+        with self._lock:
+            if key in self._hardware_bundles:
+                return self._hardware_bundles[key]
+        run = json.loads((directory / "run.json").read_text())
+        dataset = json.loads((directory / "dataset.json").read_text())
+        bundle = build_hardware_bundle(directory, run, dataset)
+        bundle["revision"] = len(run["rounds"]) + (1 if run["status"] == "COMPLETED" else 0)
+        with self._lock:
+            self._hardware_bundles = {k: v for k, v in self._hardware_bundles.items() if k[0] != run_id}
+            self._hardware_bundles[key] = bundle
+        return bundle
+
+    def _hardware_records(self, run_id: str) -> list[dict[str, Any]]:
+        b = self._hardware_bundle(run_id)
+        ev = b["evaluation"]
+        out = []
+        for key, block in sorted(ev["states"].items()):
+            p = block["pooled"]
+            out.append({"schema_version": "STUDIO_ROUND_EVALUATION_V1", "run_id": run_id, "run_length": b["run_length"], "round_id": int(key[1:]), "global_state_digest": ev["state_digests"][key],
+                        "candidate_id": None, "cohort_id": ev["cohort_id"], "cohort_use": ev["cohort_use"], "evaluation_protocol_id": b["protocol"]["evaluation_protocol_id"], "evaluation_status": "COMPLETED",
+                        "evaluation_queued_at": None, "evaluation_started_at": None, "evaluation_completed_at": None, "failure": None, "threshold": 0.5, "calibration": "NONE", "windows": p["windows"],
+                        "metric_result": {k: v for k, v in p.items() if k != "histogram"},
+                        "confusion_counts": {k: int(p[k]) for k in ("TP", "FP", "TN", "FN", "predicted_positives", "predicted_negatives")}})
+        return out
+
     def kind(self, run_id: str) -> str:
         if run_id in RECORDED:
             return "RECORDED"
+        if run_id.startswith("HDFLRUN-"):
+            return "HARDWARE_DEMO"
         return "FL10_10R" if run_id.startswith("FL10RUN-") else "PRODUCT"
 
     def owner_of(self, run_id: str) -> str | None:
+        if self.is_hardware(run_id):
+            return self.hardware.owner_of(run_id) if self.hardware is not None else None
         return self.runner10.owner_of(run_id) if run_id.startswith("FL10RUN-") else self.federation.owner_of(run_id)
 
     def authorize(self, user_id: str, run_id: str) -> None:
@@ -138,6 +187,8 @@ class StudioService:
             raise ProductError(ProductErrorCode.FORBIDDEN, "not the owner of this run")
 
     def journal_for(self, run_id: str) -> Any:
+        if self.is_hardware(run_id):
+            return self.hardware.journal_for(run_id) if self.hardware is not None else None
         if self.is_recorded(run_id):
             with self._lock:
                 if run_id not in self._recorded_journals:
@@ -149,7 +200,7 @@ class StudioService:
 
     # ---- descriptors ---------------------------------------------------------------------------------------------------
     def _eval_run_id(self, run_id: str) -> str:
-        if run_id.startswith("FL10RUN-") or self.is_recorded(run_id):
+        if run_id.startswith("FL10RUN-") or run_id.startswith("HDFLRUN-") or self.is_recorded(run_id):
             return run_id
         meta = self.federation.artifacts.read_run_meta(run_id) or {}
         return meta.get("replay_source_run_id") or run_id
@@ -166,6 +217,8 @@ class StudioService:
 
     def describe(self, user_id: str, run_id: str) -> dict[str, Any]:
         self.authorize(user_id, run_id)
+        if self.is_hardware(run_id):
+            return self.hardware.describe(self._hardware_job(run_id))
         if self.is_recorded(run_id):
             bundle = recorded_bundle(run_id)
             return {"run_id": run_id, "run_length": 10, "engine": "FL10_10R", "origin": "RECORDED", "run_type": "REPLAY", "algorithm": "FEDAVG", "secagg_mode": "PLAIN",
@@ -200,12 +253,16 @@ class StudioService:
     def list_runs(self, user_id: str) -> list[dict[str, Any]]:
         out = [self.describe(user_id, r.run_id) for r in self.federation.list_runs(user_id)]
         out += [self.describe(user_id, j.run_id) for j in self.runner10.list(user_id)]
+        if self.hardware is not None:
+            out += [self.describe(user_id, j.run_id) for j in self.hardware.list(user_id)]
         out += [self.describe(user_id, key) for key in RECORDED]
         return out
 
     # ---- data ----------------------------------------------------------------------------------------------------------
     def bundle(self, user_id: str, run_id: str) -> dict[str, Any]:
         self.authorize(user_id, run_id)
+        if self.is_hardware(run_id):
+            return self._hardware_bundle(run_id)
         if self.is_recorded(run_id):
             return recorded_bundle(run_id)
         d = self.describe(user_id, run_id)
@@ -231,7 +288,9 @@ class StudioService:
 
     def evaluation_summary(self, user_id: str, run_id: str) -> dict[str, Any]:
         d = self.describe(user_id, run_id)
-        if self.is_recorded(run_id):
+        if self.is_hardware(run_id):
+            records = self._hardware_records(run_id)
+        elif self.is_recorded(run_id):
             records = recorded_records(recorded_bundle(run_id))
         else:
             records = [r.light() for r in self.observer.records(d["evaluation"]["evaluation_run_id"])] if d["evaluation"]["available"] else []
@@ -239,15 +298,30 @@ class StudioService:
         from studio.specs import comparison_pair
 
         a, e = comparison_pair(n)
-        paired = recorded_bundle(run_id)["evaluation"]["paired"] if self.is_recorded(run_id) else self.observer.paired(d["evaluation"]["evaluation_run_id"])
+        paired = (None if self.is_hardware(run_id) else recorded_bundle(run_id)["evaluation"]["paired"] if self.is_recorded(run_id) else self.observer.paired(d["evaluation"]["evaluation_run_id"]))
+        labels = {"evaluation_protocol_id": EVAL_PROTOCOL_ID, "observer_id": OBSERVER_ID, "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "claim_boundary": CLAIM_BOUNDARY}
+        if self.is_hardware(run_id):       # recorded-hardware runs carry their own evaluation wording (never the synthetic-cohort constants)
+            from studio.hardware_bundle import CLAIM, COHORT_USE
+
+            b = self._hardware_bundle(run_id)
+            labels = {"evaluation_protocol_id": b["protocol"]["evaluation_protocol_id"], "observer_id": "NHM_HARDWARE_DEMO_EVALUATION_V1", "cohort_use": COHORT_USE, "cohort_use_detail": COHORT_USE, "claim_boundary": CLAIM}
         return {"run_id": run_id, "run_length": n, "evaluation": d["evaluation"], "records": records, "rounds_expected": list(range(n + 1)), "comparison": {"comparator_round": a, "endpoint_round": e, "paired_available": paired is not None},
-                "evaluation_protocol_id": EVAL_PROTOCOL_ID, "observer_id": OBSERVER_ID, "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "claim_boundary": CLAIM_BOUNDARY, "threshold": 0.5, "calibration": "NONE",
+                **labels, "threshold": 0.5, "calibration": "NONE",
                 "source_label": d["source_label"], "run_status": d["status"], "revision": d["evaluation"]["revision"]}
 
     def evaluation_round(self, user_id: str, run_id: str, round_id: int) -> dict[str, Any]:
         d = self.describe(user_id, run_id)
         if not 0 <= round_id <= d["run_length"]:
             raise ProductError(ProductErrorCode.NOT_FOUND, "round out of range for this run")
+        if self.is_hardware(run_id):
+            b = self._hardware_bundle(run_id)
+            key = f"R{round_id:02d}"
+            block = b["evaluation"]["states"].get(key)
+            if block is None:
+                return {"run_id": run_id, "round_id": round_id, "evaluation_status": "NOT_SUBMITTED", "reason": "this round has not been committed yet; nothing is invented"}
+            rec = next(r for r in self._hardware_records(run_id) if r["round_id"] == round_id)
+            return {**rec, "participant_metrics": block["participants"], "participant_summary": {k: block[k] for k in ("participant_macro_F1", "participants_defined", "participants_undefined")},
+                    "curves": block["curves"], "metric_result": block["pooled"]}
         if self.is_recorded(run_id):
             b = recorded_bundle(run_id)
             key = f"R{round_id:02d}"
@@ -271,6 +345,8 @@ class StudioService:
     # ---- generalisation lane ----------------------------------------------------------------------------------------------
     def _generalisation_run(self, user_id: str, run_id: str) -> tuple[dict[str, Any], str]:
         d = self.describe(user_id, run_id)
+        if self.is_hardware(run_id):
+            raise ProductError(ProductErrorCode.INVALID_STATE, "GENERALISATION_NOT_AVAILABLE: the unseen-cohort generalisation lane scores MODEL_V2_FINAL-compatible ECG windows; recorded-hardware runs have no unseen cohort and no V2 baseline")
         if self.is_recorded(run_id):
             raise ProductError(ProductErrorCode.INVALID_STATE, "GENERALISATION_NOT_AVAILABLE: recorded evidence runs keep their own recorded diagnostic evaluation; start a new run to score the unseen cohort")
         if not d["evaluation"]["available"]:
@@ -308,7 +384,7 @@ class StudioService:
         run = bundle["run"]
         return {"run_id": run_id, "run_length": bundle["run_length"], "engine": bundle["engine"], "origin": d["origin"], "source_label": bundle["source_label"], "mode": bundle["mode"], "source_mode": d["source_mode"],
                 "synthetic_label": bundle["synthetic_label"], "live_label": bundle["live_label"], "status": d["status"],
-                "run": {k: run.get(k) for k in ("status", "started_at", "finished_at", "total_seconds", "accepted_updates_total", "example_exposures_total", "unique_training_windows", "candidate", "git_commit", "settings", "federation_engine",
+                "run": {k: run.get(k) for k in ("status", "started_at", "finished_at", "total_seconds", "accepted_updates_total", "example_exposures_total", "unique_training_windows", "candidate", "git_commit", "settings", "algorithm", "secagg_mode", "federation_engine",
                                                 "prefix_equals_frozen_reference", "coordinator_identity", "rounds_committed", "failure")},
                 "protocol": {k: bundle["protocol"].get(k) for k in ("id", "evaluation_protocol_id", "sha256", "holdout_manifest_sha256", "interpretation_boundaries", "research_question", "primary_comparison")},
                 "evaluation": {k: bundle["evaluation"].get(k) for k in ("windows", "threshold", "calibration", "round_selection", "method_freeze_commit", "separation", "separation_source", "cohort_use", "cohort_use_detail", "comparator", "endpoint")}
@@ -324,7 +400,14 @@ class StudioService:
                 "batches": [r for r in bundle["batches"] if r["round"] == round_id], "state": bundle["state_progression"].get(str(round_id))}
 
     # ---- exports -------------------------------------------------------------------------------------------------------
+    def finalize_hardware(self, run_id: str, directory: Path) -> None:
+        """Figure/table exports of a completed recorded-hardware run (same exporter, no V2 evaluation artefacts)."""
+        bundle = self._hardware_bundle(run_id)
+        export_run(bundle, directory / "export")      # writes export_manifest.json itself
+
     def export_dir(self, run_id: str) -> Path:
+        if self.is_hardware(run_id):
+            return self.hardware.demo.root / run_id / "export"
         if self.is_recorded(run_id):
             return PUBLICATION / RECORDED[run_id][0]
         eval_id = self._eval_run_id(run_id)

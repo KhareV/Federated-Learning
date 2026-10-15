@@ -67,7 +67,16 @@
 				{#each hardwarePlot.paths as path}<path d={path} fill="none" stroke="#2bb8b0" stroke-width="2" vector-effect="non-scaling-stroke" />{/each}
 				{#each hardwarePlot.points as point}<circle cx={point.x} cy={point.y} r="1.8" fill="#2bb8b0" />{/each}
 			</svg><p>{hardwarePlot.points.length} saved points · exact ADC values · no interpolation or resampling.</p>{/if}
-			<ol class="events">{#each hardware.readings as r}<li><code>{r.id}</code> · {new Date(r.ingested_at).toLocaleString()} · ECG {r.ecg} · BPM {r.bpm ?? 'unavailable'} · SpO₂ {r.spo2 ?? 'unavailable'} (unverified)</li>{/each}</ol>
+			<dl class="hwfacts" data-testid="hardware-detail-facts">
+				<div><dt>Readings</dt><dd>{hardware.record_count}</dd></div>
+				<div><dt>Stored</dt><dd>{hardware.readings.length}{hardware.readings.length < hardware.record_count ? ' (newest kept)' : ''}</dd></div>
+				<div><dt>ECG range</dt><dd>{hardware.readings.length ? `${Math.min(...hardware.readings.map((r) => r.ecg))}–${Math.max(...hardware.readings.map((r) => r.ecg))}` : '--'}</dd></div>
+				<div><dt>Device BPM</dt><dd>{(() => { const v = hardware.readings.map((r) => r.bpm).filter((x): x is number => x != null && x > 0); return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : '--'; })()}</dd></div>
+			</dl>
+			{#if hardware.status !== 'ACTIVE' && hardware.record_count > 0}<p><a class="cta" href={`/app/federation?source=hardware&session=${encodeURIComponent(hardware.session_id)}`} data-testid="hardware-use-in-fl">Use this session in a federation run →</a></p>{/if}
+			<details class="readings" data-testid="hardware-readings-list"><summary>Show stored readings ({hardware.readings.length}; first and last 25 listed)</summary>
+				<ol class="events">{#each [...hardware.readings.slice(0, 25), ...(hardware.readings.length > 50 ? [null] : []), ...hardware.readings.slice(-25)] as r}{#if r === null}<li>… {hardware.readings.length - 50} more readings are kept in the saved session …</li>{:else}<li><code>{r.id}</code> · {new Date(r.ingested_at).toLocaleTimeString()} · ECG {r.ecg} · BPM {r.bpm ?? 'unavailable'} · SpO₂ {r.spo2 ?? 'unavailable'} (unverified)</li>{/if}{/each}</ol>
+			</details>
 		</Panel>
 	{:else if session}
 		<Panel eyebrow="01 / SESSION" title={session.session_id} note={session.state}>
@@ -127,4 +136,6 @@
 </div>
 <style>
 	.evidence { display:grid; gap:16px; min-width:0; max-width:100%; } .eyebrow{font:11px 'JetBrains Mono',monospace;color:#2bb8b0;letter-spacing:.12em} h1{font:500 clamp(26px,4vw,40px) 'Space Grotesk',sans-serif;margin:0} h2{font-size:15px;margin:20px 0 8px} p,li,dd{color:#a7b8c9;line-height:1.55;font-size:13px;overflow-wrap:anywhere} a{color:#2bb8b0}.error{color:#fecdd3}.notice{padding:12px;border:1px solid #fbbf24;color:#fbbf24}.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}.facts div{min-width:0}dt{font:10px 'JetBrains Mono',monospace;color:#71829a}dd{margin:4px 0 0}.events{max-height:500px;overflow:auto;padding-left:20px}.events li{padding:8px;border-bottom:1px solid var(--nhm-border)}.events details{margin-top:7px}.events summary{cursor:pointer;color:#2bb8b0;font:11px 'JetBrains Mono',monospace;letter-spacing:.06em}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px}.overview{border-left:3px solid #2bb8b0;padding-left:12px}.count{color:#9fe8e3;font:11px 'JetBrains Mono',monospace}select{margin:8px;padding:8px;background:#0f172a;color:#dce9e8;border:1px solid #64748b}select:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #fbbf24;outline-offset:3px}svg{display:block;width:100%;height:180px;background:#07101d;border:1px solid var(--nhm-border)}
+	.hwfacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 0; } .hwfacts div { border: 1px solid rgba(148,163,184,.16); padding: 8px 10px; } .hwfacts dt { color: #71829a; font: 10.5px 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; } .hwfacts dd { margin: 3px 0 0; font: 500 16px 'Space Grotesk', sans-serif; color: #e5f1f0; }
+	.cta { display: inline-block; padding: 9px 14px; border: 1px solid rgba(43,184,176,.6); color: #2bb8b0; text-decoration: none; font: 11px 'JetBrains Mono', monospace; letter-spacing: .08em; } .readings summary { cursor: pointer; color: #cbd5e1; font-size: 13px; padding: 6px 0; } .readings .events { max-height: 360px; overflow: auto; margin-top: 8px; }
 </style>

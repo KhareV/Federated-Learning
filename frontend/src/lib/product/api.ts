@@ -140,7 +140,7 @@ export interface ProductClient {
 	studioCapabilities(): Promise<StudioCapabilities>;
 	hardwareDemoSessions(): Promise<HardwareDemoSession[]>;
 	hardwareDemoRuns(): Promise<HardwareDemoRun[]>;
-	hardwareDemoStart(choice: HardwareDemoChoice): Promise<HardwareDemoRun>;
+	hardwareDemoStart(choice: HardwareDemoChoice): Promise<StudioRun>;
 	hardwareDemoRun(runId: string): Promise<HardwareDemoRun>;
 	studioRuns(): Promise<StudioRun[]>;
 	studioRun(runId: string): Promise<StudioRun>;
@@ -315,7 +315,7 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		studioCapabilities: async () => parseCapabilities(await call<unknown>('GET', '/studio/capabilities')),
 		hardwareDemoSessions: async () => parseHardwareDemoSessions(await call<unknown>('GET', '/studio/hardware-demo/sessions')),
 		hardwareDemoRuns: async () => (await call<unknown[]>('GET', '/studio/hardware-demo/runs')).map(parseHardwareDemoRun),
-		hardwareDemoStart: async (choice) => parseHardwareDemoRun(await call<unknown>('POST', '/studio/hardware-demo/runs', choice)),
+		hardwareDemoStart: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/hardware-demo/runs', choice)),
 		hardwareDemoRun: async (id) => parseHardwareDemoRun(await call<unknown>('GET', `/studio/hardware-demo/runs/${enc(id)}`)),
 		studioRuns: async () => parseStudioRuns(await call<unknown>('GET', '/studio/runs')),
 		studioRun: async (id) => parseStudioRun(await call<unknown>('GET', `/studio/runs/${enc(id)}`)),
@@ -376,6 +376,6 @@ export function liveSocketUrl(sessionId: string, location: { protocol: string; h
 export function federationSocketUrl(runId: string, location: { protocol: string; host: string }): string {
 	const scheme = location.protocol === 'https:' ? 'wss:' : 'ws:';
 	// 10-round Studio runs have their own typed event journal; every 3-round run keeps the original product route unchanged.
-	if (runId.startsWith('FL10RUN-') || runId.startsWith('recorded-')) return `${scheme}//${location.host}${PRODUCT_BASE}/studio/runs/${encodeURIComponent(runId)}/live`;
+	if (runId.startsWith('FL10RUN-') || runId.startsWith('HDFLRUN-') || runId.startsWith('recorded-')) return `${scheme}//${location.host}${PRODUCT_BASE}/studio/runs/${encodeURIComponent(runId)}/live`;
 	return `${scheme}//${location.host}${PRODUCT_BASE}/federation/runs/${encodeURIComponent(runId)}/live`;
 }

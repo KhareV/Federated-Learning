@@ -1,0 +1,22 @@
+{
+  "away_seconds": 10,
+  "checks": {
+    "count_equals_replica_inserts": true,
+    "missed_readings_captured": true,
+    "monitor_reattached_not_restarted": true,
+    "records_written_while_away": 170,
+    "retention_not_exceeded": true,
+    "same_session_after_return": true,
+    "session_active_while_away": true,
+    "stopped_count_stable": true
+  },
+  "count_after_catch_up": 332,
+  "count_before_leave": 51,
+  "count_final_stopped": 1008,
+  "count_just_returned": 51,
+  "demo_fl_completed": true,
+  "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "mode": "away_lifecycle",
+  "replica_inserts_total": 1008,
+  "status": "PASS"
+}

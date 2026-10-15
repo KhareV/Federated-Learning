@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ReadMore from '$lib/components/ui/ReadMore.svelte';
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -65,7 +66,7 @@
 	<ol class="flow" data-testid="architecture-flow"><li><b>Input</b><small>shape {arch.input_shape.join(' × ')}<br />per-window normalized ECG</small></li><li><b>Stem conv</b><small>{arch.channels} channels, stride 2</small></li>
 		{#each blocks as b (b.i)}<li><b>Residual block {b.i + 1}</b><small>kernel {arch.kernel_size}, dilation {b.d}</small></li>{/each}
 		<li><b>Global mean pool</b><small>{arch.pooling}</small></li><li><b>Dropout + linear</b><small>{arch.channels} → 1</small></li><li class="out"><b>Raw logit</b><small>shape {arch.output_shape.join(' × ')}</small></li></ol>
-	<p class="dim">Causal-structure facts from the implementation: receptive field {arch.receptive_field_samples.toLocaleString()} input samples; dilations {arch.dilations.join(', ')}. {arch.notes.join(' ')}</p>
+	<ReadMore label="Causal-structure facts from the implementation"><p class="dim">Receptive field {arch.receptive_field_samples.toLocaleString()} input samples; dilations {arch.dilations.join(', ')}. {arch.notes.join(' ')}</p></ReadMore>
 	<details><summary>TECHNICAL EVIDENCE · layer shapes and parameter counts</summary><div class="scroll"><table><thead><tr><th>Layer</th><th>Type</th><th>Parameters</th><th>Output shape (batch 1)</th></tr></thead><tbody>{#each arch.layers as l (l.name)}<tr><th scope="row">{l.name}</th><td>{l.type}</td><td>{l.parameters.toLocaleString()}</td><td>{l.output_shape.join(' × ')}</td></tr>{/each}</tbody></table></div></details></section>
 <section aria-label="Calibration"><h2>CAL_V2 · {cal.label}</h2>
 	<ol class="flow" data-testid="calibration-flow"><li><b>Raw logit</b><small>model output</small></li><li><b>Raw probability</b><small>{cal.semantics.raw}</small></li><li><b>÷ temperature {fmt(T, 6)}</b><small>{cal.semantics.calibrated}</small></li><li><b>Threshold ≥ {fmt(threshold, 6)}</b><small>fixed frozen policy binding</small></li></ol>
@@ -83,7 +84,7 @@
 
 <section aria-label="Activation inspection" data-testid="activation-inspection"><h2>Forward-activation inspection (opt-in, server-side)</h2>
 	<p class="tag">READ-ONLY FORWARD HOOKS · RELEASED CHECKPOINT · ONE SYNTHETIC WINDOW · NOT AN EXPLANATION METHOD</p>
-	<p class="dim">Runs the checksum-verified MODEL_V2_FINAL weights on a fresh isolated copy for the one synthetic scenario window you choose, with hooks that only read layer outputs. The logit with hooks must be bit-identical to the logit without them, otherwise nothing is shown. It is never applied to research recordings or federated candidates, and layer activations are not clinical explanations.</p>
+	<ReadMore label="How this inspection works"><p class="dim">Runs the checksum-verified MODEL_V2_FINAL weights on a fresh isolated copy for the one synthetic scenario window you choose, with hooks that only read layer outputs. The logit with hooks must be bit-identical to the logit without them, otherwise nothing is shown. It is never applied to research recordings or federated candidates, and layer activations are not clinical explanations.</p></ReadMore>
 	<div class="act-controls"><label>Scenario <input aria-label="Scenario id" bind:value={actScenario} /></label><label>Window index <input type="number" min="0" max="200" bind:value={actWindow} /></label><label>Layer (optional) <input aria-label="Layer name" placeholder="backbone.blocks.6.relu2" bind:value={actLayer} /></label><button onclick={inspectActivations} disabled={actLoading}>{actLoading ? 'Inspecting…' : 'Inspect activations'}</button></div>
 	{#if actError}<p role="alert" class="err">{actError}</p>{/if}
 	{#if actBody}<p data-testid="activation-parity">Parity: logit with hooks is bit-identical to the logit without hooks ✓ · hooks remaining after inspection: {actBody.parity.hooks_remaining_after_inspection} · window quality {actBody.window_quality} · raw logit {actBody.raw_logit.toFixed(4)} (raw probability {actBody.raw_probability.toFixed(6)})</p>

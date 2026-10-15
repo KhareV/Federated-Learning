@@ -4,6 +4,7 @@
 
 import { ProductApiError, type ProductClient } from '../api';
 import { getProductStore } from '../state.svelte';
+import { runContext } from '../federation/run-context';
 import type { GenCurves, GenParticipants, Generalisation, StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioTables } from './types';
 import { statusFor } from './metrics';
 
@@ -192,6 +193,8 @@ export class StudioStore {
 
 	/** The Generalisation lane never blocks the main refresh: its failure is shown in its own tab, not as a run error. Recorded evidence runs have no such lane. */
 	private async loadGeneralisation(id: string, token: number): Promise<void> {
+		const generalisation = runContext(this.run, id).capabilities.generalisation;   // the single source of truth for what this run can show
+		if (!generalisation.available && this.run?.origin !== 'RECORDED') { this.genNote = `${generalisation.reason ?? 'Not available for this run.'}`; return; }
 		if (this.run?.origin === 'RECORDED') { this.genNote = 'Recorded evidence runs keep their own recorded diagnostic evaluation; start a new run to score the unseen cohort.'; return; }
 		try {
 			const g = await this.api.studioGeneralisation(id);

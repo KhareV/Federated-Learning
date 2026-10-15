@@ -13,6 +13,7 @@
 <div class="head"><div class="eyebrow">NHM / FEDERATION / CLIENTS</div><h1>Logical local clients</h1></div>
 <FederationBanner />
 <p class="banner" role="note" data-testid="synthetic-banner">SYNTHETIC RESEARCH PARTITIONS — NOT HOSPITALS OR INSTITUTIONS.</p>
+<p class="dim" data-testid="clients-scope-note">This page lists the <b>synthetic-cohort</b> clients. A recorded-hardware run has its own eight logical clients (<code>RECORDED_DEMO_CLIENT_00…07</code>) built from your recorded windows; open one from <a href="/app/federation">Federation → Your federation runs</a>.</p>
 <Panel eyebrow="LOCALITY" title="What stays local">
 	<p class="dim">Each client keeps its local training examples inside its logical client buffer. The federation coordinator receives model updates and metadata rather than those local training examples.</p>
 	<p class="dim">All eight logical clients currently execute on one demonstration machine.</p>

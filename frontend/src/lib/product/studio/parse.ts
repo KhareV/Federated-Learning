@@ -1,5 +1,5 @@
 // Fail-closed parsers for the Studio REST payloads (no value is cast blindly; a malformed or foreign payload throws).
-import type { BaseModel, GenCohort, GenCurves, GenInterval, GenPair, GenParticipants, GenRecord, GenRound, Generalisation, HardwareDemoRun, HardwareDemoSession, Initialisation, StudioOverview, EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
+import type { BaseModel, BaseModelId, GenCohort, GenCurves, GenInterval, GenPair, GenParticipants, GenRecord, GenRound, Generalisation, HardwareDemoRun, HardwareDemoSession, Initialisation, StudioOverview, EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
 
 type Rec = Record<string, unknown>;
 export class StudioParseError extends Error {
@@ -22,6 +22,7 @@ const STATUSES = ['QUEUED', 'EVALUATING', 'COMPLETED', 'FAILED'] as const;
 const ROUND_STATUSES = [...STATUSES, 'NOT_SUBMITTED'] as const;
 const DIGEST = /^[0-9a-f]{64}$/;
 const INITS = ['FL_INIT_V2', 'MODEL_V2_FINAL'] as const;
+const BASE_MODELS = ['FL_INIT_V2', 'MODEL_V2_FINAL', 'HARDWARE_DEMO_MODEL_V1'] as const;
 
 function availability(raw: unknown): EvaluationAvailability {
 	const r = obj(raw, 'evaluation');
@@ -54,7 +55,7 @@ export function parseHardwareDemoRun(value: unknown): HardwareDemoRun {
 function baseModel(raw: unknown): BaseModel | null {
 	if (raw === null || raw === undefined) return null;
 	const b = obj(raw, 'base_model');
-	return { model_id: oneOf(b.model_id, INITS, 'base model') as Initialisation, label: str(b.label, 'base label'), state_sha256: strOrNull(b.state_sha256, 'state_sha256'), checkpoint_sha256: strOrNull(b.checkpoint_sha256, 'checkpoint_sha256'),
+	return { model_id: oneOf(b.model_id, BASE_MODELS, 'base model') as BaseModelId, initialisation: b.initialisation === 'WARM_START' || b.initialisation === 'FRESH_SEEDED' ? b.initialisation : null, label: str(b.label, 'base label'), state_sha256: strOrNull(b.state_sha256, 'state_sha256'), checkpoint_sha256: strOrNull(b.checkpoint_sha256, 'checkpoint_sha256'),
 		state_entries: numOrNull(b.state_entries, 'state_entries'), architecture_id: strOrNull(b.architecture_id, 'architecture_id'), training_target_of_checkpoint: strOrNull(b.training_target_of_checkpoint, 'target') };
 }
 
@@ -65,9 +66,9 @@ export function parseStudioRun(value: unknown): StudioRun {
 	const cand = r.candidate === null || r.candidate === undefined ? null : obj(r.candidate, 'candidate');
 	const fail = r.failure === null || r.failure === undefined ? null : obj(r.failure, 'failure');
 	if (cand && (cand.promoted !== false || cand.deployed !== false)) bad('CANDIDATE_MUST_NOT_BE_PROMOTED_OR_DEPLOYED');
-	return { run_id: str(r.run_id, 'run_id'), run_length: length as 3 | 10, engine: oneOf(r.engine, ['PRODUCT_3R', 'FL10_10R'] as const, 'engine'), origin: oneOf(r.origin, ['LIVE', 'REPLAY', 'RECORDED'] as const, 'origin'),
+	return { run_id: str(r.run_id, 'run_id'), run_length: length as 3 | 10, engine: oneOf(r.engine, ['PRODUCT_3R', 'FL10_10R', 'HARDWARE_DEMO'] as const, 'engine'), origin: oneOf(r.origin, ['LIVE', 'REPLAY', 'RECORDED'] as const, 'origin'),
 		run_type: oneOf(r.run_type, ['LIVE_RUN', 'REPLAY'] as const, 'run_type'), algorithm: str(r.algorithm, 'algorithm'), secagg_mode: str(r.secagg_mode, 'secagg_mode'),
-		source_mode: oneOf(r.source_mode, ['CANONICAL_SYNTHETIC', 'LIVE_MONITORED_SITE_00'] as const, 'source_mode'), status: oneOf(r.status, ['CREATED', 'RUNNING', 'COMPLETED', 'FAILED'] as const, 'status'), phase: str(r.phase, 'phase'),
+		source_mode: oneOf(r.source_mode, ['CANONICAL_SYNTHETIC', 'LIVE_MONITORED_SITE_00', 'RECORDED_HARDWARE'] as const, 'source_mode'), status: oneOf(r.status, ['CREATED', 'RUNNING', 'COMPLETED', 'FAILED'] as const, 'status'), phase: str(r.phase, 'phase'),
 		current_round: int(r.current_round, 'current_round'), planned_rounds: int(r.planned_rounds, 'planned_rounds'), client_ids: arr(r.client_ids, 'client_ids').map((c) => str(c, 'client')),
 		candidate: cand ? { candidate_id: strOrNull(cand.candidate_id, 'candidate_id'), state_sha256: strOrNull(cand.state_sha256, 'state_sha256'), promoted: false, deployed: false, label: typeof cand.label === 'string' ? cand.label : undefined } : null,
 		failure: fail ? { code: str(fail.code, 'code'), message: str(fail.message, 'message') } : null, label: str(r.label, 'label'), base_model: baseModel(r.base_model), source_label: str(r.source_label, 'source_label'), replay_of: strOrNull(r.replay_of, 'replay_of'),
@@ -132,7 +133,7 @@ export function parseSpec(value: unknown): StudioSpec {
 		return { ...v, id: str(v.id, 'view id'), label: str(v.label, 'view label'), kind: str(v.kind, 'view kind') };
 	});
 	return { id: str(s.id, 'id'), title: str(s.title, 'title'), caption: str(s.caption, 'caption'), sources: arr(s.sources, 'sources').map((x) => str(x, 'source')), group: str(s.group, 'group'), synthetic_label: str(s.synthetic_label, 'synthetic_label'),
-		note: typeof s.note === 'string' ? s.note : null, availability: oneOf(s.availability, ['AVAILABLE', 'PARTIAL', 'PENDING'] as const, 'availability'), availability_detail: str(s.availability_detail, 'availability_detail'), views } as StudioSpec;
+		note: typeof s.note === 'string' ? s.note : null, availability: oneOf(s.availability, ['AVAILABLE', 'PARTIAL', 'PENDING', 'NOT_APPLICABLE'] as const, 'availability'), availability_detail: str(s.availability_detail, 'availability_detail'), views } as StudioSpec;
 }
 
 export function parseFigures(value: unknown): StudioFigures {
@@ -148,7 +149,7 @@ export function parseTables(value: unknown): StudioTables {
 	for (const [id, raw] of Object.entries(obj(r.tables, 'tables'))) {
 		const t = obj(raw, id), columns = arr(t.columns, 'columns').map((c) => str(c, 'column'));
 		const rows = arr(t.rows, 'rows').map((row) => { const cells = arr(row, 'row'); if (cells.length !== columns.length) bad(`ROW_WIDTH:${id}`); return cells; });
-		tables[id] = { id, title: str(t.title, 'title'), columns, rows, caption: str(t.caption, 'caption'), sources: arr(t.sources, 'sources').map((x) => str(x, 'source')), synthetic_label: str(t.synthetic_label, 'synthetic_label'), availability: oneOf(t.availability, ['AVAILABLE', 'PENDING'] as const, 'availability') };
+		tables[id] = { id, title: str(t.title, 'title'), columns, rows, caption: str(t.caption, 'caption'), sources: arr(t.sources, 'sources').map((x) => str(x, 'source')), synthetic_label: str(t.synthetic_label, 'synthetic_label'), availability: oneOf(t.availability, ['AVAILABLE', 'PENDING', 'NOT_APPLICABLE'] as const, 'availability') };
 	}
 	if (Object.keys(tables).length !== 12) bad('TABLE_INVENTORY_INCOMPLETE');
 	return { run_id: str(r.run_id, 'run_id'), revision: numOrNull(r.revision, 'revision'), source_label: str(r.source_label, 'source_label'), tables };

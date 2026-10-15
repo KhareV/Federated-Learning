@@ -6,7 +6,9 @@ export type RoundEvalStatus = EvaluationStatus | 'NOT_SUBMITTED';
 export type RunOrigin = 'LIVE' | 'REPLAY' | 'RECORDED';
 export type SourceMode = 'CANONICAL_SYNTHETIC' | 'LIVE_MONITORED_SITE_00';
 export type Initialisation = 'FL_INIT_V2' | 'MODEL_V2_FINAL';
-export interface BaseModel { model_id: Initialisation; label: string; state_sha256?: string | null; checkpoint_sha256?: string | null; state_entries?: number | null; architecture_id?: string | null; training_target_of_checkpoint?: string | null }
+export type BaseModelId = Initialisation | 'HARDWARE_DEMO_MODEL_V1';
+export type RunSourceMode = SourceMode | 'RECORDED_HARDWARE';
+export interface BaseModel { model_id: BaseModelId; initialisation?: 'FRESH_SEEDED' | 'WARM_START' | null; label: string; state_sha256?: string | null; checkpoint_sha256?: string | null; state_entries?: number | null; architecture_id?: string | null; training_target_of_checkpoint?: string | null }
 export type ExportStatus = 'NOT_STARTED' | 'PREPARING' | 'READY' | 'FAILED';
 
 export interface StudioCapabilities {
@@ -30,12 +32,12 @@ export interface EvaluationAvailability { available: boolean; source: 'LIVE' | '
 export interface StudioRun {
 	run_id: string;
 	run_length: RunLength;
-	engine: 'PRODUCT_3R' | 'FL10_10R';
+	engine: 'PRODUCT_3R' | 'FL10_10R' | 'HARDWARE_DEMO';
 	origin: RunOrigin;
 	run_type: 'LIVE_RUN' | 'REPLAY';
 	algorithm: string;
 	secagg_mode: string;
-	source_mode: SourceMode;
+	source_mode: RunSourceMode;
 	status: 'CREATED' | 'RUNNING' | 'COMPLETED' | 'FAILED';
 	phase: string;
 	current_round: number;
@@ -109,9 +111,9 @@ export interface EvalRoundDetail extends Omit<Partial<EvalRecord>, 'evaluation_s
 }
 
 export interface StudioSpecView { id: string; label: string; kind: string; pending?: { x: number; state: string; status: string }[]; [key: string]: unknown }
-export interface StudioSpec { id: string; title: string; caption: string; sources: string[]; group: string; synthetic_label: string; note: string | null; availability: 'AVAILABLE' | 'PARTIAL' | 'PENDING'; availability_detail: string; views: StudioSpecView[] }
+export interface StudioSpec { id: string; title: string; caption: string; sources: string[]; group: string; synthetic_label: string; note: string | null; availability: 'AVAILABLE' | 'PARTIAL' | 'PENDING' | 'NOT_APPLICABLE'; availability_detail: string; views: StudioSpecView[] }
 export interface StudioFigures { run_id: string; revision: number | null; selected_round: number | null; source_label: string; specs: Record<string, StudioSpec> }
-export interface StudioTable { id: string; title: string; columns: string[]; rows: unknown[][]; caption: string; sources: string[]; synthetic_label: string; availability: 'AVAILABLE' | 'PENDING' }
+export interface StudioTable { id: string; title: string; columns: string[]; rows: unknown[][]; caption: string; sources: string[]; synthetic_label: string; availability: 'AVAILABLE' | 'PENDING' | 'NOT_APPLICABLE' }
 export interface StudioTables { run_id: string; revision: number | null; source_label: string; tables: Record<string, StudioTable> }
 
 export interface ExportEntry { path: string; sha256: string; rows?: number }

@@ -4,6 +4,8 @@
 	import { HEADLINE, METRIC_GROUPS, display } from '$lib/product/studio/metrics';
 	import type { StudioStore } from '$lib/product/studio/store.svelte';
 	let { studio }: { studio: StudioStore } = $props();
+	import { runContext, isHardwareContext } from '$lib/product/federation/run-context';
+	const hardwareRun = $derived(isHardwareContext(runContext(studio.run, studio.run?.run_id)));
 	const round = $derived(studio.metricRound);
 	const record = $derived(studio.records.find((r) => r.round_id === round));
 	const detail = $derived(studio.roundEval[round]);
@@ -29,7 +31,7 @@
 			{/each}
 		</div>
 		<dl class="meta">
-			<div><dt>Evaluation cohort</dt><dd data-testid="metric-cohort">{record?.cohort_id ?? '--'} · {record?.windows ?? '--'} windows · 16 participants</dd></div>
+			<div><dt>Evaluation cohort</dt><dd data-testid="metric-cohort">{record?.cohort_id ?? '--'} · {record?.windows ?? '--'} windows · {hardwareRun ? 'held-out recorded windows' : '16 participants'}</dd></div>
 			<div><dt>Committed state digest</dt><dd>{#if record}<DigestText value={record.global_state_digest} label={`round ${round} state digest`} />{:else}--{/if}</dd></div>
 			<div><dt>Decision rule</dt><dd>raw sigmoid ≥ {record?.threshold ?? 0.5} · calibration {record?.calibration ?? 'NONE'} (never tuned)</dd></div>
 			<div><dt>Protocol</dt><dd>{record?.evaluation_protocol_id ?? '--'}</dd></div>
@@ -55,11 +57,11 @@
 </div>
 <style>
 	.mc { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-width: 0; } h3 { margin: 0; font: 500 16px 'Space Grotesk', sans-serif; color: #e5f1f0; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; } .st { font: 11px 'JetBrains Mono', monospace; letter-spacing: .08em; border: 1px solid rgba(148,163,184,.4); padding: 2px 8px; color: #94a3b8; } .st-completed { color: #86efac; border-color: rgba(134,239,172,.5); } .st-evaluating { color: #fbbf24; border-color: rgba(251,191,36,.5); } .st-failed { color: #f87171; border-color: rgba(248,113,113,.5); }
-	.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 8px; } .card { border: 1px solid rgba(148,163,184,.2); background: rgba(10,15,31,.7); padding: 10px 12px; display: grid; gap: 4px; min-width: 0; text-align: left; color: inherit; cursor: pointer; font: inherit; } .card.picked { outline: 2px solid #a78bfa; outline-offset: -2px; } .card:focus-visible { outline: 2px solid #2bb8b0; outline-offset: 2px; } .card span, .cell span { font: 10px 'JetBrains Mono', monospace; letter-spacing: .1em; color: #71829a; text-transform: uppercase; } .card b { font: 500 clamp(15px, 1.6vw, 20px) 'Space Grotesk', sans-serif; color: #e5f1f0; overflow-wrap: anywhere; }
+	.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 8px; } .card { border: 1px solid rgba(148,163,184,.2); background: rgba(10,15,31,.7); padding: 10px 12px; display: grid; gap: 4px; min-width: 0; text-align: left; color: inherit; cursor: pointer; font: inherit; } .card.picked { outline: 2px solid #a78bfa; outline-offset: -2px; } .card:focus-visible { outline: 2px solid #2bb8b0; outline-offset: 2px; } .card span, .cell span { font: 10.5px 'JetBrains Mono', monospace; letter-spacing: .1em; color: #71829a; text-transform: uppercase; } .card b { font: 500 clamp(15px, 1.6vw, 20px) 'Space Grotesk', sans-serif; color: #e5f1f0; overflow-wrap: anywhere; }
 	.card.pending b, .cell.pending b { color: #fbbf24; font: 600 12px 'JetBrains Mono', monospace; letter-spacing: .08em; } .card.undefined b, .cell.undefined b { color: #94a3b8; font: 12px 'JetBrains Mono', monospace; } .card.failed b, .cell.failed b { color: #f87171; font: 600 12px 'JetBrains Mono', monospace; } .card.value { border-color: rgba(43,184,176,.35); }
-	.meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 6px; margin: 0; } .meta div { border: 1px solid rgba(148,163,184,.16); padding: 6px 9px; min-width: 0; } dt { font: 9px 'JetBrains Mono', monospace; letter-spacing: .1em; color: #71829a; text-transform: uppercase; } dd { margin: 2px 0 0; font-size: 12px; color: #cbd5e1; overflow-wrap: anywhere; }
+	.meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 6px; margin: 0; } .meta div { border: 1px solid rgba(148,163,184,.16); padding: 6px 9px; min-width: 0; } dt { font: 10.5px 'JetBrains Mono', monospace; letter-spacing: .1em; color: #71829a; text-transform: uppercase; } dd { margin: 2px 0 0; font-size: 12px; color: #cbd5e1; overflow-wrap: anywhere; }
 	.label { margin: 0; display: inline-block; width: fit-content; max-width: 100%; border: 1px solid rgba(251,191,36,.6); background: rgba(251,191,36,.07); padding: 5px 10px; font: 600 11px 'JetBrains Mono', monospace; letter-spacing: .05em; color: #fde68a; } .dim { margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.55; } .sub { margin: 0; border: 1px solid rgba(251,191,36,.5); padding: 7px 10px; color: #fde68a; font: 12px 'JetBrains Mono', monospace; } .none { margin: 0; border: 1px solid rgba(148,163,184,.4); padding: 9px 12px; color: #cbd5e1; font-size: 13px; line-height: 1.6; } .fail { margin: 0; color: #f87171; font: 12px 'JetBrains Mono', monospace; }
 	summary { cursor: pointer; font-size: 13px; color: #e2e8f0; } h4 { margin: 12px 0 6px; font: 11px 'JetBrains Mono', monospace; letter-spacing: .1em; color: #a78bfa; } .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 6px; } .cell { border: 1px solid rgba(148,163,184,.14); padding: 6px 9px; display: grid; gap: 2px; } .cell b { font: 12.5px 'JetBrains Mono', monospace; color: #e2e8f0; overflow-wrap: anywhere; }
-	.scroll { overflow: auto; max-height: 300px; } table { border-collapse: collapse; font-size: 11px; width: 100%; } th, td { border-bottom: 1px solid rgba(148,163,184,.15); padding: 4px 9px; text-align: left; white-space: nowrap; color: #cbd5e1; } thead th { position: sticky; top: 0; background: #0a0f1f; color: #71829a; font: 10px 'JetBrains Mono', monospace; } td.undef { color: #71829a; }
+	.scroll { overflow: auto; max-height: 300px; } table { border-collapse: collapse; font-size: 11px; width: 100%; } th, td { border-bottom: 1px solid rgba(148,163,184,.15); padding: 4px 9px; text-align: left; white-space: nowrap; color: #cbd5e1; } thead th { position: sticky; top: 0; background: #0a0f1f; color: #71829a; font: 10.5px 'JetBrains Mono', monospace; } td.undef { color: #71829a; }
 	p, dd, summary, h3, h4 { overflow-wrap: anywhere; }
 </style>

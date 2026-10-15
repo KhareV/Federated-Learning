@@ -19,11 +19,11 @@
 
 <svelte:head><title>Overview | NHM</title></svelte:head>
 
-<div class="head"><div class="eyebrow">NHM / OVERVIEW</div><h1>NHM research system</h1><p>A simulated-wearable monitoring system and a separate federated-learning development lane. Research prototype: not diagnostic, not clinical. Status and session values are read from the local product backend; the system map is explanatory.</p></div>
+<div class="head"><div class="eyebrow">NHM / OVERVIEW</div><h1>NHM research system</h1><p>A simulated-wearable monitoring system, an optional MongoDB hardware-telemetry source, and a separate federated-learning development lane. Research prototype: not diagnostic, not clinical. Status and session values are read from the local product backend; the system map is explanatory.</p></div>
 
 <section class="cards" aria-label="System status" data-testid="system-cards">
 	<article class="sc released"><p class="k">MONITORING</p><h2>{system?.model_id ?? 'MODEL_V2_FINAL'}</h2><p class="st"><span aria-hidden="true">●</span> {system ? 'RESEARCH DEFAULT' : 'CHECKING'}</p><p class="d">Server-side inference in {system?.software_system ?? 'SOFTWARE_SYSTEM_V2'} with {system?.calibration_id ?? 'CAL_V2'}. This is what the Monitor page uses.</p></article>
-	<article class="sc fed"><p class="k">FEDERATED DEVELOPMENT</p><h2>8 synthetic logical clients</h2>{#if fedEnabled}<p class="st"><span aria-hidden="true">●</span> <span class="badge">ENGINEERING RUNTIME ENABLED</span></p><p class="d">Engineering candidates: <b data-testid="overview-candidate-count">{fed.overview ? fed.overview.candidate_count : '--'}</b> · never automatically deployed.</p>{:else}<p class="st"><span aria-hidden="true">○</span> <span class="badge warn">FEDERATION BACKEND NOT ENABLED</span></p><p class="d">Federation is switched off for this backend.</p>{/if}</article>
+	<article class="sc fed"><p class="k">FEDERATED DEVELOPMENT</p><h2>8 logical clients</h2>{#if fedEnabled}<p class="st"><span aria-hidden="true">●</span> <span class="badge">ENGINEERING RUNTIME ENABLED</span></p><p class="d">Engineering candidates: <b data-testid="overview-candidate-count">{fed.overview ? fed.overview.candidate_count : '--'}</b> · never automatically deployed.</p>{:else}<p class="st"><span aria-hidden="true">○</span> <span class="badge warn">FEDERATION BACKEND NOT ENABLED</span></p><p class="d">Federation is switched off for this backend.</p>{/if}</article>
 	<article class="sc auth"><p class="k">AUTHENTICATION</p><h2>{identity ? identity.auth_provider : (system?.auth_provider ?? '--')}</h2><p class="st"><span aria-hidden="true">●</span> {identity ? (identity.demo_mode ? 'OFFLINE DEMO WORKSPACE' : 'SIGNED IN') : 'NOT SIGNED IN'}</p><p class="d">Identity is decided by the backend; the browser never decides access.</p></article>
 </section>
 
@@ -32,13 +32,14 @@
 		<FlowDiagram tone="released" label="Released monitoring lane" steps={[{ label: 'VIRTUAL WEARABLE', sub: 'simulated source' }, { label: 'PRODUCT API', sub: 'authenticated backend' }, { label: `${system?.model_id ?? 'MODEL_V2_FINAL'} + ${system?.calibration_id ?? 'CAL_V2'}`, sub: 'server-side inference' }, { label: 'RESEARCH MONITORING STATE', sub: 'not a diagnosis' }, { label: 'PERSISTED HISTORY', sub: 'local database' }]} /></div>
 	<div class="wall" role="separator" aria-label="No automatic promotion between the lanes"><span>NO AUTOMATIC PROMOTION</span><small>candidate → monitoring: not enabled</small></div>
 	<div class="lane" data-testid="lane-federated"><p class="ln fed">LANE B · FEDERATED DEVELOPMENT</p>
-		<FlowDiagram tone="federated" label="Federated development lane" steps={[{ label: 'FL_INIT_V2', sub: 'initial federated state' }, { label: '8 SYNTHETIC CLIENTS', sub: 'one demonstration machine' }, { label: 'FEDERATED TRAINING', sub: 'local training + aggregation' }, { label: 'CANDIDATE', sub: 'engineering artifact', tone: 'candidate' }, { label: 'ENGINEERING SANDBOX', sub: 'NOT DEPLOYED', tone: 'candidate' }]} /></div>
+		<FlowDiagram tone="federated" label="Federated development lane" steps={[{ label: 'FL_INIT_V2', sub: 'initial federated state' }, { label: '8 LOGICAL CLIENTS', sub: 'synthetic cohort or your recorded windows · one machine' }, { label: 'FEDERATED TRAINING', sub: 'local training + aggregation' }, { label: 'CANDIDATE', sub: 'engineering artifact', tone: 'candidate' }, { label: 'ENGINEERING SANDBOX', sub: 'NOT DEPLOYED', tone: 'candidate' }]} /></div>
 </Panel>
 <div class="gap"></div>
 <Panel eyebrow="START HERE" title="What do you want to demonstrate?">
 	<div class="actions" data-testid="evaluator-actions">
 		<a class="act released" href="/app/monitoring"><b>MONITOR A SIMULATED WEARABLE</b><span>Attach a virtual wearable, run a session, watch MODEL_V2_FINAL monitoring.</span><i>Open Monitor →</i></a>
-		<a class="act fed" href="/app/federation"><b>RUN FEDERATED TRAINING</b><span>Watch 8 synthetic clients train locally and produce an engineering candidate.</span><i>Open Federation Studio →</i></a>
+		<a class="act fed" href="/app/federation"><b>RUN FEDERATED TRAINING</b><span>Watch 8 logical clients (synthetic cohort or your recorded windows) train locally and produce an engineering result.</span><i>Open Federation Studio →</i></a>
+		<a class="act hw" href="/app/monitoring" data-testid="start-hardware"><b>RECORD LIVE HARDWARE TELEMETRY</b><span>In Monitor choose “Live hardware (MongoDB)”, record a session, then train on your recorded windows in Federation. Telemetry only; not validated model input.</span><i>Open Monitor →</i></a>
 		<div class="act ev"><b>REVIEW RESEARCH EVIDENCE</b><span>How the released model and the scientific FL experiments were evaluated.</span><span class="links"><a href="/app/research/ml">ML evidence →</a><a href="/app/research/fl">FL evidence →</a></span></div>
 	</div>
 </Panel>

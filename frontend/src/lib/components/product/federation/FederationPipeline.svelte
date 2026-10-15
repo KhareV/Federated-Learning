@@ -1,7 +1,9 @@
 <script lang="ts">
+	import type { RunDataSource } from '$lib/product/federation/data-source';
+	let { dataSource = 'SYNTHETIC' }: { dataSource?: RunDataSource } = $props();
 	// STATIC explanation of the existing federation process (not live data). Desktop: a horizontal flow; mobile: the same stages stacked.
-	const steps = [
-		{ id: 'clients', title: '8 local clients', text: 'Synthetic clients, each with its own local data buffer.' },
+	const steps = $derived([
+		{ id: 'clients', title: '8 local clients', text: dataSource === 'HARDWARE' ? 'Each holds a block of your recorded windows in its own local buffer.' : 'Synthetic clients, each with its own local data buffer.' },
 		{ id: 'train', title: 'Local training', text: 'Every client trains on its own local examples.' },
 		{ id: 'updates', title: 'Model updates', text: 'Only model updates leave a client - not its examples.' },
 		{ id: 'coord', title: 'Coordinator', text: 'Collects the updates for the round.' },
@@ -9,7 +11,7 @@
 		{ id: 'state', title: 'New global state', text: 'The shared model state after the round.' },
 		{ id: 'cand', title: 'Final candidate', text: 'After 3 rounds the last state becomes a candidate.' },
 		{ id: 'sandbox', title: 'Engineering sandbox', text: 'Structural checks only. Not deployed.' }
-	];
+	]);
 </script>
 <ol class="pipe" data-testid="federation-pipeline" aria-label="Federated training pipeline">
 	{#each steps as s, i (s.id)}

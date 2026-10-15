@@ -86,6 +86,8 @@
 </div>
 
 <style>
+	/* Site-wide readability floor for micro-labels rendered inside page content (component styles stay untouched). */
+	main :global(th), main :global(dt), main :global(.chip), main :global(.tag), main :global(.badge) { font-size: 11px !important; }
 	.skip { position: absolute; left: -999px; top: 0; z-index: 100; padding: 10px 14px; background: #2bb8b0; color: #030712; } .skip:focus { left: 8px; top: 8px; }
 	.shell { min-height: 100vh; display: flex; background: var(--nhm-bg); color: var(--nhm-text); font-family: Inter, sans-serif; }
 	.side { position: sticky; top: 0; align-self: flex-start; width: 232px; flex: 0 0 232px; height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; border-right: 1px solid var(--nhm-border); background: linear-gradient(180deg,#050a14,#040812); overflow-y: auto; }

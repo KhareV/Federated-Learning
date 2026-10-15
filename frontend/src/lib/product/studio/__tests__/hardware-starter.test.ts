@@ -20,7 +20,7 @@ const caps = (hardware: typeof HW | undefined): StudioCapabilities => ({ studio_
 	three_round: { available: true, expected_updates: 24 }, ...(hardware ? { hardware_demo: hardware } : {}),
 	evaluation: { observer_id: 'O', protocol_id: 'P', threshold: 0.5, calibration: 'NONE', cohort_use: 'x', cohort_use_detail: 'd', claim_boundary: 'c' } } as StudioCapabilities);
 
-const prior = { run_id: 'HDFLRUN-AAA', algorithm: 'FEDAVG', rounds_planned: 3, completed_at: '2026-10-15T00:00:00Z', model: { id: 'HARDWARE_DEMO_MODEL_V1' } } as unknown as HardwareDemoRun;
+const prior = { run_id: 'HDFLRUN-AAA', status: 'COMPLETED', algorithm: 'FEDAVG', rounds_planned: 3, completed_at: '2026-10-15T00:00:00Z', model: { id: 'HARDWARE_DEMO_MODEL_V1' } } as unknown as HardwareDemoRun;
 let started: unknown;
 beforeEach(() => {
 	FakeSocket.reset(); started = null;
@@ -64,5 +64,13 @@ describe('recorded hardware inside the run starter', () => {
 		await fireEvent.change(screen.getByTestId('hardware-demo-algorithm'), { target: { value: 'FEDPROX' } });
 		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
 		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], run_length: 10, algorithm: 'FEDPROX', initialisation: 'WARM_START', warm_start_run_id: 'HDFLRUN-AAA' }));
+	});
+	it('a History deep link opens Recorded hardware with that eligible session already chosen (and never an ineligible one)', async () => {
+		render(StudioRunStarter, { props: { capabilities: caps(HW), onStartThree: vi.fn(), onStartTen: vi.fn(), dataSource: 'HARDWARE', preselectSession: 'HW-OK' } });
+		await waitFor(() => expect((screen.getByTestId('hardware-demo-session-HW-OK') as HTMLInputElement).checked).toBe(true));
+		cleanup();
+		render(StudioRunStarter, { props: { capabilities: caps(HW), onStartThree: vi.fn(), onStartTen: vi.fn(), dataSource: 'HARDWARE', preselectSession: 'HW-EMPTY' } });
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-EMPTY')).toBeTruthy());
+		expect((screen.getByTestId('hardware-demo-session-HW-EMPTY') as HTMLInputElement).checked).toBe(false);
 	});
 });

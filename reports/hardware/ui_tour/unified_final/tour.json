@@ -1,0 +1,69 @@
+{
+  "mode": "tour",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-TOUR-1792094015303",
+  "session_id": "HW-4716b93ac6894fac908952c9d2e28842",
+  "hardware_run": {
+    "run_id": "HDFLRUN-A215D5A0E80E",
+    "status_line": "COMPLETED · LIVE_RUN · FEDPROX · round 3/3 · 197 events",
+    "banner": "ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED",
+    "chips": [
+      "Round 3 of 3",
+      "FedProx",
+      "8 logical clients · your recorded windows",
+      "one demonstration machine",
+      "stream: CLOSED_NORMAL"
+    ],
+    "client_cards": 8,
+    "card_tags": 8,
+    "hw_participation": "YOUR RECORDED DATA IN THIS RUN 29 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and ass",
+    "hw_total_windows": "29",
+    "hw_raw_sent": "0",
+    "metric_auprc": "AUPRC0.722222",
+    "metric_accuracy": "Accuracy0.333333",
+    "metric_bce": "BCE0.745771",
+    "metric_status": "COMPLETED",
+    "evaluated_graph_points": 23,
+    "figure_avail": [
+      "PARTIAL",
+      "PARTIAL",
+      "PARTIAL",
+      "PENDING",
+      "AVAILABLE",
+      "PENDING"
+    ],
+    "final_state": "Latest committed global state: 37b4ed7d…5fc7copy",
+    "accepted_counter": "24/24",
+    "alerts": [],
+    "run_label_text": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+    "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+    "init_options": [
+      {
+        "value": "FRESH_SEEDED",
+        "label": "Fresh initialisation (seeded, untrained)",
+        "disabled": false
+      },
+      {
+        "value": "WARM_START",
+        "label": "Pretrained: warm start from an earlier recorded-hardware run",
+        "disabled": false
+      },
+      {
+        "value": "MODEL_V2_FINAL",
+        "label": "Pretrained V2 (MODEL_V2_FINAL) — not applicable",
+        "disabled": true
+      }
+    ],
+    "v2_note": "Pretrained V2 is not offered here: V2 is a 250 Hz ECG-window network; the hardware demo model is a tabular classifier over recorded-window features, so V2 weights cannot be loaded into it and no transfer is claimed."
+  },
+  "synthetic_run": "FL10RUN-B75F7688DD60",
+  "routes_toured": 116
+}

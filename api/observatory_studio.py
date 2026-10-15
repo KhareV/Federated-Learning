@@ -51,6 +51,9 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
 
     service = StudioService(root=Path(artifact_root), federation=app.state.federation_service, inference_factory=inference_factory, other_run_active=other_active)
     hardware_demo = HardwareDemoService(store, Path(artifact_root))
+    from studio.hardware_runs import HardwareRunJobs
+
+    service.hardware = HardwareRunJobs(hardware_demo, Path(artifact_root), finalize=service.finalize_hardware)
     app.state.studio_service = service
     app.state.hardware_demo_fl_service = hardware_demo
     inner_lifespan = app.router.lifespan_context
@@ -120,9 +123,10 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         allowed = {"session_ids", "run_length", "algorithm", "secagg_mode", "label_seed", "initialisation", "warm_start_run_id"}
         if set(body) - allowed or not isinstance(body.get("session_ids"), list):
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "invalid hardware demo request")
+        loop = asyncio.get_running_loop()
         try:
-            return await asyncio.to_thread(
-                hardware_demo.run, user,
+            job = await asyncio.to_thread(
+                service.hardware.start, user, loop,
                 session_ids=body["session_ids"], rounds=body.get("run_length", 3),
                 algorithm=body.get("algorithm", "FEDAVG"), secagg_mode=body.get("secagg_mode", "PLAIN"),
                 label_seed=body.get("label_seed", 20261015),
@@ -134,6 +138,8 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
             raise ProductError(ProductErrorCode.NOT_FOUND, str(error)) from error
         except (ValueError, RuntimeError) as error:
             raise ProductError(ProductErrorCode.INVALID_STATE, str(error)) from error
+        # The run executes in the background and is observed through the same Studio/federation surface as every other run (Live page).
+        return await asyncio.to_thread(service.describe, user, job.run_id)
 
     @app.get(f"{STUDIO}/hardware-demo/runs/{{run_id}}")
     async def get_hardware_demo(request: Request, run_id: str) -> dict[str, Any]:

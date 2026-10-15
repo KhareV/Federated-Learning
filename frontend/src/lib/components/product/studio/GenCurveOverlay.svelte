@@ -24,7 +24,7 @@
 <style>
 	.co { margin: 0; display: grid; gap: 6px; min-width: 0; border: 1px solid rgba(148,163,184,.2); padding: 10px 12px; background: rgba(7,16,30,.55); } figcaption { display: grid; gap: 2px; }
 	figcaption b { font: 600 12px 'JetBrains Mono', monospace; letter-spacing: .06em; color: #e5f1f0; } figcaption span { color: #94a3b8; font-size: 12px; }
-	svg { width: 100%; max-width: 300px; height: auto; } .frame { fill: none; stroke: rgba(148,163,184,.3); } .diag { stroke: rgba(148,163,184,.3); stroke-dasharray: 3 3; } .t { fill: #71829a; font: 9px 'JetBrains Mono', monospace; }
+	svg { width: 100%; max-width: 300px; height: auto; } .frame { fill: none; stroke: rgba(148,163,184,.3); } .diag { stroke: rgba(148,163,184,.3); stroke-dasharray: 3 3; } .t { fill: #71829a; font: 10.5px 'JetBrains Mono', monospace; }
 	.key { display: flex; flex-wrap: wrap; gap: 4px 12px; list-style: none; margin: 0; padding: 0; color: #cbd5e1; font-size: 12px; } .key li { display: flex; align-items: center; gap: 6px; } .key i { width: 18px; height: 3px; display: inline-block; }
 	.key i.dash { background: repeating-linear-gradient(90deg, #f59e0b 0 6px, transparent 6px 11px); height: 2px; } .empty { margin: 0; color: #94a3b8; font-size: 12px; }
 </style>

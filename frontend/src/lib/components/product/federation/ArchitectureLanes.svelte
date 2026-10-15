@@ -1,8 +1,8 @@
 <script lang="ts">
 	// STATIC ARCHITECTURE FACTS (not live data): two separate lanes with a wall between them. There is deliberately no arrow from the
 	// federated lane into the released lane or into live monitoring.
-	let { releasedModel = 'MODEL_V2_FINAL' }: { releasedModel?: string } = $props();
-	const laneB = ['FL_INIT_V2', '8 synthetic clients', 'Local training', 'Aggregation', 'Federated candidate', 'Engineering sandbox'];
+	let { releasedModel = 'MODEL_V2_FINAL', dataSource = 'SYNTHETIC' }: { releasedModel?: string; dataSource?: 'SYNTHETIC' | 'HARDWARE' } = $props();
+	const laneB = $derived(dataSource === 'HARDWARE' ? ['HARDWARE_DEMO_MODEL_V1', '8 clients · your recorded windows', 'Local training', 'Aggregation', 'Demo model state', 'Engineering sandbox'] : ['FL_INIT_V2', '8 synthetic clients', 'Local training', 'Aggregation', 'Federated candidate', 'Engineering sandbox']);
 </script>
 <div class="lanes" data-testid="architecture-lanes">
 	<section class="a" aria-labelledby="lane-a">

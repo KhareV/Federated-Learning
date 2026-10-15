@@ -16,6 +16,11 @@ THRESHOLD_METRICS = [("F1", "F1"), ("accuracy", "Accuracy"), ("balanced_accuracy
 LOW = "SIM_FL_"
 
 
+def _short(client_id: str) -> str:
+    """Display name of a logical client: SIM_FL_SITE_00 -> SITE_00, RECORDED_DEMO_CLIENT_00 -> 00."""
+    return client_id.replace(LOW, "").replace("RECORDED_DEMO_CLIENT_", "CLIENT_")
+
+
 def skey(r: int) -> str:
     return f"R{r:02d}"
 
@@ -102,7 +107,12 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
     windows = b["evaluation"]["windows"]
     algorithm = b.get("run", {}).get("algorithm") or "FEDAVG"
     algorithm_label = "FedProx" if algorithm == "FEDPROX" else "FedAvg"
-    objective = (b.get("run", {}).get("settings") or {}).get("local_objective", "BCE")
+    settings = b.get("run", {}).get("settings") or {}
+    objective = settings.get("local_objective", "BCE")
+    optimizer_text = settings.get("optimizer_label", "AdamW, 1 epoch")
+    local_phrase = settings.get("local_phrase", "for one epoch")
+    monitoring_text = settings.get("monitoring_text", "optional simulated ECG monitoring session -> SITE_00 buffer (Mode B)")
+    participants_n = len(b["evaluation"]["holdout_participants"])
 
     def add(fid: str, caption: str, sources: list[str], views: list[dict[str, Any]], *, group: str | None = None, note: str | None = None, needs: list[str] | None = None, none_needed: bool = False,
             availability_note: str | None = None) -> None:
@@ -120,14 +130,14 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
         return view
 
     # 01 architecture ---------------------------------------------------------------------------------------------------------------
-    nodes = [{"id": cl, "label": f"{cl.replace(LOW, '')}: local data stays here", "kind": "client"} for cl in clients]
+    nodes = [{"id": cl, "label": f"{_short(cl)}: local data stays here", "kind": "client"} for cl in clients]
     legacy_fedavg = algorithm == "FEDAVG" and (b.get("run", {}).get("secagg_mode") or "PLAIN") == "PLAIN"
-    architecture_caption = (f"Eight logical clients (single machine) train locally for one epoch, submit updates, and the coordinator applies weighted FedAvg for {n} round{'s' if n != 1 else ''}; the highlighted round is the latest committed one."
-                            if legacy_fedavg else f"Eight logical clients (single machine) train locally for one epoch, submit updates, and the coordinator applies sample-count-weighted aggregation after {algorithm_label} local training for {n} round{'s' if n != 1 else ''}; the highlighted round is the latest committed one.")
-    stages = (["local optimizer (AdamW, 1 epoch)", "update submission (digest, example count)", "weighted FedAvg (Coordinator)", f"global model R00 -> R{n:02d}", "final engineering candidate (not promoted)"]
-              if legacy_fedavg else [f"local optimizer (AdamW, 1 epoch; {objective})", "update submission (digest, example count)", "sample-count-weighted aggregation (Coordinator)", f"global model R00 -> R{n:02d}", "final engineering candidate (not promoted)"])
+    architecture_caption = (f"Eight logical clients (single machine) train locally {local_phrase}, submit updates, and the coordinator applies weighted FedAvg for {n} round{'s' if n != 1 else ''}; the highlighted round is the latest committed one."
+                            if legacy_fedavg else f"Eight logical clients (single machine) train locally {local_phrase}, submit updates, and the coordinator applies sample-count-weighted aggregation after {algorithm_label} local training for {n} round{'s' if n != 1 else ''}; the highlighted round is the latest committed one.")
+    stages = ([f"local optimizer ({optimizer_text})", "update submission (digest, example count)", "weighted FedAvg (Coordinator)", f"global model R00 -> R{n:02d}", "final engineering candidate (not promoted)"]
+              if legacy_fedavg else [f"local optimizer ({optimizer_text}; {objective})", "update submission (digest, example count)", "sample-count-weighted aggregation (Coordinator)", f"global model R00 -> R{n:02d}", "final engineering candidate (not promoted)"])
     add("FL10_FIG01", architecture_caption,
-        ["run_report.json"], [{"id": "diagram", "label": "Architecture", "kind": "diagram", "nodes": nodes, "monitoring": "optional simulated ECG monitoring session -> SITE_00 buffer (Mode B)",
+        ["run_report.json"], [{"id": "diagram", "label": "Architecture", "kind": "diagram", "nodes": nodes, "monitoring": monitoring_text,
                                "stages": stages,
                                "current_round": max(c.committed) if c.committed else 0, "planned_rounds": n}], none_needed=True)
     # 02 global loss ----------------------------------------------------------------------------------------------------------------
@@ -137,10 +147,10 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
     # 03 per-client loss ------------------------------------------------------------------------------------------------------------
     loss = c.by_cr("mean_training_loss")
     add("FL10_FIG03", "Each client's actual mean local training loss per round (training data).", ["client_rounds.csv"],
-        [lines_view("client_loss", "Per-client training loss", "Communication round", "Mean local training loss", [_line(cl.replace(LOW, ""), rounds, [loss[cl].get(r) for r in rounds]) for cl in clients], pending=False)],
+        [lines_view("client_loss", "Per-client training loss", "Communication round", "Mean local training loss", [_line(_short(cl), rounds, [loss[cl].get(r) for r in rounds]) for cl in clients], pending=False)],
         none_needed=True, availability_note=f"{len(rr)} of {n} rounds committed")
     # 04 AUPRC / AUROC --------------------------------------------------------------------------------------------------------------
-    add("FL10_FIG04", f"AUPRC and AUROC of every EVALUATED global state on the SAME diagnostic holdout ({windows} windows, 16 participants); dashed line = AUPRC chance level (positive prevalence). {b['evaluation']['cohort_use']} No round was selected from these values.",
+    add("FL10_FIG04", f"AUPRC and AUROC of every EVALUATED global state on the SAME diagnostic holdout ({windows} windows, {participants_n} participants); dashed line = AUPRC chance level (positive prevalence). {b['evaluation']['cohort_use']} No round was selected from these values.",
         ["evaluation_results.json"], [lines_view("rank", "AUPRC and AUROC", "Global state (round)", "Metric value",
                                                  [_line("AUPRC", xs, c.metric_series("AUPRC")), _line("AUROC", xs, c.metric_series("AUROC")), _line("AUPRC chance level (prevalence)", xs, [prevalence] * (n + 1) if prevalence is not None else [None] * (n + 1), dashed=True)])])
     # 05 threshold metrics ----------------------------------------------------------------------------------------------------------
@@ -179,13 +189,13 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
     # 11 contribution matrix --------------------------------------------------------------------------------------------------------
     acc, status = c.by_cr("examples_processed"), c.by_cr("acceptance_status")
     add("FL10_FIG11", "Accepted-update matrix: cell value = examples contributed by the client's ACCEPTED update in that round (blank = no accepted update yet).", ["client_rounds.csv"],
-        [{"id": "accepted", "label": "Accepted update (examples)", "kind": "heatmap", "rows": [cl.replace(LOW, "") for cl in clients], "cols": [f"R{r}" for r in rounds],
+        [{"id": "accepted", "label": "Accepted update (examples)", "kind": "heatmap", "rows": [_short(cl) for cl in clients], "cols": [f"R{r}" for r in rounds],
           "values": [[acc[cl].get(r) if status[cl].get(r) == "ACCEPTED" else None for r in rounds] for cl in clients], "value_label": "examples in accepted update"}], none_needed=True, availability_note=f"{len(rr)} of {n} rounds committed")
 
     # 12 training heatmap -----------------------------------------------------------------------------------------------------------
     def hm(field: str, label: str) -> dict[str, Any]:
         m = c.by_cr(field)
-        return {"id": field, "label": label, "kind": "heatmap", "rows": [cl.replace(LOW, "") for cl in clients], "cols": [f"R{r}" for r in rounds], "values": [[m[cl].get(r) for r in rounds] for cl in clients], "value_label": label}
+        return {"id": field, "label": label, "kind": "heatmap", "rows": [_short(cl) for cl in clients], "cols": [f"R{r}" for r in rounds], "values": [[m[cl].get(r) for r in rounds] for cl in clients], "value_label": label}
 
     add("FL10_FIG12", "Client x round training diagnostics from the actual run.", ["client_rounds.csv"], [hm("mean_training_loss", "Mean training loss"), hm("local_update_norm", "Local update L2 norm"), hm("examples_processed", "Examples processed"), hm("gradient_norm_mean", "Mean gradient L2 norm")],
         none_needed=True, availability_note=f"{len(rr)} of {n} rounds committed")
@@ -193,16 +203,16 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
     w = c.by_cr("aggregation_weight")
     add("FL10_FIG13", ("FedAvg aggregation weights = accepted example count / total accepted examples; each completed round sums to one." if legacy_fedavg else f"{algorithm_label} aggregation weights = accepted example count / total accepted examples; each completed round sums to one."), ["client_rounds.csv", "rounds.csv"],
         [{"id": "weights", "label": "Aggregation weights", "kind": "stacked", "x_label": "Communication round", "y_label": "Normalised weight", "categories": [f"R{r}" for r in rounds],
-          "series": [{"name": cl.replace(LOW, ""), "values": [w[cl].get(r) for r in rounds]} for cl in clients], "total_check": [sum(w[cl][r] for cl in clients) if all(r in w[cl] for cl in clients) else None for r in rounds]}], none_needed=True, availability_note=f"{len(rr)} of {n} rounds committed")
+          "series": [{"name": _short(cl), "values": [w[cl].get(r) for r in rounds]} for cl in clients], "total_check": [sum(w[cl][r] for cl in clients) if all(r in w[cl] for cl in clients) else None for r in rounds]}], none_needed=True, availability_note=f"{len(rr)} of {n} rounds committed")
     # 14 dataset composition --------------------------------------------------------------------------------------------------------
     cohort = {x["client_id"]: x["counts"] for x in b["training_cohort"]}
     hold = b["evaluation"]["holdout_participants"]
     add("FL10_FIG14", "Training composition per client (TRAIN) and diagnostic-holdout composition per participant (EVALUATION). Training and holdout are separate populations that never overlap.", ["training_cohort.json", "holdout_manifest_v1.json"],
-        [{"id": "training", "label": "Training: positives / negatives", "kind": "bars", "categories": [cl.replace(LOW, "") for cl in clients], "x_label": "Training client", "y_label": "Windows",
+        [{"id": "training", "label": "Training: positives / negatives", "kind": "bars", "categories": [_short(cl) for cl in clients], "x_label": "Training client", "y_label": "Windows",
           "series": [{"name": "positive", "values": [cohort[cl]["synthetic_positive"] for cl in clients]}, {"name": "negative", "values": [cohort[cl]["synthetic_negative"] for cl in clients]}]},
          {"id": "holdout", "label": "Holdout: positives / negatives", "kind": "bars", "categories": [h["participant_id"] for h in hold], "x_label": "Diagnostic holdout participant", "y_label": "Windows",
           "series": [{"name": "positive", "values": [h["counts"]["synthetic_positive"] for h in hold]}, {"name": "negative", "values": [h["counts"]["synthetic_negative"] for h in hold]}]},
-         {"id": "quality_train", "label": "Training quality: eligible vs excluded", "kind": "bars", "categories": [cl.replace(LOW, "") for cl in clients], "x_label": "Training client", "y_label": "Windows",
+         {"id": "quality_train", "label": "Training quality: eligible vs excluded", "kind": "bars", "categories": [_short(cl) for cl in clients], "x_label": "Training client", "y_label": "Windows",
           "series": [{"name": "quality-eligible", "values": [cohort[cl]["trainable"] for cl in clients]}, {"name": "excluded (degraded)", "values": [cohort[cl]["DEGRADED"] for cl in clients]}, {"name": "excluded (unusable)", "values": [cohort[cl]["UNUSABLE"] for cl in clients]}]},
          {"id": "quality_holdout", "label": "Holdout quality: eligible vs excluded", "kind": "bars", "categories": [h["participant_id"] for h in hold], "x_label": "Diagnostic holdout participant", "y_label": "Windows",
           "series": [{"name": "quality-eligible", "values": [h["counts"]["trainable"] for h in hold]}, {"name": "excluded (degraded)", "values": [h["counts"]["DEGRADED"] for h in hold]}, {"name": "excluded (unusable)", "values": [h["counts"]["UNUSABLE"] for h in hold]}]}],
@@ -230,7 +240,7 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
     add("FL10_FIG17", "Measured logical update payload bytes (serialized size on the single-machine transport, not network traffic), measured client and round wall-clock durations, and cumulative accepted updates.", ["rounds.csv", "client_rounds.csv"],
         [lines_view("bytes", "Payload bytes by round", "Communication round", "Logical payload bytes", [_line("payload bytes (round)", rounds, [rr_by[r]["update_payload_bytes_total"] if r in rr_by else None for r in rounds]),
                                                                                                     _line("cumulative payload bytes", rounds, [rr_by[r]["cumulative_payload_bytes"] if r in rr_by else None for r in rounds])], pending=False),
-         lines_view("client_time", "Client durations", "Communication round", "Seconds (wall clock)", [_line(cl.replace(LOW, ""), rounds, [dur[cl].get(r) for r in rounds]) for cl in clients], pending=False),
+         lines_view("client_time", "Client durations", "Communication round", "Seconds (wall clock)", [_line(_short(cl), rounds, [dur[cl].get(r) for r in rounds]) for cl in clients], pending=False),
          lines_view("round_time", "Round durations", "Communication round", "Seconds (wall clock)", [_line("round duration", rounds, [rr_by[r]["round_duration_seconds"] if r in rr_by else None for r in rounds])], pending=False),
          lines_view("updates", "Cumulative accepted updates", "Communication round", "Accepted updates", [_line("cumulative accepted updates", rounds, [rr_by[r]["cumulative_accepted_updates"] if r in rr_by else None for r in rounds])], pending=False)],
         none_needed=True, availability_note=f"{len(rr)} of {n} rounds committed")
@@ -251,7 +261,7 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
         series = []
         for cl in clients:
             rows = sorted((x for x in b["batches"] if x["client_id"] == cl), key=lambda x: (x["round"], x["batch_index"]))
-            series.append(_line(cl.replace(LOW, ""), [i + 1 for i in range(len(rows))], [x[field] for x in rows]))
+            series.append(_line(_short(cl), [i + 1 for i in range(len(rows))], [x[field] for x in rows]))
         return {"id": field, "label": label, "kind": "lines", "x_label": "Optimizer step (cumulative per client)", "y_label": label, "series": series}
 
     add("FL10_FIG19", "Actual per-batch loss and gradient L2 norm captured by the read-only optimizer hooks (no inferred points).", ["batches.csv"], [batch_view("loss", "Batch loss"), batch_view("gradient_l2_norm", "Gradient L2 norm")],
@@ -263,6 +273,9 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
     add("FL10_FIG20", "Integrated summary of the evaluated comparison states (initial, comparison endpoints, selected round) on the diagnostic holdout. Ranking and fixed-threshold metrics are shown together with the actual counts of predicted positives and negatives.", ["evaluation_results.json"],
         [{"id": gid, "label": label, "kind": "bars", "categories": [name for _, name in keys], "x_label": "Metric", "y_label": units, "series": [{"name": s, "values": [c.metric(s, key) for key, _ in keys]} for s in summary_states]} for gid, label, units, keys in groups],
         needs=[skey(0), skey(c.cmp_a), skey(c.cmp_b)])
+    if c.ev.get("paired_not_applicable"):         # recorded hardware: sessions are not independent participant clusters, so no paired interval exists
+        specs["FL10_FIG16"]["availability"] = "NOT_APPLICABLE"
+        specs["FL10_FIG16"]["availability_detail"] = c.ev["paired_not_applicable"]
     return specs
 
 

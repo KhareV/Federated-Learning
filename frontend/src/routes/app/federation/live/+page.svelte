@@ -16,6 +16,7 @@
 	import TechnicalEvidence from '$lib/components/product/federation/TechnicalEvidence.svelte';
 	import { bootRun, chooseRun } from '$lib/components/product/federation/useRunParam';
 	import RunStatusStrip from '$lib/components/product/studio/RunStatusStrip.svelte';
+	import RunAtAGlance from '$lib/components/product/studio/RunAtAGlance.svelte';
 	import RoundExplorer from '$lib/components/product/studio/RoundExplorer.svelte';
 	import MetricCards from '$lib/components/product/studio/MetricCards.svelte';
 	import StudioGraphs from '$lib/components/product/studio/StudioGraphs.svelte';
@@ -25,17 +26,26 @@
 	import { useFederation } from '$lib/product/federation/state.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import { ownerBoundClientId } from '$lib/product/federation/participation';
+	import { SOURCE_COPY } from '$lib/product/federation/data-source';
+	import { runContext, isHardwareContext } from '$lib/product/federation/run-context';
 	import { algorithmName } from '$lib/product/federation/presentation';
 	const fed = useFederation();
 	const studio = useStudio();
 	const product = getProductStore();
-	onMount(() => { void studio.loadCapabilities(); void bootRun(fed, page.url.searchParams.get('run')); void fed.loadClients(); return () => { fed.closeLive(); studio.track(null); }; });
+	onMount(() => { void studio.loadCapabilities(); void bootRun(fed, page.url.searchParams.get('run'), page.url.pathname); void fed.loadClients(); return () => { fed.closeLive(); studio.track(null); }; });
 	// One run at a time in the Studio store: switching runs clears every run-scoped cache before anything is fetched.
 	$effect(() => { studio.track(fed.run?.run_id ?? null); });
 	const v = $derived(fed.view);
 	const replay = $derived(v.runType === 'REPLAY');
 	// UFL-LITE-002: owner binding is a pure presentation rule over the backend-decided auth provider and the run type.
-	const ownerBound = $derived(ownerBoundClientId(product.authState.system?.auth_provider, v.runType ?? fed.run?.run_type));
+	// One typed interpretation of the SELECTED run's validated descriptor (never an id prefix, never another run's descriptor).
+	const ctx = $derived(runContext(studio.run, fed.run?.run_id ?? v.runId));
+	const hardware = $derived(isHardwareContext(ctx));
+	const dataSource = $derived(hardware ? 'HARDWARE' : 'SYNTHETIC');
+	const copy = $derived(SOURCE_COPY[dataSource]);
+	// Recorded-hardware runs have no single owner-bound client: all eight logical clients hold the signed-in user's own recorded windows.
+	const routeRun = $derived(page.url.searchParams.get('run'));
+	const ownerBound = $derived(hardware ? null : ownerBoundClientId(product.authState.system?.auth_provider, v.runType ?? fed.run?.run_type));
 	const plannedRounds = $derived(v.plannedRounds || fed.run?.planned_rounds || 0);
 	const status = $derived(v.runStatus ?? fed.run?.status ?? '--');
 	const shadow = $derived(v.secagg.filter((s) => s.mode === 'SECAGG_SHADOW'));
@@ -57,12 +67,15 @@
 	const identity = $derived(selectedId ? fed.clients.find((c) => c.client_id === selectedId) : undefined);
 	const mine = $derived(ownerBound ? (v.clients.find((c) => c.clientId === ownerBound) ?? null) : null);
 	const runDone = $derived(v.runStatus === 'COMPLETED');
+	const totalWindows = $derived(v.clients.reduce((n, c) => n + (c.localExamples ?? 0), 0));
+	const lastDigest = $derived([...shown.rounds].reverse().find((r) => r.stateDigest)?.stateDigest ?? null);
 </script>
 <svelte:head><title>Live federation | NHM</title></svelte:head>
+<div class="live-readable">
 <div class="head"><div class="eyebrow">NHM / FEDERATION / LIVE</div><h1>Live federation</h1>
 	<p class="dim">The run executes on the product backend; closing this page does not stop it. Returning rebuilds this view from the event journal (sequence 0).</p></div>
-<FederationBanner runType={v.runType} />
-<RunSelector runs={fed.runs} selected={fed.run?.run_id ?? null} onSelect={(id) => { studio.selectClient(null); void chooseRun(fed, page.url.pathname, id); }} />
+<FederationBanner runType={v.runType} {dataSource} />
+<RunSelector runs={fed.runs} badges={fed.runBadges} selected={fed.run?.run_id ?? null} onSelect={(id) => { studio.selectClient(null); void chooseRun(fed, page.url.pathname, id); }} />
 {#if v.streamError}<p class="err" role="alert" data-testid="stream-error">FEDERATION STREAM ERROR ({v.streamError.reason}) — derived progress below is no longer trustworthy. <button type="button" onclick={() => fed.reconnectLive()}>Reconnect</button></p>{/if}
 {#if fed.socketStatus === 'DISCONNECTED' && !v.streamError}<p class="err" role="alert" data-testid="stream-disconnected">LIVE EVENT STREAM DISCONNECTED — round progress, client stages and the timeline below are not current. Analysis panels may still show completed results from the backend. <button type="button" onclick={() => fed.reconnectLive()}>Reconnect live stream</button></p>{/if}
 {#if fed.error}<p class="err" role="alert">{fed.error}</p>{/if}
@@ -71,10 +84,12 @@
 <section class="run" aria-label="Run header">
 	<div class="tag">{replay ? 'REPLAY OF A PREVIOUS RUN' : 'LIVE FEDERATED TRAINING'}</div>
 	<p role="status" aria-live="polite" data-testid="run-status"><b>{status}</b> · {v.runType ?? fed.run.run_type} · {v.algorithm ?? fed.run.algorithm} · round {v.currentRound}/{v.plannedRounds || fed.run.planned_rounds} · {v.eventCount} events</p>
-	<ul class="chips"><li>Round {v.currentRound || '--'} of {plannedRounds || '--'}</li><li>{algorithmName(v.algorithm ?? fed.run.algorithm)}</li><li>8 synthetic logical clients</li><li>one demonstration machine</li>{#if ownerBound}<li class="own">1 owner-bound client · 7 synthetic peers</li>{/if}<li class="muted">stream: {fed.socketStatus}</li></ul>
+	<ul class="chips"><li>Round {v.currentRound || '--'} of {plannedRounds || '--'}</li><li>{algorithmName(v.algorithm ?? fed.run.algorithm)}</li><li>{copy.chip}</li><li>one demonstration machine</li>{#if ownerBound}<li class="own">1 owner-bound client · 7 synthetic peers</li>{/if}<li class="muted">stream: {fed.socketStatus}</li></ul>
 	<p class="dim counters">Update-ready events: <b data-testid="update-ready-count">{v.updateReadyCount}</b> · client SUBMITTED completions: <b data-testid="submitted-count">{v.submittedCount}</b></p>
 	{#each v.errors as e}<p class="err" role="alert">ERROR {e.code}: {e.message}{e.roundId ? ` (round ${e.roundId})` : ''}</p>{/each}
 </section>
+<div class="gap"></div>
+<RunAtAGlance {ctx} {studio} {status} algorithm={algorithmName(v.algorithm ?? fed.run.algorithm)} currentRound={v.currentRound} {plannedRounds} accepted={v.submittedCount} expected={(v.clientCount || 8) * (plannedRounds || 0)} />
 <div class="gap"></div>
 {#if recorded}<p class="replay" role="status" data-testid="recorded-note"><b>RECORDED FL10 EVIDENCE — NOT A NEW MEASUREMENT.</b> This run was recorded earlier by NHM_FL10_001. The event view below is reconstructed from its recorded run report (replay); nothing is trained.</p><div class="gap"></div>{/if}
 <RunStatusStrip {studio} view={v} />
@@ -83,9 +98,10 @@
 <Panel eyebrow="STAGES" title="Where is the federation right now?" note={replay ? 'HISTORICAL EVENTS' : 'DERIVED FROM BACKEND STATE'}><ProcessStepper view={shown} {replay} /></Panel>
 <div class="gap"></div>
 {#if replay}<Panel eyebrow="REPLAY VS LIVE" title="What a replay does and does not do"><LiveVsReplay highlight="REPLAY" /></Panel><div class="gap"></div>{/if}
-<Panel eyebrow="CLIENT NETWORK" title={ownerBound ? `Federated participants (round ${shownRound || '--'})` : `Eight logical clients (round ${shownRound || '--'})`} note="SYNTHETIC">
+<span id="sec-network"></span>
+<Panel eyebrow="CLIENT NETWORK" title={ownerBound ? `Federated participants (round ${shownRound || '--'})` : `${copy.network} (round ${shownRound || '--'})`} note={copy.networkNote}>
 	{#if ownerBound}<p class="dim" data-testid="participants-note">1 authenticated owner-bound client · 7 synthetic peers · ALL TRAINING DATA IN THIS DEMO IS SYNTHETIC ENGINEERING DATA and does not represent the authenticated user's physiology.</p>{/if}
-	<ClientGrid live={shown.clients} round={shownRound} {replay} ownerBoundClientId={ownerBound} selected={selectedId} onSelect={(id) => studio.selectClient(id)} runDone={historical ? false : runDone} />
+	<ClientGrid live={shown.clients} round={shownRound} {replay} {dataSource} ownerBoundClientId={ownerBound} selected={selectedId} onSelect={(id) => studio.selectClient(id)} runDone={historical ? false : runDone} />
 	<p class="dim">Click a client to see what it is doing. Training milestones are shown exactly as reported (started / completed); nothing is interpolated.</p>
 	{#if ownerBound}
 		<div class="mine" data-testid="my-participation">
@@ -98,13 +114,23 @@
 			<TechnicalEvidence label="WHY THIS IS SYNTHETIC (full qualification)"><p>Training examples remain in this client's logical local buffer; the federation coordinator receives model updates and metadata rather than those local training examples. All clients execute on one demonstration machine. The owner label is a presentation role only: your physiology and your monitoring sessions never feed federation.</p></TechnicalEvidence>
 		</div>
 	{/if}
-	{#if selectedId}<ClientDetailPanel clientId={selectedId} client={selectedClient} ownerBound={selectedId === ownerBound} {plannedRounds} {replay} {identity} />{/if}
+	{#if hardware}
+		<div class="mine" data-testid="hardware-participation">
+			<b>YOUR RECORDED DATA IN THIS RUN</b>
+			<p><b data-testid="hw-total-windows">{totalWindows || '--'}</b> recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client).</p>
+			<p>Raw recorded windows sent to the federation coordinator: <b data-testid="hw-raw-sent">0</b> · only model updates are shared.</p>
+			<TechnicalEvidence label="WHAT IS REAL AND WHAT IS SYNTHETIC"><p>The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the model is a small tabular classifier, not MODEL_V2_FINAL.</p></TechnicalEvidence>
+		</div>
+	{/if}
+	{#if selectedId}<ClientDetailPanel clientId={selectedId} client={selectedClient} ownerBound={selectedId === ownerBound} {plannedRounds} {replay} {identity} {dataSource} />{/if}
 </Panel>
 <div class="gap"></div>
 <Panel eyebrow="ROUND EXPLORER" title="Live / historical round explorer" note={studio.followLive ? 'FOLLOWING LIVE' : `INSPECTING R${studio.selectedRound}`}><RoundExplorer {studio} /></Panel>
 <div class="gap"></div>
+<span id="sec-evaluation"></span>
 <Panel eyebrow="EVALUATION" title={`Evaluation of selected round (R${studio.metricRound})`} note={studio.summary ? 'MEASURED FROM THIS RUN\'S COMMITTED CHECKPOINT' : 'PER-ROUND MEASUREMENT'}><MetricCards {studio} /></Panel>
 <div class="gap"></div>
+<span id="sec-graphs"></span>
 <Panel eyebrow="INTERACTIVE GRAPHS" title="Measured evolution across rounds" note="REAL MEASUREMENTS ONLY"><StudioGraphs {studio} /></Panel>
 <div class="gap"></div>
 <div class="grid">
@@ -121,18 +147,32 @@
 	</Panel>
 </div>
 <div class="gap"></div>
+<span id="sec-analysis"></span>
 <Panel eyebrow="ANALYSIS" title="Performance, training, clients, matrices, comparison and exports" note="THIS RUN'S MEASURED DATA"><AnalysisTabs {studio} /></Panel>
 <div class="gap"></div>
 <div class="grid">
 	<Panel eyebrow="MODEL STATE" title="Global model state evolution" note="REPORTED DIGESTS"><ModelStateTransition view={shown} baseDigest={fed.rounds[0]?.base_state_digest ?? studio.records.find((r) => r.round_id === 0)?.global_state_digest ?? null} /></Panel>
-	{#if isTen && studio.run}<Panel eyebrow="CANDIDATE" title="Final engineering candidate" note="NOT PROMOTED · NOT DEPLOYED"><CandidateSummary run={studio.run} /></Panel>
+	{#if hardware}<Panel eyebrow="FINAL MODEL STATE" title="Demo model after the last committed round" note="NOT PROMOTED · NOT DEPLOYED">
+		<p data-testid="hardware-final-state">{#if lastDigest}Latest committed global state: <DigestText value={lastDigest} label="latest committed state digest" />{:else}No round has committed yet.{/if}</p>
+		<ul class="rs"><li>Promoted: <b>NO</b></li><li>Deployed: <b>NO</b></li><li>Released monitoring model changed: <b>NO</b></li><li>Pretrained V2 transfer: <b>NOT APPLICABLE</b></li></ul>
+		<p class="dim">This is a toy model trained to show the federated path on your recorded telemetry; it is not registered or used for monitoring.</p></Panel>
+	{:else if isTen && studio.run}<Panel eyebrow="CANDIDATE" title="Final engineering candidate" note="NOT PROMOTED · NOT DEPLOYED"><CandidateSummary run={studio.run} /></Panel>
 	{:else}<Panel eyebrow="CANDIDATE" title="Candidate lifecycle" note={replay ? 'HISTORICAL EVENT REPLAY' : 'ENGINEERING SANDBOX'}><CandidateLifecycle view={shown} {replay} /></Panel>{/if}
 </div>
 <div class="gap"></div>
-<Panel eyebrow="TIMELINE" title="What happened, in order" note={`${shown.timeline.length} events`}><FederationTimeline view={shown} /></Panel>
+<span id="sec-timeline"></span>
+<details class="tl" data-testid="timeline-disclosure"><summary>Timeline — what happened, in order <span>{shown.timeline.length} events</span></summary>
+<Panel eyebrow="TIMELINE" title="What happened, in order" note={`${shown.timeline.length} events`}><FederationTimeline view={shown} /></Panel></details>
+{:else if routeRun && fed.error}
+<Panel eyebrow="RUN UNAVAILABLE" title="This run could not be loaded"><p class="err" role="alert" data-testid="run-load-error">{fed.error}</p>
+	<p class="dim">The run id in the address is <code>{routeRun}</code>. It may belong to another account, may have been removed, or the backend may be unavailable. This is an error, not an empty run.</p>
+	<p><button type="button" onclick={() => { fed.error = null; void fed.selectRun(routeRun); }}>Try again</button> <a href="/app/federation">Back to Federation</a></p></Panel>
+{:else if routeRun}
+<Panel eyebrow="LOADING" title="Loading the selected run…"><p class="dim" role="status" data-testid="run-loading">Fetching the run descriptor and replaying its event journal from the start.</p></Panel>
 {:else}
 <Panel eyebrow="NO RUN SELECTED" title="Pick a run to watch"><p class="dim">Select a run, or start one from <a href="/app/federation">Federation</a>.</p><LiveVsReplay /></Panel>
 {/if}
+</div>
 <style>
 	.eyebrow { color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; letter-spacing: .14em; } h1 { margin: 10px 0 8px; font: 500 clamp(26px, 3.6vw, 38px) 'Space Grotesk', sans-serif; } .gap { height: 12px; } .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 12px; align-items: start; }
 	.dim { color: #94a3b8; font-size: 13px; line-height: 1.6; margin: 0 0 8px; } p { margin: 0 0 8px; font-size: 13px; } .err { color: #f87171; font: 12px 'JetBrains Mono', monospace; } a { color: #2bb8b0; } .replay { border: 1px solid rgba(148,163,184,.6); color: #e5e7eb; background: rgba(148,163,184,.08); padding: 8px 12px; font: 12px 'JetBrains Mono', monospace; }
@@ -141,4 +181,8 @@
 	.mine { margin: 10px 0; border: 1px solid rgba(43,184,176,.5); padding: 10px 12px; display: grid; gap: 4px; } .mine > b { font: 11px 'JetBrains Mono', monospace; letter-spacing: .1em; color: #2bb8b0; } .mine p { margin: 0; font-size: 12.5px; color: #cbd5e1; line-height: 1.5; }
 	.big { font-size: 14px; } .ss { font: 600 13px 'JetBrains Mono', monospace; letter-spacing: .06em; } .ss-complete { color: #c4b5fd; } .ss-running { color: #fbbf24; } .ss-failed { color: #f87171; } .ss-not-started, .ss-not-used { color: #94a3b8; }
 	.rs { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 12px; } button { background: none; border: 1px solid #f87171; color: #f87171; padding: 3px 8px; min-height: 24px; cursor: pointer; } button:focus-visible { outline: 2px solid #2bb8b0; }
+	.tl { border: 1px solid rgba(148,163,184,.16); } .tl > summary { cursor: pointer; padding: 10px 14px; font: 500 14px 'Space Grotesk', sans-serif; color: #e5f1f0; min-height: 24px; } .tl > summary span { margin-left: 10px; color: #71829a; font: 11.5px 'JetBrains Mono', monospace; } .tl[open] > summary { border-bottom: 1px solid rgba(148,163,184,.16); }
+	/* Readability of the frozen original components, applied from the page (their bytes stay pinned): micro-labels never fall below 11.5 px. */
+	.live-readable :global(small), .live-readable :global(dt), .live-readable :global(.k), .live-readable :global(.st), .live-readable :global(.raw), .live-readable :global(.peer), .live-readable :global(.mine) { font-size: 11.5px !important; }
+	#sec-network, #sec-evaluation, #sec-graphs, #sec-analysis, #sec-timeline { display: block; scroll-margin-top: 72px; }
 </style>

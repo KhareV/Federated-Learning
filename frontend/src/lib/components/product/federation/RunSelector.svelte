@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { FederationRun } from '$lib/product/federation/types';
-	let { runs, selected, onSelect }: { runs: FederationRun[]; selected: string | null; onSelect: (id: string) => void } = $props();
+	let { runs, selected, onSelect, badges = {} }: { runs: FederationRun[]; selected: string | null; onSelect: (id: string) => void; badges?: Record<string, string> } = $props();
 </script>
 <label class="sel">Federation run
 	<select value={selected ?? ''} onchange={(e) => onSelect((e.currentTarget as HTMLSelectElement).value)} data-testid="run-selector">
 		<option value="" disabled>{runs.length ? 'Select a run' : 'No runs yet'}</option>
-		{#each runs as r}<option value={r.run_id}>{r.run_id} · {r.run_type} · {r.algorithm} · {r.secagg_mode} · {r.planned_rounds} rounds · {r.status}</option>{/each}
+		{#each runs as r}<option value={r.run_id}>{r.run_id} · {badges[r.run_id] ?? r.run_type} · {r.run_type} · {r.algorithm} · {r.secagg_mode} · {r.planned_rounds} rounds · {r.status}</option>{/each}
 	</select>
 </label>
 <style>

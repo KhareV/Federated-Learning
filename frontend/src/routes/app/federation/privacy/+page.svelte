@@ -7,20 +7,20 @@
 	import { bootRun, chooseRun } from '$lib/components/product/federation/useRunParam';
 	import { useFederation } from '$lib/product/federation/state.svelte';
 	const fed = useFederation();
-	onMount(() => { void bootRun(fed, page.url.searchParams.get('run')); return () => fed.closeLive(); });
+	onMount(() => { void bootRun(fed, page.url.searchParams.get('run'), page.url.pathname); return () => fed.closeLive(); });
 	const shadow = $derived(fed.view.secagg.filter((s) => s.mode === 'SECAGG_SHADOW'));
 	const agg = $derived(fed.view.rounds.find((r) => r.aggregationMode)?.aggregationMode ?? null);
 </script>
 <svelte:head><title>Federation privacy boundary | NHM</title></svelte:head>
 <div class="head"><div class="eyebrow">NHM / FEDERATION / PRIVACY</div><h1>The implemented privacy boundary</h1></div>
-<FederationBanner runType={fed.run?.run_type ?? null} />
+<FederationBanner runType={fed.run?.run_type ?? null} dataSource={fed.hardwareRun ? 'HARDWARE' : 'SYNTHETIC'} />
 <p class="lead">A narrow engineering claim about what the aggregation interface receives. It is not a general privacy or security guarantee.</p>
 <div class="grid">
 	<Panel eyebrow="01 / LOGICAL CLIENT" title="What stays local">
-		<p>Local synthetic training examples stay inside each logical client buffer. All eight logical clients execute on one demonstration machine, not separate hospitals or institutions.</p>
+		<p>{fed.hardwareRun ? 'Your recorded training windows (labels are synthetic)' : 'Local synthetic training examples'} stay inside each logical client buffer. All eight logical clients execute on one demonstration machine, not separate hospitals or institutions.</p>
 	</Panel>
 	<Panel eyebrow="02 / COORDINATOR" title="What the coordinator receives">
-		<p>Model updates and metadata — not the clients' local synthetic training examples. This is an application-level data-flow boundary, not host or network isolation.</p>
+		<p>Model updates and metadata — not the clients' local {fed.hardwareRun ? 'recorded training windows' : 'synthetic training examples'}. This is an application-level data-flow boundary, not host or network isolation.</p>
 	</Panel>
 	<Panel eyebrow="03 / SHADOW" title="What SecAgg+ demonstrates" note="ROUND 1 ONLY">
 		<p>ROUND-1 PROTECTED-AGGREGATION SHADOW: a Flower SecAgg+ shadow is executed for round 1 only and compared with the plain aggregate under the frozen tolerance. <b>Authoritative aggregation remains PLAIN</b> in every product run.</p>
@@ -29,7 +29,7 @@
 </div>
 <section class="not-claimed" aria-labelledby="not-claimed-heading"><h2 id="not-claimed-heading">What is not claimed</h2><ul><li>No differential privacy.</li><li>No anonymity guarantee.</li><li>No hospital deployment.</li><li>No network or host isolation claim.</li><li>No production security certification.</li></ul></section>
 <div class="gap"></div>
-<RunSelector runs={fed.runs} selected={fed.run?.run_id ?? null} onSelect={(id) => chooseRun(fed, page.url.pathname, id)} />
+<RunSelector runs={fed.runs} badges={fed.runBadges} selected={fed.run?.run_id ?? null} onSelect={(id) => chooseRun(fed, page.url.pathname, id)} />
 {#if fed.run}
 	<Panel eyebrow="SELECTED RUN" title={fed.run.run_id} note={fed.run.secagg_mode}>
 		<p data-testid="privacy-agg">AUTHORITATIVE AGGREGATE: <b>{agg ?? '--'}</b></p>
