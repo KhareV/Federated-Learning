@@ -1,0 +1,88 @@
+{
+  "mode": "scenario-b",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-B-1792052182622",
+  "prior_history_after_restart": true,
+  "pre_emission_seconds": 18,
+  "first_session_id": "HW-3c8324da31bf4be2bef1cd0b0c092946",
+  "first_live": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 1200,
+    "bpm": "69",
+    "spo2": "98%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad08c262ddc3f5b68fc8082",
+    "latest_ecg": 1817,
+    "latest_x": 1000,
+    "latest_y": 103.44322344322345,
+    "expected_y": 103.44322344322345
+  },
+  "first_stop": {
+    "state": "SESSION STOPPED",
+    "count": 1200,
+    "bpm": "69",
+    "spo2": "98%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad08c262ddc3f5b68fc8082",
+    "latest_ecg": 1817,
+    "latest_x": 1000,
+    "latest_y": 103.44322344322345,
+    "expected_y": 103.44322344322345
+  },
+  "first_after_stop": {
+    "state": "SESSION STOPPED",
+    "count": 1200,
+    "bpm": "69",
+    "spo2": "98%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad08c262ddc3f5b68fc8082",
+    "latest_ecg": 1817,
+    "latest_x": 1000,
+    "latest_y": 103.44322344322345,
+    "expected_y": 103.44322344322345
+  },
+  "second_session_id": "HW-837e61b57ed94897a76b841fcfcf6a58",
+  "second_live": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 500,
+    "bpm": "75",
+    "spo2": "98%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad08c432ddc3f5b68fc82d0",
+    "latest_ecg": 2266,
+    "latest_x": 1000,
+    "latest_y": 86.99633699633699,
+    "expected_y": 86.99633699633699
+  },
+  "second_stop": {
+    "state": "SESSION STOPPED",
+    "count": 500,
+    "bpm": "75",
+    "spo2": "98%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad08c432ddc3f5b68fc82d0",
+    "latest_ecg": 2266,
+    "latest_x": 1000,
+    "latest_y": 86.99633699633699,
+    "expected_y": 86.99633699633699
+  },
+  "separate_sessions": true,
+  "history_visible": true,
+  "demo_fl": {
+    "fedavg": "HDFLRUN-51ED6975D928 · COMPLETED48 train / 12 holdout windows8 clients · 10 rounds · 80 accepted updatesFeature digest deb1ad230b44c002…Final state cc117a4048741f4d…SecAgg+ shadow: PASS · authoritative aggregate PLAINTOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
+    "fedprox": "HDFLRUN-36D6C2B25A1B · COMPLETED48 train / 12 holdout windows8 clients · 10 rounds · 80 accepted updatesFeature digest deb1ad230b44c002…Final state dc996bcfc0ddaf79…SecAgg+ shadow: PASS · authoritative aggregate PLAINTOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity"
+  }
+}

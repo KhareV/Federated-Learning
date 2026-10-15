@@ -100,6 +100,9 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
     rr = b["rounds"]
     rr_by = {r["round"]: r for r in rr}
     windows = b["evaluation"]["windows"]
+    algorithm = b.get("run", {}).get("algorithm") or "FEDAVG"
+    algorithm_label = "FedProx" if algorithm == "FEDPROX" else "FedAvg"
+    objective = (b.get("run", {}).get("settings") or {}).get("local_objective", "BCE")
 
     def add(fid: str, caption: str, sources: list[str], views: list[dict[str, Any]], *, group: str | None = None, note: str | None = None, needs: list[str] | None = None, none_needed: bool = False,
             availability_note: str | None = None) -> None:
@@ -118,9 +121,14 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
 
     # 01 architecture ---------------------------------------------------------------------------------------------------------------
     nodes = [{"id": cl, "label": f"{cl.replace(LOW, '')}: local data stays here", "kind": "client"} for cl in clients]
-    add("FL10_FIG01", f"Eight logical clients (single machine) train locally for one epoch, submit updates, and the coordinator applies weighted FedAvg for {n} round{'s' if n != 1 else ''}; the highlighted round is the latest committed one.",
+    legacy_fedavg = algorithm == "FEDAVG" and (b.get("run", {}).get("secagg_mode") or "PLAIN") == "PLAIN"
+    architecture_caption = (f"Eight logical clients (single machine) train locally for one epoch, submit updates, and the coordinator applies weighted FedAvg for {n} round{'s' if n != 1 else ''}; the highlighted round is the latest committed one."
+                            if legacy_fedavg else f"Eight logical clients (single machine) train locally for one epoch, submit updates, and the coordinator applies sample-count-weighted aggregation after {algorithm_label} local training for {n} round{'s' if n != 1 else ''}; the highlighted round is the latest committed one.")
+    stages = (["local optimizer (AdamW, 1 epoch)", "update submission (digest, example count)", "weighted FedAvg (Coordinator)", f"global model R00 -> R{n:02d}", "final engineering candidate (not promoted)"]
+              if legacy_fedavg else [f"local optimizer (AdamW, 1 epoch; {objective})", "update submission (digest, example count)", "sample-count-weighted aggregation (Coordinator)", f"global model R00 -> R{n:02d}", "final engineering candidate (not promoted)"])
+    add("FL10_FIG01", architecture_caption,
         ["run_report.json"], [{"id": "diagram", "label": "Architecture", "kind": "diagram", "nodes": nodes, "monitoring": "optional simulated ECG monitoring session -> SITE_00 buffer (Mode B)",
-                               "stages": ["local optimizer (AdamW, 1 epoch)", "update submission (digest, example count)", "weighted FedAvg (Coordinator)", f"global model R00 -> R{n:02d}", "final engineering candidate (not promoted)"],
+                               "stages": stages,
                                "current_round": max(c.committed) if c.committed else 0, "planned_rounds": n}], none_needed=True)
     # 02 global loss ----------------------------------------------------------------------------------------------------------------
     add("FL10_FIG02", "Example-weighted mean of the eight clients' actual local training losses per round (training data, not independent evaluation).", ["rounds.csv"],
@@ -183,7 +191,7 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
         none_needed=True, availability_note=f"{len(rr)} of {n} rounds committed")
     # 13 weights --------------------------------------------------------------------------------------------------------------------
     w = c.by_cr("aggregation_weight")
-    add("FL10_FIG13", "FedAvg aggregation weights = accepted example count / total accepted examples; each completed round sums to one.", ["client_rounds.csv", "rounds.csv"],
+    add("FL10_FIG13", ("FedAvg aggregation weights = accepted example count / total accepted examples; each completed round sums to one." if legacy_fedavg else f"{algorithm_label} aggregation weights = accepted example count / total accepted examples; each completed round sums to one."), ["client_rounds.csv", "rounds.csv"],
         [{"id": "weights", "label": "Aggregation weights", "kind": "stacked", "x_label": "Communication round", "y_label": "Normalised weight", "categories": [f"R{r}" for r in rounds],
           "series": [{"name": cl.replace(LOW, ""), "values": [w[cl].get(r) for r in rounds]} for cl in clients], "total_check": [sum(w[cl][r] for cl in clients) if all(r in w[cl] for cl in clients) else None for r in rounds]}], none_needed=True, availability_note=f"{len(rr)} of {n} rounds committed")
     # 14 dataset composition --------------------------------------------------------------------------------------------------------

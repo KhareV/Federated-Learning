@@ -75,11 +75,11 @@ describe('round-scoped api client and sockets', () => {
 		expect(federationSocketUrl('recorded-A', loc)).toBe('wss://h/product/v1/studio/runs/recorded-A/live');
 		expect(federationSocketUrl('FL10RUN-X', loc)).not.toMatch(/token|secret|user|bearer|cookie/i);
 	});
-	it('a 10-round start sends exactly run_length and source_mode (no algorithm, threshold or calibration field)', async () => {
+	it('a 10-round start sends explicit algorithm and aggregation defaults without threshold or calibration fields', async () => {
 		const sent: unknown[] = [];
 		const client = createProductClient({ fetchImpl: (async (_u: string, init: RequestInit) => { sent.push(JSON.parse(String(init.body))); return new Response('{}', { status: 200 }); }) as never });
 		await client.studioStartTenRound({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00' }).catch(() => undefined);
-		expect(sent[0]).toEqual({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00' });
+		expect(sent[0]).toEqual({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00', algorithm: 'FEDAVG', secagg_mode: 'PLAIN' });
 	});
 });
 

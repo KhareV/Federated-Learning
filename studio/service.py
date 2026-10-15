@@ -176,7 +176,7 @@ class StudioService:
                 job = self.runner10.get(user_id, run_id)
             except StudioRunError as error:
                 raise _as_product_error(error) from error
-            return {"run_id": run_id, "run_length": job.rounds, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": "FEDAVG", "secagg_mode": "PLAIN", "source_mode": MODES[job.mode], "status": job.status,
+            return {"run_id": run_id, "run_length": job.rounds, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "source_mode": MODES[job.mode], "status": job.status,
                     "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds, "client_ids": list(CLIENT_IDS), "candidate": job.candidate, "failure": job.failure,
                     "label": f"{job.rounds}-round " + ("extended run" if job.init == v2_init.INIT_FRESH else "run — pretrained V2 start"),
                     "base_model": self._base_model(job.init, job.base_audit), "source_label": "LIVE RUN (this session)", "replay_of": None, "evaluation": self._evaluation_state(run_id), "export_status": job.export_status, "created_at": job.created_at}

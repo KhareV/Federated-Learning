@@ -24,7 +24,6 @@ EVIDENCE = "reports/unified_live_fl"
 PROTECTED_SURFACE = ("reports/model_v2", "reports/fl10", "reports/final_showcase", "configs/fl10", "federated", "models", "checkpoints", "training", "preprocessing", "privacy", "simulation", "product", "src", "final_showcase",
                      "fl10/charts.py", "fl10/tables.py", "fl10/figures.py", "fl10/evaluate.py", "fl10/metrics.py", "fl10/bundle.py", "fl10/holdout.py", "capstone_persistence", "contracts")
 ALLOWED_ARTIFACT_PREFIX = "artifacts/unified_studio/"
-HARDWARE_SUCCESSOR = "artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json"
 FLAGS_FALSE = ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "hardware_work_performed", "historical_locks_edited", "automatically_pushed", "frozen_scientific_evidence_edited")
 
 
@@ -37,15 +36,24 @@ def git(*args: str) -> str:
 
 
 def hardware_successor_bound() -> dict[str, str]:
-    """Exact files changed by the later hardware/Clerk successor, if it exists and chains."""
-    if not (ROOT / HARDWARE_SUCCESSOR).is_file():
-        return {}
-    link = next(x for x in successor_chain.LINKS if x.lock_id == "NHM_HARDWARE_MONGO_MONITOR_001")
-    lock = successor_chain.validate_link(link, ROOT)
-    bound = lock.get("bound_files", {})
-    if not isinstance(bound, dict) or any(not (ROOT / p).is_file() or sha(ROOT / p) != d for p, d in bound.items()):
-        raise ValueError("HARDWARE_SUCCESSOR_BOUND_FILE_DRIFT")
-    return bound
+    """Exact files changed by every registered successor after this Studio lock."""
+    merged: dict[str, str] = {}
+    loaded: list[tuple[successor_chain.Link, dict[str, Any]]] = []
+    studio_index = next(i for i, item in enumerate(successor_chain.LINKS) if item.lock_id == "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001")
+    for link in successor_chain.LINKS[studio_index + 1:]:
+        if not (ROOT / link.path).is_file():
+            break
+        lock = successor_chain.validate_link(link, ROOT)
+        bound = lock.get("bound_files", {})
+        if not isinstance(bound, dict):
+            raise ValueError(f"{link.lock_id}_BOUND_FILE_DRIFT")
+        loaded.append((link, lock))
+        merged.update(bound)
+    # Validate the merged tip. A prior successor's file may differ only when a
+    # later, independently validated successor explicitly re-pins that path.
+    if any(not (ROOT / path).is_file() or sha(ROOT / path) != digest for path, digest in merged.items()):
+        raise ValueError(f"{loaded[-1][0].lock_id if loaded else 'HARDWARE_SUCCESSOR'}_BOUND_FILE_DRIFT")
+    return merged
 
 
 def verify_evidence() -> dict[str, Any]:
@@ -57,10 +65,11 @@ def verify_evidence() -> dict[str, Any]:
     if changed:
         raise ValueError(f"PROTECTED_SURFACE_CHANGED:{changed[:5]}")
     historical = []
+    later_successor_paths = {link.path for link in successor_chain.LINKS if link.lock_id not in ("NHM_FL10_001", "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001")}
     for line in git("diff", "--name-status", FL10_COMMIT, "--", "artifacts").splitlines():
         code, _, path = line.partition("\t")
         additive_amendment = code == "A" and re.fullmatch(r"artifacts/(?:capstone|final_eval_repair|ufl_lite)/[A-Z]+(?:_[A-Z0-9]+)*_PROTOCOL_V1\.amendment_[0-9_]+\.json", path) is not None
-        if path and not path.startswith(ALLOWED_ARTIFACT_PREFIX) and not (code == "A" and path == HARDWARE_SUCCESSOR) and not additive_amendment:      # only exact later successor or NEW compatibility amendments; no historical file is modified or deleted
+        if path and not path.startswith(ALLOWED_ARTIFACT_PREFIX) and not (code == "A" and path in later_successor_paths) and not additive_amendment:      # only registered later successors or NEW compatibility amendments; no historical file is modified or deleted
             historical.append(line)
     if historical:
         raise ValueError(f"HISTORICAL_LOCK_OR_AMENDMENT_CHANGED:{historical[:5]}")
@@ -174,6 +183,8 @@ def verify_lock(path: Path = LOCK_PATH, *, with_older_chain: bool = True) -> dic
     # immutable predecessor commit by the successor-chain validation above.
     if tip is not None and lock["frontend_files"] != json.loads(LOCK_PATH.read_text())["frontend_files"]:
         raise ValueError("STUDIO_HISTORICAL_FRONTEND_BINDING_TAMPER")
+    if tip is not None and lock["repins_predecessor_files"] != json.loads(LOCK_PATH.read_text())["repins_predecessor_files"]:
+        raise ValueError("STUDIO_HISTORICAL_REPIN_BINDING_TAMPER")
     later_frontend = {r for r, d in (tip or {}).items() if (ROOT / r).is_file() and sha(ROOT / r) == d and lock["frontend_files"].get(r) != d}
     newly_repinned_frontend = later_frontend - set(lock["repins_predecessor_files"])
     newly_repinned_bound = set(later) - set(lock["repins_predecessor_files"])

@@ -1,0 +1,44 @@
+{
+  "actual_atlas_collection": "health_db.nhm_integration_test",
+  "backend_restart_between_scenarios": true,
+  "owner_probe": {
+    "actual_atlas": true,
+    "detail_refused": true,
+    "mode": "owner-probe",
+    "real_browser": true,
+    "real_clerk": true,
+    "signin": {
+      "clerk_test": true,
+      "client_trust_code_used": true,
+      "signed_in": true
+    },
+    "synthetic_source": true,
+    "target_absent_from_demo_sources": true,
+    "target_session": "HW-2cee298c49134028ba71b2ebd1df83f6"
+  },
+  "real_chrome": true,
+  "real_clerk_test_users": 2,
+  "scenario_a_session": "HW-2cee298c49134028ba71b2ebd1df83f6",
+  "scenario_b_sessions": [
+    "HW-3c8324da31bf4be2bef1cd0b0c092946",
+    "HW-837e61b57ed94897a76b841fcfcf6a58"
+  ],
+  "screenshots": [
+    "owner_probe_shots/owner_b_forbidden.png",
+    "scenario_a_shots/a_history.png",
+    "scenario_a_shots/a_live.png",
+    "scenario_a_shots/a_recovered.png",
+    "scenario_a_shots/a_stale.png",
+    "scenario_a_shots/a_stopped.png",
+    "scenario_a_shots/a_waiting.png",
+    "scenario_a_shots/demo_3_fedavg.png",
+    "scenario_a_shots/demo_3_fedprox.png",
+    "scenario_b_shots/b_first_live.png",
+    "scenario_b_shots/b_history.png",
+    "scenario_b_shots/b_prior_history_after_restart.png",
+    "scenario_b_shots/b_second_stopped.png",
+    "scenario_b_shots/demo_10_fedavg.png",
+    "scenario_b_shots/demo_10_fedprox.png"
+  ],
+  "status": "PASS"
+}

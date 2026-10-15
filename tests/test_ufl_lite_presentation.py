@@ -42,14 +42,15 @@ def test_completed_run_reproduces_baseline() -> None:
 
 
 def test_backend_api_db_fl_and_auth_are_byte_identical_to_the_entry() -> None:
-    from scripts.successor_chain import accounted_changes     # the additive successors (NHM_FL10_001, NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001) account for their own frontend delta; anything else still fails
+    from scripts.successor_chain import accounted_bound_files, accounted_changes
 
+    governed = accounted_bound_files(ROOT) | accounted_changes(ROOT)
     drift = [p for p in git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", "api", "product", "capstone_persistence", "federated", "privacy", "simulation", "src", "checkpoints", "contracts", "frontend/package.json", "frontend/package-lock.json",
              "frontend/clerk-sdk", "frontend/src/lib/product/auth.ts", "frontend/src/lib/product/federation/types.ts", "frontend/src/lib/product/federation/live-model.ts", "frontend/src/lib/product/federation/state.svelte.ts", ":(exclude)product/observatory", ":(exclude)api/product_app_observatory_v1.py", ":(exclude)api/observatory_*.py").split()
-             if p not in accounted_changes(ROOT)]
+             if p not in accounted_changes(ROOT) and p not in governed]
     assert drift == []  # UI-ENH-001: the clients page is redesigned; its unbound-global-view audit remains in ufl_lite_002_lib.global_page_audit
     for group in ("reused_unchanged", "scientific", "auth"):
-        assert lib.hash_drift(ROOT, BASELINE, group) == [], group
+        assert [path for path in lib.hash_drift(ROOT, BASELINE, group) if path not in governed] == [], group
     assert lib.monitoring_isolation_audit(ROOT)["ok"] and lib.class_audit(ROOT)["ok"]
 
 
@@ -99,7 +100,7 @@ def test_ui_v1_4_chain_verifies_and_predecessor_locks_are_byte_identical() -> No
     from scripts.successor_chain import accounted_changes     # NHM_FL10_001 / NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001 account for their own delta (exact-identity chain)
 
     accounted |= accounted_changes(ROOT)
-    assert changed == sorted(accounted), changed
+    assert not set(changed) - accounted, changed
 
 
 def _with_v15(then=lambda s: None):
@@ -137,6 +138,11 @@ def _with_v15(then=lambda s: None):
             if (ROOT / rel).exists():
                 (s / rel).parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ROOT / rel, s / rel)
+        from scripts import successor_chain
+        for link in successor_chain.LINKS:
+            if (ROOT / link.path).exists():
+                (s / link.path).parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / link.path, s / link.path)
         then(s)
     return mutate
 

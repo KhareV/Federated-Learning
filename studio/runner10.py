@@ -21,6 +21,7 @@ from fl10.runner import atomic_write, load_state
 from product.federation.artifact_store import FederationArtifactStore
 from product.federation.events import FederationEmitter
 from product.federation.journal import FederationEventJournal
+from product.federation.base import AggregationMode, Algorithm
 from studio import v2_init
 from studio.events10 import Fl10EventTranslator
 from studio.observer import EvaluationObserver
@@ -50,6 +51,8 @@ class Job:
     rounds: int = 10                             # 10 (extended) or 3 (only with the pretrained start; the frozen 3-round product contract keeps the untrained start)
     init: str = v2_init.INIT_FRESH               # FL_INIT_V2 (untrained, default) | MODEL_V2_FINAL (pretrained, federated fine-tuning)
     base_audit: dict[str, Any] | None = None     # compatibility audit of the pretrained start (None for FL_INIT_V2)
+    algorithm: str = "FEDAVG"
+    secagg_mode: str = "PLAIN"
     status: str = "CREATED"                      # CREATED | RUNNING | COMPLETED | FAILED
     phase: str = "CREATED"
     current_round: int = 0
@@ -84,14 +87,14 @@ class StudioFl10Service:
         return self.root / run_id
 
     def _save(self, job: Job) -> None:
-        meta = {"run_id": job.run_id, "owner": job.owner, "mode": job.mode, "init": job.init, "base_audit": job.base_audit, "created_at": job.created_at, "status": job.status, "phase": job.phase, "current_round": job.current_round,
+        meta = {"run_id": job.run_id, "owner": job.owner, "mode": job.mode, "init": job.init, "base_audit": job.base_audit, "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "created_at": job.created_at, "status": job.status, "phase": job.phase, "current_round": job.current_round,
                 "failure": job.failure, "candidate": job.candidate, "export_status": job.export_status, "run_length": job.rounds, "engine": "FL10_10R"}
         atomic_write(self.job_dir(job.run_id) / "meta.json", (json.dumps(meta, indent=1, sort_keys=True) + "\n").encode())
 
     def _load_existing(self) -> None:
         for path in sorted(self.root.glob("FL10RUN-*/meta.json")):
             meta = json.loads(path.read_text())
-            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], rounds=int(meta.get("run_length", 10)), init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
+            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], rounds=int(meta.get("run_length", 10)), init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), algorithm=meta.get("algorithm", "FEDAVG"), secagg_mode=meta.get("secagg_mode", "PLAIN"), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
                       failure=meta.get("failure"), candidate=meta.get("candidate"), export_status=meta.get("export_status", "NOT_STARTED"))
             journal = FederationEventJournal(job.run_id)
             for event in self.events.read_events(job.run_id):
@@ -139,7 +142,8 @@ class StudioFl10Service:
         if tasks:
             await asyncio.wait(tasks, timeout=timeout)
 
-    async def create(self, owner: str, mode: str, init: str = v2_init.INIT_FRESH, rounds: int = 10) -> Job:
+    async def create(self, owner: str, mode: str, init: str = v2_init.INIT_FRESH, rounds: int = 10,
+                     algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN") -> Job:
         if rounds not in (3, 10):
             raise StudioRunError("INVALID_REQUEST", "the extended engine runs 3 or 10 rounds")
         if rounds == 3 and init != v2_init.INIT_V2_FINAL:
@@ -151,10 +155,12 @@ class StudioFl10Service:
         if mode == "B" and self._inference_factory is None:
             raise StudioRunError("SOURCE_MODE_UNAVAILABLE", "the live-monitored simulated SITE_00 source needs the monitoring runtime")
         run_id = f"FL10RUN-{secrets.token_hex(6).upper()}"
-        job = Job(run_id=run_id, owner=owner, mode=mode, rounds=rounds, init=init, created_at=_now(), loop=asyncio.get_running_loop())
+        if algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
+            raise StudioRunError("INVALID_REQUEST", "algorithm or aggregation mode is unsupported")
+        job = Job(run_id=run_id, owner=owner, mode=mode, rounds=rounds, init=init, algorithm=algorithm, secagg_mode=secagg_mode, created_at=_now(), loop=asyncio.get_running_loop())
         job.journal = FederationEventJournal(run_id)
         job.emitter = FederationEmitter(run_id, lambda: time.time_ns() // 1000, [job.journal.append, lambda e: self.events.append_event(run_id, e)], 0)
-        job.translator = Fl10EventTranslator(job.emitter, lambda fn: job.loop.call_soon_threadsafe(fn), planned_rounds=rounds, client_ids=CLIENT_IDS, local_examples={c: 0 for c in CLIENT_IDS})
+        job.translator = Fl10EventTranslator(job.emitter, lambda fn: job.loop.call_soon_threadsafe(fn), planned_rounds=rounds, client_ids=CLIENT_IDS, local_examples={c: 0 for c in CLIENT_IDS}, algorithm=Algorithm(algorithm), secagg_mode=AggregationMode(secagg_mode))
         self.jobs[run_id] = job
         self._save(job)
         job.translator.created()
@@ -244,14 +250,14 @@ class StudioFl10Service:
         self._set_phase(job, "TRAINING")
         pretrained = {"initial_state": initial_state, "initialisation": initialisation} if initial_state is not None else {}
         if job.mode == "A":
-            report = runner.run_training(mode="A", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, rounds=job.rounds, require_prefix_parity=initial_state is None, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), **pretrained)
+            report = runner.run_training(mode="A", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, rounds=job.rounds, require_prefix_parity=initial_state is None and job.algorithm == "FEDAVG", progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), algorithm=job.algorithm, secagg_mode=job.secagg_mode, **pretrained)
         else:
             from final_showcase import link_trace
             from fl10.trace import Fl10TrainerTap
             from product.edge.local_training_buffer import LocalTrainingBufferV1
 
             with Fl10TrainerTap() as tap:
-                report = runner.run_training(mode="B", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, rounds=job.rounds, require_prefix_parity=False, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), **pretrained)
+                report = runner.run_training(mode="B", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, rounds=job.rounds, require_prefix_parity=False, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), algorithm=job.algorithm, secagg_mode=job.secagg_mode, **pretrained)
             expected = link_trace.expected_trace(live)
             buffer = LocalTrainingBufferV1(live.client_id, live.participant_id)
             buffer.ingest_dataset(live)

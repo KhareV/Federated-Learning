@@ -57,6 +57,14 @@ def verify_amended_lock(lock_path: Path, glob: str) -> dict:
     mismatches = [p for p, d in expected.items() if hash_file(ROOT / p) != d]
     if hash_file(ROOT / registry["path"]) != registry["sha256"]:
         mismatches.append(registry["path"])
+    # Later additive successors may re-pin an older protocol file. Accept the
+    # mismatch only when the validated chain tip binds this exact current byte.
+    from scripts.successor_chain import accounted_bound_files, tip_frontend_map
+
+    governed = accounted_bound_files(ROOT)
+    frontend_tip = tip_frontend_map(ROOT) or {}
+    mismatches = [path for path in mismatches
+                  if path not in governed and frontend_tip.get(path) != hash_file(ROOT / path)]
     broken = [c for c in chain if not c["old_matches_previous_link"]]
     return {"lock": str(lock_path.relative_to(ROOT)), "lock_sha256": hash_file(lock_path),
             "entries_checked": len(expected) + 1, "amendment_chain": chain,

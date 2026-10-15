@@ -51,6 +51,9 @@ LINKS: tuple[Link, ...] = (
     Link("NHM_HARDWARE_MONGO_MONITOR_001", "artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json", "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json",
          "predecessor_lock_sha256", "predecessor_commit", "1501c9de890342d7aa286ed3521053799b48e81e", "frontend_files",
          ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "historical_locks_edited", "automatically_pushed", "frozen_scientific_evidence_edited")),
+    Link("NHM_RECORDED_HARDWARE_FL_001", "artifacts/hardware_demo/NHM_RECORDED_HARDWARE_FL_001.lock.json", "artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json",
+         "predecessor_lock_sha256", "predecessor_commit", "e2377adb066381e4914a5c073c56a3ec821ead0c", "frontend_files",
+         ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "historical_locks_edited", "automatically_pushed", "frozen_scientific_evidence_edited")),
 )
 
 
@@ -122,14 +125,26 @@ def tip_frontend_map(root: Path, links: tuple[Link, ...] = LINKS) -> dict[str, s
 
 
 def accounted_changes(root: Path = ROOT, links: tuple[Link, ...] = LINKS) -> set[str]:
-    """Frontend files whose bytes changed (or that were added) by the registered, validly chained additive successors after NHM_FINAL_SHOWCASE_001.
+    """Frontend files whose tip bytes differ from the final-showcase baseline.
     Used by the historical accounting tests: drift is legal only when completely accounted for here. An invalid link raises; there is no fallback."""
-    previous = dict(json.loads((root / FINAL_SHOWCASE).read_text())["bound_artifacts"])
-    changed: set[str] = set()
+    baseline = dict(json.loads((root / FINAL_SHOWCASE).read_text())["bound_artifacts"])
+    tip = dict(baseline)
     for link in links:
         if not (root / link.path).exists():
             break
-        current = dict(validate_link(link, root, links)[link.frontend_map_key])
-        changed |= {p for p, d in current.items() if previous.get(p) != d}
-        previous = current
-    return changed
+        tip = dict(validate_link(link, root, links)[link.frontend_map_key])
+    return {path for path in set(baseline) | set(tip) if baseline.get(path) != tip.get(path)}
+
+
+def accounted_bound_files(root: Path = ROOT, links: tuple[Link, ...] = LINKS) -> set[str]:
+    """All implementation and evidence paths explicitly bound by valid successors."""
+    bound: dict[str, str] = {}
+    for link in links:
+        if not (root / link.path).exists():
+            break
+        lock = validate_link(link, root, links)
+        values = lock.get("bound_files", {})
+        if not isinstance(values, dict):
+            raise _broken(link, "NO_BOUND_FILES")
+        bound.update(values)
+    return {path for path, digest in bound.items() if (root / path).is_file() and sha256((root / path).read_bytes()) == digest}

@@ -27,13 +27,15 @@ CLIENT_COUNT = 8
 class Fl10EventTranslator:
     """``post(fn)`` runs ``fn`` on the thread that owns the journal (the event loop); order of calls is preserved."""
 
-    def __init__(self, emitter: FederationEmitter, post: Callable[[Callable[[], None]], None], *, planned_rounds: int, client_ids: tuple[str, ...], local_examples: dict[str, int], run_type: RunType = RunType.LIVE_RUN) -> None:
+    def __init__(self, emitter: FederationEmitter, post: Callable[[Callable[[], None]], None], *, planned_rounds: int, client_ids: tuple[str, ...], local_examples: dict[str, int], run_type: RunType = RunType.LIVE_RUN,
+                 algorithm: Algorithm = Algorithm.FEDAVG, secagg_mode: AggregationMode = AggregationMode.PLAIN) -> None:
         self.em, self._post, self.run_type = emitter, post, run_type
+        self.algorithm, self.secagg_mode = algorithm, secagg_mode
         self.planned, self.clients, self.examples = planned_rounds, client_ids, local_examples
         self.round = 0
 
     def _status(self, status: RunState, round_id: int) -> None:
-        self.em.federation_status(run_type=self.run_type, run_status=status, algorithm=Algorithm.FEDAVG, current_round=round_id, planned_rounds=self.planned, client_count=CLIENT_COUNT, engineering_only=True)
+        self.em.federation_status(run_type=self.run_type, run_status=status, algorithm=self.algorithm, current_round=round_id, planned_rounds=self.planned, client_count=CLIENT_COUNT, engineering_only=True)
 
     def created(self) -> None:
         self._post(lambda: self._status(RunState.CREATED, 0))
@@ -79,14 +81,17 @@ class Fl10EventTranslator:
                     self.em.client_status(client_id=c, client_state=ClientState.SUBMITTED, local_example_count=self.examples[c], reason_code=None)
                 self.em.round_status(round_id=r, round_state=RoundState.UPDATES_READY, accepted_updates=len(accepted), expected_updates=CLIENT_COUNT)
                 self.em.round_status(round_id=r, round_state=RoundState.AGGREGATING, accepted_updates=len(accepted), expected_updates=CLIENT_COUNT)
-                self.em.secagg_status(round_id=r, mode=AggregationMode.PLAIN, status=SecAggStatus.NOT_USED)
+                if self.secagg_mode is AggregationMode.PLAIN or r != 1:
+                    self.em.secagg_status(round_id=r, mode=AggregationMode.PLAIN, status=SecAggStatus.NOT_USED)
 
             self._post(accept)
+        elif kind == "SECAGG_SHADOW_VERIFIED":
+            self._post(lambda: self.em.secagg_status(round_id=1, mode=AggregationMode.SECAGG_SHADOW, status=SecAggStatus.VERIFIED))
         elif kind == "ROUND_COMMITTED":
             digest = event["global_state_sha256"]
 
             def committed() -> None:
-                self.em.aggregation_status(round_id=r, algorithm=Algorithm.FEDAVG, aggregation_mode=AggregationMode.PLAIN, accepted_updates=CLIENT_COUNT, state_digest=digest)
+                self.em.aggregation_status(round_id=r, algorithm=self.algorithm, aggregation_mode=AggregationMode.PLAIN, accepted_updates=CLIENT_COUNT, state_digest=digest)
                 self.em.round_status(round_id=r, round_state=RoundState.COMPLETED, accepted_updates=CLIENT_COUNT, expected_updates=CLIENT_COUNT)
 
             self._post(committed)

@@ -1,5 +1,5 @@
 // Fail-closed parsers for the Studio REST payloads (no value is cast blindly; a malformed or foreign payload throws).
-import type { BaseModel, GenCohort, GenCurves, GenInterval, GenPair, GenParticipants, GenRecord, GenRound, Generalisation, Initialisation, StudioOverview, EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
+import type { BaseModel, GenCohort, GenCurves, GenInterval, GenPair, GenParticipants, GenRecord, GenRound, Generalisation, HardwareDemoRun, HardwareDemoSession, Initialisation, StudioOverview, EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
 
 type Rec = Record<string, unknown>;
 export class StudioParseError extends Error {
@@ -35,9 +35,20 @@ export function parseCapabilities(value: unknown): StudioCapabilities {
 		ten_round: { available: t.available === true, initialisations: Array.isArray(t.initialisations) ? t.initialisations.map((i) => { const o = obj(i, 'initialisation'); return { id: oneOf(o.id, INITS, 'initialisation'), label: str(o.label, 'label'), default: o.default === true }; }) : undefined, rounds_by_initialisation: t.rounds_by_initialisation ? Object.fromEntries(Object.entries(obj(t.rounds_by_initialisation, 'rounds_by_initialisation')).map(([k, v]) => [oneOf(k, INITS, 'initialisation'), arr(v, 'rounds').map((x) => int(x, 'round'))])) : undefined, default_initialisation: t.default_initialisation === undefined ? undefined : oneOf(t.default_initialisation, INITS, 'default_initialisation'), source_modes: arr(t.source_modes, 'modes').map((m) => oneOf(m, ['CANONICAL_SYNTHETIC', 'LIVE_MONITORED_SITE_00'] as const, 'mode')), algorithms: arr(t.algorithms, 'algorithms').map((x) => str(x, 'algorithm')),
 			aggregation_modes: arr(t.aggregation_modes, 'agg').map((x) => str(x, 'agg')), unsupported: Object.fromEntries(Object.entries(obj(t.unsupported, 'unsupported')).map(([k, v]) => [k, str(v, 'why')])), expected_updates: int(t.expected_updates, 'expected') },
 		three_round: { available: h.available === true, expected_updates: int(h.expected_updates, 'expected') },
+		hardware_demo: r.hardware_demo ? (() => { const d = obj(r.hardware_demo, 'hardware_demo'); return { available: d.available === true, source_mode: oneOf(d.source_mode, ['RECORDED_HARDWARE_DEMO'] as const, 'hardware source'), model: oneOf(d.model, ['HARDWARE_DEMO_MODEL_V1'] as const, 'hardware model'), run_lengths: arr(d.run_lengths, 'hardware rounds').map((x) => int(x, 'round')), algorithms: arr(d.algorithms, 'hardware algorithms').map((x) => str(x, 'algorithm')), aggregation_modes: arr(d.aggregation_modes, 'hardware modes').map((x) => str(x, 'mode')), secagg_scope: str(d.secagg_scope, 'secagg scope'), fedprox_mu: num(d.fedprox_mu, 'mu'), label_assignment: str(d.label_assignment, 'labels'), initialisations: arr(d.initialisations, 'hardware initialisations').map((x) => str(x, 'initialisation')), v2_initialisation: str(d.v2_initialisation, 'v2 compatibility') }; })() : undefined,
 		generalisation: r.generalisation ? { cohort_id: str(obj(r.generalisation, 'generalisation').cohort_id, 'cohort_id'), label: str(obj(r.generalisation, 'generalisation').label, 'label'), claim_boundary: str(obj(r.generalisation, 'generalisation').claim_boundary, 'claim_boundary'), baseline: str(obj(r.generalisation, 'generalisation').baseline, 'baseline') } : undefined,
 		evaluation: { observer_id: str(e.observer_id, 'observer'), protocol_id: str(e.protocol_id, 'protocol'), threshold: num(e.threshold, 'threshold'), calibration: str(e.calibration, 'calibration'), cohort_use: str(e.cohort_use, 'cohort_use'),
 			cohort_use_detail: str(e.cohort_use_detail, 'cohort_use_detail'), claim_boundary: str(e.claim_boundary, 'claim_boundary') } };
+}
+
+export function parseHardwareDemoSessions(value: unknown): HardwareDemoSession[] {
+	return arr(value, 'hardware sessions').map((raw) => { const r = obj(raw, 'hardware session'); return { id: str(r.id, 'id'), started_at: str(r.started_at, 'started_at'), stopped_at: str(r.stopped_at, 'stopped_at'), record_count: int(r.record_count, 'record_count'), trace_count: int(r.trace_count, 'trace_count'), eligible: r.eligible === true }; });
+}
+
+export function parseHardwareDemoRun(value: unknown): HardwareDemoRun {
+	const r = obj(value, 'hardware demo run');
+	if (r.schema_version !== 'HARDWARE_DEMO_FL_RUN_V1' || r.status !== 'COMPLETED' || r.source_mode !== 'RECORDED_HARDWARE_DEMO') bad('BAD_HARDWARE_DEMO_RUN');
+	return r as unknown as HardwareDemoRun;
 }
 
 function baseModel(raw: unknown): BaseModel | null {

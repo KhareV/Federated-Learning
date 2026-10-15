@@ -15,11 +15,6 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 TIP_PATH = "artifacts/final_showcase/NHM_FINAL_SHOWCASE_001.lock.json"
-SUCCESSORS = [("NHM_FL10_001", "artifacts/fl10/NHM_FL10_001.lock.json"),
-              ("NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001", "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json"),
-              ("NHM_HARDWARE_MONGO_MONITOR_001", "artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json")]
-
-
 def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -35,11 +30,12 @@ def reconcile(since_ref: str = "274323730d1c7355f688ad4c9ff01ecbfb746501") -> di
     tip = json.loads((ROOT / TIP_PATH).read_text())
     expected = dict(tip["bound_artifacts"])
     successor_maps: dict[str, dict[str, str]] = {}
-    for lock_id, rel in SUCCESSORS:
-        if not (ROOT / rel).exists():          # a successor that has not been frozen yet contributes nothing
-            continue
-        lock = json.loads((ROOT / rel).read_text())
-        successor_maps[lock_id] = dict(lock["frontend_files"])
+    from scripts import successor_chain
+    for link in successor_chain.LINKS:
+        if not (ROOT / link.path).exists():          # a successor that has not been frozen yet contributes nothing
+            break
+        lock = successor_chain.validate_link(link, ROOT)
+        successor_maps[link.lock_id] = dict(lock[link.frontend_map_key])
     current_set = set(frontend_files())
     rows = []
     for path in sorted(set(expected) | current_set | {p for m in successor_maps.values() for p in m}):

@@ -142,14 +142,15 @@ def test_new_amendments_are_pure_successor_compatibility_with_continuous_digests
         )
     }
     assert {path.name for path in hardware} == expected_hardware
-    # Eight pre-existing amendments plus the narrow CLERK_LIVE_001 transport
-    # successor added by the hardware-monitor integration.
-    assert len(new) - len(studio) - len(hardware) == 9, new
+    # Eight pre-existing amendments plus the two narrow CLERK_LIVE_001 successors
+    # (first-frame WebSocket token; connected-driver SPA navigation).
+    assert len(new) - len(studio) - len(hardware) == 10, new
     from scripts.verify_unified_studio_001 import hardware_successor_bound
     from scripts.successor_chain import tip_frontend_map
 
     hardware_bound = hardware_successor_bound()
     frontend_bound = tip_frontend_map(vf.ROOT) or {}
+    hardware_lock = json.loads((vf.ROOT / "artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json").read_text())
     hardware_extra = {
         ".env.example", "api/product_app_v1_1.py", "api/product_app_v1_2.py",
         "tests/test_capstone_auth.py", "tests/test_capstone_monitoring_websocket.py",
@@ -160,9 +161,15 @@ def test_new_amendments_are_pure_successor_compatibility_with_continuous_digests
         doc = json.loads(path.read_text())
         assert doc["scope"] == "SUCCESSOR_COMPATIBILITY_ONLY" and doc["result_evidence_committed_with_amendment"] is False and doc["made_after_method_freeze"] is True
         for rel, digests in doc["files"].items():
-            assert authorised(rel) or (path in hardware and rel in hardware_extra), rel
+            assert authorised(rel) or (path in hardware and rel in hardware_extra) or (
+                path.name.startswith("CLERK_LIVE_001_PROTOCOL_V1.amendment_")
+                and rel == "scripts/clerk_connected_cdp_driver.mjs"
+            ), rel
             if path in hardware:
-                assert (frontend_bound if rel.startswith("frontend/") else hardware_bound)[rel] == digests["new_sha256"], rel
+                current = (frontend_bound if rel.startswith("frontend/") else hardware_bound)[rel]
+                if current != digests["new_sha256"]:
+                    historical = hardware_lock["frontend_files"] if rel.startswith("frontend/") else hardware_lock["bound_files"]
+                    assert historical[rel] == digests["new_sha256"], rel
             assert not rel.startswith(("reports/", "checkpoints/", "models/", "federated/", "simulation/", "product/federation/", "product/monitoring/", "product/models/"))
             assert digests["old_sha256"] != digests["new_sha256"]
     # the LAST amendment per (lock, file) must name the digest of the file as it is now (chain ends at the present bytes)

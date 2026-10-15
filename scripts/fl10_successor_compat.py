@@ -37,16 +37,22 @@ def accepted_successor(historical_path: Path = FINAL) -> dict[str, Any] | None:
         lock["repins_predecessor_files"] = sorted(set(lock["repins_predecessor_files"]) | set(studio["repins_predecessor_files"]))
     from scripts import successor_chain
 
-    hardware_link = next(x for x in successor_chain.LINKS if x.lock_id == "NHM_HARDWARE_MONGO_MONITOR_001")
-    if (ROOT / hardware_link.path).is_file():
-        hardware = successor_chain.validate_link(hardware_link, ROOT)
-        changes = hardware.get("bound_files", {})
-        if not isinstance(changes, dict) or any(not (ROOT / p).is_file() or hashlib.sha256((ROOT / p).read_bytes()).hexdigest() != d for p, d in changes.items()):
-            raise RuntimeError("HARDWARE_SUCCESSOR_BOUND_FILE_DRIFT")
+    studio_index = next(i for i, item in enumerate(successor_chain.LINKS) if item.lock_id == "NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001")
+    for later_link in successor_chain.LINKS[studio_index + 1:]:
+        if not (ROOT / later_link.path).is_file():
+            break
+        later = successor_chain.validate_link(later_link, ROOT)
+        changes = later.get("bound_files", {})
+        if not isinstance(changes, dict):
+            raise RuntimeError(f"{later_link.lock_id}_BOUND_FILE_DRIFT")
         previous = dict(lock["bound_files"])
-        changed_frontend = {p: d for p, d in hardware["frontend_files"].items() if p in previous and previous[p] != d}
+        previous_frontend = dict(lock["frontend_files"])
+        changed_frontend = {p: d for p, d in later["frontend_files"].items() if previous_frontend.get(p) != d}
         lock = dict(lock)
-        lock["frontend_files"] = dict(hardware["frontend_files"])
+        lock["frontend_files"] = dict(later["frontend_files"])
         lock["bound_files"] = {**previous, **changes, **changed_frontend}
         lock["repins_predecessor_files"] = sorted(set(lock["repins_predecessor_files"]) | {p for p, d in changes.items() if previous.get(p) != d} | set(changed_frontend))
+    if any(not (ROOT / path).is_file() or hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != digest
+           for path, digest in lock["bound_files"].items()):
+        raise RuntimeError("SUCCESSOR_TIP_BOUND_FILE_DRIFT")
     return lock

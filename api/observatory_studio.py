@@ -33,6 +33,7 @@ from studio.constants import (
 )
 from studio.runner10 import MODES, StudioRunError
 from studio.service import StudioService, _as_product_error
+from studio.hardware_demo import HardwareDemoService, LABEL_VERSION, MODEL_ID, MU
 
 MEDIA = {"svg": "image/svg+xml", "png": "image/png", "csv": "text/csv", "json": "application/json", "md": "text/markdown", "provenance": "application/json"}
 STUDIO = "/product/v1/studio"
@@ -49,7 +50,9 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         return bool((provider is not None and provider.armed) or (fl10_active is not None and fl10_active()))
 
     service = StudioService(root=Path(artifact_root), federation=app.state.federation_service, inference_factory=inference_factory, other_run_active=other_active)
+    hardware_demo = HardwareDemoService(store, Path(artifact_root))
     app.state.studio_service = service
+    app.state.hardware_demo_fl_service = hardware_demo
     inner_lifespan = app.router.lifespan_context
 
     @asynccontextmanager
@@ -82,11 +85,58 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     async def capabilities(request: Request) -> dict[str, Any]:
         await identity(request)
         return {"studio_id": STUDIO_ID, "run_lengths": list(RUN_LENGTHS), "default_run_length": 3,
-                "ten_round": {"available": True, "engine": "FL10_10R", "rounds_by_initialisation": {"FL_INIT_V2": [10], "MODEL_V2_FINAL": [3, 10]}, "default_initialisation": v2_init.INIT_V2_FINAL, "initialisations": [{"id": k, "label": v2_init.INIT_LABELS[k], "default": k == v2_init.INIT_V2_FINAL} for k in v2_init.INITS], "source_modes": list(MODES.values()), "algorithms": ["FEDAVG"], "aggregation_modes": ["PLAIN"],
-                              "unsupported": {"FEDPROX": "not implemented or verified by the 10-round engine", "SECAGG_SHADOW": "not implemented or verified by the 10-round engine"}, "expected_updates": 80},
+                "ten_round": {"available": True, "engine": "FL10_10R", "rounds_by_initialisation": {"FL_INIT_V2": [10], "MODEL_V2_FINAL": [3, 10]}, "default_initialisation": v2_init.INIT_V2_FINAL, "initialisations": [{"id": k, "label": v2_init.INIT_LABELS[k], "default": k == v2_init.INIT_V2_FINAL} for k in v2_init.INITS], "source_modes": list(MODES.values()), "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
+                              "unsupported": {}, "expected_updates": 80},
                 "three_round": {"available": True, "engine": "PRODUCT_3R", "route": FEDERATION_RUNS, "expected_updates": 24},
+                "hardware_demo": {"available": hasattr(app.state, "hardware_sessions"), "source_mode": "RECORDED_HARDWARE_DEMO", "model": MODEL_ID,
+                                  "run_lengths": [3, 10], "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
+                                  "secagg_scope": "ROUND-1 SECAGG+ SHADOW; authoritative aggregation remains plain", "fedprox_mu": MU,
+                                  "label_assignment": LABEL_VERSION, "initialisations": [MODEL_ID], "v2_initialisation": "NOT_APPLICABLE"},
                 "generalisation": {"cohort_id": g1_cohort.COHORT_ID, "label": g1_cohort.COHORT_USE_LABEL, "claim_boundary": g1_cohort.CLAIM_BOUNDARY, "baseline": "MODEL_V2_FINAL (unchanged, frozen)"},
                 "evaluation": {"observer_id": OBSERVER_ID, "protocol_id": EVAL_PROTOCOL_ID, "threshold": 0.5, "calibration": "NONE", "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "claim_boundary": CLAIM_BOUNDARY}}
+
+    @app.get(f"{STUDIO}/hardware-demo/sessions")
+    async def hardware_demo_sessions(request: Request) -> list[dict[str, Any]]:
+        user = await identity(request)
+        try:
+            return await asyncio.to_thread(hardware_demo.eligible_sessions, user)
+        except Exception as error:
+            if "no such table" in str(error):
+                raise ProductError(ProductErrorCode.INVALID_STATE, "hardware telemetry is not enabled") from error
+            raise
+
+    @app.get(f"{STUDIO}/hardware-demo/runs")
+    async def hardware_demo_runs(request: Request) -> list[dict[str, Any]]:
+        return await asyncio.to_thread(hardware_demo.list_runs, await identity(request))
+
+    @app.post(f"{STUDIO}/hardware-demo/runs")
+    async def start_hardware_demo(request: Request, body: dict[str, Any]) -> dict[str, Any]:
+        user = await identity(request)
+        allowed = {"session_ids", "run_length", "algorithm", "secagg_mode", "label_seed"}
+        if set(body) - allowed or not isinstance(body.get("session_ids"), list):
+            raise ProductError(ProductErrorCode.INVALID_REQUEST, "invalid hardware demo request")
+        try:
+            return await asyncio.to_thread(
+                hardware_demo.run, user,
+                session_ids=body["session_ids"], rounds=body.get("run_length", 3),
+                algorithm=body.get("algorithm", "FEDAVG"), secagg_mode=body.get("secagg_mode", "PLAIN"),
+                label_seed=body.get("label_seed", 20261015),
+            )
+        except PermissionError as error:
+            raise ProductError(ProductErrorCode.FORBIDDEN, str(error)) from error
+        except LookupError as error:
+            raise ProductError(ProductErrorCode.NOT_FOUND, str(error)) from error
+        except (ValueError, RuntimeError) as error:
+            raise ProductError(ProductErrorCode.INVALID_STATE, str(error)) from error
+
+    @app.get(f"{STUDIO}/hardware-demo/runs/{{run_id}}")
+    async def get_hardware_demo(request: Request, run_id: str) -> dict[str, Any]:
+        try:
+            return await asyncio.to_thread(hardware_demo.get, await identity(request), run_id)
+        except PermissionError as error:
+            raise ProductError(ProductErrorCode.FORBIDDEN, str(error)) from error
+        except LookupError as error:
+            raise ProductError(ProductErrorCode.NOT_FOUND, str(error)) from error
 
     @app.get(f"{STUDIO}/runs")
     async def list_runs(request: Request) -> list[dict[str, Any]]:
@@ -102,12 +152,13 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         mode_names = {v: k for k, v in MODES.items()}
         if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "run_length must be 10 (or 3 with initialisation MODEL_V2_FINAL) and source_mode CANONICAL_SYNTHETIC or LIVE_MONITORED_SITE_00")
-        if body.get("algorithm", "FEDAVG") != "FEDAVG" or body.get("secagg_mode", "PLAIN") != "PLAIN" or body.get("run_type", "LIVE_RUN") != "LIVE_RUN":
-            raise ProductError(ProductErrorCode.INVALID_REQUEST, "the 10-round engine supports LIVE_RUN FedAvg with plain aggregation only; an unsupported combination is never reinterpreted")
+        if body.get("algorithm", "FEDAVG") not in ("FEDAVG", "FEDPROX") or body.get("secagg_mode", "PLAIN") not in ("PLAIN", "SECAGG_SHADOW") or body.get("run_type", "LIVE_RUN") != "LIVE_RUN":
+            raise ProductError(ProductErrorCode.INVALID_REQUEST, "unsupported Studio algorithm, aggregation mode, or run type")
         resolved = await identity_resolver(request)
         store.upsert_user(resolved)
         try:
-            job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")], body.get("initialisation", "FL_INIT_V2"), rounds)
+            job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")], body.get("initialisation", "FL_INIT_V2"), rounds,
+                                                body.get("algorithm", "FEDAVG"), body.get("secagg_mode", "PLAIN"))
             job = await service.runner10.start(user, job.run_id)
         except StudioRunError as error:
             raise _as_product_error(error) from error

@@ -1,0 +1,16 @@
+{
+ "amendment_id": "CLERK_LIVE_001_PROTOCOL_V1_AMENDMENT_3",
+ "change": "The connected-browser driver navigates to the Research and System pages inside the authenticated single-page app and asserts on text the pages actually render (collapsed technical-evidence text via textContent; 'Physical hardware available').",
+ "defect": "The driver used full-page navigation, which raced the Clerk session bootstrap, and waited for a literal API key name and for text inside collapsed evidence blocks that the pages never expose through innerText. The assertions' meaning (promotion distinction, system default accepted, simulated-only hardware mode) is unchanged.",
+ "files": {
+  "scripts/clerk_connected_cdp_driver.mjs": {
+   "new_sha256": "4edb9ea381c04b4cbacede574a688be52ffd3d1b40f68c1671ea30181aedf7e5",
+   "old_sha256": "d55d8dfb61df323cff125c029bbc38e8ce0f185e17376e4447e2c0e44e71757a"
+  }
+ },
+ "made_after_method_freeze": true,
+ "owner_phase": "NHM-RECORDED-HARDWARE-FL-001",
+ "previous_amendment": "CLERK_LIVE_001_PROTOCOL_V1_AMENDMENT_2",
+ "result_evidence_committed_with_amendment": false,
+ "scope": "SUCCESSOR_COMPATIBILITY_ONLY"
+}

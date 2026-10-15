@@ -8,6 +8,7 @@
 	import FederationPipeline from '$lib/components/product/federation/FederationPipeline.svelte';
 	import TechnicalEvidence from '$lib/components/product/federation/TechnicalEvidence.svelte';
 	import StudioRunStarter from '$lib/components/product/studio/StudioRunStarter.svelte';
+	import HardwareDemoStarter from '$lib/components/product/studio/HardwareDemoStarter.svelte';
 	import RunList from '$lib/components/product/federation/RunList.svelte';
 	import { FederationStore, REPLAY_NO_SOURCE, useFederation } from '$lib/product/federation/state.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -37,9 +38,9 @@
 </script>
 <svelte:head><title>Federation | NHM</title></svelte:head>
 <div class="head"><div class="eyebrow">NHM / FEDERATION</div><h1>Federation Studio</h1>
-	<p class="lead">Watch real federated training happen: eight synthetic clients each train locally, send only model updates, and a coordinator combines them into a new global state - three times in a row, or ten with the extended run.</p>
-	<ul class="facts" aria-label="Federation run at a glance"><li><b>8</b> synthetic clients</li><li><b>3</b> rounds <span class="ext">(or 10, extended)</span></li><li><b>Local</b> training</li><li><b>FedAvg</b> aggregation</li><li><b>Engineering</b> candidate</li></ul>
-	<p class="dim">Real local optimization on synthetic data, on one demonstration machine. This screen makes no performance claim. <a href="/app/research/fl">View frozen FL research evidence →</a></p></div>
+	<p class="lead">Watch real federated training happen: eight logical clients each train locally, send model updates, and a coordinator combines them into a new global state for three or ten rounds.</p>
+	<ul class="facts" aria-label="Federation run at a glance"><li><b>8</b> logical clients</li><li><b>3</b> rounds <span class="ext">(or 10, extended)</span></li><li><b>Local</b> training</li><li><b>FedAvg / FedProx</b></li><li><b>Engineering</b> candidate</li></ul>
+	<p class="dim">Real local optimization on one demonstration machine. Sources and label provenance are shown by each workflow; this screen makes no performance claim. <a href="/app/research/fl">View frozen FL research evidence →</a></p></div>
 <FederationBanner />
 {#if !enabled}
 	<p class="warn" role="alert" data-testid="backend-not-enabled">FEDERATION BACKEND NOT ENABLED</p>
@@ -51,6 +52,7 @@
 <div class="grid">
 	<Panel eyebrow="03 / RUN" title="Start a federation run" note="FL_SINGLE_RUN">
 		<StudioRunStarter disabled={fed.busy} {liveBlocked} backendEnabled={enabled} capabilities={studio.capabilities} onStartThree={start} onStartTen={startTen} />
+		<HardwareDemoStarter disabled={fed.busy || liveBlocked} capabilities={studio.capabilities} />
 		{#if fed.replayNoSource}<p class="warn" role="alert" data-testid="replay-no-source">{REPLAY_NO_SOURCE}</p>{/if}
 		{#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
 	</Panel>

@@ -24,6 +24,9 @@ import numpy as np
 
 from federated.model_adapter import deserialize_state, serialize_state
 from federated.model_v2_fl import state_sha, train_local_epoch_v2
+from federated.model_v2_fedprox import train_local_fedprox_epoch_v2
+from product.federation.client import frozen_fedprox_mu
+from product.federation.secagg_shadow import run_round1_shadow
 from federated.virtual_client_source_v1 import LocalDataset
 from federated.wearable_fl_runner_v1 import (
     BASE_SEED,
@@ -103,12 +106,16 @@ EXPECTED_CODE = {"INJECT_STALE": "STALE_ROUND", "INJECT_DUPLICATE": "DUPLICATE_U
 def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalDataset], manifest: dict[str, dict[str, str]], rounds: int = ROUNDS, require_prefix_parity: bool = True,
                  capture_batches: bool = True, progress: Callable[[dict[str, Any]], None] | None = None, git_commit: str = "UNKNOWN", protocol_sha256: str = "UNKNOWN",
                  tamper_before_round: Callable[[int, dict[str, np.ndarray]], dict[str, np.ndarray]] | None = None,
-                 initial_state: dict[str, np.ndarray] | None = None, initialisation: dict[str, Any] | None = None) -> dict[str, Any]:
+                 initial_state: dict[str, np.ndarray] | None = None, initialisation: dict[str, Any] | None = None,
+                 algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN") -> dict[str, Any]:
     """Execute ``rounds`` genuine FedAvg rounds. Fails closed (raises, run marked incomplete) on any parity, digest, acceptance or finiteness violation.
 
     ``initial_state`` (additive, default None) starts the rounds from a verified pretrained state instead of ``FL_INIT_V2``. That is a separately identified mode: the frozen
     FL_INIT_V2 reference (initial digest and prefix parity) does not apply to it, so those checks are skipped and the report carries ``initialisation`` instead."""
-    if capture_batches:
+    if algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
+        raise Fl10Error("UNSUPPORTED_ALGORITHM_OR_AGGREGATION")
+    mu = frozen_fedprox_mu() if algorithm == "FEDPROX" else None
+    if capture_batches and algorithm == "FEDAVG":
         from api.observatory_batch_capture import BatchCapture
     emit = progress or (lambda event: None)
     by_client = {d.client_id: d for d in datasets}
@@ -136,9 +143,11 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
     started = datetime.now(UTC).isoformat()
     t_run = time.perf_counter()
     report: dict[str, Any] = {"run_id": run_id, "mode": mode, "status": "RUNNING", "git_commit": git_commit, "protocol_sha256": protocol_sha256, "experiment_id": "NHM_FL10_SYNTHETIC_ENGINEERING_V1",
-                              "federation_engine": "federated.wearable_fl_system_v1.Coordinator + federated.model_v2_fl.train_local_epoch_v2 (unchanged)", "planned_rounds": rounds, "started_at": started,
+                              "federation_engine": "federated.wearable_fl_system_v1.Coordinator + genuine V2 local optimizer", "planned_rounds": rounds, "started_at": started,
+                              "algorithm": algorithm, "secagg_mode": secagg_mode, "fedprox_mu": mu,
                               "settings": {"base_seed": BASE_SEED, "experiment_id_for_seeds": FL_EXPERIMENT_ID, "batch_size": BATCH_SIZE, "learning_rate": LEARNING_RATE, "weight_decay": WEIGHT_DECAY,
-                                           "pos_weight": POS_WEIGHT, "optimizer": "AdamW (reset every local epoch)", "local_epochs": 1, "aggregation": "weighted FedAvg by accepted example count"},
+                                           "pos_weight": POS_WEIGHT, "optimizer": "AdamW (reset every local epoch)", "local_epochs": 1, "aggregation": "weighted plain aggregation by accepted example count",
+                                           "local_objective": "BCE" if algorithm == "FEDAVG" else f"BCE + ({mu}/2)*||w-w_global||^2"},
                               "environment": {"python": platform.python_version(), "platform": platform.platform(), "numpy": np.__version__}, "frozen_reference": FROZEN_RUN if initial_state is None else None, "initialisation": initialisation or {"model_id": "FL_INIT_V2"},
                               "state_progression": {"0": {**state_info(state), "committed_at": started}}, "rounds": [], "client_rounds": [], "batches": [], "updates": []}
     try:
@@ -171,12 +180,15 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                 t0 = time.perf_counter()
                 kwargs = dict(global_state=state, inputs=d.inputs, labels=d.labels, site_id=client, round_number=round_id, experiment_id=FL_EXPERIMENT_ID, base_seed=BASE_SEED,
                               batch_size=BATCH_SIZE, learning_rate=LEARNING_RATE, weight_decay=WEIGHT_DECAY, pos_weight=POS_WEIGHT)
-                if capture_batches:
+                trainer = train_local_epoch_v2 if algorithm == "FEDAVG" else train_local_fedprox_epoch_v2
+                if algorithm == "FEDPROX":
+                    kwargs["mu"] = mu
+                if capture_batches and algorithm == "FEDAVG":
                     with BatchCapture() as cap:
-                        result = train_local_epoch_v2(**kwargs)
+                        result = trainer(**kwargs)
                     captures[client] = cap
                 else:
-                    result = train_local_epoch_v2(**kwargs)
+                    result = trainer(**kwargs)
                 durations[client] = time.perf_counter() - t0
                 results[client] = result
                 envelopes[client] = make_envelope(round_id=round_id, client_id=client, participant_id=d.participant_id, session_id=d.session_id, base_sha=base_sha, dataset_sha=d.dataset_sha256,
@@ -204,6 +216,12 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
             if len(coord.accepted) != 8 or sorted(coord.accepted) != order:
                 raise Fl10Error("INCOMPLETE_OR_UNEXPECTED_ACCEPTANCE", str(sorted(coord.accepted)))
             emit({"event": "UPDATES_ACCEPTED", "round": round_id, "accepted_clients": order, "accepted_updates": len(coord.accepted)})
+            if round_id == 1 and secagg_mode == "SECAGG_SHADOW":
+                report["secagg_shadow"] = run_round1_shadow(
+                    state, coord.deltas,
+                    {c: int(coord.accepted[c]["examples_seen"]) for c in order},
+                )
+                emit({"event": "SECAGG_SHADOW_VERIFIED", "round": 1, "report": report["secagg_shadow"]})
             probe = Coordinator(coord.manifest, coord.spec_sha)           # missing-client probe: the unchanged coordinator refuses to aggregate seven updates
             probe.open_round, probe.base_sha = round_id, base_sha
             probe.accepted = {c: coord.accepted[c] for c in order[:-1]}
@@ -240,7 +258,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                     raise Fl10Error("PREFIX_PARITY_MISMATCH", f"round {round_id}: {new_sha} != {frozen[str(round_id)]}")
             for client in order:
                 d, r = by_client[client], results[client]
-                cap = captures[client].batches if capture_batches else []
+                cap = captures[client].batches if capture_batches and algorithm == "FEDAVG" else []
                 for b in cap:
                     report["batches"].append({"run_id": run_id, "round": round_id, "client_id": client, "epoch": 1, **b})
                 losses = [b["loss"] for b in cap]
@@ -252,7 +270,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                     "excluded_valid_but_incomplete": counts.get("excluded_valid_but_incomplete"), "positive_labels": counts.get("synthetic_positive"), "negative_labels": counts.get("synthetic_negative"),
                     "class_prevalence": counts["synthetic_positive"] / counts["trainable"], "examples_processed": r.examples_seen, "unique_local_examples": len(d.labels), "local_epochs": 1,
                     "batch_count": r.batch_count, "mean_training_loss": r.mean_loss, "final_batch_loss": losses[-1] if losses else None, "batch_loss_min": min(losses) if losses else None,
-                    "batch_loss_max": max(losses) if losses else None, "learning_rate": LEARNING_RATE, "optimizer_steps": len(cap) if capture_batches else None,
+                    "batch_loss_max": max(losses) if losses else None, "learning_rate": LEARNING_RATE, "optimizer_steps": r.batch_count,
                     "gradient_norm_mean": float(np.mean(grads)) if grads else None, "gradient_norm_max": max(grads) if grads else None, "local_update_norm": r.update_norm,
                     "update_payload_bytes": r.update_bytes, "update_sha256": envelopes[client]["update_sha256"], "submission_status": "SUBMITTED", "acceptance_status": decisions[client]["decision"],
                     "rejection_reason": None, "aggregation_weight": weights[client], "client_duration_seconds": durations[client], "shuffle_seed": str(r.shuffle_seed)})

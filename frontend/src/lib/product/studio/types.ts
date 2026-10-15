@@ -15,9 +15,15 @@ export interface StudioCapabilities {
 	default_run_length: number;
 	ten_round: { available: boolean; initialisations?: { id: Initialisation; label: string; default: boolean }[]; rounds_by_initialisation?: Partial<Record<Initialisation, number[]>>; default_initialisation?: Initialisation; source_modes: SourceMode[]; algorithms: string[]; aggregation_modes: string[]; unsupported: Record<string, string>; expected_updates: number };
 	three_round: { available: boolean; expected_updates: number };
+	hardware_demo?: { available: boolean; source_mode: 'RECORDED_HARDWARE_DEMO'; model: 'HARDWARE_DEMO_MODEL_V1'; run_lengths: number[]; algorithms: string[]; aggregation_modes: string[]; secagg_scope: string; fedprox_mu: number; label_assignment: string; initialisations: string[]; v2_initialisation: string };
 	generalisation?: { cohort_id: string; label: string; claim_boundary: string; baseline: string };
 	evaluation: { observer_id: string; protocol_id: string; threshold: number; calibration: string; cohort_use: string; cohort_use_detail: string; claim_boundary: string };
 }
+
+export interface HardwareDemoSession { id: string; started_at: string; stopped_at: string; record_count: number; trace_count: number; eligible: boolean }
+export interface HardwareDemoRound { round: number; base_state_sha256: string; global_state_sha256: string; accepted_updates: number; rejected_updates: number; weighted_mean_training_loss: number; optimizer_steps: number; evaluation: { BCE: number; accuracy: number; precision: number | null; recall: number | null; F1: number | null; windows: number; confusion: Record<string, number> } }
+export interface HardwareDemoRun { schema_version: 'HARDWARE_DEMO_FL_RUN_V1'; run_id: string; created_at: string; completed_at: string; status: 'COMPLETED'; source_mode: 'RECORDED_HARDWARE_DEMO'; source_session_ids: string[]; source_record_count: number; snapshot_sha256: string; algorithm: 'FEDAVG' | 'FEDPROX'; fedprox_mu: number | null; aggregation: 'PLAIN'; secagg_mode: 'PLAIN' | 'SECAGG_SHADOW'; secagg_shadow: Record<string, unknown> | null; rounds_planned: 3 | 10; rounds: HardwareDemoRound[]; state_progression: Record<string, string>; model: { id: 'HARDWARE_DEMO_MODEL_V1'; architecture: string; released: false; v2_initialisation: 'NOT_APPLICABLE' }; dataset: { training_windows: number; holdout_windows: number; windows_total: number; input_feature_sha256: string; label_sha256: string; label_assignment: { version: string; status: 'SYNTHETIC_ASSIGNED_FOR_DEMO'; seed: number; classes: Record<string, string> }; clients: Record<string, { samples: number; label_counts: Record<string, number>; feature_sha256: string; window_ids: string[] }> }; claim_boundary: string }
+export interface HardwareDemoChoice { session_ids: string[]; run_length: 3 | 10; algorithm: 'FEDAVG' | 'FEDPROX'; secagg_mode: 'PLAIN' | 'SECAGG_SHADOW'; label_seed: number }
 
 export interface EvaluationAvailability { available: boolean; source: 'LIVE' | 'RECORDED' | 'RECORDED_FROM_SOURCE_RUN'; evaluation_run_id: string; reason: string | null; revision: number }
 
@@ -143,7 +149,7 @@ export interface StudioOverview {
 	historical_exposed: string;
 }
 
-export interface StudioRunChoice { run_length: RunLength; source_mode: SourceMode; initialisation?: Initialisation }
+export interface StudioRunChoice { run_length: RunLength; source_mode: SourceMode; initialisation?: Initialisation; algorithm?: 'FEDAVG' | 'FEDPROX'; secagg_mode?: 'PLAIN' | 'SECAGG_SHADOW' }
 
 // ---- Generalisation lane (frozen V2 vs every federated round on the unseen G1 cohort) --------------------------------------------
 export interface GenRecord extends EvalRecord { subject: 'FL_ROUND' | 'FROZEN_V2_BASELINE' }

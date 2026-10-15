@@ -41,8 +41,10 @@ def _shadow(tmp_path: Path) -> Path:
     for rel in ("artifacts/fl10/NHM_FL10_001.lock.json", "artifacts/unified_studio/NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001.lock.json"):   # the additive successors after NHM_FINAL_SHOWCASE_001
         if (ROOT / rel).exists():
             paths.append(rel)
-    if (ROOT / "artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json").exists():
-        paths.append("artifacts/hardware/NHM_HARDWARE_MONGO_MONITOR_001.lock.json")
+    from scripts import successor_chain
+    for link in successor_chain.LINKS:
+        if (ROOT / link.path).exists() and link.path not in paths:
+            paths.append(link.path)
     for rel in paths:
         (shadow / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / rel, shadow / rel)

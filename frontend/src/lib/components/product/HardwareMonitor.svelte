@@ -51,18 +51,18 @@
 <p class="lead">MongoDB telemetry from the configured source; the session panel identifies the source after Start. Timestamps are server ingestion time. ECG values are transmitted ADC readings; no verified ADC sampling rate or model inference is available.</p>
 {#if error}<p role="alert" class="err">{error}</p>{/if}
 <Panel eyebrow="01 / HARDWARE SESSION" title="Live hardware telemetry" note="OWNER-SCOPED SESSION · SHARED SOURCE">
-  <p class="status" role="status">{session?.source_state ?? 'SESSION STOPPED'}</p>
-  {#if session}<p><code>{session.session_id}</code> · {session.record_count} records · elapsed {Math.max(0, Math.floor(((session.stopped_at ? new Date(session.stopped_at).getTime() : now) - new Date(session.started_at).getTime()) / 1000))} s · started {new Date(session.started_at).toLocaleString()}</p>
+  <p class="status" role="status" data-testid="hardware-state">{session?.source_state ?? 'SESSION STOPPED'}</p>
+  {#if session}<p><code data-testid="hardware-session-id">{session.session_id}</code> · <span data-testid="hardware-record-count">{session.record_count}</span> records · elapsed {Math.max(0, Math.floor(((session.stopped_at ? new Date(session.stopped_at).getTime() : now) - new Date(session.started_at).getTime()) / 1000))} s · started {new Date(session.started_at).toLocaleString()}</p>
     <p>{session.source} · collection {session.collection}</p>{/if}
   <div class="actions">
-    <button class="primary" onclick={start} disabled={busy || session?.status === 'ACTIVE'}>Start Monitoring</button>
-    <button onclick={stop} disabled={busy || session?.status !== 'ACTIVE'}>Stop Monitoring</button>
+    <button class="primary" onclick={start} disabled={busy || session?.status === 'ACTIVE'} data-testid="hardware-start">Start Monitoring</button>
+    <button onclick={stop} disabled={busy || session?.status !== 'ACTIVE'} data-testid="hardware-stop">Stop Monitoring</button>
     {#if session?.status === 'STOPPED'}<a href={`/app/history/${encodeURIComponent(session.session_id)}`}>View saved History →</a>{/if}
   </div>
 </Panel>
 <Panel eyebrow="02 / ECG" title="MongoDB ECG values" note="SERVER INGESTION TIME · GAPS ARE NOT FILLED">
   {#if display.length}
-    <svg viewBox="0 0 1000 180" preserveAspectRatio="none" role="img" aria-label="Actual MongoDB ECG readings over server ingestion time, with gaps">
+    <svg viewBox="0 0 1000 180" preserveAspectRatio="none" role="img" aria-label="Actual MongoDB ECG readings over server ingestion time, with gaps" data-testid="hardware-waveform" data-points={waveform.points.length} data-paths={waveform.paths.length}>
       {#each waveform.paths as path}<path d={path} fill="none" stroke="#2bb8b0" stroke-width="2" vector-effect="non-scaling-stroke" />{/each}
       {#each waveform.points as point}<circle cx={point.x} cy={point.y} r="2.5" fill="#2bb8b0" />{/each}
       {#if waveform.points.length}<circle cx={waveform.points.at(-1)!.x} cy={waveform.points.at(-1)!.y} r="4" fill="#fbbf24" />{/if}
@@ -72,8 +72,8 @@
   {:else}<p>Waiting for new readings. Earlier MongoDB documents are excluded.</p>{/if}
 </Panel>
 <div class="vitals">
-  <Panel eyebrow="03 / DEVICE REPORTED" title="BPM"><p class="value">{latest?.bpm ?? 'Unavailable'}</p></Panel>
-  <Panel eyebrow="04 / UNVERIFIED" title="Device-reported SpO₂ — unverified"><p class="value">{latest?.spo2 == null ? 'Unavailable' : `${latest.spo2}%`}</p></Panel>
+  <Panel eyebrow="03 / DEVICE REPORTED" title="BPM"><p class="value" data-testid="hardware-bpm">{latest?.bpm ?? 'Unavailable'}</p></Panel>
+  <Panel eyebrow="04 / UNVERIFIED" title="Device-reported SpO₂ — unverified"><p class="value" data-testid="hardware-spo2">{latest?.spo2 == null ? 'Unavailable' : `${latest.spo2}%`}</p></Panel>
 </div>
 <p class="lead">No clinical classification, calibrated prediction, signal quality verdict or hardware identity claim is made for this source. A flat ECG value can also mean the sketch's lead-off fallback; the current payload has no lead-off flag.</p>
 <style>

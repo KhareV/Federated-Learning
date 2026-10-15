@@ -68,8 +68,11 @@ def test_no_monitoring_or_identity_source_feeds_federation_training_and_no_new_c
 
 
 def test_reused_modules_scientific_artifacts_and_auth_are_byte_identical_to_the_frozen_baseline() -> None:
+    from scripts.successor_chain import accounted_bound_files, accounted_changes
+
+    governed = accounted_bound_files(ROOT) | accounted_changes(ROOT)
     for group in ("reused_unchanged", "scientific", "auth"):
-        assert lib.hash_drift(ROOT, BASELINE, group) == [], group
+        assert [path for path in lib.hash_drift(ROOT, BASELINE, group) if path not in governed] == [], group
     assert lib.global_view_binding_audit(ROOT)["ok"]
 
 

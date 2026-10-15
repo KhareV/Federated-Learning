@@ -109,6 +109,20 @@ describe('round-count selector and run starter', () => {
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
 		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00' });
 	});
+	it('enables and transmits FedProx plus the verified round-one shadow only when the backend advertises both', async () => {
+		const onStartTen = vi.fn();
+		const supported = { ...CAPS, ten_round: { ...CAPS.ten_round, algorithms: ['FEDAVG', 'FEDPROX'], aggregation_modes: ['PLAIN', 'SECAGG_SHADOW'], unsupported: {} } };
+		render(StudioRunStarter, { props: { capabilities: supported, onStartThree: vi.fn(), onStartTen } });
+		await fireEvent.click(screen.getByTestId('rounds-10'));
+		expect(screen.getByTestId('cfg10-algorithm').hasAttribute('disabled')).toBe(false);
+		expect(screen.getByTestId('cfg10-mode').hasAttribute('disabled')).toBe(false);
+		await fireEvent.change(screen.getByTestId('cfg10-algorithm'), { target: { value: 'FEDPROX' } });
+		await fireEvent.change(screen.getByTestId('cfg10-mode'), { target: { value: 'SECAGG_SHADOW' } });
+		expect(screen.getByTestId('cfg10-algorithm-note').textContent).toContain('current round-start global weights');
+		expect(screen.getByTestId('cfg10-mode-note').textContent).toContain('authoritative plain aggregate');
+		await fireEvent.click(screen.getByTestId('cfg10-submit'));
+		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'CANONICAL_SYNTHETIC', algorithm: 'FEDPROX', secagg_mode: 'SECAGG_SHADOW' });
+	});
 	it('10 rounds is disabled with an explanation when the backend lacks the engine, and while another run is active', async () => {
 		render(StudioRunStarter, { props: { capabilities: null, onStartThree: vi.fn(), onStartTen: vi.fn() } });
 		expect(screen.getByTestId('rounds-10').hasAttribute('disabled')).toBe(true);

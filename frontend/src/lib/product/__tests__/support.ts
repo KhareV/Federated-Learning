@@ -111,6 +111,10 @@ export function fakeBackend(system: SystemInfoV2 = systemInfo({ federation_runti
 		return Promise.resolve(value);
 	};
 	return {
+		hardwareDemoSessions: () => Promise.resolve([]),
+		hardwareDemoRuns: () => Promise.resolve([]),
+		hardwareDemoStart: () => Promise.reject(new Error('NO_FAKE_HARDWARE_DEMO')),
+		hardwareDemoRun: () => Promise.reject(new Error('NO_FAKE_HARDWARE_DEMO')),
 		hardwareStart: () => Promise.reject(new Error('NO_FAKE_HARDWARE')),
 		hardwarePoll: () => Promise.reject(new Error('NO_FAKE_HARDWARE')),
 		hardwareStop: () => Promise.reject(new Error('NO_FAKE_HARDWARE')),

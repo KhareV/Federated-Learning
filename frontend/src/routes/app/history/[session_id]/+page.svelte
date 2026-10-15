@@ -3,7 +3,9 @@
 	import { page } from '$app/state';
 	import Panel from '$lib/components/dashboard/Panel.svelte';
 	import type { HardwareSession } from '$lib/product/api';
+	import { hardwareWaveform } from '$lib/product/hardware-waveform';
 	let hardware = $state<HardwareSession | null>(null);
+	const hardwarePlot = $derived(hardwareWaveform(hardware?.readings ?? []));
 	import { getProductStore } from '$lib/product/state.svelte';
 	import type { MonitoringSession } from '$lib/product/types';
 	import type { SessionSummary, SessionTimeline, SourceKind, WaveformPreview } from '$lib/product/history/types';
@@ -61,6 +63,10 @@
 		<Panel eyebrow="01 / HARDWARE TELEMETRY" title={hardware.session_id} note={hardware.status}>
 			<p>{hardware.source} · {hardware.collection}</p><p>Started {new Date(hardware.started_at).toLocaleString()} · Stopped {hardware.stopped_at ? new Date(hardware.stopped_at).toLocaleString() : 'Interrupted or active'} · {hardware.record_count} actual accepted records</p>
 			<p>Stored trace: last {hardware.trace_limit} readings maximum. Timestamp is server ingestion time. This session has no model inference or clinical classification.</p>
+			{#if hardwarePlot.points.length}<svg viewBox="0 0 1000 180" role="img" aria-label="Saved MongoDB ECG trace over server ingestion time; long gaps are unconnected" preserveAspectRatio="none">
+				{#each hardwarePlot.paths as path}<path d={path} fill="none" stroke="#2bb8b0" stroke-width="2" vector-effect="non-scaling-stroke" />{/each}
+				{#each hardwarePlot.points as point}<circle cx={point.x} cy={point.y} r="1.8" fill="#2bb8b0" />{/each}
+			</svg><p>{hardwarePlot.points.length} saved points · exact ADC values · no interpolation or resampling.</p>{/if}
 			<ol class="events">{#each hardware.readings as r}<li><code>{r.id}</code> · {new Date(r.ingested_at).toLocaleString()} · ECG {r.ecg} · BPM {r.bpm ?? 'unavailable'} · SpO₂ {r.spo2 ?? 'unavailable'} (unverified)</li>{/each}</ol>
 		</Panel>
 	{:else if session}

@@ -199,11 +199,18 @@ if (MODE === 'a-journey') {
 	await click('Models'); await waitFor(`location.pathname === '/app/models' && !!document.querySelector('[data-testid="candidate-card"]')`, 60000);
 	const mod = lastBody(/GET \/product\/v1\/models$/);
 	step('models', { candidates: await ev(`document.querySelectorAll('[data-testid="candidate-card"]').length`), productionDeployed: await ev(`[...document.querySelectorAll('[data-testid="production-deployed"]')].map((e) => e.textContent.trim())`), released_default: mod?.body?.released_default_model_id, controls: await ev(`[...document.querySelectorAll('button,a')].map((b) => b.textContent.trim()).filter((t) => /deploy|promote|default|switch|inference|use candidate/i.test(t))`), candidate: mod?.body?.capstone_fl_candidates?.map((c) => ({ candidate_id: c.candidate_id, state_digest: c.state_digest, governance_status: c.governance_status, sandbox_status: c.sandbox_status, production_deployed: c.production_deployed, validation_status: c.validation_status, parent_model_id: c.parent_model_id })) });
-	await goto('/app/research/ml'); await waitFor(`document.body.innerText.includes('MODEL_V2_NOT_PROMOTED_RELEASE_CI') && document.body.innerText.includes('SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED')`, 60000);
+	// Keep this navigation inside the authenticated SPA. A full Page.navigate races the
+	// Clerk session bootstrap with the page's one-shot evidence request and can turn a
+	// valid connected run into an unrelated transient 401.
+	await click('Research'); await waitFor(`location.pathname === '/app/research/ml'`);
+	// The decision strings live in collapsed TechnicalEvidence blocks: use textContent, not innerText.
+	await waitFor(`document.body.textContent.includes('MODEL_V2_NOT_PROMOTED_RELEASE_CI') && document.body.textContent.includes('SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED')`, 60000);
 	const ml = lastBody(/GET \/product\/v1\/research\/ml$/); step('research-ml', { status: ml?.status, promotionDistinction: true });
-	await goto('/app/research/fl'); await waitFor(`document.body.innerText.includes('V2-FL-004') && document.body.innerText.includes('V2-FL-005')`, 60000);
+	await click('FL evidence'); await waitFor(`location.pathname === '/app/research/fl'`);
+	await waitFor(`document.body.innerText.includes('V2-FL-004') && document.body.innerText.includes('V2-FL-005')`, 60000);
 	const fl = lastBody(/GET \/product\/v1\/research\/fl$/); step('research-fl', { status: fl?.status, engineeringSeparate: (await body()).includes('V2-FL-005 is not scientific efficacy') });
-	await goto('/app/system'); await waitFor(`document.body.innerText.includes('hardware_mode')`, 30000); step('system-page', { simulatedOnly: (await body()).includes('SIMULATED_ONLY') });
+	await click('System'); await waitFor(`location.pathname === '/app/system'`);
+	await waitFor(`document.body.innerText.includes('Physical hardware available')`, 30000); step('system-page', { simulatedOnly: (await body()).includes('SIMULATED_ONLY') });
 	// refresh restores the Clerk session (no local token persistence by NHM)
 	await goto('/app'); await waitFor(`!!document.querySelector('[data-testid="identity-chip"]')`, 60000);
 	const reMe = lastBody(/GET \/product\/v1\/me$/);

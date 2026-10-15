@@ -19,20 +19,24 @@ class Fl10TrainerTap:
     def __enter__(self) -> Fl10TrainerTap:
         from fl10 import runner
 
-        self._module, self._original = runner, runner.train_local_epoch_v2
-        original = self._original
+        self._module = runner
+        self._original_avg = runner.train_local_epoch_v2
+        self._original_prox = runner.train_local_fedprox_epoch_v2
 
-        def tapped(**kwargs: Any) -> Any:
-            inputs, labels = kwargs["inputs"], kwargs["labels"]
-            record = {"site_id": kwargs["site_id"], "round_number": kwargs["round_number"], "examples": int(inputs.shape[0]), "inputs_sha256": array_sha(inputs, np.float32), "labels_sha256": array_sha(labels, np.float32)}
-            result = original(**kwargs)
-            record["examples_seen"] = int(result.examples_seen)
-            with self._lock:
-                self.calls.append(record)
-            return result
-
-        runner.train_local_epoch_v2 = tapped
+        def wrap(original: Any) -> Any:
+            def tapped(**kwargs: Any) -> Any:
+                inputs, labels = kwargs["inputs"], kwargs["labels"]
+                record = {"site_id": kwargs["site_id"], "round_number": kwargs["round_number"], "examples": int(inputs.shape[0]), "inputs_sha256": array_sha(inputs, np.float32), "labels_sha256": array_sha(labels, np.float32)}
+                result = original(**kwargs)
+                record["examples_seen"] = int(result.examples_seen)
+                with self._lock:
+                    self.calls.append(record)
+                return result
+            return tapped
+        runner.train_local_epoch_v2 = wrap(self._original_avg)
+        runner.train_local_fedprox_epoch_v2 = wrap(self._original_prox)
         return self
 
     def __exit__(self, *exc: Any) -> None:
-        self._module.train_local_epoch_v2 = self._original
+        self._module.train_local_epoch_v2 = self._original_avg
+        self._module.train_local_fedprox_epoch_v2 = self._original_prox

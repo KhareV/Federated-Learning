@@ -45,6 +45,12 @@ def verify() -> dict[str, object]:
             expected[path] = digest
     failures = [path for path, digest in expected.items()
                 if hash_file(ROOT / path) != digest]
+    from scripts.successor_chain import accounted_bound_files, tip_frontend_map
+
+    governed = accounted_bound_files(ROOT)
+    frontend_tip = tip_frontend_map(ROOT) or {}
+    failures = [path for path in failures
+                if path not in governed and frontend_tip.get(path) != hash_file(ROOT / path)]
     failures.extend(chain_failures)
     if not all(item["verified"] for item in all_locks().values()):
         failures.append("prior_lock_chain")

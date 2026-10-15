@@ -58,7 +58,9 @@ def test_studio_requires_identity_and_serves_recorded_runs_through_the_same_rout
         for path in ("/capabilities", "/runs", "/runs/recorded-A", "/runs/recorded-A/evaluation", "/runs/recorded-A/figures", "/runs/recorded-A/tables", "/runs/recorded-A/exports"):
             assert c.get(f"{S}{path}").status_code == 401, path
         caps = c.get(f"{S}/capabilities", headers=USER_A).json()
-        assert caps["run_lengths"] == [3, 10] and caps["default_run_length"] == 3 and "FEDPROX" in caps["ten_round"]["unsupported"] and caps["ten_round"]["expected_updates"] == 80
+        assert caps["run_lengths"] == [3, 10] and caps["default_run_length"] == 3
+        assert caps["ten_round"]["algorithms"] == ["FEDAVG", "FEDPROX"] and caps["ten_round"]["aggregation_modes"] == ["PLAIN", "SECAGG_SHADOW"] and caps["ten_round"]["unsupported"] == {} and caps["ten_round"]["expected_updates"] == 80
+        assert caps["hardware_demo"]["model"] == "HARDWARE_DEMO_MODEL_V1" and caps["hardware_demo"]["v2_initialisation"] == "NOT_APPLICABLE"
         runs = c.get(f"{S}/runs", headers=USER_A).json()
         assert {r["run_id"] for r in runs} == {"recorded-A", "recorded-B"} and all(r["origin"] == "RECORDED" and r["source_label"].startswith("RECORDED") for r in runs)
         summary = c.get(f"{S}/runs/recorded-A/evaluation", headers=USER_B).json()          # recorded evidence is global read-only reference
@@ -81,7 +83,7 @@ def test_three_round_contract_is_unchanged_and_the_studio_does_not_widen_it(tmp_
     with TestClient(_app(tmp_path)) as c:
         assert c.post(f"{BASE}/federation/runs", json={**SINGLE_RUN, "planned_rounds": 10}, headers=USER_A).status_code in (400, 422)
         assert c.post(f"{S}/runs", json={"run_length": 3}, headers=USER_A).status_code == 400                      # 3 rounds use the frozen product route
-        for body in ({"run_length": 5}, {"run_length": 10, "source_mode": "NOPE"}, {"run_length": 10, "algorithm": "FEDPROX"}, {"run_length": 10, "secagg_mode": "SECAGG_SHADOW"},
+        for body in ({"run_length": 5}, {"run_length": 10, "source_mode": "NOPE"}, {"run_length": 10, "algorithm": "NOPE"}, {"run_length": 10, "secagg_mode": "AUTHORITATIVE_SECAGG"},
                      {"run_length": 10, "run_type": "REPLAY"}, {"run_length": 10, "rounds": 3}):
             assert c.post(f"{S}/runs", json=body, headers=USER_A).status_code == 400, body            # unsupported combinations are refused, never reinterpreted as FedAvg/plain
         assert c.post(f"{S}/runs", json={"run_length": 10}).status_code == 401
