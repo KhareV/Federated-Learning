@@ -123,3 +123,25 @@ def test_active_foreign_and_too_short_sessions_fail_closed(tmp_path):
     with pytest.raises(PermissionError):
         service.run("user-b", session_ids=["HW-RECORDED-A"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=1)
     store.close()
+
+
+def test_warm_start_continues_from_an_earlier_run_owner_scoped_and_fresh_start_is_default(tmp_path):
+    _, service = populated(tmp_path)
+    first = service.run("user-a", session_ids=["HW-RECORDED-A"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=11)
+    assert first["model"]["initialisation"] == "FRESH_SEEDED" and first["model"]["warm_start"] is None
+    second = service.run("user-a", session_ids=["HW-RECORDED-A"], rounds=3, algorithm="FEDPROX", secagg_mode="PLAIN", label_seed=11,
+                         initialisation="WARM_START", warm_start_run_id=first["run_id"])
+    # R0 of the warm run is exactly the final global state of the earlier run, not a fresh seed.
+    assert second["state_progression"]["0"] == first["state_progression"]["3"]
+    assert second["state_progression"]["0"] != first["state_progression"]["0"]
+    assert second["model"]["warm_start"]["source_run_id"] == first["run_id"]
+    assert second["rounds"][0]["global_state_sha256"] != second["state_progression"]["0"]
+    with pytest.raises(PermissionError):
+        service.run("user-b", session_ids=[], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=11,
+                    initialisation="WARM_START", warm_start_run_id=first["run_id"])
+    with pytest.raises(LookupError):
+        service.run("user-a", session_ids=["HW-RECORDED-A"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=11,
+                    initialisation="WARM_START", warm_start_run_id="HDFLRUN-DOESNOTEXIST")
+    with pytest.raises(ValueError):
+        service.run("user-a", session_ids=["HW-RECORDED-A"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=11,
+                    initialisation="MODEL_V2_FINAL")

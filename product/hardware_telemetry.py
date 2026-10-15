@@ -267,4 +267,29 @@ class HardwareSessions:
                     (owner,),
                 )
             ]
-        return [self.detail(sid, owner, 0) | {"readings": []} for sid in ids]
+        return [self.detail(sid, owner, 0) | {"readings": [], "summary": self._summary(sid)} for sid in ids]
+
+    def _summary(self, sid: str) -> dict[str, Any]:
+        """Descriptive aggregates of the stored (bounded) trace; no inference, no validity claim."""
+        with self.store._lock:
+            row = self.store._connection.execute(
+                "SELECT COUNT(*) n, MIN(ingested_at) first, MAX(ingested_at) last, MIN(ecg) ecg_min, MAX(ecg) ecg_max,"
+                " AVG(bpm) bpm_mean, COUNT(bpm) bpm_n, AVG(spo2) spo2_mean, COUNT(spo2) spo2_n"
+                " FROM hardware_trace WHERE session_id=?",
+                (sid,),
+            ).fetchone()
+        n = row["n"]
+        span = None
+        if n > 1:
+            span = (datetime.fromisoformat(row["last"]) - datetime.fromisoformat(row["first"])).total_seconds()
+        return {
+            "stored_readings": n,
+            "first_reading_at": row["first"],
+            "last_reading_at": row["last"],
+            "span_seconds": span,
+            "arrival_hz": (n - 1) / span if span and span > 0 else None,
+            "ecg_min": row["ecg_min"],
+            "ecg_max": row["ecg_max"],
+            "bpm_mean": round(row["bpm_mean"], 1) if row["bpm_n"] else None,
+            "spo2_mean": round(row["spo2_mean"], 1) if row["spo2_n"] else None,
+        }

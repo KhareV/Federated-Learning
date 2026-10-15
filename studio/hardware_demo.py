@@ -256,15 +256,42 @@ class HardwareDemoService:
             raise PermissionError("hardware demo run belongs to another user")
         return data
 
-    def run(self, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int) -> dict[str, Any]:
+    def run(self, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int,
+            initialisation: str = "FRESH_SEEDED", warm_start_run_id: str | None = None) -> dict[str, Any]:
         if not self._run_lock.acquire(blocking=False):
             raise RuntimeError("HARDWARE_DEMO_RUN_ALREADY_ACTIVE")
         try:
-            return self._run(owner, session_ids=session_ids, rounds=rounds, algorithm=algorithm, secagg_mode=secagg_mode, label_seed=label_seed)
+            return self._run(owner, session_ids=session_ids, rounds=rounds, algorithm=algorithm, secagg_mode=secagg_mode, label_seed=label_seed,
+                             initialisation=initialisation, warm_start_run_id=warm_start_run_id)
         finally:
             self._run_lock.release()
 
-    def _run(self, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int) -> dict[str, Any]:
+    def _warm_start_state(self, owner: str, run_id: str | None) -> tuple[OrderedDict[str, np.ndarray], dict[str, Any]]:
+        """Final global weights of an earlier recorded-hardware run of the SAME owner and model."""
+        if not run_id:
+            raise ValueError("WARM_START requires warm_start_run_id")
+        previous = self.get(owner, run_id)  # LookupError / PermissionError: owner-scoped
+        if previous.get("model", {}).get("id") != MODEL_ID:
+            raise ValueError("warm start source is not a HARDWARE_DEMO_MODEL_V1 run")
+        checkpoint = self.root / run_id / "checkpoints" / f"R{int(previous['rounds_planned']):02d}.json"
+        raw = json.loads(checkpoint.read_text())
+        reference = _state(_model(0))
+        state: OrderedDict[str, np.ndarray] = OrderedDict()
+        for key, value in reference.items():
+            loaded = np.asarray(raw.get(key), dtype=np.float32)
+            if loaded.shape != value.shape or not np.isfinite(loaded).all():
+                raise ValueError("warm start checkpoint does not match HARDWARE_DEMO_MODEL_V1")
+            state[key] = loaded
+        return state, {"source_run_id": run_id, "source_round": int(previous["rounds_planned"]),
+                       "source_state_sha256": _state_digest(state), "source_algorithm": previous.get("algorithm")}
+
+    def _run(self, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int,
+             initialisation: str = "FRESH_SEEDED", warm_start_run_id: str | None = None) -> dict[str, Any]:
+        if initialisation not in ("FRESH_SEEDED", "WARM_START"):
+            raise ValueError("unsupported starting model for HARDWARE_DEMO_MODEL_V1")
+        warm_state, warm_info = (None, None)
+        if initialisation == "WARM_START":
+            warm_state, warm_info = self._warm_start_state(owner, warm_start_run_id)
         if rounds not in (3, 10) or algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
             raise ValueError("unsupported hardware demo configuration")
         if not 0 <= label_seed <= 2**31 - 1:
@@ -310,7 +337,7 @@ class HardwareDemoService:
         }
         torch.use_deterministic_algorithms(True)
         model = _model(label_seed)
-        global_state = _state(model)
+        global_state = warm_state if warm_state is not None else _state(model)
         progression = {"0": _state_digest(global_state)}
         round_rows: list[dict[str, Any]] = []
         secagg = None
@@ -351,7 +378,8 @@ class HardwareDemoService:
             "created_at": created, "completed_at": _iso_now(), "status": "COMPLETED",
             "source_mode": "RECORDED_HARDWARE_DEMO", "source_session_ids": session_ids,
             "source_record_count": len(records), "snapshot_sha256": snapshot["snapshot_sha256"],
-            "dataset": dataset, "model": {"id": MODEL_ID, "architecture": f"Linear({len(FEATURES)},1)", "released": False, "v2_initialisation": "NOT_APPLICABLE"},
+            "dataset": dataset, "model": {"id": MODEL_ID, "architecture": f"Linear({len(FEATURES)},1)", "released": False, "v2_initialisation": "NOT_APPLICABLE",
+                      "initialisation": initialisation, "warm_start": warm_info},
             "algorithm": algorithm, "fedprox_mu": MU if algorithm == "FEDPROX" else None, "secagg_mode": secagg_mode,
             "aggregation": "PLAIN", "secagg_shadow": secagg, "rounds_planned": rounds,
             "rounds": round_rows, "state_progression": progression,

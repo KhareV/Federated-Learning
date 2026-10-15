@@ -60,9 +60,11 @@ async function openHardwareAndStart() {
 }
 async function monitorSnapshot() { return ev(`(() => { const text=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent??'').trim(); const svg=document.querySelector('[data-testid="hardware-waveform"]'); const latest=[...document.querySelectorAll('p')].find(p=>p.textContent.includes('Latest received: MongoDB ID')); const match=latest?.textContent.match(/MongoDB ID\\s+([0-9a-f]+)\\s+· ECG\\s+(\\d+)/i); const marker=svg?.querySelector('circle[fill="#fbbf24"]'); const ecg=match?Number(match[2]):null; return { state:text('hardware-state'), count:Number(text('hardware-record-count')), bpm:text('hardware-bpm'), spo2:text('hardware-spo2'), points:Number(svg?.getAttribute('data-points')??0), paths:Number(svg?.getAttribute('data-paths')??0), latest_id:match?.[1]??null, latest_ecg:ecg, latest_x:marker?Number(marker.getAttribute('cx')):null, latest_y:marker?Number(marker.getAttribute('cy')):null, expected_y:ecg===null?null:170-ecg/4095*150 }; })()`); }
 async function runDemo(sessionId, rounds, algorithm) {
-	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-starter"]')`, 120000);
+	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="data-source-hardware"]')`, 120000);
+	await clickId('data-source-hardware'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-starter"]')`, 60000);
 	await waitFor(`!!document.querySelector('[data-testid="hardware-demo-session-${sessionId}"]')`, 60000);
-	await clickId(`hardware-demo-session-${sessionId}`); await setSelect('[data-testid="hardware-demo-rounds"]', String(rounds)); await setSelect('[data-testid="hardware-demo-algorithm"]', algorithm); await setSelect('[data-testid="hardware-demo-secagg"]', 'SECAGG_SHADOW');
+	await clickId(`rounds-${rounds}`);
+	await clickId(`hardware-demo-session-${sessionId}`); await setSelect('[data-testid="hardware-demo-algorithm"]', algorithm); await setSelect('[data-testid="hardware-demo-secagg"]', 'SECAGG_SHADOW');
 	await clickId('hardware-demo-start'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-result"]')`, 600000); const text = await value('hardware-demo-result'); await shot(`demo_${rounds}_${algorithm.toLowerCase()}`); return text;
 }
 
@@ -89,7 +91,8 @@ if (MODE === 'scenario-a') {
 } else if (MODE === 'owner-probe') {
 	const target = process.env.NHM_EXPECT_SESSION; if (!target) throw new Error('NHM_EXPECT_SESSION missing');
 	await goto(`/app/history/${encodeURIComponent(target)}`); await waitFor(`document.querySelector('[role="alert"]') || document.body.innerText.includes('FORBIDDEN')`, 60000); const detailText = await ev('document.body.innerText'); await shot('owner_b_forbidden');
-	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-starter"]')`, 120000); await sleep(1000);
+	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="data-source-hardware"]')`, 120000);
+	await clickId('data-source-hardware'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-starter"]')`, 60000); await sleep(1000);
 	Object.assign(out, { target_session: target, detail_refused: /forbidden|belongs to another user/i.test(detailText), target_absent_from_demo_sources: !(await ev(`document.body.innerText.includes(${JSON.stringify(target)})`)) });
 } else throw new Error(`unknown mode ${MODE}`);
 writeFileSync(OUT, JSON.stringify(out, null, 2)); await cdp.send('Browser.close').catch(() => {});

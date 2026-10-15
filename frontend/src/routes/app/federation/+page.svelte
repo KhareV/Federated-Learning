@@ -8,7 +8,6 @@
 	import FederationPipeline from '$lib/components/product/federation/FederationPipeline.svelte';
 	import TechnicalEvidence from '$lib/components/product/federation/TechnicalEvidence.svelte';
 	import StudioRunStarter from '$lib/components/product/studio/StudioRunStarter.svelte';
-	import HardwareDemoStarter from '$lib/components/product/studio/HardwareDemoStarter.svelte';
 	import RunList from '$lib/components/product/federation/RunList.svelte';
 	import { FederationStore, REPLAY_NO_SOURCE, useFederation } from '$lib/product/federation/state.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -52,7 +51,6 @@
 <div class="grid">
 	<Panel eyebrow="03 / RUN" title="Start a federation run" note="FL_SINGLE_RUN">
 		<StudioRunStarter disabled={fed.busy} {liveBlocked} backendEnabled={enabled} capabilities={studio.capabilities} onStartThree={start} onStartTen={startTen} />
-		<HardwareDemoStarter disabled={fed.busy || liveBlocked} capabilities={studio.capabilities} />
 		{#if fed.replayNoSource}<p class="warn" role="alert" data-testid="replay-no-source">{REPLAY_NO_SOURCE}</p>{/if}
 		{#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
 	</Panel>

@@ -102,6 +102,7 @@ export interface ProductClient {
 	hardwareStop(id: string): Promise<HardwareSession>;
 	hardwareSessions(): Promise<HardwareSession[]>;
 	hardwareSession(id: string): Promise<HardwareSession>;
+	hardwareV2Experimental(id: string): Promise<import('./hardware-v2').HardwareV2Experimental>;
 	system(): Promise<SystemInfoV2>;
 	me(): Promise<AuthIdentity>;
 	devices(): Promise<DeviceDescriptor[]>;
@@ -188,6 +189,7 @@ export interface HardwareSession {
 	started_at: string; stopped_at: string | null; status: string; source_state: string;
 	record_count: number; last_received_at: string | null; readings: HardwareReading[];
 	trace_limit: number; stale_threshold_seconds: number;
+	summary?: { stored_readings: number; first_reading_at: string | null; last_reading_at: string | null; span_seconds: number | null; arrival_hz: number | null; ecg_min: number | null; ecg_max: number | null; bpm_mean: number | null; spo2_mean: number | null };
 }
 
 /** The only three user-controlled run options; scenario and rounds are frozen constants. */
@@ -253,6 +255,7 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		hardwareStop: (id) => call('POST', `/hardware/sessions/${enc(id)}/stop`),
 		hardwareSessions: () => call('GET', '/hardware/sessions'),
 		hardwareSession: (id) => call('GET', `/hardware/sessions/${enc(id)}`),
+		hardwareV2Experimental: (id) => call('GET', `/hardware/sessions/${enc(id)}/v2-experimental`),
 		system: () => call('GET', '/system'),
 		me: () => call('GET', '/me'),
 		devices: () => call('GET', '/devices'),

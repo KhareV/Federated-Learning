@@ -91,7 +91,12 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
                 "hardware_demo": {"available": hasattr(app.state, "hardware_sessions"), "source_mode": "RECORDED_HARDWARE_DEMO", "model": MODEL_ID,
                                   "run_lengths": [3, 10], "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
                                   "secagg_scope": "ROUND-1 SECAGG+ SHADOW; authoritative aggregation remains plain", "fedprox_mu": MU,
-                                  "label_assignment": LABEL_VERSION, "initialisations": [MODEL_ID], "v2_initialisation": "NOT_APPLICABLE"},
+                                  "label_assignment": LABEL_VERSION, "initialisations": [MODEL_ID], "v2_initialisation": "NOT_APPLICABLE",
+                                  "starting_models": [
+                                      {"id": "FRESH_SEEDED", "label": "Fresh initialisation (seeded, untrained)", "available": True, "reason": None},
+                                      {"id": "WARM_START", "label": "Pretrained: warm start from an earlier recorded-hardware run", "available": True, "reason": None},
+                                      {"id": "MODEL_V2_FINAL", "label": "Pretrained V2 (MODEL_V2_FINAL)", "available": False,
+                                       "reason": "V2 is a 250 Hz ECG-window network; the hardware demo model is a tabular classifier over recorded-window features, so V2 weights cannot be loaded into it and no transfer is claimed."}]},
                 "generalisation": {"cohort_id": g1_cohort.COHORT_ID, "label": g1_cohort.COHORT_USE_LABEL, "claim_boundary": g1_cohort.CLAIM_BOUNDARY, "baseline": "MODEL_V2_FINAL (unchanged, frozen)"},
                 "evaluation": {"observer_id": OBSERVER_ID, "protocol_id": EVAL_PROTOCOL_ID, "threshold": 0.5, "calibration": "NONE", "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "claim_boundary": CLAIM_BOUNDARY}}
 
@@ -112,7 +117,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     @app.post(f"{STUDIO}/hardware-demo/runs")
     async def start_hardware_demo(request: Request, body: dict[str, Any]) -> dict[str, Any]:
         user = await identity(request)
-        allowed = {"session_ids", "run_length", "algorithm", "secagg_mode", "label_seed"}
+        allowed = {"session_ids", "run_length", "algorithm", "secagg_mode", "label_seed", "initialisation", "warm_start_run_id"}
         if set(body) - allowed or not isinstance(body.get("session_ids"), list):
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "invalid hardware demo request")
         try:
@@ -121,6 +126,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
                 session_ids=body["session_ids"], rounds=body.get("run_length", 3),
                 algorithm=body.get("algorithm", "FEDAVG"), secagg_mode=body.get("secagg_mode", "PLAIN"),
                 label_seed=body.get("label_seed", 20261015),
+                initialisation=body.get("initialisation", "FRESH_SEEDED"), warm_start_run_id=body.get("warm_start_run_id"),
             )
         except PermissionError as error:
             raise ProductError(ProductErrorCode.FORBIDDEN, str(error)) from error

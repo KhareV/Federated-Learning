@@ -9,8 +9,8 @@
   "real_clerk": true,
   "actual_atlas": true,
   "synthetic_source": true,
-  "tag": "NHM-BROWSER-A-1792052069477",
-  "session_id": "HW-2cee298c49134028ba71b2ebd1df83f6",
+  "tag": "NHM-BROWSER-A-1792068017725",
+  "session_id": "HW-6e27de769acc442abd446191a7bf5253",
   "waiting": {
     "state": "WAITING FOR DATA",
     "count": 0,
@@ -26,16 +26,16 @@
   },
   "live": {
     "state": "LIVE DATA RECEIVED",
-    "count": 20,
-    "bpm": "73",
+    "count": 30,
+    "bpm": "74",
     "spo2": "97%",
-    "points": 20,
-    "paths": 1,
-    "latest_id": "6ad08b719457179dc30bec41",
-    "latest_ecg": 1820,
+    "points": 30,
+    "paths": 2,
+    "latest_id": "6ad0c9c8f9d2852347ac0e47",
+    "latest_ecg": 2278,
     "latest_x": 1000,
-    "latest_y": 103.33333333333334,
-    "expected_y": 103.33333333333334
+    "latest_y": 86.55677655677655,
+    "expected_y": 86.55677655677655
   },
   "stale": {
     "state": "STALE DATA",
@@ -44,7 +44,7 @@
     "spo2": "98%",
     "points": 300,
     "paths": 1,
-    "latest_id": "6ad08b899457179dc30bee21",
+    "latest_id": "6ad0c9dbf9d2852347ac101d",
     "latest_ecg": 1827,
     "latest_x": 1000,
     "latest_y": 103.07692307692308,
@@ -57,7 +57,7 @@
     "spo2": "97%",
     "points": 300,
     "paths": 2,
-    "latest_id": "6ad08b909457179dc30bee2b",
+    "latest_id": "6ad0c9e2f9d2852347ac1027",
     "latest_ecg": 2267,
     "latest_x": 1000,
     "latest_y": 86.95970695970695,
@@ -70,7 +70,7 @@
     "spo2": "98%",
     "points": 300,
     "paths": 1,
-    "latest_id": "6ad08bb39457179dc30bf0dd",
+    "latest_id": "6ad0ca05f9d2852347ac12d9",
     "latest_ecg": 1818,
     "latest_x": 1000,
     "latest_y": 103.40659340659342,
@@ -83,7 +83,7 @@
     "spo2": "98%",
     "points": 300,
     "paths": 1,
-    "latest_id": "6ad08bb39457179dc30bf0dd",
+    "latest_id": "6ad0ca05f9d2852347ac12d9",
     "latest_ecg": 1818,
     "latest_x": 1000,
     "latest_y": 103.40659340659342,
@@ -91,7 +91,7 @@
   },
   "history_visible": true,
   "demo_fl": {
-    "fedavg": "HDFLRUN-49A01185A305 · COMPLETED48 train / 12 holdout windows8 clients · 3 rounds · 24 accepted updatesFeature digest f2e6a664f7bae44c…Final state 7f7e0d340b721d96…SecAgg+ shadow: PASS · authoritative aggregate PLAINTOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
-    "fedprox": "HDFLRUN-23C759268B00 · COMPLETED48 train / 12 holdout windows8 clients · 3 rounds · 24 accepted updatesFeature digest f2e6a664f7bae44c…Final state b3b1aba337f0a688…SecAgg+ shadow: PASS · authoritative aggregate PLAINTOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity"
+    "fedavg": "HDFLRUN-87CC1ED2684E · COMPLETED 46 train / 10 holdout windows · 8 clients · 3 rounds · 24 accepted updates Start: fresh seeded initialisation Feature digest 4300dd9aa8bd866f… · final state 0099974bd4969127… SecAgg+ shadow: PASS · authoritative aggregate PLAIN roundtrain lossholdout BCEaccuracyR10.66750.743960.0%R20.66360.754460.0%R30.66040.765550.0% TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
+    "fedprox": "HDFLRUN-E6EA9A4C4B3C · COMPLETED 46 train / 10 holdout windows · 8 clients · 3 rounds · 24 accepted updates Start: fresh seeded initialisation Feature digest 4300dd9aa8bd866f… · final state e35d379c00fe34e0… SecAgg+ shadow: PASS · authoritative aggregate PLAIN roundtrain lossholdout BCEaccuracyR10.66750.743960.0%R20.66370.754360.0%R30.66040.765450.0% TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity"
   }
 }

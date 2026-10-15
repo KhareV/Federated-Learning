@@ -215,7 +215,7 @@ describe('claim wording in product copy', () => {
 	it('the reviewed qualified occurrences are exactly the expected disclaimers', () => {
 		const all = copy.join('\n');
 		expect(/physical device path still requires a live hardware demonstration/i.test(all)).toBe(true);
-		expect(/no verified ADC sampling rate or model inference is available/i.test(all)).toBe(true);
+		expect(/no verified ADC sampling rate; any model analysis of this source is experimental and not valid/i.test(all)).toBe(true);
 		expect(/not (a )?diagnostic or medical device|not a medical device/i.test(all + read('routes/+page.svelte'))).toBe(true);
 	});
 });

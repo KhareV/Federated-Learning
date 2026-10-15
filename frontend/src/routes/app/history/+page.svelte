@@ -7,14 +7,43 @@
 	import { getProductStore } from '$lib/product/state.svelte';
 	const store = getProductStore();
 	let loaded = $state(false);
+	const secs = (v: number | null | undefined) => (v == null ? '--' : v >= 60 ? `${Math.floor(v / 60)} m ${Math.round(v % 60)} s` : `${v.toFixed(1)} s`);
 	const when = (us: number | null) => (us === null ? '--' : new Date(us / 1000).toLocaleString());
 	onMount(() => { void Promise.all([store.loadSessions(), store.api.hardwareSessions().then((v) => { hardware = v; }).catch(() => { hardware = []; })]).finally(() => (loaded = true)); });
 </script>
 <svelte:head><title>History | NHM</title></svelte:head>
 <div class="eyebrow">NHM / HISTORY</div><h1>Research monitoring history</h1>
 {#if store.error}<p class="err" role="alert">{store.error}</p>{/if}
-<Panel eyebrow="00 / HARDWARE" title="Hardware telemetry sessions" note="OWNER-SCOPED · NO MODEL INFERENCE">
-	{#if hardware.length}<ul>{#each hardware as h}<li><a href={`/app/history/${encodeURIComponent(h.session_id)}`}>{h.session_id}</a> · {h.status} · {h.record_count} MongoDB readings · {new Date(h.started_at).toLocaleString()} · {h.source}</li>{/each}</ul>{:else}<p class="dim">No saved hardware sessions.</p>{/if}
+<Panel eyebrow="00 / HARDWARE" title="Hardware telemetry sessions" note="OWNER-SCOPED · TELEMETRY ONLY · NO VALIDATED INFERENCE">
+	{#if !loaded}<p role="status" class="dim">Loading hardware sessions…</p>
+	{:else if hardware.length === 0}<div class="empty"><strong>No saved hardware sessions</strong><p class="dim">Record one on the Monitor page: choose “Live hardware (MongoDB)”, then Start and Stop Monitoring.</p><a class="cta" href="/app/monitoring">RECORD A HARDWARE SESSION →</a></div>
+	{:else}
+		<div class="hwsummary" data-testid="hardware-history-summary">
+			<span><b>{hardware.length}</b> sessions</span>
+			<span><b>{hardware.reduce((n, h) => n + h.record_count, 0)}</b> readings</span>
+			<span><b>{hardware.filter((h) => h.status === 'STOPPED' && (h.summary?.stored_readings ?? 0) > 0).length}</b> usable for recorded-hardware FL</span>
+		</div>
+		<div class="scroll"><table data-testid="hardware-session-table"><caption class="sr">Hardware telemetry sessions, newest first</caption>
+			<thead><tr><th scope="col">Session</th><th scope="col">State</th><th scope="col">Readings</th><th scope="col">Duration</th><th scope="col">Rate</th><th scope="col">ECG range</th><th scope="col">Device BPM</th><th scope="col">Started</th><th scope="col">Source</th><th scope="col">Evidence</th></tr></thead>
+			<tbody>{#each hardware as h (h.session_id)}<tr>
+				<td><code>{h.session_id}</code></td>
+				<td><span class="badge" class:complete={h.status === 'STOPPED' && h.record_count > 0} class:failed={h.record_count === 0}>{h.status === 'ACTIVE' ? 'ACTIVE' : h.record_count === 0 ? 'NO DATA' : 'SAVED'}</span></td>
+				<td>{h.record_count}</td>
+				<td>{secs(h.summary?.span_seconds)}</td>
+				<td>{h.summary?.arrival_hz ? `${h.summary.arrival_hz.toFixed(1)} msg/s` : '--'}</td>
+				<td>{h.summary?.ecg_min != null ? `${h.summary.ecg_min}–${h.summary.ecg_max}` : '--'}</td>
+				<td>{h.summary?.bpm_mean ?? '--'}</td>
+				<td>{new Date(h.started_at).toLocaleString()}</td>
+				<td><span class="badge" class:test={h.source.startsWith('SYNTHETIC')}>{h.source.startsWith('SYNTHETIC') ? 'TEST SOURCE' : 'ESP32 · UNVERIFIED'}</span></td>
+				<td><a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a>{#if h.status === 'STOPPED' && h.record_count > 0} · <a href="/app/federation" title="Choose Recorded hardware in Start a federation run">USE IN FL →</a>{/if}</td>
+			</tr>{/each}</tbody></table></div>
+		<ul class="mobile-list" aria-label="Hardware telemetry sessions">{#each hardware as h (h.session_id)}<li>
+			<div class="card-head"><span class="badge" class:complete={h.status === 'STOPPED' && h.record_count > 0} class:failed={h.record_count === 0}>{h.status === 'ACTIVE' ? 'ACTIVE' : h.record_count === 0 ? 'NO DATA' : 'SAVED'}</span><time>{new Date(h.started_at).toLocaleString()}</time></div>
+			<strong class="session-id">{h.session_id}</strong>
+			<dl><div><dt>Readings</dt><dd>{h.record_count}</dd></div><div><dt>Duration</dt><dd>{secs(h.summary?.span_seconds)}</dd></div><div><dt>Device BPM</dt><dd>{h.summary?.bpm_mean ?? '--'}</dd></div><div><dt>Source</dt><dd>{h.source.startsWith('SYNTHETIC') ? 'TEST SOURCE' : 'ESP32 · UNVERIFIED'}</dd></div></dl>
+			<a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a></li>{/each}</ul>
+	{/if}
+	<p class="dim">Hardware sessions are telemetry recordings of the shared MongoDB source. Durations and rates come from server ingestion timestamps; device BPM and SpO₂ are unverified. No clinical claim is made.</p>
 </Panel>
 <Panel eyebrow="01 / PERSISTED" title="Monitoring sessions" note="OWNER-SCOPED HISTORY">
 	{#if !loaded}<p role="status" class="dim">Loading persisted monitoring sessions…</p>
@@ -31,6 +60,6 @@
 	.eyebrow { color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; letter-spacing: .14em; } h1 { margin: 10px 0 18px; font: 500 clamp(26px, 4vw, 40px) 'Space Grotesk', sans-serif; } .dim { color: #94a3b8; font-size: 13px; line-height: 1.6; } .err { color: #fecdd3; padding: 10px; border: 1px solid rgba(251,113,133,.4); }
 	.scroll { overflow-x: auto; } table { border-collapse: collapse; width: 100%; font-size: 12px; } th, td { padding: 9px 10px; border-bottom: 1px solid var(--nhm-border); text-align: left; white-space: nowrap; } th { color: #71829a; font: 10px 'JetBrains Mono', monospace; letter-spacing: .1em; font-weight: 500; }
 	code { font: 11px 'JetBrains Mono', monospace; } .badge { padding: 2px 7px; border: 1px solid rgba(43,184,176,.5); color: #2bb8b0; font: 10px 'JetBrains Mono', monospace; } a { color: #2bb8b0; display: inline-flex; align-items: center; min-height: 24px; } .sr { position: absolute; left: -9999px; }
-	.badge.complete{color:#2bb8b0}.badge.failed{color:#fb7185;border-color:rgba(251,113,133,.5)}.empty{padding:18px;border:1px dashed var(--nhm-border)}.empty strong{font:500 18px 'Space Grotesk',sans-serif}.cta{display:inline-flex;align-items:center;min-height:32px;padding:7px 12px;border:1px solid #2bb8b0;text-decoration:none;font:600 11px 'JetBrains Mono',monospace;letter-spacing:.06em}.mobile-list{display:none;list-style:none;margin:0;padding:0;gap:10px}.mobile-list li{border:1px solid var(--nhm-border);padding:14px;min-width:0}.card-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.card-head time{color:#94a3b8;font-size:11px}.session-id{display:block;margin:12px 0;overflow-wrap:anywhere;font:500 13px 'JetBrains Mono',monospace}.mobile-list dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:0 0 14px}.mobile-list dt{color:#71829a;font:10px 'JetBrains Mono',monospace}.mobile-list dd{margin:3px 0 0;overflow-wrap:anywhere;font-size:12px}.mobile-list a:focus-visible,a:focus-visible{outline:2px solid #fbbf24;outline-offset:2px}
+	.hwsummary{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:12px;color:#94a3b8;font-size:13px}.hwsummary b{color:#e5f1f0;font:600 18px 'Space Grotesk',sans-serif;margin-right:4px}.badge.test{color:#fbbf24;border-color:rgba(251,191,36,.5)}.badge.complete{color:#2bb8b0}.badge.failed{color:#fb7185;border-color:rgba(251,113,133,.5)}.empty{padding:18px;border:1px dashed var(--nhm-border)}.empty strong{font:500 18px 'Space Grotesk',sans-serif}.cta{display:inline-flex;align-items:center;min-height:32px;padding:7px 12px;border:1px solid #2bb8b0;text-decoration:none;font:600 11px 'JetBrains Mono',monospace;letter-spacing:.06em}.mobile-list{display:none;list-style:none;margin:0;padding:0;gap:10px}.mobile-list li{border:1px solid var(--nhm-border);padding:14px;min-width:0}.card-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.card-head time{color:#94a3b8;font-size:11px}.session-id{display:block;margin:12px 0;overflow-wrap:anywhere;font:500 13px 'JetBrains Mono',monospace}.mobile-list dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:0 0 14px}.mobile-list dt{color:#71829a;font:10px 'JetBrains Mono',monospace}.mobile-list dd{margin:3px 0 0;overflow-wrap:anywhere;font-size:12px}.mobile-list a:focus-visible,a:focus-visible{outline:2px solid #fbbf24;outline-offset:2px}
 	@media(max-width:760px){.scroll{display:none}.mobile-list{display:grid}}@media(max-width:390px){.mobile-list dl{grid-template-columns:1fr}}
 </style>

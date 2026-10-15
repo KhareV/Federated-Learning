@@ -2,6 +2,7 @@
 	// One continuous start workflow for both run lengths and both starting models. The default starting model is the pretrained V2 (MODEL_V2_FINAL, federated fine-tuning); the untrained start stays available.
 	// 3 rounds from the UNTRAINED start keeps the ORIGINAL run form and the frozen 3-round product contract untouched; every other combination uses the verified extended engine.
 	import RunConfigForm from '$lib/components/product/federation/RunConfigForm.svelte';
+	import HardwareDemoStarter from '$lib/components/product/studio/HardwareDemoStarter.svelte';
 	import type { FederationRunChoice } from '$lib/product/api';
 	import type { Initialisation, RunLength, SourceMode, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
 	let { disabled = false, liveBlocked = false, backendEnabled = true, capabilities = null, onStartThree, onStartTen }: {
@@ -9,6 +10,10 @@
 		onStartThree: (choice: FederationRunChoice) => void; onStartTen: (choice: StudioRunChoice) => void } = $props();
 	let length = $state<RunLength>(3);              // default stays 3
 	let source = $state<SourceMode>('CANONICAL_SYNTHETIC');
+	// Training data: the synthetic cohort (default, unchanged) or readings recorded from the MongoDB hardware source.
+	let dataSource = $state<'SYNTHETIC' | 'HARDWARE'>('SYNTHETIC');
+	const hardwareOffered = $derived(capabilities?.hardware_demo?.available === true);
+	const hardware = $derived(dataSource === 'HARDWARE' && hardwareOffered);
 	let algorithm = $state<'FEDAVG' | 'FEDPROX'>('FEDAVG');
 	let secaggMode = $state<'PLAIN' | 'SECAGG_SHADOW'>('PLAIN');
 	let initChoice = $state<Initialisation | null>(null);                           // null = follow the backend's default (pretrained V2); the user's choice then overrides it
@@ -18,7 +23,7 @@
 	const v2Rounds = $derived(capabilities?.ten_round.rounds_by_initialisation?.MODEL_V2_FINAL ?? [10]);
 	const v2ThreeUnsupported = $derived(inits.length > 0 && initialisation === 'MODEL_V2_FINAL' && length === 3 && !v2Rounds.includes(3));
 	/** The original frozen form: 3 rounds from the untrained start (or a backend that offers no starting-model choice). */
-	const original = $derived(length === 3 && (!inits.length || initialisation === 'FL_INIT_V2' || v2ThreeUnsupported));
+	const original = $derived(!hardware && length === 3 && (!inits.length || initialisation === 'FL_INIT_V2' || v2ThreeUnsupported));
 	const tenAvailable = $derived(capabilities?.ten_round.available === true);
 	const modes = $derived(capabilities?.ten_round.source_modes ?? ['CANONICAL_SYNTHETIC']);
 	const fedproxAvailable = $derived(capabilities?.ten_round.algorithms.includes('FEDPROX') === true);
@@ -39,6 +44,13 @@
 </script>
 <div class="rs" data-testid="studio-run-starter">
 	<div class="sel" role="radiogroup" aria-label="Communication rounds">
+		{#if hardwareOffered}
+			<span class="cap">Training data</span>
+			<div class="opts" role="radiogroup" aria-label="Training data">
+				<button type="button" role="radio" aria-checked={dataSource === 'SYNTHETIC'} class:on={dataSource === 'SYNTHETIC'} data-testid="data-source-synthetic" onclick={() => { dataSource = 'SYNTHETIC'; }}><b>SYNTHETIC COHORT</b><small>EIGHT FROZEN SYNTHETIC CLIENTS</small></button>
+				<button type="button" role="radio" aria-checked={dataSource === 'HARDWARE'} class:on={dataSource === 'HARDWARE'} data-testid="data-source-hardware" onclick={() => { dataSource = 'HARDWARE'; }}><b>RECORDED HARDWARE</b><small>YOUR SAVED MONGODB SESSIONS</small></button>
+			</div>
+		{/if}
 		<span class="cap">Communication rounds</span>
 		<div class="opts">{#each OPTIONS as o (o.value)}
 			<button type="button" role="radio" id={`rounds-${o.value}`} aria-checked={length === o.value} tabindex={length === o.value ? 0 : -1} class:on={length === o.value} disabled={o.value === 10 && !tenAvailable} data-testid={`rounds-${o.value}`} onclick={() => { length = o.value; }} onkeydown={radioKey}><b>{o.title}</b><small>{o.tag}</small></button>{/each}</div>
@@ -46,13 +58,15 @@
 		<table class="exp" aria-label="Expected communication structure"><thead><tr><th scope="col">Choice</th><th scope="col">Clients</th><th scope="col">Rounds</th><th scope="col">Expected accepted updates</th></tr></thead>
 			<tbody><tr class:cur={length === 3}><th scope="row">Default</th><td>8</td><td>3</td><td data-testid="expected-3">24</td></tr><tr class:cur={length === 10}><th scope="row">Extended</th><td>8</td><td>10</td><td data-testid="expected-10">80</td></tr></tbody></table>
 		<p class="dim">These are expected counts, not evidence of completed work. The running page shows only updates the coordinator actually accepted.</p>
-		{#if inits.length}
+		{#if inits.length && !hardware}
 			<label><span>Starting model</span><select value={initialisation} onchange={(e) => { initChoice = (e.currentTarget as HTMLSelectElement).value as Initialisation; }} data-testid="cfg10-init">{#each inits as i (i.id)}<option value={i.id}>{i.id === 'FL_INIT_V2' ? 'Untrained V2 architecture — FL_INIT_V2' : 'Pretrained V2 (default) — MODEL_V2_FINAL, federated fine-tuning'}</option>{/each}</select></label>
 			<p class="help" data-testid="cfg10-init-note">{inits.find((i) => i.id === initialisation)?.label}. {initialisation === 'MODEL_V2_FINAL' ? 'R0 is the verified pretrained checkpoint, unchanged; the federated rounds adapt it on the synthetic engineering-event task. The Generalisation tab then compares every round with frozen V2 on an unseen cohort.' : length === 3 ? 'Original frozen 3-round contract: FedAvg or FedProx, optional protected-aggregation shadow. R0 is a fresh untrained model.' : 'R0 is a fresh untrained model; frozen V2 is shown only as an external reference.'}</p>
 			{#if v2ThreeUnsupported}<p class="warn" role="status" data-testid="v2-three-unsupported">3 rounds from the pretrained start are not offered by the connected backend; the original untrained 3-round form is shown.</p>{/if}
 		{/if}
 	</div>
-	{#if original}
+	{#if hardware}
+		<HardwareDemoStarter {capabilities} {disabled} rounds={length} />
+	{:else if original}
 		<RunConfigForm {disabled} {liveBlocked} {backendEnabled} onSubmit={onStartThree} />
 	{:else}
 		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: length, source_mode: source, ...(inits.length ? { initialisation } : {}), ...(algorithm !== 'FEDAVG' ? { algorithm } : {}), ...(secaggMode !== 'PLAIN' ? { secagg_mode: secaggMode } : {}) }); }} aria-label={`${length === 3 ? 'Three' : 'Ten'}-round federation run configuration`}>
