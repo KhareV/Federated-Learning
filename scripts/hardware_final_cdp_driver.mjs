@@ -47,7 +47,12 @@ async function signIn() {
 }
 function startPublisher(tag, count, extra = []) {
 	const fd = openSync(`${LOGS}/${tag}.log`, 'w');
-	const child = spawn(process.env.NHM_TEST_PYTHON, ['-m', 'scripts.publish_hardware_test', '--count', String(count), '--rate', '20', '--run-tag', tag, ...extra], { cwd: process.cwd(), env: process.env, stdio: ['ignore', fd, fd] });
+	// NHM_PRODUCER=ws drives the real network path (ESP32 emulator -> ingestion server -> Atlas); default writes to Atlas directly.
+	const ws = process.env.NHM_PRODUCER === 'ws';
+	const argv = ws ? ['-m', 'scripts.emulate_esp32_ws', '--url', process.env.NHM_WS_URL, '--timing', 'firmware', '--count', String(count), '--rate', '20', '--run-tag', tag, '--event-log', `${LOGS}/${tag}.events.jsonl`, '--summary-file', `${LOGS}/${tag}.summary.json`, ...extra]
+		: ['-m', 'scripts.publish_hardware_test', '--count', String(count), '--rate', '20', '--run-tag', tag, ...extra];
+	const childEnv = { ...process.env }; if (ws) delete childEnv.NHM_HARDWARE_MONGO_URI;  // the emulator never holds database credentials
+	const child = spawn(process.env.NHM_TEST_PYTHON, argv, { cwd: process.cwd(), env: childEnv, stdio: ['ignore', fd, fd] });
 	child.on('exit', () => closeFd(fd));
 	let closed = false; function closeFd(n) { if (!closed) { closed = true; try { closeSync(n); } catch {} } }
 	return child;
@@ -88,6 +93,30 @@ if (MODE === 'scenario-a') {
 	await goto('/app/history'); await waitFor(`document.body.innerText.includes(${JSON.stringify(sid1)}) && document.body.innerText.includes(${JSON.stringify(sid2)})`, 60000); await shot('b_history');
 	const fedavg = await runDemo(sid1, 10, 'FEDAVG'); const fedprox = await runDemo(sid1, 10, 'FEDPROX');
 	Object.assign(out, { tag, prior_history_after_restart: priorHistoryAfterRestart, pre_emission_seconds: 18, first_session_id: sid1, first_live: firstLive, first_stop: firstStop, first_after_stop: firstStable, second_session_id: sid2, second_live: secondLive, second_stop: secondStop, separate_sessions: sid1 !== sid2, history_visible: true, demo_fl: { fedavg, fedprox } });
+} else if (MODE === 'latency') {
+	// First wall-clock moment each MongoDB _id is shown in the "Latest received" line (60 ms DOM sampling).
+	const seconds = Number(process.env.NHM_LATENCY_SECONDS ?? 60); const tag = `NHM-BROWSER-LAT-${stamp}`;
+	const sid = await openHardwareAndStart(); const pub = startPublisher(tag, Math.round(seconds * 20), []);
+	const seen = {}; const t0 = Date.now(); const expr = `(() => { const p=[...document.querySelectorAll('p')].find(x=>x.textContent.includes('Latest received: MongoDB ID')); const m=p?p.textContent.match(/MongoDB ID\\s+([0-9a-f]{24})/i):null; return m?m[1]:null; })()`;
+	while (Date.now() - t0 < seconds * 1000 + 4000) { const id = await ev(expr); if (id && !(id in seen)) seen[id] = Date.now(); await sleep(60); }
+	await waitExit(pub, 60000).catch(() => {}); await clickId('hardware-stop');
+	Object.assign(out, { tag, session_id: sid, seconds, seen, distinct_ids_displayed: Object.keys(seen).length });
+} else if (MODE === 'soak') {
+	// Long-running Monitor: sample JS heap, DOM size, plotted points and poll health while the emulator transmits continuously.
+	const seconds = Number(process.env.NHM_SOAK_SECONDS ?? 600); const tag = `NHM-BROWSER-SOAK-${stamp}`;
+	const sid = await openHardwareAndStart(); const pub = startPublisher(tag, Math.round(seconds * 20), []);
+	const samples = []; const t0 = Date.now();
+	while (Date.now() - t0 < seconds * 1000) {
+		await sleep(30000);
+		const snap = await monitorSnapshot();
+		const mem = await ev(`({ heap: performance.memory ? performance.memory.usedJSHeapSize : null, nodes: document.getElementsByTagName('*').length, alert: !!document.querySelector('[role="alert"]') })`);
+		samples.push({ t: Math.round((Date.now() - t0) / 1000), ...snap, ...mem });
+		if (samples.length % 4 === 0) await shot(`soak_${samples.length}`);
+	}
+	await waitExit(pub, 120000).catch(() => {}); await sleep(2000); const beforeStop = await monitorSnapshot();
+	await clickId('hardware-stop'); await waitFor(`document.querySelector('[data-testid="hardware-state"]')?.textContent.includes('SESSION STOPPED')`, 30000); const stopped = await monitorSnapshot();
+	await goto(`/app/history/${encodeURIComponent(sid)}`); await waitFor(`document.body.innerText.includes(${JSON.stringify(sid)})`, 60000); await shot('soak_history');
+	Object.assign(out, { tag, session_id: sid, seconds, samples, before_stop: beforeStop, stopped });
 } else if (MODE === 'owner-probe') {
 	const target = process.env.NHM_EXPECT_SESSION; if (!target) throw new Error('NHM_EXPECT_SESSION missing');
 	await goto(`/app/history/${encodeURIComponent(target)}`); await waitFor(`document.querySelector('[role="alert"]') || document.body.innerText.includes('FORBIDDEN')`, 60000); const detailText = await ev('document.body.innerText'); await shot('owner_b_forbidden');

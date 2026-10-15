@@ -1,0 +1,99 @@
+{
+  "cleanup": {
+    "database": "nhm_rehearsal",
+    "deleted_by_collection": {
+      "records_2026-10-15": 591
+    },
+    "dropped_empty_collections": [
+      "records_2026-10-15"
+    ],
+    "production_database_touched": false
+  },
+  "git_revision": "0f5a56849aab5e3b400be1bc6c4a595ed9dbb32e",
+  "latency": {},
+  "mode": "faults",
+  "physical_esp32": "NOT_RUN",
+  "run": "20261015T131807Z",
+  "scenarios": [
+    {
+      "checks": {
+        "emulator_reconnected": {
+          "detail": {
+            "connects": 2,
+            "reconnects": 1,
+            "transport_errors": 2
+          },
+          "ok": true
+        },
+        "stale_then_live": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED",
+            "STALE DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        },
+        "unique_documents": {
+          "detail": 591,
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 4,
+          "connects": 2,
+          "disconnects": 1,
+          "effective_hz": 13.12,
+          "frames_attempted": 763,
+          "frames_handed": 591,
+          "frames_not_handed": 172,
+          "interval_ms": {
+            "max": 10190.02,
+            "mean": 76.22,
+            "n": 590,
+            "p50": 57.33,
+            "p95": 82.89
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 1,
+          "run_tag": "NHM-REH-20261015T131807Z-S08_restart",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:52242/",
+          "timing": "firmware",
+          "transport_errors": 2
+        },
+        "replica_events": 1184,
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED",
+          "STALE DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "emulator notices the loss, retries every >= 5 s and reconnects within one retry period of the server being back",
+        "the same NHM session continues (STALE then LIVE), documents stay unique"
+      ],
+      "id": "S08_SERVER_RESTART",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 50.8,
+      "title": "Ingestion server process killed and restarted (like a Render restart)"
+    }
+  ],
+  "seconds": 52.0,
+  "target": {
+    "database": "nhm_rehearsal",
+    "kind": "LOCAL_RENDER_REPLICA",
+    "production_database_touched": false,
+    "real_render_verified": false
+  },
+  "totals": {
+    "failed": 0,
+    "not_run": 0,
+    "passed": 1
+  }
+}

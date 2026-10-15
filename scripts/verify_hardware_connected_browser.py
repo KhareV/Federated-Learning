@@ -57,12 +57,30 @@ def main() -> int:
     parser.add_argument("--env-file", default=str(ROOT / ".env"))
     parser.add_argument("--users-file", required=True)
     parser.add_argument("--out", default=str(ROOT / "reports/hardware/final_demo/browser"))
+    parser.add_argument("--producer", choices=["direct", "ws"], default="direct",
+                        help="direct: publisher inserts into Atlas; ws: ESP32 emulator -> local ingestion replica -> Atlas")
+    parser.add_argument("--database", default=None, help="Atlas database (ws mode defaults to the isolated nhm_rehearsal)")
+    parser.add_argument("--stamp", default=None)
+    parser.add_argument("--latency-seconds", type=int, default=0, help="measure Atlas-ack -> browser-display latency for this many seconds")
+    parser.add_argument("--soak-seconds", type=int, default=0, help="run only the long browser soak for this many seconds")
     args = parser.parse_args()
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     env = {**parse_env_file(Path(args.env_file)), **os.environ}
     env["NHM_HARDWARE_MONGO_ENABLED"] = "true"
-    env["NHM_HARDWARE_MONGO_DATABASE"] = "health_db"
-    env["NHM_HARDWARE_MONGO_COLLECTION"] = "nhm_integration_test"
+    ws_mode = args.producer == "ws"
+    database = args.database or ("nhm_rehearsal" if ws_mode else "health_db")
+    if database == "health_db" and ws_mode:
+        raise SystemExit("ws producer mode must not target health_db")
+    env["NHM_HARDWARE_MONGO_DATABASE"] = database
+    env["NHM_HARDWARE_MONGO_COLLECTION"] = "records_*" if ws_mode else "nhm_integration_test"
+    replica = None
+    if ws_mode:
+        from scripts.hardware_chain import Replica
+        replica = Replica(out / "replica", database=database)
+        replica.workdir.mkdir(parents=True, exist_ok=True)
+        replica.start()
+        env["NHM_PRODUCER"] = "ws"
+        env["NHM_WS_URL"] = replica.url
     cfg = resolve_config(env, 4173)
     python = str(ROOT / ".venv-studio311/bin/python")
     build_frontend(cfg, env)
@@ -70,6 +88,44 @@ def main() -> int:
     tags: list[str] = []
     first = second = owner = None
     try:
+        if args.latency_seconds:
+            from scripts.hardware_chain import browser_latency
+            running, origin = stack(env, workspace, python)
+            try:
+                env["NHM_LATENCY_SECONDS"] = str(args.latency_seconds)
+                lat = drive("latency", origin, Path(args.users_file), out / "latency.json", out / "latency_shots", out / "publisher_logs", env)
+                tags.append(lat["tag"])
+            finally:
+                running.shutdown()
+            log_dir = out / "publisher_logs"
+            emulator_events = [json.loads(x) for x in (log_dir / f"{lat['tag']}.events.jsonl").read_text().splitlines() if x.strip()] if (log_dir / f"{lat['tag']}.events.jsonl").exists() else []
+            replica_events = replica.events() if replica else []
+            report = browser_latency({k: float(v) for k, v in lat["seen"].items()}, replica_events, emulator_events)
+            report |= {"session_id": lat["session_id"], "seconds": lat["seconds"], "producer": "ws" if ws_mode else "direct",
+                       "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA" if ws_mode else "VERIFIED_DIRECT_ATLAS_INJECTION"}
+            (out / "browser_latency.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(report))
+            return 0
+        if args.soak_seconds:
+            running, origin = stack(env, workspace, python)
+            try:
+                env["NHM_SOAK_SECONDS"] = str(args.soak_seconds)
+                soak = drive("soak", origin, Path(args.users_file), out / "soak.json", out / "soak_shots", out / "publisher_logs", env)
+                tags.append(soak["tag"])
+            finally:
+                running.shutdown()
+            samples = soak["samples"]
+            heaps = [x["heap"] for x in samples if x.get("heap")]
+            verdict = {"status": "PASS" if samples and not any(x["alert"] for x in samples) and soak["stopped"]["state"] == "SESSION STOPPED" else "FAIL",
+                       "mode": "browser_soak", "seconds": soak["seconds"], "samples": len(samples), "any_poll_error_banner": any(x["alert"] for x in samples),
+                       "heap_bytes_first_last_max": [heaps[0], heaps[-1], max(heaps)] if heaps else None,
+                       "dom_nodes_first_last": [samples[0]["nodes"], samples[-1]["nodes"]] if samples else None,
+                       "plotted_points_max": max((x.get("points") or 0) for x in samples) if samples else None,
+                       "record_count_final": soak["stopped"]["count"], "producer": "ESP32_WEBSOCKET_EMULATOR_VIA_LOCAL_RENDER_REPLICA" if ws_mode else "DIRECT",
+                       "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA" if ws_mode else "VERIFIED_DIRECT_ATLAS_INJECTION"}
+            (out / "browser_soak_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
         running, origin = stack(env, workspace, python)
         try:
             first = drive("scenario-a", origin, Path(args.users_file), out / "scenario_a.json", out / "scenario_a_shots", out / "publisher_logs", env)
@@ -93,7 +149,11 @@ def main() -> int:
                 second["first_stop"]["count"] == second["first_after_stop"]["count"] and second["separate_sessions"] and
                 owner["detail_refused"] and owner["target_absent_from_demo_sources"]
             ) else "FAIL",
-            "real_chrome": True, "real_clerk_test_users": 2, "actual_atlas_collection": "health_db.nhm_integration_test",
+            "real_chrome": True, "real_clerk_test_users": 2,
+            "actual_atlas_collection": f"{database}.records_*" if ws_mode else "health_db.nhm_integration_test",
+            "producer": "ESP32_WEBSOCKET_EMULATOR_VIA_LOCAL_RENDER_REPLICA" if ws_mode else "DIRECT_ATLAS_INJECTION",
+            "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA" if ws_mode else "VERIFIED_DIRECT_ATLAS_INJECTION",
+            "real_render_verified": False, "physical_esp32_verified": False,
             "scenario_a_session": first["session_id"], "scenario_b_sessions": [second["first_session_id"], second["second_session_id"]],
             "backend_restart_between_scenarios": True, "owner_probe": owner,
             "screenshots": sorted(str(p.relative_to(out)) for p in out.rglob("*.png")),
@@ -102,14 +162,29 @@ def main() -> int:
         print(json.dumps({"status": verdict["status"], "evidence": str(out / "browser_verdict.json")}))
         return 0 if verdict["status"] == "PASS" else 1
     finally:
+        if replica is not None:
+            replica.stop()
         uri = env.get("NHM_HARDWARE_MONGO_URI")
         if uri and tags:
             client = MongoClient(uri, serverSelectionTimeoutMS=5000)
-            collection = client[env.get("NHM_HARDWARE_MONGO_DATABASE", "health_db")]["nhm_integration_test"]
-            cleanup = {tag: collection.delete_many({"nhmTestRun": tag}).deleted_count for tag in tags}
-            (out / "browser_atlas_cleanup.json").write_text(json.dumps({"deleted_by_tag": cleanup, "production_data_deleted": False}, indent=2, sort_keys=True) + "\n")
+            db = client[database]
+            if ws_mode:
+                cleanup, dropped = {}, []
+                for name in db.list_collection_names():
+                    if name.startswith("records_"):
+                        for tag in tags:
+                            n = db[name].delete_many({"nhmTestRun": tag}).deleted_count
+                            if n:
+                                cleanup[f"{name}:{tag}"] = n
+                        if db[name].estimated_document_count() == 0:
+                            db.drop_collection(name)
+                            dropped.append(name)
+                payload = {"deleted_by_tag": cleanup, "dropped_empty_collections": dropped, "production_data_deleted": False, "database": database}
+            else:
+                collection = db["nhm_integration_test"]
+                payload = {"deleted_by_tag": {tag: collection.delete_many({"nhmTestRun": tag}).deleted_count for tag in tags}, "production_data_deleted": False}
+            (out / "browser_atlas_cleanup.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
             client.close()
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

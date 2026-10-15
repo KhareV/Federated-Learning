@@ -1,0 +1,26 @@
+{
+  "atlas_ack_to_browser_display_ms": {
+    "max": 701.297,
+    "mean": 106.073,
+    "min": 20.738,
+    "n": 75,
+    "p50": 101.791,
+    "p95": 171.313,
+    "p99": 701.297
+  },
+  "displayed_ids": 75,
+  "emulator_send_to_browser_display_ms": {
+    "max": 760.765,
+    "mean": 197.319,
+    "min": 74.175,
+    "n": 75,
+    "p50": 181.086,
+    "p95": 420.446,
+    "p99": 760.765
+  },
+  "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "note": "freshness of the NEWEST record on screen at each refresh (the page shows one 'Latest received' id per poll); per-document display delay is this plus up to one 800 ms poll interval for older documents in a batch. 60 ms DOM sampling step.",
+  "producer": "ws",
+  "seconds": 60,
+  "session_id": "HW-f6993d34ce2e44139fde855678a93643"
+}

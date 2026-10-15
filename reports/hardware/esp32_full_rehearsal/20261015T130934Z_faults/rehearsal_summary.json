@@ -1,0 +1,1128 @@
+{
+  "cleanup": {
+    "database": "nhm_rehearsal",
+    "deleted_by_collection": {
+      "records_2026-10-15": 5701,
+      "records_2026-10-16": 253
+    },
+    "dropped_empty_collections": [
+      "records_2026-10-16",
+      "records_2026-10-15"
+    ],
+    "production_database_touched": false
+  },
+  "git_revision": "0f5a56849aab5e3b400be1bc6c4a595ed9dbb32e",
+  "latency": {
+    "nominal": {
+      "consumed_not_in_replica_log": 0,
+      "documents_consumed_by_nhm": 669,
+      "documents_inserted": 669,
+      "emulator_frames_unmatched_at_replica": 0,
+      "frames_handed_by_emulator": 669,
+      "frames_received_by_replica": 669,
+      "latency_ms": {
+        "atlas_ack_to_nhm_consumption": {
+          "max": 1208.736,
+          "mean": 511.694,
+          "min": 1.018,
+          "n": 669,
+          "p50": 492.492,
+          "p95": 970.623,
+          "p99": 1112.331
+        },
+        "emulator_send_to_nhm_consumption": {
+          "max": 1397.782,
+          "mean": 615.534,
+          "min": 60.152,
+          "n": 669,
+          "p50": 608.849,
+          "p95": 1084.729,
+          "p99": 1244.611
+        },
+        "emulator_send_to_replica_receipt": {
+          "max": 0.866,
+          "mean": 0.424,
+          "min": 0.195,
+          "n": 669,
+          "p50": 0.413,
+          "p95": 0.561,
+          "p99": 0.705
+        },
+        "nhm_consumption_to_browser_display": {
+          "n": 0,
+          "status": "UNMEASURED_IN_PROTOCOL_RUN"
+        },
+        "replica_receipt_to_atlas_ack": {
+          "max": 1034.355,
+          "mean": 103.416,
+          "min": 47.352,
+          "n": 669,
+          "p50": 81.865,
+          "p95": 212.797,
+          "p99": 532.374
+        }
+      },
+      "note": "stage 'atlas_ack_to_nhm_consumption' is dominated by the 800 ms NHM poll interval by design"
+    }
+  },
+  "mode": "faults",
+  "physical_esp32": "NOT_RUN",
+  "run": "20261015T130934Z",
+  "scenarios": [
+    {
+      "checks": {
+        "all_consumed_once": {
+          "detail": {
+            "consumed": 669,
+            "stored": 669
+          },
+          "ok": true
+        },
+        "all_frames_received": {
+          "detail": {
+            "handed": 669,
+            "received": 669
+          },
+          "ok": true
+        },
+        "all_stored_once": {
+          "detail": 669,
+          "ok": true
+        },
+        "live_seen": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        },
+        "rate_matches_firmware_rule": {
+          "detail": 16.71,
+          "ok": true
+        },
+        "waiting_before_device": {
+          "detail": [
+            "WAITING FOR DATA"
+          ],
+          "ok": true
+        }
+      },
+      "data": {
+        "correlation": {
+          "consumed_not_in_replica_log": 0,
+          "documents_consumed_by_nhm": 669,
+          "documents_inserted": 669,
+          "emulator_frames_unmatched_at_replica": 0,
+          "frames_handed_by_emulator": 669,
+          "frames_received_by_replica": 669,
+          "latency_ms": {
+            "atlas_ack_to_nhm_consumption": {
+              "max": 1208.736,
+              "mean": 511.694,
+              "min": 1.018,
+              "n": 669,
+              "p50": 492.492,
+              "p95": 970.623,
+              "p99": 1112.331
+            },
+            "emulator_send_to_nhm_consumption": {
+              "max": 1397.782,
+              "mean": 615.534,
+              "min": 60.152,
+              "n": 669,
+              "p50": 608.849,
+              "p95": 1084.729,
+              "p99": 1244.611
+            },
+            "emulator_send_to_replica_receipt": {
+              "max": 0.866,
+              "mean": 0.424,
+              "min": 0.195,
+              "n": 669,
+              "p50": 0.413,
+              "p95": 0.561,
+              "p99": 0.705
+            },
+            "nhm_consumption_to_browser_display": {
+              "n": 0,
+              "status": "UNMEASURED_IN_PROTOCOL_RUN"
+            },
+            "replica_receipt_to_atlas_ack": {
+              "max": 1034.355,
+              "mean": 103.416,
+              "min": 47.352,
+              "n": 669,
+              "p50": 81.865,
+              "p95": 212.797,
+              "p99": 532.374
+            }
+          },
+          "note": "stage 'atlas_ack_to_nhm_consumption' is dominated by the 800 ms NHM poll interval by design"
+        },
+        "emulator": {
+          "connect_attempts": 1,
+          "connects": 1,
+          "disconnects": 0,
+          "effective_hz": 16.71,
+          "frames_attempted": 669,
+          "frames_handed": 669,
+          "frames_not_handed": 0,
+          "interval_ms": {
+            "max": 100.27,
+            "mean": 59.86,
+            "n": 668,
+            "p50": 57.97,
+            "p95": 84.76
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 0,
+          "run_tag": "NHM-REH-20261015T130934Z-S01_nominal",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:51861/",
+          "timing": "firmware",
+          "transport_errors": 0
+        },
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "WAITING FOR DATA before the first frame",
+        "LIVE DATA RECEIVED while frames arrive",
+        "every frame handed to the transport is received, stored once and consumed once",
+        "effective rate follows the sketch's >50 ms rule (about 15-19 Hz), not exactly 20 Hz"
+      ],
+      "id": "S01_NOMINAL",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 49.0,
+      "title": "Nominal ~17-20 Hz transmission, NHM waiting before the device"
+    },
+    {
+      "checks": {
+        "data_after_accept": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        },
+        "emulator_retried": {
+          "detail": {
+            "connect_attempts": 4,
+            "connects": 1,
+            "transport_errors": 3
+          },
+          "ok": true
+        },
+        "frames_not_handed_while_down": {
+          "detail": 253,
+          "ok": true
+        },
+        "no_records_while_rejected": {
+          "detail": 0,
+          "ok": true
+        },
+        "waiting_while_rejected": {
+          "detail": [
+            "WAITING FOR DATA"
+          ],
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 4,
+          "connects": 1,
+          "disconnects": 0,
+          "effective_hz": 16.69,
+          "frames_attempted": 502,
+          "frames_handed": 249,
+          "frames_not_handed": 253,
+          "interval_ms": {
+            "max": 100.06,
+            "mean": 59.91,
+            "n": 248,
+            "p50": 58.2,
+            "p95": 86.33
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 0,
+          "run_tag": "NHM-REH-20261015T130934Z-S02_rejected",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:51880/",
+          "timing": "firmware",
+          "transport_errors": 3
+        },
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "no frame is handed while rejected; emulator keeps retrying every ~5 s",
+        "NHM stays WAITING FOR DATA, never fabricates data",
+        "after the server accepts, the next retry connects and data flows (LIVE)"
+      ],
+      "id": "S02_HANDSHAKE_REJECTED",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 34.3,
+      "title": "Server rejects WebSocket handshakes, then accepts"
+    },
+    {
+      "checks": {
+        "connected_within_retry_interval": {
+          "detail": 1.15,
+          "ok": true
+        },
+        "live_after_connect": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        },
+        "refused_before_up": {
+          "detail": 2,
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 3,
+          "connects": 1,
+          "disconnects": 0,
+          "effective_hz": 16.91,
+          "frames_attempted": 373,
+          "frames_handed": 202,
+          "frames_not_handed": 171,
+          "interval_ms": {
+            "max": 99.26,
+            "mean": 59.14,
+            "n": 201,
+            "p50": 57.12,
+            "p95": 89.44
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 0,
+          "run_tag": "NHM-REH-20261015T130934Z-S03_late",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:51905/",
+          "timing": "firmware",
+          "transport_errors": 2
+        },
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "connection refused errors then success within one 5 s retry period of the server becoming reachable",
+        "NHM WAITING until data, then LIVE"
+      ],
+      "id": "S03_SERVER_LATE_START",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 25.9,
+      "title": "Server unreachable at power-on (cold start), becomes reachable ~9 s later"
+    },
+    {
+      "checks": {
+        "gap_visible_in_timestamps": {
+          "detail": [
+            2.01
+          ],
+          "ok": true
+        },
+        "no_duplicate_documents": {
+          "detail": null,
+          "ok": true
+        },
+        "session_stayed_active": {
+          "detail": "ACTIVE",
+          "ok": true
+        },
+        "stale_as_expected": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 1,
+          "connects": 1,
+          "disconnects": 0,
+          "effective_hz": 15.27,
+          "frames_attempted": 341,
+          "frames_handed": 341,
+          "frames_not_handed": 0,
+          "interval_ms": {
+            "max": 2064.57,
+            "mean": 65.49,
+            "n": 306,
+            "p50": 57.16,
+            "p95": 86.08
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 0,
+          "run_tag": "NHM-REH-20261015T130934Z-s04_stall_2s",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:51926/",
+          "timing": "firmware",
+          "transport_errors": 0
+        },
+        "gaps_seconds": [
+          2.01
+        ],
+        "records": 341,
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "frames written during the stall are delivered late as one burst",
+        "NHM does not go STALE (<5 s)",
+        "server-side timestamps compress the delayed frames; the gap is visible, nothing is invented"
+      ],
+      "id": "S04_STALL_2S",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 25.5,
+      "title": "2 s Wi-Fi stall, TCP survives"
+    },
+    {
+      "checks": {
+        "gap_visible_in_timestamps": {
+          "detail": [
+            9.08
+          ],
+          "ok": true
+        },
+        "no_duplicate_documents": {
+          "detail": null,
+          "ok": true
+        },
+        "recovered_live_after_stale": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED",
+            "STALE DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        },
+        "session_stayed_active": {
+          "detail": "ACTIVE",
+          "ok": true
+        },
+        "stale_as_expected": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED",
+            "STALE DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 2,
+          "connects": 2,
+          "disconnects": 1,
+          "effective_hz": 11.71,
+          "frames_attempted": 494,
+          "frames_handed": 341,
+          "frames_not_handed": 153,
+          "interval_ms": {
+            "max": 9082.45,
+            "mean": 85.42,
+            "n": 340,
+            "p50": 57.12,
+            "p95": 82.39
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 1,
+          "run_tag": "NHM-REH-20261015T130934Z-s05_drop_9s",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:51945/",
+          "timing": "firmware",
+          "transport_errors": 0
+        },
+        "gaps_seconds": [
+          9.08
+        ],
+        "records": 341,
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED",
+          "STALE DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "frames during the loss are not handed (and lost, as on the device)",
+        "reconnect happens >= 5 s after the loss was noticed",
+        "NHM shows STALE DATA then recovers to LIVE DATA RECEIVED; session never auto-stops"
+      ],
+      "id": "S05_DROP_9S",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 34.4,
+      "title": "9 s network loss, TCP reset, reconnect"
+    },
+    {
+      "checks": {
+        "gap_visible_in_timestamps": {
+          "detail": [
+            2.01
+          ],
+          "ok": true
+        },
+        "no_duplicate_documents": {
+          "detail": null,
+          "ok": true
+        },
+        "session_stayed_active": {
+          "detail": "ACTIVE",
+          "ok": true
+        },
+        "stale_as_expected": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED",
+            "SESSION STOPPED"
+          ],
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 2,
+          "connects": 2,
+          "disconnects": 1,
+          "effective_hz": 14.9,
+          "frames_attempted": 240,
+          "frames_handed": 240,
+          "frames_not_handed": 0,
+          "interval_ms": {
+            "max": 2006.6,
+            "mean": 67.13,
+            "n": 239,
+            "p50": 57.19,
+            "p95": 85.39
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 1,
+          "run_tag": "NHM-REH-20261015T130934Z-s06_clean_close",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:51969/",
+          "timing": "firmware",
+          "transport_errors": 0
+        },
+        "gaps_seconds": [
+          2.01
+        ],
+        "records": 240,
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED",
+          "SESSION STOPPED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "clean close then reconnect after the 2 s wait",
+        "no duplicate documents"
+      ],
+      "id": "S06_CLEAN_CLOSE",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 21.2,
+      "title": "Clean WebSocket close and reconnect"
+    },
+    {
+      "checks": {
+        "no_new_records_while_dead": {
+          "detail": [
+            168,
+            168
+          ],
+          "ok": true
+        },
+        "session_still_active": {
+          "detail": "ACTIVE",
+          "ok": true
+        },
+        "stale_after_kill": {
+          "detail": "STALE DATA",
+          "ok": true
+        },
+        "stop_freezes_count": {
+          "detail": 168,
+          "ok": true
+        }
+      },
+      "data": {
+        "records": 168,
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED",
+          "STALE DATA"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "NHM becomes STALE DATA after >5 s and keeps the session ACTIVE",
+        "no new records appear and none are invented",
+        "Stop Monitoring still works and freezes the count"
+      ],
+      "id": "S07_PRODUCER_KILLED",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 24.3,
+      "title": "Emulator process terminated abruptly during transmission"
+    },
+    {
+      "checks": {
+        "emulator_reconnected": {
+          "detail": {
+            "connects": 2,
+            "reconnects": 1,
+            "transport_errors": 1
+          },
+          "ok": true
+        },
+        "stale_then_live": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": false
+        },
+        "unique_documents": {
+          "detail": 677,
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 3,
+          "connects": 2,
+          "disconnects": 1,
+          "effective_hz": 15.02,
+          "frames_attempted": 763,
+          "frames_handed": 677,
+          "frames_not_handed": 86,
+          "interval_ms": {
+            "max": 5111.47,
+            "mean": 66.57,
+            "n": 676,
+            "p50": 57.4,
+            "p95": 83.77
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 1,
+          "run_tag": "NHM-REH-20261015T130934Z-S08_restart",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:52012/",
+          "timing": "firmware",
+          "transport_errors": 1
+        },
+        "replica_events": 1355,
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "emulator notices the loss, retries every >= 5 s and reconnects once the server is back",
+        "the same NHM session continues (STALE then LIVE), documents stay unique"
+      ],
+      "id": "S08_SERVER_RESTART",
+      "level": "FAILED",
+      "seconds": 50.1,
+      "title": "Ingestion server process killed and restarted (like a Render restart)"
+    },
+    {
+      "checks": {
+        "inserts_failed_and_were_logged": {
+          "detail": 119,
+          "ok": true
+        },
+        "lost_frames_accounted": {
+          "detail": {
+            "errors": 119,
+            "received": 510,
+            "stored": 391
+          },
+          "ok": true
+        },
+        "stale_then_live": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED",
+            "STALE DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        }
+      },
+      "data": {
+        "lost_during_outage": 119,
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED",
+          "STALE DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "frames are received but not stored (lost like on the real server unless it queues); NHM goes STALE",
+        "after inserts work again NHM recovers; nothing from the outage window appears"
+      ],
+      "id": "S09_ATLAS_INSERT_OUTAGE",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 35.5,
+      "title": "Server receives frames but every Atlas insert fails for ~7 s"
+    },
+    {
+      "checks": {
+        "invalid_vitals_are_unavailable": {
+          "detail": 1,
+          "ok": true
+        },
+        "malformed_detected_by_server": {
+          "detail": 6,
+          "ok": true
+        },
+        "nhm_count_below_server_stored": {
+          "detail": {
+            "nhm": 139,
+            "server_stored": 142
+          },
+          "ok": true
+        },
+        "nhm_only_valid_ecg": {
+          "detail": 139,
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 1,
+          "connects": 1,
+          "disconnects": 0,
+          "effective_hz": 16.09,
+          "frames_attempted": 148,
+          "frames_handed": 148,
+          "frames_not_handed": 0,
+          "interval_ms": {
+            "max": 513.83,
+            "mean": 62.13,
+            "n": 137,
+            "p50": 57.19,
+            "p95": 82.66
+          },
+          "malformed_sent": 10,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 0,
+          "run_tag": "NHM-REH-20261015T130934Z-S10_invalid",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:52063/",
+          "timing": "firmware",
+          "transport_errors": 0
+        },
+        "malformed": 6,
+        "nhm_consumed": 139,
+        "server_stored": 142
+      },
+      "error": null,
+      "expected": [
+        "malformed frames never reach MongoDB; permissive server stores parsable objects as-is",
+        "NHM rejects documents without a valid ECG integer 0..4095; invalid BPM/SpO2 become unavailable, not zero"
+      ],
+      "id": "S10_MALFORMED_AND_INVALID",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 14.0,
+      "title": "Malformed JSON, missing ECG, out-of-range values"
+    },
+    {
+      "checks": {
+        "no_contact_claim_in_api": {
+          "detail": [
+            "collection",
+            "last_received_at",
+            "readings",
+            "record_count",
+            "session_id",
+            "source",
+            "source_state",
+            "stale_threshold_seconds",
+            "started_at",
+            "status",
+            "stopped_at",
+            "trace_limit",
+            "version"
+          ],
+          "ok": true
+        },
+        "placeholder_stored_verbatim": {
+          "detail": 104,
+          "ok": true
+        },
+        "zero_vitals_unavailable": {
+          "detail": null,
+          "ok": true
+        }
+      },
+      "data": {
+        "placeholder_readings": 104,
+        "total": 205
+      },
+      "error": null,
+      "expected": [
+        "values are stored and displayed as received; BPM/SpO2 of 0 are unavailable, not 0%",
+        "NHM makes no lead-off/contact claim because the payload has no lead-off flag"
+      ],
+      "id": "S11_LEADOFF_PLACEHOLDER",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 17.5,
+      "title": "ECG 2048 placeholder (leads off) and BPM/SpO2 0 (no finger)"
+    },
+    {
+      "checks": {
+        "all_consumed": {
+          "detail": {
+            "consumed": 240,
+            "stored": 240
+          },
+          "ok": true
+        },
+        "some_stored": {
+          "detail": 240,
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 1,
+          "connects": 1,
+          "disconnects": 0,
+          "effective_hz": 19.95,
+          "frames_attempted": 240,
+          "frames_handed": 240,
+          "frames_not_handed": 0,
+          "interval_ms": {
+            "max": 151.47,
+            "mean": 50.13,
+            "n": 239,
+            "p50": 0.32,
+            "p95": 151.33
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 0,
+          "run_tag": "NHM-REH-20261015T130934Z-S12_burst",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:52101/",
+          "timing": "fixed",
+          "transport_errors": 0
+        },
+        "stored": 240
+      },
+      "error": null,
+      "expected": [
+        "all frames stored and consumed exactly once",
+        "ordering follows ObjectId; nothing dropped under bursts"
+      ],
+      "id": "S12_BURSTY_TIMING",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 17.3,
+      "title": "Frames arrive in bursts of three"
+    },
+    {
+      "checks": {
+        "all_consumed_across_rollover": {
+          "detail": {
+            "consumed": 408,
+            "stored": 408
+          },
+          "ok": true
+        },
+        "no_gap_over_1s": {
+          "detail": [],
+          "ok": true
+        },
+        "readings_carry_collection": {
+          "detail": [
+            "records_2026-10-15",
+            "records_2026-10-16"
+          ],
+          "ok": true
+        },
+        "two_daily_collections": {
+          "detail": [
+            "records_2026-10-15",
+            "records_2026-10-16"
+          ],
+          "ok": true
+        }
+      },
+      "data": {
+        "collections": [
+          "records_2026-10-15",
+          "records_2026-10-16"
+        ],
+        "stored": 408
+      },
+      "error": null,
+      "expected": [
+        "documents land in two consecutive daily collections",
+        "NHM keeps one continuous session, no gap larger than the transmit pattern, no duplicates, no loss"
+      ],
+      "id": "S13_MIDNIGHT_ROLLOVER",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 29.5,
+      "title": "Daily collection rolls over mid-session (replica clock starts 10 s before midnight UTC)"
+    },
+    {
+      "checks": {
+        "data_kept": {
+          "detail": 202,
+          "ok": true
+        },
+        "interrupted_count_frozen": {
+          "detail": [
+            202,
+            202
+          ],
+          "ok": true
+        },
+        "new_session_id": {
+          "detail": "HW-774f10bed38644f7911d39bcd0144ba3",
+          "ok": true
+        },
+        "new_session_receives_data": {
+          "detail": 175,
+          "ok": true
+        },
+        "no_further_growth": {
+          "detail": null,
+          "ok": true
+        },
+        "no_replay_into_new_session": {
+          "detail": 0,
+          "ok": true
+        },
+        "session_interrupted": {
+          "detail": "SESSION INTERRUPTED (BACKEND RESTARTED)",
+          "ok": true
+        }
+      },
+      "data": {
+        "first": "HW-c1b27c9d4bba45d9ae3cee13f65ac2e0",
+        "interrupted_records": 202,
+        "second": "HW-774f10bed38644f7911d39bcd0144ba3"
+      },
+      "error": null,
+      "expected": [
+        "the interrupted session is marked INTERRUPTED (never silently active again) and its count freezes",
+        "a new Start creates a fresh session with a new high-water mark; earlier documents are not replayed into it",
+        "the interrupted session's data remains available (and eligible for recorded-hardware FL)"
+      ],
+      "id": "S14_NHM_BACKEND_RESTART",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 42.0,
+      "title": "NHM backend restarts in the middle of a hardware session"
+    },
+    {
+      "checks": {
+        "both_saved_with_zero_readings": {
+          "detail": [
+            0,
+            0
+          ],
+          "ok": true
+        },
+        "double_start_same_session": {
+          "detail": [
+            "HW-809f59ed4cc848a3ab995f48fbafd45d",
+            "HW-809f59ed4cc848a3ab995f48fbafd45d"
+          ],
+          "ok": true
+        },
+        "double_stop_harmless": {
+          "detail": "STOPPED",
+          "ok": true
+        },
+        "new_session_after_stop": {
+          "detail": "HW-45fe1541c0f2421086a8887cde7057be",
+          "ok": true
+        }
+      },
+      "data": {},
+      "error": null,
+      "expected": [
+        "second Start re-attaches to the same ACTIVE session (no orphan)",
+        "second Stop is harmless",
+        "Stop immediately after Start yields a saved session with zero readings"
+      ],
+      "id": "S15_START_STOP_IDEMPOTENCE",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 1.9,
+      "title": "Double Start, double Stop, Stop right after Start, re-open"
+    },
+    {
+      "checks": {
+        "both_consumed": {
+          "detail": [
+            205,
+            205
+          ],
+          "ok": true
+        },
+        "cross_read_forbidden": {
+          "detail": null,
+          "ok": true
+        },
+        "cross_stop_forbidden": {
+          "detail": null,
+          "ok": true
+        },
+        "list_isolated": {
+          "detail": null,
+          "ok": true
+        },
+        "same_shared_documents": {
+          "detail": 205,
+          "ok": true
+        },
+        "unauthenticated_refused": {
+          "detail": null,
+          "ok": true
+        }
+      },
+      "data": {
+        "user_a_records": 205,
+        "user_b_records": 205
+      },
+      "error": null,
+      "expected": [
+        "both users' sessions consume the same documents independently",
+        "neither can read or stop the other's session; unauthenticated calls are refused"
+      ],
+      "id": "S16_TWO_USERS_SHARED_SOURCE",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 16.6,
+      "title": "Two signed-in users watching the same shared hardware source"
+    },
+    {
+      "checks": {
+        "count_frozen_after_stop": {
+          "detail": [
+            245,
+            245
+          ],
+          "ok": true
+        },
+        "device_still_emitting": {
+          "detail": 688,
+          "ok": true
+        },
+        "new_consumed": {
+          "detail": 245,
+          "ok": true
+        },
+        "no_merge_between_sessions": {
+          "detail": null,
+          "ok": true
+        },
+        "old_excluded": {
+          "detail": 0,
+          "ok": true
+        },
+        "second_session_distinct": {
+          "detail": "HW-df9e57eefdbb4ff4b920cbe378a2994a",
+          "ok": true
+        }
+      },
+      "data": {
+        "excluded_before_start": 337,
+        "first": "HW-7096125628654a19b6e428726a072bcf",
+        "second": "HW-df9e57eefdbb4ff4b920cbe378a2994a"
+      },
+      "error": null,
+      "expected": [
+        "documents inserted before Start are excluded by the high-water mark",
+        "new documents are consumed; stopping NHM does not stop the device and freezes the session"
+      ],
+      "id": "S17_DEVICE_FIRST",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 48.3,
+      "title": "Scenario B at protocol level: device transmitting for 20 s before NHM starts"
+    },
+    {
+      "checks": {
+        "bounded_wait": {
+          "detail": 3.03,
+          "ok": true
+        },
+        "no_session_created": {
+          "detail": null,
+          "ok": true
+        },
+        "start_refused_cleanly": {
+          "detail": {
+            "status": 409
+          },
+          "ok": true
+        }
+      },
+      "data": {},
+      "error": null,
+      "expected": [
+        "Start is refused with a clean, bounded error; the application stays up",
+        "no session row is created"
+      ],
+      "id": "S18_NHM_CANNOT_REACH_MONGODB",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 3.1,
+      "title": "NHM backend cannot reach MongoDB at all"
+    }
+  ],
+  "seconds": 495.9,
+  "target": {
+    "database": "nhm_rehearsal",
+    "kind": "LOCAL_RENDER_REPLICA",
+    "production_database_touched": false,
+    "real_render_verified": false
+  },
+  "totals": {
+    "failed": 1,
+    "not_run": 0,
+    "passed": 17
+  }
+}

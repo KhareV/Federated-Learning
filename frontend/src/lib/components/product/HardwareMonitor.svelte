@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import Panel from '$lib/components/dashboard/Panel.svelte';
   import FlowDiagram from '$lib/components/product/story/FlowDiagram.svelte';
   import TechnicalEvidence from '$lib/components/product/federation/TechnicalEvidence.svelte';
@@ -19,6 +19,7 @@
   let timer: ReturnType<typeof setInterval> | undefined;
   let v2Timer: ReturnType<typeof setInterval> | undefined;
   let polling = false;
+  let resumed = $state(false);
   let v2Polling = false;
   const latest = $derived(readings.at(-1));
   const display = $derived(readings.slice(-300));
@@ -52,15 +53,35 @@
     catch (cause) { v2Error = cause instanceof Error ? cause.message : String(cause); }
     finally { v2Polling = false; }
   }
+  function attachTimers() {
+    if (timer) clearInterval(timer);
+    if (v2Timer) clearInterval(v2Timer);
+    timer = setInterval(() => { now = Date.now(); void poll(); }, 800);
+    v2Timer = setInterval(() => { void refreshV2(); }, 5000);
+  }
   async function start() {
     busy = true; error = '';
     try {
+      // Start is idempotent on the backend: if this user already has an ACTIVE session it is re-attached.
       session = await product.api.hardwareStart(); readings = []; v2 = null; v2Error = '';
-      timer = setInterval(() => { now = Date.now(); void poll(); }, 800);
-      v2Timer = setInterval(() => { void refreshV2(); }, 5000);
+      attachTimers();
     } catch (cause) { error = cause instanceof Error ? cause.message : String(cause); }
     finally { busy = false; }
   }
+  // Browser refresh or re-opening Monitor: pick up this user's still-ACTIVE session instead of orphaning it.
+  onMount(() => {
+    void (async () => {
+      try {
+        const active = (await product.api.hardwareSessions()).find((s) => s.status === 'ACTIVE');
+        if (!active || session) return;
+        session = await product.api.hardwareSession(active.session_id);
+        readings = session.readings.slice(-2000);
+        resumed = true;
+        attachTimers();
+        void refreshV2();
+      } catch { /* no resumable session; the Start button remains available */ }
+    })();
+  });
   async function stop() {
     if (!session) return;
     if (timer) clearInterval(timer);
@@ -94,7 +115,8 @@
   <div class="actions">
     <button class="primary" onclick={start} disabled={busy || session?.status === 'ACTIVE'} data-testid="hardware-start">Start Monitoring</button>
     <button onclick={stop} disabled={busy || session?.status !== 'ACTIVE'} data-testid="hardware-stop">Stop Monitoring</button>
-    {#if session?.status === 'STOPPED'}<a href={`/app/history/${encodeURIComponent(session.session_id)}`}>View saved History →</a>{/if}
+    {#if resumed && session?.status === 'ACTIVE'}<span class="dim" data-testid="hardware-resumed">Resumed your active session after a reload.</span>{/if}
+    {#if session && session.status !== 'ACTIVE'}<a href={`/app/history/${encodeURIComponent(session.session_id)}`}>View saved History →</a>{/if}
   </div>
 </Panel>
 <Panel eyebrow="02 / ECG" title="MongoDB ECG values · actual stored points" note="SERVER INGESTION TIME · GAPS ARE NOT FILLED">

@@ -1,0 +1,25 @@
+{
+  "connect_attempts": 1,
+  "connects": 1,
+  "disconnects": 0,
+  "effective_hz": 16.93,
+  "frames_attempted": 2032,
+  "frames_handed": 2032,
+  "frames_not_handed": 0,
+  "interval_ms": {
+    "max": 101.84,
+    "mean": 59.07,
+    "n": 2031,
+    "p50": 57.26,
+    "p95": 83.22
+  },
+  "malformed_sent": 0,
+  "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+  "reconnects": 0,
+  "run_tag": "NHM-BROWSER-B-1792070563400",
+  "seed": 20261015,
+  "status": "EMULATOR_DONE",
+  "target": "ws://127.0.0.1:52295/",
+  "timing": "firmware",
+  "transport_errors": 0
+}

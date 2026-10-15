@@ -1,0 +1,97 @@
+{
+  "mode": "scenario-a",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-A-1792070450296",
+  "session_id": "HW-f332fc92259e4763913f600ede899672",
+  "waiting": {
+    "state": "WAITING FOR DATA",
+    "count": 0,
+    "bpm": "Unavailable",
+    "spo2": "Unavailable",
+    "points": 0,
+    "paths": 0,
+    "latest_id": null,
+    "latest_ecg": null,
+    "latest_x": null,
+    "latest_y": null,
+    "expected_y": null
+  },
+  "live": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 31,
+    "bpm": "71",
+    "spo2": "97%",
+    "points": 31,
+    "paths": 1,
+    "latest_id": "6ad0d33ff182fe85093239be",
+    "latest_ecg": 2065,
+    "latest_x": 1000,
+    "latest_y": 94.35897435897436,
+    "expected_y": 94.35897435897436
+  },
+  "stale": {
+    "state": "STALE DATA",
+    "count": 426,
+    "bpm": "69",
+    "spo2": "96%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0d356f182fe8509323b49",
+    "latest_ecg": 2114,
+    "latest_x": 1000,
+    "latest_y": 92.56410256410255,
+    "expected_y": 92.56410256410255
+  },
+  "recovered": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 429,
+    "bpm": "69",
+    "spo2": "96%",
+    "points": 300,
+    "paths": 2,
+    "latest_id": "6ad0d35df182fe8509323b4c",
+    "latest_ecg": 2074,
+    "latest_x": 1000,
+    "latest_y": 94.02930402930403,
+    "expected_y": 94.02930402930403
+  },
+  "before_stop": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 1019,
+    "bpm": "67",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0d380f182fe8509323d9a",
+    "latest_ecg": 2044,
+    "latest_x": 1000,
+    "latest_y": 95.12820512820512,
+    "expected_y": 95.12820512820512
+  },
+  "stopped": {
+    "state": "SESSION STOPPED",
+    "count": 1019,
+    "bpm": "67",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0d380f182fe8509323d9a",
+    "latest_ecg": 2044,
+    "latest_x": 1000,
+    "latest_y": 95.12820512820512,
+    "expected_y": 95.12820512820512
+  },
+  "history_visible": true,
+  "demo_fl": {
+    "fedavg": "HDFLRUN-EB7397C2231B · COMPLETED 48 train / 12 holdout windows · 8 clients · 3 rounds · 24 accepted updates Start: fresh seeded initialisation Feature digest 91b17ccacfabd5dd… · final state 2374ded74fba3af9… SecAgg+ shadow: PASS · authoritative aggregate PLAIN roundtrain lossholdout BCEaccuracyR10.68790.714058.3%R20.68550.717450.0%R30.68330.720750.0% TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
+    "fedprox": "HDFLRUN-E1AA38B9AEBE · COMPLETED 48 train / 12 holdout windows · 8 clients · 3 rounds · 24 accepted updates Start: fresh seeded initialisation Feature digest 91b17ccacfabd5dd… · final state 6291e92caf3a8308… SecAgg+ shadow: PASS · authoritative aggregate PLAIN roundtrain lossholdout BCEaccuracyR10.68790.714058.3%R20.68560.717450.0%R30.68330.720750.0% TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity"
+  }
+}

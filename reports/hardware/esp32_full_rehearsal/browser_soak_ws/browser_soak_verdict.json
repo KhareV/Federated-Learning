@@ -1,0 +1,20 @@
+{
+  "any_poll_error_banner": false,
+  "dom_nodes_first_last": [
+    711,
+    783
+  ],
+  "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "heap_bytes_first_last_max": [
+    44458751,
+    60534483,
+    71074520
+  ],
+  "mode": "browser_soak",
+  "plotted_points_max": 300,
+  "producer": "ESP32_WEBSOCKET_EMULATOR_VIA_LOCAL_RENDER_REPLICA",
+  "record_count_final": 10151,
+  "samples": 20,
+  "seconds": 600,
+  "status": "PASS"
+}

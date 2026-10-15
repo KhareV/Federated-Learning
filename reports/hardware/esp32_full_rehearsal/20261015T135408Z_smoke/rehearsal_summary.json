@@ -1,0 +1,217 @@
+{
+  "cleanup": {
+    "database": "nhm_rehearsal",
+    "deleted_by_collection": {
+      "records_2026-10-15": 419
+    },
+    "dropped_empty_collections": [
+      "records_2026-10-15"
+    ],
+    "production_database_touched": false
+  },
+  "git_revision": "0f5a56849aab5e3b400be1bc6c4a595ed9dbb32e",
+  "latency": {
+    "nominal": {
+      "consumed_not_in_replica_log": 0,
+      "documents_consumed_by_nhm": 419,
+      "documents_inserted": 419,
+      "emulator_frames_unmatched_at_replica": 0,
+      "frames_handed_by_emulator": 419,
+      "frames_received_by_replica": 419,
+      "latency_ms": {
+        "atlas_ack_to_nhm_consumption": {
+          "max": 1275.143,
+          "mean": 528.233,
+          "min": 4.981,
+          "n": 419,
+          "p50": 547.162,
+          "p95": 976.002,
+          "p99": 1114.442
+        },
+        "emulator_send_to_nhm_consumption": {
+          "max": 1434.175,
+          "mean": 629.719,
+          "min": 72.144,
+          "n": 419,
+          "p50": 625.498,
+          "p95": 1140.004,
+          "p99": 1368.655
+        },
+        "emulator_send_to_replica_receipt": {
+          "max": 1.048,
+          "mean": 0.414,
+          "min": 0.182,
+          "n": 419,
+          "p50": 0.409,
+          "p95": 0.562,
+          "p99": 0.642
+        },
+        "nhm_consumption_to_browser_display": {
+          "n": 0,
+          "status": "UNMEASURED_IN_PROTOCOL_RUN"
+        },
+        "replica_receipt_to_atlas_ack": {
+          "max": 641.39,
+          "mean": 101.072,
+          "min": 51.794,
+          "n": 419,
+          "p50": 74.581,
+          "p95": 270.519,
+          "p99": 539.472
+        }
+      },
+      "note": "stage 'atlas_ack_to_nhm_consumption' is dominated by the 800 ms NHM poll interval by design"
+    }
+  },
+  "mode": "smoke",
+  "physical_esp32": "NOT_RUN",
+  "run": "20261015T135408Z",
+  "scenarios": [
+    {
+      "checks": {
+        "all_consumed_once": {
+          "detail": {
+            "consumed": 419,
+            "stored": 419
+          },
+          "ok": true
+        },
+        "all_frames_received": {
+          "detail": {
+            "handed": 419,
+            "received": 419
+          },
+          "ok": true
+        },
+        "all_stored_once": {
+          "detail": 419,
+          "ok": true
+        },
+        "live_seen": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        },
+        "rate_matches_firmware_rule": {
+          "detail": 16.72,
+          "ok": true
+        },
+        "waiting_before_device": {
+          "detail": [
+            "WAITING FOR DATA"
+          ],
+          "ok": true
+        }
+      },
+      "data": {
+        "correlation": {
+          "consumed_not_in_replica_log": 0,
+          "documents_consumed_by_nhm": 419,
+          "documents_inserted": 419,
+          "emulator_frames_unmatched_at_replica": 0,
+          "frames_handed_by_emulator": 419,
+          "frames_received_by_replica": 419,
+          "latency_ms": {
+            "atlas_ack_to_nhm_consumption": {
+              "max": 1275.143,
+              "mean": 528.233,
+              "min": 4.981,
+              "n": 419,
+              "p50": 547.162,
+              "p95": 976.002,
+              "p99": 1114.442
+            },
+            "emulator_send_to_nhm_consumption": {
+              "max": 1434.175,
+              "mean": 629.719,
+              "min": 72.144,
+              "n": 419,
+              "p50": 625.498,
+              "p95": 1140.004,
+              "p99": 1368.655
+            },
+            "emulator_send_to_replica_receipt": {
+              "max": 1.048,
+              "mean": 0.414,
+              "min": 0.182,
+              "n": 419,
+              "p50": 0.409,
+              "p95": 0.562,
+              "p99": 0.642
+            },
+            "nhm_consumption_to_browser_display": {
+              "n": 0,
+              "status": "UNMEASURED_IN_PROTOCOL_RUN"
+            },
+            "replica_receipt_to_atlas_ack": {
+              "max": 641.39,
+              "mean": 101.072,
+              "min": 51.794,
+              "n": 419,
+              "p50": 74.581,
+              "p95": 270.519,
+              "p99": 539.472
+            }
+          },
+          "note": "stage 'atlas_ack_to_nhm_consumption' is dominated by the 800 ms NHM poll interval by design"
+        },
+        "emulator": {
+          "connect_attempts": 1,
+          "connects": 1,
+          "disconnects": 0,
+          "effective_hz": 16.72,
+          "frames_attempted": 419,
+          "frames_handed": 419,
+          "frames_not_handed": 0,
+          "gap_count": 0,
+          "gaps_over_1s_ms": [],
+          "interval_ms": {
+            "max": 100.2,
+            "mean": 59.81,
+            "n": 418,
+            "p50": 57.97,
+            "p95": 83.66
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 0,
+          "run_tag": "NHM-REH-20261015T135408Z-S01_nominal",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:56094/",
+          "timing": "firmware",
+          "transport_errors": 0
+        },
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "WAITING FOR DATA before the first frame",
+        "LIVE DATA RECEIVED while frames arrive",
+        "every frame handed to the transport is received, stored once and consumed once",
+        "effective rate follows the sketch's >50 ms rule (about 15-19 Hz), not exactly 20 Hz"
+      ],
+      "id": "S01_NOMINAL",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 33.7,
+      "title": "Nominal ~17-20 Hz transmission, NHM waiting before the device"
+    }
+  ],
+  "seconds": 34.9,
+  "target": {
+    "database": "nhm_rehearsal",
+    "kind": "LOCAL_RENDER_REPLICA",
+    "production_database_touched": false,
+    "real_render_verified": false
+  },
+  "totals": {
+    "failed": 0,
+    "not_run": 0,
+    "passed": 1
+  }
+}

@@ -216,7 +216,7 @@ class HardwareDemoService:
             rows = self.store._connection.execute(
                 "SELECT s.id,s.started_at,s.stopped_at,s.record_count,COUNT(t.document_id) trace_count "
                 "FROM hardware_sessions s LEFT JOIN hardware_trace t ON t.session_id=s.id "
-                "WHERE s.owner=? AND s.status='STOPPED' GROUP BY s.id ORDER BY s.started_at DESC", (owner,)
+                "WHERE s.owner=? AND s.status IN ('STOPPED','INTERRUPTED') GROUP BY s.id ORDER BY s.started_at DESC", (owner,)
             ).fetchall()
         return [dict(row) | {"eligible": int(row["trace_count"]) >= MIN_RECORDS * 20} for row in rows]
 
@@ -231,7 +231,7 @@ class HardwareDemoService:
                     raise LookupError("unknown hardware session")
                 if row["owner"] != owner:
                     raise PermissionError("hardware session belongs to another user")
-                if row["status"] != "STOPPED":
+                if row["status"] not in ("STOPPED", "INTERRUPTED"):
                     raise ValueError("only stopped hardware sessions are eligible")
                 trace = self.store._connection.execute(
                     "SELECT document_id,ingested_at,ecg,bpm,spo2,collection FROM hardware_trace WHERE session_id=? ORDER BY ordinal", (session_id,)

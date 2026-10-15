@@ -1,0 +1,88 @@
+{
+  "mode": "scenario-b",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-B-1792070563400",
+  "prior_history_after_restart": true,
+  "pre_emission_seconds": 18,
+  "first_session_id": "HW-fce4f7b70dbf40ca951f22615f29ec56",
+  "first_live": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 1006,
+    "bpm": "65",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0d3f2f182fe85093242ca",
+    "latest_ecg": 2022,
+    "latest_x": 1000,
+    "latest_y": 95.93406593406593,
+    "expected_y": 95.93406593406593
+  },
+  "first_stop": {
+    "state": "SESSION STOPPED",
+    "count": 1020,
+    "bpm": "65",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0d3f3f182fe85093242d8",
+    "latest_ecg": 2015,
+    "latest_x": 1000,
+    "latest_y": 96.19047619047619,
+    "expected_y": 96.19047619047619
+  },
+  "first_after_stop": {
+    "state": "SESSION STOPPED",
+    "count": 1020,
+    "bpm": "65",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0d3f3f182fe85093242d8",
+    "latest_ecg": 2015,
+    "latest_x": 1000,
+    "latest_y": 96.19047619047619,
+    "expected_y": 96.19047619047619
+  },
+  "second_session_id": "HW-305bff7f0dd344b58b5e0133f7d5708c",
+  "second_live": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 423,
+    "bpm": "67",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0d410f182fe85093244c8",
+    "latest_ecg": 2065,
+    "latest_x": 1000,
+    "latest_y": 94.35897435897436,
+    "expected_y": 94.35897435897436
+  },
+  "second_stop": {
+    "state": "SESSION STOPPED",
+    "count": 423,
+    "bpm": "67",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0d410f182fe85093244c8",
+    "latest_ecg": 2065,
+    "latest_x": 1000,
+    "latest_y": 94.35897435897436,
+    "expected_y": 94.35897435897436
+  },
+  "separate_sessions": true,
+  "history_visible": true,
+  "demo_fl": {
+    "fedavg": "HDFLRUN-DC8732B7CB2D · COMPLETED 48 train / 12 holdout windows · 8 clients · 10 rounds · 80 accepted updates Start: fresh seeded initialisation Feature digest fd12af458e9c1c4e… · final state 1acbd0f3aaa14944… SecAgg+ shadow: PASS · authoritative aggregate PLAIN roundtrain lossholdout BCEaccuracyR10.70420.665758.3%R20.69970.670558.3%R30.69560.675358.3%R40.69180.680158.3%R50.68830.684950.0%R60.68510.689750.0%R70.68220.694450.0%R80.67950.699150.0%R90.67700.703850.0%R100.67460.708441.7% TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
+    "fedprox": "HDFLRUN-3C1C047A0508 · COMPLETED 48 train / 12 holdout windows · 8 clients · 10 rounds · 80 accepted updates Start: fresh seeded initialisation Feature digest fd12af458e9c1c4e… · final state da59ae7be47857c4… SecAgg+ shadow: PASS · authoritative aggregate PLAIN roundtrain lossholdout BCEaccuracyR10.70420.665658.3%R20.69970.670458.3%R30.69560.675258.3%R40.69190.680058.3%R50.68840.684850.0%R60.68520.689650.0%R70.68230.694350.0%R80.67960.699050.0%R90.67710.703750.0%R100.67470.708341.7% TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity"
+  }
+}

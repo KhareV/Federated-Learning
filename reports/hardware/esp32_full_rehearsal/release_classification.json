@@ -1,0 +1,322 @@
+{
+ "browser_scenarios_a_b_and_fl": {
+  "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "producer": "ESP32_WEBSOCKET_EMULATOR_VIA_LOCAL_RENDER_REPLICA",
+  "status": "PASS"
+ },
+ "browser_soak": {
+  "any_poll_error_banner": false,
+  "dom_nodes_first_last": [
+   711,
+   783
+  ],
+  "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "heap_bytes_first_last_max": [
+   44458751,
+   60534483,
+   71074520
+  ],
+  "mode": "browser_soak",
+  "plotted_points_max": 300,
+  "producer": "ESP32_WEBSOCKET_EMULATOR_VIA_LOCAL_RENDER_REPLICA",
+  "record_count_final": 10151,
+  "samples": 20,
+  "seconds": 600,
+  "status": "PASS"
+ },
+ "database": "nhm_rehearsal (isolated; health_db untouched)",
+ "defect_found_and_fixed": {
+  "after_fix_smoke_level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "first_smoke_run": {
+   "consumed": 421,
+   "level": "FAILED",
+   "stored": 425
+  },
+  "fix": "bounded 5 s look-back below the high-water mark, never below the session start mark",
+  "what": "reader skipped a lower _id committed after a higher one (cursor _id > mark)"
+ },
+ "fault_matrix": [
+  {
+   "checks": {
+    "all_consumed_once": true,
+    "all_frames_received": true,
+    "all_stored_once": true,
+    "live_seen": true,
+    "rate_matches_firmware_rule": true,
+    "waiting_before_device": true
+   },
+   "id": "S01_NOMINAL",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Nominal ~17-20 Hz transmission, NHM waiting before the device"
+  },
+  {
+   "checks": {
+    "data_after_accept": true,
+    "emulator_retried": true,
+    "frames_not_handed_while_down": true,
+    "no_records_while_rejected": true,
+    "waiting_while_rejected": true
+   },
+   "id": "S02_HANDSHAKE_REJECTED",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Server rejects WebSocket handshakes, then accepts"
+  },
+  {
+   "checks": {
+    "connected_within_retry_interval": true,
+    "live_after_connect": true,
+    "refused_before_up": true
+   },
+   "id": "S03_SERVER_LATE_START",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Server unreachable at power-on (cold start), becomes reachable ~9 s later"
+  },
+  {
+   "checks": {
+    "gap_visible_in_timestamps": true,
+    "no_duplicate_documents": true,
+    "session_stayed_active": true,
+    "stale_as_expected": true
+   },
+   "id": "S04_STALL_2S",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "2 s Wi-Fi stall, TCP survives"
+  },
+  {
+   "checks": {
+    "gap_visible_in_timestamps": true,
+    "no_duplicate_documents": true,
+    "recovered_live_after_stale": true,
+    "session_stayed_active": true,
+    "stale_as_expected": true
+   },
+   "id": "S05_DROP_9S",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "9 s network loss, TCP reset, reconnect"
+  },
+  {
+   "checks": {
+    "gap_visible_in_timestamps": true,
+    "no_duplicate_documents": true,
+    "session_stayed_active": true,
+    "stale_as_expected": true
+   },
+   "id": "S06_CLEAN_CLOSE",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Clean WebSocket close and reconnect"
+  },
+  {
+   "checks": {
+    "no_new_records_while_dead": true,
+    "session_still_active": true,
+    "stale_after_kill": true,
+    "stop_freezes_count": true
+   },
+   "id": "S07_PRODUCER_KILLED",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Emulator process terminated abruptly during transmission"
+  },
+  {
+   "checks": {
+    "emulator_reconnected": true,
+    "stale_then_live": true,
+    "unique_documents": true
+   },
+   "id": "S08_SERVER_RESTART",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Ingestion server process killed and restarted (like a Render restart)"
+  },
+  {
+   "checks": {
+    "inserts_failed_and_were_logged": true,
+    "lost_frames_accounted": true,
+    "stale_then_live": true
+   },
+   "id": "S09_ATLAS_INSERT_OUTAGE",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Server receives frames but every Atlas insert fails for ~7 s"
+  },
+  {
+   "checks": {
+    "invalid_vitals_are_unavailable": true,
+    "malformed_detected_by_server": true,
+    "nhm_count_below_server_stored": true,
+    "nhm_only_valid_ecg": true
+   },
+   "id": "S10_MALFORMED_AND_INVALID",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Malformed JSON, missing ECG, out-of-range values"
+  },
+  {
+   "checks": {
+    "no_contact_claim_in_api": true,
+    "placeholder_stored_verbatim": true,
+    "zero_vitals_unavailable": true
+   },
+   "id": "S11_LEADOFF_PLACEHOLDER",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "ECG 2048 placeholder (leads off) and BPM/SpO2 0 (no finger)"
+  },
+  {
+   "checks": {
+    "all_consumed": true,
+    "some_stored": true
+   },
+   "id": "S12_BURSTY_TIMING",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Frames arrive in bursts of three"
+  },
+  {
+   "checks": {
+    "all_consumed_across_rollover": true,
+    "no_gap_over_1s": true,
+    "readings_carry_collection": true,
+    "two_daily_collections": true
+   },
+   "id": "S13_MIDNIGHT_ROLLOVER",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Daily collection rolls over mid-session (replica clock starts 10 s before midnight UTC)"
+  },
+  {
+   "checks": {
+    "data_kept": true,
+    "interrupted_count_frozen": true,
+    "new_session_id": true,
+    "new_session_receives_data": true,
+    "no_further_growth": true,
+    "no_replay_into_new_session": true,
+    "session_interrupted": true
+   },
+   "id": "S14_NHM_BACKEND_RESTART",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "NHM backend restarts in the middle of a hardware session"
+  },
+  {
+   "checks": {
+    "both_saved_with_zero_readings": true,
+    "double_start_same_session": true,
+    "double_stop_harmless": true,
+    "new_session_after_stop": true
+   },
+   "id": "S15_START_STOP_IDEMPOTENCE",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Double Start, double Stop, Stop right after Start, re-open"
+  },
+  {
+   "checks": {
+    "both_consumed": true,
+    "cross_read_forbidden": true,
+    "cross_stop_forbidden": true,
+    "list_isolated": true,
+    "same_shared_documents": true,
+    "unauthenticated_refused": true
+   },
+   "id": "S16_TWO_USERS_SHARED_SOURCE",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Two signed-in users watching the same shared hardware source"
+  },
+  {
+   "checks": {
+    "count_frozen_after_stop": true,
+    "device_still_emitting": true,
+    "new_consumed": true,
+    "no_merge_between_sessions": true,
+    "old_excluded": true,
+    "second_session_distinct": true
+   },
+   "id": "S17_DEVICE_FIRST",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "Scenario B at protocol level: device transmitting for 20 s before NHM starts"
+  },
+  {
+   "checks": {
+    "bounded_wait": true,
+    "no_session_created": true,
+    "start_refused_cleanly": true
+   },
+   "id": "S18_NHM_CANNOT_REACH_MONGODB",
+   "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+   "title": "NHM backend cannot reach MongoDB at all"
+  }
+ ],
+ "git_revision_at_run": "0f5a56849aab5e3b400be1bc6c4a595ed9dbb32e",
+ "latency_ms_browser": {
+  "atlas_ack_to_browser_display_ms": {
+   "max": 701.297,
+   "mean": 106.073,
+   "min": 20.738,
+   "n": 75,
+   "p50": 101.791,
+   "p95": 171.313,
+   "p99": 701.297
+  },
+  "displayed_ids": 75,
+  "emulator_send_to_browser_display_ms": {
+   "max": 760.765,
+   "mean": 197.319,
+   "min": 74.175,
+   "n": 75,
+   "p50": 181.086,
+   "p95": 420.446,
+   "p99": 760.765
+  },
+  "note": "freshness of the NEWEST record on screen at each refresh (the page shows one 'Latest received' id per poll); per-document display delay is this plus up to one 800 ms poll interval for older documents in a batch. 60 ms DOM sampling step."
+ },
+ "latency_ms_protocol": {
+  "nominal_n": 678,
+  "soak": {
+   "atlas_ack_to_nhm_consumption": {
+    "max": 1840.4,
+    "mean": 591.798,
+    "min": 1.465,
+    "n": 10149,
+    "p50": 588.942,
+    "p95": 1093.786,
+    "p99": 1238.723
+   },
+   "emulator_send_to_nhm_consumption": {
+    "max": 2265.436,
+    "mean": 679.89,
+    "min": 71.062,
+    "n": 10149,
+    "p50": 673.768,
+    "p95": 1191.039,
+    "p99": 1364.77
+   },
+   "emulator_send_to_replica_receipt": {
+    "max": 8.113,
+    "mean": 0.444,
+    "min": 0.123,
+    "n": 10149,
+    "p50": 0.437,
+    "p95": 0.593,
+    "p99": 0.82
+   },
+   "nhm_consumption_to_browser_display": {
+    "n": 0,
+    "status": "UNMEASURED_IN_PROTOCOL_RUN"
+   },
+   "replica_receipt_to_atlas_ack": {
+    "max": 971.149,
+    "mean": 87.649,
+    "min": 42.212,
+    "n": 10149,
+    "p50": 76.59,
+    "p95": 145.522,
+    "p99": 240.126
+   }
+  },
+  "soak_n": 10149
+ },
+ "physical_esp32": "NOT_RUN",
+ "protocol_soak": {
+  "consumed": 10149,
+  "frames": 10149,
+  "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "retained_readings": 2000,
+  "retained_seconds": 118.2,
+  "stored": 10149
+ },
+ "staging_render": "NOT_RUN (service source/deployment unavailable)",
+ "target": "LOCAL_RENDER_REPLICA (not the deployed Render service)"
+}

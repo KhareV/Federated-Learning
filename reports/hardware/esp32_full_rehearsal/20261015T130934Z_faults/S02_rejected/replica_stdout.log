@@ -1,0 +1,2 @@
+{"status": "REPLICA_READY", "not_real_render": true, "url": "ws://127.0.0.1:51880/", "database": "nhm_rehearsal", "collection_prefix": "records_", "collection_timezone": "UTC", "sink": "mongo", "simulated_start": null}
+{"status": "REPLICA_STOPPED", "connections": 1, "rejected": 3, "frames": 249, "malformed": 0, "inserted": 249, "insert_errors": 0, "disconnects": 1}

@@ -21,24 +21,24 @@
 		<div class="hwsummary" data-testid="hardware-history-summary">
 			<span><b>{hardware.length}</b> sessions</span>
 			<span><b>{hardware.reduce((n, h) => n + h.record_count, 0)}</b> readings</span>
-			<span><b>{hardware.filter((h) => h.status === 'STOPPED' && (h.summary?.stored_readings ?? 0) > 0).length}</b> usable for recorded-hardware FL</span>
+			<span><b>{hardware.filter((h) => h.status !== 'ACTIVE' && (h.summary?.stored_readings ?? 0) > 0).length}</b> usable for recorded-hardware FL</span>
 		</div>
 		<div class="scroll"><table data-testid="hardware-session-table"><caption class="sr">Hardware telemetry sessions, newest first</caption>
 			<thead><tr><th scope="col">Session</th><th scope="col">State</th><th scope="col">Readings</th><th scope="col">Duration</th><th scope="col">Rate</th><th scope="col">ECG range</th><th scope="col">Device BPM</th><th scope="col">Started</th><th scope="col">Source</th><th scope="col">Evidence</th></tr></thead>
 			<tbody>{#each hardware as h (h.session_id)}<tr>
 				<td><code>{h.session_id}</code></td>
-				<td><span class="badge" class:complete={h.status === 'STOPPED' && h.record_count > 0} class:failed={h.record_count === 0}>{h.status === 'ACTIVE' ? 'ACTIVE' : h.record_count === 0 ? 'NO DATA' : 'SAVED'}</span></td>
-				<td>{h.record_count}</td>
+				<td><span class="badge" class:complete={h.status === 'STOPPED' && h.record_count > 0} class:failed={h.record_count === 0}>{h.status === 'ACTIVE' ? 'ACTIVE' : h.status === 'INTERRUPTED' ? 'INTERRUPTED' : h.record_count === 0 ? 'NO DATA' : 'SAVED'}</span></td>
+				<td>{h.record_count}{h.summary && h.summary.stored_readings < h.record_count ? ` (newest ${h.summary.stored_readings} retained)` : ''}</td>
 				<td>{secs(h.summary?.span_seconds)}</td>
 				<td>{h.summary?.arrival_hz ? `${h.summary.arrival_hz.toFixed(1)} msg/s` : '--'}</td>
 				<td>{h.summary?.ecg_min != null ? `${h.summary.ecg_min}–${h.summary.ecg_max}` : '--'}</td>
 				<td>{h.summary?.bpm_mean ?? '--'}</td>
 				<td>{new Date(h.started_at).toLocaleString()}</td>
 				<td><span class="badge" class:test={h.source.startsWith('SYNTHETIC')}>{h.source.startsWith('SYNTHETIC') ? 'TEST SOURCE' : 'ESP32 · UNVERIFIED'}</span></td>
-				<td><a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a>{#if h.status === 'STOPPED' && h.record_count > 0} · <a href="/app/federation" title="Choose Recorded hardware in Start a federation run">USE IN FL →</a>{/if}</td>
+				<td><a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a>{#if h.status !== 'ACTIVE' && h.record_count > 0} · <a href="/app/federation" title="Choose Recorded hardware in Start a federation run">USE IN FL →</a>{/if}</td>
 			</tr>{/each}</tbody></table></div>
 		<ul class="mobile-list" aria-label="Hardware telemetry sessions">{#each hardware as h (h.session_id)}<li>
-			<div class="card-head"><span class="badge" class:complete={h.status === 'STOPPED' && h.record_count > 0} class:failed={h.record_count === 0}>{h.status === 'ACTIVE' ? 'ACTIVE' : h.record_count === 0 ? 'NO DATA' : 'SAVED'}</span><time>{new Date(h.started_at).toLocaleString()}</time></div>
+			<div class="card-head"><span class="badge" class:complete={h.status === 'STOPPED' && h.record_count > 0} class:failed={h.record_count === 0}>{h.status === 'ACTIVE' ? 'ACTIVE' : h.status === 'INTERRUPTED' ? 'INTERRUPTED' : h.record_count === 0 ? 'NO DATA' : 'SAVED'}</span><time>{new Date(h.started_at).toLocaleString()}</time></div>
 			<strong class="session-id">{h.session_id}</strong>
 			<dl><div><dt>Readings</dt><dd>{h.record_count}</dd></div><div><dt>Duration</dt><dd>{secs(h.summary?.span_seconds)}</dd></div><div><dt>Device BPM</dt><dd>{h.summary?.bpm_mean ?? '--'}</dd></div><div><dt>Source</dt><dd>{h.source.startsWith('SYNTHETIC') ? 'TEST SOURCE' : 'ESP32 · UNVERIFIED'}</dd></div></dl>
 			<a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a></li>{/each}</ul>

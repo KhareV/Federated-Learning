@@ -135,3 +135,48 @@ def test_same_mongodb_id_copied_across_daily_collections_counts_once(monkeypatch
     assert result["record_count"] == 1
     assert [x["id"] for x in result["readings"]] == [str(oid(11))]
     store.close()
+
+
+def test_late_lower_object_id_is_consumed_but_pre_session_documents_stay_excluded(tmp_path):
+    from datetime import UTC, datetime
+    from bson import ObjectId
+    from capstone_persistence.store import CapstoneSqliteStore
+    from product.hardware_telemetry import HardwareSessions
+
+    now = datetime.now(UTC)
+
+    def oid(offset_ms: int, tail: int) -> ObjectId:
+        base = ObjectId.from_datetime(now)
+        return ObjectId(base.binary[:4] + (int.from_bytes(base.binary[4:], "big") + offset_ms * 1000 + tail).to_bytes(8, "big"))
+
+    class Source:
+        collection_name = "records_*"
+
+        def __init__(self):
+            self.docs = []
+
+        def high_water(self):
+            return max((d["_id"] for d in self.docs), default=None)
+
+        def after(self, mark):
+            return sorted((d for d in self.docs if mark is None or d["_id"] > mark), key=lambda d: d["_id"])
+
+    def doc(i, ecg):
+        return {"_id": i, "timestamp": now, "ecg": ecg, "bpm": 70, "spo2": 97}
+
+    store = CapstoneSqliteStore(tmp_path / "late.sqlite3")
+    source = Source()
+    service = HardwareSessions(store, source)
+    old = oid(0, 1)
+    source.docs.append(doc(old, 1111))                      # exists before the session: must never appear
+    sid = service.start("u")["session_id"]
+    first, late, third = oid(10, 3), oid(10, 2), oid(10, 4)   # `late` has the LOWER id but becomes visible after `first`
+    source.docs.append(doc(first, 2001))
+    assert service.poll(sid, "u")["record_count"] == 1
+    source.docs += [doc(late, 2002), doc(third, 2003)]
+    body = service.poll(sid, "u")
+    assert body["record_count"] == 3, "a lower _id committed after a higher one must still be consumed"
+    assert sorted(r["ecg"] for r in body["readings"]) == [2001, 2002, 2003]
+    assert 1111 not in {r["ecg"] for r in body["readings"]}
+    assert service.poll(sid, "u")["record_count"] == 3     # repeated polls do not duplicate
+    store.close()

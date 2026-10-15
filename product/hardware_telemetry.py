@@ -18,6 +18,10 @@ from product.api.errors import ProductError, ProductErrorCode
 
 STALE_SECONDS = 5.0  # > 100 expected 50 ms messages; allows Render/Atlas pauses
 MAX_BATCH = 500
+# A writer with several inserts in flight can make a lower _id become visible after a higher one. The cursor therefore
+# re-reads this window below its high-water mark (never below the session's start mark); duplicates are dropped by
+# the (session_id, document_id) primary key.
+LOOKBACK_SECONDS = 5.0
 MAX_TRACE = 2000
 DISCOVERY_INTERVAL_SECONDS = 2.0
 DAILY_COLLECTION = re.compile(r"records_\d{4}-\d{2}-\d{2}$")
@@ -117,6 +121,9 @@ class HardwareSessions:
             columns = {r[1] for r in store._connection.execute("PRAGMA table_info(hardware_trace)")}
             if "collection" not in columns:
                 store._connection.execute("ALTER TABLE hardware_trace ADD COLUMN collection TEXT")
+            session_columns = {r[1] for r in store._connection.execute("PRAGMA table_info(hardware_sessions)")}
+            if "start_mark" not in session_columns:
+                store._connection.execute("ALTER TABLE hardware_sessions ADD COLUMN start_mark TEXT")
             store._connection.execute(
                 "UPDATE hardware_sessions SET status='INTERRUPTED', stopped_at=? WHERE status='ACTIVE'",
                 (datetime.now(UTC).isoformat(),),
@@ -135,6 +142,14 @@ class HardwareSessions:
 
     def start(self, owner: str) -> dict[str, Any]:
         with self.lock:
+            # Idempotent: a second Start (double click, second tab, page refresh) re-attaches to the owner's
+            # ACTIVE session instead of creating an orphan that keeps its own high-water mark.
+            with self.store._lock:
+                existing = self.store._connection.execute(
+                    "SELECT id FROM hardware_sessions WHERE owner=? AND status='ACTIVE' ORDER BY started_at DESC LIMIT 1", (owner,)
+                ).fetchone()
+            if existing:
+                return self.detail(existing["id"], owner, 0)
             try:
                 mark = self.source.high_water()
             except PyMongoError as error:
@@ -144,13 +159,14 @@ class HardwareSessions:
             sid = "HW-" + uuid.uuid4().hex
             with self.store._lock, self.store._connection:
                 self.store._connection.execute(
-                    "INSERT INTO hardware_sessions (id,owner,collection,started_at,status,mark) VALUES (?,?,?,?,?,?)",
+                    "INSERT INTO hardware_sessions (id,owner,collection,started_at,status,mark,start_mark) VALUES (?,?,?,?,?,?,?)",
                     (
                         sid,
                         owner,
                         self.source.collection_name,
                         datetime.now(UTC).isoformat(),
                         "ACTIVE",
+                        str(mark) if mark else None,
                         str(mark) if mark else None,
                     ),
                 )
@@ -167,7 +183,9 @@ class HardwareSessions:
                 ).fetchall()
             ]
         now = datetime.now(UTC)
-        if row["status"] != "ACTIVE":
+        if row["status"] == "INTERRUPTED":
+            state = "SESSION INTERRUPTED (BACKEND RESTARTED)"
+        elif row["status"] != "ACTIVE":
             state = "SESSION STOPPED"
         elif (
             row["last_received_at"]
@@ -203,7 +221,7 @@ class HardwareSessions:
             if row["status"] != "ACTIVE":
                 return self.detail(sid, owner, after)
             try:
-                docs = self.source.after(ObjectId(row["mark"]) if row["mark"] else None)
+                docs = self.source.after(self._query_floor(row))
             except PyMongoError:
                 result = self.detail(sid, owner, after)
                 result["source_state"] = "MONGODB UNAVAILABLE"
@@ -233,7 +251,7 @@ class HardwareSessions:
                     self.store._connection.execute(
                         "UPDATE hardware_sessions SET mark=?, record_count=?, last_received_at=? WHERE id=?",
                         (
-                            str(docs[-1]["_id"]),
+                            str(max(docs[-1]["_id"], ObjectId(row["mark"])) if row["mark"] else docs[-1]["_id"]),
                             count,
                             datetime.now(UTC).isoformat()
                             if count > row["record_count"]
@@ -246,6 +264,21 @@ class HardwareSessions:
                         (sid, max(0, count - MAX_TRACE)),
                     )
             return self.detail(sid, owner, after)
+
+    @staticmethod
+    def _query_floor(row: dict[str, Any]) -> ObjectId | None:
+        """Exclusive lower bound for the next read: the high-water mark minus the look-back, never below the start mark."""
+        if not row["mark"]:
+            return None
+        mark = ObjectId(row["mark"])
+        seconds = int(mark.generation_time.timestamp()) - int(LOOKBACK_SECONDS)
+        if seconds <= 0:  # not a real wall-clock ObjectId: strict cursor, no look-back
+            return mark
+        floor = ObjectId.from_datetime(datetime.fromtimestamp(seconds, UTC))
+        start = row.get("start_mark")
+        if start:
+            floor = max(floor, ObjectId(start))
+        return floor
 
     def stop(self, sid: str, owner: str) -> dict[str, Any]:
         with self.lock:

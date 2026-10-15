@@ -1,0 +1,769 @@
+{
+  "cleanup": {
+    "database": "nhm_rehearsal",
+    "deleted_by_collection": {
+      "records_2026-10-15": 10827
+    },
+    "dropped_empty_collections": [
+      "records_2026-10-15"
+    ],
+    "production_database_touched": false
+  },
+  "git_revision": "0f5a56849aab5e3b400be1bc6c4a595ed9dbb32e",
+  "latency": {
+    "nominal": {
+      "consumed_not_in_replica_log": 0,
+      "documents_consumed_by_nhm": 678,
+      "documents_inserted": 678,
+      "emulator_frames_unmatched_at_replica": 0,
+      "frames_handed_by_emulator": 678,
+      "frames_received_by_replica": 678,
+      "latency_ms": {
+        "atlas_ack_to_nhm_consumption": {
+          "max": 1118.649,
+          "mean": 536.731,
+          "min": -6.177,
+          "n": 678,
+          "p50": 550.446,
+          "p95": 979.837,
+          "p99": 1069.093
+        },
+        "emulator_send_to_nhm_consumption": {
+          "max": 1608.696,
+          "mean": 635.873,
+          "min": 68.018,
+          "n": 678,
+          "p50": 628.244,
+          "p95": 1096.149,
+          "p99": 1207.521
+        },
+        "emulator_send_to_replica_receipt": {
+          "max": 1.286,
+          "mean": 0.447,
+          "min": 0.121,
+          "n": 678,
+          "p50": 0.444,
+          "p95": 0.621,
+          "p99": 0.804
+        },
+        "nhm_consumption_to_browser_display": {
+          "n": 0,
+          "status": "UNMEASURED_IN_PROTOCOL_RUN"
+        },
+        "replica_receipt_to_atlas_ack": {
+          "max": 764.481,
+          "mean": 98.696,
+          "min": 48.691,
+          "n": 678,
+          "p50": 84.822,
+          "p95": 183.583,
+          "p99": 353.537
+        }
+      },
+      "note": "stage 'atlas_ack_to_nhm_consumption' is dominated by the 800 ms NHM poll interval by design"
+    },
+    "soak": {
+      "consumed_not_in_replica_log": 0,
+      "documents_consumed_by_nhm": 10149,
+      "documents_inserted": 10149,
+      "emulator_frames_unmatched_at_replica": 0,
+      "frames_handed_by_emulator": 10149,
+      "frames_received_by_replica": 10149,
+      "latency_ms": {
+        "atlas_ack_to_nhm_consumption": {
+          "max": 1840.4,
+          "mean": 591.798,
+          "min": 1.465,
+          "n": 10149,
+          "p50": 588.942,
+          "p95": 1093.786,
+          "p99": 1238.723
+        },
+        "emulator_send_to_nhm_consumption": {
+          "max": 2265.436,
+          "mean": 679.89,
+          "min": 71.062,
+          "n": 10149,
+          "p50": 673.768,
+          "p95": 1191.039,
+          "p99": 1364.77
+        },
+        "emulator_send_to_replica_receipt": {
+          "max": 8.113,
+          "mean": 0.444,
+          "min": 0.123,
+          "n": 10149,
+          "p50": 0.437,
+          "p95": 0.593,
+          "p99": 0.82
+        },
+        "nhm_consumption_to_browser_display": {
+          "n": 0,
+          "status": "UNMEASURED_IN_PROTOCOL_RUN"
+        },
+        "replica_receipt_to_atlas_ack": {
+          "max": 971.149,
+          "mean": 87.649,
+          "min": 42.212,
+          "n": 10149,
+          "p50": 76.59,
+          "p95": 145.522,
+          "p99": 240.126
+        }
+      },
+      "note": "stage 'atlas_ack_to_nhm_consumption' is dominated by the 800 ms NHM poll interval by design"
+    }
+  },
+  "mode": "soak",
+  "physical_esp32": "NOT_RUN",
+  "run": "20261015T132523Z",
+  "scenarios": [
+    {
+      "checks": {
+        "all_consumed_once": {
+          "detail": {
+            "consumed": 678,
+            "stored": 678
+          },
+          "ok": true
+        },
+        "all_frames_received": {
+          "detail": {
+            "handed": 678,
+            "received": 678
+          },
+          "ok": true
+        },
+        "all_stored_once": {
+          "detail": 678,
+          "ok": true
+        },
+        "live_seen": {
+          "detail": [
+            "WAITING FOR DATA",
+            "LIVE DATA RECEIVED"
+          ],
+          "ok": true
+        },
+        "rate_matches_firmware_rule": {
+          "detail": 16.93,
+          "ok": true
+        },
+        "waiting_before_device": {
+          "detail": [
+            "WAITING FOR DATA"
+          ],
+          "ok": true
+        }
+      },
+      "data": {
+        "correlation": {
+          "consumed_not_in_replica_log": 0,
+          "documents_consumed_by_nhm": 678,
+          "documents_inserted": 678,
+          "emulator_frames_unmatched_at_replica": 0,
+          "frames_handed_by_emulator": 678,
+          "frames_received_by_replica": 678,
+          "latency_ms": {
+            "atlas_ack_to_nhm_consumption": {
+              "max": 1118.649,
+              "mean": 536.731,
+              "min": -6.177,
+              "n": 678,
+              "p50": 550.446,
+              "p95": 979.837,
+              "p99": 1069.093
+            },
+            "emulator_send_to_nhm_consumption": {
+              "max": 1608.696,
+              "mean": 635.873,
+              "min": 68.018,
+              "n": 678,
+              "p50": 628.244,
+              "p95": 1096.149,
+              "p99": 1207.521
+            },
+            "emulator_send_to_replica_receipt": {
+              "max": 1.286,
+              "mean": 0.447,
+              "min": 0.121,
+              "n": 678,
+              "p50": 0.444,
+              "p95": 0.621,
+              "p99": 0.804
+            },
+            "nhm_consumption_to_browser_display": {
+              "n": 0,
+              "status": "UNMEASURED_IN_PROTOCOL_RUN"
+            },
+            "replica_receipt_to_atlas_ack": {
+              "max": 764.481,
+              "mean": 98.696,
+              "min": 48.691,
+              "n": 678,
+              "p50": 84.822,
+              "p95": 183.583,
+              "p99": 353.537
+            }
+          },
+          "note": "stage 'atlas_ack_to_nhm_consumption' is dominated by the 800 ms NHM poll interval by design"
+        },
+        "emulator": {
+          "connect_attempts": 1,
+          "connects": 1,
+          "disconnects": 0,
+          "effective_hz": 16.93,
+          "frames_attempted": 678,
+          "frames_handed": 678,
+          "frames_not_handed": 0,
+          "interval_ms": {
+            "max": 99.28,
+            "mean": 59.08,
+            "n": 677,
+            "p50": 57.33,
+            "p95": 83.99
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 0,
+          "run_tag": "NHM-REH-20261015T132523Z-S01_nominal",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:53237/",
+          "timing": "firmware",
+          "transport_errors": 0
+        },
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED"
+        ]
+      },
+      "error": null,
+      "expected": [
+        "WAITING FOR DATA before the first frame",
+        "LIVE DATA RECEIVED while frames arrive",
+        "every frame handed to the transport is received, stored once and consumed once",
+        "effective rate follows the sketch's >50 ms rule (about 15-19 Hz), not exactly 20 Hz"
+      ],
+      "id": "S01_NOMINAL",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 48.6,
+      "title": "Nominal ~17-20 Hz transmission, NHM waiting before the device"
+    },
+    {
+      "checks": {
+        "all_stored_consumed": {
+          "detail": {
+            "consumed": 10149,
+            "stored": 10149
+          },
+          "ok": true
+        },
+        "counter_counts_all": {
+          "detail": {
+            "record_count": 10149,
+            "stored": 10149
+          },
+          "ok": true
+        },
+        "no_poll_errors": {
+          "detail": [],
+          "ok": true
+        },
+        "rate_stable": {
+          "detail": {
+            "first_third_hz": 16.91,
+            "last_third_hz": 16.91
+          },
+          "ok": true
+        },
+        "trace_bounded_at_cap": {
+          "detail": {
+            "cap": 2000,
+            "retained": 2000
+          },
+          "ok": true
+        }
+      },
+      "data": {
+        "emulator": {
+          "connect_attempts": 1,
+          "connects": 1,
+          "disconnects": 0,
+          "effective_hz": 16.91,
+          "frames_attempted": 10149,
+          "frames_handed": 10149,
+          "frames_not_handed": 0,
+          "interval_ms": {
+            "max": 103.54,
+            "mean": 59.13,
+            "n": 10148,
+            "p50": 57.26,
+            "p95": 84.2
+          },
+          "malformed_sent": 0,
+          "note": "frames_handed means the WebSocket transport accepted the frame; it is not proof MongoDB stored a document",
+          "reconnects": 0,
+          "run_tag": "NHM-REH-20261015T132523Z-SOAK",
+          "seed": 20261015,
+          "status": "EMULATOR_DONE",
+          "target": "ws://127.0.0.1:53262/",
+          "timing": "firmware",
+          "transport_errors": 0
+        },
+        "record_count": 10149,
+        "retained_readings": 2000,
+        "retained_seconds": 118.2,
+        "samples": [
+          {
+            "nhm_count": 164,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 10
+          },
+          {
+            "nhm_count": 333,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 20
+          },
+          {
+            "nhm_count": 491,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 506,
+            "t": 30
+          },
+          {
+            "nhm_count": 671,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 40
+          },
+          {
+            "nhm_count": 831,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 50
+          },
+          {
+            "nhm_count": 1009,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 1013,
+            "t": 60
+          },
+          {
+            "nhm_count": 1172,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 70
+          },
+          {
+            "nhm_count": 1335,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 80
+          },
+          {
+            "nhm_count": 1509,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 1521,
+            "t": 90
+          },
+          {
+            "nhm_count": 1675,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 100
+          },
+          {
+            "nhm_count": 1840,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 110
+          },
+          {
+            "nhm_count": 2011,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 2030,
+            "t": 120
+          },
+          {
+            "nhm_count": 2195,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 130
+          },
+          {
+            "nhm_count": 2363,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 140
+          },
+          {
+            "nhm_count": 2536,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 2537,
+            "t": 150
+          },
+          {
+            "nhm_count": 2689,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 160
+          },
+          {
+            "nhm_count": 2867,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 170
+          },
+          {
+            "nhm_count": 3041,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 3044,
+            "t": 180
+          },
+          {
+            "nhm_count": 3200,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 190
+          },
+          {
+            "nhm_count": 3371,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 200
+          },
+          {
+            "nhm_count": 3539,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 3552,
+            "t": 210
+          },
+          {
+            "nhm_count": 3714,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 220
+          },
+          {
+            "nhm_count": 3875,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 230
+          },
+          {
+            "nhm_count": 4054,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 4059,
+            "t": 240
+          },
+          {
+            "nhm_count": 4218,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 250
+          },
+          {
+            "nhm_count": 4383,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 260
+          },
+          {
+            "nhm_count": 4551,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 4567,
+            "t": 270
+          },
+          {
+            "nhm_count": 4733,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 280
+          },
+          {
+            "nhm_count": 4892,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 290
+          },
+          {
+            "nhm_count": 5071,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 5074,
+            "t": 300
+          },
+          {
+            "nhm_count": 5237,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 310
+          },
+          {
+            "nhm_count": 5401,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 320
+          },
+          {
+            "nhm_count": 5583,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 5586,
+            "t": 330
+          },
+          {
+            "nhm_count": 5751,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 340
+          },
+          {
+            "nhm_count": 5919,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 350
+          },
+          {
+            "nhm_count": 6084,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 6098,
+            "t": 361
+          },
+          {
+            "nhm_count": 6249,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 371
+          },
+          {
+            "nhm_count": 6430,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 381
+          },
+          {
+            "nhm_count": 6600,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 6604,
+            "t": 391
+          },
+          {
+            "nhm_count": 6766,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 401
+          },
+          {
+            "nhm_count": 6933,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 411
+          },
+          {
+            "nhm_count": 7097,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 7110,
+            "t": 421
+          },
+          {
+            "nhm_count": 7274,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 431
+          },
+          {
+            "nhm_count": 7449,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 441
+          },
+          {
+            "nhm_count": 7602,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 7619,
+            "t": 451
+          },
+          {
+            "nhm_count": 7773,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 461
+          },
+          {
+            "nhm_count": 7943,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 471
+          },
+          {
+            "nhm_count": 8115,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 8127,
+            "t": 481
+          },
+          {
+            "nhm_count": 8286,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 491
+          },
+          {
+            "nhm_count": 8467,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 501
+          },
+          {
+            "nhm_count": 8637,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 8637,
+            "t": 511
+          },
+          {
+            "nhm_count": 8791,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 521
+          },
+          {
+            "nhm_count": 8967,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 531
+          },
+          {
+            "nhm_count": 9135,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 9145,
+            "t": 541
+          },
+          {
+            "nhm_count": 9300,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 551
+          },
+          {
+            "nhm_count": 9476,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 561
+          },
+          {
+            "nhm_count": 9639,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 9653,
+            "t": 571
+          },
+          {
+            "nhm_count": 9806,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 581
+          },
+          {
+            "nhm_count": 9991,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": null,
+            "t": 591
+          },
+          {
+            "nhm_count": 10149,
+            "poll_errors": 0,
+            "state": "LIVE DATA RECEIVED",
+            "stored_so_far": 10149,
+            "t": 601
+          }
+        ],
+        "states": [
+          "WAITING FOR DATA",
+          "LIVE DATA RECEIVED"
+        ],
+        "storage_finding": "only the newest 2000 of 10149 readings (~118 s) are retained for History/FL; a longer recording is NOT preserved in full"
+      },
+      "error": null,
+      "expected": [
+        "no process crash; every stored document consumed exactly once while the session is ACTIVE",
+        "trace retention stays bounded at the documented 2,000 newest readings; counter keeps counting",
+        "effective rate stable within +-15% between first and last third"
+      ],
+      "id": "SOAK",
+      "level": "VERIFIED_LOCAL_RENDER_REPLICA",
+      "seconds": 607.6,
+      "title": "10-minute continuous transmission"
+    }
+  ],
+  "seconds": 662.7,
+  "target": {
+    "database": "nhm_rehearsal",
+    "kind": "LOCAL_RENDER_REPLICA",
+    "production_database_touched": false,
+    "real_render_verified": false
+  },
+  "totals": {
+    "failed": 0,
+    "not_run": 0,
+    "passed": 2
+  }
+}
