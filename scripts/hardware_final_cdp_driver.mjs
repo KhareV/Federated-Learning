@@ -117,6 +117,40 @@ if (MODE === 'scenario-a') {
 	await clickId('hardware-stop'); await waitFor(`document.querySelector('[data-testid="hardware-state"]')?.textContent.includes('SESSION STOPPED')`, 30000); const stopped = await monitorSnapshot();
 	await goto(`/app/history/${encodeURIComponent(sid)}`); await waitFor(`document.body.innerText.includes(${JSON.stringify(sid)})`, 60000); await shot('soak_history');
 	Object.assign(out, { tag, session_id: sid, seconds, samples, before_stop: beforeStop, stopped });
+} else if (MODE === 'away') {
+	// Lifecycle audit: Start -> readings -> leave Monitor for N s while the emitter continues -> return -> same session?
+	const awayS = Number(process.env.NHM_AWAY_SECONDS ?? 15); const tag = `NHM-BROWSER-AWAY-${stamp}`;
+	const sid = await openHardwareAndStart(); const pub = startPublisher(tag, Math.round(awayS * 17 + 60 * 17), []);
+	await waitFor(`Number(document.querySelector('[data-testid="hardware-record-count"]')?.textContent ?? 0) >= 40`, 60000);
+	const beforeLeave = await monitorSnapshot(); await shot('away_1_before_leave');
+	const apiState = async () => ev(`(async () => { const t = await (window.Clerk?.session?.getToken?.()); return null; })()`).catch(() => null);
+	const leftAt = Date.now(); await goto('/app/history'); await waitFor(`document.body.innerText.includes(${JSON.stringify(sid)})`, 60000);
+	const historyWhileAway = await ev(`document.body.innerText.includes('ACTIVE')`); await shot('away_2_history_while_away');
+	await sleep(Math.max(0, awayS * 1000 - (Date.now() - leftAt)));
+	const returnedAt = Date.now(); await goto('/app/monitoring'); await waitFor(`!!document.querySelector('#monitor-source')`); await setSelect('#monitor-source', 'hardware');
+	await waitFor(`document.querySelector('[data-testid="hardware-session-id"]')?.textContent.trim() === ${JSON.stringify(sid)}`, 30000);
+	const hasStartButton = await ev(`!!document.querySelector('[data-testid="hardware-start"]') && !document.querySelector('[data-testid="hardware-start"]').disabled`);
+	const justReturned = await monitorSnapshot(); await shot('away_3_returned');
+	await sleep(6000); const afterCatchUp = await monitorSnapshot(); await shot('away_4_caught_up');
+	await waitExit(pub, 180000); await sleep(3000); const beforeStop = await monitorSnapshot();
+	const sidAfter = await value('hardware-session-id'); const lifecycleNote = await ev(`!!document.querySelector('[data-testid="hardware-lifecycle-note"]')`);
+	await clickId('hardware-stop'); await waitFor(`document.querySelector('[data-testid="hardware-state"]')?.textContent.includes('SESSION STOPPED')`, 30000); const stopped = await monitorSnapshot(); await shot('away_5_stopped');
+	await sleep(4000); const stoppedStable = await monitorSnapshot();
+	await goto(`/app/history/${encodeURIComponent(sid)}`); await waitFor(`document.body.innerText.includes(${JSON.stringify(sid)}) && document.body.innerText.includes('actual accepted records')`, 60000); await shot('away_6_history');
+	const historyText = await ev(`document.body.innerText`);
+	const fedavg = await runDemo(sid, 3, 'FEDAVG');
+	// Merged federation form: warm start from the run just completed (and check Pretrained V2 is shown as not applicable).
+	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="data-source-hardware"]')`, 120000);
+	await clickId('data-source-hardware'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-starter"]')`, 60000);
+	await waitFor(`!!document.querySelector('[data-testid="hardware-demo-session-${sid}"]')`, 60000);
+	const initOptions = await ev(`[...document.querySelector('[data-testid="hardware-demo-init"]').options].map(o=>({value:o.value,label:o.textContent.trim(),disabled:o.disabled}))`);
+	await clickId('rounds-3'); await clickId(`hardware-demo-session-${sid}`); await setSelect('[data-testid="hardware-demo-init"]', 'WARM_START');
+	await waitFor(`!!document.querySelector('[data-testid="hardware-demo-warm-run"]') && document.querySelector('[data-testid="hardware-demo-warm-run"]').options.length > 0`, 30000);
+	const warmSource = await ev(`document.querySelector('[data-testid="hardware-demo-warm-run"]').value`);
+	await shot('away_7_warm_form'); await clickId('hardware-demo-start'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-result"]')`, 600000);
+	const warmText = await value('hardware-demo-result'); await shot('away_8_warm_result');
+	const v2Note = await value('hardware-demo-v2-note');
+	Object.assign(out, { tag, init_options: initOptions, warm_source_run: warmSource, warm_result: warmText, v2_note: v2Note, session_id: sid, session_id_after_return: sidAfter, away_seconds: awayS, left_at_ms: leftAt, returned_at_ms: returnedAt, before_leave: beforeLeave, history_shows_active_while_away: historyWhileAway, start_button_enabled_after_return: hasStartButton, just_returned: justReturned, after_catch_up: afterCatchUp, before_stop: beforeStop, stopped, stopped_stable: stoppedStable, lifecycle_note_visible: lifecycleNote, history_text_excerpt: historyText.slice(0, 1500), demo_fl: { fedavg } });
 } else if (MODE === 'owner-probe') {
 	const target = process.env.NHM_EXPECT_SESSION; if (!target) throw new Error('NHM_EXPECT_SESSION missing');
 	await goto(`/app/history/${encodeURIComponent(target)}`); await waitFor(`document.querySelector('[role="alert"]') || document.body.innerText.includes('FORBIDDEN')`, 60000); const detailText = await ev('document.body.innerText'); await shot('owner_b_forbidden');

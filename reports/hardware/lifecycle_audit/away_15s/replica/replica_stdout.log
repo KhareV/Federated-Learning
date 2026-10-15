@@ -1,0 +1,4 @@
+{"status": "REPLICA_READY", "not_real_render": true, "url": "ws://127.0.0.1:56400/", "database": "nhm_rehearsal", "collection_prefix": "records_", "collection_timezone": "UTC", "sink": "mongo", "simulated_start": null}
+{"status": "REPLICA_STOPPED", "connections": 0, "rejected": 0, "frames": 0, "malformed": 0, "inserted": 0, "insert_errors": 0, "disconnects": 0}
+{"status": "REPLICA_READY", "not_real_render": true, "url": "ws://127.0.0.1:56528/", "database": "nhm_rehearsal", "collection_prefix": "records_", "collection_timezone": "UTC", "sink": "mongo", "simulated_start": null}
+{"status": "REPLICA_STOPPED", "connections": 1, "rejected": 0, "frames": 1079, "malformed": 0, "inserted": 1079, "insert_errors": 0, "disconnects": 1}

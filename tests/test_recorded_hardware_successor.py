@@ -20,7 +20,8 @@ def _link() -> successor_chain.Link:
 def test_recorded_hardware_successor_is_exact_and_complete() -> None:
     link = _link()
     lock = successor_chain.validate_link(link, ROOT)
-    expected = lock["frontend_files"]
+    # Once a later additive successor exists, the tree matches the chain tip, not this (historical) link.
+    expected = successor_chain.tip_frontend_map(ROOT) or lock["frontend_files"]
     actual = set(frontend_files())
     assert set(expected) == actual
     assert all(successor_chain.sha256((ROOT / path).read_bytes()) == digest for path, digest in expected.items())

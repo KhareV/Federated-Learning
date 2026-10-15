@@ -33,6 +33,10 @@ saying so; the fallback is the labelled simulated wearable (*Simulated wearable*
 Record **60–100 s** in segment 1–6 if the same session is to feed segment 7: only the newest 2,000 readings
 (≈ 118 s at 17 Hz) are retained; History says "(newest N retained)".
 
+Navigating away from Monitor (e.g. to History) does **not** stop the session. Records written while you are away are
+picked up from MongoDB when you return to Monitor (the page shows STALE for a moment, then catches up). Nothing is
+recorded in the background by NHM itself; only *Stop Monitoring* ends the session.
+
 ## Say explicitly
 
 * The labels in the federated demo are synthetic and assigned for demonstration; nothing is clinically meaningful.

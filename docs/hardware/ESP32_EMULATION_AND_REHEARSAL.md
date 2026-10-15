@@ -87,6 +87,15 @@ no URIs, tokens or passwords).
    `INTERRUPTED` (data kept, eligible for FL). `Start` is idempotent, so a double click or a reload re-attaches
    instead of orphaning a session, and the Monitor resumes the user's active session after a page reload.
 
+9. **Leaving the Monitor page does not stop the session, and does not record in the background.** The backend has
+   no collector thread: readings are ingested only inside authenticated polls (every 800 ms while the Monitor is open).
+   Leaving the page only detaches timers; the session stays `ACTIVE`, a returning Monitor re-attaches to the same
+   session id, and the next polls catch up from MongoDB using the session's saved high-water mark (500 documents per
+   poll). Verified in real Chrome + Clerk (15 s away, 252 readings written meanwhile, all counted exactly once,
+   `VERIFIED_LOCAL_RENDER_REPLICA`). Limits: the trace keeps the newest 2,000 readings; if MongoDB's own retention
+   removes documents while the page is away they cannot be recovered; a session whose owner never returns stays
+   `ACTIVE` until Stop or a backend restart (then `INTERRUPTED`). Only the explicit Stop button ends a session.
+
 ## Bounded values (current)
 
 | Value | Setting | At ~17 Hz |

@@ -1,0 +1,123 @@
+{
+  "mode": "away",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-AWAY-1792078711701",
+  "init_options": [
+    {
+      "value": "FRESH_SEEDED",
+      "label": "Fresh initialisation (seeded, untrained)",
+      "disabled": false
+    },
+    {
+      "value": "WARM_START",
+      "label": "Pretrained: warm start from an earlier recorded-hardware run",
+      "disabled": false
+    },
+    {
+      "value": "MODEL_V2_FINAL",
+      "label": "Pretrained V2 (MODEL_V2_FINAL) — not applicable",
+      "disabled": true
+    }
+  ],
+  "warm_source_run": "",
+  "warm_result": "HDFLRUN-E44E857E0385 · COMPLETED 52 train / 12 holdout windows · 8 clients · 3 rounds · 24 accepted updates Start: warm start from HDFLRUN-16C164DC03F0 Feature digest 3c81a89d337b8cef… · final state dad4358269f90012…  roundtrain lossholdout BCEaccuracyR10.66380.608875.0%R20.66150.615175.0%R30.65950.620883.3% TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
+  "v2_note": "Pretrained V2 is not offered here: V2 is a 250 Hz ECG-window network; the hardware demo model is a tabular classifier over recorded-window features, so V2 weights cannot be loaded into it and no transfer is claimed.",
+  "session_id": "HW-a4798f4ae1fe438fa92d10a6b9e60687",
+  "session_id_after_return": "HW-a4798f4ae1fe438fa92d10a6b9e60687",
+  "away_seconds": 15,
+  "left_at_ms": 1792078716704,
+  "returned_at_ms": 1792078731706,
+  "before_leave": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 49,
+    "bpm": "72",
+    "spo2": "97%",
+    "points": 49,
+    "paths": 1,
+    "latest_id": "6ad0f37b8cdf2a034a269140",
+    "latest_ecg": 2008,
+    "latest_x": 1000,
+    "latest_y": 96.44688644688645,
+    "expected_y": 96.44688644688645
+  },
+  "history_shows_active_while_away": true,
+  "start_button_enabled_after_return": false,
+  "just_returned": {
+    "state": "STALE DATA",
+    "count": 49,
+    "bpm": "72",
+    "spo2": "97%",
+    "points": 49,
+    "paths": 1,
+    "latest_id": "6ad0f37b8cdf2a034a269140",
+    "latest_ecg": 2008,
+    "latest_x": 1000,
+    "latest_y": 96.44688644688645,
+    "expected_y": 96.44688644688645
+  },
+  "after_catch_up": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 419,
+    "bpm": "68",
+    "spo2": "96%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0f3918cdf2a034a2692b2",
+    "latest_ecg": 2085,
+    "latest_x": 1000,
+    "latest_y": 93.62637362637363,
+    "expected_y": 93.62637362637363
+  },
+  "before_stop": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 1079,
+    "bpm": "68",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0f3b88cdf2a034a269546",
+    "latest_ecg": 2030,
+    "latest_x": 1000,
+    "latest_y": 95.64102564102564,
+    "expected_y": 95.64102564102564
+  },
+  "stopped": {
+    "state": "SESSION STOPPED",
+    "count": 1079,
+    "bpm": "68",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0f3b88cdf2a034a269546",
+    "latest_ecg": 2030,
+    "latest_x": 1000,
+    "latest_y": 95.64102564102564,
+    "expected_y": 95.64102564102564
+  },
+  "stopped_stable": {
+    "state": "SESSION STOPPED",
+    "count": 1079,
+    "bpm": "68",
+    "spo2": "95%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad0f3b88cdf2a034a269546",
+    "latest_ecg": 2030,
+    "latest_x": 1000,
+    "latest_y": 95.64102564102564,
+    "expected_y": 95.64102564102564
+  },
+  "lifecycle_note_visible": true,
+  "history_text_excerpt": "Skip to content\nN\nNHM\nOverview\nDevice\nMonitor\nHistory\nObservatory\nFederation\nModels\nResearch\nSystem\nAbout\nSIMULATED MODEL / HARDWARE TELEMETRY\nRESEARCH / NOT DIAGNOSTIC\nCLERK\nuser_3KhjxqrP8WVKzjFI4SFOX4J8uIy\nSign out\n\nHISTORY / SESSION EVIDENCE\n\nSession evidence\n01 / HARDWARE TELEMETRY\nHW-a4798f4ae1fe438fa92d10a6b9e60687\nSTOPPED\n\nESP32 via Render/MongoDB (unverified device provenance) · records_*\n\nStarted 15/10/2026, 21:08:32 · Stopped 15/10/2026, 21:09:39 · 1079 actual accepted records\n\nStored trace: last 2000 readings maximum. Timestamp is server ingestion time. This session has no model inference or clinical classification.\n\n1079 saved points · exact ADC values · no interpolation or resampling.\n\n6ad0f3798cdf2a034a269110 · 15/10/2026, 21:08:33 · ECG 2053 · BPM 72 · SpO₂ 97 (unverified)\n6ad0f3798cdf2a034a269111 · 15/10/2026, 21:08:33 · ECG 2048 · BPM 72 · SpO₂ 97 (unverified)\n6ad0f3798cdf2a034a269114 · 15/10/2026, 21:08:33 · ECG 1888 · BPM 72 · SpO₂ 97 (unverified)\n6ad0f3798cdf2a034a269115 · 15/10/2026, 21:08:33 · ECG 2044 · BPM 72 · SpO₂ 97 (unverified)\n6ad0f3798cdf2a034a269116 · 15/10/2026, 21:08:33 · ECG 2076 · BPM 72 · SpO₂ 97 (unverified)\n6ad0f3798cdf2a034a269117 · 15/10/2026, 21:08:33 · ECG 2118 · BPM 72 · SpO₂ 97 (unverified)\n6ad0f3798cdf2a034a269112 · 15/10/2026, 21:08:33 · ECG 2045 · BPM 72 · SpO₂ 97 (unverified)\n6ad0f3798cdf2a034a269113 · 15/10/2026, 21:08:33 · ECG 2056 · BPM 72 · SpO₂ 97 (unverified)\n6ad0f3798cdf2a034a269118 · 15/10/2026, 21:08:33 · ECG 2240 · BPM",
+  "demo_fl": {
+    "fedavg": "HDFLRUN-16C164DC03F0 · COMPLETED 52 train / 12 holdout windows · 8 clients · 3 rounds · 24 accepted updates Start: fresh seeded initialisation Feature digest 3c81a89d337b8cef… · final state 7c17df84e2df2469… SecAgg+ shadow: PASS · authoritative aggregate PLAIN roundtrain lossholdout BCEaccuracyR10.67380.585983.3%R20.66980.594283.3%R30.66650.601875.0% TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity"
+  }
+}

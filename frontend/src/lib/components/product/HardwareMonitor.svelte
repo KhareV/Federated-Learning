@@ -92,14 +92,17 @@
     finally { busy = false; }
   }
   const pct = (v: number | null | undefined) => (v == null ? 'Unavailable' : `${(v * 100).toFixed(2)}%`);
+  // Leaving the page only detaches this view (timers). It never stops the session: only the explicit
+  // Stop button does. The backend ingests inside authenticated polls, so while the page is away nothing is
+  // read; on return the session's saved high-water mark makes the next polls catch up from MongoDB.
   onDestroy(() => {
     if (timer) clearInterval(timer);
     if (v2Timer) clearInterval(v2Timer);
-    if (session?.status === 'ACTIVE') void product.api.hardwareStop(session.session_id).catch(() => {});
   });
 </script>
 
 <p class="lead">MongoDB telemetry from the configured source; the session panel identifies the source after Start. Timestamps are server ingestion time. ECG values are transmitted ADC readings with no verified ADC sampling rate; any model analysis of this source is experimental and not valid. The V2 panels below are an <b>experimental, resampled, not-valid</b> analysis, kept separate from the simulated wearable.</p>
+<p class="note" data-testid="hardware-lifecycle-note">Session lifecycle: a session ends only when you press <b>Stop Monitoring</b> (or the backend restarts, which marks it INTERRUPTED). Leaving this page does not stop it, but readings are collected only while this page is open; on return the session catches up from MongoDB, so records written meanwhile are still counted (the newest {session?.trace_limit ?? 2000} are retained).</p>
 {#if error}<p role="alert" class="err">{error}</p>{/if}
 <div class="flowbox" data-testid="hardware-flow"><FlowDiagram label="Hardware telemetry pipeline" steps={flow} /></div>
 <Panel eyebrow="01 / HARDWARE SESSION" title="Live hardware telemetry" note="OWNER-SCOPED SESSION · SHARED SOURCE">
@@ -161,7 +164,7 @@
       <div><dt>DEVICE SpO₂ — UNVERIFIED</dt><dd data-testid="hardware-spo2">{latest?.spo2 == null ? 'Unavailable' : `${latest.spo2}%`}</dd></div>
       <div><dt>CONTEXT SENT TO V2</dt><dd>{latestWindow?.ppg_context ? `PR ${latestWindow.ppg_context.pr_bpm ?? '--'} bpm · SpO₂ ${latestWindow.ppg_context.spo2_pct ?? '--'}% · quality ${latestWindow.ppg_context.quality ?? 'not supplied'}` : 'none'}</dd></div>
     </dl>
-    <p class="label">Zero is shown as unavailable, never as 0%. No PPG quality metric is available, so V2 reports CONTEXT_UNAVAILABLE for this source.</p>
+    <p class="label">Zero is shown as unavailable, not as a measured value. No PPG quality metric is available, so V2 reports CONTEXT_UNAVAILABLE for this source.</p>
   </Panel>
   <Panel eyebrow="06 / INFERENCE" title="MODEL_V2_FINAL result · EXPERIMENTAL" note="inference.result · NOT VALID">
     {#if latestInference}

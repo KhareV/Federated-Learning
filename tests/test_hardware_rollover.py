@@ -180,3 +180,51 @@ def test_late_lower_object_id_is_consumed_but_pre_session_documents_stay_exclude
     assert 1111 not in {r["ecg"] for r in body["readings"]}
     assert service.poll(sid, "u")["record_count"] == 3     # repeated polls do not duplicate
     store.close()
+
+
+def test_records_written_while_nobody_polls_are_caught_up_and_session_stays_active(tmp_path):
+    """Lifecycle audit: no background collector exists; the saved mark makes the next poll catch up."""
+    now = datetime.now(UTC)
+    start = int(now.timestamp()) - 3600
+
+    def make(n):
+        # ~17 documents per wall-clock second, like the device, so the 5 s look-back window stays bounded.
+        stamp = datetime.fromtimestamp(start + n // 17, UTC)
+        raw = ObjectId.from_datetime(stamp).binary[:4] + n.to_bytes(8, "big")
+        return {"_id": ObjectId(raw), "timestamp": stamp, "ecg": 1000 + n, "bpm": 70, "spo2": 97}
+
+    class Source:
+        collection_name = "records_*"
+
+        def __init__(self):
+            self.docs = []
+            self.reads = 0
+
+        def high_water(self):
+            return max((d["_id"] for d in self.docs), default=None)
+
+        def after(self, mark):
+            self.reads += 1
+            return sorted((d for d in self.docs if mark is None or d["_id"] > mark), key=lambda d: d["_id"])[:MAX_BATCH]
+
+    store = CapstoneSqliteStore(tmp_path / "away.sqlite3")
+    source = Source()
+    service = HardwareSessions(store, source)
+    sid = service.start("u")["session_id"]
+    source.docs += [make(n) for n in range(1, 11)]
+    assert service.poll(sid, "u")["record_count"] == 10
+    reads_before = source.reads
+    # Monitor page absent: documents arrive, no poll happens. Nothing is read and the session stays ACTIVE.
+    source.docs += [make(n) for n in range(11, 11 + MAX_BATCH + 100)]
+    assert source.reads == reads_before
+    assert service.detail(sid, "u")["status"] == "ACTIVE"
+    assert service.detail(sid, "u")["record_count"] == 10
+    # Same session re-attached on return (idempotent start) and the missed records are counted exactly once.
+    assert service.start("u")["session_id"] == sid
+    service.poll(sid, "u")
+    body = service.poll(sid, "u")
+    assert body["record_count"] == 10 + MAX_BATCH + 100
+    assert len({r["id"] for r in body["readings"]}) == len(body["readings"])
+    assert service.poll(sid, "u")["record_count"] == 10 + MAX_BATCH + 100
+    assert service.stop(sid, "u")["status"] == "STOPPED"
+    store.close()

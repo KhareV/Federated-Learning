@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import json
 import os
 import shutil
@@ -62,6 +63,7 @@ def main() -> int:
     parser.add_argument("--database", default=None, help="Atlas database (ws mode defaults to the isolated nhm_rehearsal)")
     parser.add_argument("--stamp", default=None)
     parser.add_argument("--latency-seconds", type=int, default=0, help="measure Atlas-ack -> browser-display latency for this many seconds")
+    parser.add_argument("--away-seconds", type=int, default=0, help="lifecycle audit: leave the Monitor page for this many seconds while the emitter continues")
     parser.add_argument("--soak-seconds", type=int, default=0, help="run only the long browser soak for this many seconds")
     args = parser.parse_args()
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
@@ -106,6 +108,38 @@ def main() -> int:
             (out / "browser_latency.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
             print(json.dumps(report))
             return 0
+        if args.away_seconds:
+            running, origin = stack(env, workspace, python)
+            try:
+                env["NHM_AWAY_SECONDS"] = str(args.away_seconds)
+                away = drive("away", origin, Path(args.users_file), out / "away.json", out / "away_shots", out / "publisher_logs", env)
+                tags.append(away["tag"])
+            finally:
+                running.shutdown()
+            inserted = [e for e in (replica.events() if replica else []) if e.get("event") == "insert_ok"]
+            def wall_ms(e):
+                return datetime.fromisoformat(e["t_wall"]).timestamp() * 1000
+            during = [e for e in inserted if away["left_at_ms"] <= wall_ms(e) <= away["returned_at_ms"]]
+            final = away["stopped"]["count"]
+            checks = {
+                "same_session_after_return": away["session_id"] == away["session_id_after_return"],
+                "session_active_while_away": away["history_shows_active_while_away"],
+                "monitor_reattached_not_restarted": away["just_returned"]["count"] >= away["before_leave"]["count"],
+                "records_written_while_away": len(during),
+                "count_equals_replica_inserts": final == len(inserted),
+                "missed_readings_captured": final >= away["before_leave"]["count"] + len(during),
+                "stopped_count_stable": away["stopped"]["count"] == away["stopped_stable"]["count"],
+                "retention_not_exceeded": len(inserted) <= 2000,
+            }
+            ok = all(v is True or (isinstance(v, int) and not isinstance(v, bool)) for v in checks.values()) and checks["records_written_while_away"] > 0
+            verdict = {"status": "PASS" if ok else "FAIL", "mode": "away_lifecycle", "away_seconds": away["away_seconds"], "checks": checks,
+                       "replica_inserts_total": len(inserted), "count_before_leave": away["before_leave"]["count"],
+                       "count_just_returned": away["just_returned"]["count"], "count_after_catch_up": away["after_catch_up"]["count"],
+                       "count_final_stopped": final, "demo_fl_completed": bool(away["demo_fl"]["fedavg"]),
+                       "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA" if ws_mode else "VERIFIED_DIRECT_ATLAS_INJECTION"}
+            (out / "away_lifecycle_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if ok else 1
         if args.soak_seconds:
             running, origin = stack(env, workspace, python)
             try:
