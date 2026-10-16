@@ -3,6 +3,8 @@
 	// 3 rounds from the UNTRAINED start keeps the ORIGINAL run form and the frozen 3-round product contract untouched; every other combination uses the verified extended engine.
 	import RunConfigForm from '$lib/components/product/federation/RunConfigForm.svelte';
 	import HardwareDemoStarter from '$lib/components/product/studio/HardwareDemoStarter.svelte';
+	import { onMount } from 'svelte';
+	import { getProductStore } from '$lib/product/state.svelte';
 	import type { FederationRunChoice } from '$lib/product/api';
 	import type { Initialisation, RunLength, SourceMode, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
 	let { disabled = false, liveBlocked = false, backendEnabled = true, capabilities = null, dataSource = $bindable<'SYNTHETIC' | 'HARDWARE'>('SYNTHETIC'), preselectSession = null, onStartThree, onStartTen }: {
@@ -12,6 +14,14 @@
 	let source = $state<SourceMode>('CANONICAL_SYNTHETIC');
 	let monitoredSite = $state(0);                  // source mode LIVE_MONITORED_SITE_00 only: which canonical cohort site is genuinely live-monitored (0 = SITE_00, the original behaviour)
 	const sites = $derived(capabilities?.ten_round.monitored_sites ?? []);
+	// Signal of the monitored client: a NEW simulated session of the cohort site (default), or a COMPLETED monitoring session from History whose signal is regenerated from its frozen scenario.
+	const product = getProductStore();
+	let signal = $state<'SITE_NOW' | 'HISTORY'>('SITE_NOW');
+	let sessionPick = $state('');
+	const historySessions = $derived(product.sessions.filter((x) => x.state === 'COMPLETED' && !!x.simulation_provenance));
+	onMount(() => { void product.loadSessions(); });
+	$effect(() => { if (signal === 'HISTORY' && !historySessions.some((x) => x.session_id === sessionPick)) sessionPick = historySessions[0]?.session_id ?? ''; });
+	const fromHistory = $derived(source === 'LIVE_MONITORED_SITE_00' && signal === 'HISTORY');
 	const siteLabel = $derived(`SITE_${String(monitoredSite).padStart(2, '0')}`);
 	// Training data: the synthetic cohort (default, unchanged) or readings recorded from the MongoDB hardware source.
 	const hardwareOffered = $derived(capabilities?.hardware_demo?.available === true);
@@ -32,10 +42,10 @@
 	const shadowAvailable = $derived(capabilities?.ten_round.aggregation_modes.includes('SECAGG_SHADOW') === true);
 	const fedproxUnavailable = $derived(capabilities?.ten_round.unsupported?.FEDPROX ?? 'not advertised by the connected backend');
 	const shadowUnavailable = $derived(capabilities?.ten_round.unsupported?.SECAGG_SHADOW ?? 'not advertised by the connected backend');
-	const blocked = $derived(!backendEnabled || disabled || liveBlocked || !tenAvailable);
+	const blocked = $derived(!backendEnabled || disabled || liveBlocked || !tenAvailable || (fromHistory && !sessionPick));
 	const OPTIONS: { value: RunLength; title: string; tag: string }[] = [{ value: 3, title: '★ 3 ROUNDS', tag: 'DEFAULT' }, { value: 10, title: '10 ROUNDS', tag: 'EXTENDED' }];
 	const SOURCE_TEXT: Record<SourceMode, string> = { CANONICAL_SYNTHETIC: 'Canonical synthetic cohort — eight frozen synthetic clients.', LIVE_MONITORED_SITE_00: 'Live-monitored simulated site — the simulated monitoring stream of that site is genuinely executed and feeds it. This is NOT real patient physiology.' };
-	const sourceNote = $derived(source === 'LIVE_MONITORED_SITE_00' ? `Live-monitored simulated ${siteLabel} — the simulated monitoring stream of ${siteLabel} is genuinely executed (real monitoring runtime, real inference) and its windows become that client's local data; the other seven clients stay canonical synthetic. This is NOT real patient physiology.` : SOURCE_TEXT[source]);
+	const sourceNote = $derived(fromHistory ? `Your monitoring session ${sessionPick || '—'} — its signal is regenerated from its frozen scenario (no new monitoring session, no new inference) and becomes the local data of ${siteLabel}; the other seven clients stay canonical synthetic. Labels are synthetic-assigned for the demonstration (a monitoring session has no scheduled engineering events), exactly as for recorded hardware. This is NOT real patient physiology.` : source === 'LIVE_MONITORED_SITE_00' ? `Live-monitored simulated ${siteLabel} — the simulated monitoring stream of ${siteLabel} is genuinely executed (real monitoring runtime, real inference) and its windows become that client's local data; the other seven clients stay canonical synthetic. This is NOT real patient physiology.` : SOURCE_TEXT[source]);
 	function radioKey(e: KeyboardEvent) {
 		if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
 		e.preventDefault();
@@ -72,12 +82,16 @@
 	{:else if original}
 		<RunConfigForm {disabled} {liveBlocked} {backendEnabled} onSubmit={onStartThree} />
 	{:else}
-		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: length, source_mode: source, ...(source === 'LIVE_MONITORED_SITE_00' && monitoredSite ? { monitored_site: monitoredSite } : {}), ...(inits.length ? { initialisation } : {}), ...(algorithm !== 'FEDAVG' ? { algorithm } : {}), ...(secaggMode !== 'PLAIN' ? { secagg_mode: secaggMode } : {}) }); }} aria-label={`${length === 3 ? 'Three' : 'Ten'}-round federation run configuration`}>
+		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: length, source_mode: source, ...(source === 'LIVE_MONITORED_SITE_00' && monitoredSite ? { monitored_site: monitoredSite } : {}), ...(fromHistory ? { signal_session_id: sessionPick } : {}), ...(inits.length ? { initialisation } : {}), ...(algorithm !== 'FEDAVG' ? { algorithm } : {}), ...(secaggMode !== 'PLAIN' ? { secagg_mode: secaggMode } : {}) }); }} aria-label={`${length === 3 ? 'Three' : 'Ten'}-round federation run configuration`}>
 			<label><span>Run mode</span><select disabled data-testid="cfg10-run-type"><option>LIVE_RUN</option><option disabled>REPLAY — open a completed run instead</option></select></label>
 			<p class="help">LIVE_RUN performs genuine local optimization and federation for {length} rounds. A replay never trains: open a completed run from “Your federation runs”, or a recorded FL10 run, to replay it.</p>
 			<label><span>Source mode</span><select bind:value={source} data-testid="cfg10-source">{#each modes as m (m)}<option value={m}>{m === 'CANONICAL_SYNTHETIC' ? 'Canonical synthetic cohort' : 'Live-monitored simulated site'}</option>{/each}</select></label>
+			{#if source === 'LIVE_MONITORED_SITE_00'}
+				<label><span>Signal</span><select bind:value={signal} data-testid="cfg10-signal"><option value="SITE_NOW">Monitor the cohort site now (new simulated session)</option><option value="HISTORY" disabled={!historySessions.length}>A monitoring session from History{historySessions.length ? '' : ' — none completed yet'}</option></select></label>
+				{#if signal === 'HISTORY' && historySessions.length}<label><span>History session</span><select bind:value={sessionPick} data-testid="cfg10-session">{#each historySessions as h (h.session_id)}<option value={h.session_id}>{h.session_id} · {h.simulation_provenance?.scenario_id}</option>{/each}</select></label>{/if}
+			{/if}
 			{#if source === 'LIVE_MONITORED_SITE_00' && sites.length}
-				<label><span>Monitored site</span><select bind:value={monitoredSite} data-testid="cfg10-site">{#each sites as site (site.index)}<option value={site.index}>{site.label} — {site.profile}</option>{/each}</select></label>
+				<label><span>{signal === 'HISTORY' ? 'Client it replaces' : 'Monitored site'}</span><select bind:value={monitoredSite} data-testid="cfg10-site">{#each sites as site (site.index)}<option value={site.index}>{site.label} — {site.profile}</option>{/each}</select></label>
 			{/if}
 			<p class="help" data-testid="cfg10-source-note">{sourceNote}</p>
 			<label><span>Algorithm</span><select bind:value={algorithm} disabled={!fedproxAvailable} data-testid="cfg10-algorithm"><option value="FEDAVG">FedAvg — sample-count-weighted averaging</option><option value="FEDPROX">FedProx — frozen μ 0.1</option></select></label>

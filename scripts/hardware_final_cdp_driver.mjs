@@ -276,7 +276,7 @@ if (MODE === 'scenario-a') {
 	await waitFor(`(document.querySelector('[data-testid="run-status"]')?.textContent || '').includes('COMPLETED')`, 900000);
 	await sleep(4000);
 	const live = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
-		return { status_line: t('run-status'), badge: t('source-badge'), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map((x)=>x.getAttribute('data-client')), hw_participation: t('hardware-participation').slice(0, 500),
+		return { status_line: t('run-status'), badge: t('source-badge'), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map((x)=>x.getAttribute('data-client')), hw_participation: t('hardware-participation').slice(0, 500), recorded_cards: document.querySelectorAll('[data-testid="hardware-card-label"]').length, peer_cards: document.querySelectorAll('[data-testid="hardware-peer-label"]').length,
 		metric_auprc: t('metric-AUPRC'), metric_accuracy: t('metric-accuracy'), secagg: t('secagg-status'), label: (document.body.innerText.match(/(\\d+)-round recorded-hardware run[^\\n]*/)||[''])[0],
 		alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }; })()`);
 	await shot('v2_live');
@@ -295,6 +295,48 @@ if (MODE === 'scenario-a') {
 	await shot('v2_fed_replay');
 	Object.assign(out, { tag, session_ids: [sid1, sid2], monitor_replay_link: monitorReplayLink, history_links: historyLinks, replay, trace, trace_next_window: traceNext, observatory_console_errors: consoleErrors,
 		init_options: initOptions, single_session_preview: single, two_session_preview: both, run_id: runId, live, generalisation, fed_replay: fedReplay });
+} else if (MODE === 'history-source') {
+	// A COMPLETED simulated monitoring session from History as the signal of one federation client (synthetic-assigned labels), through the real starter.
+	const clickText = (text) => ev(`(() => { const b=[...document.querySelectorAll('button')].find(x=>x.textContent.trim()===${JSON.stringify(text)} && !x.disabled); if(!b) return false; b.click(); return true; })()`);
+	await goto('/app/device'); await waitFor(`[...document.querySelectorAll('button')].some(x=>x.textContent.trim()==='ATTACH NHM VIRTUAL WEARABLE')`, 60000);
+	await clickText('ATTACH NHM VIRTUAL WEARABLE'); await waitFor(`document.querySelector('[data-testid="device-state"]')?.textContent.trim() === 'DETACHED'`, 30000);
+	await waitFor(`[...document.querySelectorAll('button')].some(x=>x.textContent.trim()==='SCAN' && !x.disabled)`, 30000); await clickText('SCAN');
+	await waitFor(`document.querySelector('[data-testid="device-state"]')?.textContent.trim() === 'FOUND'`, 30000); await waitFor(`[...document.querySelectorAll('button')].some(x=>x.textContent.trim()==='PAIR / CONNECT' && !x.disabled)`, 30000); await clickText('PAIR / CONNECT');
+	await waitFor(`document.querySelector('[data-testid="device-state"]')?.textContent.trim() === 'CONNECTED'`, 30000);
+	await goto('/app/monitoring'); await waitFor(`!!document.querySelector('[data-testid="create-session"]') && !document.querySelector('[data-testid="create-session"]').disabled`, 60000);
+	await clickId('create-session'); await waitFor(`!!document.querySelector('[data-testid="start-session"]') && !document.querySelector('[data-testid="start-session"]').disabled`, 60000); await clickId('start-session');
+	await goto('/app/history'); await waitFor(`!!document.querySelector('[data-testid="session-table"] code')`, 60000);
+	let sessionId = '', state = ''; const t0 = Date.now();
+	while (Date.now() - t0 < 300000) {
+		await goto('/app/history'); await waitFor(`!!document.querySelector('[data-testid="session-table"] code')`, 60000);
+		const row = await ev(`(() => { const tr = document.querySelector('[data-testid="session-table"] tbody tr'); return { id: tr.querySelector('code').textContent.trim(), text: tr.textContent }; })()`);
+		sessionId = row.id; state = /COMPLETED/.test(row.text) ? 'COMPLETED' : /FAILED/.test(row.text) ? 'FAILED' : 'RUNNING';
+		if (state !== 'RUNNING') break; await sleep(4000);
+	}
+	if (state !== 'COMPLETED') throw new Error('monitoring session ended ' + state);
+	await goto('/app/history'); await waitFor(`document.body.innerText.includes(${JSON.stringify(sessionId)})`, 60000); await shot('hs_history');
+	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="rounds-10"]')`, 120000);
+	await waitFor(`!!document.querySelector('[data-testid="cfg10-source"]') || !!document.querySelector('[data-testid="cfg10-submit"]')`, 60000);
+	await setSelect('[data-testid="cfg10-source"]', 'LIVE_MONITORED_SITE_00'); await waitFor(`!!document.querySelector('[data-testid="cfg10-signal"]')`, 30000);
+	await setSelect('[data-testid="cfg10-signal"]', 'HISTORY'); await waitFor(`!!document.querySelector('[data-testid="cfg10-session"]') && [...document.querySelector('[data-testid="cfg10-session"]').options].some(o => o.value === ${JSON.stringify(sessionId)})`, 30000);
+	await setSelect('[data-testid="cfg10-session"]', sessionId); await setSelect('[data-testid="cfg10-site"]', '2');
+	const note = await value('cfg10-source-note'); await shot('hs_form');
+	await clickId('cfg10-submit');
+	await waitFor(`location.pathname === '/app/federation/live' && /^FL10RUN-/.test(new URLSearchParams(location.search).get('run') || '')`, 120000);
+	const runId = await ev(`new URLSearchParams(location.search).get('run')`);
+	await waitFor(`(document.querySelector('[data-testid="run-status"]')?.textContent || '').includes('COMPLETED')`, 1200000);
+	await sleep(4000);
+	const live = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+		return { badge: t('source-badge'), status_line: t('run-status'), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map(x=>x.getAttribute('data-client')), metric_auprc: t('metric-AUPRC'), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)),
+		local_examples: [...document.querySelectorAll('[data-testid="client-grid"] li')].map(x=>[x.getAttribute('data-client'), (x.textContent.match(/local examples: (\\S+)/)||[])[1]]) }; })()`);
+	await shot('hs_live');
+	await clickId('atab-overview').catch(() => {}); await sleep(1500);
+	const overview = await ev(`(document.querySelector('[data-testid="monitoring-link"]')?.textContent ?? '').replace(/\\s+/g,' ').trim()`);
+	await goto('/app/observatory/federation-replay'); await waitFor(`!!document.querySelector('.pick select') && [...document.querySelector('.pick select').options].some(o=>o.value===${JSON.stringify(runId)})`, 60000);
+	await setSelect('.pick select', runId); await waitFor(`!!document.querySelector('[data-testid="fed-replay-controls"]') || !!document.querySelector('[role="alert"]')`, 180000);
+	const replay = await ev(`({ controls: !!document.querySelector('[data-testid="fed-replay-controls"]'), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,200)) })`);
+	await shot('hs_replay');
+	Object.assign(out, { session_id: sessionId, run_id: runId, source_note: note, live, overview, replay });
 } else if (MODE === 'owner-probe') {
 	const target = process.env.NHM_EXPECT_SESSION; if (!target) throw new Error('NHM_EXPECT_SESSION missing');
 	await goto(`/app/history/${encodeURIComponent(target)}`); await waitFor(`document.querySelector('[role="alert"]') || document.body.innerText.includes('FORBIDDEN')`, 60000); const detailText = await ev('document.body.innerText'); await shot('owner_b_forbidden');

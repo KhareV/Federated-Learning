@@ -7,7 +7,7 @@
 	import type { FederationView } from '$lib/product/federation/live-model';
 	import { buildSnapshots } from '$lib/product/observatory/replay.svelte';
 	import type { StudioRun } from '$lib/product/studio/types';
-	import { clientIdsFor, runDataSource } from '$lib/product/federation/data-source';
+	import { clientIdsOfRun, runDataSource } from '$lib/product/federation/data-source';
 	import ProcessStepper from '$lib/components/product/federation/ProcessStepper.svelte';
 	import RoundProgress from '$lib/components/product/federation/RoundProgress.svelte';
 	import ClientGrid from '$lib/components/product/federation/ClientGrid.svelte';
@@ -38,14 +38,23 @@
 	function stopPlay() { playing = false; if (timer) { clearInterval(timer); timer = null; } }
 	async function load() {
 		stopPlay(); socket?.close(); socket = null; snapshots = []; raw = []; error = null; index = 0;
-		selectedClient = clientIdsFor(runDataSource(runId, runs.find((r) => r.run_id === runId)?.engine))[0];
+		const picked = runs.find((r) => r.run_id === runId);
+		selectedClient = clientIdsOfRun(runDataSource(runId, picked?.engine), picked?.client_ids)[0];
 		if (!runId) { status = 'IDLE'; return; }
 		status = 'COLLECTING';
 		socket = new LiveSocket({
 			url: federationSocketUrl(runId, location),
+			getToken: store.authState.mode === 'CLERK' ? () => store.auth.getSessionToken() : undefined,       // the journal socket is owner-scoped: without the Clerk token the server refuses it (4401), which looked like a disconnect
 			handlers: {
 				onReset: () => { raw = []; },
-				onMessage: (data) => { try { raw.push(typeof data === 'string' ? JSON.parse(data) : null); } catch { raw.push(null); } },
+				onMessage: (data) => {
+					let parsed: { event_type?: string } | null = null;
+					try { parsed = typeof data === 'string' ? JSON.parse(data) : null; } catch { parsed = null; }
+					raw.push(parsed);
+					// The server closes the journal only after every evaluation and export has settled, which can be minutes after training completed. The terminal event IS the end of the
+					// training journal, so replay starts there instead of waiting for the socket to close (a long-idle socket was being reported as a disconnect).
+					if (status === 'COLLECTING' && (parsed?.event_type === 'federation.completed' || parsed?.event_type === 'federation.error')) { socket?.close(); socket = null; build(); }
+				},
 				onStatus: (s) => { if (s === 'CLOSED_NORMAL') build(); else if (s === 'DISCONNECTED') { status = 'FAILED'; error = 'The journal stream disconnected before replay data was complete; no events are invented.'; } }
 			}
 		});
@@ -72,7 +81,7 @@
 	<label class="scrub">Event {index + 1} of {snapshots.length} <input type="range" min="0" max={snapshots.length - 1} bind:value={index} aria-valuetext={`event ${index + 1} of ${snapshots.length}`} /></label>
 	<p class="dim" data-testid="fed-replay-event">Latest journal entry: {view.timeline[view.timeline.length - 1]?.kind ?? '—'} — {view.timeline[view.timeline.length - 1]?.summary ?? ''}</p></section>
 <section aria-label="Process" data-testid="fed-replay-state"><ProcessStepper {view} replay={true} /><div class="gap"></div><RoundProgress {view} plannedRounds={planned} />
-	<h2>Clients at this event</h2><ClientGrid live={view.clients} round={view.currentRound} replay={true} ownerBoundClientId={null} selected={selectedClient} onSelect={(id) => (selectedClient = id)} runDone={view.runStatus === 'COMPLETED'} {dataSource} />
+	<h2>Clients at this event</h2><ClientGrid live={view.clients} round={view.currentRound} replay={true} clientIds={run?.client_ids} ownerBoundClientId={null} selected={selectedClient} onSelect={(id) => (selectedClient = id)} runDone={view.runStatus === 'COMPLETED'} {dataSource} />
 	<h2>Candidate</h2><CandidateLifecycle {view} replay={true} /></section>
 <p class="dim">Rejected updates are shown only if they appear in the journal. Rejection scenarios exercised in frozen engineering evidence (stale, duplicate, wrong-base, unknown-client) are not animated here unless they occurred in this run.</p>
 {/if}

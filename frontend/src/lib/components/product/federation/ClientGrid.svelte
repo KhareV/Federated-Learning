@@ -3,12 +3,12 @@
 	import type { ClientState } from '$lib/product/federation/types';
 	import type { ClientView } from '$lib/product/federation/live-model';
 	import { participationRole } from '$lib/product/federation/participation';
-	import { clientShortName, SOURCE_COPY, clientIdsFor, type RunDataSource } from '$lib/product/federation/data-source';
+	import { clientShortName, SOURCE_COPY, clientIdsOfRun, isRecordedClient, type RunDataSource } from '$lib/product/federation/data-source';
 	import { nodeState, NODE_LABEL, NODE_MARK } from '$lib/product/federation/presentation';
 	// ownerBoundClientId is DISPLAY-ONLY (UFL-LITE-002): null/undefined keeps the existing presentation exactly.
 	// UI-ENH-001: the same eight cards are laid out as a client network around the coordinator on wide screens and as a plain grid on narrow ones (one DOM, CSS-only switch).
-	let { live, round = 0, replay = false, ownerBoundClientId = null, selected = null, onSelect = undefined, runDone = false, dataSource = 'SYNTHETIC' }: { live: ClientView[]; round?: number; replay?: boolean; ownerBoundClientId?: string | null; selected?: string | null; onSelect?: (id: string) => void; runDone?: boolean; dataSource?: RunDataSource } = $props();
-	const ids = $derived(clientIdsFor(dataSource));
+	let { live, round = 0, replay = false, ownerBoundClientId = null, selected = null, onSelect = undefined, runDone = false, dataSource = 'SYNTHETIC', clientIds = undefined }: { live: ClientView[]; round?: number; replay?: boolean; ownerBoundClientId?: string | null; selected?: string | null; onSelect?: (id: string) => void; runDone?: boolean; dataSource?: RunDataSource; clientIds?: readonly string[] } = $props();
+	const ids = $derived(clientIdsOfRun(dataSource, clientIds));
 	const copy = $derived(SOURCE_COPY[dataSource]);
 	const byId = $derived(Object.fromEntries(live.map((c) => [c.clientId, c])));
 	const state = (id: string): ClientState => byId[id]?.state ?? 'IDLE';
@@ -26,8 +26,8 @@
 			{@const p = pos(i)}
 			<li class={`c s-${state(id).toLowerCase()} n-${ns.toLowerCase()}${role === 'AUTHENTICATED_OWNER' ? ' owner' : ''}${selected === id ? ' sel' : ''}`} style={`left: ${p.x}%; top: ${p.y}%`} data-client={id} data-state={state(id)} data-role={role ?? undefined}>
 				<button type="button" class="node" aria-pressed={selected === id} aria-label={`Show details for ${id}`} onclick={() => onSelect?.(id)}>
-					{#if role === 'AUTHENTICATED_OWNER'}<span class="mine" data-testid="owner-card-label">★ MY EDGE CLIENT</span>{:else if role === 'SYNTHETIC_PEER'}<span class="peer" data-testid="peer-label">SYNTHETIC PEER</span>{:else if dataSource === 'HARDWARE'}<span class="mine" data-testid="hardware-card-label">★ YOUR RECORDED WINDOWS</span>{/if}
-					{#if dataSource === 'HARDWARE'}<b title={id}>{clientShortName(id)}</b>{:else}<b>{id}</b>{/if}<span class="st"><span aria-hidden="true">{NODE_MARK[ns]}</span> {replay ? 'REPLAYED EVENT: ' : ''}{NODE_LABEL[ns]}<span class="raw"> ({CLIENT_LABEL[state(id)]})</span></span>
+					{#if role === 'AUTHENTICATED_OWNER'}<span class="mine" data-testid="owner-card-label">★ MY EDGE CLIENT</span>{:else if role === 'SYNTHETIC_PEER'}<span class="peer" data-testid="peer-label">SYNTHETIC PEER</span>{:else if dataSource === 'HARDWARE' && !isRecordedClient(id)}<span class="peer" data-testid="hardware-peer-label">SYNTHETIC COHORT PEER</span>{:else if dataSource === 'HARDWARE'}<span class="mine" data-testid="hardware-card-label">★ YOUR RECORDED WINDOWS</span>{/if}
+					{#if dataSource === 'HARDWARE' && isRecordedClient(id)}<b title={id}>{clientShortName(id)}</b>{:else}<b>{id}</b>{/if}<span class="st"><span aria-hidden="true">{NODE_MARK[ns]}</span> {replay ? 'REPLAYED EVENT: ' : ''}{NODE_LABEL[ns]}<span class="raw"> ({CLIENT_LABEL[state(id)]})</span></span>
 					{#if role === 'AUTHENTICATED_OWNER'}<small class="own" data-testid="owner-binding-note">TRAINING DATA: SYNTHETIC ENGINEERING FIXTURE · NOT YOUR PHYSIOLOGY</small>{/if}
 					<small>local examples: {byId[id]?.localExamples ?? '--'}</small>
 					<small>milestone: {milestone(id)}</small>

@@ -41,6 +41,7 @@ class HardwareJob:
     initialisation: str
     warm_info: dict[str, Any] | None
     created_at: str
+    client_ids: tuple[str, ...] = CLIENT_IDS       # the logical clients of this run (eight recorded blocks, or one recorded client + seven synthetic peers for the pretrained-V2 family)
     status: str = "RUNNING"                       # RUNNING | COMPLETED | FAILED
     phase: str = "TRAINING"
     current_round: int = 0
@@ -79,7 +80,7 @@ class HardwareRunJobs:
             exported = (self.demo.root / run_id / "export" / "export_manifest.json").exists()
             self.jobs[run_id] = HardwareJob(
                 run_id=run_id, owner=data["owner"], rounds=int(data["rounds_planned"]), algorithm=data["algorithm"], secagg_mode=data["secagg_mode"],
-                initialisation=data["model"]["initialisation"], warm_info=data["model"].get("base_audit") if data["model"]["initialisation"] == "MODEL_V2_FINAL" else data["model"].get("warm_start"), created_at=data["created_at"], status=status,
+                initialisation=data["model"]["initialisation"], warm_info=data["model"].get("base_audit") if data["model"]["initialisation"] == "MODEL_V2_FINAL" else data["model"].get("warm_start"), created_at=data["created_at"], client_ids=tuple(data.get("client_ids") or CLIENT_IDS), status=status,
                 phase="DONE" if status == "COMPLETED" else "FAILED", current_round=len(data["rounds"]), failure=failure, journal=journal,
                 export_status="READY" if exported else ("NOT_STARTED" if status == "COMPLETED" else "NOT_STARTED"))
 
@@ -110,11 +111,11 @@ class HardwareRunJobs:
         run_id = ctx["run_id"]
         ctx["state_sink"] = self.state_sink
         job = HardwareJob(run_id=run_id, owner=owner, rounds=ctx["rounds"], algorithm=ctx["algorithm"], secagg_mode=ctx["secagg_mode"], initialisation=ctx["initialisation"],
-                          warm_info=ctx["warm_info"], created_at=_now())
+                          warm_info=ctx["warm_info"], created_at=_now(), client_ids=tuple(ctx.get("client_ids") or CLIENT_IDS))
         job.journal = FederationEventJournal(run_id)
         emitter = FederationEmitter(run_id, lambda: time.time_ns() // 1000, [job.journal.append, lambda e: self.events.append_event(run_id, e)], 0)
         job.translator = Fl10EventTranslator(
-            emitter, lambda fn: loop.call_soon_threadsafe(fn), planned_rounds=job.rounds, client_ids=CLIENT_IDS, local_examples=dict(ctx["examples"]),
+            emitter, lambda fn: loop.call_soon_threadsafe(fn), planned_rounds=job.rounds, client_ids=job.client_ids, local_examples=dict(ctx["examples"]),
             run_type=RunType.LIVE_RUN, algorithm=Algorithm(job.algorithm), secagg_mode=AggregationMode(job.secagg_mode))
         directory = self.demo.root / run_id
         directory.mkdir(parents=True, exist_ok=True)
@@ -176,7 +177,7 @@ class HardwareRunJobs:
         return {
             "run_id": job.run_id, "run_length": job.rounds, "engine": ENGINE, "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode,
             "source_mode": "RECORDED_HARDWARE", "status": job.status, "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds,
-            "client_ids": list(CLIENT_IDS), "candidate": None, "failure": job.failure,
+            "client_ids": list(job.client_ids), "candidate": None, "failure": job.failure,
             "label": f"{job.rounds}-round recorded-hardware run" + (" — warm start" if job.initialisation == "WARM_START" else " — pretrained V2" if job.initialisation == "MODEL_V2_FINAL" else ""),
             "base_model": self._base_model(job),
             "source_label": "RECORDED HARDWARE (this account)", "replay_of": None,

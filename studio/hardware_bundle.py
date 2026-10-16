@@ -98,7 +98,7 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
     for row in run["rounds"]:
         r = int(row["round"])
         examples_total = sum(int(c["examples"]) for c in row["clients"].values())
-        for client in CLIENT_IDS:
+        for client in (run.get("client_ids") or CLIENT_IDS):
             diag = row["clients"][client]
             client_rounds.append({
                 "run_id": run["run_id"], "round": r, "client_id": client, "acceptance_status": "ACCEPTED",
@@ -128,7 +128,7 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
     run_block = {
         "run_id": run["run_id"], "mode": MODE, "status": status, "planned_rounds": n, "rounds_committed": len(rounds), "started_at": started, "finished_at": finished,
         "settings": ({"local_objective": "BCE (+ FedProx proximal term)" if run["algorithm"] == "FEDPROX" else "BCE", "optimizer_label": "AdamW (reset every local epoch), one local epoch", "local_phrase": "for one local epoch",
-                      "monitoring_text": "recorded telemetry session(s) -> resampled to 360 Hz -> PREPROC_V1 10 s windows (VALID only) -> 8 logical clients (contiguous blocks)",
+                      "monitoring_text": "recorded telemetry session(s) -> resampled onto the V2 source grid -> PREPROC_V1 10 s windows (VALID only) -> ONE recorded client, federated with seven canonical synthetic peers",
                       "model": "MODEL_V2_FINAL", "features": [], "window_seconds": 10.0} if v2 else
                      {"local_objective": "BCE (+ FedProx proximal term)" if run["algorithm"] == "FEDPROX" else "BCE", "optimizer_label": "SGD, full-batch, 2 local steps", "local_phrase": "for two full-batch local steps",
                       "monitoring_text": "recorded telemetry session(s) -> 1 s windows -> 8 logical clients (contiguous blocks)",
@@ -143,7 +143,7 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
         "initialisation": {"model_id": run["model"]["initialisation"], "warm_start": run["model"].get("warm_start"), **({"base_audit": run["model"].get("base_audit")} if v2 else {})},
     }
     cohort = [
-        {"client_id": client, "participant_id": client, "session_id": ", ".join(run["source_session_ids"]), "dataset_sha256": info["feature_sha256"],
+        {"client_id": client, "participant_id": client, "session_id": info.get("session_id") or ", ".join(run["source_session_ids"]), "dataset_sha256": info["feature_sha256"],
          "counts": {"windows_emitted": info["samples"], "trainable": info["samples"], "DEGRADED": 0, "UNUSABLE": 0,
                     "synthetic_positive": info["label_counts"]["1"], "synthetic_negative": info["label_counts"]["0"]}}
         for client, info in dataset["clients"].items()
@@ -156,7 +156,7 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
             "uncertainty": None, "threshold": 0.5, "metric_definitions": {}, "probability_histogram": {"bins": fl10_metrics.HIST_BINS},
             "interpretation_boundaries": ([
                 "Windows are real recorded telemetry resampled from ~20 Hz to 360 Hz (linear interpolation between real readings) under an UNVERIFIED ADC scaling assumption; MODEL_V2_FINAL was validated on MIT-BIH ECG, not on this signal chain.",
-                "Labels are deterministic and SYNTHETIC (assigned for the demonstration); the metrics measure agreement with those assigned labels only.",
+                "The recorded client's labels are deterministic and SYNTHETIC (assigned for the demonstration); the seven peers are the canonical synthetic cohort with their own synthetic event-window labels. The metrics measure agreement with the assigned labels on the recorded holdout only.",
                 "The holdout is a time-purged block of the same recording sessions, so it is a diagnostic, not independent evidence.",
                 "There is no clinical, diagnostic or scientific claim.",
             ] if v2 else [

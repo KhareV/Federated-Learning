@@ -8,6 +8,10 @@ export function runDataSource(runId: string | null | undefined, engine?: string 
 	return engine === 'HARDWARE_DEMO' || (runId ?? '').startsWith('HDFLRUN-') ? 'HARDWARE' : 'SYNTHETIC';
 }
 export const clientIdsFor = (source: RunDataSource): string[] => (source === 'HARDWARE' ? HARDWARE_CLIENT_IDS : SYNTHETIC_CLIENT_IDS);
+/** The eight logical clients of THIS run: its descriptor's own list when it has one (a pretrained-V2 hardware run is one recorded client plus seven synthetic peers), else the namespace default. */
+export const clientIdsOfRun = (source: RunDataSource, runClientIds?: readonly string[] | null): string[] => (runClientIds && runClientIds.length === 8 ? [...runClientIds] : clientIdsFor(source));
+/** A client that holds YOUR recorded windows (as opposed to a synthetic peer). */
+export const isRecordedClient = (clientId: string): boolean => clientId.startsWith('RECORDED_DEMO_CLIENT_');
 
 /** Short, human name for a logical client: SIM_FL_SITE_03 -> "Site 03", RECORDED_DEMO_CLIENT_03 -> "Client 03". */
 export function clientShortName(clientId: string): string {

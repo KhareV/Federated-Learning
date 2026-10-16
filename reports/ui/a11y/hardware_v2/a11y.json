@@ -3029,27 +3029,41 @@
    "route": "/app/federation/clients",
    "viewport": "laptop",
    "semantics": {
-    "smallHtmlText": 0,
-    "smallHtmlTextBreakdown": [],
+    "smallHtmlText": 25,
+    "smallHtmlTextBreakdown": [
+     [
+      "span@10px",
+      16
+     ],
+     [
+      "summary@10px",
+      8
+     ],
+     [
+      "div@10px",
+      1
+     ]
+    ],
     "chartTabStopsMax": 0,
     "chartTabStopsTotal": 0,
     "chartsWithPoints": 0,
     "chartPointsFocusable": 0,
     "lang": "en",
-    "title": "",
+    "title": "Federation clients | NHM",
     "h1": 1,
     "headingOutline": [
-     1
+     1,
+     2
     ],
     "headingSkips": [],
     "emptyHeadings": 0,
     "landmarks": {
      "main": 1,
-     "nav": 0,
-     "banner": 0,
+     "nav": 1,
+     "banner": 2,
      "contentinfo": 0
     },
-    "skipLink": false,
+    "skipLink": true,
     "svgCharts": 0,
     "svgNoName": [],
     "tables": 0,
@@ -3057,11 +3071,11 @@
     "thNoScope": 0,
     "controls": 0,
     "controlsNoLabel": [],
-    "interactive": 0,
+    "interactive": 27,
     "unnamedInteractive": [],
     "genericLinkText": 0,
     "regions": 0,
-    "liveRegions": 2,
+    "liveRegions": 1,
     "positiveTabindex": 0,
     "scrollRegionsNoName": 0,
     "duplicateIds": 0,

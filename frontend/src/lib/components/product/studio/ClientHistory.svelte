@@ -1,11 +1,11 @@
 <script lang="ts">
 	// One client across all committed rounds (from the run's client-round table) and the diagnostic-holdout participants that share its site condition, for the selected round.
 	import type { StudioStore } from '$lib/product/studio/store.svelte';
-	import { clientIdsFor } from '$lib/product/federation/data-source';
+	import { clientIdsOfRun } from '$lib/product/federation/data-source';
 	import { runContext, isHardwareContext } from '$lib/product/federation/run-context';
 	let { studio }: { studio: StudioStore } = $props();
 	const hardware = $derived(isHardwareContext(runContext(studio.run, studio.run?.run_id)));
-	const CLIENTS = $derived(clientIdsFor(hardware ? 'HARDWARE' : 'SYNTHETIC'));
+	const CLIENTS = $derived(clientIdsOfRun(hardware ? 'HARDWARE' : 'SYNTHETIC', studio.run?.client_ids));
 	const client = $derived(studio.selectedClientId && CLIENTS.includes(studio.selectedClientId) ? studio.selectedClientId : CLIENTS[0]);
 	const t3 = $derived(studio.tables?.tables['FL10_TAB03'] ?? null);
 	const t5 = $derived(studio.tables?.tables['FL10_TAB05'] ?? null);

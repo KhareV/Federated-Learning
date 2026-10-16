@@ -26,7 +26,7 @@
 	import { useFederation } from '$lib/product/federation/state.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import { ownerBoundClientId } from '$lib/product/federation/participation';
-	import { SOURCE_COPY } from '$lib/product/federation/data-source';
+	import { SOURCE_COPY, isRecordedClient } from '$lib/product/federation/data-source';
 	import { runContext, isHardwareContext } from '$lib/product/federation/run-context';
 	import { algorithmName } from '$lib/product/federation/presentation';
 	const fed = useFederation();
@@ -68,7 +68,8 @@
 	const identity = $derived(selectedId ? fed.clients.find((c) => c.client_id === selectedId) : undefined);
 	const mine = $derived(ownerBound ? (v.clients.find((c) => c.clientId === ownerBound) ?? null) : null);
 	const runDone = $derived(v.runStatus === 'COMPLETED');
-	const totalWindows = $derived(v.clients.reduce((n, c) => n + (c.localExamples ?? 0), 0));
+	const totalWindows = $derived(v.clients.filter((c) => isRecordedClient(c.clientId)).reduce((n, c) => n + (c.localExamples ?? 0), 0));      // only clients that hold YOUR windows (a V2 hardware run's peers are synthetic)
+	const runClientIds = $derived(studio.run?.run_id === (fed.run?.run_id ?? v.runId) ? studio.run?.client_ids : undefined);
 	const lastDigest = $derived([...shown.rounds].reverse().find((r) => r.stateDigest)?.stateDigest ?? null);
 </script>
 <svelte:head><title>Live federation | NHM</title></svelte:head>
@@ -102,7 +103,7 @@
 <span id="sec-network"></span>
 <Panel eyebrow="CLIENT NETWORK" title={ownerBound ? `Federated participants (round ${shownRound || '--'})` : `${copy.network} (round ${shownRound || '--'})`} note={copy.networkNote}>
 	{#if ownerBound}<p class="dim" data-testid="participants-note">1 authenticated owner-bound client · 7 synthetic peers · ALL TRAINING DATA IN THIS DEMO IS SYNTHETIC ENGINEERING DATA and does not represent the authenticated user's physiology.</p>{/if}
-	<ClientGrid live={shown.clients} round={shownRound} {replay} {dataSource} ownerBoundClientId={ownerBound} selected={selectedId} onSelect={(id) => studio.selectClient(id)} runDone={historical ? false : runDone} />
+	<ClientGrid live={shown.clients} round={shownRound} {replay} {dataSource} clientIds={runClientIds} ownerBoundClientId={ownerBound} selected={selectedId} onSelect={(id) => studio.selectClient(id)} runDone={historical ? false : runDone} />
 	<p class="dim">Click a client to see what it is doing. Training milestones are shown exactly as reported (started / completed); nothing is interpolated.</p>
 	{#if ownerBound}
 		<div class="mine" data-testid="my-participation">
@@ -118,9 +119,9 @@
 	{#if hardware}
 		<div class="mine" data-testid="hardware-participation">
 			<b>YOUR RECORDED DATA IN THIS RUN</b>
-			<p><b data-testid="hw-total-windows">{totalWindows || '--'}</b> {hardwareV2 ? 'recorded 10 s V2 windows (resampled, quality-VALID only)' : 'recorded one-second windows'}, split into eight contiguous blocks (every window belongs to exactly one logical client).</p>
+			<p><b data-testid="hw-total-windows">{totalWindows || '--'}</b> {hardwareV2 ? 'recorded 10 s V2 windows (resampled, quality-VALID only) on your one recorded client; the other seven clients are canonical synthetic peers.' : 'recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client).'}</p>
 			<p>Raw recorded windows sent to the federation coordinator: <b data-testid="hw-raw-sent">0</b> · only model updates are shared.</p>
-			<TechnicalEvidence label="WHAT IS REAL AND WHAT IS SYNTHETIC"><p>{hardwareV2 ? 'The windows come from your own recorded MongoDB telemetry, resampled from the low-rate telemetry onto the V2 source grid under an unverified ADC-scaling assumption, then graded by the unchanged quality gate. MODEL_V2_FINAL was validated on MIT-BIH ECG, not on this signal chain. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine.' : 'The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the model is a small tabular classifier, not MODEL_V2_FINAL.'}</p></TechnicalEvidence>
+			<TechnicalEvidence label="WHAT IS REAL AND WHAT IS SYNTHETIC"><p>{hardwareV2 ? 'The windows come from your own recorded MongoDB telemetry, resampled from the low-rate telemetry onto the V2 source grid under an unverified ADC-scaling assumption, then graded by the unchanged quality gate. MODEL_V2_FINAL was validated on MIT-BIH ECG, not on this signal chain. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the seven peers keep the cohort\'s synthetic event-window labels, your recorded client has assigned ones.' : 'The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the model is a small tabular classifier, not MODEL_V2_FINAL.'}</p></TechnicalEvidence>
 		</div>
 	{/if}
 	{#if selectedId}<ClientDetailPanel clientId={selectedId} client={selectedClient} ownerBound={selectedId === ownerBound} {plannedRounds} {replay} {identity} {dataSource} modelLabel={hardwareV2 ? 'MODEL_V2 architecture (pretrained V2 weights)' : undefined} />{/if}

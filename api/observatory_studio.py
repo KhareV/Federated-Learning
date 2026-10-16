@@ -182,15 +182,23 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         if rounds == 3 and body.get("initialisation") != v2_init.INIT_V2_FINAL:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, f"3-round runs from the untrained start use the frozen product contract: POST {FEDERATION_RUNS}")
         mode_names = {v: k for k, v in MODES.items()}
-        if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation", "monitored_site"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
+        if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation", "monitored_site", "signal_session_id"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "run_length must be 10 (or 3 with initialisation MODEL_V2_FINAL) and source_mode CANONICAL_SYNTHETIC or LIVE_MONITORED_SITE_00")
         if body.get("algorithm", "FEDAVG") not in ("FEDAVG", "FEDPROX") or body.get("secagg_mode", "PLAIN") not in ("PLAIN", "SECAGG_SHADOW") or body.get("run_type", "LIVE_RUN") != "LIVE_RUN":
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "unsupported Studio algorithm, aggregation mode, or run type")
         resolved = await identity_resolver(request)
         store.upsert_user(resolved)
+        signal_session = None
+        if body.get("signal_session_id") is not None:
+            from studio import session_source
+
+            try:
+                signal_session = await asyncio.to_thread(session_source.resolve, store, user, str(body["signal_session_id"]))
+            except session_source.SessionSourceError as error:
+                raise _as_product_error(StudioRunError(error.code, str(error.detail))) from error
         try:
             job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")], body.get("initialisation", "FL_INIT_V2"), rounds,
-                                                body.get("algorithm", "FEDAVG"), body.get("secagg_mode", "PLAIN"), body.get("monitored_site", 0))
+                                                body.get("algorithm", "FEDAVG"), body.get("secagg_mode", "PLAIN"), body.get("monitored_site", 0), signal_session)
             job = await service.runner10.start(user, job.run_id)
         except StudioRunError as error:
             raise _as_product_error(error) from error

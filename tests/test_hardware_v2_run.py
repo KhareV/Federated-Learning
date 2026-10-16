@@ -70,18 +70,24 @@ def test_ecg_like_recording_yields_valid_v2_windows_and_a_time_purged_split(prep
     _, _, _, ctx = prepared
     d = ctx["dataset"]
     assert d["training_windows"] >= hardware_v2.MIN_TRAIN_WINDOWS and d["holdout_windows"] >= hardware_v2.MIN_HOLDOUT_WINDOWS
-    assert len(ctx["datasets"]) == 8 and all(len(x.labels) >= 1 for x in ctx["datasets"])
+    # ONE recorded client + the seven canonical synthetic peers, unchanged
+    assert [x.client_id for x in ctx["datasets"]] == ["RECORDED_DEMO_CLIENT_00", *[f"SIM_FL_SITE_{i:02d}" for i in range(1, 8)]] == ctx["client_ids"]
+    from federated.wearable_fl_runner_v1 import build_cohort
+
+    canonical = build_cohort()[1]
+    assert [x.dataset_sha256 for x in ctx["datasets"][1:]] == [c.dataset_sha256 for c in canonical[1:]]
+    assert ctx["datasets"][0].counts["trainable"] == d["training_windows"] <= hardware_v2.MAX_CLIENT_WINDOWS == 93
     assert ctx["initialisation"] == "MODEL_V2_FINAL" and ctx["engine"] == "HARDWARE_V2"
-    assert d["label_assignment"]["status"] == "SYNTHETIC_ASSIGNED_FOR_DEMO"
+    assert d["label_assignment"]["status"] == "SYNTHETIC_ASSIGNED_FOR_DEMO" and d["topology"] == "ONE_RECORDED_CLIENT_PLUS_SEVEN_SYNTHETIC_PEERS"
+    assert {k: v["kind"] for k, v in d["clients"].items()} == {"RECORDED_DEMO_CLIENT_00": "RECORDED", **{f"SIM_FL_SITE_{i:02d}": "SYNTHETIC_PEER" for i in range(1, 8)}}
     # no training window overlaps a holdout window of the same session (10 s windows, right-edge timestamps)
     by_id = {w["window_id"]: w for w in d["window_manifest"]}
     for session in ("HW-V2-A", "HW-V2-B"):
         hold = [w["timestamp_us"] for w in by_id.values() if w["session_id"] == session and w["split"] == "HOLDOUT"]
         train = [w["timestamp_us"] for w in by_id.values() if w["session_id"] == session and w["split"] == "TRAIN"]
         assert hold and train and max(train) <= min(hold) - hardware_v2.WINDOW_US
-    # every training window belongs to exactly one client
-    owners = [w["client_id"] for w in by_id.values() if w["split"] == "TRAIN"]
-    assert None not in owners and sorted(set(owners)) == sorted(set(ctx["examples"]))
+    # every training window belongs to the recorded client
+    assert {w["client_id"] for w in by_id.values() if w["split"] == "TRAIN"} == {"RECORDED_DEMO_CLIENT_00"}
 
 
 def test_preparation_is_deterministic_for_the_same_seed(prepared):
@@ -136,6 +142,8 @@ def test_v2_hardware_run_trains_for_real_and_feeds_every_builder(tmp_path, algor
         assert job.status == "COMPLETED", job.failure
         d = jobs.describe(job)
         assert d["base_model"]["model_id"] == "MODEL_V2_FINAL" and d["source_mode"] == "RECORDED_HARDWARE" and d["algorithm"] == algorithm
+        assert d["client_ids"] == ["RECORDED_DEMO_CLIENT_00", *[f"SIM_FL_SITE_{i:02d}" for i in range(1, 8)]]
+        assert {e.payload.client_id for e in job.journal.events if e.event_type == "client.status"} == set(d["client_ids"])
         kinds = [e.event_type for e in job.journal.events]
         assert kinds[0] == "federation.status" and kinds[-1] == "federation.completed" and kinds.count("client.update_ready") == 24
         if secagg == "SECAGG_SHADOW":
@@ -169,3 +177,11 @@ def test_a_restart_reloads_a_v2_hardware_run_with_its_base_model(tmp_path):
         d = reloaded.describe(again)
         assert d["base_model"]["model_id"] == "MODEL_V2_FINAL" and d["base_model"]["state_sha256"] and d["status"] == "COMPLETED"
     asyncio.run(go())
+
+
+def test_the_recorded_client_is_capped_at_the_canonical_cohorts_largest_client_so_the_frozen_shadow_still_applies(tmp_path):
+    ids = tuple(f"HW-V2-{c}" for c in "ABCDEFGH")
+    _, demo = store_with_sessions(tmp_path, sessions=ids)
+    ctx = demo.prepare("user-a", session_ids=list(ids), rounds=3, algorithm="FEDAVG", secagg_mode="SECAGG_SHADOW", label_seed=3, initialisation="MODEL_V2_FINAL")
+    assert ctx["dataset"]["training_windows_available"] > 93 and ctx["datasets"][0].counts["trainable"] == 93 == ctx["dataset"]["training_windows"]
+    assert max(len(d.labels) for d in ctx["datasets"]) == 93        # the frozen SecAgg+ preflight's input rule (largest client == 93)

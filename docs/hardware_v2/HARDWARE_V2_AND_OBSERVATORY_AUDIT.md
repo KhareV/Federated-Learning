@@ -12,7 +12,7 @@ Research prototype. Not a clinical claim. Physical ESP32 and the deployed Render
 | 3 | Session replay / trace for hardware sessions | Window trace (`/app/observatory?hw=`) and session replay (`/app/observatory/replay?session=`) work on recorded hardware. |
 | 4 | Run the earlier simulated tests to show hardware still works | See §5. |
 | 5 | Find what else is software-only and extend it | See §4. |
-| 6 | Source-mode dropdown over several synthetic monitoring sessions | Implemented as a choice of the **monitored cohort site (SITE_00…SITE_07)**; see §3.3 for why an arbitrary user session cannot be used. |
+| 6 | Source mode: use the signal of the user's monitoring session | Implemented: a completed History session becomes one client's data (synthetic-assigned labels, as for hardware); the live-monitored cohort site (SITE_00…SITE_07) stays as the other signal choice. |
 
 ## 2. Defect and extension ledger
 
@@ -26,6 +26,7 @@ The tabular hardware demo model cannot take V2 weights, so a V2 hardware run is 
 * windows: recorded readings are resampled onto the V2 source grid (linear interpolation between real readings only, documented ADC-scaling **assumption**) and the **unchanged** `PREPROC_V1` runtime builds and grades 10 s windows; only windows graded VALID and complete train (the synthetic cohort's `is_trainable` rule);
 * split: per-session chronological holdout block, **time-purged** so no training window overlaps a holdout window (asserted in tests);
 * labels: deterministic, balanced, seeded and **synthetic** (recorded telemetry has no ground truth);
+* topology: **one recorded client plus the seven canonical synthetic peers** (SIM_FL_SITE_01..07, the unchanged cohort datasets). This replaces the earlier eight-way split of one recording, which read as eight fake devices. The recorded client uses at most 93 windows (the canonical cohort's largest client), which keeps the frozen round-1 SecAgg+ shadow applicable as it is for a synthetic run; the earlier `shadow_runner` addition to `fl10/runner.py` was therefore removed. The recorded client's labels are synthetic-assigned, the peers keep their event-window labels, and the UI names both;
 * training: the unchanged FL10 runner (`Coordinator`, `train_local_epoch_v2`, FedAvg/FedProx) starting from the digest-verified `MODEL_V2_FINAL` state; R0 equals frozen V2;
 * round-1 SecAgg+ shadow: the frozen shadow only accepts the canonical cohort's example counts, so `fl10.runner.run_training` gained one **additive, default-off** parameter `shadow_runner`; hardware runs pass the generic Flower SecAgg+ harness of the recorded-hardware demo. Authoritative aggregation stays plain;
 * evaluation: isolated V2 scorer on the holdout block (diagnostic only); the committed states are also mirrored to the existing **unseen-cohort generalisation lane** (frozen V2 baseline, paired participant-cluster intervals);
@@ -38,11 +39,17 @@ The tabular hardware demo model cannot take V2 weights, so a V2 hardware run is 
 ### 2.4 Live-monitored site choice
 `studio/site_monitor.py` generalises the frozen `monitor_site00` to any cohort site without editing it (site 0 delegates to the original function). Sites 3 and 4 reproduce their canonical datasets (parity measured in tests).
 
+### 2.5 History monitoring session as the signal of one client
+`studio/session_source.py` regenerates a COMPLETED simulated session's windows from its frozen scenario and seed (the Observatory relies on the same determinism; no new monitoring session, no new inference) and makes the VALID, complete windows the local data of the chosen client; the other seven stay canonical. A scenario session has no scheduled engineering events, so labels are **synthetic-assigned** (deterministic, balanced), exactly as for recorded hardware, and every surface says so. Tested for all five frozen scenarios, with owner / state / forgery refusals, and end to end through the real runner (buffer trace verified) and in a real browser.
+
+### 2.6 Federation journal replay
+The page waited for the server to close the journal, which only happens after evaluations and export settle (minutes after a run is `COMPLETED`), and reported the idle socket as a disconnect. Replay now starts at the terminal event and authenticates with the Clerk token like the live page.
+
 ## 3. Scientific and design boundaries
 
 1. **V2 on hardware is experimental and not valid**: validated on MIT-BIH ECG, not on this signal chain; the ADC scaling is unverified; labels are synthetic; the holdout is a diagnostic of the same recording, not an independent test.
 2. The unseen-cohort lane scores the **synthetic** G1 cohort; for a hardware run it answers "did fine-tuning on this recording move V2 on a standard unseen task", nothing more.
-3. **Why not any monitoring session as federation source:** federation labels come from `SimulationLabelAdapterV1(profile)`, which needs the event times of an event-bearing cohort profile. A scenario session from the Monitor page has no such event times, so feeding it to training would invent labels. The choice is therefore among the eight canonical sites, each with its own faults/context profile.
+3. A History session carries no event truth, so its labels are synthetic-assigned (as for recorded hardware); metrics on them are not comparable to the cohort's event task.
 4. Hardware replay "policy state changes" are derived from consecutive per-window results; there is no persisted monitoring state machine for hardware, and the page says so.
 
 ## 4. Site-wide audit: software-only features and what was done
@@ -65,19 +72,19 @@ The tabular hardware demo model cannot take V2 weights, so a V2 hardware run is 
 
 | Gate | Result |
 |---|---|
-| Complete Python suite (`PYTHONPATH=src:.`) | **3461 passed, 1 skipped, 0 failed** |
-| Frontend tests | **407 passed** (3 skipped) |
+| Complete Python suite (`PYTHONPATH=src:.`) | **3472 passed, 1 skipped, 0 failed** |
+| Frontend tests | **413 passed** (3 skipped) |
 | `svelte-check` | 0 errors |
-| Production build | succeeded |
-| Direct-load HTTP gate | PASS |
+| Production build, direct-load HTTP gate | pass |
 | `git diff --check` | clean |
-| Browser a11y audit (28 routes × 4 viewports, hardware source off) | 112 entries, 0 tool errors; 0 outside-viewport / obscured / hidden / no-ring stops; 0 heading skips, unnamed controls, unnamed tables, `th` without scope; the only console items are the Clerk development-keys notice and the intentional 404 for an unknown session id |
-| Successor lock `NHM_HARDWARE_V2_OBSERVATORY_001` | PASS, chains from `NHM_UI_RESIDUAL_REPAIR_001` (4cd4462); 198 bound files; predecessor locks untouched |
+| Browser a11y audit (28 routes × 4 viewports) | 112 entries, 0 tool errors; 0 outside-viewport / obscured / hidden / no-ring stops; 0 semantic defects |
+| Successor locks | `NHM_HARDWARE_V2_OBSERVATORY_001` (bf335bb, pushed) and `NHM_SESSION_SOURCE_MIXED_TOPOLOGY_001` (chains from it); predecessor locks untouched |
 
-Hardware browser evidence (real Chrome, real Clerk test users, ESP32 emulator → local replica → `nhm_rehearsal`; all `VERIFIED_LOCAL_RENDER_REPLICA`):
+Real-browser gates (Chrome, Clerk test users; hardware gates use the ESP32 emulator → local replica → `nhm_rehearsal`, `VERIFIED_LOCAL_RENDER_REPLICA`):
 
-* **New** `--hardware-v2` gate: 20/20 checks PASS (`reports/hardware/live_page_hardware/v2_hardware/hardware_v2_verdict.json`): two retention-capped recordings; History/Monitor replay links; Observatory replay with every usable window scored and zero console/HTTP errors; Observatory trace; V2 preview; a real FedProx + SecAgg-shadow pretrained-V2 run (R0 identical to frozen V2, SHADOW_VERIFIED); generalisation lane 4/4 rounds scored; federation journal replay of the hardware run with eight `RECORDED_DEMO_CLIENT_xx`.
-* **Earlier hardware tests re-run on the new code** (`reports/hardware/post_v2_regression/`): rehearsal smoke 1/1, rehearsal faults 18/18, Scenario A/B + owner probe PASS, run-switch PASS, away lifecycle PASS, UI tour (116 route/viewport visits) completed with a hardware run.
+* `--hardware-v2`: PASS (one recorded client + seven peers; replay, trace, V2 preview, FedProx + SecAgg shadow with the frozen shadow, generalisation 4/4, federation replay of the run).
+* `--history-source`: PASS (a completed simulated session from History as the signal of SITE_02; synthetic-assigned labels named; overview and federation replay open).
+* Earlier hardware tests re-run on the final code: Scenario A/B + owner probe, run-switch, away lifecycle all PASS; earlier on the V2 build: rehearsal smoke 1/1, faults 18/18, UI tour 116 route visits.
 
 ## 6. Limitations
 

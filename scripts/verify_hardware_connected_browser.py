@@ -67,6 +67,7 @@ def main() -> int:
     parser.add_argument("--run-switch", action="store_true", help="real-browser run-switch check: hardware <-> recorded synthetic evidence via the selector, back/forward and reload")
     parser.add_argument("--ui-tour", action="store_true", help="seed a hardware session + run, then tour every route at desktop and phone width")
     parser.add_argument("--soak-seconds", type=int, default=0, help="run only the long browser soak for this many seconds")
+    parser.add_argument("--history-source", action="store_true", help="a completed simulated monitoring session from History as the signal of one federation client")
     parser.add_argument("--hardware-v2", action="store_true", help="pretrained-V2 recorded-hardware path: two recordings, Observatory replay + trace, V2 run, generalisation tab, federation journal replay")
     args = parser.parse_args()
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
@@ -134,6 +135,28 @@ def main() -> int:
             (out / "run_switch_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
             print(json.dumps(verdict))
             return 0 if verdict["status"] == "PASS" else 1
+        if args.history_source:
+            running, origin = stack(env, workspace, python)
+            try:
+                hs = drive("history-source", origin, Path(args.users_file), out / "history_source.json", out / "hs_shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            live = hs["live"]
+            checks = {
+                "run_completed": "COMPLETED" in live["status_line"],
+                "badge_names_history_session_and_site": live["badge"] == "HISTORY SESSION · SITE_02",
+                "eight_synthetic_namespace_clients": len(live["clients"]) == 8 and all(c.startswith("SIM_FL_SITE_") for c in live["clients"]),
+                "session_signal_is_the_chosen_clients_data": any(c == "SIM_FL_SITE_02" and n not in (None, "--", "93") for c, n in live["local_examples"]),
+                "labels_are_named_synthetic_assigned": "synthetic-assigned" in hs["source_note"],
+                "overview_names_history_session": "HISTORY MONITORING SESSION SIGNAL" in hs["overview"] and "Monitoring sessions executed: 0" in hs["overview"],
+                "metrics_shown": bool(live["metric_auprc"]) and "NOT YET" not in live["metric_auprc"],
+                "no_alerts": not live["alerts"] and not hs["replay"]["alerts"],
+                "federation_replay_opens": hs["replay"]["controls"],
+            }
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "history_source", "checks": checks, "run_id": hs["run_id"], "session_id": hs["session_id"]}
+            (out / "history_source_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
         if args.hardware_v2:
             if not ws_mode:
                 raise SystemExit("--hardware-v2 needs --producer ws (the AD8232-amplitude emulator pattern through the local replica)")
@@ -159,13 +182,14 @@ def main() -> int:
                 "single_session_preview_reported": "training" in single["text"] and "holdout" in single["text"] and (single["start_disabled"] == ("NOT ENOUGH" in single["text"])),
                 "two_sessions_accepted": "ENOUGH USABLE" in both["text"] and "NOT ENOUGH" not in both["text"] and not both["start_disabled"],
                 "run_completed": "COMPLETED" in live["status_line"],
-                "run_is_recorded_hardware_v2": live["badge"] == "RECORDED HARDWARE" and "pretrained V2" in live["label"] and len(live["clients"]) == 8 and all(c.startswith("RECORDED_DEMO_CLIENT_") for c in live["clients"]),
+                "run_is_recorded_hardware_v2": live["badge"] == "RECORDED HARDWARE" and "pretrained V2" in live["label"] and len(live["clients"]) == 8 and live["clients"][0] == "RECORDED_DEMO_CLIENT_00" and all(c.startswith("SIM_FL_SITE_") for c in live["clients"][1:]),
+                "one_recorded_card_and_seven_peers": live["recorded_cards"] == 1 and live["peer_cards"] == 7 and "seven" in live["hw_participation"],
                 "run_metrics_shown": bool(live["metric_auprc"]) and "NOT YET" not in live["metric_auprc"],
                 "secagg_shadow_reported": "VERIF" in live["secagg"].upper() or "SHADOW" in live["secagg"].upper(),
                 "generalisation_available": bool(gen["progress"]) and not gen["unavailable"] and "MODEL_V2_FINAL" in gen["base_model"],
                 "generalisation_all_rounds_scored": rounds_scored.split("/")[0] == rounds_scored.split("/")[-1] if "/" in rounds_scored else False,
                 "r0_identical_to_frozen_v2": gen["r0_identical"],
-                "federation_replay_lists_hardware_run": "RECORDED HARDWARE" in (v2["fed_replay"]["option"] or "") and len(v2["fed_replay"]["clients"]) == 8 and all(c.startswith("RECORDED_DEMO_CLIENT_") for c in v2["fed_replay"]["clients"]),
+                "federation_replay_lists_hardware_run": "RECORDED HARDWARE" in (v2["fed_replay"]["option"] or "") and len(v2["fed_replay"]["clients"]) == 8 and v2["fed_replay"]["clients"][0] == "RECORDED_DEMO_CLIENT_00" and all(c.startswith("SIM_FL_SITE_") for c in v2["fed_replay"]["clients"][1:]),
                 "federation_replay_round_jumps": len(v2["fed_replay"]["jumps"]) >= 2 and not v2["fed_replay"]["alerts"],
             }
             verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "hardware_v2", "checks": checks, "run_id": v2["run_id"], "sessions": v2["session_ids"],

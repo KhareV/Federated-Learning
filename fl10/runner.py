@@ -107,14 +107,11 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                  capture_batches: bool = True, progress: Callable[[dict[str, Any]], None] | None = None, git_commit: str = "UNKNOWN", protocol_sha256: str = "UNKNOWN",
                  tamper_before_round: Callable[[int, dict[str, np.ndarray]], dict[str, np.ndarray]] | None = None,
                  initial_state: dict[str, np.ndarray] | None = None, initialisation: dict[str, Any] | None = None,
-                 algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN", shadow_runner: Callable[[dict[str, np.ndarray], dict[str, dict[str, np.ndarray]], dict[str, int]], dict[str, Any]] | None = None) -> dict[str, Any]:
+                 algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN") -> dict[str, Any]:
     """Execute ``rounds`` genuine FedAvg rounds. Fails closed (raises, run marked incomplete) on any parity, digest, acceptance or finiteness violation.
 
     ``initial_state`` (additive, default None) starts the rounds from a verified pretrained state instead of ``FL_INIT_V2``. That is a separately identified mode: the frozen
-    FL_INIT_V2 reference (initial digest and prefix parity) does not apply to it, so those checks are skipped and the report carries ``initialisation`` instead.
-
-    ``shadow_runner`` (additive, default None = the frozen ``run_round1_shadow``, which is calibrated to the canonical cohort's example counts) lets a source whose client sizes differ (recorded
-    hardware) supply its own round-1 protected-aggregation shadow with ``(global_state, deltas, examples) -> report``. Authoritative aggregation stays plain either way."""
+    FL_INIT_V2 reference (initial digest and prefix parity) does not apply to it, so those checks are skipped and the report carries ``initialisation`` instead."""
     if algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
         raise Fl10Error("UNSUPPORTED_ALGORITHM_OR_AGGREGATION")
     mu = frozen_fedprox_mu() if algorithm == "FEDPROX" else None
@@ -220,7 +217,7 @@ def run_training(*, mode: str, run_id: str, out_dir: Path, datasets: list[LocalD
                 raise Fl10Error("INCOMPLETE_OR_UNEXPECTED_ACCEPTANCE", str(sorted(coord.accepted)))
             emit({"event": "UPDATES_ACCEPTED", "round": round_id, "accepted_clients": order, "accepted_updates": len(coord.accepted)})
             if round_id == 1 and secagg_mode == "SECAGG_SHADOW":
-                report["secagg_shadow"] = (shadow_runner or run_round1_shadow)(
+                report["secagg_shadow"] = run_round1_shadow(
                     state, coord.deltas,
                     {c: int(coord.accepted[c]["examples_seen"]) for c in order},
                 )

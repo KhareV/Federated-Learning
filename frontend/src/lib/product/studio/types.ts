@@ -40,6 +40,8 @@ export interface StudioRun {
 	source_mode: RunSourceMode;
 	/** Source mode LIVE_MONITORED_SITE_00 only: which canonical cohort site (0..7) was genuinely live-monitored (0 = SITE_00, the original behaviour). */
 	monitored_site?: number | null;
+	/** Source mode LIVE_MONITORED_SITE_00 only: the History monitoring session whose regenerated windows were that client's data (null = the site was monitored live). */
+	signal_session_id?: string | null;
 	status: 'CREATED' | 'RUNNING' | 'COMPLETED' | 'FAILED';
 	phase: string;
 	current_round: number;
@@ -153,7 +155,7 @@ export interface StudioOverview {
 	historical_exposed: string;
 }
 
-export interface StudioRunChoice { run_length: RunLength; source_mode: SourceMode; monitored_site?: number; initialisation?: Initialisation; algorithm?: 'FEDAVG' | 'FEDPROX'; secagg_mode?: 'PLAIN' | 'SECAGG_SHADOW' }
+export interface StudioRunChoice { run_length: RunLength; source_mode: SourceMode; monitored_site?: number; signal_session_id?: string; initialisation?: Initialisation; algorithm?: 'FEDAVG' | 'FEDPROX'; secagg_mode?: 'PLAIN' | 'SECAGG_SHADOW' }
 
 // ---- Generalisation lane (frozen V2 vs every federated round on the unseen G1 cohort) --------------------------------------------
 export interface GenRecord extends EvalRecord { subject: 'FL_ROUND' | 'FROZEN_V2_BASELINE' }

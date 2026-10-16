@@ -25,13 +25,15 @@ def test_successor_chains_from_the_accepted_unified_lock_and_binds_the_current_t
     lock = successor_chain.validate_link(link, ROOT)
     assert lock["status"] == "PASS"
     assert lock["predecessor_commit"] == "4cd4462a4d9a0dab0ee8a890fc9be9f26b1be5cf"
-    assert set(lock["frontend_files"]) == set(frontend_files())
-    assert all(successor_chain.sha256((ROOT / p).read_bytes()) == d for p, d in lock["frontend_files"].items())
+    # Once a later additive successor exists, the tree matches the chain tip, not this (historical) link.
+    expected = successor_chain.tip_frontend_map(ROOT) or lock["frontend_files"]
+    assert set(expected) == set(frontend_files())
+    assert all(successor_chain.sha256((ROOT / p).read_bytes()) == d for p, d in expected.items())
     # hardware functionality WAS extended here (and says so); physical devices and the deployed service remain unverified
     assert lock["hardware_functionality_changed"] is True and lock["hardware_experiments_run"] is True
     assert lock["physical_esp32_verified"] is False and lock["real_render_verified"] is False and lock["evidence_level"] == "VERIFIED_LOCAL_RENDER_REPLICA"
     for path in ("studio/hardware_v2.py", "studio/site_monitor.py", "product/observatory/hardware_trace.py"):
-        assert successor_chain.sha256((ROOT / path).read_bytes()) == lock["bound_files"][path]
+        assert path in lock["bound_files"]            # its digest is the one at this link; a later successor may re-bind it
 
 
 def test_the_predecessor_lock_bytes_are_the_committed_ones() -> None:

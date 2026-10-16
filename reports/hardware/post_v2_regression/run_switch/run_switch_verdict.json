@@ -5,12 +5,12 @@
   "status": "PASS",
   "steps": [
     {
-      "auprc": "AUPRC0.638889",
+      "auprc": "AUPRC0.411111",
       "badge": "RECORDED HARDWARE",
       "client_namespace": "RECORDED_DEMO_",
       "pass": true,
       "step": "open hardware",
-      "url_run": "HDFLRUN-B5AFEFF5FAAB"
+      "url_run": "HDFLRUN-1ABE7895D16E"
     },
     {
       "auprc": "AUPRC0.911570",
@@ -21,12 +21,12 @@
       "url_run": "recorded-A"
     },
     {
-      "auprc": "AUPRC0.638889",
+      "auprc": "AUPRC0.411111",
       "badge": "RECORDED HARDWARE",
       "client_namespace": "RECORDED_DEMO_",
       "pass": true,
       "step": "switch back to hardware (no reload)",
-      "url_run": "HDFLRUN-B5AFEFF5FAAB"
+      "url_run": "HDFLRUN-1ABE7895D16E"
     },
     {
       "auprc": "AUPRC0.911570",
@@ -61,20 +61,20 @@
       "url_run": "recorded-B"
     },
     {
-      "auprc": "AUPRC0.638889",
+      "auprc": "AUPRC0.411111",
       "badge": "RECORDED HARDWARE",
       "client_namespace": "RECORDED_DEMO_",
       "pass": true,
       "step": "switch to hardware, then reload",
-      "url_run": "HDFLRUN-B5AFEFF5FAAB"
+      "url_run": "HDFLRUN-1ABE7895D16E"
     },
     {
-      "auprc": "AUPRC0.638889",
+      "auprc": "AUPRC0.411111",
       "badge": "RECORDED HARDWARE",
       "client_namespace": "RECORDED_DEMO_",
       "pass": true,
       "step": "reload on hardware",
-      "url_run": "HDFLRUN-B5AFEFF5FAAB"
+      "url_run": "HDFLRUN-1ABE7895D16E"
     }
   ]
 }

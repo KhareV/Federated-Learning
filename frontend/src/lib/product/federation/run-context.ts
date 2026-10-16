@@ -10,7 +10,7 @@ export type ExecutionMode = 'LIVE_TRAINING' | 'EVENT_REPLAY' | 'RECORDED_EVIDENC
 /** Where the labels come from. */
 export type LabelProvenance = 'SYNTHETIC_ENGINEERING_EVENTS' | 'SYNTHETIC_ASSIGNED_FOR_DEMO' | 'UNKNOWN';
 export type ModelLineage = 'FL_INIT_V2' | 'MODEL_V2_FINAL' | 'HARDWARE_DEMO_FRESH' | 'HARDWARE_DEMO_WARM_START' | 'HARDWARE_V2_PRETRAINED' | 'UNKNOWN';
-export type ClientNamespace = 'SIM_FL_SITE' | 'RECORDED_DEMO_CLIENT' | 'UNKNOWN';
+export type ClientNamespace = 'SIM_FL_SITE' | 'RECORDED_DEMO_CLIENT' | 'RECORDED_CLIENT_PLUS_SIM_PEERS' | 'UNKNOWN';
 
 export interface Capability { available: boolean; reason: string | null }
 export interface RunContext {
@@ -68,18 +68,20 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 	const lineage: ModelLineage = hardware ? (modelId === 'MODEL_V2_FINAL' ? 'HARDWARE_V2_PRETRAINED' : warm ? 'HARDWARE_DEMO_WARM_START' : 'HARDWARE_DEMO_FRESH') : modelId === 'MODEL_V2_FINAL' ? 'MODEL_V2_FINAL' : modelId === 'FL_INIT_V2' ? 'FL_INIT_V2' : 'UNKNOWN';
 	const recorded = execution === 'RECORDED_EVIDENCE';
 	const live = execution === 'LIVE_TRAINING';
-	const badge = hardware ? 'RECORDED HARDWARE' : recorded ? 'RECORDED SYNTHETIC EVIDENCE' : execution === 'EVENT_REPLAY' ? 'REPLAY' : provenance === 'SIMULATED_MONITORED_SITE_00' ? `SIMULATED SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : 'SYNTHETIC COHORT';
+	const badge = hardware ? 'RECORDED HARDWARE' : recorded ? 'RECORDED SYNTHETIC EVIDENCE' : execution === 'EVENT_REPLAY' ? 'REPLAY' : provenance === 'SIMULATED_MONITORED_SITE_00' ? run.signal_session_id ? `HISTORY SESSION · SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : `SIMULATED SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : 'SYNTHETIC COHORT';
 	const dataSentence = hardware
 		? lineage === 'HARDWARE_V2_PRETRAINED'
-			? 'Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (only windows the quality gate grades VALID) with deterministic synthetic labels, split across eight logical clients on one machine.'
+			? 'Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (only windows the quality gate grades VALID) with deterministic synthetic labels on ONE recorded client, federated with seven canonical synthetic peers on one machine.'
 			: 'Your recorded telemetry windows (real features) with deterministic synthetic labels, split across eight logical clients on one machine.'
 		: provenance === 'SIMULATED_MONITORED_SITE_00'
-			? `A genuinely executed simulated monitoring stream feeds SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}; the other seven clients are synthetic. No real physiology.`
+			? run.signal_session_id
+				? `The signal of your own simulated monitoring session (regenerated from its frozen scenario) is the local data of SITE_${String(run.monitored_site ?? 0).padStart(2, '0')} with synthetic-assigned labels; the other seven clients are canonical synthetic. No real physiology.`
+				: `A genuinely executed simulated monitoring stream feeds SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}; the other seven clients are synthetic. No real physiology.`
 			: 'Synthetic engineering data on eight logical clients on one machine. No real physiology.';
 	return {
 		provisional: false, provenance, execution, lineage,
 		labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'SYNTHETIC_ENGINEERING_EVENTS',
-		clients: hardware ? 'RECORDED_DEMO_CLIENT' : 'SIM_FL_SITE',
+		clients: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? 'RECORDED_CLIENT_PLUS_SIM_PEERS' : 'RECORDED_DEMO_CLIENT') : 'SIM_FL_SITE',
 		badge, dataSentence,
 		capabilities: {
 			ownerBoundClient: !hardware && live ? yes() : no(hardware ? 'Every recorded-hardware client holds your own recorded windows; there is no single owner-bound client.' : 'Only a live run executes on behalf of the signed-in owner.'),

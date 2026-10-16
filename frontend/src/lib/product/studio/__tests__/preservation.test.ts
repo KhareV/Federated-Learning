@@ -39,6 +39,8 @@ describe.each([
 	});
 });
 
+// MIXED-TOPOLOGY PROVISION (reviewed, additive): ClientGrid takes the run's own client ids and, in a recorded-hardware run, tags/names only a recorded client as YOUR RECORDED WINDOWS (peers keep
+// the synthetic wording); ClientDetailPanel makes the same per-client distinction. A pure-hardware (eight recorded blocks) and a synthetic run render exactly as before.
 // HARDWARE-V2 PROVISION (reviewed, additive): ClientDetailPanel gained ONE optional `modelLabel` prop so a recorded-hardware run that fine-tunes the pretrained V2 network names its real model
 // (default unchanged: SOURCE_COPY wording). No markup, test id or style rule changed.
 // ACCESSIBILITY PROVISION (reviewed): RoundProgress states its true heading level to assistive technology (aria-level="3" on the existing <h4>; no markup, style or visual change).
@@ -47,8 +49,8 @@ describe.each([
 // and the reviewed bytes are pinned so any further drift fails here.
 const REVIEWED_HARDWARE_PROVISION: Record<string, string> = {
 	'frontend/src/lib/components/product/federation/RoundProgress.svelte': '212dbd720234531168ad3dff00dd624022c69837c7c2055b05fad0988936d2e1',
-	'frontend/src/lib/components/product/federation/ClientGrid.svelte': '573ec801e90e186dde585aa91903f121e93c0f0d3cf254c3a3d8209f160a5115',
-	'frontend/src/lib/components/product/federation/ClientDetailPanel.svelte': 'd3b11f22966d8063830302adbca31f93491764c497159fdb42525f326250e77f'
+	'frontend/src/lib/components/product/federation/ClientGrid.svelte': '8f03c577b7362ba874f451c55e3f2d37342263436e3d36bd81b177ca300b1a55',
+	'frontend/src/lib/components/product/federation/ClientDetailPanel.svelte': '0b374063e279c4e8ca4eeaf706282508a9f8428145739e284a2dd1858e9da14a'
 };
 describe('recorded-hardware provision keeps the original component design', () => {
 	it.each(Object.keys(REVIEWED_HARDWARE_PROVISION))('%s: original test ids and style rules are intact and the reviewed bytes are pinned', (file) => {

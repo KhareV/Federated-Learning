@@ -64,7 +64,7 @@
 	}
 </script>
 <form class="cfg" data-testid="hardware-demo-starter" onsubmit={(e) => { e.preventDefault(); if (canStart) void start(); }} aria-label={`Recorded hardware ${rounds}-round run configuration`}>
-	<p class="boundary" data-testid="hardware-demo-boundary">{v2 ? 'RECORDED HARDWARE · actual saved MongoDB telemetry windows (resampled, quality-gated) · deterministic SYNTHETIC labels · genuine federated fine-tuning of the pretrained V2 · no clinical meaning.' : 'RECORDED HARDWARE · actual saved MongoDB telemetry features · deterministic SYNTHETIC labels · genuine toy federated optimisation · no clinical meaning.'} Eight logical clients are partitions of one recording, not eight devices.</p>
+	<p class="boundary" data-testid="hardware-demo-boundary">{v2 ? 'RECORDED HARDWARE · actual saved MongoDB telemetry windows (resampled, quality-gated) · deterministic SYNTHETIC labels · genuine federated fine-tuning of the pretrained V2 (one recorded client + seven synthetic peers) · no clinical meaning.' : 'RECORDED HARDWARE · actual saved MongoDB telemetry features · deterministic SYNTHETIC labels · genuine toy federated optimisation · no clinical meaning.'} Eight logical clients are partitions of one recording, not eight devices.</p>
 	{#if !available}<p class="warn" role="status">Hardware telemetry is unavailable in this backend configuration.</p>
 	{:else}
 		<fieldset class="sessions" aria-label="Recorded sessions">
@@ -88,7 +88,7 @@
 				</select></label>
 			<p class="help" data-testid="hardware-demo-warm-note">{priorRuns.length ? 'R0 is the final global weights of that earlier recorded-hardware run, unchanged; the rounds then continue training on the sessions selected above. Normalisation is refitted on the new training windows.' : 'No earlier recorded-hardware run exists yet; run once from a fresh initialisation first.'}</p>
 		{:else if v2}
-			<p class="help" data-testid="hardware-demo-v2-note">R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged. {v2Model?.note ?? 'Your recorded windows are resampled onto the V2 source grid and graded by the unchanged quality gate; only VALID windows train.'} The model changes from the small tabular classifier to the V2 ECG network, so this is a different run family from the fresh and warm-start choices.</p>
+			<p class="help" data-testid="hardware-demo-v2-note">R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven canonical synthetic peers of the cohort. {v2Model?.note ?? 'Your recorded windows are resampled onto the V2 source grid and graded by the unchanged quality gate; only VALID windows train.'} The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.</p>
 			{#if selected.length === 0}<p class="help">Select at least one recorded session to see how many V2 windows it provides.</p>
 			{:else if previewing}<p class="help" role="status">Checking what the unchanged quality gate accepts…</p>
 			{:else if previewError}<p class="warn" role="alert" data-testid="hardware-v2-preview-error">{previewError}</p>
@@ -109,7 +109,7 @@
 		<label><span>Aggregation / protection mode</span><select bind:value={secagg} disabled={running} data-testid="hardware-demo-secagg"><option value="PLAIN">Plain aggregation</option><option value="SECAGG_SHADOW">Round-1 SecAgg+ shadow verification</option></select></label>
 		<p class="help">{secagg === 'SECAGG_SHADOW' ? 'ROUND-1 SECAGG+ SHADOW: a real protected aggregate is compared with the authoritative plain aggregate. It does not make the run private.' : 'Plain, sample-count-weighted aggregation.'}</p>
 		<label><span>Label seed</span><input type="number" min="0" max="2147483647" bind:value={seed} disabled={running} data-testid="hardware-demo-seed" /></label>
-		<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Model</dt><dd>{v2 ? 'MODEL_V2_FINAL (fine-tuned)' : 'HARDWARE_DEMO_MODEL_V1'}</dd></div><div><dt>Clients</dt><dd>8 logical</dd></div><div><dt>Rounds</dt><dd>{rounds}</dd></div><div><dt>Labels</dt><dd>SYNTHETIC</dd></div></dl>
+		<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Model</dt><dd>{v2 ? 'MODEL_V2_FINAL (fine-tuned)' : 'HARDWARE_DEMO_MODEL_V1'}</dd></div><div><dt>Clients</dt><dd>{v2 ? '1 recorded + 7 peers' : '8 logical'}</dd></div><div><dt>Rounds</dt><dd>{rounds}</dd></div><div><dt>Labels</dt><dd>SYNTHETIC</dd></div></dl>
 		<button type="submit" disabled={!canStart} data-testid="hardware-demo-start">{running ? 'Training…' : `Create and start ${rounds}-round recorded-hardware run`}</button>
 		{#if error}<p class="warn" role="alert">{error}</p>{/if}
 	{/if}
