@@ -64,7 +64,7 @@
 	}
 </script>
 <form class="cfg" data-testid="hardware-demo-starter" onsubmit={(e) => { e.preventDefault(); if (canStart) void start(); }} aria-label={`Recorded hardware ${rounds}-round run configuration`}>
-	<p class="boundary" data-testid="hardware-demo-boundary">{v2 ? 'RECORDED HARDWARE · actual saved MongoDB telemetry windows (resampled, quality-gated) · deterministic SYNTHETIC labels · genuine federated fine-tuning of the pretrained V2 (one recorded client + seven synthetic peers) · no clinical meaning.' : 'RECORDED HARDWARE · actual saved MongoDB telemetry features · deterministic SYNTHETIC labels · genuine toy federated optimisation · no clinical meaning.'} Eight logical clients are partitions of one recording, not eight devices.</p>
+	<p class="boundary" data-testid="hardware-demo-boundary">{v2 ? 'RECORDED HARDWARE · actual saved MongoDB telemetry windows (resampled, quality-gated) · deterministic SYNTHETIC labels · genuine federated fine-tuning of the pretrained V2 (one recorded client + seven synthetic peers) · no clinical meaning.' : 'RECORDED HARDWARE · actual saved MongoDB telemetry features · deterministic SYNTHETIC labels · genuine toy federated optimisation · no clinical meaning.'} {v2 ? 'The recorded client holds one recording, not a fleet of devices; its seven peers are synthetic.' : 'Eight logical clients are partitions of one recording, not eight devices.'}</p>
 	{#if !available}<p class="warn" role="status">Hardware telemetry is unavailable in this backend configuration.</p>
 	{:else}
 		<fieldset class="sessions" aria-label="Recorded sessions">

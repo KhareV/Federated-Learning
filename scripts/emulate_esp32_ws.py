@@ -15,7 +15,7 @@ production-compatible payload is unchanged.
 Signal values are engineering test patterns. They are not physiological ECG.
 
 Plan DSL (``--plan``), comma separated, executed in order:
-  run:S[:pattern]   transmit for S seconds (pattern: ecg|ecg_ad8232|sine|flat|leadoff|rail|steps)
+  run:S[:pattern]   transmit for S seconds (pattern: ecg|ecg_ad8232|sketch|sketch_real|sketch_highgain|sine|flat|leadoff|rail|steps)
   pause:S           stay connected, transmit nothing (device busy)
   drop:S            abrupt network loss for S seconds (TCP aborted, no close frame; the send loop keeps running, frames are
                     not handed; reconnect only after the network is back AND >= 5 s after the loss was noticed)
@@ -71,13 +71,60 @@ class Signal:
         self.t = 0.0
         self.bpm = 72.0
         self.spo2 = 97.0
+        self._mock_bpm = 76
+        self._mock_bpm_at = -10.0      # signal time of the last 2 s mock BPM refresh
+        self._sketch_spo2 = 0
+        self._phase, self._t_prev = 0.0, 0.0                 # sketch_real: beat phase and the signal time of the previous sample
+        self._motion_next, self._motion_until, self._motion_amp = self.rng.uniform(35.0, 60.0), -1.0, 0.0
 
     def step(self, dt: float) -> None:
         self.t += dt
         self.bpm = min(110.0, max(48.0, self.bpm + self.rng.uniform(-0.15, 0.15)))
         self.spo2 = min(100.0, max(90.0, self.spo2 + self.rng.uniform(-0.05, 0.05)))
 
+    def vitals(self, vitals: str, unavailable: bool) -> tuple[int, int]:
+        """(bpm, spo2) as the frame carries them. ``drift`` is the historical emulator behaviour; ``sketch`` reproduces the supplied firmware: BPM is MOCK ``random(72, 82)`` refreshed every 2 s
+        (never measured), SpO2 is ``110 - 25 * red/ir`` clipped to 100 and kept only when above 80 (a finger on the sensor), and both are 0 while no finger is present (``unavailable``)."""
+        if unavailable:
+            self._sketch_spo2 = 0
+            return 0, 0
+        if vitals != "sketch":
+            return int(round(self.bpm)), int(round(self.spo2))
+        if self.t - self._mock_bpm_at > 2.0:
+            self._mock_bpm, self._mock_bpm_at = self.rng.randint(72, 81), self.t
+        ratio = 0.53 + 0.02 * math.sin(2 * math.pi * self.t / 40.0) + self.rng.gauss(0.0, 0.010)      # slow physiological drift + sensor noise
+        estimated = min(100, int(110 - 25 * ratio))
+        if estimated > 80:
+            self._sketch_spo2 = estimated
+        return self._mock_bpm, self._sketch_spo2
+
+    def ecg_real(self, scale: float = 235.0) -> int:
+        """A hyper-realistic raw ADC reading of an AD8232 front end sampled by the sketch's loop (instantaneous ``analogRead``, no anti-alias filter):
+
+        * beats follow a heart rate with slow variability (LF 0.1 Hz) and respiratory sinus arrhythmia (0.25 Hz); P-QRS-T morphology with a ~15 ms QRS spread, R wave about +``scale`` counts;
+        * the module's output sits near mid-supply (about 1.5 V, i.e. ~1860 counts of a 12-bit/3.3 V ADC), with respiration (0.25 Hz) and slow drift on the baseline;
+        * 50 Hz mains pickup (aliased by the ~17 Hz sampling), ADC noise, and occasional 2-4 s motion bursts of large baseline excursion;
+        * clipped to the 12-bit range. The sampling instants are the emulator's real loop timing, so aliasing and irregular spacing are genuine."""
+        t = self.t
+        dt = max(0.0, t - self._t_prev)
+        self._t_prev = t
+        hr = 66.0 + 2.6 * math.sin(2 * math.pi * 0.10 * t) + 2.0 * math.sin(2 * math.pi * 0.25 * t + 1.0) + self.rng.gauss(0.0, 0.1)
+        self._phase = (self._phase + hr / 60.0 * dt) % 1.0
+        ph = self._phase
+        g = lambda centre, width: math.exp(-((ph - centre) ** 2) / (2 * width**2))  # noqa: E731
+        beat = 0.11 * g(0.18, 0.022) - 0.10 * g(0.283, 0.008) + 1.0 * g(0.300, 0.016) - 0.20 * g(0.322, 0.010) + 0.28 * g(0.52, 0.045)
+        base = 1860 + 38 * math.sin(2 * math.pi * 0.25 * t) + 55 * math.sin(2 * math.pi * 0.045 * t + 0.7)
+        if t >= self._motion_next:
+            self._motion_until, self._motion_next = t + self.rng.uniform(2.0, 4.0), t + self.rng.uniform(50.0, 90.0)
+            self._motion_amp = self.rng.uniform(250.0, 450.0)
+        if t < self._motion_until:
+            base += self._motion_amp * math.sin(2 * math.pi * 0.9 * t) + self.rng.gauss(0.0, 35.0)
+        value = base + scale * beat + 11 * math.sin(2 * math.pi * 50.0 * t) + self.rng.gauss(0.0, 5.5)
+        return max(0, min(4095, int(round(value))))
+
     def ecg(self, pattern: str) -> int:
+        if pattern == "sketch_real":
+            return self.ecg_real()
         if pattern == "leadoff":
             return 2048  # firmware placeholder while LO+ / LO- is high
         if pattern == "flat":
@@ -91,7 +138,8 @@ class Signal:
         phase = (self.t * self.bpm / 60.0) % 1.0  # ecg-like: baseline wander, QRS spike, T wave, noise
         # "ecg_ad8232": the same shape at an amplitude an AD8232 front end plausibly produces (R wave ~ +200 counts), which stays inside the
         # analysis runtime's +/-2.5 mV rail under the documented scaling; the default "ecg" keeps its large historical amplitude (it exceeds that rail).
-        scale = 0.3 if pattern == "ecg_ad8232" else 1.0
+        # "sketch" = the supplied firmware's front end modelled as ecg_ad8232 amplitude; "sketch_highgain" = the same board with an ~11x higher total gain (some AD8232 breakouts): it rails the ADC.
+        scale = 3.3 if pattern == "sketch_highgain" else 0.3 if pattern in ("ecg_ad8232", "sketch") else 1.0
         value = 2048 + 40 * scale * math.sin(2 * math.pi * 0.25 * self.t)
         value += scale * (700 * math.exp(-((phase - 0.30) ** 2) / (2 * 0.012**2)) - 180 * math.exp(-((phase - 0.27) ** 2) / (2 * 0.01**2)))
         value += scale * 160 * math.exp(-((phase - 0.55) ** 2) / (2 * 0.05**2)) + self.rng.gauss(0, 9 * scale)
@@ -255,8 +303,7 @@ class Emulator:
             self.signal.step(max(0.001, time.monotonic() - now))
 
     async def emit(self, pattern: str, unavailable: bool) -> None:
-        bpm = 0 if unavailable else int(round(self.signal.bpm))
-        spo2 = 0 if unavailable else int(round(self.signal.spo2))
+        bpm, spo2 = self.signal.vitals(self.args.vitals, unavailable)
         await self.send_text(frame(bpm, spo2, self.signal.ecg(pattern)))
 
     async def execute(self, plan: list[tuple[str, float, str]]) -> None:
@@ -266,7 +313,7 @@ class Emulator:
             if kind == "run":
                 await self.transmit_for(amount, pattern)
             elif kind == "unavail":
-                await self.transmit_for(amount, "ecg", unavailable=True)
+                await self.transmit_for(amount, pattern, unavailable=True)
             elif kind == "burst":
                 await self.transmit_for(amount, pattern, burst=True)
             elif kind == "pause":
@@ -346,7 +393,8 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--rate", type=float, default=20.0, help="nominal Hz for --timing fixed (and for translating --count)")
     p.add_argument("--jitter-ms", type=float, default=4.0)
     p.add_argument("--seed", type=int, default=20261015)
-    p.add_argument("--pattern", default="ecg", choices=["ecg", "ecg_ad8232", "sine", "flat", "leadoff", "rail", "steps"])
+    p.add_argument("--pattern", default="ecg", choices=["ecg", "ecg_ad8232", "sketch", "sketch_real", "sketch_highgain", "sine", "flat", "leadoff", "rail", "steps"])
+    p.add_argument("--vitals", choices=["drift", "sketch"], default="drift", help="sketch: mock BPM random(72,82) every 2 s and ratio-based SpO2, as in the supplied firmware")
     p.add_argument("--plan", help="step DSL, see module docstring")
     # flags compatible with scripts.publish_hardware_test
     p.add_argument("--count", type=int)

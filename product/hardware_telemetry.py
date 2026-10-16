@@ -284,6 +284,10 @@ class HardwareSessions:
         with self.lock:
             row = self._row(sid, owner)
             if row["status"] == "ACTIVE":
+                # Final catch-up: everything already STORED in MongoDB when Stop is pressed belongs to the session even if the last 800 ms poll has not seen it yet. A source outage here
+                # never blocks Stop (poll reports it and ingests nothing); anything stored after this point is excluded, exactly as before.
+                self.poll(sid, owner)
+                row = self._row(sid, owner)
                 with self.store._lock, self.store._connection:
                     self.store._connection.execute(
                         "UPDATE hardware_sessions SET status='STOPPED', stopped_at=? WHERE id=?",

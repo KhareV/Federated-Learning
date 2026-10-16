@@ -72,7 +72,7 @@ The page waited for the server to close the journal, which only happens after ev
 
 | Gate | Result |
 |---|---|
-| Complete Python suite (`PYTHONPATH=src:.`) | **3472 passed, 1 skipped, 0 failed** |
+| Complete Python suite (`PYTHONPATH=src:.`) | **3480 passed, 1 skipped, 0 failed** |
 | Frontend tests | **413 passed** (3 skipped) |
 | `svelte-check` | 0 errors |
 | Production build, direct-load HTTP gate | pass |
@@ -85,6 +85,18 @@ Real-browser gates (Chrome, Clerk test users; hardware gates use the ESP32 emula
 * `--hardware-v2`: PASS (one recorded client + seven peers; replay, trace, V2 preview, FedProx + SecAgg shadow with the frozen shadow, generalisation 4/4, federation replay of the run).
 * `--history-source`: PASS (a completed simulated session from History as the signal of SITE_02; synthetic-assigned labels named; overview and federation replay open).
 * Earlier hardware tests re-run on the final code: Scenario A/B + owner probe, run-switch, away lifecycle all PASS; earlier on the V2 build: rehearsal smoke 1/1, faults 18/18, UI tour 116 route visits.
+
+## 5b. Simulated end-to-end hardware journey (sketch-faithful)
+
+The supplied firmware sketch was used to model the device: compact `{"bpm","spo2","ecg"}` frames at about 17 Hz, **mock BPM `random(72, 82)` refreshed every 2 s (never measured)**, SpO₂ from `110 − 25·red/ir` kept only above 80 (zeros without a finger), ECG from an AD8232 front end (flat 2048 placeholder with the leads off). `scripts/emulate_esp32_ws.py` gained `--vitals sketch` and the `sketch` / `sketch_highgain` patterns.
+Chain: emulator → local Render replica → Atlas rehearsal database `nhm_rehearsal` → NHM backend → real Chrome with real Clerk test users (`python -m scripts.verify_hardware_connected_browser --producer ws --journey`; verdict `reports/hardware/simulated_journey/journey_verdict.json`). **23/23 checks PASS** on three recordings (two ~127 s sessions with a 6 s finger removal and a 6 s leads-off stretch; one high-gain session):
+
+* live monitoring: records arrive and plot; BPM is 72–81 (the mock); SpO₂ 90–100 %; finger removal shows "Unavailable" (not 0); leads-off shows the 2048 placeholder; Stop keeps the count; the Mongo-side count equals the replica's inserts for every recording;
+* History links; Observatory session replay of a recording (18 of 21 windows scored, the 3 windows over the flat leads-off stretch rejected with no invented result) and window trace (a rejected window has no model result);
+* tabular hardware FL: FedAvg and FedProx + SecAgg shadow complete, eight recorded clients;
+* pretrained-V2 FL: the **high-gain recording is refused with the CLIPPING reason**; the two good recordings train as one recorded client + seven peers, with metrics and generalisation 4/4.
+
+Defect found and fixed: **Stop did not do a final catch-up poll**, so documents already stored in Atlas just before Stop could be lost to the 800 ms poll cadence (and a back-to-back next session could pick up the previous recording's late tail). `HardwareSessions.stop` now ingests what is already stored before closing the session; documents stored afterwards are still excluded (test added).
 
 ## 6. Limitations
 

@@ -9758,86 +9758,39 @@
    "route": "/app/federation/live?run=recorded-A",
    "viewport": "phone",
    "semantics": {
-    "smallHtmlText": 46,
-    "smallHtmlTextBreakdown": [
-     [
-      "span@10px",
-      22
-     ],
-     [
-      "p@10px",
-      9
-     ],
-     [
-      "button@10px",
-      8
-     ],
-     [
-      "summary@10px",
-      4
-     ],
-     [
-      "h3@10px",
-      2
-     ],
-     [
-      "div@10px",
-      1
-     ]
-    ],
-    "chartTabStopsMax": 1,
-    "chartTabStopsTotal": 4,
-    "chartsWithPoints": 4,
-    "chartPointsFocusable": 129,
+    "smallHtmlText": 0,
+    "smallHtmlTextBreakdown": [],
+    "chartTabStopsMax": 0,
+    "chartTabStopsTotal": 0,
+    "chartsWithPoints": 0,
+    "chartPointsFocusable": 0,
     "lang": "en",
-    "title": "Live federation | NHM",
+    "title": "",
     "h1": 1,
     "headingOutline": [
-     1,
-     2,
-     2,
-     3,
-     3,
-     2,
-     2,
-     2,
-     3,
-     4,
-     4,
-     4,
-     4,
-     4,
-     4,
-     2,
-     2,
-     3,
-     2,
-     2,
-     2,
-     2,
-     2
+     1
     ],
     "headingSkips": [],
     "emptyHeadings": 0,
     "landmarks": {
      "main": 1,
-     "nav": 2,
-     "banner": 13,
+     "nav": 0,
+     "banner": 0,
      "contentinfo": 0
     },
-    "skipLink": true,
-    "svgCharts": 4,
+    "skipLink": false,
+    "svgCharts": 0,
     "svgNoName": [],
-    "tables": 10,
+    "tables": 0,
     "tablesNoCaption": 0,
     "thNoScope": 0,
-    "controls": 1,
+    "controls": 0,
     "controlsNoLabel": [],
-    "interactive": 262,
+    "interactive": 0,
     "unnamedInteractive": [],
     "genericLinkText": 0,
-    "regions": 9,
-    "liveRegions": 11,
+    "regions": 0,
+    "liveRegions": 2,
     "positiveTabindex": 0,
     "scrollRegionsNoName": 0,
     "duplicateIds": 0,
@@ -9845,7 +9798,7 @@
    },
    "httpStatus": 200,
    "focus": {
-    "stops": 90,
+    "stops": 59,
     "noRing": 0,
     "hidden": [],
     "outside": [],
@@ -9863,30 +9816,6 @@
       "name": "AUPRC, x 0, value 0.628671 (activate to select t",
       "w": 3,
       "h": 3
-     },
-     {
-      "tag": "circle",
-      "name": "F1, x 0, value 0 (activate to select this round)",
-      "w": 3,
-      "h": 3
-     },
-     {
-      "tag": "circle",
-      "name": "BCE (log loss), x 0, value 0.650140 (activate to",
-      "w": 3,
-      "h": 3
-     },
-     {
-      "tag": "circle",
-      "name": "weighted mean training loss, x 1, value 0.714599",
-      "w": 3,
-      "h": 3
-     },
-     {
-      "tag": "summary",
-      "name": "Interpretation limits",
-      "w": 294,
-      "h": 20
      }
     ],
     "first": [

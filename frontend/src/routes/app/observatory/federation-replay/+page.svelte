@@ -29,7 +29,7 @@
 	const dataSource = $derived(runDataSource(runId, run?.engine));
 	const planned = $derived(view?.plannedRounds || run?.planned_rounds || 3);
 	const jumpRounds = $derived([...new Set([1, Math.ceil(planned / 2), planned])].filter((n) => n >= 1 && n <= planned));
-	const sourceName = (r: StudioRun) => (r.source_mode === 'RECORDED_HARDWARE' ? 'RECORDED HARDWARE' : r.source_mode === 'LIVE_MONITORED_SITE_00' ? `LIVE-MONITORED SITE_${String(r.monitored_site ?? 0).padStart(2, '0')}` : r.origin === 'RECORDED' ? 'RECORDED SYNTHETIC' : 'SYNTHETIC');
+	const sourceName = (r: StudioRun) => (r.source_mode === 'RECORDED_HARDWARE' ? 'RECORDED HARDWARE' : r.source_mode === 'LIVE_MONITORED_SITE_00' ? `${r.signal_session_id ? 'HISTORY SESSION · SITE_' : 'LIVE-MONITORED SITE_'}${String(r.monitored_site ?? 0).padStart(2, '0')}` : r.origin === 'RECORDED' ? 'RECORDED SYNTHETIC' : 'SYNTHETIC');
 	function build() {
 		const out = buildSnapshots(runId, raw);
 		if (out === null) { error = 'The event journal failed integrity validation; replay is not shown as trustworthy.'; status = 'FAILED'; return; }

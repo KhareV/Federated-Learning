@@ -127,23 +127,39 @@ describe('round-count selector and run starter', () => {
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
 		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00', monitored_site: 3 });
 	});
-	it('the signal of the live-monitored client can be a completed monitoring session from History (synthetic-assigned labels are stated)', async () => {
+	it('MY MONITORING SESSION is a Training-data choice (not a source-mode detail): completed sessions only, fills SITE_00, labels stated', async () => {
 		const store = getProductStore();
-		store.sessions = [{ session_id: 'SESS-DONE', state: 'COMPLETED', simulation_provenance: { scenario_id: 'MIXED_MONITORING_SESSION', seed: 1, simulation_version: 'v' } }, { session_id: 'SESS-RUN', state: 'RUNNING', simulation_provenance: { scenario_id: 'NORMAL_MONITORING', seed: 2, simulation_version: 'v' } }] as never;
+		store.sessions = [{ session_id: 'SESS-DONE-0123456789', state: 'COMPLETED', created_at_us: 1_700_000_000_000_000, simulation_provenance: { scenario_id: 'MIXED_MONITORING_SESSION', seed: 1, simulation_version: 'v' } }, { session_id: 'SESS-RUN', state: 'RUNNING', simulation_provenance: { scenario_id: 'NORMAL_MONITORING', seed: 2, simulation_version: 'v' } }] as never;
 		vi.spyOn(store, 'loadSessions').mockResolvedValue(undefined);
 		const sites = Array.from({ length: 8 }, (_, i) => ({ index: i, client_id: `SIM_FL_SITE_0${i}`, label: `SITE_0${i}`, profile: 'clean signal' }));
 		const onStartTen = vi.fn();
 		render(StudioRunStarter, { props: { capabilities: { ...CAPS, ten_round: { ...CAPS.ten_round, monitored_sites: sites } } as StudioCapabilities, onStartThree: vi.fn(), onStartTen } });
 		await fireEvent.click(screen.getByTestId('rounds-10'));
-		await fireEvent.change(screen.getByTestId('cfg10-source'), { target: { value: 'LIVE_MONITORED_SITE_00' } });
-		expect(screen.queryByTestId('cfg10-session')).toBeNull();                            // default: monitor the cohort site now
-		await fireEvent.change(screen.getByTestId('cfg10-signal'), { target: { value: 'HISTORY' } });
+		expect(screen.getByTestId('data-source-session').getAttribute('aria-checked')).toBe('false');
+		expect(screen.queryByTestId('cfg10-session')).toBeNull();
+		await fireEvent.click(screen.getByTestId('data-source-session'));
+		expect(screen.getByTestId('data-source-session').getAttribute('aria-checked')).toBe('true');
 		const pick = screen.getByTestId('cfg10-session') as HTMLSelectElement;
-		expect([...pick.options].map((o) => o.value)).toEqual(['SESS-DONE']);                // only COMPLETED sessions of a frozen scenario
-		expect(screen.getByTestId('cfg10-source-note').textContent).toMatch(/synthetic-assigned.*recorded hardware/);
-		await fireEvent.change(screen.getByTestId('cfg10-site'), { target: { value: '4' } });
+		expect([...pick.options].map((o) => o.value)).toEqual(['SESS-DONE-0123456789']);       // only COMPLETED sessions of a frozen scenario
+		expect(pick.options[0].textContent).toContain('MIXED_MONITORING_SESSION');            // scenario first, shortened id, date: readable, not a bare id
+		expect(screen.queryByTestId('cfg10-source')).toBeNull();                               // no source-mode / signal / replaced-client detail for this choice
+		expect(screen.queryByTestId('cfg10-signal')).toBeNull();
+		expect(screen.queryByTestId('cfg10-site')).toBeNull();
+		expect(screen.getByTestId('cfg10-source-note').textContent).toMatch(/SITE_00.*synthetic-assigned.*recorded hardware/);
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
-		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00', monitored_site: 4, signal_session_id: 'SESS-DONE' });
+		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00', signal_session_id: 'SESS-DONE-0123456789' });
+	});
+	it('a monitoring session cannot be combined with the untrained 3-round product form (it says why and blocks)', async () => {
+		const store = getProductStore();
+		store.sessions = [{ session_id: 'SESS-DONE', state: 'COMPLETED', simulation_provenance: { scenario_id: 'NORMAL_MONITORING', seed: 1, simulation_version: 'v' } }] as never;
+		vi.spyOn(store, 'loadSessions').mockResolvedValue(undefined);
+		const caps = { ...CAPS, ten_round: { ...CAPS.ten_round, initialisations: [{ id: 'FL_INIT_V2', label: 'u', default: false }, { id: 'MODEL_V2_FINAL', label: 'p', default: true }], rounds_by_initialisation: { FL_INIT_V2: [10], MODEL_V2_FINAL: [3, 10] }, default_initialisation: 'MODEL_V2_FINAL' } } as StudioCapabilities;
+		render(StudioRunStarter, { props: { capabilities: caps, onStartThree: vi.fn(), onStartTen: vi.fn() } });
+		await fireEvent.click(screen.getByTestId('data-source-session'));
+		expect(screen.queryByTestId('session-needs-v2')).toBeNull();                          // pretrained start, 3 rounds: supported
+		await fireEvent.change(screen.getByTestId('cfg10-init'), { target: { value: 'FL_INIT_V2' } });
+		expect(screen.getByTestId('session-needs-v2')).toBeTruthy();
+		expect((screen.getByTestId('cfg10-submit') as HTMLButtonElement).disabled).toBe(true);
 	});
 	it('enables and transmits FedProx plus the verified round-one shadow only when the backend advertises both', async () => {
 		const onStartTen = vi.fn();

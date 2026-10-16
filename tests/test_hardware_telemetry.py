@@ -109,3 +109,41 @@ def test_owner_scoped_rest_lifecycle(tmp_path):
     assert client.get(f"/product/v1/hardware/sessions/{sid}/poll").json()["record_count"] == 1
     assert client.get(f"/product/v1/hardware/sessions/{sid}").json()["readings"][0]["ecg"] == 2001
     store.close()
+
+
+def test_stop_counts_documents_already_stored_but_not_yet_polled_and_excludes_later_ones(tmp_path):
+    """Pressing Stop does a final catch-up: documents stored before Stop are never lost to the 800 ms poll cadence; documents stored after Stop are not counted."""
+    app = FastAPI()
+    store = CapstoneSqliteStore(tmp_path / "hw.sqlite3")
+
+    async def identity(_request):
+        return AuthIdentity(user_id="u", auth_provider=AuthProviderType.CLERK, auth_session_id="s", demo_mode=False)
+
+    install_hardware_routes(app, store, identity, {"NHM_HARDWARE_MONGO_ENABLED": "true", "NHM_HARDWARE_MONGO_URI": "mongodb://127.0.0.1:27017", "NHM_HARDWARE_MONGO_DATABASE": "health_db",
+                                                   "NHM_HARDWARE_MONGO_COLLECTION": "nhm_integration_test"})
+
+    class Source:
+        collection_name = "nhm_integration_test"
+
+        def __init__(self):
+            self.docs = []
+
+        def high_water(self):
+            return self.docs[-1]["_id"] if self.docs else None
+
+        def after(self, mark):
+            return [d for d in self.docs if mark is None or d["_id"] > mark]
+
+    source = Source()
+    app.state.hardware_sessions.source = source
+    client = TestClient(app)
+    sid = client.post("/product/v1/hardware/sessions").json()["session_id"]
+    for i in range(5):
+        source.docs.append({"_id": ObjectId(), "timestamp": datetime.now(UTC), "ecg": 2000 + i, "bpm": 76, "spo2": 97})
+    assert client.get(f"/product/v1/hardware/sessions/{sid}/poll").json()["record_count"] == 5
+    for i in range(4):                                       # stored in MongoDB, but the browser has not polled again yet
+        source.docs.append({"_id": ObjectId(), "timestamp": datetime.now(UTC), "ecg": 2100 + i, "bpm": 76, "spo2": 97})
+    assert client.post(f"/product/v1/hardware/sessions/{sid}/stop").json()["record_count"] == 9
+    source.docs.append({"_id": ObjectId(), "timestamp": datetime.now(UTC), "ecg": 2200})            # stored after Stop: not counted
+    assert client.get(f"/product/v1/hardware/sessions/{sid}").json()["record_count"] == 9
+    store.close()

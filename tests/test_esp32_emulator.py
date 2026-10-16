@@ -103,3 +103,52 @@ def test_ad8232_amplitude_pattern_stays_inside_the_analysis_rail_and_yields_vali
     windows, _ = build_windows(small, "HW-EMU", "MODEL_V2_FINAL")
     assert windows and sum(w["ecg_quality"] == "VALID" for w in windows) >= len(windows) - 1
     assert all(w["ecg_quality"] == "UNUSABLE" for w in build_windows(large, "HW-EMU", "MODEL_V2_FINAL")[0])
+
+
+def test_sketch_vitals_reproduce_the_supplied_firmware_mock_bpm_ratio_spo2_and_finger_removal_and_leave_drift_unchanged():
+    from scripts.emulate_esp32_ws import Signal, frame
+
+    signal = Signal(9)
+    seen, spo2s, held = [], [], []
+    for i in range(600):                                     # 30 s at 20 Hz
+        signal.step(0.05)
+        bpm, spo2 = signal.vitals("sketch", False)
+        seen.append(bpm); spo2s.append(spo2)
+        if i % 20 == 19:
+            held.append(bpm)
+    assert min(seen) >= 72 and max(seen) <= 81 and len(set(seen)) > 1               # MOCK random(72, 82), never a measured pulse
+    changes = sum(1 for a, b in zip(seen, seen[1:], strict=False) if a != b)
+    assert changes <= 30/2 + 2                                                       # refreshed about every 2 s, constant in between
+    assert all(90 <= v <= 100 for v in spo2s[20:]) and max(spo2s) <= 100              # 110 - 25 * red/ir, clipped to 100
+    assert signal.vitals("sketch", True) == (0, 0) and signal.vitals("sketch", False)[1] > 80      # finger removed -> zeros, finger back -> valid again
+    d = Signal(9)
+    d.step(0.05)
+    assert 48 <= d.vitals("drift", False)[0] <= 110 and frame(*d.vitals("drift", False), 2048).startswith('{"bpm":')   # the historical behaviour
+    hi = Signal(9)
+    rails = []
+    for _ in range(400):
+        hi.step(0.05)
+        rails.append(hi.ecg("sketch_highgain"))
+    assert min(rails) == 0 or max(rails) == 4095                                     # the high-gain board rails the 12-bit ADC
+
+
+def test_hyper_realistic_ecg_has_the_modules_offset_wander_motion_bursts_and_stays_in_the_adc_range_deterministically():
+    import random
+
+    import numpy as np
+
+    from scripts.emulate_esp32_ws import Signal
+
+    def run(seed: int):
+        signal, r, out = Signal(seed), random.Random(seed), []
+        for _ in range(2200):                                 # ~2 min of the sketch's irregular ~17 Hz instants
+            signal.step(0.052 + r.random() * 0.016)
+            out.append(signal.ecg("sketch_real"))
+        return np.array(out)
+
+    a, b = run(4), run(4)
+    assert (a == b).all() and not (a == run(5)).all()                                   # deterministic per seed
+    assert 0 <= a.min() and a.max() <= 4095
+    assert 1800 < np.median(a) < 1960                                                   # module output near mid-supply (~1.5 V), not the 2048 midpoint
+    assert np.abs(np.diff(a)).max() > 120                                               # R waves / motion bursts are visible in single samples
+    assert a.std() > 40 and (np.abs(a - np.median(a)) > 300).sum() > 5                  # baseline wander plus at least one motion burst

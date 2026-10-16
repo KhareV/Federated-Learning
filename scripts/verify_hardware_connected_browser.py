@@ -67,6 +67,8 @@ def main() -> int:
     parser.add_argument("--run-switch", action="store_true", help="real-browser run-switch check: hardware <-> recorded synthetic evidence via the selector, back/forward and reload")
     parser.add_argument("--ui-tour", action="store_true", help="seed a hardware session + run, then tour every route at desktop and phone width")
     parser.add_argument("--soak-seconds", type=int, default=0, help="run only the long browser soak for this many seconds")
+    parser.add_argument("--journey", action="store_true", help="full simulated-hardware journey: sketch-faithful emulator -> local Render replica -> Atlas rehearsal DB -> live monitoring, recording, History, Observatory replay + trace, tabular and pretrained-V2 FL, high-gain negative case")
+    parser.add_argument("--ui-shots", action="store_true", help="screenshots of the federation starter in every source-mode state")
     parser.add_argument("--history-source", action="store_true", help="a completed simulated monitoring session from History as the signal of one federation client")
     parser.add_argument("--hardware-v2", action="store_true", help="pretrained-V2 recorded-hardware path: two recordings, Observatory replay + trace, V2 run, generalisation tab, federation journal replay")
     args = parser.parse_args()
@@ -135,6 +137,14 @@ def main() -> int:
             (out / "run_switch_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
             print(json.dumps(verdict))
             return 0 if verdict["status"] == "PASS" else 1
+        if args.ui_shots:
+            running, origin = stack(env, workspace, python)
+            try:
+                drive("ui-shots", origin, Path(args.users_file), out / "ui_shots.json", out / "shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            print(json.dumps({"status": "UI_SHOTS_DONE", "dir": str(out / "shots")}))
+            return 0
         if args.history_source:
             running, origin = stack(env, workspace, python)
             try:
@@ -144,9 +154,9 @@ def main() -> int:
             live = hs["live"]
             checks = {
                 "run_completed": "COMPLETED" in live["status_line"],
-                "badge_names_history_session_and_site": live["badge"] == "HISTORY SESSION · SITE_02",
+                "badge_names_history_session_and_site": live["badge"] == "HISTORY SESSION · SITE_00",
                 "eight_synthetic_namespace_clients": len(live["clients"]) == 8 and all(c.startswith("SIM_FL_SITE_") for c in live["clients"]),
-                "session_signal_is_the_chosen_clients_data": any(c == "SIM_FL_SITE_02" and n not in (None, "--", "93") for c, n in live["local_examples"]),
+                "session_signal_is_the_chosen_clients_data": any(c == "SIM_FL_SITE_00" and n not in (None, "--", "93") for c, n in live["local_examples"]),
                 "labels_are_named_synthetic_assigned": "synthetic-assigned" in hs["source_note"],
                 "overview_names_history_session": "HISTORY MONITORING SESSION SIGNAL" in hs["overview"] and "Monitoring sessions executed: 0" in hs["overview"],
                 "metrics_shown": bool(live["metric_auprc"]) and "NOT YET" not in live["metric_auprc"],
@@ -155,6 +165,73 @@ def main() -> int:
             }
             verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "history_source", "checks": checks, "run_id": hs["run_id"], "session_id": hs["session_id"]}
             (out / "history_source_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
+        if args.journey:
+            if not ws_mode:
+                raise SystemExit("--journey needs --producer ws")
+            import re
+
+            env["NHM_VITALS"] = "sketch"
+            running, origin = stack(env, workspace, python)
+            try:
+                j = drive("journey", origin, Path(args.users_file), out / "journey.json", out / "journey_shots", out / "publisher_logs", env)
+                tags.extend(f"{j['tag']}-{n}" for n in ("A", "B", "C"))
+            finally:
+                running.shutdown()
+            inserted = [e for e in (replica.events() if replica else []) if e.get("event") == "insert_ok"]
+
+            def wall_ms(e):
+                return datetime.fromisoformat(e["t_wall"]).timestamp() * 1000
+
+            def inserts_of(x):
+                return sum(1 for e in inserted if x["started_ms"] - 2000 <= wall_ms(e) <= x["ended_ms"] + 4000)
+
+            A, B, C = (j["sessions"][k] for k in ("A", "B", "C"))
+            snap = lambda x, name: next(sn for sn in x["snaps"] if sn["name"] == name)  # noqa: E731
+            num = lambda t: int(t) if str(t).strip().isdigit() else None  # noqa: E731
+            sc = lambda t: int(m.group(1)) if (m := re.search(r"(\d+) scored", t)) else -1  # noqa: E731
+            rej = lambda t: int(m.group(1)) if (m := re.search(r"(\d+) rejected", t)) else -1  # noqa: E731
+            emitted = lambda t: int(m.group(1)) if (m := re.search(r"(\d+) windows emitted", t)) else -1  # noqa: E731
+            live, fr, lo, again = snap(A, "live"), snap(A, "finger_removed"), snap(A, "leads_off"), snap(A, "recovered_live")
+            asleep, woken, stale = snap(A, "render_asleep"), snap(A, "render_woken_after_14s"), snap(A, "wifi_dropped_stale")
+            rejected_handshakes = sum(1 for e in (replica.events() if replica else []) if e.get("event") == "handshake_rejected")
+            ra, rc = j["replay"]["A"], j["replay"]["C"]
+            tv, tb = j["trace"]["valid"], j["trace"]["rejected"]
+            ta, tB = j["tabular"]["A"], j["tabular"]["B"]
+            v2 = j["v2"]
+            checks = {
+                "live_monitoring_receives_and_plots": "LIVE" in live["state"] and live["count"] > 100 and live["points"] > 0,
+                "render_cold_start_waits_without_fabricating_data": asleep["state"] == "WAITING FOR DATA" and asleep["count"] == 0 and woken["count"] == 0 and rejected_handshakes >= 1,
+                "wifi_drop_goes_stale_then_recovers": "STALE" in stale["state"] and "LIVE" in again["state"],
+                "bpm_is_the_firmwares_mock_72_to_81": num(live["bpm"]) is not None and 72 <= num(live["bpm"]) <= 81,
+                "spo2_is_ratio_based_90_to_100": bool(re.fullmatch(r"(9\d|100)%", live["spo2"])),
+                "finger_removed_shows_unavailable_not_zero": fr["bpm"] == "Unavailable" and fr["spo2"] == "Unavailable",
+                "leads_off_shows_the_flat_placeholder": lo["latest_ecg"] == 2048,
+                "stops_cleanly_and_keeps_the_count": snap(A, "stopped")["state"] == "SESSION STOPPED" and snap(A, "stopped")["count"] >= 1900,
+                "mongo_count_equals_replica_inserts_A": snap(A, "stopped")["count"] == inserts_of(A),
+                "mongo_count_equals_replica_inserts_B": snap(B, "stopped")["count"] == inserts_of(B),
+                "mongo_count_equals_replica_inserts_C": snap(C, "stopped")["count"] == inserts_of(C),
+                "history_links": all(j["detail"].values()),
+                "replay_A_scores_every_usable_window": sc(ra["summary"]) > 5 and "pending" not in ra["summary"] and ra["controls"] and ra["chart_points"] > 0 and bool(ra["transitions"]),
+                "replay_A_rejects_the_leads_off_stretch": rej(ra["summary"]) >= 1,
+                "replay_A_clean": not ra["alerts"] and not ra["errors"],
+                "replay_C_highgain_all_rejected_and_explained": emitted(rc["summary"]) > 0 and rej(rc["summary"]) == emitted(rc["summary"]) and sc(rc["summary"]) == 0 and "quality gate" in rc["empty"],
+                "replay_C_clean": not rc["alerts"] and not rc["errors"],
+                "trace_valid_window": "RECORDED HARDWARE" in tv["classification"] and tv["stages"] >= 4 and bool(tv["inference"]),
+                "trace_rejected_window_has_no_invented_result": bool(tb) and "UNUSABLE" in tb["window"] and not tb["has_inference"] and "no model result" in tb["none"],
+                "tabular_fedavg_completed": "COMPLETED" in ta["status_line"] and len(ta["card_tags"] if isinstance(ta["card_tags"], list) else []) >= 0 and ta["card_tags"] == 8 and bool(ta["metric_auprc"]),
+                "tabular_fedprox_shadow_verified": "COMPLETED" in tB["status_line"] and "VERIFIED" in tB["secagg"].upper() and tB["card_tags"] == 8,
+                "v2_refuses_the_highgain_recording_with_reason": "NOT ENOUGH" in v2["preview_c"]["text"] and "CLIPPING" in v2["preview_c"]["text"] and v2["preview_c"]["start_disabled"],
+                "v2_accepts_the_good_recordings": "ENOUGH USABLE" in v2["preview_ab"]["text"] and not v2["preview_ab"]["start_disabled"],
+                "v2_run_one_recorded_client_plus_seven_peers": v2["live"]["badge"] == "RECORDED HARDWARE" and v2["live"]["clients"][0] == "RECORDED_DEMO_CLIENT_00" and all(c.startswith("SIM_FL_SITE_") for c in v2["live"]["clients"][1:]) and len(v2["live"]["clients"]) == 8,
+                "v2_run_has_metrics_and_generalisation": "pretrained V2" in v2["live"]["label"] and bool(v2["live"]["metric_auprc"]) and v2["generalisation"].startswith("4/4") and not v2["live"]["alerts"],
+            }
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "simulated_hardware_journey", "checks": checks, "plan": j["plan"], "plan_b": j.get("plan_b"), "rejected_handshakes": rejected_handshakes, "v2_run_id": v2["run_id"],
+                       "replica_inserts_total": len(inserted), "sessions": {k: j["sessions"][k]["sid"] for k in ("A", "B", "C")},
+                       "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA", "real_render_verified": False, "physical_esp32_verified": False,
+                       "firmware_behaviour_modelled": "supplied sketch: mock BPM random(72,82) every 2 s, drifting ratio SpO2, hyper-realistic AD8232 ECG (HRV, respiration, mains pickup aliased by ~17 Hz sampling, motion bursts, ~1860-count module offset), boot with electrodes off during a Render cold start (handshakes rejected ~14 s), finger removal, leads off, 9 s Wi-Fi drop; high-gain variant for the negative case"}
+            (out / "journey_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
             print(json.dumps(verdict))
             return 0 if verdict["status"] == "PASS" else 1
         if args.hardware_v2:
