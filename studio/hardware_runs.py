@@ -57,6 +57,7 @@ class HardwareRunJobs:
         self._finalize = finalize                  # (run_id, run_dir) -> None; renders the figure/table exports of a completed run
         self.events = FederationArtifactStore(Path(root) / "hardware_demo_events")
         self.jobs: dict[str, HardwareJob] = {}
+        self.state_sink: Any = None                # (run_id, run_length, round_id, state, digest) -> None; lets a V2-family run mirror its committed states to the unseen-cohort lane
         self._lock = threading.Lock()
         self._load_existing()
 
@@ -78,7 +79,7 @@ class HardwareRunJobs:
             exported = (self.demo.root / run_id / "export" / "export_manifest.json").exists()
             self.jobs[run_id] = HardwareJob(
                 run_id=run_id, owner=data["owner"], rounds=int(data["rounds_planned"]), algorithm=data["algorithm"], secagg_mode=data["secagg_mode"],
-                initialisation=data["model"]["initialisation"], warm_info=data["model"].get("warm_start"), created_at=data["created_at"], status=status,
+                initialisation=data["model"]["initialisation"], warm_info=data["model"].get("base_audit") if data["model"]["initialisation"] == "MODEL_V2_FINAL" else data["model"].get("warm_start"), created_at=data["created_at"], status=status,
                 phase="DONE" if status == "COMPLETED" else "FAILED", current_round=len(data["rounds"]), failure=failure, journal=journal,
                 export_status="READY" if exported else ("NOT_STARTED" if status == "COMPLETED" else "NOT_STARTED"))
 
@@ -107,6 +108,7 @@ class HardwareRunJobs:
             self.demo._run_lock.release()
             raise
         run_id = ctx["run_id"]
+        ctx["state_sink"] = self.state_sink
         job = HardwareJob(run_id=run_id, owner=owner, rounds=ctx["rounds"], algorithm=ctx["algorithm"], secagg_mode=ctx["secagg_mode"], initialisation=ctx["initialisation"],
                           warm_info=ctx["warm_info"], created_at=_now())
         job.journal = FederationEventJournal(run_id)
@@ -159,15 +161,24 @@ class HardwareRunJobs:
                 job.failure = {"code": "EXPORT_FAILED", "message": str(error)[:300]}
 
     # ---- descriptors (the StudioRun shape the Live page already consumes) ----------------------------------------------
+    @staticmethod
+    def _base_model(job: HardwareJob) -> dict[str, Any]:
+        info = job.warm_info or {}
+        if job.initialisation == "MODEL_V2_FINAL":     # pretrained V2 fine-tuned on resampled recorded windows (studio.hardware_v2)
+            return {"model_id": "MODEL_V2_FINAL", "label": "Pretrained V2 (MODEL_V2_FINAL) — federated fine-tuning on resampled recorded windows", "state_sha256": info.get("state_sha256"),
+                    "checkpoint_sha256": info.get("checkpoint_sha256"), "state_entries": info.get("state_entries"), "architecture_id": info.get("architecture_id"),
+                    "training_target_of_checkpoint": info.get("training_target_of_checkpoint"), "initialisation": None}
+        return {"model_id": MODEL_ID, "label": ("Warm start from " + str(info.get("source_run_id"))) if job.initialisation == "WARM_START" else "Fresh seeded initialisation (untrained)",
+                "state_sha256": info.get("source_state_sha256"), "initialisation": job.initialisation}
+
     def describe(self, job: HardwareJob) -> dict[str, Any]:
         done = job.status == "COMPLETED"
         return {
             "run_id": job.run_id, "run_length": job.rounds, "engine": ENGINE, "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode,
             "source_mode": "RECORDED_HARDWARE", "status": job.status, "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds,
             "client_ids": list(CLIENT_IDS), "candidate": None, "failure": job.failure,
-            "label": f"{job.rounds}-round recorded-hardware run" + (" — warm start" if job.initialisation == "WARM_START" else ""),
-            "base_model": {"model_id": MODEL_ID, "label": ("Warm start from " + str((job.warm_info or {}).get("source_run_id"))) if job.initialisation == "WARM_START" else "Fresh seeded initialisation (untrained)",
-                           "state_sha256": (job.warm_info or {}).get("source_state_sha256"), "initialisation": job.initialisation},
+            "label": f"{job.rounds}-round recorded-hardware run" + (" — warm start" if job.initialisation == "WARM_START" else " — pretrained V2" if job.initialisation == "MODEL_V2_FINAL" else ""),
+            "base_model": self._base_model(job),
             "source_label": "RECORDED HARDWARE (this account)", "replay_of": None,
             "evaluation": {"available": True, "source": "LIVE", "evaluation_run_id": job.run_id, "reason": None, "revision": job.current_round + (1 if done else 0)},
             "export_status": job.export_status, "created_at": job.created_at, "mode": MODE,

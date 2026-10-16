@@ -5,8 +5,8 @@
 
 import { parseFl10, parseFl10Job, parseFl10Recorded, type Fl10Job, type Fl10Payload, type Fl10Recorded } from './observatory/fl10';
 import { parseLiveLink, parseShowcase, type LiveLinkStatus, type ShowcaseBundle } from './observatory/showcase';
-import { parseGenCurves, parseGenParticipants, parseGeneralisation, parseHardwareDemoRun, parseHardwareDemoSessions, parseOverview, parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
-import type { GenCurves, GenParticipants, Generalisation, HardwareDemoChoice, HardwareDemoRun, HardwareDemoSession, StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
+import { parseGenCurves, parseGenParticipants, parseGeneralisation, parseHardwareDemoRun, parseHardwareDemoSessions, parseHardwareV2Preview, parseOverview, parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
+import type { GenCurves, GenParticipants, Generalisation, HardwareDemoChoice, HardwareDemoRun, HardwareDemoSession, HardwareV2Preview, StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
 import type {
 	AuthIdentity,
 	DeviceDescriptor,
@@ -31,10 +31,10 @@ import {
 	type ReleasedModelRef,
 	type RunType
 } from './federation/types';
-import { parseSessionSummary, parseSessionTimeline, type SessionSummary, type SessionTimeline } from './history/types';
+import { parseHardwareTimeline, parseSessionSummary, parseSessionTimeline, type HardwareSessionTimeline, type SessionSummary, type SessionTimeline } from './history/types';
 import { parseFlResearchEvidence, parseMlResearchEvidence, type FlResearchEvidence, type MlResearchEvidence } from './research/types';
-import { parseCaptureArm, parseScenarioTimeline, parseScenarioList, parseWindowTrace,
-	type CaptureArm, type ScenarioInfo, type ScenarioTimeline, type WindowTrace } from './observatory/types';
+import { parseCaptureArm, parseHardwareWindowList, parseScenarioTimeline, parseScenarioList, parseWindowTrace,
+	type CaptureArm, type HardwareWindowList, type ScenarioInfo, type ScenarioTimeline, type WindowTrace } from './observatory/types';
 import { parseFlClientWindowTrace, parseFrozenCohort, parseRunContributions,
 	type FlClientWindowTrace, type FrozenCohort, type RunContributions } from './observatory/federation';
 import { parseArchitecture, parseBoundaries, parseCalibration, parseFlCurves, parseFlEval, parseReproducibility, parseXaiCase, parseXaiIndex, parseDatasetPreprocessing, parseActivationInspection,
@@ -120,6 +120,10 @@ export interface ProductClient {
 	observatoryScenarios(): Promise<ScenarioInfo[]>;
 	observatoryScenarioWindow(scenarioId: string, windowIndex: number): Promise<WindowTrace>;
 	observatorySessionWindow(sessionId: string, windowIndex: number): Promise<WindowTrace>;
+	/** Recorded-hardware sessions (experimental, resampled): the windows a session emitted, one window's stage trace, and the replay timeline (scored in bounded batches). */
+	observatoryHardwareWindows(sessionId: string): Promise<HardwareWindowList>;
+	observatoryHardwareWindow(sessionId: string, windowIndex: number): Promise<WindowTrace>;
+	hardwareSessionTimeline(sessionId: string, budget?: number): Promise<HardwareSessionTimeline>;
 	observatoryCohort(): Promise<FrozenCohort>;
 	observatoryRunContributions(runId: string): Promise<RunContributions>;
 	observatoryFlClientWindow(clientId: string, windowIndex: number): Promise<FlClientWindowTrace>;
@@ -139,6 +143,7 @@ export interface ProductClient {
 	// NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001: unified, owner-scoped run observation (3-round runs are still created through the frozen federation routes)
 	studioCapabilities(): Promise<StudioCapabilities>;
 	hardwareDemoSessions(): Promise<HardwareDemoSession[]>;
+	hardwareV2Preview(sessionIds: string[]): Promise<HardwareV2Preview>;
 	hardwareDemoRuns(): Promise<HardwareDemoRun[]>;
 	hardwareDemoStart(choice: HardwareDemoChoice): Promise<StudioRun>;
 	hardwareDemoRun(runId: string): Promise<HardwareDemoRun>;
@@ -280,6 +285,9 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 			`/observatory/scenarios/${enc(id)}/windows/${enc(String(index))}`)),
 		observatorySessionWindow: async (id, index) => parseWindowTrace(await call<unknown>('GET',
 			`/observatory/sessions/${enc(id)}/windows/${enc(String(index))}`)),
+		observatoryHardwareWindows: async (id) => parseHardwareWindowList(await call<unknown>('GET', `/hardware/sessions/${enc(id)}/observatory/windows`)),
+		observatoryHardwareWindow: async (id, index) => parseWindowTrace(await call<unknown>('GET', `/hardware/sessions/${enc(id)}/observatory/windows/${enc(String(index))}`)),
+		hardwareSessionTimeline: async (id, budget = 24) => parseHardwareTimeline(await call<unknown>('GET', `/hardware/sessions/${enc(id)}/observatory/timeline?budget=${budget}`)),
 		observatoryCohort: async () => parseFrozenCohort(await call<unknown>('GET', '/observatory/federation/cohort')),
 		observatoryRunContributions: async (id) => parseRunContributions(await call<unknown>('GET',
 			`/observatory/federation/runs/${enc(id)}/contributions`)),
@@ -314,12 +322,13 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		},
 		studioCapabilities: async () => parseCapabilities(await call<unknown>('GET', '/studio/capabilities')),
 		hardwareDemoSessions: async () => parseHardwareDemoSessions(await call<unknown>('GET', '/studio/hardware-demo/sessions')),
-		hardwareDemoRuns: async () => (await call<unknown[]>('GET', '/studio/hardware-demo/runs')).map(parseHardwareDemoRun),
+		hardwareV2Preview: async (sessionIds) => parseHardwareV2Preview(await call<unknown>('GET', `/studio/hardware-demo/v2-preview?session_ids=${encodeURIComponent(sessionIds.join(','))}`)),
+		hardwareDemoRuns: async () => (await call<unknown[]>('GET', '/studio/hardware-demo/runs')).filter((r) => (r as { status?: unknown } | null)?.status === 'COMPLETED').map(parseHardwareDemoRun),   // running / failed runs are not warm-start sources (and must not break the list)
 		hardwareDemoStart: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/hardware-demo/runs', choice)),
 		hardwareDemoRun: async (id) => parseHardwareDemoRun(await call<unknown>('GET', `/studio/hardware-demo/runs/${enc(id)}`)),
 		studioRuns: async () => parseStudioRuns(await call<unknown>('GET', '/studio/runs')),
 		studioRun: async (id) => parseStudioRun(await call<unknown>('GET', `/studio/runs/${enc(id)}`)),
-		studioStartTenRound: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/runs', { run_length: choice.run_length, source_mode: choice.source_mode, ...(choice.initialisation ? { initialisation: choice.initialisation } : {}), algorithm: choice.algorithm ?? 'FEDAVG', secagg_mode: choice.secagg_mode ?? 'PLAIN' })),
+		studioStartTenRound: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/runs', { run_length: choice.run_length, source_mode: choice.source_mode, ...(choice.monitored_site ? { monitored_site: choice.monitored_site } : {}), ...(choice.initialisation ? { initialisation: choice.initialisation } : {}), algorithm: choice.algorithm ?? 'FEDAVG', secagg_mode: choice.secagg_mode ?? 'PLAIN' })),
 		studioOverview: async (id) => parseOverview(await call<unknown>('GET', `/studio/runs/${enc(id)}/overview`)),
 		studioEvaluation: async (id) => parseEvalSummary(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation`)),
 		studioEvaluationRound: async (id, round) => parseEvalRound(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation/${round}`)),

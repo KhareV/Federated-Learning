@@ -119,7 +119,7 @@
     <button class="primary" onclick={start} disabled={busy || session?.status === 'ACTIVE'} data-testid="hardware-start">Start Monitoring</button>
     <button onclick={stop} disabled={busy || session?.status !== 'ACTIVE'} data-testid="hardware-stop">Stop Monitoring</button>
     {#if resumed && session?.status === 'ACTIVE'}<span class="dim" data-testid="hardware-resumed">Resumed your active session after a reload.</span>{/if}
-    {#if session && session.status !== 'ACTIVE'}<a href={`/app/history/${encodeURIComponent(session.session_id)}`}>View saved History →</a>{/if}
+    {#if session && session.status !== 'ACTIVE'}<a href={`/app/history/${encodeURIComponent(session.session_id)}`}>View saved History →</a> <a href={`/app/observatory/replay?session=${encodeURIComponent(session.session_id)}`} data-testid="hardware-monitor-replay">Replay in Observatory →</a>{/if}
   </div>
 </Panel>
 <Panel eyebrow="02 / ECG" title="MongoDB ECG values · actual stored points" note="SERVER INGESTION TIME · GAPS ARE NOT FILLED">

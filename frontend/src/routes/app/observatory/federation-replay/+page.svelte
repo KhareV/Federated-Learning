@@ -6,13 +6,14 @@
 	import { LiveSocket } from '$lib/product/socket';
 	import type { FederationView } from '$lib/product/federation/live-model';
 	import { buildSnapshots } from '$lib/product/observatory/replay.svelte';
-	import type { FederationRun } from '$lib/product/federation/types';
+	import type { StudioRun } from '$lib/product/studio/types';
+	import { clientIdsFor, runDataSource } from '$lib/product/federation/data-source';
 	import ProcessStepper from '$lib/components/product/federation/ProcessStepper.svelte';
 	import RoundProgress from '$lib/components/product/federation/RoundProgress.svelte';
 	import ClientGrid from '$lib/components/product/federation/ClientGrid.svelte';
 	import CandidateLifecycle from '$lib/components/product/federation/CandidateLifecycle.svelte';
 	const store = getProductStore();
-	let runs = $state<FederationRun[]>([]);
+	let runs = $state<StudioRun[]>([]);
 	let runId = $state('');
 	let raw: unknown[] = [];
 	let snapshots = $state.raw<FederationView[]>([]);
@@ -25,6 +26,10 @@
 	let selectedClient = $state('SIM_FL_SITE_00');
 	const view = $derived(snapshots[Math.min(index, Math.max(0, snapshots.length - 1))] ?? null);
 	const run = $derived(runs.find((r) => r.run_id === runId) ?? null);
+	const dataSource = $derived(runDataSource(runId, run?.engine));
+	const planned = $derived(view?.plannedRounds || run?.planned_rounds || 3);
+	const jumpRounds = $derived([...new Set([1, Math.ceil(planned / 2), planned])].filter((n) => n >= 1 && n <= planned));
+	const sourceName = (r: StudioRun) => (r.source_mode === 'RECORDED_HARDWARE' ? 'RECORDED HARDWARE' : r.source_mode === 'LIVE_MONITORED_SITE_00' ? `LIVE-MONITORED SITE_${String(r.monitored_site ?? 0).padStart(2, '0')}` : r.origin === 'RECORDED' ? 'RECORDED SYNTHETIC' : 'SYNTHETIC');
 	function build() {
 		const out = buildSnapshots(runId, raw);
 		if (out === null) { error = 'The event journal failed integrity validation; replay is not shown as trustworthy.'; status = 'FAILED'; return; }
@@ -33,6 +38,7 @@
 	function stopPlay() { playing = false; if (timer) { clearInterval(timer); timer = null; } }
 	async function load() {
 		stopPlay(); socket?.close(); socket = null; snapshots = []; raw = []; error = null; index = 0;
+		selectedClient = clientIdsFor(runDataSource(runId, runs.find((r) => r.run_id === runId)?.engine))[0];
 		if (!runId) { status = 'IDLE'; return; }
 		status = 'COLLECTING';
 		socket = new LiveSocket({
@@ -48,25 +54,25 @@
 	function step(d: number) { index = Math.min(snapshots.length - 1, Math.max(0, index + d)); }
 	function firstWhere(test: (v: FederationView) => boolean, from = 0) { const i = snapshots.findIndex((v, n) => n >= from && test(v)); if (i >= 0) index = i; }
 	function toggle() { if (playing) { stopPlay(); return; } playing = true; timer = setInterval(() => { if (index >= snapshots.length - 1) stopPlay(); else index += 1; }, 450); }
-	onMount(() => { void store.api.federationRuns().then((r) => { runs = r.filter((x) => x.status === 'COMPLETED'); }).catch((c) => { error = c instanceof Error ? c.message : String(c); }); return () => { stopPlay(); socket?.close(); }; });
+	onMount(() => { void store.api.studioRuns().then((r) => { runs = r.filter((x) => x.status === 'COMPLETED' && x.origin !== 'REPLAY'); }).catch((c) => { error = c instanceof Error ? c.message : String(c); }); return () => { stopPlay(); socket?.close(); }; });
 </script>
 <svelte:head><title>Federation journal replay | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / FEDERATION REPLAY</div>
 <h1 tabindex="-1" use:focusHeading>Federation event-journal replay</h1>
 <p class="tag" data-testid="replay-label">REPLAY — NO LOCAL TRAINING EXECUTING</p>
-<p class="lead">Step through the persisted event journal of one owned, completed run. The journal is read from sequence 0 and every step is derived by the same validated view model as the live page. Nothing trains, no candidate is created, and pace is presentation only.</p>
-<label class="pick">Completed run <select bind:value={runId} onchange={load}><option value="">— choose an owned run —</option>{#each runs as r (r.run_id)}<option value={r.run_id}>{r.run_id} · {r.run_type} · {r.algorithm}</option>{/each}</select></label>
+<p class="lead">Step through the persisted event journal of one owned, completed run (synthetic, live-monitored site or recorded hardware). The journal is read from sequence 0 and every step is derived by the same validated view model as the live page. Nothing trains, no candidate is created, and pace is presentation only.</p>
+<label class="pick">Completed run <select bind:value={runId} onchange={load}><option value="">— choose an owned run —</option>{#each runs as r (r.run_id)}<option value={r.run_id}>{r.run_id} · {sourceName(r)} · {r.planned_rounds} rounds · {r.algorithm}</option>{/each}</select></label>
 {#if status === 'COLLECTING'}<p class="dim" role="status">Reading the journal…</p>{/if}
 {#if error}<p role="alert" class="err">{error}</p>{/if}
 {#if status === 'READY' && view}
 <section aria-label="Replay controls" data-testid="fed-replay-controls"><div class="controls"><button onclick={() => step(-1)} disabled={index === 0}>← Step back</button><button onclick={() => step(1)} disabled={index >= snapshots.length - 1}>Step forward →</button><button onclick={toggle}>{playing ? 'Pause' : 'Play'}</button>
-	{#each [1, 2, 3] as r}<button onclick={() => firstWhere((v) => v.currentRound >= r)}>Jump to round {r}</button>{/each}
+	{#each jumpRounds as r (r)}<button onclick={() => firstWhere((v) => v.currentRound >= r)}>Jump to round {r}</button>{/each}
 	<button onclick={() => firstWhere((v) => v.rounds.some((x) => x.aggregationMode !== null))}>Jump to aggregation</button><button onclick={() => firstWhere((v) => v.candidate !== null)}>Jump to candidate</button>
 	<button onclick={() => firstWhere((v) => (v.clients.find((c) => c.clientId === selectedClient)?.state ?? 'IDLE') !== 'IDLE')}>Jump to selected client</button></div>
 	<label class="scrub">Event {index + 1} of {snapshots.length} <input type="range" min="0" max={snapshots.length - 1} bind:value={index} aria-valuetext={`event ${index + 1} of ${snapshots.length}`} /></label>
 	<p class="dim" data-testid="fed-replay-event">Latest journal entry: {view.timeline[view.timeline.length - 1]?.kind ?? '—'} — {view.timeline[view.timeline.length - 1]?.summary ?? ''}</p></section>
-<section aria-label="Process" data-testid="fed-replay-state"><ProcessStepper {view} replay={true} /><div class="gap"></div><RoundProgress {view} plannedRounds={view.plannedRounds || run?.planned_rounds || 0} />
-	<h2>Clients at this event</h2><ClientGrid live={view.clients} round={view.currentRound} replay={true} ownerBoundClientId={null} selected={selectedClient} onSelect={(id) => (selectedClient = id)} runDone={view.runStatus === 'COMPLETED'} />
+<section aria-label="Process" data-testid="fed-replay-state"><ProcessStepper {view} replay={true} /><div class="gap"></div><RoundProgress {view} plannedRounds={planned} />
+	<h2>Clients at this event</h2><ClientGrid live={view.clients} round={view.currentRound} replay={true} ownerBoundClientId={null} selected={selectedClient} onSelect={(id) => (selectedClient = id)} runDone={view.runStatus === 'COMPLETED'} {dataSource} />
 	<h2>Candidate</h2><CandidateLifecycle {view} replay={true} /></section>
 <p class="dim">Rejected updates are shown only if they appear in the journal. Rejection scenarios exercised in frozen engineering evidence (stale, duplicate, wrong-base, unknown-client) are not animated here unless they occurred in this run.</p>
 {/if}

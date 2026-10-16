@@ -294,6 +294,10 @@ class HardwareDemoService:
     def prepare(self, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int,
                 initialisation: str = "FRESH_SEEDED", warm_start_run_id: str | None = None) -> dict[str, Any]:
         """Validate and build everything that can fail on the caller's thread (data, windows, split, warm start). Nothing is trained."""
+        if initialisation == "MODEL_V2_FINAL":       # pretrained V2 fine-tuning on resampled recorded windows: a different model family, built by studio.hardware_v2
+            from studio import hardware_v2
+
+            return hardware_v2.prepare(self, owner, session_ids=session_ids, rounds=rounds, algorithm=algorithm, secagg_mode=secagg_mode, label_seed=label_seed)
         if initialisation not in ("FRESH_SEEDED", "WARM_START"):
             raise ValueError("unsupported starting model for HARDWARE_DEMO_MODEL_V1")
         warm_state, warm_info = (None, None)
@@ -351,6 +355,10 @@ class HardwareDemoService:
     def train(self, ctx: dict[str, Any], progress: Any = None) -> dict[str, Any]:
         """Execute the prepared run. ``progress`` receives the same event vocabulary as the FL10 runner (ROUND_OPENED, CLIENT_TRAINING_STARTED/FINISHED,
         UPDATES_ACCEPTED, SECAGG_SHADOW_VERIFIED, ROUND_COMMITTED) at the moment each step really happened."""
+        if ctx.get("engine") == "HARDWARE_V2":
+            from studio import hardware_v2
+
+            return hardware_v2.train(self, ctx, progress)
         emit = progress or (lambda _event: None)
         owner, run_id, session_ids, rounds = ctx["owner"], ctx["run_id"], ctx["session_ids"], ctx["rounds"]
         algorithm, secagg_mode, label_seed = ctx["algorithm"], ctx["secagg_mode"], ctx["label_seed"]
@@ -427,10 +435,10 @@ class HardwareDemoService:
             "created_at": started_at, "completed_at": completed_at, "status": status,
             "source_mode": "RECORDED_HARDWARE_DEMO", "source_session_ids": ctx["session_ids"],
             "source_record_count": len(ctx["records"]), "snapshot_sha256": ctx["snapshot"]["snapshot_sha256"],
-            "dataset": ctx["dataset"], "model": {"id": MODEL_ID, "architecture": f"Linear({len(FEATURES)},1)", "released": False, "v2_initialisation": "NOT_APPLICABLE",
-                                                 "initialisation": ctx["initialisation"], "warm_start": ctx["warm_info"]},
+            "dataset": ctx["dataset"], "model": ctx.get("model_block") or {"id": MODEL_ID, "architecture": f"Linear({len(FEATURES)},1)", "released": False, "v2_initialisation": "NOT_APPLICABLE",
+                                                                           "initialisation": ctx["initialisation"], "warm_start": ctx["warm_info"]},
             "algorithm": ctx["algorithm"], "fedprox_mu": MU if ctx["algorithm"] == "FEDPROX" else None, "secagg_mode": ctx["secagg_mode"],
             "aggregation": "PLAIN", "secagg_shadow": secagg, "rounds_planned": ctx["rounds"],
             "rounds": round_rows, "state_progression": progression, "failure": failure,
-            "claim_boundary": "TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
+            "claim_boundary": ctx.get("claim_boundary") or "TOY ENGINEERING DEMO; recorded telemetry features with synthetic assigned labels; no clinical or scientific validity",
         }

@@ -80,3 +80,26 @@ def test_end_to_end_local_chain_with_drop_reconnect_and_malformed_frames(tmp_pat
 def test_emulator_never_needs_database_credentials(tmp_path):
     source = (ROOT / "scripts/emulate_esp32_ws.py").read_text()
     assert "pymongo" not in source and "MONGO" not in source.upper().replace("MONGODB", "")
+
+
+def test_ad8232_amplitude_pattern_stays_inside_the_analysis_rail_and_yields_valid_v2_windows_while_default_is_unchanged():
+    """``ecg_ad8232`` is test tooling for the pretrained-V2 recorded-hardware path; the historical ``ecg`` pattern keeps its large amplitude (and its digests)."""
+    from datetime import UTC, datetime, timedelta
+
+    from api.hardware_v2_experimental import ADC_MIDPOINT, RUNTIME_COUNTS_PER_ADC, build_windows
+    from scripts.emulate_esp32_ws import Signal
+
+    def series(pattern: str, seconds: int = 40):
+        signal, out = Signal(5), []
+        start = datetime(2026, 10, 15, tzinfo=UTC)
+        for i in range(seconds * 20):
+            signal.step(0.05)
+            out.append({"document_id": f"d{i}", "ingested_at": (start + timedelta(milliseconds=50 * i)).isoformat(), "ecg": signal.ecg(pattern), "bpm": 72, "spo2": 97})
+        return out
+
+    small, large = series("ecg_ad8232"), series("ecg")
+    assert max(abs(r["ecg"] - ADC_MIDPOINT) for r in small) * RUNTIME_COUNTS_PER_ADC < 2500 < max(abs(r["ecg"] - ADC_MIDPOINT) for r in large) * RUNTIME_COUNTS_PER_ADC
+    assert [Signal(5).ecg("ecg") for _ in range(3)] == [Signal(5).ecg("ecg") for _ in range(3)]
+    windows, _ = build_windows(small, "HW-EMU", "MODEL_V2_FINAL")
+    assert windows and sum(w["ecg_quality"] == "VALID" for w in windows) >= len(windows) - 1
+    assert all(w["ecg_quality"] == "UNUSABLE" for w in build_windows(large, "HW-EMU", "MODEL_V2_FINAL")[0])

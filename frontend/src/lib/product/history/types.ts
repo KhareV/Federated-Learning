@@ -120,10 +120,10 @@ function preview(value: unknown, label: string): WaveformPreview {
 		claim_boundary: literal(o.claim_boundary, 'BOUNDED_DECIMATED_PREVIEW_NOT_RAW_STREAM_STORAGE', 'preview.claim_boundary') };
 }
 
-export function parseSessionTimeline(value: unknown): SessionTimeline {
+function parseTimelineBase(value: unknown, claim: string, extra: string[]): Omit<SessionTimeline, 'claim_boundary'> & { claim_boundary: string; raw: Record<string, unknown> } {
 	const o = object(value, 'timeline');
 	fields(o, ['session_id','timeline_version','source_timeline','device_lifecycle','waveform_previews',
-		'time_domains','time_domain_explanation','claim_boundary'], 'timeline');
+		'time_domains','time_domain_explanation','claim_boundary', ...extra], 'timeline');
 	const domains = object(o.time_domains, 'time_domains');
 	fields(domains, ['source_timeline','device_lifecycle'], 'time_domains');
 	const sources = array(o.source_timeline, sourceItem, 'source_timeline');
@@ -137,5 +137,24 @@ export function parseSessionTimeline(value: unknown): SessionTimeline {
 		time_domains: { source_timeline: literal(domains.source_timeline, 'SOURCE_TIMELINE', 'source_timeline'),
 			device_lifecycle: literal(domains.device_lifecycle, 'PRODUCT_CLOCK', 'device_lifecycle') },
 		time_domain_explanation: string(o.time_domain_explanation, 'time_domain_explanation'),
-		claim_boundary: literal(o.claim_boundary, 'PERSISTED_RESEARCH_ENGINEERING_EVIDENCE_NOT_WEBSOCKET_REPLAY', 'timeline.claim_boundary') };
+		claim_boundary: literal(o.claim_boundary, claim, 'timeline.claim_boundary'), raw: o };
+}
+
+export function parseSessionTimeline(value: unknown): SessionTimeline {
+	const { raw: _raw, ...timeline } = parseTimelineBase(value, 'PERSISTED_RESEARCH_ENGINEERING_EVIDENCE_NOT_WEBSOCKET_REPLAY', []);
+	return timeline as SessionTimeline;
+}
+
+/** Replay timeline of a RECORDED-HARDWARE session: the same record kinds as a persisted session, derived from resampled windows scored by the released service (EXPERIMENTAL). */
+export interface HardwareSessionTimeline extends Omit<SessionTimeline, 'claim_boundary'> {
+	claim_boundary: 'RECORDED_HARDWARE_RESAMPLED_EXPERIMENTAL_DERIVED_TIMELINE_NOT_VALID_NOT_DIAGNOSTIC';
+	label: string; windows_total: number; windows_scored: number; windows_pending: number; windows_unusable: number; complete: boolean;
+}
+export function parseHardwareTimeline(value: unknown): HardwareSessionTimeline {
+	const { raw, ...timeline } = parseTimelineBase(value, 'RECORDED_HARDWARE_RESAMPLED_EXPERIMENTAL_DERIVED_TIMELINE_NOT_VALID_NOT_DIAGNOSTIC',
+		['label', 'source_kind', 'assumptions', 'windows_total', 'windows_scored', 'windows_pending', 'complete', 'windows_unusable']);
+	literal(raw.source_kind, 'RECORDED_HARDWARE_RESAMPLED', 'source_kind');
+	return { ...timeline, claim_boundary: 'RECORDED_HARDWARE_RESAMPLED_EXPERIMENTAL_DERIVED_TIMELINE_NOT_VALID_NOT_DIAGNOSTIC', label: string(raw.label, 'label'),
+		windows_total: integer(raw.windows_total, 'windows_total'), windows_scored: integer(raw.windows_scored, 'windows_scored'), windows_pending: integer(raw.windows_pending, 'windows_pending'),
+		windows_unusable: integer(raw.windows_unusable, 'windows_unusable'), complete: bool(raw.complete, 'complete') };
 }

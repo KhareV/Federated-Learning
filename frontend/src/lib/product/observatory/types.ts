@@ -53,8 +53,8 @@ export interface PersistedInference {
 }
 export interface WindowTrace {
 	trace_version: 'NHM_PIPELINE_TRACE_V1';
-	classification: 'DETERMINISTIC_LOCAL_RECONSTRUCTION' | 'CAPTURED_LIVE_PREPROCESSING';
-	source_kind: 'SYNTHETIC_VIRTUAL_WEARABLE';
+	classification: 'DETERMINISTIC_LOCAL_RECONSTRUCTION' | 'CAPTURED_LIVE_PREPROCESSING' | 'RECORDED_HARDWARE_RECONSTRUCTION';
+	source_kind: 'SYNTHETIC_VIRTUAL_WEARABLE' | 'RECORDED_HARDWARE_RESAMPLED';
 	scenario_id: string; session_id: string | null; window_index: number; window_id: string;
 	left_timestamp_us: number; right_timestamp_us: number;
 	source_rate_hz: number; target_rate_hz: number; window_sample_count: number; cadence_us: number;
@@ -127,6 +127,24 @@ function inference(value: unknown): PersistedInference {
 		probability_role: literal(o.probability_role, 'RESEARCH_TECHNICAL_METADATA', 'probability_role') };
 }
 
+/** The windows a RECORDED-HARDWARE session emitted (resampled, experimental), with the quality gate's verdict for each. */
+export interface HardwareWindowList {
+	session_id: string; label: string; source_kind: 'RECORDED_HARDWARE_RESAMPLED'; claim_boundary: string; input_readings: number;
+	assumptions: Record<string, string | number>;
+	windows: { window_index: number; window_id: string; right_timestamp_us: number; ecg_quality: string; quality_reasons: string[] }[];
+}
+export function parseHardwareWindowList(value: unknown): HardwareWindowList {
+	const o = object(value, 'hardware_windows');
+	fields(o, ['session_id', 'label', 'source_kind', 'claim_boundary', 'assumptions', 'input_readings', 'windows'], 'hardware_windows');
+	const assumptions = object(o.assumptions, 'assumptions');
+	return { session_id: string(o.session_id, 'session_id'), label: string(o.label, 'label'), source_kind: literal(o.source_kind, 'RECORDED_HARDWARE_RESAMPLED', 'source_kind'),
+		claim_boundary: string(o.claim_boundary, 'claim_boundary'), input_readings: integer(o.input_readings, 'input_readings'),
+		assumptions: Object.fromEntries(Object.entries(assumptions).map(([k, v]) => [k, typeof v === 'number' ? number(v, k) : string(v, k)])),
+		windows: array(o.windows, (w, l) => { const x = object(w, l); fields(x, ['window_index', 'window_id', 'right_timestamp_us', 'ecg_quality', 'quality_reasons'], l);
+			return { window_index: integer(x.window_index, 'window_index'), window_id: string(x.window_id, 'window_id'), right_timestamp_us: integer(x.right_timestamp_us, 'right_timestamp_us'),
+				ecg_quality: string(x.ecg_quality, 'ecg_quality'), quality_reasons: array(x.quality_reasons, string, 'quality_reasons') }; }, 'windows') };
+}
+
 export function parseWindowTrace(value: unknown): WindowTrace {
 	const o = object(value, 'window_trace');
 	fields(o, ['trace_version','classification','source_kind','scenario_id','session_id','window_index','window_id',
@@ -140,8 +158,8 @@ export function parseWindowTrace(value: unknown): WindowTrace {
 	if (right - left !== 10_000_000) throw new Error('MALFORMED_EVIDENCE:window_duration');
 	return { trace_version: literal(o.trace_version, 'NHM_PIPELINE_TRACE_V1', 'trace_version'),
 		classification: oneOf(o.classification,
-			['DETERMINISTIC_LOCAL_RECONSTRUCTION', 'CAPTURED_LIVE_PREPROCESSING'], 'classification'),
-		source_kind: literal(o.source_kind, 'SYNTHETIC_VIRTUAL_WEARABLE', 'source_kind'),
+			['DETERMINISTIC_LOCAL_RECONSTRUCTION', 'CAPTURED_LIVE_PREPROCESSING', 'RECORDED_HARDWARE_RECONSTRUCTION'], 'classification'),
+		source_kind: oneOf(o.source_kind, ['SYNTHETIC_VIRTUAL_WEARABLE', 'RECORDED_HARDWARE_RESAMPLED'], 'source_kind'),
 		scenario_id: string(o.scenario_id, 'scenario_id'), session_id: nullable(o.session_id, string, 'session_id'),
 		window_index: integer(o.window_index, 'window_index'), window_id: string(o.window_id, 'window_id'),
 		left_timestamp_us: left, right_timestamp_us: right,

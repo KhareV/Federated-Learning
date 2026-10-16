@@ -109,6 +109,23 @@ describe('round-count selector and run starter', () => {
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
 		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00' });
 	});
+	it('a live-monitored site can be chosen from the eight canonical sites; SITE_00 stays the unchanged default request', async () => {
+		const sites = Array.from({ length: 8 }, (_, i) => ({ index: i, client_id: `SIM_FL_SITE_0${i}`, label: `SITE_0${i}`, profile: i === 3 ? 'sensor dropout' : 'clean signal' }));
+		const onStartTen = vi.fn();
+		render(StudioRunStarter, { props: { capabilities: { ...CAPS, ten_round: { ...CAPS.ten_round, monitored_sites: sites } } as StudioCapabilities, onStartThree: vi.fn(), onStartTen } });
+		await fireEvent.click(screen.getByTestId('rounds-10'));
+		expect(screen.queryByTestId('cfg10-site')).toBeNull();                        // only meaningful for the live-monitored source
+		await fireEvent.change(screen.getByTestId('cfg10-source'), { target: { value: 'LIVE_MONITORED_SITE_00' } });
+		const select = screen.getByTestId('cfg10-site') as HTMLSelectElement;
+		expect([...select.options].map((o) => o.textContent)).toContain('SITE_03 — sensor dropout');
+		expect(screen.getByTestId('cfg10-source-note').textContent).toContain('SITE_00');
+		await fireEvent.click(screen.getByTestId('cfg10-submit'));
+		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00' });
+		await fireEvent.change(select, { target: { value: '3' } });
+		expect(screen.getByTestId('cfg10-source-note').textContent).toContain('SITE_03');
+		await fireEvent.click(screen.getByTestId('cfg10-submit'));
+		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00', monitored_site: 3 });
+	});
 	it('enables and transmits FedProx plus the verified round-one shadow only when the backend advertises both', async () => {
 		const onStartTen = vi.fn();
 		const supported = { ...CAPS, ten_round: { ...CAPS.ten_round, algorithms: ['FEDAVG', 'FEDPROX'], aggregation_modes: ['PLAIN', 'SECAGG_SHADOW'], unsupported: {} } };

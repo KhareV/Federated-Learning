@@ -39,6 +39,8 @@ describe.each([
 	});
 });
 
+// HARDWARE-V2 PROVISION (reviewed, additive): ClientDetailPanel gained ONE optional `modelLabel` prop so a recorded-hardware run that fine-tunes the pretrained V2 network names its real model
+// (default unchanged: SOURCE_COPY wording). No markup, test id or style rule changed.
 // ACCESSIBILITY PROVISION (reviewed): RoundProgress states its true heading level to assistive technology (aria-level="3" on the existing <h4>; no markup, style or visual change).
 // RECORDED-HARDWARE PROVISION (reviewed, additive): these two components gained ONE optional `dataSource` prop so the SAME Live page can show a recorded-hardware
 // run (client ids, card tag, buffer/model wording). Synthetic runs render exactly as before (default 'SYNTHETIC'). Every original test id and style rule must remain,
@@ -46,7 +48,7 @@ describe.each([
 const REVIEWED_HARDWARE_PROVISION: Record<string, string> = {
 	'frontend/src/lib/components/product/federation/RoundProgress.svelte': '212dbd720234531168ad3dff00dd624022c69837c7c2055b05fad0988936d2e1',
 	'frontend/src/lib/components/product/federation/ClientGrid.svelte': '573ec801e90e186dde585aa91903f121e93c0f0d3cf254c3a3d8209f160a5115',
-	'frontend/src/lib/components/product/federation/ClientDetailPanel.svelte': 'bc1e08bcc0f4e62817da65a166f43367eadf9d7761dd0a374c3d58881a4542d2'
+	'frontend/src/lib/components/product/federation/ClientDetailPanel.svelte': 'd3b11f22966d8063830302adbca31f93491764c497159fdb42525f326250e77f'
 };
 describe('recorded-hardware provision keeps the original component design', () => {
 	it.each(Object.keys(REVIEWED_HARDWARE_PROVISION))('%s: original test ids and style rules are intact and the reviewed bytes are pinned', (file) => {

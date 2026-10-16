@@ -10,11 +10,11 @@ import type { HardwareDemoRun, StudioCapabilities } from '../types';
 
 const immediate = (cb: () => void) => { cb(); return 0; };
 const HW = { available: true, source_mode: 'RECORDED_HARDWARE_DEMO' as const, model: 'HARDWARE_DEMO_MODEL_V1' as const, run_lengths: [3, 10], algorithms: ['FEDAVG', 'FEDPROX'],
-	aggregation_modes: ['PLAIN', 'SECAGG_SHADOW'], secagg_scope: 'ROUND-1', fedprox_mu: 0.1, label_assignment: 'L', initialisations: ['HARDWARE_DEMO_MODEL_V1'], v2_initialisation: 'NOT_APPLICABLE',
+	aggregation_modes: ['PLAIN', 'SECAGG_SHADOW'], secagg_scope: 'ROUND-1', fedprox_mu: 0.1, label_assignment: 'L', initialisations: ['HARDWARE_DEMO_MODEL_V1'], v2_initialisation: 'PRETRAINED_V2_FINE_TUNING',
 	starting_models: [
 		{ id: 'FRESH_SEEDED' as const, label: 'Fresh initialisation (seeded, untrained)', available: true, reason: null },
 		{ id: 'WARM_START' as const, label: 'Pretrained: warm start from an earlier recorded-hardware run', available: true, reason: null },
-		{ id: 'MODEL_V2_FINAL' as const, label: 'Pretrained V2 (MODEL_V2_FINAL)', available: false, reason: 'V2 is a 250 Hz ECG-window network; this model is tabular.' }] };
+		{ id: 'MODEL_V2_FINAL' as const, label: 'Pretrained V2 (MODEL_V2_FINAL)', available: true, reason: null, note: 'Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows.' }] };
 const caps = (hardware: typeof HW | undefined): StudioCapabilities => ({ studio_id: 'S', run_lengths: [3, 10], default_run_length: 3,
 	ten_round: { available: true, initialisations: [], rounds_by_initialisation: {}, default_initialisation: 'FL_INIT_V2', source_modes: ['CANONICAL_SYNTHETIC'], algorithms: ['FEDAVG'], aggregation_modes: ['PLAIN'], unsupported: {}, expected_updates: 80 },
 	three_round: { available: true, expected_updates: 24 }, ...(hardware ? { hardware_demo: hardware } : {}),
@@ -22,13 +22,17 @@ const caps = (hardware: typeof HW | undefined): StudioCapabilities => ({ studio_
 
 const prior = { run_id: 'HDFLRUN-AAA', status: 'COMPLETED', algorithm: 'FEDAVG', rounds_planned: 3, completed_at: '2026-10-15T00:00:00Z', model: { id: 'HARDWARE_DEMO_MODEL_V1' } } as unknown as HardwareDemoRun;
 let started: unknown;
+let previewResult: unknown;
+const PREVIEW_OK = { sessions: [{ session_id: 'HW-OK', readings: 4800, windows: 57, usable: 40, train: 28, holdout: 8, by_quality: { VALID: 40, UNUSABLE: 17 }, excluded_reasons: { CLIPPING: 17 } }], train_windows: 28, holdout_windows: 8, min_train_windows: 16, min_holdout_windows: 4, eligible: true, reason: null, assumptions: {} };
+const PREVIEW_BAD = { ...PREVIEW_OK, sessions: [{ ...PREVIEW_OK.sessions[0], usable: 0, train: 0, holdout: 0 }], train_windows: 0, holdout_windows: 0, eligible: false, reason: 'INSUFFICIENT_V2_WINDOWS: 0 training and 0 holdout windows usable; the unchanged PREPROC_V1 quality gate excluded: CLIPPING ×57.' };
 beforeEach(() => {
-	FakeSocket.reset(); started = null;
+	FakeSocket.reset(); started = null; previewResult = PREVIEW_OK;
 	vi.stubGlobal('location', { protocol: 'http:', host: 'localhost:5173', assign: vi.fn() });
 	const backend = Object.assign(fakeBackend(), {
 		hardwareDemoSessions: () => Promise.resolve([{ id: 'HW-OK', started_at: '2026-10-15T00:00:00Z', stopped_at: '2026-10-15T00:01:00Z', record_count: 1200, trace_count: 1200, eligible: true },
 			{ id: 'HW-EMPTY', started_at: '2026-10-15T00:00:00Z', stopped_at: '2026-10-15T00:00:05Z', record_count: 0, trace_count: 0, eligible: false }]),
 		hardwareDemoRuns: () => Promise.resolve([prior]),
+		hardwareV2Preview: () => Promise.resolve(previewResult),
 		hardwareDemoStart: (choice: unknown) => { started = choice; return Promise.reject(new Error('stop here')); }
 	});
 	setProductStore(new ProductStore(new FrontendAuth({ createClient: () => backend }), immediate, (u) => new FakeSocket(u)));
@@ -41,15 +45,15 @@ describe('recorded hardware inside the run starter', () => {
 		mount(caps(undefined));
 		expect(screen.queryByTestId('data-source-hardware')).toBeNull();
 	});
-	it('selecting Recorded hardware swaps in the hardware form; V2 is shown as not applicable with the reason', async () => {
+	it('selecting Recorded hardware swaps in the hardware form; pretrained V2 is a selectable starting model', async () => {
 		mount(caps(HW));
 		expect(screen.getByTestId('data-source-synthetic').getAttribute('aria-checked')).toBe('true');
 		await fireEvent.click(screen.getByTestId('data-source-hardware'));
 		expect(await screen.findByTestId('hardware-demo-starter')).toBeTruthy();
 		expect(screen.getByTestId('hardware-demo-boundary').textContent).toContain('SYNTHETIC labels');
 		const init = screen.getByTestId('hardware-demo-init') as HTMLSelectElement;
-		expect([...init.options].map((o) => [o.value, o.disabled])).toEqual([['FRESH_SEEDED', false], ['WARM_START', false], ['MODEL_V2_FINAL', true]]);
-		expect(screen.getByTestId('hardware-demo-v2-note').textContent).toContain('tabular');
+		expect([...init.options].map((o) => [o.value, o.disabled])).toEqual([['FRESH_SEEDED', false], ['WARM_START', false], ['MODEL_V2_FINAL', false]]);
+		expect(screen.queryByTestId('hardware-demo-v2-note')).toBeNull();      // the V2 note appears only once V2 is chosen
 		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
 		expect((screen.getByTestId('hardware-demo-session-HW-EMPTY') as HTMLInputElement).disabled).toBe(true);
 		expect(screen.queryByTestId('cfg-run-type')).toBeNull();     // the frozen synthetic 3-round form is not shown
@@ -72,5 +76,28 @@ describe('recorded hardware inside the run starter', () => {
 		render(StudioRunStarter, { props: { capabilities: caps(HW), onStartThree: vi.fn(), onStartTen: vi.fn(), dataSource: 'HARDWARE', preselectSession: 'HW-EMPTY' } });
 		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-EMPTY')).toBeTruthy());
 		expect((screen.getByTestId('hardware-demo-session-HW-EMPTY') as HTMLInputElement).checked).toBe(false);
+	});
+	it('pretrained V2 shows what the quality gate accepts and starts a MODEL_V2_FINAL run only when enough windows are usable', async () => {
+		mount(caps(HW));
+		await fireEvent.click(screen.getByTestId('data-source-hardware'));
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
+		await fireEvent.click(screen.getByTestId('hardware-demo-session-HW-OK'));
+		await fireEvent.change(screen.getByTestId('hardware-demo-init'), { target: { value: 'MODEL_V2_FINAL' } });
+		expect(screen.getByTestId('hardware-demo-v2-note').textContent).toContain('verified pretrained MODEL_V2_FINAL');
+		await waitFor(() => expect(screen.getByTestId('hardware-v2-preview').textContent).toContain('ENOUGH USABLE WINDOWS'));
+		expect(screen.getByText('MODEL_V2_FINAL (fine-tuned)')).toBeTruthy();
+		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
+		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], run_length: 3, initialisation: 'MODEL_V2_FINAL' }));
+		expect(started).not.toHaveProperty('warm_start_run_id');
+	});
+	it('pretrained V2 refuses to start (with the backend\'s reason) when the quality gate leaves too few windows', async () => {
+		previewResult = PREVIEW_BAD;
+		mount(caps(HW));
+		await fireEvent.click(screen.getByTestId('data-source-hardware'));
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
+		await fireEvent.click(screen.getByTestId('hardware-demo-session-HW-OK'));
+		await fireEvent.change(screen.getByTestId('hardware-demo-init'), { target: { value: 'MODEL_V2_FINAL' } });
+		await waitFor(() => expect(screen.getByTestId('hardware-v2-preview-reason').textContent).toContain('CLIPPING'));
+		expect((screen.getByTestId('hardware-demo-start') as HTMLButtonElement).disabled).toBe(true);
 	});
 });

@@ -7,9 +7,9 @@
 	import type { ClientView } from '$lib/product/federation/live-model';
 	import type { FLClientIdentity } from '$lib/product/federation/types';
 	import { SOURCE_COPY, clientShortName, type RunDataSource } from '$lib/product/federation/data-source';
-	let { clientId, client, ownerBound = false, plannedRounds = 3, replay = false, identity = undefined, dataSource = 'SYNTHETIC' }: { clientId: string; client: ClientView | undefined; ownerBound?: boolean; plannedRounds?: number; replay?: boolean; identity?: FLClientIdentity | undefined; dataSource?: RunDataSource } = $props();
+	let { clientId, client, ownerBound = false, plannedRounds = 3, replay = false, identity = undefined, dataSource = 'SYNTHETIC', modelLabel = undefined }: { clientId: string; client: ClientView | undefined; ownerBound?: boolean; plannedRounds?: number; replay?: boolean; identity?: FLClientIdentity | undefined; dataSource?: RunDataSource; modelLabel?: string } = $props();
 	const copy = $derived(SOURCE_COPY[dataSource]);
-	const stepLabel = (id: string, label: string) => (id === 'BUFFER' ? copy.bufferLabel : id === 'ARCHITECTURE' ? copy.modelLabel : label);
+	const stepLabel = (id: string, label: string) => (id === 'BUFFER' ? copy.bufferLabel : id === 'ARCHITECTURE' ? (modelLabel ?? copy.modelLabel) : label);
 	const step = $derived(localStepIndex(client));
 	const completed = $derived(client ? Object.values(client.milestones).filter((m) => m === 1).length : 0);
 	const produced = $derived(client ? Object.keys(client.updateDigests).length : 0);

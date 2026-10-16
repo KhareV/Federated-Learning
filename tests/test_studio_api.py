@@ -60,7 +60,7 @@ def test_studio_requires_identity_and_serves_recorded_runs_through_the_same_rout
         caps = c.get(f"{S}/capabilities", headers=USER_A).json()
         assert caps["run_lengths"] == [3, 10] and caps["default_run_length"] == 3
         assert caps["ten_round"]["algorithms"] == ["FEDAVG", "FEDPROX"] and caps["ten_round"]["aggregation_modes"] == ["PLAIN", "SECAGG_SHADOW"] and caps["ten_round"]["unsupported"] == {} and caps["ten_round"]["expected_updates"] == 80
-        assert caps["hardware_demo"]["model"] == "HARDWARE_DEMO_MODEL_V1" and caps["hardware_demo"]["v2_initialisation"] == "NOT_APPLICABLE"
+        assert caps["hardware_demo"]["model"] == "HARDWARE_DEMO_MODEL_V1" and caps["hardware_demo"]["v2_initialisation"] == "PRETRAINED_V2_FINE_TUNING" and {m["id"]: m["available"] for m in caps["hardware_demo"]["starting_models"]}["MODEL_V2_FINAL"] is True
         runs = c.get(f"{S}/runs", headers=USER_A).json()
         assert {r["run_id"] for r in runs} == {"recorded-A", "recorded-B"} and all(r["origin"] == "RECORDED" and r["source_label"].startswith("RECORDED") for r in runs)
         summary = c.get(f"{S}/runs/recorded-A/evaluation", headers=USER_B).json()          # recorded evidence is global read-only reference

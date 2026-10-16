@@ -50,7 +50,7 @@ function startPublisher(tag, count, extra = []) {
 	const fd = openSync(`${LOGS}/${tag}.log`, 'w');
 	// NHM_PRODUCER=ws drives the real network path (ESP32 emulator -> ingestion server -> Atlas); default writes to Atlas directly.
 	const ws = process.env.NHM_PRODUCER === 'ws';
-	const argv = ws ? ['-m', 'scripts.emulate_esp32_ws', '--url', process.env.NHM_WS_URL, '--timing', 'firmware', '--count', String(count), '--rate', '20', '--run-tag', tag, '--event-log', `${LOGS}/${tag}.events.jsonl`, '--summary-file', `${LOGS}/${tag}.summary.json`, ...extra]
+	const argv = ws ? ['-m', 'scripts.emulate_esp32_ws', '--url', process.env.NHM_WS_URL, '--timing', 'firmware', '--count', String(count), '--rate', '20', '--run-tag', tag, ...(process.env.NHM_PATTERN ? ['--pattern', process.env.NHM_PATTERN] : []), '--event-log', `${LOGS}/${tag}.events.jsonl`, '--summary-file', `${LOGS}/${tag}.summary.json`, ...extra]
 		: ['-m', 'scripts.publish_hardware_test', '--count', String(count), '--rate', '20', '--run-tag', tag, ...extra];
 	const childEnv = { ...process.env }; if (ws) delete childEnv.NHM_HARDWARE_MONGO_URI;  // the emulator never holds database credentials
 	const child = spawn(process.env.NHM_TEST_PYTHON, argv, { cwd: process.cwd(), env: childEnv, stdio: ['ignore', fd, fd] });
@@ -218,6 +218,83 @@ if (MODE === 'scenario-a') {
 	await ev('location.reload()'); await sleep(1500); await snap('reload on hardware', 'RECORDED HARDWARE', HW);
 	await shot('switch_final_hardware');
 	Object.assign(out, { tag, session_id: sid, hardware_run: HW, steps });
+} else if (MODE === 'v2') {
+	// Pretrained-V2 recorded-hardware path in a real browser: two retention-capped recordings (AD8232-amplitude emulator pattern through the local replica),
+	// Observatory replay + window trace on the recorded session, the V2 starter's preview (single session refused, two accepted), a real V2 run and its generalisation tab.
+	const tag = `NHM-BROWSER-V2-${stamp}`; const text = (id) => value(id);
+	const record = async (n) => {
+		const sid = await openHardwareAndStart(); const pub = startPublisher(`${tag}-${n}`, 2500, []);
+		await waitFor(`Number(document.querySelector('[data-testid="hardware-record-count"]')?.textContent ?? 0) >= 2000`, 240000);
+		await waitExit(pub, 240000); await sleep(1500);
+		await clickId('hardware-stop'); await waitFor(`document.querySelector('[data-testid="hardware-state"]')?.textContent.includes('SESSION STOPPED')`, 30000);
+		return sid;
+	};
+	const sid1 = await record(1); const sid2 = await record(2); await shot('v2_monitor_stopped');
+	const monitorReplayLink = await ev(`!!document.querySelector('[data-testid="hardware-monitor-replay"]')`);
+	// --- History links
+	await goto(`/app/history/${encodeURIComponent(sid1)}`); await waitFor(`!!document.querySelector('[data-testid="hardware-replay"]')`, 60000);
+	const historyLinks = await ev(`({ replay: document.querySelector('[data-testid="hardware-replay"]')?.getAttribute('href'), trace: document.querySelector('[data-testid="hardware-trace"]')?.getAttribute('href') })`);
+	// --- Session replay (hardware)
+	cdpEvents.length = 0;
+	await goto(`/app/observatory/replay?session=${encodeURIComponent(sid1)}`);
+	await waitFor(`!!document.querySelector('[data-testid="replay-hardware-tag"]')`, 90000);
+	await waitFor(`/scored/.test(document.querySelector('[data-testid="replay-hardware-summary"]')?.textContent ?? '') && !/pending/.test(document.querySelector('[data-testid="replay-hardware-summary"]')?.textContent ?? '') && !document.querySelector('[data-testid="replay-loading"]')`, 300000);
+	await sleep(800);
+	const replay = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+		return { tag: t('replay-hardware-tag'), summary: t('replay-hardware-summary'), has_controls: !!document.querySelector('[data-testid="replay-controls"]'), state: t('replay-state').slice(0, 500), transitions: t('replay-transitions').slice(0, 300),
+		chart_points: document.querySelectorAll('[data-testid="replay-chart"] circle').length, selected: document.querySelector('.pick select')?.value ?? null, alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }; })()`);
+	await shot('v2_replay');
+	// --- Observatory signal trace (hardware)
+	await goto(`/app/observatory?hw=${encodeURIComponent(sid1)}`);
+	await waitFor(`!!document.querySelector('[data-testid="observatory-classification"]')`, 120000);
+	await sleep(800);
+	const trace = await ev(`(() => ({ classification: (document.querySelector('[data-testid="observatory-classification"]')?.textContent ?? '').trim(), stages: document.querySelectorAll('.signal-grid > *').length,
+		summary: [...document.querySelectorAll('.summary > div')].map(x=>x.textContent.replace(/\\s+/g,' ').trim()), window_control: (document.querySelector('[data-testid="observatory-hardware-window"] output')?.textContent ?? '').trim(),
+		inference: (document.querySelector('.inference h2')?.textContent ?? '').trim(), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }))()`);
+	await shot('v2_trace');
+	await ev(`document.querySelector('[data-testid="observatory-hardware-window"] .stepper button:last-of-type')?.click()`); await sleep(2500);
+	const traceNext = await ev(`(document.querySelector('[data-testid="observatory-hardware-window"] output')?.textContent ?? '').trim()`);
+	const consoleErrors = cdpEvents.flatMap((e) => e.method === 'Log.entryAdded' && e.params.entry.level === 'error' ? [`console:${String(e.params.entry.text).slice(0, 140)}:${String(e.params.entry.url ?? '').slice(0, 90)}`]
+		: e.method === 'Network.responseReceived' && e.params.response.status >= 400 ? [`http ${e.params.response.status} ${String(e.params.response.url).replace(ORIGIN, '').slice(0, 120)}`]
+		: e.method === 'Runtime.exceptionThrown' ? [`exception:${JSON.stringify(e.params.exceptionDetails.exception?.description ?? e.params.exceptionDetails.text).slice(0, 160)}`] : []);
+	// --- Federation: V2 starter
+	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="data-source-hardware"]')`, 120000);
+	await clickId('data-source-hardware'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-starter"]')`, 60000);
+	await waitFor(`!!document.querySelector('[data-testid="hardware-demo-session-${sid1}"]') && !!document.querySelector('[data-testid="hardware-demo-session-${sid2}"]')`, 60000);
+	const initOptions = await ev(`[...document.querySelector('[data-testid="hardware-demo-init"]').options].map(o=>({value:o.value,disabled:o.disabled}))`);
+	await clickId(`hardware-demo-session-${sid1}`); await setSelect('[data-testid="hardware-demo-init"]', 'MODEL_V2_FINAL');
+	await waitFor(`!!document.querySelector('[data-testid="hardware-v2-preview"]')`, 120000);
+	const single = await ev(`({ text: document.querySelector('[data-testid="hardware-v2-preview"]').textContent.replace(/\\s+/g,' ').trim().slice(0, 700), start_disabled: document.querySelector('[data-testid="hardware-demo-start"]').disabled })`);
+	await shot('v2_form_single_refused');
+	await clickId(`hardware-demo-session-${sid2}`);
+	await waitFor(`/ENOUGH USABLE/.test(document.querySelector('[data-testid="hardware-v2-preview"]')?.textContent ?? '') && !/NOT ENOUGH/.test(document.querySelector('[data-testid="hardware-v2-preview"]')?.textContent ?? '')`, 180000);
+	const both = await ev(`({ text: document.querySelector('[data-testid="hardware-v2-preview"]').textContent.replace(/\\s+/g,' ').trim().slice(0, 700), start_disabled: document.querySelector('[data-testid="hardware-demo-start"]').disabled })`);
+	await setSelect('[data-testid="hardware-demo-algorithm"]', 'FEDPROX'); await setSelect('[data-testid="hardware-demo-secagg"]', 'SECAGG_SHADOW');
+	await shot('v2_form_ready'); await clickId('hardware-demo-start');
+	await waitFor(`location.pathname === '/app/federation/live' && (new URLSearchParams(location.search).get('run') || '').startsWith('HDFLRUN-')`, 120000);
+	const runId = await ev(`new URLSearchParams(location.search).get('run')`);
+	await waitFor(`(document.querySelector('[data-testid="run-status"]')?.textContent || '').includes('COMPLETED')`, 900000);
+	await sleep(4000);
+	const live = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+		return { status_line: t('run-status'), badge: t('source-badge'), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map((x)=>x.getAttribute('data-client')), hw_participation: t('hardware-participation').slice(0, 500),
+		metric_auprc: t('metric-AUPRC'), metric_accuracy: t('metric-accuracy'), secagg: t('secagg-status'), label: (document.body.innerText.match(/(\\d+)-round recorded-hardware run[^\\n]*/)||[''])[0],
+		alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }; })()`);
+	await shot('v2_live');
+	await clickId('atab-generalisation'); await waitFor(`!!document.querySelector('[data-testid="generalisation-panel"]')`, 60000);
+	await waitFor(`/rounds scored/.test(document.querySelector('[data-testid="generalisation-progress"]')?.textContent ?? '') || !!document.querySelector('[data-testid="generalisation-unavailable"]')`, 120000).catch(() => {});
+	await waitFor(`(() => { const m = (document.querySelector('[data-testid="generalisation-progress"]')?.textContent ?? '').match(/(\\d+)\\/(\\d+) rounds scored/); return m && m[1] === m[2]; })()`, 900000).catch(() => {});
+	const generalisation = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+		return { progress: t('generalisation-progress'), base_model: t('generalisation-base-model'), unavailable: t('generalisation-unavailable'), r0_identical: !!document.querySelector('[data-testid="generalisation-r0-identical"]') }; })()`);
+	await shot('v2_generalisation');
+	// --- Federation journal replay of the hardware run
+	await goto('/app/observatory/federation-replay'); await waitFor(`!!document.querySelector('.pick select') && [...document.querySelector('.pick select').options].some(o=>o.value===${JSON.stringify(runId)})`, 60000);
+	await setSelect('.pick select', runId); await waitFor(`!!document.querySelector('[data-testid="fed-replay-controls"]')`, 120000);
+	await sleep(1500);
+	const fedReplay = await ev(`({ option: [...document.querySelector('.pick select').options].find(o=>o.value===${JSON.stringify(runId)})?.textContent.trim(), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map(x=>x.getAttribute('data-client')),
+		jumps: [...document.querySelectorAll('[data-testid="fed-replay-controls"] button')].map(x=>x.textContent.trim()).filter(x=>/Jump to round/.test(x)), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) })`);
+	await shot('v2_fed_replay');
+	Object.assign(out, { tag, session_ids: [sid1, sid2], monitor_replay_link: monitorReplayLink, history_links: historyLinks, replay, trace, trace_next_window: traceNext, observatory_console_errors: consoleErrors,
+		init_options: initOptions, single_session_preview: single, two_session_preview: both, run_id: runId, live, generalisation, fed_replay: fedReplay });
 } else if (MODE === 'owner-probe') {
 	const target = process.env.NHM_EXPECT_SESSION; if (!target) throw new Error('NHM_EXPECT_SESSION missing');
 	await goto(`/app/history/${encodeURIComponent(target)}`); await waitFor(`document.querySelector('[role="alert"]') || document.body.innerText.includes('FORBIDDEN')`, 60000); const detailText = await ev('document.body.innerText'); await shot('owner_b_forbidden');

@@ -35,8 +35,18 @@ describe('run context axes are independent', () => {
 		const c = runContext(base({ run_id: 'HDFLRUN-W', engine: 'HARDWARE_DEMO', source_mode: 'RECORDED_HARDWARE', base_model: { model_id: 'HARDWARE_DEMO_MODEL_V1', label: 'w', initialisation: 'WARM_START' } as never }), 'HDFLRUN-W');
 		expect(c.lineage).toBe('HARDWARE_DEMO_WARM_START');
 	});
-	it('simulated SITE_00 is its own provenance', () => {
-		expect(runContext(base({ source_mode: 'LIVE_MONITORED_SITE_00' }), 'FL10RUN-A').provenance).toBe('SIMULATED_MONITORED_SITE_00');
+	it('a pretrained-V2 hardware run keeps hardware provenance and synthetic labels, and unlocks the unseen-cohort lane only', () => {
+		const c = runContext(base({ run_id: 'HDFLRUN-V', engine: 'HARDWARE_DEMO', source_mode: 'RECORDED_HARDWARE', base_model: { model_id: 'MODEL_V2_FINAL', label: 'v2' } }), 'HDFLRUN-V');
+		expect(c).toMatchObject({ provenance: 'RECORDED_HARDWARE', labels: 'SYNTHETIC_ASSIGNED_FOR_DEMO', lineage: 'HARDWARE_V2_PRETRAINED', clients: 'RECORDED_DEMO_CLIENT' });
+		expect(c.capabilities.generalisation.available).toBe(true);
+		for (const k of ['pairedIntervals', 'historicalReference', 'ownerBoundClient'] as const) expect(c.capabilities[k].available).toBe(false);
+		expect(c.dataSentence).toMatch(/V2 windows/);
+	});
+	it('simulated SITE_00 is its own provenance, and the badge names the monitored site', () => {
+		expect(runContext(base({ source_mode: 'LIVE_MONITORED_SITE_00' }), 'FL10RUN-A')).toMatchObject({ provenance: 'SIMULATED_MONITORED_SITE_00', badge: 'SIMULATED SITE_00' });
+		const c = runContext(base({ source_mode: 'LIVE_MONITORED_SITE_00', monitored_site: 5 }), 'FL10RUN-A');
+		expect(c.badge).toBe('SIMULATED SITE_05');
+		expect(c.dataSentence).toContain('SITE_05');
 	});
 });
 

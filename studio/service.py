@@ -229,7 +229,7 @@ class StudioService:
                 job = self.runner10.get(user_id, run_id)
             except StudioRunError as error:
                 raise _as_product_error(error) from error
-            return {"run_id": run_id, "run_length": job.rounds, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "source_mode": MODES[job.mode], "status": job.status,
+            return {"run_id": run_id, "run_length": job.rounds, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "source_mode": MODES[job.mode], "monitored_site": job.monitored_site if job.mode == "B" else None, "status": job.status,
                     "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds, "client_ids": list(CLIENT_IDS), "candidate": job.candidate, "failure": job.failure,
                     "label": f"{job.rounds}-round " + ("extended run" if job.init == v2_init.INIT_FRESH else "run — pretrained V2 start"),
                     "base_model": self._base_model(job.init, job.base_audit), "source_label": "LIVE RUN (this session)", "replay_of": None, "evaluation": self._evaluation_state(run_id), "export_status": job.export_status, "created_at": job.created_at}
@@ -304,7 +304,10 @@ class StudioService:
             from studio.hardware_bundle import CLAIM, COHORT_USE
 
             b = self._hardware_bundle(run_id)
-            labels = {"evaluation_protocol_id": b["protocol"]["evaluation_protocol_id"], "observer_id": "NHM_HARDWARE_DEMO_EVALUATION_V1", "cohort_use": COHORT_USE, "cohort_use_detail": COHORT_USE, "claim_boundary": CLAIM}
+            v2 = b["run"]["initialisation"]["model_id"] == "MODEL_V2_FINAL"
+            if v2:
+                from studio.hardware_v2 import CLAIM as V2_CLAIM
+            labels = {"evaluation_protocol_id": b["protocol"]["evaluation_protocol_id"], "observer_id": "NHM_HARDWARE_DEMO_EVALUATION_V1", "cohort_use": b["evaluation"]["cohort_use"], "cohort_use_detail": b["evaluation"]["cohort_use_detail"], "claim_boundary": V2_CLAIM if v2 else CLAIM}
         return {"run_id": run_id, "run_length": n, "evaluation": d["evaluation"], "records": records, "rounds_expected": list(range(n + 1)), "comparison": {"comparator_round": a, "endpoint_round": e, "paired_available": paired is not None},
                 **labels, "threshold": 0.5, "calibration": "NONE",
                 "source_label": d["source_label"], "run_status": d["status"], "revision": d["evaluation"]["revision"]}
@@ -346,7 +349,9 @@ class StudioService:
     def _generalisation_run(self, user_id: str, run_id: str) -> tuple[dict[str, Any], str]:
         d = self.describe(user_id, run_id)
         if self.is_hardware(run_id):
-            raise ProductError(ProductErrorCode.INVALID_STATE, "GENERALISATION_NOT_AVAILABLE: the unseen-cohort generalisation lane scores MODEL_V2_FINAL-compatible ECG windows; recorded-hardware runs have no unseen cohort and no V2 baseline")
+            if d["base_model"]["model_id"] != "MODEL_V2_FINAL":
+                raise ProductError(ProductErrorCode.INVALID_STATE, "GENERALISATION_NOT_AVAILABLE: the unseen-cohort generalisation lane scores MODEL_V2_FINAL-compatible ECG windows; this recorded-hardware run trained the small tabular model, which has no V2 baseline")
+            return d, run_id          # a pretrained-V2 hardware run: its committed states are V2-compatible and were mirrored to the lane as they committed
         if self.is_recorded(run_id):
             raise ProductError(ProductErrorCode.INVALID_STATE, "GENERALISATION_NOT_AVAILABLE: recorded evidence runs keep their own recorded diagnostic evaluation; start a new run to score the unseen cohort")
         if not d["evaluation"]["available"]:
@@ -400,9 +405,19 @@ class StudioService:
                 "batches": [r for r in bundle["batches"] if r["round"] == round_id], "state": bundle["state_progression"].get(str(round_id))}
 
     # ---- exports -------------------------------------------------------------------------------------------------------
+    def submit_hardware_v2_state(self, run_id: str, run_length: int, round_id: int, state: Any, digest: str) -> None:
+        """A committed state of a pretrained-V2 recorded-hardware run is scored on the unseen G1 cohort like any V2 run (the diagnostic lane for hardware is its own holdout block)."""
+        self.generalisation.observer.submit(run_id=run_id, run_length=run_length, round_id=round_id, state=state, expected_digest=digest, mirror=False)
+
     def finalize_hardware(self, run_id: str, directory: Path) -> None:
-        """Figure/table exports of a completed recorded-hardware run (same exporter, no V2 evaluation artefacts)."""
+        """Figure/table exports of a completed recorded-hardware run (same exporter; a pretrained-V2 run also exports its unseen-cohort lane)."""
         bundle = self._hardware_bundle(run_id)
+        job = self._hardware_job(run_id)
+        if job.initialisation == "MODEL_V2_FINAL":
+            self.generalisation.wait_settled(run_id, job.rounds)
+            gen = self.generalisation.bundle(run_id, run_length=job.rounds, init=self.hardware.describe(job)["base_model"])
+            export_run(bundle, directory / "export", generalisation=gen, gen_dir=self.generalisation.observer.run_dir(run_id), baseline_dir=self.generalisation.observer.run_dir(BASELINE_RUN_ID))
+            return
         export_run(bundle, directory / "export")      # writes export_manifest.json itself
 
     def export_dir(self, run_id: str) -> Path:

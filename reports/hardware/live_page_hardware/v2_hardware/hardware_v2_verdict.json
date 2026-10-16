@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "federation_replay_lists_hardware_run": true,
+    "federation_replay_round_jumps": true,
+    "generalisation_all_rounds_scored": true,
+    "generalisation_available": true,
+    "history_links": true,
+    "observatory_no_console_or_http_errors": true,
+    "r0_identical_to_frozen_v2": true,
+    "replay_every_usable_window_scored": true,
+    "replay_hardware_tag": true,
+    "replay_no_alerts": true,
+    "replay_scored_windows": true,
+    "run_completed": true,
+    "run_is_recorded_hardware_v2": true,
+    "run_metrics_shown": true,
+    "secagg_shadow_reported": true,
+    "single_session_preview_reported": true,
+    "trace_next_window_moves": true,
+    "trace_recorded_hardware": true,
+    "two_sessions_accepted": true,
+    "v2_option_enabled": true
+  },
+  "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "mode": "hardware_v2",
+  "observatory_console_errors": [],
+  "physical_esp32_verified": false,
+  "real_render_verified": false,
+  "run_id": "HDFLRUN-48F9F8A8C9CB",
+  "sessions": [
+    "HW-177627bd47ce4582b684eefbc84c0ec2",
+    "HW-cd399bae878f4ac5a9c955f342cfc15d"
+  ],
+  "status": "PASS"
+}

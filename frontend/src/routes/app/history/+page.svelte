@@ -5,20 +5,13 @@
 	import type { HardwareSession } from '$lib/product/api';
 	let hardware = $state<HardwareSession[]>([]);
 	import { getProductStore } from '$lib/product/state.svelte';
+	import { loadHardwareSessions } from '$lib/product/hardware-sessions';
 	const store = getProductStore();
 	let loaded = $state(false);
 	const secs = (v: number | null | undefined) => (v == null ? '--' : v >= 60 ? `${Math.floor(v / 60)} m ${Math.round(v % 60)} s` : `${v.toFixed(1)} s`);
 	const when = (us: number | null) => (us === null ? '--' : new Date(us / 1000).toLocaleString());
-	// The hardware-session routes exist only when the hardware telemetry source is enabled on the backend; asking for them otherwise is a guaranteed 404 (a console error on every visit).
-	// The backend's own capability flag decides, so a disabled source is an ordinary empty state, not a failed request.
-	async function loadHardware(): Promise<void> {
-		try {
-			const caps = await store.api.studioCapabilities();
-			hardware = caps.hardware_demo?.available === true ? await store.api.hardwareSessions() : [];
-		} catch {
-			hardware = [];
-		}
-	}
+	// The hardware-session routes exist only when the telemetry source is enabled; the backend's own capability flag decides (see loadHardwareSessions).
+	async function loadHardware(): Promise<void> { hardware = await loadHardwareSessions(store.api); }
 	onMount(() => { void Promise.all([store.loadSessions(), loadHardware()]).finally(() => (loaded = true)); });
 </script>
 <svelte:head><title>History | NHM</title></svelte:head>
@@ -42,13 +35,13 @@
 				<td class="two"><b>{h.summary?.ecg_min != null ? `ECG ${h.summary.ecg_min}–${h.summary.ecg_max}` : 'ECG --'}</b><small>device BPM {h.summary?.bpm_mean ?? '--'}</small></td>
 				<td class="two"><b>{new Date(h.started_at).toLocaleDateString()}</b><small>{new Date(h.started_at).toLocaleTimeString()}</small></td>
 				<td><span class="badge" class:test={h.source.startsWith('SYNTHETIC')}>{h.source.startsWith('SYNTHETIC') ? 'TEST SOURCE' : 'ESP32 · UNVERIFIED'}</span></td>
-				<td><div class="acts"><a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a>{#if h.status !== 'ACTIVE' && h.record_count > 0}<a class="fl" href={`/app/federation?source=hardware&session=${encodeURIComponent(h.session_id)}`} title="Opens Start a federation run with Recorded hardware and this session selected">USE IN FL →</a>{/if}</div></td>
+				<td><div class="acts"><a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a>{#if h.status !== 'ACTIVE' && h.record_count > 0}<a class="fl" href={`/app/federation?source=hardware&session=${encodeURIComponent(h.session_id)}`} title="Opens Start a federation run with Recorded hardware and this session selected">USE IN FL →</a><a class="fl" href={`/app/observatory/replay?session=${encodeURIComponent(h.session_id)}`} title="Opens the session replay with this recorded session (experimental, resampled)">REPLAY →</a>{/if}</div></td>
 			</tr>{/each}</tbody></table></div>
 		<ul class="mobile-list" aria-label="Hardware telemetry sessions">{#each hardware as h (h.session_id)}<li>
 			<div class="card-head"><span class="badge" class:complete={h.status === 'STOPPED' && h.record_count > 0} class:failed={h.record_count === 0}>{h.status === 'ACTIVE' ? 'ACTIVE' : h.status === 'INTERRUPTED' ? 'INTERRUPTED' : h.record_count === 0 ? 'NO DATA' : 'SAVED'}</span><time>{new Date(h.started_at).toLocaleString()}</time></div>
 			<strong class="session-id">{h.session_id}</strong>
 			<dl><div><dt>Readings</dt><dd>{h.record_count}</dd></div><div><dt>Duration</dt><dd>{secs(h.summary?.span_seconds)}</dd></div><div><dt>Device BPM</dt><dd>{h.summary?.bpm_mean ?? '--'}</dd></div><div><dt>Source</dt><dd>{h.source.startsWith('SYNTHETIC') ? 'TEST SOURCE' : 'ESP32 · UNVERIFIED'}</dd></div></dl>
-			<a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a></li>{/each}</ul>
+			<a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a>{#if h.status !== 'ACTIVE' && h.record_count > 0}<a href={`/app/observatory/replay?session=${encodeURIComponent(h.session_id)}`}>REPLAY →</a>{/if}</li>{/each}</ul>
 	{/if}
 	<p class="dim">Hardware sessions are telemetry recordings of the shared MongoDB source. Durations and rates come from server ingestion timestamps; device BPM and SpO₂ are unverified. No clinical claim is made.</p>
 </Panel>

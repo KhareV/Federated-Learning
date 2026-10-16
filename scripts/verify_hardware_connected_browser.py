@@ -67,6 +67,7 @@ def main() -> int:
     parser.add_argument("--run-switch", action="store_true", help="real-browser run-switch check: hardware <-> recorded synthetic evidence via the selector, back/forward and reload")
     parser.add_argument("--ui-tour", action="store_true", help="seed a hardware session + run, then tour every route at desktop and phone width")
     parser.add_argument("--soak-seconds", type=int, default=0, help="run only the long browser soak for this many seconds")
+    parser.add_argument("--hardware-v2", action="store_true", help="pretrained-V2 recorded-hardware path: two recordings, Observatory replay + trace, V2 run, generalisation tab, federation journal replay")
     args = parser.parse_args()
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     env = {**parse_env_file(Path(args.env_file)), **os.environ}
@@ -131,6 +132,45 @@ def main() -> int:
                        "hardware_vs_recorded_metric_differs": len({st.get("auprc") for st in steps if st.get("auprc")}) > 1,
                        "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA" if ws_mode else "VERIFIED_DIRECT_ATLAS_INJECTION"}
             (out / "run_switch_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
+        if args.hardware_v2:
+            if not ws_mode:
+                raise SystemExit("--hardware-v2 needs --producer ws (the AD8232-amplitude emulator pattern through the local replica)")
+            env["NHM_PATTERN"] = "ecg_ad8232"
+            running, origin = stack(env, workspace, python)
+            try:
+                v2 = drive("v2", origin, Path(args.users_file), out / "v2.json", out / "v2_shots", out / "publisher_logs", env)
+                tags.extend(f"{v2['tag']}-{n}" for n in (1, 2))
+            finally:
+                running.shutdown()
+            live, gen, single, both = v2["live"], v2["generalisation"], v2["single_session_preview"], v2["two_session_preview"]
+            rounds_scored = gen["progress"].split(" ")[0]
+            checks = {
+                "history_links": bool(v2["history_links"]["replay"]) and bool(v2["history_links"]["trace"]) and v2["monitor_replay_link"],
+                "replay_hardware_tag": "RECORDED HARDWARE" in v2["replay"]["tag"] and "NOT DIAGNOSTIC" in v2["replay"]["tag"],
+                "replay_scored_windows": "scored" in v2["replay"]["summary"] and v2["replay"]["has_controls"] and v2["replay"]["chart_points"] > 0 and "calibrated" in v2["replay"]["state"],
+                "replay_no_alerts": not v2["replay"]["alerts"],
+                "replay_every_usable_window_scored": "pending" not in v2["replay"]["summary"] and "0 rejected" in v2["replay"]["summary"] or "rejected by the quality gate" in v2["replay"]["summary"] and "pending" not in v2["replay"]["summary"],
+                "trace_recorded_hardware": "RECORDED HARDWARE" in v2["trace"]["classification"] and v2["trace"]["stages"] >= 4 and not v2["trace"]["alerts"],
+                "trace_next_window_moves": v2["trace_next_window"] != v2["trace"]["window_control"],
+                "observatory_no_console_or_http_errors": not v2["observatory_console_errors"],
+                "v2_option_enabled": any(o["value"] == "MODEL_V2_FINAL" and not o["disabled"] for o in v2["init_options"]),
+                "single_session_preview_reported": "training" in single["text"] and "holdout" in single["text"] and (single["start_disabled"] == ("NOT ENOUGH" in single["text"])),
+                "two_sessions_accepted": "ENOUGH USABLE" in both["text"] and "NOT ENOUGH" not in both["text"] and not both["start_disabled"],
+                "run_completed": "COMPLETED" in live["status_line"],
+                "run_is_recorded_hardware_v2": live["badge"] == "RECORDED HARDWARE" and "pretrained V2" in live["label"] and len(live["clients"]) == 8 and all(c.startswith("RECORDED_DEMO_CLIENT_") for c in live["clients"]),
+                "run_metrics_shown": bool(live["metric_auprc"]) and "NOT YET" not in live["metric_auprc"],
+                "secagg_shadow_reported": "VERIF" in live["secagg"].upper() or "SHADOW" in live["secagg"].upper(),
+                "generalisation_available": bool(gen["progress"]) and not gen["unavailable"] and "MODEL_V2_FINAL" in gen["base_model"],
+                "generalisation_all_rounds_scored": rounds_scored.split("/")[0] == rounds_scored.split("/")[-1] if "/" in rounds_scored else False,
+                "r0_identical_to_frozen_v2": gen["r0_identical"],
+                "federation_replay_lists_hardware_run": "RECORDED HARDWARE" in (v2["fed_replay"]["option"] or "") and len(v2["fed_replay"]["clients"]) == 8 and all(c.startswith("RECORDED_DEMO_CLIENT_") for c in v2["fed_replay"]["clients"]),
+                "federation_replay_round_jumps": len(v2["fed_replay"]["jumps"]) >= 2 and not v2["fed_replay"]["alerts"],
+            }
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "hardware_v2", "checks": checks, "run_id": v2["run_id"], "sessions": v2["session_ids"],
+                       "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA", "real_render_verified": False, "physical_esp32_verified": False, "observatory_console_errors": v2["observatory_console_errors"]}
+            (out / "hardware_v2_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
             print(json.dumps(verdict))
             return 0 if verdict["status"] == "PASS" else 1
         if args.ui_tour:

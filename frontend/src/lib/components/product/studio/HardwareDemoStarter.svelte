@@ -3,7 +3,7 @@
 	// control: the rounds radio of the parent card is the only one, so both data sources share one form.
 	import { goto } from '$app/navigation';
 	import { getProductStore } from '$lib/product/state.svelte';
-	import type { HardwareDemoRun, HardwareDemoSession, HardwareStartingModel, StudioCapabilities } from '$lib/product/studio/types';
+	import type { HardwareDemoRun, HardwareDemoSession, HardwareStartingModel, HardwareV2Preview, StudioCapabilities } from '$lib/product/studio/types';
 	let { capabilities = null, disabled = false, rounds = 3, preselect = null }: { capabilities?: StudioCapabilities | null; disabled?: boolean; rounds?: 3 | 10; preselect?: string | null } = $props();
 	const product = getProductStore();
 	let sessions = $state<HardwareDemoSession[]>([]);
@@ -11,7 +11,7 @@
 	let selected = $state<string[]>([]);
 	let algorithm = $state<'FEDAVG' | 'FEDPROX'>('FEDAVG');
 	let secagg = $state<'PLAIN' | 'SECAGG_SHADOW'>('PLAIN');
-	let startModel = $state<'FRESH_SEEDED' | 'WARM_START'>('FRESH_SEEDED');
+	let startModel = $state<'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL'>('FRESH_SEEDED');
 	let warmRun = $state('');
 	let seed = $state(20261015);
 	let running = $state(false);
@@ -25,7 +25,20 @@
 	const warmAvailable = $derived(models.some((m) => m.id === 'WARM_START' && m.available));
 	const eligible = $derived(sessions.filter((s) => s.eligible));
 	const warmPick = $derived(warmRun || priorRuns[0]?.run_id || '');
-	const canStart = $derived(!disabled && !running && selected.length > 0 && (startModel === 'FRESH_SEEDED' || !!warmPick));
+	// Pretrained V2: the chosen sessions are resampled and graded by the unchanged PREPROC_V1 gate; only VALID windows train. The preview shows what is usable BEFORE a run is started.
+	let preview = $state<HardwareV2Preview | null>(null);
+	let previewing = $state(false);
+	let previewError = $state<string | null>(null);
+	let previewSeq = 0;
+	const v2 = $derived(startModel === 'MODEL_V2_FINAL');
+	$effect(() => {
+		const ids = selected;
+		if (!v2 || ids.length === 0) { preview = null; previewError = null; previewing = false; return; }
+		const mine = ++previewSeq;
+		previewing = true; previewError = null; preview = null;
+		product.api.hardwareV2Preview(ids).then((value) => { if (mine === previewSeq) preview = value; }).catch((cause) => { if (mine === previewSeq) previewError = cause instanceof Error ? cause.message : String(cause); }).finally(() => { if (mine === previewSeq) previewing = false; });
+	});
+	const canStart = $derived(!disabled && !running && selected.length > 0 && (startModel === 'FRESH_SEEDED' || (startModel === 'WARM_START' && !!warmPick) || (v2 && preview?.eligible === true)));
 	async function load() {
 		if (!available) return;
 		try {
@@ -51,7 +64,7 @@
 	}
 </script>
 <form class="cfg" data-testid="hardware-demo-starter" onsubmit={(e) => { e.preventDefault(); if (canStart) void start(); }} aria-label={`Recorded hardware ${rounds}-round run configuration`}>
-	<p class="boundary" data-testid="hardware-demo-boundary">RECORDED HARDWARE · actual saved MongoDB telemetry features · deterministic SYNTHETIC labels · genuine toy federated optimisation · no clinical meaning. Eight logical clients are partitions of one recording, not eight devices.</p>
+	<p class="boundary" data-testid="hardware-demo-boundary">{v2 ? 'RECORDED HARDWARE · actual saved MongoDB telemetry windows (resampled, quality-gated) · deterministic SYNTHETIC labels · genuine federated fine-tuning of the pretrained V2 · no clinical meaning.' : 'RECORDED HARDWARE · actual saved MongoDB telemetry features · deterministic SYNTHETIC labels · genuine toy federated optimisation · no clinical meaning.'} Eight logical clients are partitions of one recording, not eight devices.</p>
 	{#if !available}<p class="warn" role="status">Hardware telemetry is unavailable in this backend configuration.</p>
 	{:else}
 		<fieldset class="sessions" aria-label="Recorded sessions">
@@ -66,8 +79,7 @@
 		</fieldset>
 		<label><span>Starting model</span>
 			<select bind:value={startModel} disabled={running} data-testid="hardware-demo-init">
-				{#each models.filter((m) => m.id !== 'MODEL_V2_FINAL') as m (m.id)}<option value={m.id} disabled={!m.available}>{m.label}</option>{/each}
-				{#if v2Model}<option value="MODEL_V2_FINAL" disabled>{v2Model.label} — not applicable</option>{/if}
+				{#each models as m (m.id)}<option value={m.id} disabled={!m.available}>{m.id === 'MODEL_V2_FINAL' ? 'Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning' : m.label}</option>{/each}
 			</select></label>
 		{#if startModel === 'WARM_START'}
 			<label><span>Warm-start source run</span>
@@ -75,16 +87,29 @@
 					{#each priorRuns as r (r.run_id)}<option value={r.run_id}>{r.run_id} · {r.algorithm} · {r.rounds_planned} rounds · {new Date(r.completed_at).toLocaleString()}</option>{/each}
 				</select></label>
 			<p class="help" data-testid="hardware-demo-warm-note">{priorRuns.length ? 'R0 is the final global weights of that earlier recorded-hardware run, unchanged; the rounds then continue training on the sessions selected above. Normalisation is refitted on the new training windows.' : 'No earlier recorded-hardware run exists yet; run once from a fresh initialisation first.'}</p>
+		{:else if v2}
+			<p class="help" data-testid="hardware-demo-v2-note">R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged. {v2Model?.note ?? 'Your recorded windows are resampled onto the V2 source grid and graded by the unchanged quality gate; only VALID windows train.'} The model changes from the small tabular classifier to the V2 ECG network, so this is a different run family from the fresh and warm-start choices.</p>
+			{#if selected.length === 0}<p class="help">Select at least one recorded session to see how many V2 windows it provides.</p>
+			{:else if previewing}<p class="help" role="status">Checking what the unchanged quality gate accepts…</p>
+			{:else if previewError}<p class="warn" role="alert" data-testid="hardware-v2-preview-error">{previewError}</p>
+			{:else if preview}
+				<div class="result" data-testid="hardware-v2-preview" class:bad={!preview.eligible}>
+					<b>{preview.eligible ? 'ENOUGH USABLE WINDOWS' : 'NOT ENOUGH USABLE WINDOWS'}</b>
+					<span>{preview.train_windows} training · {preview.holdout_windows} holdout windows (needs {preview.min_train_windows} and {preview.min_holdout_windows}); time-purged so no training window overlaps the holdout.</span>
+					<table aria-label="V2 windows per recorded session"><thead><tr><th scope="col">Session</th><th scope="col">10 s windows</th><th scope="col">Quality-VALID</th><th scope="col">Train</th><th scope="col">Holdout</th></tr></thead>
+						<tbody>{#each preview.sessions as row (row.session_id)}<tr><th scope="row"><code>{row.session_id}</code></th><td>{row.windows}</td><td>{row.usable}</td><td>{row.train}</td><td>{row.holdout}</td></tr>{/each}</tbody></table>
+					{#if preview.reason}<span class="warn" data-testid="hardware-v2-preview-reason">{preview.reason}</span>{/if}
+				</div>
+			{/if}
 		{:else}
 			<p class="help" data-testid="hardware-demo-init-note">R0 is a seeded, untrained HARDWARE_DEMO_MODEL_V1 (a small tabular classifier over window features).</p>
 		{/if}
-		{#if v2Model}<p class="help" data-testid="hardware-demo-v2-note">Pretrained V2 is not offered here: {v2Model.reason}</p>{/if}
 		{#if !warmAvailable}<p class="help">Warm start is not advertised by the connected backend.</p>{/if}
 		<label><span>Algorithm</span><select bind:value={algorithm} disabled={running} data-testid="hardware-demo-algorithm"><option value="FEDAVG">FedAvg — sample-count-weighted averaging</option><option value="FEDPROX">FedProx — fixed μ {hw?.fedprox_mu ?? 0.1}</option></select></label>
 		<label><span>Aggregation / protection mode</span><select bind:value={secagg} disabled={running} data-testid="hardware-demo-secagg"><option value="PLAIN">Plain aggregation</option><option value="SECAGG_SHADOW">Round-1 SecAgg+ shadow verification</option></select></label>
 		<p class="help">{secagg === 'SECAGG_SHADOW' ? 'ROUND-1 SECAGG+ SHADOW: a real protected aggregate is compared with the authoritative plain aggregate. It does not make the run private.' : 'Plain, sample-count-weighted aggregation.'}</p>
 		<label><span>Label seed</span><input type="number" min="0" max="2147483647" bind:value={seed} disabled={running} data-testid="hardware-demo-seed" /></label>
-		<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Model</dt><dd>HARDWARE_DEMO_MODEL_V1</dd></div><div><dt>Clients</dt><dd>8 logical</dd></div><div><dt>Rounds</dt><dd>{rounds}</dd></div><div><dt>Labels</dt><dd>SYNTHETIC</dd></div></dl>
+		<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Model</dt><dd>{v2 ? 'MODEL_V2_FINAL (fine-tuned)' : 'HARDWARE_DEMO_MODEL_V1'}</dd></div><div><dt>Clients</dt><dd>8 logical</dd></div><div><dt>Rounds</dt><dd>{rounds}</dd></div><div><dt>Labels</dt><dd>SYNTHETIC</dd></div></dl>
 		<button type="submit" disabled={!canStart} data-testid="hardware-demo-start">{running ? 'Training…' : `Create and start ${rounds}-round recorded-hardware run`}</button>
 		{#if error}<p class="warn" role="alert">{error}</p>{/if}
 	{/if}
@@ -99,6 +124,6 @@
 	.session { flex-direction: row; align-items: flex-start; gap: 10px; letter-spacing: 0; font: 12px Inter, sans-serif; color: #cbd5e1; border: 1px solid rgba(148,163,184,.14); padding: 8px; } .session.ineligible { opacity: .55; } .session span { display: grid; gap: 2px; min-width: 0; } .session small { color: #71829a; font-size: 11px; }
 	code { color: #9fe7e1; overflow-wrap: anywhere; } .fixedcfg { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; margin: 0; } .fixedcfg div { border: 1px solid rgba(148,163,184,.16); padding: 6px 8px; }
 	dt { color: #71829a; font: 10.5px 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; } dd { margin: 3px 0 0; font-size: 13px; color: #e5f1f0; }
-	.result { display: grid; gap: 6px; border: 1px solid rgba(43,184,176,.4); padding: 10px; font-size: 12px; color: #cbd5e1; } table { border-collapse: collapse; width: 100%; font: 11px 'JetBrains Mono', monospace; } th, td { text-align: left; padding: 3px 6px; border-bottom: 1px solid rgba(148,163,184,.16); }
+	.result.bad { border-color: rgba(251,191,36,.5); } .result { display: grid; gap: 6px; border: 1px solid rgba(43,184,176,.4); padding: 10px; font-size: 12px; color: #cbd5e1; } table { border-collapse: collapse; width: 100%; font: 11px 'JetBrains Mono', monospace; } th, td { text-align: left; padding: 3px 6px; border-bottom: 1px solid rgba(148,163,184,.16); }
 	p, dd, small, label, button { overflow-wrap: anywhere; }
 </style>

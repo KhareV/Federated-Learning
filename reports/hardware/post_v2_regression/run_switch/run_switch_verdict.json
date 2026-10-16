@@ -1,0 +1,80 @@
+{
+  "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "hardware_vs_recorded_metric_differs": true,
+  "mode": "run_switch",
+  "status": "PASS",
+  "steps": [
+    {
+      "auprc": "AUPRC0.638889",
+      "badge": "RECORDED HARDWARE",
+      "client_namespace": "RECORDED_DEMO_",
+      "pass": true,
+      "step": "open hardware",
+      "url_run": "HDFLRUN-B5AFEFF5FAAB"
+    },
+    {
+      "auprc": "AUPRC0.911570",
+      "badge": "RECORDED SYNTHETIC EVIDENCE",
+      "client_namespace": "SIM_FL_SITE_00",
+      "pass": true,
+      "step": "switch to recorded synthetic evidence A (no reload)",
+      "url_run": "recorded-A"
+    },
+    {
+      "auprc": "AUPRC0.638889",
+      "badge": "RECORDED HARDWARE",
+      "client_namespace": "RECORDED_DEMO_",
+      "pass": true,
+      "step": "switch back to hardware (no reload)",
+      "url_run": "HDFLRUN-B5AFEFF5FAAB"
+    },
+    {
+      "auprc": "AUPRC0.911570",
+      "badge": "RECORDED SYNTHETIC EVIDENCE",
+      "client_namespace": "SIM_FL_SITE_00",
+      "pass": true,
+      "step": "switch to recorded synthetic evidence B",
+      "url_run": "recorded-B"
+    },
+    {
+      "auprc": "",
+      "badge": "",
+      "client_namespace": "",
+      "pass": true,
+      "step": "browser back leaves the Live page (selection is replaceState)",
+      "url_run": null
+    },
+    {
+      "auprc": "AUPRC0.911570",
+      "badge": "RECORDED SYNTHETIC EVIDENCE",
+      "client_namespace": "SIM_FL_SITE_00",
+      "pass": true,
+      "step": "browser forward returns to the last selected run (recorded B)",
+      "url_run": "recorded-B"
+    },
+    {
+      "auprc": "AUPRC0.911570",
+      "badge": "RECORDED SYNTHETIC EVIDENCE",
+      "client_namespace": "SIM_FL_SITE_00",
+      "pass": true,
+      "step": "reload keeps the selected run (recorded B)",
+      "url_run": "recorded-B"
+    },
+    {
+      "auprc": "AUPRC0.638889",
+      "badge": "RECORDED HARDWARE",
+      "client_namespace": "RECORDED_DEMO_",
+      "pass": true,
+      "step": "switch to hardware, then reload",
+      "url_run": "HDFLRUN-B5AFEFF5FAAB"
+    },
+    {
+      "auprc": "AUPRC0.638889",
+      "badge": "RECORDED HARDWARE",
+      "client_namespace": "RECORDED_DEMO_",
+      "pass": true,
+      "step": "reload on hardware",
+      "url_run": "HDFLRUN-B5AFEFF5FAAB"
+    }
+  ]
+}

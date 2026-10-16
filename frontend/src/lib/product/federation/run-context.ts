@@ -9,7 +9,7 @@ export type DataProvenance = 'SYNTHETIC_COHORT' | 'SIMULATED_MONITORED_SITE_00' 
 export type ExecutionMode = 'LIVE_TRAINING' | 'EVENT_REPLAY' | 'RECORDED_EVIDENCE' | 'UNKNOWN';
 /** Where the labels come from. */
 export type LabelProvenance = 'SYNTHETIC_ENGINEERING_EVENTS' | 'SYNTHETIC_ASSIGNED_FOR_DEMO' | 'UNKNOWN';
-export type ModelLineage = 'FL_INIT_V2' | 'MODEL_V2_FINAL' | 'HARDWARE_DEMO_FRESH' | 'HARDWARE_DEMO_WARM_START' | 'UNKNOWN';
+export type ModelLineage = 'FL_INIT_V2' | 'MODEL_V2_FINAL' | 'HARDWARE_DEMO_FRESH' | 'HARDWARE_DEMO_WARM_START' | 'HARDWARE_V2_PRETRAINED' | 'UNKNOWN';
 export type ClientNamespace = 'SIM_FL_SITE' | 'RECORDED_DEMO_CLIENT' | 'UNKNOWN';
 
 export interface Capability { available: boolean; reason: string | null }
@@ -30,7 +30,7 @@ export interface RunContext {
 	};
 }
 
-const NA_HARDWARE_GENERALISATION = 'Not applicable to recorded-hardware runs: the unseen-cohort lane scores MODEL_V2_FINAL-compatible ECG windows, and a recorded-hardware run has neither an unseen cohort nor a V2 baseline.';
+const NA_HARDWARE_GENERALISATION = 'Not applicable to this recorded-hardware run: it trained the small tabular model, and the unseen-cohort lane scores MODEL_V2_FINAL-compatible ECG windows. Start a pretrained-V2 recorded-hardware run to compare with frozen V2 on the unseen cohort.';
 const NA_HARDWARE_PAIRED = 'Not applicable: paired participant-cluster intervals need several independent participants; recorded sessions are not independent clusters.';
 const NA_HARDWARE_HISTORICAL = 'Not applicable: no previously examined reference exists for recorded-hardware data.';
 const NA_RECORDED_GENERALISATION = 'Recorded evidence runs keep their own recorded diagnostic evaluation; start a new run to score the unseen cohort.';
@@ -65,14 +65,16 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 	const hardware = provenance === 'RECORDED_HARDWARE';
 	const modelId = run.base_model?.model_id ?? null;
 	const warm = (run.base_model as { initialisation?: string } | null)?.initialisation === 'WARM_START';
-	const lineage: ModelLineage = hardware ? (warm ? 'HARDWARE_DEMO_WARM_START' : 'HARDWARE_DEMO_FRESH') : modelId === 'MODEL_V2_FINAL' ? 'MODEL_V2_FINAL' : modelId === 'FL_INIT_V2' ? 'FL_INIT_V2' : 'UNKNOWN';
+	const lineage: ModelLineage = hardware ? (modelId === 'MODEL_V2_FINAL' ? 'HARDWARE_V2_PRETRAINED' : warm ? 'HARDWARE_DEMO_WARM_START' : 'HARDWARE_DEMO_FRESH') : modelId === 'MODEL_V2_FINAL' ? 'MODEL_V2_FINAL' : modelId === 'FL_INIT_V2' ? 'FL_INIT_V2' : 'UNKNOWN';
 	const recorded = execution === 'RECORDED_EVIDENCE';
 	const live = execution === 'LIVE_TRAINING';
-	const badge = hardware ? 'RECORDED HARDWARE' : recorded ? 'RECORDED SYNTHETIC EVIDENCE' : execution === 'EVENT_REPLAY' ? 'REPLAY' : provenance === 'SIMULATED_MONITORED_SITE_00' ? 'SIMULATED SITE_00' : 'SYNTHETIC COHORT';
+	const badge = hardware ? 'RECORDED HARDWARE' : recorded ? 'RECORDED SYNTHETIC EVIDENCE' : execution === 'EVENT_REPLAY' ? 'REPLAY' : provenance === 'SIMULATED_MONITORED_SITE_00' ? `SIMULATED SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : 'SYNTHETIC COHORT';
 	const dataSentence = hardware
-		? 'Your recorded telemetry windows (real features) with deterministic synthetic labels, split across eight logical clients on one machine.'
+		? lineage === 'HARDWARE_V2_PRETRAINED'
+			? 'Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (only windows the quality gate grades VALID) with deterministic synthetic labels, split across eight logical clients on one machine.'
+			: 'Your recorded telemetry windows (real features) with deterministic synthetic labels, split across eight logical clients on one machine.'
 		: provenance === 'SIMULATED_MONITORED_SITE_00'
-			? 'A genuinely executed simulated monitoring stream feeds SITE_00; the other seven clients are synthetic. No real physiology.'
+			? `A genuinely executed simulated monitoring stream feeds SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}; the other seven clients are synthetic. No real physiology.`
 			: 'Synthetic engineering data on eight logical clients on one machine. No real physiology.';
 	return {
 		provisional: false, provenance, execution, lineage,
@@ -81,7 +83,7 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 		badge, dataSentence,
 		capabilities: {
 			ownerBoundClient: !hardware && live ? yes() : no(hardware ? 'Every recorded-hardware client holds your own recorded windows; there is no single owner-bound client.' : 'Only a live run executes on behalf of the signed-in owner.'),
-			generalisation: hardware ? no(NA_HARDWARE_GENERALISATION) : recorded ? no(NA_RECORDED_GENERALISATION) : yes(),
+			generalisation: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? yes() : no(NA_HARDWARE_GENERALISATION)) : recorded ? no(NA_RECORDED_GENERALISATION) : yes(),
 			pairedIntervals: hardware ? no(NA_HARDWARE_PAIRED) : yes(),
 			historicalReference: hardware ? no(NA_HARDWARE_HISTORICAL) : yes(),
 			secaggShadow: run.secagg_mode === 'SECAGG_SHADOW' ? yes() : no('Plain aggregation was used for this run.'),

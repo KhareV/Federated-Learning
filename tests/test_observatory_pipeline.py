@@ -541,6 +541,7 @@ def test_api_extension_adds_only_the_documented_observatory_routes(tmp_path: Pat
         ("/product/v1/studio/runs/{run_id}/rounds/{round_id}", ("GET",)),
         ("/product/v1/studio/runs/{run_id}/tables", ("GET",)),
         ("/product/v1/studio/hardware-demo/sessions", ("GET",)),
+        ("/product/v1/studio/hardware-demo/v2-preview", ("GET",)),
         ("/product/v1/studio/hardware-demo/runs", ("GET",)),
         ("/product/v1/studio/hardware-demo/runs", ("POST",)),
         ("/product/v1/studio/hardware-demo/runs/{run_id}", ("GET",)),

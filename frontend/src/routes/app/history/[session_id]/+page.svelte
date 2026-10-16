@@ -73,7 +73,8 @@
 				<div><dt>ECG range</dt><dd>{hardware.readings.length ? `${Math.min(...hardware.readings.map((r) => r.ecg))}–${Math.max(...hardware.readings.map((r) => r.ecg))}` : '--'}</dd></div>
 				<div><dt>Device BPM</dt><dd>{(() => { const v = hardware.readings.map((r) => r.bpm).filter((x): x is number => x != null && x > 0); return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : '--'; })()}</dd></div>
 			</dl>
-			{#if hardware.status !== 'ACTIVE' && hardware.record_count > 0}<p><a class="cta" href={`/app/federation?source=hardware&session=${encodeURIComponent(hardware.session_id)}`} data-testid="hardware-use-in-fl">Use this session in a federation run →</a></p>{/if}
+			{#if hardware.status !== 'ACTIVE' && hardware.record_count > 0}<p><a class="cta" href={`/app/federation?source=hardware&session=${encodeURIComponent(hardware.session_id)}`} data-testid="hardware-use-in-fl">Use this session in a federation run →</a></p>
+			<p class="hwlinks"><a class="cta" href={`/app/observatory/replay?session=${encodeURIComponent(hardware.session_id)}`} data-testid="hardware-replay">Replay this session (experimental) →</a> <a class="cta" href={`/app/observatory?hw=${encodeURIComponent(hardware.session_id)}`} data-testid="hardware-trace">Trace one 10-second window →</a></p>{/if}
 			<details class="readings" data-testid="hardware-readings-list"><summary>Show stored readings ({hardware.readings.length}; first and last 25 listed)</summary>
 				<ol class="events">{#each [...hardware.readings.slice(0, 25), ...(hardware.readings.length > 50 ? [null] : []), ...hardware.readings.slice(-25)] as r}{#if r === null}<li>… {hardware.readings.length - 50} more readings are kept in the saved session …</li>{:else}<li><code>{r.id}</code> · {new Date(r.ingested_at).toLocaleTimeString()} · ECG {r.ecg} · BPM {r.bpm ?? 'unavailable'} · SpO₂ {r.spo2 ?? 'unavailable'} (unverified)</li>{/if}{/each}</ol>
 			</details>

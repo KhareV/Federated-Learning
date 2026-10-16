@@ -112,6 +112,7 @@ export function fakeBackend(system: SystemInfoV2 = systemInfo({ federation_runti
 	};
 	return {
 		hardwareDemoSessions: () => Promise.resolve([]),
+		hardwareV2Preview: () => Promise.reject(new Error('NO_FAKE_HARDWARE_V2_PREVIEW')),
 		hardwareDemoRuns: () => Promise.resolve([]),
 		hardwareDemoStart: () => Promise.reject(new Error('NO_FAKE_HARDWARE_DEMO')),
 		hardwareDemoRun: () => Promise.reject(new Error('NO_FAKE_HARDWARE_DEMO')),
@@ -149,6 +150,9 @@ export function fakeBackend(system: SystemInfoV2 = systemInfo({ federation_runti
 		observatoryScenarios: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_TRACE')),
 		observatoryScenarioWindow: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_TRACE')),
 		observatorySessionWindow: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_TRACE')),
+		observatoryHardwareWindows: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_TRACE')),
+		observatoryHardwareWindow: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_TRACE')),
+		hardwareSessionTimeline: () => Promise.reject(new Error('NO_FAKE_HISTORY_EVIDENCE')),
 		observatoryCohort: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_COHORT')),
 		observatoryRunContributions: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_CONTRIBUTIONS')),
 		observatoryFlClientWindow: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_CLIENT_WINDOW')),

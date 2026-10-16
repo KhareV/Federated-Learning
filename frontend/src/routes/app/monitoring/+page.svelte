@@ -66,7 +66,8 @@
 	{#if !device}
 		<p class="dim">No virtual wearable is attached. <a href="/app/device">Attach one on the Device page →</a></p>
 	{:else if !connected && !session}
-		<p class="dim">Device <code>{device.device_id}</code> is <b>{device.connection_state}</b>. Scan and connect it first. <a href="/app/device">Device page →</a></p>
+		<p class="dim">Device <code>{device.device_id}</code> is <b>{device.connection_state}</b>. {device.connection_state === 'STOPPED' ? 'The last session ended and the link was kept; reconnect to monitor again.' : device.connection_state === 'DETACHED' || device.connection_state === 'ERROR' ? 'Scan and connect it first.' : 'Finish connecting it first.'} <a href="/app/device">Device page →</a></p>
+		{#if device.connection_state === 'STOPPED'}<button class="primary" onclick={() => store.connect(device.device_id)} disabled={store.busy} data-testid="monitor-reconnect">RECONNECT DEVICE</button>{/if}
 	{:else}
 		<dl>
 			<dt>DEVICE</dt><dd>{device.device_id} <span class="badge">{live.deviceState ?? device.connection_state}</span></dd>
@@ -80,7 +81,7 @@
 			<button onclick={() => store.stopSession()} disabled={store.busy || !active} data-testid="stop-session">STOP MONITORING</button>
 		</div>
 	{/if}
-	{#if finished && !connected}<p class="dim" data-testid="rerun-hint">To run another session, scan and connect the virtual wearable again on the <a href="/app/device">Device page</a> (it ends each session {device?.connection_state === 'STOPPED' ? 'STOPPED' : 'in its own link state'}).</p>{/if}
+	{#if finished && !connected}<p class="dim" data-testid="rerun-hint">To run another session, reconnect the virtual wearable on the <a href="/app/device">Device page</a> (a finished session leaves it {device?.connection_state === 'STOPPED' ? 'STOPPED with the link kept, so Reconnect is enough' : 'in its own link state'}).</p>{/if}
 	{#if finished && session}
 		<div class="done" role="status" data-testid="session-complete">
 			<b>{sessState === 'COMPLETED' ? 'Session completed' : 'Session failed (technical)'}</b>

@@ -25,8 +25,10 @@ def test_successor_chains_from_the_accepted_unified_lock_and_binds_the_current_t
     lock = successor_chain.validate_link(link, ROOT)
     assert lock["status"] == "PASS"
     assert lock["predecessor_commit"] == "21a5fad1bea34fc197a797f55dbda7ca39fded3f"
-    assert set(lock["frontend_files"]) == set(frontend_files())
-    assert all(successor_chain.sha256((ROOT / p).read_bytes()) == d for p, d in lock["frontend_files"].items())
+    # Once a later additive successor exists, the tree matches the chain tip, not this (historical) link.
+    expected = successor_chain.tip_frontend_map(ROOT) or lock["frontend_files"]
+    assert set(expected) == set(frontend_files())
+    assert all(successor_chain.sha256((ROOT / p).read_bytes()) == d for p, d in expected.items())
     # hardware is explicitly out of this lock's scope
     assert lock["hardware_functionality_changed"] is False and lock["hardware_experiments_run"] is False
     assert lock["physical_e2e_verified"] is False

@@ -2,16 +2,24 @@
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
-	import type { SessionTimeline, SourceTimelineItem } from '$lib/product/history/types';
+	import type { HardwareSessionTimeline, SessionTimeline, SourceTimelineItem } from '$lib/product/history/types';
+	import type { HardwareSession } from '$lib/product/api';
+	import { loadHardwareSessions, observatoryReady } from '$lib/product/hardware-sessions';
+	import { page } from '$app/state';
 	const store = getProductStore();
 	let sessionId = $state('');
-	let timeline = $state<SessionTimeline | null>(null);
+	let timeline = $state<SessionTimeline | HardwareSessionTimeline | null>(null);
+	let hardware = $state<HardwareSession[]>([]);
+	let scoringSeq = 0;
 	let error = $state<string | null>(null);
 	let loading = $state(false);
 	let index = $state(0);
 	let playing = $state(false);
 	let timer: ReturnType<typeof setInterval> | null = null;
 	const done = $derived(store.sessions.filter((s) => s.state === 'COMPLETED'));
+	const hardwareReady = $derived(hardware.filter(observatoryReady));
+	const isHardware = $derived(hardwareReady.some((h) => h.session_id === sessionId));
+	const hw = $derived(timeline && 'windows_total' in timeline ? timeline : null);
 	const items = $derived((timeline?.source_timeline ?? []).slice().sort((a, b) => a.source_timestamp_us - b.source_timestamp_us || a.sequence_index - b.sequence_index));
 	const inferences = $derived(items.filter((i) => i.kind === 'INFERENCE'));
 	const changes = $derived(items.filter((i) => i.kind === 'MONITORING_STATE_CHANGE'));
@@ -33,7 +41,19 @@
 		stop(); timeline = null; error = null; index = 0;
 		if (!sessionId) return;
 		loading = true;
-		try { timeline = await store.api.sessionTimeline(sessionId); } catch (c) { error = c instanceof Error ? c.message : String(c); } finally { loading = false; }
+		const mine = ++scoringSeq;
+		try {
+			if (hardwareReady.some((h) => h.session_id === sessionId)) {
+				// Recorded hardware: the released model scores the resampled windows in bounded batches (cached per window); the replay fills in as they arrive.
+				for (let batch = 0; batch < 200; batch++) {
+					const value = await store.api.hardwareSessionTimeline(sessionId, 24);
+					if (mine !== scoringSeq) return;
+					timeline = value;
+					loading = !value.complete;
+					if (value.complete) break;
+				}
+			} else timeline = await store.api.sessionTimeline(sessionId);
+		} catch (c) { if (mine === scoringSeq) error = c instanceof Error ? c.message : String(c); } finally { if (mine === scoringSeq) loading = false; }
 	}
 	function step(d: number) { index = Math.min(items.length - 1, Math.max(0, index + d)); }
 	function jump(kind: string) { const i = items.findIndex((x, n) => n > index && x.kind === kind); if (i >= 0) index = i; }
@@ -43,17 +63,33 @@
 		playing = true;
 		timer = setInterval(() => { if (index >= items.length - 1) stop(); else index += 1; }, 700);
 	}
-	onMount(() => { void store.loadSessions(); return stop; });
+	onMount(() => {
+		void (async () => {
+			await Promise.all([store.loadSessions(), loadHardwareSessions(store.api).then((rows) => { hardware = rows; })]);
+			const wanted = page.url.searchParams.get('session');          // deep link from History ("REPLAY →")
+			if (wanted && hardwareReady.some((h) => h.session_id === wanted)) { sessionId = wanted; void load(); }
+		})();
+		return () => { scoringSeq++; stop(); };
+	});
 </script>
 <svelte:head><title>Session replay and policy trace | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / SESSION REPLAY</div>
 <h1 tabindex="-1" use:focusHeading>Session replay and monitoring-policy trace</h1>
+{#if isHardware}
+<p class="lead">Step through one <b>recorded hardware</b> session in source time. Your saved readings are resampled onto the V2 source grid, graded by the unchanged quality gate, and each usable window is scored once by the released model (the result is cached). Policy-state <em>changes</em> are derived from consecutive window results; there is no persisted monitoring state machine for hardware. Playback speed is presentation only.</p>
+<p class="tag hw" data-testid="replay-hardware-tag">RECORDED HARDWARE · RESAMPLED · EXPERIMENTAL · NOT VALID · NOT DIAGNOSTIC</p>
+{:else}
 <p class="lead">Step through the <b>persisted</b> evidence of one owned, completed session in source time. Nothing is re-run: each step reveals records that were stored by the monitoring runtime (quality, calibrated score against the frozen threshold, policy state and its reason codes). Playback speed is presentation only, not real-time acquisition.</p>
 <p class="tag">PERSISTED EVIDENCE REPLAY · NO NEW INFERENCE</p>
-<label class="pick">Completed session <select bind:value={sessionId} onchange={load}><option value="">— choose an owned session —</option>{#each done as s (s.session_id)}<option value={s.session_id}>{s.session_id}</option>{/each}</select></label>
-{#if done.length === 0}<p class="dim">No completed session is available. Run one from <a href="/app/monitoring">Monitor</a>.</p>{/if}
+{/if}
+<label class="pick">Session <select bind:value={sessionId} onchange={load}><option value="">— choose an owned session —</option>
+	{#if done.length}<optgroup label="Simulated monitoring sessions (completed)">{#each done as s (s.session_id)}<option value={s.session_id}>{s.session_id}</option>{/each}</optgroup>{/if}
+	{#if hardwareReady.length}<optgroup label="Recorded hardware sessions (experimental)">{#each hardwareReady as h (h.session_id)}<option value={h.session_id}>{h.session_id} · {h.summary?.stored_readings ?? h.record_count} readings</option>{/each}</optgroup>{/if}</select></label>
+{#if done.length === 0 && hardwareReady.length === 0}<p class="dim">No completed session is available. Run one from <a href="/app/monitoring">Monitor</a> (simulated or live hardware).</p>{/if}
 {#if error}<p role="alert" class="err">{error}</p>{/if}
-{#if loading}<p class="dim" role="status">Loading persisted timeline…</p>{/if}
+{#if loading}<p class="dim" role="status" data-testid="replay-loading">{hw ? `Scoring recorded windows with the released model: ${hw.windows_scored} of ${hw.windows_scored + hw.windows_pending} usable windows done…` : isHardware ? 'Resampling the recorded session and checking each window…' : 'Loading persisted timeline…'}</p>{/if}
+{#if hw}<p class="dim" data-testid="replay-hardware-summary">{hw.windows_total} windows emitted · {hw.windows_unusable} rejected by the quality gate (no model result, none invented) · {hw.windows_scored} scored{hw.windows_pending ? ` · ${hw.windows_pending} pending` : ''}. {hw.label}</p>{/if}
+{#if timeline && items.length === 0 && hw && !loading}<p class="dim" data-testid="replay-empty">This recorded session produced no window the quality gate accepts, so there is no model output or policy state to replay. See the quality summary above.</p>{/if}
 {#if timeline && items.length}
 <section aria-label="Replay controls" data-testid="replay-controls"><div class="controls"><button onclick={() => step(-1)} disabled={index === 0}>← Step back</button><button onclick={() => step(1)} disabled={index >= items.length - 1}>Step forward →</button><button onclick={toggle}>{playing ? 'Pause' : 'Play'}</button><button onclick={() => jump('INFERENCE')}>Next inference</button><button onclick={() => jump('MONITORING_STATE_CHANGE')}>Next state change</button></div>
 	<label class="scrub">Record {index + 1} of {items.length} · source time {seconds(cursor)} s <input type="range" min="0" max={items.length - 1} bind:value={index} aria-valuetext={`record ${index + 1} of ${items.length}`} /></label></section>
@@ -74,7 +110,7 @@
 {/if}
 <p class="dim"><a href="/app/observatory">← Observatory</a> · <a href="/app/history">History</a></p>
 <style>
-	.eyebrow{color:#2bb8b0;font:10px 'JetBrains Mono',monospace;letter-spacing:.14em}h1{font:500 clamp(26px,4vw,40px) 'Space Grotesk',sans-serif;margin:8px 0}h2{font:500 18px 'Space Grotesk',sans-serif;margin:22px 0 8px}.lead{max-width:860px;color:#a7b8c9;line-height:1.6}.tag{display:inline-block;margin:0 0 10px;border:1px solid rgba(167,139,250,.5);padding:5px 10px;color:#c4b5fd;font:11px 'JetBrains Mono',monospace;letter-spacing:.1em}.dim,small,li,p{color:#94a3b8;font-size:13px;line-height:1.6;overflow-wrap:anywhere}.err{color:#fecdd3}a{color:#2bb8b0}
+	.eyebrow{color:#2bb8b0;font:10px 'JetBrains Mono',monospace;letter-spacing:.14em}h1{font:500 clamp(26px,4vw,40px) 'Space Grotesk',sans-serif;margin:8px 0}h2{font:500 18px 'Space Grotesk',sans-serif;margin:22px 0 8px}.lead{max-width:860px;color:#a7b8c9;line-height:1.6}.tag.hw{border-color:rgba(251,191,36,.5);color:#fbbf24}.tag{display:inline-block;margin:0 0 10px;border:1px solid rgba(167,139,250,.5);padding:5px 10px;color:#c4b5fd;font:11px 'JetBrains Mono',monospace;letter-spacing:.1em}.dim,small,li,p{color:#94a3b8;font-size:13px;line-height:1.6;overflow-wrap:anywhere}.err{color:#fecdd3}a{color:#2bb8b0}
 	.pick,.scrub{display:grid;gap:4px;font:10px 'JetBrains Mono',monospace;color:#71829a;margin:8px 0}select,button{background:#0a0f1f;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);padding:6px 10px;min-height:32px;font:12px 'JetBrains Mono',monospace}button:disabled{opacity:.4}.controls{display:flex;flex-wrap:wrap;gap:8px}.scrub input{width:100%;max-width:640px}
 	.lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px}.lanes article{border:1px solid rgba(148,163,184,.25);padding:10px 12px;display:grid;gap:4px;min-width:0}.lanes span{font:10px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#71829a}.lanes b{font:500 16px 'Space Grotesk',sans-serif;color:#e2e8f0;overflow-wrap:anywhere}
 	svg{width:100%;height:200px;background:#050a15}.frame{fill:none;stroke:rgba(148,163,184,.35)}.thr{stroke:#fbbf24;stroke-dasharray:2 2;fill:none;vector-effect:non-scaling-stroke}.cur{stroke:#a78bfa;fill:none;stroke-width:1.5;vector-effect:non-scaling-stroke}.pt{fill:#2bb8b0}.pt.s-degraded{fill:#fbbf24}.pt.s-unusable{fill:#f87171}.tr{padding-left:18px;display:grid;gap:4px}.tr li{opacity:.55}.tr li.now{opacity:1;color:#e2e8f0}

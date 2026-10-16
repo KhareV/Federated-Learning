@@ -41,6 +41,7 @@
 	// One typed interpretation of the SELECTED run's validated descriptor (never an id prefix, never another run's descriptor).
 	const ctx = $derived(runContext(studio.run, fed.run?.run_id ?? v.runId));
 	const hardware = $derived(isHardwareContext(ctx));
+	const hardwareV2 = $derived(ctx.lineage === 'HARDWARE_V2_PRETRAINED');
 	const dataSource = $derived(hardware ? 'HARDWARE' : 'SYNTHETIC');
 	const copy = $derived(SOURCE_COPY[dataSource]);
 	// Recorded-hardware runs have no single owner-bound client: all eight logical clients hold the signed-in user's own recorded windows.
@@ -117,12 +118,12 @@
 	{#if hardware}
 		<div class="mine" data-testid="hardware-participation">
 			<b>YOUR RECORDED DATA IN THIS RUN</b>
-			<p><b data-testid="hw-total-windows">{totalWindows || '--'}</b> recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client).</p>
+			<p><b data-testid="hw-total-windows">{totalWindows || '--'}</b> {hardwareV2 ? 'recorded 10 s V2 windows (resampled, quality-VALID only)' : 'recorded one-second windows'}, split into eight contiguous blocks (every window belongs to exactly one logical client).</p>
 			<p>Raw recorded windows sent to the federation coordinator: <b data-testid="hw-raw-sent">0</b> · only model updates are shared.</p>
-			<TechnicalEvidence label="WHAT IS REAL AND WHAT IS SYNTHETIC"><p>The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the model is a small tabular classifier, not MODEL_V2_FINAL.</p></TechnicalEvidence>
+			<TechnicalEvidence label="WHAT IS REAL AND WHAT IS SYNTHETIC"><p>{hardwareV2 ? 'The windows come from your own recorded MongoDB telemetry, resampled from the low-rate telemetry onto the V2 source grid under an unverified ADC-scaling assumption, then graded by the unchanged quality gate. MODEL_V2_FINAL was validated on MIT-BIH ECG, not on this signal chain. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine.' : 'The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the model is a small tabular classifier, not MODEL_V2_FINAL.'}</p></TechnicalEvidence>
 		</div>
 	{/if}
-	{#if selectedId}<ClientDetailPanel clientId={selectedId} client={selectedClient} ownerBound={selectedId === ownerBound} {plannedRounds} {replay} {identity} {dataSource} />{/if}
+	{#if selectedId}<ClientDetailPanel clientId={selectedId} client={selectedClient} ownerBound={selectedId === ownerBound} {plannedRounds} {replay} {identity} {dataSource} modelLabel={hardwareV2 ? 'MODEL_V2 architecture (pretrained V2 weights)' : undefined} />{/if}
 </Panel>
 <div class="gap"></div>
 <Panel eyebrow="ROUND EXPLORER" title="Live / historical round explorer" note={studio.followLive ? 'FOLLOWING LIVE' : `INSPECTING R${studio.selectedRound}`}><RoundExplorer {studio} /></Panel>

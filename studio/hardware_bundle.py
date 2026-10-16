@@ -29,6 +29,8 @@ SYNTHETIC_LABEL = "RECORDED HARDWARE WINDOWS · SYNTHETIC ASSIGNED LABELS · NOT
 COHORT_USE = "DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST"
 CLAIM = "RECORDED_HARDWARE_FEATURES_WITH_SYNTHETIC_ASSIGNED_LABELS_ENGINEERING_DEMO_ONLY_NOT_CLINICAL"
 UNAVAILABLE_FOR_HARDWARE = "NOT APPLICABLE TO RECORDED-HARDWARE RUNS"
+V2_LABEL = "RECORDED HARDWARE WINDOWS · RESAMPLED · PRETRAINED V2 FINE-TUNING · SYNTHETIC ASSIGNED LABELS · NOT VALID · NOT DIAGNOSTIC"
+V2_COHORT_USE = "DIAGNOSTIC HOLDOUT BLOCK OF THE RECORDING (time-purged, same sessions as training) — NOT AN INDEPENDENT TEST"
 
 
 def _state_key(round_id: int) -> str:
@@ -48,6 +50,10 @@ def _logits(state: dict[str, np.ndarray], x: np.ndarray) -> np.ndarray:
 
 def evaluation_states(run_dir: Path, run: dict[str, Any], dataset: dict[str, Any]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Per-state pooled/participant metrics + curves on the stored holdout; plus the holdout participant (session) composition."""
+    if run["model"]["id"] == "MODEL_V2_FINAL":       # pretrained V2 fine-tuning on resampled recorded windows: V2 scorer, stored holdout block
+        from studio import hardware_v2
+
+        return hardware_v2.evaluation_states(run_dir, run, dataset)
     manifest = [w for w in dataset["window_manifest"] if w["split"] == "HOLDOUT"]
     x = np.asarray([w["normalized_features"] for w in manifest], dtype=np.float64)
     y = np.asarray([w["label"] for w in manifest], dtype=np.int64)
@@ -80,6 +86,7 @@ def evaluation_states(run_dir: Path, run: dict[str, Any], dataset: dict[str, Any
 def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str, Any], *, evaluation_status: str = "COMPLETED") -> dict[str, Any]:
     n = int(run["rounds_planned"])
     status = run.get("status", "COMPLETED")
+    v2 = run["model"]["id"] == "MODEL_V2_FINAL"
     states, holdout = evaluation_states(run_dir, run, dataset)
     digests = {_state_key(int(k)): v for k, v in run["state_progression"].items()}
     progression = {k: {"sha256": v, "finite": True} for k, v in run["state_progression"].items()}
@@ -99,7 +106,7 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
                 "mean_training_loss": diag["mean_loss"], "final_training_loss": diag["final_loss"],
                 "local_update_norm": diag.get("local_update_l2"), "gradient_norm_mean": float(np.mean(diag["step_gradient_norms"])) if diag.get("step_gradient_norms") else diag["gradient_norm"],
                 "aggregation_weight": row["aggregation_weights"][client], "client_duration_seconds": diag.get("duration_seconds"),
-                "update_sha256": diag["state_sha256"], "proximal_penalty": diag["final_proximal_penalty"],
+                "update_sha256": diag["state_sha256"], "proximal_penalty": diag.get("final_proximal_penalty"),
             })
             updates.append({"round": r, "client_id": client, "update_sha256": diag["state_sha256"]})
             for step, (loss, grad) in enumerate(zip(diag.get("step_losses", []), diag.get("step_gradient_norms", []), strict=False), start=1):
@@ -110,7 +117,7 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
         rounds.append({
             "round": r, "expected_clients": 8, "received_updates": 8, "accepted_updates": int(row["accepted_updates"]), "rejected_updates": int(row["rejected_updates"]),
             "rejections": [], "total_accepted_example_weight": examples_total, "weighted_mean_training_loss": row["weighted_mean_training_loss"],
-            "aggregated_update_norm": None, "update_payload_bytes_total": row.get("update_payload_bytes_total"), "round_duration_seconds": row.get("round_duration_seconds"),
+            "aggregated_update_norm": row.get("aggregated_update_norm"), "update_payload_bytes_total": row.get("update_payload_bytes_total"), "round_duration_seconds": row.get("round_duration_seconds"),
             "cumulative_accepted_updates": cumulative_updates, "cumulative_example_exposures": cumulative_exposures, "cumulative_payload_bytes": cumulative_bytes,
             "base_state_sha256": row["base_state_sha256"], "global_state_sha256": row["global_state_sha256"], "aggregation_state": "COMMITTED",
             "candidate_status": "FINAL ENGINEERING STATE (not promoted, not deployed)" if r == n else "INTERMEDIATE GLOBAL STATE",
@@ -120,16 +127,20 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
     finished = run.get("completed_at")
     run_block = {
         "run_id": run["run_id"], "mode": MODE, "status": status, "planned_rounds": n, "rounds_committed": len(rounds), "started_at": started, "finished_at": finished,
-        "settings": {"local_objective": "BCE (+ FedProx proximal term)" if run["algorithm"] == "FEDPROX" else "BCE", "optimizer_label": "SGD, full-batch, 2 local steps", "local_phrase": "for two full-batch local steps",
-                     "monitoring_text": "recorded telemetry session(s) -> 1 s windows -> 8 logical clients (contiguous blocks)",
-                     "model": MODEL_ID, "features": list(FEATURES), "window_seconds": WINDOW_SECONDS},
+        "settings": ({"local_objective": "BCE (+ FedProx proximal term)" if run["algorithm"] == "FEDPROX" else "BCE", "optimizer_label": "AdamW (reset every local epoch), one local epoch", "local_phrase": "for one local epoch",
+                      "monitoring_text": "recorded telemetry session(s) -> resampled to 360 Hz -> PREPROC_V1 10 s windows (VALID only) -> 8 logical clients (contiguous blocks)",
+                      "model": "MODEL_V2_FINAL", "features": [], "window_seconds": 10.0} if v2 else
+                     {"local_objective": "BCE (+ FedProx proximal term)" if run["algorithm"] == "FEDPROX" else "BCE", "optimizer_label": "SGD, full-batch, 2 local steps", "local_phrase": "for two full-batch local steps",
+                      "monitoring_text": "recorded telemetry session(s) -> 1 s windows -> 8 logical clients (contiguous blocks)",
+                      "model": MODEL_ID, "features": list(FEATURES), "window_seconds": WINDOW_SECONDS}),
         "accepted_updates_total": cumulative_updates, "example_exposures_total": cumulative_exposures,
         "unique_training_windows": int(run["dataset"]["training_windows"]),
         "candidate": {"candidate_id": None, "promoted": False, "deployed": False, "label": "RECORDED-HARDWARE DEMO MODEL (not a candidate)"},
-        "coordinator_identity": "HARDWARE_DEMO_FEDAVG_COORDINATOR_V1", "prefix_equals_frozen_reference": {}, "federation_engine": "HARDWARE_DEMO_SINGLE_PROCESS",
+        "coordinator_identity": "FL10_COORDINATOR (unchanged, recorded-hardware V2 fine-tuning)" if v2 else "HARDWARE_DEMO_FEDAVG_COORDINATOR_V1", "prefix_equals_frozen_reference": {},
+        "federation_engine": "FL10 runner + genuine V2 local optimiser (recorded-hardware windows)" if v2 else "HARDWARE_DEMO_SINGLE_PROCESS",
         "failure": None, "algorithm": run["algorithm"], "secagg_mode": run["secagg_mode"], "fedprox_mu": run.get("fedprox_mu"),
         "secagg_shadow": run.get("secagg_shadow"), "total_seconds": sum(float(r.get("round_duration_seconds") or 0.0) for r in run["rounds"]),
-        "initialisation": {"model_id": run["model"]["initialisation"], "warm_start": run["model"].get("warm_start")},
+        "initialisation": {"model_id": run["model"]["initialisation"], "warm_start": run["model"].get("warm_start"), **({"base_audit": run["model"].get("base_audit")} if v2 else {})},
     }
     cohort = [
         {"client_id": client, "participant_id": client, "session_id": ", ".join(run["source_session_ids"]), "dataset_sha256": info["feature_sha256"],
@@ -139,16 +150,22 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
     ]
     return {
         "schema_version": SCHEMA, "source_label": "RECORDED HARDWARE SESSION DATA (this account)", "run_id": run["run_id"], "run_length": n, "planned_rounds": n,
-        "engine": ENGINE, "mode": MODE, "replay_of": None, "synthetic_label": SYNTHETIC_LABEL, "live_label": None,
+        "engine": ENGINE, "mode": MODE, "replay_of": None, "synthetic_label": V2_LABEL if v2 else SYNTHETIC_LABEL, "live_label": None,
         "protocol": {
             "id": "HARDWARE_DEMO_PROTOCOL_V1", "evaluation_protocol_id": "HARDWARE_DEMO_DIAGNOSTIC_EVAL_V1", "sha256": run["snapshot_sha256"], "holdout_manifest_sha256": run["dataset"]["label_sha256"],
             "uncertainty": None, "threshold": 0.5, "metric_definitions": {}, "probability_histogram": {"bins": fl10_metrics.HIST_BINS},
-            "interpretation_boundaries": [
+            "interpretation_boundaries": ([
+                "Windows are real recorded telemetry resampled from ~20 Hz to 360 Hz (linear interpolation between real readings) under an UNVERIFIED ADC scaling assumption; MODEL_V2_FINAL was validated on MIT-BIH ECG, not on this signal chain.",
+                "Labels are deterministic and SYNTHETIC (assigned for the demonstration); the metrics measure agreement with those assigned labels only.",
+                "The holdout is a time-purged block of the same recording sessions, so it is a diagnostic, not independent evidence.",
+                "There is no clinical, diagnostic or scientific claim.",
+            ] if v2 else [
                 "Features are real recorded telemetry; labels are deterministic and SYNTHETIC (assigned for the demonstration).",
                 "The holdout is a window-level split of the same recording sessions, so it is a diagnostic, not independent evidence.",
                 "There is no clinical, diagnostic or scientific claim, and no transfer from MODEL_V2_FINAL.",
-            ],
-            "research_question": "Engineering demonstration: does the federated optimisation path (FedAvg / FedProx, optional round-1 SecAgg+ shadow) run end to end on recorded telemetry windows?",
+            ]),
+            "research_question": ("Engineering demonstration: does federated fine-tuning of the pretrained V2 model (FedAvg / FedProx, optional round-1 SecAgg+ shadow) run end to end on recorded hardware windows?" if v2 else
+                                  "Engineering demonstration: does the federated optimisation path (FedAvg / FedProx, optional round-1 SecAgg+ shadow) run end to end on recorded telemetry windows?"),
             "primary_comparison": None,
         },
         "run": run_block, "state_progression": progression, "rounds": rounds, "client_rounds": client_rounds, "batches": batches, "updates": updates,
@@ -160,11 +177,11 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
             "separation_source": "WINDOW_IDS_DISJOINT_BY_CONSTRUCTION", "window_level_split": True, "threshold": 0.5, "calibration": "NONE",
             "round_selection": "NONE - no round, threshold or candidate is selected from diagnostic evaluation", "paired": None,
             "paired_not_applicable": "Paired participant-cluster intervals need several independent participants; recorded hardware sessions are not independent clusters.",
-            "comparator": f"R{0:02d}", "endpoint": f"R{n:02d}", "cohort_use": COHORT_USE, "cohort_use_detail": COHORT_USE, "cohort_id": "RECORDED_HARDWARE_HOLDOUT",
+            "comparator": f"R{0:02d}", "endpoint": f"R{n:02d}", "cohort_use": V2_COHORT_USE if v2 else COHORT_USE, "cohort_use_detail": V2_COHORT_USE if v2 else COHORT_USE, "cohort_id": "RECORDED_HARDWARE_HOLDOUT",
             "protocol_sha256": run["snapshot_sha256"], "holdout_manifest_sha256": run["dataset"]["label_sha256"], "method_freeze_commit": None,
         },
         "historical_exposed": {"label": UNAVAILABLE_FOR_HARDWARE, "caveat": UNAVAILABLE_FOR_HARDWARE, "source": "none", "sha256": "", "states": {}},
         "scientific_bridge": {"comparability_rows": [], "verdict": "NOT_COMPARABLE", "limitations": ["Recorded-hardware demo metrics are not comparable to any scientific or synthetic-cohort result."],
-                              "route": "/app/observatory/outcomes", "note": "Recorded-hardware demo runs use synthetic assigned labels and a tabular feature model; they are not comparable to the real-ECG scientific results."},
+                              "route": "/app/observatory/outcomes", "note": ("Recorded-hardware V2 runs fine-tune on resampled windows with synthetic assigned labels; they are not comparable to the real-ECG scientific results." if v2 else "Recorded-hardware demo runs use synthetic assigned labels and a tabular feature model; they are not comparable to the real-ECG scientific results.")},
         "revision": 1,
     }

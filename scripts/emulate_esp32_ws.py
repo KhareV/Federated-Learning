@@ -15,7 +15,7 @@ production-compatible payload is unchanged.
 Signal values are engineering test patterns. They are not physiological ECG.
 
 Plan DSL (``--plan``), comma separated, executed in order:
-  run:S[:pattern]   transmit for S seconds (pattern: ecg|sine|flat|leadoff|rail|steps)
+  run:S[:pattern]   transmit for S seconds (pattern: ecg|ecg_ad8232|sine|flat|leadoff|rail|steps)
   pause:S           stay connected, transmit nothing (device busy)
   drop:S            abrupt network loss for S seconds (TCP aborted, no close frame; the send loop keeps running, frames are
                     not handed; reconnect only after the network is back AND >= 5 s after the loss was noticed)
@@ -89,9 +89,12 @@ class Signal:
         if pattern == "sine":
             return int(2048 + 600 * math.sin(2 * math.pi * self.t * (self.bpm / 60.0)))
         phase = (self.t * self.bpm / 60.0) % 1.0  # ecg-like: baseline wander, QRS spike, T wave, noise
-        value = 2048 + 40 * math.sin(2 * math.pi * 0.25 * self.t)
-        value += 700 * math.exp(-((phase - 0.30) ** 2) / (2 * 0.012**2)) - 180 * math.exp(-((phase - 0.27) ** 2) / (2 * 0.01**2))
-        value += 160 * math.exp(-((phase - 0.55) ** 2) / (2 * 0.05**2)) + self.rng.gauss(0, 9)
+        # "ecg_ad8232": the same shape at an amplitude an AD8232 front end plausibly produces (R wave ~ +200 counts), which stays inside the
+        # analysis runtime's +/-2.5 mV rail under the documented scaling; the default "ecg" keeps its large historical amplitude (it exceeds that rail).
+        scale = 0.3 if pattern == "ecg_ad8232" else 1.0
+        value = 2048 + 40 * scale * math.sin(2 * math.pi * 0.25 * self.t)
+        value += scale * (700 * math.exp(-((phase - 0.30) ** 2) / (2 * 0.012**2)) - 180 * math.exp(-((phase - 0.27) ** 2) / (2 * 0.01**2)))
+        value += scale * 160 * math.exp(-((phase - 0.55) ** 2) / (2 * 0.05**2)) + self.rng.gauss(0, 9 * scale)
         return max(0, min(4095, int(value)))
 
 
@@ -343,7 +346,7 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--rate", type=float, default=20.0, help="nominal Hz for --timing fixed (and for translating --count)")
     p.add_argument("--jitter-ms", type=float, default=4.0)
     p.add_argument("--seed", type=int, default=20261015)
-    p.add_argument("--pattern", default="ecg", choices=["ecg", "sine", "flat", "leadoff", "rail", "steps"])
+    p.add_argument("--pattern", default="ecg", choices=["ecg", "ecg_ad8232", "sine", "flat", "leadoff", "rail", "steps"])
     p.add_argument("--plan", help="step DSL, see module docstring")
     # flags compatible with scripts.publish_hardware_test
     p.add_argument("--count", type=int)

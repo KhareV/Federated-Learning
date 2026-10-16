@@ -10,7 +10,7 @@
 		<li>Monitoring states are research outputs, not health assessments.</li>
 	</ul></Panel>
 	<Panel eyebrow="02 / MONITORING" title="What runs today"><ul>
-		<li>For model inference, the wearable source is <b>SIMULATED ONLY</b> (WEARABLE_SIM_V1). No physical wearable is connected to the inference path. A separate, optional MongoDB source displays ESP32 telemetry without model inference. The physical device path still requires a live hardware demonstration.</li>
+		<li>For model inference, the wearable source is <b>SIMULATED ONLY</b> (WEARABLE_SIM_V1). No physical wearable is connected to the inference path. A separate, optional MongoDB source displays ESP32 telemetry; the released model can be applied to it only as an experimental, resampled and not-valid analysis (Monitor, Observatory replay and trace, and optional federated fine-tuning of the pretrained V2 on your recorded windows with synthetic labels). The physical device path still requires a live hardware demonstration.</li>
 		<li>Inference is server-side: MODEL_V2_FINAL in SOFTWARE_SYSTEM_V2. Nothing runs on a sensor.</li>
 		<li>The virtual Monitor plots simulated source ECG. A PPG waveform is unavailable in the current simulator. The hardware view plots stored ECG ADC values against server ingestion time; its device-reported SpO₂ is unverified.</li>
 	</ul></Panel>

@@ -28,7 +28,7 @@
 <Panel eyebrow="COMPARISON" title="Released monitoring model vs federated engineering candidate" note="ROLE AND STATUS ONLY">
 	<ComparisonPanel testid="released-vs-candidate" leftTitle={released} leftSub="Released monitoring model" leftStatus="RELEASED" leftTone="released" rightTitle={cand?.candidate_id ?? 'CAPSTONE_FL_CANDIDATE_####'} rightSub={cand ? 'Federated engineering candidate' : 'No candidate yet'} rightStatus="NOT DEPLOYED" rightTone="candidate" {rows} />
 	<p class="dim">This comparison does not say that the candidate is better or worse. No candidate performance has been established.</p>
-	<p class="dim" data-testid="hardware-demo-model-note">Recorded-hardware demo runs train a separate small tabular model (<code>HARDWARE_DEMO_MODEL_V1</code>) on your recorded windows with synthetic labels. It is not registered, not a candidate and not comparable to <code>MODEL_V2_FINAL</code>; see the run on its Live page.</p>
+	<p class="dim" data-testid="hardware-demo-model-note">Recorded-hardware runs either train a separate small tabular model (<code>HARDWARE_DEMO_MODEL_V1</code>, fresh or warm-started) or fine-tune the pretrained <code>MODEL_V2_FINAL</code> checkpoint on your resampled recorded windows; both use synthetic labels. Neither is registered, a candidate, promoted or deployed, and neither is comparable to the real-ECG scientific results; the released <code>MODEL_V2_FINAL</code> is never changed. See the run on its Live page.</p>
 </Panel>
 <div class="gap"></div>
 <Panel eyebrow="LIFECYCLE" title="Two lifecycles, one blocked boundary">

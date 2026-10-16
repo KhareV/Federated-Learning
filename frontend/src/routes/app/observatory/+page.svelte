@@ -4,13 +4,23 @@
 	import { getProductStore } from '$lib/product/state.svelte';
 	import { downloadExport } from '$lib/product/observatory/export';
 	import { ProductApiError } from '$lib/product/api';
-	import type { ScenarioInfo, WindowTrace } from '$lib/product/observatory/types';
+	import type { HardwareWindowList, ScenarioInfo, WindowTrace } from '$lib/product/observatory/types';
+	import type { HardwareSession } from '$lib/product/api';
+	import { loadHardwareSessions, observatoryReady } from '$lib/product/hardware-sessions';
+	import { page } from '$app/state';
 	import SignalStageChart from '$lib/components/product/observatory/SignalStageChart.svelte';
 
 	const store = getProductStore();
 	let scenarios = $state<ScenarioInfo[]>([]);
 	let scenarioId = $state('MIXED_MONITORING_SESSION');
 	let sessionId = $state('');
+	// Recorded hardware (experimental): its own windows, not a frozen scenario's.
+	let hardware = $state<HardwareSession[]>([]);
+	let hardwareId = $state('');
+	let hardwareWindows = $state<HardwareWindowList | null>(null);
+	let hardwarePos = $state(0);
+	const hardwareReady = $derived(hardware.filter(observatoryReady));
+	const hwCurrent = $derived(hardwareWindows?.windows[hardwarePos] ?? null);
 	let windowIndex = $state(0);
 	let trace = $state<WindowTrace | null>(null);
 	let loading = $state(true);
@@ -25,6 +35,7 @@
 	const scenario = $derived(scenarios.find((s) => s.scenario_id === scenarioId) ?? null);
 	const selectedSession = $derived(store.sessions.find((s) => s.session_id === sessionId));
 	const maximum = $derived(Math.max(0, (scenario?.window_count ?? 1) - 1));
+	const hwMaximum = $derived(Math.max(0, (hardwareWindows?.windows.length ?? 1) - 1));
 	const sourceCommit = 'dff28f6a7b7bd527def21cb9fd95d682aa60a667';
 	const codeLinks = [
 		{ label: 'Gap policy', path: 'preprocessing/gaps.py' },
@@ -39,9 +50,11 @@
 		loading = true;
 		error = null;
 		try {
-			const value = sessionId
-				? await store.api.observatorySessionWindow(sessionId, windowIndex)
-				: await store.api.observatoryScenarioWindow(scenarioId, windowIndex);
+			const value = hardwareId
+				? await store.api.observatoryHardwareWindow(hardwareId, windowIndex)
+				: sessionId
+					? await store.api.observatorySessionWindow(sessionId, windowIndex)
+					: await store.api.observatoryScenarioWindow(scenarioId, windowIndex);
 			if (current === requestNumber) trace = value;
 		} catch (cause) {
 			if (current === requestNumber) {
@@ -55,11 +68,38 @@
 	function chooseScenario(event: Event) {
 		scenarioId = (event.currentTarget as HTMLSelectElement).value;
 		sessionId = '';
+		hardwareId = ''; hardwareWindows = null;
 		captureRequested = false;
 		windowIndex = 0;
 		void load();
 	}
+	async function chooseHardware(id: string) {
+		hardwareId = id; sessionId = ''; captureRequested = false; trace = null; error = null; hardwareWindows = null; hardwarePos = 0;
+		if (!id) { windowIndex = 0; void load(); return; }
+		const current = ++requestNumber;
+		loading = true;
+		try {
+			const list = await store.api.observatoryHardwareWindows(id);
+			if (current !== requestNumber) return;
+			hardwareWindows = list;
+			// Start at the first window the quality gate accepts, so the first view is a complete signal path; the others stay reachable.
+			const first = list.windows.findIndex((w) => w.ecg_quality !== 'UNUSABLE');
+			hardwarePos = Math.max(0, first);
+			if (!list.windows.length) { loading = false; error = 'This recorded session is too short to emit a 10-second window.'; return; }
+			windowIndex = list.windows[hardwarePos].window_index;
+			await load();
+		} catch (cause) {
+			if (current === requestNumber) { loading = false; error = cause instanceof Error ? cause.message : String(cause); }
+		}
+	}
+	function moveHardware(position: number) {
+		if (!hardwareWindows) return;
+		hardwarePos = Math.min(hwMaximum, Math.max(0, position));
+		windowIndex = hardwareWindows.windows[hardwarePos].window_index;
+		void load();
+	}
 	function chooseSession(event: Event) {
+		hardwareId = ''; hardwareWindows = null;
 		sessionId = (event.currentTarget as HTMLSelectElement).value;
 		captureRequested = false;
 		const selected = store.sessions.find((s) => s.session_id === sessionId);
@@ -121,6 +161,9 @@
 				scenarios = loaded;
 				if (!loaded.some((s) => s.scenario_id === scenarioId)) scenarioId = loaded[0]?.scenario_id ?? '';
 				await store.loadSessions();
+				hardware = await loadHardwareSessions(store.api);
+				const wanted = page.url.searchParams.get('hw');                 // deep link from History / Replay
+				if (wanted && hardware.filter(observatoryReady).some((h) => h.session_id === wanted)) { await chooseHardware(wanted); return; }
 				if (scenarioId) await load();
 				else { loading = false; error = 'No frozen synthetic scenarios are available.'; }
 			} catch (cause) {
@@ -135,7 +178,7 @@
 
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY</div>
 <h1 tabindex="-1" use:focusHeading>Follow one signal through the system</h1>
-<p class="lead">Inspect a deterministic synthetic window through the unchanged gap controller, causal resampler, ECG filter and normalization. Existing sessions default to bounded reconstruction; a new session can explicitly capture one window from its actual live preprocessing runtime.</p>
+<p class="lead">Inspect a deterministic synthetic window through the unchanged gap controller, causal resampler, ECG filter and normalization. Existing sessions default to bounded reconstruction; a new session can explicitly capture one window from its actual live preprocessing runtime. A saved recorded-hardware session can be traced the same way (experimental: resampled from low-rate telemetry).</p>
 <p><a href="/app/observatory/federation">Inspect all eight synthetic federation participants and their recorded contributions →</a></p>
 <p><a href="/app/observatory/research">Inspect an authorized MIT-BIH TRAIN research window →</a></p>
 <p><a href="/app/observatory/tour">Start the guided evidence journey →</a></p>
@@ -153,6 +196,24 @@
 			{#each store.sessions.filter((s) => !!s.simulation_provenance) as item}<option value={item.session_id}>{item.session_id} · {item.state}</option>{/each}
 		</select>
 	</label>
+	{#if hardwareReady.length}
+	<label>RECORDED HARDWARE SESSION (EXPERIMENTAL)
+		<select value={hardwareId} onchange={(e) => void chooseHardware((e.currentTarget as HTMLSelectElement).value)} data-testid="observatory-hardware-select">
+			<option value="">None — use a scenario or simulated session</option>
+			{#each hardwareReady as item (item.session_id)}<option value={item.session_id}>{item.session_id} · {item.summary?.stored_readings ?? item.record_count} readings</option>{/each}
+		</select>
+	</label>
+	{/if}
+	{#if hardwareId && hardwareWindows}
+	<div class="window-control" data-testid="observatory-hardware-window">
+		<span>SELECTED 10-SECOND WINDOW · {hardwareWindows.windows.length} EMITTED BY THIS RECORDING</span>
+		<div class="stepper"><button onclick={() => moveHardware(hardwarePos - 1)} disabled={loading || hardwarePos === 0} aria-label="Previous window">←</button>
+			<input aria-label="Selected recorded window" type="range" min="0" max={hwMaximum} step="1" value={hardwarePos} oninput={(e) => moveHardware(Number((e.currentTarget as HTMLInputElement).value))} disabled={loading} />
+			<button onclick={() => moveHardware(hardwarePos + 1)} disabled={loading || hardwarePos >= hwMaximum} aria-label="Next window">→</button>
+			<output>{hwCurrent ? `W${String(hwCurrent.window_index).padStart(4, '0')} · ${hwCurrent.ecg_quality}` : '—'} · {hardwarePos + 1} / {hardwareWindows.windows.length}</output></div>
+		<small class="hwnote">{hardwareWindows.label}. {hardwareWindows.windows.filter((w) => w.ecg_quality === 'UNUSABLE').length} of {hardwareWindows.windows.length} windows are rejected by the quality gate; they still show their signal path, with no model result.</small>
+	</div>
+	{:else}
 	<div class="window-control">
 		<span>SELECTED 10-SECOND WINDOW</span>
 		<div class="stepper"><button onclick={() => move(-1)} disabled={loading || windowIndex === 0} aria-label="Previous window">←</button>
@@ -160,13 +221,14 @@
 			<button onclick={() => move(1)} disabled={loading || windowIndex >= maximum} aria-label="Next window">→</button>
 			<output>W{String(windowIndex).padStart(4, '0')} / {maximum}</output></div>
 	</div>
+	{/if}
 </section>
 {#if selectedSession?.state === 'DEVICE_READY'}<div class="capture-control"><p><b>CAPTURE ONE ACTUAL LIVE WINDOW</b> — arming is opt-in and memory-only. Starting this owned session runs the normal released monitoring model; capture observes the selected source/gap/resampler/filter stages without changing its processing. The normalized input shown is reconstructed from the emitted filtered window, not recorded inside the gateway.</p><button onclick={() => void startWithCapture()} disabled={loading}>Arm window {windowIndex} and start monitoring</button></div>{/if}
 {#if sessionId && selectedSession?.state !== 'DEVICE_READY' && !captureRequested}<div class="capture-control"><p>A previously armed capture may still be available in this backend process. Historical sessions without one remain reconstruction-only.</p><button onclick={() => void reloadCapture()} disabled={loading}>Open captured live window if available</button></div>{/if}
 {#if captureRequested}<p class="capture-control">Live capture was requested for this session. {#if loading}Waiting for the selected source window…{:else}<button onclick={() => void reloadCapture()}>Reload captured evidence</button>{/if}</p>{/if}
 
 {#if loading}<p role="status" class="status">{captureRequested ? 'Waiting for the actual live captured window…' : 'Reconstructing the selected canonical window…'}</p>{/if}
-{#if error}<div role="alert" class="error"><strong>Trace unavailable</strong><p>{error}</p><p>Historical sessions only expose windows with persisted inference evidence. For an excluded/unusable window, inspect the scenario reconstruction instead.</p></div>{/if}
+{#if error}<div role="alert" class="error"><strong>Trace unavailable</strong><p>{error}</p><p>{hardwareId ? 'Recorded hardware windows come from your saved readings; a window the recording did not emit cannot be traced.' : 'Historical sessions only expose windows with persisted inference evidence. For an excluded/unusable window, inspect the scenario reconstruction instead.'}</p></div>{/if}
 
 {#if trace && !loading}
 	<section class="summary" aria-label="Selected window evidence">
@@ -175,21 +237,21 @@
 		<div><span>MODEL INPUT</span><strong>{trace.normalization.status === 'RECONSTRUCTED_MODEL_INPUT' ? 'float32 [1, 2500]' : 'NOT APPLIED'}</strong><small>Per-window z-score, only for usable inference windows</small></div>
 		<div><span>INFERENCE EVIDENCE</span><strong>{trace.persisted_inference ? trace.persisted_inference.monitoring_state : 'NOT ATTACHED'}</strong><small>{trace.inference_evidence_status}</small></div>
 	</section>
-	<div class="classification">{trace.classification === 'CAPTURED_LIVE_PREPROCESSING' ? 'CAPTURED FROM THIS LIVE PREPROCESSING RUNTIME · GATEWAY INPUT RECONSTRUCTED' : 'DETERMINISTIC LOCAL RECONSTRUCTION · SYNTHETIC VIRTUAL WEARABLE · NO NEW INFERENCE'}</div>
+	<div class="classification" data-testid="observatory-classification">{trace.classification === 'CAPTURED_LIVE_PREPROCESSING' ? 'CAPTURED FROM THIS LIVE PREPROCESSING RUNTIME · GATEWAY INPUT RECONSTRUCTED' : trace.classification === 'RECORDED_HARDWARE_RECONSTRUCTION' ? 'RECORDED HARDWARE · RESAMPLED FROM LOW-RATE TELEMETRY · EXPERIMENTAL · NOT VALID · NOT DIAGNOSTIC' : 'DETERMINISTIC LOCAL RECONSTRUCTION · SYNTHETIC VIRTUAL WEARABLE · NO NEW INFERENCE'}</div>
 	<section aria-labelledby="pipeline-title">
 		<div class="section-head"><div><span>01 / SIGNAL PATH</span><h2 id="pipeline-title">Same window, five representations</h2></div><p>Plots use actual values returned by the canonical operators. Null gaps are never joined or filled by the chart.</p></div>
 		<div class="signal-grid">{#each trace.stages as stage}<SignalStageChart {stage} startUs={trace.left_timestamp_us} endUs={trace.right_timestamp_us} />{/each}</div>
 	</section>
 	<section class="facts" aria-label="Window and gap evidence">
-		<article><span>02 / WINDOWING</span><h2>10 seconds, 5-second cadence</h2><p>The selected window contains {trace.window_sample_count} target-rate positions at {trace.target_rate_hz} Hz. Moving one step advances the right edge by {trace.cadence_us / 1_000_000} seconds; adjacent windows overlap. Signal samples occupy [t−10 s, t).</p><p>Source ECG uses {trace.source_rate_hz} Hz synthetic transport; processing and inference are server-side, not performed in this browser.</p></article>
+		<article><span>02 / WINDOWING</span><h2>10 seconds, 5-second cadence</h2><p>The selected window contains {trace.window_sample_count} target-rate positions at {trace.target_rate_hz} Hz. Moving one step advances the right edge by {trace.cadence_us / 1_000_000} seconds; adjacent windows overlap. Signal samples occupy [t−10 s, t).</p><p>{trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? `Your recorded readings are resampled onto the ${trace.source_rate_hz} Hz V2 source grid between real readings only (an unverified scaling assumption); ` : `Source ECG uses ${trace.source_rate_hz} Hz synthetic transport; `}processing and inference are server-side, not performed in this browser.</p></article>
 		<article><span>03 / GAP POLICY</span><h2>{trace.gaps.length ? `${trace.gaps.length} intersecting source gap(s)` : 'No source gap intersects this window'}</h2>
 			{#each trace.gaps as gap}<div class="gap"><b>{gap.kind} · {gap.duration_ms} ms</b><p>Missing source indices {gap.first_missing_index}–{gap.last_missing_index}; {gap.fill_count} causal hold fills; segment {gap.previous_segment_id} → {gap.next_segment_id}. Quality requirement: {gap.quality_requirement}.</p></div>{/each}
 			{#if !trace.gaps.length}<p>No gap is invented for this selected interval. Select a faulted scenario/window to inspect actual emitted gap events.</p>{/if}
 		</article>
-		<article><span>04 / CONTEXT</span><h2>{trace.context_available ? 'Context available' : 'Context unavailable'}</h2><p>ECG is the supervised model signal. Device-reported PPG/SpO₂/pulse values are context and quality evidence, not a jointly supervised classification input. {trace.classification === 'CAPTURED_LIVE_PREPROCESSING' ? 'Availability comes from the live emitted window.' : trace.session_id ? 'For this owned session, availability comes from the projected public context snapshot.' : 'Availability comes from deterministic scenario reconstruction.'}</p></article>
+		<article><span>04 / CONTEXT</span><h2>{trace.context_available ? 'Context available' : 'Context unavailable'}</h2><p>ECG is the supervised model signal. Device-reported PPG/SpO₂/pulse values are context and quality evidence, not a jointly supervised classification input. {trace.classification === 'CAPTURED_LIVE_PREPROCESSING' ? 'Availability comes from the live emitted window.' : trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? 'For this recorded session, availability comes from the device-reported BPM and SpO₂ of the window.' : trace.session_id ? 'For this owned session, availability comes from the projected public context snapshot.' : 'Availability comes from deterministic scenario reconstruction.'}</p></article>
 		<article><span>05 / NORMALIZATION</span><h2>{trace.normalization.identity}</h2><p>Status: {trace.normalization.status}. {#if trace.normalization.mean !== null}Mean {trace.normalization.mean.toPrecision(7)}, population standard deviation {trace.normalization.std?.toPrecision(7)}, epsilon {trace.normalization.epsilon}.{:else}An unusable window is rejected before model input normalization.{/if}</p></article>
 	</section>
-	{#if trace.persisted_inference}<section class="inference"><span>06 / PERSISTED MODEL RESULT</span><h2>{trace.persisted_inference.monitoring_state}</h2><p>MODEL_V2_FINAL · CAL_V2 · {trace.persisted_inference.calibration_domain}. Raw sigmoid probability {trace.persisted_inference.raw_probability ?? 'unavailable'}; source-domain calibrated probability {trace.persisted_inference.source_domain_calibrated_probability ?? 'unavailable'}; fixed threshold {trace.persisted_inference.threshold ?? 'unavailable'}.</p><p><strong>RESEARCH TECHNICAL METADATA</strong> — not disease probability, diagnosis, or personal risk. The Observatory did not rerun inference.</p></section>{:else}<p class="not-available">No persisted model result is attached to this scenario-only reconstruction. Select an owned inferred session window to inspect its recorded result.</p>{/if}
+	{#if trace.persisted_inference}<section class="inference"><span>{trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? '06 / EXPERIMENTAL MODEL RESULT' : '06 / PERSISTED MODEL RESULT'}</span><h2>{trace.persisted_inference.monitoring_state}</h2><p>MODEL_V2_FINAL · CAL_V2 · {trace.persisted_inference.calibration_domain}. Raw sigmoid probability {trace.persisted_inference.raw_probability ?? 'unavailable'}; source-domain calibrated probability {trace.persisted_inference.source_domain_calibrated_probability ?? 'unavailable'}; fixed threshold {trace.persisted_inference.threshold ?? 'unavailable'}.</p><p><strong>RESEARCH TECHNICAL METADATA</strong> — not disease probability, diagnosis, or personal risk. {trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? 'The released model scored this resampled recorded window once (the result is cached); MODEL_V2_FINAL was validated on MIT-BIH ECG, not on this signal chain, so the result is experimental and not valid.' : 'The Observatory did not rerun inference.'}</p></section>{:else}<p class="not-available">{trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? (trace.quality_state === 'UNUSABLE' ? 'The quality gate rejected this recorded window before the model, so there is no model result and none is invented. Choose a window marked VALID to see one.' : 'No model result is attached to this recorded window yet.') : 'No persisted model result is attached to this scenario-only reconstruction. Select an owned inferred session window to inspect its recorded result.'}</p>{/if}
 	<p class="exp"><button onclick={exportTrace}>Export this window as evidence JSON</button>{#if exportDigest} <small>Exported · SHA256 <code>{exportDigest.slice(0, 16)}…</code></small>{/if}</p>
 	<details class="evidence"><summary>TECHNICAL EVIDENCE & LIMITATIONS</summary><dl><div><dt>Trace classification</dt><dd>{trace.classification}</dd></div><div><dt>Source</dt><dd>{trace.source_kind} / {trace.scenario_id}</dd></div><div><dt>Normalization tensor digest</dt><dd>{trace.normalization.tensor_sha256 ?? 'NOT APPLIED'}</dd></div><div><dt>Context/inference basis</dt><dd>{trace.inference_evidence_status}</dd></div><div><dt>Claim boundary</dt><dd>{trace.claim_boundary}</dd></div></dl><p>Canonical source-code references at accepted entry commit <code>{sourceCommit}</code> (offline path references; no external link):</p><ul>{#each codeLinks as item}<li>{item.label} · <code>{item.path}</code></li>{/each}</ul><ul>{#each trace.limitations as item}<li>{item}</li>{/each}</ul></details>
 {/if}
@@ -199,7 +261,7 @@
 	h1{margin:9px 0;font:500 clamp(28px,4vw,42px) 'Space Grotesk',sans-serif}.lead{max-width:850px;color:#a7b8c9;line-height:1.6;margin:0 0 20px}
 	.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px}.controls label,.window-control{display:grid;gap:8px;padding:13px;border:1px solid rgba(148,163,184,.25);color:#94a3b8;font:10px 'JetBrains Mono',monospace;letter-spacing:.09em;min-width:0}.window-control{grid-column:1/-1}
 	select,input,button{min-height:32px;background:#07101e;color:#e5f1f0;border:1px solid rgba(148,163,184,.35);font:12px 'JetBrains Mono',monospace}select{width:100%;min-width:0;padding:7px}.stepper{display:flex;align-items:center;gap:10px}.stepper input{flex:1;min-width:40px}.stepper button{min-width:36px;cursor:pointer}.stepper button:disabled{opacity:.45;cursor:not-allowed}.stepper output{white-space:nowrap;color:#e5f1f0}
-	.status,.error,.not-available{padding:14px;border:1px solid rgba(148,163,184,.3);color:#a7b8c9}.error{border-color:#fb7185;color:#fecdd3}.error p{margin:6px 0 0}
+	.hwnote{color:#fbbf24;line-height:1.5;letter-spacing:0}.status,.error,.not-available{padding:14px;border:1px solid rgba(148,163,184,.3);color:#a7b8c9}.error{border-color:#fb7185;color:#fecdd3}.error p{margin:6px 0 0}
 	.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:10px}.summary>div{display:grid;gap:7px;padding:13px;border:1px solid rgba(148,163,184,.24);min-width:0}.summary span{color:#71829a;font:10px 'JetBrains Mono',monospace;letter-spacing:.1em}.summary strong{overflow-wrap:anywhere;font:500 15px 'Space Grotesk',sans-serif}.summary strong.warn{color:#fbbf24}.summary small{color:#94a3b8;line-height:1.5;overflow-wrap:anywhere;min-width:0}
 	.classification{padding:8px 11px;margin-bottom:18px;border-left:3px solid #fbbf24;background:rgba(251,191,36,.08);color:#fbbf24;font:10px 'JetBrains Mono',monospace;letter-spacing:.08em}
 	.capture-control{border:1px solid rgba(43,184,176,.45);background:rgba(43,184,176,.07);padding:12px;margin:12px 0;color:#b9cad7;font-size:12px;line-height:1.6}.capture-control p{margin:0 0 10px}.capture-control button{padding:9px 13px;cursor:pointer}.capture-control button:disabled{opacity:.5;cursor:not-allowed}

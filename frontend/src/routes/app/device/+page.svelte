@@ -3,6 +3,7 @@
 	import Panel from '$lib/components/dashboard/Panel.svelte';
 	import SimulationBanner from '$lib/components/product/SimulationBanner.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
+	import { deviceActions } from '$lib/product/device-lifecycle';
 	import { MONITORING_SCENARIOS, RECOMMENDED_SCENARIO, type DeviceState, type ScenarioId } from '$lib/product/types';
 
 	const store = getProductStore();
@@ -14,6 +15,7 @@
 	const stepIndex = $derived(device ? (device.connection_state === 'STREAMING' ? 4 : STEPS.indexOf(device.connection_state)) : -1);
 	const scenarioOf = $derived(device ? store.scenarioFor(device.device_id) : null);
 	const dstate = $derived(device?.connection_state ?? null);
+	const can = $derived(deviceActions(dstate));
 	onMount(() => { void Promise.all([store.loadDevices(), store.loadSessions()]).finally(() => (loaded = true)); });
 </script>
 
@@ -41,15 +43,16 @@
 	</Panel>
 {:else}
 	<Panel eyebrow="01 / CONNECTION" title={device.display_name} note="SIMULATED SOURCE">
-		<div class="current"><span>CURRENT SOFTWARE STATE</span><strong data-testid="device-state">{device.connection_state}</strong><small>{dstate === 'CONNECTED' ? 'Ready for a research monitoring session.' : dstate === 'FOUND' ? 'Select Pair / Connect to continue.' : dstate === 'DETACHED' ? 'Scan for the attached virtual source.' : 'This is a simulated source lifecycle, not a physical connection.'}</small></div>
+		<div class="current"><span>CURRENT SOFTWARE STATE</span><strong data-testid="device-state">{device.connection_state}</strong><small>{dstate === 'CONNECTED' ? 'Ready for a research monitoring session.' : dstate === 'FOUND' ? 'Select Pair / Connect to continue.' : dstate === 'DETACHED' ? 'Scan for the attached virtual source.' : dstate === 'STOPPED' ? 'The last session ended and the link was kept. Reconnect to monitor again, or Disconnect to detach and scan afresh.' : dstate === 'ERROR' ? 'Scan again to recover, or Disconnect to detach.' : 'This is a simulated source lifecycle, not a physical connection.'}</small></div>
 		<ol class="steps" aria-label="Device lifecycle">
 			{#each STEPS as step, i}<li class:done={stepIndex >= 0 && i < stepIndex} class:now={i === stepIndex} aria-current={i === stepIndex ? 'step' : undefined}><span>{i + 1}</span>{LABELS[i]}</li>{/each}
 		</ol>
 		{#if dstate === 'DISCONNECTED' || dstate === 'RECONNECTING' || dstate === 'ERROR' || dstate === 'STREAMING' || dstate === 'STOPPED'}<p class="dim">Current state: <b>{dstate}</b></p>{/if}
 		<div class="actions">
-			<button class="primary" onclick={() => store.scan(device.device_id)} disabled={store.busy || !(dstate === 'DETACHED' || dstate === 'STOPPED' || dstate === 'DISCONNECTED')}>SCAN</button>
-			<button class="primary" onclick={() => store.connect(device.device_id)} disabled={store.busy || dstate !== 'FOUND'}>PAIR / CONNECT</button>
-			<button onclick={() => store.disconnect(device.device_id)} disabled={store.busy || !(dstate === 'CONNECTED' || dstate === 'STREAMING')}>DISCONNECT</button>
+			<!-- Only moves the frozen device lifecycle allows: DETACHED/ERROR -> SCANNING; FOUND -> PAIRING -> CONNECTED; STOPPED -> CONNECTED (link kept); any linked state -> DETACHED. -->
+			<button class="primary" onclick={() => store.scan(device.device_id)} disabled={store.busy || !can.scan}>SCAN</button>
+			<button class="primary" onclick={() => store.connect(device.device_id)} disabled={store.busy || !(can.connect || can.reconnect)}>{dstate === 'STOPPED' ? 'RECONNECT' : 'PAIR / CONNECT'}</button>
+			<button onclick={() => store.disconnect(device.device_id)} disabled={store.busy || !can.disconnect}>DISCONNECT</button>
 			{#if dstate === 'CONNECTED'}<a class="next" href="/app/monitoring">CONTINUE TO MONITORING →</a>{/if}
 		</div>
 		{#if store.busy}<p role="status" class="dim">Updating virtual wearable connection…</p>{/if}

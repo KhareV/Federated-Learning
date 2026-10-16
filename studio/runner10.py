@@ -53,6 +53,7 @@ class Job:
     base_audit: dict[str, Any] | None = None     # compatibility audit of the pretrained start (None for FL_INIT_V2)
     algorithm: str = "FEDAVG"
     secagg_mode: str = "PLAIN"
+    monitored_site: int = 0                      # source mode B only: which canonical cohort site (0..7) is genuinely live-monitored (default SITE_00, the original behaviour)
     status: str = "CREATED"                      # CREATED | RUNNING | COMPLETED | FAILED
     phase: str = "CREATED"
     current_round: int = 0
@@ -87,14 +88,14 @@ class StudioFl10Service:
         return self.root / run_id
 
     def _save(self, job: Job) -> None:
-        meta = {"run_id": job.run_id, "owner": job.owner, "mode": job.mode, "init": job.init, "base_audit": job.base_audit, "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "created_at": job.created_at, "status": job.status, "phase": job.phase, "current_round": job.current_round,
+        meta = {"run_id": job.run_id, "owner": job.owner, "mode": job.mode, "init": job.init, "base_audit": job.base_audit, "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "monitored_site": job.monitored_site, "created_at": job.created_at, "status": job.status, "phase": job.phase, "current_round": job.current_round,
                 "failure": job.failure, "candidate": job.candidate, "export_status": job.export_status, "run_length": job.rounds, "engine": "FL10_10R"}
         atomic_write(self.job_dir(job.run_id) / "meta.json", (json.dumps(meta, indent=1, sort_keys=True) + "\n").encode())
 
     def _load_existing(self) -> None:
         for path in sorted(self.root.glob("FL10RUN-*/meta.json")):
             meta = json.loads(path.read_text())
-            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], rounds=int(meta.get("run_length", 10)), init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), algorithm=meta.get("algorithm", "FEDAVG"), secagg_mode=meta.get("secagg_mode", "PLAIN"), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
+            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], rounds=int(meta.get("run_length", 10)), init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), algorithm=meta.get("algorithm", "FEDAVG"), secagg_mode=meta.get("secagg_mode", "PLAIN"), monitored_site=int(meta.get("monitored_site", 0)), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
                       failure=meta.get("failure"), candidate=meta.get("candidate"), export_status=meta.get("export_status", "NOT_STARTED"))
             journal = FederationEventJournal(job.run_id)
             for event in self.events.read_events(job.run_id):
@@ -143,7 +144,7 @@ class StudioFl10Service:
             await asyncio.wait(tasks, timeout=timeout)
 
     async def create(self, owner: str, mode: str, init: str = v2_init.INIT_FRESH, rounds: int = 10,
-                     algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN") -> Job:
+                     algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN", monitored_site: int = 0) -> Job:
         if rounds not in (3, 10):
             raise StudioRunError("INVALID_REQUEST", "the extended engine runs 3 or 10 rounds")
         if rounds == 3 and init != v2_init.INIT_V2_FINAL:
@@ -152,12 +153,16 @@ class StudioFl10Service:
             raise StudioRunError("INVALID_REQUEST", "initialisation must be FL_INIT_V2 (untrained) or MODEL_V2_FINAL (pretrained)")
         if mode not in MODES:
             raise StudioRunError("INVALID_REQUEST", "source mode must be A (canonical synthetic cohort) or B (live-monitored simulated SITE_00)")
+        if not isinstance(monitored_site, int) or isinstance(monitored_site, bool) or not 0 <= monitored_site < 8:
+            raise StudioRunError("INVALID_REQUEST", "monitored_site must be an integer 0..7")
+        if mode != "B" and monitored_site != 0:
+            raise StudioRunError("INVALID_REQUEST", "monitored_site applies only to the live-monitored simulated site source mode")
         if mode == "B" and self._inference_factory is None:
             raise StudioRunError("SOURCE_MODE_UNAVAILABLE", "the live-monitored simulated SITE_00 source needs the monitoring runtime")
         run_id = f"FL10RUN-{secrets.token_hex(6).upper()}"
         if algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
             raise StudioRunError("INVALID_REQUEST", "algorithm or aggregation mode is unsupported")
-        job = Job(run_id=run_id, owner=owner, mode=mode, rounds=rounds, init=init, algorithm=algorithm, secagg_mode=secagg_mode, created_at=_now(), loop=asyncio.get_running_loop())
+        job = Job(run_id=run_id, owner=owner, mode=mode, rounds=rounds, init=init, algorithm=algorithm, secagg_mode=secagg_mode, monitored_site=monitored_site, created_at=_now(), loop=asyncio.get_running_loop())
         job.journal = FederationEventJournal(run_id)
         job.emitter = FederationEmitter(run_id, lambda: time.time_ns() // 1000, [job.journal.append, lambda e: self.events.append_event(run_id, e)], 0)
         job.translator = Fl10EventTranslator(job.emitter, lambda fn: job.loop.call_soon_threadsafe(fn), planned_rounds=rounds, client_ids=CLIENT_IDS, local_examples={c: 0 for c in CLIENT_IDS}, algorithm=Algorithm(algorithm), secagg_mode=AggregationMode(secagg_mode))
@@ -218,13 +223,15 @@ class StudioFl10Service:
         if job.mode == "B":
             from final_showcase import live_link as ll
             from simulation.fl_cohort_v1 import cohort_profiles
+            from studio import site_monitor
 
-            self._set_phase(job, "MONITORING_SITE_00")
-            profile = cohort_profiles()[0]
-            monitored = aio.run(ll.monitor_site00(self._inference_factory, session_id=f"LIVELINK-{job.run_id}"))
+            site = job.monitored_site
+            self._set_phase(job, "MONITORING_SITE_00")       # phase id kept for compatibility; the page names the monitored site from the run descriptor
+            profile = cohort_profiles()[site]
+            monitored = aio.run(site_monitor.monitor_site(self._inference_factory, site, session_id=f"LIVELINK-{job.run_id}"))
             live = ll.dataset_from_windows(monitored["windows"], profile)
-            parity = ll.parity(monitored, live, profile, datasets[0].dataset_sha256) | {"inference_http_statuses": monitored["inference_http_statuses"]}
-            datasets = [live, *datasets[1:]]
+            parity = ll.parity(monitored, live, profile, datasets[site].dataset_sha256) | {"inference_http_statuses": monitored["inference_http_statuses"]}
+            datasets = [*datasets[:site], live, *datasets[site + 1:]]
             manifest = manifest_for(datasets)
         examples = {d.client_id: len(d.labels) for d in datasets}
         job.translator.examples = examples  # type: ignore[union-attr]
@@ -263,7 +270,8 @@ class StudioFl10Service:
             buffer.ingest_dataset(live)
             trace = link_trace.verify_trace(expected, link_trace.buffer_trace(buffer), tap.calls, client_id=live.client_id, rounds=job.rounds)
             link = {"label": "LIVE-MONITORED SIMULATED ECG — NOT A REAL PHYSIOLOGICAL PATIENT", "monitoring": {k: v for k, v in (monitored or {}).items() if k != "windows"}, "parity": parity, "trace": trace,
-                    "monitoring_sessions_executed": 1, "buffer_reused_for_rounds": job.rounds, "site00_source": "LIVE_MONITORED_WINDOWS"}
+                    "monitoring_sessions_executed": 1, "buffer_reused_for_rounds": job.rounds, "site00_source": "LIVE_MONITORED_WINDOWS",
+                    "monitored_site": job.monitored_site, "monitored_client_id": live.client_id}
             atomic_write(run_dir / "monitoring_link.json", (json.dumps(link, sort_keys=True, indent=1) + "\n").encode())
         job.candidate = {**report["candidate"], "candidate_id": f"FL10_CANDIDATE_{job.run_id}"}
         job.status, job.phase, job.current_round = "COMPLETED", "EVALUATING", job.rounds

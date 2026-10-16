@@ -22,6 +22,7 @@ from starlette.websockets import WebSocketDisconnect
 from api.product_app_v1_1 import WS_FORBIDDEN, WS_NOT_FOUND, WS_POLICY_VIOLATION, WS_UNAUTHENTICATED
 from product.api.errors import ProductError, ProductErrorCode
 from product.auth.websocket import authenticate_live_websocket
+from simulation.fl_cohort_v1 import cohort_profiles
 from studio import STUDIO_ID, g1_cohort, v2_init
 from studio.constants import (
     CLAIM_BOUNDARY,
@@ -54,6 +55,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     from studio.hardware_runs import HardwareRunJobs
 
     service.hardware = HardwareRunJobs(hardware_demo, Path(artifact_root), finalize=service.finalize_hardware)
+    service.hardware.state_sink = service.submit_hardware_v2_state
     app.state.studio_service = service
     app.state.hardware_demo_fl_service = hardware_demo
     inner_lifespan = app.router.lifespan_context
@@ -89,17 +91,18 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         await identity(request)
         return {"studio_id": STUDIO_ID, "run_lengths": list(RUN_LENGTHS), "default_run_length": 3,
                 "ten_round": {"available": True, "engine": "FL10_10R", "rounds_by_initialisation": {"FL_INIT_V2": [10], "MODEL_V2_FINAL": [3, 10]}, "default_initialisation": v2_init.INIT_V2_FINAL, "initialisations": [{"id": k, "label": v2_init.INIT_LABELS[k], "default": k == v2_init.INIT_V2_FINAL} for k in v2_init.INITS], "source_modes": list(MODES.values()), "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
-                              "unsupported": {}, "expected_updates": 80},
+                              "unsupported": {}, "expected_updates": 80,
+                              "monitored_sites": [{"index": i, "client_id": f"SIM_FL_SITE_{i:02d}", "label": f"SITE_{i:02d}", "profile": cohort_profiles()[i].coverage[0]} for i in range(8)]},
                 "three_round": {"available": True, "engine": "PRODUCT_3R", "route": FEDERATION_RUNS, "expected_updates": 24},
                 "hardware_demo": {"available": hasattr(app.state, "hardware_sessions"), "source_mode": "RECORDED_HARDWARE_DEMO", "model": MODEL_ID,
                                   "run_lengths": [3, 10], "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
                                   "secagg_scope": "ROUND-1 SECAGG+ SHADOW; authoritative aggregation remains plain", "fedprox_mu": MU,
-                                  "label_assignment": LABEL_VERSION, "initialisations": [MODEL_ID], "v2_initialisation": "NOT_APPLICABLE",
+                                  "label_assignment": LABEL_VERSION, "initialisations": [MODEL_ID, "MODEL_V2_FINAL"], "v2_initialisation": "PRETRAINED_V2_FINE_TUNING",
                                   "starting_models": [
                                       {"id": "FRESH_SEEDED", "label": "Fresh initialisation (seeded, untrained)", "available": True, "reason": None},
                                       {"id": "WARM_START", "label": "Pretrained: warm start from an earlier recorded-hardware run", "available": True, "reason": None},
-                                      {"id": "MODEL_V2_FINAL", "label": "Pretrained V2 (MODEL_V2_FINAL)", "available": False,
-                                       "reason": "V2 is a 250 Hz ECG-window network; the hardware demo model is a tabular classifier over recorded-window features, so V2 weights cannot be loaded into it and no transfer is claimed."}]},
+                                      {"id": "MODEL_V2_FINAL", "label": "Pretrained V2 (MODEL_V2_FINAL)", "available": True, "reason": None,
+                                       "note": "Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain."}]},
                 "generalisation": {"cohort_id": g1_cohort.COHORT_ID, "label": g1_cohort.COHORT_USE_LABEL, "claim_boundary": g1_cohort.CLAIM_BOUNDARY, "baseline": "MODEL_V2_FINAL (unchanged, frozen)"},
                 "evaluation": {"observer_id": OBSERVER_ID, "protocol_id": EVAL_PROTOCOL_ID, "threshold": 0.5, "calibration": "NONE", "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "claim_boundary": CLAIM_BOUNDARY}}
 
@@ -112,6 +115,23 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
             if "no such table" in str(error):
                 raise ProductError(ProductErrorCode.INVALID_STATE, "hardware telemetry is not enabled") from error
             raise
+
+    @app.get(f"{STUDIO}/hardware-demo/v2-preview")
+    async def hardware_v2_preview(request: Request, session_ids: str) -> dict[str, Any]:
+        """What a pretrained-V2 run could use from the chosen sessions (resample + PREPROC_V1 grading). Reads only; nothing is trained or written."""
+        user = await identity(request)
+        ids = [x for x in session_ids.split(",") if x]
+        try:
+            from studio import hardware_v2
+
+            records = await asyncio.to_thread(hardware_demo._records, user, ids)
+            return await asyncio.to_thread(hardware_v2.preview, records, ids)
+        except PermissionError as error:
+            raise ProductError(ProductErrorCode.FORBIDDEN, str(error)) from error
+        except LookupError as error:
+            raise ProductError(ProductErrorCode.NOT_FOUND, str(error)) from error
+        except ValueError as error:
+            raise ProductError(ProductErrorCode.INVALID_REQUEST, str(error)) from error
 
     @app.get(f"{STUDIO}/hardware-demo/runs")
     async def hardware_demo_runs(request: Request) -> list[dict[str, Any]]:
@@ -162,7 +182,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         if rounds == 3 and body.get("initialisation") != v2_init.INIT_V2_FINAL:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, f"3-round runs from the untrained start use the frozen product contract: POST {FEDERATION_RUNS}")
         mode_names = {v: k for k, v in MODES.items()}
-        if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
+        if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation", "monitored_site"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "run_length must be 10 (or 3 with initialisation MODEL_V2_FINAL) and source_mode CANONICAL_SYNTHETIC or LIVE_MONITORED_SITE_00")
         if body.get("algorithm", "FEDAVG") not in ("FEDAVG", "FEDPROX") or body.get("secagg_mode", "PLAIN") not in ("PLAIN", "SECAGG_SHADOW") or body.get("run_type", "LIVE_RUN") != "LIVE_RUN":
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "unsupported Studio algorithm, aggregation mode, or run type")
@@ -170,7 +190,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         store.upsert_user(resolved)
         try:
             job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")], body.get("initialisation", "FL_INIT_V2"), rounds,
-                                                body.get("algorithm", "FEDAVG"), body.get("secagg_mode", "PLAIN"))
+                                                body.get("algorithm", "FEDAVG"), body.get("secagg_mode", "PLAIN"), body.get("monitored_site", 0))
             job = await service.runner10.start(user, job.run_id)
         except StudioRunError as error:
             raise _as_product_error(error) from error

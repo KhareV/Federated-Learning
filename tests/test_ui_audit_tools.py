@@ -31,3 +31,17 @@ def test_report_counts_before_and_after_and_excludes_the_clerk_notice(tmp_path: 
     assert "| heading level skips | 2 | 0 |" in text and "| tables without a name | 3 | 0 |" in text
     assert "| console errors/warnings | 0 | 0 |" in text          # the Clerk development-keys notice is excluded by design
     assert "`clerk.example`" in text
+
+
+def test_device_lifecycle_table_in_the_frontend_matches_the_frozen_contract():
+    """The Device page disables any button the frozen device lifecycle forbids (STOPPED -> SCANNING was reachable before)."""
+    import json
+    import re
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    contract = json.loads((root / "contracts/capstone/device_source_v1.json").read_text())["device_transitions"]
+    source = (root / "frontend/src/lib/product/device-lifecycle.ts").read_text()
+    block = source.split("DEVICE_TRANSITIONS", 1)[1].split("};", 1)[0]
+    parsed = {m.group(1): re.findall(r"'([A-Z]+)'", m.group(2)) for m in re.finditer(r"(\w+):\s*\[([^\]]*)\]", block)}
+    assert parsed == {state: list(edges) for state, edges in contract.items()}
