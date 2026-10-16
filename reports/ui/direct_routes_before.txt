@@ -1,0 +1,11 @@
+Direct HTTP loads against the production build served by `vite preview`, BEFORE the fix (recorded with curl on 2026-10-16; tree = 21a5fad):
+  200  /app/history
+  404  /app/history/HW-abc                              (713 B: SPA shell served with a 404 status)
+  404  /app/history/SESSION-1
+  200  /app/observatory/federation
+  404  /app/observatory/federation/SIM_FL_SITE_00        (722 B)
+  200  /app/federation/live
+  404  /app/nonexistent                                  (correct)
+  404  /nonexistent-root                                 (correct)
+Cause: root layout `prerender = true` removes un-prerendered dynamic routes from the server manifest; the request matched no route.
+After the fix: see direct_routes_final.json (10/10 as expected).

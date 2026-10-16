@@ -1,0 +1,96 @@
+{
+  "status": "PASS",
+  "server": "vite preview (production build)",
+  "rows": [
+    {
+      "path": "/app",
+      "expected": 200,
+      "status": 200,
+      "ok": true,
+      "bytes": 3850,
+      "content_type": "text/html",
+      "why": "static route"
+    },
+    {
+      "path": "/app/history",
+      "expected": 200,
+      "status": 200,
+      "ok": true,
+      "bytes": 3277,
+      "content_type": "text/html",
+      "why": "static route"
+    },
+    {
+      "path": "/app/history/HW-0123456789abcdef",
+      "expected": 200,
+      "status": 200,
+      "ok": true,
+      "bytes": 1023,
+      "content_type": "text/html",
+      "why": "dynamic route: direct load / reload"
+    },
+    {
+      "path": "/app/history/SESSION-1",
+      "expected": 200,
+      "status": 200,
+      "ok": true,
+      "bytes": 1023,
+      "content_type": "text/html",
+      "why": "dynamic route: direct load / reload"
+    },
+    {
+      "path": "/app/observatory/federation",
+      "expected": 200,
+      "status": 200,
+      "ok": true,
+      "bytes": 3463,
+      "content_type": "text/html",
+      "why": "static route"
+    },
+    {
+      "path": "/app/observatory/federation/SIM_FL_SITE_00",
+      "expected": 200,
+      "status": 200,
+      "ok": true,
+      "bytes": 1055,
+      "content_type": "text/html",
+      "why": "dynamic route: direct load / reload"
+    },
+    {
+      "path": "/app/federation/live",
+      "expected": 200,
+      "status": 200,
+      "ok": true,
+      "bytes": 4906,
+      "content_type": "text/html",
+      "why": "static route"
+    },
+    {
+      "path": "/app/federation/live?run=HDFLRUN-ABC",
+      "expected": 200,
+      "status": 200,
+      "ok": true,
+      "bytes": 4906,
+      "content_type": "text/html",
+      "why": "static route with a query"
+    },
+    {
+      "path": "/app/nonexistent-page",
+      "expected": 404,
+      "status": 404,
+      "ok": true,
+      "bytes": 705,
+      "content_type": "text/html",
+      "why": "not a route: stays 404"
+    },
+    {
+      "path": "/nonexistent-root",
+      "expected": 404,
+      "status": 404,
+      "ok": true,
+      "bytes": 702,
+      "content_type": "text/html",
+      "why": "not a route: stays 404"
+    }
+  ]
+}

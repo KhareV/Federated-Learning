@@ -22,11 +22,11 @@
 		<label>metric across rounds <select value={metric} onchange={(e) => { studio.selectedMetric = (e.currentTarget as HTMLSelectElement).value; }} data-testid="cmp-metric">{#each KEYS as k}<option>{k}</option>{/each}</select></label></div>
 	{#if done.length < 2}<p class="dim" role="status">Comparison needs at least two evaluated rounds; evaluated so far: {done.length}.</p>
 	{:else}
-		<div class="scroll" tabindex="-1"><table data-testid="cmp-table"><thead><tr><th scope="col">Metric</th><th scope="col">R{A}</th><th scope="col">R{B}</th><th scope="col">Difference (R{B} − R{A})</th></tr></thead>
+		<div class="scroll" tabindex="-1"><table data-testid="cmp-table" aria-label="Metric comparison between two rounds"><thead><tr><th scope="col">Metric</th><th scope="col">R{A}</th><th scope="col">R{B}</th><th scope="col">Difference (R{B} − R{A})</th></tr></thead>
 			<tbody>{#each KEYS as k}<tr><th scope="row">{k}</th><td>{fmt(val(A, k))}</td><td>{fmt(val(B, k))}</td><td data-testid={`cmp-diff-${k}`}>{fmt(diff(k))}</td></tr>{/each}</tbody></table></div>
 		<p class="warn">Ranking metrics (AUPRC/AUROC) and probability-quality metrics (BCE/Brier) can move in opposite directions. Read the confusion matrices: a model can rank well yet still predict one class for every window at the fixed 0.5 rule.</p>
 		<h4>{metric} across evaluated rounds</h4>
-		<div class="scroll" tabindex="-1"><table><thead><tr>{#each studio.rounds as r}<th scope="col">R{r}</th>{/each}</tr></thead><tbody><tr data-testid="metric-across">{#each studio.rounds as r}<td>{display(rec(r), metric, 'rate').tone === 'value' ? fmt(val(r, metric)) : display(rec(r), metric).text}</td>{/each}</tr></tbody></table></div>
+		<div class="scroll" tabindex="-1"><table aria-label="Selected metric across rounds"><thead><tr>{#each studio.rounds as r}<th scope="col">R{r}</th>{/each}</tr></thead><tbody><tr data-testid="metric-across">{#each studio.rounds as r}<td>{display(rec(r), metric, 'rate').tone === 'value' ? fmt(val(r, metric)) : display(rec(r), metric).text}</td>{/each}</tr></tbody></table></div>
 		<p class="dim">Descriptive point differences only: nominal intervals exist solely for the predeclared pair R{pair?.comparator_round} → R{pair?.endpoint_round}.</p>
 	{/if}
 </div>

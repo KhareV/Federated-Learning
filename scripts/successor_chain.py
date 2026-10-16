@@ -60,6 +60,9 @@ LINKS: tuple[Link, ...] = (
     Link("NHM_HARDWARE_LIVE_UNIFIED_001", "artifacts/hardware_demo/NHM_HARDWARE_LIVE_UNIFIED_001.lock.json", "artifacts/hardware_demo/NHM_HARDWARE_MONITOR_LIFECYCLE_001.lock.json",
          "predecessor_lock_sha256", "predecessor_commit", "49855ec9da7b349852a7dac34525de5ccb5160fb", "frontend_files",
          ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "historical_locks_edited", "automatically_pushed", "frozen_scientific_evidence_edited")),
+    Link("NHM_UI_RESIDUAL_REPAIR_001", "artifacts/ui/NHM_UI_RESIDUAL_REPAIR_001.lock.json", "artifacts/hardware_demo/NHM_HARDWARE_LIVE_UNIFIED_001.lock.json",
+         "predecessor_lock_sha256", "predecessor_commit", "21a5fad1bea34fc197a797f55dbda7ca39fded3f", "frontend_files",
+         ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "historical_locks_edited", "automatically_pushed", "frozen_scientific_evidence_edited")),
 )
 
 

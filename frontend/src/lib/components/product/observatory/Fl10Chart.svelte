@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { chartNav } from '$lib/product/a11y/chart-nav';
+	const hintId = `chart-hint-${Math.random().toString(36).slice(2, 9)}`;
 	import { cell, type Fl10Spec, type Fl10View } from '$lib/product/observatory/fl10';
 	// selectedX / onPickX / pending markers are additive Studio features: the selected round is highlighted, a pending (not yet evaluated) round is marked as pending and never drawn as a value.
 	let { spec, initialView = null, selectedX = null, onPickX = undefined }: { spec: Fl10Spec; initialView?: string | null; selectedX?: number | null; onPickX?: (x: number) => void } = $props();
@@ -77,12 +79,13 @@
 </script>
 <figure class="chart" data-testid={`chart-${spec.id}`}>
 	<figcaption><b>{spec.id.replace('FL10_', '')} · {spec.title}</b></figcaption>
+	<p id={hintId} class="sr-only">One tab stop per chart. Use the arrow keys to move between data points, Home and End to jump to the first or last, and Enter to select a round where offered.</p>
 	{#if spec.views.length > 1}
 		<div class="views" role="group" aria-label="Select view">{#each spec.views as v (v.id)}<button class:on={v.id === view.id} aria-pressed={v.id === view.id} onclick={() => { viewId = v.id; }}>{v.label}</button>{/each}</div>
 	{/if}
 	{#if view.kind === 'lines' || view.kind === 'curves'}
 		<div class="legend">{#each series as s, i (s.name)}<button class:off={isHidden(s.name)} aria-pressed={!isHidden(s.name)} onclick={() => toggle(s.name)}><i style={`background:${COLORS[i % COLORS.length]}`}></i>{s.name}</button>{/each}</div>
-		<svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${spec.title}: ${view.label}. ${visible.length} visible series.`}>
+		<svg viewBox={`0 0 ${W} ${H}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${spec.title}: ${view.label}. ${visible.length} visible series.`}>
 			{#each niceTicks(yr[0], yr[1]) as t}<line x1={L} x2={W - R} y1={py(t)} y2={py(t)} class="grid" /><text x={L - 6} y={py(t) + 3} class="tick" text-anchor="end">{fmt(t)}</text>{/each}
 			{#each niceTicks(xr[0], xr[1], 6) as t}<text x={px(t)} y={H - B + 14} class="tick" text-anchor="middle">{fmt(t)}</text>{/each}
 			<line x1={L} x2={L} y1={T} y2={H - B} class="axis" /><line x1={L} x2={W - R} y1={H - B} y2={H - B} class="axis" />
@@ -102,7 +105,7 @@
 		</svg>
 	{:else if view.kind === 'bars' || view.kind === 'stacked'}
 		<div class="legend">{#each series as s, i (s.name)}<button class:off={isHidden(s.name)} aria-pressed={!isHidden(s.name)} onclick={() => toggle(s.name)}><i style={`background:${COLORS[i % COLORS.length]}`}></i>{s.name}</button>{/each}</div>
-		<svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${spec.title}: ${view.label}`}>
+		<svg viewBox={`0 0 ${W} ${H}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${spec.title}: ${view.label}`}>
 			{#each niceTicks(byr[0], byr[1]) as t}<line x1={L} x2={W - R} y1={bpy(t)} y2={bpy(t)} class="grid" /><text x={L - 6} y={bpy(t) + 3} class="tick" text-anchor="end">{fmt(t)}</text>{/each}
 			<line x1={L} x2={L} y1={T} y2={H - B} class="axis" /><line x1={L} x2={W - R} y1={H - B} y2={H - B} class="axis" />
 			{#each cats as c, i}<text transform={`translate(${bx(i) + bw / 2} ${H - B + 10}) rotate(${cats.length > 8 ? -55 : 0})`} class="tick" text-anchor={cats.length > 8 ? 'end' : 'middle'}>{c}</text>{/each}
@@ -125,7 +128,7 @@
 		{#if view.kind === 'stacked'}<p class="dim">Weights per round sum to {view.total_check.map((t: number) => t.toFixed(6)).join(', ')}.</p>{/if}
 	{:else if view.kind === 'heatmap'}
 		{@const rl = view.rows as string[]}{@const cl = view.cols as string[]}
-		<svg viewBox={`0 0 ${W} ${40 + rl.length * 30}`} role="img" aria-label={`${spec.title}: ${view.label}`}>
+		<svg viewBox={`0 0 ${W} ${40 + rl.length * 30}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${spec.title}: ${view.label}`}>
 			{#each cl as c, j}<text x={80 + j * ((W - 90) / cl.length) + (W - 90) / cl.length / 2} y="14" class="tick" text-anchor="middle">{c}</text>{/each}
 			{#each rl as r, i}<text x="74" y={44 + i * 30} class="tick" text-anchor="end">{r}</text>
 				{#each cl as c, j}{@const v = view.values[i][j]}{@const cw = (W - 90) / cl.length}
@@ -136,7 +139,7 @@
 	{:else if view.kind === 'hist'}
 		<div class="panels">{#each view.panels as p (p.name)}
 			{@const hmax = Math.max(1, ...p.positive, ...p.negative)}{@const hw = (W - L - R) / p.positive.length}
-			<svg viewBox={`0 0 ${W} ${H - 60}`} role="img" aria-label={`Predicted probability histogram for ${p.name}`}>
+			<svg viewBox={`0 0 ${W} ${H - 60}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`Predicted probability histogram for ${p.name}`}>
 				<text x={W / 2} y="12" class="label" text-anchor="middle">{p.name}</text>
 				{#each p.positive as v, i}<rect x={L + i * hw} width={hw * 0.46} y={H - 60 - 36 - (p.negative[i] / hmax) * (H - 120)} height={(p.negative[i] / hmax) * (H - 120)} fill="#4ea1ff" tabindex="0" role="img" aria-label={`${p.name} bin ${i} negative ${p.negative[i]}`} onfocus={() => say(`${p.name} · bin ${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)} · negative ${p.negative[i]} · positive ${v}`)} onmouseenter={() => say(`${p.name} · bin ${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)} · negative ${p.negative[i]} · positive ${v}`)}><title>{`negative ${p.negative[i]}`}</title></rect>
 					<rect x={L + i * hw + hw * 0.5} width={hw * 0.46} y={H - 60 - 36 - (v / hmax) * (H - 120)} height={(v / hmax) * (H - 120)} fill="#f59e0b" tabindex="0" role="img" aria-label={`${p.name} bin ${i} positive ${v}`} onfocus={() => say(`${p.name} · bin ${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)} · positive ${v} · negative ${p.negative[i]}`)} onmouseenter={() => say(`${p.name} · positive ${v}`)}><title>{`positive ${v}`}</title></rect>{/each}
@@ -152,7 +155,7 @@
 					<b>actual +</b><span class="tp">TP {m.TP}{#if normalize}<br /><small>{m.positives ? ((m.TP / m.positives) * 100).toFixed(1) : 'UNDEFINED'}%</small>{/if}</span><span class="fn">FN {m.FN}{#if normalize}<br /><small>{m.positives ? ((m.FN / m.positives) * 100).toFixed(1) : 'UNDEFINED'}%</small>{/if}</span>
 					<b>actual −</b><span class="fp">FP {m.FP}{#if normalize}<br /><small>{m.negatives ? ((m.FP / m.negatives) * 100).toFixed(1) : 'UNDEFINED'}%</small>{/if}</span><span class="tn">TN {m.TN}{#if normalize}<br /><small>{m.negatives ? ((m.TN / m.negatives) * 100).toFixed(1) : 'UNDEFINED'}%</small>{/if}</span></div></div>{/each}</div>
 	{:else if view.kind === 'intervals'}
-		<svg viewBox={`0 0 ${W} ${40 + iv.length * 28}`} role="img" aria-label={`${spec.title}: paired differences with nominal intervals`}>
+		<svg viewBox={`0 0 ${W} ${40 + iv.length * 28}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${spec.title}: paired differences with nominal intervals`}>
 			<line x1={ix(0)} x2={ix(0)} y1="8" y2={30 + iv.length * 28} class="thr" /><text x={ix(0)} y="6" class="tick" text-anchor="middle">0</text>
 			{#each iv as r, i}<text x="12" y={34 + i * 28} class="tick">{r.label}</text>
 				{#if r.lo !== null && r.hi !== null}<line x1={ix(r.lo)} x2={ix(r.hi)} y1={30 + i * 28} y2={30 + i * 28} stroke="#4ea1ff" stroke-width="2" />{/if}
@@ -170,7 +173,7 @@
 	<p class="cap">{spec.caption}</p>
 	<p class="syn">{spec.synthetic_label}</p>
 	<details class="datatable"><summary>Data table for this view ({rows.length} rows) · sources {spec.sources.join(', ')}</summary>
-		<div class="scroll"><table><tbody>{#each rows.slice(0, 700) as r}<tr>{#each r as c}<td>{c}</td>{/each}</tr>{/each}</tbody></table></div>
+		<div class="scroll"><table aria-label="Chart data table"><tbody>{#each rows.slice(0, 700) as r}<tr>{#each r as c}<td>{c}</td>{/each}</tr>{/each}</tbody></table></div>
 		{#if rows.length > 700}<p class="dim">First 700 rows shown; the complete data is in the CSV export.</p>{/if}</details>
 </figure>
 <style>

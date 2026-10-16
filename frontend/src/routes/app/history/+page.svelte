@@ -9,7 +9,17 @@
 	let loaded = $state(false);
 	const secs = (v: number | null | undefined) => (v == null ? '--' : v >= 60 ? `${Math.floor(v / 60)} m ${Math.round(v % 60)} s` : `${v.toFixed(1)} s`);
 	const when = (us: number | null) => (us === null ? '--' : new Date(us / 1000).toLocaleString());
-	onMount(() => { void Promise.all([store.loadSessions(), store.api.hardwareSessions().then((v) => { hardware = v; }).catch(() => { hardware = []; })]).finally(() => (loaded = true)); });
+	// The hardware-session routes exist only when the hardware telemetry source is enabled on the backend; asking for them otherwise is a guaranteed 404 (a console error on every visit).
+	// The backend's own capability flag decides, so a disabled source is an ordinary empty state, not a failed request.
+	async function loadHardware(): Promise<void> {
+		try {
+			const caps = await store.api.studioCapabilities();
+			hardware = caps.hardware_demo?.available === true ? await store.api.hardwareSessions() : [];
+		} catch {
+			hardware = [];
+		}
+	}
+	onMount(() => { void Promise.all([store.loadSessions(), loadHardware()]).finally(() => (loaded = true)); });
 </script>
 <svelte:head><title>History | NHM</title></svelte:head>
 <div class="eyebrow">NHM / HISTORY</div><h1>Research monitoring history</h1>

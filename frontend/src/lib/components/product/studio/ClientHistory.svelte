@@ -23,13 +23,13 @@
 	{:else}
 		<h4>{client}: per-round training statistics ({rows.length} committed rounds)</h4>
 		{#if rows.length === 0}<p class="dim">No committed round yet for this client.</p>{:else}
-		<div class="scroll" tabindex="-1"><table data-testid="client-history-table"><thead><tr><th scope="col">round</th><th scope="col">examples</th><th scope="col">mean loss</th><th scope="col">update norm</th><th scope="col">grad norm</th><th scope="col">weight</th><th scope="col">acceptance</th></tr></thead>
+		<div class="scroll" tabindex="-1"><table data-testid="client-history-table" aria-label="Per-round training statistics of the selected client"><thead><tr><th scope="col">round</th><th scope="col">examples</th><th scope="col">mean loss</th><th scope="col">update norm</th><th scope="col">grad norm</th><th scope="col">weight</th><th scope="col">acceptance</th></tr></thead>
 			<tbody>{#each rows as r}<tr class:sel={r[idx(t3, 'round')] === studio.selectedRound}><td>{r[idx(t3, 'round')]}</td><td>{n(r[idx(t3, 'examples_processed')])}</td><td>{n(r[idx(t3, 'mean_training_loss')])}</td><td>{n(r[idx(t3, 'local_update_norm')])}</td><td>{n(r[idx(t3, 'gradient_norm_mean')])}</td><td>{n(r[idx(t3, 'aggregation_weight')], 8)}</td><td>{n(r[idx(t3, 'acceptance_status')])}</td></tr>{/each}</tbody></table></div>{/if}
 		{#if hardware}<p class="dim" data-testid="client-holdout-hardware">The held-out windows are a window-level split of the recorded sessions: they are shared by all eight clients, are never used for training, and are not tied to one client.</p>
 		{:else}
 		<h4>Evaluation-holdout participants with this site's condition, state {state}</h4>
 		{#if part.length === 0}<p class="dim" data-testid="client-holdout-none">No evaluated record for {state} yet.</p>
-		{:else}<div class="scroll" tabindex="-1"><table data-testid="client-holdout-table"><thead><tr><th scope="col">participant</th>{#each ['AUPRC', 'AUROC', 'F1', 'recall', 'specificity'] as k}<th scope="col">{k}</th>{/each}</tr></thead>
+		{:else}<div class="scroll" tabindex="-1"><table data-testid="client-holdout-table" aria-label="Held-out participants sharing this client's condition"><thead><tr><th scope="col">participant</th>{#each ['AUPRC', 'AUROC', 'F1', 'recall', 'specificity'] as k}<th scope="col">{k}</th>{/each}</tr></thead>
 			<tbody>{#each part as r}<tr><th scope="row">{r[1]}</th>{#each ['AUPRC', 'AUROC', 'F1', 'recall', 'specificity'] as k}<td>{n(r[idx(t5, k)])}</td>{/each}</tr>{/each}</tbody></table></div>{/if}
 		<p class="dim">Two holdout participants share each site's synthetic condition; the holdout never enters training.</p>
 		{/if}

@@ -43,6 +43,12 @@
 	const identity = $derived(store.authState.identity);
 	const system = $derived(store.authState.system);
 	async function signOut() { await store.auth.signOut(); location.assign('/sign-in'); }
+	// Small-screen drawer: opening it moves focus INTO the navigation; navigating closes it (the closed drawer is removed from the tab order by CSS).
+	function toggleMenu() {
+		open = !open;
+		if (open) queueMicrotask(() => (document.querySelector('#product-nav-list a') as HTMLElement | null)?.focus());
+	}
+	$effect(() => { void path; open = false; });
 	function onKeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape' && open) { open = false; menuButton?.focus(); }
 		const target = event.target as HTMLElement | null;
@@ -75,7 +81,7 @@
 	</aside>
 	<div class="main">
 		<header>
-			<button bind:this={menuButton} class="menu" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls="product-navigation" onclick={() => (open = !open)}>{#if open}<X size={19} />{:else}<Menu size={19} />{/if}</button>
+			<button bind:this={menuButton} class="menu" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls="product-navigation" onclick={toggleMenu}>{#if open}<X size={19} />{:else}<Menu size={19} />{/if}</button>
 			<div class="who" data-testid="identity-chip">
 				{#if identity}<span class="mode">{identity.auth_provider}</span><strong>{identity.user_id}</strong>{:else}<span class="mode">NOT SIGNED IN</span>{/if}
 			</div>
@@ -86,6 +92,8 @@
 </div>
 
 <style>
+	/* WCAG 2.4.11: the sticky header (58 px) must never cover a focused control the browser scrolled into view. */
+	:global(html) { scroll-padding-top: 84px; scroll-padding-bottom: 24px; }
 	/* Site-wide readability floor for micro-labels rendered inside page content (component styles stay untouched). */
 	main :global(th), main :global(dt), main :global(.chip), main :global(.tag), main :global(.badge) { font-size: 11px !important; }
 	.skip { position: absolute; left: -999px; top: 0; z-index: 100; padding: 10px 14px; background: #2bb8b0; color: #030712; } .skip:focus { left: 8px; top: 8px; }
@@ -118,11 +126,11 @@
 	main { padding: clamp(16px, 3vw, 40px); min-width: 0; } main:focus { outline: none; }
 	@media (max-width: 860px) {
 		.sb-toggle { display: none; }
-		.side { position: fixed; z-index: 40; left: 0; top: 0; transform: translateX(-102%); transition: transform .2s; } .open .side { transform: none; }
+		.side { position: fixed; z-index: 40; left: 0; top: 0; transform: translateX(-102%); visibility: hidden; transition: transform .2s, visibility 0s linear .2s; } .open .side { transform: none; visibility: visible; transition: transform .2s, visibility 0s; }
 		.open .scrim { display: block; position: fixed; z-index: 35; inset: 0; border: 0; background: rgba(0,0,0,.65); }
 		.menu { display: inline-flex; } .out span { display: none; } .out { padding: 8px 10px; }
 	}
-	@media (prefers-reduced-motion: reduce) { .side { transition: none; } }
+	@media (prefers-reduced-motion: reduce) { .side, .open .side { transition: none; } }
 	.sb-toggle:focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
 	.who{max-width:min(60vw,600px)}.who strong{min-width:0}.out:focus-visible,.menu:focus-visible,.brand:focus-visible,.item:focus-visible,.sub a:focus-visible{outline:2px solid #fbbf24;outline-offset:2px}
 	@media(max-width:390px){.who{max-width:calc(100vw - 165px)}.who .mode{flex-shrink:0}.out,.menu{min-width:36px;justify-content:center}}

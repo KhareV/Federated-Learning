@@ -12,7 +12,7 @@
 	]);
 </script>
 <div class="rp" data-testid="round-progress">
-	<h4>{roundId ? `ROUND ${roundId} OF ${plannedRounds || '--'}` : 'WAITING FOR ROUND 1'}</h4>
+	<h4 aria-level="3">{roundId ? `ROUND ${roundId} OF ${plannedRounds || '--'}` : 'WAITING FOR ROUND 1'}</h4>
 	{#each rows as r (r.id)}
 		<div class="row"><span class="lab">{r.label}</span><span class="seg" aria-hidden="true">{#each Array.from({ length: c.total }, (_, i) => i) as i}<i class:on={i < r.n}></i>{/each}</span><b data-testid={`rp-${r.id}`}>{r.n} / {c.total}</b></div>
 	{/each}

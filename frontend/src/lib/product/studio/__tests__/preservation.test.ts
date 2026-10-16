@@ -39,10 +39,12 @@ describe.each([
 	});
 });
 
+// ACCESSIBILITY PROVISION (reviewed): RoundProgress states its true heading level to assistive technology (aria-level="3" on the existing <h4>; no markup, style or visual change).
 // RECORDED-HARDWARE PROVISION (reviewed, additive): these two components gained ONE optional `dataSource` prop so the SAME Live page can show a recorded-hardware
 // run (client ids, card tag, buffer/model wording). Synthetic runs render exactly as before (default 'SYNTHETIC'). Every original test id and style rule must remain,
 // and the reviewed bytes are pinned so any further drift fails here.
 const REVIEWED_HARDWARE_PROVISION: Record<string, string> = {
+	'frontend/src/lib/components/product/federation/RoundProgress.svelte': '212dbd720234531168ad3dff00dd624022c69837c7c2055b05fad0988936d2e1',
 	'frontend/src/lib/components/product/federation/ClientGrid.svelte': '573ec801e90e186dde585aa91903f121e93c0f0d3cf254c3a3d8209f160a5115',
 	'frontend/src/lib/components/product/federation/ClientDetailPanel.svelte': 'bc1e08bcc0f4e62817da65a166f43367eadf9d7761dd0a374c3d58881a4542d2'
 };
@@ -58,7 +60,7 @@ describe('recorded-hardware provision keeps the original component design', () =
 
 describe('the original network components and the owner-binding rule are untouched', () => {
 	it.each([
-		'frontend/src/lib/components/product/federation/ProcessStepper.svelte', 'frontend/src/lib/components/product/federation/RoundProgress.svelte',
+		'frontend/src/lib/components/product/federation/ProcessStepper.svelte',
 		'frontend/src/lib/components/product/federation/ModelStateTransition.svelte', 'frontend/src/lib/components/product/federation/CandidateLifecycle.svelte', 'frontend/src/lib/components/product/federation/FederationTimeline.svelte',
 		'frontend/src/lib/components/product/federation/RunConfigForm.svelte', 'frontend/src/lib/components/product/federation/TechnicalEvidence.svelte',
 		'frontend/src/lib/product/federation/participation.ts', 'frontend/src/lib/product/federation/live-model.ts', 'frontend/src/lib/product/federation/events.ts', 'frontend/src/lib/product/federation/presentation.ts'

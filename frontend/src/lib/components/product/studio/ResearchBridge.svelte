@@ -10,7 +10,7 @@
 	{#if !bridge}<p class="dim" role="status">Loading the frozen research reference…</p>
 	{:else}
 		<p class="warn">{bridge.note}</p>
-		<div class="scroll" tabindex="-1"><table data-testid="bridge-table"><thead><tr><th scope="col">Dataset</th><th scope="col">Centralized V2 AUPRC</th><th scope="col">Federated V2 FedAvg IID AUPRC</th><th scope="col">AUPRC difference (federated − centralized)</th><th scope="col">Centralized V2 AUROC</th><th scope="col">Federated AUROC</th><th scope="col">AUROC difference</th></tr></thead>
+		<div class="scroll" tabindex="-1"><table data-testid="bridge-table" aria-label="Comparability of centralized and federated results by dataset"><thead><tr><th scope="col">Dataset</th><th scope="col">Centralized V2 AUPRC</th><th scope="col">Federated V2 FedAvg IID AUPRC</th><th scope="col">AUPRC difference (federated − centralized)</th><th scope="col">Centralized V2 AUROC</th><th scope="col">Federated AUROC</th><th scope="col">AUROC difference</th></tr></thead>
 			<tbody>{#each bridge.comparability_rows as r}<tr><th scope="row">{r.dataset}</th><td>{n(r.centralized_V2_AUPRC)}</td><td>{n(r.federated_V2_FedAvg_IID_AUPRC)}</td><td>{n(r.AUPRC_difference_federated_minus_centralized)}</td><td>{n(r.centralized_V2_AUROC)}</td><td>{n(r.federated_V2_FedAvg_IID_AUROC)}</td><td>{n(r.AUROC_difference_federated_minus_centralized)}</td></tr>{/each}</tbody></table></div>
 		<p class="dim">{bridge.verdict}. <a href="/app/observatory/outcomes">Open the frozen scientific outcomes →</a> · <a href="/app/observatory/evidence">Evidence explorer →</a></p>
 		{#if bridge.limitations.length}<ul>{#each bridge.limitations as l}<li>{l}</li>{/each}</ul>{/if}

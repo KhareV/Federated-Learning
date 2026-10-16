@@ -25,6 +25,7 @@
 	<p class="tag" data-testid="frozen-tag"><b>MODEL_V2_FINAL</b> · FROZEN RESEARCH EVIDENCE</p>
 	{#if error}<p role="alert" class="error">{error}</p>{:else if !evidence}<p class="dim" role="status">Loading frozen evidence…</p>{/if}
 	{#if evidence}
+		<h2 class="sec-h">The decision in plain questions</h2>
 		<div class="decision-grid">
 			<QuestionCard n="1" testid="q-promotion" question="Was MODEL_V2 promoted by the original model-promotion criterion?" answer={known('promotion_eligible') ? (truthy('promotion_eligible') ? 'YES · PROMOTED' : 'NO · NOT PROMOTED') : 'Unavailable'} tone="no" reason="The predeclared paired release-seed confidence interval crossed zero. This historical negative finding remains true.">
 				<TechnicalEvidence label="TECHNICAL EVIDENCE" testid="q1-evidence"><p>V2-007 / HISTORICAL MODEL PROMOTION GATE: <b>{val('promotion_decision')}</b>. Promotion eligible: {val('promotion_eligible')}. Predeclared paired release-seed AUPRC-delta confidence interval [{val('release_ci_lower')}, {val('release_ci_upper')}] crossed zero.</p></TechnicalEvidence>
@@ -59,4 +60,5 @@
 <style>
 	.page{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;min-width:0;max-width:100%}.eyebrow{color:#2bb8b0;font:11px 'JetBrains Mono',monospace;letter-spacing:.12em}h1{font:500 clamp(28px,4vw,42px) 'Space Grotesk',sans-serif;margin:0}.decision-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}p,li{color:#a7b8c9;font-size:13px;line-height:1.6;overflow-wrap:anywhere}.error{color:#fecdd3}code{overflow-wrap:anywhere}
 .lead{color:#94a3b8;font-size:14px;max-width:760px;margin:0}.tag{margin:0;font:11px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#9fe8e3;border:1px solid rgba(43,184,176,.5);padding:6px 10px;justify-self:start}.dim{color:#94a3b8}.warnline{border-left:3px solid #fbbf24;padding:6px 10px;color:#fde68a;background:rgba(251,191,36,.05)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px;align-items:start}.decision-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}ul{margin:0;padding-left:18px}
+	.sec-h { margin: 6px 0 8px; font: 500 18px 'Space Grotesk', sans-serif; color: #e5f1f0; }
 </style>

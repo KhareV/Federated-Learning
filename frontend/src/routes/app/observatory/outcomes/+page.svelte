@@ -50,14 +50,14 @@
 	{:else}<p class="dim">No frozen round log for this selection.</p>{/if}
 </section>
 <section aria-label="Model metrics"><h2>Frozen evaluation on {dataset} · V2 {algorithm}</h2>
-	<div class="scroll"><table data-testid="outcome-models"><thead><tr><th>Model</th><th>AUPRC [95% interval]</th><th>AUROC</th><th>Patient-macro F1</th><th>Sensitivity</th><th>Specificity</th></tr></thead><tbody>
+	<div class="scroll"><table data-testid="outcome-models" aria-label="Scientific outcome metrics by model"><thead><tr><th scope="col">Model</th><th scope="col">AUPRC [95% interval]</th><th scope="col">AUROC</th><th scope="col">Patient-macro F1</th><th scope="col">Sensitivity</th><th scope="col">Specificity</th></tr></thead><tbody>
 	{#each rows as m (m.model_id)}<tr><th scope="row">{m.model_id}</th><td>{fmt(m.point.AUPRC)} <small>[{fmt(m.ci_95.AUPRC?.lower, 3)}, {fmt(m.ci_95.AUPRC?.upper, 3)}]</small></td><td>{fmt(m.point.AUROC)}</td><td>{fmt(m.point.patient_macro_F1)}</td><td>{fmt(m.point.sensitivity)}</td><td>{fmt(m.point.specificity)}</td></tr>{/each}</tbody></table></div>
 	<h3>V1 against V2, same condition ({condition})</h3>
-	<div class="scroll"><table><thead><tr><th>Model</th><th>AUPRC</th><th>AUROC</th></tr></thead><tbody>{#each v1v2 as m (m.model_id)}<tr><th scope="row">{m.model_id}</th><td>{fmt(m.point.AUPRC)}</td><td>{fmt(m.point.AUROC)}</td></tr>{/each}</tbody></table></div>
+	<div class="scroll"><table aria-label="Historical V1 and V2 centralized reference metrics"><thead><tr><th scope="col">Model</th><th scope="col">AUPRC</th><th scope="col">AUROC</th></tr></thead><tbody>{#each v1v2 as m (m.model_id)}<tr><th scope="row">{m.model_id}</th><td>{fmt(m.point.AUPRC)}</td><td>{fmt(m.point.AUROC)}</td></tr>{/each}</tbody></table></div>
 </section>
 <section aria-label="Centralized versus federated" data-testid="comparability"><h2>Centralized V2 against federated V2 (FedAvg, IID)</h2>
 	<p class="warn">{bundle.comparability.verdict}</p>
-	<div class="scroll"><table data-testid="comparability-matrix"><thead><tr><th>Dataset</th><th>Centralized AUPRC</th><th>Federated AUPRC</th><th>Difference</th><th>Centralized AUROC</th><th>Federated AUROC</th><th>Difference</th></tr></thead><tbody>
+	<div class="scroll"><table data-testid="comparability-matrix" aria-label="Centralized versus federated comparability matrix"><thead><tr><th scope="col">Dataset</th><th scope="col">Centralized AUPRC</th><th scope="col">Federated AUPRC</th><th scope="col">Difference</th><th scope="col">Centralized AUROC</th><th scope="col">Federated AUROC</th><th scope="col">Difference</th></tr></thead><tbody>
 	{#each bundle.comparability.rows as r (r.dataset)}<tr><th scope="row">{r.dataset}</th><td>{fmt(r.centralized_V2_AUPRC, 6)}</td><td>{fmt(r.federated_V2_FedAvg_IID_AUPRC, 6)}</td><td>{fmt(r.AUPRC_difference_federated_minus_centralized, 6)}</td><td>{fmt(r.centralized_V2_AUROC, 6)}</td><td>{fmt(r.federated_V2_FedAvg_IID_AUROC, 6)}</td><td>{fmt(r.AUROC_difference_federated_minus_centralized, 6)}</td></tr>{/each}</tbody></table></div>
 	<h3>Comparability audit (read-only)</h3>
 	<ul>{#each bundle.comparability.checks as c}<li><b>{c.item}</b> — <span class={`st ${c.status.toLowerCase()}`}>{c.status}</span>: {c.detail}</li>{/each}</ul>
@@ -68,7 +68,7 @@
 <section aria-label="Synthetic sandbox evaluation" data-testid="synthetic-eval"><h2>Live sandbox candidate · independent synthetic holdout</h2>
 	<p class="syn" data-testid="synthetic-label">{syn.boundary_label || SYN_LABEL}</p>
 	<p class="dim">Frozen protocol <code>{syn.protocol_sha256.slice(0, 16)}…</code> (method-freeze commit <code>{syn.method_freeze_commit.slice(0, 10)}</code>) · {syn.holdout_windows} holdout windows from 8 unseen participants · raw sigmoid 0.5, no CAL_V2, no tuning · candidate <code>{syn.candidate_digest.slice(0, 16)}…</code>.</p>
-	<div class="scroll"><table><thead><tr><th>State</th>{#each synMetrics as m}<th>{m}</th>{/each}<th>TP/FP/TN/FN</th></tr></thead><tbody>
+	<div class="scroll"><table aria-label="Synthetic federated states: metrics and confusion counts"><thead><tr><th scope="col">State</th>{#each synMetrics as m}<th scope="col">{m}</th>{/each}<th scope="col">TP/FP/TN/FN</th></tr></thead><tbody>
 	{#each Object.entries(syn.states) as [k, s] (k)}<tr><th scope="row">{k.replace('_', ' ')}</th>{#each synMetrics as m}<td>{fmt(s.pooled[m])}</td>{/each}<td>{s.pooled.TP}/{s.pooled.FP}/{s.pooled.TN}/{s.pooled.FN}</td></tr>{/each}</tbody></table></div>
 	<p class="warn">Reported as measured, including operating-point failures. Metric undefined ⇒ shown as UNDEFINED, never as zero. These are not AAMI-SVF, clinical or deployment claims.</p>
 </section>
