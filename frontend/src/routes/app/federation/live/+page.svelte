@@ -26,7 +26,7 @@
 	import { useFederation } from '$lib/product/federation/state.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import { ownerBoundClientId } from '$lib/product/federation/participation';
-	import { SOURCE_COPY, isRecordedClient } from '$lib/product/federation/data-source';
+	import { SOURCE_COPY, HARDWARE_V2_COPY, isRecordedClient } from '$lib/product/federation/data-source';
 	import { runContext, isHardwareContext } from '$lib/product/federation/run-context';
 	import { algorithmName } from '$lib/product/federation/presentation';
 	const fed = useFederation();
@@ -43,7 +43,7 @@
 	const hardware = $derived(isHardwareContext(ctx));
 	const hardwareV2 = $derived(ctx.lineage === 'HARDWARE_V2_PRETRAINED');
 	const dataSource = $derived(hardware ? 'HARDWARE' : 'SYNTHETIC');
-	const copy = $derived(SOURCE_COPY[dataSource]);
+	const copy = $derived(hardwareV2 ? HARDWARE_V2_COPY : SOURCE_COPY[dataSource]);
 	// Recorded-hardware runs have no single owner-bound client: all eight logical clients hold the signed-in user's own recorded windows.
 	const routeRun = $derived(page.url.searchParams.get('run'));
 	const ownerBound = $derived(hardware ? null : ownerBoundClientId(product.authState.system?.auth_provider, v.runType ?? fed.run?.run_type));
@@ -119,7 +119,8 @@
 	{#if hardware}
 		<div class="mine" data-testid="hardware-participation">
 			<b>YOUR RECORDED DATA IN THIS RUN</b>
-			<p><b data-testid="hw-total-windows">{totalWindows || '--'}</b> {hardwareV2 ? 'recorded 10 s V2 windows (resampled, quality-VALID only) on your one recorded client; the other seven clients are canonical synthetic peers.' : 'recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client).'}</p>
+			<p><b data-testid="hw-total-windows">{totalWindows || '--'}</b> {hardwareV2 ? 'recorded 10 s V2 windows (resampled; every complete window is used, the quality grade is reported but does not block) on your one recorded client; the other seven clients are canonical synthetic peers.' : 'recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client).'}</p>
+			{#if hardwareV2}<p class="dim" data-testid="hardware-metrics-note">Your recording trains client 00 only (its labels are synthetic-assigned). Every round is evaluated exactly as in a synthetic run, on the same frozen synthetic evaluation cohort, so these metrics are directly comparable with a synthetic pretrained-V2 run; they say nothing about your physiology.</p>{/if}
 			<p>Raw recorded windows sent to the federation coordinator: <b data-testid="hw-raw-sent">0</b> · only model updates are shared.</p>
 			<TechnicalEvidence label="WHAT IS REAL AND WHAT IS SYNTHETIC"><p>{hardwareV2 ? 'The windows come from your own recorded MongoDB telemetry, resampled from the low-rate telemetry onto the V2 source grid under an unverified ADC-scaling assumption, then graded by the unchanged quality gate. MODEL_V2_FINAL was validated on MIT-BIH ECG, not on this signal chain. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the seven peers keep the cohort\'s synthetic event-window labels, your recorded client has assigned ones.' : 'The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the model is a small tabular classifier, not MODEL_V2_FINAL.'}</p></TechnicalEvidence>
 		</div>
@@ -154,11 +155,11 @@
 <div class="gap"></div>
 <div class="grid">
 	<Panel eyebrow="MODEL STATE" title="Global model state evolution" note="REPORTED DIGESTS"><ModelStateTransition view={shown} baseDigest={fed.rounds[0]?.base_state_digest ?? studio.records.find((r) => r.round_id === 0)?.global_state_digest ?? null} /></Panel>
-	{#if hardware}<Panel eyebrow="FINAL MODEL STATE" title="Demo model after the last committed round" note="NOT PROMOTED · NOT DEPLOYED">
+	{#if hardware && !hardwareV2}<Panel eyebrow="FINAL MODEL STATE" title="Demo model after the last committed round" note="NOT PROMOTED · NOT DEPLOYED">
 		<p data-testid="hardware-final-state">{#if lastDigest}Latest committed global state: <DigestText value={lastDigest} label="latest committed state digest" />{:else}No round has committed yet.{/if}</p>
-		<ul class="rs"><li>Promoted: <b>NO</b></li><li>Deployed: <b>NO</b></li><li>Released monitoring model changed: <b>NO</b></li><li>Pretrained V2 transfer: <b>NOT APPLICABLE</b></li></ul>
-		<p class="dim">This is a toy model trained to show the federated path on your recorded telemetry; it is not registered or used for monitoring.</p></Panel>
-	{:else if isTen && studio.run}<Panel eyebrow="CANDIDATE" title="Final engineering candidate" note="NOT PROMOTED · NOT DEPLOYED"><CandidateSummary run={studio.run} /></Panel>
+		<ul class="rs"><li>Promoted: <b>NO</b></li><li>Deployed: <b>NO</b></li><li>Released monitoring model changed: <b>NO</b></li><li>Pretrained V2 transfer: <b>{hardwareV2 ? 'YES — started from MODEL_V2_FINAL, fine-tuned by these rounds' : 'NOT APPLICABLE'}</b></li></ul>
+		<p class="dim">{hardwareV2 ? 'This is the pretrained V2 network after federated fine-tuning on your recorded telemetry and seven synthetic peers; it is not registered or used for monitoring.' : 'This is a toy model trained to show the federated path on your recorded telemetry; it is not registered or used for monitoring.'}</p></Panel>
+	{:else if (isTen || hardwareV2) && studio.run}<Panel eyebrow="CANDIDATE" title="Final engineering candidate" note="NOT PROMOTED · NOT DEPLOYED"><CandidateSummary run={studio.run} /></Panel>
 	{:else}<Panel eyebrow="CANDIDATE" title="Candidate lifecycle" note={replay ? 'HISTORICAL EVENT REPLAY' : 'ENGINEERING SANDBOX'}><CandidateLifecycle view={shown} {replay} /></Panel>{/if}
 </div>
 <div class="gap"></div>

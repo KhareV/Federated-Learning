@@ -23,6 +23,7 @@ from __future__ import annotations
 import hashlib
 import json
 import secrets
+import threading
 import time
 from collections import OrderedDict
 from pathlib import Path
@@ -35,6 +36,7 @@ from federated.virtual_client_source_v1 import WINDOW_SAMPLES, LocalDataset, dat
 from fl10 import metrics as fl10_metrics
 from fl10.runner import atomic_write, load_state
 from final_showcase import metrics as base_metrics
+from product.hardware_telemetry import MAX_TRACE
 from studio import v2_init
 from studio.hardware_demo import canonical_digest
 
@@ -51,7 +53,8 @@ HARDWARE_CLIENT_ID = "RECORDED_DEMO_CLIENT_00"
 PEER_IDS = tuple(f"SIM_FL_SITE_{i:02d}" for i in range(1, 8))
 CLIENT_IDS = (HARDWARE_CLIENT_ID, *PEER_IDS)
 _PEERS: dict[str, Any] = {}
-MAX_STORED_READINGS = 2000      # product.hardware_telemetry.MAX_TRACE: only the newest readings of a session are kept
+_PEERS_LOCK = threading.Lock()
+MAX_STORED_READINGS = MAX_TRACE  # only the newest readings of a session are kept
 LABEL = "RECORDED HARDWARE · RESAMPLED · PRETRAINED V2 FINE-TUNING · SYNTHETIC ASSIGNED LABELS · NOT VALID · NOT DIAGNOSTIC"
 CLAIM = "RECORDED_HARDWARE_RESAMPLED_WINDOWS_WITH_SYNTHETIC_ASSIGNED_LABELS_V2_FINE_TUNING_ENGINEERING_DEMO_ONLY_NOT_CLINICAL"
 COHORT_USE = "DIAGNOSTIC HOLDOUT BLOCK OF THE RECORDING (time-purged, same sessions as training) — NOT AN INDEPENDENT TEST"
@@ -59,11 +62,12 @@ COHORT_USE = "DIAGNOSTIC HOLDOUT BLOCK OF THE RECORDING (time-purged, same sessi
 
 def peer_datasets() -> list[LocalDataset]:
     """The seven canonical synthetic peers (SIM_FL_SITE_01..07), built once per process by the unchanged cohort builder (about 12 s the first time)."""
-    if "peers" not in _PEERS:
-        from federated.wearable_fl_runner_v1 import build_cohort
+    with _PEERS_LOCK:
+        if "peers" not in _PEERS:
+            from federated.wearable_fl_runner_v1 import build_cohort
 
-        _PEERS["peers"] = build_cohort()[1][1:]
-    return list(_PEERS["peers"])
+            _PEERS["peers"] = build_cohort()[1][1:]
+        return list(_PEERS["peers"])
 
 
 def _complete(event: dict[str, Any]) -> bool:
@@ -125,8 +129,8 @@ def _insufficient(sessions: list[dict[str, Any]], train_total: int, holdout_tota
     detail = ", ".join(f"{k} ×{v}" for k, v in sorted(reasons.items(), key=lambda kv: -kv[1])) or "none"
     windows = sum(s["windows"] for s in sessions)
     capped = any(s["readings"] >= MAX_STORED_READINGS for s in sessions)
-    hint = (f" NHM keeps at most the newest {MAX_STORED_READINGS} readings of a session (about {MAX_STORED_READINGS // 20} s at 20 Hz, roughly 13 trainable windows), so select two or more recorded sessions."
-            if capped or windows < MIN_TRAIN_WINDOWS + MIN_HOLDOUT_WINDOWS else "")
+    hint = (f" NHM keeps at most the newest {MAX_STORED_READINGS} readings of a session (about {MAX_STORED_READINGS // 20 // 60} min at 20 Hz), so select more than one session."
+            if capped else (" A V2 run needs about 4 minutes of clean recording (16 training + 4 holdout 10 s windows), so record longer or select more sessions." if windows < MIN_TRAIN_WINDOWS + MIN_HOLDOUT_WINDOWS else ""))
     return (f"INSUFFICIENT_V2_WINDOWS: {train_total} training and {holdout_total} holdout windows usable (need {MIN_TRAIN_WINDOWS} and {MIN_HOLDOUT_WINDOWS}) from {windows} 10 s windows; "
             f"incomplete windows excluded: {detail}. V2 trains on every complete 10 s window whatever its grade.{hint}")
 
@@ -195,7 +199,7 @@ def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algor
     dataset = {
         "version": DATASET_VERSION, "feature_version": "PREPROC_V1_RESAMPLED_250HZ_10S_NORMALISED", "feature_names": [], "window_seconds": WINDOW_US / 1e6, "minimum_records": None,
         "windows_total": sum(i["windows"] for i in infos), "quality_gate": "NOT_ENFORCED_FOR_HARDWARE_V2", "gate_overridden_windows": sum(i["gate_overridden"] for i in infos), "training_windows": len(used), "training_windows_available": len(train_all), "topology": "ONE_RECORDED_CLIENT_PLUS_SEVEN_SYNTHETIC_PEERS", "holdout_windows": len(holdout_flat), "excluded_windows": [{"session_id": i["session_id"], "reasons": i["excluded_reasons"], "windows": i["windows"], "usable": i["usable"]} for i in infos],
-        "sessions": infos, "label_assignment": {"version": LABEL_VERSION, "status": "SYNTHETIC_ASSIGNED_FOR_DEMO", "seed": label_seed, "classes": {"0": "DEMO_CLASS_A", "1": "DEMO_CLASS_B"}},
+        "sessions": infos, "label_assignment": {"version": LABEL_VERSION, "status": "SYNTHETIC_ASSIGNED_FOR_DEMO", "seed": label_seed, "classes": {"0": "NORMAL_MONITORED_PATTERN", "1": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"}},
         "input_feature_sha256": canonical_digest({w["window_id"]: hashlib.sha256(json.dumps(w["ecg"]["samples"]).encode()).hexdigest() for w in all_windows}),
         "label_sha256": canonical_digest({**{k: v for k, v in train_labels.items() if k in used_ids}, **holdout_labels}), "normalization": {"scope": "PER_WINDOW_ZSCORE", "unit": "unchanged normalize_windows"}, "assumptions": ASSUMPTIONS,
         "clients": client_manifest, "holdout_window_ids": [w["window_id"] for w in holdout_flat],

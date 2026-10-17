@@ -105,3 +105,19 @@ Defect found and fixed: **Stop did not do a final catch-up poll**, so documents 
 * A pretrained-V2 hardware run needs a recording the quality gate accepts; large-amplitude recordings are refused (by design) until the ADC scaling is verified.
 * The warm start from an earlier V2 hardware run is not offered (only fresh/warm for the tabular model, and the pretrained checkpoint for V2).
 * One monitored site per run; several simultaneously monitored sites are not offered.
+
+## 6. Parity audit: pretrained-V2 hardware run vs synthetic pretrained-V2 run
+
+A pretrained-V2 recorded-hardware run uses the same checkpoint (`load_v2_final()`, identical checkpoint and state SHA-256), the same FL10 runner and the same topology (one data-holding client plus seven canonical synthetic peers) as a synthetic V2 run. It used to be *presented* very differently. The audit and the resulting changes:
+
+| Aspect | Before | Now |
+|---|---|---|
+| Per-round evaluation | 11-window holdout block of the recording, synthetic-assigned (random) labels: chance by construction, not comparable with anything | The frozen synthetic evaluation cohort (`WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1`, 1446 windows, 16 participants), scored by the same `EvaluationObserver`; R0 equals a synthetic V2 run's R0 |
+| Unseen-cohort lane | fed directly | fed by the observer mirror, as for synthetic runs |
+| Paired comparison / historical reference | "not applicable" | available (same observer, same bundle) |
+| Final candidate | none ("NOT CREATED YET", "toy model" panel, "Pretrained V2 transfer: NOT APPLICABLE") | `FL10_CANDIDATE_<run>` from the runner's report, same panel as a synthetic run |
+| Bundle / figures / tables / export | hardware-specific builder | `build_live_bundle` (ROC/PR curves, confusion matrices, same 20 figures and 12 tables), plus the footer qualifier "client 00 trains on your recorded hardware windows (synthetic-assigned labels)" |
+| Live-page chips and network panel | "8 logical clients · your recorded windows", METHOD "—" | "1 recorded client · 7 synthetic peers", "pretrained V2 start" |
+| Stale text | "quality-VALID only" | every complete window trains; the grade is reported |
+
+The tabular recorded-hardware family (fresh / warm start) is unchanged and keeps its own diagnostic holdout block. What the recorded client contributes in a V2 run is training windows only; its labels remain synthetic-assigned, so nothing in the evaluation says anything about the recorded physiology. `tests/test_hardware_v2_parity.py` runs a real V2 hardware run through `StudioService` and checks the points above.

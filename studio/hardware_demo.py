@@ -332,7 +332,7 @@ class HardwareDemoService:
             "version": DATASET_VERSION, "feature_version": FEATURE_VERSION, "feature_names": FEATURES,
             "window_seconds": WINDOW_SECONDS, "minimum_records": MIN_RECORDS, "windows_total": len(windows),
             "training_windows": len(train), "holdout_windows": len(holdout), "excluded_windows": excluded,
-            "label_assignment": {"version": LABEL_VERSION, "status": "SYNTHETIC_ASSIGNED_FOR_DEMO", "seed": label_seed, "classes": {"0": "DEMO_CLASS_A", "1": "DEMO_CLASS_B"}},
+            "label_assignment": {"version": LABEL_VERSION, "status": "SYNTHETIC_ASSIGNED_FOR_DEMO", "seed": label_seed, "classes": {"0": "NORMAL_MONITORED_PATTERN", "1": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"}},
             "input_feature_sha256": feature_digest, "label_sha256": label_digest,
             "normalization": {"mean": mean.tolist(), "std": std.tolist(), "fit_scope": "TRAIN_ONLY"},
             "clients": client_manifest, "holdout_window_ids": [w["window_id"] for w in holdout],

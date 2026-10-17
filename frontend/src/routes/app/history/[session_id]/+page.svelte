@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import Panel from '$lib/components/dashboard/Panel.svelte';
+	import HardwareEvidence from '$lib/components/product/HardwareEvidence.svelte';
 	import type { HardwareSession } from '$lib/product/api';
 	import { hardwareWaveform } from '$lib/product/hardware-waveform';
 	let hardware = $state<HardwareSession | null>(null);
@@ -62,7 +63,7 @@
 	{#if hardware}
 		<Panel eyebrow="01 / HARDWARE TELEMETRY" title={hardware.session_id} note={hardware.status}>
 			<p>{hardware.source} · {hardware.collection}</p><p>Started {new Date(hardware.started_at).toLocaleString()} · Stopped {hardware.stopped_at ? new Date(hardware.stopped_at).toLocaleString() : 'Interrupted or active'} · {hardware.record_count} actual accepted records</p>
-			<p>Stored trace: last {hardware.trace_limit} readings maximum. Timestamp is server ingestion time. This session has no model inference or clinical classification.</p>
+			<p>Stored trace: last {hardware.trace_limit} readings maximum. Timestamp is server ingestion time. The stored trace itself is raw telemetry; the experimental model output on its resampled windows is shown below, and nothing here is a clinical classification.</p>
 			{#if hardwarePlot.points.length}<svg viewBox="0 0 1000 180" role="img" aria-label="Saved MongoDB ECG trace over server ingestion time; long gaps are unconnected" preserveAspectRatio="none">
 				{#each hardwarePlot.paths as path}<path d={path} fill="none" stroke="#2bb8b0" stroke-width="2" vector-effect="non-scaling-stroke" />{/each}
 				{#each hardwarePlot.points as point}<circle cx={point.x} cy={point.y} r="1.8" fill="#2bb8b0" />{/each}
@@ -79,6 +80,7 @@
 				<ol class="events">{#each [...hardware.readings.slice(0, 25), ...(hardware.readings.length > 50 ? [null] : []), ...hardware.readings.slice(-25)] as r}{#if r === null}<li>… {hardware.readings.length - 50} more readings are kept in the saved session …</li>{:else}<li><code>{r.id}</code> · {new Date(r.ingested_at).toLocaleTimeString()} · ECG {r.ecg} · BPM {r.bpm ?? 'unavailable'} · SpO₂ {r.spo2 ?? 'unavailable'} (unverified)</li>{/if}{/each}</ol>
 			</details>
 		</Panel>
+		<HardwareEvidence session={hardware} />
 	{:else if session}
 		<Panel eyebrow="01 / SESSION" title={session.session_id} note={session.state}>
 			<p class="overview">Research/engineering monitoring history — not a diagnosis. Runtime identity was fixed at session creation.</p>

@@ -71,7 +71,7 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 	const badge = hardware ? 'RECORDED HARDWARE' : recorded ? 'RECORDED SYNTHETIC EVIDENCE' : execution === 'EVENT_REPLAY' ? 'REPLAY' : provenance === 'SIMULATED_MONITORED_SITE_00' ? run.signal_session_id ? `HISTORY SESSION · SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : `SIMULATED SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : 'SYNTHETIC COHORT';
 	const dataSentence = hardware
 		? lineage === 'HARDWARE_V2_PRETRAINED'
-			? 'Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (only windows the quality gate grades VALID) with deterministic synthetic labels on ONE recorded client, federated with seven canonical synthetic peers on one machine.'
+			? 'Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven canonical synthetic peers on one machine.'
 			: 'Your recorded telemetry windows (real features) with deterministic synthetic labels, split across eight logical clients on one machine.'
 		: provenance === 'SIMULATED_MONITORED_SITE_00'
 			? run.signal_session_id
@@ -86,13 +86,15 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 		capabilities: {
 			ownerBoundClient: !hardware && live ? yes() : no(hardware ? 'Every recorded-hardware client holds your own recorded windows; there is no single owner-bound client.' : 'Only a live run executes on behalf of the signed-in owner.'),
 			generalisation: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? yes() : no(NA_HARDWARE_GENERALISATION)) : recorded ? no(NA_RECORDED_GENERALISATION) : yes(),
-			pairedIntervals: hardware ? no(NA_HARDWARE_PAIRED) : yes(),
-			historicalReference: hardware ? no(NA_HARDWARE_HISTORICAL) : yes(),
+			pairedIntervals: hardware && lineage !== 'HARDWARE_V2_PRETRAINED' ? no(NA_HARDWARE_PAIRED) : yes(),
+			historicalReference: hardware && lineage !== 'HARDWARE_V2_PRETRAINED' ? no(NA_HARDWARE_HISTORICAL) : yes(),
 			secaggShadow: run.secagg_mode === 'SECAGG_SHADOW' ? yes() : no('Plain aggregation was used for this run.'),
 			exports: run.export_status === 'READY' ? yes() : no(run.export_status === 'PREPARING' ? 'Exports are being prepared.' : 'Exports are generated when the run completes and every evaluation has settled.'),
-			replay: no(hardware ? 'Recorded-hardware runs are opened from their saved journal; replay is not offered.' : 'Open a completed run from "Your federation runs" to replay it.')
+			replay: no(hardware && lineage !== 'HARDWARE_V2_PRETRAINED' ? 'Recorded-hardware runs are opened from their saved journal; replay is not offered.' : 'Open a completed run from "Your federation runs" to replay it.')
 		}
 	};
 }
 
 export const isHardwareContext = (c: RunContext): boolean => c.provenance === 'RECORDED_HARDWARE';
+/** Only the tabular recorded-hardware family is evaluated on a small holdout block of the recording; a pretrained-V2 hardware run is evaluated on the same frozen synthetic cohort as a synthetic V2 run. */
+export const hasRecordingHoldout = (c: RunContext): boolean => c.provenance === 'RECORDED_HARDWARE' && c.lineage !== 'HARDWARE_V2_PRETRAINED';

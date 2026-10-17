@@ -40,7 +40,7 @@ ASSUMPTIONS = {
     "resampling": f"linear interpolation to {SOURCE_HZ} Hz between real readings; gaps over {MAX_BRIDGE_US / 1e6:g} s are not bridged",
     "adc_scaling": "ASSUMED AD8232 gain 100, 3.3 V reference, 12-bit ADC, midpoint 2048 (unverified)",
     "runtime_counts_per_adc_count": RUNTIME_COUNTS_PER_ADC,
-    "ppg_context": "device-reported BPM used as pulse rate; device SpO2 treated as valid only when > 0; no PPG quality supplied",
+    "ppg_context": "device-reported BPM used as pulse rate; device SpO2 treated as valid only when > 0; PPG QUALITY IS AN ASSUMPTION: VALID while the device reports both a pulse rate and an SpO2 (finger present), absent otherwise; the sketch supplies no PPG signal quality",
     "validity": "MODEL_V2_FINAL was validated on MIT-BIH 360 Hz ECG, not on this signal chain",
 }
 
@@ -93,7 +93,7 @@ def readings_to_records(readings: list[dict[str, Any]], session_id: str) -> tupl
                     hr_ecg_bpm=None,
                     pr_ppg_bpm=float(bpm) if bpm else None,
                     ecg_quality="VALID",  # ignored: the runtime recomputes quality itself
-                    ppg_quality=None,
+                    ppg_quality="VALID" if bpm and spo2 else None,   # ASSUMED (see ASSUMPTIONS['ppg_context']): the device supplies no PPG quality
                     source="HARDWARE_MONGO_EXPERIMENTAL_RESAMPLED",
                     preprocess_version=None,
                 )

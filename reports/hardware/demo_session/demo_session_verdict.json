@@ -1,0 +1,29 @@
+{
+  "checks": {
+    "app_init_created_the_collection_in_mongo": true,
+    "history_evidence_scored_windows": true,
+    "history_links": true,
+    "listed_in_history_as_saved": true,
+    "observatory_no_console_or_http_errors": true,
+    "replay_hardware_tag": true,
+    "replay_no_alerts": true,
+    "replay_scored_windows": true,
+    "single_demo_session_enough_for_v2": true,
+    "tabular_3_rounds_completed": true,
+    "trace_recorded_hardware": true,
+    "v2_3_rounds_completed_one_recorded_plus_seven": true,
+    "v2_3_rounds_same_evaluation_as_synthetic_v2": true
+  },
+  "database": "nhm_rehearsal",
+  "documents_seeded": 5041,
+  "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA",
+  "generated_not_recorded": true,
+  "mode": "demo_session",
+  "physical_esp32_verified": false,
+  "real_render_verified": false,
+  "session_id": "HW-SHOWCASE-2026-10-17-01-7f744f03",
+  "status": "PASS",
+  "v2_run_ids": [
+    "HDFLRUN-06B03FDC777C"
+  ]
+}

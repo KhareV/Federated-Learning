@@ -8,7 +8,7 @@ This opt-in engineering demonstration is separate from `MODEL_V2_FINAL`, AAMI-SV
 2. A Clerk-owned NHM hardware session accepts only documents newer than its start high-water mark and saves a bounded trace in SQLite.
 3. After Stop, Studio snapshots the selected owner's trace. The snapshot is immutable for that run.
 4. Non-overlapping one-second windows with at least ten messages produce twelve unvalidated engineering features. No resampling or 360 Hz claim occurs.
-5. `SYNTHETIC_ASSIGNED_FOR_DEMO_V1` assigns balanced `DEMO_CLASS_A` and `DEMO_CLASS_B` labels deterministically from the window ID and recorded seed.
+5. `SYNTHETIC_ASSIGNED_FOR_DEMO_V1` assigns balanced `NORMAL_MONITORED_PATTERN` and `POTENTIAL_ECTOPY_ASSOCIATED_PATTERN` labels (synthetic-assigned, provenance unchanged) deterministically from the window ID and recorded seed.
 6. A disjoint label-stratified holdout is selected before training. Remaining windows are assigned once to eight chronological logical clients.
 7. `HARDWARE_DEMO_MODEL_V1`, a one-layer binary classifier, performs genuine local SGD. FedAvg or FedProx (`mu = 0.1`) produces sample-count-weighted committed states for 3 or 10 rounds.
 8. Optional `ROUND-1 SECAGG+ SHADOW` performs Flower protected aggregation and compares it with the authoritative plain aggregate. It makes no production privacy or anonymity claim.

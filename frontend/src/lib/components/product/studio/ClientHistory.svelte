@@ -2,9 +2,10 @@
 	// One client across all committed rounds (from the run's client-round table) and the diagnostic-holdout participants that share its site condition, for the selected round.
 	import type { StudioStore } from '$lib/product/studio/store.svelte';
 	import { clientIdsOfRun } from '$lib/product/federation/data-source';
-	import { runContext, isHardwareContext } from '$lib/product/federation/run-context';
+	import { runContext, isHardwareContext, hasRecordingHoldout } from '$lib/product/federation/run-context';
 	let { studio }: { studio: StudioStore } = $props();
 	const hardware = $derived(isHardwareContext(runContext(studio.run, studio.run?.run_id)));
+	const recordingHoldout = $derived(hasRecordingHoldout(runContext(studio.run, studio.run?.run_id)));
 	const CLIENTS = $derived(clientIdsOfRun(hardware ? 'HARDWARE' : 'SYNTHETIC', studio.run?.client_ids));
 	const client = $derived(studio.selectedClientId && CLIENTS.includes(studio.selectedClientId) ? studio.selectedClientId : CLIENTS[0]);
 	const t3 = $derived(studio.tables?.tables['FL10_TAB03'] ?? null);
@@ -25,7 +26,7 @@
 		{#if rows.length === 0}<p class="dim">No committed round yet for this client.</p>{:else}
 		<div class="scroll" tabindex="-1"><table data-testid="client-history-table" aria-label="Per-round training statistics of the selected client"><thead><tr><th scope="col">round</th><th scope="col">examples</th><th scope="col">mean loss</th><th scope="col">update norm</th><th scope="col">grad norm</th><th scope="col">weight</th><th scope="col">acceptance</th></tr></thead>
 			<tbody>{#each rows as r}<tr class:sel={r[idx(t3, 'round')] === studio.selectedRound}><td>{r[idx(t3, 'round')]}</td><td>{n(r[idx(t3, 'examples_processed')])}</td><td>{n(r[idx(t3, 'mean_training_loss')])}</td><td>{n(r[idx(t3, 'local_update_norm')])}</td><td>{n(r[idx(t3, 'gradient_norm_mean')])}</td><td>{n(r[idx(t3, 'aggregation_weight')], 8)}</td><td>{n(r[idx(t3, 'acceptance_status')])}</td></tr>{/each}</tbody></table></div>{/if}
-		{#if hardware}<p class="dim" data-testid="client-holdout-hardware">The held-out windows are a window-level split of the recorded sessions: they are shared by all eight clients, are never used for training, and are not tied to one client.</p>
+		{#if recordingHoldout}<p class="dim" data-testid="client-holdout-hardware">The held-out windows are a window-level split of the recorded sessions: they are shared by all eight clients, are never used for training, and are not tied to one client.</p>
 		{:else}
 		<h4>Evaluation-holdout participants with this site's condition, state {state}</h4>
 		{#if part.length === 0}<p class="dim" data-testid="client-holdout-none">No evaluated record for {state} yet.</p>

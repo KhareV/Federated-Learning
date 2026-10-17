@@ -12,6 +12,7 @@
 	let algorithm = $state<'FEDAVG' | 'FEDPROX'>('FEDAVG');
 	let secagg = $state<'PLAIN' | 'SECAGG_SHADOW'>('PLAIN');
 	let startModel = $state<'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL'>('FRESH_SEEDED');
+	let modelTouched = $state(false);                       // the backend's default (pretrained V2, as for the synthetic cohort) applies until the user picks a model
 	let warmRun = $state('');
 	let seed = $state(20261015);
 	let running = $state(false);
@@ -24,6 +25,7 @@
 	const v2Model = $derived(models.find((m) => m.id === 'MODEL_V2_FINAL'));
 	const warmAvailable = $derived(models.some((m) => m.id === 'WARM_START' && m.available));
 	const eligible = $derived(sessions.filter((s) => s.eligible));
+	const ordered = $derived([...sessions.filter((s) => s.eligible), ...sessions.filter((s) => !s.eligible)]);
 	const warmPick = $derived(warmRun || priorRuns[0]?.run_id || '');
 	// Pretrained V2: the chosen sessions are resampled and graded by the unchanged PREPROC_V1 gate; only VALID windows train. The preview shows what is usable BEFORE a run is started.
 	let preview = $state<HardwareV2Preview | null>(null);
@@ -31,6 +33,7 @@
 	let previewError = $state<string | null>(null);
 	let previewSeq = 0;
 	const v2 = $derived(startModel === 'MODEL_V2_FINAL');
+	$effect(() => { if (!modelTouched && v2Model?.available === true && startModel === 'FRESH_SEEDED') startModel = 'MODEL_V2_FINAL'; });
 	$effect(() => {
 		const ids = selected;
 		if (!v2 || ids.length === 0) { preview = null; previewError = null; previewing = false; return; }
@@ -70,15 +73,22 @@
 		<fieldset class="sessions" aria-label="Recorded sessions">
 			<legend>Recorded sessions <small>{eligible.length} of {sessions.length} eligible</small></legend>
 			{#if sessions.length === 0}<p class="dim">No stopped hardware sessions yet. Record one on the Monitor page with “Live hardware (MongoDB)”.</p>{/if}
-			{#each sessions as session (session.id)}
-				<label class="session" class:ineligible={!session.eligible}>
-					<input type="checkbox" data-testid={`hardware-demo-session-${session.id}`} checked={selected.includes(session.id)} disabled={!session.eligible || running} onchange={() => toggle(session.id)} />
-					<span><code>{session.id}</code><small>{session.trace_count} stored readings · {new Date(session.started_at).toLocaleString()}{session.eligible ? '' : ' · insufficient data (needs ≥ 8 usable 1 s windows with a 2-class split)'}</small></span>
-				</label>
-			{/each}
+			{#if sessions.length > 0}
+				<details class="picker" data-testid="hardware-demo-session-picker">
+					<summary data-testid="hardware-demo-session-summary"><span>{selected.length === 0 ? 'Choose recorded sessions' : selected.length === 1 ? selected[0] : `${selected.length} sessions selected`}</span><small>{eligible.length} eligible</small></summary>
+					<div class="options">
+						{#each ordered as session (session.id)}
+							<label class="session" class:ineligible={!session.eligible}>
+								<input type="checkbox" data-testid={`hardware-demo-session-${session.id}`} checked={selected.includes(session.id)} disabled={!session.eligible || running} onchange={() => toggle(session.id)} />
+								<span><code>{session.id}</code><small>{session.trace_count} stored readings · {new Date(session.started_at).toLocaleString()}{session.eligible ? '' : ' · insufficient data (needs ≥ 8 usable 1 s windows with a 2-class split)'}</small></span>
+							</label>
+						{/each}
+					</div>
+				</details>
+			{/if}
 		</fieldset>
 		<label><span>Starting model</span>
-			<select bind:value={startModel} disabled={running} data-testid="hardware-demo-init">
+			<select bind:value={startModel} onchange={() => { modelTouched = true; }} disabled={running} data-testid="hardware-demo-init">
 				{#each models as m (m.id)}<option value={m.id} disabled={!m.available}>{m.id === 'MODEL_V2_FINAL' ? 'Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning' : m.label}</option>{/each}
 			</select></label>
 		{#if startModel === 'WARM_START'}
@@ -110,7 +120,7 @@
 		<p class="help">{secagg === 'SECAGG_SHADOW' ? 'ROUND-1 SECAGG+ SHADOW: a real protected aggregate is compared with the authoritative plain aggregate. It does not make the run private.' : 'Plain, sample-count-weighted aggregation.'}</p>
 		<label><span>Label seed</span><input type="number" min="0" max="2147483647" bind:value={seed} disabled={running} data-testid="hardware-demo-seed" /></label>
 		<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Model</dt><dd>{v2 ? 'MODEL_V2_FINAL (fine-tuned)' : 'HARDWARE_DEMO_MODEL_V1'}</dd></div><div><dt>Clients</dt><dd>{v2 ? '1 recorded + 7 peers' : '8 logical'}</dd></div><div><dt>Rounds</dt><dd>{rounds}</dd></div><div><dt>Labels</dt><dd>SYNTHETIC</dd></div></dl>
-		<button type="submit" disabled={!canStart} data-testid="hardware-demo-start">{running ? 'Training…' : `Create and start ${rounds}-round recorded-hardware run`}</button>
+		<button type="submit" disabled={!canStart} data-testid="hardware-demo-start">{running ? 'Preparing the run…' : `Create and start ${rounds}-round recorded-hardware run · ${startModel === 'MODEL_V2_FINAL' ? 'pretrained V2' : startModel === 'WARM_START' ? 'warm start' : 'fresh initialisation'}`}</button>
 		{#if error}<p class="warn" role="alert">{error}</p>{/if}
 	{/if}
 </form>
@@ -121,6 +131,7 @@
 	.cfg button { background: #2bb8b0; color: #030712; font-weight: 600; cursor: pointer; } .cfg button:disabled { opacity: .45; cursor: not-allowed; }
 	.help, .dim { margin: 0; color: #94a3b8; font-size: 12px; line-height: 1.5; } .warn { margin: 0; color: #fbbf24; font: 11px 'JetBrains Mono', monospace; }
 	.sessions { border: 1px solid rgba(148,163,184,.2); padding: 8px 10px; display: grid; gap: 6px; margin: 0; min-width: 0; } legend { font: 11px 'JetBrains Mono', monospace; color: #94a3b8; letter-spacing: .06em; padding: 0 4px; } legend small { color: #71829a; }
+	.picker { border: 1px solid rgba(148,163,184,.22); background: rgba(8,13,22,.6); } .picker > summary { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 10px; cursor: pointer; font: 12px Inter, sans-serif; color: #e2e8f0; letter-spacing: 0; } .picker > summary small { color: #71829a; } .picker .options { display: grid; max-height: 280px; overflow: auto; border-top: 1px solid rgba(148,163,184,.14); }
 	.session { flex-direction: row; align-items: flex-start; gap: 10px; letter-spacing: 0; font: 12px Inter, sans-serif; color: #cbd5e1; border: 1px solid rgba(148,163,184,.14); padding: 8px; } .session.ineligible { opacity: .55; } .session span { display: grid; gap: 2px; min-width: 0; } .session small { color: #71829a; font-size: 11px; }
 	code { color: #9fe7e1; overflow-wrap: anywhere; } .fixedcfg { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; margin: 0; } .fixedcfg div { border: 1px solid rgba(148,163,184,.16); padding: 6px 8px; }
 	dt { color: #71829a; font: 10.5px 'JetBrains Mono', monospace; letter-spacing: .1em; text-transform: uppercase; } dd { margin: 3px 0 0; font-size: 13px; color: #e5f1f0; }

@@ -34,7 +34,7 @@ from studio.generalisation import GeneralisationLane
 from studio.observer import EvaluationObserver
 from studio.recorded import RECORDED_LABEL, recorded_bundle, recorded_records
 from studio.runner10 import CLIENT_IDS, MODES, StudioFl10Service, StudioRunError
-from studio.specs import build_specs
+from studio.specs import build_specs, comparison_pair
 from studio.tables import build_tables
 
 PUBLICATION = ROOT / "reports/fl10/publication"
@@ -132,6 +132,51 @@ class StudioService:
             raise ProductError(ProductErrorCode.NOT_FOUND, "run not found")
         return job
 
+    @staticmethod
+    def _hw_v2(job: Any) -> bool:
+        return job.initialisation == "MODEL_V2_FINAL"
+
+    def _hw_diag(self, run_id: str) -> bool:
+        """A recorded-hardware run that keeps its own small diagnostic holdout (the tabular family). A pretrained-V2 hardware run is evaluated exactly like a synthetic V2 run instead."""
+        return self.is_hardware(run_id) and not self._hw_v2(self._hardware_job(run_id))
+
+    def _hw_candidate(self, job: Any) -> dict[str, Any] | None:
+        if not self._hw_v2(job) or job.status != "COMPLETED":
+            return None
+        report = read_run_report(self.hardware.demo.root / job.run_id / "fl10")
+        return {**report["candidate"], "candidate_id": f"FL10_CANDIDATE_{job.run_id}"} if report and report.get("candidate") else None
+
+    def _hardware_cohort(self, run_id: str) -> list[dict[str, Any]]:
+        import json
+
+        dataset = json.loads((self.hardware.demo.root / run_id / "dataset.json").read_text())
+        out = []
+        for client_id, c in dataset["clients"].items():
+            n, lc = int(c["samples"]), c.get("label_counts") or {}
+            out.append({"client_id": client_id, "participant_id": client_id, "session_id": c.get("session_id"), "dataset_sha256": c.get("feature_sha256"), "kind": c.get("kind"),
+                        "counts": {"source_records": None, "windows_emitted": n, "VALID": n, "DEGRADED": 0, "UNUSABLE": 0, "trainable": n, "synthetic_positive": int(lc.get("1", 0)), "synthetic_negative": int(lc.get("0", 0)),
+                                   "excluded_not_valid": 0, "excluded_valid_but_incomplete": 0}})
+        return out
+
+    def _hardware_live_bundle(self, run_id: str) -> dict[str, Any]:
+        """A pretrained-V2 recorded-hardware run is evaluated by the SAME observer, on the SAME frozen synthetic evaluation cohort, and bundled by the SAME builder as a synthetic V2 run."""
+        job = self._hardware_job(run_id)
+        d = self.describe(job.owner, run_id)
+        key = (run_id, self.observer.revision(run_id), d["status"], d["current_round"])
+        with self._lock:
+            if key in self._bundles:
+                self._bundles.move_to_end(key)
+                return self._bundles[key]
+        bundle = build_live_bundle(run_id=run_id, run_length=d["run_length"], run_dir=self.hardware.demo.root / run_id / "fl10", observer=self.observer, mode="A", engine=d["engine"], status=d["status"],
+                                   source_label=d["source_label"], eval_run_id=run_id, training_cohort=self._hardware_cohort(run_id))
+        bundle["run"]["candidate"] = d["candidate"]
+        bundle["synthetic_label"] = f"{bundle['synthetic_label']} · CLIENT 00 TRAINS ON YOUR RECORDED HARDWARE WINDOWS (SYNTHETIC-ASSIGNED LABELS)"
+        with self._lock:
+            self._bundles[key] = bundle
+            while len(self._bundles) > 8:
+                self._bundles.popitem(last=False)
+        return bundle
+
     def _hardware_bundle(self, run_id: str) -> dict[str, Any]:
         import json
 
@@ -157,6 +202,8 @@ class StudioService:
         ev = b["evaluation"]
         out = []
         for key, block in sorted(ev["states"].items()):
+            if key not in ev["state_digests"]:       # a state whose digest is not recorded yet (asked for mid-run): not reported until it is, never an error
+                continue
             p = block["pooled"]
             out.append({"schema_version": "STUDIO_ROUND_EVALUATION_V1", "run_id": run_id, "run_length": b["run_length"], "round_id": int(key[1:]), "global_state_digest": ev["state_digests"][key],
                         "candidate_id": None, "cohort_id": ev["cohort_id"], "cohort_use": ev["cohort_use"], "evaluation_protocol_id": b["protocol"]["evaluation_protocol_id"], "evaluation_status": "COMPLETED",
@@ -218,7 +265,9 @@ class StudioService:
     def describe(self, user_id: str, run_id: str) -> dict[str, Any]:
         self.authorize(user_id, run_id)
         if self.is_hardware(run_id):
-            return self.hardware.describe(self._hardware_job(run_id))
+            job = self._hardware_job(run_id)
+            d = self.hardware.describe(job)
+            return d | {"evaluation": self._evaluation_state(run_id), "candidate": self._hw_candidate(job)} if self._hw_v2(job) else d
         if self.is_recorded(run_id):
             bundle = recorded_bundle(run_id)
             return {"run_id": run_id, "run_length": 10, "engine": "FL10_10R", "origin": "RECORDED", "run_type": "REPLAY", "algorithm": "FEDAVG", "secagg_mode": "PLAIN",
@@ -262,7 +311,7 @@ class StudioService:
     def bundle(self, user_id: str, run_id: str) -> dict[str, Any]:
         self.authorize(user_id, run_id)
         if self.is_hardware(run_id):
-            return self._hardware_bundle(run_id)
+            return self._hardware_bundle(run_id) if self._hw_diag(run_id) else self._hardware_live_bundle(run_id)
         if self.is_recorded(run_id):
             return recorded_bundle(run_id)
         d = self.describe(user_id, run_id)
@@ -288,7 +337,7 @@ class StudioService:
 
     def evaluation_summary(self, user_id: str, run_id: str) -> dict[str, Any]:
         d = self.describe(user_id, run_id)
-        if self.is_hardware(run_id):
+        if self._hw_diag(run_id) if self.is_hardware(run_id) else False:
             records = self._hardware_records(run_id)
         elif self.is_recorded(run_id):
             records = recorded_records(recorded_bundle(run_id))
@@ -298,9 +347,9 @@ class StudioService:
         from studio.specs import comparison_pair
 
         a, e = comparison_pair(n)
-        paired = (None if self.is_hardware(run_id) else recorded_bundle(run_id)["evaluation"]["paired"] if self.is_recorded(run_id) else self.observer.paired(d["evaluation"]["evaluation_run_id"]))
+        paired = (None if (self.is_hardware(run_id) and self._hw_diag(run_id)) else recorded_bundle(run_id)["evaluation"]["paired"] if self.is_recorded(run_id) else self.observer.paired(d["evaluation"]["evaluation_run_id"]))
         labels = {"evaluation_protocol_id": EVAL_PROTOCOL_ID, "observer_id": OBSERVER_ID, "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "claim_boundary": CLAIM_BOUNDARY}
-        if self.is_hardware(run_id):       # recorded-hardware runs carry their own evaluation wording (never the synthetic-cohort constants)
+        if self.is_hardware(run_id) and self._hw_diag(run_id):       # tabular recorded-hardware runs carry their own evaluation wording (never the synthetic-cohort constants)
             from studio.hardware_bundle import CLAIM, COHORT_USE
 
             b = self._hardware_bundle(run_id)
@@ -316,7 +365,7 @@ class StudioService:
         d = self.describe(user_id, run_id)
         if not 0 <= round_id <= d["run_length"]:
             raise ProductError(ProductErrorCode.NOT_FOUND, "round out of range for this run")
-        if self.is_hardware(run_id):
+        if self.is_hardware(run_id) and self._hw_diag(run_id):
             b = self._hardware_bundle(run_id)
             key = f"R{round_id:02d}"
             block = b["evaluation"]["states"].get(key)
@@ -406,19 +455,23 @@ class StudioService:
 
     # ---- exports -------------------------------------------------------------------------------------------------------
     def submit_hardware_v2_state(self, run_id: str, run_length: int, round_id: int, state: Any, digest: str) -> None:
-        """A committed state of a pretrained-V2 recorded-hardware run is scored on the unseen G1 cohort like any V2 run (the diagnostic lane for hardware is its own holdout block)."""
-        self.generalisation.observer.submit(run_id=run_id, run_length=run_length, round_id=round_id, state=state, expected_digest=digest, mirror=False)
+        """A committed state of a pretrained-V2 recorded-hardware run is scored exactly like a synthetic V2 run: on the frozen evaluation cohort by the primary observer, which mirrors it to the unseen-cohort lane."""
+        if round_id == 0:
+            self.observer.declare_pair(run_id, *comparison_pair(run_length))
+        self.observer.submit(run_id=run_id, run_length=run_length, round_id=round_id, state=state, expected_digest=digest, candidate_id=f"FL10_CANDIDATE_{run_id}" if round_id == run_length else None)
 
     def finalize_hardware(self, run_id: str, directory: Path) -> None:
-        """Figure/table exports of a completed recorded-hardware run (same exporter; a pretrained-V2 run also exports its unseen-cohort lane)."""
-        bundle = self._hardware_bundle(run_id)
+        """Figure/table exports of a completed recorded-hardware run (the same exporter; a pretrained-V2 run is bundled and exported exactly like a synthetic V2 run, including its unseen-cohort lane)."""
         job = self._hardware_job(run_id)
-        if job.initialisation == "MODEL_V2_FINAL":
+        if self._hw_v2(job):
+            self.observer.wait_idle()
             self.generalisation.wait_settled(run_id, job.rounds)
+            bundle = self._hardware_live_bundle(run_id)
             gen = self.generalisation.bundle(run_id, run_length=job.rounds, init=self.hardware.describe(job)["base_model"])
-            export_run(bundle, directory / "export", generalisation=gen, gen_dir=self.generalisation.observer.run_dir(run_id), baseline_dir=self.generalisation.observer.run_dir(BASELINE_RUN_ID))
+            export_run(bundle, directory / "export", eval_dir=self.observer.run_dir(run_id), run_dir=directory / "fl10", generalisation=gen, gen_dir=self.generalisation.observer.run_dir(run_id),
+                       baseline_dir=self.generalisation.observer.run_dir(BASELINE_RUN_ID))
             return
-        export_run(bundle, directory / "export")      # writes export_manifest.json itself
+        export_run(self._hardware_bundle(run_id), directory / "export")      # writes export_manifest.json itself
 
     def export_dir(self, run_id: str) -> Path:
         if self.is_hardware(run_id):

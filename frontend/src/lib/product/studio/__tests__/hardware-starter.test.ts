@@ -53,7 +53,8 @@ describe('recorded hardware inside the run starter', () => {
 		expect(screen.getByTestId('hardware-demo-boundary').textContent).toContain('SYNTHETIC labels');
 		const init = screen.getByTestId('hardware-demo-init') as HTMLSelectElement;
 		expect([...init.options].map((o) => [o.value, o.disabled])).toEqual([['FRESH_SEEDED', false], ['WARM_START', false], ['MODEL_V2_FINAL', false]]);
-		expect(screen.queryByTestId('hardware-demo-v2-note')).toBeNull();      // the V2 note appears only once V2 is chosen
+		await waitFor(() => expect(init.value).toBe('MODEL_V2_FINAL'));      // pretrained V2 is the default, as for the synthetic cohort
+		expect(screen.getByTestId('hardware-demo-v2-note')).toBeTruthy();
 		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
 		expect((screen.getByTestId('hardware-demo-session-HW-EMPTY') as HTMLInputElement).disabled).toBe(true);
 		expect(screen.queryByTestId('cfg-run-type')).toBeNull();     // the frozen synthetic 3-round form is not shown

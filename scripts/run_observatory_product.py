@@ -45,6 +45,14 @@ def build_app_from_env(env: Mapping[str, str]):
     )
     if env.get("NHM_HARDWARE_MONGO_ENABLED", "").lower() == "true":
         from api.hardware_telemetry_routes import install_hardware_routes
+        from product.hardware_demo_session import DEMO_COLLECTION
+
+        # The prerecorded demo hardware session is on by default when hardware telemetry is on; NHM_HARDWARE_DEMO_SESSION=off removes it (an explicit NHM_HARDWARE_DEMO_COLLECTION wins).
+        if "NHM_HARDWARE_DEMO_COLLECTION" not in env and env.get("NHM_HARDWARE_DEMO_SESSION", "on").lower() != "off":
+            env = {**env, "NHM_HARDWARE_DEMO_COLLECTION": DEMO_COLLECTION}
+        # Finished past days of the database (records_YYYY-MM-DD) appear in History as saved hardware sessions; NHM_HARDWARE_HISTORY_IMPORT=off disables it.
+        if env.get("NHM_HARDWARE_HISTORY_IMPORT", "on").lower() != "off":
+            env = {**env, "NHM_HARDWARE_HISTORY_IMPORT": "on"}
         install_hardware_routes(app, store, make_identity_resolver(provider), env)
     return app
 
@@ -63,6 +71,16 @@ def main() -> None:
     except AuthConfigError as error:
         print(f"REFUSING TO START: {error}", file=sys.stderr, flush=True)
         raise SystemExit(2) from error
+    # The federation client cohort is built lazily on the first /federation/clients call. Built mid-run, it raced with a training thread over process-global torch state and failed its frozen
+    # initial-state digest (BASE_STATE_NOT_FL_INIT_V2, shown as "Product backend error"). Build it once, here, before the server accepts requests.
+    from product.federation.service import get_cohort
+
+    get_cohort()
+    if os.environ.get("NHM_HARDWARE_MONGO_ENABLED", "").lower() == "true":
+        # The seven synthetic peers of a pretrained-V2 hardware run take about 12 s to build; build them here so the first run after start does not wait.
+        from studio import hardware_v2
+
+        hardware_v2.peer_datasets()
     import uvicorn
 
     uvicorn.run(app, host=args.host, port=args.port, log_level="warning")

@@ -39,7 +39,7 @@ def test_adc_midpoint_is_zero_and_values_come_from_readings():
              "bpm": None, "spo2": None} for i in range(40)]
     records, _ = readings_to_records(flat, "HW-X")
     assert records and {r.ecg_raw for r in records} == {0}
-    assert all(r.pr_ppg_bpm is None and r.spo2_valid is False for r in records)
+    assert all(r.pr_ppg_bpm is None and r.spo2_valid is False and r.ppg_quality is None for r in records)      # no finger: no context, nothing assumed
     assert abs(records[1].timestamp_us - records[0].timestamp_us - 1e6 / SOURCE_HZ) < 2
 
 
@@ -50,7 +50,7 @@ def test_windows_follow_the_unchanged_runtime_contract_and_stay_labelled_experim
     assert first["timestamp_us"] == 15_000_000 and len(first["ecg"]["samples"]) == 2500
     assert first["ecg"]["target_hz"] == 250 and first["ecg"]["window_seconds"] == 10
     assert first["ecg_quality"] == "VALID"
-    assert first["ppg_context"]["pr_bpm"] == 72.0 and first["ppg_context"]["quality"] is None
+    assert first["ppg_context"]["pr_bpm"] == 72.0 and first["ppg_context"]["quality"] == "VALID"      # ASSUMED while the device reports a pulse rate and SpO2
     assert "NOT VALID" in LABEL and "NOT DIAGNOSTIC" in LABEL and "unverified" in ASSUMPTIONS["adc_scaling"]
     assert window_key(first) != window_key(windows[1])
 

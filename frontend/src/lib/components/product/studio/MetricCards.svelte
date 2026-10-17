@@ -4,8 +4,8 @@
 	import { HEADLINE, METRIC_GROUPS, display } from '$lib/product/studio/metrics';
 	import type { StudioStore } from '$lib/product/studio/store.svelte';
 	let { studio }: { studio: StudioStore } = $props();
-	import { runContext, isHardwareContext } from '$lib/product/federation/run-context';
-	const hardwareRun = $derived(isHardwareContext(runContext(studio.run, studio.run?.run_id)));
+	import { runContext, hasRecordingHoldout } from '$lib/product/federation/run-context';
+	const hardwareRun = $derived(hasRecordingHoldout(runContext(studio.run, studio.run?.run_id)));
 	const round = $derived(studio.metricRound);
 	const record = $derived(studio.records.find((r) => r.round_id === round));
 	const detail = $derived(studio.roundEval[round]);

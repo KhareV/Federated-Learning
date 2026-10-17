@@ -68,6 +68,7 @@ def main() -> int:
     parser.add_argument("--ui-tour", action="store_true", help="seed a hardware session + run, then tour every route at desktop and phone width")
     parser.add_argument("--soak-seconds", type=int, default=0, help="run only the long browser soak for this many seconds")
     parser.add_argument("--journey", action="store_true", help="full simulated-hardware journey: sketch-faithful emulator -> local Render replica -> Atlas rehearsal DB -> live monitoring, recording, History, Observatory replay + trace, tabular and pretrained-V2 FL, high-gain negative case")
+    parser.add_argument("--demo-session", action="store_true", help="the prerecorded DEMO hardware session: seeded in its own Atlas rehearsal collection, imported into History, Observatory replay + trace, pretrained-V2 and tabular runs")
     parser.add_argument("--ui-shots", action="store_true", help="screenshots of the federation starter in every source-mode state")
     parser.add_argument("--history-source", action="store_true", help="a completed simulated monitoring session from History as the signal of one federation client")
     parser.add_argument("--hardware-v2", action="store_true", help="pretrained-V2 recorded-hardware path: two recordings, Observatory replay + trace, V2 run, generalisation tab, federation journal replay")
@@ -272,6 +273,44 @@ def main() -> int:
             verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "hardware_v2", "checks": checks, "run_id": v2["run_id"], "sessions": v2["session_ids"],
                        "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA", "real_render_verified": False, "physical_esp32_verified": False, "observatory_console_errors": v2["observatory_console_errors"]}
             (out / "hardware_v2_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
+        if args.demo_session:
+            if not ws_mode:
+                raise SystemExit("--demo-session needs --producer ws (isolated rehearsal database)")
+            from pymongo import MongoClient
+
+            from product.hardware_demo_session import DEMO_COLLECTION
+
+            # App-init path under test: the collection is removed first, and no demo setting is passed, so the product app itself must create it (default-on) and import it into History.
+            demo_collection = MongoClient(env["NHM_HARDWARE_MONGO_URI"], serverSelectionTimeoutMS=5000)[database][DEMO_COLLECTION]
+            demo_collection.drop()
+            env.pop("NHM_HARDWARE_DEMO_COLLECTION", None)
+            running, origin = stack(env, workspace, python)
+            try:
+                demo = drive("demo-session", origin, Path(args.users_file), out / "demo_session.json", out / "demo_shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            seeded = demo_collection.count_documents({})
+            r = demo["replay"]
+            checks = {
+                "app_init_created_the_collection_in_mongo": seeded > 4000,
+                "listed_in_history_as_saved": demo["session_id"].startswith("HW-SHOWCASE-") and "SAVED" in demo["history_row"] and str(seeded) in demo["history_row"],
+                "history_links": bool(demo["history_links"]["replay"]) and bool(demo["history_links"]["trace"]),
+                "history_evidence_scored_windows": demo["evidence"]["rows"] >= 25 and demo["evidence"]["events"] > 25 and bool(demo["evidence"]["states"]) and not demo["evidence"]["alerts"] and "CONTEXT_UNAVAILABLE" not in " ".join(demo["evidence"]["states"]),
+                "replay_hardware_tag": "RECORDED HARDWARE" in r["tag"] and "NOT DIAGNOSTIC" in r["tag"],
+                "replay_scored_windows": "scored" in r["summary"] and "pending" not in r["summary"] and r["has_controls"] and r["chart_points"] > 0,
+                "replay_no_alerts": not r["alerts"],
+                "trace_recorded_hardware": "RECORDED HARDWARE" in demo["trace"]["classification"] and demo["trace"]["stages"] >= 4 and not demo["trace"]["alerts"],
+                "observatory_no_console_or_http_errors": not demo["observatory_console_errors"],
+                "single_demo_session_enough_for_v2": all("ENOUGH USABLE" in x["preview"]["text"] and not x["preview"]["start_disabled"] for x in demo["v2_runs"]),
+                **{f"v2_{x['rounds']}_rounds_completed_one_recorded_plus_seven": "COMPLETED" in x["live"]["status_line"] and x["live"]["badge"] == "RECORDED HARDWARE" and "pretrained V2" in x["live"]["label"] and x["live"]["recorded_cards"] == 1 and x["live"]["peer_cards"] == 7 and bool(x["live"]["metric_auprc"]) and f"{x['rounds']}-round" in x["live"]["label"] for x in demo["v2_runs"]},
+                **{f"v2_{x['rounds']}_rounds_same_evaluation_as_synthetic_v2": "1446 windows" in x["live"]["metric_cohort"] and any(ch.isdigit() for ch in x["live"]["metric_auprc"]) and "16 participants" in x["live"]["metric_cohort"] and x["live"]["candidate_panel"] and not x["live"]["backend_error"] and not x["live"]["final_state_panel"] and any("1 recorded client" in c for c in x["live"]["chips"]) for x in demo["v2_runs"]},
+                **{f"tabular_{x['rounds']}_rounds_completed": "COMPLETED" in x["live"]["status_line"] and bool(x["live"]["metric_auprc"]) and not x["live"]["alerts"] for x in demo["tabular_runs"]},
+            }
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "demo_session", "checks": checks, "session_id": demo["session_id"], "v2_run_ids": [x["run_id"] for x in demo["v2_runs"]], "documents_seeded": seeded,
+                       "database": database, "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA", "real_render_verified": False, "physical_esp32_verified": False, "generated_not_recorded": True}
+            (out / "demo_session_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
             print(json.dumps(verdict))
             return 0 if verdict["status"] == "PASS" else 1
         if args.ui_tour:

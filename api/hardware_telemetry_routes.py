@@ -36,6 +36,10 @@ def install_hardware_routes(
     if not all((uri, database, collection)):
         raise ValueError("HARDWARE_MONGO_CONFIGURATION_INCOMPLETE")
     service = HardwareSessions(store, MongoTelemetry(uri, database, collection))
+    service.demo_collection = env.get("NHM_HARDWARE_DEMO_COLLECTION") or None
+    service.history_import = env.get("NHM_HARDWARE_HISTORY_IMPORT", "").lower() == "on"
+    if env.get("NHM_HARDWARE_HISTORY_GAP_SECONDS"):
+        service.history_gap_seconds = float(env["NHM_HARDWARE_HISTORY_GAP_SECONDS"])
     app.state.hardware_sessions = service
     v2_cache = V2Cache(store)
     inference_url = env.get("NHM_PRODUCT_INFERENCE_URL", "http://127.0.0.1:8001")
@@ -45,6 +49,7 @@ def install_hardware_routes(
     @asynccontextmanager
     async def hardware_lifespan(application: Any):
         async with previous_lifespan(application):
+            await asyncio.to_thread(service.seed_demo_collection)   # the prerecorded demo session's documents, created in Mongo only if missing
             try:
                 yield
             finally:

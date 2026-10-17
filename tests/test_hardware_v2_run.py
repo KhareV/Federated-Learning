@@ -61,7 +61,7 @@ def store_with_sessions(tmp_path: Path, *, owner: str = "user-a", seconds: int =
 @pytest.fixture(scope="module")
 def prepared(tmp_path_factory):
     tmp = tmp_path_factory.mktemp("v2hw")
-    store, demo = store_with_sessions(tmp, sessions=("HW-V2-A", "HW-V2-B"))     # NHM keeps ~100 s (2000 readings) per session, so a V2 run combines several
+    store, demo = store_with_sessions(tmp, sessions=("HW-V2-A", "HW-V2-B"))     # two sessions give a comfortable number of windows
     ctx = demo.prepare("user-a", session_ids=["HW-V2-A", "HW-V2-B"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=7, initialisation="MODEL_V2_FINAL")
     return tmp, store, demo, ctx
 
@@ -99,11 +99,11 @@ def test_preparation_is_deterministic_for_the_same_seed(prepared):
     assert other["dataset"]["label_sha256"] != ctx["dataset"]["label_sha256"]
 
 
-def test_one_retention_capped_session_is_not_enough_and_the_reason_says_to_combine_sessions(tmp_path):
+def test_a_too_short_session_is_not_enough_and_the_reason_says_to_record_longer(tmp_path):
     _, demo = store_with_sessions(tmp_path, sessions=("HW-V2-A",))
     info = hardware_v2.preview(demo._records("user-a", ["HW-V2-A"]), ["HW-V2-A"])
-    assert info["eligible"] is False and info["sessions"][0]["readings"] == 2000 and "two or more recorded sessions" in info["reason"]
-    with pytest.raises(ValueError, match="two or more recorded sessions"):
+    assert info["eligible"] is False and info["sessions"][0]["readings"] == 2000 and "record longer or select more sessions" in info["reason"]
+    with pytest.raises(ValueError, match="record longer or select more sessions"):
         demo.prepare("user-a", session_ids=["HW-V2-A"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=1, initialisation="MODEL_V2_FINAL")
 
 

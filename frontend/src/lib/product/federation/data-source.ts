@@ -20,6 +20,12 @@ export function clientShortName(clientId: string): string {
 	return clientId.startsWith('RECORDED_DEMO_CLIENT_') ? `Client ${m[1]}` : `Site ${m[1]}`;
 }
 
+/** Pretrained-V2 recorded-hardware runs: one recorded client and seven synthetic peers, exactly the shape of a synthetic V2 run. */
+export const HARDWARE_V2_COPY: (typeof SOURCE_COPY)['HARDWARE'] = {
+	chip: '1 recorded client · 7 synthetic peers', claimChips: ['RECORDED HARDWARE DATA', 'SYNTHETIC LABELS'], network: 'Federated participants', networkNote: 'RECORDED HARDWARE · SYNTHETIC LABELS',
+	dataLabel: 'YOUR RECORDED WINDOWS · LABELS ARE SYNTHETIC', bufferLabel: 'Local recorded-window buffer', modelLabel: 'MODEL_V2 architecture (pretrained V2 weights)', peerTag: 'SYNTHETIC COHORT PEER'
+};
+
 export const SOURCE_COPY: Record<RunDataSource, { chip: string; claimChips: string[]; network: string; networkNote: string; dataLabel: string; bufferLabel: string; modelLabel: string; peerTag: string | null }> = {
 	SYNTHETIC: {
 		chip: '8 synthetic logical clients', claimChips: ['SIMULATED CLIENTS'], network: 'Eight logical clients', networkNote: 'SYNTHETIC',

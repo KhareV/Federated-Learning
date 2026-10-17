@@ -22,7 +22,7 @@
 	<p class="what" data-testid="source-sentence">{ctx.dataSentence}</p>
 	<div class="cells">
 		<div><span>STATUS</span><b data-testid="glance-status">{status}</b><small>round {Math.min(currentRound, plannedRounds || currentRound)} of {plannedRounds || '--'} · {accepted}/{expected} updates accepted</small></div>
-		<div><span>METHOD</span><b>{algorithm}</b><small>{ctx.lineage === 'MODEL_V2_FINAL' ? 'pretrained V2 start' : ctx.lineage === 'FL_INIT_V2' ? 'untrained V2 architecture' : ctx.lineage === 'HARDWARE_DEMO_WARM_START' ? 'hardware model, warm start' : ctx.lineage === 'HARDWARE_DEMO_FRESH' ? 'hardware model, fresh start' : '—'}</small></div>
+		<div><span>METHOD</span><b>{algorithm}</b><small>{ctx.lineage === 'MODEL_V2_FINAL' || ctx.lineage === 'HARDWARE_V2_PRETRAINED' ? 'pretrained V2 start' : ctx.lineage === 'FL_INIT_V2' ? 'untrained V2 architecture' : ctx.lineage === 'HARDWARE_DEMO_WARM_START' ? 'hardware model, warm start' : ctx.lineage === 'HARDWARE_DEMO_FRESH' ? 'hardware model, fresh start' : '—'}</small></div>
 		{#if latest}
 			{#each KEYS as k (k.key)}
 				{@const d = display(latest, k.key, k.format)}

@@ -35,11 +35,12 @@ describe('run context axes are independent', () => {
 		const c = runContext(base({ run_id: 'HDFLRUN-W', engine: 'HARDWARE_DEMO', source_mode: 'RECORDED_HARDWARE', base_model: { model_id: 'HARDWARE_DEMO_MODEL_V1', label: 'w', initialisation: 'WARM_START' } as never }), 'HDFLRUN-W');
 		expect(c.lineage).toBe('HARDWARE_DEMO_WARM_START');
 	});
-	it('a pretrained-V2 hardware run keeps hardware provenance and synthetic labels, and unlocks the unseen-cohort lane only', () => {
+	it('a pretrained-V2 hardware run keeps hardware provenance and synthetic labels and is evaluated like a synthetic V2 run', () => {
 		const c = runContext(base({ run_id: 'HDFLRUN-V', engine: 'HARDWARE_DEMO', source_mode: 'RECORDED_HARDWARE', base_model: { model_id: 'MODEL_V2_FINAL', label: 'v2' } }), 'HDFLRUN-V');
 		expect(c).toMatchObject({ provenance: 'RECORDED_HARDWARE', labels: 'SYNTHETIC_ASSIGNED_FOR_DEMO', lineage: 'HARDWARE_V2_PRETRAINED', clients: 'RECORDED_CLIENT_PLUS_SIM_PEERS' });
-		expect(c.capabilities.generalisation.available).toBe(true);
-		for (const k of ['pairedIntervals', 'historicalReference', 'ownerBoundClient'] as const) expect(c.capabilities[k].available).toBe(false);
+		// evaluated like a synthetic V2 run (same observer, same frozen cohort): generalisation, paired intervals and the historical reference are all available; there is still no authenticated owner-bound client
+		for (const k of ['generalisation', 'pairedIntervals', 'historicalReference'] as const) expect(c.capabilities[k].available).toBe(true);
+		expect(c.capabilities.ownerBoundClient.available).toBe(false);
 		expect(c.dataSentence).toMatch(/V2 windows/);
 	});
 	it('simulated SITE_00 is its own provenance, and the badge names the monitored site', () => {

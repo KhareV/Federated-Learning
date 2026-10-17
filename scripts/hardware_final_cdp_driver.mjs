@@ -18,7 +18,7 @@ const cdp = new Cdp(targets.find((t) => t.type === 'page').webSocketDebuggerUrl)
 for (const domain of ['Page', 'Runtime', 'Network', 'Log']) await cdp.send(`${domain}.enable`);
 await cdp.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
 async function ev(expression) { const r = await cdp.send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true }); if (r.exceptionDetails) throw new Error(JSON.stringify(r.exceptionDetails)); return r.result.value; }
-async function waitFor(expression, timeout = 120000) { const end = Date.now() + timeout; while (Date.now() < end) { try { const v = await ev(expression); if (v) return v; } catch {} await sleep(150); } throw new Error(`timeout:${expression}`); }
+async function waitFor(expression, timeout = 120000) { const end = Date.now() + timeout; while (Date.now() < end) { try { const v = await ev(expression); if (v) return v; } catch {} await sleep(150); } try { await shot(`timeout_${Date.now()}`); writeFileSync(`${SHOTS}/timeout_page.txt`, await ev('location.pathname + "\\n" + document.body.innerText')); console.error('PAGE AT TIMEOUT: see timeout_page.txt'); } catch {} throw new Error(`timeout:${expression}`); }
 async function goto(path) { await cdp.send('Page.navigate', { url: ORIGIN + path }); await sleep(500); }
 async function shot(name) { const r = await cdp.send('Page.captureScreenshot', { format: 'png' }); writeFileSync(`${SHOTS}/${name}.png`, Buffer.from(r.data, 'base64')); }
 const clickId = (id) => ev(`(() => { const e=document.querySelector('[data-testid=${JSON.stringify(id)}]'); if(!e||e.disabled)return false;e.click();return true;})()`);
@@ -73,7 +73,7 @@ async function runDemo(sessionId, rounds, algorithm, opts = {}) {
 	await waitFor(`!!document.querySelector('[data-testid="hardware-demo-session-${sessionId}"]')`, 60000);
 	const initOptions = await ev(`[...document.querySelector('[data-testid="hardware-demo-init"]').options].map(o=>({value:o.value,label:o.textContent.trim(),disabled:o.disabled}))`);
 	await clickId(`rounds-${rounds}`);
-	await clickId(`hardware-demo-session-${sessionId}`); await setSelect('[data-testid="hardware-demo-algorithm"]', algorithm); await setSelect('[data-testid="hardware-demo-secagg"]', opts.secagg ?? 'SECAGG_SHADOW');
+	await clickId(`hardware-demo-session-${sessionId}`); await setSelect('[data-testid="hardware-demo-init"]', opts.warm ? 'WARM_START' : 'FRESH_SEEDED'); await setSelect('[data-testid="hardware-demo-algorithm"]', algorithm); await setSelect('[data-testid="hardware-demo-secagg"]', opts.secagg ?? 'SECAGG_SHADOW');
 	if (opts.warm) { await setSelect('[data-testid="hardware-demo-init"]', 'WARM_START'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-warm-run"]') && document.querySelector('[data-testid="hardware-demo-warm-run"]').options.length > 0`, 30000); }
 	await shot(`form_${rounds}_${algorithm.toLowerCase()}${opts.warm ? '_warm' : ''}`);
 	const v2Note = await value('hardware-demo-v2-note');
@@ -299,6 +299,54 @@ if (MODE === 'scenario-a') {
 	await shot('v2_fed_replay');
 	Object.assign(out, { tag, session_ids: [sid1, sid2], monitor_replay_link: monitorReplayLink, history_links: historyLinks, replay, trace, trace_next_window: traceNext, observatory_console_errors: consoleErrors,
 		init_options: initOptions, single_session_preview: single, two_session_preview: both, run_id: runId, live, generalisation, fed_replay: fedReplay });
+} else if (MODE === 'demo-session') {
+	// The prerecorded DEMO hardware session (generated sketch-format documents in their own Mongo collection, imported as a STOPPED session): History, Observatory replay + trace, pretrained-V2 run and tabular run from that ONE session.
+	const text = (id) => value(id);
+	await goto('/app/history'); await waitFor(`[...document.querySelectorAll('code.sid')].some(x=>x.textContent.trim().startsWith('HW-SHOWCASE-'))`, 120000);
+	const sid = await ev(`[...document.querySelectorAll('code.sid')].find(x=>x.textContent.trim().startsWith('HW-SHOWCASE-')).textContent.trim()`);
+	const historyRow = await ev(`[...document.querySelectorAll('code.sid')].find(x=>x.textContent.trim().startsWith('HW-SHOWCASE-')).closest('tr').textContent.replace(/\\s+/g,' ').trim()`);
+	await shot('demo_history');
+	await goto(`/app/history/${encodeURIComponent(sid)}`); await waitFor(`!!document.querySelector('[data-testid="hardware-replay"]')`, 60000);
+	const historyLinks = await ev(`({ replay: document.querySelector('[data-testid="hardware-replay"]')?.getAttribute('href'), trace: document.querySelector('[data-testid="hardware-trace"]')?.getAttribute('href'), page_text: document.body.innerText.replace(/\\s+/g,' ').slice(0, 900) })`);
+	await waitFor(`!!document.querySelector('[data-testid="hardware-evidence-summary"]') && !document.querySelector('[data-testid="hardware-evidence-loading"]') && !!document.querySelector('[data-testid="hardware-window-results"]')`, 600000); await sleep(600);
+	const evidence = await ev(`(() => { const t=(q)=>(document.querySelector(q)?.textContent ?? '').replace(/\\s+/g,' ').trim(); return { summary: t('[data-testid="hardware-evidence-summary"]'), states: [...document.querySelectorAll('[data-testid="hardware-evidence-states"] li')].map(x=>x.textContent.trim()), rows: document.querySelectorAll('[data-testid="hardware-window-results"] tbody tr').length, events: document.querySelectorAll('ol.events li').length, alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }; })()`);
+	await shot('demo_history_detail');
+	cdpEvents.length = 0;
+	await goto(`/app/observatory/replay?session=${encodeURIComponent(sid)}`);
+	await waitFor(`!!document.querySelector('[data-testid="replay-hardware-tag"]')`, 90000);
+	await waitFor(`/scored/.test(document.querySelector('[data-testid="replay-hardware-summary"]')?.textContent ?? '') && !/pending/.test(document.querySelector('[data-testid="replay-hardware-summary"]')?.textContent ?? '') && !document.querySelector('[data-testid="replay-loading"]')`, 600000);
+	await sleep(800);
+	const replay = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+		return { tag: t('replay-hardware-tag'), summary: t('replay-hardware-summary'), has_controls: !!document.querySelector('[data-testid="replay-controls"]'), state: t('replay-state').slice(0, 500),
+		chart_points: document.querySelectorAll('[data-testid="replay-chart"] circle').length, alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }; })()`);
+	await shot('demo_replay');
+	await goto(`/app/observatory?hw=${encodeURIComponent(sid)}`); await waitFor(`!!document.querySelector('[data-testid="observatory-classification"]')`, 120000); await sleep(800);
+	const trace = await ev(`(() => ({ classification: (document.querySelector('[data-testid="observatory-classification"]')?.textContent ?? '').trim(), stages: document.querySelectorAll('.signal-grid > *').length, alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }))()`);
+	await shot('demo_trace');
+	const consoleErrors = cdpEvents.flatMap((e) => e.method === 'Log.entryAdded' && e.params.entry.level === 'error' ? [`console:${String(e.params.entry.text).slice(0, 140)}`]
+		: e.method === 'Network.responseReceived' && e.params.response.status >= 400 ? [`http ${e.params.response.status} ${String(e.params.response.url).replace(ORIGIN, '').slice(0, 120)}`]
+		: e.method === 'Runtime.exceptionThrown' ? [`exception:${JSON.stringify(e.params.exceptionDetails.exception?.description ?? e.params.exceptionDetails.text).slice(0, 160)}`] : []);
+	// pretrained V2 from this single session
+	const v2Runs = []; const tabularRuns = [];
+	for (const rounds of (process.env.NHM_DEMO_ROUNDS ?? '3,10').split(',').map(Number)) {
+		await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="data-source-hardware"]')`, 120000);
+		await clickId('data-source-hardware'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-session-${sid}"]')`, 60000);
+		await clickId(`hardware-demo-session-${sid}`); await setSelect('[data-testid="hardware-demo-init"]', 'MODEL_V2_FINAL');
+		await waitFor(`/ENOUGH USABLE/.test(document.querySelector('[data-testid="hardware-v2-preview"]')?.textContent ?? '') && !/NOT ENOUGH/.test(document.querySelector('[data-testid="hardware-v2-preview"]')?.textContent ?? '')`, 180000);
+		const previewNow = await ev(`({ text: document.querySelector('[data-testid="hardware-v2-preview"]').textContent.replace(/\\s+/g,' ').trim().slice(0, 700), start_disabled: document.querySelector('[data-testid="hardware-demo-start"]').disabled })`);
+		await clickId(`rounds-${rounds}`); await setSelect('[data-testid="hardware-demo-algorithm"]', 'FEDAVG'); await setSelect('[data-testid="hardware-demo-secagg"]', 'SECAGG_SHADOW'); await shot(`demo_v2_form_${rounds}`); await clickId('hardware-demo-start');
+		await waitFor(`location.pathname === '/app/federation/live' && (new URLSearchParams(location.search).get('run') || '').startsWith('HDFLRUN-')`, 120000);
+		const v2RunId = await ev(`new URLSearchParams(location.search).get('run')`);
+		await waitFor(`(document.querySelector('[data-testid="run-status"]')?.textContent || '').includes('COMPLETED')`, 900000);
+		await waitFor(`/\\d\\.\\d/.test(document.querySelector('[data-testid="metric-AUPRC"]')?.textContent ?? '') && /\\d+ windows/.test(document.querySelector('[data-testid="metric-cohort"]')?.textContent ?? '')`, 900000).catch(() => {}); await sleep(2500);
+		const v2Live = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+			return { status_line: t('run-status'), badge: t('source-badge'), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map((x)=>x.getAttribute('data-client')), recorded_cards: document.querySelectorAll('[data-testid="hardware-card-label"]').length, peer_cards: document.querySelectorAll('[data-testid="hardware-peer-label"]').length,
+			metric_auprc: t('metric-AUPRC'), metric_cohort: t('metric-cohort'), glance_method: t('glance-method') || (document.querySelector('.cells')?.textContent ?? '').replace(/\\s+/g,' ').slice(0,300), candidate_panel: /FL10_CANDIDATE_HDFLRUN-/.test(document.body.innerText), backend_error: /Product backend error|BACKEND_ERROR/.test(document.body.innerText), chips: [...document.querySelectorAll('.chips li')].map(x=>x.textContent.trim()), final_state_panel: !!document.querySelector('[data-testid="hardware-final-state"]'), label: (document.body.innerText.match(/(\\d+)-round recorded-hardware run[^\\n]*/)||[''])[0], alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }; })()`);
+		await shot(`demo_v2_live_${rounds}`);
+		v2Runs.push({ rounds, preview: previewNow, run_id: v2RunId, live: v2Live });
+		tabularRuns.push({ rounds, live: await runDemo(sid, rounds, 'FEDAVG') });
+	}
+	Object.assign(out, { session_id: sid, history_row: historyRow, history_links: historyLinks, evidence, replay, trace, observatory_console_errors: consoleErrors, v2_runs: v2Runs, tabular_runs: tabularRuns });
 } else if (MODE === 'history-source') {
 	// A COMPLETED simulated monitoring session from History as the signal of one federation client (synthetic-assigned labels), through the real starter.
 	const clickText = (text) => ev(`(() => { const b=[...document.querySelectorAll('button')].find(x=>x.textContent.trim()===${JSON.stringify(text)} && !x.disabled); if(!b) return false; b.click(); return true; })()`);
