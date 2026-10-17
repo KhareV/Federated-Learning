@@ -26,6 +26,9 @@
 	const bpm = $derived(session.readings.map((r) => r.bpm).filter((v): v is number => v != null && v > 0));
 	const spo2 = $derived(session.readings.map((r) => r.spo2).filter((v): v is number => v != null && v > 0));
 	const seconds = (us: number) => `${(us / 1e6).toFixed(1)} s`;
+	const REASONS: Record<string, string> = { LONG_GAP_SPAN: 'long gap (no readings for over 1 s)', FLATLINE: 'flatline', CLIPPING: 'clipping (at the ADC rail)', LOW_AMPLITUDE: 'low amplitude', NOISE: 'noise' };
+	const reasonList = $derived(Object.entries(timeline?.unusable_reasons ?? {}).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${REASONS[k] ?? k.toLowerCase().replaceAll('_', ' ')} ×${n}`));
+	const nothingScored = $derived(!!timeline && timeline.complete && timeline.windows_scored === 0);
 	const pct = (v: unknown) => typeof v === 'number' ? v.toFixed(3) : '—';
 
 	onMount(() => { void (async () => {
@@ -48,11 +51,13 @@
 			{#if error}<p class="error" role="alert">{error}</p>{/if}
 			{#if timeline}
 				<p class="dim">{timeline.label}. The recording is resampled to the model's 250 Hz window grid and scored by the unchanged released service; PPG context quality is an assumption (VALID while the device reports a pulse rate and SpO₂). Not validated on this signal chain.</p>
+				{#if nothingScored}<p class="notice" role="status" data-testid="hardware-evidence-none-scored"><b>No window reached the model.</b> 0 of {timeline.windows_total} 10 s windows were scored{timeline.windows_unusable ? ` — all ${timeline.windows_unusable} were rejected by the quality gate` : ''}{reasonList.length ? `: ${reasonList.join(' · ')}` : ''}. The model needs a dense, valid ECG stream (about 17 readings per second with the leads attached); a short, sparse or leads-off recording gives no probabilities, labels or policy states, so those rows below are empty rather than zero.</p>
+				{:else if reasonList.length}<p class="dim" data-testid="hardware-evidence-rejected">{timeline.windows_unusable} of {timeline.windows_total} windows were rejected by the quality gate: {reasonList.join(' · ')}.</p>{/if}
 				<dl class="facts" data-testid="hardware-evidence-summary">
 					<div><dt>10 s windows</dt><dd>{timeline.windows_total}</dd></div>
 					<div><dt>Scored</dt><dd>{timeline.windows_scored}</dd></div>
 					<div><dt>Rejected by the quality gate</dt><dd>{timeline.windows_unusable}</dd></div>
-					<div><dt>Raw probability min / mean / max</dt><dd>{stats(probabilities)}</dd></div>
+					<div><dt>Raw probability min / mean / max</dt><dd>{nothingScored ? '— (no window scored)' : stats(probabilities)}</dd></div>
 					<div><dt>Device BPM min / mean / max</dt><dd>{stats(bpm)}</dd></div>
 					<div><dt>Device SpO₂ min / mean / max</dt><dd>{stats(spo2)} %</dd></div>
 				</dl>
@@ -84,5 +89,6 @@
 	.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; margin: 10px 0; } .facts div { border: 1px solid rgba(148,163,184,.16); padding: 8px 10px; } .facts dt { font: 10px 'JetBrains Mono', monospace; color: #71829a; letter-spacing: .08em; text-transform: uppercase; } .facts dd { margin: 3px 0 0; font-size: 14px; }
 	h3 { font: 500 13px Inter, sans-serif; margin: 12px 0 4px; } ul, ol.events { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 12px; } ol.events { max-height: 420px; overflow: auto; } pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 11px; }
 	.scroll { overflow: auto; max-height: 360px; } table { width: 100%; border-collapse: collapse; font-size: 12px; } th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid rgba(148,163,184,.12); } th { font: 10px 'JetBrains Mono', monospace; color: #71829a; letter-spacing: .08em; text-transform: uppercase; position: sticky; top: 0; background: #0a111c; }
+	.notice { margin: 8px 0; padding: 10px 12px; border: 1px solid rgba(251,191,36,.45); background: rgba(251,191,36,.06); color: #fde68a; font-size: 13px; line-height: 1.5; }
 	.dim { color: #8696ad; font-size: 12px; } .error { color: #fca5a5; } .count { font: 11px 'JetBrains Mono', monospace; color: #8696ad; } .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 </style>

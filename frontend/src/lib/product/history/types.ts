@@ -148,13 +148,14 @@ export function parseSessionTimeline(value: unknown): SessionTimeline {
 /** Replay timeline of a RECORDED-HARDWARE session: the same record kinds as a persisted session, derived from resampled windows scored by the released service (EXPERIMENTAL). */
 export interface HardwareSessionTimeline extends Omit<SessionTimeline, 'claim_boundary'> {
 	claim_boundary: 'RECORDED_HARDWARE_RESAMPLED_EXPERIMENTAL_DERIVED_TIMELINE_NOT_VALID_NOT_DIAGNOSTIC';
-	label: string; windows_total: number; windows_scored: number; windows_pending: number; windows_unusable: number; complete: boolean;
+	label: string; windows_total: number; windows_scored: number; windows_pending: number; windows_unusable: number; unusable_reasons: Record<string, number>; complete: boolean;
 }
 export function parseHardwareTimeline(value: unknown): HardwareSessionTimeline {
 	const { raw, ...timeline } = parseTimelineBase(value, 'RECORDED_HARDWARE_RESAMPLED_EXPERIMENTAL_DERIVED_TIMELINE_NOT_VALID_NOT_DIAGNOSTIC',
-		['label', 'source_kind', 'assumptions', 'windows_total', 'windows_scored', 'windows_pending', 'complete', 'windows_unusable']);
+		['label', 'source_kind', 'assumptions', 'windows_total', 'windows_scored', 'windows_pending', 'complete', 'windows_unusable', 'unusable_reasons']);
 	literal(raw.source_kind, 'RECORDED_HARDWARE_RESAMPLED', 'source_kind');
 	return { ...timeline, claim_boundary: 'RECORDED_HARDWARE_RESAMPLED_EXPERIMENTAL_DERIVED_TIMELINE_NOT_VALID_NOT_DIAGNOSTIC', label: string(raw.label, 'label'),
 		windows_total: integer(raw.windows_total, 'windows_total'), windows_scored: integer(raw.windows_scored, 'windows_scored'), windows_pending: integer(raw.windows_pending, 'windows_pending'),
-		windows_unusable: integer(raw.windows_unusable, 'windows_unusable'), complete: bool(raw.complete, 'complete') };
+		windows_unusable: integer(raw.windows_unusable, 'windows_unusable'), complete: bool(raw.complete, 'complete'),
+		unusable_reasons: raw.unusable_reasons === undefined ? {} : Object.fromEntries(Object.entries(raw.unusable_reasons as Record<string, unknown>).map(([k, v]) => [k, integer(v, 'unusable_reasons')])) };
 }

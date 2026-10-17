@@ -8,7 +8,7 @@ const BOUNDARY = 'RECORDED_HARDWARE_RESAMPLED_EXPERIMENTAL_DERIVED_TIMELINE_NOT_
 const timeline = (over: Record<string, unknown> = {}) => ({
 	session_id: 'HW-1', timeline_version: 'CAPSTONE_SESSION_TIMELINE_V1', device_lifecycle: [], waveform_previews: [],
 	time_domains: { source_timeline: 'SOURCE_TIMELINE', device_lifecycle: 'PRODUCT_CLOCK' }, time_domain_explanation: 'x', claim_boundary: BOUNDARY, label: 'EXPERIMENTAL', source_kind: 'RECORDED_HARDWARE_RESAMPLED',
-	assumptions: { adc_scaling: 'unverified' }, windows_total: 3, windows_scored: 2, windows_pending: 0, windows_unusable: 1, complete: true,
+	assumptions: { adc_scaling: 'unverified' }, windows_total: 3, windows_scored: 2, windows_pending: 0, windows_unusable: 1, unusable_reasons: { LONG_GAP_SPAN: 1, FLATLINE: 1 }, complete: true,
 	source_timeline: [
 		{ kind: 'QUALITY_CHANGE', sequence_index: 0, source_timestamp_us: 15e6, payload: { ecg_quality: 'VALID', ppg_quality: null, storage_basis: 'CHANGE_ONLY' } },
 		{ kind: 'INFERENCE', sequence_index: 1, source_timestamp_us: 15e6, payload: { model_id: 'MODEL_V2_FINAL', calibration_domain: 'D', ecg_quality: 'VALID', monitoring_state: 'NORMAL_MONITORED_PATTERN', raw_probability: 0.2, source_domain_calibrated_probability: 0.1, threshold: 0.35, latency_ms: 3, probability_role: 'RESEARCH_TECHNICAL_METADATA' } },
@@ -21,6 +21,11 @@ describe('recorded-hardware timeline', () => {
 		const t = parseHardwareTimeline(timeline());
 		expect(t).toMatchObject({ windows_total: 3, windows_scored: 2, windows_unusable: 1, complete: true, claim_boundary: BOUNDARY });
 		expect(t.source_timeline.map((i) => i.kind)).toEqual(['QUALITY_CHANGE', 'INFERENCE', 'MONITORING_STATE_CHANGE']);
+	});
+	it('carries the quality-gate rejection reasons, and an older response without them parses as none', () => {
+		expect(parseHardwareTimeline(timeline()).unusable_reasons).toEqual({ LONG_GAP_SPAN: 1, FLATLINE: 1 });
+		const { unusable_reasons: _drop, ...older } = timeline() as Record<string, unknown>;
+		expect(parseHardwareTimeline(older).unusable_reasons).toEqual({});
 	});
 	it('rejects a timeline that claims persisted-session evidence, a wrong source kind, or an unknown field', () => {
 		expect(() => parseHardwareTimeline(timeline({ claim_boundary: 'PERSISTED_RESEARCH_ENGINEERING_EVIDENCE_NOT_WEBSOCKET_REPLAY' }))).toThrow();

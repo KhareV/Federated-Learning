@@ -113,6 +113,16 @@ def window_trace(sid: str, readings: list[dict[str, Any]], window_index: int, in
     })
 
 
+def _unusable_reasons(windows: list[dict[str, Any]]) -> dict[str, int]:
+    """Why windows were rejected before the model: the unchanged PREPROC_V1 quality reasons, counted over the rejected windows (a window can carry several)."""
+    counts: dict[str, int] = {}
+    for w in windows:
+        if w["ecg_quality"] == "UNUSABLE":
+            for reason in (w.get("diagnostics") or {}).get("quality_reasons") or ["UNSPECIFIED"]:
+                counts[str(reason)] = counts.get(str(reason), 0) + 1
+    return counts
+
+
 def timeline(sid: str, readings: list[dict[str, Any]], results: dict[str, dict[str, Any]], *, started_at_us: int = 0) -> dict[str, Any]:
     """SessionTimeline-shaped replay. ``results`` maps ``window_key`` -> the experimental scorer's cached result (``{"outcome", "inference", ...}``).
     A window with no result contributes no INFERENCE record (nothing is invented); ``pending`` counts quality-eligible windows still waiting for a result."""
@@ -158,4 +168,4 @@ def timeline(sid: str, readings: list[dict[str, Any]], results: dict[str, dict[s
             "time_domain_explanation": "Source time is measured from the first recorded reading of this hardware session; policy-state changes are derived from consecutive per-window results of the released service, not from a persisted monitoring state machine.",
             "claim_boundary": TIMELINE_CLAIM, "label": LABEL, "source_kind": SOURCE_KIND, "assumptions": ASSUMPTIONS,
             "windows_total": len(windows), "windows_scored": scored, "windows_pending": pending, "complete": pending == 0,
-            "windows_unusable": sum(1 for w in windows if w["ecg_quality"] == "UNUSABLE")}
+            "windows_unusable": sum(1 for w in windows if w["ecg_quality"] == "UNUSABLE"), "unusable_reasons": _unusable_reasons(windows)}

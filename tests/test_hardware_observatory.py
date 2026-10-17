@@ -187,3 +187,21 @@ def test_windows_can_be_traced_in_any_order_because_each_window_is_its_own_infer
         assert trace["persisted_inference"] is not None, window
     done = client.get(f"{BASE}/timeline?budget=48").json()
     assert done["windows_pending"] == 0 and done["windows_scored"] == len(valid)
+
+
+def test_timeline_names_why_windows_were_rejected_for_a_sparse_gappy_recording():
+    """The shape of a real failing bench recording: about one reading per second in three bursts separated by 12 s gaps, ECG pinned at the lead-off placeholder or the ADC rails."""
+    from datetime import UTC, datetime, timedelta
+
+    base = datetime(2026, 10, 13, 9, tzinfo=UTC)
+    readings, n = [], 0
+    for burst in range(3):
+        for i in range(18):
+            stamp = base + timedelta(seconds=burst * 30 + i * 1.0)
+            n += 1
+            readings.append({"document_id": f"d{n:04d}", "ingested_at": stamp.isoformat(), "ecg": (4095, 0, 2048)[i % 3] if burst == 0 else 2048, "bpm": 74, "spo2": 92})
+    out = hardware_trace.timeline("HW-SPARSE", readings, {})
+    assert out["windows_total"] >= 3 and out["windows_unusable"] == out["windows_total"] and out["windows_scored"] == 0
+    reasons = out["unusable_reasons"]
+    assert reasons.get("LONG_GAP_SPAN", 0) >= 1 and set(reasons) <= {"LONG_GAP_SPAN", "FLATLINE", "CLIPPING", "LOW_AMPLITUDE", "NOISE", "UNSPECIFIED"}
+    assert all(isinstance(v, int) and v > 0 for v in reasons.values())
