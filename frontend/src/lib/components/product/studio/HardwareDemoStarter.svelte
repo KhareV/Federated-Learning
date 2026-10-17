@@ -11,8 +11,8 @@
 	let selected = $state<string[]>([]);
 	let algorithm = $state<'FEDAVG' | 'FEDPROX'>('FEDAVG');
 	let secagg = $state<'PLAIN' | 'SECAGG_SHADOW'>('PLAIN');
-	let startModel = $state<'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL'>('FRESH_SEEDED');
-	let modelTouched = $state(false);                       // the backend's default (pretrained V2, as for the synthetic cohort) applies until the user picks a model
+	type StartModel = 'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL';
+	let modelChoice = $state<StartModel | null>(null);       // null = the user has not chosen: the default applies (pretrained V2, as for the synthetic cohort); any explicit choice, including Fresh, is kept
 	let warmRun = $state('');
 	let seed = $state(20261015);
 	let running = $state(false);
@@ -23,6 +23,7 @@
 	const models = $derived<HardwareStartingModel[]>(hw?.starting_models ?? [
 		{ id: 'FRESH_SEEDED', label: 'Fresh initialisation (seeded, untrained)', available: true, reason: null }]);
 	const v2Model = $derived(models.find((m) => m.id === 'MODEL_V2_FINAL'));
+	const startModel = $derived<StartModel>(modelChoice ?? (v2Model?.available === true ? 'MODEL_V2_FINAL' : 'FRESH_SEEDED'));
 	const warmAvailable = $derived(models.some((m) => m.id === 'WARM_START' && m.available));
 	const eligible = $derived(sessions.filter((s) => s.eligible));
 	const ordered = $derived([...sessions.filter((s) => s.eligible), ...sessions.filter((s) => !s.eligible)]);
@@ -33,7 +34,6 @@
 	let previewError = $state<string | null>(null);
 	let previewSeq = 0;
 	const v2 = $derived(startModel === 'MODEL_V2_FINAL');
-	$effect(() => { if (!modelTouched && v2Model?.available === true && startModel === 'FRESH_SEEDED') startModel = 'MODEL_V2_FINAL'; });
 	$effect(() => {
 		const ids = selected;
 		if (!v2 || ids.length === 0) { preview = null; previewError = null; previewing = false; return; }
@@ -88,7 +88,7 @@
 			{/if}
 		</fieldset>
 		<label><span>Starting model</span>
-			<select bind:value={startModel} onchange={() => { modelTouched = true; }} disabled={running} data-testid="hardware-demo-init">
+			<select value={startModel} onchange={(e) => { modelChoice = (e.currentTarget as HTMLSelectElement).value as StartModel; }} disabled={running} data-testid="hardware-demo-init">
 				{#each models as m (m.id)}<option value={m.id} disabled={!m.available}>{m.id === 'MODEL_V2_FINAL' ? 'Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning' : m.label}</option>{/each}
 			</select></label>
 		{#if startModel === 'WARM_START'}

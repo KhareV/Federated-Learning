@@ -70,6 +70,23 @@ describe('recorded hardware inside the run starter', () => {
 		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
 		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], run_length: 10, algorithm: 'FEDPROX', initialisation: 'WARM_START', warm_start_run_id: 'HDFLRUN-AAA' }));
 	});
+	it('an explicit choice of Fresh initialisation is kept (the pretrained-V2 default never overrides it) and is what is sent', async () => {
+		mount(caps(HW));
+		await fireEvent.click(screen.getByTestId('data-source-hardware'));
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
+		const init = screen.getByTestId('hardware-demo-init') as HTMLSelectElement;
+		await waitFor(() => expect(init.value).toBe('MODEL_V2_FINAL'));          // untouched: the default
+		await fireEvent.click(screen.getByTestId('hardware-demo-session-HW-OK'));
+		await fireEvent.change(init, { target: { value: 'FRESH_SEEDED' } });
+		await fireEvent.click(screen.getByTestId('rounds-10'));                    // other changes afterwards must not flip it back
+		await fireEvent.change(screen.getByTestId('hardware-demo-algorithm'), { target: { value: 'FEDPROX' } });
+		await new Promise((r) => setTimeout(r, 50));
+		expect(init.value).toBe('FRESH_SEEDED');
+		expect(screen.queryByTestId('hardware-demo-v2-note')).toBeNull();
+		expect((screen.getByTestId('hardware-demo-start').textContent ?? '')).toContain('fresh initialisation');
+		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
+		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], initialisation: 'FRESH_SEEDED' }));
+	});
 	it('a History deep link opens Recorded hardware with that eligible session already chosen (and never an ineligible one)', async () => {
 		render(StudioRunStarter, { props: { capabilities: caps(HW), onStartThree: vi.fn(), onStartTen: vi.fn(), dataSource: 'HARDWARE', preselectSession: 'HW-OK' } });
 		await waitFor(() => expect((screen.getByTestId('hardware-demo-session-HW-OK') as HTMLInputElement).checked).toBe(true));
