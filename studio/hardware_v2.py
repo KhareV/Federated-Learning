@@ -4,8 +4,9 @@
 The tabular hardware demo model cannot take V2 weights, so a hardware run that starts from ``MODEL_V2_FINAL`` uses the SAME machinery as a synthetic V2 run instead:
 
 * windows: the recorded readings are resampled onto the 360 Hz grid exactly as the experimental Monitor path does (``api.hardware_v2_experimental``: linear interpolation between real
-  readings only, documented ADC scaling ASSUMPTION), and the UNCHANGED ``WearableStreamRuntime`` (PREPROC_V1) builds and quality-grades the 10 s V2 windows. Only windows the
-  runtime grades VALID and complete (``is_trainable``, the same rule as the synthetic cohort) are used; everything else is counted and reported, never silently dropped;
+  readings only, documented ADC scaling ASSUMPTION), and the UNCHANGED ``WearableStreamRuntime`` (PREPROC_V1) builds and quality-grades the 10 s V2 windows. Every COMPLETE window is used
+  whatever the grade (the VALID-only ``is_trainable`` rule of the synthetic cohort is deliberately not enforced here); windows the gate would have rejected are counted and named
+  (``gate_overridden``), incomplete ones are counted and excluded, nothing is silently dropped;
 * topology: ONE recorded client (all of the recording's training windows) federated with the SEVEN canonical synthetic peers of the cohort (SIM_FL_SITE_01..07, unchanged, event-window
   labels). The peers are the unchanged ``build_cohort`` datasets, so the frozen round-1 SecAgg+ shadow applies as it does for a synthetic run (it needs the canonical cohort's largest
   client size, 93, so the recorded client contributes at most 93 windows);
@@ -30,7 +31,7 @@ from typing import Any
 import numpy as np
 
 from api.hardware_v2_experimental import ASSUMPTIONS, build_windows
-from federated.virtual_client_source_v1 import LocalDataset, dataset_semantic_sha, is_trainable, normalize_windows
+from federated.virtual_client_source_v1 import WINDOW_SAMPLES, LocalDataset, dataset_semantic_sha, is_trainable, normalize_windows
 from fl10 import metrics as fl10_metrics
 from fl10.runner import atomic_write, load_state
 from final_showcase import metrics as base_metrics
@@ -65,18 +66,29 @@ def peer_datasets() -> list[LocalDataset]:
     return list(_PEERS["peers"])
 
 
+def _complete(event: dict[str, Any]) -> bool:
+    """Full 10 s window of finite samples with no missing slots. The PREPROC_V1 quality grade is NOT required: hardware V2 runs are allowed whatever the grade says (it is reported, never hidden)."""
+    samples = event["ecg"]["samples"]
+    return len(samples) == WINDOW_SAMPLES and event["diagnostics"]["missing_slots"] == 0 and bool(np.isfinite(np.asarray(samples, dtype=np.float64)).all())
+
+
 def _session_windows(records: list[dict[str, Any]], session_id: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     rows = sorted((r for r in records if r["session_id"] == session_id), key=lambda r: (r["ingested_at"], r["document_id"]))
     events, summary = build_windows(rows, session_id, MODEL_ID)
-    usable = [e for e in events if is_trainable(e)]
+    usable = [e for e in events if _complete(e)]
     by_quality: dict[str, int] = {}
     reasons: dict[str, int] = {}
+    gate_reasons: dict[str, int] = {}
+    overridden = 0
     for event in events:
         by_quality[event["ecg_quality"]] = by_quality.get(event["ecg_quality"], 0) + 1
-        if not is_trainable(event):
-            for reason in event["diagnostics"].get("quality_reasons") or ([] if event["ecg_quality"] == "VALID" else ["INCOMPLETE_WINDOW"]):
-                reasons[reason] = reasons.get(reason, 0) + 1
-    return usable, {"session_id": session_id, "readings": len(rows), "resampled_records": summary["resampled_records"], "windows": len(events), "usable": len(usable), "by_quality": by_quality, "excluded_reasons": reasons}
+        if not _complete(event):
+            reasons["INCOMPLETE_WINDOW"] = reasons.get("INCOMPLETE_WINDOW", 0) + 1
+        elif not is_trainable(event):
+            overridden += 1
+            for reason in event["diagnostics"].get("quality_reasons") or [event["ecg_quality"]]:
+                gate_reasons[reason] = gate_reasons.get(reason, 0) + 1
+    return usable, {"gate_overridden": overridden, "gate_reasons": gate_reasons, "session_id": session_id, "readings": len(rows), "resampled_records": summary["resampled_records"], "windows": len(events), "usable": len(usable), "by_quality": by_quality, "excluded_reasons": reasons}
 
 
 def split_session(usable: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -116,7 +128,7 @@ def _insufficient(sessions: list[dict[str, Any]], train_total: int, holdout_tota
     hint = (f" NHM keeps at most the newest {MAX_STORED_READINGS} readings of a session (about {MAX_STORED_READINGS // 20} s at 20 Hz, roughly 13 trainable windows), so select two or more recorded sessions."
             if capped or windows < MIN_TRAIN_WINDOWS + MIN_HOLDOUT_WINDOWS else "")
     return (f"INSUFFICIENT_V2_WINDOWS: {train_total} training and {holdout_total} holdout windows usable (need {MIN_TRAIN_WINDOWS} and {MIN_HOLDOUT_WINDOWS}) from {windows} 10 s windows; "
-            f"the unchanged PREPROC_V1 quality gate excluded: {detail}. V2 only trains on windows the gate grades VALID and complete.{hint}")
+            f"incomplete windows excluded: {detail}. V2 trains on every complete 10 s window whatever its grade.{hint}")
 
 
 def _label(windows: list[dict[str, Any]], seed: int, scope: str) -> dict[str, int]:
@@ -182,7 +194,7 @@ def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algor
     all_windows = used + holdout_flat
     dataset = {
         "version": DATASET_VERSION, "feature_version": "PREPROC_V1_RESAMPLED_250HZ_10S_NORMALISED", "feature_names": [], "window_seconds": WINDOW_US / 1e6, "minimum_records": None,
-        "windows_total": sum(i["windows"] for i in infos), "training_windows": len(used), "training_windows_available": len(train_all), "topology": "ONE_RECORDED_CLIENT_PLUS_SEVEN_SYNTHETIC_PEERS", "holdout_windows": len(holdout_flat), "excluded_windows": [{"session_id": i["session_id"], "reasons": i["excluded_reasons"], "windows": i["windows"], "usable": i["usable"]} for i in infos],
+        "windows_total": sum(i["windows"] for i in infos), "quality_gate": "NOT_ENFORCED_FOR_HARDWARE_V2", "gate_overridden_windows": sum(i["gate_overridden"] for i in infos), "training_windows": len(used), "training_windows_available": len(train_all), "topology": "ONE_RECORDED_CLIENT_PLUS_SEVEN_SYNTHETIC_PEERS", "holdout_windows": len(holdout_flat), "excluded_windows": [{"session_id": i["session_id"], "reasons": i["excluded_reasons"], "windows": i["windows"], "usable": i["usable"]} for i in infos],
         "sessions": infos, "label_assignment": {"version": LABEL_VERSION, "status": "SYNTHETIC_ASSIGNED_FOR_DEMO", "seed": label_seed, "classes": {"0": "DEMO_CLASS_A", "1": "DEMO_CLASS_B"}},
         "input_feature_sha256": canonical_digest({w["window_id"]: hashlib.sha256(json.dumps(w["ecg"]["samples"]).encode()).hexdigest() for w in all_windows}),
         "label_sha256": canonical_digest({**{k: v for k, v in train_labels.items() if k in used_ids}, **holdout_labels}), "normalization": {"scope": "PER_WINDOW_ZSCORE", "unit": "unchanged normalize_windows"}, "assumptions": ASSUMPTIONS,

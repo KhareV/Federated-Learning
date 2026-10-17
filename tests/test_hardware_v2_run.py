@@ -107,13 +107,14 @@ def test_one_retention_capped_session_is_not_enough_and_the_reason_says_to_combi
         demo.prepare("user-a", session_ids=["HW-V2-A"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=1, initialisation="MODEL_V2_FINAL")
 
 
-def test_too_clean_a_gate_fails_closed_with_the_reason(tmp_path):
-    """A signal the unchanged PREPROC_V1 gate grades CLIPPING (amplitude beyond the runtime rail) leaves nothing to train on: the run is refused, with counts, never faked."""
-    _, demo = store_with_sessions(tmp_path, amplitude=700.0)
-    with pytest.raises(ValueError, match=r"INSUFFICIENT_V2_WINDOWS.*CLIPPING"):
-        demo.prepare("user-a", session_ids=["HW-V2-A"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=1, initialisation="MODEL_V2_FINAL")
-    info = hardware_v2.preview(demo._records("user-a", ["HW-V2-A"]), ["HW-V2-A"])
-    assert info["eligible"] is False and "CLIPPING" in info["reason"] and info["sessions"][0]["by_quality"].get("UNUSABLE", 0) > 0
+def test_a_high_gain_signal_the_gate_would_reject_is_still_allowed_and_the_override_is_reported(tmp_path):
+    """Amplitude beyond the runtime rail (graded CLIPPING by the unchanged PREPROC_V1 gate) no longer blocks V2: complete windows are used and the override is counted."""
+    _, demo = store_with_sessions(tmp_path, amplitude=700.0, sessions=("HW-V2-A", "HW-V2-B"))
+    info = hardware_v2.preview(demo._records("user-a", ["HW-V2-A", "HW-V2-B"]), ["HW-V2-A", "HW-V2-B"])
+    assert info["eligible"] is True and sum(s["gate_overridden"] for s in info["sessions"]) > 0
+    assert any("CLIPPING" in s["gate_reasons"] for s in info["sessions"])
+    ctx = demo.prepare("user-a", session_ids=["HW-V2-A", "HW-V2-B"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=1, initialisation="MODEL_V2_FINAL")
+    assert ctx["dataset"]["gate_overridden_windows"] > 0 and ctx["dataset"]["quality_gate"] == "NOT_ENFORCED_FOR_HARDWARE_V2"
 
 
 def test_foreign_and_active_sessions_are_refused_for_v2_too(tmp_path):
