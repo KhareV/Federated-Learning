@@ -80,6 +80,7 @@ class EvaluationObserver:
         self._before_submit = before_submit
         self._mirrors: list[EvaluationObserver] = []
         self._holdout_provider = holdout_provider
+        self._run_cohorts: dict[str, tuple[Callable[[], FrozenHoldout], str, str]] = {}      # run id -> (holdout provider, cohort id, cohort-use label) for runs that chose another cohort
         prepare_template()          # the only RNG-consuming model construction happens here, at construction time, before any run can be training
         self._evaluator = evaluator or evaluate_isolated
         self._records: dict[str, dict[int, EvaluationRecord]] = {}
@@ -104,6 +105,17 @@ class EvaluationObserver:
         with self._lock:
             self._pairs[run_id] = (comparator, endpoint)
 
+    def set_run_cohort(self, run_id: str, provider: Callable[[], FrozenHoldout], cohort_id: str, use_label: str) -> None:
+        """A run that chose another synthetic cohort is scored, paired and labelled on that cohort's holdout. Runs that never call this use the observer's default, exactly as before."""
+        with self._lock:
+            self._run_cohorts[run_id] = (provider, cohort_id, use_label)
+
+    def _holdout(self, run_id: str) -> FrozenHoldout:
+        return self._run_cohorts[run_id][0]() if run_id in self._run_cohorts else self._holdout_provider()
+
+    def _use_label(self, run_id: str) -> str:
+        return self._run_cohorts[run_id][2] if run_id in self._run_cohorts else COHORT_USE_LABEL
+
     def add_mirror(self, other: EvaluationObserver) -> None:
         """Every state submitted here is also submitted (same private copy semantics) to ``other``; a mirror can never change this observer's records or training."""
         self._mirrors.append(other)
@@ -115,8 +127,8 @@ class EvaluationObserver:
             self._before_submit()
         blob = serialize_state(state)
         digest_ok = state_sha(OrderedDict(state)) == expected_digest
-        queued = self._record_cls(run_id=run_id, run_length=run_length, round_id=round_id, global_state_digest=expected_digest, candidate_id=candidate_id, cohort_id=self._cohort(),
-                                  evaluation_status="QUEUED" if digest_ok else "FAILED", evaluation_queued_at=_now(), **(record_extra or {}),
+        queued = self._record_cls(run_id=run_id, run_length=run_length, round_id=round_id, global_state_digest=expected_digest, candidate_id=candidate_id, cohort_id=self._cohort(run_id),
+                                  evaluation_status="QUEUED" if digest_ok else "FAILED", evaluation_queued_at=_now(), **({"cohort_use": self._use_label(run_id)} if run_id in self._run_cohorts else {}), **(record_extra or {}),
                                   failure=None if digest_ok else Failure(code="STATE_DIGEST_MISMATCH", message="submitted state does not hash to the committed digest; not scored"))
         with self._lock:
             if run_id not in self._records:
@@ -217,7 +229,7 @@ class EvaluationObserver:
         state = deserialize_state(blob)
         if state_sha(OrderedDict(state)) != queued.global_state_digest:     # verified again on the private copy, before scoring
             raise ev.Fl10EvalError("STATE_DIGEST_MISMATCH", round_key(round_id))
-        holdout = self._holdout_provider()
+        holdout = self._holdout(run_id)
         name = round_key(round_id)
         result = self._evaluator({name: state}, list(holdout.datasets), replicates=0, seed=0)
         logits = result["_logits"][name]
@@ -249,7 +261,7 @@ class EvaluationObserver:
         a, b = (self.get(run_id, pair[0]), self.get(run_id, pair[1]))
         if a is None or b is None or a.evaluation_status != "COMPLETED" or b.evaluation_status != "COMPLETED":
             return
-        holdout = self._holdout_provider()
+        holdout = self._holdout(run_id)
         base = self.run_dir(run_id)
         oa, ya, za = read_predictions((base / a.prediction_artifact_reference.path).read_bytes())  # type: ignore[union-attr]
         ob, yb, zb = read_predictions((base / b.prediction_artifact_reference.path).read_bytes())  # type: ignore[union-attr]
@@ -257,12 +269,14 @@ class EvaluationObserver:
             return
         boot = holdout.protocol["uncertainty"]
         paired = fl10_metrics.paired_cluster_bootstrap(oa, ya, za, zb, replicates=boot["replicates"], seed=boot["seed"])
-        body = {"comparator": round_key(pair[0]), "endpoint": round_key(pair[1]), "cohort_use": COHORT_USE_LABEL, "evaluation_protocol_id": EVAL_PROTOCOL_ID, **paired}
+        body = {"comparator": round_key(pair[0]), "endpoint": round_key(pair[1]), "cohort_use": self._use_label(run_id), "evaluation_protocol_id": EVAL_PROTOCOL_ID, **paired}
         atomic_write(base / "paired.json", (json.dumps(body, indent=1, sort_keys=True) + "\n").encode())
         with self._lock:
             self._revision[run_id] = self._revision.get(run_id, 0) + 1
 
-    def _cohort(self) -> str:
+    def _cohort(self, run_id: str | None = None) -> str:
+        if run_id is not None and run_id in self._run_cohorts:
+            return self._run_cohorts[run_id][1]
         return self._cohort_id_override or _default_cohort_id()
 
     def paired(self, run_id: str) -> dict[str, Any] | None:

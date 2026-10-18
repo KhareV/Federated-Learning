@@ -8,7 +8,6 @@ from typing import Any
 
 from fl10.inventory import METRIC_DEFINITIONS, TABLES
 from fl10.tables import GLOBAL_COLS, PART_COLS
-from studio.constants import COHORT_USE_LABEL
 from studio.specs import comparison_pair, skey
 
 Q = ["0.05", "0.25", "0.5", "0.75", "0.95"]
@@ -36,7 +35,7 @@ def build_tables(b: dict[str, Any]) -> dict[str, dict[str, Any]]:
         out[tid] = {"id": tid, "title": table_title(tid, n), "columns": columns, "rows": rows, "caption": caption + (f" {empty_note}" if empty_note and not rows else ""), "sources": sources,
                     "synthetic_label": b["synthetic_label"], "availability": "AVAILABLE" if rows else "PENDING"}
 
-    label = f"{b['synthetic_label']}. {COHORT_USE_LABEL}."
+    label = f"{b['synthetic_label']}. {b['evaluation']['cohort_use']}."
     add("FL10_TAB01", ["state", *GLOBAL_COLS, *[f"score_q{x}" for x in Q], "participant_macro_F1", "participants_defined", "participants_undefined", "undefined_reasons"],
         [[s, *[states[s]["pooled"][c] for c in GLOBAL_COLS], *[states[s]["pooled"]["score_quantiles"][x] for x in Q], states[s]["participant_macro_F1"], states[s]["participants_defined"], states[s]["participants_undefined"], _undef(states[s]["pooled"])] for s in evaluated],
         f"{label} {len(ev['holdout_participants'])}-participant holdout; fixed threshold 0.5; blank = UNDEFINED (reason column). Only genuinely evaluated states have rows.", ["evaluation_results.json"], empty_note="No state has been evaluated yet.")

@@ -1,0 +1,81 @@
+{
+ "FedAvg from pretrained V2, R01": {
+  "AUPRC": 0.6086376270943239,
+  "AUROC": 0.8972010087734877,
+  "F1": 0.6582278481012658,
+  "FN": 53,
+  "FP": 136,
+  "TN": 1062,
+  "TP": 182,
+  "mean_per_participant_AUROC": 0.9078111389101576,
+  "participants_scored": 14
+ },
+ "FedAvg from pretrained V2, R03": {
+  "AUPRC": 0.6866133539915125,
+  "AUROC": 0.8716264696479948,
+  "F1": 0.6616161616161617,
+  "FN": 104,
+  "FP": 30,
+  "TN": 1168,
+  "TP": 131,
+  "mean_per_participant_AUROC": 0.8726105202107207,
+  "participants_scored": 14
+ },
+ "FedAvg from pretrained V2, R05": {
+  "AUPRC": 0.7573828865334484,
+  "AUROC": 0.8981991262032466,
+  "F1": 0.5971830985915493,
+  "FN": 129,
+  "FP": 14,
+  "TN": 1184,
+  "TP": 106,
+  "mean_per_participant_AUROC": 0.915753072172487,
+  "participants_scored": 14
+ },
+ "FedAvg from pretrained V2, R10": {
+  "AUPRC": 0.8381440200517621,
+  "AUROC": 0.9207935211167549,
+  "F1": 0.7741935483870968,
+  "FN": 79,
+  "FP": 12,
+  "TN": 1186,
+  "TP": 156,
+  "mean_per_participant_AUROC": 0.9499729078274185,
+  "participants_scored": 14
+ },
+ "always_positive_F1": 0.2817745803357314,
+ "logistic: 6 amplitude features": {
+  "AUPRC": 0.33385975816500535,
+  "AUROC": 0.7020566191880083,
+  "F1": 0.09375,
+  "FN": 223,
+  "FP": 9,
+  "TN": 1189,
+  "TP": 12,
+  "mean_per_participant_AUROC": 0.7436723089014595,
+  "participants_scored": 14
+ },
+ "logistic: R-peak timing features": {
+  "AUPRC": 0.5738757385582528,
+  "AUROC": 0.8543281355450574,
+  "F1": 0.13127413127413126,
+  "FN": 218,
+  "FP": 7,
+  "TN": 1191,
+  "TP": 17,
+  "mean_per_participant_AUROC": 0.8705830453201024,
+  "participants_scored": 14
+ },
+ "pretrained V2 (R00, no training)": {
+  "AUPRC": 0.4843910588906293,
+  "AUROC": 0.8476645472951374,
+  "F1": 0.5580645161290323,
+  "FN": 62,
+  "FP": 212,
+  "TN": 986,
+  "TP": 173,
+  "mean_per_participant_AUROC": 0.8663334493872209,
+  "participants_scored": 14
+ },
+ "prevalence": 0.16399162595952546
+}

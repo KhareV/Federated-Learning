@@ -18,14 +18,11 @@ from fl10.constants import RECORDED
 from fl10.evaluate import ROOT
 from product.api.errors import ProductError, ProductErrorCode
 from product.federation.service import FederationService
-from studio import v2_init
+from studio import cohorts, v2_init
 from studio.bundle import build_live_bundle, read_run_report
 from studio.capture3 import ProductRunCapture
 from studio.constants import (
     BASELINE_RUN_ID,
-    CLAIM_BOUNDARY,
-    COHORT_USE_DETAIL,
-    COHORT_USE_LABEL,
     EVAL_PROTOCOL_ID,
     OBSERVER_ID,
 )
@@ -97,10 +94,10 @@ class StudioService:
                 self._exports[run_id] = {"status": "FAILED", "message": str(error)[:300]}
 
     def _finalize_10(self, run_id: str, directory: Path) -> None:
-        self._export(run_id, self.runner10.jobs[run_id].rounds, "FL10_10R", self.runner10.jobs[run_id].mode, directory)
+        self._export(run_id, self.runner10.jobs[run_id].rounds, "FL10_10R", self.runner10.jobs[run_id].mode, directory, cohort=self.runner10.jobs[run_id].cohort)
 
-    def _export(self, run_id: str, n: int, engine: str, mode: str, directory: Path) -> None:
-        bundle = build_live_bundle(run_id=run_id, run_length=n, run_dir=directory / "run", observer=self.observer, mode=mode, engine=engine, status="COMPLETED", training_cohort=self._training_cohort(run_id))
+    def _export(self, run_id: str, n: int, engine: str, mode: str, directory: Path, cohort: str = cohorts.ORIGINAL) -> None:
+        bundle = build_live_bundle(run_id=run_id, run_length=n, run_dir=directory / "run", observer=self.observer, mode=mode, engine=engine, status="COMPLETED", training_cohort=self._training_cohort(run_id), cohort=cohort)
         self.generalisation.wait_settled(run_id, n)          # the unseen-cohort lane settles after the diagnostic lane; whatever state it reached is exported as it is (failures included)
         job = self.runner10.jobs.get(run_id)
         gen = self.generalisation.bundle(run_id, run_length=n, init=self._base_model(job.init, job.base_audit) if job else None)
@@ -168,7 +165,7 @@ class StudioService:
                 self._bundles.move_to_end(key)
                 return self._bundles[key]
         bundle = build_live_bundle(run_id=run_id, run_length=d["run_length"], run_dir=self.hardware.demo.root / run_id / "fl10", observer=self.observer, mode="A", engine=d["engine"], status=d["status"],
-                                   source_label=d["source_label"], eval_run_id=run_id, training_cohort=self._hardware_cohort(run_id))
+                                   source_label=d["source_label"], eval_run_id=run_id, training_cohort=self._hardware_cohort(run_id), cohort=job.cohort)
         bundle["run"]["candidate"] = d["candidate"]
         bundle["synthetic_label"] = f"{bundle['synthetic_label']} · CLIENT 00 TRAINS ON YOUR RECORDED HARDWARE WINDOWS (SYNTHETIC-ASSIGNED LABELS)"
         with self._lock:
@@ -278,9 +275,9 @@ class StudioService:
                 job = self.runner10.get(user_id, run_id)
             except StudioRunError as error:
                 raise _as_product_error(error) from error
-            return {"run_id": run_id, "run_length": job.rounds, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "source_mode": MODES[job.mode], "monitored_site": job.monitored_site if job.mode == "B" else None, "signal_session_id": (job.signal_session or {}).get("session_id") if job.mode == "B" else None, "status": job.status,
-                    "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds, "client_ids": list(CLIENT_IDS), "candidate": job.candidate, "failure": job.failure,
-                    "label": f"{job.rounds}-round " + ("extended run" if job.init == v2_init.INIT_FRESH else "run — pretrained V2 start"),
+            return {"run_id": run_id, "run_length": job.rounds, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "source_mode": MODES[job.mode], "monitored_site": job.monitored_site if job.mode == "B" else None, "signal_session_id": (job.signal_session or {}).get("session_id") if job.mode == "B" else None, "cohort": job.cohort, "cohort_label": cohorts.spec(job.cohort).label, "status": job.status,
+                    "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds, "client_ids": list(cohorts.spec(job.cohort).client_ids), "candidate": job.candidate, "failure": job.failure,
+                    "label": f"{job.rounds}-round " + ("extended run" if job.init == v2_init.INIT_FRESH else "run — pretrained V2 start") + (" · realistic cohort" if job.cohort == cohorts.REALISTIC else ""),
                     "base_model": self._base_model(job.init, job.base_audit), "source_label": "LIVE RUN (this session)", "replay_of": None, "evaluation": self._evaluation_state(run_id), "export_status": job.export_status, "created_at": job.created_at}
         run = self.federation.get_run(user_id, run_id)
         meta = self.federation.artifacts.read_run_meta(run_id) or {}
@@ -325,7 +322,7 @@ class StudioService:
                 return self._bundles[key]
         bundle = build_live_bundle(run_id=run_id, run_length=d["run_length"], run_dir=self.root / eval_id / "run", observer=self.observer, mode="A" if d["source_mode"] == "CANONICAL_SYNTHETIC" else "B", engine=d["engine"],
                                    status=d["status"], source_label=d["source_label"] if d["origin"] != "REPLAY" else f"REPLAY — evaluation recorded from source run {eval_id}", eval_run_id=eval_id, training_cohort=self._training_cohort(eval_id)
-                                   or self._product_cohort(eval_id), replay_of=d["replay_of"])
+                                   or self._product_cohort(eval_id), replay_of=d["replay_of"], cohort=d.get("cohort", cohorts.ORIGINAL))
         with self._lock:
             self._bundles[key] = bundle
             while len(self._bundles) > 8:
@@ -348,9 +345,10 @@ class StudioService:
 
         a, e = comparison_pair(n)
         paired = (None if (self.is_hardware(run_id) and self._hw_diag(run_id)) else recorded_bundle(run_id)["evaluation"]["paired"] if self.is_recorded(run_id) else self.observer.paired(d["evaluation"]["evaluation_run_id"]))
-        labels = {"evaluation_protocol_id": EVAL_PROTOCOL_ID, "observer_id": OBSERVER_ID, "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "claim_boundary": CLAIM_BOUNDARY}
+        picked = cohorts.spec(d.get("cohort", cohorts.ORIGINAL))
+        labels = {"evaluation_protocol_id": EVAL_PROTOCOL_ID, "observer_id": OBSERVER_ID, "cohort_use": picked.use_label, "cohort_use_detail": picked.use_detail, "claim_boundary": picked.claim_boundary}
         if self.is_hardware(run_id) and self._hw_diag(run_id):       # tabular recorded-hardware runs carry their own evaluation wording (never the synthetic-cohort constants)
-            from studio.hardware_bundle import CLAIM, COHORT_USE
+            from studio.hardware_bundle import CLAIM
 
             b = self._hardware_bundle(run_id)
             v2 = b["run"]["initialisation"]["model_id"] == "MODEL_V2_FINAL"
@@ -457,6 +455,10 @@ class StudioService:
     def submit_hardware_v2_state(self, run_id: str, run_length: int, round_id: int, state: Any, digest: str) -> None:
         """A committed state of a pretrained-V2 recorded-hardware run is scored exactly like a synthetic V2 run: on the frozen evaluation cohort by the primary observer, which mirrors it to the unseen-cohort lane."""
         if round_id == 0:
+            job = self._hardware_job(run_id)
+            if job.cohort != cohorts.ORIGINAL:          # a run whose peers come from another cohort is scored on that cohort's evaluation holdout
+                picked = cohorts.spec(job.cohort)
+                self.observer.set_run_cohort(run_id, cohorts.holdout_provider(job.cohort), picked.evaluation_cohort_id, picked.use_label)
             self.observer.declare_pair(run_id, *comparison_pair(run_length))
         self.observer.submit(run_id=run_id, run_length=run_length, round_id=round_id, state=state, expected_digest=digest, candidate_id=f"FL10_CANDIDATE_{run_id}" if round_id == run_length else None)
 

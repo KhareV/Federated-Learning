@@ -23,7 +23,19 @@ SETTLE_SECONDS = 4.0                      # electrodes just applied: no finger y
 FORBIDDEN_DATABASES = {"health_db"}       # the production database is never seeded by the script
 
 
-def generate_documents(seed: int = DEMO_SEED, seconds: float = DEMO_SECONDS) -> list[dict[str, Any]]:
+LONG_DEMO_COLLECTION = "demo_prerecorded_hardware_session_long_v1"
+LONG_DEMO_SEED = 20261018
+LONG_DEMO_SECONDS = 480.0                 # about 93 complete 10 s windows (5 s stride), every one usable: 74 training + 19 holdout from this one session
+LONG_DEMO_START = datetime(2026, 10, 17, 12, 0, 0, tzinfo=UTC)
+
+# collection -> (session ordinal, seed, seconds, start, ObjectId tag); each prerecorded demo session lives in its own collection and is imported as its own HW-SHOWCASE-* session
+SHOWCASES: dict[str, tuple[int, int, float, datetime, bytes]] = {
+    DEMO_COLLECTION: (1, DEMO_SEED, DEMO_SECONDS, DEMO_START, b"DEMO1"),
+    LONG_DEMO_COLLECTION: (2, LONG_DEMO_SEED, LONG_DEMO_SECONDS, LONG_DEMO_START, b"DEMO2"),
+}
+
+
+def generate_documents(seed: int = DEMO_SEED, seconds: float = DEMO_SECONDS, start: datetime = DEMO_START, tag: bytes = b"DEMO1") -> list[dict[str, Any]]:
     from scripts.emulate_esp32_ws import Signal
 
     rng = random.Random(seed ^ 0x5EED)
@@ -42,13 +54,19 @@ def generate_documents(seed: int = DEMO_SEED, seconds: float = DEMO_SECONDS) -> 
         settling = t < SETTLE_SECONDS
         bpm, spo2 = signal.vitals("sketch", settling)
         ecg = 2048 if settling else signal.ecg("sketch_real")
-        stamp = DEMO_START + timedelta(seconds=t)
+        stamp = start + timedelta(seconds=t)
         stamp = stamp.replace(microsecond=(stamp.microsecond // 1000) * 1000)
         counter += 1
-        object_id = ObjectId(int(stamp.timestamp()).to_bytes(4, "big") + b"DEMO1" + counter.to_bytes(3, "big"))
+        object_id = ObjectId(int(stamp.timestamp()).to_bytes(4, "big") + tag + counter.to_bytes(3, "big"))
         docs.append({"_id": object_id, "bpm": int(bpm), "spo2": int(spo2), "ecg": int(ecg), "timestamp": stamp})
     return docs
 
 
-def owner_session_id(owner: str) -> str:
-    return f"HW-SHOWCASE-{DEMO_START:%Y-%m-%d}-01-" + hashlib.sha256(owner.encode()).hexdigest()[:8]
+def documents_for(collection: str) -> list[dict[str, Any]]:
+    _, seed, seconds, start, tag = SHOWCASES[collection]
+    return generate_documents(seed, seconds, start, tag)
+
+
+def owner_session_id(owner: str, collection: str = DEMO_COLLECTION) -> str:
+    ordinal, _, _, start, _ = SHOWCASES[collection]
+    return f"HW-SHOWCASE-{start:%Y-%m-%d}-{ordinal:02d}-" + hashlib.sha256(owner.encode()).hexdigest()[:8]

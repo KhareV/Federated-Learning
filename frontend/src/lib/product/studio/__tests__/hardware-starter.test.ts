@@ -119,3 +119,38 @@ describe('recorded hardware inside the run starter', () => {
 		expect((screen.getByTestId('hardware-demo-start') as HTMLButtonElement).disabled).toBe(true);
 	});
 });
+
+// The synthetic-cohort option for a recorded-hardware run: it supplies the seven synthetic peers (and the evaluation holdout) of a pretrained-V2 run only.
+const withCohorts = (c: StudioCapabilities): StudioCapabilities => ({ ...c, ten_round: { ...c.ten_round, cohorts: [
+	{ id: 'ORIGINAL', label: 'Original', description: 'The frozen cohort.', client_ids: ['SIM_FL_SITE_00'], evaluation_cohort_id: 'E1', cohort_use: 'u', claim_boundary: 'c', default: true },
+	{ id: 'REALISTIC', label: 'Realistic', description: 'Premature ectopic beats with pauses.', client_ids: ['SIM_FL_SITE_00'], evaluation_cohort_id: 'E2', cohort_use: 'u', claim_boundary: 'c', default: false }] } });
+
+describe('the cohort option on a recorded-hardware run', () => {
+	it('the original cohort sends no cohort; the realistic cohort travels with a pretrained-V2 run', async () => {
+		mount(withCohorts(caps(HW)));
+		await fireEvent.click(screen.getByTestId('data-source-hardware'));
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
+		await fireEvent.click(screen.getByTestId('hardware-demo-session-HW-OK'));
+		await waitFor(() => expect(screen.getByTestId('hardware-v2-preview').textContent).toContain('ENOUGH USABLE WINDOWS'));
+		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
+		await waitFor(() => expect(started).toMatchObject({ initialisation: 'MODEL_V2_FINAL' }));
+		expect(started).not.toHaveProperty('cohort');
+		await fireEvent.click(screen.getByTestId('cohort-realistic'));
+		expect(screen.getByTestId('hardware-demo-v2-note').textContent).toContain('seven realistic synthetic peers');
+		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
+		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], initialisation: 'MODEL_V2_FINAL', cohort: 'REALISTIC' }));
+	});
+	it('the realistic cohort cannot be combined with a tabular starting model (no synthetic peers there)', async () => {
+		mount(withCohorts(caps(HW)));
+		await fireEvent.click(screen.getByTestId('data-source-hardware'));
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
+		await fireEvent.click(screen.getByTestId('hardware-demo-session-HW-OK'));
+		await fireEvent.click(screen.getByTestId('cohort-realistic'));
+		await fireEvent.change(screen.getByTestId('hardware-demo-init'), { target: { value: 'FRESH_SEEDED' } });
+		expect(screen.getByTestId('hardware-cohort-needs-v2').textContent).toContain('seven synthetic peers');
+		expect((screen.getByTestId('hardware-demo-start') as HTMLButtonElement).disabled).toBe(true);
+		await fireEvent.click(screen.getByTestId('cohort-original'));
+		expect(screen.queryByTestId('hardware-cohort-needs-v2')).toBeNull();
+		expect((screen.getByTestId('hardware-demo-start') as HTMLButtonElement).disabled).toBe(false);
+	});
+});

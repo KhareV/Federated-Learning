@@ -3,8 +3,8 @@
 	// control: the rounds radio of the parent card is the only one, so both data sources share one form.
 	import { goto } from '$app/navigation';
 	import { getProductStore } from '$lib/product/state.svelte';
-	import type { HardwareDemoRun, HardwareDemoSession, HardwareStartingModel, HardwareV2Preview, StudioCapabilities } from '$lib/product/studio/types';
-	let { capabilities = null, disabled = false, rounds = 3, preselect = null }: { capabilities?: StudioCapabilities | null; disabled?: boolean; rounds?: 3 | 10; preselect?: string | null } = $props();
+	import type { CohortId, HardwareDemoRun, HardwareDemoSession, HardwareStartingModel, HardwareV2Preview, StudioCapabilities } from '$lib/product/studio/types';
+	let { capabilities = null, disabled = false, rounds = 3, preselect = null, cohort = 'ORIGINAL' }: { capabilities?: StudioCapabilities | null; disabled?: boolean; rounds?: 3 | 10; preselect?: string | null; cohort?: CohortId } = $props();
 	const product = getProductStore();
 	let sessions = $state<HardwareDemoSession[]>([]);
 	let priorRuns = $state<HardwareDemoRun[]>([]);
@@ -41,7 +41,9 @@
 		previewing = true; previewError = null; preview = null;
 		product.api.hardwareV2Preview(ids).then((value) => { if (mine === previewSeq) preview = value; }).catch((cause) => { if (mine === previewSeq) previewError = cause instanceof Error ? cause.message : String(cause); }).finally(() => { if (mine === previewSeq) previewing = false; });
 	});
-	const canStart = $derived(!disabled && !running && selected.length > 0 && (startModel === 'FRESH_SEEDED' || (startModel === 'WARM_START' && !!warmPick) || (v2 && preview?.eligible === true)));
+	// The realistic cohort supplies the seven synthetic peers (and the evaluation holdout) of a pretrained-V2 run; the tabular starts have eight recorded blocks and no peers.
+	const cohortNeedsV2 = $derived(cohort === 'REALISTIC' && !v2);
+	const canStart = $derived(!disabled && !running && !cohortNeedsV2 && selected.length > 0 && (startModel === 'FRESH_SEEDED' || (startModel === 'WARM_START' && !!warmPick) || (v2 && preview?.eligible === true)));
 	async function load() {
 		if (!available) return;
 		try {
@@ -59,7 +61,7 @@
 			// The run executes on the backend and is observed on the same Live page as every other run.
 			const run = await product.api.hardwareDemoStart({
 				session_ids: selected, run_length: rounds, algorithm, secagg_mode: secagg, label_seed: seed,
-				initialisation: startModel, ...(startModel === 'WARM_START' ? { warm_start_run_id: warmPick } : {})
+				initialisation: startModel, ...(startModel === 'WARM_START' ? { warm_start_run_id: warmPick } : {}), ...(cohort === 'REALISTIC' && v2 ? { cohort } : {})
 			});
 			await goto(`/app/federation/live?run=${encodeURIComponent(run.run_id)}`);
 		} catch (cause) { error = cause instanceof Error ? cause.message : String(cause); }
@@ -98,7 +100,7 @@
 				</select></label>
 			<p class="help" data-testid="hardware-demo-warm-note">{priorRuns.length ? 'R0 is the final global weights of that earlier recorded-hardware run, unchanged; the rounds then continue training on the sessions selected above. Normalisation is refitted on the new training windows.' : 'No earlier recorded-hardware run exists yet; run once from a fresh initialisation first.'}</p>
 		{:else if v2}
-			<p class="help" data-testid="hardware-demo-v2-note">R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven canonical synthetic peers of the cohort. {v2Model?.note ?? 'Your recorded windows are resampled onto the V2 source grid and graded by the unchanged quality gate; only VALID windows train.'} The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.</p>
+			<p class="help" data-testid="hardware-demo-v2-note">R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven {cohort === 'REALISTIC' ? 'realistic' : 'canonical'} synthetic peers of the cohort. {v2Model?.note ?? 'Your recorded windows are resampled onto the V2 source grid and graded by the unchanged quality gate; only VALID windows train.'} The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.</p>
 			{#if selected.length === 0}<p class="help">Select at least one recorded session to see how many V2 windows it provides.</p>
 			{:else if previewing}<p class="help" role="status">Checking what the unchanged quality gate accepts…</p>
 			{:else if previewError}<p class="warn" role="alert" data-testid="hardware-v2-preview-error">{previewError}</p>
@@ -114,6 +116,7 @@
 		{:else}
 			<p class="help" data-testid="hardware-demo-init-note">R0 is a seeded, untrained HARDWARE_DEMO_MODEL_V1 (a small tabular classifier over window features).</p>
 		{/if}
+		{#if cohortNeedsV2}<p class="warn" role="status" data-testid="hardware-cohort-needs-v2">The realistic cohort supplies the seven synthetic peers of a pretrained-V2 recorded-hardware run. Choose the pretrained V2 starting model, or switch the cohort back to original.</p>{/if}
 		{#if !warmAvailable}<p class="help">Warm start is not advertised by the connected backend.</p>{/if}
 		<label><span>Algorithm</span><select bind:value={algorithm} disabled={running} data-testid="hardware-demo-algorithm"><option value="FEDAVG">FedAvg — sample-count-weighted averaging</option><option value="FEDPROX">FedProx — fixed μ {hw?.fedprox_mu ?? 0.1}</option></select></label>
 		<label><span>Aggregation / protection mode</span><select bind:value={secagg} disabled={running} data-testid="hardware-demo-secagg"><option value="PLAIN">Plain aggregation</option><option value="SECAGG_SHADOW">Round-1 SecAgg+ shadow verification</option></select></label>

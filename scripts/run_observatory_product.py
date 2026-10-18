@@ -45,11 +45,11 @@ def build_app_from_env(env: Mapping[str, str]):
     )
     if env.get("NHM_HARDWARE_MONGO_ENABLED", "").lower() == "true":
         from api.hardware_telemetry_routes import install_hardware_routes
-        from product.hardware_demo_session import DEMO_COLLECTION
+        from product.hardware_demo_session import DEMO_COLLECTION, LONG_DEMO_COLLECTION
 
         # The prerecorded demo hardware session is on by default when hardware telemetry is on; NHM_HARDWARE_DEMO_SESSION=off removes it (an explicit NHM_HARDWARE_DEMO_COLLECTION wins).
         if "NHM_HARDWARE_DEMO_COLLECTION" not in env and env.get("NHM_HARDWARE_DEMO_SESSION", "on").lower() != "off":
-            env = {**env, "NHM_HARDWARE_DEMO_COLLECTION": DEMO_COLLECTION}
+            env = {**env, "NHM_HARDWARE_DEMO_COLLECTION": f"{DEMO_COLLECTION},{LONG_DEMO_COLLECTION}"}
         # Finished past days of the database (records_YYYY-MM-DD) appear in History as saved hardware sessions; NHM_HARDWARE_HISTORY_IMPORT=off disables it.
         if env.get("NHM_HARDWARE_HISTORY_IMPORT", "on").lower() != "off":
             env = {**env, "NHM_HARDWARE_HISTORY_IMPORT": "on"}

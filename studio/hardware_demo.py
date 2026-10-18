@@ -292,14 +292,16 @@ class HardwareDemoService:
                        "source_state_sha256": _state_digest(state), "source_algorithm": previous.get("algorithm")}
 
     def prepare(self, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int,
-                initialisation: str = "FRESH_SEEDED", warm_start_run_id: str | None = None) -> dict[str, Any]:
+                initialisation: str = "FRESH_SEEDED", warm_start_run_id: str | None = None, cohort: str = "ORIGINAL") -> dict[str, Any]:
         """Validate and build everything that can fail on the caller's thread (data, windows, split, warm start). Nothing is trained."""
         if initialisation == "MODEL_V2_FINAL":       # pretrained V2 fine-tuning on resampled recorded windows: a different model family, built by studio.hardware_v2
             from studio import hardware_v2
 
-            return hardware_v2.prepare(self, owner, session_ids=session_ids, rounds=rounds, algorithm=algorithm, secagg_mode=secagg_mode, label_seed=label_seed)
+            return hardware_v2.prepare(self, owner, session_ids=session_ids, rounds=rounds, algorithm=algorithm, secagg_mode=secagg_mode, label_seed=label_seed, cohort=cohort)
         if initialisation not in ("FRESH_SEEDED", "WARM_START"):
             raise ValueError("unsupported starting model for HARDWARE_DEMO_MODEL_V1")
+        if cohort != "ORIGINAL":
+            raise ValueError("the realistic synthetic cohort applies to the pretrained-V2 hardware family (its synthetic peers); the tabular hardware family trains eight recorded blocks and has no synthetic peers")
         warm_state, warm_info = (None, None)
         if initialisation == "WARM_START":
             warm_state, warm_info = self._warm_start_state(owner, warm_start_run_id)

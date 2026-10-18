@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import type { FederationRunChoice } from '$lib/product/api';
-	import type { Initialisation, RunLength, SourceMode, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
+	import type { CohortId, Initialisation, RunLength, SourceMode, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
 	let { disabled = false, liveBlocked = false, backendEnabled = true, capabilities = null, dataSource = $bindable<'SYNTHETIC' | 'HARDWARE'>('SYNTHETIC'), preselectSession = null, onStartThree, onStartTen }: {
 		disabled?: boolean; liveBlocked?: boolean; backendEnabled?: boolean; capabilities?: StudioCapabilities | null; dataSource?: 'SYNTHETIC' | 'HARDWARE'; preselectSession?: string | null;
 		onStartThree: (choice: FederationRunChoice) => void; onStartTen: (choice: StudioRunChoice) => void } = $props();
@@ -30,6 +30,13 @@
 	// Training data: the synthetic cohort (default, unchanged) or readings recorded from the MongoDB hardware source.
 	const hardwareOffered = $derived(capabilities?.hardware_demo?.available === true);
 	const hardware = $derived(choice === 'HARDWARE' && hardwareOffered);
+	// The synthetic cohort: the frozen original (default, reproduces every recorded result) or the realistic one (variable rhythm, premature ectopic beats, motion artifacts, annotation-noisy labels).
+	// It supplies the eight training clients (or the seven peers of a recorded-hardware run) and the evaluation holdout. A History monitoring session regenerates the original cohort's site signal, so it stays on the original.
+	let cohortChoice = $state<CohortId>('ORIGINAL');
+	const cohortOptions = $derived(capabilities?.ten_round.cohorts ?? []);
+	const cohortOffered = $derived(cohortOptions.some((c) => c.id === 'REALISTIC'));
+	const realistic = $derived(cohortOffered && cohortChoice === 'REALISTIC' && !fromHistory);
+	const cohortNote = $derived(cohortOptions.find((c) => c.id === (realistic ? 'REALISTIC' : 'ORIGINAL'))?.description ?? '');
 	let algorithm = $state<'FEDAVG' | 'FEDPROX'>('FEDAVG');
 	let secaggMode = $state<'PLAIN' | 'SECAGG_SHADOW'>('PLAIN');
 	let initChoice = $state<Initialisation | null>(null);                           // null = follow the backend's default (pretrained V2); the user's choice then overrides it
@@ -39,7 +46,7 @@
 	const v2Rounds = $derived(capabilities?.ten_round.rounds_by_initialisation?.MODEL_V2_FINAL ?? [10]);
 	const v2ThreeUnsupported = $derived(inits.length > 0 && initialisation === 'MODEL_V2_FINAL' && length === 3 && !v2Rounds.includes(3));
 	/** The original frozen form: 3 rounds from the untrained start (or a backend that offers no starting-model choice). */
-	const original = $derived(!hardware && !fromHistory && length === 3 && (!inits.length || initialisation === 'FL_INIT_V2' || v2ThreeUnsupported));
+	const original = $derived(!hardware && !fromHistory && !realistic && length === 3 && (!inits.length || initialisation === 'FL_INIT_V2' || v2ThreeUnsupported));
 	const tenAvailable = $derived(capabilities?.ten_round.available === true);
 	const modes = $derived(capabilities?.ten_round.source_modes ?? ['CANONICAL_SYNTHETIC']);
 	const fedproxAvailable = $derived(capabilities?.ten_round.algorithms.includes('FEDPROX') === true);
@@ -47,10 +54,12 @@
 	const fedproxUnavailable = $derived(capabilities?.ten_round.unsupported?.FEDPROX ?? 'not advertised by the connected backend');
 	const shadowUnavailable = $derived(capabilities?.ten_round.unsupported?.SECAGG_SHADOW ?? 'not advertised by the connected backend');
 	const sessionNeedsV2 = $derived(fromHistory && length === 3 && initialisation !== 'MODEL_V2_FINAL');       // 3 rounds from the untrained start use the frozen product contract, which has no history source
-	const blocked = $derived(!backendEnabled || disabled || liveBlocked || !tenAvailable || (fromHistory && (!sessionPick || sessionNeedsV2)));
+	const realisticNeedsV2 = $derived(realistic && !hardware && length === 3 && initialisation !== 'MODEL_V2_FINAL');      // the frozen 3-round contract is defined on the original cohort only
+	const blocked = $derived(!backendEnabled || disabled || liveBlocked || !tenAvailable || realisticNeedsV2 || (fromHistory && (!sessionPick || sessionNeedsV2)));
 	const OPTIONS: { value: RunLength; title: string; tag: string }[] = [{ value: 3, title: '★ 3 ROUNDS', tag: 'DEFAULT' }, { value: 10, title: '10 ROUNDS', tag: 'EXTENDED' }];
 	const SOURCE_TEXT: Record<SourceMode, string> = { CANONICAL_SYNTHETIC: 'Canonical synthetic cohort — eight frozen synthetic clients.', LIVE_MONITORED_SITE_00: 'Live-monitored simulated site — the simulated monitoring stream of that site is genuinely executed and feeds it. This is NOT real patient physiology.' };
-	const sourceNote = $derived(fromHistory ? `Your synthetic monitoring session ${sessionPick ? sessionPick.slice(0, 13) + '…' : '—'} — its signal is regenerated from its frozen scenario (no new monitoring session, no new inference) and becomes the local data of your client, SITE_00; the other seven clients stay canonical synthetic. Labels are synthetic-assigned for the demonstration (a monitoring session has no scheduled engineering events), exactly as for recorded hardware. This is NOT real patient physiology.` : source === 'LIVE_MONITORED_SITE_00' ? `Live-monitored simulated ${siteLabel} — the simulated monitoring stream of ${siteLabel} is genuinely executed (real monitoring runtime, real inference) and its windows become that client's local data; the other seven clients stay canonical synthetic. This is NOT real patient physiology.` : SOURCE_TEXT[source]);
+	const kind = $derived(realistic ? 'realistic synthetic' : 'canonical synthetic');
+	const sourceNote = $derived(fromHistory ? `Your synthetic monitoring session ${sessionPick ? sessionPick.slice(0, 13) + '…' : '—'} — its signal is regenerated from its frozen scenario (no new monitoring session, no new inference) and becomes the local data of your client, SITE_00; the other seven clients stay canonical synthetic. Labels are synthetic-assigned for the demonstration (a monitoring session has no scheduled engineering events), exactly as for recorded hardware. This is NOT real patient physiology.` : source === 'LIVE_MONITORED_SITE_00' ? `Live-monitored simulated ${siteLabel} — the simulated monitoring stream of ${siteLabel} is genuinely executed (real monitoring runtime, real inference) and its windows become that client's local data; the other seven clients stay ${kind}. This is NOT real patient physiology.` : realistic ? 'Realistic synthetic cohort — eight synthetic clients with variable rhythm, ectopic beats and annotation-noisy labels.' : SOURCE_TEXT[source]);
 	function radioKey(e: KeyboardEvent) {
 		if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
 		e.preventDefault();
@@ -65,10 +74,19 @@
 		{#if hardwareOffered || historySessions.length}
 			<span class="cap">Training data</span>
 			<div class="opts data" role="radiogroup" aria-label="Training data">
-				<button type="button" role="radio" aria-checked={choice === 'SYNTHETIC'} class:on={choice === 'SYNTHETIC'} data-testid="data-source-synthetic" onclick={() => { choice = 'SYNTHETIC'; }}><b>SYNTHETIC COHORT</b><small>EIGHT FROZEN SYNTHETIC CLIENTS</small></button>
+				<button type="button" role="radio" aria-checked={choice === 'SYNTHETIC'} class:on={choice === 'SYNTHETIC'} data-testid="data-source-synthetic" onclick={() => { choice = 'SYNTHETIC'; }}><b>SYNTHETIC COHORT</b><small>{realistic ? 'EIGHT REALISTIC SYNTHETIC CLIENTS' : 'EIGHT FROZEN SYNTHETIC CLIENTS'}</small></button>
 				<button type="button" role="radio" aria-checked={choice === 'SESSION'} class:on={choice === 'SESSION'} data-testid="data-source-session" disabled={!historySessions.length} title={historySessions.length ? '' : 'Run a synthetic monitoring session to completion first'} onclick={() => { choice = 'SESSION'; }}><b>SYNTHETIC MONITORING</b><small>{historySessions.length ? 'COMPLETED · FROM HISTORY' : 'NO COMPLETED SESSION YET'}</small></button>
 				{#if hardwareOffered}<button type="button" role="radio" aria-checked={choice === 'HARDWARE'} class:on={choice === 'HARDWARE'} data-testid="data-source-hardware" onclick={() => { choice = 'HARDWARE'; }}><b>RECORDED HARDWARE</b><small>YOUR SAVED MONGODB SESSIONS</small></button>{/if}
 			</div>
+		{/if}
+		{#if cohortOffered && !fromHistory}
+			<span class="cap">Synthetic cohort</span>
+			<div class="opts data" role="radiogroup" aria-label="Synthetic cohort">
+				<button type="button" role="radio" aria-checked={!realistic} class:on={!realistic} data-testid="cohort-original" onclick={() => { cohortChoice = 'ORIGINAL'; }}><b>ORIGINAL</b><small>FROZEN · REPRODUCES RECORDED RESULTS</small></button>
+				<button type="button" role="radio" aria-checked={realistic} class:on={realistic} data-testid="cohort-realistic" onclick={() => { cohortChoice = 'REALISTIC'; }}><b>REALISTIC</b><small>HARDER · CLOSER TO REAL ECG · STILL SYNTHETIC</small></button>
+			</div>
+			<p class="help" data-testid="cohort-note">{cohortNote}{hardware ? ' For a recorded-hardware run it supplies the seven synthetic peers and the evaluation holdout (pretrained V2 start only).' : ''}</p>
+			{#if realisticNeedsV2}<p class="warn" role="status" data-testid="cohort-needs-v2">3 rounds from the untrained start use the frozen product contract, which is defined on the original cohort only. Choose the pretrained V2 start, 10 rounds, or the original cohort.</p>{/if}
 		{/if}
 		{#if !hardware && !original}
 		{#if fromHistory}
@@ -96,18 +114,18 @@
 		{/if}
 	</div>
 	{#if hardware}
-		<HardwareDemoStarter {capabilities} {disabled} rounds={length} preselect={preselectSession} />
+		<HardwareDemoStarter {capabilities} {disabled} rounds={length} preselect={preselectSession} cohort={realistic ? 'REALISTIC' : 'ORIGINAL'} />
 	{:else if original}
 		<RunConfigForm {disabled} {liveBlocked} {backendEnabled} onSubmit={onStartThree} />
 	{:else}
-		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: length, source_mode: fromHistory ? 'LIVE_MONITORED_SITE_00' : source, ...(!fromHistory && source === 'LIVE_MONITORED_SITE_00' && monitoredSite ? { monitored_site: monitoredSite } : {}), ...(fromHistory ? { signal_session_id: sessionPick } : {}), ...(inits.length ? { initialisation } : {}), ...(algorithm !== 'FEDAVG' ? { algorithm } : {}), ...(secaggMode !== 'PLAIN' ? { secagg_mode: secaggMode } : {}) }); }} aria-label={`${length === 3 ? 'Three' : 'Ten'}-round federation run configuration`}>
+		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: length, source_mode: fromHistory ? 'LIVE_MONITORED_SITE_00' : source, ...(!fromHistory && source === 'LIVE_MONITORED_SITE_00' && monitoredSite ? { monitored_site: monitoredSite } : {}), ...(fromHistory ? { signal_session_id: sessionPick } : {}), ...(inits.length ? { initialisation } : {}), ...(algorithm !== 'FEDAVG' ? { algorithm } : {}), ...(secaggMode !== 'PLAIN' ? { secagg_mode: secaggMode } : {}), ...(realistic ? { cohort: 'REALISTIC' as const } : {}) }); }} aria-label={`${length === 3 ? 'Three' : 'Ten'}-round federation run configuration`}>
 			<label><span>Algorithm</span><select bind:value={algorithm} disabled={!fedproxAvailable} data-testid="cfg10-algorithm"><option value="FEDAVG">FedAvg — sample-count-weighted averaging</option><option value="FEDPROX">FedProx — frozen μ 0.1</option></select></label>
 			<p class="help" data-testid="cfg10-algorithm-note">{!fedproxAvailable ? `FedProx is disabled: ${fedproxUnavailable}.` : algorithm === 'FEDPROX' ? 'Genuine proximal local objective against the current round-start global weights; μ 0.1.' : 'Genuine local BCE optimization with weighted FedAvg.'}</p>
 			<label><span>Aggregation / protection mode</span><select bind:value={secaggMode} disabled={!shadowAvailable} data-testid="cfg10-mode"><option value="PLAIN">Plain aggregation</option><option value="SECAGG_SHADOW">Round-1 SecAgg+ shadow verification</option></select></label>
 			<p class="help" data-testid="cfg10-mode-note">{!shadowAvailable ? `SecAgg+ shadow is disabled: ${shadowUnavailable}; an unsupported request is never silently reinterpreted.` : secaggMode === 'SECAGG_SHADOW' ? 'The real protected shadow is compared with the authoritative plain aggregate in round 1. It does not make anonymity or DP claims.' : 'Authoritative sample-count-weighted plain aggregation.'}</p>
 			<label><span>Run mode</span><select disabled data-testid="cfg10-run-type"><option>LIVE_RUN</option><option disabled>REPLAY — open a completed run instead</option></select></label>
 			<p class="help">LIVE_RUN performs genuine local optimization and federation for {length} rounds. A replay never trains: open a completed run from “Your federation runs”, or a recorded FL10 run, to replay it.</p>
-			<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Clients</dt><dd>8</dd></div><div><dt>Rounds</dt><dd>{length}</dd></div><div><dt>Base</dt><dd>{initialisation}</dd></div><div><dt>Evaluation</dt><dd>per committed round</dd></div></dl>
+			<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Clients</dt><dd>8</dd></div><div><dt>Rounds</dt><dd>{length}</dd></div><div><dt>Base</dt><dd>{initialisation}</dd></div><div><dt>Evaluation</dt><dd>per committed round</dd></div><div><dt>Cohort</dt><dd data-testid="cfg10-cohort">{realistic ? 'REALISTIC' : fromHistory ? 'ORIGINAL (history session)' : 'ORIGINAL'}</dd></div></dl>
 			{#if liveBlocked}<p class="warn" role="status">ONE LIVE FEDERATION RUN AT A TIME IN THIS ONE-LAPTOP DEMONSTRATION.</p>{/if}
 			<button type="submit" disabled={blocked} data-testid="cfg10-submit">Create and start {length}-round live run</button>
 		</form>

@@ -1,0 +1,90 @@
+{
+  "mode": "realistic-cohort",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "canonical": {
+    "run_id": "FL10RUN-66060AC986C0",
+    "defaults": {
+      "original_checked": "true",
+      "realistic_checked": "false",
+      "submit_sent_cohort_text": "ORIGINAL"
+    },
+    "chosen": {
+      "realistic_checked": "true",
+      "note": "Variable rhythm, premature ectopic beats with pauses, motion artifacts and annotation-noisy labels. Harder and closer to real ECG; still synthetic.",
+      "fixed_cohort": "REALISTIC",
+      "init": "MODEL_V2_FINAL"
+    },
+    "live": {
+      "badge": "SYNTHETIC COHORT · REALISTIC",
+      "sentence": "Realistic synthetic ECG on eight logical clients on one machine: variable rhythm, premature ectopic beats with pauses, motion artifacts, and annotation-noisy labels. Still synthetic: no real physiology.",
+      "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+      "clients": [
+        "SIM_FL_SITE_00",
+        "SIM_FL_SITE_01",
+        "SIM_FL_SITE_02",
+        "SIM_FL_SITE_03",
+        "SIM_FL_SITE_04",
+        "SIM_FL_SITE_05",
+        "SIM_FL_SITE_06",
+        "SIM_FL_SITE_07"
+      ],
+      "metric_auprc": "AUPRC0.484391",
+      "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 · 1433 windows · 16 participants",
+      "alerts": [],
+      "body_has_realistic_use": true,
+      "body_has_frozen_reuse": false
+    },
+    "overview": {
+      "limits": "improvement in ranking does not imply usable classification at the fixed threshold16 independent synthetic participants: all intervals are nominala negative or flat result is a valid completed experimentno extra training run, round selection or threshold change is permitted after seeing resultsSingle-machine federation of eight logical clients on simulated data; payload bytes are logical serialized sizes, not network traffic.The 16 evaluation participants (SIM_P000601-616) come from the realistic ECG generator: variable rhythm, ectopic beats that are premature with a pause, motion artifacts, and labels that are annotations with a few misses and false marks. They are disjoint from both training cohorts and every earlier evaluation cohort, and their digests are pinned in the committed manifest. The cohort was inspected once before a timing fix to the generator (see docs/realistic/REALISTIC_COHORT_V2.md), so it is fresh, not untouched. No round, threshold or candidate is selected from these scores. Same simulator family as the training clients: evidence about the pipeline, not about patients.",
+      "monitoring_link": "",
+      "cards": "SOURCELIVE RUN (this session)CANONICAL_SYNTHETIC · FL10RUN-66060AC986C0 STATUSCOMPLETEDweighted FedAvg · eight logical clients · 3 of 3 rounds committed ACCEPTED UPDATES248 per round expected EXAMPLE EXPOSURES2163721 unique windows × 3 rounds (repeated, not independent) FINAL CANDIDATE (R3)1016af00e7a5df5e…FL10_CANDIDATE_FL10RUN-66060AC986C0 · not promoted · not deployed SELECTED STATE R31016af00e7a5df5e…accepted 8 · loss 0.5225 · 7.66 s EVALUATION COHORT1433 windows16 participants · threshold 0.5 · no CAL_V2 · no round selection TIMINGNOT CAPTUREDmeasured wall clock, single machine"
+    }
+  },
+  "monitored": {
+    "run_id": "FL10RUN-E05B46F9FF83",
+    "defaults": {
+      "original_checked": "true",
+      "realistic_checked": "false",
+      "submit_sent_cohort_text": "ORIGINAL"
+    },
+    "chosen": {
+      "realistic_checked": "true",
+      "note": "Variable rhythm, premature ectopic beats with pauses, motion artifacts and annotation-noisy labels. Harder and closer to real ECG; still synthetic.",
+      "fixed_cohort": "REALISTIC",
+      "init": "MODEL_V2_FINAL"
+    },
+    "live": {
+      "badge": "SIMULATED SITE_02 · REALISTIC",
+      "sentence": "A genuinely executed simulated monitoring stream feeds SITE_02; the other seven clients are synthetic. No real physiology.",
+      "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+      "clients": [
+        "SIM_FL_SITE_00",
+        "SIM_FL_SITE_01",
+        "SIM_FL_SITE_02",
+        "SIM_FL_SITE_03",
+        "SIM_FL_SITE_04",
+        "SIM_FL_SITE_05",
+        "SIM_FL_SITE_06",
+        "SIM_FL_SITE_07"
+      ],
+      "metric_auprc": "AUPRC0.484391",
+      "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 · 1433 windows · 16 participants",
+      "alerts": [],
+      "body_has_realistic_use": true,
+      "body_has_frozen_reuse": false
+    },
+    "overview": {
+      "limits": "improvement in ranking does not imply usable classification at the fixed threshold16 independent synthetic participants: all intervals are nominala negative or flat result is a valid completed experimentno extra training run, round selection or threshold change is permitted after seeing resultsSingle-machine federation of eight logical clients on simulated data; payload bytes are logical serialized sizes, not network traffic.The 16 evaluation participants (SIM_P000601-616) come from the realistic ECG generator: variable rhythm, ectopic beats that are premature with a pause, motion artifacts, and labels that are annotations with a few misses and false marks. They are disjoint from both training cohorts and every earlier evaluation cohort, and their digests are pinned in the committed manifest. The cohort was inspected once before a timing fix to the generator (see docs/realistic/REALISTIC_COHORT_V2.md), so it is fresh, not untouched. No round, threshold or candidate is selected from these scores. Same simulator family as the training clients: evidence about the pipeline, not about patients.",
+      "monitoring_link": "Source mode: LIVE-MONITORED SIMULATED ECG — NOT A REAL PHYSIOLOGICAL PATIENT. Monitoring sessions executed: 1; buffer reused for 3 rounds. This is a simulated stream, not real physiology.",
+      "cards": "SOURCELIVE RUN (this session)LIVE_MONITORED_SITE_00 · FL10RUN-E05B46F9FF83 STATUSCOMPLETEDweighted FedAvg · eight logical clients · 3 of 3 rounds committed ACCEPTED UPDATES248 per round expected EXAMPLE EXPOSURES2163721 unique windows × 3 rounds (repeated, not independent) FINAL CANDIDATE (R3)1016af00e7a5df5e…FL10_CANDIDATE_FL10RUN-E05B46F9FF83 · not promoted · not deployed SELECTED STATE R31016af00e7a5df5e…accepted 8 · loss 0.5225 · 15.39 s EVALUATION COHORT1433 windows16 participants · threshold 0.5 · no CAL_V2 · no round selection TIMINGNOT CAPTUREDmeasured wall clock, single machine"
+    }
+  }
+}

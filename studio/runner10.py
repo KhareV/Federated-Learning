@@ -19,10 +19,10 @@ from typing import Any
 
 from fl10.runner import atomic_write, load_state
 from product.federation.artifact_store import FederationArtifactStore
+from product.federation.base import AggregationMode, Algorithm
 from product.federation.events import FederationEmitter
 from product.federation.journal import FederationEventJournal
-from product.federation.base import AggregationMode, Algorithm
-from studio import v2_init
+from studio import cohorts, v2_init
 from studio.events10 import Fl10EventTranslator
 from studio.observer import EvaluationObserver
 from studio.specs import comparison_pair
@@ -55,6 +55,7 @@ class Job:
     secagg_mode: str = "PLAIN"
     signal_session: dict[str, Any] | None = None  # source mode B only: a COMPLETED History monitoring session whose regenerated windows become the chosen site's local data (instead of monitoring a cohort site now)
     monitored_site: int = 0                      # source mode B only: which canonical cohort site (0..7) is genuinely live-monitored (default SITE_00, the original behaviour)
+    cohort: str = cohorts.ORIGINAL               # ORIGINAL (frozen NHM_FL10_001 cohort, default) | REALISTIC (realistic synthetic cohort): the training clients, the evaluation holdout and the wording that goes with them
     status: str = "CREATED"                      # CREATED | RUNNING | COMPLETED | FAILED
     phase: str = "CREATED"
     current_round: int = 0
@@ -89,15 +90,16 @@ class StudioFl10Service:
         return self.root / run_id
 
     def _save(self, job: Job) -> None:
-        meta = {"run_id": job.run_id, "owner": job.owner, "mode": job.mode, "init": job.init, "base_audit": job.base_audit, "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "monitored_site": job.monitored_site, "signal_session": job.signal_session, "created_at": job.created_at, "status": job.status, "phase": job.phase, "current_round": job.current_round,
+        meta = {"run_id": job.run_id, "owner": job.owner, "mode": job.mode, "init": job.init, "base_audit": job.base_audit, "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "monitored_site": job.monitored_site, "signal_session": job.signal_session, "cohort": job.cohort, "created_at": job.created_at, "status": job.status, "phase": job.phase, "current_round": job.current_round,
                 "failure": job.failure, "candidate": job.candidate, "export_status": job.export_status, "run_length": job.rounds, "engine": "FL10_10R"}
         atomic_write(self.job_dir(job.run_id) / "meta.json", (json.dumps(meta, indent=1, sort_keys=True) + "\n").encode())
 
     def _load_existing(self) -> None:
         for path in sorted(self.root.glob("FL10RUN-*/meta.json")):
             meta = json.loads(path.read_text())
-            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], rounds=int(meta.get("run_length", 10)), init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), algorithm=meta.get("algorithm", "FEDAVG"), secagg_mode=meta.get("secagg_mode", "PLAIN"), monitored_site=int(meta.get("monitored_site", 0)), signal_session=meta.get("signal_session"), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
+            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], rounds=int(meta.get("run_length", 10)), init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), algorithm=meta.get("algorithm", "FEDAVG"), secagg_mode=meta.get("secagg_mode", "PLAIN"), monitored_site=int(meta.get("monitored_site", 0)), signal_session=meta.get("signal_session"), cohort=meta.get("cohort", cohorts.ORIGINAL), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
                       failure=meta.get("failure"), candidate=meta.get("candidate"), export_status=meta.get("export_status", "NOT_STARTED"))
+            self._register_cohort(job)
             journal = FederationEventJournal(job.run_id)
             for event in self.events.read_events(job.run_id):
                 journal.append(event)
@@ -108,6 +110,12 @@ class StudioFl10Service:
             journal.close()
             job.journal = journal
             self.jobs[job.run_id] = job
+
+    def _register_cohort(self, job: Job) -> None:
+        """A run on another cohort is scored, paired and labelled on that cohort's holdout (the original cohort needs no registration: it is the observer's default)."""
+        if job.cohort != cohorts.ORIGINAL and self.observer is not None:
+            spec = cohorts.spec(job.cohort)
+            self.observer.set_run_cohort(job.run_id, cohorts.holdout_provider(job.cohort), spec.evaluation_cohort_id, spec.use_label)
 
     # ---- API ------------------------------------------------------------------------------------------------------------
     def owner_of(self, run_id: str) -> str | None:
@@ -145,7 +153,11 @@ class StudioFl10Service:
             await asyncio.wait(tasks, timeout=timeout)
 
     async def create(self, owner: str, mode: str, init: str = v2_init.INIT_FRESH, rounds: int = 10,
-                     algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN", monitored_site: int = 0, signal_session: dict[str, Any] | None = None) -> Job:
+                     algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN", monitored_site: int = 0, signal_session: dict[str, Any] | None = None, cohort: str = cohorts.ORIGINAL) -> Job:
+        if cohort not in cohorts.COHORTS:
+            raise StudioRunError("INVALID_REQUEST", "cohort must be ORIGINAL or REALISTIC")
+        if cohort != cohorts.ORIGINAL and signal_session is not None:
+            raise StudioRunError("INVALID_REQUEST", "a History monitoring session regenerates the original cohort's site signal; it cannot be combined with the realistic cohort")
         if rounds not in (3, 10):
             raise StudioRunError("INVALID_REQUEST", "the extended engine runs 3 or 10 rounds")
         if rounds == 3 and init != v2_init.INIT_V2_FINAL:
@@ -165,10 +177,11 @@ class StudioFl10Service:
         run_id = f"FL10RUN-{secrets.token_hex(6).upper()}"
         if algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
             raise StudioRunError("INVALID_REQUEST", "algorithm or aggregation mode is unsupported")
-        job = Job(run_id=run_id, owner=owner, mode=mode, rounds=rounds, init=init, algorithm=algorithm, secagg_mode=secagg_mode, monitored_site=monitored_site, signal_session=signal_session, created_at=_now(), loop=asyncio.get_running_loop())
+        job = Job(run_id=run_id, owner=owner, mode=mode, rounds=rounds, init=init, algorithm=algorithm, secagg_mode=secagg_mode, monitored_site=monitored_site, signal_session=signal_session, cohort=cohort, created_at=_now(), loop=asyncio.get_running_loop())
+        self._register_cohort(job)
         job.journal = FederationEventJournal(run_id)
         job.emitter = FederationEmitter(run_id, lambda: time.time_ns() // 1000, [job.journal.append, lambda e: self.events.append_event(run_id, e)], 0)
-        job.translator = Fl10EventTranslator(job.emitter, lambda fn: job.loop.call_soon_threadsafe(fn), planned_rounds=rounds, client_ids=CLIENT_IDS, local_examples={c: 0 for c in CLIENT_IDS}, algorithm=Algorithm(algorithm), secagg_mode=AggregationMode(secagg_mode))
+        job.translator = Fl10EventTranslator(job.emitter, lambda fn: job.loop.call_soon_threadsafe(fn), planned_rounds=rounds, client_ids=cohorts.spec(cohort).client_ids, local_examples={c: 0 for c in cohorts.spec(cohort).client_ids}, algorithm=Algorithm(algorithm), secagg_mode=AggregationMode(secagg_mode))
         self.jobs[run_id] = job
         self._save(job)
         job.translator.created()
@@ -220,7 +233,7 @@ class StudioFl10Service:
             initial_state, initialisation = v2_init.load_v2_final()
             job.base_audit = initialisation
             self._save(job)
-        _, datasets, manifest = build_cohort()
+        datasets, manifest = cohorts.training(job.cohort) if job.cohort != cohorts.ORIGINAL else build_cohort()[1:]
         monitored: dict[str, Any] | None = None
         live = None
         if job.mode == "B":
@@ -230,7 +243,16 @@ class StudioFl10Service:
 
             site = job.monitored_site
             profile = cohort_profiles()[site]
-            if job.signal_session is not None:
+            if job.cohort == cohorts.REALISTIC:
+                from simulation import fl_cohort_realistic_v2 as realistic_cohort
+                from studio import realistic_monitor
+
+                profile = realistic_cohort.train_profile(site)
+                self._set_phase(job, "MONITORING_SITE_00")       # phase id kept for compatibility; the page names the monitored site from the run descriptor
+                monitored = aio.run(realistic_monitor.monitor_site(self._inference_factory, site, session_id=f"LIVELINK-{job.run_id}"))
+                live = realistic_monitor.dataset_from_windows(monitored["windows"], profile)
+                parity = realistic_monitor.parity(monitored, live, profile, datasets[site].dataset_sha256) | {"inference_http_statuses": monitored["inference_http_statuses"]}
+            elif job.signal_session is not None:
                 # The signal is a COMPLETED monitoring session from History: its windows are regenerated deterministically (no new monitoring session, no new inference).
                 from studio import session_source
 
@@ -268,7 +290,7 @@ class StudioFl10Service:
         self._set_phase(job, "TRAINING")
         pretrained = {"initial_state": initial_state, "initialisation": initialisation} if initial_state is not None else {}
         if job.mode == "A":
-            report = runner.run_training(mode="A", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, rounds=job.rounds, require_prefix_parity=initial_state is None and job.algorithm == "FEDAVG", progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), algorithm=job.algorithm, secagg_mode=job.secagg_mode, **pretrained)
+            report = runner.run_training(mode="A", run_id=job.run_id, out_dir=run_dir, datasets=datasets, manifest=manifest, rounds=job.rounds, require_prefix_parity=initial_state is None and job.algorithm == "FEDAVG" and job.cohort == cohorts.ORIGINAL, progress=progress, git_commit=git_head(), protocol_sha256=protocol_sha(), algorithm=job.algorithm, secagg_mode=job.secagg_mode, **pretrained)
         else:
             from final_showcase import link_trace
             from fl10.trace import Fl10TrainerTap

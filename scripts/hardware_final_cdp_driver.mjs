@@ -389,6 +389,34 @@ if (MODE === 'scenario-a') {
 	const replay = await ev(`({ controls: !!document.querySelector('[data-testid="fed-replay-controls"]'), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,200)) })`);
 	await shot('hs_replay');
 	Object.assign(out, { session_id: sessionId, run_id: runId, source_note: note, live, overview, replay });
+} else if (MODE === 'realistic-cohort') {
+	// The synthetic-cohort option, through the real starter: the original cohort is the default, REALISTIC is an explicit choice, and the run it starts is described, evaluated and labelled as realistic.
+	const realisticRun = async (tag, monitoredSite) => {
+		await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="cohort-realistic"]')`, 120000);
+		await waitFor(`!!document.querySelector('[data-testid="cfg10-submit"]')`, 60000);
+		const defaults = { original_checked: await attr('cohort-original', 'aria-checked'), realistic_checked: await attr('cohort-realistic', 'aria-checked'), submit_sent_cohort_text: await value('cfg10-cohort') };
+		await clickId('cohort-realistic');
+		const chosen = { realistic_checked: await attr('cohort-realistic', 'aria-checked'), note: await value('cohort-note'), fixed_cohort: await value('cfg10-cohort'), init: await ev(`document.querySelector('[data-testid="cfg10-init"]')?.value ?? null`) };
+		if (monitoredSite !== undefined) { await setSelect('[data-testid="cfg10-source"]', 'LIVE_MONITORED_SITE_00'); await waitFor(`!!document.querySelector('[data-testid="cfg10-site"]')`, 30000); await setSelect('[data-testid="cfg10-site"]', String(monitoredSite)); }
+		await shot(`rc_form_${tag}`);
+		await clickId('cfg10-submit');
+		await waitFor(`location.pathname === '/app/federation/live' && /^FL10RUN-/.test(new URLSearchParams(location.search).get('run') || '')`, 120000);
+		const runId = await ev(`new URLSearchParams(location.search).get('run')`);
+		await waitFor(`(document.querySelector('[data-testid="run-status"]')?.textContent || '').includes('COMPLETED')`, 1500000);
+		await waitFor(`!!document.querySelector('[data-testid="metric-AUPRC"]') && !/NOT YET AVAILABLE|EVALUATING|QUEUED/.test(document.querySelector('[data-testid="metric-AUPRC"]').textContent)`, 600000).catch(() => {});
+		await sleep(4000);
+		const live = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+			return { badge: t('source-badge'), sentence: t('source-sentence'), status_line: t('run-status'), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map(x=>x.getAttribute('data-client')),
+			metric_auprc: t('metric-AUPRC'), metric_cohort: t('metric-cohort'), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)),
+			body_has_realistic_use: /REALISTIC SYNTHETIC EVALUATION COHORT/.test(document.body.innerText), body_has_frozen_reuse: /REUSED SYNTHETIC DIAGNOSTIC EVALUATION/.test(document.body.innerText) }; })()`);
+		await shot(`rc_live_${tag}`);
+		await clickId('atab-overview').catch(() => {}); await sleep(1500);
+		const overview = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim(); return { limits: t('limits'), monitoring_link: t('monitoring-link'), cards: t('overview-cards') }; })()`);
+		await shot(`rc_overview_${tag}`);
+		return { run_id: runId, defaults, chosen, live, overview };
+	};
+	out.canonical = await realisticRun('canonical');
+	out.monitored = await realisticRun('monitored', 2);
 } else if (MODE === 'ui-shots') {
 	// Visual review of the federation starter in every source-mode state (full page, desktop) plus the phone width.
 	const clickText = (text) => ev(`(() => { const b=[...document.querySelectorAll('button')].find(x=>x.textContent.trim()===${JSON.stringify(text)} && !x.disabled); if(!b) return false; b.click(); return true; })()`);

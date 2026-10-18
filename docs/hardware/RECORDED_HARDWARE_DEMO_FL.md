@@ -33,3 +33,6 @@ The eight clients are logical partitions of recorded data. They do not represent
 ```
 
 For the physical demonstration, start the ESP32 and confirm Render is adding documents to the current `records_YYYY-MM-DD` collection. Then start NHM monitoring. The start call establishes a high-water mark, so only documents inserted afterward appear. Starting NHM first is also supported: it remains `WAITING FOR DATA` until the ESP32 begins writing. Stop ends only the owner-scoped NHM session; it does not stop the ESP32 or modify Atlas.
+
+## Synthetic cohort option for the pretrained-V2 family
+A pretrained-V2 recorded-hardware run can take its seven synthetic peers, and the evaluation holdout it is scored on, from the **realistic synthetic cohort** instead of the original one (`cohort: "REALISTIC"` in the start request; the starter shows it as a cohort choice). Your recording is unchanged: client 00 with its assigned labels. The tabular starts (fresh, warm start) have no synthetic peers and refuse the option. See `docs/realistic/REALISTIC_COHORT_V2.md`. The frozen round-1 SecAgg+ size rule (largest client 93 windows) holds for both cohorts.

@@ -70,6 +70,7 @@ def main() -> int:
     parser.add_argument("--journey", action="store_true", help="full simulated-hardware journey: sketch-faithful emulator -> local Render replica -> Atlas rehearsal DB -> live monitoring, recording, History, Observatory replay + trace, tabular and pretrained-V2 FL, high-gain negative case")
     parser.add_argument("--demo-session", action="store_true", help="the prerecorded DEMO hardware session: seeded in its own Atlas rehearsal collection, imported into History, Observatory replay + trace, pretrained-V2 and tabular runs")
     parser.add_argument("--ui-shots", action="store_true", help="screenshots of the federation starter in every source-mode state")
+    parser.add_argument("--realistic-cohort", action="store_true", help="the synthetic-cohort option through the real starter: a realistic 3-round pretrained run and a realistic live-monitored site run")
     parser.add_argument("--history-source", action="store_true", help="a completed simulated monitoring session from History as the signal of one federation client")
     parser.add_argument("--hardware-v2", action="store_true", help="pretrained-V2 recorded-hardware path: two recordings, Observatory replay + trace, V2 run, generalisation tab, federation journal replay")
     args = parser.parse_args()
@@ -146,6 +147,32 @@ def main() -> int:
                 running.shutdown()
             print(json.dumps({"status": "UI_SHOTS_DONE", "dir": str(out / "shots")}))
             return 0
+        if args.realistic_cohort:
+            running, origin = stack(env, workspace, python)
+            try:
+                rc = drive("realistic-cohort", origin, Path(args.users_file), out / "realistic_cohort.json", out / "rc_shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            checks = {}
+            for tag in ("canonical", "monitored"):
+                r = rc[tag]
+                live, ov = r["live"], r["overview"]
+                checks |= {
+                    f"{tag}_original_is_the_default": r["defaults"]["original_checked"] == "true" and r["defaults"]["realistic_checked"] == "false",
+                    f"{tag}_realistic_choice_is_kept": r["chosen"]["realistic_checked"] == "true" and r["chosen"]["fixed_cohort"] == "REALISTIC" and "premature ectopic beats" in r["chosen"]["note"],
+                    f"{tag}_run_completed": "COMPLETED" in live["status_line"],
+                    f"{tag}_badge_names_the_realistic_cohort": "REALISTIC" in live["badge"],
+                    f"{tag}_eight_site_clients": live["clients"] == [f"SIM_FL_SITE_0{i}" for i in range(8)],
+                    f"{tag}_scored_on_the_realistic_holdout": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2" in live["metric_cohort"] and live["body_has_realistic_use"] and not live["body_has_frozen_reuse"],
+                    f"{tag}_metrics_shown": bool(live["metric_auprc"]) and not any(w in live["metric_auprc"] for w in ("NOT YET", "EVALUATING", "QUEUED")),
+                    f"{tag}_overview_states_the_realistic_use": "realistic ECG generator" in ov["limits"],
+                    f"{tag}_no_alerts": not live["alerts"],
+                }
+            checks["monitored_site_overview_names_the_link"] = "Source mode:" in rc["monitored"]["overview"]["monitoring_link"] and "simulated stream" in rc["monitored"]["overview"]["monitoring_link"]
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "realistic_cohort", "checks": checks, "canonical_run": rc["canonical"]["run_id"], "monitored_run": rc["monitored"]["run_id"]}
+            (out / "realistic_cohort_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
         if args.history_source:
             running, origin = stack(env, workspace, python)
             try:

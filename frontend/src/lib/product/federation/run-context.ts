@@ -1,7 +1,7 @@
 // RUN CONTEXT: one typed, fail-closed interpretation of a validated run descriptor (StudioRun) into the INDEPENDENT axes the UI needs.
 // Nothing here is scientific logic and nothing is guessed from an id prefix: every field comes from the backend-validated descriptor.
 // An id prefix is only used for a clearly marked PROVISIONAL context while the descriptor of the selected run has not arrived yet.
-import type { StudioRun } from '../studio/types';
+import type { CohortId, StudioRun } from '../studio/types';
 
 /** Where the training windows come from. */
 export type DataProvenance = 'SYNTHETIC_COHORT' | 'SIMULATED_MONITORED_SITE_00' | 'RECORDED_HARDWARE' | 'UNKNOWN';
@@ -15,6 +15,8 @@ export type ClientNamespace = 'SIM_FL_SITE' | 'RECORDED_DEMO_CLIENT' | 'RECORDED
 export interface Capability { available: boolean; reason: string | null }
 export interface RunContext {
 	provisional: boolean;
+	/** Which synthetic cohort supplies the training clients / peers and the evaluation holdout (ORIGINAL = the frozen cohort, also for every run that predates the option). */
+	cohort: CohortId;
 	provenance: DataProvenance;
 	execution: ExecutionMode;
 	labels: LabelProvenance;
@@ -48,7 +50,7 @@ const CLOSED: RunContext['capabilities'] = {
 export function provisionalContext(runId: string | null | undefined): RunContext {
 	const hardware = (runId ?? '').startsWith('HDFLRUN-');
 	return {
-		provisional: true, provenance: hardware ? 'RECORDED_HARDWARE' : 'UNKNOWN', execution: 'UNKNOWN', labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'UNKNOWN', lineage: 'UNKNOWN',
+		provisional: true, cohort: 'ORIGINAL', provenance: hardware ? 'RECORDED_HARDWARE' : 'UNKNOWN', execution: 'UNKNOWN', labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'UNKNOWN', lineage: 'UNKNOWN',
 		clients: hardware ? 'RECORDED_DEMO_CLIENT' : 'UNKNOWN', badge: hardware ? 'RECORDED HARDWARE' : 'LOADING', dataSentence: 'Loading the selected run…', capabilities: CLOSED
 	};
 }
@@ -66,23 +68,28 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 	const modelId = run.base_model?.model_id ?? null;
 	const warm = (run.base_model as { initialisation?: string } | null)?.initialisation === 'WARM_START';
 	const lineage: ModelLineage = hardware ? (modelId === 'MODEL_V2_FINAL' ? 'HARDWARE_V2_PRETRAINED' : warm ? 'HARDWARE_DEMO_WARM_START' : 'HARDWARE_DEMO_FRESH') : modelId === 'MODEL_V2_FINAL' ? 'MODEL_V2_FINAL' : modelId === 'FL_INIT_V2' ? 'FL_INIT_V2' : 'UNKNOWN';
+	const cohort: CohortId = run.cohort === 'REALISTIC' ? 'REALISTIC' : 'ORIGINAL';
+	const realistic = cohort === 'REALISTIC';
 	const recorded = execution === 'RECORDED_EVIDENCE';
 	const live = execution === 'LIVE_TRAINING';
 	const badge = hardware ? 'RECORDED HARDWARE' : recorded ? 'RECORDED SYNTHETIC EVIDENCE' : execution === 'EVENT_REPLAY' ? 'REPLAY' : provenance === 'SIMULATED_MONITORED_SITE_00' ? run.signal_session_id ? `HISTORY SESSION · SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : `SIMULATED SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : 'SYNTHETIC COHORT';
+	const cohortBadge = realistic && !hardware ? `${badge} · REALISTIC` : badge;
 	const dataSentence = hardware
 		? lineage === 'HARDWARE_V2_PRETRAINED'
-			? 'Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven canonical synthetic peers on one machine.'
+			? 'Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven ' + (realistic ? 'realistic' : 'canonical') + ' synthetic peers on one machine.'
 			: 'Your recorded telemetry windows (real features) with deterministic synthetic labels, split across eight logical clients on one machine.'
 		: provenance === 'SIMULATED_MONITORED_SITE_00'
 			? run.signal_session_id
 				? `The signal of your own simulated monitoring session (regenerated from its frozen scenario) is the local data of SITE_${String(run.monitored_site ?? 0).padStart(2, '0')} with synthetic-assigned labels; the other seven clients are canonical synthetic. No real physiology.`
 				: `A genuinely executed simulated monitoring stream feeds SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}; the other seven clients are synthetic. No real physiology.`
-			: 'Synthetic engineering data on eight logical clients on one machine. No real physiology.';
+			: realistic
+				? 'Realistic synthetic ECG on eight logical clients on one machine: variable rhythm, premature ectopic beats with pauses, motion artifacts, and annotation-noisy labels. Still synthetic: no real physiology.'
+				: 'Synthetic engineering data on eight logical clients on one machine. No real physiology.';
 	return {
-		provisional: false, provenance, execution, lineage,
+		provisional: false, cohort, provenance, execution, lineage,
 		labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'SYNTHETIC_ENGINEERING_EVENTS',
 		clients: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? 'RECORDED_CLIENT_PLUS_SIM_PEERS' : 'RECORDED_DEMO_CLIENT') : 'SIM_FL_SITE',
-		badge, dataSentence,
+		badge: cohortBadge, dataSentence,
 		capabilities: {
 			ownerBoundClient: !hardware && live ? yes() : no(hardware ? 'Every recorded-hardware client holds your own recorded windows; there is no single owner-bound client.' : 'Only a live run executes on behalf of the signed-in owner.'),
 			generalisation: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? yes() : no(NA_HARDWARE_GENERALISATION)) : recorded ? no(NA_RECORDED_GENERALISATION) : yes(),

@@ -23,7 +23,7 @@ from api.product_app_v1_1 import WS_FORBIDDEN, WS_NOT_FOUND, WS_POLICY_VIOLATION
 from product.api.errors import ProductError, ProductErrorCode
 from product.auth.websocket import authenticate_live_websocket
 from simulation.fl_cohort_v1 import cohort_profiles
-from studio import STUDIO_ID, g1_cohort, v2_init
+from studio import STUDIO_ID, cohorts, g1_cohort, v2_init
 from studio.constants import (
     CLAIM_BOUNDARY,
     COHORT_USE_DETAIL,
@@ -92,6 +92,8 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         return {"studio_id": STUDIO_ID, "run_lengths": list(RUN_LENGTHS), "default_run_length": 3,
                 "ten_round": {"available": True, "engine": "FL10_10R", "rounds_by_initialisation": {"FL_INIT_V2": [10], "MODEL_V2_FINAL": [3, 10]}, "default_initialisation": v2_init.INIT_V2_FINAL, "initialisations": [{"id": k, "label": v2_init.INIT_LABELS[k], "default": k == v2_init.INIT_V2_FINAL} for k in v2_init.INITS], "source_modes": list(MODES.values()), "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
                               "unsupported": {}, "expected_updates": 80,
+                              "cohorts": [cohorts.describe(c) | {"default": c == cohorts.DEFAULT} for c in cohorts.COHORTS],
+                              "cohort_note": "The 3-round untrained run uses the frozen product contract, which is defined on the original cohort only; the realistic cohort is available for 10 rounds and for 3 rounds from the pretrained V2 start.",
                               "monitored_sites": [{"index": i, "client_id": f"SIM_FL_SITE_{i:02d}", "label": f"SITE_{i:02d}", "profile": cohort_profiles()[i].coverage[0]} for i in range(8)]},
                 "three_round": {"available": True, "engine": "PRODUCT_3R", "route": FEDERATION_RUNS, "expected_updates": 24},
                 "hardware_demo": {"available": hasattr(app.state, "hardware_sessions"), "source_mode": "RECORDED_HARDWARE_DEMO", "model": MODEL_ID,
@@ -140,7 +142,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     @app.post(f"{STUDIO}/hardware-demo/runs")
     async def start_hardware_demo(request: Request, body: dict[str, Any]) -> dict[str, Any]:
         user = await identity(request)
-        allowed = {"session_ids", "run_length", "algorithm", "secagg_mode", "label_seed", "initialisation", "warm_start_run_id"}
+        allowed = {"session_ids", "run_length", "algorithm", "secagg_mode", "label_seed", "initialisation", "warm_start_run_id", "cohort"}
         if set(body) - allowed or not isinstance(body.get("session_ids"), list):
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "invalid hardware demo request")
         loop = asyncio.get_running_loop()
@@ -150,7 +152,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
                 session_ids=body["session_ids"], rounds=body.get("run_length", 3),
                 algorithm=body.get("algorithm", "FEDAVG"), secagg_mode=body.get("secagg_mode", "PLAIN"),
                 label_seed=body.get("label_seed", 20261015),
-                initialisation=body.get("initialisation", "FRESH_SEEDED"), warm_start_run_id=body.get("warm_start_run_id"),
+                initialisation=body.get("initialisation", "FRESH_SEEDED"), warm_start_run_id=body.get("warm_start_run_id"), cohort=body.get("cohort", cohorts.DEFAULT),
             )
         except PermissionError as error:
             raise ProductError(ProductErrorCode.FORBIDDEN, str(error)) from error
@@ -182,10 +184,13 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         if rounds == 3 and body.get("initialisation") != v2_init.INIT_V2_FINAL:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, f"3-round runs from the untrained start use the frozen product contract: POST {FEDERATION_RUNS}")
         mode_names = {v: k for k, v in MODES.items()}
-        if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation", "monitored_site", "signal_session_id"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
+        if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation", "monitored_site", "signal_session_id", "cohort"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "run_length must be 10 (or 3 with initialisation MODEL_V2_FINAL) and source_mode CANONICAL_SYNTHETIC or LIVE_MONITORED_SITE_00")
         if body.get("algorithm", "FEDAVG") not in ("FEDAVG", "FEDPROX") or body.get("secagg_mode", "PLAIN") not in ("PLAIN", "SECAGG_SHADOW") or body.get("run_type", "LIVE_RUN") != "LIVE_RUN":
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "unsupported Studio algorithm, aggregation mode, or run type")
+        cohort = body.get("cohort", cohorts.DEFAULT)
+        if cohort not in cohorts.COHORTS:
+            raise ProductError(ProductErrorCode.INVALID_REQUEST, "cohort must be ORIGINAL or REALISTIC")
         resolved = await identity_resolver(request)
         store.upsert_user(resolved)
         signal_session = None
@@ -198,7 +203,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
                 raise _as_product_error(StudioRunError(error.code, str(error.detail))) from error
         try:
             job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")], body.get("initialisation", "FL_INIT_V2"), rounds,
-                                                body.get("algorithm", "FEDAVG"), body.get("secagg_mode", "PLAIN"), body.get("monitored_site", 0), signal_session)
+                                                body.get("algorithm", "FEDAVG"), body.get("secagg_mode", "PLAIN"), body.get("monitored_site", 0), signal_session, cohort)
             job = await service.runner10.start(user, job.run_id)
         except StudioRunError as error:
             raise _as_product_error(error) from error

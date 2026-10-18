@@ -60,14 +60,21 @@ CLAIM = "RECORDED_HARDWARE_RESAMPLED_WINDOWS_WITH_SYNTHETIC_ASSIGNED_LABELS_V2_F
 COHORT_USE = "DIAGNOSTIC HOLDOUT BLOCK OF THE RECORDING (time-purged, same sessions as training) — NOT AN INDEPENDENT TEST"
 
 
-def peer_datasets() -> list[LocalDataset]:
-    """The seven canonical synthetic peers (SIM_FL_SITE_01..07), built once per process by the unchanged cohort builder (about 12 s the first time)."""
+def peer_datasets(cohort: str = "ORIGINAL") -> list[LocalDataset]:
+    """The seven synthetic peers of the chosen cohort, built once per process: the canonical ones (SIM_FL_SITE_01..07, unchanged cohort builder, about 12 s the first time) or the realistic ones (SIM_RFL_SITE_01..07)."""
     with _PEERS_LOCK:
-        if "peers" not in _PEERS:
-            from federated.wearable_fl_runner_v1 import build_cohort
+        if cohort not in _PEERS:
+            if cohort == "REALISTIC":
+                from simulation import fl_cohort_realistic_v2 as realistic
 
-            _PEERS["peers"] = build_cohort()[1][1:]
-        return list(_PEERS["peers"])
+                _PEERS[cohort] = [realistic.build_dataset(p) for p in realistic.train_profiles()[1:]]
+            elif cohort == "ORIGINAL":
+                from federated.wearable_fl_runner_v1 import build_cohort
+
+                _PEERS[cohort] = build_cohort()[1][1:]
+            else:
+                raise ValueError("cohort must be ORIGINAL or REALISTIC")
+        return list(_PEERS[cohort])
 
 
 def _complete(event: dict[str, Any]) -> bool:
@@ -150,7 +157,7 @@ def _dataset(client: str, windows: list[dict[str, Any]], labels: dict[str, int],
     return LocalDataset(client, client, ", ".join(session_ids), inputs, y, tuple(edges), counts, dataset_semantic_sha(inputs, y, edges))
 
 
-def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int, **_: Any) -> dict[str, Any]:
+def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int, cohort: str = "ORIGINAL", **_: Any) -> dict[str, Any]:
     """Validate and build everything that can fail on the caller's thread. Nothing is trained."""
     if rounds not in (3, 10) or algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
         raise ValueError("unsupported hardware demo configuration")
@@ -183,7 +190,7 @@ def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algor
     if {holdout_labels[w["window_id"]] for w in holdout_flat} != {0, 1}:
         raise ValueError("INSUFFICIENT_V2_WINDOWS: the holdout block cannot provide both synthetic classes")
     mine = _dataset(HARDWARE_CLIENT_ID, used, train_labels, session_ids)
-    peers = peer_datasets()
+    peers = peer_datasets(cohort)
     datasets = [mine, *peers]                      # ONE recorded client + seven canonical synthetic peers
     holdout = [_dataset(f"HOLDOUT_{i:02d}", rows, holdout_labels, [sid]) for i, (sid, rows) in enumerate(holdout_sets) if rows]
     run_id = f"HDFLRUN-{secrets.token_hex(6).upper()}"
@@ -210,7 +217,7 @@ def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algor
                    "base_audit": {k: audit[k] for k in ("model_id", "checkpoint_sha256", "state_sha256", "state_entries", "architecture_id", "training_target_of_checkpoint")}}
     return {"engine": ENGINE_ID, "owner": owner, "run_id": run_id, "session_ids": session_ids, "rounds": rounds, "algorithm": algorithm, "secagg_mode": secagg_mode, "label_seed": label_seed,
             "initialisation": MODEL_ID, "warm_state": None, "warm_info": model_block["base_audit"], "records": records, "snapshot": snapshot, "dataset": dataset, "initial_state": state, "v2_audit": audit,
-            "datasets": datasets, "holdout": holdout, "client_ids": list(CLIENT_IDS), "examples": {d.client_id: len(d.labels) for d in datasets}, "model_block": model_block,
+            "datasets": datasets, "holdout": holdout, "cohort": cohort, "client_ids": [d.client_id for d in datasets], "examples": {d.client_id: len(d.labels) for d in datasets}, "model_block": model_block,
             "claim_boundary": "ENGINEERING DEMO; one recorded client (resampled V2 windows, synthetic assigned labels) federated with seven synthetic cohort peers (synthetic event-window labels); MODEL_V2_FINAL was not validated on this signal chain; no clinical or scientific validity"}
 
 
@@ -331,7 +338,7 @@ def _run_record(ctx: dict[str, Any], *, status: str, started_at: str, completed_
         "source_mode": "RECORDED_HARDWARE_DEMO", "source_session_ids": ctx["session_ids"], "source_record_count": len(ctx["records"]), "snapshot_sha256": ctx["snapshot"]["snapshot_sha256"],
         "dataset": ctx["dataset"], "model": ctx["model_block"], "algorithm": ctx["algorithm"], "fedprox_mu": MU if ctx["algorithm"] == "FEDPROX" else None, "secagg_mode": ctx["secagg_mode"],
         "aggregation": "PLAIN", "secagg_shadow": secagg, "rounds_planned": ctx["rounds"], "rounds": _rounds_rows(report), "state_progression": progression, "failure": None,
-        "claim_boundary": ctx["claim_boundary"], "engine": ENGINE_ID, "fl10_run_dir": "fl10", "client_ids": ctx["client_ids"],
+        "claim_boundary": ctx["claim_boundary"], "engine": ENGINE_ID, "fl10_run_dir": "fl10", "client_ids": ctx["client_ids"], "cohort": ctx.get("cohort", "ORIGINAL"),
     }
 
 

@@ -8,7 +8,7 @@ import re
 import threading
 import time
 import uuid
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from bson import ObjectId
@@ -119,6 +119,15 @@ class MongoTelemetry:
         names = sorted(n for n in self.database.list_collection_names() if DAILY_COLLECTION.fullmatch(n))
         return [n for n in names if n.removeprefix("records_") < before.isoformat()]
 
+    def current_collection(self, today: Any) -> str | None:
+        """The daily ``records_YYYY-MM-DD`` collection of ``today`` (a date) when it exists: the one day ``frozen_collections`` leaves out because the device may still be writing it."""
+        name = f"records_{today.isoformat()}"
+        return name if name in self.database.list_collection_names() else None
+
+    def latest_id(self, name: str) -> str | None:
+        doc = self.database[name].find_one({}, {"_id": 1}, sort=[("_id", -1)])
+        return str(doc["_id"]) if doc else None
+
     def read_collection(self, name: str) -> list[dict[str, Any]]:
         """Every document of one named collection in _id order (the prerecorded demo session; live monitoring never reads it)."""
         docs = list(self.database[name].find({}).sort("_id", 1))
@@ -147,7 +156,8 @@ class HardwareSessions:
         self.history_import = False                    # past daily collections of the database appear as saved hardware sessions (see ensure_history)
         self.history_gap_seconds = 30.0
         self._history_checked: dict[str, float] = {}
-        self.demo_collection: str | None = None      # set from NHM_HARDWARE_DEMO_COLLECTION: a prerecorded demo session offered to every owner
+        self._today_settled: dict[tuple[str, str], str] = {}   # (owner, collection) -> newest document id at the last pass that left no segment open
+        self._demo_collections: tuple[str, ...] = ()  # set from NHM_HARDWARE_DEMO_COLLECTION (comma separated): prerecorded demo sessions offered to every owner
         with store._lock, store._connection:
             store._connection.execute("CREATE TABLE IF NOT EXISTS hardware_history_imports (owner TEXT NOT NULL, collection TEXT NOT NULL, sessions INTEGER NOT NULL, PRIMARY KEY(owner, collection))")
             store._connection.execute("""CREATE TABLE IF NOT EXISTS hardware_sessions (
@@ -244,7 +254,7 @@ class HardwareSessions:
             "source": "SYNTHETIC TEST SOURCE"
             if row["collection"] == "nhm_integration_test"
             else "PRESET DEMO SESSION (generated in the ESP32 sketch's document format; not a live device recording)"
-            if row["collection"] == self.demo_collection
+            if row["collection"] in self._demo_collections
             else "ESP32 via Render/MongoDB (unverified device provenance)",
             "collection": row["collection"],
             "started_at": row["started_at"],
@@ -338,35 +348,47 @@ class HardwareSessions:
                     )
             return self.detail(sid, owner, 0)
 
-    def seed_demo_collection(self) -> int:
-        """On app start: make sure the prerecorded demo collection exists in the configured database (created only when missing; a source outage seeds nothing and is retried at the next start)."""
-        if not self.demo_collection:
-            return 0
-        from product.hardware_demo_session import generate_documents
+    @property
+    def demo_collection(self) -> str | None:
+        return ",".join(self._demo_collections) or None
 
-        try:
-            return self.source.seed_if_missing(self.demo_collection, generate_documents)
-        except PyMongoError:
-            return 0
+    @demo_collection.setter
+    def demo_collection(self, value: str | None) -> None:
+        self._demo_collections = tuple(name.strip() for name in (value or "").split(",") if name.strip())
+
+    def seed_demo_collection(self) -> int:
+        """On app start: make sure every prerecorded demo collection exists in the configured database (each created only when missing; a source outage seeds nothing and is retried at the next start)."""
+        from product.hardware_demo_session import SHOWCASES, documents_for
+
+        written = 0
+        for name in self._demo_collections:
+            if name not in SHOWCASES:
+                continue
+            try:
+                written += self.source.seed_if_missing(name, lambda name=name: documents_for(name))
+            except PyMongoError:
+                continue
+        return written
 
     def ensure_demo(self, owner: str) -> None:
-        """Import the prerecorded demo session for this owner once (idempotent). It is a STOPPED session built from a separate collection, named HW-SHOWCASE-*; an unreachable or empty source imports nothing."""
-        if not self.demo_collection:
-            return
-        from product.hardware_demo_session import owner_session_id
+        """Import each prerecorded demo session for this owner once (idempotent). Each is a STOPPED session built from its own separate collection, named HW-SHOWCASE-*; an unreachable or empty source imports nothing."""
+        from product.hardware_demo_session import SHOWCASES, owner_session_id
 
-        sid = owner_session_id(owner)
-        with self.lock:
-            with self.store._lock:
-                if self.store._connection.execute("SELECT 1 FROM hardware_sessions WHERE id=?", (sid,)).fetchone():
-                    return
-            try:
-                samples = [x for doc in self.source.read_collection(self.demo_collection) if (x := clean_document(doc))]
-            except PyMongoError:
-                return
-            if not samples:
-                return
-            self._store_stopped(sid, owner, self.demo_collection, samples)
+        for name in self._demo_collections:
+            if name not in SHOWCASES:
+                continue
+            sid = owner_session_id(owner, name)
+            with self.lock:
+                with self.store._lock:
+                    if self.store._connection.execute("SELECT 1 FROM hardware_sessions WHERE id=?", (sid,)).fetchone():
+                        continue
+                try:
+                    samples = [x for doc in self.source.read_collection(name) if (x := clean_document(doc))]
+                except PyMongoError:
+                    continue
+                if not samples:
+                    continue
+                self._store_stopped(sid, owner, name, samples)
 
     def _store_stopped(self, sid: str, owner: str, collection: str, samples: list[dict[str, Any]]) -> None:
         """Save a finished session built from already-stored documents: every reading counts, the newest MAX_TRACE are kept in the trace."""
@@ -386,7 +408,9 @@ class HardwareSessions:
     def ensure_history(self, owner: str) -> None:
         """Past days of the database appear in History as saved hardware sessions. Each finished daily collection (``records_YYYY-MM-DD`` dated before today, UTC) is read once per owner and split into
         sessions wherever the recording pauses for more than ``history_gap_seconds``; ids are ``HW-REC-<date>-<n>-<owner tag>``. A segment whose documents are already in one of the owner's own sessions
-        (a live recording made in NHM earlier: its first or last document is already stored, since a long session keeps only its newest readings) is skipped, and the current day is never imported because a live session may still be writing it. Source outages import nothing and are retried."""
+        (a live recording made in NHM earlier: its first or last document is already stored, since a long session keeps only its newest readings) is skipped. The current day is imported segment by segment:
+        only a segment whose newest reading is older than the gap is imported, because no later reading can join it, so it can never grow; the segment still being written stays out until it settles, and the
+        day is not marked as imported until it is over. Source outages import nothing and are retried."""
         if not self.history_import or not hasattr(self.source, "frozen_collections"):
             return
         now = time.monotonic()
@@ -395,8 +419,9 @@ class HardwareSessions:
         self._history_checked[owner] = now
         tag = hashlib.sha256(owner.encode()).hexdigest()[:8]
         with self.lock:
+            today = datetime.now(UTC).date()
             try:
-                names = self.source.frozen_collections(datetime.now(UTC).date())
+                names = self.source.frozen_collections(today)
             except PyMongoError:
                 self._history_checked.pop(owner, None)
                 return
@@ -409,18 +434,51 @@ class HardwareSessions:
                 except PyMongoError:
                     self._history_checked.pop(owner, None)
                     return
-                stored = 0
-                for number, segment in enumerate(split_sessions(samples, self.history_gap_seconds), start=1):
-                    with self.store._lock:
-                        taken = self.store._connection.execute(
-                            "SELECT 1 FROM hardware_trace t JOIN hardware_sessions s ON s.id=t.session_id WHERE s.owner=? AND t.document_id IN (?, ?)", (owner, segment[0]["id"], segment[-1]["id"])
-                        ).fetchone()
-                    if taken:
-                        continue
-                    self._store_stopped(f"HW-REC-{name.removeprefix('records_')}-{number:02d}-{tag}", owner, name, segment)
-                    stored += 1
+                stored, _ = self._import_segments(owner, tag, name, samples, None)
                 with self.store._lock, self.store._connection:
                     self.store._connection.execute("INSERT OR REPLACE INTO hardware_history_imports VALUES (?,?,?)", (owner, name, stored))
+            if not self._import_today(owner, tag, today):
+                self._history_checked.pop(owner, None)
+
+    def _import_today(self, owner: str, tag: str, today: Any) -> bool:
+        """Import the finished segments of today's collection. Returns False on a source outage (retried at once)."""
+        if not hasattr(self.source, "current_collection"):
+            return True
+        try:
+            name = self.source.current_collection(today)
+            if name is None:
+                return True
+            newest = self.source.latest_id(name)
+            if newest is None or self._today_settled.get((owner, name)) == newest:
+                return True                                   # nothing new since a pass that left no segment open
+            samples = [x for doc in self.source.read_collection(name) if (x := clean_document(doc))]
+        except PyMongoError:
+            return False
+        _, still_open = self._import_segments(owner, tag, name, samples, datetime.now(UTC) - timedelta(seconds=self.history_gap_seconds))
+        if still_open:
+            self._today_settled.pop((owner, name), None)
+        else:
+            self._today_settled[(owner, name)] = newest
+        return True
+
+    def _import_segments(self, owner: str, tag: str, name: str, samples: list[dict[str, Any]], settled_before: datetime | None) -> tuple[int, bool]:
+        """Store each not-yet-owned segment of one daily collection as a saved session. With ``settled_before`` set, a segment whose newest reading is not older than it is still open and is left out.
+        Returns (segments stored, whether an open segment was left out)."""
+        stored, still_open = 0, False
+        for number, segment in enumerate(split_sessions(samples, self.history_gap_seconds), start=1):
+            if settled_before is not None and datetime.fromisoformat(segment[-1]["ingested_at"]) >= settled_before:
+                still_open = True
+                continue
+            sid = f"HW-REC-{name.removeprefix('records_')}-{number:02d}-{tag}"
+            with self.store._lock:
+                taken = self.store._connection.execute(
+                    "SELECT 1 FROM hardware_trace t JOIN hardware_sessions s ON s.id=t.session_id WHERE s.owner=? AND t.document_id IN (?, ?)", (owner, segment[0]["id"], segment[-1]["id"])
+                ).fetchone() or self.store._connection.execute("SELECT 1 FROM hardware_sessions WHERE id=?", (sid,)).fetchone()
+            if taken:
+                continue
+            self._store_stopped(sid, owner, name, segment)
+            stored += 1
+        return stored, still_open
 
     def list(self, owner: str) -> list[dict[str, Any]]:
         self.ensure_history(owner)
