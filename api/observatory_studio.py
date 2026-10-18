@@ -50,8 +50,15 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
         fl10_active = getattr(app.state, "fl10_job_active", None)
         return bool((provider is not None and provider.armed) or (fl10_active is not None and fl10_active()))
 
-    service = StudioService(root=Path(artifact_root), federation=app.state.federation_service, inference_factory=inference_factory, other_run_active=other_active)
+    import os
+
+    from studio.candidates import ENV_ROOT, CandidateLibrary
+
+    # durable candidate library: the product launcher points NHM_CANDIDATE_LIBRARY_DIR at a stable folder outside the per-launch workspace; without it the library stays inside the workspace (tests, ad-hoc use)
+    library = CandidateLibrary(Path(os.environ[ENV_ROOT])) if os.environ.get(ENV_ROOT) else None
+    service = StudioService(root=Path(artifact_root), federation=app.state.federation_service, inference_factory=inference_factory, other_run_active=other_active, candidate_library=library)
     hardware_demo = HardwareDemoService(store, Path(artifact_root))
+    hardware_demo.candidates = service.candidates
     from studio.hardware_runs import HardwareRunJobs
 
     service.hardware = HardwareRunJobs(hardware_demo, Path(artifact_root), finalize=service.finalize_hardware)
@@ -88,13 +95,14 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
 
     @app.get(f"{STUDIO}/capabilities")
     async def capabilities(request: Request) -> dict[str, Any]:
-        await identity(request)
+        user = await identity(request)
         return {"studio_id": STUDIO_ID, "run_lengths": list(RUN_LENGTHS), "default_run_length": 3,
                 "ten_round": {"available": True, "engine": "FL10_10R", "rounds_by_initialisation": {"FL_INIT_V2": [10], "MODEL_V2_FINAL": [3, 10]}, "default_initialisation": v2_init.INIT_V2_FINAL, "initialisations": [{"id": k, "label": v2_init.INIT_LABELS[k], "default": k == v2_init.INIT_V2_FINAL} for k in v2_init.INITS], "source_modes": list(MODES.values()), "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
                               "unsupported": {}, "expected_updates": 80,
                               "cohorts": [cohorts.describe(c) | {"default": c == cohorts.DEFAULT} for c in cohorts.COHORTS],
                               "cohort_note": "The 3-round untrained run uses the frozen product contract, which is defined on the original cohort only; the realistic cohort is available for 10 rounds and for 3 rounds from the pretrained V2 start.",
                               "monitored_sites": [{"index": i, "client_id": f"SIM_FL_SITE_{i:02d}", "label": f"SITE_{i:02d}", "profile": cohort_profiles()[i].coverage[0]} for i in range(8)]},
+                "candidate_library": {"available": True, "count": len(service.candidates.list(user)), "rounds": [3, 10], "note": "Final engineering candidates of your completed runs, kept across restarts. Any of them can be the starting model of a later run (synthetic, monitored-site or recorded-hardware pretrained-V2 family). Not promoted, not deployed, never used for monitoring."},
                 "three_round": {"available": True, "engine": "PRODUCT_3R", "route": FEDERATION_RUNS, "expected_updates": 24},
                 "hardware_demo": {"available": hasattr(app.state, "hardware_sessions"), "source_mode": "RECORDED_HARDWARE_DEMO", "model": MODEL_ID,
                                   "run_lengths": [3, 10], "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
@@ -103,10 +111,31 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
                                   "starting_models": [
                                       {"id": "FRESH_SEEDED", "label": "Fresh initialisation (seeded, untrained)", "available": True, "reason": None},
                                       {"id": "WARM_START", "label": "Pretrained: warm start from an earlier recorded-hardware run", "available": True, "reason": None},
+                                      {"id": "CANDIDATE", "label": "Stored engineering candidate (from your candidate library)", "available": bool(service.candidates.list(user)),
+                                       "reason": None if service.candidates.list(user) else "no completed run has produced an engineering candidate yet",
+                                       "note": "Starts the pretrained-V2 family from the final state of an earlier run of yours (synthetic, monitored-site or recorded-hardware): same topology and windows as the pretrained-V2 start, different R0. Not promoted, not deployed."},
                                       {"id": "MODEL_V2_FINAL", "label": "Pretrained V2 (MODEL_V2_FINAL)", "available": True, "reason": None,
                                        "note": "Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain."}]},
                 "generalisation": {"cohort_id": g1_cohort.COHORT_ID, "label": g1_cohort.COHORT_USE_LABEL, "claim_boundary": g1_cohort.CLAIM_BOUNDARY, "baseline": "MODEL_V2_FINAL (unchanged, frozen)"},
                 "evaluation": {"observer_id": OBSERVER_ID, "protocol_id": EVAL_PROTOCOL_ID, "threshold": 0.5, "calibration": "NONE", "cohort_use": COHORT_USE_LABEL, "cohort_use_detail": COHORT_USE_DETAIL, "claim_boundary": CLAIM_BOUNDARY}}
+
+    def _public(entry: dict[str, Any]) -> dict[str, Any]:
+        out = {k: v for k, v in entry.items() if k != "owner"}
+        out["cohort_label"] = cohorts.spec(entry["cohort"]).label
+        return out
+
+    @app.get(f"{STUDIO}/candidates")
+    async def list_candidates(request: Request) -> list[dict[str, Any]]:
+        user = await identity(request)
+        return [_public(e) for e in await asyncio.to_thread(service.candidates.list, user)]
+
+    @app.get(f"{STUDIO}/candidates/{{candidate_id}}")
+    async def get_candidate(request: Request, candidate_id: str) -> dict[str, Any]:
+        user = await identity(request)
+        try:
+            return _public(await asyncio.to_thread(service.candidates.get, user, candidate_id))
+        except (LookupError, PermissionError) as error:
+            raise ProductError(ProductErrorCode.NOT_FOUND, "candidate not found") from error
 
     @app.get(f"{STUDIO}/hardware-demo/sessions")
     async def hardware_demo_sessions(request: Request) -> list[dict[str, Any]]:
@@ -142,7 +171,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     @app.post(f"{STUDIO}/hardware-demo/runs")
     async def start_hardware_demo(request: Request, body: dict[str, Any]) -> dict[str, Any]:
         user = await identity(request)
-        allowed = {"session_ids", "run_length", "algorithm", "secagg_mode", "label_seed", "initialisation", "warm_start_run_id", "cohort"}
+        allowed = {"session_ids", "run_length", "algorithm", "secagg_mode", "label_seed", "initialisation", "warm_start_run_id", "cohort", "candidate_id"}
         if set(body) - allowed or not isinstance(body.get("session_ids"), list):
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "invalid hardware demo request")
         loop = asyncio.get_running_loop()
@@ -152,7 +181,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
                 session_ids=body["session_ids"], rounds=body.get("run_length", 3),
                 algorithm=body.get("algorithm", "FEDAVG"), secagg_mode=body.get("secagg_mode", "PLAIN"),
                 label_seed=body.get("label_seed", 20261015),
-                initialisation=body.get("initialisation", "FRESH_SEEDED"), warm_start_run_id=body.get("warm_start_run_id"), cohort=body.get("cohort", cohorts.DEFAULT),
+                initialisation=body.get("initialisation", "FRESH_SEEDED"), warm_start_run_id=body.get("warm_start_run_id"), cohort=body.get("cohort", cohorts.DEFAULT), candidate_id=body.get("candidate_id"),
             )
         except PermissionError as error:
             raise ProductError(ProductErrorCode.FORBIDDEN, str(error)) from error
@@ -181,10 +210,10 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     async def start_ten_round(request: Request, body: dict[str, Any]) -> dict[str, Any]:
         user = await identity(request)
         rounds = body.get("run_length")
-        if rounds == 3 and body.get("initialisation") != v2_init.INIT_V2_FINAL:
+        if rounds == 3 and body.get("initialisation") not in (v2_init.INIT_V2_FINAL, "CANDIDATE"):
             raise ProductError(ProductErrorCode.INVALID_REQUEST, f"3-round runs from the untrained start use the frozen product contract: POST {FEDERATION_RUNS}")
         mode_names = {v: k for k, v in MODES.items()}
-        if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation", "monitored_site", "signal_session_id", "cohort"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
+        if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation", "monitored_site", "signal_session_id", "cohort", "candidate_id"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "run_length must be 10 (or 3 with initialisation MODEL_V2_FINAL) and source_mode CANONICAL_SYNTHETIC or LIVE_MONITORED_SITE_00")
         if body.get("algorithm", "FEDAVG") not in ("FEDAVG", "FEDPROX") or body.get("secagg_mode", "PLAIN") not in ("PLAIN", "SECAGG_SHADOW") or body.get("run_type", "LIVE_RUN") != "LIVE_RUN":
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "unsupported Studio algorithm, aggregation mode, or run type")
@@ -203,7 +232,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
                 raise _as_product_error(StudioRunError(error.code, str(error.detail))) from error
         try:
             job = await service.runner10.create(user, mode_names[body.get("source_mode", "CANONICAL_SYNTHETIC")], body.get("initialisation", "FL_INIT_V2"), rounds,
-                                                body.get("algorithm", "FEDAVG"), body.get("secagg_mode", "PLAIN"), body.get("monitored_site", 0), signal_session, cohort)
+                                                body.get("algorithm", "FEDAVG"), body.get("secagg_mode", "PLAIN"), body.get("monitored_site", 0), signal_session, cohort, body.get("candidate_id"))
             job = await service.runner10.start(user, job.run_id)
         except StudioRunError as error:
             raise _as_product_error(error) from error

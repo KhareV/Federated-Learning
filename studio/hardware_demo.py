@@ -211,6 +211,7 @@ def _metrics(state: dict[str, np.ndarray], x: np.ndarray, y: np.ndarray) -> dict
 class HardwareDemoService:
     def __init__(self, store: Any, root: Path):
         self.store = store
+        self.candidates: Any | None = None         # the Studio candidate library (set by the service wiring); None = starting from a stored candidate is unavailable
         self.root = Path(root) / "hardware_demo"
         self.root.mkdir(parents=True, exist_ok=True)
         self._run_lock = threading.Lock()
@@ -292,12 +293,18 @@ class HardwareDemoService:
                        "source_state_sha256": _state_digest(state), "source_algorithm": previous.get("algorithm")}
 
     def prepare(self, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int,
-                initialisation: str = "FRESH_SEEDED", warm_start_run_id: str | None = None, cohort: str = "ORIGINAL") -> dict[str, Any]:
+                initialisation: str = "FRESH_SEEDED", warm_start_run_id: str | None = None, cohort: str = "ORIGINAL", candidate_id: str | None = None) -> dict[str, Any]:
         """Validate and build everything that can fail on the caller's thread (data, windows, split, warm start). Nothing is trained."""
+        if initialisation == "CANDIDATE":             # a stored engineering candidate starts the pretrained-V2 family (same topology and windows as MODEL_V2_FINAL)
+            if not candidate_id:
+                raise ValueError("initialisation CANDIDATE needs a candidate_id from your candidate library")
+            initialisation = "MODEL_V2_FINAL"
+        elif candidate_id is not None:
+            raise ValueError("candidate_id applies only to initialisation CANDIDATE")
         if initialisation == "MODEL_V2_FINAL":       # pretrained V2 fine-tuning on resampled recorded windows: a different model family, built by studio.hardware_v2
             from studio import hardware_v2
 
-            return hardware_v2.prepare(self, owner, session_ids=session_ids, rounds=rounds, algorithm=algorithm, secagg_mode=secagg_mode, label_seed=label_seed, cohort=cohort)
+            return hardware_v2.prepare(self, owner, session_ids=session_ids, rounds=rounds, algorithm=algorithm, secagg_mode=secagg_mode, label_seed=label_seed, cohort=cohort, candidate_id=candidate_id)
         if initialisation not in ("FRESH_SEEDED", "WARM_START"):
             raise ValueError("unsupported starting model for HARDWARE_DEMO_MODEL_V1")
         if cohort != "ORIGINAL":

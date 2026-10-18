@@ -17,6 +17,8 @@ export interface RunContext {
 	provisional: boolean;
 	/** Which synthetic cohort supplies the training clients / peers and the evaluation holdout (ORIGINAL = the frozen cohort, also for every run that predates the option). */
 	cohort: CohortId;
+	/** The stored engineering candidate this run started from (its R0), or null. */
+	startCandidate: { id: string; cohort: CohortId | null; sourceRunId: string | null } | null;
 	provenance: DataProvenance;
 	execution: ExecutionMode;
 	labels: LabelProvenance;
@@ -50,7 +52,7 @@ const CLOSED: RunContext['capabilities'] = {
 export function provisionalContext(runId: string | null | undefined): RunContext {
 	const hardware = (runId ?? '').startsWith('HDFLRUN-');
 	return {
-		provisional: true, cohort: 'ORIGINAL', provenance: hardware ? 'RECORDED_HARDWARE' : 'UNKNOWN', execution: 'UNKNOWN', labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'UNKNOWN', lineage: 'UNKNOWN',
+		provisional: true, cohort: 'ORIGINAL', startCandidate: null, provenance: hardware ? 'RECORDED_HARDWARE' : 'UNKNOWN', execution: 'UNKNOWN', labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'UNKNOWN', lineage: 'UNKNOWN',
 		clients: hardware ? 'RECORDED_DEMO_CLIENT' : 'UNKNOWN', badge: hardware ? 'RECORDED HARDWARE' : 'LOADING', dataSentence: 'Loading the selected run…', capabilities: CLOSED
 	};
 }
@@ -66,8 +68,11 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 	const execution: ExecutionMode = run.origin === 'RECORDED' ? 'RECORDED_EVIDENCE' : run.run_type === 'REPLAY' || run.origin === 'REPLAY' ? 'EVENT_REPLAY' : run.run_type === 'LIVE_RUN' ? 'LIVE_TRAINING' : 'UNKNOWN';
 	const hardware = provenance === 'RECORDED_HARDWARE';
 	const modelId = run.base_model?.model_id ?? null;
+	// A run started from a stored engineering candidate belongs to the pretrained-V2 family (same topology, windows and lanes); only its R0 differs.
+	const startedFromCandidate = run.base_model?.kind === 'CANDIDATE';
+	const startCandidate = startedFromCandidate ? { id: String(modelId), cohort: run.base_model?.candidate_cohort ?? null, sourceRunId: run.base_model?.source_run_id ?? null } : null;
 	const warm = (run.base_model as { initialisation?: string } | null)?.initialisation === 'WARM_START';
-	const lineage: ModelLineage = hardware ? (modelId === 'MODEL_V2_FINAL' ? 'HARDWARE_V2_PRETRAINED' : warm ? 'HARDWARE_DEMO_WARM_START' : 'HARDWARE_DEMO_FRESH') : modelId === 'MODEL_V2_FINAL' ? 'MODEL_V2_FINAL' : modelId === 'FL_INIT_V2' ? 'FL_INIT_V2' : 'UNKNOWN';
+	const lineage: ModelLineage = hardware ? (modelId === 'MODEL_V2_FINAL' || startedFromCandidate ? 'HARDWARE_V2_PRETRAINED' : warm ? 'HARDWARE_DEMO_WARM_START' : 'HARDWARE_DEMO_FRESH') : modelId === 'MODEL_V2_FINAL' || startedFromCandidate ? 'MODEL_V2_FINAL' : modelId === 'FL_INIT_V2' ? 'FL_INIT_V2' : 'UNKNOWN';
 	const cohort: CohortId = run.cohort === 'REALISTIC' ? 'REALISTIC' : 'ORIGINAL';
 	const realistic = cohort === 'REALISTIC';
 	const recorded = execution === 'RECORDED_EVIDENCE';
@@ -86,7 +91,7 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 				? 'Realistic synthetic ECG on eight logical clients on one machine: variable rhythm, premature ectopic beats with pauses, motion artifacts, and annotation-noisy labels. Still synthetic: no real physiology.'
 				: 'Synthetic engineering data on eight logical clients on one machine. No real physiology.';
 	return {
-		provisional: false, cohort, provenance, execution, lineage,
+		provisional: false, cohort, startCandidate, provenance, execution, lineage,
 		labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'SYNTHETIC_ENGINEERING_EVENTS',
 		clients: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? 'RECORDED_CLIENT_PLUS_SIM_PEERS' : 'RECORDED_DEMO_CLIENT') : 'SIM_FL_SITE',
 		badge: cohortBadge, dataSentence,
@@ -102,6 +107,14 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 	};
 }
 
+/** Wording of a pretrained-V2 recorded-hardware run that depends on the synthetic cohort supplying its seven peers and its evaluation holdout. */
+export function hardwareV2Texts(cohort: CohortId): { peers: string; metricsNote: string } {
+	const realistic = cohort === 'REALISTIC';
+	return {
+		peers: `recorded 10 s V2 windows (resampled; every complete window is used, the quality grade is reported but does not block) on your one recorded client; the other seven clients are ${realistic ? 'realistic' : 'canonical'} synthetic peers.`,
+		metricsNote: `Your recording trains client 00 only (its labels are synthetic-assigned). Every round is evaluated exactly as in a synthetic run, on the ${realistic ? 'realistic synthetic evaluation cohort' : 'same frozen synthetic evaluation cohort'}, so these metrics are directly comparable with a ${realistic ? 'realistic-cohort ' : ''}synthetic pretrained-V2 run; they say nothing about your physiology.`
+	};
+}
 export const isHardwareContext = (c: RunContext): boolean => c.provenance === 'RECORDED_HARDWARE';
 /** Only the tabular recorded-hardware family is evaluated on a small holdout block of the recording; a pretrained-V2 hardware run is evaluated on the same frozen synthetic cohort as a synthetic V2 run. */
 export const hasRecordingHoldout = (c: RunContext): boolean => c.provenance === 'RECORDED_HARDWARE' && c.lineage !== 'HARDWARE_V2_PRETRAINED';

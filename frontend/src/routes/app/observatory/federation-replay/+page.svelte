@@ -12,6 +12,7 @@
 	import RoundProgress from '$lib/components/product/federation/RoundProgress.svelte';
 	import ClientGrid from '$lib/components/product/federation/ClientGrid.svelte';
 	import CandidateLifecycle from '$lib/components/product/federation/CandidateLifecycle.svelte';
+	import CandidateSummary from '$lib/components/product/studio/CandidateSummary.svelte';
 	const store = getProductStore();
 	let runs = $state<StudioRun[]>([]);
 	let runId = $state('');
@@ -27,6 +28,10 @@
 	const view = $derived(snapshots[Math.min(index, Math.max(0, snapshots.length - 1))] ?? null);
 	const run = $derived(runs.find((r) => r.run_id === runId) ?? null);
 	const dataSource = $derived(runDataSource(runId, run?.engine));
+	// The extended engine (10-round, pretrained 3-round, pretrained-V2 hardware) records its candidate in the run record, not as a journal event, so the journal alone can never show one.
+	// Like the live page, the replay then shows the candidate from the run record, only once the replay has reached the end of the run (nothing is created here).
+	const recordCandidate = $derived(!!run?.candidate && (run.engine === 'FL10_10R' || (run.engine === 'HARDWARE_DEMO' && run.base_model?.model_id === 'MODEL_V2_FINAL')));
+	const reachedEnd = $derived(view?.runStatus === 'COMPLETED');
 	const planned = $derived(view?.plannedRounds || run?.planned_rounds || 3);
 	const jumpRounds = $derived([...new Set([1, Math.ceil(planned / 2), planned])].filter((n) => n >= 1 && n <= planned));
 	const sourceName = (r: StudioRun) => (r.source_mode === 'RECORDED_HARDWARE' ? 'RECORDED HARDWARE' : r.source_mode === 'LIVE_MONITORED_SITE_00' ? `${r.signal_session_id ? 'HISTORY SESSION · SITE_' : 'LIVE-MONITORED SITE_'}${String(r.monitored_site ?? 0).padStart(2, '0')}` : r.origin === 'RECORDED' ? 'RECORDED SYNTHETIC' : 'SYNTHETIC');
@@ -76,13 +81,21 @@
 {#if status === 'READY' && view}
 <section aria-label="Replay controls" data-testid="fed-replay-controls"><div class="controls"><button onclick={() => step(-1)} disabled={index === 0}>← Step back</button><button onclick={() => step(1)} disabled={index >= snapshots.length - 1}>Step forward →</button><button onclick={toggle}>{playing ? 'Pause' : 'Play'}</button>
 	{#each jumpRounds as r (r)}<button onclick={() => firstWhere((v) => v.currentRound >= r)}>Jump to round {r}</button>{/each}
-	<button onclick={() => firstWhere((v) => v.rounds.some((x) => x.aggregationMode !== null))}>Jump to aggregation</button><button onclick={() => firstWhere((v) => v.candidate !== null)}>Jump to candidate</button>
+	<button onclick={() => firstWhere((v) => v.rounds.some((x) => x.aggregationMode !== null))}>Jump to aggregation</button><button onclick={() => firstWhere((v) => v.candidate !== null || (recordCandidate && v.runStatus === 'COMPLETED'))}>Jump to candidate</button>
 	<button onclick={() => firstWhere((v) => (v.clients.find((c) => c.clientId === selectedClient)?.state ?? 'IDLE') !== 'IDLE')}>Jump to selected client</button></div>
 	<label class="scrub">Event {index + 1} of {snapshots.length} <input type="range" min="0" max={snapshots.length - 1} bind:value={index} aria-valuetext={`event ${index + 1} of ${snapshots.length}`} /></label>
 	<p class="dim" data-testid="fed-replay-event">Latest journal entry: {view.timeline[view.timeline.length - 1]?.kind ?? '—'} — {view.timeline[view.timeline.length - 1]?.summary ?? ''}</p></section>
 <section aria-label="Process" data-testid="fed-replay-state"><ProcessStepper {view} replay={true} /><div class="gap"></div><RoundProgress {view} plannedRounds={planned} />
 	<h2>Clients at this event</h2><ClientGrid live={view.clients} round={view.currentRound} replay={true} clientIds={run?.client_ids} ownerBoundClientId={null} selected={selectedClient} onSelect={(id) => (selectedClient = id)} runDone={view.runStatus === 'COMPLETED'} {dataSource} />
-	<h2>Candidate</h2><CandidateLifecycle {view} replay={true} /></section>
+	<h2>Candidate</h2>
+	{#if recordCandidate && run && view.candidate === null}
+		{#if reachedEnd}
+			<CandidateSummary {run} />
+			<p class="dim" data-testid="replay-candidate-from-record">This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.</p>
+		{:else}
+			<p class="dim" data-testid="replay-candidate-pending">The final engineering candidate is created after the last round. It appears here when the replay reaches the end of the run.</p>
+		{/if}
+	{:else}<CandidateLifecycle {view} replay={true} />{/if}</section>
 <p class="dim">Rejected updates are shown only if they appear in the journal. Rejection scenarios exercised in frozen engineering evidence (stale, duplicate, wrong-base, unknown-client) are not animated here unless they occurred in this run.</p>
 {/if}
 <p class="dim"><a href="/app/observatory/federation">← Federation observatory</a> · <a href="/app/federation/live">Live federation page</a></p>

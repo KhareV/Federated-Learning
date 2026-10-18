@@ -53,6 +53,32 @@ def drive(mode: str, origin: str, users: Path, out: Path, shots: Path, logs: Pat
     return json.loads(out.read_text())
 
 
+def candidate_library_checks(cl: dict, library_files_ok: bool) -> dict[str, bool]:
+    """Checks of the candidate-library browser run. Card text is the page's textContent, in which a label and its value are separate elements (no space between them), so patterns allow zero whitespace."""
+    import re
+
+    first_cards, after_cards = cl["models"]["cards"], cl["models_after"]["cards"]
+    first_id = first_cards[0]["id"] if first_cards else ""
+    second = cl["second"]["live"]
+    return {
+        "first_run_completed": "COMPLETED" in cl["first"]["live"]["status_line"] and "REALISTIC" in cl["first"]["live"]["badge"],
+        "candidate_listed_on_models_page": len(first_cards) == 1 and first_cards[0]["cohort"] == "REALISTIC",
+        "candidate_labelled_not_deployed": bool(first_cards) and "NOT DEPLOYED" in first_cards[0]["text"] and "NEVER USED FOR MONITORING" in first_cards[0]["text"],
+        "candidate_carries_scores": bool(first_cards) and re.search(r"AUPRC\s*\d\.\d+", first_cards[0]["text"]) is not None,
+        "form_offers_the_candidate": first_id in cl["second_form"]["options"] and "R0 is the final state of the candidate chosen below" in cl["second_form"]["init_note"],
+        "form_says_cross_cohort": "This run uses the original cohort" in cl["second_form"]["note"],
+        "second_run_completed": "COMPLETED" in second["status_line"],
+        "second_run_names_its_candidate": first_id in second["start_candidate"] and "trained on the realistic cohort" in second["start_candidate"] and "this run uses the original cohort" in second["start_candidate"],
+        "second_run_method_says_candidate_start": "stored candidate start" in second["glance"],
+        "second_run_is_original_cohort": "REALISTIC" not in second["badge"],
+        "second_run_metrics_shown": bool(second["metric_auprc"]) and not any(w in second["metric_auprc"] for w in ("NOT YET", "EVALUATING", "QUEUED")),
+        "library_now_has_both": len(after_cards) == 2 and {c["cohort"] for c in after_cards} == {"REALISTIC", "ORIGINAL"},
+        "second_candidate_descends_from_first": any(c["id"] != first_id and re.search(r"Started from\s*candidate\s*" + re.escape(first_id), c["text"]) is not None for c in after_cards),
+        "library_files_exist_on_disk": library_files_ok,
+        "no_alerts": not cl["first"]["live"]["alerts"] and not second["alerts"],
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--env-file", default=str(ROOT / ".env"))
@@ -70,6 +96,7 @@ def main() -> int:
     parser.add_argument("--journey", action="store_true", help="full simulated-hardware journey: sketch-faithful emulator -> local Render replica -> Atlas rehearsal DB -> live monitoring, recording, History, Observatory replay + trace, tabular and pretrained-V2 FL, high-gain negative case")
     parser.add_argument("--demo-session", action="store_true", help="the prerecorded DEMO hardware session: seeded in its own Atlas rehearsal collection, imported into History, Observatory replay + trace, pretrained-V2 and tabular runs")
     parser.add_argument("--ui-shots", action="store_true", help="screenshots of the federation starter in every source-mode state")
+    parser.add_argument("--candidate-library", action="store_true", help="engineering candidates through the real UI: a realistic run is stored, listed on the Models page, and starts a second run on the other cohort")
     parser.add_argument("--realistic-cohort", action="store_true", help="the synthetic-cohort option through the real starter: a realistic 3-round pretrained run and a realistic live-monitored site run")
     parser.add_argument("--history-source", action="store_true", help="a completed simulated monitoring session from History as the signal of one federation client")
     parser.add_argument("--hardware-v2", action="store_true", help="pretrained-V2 recorded-hardware path: two recordings, Observatory replay + trace, V2 run, generalisation tab, federation journal replay")
@@ -147,6 +174,20 @@ def main() -> int:
                 running.shutdown()
             print(json.dumps({"status": "UI_SHOTS_DONE", "dir": str(out / "shots")}))
             return 0
+        if args.candidate_library:
+            library = Path(tempfile.mkdtemp(prefix="nhm-candidate-library-gate-"))
+            env["NHM_CANDIDATE_LIBRARY_DIR"] = str(library)            # the gate never touches the real library
+            running, origin = stack(env, workspace, python)
+            try:
+                cl = drive("candidate-library", origin, Path(args.users_file), out / "candidate_library.json", out / "cl_shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            checks = candidate_library_checks(cl, len(list(library.rglob("candidate.json"))) == 2 and len(list(library.rglob("state.bin"))) == 2)
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "candidate_library", "checks": checks, "first_run": cl["first"]["run_id"], "second_run": cl["second"]["run_id"]}
+            (out / "candidate_library_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            shutil.rmtree(library, ignore_errors=True)
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
         if args.realistic_cohort:
             running, origin = stack(env, workspace, python)
             try:

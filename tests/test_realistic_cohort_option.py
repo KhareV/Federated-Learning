@@ -174,3 +174,13 @@ def test_the_studio_routes_advertise_both_cohorts_and_validate_the_choice(tmp_pa
         assert untrained3.status_code == 400                                  # 3 untrained rounds are the frozen product contract, defined on the original cohort only
         extra = c.post(f"{BASE}/studio/runs", headers=USER_A, json={"run_length": 10, "cohorts": "REALISTIC"})
         assert extra.status_code == 400                                       # unknown keys are still refused
+
+
+def test_figure_titles_name_the_cohort_they_are_scored_on():
+    from studio.specs import figure_title
+
+    original = figure_title("FL10_FIG04", 10)
+    realistic = figure_title("FL10_FIG04", 10, "REALISTIC")
+    assert "reused diagnostic holdout" in original and "realistic" not in original
+    assert "realistic diagnostic holdout" in realistic and "reused" not in realistic
+    assert figure_title("FL10_FIG04", 10, "ORIGINAL") == original                         # the default is unchanged

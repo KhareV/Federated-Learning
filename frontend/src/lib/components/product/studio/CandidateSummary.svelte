@@ -11,7 +11,7 @@
 		<p>Final global state R{run.planned_rounds}: {#if c.state_sha256}<DigestText value={c.state_sha256} label="candidate state digest" />{/if}</p>
 		<p class="badge" data-testid="candidate-label">{c.label ?? 'ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL'}</p>
 		<ul><li>Promoted: <b>NO</b></li><li>Deployed: <b>NO</b></li><li>Registered in the product model registry: <b>NO</b></li><li>Calibration applied: <b>NONE</b></li><li>Released monitoring model changed: <b>NO</b></li></ul>
-		<p class="dim">The candidate is the committed output of round {run.planned_rounds}. It was not chosen by any evaluation result; its scores are exploratory measurements on a reused synthetic cohort.</p>
+		<p class="dim">The candidate is the committed output of round {run.planned_rounds}. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort.</p>
 	{:else}<p class="dim" role="status">{run.status === 'FAILED' ? 'The run failed: there is no candidate. An interrupted run never produces one.' : 'The final candidate is created only when the last round commits.'}</p>{/if}
 </div>
 <style>

@@ -5,8 +5,8 @@
 
 import { parseFl10, parseFl10Job, parseFl10Recorded, type Fl10Job, type Fl10Payload, type Fl10Recorded } from './observatory/fl10';
 import { parseLiveLink, parseShowcase, type LiveLinkStatus, type ShowcaseBundle } from './observatory/showcase';
-import { parseGenCurves, parseGenParticipants, parseGeneralisation, parseHardwareDemoRun, parseHardwareDemoSessions, parseHardwareV2Preview, parseOverview, parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
-import type { GenCurves, GenParticipants, Generalisation, HardwareDemoChoice, HardwareDemoRun, HardwareDemoSession, HardwareV2Preview, StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
+import { parseCandidates, parseGenCurves, parseGenParticipants, parseGeneralisation, parseHardwareDemoRun, parseHardwareDemoSessions, parseHardwareV2Preview, parseOverview, parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
+import type { StudioCandidate, GenCurves, GenParticipants, Generalisation, HardwareDemoChoice, HardwareDemoRun, HardwareDemoSession, HardwareV2Preview, StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
 import type {
 	AuthIdentity,
 	DeviceDescriptor,
@@ -150,6 +150,7 @@ export interface ProductClient {
 	studioRuns(): Promise<StudioRun[]>;
 	studioRun(runId: string): Promise<StudioRun>;
 	studioStartTenRound(choice: StudioRunChoice): Promise<StudioRun>;
+	studioCandidates(): Promise<StudioCandidate[]>;
 	studioOverview(runId: string): Promise<StudioOverview>;
 	studioEvaluation(runId: string): Promise<EvalSummary>;
 	studioEvaluationRound(runId: string, round: number): Promise<EvalRoundDetail>;
@@ -327,8 +328,9 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 		hardwareDemoStart: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/hardware-demo/runs', choice)),
 		hardwareDemoRun: async (id) => parseHardwareDemoRun(await call<unknown>('GET', `/studio/hardware-demo/runs/${enc(id)}`)),
 		studioRuns: async () => parseStudioRuns(await call<unknown>('GET', '/studio/runs')),
+		studioCandidates: async () => parseCandidates(await call<unknown>('GET', '/studio/candidates')),
 		studioRun: async (id) => parseStudioRun(await call<unknown>('GET', `/studio/runs/${enc(id)}`)),
-		studioStartTenRound: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/runs', { run_length: choice.run_length, source_mode: choice.source_mode, ...(choice.monitored_site ? { monitored_site: choice.monitored_site } : {}), ...(choice.signal_session_id ? { signal_session_id: choice.signal_session_id } : {}), ...(choice.initialisation ? { initialisation: choice.initialisation } : {}), ...(choice.cohort ? { cohort: choice.cohort } : {}), algorithm: choice.algorithm ?? 'FEDAVG', secagg_mode: choice.secagg_mode ?? 'PLAIN' })),
+		studioStartTenRound: async (choice) => parseStudioRun(await call<unknown>('POST', '/studio/runs', { run_length: choice.run_length, source_mode: choice.source_mode, ...(choice.monitored_site ? { monitored_site: choice.monitored_site } : {}), ...(choice.signal_session_id ? { signal_session_id: choice.signal_session_id } : {}), ...(choice.initialisation ? { initialisation: choice.initialisation } : {}), ...(choice.cohort ? { cohort: choice.cohort } : {}), ...(choice.candidate_id ? { candidate_id: choice.candidate_id } : {}), algorithm: choice.algorithm ?? 'FEDAVG', secagg_mode: choice.secagg_mode ?? 'PLAIN' })),
 		studioOverview: async (id) => parseOverview(await call<unknown>('GET', `/studio/runs/${enc(id)}/overview`)),
 		studioEvaluation: async (id) => parseEvalSummary(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation`)),
 		studioEvaluationRound: async (id, round) => parseEvalRound(await call<unknown>('GET', `/studio/runs/${enc(id)}/evaluation/${round}`)),

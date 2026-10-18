@@ -27,7 +27,7 @@
 	import { getProductStore } from '$lib/product/state.svelte';
 	import { ownerBoundClientId } from '$lib/product/federation/participation';
 	import { SOURCE_COPY, HARDWARE_V2_COPY, isRecordedClient } from '$lib/product/federation/data-source';
-	import { runContext, isHardwareContext } from '$lib/product/federation/run-context';
+	import { runContext, isHardwareContext, hardwareV2Texts } from '$lib/product/federation/run-context';
 	import { algorithmName } from '$lib/product/federation/presentation';
 	const fed = useFederation();
 	const studio = useStudio();
@@ -119,8 +119,8 @@
 	{#if hardware}
 		<div class="mine" data-testid="hardware-participation">
 			<b>YOUR RECORDED DATA IN THIS RUN</b>
-			<p><b data-testid="hw-total-windows">{totalWindows || '--'}</b> {hardwareV2 ? 'recorded 10 s V2 windows (resampled; every complete window is used, the quality grade is reported but does not block) on your one recorded client; the other seven clients are canonical synthetic peers.' : 'recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client).'}</p>
-			{#if hardwareV2}<p class="dim" data-testid="hardware-metrics-note">Your recording trains client 00 only (its labels are synthetic-assigned). Every round is evaluated exactly as in a synthetic run, on the same frozen synthetic evaluation cohort, so these metrics are directly comparable with a synthetic pretrained-V2 run; they say nothing about your physiology.</p>{/if}
+			<p><b data-testid="hw-total-windows">{totalWindows || '--'}</b> {hardwareV2 ? hardwareV2Texts(ctx.cohort).peers : 'recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client).'}</p>
+			{#if hardwareV2}<p class="dim" data-testid="hardware-metrics-note">{hardwareV2Texts(ctx.cohort).metricsNote}</p>{/if}
 			<p>Raw recorded windows sent to the federation coordinator: <b data-testid="hw-raw-sent">0</b> · only model updates are shared.</p>
 			<TechnicalEvidence label="WHAT IS REAL AND WHAT IS SYNTHETIC"><p>{hardwareV2 ? 'The windows come from your own recorded MongoDB telemetry, resampled from the low-rate telemetry onto the V2 source grid under an unverified ADC-scaling assumption, then graded by the unchanged quality gate. MODEL_V2_FINAL was validated on MIT-BIH ECG, not on this signal chain. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the seven peers keep the cohort\'s synthetic event-window labels, your recorded client has assigned ones.' : 'The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and assigned for this demonstration, so this run has no clinical meaning and is not diagnostic. The eight clients run on one demonstration machine; the model is a small tabular classifier, not MODEL_V2_FINAL.'}</p></TechnicalEvidence>
 		</div>

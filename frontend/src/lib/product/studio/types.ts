@@ -5,20 +5,27 @@ export type EvaluationStatus = 'QUEUED' | 'EVALUATING' | 'COMPLETED' | 'FAILED';
 export type RoundEvalStatus = EvaluationStatus | 'NOT_SUBMITTED';
 export type RunOrigin = 'LIVE' | 'REPLAY' | 'RECORDED';
 export type SourceMode = 'CANONICAL_SYNTHETIC' | 'LIVE_MONITORED_SITE_00';
-export type Initialisation = 'FL_INIT_V2' | 'MODEL_V2_FINAL';
-export type BaseModelId = Initialisation | 'HARDWARE_DEMO_MODEL_V1';
+export type Initialisation = 'FL_INIT_V2' | 'MODEL_V2_FINAL' | 'CANDIDATE';
+export type BaseModelId = 'FL_INIT_V2' | 'MODEL_V2_FINAL' | 'HARDWARE_DEMO_MODEL_V1';
 export type RunSourceMode = SourceMode | 'RECORDED_HARDWARE';
-export interface BaseModel { model_id: BaseModelId; initialisation?: 'FRESH_SEEDED' | 'WARM_START' | null; label: string; state_sha256?: string | null; checkpoint_sha256?: string | null; state_entries?: number | null; architecture_id?: string | null; training_target_of_checkpoint?: string | null }
+export interface BaseModel { /** A known base model, or (kind CANDIDATE) the id of the stored engineering candidate the run started from. */ model_id: BaseModelId | string; kind?: 'CANDIDATE' | null; candidate_cohort?: CohortId | null; source_run_id?: string | null; parent_model_id?: string | null; initialisation?: 'FRESH_SEEDED' | 'WARM_START' | null; label: string; state_sha256?: string | null; checkpoint_sha256?: string | null; state_entries?: number | null; architecture_id?: string | null; training_target_of_checkpoint?: string | null }
 export type ExportStatus = 'NOT_STARTED' | 'PREPARING' | 'READY' | 'FAILED';
 
 export type CohortId = 'ORIGINAL' | 'REALISTIC';
 export interface CohortOption { id: CohortId; label: string; description: string; client_ids: string[]; evaluation_cohort_id: string; cohort_use: string; claim_boundary: string; default: boolean }
+
+export interface StudioCandidate {
+	schema_version: string; candidate_id: string; label: string; created_at: string; source_run_id: string; source_kind: 'SYNTHETIC_COHORT' | 'LIVE_MONITORED_SITE' | 'RECORDED_HARDWARE'; source_detail: Record<string, unknown>;
+	cohort: CohortId; cohort_label: string; evaluation_cohort_id: string | null; run_length: number; round_id: number; algorithm: string; secagg_mode: string; base_model: Record<string, unknown>; state_sha256: string;
+	metrics: Record<string, number> | null; promoted: false; deployed: false; registered_in_product_registry: false; used_for_monitoring: false;
+}
 
 export interface StudioCapabilities {
 	studio_id: string;
 	run_lengths: number[];
 	default_run_length: number;
 	ten_round: { available: boolean; initialisations?: { id: Initialisation; label: string; default: boolean }[]; rounds_by_initialisation?: Partial<Record<Initialisation, number[]>>; default_initialisation?: Initialisation; source_modes: SourceMode[]; algorithms: string[]; aggregation_modes: string[]; unsupported: Record<string, string>; expected_updates: number; monitored_sites?: { index: number; client_id: string; label: string; profile: string }[]; cohorts?: CohortOption[]; cohort_note?: string };
+	candidate_library?: { available: boolean; count: number; rounds?: number[]; note: string };
 	three_round: { available: boolean; expected_updates: number };
 	hardware_demo?: { available: boolean; source_mode: 'RECORDED_HARDWARE_DEMO'; model: 'HARDWARE_DEMO_MODEL_V1'; run_lengths: number[]; algorithms: string[]; aggregation_modes: string[]; secagg_scope: string; fedprox_mu: number; label_assignment: string; initialisations: string[]; v2_initialisation: string; starting_models?: HardwareStartingModel[] };
 	generalisation?: { cohort_id: string; label: string; claim_boundary: string; baseline: string };
@@ -28,7 +35,7 @@ export interface StudioCapabilities {
 export interface HardwareDemoSession { id: string; started_at: string; stopped_at: string; record_count: number; trace_count: number; eligible: boolean }
 export interface HardwareDemoRound { round: number; base_state_sha256: string; global_state_sha256: string; accepted_updates: number; rejected_updates: number; weighted_mean_training_loss: number; optimizer_steps: number; evaluation: { BCE: number; accuracy: number; precision: number | null; recall: number | null; F1: number | null; windows: number; confusion: Record<string, number> } }
 export interface HardwareDemoRun { schema_version: 'HARDWARE_DEMO_FL_RUN_V1'; run_id: string; created_at: string; completed_at: string; status: 'COMPLETED'; source_mode: 'RECORDED_HARDWARE_DEMO'; source_session_ids: string[]; source_record_count: number; snapshot_sha256: string; algorithm: 'FEDAVG' | 'FEDPROX'; fedprox_mu: number | null; aggregation: 'PLAIN'; secagg_mode: 'PLAIN' | 'SECAGG_SHADOW'; secagg_shadow: Record<string, unknown> | null; rounds_planned: 3 | 10; rounds: HardwareDemoRound[]; state_progression: Record<string, string>; model: { id: 'HARDWARE_DEMO_MODEL_V1' | 'MODEL_V2_FINAL'; architecture: string; released: false; v2_initialisation: 'NOT_APPLICABLE' | 'PRETRAINED_V2_FINE_TUNING'; initialisation?: 'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL'; warm_start?: { source_run_id: string; source_round: number; source_state_sha256: string; source_algorithm: string | null } | null }; dataset: { training_windows: number; holdout_windows: number; windows_total: number; input_feature_sha256: string; label_sha256: string; label_assignment: { version: string; status: 'SYNTHETIC_ASSIGNED_FOR_DEMO'; seed: number; classes: Record<string, string> }; clients: Record<string, { samples: number; label_counts: Record<string, number>; feature_sha256: string; window_ids: string[] }> }; claim_boundary: string }
-export interface HardwareDemoChoice { session_ids: string[]; run_length: 3 | 10; algorithm: 'FEDAVG' | 'FEDPROX'; secagg_mode: 'PLAIN' | 'SECAGG_SHADOW'; label_seed: number; initialisation?: 'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL'; warm_start_run_id?: string; cohort?: CohortId }
+export interface HardwareDemoChoice { session_ids: string[]; run_length: 3 | 10; algorithm: 'FEDAVG' | 'FEDPROX'; secagg_mode: 'PLAIN' | 'SECAGG_SHADOW'; label_seed: number; initialisation?: 'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL' | 'CANDIDATE'; warm_start_run_id?: string; cohort?: CohortId; candidate_id?: string }
 
 export interface EvaluationAvailability { available: boolean; source: 'LIVE' | 'RECORDED' | 'RECORDED_FROM_SOURCE_RUN'; evaluation_run_id: string; reason: string | null; revision: number }
 
@@ -161,7 +168,7 @@ export interface StudioOverview {
 	historical_exposed: string;
 }
 
-export interface StudioRunChoice { run_length: RunLength; source_mode: SourceMode; monitored_site?: number; signal_session_id?: string; initialisation?: Initialisation; algorithm?: 'FEDAVG' | 'FEDPROX'; secagg_mode?: 'PLAIN' | 'SECAGG_SHADOW'; cohort?: CohortId }
+export interface StudioRunChoice { run_length: RunLength; source_mode: SourceMode; monitored_site?: number; signal_session_id?: string; initialisation?: Initialisation; algorithm?: 'FEDAVG' | 'FEDPROX'; secagg_mode?: 'PLAIN' | 'SECAGG_SHADOW'; cohort?: CohortId; candidate_id?: string }
 
 // ---- Generalisation lane (frozen V2 vs every federated round on the unseen G1 cohort) --------------------------------------------
 export interface GenRecord extends EvalRecord { subject: 'FL_ROUND' | 'FROZEN_V2_BASELINE' }
@@ -186,6 +193,6 @@ export interface Generalisation {
 export interface GenCurves { run_id: string; round_id: number; available: boolean; reason?: string; round?: { roc: number[][]; pr: number[][] }; baseline?: { roc: number[][]; pr: number[][] } | null }
 export interface GenParticipants { run_id: string; round_id: number; available: boolean; round?: Record<string, Metrics>; baseline?: Record<string, Metrics> | null }
 
-export interface HardwareStartingModel { id: 'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL'; label: string; available: boolean; reason: string | null; note?: string | null }
+export interface HardwareStartingModel { id: 'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL' | 'CANDIDATE'; label: string; available: boolean; reason: string | null; note?: string | null }
 /** What a pretrained-V2 run could use from the chosen recorded sessions (resample + the unchanged PREPROC_V1 quality gate). */
 export interface HardwareV2Preview { sessions: { session_id: string; readings: number; windows: number; usable: number; train: number; holdout: number; by_quality: Record<string, number>; excluded_reasons: Record<string, number> }[]; train_windows: number; holdout_windows: number; min_train_windows: number; min_holdout_windows: number; eligible: boolean; reason: string | null; assumptions: Record<string, unknown> }

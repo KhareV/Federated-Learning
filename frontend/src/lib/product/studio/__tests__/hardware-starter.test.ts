@@ -6,6 +6,7 @@ import StudioRunStarter from '$lib/components/product/studio/StudioRunStarter.sv
 import { FrontendAuth } from '../../auth';
 import { ProductStore, setProductStore } from '../../state.svelte';
 import { FakeSocket, fakeBackend } from '../../__tests__/support';
+import { parseCandidates } from '../parse';
 import type { HardwareDemoRun, StudioCapabilities } from '../types';
 
 const immediate = (cb: () => void) => { cb(); return 0; };
@@ -23,15 +24,17 @@ const caps = (hardware: typeof HW | undefined): StudioCapabilities => ({ studio_
 const prior = { run_id: 'HDFLRUN-AAA', status: 'COMPLETED', algorithm: 'FEDAVG', rounds_planned: 3, completed_at: '2026-10-15T00:00:00Z', model: { id: 'HARDWARE_DEMO_MODEL_V1' } } as unknown as HardwareDemoRun;
 let started: unknown;
 let previewResult: unknown;
+let candidatesResult: unknown[] = [];
 const PREVIEW_OK = { sessions: [{ session_id: 'HW-OK', readings: 4800, windows: 57, usable: 40, train: 28, holdout: 8, by_quality: { VALID: 40, UNUSABLE: 17 }, excluded_reasons: { CLIPPING: 17 } }], train_windows: 28, holdout_windows: 8, min_train_windows: 16, min_holdout_windows: 4, eligible: true, reason: null, assumptions: {} };
 const PREVIEW_BAD = { ...PREVIEW_OK, sessions: [{ ...PREVIEW_OK.sessions[0], usable: 0, train: 0, holdout: 0 }], train_windows: 0, holdout_windows: 0, eligible: false, reason: 'INSUFFICIENT_V2_WINDOWS: 0 training and 0 holdout windows usable; the unchanged PREPROC_V1 quality gate excluded: CLIPPING ×57.' };
 beforeEach(() => {
-	FakeSocket.reset(); started = null; previewResult = PREVIEW_OK;
+	FakeSocket.reset(); started = null; previewResult = PREVIEW_OK; candidatesResult = [];
 	vi.stubGlobal('location', { protocol: 'http:', host: 'localhost:5173', assign: vi.fn() });
 	const backend = Object.assign(fakeBackend(), {
 		hardwareDemoSessions: () => Promise.resolve([{ id: 'HW-OK', started_at: '2026-10-15T00:00:00Z', stopped_at: '2026-10-15T00:01:00Z', record_count: 1200, trace_count: 1200, eligible: true },
 			{ id: 'HW-EMPTY', started_at: '2026-10-15T00:00:00Z', stopped_at: '2026-10-15T00:00:05Z', record_count: 0, trace_count: 0, eligible: false }]),
 		hardwareDemoRuns: () => Promise.resolve([prior]),
+		studioCandidates: () => Promise.resolve(parseCandidates(candidatesResult)),
 		hardwareV2Preview: () => Promise.resolve(previewResult),
 		hardwareDemoStart: (choice: unknown) => { started = choice; return Promise.reject(new Error('stop here')); }
 	});
@@ -152,5 +155,40 @@ describe('the cohort option on a recorded-hardware run', () => {
 		await fireEvent.click(screen.getByTestId('cohort-original'));
 		expect(screen.queryByTestId('hardware-cohort-needs-v2')).toBeNull();
 		expect((screen.getByTestId('hardware-demo-start') as HTMLButtonElement).disabled).toBe(false);
+	});
+});
+
+
+// A stored engineering candidate can be the starting model of a recorded-hardware run (the pretrained-V2 family): same topology, windows and quality gate, only R0 differs.
+const CAND = (id: string, cohort: string) => ({ schema_version: 'STUDIO_ENGINEERING_CANDIDATE_V1', candidate_id: id, label: 'ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL', created_at: '2026-10-18T12:00:00+00:00', source_run_id: 'FL10RUN-AAA', source_kind: 'SYNTHETIC_COHORT',
+	source_detail: {}, cohort, cohort_label: cohort, evaluation_cohort_id: 'E', run_length: 10, round_id: 10, algorithm: 'FEDAVG', secagg_mode: 'PLAIN', base_model: { model_id: 'MODEL_V2_FINAL' }, state_sha256: 'ab'.repeat(32), metrics: { AUPRC: 0.8 },
+	promoted: false, deployed: false, registered_in_product_registry: false, used_for_monitoring: false });
+const HW_WITH_CANDIDATES = { ...HW, starting_models: [...HW.starting_models, { id: 'CANDIDATE' as const, label: 'Stored engineering candidate (from your candidate library)', available: true, reason: null, note: 'starts the pretrained-V2 family from an earlier run' }] };
+
+describe('a stored candidate as the starting model of a recorded-hardware run', () => {
+	it('is offered, listed with its cohort, and sent with its id (the run is still the pretrained-V2 family)', async () => {
+		candidatesResult = [CAND('FL10_CANDIDATE_FL10RUN-AAA', 'REALISTIC'), CAND('HDFL_CANDIDATE_B', 'ORIGINAL')];
+		mount(caps(HW_WITH_CANDIDATES as unknown as typeof HW));
+		await fireEvent.click(screen.getByTestId('data-source-hardware'));
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
+		await fireEvent.click(screen.getByTestId('hardware-demo-session-HW-OK'));
+		await fireEvent.change(screen.getByTestId('hardware-demo-init'), { target: { value: 'CANDIDATE' } });
+		const picker = (await screen.findByTestId('hardware-demo-candidate')) as HTMLSelectElement;
+		await waitFor(() => expect(picker.options.length).toBe(2));
+		expect(picker.options[0].textContent).toContain('realistic cohort');
+		await waitFor(() => expect(screen.getByTestId('hardware-v2-preview').textContent).toContain('ENOUGH USABLE WINDOWS'));      // the quality-gate preview applies unchanged
+		expect(screen.getByTestId('hardware-demo-v2-note').textContent).toContain('final state of the stored candidate');
+		await fireEvent.change(picker, { target: { value: 'HDFL_CANDIDATE_B' } });
+		expect(screen.getByTestId('hardware-demo-candidate-note').textContent).toContain('trained on the original cohort');
+		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
+		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], run_length: 3, initialisation: 'CANDIDATE', candidate_id: 'HDFL_CANDIDATE_B' }));
+	});
+	it('with no stored candidate the option is shown unavailable with its reason and cannot be started', async () => {
+		const none = { ...HW, starting_models: [...HW.starting_models, { id: 'CANDIDATE' as const, label: 'Stored engineering candidate (from your candidate library)', available: false, reason: 'no completed run has produced an engineering candidate yet' }] };
+		mount(caps(none as unknown as typeof HW));
+		await fireEvent.click(screen.getByTestId('data-source-hardware'));
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
+		const option = [...(screen.getByTestId('hardware-demo-init') as HTMLSelectElement).options].find((o) => o.value === 'CANDIDATE');
+		expect(option?.disabled).toBe(true);
 	});
 });

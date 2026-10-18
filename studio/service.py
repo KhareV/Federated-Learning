@@ -19,6 +19,7 @@ from fl10.evaluate import ROOT
 from product.api.errors import ProductError, ProductErrorCode
 from product.federation.service import FederationService
 from studio import cohorts, v2_init
+from studio.candidates import CandidateLibrary
 from studio.bundle import build_live_bundle, read_run_report
 from studio.capture3 import ProductRunCapture
 from studio.constants import (
@@ -43,16 +44,17 @@ def _as_product_error(error: StudioRunError) -> ProductError:
 
 
 class StudioService:
-    def __init__(self, *, root: Path, federation: FederationService, inference_factory: Any | None, other_run_active: Any, observer: EvaluationObserver | None = None) -> None:
+    def __init__(self, *, root: Path, federation: FederationService, inference_factory: Any | None, other_run_active: Any, observer: EvaluationObserver | None = None, candidate_library: CandidateLibrary | None = None) -> None:
         self.root = Path(root) / "studio_runs"
         self.root.mkdir(parents=True, exist_ok=True)
+        self.candidates = candidate_library or CandidateLibrary(Path(root) / "candidate_library")      # the product launcher passes the stable library; tests and ad-hoc use stay inside their own workspace
         self.federation = federation
         self.observer = observer or EvaluationObserver(self.root)
         self.generalisation = GeneralisationLane(self.root, self.observer)       # second lane: unseen G1 cohort + the unchanged frozen V2 baseline (mirrors every submission)
         self.capture = ProductRunCapture(federation, self.observer, self.root)
         self.capture.install()
         self.runner10 = StudioFl10Service(root=self.root, observer=self.observer, inference_factory=inference_factory,
-                                          other_run_active=lambda: bool(other_run_active()) or federation.active_live_run(), finalize=self._finalize_10)
+                                          other_run_active=lambda: bool(other_run_active()) or federation.active_live_run(), finalize=self._finalize_10, candidates=self.candidates)
         self._exports: dict[str, dict[str, Any]] = {}
         self.hardware: Any | None = None         # HardwareRunJobs (attached by register_studio): recorded-hardware runs share every read path below
         self._hardware_bundles: dict[tuple[Any, ...], dict[str, Any]] = {}
@@ -93,7 +95,54 @@ class StudioService:
             with self._lock:
                 self._exports[run_id] = {"status": "FAILED", "message": str(error)[:300]}
 
+    def _final_metrics(self, run_id: str, round_id: int) -> dict[str, Any] | None:
+        record = self.observer.get(run_id, round_id)
+        return dict(record.metric_result) if record is not None and record.evaluation_status == "COMPLETED" and record.metric_result else None
+
+    def _register_candidate_10(self, run_id: str) -> None:
+        """The final engineering candidate of a completed extended-engine run is kept in the candidate library (a failure here never touches the run)."""
+        import logging
+
+        job = self.runner10.jobs.get(run_id)
+        if job is None or job.status != "COMPLETED" or not job.candidate:
+            return
+        try:
+            from fl10.runner import load_state
+
+            state = load_state(self.root / run_id / "run", job.rounds, job.candidate["state_sha256"])
+            self.candidates.register(
+                owner=job.owner, candidate_id=job.candidate["candidate_id"], source_run_id=run_id, source_kind="LIVE_MONITORED_SITE" if job.mode == "B" else "SYNTHETIC_COHORT",
+                source_detail={"source_mode": MODES[job.mode], "monitored_site": job.monitored_site if job.mode == "B" else None, "signal_session_id": (job.signal_session or {}).get("session_id") if job.mode == "B" else None},
+                cohort=job.cohort, evaluation_cohort_id=cohorts.spec(job.cohort).evaluation_cohort_id, run_length=job.rounds, algorithm=job.algorithm, secagg_mode=job.secagg_mode,
+                base_model=self._base_model(job.init, job.base_audit), state=state, metrics=self._final_metrics(run_id, job.rounds))
+        except Exception:  # noqa: BLE001
+            logging.getLogger(__name__).exception("candidate library registration failed for %s", run_id)
+
+    def _register_candidate_hardware(self, run_id: str) -> None:
+        import logging
+
+        job = self._hardware_job(run_id)
+        candidate = self._hw_candidate(job)
+        if candidate is None:
+            return
+        try:
+            import json
+
+            from fl10.runner import load_state
+
+            directory = self.hardware.demo.root / run_id
+            run = json.loads((directory / "run.json").read_text())
+            state = load_state(directory / "fl10", job.rounds, candidate["state_sha256"])
+            self.candidates.register(
+                owner=job.owner, candidate_id=candidate["candidate_id"], source_run_id=run_id, source_kind="RECORDED_HARDWARE",
+                source_detail={"session_ids": run.get("source_session_ids"), "recorded_client_windows": run.get("dataset", {}).get("training_windows")},
+                cohort=job.cohort, evaluation_cohort_id=cohorts.spec(job.cohort).evaluation_cohort_id, run_length=job.rounds, algorithm=job.algorithm, secagg_mode=job.secagg_mode,
+                base_model=self.hardware.describe(job)["base_model"], state=state, metrics=self._final_metrics(run_id, job.rounds))
+        except Exception:  # noqa: BLE001
+            logging.getLogger(__name__).exception("candidate library registration failed for %s", run_id)
+
     def _finalize_10(self, run_id: str, directory: Path) -> None:
+        self._register_candidate_10(run_id)
         self._export(run_id, self.runner10.jobs[run_id].rounds, "FL10_10R", self.runner10.jobs[run_id].mode, directory, cohort=self.runner10.jobs[run_id].cohort)
 
     def _export(self, run_id: str, n: int, engine: str, mode: str, directory: Path, cohort: str = cohorts.ORIGINAL) -> None:
@@ -277,7 +326,7 @@ class StudioService:
                 raise _as_product_error(error) from error
             return {"run_id": run_id, "run_length": job.rounds, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "source_mode": MODES[job.mode], "monitored_site": job.monitored_site if job.mode == "B" else None, "signal_session_id": (job.signal_session or {}).get("session_id") if job.mode == "B" else None, "cohort": job.cohort, "cohort_label": cohorts.spec(job.cohort).label, "status": job.status,
                     "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds, "client_ids": list(cohorts.spec(job.cohort).client_ids), "candidate": job.candidate, "failure": job.failure,
-                    "label": f"{job.rounds}-round " + ("extended run" if job.init == v2_init.INIT_FRESH else "run — pretrained V2 start") + (" · realistic cohort" if job.cohort == cohorts.REALISTIC else ""),
+                    "label": f"{job.rounds}-round " + ("extended run" if job.init == v2_init.INIT_FRESH else "run — candidate start" if job.init == "CANDIDATE" else "run — pretrained V2 start") + (" · realistic cohort" if job.cohort == cohorts.REALISTIC else ""),
                     "base_model": self._base_model(job.init, job.base_audit), "source_label": "LIVE RUN (this session)", "replay_of": None, "evaluation": self._evaluation_state(run_id), "export_status": job.export_status, "created_at": job.created_at}
         run = self.federation.get_run(user_id, run_id)
         meta = self.federation.artifacts.read_run_meta(run_id) or {}
@@ -291,6 +340,9 @@ class StudioService:
 
     @staticmethod
     def _base_model(init: str, audit: dict[str, Any] | None) -> dict[str, Any]:
+        if init == "CANDIDATE":          # a stored engineering candidate is the starting state; the family (V2 layout), its cohort and its source run are named
+            return {"model_id": (audit or {}).get("model_id"), "kind": "CANDIDATE", "family": "V2", "label": (audit or {}).get("label"),
+                    **{k: (audit or {}).get(k) for k in ("state_sha256", "architecture_id", "training_target_of_checkpoint", "parent_model_id", "source_run_id", "source_kind", "candidate_cohort", "candidate_run_length")}}
         info = {"model_id": init, "label": v2_init.INIT_LABELS[init]}
         if audit:
             info |= {k: audit.get(k) for k in ("state_sha256", "checkpoint_sha256", "state_entries", "architecture_id", "training_target_of_checkpoint")}
@@ -467,6 +519,7 @@ class StudioService:
         job = self._hardware_job(run_id)
         if self._hw_v2(job):
             self.observer.wait_idle()
+            self._register_candidate_hardware(run_id)
             self.generalisation.wait_settled(run_id, job.rounds)
             bundle = self._hardware_live_bundle(run_id)
             gen = self.generalisation.bundle(run_id, run_length=job.rounds, init=self.hardware.describe(job)["base_model"])

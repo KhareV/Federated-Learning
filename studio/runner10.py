@@ -23,12 +23,14 @@ from product.federation.base import AggregationMode, Algorithm
 from product.federation.events import FederationEmitter
 from product.federation.journal import FederationEventJournal
 from studio import cohorts, v2_init
+from studio.candidates import CandidateLibrary, audit_of
 from studio.events10 import Fl10EventTranslator
 from studio.observer import EvaluationObserver
 from studio.specs import comparison_pair
 
 CLIENT_IDS = tuple(f"SIM_FL_SITE_{i:02d}" for i in range(8))
 MODES = {"A": "CANONICAL_SYNTHETIC", "B": "LIVE_MONITORED_SITE_00"}
+INIT_CANDIDATE = "CANDIDATE"
 PHASES = ("CREATED", "BUILDING_COHORT", "MONITORING_SITE_00", "TRAINING", "EVALUATING", "EXPORTING", "DONE", "FAILED")
 
 
@@ -55,6 +57,7 @@ class Job:
     secagg_mode: str = "PLAIN"
     signal_session: dict[str, Any] | None = None  # source mode B only: a COMPLETED History monitoring session whose regenerated windows become the chosen site's local data (instead of monitoring a cohort site now)
     monitored_site: int = 0                      # source mode B only: which canonical cohort site (0..7) is genuinely live-monitored (default SITE_00, the original behaviour)
+    candidate_id: str | None = None              # init CANDIDATE only: the library candidate whose final state is R0 (a federated engineering candidate of an earlier run)
     cohort: str = cohorts.ORIGINAL               # ORIGINAL (frozen NHM_FL10_001 cohort, default) | REALISTIC (realistic synthetic cohort): the training clients, the evaluation holdout and the wording that goes with them
     status: str = "CREATED"                      # CREATED | RUNNING | COMPLETED | FAILED
     phase: str = "CREATED"
@@ -72,8 +75,9 @@ class Job:
 
 class StudioFl10Service:
     def __init__(self, *, root: Path, observer: EvaluationObserver, inference_factory: Callable[[], Any] | None, other_run_active: Callable[[], bool],
-                 finalize: Callable[[str, Path], None] | None = None) -> None:
+                 finalize: Callable[[str, Path], None] | None = None, candidates: CandidateLibrary | None = None) -> None:
         self.root = Path(root)
+        self.candidates = candidates
         self.observer = observer
         self.events = FederationArtifactStore(self.root / "engine10_events")
         self._inference_factory = inference_factory
@@ -90,14 +94,14 @@ class StudioFl10Service:
         return self.root / run_id
 
     def _save(self, job: Job) -> None:
-        meta = {"run_id": job.run_id, "owner": job.owner, "mode": job.mode, "init": job.init, "base_audit": job.base_audit, "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "monitored_site": job.monitored_site, "signal_session": job.signal_session, "cohort": job.cohort, "created_at": job.created_at, "status": job.status, "phase": job.phase, "current_round": job.current_round,
+        meta = {"run_id": job.run_id, "owner": job.owner, "mode": job.mode, "init": job.init, "base_audit": job.base_audit, "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "monitored_site": job.monitored_site, "signal_session": job.signal_session, "cohort": job.cohort, "candidate_id": job.candidate_id, "created_at": job.created_at, "status": job.status, "phase": job.phase, "current_round": job.current_round,
                 "failure": job.failure, "candidate": job.candidate, "export_status": job.export_status, "run_length": job.rounds, "engine": "FL10_10R"}
         atomic_write(self.job_dir(job.run_id) / "meta.json", (json.dumps(meta, indent=1, sort_keys=True) + "\n").encode())
 
     def _load_existing(self) -> None:
         for path in sorted(self.root.glob("FL10RUN-*/meta.json")):
             meta = json.loads(path.read_text())
-            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], rounds=int(meta.get("run_length", 10)), init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), algorithm=meta.get("algorithm", "FEDAVG"), secagg_mode=meta.get("secagg_mode", "PLAIN"), monitored_site=int(meta.get("monitored_site", 0)), signal_session=meta.get("signal_session"), cohort=meta.get("cohort", cohorts.ORIGINAL), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
+            job = Job(run_id=meta["run_id"], owner=meta["owner"], mode=meta["mode"], rounds=int(meta.get("run_length", 10)), init=meta.get("init", v2_init.INIT_FRESH), base_audit=meta.get("base_audit"), algorithm=meta.get("algorithm", "FEDAVG"), secagg_mode=meta.get("secagg_mode", "PLAIN"), monitored_site=int(meta.get("monitored_site", 0)), signal_session=meta.get("signal_session"), cohort=meta.get("cohort", cohorts.ORIGINAL), candidate_id=meta.get("candidate_id"), created_at=meta["created_at"], status=meta["status"], phase=meta["phase"], current_round=meta["current_round"],
                       failure=meta.get("failure"), candidate=meta.get("candidate"), export_status=meta.get("export_status", "NOT_STARTED"))
             self._register_cohort(job)
             journal = FederationEventJournal(job.run_id)
@@ -153,17 +157,27 @@ class StudioFl10Service:
             await asyncio.wait(tasks, timeout=timeout)
 
     async def create(self, owner: str, mode: str, init: str = v2_init.INIT_FRESH, rounds: int = 10,
-                     algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN", monitored_site: int = 0, signal_session: dict[str, Any] | None = None, cohort: str = cohorts.ORIGINAL) -> Job:
+                     algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN", monitored_site: int = 0, signal_session: dict[str, Any] | None = None, cohort: str = cohorts.ORIGINAL, candidate_id: str | None = None) -> Job:
         if cohort not in cohorts.COHORTS:
             raise StudioRunError("INVALID_REQUEST", "cohort must be ORIGINAL or REALISTIC")
         if cohort != cohorts.ORIGINAL and signal_session is not None:
             raise StudioRunError("INVALID_REQUEST", "a History monitoring session regenerates the original cohort's site signal; it cannot be combined with the realistic cohort")
         if rounds not in (3, 10):
             raise StudioRunError("INVALID_REQUEST", "the extended engine runs 3 or 10 rounds")
-        if rounds == 3 and init != v2_init.INIT_V2_FINAL:
-            raise StudioRunError("INVALID_REQUEST", "3-round untrained runs use the frozen product contract (POST /product/v1/federation/runs); 3 rounds here start from the pretrained V2 weights")
-        if init not in v2_init.INITS:
-            raise StudioRunError("INVALID_REQUEST", "initialisation must be FL_INIT_V2 (untrained) or MODEL_V2_FINAL (pretrained)")
+        if rounds == 3 and init not in (v2_init.INIT_V2_FINAL, INIT_CANDIDATE):
+            raise StudioRunError("INVALID_REQUEST", "3-round untrained runs use the frozen product contract (POST /product/v1/federation/runs); 3 rounds here start from the pretrained V2 weights or a stored candidate")
+        if init not in (*v2_init.INITS, INIT_CANDIDATE):
+            raise StudioRunError("INVALID_REQUEST", "initialisation must be FL_INIT_V2 (untrained), MODEL_V2_FINAL (pretrained) or CANDIDATE (a stored engineering candidate)")
+        base_audit = None
+        if init == INIT_CANDIDATE:
+            if not candidate_id or self.candidates is None:
+                raise StudioRunError("INVALID_REQUEST", "initialisation CANDIDATE needs a candidate_id from your candidate library")
+            try:
+                base_audit = audit_of(self.candidates.get(owner, candidate_id))
+            except (LookupError, PermissionError) as error:
+                raise StudioRunError("NOT_FOUND", "candidate not found in your library") from error
+        elif candidate_id is not None:
+            raise StudioRunError("INVALID_REQUEST", "candidate_id applies only to initialisation CANDIDATE")
         if mode not in MODES:
             raise StudioRunError("INVALID_REQUEST", "source mode must be A (canonical synthetic cohort) or B (live-monitored simulated SITE_00)")
         if not isinstance(monitored_site, int) or isinstance(monitored_site, bool) or not 0 <= monitored_site < 8:
@@ -177,7 +191,7 @@ class StudioFl10Service:
         run_id = f"FL10RUN-{secrets.token_hex(6).upper()}"
         if algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
             raise StudioRunError("INVALID_REQUEST", "algorithm or aggregation mode is unsupported")
-        job = Job(run_id=run_id, owner=owner, mode=mode, rounds=rounds, init=init, algorithm=algorithm, secagg_mode=secagg_mode, monitored_site=monitored_site, signal_session=signal_session, cohort=cohort, created_at=_now(), loop=asyncio.get_running_loop())
+        job = Job(run_id=run_id, owner=owner, mode=mode, rounds=rounds, init=init, base_audit=base_audit, candidate_id=candidate_id, algorithm=algorithm, secagg_mode=secagg_mode, monitored_site=monitored_site, signal_session=signal_session, cohort=cohort, created_at=_now(), loop=asyncio.get_running_loop())
         self._register_cohort(job)
         job.journal = FederationEventJournal(run_id)
         job.emitter = FederationEmitter(run_id, lambda: time.time_ns() // 1000, [job.journal.append, lambda e: self.events.append_event(run_id, e)], 0)
@@ -231,6 +245,11 @@ class StudioFl10Service:
         initial_state, initialisation = None, {"model_id": v2_init.INIT_FRESH}
         if job.init == v2_init.INIT_V2_FINAL:          # verified before any training: a digest / layout problem fails the run closed at R0
             initial_state, initialisation = v2_init.load_v2_final()
+            job.base_audit = initialisation
+            self._save(job)
+        elif job.init == INIT_CANDIDATE:               # the stored candidate: digest and layout verified before any training
+            assert self.candidates is not None and job.candidate_id is not None
+            initial_state, initialisation = self.candidates.load_for_start(job.owner, job.candidate_id)
             job.base_audit = initialisation
             self._save(job)
         datasets, manifest = cohorts.training(job.cohort) if job.cohort != cohorts.ORIGINAL else build_cohort()[1:]

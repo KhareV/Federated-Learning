@@ -166,6 +166,10 @@ class HardwareRunJobs:
     @staticmethod
     def _base_model(job: HardwareJob) -> dict[str, Any]:
         info = job.warm_info or {}
+        if job.initialisation == "MODEL_V2_FINAL" and info.get("kind") == "CANDIDATE":     # the V2-family run started from a stored engineering candidate
+            return {"model_id": info.get("model_id"), "kind": "CANDIDATE", "family": "V2", "label": info.get("label"), "state_sha256": info.get("state_sha256"), "architecture_id": info.get("architecture_id"),
+                    "training_target_of_checkpoint": info.get("training_target_of_checkpoint"), "parent_model_id": info.get("parent_model_id"), "source_run_id": info.get("source_run_id"),
+                    "source_kind": info.get("source_kind"), "candidate_cohort": info.get("candidate_cohort"), "candidate_run_length": info.get("candidate_run_length"), "initialisation": None}
         if job.initialisation == "MODEL_V2_FINAL":     # pretrained V2 fine-tuned on resampled recorded windows (studio.hardware_v2)
             return {"model_id": "MODEL_V2_FINAL", "label": "Pretrained V2 (MODEL_V2_FINAL) — federated fine-tuning on resampled recorded windows", "state_sha256": info.get("state_sha256"),
                     "checkpoint_sha256": info.get("checkpoint_sha256"), "state_entries": info.get("state_entries"), "architecture_id": info.get("architecture_id"),
@@ -179,7 +183,7 @@ class HardwareRunJobs:
             "run_id": job.run_id, "run_length": job.rounds, "engine": ENGINE, "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode,
             "source_mode": "RECORDED_HARDWARE", "status": job.status, "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds,
             "client_ids": list(job.client_ids), "cohort": job.cohort, "candidate": None, "failure": job.failure,
-            "label": f"{job.rounds}-round recorded-hardware run" + (" — warm start" if job.initialisation == "WARM_START" else " — pretrained V2" if job.initialisation == "MODEL_V2_FINAL" else ""),
+            "label": f"{job.rounds}-round recorded-hardware run" + (" — warm start" if job.initialisation == "WARM_START" else " — candidate start" if (job.warm_info or {}).get("kind") == "CANDIDATE" else " — pretrained V2" if job.initialisation == "MODEL_V2_FINAL" else ""),
             "base_model": self._base_model(job),
             "source_label": "RECORDED HARDWARE (this account)", "replay_of": None,
             "evaluation": {"available": True, "source": "LIVE", "evaluation_run_id": job.run_id, "reason": None, "revision": job.current_round + (1 if done else 0)},

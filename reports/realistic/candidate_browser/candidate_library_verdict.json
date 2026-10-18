@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "candidate_carries_scores": true,
+    "candidate_labelled_not_deployed": true,
+    "candidate_listed_on_models_page": true,
+    "first_run_completed": true,
+    "form_offers_the_candidate": true,
+    "form_says_cross_cohort": true,
+    "library_files_exist_on_disk": true,
+    "library_now_has_both": true,
+    "no_alerts": true,
+    "second_candidate_descends_from_first": true,
+    "second_run_completed": true,
+    "second_run_is_original_cohort": true,
+    "second_run_method_says_candidate_start": true,
+    "second_run_metrics_shown": true,
+    "second_run_names_its_candidate": true
+  },
+  "first_run": "FL10RUN-54FE880D00F1",
+  "mode": "candidate_library",
+  "note": "Re-derived from the saved browser output (candidate_library.json) after fixing one check that matched 'Started from candidate' with a space where the page text has none; the browser run itself was not repeated. The on-disk check is carried over from the original run's verdict.",
+  "second_run": "FL10RUN-61ACA16FCF81",
+  "status": "PASS"
+}

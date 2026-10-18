@@ -38,3 +38,6 @@ data/processed/
 *.tflite
 artifacts/tmp/
 tmp/
+
+# Engineering candidates of completed Studio runs (durable, per owner; never committed)
+data/studio_candidates/

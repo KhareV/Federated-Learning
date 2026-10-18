@@ -157,14 +157,23 @@ def _dataset(client: str, windows: list[dict[str, Any]], labels: dict[str, int],
     return LocalDataset(client, client, ", ".join(session_ids), inputs, y, tuple(edges), counts, dataset_semantic_sha(inputs, y, edges))
 
 
-def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int, cohort: str = "ORIGINAL", **_: Any) -> dict[str, Any]:
+def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int, cohort: str = "ORIGINAL", candidate_id: str | None = None, **_: Any) -> dict[str, Any]:
     """Validate and build everything that can fail on the caller's thread. Nothing is trained."""
     if rounds not in (3, 10) or algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
         raise ValueError("unsupported hardware demo configuration")
     if not 0 <= label_seed <= 2**31 - 1:
         raise ValueError("label_seed must be 0..2147483647")
     records = demo._records(owner, session_ids)
-    state, audit = v2_init.load_v2_final()                       # fails closed on any digest / layout difference
+    if candidate_id:                                             # a stored engineering candidate of this owner is R0 (digest and layout verified; fails closed)
+        library = getattr(demo, "candidates", None)
+        if library is None:
+            raise ValueError("the candidate library is not available")
+        try:
+            state, audit = library.load_for_start(owner, candidate_id)
+        except PermissionError as error:
+            raise LookupError("candidate not found in your library") from error
+    else:
+        state, audit = v2_init.load_v2_final()                   # fails closed on any digest / layout difference
     train_all: list[dict[str, Any]] = []
     holdout_sets: list[tuple[str, list[dict[str, Any]]]] = []
     infos: list[dict[str, Any]] = []
@@ -213,8 +222,11 @@ def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algor
         "window_manifest": [{"window_id": w["window_id"], "session_id": w["session_id"], "timestamp_us": int(w["timestamp_us"]), "label": (train_labels | holdout_labels)[w["window_id"]], "label_provenance": "SYNTHETIC_ASSIGNED_FOR_DEMO",
                              "split": "TRAIN" if w["window_id"] in used_ids else "HOLDOUT", "client_id": HARDWARE_CLIENT_ID if w["window_id"] in used_ids else None} for w in all_windows],
     }
-    model_block = {"id": MODEL_ID, "architecture": audit["architecture_id"], "released": False, "v2_initialisation": "PRETRAINED_V2_FINE_TUNING", "initialisation": MODEL_ID, "warm_start": None,
-                   "base_audit": {k: audit[k] for k in ("model_id", "checkpoint_sha256", "state_sha256", "state_entries", "architecture_id", "training_target_of_checkpoint")}}
+    base_audit = {k: audit.get(k) for k in ("model_id", "checkpoint_sha256", "state_sha256", "state_entries", "architecture_id", "training_target_of_checkpoint")}
+    if candidate_id:
+        base_audit |= {k: audit.get(k) for k in ("kind", "family", "label", "parent_model_id", "source_run_id", "source_kind", "candidate_cohort", "candidate_run_length")}
+    model_block = {"id": MODEL_ID, "architecture": audit["architecture_id"], "released": False, "v2_initialisation": "CANDIDATE_FINE_TUNING" if candidate_id else "PRETRAINED_V2_FINE_TUNING", "initialisation": MODEL_ID, "warm_start": None,
+                   "base_audit": base_audit}
     return {"engine": ENGINE_ID, "owner": owner, "run_id": run_id, "session_ids": session_ids, "rounds": rounds, "algorithm": algorithm, "secagg_mode": secagg_mode, "label_seed": label_seed,
             "initialisation": MODEL_ID, "warm_state": None, "warm_info": model_block["base_audit"], "records": records, "snapshot": snapshot, "dataset": dataset, "initial_state": state, "v2_audit": audit,
             "datasets": datasets, "holdout": holdout, "cohort": cohort, "client_ids": [d.client_id for d in datasets], "examples": {d.client_id: len(d.labels) for d in datasets}, "model_block": model_block,

@@ -1,0 +1,64 @@
+{
+  "mode": "candidate-library",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "first": {
+    "run_id": "FL10RUN-54FE880D00F1",
+    "live": {
+      "badge": "SYNTHETIC COHORT · REALISTIC",
+      "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+      "start_candidate": "",
+      "metric_auprc": "AUPRC0.484391",
+      "glance": "SYNTHETIC COHORT · REALISTIC Training executes now Realistic synthetic ECG on eight logical clients on one machine: variable rhythm, premature ectopic beats with pauses, motion artifacts, and annotation-noisy labels. Still synthetic: no real physiology. STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvgpretrained V2 start AUPRC0.484391latest evaluated R0AUROC0.847665latest evaluated R0BCE0.829727latest evaluated R0 ClientsEvaluationGraphsAnalysisTimeline",
+      "alerts": []
+    }
+  },
+  "models": {
+    "cards": [
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-54FE880D00F1",
+        "cohort": "REALISTIC",
+        "text": "FL10_CANDIDATE_FL10RUN-54FE880D00F1REALISTIC COHORT Synthetic cohort run · 3 rounds · FEDAVG · 18 Oct 2026, 20:35 AUPRC0.648AUROC0.838F1 @ 0.50.648 Started fromMODEL_V2_FINAL Scores are exploratory measurements on WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 at round 3; they are not a basis for choosing it. State 1016af00e7a5df5e… · source run FL10RUN-54FE880D00F1 ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL · NOT DEPLOYED · NEVER USED FOR MONITORING"
+      }
+    ]
+  },
+  "second_form": {
+    "note": "Started from FL10_CANDIDATE_FL10RUN-54FE880D00F1: a synthetic-cohort run on the realistic cohort. This run uses the original cohort: that is allowed, and both cohorts are recorded on the run.",
+    "init_note": "Stored engineering candidate. R0 is the final state of the candidate chosen below, unchanged; the federated rounds adapt it further. The Generalisation tab still compares every round with frozen V2 on an unseen cohort.",
+    "options": [
+      "FL10_CANDIDATE_FL10RUN-54FE880D00F1"
+    ]
+  },
+  "second": {
+    "run_id": "FL10RUN-61ACA16FCF81",
+    "live": {
+      "badge": "SYNTHETIC COHORT",
+      "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+      "start_candidate": "Starting model: stored engineering candidate FL10_CANDIDATE_FL10RUN-54FE880D00F1 (trained on the realistic cohort; this run uses the original cohort). Round 0 is that candidate's final state, unchanged.",
+      "metric_auprc": "AUPRC0.941019",
+      "glance": "SYNTHETIC COHORT Training executes now Synthetic engineering data on eight logical clients on one machine. No real physiology. Starting model: stored engineering candidate FL10_CANDIDATE_FL10RUN-54FE880D00F1 (trained on the realistic cohort; this run uses the original cohort). Round 0 is that candidate's final state, unchanged. STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvgstored candidate start AUPRC0.941019latest evaluated R2AUROC0.957863latest evaluated R2BCE0.456635latest evaluated R2 ClientsEvaluationGraphsAnalysisTimeline",
+      "alerts": []
+    }
+  },
+  "models_after": {
+    "cards": [
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-61ACA16FCF81",
+        "cohort": "ORIGINAL",
+        "text": "FL10_CANDIDATE_FL10RUN-61ACA16FCF81ORIGINAL COHORT Synthetic cohort run · 3 rounds · FEDAVG · 18 Oct 2026, 20:36 AUPRC0.962AUROC0.971F1 @ 0.50.833 Started fromcandidate FL10_CANDIDATE_FL10RUN-54FE880D00F1 Scores are exploratory measurements on WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 at round 3; they are not a basis for choosing it. State 3dabbf5a6d18866c… · source run FL10RUN-61ACA16FCF81 ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL · NOT DEPLOYED · NEVER USED FOR MONITORING"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-54FE880D00F1",
+        "cohort": "REALISTIC",
+        "text": "FL10_CANDIDATE_FL10RUN-54FE880D00F1REALISTIC COHORT Synthetic cohort run · 3 rounds · FEDAVG · 18 Oct 2026, 20:35 AUPRC0.648AUROC0.838F1 @ 0.50.648 Started fromMODEL_V2_FINAL Scores are exploratory measurements on WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 at round 3; they are not a basis for choosing it. State 1016af00e7a5df5e… · source run FL10RUN-54FE880D00F1 ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL · NOT DEPLOYED · NEVER USED FOR MONITORING"
+      }
+    ]
+  }
+}

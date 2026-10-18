@@ -25,11 +25,11 @@ def skey(r: int) -> str:
     return f"R{r:02d}"
 
 
-def figure_title(fid: str, n: int) -> str:
+def figure_title(fid: str, n: int, cohort: str = "ORIGINAL") -> str:
     base = next(t for i, t, _ in FIGURES if i == fid)
     word = {3: "Three", 10: "Ten"}.get(n, str(n))
     cmp_a, cmp_b = comparison_pair(n)
-    return (base.replace("independent holdout", "reused diagnostic holdout").replace("Ten-round", f"{word}-round").replace("R0-R10", f"R0-R{n}")
+    return (base.replace("independent holdout", "reused diagnostic holdout" if cohort != "REALISTIC" else "realistic diagnostic holdout").replace("Ten-round", f"{word}-round").replace("R0-R10", f"R0-R{n}")
             .replace("R10 minus R3", f"R{cmp_b} minus R{cmp_a}"))
 
 
@@ -116,7 +116,7 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
 
     def add(fid: str, caption: str, sources: list[str], views: list[dict[str, Any]], *, group: str | None = None, note: str | None = None, needs: list[str] | None = None, none_needed: bool = False,
             availability_note: str | None = None) -> None:
-        specs[fid] = {"id": fid, "title": figure_title(fid, n), "caption": caption, "sources": sources, "views": views, "note": note, "group": group or next(g for i, _, g in FIGURES if i == fid), "synthetic_label": b["synthetic_label"]}
+        specs[fid] = {"id": fid, "title": figure_title(fid, n, b.get("cohort", "ORIGINAL")), "caption": caption, "sources": sources, "views": views, "note": note, "group": group or next(g for i, _, g in FIGURES if i == fid), "synthetic_label": b["synthetic_label"]}
         if none_needed:
             specs[fid]["availability"] = "AVAILABLE" if (views and views[0].get("kind") == "diagram") or any(_has_data(v) for v in views) else "PENDING"
             specs[fid]["availability_detail"] = availability_note or "from committed rounds"

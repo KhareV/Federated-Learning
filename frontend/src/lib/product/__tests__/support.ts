@@ -174,6 +174,7 @@ export function fakeBackend(system: SystemInfoV2 = systemInfo({ federation_runti
 		studioRuns: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
 		studioRun: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
 		studioStartTenRound: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
+		studioCandidates: () => Promise.resolve([]),
 		studioEvaluation: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
 		studioEvaluationRound: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
 		studioRoundDetail: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),

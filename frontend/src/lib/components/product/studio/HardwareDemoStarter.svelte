@@ -3,7 +3,7 @@
 	// control: the rounds radio of the parent card is the only one, so both data sources share one form.
 	import { goto } from '$app/navigation';
 	import { getProductStore } from '$lib/product/state.svelte';
-	import type { CohortId, HardwareDemoRun, HardwareDemoSession, HardwareStartingModel, HardwareV2Preview, StudioCapabilities } from '$lib/product/studio/types';
+	import type { CohortId, HardwareDemoRun, HardwareDemoSession, HardwareStartingModel, HardwareV2Preview, StudioCandidate, StudioCapabilities } from '$lib/product/studio/types';
 	let { capabilities = null, disabled = false, rounds = 3, preselect = null, cohort = 'ORIGINAL' }: { capabilities?: StudioCapabilities | null; disabled?: boolean; rounds?: 3 | 10; preselect?: string | null; cohort?: CohortId } = $props();
 	const product = getProductStore();
 	let sessions = $state<HardwareDemoSession[]>([]);
@@ -11,7 +11,9 @@
 	let selected = $state<string[]>([]);
 	let algorithm = $state<'FEDAVG' | 'FEDPROX'>('FEDAVG');
 	let secagg = $state<'PLAIN' | 'SECAGG_SHADOW'>('PLAIN');
-	type StartModel = 'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL';
+	type StartModel = 'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL' | 'CANDIDATE';
+	let candidates = $state<StudioCandidate[]>([]);
+	let candidatePick = $state('');
 	let modelChoice = $state<StartModel | null>(null);       // null = the user has not chosen: the default applies (pretrained V2, as for the synthetic cohort); any explicit choice, including Fresh, is kept
 	let warmRun = $state('');
 	let seed = $state(20261015);
@@ -33,7 +35,9 @@
 	let previewing = $state(false);
 	let previewError = $state<string | null>(null);
 	let previewSeq = 0;
-	const v2 = $derived(startModel === 'MODEL_V2_FINAL');
+	const v2 = $derived(startModel === 'MODEL_V2_FINAL' || startModel === 'CANDIDATE');      // both start the pretrained-V2 family: same topology, windows and quality gate; only R0 differs
+	const candidateId = $derived(candidatePick || candidates[0]?.candidate_id || '');
+	const pickedCandidate = $derived(candidates.find((c) => c.candidate_id === candidateId) ?? null);
 	$effect(() => {
 		const ids = selected;
 		if (!v2 || ids.length === 0) { preview = null; previewError = null; previewing = false; return; }
@@ -43,13 +47,14 @@
 	});
 	// The realistic cohort supplies the seven synthetic peers (and the evaluation holdout) of a pretrained-V2 run; the tabular starts have eight recorded blocks and no peers.
 	const cohortNeedsV2 = $derived(cohort === 'REALISTIC' && !v2);
-	const canStart = $derived(!disabled && !running && !cohortNeedsV2 && selected.length > 0 && (startModel === 'FRESH_SEEDED' || (startModel === 'WARM_START' && !!warmPick) || (v2 && preview?.eligible === true)));
+	const canStart = $derived(!disabled && !running && !cohortNeedsV2 && selected.length > 0 && (startModel === 'FRESH_SEEDED' || (startModel === 'WARM_START' && !!warmPick) || (v2 && preview?.eligible === true && (startModel !== 'CANDIDATE' || !!candidateId))));
 	async function load() {
 		if (!available) return;
 		try {
 			sessions = await product.api.hardwareDemoSessions();
 			// deep link from History ("Use in FL"): preselect that session when it is eligible; the user can still change the selection
 			if (preselect && selected.length === 0 && sessions.some((x) => x.id === preselect && x.eligible)) selected = [preselect];
+			candidates = await product.api.studioCandidates().catch(() => [] as StudioCandidate[]);
 			priorRuns = (await product.api.hardwareDemoRuns()).filter((r) => r.model.id === 'HARDWARE_DEMO_MODEL_V1' && r.status === 'COMPLETED');
 		} catch (cause) { error = cause instanceof Error ? cause.message : String(cause); }
 	}
@@ -61,7 +66,7 @@
 			// The run executes on the backend and is observed on the same Live page as every other run.
 			const run = await product.api.hardwareDemoStart({
 				session_ids: selected, run_length: rounds, algorithm, secagg_mode: secagg, label_seed: seed,
-				initialisation: startModel, ...(startModel === 'WARM_START' ? { warm_start_run_id: warmPick } : {}), ...(cohort === 'REALISTIC' && v2 ? { cohort } : {})
+				initialisation: startModel, ...(startModel === 'WARM_START' ? { warm_start_run_id: warmPick } : {}), ...(startModel === 'CANDIDATE' ? { candidate_id: candidateId } : {}), ...(cohort === 'REALISTIC' && v2 ? { cohort } : {})
 			});
 			await goto(`/app/federation/live?run=${encodeURIComponent(run.run_id)}`);
 		} catch (cause) { error = cause instanceof Error ? cause.message : String(cause); }
@@ -100,7 +105,11 @@
 				</select></label>
 			<p class="help" data-testid="hardware-demo-warm-note">{priorRuns.length ? 'R0 is the final global weights of that earlier recorded-hardware run, unchanged; the rounds then continue training on the sessions selected above. Normalisation is refitted on the new training windows.' : 'No earlier recorded-hardware run exists yet; run once from a fresh initialisation first.'}</p>
 		{:else if v2}
-			<p class="help" data-testid="hardware-demo-v2-note">R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven {cohort === 'REALISTIC' ? 'realistic' : 'canonical'} synthetic peers of the cohort. {v2Model?.note ?? 'Your recorded windows are resampled onto the V2 source grid and graded by the unchanged quality gate; only VALID windows train.'} The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.</p>
+			<p class="help" data-testid="hardware-demo-v2-note">{startModel === 'CANDIDATE' ? 'R0 is the final state of the stored candidate chosen below, unchanged.' : 'R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged.'} Your recording becomes ONE recorded client (up to 93 windows) federated with the seven {cohort === 'REALISTIC' ? 'realistic' : 'canonical'} synthetic peers of the cohort. {v2Model?.note ?? 'Your recorded windows are resampled onto the V2 source grid and graded by the unchanged quality gate; only VALID windows train.'} The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.</p>
+			{#if startModel === 'CANDIDATE'}
+				<label><span>Candidate</span><select bind:value={candidatePick} disabled={running} data-testid="hardware-demo-candidate">{#each candidates as c (c.candidate_id)}<option value={c.candidate_id}>{c.candidate_id} · {c.cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort · {c.run_length} rounds{c.metrics?.AUPRC !== undefined ? ` · AUPRC ${c.metrics.AUPRC.toFixed(3)}` : ''}</option>{/each}</select></label>
+				{#if pickedCandidate}<p class="help" data-testid="hardware-demo-candidate-note">Started from {pickedCandidate.candidate_id} (trained on the {pickedCandidate.cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort; this run's peers come from the {cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort).</p>{/if}
+			{/if}
 			{#if selected.length === 0}<p class="help">Select at least one recorded session to see how many V2 windows it provides.</p>
 			{:else if previewing}<p class="help" role="status">Checking what the unchanged quality gate accepts…</p>
 			{:else if previewError}<p class="warn" role="alert" data-testid="hardware-v2-preview-error">{previewError}</p>
@@ -122,8 +131,8 @@
 		<label><span>Aggregation / protection mode</span><select bind:value={secagg} disabled={running} data-testid="hardware-demo-secagg"><option value="PLAIN">Plain aggregation</option><option value="SECAGG_SHADOW">Round-1 SecAgg+ shadow verification</option></select></label>
 		<p class="help">{secagg === 'SECAGG_SHADOW' ? 'ROUND-1 SECAGG+ SHADOW: a real protected aggregate is compared with the authoritative plain aggregate. It does not make the run private.' : 'Plain, sample-count-weighted aggregation.'}</p>
 		<label><span>Label seed</span><input type="number" min="0" max="2147483647" bind:value={seed} disabled={running} data-testid="hardware-demo-seed" /></label>
-		<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Model</dt><dd>{v2 ? 'MODEL_V2_FINAL (fine-tuned)' : 'HARDWARE_DEMO_MODEL_V1'}</dd></div><div><dt>Clients</dt><dd>{v2 ? '1 recorded + 7 peers' : '8 logical'}</dd></div><div><dt>Rounds</dt><dd>{rounds}</dd></div><div><dt>Labels</dt><dd>SYNTHETIC</dd></div></dl>
-		<button type="submit" disabled={!canStart} data-testid="hardware-demo-start">{running ? 'Preparing the run…' : `Create and start ${rounds}-round recorded-hardware run · ${startModel === 'MODEL_V2_FINAL' ? 'pretrained V2' : startModel === 'WARM_START' ? 'warm start' : 'fresh initialisation'}`}</button>
+		<dl class="fixedcfg" aria-label="Fixed configuration"><div><dt>Model</dt><dd>{startModel === 'CANDIDATE' ? 'stored candidate (fine-tuned)' : v2 ? 'MODEL_V2_FINAL (fine-tuned)' : 'HARDWARE_DEMO_MODEL_V1'}</dd></div><div><dt>Clients</dt><dd>{v2 ? '1 recorded + 7 peers' : '8 logical'}</dd></div><div><dt>Rounds</dt><dd>{rounds}</dd></div><div><dt>Labels</dt><dd>SYNTHETIC</dd></div></dl>
+		<button type="submit" disabled={!canStart} data-testid="hardware-demo-start">{running ? 'Preparing the run…' : `Create and start ${rounds}-round recorded-hardware run · ${startModel === 'MODEL_V2_FINAL' ? 'pretrained V2' : startModel === 'CANDIDATE' ? 'candidate start' : startModel === 'WARM_START' ? 'warm start' : 'fresh initialisation'}`}</button>
 		{#if error}<p class="warn" role="alert">{error}</p>{/if}
 	{/if}
 </form>

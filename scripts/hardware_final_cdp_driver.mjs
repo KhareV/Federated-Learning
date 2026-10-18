@@ -417,6 +417,40 @@ if (MODE === 'scenario-a') {
 	};
 	out.canonical = await realisticRun('canonical');
 	out.monitored = await realisticRun('monitored', 2);
+} else if (MODE === 'candidate-library') {
+	// Engineering candidates are kept when a run completes, listed on the Models page, and usable as the starting model of a later run (here across cohorts), through the real UI.
+	const finishRun = async (tag) => {
+		await waitFor(`location.pathname === '/app/federation/live' && /^FL10RUN-/.test(new URLSearchParams(location.search).get('run') || '')`, 120000);
+		const runId = await ev(`new URLSearchParams(location.search).get('run')`);
+		await waitFor(`(document.querySelector('[data-testid="run-status"]')?.textContent || '').includes('COMPLETED')`, 1500000);
+		await waitFor(`!!document.querySelector('[data-testid="metric-AUPRC"]') && !/NOT YET AVAILABLE|EVALUATING|QUEUED/.test(document.querySelector('[data-testid="metric-AUPRC"]').textContent)`, 600000).catch(() => {});
+		await sleep(4000);
+		const live = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+			return { badge: t('source-badge'), status_line: t('run-status'), start_candidate: t('start-candidate'), metric_auprc: t('metric-AUPRC'), glance: t('run-at-a-glance'), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }; })()`);
+		await shot(`cl_live_${tag}`);
+		return { run_id: runId, live };
+	};
+	const libraryCards = () => ev(`[...document.querySelectorAll('[data-testid="library-candidates"] li[data-candidate]')].map((li) => ({ id: li.getAttribute('data-candidate'), cohort: li.getAttribute('data-cohort'), text: li.textContent.replace(/\\s+/g,' ').trim().slice(0, 600) }))`);
+	// 1. a realistic run (3 rounds from the pretrained start)
+	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="cohort-realistic"]')`, 120000);
+	await waitFor(`!!document.querySelector('[data-testid="cfg10-submit"]')`, 60000);
+	await clickId('cohort-realistic'); await clickId('cfg10-submit');
+	out.first = await finishRun('first');
+	// 2. the candidate appears in the library (registered once every evaluation has settled): wait for it on the Models page
+	let cards = [];
+	for (let i = 0; i < 90 && !cards.length; i++) { await goto('/app/models'); await waitFor(`!!document.querySelector('[data-testid="candidate-library"]')`, 60000); await sleep(1500); cards = await libraryCards(); if (!cards.length) await sleep(4000); }
+	await shot('cl_models'); out.models = { cards };
+	// 3. start a second run from that candidate, on the ORIGINAL cohort (a cross-cohort start)
+	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="cfg10-init"]')`, 120000);
+	await waitFor(`[...document.querySelector('[data-testid="cfg10-init"]').options].some((o) => o.value === 'CANDIDATE')`, 60000);
+	await setSelect('[data-testid="cfg10-init"]', 'CANDIDATE'); await waitFor(`!!document.querySelector('[data-testid="cfg10-candidate"]')`, 30000);
+	out.second_form = { note: await value('cfg10-candidate-note'), init_note: await value('cfg10-init-note'), options: await ev(`[...document.querySelector('[data-testid="cfg10-candidate"]').options].map((o) => o.value)`) };
+	await shot('cl_form_second'); await clickId('cfg10-submit');
+	out.second = await finishRun('second');
+	// 4. the second run's own candidate joins the library, with the first as its parent
+	let after = [];
+	for (let i = 0; i < 90 && after.length < 2; i++) { await goto('/app/models'); await waitFor(`!!document.querySelector('[data-testid="candidate-library"]')`, 60000); await sleep(1500); after = await libraryCards(); if (after.length < 2) await sleep(4000); }
+	await shot('cl_models_after'); out.models_after = { cards: after };
 } else if (MODE === 'ui-shots') {
 	// Visual review of the federation starter in every source-mode state (full page, desktop) plus the phone width.
 	const clickText = (text) => ev(`(() => { const b=[...document.querySelectorAll('button')].find(x=>x.textContent.trim()===${JSON.stringify(text)} && !x.disabled); if(!b) return false; b.click(); return true; })()`);

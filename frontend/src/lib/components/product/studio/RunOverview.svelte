@@ -12,6 +12,8 @@
 	const run = $derived((ov?.run ?? {}) as Record<string, unknown>);
 	const candidate = $derived((run.candidate ?? null) as { candidate_id?: string; state_sha256?: string } | null);
 	void useStudio;
+	// a commit hash is shortened; a statement such as "NONE (…)" (the realistic cohort has no method freeze) is shown whole
+	const freezeText = (v: string | null | undefined) => (/^[0-9a-f]{40}$/.test(v ?? '') ? (v as string).slice(0, 10) : (v ?? '—'));
 </script>
 <div class="ro" data-testid="run-overview">
 	{#if !ov}<p class="dim" role="status">Loading run facts…</p>
@@ -30,7 +32,7 @@
 		{#if ov.monitoring_link}<p class="dim" data-testid="monitoring-link">Source mode: {ov.monitoring_link.label}. Monitoring sessions executed: {ov.monitoring_link.monitoring_sessions_executed}; buffer reused for {ov.monitoring_link.buffer_reused_for_rounds} rounds. This is a simulated stream, not real physiology.</p>{/if}
 		<details class="limits" open><summary>Interpretation limits</summary>
 			<ul data-testid="limits">{#each ov.protocol.interpretation_boundaries ?? [] as l}<li>{l}</li>{/each}<li>Single-machine federation of eight logical clients on {ov.engine === 'HARDWARE_DEMO' ? 'recorded data with synthetic labels' : 'simulated data'}; payload bytes are logical serialized sizes, not network traffic.</li><li>{ov.evaluation.cohort_use_detail}</li></ul></details>
-		<p class="dim">Protocol <code>{(ov.protocol.sha256 ?? '').slice(0, 16)}…</code> · holdout manifest <code>{(ov.protocol.holdout_manifest_sha256 ?? '').slice(0, 16)}…</code> · method freeze <code>{(ov.evaluation.method_freeze_commit ?? '').slice(0, 10)}</code> · separation proof: {ov.evaluation.separation_source}</p>
+		<p class="dim">Protocol <code>{(ov.protocol.sha256 ?? '').slice(0, 16)}…</code> · holdout manifest <code>{(ov.protocol.holdout_manifest_sha256 ?? '').slice(0, 16)}…</code> · method freeze <code>{freezeText(ov.evaluation.method_freeze_commit)}</code> · separation proof: {ov.evaluation.separation_source}</p>
 		{#if stateDigest}<p class="dim">Selected round state digest: <DigestText value={stateDigest} label={`round ${r} state digest`} /></p>{/if}
 	{/if}
 </div>

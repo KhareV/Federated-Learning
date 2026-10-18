@@ -5,7 +5,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/svelte';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import StudioRunStarter from '$lib/components/product/studio/StudioRunStarter.svelte';
 import { createProductClient } from '$lib/product/api';
-import { runContext } from '$lib/product/federation/run-context';
+import { hardwareV2Texts, runContext } from '$lib/product/federation/run-context';
 import { parseCapabilities, parseStudioRun } from '../parse';
 import type { StudioCapabilities } from '../types';
 import { run } from './fixtures';
@@ -119,5 +119,22 @@ describe('the request that reaches the backend', () => {
 		await client.hardwareDemoStart({ session_ids: ['HW-1'], run_length: 3, algorithm: 'FEDAVG', secagg_mode: 'PLAIN', label_seed: 1, initialisation: 'MODEL_V2_FINAL', cohort: 'REALISTIC' }).catch(() => undefined);
 		expect(sent[0].url).toContain('/studio/hardware-demo/runs');
 		expect(sent[0].body.cohort).toBe('REALISTIC');
+	});
+});
+
+describe('wording of a pretrained-V2 recorded-hardware run follows its cohort', () => {
+	it('the original cohort keeps the canonical / frozen wording exactly', () => {
+		const t = hardwareV2Texts('ORIGINAL');
+		expect(t.peers).toContain('canonical synthetic peers');
+		expect(t.metricsNote).toContain('same frozen synthetic evaluation cohort');
+		expect(t.metricsNote).toContain('comparable with a synthetic pretrained-V2 run');
+	});
+	it('the realistic cohort never calls its peers canonical or its holdout frozen', () => {
+		const t = hardwareV2Texts('REALISTIC');
+		expect(t.peers).toContain('realistic synthetic peers');
+		expect(t.peers).not.toContain('canonical');
+		expect(t.metricsNote).toContain('realistic synthetic evaluation cohort');
+		expect(t.metricsNote).toContain('comparable with a realistic-cohort synthetic pretrained-V2 run');
+		expect(t.metricsNote).not.toContain('frozen');
 	});
 });

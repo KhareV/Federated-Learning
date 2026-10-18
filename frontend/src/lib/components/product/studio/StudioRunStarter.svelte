@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import type { FederationRunChoice } from '$lib/product/api';
-	import type { CohortId, Initialisation, RunLength, SourceMode, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
+	import type { CohortId, Initialisation, RunLength, SourceMode, StudioCandidate, StudioCapabilities, StudioRunChoice } from '$lib/product/studio/types';
 	let { disabled = false, liveBlocked = false, backendEnabled = true, capabilities = null, dataSource = $bindable<'SYNTHETIC' | 'HARDWARE'>('SYNTHETIC'), preselectSession = null, onStartThree, onStartTen }: {
 		disabled?: boolean; liveBlocked?: boolean; backendEnabled?: boolean; capabilities?: StudioCapabilities | null; dataSource?: 'SYNTHETIC' | 'HARDWARE'; preselectSession?: string | null;
 		onStartThree: (choice: FederationRunChoice) => void; onStartTen: (choice: StudioRunChoice) => void } = $props();
@@ -43,6 +43,14 @@
 	const inits = $derived(capabilities?.ten_round.initialisations ?? []);
 	const defaultInit = $derived<Initialisation>(capabilities?.ten_round.default_initialisation ?? (inits.some((i) => i.id === 'MODEL_V2_FINAL') ? 'MODEL_V2_FINAL' : 'FL_INIT_V2'));
 	const initialisation = $derived<Initialisation>(initChoice ?? defaultInit);
+	// Stored engineering candidates of the owner's earlier runs: any of them can be the starting model (R0) of this run, on either cohort.
+	const libraryOffered = $derived(capabilities?.candidate_library?.available === true);
+	let candidates = $state<StudioCandidate[]>([]);
+	let candidatesLoaded = $state(false);
+	let candidatePick = $state('');
+	$effect(() => { if (libraryOffered && !candidatesLoaded) { candidatesLoaded = true; void product.api.studioCandidates().then((c) => { candidates = c; }).catch(() => { candidates = []; }); } });
+	const candidateId = $derived(candidatePick || candidates[0]?.candidate_id || '');
+	const pickedCandidate = $derived(candidates.find((c) => c.candidate_id === candidateId) ?? null);
 	const v2Rounds = $derived(capabilities?.ten_round.rounds_by_initialisation?.MODEL_V2_FINAL ?? [10]);
 	const v2ThreeUnsupported = $derived(inits.length > 0 && initialisation === 'MODEL_V2_FINAL' && length === 3 && !v2Rounds.includes(3));
 	/** The original frozen form: 3 rounds from the untrained start (or a backend that offers no starting-model choice). */
@@ -53,9 +61,9 @@
 	const shadowAvailable = $derived(capabilities?.ten_round.aggregation_modes.includes('SECAGG_SHADOW') === true);
 	const fedproxUnavailable = $derived(capabilities?.ten_round.unsupported?.FEDPROX ?? 'not advertised by the connected backend');
 	const shadowUnavailable = $derived(capabilities?.ten_round.unsupported?.SECAGG_SHADOW ?? 'not advertised by the connected backend');
-	const sessionNeedsV2 = $derived(fromHistory && length === 3 && initialisation !== 'MODEL_V2_FINAL');       // 3 rounds from the untrained start use the frozen product contract, which has no history source
-	const realisticNeedsV2 = $derived(realistic && !hardware && length === 3 && initialisation !== 'MODEL_V2_FINAL');      // the frozen 3-round contract is defined on the original cohort only
-	const blocked = $derived(!backendEnabled || disabled || liveBlocked || !tenAvailable || realisticNeedsV2 || (fromHistory && (!sessionPick || sessionNeedsV2)));
+	const sessionNeedsV2 = $derived(fromHistory && length === 3 && initialisation === 'FL_INIT_V2');       // 3 rounds from the untrained start use the frozen product contract, which has no history source
+	const realisticNeedsV2 = $derived(realistic && !hardware && length === 3 && initialisation === 'FL_INIT_V2');      // the frozen 3-round contract is defined on the original cohort only
+	const blocked = $derived(!backendEnabled || disabled || liveBlocked || !tenAvailable || realisticNeedsV2 || (initialisation === 'CANDIDATE' && !candidateId) || (fromHistory && (!sessionPick || sessionNeedsV2)));
 	const OPTIONS: { value: RunLength; title: string; tag: string }[] = [{ value: 3, title: '★ 3 ROUNDS', tag: 'DEFAULT' }, { value: 10, title: '10 ROUNDS', tag: 'EXTENDED' }];
 	const SOURCE_TEXT: Record<SourceMode, string> = { CANONICAL_SYNTHETIC: 'Canonical synthetic cohort — eight frozen synthetic clients.', LIVE_MONITORED_SITE_00: 'Live-monitored simulated site — the simulated monitoring stream of that site is genuinely executed and feeds it. This is NOT real patient physiology.' };
 	const kind = $derived(realistic ? 'realistic synthetic' : 'canonical synthetic');
@@ -108,8 +116,12 @@
 			<tbody><tr class:cur={length === 3}><th scope="row">Default</th><td>8</td><td>3</td><td data-testid="expected-3">24</td></tr><tr class:cur={length === 10}><th scope="row">Extended</th><td>8</td><td>10</td><td data-testid="expected-10">80</td></tr></tbody></table>
 		<p class="dim">These are expected counts, not evidence of completed work. The running page shows only updates the coordinator actually accepted.</p>
 		{#if inits.length && !hardware}
-			<label><span>Starting model</span><select value={initialisation} onchange={(e) => { initChoice = (e.currentTarget as HTMLSelectElement).value as Initialisation; }} data-testid="cfg10-init">{#each inits as i (i.id)}<option value={i.id}>{i.id === 'FL_INIT_V2' ? 'Untrained V2 architecture — FL_INIT_V2' : 'Pretrained V2 (default) — MODEL_V2_FINAL, federated fine-tuning'}</option>{/each}</select></label>
-			<p class="help" data-testid="cfg10-init-note">{inits.find((i) => i.id === initialisation)?.label}. {initialisation === 'MODEL_V2_FINAL' ? 'R0 is the verified pretrained checkpoint, unchanged; the federated rounds adapt it on the synthetic engineering-event task. The Generalisation tab then compares every round with frozen V2 on an unseen cohort.' : length === 3 ? 'Original frozen 3-round contract: FedAvg or FedProx, optional protected-aggregation shadow. R0 is a fresh untrained model.' : 'R0 is a fresh untrained model; frozen V2 is shown only as an external reference.'}</p>
+			<label><span>Starting model</span><select value={initialisation} onchange={(e) => { initChoice = (e.currentTarget as HTMLSelectElement).value as Initialisation; }} data-testid="cfg10-init">{#each inits as i (i.id)}<option value={i.id}>{i.id === 'FL_INIT_V2' ? 'Untrained V2 architecture — FL_INIT_V2' : 'Pretrained V2 (default) — MODEL_V2_FINAL, federated fine-tuning'}</option>{/each}{#if candidates.length}<option value="CANDIDATE">Stored engineering candidate — from your library</option>{/if}</select></label>
+			<p class="help" data-testid="cfg10-init-note">{initialisation === 'CANDIDATE' ? 'Stored engineering candidate' : inits.find((i) => i.id === initialisation)?.label}. {initialisation === 'CANDIDATE' ? 'R0 is the final state of the candidate chosen below, unchanged; the federated rounds adapt it further. The Generalisation tab still compares every round with frozen V2 on an unseen cohort.' : initialisation === 'MODEL_V2_FINAL' ? 'R0 is the verified pretrained checkpoint, unchanged; the federated rounds adapt it on the synthetic engineering-event task. The Generalisation tab then compares every round with frozen V2 on an unseen cohort.' : length === 3 ? 'Original frozen 3-round contract: FedAvg or FedProx, optional protected-aggregation shadow. R0 is a fresh untrained model.' : 'R0 is a fresh untrained model; frozen V2 is shown only as an external reference.'}</p>
+			{#if initialisation === 'CANDIDATE'}
+				<label><span>Candidate</span><select bind:value={candidatePick} data-testid="cfg10-candidate">{#each candidates as c (c.candidate_id)}<option value={c.candidate_id}>{c.candidate_id} · {c.cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort · {c.run_length} rounds{c.metrics?.AUPRC !== undefined ? ` · AUPRC ${c.metrics.AUPRC.toFixed(3)}` : ''}</option>{/each}</select></label>
+				<p class="help" data-testid="cfg10-candidate-note">{pickedCandidate ? `Started from ${pickedCandidate.candidate_id}: a ${pickedCandidate.source_kind === 'RECORDED_HARDWARE' ? 'recorded-hardware' : pickedCandidate.source_kind === 'LIVE_MONITORED_SITE' ? 'monitored-site' : 'synthetic-cohort'} run on the ${pickedCandidate.cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort.` : 'Choose a stored candidate.'}{pickedCandidate && pickedCandidate.cohort !== (realistic ? 'REALISTIC' : 'ORIGINAL') ? ` This run uses the ${realistic ? 'realistic' : 'original'} cohort: that is allowed, and both cohorts are recorded on the run.` : ''}</p>
+			{/if}
 			{#if v2ThreeUnsupported}<p class="warn" role="status" data-testid="v2-three-unsupported">3 rounds from the pretrained start are not offered by the connected backend; the original untrained 3-round form is shown.</p>{/if}
 		{/if}
 	</div>
@@ -118,7 +130,7 @@
 	{:else if original}
 		<RunConfigForm {disabled} {liveBlocked} {backendEnabled} onSubmit={onStartThree} />
 	{:else}
-		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: length, source_mode: fromHistory ? 'LIVE_MONITORED_SITE_00' : source, ...(!fromHistory && source === 'LIVE_MONITORED_SITE_00' && monitoredSite ? { monitored_site: monitoredSite } : {}), ...(fromHistory ? { signal_session_id: sessionPick } : {}), ...(inits.length ? { initialisation } : {}), ...(algorithm !== 'FEDAVG' ? { algorithm } : {}), ...(secaggMode !== 'PLAIN' ? { secagg_mode: secaggMode } : {}), ...(realistic ? { cohort: 'REALISTIC' as const } : {}) }); }} aria-label={`${length === 3 ? 'Three' : 'Ten'}-round federation run configuration`}>
+		<form class="cfg" onsubmit={(e) => { e.preventDefault(); if (!blocked) onStartTen({ run_length: length, source_mode: fromHistory ? 'LIVE_MONITORED_SITE_00' : source, ...(!fromHistory && source === 'LIVE_MONITORED_SITE_00' && monitoredSite ? { monitored_site: monitoredSite } : {}), ...(fromHistory ? { signal_session_id: sessionPick } : {}), ...(inits.length ? { initialisation } : {}), ...(initialisation === 'CANDIDATE' ? { candidate_id: candidateId } : {}), ...(algorithm !== 'FEDAVG' ? { algorithm } : {}), ...(secaggMode !== 'PLAIN' ? { secagg_mode: secaggMode } : {}), ...(realistic ? { cohort: 'REALISTIC' as const } : {}) }); }} aria-label={`${length === 3 ? 'Three' : 'Ten'}-round federation run configuration`}>
 			<label><span>Algorithm</span><select bind:value={algorithm} disabled={!fedproxAvailable} data-testid="cfg10-algorithm"><option value="FEDAVG">FedAvg — sample-count-weighted averaging</option><option value="FEDPROX">FedProx — frozen μ 0.1</option></select></label>
 			<p class="help" data-testid="cfg10-algorithm-note">{!fedproxAvailable ? `FedProx is disabled: ${fedproxUnavailable}.` : algorithm === 'FEDPROX' ? 'Genuine proximal local objective against the current round-start global weights; μ 0.1.' : 'Genuine local BCE optimization with weighted FedAvg.'}</p>
 			<label><span>Aggregation / protection mode</span><select bind:value={secaggMode} disabled={!shadowAvailable} data-testid="cfg10-mode"><option value="PLAIN">Plain aggregation</option><option value="SECAGG_SHADOW">Round-1 SecAgg+ shadow verification</option></select></label>

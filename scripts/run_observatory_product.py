@@ -62,6 +62,9 @@ def main() -> None:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8002)
     args = parser.parse_args()
+    from studio.candidates import ENV_ROOT, default_root
+
+    os.environ.setdefault(ENV_ROOT, str(default_root()))          # engineering candidates are kept in a stable folder (data/studio_candidates), not in the per-launch temporary workspace
     logging.basicConfig(level=logging.WARNING, format="%(asctime)s %(message)s",
                         datefmt="%H:%M:%S", force=True)
     # One console line per client-round (start/finish, plus batches when capture is on).
