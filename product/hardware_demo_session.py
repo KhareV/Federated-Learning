@@ -8,6 +8,7 @@ never ingests them, and the imported session is named and labelled as a prerecor
 
 from __future__ import annotations
 
+import functools
 import hashlib
 import random
 from datetime import UTC, datetime, timedelta
@@ -65,6 +66,12 @@ def generate_documents(seed: int = DEMO_SEED, seconds: float = DEMO_SECONDS, sta
 def documents_for(collection: str) -> list[dict[str, Any]]:
     _, seed, seconds, start, tag = SHOWCASES[collection]
     return generate_documents(seed, seconds, start, tag)
+
+
+@functools.lru_cache(maxsize=None)
+def expected_count(collection: str) -> int:
+    """How many documents a complete showcase collection holds (the generator is deterministic), so a collection still being seeded is never imported half-written."""
+    return len(documents_for(collection))
 
 
 def owner_session_id(owner: str, collection: str = DEMO_COLLECTION) -> str:

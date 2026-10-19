@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import threading
 from pathlib import Path
 from typing import Any
 
@@ -52,19 +53,26 @@ def _holdout_info(cohort: str = cohorts.ORIGINAL) -> dict[str, Any]:
     return _STATIC["frozen"]
 
 
-def _static() -> dict[str, Any]:
-    if "protocol" not in _STATIC:
-        protocol = _json(ROOT / PROTOCOL)
-        historical = _json(ROOT / HISTORICAL)
-        keys = ("AUPRC", "AUROC", "F1", "accuracy", "precision", "recall", "specificity", "balanced_accuracy", "BCE", "TP", "FP", "TN", "FN", "windows")
-        _STATIC["protocol"] = protocol
-        from final_showcase import research
+_STATIC_LOCK = threading.Lock()
 
-        sci = research.bundle()
-        _STATIC["bridge"] = {"comparability_rows": sci["comparability"]["rows"], "verdict": sci["comparability"]["verdict"], "limitations": sci["limitations"], "route": "/app/observatory/outcomes",
-                             "note": "Scientific real-ECG FL results (lane B) and historical centralized references (lane H) are unchanged and are NOT comparable to the synthetic engineering metrics of a Studio run."}
-        _STATIC["historical"] = {"label": "PREVIOUSLY EXPOSED SYNTHETIC EVALUATION", "caveat": "8-participant holdout already examined by NHM_FINAL_SHOWCASE_001; continuity only, never used for decisions", "source": str(HISTORICAL),
-                                 "sha256": hashlib.sha256((ROOT / HISTORICAL).read_bytes()).hexdigest(), "states": {k: {m: v["pooled"][m] for m in keys} for k, v in historical["results"].items()}}
+
+def _static() -> dict[str, Any]:
+    """The pinned protocol, scientific bridge and historical reference. Built once under a lock and published with "protocol" LAST: a concurrent first request used to see the half-built cache and fail with KeyError: 'historical'."""
+    if "protocol" in _STATIC:
+        return _STATIC
+    with _STATIC_LOCK:
+        if "protocol" not in _STATIC:
+            protocol = _json(ROOT / PROTOCOL)
+            historical = _json(ROOT / HISTORICAL)
+            keys = ("AUPRC", "AUROC", "F1", "accuracy", "precision", "recall", "specificity", "balanced_accuracy", "BCE", "TP", "FP", "TN", "FN", "windows")
+            from final_showcase import research
+
+            sci = research.bundle()
+            _STATIC["bridge"] = {"comparability_rows": sci["comparability"]["rows"], "verdict": sci["comparability"]["verdict"], "limitations": sci["limitations"], "route": "/app/observatory/outcomes",
+                                 "note": "Scientific real-ECG FL results (lane B) and historical centralized references (lane H) are unchanged and are NOT comparable to the synthetic engineering metrics of a Studio run."}
+            _STATIC["historical"] = {"label": "PREVIOUSLY EXPOSED SYNTHETIC EVALUATION", "caveat": "8-participant holdout already examined by NHM_FINAL_SHOWCASE_001; continuity only, never used for decisions", "source": str(HISTORICAL),
+                                     "sha256": hashlib.sha256((ROOT / HISTORICAL).read_bytes()).hexdigest(), "states": {k: {m: v["pooled"][m] for m in keys} for k, v in historical["results"].items()}}
+            _STATIC["protocol"] = protocol
     return _STATIC
 
 

@@ -170,14 +170,19 @@ def _dataset(client: str, windows: list[dict[str, Any]], labels: dict[str, int],
     return LocalDataset(client, client, ", ".join(session_ids), inputs, y, tuple(edges), counts, dataset_semantic_sha(inputs, y, edges))
 
 
-def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int, cohort: str = "ORIGINAL", candidate_id: str | None = None, **_: Any) -> dict[str, Any]:
-    """Validate and build everything that can fail on the caller's thread. Nothing is trained."""
+def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algorithm: str, secagg_mode: str, label_seed: int, cohort: str = "ORIGINAL", candidate_id: str | None = None, untrained: bool = False, **_: Any) -> dict[str, Any]:
+    """Validate and build everything that can fail on the caller's thread. Nothing is trained. ``untrained`` starts the SAME V2 family from the seeded FL_INIT_V2 state instead of a checkpoint."""
     if rounds not in (3, 10) or algorithm not in ("FEDAVG", "FEDPROX") or secagg_mode not in ("PLAIN", "SECAGG_SHADOW"):
         raise ValueError("unsupported hardware demo configuration")
     if not 0 <= label_seed <= 2**31 - 1:
         raise ValueError("label_seed must be 0..2147483647")
     records = demo._records(owner, session_ids)
-    if candidate_id:                                             # a stored engineering candidate of this owner is R0 (digest and layout verified; fails closed)
+    if untrained and candidate_id:
+        raise ValueError("an untrained V2 start has no candidate")
+    if untrained:                                                # seeded FL_INIT_V2: the same untrained model a synthetic 10-round run starts from, so the two are comparable
+        state, audit = v2_init.initial_state(v2_init.INIT_FRESH)
+        audit = {**audit, "architecture_id": "V2_FL_MODEL_LAYOUT", "state_entries": len(state), "kind": "UNTRAINED_INIT", "family": "V2", "training_target_of_checkpoint": None, "checkpoint_sha256": None}
+    elif candidate_id:                                             # a stored engineering candidate of this owner is R0 (digest and layout verified; fails closed)
         library = getattr(demo, "candidates", None)
         if library is None:
             raise ValueError("the candidate library is not available")
@@ -239,7 +244,9 @@ def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algor
     base_audit = {k: audit.get(k) for k in ("model_id", "checkpoint_sha256", "state_sha256", "state_entries", "architecture_id", "training_target_of_checkpoint")}
     if candidate_id:
         base_audit |= {k: audit.get(k) for k in ("kind", "family", "label", "parent_model_id", "source_run_id", "source_kind", "candidate_cohort", "candidate_run_length")}
-    model_block = {"id": MODEL_ID, "architecture": audit["architecture_id"], "released": False, "v2_initialisation": "CANDIDATE_FINE_TUNING" if candidate_id else "PRETRAINED_V2_FINE_TUNING", "initialisation": MODEL_ID, "warm_start": None,
+    if untrained:
+        base_audit |= {k: audit.get(k) for k in ("kind", "family", "label")}
+    model_block = {"id": MODEL_ID, "architecture": audit["architecture_id"], "released": False, "v2_initialisation": "CANDIDATE_FINE_TUNING" if candidate_id else "UNTRAINED_V2_FROM_SCRATCH" if untrained else "PRETRAINED_V2_FINE_TUNING", "initialisation": MODEL_ID, "warm_start": None,
                    "base_audit": base_audit}
     return {"engine": ENGINE_ID, "owner": owner, "run_id": run_id, "session_ids": session_ids, "rounds": rounds, "algorithm": algorithm, "secagg_mode": secagg_mode, "label_seed": label_seed,
             "initialisation": MODEL_ID, "warm_state": None, "warm_info": model_block["base_audit"], "records": records, "snapshot": snapshot, "dataset": dataset, "initial_state": state, "v2_audit": audit,

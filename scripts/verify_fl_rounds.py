@@ -295,6 +295,27 @@ def verify_run(job: Path, *, rederive: set[int] | None = None) -> dict[str, Any]
     return out
 
 
+def verify_hardware_run(hardware_dir: Path, studio_dir: Path) -> dict[str, Any]:
+    """The same independent verification for a pretrained / untrained / candidate-start RECORDED-HARDWARE run (V2 family): its states live in ``hardware_demo/<id>/fl10`` and its evaluation lanes in ``studio_runs/<id>``.
+    A virtual job directory of links lets ``verify_run`` read it unchanged; the aggregation re-derivation is not offered (the recorded client's windows are not rebuilt here), every state, digest, prediction and metric is."""
+    import tempfile
+
+    run = json.loads((hardware_dir / "run.json").read_text())
+    audit = (run.get("model") or {}).get("base_audit") or {}
+    kind = audit.get("kind")
+    init = "FL_INIT_V2" if kind == "UNTRAINED_INIT" else "CANDIDATE" if kind == "CANDIDATE" else "MODEL_V2_FINAL"
+    meta = {"run_id": hardware_dir.name, "cohort": run.get("cohort", "ORIGINAL"), "run_length": int(run["rounds_planned"]), "init": init, "algorithm": run.get("algorithm"), "mode": "H", "base_audit": audit}
+    with tempfile.TemporaryDirectory(prefix="nhm-verify-hw-") as tmp:
+        job = Path(tmp) / hardware_dir.name
+        job.mkdir()
+        (job / "meta.json").write_text(json.dumps(meta))
+        (job / "run").symlink_to(hardware_dir / "fl10")
+        (job / "eval").symlink_to(studio_dir / "eval")
+        if (studio_dir / "eval_g1").exists():
+            (job / "eval_g1").symlink_to(studio_dir / "eval_g1")
+        return verify_run(job, rederive=None)
+
+
 def run_dirs(root: Path, only: str | None) -> list[Path]:
     return [d for d in sorted(root.glob("FL10RUN-*")) if (d / "meta.json").exists() and (d / "run" / "run_report.json").exists() and (only is None or d.name == only)]
 

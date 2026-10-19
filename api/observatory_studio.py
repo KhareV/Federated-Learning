@@ -25,6 +25,7 @@ from product.auth.websocket import authenticate_live_websocket
 from simulation.fl_cohort_v1 import cohort_profiles
 from studio import STUDIO_ID, cohorts, g1_cohort, v2_init
 from studio import candidates as candidates_mod
+from studio import upgrade_shortlist as upgrade_shortlist_mod
 from studio.constants import (
     CLAIM_BOUNDARY,
     COHORT_USE_DETAIL,
@@ -101,20 +102,22 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
                 "ten_round": {"available": True, "engine": "FL10_10R", "rounds_by_initialisation": {"FL_INIT_V2": [10], "MODEL_V2_FINAL": [3, 10]}, "default_initialisation": v2_init.INIT_V2_FINAL, "initialisations": [{"id": k, "label": v2_init.INIT_LABELS[k], "default": k == v2_init.INIT_V2_FINAL} for k in v2_init.INITS], "source_modes": list(MODES.values()), "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
                               "unsupported": {}, "expected_updates": 80,
                               "cohorts": [cohorts.describe(c) | {"default": c == cohorts.DEFAULT} for c in cohorts.COHORTS],
-                              "cohort_note": "The 3-round untrained run uses the frozen product contract, which is defined on the original cohort only; the realistic cohort is available for 10 rounds and for 3 rounds from the pretrained V2 start.",
+                              "cohort_note": "The 3-round untrained run on the canonical ORIGINAL cohort uses the frozen product contract; every other combination of cohort, rounds and starting model (including the untrained start on a realistic cohort) runs on this extended engine.",
                               "monitored_sites": [{"index": i, "client_id": f"SIM_FL_SITE_{i:02d}", "label": f"SITE_{i:02d}", "profile": cohort_profiles()[i].coverage[0]} for i in range(8)]},
                 "candidate_library": {"available": True, "count": len(service.candidates.list(user)), "rounds": [3, 10], "note": "Final engineering candidates of your completed runs, kept across restarts. Any of them can be the starting model of a later run (synthetic, monitored-site or recorded-hardware pretrained-V2 family). Not promoted, not deployed, never used for monitoring."},
                 "three_round": {"available": True, "engine": "PRODUCT_3R", "route": FEDERATION_RUNS, "expected_updates": 24},
                 "hardware_demo": {"available": hasattr(app.state, "hardware_sessions"), "source_mode": "RECORDED_HARDWARE_DEMO", "model": MODEL_ID,
                                   "run_lengths": [3, 10], "algorithms": ["FEDAVG", "FEDPROX"], "aggregation_modes": ["PLAIN", "SECAGG_SHADOW"],
                                   "secagg_scope": "ROUND-1 SECAGG+ SHADOW; authoritative aggregation remains plain", "fedprox_mu": MU,
-                                  "label_assignment": LABEL_VERSION, "initialisations": [MODEL_ID, "MODEL_V2_FINAL"], "v2_initialisation": "PRETRAINED_V2_FINE_TUNING",
+                                  "label_assignment": LABEL_VERSION, "initialisations": [MODEL_ID, "MODEL_V2_FINAL", "FL_INIT_V2"], "v2_initialisation": "PRETRAINED_V2_FINE_TUNING",
                                   "starting_models": [
                                       {"id": "FRESH_SEEDED", "label": "Fresh initialisation (seeded, untrained)", "available": True, "reason": None},
                                       {"id": "WARM_START", "label": "Pretrained: warm start from an earlier recorded-hardware run", "available": True, "reason": None},
                                       {"id": "CANDIDATE", "label": "Stored engineering candidate (from your candidate library)", "available": bool(service.candidates.list(user)),
                                        "reason": None if service.candidates.list(user) else "no completed run has produced an engineering candidate yet",
                                        "note": "Starts the pretrained-V2 family from the final state of an earlier run of yours (synthetic, monitored-site or recorded-hardware): same topology and windows as the pretrained-V2 start, different R0. Not promoted, not deployed."},
+                                      {"id": "FL_INIT_V2", "label": "Untrained V2 network (FL_INIT_V2, from scratch)", "available": True, "reason": None,
+                                       "note": "The same seeded untrained V2-architecture model a synthetic 10-round run starts from, trained from scratch on your resampled recorded windows federated with the seven synthetic peers. Works with every synthetic cohort; labels stay synthetic. Scores are not comparable to pretrained-V2 runs."},
                                       {"id": "MODEL_V2_FINAL", "label": "Pretrained V2 (MODEL_V2_FINAL)", "available": True, "reason": None,
                                        "note": "Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain."}]},
                 "generalisation": {"cohort_id": g1_cohort.COHORT_ID, "label": g1_cohort.COHORT_USE_LABEL, "claim_boundary": g1_cohort.CLAIM_BOUNDARY, "baseline": "MODEL_V2_FINAL (unchanged, frozen)"},
@@ -129,6 +132,12 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     async def list_candidates(request: Request) -> list[dict[str, Any]]:
         user = await identity(request)
         return [_public(e) for e in await asyncio.to_thread(service.candidates.list, user)]
+
+    @app.get(f"{STUDIO}/candidates-upgrade-shortlist")
+    async def upgrade_shortlist(request: Request) -> dict[str, Any]:
+        user = await identity(request)
+        entries = await asyncio.to_thread(service.candidates.list, user)
+        return await asyncio.to_thread(upgrade_shortlist_mod.build, entries)
 
     @app.get(f"{STUDIO}/candidates/{{candidate_id}}")
     async def get_candidate(request: Request, candidate_id: str) -> dict[str, Any]:
@@ -211,8 +220,8 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
     async def start_ten_round(request: Request, body: dict[str, Any]) -> dict[str, Any]:
         user = await identity(request)
         rounds = body.get("run_length")
-        if rounds == 3 and body.get("initialisation") not in (v2_init.INIT_V2_FINAL, "CANDIDATE"):
-            raise ProductError(ProductErrorCode.INVALID_REQUEST, f"3-round runs from the untrained start use the frozen product contract: POST {FEDERATION_RUNS}")
+        if rounds == 3 and body.get("initialisation") not in (v2_init.INIT_V2_FINAL, "CANDIDATE") and body.get("cohort", cohorts.DEFAULT) == cohorts.ORIGINAL and body.get("source_mode", "CANONICAL_SYNTHETIC") == "CANONICAL_SYNTHETIC" and body.get("signal_session_id") is None:
+            raise ProductError(ProductErrorCode.INVALID_REQUEST, f"3-round runs from the untrained start on the original cohort use the frozen product contract: POST {FEDERATION_RUNS}")
         mode_names = {v: k for k, v in MODES.items()}
         if rounds not in (3, 10) or set(body) - {"run_length", "source_mode", "algorithm", "secagg_mode", "run_type", "initialisation", "monitored_site", "signal_session_id", "cohort", "candidate_id"} or body.get("source_mode", "CANONICAL_SYNTHETIC") not in mode_names:
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "run_length must be 10 (or 3 with initialisation MODEL_V2_FINAL) and source_mode CANONICAL_SYNTHETIC or LIVE_MONITORED_SITE_00")

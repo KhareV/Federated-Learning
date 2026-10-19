@@ -110,9 +110,9 @@ describe('starting a synthetic run from a candidate', () => {
 		await waitFor(() => expect([...(screen.getByTestId('cfg10-init') as HTMLSelectElement).options].map((o) => o.value)).toContain('CANDIDATE'));
 		await fireEvent.change(screen.getByTestId('cfg10-init'), { target: { value: 'CANDIDATE' } });
 		const picker = screen.getByTestId('cfg10-candidate') as HTMLSelectElement;
-		expect([...picker.options].map((o) => o.value)).toEqual(['FL10_CANDIDATE_FL10RUN-AAA', 'FL10_CANDIDATE_FL10RUN-BBB']);
-		expect(picker.options[0].textContent).toContain('realistic cohort');
-		expect(picker.options[0].textContent).toContain('AUPRC 0.812');
+		expect([...picker.options].map((o) => o.value)).toEqual(['FL10_CANDIDATE_FL10RUN-BBB', 'FL10_CANDIDATE_FL10RUN-AAA']);
+		expect([...picker.querySelectorAll('optgroup')].map((g) => g.label)).toEqual(['Trained on the original cohort', 'Trained on the realistic cohort (invented noise)']);      // segregated by the cohort each candidate was trained on
+		expect(picker.options[1].textContent).toContain('AUPRC 0.812');
 		await fireEvent.change(picker, { target: { value: 'FL10_CANDIDATE_FL10RUN-BBB' } });
 		expect(screen.getByTestId('cfg10-candidate-note').textContent).toContain('recorded-hardware run on the original cohort');
 		expect(screen.getByTestId('cfg10-init-note').textContent).toContain('R0 is the final state of the candidate chosen below');
@@ -142,14 +142,14 @@ describe('the library panel', () => {
 	it('lists each candidate with its cohort, source, scores and the not-promoted / not-deployed labels', async () => {
 		install([RAW(), CAND_ORIGINAL]);
 		render(CandidateLibrary);
-		await waitFor(() => expect(screen.getByTestId('library-candidates')).toBeTruthy());
+		await waitFor(() => expect(screen.getAllByTestId('library-candidates').length).toBe(2));          // one list per training cohort
 		const cards = screen.getAllByRole('listitem').filter((li) => li.hasAttribute('data-candidate'));
-		expect(cards.map((c) => c.getAttribute('data-cohort'))).toEqual(['REALISTIC', 'ORIGINAL']);
-		expect(cards[0].textContent).toContain('0.812');
+		expect(cards.map((c) => c.getAttribute('data-cohort'))).toEqual(['ORIGINAL', 'REALISTIC']);
+		expect(cards[1].textContent).toContain('0.812');
 		expect(cards[0].textContent).toContain('NOT DEPLOYED');
-		expect(cards[1].textContent).toContain('Recorded-hardware run');
-		expect(cards[1].textContent).toContain('candidate FL10_CANDIDATE_FL10RUN-AAA');               // lineage: it started from the first candidate
-		expect(cards[1].textContent).toContain('—');                                                   // no scores snapshot: shown as undefined, never as zero
+		expect(cards[0].textContent).toContain('Recorded-hardware run');
+		expect(cards[0].textContent).toContain('candidate FL10_CANDIDATE_FL10RUN-AAA');               // lineage: it started from the first candidate
+		expect(cards[0].textContent).toContain('—');                                                   // no scores snapshot: shown as undefined, never as zero
 	});
 	it('explains the empty library', async () => {
 		install([]);
@@ -202,14 +202,14 @@ describe('label provenance of a run is named for the clients that really have ea
 });
 
 
-describe('the library groups candidates by the cohort they were scored on and shows their lineage', () => {
-	it('separates different evaluation cohorts, says their scores are not comparable, and draws the lineage chain', async () => {
+describe('the library groups candidates by the cohort they were trained on and shows their lineage', () => {
+	it('separates candidates by training cohort, says scores on different evaluation cohorts are not comparable, and draws the lineage chain', async () => {
 		const original = RAW({ candidate_id: 'FL10_CANDIDATE_FL10RUN-ORIG', cohort: 'ORIGINAL', evaluation_cohort_id: 'WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1', base_model: { model_id: 'MODEL_V2_FINAL' } });
 		const child = RAW({ candidate_id: 'FL10_CANDIDATE_FL10RUN-CHILD', base_model: { kind: 'CANDIDATE', model_id: 'FL10_CANDIDATE_FL10RUN-AAA' } });
 		install([RAW(), child, original]);
 		render(CandidateLibrary);
 		await waitFor(() => expect(screen.getAllByTestId('library-group').length).toBe(2));
-		expect(screen.getAllByTestId('library-group').map((g) => g.textContent)).toEqual(['Scored on WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2', 'Scored on WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1']);
+		expect(screen.getAllByTestId('library-group').map((g) => g.textContent)).toEqual(['Trained on the original cohort', 'Trained on the realistic cohort (invented noise)']);
 		expect(screen.getByTestId('library-not-comparable').textContent).toContain('not comparable');
 		const lineages = screen.getAllByTestId('library-lineage').map((l) => l.textContent);
 		expect(lineages).toContain('Lineage: FL10_CANDIDATE_FL10RUN-CHILD ← FL10_CANDIDATE_FL10RUN-AAA ← MODEL_V2_FINAL');

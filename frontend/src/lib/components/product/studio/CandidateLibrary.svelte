@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 	import { candidateChipText } from '$lib/product/studio/cohort-text';
+	import { groupByTrainingCohort } from '$lib/product/studio/candidate-text';
 	import type { StudioCandidate } from '$lib/product/studio/types';
 	const product = getProductStore();
 	let candidates = $state<StudioCandidate[] | null>(null);
@@ -12,12 +13,9 @@
 	const metric = (c: StudioCandidate, key: string) => (c.metrics && typeof c.metrics[key] === 'number' ? c.metrics[key].toFixed(3) : '—');
 	const when = (iso: string) => new Date(iso).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
 	const parent = (c: StudioCandidate) => (c.base_model.kind === 'CANDIDATE' ? `candidate ${String(c.base_model.model_id)}` : String(c.base_model.model_id ?? '—'));
-	// Scores are only comparable between candidates scored on the SAME evaluation cohort: the list is grouped by it, newest first within a group.
-	const groups = $derived.by(() => {
-		const by = new Map<string, StudioCandidate[]>();
-		for (const c of candidates ?? []) by.set(c.evaluation_cohort_id ?? 'an unrecorded evaluation cohort', [...(by.get(c.evaluation_cohort_id ?? 'an unrecorded evaluation cohort') ?? []), c]);
-		return [...by.entries()];
-	});
+	// Segregated by the cohort each candidate was TRAINED on (newest first within a group). Scores are only comparable between candidates scored on the SAME evaluation cohort, so the cohorts scored on are counted separately.
+	const groups = $derived(groupByTrainingCohort(candidates ?? []));
+	const evaluationCohorts = $derived(new Set((candidates ?? []).map((c) => c.evaluation_cohort_id ?? 'an unrecorded evaluation cohort')));
 	/** This candidate, then what it was started from, as far as the library knows: `a ← b ← MODEL_V2_FINAL`. A parent that is no longer in the library is said so, never guessed. */
 	function lineage(c: StudioCandidate): string {
 		const known = new Map((candidates ?? []).map((x) => [x.candidate_id, x]));
@@ -42,11 +40,11 @@
 	{:else if candidates === null}<p class="dim" role="status">Loading your candidate library…</p>
 	{:else if candidates.length === 0}<p class="dim" data-testid="no-library-candidates">No stored candidates yet. Every completed Studio run (synthetic, monitored-site or recorded-hardware pretrained V2) keeps its final engineering candidate here.</p>
 	{:else}
-		{#if groups.length > 1}<p class="dim" role="note" data-testid="library-not-comparable"><b>Different evaluation cohorts.</b> These candidates were scored on {groups.length} different cohorts; their scores are not comparable with each other and are listed in separate groups.</p>{/if}
-		{#each groups as [cohortId, members] (cohortId)}
-		<h3 class="group" data-testid="library-group">Scored on {cohortId}</h3>
+		{#if evaluationCohorts.size > 1}<p class="dim" role="note" data-testid="library-not-comparable"><b>Different evaluation cohorts.</b> These candidates were scored on {evaluationCohorts.size} different cohorts; their scores are not comparable with each other. Each card names the cohort it was scored on.</p>{/if}
+		{#each groups as g (g.cohort)}
+		<h3 class="group" data-testid="library-group" data-training-cohort={g.cohort}>{g.label}</h3>
 		<ul class="cards" data-testid="library-candidates">
-			{#each members as c (c.candidate_id)}
+			{#each g.items as c (c.candidate_id)}
 				<li data-candidate={c.candidate_id} data-cohort={c.cohort}>
 					<div class="top"><b class="id">{c.candidate_id}</b><span class="chip" class:real={c.cohort === 'REALISTIC' || c.cohort === 'REALISTIC_NSTDB'} class:ecg={c.cohort === 'REAL_ECG'} data-testid="library-cohort">{candidateChipText(c.cohort)}</span></div>
 					<p class="dim">{SOURCE[c.source_kind]} · {c.run_length} rounds · {c.algorithm}{c.secagg_mode === 'SECAGG_SHADOW' ? ' · SecAgg+ shadow' : ''} · {when(c.created_at)}</p>

@@ -56,7 +56,7 @@ describe('recorded hardware inside the run starter', () => {
 		expect(screen.getByTestId('hardware-demo-boundary').textContent).toContain('SYNTHETIC labels');
 		const init = screen.getByTestId('hardware-demo-init') as HTMLSelectElement;
 		expect([...init.options].map((o) => [o.value, o.disabled])).toEqual([['MODEL_V2_FINAL', false], ['FRESH_SEEDED', false], ['WARM_START', false]]);      // the recommended pretrained-V2 family first, the tabular model grouped below as Advanced / engineering demo
-		expect([...init.querySelectorAll('optgroup')].map((g) => g.label)).toEqual(['Pretrained-V2 family (recommended)', 'Advanced / engineering demo — small tabular model (HARDWARE_DEMO_MODEL_V1)']);
+		expect([...init.querySelectorAll('optgroup')].map((g) => g.label)).toEqual(['V2 network (recommended) — works with every synthetic cohort', 'Advanced / engineering demo — small tabular model (HARDWARE_DEMO_MODEL_V1)']);
 		await waitFor(() => expect(init.value).toBe('MODEL_V2_FINAL'));      // pretrained V2 is the default, as for the synthetic cohort
 		expect(screen.getByTestId('hardware-demo-v2-note')).toBeTruthy();
 		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
@@ -144,18 +144,24 @@ describe('the cohort option on a recorded-hardware run', () => {
 		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
 		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], initialisation: 'MODEL_V2_FINAL', cohort: 'REALISTIC' }));
 	});
-	it('the realistic cohort cannot be combined with a tabular starting model (no synthetic peers there)', async () => {
-		mount(withCohorts(caps(HW)));
+	it('every cohort can be combined with every starting model: the tabular model says it does not use the cohort, and the untrained V2 network applies it', async () => {
+		const withUntrained = { ...HW, starting_models: [...HW.starting_models, { id: 'FL_INIT_V2' as const, label: 'Untrained V2 network (FL_INIT_V2, from scratch)', available: true, reason: null }] };
+		mount(withCohorts(caps(withUntrained as unknown as typeof HW)));
 		await fireEvent.click(screen.getByTestId('data-source-hardware'));
 		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
 		await fireEvent.click(screen.getByTestId('hardware-demo-session-HW-OK'));
 		await fireEvent.click(screen.getByTestId('cohort-realistic'));
 		await fireEvent.change(screen.getByTestId('hardware-demo-init'), { target: { value: 'FRESH_SEEDED' } });
-		expect(screen.getByTestId('hardware-cohort-needs-v2').textContent).toContain('seven synthetic peers');
-		expect((screen.getByTestId('hardware-demo-start') as HTMLButtonElement).disabled).toBe(true);
+		expect(screen.getByTestId('hardware-cohort-unused').textContent).toContain('not used by this run');
+		expect((screen.getByTestId('hardware-demo-start') as HTMLButtonElement).disabled).toBe(false);          // allowed, never silently ignored
 		await fireEvent.click(screen.getByTestId('cohort-original'));
-		expect(screen.queryByTestId('hardware-cohort-needs-v2')).toBeNull();
-		expect((screen.getByTestId('hardware-demo-start') as HTMLButtonElement).disabled).toBe(false);
+		expect(screen.queryByTestId('hardware-cohort-unused')).toBeNull();
+		await fireEvent.click(screen.getByTestId('cohort-realistic'));
+		await fireEvent.change(screen.getByTestId('hardware-demo-init'), { target: { value: 'FL_INIT_V2' } });
+		expect(screen.queryByTestId('hardware-cohort-unused')).toBeNull();
+		await waitFor(() => expect((screen.getByTestId('hardware-demo-start') as HTMLButtonElement).disabled).toBe(false));
+		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
+		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], initialisation: 'FL_INIT_V2', cohort: 'REALISTIC' }));
 	});
 });
 
@@ -176,7 +182,8 @@ describe('a stored candidate as the starting model of a recorded-hardware run', 
 		await fireEvent.change(screen.getByTestId('hardware-demo-init'), { target: { value: 'CANDIDATE' } });
 		const picker = (await screen.findByTestId('hardware-demo-candidate')) as HTMLSelectElement;
 		await waitFor(() => expect(picker.options.length).toBe(2));
-		expect(picker.options[0].textContent).toContain('realistic cohort');
+		expect([...picker.querySelectorAll('optgroup')].map((g) => g.label)).toEqual(['Trained on the original cohort', 'Trained on the realistic cohort (invented noise)']);      // segregated by the cohort each candidate was trained on
+		expect([...picker.options].map((o) => o.value)).toEqual(['HDFL_CANDIDATE_B', 'FL10_CANDIDATE_FL10RUN-AAA']);
 		await waitFor(() => expect(screen.getByTestId('hardware-v2-preview').textContent).toContain('ENOUGH USABLE WINDOWS'));      // the quality-gate preview applies unchanged
 		expect(screen.getByTestId('hardware-demo-v2-note').textContent).toContain('final state of the stored candidate');
 		await fireEvent.change(picker, { target: { value: 'HDFL_CANDIDATE_B' } });

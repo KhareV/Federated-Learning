@@ -66,6 +66,27 @@ async function openHardwareAndStart() {
 	return value('hardware-session-id');
 }
 async function monitorSnapshot() { return ev(`(() => { const text=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent??'').trim(); const svg=document.querySelector('[data-testid="hardware-waveform"]'); const latest=[...document.querySelectorAll('p')].find(p=>p.textContent.includes('Latest received: MongoDB ID')); const match=latest?.textContent.match(/MongoDB ID\\s+([0-9a-f]+)\\s+· ECG\\s+(\\d+)/i); const marker=svg?.querySelector('circle[fill="#fbbf24"]'); const ecg=match?Number(match[2]):null; return { state:text('hardware-state'), count:Number(text('hardware-record-count')), bpm:text('hardware-bpm'), spo2:text('hardware-spo2'), points:Number(svg?.getAttribute('data-points')??0), paths:Number(svg?.getAttribute('data-paths')??0), latest_id:match?.[1]??null, latest_ecg:ecg, latest_x:marker?Number(marker.getAttribute('cx')):null, latest_y:marker?Number(marker.getAttribute('cy')):null, expected_y:ecg===null?null:170-ecg/4095*150 }; })()`); }
+// The showcase collections are created by the product at app start (Atlas writes can take a while): History lists them once they exist, so the page is reloaded until a HW-SHOWCASE session appears.
+async function findShowcaseSession(attempts = 24) {
+	for (let i = 0; i < attempts; i++) {
+		await goto('/app/history');
+		const found = await waitFor(`[...document.querySelectorAll('code.sid')].some(x=>x.textContent.trim().startsWith('HW-SHOWCASE-'))`, 15000).then(() => true).catch(() => false);
+		if (found) return ev(`[...document.querySelectorAll('code.sid')].find(x=>x.textContent.trim().startsWith('HW-SHOWCASE-')).textContent.trim()`);
+		await sleep(10000);
+	}
+	throw new Error('no HW-SHOWCASE session appeared in History');
+}
+// Candidates are registered once every evaluation of their source run has settled (the observer works through the runs in order), so the Models page is reloaded until the expected number is listed.
+async function loadModelsWhenSettled(expectedCards, minutes = 20) {
+	const end = Date.now() + minutes * 60000; let n = 0;
+	while (true) {
+		await goto('/app/models'); await waitFor(`!!document.querySelector('[data-testid="candidate-library"]')`, 120000);
+		await waitFor(`!!document.querySelector('[data-testid="shortlist-entries"]') || !!document.querySelector('[data-testid="shortlist-empty"]')`, 120000).catch(() => {}); await sleep(1500);
+		n = await ev(`document.querySelectorAll('[data-testid="library-candidates"] li[data-candidate]').length`);
+		if (n >= expectedCards || Date.now() > end) return n;
+		await sleep(20000);
+	}
+}
 async function runDemo(sessionId, rounds, algorithm, opts = {}) {
 	// Merged "Start a federation run" form -> the SAME Live page every synthetic run uses.
 	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="data-source-hardware"]')`, 120000);
@@ -302,8 +323,7 @@ if (MODE === 'scenario-a') {
 } else if (MODE === 'demo-session') {
 	// The prerecorded DEMO hardware session (generated sketch-format documents in their own Mongo collection, imported as a STOPPED session): History, Observatory replay + trace, pretrained-V2 run and tabular run from that ONE session.
 	const text = (id) => value(id);
-	await goto('/app/history'); await waitFor(`[...document.querySelectorAll('code.sid')].some(x=>x.textContent.trim().startsWith('HW-SHOWCASE-'))`, 120000);
-	const sid = await ev(`[...document.querySelectorAll('code.sid')].find(x=>x.textContent.trim().startsWith('HW-SHOWCASE-')).textContent.trim()`);
+	const sid = await findShowcaseSession();
 	const historyRow = await ev(`[...document.querySelectorAll('code.sid')].find(x=>x.textContent.trim().startsWith('HW-SHOWCASE-')).closest('tr').textContent.replace(/\\s+/g,' ').trim()`);
 	await shot('demo_history');
 	await goto(`/app/history/${encodeURIComponent(sid)}`); await waitFor(`!!document.querySelector('[data-testid="hardware-replay"]')`, 60000);
@@ -347,6 +367,59 @@ if (MODE === 'scenario-a') {
 		tabularRuns.push({ rounds, live: await runDemo(sid, rounds, 'FEDAVG') });
 	}
 	Object.assign(out, { session_id: sid, history_row: historyRow, history_links: historyLinks, evidence, replay, trace, observatory_console_errors: consoleErrors, v2_runs: v2Runs, tabular_runs: tabularRuns });
+} else if (MODE === 'hardware-combos') {
+	// Every combination of starting model x synthetic cohort for a recorded-hardware run, from ONE stored (generated) hardware session: the pretrained V2, the untrained V2 network, a stored candidate (the first
+	// run's own candidate) and the small tabular model, each on the original / realistic / recorded-noise cohort. Each run is checked for its starting-model wording, its clients and its evaluation cohort.
+	const COHORT_BUTTON = { ORIGINAL: 'cohort-original', REALISTIC: 'cohort-realistic', REALISTIC_NSTDB: 'cohort-realistic-nstdb' };
+	const sid = await findShowcaseSession();
+	const PLAN = [];
+	for (const cohort of ['ORIGINAL', 'REALISTIC', 'REALISTIC_NSTDB']) for (const init of ['MODEL_V2_FINAL', 'FL_INIT_V2', 'CANDIDATE', 'FRESH_SEEDED']) PLAN.push({ tag: `${init.toLowerCase()}_${cohort.toLowerCase()}`, init, cohort, rounds: 3 });
+	const only = (process.env.NHM_COMBOS_ONLY || '').split(',').filter(Boolean);
+	out.session_id = sid; out.steps = []; let firstRunId = null;
+	for (const step of PLAN) {
+		if (only.length && !only.includes(step.tag)) continue;
+		const rec = { tag: step.tag, plan: step };
+		try {
+			await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="data-source-hardware"]')`, 120000);
+			await clickId('data-source-hardware'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-session-${sid}"]')`, 60000);
+			await clickId(`hardware-demo-session-${sid}`); await clickId(COHORT_BUTTON[step.cohort]); await clickId(`rounds-${step.rounds}`);
+			await setSelect('[data-testid="hardware-demo-init"]', step.init); await sleep(500);
+			if (step.init === 'CANDIDATE') {
+				// the first run's candidate is registered once its evaluations settle: wait for it to be offered, then choose it
+				const wanted = `FL10_CANDIDATE_${firstRunId}`;
+				for (let i = 0; i < 120; i++) {
+					await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="data-source-hardware"]')`, 120000); await clickId('data-source-hardware'); await waitFor(`!!document.querySelector('[data-testid="hardware-demo-session-${sid}"]')`, 60000);
+					await clickId(`hardware-demo-session-${sid}`); await clickId(COHORT_BUTTON[step.cohort]); await clickId(`rounds-${step.rounds}`); await sleep(500);
+					const offered = await ev(`[...(document.querySelector('[data-testid="hardware-demo-init"]')?.options ?? [])].some(o => o.value === 'CANDIDATE' && !o.disabled)`);
+					if (offered) { await setSelect('[data-testid="hardware-demo-init"]', 'CANDIDATE'); await sleep(600); const has = await ev(`[...(document.querySelector('[data-testid="hardware-demo-candidate"]')?.options ?? [])].some(o => o.value === ${JSON.stringify(wanted)})`); if (has) break; }
+					await sleep(15000);
+				}
+				await setSelect('[data-testid="hardware-demo-candidate"]', wanted); await sleep(400);
+				rec.candidate_picker = await ev(`({ groups: [...document.querySelector('[data-testid="hardware-demo-candidate"]').querySelectorAll('optgroup')].map(g => g.label), selected: document.querySelector('[data-testid="hardware-demo-candidate"]').value })`);
+			}
+			rec.form = { init: await ev(`document.querySelector('[data-testid="hardware-demo-init"]').value`), unused_note: await ev(`(document.querySelector('[data-testid="hardware-cohort-unused"]')?.textContent ?? '').replace(/\\s+/g,' ').trim()`),
+				v2_note: await value('hardware-demo-v2-note').catch(() => ''), start_disabled: await ev(`document.querySelector('[data-testid="hardware-demo-start"]').disabled`) };
+			if (step.init !== 'FRESH_SEEDED') await waitFor(`/ENOUGH USABLE/.test(document.querySelector('[data-testid="hardware-v2-preview"]')?.textContent ?? '') && !/NOT ENOUGH/.test(document.querySelector('[data-testid="hardware-v2-preview"]')?.textContent ?? '')`, 180000);
+			rec.form.start_disabled = await ev(`document.querySelector('[data-testid="hardware-demo-start"]').disabled`);
+			await shot(`hc_form_${step.tag}`);
+			await clickId('hardware-demo-start');
+			await waitFor(`location.pathname === '/app/federation/live' && (new URLSearchParams(location.search).get('run') || '').startsWith('HDFLRUN-')`, 120000);
+			const runId = await ev(`new URLSearchParams(location.search).get('run')`); rec.run_id = runId; if (!firstRunId && step.init === 'MODEL_V2_FINAL') firstRunId = runId;
+			await waitFor(`(document.querySelector('[data-testid="run-status"]')?.textContent || '').includes('COMPLETED')`, 1800000);
+			await waitFor(`!!document.querySelector('[data-testid="metric-AUPRC"]') && !/NOT YET AVAILABLE|EVALUATING|QUEUED/.test(document.querySelector('[data-testid="metric-AUPRC"]').textContent)`, 900000).catch(() => {});
+			await sleep(3000);
+			rec.live = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+				return { status_line: t('run-status'), badge: t('source-badge'), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map(x=>x.getAttribute('data-client')), metric_auprc: t('metric-AUPRC'), metric_auroc: t('metric-AUROC'), metric_cohort: t('metric-cohort'),
+				start_candidate: t('start-candidate'), start_untrained: t('start-untrained'), glance: (document.querySelector('.cells')?.textContent ?? '').replace(/\\s+/g,' ').slice(0, 300), source_sentence: t('source-sentence').slice(0, 500),
+				run_label: (document.body.innerText.match(/(\\d+)-round recorded-hardware run[^\\n]*/) || [''])[0], backend_error: /Product backend error|BACKEND_ERROR/.test(document.body.innerText), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }; })()`);
+			await shot(`hc_live_${step.tag}`);
+		} catch (error) { rec.error = String(error && error.message || error).slice(0, 400); await shot(`hc_error_${step.tag}`).catch(() => {}); }
+		out.steps.push(rec); writeFileSync(OUT, JSON.stringify(out, null, 1));
+	}
+	out.expected_cards = out.steps.filter((s) => s.plan.init !== 'FRESH_SEEDED' && s.run_id && !s.error).length + 2; out.settled_cards = await loadModelsWhenSettled(out.expected_cards);
+	out.library = await ev(`({ cards: [...document.querySelectorAll('[data-testid="library-candidates"] li[data-candidate]')].map(li => ({ id: li.getAttribute('data-candidate'), cohort: li.getAttribute('data-cohort') })), training_groups: [...document.querySelectorAll('[data-testid="library-group"]')].map(h => ({ cohort: h.getAttribute('data-training-cohort'), label: h.textContent.trim(), member_cohorts: [...(h.nextElementSibling?.querySelectorAll('li[data-candidate]') ?? [])].map(li => li.getAttribute('data-cohort')) })),
+		shortlist_entries: document.querySelectorAll('[data-testid="shortlist-entries"] > li').length })`);
+	await shot('hc_models');
 } else if (MODE === 'history-source') {
 	// A COMPLETED simulated monitoring session from History as the signal of one federation client (synthetic-assigned labels), through the real starter.
 	const clickText = (text) => ev(`(() => { const b=[...document.querySelectorAll('button')].find(x=>x.textContent.trim()===${JSON.stringify(text)} && !x.disabled); if(!b) return false; b.click(); return true; })()`);
@@ -455,7 +528,13 @@ if (MODE === 'scenario-a') {
 		{ tag: 'nstdb3_monitored_site', cohort: 'REALISTIC_NSTDB', rounds: 3, init: 'MODEL_V2_FINAL', monitoredSite: 5 },
 		{ tag: 'cand_orig10_to_nstdb3', cohort: 'REALISTIC_NSTDB', rounds: 3, init: 'CANDIDATE', candidateFrom: 'orig10_pretrained' },
 		{ tag: 'cand_nstdb10_to_real3', cohort: 'REALISTIC', rounds: 3, init: 'CANDIDATE', candidateFrom: 'nstdb10_pretrained' },
-		{ tag: 'cand_research_to_orig3', cohort: 'ORIGINAL', rounds: 3, init: 'CANDIDATE', candidateId: 'RESEARCH_FL_V2_FL001_R50' }
+		{ tag: 'cand_research_to_orig3', cohort: 'ORIGINAL', rounds: 3, init: 'CANDIDATE', candidateId: 'RESEARCH_FL_V2_FL001_R50' },
+		// every other combination of cohort x rounds x starting model: untrained starts on the realistic cohorts, and further candidate starts (an untrained-trained candidate, the best-validation research checkpoint)
+		{ tag: 'real3_untrained', cohort: 'REALISTIC', rounds: 3, init: 'FL_INIT_V2' },
+		{ tag: 'nstdb3_untrained', cohort: 'REALISTIC_NSTDB', rounds: 3, init: 'FL_INIT_V2' },
+		{ tag: 'nstdb10_untrained', cohort: 'REALISTIC_NSTDB', rounds: 10, init: 'FL_INIT_V2' },
+		{ tag: 'cand_real3untrained_to_nstdb3', cohort: 'REALISTIC_NSTDB', rounds: 3, init: 'CANDIDATE', candidateFrom: 'real3_untrained' },
+		{ tag: 'cand_research38_to_nstdb3', cohort: 'REALISTIC_NSTDB', rounds: 3, init: 'CANDIDATE', candidateId: 'RESEARCH_FL_V2_FL001_R38_BEST' }
 	];
 	const only = (process.env.NHM_MATRIX_ONLY || '').split(',').filter(Boolean);
 	const textOf = (id) => `(document.querySelector('[data-testid="${id}"]')?.textContent ?? '').replace(/\\s+/g,' ').trim()`;
@@ -518,8 +597,11 @@ if (MODE === 'scenario-a') {
 		writeFileSync(OUT, JSON.stringify(out, null, 1));
 	}
 	// the Models page lists the stored candidates of this session (and the imported research ones) in score groups
-	await goto('/app/models'); await waitFor(`!!document.querySelector('[data-testid="candidate-library"]')`, 120000); await sleep(2500);
-	out.library = await ev(`({ cards: [...document.querySelectorAll('[data-testid="library-candidates"] li[data-candidate]')].map(li => ({ id: li.getAttribute('data-candidate'), cohort: li.getAttribute('data-cohort') })), groups: document.querySelectorAll('[data-testid="library-group"]').length, alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) })`);
+	out.expected_cards = out.steps.filter((s) => s.run_id && !s.error && !s.plan.frozenForm).length + 2; out.settled_cards = await loadModelsWhenSettled(out.expected_cards);
+	out.library = await ev(`({ cards: [...document.querySelectorAll('[data-testid="library-candidates"] li[data-candidate]')].map(li => ({ id: li.getAttribute('data-candidate'), cohort: li.getAttribute('data-cohort') })), groups: document.querySelectorAll('[data-testid="library-group"]').length,
+		training_groups: [...document.querySelectorAll('[data-testid="library-group"]')].map(h => ({ cohort: h.getAttribute('data-training-cohort'), label: h.textContent.trim(), member_cohorts: [...(h.nextElementSibling?.querySelectorAll('li[data-candidate]') ?? [])].map(li => li.getAttribute('data-cohort')) })),
+		shortlist: { present: !!document.querySelector('[data-testid="upgrade-shortlist"]'), boundary: (document.querySelector('[data-testid="shortlist-boundary"]')?.textContent ?? '').replace(/\\s+/g,' ').trim(), summary: (document.querySelector('[data-testid="shortlist-summary"]')?.textContent ?? '').replace(/\\s+/g,' ').trim(),
+			entries: [...document.querySelectorAll('[data-testid="shortlist-entries"] > li')].map(li => ({ id: li.getAttribute('data-candidate'), tier: li.getAttribute('data-tier'), marks: [...li.querySelectorAll('.marks .m')].map(m => m.textContent.trim()) })), buttons: document.querySelectorAll('[data-testid="upgrade-shortlist"] button').length }, alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) })`);
 	await shot('mx_models');
 } else if (MODE === 'demo-path') {
 	// The guided demonstration path through the real UI: reachable from the Overview, every step link resolves to a real page, the keyboard reaches every step link in order, and the page fits a phone width.
@@ -528,7 +610,7 @@ if (MODE === 'scenario-a') {
 	await clickId('start-demo-path');
 	await waitFor(`location.pathname === '/app/demo' && !!document.querySelector('[data-testid="demo-steps"]')`, 60000);
 	await sleep(800);
-	out.page = await ev(`(() => ({ h1: document.querySelector('h1')?.textContent ?? '', focused_tag: document.activeElement?.tagName ?? null, steps: [...document.querySelectorAll('[data-testid="demo-steps"] li')].map(li => ({ id: li.getAttribute('data-step'), mode: li.querySelector('[data-testid="demo-mode"]')?.textContent ?? '', href: li.querySelector('a.go')?.getAttribute('href') ?? null, fields: li.querySelectorAll('dt').length })), mode_legend: document.querySelectorAll('[data-testid="demo-modes"] p').length, alerts: [...document.querySelectorAll('[role="alert"]')].map(x => x.textContent.trim().slice(0, 160)) }))()`);
+	out.page = await ev(`(() => ({ h1: document.querySelector('h1')?.textContent ?? '', focused_tag: document.activeElement?.tagName ?? null, steps: [...document.querySelectorAll('[data-testid="demo-steps"] li')].map(li => ({ id: li.getAttribute('data-step'), mode: li.querySelector('[data-testid="demo-mode"]')?.textContent ?? '', href: li.querySelector('a.go')?.getAttribute('href') ?? null, fields: li.querySelectorAll('.cell').length })), mode_legend: document.querySelectorAll('[data-testid="demo-modes"] p').length, alerts: [...document.querySelectorAll('[role="alert"]')].map(x => x.textContent.trim().slice(0, 160)) }))()`);
 	await shot('dp_desktop');
 	// keyboard: Tab from the top and record which step links receive focus, in order
 	await ev(`(document.activeElement && document.activeElement.blur(), window.scrollTo(0, 0), true)`);
@@ -552,6 +634,19 @@ if (MODE === 'scenario-a') {
 	out.phone = await ev(`({ inner: window.innerWidth, scroll: document.documentElement.scrollWidth })`);
 	await shot('dp_phone');
 	await cdp.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
+	// presenter mode: the bar appears, the arrow keys step through the story (ticking what they leave), space pauses, Escape stops
+	await goto('/app/demo'); await waitFor(`!!document.querySelector('[data-testid="start-presenting"]')`, 60000);
+	const key = async (k, code, vk) => { await cdp.send('Input.dispatchKeyEvent', { type: 'keyDown', key: k, code, windowsVirtualKeyCode: vk }); await cdp.send('Input.dispatchKeyEvent', { type: 'keyUp', key: k, code, windowsVirtualKeyCode: vk }); await sleep(400); };
+	const bar = () => ev(`(document.querySelector('[data-testid="presenter-bar"]')?.textContent ?? '').replace(/\\s+/g,' ').trim()`);
+	out.presenter = { before: await bar() };
+	await clickId('start-presenting'); await waitFor(`!!document.querySelector('[data-testid="presenter-bar"]')`, 10000); await sleep(1500);
+	out.presenter.started = await bar(); await shot('dp_presenter');
+	await ev(`document.activeElement && document.activeElement.blur()`); await key('ArrowRight', 'ArrowRight', 39);
+	out.presenter.after_next = await bar(); out.presenter.covered = await ev(`(document.querySelector('[data-testid="covered-count"]')?.textContent ?? '').replace(/\\s+/g,' ').trim()`);
+	await key('ArrowLeft', 'ArrowLeft', 37); out.presenter.after_prev = await bar();
+	const t1 = await ev(`document.querySelector('[data-testid="presenter-elapsed"]')?.textContent`); await key(' ', 'Space', 32); await sleep(2500); const t2 = await ev(`document.querySelector('[data-testid="presenter-elapsed"]')?.textContent`); await sleep(2500); out.presenter.paused_stable = (t2 === await ev(`document.querySelector('[data-testid="presenter-elapsed"]')?.textContent`));
+	await key('Escape', 'Escape', 27); out.presenter.after_escape = await bar(); out.presenter.t = [t1, t2];
+	await ev(`localStorage.removeItem('nhm-demo-covered')`);
 } else if (MODE === 'external-check') {
 	// The Observatory external-check page through the real UI: reachable from the Observatory, boundaries shown first, the evidence table loads from the hash-verified backend route, the set selector works, phone width fits.
 	await goto('/app/observatory'); await waitFor(`!!document.querySelector('nav.explore a[href="/app/observatory/external-check"]')`, 120000);

@@ -70,6 +70,14 @@ def test_import_is_a_stopped_demo_session_once_per_owner_and_private(tmp_path, d
         assert store._connection.execute("SELECT COUNT(*) FROM hardware_trace WHERE session_id=?", (owner_session_id("user-a"),)).fetchone()[0] == len(docs)
 
 
+def test_a_collection_that_is_still_being_seeded_is_not_imported_half_written(tmp_path, docs):
+    store, svc = service(tmp_path, docs[: len(docs) // 2])                           # the app start has inserted only part of the collection
+    assert svc.list("user-a") == []
+    svc.source.docs = docs                                                           # seeding finished: the next listing imports the whole session
+    listed = svc.list("user-a")
+    assert [s["session_id"] for s in listed] == [owner_session_id("user-a")] and listed[0]["record_count"] == len(docs)
+
+
 def test_without_the_setting_nothing_is_imported(tmp_path, docs):
     _, svc = service(tmp_path, docs)
     svc.demo_collection = None

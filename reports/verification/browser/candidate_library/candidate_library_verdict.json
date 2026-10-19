@@ -1,0 +1,23 @@
+{
+  "checks": {
+    "candidate_carries_scores": true,
+    "candidate_labelled_not_deployed": true,
+    "candidate_listed_on_models_page": true,
+    "first_run_completed": true,
+    "form_offers_the_candidate": true,
+    "form_says_cross_cohort": true,
+    "library_files_exist_on_disk": true,
+    "library_now_has_both": true,
+    "no_alerts": true,
+    "second_candidate_descends_from_first": true,
+    "second_run_completed": true,
+    "second_run_is_original_cohort": true,
+    "second_run_method_says_candidate_start": true,
+    "second_run_metrics_shown": true,
+    "second_run_names_its_candidate": true
+  },
+  "first_run": "FL10RUN-219E58D4C04E",
+  "mode": "candidate_library",
+  "second_run": "FL10RUN-4DC8BA00DCB1",
+  "status": "PASS"
+}

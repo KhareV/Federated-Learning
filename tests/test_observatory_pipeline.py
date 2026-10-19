@@ -528,6 +528,7 @@ def test_api_extension_adds_only_the_documented_observatory_routes(tmp_path: Pat
         ("/product/v1/observatory/evidence/external-check", ("GET",)),
         # NHM_CANDIDATE_LIBRARY_001 adds exactly these owner-scoped, read-only candidate routes (a candidate is started through the existing run-start routes).
         ("/product/v1/studio/candidates", ("GET",)),
+        ("/product/v1/studio/candidates-upgrade-shortlist", ("GET",)),
         ("/product/v1/studio/candidates/{candidate_id}", ("GET",)),
         ("/product/v1/studio/capabilities", ("GET",)),
         ("/product/v1/studio/runs", ("GET",)),

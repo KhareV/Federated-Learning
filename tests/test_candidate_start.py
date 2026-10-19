@@ -44,8 +44,12 @@ def test_starting_from_a_candidate_is_validated_before_a_run_exists(tmp_path):
             await service.runner10.create("user-a", "A", "CANDIDATE", 3)
         with pytest.raises(StudioRunError):                                         # an id without CANDIDATE
             await service.runner10.create("user-a", "A", v2_init.INIT_V2_FINAL, 3, candidate_id="FL10_CANDIDATE_X")
-        with pytest.raises(StudioRunError):                                         # 3 rounds from an untrained start stays the frozen product contract
+        with pytest.raises(StudioRunError):                                         # 3 rounds from an untrained start on the ORIGINAL cohort stays the frozen product contract
             await service.runner10.create("user-a", "A", v2_init.INIT_FRESH, 3)
+        realistic = await service.runner10.create("user-a", "A", v2_init.INIT_FRESH, 3, cohort="REALISTIC_NSTDB")      # ... but on a realistic cohort it runs on the extended engine
+        assert realistic.rounds == 3 and realistic.init == v2_init.INIT_FRESH and realistic.cohort == "REALISTIC_NSTDB"
+        monitored = await service.runner10.create("user-a", "B", v2_init.INIT_FRESH, 3, signal_session={"session_id": "SESS-X"})                       # ... and from a History / live-monitored signal on the original cohort
+        assert monitored.rounds == 3 and monitored.init == v2_init.INIT_FRESH and monitored.cohort == "ORIGINAL"
 
     asyncio.run(go())
 

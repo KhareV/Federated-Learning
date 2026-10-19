@@ -30,6 +30,7 @@ COHORT_USE = "DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same r
 CLAIM = "RECORDED_HARDWARE_FEATURES_WITH_SYNTHETIC_ASSIGNED_LABELS_ENGINEERING_DEMO_ONLY_NOT_CLINICAL"
 UNAVAILABLE_FOR_HARDWARE = "NOT APPLICABLE TO RECORDED-HARDWARE RUNS"
 V2_LABEL = "RECORDED HARDWARE WINDOWS · RESAMPLED · PRETRAINED V2 FINE-TUNING · SYNTHETIC ASSIGNED LABELS · NOT VALID · NOT DIAGNOSTIC"
+V2_LABEL_UNTRAINED = "RECORDED HARDWARE WINDOWS · RESAMPLED · UNTRAINED V2 NETWORK TRAINED FROM SCRATCH · SYNTHETIC ASSIGNED LABELS · NOT VALID · NOT DIAGNOSTIC"
 V2_COHORT_USE = "DIAGNOSTIC HOLDOUT BLOCK OF THE RECORDING (time-purged, same sessions as training) — NOT AN INDEPENDENT TEST"
 
 
@@ -87,6 +88,7 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
     n = int(run["rounds_planned"])
     status = run.get("status", "COMPLETED")
     v2 = run["model"]["id"] == "MODEL_V2_FINAL"
+    untrained = v2 and (run["model"].get("base_audit") or {}).get("kind") == "UNTRAINED_INIT"
     states, holdout = evaluation_states(run_dir, run, dataset)
     digests = {_state_key(int(k)): v for k, v in run["state_progression"].items()}
     progression = {k: {"sha256": v, "finite": True} for k, v in run["state_progression"].items()}
@@ -150,7 +152,7 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
     ]
     return {
         "schema_version": SCHEMA, "source_label": "RECORDED HARDWARE SESSION DATA (this account)", "run_id": run["run_id"], "run_length": n, "planned_rounds": n,
-        "engine": ENGINE, "mode": MODE, "replay_of": None, "synthetic_label": V2_LABEL if v2 else SYNTHETIC_LABEL, "live_label": None,
+        "engine": ENGINE, "mode": MODE, "replay_of": None, "synthetic_label": (V2_LABEL_UNTRAINED if untrained else V2_LABEL) if v2 else SYNTHETIC_LABEL, "live_label": None,
         "protocol": {
             "id": "HARDWARE_DEMO_PROTOCOL_V1", "evaluation_protocol_id": "HARDWARE_DEMO_DIAGNOSTIC_EVAL_V1", "sha256": run["snapshot_sha256"], "holdout_manifest_sha256": run["dataset"]["label_sha256"],
             "uncertainty": None, "threshold": 0.5, "metric_definitions": {}, "probability_histogram": {"bins": fl10_metrics.HIST_BINS},
@@ -164,7 +166,7 @@ def build_hardware_bundle(run_dir: Path, run: dict[str, Any], dataset: dict[str,
                 "The holdout is a window-level split of the same recording sessions, so it is a diagnostic, not independent evidence.",
                 "There is no clinical, diagnostic or scientific claim, and no transfer from MODEL_V2_FINAL.",
             ]),
-            "research_question": ("Engineering demonstration: does federated fine-tuning of the pretrained V2 model (FedAvg / FedProx, optional round-1 SecAgg+ shadow) run end to end on recorded hardware windows?" if v2 else
+            "research_question": (("Engineering demonstration: does federated training of an untrained V2-architecture network from scratch (FedAvg / FedProx, optional round-1 SecAgg+ shadow) run end to end on recorded hardware windows?" if untrained else "Engineering demonstration: does federated fine-tuning of the pretrained V2 model (FedAvg / FedProx, optional round-1 SecAgg+ shadow) run end to end on recorded hardware windows?") if v2 else
                                   "Engineering demonstration: does the federated optimisation path (FedAvg / FedProx, optional round-1 SecAgg+ shadow) run end to end on recorded telemetry windows?"),
             "primary_comparison": None,
         },

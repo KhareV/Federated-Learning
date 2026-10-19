@@ -21,6 +21,8 @@ export interface RunContext {
 	cohort: CohortId;
 	/** The stored engineering candidate this run started from (its R0), or null. */
 	startCandidate: { id: string; cohort: CandidateCohort | null; sourceRunId: string | null } | null;
+	/** A recorded-hardware V2-family run that started from the untrained FL_INIT_V2 model (not a checkpoint). */
+	startUntrained: boolean;
 	provenance: DataProvenance;
 	execution: ExecutionMode;
 	labels: LabelProvenance;
@@ -54,7 +56,7 @@ const CLOSED: RunContext['capabilities'] = {
 export function provisionalContext(runId: string | null | undefined): RunContext {
 	const hardware = (runId ?? '').startsWith('HDFLRUN-');
 	return {
-		provisional: true, cohort: 'ORIGINAL', startCandidate: null, provenance: hardware ? 'RECORDED_HARDWARE' : 'UNKNOWN', execution: 'UNKNOWN', labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'UNKNOWN', lineage: 'UNKNOWN',
+		provisional: true, cohort: 'ORIGINAL', startCandidate: null, startUntrained: false, provenance: hardware ? 'RECORDED_HARDWARE' : 'UNKNOWN', execution: 'UNKNOWN', labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'UNKNOWN', lineage: 'UNKNOWN',
 		clients: hardware ? 'RECORDED_DEMO_CLIENT' : 'UNKNOWN', badge: hardware ? 'RECORDED HARDWARE' : 'LOADING', dataSentence: 'Loading the selected run…', capabilities: CLOSED
 	};
 }
@@ -74,7 +76,7 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 	const startedFromCandidate = run.base_model?.kind === 'CANDIDATE';
 	const startCandidate = startedFromCandidate ? { id: String(modelId), cohort: run.base_model?.candidate_cohort ?? null, sourceRunId: run.base_model?.source_run_id ?? null } : null;
 	const warm = (run.base_model as { initialisation?: string } | null)?.initialisation === 'WARM_START';
-	const lineage: ModelLineage = hardware ? (modelId === 'MODEL_V2_FINAL' || startedFromCandidate ? 'HARDWARE_V2_PRETRAINED' : warm ? 'HARDWARE_DEMO_WARM_START' : 'HARDWARE_DEMO_FRESH') : modelId === 'MODEL_V2_FINAL' || startedFromCandidate ? 'MODEL_V2_FINAL' : modelId === 'FL_INIT_V2' ? 'FL_INIT_V2' : 'UNKNOWN';
+	const lineage: ModelLineage = hardware ? (modelId === 'MODEL_V2_FINAL' || modelId === 'FL_INIT_V2' || startedFromCandidate ? 'HARDWARE_V2_PRETRAINED' : warm ? 'HARDWARE_DEMO_WARM_START' : 'HARDWARE_DEMO_FRESH') : modelId === 'MODEL_V2_FINAL' || startedFromCandidate ? 'MODEL_V2_FINAL' : modelId === 'FL_INIT_V2' ? 'FL_INIT_V2' : 'UNKNOWN';
 	const cohort: CohortId = isCohortId(run.cohort) ? run.cohort : 'ORIGINAL';
 	const realistic = cohort !== 'ORIGINAL';
 	const recorded = execution === 'RECORDED_EVIDENCE';
@@ -95,7 +97,7 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 				? 'Realistic synthetic ECG on eight logical clients on one machine: variable rhythm, premature ectopic beats with pauses, motion artifacts, and annotation-noisy labels. Still synthetic: no real physiology.'
 				: 'Synthetic engineering data on eight logical clients on one machine. No real physiology.';
 	return {
-		provisional: false, cohort, startCandidate, provenance, execution, lineage,
+		provisional: false, cohort, startCandidate, startUntrained: hardware && modelId === 'FL_INIT_V2', provenance, execution, lineage,
 		labels: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? 'SYNTHETIC_ASSIGNED_CLIENT_PLUS_EVENT_PEERS' : 'SYNTHETIC_ASSIGNED_FOR_DEMO') : run.signal_session_id ? 'SYNTHETIC_ASSIGNED_CLIENT_PLUS_EVENT_PEERS' : 'SYNTHETIC_ENGINEERING_EVENTS',
 		clients: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? 'RECORDED_CLIENT_PLUS_SIM_PEERS' : 'RECORDED_DEMO_CLIENT') : 'SIM_FL_SITE',
 		badge: cohortBadge, dataSentence,

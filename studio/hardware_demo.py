@@ -301,6 +301,10 @@ class HardwareDemoService:
             initialisation = "MODEL_V2_FINAL"
         elif candidate_id is not None:
             raise ValueError("candidate_id applies only to initialisation CANDIDATE")
+        if initialisation == "FL_INIT_V2":            # the untrained V2-architecture network (seeded R0): the same family, windows, peers and cohorts as the pretrained start, only R0 differs
+            from studio import hardware_v2
+
+            return hardware_v2.prepare(self, owner, session_ids=session_ids, rounds=rounds, algorithm=algorithm, secagg_mode=secagg_mode, label_seed=label_seed, cohort=cohort, untrained=True)
         if initialisation == "MODEL_V2_FINAL":       # pretrained V2 fine-tuning on resampled recorded windows: a different model family, built by studio.hardware_v2
             from studio import hardware_v2
 

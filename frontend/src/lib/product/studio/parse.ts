@@ -1,5 +1,5 @@
 // Fail-closed parsers for the Studio REST payloads (no value is cast blindly; a malformed or foreign payload throws).
-import type { StudioCandidate, RecordedQuality, HardwareV2Preview, BaseModel, BaseModelId, GenCohort, GenCurves, GenInterval, GenPair, GenParticipants, GenRecord, GenRound, Generalisation, HardwareDemoRun, HardwareDemoSession, Initialisation, StudioOverview, EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
+import type { UpgradeShortlist, StudioCandidate, RecordedQuality, HardwareV2Preview, BaseModel, BaseModelId, GenCohort, GenCurves, GenInterval, GenPair, GenParticipants, GenRecord, GenRound, Generalisation, HardwareDemoRun, HardwareDemoSession, Initialisation, StudioOverview, EvalRecord, EvalRoundDetail, EvalSummary, EvaluationAvailability, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioSpec, StudioTable, StudioTables } from './types';
 
 type Rec = Record<string, unknown>;
 export class StudioParseError extends Error {
@@ -38,7 +38,7 @@ export function parseCapabilities(value: unknown): StudioCapabilities {
 			cohorts: Array.isArray(t.cohorts) ? t.cohorts.map((x) => { const o = obj(x, 'cohort'); return { id: oneOf(o.id, ['ORIGINAL', 'REALISTIC', 'REALISTIC_NSTDB'] as const, 'cohort'), label: str(o.label, 'label'), description: str(o.description, 'description'), client_ids: arr(o.client_ids, 'client_ids').map((c) => str(c, 'client')), evaluation_cohort_id: str(o.evaluation_cohort_id, 'evaluation_cohort_id'), cohort_use: str(o.cohort_use, 'cohort_use'), claim_boundary: str(o.claim_boundary, 'claim_boundary'), default: o.default === true }; }) : undefined, cohort_note: typeof t.cohort_note === 'string' ? t.cohort_note : undefined },
 		candidate_library: r.candidate_library ? (() => { const c = obj(r.candidate_library, 'candidate_library'); return { available: c.available === true, count: int(c.count, 'count'), rounds: Array.isArray(c.rounds) ? c.rounds.map((x) => int(x, 'round')) : undefined, note: str(c.note, 'note') }; })() : undefined,
 		three_round: { available: h.available === true, expected_updates: int(h.expected_updates, 'expected') },
-		hardware_demo: r.hardware_demo ? (() => { const d = obj(r.hardware_demo, 'hardware_demo'); return { available: d.available === true, source_mode: oneOf(d.source_mode, ['RECORDED_HARDWARE_DEMO'] as const, 'hardware source'), model: oneOf(d.model, ['HARDWARE_DEMO_MODEL_V1'] as const, 'hardware model'), run_lengths: arr(d.run_lengths, 'hardware rounds').map((x) => int(x, 'round')), algorithms: arr(d.algorithms, 'hardware algorithms').map((x) => str(x, 'algorithm')), aggregation_modes: arr(d.aggregation_modes, 'hardware modes').map((x) => str(x, 'mode')), secagg_scope: str(d.secagg_scope, 'secagg scope'), fedprox_mu: num(d.fedprox_mu, 'mu'), label_assignment: str(d.label_assignment, 'labels'), initialisations: arr(d.initialisations, 'hardware initialisations').map((x) => str(x, 'initialisation')), v2_initialisation: str(d.v2_initialisation, 'v2 compatibility'), starting_models: d.starting_models === undefined ? undefined : arr(d.starting_models, 'starting models').map((x) => { const m = obj(x, 'starting model'); return { id: oneOf(m.id, ['FRESH_SEEDED', 'WARM_START', 'MODEL_V2_FINAL', 'CANDIDATE'] as const, 'starting model id'), label: str(m.label, 'label'), available: m.available === true, reason: m.reason === null || m.reason === undefined ? null : str(m.reason, 'reason'), note: m.note === null || m.note === undefined ? null : str(m.note, 'note') }; }) }; })() : undefined,
+		hardware_demo: r.hardware_demo ? (() => { const d = obj(r.hardware_demo, 'hardware_demo'); return { available: d.available === true, source_mode: oneOf(d.source_mode, ['RECORDED_HARDWARE_DEMO'] as const, 'hardware source'), model: oneOf(d.model, ['HARDWARE_DEMO_MODEL_V1'] as const, 'hardware model'), run_lengths: arr(d.run_lengths, 'hardware rounds').map((x) => int(x, 'round')), algorithms: arr(d.algorithms, 'hardware algorithms').map((x) => str(x, 'algorithm')), aggregation_modes: arr(d.aggregation_modes, 'hardware modes').map((x) => str(x, 'mode')), secagg_scope: str(d.secagg_scope, 'secagg scope'), fedprox_mu: num(d.fedprox_mu, 'mu'), label_assignment: str(d.label_assignment, 'labels'), initialisations: arr(d.initialisations, 'hardware initialisations').map((x) => str(x, 'initialisation')), v2_initialisation: str(d.v2_initialisation, 'v2 compatibility'), starting_models: d.starting_models === undefined ? undefined : arr(d.starting_models, 'starting models').map((x) => { const m = obj(x, 'starting model'); return { id: oneOf(m.id, ['FRESH_SEEDED', 'WARM_START', 'MODEL_V2_FINAL', 'FL_INIT_V2', 'CANDIDATE'] as const, 'starting model id'), label: str(m.label, 'label'), available: m.available === true, reason: m.reason === null || m.reason === undefined ? null : str(m.reason, 'reason'), note: m.note === null || m.note === undefined ? null : str(m.note, 'note') }; }) }; })() : undefined,
 		generalisation: r.generalisation ? { cohort_id: str(obj(r.generalisation, 'generalisation').cohort_id, 'cohort_id'), label: str(obj(r.generalisation, 'generalisation').label, 'label'), claim_boundary: str(obj(r.generalisation, 'generalisation').claim_boundary, 'claim_boundary'), baseline: str(obj(r.generalisation, 'generalisation').baseline, 'baseline') } : undefined,
 		evaluation: { observer_id: str(e.observer_id, 'observer'), protocol_id: str(e.protocol_id, 'protocol'), threshold: num(e.threshold, 'threshold'), calibration: str(e.calibration, 'calibration'), cohort_use: str(e.cohort_use, 'cohort_use'),
 			cohort_use_detail: str(e.cohort_use_detail, 'cohort_use_detail'), claim_boundary: str(e.claim_boundary, 'claim_boundary') } };
@@ -276,3 +276,24 @@ export function parseGenParticipants(value: unknown): GenParticipants {
 	const set = (v: unknown) => Object.fromEntries(Object.entries(obj(v, 'participants')).map(([k, m]) => [k, metrics(m, k)]));
 	return { run_id: str(r.run_id, 'run_id'), round_id: int(r.round_id, 'round_id'), available: true, round: set(r.round), baseline: r.baseline ? set(r.baseline) : null };
 }
+
+export const parseUpgradeShortlist = (value: unknown): UpgradeShortlist => {
+	const r = obj(value, 'upgrade shortlist');
+	const released = obj(r.released_model, 'released model');
+	const ci = released.ci95 === null || released.ci95 === undefined ? null : (arr(released.ci95, 'ci95').map((x) => num(x, 'ci')) as number[]);
+	return {
+		policy_id: str(r.policy_id, 'policy'), note: str(r.note, 'note'), external_check: strOrNull(r.external_check, 'external check'),
+		criteria: arr(r.criteria, 'criteria').map((c) => { const o = obj(c, 'criterion'); return { id: str(o.id, 'id'), title: str(o.title, 'title'), rule: str(o.rule, 'rule') }; }),
+		released_model: { model_id: str(released.model_id, 'model'), role: str(released.role, 'role'), real_ecg_auroc: numOrNull(released.real_ecg_auroc, 'auroc'), ci95: ci && ci.length === 2 ? [ci[0], ci[1]] : null },
+		entries: arr(r.entries, 'entries').map((e) => {
+			const o = obj(e, 'entry');
+			return {
+				candidate_id: str(o.candidate_id, 'candidate'), label: strOrNull(o.label, 'label'), cohort: oneOf(o.cohort, ['ORIGINAL', 'REALISTIC', 'REALISTIC_NSTDB', 'REAL_ECG'] as const, 'cohort'), source_kind: strOrNull(o.source_kind, 'source'),
+				run_length: numOrNull(o.run_length, 'rounds'), round_id: numOrNull(o.round_id, 'round'), rank: num(o.rank, 'rank'), tier: oneOf(o.tier, ['SHORTLISTED_FOR_REVIEW', 'COMPARABLE_NOT_BETTER', 'NOT_SHORTLISTED'] as const, 'tier'),
+				failing: arr(o.failing, 'failing').map((x) => str(x, 'id')), passing: arr(o.passing, 'passing').map((x) => str(x, 'id')), not_evidenced: arr(o.not_evidenced, 'not evidenced').map((x) => str(x, 'id')),
+				checks: arr(o.checks, 'checks').map((c) => { const k = obj(c, 'check'); return { id: str(k.id, 'id'), status: oneOf(k.status, ['PASS', 'FAIL', 'NOT_EVIDENCED'] as const, 'status'), detail: str(k.detail, 'detail') }; }),
+				promoted: false as const, deployed: false as const
+			};
+		})
+	};
+};

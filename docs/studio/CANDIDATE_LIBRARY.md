@@ -47,3 +47,23 @@ Pick **Stored engineering candidate** as the starting model in the Federation St
 ## Imported research checkpoints (real MIT-BIH patients, no synthetic cohort)
 The 50-round federated V2 checkpoints of experiment V2-FL-001 (round 50, and round 38, the best-validation checkpoint that the frozen FL evaluation family scored) can be added with `python -m scripts.register_research_candidates --owner <clerk user id>`. They are listed with source kind `RESEARCH_FEDERATED_CHECKPOINT` and cohort `REAL_ECG`: they were federated from a random start on eight simulated whole-patient sites of REAL MIT-BIH training patients, so no synthetic cohort stands behind them. The two values only ever occur together (the library refuses a mismatch). Their library scores are measured on the real MIT-BIH VALIDATION windows, which V2-FL-001 used to pick its best round (round 38 is optimistic there); they sit in their own score group and are never compared with synthetic-cohort scores. Like every candidate they are not promoted, not deployed and never used for monitoring, and they may start a later run on either synthetic cohort (the run records both).
 
+
+## Segregation by training cohort, and every start x cohort combination
+* The Models page and every candidate dropdown (synthetic and recorded-hardware starters) list candidates **by the cohort they were trained on**, in a fixed order: original, realistic (invented noise), realistic (recorded noise), then imported real-ECG research checkpoints. Newest first within a group. Each card still names the cohort it was *scored* on; scores on different evaluation cohorts are not comparable.
+* Any starting model works with any synthetic cohort: pretrained V2, the untrained V2 network (`FL_INIT_V2`), or a stored candidate, for synthetic, live-monitored, History-session and recorded-hardware runs, at 3 or 10 rounds. The only run that stays on its own frozen engine is the 3-round untrained run on the canonical original cohort (the frozen product contract). The small tabular hardware model (`HARDWARE_DEMO_MODEL_V1`) has no synthetic peers, so a selected cohort is not used by it; the starter says so and still starts.
+* An untrained V2 recorded-hardware run (`initialisation: "FL_INIT_V2"` on `POST /product/v1/studio/hardware-demo/runs`) starts from the seeded `FL_INIT_V2` state, the same untrained model a synthetic 10-round run starts from. It is the V2-architecture family: one recorded client plus seven synthetic peers, scored on its cohort's holdout. Its lineage reads `FL_INIT_V2 (initial state)`, never "pretrained checkpoint".
+
+## Upgrade shortlist (`UPGRADE_SHORTLIST_POLICY_V1`)
+`GET /product/v1/studio/candidates-upgrade-shortlist` and the **Upgrade shortlist** panel on the Models page rank the owner's stored candidates by an explicit evidence checklist (`studio/upgrade_shortlist.py`). It is read-only: **a shortlist is not an upgrade**, nothing is promoted, registered or deployed, and the released monitoring model stays `MODEL_V2_FINAL` + `CAL_V2`.
+
+| Criterion | Meaning |
+|---|---|
+| S1 | scored on real, unseen ECG (a row in the PTB-XL external check) |
+| S2 | not distinguishably worse than the released V2 on real ECG |
+| S3 | better than the released V2 on real ECG (lower AUROC bound above the released point) |
+| S4 | trained on real-ECG labels (synthetic-cohort adaptation lowered real-ECG performance) |
+| S5 | F1 at the fixed 0.5 threshold of at least 0.5 on its evaluation cohort |
+| S6 | calibration evidence exists (none does for any candidate) |
+| S7 | a human release decision exists (NHM has no deployment path) |
+
+Tiers: `SHORTLISTED_FOR_REVIEW` (real-ECG evidence and no failing criterion), `COMPARABLE_NOT_BETTER` (matches the released model on real ECG but does not beat it: no case for an upgrade), `NOT_SHORTLISTED`. S6 and S7 stay open for every candidate. With today's evidence no candidate is shortlisted: the two federated research checkpoints match the central V2 on PTB-XL (AUROC 0.910 against 0.911) without beating it, and every synthetic-cohort or assigned-label candidate fails S4.

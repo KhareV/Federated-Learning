@@ -389,7 +389,7 @@ class HardwareSessions:
 
     def ensure_demo(self, owner: str) -> None:
         """Import each prerecorded demo session for this owner once (idempotent). Each is a STOPPED session built from its own separate collection, named HW-SHOWCASE-*; an unreachable or empty source imports nothing."""
-        from product.hardware_demo_session import SHOWCASES, owner_session_id
+        from product.hardware_demo_session import SHOWCASES, expected_count, owner_session_id
 
         for name in self._demo_collections:
             if name not in SHOWCASES:
@@ -401,10 +401,11 @@ class HardwareSessions:
                         continue
                 try:
                     reader = getattr(self.source, "read_demo_collection", None) or self.source.read_collection        # the demo database when the source has one; a plain source keeps its single read
-                    samples = [x for doc in reader(name) if (x := clean_document(doc))]
+                    raw = list(reader(name))
+                    samples = [x for doc in raw if (x := clean_document(doc))]
                 except PyMongoError:
                     continue
-                if not samples:
+                if not samples or len(raw) < expected_count(name):      # empty, or still being seeded by the app start: retried at the next listing, never imported half-written
                     continue
                 self._store_stopped(sid, owner, name, samples)
 

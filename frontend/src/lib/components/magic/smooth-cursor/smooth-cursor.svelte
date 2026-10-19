@@ -1,21 +1,45 @@
 <script lang="ts">
 	// The site's arrow cursor. It follows the mouse INSTANTLY, exactly like the system pointer: the position is written straight to the element on every
-	// pointer event (no spring, no frame throttling, no rotation or scale easing), and the arrow's tip is the hotspot.
+	// pointer event (no spring, no frame throttling), and the arrow's tip is the hotspot. The arrow's head turns toward the direction the mouse is moving
+	// (rotation is about the tip, so the tip never leaves the pointer); only that turning has a short ease, the position never does.
 	import { onMount } from "svelte";
 	import type { Snippet } from "svelte";
 
 	let { cursor }: { cursor?: Snippet } = $props();
 
 	let el = $state<HTMLDivElement>();
+	let head = $state<HTMLDivElement>();
 	let visible = $state(false);
 
 	// The default arrow is drawn 50x54 and shown at half scale about its centre, which puts its tip 25px right and ~15.75px down from the element's corner.
 	const TIP_X = 25;
 	const TIP_Y = 15.75;
+	// The pointer must travel this far from the last heading sample before the heading is re-read, so hand tremor does not make the head jitter.
+	const TURN_DISTANCE = 4;
 
 	onMount(() => {
+		let anchorX: number | null = null;
+		let anchorY = 0;
+		let heading = 0; // degrees, unwrapped so the head always turns the short way round
+		let lastTarget = 0;
+		const turn = (x: number, y: number) => {
+			if (anchorX === null) { anchorX = x; anchorY = y; return; }
+			const dx = x - anchorX;
+			const dy = y - anchorY;
+			if (Math.hypot(dx, dy) < TURN_DISTANCE) return;
+			const target = (Math.atan2(dy, dx) * 180) / Math.PI + 90; // the arrow is drawn pointing up
+			let diff = target - lastTarget;
+			if (diff > 180) diff -= 360;
+			if (diff < -180) diff += 360;
+			heading += diff;
+			lastTarget = target;
+			anchorX = x;
+			anchorY = y;
+			if (head) head.style.transform = `rotate(${heading}deg)`;
+		};
 		const place = (e: MouseEvent | PointerEvent) => {
 			if (el) el.style.transform = `translate3d(${e.clientX - TIP_X}px, ${e.clientY - TIP_Y}px, 0)`;
+			turn(e.clientX, e.clientY);
 			if (!visible) visible = true;
 		};
 		const leave = () => { visible = false; };
@@ -37,6 +61,7 @@
 	data-testid="site-cursor"
 	style="position: fixed; left: 0; top: 0; z-index: 100; pointer-events: none; will-change: transform; opacity: {visible ? 1 : 0};"
 >
+	<div bind:this={head} data-testid="site-cursor-head" style="transform-origin: {TIP_X}px {TIP_Y}px; transition: transform 120ms ease-out;">
 	{#if cursor}
 		{@render cursor()}
 	{:else}
@@ -98,4 +123,5 @@
 			</defs>
 		</svg>
 	{/if}
+	</div>
 </div>

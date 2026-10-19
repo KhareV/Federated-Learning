@@ -51,16 +51,17 @@ describe('cohort selector', () => {
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
 		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'CANONICAL_SYNTHETIC', initialisation: 'MODEL_V2_FINAL', cohort: 'REALISTIC' });
 	});
-	it('3 untrained rounds use the frozen product contract (original cohort only): realistic says so and cannot be submitted', async () => {
+	it('3 untrained rounds on a realistic cohort run on the extended engine; on the original cohort they keep the frozen product form', async () => {
 		const { onStartTen, onStartThree } = mount();
 		await fireEvent.click(screen.getByTestId('cohort-realistic'));
 		await fireEvent.change(screen.getByTestId('cfg10-init'), { target: { value: 'FL_INIT_V2' } });
-		expect(screen.getByTestId('cohort-needs-v2').textContent).toContain('original cohort only');
-		expect((screen.getByTestId('cfg10-submit') as HTMLButtonElement).disabled).toBe(true);
-		expect(screen.queryByTestId('cfg-run-type')).toBeNull();                       // the original frozen form is not offered for the realistic cohort
+		expect(screen.queryByTestId('cohort-needs-v2')).toBeNull();
+		expect((screen.getByTestId('cfg10-submit') as HTMLButtonElement).disabled).toBe(false);
+		expect(screen.queryByTestId('cfg-run-type')).toBeNull();                       // the original frozen form is not offered for a realistic cohort
+		await fireEvent.click(screen.getByTestId('cfg10-submit'));
+		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 3, source_mode: 'CANONICAL_SYNTHETIC', initialisation: 'FL_INIT_V2', cohort: 'REALISTIC' });
 		await fireEvent.click(screen.getByTestId('cohort-original'));                   // back to the original cohort: the frozen form returns unchanged
 		expect(screen.getByTestId('cfg-run-type')).toBeTruthy();
-		expect(onStartTen).not.toHaveBeenCalled();
 		expect(onStartThree).not.toHaveBeenCalled();
 	});
 	it('10 untrained rounds with the realistic cohort are allowed', async () => {
@@ -167,12 +168,14 @@ describe('the recorded-noise realistic cohort option', () => {
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
 		expect(onStartTen.mock.lastCall?.[0]).not.toHaveProperty('cohort');
 	});
-	it('3 untrained rounds still need the original cohort (the frozen product contract)', async () => {
-		mount(CAPS3);
+	it('3 untrained rounds on the recorded-noise cohort are allowed too', async () => {
+		const { onStartTen } = mount(CAPS3);
 		await fireEvent.click(screen.getByTestId('cohort-realistic-nstdb'));
 		await fireEvent.change(screen.getByTestId('cfg10-init'), { target: { value: 'FL_INIT_V2' } });
-		expect(screen.getByTestId('cohort-needs-v2').textContent).toContain('original cohort only');
-		expect((screen.getByTestId('cfg10-submit') as HTMLButtonElement).disabled).toBe(true);
+		expect(screen.queryByTestId('cohort-needs-v2')).toBeNull();
+		expect((screen.getByTestId('cfg10-submit') as HTMLButtonElement).disabled).toBe(false);
+		await fireEvent.click(screen.getByTestId('cfg10-submit'));
+		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 3, source_mode: 'CANONICAL_SYNTHETIC', initialisation: 'FL_INIT_V2', cohort: 'REALISTIC_NSTDB' });
 	});
 	it('is parsed as an advertised cohort, as a run cohort and as a candidate cohort; an unknown one is still refused', () => {
 		const caps = JSON.parse(JSON.stringify(CAPS3));

@@ -164,8 +164,8 @@ class StudioFl10Service:
             raise StudioRunError("INVALID_REQUEST", "a History monitoring session regenerates the original cohort's site signal; it cannot be combined with the realistic cohort")
         if rounds not in (3, 10):
             raise StudioRunError("INVALID_REQUEST", "the extended engine runs 3 or 10 rounds")
-        if rounds == 3 and init not in (v2_init.INIT_V2_FINAL, INIT_CANDIDATE):
-            raise StudioRunError("INVALID_REQUEST", "3-round untrained runs use the frozen product contract (POST /product/v1/federation/runs); 3 rounds here start from the pretrained V2 weights or a stored candidate")
+        if rounds == 3 and init not in (v2_init.INIT_V2_FINAL, INIT_CANDIDATE) and cohort == cohorts.ORIGINAL and mode == "A":
+            raise StudioRunError("INVALID_REQUEST", "3-round untrained runs on the canonical original cohort use the frozen product contract (POST /product/v1/federation/runs); here 3 rounds start from the pretrained V2 weights or a stored candidate, or run the untrained start on a realistic cohort or from a live-monitored / History signal")
         if init not in (*v2_init.INITS, INIT_CANDIDATE):
             raise StudioRunError("INVALID_REQUEST", "initialisation must be FL_INIT_V2 (untrained), MODEL_V2_FINAL (pretrained) or CANDIDATE (a stored engineering candidate)")
         base_audit = None

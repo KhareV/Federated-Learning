@@ -45,7 +45,7 @@ def drive(mode: str, origin: str, users: Path, out: Path, shots: Path, logs: Pat
     if expected:
         run_env["NHM_EXPECT_SESSION"] = expected
     try:
-        result = subprocess.run(command, cwd=ROOT, env=run_env, capture_output=True, text=True, timeout=1800)
+        result = subprocess.run(command, cwd=ROOT, env=run_env, capture_output=True, text=True, timeout=int(os.environ.get("NHM_DRIVER_TIMEOUT", "1800")))      # the full matrix of ~19 runs needs more than the default half hour
     finally:
         browser.close(); shutil.rmtree(profile, ignore_errors=True)
     if result.returncode or not out.exists():
@@ -112,6 +112,49 @@ def fl_matrix_checks(mx: dict, verification: dict | None = None, studio_root: Pa
     lib = mx.get("library") or {"cards": [], "groups": 0, "alerts": ["missing"]}
     cohorts_listed = {c["cohort"] for c in lib["cards"]}
     checks["models_page_lists_the_imported_and_every_cohort_candidate"] = ({"REAL_ECG", "ORIGINAL", "REALISTIC", "REALISTIC_NSTDB"} <= cohorts_listed and any(c["id"] == "RESEARCH_FL_V2_FL001_R50" for c in lib["cards"]) and lib["groups"] >= 2 and not lib["alerts"])
+    groups = lib.get("training_groups") or []
+    order = ["ORIGINAL", "REALISTIC", "REALISTIC_NSTDB", "REAL_ECG"]
+    checks["models_page_segregates_candidates_by_the_cohort_they_were_trained_on"] = (bool(groups) and [g["cohort"] for g in groups] == [c for c in order if c in {g["cohort"] for g in groups}]
+                                                                                     and all(g["member_cohorts"] and set(g["member_cohorts"]) == {g["cohort"]} for g in groups) and sum(len(g["member_cohorts"]) for g in groups) == len(lib["cards"]))
+    sl = lib.get("shortlist") or {}
+    entries = sl.get("entries") or []
+    checks["upgrade_shortlist_lists_every_stored_candidate_and_is_read_only"] = (bool(sl.get("present")) and {e["id"] for e in entries} == {c["id"] for c in lib["cards"]} and "NOT AN UPGRADE" in sl.get("boundary", "") and sl.get("buttons") == 0)
+    checks["upgrade_shortlist_never_shortlists_a_synthetic_or_assigned_label_candidate"] = all(e["tier"] == "NOT_SHORTLISTED" for e in entries if not e["id"].startswith("RESEARCH_")) and all(e["tier"] in ("COMPARABLE_NOT_BETTER", "SHORTLISTED_FOR_REVIEW") for e in entries if e["id"].startswith("RESEARCH_"))
+    return checks
+
+
+def hardware_combos_checks(hc: dict, verification: dict | None = None, studio_root: Path | None = None) -> dict[str, bool]:
+    """Checks of the hardware starting-model x cohort matrix: every combination starts, completes, says what it started from and is scored on its cohort's holdout."""
+    metric_id = {"ORIGINAL": "FL10", "REALISTIC": "REALISTIC_EVAL_COHORT_V2", "REALISTIC_NSTDB": "REALISTIC_EVAL_COHORT_V3"}
+    checks: dict[str, bool] = {}
+    first = next((s.get("run_id") for s in hc["steps"] if s["plan"]["init"] == "MODEL_V2_FINAL"), None)
+    for st in hc["steps"]:
+        tag, plan = st["tag"], st["plan"]
+        live, form = st.get("live"), st.get("form") or {}
+        ok = "error" not in st and live is not None
+        checks[f"{tag}_started_completed_and_scored"] = ok and "COMPLETED" in live["status_line"] and live["badge"] == "RECORDED HARDWARE" and not live["backend_error"] and not live["alerts"] and not form.get("start_disabled") and bool(live["metric_auprc"]) and not any(w in live["metric_auprc"] for w in ("NOT YET", "EVALUATING", "QUEUED"))
+        if not ok:
+            continue
+        if plan["init"] == "FRESH_SEEDED":
+            checks[f"{tag}_tabular_clients_and_cohort_note"] = all(c.startswith("RECORDED_DEMO_CLIENT") for c in live["clients"]) and len(live["clients"]) == 8 and (("not used by this run" in form.get("unused_note", "")) == (plan["cohort"] != "ORIGINAL"))
+            continue
+        checks[f"{tag}_one_recorded_client_plus_seven_peers"] = len(live["clients"]) == 8 and live["clients"][0] == "RECORDED_DEMO_CLIENT_00" and all(c.startswith("SIM_FL_SITE_") for c in live["clients"][1:])
+        windows = {"ORIGINAL": 1446, "REALISTIC": 1433, "REALISTIC_NSTDB": 1446}[plan["cohort"]]
+        checks[f"{tag}_scored_on_its_cohorts_holdout"] = f"{windows} windows" in live["metric_cohort"] and "16 participants" in live["metric_cohort"] and metric_id[plan["cohort"]] in live["metric_cohort"]
+        if plan["init"] == "FL_INIT_V2":
+            checks[f"{tag}_says_it_started_untrained"] = "untrained V2 network (FL_INIT_V2)" in live["start_untrained"] and "untrained V2" in live["glance"] and "pretrained" not in live["start_untrained"].lower().replace("nothing is pretrained", "")
+        elif plan["init"] == "CANDIDATE":
+            picker = st.get("candidate_picker") or {}
+            checks[f"{tag}_started_from_the_stored_candidate"] = bool(first) and first in live["start_candidate"] and "Round 0 is that candidate" in live["start_candidate"] and bool(picker.get("groups"))
+        else:
+            checks[f"{tag}_says_pretrained"] = "pretrained V2" in live["glance"] and not live["start_untrained"]
+        if verification is not None and studio_root is not None and st.get("run_id") in verification:
+            v = verification[st["run_id"]]
+            checks[f"{tag}_every_round_value_verified_independently"] = bool(v["ok"]) and len(v["rounds"]) == plan["rounds"] + 1
+    lib = hc.get("library") or {"cards": [], "training_groups": []}
+    groups = lib.get("training_groups") or []
+    checks["models_page_segregates_the_new_candidates_by_training_cohort"] = (bool(groups) and all(g["member_cohorts"] and set(g["member_cohorts"]) == {g["cohort"]} for g in groups) and sum(len(g["member_cohorts"]) for g in groups) == len(lib["cards"])
+                                                                              and {c["cohort"] for c in lib["cards"]} >= {"ORIGINAL", "REALISTIC", "REALISTIC_NSTDB"} and lib.get("shortlist_entries") == len(lib["cards"]))
     return checks
 
 
@@ -165,6 +208,8 @@ def demo_path_checks(dp: dict) -> dict[str, bool]:
         "no_alerts": not dp["page"]["alerts"],
         "tour_and_storyboard_link_back": bool(dp["banner_tour"]) and bool(dp["banner_storyboard"]),
         "no_horizontal_scroll_on_a_phone": dp["phone"]["scroll"] <= dp["phone"]["inner"],
+        "presenter_mode_starts_steps_pauses_and_stops": (dp["presenter"]["before"] == "" and "1/8" in dp["presenter"]["started"] and "2/8" in dp["presenter"]["after_next"] and "1/8" in dp["presenter"]["after_prev"]
+                                                          and dp["presenter"]["covered"].startswith("1") and dp["presenter"]["paused_stable"] and dp["presenter"]["after_escape"] == ""),
     }
 
 
@@ -214,6 +259,7 @@ def main() -> int:
     parser.add_argument("--demo-path", action="store_true", help="the guided demonstration path through the real UI: reachable from the Overview, every step link resolves, keyboard order, phone width")
     parser.add_argument("--external-check", action="store_true", help="the Observatory external-check page through the real UI: reachable, boundaries first, evidence loaded from the hash-verified route, set selector, phone width")
     parser.add_argument("--recorded-noise-cohort", action="store_true", help="the realistic cohort with recorded NSTDB noise through the real starter: a third cohort button and a 3-round pretrained run described, evaluated and labelled as recorded-noise")
+    parser.add_argument("--hardware-combos", action="store_true", help="every starting model x synthetic cohort for a recorded-hardware run from one stored session: pretrained V2, untrained V2, stored candidate and the tabular model on the original / realistic / recorded-noise cohort")
     parser.add_argument("--fl-matrix", action="store_true", help="every federated-run flow through the real UI: 3 and 10 rounds, every cohort, untrained and pretrained starts, runs started from stored candidates (one imported research checkpoint), each opened in the Observatory journal replay")
     parser.add_argument("--candidate-library", action="store_true", help="engineering candidates through the real UI: a realistic run is stored, listed on the Models page, and starts a second run on the other cohort")
     parser.add_argument("--realistic-cohort", action="store_true", help="the synthetic-cohort option through the real starter: a realistic 3-round pretrained run and a realistic live-monitored site run")
@@ -230,6 +276,12 @@ def main() -> int:
     env["NHM_HARDWARE_MONGO_DATABASE"] = database
     env["NHM_HARDWARE_DEMO_DATABASE"] = database           # generated demo collections stay in the isolated database too (never the operator's own demo database)
     env["NHM_HARDWARE_MONGO_COLLECTION"] = "records_*" if ws_mode else "nhm_integration_test"
+    if not env.get("NHM_CANDIDATE_LIBRARY_DIR"):             # no gate may write its test candidates into the operator's real candidate library (data/studio_candidates): every mode gets a throwaway one
+        import atexit
+
+        gate_library = Path(tempfile.mkdtemp(prefix="nhm-gate-library-"))
+        env["NHM_CANDIDATE_LIBRARY_DIR"] = str(gate_library)
+        atexit.register(shutil.rmtree, gate_library, ignore_errors=True)
     replica = None
     if ws_mode:
         from scripts.hardware_chain import Replica
@@ -555,6 +607,35 @@ def main() -> int:
             verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "demo_session", "checks": checks, "session_id": demo["session_id"], "v2_run_ids": [x["run_id"] for x in demo["v2_runs"]], "documents_seeded": seeded,
                        "database": database, "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA", "real_render_verified": False, "physical_esp32_verified": False, "generated_not_recorded": True}
             (out / "demo_session_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
+        if args.hardware_combos:
+            from product.hardware_demo_session import DEMO_COLLECTION
+
+            library = Path(tempfile.mkdtemp(prefix="nhm-hw-combos-library-"))
+            env["NHM_CANDIDATE_LIBRARY_DIR"] = str(library)             # the gate never touches the real library
+            owner = json.loads(Path(args.users_file).read_text())["A"]["user_id"]
+            from scripts.register_research_candidates import register_all
+
+            register_all(owner, library)
+            demo_collection = MongoClient(env["NHM_HARDWARE_MONGO_URI"], serverSelectionTimeoutMS=5000)[database][DEMO_COLLECTION]
+            demo_collection.drop()
+            env.pop("NHM_HARDWARE_DEMO_COLLECTION", None)
+            running, origin = stack(env, workspace, python)
+            try:
+                hc = drive("hardware-combos", origin, Path(args.users_file), out / "hardware_combos.json", out / "hc_shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            from scripts.verify_fl_rounds import verify_hardware_run
+
+            studio_root = workspace / "federation" / "studio_runs"
+            verification = {d.name: verify_hardware_run(d, studio_root / d.name) for d in sorted((workspace / "federation" / "hardware_demo").glob("HDFLRUN-*")) if (studio_root / d.name / "eval").exists()}
+            (out / "hardware_combos_round_verification.json").write_text(json.dumps(verification, indent=1, sort_keys=True, default=float) + "\n")
+            checks = hardware_combos_checks(hc, verification, studio_root)
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "hardware_combos", "checks": checks, "runs": {st["tag"]: st.get("run_id") for st in hc["steps"]}, "session_id": hc.get("session_id"),
+                       "rounds_verified_independently": sum(len(v["rounds"]) for v in verification.values()), "database": database, "evidence_level": "VERIFIED_LOCAL_RENDER_REPLICA", "physical_esp32_verified": False, "generated_not_recorded": True}
+            (out / "hardware_combos_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            shutil.rmtree(library, ignore_errors=True)
             print(json.dumps(verdict))
             return 0 if verdict["status"] == "PASS" else 1
         if args.ui_tour:

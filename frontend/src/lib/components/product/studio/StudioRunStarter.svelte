@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { COHORT_BUTTON, candidateOptionText, cohortTestId } from '$lib/product/studio/cohort-text';
-	import { crossesCohorts, runCohortName, trainedOn } from '$lib/product/studio/candidate-text';
+	import { COHORT_BUTTON, cohortTestId } from '$lib/product/studio/cohort-text';
+	import { crossesCohorts, groupByTrainingCohort, runCohortName, trainedOn } from '$lib/product/studio/candidate-text';
 	// One continuous start workflow for both run lengths and both starting models. The default starting model is the pretrained V2 (MODEL_V2_FINAL, federated fine-tuning); the untrained start stays available.
 	// 3 rounds from the UNTRAINED start keeps the ORIGINAL run form and the frozen 3-round product contract untouched; every other combination uses the verified extended engine.
 	import RunConfigForm from '$lib/components/product/federation/RunConfigForm.svelte';
@@ -64,9 +64,7 @@
 	const shadowAvailable = $derived(capabilities?.ten_round.aggregation_modes.includes('SECAGG_SHADOW') === true);
 	const fedproxUnavailable = $derived(capabilities?.ten_round.unsupported?.FEDPROX ?? 'not advertised by the connected backend');
 	const shadowUnavailable = $derived(capabilities?.ten_round.unsupported?.SECAGG_SHADOW ?? 'not advertised by the connected backend');
-	const sessionNeedsV2 = $derived(fromHistory && length === 3 && initialisation === 'FL_INIT_V2');       // 3 rounds from the untrained start use the frozen product contract, which has no history source
-	const realisticNeedsV2 = $derived(realistic && !hardware && length === 3 && initialisation === 'FL_INIT_V2');      // the frozen 3-round contract is defined on the original cohort only
-	const blocked = $derived(!backendEnabled || disabled || liveBlocked || !tenAvailable || realisticNeedsV2 || (initialisation === 'CANDIDATE' && !candidateId) || (fromHistory && (!sessionPick || sessionNeedsV2)));
+	const blocked = $derived(!backendEnabled || disabled || liveBlocked || !tenAvailable || (initialisation === 'CANDIDATE' && !candidateId) || (fromHistory && !sessionPick));
 	const OPTIONS: { value: RunLength; title: string; tag: string }[] = [{ value: 3, title: '★ 3 ROUNDS', tag: 'DEFAULT' }, { value: 10, title: '10 ROUNDS', tag: 'EXTENDED' }];
 	const SOURCE_TEXT: Record<SourceMode, string> = { CANONICAL_SYNTHETIC: 'Canonical synthetic cohort — eight frozen synthetic clients.', LIVE_MONITORED_SITE_00: 'Live-monitored simulated site — the simulated monitoring stream of that site is genuinely executed and feeds it. This is NOT real patient physiology.' };
 	const kind = $derived(chosenCohort === 'REALISTIC_NSTDB' ? 'realistic synthetic (recorded noise)' : realistic ? 'realistic synthetic' : 'canonical synthetic');
@@ -98,12 +96,10 @@
 				{/each}
 			</div>
 			<p class="help" data-testid="cohort-note">{cohortNote}{hardware ? ' For a recorded-hardware run it supplies the seven synthetic peers and the evaluation holdout (pretrained V2 start only).' : ''}</p>
-			{#if realisticNeedsV2}<p class="warn" role="status" data-testid="cohort-needs-v2">3 rounds from the untrained start use the frozen product contract, which is defined on the original cohort only. Choose the pretrained V2 start, 10 rounds, or the original cohort.</p>{/if}
 		{/if}
 		{#if !hardware && !original}
 		{#if fromHistory}
 			<label><span>Synthetic monitoring session</span><select bind:value={sessionPick} data-testid="cfg10-session">{#each historySessions as h (h.session_id)}<option value={h.session_id}>{sessionText(h)}</option>{/each}</select></label>
-			{#if sessionNeedsV2}<p class="warn" role="status" data-testid="session-needs-v2">3 rounds from the untrained start use the frozen product form, which has no monitoring-session source. Choose the pretrained V2 start or 10 rounds.</p>{/if}
 		{:else}
 			<label><span>Source mode</span><select bind:value={source} data-testid="cfg10-source">{#each modes as m (m)}<option value={m}>{m === 'CANONICAL_SYNTHETIC' ? 'Canonical synthetic cohort' : 'Live-monitored simulated site'}</option>{/each}</select></label>
 			{#if source === 'LIVE_MONITORED_SITE_00' && sites.length}
@@ -123,7 +119,7 @@
 			<label><span>Starting model</span><select value={initialisation} onchange={(e) => { initChoice = (e.currentTarget as HTMLSelectElement).value as Initialisation; }} data-testid="cfg10-init">{#each inits as i (i.id)}<option value={i.id}>{i.id === 'FL_INIT_V2' ? 'Untrained V2 architecture — FL_INIT_V2' : 'Pretrained V2 (default) — MODEL_V2_FINAL, federated fine-tuning'}</option>{/each}{#if candidates.length}<option value="CANDIDATE">Stored engineering candidate — from your library</option>{/if}</select></label>
 			<p class="help" data-testid="cfg10-init-note">{initialisation === 'CANDIDATE' ? 'Stored engineering candidate' : inits.find((i) => i.id === initialisation)?.label}. {initialisation === 'CANDIDATE' ? 'R0 is the final state of the candidate chosen below, unchanged; the federated rounds adapt it further. The Generalisation tab still compares every round with frozen V2 on an unseen cohort.' : initialisation === 'MODEL_V2_FINAL' ? 'R0 is the verified pretrained checkpoint, unchanged; the federated rounds adapt it on the synthetic engineering-event task. The Generalisation tab then compares every round with frozen V2 on an unseen cohort.' : length === 3 ? 'Original frozen 3-round contract: FedAvg or FedProx, optional protected-aggregation shadow. R0 is a fresh untrained model.' : 'R0 is a fresh untrained model; frozen V2 is shown only as an external reference.'}</p>
 			{#if initialisation === 'CANDIDATE'}
-				<label><span>Candidate</span><select bind:value={candidatePick} data-testid="cfg10-candidate">{#each candidates as c (c.candidate_id)}<option value={c.candidate_id}>{c.candidate_id} · {candidateOptionText(c.cohort)} · {c.run_length} rounds{c.metrics?.AUPRC !== undefined ? ` · AUPRC ${c.metrics.AUPRC.toFixed(3)}` : ''}</option>{/each}</select></label>
+				<label><span>Candidate</span><select bind:value={candidatePick} data-testid="cfg10-candidate">{#each groupByTrainingCohort(candidates) as g (g.cohort)}<optgroup label={g.label}>{#each g.items as c (c.candidate_id)}<option value={c.candidate_id}>{c.candidate_id} · {c.run_length} rounds{c.metrics?.AUPRC !== undefined ? ` · AUPRC ${c.metrics.AUPRC.toFixed(3)}` : ''}</option>{/each}</optgroup>{/each}</select></label>
 				<p class="help" data-testid="cfg10-candidate-note">{pickedCandidate ? `Started from ${pickedCandidate.candidate_id}: ${pickedCandidate.source_kind === 'RESEARCH_FEDERATED_CHECKPOINT' ? `an imported federated research checkpoint, trained on ${trainedOn(pickedCandidate.cohort)}.` : `a ${pickedCandidate.source_kind === 'RECORDED_HARDWARE' ? 'recorded-hardware' : pickedCandidate.source_kind === 'LIVE_MONITORED_SITE' ? 'monitored-site' : 'synthetic-cohort'} run on ${trainedOn(pickedCandidate.cohort)}.`}` : 'Choose a stored candidate.'}{pickedCandidate && crossesCohorts(pickedCandidate.cohort, chosenCohort) ? ` This run uses ${runCohortName(chosenCohort)}: that is allowed, and both are recorded on the run.` : ''}</p>
 			{/if}
 			{#if v2ThreeUnsupported}<p class="warn" role="status" data-testid="v2-three-unsupported">3 rounds from the pretrained start are not offered by the connected backend; the original untrained 3-round form is shown.</p>{/if}

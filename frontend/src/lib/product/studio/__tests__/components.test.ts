@@ -149,17 +149,19 @@ describe('round-count selector and run starter', () => {
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
 		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00', signal_session_id: 'SESS-DONE-0123456789' });
 	});
-	it('a monitoring session cannot be combined with the untrained 3-round product form (it says why and blocks)', async () => {
+	it('a monitoring session can start from the untrained network for 3 rounds (it runs on the extended engine, not the frozen product form)', async () => {
 		const store = getProductStore();
 		store.sessions = [{ session_id: 'SESS-DONE', state: 'COMPLETED', simulation_provenance: { scenario_id: 'NORMAL_MONITORING', seed: 1, simulation_version: 'v' } }] as never;
 		vi.spyOn(store, 'loadSessions').mockResolvedValue(undefined);
-		const caps = { ...CAPS, ten_round: { ...CAPS.ten_round, initialisations: [{ id: 'FL_INIT_V2', label: 'u', default: false }, { id: 'MODEL_V2_FINAL', label: 'p', default: true }], rounds_by_initialisation: { FL_INIT_V2: [10], MODEL_V2_FINAL: [3, 10] }, default_initialisation: 'MODEL_V2_FINAL' } } as StudioCapabilities;
-		render(StudioRunStarter, { props: { capabilities: caps, onStartThree: vi.fn(), onStartTen: vi.fn() } });
+		const caps = { ...CAPS, ten_round: { ...CAPS.ten_round, initialisations: [{ id: 'FL_INIT_V2', label: 'u', default: false }, { id: 'MODEL_V2_FINAL', label: 'p', default: true }], rounds_by_initialisation: { FL_INIT_V2: [10], MODEL_V2_FINAL: [3, 10] }, default_initialisation: 'MODEL_V2_FINAL' } } as never;
+		const onStartTen = vi.fn();
+		render(StudioRunStarter, { props: { capabilities: caps, onStartThree: vi.fn(), onStartTen } });
 		await fireEvent.click(screen.getByTestId('data-source-session'));
-		expect(screen.queryByTestId('session-needs-v2')).toBeNull();                          // pretrained start, 3 rounds: supported
 		await fireEvent.change(screen.getByTestId('cfg10-init'), { target: { value: 'FL_INIT_V2' } });
-		expect(screen.getByTestId('session-needs-v2')).toBeTruthy();
-		expect((screen.getByTestId('cfg10-submit') as HTMLButtonElement).disabled).toBe(true);
+		expect(screen.queryByTestId('session-needs-v2')).toBeNull();
+		expect((screen.getByTestId('cfg10-submit') as HTMLButtonElement).disabled).toBe(false);
+		await fireEvent.click(screen.getByTestId('cfg10-submit'));
+		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 3, source_mode: 'LIVE_MONITORED_SITE_00', signal_session_id: expect.any(String), initialisation: 'FL_INIT_V2' });
 	});
 	it('enables and transmits FedProx plus the verified round-one shadow only when the backend advertises both', async () => {
 		const onStartTen = vi.fn();

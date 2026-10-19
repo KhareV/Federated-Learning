@@ -1,0 +1,604 @@
+{
+  "mode": "hardware-combos",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "session_id": "HW-SHOWCASE-2026-10-17-02-7f744f03",
+  "steps": [
+    {
+      "tag": "model_v2_final_original",
+      "plan": {
+        "tag": "model_v2_final_original",
+        "init": "MODEL_V2_FINAL",
+        "cohort": "ORIGINAL",
+        "rounds": 3
+      },
+      "form": {
+        "init": "MODEL_V2_FINAL",
+        "unused_note": "",
+        "v2_note": "R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven canonical synthetic peers of the cohort. Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain. The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-DD2F059D5F5D",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.903981",
+        "metric_auroc": "AUROC0.930841",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "start_untrained": "",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvgpretrained V2 start AUPRC0.903981latest evaluated R0AUROC0.930841latest evaluated R0BCE0.218448latest evaluated R0",
+        "source_sentence": "Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven canonical synthetic peers on one machine.",
+        "run_label": "3-round recorded-hardware run — pretrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 1/4 · REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "fl_init_v2_original",
+      "plan": {
+        "tag": "fl_init_v2_original",
+        "init": "FL_INIT_V2",
+        "cohort": "ORIGINAL",
+        "rounds": 3
+      },
+      "form": {
+        "init": "FL_INIT_V2",
+        "unused_note": "",
+        "v2_note": "R0 is the seeded, UNTRAINED V2-architecture model (FL_INIT_V2), the same untrained start as a synthetic 10-round run; it learns only from your windows and the seven peers. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven canonical synthetic peers of the cohort. Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain. The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-CC761B2A14F0",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.628671",
+        "metric_auroc": "AUROC0.726971",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "start_untrained": "Starting model: the untrained V2 network (FL_INIT_V2). Round 0 is its seeded initial state; nothing is pretrained, so every weight is learned from your recorded windows and the seven synthetic peers.",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvguntrained V2 start AUPRC0.628671latest evaluated R0AUROC0.726971latest evaluated R0BCE0.650140latest evaluated R0",
+        "source_sentence": "Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven canonical synthetic peers on one machine.",
+        "run_label": "3-round recorded-hardware run — untrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 1/4 · REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "candidate_original",
+      "plan": {
+        "tag": "candidate_original",
+        "init": "CANDIDATE",
+        "cohort": "ORIGINAL",
+        "rounds": 3
+      },
+      "candidate_picker": {
+        "groups": [
+          "Trained on the original cohort",
+          "Imported research checkpoints (real MIT-BIH ECG, no synthetic cohort)"
+        ],
+        "selected": "FL10_CANDIDATE_HDFLRUN-DD2F059D5F5D"
+      },
+      "form": {
+        "init": "CANDIDATE",
+        "unused_note": "",
+        "v2_note": "R0 is the final state of the stored candidate chosen below, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven canonical synthetic peers of the cohort. Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain. The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-604E23FD588F",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.987795",
+        "metric_auroc": "AUROC0.993317",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "start_candidate": "Starting model: stored engineering candidate FL10_CANDIDATE_HDFLRUN-DD2F059D5F5D (trained on the original cohort). Round 0 is that candidate's final state, unchanged.",
+        "start_untrained": "",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvgstored candidate start AUPRC0.987795latest evaluated R2AUROC0.993317latest evaluated R2BCE0.159551latest evaluated R2",
+        "source_sentence": "Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven canonical synthetic peers on one machine.",
+        "run_label": "3-round recorded-hardware run — candidate start · RECORDED HARDWARE (this account) · evaluated rounds 3/4 · REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "fresh_seeded_original",
+      "plan": {
+        "tag": "fresh_seeded_original",
+        "init": "FRESH_SEEDED",
+        "cohort": "ORIGINAL",
+        "rounds": 3
+      },
+      "form": {
+        "init": "FRESH_SEEDED",
+        "unused_note": "",
+        "v2_note": "",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-AAAA77172243",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "RECORDED_DEMO_CLIENT_01",
+          "RECORDED_DEMO_CLIENT_02",
+          "RECORDED_DEMO_CLIENT_03",
+          "RECORDED_DEMO_CLIENT_04",
+          "RECORDED_DEMO_CLIENT_05",
+          "RECORDED_DEMO_CLIENT_06",
+          "RECORDED_DEMO_CLIENT_07"
+        ],
+        "metric_auprc": "AUPRC0.499400",
+        "metric_auroc": "AUROC0.490267",
+        "metric_cohort": "RECORDED_HARDWARE_HOLDOUT · 94 windows · held-out recorded windows",
+        "start_candidate": "",
+        "start_untrained": "",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvghardware model, fresh start AUPRC0.499400latest evaluated R3AUROC0.490267latest evaluated R3BCE0.706726latest evaluated R3",
+        "source_sentence": "Your recorded telemetry windows (real features) with deterministic synthetic labels, split across eight logical clients on one machine.",
+        "run_label": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "model_v2_final_realistic",
+      "plan": {
+        "tag": "model_v2_final_realistic",
+        "init": "MODEL_V2_FINAL",
+        "cohort": "REALISTIC",
+        "rounds": 3
+      },
+      "form": {
+        "init": "MODEL_V2_FINAL",
+        "unused_note": "",
+        "v2_note": "R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven realistic synthetic peers of the cohort. Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain. The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-7802E4F8548A",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.484391",
+        "metric_auroc": "AUROC0.847665",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 · 1433 windows · 16 participants",
+        "start_candidate": "",
+        "start_untrained": "",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvgpretrained V2 start AUPRC0.484391latest evaluated R0AUROC0.847665latest evaluated R0BCE0.829727latest evaluated R0",
+        "source_sentence": "Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven realistic synthetic peers on one machine.",
+        "run_label": "3-round recorded-hardware run — pretrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 1/4 · REALISTIC SYNTHETIC EVALUATION COHORT — DIAGNOSTIC, ANNOTATION-NOISY, NOT CLINICAL",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "fl_init_v2_realistic",
+      "plan": {
+        "tag": "fl_init_v2_realistic",
+        "init": "FL_INIT_V2",
+        "cohort": "REALISTIC",
+        "rounds": 3
+      },
+      "form": {
+        "init": "FL_INIT_V2",
+        "unused_note": "",
+        "v2_note": "R0 is the seeded, UNTRAINED V2-architecture model (FL_INIT_V2), the same untrained start as a synthetic 10-round run; it learns only from your windows and the seven peers. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven realistic synthetic peers of the cohort. Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain. The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-9472B2693D48",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.187931",
+        "metric_auroc": "AUROC0.562070",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 · 1433 windows · 16 participants",
+        "start_candidate": "",
+        "start_untrained": "Starting model: the untrained V2 network (FL_INIT_V2). Round 0 is its seeded initial state; nothing is pretrained, so every weight is learned from your recorded windows and the seven synthetic peers.",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvguntrained V2 start AUPRC0.187931latest evaluated R0AUROC0.562070latest evaluated R0BCE0.646502latest evaluated R0",
+        "source_sentence": "Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven realistic synthetic peers on one machine.",
+        "run_label": "3-round recorded-hardware run — untrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 1/4 · REALISTIC SYNTHETIC EVALUATION COHORT — DIAGNOSTIC, ANNOTATION-NOISY, NOT CLINICAL",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "candidate_realistic",
+      "plan": {
+        "tag": "candidate_realistic",
+        "init": "CANDIDATE",
+        "cohort": "REALISTIC",
+        "rounds": 3
+      },
+      "candidate_picker": {
+        "groups": [
+          "Trained on the original cohort",
+          "Imported research checkpoints (real MIT-BIH ECG, no synthetic cohort)"
+        ],
+        "selected": "FL10_CANDIDATE_HDFLRUN-DD2F059D5F5D"
+      },
+      "form": {
+        "init": "CANDIDATE",
+        "unused_note": "",
+        "v2_note": "R0 is the final state of the stored candidate chosen below, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven realistic synthetic peers of the cohort. Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain. The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-E2AF9DA2A4F3",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.436715",
+        "metric_auroc": "AUROC0.847853",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 · 1433 windows · 16 participants",
+        "start_candidate": "Starting model: stored engineering candidate FL10_CANDIDATE_HDFLRUN-DD2F059D5F5D (trained on the original cohort; this run uses the realistic cohort). Round 0 is that candidate's final state, unchanged.",
+        "start_untrained": "",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvgstored candidate start AUPRC0.436715latest evaluated R0AUROC0.847853latest evaluated R0BCE1.490537latest evaluated R0",
+        "source_sentence": "Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven realistic synthetic peers on one machine.",
+        "run_label": "3-round recorded-hardware run — candidate start · RECORDED HARDWARE (this account) · evaluated rounds 1/4 · REALISTIC SYNTHETIC EVALUATION COHORT — DIAGNOSTIC, ANNOTATION-NOISY, NOT CLINICAL",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "fresh_seeded_realistic",
+      "plan": {
+        "tag": "fresh_seeded_realistic",
+        "init": "FRESH_SEEDED",
+        "cohort": "REALISTIC",
+        "rounds": 3
+      },
+      "form": {
+        "init": "FRESH_SEEDED",
+        "unused_note": "The small tabular model has no synthetic peers and no V2 evaluation cohort, so the synthetic cohort you selected is not used by this run. Choose a V2 start (pretrained, untrained or a stored candidate) for the cohort to apply.",
+        "v2_note": "",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-61C419DDE05E",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "RECORDED_DEMO_CLIENT_01",
+          "RECORDED_DEMO_CLIENT_02",
+          "RECORDED_DEMO_CLIENT_03",
+          "RECORDED_DEMO_CLIENT_04",
+          "RECORDED_DEMO_CLIENT_05",
+          "RECORDED_DEMO_CLIENT_06",
+          "RECORDED_DEMO_CLIENT_07"
+        ],
+        "metric_auprc": "AUPRC0.499400",
+        "metric_auroc": "AUROC0.490267",
+        "metric_cohort": "RECORDED_HARDWARE_HOLDOUT · 94 windows · held-out recorded windows",
+        "start_candidate": "",
+        "start_untrained": "",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvghardware model, fresh start AUPRC0.499400latest evaluated R3AUROC0.490267latest evaluated R3BCE0.706726latest evaluated R3",
+        "source_sentence": "Your recorded telemetry windows (real features) with deterministic synthetic labels, split across eight logical clients on one machine.",
+        "run_label": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "model_v2_final_realistic_nstdb",
+      "plan": {
+        "tag": "model_v2_final_realistic_nstdb",
+        "init": "MODEL_V2_FINAL",
+        "cohort": "REALISTIC_NSTDB",
+        "rounds": 3
+      },
+      "form": {
+        "init": "MODEL_V2_FINAL",
+        "unused_note": "",
+        "v2_note": "R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven canonical synthetic peers of the cohort. Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain. The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-B7CAF9A37379",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.899584",
+        "metric_auroc": "AUROC0.948897",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "start_untrained": "",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvgpretrained V2 start AUPRC0.899584latest evaluated R0AUROC0.948897latest evaluated R0BCE0.108320latest evaluated R0",
+        "source_sentence": "Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven realistic (recorded-noise) synthetic peers on one machine.",
+        "run_label": "3-round recorded-hardware run — pretrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 1/4 · REALISTIC SYNTHETIC EVALUATION COHORT WITH RECORDED NSTDB NOISE — DIAGNOSTIC, ANNOTATION-NOISY, NOT CLINICAL",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "fl_init_v2_realistic_nstdb",
+      "plan": {
+        "tag": "fl_init_v2_realistic_nstdb",
+        "init": "FL_INIT_V2",
+        "cohort": "REALISTIC_NSTDB",
+        "rounds": 3
+      },
+      "form": {
+        "init": "FL_INIT_V2",
+        "unused_note": "",
+        "v2_note": "R0 is the seeded, UNTRAINED V2-architecture model (FL_INIT_V2), the same untrained start as a synthetic 10-round run; it learns only from your windows and the seven peers. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven canonical synthetic peers of the cohort. Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain. The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-0B73926B8743",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.315989",
+        "metric_auroc": "AUROC0.609790",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "start_untrained": "Starting model: the untrained V2 network (FL_INIT_V2). Round 0 is its seeded initial state; nothing is pretrained, so every weight is learned from your recorded windows and the seven synthetic peers.",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvguntrained V2 start AUPRC0.315989latest evaluated R0AUROC0.609790latest evaluated R0BCE0.634885latest evaluated R0",
+        "source_sentence": "Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven realistic (recorded-noise) synthetic peers on one machine.",
+        "run_label": "3-round recorded-hardware run — untrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 1/4 · REALISTIC SYNTHETIC EVALUATION COHORT WITH RECORDED NSTDB NOISE — DIAGNOSTIC, ANNOTATION-NOISY, NOT CLINICAL",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "candidate_realistic_nstdb",
+      "plan": {
+        "tag": "candidate_realistic_nstdb",
+        "init": "CANDIDATE",
+        "cohort": "REALISTIC_NSTDB",
+        "rounds": 3
+      },
+      "candidate_picker": {
+        "groups": [
+          "Trained on the original cohort",
+          "Imported research checkpoints (real MIT-BIH ECG, no synthetic cohort)"
+        ],
+        "selected": "FL10_CANDIDATE_HDFLRUN-DD2F059D5F5D"
+      },
+      "form": {
+        "init": "CANDIDATE",
+        "unused_note": "",
+        "v2_note": "R0 is the final state of the stored candidate chosen below, unchanged. Your recording becomes ONE recorded client (up to 93 windows) federated with the seven canonical synthetic peers of the cohort. Federated fine-tuning of the verified pretrained V2 checkpoint on your recorded windows, resampled to 360 Hz and graded by the unchanged PREPROC_V1 quality gate (only VALID windows train). Labels stay synthetic; V2 was not validated on this signal chain. The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-35C689BDEA3B",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.918733",
+        "metric_auroc": "AUROC0.970464",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3 · 1446 windows · 16 participants",
+        "start_candidate": "Starting model: stored engineering candidate FL10_CANDIDATE_HDFLRUN-DD2F059D5F5D (trained on the original cohort; this run uses the realistic cohort with recorded noise). Round 0 is that candidate's final state, unchanged.",
+        "start_untrained": "",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvgstored candidate start AUPRC0.918733latest evaluated R0AUROC0.970464latest evaluated R0BCE0.125030latest evaluated R0",
+        "source_sentence": "Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven realistic (recorded-noise) synthetic peers on one machine.",
+        "run_label": "3-round recorded-hardware run — candidate start · RECORDED HARDWARE (this account) · evaluated rounds 1/4 · REALISTIC SYNTHETIC EVALUATION COHORT WITH RECORDED NSTDB NOISE — DIAGNOSTIC, ANNOTATION-NOISY, NOT CLINICAL",
+        "backend_error": false,
+        "alerts": []
+      }
+    },
+    {
+      "tag": "fresh_seeded_realistic_nstdb",
+      "plan": {
+        "tag": "fresh_seeded_realistic_nstdb",
+        "init": "FRESH_SEEDED",
+        "cohort": "REALISTIC_NSTDB",
+        "rounds": 3
+      },
+      "form": {
+        "init": "FRESH_SEEDED",
+        "unused_note": "The small tabular model has no synthetic peers and no V2 evaluation cohort, so the synthetic cohort you selected is not used by this run. Choose a V2 start (pretrained, untrained or a stored candidate) for the cohort to apply.",
+        "v2_note": "",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-FE0348EFFE8D",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "RECORDED_DEMO_CLIENT_01",
+          "RECORDED_DEMO_CLIENT_02",
+          "RECORDED_DEMO_CLIENT_03",
+          "RECORDED_DEMO_CLIENT_04",
+          "RECORDED_DEMO_CLIENT_05",
+          "RECORDED_DEMO_CLIENT_06",
+          "RECORDED_DEMO_CLIENT_07"
+        ],
+        "metric_auprc": "AUPRC0.499400",
+        "metric_auroc": "AUROC0.490267",
+        "metric_cohort": "RECORDED_HARDWARE_HOLDOUT · 94 windows · held-out recorded windows",
+        "start_candidate": "",
+        "start_untrained": "",
+        "glance": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvghardware model, fresh start AUPRC0.499400latest evaluated R3AUROC0.490267latest evaluated R3BCE0.706726latest evaluated R3",
+        "source_sentence": "Your recorded telemetry windows (real features) with deterministic synthetic labels, split across eight logical clients on one machine.",
+        "run_label": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+        "backend_error": false,
+        "alerts": []
+      }
+    }
+  ],
+  "expected_cards": 11,
+  "settled_cards": 11,
+  "library": {
+    "cards": [
+      {
+        "id": "FL10_CANDIDATE_HDFLRUN-604E23FD588F",
+        "cohort": "ORIGINAL"
+      },
+      {
+        "id": "FL10_CANDIDATE_HDFLRUN-CC761B2A14F0",
+        "cohort": "ORIGINAL"
+      },
+      {
+        "id": "FL10_CANDIDATE_HDFLRUN-DD2F059D5F5D",
+        "cohort": "ORIGINAL"
+      },
+      {
+        "id": "FL10_CANDIDATE_HDFLRUN-9472B2693D48",
+        "cohort": "REALISTIC"
+      },
+      {
+        "id": "FL10_CANDIDATE_HDFLRUN-7802E4F8548A",
+        "cohort": "REALISTIC"
+      },
+      {
+        "id": "FL10_CANDIDATE_HDFLRUN-E2AF9DA2A4F3",
+        "cohort": "REALISTIC"
+      },
+      {
+        "id": "FL10_CANDIDATE_HDFLRUN-B7CAF9A37379",
+        "cohort": "REALISTIC_NSTDB"
+      },
+      {
+        "id": "FL10_CANDIDATE_HDFLRUN-0B73926B8743",
+        "cohort": "REALISTIC_NSTDB"
+      },
+      {
+        "id": "FL10_CANDIDATE_HDFLRUN-35C689BDEA3B",
+        "cohort": "REALISTIC_NSTDB"
+      },
+      {
+        "id": "RESEARCH_FL_V2_FL001_R38_BEST",
+        "cohort": "REAL_ECG"
+      },
+      {
+        "id": "RESEARCH_FL_V2_FL001_R50",
+        "cohort": "REAL_ECG"
+      }
+    ],
+    "training_groups": [
+      {
+        "cohort": "ORIGINAL",
+        "label": "Trained on the original cohort",
+        "member_cohorts": [
+          "ORIGINAL",
+          "ORIGINAL",
+          "ORIGINAL"
+        ]
+      },
+      {
+        "cohort": "REALISTIC",
+        "label": "Trained on the realistic cohort (invented noise)",
+        "member_cohorts": [
+          "REALISTIC",
+          "REALISTIC",
+          "REALISTIC"
+        ]
+      },
+      {
+        "cohort": "REALISTIC_NSTDB",
+        "label": "Trained on the realistic cohort with recorded noise",
+        "member_cohorts": [
+          "REALISTIC_NSTDB",
+          "REALISTIC_NSTDB",
+          "REALISTIC_NSTDB"
+        ]
+      },
+      {
+        "cohort": "REAL_ECG",
+        "label": "Imported research checkpoints (real MIT-BIH ECG, no synthetic cohort)",
+        "member_cohorts": [
+          "REAL_ECG",
+          "REAL_ECG"
+        ]
+      }
+    ],
+    "shortlist_entries": 11
+  }
+}

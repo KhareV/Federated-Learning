@@ -54,3 +54,9 @@ Run it before the session, and again after a restart.
 ## Guided demonstration path
 
 `/app/demo` (Overview → "GUIDED DEMONSTRATION PATH") is the recommended story: scope, Monitor, a live 3-round realistic-cohort federation run, per-round evaluation, the frozen scientific result, the candidate library, the hardware boundary, and limits. Every step names how its evidence is produced (computed now, a prepared recorded run, frozen evidence, a stored session, or the stored library) and gives a fallback, so a replay is never presented as live. The older evidence tour and run storyboard remain as detailed companions. The steps are data in `frontend/src/lib/product/demo-path.ts` and are covered by `demo-path.test.ts`.
+
+## 4. Presenting from the Guided demo page (`/app/demo`)
+
+The page is built to be presented from. **Start presenting** opens a presenter bar with a timer, the current step and its planned start time, an on-pace / ahead / behind indicator, and controls: arrow keys move between steps (moving on ticks the step you leave as covered), space pauses the timer, Escape stops. The story map shows the eight steps proportional to their planned minutes; every step card has Do / Understand / Say / If it fails, its evidence mode (live, prepared run, frozen evidence, recorded session, stored library or statement) and a link that opens the page. Covered ticks are remembered in the browser only (never sent anywhere). The page also lists the pre-flight and launch commands with copy buttons.
+
+Rebuilding the frontend while the site is running deletes the files its preview server is serving and takes the whole stack down: stop the site first, then build.

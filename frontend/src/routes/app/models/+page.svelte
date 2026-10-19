@@ -5,6 +5,7 @@
 	import CandidateCard from '$lib/components/product/federation/CandidateCard.svelte';
 	import TechnicalEvidence from '$lib/components/product/federation/TechnicalEvidence.svelte';
 	import CandidateLibrary from '$lib/components/product/studio/CandidateLibrary.svelte';
+	import UpgradeShortlist from '$lib/components/product/studio/UpgradeShortlist.svelte';
 	import ComparisonPanel from '$lib/components/product/story/ComparisonPanel.svelte';
 	import FlowDiagram from '$lib/components/product/story/FlowDiagram.svelte';
 	import { useFederation } from '$lib/product/federation/state.svelte';
@@ -29,7 +30,7 @@
 <Panel eyebrow="COMPARISON" title="Released monitoring model vs federated engineering candidate" note="ROLE AND STATUS ONLY">
 	<ComparisonPanel testid="released-vs-candidate" leftTitle={released} leftSub="Released monitoring model" leftStatus="RELEASED" leftTone="released" rightTitle={cand?.candidate_id ?? 'CAPSTONE_FL_CANDIDATE_####'} rightSub={cand ? 'Federated engineering candidate' : 'No candidate yet'} rightStatus="NOT DEPLOYED" rightTone="candidate" {rows} />
 	<p class="dim">This comparison does not say that the candidate is better or worse. No candidate performance has been established.</p>
-	<p class="dim" data-testid="hardware-demo-model-note">Recorded-hardware runs either train a separate small tabular model (<code>HARDWARE_DEMO_MODEL_V1</code>, fresh or warm-started) or fine-tune the pretrained <code>MODEL_V2_FINAL</code> checkpoint on your resampled recorded windows; both use synthetic labels. The pretrained-V2 family keeps its final engineering candidate in your stored candidates below; the tabular model keeps none. Neither is registered in the product registry, promoted or deployed, and neither is comparable to the real-ECG scientific results; the released <code>MODEL_V2_FINAL</code> is never changed. See the run on its Live page.</p>
+	<p class="dim" data-testid="hardware-demo-model-note">Recorded-hardware runs either train a separate small tabular model (<code>HARDWARE_DEMO_MODEL_V1</code>, fresh or warm-started) or use the V2 network on your resampled recorded windows, started from the pretrained <code>MODEL_V2_FINAL</code> checkpoint, from the untrained <code>FL_INIT_V2</code> model, or from a stored candidate; all use synthetic labels. The V2 family keeps its final engineering candidate in your stored candidates below, listed by the cohort each was trained on; the tabular model keeps none. Neither is registered in the product registry, promoted or deployed, and neither is comparable to the real-ECG scientific results; the released <code>MODEL_V2_FINAL</code> is never changed. See the run on its Live page.</p>
 </Panel>
 <div class="gap"></div>
 <Panel eyebrow="LIFECYCLE" title="Two lifecycles, one blocked boundary">
@@ -46,6 +47,8 @@
 </Panel>
 <div class="gap"></div>
 <Panel eyebrow="FEDERATION STUDIO" title="Stored engineering candidates" note="YOUR LIBRARY · KEPT ACROSS RESTARTS"><CandidateLibrary /></Panel>
+<div class="gap"></div>
+<Panel eyebrow="UPGRADE SHORTLIST" title="Which candidates could be reviewed as a future custom model" note="EVIDENCE CHECKLIST · NOTHING IS DEPLOYED"><UpgradeShortlist /></Panel>
 <div class="gap"></div>
 <TechnicalEvidence label="TECHNICAL EVIDENCE (RELEASED SCIENTIFIC registry)" testid="models-evidence">
 	{#if fed.registry}

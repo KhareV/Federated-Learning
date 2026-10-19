@@ -33,13 +33,13 @@
   "plan": "run:8:leadoff,run:45:sketch_real,unavail:7:sketch_real,run:25:sketch_real,run:6:leadoff,run:20:sketch_real,drop:9:sketch_real,run:25:sketch_real",
   "plan_b": "run:125:sketch_real",
   "real_render_verified": false,
-  "rejected_handshakes": 6,
-  "replica_inserts_total": 10058,
+  "rejected_handshakes": 3,
+  "replica_inserts_total": 5030,
   "sessions": {
-    "A": "HW-cc82a94874054dcfa9878b68c41d6244",
-    "B": "HW-e42dbd47e7af4ed581d9ab3e0f1ea688",
-    "C": "HW-9f00131bbd924c758f96a54c2f1830ab"
+    "A": "HW-e98e7568a51c4ea89cf8fa6eeb4c0d02",
+    "B": "HW-9551d966cba143c39f341bc420530dcc",
+    "C": "HW-fa56f1fc335c4ea7ae244e6f80d3ca71"
   },
   "status": "PASS",
-  "v2_run_id": "HDFLRUN-6F9BFE403343"
+  "v2_run_id": "HDFLRUN-0F8F004FC000"
 }

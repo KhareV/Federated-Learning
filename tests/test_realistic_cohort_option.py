@@ -231,8 +231,8 @@ def test_the_studio_routes_advertise_every_cohort_and_validate_the_choice(tmp_pa
         assert caps["cohorts"][1]["evaluation_cohort_id"] == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2" and caps["cohorts"][2]["evaluation_cohort_id"] == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3" and "frozen product contract" in caps["cohort_note"]
         bad = c.post(f"{BASE}/studio/runs", headers=USER_A, json={"run_length": 10, "cohort": "EXOTIC"})
         assert bad.status_code == 400 and "cohort must be one of ORIGINAL, REALISTIC, REALISTIC_NSTDB" in bad.text
-        untrained3 = c.post(f"{BASE}/studio/runs", headers=USER_A, json={"run_length": 3, "initialisation": "FL_INIT_V2", "cohort": "REALISTIC"})
-        assert untrained3.status_code == 400                                  # 3 untrained rounds are the frozen product contract, defined on the original cohort only
+        untrained3 = c.post(f"{BASE}/studio/runs", headers=USER_A, json={"run_length": 3, "initialisation": "FL_INIT_V2"})
+        assert untrained3.status_code == 400                                  # 3 untrained rounds on the ORIGINAL cohort are the frozen product contract (a realistic cohort runs on the extended engine)
         extra = c.post(f"{BASE}/studio/runs", headers=USER_A, json={"run_length": 10, "cohorts": "REALISTIC"})
         assert extra.status_code == 400                                       # unknown keys are still refused
 
