@@ -87,10 +87,10 @@ describe('ClientGrid (display-only prop)', () => {
 	it('unbound (no prop): the existing presentation with no owner or peer labels', () => {
 		render(ClientGrid, { live: views, round: 1 });
 		expect(screen.getByTestId('client-grid').getAttribute('aria-label')).toBe('Eight logical clients');
-		expect(text()).not.toMatch(/MY EDGE CLIENT|SYNTHETIC PEER|AUTHENTICATED OWNER/);
+		expect(text()).not.toMatch(/MY EDGE CLIENT|RESEARCH PEER|AUTHENTICATED OWNER/);
 		expect(CLIENT_IDS.every((id) => text().includes(id))).toBe(true);
 	});
-	it('bound: exactly one MY EDGE CLIENT card for SIM_FL_SITE_00 and seven SYNTHETIC PEER cards; technical ids unchanged', () => {
+	it('bound: exactly one MY EDGE CLIENT card for SIM_FL_SITE_00 and seven RESEARCH PEER cards; technical ids unchanged', () => {
 		render(ClientGrid, { live: views, round: 1, ownerBoundClientId: 'SIM_FL_SITE_00' });
 		expect(screen.getAllByTestId('owner-card-label')).toHaveLength(1);
 		expect(screen.getAllByTestId('peer-label')).toHaveLength(7);
@@ -98,7 +98,7 @@ describe('ClientGrid (display-only prop)', () => {
 		expect(owner.getAttribute('data-client')).toBe('SIM_FL_SITE_00');
 		expect(owner.textContent).toContain('SIM_FL_SITE_00');
 		expect(owner.textContent).toContain('MY EDGE CLIENT');
-		expect(owner.textContent).toContain('SYNTHETIC ENGINEERING');
+		expect(owner.textContent).toContain('RESEARCH');
 		expect(owner.textContent).toContain('NOT YOUR PHYSIOLOGY');
 		expect(owner.textContent).toContain('local examples: 90');
 		expect([...document.querySelectorAll('[data-client]')].map((e) => e.getAttribute('data-client'))).toEqual(CLIENT_IDS);
@@ -124,8 +124,8 @@ describe('live page', () => {
 		expect(screen.getByTestId('my-raw-examples-sent').textContent).toBe('0');
 		expect(screen.getByTestId('my-participation').textContent).toContain("Training examples remain in this client's logical local buffer");
 		expect(screen.getByTestId('my-participation').textContent).toContain('All clients execute on one demonstration machine');
-		expect(screen.getByTestId('participants-note').textContent).toContain('1 authenticated owner-bound client · 7 synthetic peers');
-		expect(screen.getByTestId('participants-note').textContent).toContain('ALL TRAINING DATA IN THIS DEMO IS SYNTHETIC ENGINEERING DATA');
+		expect(screen.getByTestId('participants-note').textContent).toContain('1 authenticated owner-bound client · 7 research peers');
+		expect(screen.getByTestId('participants-note').textContent).toContain('ALL TRAINING DATA IN THIS DEMO IS GENERATED RESEARCH DATA');
 		expect(text()).toContain('Federated participants');
 		expect(text()).not.toMatch(/Eight logical clients/);
 	});
@@ -139,7 +139,7 @@ describe('live page', () => {
 	it('CLERK + REPLAY and DEMO + LIVE_RUN / DEMO + REPLAY show no owner binding and keep the existing title', async () => {
 		for (const [provider, runType] of [['CLERK', 'REPLAY'], ['DEMO', 'LIVE_RUN'], ['DEMO', 'REPLAY']] as const) {
 			await live(provider, runType);
-			expect(text(), `${provider}+${runType}`).not.toMatch(/MY EDGE CLIENT|AUTHENTICATED OWNER|SYNTHETIC PEER|MY FEDERATED PARTICIPATION/);
+			expect(text(), `${provider}+${runType}`).not.toMatch(/MY EDGE CLIENT|AUTHENTICATED OWNER|RESEARCH PEER|MY FEDERATED PARTICIPATION/);
 			expect(screen.queryByTestId('my-participation')).toBeNull();
 			expect(text()).toContain('Eight logical clients');
 			cleanup(); fed.closeLive(); setFederationStore(null); setProductStore(null);
@@ -159,7 +159,7 @@ describe('global clients page and rounds page', () => {
 		await boot('CLERK');
 		render(ClientsPage);
 		await waitFor(() => expect(CLIENT_IDS.every((id) => text().includes(id))).toBe(true));
-		expect(text()).not.toMatch(/MY EDGE CLIENT|AUTHENTICATED OWNER|SYNTHETIC PEER|owner-bound/i);
+		expect(text()).not.toMatch(/MY EDGE CLIENT|AUTHENTICATED OWNER|RESEARCH PEER|owner-bound/i);
 		expect(readFileSync(resolve(SRC, 'routes/app/federation/clients/+page.svelte'), 'utf8')).not.toMatch(/MY EDGE CLIENT|ownerBound|participation/);
 	});
 	it('rounds page: a small owner note only for CLERK + LIVE_RUN', async () => {

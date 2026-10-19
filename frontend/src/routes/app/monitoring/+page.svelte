@@ -40,7 +40,7 @@
 	const flow = $derived.by(() => {
 		const done = [connected || !!session, live.segments.length > 0, !!live.quality, !!live.inference, !!live.monitoringState, finished];
 		const firstOpen = done.indexOf(false);
-		const names: [string, string][] = [['VIRTUAL WEARABLE', 'simulated source'], ['SIGNAL', 'source ECG'], ['QUALITY', 'signal quality'], [`${modelId}`, 'server-side inference'], ['MONITORING STATE', 'research state'], ['ALERT / HISTORY', 'persisted']];
+		const names: [string, string][] = [['SOFTWARE ECG SOURCE', 'software source'], ['SIGNAL', 'source ECG'], ['QUALITY', 'signal quality'], [`${modelId}`, 'server-side inference'], ['MONITORING STATE', 'research state'], ['ALERT / HISTORY', 'persisted']];
 		return names.map(([label, sub], i) => ({ label, sub, tone: (i === 3 ? 'released' : 'neutral') as 'released' | 'neutral', mark: done[i] ? '✓' : i === firstOpen && active ? '●' : '○', status: (done[i] ? 'done' : i === firstOpen && active ? 'active' : 'pending') as 'done' | 'active' | 'pending' }));
 	});
 	onMount(() => { void store.loadDevices(); void store.loadSessions(); });
@@ -49,7 +49,7 @@
 
 <svelte:head><title>Monitor | NHM</title></svelte:head>
 
-<label class="source-choice" for="monitor-source">Source <select id="monitor-source" bind:value={source}><option value="simulated">Simulated wearable</option><option value="hardware">Live hardware (MongoDB)</option></select></label>
+<label class="source-choice" for="monitor-source">Source <select id="monitor-source" bind:value={source}><option value="simulated">Software ECG source</option><option value="hardware">Live hardware (MongoDB)</option></select></label>
 {#if source === 'hardware'}
 <div class="eyebrow">NHM / MONITOR</div><h1>Live monitoring</h1><HardwareMonitor />
 {:else}
@@ -57,14 +57,14 @@
 <div class="eyebrow">NHM / MONITOR</div>
 <h1>Live monitoring</h1>
 <div class="sr" role="status" aria-live="polite">{announce}</div>
-<p class="lead">A simulated wearable streams ECG to the backend. The server checks signal quality, runs {modelId} with {calId}, and reports a research monitoring state. The browser only displays what the backend sends.</p>
+<p class="lead">A software ECG source streams ECG to the backend. The server checks signal quality, runs {modelId} with {calId}, and reports a research monitoring state. The browser only displays what the backend sends.</p>
 <div class="flowbox" data-testid="monitoring-flow"><FlowDiagram label="Monitoring pipeline" steps={flow} /></div>
 
 {#if store.error}<p class="err" role="alert">{store.error}</p>{/if}
 
 <Panel eyebrow="01 / SESSION" title="Monitoring session" note="PERSISTED IN SQLITE">
 	{#if !device}
-		<p class="dim">No virtual wearable is attached. <a href="/app/device">Attach one on the Device page →</a></p>
+		<p class="dim">No software ECG source is attached. <a href="/app/device">Attach one on the Device page →</a></p>
 	{:else if !connected && !session}
 		<p class="dim">Device <code>{device.device_id}</code> is <b>{device.connection_state}</b>. {device.connection_state === 'STOPPED' ? 'The last session ended and the link was kept; reconnect to monitor again.' : device.connection_state === 'DETACHED' || device.connection_state === 'ERROR' ? 'Scan and connect it first.' : 'Finish connecting it first.'} <a href="/app/device">Device page →</a></p>
 		{#if device.connection_state === 'STOPPED'}<button class="primary" onclick={() => store.connect(device.device_id)} disabled={store.busy} data-testid="monitor-reconnect">RECONNECT DEVICE</button>{/if}
@@ -81,7 +81,7 @@
 			<button onclick={() => store.stopSession()} disabled={store.busy || !active} data-testid="stop-session">STOP MONITORING</button>
 		</div>
 	{/if}
-	{#if finished && !connected}<p class="dim" data-testid="rerun-hint">To run another session, reconnect the virtual wearable on the <a href="/app/device">Device page</a> (a finished session leaves it {device?.connection_state === 'STOPPED' ? 'STOPPED with the link kept, so Reconnect is enough' : 'in its own link state'}).</p>{/if}
+	{#if finished && !connected}<p class="dim" data-testid="rerun-hint">To run another session, reconnect the software ECG source on the <a href="/app/device">Device page</a> (a finished session leaves it {device?.connection_state === 'STOPPED' ? 'STOPPED with the link kept, so Reconnect is enough' : 'in its own link state'}).</p>{/if}
 	{#if finished && session}
 		<div class="done" role="status" data-testid="session-complete">
 			<b>{sessState === 'COMPLETED' ? 'Session completed' : 'Session failed (technical)'}</b>
@@ -102,9 +102,9 @@
 {#if live.streamError}<p class="err" role="alert" data-testid="stream-error">{live.streamError.message}</p>{/if}
 
 <div class="wave">
-	<Panel eyebrow="02 / SIMULATED SOURCE ECG" title="Virtual wearable ECG · MODEL SIGNAL" note="360 Hz / ADC_COUNTS / rolling 10 s">
+	<Panel eyebrow="02 / SOFTWARE SOURCE ECG" title="Software ECG source ECG · MODEL SIGNAL" note="360 Hz / ADC_COUNTS / rolling 10 s">
 		<WaveformPlot segments={live.segments} start={live.waveformStart} end={live.waveformEnd} capacity={live.waveformCapacity || 3600} gaps={live.gaps} openGap={live.openGap} />
-		<p class="foot">Simulated device-source ECG transport (not the 250 Hz model-input window, not a physical sensor). PPG waveform is unavailable in the current simulator; SpO2/PPG-derived context appears only where emitted.</p>
+		<p class="foot">Software-source ECG transport (not the 250 Hz model-input window, not a physical sensor). PPG waveform is unavailable in the current software source; SpO2/PPG-derived context appears only where emitted.</p>
 		{#if live.gaps.length || live.openGap}
 			<p class="warn" role="status">Source gaps were observed in this stream.</p>
 			<TechnicalEvidence label="TECHNICAL EVIDENCE (gap ranges)" testid="gap-evidence"><p class="foot" data-testid="gap-list">Source gaps observed (sample indices): {#each [...live.gaps, ...(live.openGap ? [live.openGap] : [])] as g}<code>[{g.start}, {g.end}]</code> {/each}</p></TechnicalEvidence>
@@ -113,9 +113,9 @@
 </div>
 <div class="wave">
 	<Panel eyebrow="SOURCE VS MODEL INPUT" title="What is drawn is not what the model reads" note="SERVER-SIDE INFERENCE">
-		<ComparisonPanel testid="source-vs-model" leftTitle="SIMULATED SOURCE ECG" leftSub="what the waveform shows" leftTone="neutral" rightTitle="MODEL INPUT" rightSub={modelId} rightTone="released" rows={[
+		<ComparisonPanel testid="source-vs-model" leftTitle="SOFTWARE SOURCE ECG" leftSub="what the waveform shows" leftTone="neutral" rightTitle="MODEL INPUT" rightSub={modelId} rightTone="released" rows={[
 			{ label: 'Form', left: '360 Hz transport', right: 'Causally prepared 10 s ECG window' },
-			{ label: 'Prepared where', left: 'Streamed by the virtual wearable', right: 'On the server, from the source stream' },
+			{ label: 'Prepared where', left: 'Streamed by the software ECG source', right: 'On the server, from the source stream' },
 			{ label: 'Browser role', left: 'Draws it', right: 'None: the browser never runs preprocessing or inference' }
 		]} />
 	</Panel>

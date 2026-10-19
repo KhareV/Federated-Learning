@@ -12,7 +12,7 @@ import { METRICS, digest, run } from './fixtures';
 afterEach(() => cleanup());
 const text = () => document.body.textContent ?? '';
 const RUN = 'FL10RUN-GEN';
-const G1_LABEL = 'UNSEEN SYNTHETIC COHORT — NOT USED FOR TRAINING, ROUND OR THRESHOLD SELECTION';
+const G1_LABEL = 'UNSEEN RESEARCH COHORT — NOT USED FOR TRAINING, ROUND OR THRESHOLD SELECTION';
 const V2 = { ...METRICS, AUPRC: 0.5, AUROC: 0.6, BCE: 0.9, Brier: 0.3, specificity: 0.8 };
 
 function rec(round: number, status: GenRecord['evaluation_status'], over: Partial<GenRecord> = {}, subject: GenRecord['subject'] = 'FL_ROUND', metrics = METRICS): GenRecord {

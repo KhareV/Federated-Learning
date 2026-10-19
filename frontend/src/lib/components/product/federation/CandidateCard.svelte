@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import TechnicalEvidence from './TechnicalEvidence.svelte';
 	import DigestText from './DigestText.svelte';
 	import { GOVERNANCE_CHECK_IDS, type CandidateModel } from '$lib/product/federation/types';
@@ -14,20 +15,20 @@
 		<li class="b-nd"><span aria-hidden="true">■</span> NOT DEPLOYED</li>
 	</ul>
 	{#if accepted}
-		<p class="ok" data-testid="accepted-copy"><b>ACCEPTED TO ENGINEERING SANDBOX REGISTRY</b><br />STRUCTURAL CHECKS PASSED · NOT A SCIENTIFIC RELEASE · NOT DEPLOYED · NO CANDIDATE INFERENCE RUNTIME ENABLED.</p>
+		<p class="ok" data-testid="accepted-copy"><b>ACCEPTED TO ENGINEERING WORKSPACE REGISTRY</b><br />STRUCTURAL CHECKS PASSED · NOT A SCIENTIFIC RELEASE · NOT DEPLOYED · NO CANDIDATE INFERENCE RUNTIME ENABLED.</p>
 	{:else if rejected}
-		<p class="bad" data-testid="rejected-copy"><b>REJECTED BY ENGINEERING GOVERNANCE</b><br />NOT IN SANDBOX · NOT DEPLOYED.</p>
+		<p class="bad" data-testid="rejected-copy"><b>REJECTED BY ENGINEERING GOVERNANCE</b><br />NOT IN RESEARCH WORKSPACE · NOT DEPLOYED.</p>
 	{:else}<p class="pending">Governance state: {candidate.governance_status}</p>{/if}
 	<dl class="sum">
-		<div><dt>Algorithm</dt><dd>{candidate.algorithm}</dd></div><div><dt>Final round</dt><dd>{candidate.round}</dd></div><div><dt>Clients</dt><dd>{candidate.client_count} synthetic</dd></div><div><dt>Started from</dt><dd>{candidate.parent_model_id}</dd></div>
+		<div><dt>Algorithm</dt><dd>{candidate.algorithm}</dd></div><div><dt>Final round</dt><dd>{candidate.round}</dd></div><div><dt>Clients</dt><dd>{candidate.client_count} logical</dd></div><div><dt>Started from</dt><dd>{candidate.parent_model_id}</dd></div>
 	</dl>
 	<TechnicalEvidence label="TECHNICAL EVIDENCE" testid="candidate-evidence">
 		<dl>
 			<div><dt>Federation run</dt><dd>{candidate.federation_run_id}</dd></div>
 			<div><dt>State digest</dt><dd><DigestText value={candidate.state_digest} label="candidate state digest" /></dd></div>
-			<div><dt>Validation</dt><dd>{candidate.validation_status}</dd></div><div><dt>Governance</dt><dd>{candidate.governance_status}</dd></div><div><dt>Sandbox</dt><dd>{candidate.sandbox_status}</dd></div>
+			<div><dt>Validation</dt><dd>{candidate.validation_status}</dd></div><div><dt>Governance</dt><dd>{candidate.governance_status}</dd></div><div><dt>Workspace</dt><dd>{candidate.sandbox_status}</dd></div>
 			<div><dt>production_deployed</dt><dd data-testid="production-deployed">{candidate.production_deployed ? 'TRUE' : 'FALSE'}</dd></div>
-			<div class="wide"><dt>Claim boundary</dt><dd>{candidate.claim_boundary}</dd></div>
+			<div class="wide"><dt>Claim boundary</dt><dd>{displayCopy(candidate.claim_boundary)}</dd></div>
 		</dl>
 		<details><summary>Five frozen structural checks (engineering, not clinical or performance validation)</summary>
 			<ul>{#each GOVERNANCE_CHECK_IDS as id}<li>{id}{#if checksPassed}<span class="r"> — {checksPassed.includes(id) ? 'PASSED' : 'not reported as passed'}</span>{/if}</li>{/each}</ul>

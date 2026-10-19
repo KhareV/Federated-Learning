@@ -99,16 +99,16 @@ describe('device page', () => {
 	it('walks NO DEVICE -> attach -> scan -> FOUND -> connect -> CONNECTED with simulation labels and no hardware claim', async () => {
 		await store.init();
 		render(DevicePage);
-		expect(screen.getByTestId('simulation-banner').textContent).toMatch(/SIMULATED WEARABLE.*NO PHYSICAL HARDWARE CONNECTED.*RESEARCH PROTOTYPE.*NOT DIAGNOSTIC/s);
+		expect(screen.getByTestId('simulation-banner').textContent).toMatch(/SOFTWARE ECG SOURCE.*NO PHYSICAL HARDWARE CONNECTED.*RESEARCH PROTOTYPE.*NOT DIAGNOSTIC/s);
 		const select = screen.getByLabelText('Monitoring scenario') as HTMLSelectElement;
 		expect([...select.options].map((o) => o.value)).toEqual(['NORMAL_MONITORING', 'CONTEXT_LOSS', 'POOR_SIGNAL', 'DISCONNECT_RECONNECT', 'MIXED_MONITORING_SESSION']);
 		expect(select.value).toBe('MIXED_MONITORING_SESSION'); // recommended, not forced
-		await fireEvent.click(screen.getByRole('button', { name: 'ATTACH NHM VIRTUAL WEARABLE' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'ATTACH NHM SOFTWARE ECG SOURCE' }));
 		await screen.findByTestId('device-state');
 		expect(screen.getByTestId('device-state').textContent).toBe('DETACHED');
 		expect(screen.getByTestId('device-scenario').textContent).toBe('MIXED_MONITORING_SESSION');
-		expect(document.body.textContent).toContain('NOT USED BY THIS VIRTUAL DEVICE FLOW');
-		expect(document.body.textContent).toContain('SIMULATED');
+		expect(document.body.textContent).toContain('NOT USED BY THIS SOFTWARE SOURCE FLOW');
+		expect(document.body.textContent).not.toMatch(/simulated|synthetic|virtual/i);
 		await fireEvent.click(screen.getByRole('button', { name: 'SCAN' }));
 		await waitFor(() => expect(screen.getByTestId('device-state').textContent).toBe('FOUND'));
 		await fireEvent.click(screen.getByRole('button', { name: 'PAIR / CONNECT' }));
@@ -141,7 +141,7 @@ describe('monitoring page', () => {
 		expect(screen.getByTestId('waveform-plot').getAttribute('data-segments')).toBe('2');
 		expect(screen.getByTestId('waveform-plot').getAttribute('data-visible-gaps')).toBe('1');
 		expect(screen.getByTestId('gap-list').textContent).toContain('[3, 4]');
-		expect(document.body.textContent).toContain('Simulated device-source ECG transport');
+		expect(document.body.textContent).toContain('Software-source ECG transport');
 		expect(document.body.textContent).toContain('PPG waveform is unavailable');
 	});
 	it('shows the backend monitoring.state, the inference technical fields and a research-only probability section', async () => {

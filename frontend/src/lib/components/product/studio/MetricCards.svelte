@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	// Evaluation of the selected round: every value is the stored, measured record of THIS run's checkpoint; pending / undefined / failed are shown as such (never zero-filled).
 	import DigestText from '$lib/components/product/federation/DigestText.svelte';
 	import { HEADLINE, METRIC_GROUPS, display } from '$lib/product/studio/metrics';
@@ -36,8 +37,8 @@
 			<div><dt>Decision rule</dt><dd>raw sigmoid ≥ {record?.threshold ?? 0.5} · calibration {record?.calibration ?? 'NONE'} (never tuned)</dd></div>
 			<div><dt>Protocol</dt><dd>{record?.evaluation_protocol_id ?? '--'}</dd></div>
 		</dl>
-		<p class="label" data-testid="cohort-use-label">{record?.cohort_use ?? studio.summary?.cohort_use ?? studio.capabilities?.evaluation.cohort_use ?? 'evaluation cohort label loading…'}</p>
-		<p class="dim">{studio.summary?.claim_boundary ?? 'SYNTHETIC_ENGINEERING_EVENT_EVALUATION_ONLY_NOT_AAMI_SVF_OR_CLINICAL'} · no clinical or diagnostic claim · no round, threshold or candidate is selected from these values.</p>
+		<p class="label" data-testid="cohort-use-label">{displayCopy(record?.cohort_use ?? studio.summary?.cohort_use ?? studio.capabilities?.evaluation.cohort_use ?? 'evaluation cohort label loading…')}</p>
+		<p class="dim">{displayCopy(studio.summary?.claim_boundary ?? 'SYNTHETIC_ENGINEERING_EVENT_EVALUATION_ONLY_NOT_AAMI_SVF_OR_CLINICAL')} · no clinical or diagnostic claim · no round, threshold or candidate is selected from these values.</p>
 		{#if record?.failure}<p class="fail" role="alert">EVALUATION FAILED — {record.failure.code}: {record.failure.message}</p>{/if}
 		<details class="all"><summary>All measured metrics for R{round}</summary>
 			{#each METRIC_GROUPS as g (g.id)}

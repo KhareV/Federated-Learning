@@ -102,8 +102,8 @@ def current_text(root: Path = ROOT) -> dict[str, str]:
 # ---------------------------------------------------------------- checks (each returns bool; details via *_detail)
 def about_ok(root: Path = ROOT) -> dict[str, Any]:
     t = strip_comments(read(root, f"{SRC}/routes/app/about/+page.svelte"))
-    need = [r"research\s+prototype", r"not diagnostic", r"not a medical device", r"SIMULATED ONLY", r"No physical wearable", r"MODEL_V2_FINAL", r"SOFTWARE_SYSTEM_V2", r"simulated source ECG", r"PPG waveform is unavailable", r"engineering federation runtime is enabled", r"eight logical, synthetic",
-            r"one demonstration machine", r"not hospitals or institutions", r"MY EDGE CLIENT", r"SIM_FL_SITE_00", r"does not train any model", r"no personal or personalized model", r"sandbox", r"never automatically deployed", r"does not replace the released MODEL_V2_FINAL", r"research outputs"]
+    need = [r"research\s+prototype", r"not diagnostic", r"not a medical device", r"(SIMULATED|SOFTWARE SOURCE) ONLY", r"No physical wearable", r"MODEL_V2_FINAL", r"SOFTWARE_SYSTEM_V2", r"(simulated source|software) ECG", r"PPG waveform is unavailable", r"engineering federation runtime is enabled", r"eight logical, (synthetic|research|software-generated)",
+            r"one demonstration machine", r"not hospitals or institutions", r"MY EDGE CLIENT", r"SIM_FL_SITE_00", r"does not train any model", r"no personal or personalized model", r"(sandbox|research workspace)", r"never automatically deployed", r"does not replace the released MODEL_V2_FINAL", r"research outputs"]
     missing = [n for n in need if not re.search(n, re.sub(r"<[^>]+>", "", t), re.I)]
     stale = [m.group(0) for m in STALE.finditer(t)]
     return {"ok": not missing and not stale and not unnegated_hits(re.sub(r"<[^>]+>", "", t)), "missing": missing, "stale": stale, "claims": unnegated_hits(re.sub(r"<[^>]+>", "", t))}
@@ -113,7 +113,7 @@ def landing_ok(root: Path = ROOT) -> dict[str, Any]:
     raw = read(root, f"{SRC}/routes/+page.svelte")
     t = strip_comments(raw)
     plain = re.sub(r"<[^>]+>", " ", t)
-    need = [r"FEDERATION RUNTIME / ENGINEERING ENABLED", r"engineering federation runtime is enabled", r"eight logical synthetic clients", r"one demonstration machine", r"genuine local optimization", r"sandbox", r"never replaces the released MODEL_V2_FINAL", r"not hospitals or institutions",
+    need = [r"FEDERATION RUNTIME / ENGINEERING ENABLED", r"engineering federation runtime is enabled", r"eight logical (synthetic |software-generated )?clients", r"one demonstration machine", r"genuine local optimization", r"(sandbox|research workspace)", r"never replaces the released MODEL_V2_FINAL", r"not hospitals or institutions",
             r"not personalized federated learning", r"not differential privacy or anonymity", r"not diagnostic"]
     missing = [n for n in need if not re.search(n, plain, re.I)]
     stale = [m.group(0) for m in STALE.finditer(plain)]
@@ -219,7 +219,7 @@ def pages_ok(root: Path = ROOT) -> dict[str, Any]:
     ml, fl, models = (read(root, f"{SRC}/routes/app/{p}/+page.svelte") for p in ("research/ml", "research/fl", "models"))
     clients, fed = read(root, f"{SRC}/routes/app/federation/clients/+page.svelte"), read(root, f"{SRC}/routes/app/federation/+page.svelte")
     checks = {"ml_distinction": "SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED" in ml and re.search(r"promot", ml, re.I) is not None, "fl_engineering_separation": "V2-FL-005 is not scientific efficacy" in fl, "models_namespaces": "RELEASED SCIENTIFIC" in models and "ENGINEERING FEDERATED CANDIDATES" in models and "never used for live monitoring" in models,
-              "clients_synthetic": "NOT HOSPITALS OR INSTITUTIONS" in clients and "one demonstration machine" in clients, "federation_landing_one_machine": "one demonstration machine" in fed and "SANDBOX REGISTRY ONLY" in fed}
+              "clients_synthetic": "NOT HOSPITALS OR INSTITUTIONS" in clients and "one demonstration machine" in clients, "federation_landing_one_machine": "one demonstration machine" in fed and ("SANDBOX REGISTRY ONLY" in fed or "RESEARCH REGISTRY ONLY" in fed)}
     return {"ok": all(checks.values()), "checks": checks}
 
 

@@ -55,7 +55,7 @@
 		{ key: 'run', label: 'Launch with a durable workspace', cmd: 'PYTHONUNBUFFERED=1 PYTHONPATH=src:. .venv-studio311/bin/python -m scripts.run_nhm --durable', note: 'Runs, History and candidates survive a restart. Do not rebuild the frontend while it is running.' },
 		{ key: 'url', label: 'Open the site and sign in', cmd: 'http://127.0.0.1:4173/sign-in', note: 'Sign in with your own Clerk account before the audience arrives.' }
 	];
-	const CHECKS = ['The site is running and you are signed in', 'A completed run exists in “Your federation runs” (the fallback if a live run is slow)', 'A hardware session is listed in History (stored or the generated showcase)', 'You know the three boundaries: not clinical, synthetic labels, no physical-device verification'];
+	const CHECKS = ['The site is running and you are signed in', 'A completed run exists in “Your federation runs” (the fallback if a live run is slow)', 'A hardware session is listed in History (stored or the generated showcase)', 'You know the three boundaries: not clinical, assigned research labels, no physical-device verification'];
 </script>
 <svelte:head><title>Guided demonstration | NHM</title></svelte:head>
 <svelte:window onkeydown={onKey} />

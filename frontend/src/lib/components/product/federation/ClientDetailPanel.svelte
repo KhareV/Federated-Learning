@@ -8,7 +8,7 @@
 	import type { FLClientIdentity } from '$lib/product/federation/types';
 	import { SOURCE_COPY, clientShortName, isRecordedClient, type RunDataSource } from '$lib/product/federation/data-source';
 	let { clientId, client, ownerBound = false, plannedRounds = 3, replay = false, identity = undefined, dataSource = 'SYNTHETIC', modelLabel = undefined }: { clientId: string; client: ClientView | undefined; ownerBound?: boolean; plannedRounds?: number; replay?: boolean; identity?: FLClientIdentity | undefined; dataSource?: RunDataSource; modelLabel?: string } = $props();
-	// In a recorded-hardware run only the recorded client holds YOUR windows; a synthetic peer keeps the synthetic wording.
+	// In a recorded-hardware run only the recorded client holds YOUR windows; a research peer keeps the synthetic wording.
 	const recorded = $derived(dataSource === 'HARDWARE' && isRecordedClient(clientId));
 	const copy = $derived(SOURCE_COPY[recorded ? 'HARDWARE' : dataSource === 'HARDWARE' ? 'SYNTHETIC' : dataSource]);
 	const stepLabel = (id: string, label: string) => (id === 'BUFFER' ? copy.bufferLabel : id === 'ARCHITECTURE' ? (modelLabel ?? copy.modelLabel) : label);
@@ -18,14 +18,14 @@
 	const examples = $derived(client?.localExamples ?? identity?.local_example_count ?? null);
 </script>
 <section class="dp" data-testid="client-detail" aria-label={`Details for ${clientId}`}>
-	<h4>{recorded ? clientShortName(clientId) : clientId} <span class="role">{ownerBound ? 'OWNER-BOUND CLIENT' : recorded ? 'LOGICAL CLIENT · YOUR RECORDED WINDOWS' : 'SYNTHETIC LOGICAL CLIENT'}</span></h4>
+	<h4>{recorded ? clientShortName(clientId) : clientId} <span class="role">{ownerBound ? 'OWNER-BOUND CLIENT' : recorded ? 'LOGICAL CLIENT · YOUR RECORDED WINDOWS' : 'LOGICAL CLIENT'}</span></h4>
 	<dl class="facts">
 		<div><dt>Local examples</dt><dd>{examples ?? '--'}</dd></div><div><dt>Current state</dt><dd>{client ? CLIENT_LABEL[client.state] : 'WAITING'}</dd></div>
 		<div><dt>Rounds completed</dt><dd>{completed} / {plannedRounds}</dd></div><div><dt>Updates produced</dt><dd>{produced} / {plannedRounds}</dd></div>
 	</dl>
 	<div class="flow" data-testid="local-training-flow" aria-label="What happens inside this client">
 		<p class="q">What is happening on this client?</p>
-		<ol>{#each LOCAL_STEPS as s, i (s.id)}<li class={i < step ? 'done' : i === step ? 'act' : ''} data-step={s.id}><span aria-hidden="true">{i < step ? '✓' : i === step ? '●' : '○'}</span> {stepLabel(s.id, s.label)}{#if s.id === 'BUFFER' && examples !== null}<small> ({examples} {recorded ? 'recorded windows' : 'synthetic examples'})</small>{/if}</li>{/each}</ol>
+		<ol>{#each LOCAL_STEPS as s, i (s.id)}<li class={i < step ? 'done' : i === step ? 'act' : ''} data-step={s.id}><span aria-hidden="true">{i < step ? '✓' : i === step ? '●' : '○'}</span> {stepLabel(s.id, s.label)}{#if s.id === 'BUFFER' && examples !== null}<small> ({examples} {recorded ? 'recorded windows' : 'research examples'})</small>{/if}</li>{/each}</ol>
 		<p class="sent">RAW TRAINING EXAMPLES SENT: <b>0</b></p>
 		{#if replay}<p class="rp">REPLAY — the steps above are historical events; nothing is executing.</p>{/if}
 	</div>

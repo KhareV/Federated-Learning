@@ -4,7 +4,7 @@
 	const time = (us: number | null) => (us ? new Date(us / 1000).toISOString().replace('T', ' ').slice(0, 19) + 'Z' : '--');
 </script>
 {#if runs.length === 0}
-	<div class="empty"><strong>No federation runs yet</strong><p>A live engineering run creates a sandbox candidate. Replay opens recorded run evidence; it does not train.</p><a href="/app/federation/live">CONFIGURE LIVE RUN →</a></div>
+	<div class="empty"><strong>No federation runs yet</strong><p>A live engineering run creates a research candidate. Replay opens recorded run evidence; it does not train.</p><a href="/app/federation/live">CONFIGURE LIVE RUN →</a></div>
 {:else}
 	<ul class="runs" data-testid="run-list">
 		{#each runs as r}

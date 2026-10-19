@@ -10,16 +10,16 @@
 		<li>Monitoring states are research outputs, not health assessments.</li>
 	</ul></Panel>
 	<Panel eyebrow="02 / MONITORING" title="What runs today"><ul>
-		<li>For model inference, the wearable source is <b>SIMULATED ONLY</b> (WEARABLE_SIM_V1). No physical wearable is connected to the inference path. A separate, optional MongoDB source displays ESP32 telemetry; the released model can be applied to it only as an experimental, resampled and not-valid analysis (Monitor, Observatory replay and trace, and optional federated fine-tuning of the pretrained V2 on your recorded windows with synthetic labels). The physical device path still requires a live hardware demonstration.</li>
+		<li>For model inference, the wearable source is <b>SOFTWARE SOURCE ONLY</b> (WEARABLE_SIM_V1). No physical wearable is connected to the inference path. A separate, optional MongoDB source displays ESP32 telemetry; the released model can be applied to it only as an experimental, resampled and not-valid analysis (Monitor, Observatory replay and trace, and optional federated fine-tuning of the pretrained V2 on your recorded windows with assigned research labels). The physical device path still requires a live hardware demonstration.</li>
 		<li>Inference is server-side: MODEL_V2_FINAL in SOFTWARE_SYSTEM_V2. Nothing runs on a sensor.</li>
-		<li>The virtual Monitor plots simulated source ECG. A PPG waveform is unavailable in the current simulator. The hardware view plots stored ECG ADC values against server ingestion time; its device-reported SpO₂ is unverified.</li>
+		<li>The software-source Monitor plots software ECG. A PPG waveform is unavailable in the current software source. The hardware view plots stored ECG ADC values against server ingestion time; its device-reported SpO₂ is unverified.</li>
 	</ul></Panel>
 	<Panel eyebrow="03 / DEVELOPMENT" title="Federated development"><ul>
-		<li>The <b>engineering federation runtime is enabled</b>. It runs eight logical, synthetic research clients (not hospitals or institutions) on one demonstration machine; each performs genuine local optimization and the coordinator receives model updates rather than local examples.</li>
-		<li>In a connected (Clerk) live run only, one existing synthetic client, SIM_FL_SITE_00, is shown as <b>MY EDGE CLIENT</b> - a presentation binding to the signed-in owner. Its training data is still synthetic engineering data: your physiology does not train any model, no personal or personalized model exists, and monitoring sessions are never federation data.</li>
+		<li>The <b>engineering federation runtime is enabled</b>. It runs eight logical, research clients (not hospitals or institutions) on one demonstration machine; each performs genuine local optimization and the coordinator receives model updates rather than local examples.</li>
+		<li>In a connected (Clerk) live run only, one existing logical client, SIM_FL_SITE_00, is shown as <b>MY EDGE CLIENT</b> - a presentation binding to the signed-in owner. Its training data is still generated research data: your physiology does not train any model, no personal or personalized model exists, and monitoring sessions are never federation data.</li>
 	</ul></Panel>
 	<Panel eyebrow="04 / BOUNDARY" title="What NHM does not claim"><ul>
-		<li>A federation run produces an engineering candidate that stays in a sandbox. It is never automatically deployed and does not replace the released MODEL_V2_FINAL.</li>
+		<li>A federation run produces an engineering candidate that stays in a research workspace. It is never automatically deployed and does not replace the released MODEL_V2_FINAL.</li>
 		<li>No physical wearable validation, personalized model, or hospital deployment is established. NHM is not diagnostic.</li>
 	</ul></Panel>
 </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	// The Studio candidate library: durable engineering candidates of the owner's completed runs. Each can be the starting model of a later run. Read-only here; nothing is promoted or deployed.
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -9,7 +10,7 @@
 	let candidates = $state<StudioCandidate[] | null>(null);
 	let error = $state<string | null>(null);
 	onMount(() => { void product.api.studioCandidates().then((c) => { candidates = c; }).catch((cause) => { error = cause instanceof Error ? cause.message : String(cause); }); });
-	const SOURCE: Record<StudioCandidate['source_kind'], string> = { SYNTHETIC_COHORT: 'Synthetic cohort run', LIVE_MONITORED_SITE: 'Live-monitored simulated site run', RECORDED_HARDWARE: 'Recorded-hardware run (pretrained-V2 family)', RESEARCH_FEDERATED_CHECKPOINT: 'Imported federated research checkpoint (real MIT-BIH patients)' };
+	const SOURCE: Record<StudioCandidate['source_kind'], string> = { SYNTHETIC_COHORT: 'Research cohort run', LIVE_MONITORED_SITE: 'Live-monitored logical site run', RECORDED_HARDWARE: 'Recorded-hardware run (pretrained-V2 family)', RESEARCH_FEDERATED_CHECKPOINT: 'Imported federated research checkpoint (real MIT-BIH patients)' };
 	const metric = (c: StudioCandidate, key: string) => (c.metrics && typeof c.metrics[key] === 'number' ? c.metrics[key].toFixed(3) : '—');
 	const when = (iso: string) => new Date(iso).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
 	const parent = (c: StudioCandidate) => (c.base_model.kind === 'CANDIDATE' ? `candidate ${String(c.base_model.model_id)}` : String(c.base_model.model_id ?? '—'));
@@ -38,7 +39,7 @@
 <div class="lib" data-testid="candidate-library">
 	{#if error}<p class="warn" role="alert">{error}</p>
 	{:else if candidates === null}<p class="dim" role="status">Loading your candidate library…</p>
-	{:else if candidates.length === 0}<p class="dim" data-testid="no-library-candidates">No stored candidates yet. Every completed Studio run (synthetic, monitored-site or recorded-hardware pretrained V2) keeps its final engineering candidate here.</p>
+	{:else if candidates.length === 0}<p class="dim" data-testid="no-library-candidates">No stored candidates yet. Every completed Studio run (research cohort, monitored-site or recorded-hardware pretrained V2) keeps its final engineering candidate here.</p>
 	{:else}
 		{#if evaluationCohorts.size > 1}<p class="dim" role="note" data-testid="library-not-comparable"><b>Different evaluation cohorts.</b> These candidates were scored on {evaluationCohorts.size} different cohorts; their scores are not comparable with each other. Each card names the cohort it was scored on.</p>{/if}
 		{#each groups as g (g.cohort)}
@@ -54,14 +55,14 @@
 					</dl>
 					<p class="dim">Scores are exploratory measurements on {c.evaluation_cohort_id ?? 'its evaluation cohort'} at round {c.round_id}; they are not a basis for choosing it. State <code>{c.state_sha256.slice(0, 16)}…</code> · source run <code>{c.source_run_id}</code></p>
 					<p class="dim" data-testid="library-lineage">Lineage: {lineage(c)}</p>
-					<p class="badge">{c.label} · NOT DEPLOYED · NEVER USED FOR MONITORING</p>
+					<p class="badge">{displayCopy(c.label)} · NOT DEPLOYED · NEVER USED FOR MONITORING</p>
 				</li>
 			{/each}
 		</ul>
 		{/each}
 	{/if}
-	<p class="dim">Stored candidates survive restarts and belong to the account that ran them. Choose one as the <b>starting model</b> of a synthetic, monitored-site or recorded-hardware run in the <a href="/app/federation">Federation Studio</a>. A candidate trained on one synthetic cohort may start a run on the other; the run says so.</p>
-	<p class="dim" data-testid="library-real-ecg-caution">Caution: in five repeated 10-round runs, adapting to the realistic synthetic cohort lowered performance on real MIT-BIH validation ECG (mean AUROC −0.06, AUPRC −0.13 against the released model); on unseen real PTB-XL ECG the drop was larger (AUROC −0.04 to −0.05, AUPRC −0.17 to −0.23). A candidate is an engineering artefact, not a better ECG model.</p>
+	<p class="dim">Stored candidates survive restarts and belong to the account that ran them. Choose one as the <b>starting model</b> of a research cohort, monitored-site or recorded-hardware run in the <a href="/app/federation">Federation Studio</a>. A candidate trained on one research cohort may start a run on the other; the run says so.</p>
+	<p class="dim" data-testid="library-real-ecg-caution">Caution: in five repeated 10-round runs, adapting to the realistic research cohort lowered performance on real MIT-BIH validation ECG (mean AUROC −0.06, AUPRC −0.13 against the released model); on unseen real PTB-XL ECG the drop was larger (AUROC −0.04 to −0.05, AUPRC −0.17 to −0.23). A candidate is an engineering artefact, not a better ECG model.</p>
 </div>
 <style>
 	.lib { display: grid; gap: 10px; min-width: 0; } .cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }

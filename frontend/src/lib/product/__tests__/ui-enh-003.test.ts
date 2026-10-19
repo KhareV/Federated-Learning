@@ -8,7 +8,7 @@ const component = (name: string) => readFileSync(path.join(process.cwd(), 'src/l
 describe('UI-ENH-003 final presentation boundaries', () => {
 	it('device keeps the simulated-only and physical-hardware boundary visible', () => {
 		const text = route('device');
-		expect(text).toContain('SIMULATED ONLY');
+		expect(text).toContain('SOFTWARE SOURCE ONLY');
 		expect(text).toContain('Physical telemetry uses the Monitor source selector');
 		expect(text).toContain('CONTINUE TO MONITORING');
 	});

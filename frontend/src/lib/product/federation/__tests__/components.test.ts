@@ -58,7 +58,7 @@ describe('federation overview + run configuration', () => {
 	it('cold start: the clients panel says PREPARING, requests once and shows no invented client state', async () => {
 		backend.fed.clientsDelayMs = 50;
 		render(OverviewPage);
-		expect(screen.getByTestId('clients-preparing').textContent).toContain('PREPARING 8 SYNTHETIC LOCAL CLIENT DATASETS');
+		expect(screen.getByTestId('clients-preparing').textContent).toContain('PREPARING 8 LOCAL CLIENT DATASETS');
 		await waitFor(() => expect(text()).toContain('8 logical clients ready'));
 		expect(backend.calls.filter((c) => c === 'federationClients')).toHaveLength(1);
 	});
@@ -93,7 +93,7 @@ describe('clients page', () => {
 	it('shows the eight synthetic logical clients with the synthetic banner and no raw data or labels', async () => {
 		render(ClientsPage);
 		await waitFor(() => expect(screen.getByTestId('client-cards').children).toHaveLength(8));
-		expect(screen.getByTestId('synthetic-banner').textContent).toContain('SYNTHETIC RESEARCH PARTITIONS');
+		expect(screen.getByTestId('synthetic-banner').textContent).toContain('LOGICAL RESEARCH PARTITIONS');
 		expect(text()).toContain('SIM_FL_SITE_00'); expect(text()).toContain('SIM_FL_SITE_07');
 		expect(text()).toContain('All eight logical clients currently execute on one demonstration machine.');
 		expect(text()).not.toMatch(/hospital(?!s or)|label|participant|SIM_P0/i);
@@ -116,7 +116,7 @@ describe('live page', () => {
 		expect(screen.getByTestId('authoritative-aggregate').textContent).toContain('PLAIN');
 		expect(screen.getByTestId('secagg-status').textContent).toContain('SHADOW_VERIFIED');
 		expect(screen.getByTestId('candidate-live').textContent).toContain(CAND);
-		expect(text()).toContain('ACCEPTED TO ENGINEERING SANDBOX REGISTRY');
+		expect(text()).toContain('ACCEPTED TO ENGINEERING WORKSPACE REGISTRY');
 		expect(screen.getByTestId('candidate-live').textContent).toContain('FALSE');
 		expect(text()).not.toMatch(/promoted|deployed to|make default|accuracy|AUPRC|F1\b/i);
 	});

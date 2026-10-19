@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -72,17 +73,17 @@
 	<p class="dim">No winner is declared. A paired interval that excludes zero is not a formal significance test, and no p-values were computed.</p>
 	<div class="scroll"><table aria-label="Paired comparisons with intervals"><thead><tr><th scope="col">Comparison</th><th scope="col">AUPRC Δ</th><th scope="col">Interval</th><th scope="col">AUROC Δ</th><th scope="col">Interval</th></tr></thead><tbody>{#each pairs as c (c.comparison_id)}<tr><th scope="row">{c.a} − {c.b}</th><td>{fmt(c.delta.AUPRC?.point, 5)}</td><td><small>[{fmt(c.delta.AUPRC?.lower, 5)}, {fmt(c.delta.AUPRC?.upper, 5)}]</small></td><td>{fmt(c.delta.AUROC?.point, 5)}</td><td><small>[{fmt(c.delta.AUROC?.lower, 5)}, {fmt(c.delta.AUROC?.upper, 5)}]</small></td></tr>{/each}</tbody></table></div>
 </section>
-<section aria-label="Non-IID conditions"><h2>What the five conditions mean</h2><ul class="cond">{#each conditions as c}<li><b>{c.toUpperCase()}</b> {MEANING[c]}</li>{/each}</ul><p class="dim">Synthetic research partitions of real research ECG, not institutions or a geographic map.</p></section>
+<section aria-label="Non-IID conditions"><h2>What the five conditions mean</h2><ul class="cond">{#each conditions as c}<li><b>{c.toUpperCase()}</b> {MEANING[c]}</li>{/each}</ul><p class="dim">Logical research partitions of real research ECG, not institutions or a geographic map.</p></section>
 <section aria-label="Uncertainty method" data-testid="uncertainty"><h2>How the uncertainty was computed</h2>
 	<p>Patient-cluster bootstrap: {data.bootstrap.replicates.toLocaleString()} replicates (seed {data.bootstrap.seed}, {data.bootstrap.rng}), resampling the {data.clusters} patient clusters rather than windows, with shared draws for paired comparisons. Intervals are {data.bootstrap.multiplicity_adjustment}. p-values: {data.bootstrap.p_values}. Windows from one patient are never treated as independent.</p>
-	<ul>{#each evalData?.limitations ?? [] as limit}<li>{limit}</li>{/each}</ul>
+	<ul>{#each evalData?.limitations ?? [] as limit}<li>{displayCopy(limit)}</li>{/each}</ul>
 	<p class="dim">Source <code>{data.source.path}</code> · SHA256 <code>{data.source.sha256.slice(0, 16)}…</code> · bootstrap draws <code>{data.bootstrap.draws_sha256.slice(0, 16)}…</code></p></section>
 {/if}
 <section aria-label="Model comparison workbench" data-testid="model-workbench"><h2>Model comparison workbench · what can and cannot be compared</h2>
-	<div class="scroll"><table aria-label="Released model versus scientific FL checkpoints versus product sandbox candidate"><thead><tr><th scope="col"><span class="sr-only">Aspect</span></th><th scope="col">Released MODEL_V2_FINAL</th><th scope="col">Scientific FL checkpoints (this page)</th><th scope="col">Product sandbox candidate</th></tr></thead><tbody>
+	<div class="scroll"><table aria-label="Released model versus scientific FL checkpoints versus product research candidate"><thead><tr><th scope="col"><span class="sr-only">Aspect</span></th><th scope="col">Released MODEL_V2_FINAL</th><th scope="col">Scientific FL checkpoints (this page)</th><th scope="col">Product research candidate</th></tr></thead><tbody>
 		<tr><th scope="row">Role</th><td>Live research monitoring</td><td>Frozen research experiments</td><td>Engineering development</td></tr>
-		<tr><th scope="row">Initialization / training</th><td>Centrally trained</td><td>Federated, real eligible ECG TRAIN partitions</td><td>Federated from FL_INIT_V2, synthetic logical clients</td></tr>
-		<tr><th scope="row">Training target</th><td>AAMI_SVF_WINDOW_V1</td><td>AAMI_SVF_WINDOW_V1</td><td>WEARABLE_SIM_EVENT_WINDOW_V1 (synthetic engineering events)</td></tr>
+		<tr><th scope="row">Initialization / training</th><td>Centrally trained</td><td>Federated, real eligible ECG TRAIN partitions</td><td>Federated from FL_INIT_V2, logical clients</td></tr>
+		<tr><th scope="row">Training target</th><td>AAMI_SVF_WINDOW_V1</td><td>AAMI_SVF_WINDOW_V1</td><td>WEARABLE_SIM_EVENT_WINDOW_V1 (research events)</td></tr>
 		<tr><th scope="row">Calibration</th><td>CAL_V2 (MIT-BIH source domain)</td><td>None: raw sigmoid at 0.5</td><td>Not established</td></tr>
 		<tr><th scope="row">Evaluation population</th><td>Frozen research evidence (see Research ML)</td><td>INTERNAL_TEST (held out from FL development), INCART (post-freeze second look)</td><td>None</td></tr>
 		<tr><th scope="row">Metrics available</th><td>Frozen metrics and calibration</td><td>AUPRC, AUROC, F1, precision, sensitivity, specificity, with intervals</td><td>None: efficacy not established under this engineering contract</td></tr>

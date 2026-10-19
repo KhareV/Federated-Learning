@@ -34,7 +34,7 @@
 	let beamTo: HTMLDivElement | null = null;
 
 	const setupLines = [
-		'VIRTUAL WEARABLE / SIMULATED',
+		'SOFTWARE ECG SOURCE',
 		'PRODUCT API / LOCAL',
 		'SOFTWARE_SYSTEM_V2 / SERVER-SIDE',
 		'PHYSICAL HARDWARE / NOT CONNECTED',
@@ -73,7 +73,7 @@
 
 <svelte:head>
 	<title>NHM — Federated Physiological Monitoring Research Platform</title>
-	<meta name="description" content="NHM: a research platform for live physiological monitoring with a released model, an engineering federated-learning runtime with synthetic clients and a hardware-ready source. Virtual wearable today. Research prototype, not diagnostic." />
+	<meta name="description" content="NHM: a research platform for live physiological monitoring with a released model, an engineering federated-learning runtime with logical clients and a hardware-ready source. Software ECG source today. Research prototype, not diagnostic." />
 	<meta name="theme-color" content="#030712" />
 	
 </svelte:head>
@@ -169,7 +169,7 @@
 			<div class="hero__technical">
 				<span>NHM / 01</span>
 				<span>LIVE MONITORING RESEARCH</span>
-				<span>SIMULATED SOURCE · ECG + SpO₂ CONTEXT</span>
+				<span>SOFTWARE SOURCE · ECG + SpO₂ CONTEXT</span>
 			</div>
 
 			<div class="hero__content-wrapper">
@@ -177,14 +177,14 @@
 					<div class="hero__copy-container">
 						<BlurFade inView={true} direction="up" offset={18} blur="10px" duration={0.85}>
 							<div class="hero__copy">
-							<div class="eyebrow eyebrow--teal">RESEARCH PLATFORM · SIMULATED SOURCE · NOT DIAGNOSTIC</div>
+							<div class="eyebrow eyebrow--teal">RESEARCH PLATFORM · SOFTWARE SOURCE · NOT DIAGNOSTIC</div>
 							<h1>
 								NHM<br />
 								<span class="text-gradient">Federated physiological</span><br />
 								<span>monitoring research platform.</span>
 							</h1>
 							<p class="hero__lede">
-								Live monitoring with a released model, an engineering federated-learning runtime (synthetic clients), and a hardware-ready source boundary. A virtual wearable today; a physical adapter later. A research prototype, not a diagnostic or medical device.
+								Live monitoring with a released model, an engineering federated-learning runtime (logical clients), and a hardware-ready source boundary. A software ECG source today; a physical adapter later. A research prototype, not a diagnostic or medical device.
 							</p>
 							<div class="hero__actions">
 								<a class="button button--light" href="#technology">
@@ -192,14 +192,14 @@
 								</a>
 								<a class="text-link" href="/sign-in">OPEN NHM<span>↗</span></a>
 							</div>
-							<ul class="pillars" aria-label="Product pillars"><li><b>LIVE MONITORING SESSIONS</b><span>Simulated wearable, accelerated timing; released MODEL_V2, server-side, research states</span></li><li><b>FEDERATED MODEL DEVELOPMENT</b><span>Architecture for synthetic research partitions</span></li><li><b>HARDWARE-READY SOURCE ARCHITECTURE</b><span>Virtual wearable now, physical adapter later</span></li></ul>
+							<ul class="pillars" aria-label="Product pillars"><li><b>LIVE MONITORING SESSIONS</b><span>Software ECG source, accelerated timing; released MODEL_V2, server-side, research states</span></li><li><b>FEDERATED MODEL DEVELOPMENT</b><span>Architecture for logical research partitions</span></li><li><b>HARDWARE-READY SOURCE ARCHITECTURE</b><span>Software ECG source now, physical adapter later</span></li></ul>
 							</div>
 						</BlurFade>
 					</div>
 
 					<div class="hero__device">
 						<WatchScene />
-						<p class="hero__device-note">Concept render of a virtual wearable. Text on the model is illustrative - not live data, not connected hardware.</p>
+						<p class="hero__device-note">Concept render of a software ECG source. Text on the model is illustrative - not live data, not connected hardware.</p>
 					</div>
 				</div>
 			</div>
@@ -215,7 +215,7 @@
 				</div>
 				<div class="hero__signal-meta">
 					<span>ILLUSTRATIVE ECG</span>
-					<span>SYNTHETIC WAVEFORM</span>
+					<span>ILLUSTRATIVE WAVEFORM</span>
 					<span>NOT LIVE DATA</span>
 				</div>
 			</div>
@@ -283,7 +283,7 @@
 					<div class="hardware__title">
 						<DiaTextReveal text="Hardware-ready by design." textColor="#eef7f6" colors={['#2bb8b0', '#89d7d0', '#d5f0ed']} duration={1.65} triggerOnView={true} once={true} />
 					</div>
-					<p>Today the source is a simulated virtual wearable. The architecture defines a source-adapter boundary so a physical wearable can replace it later. The sensor concepts below are unverified design sketches, not an attached device.</p>
+					<p>Today the source is a software ECG source. The architecture defines a source-adapter boundary so a physical wearable can replace it later. The sensor concepts below are unverified design sketches, not an attached device.</p>
 				</div>
 
 				<!-- State-of-the-art Interactive Hardware Studio Component -->
@@ -307,7 +307,7 @@
 		====================================================== -->
 		<section id="signals" class="signals section-light">
 			<div class="container">
-				<div class="section-kicker">05 / SIGNALS (SIMULATED TODAY)</div>
+				<div class="section-kicker">05 / SIGNALS (SOFTWARE SOURCE TODAY)</div>
 
 				<div class="signals__heading">
 					<BlurFade inView={true} direction="up" offset={20} blur="8px">
@@ -340,14 +340,14 @@
 				<div class="section-kicker section-kicker--dark">06 / SERVER-SIDE INFERENCE</div>
 				<div class="edge__heading">
 					<h2>Released inference,<br /><span>server-side today.</span></h2>
-					<p>The virtual wearable streams to the NHM product API, which calls the released SOFTWARE_SYSTEM_V2 (MODEL_V2_FINAL) over localhost. Nothing runs on a sensor; on-device or edge deployment is not implemented.</p>
+					<p>The software ECG source streams to the NHM product API, which calls the released SOFTWARE_SYSTEM_V2 (MODEL_V2_FINAL) over localhost. Nothing runs on a sensor; on-device or edge deployment is not implemented.</p>
 				</div>
 
 				<div class="edge__flow" bind:this={beamContainer}>
 					<div class="flow-node glass-panel" bind:this={beamFrom}>
 						<span class="flow-node__index">01</span>
-						<strong>VIRTUAL WEARABLE</strong>
-						<span>SIMULATED SOURCE</span>
+						<strong>SOFTWARE ECG SOURCE</strong>
+						<span>SOFTWARE SOURCE</span>
 					</div>
 					<div class="flow-node glass-panel flow-node--active">
 						<span class="flow-node__index">02</span>
@@ -367,7 +367,7 @@
 
 				<div class="edge__quote">
 					<div class="edge__line-shadow">
-						<LineShadowText content="VIRTUAL TODAY. HARDWARE LATER." shadowColor="#2bb8b0" as="div" />
+						<LineShadowText content="SOFTWARE SOURCE TODAY. HARDWARE LATER." shadowColor="#2bb8b0" as="div" />
 					</div>
 				</div>
 			</div>
@@ -385,12 +385,12 @@
 				<div class="section-kicker section-kicker--dark">07 / FEDERATED MODEL DEVELOPMENT</div>
 				<div class="federation__heading">
 					<h2>Learn together.<br /><em>Share less.</em></h2>
-					<p>Federated learning lets participating clients contribute model updates instead of sharing their local training examples. In NHM the engineering federation runtime is enabled: eight logical synthetic clients on one demonstration machine perform genuine local optimization, and the coordinator receives model updates rather than local examples. The resulting engineering candidate stays in a sandbox and never replaces the released MODEL_V2_FINAL. The clients are synthetic research partitions - not hospitals or institutions - and this is not personalized federated learning. SecAgg+ is a narrow protected-aggregation interface, not differential privacy or anonymity.</p>
+					<p>Federated learning lets participating clients contribute model updates instead of sharing their local training examples. In NHM the engineering federation runtime is enabled: eight logical clients on one demonstration machine perform genuine local optimization, and the coordinator receives model updates rather than local examples. The resulting engineering candidate stays in a research workspace and never replaces the released MODEL_V2_FINAL. The clients are logical research partitions - not hospitals or institutions - and this is not personalized federated learning. SecAgg+ is a narrow protected-aggregation interface, not differential privacy or anonymity.</p>
 				</div>
 
 				<div class="federation__stage">
 					<div class="federation__map">
-						<svg viewBox="-260 -260 520 520" width="500" height="500" role="img" aria-label="Logical federation topology: eight synthetic research partitions around one aggregator">
+						<svg viewBox="-260 -260 520 520" width="500" height="500" role="img" aria-label="Logical federation topology: eight logical research partitions around one aggregator">
 							<text x="0" y="-246" text-anchor="middle" fill="#fbbf24" font-size="10" font-family="JetBrains Mono, monospace" letter-spacing="1.5">ILLUSTRATIVE NETWORK TOPOLOGY - NOT PARTICIPATING INSTITUTIONS</text>
 							{#each fedSites as site}
 								<line x1="0" y1="0" x2={Math.cos(site.angle) * 185} y2={Math.sin(site.angle) * 185} stroke="rgba(148,163,184,.3)" />
@@ -453,7 +453,7 @@
 				<div class="section-kicker">09 / THE PRODUCT</div>
 				<div class="product__heading">
 					<h2>See the system<br /><span>in action.</span></h2>
-					<p>An interactive, simulated preview of the research monitoring environment: illustrative multilead waveforms and research-only monitoring states. Not live signals, not a diagnosis.</p>
+					<p>An interactive research preview of the research monitoring environment: illustrative multilead waveforms and research-only monitoring states. Not live signals, not a diagnosis.</p>
 				</div>
 
 				<div class="product__workstation-wrap">

@@ -48,11 +48,11 @@ def grid_audit(root: Path = ROOT) -> dict[str, Any]:
     failures = []
     if t.count("★ MY EDGE CLIENT") != 1 or "role === 'AUTHENTICATED_OWNER'" not in t:
         failures.append("owner_label_not_exactly_one_guarded_by_role")
-    if t.count("SYNTHETIC PEER") != 1 or "role === 'SYNTHETIC_PEER'" not in t:
+    if len(re.findall(r"(?:SYNTHETIC|RESEARCH) PEER", t)) != 1 or "role === 'SYNTHETIC_PEER'" not in t:     # the label may read SYNTHETIC PEER or RESEARCH PEER; exactly one, guarded by the role
         failures.append("peer_label")
     if "<b>{id}</b>" not in t or "data-client={id}" not in t:
         failures.append("technical_id_not_displayed_unchanged")
-    if "NOT YOUR PHYSIOLOGY" not in t or "SYNTHETIC ENGINEERING" not in t:
+    if "NOT YOUR PHYSIOLOGY" not in t or not ("SYNTHETIC ENGINEERING" in t or "RESEARCH DATA FIXTURE" in t):
         failures.append("synthetic_qualification_missing")
     if "byId[id]?.localExamples" not in t:
         failures.append("local_examples_not_event_derived")

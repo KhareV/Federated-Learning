@@ -105,7 +105,7 @@
 				<h2>Inferred-window ECG-quality counts</h2><ul>{#each Object.entries(summary.quality_counts) as [quality, count]}<li>{quality}: {count}</li>{/each}</ul>
 				<p>All counts above are based on PERSISTED INFERENCE EVENTS. Windows without inference, including some UNUSABLE windows, are not counted as inferred windows.</p>
 				<p>Quality changes are persisted change-only. These summary quality counts are based on persisted inference events, not every source window.</p>
-				<p>Duration uses the PRODUCT LIFECYCLE CLOCK, not physiological source time. Accelerated simulation can make these durations very different.</p>
+				<p>Duration uses the PRODUCT LIFECYCLE CLOCK, not physiological source time. Accelerated source timing can make these durations very different.</p>
 			</Panel>
 		{/if}
 		{#if timeline}

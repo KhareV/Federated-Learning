@@ -61,7 +61,7 @@
    "provenance_type": "RUNTIME",
    "source": "WebSocket /product/v1/sessions/{id}/live (simulated source, accelerated timing)",
    "required_qualification": [
-    "SIMULATED SOURCE",
+    "SOFTWARE SOURCE",
     "NOT DIAGNOSTIC"
    ],
    "allowed_context": "names the product's live monitoring session stream; the source is simulated"
@@ -74,7 +74,7 @@
    "provenance_type": "RUNTIME",
    "source": "WebSocket /product/v1/sessions/{id}/live (simulated source, accelerated timing)",
    "required_qualification": [
-    "Simulated wearable, accelerated timing"
+    "Software ECG source, accelerated timing"
    ],
    "allowed_context": "names the product's live monitoring session stream; the source is simulated"
   }

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -83,12 +84,12 @@
 <p class="tag">PERSISTED EVIDENCE REPLAY · NO NEW INFERENCE</p>
 {/if}
 <label class="pick">Session <select bind:value={sessionId} onchange={load}><option value="">— choose an owned session —</option>
-	{#if done.length}<optgroup label="Simulated monitoring sessions (completed)">{#each done as s (s.session_id)}<option value={s.session_id}>{s.session_id}</option>{/each}</optgroup>{/if}
+	{#if done.length}<optgroup label="Software-source monitoring sessions (completed)">{#each done as s (s.session_id)}<option value={s.session_id}>{s.session_id}</option>{/each}</optgroup>{/if}
 	{#if hardwareReady.length}<optgroup label="Recorded hardware sessions (experimental)">{#each hardwareReady as h (h.session_id)}<option value={h.session_id}>{h.session_id} · {h.summary?.stored_readings ?? h.record_count} readings</option>{/each}</optgroup>{/if}</select></label>
-{#if done.length === 0 && hardwareReady.length === 0}<p class="dim">No completed session is available. Run one from <a href="/app/monitoring">Monitor</a> (simulated or live hardware).</p>{/if}
+{#if done.length === 0 && hardwareReady.length === 0}<p class="dim">No completed session is available. Run one from <a href="/app/monitoring">Monitor</a> (software ECG or live hardware).</p>{/if}
 {#if error}<p role="alert" class="err">{error}</p>{/if}
 {#if loading}<p class="dim" role="status" data-testid="replay-loading">{hw ? `Scoring recorded windows with the released model: ${hw.windows_scored} of ${hw.windows_scored + hw.windows_pending} usable windows done…` : isHardware ? 'Resampling the recorded session and checking each window…' : 'Loading persisted timeline…'}</p>{/if}
-{#if hw}<p class="dim" data-testid="replay-hardware-summary">{hw.windows_total} windows emitted · {hw.windows_unusable} rejected by the quality gate (no model result, none invented) · {hw.windows_scored} scored{hw.windows_pending ? ` · ${hw.windows_pending} pending` : ''}. {hw.label}</p>{/if}
+{#if hw}<p class="dim" data-testid="replay-hardware-summary">{hw.windows_total} windows emitted · {hw.windows_unusable} rejected by the quality gate (no model result, none invented) · {hw.windows_scored} scored{hw.windows_pending ? ` · ${hw.windows_pending} pending` : ''}. {displayCopy(hw.label)}</p>{/if}
 {#if hw && !loading && hw.windows_scored === 0}<p class="dim" data-testid="replay-empty">This recorded session produced no window the quality gate accepts, so there is no model output or policy state to replay. See the quality summary above.</p>{/if}
 {#if timeline && items.length}
 <section aria-label="Replay controls" data-testid="replay-controls"><div class="controls"><button onclick={() => step(-1)} disabled={index === 0}>← Step back</button><button onclick={() => step(1)} disabled={index >= items.length - 1}>Step forward →</button><button onclick={toggle}>{playing ? 'Pause' : 'Play'}</button><button onclick={() => jump('INFERENCE')}>Next inference</button><button onclick={() => jump('MONITORING_STATE_CHANGE')}>Next state change</button></div>
@@ -106,7 +107,7 @@
 	<p class="dim">Dots are persisted windows (shape-free; quality is stated in the panel above, not by colour alone). The dashed line is the frozen CAL_V2 threshold {fmt(threshold, 4)}. A score above the line is not by itself an alert: the monitoring policy also depends on quality and persisted state, and only the recorded state changes below are authoritative.</p></section>
 <section aria-label="State transitions" data-testid="replay-transitions"><h2>Recorded policy state transitions</h2>
 	{#if changes.length === 0}<p class="dim">No state change was persisted for this session.</p>{:else}<ol class="tr">{#each changes as c (c.sequence_index)}<li class:now={items.indexOf(c) <= index}><b>{seconds(c)} s</b> {String(p(c, 'previous_state') ?? 'start')} → <b>{String(p(c, 'monitoring_state'))}</b> <small>({String(p(c, 'reason_code') ?? 'no reason code')})</small></li>{/each}</ol>{/if}</section>
-<p class="dim">{timeline.time_domain_explanation} Source: persisted session timeline ({timeline.claim_boundary}). Replay of raw ECG stages is available only for armed live captures or deterministic reconstructions in the <a href="/app/observatory">signal journey</a>; this page does not claim intermediate arrays that were not stored.</p>
+<p class="dim">{displayCopy(timeline.time_domain_explanation)} Source: persisted session timeline ({displayCopy(timeline.claim_boundary)}). Replay of raw ECG stages is available only for armed live captures or deterministic reconstructions in the <a href="/app/observatory">signal journey</a>; this page does not claim intermediate arrays that were not stored.</p>
 {/if}
 <p class="dim"><a href="/app/observatory">← Observatory</a> · <a href="/app/history">History</a></p>
 <style>

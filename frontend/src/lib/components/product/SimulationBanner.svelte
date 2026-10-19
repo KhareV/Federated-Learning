@@ -2,8 +2,8 @@
 	// Device and monitoring pages must state these facts visibly (not only on an About page).
 </script>
 
-<aside class="sim-banner" aria-label="Simulation disclosure" data-testid="simulation-banner">
-	<span><b>SIMULATED WEARABLE</b></span>
+<aside class="sim-banner" aria-label="Source disclosure" data-testid="simulation-banner">
+	<span><b>SOFTWARE ECG SOURCE</b></span>
 	<span>NO PHYSICAL HARDWARE CONNECTED</span>
 	<span>RESEARCH PROTOTYPE</span>
 	<span>NOT DIAGNOSTIC</span>

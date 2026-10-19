@@ -32,7 +32,7 @@
 			</div>
 		{/each}
 	</div>
-	<footer><span>LOCAL EDGE / SENSOR ARRAY</span><span>QUALITY GATE / PASSED</span><span>STREAM / SYNTHETIC READY</span></footer>
+	<footer><span>LOCAL EDGE / SENSOR ARRAY</span><span>QUALITY GATE / PASSED</span><span>STREAM / SOFTWARE SOURCE READY</span></footer>
 </article>
 
 <style>

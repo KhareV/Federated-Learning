@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-// One Live-page design for every run: only the data source differs (synthetic cohort vs. the user's recorded hardware windows).
+// One Live-page design for every run: only the data source differs (research cohort vs. the user's recorded hardware windows).
 import { cleanup, render, screen } from '@testing-library/svelte';
 import { afterEach, describe, expect, it } from 'vitest';
 import ClientGrid from '$lib/components/product/federation/ClientGrid.svelte';
@@ -24,7 +24,7 @@ describe('run data source', () => {
 });
 
 describe('the unchanged components render either source', () => {
-	it('ClientGrid defaults to the synthetic cohort exactly as before', () => {
+	it('ClientGrid defaults to the research cohort exactly as before', () => {
 		render(ClientGrid, { props: { live: [], round: 1 } });
 		expect(screen.getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(SYNTHETIC_CLIENT_IDS.map((id) => `Show details for ${id}`));
 		expect(screen.queryByTestId('hardware-card-label')).toBeNull();
@@ -39,10 +39,10 @@ describe('the unchanged components render either source', () => {
 		render(FederationBanner, { props: { dataSource: 'HARDWARE' } });
 		const text = screen.getByRole('note').textContent ?? '';
 		expect(text).toContain('RECORDED HARDWARE DATA');
-		expect(text).toContain('SYNTHETIC LABELS');
-		expect(text).not.toContain('SIMULATED CLIENTS');
+		expect(text).toContain('ASSIGNED RESEARCH LABELS');
+		expect(text).not.toContain('LOGICAL CLIENTS');
 		cleanup();
 		render(FederationBanner, { props: {} });
-		expect(screen.getByRole('note').textContent).toContain('SIMULATED CLIENTS');
+		expect(screen.getByRole('note').textContent).toContain('LOGICAL CLIENTS');
 	});
 });

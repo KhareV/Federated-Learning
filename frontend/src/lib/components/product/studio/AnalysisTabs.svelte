@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	// OVERVIEW | PERFORMANCE | TRAINING | CLIENTS | MATRICES | COMPARISON | FIGURES & EXPORTS.
 	// Every one of the 20 figures and 12 tables of the delivered FL10 inventory is reachable here with THIS run's data; only the active tab is rendered (no re-render of all figures per event).
 	import Fl10Chart from '$lib/components/product/observatory/Fl10Chart.svelte';
@@ -46,7 +47,7 @@
 			<p class="dim" data-testid="analysis-unavailable">No per-round evaluation or training records were captured for this run ({studio.run?.evaluation.reason ?? 'unavailable'}). Open a run started with the unified Studio, or a recorded FL10 run, to inspect figures and tables.</p>
 		{:else}
 			{#if tab === 'overview'}
-				<p class="dim" data-testid="overview-summary">{studio.run?.label} · {studio.run?.source_label} · evaluated rounds {studio.records.filter((r) => r.evaluation_status === 'COMPLETED').length}/{studio.rounds.length} · {studio.summary?.cohort_use}</p>
+				<p class="dim" data-testid="overview-summary">{studio.run?.label} · {displayCopy(studio.run?.source_label)} · evaluated rounds {studio.records.filter((r) => r.evaluation_status === 'COMPLETED').length}/{studio.rounds.length} · {displayCopy(studio.summary?.cohort_use)}</p>
 				<RunOverview {studio} />
 			{/if}
 			{#if tab === 'clients'}<RoundClientPanel {studio} /><ClientHistory {studio} />{/if}

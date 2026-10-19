@@ -86,7 +86,7 @@ describe('sidebar collapse', () => {
 		await mount();
 		await fireEvent.click(toggle());
 		const foot = document.querySelector('.foot') as HTMLElement;
-		expect(foot.getAttribute('title')).toBe('SIMULATED MODEL · HARDWARE TELEMETRY · NOT DIAGNOSTIC');
+		expect(foot.getAttribute('title')).toBe('RESEARCH MODEL · HARDWARE TELEMETRY · NOT DIAGNOSTIC');
 		expect(foot.textContent).toContain('HARDWARE TELEMETRY');
 	});
 });

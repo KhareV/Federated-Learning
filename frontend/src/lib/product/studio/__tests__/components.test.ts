@@ -102,7 +102,7 @@ describe('round-count selector and run starter', () => {
 		expect(screen.getByTestId('cfg10-algorithm-note').textContent).toContain('FedProx is disabled: not implemented or verified by the 10-round engine');
 		expect(screen.getByTestId('cfg10-mode-note').textContent).toContain('SecAgg+ shadow is disabled');
 		expect(screen.getByTestId('cfg10-mode-note').textContent).toContain('never silently reinterpreted');
-		expect(screen.getByTestId('cfg10-source-note').textContent).toContain('Canonical synthetic cohort');
+		expect(screen.getByTestId('cfg10-source-note').textContent).toContain('Canonical research cohort');
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
 		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'CANONICAL_SYNTHETIC' });
 		await fireEvent.change(screen.getByTestId('cfg10-source'), { target: { value: 'LIVE_MONITORED_SITE_00' } });
@@ -145,7 +145,7 @@ describe('round-count selector and run starter', () => {
 		expect(screen.queryByTestId('cfg10-source')).toBeNull();                               // no source-mode / signal / replaced-client detail for this choice
 		expect(screen.queryByTestId('cfg10-signal')).toBeNull();
 		expect(screen.queryByTestId('cfg10-site')).toBeNull();
-		expect(screen.getByTestId('cfg10-source-note').textContent).toMatch(/SITE_00.*synthetic-assigned.*recorded hardware/);
+		expect(screen.getByTestId('cfg10-source-note').textContent).toMatch(/SITE_00.*algorithmically assigned.*recorded hardware/);
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
 		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 10, source_mode: 'LIVE_MONITORED_SITE_00', signal_session_id: 'SESS-DONE-0123456789' });
 	});
@@ -233,7 +233,7 @@ describe('selected-round metric cards never invent values', () => {
 		expect(screen.getByTestId('metric-F1').textContent).toContain('0.350257');
 		expect(screen.getByTestId('metric-specificity').textContent).toBe('Specificity0');
 		expect(screen.getByTestId('all-negative_predictive_value').textContent).toContain('UNDEFINED — no negative predictions (TN+FN = 0)');
-		expect(screen.getByTestId('cohort-use-label').textContent).toBe('REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST');
+		expect(screen.getByTestId('cohort-use-label').textContent).toBe('REUSED RESEARCH EVALUATION — NOT A NEW UNTOUCHED FINAL TEST');
 		expect(text()).toContain('raw sigmoid ≥ 0.5');
 		cleanup();
 		const failed = storeWith((st) => { st.run = run(); st.summary = summary([record(0, 'COMPLETED'), record(1, 'FAILED')]); st.followLive = false; st.manualRound = 1; });

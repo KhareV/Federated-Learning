@@ -53,11 +53,11 @@ describe('recorded hardware inside the run starter', () => {
 		expect(screen.getByTestId('data-source-synthetic').getAttribute('aria-checked')).toBe('true');
 		await fireEvent.click(screen.getByTestId('data-source-hardware'));
 		expect(await screen.findByTestId('hardware-demo-starter')).toBeTruthy();
-		expect(screen.getByTestId('hardware-demo-boundary').textContent).toContain('SYNTHETIC labels');
+		expect(screen.getByTestId('hardware-demo-boundary').textContent).toContain('assigned research labels');
 		const init = screen.getByTestId('hardware-demo-init') as HTMLSelectElement;
 		expect([...init.options].map((o) => [o.value, o.disabled])).toEqual([['MODEL_V2_FINAL', false], ['FRESH_SEEDED', false], ['WARM_START', false]]);      // the recommended pretrained-V2 family first, the tabular model grouped below as Advanced / engineering demo
-		expect([...init.querySelectorAll('optgroup')].map((g) => g.label)).toEqual(['V2 network (recommended) — works with every synthetic cohort', 'Advanced / engineering demo — small tabular model (HARDWARE_DEMO_MODEL_V1)']);
-		await waitFor(() => expect(init.value).toBe('MODEL_V2_FINAL'));      // pretrained V2 is the default, as for the synthetic cohort
+		expect([...init.querySelectorAll('optgroup')].map((g) => g.label)).toEqual(['V2 network (recommended) — works with every research cohort', 'Advanced / engineering demo — small tabular model (HARDWARE_DEMO_MODEL_V1)']);
+		await waitFor(() => expect(init.value).toBe('MODEL_V2_FINAL'));      // pretrained V2 is the default, as for the research cohort
 		expect(screen.getByTestId('hardware-demo-v2-note')).toBeTruthy();
 		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
 		expect((screen.getByTestId('hardware-demo-session-HW-EMPTY') as HTMLInputElement).disabled).toBe(true);
@@ -140,7 +140,7 @@ describe('the cohort option on a recorded-hardware run', () => {
 		await waitFor(() => expect(started).toMatchObject({ initialisation: 'MODEL_V2_FINAL' }));
 		expect(started).not.toHaveProperty('cohort');
 		await fireEvent.click(screen.getByTestId('cohort-realistic'));
-		expect(screen.getByTestId('hardware-demo-v2-note').textContent).toContain('seven realistic synthetic peers');
+		expect(screen.getByTestId('hardware-demo-v2-note').textContent).toContain('seven realistic research peers');
 		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
 		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], initialisation: 'MODEL_V2_FINAL', cohort: 'REALISTIC' }));
 	});

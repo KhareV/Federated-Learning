@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { cell, sha256Hex, tableToCsv, tableToMarkdown, type Fl10Table } from '$lib/product/observatory/fl10';
 	let { table, open = false }: { table: Fl10Table; open?: boolean } = $props();
 	let digest = $state<string | null>(null);
@@ -19,10 +20,10 @@
 	}
 </script>
 <section class="tbl" data-testid={`table-${table.id}`}>
-	<details {open}><summary><b>{table.id.replace('FL10_', '')}</b> · {table.title} <small>({table.rows.length} rows × {table.columns.length} columns)</small></summary>
-		<p class="cap">{table.caption}</p><p class="syn">{table.synthetic_label}</p>
+	<details {open}><summary><b>{table.id.replace('FL10_', '')}</b> · {displayCopy(table.title)} <small>({table.rows.length} rows × {table.columns.length} columns)</small></summary>
+		<p class="cap">{displayCopy(table.caption)}</p><p class="syn">{displayCopy(table.synthetic_label)}</p>
 		<div class="bar"><button onclick={() => void exportCsv()}>Export CSV (full precision)</button><button onclick={() => void exportJson()}>Export JSON</button><button onclick={() => void exportMarkdown()}>Export Markdown</button>{#if digest}<small>SHA256 <code>{digest.slice(0, 16)}…</code></small>{/if}</div>
-		<div class="scroll" tabindex="0" role="region" aria-label={`${table.title} data`}><table><thead><tr>{#each table.columns as c}<th scope="col">{c}</th>{/each}</tr></thead>
+		<div class="scroll" tabindex="0" role="region" aria-label={`${displayCopy(table.title)} data`}><table><thead><tr>{#each table.columns as c}<th scope="col">{c}</th>{/each}</tr></thead>
 			<tbody>{#each table.rows as r}<tr>{#each r as v, i}{#if i === 0}<th scope="row">{cell(v, 4)}</th>{:else}<td class:undef={v === null}>{cell(v, 4)}</td>{/if}{/each}</tr>{/each}</tbody></table></div>
 		<p class="dim">Displayed rounded to 4 decimals for reading; exports keep full precision. Sources: {table.sources.join(', ')}.</p></details>
 </section>

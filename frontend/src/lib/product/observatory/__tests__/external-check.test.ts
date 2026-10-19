@@ -10,7 +10,7 @@ import { parseExternalCheck } from '../external-check';
 
 const row = (model: string, o: Record<string, unknown> = {}) => ({ model, AUROC: 0.911, AUROC_ci: [0.896, 0.926], AUPRC: 0.705, AUPRC_ci: [0.665, 0.743], lift: 6.4, F1: 0.547, F1_ci: [0.515, 0.579], sensitivity: 0.83, specificity: 0.85, precision: 0.45, paired_vs_central_V2: null, ...o });
 const paired = (a: number, b: number) => ({ AUROC: { delta: a, ci95: [a - 0.02, a + 0.02], share_better: 0 }, AUPRC: { delta: b, ci95: [b - 0.03, b + 0.03], share_better: 0 } });
-const MODELS = ['MODEL_V1 (central, frozen)', 'MODEL_V2_FINAL (central)', 'central V2 + 10 rounds on the original synthetic cohort', 'central V2 + 10 rounds on the realistic synthetic cohort'];
+const MODELS = ['MODEL_V1 (central, frozen)', 'MODEL_V2_FINAL (central)', 'central V2 + 10 rounds on the original research cohort', 'central V2 + 10 rounds on the realistic research cohort'];
 const SAMPLE = () => ({
 	classification: 'FROZEN_EXTENSION_EVIDENCE', label: 'FROZEN EXTENSION EVIDENCE · REAL UNSEEN ECG · RECORD-LEVEL TARGET · NOT AAMI-SVF · NOT CLINICAL', claim_boundary: 'Extension outside the locked scope; no clinical claim.',
 	target: 'PTBXL_PREMATURE_BEAT_RECORD_V1', records_scored: 21535, exclusions: { paced: 302, no_lead_II: 0, bad_window: 0 }, threshold: 0.5, calibration: 'NONE',

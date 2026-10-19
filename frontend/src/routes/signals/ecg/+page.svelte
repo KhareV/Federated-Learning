@@ -11,7 +11,7 @@
 
 <WorkbenchPage eyebrow="03 / SIGNAL ANALYSIS / ECG" title="Read the electrical rhythm." description="Explore the processed cardiac signal and the variability hidden between beats. Every metric remains paired with its quality context.">
 	<div class="toolbar"><label><input type="checkbox" bind:checked={showRaw} /> RAW CHANNEL</label><button on:click={() => (windowSeconds = Math.max(1, windowSeconds - 1))}>−</button><span>{windowSeconds}S WINDOW</span><button on:click={() => (windowSeconds = Math.min(10, windowSeconds + 1))}>+</button><button class:active={paused} on:click={() => (paused = !paused)}>{paused ? 'RESUME' : 'PAUSE'} / {paused ? '▶' : 'Ⅱ'}</button></div>
-	<TelemetryPlot label={showRaw ? 'Raw + filtered ECG / AD8232' : 'Filtered ECG / AD8232'} value="72" unit="BPM" zoom={windowSeconds / 3} paused={paused} detail={paused ? 'PAUSED / INSPECTING' : `${windowSeconds}S / LIVE SYNTHETIC SIGNAL`} />
+	<TelemetryPlot label={showRaw ? 'Raw + filtered ECG / AD8232' : 'Filtered ECG / AD8232'} value="72" unit="BPM" zoom={windowSeconds / 3} paused={paused} detail={paused ? 'PAUSED / INSPECTING' : `${windowSeconds}S / LIVE SOFTWARE ECG SIGNAL`} />
 	<div class="metrics"><MetricTile label="Mean RR" value="833" unit="ms" detail="30 DETECTED BEATS" /><MetricTile label="SDNN" value="42" unit="ms" detail="RR VARIABILITY" tone="cyan" /><MetricTile label="RMSSD" value="31" unit="ms" detail="PARASYMPATHETIC INDEX" tone="teal" /><MetricTile label="pNN50" value="18" unit="%" detail="SUCCESSIVE DIFFERENCES" tone="amber" /></div>
 </WorkbenchPage>
 

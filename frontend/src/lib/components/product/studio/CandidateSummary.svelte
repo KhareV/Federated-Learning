@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	// Final engineering candidate of a 10-round run (not registered, promoted or deployed). The 3-round candidate lifecycle keeps its original component.
 	import DigestText from '$lib/components/product/federation/DigestText.svelte';
 	import type { StudioRun } from '$lib/product/studio/types';
@@ -9,9 +10,9 @@
 	{#if c}
 		<div class="id"><span>CANDIDATE</span><b data-testid="candidate-id">{c.candidate_id}</b></div>
 		<p>Final global state R{run.planned_rounds}: {#if c.state_sha256}<DigestText value={c.state_sha256} label="candidate state digest" />{/if}</p>
-		<p class="badge" data-testid="candidate-label">{c.label ?? 'ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL'}</p>
+		<p class="badge" data-testid="candidate-label">{displayCopy(c.label ?? 'ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL')}</p>
 		<ul><li>Promoted: <b>NO</b></li><li>Deployed: <b>NO</b></li><li>Registered in the product model registry: <b>NO</b></li><li>Calibration applied: <b>NONE</b></li><li>Released monitoring model changed: <b>NO</b></li></ul>
-		<p class="dim">The candidate is the committed output of round {run.planned_rounds}. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort.</p>
+		<p class="dim">The candidate is the committed output of round {run.planned_rounds}. It was not chosen by any evaluation result; its scores are exploratory measurements on a research cohort.</p>
 	{:else}<p class="dim" role="status">{run.status === 'FAILED' ? 'The run failed: there is no candidate. An interrupted run never produces one.' : 'The final candidate is created only when the last round commits.'}</p>{/if}
 </div>
 <style>

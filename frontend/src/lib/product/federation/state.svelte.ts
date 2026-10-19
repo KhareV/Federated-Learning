@@ -118,7 +118,7 @@ export class FederationStore {
 			} catch {
 				studio = [];   // a backend without the Studio routes simply has no 10-round runs
 			}
-			for (const r of product) badges[r.run_id] = r.run_type === 'REPLAY' ? 'REPLAY' : 'SYNTHETIC COHORT';
+			for (const r of product) badges[r.run_id] = r.run_type === 'REPLAY' ? 'REPLAY' : 'RESEARCH COHORT';
 			this.runBadges = badges;
 			this.runs = [...studio, ...product];
 		} catch (cause) {

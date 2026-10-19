@@ -24,7 +24,7 @@
 	<p class="lead">Read-only scientific research summaries, separate from the current product federation engineering demo. The federation clients are logical clients on one laptop, not hospitals or institutions.</p>
 	<div class="two" data-testid="science-vs-demo">
 		<section class="sci"><p class="k">SCIENTIFIC FL EXPERIMENTS</p><h2>Frozen research evidence</h2><p>Five experiment phases (V2-FL-001 to V2-FL-004 and V2-FL-EVAL-001) with frozen results. This is where federated-learning performance is discussed.</p></section>
-		<section class="demo"><p class="k">CURRENT PRODUCT ENGINEERING DEMO</p><h2>8 synthetic clients · 3 rounds · 24 updates</h2><p>Real local training that ends in a sandbox candidate. No demo-performance claim.</p></section>
+		<section class="demo"><p class="k">CURRENT PRODUCT ENGINEERING DEMO</p><h2>8 logical clients · 3 rounds · 24 updates</h2><p>Real local training that ends in a research candidate. No demo-performance claim.</p></section>
 	</div>
 	{#if error}<p role="alert" class="error">{error}</p>{:else if !evidence}<p class="dim" role="status">Loading frozen evidence…</p>{/if}
 	{#if evidence}
@@ -34,7 +34,7 @@
 				{ label: 'HELD-OUT EVALUATION', sub: 'V2-FL-EVAL-001 · one-shot held-out check' }, { label: 'SECAGG COMPATIBILITY', sub: 'V2-FL-004 · protected-aggregation interface' }]} /></div>
 		</Panel>
 		<Panel eyebrow="V2-FL-001 / IID FEDAVG" title="Frozen validation result" note="FROZEN RESEARCH EVIDENCE"><p>Initial AUPRC: {val('iid_initial_auprc')}; best validation AUPRC: {val('iid_best_auprc')} at round {val('iid_best_round')}. V2-minus-V1 paired AUPRC result: {val('iid_v2_minus_v1_auprc')} [{val('iid_v2_minus_v1_auprc_ci_lower')}, {val('iid_v2_minus_v1_auprc_ci_upper')}]. These are frozen validation-selection facts, not a new evaluation.</p></Panel>
-		<Panel eyebrow="V2-FL-002 / NON-IID" title="Synthetic research partitions" note="FROZEN RESEARCH EVIDENCE"><p>IID, LABEL, QUANTITY, FEATURE and COMBINED conditions use synthetic research partitions, not institutions. Values are descriptive; not all differences are statistically significant. Bars show best validation AUPRC on a 0 to 1 scale.</p>
+		<Panel eyebrow="V2-FL-002 / NON-IID" title="Logical research partitions" note="FROZEN RESEARCH EVIDENCE"><p>IID, LABEL, QUANTITY, FEATURE and COMBINED conditions use logical research partitions, not institutions. Values are descriptive; not all differences are statistically significant. Bars show best validation AUPRC on a 0 to 1 scale.</p>
 			<div class="grid" data-testid="condition-cards">{#each CONDITIONS as [condition, meaning]}{@const w = bar(`${condition}_best_auprc`)}<div><strong>{condition.toUpperCase()}</strong><em>{meaning}</em><span>Best validation AUPRC: {val(`${condition}_best_auprc`)}</span>{#if w !== null}<i class="bar" aria-hidden="true"><i style={`width:${w}%`}></i></i>{/if}</div>{/each}</div></Panel>
 		<Panel eyebrow="V2-FL-003 / FEDPROX" title="FedAvg vs FedProx" note="NO WINNER">
 			<ComparisonPanel testid="fedavg-vs-fedprox" leftTitle="FEDAVG" leftSub="Aggregation" leftTone="released" rightTitle="FEDPROX" rightSub="Proximal local objective" rightTone="federated" rows={[
@@ -52,8 +52,8 @@
 				<p>Overhead accounting: {val('secagg_overhead_boundary')}. Application payload bytes are not exact network bytes ({val('secagg_network_bytes_exact')}). No end-to-end deployment latency was measured.</p>
 				<p>Unsupported claims include: {unsupported.join(', ')}.</p></TechnicalEvidence></Panel>
 		<Panel eyebrow="ENGINEERING DEMO SEPARATION" title="V2-FL-005 is not scientific efficacy" note="CURRENT ENGINEERING DEMO">
-			<p>The current product federation demo derives from V2-FL-005 engineering lineage. It is not part of the five scientific evidence phases above. No synthetic demo accuracy is reported here.</p>
-			<div class="bridge" data-testid="research-to-demo"><ul><li>8 logical synthetic clients</li><li>3 rounds</li><li>real local training</li><li>engineering candidate</li><li>no performance claim</li></ul><a class="cta" href="/app/federation">OPEN FEDERATION STUDIO →</a></div></Panel>
+			<p>The current product federation demo derives from V2-FL-005 engineering lineage. It is not part of the five scientific evidence phases above. No engineering demo accuracy is reported here.</p>
+			<div class="bridge" data-testid="research-to-demo"><ul><li>8 logical clients</li><li>3 rounds</li><li>real local training</li><li>engineering candidate</li><li>no performance claim</li></ul><a class="cta" href="/app/federation">OPEN FEDERATION STUDIO →</a></div></Panel>
 		<TechnicalEvidence label="FULL FROZEN EVIDENCE" testid="full-frozen-evidence"><FactTable facts={evidence.facts} provenance={evidence.source_provenance} /></TechnicalEvidence>
 	{/if}
 </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	// Run-specific exports: each file is downloaded from THIS run's verified export set and re-hashed in the browser against the manifest; a recorded figure is never offered under a live run id.
 	import { getProductStore } from '$lib/product/state.svelte';
 	import type { StudioStore } from '$lib/product/studio/store.svelte';
@@ -47,8 +48,8 @@
 	{#if !ex || ex.status !== 'READY'}
 		<p class="prep" role="status" data-testid="export-status">{ex?.status === 'PREPARING' || studio.run?.export_status === 'PREPARING' ? 'EXPORT PREPARING — figures, tables and evidence are generated after the run completes and every evaluation has settled.' : ex?.message ?? studio.run?.export_status === 'FAILED' ? 'EXPORT FAILED — see the run status.' : 'Exports are generated when the run completes and every evaluation has settled.'}</p>
 	{:else}
-		<p class="ok" data-testid="export-status">EXPORT READY · {ex.source_label ?? ''} · run {ex.run_id}</p>
-		<p class="dim">Every file below was generated from this run's verified bundle ({figures.length} figures, {tables.length} tables, {data.length} evidence files). Cohort: {ex.cohort_use}.</p>
+		<p class="ok" data-testid="export-status">EXPORT READY · {displayCopy(ex.source_label ?? '')} · run {ex.run_id}</p>
+		<p class="dim">Every file below was generated from this run's verified bundle ({figures.length} figures, {tables.length} tables, {data.length} evidence files). Cohort: {displayCopy(ex.cohort_use)}.</p>
 		<button type="button" onclick={() => void manifestDownload()} data-testid="export-manifest" disabled={!studio.overview}>Download verification manifest (JSON)</button>
 		<h4>Figures</h4>
 		<ul>{#each figures as [id, files] (id)}<li><b>{id.replace('FL10_', '')}</b><span class="t">{title(id)}</span>{#each FIG_FORMATS as [fmt, label] (fmt)}{#if files[fmt]}<button type="button" disabled={busy} onclick={() => void get(id, fmt, files[fmt].sha256)} data-testid={`export-${id}-${fmt}`}>{label}</button>{/if}{/each}</li>{/each}</ul>

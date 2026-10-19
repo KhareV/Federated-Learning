@@ -101,7 +101,7 @@
   });
 </script>
 
-<p class="lead">MongoDB telemetry from the configured source; the session panel identifies the source after Start. Timestamps are server ingestion time. ECG values are transmitted ADC readings with no verified ADC sampling rate; any model analysis of this source is experimental and not valid. The V2 panels below are an <b>experimental, resampled, not-valid</b> analysis, kept separate from the simulated wearable.</p>
+<p class="lead">MongoDB telemetry from the configured source; the session panel identifies the source after Start. Timestamps are server ingestion time. ECG values are transmitted ADC readings with no verified ADC sampling rate; any model analysis of this source is experimental and not valid. The V2 panels below are an <b>experimental, resampled, not-valid</b> analysis, kept separate from the software ECG source.</p>
 <p class="note" data-testid="hardware-lifecycle-note">Session lifecycle: a session ends only when you press <b>Stop Monitoring</b> (or the backend restarts, which marks it INTERRUPTED). Leaving this page does not stop it, but readings are collected only while this page is open; on return the session catches up from MongoDB, so records written meanwhile are still counted (the newest {session?.trace_limit ?? 2000} are retained).</p>
 {#if error}<p role="alert" class="err">{error}</p>{/if}
 <div class="flowbox" data-testid="hardware-flow"><FlowDiagram label="Hardware telemetry pipeline" steps={flow} /></div>

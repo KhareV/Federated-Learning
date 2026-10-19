@@ -32,7 +32,7 @@
 		{#if part.length === 0}<p class="dim" data-testid="client-holdout-none">No evaluated record for {state} yet.</p>
 		{:else}<div class="scroll" tabindex="-1"><table data-testid="client-holdout-table" aria-label="Held-out participants sharing this client's condition"><thead><tr><th scope="col">participant</th>{#each ['AUPRC', 'AUROC', 'F1', 'recall', 'specificity'] as k}<th scope="col">{k}</th>{/each}</tr></thead>
 			<tbody>{#each part as r}<tr><th scope="row">{r[1]}</th>{#each ['AUPRC', 'AUROC', 'F1', 'recall', 'specificity'] as k}<td>{n(r[idx(t5, k)])}</td>{/each}</tr>{/each}</tbody></table></div>{/if}
-		<p class="dim">Two holdout participants share each site's synthetic condition; the holdout never enters training.</p>
+		<p class="dim">Two holdout participants share each site's research condition; the holdout never enters training.</p>
 		{/if}
 	{/if}
 </div>

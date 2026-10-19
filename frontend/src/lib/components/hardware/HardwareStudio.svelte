@@ -53,7 +53,7 @@
 			highlights: [
 				'Legacy sketch computes a PPG-derived pulse-rate estimate, not an ECG heart rate',
 				'SpO2 ratio heuristic observed in source is unverified against reference oximetry',
-				'No physical enclosure or glass cover has been fabricated or tested'
+				'Physical enclosure and glass cover remain design concepts'
 			]
 		},
 		{
@@ -154,7 +154,7 @@
 		<!-- Live Signal Stream for Active Subsystem -->
 		<div class="signal-preview-box">
 			<div class="preview-topline">
-				<span>SIMULATED WAVEFORM // {active.name.split(' ')[0]}</span>
+				<span>ILLUSTRATIVE WAVEFORM // {active.name.split(' ')[0]}</span>
 				<span class="live-pill"><span class="pulse-dot"></span> ILLUSTRATIVE, NOT LIVE HARDWARE</span>
 			</div>
 			<div class="preview-waveform">

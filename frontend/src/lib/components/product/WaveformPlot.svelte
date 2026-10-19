@@ -1,5 +1,5 @@
 <script lang="ts">
-	// Rolling SIMULATED SOURCE ECG (360 Hz, ADC_COUNTS). null samples stay GAPS: segments are drawn
+	// Rolling SOFTWARE SOURCE ECG (360 Hz, ADC_COUNTS). null samples stay GAPS: segments are drawn
 	// as separate polylines and the missing interval is shaded and labelled - never zero-filled,
 	// interpolated, or flat-lined. y-scaling is a display transform only.
 	import type { GapRun, WaveformSegment } from '$lib/product/waveform';
@@ -26,7 +26,7 @@
 </script>
 
 <div class="plot" data-testid="waveform-plot" data-points={segments.reduce((n, s) => n + s.values.length, 0)} data-segments={segments.length} data-visible-gaps={visibleGaps.length}>
-	<svg viewBox={`0 0 ${W} ${height}`} width="100%" height={height} preserveAspectRatio="none" role="img" aria-label="Simulated source ECG, rolling ten-second window, with gaps where the source delivered no data">
+	<svg viewBox={`0 0 ${W} ${height}`} width="100%" height={height} preserveAspectRatio="none" role="img" aria-label="Software source ECG, rolling ten-second window, with gaps where the source delivered no data">
 		<defs><pattern id="gap-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#fb7185" stroke-width="2" opacity=".55" /></pattern></defs>
 		{#each [0.25, 0.5, 0.75] as f}<line x1="0" x2={W} y1={height * f} y2={height * f} stroke="rgba(148,163,184,.1)" />{/each}
 		{#each visibleGaps as gap}

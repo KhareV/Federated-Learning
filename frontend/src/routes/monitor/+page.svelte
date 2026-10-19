@@ -14,7 +14,7 @@
 <main class="moved">
 	<p class="tag">NHM / LEGACY ROUTE</p>
 	<h1>The product monitor moved.</h1>
-	<p>This legacy address is no longer the product monitor. The live monitoring page for the virtual wearable is now:</p>
+	<p>This legacy address is no longer the product monitor. The live monitoring page for the software ECG source is now:</p>
 	<p><a class="go" href="/app/monitoring">Open /app/monitoring →</a></p>
 	<p class="dim">Looking for the recorded-replay technical research tool? It is available as the <a href="/monitoring">research runtime tool</a>.</p>
 </main>

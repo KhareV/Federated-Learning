@@ -26,9 +26,9 @@
 			{@const p = pos(i)}
 			<li class={`c s-${state(id).toLowerCase()} n-${ns.toLowerCase()}${role === 'AUTHENTICATED_OWNER' ? ' owner' : ''}${selected === id ? ' sel' : ''}`} style={`left: ${p.x}%; top: ${p.y}%`} data-client={id} data-state={state(id)} data-role={role ?? undefined}>
 				<button type="button" class="node" aria-pressed={selected === id} aria-label={`Show details for ${id}`} onclick={() => onSelect?.(id)}>
-					{#if role === 'AUTHENTICATED_OWNER'}<span class="mine" data-testid="owner-card-label">★ MY EDGE CLIENT</span>{:else if role === 'SYNTHETIC_PEER'}<span class="peer" data-testid="peer-label">SYNTHETIC PEER</span>{:else if dataSource === 'HARDWARE' && !isRecordedClient(id)}<span class="peer" data-testid="hardware-peer-label">SYNTHETIC COHORT PEER</span>{:else if dataSource === 'HARDWARE'}<span class="mine" data-testid="hardware-card-label">★ YOUR RECORDED WINDOWS</span>{/if}
+					{#if role === 'AUTHENTICATED_OWNER'}<span class="mine" data-testid="owner-card-label">★ MY EDGE CLIENT</span>{:else if role === 'SYNTHETIC_PEER'}<span class="peer" data-testid="peer-label">RESEARCH PEER</span>{:else if dataSource === 'HARDWARE' && !isRecordedClient(id)}<span class="peer" data-testid="hardware-peer-label">RESEARCH COHORT PEER</span>{:else if dataSource === 'HARDWARE'}<span class="mine" data-testid="hardware-card-label">★ YOUR RECORDED WINDOWS</span>{/if}
 					{#if dataSource === 'HARDWARE' && isRecordedClient(id)}<b title={id}>{clientShortName(id)}</b>{:else}<b>{id}</b>{/if}<span class="st"><span aria-hidden="true">{NODE_MARK[ns]}</span> {replay ? 'REPLAYED EVENT: ' : ''}{NODE_LABEL[ns]}<span class="raw"> ({CLIENT_LABEL[state(id)]})</span></span>
-					{#if role === 'AUTHENTICATED_OWNER'}<small class="own" data-testid="owner-binding-note">TRAINING DATA: SYNTHETIC ENGINEERING FIXTURE · NOT YOUR PHYSIOLOGY</small>{/if}
+					{#if role === 'AUTHENTICATED_OWNER'}<small class="own" data-testid="owner-binding-note">TRAINING DATA: RESEARCH DATA FIXTURE · NOT YOUR PHYSIOLOGY</small>{/if}
 					<small>local examples: {byId[id]?.localExamples ?? '--'}</small>
 					<small>milestone: {milestone(id)}</small>
 					<small>update: {#if produced(id)}<code title={byId[id]?.updateDigests[round] ?? ''}>{(byId[id]?.updateDigests[round] ?? '').slice(0, 10)}…</code> produced{:else}not yet produced{/if}</small>

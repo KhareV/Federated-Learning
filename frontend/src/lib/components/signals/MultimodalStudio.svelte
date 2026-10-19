@@ -23,9 +23,9 @@
 			spo2: 98.4,
 			ptt: 218,
 			hrv: 54,
-			status: 'ILLUSTRATIVE SCENARIO (SYNTHETIC VALUES)',
+			status: 'ILLUSTRATIVE SCENARIO (ILLUSTRATIVE VALUES)',
 			statusColor: '#0d9488',
-			description: 'Synthetic illustration: regular QRS complexes followed by regular pulse waves. Values are scenario parameters, not measurements.'
+			description: 'Illustrative signal: regular QRS complexes followed by regular pulse waves. Values are scenario parameters, not measurements.'
 		},
 		{
 			id: 'exertion',
@@ -34,9 +34,9 @@
 			spo2: 97.2,
 			ptt: 172,
 			hrv: 24,
-			status: 'ILLUSTRATIVE SCENARIO (SYNTHETIC VALUES)',
+			status: 'ILLUSTRATIVE SCENARIO (ILLUSTRATIVE VALUES)',
 			statusColor: '#0284c7',
-			description: 'Synthetic illustration: shorter R-R intervals and faster pulse waves. Values are scenario parameters, not measurements.'
+			description: 'Illustrative signal: shorter R-R intervals and faster pulse waves. Values are scenario parameters, not measurements.'
 		},
 		{
 			id: 'nocturnal',
@@ -45,9 +45,9 @@
 			spo2: 96.1,
 			ptt: 264,
 			hrv: 78,
-			status: 'ILLUSTRATIVE SCENARIO (SYNTHETIC VALUES)',
+			status: 'ILLUSTRATIVE SCENARIO (ILLUSTRATIVE VALUES)',
 			statusColor: '#6366f1',
-			description: 'Synthetic illustration: longer R-R intervals and slower pulse waves. Values are scenario parameters, not measurements.'
+			description: 'Illustrative signal: longer R-R intervals and slower pulse waves. Values are scenario parameters, not measurements.'
 		},
 		{
 			id: 'pvc',
@@ -56,9 +56,9 @@
 			spo2: 94.8,
 			ptt: 290,
 			hrv: 92,
-			status: 'ILLUSTRATIVE PVC PATTERN (SIMULATED, NOT A DIAGNOSIS)',
+			status: 'ILLUSTRATIVE PVC PATTERN (ILLUSTRATIVE, NOT A DIAGNOSIS)',
 			statusColor: '#e11d48',
-			description: 'Simulated premature ventricular depolarization pattern for illustration only. No on-device ML classification is implemented; this is not a diagnosis.'
+			description: 'Illustrative premature ventricular depolarization pattern for illustration only. No on-device ML classification is implemented; this is not a diagnosis.'
 		}
 	];
 
@@ -94,8 +94,8 @@
 		// Channel Labels
 		ctx.font = '600 10px JetBrains Mono, monospace';
 		ctx.fillStyle = '#64748b';
-		ctx.fillText('CH 1 // SIMULATED ECG (ILLUSTRATIVE)', 16, 22);
-		ctx.fillText('CH 2 // SIMULATED PPG (ILLUSTRATIVE)', 16, channelH + 22);
+		ctx.fillText('CH 1 // ILLUSTRATIVE ECG (ILLUSTRATIVE)', 16, 22);
+		ctx.fillText('CH 2 // ILLUSTRATIVE PPG (ILLUSTRATIVE)', 16, channelH + 22);
 		ctx.fillText('CH 3 // ARTERIAL SpO2 DELTA', 16, channelH * 2 + 22);
 
 		const speed = (currentState.bpm / 60) * 0.008;
@@ -254,7 +254,7 @@
 <div class="multimodal-studio-wrap">
 	<!-- Top Preset Controls -->
 	<div class="state-presets-bar">
-		<span class="presets-label">SIMULATION PRESETS:</span>
+		<span class="presets-label">SCENARIO PRESETS:</span>
 		<div class="presets-buttons">
 			{#each states as st}
 				<button
@@ -291,22 +291,22 @@
 		<div class="telemetry-panel">
 			<div class="vitals-metrics-column">
 				<div class="metric-card">
-					<span class="metric-label">HEART RATE (SYNTHETIC)</span>
+					<span class="metric-label">HEART RATE (ILLUSTRATIVE)</span>
 					<strong class="metric-value">{currentState.bpm} <small>BPM</small></strong>
 				</div>
 
 				<div class="metric-card">
-					<span class="metric-label">SpO₂ (SYNTHETIC)</span>
+					<span class="metric-label">SpO₂ (ILLUSTRATIVE)</span>
 					<strong class="metric-value">{currentState.spo2} <small>%</small></strong>
 				</div>
 
 				<div class="metric-card">
-					<span class="metric-label">PULSE TRANSIT (SYNTHETIC)</span>
+					<span class="metric-label">PULSE TRANSIT (ILLUSTRATIVE)</span>
 					<strong class="metric-value">{currentState.ptt} <small>ms</small></strong>
 				</div>
 
 				<div class="metric-card">
-					<span class="metric-label">HRV (SYNTHETIC)</span>
+					<span class="metric-label">HRV (ILLUSTRATIVE)</span>
 					<strong class="metric-value">{currentState.hrv} <small>ms</small></strong>
 				</div>
 			</div>

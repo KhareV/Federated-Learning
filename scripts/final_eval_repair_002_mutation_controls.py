@@ -113,7 +113,7 @@ def _tamper_v15(shadow: Path) -> None:
 
 
 def _drop_qualification(d: Path) -> None:
-    sub(LAND, "Simulated wearable, accelerated timing; released", "Released")(d)
+    sub(LAND, "Software ECG source, accelerated timing; released", "Released")(d)
 
 
 CONTROLS = {

@@ -34,7 +34,7 @@
 	const reachedEnd = $derived(view?.runStatus === 'COMPLETED');
 	const planned = $derived(view?.plannedRounds || run?.planned_rounds || 3);
 	const jumpRounds = $derived([...new Set([1, Math.ceil(planned / 2), planned])].filter((n) => n >= 1 && n <= planned));
-	const sourceName = (r: StudioRun) => (r.source_mode === 'RECORDED_HARDWARE' ? 'RECORDED HARDWARE' : r.source_mode === 'LIVE_MONITORED_SITE_00' ? `${r.signal_session_id ? 'HISTORY SESSION · SITE_' : 'LIVE-MONITORED SITE_'}${String(r.monitored_site ?? 0).padStart(2, '0')}` : r.origin === 'RECORDED' ? 'RECORDED SYNTHETIC' : 'SYNTHETIC');
+	const sourceName = (r: StudioRun) => (r.source_mode === 'RECORDED_HARDWARE' ? 'RECORDED HARDWARE' : r.source_mode === 'LIVE_MONITORED_SITE_00' ? `${r.signal_session_id ? 'HISTORY SESSION · SITE_' : 'LIVE-MONITORED SITE_'}${String(r.monitored_site ?? 0).padStart(2, '0')}` : r.origin === 'RECORDED' ? 'RECORDED RESEARCH' : 'RESEARCH COHORT');
 	function build() {
 		const out = buildSnapshots(runId, raw);
 		if (out === null) { error = 'The event journal failed integrity validation; replay is not shown as trustworthy.'; status = 'FAILED'; return; }
@@ -74,7 +74,7 @@
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / FEDERATION REPLAY</div>
 <h1 tabindex="-1" use:focusHeading>Federation event-journal replay</h1>
 <p class="tag" data-testid="replay-label">REPLAY — NO LOCAL TRAINING EXECUTING</p>
-<p class="lead">Step through the persisted event journal of one owned, completed run (synthetic, live-monitored site or recorded hardware). The journal is read from sequence 0 and every step is derived by the same validated view model as the live page. Nothing trains, no candidate is created, and pace is presentation only.</p>
+<p class="lead">Step through the persisted event journal of one owned, completed run (research cohort, live-monitored site or recorded hardware). The journal is read from sequence 0 and every step is derived by the same validated view model as the live page. Nothing trains, no candidate is created, and pace is presentation only.</p>
 <label class="pick">Completed run <select bind:value={runId} onchange={load}><option value="">— choose an owned run —</option>{#each runs as r (r.run_id)}<option value={r.run_id}>{r.run_id} · {sourceName(r)} · {r.planned_rounds} rounds · {r.algorithm}</option>{/each}</select></label>
 {#if status === 'COLLECTING'}<p class="dim" role="status">Reading the journal…</p>{/if}
 {#if error}<p role="alert" class="err">{error}</p>{/if}

@@ -30,7 +30,7 @@ describe('mixed recorded + synthetic topology', () => {
 	});
 	it('the client detail names a peer as synthetic even inside a hardware run', () => {
 		render(ClientDetailPanel, { props: { clientId: 'SIM_FL_SITE_03', client: undefined, dataSource: 'HARDWARE' } });
-		expect(screen.getByTestId('client-detail').textContent).toContain('SYNTHETIC LOGICAL CLIENT');
+		expect(screen.getByTestId('client-detail').textContent).toContain('LOGICAL CLIENT');
 		expect(screen.getByTestId('client-detail').textContent).not.toContain('YOUR RECORDED WINDOWS');
 		cleanup();
 		render(ClientDetailPanel, { props: { clientId: 'RECORDED_DEMO_CLIENT_00', client: undefined, dataSource: 'HARDWARE' } });

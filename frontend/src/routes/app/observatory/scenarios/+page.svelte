@@ -44,11 +44,11 @@
 <svelte:head><title>Scenario and fault lab | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / SCENARIO AND FAULT LAB</div>
 <h1 tabindex="-1" use:focusHeading>Scenario and fault lab</h1>
-<p class="lead">Existing deterministic simulated-wearable scenarios, shown in <b>simulated source time</b> (not wall-clock). Fault schedules come from the frozen scenario definitions; each selected window is reconstructed with the canonical operators. This does not show real-world hardware robustness.</p>
+<p class="lead">Existing deterministic software ECG source scenarios, shown in <b>software source time</b> (not wall-clock). Fault schedules come from the frozen scenario definitions; each selected window is reconstructed with the canonical operators. This does not show real-world hardware robustness.</p>
 <label class="pick">Scenario <select bind:value={scenarioId} onchange={loadTimeline}>{#each scenarios as s (s.scenario_id)}<option value={s.scenario_id}>{s.scenario_id} · {s.duration_s} s</option>{/each}</select></label>
 {#if error}<p role="alert" class="err">{error}</p>{/if}
 {#if timeline}
-<section aria-label="Source timeline" data-testid="fault-timeline"><h2>Source timeline · {timeline.duration_s} s of simulated time</h2>
+<section aria-label="Source timeline" data-testid="fault-timeline"><h2>Source timeline · {timeline.duration_s} s of source time</h2>
 	<div class="bar" role="list">{#each timeline.segments as seg (seg.name + seg.start_s)}<div role="listitem" class:fault={!!seg.ecg_fault} class:ctx={seg.context_mode !== 'VALID'} style={`flex:${seg.end_s - seg.start_s}`} title={`${seg.name} ${seg.start_s}–${seg.end_s} s`}><b>{seg.name}</b><small>{seg.start_s}–{seg.end_s} s</small>{#if seg.ecg_fault}<small>⚠ {seg.ecg_fault}</small>{/if}{#if seg.context_mode !== 'VALID'}<small>◇ {seg.context_mode}</small>{/if}</div>{/each}</div>
 	<div class="track" aria-hidden="true"><i style={`left:${(left / timeline.duration_s) * 100}%;width:${((edge - left) / timeline.duration_s) * 100}%`}></i></div>
 	<div class="scrub"><button onclick={() => step(-1)} disabled={windowIndex === 0}>← Previous window</button><label>Window {windowIndex + 1} of {timeline.window_right_edges_s.length} <input type="range" min="0" max={timeline.window_right_edges_s.length - 1} bind:value={windowIndex} onchange={loadWindow} /></label><button onclick={() => step(1)} disabled={windowIndex === timeline.window_right_edges_s.length - 1}>Next window →</button></div>

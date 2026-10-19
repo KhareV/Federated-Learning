@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -13,7 +14,7 @@
 	const signed = (v: number) => `${v >= 0 ? '+' : '−'}${Math.abs(v).toFixed(3)}`;
 	const central = $derived(current?.rows.find((r) => r.model.startsWith('MODEL_V2_FINAL')) ?? null);
 	const v1 = $derived(current?.rows.find((r) => r.model.startsWith('MODEL_V1')) ?? null);
-	const adapted = $derived((current?.rows ?? []).filter((r) => r.model.includes('synthetic cohort')));
+	const adapted = $derived((current?.rows ?? []).filter((r) => r.model.includes('research cohort')));
 	onMount(() => { void store.api.observatoryExternalCheck().then((v) => { data = v; }).catch((c) => { error = c instanceof Error ? c.message : String(c); }); });
 </script>
 <svelte:head><title>External check on unseen real ECG | NHM</title></svelte:head>
@@ -21,8 +22,8 @@
 <h1 tabindex="-1" use:focusHeading>External check on real ECG no model had seen</h1>
 <p class="lead">The frozen models scored on 12-lead clinical ECG from PTB-XL (lead II, one 10-second window per record). PTB-XL was removed from the project's execution scope, so no model was ever trained, selected, calibrated or evaluated on it. This is an extension outside the locked scope: it has no beat annotations, so the target is record-level, and it is not a clinical or diagnostic result.</p>
 {#if error}<p role="alert" class="err">External-check evidence unavailable: {error}</p>{:else if !data}<p class="dim" role="status">Loading frozen evidence…</p>{:else}
-<p class="tag" data-testid="extension-label">{data.label}</p>
-<p class="warn" data-testid="claim-boundary">{data.claim_boundary}</p>
+<p class="tag" data-testid="extension-label">{displayCopy(data.label)}</p>
+<p class="warn" data-testid="claim-boundary">{displayCopy(data.claim_boundary)}</p>
 <p class="dim">{data.records_scored.toLocaleString()} records scored (paced records excluded: {data.exclusions.paced}; no record lost to a missing lead, wrong length or flat signal: {data.exclusions.no_lead_II + data.exclusions.bad_window} excluded). Target <code>{data.target}</code> · fixed {data.threshold} rule · calibration {data.calibration}.</p>
 <section class="controls" aria-label="Evaluation set"><fieldset><legend>Evaluation set</legend>{#each data.sets as s, i (s.name)}<button class:on={setIndex === i} aria-pressed={setIndex === i} onclick={() => (setIndex = i)} data-testid={`set-${i}`}>{s.name}</button>{/each}</fieldset></section>
 {#if current}
@@ -35,7 +36,7 @@
 </section>
 <section aria-label="What this shows" data-testid="readings"><h2>What this shows</h2><ul>
 	{#if central && v1 && v1.paired_vs_central_V2}<li><b>The pretrained V2 ranks premature-beat records well above chance on data it never saw</b> (AUROC {f(central.AUROC)}, lift {f(central.lift, 1)}), and clearly better than V1 (V1's paired AUROC change against it is {signed(v1.paired_vs_central_V2.AUROC.delta)}, interval {ci(v1.paired_vs_central_V2.AUROC.ci95)}, which excludes zero).</li>{/if}
-	{#if adapted.length}<li><b>Adapting a model to a synthetic cohort lowers its performance on this unseen real ECG</b>: {#each adapted as a, i (a.model)}{i ? '; ' : ''}{a.model.includes('original') ? 'original' : 'realistic'} cohort AUROC {signed(a.paired_vs_central_V2?.AUROC.delta ?? 0)}, AUPRC {signed(a.paired_vs_central_V2?.AUPRC.delta ?? 0)} against the central V2{/each}. A synthetic-cohort candidate is not a better ECG model than the released one.</li>{/if}
+	{#if adapted.length}<li><b>Adapting a model to a research cohort lowers its performance on this unseen real ECG</b>: {#each adapted as a, i (a.model)}{i ? '; ' : ''}{a.model.includes('original') ? 'original' : 'realistic'} cohort AUROC {signed(a.paired_vs_central_V2?.AUROC.delta ?? 0)}, AUPRC {signed(a.paired_vs_central_V2?.AUPRC.delta ?? 0)} against the central V2{/each}. A research-cohort candidate is not a better ECG model than the released one.</li>{/if}
 	<li><b>Federated training on real patients matches centralized training</b> in AUROC; see the paired change of the 50-round federated rows.</li></ul></section>
 <section aria-label="Label rules" data-testid="label-rules"><h2>Label rules (primary set)</h2>
 	<p class="dim">The two label sources agree on only part of the premature-beat records ({data.label_agreement.both.toLocaleString()} both, {data.label_agreement.statement_only.toLocaleString()} cardiologist statement only, {data.label_agreement.extra_beats_only.toLocaleString()} extra-beat field only, over all records), so the same models are scored under three predeclared rules. Point estimates.</p>

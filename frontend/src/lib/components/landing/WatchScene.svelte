@@ -25,7 +25,7 @@
 
 <div class="watch-scene">
 	{#if reducedMotion}
-		<img class="watch-poster" src="/models/watch-poster.jpg" alt="Concept render of the NHM virtual wearable (static preview)" />
+		<img class="watch-poster" src="/models/watch-poster.jpg" alt="Concept render of the NHM software ECG source (static preview)" />
 	{:else}
 	<Canvas dpr={[1, 2]}>
 		<!-- Camera positioned so the full watch unibody and straps fit gracefully -->

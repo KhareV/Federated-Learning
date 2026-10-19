@@ -12,22 +12,22 @@
 <svelte:head><title>Federation clients | NHM</title></svelte:head>
 <div class="head"><div class="eyebrow">NHM / FEDERATION / CLIENTS</div><h1>Logical local clients</h1></div>
 <FederationBanner />
-<p class="banner" role="note" data-testid="synthetic-banner">SYNTHETIC RESEARCH PARTITIONS — NOT HOSPITALS OR INSTITUTIONS.</p>
-<p class="dim" data-testid="clients-scope-note">This page lists the <b>synthetic-cohort</b> clients. A recorded-hardware run has its own eight logical clients (<code>RECORDED_DEMO_CLIENT_00…07</code>) built from your recorded windows; open one from <a href="/app/federation">Federation → Your federation runs</a>.</p>
+<p class="banner" role="note" data-testid="synthetic-banner">LOGICAL RESEARCH PARTITIONS — NOT HOSPITALS OR INSTITUTIONS.</p>
+<p class="dim" data-testid="clients-scope-note">This page lists the <b>research-cohort</b> clients. A recorded-hardware run has its own eight logical clients (<code>RECORDED_DEMO_CLIENT_00…07</code>) built from your recorded windows; open one from <a href="/app/federation">Federation → Your federation runs</a>.</p>
 <Panel eyebrow="LOCALITY" title="What stays local">
 	<p class="dim">Each client keeps its local training examples inside its logical client buffer. The federation coordinator receives model updates and metadata rather than those local training examples.</p>
 	<p class="dim">All eight logical clients currently execute on one demonstration machine.</p>
 </Panel>
 <div class="gap"></div>
 {#if fed.clientsPhase === 'PREPARING' || fed.clientsPhase === 'IDLE'}
-	<p class="dim" role="status" data-testid="clients-preparing">PREPARING 8 SYNTHETIC LOCAL CLIENT DATASETS. This can take several seconds on first use.</p>
+	<p class="dim" role="status" data-testid="clients-preparing">PREPARING 8 LOCAL CLIENT DATASETS. This can take several seconds on first use.</p>
 {:else if fed.clientsPhase === 'ERROR'}<p class="warn" role="alert">Clients could not be loaded: {fed.error}</p>
 {:else}
 	<ul class="cards" data-testid="client-cards">
 		{#each fed.clients as c}
 			<li data-client={c.client_id} data-state={c.client_state}>
-				<div class="top"><b>{c.client_id}</b><span class="chip">SYNTHETIC LOGICAL CLIENT</span></div>
-				<p class="big"><span class="n">{c.local_example_count}</span> local synthetic examples</p>
+				<div class="top"><b>{c.client_id}</b><span class="chip">LOGICAL CLIENT</span></div>
+				<p class="big"><span class="n">{c.local_example_count}</span> local research examples</p>
 				<p class="st"><span aria-hidden="true">{c.eligible ? '●' : '✕'}</span> {c.eligible ? 'Eligible to train' : 'Not eligible'} · {CLIENT_LABEL[c.client_state]}</p>
 				<p class="dim">Keeps its examples in its own local buffer. Only a model update leaves the client.</p>
 				<TechnicalEvidence label="TECHNICAL EVIDENCE" testid={`client-evidence-${c.client_id}`}>

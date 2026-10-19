@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { downloadExport } from '$lib/product/observatory/export';
@@ -13,7 +14,7 @@
 	let metric = $state<'validation_AUPRC' | 'validation_AUROC' | 'training_weighted_mean_loss'>('validation_AUPRC');
 	let exportDigest = $state<string | null>(null);
 	const conditions = ['iid', 'label', 'feature', 'quantity', 'combined'];
-	const SYN_LABEL = 'SYNTHETIC ENGINEERING-EVENT CLASSIFICATION — NOT AAMI-SVF OR CLINICAL VALIDATION';
+	const SYN_LABEL = 'RESEARCH-EVENT CLASSIFICATION — NOT AAMI-SVF OR CLINICAL VALIDATION';
 	const log = $derived(bundle?.round_logs[`${algorithm}|${condition}`] ?? null);
 	const rows = $derived((bundle?.models ?? []).filter((m) => m.dataset === dataset && m.generation === 'V2' && (m.algorithm === algorithm) && (condition === 'ALL' || m.condition === condition)));
 	const v1v2 = $derived((bundle?.models ?? []).filter((m) => m.dataset === dataset && m.condition === condition));
@@ -27,7 +28,7 @@
 	onMount(() => { void store.api.observatoryShowcase().then((v) => { bundle = v; }).catch((c) => { error = c instanceof Error ? c.message : String(c); }); });
 	async function exportView() {
 		if (!bundle) return;
-		exportDigest = await downloadExport('scientific-outcomes', `${dataset}-${algorithm}-${condition}`, 'Frozen scientific evidence; descriptive only.', 'Displayed frozen values, comparability audit and (separately labelled) synthetic evaluation. No inference or statistics are computed in the browser.', { dataset, algorithm, condition, models: rows, round_log: log, comparability: bundle.comparability });
+		exportDigest = await downloadExport('scientific-outcomes', `${dataset}-${algorithm}-${condition}`, 'Frozen scientific evidence; descriptive only.', 'Displayed frozen values, comparability audit and (separately labelled) research evaluation. No inference or statistics are computed in the browser.', { dataset, algorithm, condition, models: rows, round_log: log, comparability: bundle.comparability });
 	}
 </script>
 <svelte:head><title>Scientific outcomes | NHM</title></svelte:head>
@@ -60,20 +61,20 @@
 	<div class="scroll"><table data-testid="comparability-matrix" aria-label="Centralized versus federated comparability matrix"><thead><tr><th scope="col">Dataset</th><th scope="col">Centralized AUPRC</th><th scope="col">Federated AUPRC</th><th scope="col">Difference</th><th scope="col">Centralized AUROC</th><th scope="col">Federated AUROC</th><th scope="col">Difference</th></tr></thead><tbody>
 	{#each bundle.comparability.rows as r (r.dataset)}<tr><th scope="row">{r.dataset}</th><td>{fmt(r.centralized_V2_AUPRC, 6)}</td><td>{fmt(r.federated_V2_FedAvg_IID_AUPRC, 6)}</td><td>{fmt(r.AUPRC_difference_federated_minus_centralized, 6)}</td><td>{fmt(r.centralized_V2_AUROC, 6)}</td><td>{fmt(r.federated_V2_FedAvg_IID_AUROC, 6)}</td><td>{fmt(r.AUROC_difference_federated_minus_centralized, 6)}</td></tr>{/each}</tbody></table></div>
 	<h3>Comparability audit (read-only)</h3>
-	<ul>{#each bundle.comparability.checks as c}<li><b>{c.item}</b> — <span class={`st ${c.status.toLowerCase()}`}>{c.status}</span>: {c.detail}</li>{/each}</ul>
+	<ul>{#each bundle.comparability.checks as c}<li><b>{c.item}</b> — <span class={`st ${c.status.toLowerCase()}`}>{c.status}</span>: {displayCopy(c.detail)}</li>{/each}</ul>
 	<h3>Four defensible readings</h3>
-	<ol data-testid="interpretations">{#each bundle.comparability.interpretations as i (i.id)}<li><b>{i.reading}.</b> {i.support} <em>Limit:</em> {i.limit}</li>{/each}</ol>
+	<ol data-testid="interpretations">{#each bundle.comparability.interpretations as i (i.id)}<li><b>{displayCopy(i.reading)}.</b> {displayCopy(i.support)} <em>Limit:</em> {displayCopy(i.limit)}</li>{/each}</ol>
 </section>
 {#if syn}
-<section aria-label="Synthetic sandbox evaluation" data-testid="synthetic-eval"><h2>Live sandbox candidate · independent synthetic holdout</h2>
-	<p class="syn" data-testid="synthetic-label">{syn.boundary_label || SYN_LABEL}</p>
+<section aria-label="Research sandbox evaluation" data-testid="synthetic-eval"><h2>Live research candidate · independent research holdout</h2>
+	<p class="syn" data-testid="synthetic-label">{displayCopy(syn.boundary_label || SYN_LABEL)}</p>
 	<p class="dim">Frozen protocol <code>{syn.protocol_sha256.slice(0, 16)}…</code> (method-freeze commit <code>{syn.method_freeze_commit.slice(0, 10)}</code>) · {syn.holdout_windows} holdout windows from 8 unseen participants · raw sigmoid 0.5, no CAL_V2, no tuning · candidate <code>{syn.candidate_digest.slice(0, 16)}…</code>.</p>
-	<div class="scroll"><table aria-label="Synthetic federated states: metrics and confusion counts"><thead><tr><th scope="col">State</th>{#each synMetrics as m}<th scope="col">{m}</th>{/each}<th scope="col">TP/FP/TN/FN</th></tr></thead><tbody>
+	<div class="scroll"><table aria-label="Research federated states: metrics and confusion counts"><thead><tr><th scope="col">State</th>{#each synMetrics as m}<th scope="col">{m}</th>{/each}<th scope="col">TP/FP/TN/FN</th></tr></thead><tbody>
 	{#each Object.entries(syn.states) as [k, s] (k)}<tr><th scope="row">{k.replace('_', ' ')}</th>{#each synMetrics as m}<td>{fmt(s.pooled[m])}</td>{/each}<td>{s.pooled.TP}/{s.pooled.FP}/{s.pooled.TN}/{s.pooled.FN}</td></tr>{/each}</tbody></table></div>
 	<p class="warn">Reported as measured, including operating-point failures. Metric undefined ⇒ shown as UNDEFINED, never as zero. These are not AAMI-SVF, clinical or deployment claims.</p>
 </section>
 {/if}
-<section aria-label="Limitations"><h2>Preserved limitations</h2><ul>{#each bundle.limitations as l}<li>{l}</li>{/each}</ul></section>
+<section aria-label="Limitations"><h2>Preserved limitations</h2><ul>{#each bundle.limitations as l}<li>{displayCopy(l)}</li>{/each}</ul></section>
 <p class="exp"><button onclick={() => void exportView()}>Export this view as evidence JSON</button>{#if exportDigest} <small>Exported · SHA256 <code>{exportDigest.slice(0, 16)}…</code></small>{/if}</p>
 <p class="dim">Publication figures and tables (SVG, PNG, CSV, JSON provenance and hashes) are produced by the export command listed in the demo runbook. <a href="/app/observatory/evidence">Evidence explorer</a> · <a href="/app/observatory/storyboard">FL storyboard</a> · <a href="/app/observatory/external-check">External check on real PTB-XL ECG</a> · <a href="/app/observatory">Observatory</a></p>
 {/if}

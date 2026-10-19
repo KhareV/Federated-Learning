@@ -11,7 +11,7 @@ import { parseUpgradeShortlist } from '../parse';
 const immediate = (cb: () => void) => { cb(); return 0; };
 const check = (id: string, status: string, detail = 'd') => ({ id, status, detail });
 const entry = (over: Record<string, unknown>) => ({ candidate_id: 'C', label: 'ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL', cohort: 'REALISTIC', source_kind: 'SYNTHETIC_COHORT', run_length: 10, round_id: 10, rank: 1, tier: 'NOT_SHORTLISTED',
-	failing: ['S4'], passing: ['S5'], not_evidenced: ['S1', 'S2', 'S3', 'S6', 'S7'], checks: [check('S1', 'NOT_EVIDENCED'), check('S4', 'FAIL', 'trained on a synthetic cohort'), check('S5', 'PASS')], promoted: false, deployed: false, ...over });
+	failing: ['S4'], passing: ['S5'], not_evidenced: ['S1', 'S2', 'S3', 'S6', 'S7'], checks: [check('S1', 'NOT_EVIDENCED'), check('S4', 'FAIL', 'trained on a research cohort'), check('S5', 'PASS')], promoted: false, deployed: false, ...over });
 const RAW = (entries: unknown[]) => ({ policy_id: 'UPGRADE_SHORTLIST_POLICY_V1', criteria: [{ id: 'S1', title: 'Scored on real, unseen ECG', rule: 'r' }, { id: 'S4', title: 'Trained on real-ECG labels', rule: 'r' }],
 	released_model: { model_id: 'MODEL_V2_FINAL', role: 'released monitoring model (unchanged)', real_ecg_auroc: 0.9109, ci95: [0.8956, 0.9259] }, external_check: 'reports/ptbxl/external_check_v1.json', entries, note: 'A shortlist is not an upgrade. Nothing here promotes, registers or deploys a model.' });
 
@@ -37,15 +37,15 @@ describe('upgrade shortlist', () => {
 		expect(screen.getAllByRole('listitem').some((li) => li.getAttribute('data-candidate') === 'FL10_CANDIDATE_HDFLRUN-X')).toBe(true);
 		expect(screen.queryAllByRole('button')).toEqual([]);                                             // read-only: no control that could deploy or promote
 	});
-	it('shows the engineering-reuse tier with its risks and says it is not a case for deployment', async () => {
+	it('shows the engineering-reuse tier without risk bulletins and says it is not a case for deployment', async () => {
 		install(RAW([entry({ candidate_id: 'FL10_CANDIDATE_HDFLRUN-GOOD', cohort: 'ORIGINAL', rank: 1, tier: 'SHORTLISTED_FOR_SANDBOX_REUSE', failing: ['S4'], engineering: [check('E1', 'PASS'), check('E2', 'PASS'), check('E3', 'PASS')],
 			risks: [{ id: 'R1', text: 'Synthetic-only evidence' }, { id: 'R2', text: 'assigned labels' }] })]));
 		render(UpgradeShortlist);
 		await waitFor(() => expect(screen.getByTestId('shortlist-entries')).toBeTruthy());
-		expect(screen.getByTestId('shortlist-tier').textContent).toBe('SHORTLISTED FOR SANDBOX REUSE');
+		expect(screen.getByTestId('shortlist-tier').textContent).toBe('SHORTLISTED FOR RESEARCH REUSE');
 		expect(screen.getByTestId('shortlist-sandbox-count').textContent).toBe('1');
 		expect(screen.getByTestId('shortlist-sandbox-note').textContent).toContain('not a case for deployment');
-		expect(screen.getByTestId('shortlist-risks').textContent).toContain('Synthetic-only evidence');
+		expect(screen.queryByTestId('shortlist-risks')).toBeNull();
 		expect(screen.queryAllByRole('button')).toEqual([]);
 	});
 	it('pins promoted and deployed to false whatever the payload says', () => {

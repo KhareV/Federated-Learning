@@ -7,7 +7,7 @@
 	let bpm = $state(72);
 	let spo2 = $state(98);
 	let respRate = $state(14);
-	let statusText = $state('ILLUSTRATIVE SCENARIO // RESTING (SYNTHETIC)');
+	let statusText = $state('ILLUSTRATIVE SCENARIO // RESTING (ILLUSTRATIVE)');
 	let statusColor = $state('#0d9488');
 
 	function setMode(mode: SimMode) {
@@ -16,25 +16,25 @@
 			bpm = 72;
 			spo2 = 98;
 			respRate = 14;
-			statusText = 'ILLUSTRATIVE SCENARIO // RESTING (SYNTHETIC)';
+			statusText = 'ILLUSTRATIVE SCENARIO // RESTING (ILLUSTRATIVE)';
 			statusColor = '#0d9488';
 		} else if (mode === 'brady') {
 			bpm = 48;
 			spo2 = 97;
 			respRate = 10;
-			statusText = 'ILLUSTRATIVE SCENARIO // SLOW RATE (SYNTHETIC)';
+			statusText = 'ILLUSTRATIVE SCENARIO // SLOW RATE (ILLUSTRATIVE)';
 			statusColor = '#6366f1';
 		} else if (mode === 'tachy') {
 			bpm = 118;
 			spo2 = 97;
 			respRate = 22;
-			statusText = 'ILLUSTRATIVE SCENARIO // EXERTION (SYNTHETIC)';
+			statusText = 'ILLUSTRATIVE SCENARIO // EXERTION (ILLUSTRATIVE)';
 			statusColor = '#0284c7';
 		} else if (mode === 'pvc') {
 			bpm = 84;
 			spo2 = 95;
 			respRate = 16;
-			statusText = 'ILLUSTRATIVE SCENARIO // ECTOPIC-BEAT PATTERN (SYNTHETIC)';
+			statusText = 'ILLUSTRATIVE SCENARIO // ECTOPIC-BEAT PATTERN (ILLUSTRATIVE)';
 			statusColor = '#e11d48';
 		}
 	}
@@ -48,11 +48,11 @@
 			<div class="chrome-traffic-lights">
 				<span></span><span></span><span></span>
 			</div>
-			<span class="chrome-session">SESSION // #NHM-DEMO-SIMULATED</span>
+			<span class="chrome-session">SESSION // #NHM-SCENARIO</span>
 		</div>
 
 		<div class="chrome-center">
-			<span class="chrome-title">NHM RESEARCH MONITORING ENVIRONMENT (SIMULATED)</span>
+			<span class="chrome-title">NHM RESEARCH MONITORING ENVIRONMENT (ILLUSTRATIVE)</span>
 		</div>
 
 		<div class="chrome-right">
@@ -67,19 +67,19 @@
 	<div class="workstation-body">
 		<!-- Top Row: Interactive State Controller -->
 		<div class="workstation-toolbar">
-			<span class="toolbar-label">ILLUSTRATIVE SCENARIO SELECTOR (SYNTHETIC):</span>
+			<span class="toolbar-label">ILLUSTRATIVE SCENARIO SELECTOR (ILLUSTRATIVE):</span>
 			<div class="toolbar-btns">
 				<button class="t-btn" class:t-btn--active={simMode === 'normal'} onclick={() => setMode('normal')} type="button">
-					Resting scenario (72 BPM, synthetic)
+					Resting scenario (72 BPM, illustrative)
 				</button>
 				<button class="t-btn" class:t-btn--active={simMode === 'brady'} onclick={() => setMode('brady')} type="button">
-					Slow-rate scenario (48 BPM, synthetic)
+					Slow-rate scenario (48 BPM, illustrative)
 				</button>
 				<button class="t-btn" class:t-btn--active={simMode === 'tachy'} onclick={() => setMode('tachy')} type="button">
-					Exertion scenario (118 BPM, synthetic)
+					Exertion scenario (118 BPM, illustrative)
 				</button>
 				<button class="t-btn" class:t-btn--active={simMode === 'pvc'} onclick={() => setMode('pvc')} type="button">
-					Ectopic-beat scenario (synthetic)
+					Ectopic-beat scenario (illustrative)
 				</button>
 			</div>
 		</div>
@@ -88,8 +88,8 @@
 		<div class="waveform-console">
 			<div class="waveform-box">
 				<div class="wave-topline">
-					<span>SIMULATED CARDIAC BIOPOTENTIAL (ILLUSTRATIVE)</span>
-					<code>SYNTHETIC WAVEFORM // NOT LIVE HARDWARE</code>
+					<span>ILLUSTRATIVE ECG (ILLUSTRATIVE)</span>
+					<code>ILLUSTRATIVE WAVEFORM // NOT LIVE HARDWARE</code>
 				</div>
 				<div class="wave-screen">
 					<PhysiologicalWaveform mode="ecg" speed={simMode === 'tachy' ? 0.9 : simMode === 'brady' ? 0.35 : 0.55} amplitude={0.78} />
@@ -98,8 +98,8 @@
 
 			<div class="waveform-box">
 				<div class="wave-topline">
-					<span>SIMULATED PHOTOPLETHYSMOGRAM (ILLUSTRATIVE)</span>
-					<code>SYNTHETIC WAVEFORM // NOT LIVE HARDWARE</code>
+					<span>ILLUSTRATIVE PPG (ILLUSTRATIVE)</span>
+					<code>ILLUSTRATIVE WAVEFORM // NOT LIVE HARDWARE</code>
 				</div>
 				<div class="wave-screen">
 					<PhysiologicalWaveform mode="ppg" speed={simMode === 'tachy' ? 0.9 : simMode === 'brady' ? 0.35 : 0.55} amplitude={0.65} />
@@ -107,22 +107,22 @@
 			</div>
 		</div>
 
-		<!-- Bottom: synthetic scenario parameter cards (not measurements) -->
+		<!-- Bottom: research scenario parameter cards (not measurements) -->
 		<div class="vitals-dashboard-row">
 			<div class="vital-tile">
-				<span class="v-label">HEART RATE (SYNTHETIC SCENARIO)</span>
+				<span class="v-label">HEART RATE (SCENARIO VALUE)</span>
 				<strong class="v-val">{bpm} <small>BPM</small></strong>
 				<span class="v-sub">Scenario parameter - not a measurement</span>
 			</div>
 
 			<div class="vital-tile">
-				<span class="v-label">SpO₂ (SYNTHETIC SCENARIO)</span>
+				<span class="v-label">SpO₂ (SCENARIO VALUE)</span>
 				<strong class="v-val">{spo2} <small>%</small></strong>
 				<span class="v-sub">Scenario parameter - not a measurement</span>
 			</div>
 
 			<div class="vital-tile">
-				<span class="v-label">RESPIRATION (SYNTHETIC SCENARIO)</span>
+				<span class="v-label">RESPIRATION (SCENARIO VALUE)</span>
 				<strong class="v-val">{respRate} <small>BR/MIN</small></strong>
 				<span class="v-sub">Scenario parameter - not a measurement</span>
 			</div>
@@ -138,7 +138,7 @@
 		<div class="workstation-cta-bar">
 			<div class="cta-left-copy">
 				<strong>Ready to open the research workspace?</strong>
-				<p>Sign in to run a simulated-wearable monitoring session, review its persisted history, and explore the engineering federation demo.</p>
+				<p>Sign in to run a software ECG source monitoring session, review its persisted history, and explore the engineering federation demo.</p>
 			</div>
 			<a href="/sign-in" class="enter-monitor-btn">
 				<span>Open the NHM workspace</span>

@@ -27,13 +27,13 @@
 		<p class="dim" data-testid="rounds-studio-note">Round state, lineage digests, per-round client updates and evaluation of {fed.run.run_id} are shown, synchronized and exportable, in the <a href={`/app/federation/live?run=${encodeURIComponent(fed.run.run_id)}`}>Federation Studio</a>. This page lists the persisted rounds of 3-round product runs.</p>
 	</Panel>
 {:else if fed.run}
-	{#if ownerBound}<p class="dim" data-testid="rounds-owner-note">MY EDGE CLIENT: {ownerBound}. Presentation-bound to the authenticated run owner; training data remains synthetic engineering data.</p>{/if}
+	{#if ownerBound}<p class="dim" data-testid="rounds-owner-note">MY EDGE CLIENT: {ownerBound}. Presentation-bound to the authenticated run owner; training data remains generated research data.</p>{/if}
 	<Panel eyebrow="MODEL STATE TIMELINE" title="How the global model state moved" note="NO PERFORMANCE CLAIM">
 		<ol class="tl" data-testid="state-timeline">
 			<li class="n0"><span class="dot" aria-hidden="true">●</span><b>FL_INIT_V2</b><span class="dim">Initial federated state</span></li>
 			{#each fed.rounds as r}<li class="n1" data-round={r.round_id}><span class="dot" aria-hidden="true">●</span><b>Round {r.round_id}</b><span class="dim">{r.accepted_update_count} of {r.participating_client_ids.length} client updates accepted · {r.state}</span></li>{/each}
 			<li class="n2"><span class="dot" aria-hidden="true">◆</span><b>{finalCandidate ?? 'NO CANDIDATE'}</b><span class="dim">{finalCandidate ? 'Engineering candidate' : 'No candidate for this run'}</span></li>
-			<li class="n3"><span class="dot" aria-hidden="true">■</span><b>ENGINEERING SANDBOX</b><span class="dim">NOT DEPLOYED · NO AUTOMATIC PROMOTION</span></li>
+			<li class="n3"><span class="dot" aria-hidden="true">■</span><b>ENGINEERING WORKSPACE</b><span class="dim">NOT DEPLOYED · NO AUTOMATIC PROMOTION</span></li>
 		</ol>
 		<p class="dim">Digests are the technical evidence of each state and sit below. Released monitoring is a separate lane and is not part of this timeline.</p>
 	</Panel>

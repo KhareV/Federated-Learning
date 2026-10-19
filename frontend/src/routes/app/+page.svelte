@@ -19,7 +19,7 @@
 
 <svelte:head><title>Overview | NHM</title></svelte:head>
 
-<div class="head"><div class="eyebrow">NHM / OVERVIEW</div><h1>NHM research system</h1><p>A simulated-wearable monitoring system, an optional MongoDB hardware-telemetry source, and a separate federated-learning development lane. Research prototype: not diagnostic, not clinical. Status and session values are read from the local product backend; the system map is explanatory.</p></div>
+<div class="head"><div class="eyebrow">NHM / OVERVIEW</div><h1>NHM research system</h1><p>A software ECG source monitoring system, an optional MongoDB hardware-telemetry source, and a separate federated-learning development lane. Research prototype: not diagnostic, not clinical. Status and session values are read from the local product backend; the system map is explanatory.</p></div>
 
 <section class="cards" aria-label="System status" data-testid="system-cards">
 	<article class="sc released"><p class="k">MONITORING</p><h2>{system?.model_id ?? 'MODEL_V2_FINAL'}</h2><p class="st"><span aria-hidden="true">●</span> {system ? 'RESEARCH DEFAULT' : 'CHECKING'}</p><p class="d">Server-side inference in {system?.software_system ?? 'SOFTWARE_SYSTEM_V2'} with {system?.calibration_id ?? 'CAL_V2'}. This is what the Monitor page uses.</p></article>
@@ -29,24 +29,24 @@
 
 <Panel eyebrow="SYSTEM MAP" title="Two separate lanes" note="NO AUTOMATIC PROMOTION">
 	<div class="lane" data-testid="lane-monitoring"><p class="ln released">LANE A · RELEASED MONITORING</p>
-		<FlowDiagram tone="released" label="Released monitoring lane" steps={[{ label: 'VIRTUAL WEARABLE', sub: 'simulated source' }, { label: 'PRODUCT API', sub: 'authenticated backend' }, { label: `${system?.model_id ?? 'MODEL_V2_FINAL'} + ${system?.calibration_id ?? 'CAL_V2'}`, sub: 'server-side inference' }, { label: 'RESEARCH MONITORING STATE', sub: 'not a diagnosis' }, { label: 'PERSISTED HISTORY', sub: 'local database' }]} /></div>
+		<FlowDiagram tone="released" label="Released monitoring lane" steps={[{ label: 'SOFTWARE ECG SOURCE', sub: 'software source' }, { label: 'PRODUCT API', sub: 'authenticated backend' }, { label: `${system?.model_id ?? 'MODEL_V2_FINAL'} + ${system?.calibration_id ?? 'CAL_V2'}`, sub: 'server-side inference' }, { label: 'RESEARCH MONITORING STATE', sub: 'not a diagnosis' }, { label: 'PERSISTED HISTORY', sub: 'local database' }]} /></div>
 	<div class="wall" role="separator" aria-label="No automatic promotion between the lanes"><span>NO AUTOMATIC PROMOTION</span><small>candidate → monitoring: not enabled</small></div>
 	<div class="lane" data-testid="lane-federated"><p class="ln fed">LANE B · FEDERATED DEVELOPMENT</p>
-		<FlowDiagram tone="federated" label="Federated development lane" steps={[{ label: 'FL_INIT_V2', sub: 'initial federated state' }, { label: '8 LOGICAL CLIENTS', sub: 'synthetic cohort or your recorded windows · one machine' }, { label: 'FEDERATED TRAINING', sub: 'local training + aggregation' }, { label: 'CANDIDATE', sub: 'engineering artifact', tone: 'candidate' }, { label: 'ENGINEERING SANDBOX', sub: 'NOT DEPLOYED', tone: 'candidate' }]} /></div>
+		<FlowDiagram tone="federated" label="Federated development lane" steps={[{ label: 'FL_INIT_V2', sub: 'initial federated state' }, { label: '8 LOGICAL CLIENTS', sub: 'research cohort or your recorded windows · one machine' }, { label: 'FEDERATED TRAINING', sub: 'local training + aggregation' }, { label: 'CANDIDATE', sub: 'engineering artifact', tone: 'candidate' }, { label: 'ENGINEERING WORKSPACE', sub: 'NOT DEPLOYED', tone: 'candidate' }]} /></div>
 </Panel>
 <div class="gap"></div>
 <Panel eyebrow="START HERE" title="What do you want to demonstrate?">
 	<div class="actions" data-testid="evaluator-actions">
 		<a class="act demo" href="/app/demo" data-testid="start-demo-path"><b>GUIDED DEMONSTRATION PATH</b><span>One story from monitoring to bounded evidence: what to open, what to say, how each step's evidence is produced, and what to do if it fails.</span><i>Open the path →</i></a>
-		<a class="act released" href="/app/monitoring"><b>MONITOR A SIMULATED WEARABLE</b><span>Attach a virtual wearable, run a session, watch MODEL_V2_FINAL monitoring.</span><i>Open Monitor →</i></a>
-		<a class="act fed" href="/app/federation"><b>RUN FEDERATED TRAINING</b><span>Watch 8 logical clients (synthetic cohort or your recorded windows) train locally and produce an engineering result.</span><i>Open Federation Studio →</i></a>
+		<a class="act released" href="/app/monitoring"><b>MONITOR A SOFTWARE ECG SOURCE</b><span>Attach a software ECG source, run a session, watch MODEL_V2_FINAL monitoring.</span><i>Open Monitor →</i></a>
+		<a class="act fed" href="/app/federation"><b>RUN FEDERATED TRAINING</b><span>Watch 8 logical clients (research cohort or your recorded windows) train locally and produce an engineering result.</span><i>Open Federation Studio →</i></a>
 		<a class="act hw" href="/app/monitoring" data-testid="start-hardware"><b>RECORD LIVE HARDWARE TELEMETRY</b><span>In Monitor choose “Live hardware (MongoDB)”, record a session, then train on your recorded windows in Federation. Telemetry only; not validated model input.</span><i>Open Monitor →</i></a>
 		<div class="act ev"><b>REVIEW RESEARCH EVIDENCE</b><span>How the released model and the scientific FL experiments were evaluated.</span><span class="links"><a href="/app/research/ml">ML evidence →</a><a href="/app/research/fl">FL evidence →</a></span></div>
 	</div>
 </Panel>
 <div class="gap"></div>
 <div class="grid">
-	<Panel eyebrow="DEVICE" title="Virtual wearable" note="SIMULATED">
+	<Panel eyebrow="DEVICE" title="Software ECG source" note="SOFTWARE SOURCE">
 		{#if store.devices.length === 0}<p class="dim">No device attached yet.</p>{:else}
 			<p class="big">{connected.length} connected / {store.devices.length} attached</p>
 			<ul>{#each store.devices as d}<li><code>{d.device_id}</code> <span class="badge">{d.connection_state}</span></li>{/each}</ul>

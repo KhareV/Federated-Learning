@@ -13,8 +13,8 @@ import { run } from './fixtures';
 afterEach(() => cleanup());
 const INITS = [{ id: 'FL_INIT_V2' as const, label: 'Untrained V2-architecture model (FL_INIT_V2)', default: false }, { id: 'MODEL_V2_FINAL' as const, label: 'Pretrained MODEL_V2_FINAL', default: true }];
 const COHORTS = [
-	{ id: 'ORIGINAL' as const, label: 'Original synthetic cohort (frozen)', description: 'The frozen NHM_FL10_001 cohort: scheduled synthetic events added to a regular rhythm.', client_ids: ['SIM_FL_SITE_00'], evaluation_cohort_id: 'WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1', cohort_use: 'REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST', claim_boundary: 'c', default: true },
-	{ id: 'REALISTIC' as const, label: 'Realistic synthetic cohort', description: 'Variable rhythm, premature ectopic beats with pauses, motion artifacts and annotation-noisy labels.', client_ids: ['SIM_FL_SITE_00'], evaluation_cohort_id: 'WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2', cohort_use: 'REALISTIC SYNTHETIC EVALUATION COHORT — DIAGNOSTIC, ANNOTATION-NOISY, NOT CLINICAL', claim_boundary: 'c', default: false }];
+	{ id: 'ORIGINAL' as const, label: 'Original research cohort (frozen)', description: 'The frozen NHM_FL10_001 cohort: scheduled synthetic events added to a regular rhythm.', client_ids: ['SIM_FL_SITE_00'], evaluation_cohort_id: 'WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1', cohort_use: 'REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST', claim_boundary: 'c', default: true },
+	{ id: 'REALISTIC' as const, label: 'Realistic research cohort', description: 'Variable rhythm, premature ectopic beats with pauses, motion artifacts and annotation-noisy labels.', client_ids: ['SIM_FL_SITE_00'], evaluation_cohort_id: 'WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2', cohort_use: 'REALISTIC SYNTHETIC EVALUATION COHORT — DIAGNOSTIC, ANNOTATION-NOISY, NOT CLINICAL', claim_boundary: 'c', default: false }];
 const CAPS: StudioCapabilities = { studio_id: 'S', run_lengths: [3, 10], default_run_length: 3,
 	ten_round: { available: true, initialisations: INITS, rounds_by_initialisation: { FL_INIT_V2: [10], MODEL_V2_FINAL: [3, 10] }, default_initialisation: 'MODEL_V2_FINAL', source_modes: ['CANONICAL_SYNTHETIC', 'LIVE_MONITORED_SITE_00'],
 		algorithms: ['FEDAVG'], aggregation_modes: ['PLAIN'], unsupported: {}, expected_updates: 80, cohorts: COHORTS },
@@ -43,7 +43,7 @@ describe('cohort selector', () => {
 		expect(screen.getByTestId('cohort-realistic').getAttribute('aria-checked')).toBe('true');
 		expect(screen.getByTestId('cohort-note').textContent).toContain('premature ectopic beats');
 		expect(screen.getByTestId('cfg10-cohort').textContent).toBe('REALISTIC');
-		expect(screen.getByTestId('cfg10-source-note').textContent).toContain('Realistic synthetic cohort');       // the source note no longer calls the clients frozen
+		expect(screen.getByTestId('cfg10-source-note').textContent).toContain('Realistic research cohort');       // the source note no longer calls the clients frozen
 		expect(screen.getByTestId('cfg10-source-note').textContent).not.toContain('frozen');
 		await fireEvent.click(screen.getByTestId('cfg10-submit'));
 		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 3, source_mode: 'CANONICAL_SYNTHETIC', initialisation: 'MODEL_V2_FINAL', cohort: 'REALISTIC' });
@@ -85,7 +85,7 @@ describe('parsing and run context', () => {
 		expect(parseCapabilities({ ...raw, ten_round: { ...raw.ten_round, cohorts: undefined } }).ten_round.cohorts).toBeUndefined();
 	});
 	it('a run descriptor carries its cohort; older descriptors mean ORIGINAL; an unknown cohort is refused', () => {
-		expect(parseStudioRun({ ...run(), cohort: 'REALISTIC', cohort_label: 'Realistic synthetic cohort' }).cohort).toBe('REALISTIC');
+		expect(parseStudioRun({ ...run(), cohort: 'REALISTIC', cohort_label: 'Realistic research cohort' }).cohort).toBe('REALISTIC');
 		expect(parseStudioRun(run()).cohort).toBeUndefined();
 		expect(() => parseStudioRun({ ...run(), cohort: 'EXOTIC' })).toThrow();
 	});
@@ -93,11 +93,11 @@ describe('parsing and run context', () => {
 		const original = runContext(run());
 		expect(original.cohort).toBe('ORIGINAL');
 		expect(original.badge).not.toContain('REALISTIC');
-		expect(original.dataSentence).toContain('Synthetic engineering data on eight logical clients');
+		expect(original.dataSentence).toContain('Generated research data on eight logical clients');
 		const realistic = runContext(run({ cohort: 'REALISTIC' }));
 		expect(realistic.cohort).toBe('REALISTIC');
 		expect(realistic.badge).toContain('REALISTIC');
-		expect(realistic.dataSentence).toContain('Realistic synthetic ECG');
+		expect(realistic.dataSentence).toContain('Realistic software-generated ECG');
 		expect(realistic.dataSentence).toContain('no real physiology');
 	});
 });
@@ -126,16 +126,16 @@ describe('the request that reaches the backend', () => {
 describe('wording of a pretrained-V2 recorded-hardware run follows its cohort', () => {
 	it('the original cohort keeps the canonical / frozen wording exactly', () => {
 		const t = hardwareV2Texts('ORIGINAL');
-		expect(t.peers).toContain('canonical synthetic peers');
-		expect(t.metricsNote).toContain('same frozen synthetic evaluation cohort');
-		expect(t.metricsNote).toContain('comparable with a synthetic pretrained-V2 run');
+		expect(t.peers).toContain('canonical research peers');
+		expect(t.metricsNote).toContain('same frozen research evaluation cohort');
+		expect(t.metricsNote).toContain('comparable with a research pretrained-V2 run');
 	});
 	it('the realistic cohort never calls its peers canonical or its holdout frozen', () => {
 		const t = hardwareV2Texts('REALISTIC');
-		expect(t.peers).toContain('realistic synthetic peers');
+		expect(t.peers).toContain('realistic research peers');
 		expect(t.peers).not.toContain('canonical');
-		expect(t.metricsNote).toContain('realistic synthetic evaluation cohort');
-		expect(t.metricsNote).toContain('comparable with a realistic-cohort synthetic pretrained-V2 run');
+		expect(t.metricsNote).toContain('realistic research evaluation cohort');
+		expect(t.metricsNote).toContain('comparable with a realistic-cohort research pretrained-V2 run');
 		expect(t.metricsNote).not.toContain('frozen');
 	});
 });
@@ -190,7 +190,7 @@ describe('the recorded-noise realistic cohort option', () => {
 		expect(c.badge).toContain('RECORDED NOISE');
 		expect(c.dataSentence).toContain('RECORDED noise');
 		expect(c.dataSentence).toContain('no real physiology');
-		expect(c.dataSentence).not.toContain('Synthetic engineering data on eight logical clients');
+		expect(c.dataSentence).not.toContain('Generated research data on eight logical clients');
 		expect(runContext(run({ cohort: 'REALISTIC' })).dataSentence).not.toContain('RECORDED noise');         // the invented-noise cohort keeps its own wording
 	});
 	it('a hardware run on it names its peers and its holdout as recorded-noise realistic, never canonical or frozen', () => {

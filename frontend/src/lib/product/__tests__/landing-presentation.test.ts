@@ -26,7 +26,7 @@ describe('FER-002 public landing presentation', () => {
 		const ws = read('lib/components/landing/ProductWorkstation.svelte');
 		expect(ws).not.toMatch(/DETECTED|LOCAL ONLY|0 Bytes|setInterval|Real-Time/);
 		expect(ws).toContain('SERVER-SIDE');
-		expect(ws).toContain('Resting scenario (72 BPM, synthetic)');
+		expect(ws).toContain('Resting scenario (72 BPM, illustrative)');
 	});
 	it('data-driven actionable controls (digest copy button, run and evidence links) keep a 24px minimum target', () => {
 		expect(read('lib/components/product/federation/DigestText.svelte')).toContain('min-width: 24px; min-height: 24px');

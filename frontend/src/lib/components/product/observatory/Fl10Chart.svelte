@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { chartNav } from '$lib/product/a11y/chart-nav';
 	const hintId = `chart-hint-${Math.random().toString(36).slice(2, 9)}`;
 	import { cell, type Fl10Spec, type Fl10View } from '$lib/product/observatory/fl10';
@@ -78,49 +79,49 @@
 	const say = (t: string) => { tip = t; };
 </script>
 <figure class="chart" data-testid={`chart-${spec.id}`}>
-	<figcaption><b>{spec.id.replace('FL10_', '')} · {spec.title}</b></figcaption>
+	<figcaption><b>{spec.id.replace('FL10_', '')} · {displayCopy(spec.title)}</b></figcaption>
 	<p id={hintId} class="sr-only">One tab stop per chart. Use the arrow keys to move between data points, Home and End to jump to the first or last, and Enter to select a round where offered.</p>
 	{#if spec.views.length > 1}
-		<div class="views" role="group" aria-label="Select view">{#each spec.views as v (v.id)}<button class:on={v.id === view.id} aria-pressed={v.id === view.id} onclick={() => { viewId = v.id; }}>{v.label}</button>{/each}</div>
+		<div class="views" role="group" aria-label="Select view">{#each spec.views as v (v.id)}<button class:on={v.id === view.id} aria-pressed={v.id === view.id} onclick={() => { viewId = v.id; }}>{displayCopy(v.label)}</button>{/each}</div>
 	{/if}
 	{#if view.kind === 'lines' || view.kind === 'curves'}
-		<div class="legend">{#each series as s, i (s.name)}<button class:off={isHidden(s.name)} aria-pressed={!isHidden(s.name)} onclick={() => toggle(s.name)}><i style={`background:${COLORS[i % COLORS.length]}`}></i>{s.name}</button>{/each}</div>
-		<svg viewBox={`0 0 ${W} ${H}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${spec.title}: ${view.label}. ${visible.length} visible series.`}>
+		<div class="legend">{#each series as s, i (s.name)}<button class:off={isHidden(s.name)} aria-pressed={!isHidden(s.name)} onclick={() => toggle(s.name)}><i style={`background:${COLORS[i % COLORS.length]}`}></i>{displayCopy(s.name)}</button>{/each}</div>
+		<svg viewBox={`0 0 ${W} ${H}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${displayCopy(spec.title)}: ${displayCopy(view.label)}. ${visible.length} visible series.`}>
 			{#each niceTicks(yr[0], yr[1]) as t}<line x1={L} x2={W - R} y1={py(t)} y2={py(t)} class="grid" /><text x={L - 6} y={py(t) + 3} class="tick" text-anchor="end">{fmt(t)}</text>{/each}
 			{#each niceTicks(xr[0], xr[1], 6) as t}<text x={px(t)} y={H - B + 14} class="tick" text-anchor="middle">{fmt(t)}</text>{/each}
 			<line x1={L} x2={L} y1={T} y2={H - B} class="axis" /><line x1={L} x2={W - R} y1={H - B} y2={H - B} class="axis" />
-			<text x={(L + W - R) / 2} y={H - 8} class="label" text-anchor="middle">{view.x_label}</text>
-			<text transform={`translate(14 ${(T + H - B) / 2}) rotate(-90)`} class="label" text-anchor="middle">{view.y_label}</text>
+			<text x={(L + W - R) / 2} y={H - 8} class="label" text-anchor="middle">{displayCopy(view.x_label)}</text>
+			<text transform={`translate(14 ${(T + H - B) / 2}) rotate(-90)`} class="label" text-anchor="middle">{displayCopy(view.y_label)}</text>
 			{#if view.diagonal}<line x1={px(0)} y1={py(0)} x2={px(1)} y2={py(1)} class="diag" />{/if}
-			{#if typeof view.hline === 'number'}<line x1={L} x2={W - R} y1={py(view.hline)} y2={py(view.hline)} class="diag" /><text x={W - R} y={py(view.hline) - 3} class="tick" text-anchor="end">{view.hline_label}</text>{/if}
+			{#if typeof view.hline === 'number'}<line x1={L} x2={W - R} y1={py(view.hline)} y2={py(view.hline)} class="diag" /><text x={W - R} y={py(view.hline) - 3} class="tick" text-anchor="end">{displayCopy(view.hline_label)}</text>{/if}
 			{#if view.kind === 'lines' && selectedX !== null && selectedX >= xr[0] && selectedX <= xr[1]}<line x1={px(selectedX)} x2={px(selectedX)} y1={T} y2={H - B} class="sel" data-testid="selected-round-marker" /><text x={px(selectedX)} y={T + 8} class="tick" text-anchor="middle">selected</text>{/if}
 			{#if view.kind === 'lines'}{#each pendingMarks as m (m.state)}{#if m.x >= xr[0] && m.x <= xr[1]}<circle cx={px(m.x)} cy={H - B - 8} r="4.5" class="pend" data-testid={`pending-${m.state}`} role="img" aria-label={`${m.state} ${m.status}: no measured value yet`}><title>{`${m.state}: ${m.status} - no measured value yet`}</title></circle>{/if}{/each}{/if}
 			{#each series as s, i (s.name)}{#if !isHidden(s.name)}
 				<path d={path(s)} fill="none" stroke={COLORS[i % COLORS.length]} stroke-width="1.6" stroke-dasharray={s.dashed ? '5 4' : undefined} />
 				{#if view.kind === 'lines'}{#each s.x ?? [] as x, k}{#if s.y?.[k] !== null && s.y?.[k] !== undefined}
-					<circle cx={px(x)} cy={py(s.y[k] as number)} r="3.2" fill={COLORS[i % COLORS.length]} tabindex="0" {...pointRole} aria-label={`${s.name}, x ${x}, value ${cell(s.y[k])}${onPickX ? ' (activate to select this round)' : ''}`}
-						onfocus={() => say(`${s.name} · x ${x} · ${cell(s.y?.[k])}`)} onmouseenter={() => say(`${s.name} · x ${x} · ${cell(s.y?.[k])}`)} onclick={() => onPickX?.(x)} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPickX?.(x); } }} style:cursor={onPickX ? 'pointer' : undefined}><title>{`${s.name}: x ${x}, ${cell(s.y[k])}`}</title></circle>
+					<circle cx={px(x)} cy={py(s.y[k] as number)} r="3.2" fill={COLORS[i % COLORS.length]} tabindex="0" {...pointRole} aria-label={`${displayCopy(s.name)}, x ${x}, value ${cell(s.y[k])}${onPickX ? ' (activate to select this round)' : ''}`}
+						onfocus={() => say(`${displayCopy(s.name)} · x ${x} · ${cell(s.y?.[k])}`)} onmouseenter={() => say(`${displayCopy(s.name)} · x ${x} · ${cell(s.y?.[k])}`)} onclick={() => onPickX?.(x)} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPickX?.(x); } }} style:cursor={onPickX ? 'pointer' : undefined}><title>{`${displayCopy(s.name)}: x ${x}, ${cell(s.y[k])}`}</title></circle>
 				{:else}<text x={px(x)} y={H - B - 4} class="undef" text-anchor="middle">U</text>{/if}{/each}{/if}
 			{/if}{/each}
 		</svg>
 	{:else if view.kind === 'bars' || view.kind === 'stacked'}
-		<div class="legend">{#each series as s, i (s.name)}<button class:off={isHidden(s.name)} aria-pressed={!isHidden(s.name)} onclick={() => toggle(s.name)}><i style={`background:${COLORS[i % COLORS.length]}`}></i>{s.name}</button>{/each}</div>
-		<svg viewBox={`0 0 ${W} ${H}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${spec.title}: ${view.label}`}>
+		<div class="legend">{#each series as s, i (s.name)}<button class:off={isHidden(s.name)} aria-pressed={!isHidden(s.name)} onclick={() => toggle(s.name)}><i style={`background:${COLORS[i % COLORS.length]}`}></i>{displayCopy(s.name)}</button>{/each}</div>
+		<svg viewBox={`0 0 ${W} ${H}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${displayCopy(spec.title)}: ${displayCopy(view.label)}`}>
 			{#each niceTicks(byr[0], byr[1]) as t}<line x1={L} x2={W - R} y1={bpy(t)} y2={bpy(t)} class="grid" /><text x={L - 6} y={bpy(t) + 3} class="tick" text-anchor="end">{fmt(t)}</text>{/each}
 			<line x1={L} x2={L} y1={T} y2={H - B} class="axis" /><line x1={L} x2={W - R} y1={H - B} y2={H - B} class="axis" />
 			{#each cats as c, i}<text transform={`translate(${bx(i) + bw / 2} ${H - B + 10}) rotate(${cats.length > 8 ? -55 : 0})`} class="tick" text-anchor={cats.length > 8 ? 'end' : 'middle'}>{c}</text>{/each}
-			<text x={(L + W - R) / 2} y={H - 4} class="label" text-anchor="middle">{view.x_label}</text>
-			<text transform={`translate(14 ${(T + H - B) / 2}) rotate(-90)`} class="label" text-anchor="middle">{view.y_label}</text>
+			<text x={(L + W - R) / 2} y={H - 4} class="label" text-anchor="middle">{displayCopy(view.x_label)}</text>
+			<text transform={`translate(14 ${(T + H - B) / 2}) rotate(-90)`} class="label" text-anchor="middle">{displayCopy(view.y_label)}</text>
 			{#each cats as c, i}
 				{#if view.kind === 'stacked'}
 					{#each visible as s, k}{@const below = visible.slice(0, k).reduce((a, q) => a + (q.values?.[i] ?? 0), 0)}{@const v = s.values?.[i] ?? 0}{@const colorIndex = series.findIndex((q) => q.name === s.name)}
-						<rect x={bx(i)} width={bw} y={bpy(below + v)} height={Math.max(0, bpy(below) - bpy(below + v))} fill={COLORS[colorIndex % COLORS.length]} stroke={selectedX !== null && c === `R${selectedX}` ? '#2bb8b0' : 'none'} stroke-width="2" tabindex="0" role="img" aria-label={`${s.name} ${c} ${cell(v)}`} onfocus={() => say(`${s.name} · ${c} · ${cell(v)}`)} onmouseenter={() => say(`${s.name} · ${c} · ${cell(v)}`)}><title>{`${s.name} ${c}: ${cell(v)}`}</title></rect>{/each}
+						<rect x={bx(i)} width={bw} y={bpy(below + v)} height={Math.max(0, bpy(below) - bpy(below + v))} fill={COLORS[colorIndex % COLORS.length]} stroke={selectedX !== null && c === `R${selectedX}` ? '#2bb8b0' : 'none'} stroke-width="2" tabindex="0" role="img" aria-label={`${displayCopy(s.name)} ${c} ${cell(v)}`} onfocus={() => say(`${displayCopy(s.name)} · ${c} · ${cell(v)}`)} onmouseenter={() => say(`${displayCopy(s.name)} · ${c} · ${cell(v)}`)}><title>{`${displayCopy(s.name)} ${c}: ${cell(v)}`}</title></rect>{/each}
 				{:else}
 					{@const vs = series.filter((s) => !isHidden(s.name))}
 					{#each vs as s, k}{@const v = s.values?.[i] ?? null}{@const w = bw / Math.max(1, vs.length)}{@const idx = series.findIndex((q) => q.name === s.name)}
 						{#if v === null}<text x={bx(i) + k * w + w / 2} y={H - B - 3} class="undef" text-anchor="middle">U</text>
-						{:else}<rect x={bx(i) + k * w} width={w * 0.94} y={Math.min(bpy(v), bpy(0))} height={Math.abs(bpy(0) - bpy(v))} fill={COLORS[idx % COLORS.length]} tabindex="0" role="img" aria-label={`${s.name} ${c} ${cell(v)}`}
-							onfocus={() => say(`${s.name} · ${c} · ${cell(v)}`)} onmouseenter={() => say(`${s.name} · ${c} · ${cell(v)}`)}><title>{`${s.name} ${c}: ${cell(v)}`}</title></rect>{/if}
+						{:else}<rect x={bx(i) + k * w} width={w * 0.94} y={Math.min(bpy(v), bpy(0))} height={Math.abs(bpy(0) - bpy(v))} fill={COLORS[idx % COLORS.length]} tabindex="0" role="img" aria-label={`${displayCopy(s.name)} ${c} ${cell(v)}`}
+							onfocus={() => say(`${displayCopy(s.name)} · ${c} · ${cell(v)}`)} onmouseenter={() => say(`${displayCopy(s.name)} · ${c} · ${cell(v)}`)}><title>{`${displayCopy(s.name)} ${c}: ${cell(v)}`}</title></rect>{/if}
 					{/each}
 				{/if}
 			{/each}
@@ -128,21 +129,21 @@
 		{#if view.kind === 'stacked'}<p class="dim">Weights per round sum to {view.total_check.map((t: number) => t.toFixed(6)).join(', ')}.</p>{/if}
 	{:else if view.kind === 'heatmap'}
 		{@const rl = view.rows as string[]}{@const cl = view.cols as string[]}
-		<svg viewBox={`0 0 ${W} ${40 + rl.length * 30}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${spec.title}: ${view.label}`}>
+		<svg viewBox={`0 0 ${W} ${40 + rl.length * 30}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${displayCopy(spec.title)}: ${displayCopy(view.label)}`}>
 			{#each cl as c, j}<text x={80 + j * ((W - 90) / cl.length) + (W - 90) / cl.length / 2} y="14" class="tick" text-anchor="middle">{c}</text>{/each}
 			{#each rl as r, i}<text x="74" y={44 + i * 30} class="tick" text-anchor="end">{r}</text>
 				{#each cl as c, j}{@const v = view.values[i][j]}{@const cw = (W - 90) / cl.length}
 					<rect x={80 + j * cw} y={26 + i * 30} width={cw - 2} height="27" fill={v === null ? '#1f2937' : heat(v)} stroke={selectedX !== null && c === `R${selectedX}` ? '#2bb8b0' : 'none'} stroke-width="2" data-selected={selectedX !== null && c === `R${selectedX}` ? 'true' : undefined} tabindex="0" role="img" aria-label={`${r} ${c} ${v === null ? 'NOT CAPTURED' : cell(v)}`} onfocus={() => say(`${r} · ${c} · ${v === null ? 'NOT CAPTURED' : cell(v)}`)} onmouseenter={() => say(`${r} · ${c} · ${v === null ? 'NOT CAPTURED' : cell(v)}`)}><title>{`${r} ${c}: ${v === null ? 'NOT CAPTURED' : cell(v)}`}</title></rect>
 					<text x={80 + j * cw + cw / 2} y={44 + i * 30} class="cellv" text-anchor="middle">{v === null ? 'NC' : Math.abs(v) >= 100 ? Math.round(v) : v.toPrecision(3)}</text>{/each}{/each}
 		</svg>
-		<p class="dim">Colour scale: {view.value_label}; min {fmt(Math.min(...hv))}, max {fmt(Math.max(...hv))}. NC = NOT CAPTURED.</p>
+		<p class="dim">Colour scale: {displayCopy(view.value_label)}; min {fmt(Math.min(...hv))}, max {fmt(Math.max(...hv))}. NC = NOT CAPTURED.</p>
 	{:else if view.kind === 'hist'}
 		<div class="panels">{#each view.panels as p (p.name)}
 			{@const hmax = Math.max(1, ...p.positive, ...p.negative)}{@const hw = (W - L - R) / p.positive.length}
-			<svg viewBox={`0 0 ${W} ${H - 60}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`Predicted probability histogram for ${p.name}`}>
-				<text x={W / 2} y="12" class="label" text-anchor="middle">{p.name}</text>
-				{#each p.positive as v, i}<rect x={L + i * hw} width={hw * 0.46} y={H - 60 - 36 - (p.negative[i] / hmax) * (H - 120)} height={(p.negative[i] / hmax) * (H - 120)} fill="#4ea1ff" tabindex="0" role="img" aria-label={`${p.name} bin ${i} negative ${p.negative[i]}`} onfocus={() => say(`${p.name} · bin ${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)} · negative ${p.negative[i]} · positive ${v}`)} onmouseenter={() => say(`${p.name} · bin ${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)} · negative ${p.negative[i]} · positive ${v}`)}><title>{`negative ${p.negative[i]}`}</title></rect>
-					<rect x={L + i * hw + hw * 0.5} width={hw * 0.46} y={H - 60 - 36 - (v / hmax) * (H - 120)} height={(v / hmax) * (H - 120)} fill="#f59e0b" tabindex="0" role="img" aria-label={`${p.name} bin ${i} positive ${v}`} onfocus={() => say(`${p.name} · bin ${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)} · positive ${v} · negative ${p.negative[i]}`)} onmouseenter={() => say(`${p.name} · positive ${v}`)}><title>{`positive ${v}`}</title></rect>{/each}
+			<svg viewBox={`0 0 ${W} ${H - 60}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`Predicted probability histogram for ${displayCopy(p.name)}`}>
+				<text x={W / 2} y="12" class="label" text-anchor="middle">{displayCopy(p.name)}</text>
+				{#each p.positive as v, i}<rect x={L + i * hw} width={hw * 0.46} y={H - 60 - 36 - (p.negative[i] / hmax) * (H - 120)} height={(p.negative[i] / hmax) * (H - 120)} fill="#4ea1ff" tabindex="0" role="img" aria-label={`${displayCopy(p.name)} bin ${i} negative ${p.negative[i]}`} onfocus={() => say(`${displayCopy(p.name)} · bin ${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)} · negative ${p.negative[i]} · positive ${v}`)} onmouseenter={() => say(`${displayCopy(p.name)} · bin ${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)} · negative ${p.negative[i]} · positive ${v}`)}><title>{`negative ${p.negative[i]}`}</title></rect>
+					<rect x={L + i * hw + hw * 0.5} width={hw * 0.46} y={H - 60 - 36 - (v / hmax) * (H - 120)} height={(v / hmax) * (H - 120)} fill="#f59e0b" tabindex="0" role="img" aria-label={`${displayCopy(p.name)} bin ${i} positive ${v}`} onfocus={() => say(`${displayCopy(p.name)} · bin ${p.edges[i].toFixed(2)}-${p.edges[i + 1].toFixed(2)} · positive ${v} · negative ${p.negative[i]}`)} onmouseenter={() => say(`${displayCopy(p.name)} · positive ${v}`)}><title>{`positive ${v}`}</title></rect>{/each}
 				<line x1={L + view.threshold * (W - L - R)} x2={L + view.threshold * (W - L - R)} y1="18" y2={H - 96} class="thr" /><text x={L + view.threshold * (W - L - R) + 4} y="30" class="tick">threshold 0.5</text>
 				<line x1={L} x2={W - R} y1={H - 96} y2={H - 96} class="axis" />{#each [0, 0.25, 0.5, 0.75, 1] as t}<text x={L + t * (W - L - R)} y={H - 80} class="tick" text-anchor="middle">{t}</text>{/each}
 				<text x={W / 2} y={H - 66} class="label" text-anchor="middle">Predicted probability (20 fixed bins); blue = actual negative, orange = actual positive; peak count {hmax}</text>
@@ -150,28 +151,28 @@
 	{:else if view.kind === 'confusion'}
 		<label class="norm"><input type="checkbox" bind:checked={normalize} /> Row-normalise (raw counts always shown)</label>
 		<div class="panels">{#each view.matrices as m (m.label)}
-			<div class="cm" role="group" aria-label={`Confusion matrix ${m.label}`} data-testid={`cm-${m.label}`}><b>{m.label}</b> <small>N = {m.n} · actual + {m.positives} · actual − {m.negatives}</small>
+			<div class="cm" role="group" aria-label={`Confusion matrix ${displayCopy(m.label)}`} data-testid={`cm-${m.label}`}><b>{displayCopy(m.label)}</b> <small>N = {m.n} · actual + {m.positives} · actual − {m.negatives}</small>
 				<div class="grid2"><span></span><b>pred +</b><b>pred −</b>
 					<b>actual +</b><span class="tp">TP {m.TP}{#if normalize}<br /><small>{m.positives ? ((m.TP / m.positives) * 100).toFixed(1) : 'UNDEFINED'}%</small>{/if}</span><span class="fn">FN {m.FN}{#if normalize}<br /><small>{m.positives ? ((m.FN / m.positives) * 100).toFixed(1) : 'UNDEFINED'}%</small>{/if}</span>
 					<b>actual −</b><span class="fp">FP {m.FP}{#if normalize}<br /><small>{m.negatives ? ((m.FP / m.negatives) * 100).toFixed(1) : 'UNDEFINED'}%</small>{/if}</span><span class="tn">TN {m.TN}{#if normalize}<br /><small>{m.negatives ? ((m.TN / m.negatives) * 100).toFixed(1) : 'UNDEFINED'}%</small>{/if}</span></div></div>{/each}</div>
 	{:else if view.kind === 'intervals'}
-		<svg viewBox={`0 0 ${W} ${40 + iv.length * 28}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${spec.title}: paired differences with nominal intervals`}>
+		<svg viewBox={`0 0 ${W} ${40 + iv.length * 28}`} role="group" aria-roledescription="chart" aria-describedby={hintId} use:chartNav aria-label={`${displayCopy(spec.title)}: paired differences with nominal intervals`}>
 			<line x1={ix(0)} x2={ix(0)} y1="8" y2={30 + iv.length * 28} class="thr" /><text x={ix(0)} y="6" class="tick" text-anchor="middle">0</text>
-			{#each iv as r, i}<text x="12" y={34 + i * 28} class="tick">{r.label}</text>
+			{#each iv as r, i}<text x="12" y={34 + i * 28} class="tick">{displayCopy(r.label)}</text>
 				{#if r.lo !== null && r.hi !== null}<line x1={ix(r.lo)} x2={ix(r.hi)} y1={30 + i * 28} y2={30 + i * 28} stroke="#4ea1ff" stroke-width="2" />{/if}
-				{#if r.point !== null}<circle cx={ix(r.point)} cy={30 + i * 28} r="4" fill="#f59e0b" tabindex="0" role="img" aria-label={`${r.label} difference ${cell(r.point)} interval ${cell(r.lo)} to ${cell(r.hi)}`} onfocus={() => say(`${r.label} · ${cell(r.point)} [${cell(r.lo)}, ${cell(r.hi)}] · ${r.valid} valid / ${r.invalid} invalid replicates`)} onmouseenter={() => say(`${r.label} · ${cell(r.point)} [${cell(r.lo)}, ${cell(r.hi)}]`)}><title>{`${r.label}: ${cell(r.point)}`}</title></circle>
+				{#if r.point !== null}<circle cx={ix(r.point)} cy={30 + i * 28} r="4" fill="#f59e0b" tabindex="0" role="img" aria-label={`${displayCopy(r.label)} difference ${cell(r.point)} interval ${cell(r.lo)} to ${cell(r.hi)}`} onfocus={() => say(`${displayCopy(r.label)} · ${cell(r.point)} [${cell(r.lo)}, ${cell(r.hi)}] · ${r.valid} valid / ${r.invalid} invalid replicates`)} onmouseenter={() => say(`${displayCopy(r.label)} · ${cell(r.point)} [${cell(r.lo)}, ${cell(r.hi)}]`)}><title>{`${displayCopy(r.label)}: ${cell(r.point)}`}</title></circle>
 				{:else}<text x={ix(0) + 6} y={34 + i * 28} class="undef">UNDEFINED</text>{/if}{/each}
-			<text x={W / 2} y={38 + iv.length * 28} class="label" text-anchor="middle">{view.x_label} · nominal 95% paired participant-cluster interval · axis range {fmt(ir[0])} to {fmt(ir[1])}</text>
+			<text x={W / 2} y={38 + iv.length * 28} class="label" text-anchor="middle">{displayCopy(view.x_label)} · nominal 95% paired participant-cluster interval · axis range {fmt(ir[0])} to {fmt(ir[1])}</text>
 		</svg>
 	{:else if view.kind === 'diagram'}
-		<div class="diagram"><div class="col">{#each view.nodes as n}<span class="node">{n.label}</span>{/each}</div><div class="arrow" aria-hidden="true">→</div><div class="col">{#each view.stages as st}<span class="stage">{st}</span>{/each}</div></div>
-		<p class="dim">{view.monitoring}</p>
+		<div class="diagram"><div class="col">{#each view.nodes as n}<span class="node">{displayCopy(n.label)}</span>{/each}</div><div class="arrow" aria-hidden="true">→</div><div class="col">{#each view.stages as st}<span class="stage">{displayCopy(st)}</span>{/each}</div></div>
+		<p class="dim">{displayCopy(view.monitoring)}</p>
 	{:else if view.kind === 'lineage'}
 		<ol class="lineage">{#each view.states as s (s.state)}<li><b>{s.state}</b> <code>{s.sha256.slice(0, 20)}…</code> ← <code>{(s.previous ?? s.origin ?? 'FL_INIT_V2').slice(0, 12)}…</code> · accepted {s.accepted_updates} · {s.status}{#if s.equals_frozen_reference === true} · <span class="ok">= frozen reference</span>{:else if s.equals_frozen_reference === false} · <span class="bad">DIFFERS</span>{/if}</li>{/each}</ol>
 	{/if}
 	<div class="tip" aria-live="polite" data-testid="chart-tip">{tip}</div>
-	<p class="cap">{spec.caption}</p>
-	<p class="syn">{spec.synthetic_label}</p>
+	<p class="cap">{displayCopy(spec.caption)}</p>
+	<p class="syn">{displayCopy(spec.synthetic_label)}</p>
 	<details class="datatable"><summary>Data table for this view ({rows.length} rows) · sources {spec.sources.join(', ')}</summary>
 		<div class="scroll"><table aria-label="Chart data table"><tbody>{#each rows.slice(0, 700) as r}<tr>{#each r as c}<td>{c}</td>{/each}</tr>{/each}</tbody></table></div>
 		{#if rows.length > 700}<p class="dim">First 700 rows shown; the complete data is in the CSV export.</p>{/if}</details>

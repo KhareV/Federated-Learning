@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -165,7 +166,7 @@
 				const wanted = page.url.searchParams.get('hw');                 // deep link from History / Replay
 				if (wanted && hardware.filter(observatoryReady).some((h) => h.session_id === wanted)) { await chooseHardware(wanted); return; }
 				if (scenarioId) await load();
-				else { loading = false; error = 'No frozen synthetic scenarios are available.'; }
+				else { loading = false; error = 'No frozen research scenarios are available.'; }
 			} catch (cause) {
 				loading = false;
 				error = cause instanceof Error ? cause.message : String(cause);
@@ -178,11 +179,11 @@
 
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY</div>
 <h1 tabindex="-1" use:focusHeading>Follow one signal through the system</h1>
-<p class="lead">Inspect a deterministic synthetic window through the unchanged gap controller, causal resampler, ECG filter and normalization. Existing sessions default to bounded reconstruction; a new session can explicitly capture one window from its actual live preprocessing runtime. A saved recorded-hardware session can be traced the same way (experimental: resampled from low-rate telemetry).</p>
-<p><a href="/app/observatory/federation">Inspect all eight synthetic federation participants and their recorded contributions →</a></p>
+<p class="lead">Inspect a deterministic research ECG window through the unchanged gap controller, causal resampler, ECG filter and normalization. Existing sessions default to bounded reconstruction; a new session can explicitly capture one window from its actual live preprocessing runtime. A saved recorded-hardware session can be traced the same way (experimental: resampled from low-rate telemetry).</p>
+<p><a href="/app/observatory/federation">Inspect all eight logical federation participants and their recorded contributions →</a></p>
 <p><a href="/app/observatory/research">Inspect an authorized MIT-BIH TRAIN research window →</a></p>
 <p><a href="/app/observatory/tour">Start the guided evidence journey →</a></p>
-<nav class="explore" aria-label="More Observatory views"><a href="/app/observatory/scenarios">Scenario and fault lab →</a><a href="/app/observatory/replay">Session replay and monitoring-policy trace →</a><a href="/app/observatory/federation-replay">Federation event-journal replay scrubber →</a><a href="/app/observatory/model">Model architecture and calibration →</a><a href="/app/observatory/evidence">Scientific evidence explorer (frozen metrics, curves, uncertainty) →</a><a href="/app/observatory/provenance">Provenance, decision history and known boundaries →</a><a href="/app/observatory/outcomes">FL research outcomes (frozen, with synthetic evaluation) →</a><a href="/app/observatory/external-check">External check on real PTB-XL ECG no model had seen (frozen, record-level) →</a><a href="/app/observatory/storyboard">Federated learning storyboard →</a><a href="/app/federation">Federation Studio — 3- and 10-round live runs with per-round evaluation →</a></nav>
+<nav class="explore" aria-label="More Observatory views"><a href="/app/observatory/scenarios">Scenario and fault lab →</a><a href="/app/observatory/replay">Session replay and monitoring-policy trace →</a><a href="/app/observatory/federation-replay">Federation event-journal replay scrubber →</a><a href="/app/observatory/model">Model architecture and calibration →</a><a href="/app/observatory/evidence">Scientific evidence explorer (frozen metrics, curves, uncertainty) →</a><a href="/app/observatory/provenance">Provenance, decision history and known boundaries →</a><a href="/app/observatory/outcomes">FL research outcomes (frozen, with research evaluation) →</a><a href="/app/observatory/external-check">External check on real PTB-XL ECG no model had seen (frozen, record-level) →</a><a href="/app/observatory/storyboard">Federated learning storyboard →</a><a href="/app/federation">Federation Studio — 3- and 10-round live runs with per-round evaluation →</a></nav>
 
 <section class="controls" aria-label="Trace selection">
 	<label>SCENARIO
@@ -199,7 +200,7 @@
 	{#if hardwareReady.length}
 	<label>RECORDED HARDWARE SESSION (EXPERIMENTAL)
 		<select value={hardwareId} onchange={(e) => void chooseHardware((e.currentTarget as HTMLSelectElement).value)} data-testid="observatory-hardware-select">
-			<option value="">None — use a scenario or simulated session</option>
+			<option value="">None — use a scenario or software-source session</option>
 			{#each hardwareReady as item (item.session_id)}<option value={item.session_id}>{item.session_id} · {item.summary?.stored_readings ?? item.record_count} readings</option>{/each}
 		</select>
 	</label>
@@ -211,7 +212,7 @@
 			<input aria-label="Selected recorded window" type="range" min="0" max={hwMaximum} step="1" value={hardwarePos} oninput={(e) => moveHardware(Number((e.currentTarget as HTMLInputElement).value))} disabled={loading} />
 			<button onclick={() => moveHardware(hardwarePos + 1)} disabled={loading || hardwarePos >= hwMaximum} aria-label="Next window">→</button>
 			<output>{hwCurrent ? `W${String(hwCurrent.window_index).padStart(4, '0')} · ${hwCurrent.ecg_quality}` : '—'} · {hardwarePos + 1} / {hardwareWindows.windows.length}</output></div>
-		<small class="hwnote">{hardwareWindows.label}. {hardwareWindows.windows.filter((w) => w.ecg_quality === 'UNUSABLE').length} of {hardwareWindows.windows.length} windows are rejected by the quality gate; they still show their signal path, with no model result.</small>
+		<small class="hwnote">{displayCopy(hardwareWindows.label)}. {hardwareWindows.windows.filter((w) => w.ecg_quality === 'UNUSABLE').length} of {hardwareWindows.windows.length} windows are rejected by the quality gate; they still show their signal path, with no model result.</small>
 	</div>
 	{:else}
 	<div class="window-control">
@@ -237,13 +238,13 @@
 		<div><span>MODEL INPUT</span><strong>{trace.normalization.status === 'RECONSTRUCTED_MODEL_INPUT' ? 'float32 [1, 2500]' : 'NOT APPLIED'}</strong><small>Per-window z-score, only for usable inference windows</small></div>
 		<div><span>INFERENCE EVIDENCE</span><strong>{trace.persisted_inference ? trace.persisted_inference.monitoring_state : 'NOT ATTACHED'}</strong><small>{trace.inference_evidence_status}</small></div>
 	</section>
-	<div class="classification" data-testid="observatory-classification">{trace.classification === 'CAPTURED_LIVE_PREPROCESSING' ? 'CAPTURED FROM THIS LIVE PREPROCESSING RUNTIME · GATEWAY INPUT RECONSTRUCTED' : trace.classification === 'RECORDED_HARDWARE_RECONSTRUCTION' ? 'RECORDED HARDWARE · RESAMPLED FROM LOW-RATE TELEMETRY · EXPERIMENTAL · NOT VALID · NOT DIAGNOSTIC' : 'DETERMINISTIC LOCAL RECONSTRUCTION · SYNTHETIC VIRTUAL WEARABLE · NO NEW INFERENCE'}</div>
+	<div class="classification" data-testid="observatory-classification">{trace.classification === 'CAPTURED_LIVE_PREPROCESSING' ? 'CAPTURED FROM THIS LIVE PREPROCESSING RUNTIME · GATEWAY INPUT RECONSTRUCTED' : trace.classification === 'RECORDED_HARDWARE_RECONSTRUCTION' ? 'RECORDED HARDWARE · RESAMPLED FROM LOW-RATE TELEMETRY · EXPERIMENTAL · NOT VALID · NOT DIAGNOSTIC' : 'DETERMINISTIC LOCAL RECONSTRUCTION · SOFTWARE ECG SOURCE · NO NEW INFERENCE'}</div>
 	<section aria-labelledby="pipeline-title">
 		<div class="section-head"><div><span>01 / SIGNAL PATH</span><h2 id="pipeline-title">Same window, five representations</h2></div><p>Plots use actual values returned by the canonical operators. Null gaps are never joined or filled by the chart.</p></div>
 		<div class="signal-grid">{#each trace.stages as stage}<SignalStageChart {stage} startUs={trace.left_timestamp_us} endUs={trace.right_timestamp_us} />{/each}</div>
 	</section>
 	<section class="facts" aria-label="Window and gap evidence">
-		<article><span>02 / WINDOWING</span><h2>10 seconds, 5-second cadence</h2><p>The selected window contains {trace.window_sample_count} target-rate positions at {trace.target_rate_hz} Hz. Moving one step advances the right edge by {trace.cadence_us / 1_000_000} seconds; adjacent windows overlap. Signal samples occupy [t−10 s, t).</p><p>{trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? `Your recorded readings are resampled onto the ${trace.source_rate_hz} Hz V2 source grid between real readings only (an unverified scaling assumption); ` : `Source ECG uses ${trace.source_rate_hz} Hz synthetic transport; `}processing and inference are server-side, not performed in this browser.</p></article>
+		<article><span>02 / WINDOWING</span><h2>10 seconds, 5-second cadence</h2><p>The selected window contains {trace.window_sample_count} target-rate positions at {trace.target_rate_hz} Hz. Moving one step advances the right edge by {trace.cadence_us / 1_000_000} seconds; adjacent windows overlap. Signal samples occupy [t−10 s, t).</p><p>{trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? `Your recorded readings are resampled onto the ${trace.source_rate_hz} Hz V2 source grid between real readings only (an unverified scaling assumption); ` : `Source ECG uses ${trace.source_rate_hz} Hz software ECG transport; `}processing and inference are server-side, not performed in this browser.</p></article>
 		<article><span>03 / GAP POLICY</span><h2>{trace.gaps.length ? `${trace.gaps.length} intersecting source gap(s)` : 'No source gap intersects this window'}</h2>
 			{#each trace.gaps as gap}<div class="gap"><b>{gap.kind} · {gap.duration_ms} ms</b><p>Missing source indices {gap.first_missing_index}–{gap.last_missing_index}; {gap.fill_count} causal hold fills; segment {gap.previous_segment_id} → {gap.next_segment_id}. Quality requirement: {gap.quality_requirement}.</p></div>{/each}
 			{#if !trace.gaps.length}<p>No gap is invented for this selected interval. Select a faulted scenario/window to inspect actual emitted gap events.</p>{/if}
@@ -253,7 +254,7 @@
 	</section>
 	{#if trace.persisted_inference}<section class="inference"><span>{trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? '06 / EXPERIMENTAL MODEL RESULT' : '06 / PERSISTED MODEL RESULT'}</span><h2>{trace.persisted_inference.monitoring_state}</h2><p>MODEL_V2_FINAL · CAL_V2 · {trace.persisted_inference.calibration_domain}. Raw sigmoid probability {trace.persisted_inference.raw_probability ?? 'unavailable'}; source-domain calibrated probability {trace.persisted_inference.source_domain_calibrated_probability ?? 'unavailable'}; fixed threshold {trace.persisted_inference.threshold ?? 'unavailable'}.</p><p><strong>RESEARCH TECHNICAL METADATA</strong> — not disease probability, diagnosis, or personal risk. {trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? 'The released model scored this resampled recorded window once (the result is cached); MODEL_V2_FINAL was validated on MIT-BIH ECG, not on this signal chain, so the result is experimental and not valid.' : 'The Observatory did not rerun inference.'}</p></section>{:else}<p class="not-available">{trace.source_kind === 'RECORDED_HARDWARE_RESAMPLED' ? (trace.quality_state === 'UNUSABLE' ? 'The quality gate rejected this recorded window before the model, so there is no model result and none is invented. Choose a window marked VALID to see one.' : 'No model result is attached to this recorded window yet.') : 'No persisted model result is attached to this scenario-only reconstruction. Select an owned inferred session window to inspect its recorded result.'}</p>{/if}
 	<p class="exp"><button onclick={exportTrace}>Export this window as evidence JSON</button>{#if exportDigest} <small>Exported · SHA256 <code>{exportDigest.slice(0, 16)}…</code></small>{/if}</p>
-	<details class="evidence"><summary>TECHNICAL EVIDENCE & LIMITATIONS</summary><dl><div><dt>Trace classification</dt><dd>{trace.classification}</dd></div><div><dt>Source</dt><dd>{trace.source_kind} / {trace.scenario_id}</dd></div><div><dt>Normalization tensor digest</dt><dd>{trace.normalization.tensor_sha256 ?? 'NOT APPLIED'}</dd></div><div><dt>Context/inference basis</dt><dd>{trace.inference_evidence_status}</dd></div><div><dt>Claim boundary</dt><dd>{trace.claim_boundary}</dd></div></dl><p>Canonical source-code references at accepted entry commit <code>{sourceCommit}</code> (offline path references; no external link):</p><ul>{#each codeLinks as item}<li>{item.label} · <code>{item.path}</code></li>{/each}</ul><ul>{#each trace.limitations as item}<li>{item}</li>{/each}</ul></details>
+	<details class="evidence"><summary>TECHNICAL EVIDENCE & LIMITATIONS</summary><dl><div><dt>Trace classification</dt><dd>{trace.classification}</dd></div><div><dt>Source</dt><dd>{trace.source_kind} / {trace.scenario_id}</dd></div><div><dt>Normalization tensor digest</dt><dd>{trace.normalization.tensor_sha256 ?? 'NOT APPLIED'}</dd></div><div><dt>Context/inference basis</dt><dd>{trace.inference_evidence_status}</dd></div><div><dt>Claim boundary</dt><dd>{displayCopy(trace.claim_boundary)}</dd></div></dl><p>Canonical source-code references at accepted entry commit <code>{sourceCommit}</code> (offline path references; no external link):</p><ul>{#each codeLinks as item}<li>{item.label} · <code>{item.path}</code></li>{/each}</ul><ul>{#each trace.limitations as item}<li>{displayCopy(item)}</li>{/each}</ul></details>
 {/if}
 
 <style>

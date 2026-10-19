@@ -20,30 +20,30 @@
 		{ label: 'Calibration', left: 'CAL_V2', right: 'Not established' },
 		{ label: 'Validation', left: 'Frozen research evidence', right: 'Structural engineering checks only' },
 		{ label: 'Monitoring use', left: 'YES', right: 'NO' },
-		{ label: 'Deployment', left: 'Research default', right: 'Sandbox only / NOT DEPLOYED' }
+		{ label: 'Deployment', left: 'Research default', right: 'Research workspace only / NOT DEPLOYED' }
 	]);
 </script>
 <svelte:head><title>Models | NHM</title></svelte:head>
-<div class="head"><div class="eyebrow">NHM / MODELS</div><h1>Model governance &amp; comparison</h1><p class="lead">One model runs the live research monitoring. A separate federated engineering candidate exists only in a sandbox. They are compared here by role and status, not by performance: no candidate performance is claimed.</p></div>
+<div class="head"><div class="eyebrow">NHM / MODELS</div><h1>Model governance &amp; comparison</h1><p class="lead">One model runs the live research monitoring. A separate federated engineering candidate exists only in a research workspace. They are compared here by role and status, not by performance: no candidate performance is claimed.</p></div>
 <FederationBanner />
 {#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
 <Panel eyebrow="COMPARISON" title="Released monitoring model vs federated engineering candidate" note="ROLE AND STATUS ONLY">
 	<ComparisonPanel testid="released-vs-candidate" leftTitle={released} leftSub="Released monitoring model" leftStatus="RELEASED" leftTone="released" rightTitle={cand?.candidate_id ?? 'CAPSTONE_FL_CANDIDATE_####'} rightSub={cand ? 'Federated engineering candidate' : 'No candidate yet'} rightStatus="NOT DEPLOYED" rightTone="candidate" {rows} />
 	<p class="dim">This comparison does not say that the candidate is better or worse. No candidate performance has been established.</p>
-	<p class="dim" data-testid="hardware-demo-model-note">Recorded-hardware runs either train a separate small tabular model (<code>HARDWARE_DEMO_MODEL_V1</code>, fresh or warm-started) or use the V2 network on your resampled recorded windows, started from the pretrained <code>MODEL_V2_FINAL</code> checkpoint, from the untrained <code>FL_INIT_V2</code> model, or from a stored candidate; all use synthetic labels. The V2 family keeps its final engineering candidate in your stored candidates below, listed by the cohort each was trained on; the tabular model keeps none. Neither is registered in the product registry, promoted or deployed, and neither is comparable to the real-ECG scientific results; the released <code>MODEL_V2_FINAL</code> is never changed. See the run on its Live page.</p>
+	<p class="dim" data-testid="hardware-demo-model-note">Recorded-hardware runs either train a separate small tabular model (<code>HARDWARE_DEMO_MODEL_V1</code>, fresh or warm-started) or use the V2 network on your resampled recorded windows, started from the pretrained <code>MODEL_V2_FINAL</code> checkpoint, from the untrained <code>FL_INIT_V2</code> model, or from a stored candidate; all use assigned research labels. The V2 family keeps its final engineering candidate in your stored candidates below, listed by the cohort each was trained on; the tabular model keeps none. Neither is registered in the product registry, promoted or deployed, and neither is comparable to the real-ECG scientific results; the released <code>MODEL_V2_FINAL</code> is never changed. See the run on its Live page.</p>
 </Panel>
 <div class="gap"></div>
 <Panel eyebrow="LIFECYCLE" title="Two lifecycles, one blocked boundary">
 	<div class="lc"><p class="ln r">RELEASED MONITORING</p><FlowDiagram tone="released" label="Released model lifecycle" steps={[{ label: released }, { label: 'RELEASED MONITORING' }, { label: 'LIVE RESEARCH SYSTEM' }]} /></div>
-	<div class="lc"><p class="ln f">FEDERATED DEVELOPMENT</p><FlowDiagram tone="federated" label="Candidate lifecycle" steps={[{ label: 'FL_INIT_V2' }, { label: 'FEDERATED TRAINING' }, { label: 'CANDIDATE CREATED', tone: 'candidate' }, { label: 'STRUCTURAL GOVERNANCE', tone: 'candidate' }, { label: 'ENGINEERING SANDBOX', tone: 'candidate' }]} /></div>
+	<div class="lc"><p class="ln f">FEDERATED DEVELOPMENT</p><FlowDiagram tone="federated" label="Candidate lifecycle" steps={[{ label: 'FL_INIT_V2' }, { label: 'FEDERATED TRAINING' }, { label: 'CANDIDATE CREATED', tone: 'candidate' }, { label: 'STRUCTURAL GOVERNANCE', tone: 'candidate' }, { label: 'ENGINEERING WORKSPACE', tone: 'candidate' }]} /></div>
 	<div class="wall" role="note"><span>SCIENTIFIC EVALUATION REQUIRED BEFORE ANY FUTURE PROMOTION</span><small>No promotion exists today; nothing moves a candidate into monitoring automatically.</small></div>
 </Panel>
 <div class="gap"></div>
-<Panel eyebrow="ENGINEERING FEDERATED CANDIDATES" title="Engineering federated candidates" note="SANDBOX REGISTRY">
+<Panel eyebrow="ENGINEERING FEDERATED CANDIDATES" title="Engineering federated candidates" note="RESEARCH REGISTRY">
 	{#if !fed.registry}<p class="dim" role="status">Loading registry…</p>
 	{:else if fed.candidates.length === 0}<p class="dim" data-testid="no-candidates">No engineering candidates yet. Run federated training in the <a href="/app/federation">Federation Studio</a> to create one.</p>
 	{:else}<div class="cands" data-testid="candidates">{#each fed.candidates as c}<CandidateCard candidate={c} />{/each}</div>{/if}
-	<p class="dim">Candidates are engineering sandbox entries. They are never used for live monitoring and no candidate inference runtime is enabled.</p>
+	<p class="dim">Candidates are engineering workspace entries. They are never used for live monitoring and no candidate inference runtime is enabled.</p>
 </Panel>
 <div class="gap"></div>
 <Panel eyebrow="FEDERATION STUDIO" title="Stored engineering candidates" note="YOUR LIBRARY · KEPT ACROSS RESTARTS"><CandidateLibrary /></Panel>

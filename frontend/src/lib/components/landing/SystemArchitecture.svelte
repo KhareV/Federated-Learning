@@ -175,7 +175,7 @@
 				<Globe config={{ width: 520, height: 520, dark: 1, diffuse: 1.8, mapSamples: 12000, mapBrightness: 4.5, baseColor: [0.04, 0.12, 0.18], markerColor: [0.17, 0.83, 0.75], glowColor: [0.05, 0.25, 0.28], markers: federationMarkers.map(m => ({ location: [m.lat, m.lng], size: m.size * 0.05 })) }} />
 			</div>
 
-			<p class="globe-note">Marker positions are decorative. NHM's eight synthetic federation clients run on one demonstration machine - not in these cities.</p>
+			<p class="globe-note">Marker positions are decorative. NHM's eight logical federation clients run on one demonstration machine - not in these cities.</p>
 
 			<div class="globe-stats-dock">
 				<div class="g-stat">

@@ -34,20 +34,20 @@
 				<td class="two"><b>{h.record_count} readings</b><small>{secs(h.summary?.span_seconds)}{h.summary?.arrival_hz ? ` · ${h.summary.arrival_hz.toFixed(1)} msg/s` : ''}{h.summary && h.summary.stored_readings < h.record_count ? ` · newest ${h.summary.stored_readings} kept` : ''}</small></td>
 				<td class="two"><b>{h.summary?.ecg_min != null ? `ECG ${h.summary.ecg_min}–${h.summary.ecg_max}` : 'ECG --'}</b><small>device BPM {h.summary?.bpm_mean ?? '--'}</small></td>
 				<td class="two"><b>{new Date(h.started_at).toLocaleDateString()}</b><small>{new Date(h.started_at).toLocaleTimeString()}</small></td>
-				<td><span class="badge" class:test={h.source.startsWith('SYNTHETIC')}>{h.source.startsWith('SYNTHETIC') ? 'TEST SOURCE' : 'ESP32 · UNVERIFIED'}</span></td>
+				<td><span class="badge" class:test={h.source.startsWith('SYNTHETIC')}>{h.source.startsWith('SYNTHETIC') ? 'SOFTWARE ECG SOURCE' : 'ESP32 · UNVERIFIED'}</span></td>
 				<td><div class="acts"><a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a>{#if h.status !== 'ACTIVE' && h.record_count > 0}<a class="fl" href={`/app/federation?source=hardware&session=${encodeURIComponent(h.session_id)}`} title="Opens Start a federation run with Recorded hardware and this session selected">USE IN FL →</a><a class="fl" href={`/app/observatory/replay?session=${encodeURIComponent(h.session_id)}`} title="Opens the session replay with this recorded session (experimental, resampled)">REPLAY →</a>{/if}</div></td>
 			</tr>{/each}</tbody></table></div>
 		<ul class="mobile-list" aria-label="Hardware telemetry sessions">{#each hardware as h (h.session_id)}<li>
 			<div class="card-head"><span class="badge" class:complete={h.status === 'STOPPED' && h.record_count > 0} class:failed={h.record_count === 0}>{h.status === 'ACTIVE' ? 'ACTIVE' : h.status === 'INTERRUPTED' ? 'INTERRUPTED' : h.record_count === 0 ? 'NO DATA' : 'SAVED'}</span><time>{new Date(h.started_at).toLocaleString()}</time></div>
 			<strong class="session-id">{h.session_id}</strong>
-			<dl><div><dt>Readings</dt><dd>{h.record_count}</dd></div><div><dt>Duration</dt><dd>{secs(h.summary?.span_seconds)}</dd></div><div><dt>Device BPM</dt><dd>{h.summary?.bpm_mean ?? '--'}</dd></div><div><dt>Source</dt><dd>{h.source.startsWith('SYNTHETIC') ? 'TEST SOURCE' : 'ESP32 · UNVERIFIED'}</dd></div></dl>
+			<dl><div><dt>Readings</dt><dd>{h.record_count}</dd></div><div><dt>Duration</dt><dd>{secs(h.summary?.span_seconds)}</dd></div><div><dt>Device BPM</dt><dd>{h.summary?.bpm_mean ?? '--'}</dd></div><div><dt>Source</dt><dd>{h.source.startsWith('SYNTHETIC') ? 'SOFTWARE ECG SOURCE' : 'ESP32 · UNVERIFIED'}</dd></div></dl>
 			<a href={`/app/history/${encodeURIComponent(h.session_id)}`}>VIEW EVIDENCE</a>{#if h.status !== 'ACTIVE' && h.record_count > 0}<a href={`/app/observatory/replay?session=${encodeURIComponent(h.session_id)}`}>REPLAY →</a>{/if}</li>{/each}</ul>
 	{/if}
 	<p class="dim">Hardware sessions are telemetry recordings of the shared MongoDB source. Durations and rates come from server ingestion timestamps; device BPM and SpO₂ are unverified. No clinical claim is made.</p>
 </Panel>
 <Panel eyebrow="01 / PERSISTED" title="Monitoring sessions" note="OWNER-SCOPED HISTORY">
 	{#if !loaded}<p role="status" class="dim">Loading persisted monitoring sessions…</p>
-	{:else if store.sessions.length === 0}<div class="empty"><strong>No monitoring sessions yet</strong><p class="dim">This is expected until a simulated wearable session is run and persisted.</p><a class="cta" href="/app/monitoring">RUN A MONITORING SESSION →</a></div>
+	{:else if store.sessions.length === 0}<div class="empty"><strong>No monitoring sessions yet</strong><p class="dim">This is expected until a software ECG source session is run and persisted.</p><a class="cta" href="/app/monitoring">RUN A MONITORING SESSION →</a></div>
 	{:else}
 		<div class="scroll"><table data-testid="session-table"><caption class="sr">Persisted monitoring sessions, newest first</caption>
 			<thead><tr><th scope="col">Session</th><th scope="col">State</th><th scope="col">Evidence</th><th scope="col">Created</th><th scope="col">Scenario</th><th scope="col">Model</th><th scope="col">Started</th><th scope="col">Ended</th><th scope="col">Device</th></tr></thead>

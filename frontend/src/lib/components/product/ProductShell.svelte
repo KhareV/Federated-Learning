@@ -78,7 +78,7 @@
 				{/if}
 			{/each}
 		</nav>
-		<div class="foot" title="SIMULATED MODEL · HARDWARE TELEMETRY · NOT DIAGNOSTIC"><span class="tag">SIMULATED MODEL / HARDWARE TELEMETRY</span><span class="tag">RESEARCH / NOT DIAGNOSTIC</span><span class="tag mini" aria-hidden="true">NHM</span></div>
+		<div class="foot" title="RESEARCH MODEL · HARDWARE TELEMETRY · NOT DIAGNOSTIC"><span class="tag">RESEARCH MODEL / HARDWARE TELEMETRY</span><span class="tag">RESEARCH / NOT DIAGNOSTIC</span><span class="tag mini" aria-hidden="true">NHM</span></div>
 	</aside>
 	<div class="main">
 		<header>

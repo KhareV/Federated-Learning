@@ -1,5 +1,6 @@
 <script lang="ts">
-	// GENERALISATION: every committed global state of THIS run, and the unchanged frozen V2 checkpoint, scored on the same unseen synthetic cohort with the same windows,
+	import { displayCopy } from '$lib/product/display-copy';
+	// GENERALISATION: every committed global state of THIS run, and the unchanged frozen V2 checkpoint, scored on the same unseen research cohort with the same windows,
 	// the same fixed 0.5 threshold and no calibration. Everything shown is a measured stored record; a round that has not been scored shows its status, never a value.
 	import GenLineChart from './GenLineChart.svelte';
 	import GenCurveOverlay from './GenCurveOverlay.svelte';
@@ -52,14 +53,14 @@
 	{:else}
 		<header class="hd">
 			<h3>GENERALISATION · frozen V2 vs federated global model, unseen cohort</h3>
-			<p class="label" data-testid="generalisation-cohort-label">{g.cohort.label}</p>
+			<p class="label" data-testid="generalisation-cohort-label">{displayCopy(g.cohort.label)}</p>
 			<dl class="facts">
-				<div><dt>Starting model</dt><dd data-testid="generalisation-base-model">{g.base_model.label}</dd></div>
+				<div><dt>Starting model</dt><dd data-testid="generalisation-base-model">{displayCopy(g.base_model.label)}</dd></div>
 				<div><dt>Cohort</dt><dd>{g.cohort.participants} participants · {g.cohort.windows} windows · {g.cohort.positive_windows} positive</dd></div>
 				<div><dt>Decision rule</dt><dd>fixed threshold {g.threshold}, calibration {g.calibration}</dd></div>
 				<div><dt>Progress</dt><dd data-testid="generalisation-progress">{evaluated}/{g.rounds.length} rounds scored · frozen V2 {base ? base.evaluation_status : 'NOT YET QUEUED'}</dd></div>
 			</dl>
-			<p class="dim" data-testid="generalisation-target">Target: the synthetic engineering-event task (not AAMI-SVF). {g.baseline.detail}</p>
+			<p class="dim" data-testid="generalisation-target">Target: the research-event task (not AAMI-SVF). {displayCopy(g.baseline.detail)}</p>
 			{#if g.integrity.r0_predictions_equal_frozen_v2}<p class="ok" data-testid="generalisation-r0-identical">R0 is identical to frozen V2 (same state digest, identical predictions on every window): this run started from the pretrained weights.</p>{/if}
 			{#if g.integrity.r0_digest_equals_frozen_v2 === false}<p class="dim" data-testid="generalisation-r0-different">R0 is an untrained model; frozen V2 is shown as an external reference line, not as this run's starting point.</p>{/if}
 			{#if g.run_length === 10}<p class="dim">Rounds R0–R3 of this run are its 3-round view; the same deterministic coordinator produced them.</p>{/if}
@@ -108,13 +109,13 @@
 				<tbody>{#each partRows as p (p.id)}<tr><th scope="row">{p.id}</th><td>{fixed(p.base?.AUPRC as number | null | undefined)}</td><td>{fixed(p.round.AUPRC as number | null | undefined)}</td><td>{fixed(p.base?.AUROC as number | null | undefined)}</td><td>{fixed(p.round.AUROC as number | null | undefined)}</td></tr>{/each}</tbody></table>
 		{/if}
 
-		<section class="read" data-testid="generalisation-interpretation" aria-label="Measured statements"><h4>What the numbers say</h4><ul>{#each g.interpretation as line, i (i)}<li>{line}</li>{/each}</ul></section>
+		<section class="read" data-testid="generalisation-interpretation" aria-label="Measured statements"><h4>What the numbers say</h4><ul>{#each g.interpretation as line, i (i)}<li>{displayCopy(line)}</li>{/each}</ul></section>
 
 		<section class="lim" aria-label="Limits of this evaluation"><h4>Limits</h4><ul>
-			<li>{g.cohort.detail}</li>
-			<li>Frozen V2 was trained on the real-ECG AAMI-SVF task; here it is a zero-shot transfer reference on a different, synthetic target. A lower federated score would be a finding, not an error.</li>
-			<li>Real-ECG (AAMI-SVF) retention of the adapted model was <b>not executed</b>: it needs the governed external-data path, and synthetic-event scores must never be plotted as if they measured it.</li>
-			<li>Nothing here selects a round, tunes a threshold, calibrates, or promotes a model. {g.claim_boundary.replaceAll('_', ' ').toLowerCase()}.</li></ul></section>
+			<li>{displayCopy(g.cohort.detail)}</li>
+			<li>Frozen V2 was trained on the real-ECG AAMI-SVF task; here it is a zero-shot transfer reference on a different, research target. A lower federated score would be a finding, not an error.</li>
+			<li>Real-ECG (AAMI-SVF) retention of the adapted model was <b>not executed</b>: it needs the governed external-data path, and research-event scores must never be plotted as if they measured it.</li>
+			<li>Nothing here selects a round, tunes a threshold, calibrates, or promotes a model. {displayCopy(g.claim_boundary.replaceAll('_', ' ').toLowerCase())}.</li></ul></section>
 	{/if}
 </section>
 <style>

@@ -24,7 +24,7 @@ describe('run context axes are independent', () => {
 	});
 	it('a historically recorded SYNTHETIC evidence run is recorded evidence but not hardware', () => {
 		const c = runContext(base({ run_id: 'recorded-A', origin: 'RECORDED', run_type: 'REPLAY' }), 'recorded-A');
-		expect(c).toMatchObject({ provenance: 'SYNTHETIC_COHORT', execution: 'RECORDED_EVIDENCE', badge: 'RECORDED SYNTHETIC EVIDENCE' });
+		expect(c).toMatchObject({ provenance: 'SYNTHETIC_COHORT', execution: 'RECORDED_EVIDENCE', badge: 'RECORDED RESEARCH EVIDENCE' });
 		expect(c.capabilities.ownerBoundClient.available).toBe(false);
 	});
 	it('an event replay of a synthetic run is a replay, not new training', () => {
@@ -45,9 +45,9 @@ describe('run context axes are independent', () => {
 		expect(c.dataSentence).toMatch(/V2 windows/);
 	});
 	it('simulated SITE_00 is its own provenance, and the badge names the monitored site', () => {
-		expect(runContext(base({ source_mode: 'LIVE_MONITORED_SITE_00' }), 'FL10RUN-A')).toMatchObject({ provenance: 'SIMULATED_MONITORED_SITE_00', badge: 'SIMULATED SITE_00' });
+		expect(runContext(base({ source_mode: 'LIVE_MONITORED_SITE_00' }), 'FL10RUN-A')).toMatchObject({ provenance: 'SIMULATED_MONITORED_SITE_00', badge: 'LOGICAL SITE_00' });
 		const c = runContext(base({ source_mode: 'LIVE_MONITORED_SITE_00', monitored_site: 5 }), 'FL10RUN-A');
-		expect(c.badge).toBe('SIMULATED SITE_05');
+		expect(c.badge).toBe('LOGICAL SITE_05');
 		expect(c.dataSentence).toContain('SITE_05');
 	});
 });

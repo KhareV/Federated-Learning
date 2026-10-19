@@ -17,9 +17,9 @@ import { run } from './fixtures';
 const immediate = (cb: () => void) => { cb(); return 0; };
 const RAW = (over: Record<string, unknown> = {}) => ({
 	schema_version: 'STUDIO_ENGINEERING_CANDIDATE_V1', candidate_id: 'FL10_CANDIDATE_FL10RUN-AAA', label: 'ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL', created_at: '2026-10-18T12:00:00+00:00', source_run_id: 'FL10RUN-AAA',
-	source_kind: 'SYNTHETIC_COHORT', source_detail: { source_mode: 'CANONICAL_SYNTHETIC' }, cohort: 'REALISTIC', cohort_label: 'Realistic synthetic cohort', evaluation_cohort_id: 'WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2', run_length: 10, round_id: 10,
+	source_kind: 'SYNTHETIC_COHORT', source_detail: { source_mode: 'CANONICAL_SYNTHETIC' }, cohort: 'REALISTIC', cohort_label: 'Realistic research cohort', evaluation_cohort_id: 'WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2', run_length: 10, round_id: 10,
 	algorithm: 'FEDAVG', secagg_mode: 'PLAIN', base_model: { model_id: 'MODEL_V2_FINAL' }, state_sha256: 'ab'.repeat(32), metrics: { AUPRC: 0.8123, AUROC: 0.91, F1: 0.7 }, promoted: false, deployed: false, registered_in_product_registry: false, used_for_monitoring: false, ...over });
-const CAND_ORIGINAL = RAW({ candidate_id: 'FL10_CANDIDATE_FL10RUN-BBB', cohort: 'ORIGINAL', cohort_label: 'Original synthetic cohort (frozen)', source_kind: 'RECORDED_HARDWARE', run_length: 3, metrics: null, base_model: { kind: 'CANDIDATE', model_id: 'FL10_CANDIDATE_FL10RUN-AAA' } });
+const CAND_ORIGINAL = RAW({ candidate_id: 'FL10_CANDIDATE_FL10RUN-BBB', cohort: 'ORIGINAL', cohort_label: 'Original research cohort (frozen)', source_kind: 'RECORDED_HARDWARE', run_length: 3, metrics: null, base_model: { kind: 'CANDIDATE', model_id: 'FL10_CANDIDATE_FL10RUN-AAA' } });
 
 afterEach(() => { cleanup(); setProductStore(null); });
 
@@ -187,7 +187,7 @@ describe('label provenance of a run is named for the clients that really have ea
 	const hist = (over: Record<string, unknown> = {}) => run({ source_mode: 'LIVE_MONITORED_SITE_00', monitored_site: 2, ...over } as never);
 	it('a History-derived run has an assigned-label client plus event-label peers, not "engineering events" for everyone', () => {
 		expect(runContext(hist({ signal_session_id: 'SES-1' })).labels).toBe('SYNTHETIC_ASSIGNED_CLIENT_PLUS_EVENT_PEERS');
-		expect(runContext(hist({ signal_session_id: 'SES-1' })).dataSentence).toContain('synthetic-assigned labels');
+		expect(runContext(hist({ signal_session_id: 'SES-1' })).dataSentence).toContain('algorithmically assigned labels');
 	});
 	it('a live-monitored site (no History session) and a plain synthetic run keep event-window labels', () => {
 		expect(runContext(hist()).labels).toBe('SYNTHETIC_ENGINEERING_EVENTS');
@@ -221,17 +221,17 @@ describe('the library groups candidates by the cohort they were trained on and s
 		await waitFor(() => expect(screen.getByTestId('library-lineage').textContent).toBe('Lineage: FL10_CANDIDATE_FL10RUN-ORPHAN ← FL10_CANDIDATE_GONE ← (not in this library)'));
 		expect(screen.queryByTestId('library-not-comparable')).toBeNull();
 	});
-	it('cautions that adapting to the synthetic cohort lowered real-ECG performance, so a candidate is not a better ECG model', async () => {
+	it('cautions that adapting to the research cohort lowered real-ECG performance, so a candidate is not a better ECG model', async () => {
 		install([RAW()]);
 		render(CandidateLibrary);
 		await waitFor(() => expect(screen.getByTestId('library-real-ecg-caution').textContent).toMatch(/lowered performance on real MIT-BIH validation ECG.*not a better ECG model/));
 	});
 });
 
-const RESEARCH = RAW({ candidate_id: 'RESEARCH_FL_V2_FL001_R50', source_run_id: 'V2-FL-001', source_kind: 'RESEARCH_FEDERATED_CHECKPOINT', cohort: 'REAL_ECG', cohort_label: 'Real MIT-BIH training patients in 8 simulated sites (no synthetic cohort)',
+const RESEARCH = RAW({ candidate_id: 'RESEARCH_FL_V2_FL001_R50', source_run_id: 'V2-FL-001', source_kind: 'RESEARCH_FEDERATED_CHECKPOINT', cohort: 'REAL_ECG', cohort_label: 'Real MIT-BIH training patients in 8 simulated sites (no research cohort)',
 	evaluation_cohort_id: 'MITBIH_OFFICIAL_VALIDATION (7 patient groups, 2,880 real windows; V2-FL-001 model selection used it)', run_length: 50, round_id: 50, base_model: { model_id: 'FL_INIT_V2', kind: 'RANDOM_INITIALISATION' }, metrics: { AUPRC: 0.8268, AUROC: 0.92, F1: 0.696 } });
 
-describe('an imported federated research checkpoint (real MIT-BIH patients, no synthetic cohort)', () => {
+describe('an imported federated research checkpoint (real MIT-BIH patients, no research cohort)', () => {
 	it('is parsed, and a record that claims a made-up cohort or source is still refused', () => {
 		const [c] = parseCandidates([RESEARCH]);
 		expect(c.cohort).toBe('REAL_ECG');
@@ -240,13 +240,13 @@ describe('an imported federated research checkpoint (real MIT-BIH patients, no s
 		expect(() => parseCandidates([RAW({ source_kind: 'MADE_UP' })])).toThrow();
 		expect(() => parseCandidates([{ ...RESEARCH, deployed: true }])).toThrow();                 // the never-deployed rule applies to it too
 	});
-	it('is listed as real ECG with no synthetic cohort, in its own score group, and never as an original-cohort candidate', async () => {
+	it('is listed as real ECG with no research cohort, in its own score group, and never as an original-cohort candidate', async () => {
 		install([RAW(), RESEARCH]);
 		render(CandidateLibrary);
 		await waitFor(() => expect(screen.getAllByTestId('library-candidates').length).toBe(2));
 		const card = screen.getAllByRole('listitem').find((li) => li.getAttribute('data-candidate') === 'RESEARCH_FL_V2_FL001_R50')!;
 		expect(card.getAttribute('data-cohort')).toBe('REAL_ECG');
-		expect(card.textContent).toContain('REAL ECG · NO SYNTHETIC COHORT');
+		expect(card.textContent).toContain('REAL ECG · NO RESEARCH COHORT');
 		expect(card.textContent).not.toContain('ORIGINAL COHORT');
 		expect(card.textContent).toContain('Imported federated research checkpoint');
 		expect(card.textContent).toContain('NOT DEPLOYED');
@@ -254,7 +254,7 @@ describe('an imported federated research checkpoint (real MIT-BIH patients, no s
 		expect(screen.getByTestId('library-not-comparable').textContent).toContain('not comparable');
 		expect(card.textContent).toContain('FL_INIT_V2');                                           // lineage: it started from a random V2 initialisation, not from the central checkpoint
 	});
-	it('reads as trained on real patients when chosen as the starting model, and always notes that the run uses a synthetic cohort', async () => {
+	it('reads as trained on real patients when chosen as the starting model, and always notes that the run uses a research cohort', async () => {
 		install([RESEARCH]);
 		const onStartTen = vi.fn();
 		render(StudioRunStarter, { props: { capabilities: CAPS(1), onStartThree: vi.fn(), onStartTen } });
@@ -262,7 +262,7 @@ describe('an imported federated research checkpoint (real MIT-BIH patients, no s
 		await fireEvent.change(screen.getByTestId('cfg10-init'), { target: { value: 'CANDIDATE' } });
 		const note = screen.getByTestId('cfg10-candidate-note').textContent ?? '';
 		expect(note).toContain('imported federated research checkpoint');
-		expect(note).toContain('real MIT-BIH training patients in eight simulated sites (no synthetic cohort)');
+		expect(note).toContain('real MIT-BIH training patients in eight logical sites (no research cohort)');
 		expect(note).not.toMatch(/on the original cohort\./);
 		expect(note).toContain('This run uses the original cohort');
 		await fireEvent.click(screen.getByTestId('cohort-realistic'));

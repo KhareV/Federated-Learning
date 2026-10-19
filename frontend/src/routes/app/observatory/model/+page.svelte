@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import ReadMore from '$lib/components/ui/ReadMore.svelte';
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
@@ -66,11 +67,11 @@
 	<ol class="flow" data-testid="architecture-flow"><li><b>Input</b><small>shape {arch.input_shape.join(' × ')}<br />per-window normalized ECG</small></li><li><b>Stem conv</b><small>{arch.channels} channels, stride 2</small></li>
 		{#each blocks as b (b.i)}<li><b>Residual block {b.i + 1}</b><small>kernel {arch.kernel_size}, dilation {b.d}</small></li>{/each}
 		<li><b>Global mean pool</b><small>{arch.pooling}</small></li><li><b>Dropout + linear</b><small>{arch.channels} → 1</small></li><li class="out"><b>Raw logit</b><small>shape {arch.output_shape.join(' × ')}</small></li></ol>
-	<ReadMore label="Causal-structure facts from the implementation"><p class="dim">Receptive field {arch.receptive_field_samples.toLocaleString()} input samples; dilations {arch.dilations.join(', ')}. {arch.notes.join(' ')}</p></ReadMore>
+	<ReadMore label="Causal-structure facts from the implementation"><p class="dim">Receptive field {arch.receptive_field_samples.toLocaleString()} input samples; dilations {arch.dilations.join(', ')}. {displayCopy(arch.notes.join(' '))}</p></ReadMore>
 	<details><summary>TECHNICAL EVIDENCE · layer shapes and parameter counts</summary><div class="scroll"><table aria-label="Layer shapes and parameter counts"><thead><tr><th scope="col">Layer</th><th scope="col">Type</th><th scope="col">Parameters</th><th scope="col">Output shape (batch 1)</th></tr></thead><tbody>{#each arch.layers as l (l.name)}<tr><th scope="row">{l.name}</th><td>{l.type}</td><td>{l.parameters.toLocaleString()}</td><td>{l.output_shape.join(' × ')}</td></tr>{/each}</tbody></table></div></details></section>
-<section aria-label="Calibration"><h2>CAL_V2 · {cal.label}</h2>
-	<ol class="flow" data-testid="calibration-flow"><li><b>Raw logit</b><small>model output</small></li><li><b>Raw probability</b><small>{cal.semantics.raw}</small></li><li><b>÷ temperature {fmt(T, 6)}</b><small>{cal.semantics.calibrated}</small></li><li><b>Threshold ≥ {fmt(threshold, 6)}</b><small>fixed frozen policy binding</small></li></ol>
-	<p class="warn">Calibrated on MIT-BIH source-domain records only ({String(cal.constants.calibration_window_count)} windows from {String(cal.constants.calibration_patient_count)} patients). No cross-domain, wearable, personal or clinical calibration is established. {cal.not_applicable_to}</p>
+<section aria-label="Calibration"><h2>CAL_V2 · {displayCopy(cal.label)}</h2>
+	<ol class="flow" data-testid="calibration-flow"><li><b>Raw logit</b><small>model output</small></li><li><b>Raw probability</b><small>{displayCopy(cal.semantics.raw)}</small></li><li><b>÷ temperature {fmt(T, 6)}</b><small>{displayCopy(cal.semantics.calibrated)}</small></li><li><b>Threshold ≥ {fmt(threshold, 6)}</b><small>fixed frozen policy binding</small></li></ol>
+	<p class="warn">Calibrated on MIT-BIH source-domain records only ({String(cal.constants.calibration_window_count)} windows from {String(cal.constants.calibration_patient_count)} patients). No cross-domain, wearable, personal or clinical calibration is established. {displayCopy(cal.not_applicable_to)}</p>
 	<div class="demo" data-testid="hypothetical-calibration"><p class="tag">HYPOTHETICAL ARITHMETIC · not a monitoring output · does not change any frozen policy</p>
 		<label>Hypothetical raw logit <input type="range" min="-300" max="300" step="1" bind:value={logit} aria-valuetext={`${logit}`} /></label>
 		<p>logit {logit} → raw probability {fmt(rawP)} → calibrated {fmt(calP)} → {calP >= threshold ? 'at or above' : 'below'} the frozen threshold {fmt(threshold, 4)}. This is only the CAL_V2 formula; real outputs come from the server-side monitoring runtime.</p></div>
@@ -83,19 +84,19 @@
 
 
 <section aria-label="Activation inspection" data-testid="activation-inspection"><h2>Forward-activation inspection (opt-in, server-side)</h2>
-	<p class="tag">READ-ONLY FORWARD HOOKS · RELEASED CHECKPOINT · ONE SYNTHETIC WINDOW · NOT AN EXPLANATION METHOD</p>
-	<ReadMore label="How this inspection works"><p class="dim">Runs the checksum-verified MODEL_V2_FINAL weights on a fresh isolated copy for the one synthetic scenario window you choose, with hooks that only read layer outputs. The logit with hooks must be bit-identical to the logit without them, otherwise nothing is shown. It is never applied to research recordings or federated candidates, and layer activations are not clinical explanations.</p></ReadMore>
+	<p class="tag">READ-ONLY FORWARD HOOKS · RELEASED CHECKPOINT · ONE RESEARCH ECG WINDOW · NOT AN EXPLANATION METHOD</p>
+	<ReadMore label="How this inspection works"><p class="dim">Runs the checksum-verified MODEL_V2_FINAL weights on a fresh isolated copy for the one research scenario window you choose, with hooks that only read layer outputs. The logit with hooks must be bit-identical to the logit without them, otherwise nothing is shown. It is never applied to research recordings or federated candidates, and layer activations are not clinical explanations.</p></ReadMore>
 	<div class="act-controls"><label>Scenario <input aria-label="Scenario id" bind:value={actScenario} /></label><label>Window index <input type="number" min="0" max="200" bind:value={actWindow} /></label><label>Layer (optional) <input aria-label="Layer name" placeholder="backbone.blocks.6.relu2" bind:value={actLayer} /></label><button onclick={inspectActivations} disabled={actLoading}>{actLoading ? 'Inspecting…' : 'Inspect activations'}</button></div>
 	{#if actError}<p role="alert" class="err">{actError}</p>{/if}
 	{#if actBody}<p data-testid="activation-parity">Parity: logit with hooks is bit-identical to the logit without hooks ✓ · hooks remaining after inspection: {actBody.parity.hooks_remaining_after_inspection} · window quality {actBody.window_quality} · raw logit {actBody.raw_logit.toFixed(4)} (raw probability {actBody.raw_probability.toFixed(6)})</p>
 		{#if actBody.heatmap}{@const hm = actBody.heatmap}<figure><figcaption>{actBody.selected_layer}: {hm.channels} channels × {hm.time_bins} time bins (mean-pooled from {hm.source_time_steps} steps). Brighter = larger mean activation within the bin.</figcaption>
 			<svg viewBox={`0 0 ${hm.time_bins} ${hm.channels}`} preserveAspectRatio="none" role="img" aria-label={`Activation heatmap of ${actBody.selected_layer}, ${hm.channels} channels by ${hm.time_bins} time bins, values from ${heatRange[0].toFixed(3)} to ${heatRange[1].toFixed(3)}`}>{#each hm.values as row, c}{#each row as v, t}<rect x={t} y={c} width="1" height="1" fill={cell(v, heatRange[0], heatRange[1])} />{/each}{/each}</svg></figure>{/if}
 		<details><summary>TECHNICAL EVIDENCE · per-layer statistics</summary><div class="scroll"><table><caption>Statistics over the full output of each leaf layer for this window</caption><thead><tr><th scope="col">Layer</th><th scope="col">Shape</th><th scope="col">Mean</th><th scope="col">Std</th><th scope="col">Min</th><th scope="col">Max</th><th scope="col">L2</th><th scope="col">Exactly zero</th></tr></thead><tbody>{#each actBody.layers as l (l.name)}<tr><th scope="row">{l.name}</th><td>{l.output_shape.join(' × ')}</td><td>{l.mean.toFixed(4)}</td><td>{l.std.toFixed(4)}</td><td>{l.min.toFixed(3)}</td><td>{l.max.toFixed(3)}</td><td>{l.l2_norm.toFixed(2)}</td><td>{(l.fraction_exactly_zero).toFixed(3)}</td></tr>{/each}</tbody></table></div></details>
-		<p class="dim">{actBody.caveats.join(' ')}</p>{/if}</section>
+		<p class="dim">{displayCopy(actBody.caveats.join(' '))}</p>{/if}</section>
 <section aria-label="Explainability" data-testid="explainability"><h2>Frozen explainability examples (Integrated Gradients)</h2>
 	<p class="tag">FROZEN RESEARCH EVIDENCE · MODEL_V2_FINAL · zero-baseline signed Integrated Gradients</p>
 	{#if xaiError}<p role="alert" class="err">{xaiError}</p>{:else if !xai}<p class="dim" role="status">Loading…</p>{:else}
-	<p class="warn">{xai.limitations.join(' ')} A highlighted region is never a confirmed clinical cause.</p>
+	<p class="warn">{displayCopy(xai.limitations.join(' '))} A highlighted region is never a confirmed clinical cause.</p>
 	<div class="cases">{#each xai.cases as c (c.case_type)}<button class:on={caseType===c.case_type} aria-pressed={caseType===c.case_type} onclick={() => loadCase(c.case_type)}>{c.case_type} · record {c.record_id}</button>{/each}</div>
 	{#if xaiCase}<figure><figcaption>Model input window (normalized, top) and signed attribution (below: purple = pushes the logit up, amber = down; bar height normalized by the window maximum). Time 0–10 s of the model window.</figcaption>
 		<svg viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label={`Attribution overlay for the ${xaiCase.case_type} example`}><rect x="0" y="0" width="100" height="50" class="frame" /><path d={inputPath} class="inp" />{#each bars as b}<rect x={b.x} y={b.up ? 75 - b.h : 75} width="0.45" height={b.h} class={b.up ? 'up' : 'down'} />{/each}<path d="M0,75 L100,75" class="diag" /></svg></figure>

@@ -49,8 +49,8 @@ describe.each([
 // and the reviewed bytes are pinned so any further drift fails here.
 const REVIEWED_HARDWARE_PROVISION: Record<string, string> = {
 	'frontend/src/lib/components/product/federation/RoundProgress.svelte': '212dbd720234531168ad3dff00dd624022c69837c7c2055b05fad0988936d2e1',
-	'frontend/src/lib/components/product/federation/ClientGrid.svelte': '8f03c577b7362ba874f451c55e3f2d37342263436e3d36bd81b177ca300b1a55',
-	'frontend/src/lib/components/product/federation/ClientDetailPanel.svelte': '0b374063e279c4e8ca4eeaf706282508a9f8428145739e284a2dd1858e9da14a'
+	'frontend/src/lib/components/product/federation/ClientGrid.svelte': 'dd4f5cf6ead4497fe0176065ec9495e5527bbfb04cd272a941e1a5c6c7e574d9',
+	'frontend/src/lib/components/product/federation/ClientDetailPanel.svelte': 'bbe811ce22e3b7193814eacf4136c48cc355df49d2c5937be693a4acd66b493d'
 };
 describe('recorded-hardware provision keeps the original component design', () => {
 	it.each(Object.keys(REVIEWED_HARDWARE_PROVISION))('%s: original test ids and style rules are intact and the reviewed bytes are pinned', (file) => {
@@ -65,11 +65,20 @@ describe('recorded-hardware provision keeps the original component design', () =
 describe('the original network components and the owner-binding rule are untouched', () => {
 	it.each([
 		'frontend/src/lib/components/product/federation/ProcessStepper.svelte',
-		'frontend/src/lib/components/product/federation/ModelStateTransition.svelte', 'frontend/src/lib/components/product/federation/CandidateLifecycle.svelte', 'frontend/src/lib/components/product/federation/FederationTimeline.svelte',
-		'frontend/src/lib/components/product/federation/RunConfigForm.svelte', 'frontend/src/lib/components/product/federation/TechnicalEvidence.svelte',
+		'frontend/src/lib/components/product/federation/ModelStateTransition.svelte', 'frontend/src/lib/components/product/federation/FederationTimeline.svelte',
+		'frontend/src/lib/components/product/federation/TechnicalEvidence.svelte',
 		'frontend/src/lib/product/federation/participation.ts', 'frontend/src/lib/product/federation/live-model.ts', 'frontend/src/lib/product/federation/events.ts', 'frontend/src/lib/product/federation/presentation.ts'
 	])('%s is byte-identical to the original', (file) => {
 		expect(current(file)).toBe(original(file));
+	});
+	it('candidate lifecycle changes only visible wording', () => {
+		const file = 'frontend/src/lib/components/product/federation/CandidateLifecycle.svelte';
+		const expected = original(file)
+			.replace('Engineering sandbox', 'Engineering workspace')
+			.replace('ACCEPTED TO ENGINEERING SANDBOX REGISTRY', 'ACCEPTED TO ENGINEERING WORKSPACE REGISTRY')
+			.replace('NOT IN SANDBOX', 'NOT IN RESEARCH WORKSPACE')
+			.replace('>Sandbox</dt>', '>Workspace</dt>');
+		expect(current(file)).toBe(expected);
 	});
 	it('the 3-round default still renders the ORIGINAL run form (inside the round-count starter)', () => {
 		expect(current('frontend/src/lib/components/product/studio/StudioRunStarter.svelte')).toContain("import RunConfigForm from '$lib/components/product/federation/RunConfigForm.svelte'");

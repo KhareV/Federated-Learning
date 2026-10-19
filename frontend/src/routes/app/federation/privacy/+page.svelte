@@ -17,10 +17,10 @@
 <p class="lead">A narrow engineering claim about what the aggregation interface receives. It is not a general privacy or security guarantee.</p>
 <div class="grid">
 	<Panel eyebrow="01 / LOGICAL CLIENT" title="What stays local">
-		<p>{fed.hardwareRun ? 'Your recorded training windows (labels are synthetic)' : 'Local synthetic training examples'} stay inside each logical client buffer. All eight logical clients execute on one demonstration machine, not separate hospitals or institutions.</p>
+		<p>{fed.hardwareRun ? 'Your recorded training windows (labels are algorithmically assigned)' : 'Local research training examples'} stay inside each logical client buffer. All eight logical clients execute on one demonstration machine, not separate hospitals or institutions.</p>
 	</Panel>
 	<Panel eyebrow="02 / COORDINATOR" title="What the coordinator receives">
-		<p>Model updates and metadata — not the clients' local {fed.hardwareRun ? 'recorded training windows' : 'synthetic training examples'}. This is an application-level data-flow boundary, not host or network isolation.</p>
+		<p>Model updates and metadata — not the clients' local {fed.hardwareRun ? 'recorded training windows' : 'research training examples'}. This is an application-level data-flow boundary, not host or network isolation.</p>
 	</Panel>
 	<Panel eyebrow="03 / SHADOW" title="What SecAgg+ demonstrates" note="ROUND 1 ONLY">
 		<p>ROUND-1 PROTECTED-AGGREGATION SHADOW: a Flower SecAgg+ shadow is executed for round 1 only and compared with the plain aggregate under the frozen tolerance. <b>Authoritative aggregation remains PLAIN</b> in every product run.</p>

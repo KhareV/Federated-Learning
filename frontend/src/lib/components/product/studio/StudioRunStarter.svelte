@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { COHORT_BUTTON, cohortTestId } from '$lib/product/studio/cohort-text';
 	import { crossesCohorts, groupByTrainingCohort, runCohortName, trainedOn } from '$lib/product/studio/candidate-text';
 	// One continuous start workflow for both run lengths and both starting models. The default starting model is the pretrained V2 (MODEL_V2_FINAL, federated fine-tuning); the untrained start stays available.
@@ -16,9 +17,9 @@
 	let source = $state<SourceMode>('CANONICAL_SYNTHETIC');
 	let monitoredSite = $state(0);                  // source mode LIVE_MONITORED_SITE_00 only: which canonical cohort site is genuinely live-monitored (0 = SITE_00, the original behaviour)
 	const sites = $derived(capabilities?.ten_round.monitored_sites ?? []);
-	// Signal of the monitored client: a NEW simulated session of the cohort site (default), or a COMPLETED monitoring session from History whose signal is regenerated from its frozen scenario.
+	// Signal of the monitored client: a NEW software-source session of the cohort site (default), or a COMPLETED monitoring session from History whose signal is regenerated from its frozen scenario.
 	const product = getProductStore();
-	// ONE place chooses the training data: the synthetic cohort, one of YOUR completed monitoring sessions (History), or recorded hardware. Only the first has a "source mode".
+	// ONE place chooses the training data: the research cohort, one of YOUR completed monitoring sessions (History), or recorded hardware. Only the first has a "source mode".
 	let choice = $state<'SYNTHETIC' | 'SESSION' | 'HARDWARE'>(dataSource === 'HARDWARE' ? 'HARDWARE' : 'SYNTHETIC');
 	let sessionPick = $state('');
 	$effect(() => { const next = choice === 'HARDWARE' ? 'HARDWARE' : 'SYNTHETIC'; if (dataSource !== next) dataSource = next; });
@@ -29,10 +30,10 @@
 	const fromHistory = $derived(choice === 'SESSION');
 	const sessionText = (h: { session_id: string; created_at_us?: number | null; simulation_provenance?: { scenario_id: string } | null }) => `${h.simulation_provenance?.scenario_id ?? 'session'} · ${h.session_id.slice(0, 13)}…${h.created_at_us ? ' · ' + new Date(h.created_at_us / 1000).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : ''}`;
 	const siteLabel = $derived(`SITE_${String(monitoredSite).padStart(2, '0')}`);
-	// Training data: the synthetic cohort (default, unchanged) or readings recorded from the MongoDB hardware source.
+	// Training data: the research cohort (default, unchanged) or readings recorded from the MongoDB hardware source.
 	const hardwareOffered = $derived(capabilities?.hardware_demo?.available === true);
 	const hardware = $derived(choice === 'HARDWARE' && hardwareOffered);
-	// The synthetic cohort: the frozen original (default, reproduces every recorded result) or the realistic one (variable rhythm, premature ectopic beats, motion artifacts, annotation-noisy labels).
+	// The research cohort: the frozen original (default, reproduces every recorded result) or the realistic one (variable rhythm, premature ectopic beats, motion artifacts, annotation-noisy labels).
 	// It supplies the eight training clients (or the seven peers of a recorded-hardware run) and the evaluation holdout. A History monitoring session regenerates the original cohort's site signal, so it stays on the original.
 	let cohortChoice = $state<CohortId>('ORIGINAL');
 	const cohortOptions = $derived(capabilities?.ten_round.cohorts ?? []);
@@ -66,9 +67,9 @@
 	const shadowUnavailable = $derived(capabilities?.ten_round.unsupported?.SECAGG_SHADOW ?? 'not advertised by the connected backend');
 	const blocked = $derived(!backendEnabled || disabled || liveBlocked || !tenAvailable || (initialisation === 'CANDIDATE' && !candidateId) || (fromHistory && !sessionPick));
 	const OPTIONS: { value: RunLength; title: string; tag: string }[] = [{ value: 3, title: '★ 3 ROUNDS', tag: 'DEFAULT' }, { value: 10, title: '10 ROUNDS', tag: 'EXTENDED' }];
-	const SOURCE_TEXT: Record<SourceMode, string> = { CANONICAL_SYNTHETIC: 'Canonical synthetic cohort — eight frozen synthetic clients.', LIVE_MONITORED_SITE_00: 'Live-monitored simulated site — the simulated monitoring stream of that site is genuinely executed and feeds it. This is NOT real patient physiology.' };
-	const kind = $derived(chosenCohort === 'REALISTIC_NSTDB' ? 'realistic synthetic (recorded noise)' : realistic ? 'realistic synthetic' : 'canonical synthetic');
-	const sourceNote = $derived(fromHistory ? `Your synthetic monitoring session ${sessionPick ? sessionPick.slice(0, 13) + '…' : '—'} — its signal is regenerated from its frozen scenario (no new monitoring session, no new inference) and becomes the local data of your client, SITE_00; the other seven clients stay canonical synthetic. Labels are synthetic-assigned for the demonstration (a monitoring session has no scheduled engineering events), exactly as for recorded hardware. This is NOT real patient physiology.` : source === 'LIVE_MONITORED_SITE_00' ? `Live-monitored simulated ${siteLabel} — the simulated monitoring stream of ${siteLabel} is genuinely executed (real monitoring runtime, real inference) and its windows become that client's local data; the other seven clients stay ${kind}. This is NOT real patient physiology.` : chosenCohort === 'REALISTIC_NSTDB' ? 'Realistic synthetic cohort with recorded noise — eight synthetic clients with variable rhythm, ectopic beats and annotation-noisy labels, over recorded NSTDB baseline wander, electrode motion and muscle artifact.' : realistic ? 'Realistic synthetic cohort — eight synthetic clients with variable rhythm, ectopic beats and annotation-noisy labels.' : SOURCE_TEXT[source]);
+	const SOURCE_TEXT: Record<SourceMode, string> = { CANONICAL_SYNTHETIC: 'Canonical research cohort — eight frozen logical clients.', LIVE_MONITORED_SITE_00: 'Live-monitored logical site — the software-source monitoring stream of that site is genuinely executed and feeds it. This is NOT real patient physiology.' };
+	const kind = $derived(chosenCohort === 'REALISTIC_NSTDB' ? 'realistic research (recorded noise)' : realistic ? 'realistic research' : 'canonical research');
+	const sourceNote = $derived(fromHistory ? `Your software-source monitoring session ${sessionPick ? sessionPick.slice(0, 13) + '…' : '—'} — its signal is regenerated from its frozen scenario (no new monitoring session, no new inference) and becomes the local data of your client, SITE_00; the other seven clients use the canonical research cohort. Labels are algorithmically assigned for the demonstration (a monitoring session has no scheduled engineering events), exactly as for recorded hardware. This is NOT real patient physiology.` : source === 'LIVE_MONITORED_SITE_00' ? `Live-monitored logical ${siteLabel} — the software-source monitoring stream of ${siteLabel} is genuinely executed (real monitoring runtime, real inference) and its windows become that client's local data; the other seven clients stay ${kind}. This is NOT real patient physiology.` : chosenCohort === 'REALISTIC_NSTDB' ? 'Realistic research cohort with recorded noise — eight logical clients with variable rhythm, ectopic beats and annotation-noisy labels, over recorded NSTDB baseline wander, electrode motion and muscle artifact.' : realistic ? 'Realistic research cohort — eight logical clients with variable rhythm, ectopic beats and annotation-noisy labels.' : SOURCE_TEXT[source]);
 	function radioKey(e: KeyboardEvent) {
 		if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
 		e.preventDefault();
@@ -83,27 +84,27 @@
 		{#if hardwareOffered || historySessions.length}
 			<span class="cap">Training data</span>
 			<div class="opts data" role="radiogroup" aria-label="Training data">
-				<button type="button" role="radio" aria-checked={choice === 'SYNTHETIC'} class:on={choice === 'SYNTHETIC'} data-testid="data-source-synthetic" onclick={() => { choice = 'SYNTHETIC'; }}><b>SYNTHETIC COHORT</b><small>{realistic ? 'EIGHT REALISTIC SYNTHETIC CLIENTS' : 'EIGHT FROZEN SYNTHETIC CLIENTS'}</small></button>
-				<button type="button" role="radio" aria-checked={choice === 'SESSION'} class:on={choice === 'SESSION'} data-testid="data-source-session" disabled={!historySessions.length} title={historySessions.length ? '' : 'Run a synthetic monitoring session to completion first'} onclick={() => { choice = 'SESSION'; }}><b>SYNTHETIC MONITORING</b><small>{historySessions.length ? 'COMPLETED · FROM HISTORY' : 'NO COMPLETED SESSION YET'}</small></button>
+				<button type="button" role="radio" aria-checked={choice === 'SYNTHETIC'} class:on={choice === 'SYNTHETIC'} data-testid="data-source-synthetic" onclick={() => { choice = 'SYNTHETIC'; }}><b>RESEARCH COHORT</b><small>{realistic ? 'EIGHT REALISTIC LOGICAL CLIENTS' : 'EIGHT FROZEN LOGICAL CLIENTS'}</small></button>
+				<button type="button" role="radio" aria-checked={choice === 'SESSION'} class:on={choice === 'SESSION'} data-testid="data-source-session" disabled={!historySessions.length} title={historySessions.length ? '' : 'Run a software-source monitoring session to completion first'} onclick={() => { choice = 'SESSION'; }}><b>MONITORING SESSION</b><small>{historySessions.length ? 'COMPLETED · FROM HISTORY' : 'NO COMPLETED SESSION YET'}</small></button>
 				{#if hardwareOffered}<button type="button" role="radio" aria-checked={choice === 'HARDWARE'} class:on={choice === 'HARDWARE'} data-testid="data-source-hardware" onclick={() => { choice = 'HARDWARE'; }}><b>RECORDED HARDWARE</b><small>YOUR SAVED MONGODB SESSIONS</small></button>{/if}
 			</div>
 		{/if}
 		{#if cohortOffered && !fromHistory}
-			<span class="cap">Synthetic cohort</span>
-			<div class="opts data" role="radiogroup" aria-label="Synthetic cohort">
+			<span class="cap">Research cohort</span>
+			<div class="opts data" role="radiogroup" aria-label="Research cohort">
 				{#each cohortOptions as c (c.id)}
 					<button type="button" role="radio" aria-checked={chosenCohort === c.id} class:on={chosenCohort === c.id} data-testid={cohortTestId(c.id)} onclick={() => { cohortChoice = c.id; }}><b>{COHORT_BUTTON[c.id].title}</b><small>{COHORT_BUTTON[c.id].sub}</small></button>
 				{/each}
 			</div>
-			<p class="help" data-testid="cohort-note">{cohortNote}{hardware ? ' For a recorded-hardware run it supplies the seven synthetic peers and the evaluation holdout (pretrained V2 start only).' : ''}</p>
+			<p class="help" data-testid="cohort-note">{displayCopy(cohortNote)}{hardware ? ' For a recorded-hardware run it supplies the seven research peers and the evaluation holdout (pretrained V2 start only).' : ''}</p>
 		{/if}
 		{#if !hardware && !original}
 		{#if fromHistory}
-			<label><span>Synthetic monitoring session</span><select bind:value={sessionPick} data-testid="cfg10-session">{#each historySessions as h (h.session_id)}<option value={h.session_id}>{sessionText(h)}</option>{/each}</select></label>
+			<label><span>Monitoring session</span><select bind:value={sessionPick} data-testid="cfg10-session">{#each historySessions as h (h.session_id)}<option value={h.session_id}>{sessionText(h)}</option>{/each}</select></label>
 		{:else}
-			<label><span>Source mode</span><select bind:value={source} data-testid="cfg10-source">{#each modes as m (m)}<option value={m}>{m === 'CANONICAL_SYNTHETIC' ? 'Canonical synthetic cohort' : 'Live-monitored simulated site'}</option>{/each}</select></label>
+			<label><span>Source mode</span><select bind:value={source} data-testid="cfg10-source">{#each modes as m (m)}<option value={m}>{m === 'CANONICAL_SYNTHETIC' ? 'Canonical research cohort' : 'Live-monitored logical site'}</option>{/each}</select></label>
 			{#if source === 'LIVE_MONITORED_SITE_00' && sites.length}
-				<label><span>Monitored site</span><select bind:value={monitoredSite} data-testid="cfg10-site">{#each sites as site (site.index)}<option value={site.index}>{site.label} — {site.profile}</option>{/each}</select></label>
+				<label><span>Monitored site</span><select bind:value={monitoredSite} data-testid="cfg10-site">{#each sites as site (site.index)}<option value={site.index}>{site.label} — {displayCopy(site.profile)}</option>{/each}</select></label>
 			{/if}
 		{/if}
 		<p class="help" data-testid="cfg10-source-note">{sourceNote}</p>
@@ -117,10 +118,10 @@
 		<p class="dim">These are expected counts, not evidence of completed work. The running page shows only updates the coordinator actually accepted.</p>
 		{#if inits.length && !hardware}
 			<label><span>Starting model</span><select value={initialisation} onchange={(e) => { initChoice = (e.currentTarget as HTMLSelectElement).value as Initialisation; }} data-testid="cfg10-init">{#each inits as i (i.id)}<option value={i.id}>{i.id === 'FL_INIT_V2' ? 'Untrained V2 architecture — FL_INIT_V2' : 'Pretrained V2 (default) — MODEL_V2_FINAL, federated fine-tuning'}</option>{/each}{#if candidates.length}<option value="CANDIDATE">Stored engineering candidate — from your library</option>{/if}</select></label>
-			<p class="help" data-testid="cfg10-init-note">{initialisation === 'CANDIDATE' ? 'Stored engineering candidate' : inits.find((i) => i.id === initialisation)?.label}. {initialisation === 'CANDIDATE' ? 'R0 is the final state of the candidate chosen below, unchanged; the federated rounds adapt it further. The Generalisation tab still compares every round with frozen V2 on an unseen cohort.' : initialisation === 'MODEL_V2_FINAL' ? 'R0 is the verified pretrained checkpoint, unchanged; the federated rounds adapt it on the synthetic engineering-event task. The Generalisation tab then compares every round with frozen V2 on an unseen cohort.' : length === 3 ? 'Original frozen 3-round contract: FedAvg or FedProx, optional protected-aggregation shadow. R0 is a fresh untrained model.' : 'R0 is a fresh untrained model; frozen V2 is shown only as an external reference.'}</p>
+			<p class="help" data-testid="cfg10-init-note">{initialisation === 'CANDIDATE' ? 'Stored engineering candidate' : displayCopy(inits.find((i) => i.id === initialisation)?.label)}. {initialisation === 'CANDIDATE' ? 'R0 is the final state of the candidate chosen below, unchanged; the federated rounds adapt it further. The Generalisation tab still compares every round with frozen V2 on an unseen cohort.' : initialisation === 'MODEL_V2_FINAL' ? 'R0 is the verified pretrained checkpoint, unchanged; the federated rounds adapt it on the research-event task. The Generalisation tab then compares every round with frozen V2 on an unseen cohort.' : length === 3 ? 'Original frozen 3-round contract: FedAvg or FedProx, optional protected-aggregation shadow. R0 is a fresh untrained model.' : 'R0 is a fresh untrained model; frozen V2 is shown only as an external reference.'}</p>
 			{#if initialisation === 'CANDIDATE'}
 				<label><span>Candidate</span><select bind:value={candidatePick} data-testid="cfg10-candidate">{#each groupByTrainingCohort(candidates) as g (g.cohort)}<optgroup label={g.label}>{#each g.items as c (c.candidate_id)}<option value={c.candidate_id}>{c.candidate_id} · {c.run_length} rounds{c.metrics?.AUPRC !== undefined ? ` · AUPRC ${c.metrics.AUPRC.toFixed(3)}` : ''}</option>{/each}</optgroup>{/each}</select></label>
-				<p class="help" data-testid="cfg10-candidate-note">{pickedCandidate ? `Started from ${pickedCandidate.candidate_id}: ${pickedCandidate.source_kind === 'RESEARCH_FEDERATED_CHECKPOINT' ? `an imported federated research checkpoint, trained on ${trainedOn(pickedCandidate.cohort)}.` : `a ${pickedCandidate.source_kind === 'RECORDED_HARDWARE' ? 'recorded-hardware' : pickedCandidate.source_kind === 'LIVE_MONITORED_SITE' ? 'monitored-site' : 'synthetic-cohort'} run on ${trainedOn(pickedCandidate.cohort)}.`}` : 'Choose a stored candidate.'}{pickedCandidate && crossesCohorts(pickedCandidate.cohort, chosenCohort) ? ` This run uses ${runCohortName(chosenCohort)}: that is allowed, and both are recorded on the run.` : ''}</p>
+				<p class="help" data-testid="cfg10-candidate-note">{pickedCandidate ? `Started from ${pickedCandidate.candidate_id}: ${pickedCandidate.source_kind === 'RESEARCH_FEDERATED_CHECKPOINT' ? `an imported federated research checkpoint, trained on ${trainedOn(pickedCandidate.cohort)}.` : `a ${pickedCandidate.source_kind === 'RECORDED_HARDWARE' ? 'recorded-hardware' : pickedCandidate.source_kind === 'LIVE_MONITORED_SITE' ? 'monitored-site' : 'research-cohort'} run on ${trainedOn(pickedCandidate.cohort)}.`}` : 'Choose a stored candidate.'}{pickedCandidate && crossesCohorts(pickedCandidate.cohort, chosenCohort) ? ` This run uses ${runCohortName(chosenCohort)}: that is allowed, and both are recorded on the run.` : ''}</p>
 			{/if}
 			{#if v2ThreeUnsupported}<p class="warn" role="status" data-testid="v2-three-unsupported">3 rounds from the pretrained start are not offered by the connected backend; the original untrained 3-round form is shown.</p>{/if}
 		{/if}

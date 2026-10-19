@@ -53,7 +53,7 @@ describe('UI-ENH-002 presentation boundary', () => {
 		const fl = route('research/fl');
 		expect(fl).toContain('SCIENTIFIC FL EXPERIMENTS');
 		expect(fl).toContain('CURRENT PRODUCT ENGINEERING DEMO');
-		expect(fl).toContain('No synthetic demo accuracy');
+		expect(fl).toContain('No engineering demo accuracy');
 		expect(fl).toContain('NOT promoted as a generally superior method');
 		expect(fl).not.toMatch(/candidate (?:AUPRC|AUROC|accuracy|F1)/i);
 	});

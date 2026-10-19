@@ -3,6 +3,8 @@
 	import { SmoothCursor } from '$lib/components/magic/smooth-cursor';
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
+	import { onMount } from 'svelte';
+	import { installVisibleCopy } from '$lib/product/visible-copy';
 	import type { Snippet } from 'svelte';
 
 	let { children }: { children?: Snippet } = $props();
@@ -10,6 +12,7 @@
 	// The landing page's cursor is the site-wide pointer: it is mounted on every page, including the product workspace and sign-in. It follows the mouse instantly (no spring smoothing).
 	// /monitoring is the legacy research-runtime replay tool, NOT the product live monitor.
 	const researchTool = $derived(path === '/monitoring' || path.startsWith('/monitoring/'));
+	onMount(() => installVisibleCopy(document.body));
 
 	afterNavigate(({ to }) => {
 		// Preserve native anchor navigation while making page-to-page transitions

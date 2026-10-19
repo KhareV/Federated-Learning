@@ -3,6 +3,7 @@
 	import { ALGORITHM_LABEL, MODE_LABEL } from '$lib/product/federation/labels';
 	import type { FederationRunChoice } from '$lib/product/api';
 	import LiveVsReplay from './LiveVsReplay.svelte';
+	import { displayCopy } from '$lib/product/display-copy';
 
 	let { disabled = false, liveBlocked = false, backendEnabled = true, onSubmit }: { disabled?: boolean; liveBlocked?: boolean; backendEnabled?: boolean; onSubmit: (choice: FederationRunChoice) => void } = $props();
 	let runType = $state<RunType>('LIVE_RUN');
@@ -25,7 +26,7 @@
 	</label>
 	<p class="help">{MODE_LABEL[mode].text}{mode === 'SECAGG_SHADOW' ? ' ROUND-1 PROTECTED-AGGREGATION SHADOW.' : ''}</p>
 	<div class="explain" data-testid="cfg-explain" aria-live="polite">
-		<p><b>{runType === 'LIVE_RUN' ? 'LIVE RUN' : 'REPLAY'}</b> — {runType === 'LIVE_RUN' ? 'the backend trains for real: 8 synthetic clients, 3 rounds.' : 'previous events are replayed. Nothing is trained.'}</p>
+		<p><b>{runType === 'LIVE_RUN' ? 'LIVE RUN' : 'REPLAY'}</b> — {runType === 'LIVE_RUN' ? 'the backend trains for real: 8 logical clients, 3 rounds.' : 'previous events are replayed. Nothing is trained.'}</p>
 		<p><b>{algorithm}</b> — {algorithm === 'FEDAVG' ? 'Client updates are combined using sample-count-weighted averaging.' : 'Uses the existing proximal local-training option.'}</p>
 		{#if mode === 'SECAGG_SHADOW'}<p><b>SECAGG SHADOW</b> — Round-1 protected-aggregation compatibility exercise. No differential-privacy or anonymity claim.</p>{/if}
 	</div>

@@ -12,7 +12,7 @@
 		{ id: 'train', label: 'Training complete', done: trained, note: '' },
 		{ id: 'cand', label: replay ? 'Candidate event replayed' : 'Candidate created', done: cand !== null, note: '' },
 		{ id: 'checks', label: 'Structural checks', done: checks, note: '' },
-		{ id: 'sandbox', label: 'Engineering sandbox', done: sandbox, note: '' },
+		{ id: 'sandbox', label: 'Engineering workspace', done: sandbox, note: '' },
 		{ id: 'sci', label: 'Scientific validation', done: false, note: 'not performed here' },
 		{ id: 'dep', label: 'Deployment', done: false, note: 'never automatic' }
 	]);
@@ -22,11 +22,11 @@
 	<p class="big" data-testid="not-deployed">NOT DEPLOYED</p>
 	{#if replay && cand}<p class="rp" data-testid="historical-candidate">HISTORICAL EVENT REPLAY — NO NEW CANDIDATE CREATED.</p>{/if}
 	{#if cand}
-		{#if cand.governance === 'ACCEPTED_TO_SANDBOX'}<p class="ok">ACCEPTED TO ENGINEERING SANDBOX REGISTRY · NOT A SCIENTIFIC RELEASE · NOT DEPLOYED</p>{:else if cand.governance === 'REJECTED'}<p class="err">REJECTED BY ENGINEERING GOVERNANCE · NOT IN SANDBOX · NOT DEPLOYED</p>{/if}
+		{#if cand.governance === 'ACCEPTED_TO_SANDBOX'}<p class="ok">ACCEPTED TO ENGINEERING WORKSPACE REGISTRY · NOT A SCIENTIFIC RELEASE · NOT DEPLOYED</p>{:else if cand.governance === 'REJECTED'}<p class="err">REJECTED BY ENGINEERING GOVERNANCE · NOT IN RESEARCH WORKSPACE · NOT DEPLOYED</p>{/if}
 		<TechnicalEvidence label="TECHNICAL EVIDENCE (candidate metadata)" testid="candidate-evidence">
 			<dl data-testid="candidate-live"><div><dt>Candidate</dt><dd>{cand.candidateId}</dd></div><div><dt>Parent</dt><dd>{cand.parentModelId}</dd></div><div><dt>State digest</dt><dd><DigestText value={cand.stateDigest} label="candidate digest" /></dd></div>
 				<div><dt>Validation</dt><dd>{cand.validation ?? 'PENDING'}</dd></div><div><dt>Checks reported passed</dt><dd>{cand.checksPassed.length ? cand.checksPassed.join(', ') : '--'}</dd></div>
-				<div><dt>Governance</dt><dd>{cand.governance ?? '--'}</dd></div><div><dt>Sandbox</dt><dd>{cand.sandbox ?? '--'}</dd></div><div><dt>production_deployed</dt><dd>FALSE</dd></div></dl>
+				<div><dt>Governance</dt><dd>{cand.governance ?? '--'}</dd></div><div><dt>Workspace</dt><dd>{cand.sandbox ?? '--'}</dd></div><div><dt>production_deployed</dt><dd>FALSE</dd></div></dl>
 		</TechnicalEvidence>
 	{:else}<p class="dim">No candidate event yet. A candidate appears only after the final round.</p>{/if}
 </div>

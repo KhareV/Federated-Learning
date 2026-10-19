@@ -63,7 +63,7 @@
 				</dl>
 				<h3>Window monitoring-state labels</h3><ul data-testid="hardware-evidence-states">{#each counts('monitoring_state') as [state, n]}<li>{state}: {n}</li>{/each}</ul>
 				<h3>Window ECG-quality labels</h3><ul>{#each counts('ecg_quality') as [quality, n]}<li>{quality}: {n}</li>{/each}</ul>
-				<p class="dim">Counts are over scored windows. Device BPM is the firmware's mock value and device SpO₂ is an unverified estimate; both are shown as reported.</p>
+				<p class="dim">Counts are over scored windows. Device BPM is the firmware-reported placeholder value and device SpO₂ is an unverified estimate; both are shown as reported.</p>
 			{/if}
 		</div>
 	</Panel>

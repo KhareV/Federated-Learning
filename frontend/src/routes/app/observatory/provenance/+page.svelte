@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { focusHeading } from '$lib/product/observatory/focus';
 	import { onMount } from 'svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
@@ -19,12 +20,12 @@
 {#if error}<p role="alert" class="err">Unavailable: {error}</p>{:else if !repro || !gallery}<p class="dim" role="status">Loading…</p>{:else}
 <section aria-label="Reproducibility console" data-testid="reproducibility"><h2>Reproducibility console</h2>
 	<dl><div><dt>Git commit</dt><dd>{repro.git_commit ?? 'NOT AVAILABLE'}</dd></div><div><dt>Released model</dt><dd>{repro.released_model}</dd></div><div><dt>Checkpoint SHA256</dt><dd>{repro.released_checkpoint_sha256}</dd></div><div><dt>Calibration</dt><dd>{repro.calibration_id}</dd></div>
-		{#each repro.fields as [k, v] (k)}<div><dt>{k}</dt><dd>{v}</dd></div>{/each}</dl><p class="dim">{repro.note}</p></section>
+		{#each repro.fields as [k, v] (k)}<div><dt>{k}</dt><dd>{v}</dd></div>{/each}</dl><p class="dim">{displayCopy(repro.note)}</p></section>
 <section aria-label="Decision history" data-testid="chronology"><h2>Decision history (negative results included)</h2>
-	<ol class="time">{#each gallery.chronology as item (item.id)}<li><b>{item.title}</b><span class="dec">{item.decision}</span><p>{item.why}</p><small class={item.exists ? '' : 'miss'}>{item.exists ? '✓' : '✕ MISSING'} <code>{item.path}</code> · {item.sha256 ? item.sha256.slice(0, 16) + '…' : 'no file'}</small></li>{/each}</ol>
+	<ol class="time">{#each gallery.chronology as item (item.id)}<li><b>{displayCopy(item.title)}</b><span class="dec">{displayCopy(item.decision)}</span><p>{displayCopy(item.why)}</p><small class={item.exists ? '' : 'miss'}>{item.exists ? '✓' : '✕ MISSING'} <code>{item.path}</code> · {item.sha256 ? item.sha256.slice(0, 16) + '…' : 'no file'}</small></li>{/each}</ol>
 	<p class="warn">MODEL_V2_NOT_PROMOTED_RELEASE_CI and SYSTEM_V2_RESEARCH_DEFAULT_ACCEPTED are different decisions under different criteria; neither rewrites the other.</p></section>
 <section aria-label="Known boundaries" data-testid="boundaries"><h2>Known boundaries</h2>
-	<ul class="cards">{#each gallery.boundaries as item (item.id)}<li><b>{item.title}</b><p>{item.statement}</p><small class={item.exists ? '' : 'miss'}>{item.exists ? '✓' : '✕ MISSING'} <code>{item.path}</code> · {item.sha256 ? item.sha256.slice(0, 16) + '…' : 'no file'}</small></li>{/each}</ul></section>
+	<ul class="cards">{#each gallery.boundaries as item (item.id)}<li><b>{displayCopy(item.title)}</b><p>{displayCopy(item.statement)}</p><small class={item.exists ? '' : 'miss'}>{item.exists ? '✓' : '✕ MISSING'} <code>{item.path}</code> · {item.sha256 ? item.sha256.slice(0, 16) + '…' : 'no file'}</small></li>{/each}</ul></section>
 {/if}
 <p class="dim"><a href="/app/observatory">← Observatory</a> · <a href="/app/observatory/evidence">Scientific evidence</a> · <a href="/app/observatory/model">Model and calibration</a></p>
 <style>

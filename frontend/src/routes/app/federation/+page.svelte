@@ -61,9 +61,9 @@
 		{#if fed.error}<p class="warn" role="alert">{fed.error}</p>{/if}
 	</Panel>
 	<div class="stack">
-		<Panel eyebrow="04 / CLIENTS" title="Logical local clients" note={startSource === 'HARDWARE' ? 'YOUR RECORDED WINDOWS' : 'SYNTHETIC RESEARCH PARTITIONS'}>
+		<Panel eyebrow="04 / CLIENTS" title="Logical local clients" note={startSource === 'HARDWARE' ? 'YOUR RECORDED WINDOWS' : 'LOGICAL RESEARCH PARTITIONS'}>
 			{#if fed.clientsPhase === 'PREPARING' || fed.clientsPhase === 'IDLE'}
-				<p class="dim" role="status" data-testid="clients-preparing">PREPARING 8 SYNTHETIC LOCAL CLIENT DATASETS. This can take several seconds on first use.</p>
+				<p class="dim" role="status" data-testid="clients-preparing">PREPARING 8 LOCAL CLIENT DATASETS. This can take several seconds on first use.</p>
 			{:else if fed.clientsPhase === 'ERROR'}<p class="warn" role="alert">Clients could not be loaded.</p>
 			{:else}<p class="dim">{fed.clients.length} logical clients ready · <a href="/app/federation/clients">view clients →</a></p>{/if}
 			<p class="dim">All eight logical clients currently execute on one demonstration machine.</p>
@@ -77,7 +77,7 @@
 		<MetricTile label="Federation runtime" value={fed.overview?.federation_runtime ?? '--'} detail="ENGINEERING ONLY" tone="cyan" />
 		<MetricTile label="Logical clients" value={fed.overview ? String(fed.overview.client_count) : '--'} detail={fed.overview?.cohort_id ?? '--'} />
 		<MetricTile label="Active LIVE run" value={fed.overview ? (fed.overview.active_live_run ? 'YES' : 'NO') : '--'} detail="ONE AT A TIME (ONE-LAPTOP DEMO)" tone="amber" />
-		<MetricTile label="Engineering candidates" value={fed.overview ? String(fed.overview.candidate_count) : '--'} detail="SANDBOX REGISTRY ONLY" />
+		<MetricTile label="Engineering candidates" value={fed.overview ? String(fed.overview.candidate_count) : '--'} detail="RESEARCH REGISTRY ONLY" />
 		<MetricTile label="Released monitoring model" value={fed.overview?.released_model_id ?? '--'} detail="UNCHANGED BY FEDERATION" tone="cyan" />
 	</div>
 </TechnicalEvidence>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	import { onMount } from 'svelte';
 	import Panel from '$lib/components/dashboard/Panel.svelte';
 	import SimulationBanner from '$lib/components/product/SimulationBanner.svelte';
@@ -23,27 +24,27 @@
 
 <SimulationBanner />
 <div class="eyebrow">NHM / DEVICE</div>
-<h1>Virtual wearable</h1>
-<p class="lead">A simulated ECG source for research monitoring. This lifecycle is software-only; no Bluetooth or physical sensor is connected.</p>
-<div class="boundary"><strong>THIS PAGE: SIMULATED ONLY</strong><span>Physical telemetry uses the Monitor source selector; it does not pair here.</span></div>
+<h1>Software ECG source</h1>
+<p class="lead">A software ECG source for research monitoring. This lifecycle is software-only; no Bluetooth or physical sensor is connected.</p>
+<div class="boundary"><strong>THIS PAGE: SOFTWARE SOURCE ONLY</strong><span>Physical telemetry uses the Monitor source selector; it does not pair here.</span></div>
 
 {#if store.error}<p class="err" role="alert">{store.error}</p>{/if}
 
-{#if !loaded}<p role="status" class="dim">Loading virtual wearable and persisted sessions…</p>{/if}
+{#if !loaded}<p role="status" class="dim">Loading software ECG source and persisted sessions…</p>{/if}
 {#if !device}
-	<Panel eyebrow="01 / ATTACH" title="No virtual wearable attached">
-		<p class="dim">No device is attached. Attach the NHM Virtual Wearable - a software source (WEARABLE_SIM_V1). It is not a physical device.</p>
+	<Panel eyebrow="01 / ATTACH" title="No software ECG source attached">
+		<p class="dim">No device is attached. Attach the NHM software ECG source to use research monitoring. It is not a physical device.</p>
 		<label for="scenario">Monitoring scenario</label>
 		<select id="scenario" bind:value={scenario}>
 			{#each MONITORING_SCENARIOS as s}<option value={s.id}>{s.label} - {s.id}</option>{/each}
 		</select>
 		<p class="hint">Recommended for the faculty demo: <code>MIXED_MONITORING_SESSION</code> (streaming, context loss, quality degradation, disconnect, reconnect).</p>
-		<button class="primary" onclick={() => store.attachVirtualWearable(scenario)} disabled={store.busy}>ATTACH NHM VIRTUAL WEARABLE</button>
-		{#if store.busy}<p role="status" class="dim">Attaching simulated source…</p>{/if}
+		<button class="primary" onclick={() => store.attachVirtualWearable(scenario)} disabled={store.busy}>ATTACH NHM SOFTWARE ECG SOURCE</button>
+		{#if store.busy}<p role="status" class="dim">Attaching software source…</p>{/if}
 	</Panel>
 {:else}
-	<Panel eyebrow="01 / CONNECTION" title={device.display_name} note="SIMULATED SOURCE">
-		<div class="current"><span>CURRENT SOFTWARE STATE</span><strong data-testid="device-state">{device.connection_state}</strong><small>{dstate === 'CONNECTED' ? 'Ready for a research monitoring session.' : dstate === 'FOUND' ? 'Select Pair / Connect to continue.' : dstate === 'DETACHED' ? 'Scan for the attached virtual source.' : dstate === 'STOPPED' ? 'The last session ended and the link was kept. Reconnect to monitor again, or Disconnect to detach and scan afresh.' : dstate === 'ERROR' ? 'Scan again to recover, or Disconnect to detach.' : 'This is a simulated source lifecycle, not a physical connection.'}</small></div>
+	<Panel eyebrow="01 / CONNECTION" title={displayCopy(device.display_name)} note="SOFTWARE SOURCE">
+		<div class="current"><span>CURRENT SOFTWARE STATE</span><strong data-testid="device-state">{device.connection_state}</strong><small>{dstate === 'CONNECTED' ? 'Ready for a research monitoring session.' : dstate === 'FOUND' ? 'Select Pair / Connect to continue.' : dstate === 'DETACHED' ? 'Scan for the attached software source.' : dstate === 'STOPPED' ? 'The last session ended and the link was kept. Reconnect to monitor again, or Disconnect to detach and scan afresh.' : dstate === 'ERROR' ? 'Scan again to recover, or Disconnect to detach.' : 'This is a software source lifecycle, not a physical connection.'}</small></div>
 		<ol class="steps" aria-label="Device lifecycle">
 			{#each STEPS as step, i}<li class:done={stepIndex >= 0 && i < stepIndex} class:now={i === stepIndex} aria-current={i === stepIndex ? 'step' : undefined}><span>{i + 1}</span>{LABELS[i]}</li>{/each}
 		</ol>
@@ -55,20 +56,20 @@
 			<button onclick={() => store.disconnect(device.device_id)} disabled={store.busy || !can.disconnect}>DISCONNECT</button>
 			{#if dstate === 'CONNECTED'}<a class="next" href="/app/monitoring">CONTINUE TO MONITORING →</a>{/if}
 		</div>
-		{#if store.busy}<p role="status" class="dim">Updating virtual wearable connection…</p>{/if}
+		{#if store.busy}<p role="status" class="dim">Updating software ECG source connection…</p>{/if}
 		<details class="technical"><summary>TECHNICAL DEVICE EVIDENCE</summary><dl>
-			<dt>DEVICE ID</dt><dd data-testid="device-id">{device.device_id}</dd>
-			<dt>ADAPTER</dt><dd>{device.adapter_type}</dd>
-			<dt>PROVENANCE</dt><dd>{device.source_dataset_id} (software simulation)</dd>
+			<dt>DEVICE ID</dt><dd data-testid="device-id">{displayCopy(device.device_id)}</dd>
+			<dt>ADAPTER</dt><dd>{displayCopy(device.adapter_type)}</dd>
+			<dt>PROVENANCE</dt><dd>{displayCopy(device.source_dataset_id)} (software source)</dd>
 			<dt>SCENARIO</dt><dd data-testid="device-scenario">{scenarioOf ?? 'select when creating a session'}</dd>
-			<dt>VERSION / MODE</dt><dd>{device.simulation_version} / {device.source_mode}</dd>
+			<dt>VERSION / MODE</dt><dd>{displayCopy(device.simulation_version)} / {displayCopy(device.source_mode)}</dd>
 			<dt>CAPABILITIES</dt><dd>ECG {device.capabilities.supports_ecg ? 'yes' : 'no'} / PPG waveform {device.capabilities.supports_ppg ? 'yes' : 'unavailable'} / SpO2 context {device.capabilities.supports_spo2_context ? 'where emitted' : 'no'} / source {Object.values(device.capabilities.nominal_source_rates_hz).join(', ')} Hz</dd>
-			<dt>PHYSICAL HARDWARE</dt><dd>NOT USED BY THIS VIRTUAL DEVICE FLOW</dd>
+			<dt>PHYSICAL HARDWARE</dt><dd>NOT USED BY THIS SOFTWARE SOURCE FLOW</dd>
 		</dl></details>
 		<div class="live" role="status" aria-live="polite">Device state: {device.connection_state}</div>
 	</Panel>
 	{#if store.devices.length > 1}
-		<Panel eyebrow="02 / DEVICES" title="Attached virtual sources"><ul>{#each store.devices as d}<li><button class="link" onclick={() => (store.selectedDeviceId = d.device_id)} aria-current={d.device_id === device.device_id ? 'true' : undefined}>{d.display_name} · {d.device_id}</button> <span>{d.connection_state}</span></li>{/each}</ul></Panel>
+		<Panel eyebrow="02 / DEVICES" title="Attached software sources"><ul>{#each store.devices as d}<li><button class="link" onclick={() => (store.selectedDeviceId = d.device_id)} aria-current={d.device_id === device.device_id ? 'true' : undefined}>{displayCopy(d.display_name)} · {displayCopy(d.device_id)}</button> <span>{d.connection_state}</span></li>{/each}</ul></Panel>
 	{/if}
 {/if}
 

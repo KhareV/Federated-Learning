@@ -4,7 +4,7 @@
 </script>
 
 <WorkbenchPage eyebrow="DEFERRED / OUT OF SCOPE" {title} {description}>
-	<div class="deferred"><span>STATUS / DEFERRED</span><p>Federated learning, hardware integration, edge optimization, and privacy protocols are not part of the centralized software release.</p><small>This route is retained as a documented placeholder. It exposes no fabricated metrics or operational controls.</small></div>
+	<div class="deferred"><span>STATUS / DEFERRED</span><p>Federated learning, hardware integration, edge optimization, and privacy protocols are not part of the centralized software release.</p><small>This route is retained as a documented placeholder. It exposes no unsupported metrics or operational controls.</small></div>
 </WorkbenchPage>
 
 <style>

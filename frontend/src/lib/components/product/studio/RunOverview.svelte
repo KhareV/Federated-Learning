@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { displayCopy } from '$lib/product/display-copy';
 	// Run facts, interpretation limits and the evidence boundary of THIS run (migrated from the retired FL10 overview cards; now available for every run).
 	import DigestText from '$lib/components/product/federation/DigestText.svelte';
 	import { useStudio } from '$lib/product/studio/store.svelte';
@@ -18,9 +19,9 @@
 <div class="ro" data-testid="run-overview">
 	{#if !ov}<p class="dim" role="status">Loading run facts…</p>
 	{:else}
-		<p class="syn" data-testid="synthetic-label">{ov.synthetic_label}</p>{#if ov.live_label}<p class="syn live" data-testid="live-label">{ov.live_label}</p>{/if}
+		<p class="syn" data-testid="synthetic-label">{displayCopy(ov.synthetic_label)}</p>{#if ov.live_label}<p class="syn live" data-testid="live-label">{displayCopy(ov.live_label)}</p>{/if}
 		<div class="cards" data-testid="overview-cards">
-			<div><span>SOURCE</span><strong data-testid="source-label">{ov.source_label}</strong><small>{ov.source_mode} · {ov.run_id}</small></div>
+			<div><span>SOURCE</span><strong data-testid="source-label">{displayCopy(ov.source_label)}</strong><small>{ov.source_mode === 'CANONICAL_SYNTHETIC' ? 'Research cohort' : ov.source_mode === 'LIVE_MONITORED_SITE_00' ? 'Monitored logical site' : ov.source_mode === 'RECORDED_HARDWARE' ? 'Recorded hardware' : displayCopy(ov.source_mode)} · {ov.run_id}</small></div>
 			<div><span>STATUS</span><strong>{ov.status}</strong><small>{run.algorithm === 'FEDPROX' ? 'FedProx local objective, sample-weighted aggregation' : 'weighted FedAvg'} · eight logical clients · {num(run.rounds_committed, 0)} of {ov.run_length} rounds committed</small></div>
 			<div><span>ACCEPTED UPDATES</span><strong data-testid="accepted-updates">{num(run.accepted_updates_total, 0)}</strong><small>8 per round expected</small></div>
 			<div><span>EXAMPLE EXPOSURES</span><strong>{num(run.example_exposures_total, 0)}</strong><small>{num(run.unique_training_windows, 0)} unique windows × {ov.run_length} rounds (repeated, not independent)</small></div>
@@ -29,9 +30,9 @@
 			<div><span>EVALUATION COHORT</span><strong>{ov.evaluation.windows} windows</strong><small>{ov.engine === 'HARDWARE_DEMO' && studio.run?.base_model?.model_id !== 'MODEL_V2_FINAL' ? 'held-out recorded windows' : '16 participants'} · threshold {ov.evaluation.threshold} · no CAL_V2 · no round selection</small></div>
 			<div><span>TIMING</span><strong>{run.total_seconds === null || run.total_seconds === undefined ? 'NOT CAPTURED' : `${num(run.total_seconds, 1)} s`}</strong><small>measured wall clock, single machine</small></div>
 		</div>
-		{#if ov.monitoring_link}<p class="dim" data-testid="monitoring-link">Source mode: {ov.monitoring_link.label}. Monitoring sessions executed: {ov.monitoring_link.monitoring_sessions_executed}; buffer reused for {ov.monitoring_link.buffer_reused_for_rounds} rounds. This is a simulated stream, not real physiology.</p>{/if}
+		{#if ov.monitoring_link}<p class="dim" data-testid="monitoring-link">Source mode: {displayCopy(ov.monitoring_link.label)}. Monitoring sessions executed: {ov.monitoring_link.monitoring_sessions_executed}; buffer reused for {ov.monitoring_link.buffer_reused_for_rounds} rounds. This is a software-source stream, not real physiology.</p>{/if}
 		<details class="limits" open><summary>Interpretation limits</summary>
-			<ul data-testid="limits">{#each ov.protocol.interpretation_boundaries ?? [] as l}<li>{l}</li>{/each}<li>Single-machine federation of eight logical clients on {ov.engine === 'HARDWARE_DEMO' ? 'recorded data with synthetic labels' : 'simulated data'}; payload bytes are logical serialized sizes, not network traffic.</li><li>{ov.evaluation.cohort_use_detail}</li></ul></details>
+			<ul data-testid="limits">{#each ov.protocol.interpretation_boundaries ?? [] as l}<li>{displayCopy(l)}</li>{/each}<li>Single-machine federation of eight logical clients on {ov.engine === 'HARDWARE_DEMO' ? 'recorded data with assigned research labels' : 'generated research data'}; payload bytes are logical serialized sizes, not network traffic.</li><li>{displayCopy(ov.evaluation.cohort_use_detail)}</li></ul></details>
 		<p class="dim">Protocol <code>{(ov.protocol.sha256 ?? '').slice(0, 16)}…</code> · holdout manifest <code>{(ov.protocol.holdout_manifest_sha256 ?? '').slice(0, 16)}…</code> · method freeze <code>{freezeText(ov.evaluation.method_freeze_commit)}</code> · separation proof: {ov.evaluation.separation_source}</p>
 		{#if stateDigest}<p class="dim">Selected round state digest: <DigestText value={stateDigest} label={`round ${r} state digest`} /></p>{/if}
 	{/if}
