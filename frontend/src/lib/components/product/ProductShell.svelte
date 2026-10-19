@@ -2,7 +2,7 @@
 	// One navigation system for the product. The backend remains the auth authority.
 	import { page } from '$app/state';
 	import type { Snippet } from 'svelte';
-	import { LayoutDashboard, Watch, Activity, History, Network, Boxes, FlaskConical, ScanSearch, Server, Info, LogOut, Menu, X, PanelLeftClose, PanelLeftOpen } from '@lucide/svelte';
+	import { LayoutDashboard, Presentation, Watch, Activity, History, Network, Boxes, FlaskConical, ScanSearch, Server, Info, LogOut, Menu, X, PanelLeftClose, PanelLeftOpen } from '@lucide/svelte';
 	import DemoBanner from './DemoBanner.svelte';
 	import { getProductStore } from '$lib/product/state.svelte';
 
@@ -25,6 +25,7 @@
 
 	const NAV = [
 		{ label: 'Overview', href: '/app', icon: LayoutDashboard, exact: true },
+		{ label: 'Guided demo', href: '/app/demo', icon: Presentation },
 		{ label: 'Device', href: '/app/device', icon: Watch },
 		{ label: 'Monitor', href: '/app/monitoring', icon: Activity },
 		{ label: 'History', href: '/app/history', icon: History },

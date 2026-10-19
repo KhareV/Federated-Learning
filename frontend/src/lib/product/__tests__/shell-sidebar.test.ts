@@ -43,7 +43,7 @@ describe('sidebar collapse', () => {
 		expect(shell().classList.contains('collapsed')).toBe(true);
 		expect(toggle().getAttribute('aria-label')).toBe('Expand sidebar');
 		expect(toggle().getAttribute('aria-expanded')).toBe('false');
-		for (const label of ['Overview', 'Device', 'Monitor', 'History', 'Observatory', 'Federation', 'Models', 'Research', 'System', 'About']) {
+		for (const label of ['Overview', 'Guided demo', 'Device', 'Monitor', 'History', 'Observatory', 'Federation', 'Models', 'Research', 'System', 'About']) {
 			const link = screen.getByRole('link', { name: label });
 			expect(link.getAttribute('title')).toBe(label);
 			expect(link.getAttribute('href')).toMatch(/^\/app/);
@@ -88,5 +88,14 @@ describe('sidebar collapse', () => {
 		const foot = document.querySelector('.foot') as HTMLElement;
 		expect(foot.getAttribute('title')).toBe('SIMULATED MODEL · HARDWARE TELEMETRY · NOT DIAGNOSTIC');
 		expect(foot.textContent).toContain('HARDWARE TELEMETRY');
+	});
+});
+
+describe('the guided demonstration path in the sidebar', () => {
+	it('is a navigation item right after the Overview, links to /app/demo and is marked as the current section there', async () => {
+		await mount();
+		const links = screen.getAllByRole('link').map((l) => l.textContent?.trim());
+		expect(links.indexOf('Guided demo')).toBe(links.indexOf('Overview') + 1);
+		expect(screen.getByRole('link', { name: 'Guided demo' }).getAttribute('href')).toBe('/app/demo');
 	});
 });
