@@ -10,7 +10,7 @@
   "INTERNAL_DYNAMIC",
   "CATCH_ALL"
  ],
- "route_file_count": 67,
+ "route_file_count": 69,
  "legacy_redirect_count": 33,
  "retained_legacy_tool_count": 1,
  "monitoring_decision": "/monitoring is RETAINED as LEGACY_RETAINED_RESEARCH_TOOL: layout renders a RESEARCH RUNTIME TOOL banner linking to /app/monitoring, /monitor links to it, its copy is non-diagnostic and makes no federation/personalization claim.",
@@ -73,6 +73,11 @@
    "class": "CURRENT_PRODUCT"
   },
   {
+   "pattern": "/app/demo",
+   "file": "frontend/src/routes/app/demo/+page.svelte",
+   "class": "CURRENT_PRODUCT"
+  },
+  {
    "pattern": "/app/device",
    "file": "frontend/src/routes/app/device/+page.svelte",
    "class": "CURRENT_PRODUCT"
@@ -130,6 +135,11 @@
   {
    "pattern": "/app/observatory/evidence",
    "file": "frontend/src/routes/app/observatory/evidence/+page.svelte",
+   "class": "CURRENT_RESEARCH"
+  },
+  {
+   "pattern": "/app/observatory/external-check",
+   "file": "frontend/src/routes/app/observatory/external-check/+page.svelte",
    "class": "CURRENT_RESEARCH"
   },
   {

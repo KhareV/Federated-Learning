@@ -1,0 +1,468 @@
+{
+  "mode": "journey",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-JOURNEY-1792372764114",
+  "plan": "run:8:leadoff,run:45:sketch_real,unavail:7:sketch_real,run:25:sketch_real,run:6:leadoff,run:20:sketch_real,drop:9:sketch_real,run:25:sketch_real",
+  "plan_b": "run:125:sketch_real",
+  "sessions": {
+    "A": {
+      "sid": "HW-cc82a94874054dcfa9878b68c41d6244",
+      "snaps": [
+        {
+          "name": "render_asleep",
+          "state": "WAITING FOR DATA",
+          "count": 0,
+          "bpm": "Unavailable",
+          "spo2": "Unavailable",
+          "points": 0,
+          "paths": 0,
+          "latest_id": null,
+          "latest_ecg": null,
+          "latest_x": null,
+          "latest_y": null,
+          "expected_y": null
+        },
+        {
+          "name": "render_woken_after_14s",
+          "state": "WAITING FOR DATA",
+          "count": 0,
+          "bpm": "Unavailable",
+          "spo2": "Unavailable",
+          "points": 0,
+          "paths": 0,
+          "latest_id": null,
+          "latest_ecg": null,
+          "latest_x": null,
+          "latest_y": null,
+          "expected_y": null
+        },
+        {
+          "name": "live",
+          "state": "LIVE DATA RECEIVED",
+          "count": 308,
+          "bpm": "79",
+          "spo2": "97%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad57040c7885ad5059c59e5",
+          "latest_ecg": 1854,
+          "latest_x": 1000,
+          "latest_y": 102.08791208791209,
+          "expected_y": 102.08791208791209,
+          "quality": "AWAITING WINDOW",
+          "v2": "",
+          "v2_error": ""
+        },
+        {
+          "name": "finger_removed",
+          "state": "LIVE DATA RECEIVED",
+          "count": 648,
+          "bpm": "Unavailable",
+          "spo2": "Unavailable",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad57055c7885ad5059c5b39",
+          "latest_ecg": 1886,
+          "latest_x": 1000,
+          "latest_y": 100.91575091575092,
+          "expected_y": 100.91575091575092,
+          "quality": "VALID",
+          "v2": "NORMAL_MONITORED_PATTERN",
+          "v2_error": ""
+        },
+        {
+          "name": "leads_off",
+          "state": "LIVE DATA RECEIVED",
+          "count": 1173,
+          "bpm": "76",
+          "spo2": "97%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad57074c7885ad5059c5d46",
+          "latest_ecg": 2048,
+          "latest_x": 1000,
+          "latest_y": 94.98168498168498,
+          "expected_y": 94.98168498168498,
+          "quality": "VALID",
+          "v2": "NORMAL_MONITORED_PATTERN",
+          "v2_error": ""
+        },
+        {
+          "name": "wifi_dropped_stale",
+          "state": "STALE DATA",
+          "count": 1605,
+          "bpm": "78",
+          "spo2": "97%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad5708ec7885ad5059c5ef6",
+          "latest_ecg": 1857,
+          "latest_x": 1000,
+          "latest_y": 101.97802197802199,
+          "expected_y": 101.97802197802199,
+          "quality": "VALID",
+          "v2": "NORMAL_MONITORED_PATTERN",
+          "v2_error": ""
+        },
+        {
+          "name": "recovered_live",
+          "state": "LIVE DATA RECEIVED",
+          "count": 1611,
+          "bpm": "77",
+          "spo2": "96%",
+          "points": 300,
+          "paths": 2,
+          "latest_id": "6ad57097c7885ad5059c5efc",
+          "latest_ecg": 1888,
+          "latest_x": 1000,
+          "latest_y": 100.84249084249083,
+          "expected_y": 100.84249084249083,
+          "quality": "VALID",
+          "v2": "NORMAL_MONITORED_PATTERN",
+          "v2_error": ""
+        },
+        {
+          "name": "before_stop",
+          "state": "STALE DATA",
+          "count": 2022,
+          "bpm": "75",
+          "spo2": "97%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad570b0c7885ad5059c6097",
+          "latest_ecg": 1845,
+          "latest_x": 1000,
+          "latest_y": 102.41758241758242,
+          "expected_y": 102.41758241758242,
+          "quality": "VALID",
+          "v2": "NORMAL_MONITORED_PATTERN",
+          "v2_error": ""
+        },
+        {
+          "name": "stopped",
+          "state": "SESSION STOPPED",
+          "count": 2022,
+          "bpm": "75",
+          "spo2": "97%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad570b0c7885ad5059c6097",
+          "latest_ecg": 1845,
+          "latest_x": 1000,
+          "latest_y": 102.41758241758242,
+          "expected_y": 102.41758241758242,
+          "quality": "VALID",
+          "v2": "NORMAL_MONITORED_PATTERN",
+          "v2_error": ""
+        }
+      ],
+      "started_ms": 1792372767236,
+      "ended_ms": 1792372912634
+    },
+    "B": {
+      "sid": "HW-e42dbd47e7af4ed581d9ab3e0f1ea688",
+      "snaps": [
+        {
+          "name": "before_stop",
+          "state": "STALE DATA",
+          "count": 2088,
+          "bpm": "78",
+          "spo2": "96%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad57136c7885ad5059c68bf",
+          "latest_ecg": 1840,
+          "latest_x": 1000,
+          "latest_y": 102.6007326007326,
+          "expected_y": 102.6007326007326,
+          "quality": "VALID",
+          "v2": "NORMAL_MONITORED_PATTERN",
+          "v2_error": ""
+        },
+        {
+          "name": "stopped",
+          "state": "SESSION STOPPED",
+          "count": 2088,
+          "bpm": "78",
+          "spo2": "96%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad57136c7885ad5059c68bf",
+          "latest_ecg": 1840,
+          "latest_x": 1000,
+          "latest_y": 102.6007326007326,
+          "expected_y": 102.6007326007326,
+          "quality": "VALID",
+          "v2": "NORMAL_MONITORED_PATTERN",
+          "v2_error": ""
+        }
+      ],
+      "started_ms": 1792372921414,
+      "ended_ms": 1792373046571
+    },
+    "C": {
+      "sid": "HW-9f00131bbd924c758f96a54c2f1830ab",
+      "snaps": [
+        {
+          "name": "live_highgain",
+          "state": "LIVE DATA RECEIVED",
+          "count": 400,
+          "bpm": "75",
+          "spo2": "97%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad57156c7885ad5059c6a4f",
+          "latest_ecg": 1990,
+          "latest_x": 1000,
+          "latest_y": 97.10622710622711,
+          "expected_y": 97.10622710622711,
+          "quality": "UNUSABLE",
+          "v2": "",
+          "v2_error": ""
+        },
+        {
+          "name": "before_stop",
+          "state": "STALE DATA",
+          "count": 920,
+          "bpm": "79",
+          "spo2": "96%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad57176c7885ad5059c6c57",
+          "latest_ecg": 2038,
+          "latest_x": 1000,
+          "latest_y": 95.34798534798534,
+          "expected_y": 95.34798534798534,
+          "quality": "UNUSABLE",
+          "v2": "",
+          "v2_error": ""
+        },
+        {
+          "name": "stopped",
+          "state": "SESSION STOPPED",
+          "count": 920,
+          "bpm": "79",
+          "spo2": "96%",
+          "points": 300,
+          "paths": 1,
+          "latest_id": "6ad57176c7885ad5059c6c57",
+          "latest_ecg": 2038,
+          "latest_x": 1000,
+          "latest_y": 95.34798534798534,
+          "expected_y": 95.34798534798534,
+          "quality": "UNUSABLE",
+          "v2": "",
+          "v2_error": ""
+        }
+      ],
+      "started_ms": 1792373054896,
+      "ended_ms": 1792373110045
+    }
+  },
+  "detail": {
+    "replay": true,
+    "trace": true,
+    "use_in_fl": true
+  },
+  "replay": {
+    "A": {
+      "summary": "23 windows emitted · 7 rejected by the quality gate (no model result, none invented) · 16 scored. EXPERIMENTAL · RESAMPLED FROM LOW-RATE MONGODB TELEMETRY · NOT VALID · NOT DIAGNOSTIC",
+      "empty": "",
+      "controls": true,
+      "chart_points": 16,
+      "state": "At source time 0.0 s QUALITY (signal usability)not yet recordedAn engineering gate, not a diagnosis. MODEL OUTPUT (research metadata)calibrated —raw — · frozen threshold — · — POLICY STATEnot yet recordedno state change recorded yet CONTEXT (PPG / SpO₂, not a model signal)availableECG HR — · PPG pulse 76.0 · SpO₂ valid true",
+      "transitions": "Recorded policy state transitions 0.0 s start → NORMAL_MONITORED_PATTERN (DERIVED_FROM_CONSECUTIVE_WINDOW_RESULTS)25.0 s NORMAL_MONITORED_PATTERN → CONTEXT_UNAVAILABLE (DERIVED_FROM_CONSECUTIVE_WINDOW_RESULTS)45.0 s CONTEXT_UNAVAILABLE → NORMAL_MONITORED_PATTERN (DERIVED_FROM_CONSECUTIVE_WINDOW_RESULTS)",
+      "alerts": [],
+      "errors": []
+    },
+    "C": {
+      "summary": "8 windows emitted · 8 rejected by the quality gate (no model result, none invented) · 0 scored. EXPERIMENTAL · RESAMPLED FROM LOW-RATE MONGODB TELEMETRY · NOT VALID · NOT DIAGNOSTIC",
+      "empty": "This recorded session produced no window the quality gate accepts, so there is no model output or policy state to replay. See the quality summary above.",
+      "controls": true,
+      "chart_points": 0,
+      "state": "At source time 0.0 s QUALITY (signal usability)not yet recordedAn engineering gate, not a diagnosis. MODEL OUTPUT (research metadata)calibrated —raw — · frozen threshold — · — POLICY STATEnot yet recordedno state change recorded yet CONTEXT (PPG / SpO₂, not a model signal)availableECG HR — · PPG pulse 79.0 · SpO₂ valid true",
+      "transitions": "Recorded policy state transitions No state change was persisted for this session.",
+      "alerts": [],
+      "errors": []
+    }
+  },
+  "trace": {
+    "valid": {
+      "classification": "RECORDED HARDWARE · RESAMPLED FROM LOW-RATE TELEMETRY · EXPERIMENTAL · NOT VALID · NOT DIAGNOSTIC",
+      "stages": 5,
+      "window": "W0000 · VALID · 1 / 23",
+      "inference": "NORMAL_MONITORED_PATTERN",
+      "summary": [
+        "WINDOWHW-cc82a94874054dcfa9878b68c41d6244-W00005s–15s source time · [left, right)",
+        "QUALITY GATEVALIDNo emitted quality reasons",
+        "MODEL INPUTfloat32 [1, 2500]Per-window z-score, only for usable inference windows",
+        "INFERENCE EVIDENCENORMAL_MONITORED_PATTERNEXPERIMENTAL_MODEL_RESULT_SCORED_FROM_RESAMPLED_RECORDED_WINDOW"
+      ]
+    },
+    "rejected": {
+      "window": "W0006 · UNUSABLE · 7 / 23",
+      "quality": [
+        "WINDOWHW-cc82a94874054dcfa9878b68c41d6244-W000635s–45s source time · [left, right)",
+        "QUALITY GATEUNUSABLECLIPPING",
+        "MODEL INPUTNOT APPLIEDPer-window z-score, only for usable inference windows",
+        "INFERENCE EVIDENCENOT ATTACHEDNOT_ATTACHED_NO_MODEL_RESULT_FOR_THIS_WINDOW"
+      ],
+      "none": "The quality gate rejected this recorded window before the model, so there is no model result and none is invented. Choose a window marked VALID to see one.",
+      "has_inference": false
+    }
+  },
+  "tabular": {
+    "A": {
+      "run_id": "HDFLRUN-6DFE7272D752",
+      "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+      "banner": "ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED",
+      "chips": [
+        "Round 3 of 3",
+        "FedAvg",
+        "8 logical clients · your recorded windows",
+        "one demonstration machine",
+        "stream: CLOSED_NORMAL"
+      ],
+      "client_cards": 8,
+      "card_tags": 8,
+      "hw_participation": "YOUR RECORDED DATA IN THIS RUN 97 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and ass",
+      "hw_total_windows": "97",
+      "hw_raw_sent": "0",
+      "metric_auprc": "AUPRC0.606386",
+      "metric_accuracy": "Accuracy0.416667",
+      "metric_bce": "BCE0.708239",
+      "metric_status": "COMPLETED",
+      "evaluated_graph_points": 23,
+      "figure_avail": [
+        "PARTIAL",
+        "PARTIAL",
+        "PARTIAL",
+        "PENDING",
+        "AVAILABLE",
+        "PENDING"
+      ],
+      "final_state": "Latest committed global state: 06fdddaa…1a41copy",
+      "accepted_counter": "24/24",
+      "alerts": [],
+      "run_label_text": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+      "secagg": "SECAGG SHADOW: NOT USED",
+      "init_options": [
+        {
+          "value": "CANDIDATE",
+          "label": "Stored engineering candidate (from your candidate library)",
+          "disabled": false
+        },
+        {
+          "value": "MODEL_V2_FINAL",
+          "label": "Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning",
+          "disabled": false
+        },
+        {
+          "value": "FRESH_SEEDED",
+          "label": "Fresh initialisation (seeded, untrained)",
+          "disabled": false
+        },
+        {
+          "value": "WARM_START",
+          "label": "Pretrained: warm start from an earlier recorded-hardware run",
+          "disabled": false
+        }
+      ],
+      "v2_note": ""
+    },
+    "B": {
+      "run_id": "HDFLRUN-97488DC8F988",
+      "status_line": "COMPLETED · LIVE_RUN · FEDPROX · round 3/3 · 197 events",
+      "banner": "ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED",
+      "chips": [
+        "Round 3 of 3",
+        "FedProx",
+        "8 logical clients · your recorded windows",
+        "one demonstration machine",
+        "stream: CLOSED_NORMAL"
+      ],
+      "client_cards": 8,
+      "card_tags": 8,
+      "hw_participation": "YOUR RECORDED DATA IN THIS RUN 101 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and as",
+      "hw_total_windows": "101",
+      "hw_raw_sent": "0",
+      "metric_auprc": "AUPRC0.647864",
+      "metric_accuracy": "Accuracy0.625000",
+      "metric_bce": "BCE0.667545",
+      "metric_status": "COMPLETED",
+      "evaluated_graph_points": 23,
+      "figure_avail": [
+        "PARTIAL",
+        "PARTIAL",
+        "PARTIAL",
+        "PENDING",
+        "AVAILABLE",
+        "PENDING"
+      ],
+      "final_state": "Latest committed global state: c7cd4a15…ba14copy",
+      "accepted_counter": "24/24",
+      "alerts": [],
+      "run_label_text": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+      "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+      "init_options": [
+        {
+          "value": "CANDIDATE",
+          "label": "Stored engineering candidate (from your candidate library)",
+          "disabled": false
+        },
+        {
+          "value": "MODEL_V2_FINAL",
+          "label": "Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning",
+          "disabled": false
+        },
+        {
+          "value": "FRESH_SEEDED",
+          "label": "Fresh initialisation (seeded, untrained)",
+          "disabled": false
+        },
+        {
+          "value": "WARM_START",
+          "label": "Pretrained: warm start from an earlier recorded-hardware run",
+          "disabled": false
+        }
+      ],
+      "v2_note": ""
+    }
+  },
+  "v2": {
+    "preview_c": {
+      "text": "NOT ENOUGH USABLE WINDOWS 5 training · 2 holdout windows (needs 16 and 4); time-purged so no training window overlaps the holdout. Session10 s windowsCompleteof which VALIDBelow VALID (accepted)TrainHoldoutHW-9f00131bbd924c758f96a54c2f1830ab880852 0 of 8 complete windows are graded VALID. 8 lower-quality windows (degraded or unusable) are accepted for EXPERIMENTAL training, 5 of them in the training set: the grade is reported, not enforced, and these windows are never counted as VALID. INSUFFICIENT_V2_WINDOWS: 5 training and 2 holdout windows usable (need 16 and 4) from 8 10 s windows; incomplete windows excluded: none. V2 trains on every complete 10 s window whatever its grade. A V2 run needs about 4 minutes of clean recording (16 training + 4 holdout 10 s windows), so record longer or select more sessions.",
+      "start_disabled": true
+    },
+    "preview_ab": {
+      "text": "ENOUGH USABLE WINDOWS 31 training · 8 holdout windows (needs 16 and 4); time-purged so no training window overlaps the holdout. Session10 s windowsCompleteof which VALIDBelow VALID (accepted)TrainHoldoutHW-cc82a94874054dcfa9878b68c41d62442319163144HW-e42dbd47e7af4ed581d9ab3e0f1ea6882222202174 36 of 41 complete windows are graded VALID. 5 lower-quality windows (degraded or unusable) are accepted for EXPERIMENTAL training, 5 of them in the training set: the grade is reported, not enforced, and these windows are never counted as VALID.",
+      "start_disabled": false
+    },
+    "run_id": "HDFLRUN-6F9BFE403343",
+    "live": {
+      "badge": "RECORDED HARDWARE",
+      "clients": [
+        "RECORDED_DEMO_CLIENT_00",
+        "SIM_FL_SITE_01",
+        "SIM_FL_SITE_02",
+        "SIM_FL_SITE_03",
+        "SIM_FL_SITE_04",
+        "SIM_FL_SITE_05",
+        "SIM_FL_SITE_06",
+        "SIM_FL_SITE_07"
+      ],
+      "metric_auprc": "AUPRCQUEUED",
+      "label": "3-round recorded-hardware run — pretrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 0/4 · REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST",
+      "alerts": []
+    },
+    "generalisation": "4/4 rounds scored · frozen V2 COMPLETED"
+  }
+}

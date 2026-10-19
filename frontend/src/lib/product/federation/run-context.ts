@@ -1,14 +1,16 @@
 // RUN CONTEXT: one typed, fail-closed interpretation of a validated run descriptor (StudioRun) into the INDEPENDENT axes the UI needs.
 // Nothing here is scientific logic and nothing is guessed from an id prefix: every field comes from the backend-validated descriptor.
 // An id prefix is only used for a clearly marked PROVISIONAL context while the descriptor of the selected run has not arrived yet.
-import type { CohortId, StudioRun } from '../studio/types';
+import { COHORT_HOLDOUT_PHRASE, COHORT_TAG, isCohortId } from '../studio/cohort-text';
+import type { CandidateCohort, CohortId, RecordedQuality, StudioRun } from '../studio/types';
 
 /** Where the training windows come from. */
 export type DataProvenance = 'SYNTHETIC_COHORT' | 'SIMULATED_MONITORED_SITE_00' | 'RECORDED_HARDWARE' | 'UNKNOWN';
 /** What this run IS right now (independent of provenance): training that executes, an event replay, or a stored historical record. */
 export type ExecutionMode = 'LIVE_TRAINING' | 'EVENT_REPLAY' | 'RECORDED_EVIDENCE' | 'UNKNOWN';
 /** Where the labels come from. */
-export type LabelProvenance = 'SYNTHETIC_ENGINEERING_EVENTS' | 'SYNTHETIC_ASSIGNED_FOR_DEMO' | 'UNKNOWN';
+/** Where the labels of the training clients come from. A client fed by a History session or a recorded V2 hardware recording has ASSIGNED labels while its seven peers keep event-window labels: that mixture is named, never flattened into either. */
+export type LabelProvenance = 'SYNTHETIC_ENGINEERING_EVENTS' | 'SYNTHETIC_ASSIGNED_FOR_DEMO' | 'SYNTHETIC_ASSIGNED_CLIENT_PLUS_EVENT_PEERS' | 'UNKNOWN';
 export type ModelLineage = 'FL_INIT_V2' | 'MODEL_V2_FINAL' | 'HARDWARE_DEMO_FRESH' | 'HARDWARE_DEMO_WARM_START' | 'HARDWARE_V2_PRETRAINED' | 'UNKNOWN';
 export type ClientNamespace = 'SIM_FL_SITE' | 'RECORDED_DEMO_CLIENT' | 'RECORDED_CLIENT_PLUS_SIM_PEERS' | 'UNKNOWN';
 
@@ -18,7 +20,7 @@ export interface RunContext {
 	/** Which synthetic cohort supplies the training clients / peers and the evaluation holdout (ORIGINAL = the frozen cohort, also for every run that predates the option). */
 	cohort: CohortId;
 	/** The stored engineering candidate this run started from (its R0), or null. */
-	startCandidate: { id: string; cohort: CohortId | null; sourceRunId: string | null } | null;
+	startCandidate: { id: string; cohort: CandidateCohort | null; sourceRunId: string | null } | null;
 	provenance: DataProvenance;
 	execution: ExecutionMode;
 	labels: LabelProvenance;
@@ -73,26 +75,28 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 	const startCandidate = startedFromCandidate ? { id: String(modelId), cohort: run.base_model?.candidate_cohort ?? null, sourceRunId: run.base_model?.source_run_id ?? null } : null;
 	const warm = (run.base_model as { initialisation?: string } | null)?.initialisation === 'WARM_START';
 	const lineage: ModelLineage = hardware ? (modelId === 'MODEL_V2_FINAL' || startedFromCandidate ? 'HARDWARE_V2_PRETRAINED' : warm ? 'HARDWARE_DEMO_WARM_START' : 'HARDWARE_DEMO_FRESH') : modelId === 'MODEL_V2_FINAL' || startedFromCandidate ? 'MODEL_V2_FINAL' : modelId === 'FL_INIT_V2' ? 'FL_INIT_V2' : 'UNKNOWN';
-	const cohort: CohortId = run.cohort === 'REALISTIC' ? 'REALISTIC' : 'ORIGINAL';
-	const realistic = cohort === 'REALISTIC';
+	const cohort: CohortId = isCohortId(run.cohort) ? run.cohort : 'ORIGINAL';
+	const realistic = cohort !== 'ORIGINAL';
 	const recorded = execution === 'RECORDED_EVIDENCE';
 	const live = execution === 'LIVE_TRAINING';
 	const badge = hardware ? 'RECORDED HARDWARE' : recorded ? 'RECORDED SYNTHETIC EVIDENCE' : execution === 'EVENT_REPLAY' ? 'REPLAY' : provenance === 'SIMULATED_MONITORED_SITE_00' ? run.signal_session_id ? `HISTORY SESSION · SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : `SIMULATED SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}` : 'SYNTHETIC COHORT';
-	const cohortBadge = realistic && !hardware ? `${badge} · REALISTIC` : badge;
+	const cohortBadge = realistic && !hardware ? `${badge} · ${COHORT_TAG[cohort]}` : badge;
 	const dataSentence = hardware
 		? lineage === 'HARDWARE_V2_PRETRAINED'
-			? 'Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven ' + (realistic ? 'realistic' : 'canonical') + ' synthetic peers on one machine.'
+			? 'Your recorded telemetry resampled onto the V2 source grid into 10 s V2 windows (every complete window trains; the quality grade is reported but does not block) with deterministic synthetic labels on ONE recorded client, federated with seven ' + (cohort === 'REALISTIC_NSTDB' ? 'realistic (recorded-noise)' : realistic ? 'realistic' : 'canonical') + ' synthetic peers on one machine.'
 			: 'Your recorded telemetry windows (real features) with deterministic synthetic labels, split across eight logical clients on one machine.'
 		: provenance === 'SIMULATED_MONITORED_SITE_00'
 			? run.signal_session_id
 				? `The signal of your own simulated monitoring session (regenerated from its frozen scenario) is the local data of SITE_${String(run.monitored_site ?? 0).padStart(2, '0')} with synthetic-assigned labels; the other seven clients are canonical synthetic. No real physiology.`
 				: `A genuinely executed simulated monitoring stream feeds SITE_${String(run.monitored_site ?? 0).padStart(2, '0')}; the other seven clients are synthetic. No real physiology.`
-			: realistic
+			: cohort === 'REALISTIC_NSTDB'
+				? 'Realistic synthetic ECG with RECORDED noise (MIT-BIH Noise Stress Test baseline wander, electrode motion and muscle artifact at NSTDB signal-to-noise levels) on eight logical clients on one machine: variable rhythm, premature ectopic beats with pauses, and annotation-noisy labels. The ECG is still synthetic: no real physiology.'
+				: realistic
 				? 'Realistic synthetic ECG on eight logical clients on one machine: variable rhythm, premature ectopic beats with pauses, motion artifacts, and annotation-noisy labels. Still synthetic: no real physiology.'
 				: 'Synthetic engineering data on eight logical clients on one machine. No real physiology.';
 	return {
 		provisional: false, cohort, startCandidate, provenance, execution, lineage,
-		labels: hardware ? 'SYNTHETIC_ASSIGNED_FOR_DEMO' : 'SYNTHETIC_ENGINEERING_EVENTS',
+		labels: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? 'SYNTHETIC_ASSIGNED_CLIENT_PLUS_EVENT_PEERS' : 'SYNTHETIC_ASSIGNED_FOR_DEMO') : run.signal_session_id ? 'SYNTHETIC_ASSIGNED_CLIENT_PLUS_EVENT_PEERS' : 'SYNTHETIC_ENGINEERING_EVENTS',
 		clients: hardware ? (lineage === 'HARDWARE_V2_PRETRAINED' ? 'RECORDED_CLIENT_PLUS_SIM_PEERS' : 'RECORDED_DEMO_CLIENT') : 'SIM_FL_SITE',
 		badge: cohortBadge, dataSentence,
 		capabilities: {
@@ -109,11 +113,18 @@ export function runContext(run: StudioRun | null | undefined, routeRunId?: strin
 
 /** Wording of a pretrained-V2 recorded-hardware run that depends on the synthetic cohort supplying its seven peers and its evaluation holdout. */
 export function hardwareV2Texts(cohort: CohortId): { peers: string; metricsNote: string } {
-	const realistic = cohort === 'REALISTIC';
+	const realistic = cohort !== 'ORIGINAL';
+	const peerWord = cohort === 'REALISTIC_NSTDB' ? 'realistic (recorded-noise)' : realistic ? 'realistic' : 'canonical';
 	return {
-		peers: `recorded 10 s V2 windows (resampled; every complete window is used, the quality grade is reported but does not block) on your one recorded client; the other seven clients are ${realistic ? 'realistic' : 'canonical'} synthetic peers.`,
-		metricsNote: `Your recording trains client 00 only (its labels are synthetic-assigned). Every round is evaluated exactly as in a synthetic run, on the ${realistic ? 'realistic synthetic evaluation cohort' : 'same frozen synthetic evaluation cohort'}, so these metrics are directly comparable with a ${realistic ? 'realistic-cohort ' : ''}synthetic pretrained-V2 run; they say nothing about your physiology.`
+		peers: `recorded 10 s V2 windows (resampled; every complete window is used, the quality grade is reported but does not block) on your one recorded client; the other seven clients are ${peerWord} synthetic peers.`,
+		metricsNote: `Your recording trains client 00 only (its labels are synthetic-assigned). Every round is evaluated exactly as in a synthetic run, on the ${cohort === 'ORIGINAL' ? 'same frozen synthetic evaluation cohort' : COHORT_HOLDOUT_PHRASE[cohort]}, so these metrics are directly comparable with a ${realistic ? `${cohort === 'REALISTIC_NSTDB' ? 'recorded-noise realistic' : 'realistic'}-cohort ` : ''}synthetic pretrained-V2 run; they say nothing about your physiology.`
 	};
+}
+/** What the recording contributed to a pretrained-V2 hardware run, in words: genuinely VALID windows versus lower-quality windows accepted for experimental training. Older runs say the split is unknown. */
+export function hardwareQualityText(q: RecordedQuality): string {
+	if (!q.recorded || q.VALID === null || q.accepted_below_valid === null) return `Per-window quality grades were not kept for this older run, so how many of your ${q.windows} windows are VALID is unknown.`;
+	const n = q.accepted_below_valid;
+	return `Of your ${q.windows} recorded windows, ${q.VALID} are graded VALID; ${n} lower-quality window${n === 1 ? '' : 's'} (${q.DEGRADED} degraded, ${q.UNUSABLE} unusable) ${n === 1 ? 'was' : 'were'} accepted for experimental training. The grade is reported, not enforced.`;
 }
 export const isHardwareContext = (c: RunContext): boolean => c.provenance === 'RECORDED_HARDWARE';
 /** Only the tabular recorded-hardware family is evaluated on a small holdout block of the recording; a pretrained-V2 hardware run is evaluated on the same frozen synthetic cohort as a synthetic V2 run. */

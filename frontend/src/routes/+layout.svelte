@@ -7,7 +7,7 @@
 
 	let { children }: { children?: Snippet } = $props();
 	const path = $derived(page.url.pathname);
-	// The landing page's smooth cursor is the site-wide pointer: it is mounted on every page, including the product workspace and sign-in.
+	// The landing page's cursor is the site-wide pointer: it is mounted on every page, including the product workspace and sign-in. It follows the mouse instantly (no spring smoothing).
 	// /monitoring is the legacy research-runtime replay tool, NOT the product live monitor.
 	const researchTool = $derived(path === '/monitoring' || path.startsWith('/monitoring/'));
 

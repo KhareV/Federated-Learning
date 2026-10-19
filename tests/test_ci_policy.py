@@ -61,3 +61,15 @@ def test_historical_t033_ci_evidence_is_preserved() -> None:
     assert (ROOT / "reports/t033/ci_report.json").exists()
     run = (ROOT / "reports/t033/ci_run.json").read_text(encoding="utf-8")
     assert "36910820027" in run
+
+
+def test_every_workflow_is_manual_only_until_the_owner_asks_for_automatic_ci():
+    """The fast lane is a separate workflow, but the standing instruction still applies to it: no push / pull_request / schedule trigger."""
+    import re
+
+    for path in sorted((ROOT / ".github/workflows").glob("*.yml")):
+        text = path.read_text(encoding="utf-8")
+        on_block = re.search(r"^on:\n((?:[ \t]+.*\n|\n)+)", text, re.M)
+        assert on_block, path.name
+        keys = re.findall(r"^[ \t]{2}(\w+):", on_block.group(1), re.M)
+        assert keys == ["workflow_dispatch"], (path.name, keys)

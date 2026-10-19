@@ -15,7 +15,7 @@ One directory per owner and candidate under a **stable, git-ignored** location (
 
 | Field | Meaning |
 |---|---|
-| `cohort` | which synthetic cohort the run used (`ORIGINAL` or `REALISTIC`) |
+| `cohort` | which synthetic cohort the run used (`ORIGINAL`, `REALISTIC` or `REALISTIC_NSTDB`; `REAL_ECG` for imported research checkpoints) |
 | `source_kind` | `SYNTHETIC_COHORT`, `LIVE_MONITORED_SITE`, or `RECORDED_HARDWARE` (pretrained-V2 family) |
 | `base_model` | what the run started from (pretrained V2, untrained, or another candidate: lineage) |
 | `metrics` | exploratory scores of the final round on its evaluation cohort (not a selection criterion) |
@@ -43,3 +43,7 @@ Pick **Stored engineering candidate** as the starting model in the Federation St
 * Candidates are engineering artefacts: not promoted, not deployed, never used for monitoring, no scientific or clinical claim. Their scores say little about each other when they come from different cohorts.
 * The runs themselves (journals, figures, evidence) still live in the per-launch workspace; only the candidate state is durable. A candidate's `source_run_id` therefore identifies a run whose page may no longer exist after a restart.
 * The tabular recorded-hardware family (fresh / warm start) has its own warm start from an earlier hardware run and is not part of this library.
+
+## Imported research checkpoints (real MIT-BIH patients, no synthetic cohort)
+The 50-round federated V2 checkpoints of experiment V2-FL-001 (round 50, and round 38, the best-validation checkpoint that the frozen FL evaluation family scored) can be added with `python -m scripts.register_research_candidates --owner <clerk user id>`. They are listed with source kind `RESEARCH_FEDERATED_CHECKPOINT` and cohort `REAL_ECG`: they were federated from a random start on eight simulated whole-patient sites of REAL MIT-BIH training patients, so no synthetic cohort stands behind them. The two values only ever occur together (the library refuses a mismatch). Their library scores are measured on the real MIT-BIH VALIDATION windows, which V2-FL-001 used to pick its best round (round 38 is optimistic there); they sit in their own score group and are never compared with synthetic-cohort scores. Like every candidate they are not promoted, not deployed and never used for monitoring, and they may start a later run on either synthetic cohort (the run records both).
+

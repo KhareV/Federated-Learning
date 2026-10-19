@@ -186,6 +186,7 @@ export function fakeBackend(system: SystemInfoV2 = systemInfo({ federation_runti
 		studioExports: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
 		studioExportFile: () => Promise.reject(new Error('NO_FAKE_STUDIO_EVIDENCE')),
 		observatoryShowcase: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_EVIDENCE')),
+		observatoryExternalCheck: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_EVIDENCE')),
 		observatoryFlEval: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_EVIDENCE')),
 		observatoryFlCurves: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_EVIDENCE')),
 		observatoryArchitecture: () => Promise.reject(new Error('NO_FAKE_OBSERVATORY_EVIDENCE')),

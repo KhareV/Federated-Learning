@@ -42,6 +42,7 @@ describe('hardware session evidence when the quality gate rejects windows', () =
 		answer = timeline({ windows_total: 57, windows_scored: 49, windows_unusable: 8, unusable_reasons: { CLIPPING: 8 } });
 		render(HardwareEvidence, { props: { session } });
 		await waitFor(() => expect(screen.getByTestId('hardware-evidence-rejected').textContent).toContain('8 of 57 windows were rejected by the quality gate: clipping (at the ADC rail) ×8'));
+		expect(screen.getByTestId('hardware-evidence-rejected').textContent).toContain('accepts complete windows of any grade as experimental training data; they are never counted as VALID');
 		expect(screen.queryByTestId('hardware-evidence-none-scored')).toBeNull();
 	});
 });

@@ -159,7 +159,7 @@ class StudioFl10Service:
     async def create(self, owner: str, mode: str, init: str = v2_init.INIT_FRESH, rounds: int = 10,
                      algorithm: str = "FEDAVG", secagg_mode: str = "PLAIN", monitored_site: int = 0, signal_session: dict[str, Any] | None = None, cohort: str = cohorts.ORIGINAL, candidate_id: str | None = None) -> Job:
         if cohort not in cohorts.COHORTS:
-            raise StudioRunError("INVALID_REQUEST", "cohort must be ORIGINAL or REALISTIC")
+            raise StudioRunError("INVALID_REQUEST", f"cohort must be one of {', '.join(cohorts.COHORTS)}")
         if cohort != cohorts.ORIGINAL and signal_session is not None:
             raise StudioRunError("INVALID_REQUEST", "a History monitoring session regenerates the original cohort's site signal; it cannot be combined with the realistic cohort")
         if rounds not in (3, 10):
@@ -262,13 +262,12 @@ class StudioFl10Service:
 
             site = job.monitored_site
             profile = cohort_profiles()[site]
-            if job.cohort == cohorts.REALISTIC:
-                from simulation import fl_cohort_realistic_v2 as realistic_cohort
+            if cohorts.is_realistic(job.cohort):
                 from studio import realistic_monitor
 
-                profile = realistic_cohort.train_profile(site)
+                profile = cohorts.module(job.cohort).train_profile(site)
                 self._set_phase(job, "MONITORING_SITE_00")       # phase id kept for compatibility; the page names the monitored site from the run descriptor
-                monitored = aio.run(realistic_monitor.monitor_site(self._inference_factory, site, session_id=f"LIVELINK-{job.run_id}"))
+                monitored = aio.run(realistic_monitor.monitor_site(self._inference_factory, site, session_id=f"LIVELINK-{job.run_id}", cohort=job.cohort))
                 live = realistic_monitor.dataset_from_windows(monitored["windows"], profile)
                 parity = realistic_monitor.parity(monitored, live, profile, datasets[site].dataset_sha256) | {"inference_http_statuses": monitored["inference_http_statuses"]}
             elif job.signal_session is not None:

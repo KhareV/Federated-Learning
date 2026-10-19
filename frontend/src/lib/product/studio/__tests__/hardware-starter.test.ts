@@ -25,8 +25,8 @@ const prior = { run_id: 'HDFLRUN-AAA', status: 'COMPLETED', algorithm: 'FEDAVG',
 let started: unknown;
 let previewResult: unknown;
 let candidatesResult: unknown[] = [];
-const PREVIEW_OK = { sessions: [{ session_id: 'HW-OK', readings: 4800, windows: 57, usable: 40, train: 28, holdout: 8, by_quality: { VALID: 40, UNUSABLE: 17 }, excluded_reasons: { CLIPPING: 17 } }], train_windows: 28, holdout_windows: 8, min_train_windows: 16, min_holdout_windows: 4, eligible: true, reason: null, assumptions: {} };
-const PREVIEW_BAD = { ...PREVIEW_OK, sessions: [{ ...PREVIEW_OK.sessions[0], usable: 0, train: 0, holdout: 0 }], train_windows: 0, holdout_windows: 0, eligible: false, reason: 'INSUFFICIENT_V2_WINDOWS: 0 training and 0 holdout windows usable; the unchanged PREPROC_V1 quality gate excluded: CLIPPING ×57.' };
+const PREVIEW_OK = { sessions: [{ session_id: 'HW-OK', readings: 4800, windows: 57, usable: 40, valid: 31, below_valid: 9, train: 28, train_valid: 22, train_below_valid: 6, holdout: 8, holdout_valid: 6, holdout_below_valid: 2, by_quality: { VALID: 31, DEGRADED: 4, UNUSABLE: 22 }, excluded_reasons: { CLIPPING: 17 } }], valid_windows: 31, below_valid_windows: 9, train_below_valid: 6, holdout_below_valid: 2, train_windows: 28, holdout_windows: 8, min_train_windows: 16, min_holdout_windows: 4, eligible: true, reason: null, assumptions: {} };
+const PREVIEW_BAD = { ...PREVIEW_OK, sessions: [{ ...PREVIEW_OK.sessions[0], usable: 0, valid: 0, below_valid: 0, train: 0, train_valid: 0, train_below_valid: 0, holdout: 0, holdout_valid: 0, holdout_below_valid: 0 }], valid_windows: 0, below_valid_windows: 0, train_below_valid: 0, holdout_below_valid: 0, train_windows: 0, holdout_windows: 0, eligible: false, reason: 'INSUFFICIENT_V2_WINDOWS: 0 training and 0 holdout windows usable; the unchanged PREPROC_V1 quality gate excluded: CLIPPING ×57.' };
 beforeEach(() => {
 	FakeSocket.reset(); started = null; previewResult = PREVIEW_OK; candidatesResult = [];
 	vi.stubGlobal('location', { protocol: 'http:', host: 'localhost:5173', assign: vi.fn() });
@@ -55,7 +55,8 @@ describe('recorded hardware inside the run starter', () => {
 		expect(await screen.findByTestId('hardware-demo-starter')).toBeTruthy();
 		expect(screen.getByTestId('hardware-demo-boundary').textContent).toContain('SYNTHETIC labels');
 		const init = screen.getByTestId('hardware-demo-init') as HTMLSelectElement;
-		expect([...init.options].map((o) => [o.value, o.disabled])).toEqual([['FRESH_SEEDED', false], ['WARM_START', false], ['MODEL_V2_FINAL', false]]);
+		expect([...init.options].map((o) => [o.value, o.disabled])).toEqual([['MODEL_V2_FINAL', false], ['FRESH_SEEDED', false], ['WARM_START', false]]);      // the recommended pretrained-V2 family first, the tabular model grouped below as Advanced / engineering demo
+		expect([...init.querySelectorAll('optgroup')].map((g) => g.label)).toEqual(['Pretrained-V2 family (recommended)', 'Advanced / engineering demo — small tabular model (HARDWARE_DEMO_MODEL_V1)']);
 		await waitFor(() => expect(init.value).toBe('MODEL_V2_FINAL'));      // pretrained V2 is the default, as for the synthetic cohort
 		expect(screen.getByTestId('hardware-demo-v2-note')).toBeTruthy();
 		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
@@ -190,5 +191,45 @@ describe('a stored candidate as the starting model of a recorded-hardware run', 
 		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
 		const option = [...(screen.getByTestId('hardware-demo-init') as HTMLSelectElement).options].find((o) => o.value === 'CANDIDATE');
 		expect(option?.disabled).toBe(true);
+	});
+});
+
+
+// A pretrained-V2 hardware run trains on every complete window whatever its grade: the preview must not call them all VALID.
+describe('the preview separates VALID windows from lower-quality windows accepted for experimental training', () => {
+	it('shows complete / VALID / below-VALID columns and a summary that never counts accepted windows as VALID', async () => {
+		mount(caps(HW));
+		await fireEvent.click(screen.getByTestId('data-source-hardware'));
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
+		await fireEvent.click(screen.getByTestId('hardware-demo-session-HW-OK'));
+		await fireEvent.change(screen.getByTestId('hardware-demo-init'), { target: { value: 'MODEL_V2_FINAL' } });
+		const preview = await screen.findByTestId('hardware-v2-preview');
+		await waitFor(() => expect(preview.textContent).toContain('ENOUGH USABLE WINDOWS'));
+		const headers = [...preview.querySelectorAll('th[scope="col"]')].map((h) => h.textContent);
+		expect(headers).toEqual(['Session', '10 s windows', 'Complete', 'of which VALID', 'Below VALID (accepted)', 'Train', 'Holdout']);
+		expect(preview.textContent).not.toContain('Quality-VALID');                                    // the old column called every complete window "VALID"
+		const row = [...preview.querySelectorAll('tbody tr')][0];
+		expect([...row.querySelectorAll('td')].map((c) => c.textContent)).toEqual(['57', '40', '31', '9', '28', '8']);
+		const summary = screen.getByTestId('hardware-v2-quality-summary').textContent ?? '';
+		expect(summary).toContain('31 of 40 complete windows are graded VALID');
+		expect(summary).toContain('9 lower-quality windows');
+		expect(summary).toContain('EXPERIMENTAL training');
+		expect(summary).toContain('6 of them in the training set');
+		expect(summary).toContain('never counted as VALID');
+	});
+});
+
+
+describe('the tabular hardware model stays available as an Advanced / engineering demo', () => {
+	it('can still be started with a fresh initialisation, and says what it is and is not', async () => {
+		mount(caps(HW));
+		await fireEvent.click(screen.getByTestId('data-source-hardware'));
+		await waitFor(() => expect(screen.getByTestId('hardware-demo-session-HW-OK')).toBeTruthy());
+		await fireEvent.click(screen.getByTestId('hardware-demo-session-HW-OK'));
+		await fireEvent.change(screen.getByTestId('hardware-demo-init'), { target: { value: 'FRESH_SEEDED' } });
+		expect(screen.getByTestId('hardware-demo-advanced-note').textContent).toContain('Advanced / engineering demo');
+		expect(screen.getByTestId('hardware-demo-init-note').textContent).toContain('not comparable to pretrained-V2 runs');
+		await fireEvent.click(screen.getByTestId('hardware-demo-start'));
+		await waitFor(() => expect(started).toMatchObject({ session_ids: ['HW-OK'], initialisation: 'FRESH_SEEDED' }));
 	});
 });

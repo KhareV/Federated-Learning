@@ -1,0 +1,1314 @@
+{
+ "calibration": "NONE",
+ "error_analysis_central_V2_rule_A_primary": {
+  "negatives": {
+   "records": 3860,
+   "share_flagged": 0.14818652849740932
+  },
+  "negatives NORM+SR": {
+   "records": 1573,
+   "share_flagged": 0.029243483788938335
+  },
+  "negatives with AFIB": {
+   "records": 236,
+   "share_flagged": 0.7372881355932204
+  },
+  "negatives with baseline_drift": {
+   "records": 405,
+   "share_flagged": 0.13580246913580246
+  },
+  "negatives with burst_noise": {
+   "records": 76,
+   "share_flagged": 0.13157894736842105
+  },
+  "negatives with static_noise": {
+   "records": 566,
+   "share_flagged": 0.1519434628975265
+  },
+  "positives": {
+   "records": 476,
+   "share_flagged": 0.8298319327731093
+  },
+  "positives by source": {
+   "SCP statement and extra_beats": {
+    "records": 214,
+    "share_flagged": 0.9766355140186916
+   },
+   "SCP statement only": {
+    "records": 94,
+    "share_flagged": 0.8297872340425532
+   },
+   "extra_beats only": {
+    "records": 168,
+    "share_flagged": 0.6428571428571429
+   }
+  },
+  "positives with 1 extra beat(s)": {
+   "records": 144,
+   "share_flagged": 0.8402777777777778
+  },
+  "positives with 2 extra beat(s)": {
+   "records": 67,
+   "share_flagged": 0.8507462686567164
+  },
+  "positives with 3+ extra beat(s)": {
+   "records": 51,
+   "share_flagged": 0.9607843137254902
+  },
+  "positives with unspecified extra beat(s)": {
+   "records": 120,
+   "share_flagged": 0.75
+  }
+ },
+ "exclusions": {
+  "bad_window": 0,
+  "no_lead_II": 0,
+  "paced": 302
+ },
+ "models": [
+  "MODEL_V1 (central, frozen)",
+  "MODEL_V2_FINAL (central)",
+  "V2-FL-001 round 50 (federated)",
+  "V2-FL-001 round 38 (best-validation)",
+  "central V2 + 10 rounds on the original synthetic cohort",
+  "central V2 + 10 rounds on the realistic synthetic cohort"
+ ],
+ "protocol": {
+  "file": "docs/ptbxl/PTBXL_EXTERNAL_CHECK_V1.md",
+  "sha256": "a4bf4af176e6ff3291560f75f656529d6c2fe430fdad56d7e07740855128188b"
+ },
+ "records_scored": 21535,
+ "sanity": {
+  "label_source_agreement": {
+   "SCP statement only": 472,
+   "both": 1052,
+   "extra_beats only": 902
+  },
+  "mean_logit_NORM_SR_negatives_vs_positives_central_V2": [
+   -4.223544987278919,
+   4.598863689437251
+  ],
+  "window_std_mean": 1.0,
+  "windows_finite": true
+ },
+ "sets": {
+  "primary (folds 9-10)": {
+   "bootstrap rule A": {
+    "invalid_replicates": 0,
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": {
+       "ci95": [
+        0.2702729435502954,
+        0.35805876437290507
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.6738772043807977,
+        0.7285997542021513
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.2923944034397921,
+        0.3545123838078556
+       ]
+      }
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": {
+       "ci95": [
+        0.6645542101679798,
+        0.7431721625440801
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.8956318484348466,
+        0.9259469097617016
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.5145145181910346,
+        0.5791712144837146
+       ]
+      }
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": {
+       "ci95": [
+        0.6810383015848062,
+        0.7593568557274093
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.8931504312432432,
+        0.9265777860378452
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.6003929823553078,
+        0.6719419928889852
+       ]
+      }
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": {
+       "ci95": [
+        0.69281396123708,
+        0.7706667300328768
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.8926628027511274,
+        0.9266688337184589
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.6270453471796317,
+        0.6977215323284469
+       ]
+      }
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": {
+       "ci95": [
+        0.484064528981744,
+        0.5855255516147718
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.8585797860852,
+        0.8911787151448742
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.25999160302754853,
+        0.30197949421603876
+       ]
+      }
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": {
+       "ci95": [
+        0.4289712921679003,
+        0.5223517175377734
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.8473711724219234,
+        0.8817950163355697
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.4561113779431,
+        0.5232774256013839
+       ]
+      }
+     }
+    },
+    "paired_vs_central_V2": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": {
+       "ci95": [
+        -0.4318466749796428,
+        -0.34749358654234574
+       ],
+       "delta_mean": -0.3891208404359102,
+       "share_better": 0.0
+      },
+      "AUROC": {
+       "ci95": [
+        -0.23686742217422224,
+        -0.18392045172255342
+       ],
+       "delta_mean": -0.20973167402701262,
+       "share_better": 0.0
+      }
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": {
+       "ci95": [
+        -0.00809863300390351,
+        0.040178864318987415
+       ],
+       "delta_mean": 0.01530135183391108,
+       "share_better": 0.8885
+      },
+      "AUROC": {
+       "ci95": [
+        -0.010957375867935598,
+        0.009417289825250509
+       ],
+       "delta_mean": -0.0007531072968234481,
+       "share_better": 0.4345
+      }
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": {
+       "ci95": [
+        0.001197746778365938,
+        0.05135255784956832
+       ],
+       "delta_mean": 0.026721331034707155,
+       "share_better": 0.979
+      },
+      "AUROC": {
+       "ci95": [
+        -0.011309025934846114,
+        0.009348134536653318
+       ],
+       "delta_mean": -0.0009393347420640888,
+       "share_better": 0.428
+      }
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": {
+       "ci95": [
+        -0.20292513219240355,
+        -0.1354956622654801
+       ],
+       "delta_mean": -0.1692139669403986,
+       "share_better": 0.0
+      },
+      "AUROC": {
+       "ci95": [
+        -0.04873309851643816,
+        -0.023226269292221144
+       ],
+       "delta_mean": -0.035706890400050526,
+       "share_better": 0.0
+      }
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": {
+       "ci95": [
+        -0.26452089031221815,
+        -0.19116233437949381
+       ],
+       "delta_mean": -0.22863241074106203,
+       "share_better": 0.0
+      },
+      "AUROC": {
+       "ci95": [
+        -0.056978361797649674,
+        -0.03488404904889946
+       ],
+       "delta_mean": -0.04581459149684387,
+       "share_better": 0.0
+      }
+     }
+    },
+    "patients": 3809,
+    "replicates": 2000
+   },
+   "rule A": {
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": 0.3127723743306632,
+      "AUROC": 0.7012147864327077,
+      "F1": 0.32362459546925565,
+      "FN": 226,
+      "FP": 819,
+      "TN": 3041,
+      "TP": 250,
+      "lift": 2.8491197796171335,
+      "precision": 0.23386342376052385,
+      "prevalence": 0.10977859778597786,
+      "recall": 0.5252100840336135,
+      "specificity": 0.7878238341968912,
+      "threshold": 0.5
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": 0.7045212357205036,
+      "AUROC": 0.9109249140070536,
+      "F1": 0.5474705474705475,
+      "FN": 81,
+      "FP": 572,
+      "TN": 3288,
+      "TP": 395,
+      "lift": 6.417655626227109,
+      "precision": 0.40847983453981385,
+      "prevalence": 0.10977859778597786,
+      "recall": 0.8298319327731093,
+      "specificity": 0.8518134715025907,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": 0.7198322896792463,
+      "AUROC": 0.9101237645317195,
+      "F1": 0.6364513018322083,
+      "FN": 146,
+      "FP": 231,
+      "TN": 3629,
+      "TP": 330,
+      "lift": 6.5571277480025465,
+      "precision": 0.5882352941176471,
+      "prevalence": 0.10977859778597786,
+      "recall": 0.6932773109243697,
+      "specificity": 0.9401554404145078,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": 0.7312870755343046,
+      "AUROC": 0.9099700113205904,
+      "F1": 0.662109375,
+      "FN": 137,
+      "FP": 209,
+      "TN": 3651,
+      "TP": 339,
+      "lift": 6.661472183858708,
+      "precision": 0.6186131386861314,
+      "prevalence": 0.10977859778597786,
+      "recall": 0.7121848739495799,
+      "specificity": 0.9458549222797927,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": 0.5344516819046936,
+      "AUROC": 0.8753287325292811,
+      "F1": 0.28080931943592885,
+      "FN": 18,
+      "FP": 2328,
+      "TN": 1532,
+      "TP": 458,
+      "lift": 4.868450614997377,
+      "precision": 0.16439339554917445,
+      "prevalence": 0.10977859778597786,
+      "recall": 0.9621848739495799,
+      "specificity": 0.39689119170984455,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": 0.47580563188416786,
+      "AUROC": 0.8653034789045151,
+      "F1": 0.49014084507042255,
+      "FN": 128,
+      "FP": 596,
+      "TN": 3264,
+      "TP": 348,
+      "lift": 4.334229453465865,
+      "precision": 0.3686440677966102,
+      "prevalence": 0.10977859778597786,
+      "recall": 0.7310924369747899,
+      "specificity": 0.8455958549222798,
+      "threshold": 0.5
+     }
+    },
+    "patients": 3809,
+    "positives": 476,
+    "records": 4336
+   },
+   "rule A, clean negatives (NORM + SR)": {
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": 0.5796044798505888,
+      "AUROC": 0.7422283598754187,
+      "F1": 0.5341880341880342,
+      "FN": 226,
+      "FP": 210,
+      "TN": 1363,
+      "TP": 250,
+      "lift": 2.4949781075921353,
+      "precision": 0.5434782608695652,
+      "prevalence": 0.2323084431429966,
+      "recall": 0.5252100840336135,
+      "specificity": 0.866497139224412,
+      "threshold": 0.5
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": 0.9283823674750039,
+      "AUROC": 0.9542088927115665,
+      "F1": 0.861504907306434,
+      "FN": 81,
+      "FP": 46,
+      "TN": 1527,
+      "TP": 395,
+      "lift": 3.996335023017401,
+      "precision": 0.8956916099773242,
+      "prevalence": 0.2323084431429966,
+      "recall": 0.8298319327731093,
+      "specificity": 0.9707565162110616,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": 0.9394118479821258,
+      "AUROC": 0.9583638286846844,
+      "F1": 0.8188585607940446,
+      "FN": 146,
+      "FP": 0,
+      "TN": 1573,
+      "TP": 330,
+      "lift": 4.043812765788605,
+      "precision": 1.0,
+      "prevalence": 0.2323084431429966,
+      "recall": 0.6932773109243697,
+      "specificity": 1.0,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": 0.9341843696982679,
+      "AUROC": 0.9538108949873656,
+      "F1": 0.8319018404907975,
+      "FN": 137,
+      "FP": 0,
+      "TN": 1573,
+      "TP": 339,
+      "lift": 4.0213104485540985,
+      "precision": 1.0,
+      "prevalence": 0.2323084431429966,
+      "recall": 0.7121848739495799,
+      "specificity": 1.0,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": 0.8947031684741437,
+      "AUROC": 0.9439704680346391,
+      "F1": 0.5565006075334143,
+      "FN": 18,
+      "FP": 712,
+      "TN": 861,
+      "TP": 458,
+      "lift": 3.8513588071502527,
+      "precision": 0.39145299145299145,
+      "prevalence": 0.2323084431429966,
+      "recall": 0.9621848739495799,
+      "specificity": 0.547361729179911,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": 0.8761888180812774,
+      "AUROC": 0.9325607547532682,
+      "F1": 0.7936145952109465,
+      "FN": 128,
+      "FP": 53,
+      "TN": 1520,
+      "TP": 348,
+      "lift": 3.7716615299339016,
+      "precision": 0.8678304239401496,
+      "prevalence": 0.2323084431429966,
+      "recall": 0.7310924369747899,
+      "specificity": 0.9663064208518753,
+      "threshold": 0.5
+     }
+    },
+    "positives": 476,
+    "records": 2049
+   },
+   "rule B": {
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": 0.3513960391413885,
+      "AUROC": 0.8204856907655804,
+      "F1": 0.25506756756756754,
+      "FN": 63,
+      "FP": 819,
+      "TN": 3041,
+      "TP": 151,
+      "lift": 6.689661044215032,
+      "precision": 0.1556701030927835,
+      "prevalence": 0.052528227785959745,
+      "recall": 0.705607476635514,
+      "specificity": 0.7878238341968912,
+      "threshold": 0.5
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": 0.8239157879534087,
+      "AUROC": 0.9813180959759817,
+      "F1": 0.4201005025125628,
+      "FN": 5,
+      "FP": 572,
+      "TN": 3288,
+      "TP": 209,
+      "lift": 15.68520056131863,
+      "precision": 0.2676056338028169,
+      "prevalence": 0.052528227785959745,
+      "recall": 0.9766355140186916,
+      "specificity": 0.8518134715025907,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": 0.8588107340818155,
+      "AUROC": 0.984803399351121,
+      "F1": 0.6222910216718266,
+      "FN": 13,
+      "FP": 231,
+      "TN": 3629,
+      "TP": 201,
+      "lift": 16.349509021725776,
+      "precision": 0.4652777777777778,
+      "prevalence": 0.052528227785959745,
+      "recall": 0.9392523364485982,
+      "specificity": 0.9401554404145078,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": 0.8632446385496683,
+      "AUROC": 0.9838748728875115,
+      "F1": 0.6485623003194888,
+      "FN": 11,
+      "FP": 209,
+      "TN": 3651,
+      "TP": 203,
+      "lift": 16.43391896005303,
+      "precision": 0.49271844660194175,
+      "prevalence": 0.052528227785959745,
+      "recall": 0.9485981308411215,
+      "specificity": 0.9458549222797927,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": 0.5926789718750951,
+      "AUROC": 0.9486877148806354,
+      "F1": 0.1539578794480755,
+      "FN": 2,
+      "FP": 2328,
+      "TN": 1532,
+      "TP": 212,
+      "lift": 11.283056688874474,
+      "precision": 0.08346456692913386,
+      "prevalence": 0.052528227785959745,
+      "recall": 0.9906542056074766,
+      "specificity": 0.39689119170984455,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": 0.3590432004493637,
+      "AUROC": 0.9104256452472036,
+      "F1": 0.35365853658536583,
+      "FN": 40,
+      "FP": 596,
+      "TN": 3264,
+      "TP": 174,
+      "lift": 6.835242984255644,
+      "precision": 0.22597402597402597,
+      "prevalence": 0.052528227785959745,
+      "recall": 0.8130841121495327,
+      "specificity": 0.8455958549222798,
+      "threshold": 0.5
+     }
+    },
+    "patients": 3610,
+    "positives": 214,
+    "records": 4074
+   },
+   "rule C": {
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": 0.29157571913632707,
+      "AUROC": 0.7558418183107855,
+      "F1": 0.2716049382716049,
+      "FN": 121,
+      "FP": 882,
+      "TN": 3146,
+      "TP": 187,
+      "lift": 4.104780253815306,
+      "precision": 0.17492984097287184,
+      "prevalence": 0.07103321033210332,
+      "recall": 0.6071428571428571,
+      "specificity": 0.7810327706057597,
+      "threshold": 0.5
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": 0.6970949106435737,
+      "AUROC": 0.9549795103109402,
+      "F1": 0.45019607843137255,
+      "FN": 21,
+      "FP": 680,
+      "TN": 3348,
+      "TP": 287,
+      "lift": 9.813647832956285,
+      "precision": 0.296794208893485,
+      "prevalence": 0.07103321033210332,
+      "recall": 0.9318181818181818,
+      "specificity": 0.8311817279046674,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": 0.7182733852414845,
+      "AUROC": 0.9582439965694682,
+      "F1": 0.5845799769850403,
+      "FN": 54,
+      "FP": 307,
+      "TN": 3721,
+      "TP": 254,
+      "lift": 10.111796748074926,
+      "precision": 0.45276292335115864,
+      "prevalence": 0.07103321033210332,
+      "recall": 0.8246753246753247,
+      "specificity": 0.9237835153922542,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": 0.7262256206340518,
+      "AUROC": 0.9599149299062407,
+      "F1": 0.6051401869158879,
+      "FN": 49,
+      "FP": 289,
+      "TN": 3739,
+      "TP": 259,
+      "lift": 10.223747698276782,
+      "precision": 0.4726277372262774,
+      "prevalence": 0.07103321033210332,
+      "recall": 0.8409090909090909,
+      "specificity": 0.9282522343594836,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": 0.5182530417248187,
+      "AUROC": 0.910954890442229,
+      "F1": 0.19521654815772463,
+      "FN": 6,
+      "FP": 2484,
+      "TN": 1544,
+      "TP": 302,
+      "lift": 7.295925938048097,
+      "precision": 0.10839913854989232,
+      "prevalence": 0.07103321033210332,
+      "recall": 0.9805194805194806,
+      "specificity": 0.3833167825223436,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": 0.4002863112549912,
+      "AUROC": 0.8954917041746733,
+      "F1": 0.3977635782747604,
+      "FN": 59,
+      "FP": 695,
+      "TN": 3333,
+      "TP": 249,
+      "lift": 5.63519949870663,
+      "precision": 0.263771186440678,
+      "prevalence": 0.07103321033210332,
+      "recall": 0.8084415584415584,
+      "specificity": 0.8274577954319762,
+      "threshold": 0.5
+     }
+    },
+    "patients": 3809,
+    "positives": 308,
+    "records": 4336
+   }
+  },
+  "replication (folds 1-8)": {
+   "bootstrap rule A": {
+    "invalid_replicates": 0,
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": {
+       "ci95": [
+        0.2854187313397103,
+        0.33543116072327217
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.6631000966161215,
+        0.6934691962916968
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.28440459968089293,
+        0.3167210899511677
+       ]
+      }
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": {
+       "ci95": [
+        0.6514356143741812,
+        0.6971706329360526
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.886420837478471,
+        0.90423085661325
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.5094720206124344,
+        0.5430379492628871
+       ]
+      }
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": {
+       "ci95": [
+        0.675629768666038,
+        0.7185991676274233
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.8898140325035117,
+        0.9077678106912984
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.6148762635488979,
+        0.6511229147431047
+       ]
+      }
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": {
+       "ci95": [
+        0.6815645227144341,
+        0.7236289448412532
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.8882861682372413,
+        0.9067233706330796
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.6155363268090298,
+        0.6518872278931291
+       ]
+      }
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": {
+       "ci95": [
+        0.5148274798930581,
+        0.5658820168994388
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.8531565704875794,
+        0.871947535876253
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.26569682337995393,
+        0.28718895135095873
+       ]
+      }
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": {
+       "ci95": [
+        0.4136791101210252,
+        0.4628112221641524
+       ]
+      },
+      "AUROC": {
+       "ci95": [
+        0.8457859553272947,
+        0.8642136647158675
+       ]
+      },
+      "F1": {
+       "ci95": [
+        0.4644597921691518,
+        0.49800249000303776
+       ]
+      }
+     }
+    },
+    "paired_vs_central_V2": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": {
+       "ci95": [
+        -0.38874182245390515,
+        -0.33948362057576464
+       ],
+       "delta_mean": -0.3642568014539992,
+       "share_better": 0.0
+      },
+      "AUROC": {
+       "ci95": [
+        -0.23079044400039,
+        -0.203000426966623
+       ],
+       "delta_mean": -0.21659904270480224,
+       "share_better": 0.0
+      }
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": {
+       "ci95": [
+        0.010220128725925346,
+        0.03556878353524294
+       ],
+       "delta_mean": 0.022664865224097046,
+       "share_better": 1.0
+      },
+      "AUROC": {
+       "ci95": [
+        -0.002245218556716,
+        0.008773958066921064
+       ],
+       "delta_mean": 0.0032636136476913878,
+       "share_better": 0.8765
+      }
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": {
+       "ci95": [
+        0.015423859963768063,
+        0.041836280381285715
+       ],
+       "delta_mean": 0.028158450685325825,
+       "share_better": 1.0
+      },
+      "AUROC": {
+       "ci95": [
+        -0.00419016706437525,
+        0.007680854614941499
+       ],
+       "delta_mean": 0.0017734280526773896,
+       "share_better": 0.718
+      }
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": {
+       "ci95": [
+        -0.15200141001247655,
+        -0.11685274497175516
+       ],
+       "delta_mean": -0.1343048473336703,
+       "share_better": 0.0
+      },
+      "AUROC": {
+       "ci95": [
+        -0.03916589627620291,
+        -0.026380259714943455
+       ],
+       "delta_mean": -0.03281954286091292,
+       "share_better": 0.0
+      }
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": {
+       "ci95": [
+        -0.25749868601672016,
+        -0.21531158364296257
+       ],
+       "delta_mean": -0.23624177868403523,
+       "share_better": 0.0
+      },
+      "AUROC": {
+       "ci95": [
+        -0.04655050646622122,
+        -0.03437107723174195
+       ],
+       "delta_mean": -0.04062427531377048,
+       "share_better": 0.0
+      }
+     }
+    },
+    "patients": 14861,
+    "replicates": 2000
+   },
+   "rule A": {
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": 0.30986609224255907,
+      "AUROC": 0.6791686606780406,
+      "F1": 0.3009913863156184,
+      "FN": 967,
+      "FP": 3334,
+      "TN": 11972,
+      "TP": 926,
+      "lift": 2.815312689107117,
+      "precision": 0.21737089201877935,
+      "prevalence": 0.11006453863596721,
+      "recall": 0.4891706286318014,
+      "specificity": 0.7821769240820593,
+      "threshold": 0.5
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": 0.6741581614380674,
+      "AUROC": 0.8956107348805964,
+      "F1": 0.5266221537407978,
+      "FN": 355,
+      "FP": 2410,
+      "TN": 12896,
+      "TP": 1538,
+      "lift": 6.1251168613699525,
+      "precision": 0.389564336372847,
+      "prevalence": 0.11006453863596721,
+      "recall": 0.8124669836238775,
+      "specificity": 0.8425454070299229,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": 0.6970073415764652,
+      "AUROC": 0.8989229508483013,
+      "F1": 0.6333253185861986,
+      "FN": 576,
+      "FP": 949,
+      "TN": 14357,
+      "TP": 1317,
+      "lift": 6.332714879964936,
+      "precision": 0.5812003530450133,
+      "prevalence": 0.11006453863596721,
+      "recall": 0.6957210776545166,
+      "specificity": 0.9379981706520318,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": 0.7025306758611687,
+      "AUROC": 0.8974186672873555,
+      "F1": 0.6337687469762942,
+      "FN": 583,
+      "FP": 931,
+      "TN": 14375,
+      "TP": 1310,
+      "lift": 6.382897566897116,
+      "precision": 0.5845604640785363,
+      "prevalence": 0.11006453863596721,
+      "recall": 0.6920232435287903,
+      "specificity": 0.9391741800601071,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": 0.5400019611061359,
+      "AUROC": 0.8628411295295293,
+      "F1": 0.27651544327197103,
+      "FN": 98,
+      "FP": 9295,
+      "TN": 6011,
+      "TP": 1795,
+      "lift": 4.90623017911486,
+      "precision": 0.1618575293056808,
+      "prevalence": 0.11006453863596721,
+      "recall": 0.948230322239831,
+      "specificity": 0.3927218084411342,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": 0.43776741791432905,
+      "AUROC": 0.8549444993552552,
+      "F1": 0.4815331010452962,
+      "FN": 511,
+      "FP": 2465,
+      "TN": 12841,
+      "TP": 1382,
+      "lift": 3.9773702169617247,
+      "precision": 0.3592409669872628,
+      "prevalence": 0.11006453863596721,
+      "recall": 0.7300581088219757,
+      "specificity": 0.8389520449496929,
+      "threshold": 0.5
+     }
+    },
+    "patients": 14861,
+    "positives": 1893,
+    "records": 17199
+   },
+   "rule A, clean negatives (NORM + SR)": {
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": 0.5487769517011314,
+      "AUROC": 0.7030574485797119,
+      "F1": 0.4800414722654225,
+      "FN": 967,
+      "FP": 1039,
+      "TN": 5157,
+      "TP": 926,
+      "lift": 2.3449850831011365,
+      "precision": 0.4712468193384224,
+      "prevalence": 0.23402151069353444,
+      "recall": 0.4891706286318014,
+      "specificity": 0.8323111684958038,
+      "threshold": 0.5
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": 0.9067264036617696,
+      "AUROC": 0.9381792762367009,
+      "F1": 0.8399781540141998,
+      "FN": 355,
+      "FP": 231,
+      "TN": 5965,
+      "TP": 1538,
+      "lift": 3.874542989551006,
+      "precision": 0.8694177501413228,
+      "prevalence": 0.23402151069353444,
+      "recall": 0.8124669836238775,
+      "specificity": 0.9627178825048418,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": 0.9241817501160682,
+      "AUROC": 0.9506137251953019,
+      "F1": 0.8167441860465117,
+      "FN": 576,
+      "FP": 15,
+      "TN": 6181,
+      "TP": 1317,
+      "lift": 3.949131630580494,
+      "precision": 0.9887387387387387,
+      "prevalence": 0.23402151069353444,
+      "recall": 0.6957210776545166,
+      "specificity": 0.9975790832795352,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": 0.9188373628499154,
+      "AUROC": 0.9455284785746951,
+      "F1": 0.8139173656415035,
+      "FN": 583,
+      "FP": 16,
+      "TN": 6180,
+      "TP": 1310,
+      "lift": 3.926294468089258,
+      "precision": 0.9879336349924586,
+      "prevalence": 0.23402151069353444,
+      "recall": 0.6920232435287903,
+      "specificity": 0.9974176888315042,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": 0.8765063452088029,
+      "AUROC": 0.9277502790512563,
+      "F1": 0.5451784358390281,
+      "FN": 98,
+      "FP": 2897,
+      "TN": 3299,
+      "TP": 1795,
+      "lift": 3.745409311354467,
+      "precision": 0.3825660699062234,
+      "prevalence": 0.23402151069353444,
+      "recall": 0.948230322239831,
+      "specificity": 0.5324402840542285,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": 0.8652608667314279,
+      "AUROC": 0.9237605196270313,
+      "F1": 0.781232334652346,
+      "FN": 511,
+      "FP": 263,
+      "TN": 5933,
+      "TP": 1382,
+      "lift": 3.6973561283626624,
+      "precision": 0.8401215805471125,
+      "prevalence": 0.23402151069353444,
+      "recall": 0.7300581088219757,
+      "specificity": 0.9575532601678503,
+      "threshold": 0.5
+     }
+    },
+    "positives": 1893,
+    "records": 8089
+   },
+   "rule B": {
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": 0.3328319267690016,
+      "AUROC": 0.7902020210566161,
+      "F1": 0.2320254506892895,
+      "FN": 287,
+      "FP": 3334,
+      "TN": 11972,
+      "TP": 547,
+      "lift": 6.441135848982836,
+      "precision": 0.14094305591342438,
+      "prevalence": 0.0516728624535316,
+      "recall": 0.6558752997601919,
+      "specificity": 0.7821769240820593,
+      "threshold": 0.5
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": 0.7832186058556343,
+      "AUROC": 0.9755161766314115,
+      "F1": 0.3992104613866272,
+      "FN": 25,
+      "FP": 2410,
+      "TN": 12896,
+      "TP": 809,
+      "lift": 15.157252156486734,
+      "precision": 0.25132028580304444,
+      "prevalence": 0.0516728624535316,
+      "recall": 0.9700239808153477,
+      "specificity": 0.8425454070299229,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": 0.8454835403463308,
+      "AUROC": 0.984841918703375,
+      "F1": 0.6129910540645663,
+      "FN": 46,
+      "FP": 949,
+      "TN": 14357,
+      "TP": 788,
+      "lift": 16.362235421090862,
+      "precision": 0.45365572826712725,
+      "prevalence": 0.0516728624535316,
+      "recall": 0.9448441247002398,
+      "specificity": 0.9379981706520318,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": 0.8406035010401206,
+      "AUROC": 0.9841391488925676,
+      "F1": 0.6151431934091801,
+      "FN": 50,
+      "FP": 931,
+      "TN": 14375,
+      "TP": 784,
+      "lift": 16.267794372646936,
+      "precision": 0.45714285714285713,
+      "prevalence": 0.0516728624535316,
+      "recall": 0.9400479616306955,
+      "specificity": 0.9391741800601071,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": 0.6103234410843845,
+      "AUROC": 0.9579819484279295,
+      "F1": 0.1521481346346803,
+      "FN": 0,
+      "FP": 9295,
+      "TN": 6011,
+      "TP": 834,
+      "lift": 11.811295370625858,
+      "precision": 0.08233784184026063,
+      "prevalence": 0.0516728624535316,
+      "recall": 1.0,
+      "specificity": 0.3927218084411342,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": 0.32147616408114604,
+      "AUROC": 0.9104294768810588,
+      "F1": 0.3492619464598449,
+      "FN": 136,
+      "FP": 2465,
+      "TN": 12841,
+      "TP": 698,
+      "lift": 6.221373247325776,
+      "precision": 0.22067657287385395,
+      "prevalence": 0.0516728624535316,
+      "recall": 0.8369304556354916,
+      "specificity": 0.8389520449496929,
+      "threshold": 0.5
+     }
+    },
+    "patients": 14077,
+    "positives": 834,
+    "records": 16140
+   },
+   "rule C": {
+    "models": {
+     "MODEL_V1 (central, frozen)": {
+      "AUPRC": 0.2910963326186238,
+      "AUROC": 0.7327856028272236,
+      "F1": 0.25260464266130506,
+      "FN": 520,
+      "FP": 3569,
+      "TN": 12419,
+      "TP": 691,
+      "lift": 4.134240978288778,
+      "precision": 0.16220657276995304,
+      "prevalence": 0.0704110704110704,
+      "recall": 0.5706028075970272,
+      "specificity": 0.7767700775581686,
+      "threshold": 0.5
+     },
+     "MODEL_V2_FINAL (central)": {
+      "AUPRC": 0.6635246153677476,
+      "AUROC": 0.9453118172650957,
+      "F1": 0.43419267299864317,
+      "FN": 91,
+      "FP": 2828,
+      "TN": 13160,
+      "TP": 1120,
+      "lift": 9.423583699182405,
+      "precision": 0.28368794326241137,
+      "prevalence": 0.0704110704110704,
+      "recall": 0.9248554913294798,
+      "specificity": 0.8231173380035026,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 38 (best-validation)": {
+      "AUPRC": 0.7086956066884075,
+      "AUROC": 0.9522806070283513,
+      "F1": 0.5821110152430256,
+      "FN": 199,
+      "FP": 1254,
+      "TN": 14734,
+      "TP": 1012,
+      "lift": 10.065116217534204,
+      "precision": 0.44660194174757284,
+      "prevalence": 0.0704110704110704,
+      "recall": 0.8356729975227085,
+      "specificity": 0.9215661746309732,
+      "threshold": 0.5
+     },
+     "V2-FL-001 round 50 (federated)": {
+      "AUPRC": 0.7033788149086481,
+      "AUROC": 0.9523791274504599,
+      "F1": 0.5845886442641947,
+      "FN": 202,
+      "FP": 1232,
+      "TN": 14756,
+      "TP": 1009,
+      "lift": 9.989605481101435,
+      "precision": 0.4502454261490406,
+      "prevalence": 0.0704110704110704,
+      "recall": 0.833195706028076,
+      "specificity": 0.9229422066549913,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the original synthetic cohort": {
+      "AUPRC": 0.5287877843644385,
+      "AUROC": 0.9175896424795887,
+      "F1": 0.1952686773433054,
+      "FN": 10,
+      "FP": 9889,
+      "TN": 6099,
+      "TP": 1201,
+      "lift": 7.510009168690321,
+      "precision": 0.10829576194770063,
+      "prevalence": 0.0704110704110704,
+      "recall": 0.9917423616845582,
+      "specificity": 0.38147360520390294,
+      "threshold": 0.5
+     },
+     "central V2 + 10 rounds on the realistic synthetic cohort": {
+      "AUPRC": 0.353859335581826,
+      "AUROC": 0.8934229832159422,
+      "F1": 0.3914590747330961,
+      "FN": 221,
+      "FP": 2857,
+      "TN": 13131,
+      "TP": 990,
+      "lift": 5.025620737136107,
+      "precision": 0.2573433844554198,
+      "prevalence": 0.0704110704110704,
+      "recall": 0.8175061932287366,
+      "specificity": 0.8213034776082061,
+      "threshold": 0.5
+     }
+    },
+    "patients": 14861,
+    "positives": 1211,
+    "records": 17199
+   }
+  }
+ },
+ "target": "PTBXL_PREMATURE_BEAT_RECORD_V1",
+ "threshold": 0.5
+}

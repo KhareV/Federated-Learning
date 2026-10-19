@@ -17,6 +17,8 @@ from studio.observer import EvaluationObserver, round_key
 from studio.specs import comparison_pair
 
 SCHEMA = "STUDIO_LIVE_BUNDLE_V1"
+# A run whose monitored client got its signal from a COMPLETED History session did not monitor anything live: the signal was regenerated from the frozen scenario, and that client's labels are assigned (a session has no scheduled events)
+HISTORY_SOURCE_LABEL = "HISTORY MONITORING SESSION SIGNAL (REGENERATED, NOT LIVE-MONITORED) — NOT A REAL PHYSIOLOGICAL PATIENT"
 FROZEN_EVAL = ROOT / "reports/fl10/eval/modeA/evaluation_results.json"
 _STATIC: dict[str, Any] = {}
 
@@ -35,10 +37,10 @@ def read_run_report(run_dir: Path) -> dict[str, Any] | None:
 
 def _holdout_info(cohort: str = cohorts.ORIGINAL) -> dict[str, Any]:
     """Holdout participants + leakage audit. RECOMPUTED once the observer has loaded the frozen holdout; before that, the FL10 frozen evidence for the same cohort (labelled)."""
-    if cohort == cohorts.REALISTIC:
-        loaded = cohorts.loaded_holdout(cohorts.REALISTIC)
+    if cohorts.is_realistic(cohort):
+        loaded = cohorts.loaded_holdout(cohort)
         if loaded is None:
-            return cohorts.static_info()
+            return cohorts.static_info(cohort)
         return {"entries": loaded.entries, "separation": loaded.separation, "windows": loaded.windows, "separation_source": "RECOMPUTED_BY_OBSERVER_IN_THIS_PROCESS", "protocol_sha256": loaded.protocol_sha256, "manifest_sha256": loaded.manifest_sha256}
     cached = holdout_cache._CACHE
     if cached is not None:
@@ -71,7 +73,8 @@ def build_live_bundle(*, run_id: str, run_length: int, run_dir: Path, observer: 
     static = _static()
     spec = cohorts.spec(cohort)
     protocol, info = static["protocol"], _holdout_info(cohort)
-    synthetic_label = protocol["boundary_label"] if cohort == cohorts.ORIGINAL else "SYNTHETIC REALISTIC ECTOPY CLASSIFICATION (ANNOTATION-NOISY LABELS) — NOT AAMI-SVF OR CLINICAL VALIDATION"
+    synthetic_label = (protocol["boundary_label"] if cohort == cohorts.ORIGINAL else "SYNTHETIC REALISTIC ECTOPY CLASSIFICATION (ANNOTATION-NOISY LABELS) — NOT AAMI-SVF OR CLINICAL VALIDATION" if cohort == cohorts.REALISTIC
+                       else "SYNTHETIC REALISTIC ECTOPY CLASSIFICATION WITH RECORDED NSTDB NOISE (ANNOTATION-NOISY LABELS) — NOT AAMI-SVF OR CLINICAL VALIDATION")
     report = read_run_report(run_dir) or {"status": status, "rounds": [], "client_rounds": [], "batches": [], "updates": [], "state_progression": {}}
     eval_id = eval_run_id or run_id
     records = observer.records(eval_id)
@@ -96,14 +99,18 @@ def build_live_bundle(*, run_id: str, run_length: int, run_dir: Path, observer: 
                                       "coordinator_identity", "prefix_equals_frozen_reference", "federation_engine", "failure", "initialisation", "algorithm", "secagg_mode", "fedprox_mu", "secagg_shadow")}
     run["status"] = report.get("status", status)
     link = run_dir / "monitoring_link.json"
+    link_data = _json(link) if link.exists() else None
+    from_history = bool(link_data and link_data.get("signal_session"))
+    if from_history:
+        synthetic_label += f" · SITE_{int(link_data.get('monitored_site') or 0):02d} TRAINS ON YOUR HISTORY SESSION'S REGENERATED SIGNAL (SYNTHETIC-ASSIGNED LABELS; THE OTHER SEVEN CLIENTS USE EVENT-WINDOW LABELS)"
     return {
         "schema_version": SCHEMA, "source_label": source_label, "run_id": run_id, "run_length": run_length, "planned_rounds": run_length, "engine": engine, "mode": mode, "replay_of": replay_of,
-        "synthetic_label": synthetic_label, "cohort": cohort, "cohort_label": spec.label, "live_label": protocol["live_label"] if mode == "B" else None,
+        "synthetic_label": synthetic_label, "cohort": cohort, "cohort_label": spec.label, "live_label": (HISTORY_SOURCE_LABEL if from_history else protocol["live_label"]) if mode == "B" else None,
         "protocol": {"id": protocol["protocol_id"], "evaluation_protocol_id": EVAL_PROTOCOL_ID, "sha256": info["protocol_sha256"], "holdout_manifest_sha256": info["manifest_sha256"], "uncertainty": protocol["uncertainty"], "threshold": protocol["decision_threshold"],
                      "metric_definitions": protocol["metrics"], "probability_histogram": protocol["metrics"]["probability_histogram"],
                      "interpretation_boundaries": protocol["interpretation_boundaries"], "research_question": protocol["research_question"], "primary_comparison": protocol["primary_comparison"]},
         "run": run, "state_progression": report.get("state_progression", {}), "rounds": report.get("rounds", []), "client_rounds": report.get("client_rounds", []), "batches": report.get("batches", []), "updates": report.get("updates", []),
-        "training_cohort": training, "monitoring_link": _json(link) if link.exists() else None,
+        "training_cohort": training, "monitoring_link": link_data,
         "evaluation": {"states": states, "status": statuses, "failures": failures, "state_digests": digests, "windows": info["windows"], "holdout_participants": info["entries"], "separation": info["separation"], "separation_source": info["separation_source"],
                        "threshold": 0.5, "calibration": "NONE", "round_selection": "NONE - no round, threshold or candidate is selected from diagnostic evaluation", "paired": paired, "comparator": f"R{a:02d}", "endpoint": f"R{e:02d}",
                        "cohort_use": spec.use_label, "cohort_use_detail": spec.use_detail, "cohort_id": spec.evaluation_cohort_id, "cohort": cohort, "claim_boundary": spec.claim_boundary, "protocol_sha256": info["protocol_sha256"], "holdout_manifest_sha256": info["manifest_sha256"],

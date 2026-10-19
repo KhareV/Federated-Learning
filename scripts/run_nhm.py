@@ -14,8 +14,25 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+DEFAULT_DURABLE_WORKSPACE = Path.home() / ".nhm" / "demo_workspace"
+
+
+def durable_workspace_args(args: list[str]) -> list[str]:
+    """``--durable [DIR]`` keeps ONE workspace across restarts: it is created on first use and resumed afterwards, so runs, History, journals and exports are still there after a restart.
+    Without it every launch uses a fresh temporary workspace (unchanged default). The directory must be outside the repository (the workspace layer enforces that)."""
+    if "--durable" not in args:
+        return args
+    index = args.index("--durable")
+    directory = Path(args[index + 1]).expanduser() if index + 1 < len(args) and not args[index + 1].startswith("--") else DEFAULT_DURABLE_WORKSPACE
+    rest = args[:index] + args[index + (2 if index + 1 < len(args) and not args[index + 1].startswith("--") else 1):]
+    from scripts.capstone_demo_workspace import SENTINEL
+
+    mode = "resume" if (directory / SENTINEL).exists() else "fresh"
+    return [*rest, "--workspace", str(directory), "--mode", mode]
+
+
 def dispatch(argv: list[str]) -> tuple[str, list[str]]:
-    args = list(argv)
+    args = durable_workspace_args(list(argv))
     if "--demo" in args:
         args.remove("--demo")
         if "--acknowledge-demo-auth" not in args:

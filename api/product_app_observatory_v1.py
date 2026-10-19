@@ -444,6 +444,9 @@ def create_product_app_observatory_v1(
     from api.observatory_showcase import register_live_link
 
     register_showcase(app, PREFIX, identity)
+    from api.observatory_external_check import register as register_external_check
+
+    register_external_check(app, PREFIX, identity)
     register_live_link(
         app, PREFIX, identity, artifact_root=Path(federation_artifact_root),
         store=store, identity_resolver=identity_resolver,

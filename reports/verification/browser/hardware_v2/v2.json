@@ -1,0 +1,121 @@
+{
+  "mode": "v2",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-V2-1792373329640",
+  "session_ids": [
+    "HW-e0ed52de088444d59a1cc53997f93688",
+    "HW-92a49fa7e466470d852e0e053b351bf3"
+  ],
+  "monitor_replay_link": true,
+  "history_links": {
+    "replay": "/app/observatory/replay?session=HW-e0ed52de088444d59a1cc53997f93688",
+    "trace": "/app/observatory?hw=HW-e0ed52de088444d59a1cc53997f93688"
+  },
+  "replay": {
+    "tag": "RECORDED HARDWARE · RESAMPLED · EXPERIMENTAL · NOT VALID · NOT DIAGNOSTIC",
+    "summary": "22 windows emitted · 0 rejected by the quality gate (no model result, none invented) · 22 scored. EXPERIMENTAL · RESAMPLED FROM LOW-RATE MONGODB TELEMETRY · NOT VALID · NOT DIAGNOSTIC",
+    "has_controls": true,
+    "state": "At source time 0.0 s QUALITY (signal usability)not yet recordedAn engineering gate, not a diagnosis. MODEL OUTPUT (research metadata)calibrated —raw — · frozen threshold — · — POLICY STATEnot yet recordedno state change recorded yet CONTEXT (PPG / SpO₂, not a model signal)availableECG HR — · PPG pulse 70.0 · SpO₂ valid true",
+    "transitions": "Recorded policy state transitions 0.0 s start → NORMAL_MONITORED_PATTERN (DERIVED_FROM_CONSECUTIVE_WINDOW_RESULTS)10.0 s NORMAL_MONITORED_PATTERN → POTENTIAL_ECTOPY_ASSOCIATED_PATTERN (DERIVED_FROM_CONSECUTIVE_WINDOW_RESULTS)",
+    "chart_points": 22,
+    "selected": "HW-e0ed52de088444d59a1cc53997f93688",
+    "alerts": []
+  },
+  "trace": {
+    "classification": "RECORDED HARDWARE · RESAMPLED FROM LOW-RATE TELEMETRY · EXPERIMENTAL · NOT VALID · NOT DIAGNOSTIC",
+    "stages": 5,
+    "summary": [
+      "WINDOWHW-e0ed52de088444d59a1cc53997f93688-W00005s–15s source time · [left, right)",
+      "QUALITY GATEVALIDNo emitted quality reasons",
+      "MODEL INPUTfloat32 [1, 2500]Per-window z-score, only for usable inference windows",
+      "INFERENCE EVIDENCENORMAL_MONITORED_PATTERNEXPERIMENTAL_MODEL_RESULT_SCORED_FROM_RESAMPLED_RECORDED_WINDOW"
+    ],
+    "window_control": "W0000 · VALID · 1 / 22",
+    "inference": "NORMAL_MONITORED_PATTERN",
+    "alerts": []
+  },
+  "trace_next_window": "W0001 · VALID · 2 / 22",
+  "observatory_console_errors": [],
+  "init_options": [
+    {
+      "value": "CANDIDATE",
+      "disabled": false
+    },
+    {
+      "value": "MODEL_V2_FINAL",
+      "disabled": false
+    },
+    {
+      "value": "FRESH_SEEDED",
+      "disabled": false
+    },
+    {
+      "value": "WARM_START",
+      "disabled": false
+    }
+  ],
+  "single_session_preview": {
+    "text": "ENOUGH USABLE WINDOWS 17 training · 4 holdout windows (needs 16 and 4); time-purged so no training window overlaps the holdout. Session10 s windowsCompleteof which VALIDBelow VALID (accepted)TrainHoldoutHW-e0ed52de088444d59a1cc53997f936882222220174 22 of 22 complete windows are graded VALID. 0 lower-quality windows (degraded or unusable) are accepted for EXPERIMENTAL training, 0 of them in the training set: the grade is reported, not enforced, and these windows are never counted as VALID.",
+    "start_disabled": false
+  },
+  "two_session_preview": {
+    "text": "ENOUGH USABLE WINDOWS 34 training · 8 holdout windows (needs 16 and 4); time-purged so no training window overlaps the holdout. Session10 s windowsCompleteof which VALIDBelow VALID (accepted)TrainHoldoutHW-e0ed52de088444d59a1cc53997f936882222220174HW-92a49fa7e466470d852e0e053b351bf32222220174 44 of 44 complete windows are graded VALID. 0 lower-quality windows (degraded or unusable) are accepted for EXPERIMENTAL training, 0 of them in the training set: the grade is reported, not enforced, and these windows are never counted as VALID.",
+    "start_disabled": false
+  },
+  "run_id": "HDFLRUN-F172F79D9B4B",
+  "live": {
+    "status_line": "COMPLETED · LIVE_RUN · FEDPROX · round 3/3 · 197 events",
+    "badge": "RECORDED HARDWARE",
+    "clients": [
+      "RECORDED_DEMO_CLIENT_00",
+      "SIM_FL_SITE_01",
+      "SIM_FL_SITE_02",
+      "SIM_FL_SITE_03",
+      "SIM_FL_SITE_04",
+      "SIM_FL_SITE_05",
+      "SIM_FL_SITE_06",
+      "SIM_FL_SITE_07"
+    ],
+    "hw_participation": "YOUR RECORDED DATA IN THIS RUN 34 recorded 10 s V2 windows (resampled; every complete window is used, the quality grade is reported but does not block) on your one recorded client; the other seven clients are canonical synthetic peers. Of your 34 recorded windows, 34 are graded VALID; 0 lower-quality windows (0 degraded, 0 unusable) were accepted for experimental training. The grade is reported, not enforced. Your recording trains client 00 only (its labels are synthetic-assigned). Every round i",
+    "recorded_cards": 1,
+    "peer_cards": 7,
+    "metric_auprc": "AUPRCQUEUED",
+    "metric_accuracy": "AccuracyQUEUED",
+    "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+    "label": "3-round recorded-hardware run — pretrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 0/4 · REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST",
+    "alerts": []
+  },
+  "generalisation": {
+    "progress": "4/4 rounds scored · frozen V2 COMPLETED",
+    "base_model": "Pretrained V2 (MODEL_V2_FINAL) — federated fine-tuning on resampled recorded windows",
+    "unavailable": "",
+    "r0_identical": true
+  },
+  "fed_replay": {
+    "option": "HDFLRUN-F172F79D9B4B · RECORDED HARDWARE · 3 rounds · FEDPROX",
+    "clients": [
+      "RECORDED_DEMO_CLIENT_00",
+      "SIM_FL_SITE_01",
+      "SIM_FL_SITE_02",
+      "SIM_FL_SITE_03",
+      "SIM_FL_SITE_04",
+      "SIM_FL_SITE_05",
+      "SIM_FL_SITE_06",
+      "SIM_FL_SITE_07"
+    ],
+    "jumps": [
+      "Jump to round 1",
+      "Jump to round 2",
+      "Jump to round 3"
+    ],
+    "alerts": []
+  }
+}

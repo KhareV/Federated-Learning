@@ -1,0 +1,155 @@
+{
+  "mode": "demo-path",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "page": {
+    "h1": "One story, about 9 minutes",
+    "focused_tag": "H1",
+    "steps": [
+      {
+        "id": "scope",
+        "mode": "STATEMENT",
+        "href": "/app/about",
+        "fields": 4
+      },
+      {
+        "id": "monitor",
+        "mode": "LIVE · COMPUTED NOW",
+        "href": "/app/monitoring",
+        "fields": 4
+      },
+      {
+        "id": "federation",
+        "mode": "LIVE · COMPUTED NOW",
+        "href": "/app/federation",
+        "fields": 4
+      },
+      {
+        "id": "evaluation",
+        "mode": "PREPARED RUN · RECORDED",
+        "href": "/app/federation/live",
+        "fields": 4
+      },
+      {
+        "id": "science",
+        "mode": "FROZEN EVIDENCE · HASH-CHECKED",
+        "href": "/app/observatory/outcomes",
+        "fields": 4
+      },
+      {
+        "id": "candidates",
+        "mode": "STORED · DURABLE LIBRARY",
+        "href": "/app/models",
+        "fields": 4
+      },
+      {
+        "id": "hardware",
+        "mode": "RECORDED SESSION · STORED",
+        "href": "/app/history",
+        "fields": 4
+      },
+      {
+        "id": "limits",
+        "mode": "FROZEN EVIDENCE · HASH-CHECKED",
+        "href": "/app/observatory/provenance",
+        "fields": 4
+      }
+    ],
+    "mode_legend": 6,
+    "alerts": []
+  },
+  "keyboard_reached": [
+    "/app/about",
+    "/app/monitoring",
+    "/app/federation",
+    "/app/federation/live",
+    "/app/observatory/outcomes",
+    "/app/models",
+    "/app/history",
+    "/app/observatory/provenance",
+    "/app/about",
+    "/app/monitoring",
+    "/app/federation",
+    "/app/federation/live",
+    "/app/observatory/outcomes",
+    "/app/models",
+    "/app/history",
+    "/app/observatory/provenance",
+    "/app/about",
+    "/app/monitoring",
+    "/app/federation",
+    "/app/federation/live",
+    "/app/observatory/outcomes",
+    "/app/models",
+    "/app/history",
+    "/app/observatory/provenance",
+    "/app/about",
+    "/app/monitoring",
+    "/app/federation",
+    "/app/federation/live",
+    "/app/observatory/outcomes"
+  ],
+  "targets": [
+    {
+      "asked": "/app/about",
+      "path": "/app/about",
+      "h1": "About this prototype",
+      "not_found": false
+    },
+    {
+      "asked": "/app/monitoring",
+      "path": "/app/monitoring",
+      "h1": "Live monitoring",
+      "not_found": false
+    },
+    {
+      "asked": "/app/federation",
+      "path": "/app/federation",
+      "h1": "Federation Studio",
+      "not_found": false
+    },
+    {
+      "asked": "/app/federation/live",
+      "path": "/app/federation/live",
+      "h1": "Live federation",
+      "not_found": false
+    },
+    {
+      "asked": "/app/observatory/outcomes",
+      "path": "/app/observatory/outcomes",
+      "h1": "Federated learning research outcomes",
+      "not_found": false
+    },
+    {
+      "asked": "/app/models",
+      "path": "/app/models",
+      "h1": "Model governance & comparison",
+      "not_found": false
+    },
+    {
+      "asked": "/app/history",
+      "path": "/app/history",
+      "h1": "Research monitoring history",
+      "not_found": false
+    },
+    {
+      "asked": "/app/observatory/provenance",
+      "path": "/app/observatory/provenance",
+      "h1": "Provenance, history and known boundaries",
+      "not_found": false
+    }
+  ],
+  "banner_tour": true,
+  "banner_storyboard": true,
+  "phone": {
+    "inner": 390,
+    "scroll": 390
+  }
+}

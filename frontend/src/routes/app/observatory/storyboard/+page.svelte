@@ -47,6 +47,7 @@
 <svelte:head><title>FL storyboard | NHM</title></svelte:head>
 <div class="eyebrow">NHM / RESEARCH OBSERVATORY / STORYBOARD</div>
 <h1 tabindex="-1" use:focusHeading>Federated learning storyboard</h1>
+<p class="demo-note" data-testid="demo-path-banner">Presenting? The <a href="/app/demo">guided demonstration path</a> is the single recommended story; this page is the detailed companion.</p>
 <p class="lead">One path from monitoring to measured outcomes. Every number comes from committed evidence through the backend; the four lanes are never mixed.</p>
 {#if error}<p role="alert" class="err">Storyboard unavailable: {error}</p>{:else if !bundle}<p class="dim" role="status">Loading…</p>{:else}
 <ol class="rail" aria-label="Storyboard steps">{#each STEPS as s, i (s.title)}<li><button class:on={step===i} aria-current={step===i ? 'step' : undefined} onclick={() => (step = i)}><span>{i + 1}</span>{s.title}</button></li>{/each}</ol>
@@ -76,4 +77,5 @@
 	.eyebrow{color:#2bb8b0;font:10px 'JetBrains Mono',monospace;letter-spacing:.14em}h1{font:500 clamp(28px,4vw,42px) 'Space Grotesk',sans-serif;margin:8px 0}h2{font:500 20px 'Space Grotesk',sans-serif;margin:10px 0}.lead,.card p{max-width:820px;color:#a7b8c9;line-height:1.6;overflow-wrap:anywhere}.dim,li{color:#94a3b8;font-size:13px}.err{color:#fecdd3}a{color:#2bb8b0;display:inline-block;min-height:24px;line-height:24px}
 	.rail{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0}.rail button,.nav button{background:#0a0f1f;color:#e2e8f0;border:1px solid rgba(148,163,184,.35);padding:6px 10px;min-height:32px;font:12px 'JetBrains Mono',monospace}.rail button.on{border-color:#2bb8b0;color:#9fe8e3}.rail span{color:#71829a;margin-right:6px}
 	.card{border:1px solid rgba(148,163,184,.25);padding:16px 18px;margin:12px 0}.lane{font:10px 'JetBrains Mono',monospace;border:1px solid;padding:3px 8px}.lA{color:#7dd3fc}.lB{color:#86efac}.lC{color:#d8ccff}.lH{color:#fde68a}.syn{display:inline-block;border:1px solid rgba(167,139,250,.6);padding:5px 10px;color:#d8ccff;font:11px 'JetBrains Mono',monospace}.nav{display:flex;gap:8px;margin-top:10px}.lanes{padding-left:18px;font-size:12px}h1:focus{outline:none}
+.demo-note{margin:0 0 12px;color:#fbbf24;font:11px/1.5 'JetBrains Mono',monospace}.demo-note a{color:#2bb8b0}
 </style>

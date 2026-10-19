@@ -1,0 +1,70 @@
+{
+  "mode": "history-source",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "session_id": "SESS-8bd013933b76408b83ad85fd15f1783e",
+  "run_id": "FL10RUN-68922AD89865",
+  "source_note": "Your synthetic monitoring session SESS-8bd01393… — its signal is regenerated from its frozen scenario (no new monitoring session, no new inference) and becomes the local data of your client, SITE_00; the other seven clients stay canonical synthetic. Labels are synthetic-assigned for the demonstration (a monitoring session has no scheduled engineering events), exactly as for recorded hardware. This is NOT real patient physiology.",
+  "live": {
+    "badge": "HISTORY SESSION · SITE_00",
+    "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+    "clients": [
+      "SIM_FL_SITE_00",
+      "SIM_FL_SITE_01",
+      "SIM_FL_SITE_02",
+      "SIM_FL_SITE_03",
+      "SIM_FL_SITE_04",
+      "SIM_FL_SITE_05",
+      "SIM_FL_SITE_06",
+      "SIM_FL_SITE_07"
+    ],
+    "metric_auprc": "AUPRCQUEUED",
+    "alerts": [],
+    "local_examples": [
+      [
+        "SIM_FL_SITE_00",
+        "86"
+      ],
+      [
+        "SIM_FL_SITE_01",
+        "91"
+      ],
+      [
+        "SIM_FL_SITE_02",
+        "91"
+      ],
+      [
+        "SIM_FL_SITE_03",
+        "89"
+      ],
+      [
+        "SIM_FL_SITE_04",
+        "90"
+      ],
+      [
+        "SIM_FL_SITE_05",
+        "93"
+      ],
+      [
+        "SIM_FL_SITE_06",
+        "93"
+      ],
+      [
+        "SIM_FL_SITE_07",
+        "83"
+      ]
+    ]
+  },
+  "overview": "Source mode: HISTORY MONITORING SESSION SIGNAL (REGENERATED) · SYNTHETIC-ASSIGNED LABELS — NOT A REAL PHYSIOLOGICAL PATIENT. Monitoring sessions executed: 0; buffer reused for 3 rounds. This is a simulated stream, not real physiology.",
+  "replay": {
+    "controls": true,
+    "alerts": []
+  }
+}

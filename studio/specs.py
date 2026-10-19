@@ -29,8 +29,24 @@ def figure_title(fid: str, n: int, cohort: str = "ORIGINAL") -> str:
     base = next(t for i, t, _ in FIGURES if i == fid)
     word = {3: "Three", 10: "Ten"}.get(n, str(n))
     cmp_a, cmp_b = comparison_pair(n)
-    return (base.replace("independent holdout", "reused diagnostic holdout" if cohort != "REALISTIC" else "realistic diagnostic holdout").replace("Ten-round", f"{word}-round").replace("R0-R10", f"R0-R{n}")
+    return (base.replace("independent holdout", "reused diagnostic holdout" if cohort not in ("REALISTIC", "REALISTIC_NSTDB") else "realistic diagnostic holdout").replace("Ten-round", f"{word}-round").replace("R0-R10", f"R0-R{n}")
             .replace("R10 minus R3", f"R{cmp_b} minus R{cmp_a}"))
+
+
+def _accepts_below_valid(rows: list[dict[str, Any]]) -> bool:
+    """A recorded-hardware V2 run trains on every complete window whatever its grade: its counts carry ``accepted_below_valid``, and nothing is 'excluded'."""
+    return any("accepted_below_valid" in r for r in rows)
+
+
+def _quality_label(scope: str, rows: list[dict[str, Any]]) -> str:
+    return f"{scope} quality: VALID vs accepted below VALID (experimental)" if _accepts_below_valid(rows) else f"{scope} quality: eligible vs excluded"
+
+
+def _quality_series(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    if _accepts_below_valid(rows):
+        # None = the grades were not recorded for this (older) run: shown as a gap, never as a number
+        return [{"name": "VALID (trained)", "values": [r["VALID"] for r in rows]}, {"name": "accepted below VALID (trained, experimental)", "values": [r["accepted_below_valid"] for r in rows]}]
+    return [{"name": "quality-eligible", "values": [r["trainable"] for r in rows]}, {"name": "excluded (degraded)", "values": [r["DEGRADED"] for r in rows]}, {"name": "excluded (unusable)", "values": [r["UNUSABLE"] for r in rows]}]
 
 
 def comparison_pair(n: int) -> tuple[int, int]:
@@ -212,10 +228,10 @@ def build_specs(b: dict[str, Any], selected: int | None = None) -> dict[str, dic
           "series": [{"name": "positive", "values": [cohort[cl]["synthetic_positive"] for cl in clients]}, {"name": "negative", "values": [cohort[cl]["synthetic_negative"] for cl in clients]}]},
          {"id": "holdout", "label": "Holdout: positives / negatives", "kind": "bars", "categories": [h["participant_id"] for h in hold], "x_label": "Diagnostic holdout participant", "y_label": "Windows",
           "series": [{"name": "positive", "values": [h["counts"]["synthetic_positive"] for h in hold]}, {"name": "negative", "values": [h["counts"]["synthetic_negative"] for h in hold]}]},
-         {"id": "quality_train", "label": "Training quality: eligible vs excluded", "kind": "bars", "categories": [_short(cl) for cl in clients], "x_label": "Training client", "y_label": "Windows",
-          "series": [{"name": "quality-eligible", "values": [cohort[cl]["trainable"] for cl in clients]}, {"name": "excluded (degraded)", "values": [cohort[cl]["DEGRADED"] for cl in clients]}, {"name": "excluded (unusable)", "values": [cohort[cl]["UNUSABLE"] for cl in clients]}]},
-         {"id": "quality_holdout", "label": "Holdout quality: eligible vs excluded", "kind": "bars", "categories": [h["participant_id"] for h in hold], "x_label": "Diagnostic holdout participant", "y_label": "Windows",
-          "series": [{"name": "quality-eligible", "values": [h["counts"]["trainable"] for h in hold]}, {"name": "excluded (degraded)", "values": [h["counts"]["DEGRADED"] for h in hold]}, {"name": "excluded (unusable)", "values": [h["counts"]["UNUSABLE"] for h in hold]}]}],
+         {"id": "quality_train", "label": _quality_label("Training", [cohort[cl] for cl in clients]), "kind": "bars", "categories": [_short(cl) for cl in clients], "x_label": "Training client", "y_label": "Windows",
+          "series": _quality_series([cohort[cl] for cl in clients])},
+         {"id": "quality_holdout", "label": _quality_label("Holdout", [h["counts"] for h in hold]), "kind": "bars", "categories": [h["participant_id"] for h in hold], "x_label": "Diagnostic holdout participant", "y_label": "Windows",
+          "series": _quality_series([h["counts"] for h in hold])}],
         none_needed=True, availability_note="source-backed cohort evidence")
     # 15 participant-level ----------------------------------------------------------------------------------------------------------
     pids = [h["participant_id"] for h in hold]

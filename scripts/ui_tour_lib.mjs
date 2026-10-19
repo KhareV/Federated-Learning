@@ -2,7 +2,7 @@
 import { writeFileSync } from 'node:fs';
 export const ROUTES = ['/app', '/app/device', '/app/monitoring', '/app/history', '/app/federation', '/app/federation/live', '/app/federation/clients', '/app/federation/rounds', '/app/federation/privacy',
 	'/app/models', '/app/research/ml', '/app/research/fl', '/app/system', '/app/about', '/app/observatory', '/app/observatory/evidence', '/app/observatory/federation', '/app/observatory/fl10', '/app/observatory/model',
-	'/app/observatory/outcomes', '/app/observatory/provenance', '/app/observatory/replay', '/app/observatory/scenarios', '/app/observatory/storyboard', '/app/observatory/tour', ];
+	'/app/observatory/outcomes', '/app/observatory/provenance', '/app/observatory/replay', '/app/observatory/scenarios', '/app/observatory/storyboard', '/app/observatory/tour', '/app/observatory/federation-replay', '/app/observatory/external-check', '/app/demo', ];
 const VIEWPORTS = [{ name: 'desktop', width: 1440, height: 900, mobile: false }, { name: 'laptop', width: 1024, height: 768, mobile: false }, { name: 'tablet', width: 768, height: 1024, mobile: true }, { name: 'phone', width: 390, height: 844, mobile: true }];
 const METRICS = `(() => {
 	const vw = window.innerWidth, vis = (e) => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none'; };

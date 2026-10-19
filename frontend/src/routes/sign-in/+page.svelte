@@ -60,7 +60,7 @@ python -m scripts.run_capstone_product</pre>
 			<dl>
 				<dt>IDENTITY</dt><dd>{preview?.user_id ?? 'demo identity (verified on entry)'}</dd>
 				<dt>AUTH PROVIDER</dt><dd>DEMO - NOT CLERK</dd>
-				<dt>HARDWARE</dt><dd>SIMULATED ONLY - no physical wearable</dd>
+				<dt>HARDWARE</dt><dd>Simulated wearable by default · optional MongoDB ESP32 telemetry (physical device not verified)</dd>
 				<dt>MODEL</dt><dd>{auth.system?.model_id} via {auth.system?.software_system} (server-side)</dd>
 			</dl>
 			<p class="disclose">Research prototype. Not diagnostic. Simulated device. Monitoring states are research outputs, not health assessments.</p>

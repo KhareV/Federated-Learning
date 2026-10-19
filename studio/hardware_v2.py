@@ -64,16 +64,17 @@ def peer_datasets(cohort: str = "ORIGINAL") -> list[LocalDataset]:
     """The seven synthetic peers of the chosen cohort, built once per process: the canonical ones (SIM_FL_SITE_01..07, unchanged cohort builder, about 12 s the first time) or the realistic ones (SIM_RFL_SITE_01..07)."""
     with _PEERS_LOCK:
         if cohort not in _PEERS:
-            if cohort == "REALISTIC":
-                from simulation import fl_cohort_realistic_v2 as realistic
+            if cohort in ("REALISTIC", "REALISTIC_NSTDB"):
+                from studio import cohorts
 
+                realistic = cohorts.module(cohort)
                 _PEERS[cohort] = [realistic.build_dataset(p) for p in realistic.train_profiles()[1:]]
             elif cohort == "ORIGINAL":
                 from federated.wearable_fl_runner_v1 import build_cohort
 
                 _PEERS[cohort] = build_cohort()[1][1:]
             else:
-                raise ValueError("cohort must be ORIGINAL or REALISTIC")
+                raise ValueError("cohort must be ORIGINAL, REALISTIC or REALISTIC_NSTDB")
         return list(_PEERS[cohort])
 
 
@@ -81,6 +82,14 @@ def _complete(event: dict[str, Any]) -> bool:
     """Full 10 s window of finite samples with no missing slots. The PREPROC_V1 quality grade is NOT required: hardware V2 runs are allowed whatever the grade says (it is reported, never hidden)."""
     samples = event["ecg"]["samples"]
     return len(samples) == WINDOW_SAMPLES and event["diagnostics"]["missing_slots"] == 0 and bool(np.isfinite(np.asarray(samples, dtype=np.float64)).all())
+
+
+GRADES = ("VALID", "DEGRADED", "UNUSABLE")
+
+
+def quality_counts(windows: list[dict[str, Any]]) -> dict[str, int]:
+    """How many of these windows carry each PREPROC_V1 grade. A hardware V2 run trains on every COMPLETE window whatever its grade, so VALID and 'accepted below VALID' are always reported separately."""
+    return {grade: sum(1 for w in windows if w.get("ecg_quality") == grade) for grade in GRADES}
 
 
 def _session_windows(records: list[dict[str, Any]], session_id: str) -> tuple[list[dict[str, Any]], dict[str, Any]]:
@@ -99,7 +108,8 @@ def _session_windows(records: list[dict[str, Any]], session_id: str) -> tuple[li
             overridden += 1
             for reason in event["diagnostics"].get("quality_reasons") or [event["ecg_quality"]]:
                 gate_reasons[reason] = gate_reasons.get(reason, 0) + 1
-    return usable, {"gate_overridden": overridden, "gate_reasons": gate_reasons, "session_id": session_id, "readings": len(rows), "resampled_records": summary["resampled_records"], "windows": len(events), "usable": len(usable), "by_quality": by_quality, "excluded_reasons": reasons}
+    graded = quality_counts(usable)
+    return usable, {"valid": graded["VALID"], "below_valid": len(usable) - graded["VALID"], "gate_overridden": overridden, "gate_reasons": gate_reasons, "session_id": session_id, "readings": len(rows), "resampled_records": summary["resampled_records"], "windows": len(events), "usable": len(usable), "by_quality": by_quality, "excluded_reasons": reasons}
 
 
 def split_session(usable: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -120,11 +130,13 @@ def preview(records: list[dict[str, Any]], session_ids: list[str]) -> dict[str, 
     for session_id in session_ids:
         usable, info = _session_windows(records, session_id)
         train, holdout = split_session(usable)
-        sessions.append(info | {"train": len(train), "holdout": len(holdout)})
+        tq, hq = quality_counts(train), quality_counts(holdout)
+        sessions.append(info | {"train": len(train), "holdout": len(holdout), "train_valid": tq["VALID"], "train_below_valid": len(train) - tq["VALID"], "holdout_valid": hq["VALID"], "holdout_below_valid": len(holdout) - hq["VALID"]})
         train_total += len(train)
         holdout_total += len(holdout)
     ok = train_total >= MIN_TRAIN_WINDOWS and holdout_total >= MIN_HOLDOUT_WINDOWS
-    return {"sessions": sessions, "train_windows": train_total, "holdout_windows": holdout_total, "min_train_windows": MIN_TRAIN_WINDOWS, "min_holdout_windows": MIN_HOLDOUT_WINDOWS, "eligible": ok,
+    return {"sessions": sessions, "valid_windows": sum(s["valid"] for s in sessions), "below_valid_windows": sum(s["below_valid"] for s in sessions),
+            "train_below_valid": sum(s["train_below_valid"] for s in sessions), "holdout_below_valid": sum(s["holdout_below_valid"] for s in sessions), "train_windows": train_total, "holdout_windows": holdout_total, "min_train_windows": MIN_TRAIN_WINDOWS, "min_holdout_windows": MIN_HOLDOUT_WINDOWS, "eligible": ok,
             "reason": None if ok else _insufficient(sessions, train_total, holdout_total), "assumptions": ASSUMPTIONS}
 
 
@@ -152,8 +164,9 @@ def _dataset(client: str, windows: list[dict[str, Any]], labels: dict[str, int],
     y = np.asarray([labels[w["window_id"]] for w in windows], dtype=np.float32)
     edges = [int(w["timestamp_us"]) for w in windows]
     positives = int(y.sum())
-    counts = {"source_records": None, "windows_emitted": len(windows), "VALID": len(windows), "DEGRADED": 0, "UNUSABLE": 0, "trainable": len(windows), "synthetic_positive": positives,
-              "synthetic_negative": len(windows) - positives, "excluded_not_valid": 0, "excluded_valid_but_incomplete": 0}
+    graded = quality_counts(windows)
+    counts = {"source_records": None, "windows_emitted": len(windows), **graded, "accepted_below_valid": len(windows) - graded["VALID"], "excluded_windows": 0, "quality_recorded": True, "trainable": len(windows),
+              "synthetic_positive": positives, "synthetic_negative": len(windows) - positives, "excluded_not_valid": 0, "excluded_valid_but_incomplete": 0}      # every complete window trains: below-VALID ones are ACCEPTED (experimental), never counted as VALID
     return LocalDataset(client, client, ", ".join(session_ids), inputs, y, tuple(edges), counts, dataset_semantic_sha(inputs, y, edges))
 
 
@@ -209,17 +222,18 @@ def prepare(demo: Any, owner: str, *, session_ids: list[str], rounds: int, algor
     snapshot["snapshot_sha256"] = canonical_digest(snapshot)
     client_manifest = {d.client_id: {"window_ids": [w["window_id"] for w in used] if d is mine else [], "samples": len(d.labels), "kind": "RECORDED" if d is mine else "SYNTHETIC_PEER",
                                      "session_id": ", ".join(session_ids) if d is mine else d.session_id,
-                                     "label_counts": {"0": int(d.counts["synthetic_negative"]), "1": int(d.counts["synthetic_positive"])}, "feature_sha256": d.dataset_sha256} for d in datasets}
+                                     "label_counts": {"0": int(d.counts["synthetic_negative"]), "1": int(d.counts["synthetic_positive"])}, "feature_sha256": d.dataset_sha256,
+                                     **({"quality_counts": {g: int(d.counts[g]) for g in GRADES}, "accepted_below_valid": int(d.counts["accepted_below_valid"])} if d is mine else {})} for d in datasets}
     used_ids = {w["window_id"] for w in used}
     all_windows = used + holdout_flat
     dataset = {
         "version": DATASET_VERSION, "feature_version": "PREPROC_V1_RESAMPLED_250HZ_10S_NORMALISED", "feature_names": [], "window_seconds": WINDOW_US / 1e6, "minimum_records": None,
-        "windows_total": sum(i["windows"] for i in infos), "quality_gate": "NOT_ENFORCED_FOR_HARDWARE_V2", "gate_overridden_windows": sum(i["gate_overridden"] for i in infos), "training_windows": len(used), "training_windows_available": len(train_all), "topology": "ONE_RECORDED_CLIENT_PLUS_SEVEN_SYNTHETIC_PEERS", "holdout_windows": len(holdout_flat), "excluded_windows": [{"session_id": i["session_id"], "reasons": i["excluded_reasons"], "windows": i["windows"], "usable": i["usable"]} for i in infos],
+        "windows_total": sum(i["windows"] for i in infos), "quality_gate": "NOT_ENFORCED_FOR_HARDWARE_V2", "training_quality": quality_counts(used), "holdout_quality": quality_counts(holdout_flat), "training_windows_below_valid": len(used) - quality_counts(used)["VALID"], "gate_overridden_windows": sum(i["gate_overridden"] for i in infos), "training_windows": len(used), "training_windows_available": len(train_all), "topology": "ONE_RECORDED_CLIENT_PLUS_SEVEN_SYNTHETIC_PEERS", "holdout_windows": len(holdout_flat), "excluded_windows": [{"session_id": i["session_id"], "reasons": i["excluded_reasons"], "windows": i["windows"], "usable": i["usable"]} for i in infos],
         "sessions": infos, "label_assignment": {"version": LABEL_VERSION, "status": "SYNTHETIC_ASSIGNED_FOR_DEMO", "seed": label_seed, "classes": {"0": "NORMAL_MONITORED_PATTERN", "1": "POTENTIAL_ECTOPY_ASSOCIATED_PATTERN"}},
         "input_feature_sha256": canonical_digest({w["window_id"]: hashlib.sha256(json.dumps(w["ecg"]["samples"]).encode()).hexdigest() for w in all_windows}),
         "label_sha256": canonical_digest({**{k: v for k, v in train_labels.items() if k in used_ids}, **holdout_labels}), "normalization": {"scope": "PER_WINDOW_ZSCORE", "unit": "unchanged normalize_windows"}, "assumptions": ASSUMPTIONS,
         "clients": client_manifest, "holdout_window_ids": [w["window_id"] for w in holdout_flat],
-        "window_manifest": [{"window_id": w["window_id"], "session_id": w["session_id"], "timestamp_us": int(w["timestamp_us"]), "label": (train_labels | holdout_labels)[w["window_id"]], "label_provenance": "SYNTHETIC_ASSIGNED_FOR_DEMO",
+        "window_manifest": [{"window_id": w["window_id"], "session_id": w["session_id"], "timestamp_us": int(w["timestamp_us"]), "label": (train_labels | holdout_labels)[w["window_id"]], "label_provenance": "SYNTHETIC_ASSIGNED_FOR_DEMO", "ecg_quality": w.get("ecg_quality"),
                              "split": "TRAIN" if w["window_id"] in used_ids else "HOLDOUT", "client_id": HARDWARE_CLIENT_ID if w["window_id"] in used_ids else None} for w in all_windows],
     }
     base_audit = {k: audit.get(k) for k in ("model_id", "checkpoint_sha256", "state_sha256", "state_entries", "architecture_id", "training_target_of_checkpoint")}
@@ -355,6 +369,15 @@ def _run_record(ctx: dict[str, Any], *, status: str, started_at: str, completed_
 
 
 # ---- evaluation / bundle support ------------------------------------------------------------------------------------------------------
+def _holdout_grades(dataset: dict[str, Any], session: str) -> dict[str, Any]:
+    """Per-grade counts of one holdout session. Runs recorded before grades were kept per window say so (None, never an invented number)."""
+    rows = [m for m in dataset.get("window_manifest", []) if m.get("split") == "HOLDOUT" and m.get("session_id") == session]
+    if rows and all("ecg_quality" in m for m in rows):
+        graded = {g: sum(1 for m in rows if m["ecg_quality"] == g) for g in GRADES}
+        return {**graded, "accepted_below_valid": len(rows) - graded["VALID"], "quality_recorded": True}
+    return {"VALID": None, "DEGRADED": None, "UNUSABLE": None, "accepted_below_valid": None, "quality_recorded": False}
+
+
 def evaluation_states(run_dir: Path, run: dict[str, Any], dataset: dict[str, Any]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Pooled / participant (= recording session) metrics and curves of every stored V2 state on the stored holdout block."""
     from studio.isolated_eval import isolated_logits
@@ -377,5 +400,5 @@ def evaluation_states(run_dir: Path, run: dict[str, Any], dataset: dict[str, Any
         mask = owners == session
         participants.append({"holdout_id": f"HOLDOUT_{index:02d}", "participant_id": session, "site_condition": "RECORDED_HARDWARE_SESSION", "replicate": 0, "session_id": session,
                              "seed": int(dataset["label_assignment"]["seed"]), "dataset_sha256": dataset["input_feature_sha256"],
-                             "counts": {"windows_emitted": int(mask.sum()), "trainable": int(mask.sum()), "DEGRADED": 0, "UNUSABLE": 0, "synthetic_positive": int(labels[mask].sum()), "synthetic_negative": int((labels[mask] == 0).sum())}})
+                             "counts": {"windows_emitted": int(mask.sum()), "trainable": int(mask.sum()), **_holdout_grades(dataset, session), "excluded_windows": 0, "synthetic_positive": int(labels[mask].sum()), "synthetic_negative": int((labels[mask] == 0).sum())}})
     return states, participants

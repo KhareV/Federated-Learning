@@ -50,14 +50,22 @@ def test_the_default_cohort_is_the_original_one_and_the_choice_is_validated(tmp_
     asyncio.run(go())
 
 
-def test_the_registry_describes_both_cohorts_and_the_realistic_holdout_matches_its_pinned_manifest():
-    assert cohorts.COHORTS == ("ORIGINAL", "REALISTIC") and cohorts.DEFAULT == "ORIGINAL"
+def test_the_registry_describes_every_cohort_and_each_realistic_holdout_matches_its_pinned_manifest():
+    assert cohorts.COHORTS == ("ORIGINAL", "REALISTIC", "REALISTIC_NSTDB") and cohorts.REALISTIC_FAMILY == ("REALISTIC", "REALISTIC_NSTDB") and cohorts.DEFAULT == "ORIGINAL"
     original, realistic = cohorts.spec("ORIGINAL"), cohorts.spec("REALISTIC")
     assert original.client_ids[0] == "SIM_FL_SITE_00" and realistic.client_ids == original.client_ids and len(realistic.client_ids) == 8       # the same eight logical sites; participants, sessions and signals differ
     assert original.use_label.startswith("REUSED SYNTHETIC DIAGNOSTIC EVALUATION") and realistic.use_label.startswith("REALISTIC SYNTHETIC EVALUATION COHORT")
     holdout = cohorts.load_realistic()
     assert holdout.windows == cohorts.static_info()["windows"] and len(holdout.datasets) == 16
     assert len(holdout.separation) == 5 and all(row["participant_overlap"] == row["session_overlap"] == row["window_input_overlap"] == 0 for row in holdout.separation.values())
+    nstdb = cohorts.spec("REALISTIC_NSTDB")
+    assert nstdb.client_ids == original.client_ids and nstdb.evaluation_cohort_id == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3" and nstdb.use_label.startswith("REALISTIC SYNTHETIC EVALUATION COHORT WITH RECORDED NSTDB NOISE")
+    assert "recorded" in nstdb.description.lower() and nstdb.claim_boundary.endswith("NOT_AAMI_SVF_OR_CLINICAL") and cohorts.is_realistic("REALISTIC_NSTDB") and not cohorts.is_realistic("ORIGINAL")
+    h3 = cohorts.load_realistic("REALISTIC_NSTDB")
+    assert h3.cohort_id == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3" and h3.windows == cohorts.static_info("REALISTIC_NSTDB")["windows"] and len(h3.datasets) == 16
+    assert len(h3.separation) == 7 and "realistic_v2_evaluation_cohort_16_participants" in h3.separation        # also disjoint from the invented-noise realistic cohort
+    assert all(row["participant_overlap"] == row["session_overlap"] == row["window_input_overlap"] == 0 for row in h3.separation.values())
+    assert cohorts.holdout_provider("REALISTIC_NSTDB")() is h3 and cohorts.loaded_holdout("REALISTIC_NSTDB") is h3 and cohorts.loaded_holdout("REALISTIC") is holdout
 
 
 def test_a_realistic_studio_run_trains_on_realistic_clients_and_is_scored_on_the_realistic_holdout(tmp_path):
@@ -90,24 +98,49 @@ def test_a_realistic_studio_run_trains_on_realistic_clients_and_is_scored_on_the
     asyncio.run(go())
 
 
-def test_a_hardware_v2_run_can_take_its_seven_peers_and_its_evaluation_from_the_realistic_cohort(tmp_path):
+def test_a_recorded_noise_studio_run_trains_on_its_own_clients_and_is_scored_on_its_own_holdout(tmp_path):
+    async def go():
+        service = _service(tmp_path)
+        job = await service.runner10.create("user-a", "A", v2_init.INIT_V2_FINAL, 3, cohort="REALISTIC_NSTDB")
+        await service.runner10.start("user-a", job.run_id)
+        await _wait(job)
+        assert job.status == "COMPLETED" and job.export_status == "READY", (job.failure, job.export_status)
+        d = service.describe("user-a", job.run_id)
+        assert d["cohort"] == "REALISTIC_NSTDB" and d["client_ids"] == list(cohorts.spec("REALISTIC_NSTDB").client_ids) and "recorded noise" in d["label"]
+        summary = service.evaluation_summary("user-a", job.run_id)
+        assert [r["round_id"] for r in summary["records"]] == [0, 1, 2, 3] and all(r["evaluation_status"] == "COMPLETED" for r in summary["records"])
+        assert summary["cohort_use"] == cohorts.NSTDB_USE_LABEL and summary["claim_boundary"] == cohorts.NSTDB_CLAIM_BOUNDARY
+        assert all(r["cohort_id"] == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3" for r in summary["records"])
+        assert service.evaluation_round("user-a", job.run_id, 0)["metric_result"]["windows"] == cohorts.load_realistic("REALISTIC_NSTDB").windows
+        bundle = service.bundle("user-a", job.run_id)
+        assert bundle["cohort"] == "REALISTIC_NSTDB" and bundle["evaluation"]["cohort_id"] == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3" and "RECORDED NSTDB NOISE" in bundle["synthetic_label"]
+        assert [c["client_id"] for c in bundle["training_cohort"]] == d["client_ids"]
+
+    asyncio.run(go())
+
+
+@pytest.mark.parametrize("cohort", ["REALISTIC", "REALISTIC_NSTDB"])
+def test_a_hardware_v2_run_can_take_its_seven_peers_and_its_evaluation_from_each_realistic_cohort(tmp_path, cohort):
+    holdout_id = {"REALISTIC": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2", "REALISTIC_NSTDB": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3"}[cohort]
+    use_label = {"REALISTIC": cohorts.REALISTIC_USE_LABEL, "REALISTIC_NSTDB": cohorts.NSTDB_USE_LABEL}[cohort]
+
     async def go():
         store, _ = store_with_sessions(tmp_path / "s", sessions=("HW-V2-A", "HW-V2-B"))
         service = _service(tmp_path)
         service.hardware = HardwareRunJobs(HardwareDemoService(store, tmp_path / "studio"), tmp_path / "studio", finalize=service.finalize_hardware)
         service.hardware.state_sink = service.submit_hardware_v2_state
         with pytest.raises(ValueError):                                   # the tabular family has eight recorded blocks and no synthetic peers
-            service.hardware.demo.prepare("user-a", session_ids=["HW-V2-A"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=7, initialisation="FRESH_SEEDED", cohort="REALISTIC")
-        job = service.hardware.start("user-a", asyncio.get_running_loop(), session_ids=["HW-V2-A", "HW-V2-B"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=7, initialisation="MODEL_V2_FINAL", cohort="REALISTIC")
+            service.hardware.demo.prepare("user-a", session_ids=["HW-V2-A"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=7, initialisation="FRESH_SEEDED", cohort=cohort)
+        job = service.hardware.start("user-a", asyncio.get_running_loop(), session_ids=["HW-V2-A", "HW-V2-B"], rounds=3, algorithm="FEDAVG", secagg_mode="PLAIN", label_seed=7, initialisation="MODEL_V2_FINAL", cohort=cohort)
         await _wait(job)
         assert job.status == "COMPLETED" and job.export_status == "READY", (job.failure, job.export_status)
         d = service.describe("user-a", job.run_id)
-        assert d["cohort"] == "REALISTIC" and d["client_ids"][0] == "RECORDED_DEMO_CLIENT_00" and d["client_ids"][1:] == list(cohorts.spec("REALISTIC").client_ids[1:])
+        assert d["cohort"] == cohort and d["client_ids"][0] == "RECORDED_DEMO_CLIENT_00" and d["client_ids"][1:] == list(cohorts.spec(cohort).client_ids[1:])
         summary = service.evaluation_summary("user-a", job.run_id)
-        assert all(r["evaluation_status"] == "COMPLETED" and r["cohort_id"] == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2" for r in summary["records"]) and summary["cohort_use"] == cohorts.REALISTIC_USE_LABEL
-        assert service.evaluation_round("user-a", job.run_id, 0)["metric_result"]["windows"] == cohorts.load_realistic().windows
+        assert all(r["evaluation_status"] == "COMPLETED" and r["cohort_id"] == holdout_id for r in summary["records"]) and summary["cohort_use"] == use_label
+        assert service.evaluation_round("user-a", job.run_id, 0)["metric_result"]["windows"] == cohorts.load_realistic(cohort).windows
         bundle = service.bundle("user-a", job.run_id)
-        assert bundle["cohort"] == "REALISTIC" and "RECORDED HARDWARE WINDOWS" in bundle["synthetic_label"]
+        assert bundle["cohort"] == cohort and "RECORDED HARDWARE WINDOWS" in bundle["synthetic_label"]
         assert max(c["counts"]["trainable"] for c in bundle["training_cohort"]) <= 93         # the frozen SecAgg+ round-1 size rule still holds
 
     asyncio.run(go())
@@ -131,6 +164,34 @@ def test_a_monitored_realistic_site_reproduces_its_own_canonical_dataset_and_rep
     evidence = realistic_monitor.parity(monitored, dataset, profile, canonical.dataset_sha256)
     assert evidence["records_identical"] and evidence["window_samples_and_timestamps_identical"] and evidence["dataset_identical_to_canonical"]
     assert evidence["label_contract"] == "WEARABLE_SIM_REALISTIC_EVENT_WINDOW_V2" and len(double.requests) > 0
+
+
+def test_a_monitored_recorded_noise_site_reproduces_its_own_canonical_dataset_and_reports_parity():
+    from simulation import fl_cohort_realistic_v3 as recorded
+    from studio import realistic_monitor
+    from tests.capstone_product_support import StrictInferenceDouble
+
+    site = 3
+    profile = recorded.train_profile(site)
+    canonical = recorded.build_dataset(profile)
+    double = StrictInferenceDouble()
+    monitored = asyncio.run(realistic_monitor.monitor_site(double.client, site, session_id="LIVELINK-NSTDB-3", cohort="REALISTIC_NSTDB"))
+    assert monitored["scenario_id"] == "RL_SITE_03_LIVE_LINK" and monitored["session_state"] == "COMPLETED"
+    dataset = realistic_monitor.dataset_from_windows(monitored["windows"], profile)
+    assert dataset.client_id == "SIM_FL_SITE_03" and dataset.counts["trainable"] > 0
+    evidence = realistic_monitor.parity(monitored, dataset, profile, canonical.dataset_sha256)
+    assert evidence["records_identical"] and evidence["window_samples_and_timestamps_identical"] and evidence["dataset_identical_to_canonical"]
+    assert evidence["label_contract"] == "WEARABLE_SIM_REALISTIC_EVENT_WINDOW_V3" and len(double.requests) > 0
+
+
+def test_the_hardware_peers_of_the_recorded_noise_cohort_are_its_own_seven_clients():
+    from studio import hardware_v2
+
+    peers = hardware_v2.peer_datasets("REALISTIC_NSTDB")
+    assert [p.client_id for p in peers] == list(cohorts.spec("REALISTIC_NSTDB").client_ids[1:]) and len(peers) == 7
+    assert {p.dataset_sha256 for p in peers}.isdisjoint({p.dataset_sha256 for p in hardware_v2.peer_datasets("REALISTIC")})
+    with pytest.raises(ValueError, match="REALISTIC_NSTDB"):
+        hardware_v2.peer_datasets("BOGUS")
 
 
 def test_a_realistic_run_can_monitor_a_site_live_and_trains_on_what_the_runtime_emitted(tmp_path):
@@ -158,7 +219,7 @@ def test_a_realistic_run_can_monitor_a_site_live_and_trains_on_what_the_runtime_
 
 # ---- the HTTP surface ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-def test_the_studio_routes_advertise_both_cohorts_and_validate_the_choice(tmp_path):
+def test_the_studio_routes_advertise_every_cohort_and_validate_the_choice(tmp_path):
     from fastapi.testclient import TestClient
 
     from tests.capstone_product_support import BASE, USER_A
@@ -166,10 +227,10 @@ def test_the_studio_routes_advertise_both_cohorts_and_validate_the_choice(tmp_pa
 
     with TestClient(_app(tmp_path)) as c:
         caps = c.get(f"{BASE}/studio/capabilities", headers=USER_A).json()["ten_round"]
-        assert [(x["id"], x["default"]) for x in caps["cohorts"]] == [("ORIGINAL", True), ("REALISTIC", False)]
-        assert caps["cohorts"][1]["evaluation_cohort_id"] == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2" and "frozen product contract" in caps["cohort_note"]
+        assert [(x["id"], x["default"]) for x in caps["cohorts"]] == [("ORIGINAL", True), ("REALISTIC", False), ("REALISTIC_NSTDB", False)]
+        assert caps["cohorts"][1]["evaluation_cohort_id"] == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2" and caps["cohorts"][2]["evaluation_cohort_id"] == "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3" and "frozen product contract" in caps["cohort_note"]
         bad = c.post(f"{BASE}/studio/runs", headers=USER_A, json={"run_length": 10, "cohort": "EXOTIC"})
-        assert bad.status_code == 400 and "cohort must be ORIGINAL or REALISTIC" in bad.text
+        assert bad.status_code == 400 and "cohort must be one of ORIGINAL, REALISTIC, REALISTIC_NSTDB" in bad.text
         untrained3 = c.post(f"{BASE}/studio/runs", headers=USER_A, json={"run_length": 3, "initialisation": "FL_INIT_V2", "cohort": "REALISTIC"})
         assert untrained3.status_code == 400                                  # 3 untrained rounds are the frozen product contract, defined on the original cohort only
         extra = c.post(f"{BASE}/studio/runs", headers=USER_A, json={"run_length": 10, "cohorts": "REALISTIC"})
@@ -184,3 +245,4 @@ def test_figure_titles_name_the_cohort_they_are_scored_on():
     assert "reused diagnostic holdout" in original and "realistic" not in original
     assert "realistic diagnostic holdout" in realistic and "reused" not in realistic
     assert figure_title("FL10_FIG04", 10, "ORIGINAL") == original                         # the default is unchanged
+    assert figure_title("FL10_FIG04", 10, "REALISTIC_NSTDB") == realistic                 # the recorded-noise cohort is a realistic-family holdout

@@ -6,7 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import CandidateLibrary from '$lib/components/product/studio/CandidateLibrary.svelte';
 import StudioRunStarter from '$lib/components/product/studio/StudioRunStarter.svelte';
 import { createProductClient } from '$lib/product/api';
-import { runContext } from '$lib/product/federation/run-context';
+import { hardwareQualityText, runContext } from '$lib/product/federation/run-context';
 import { FrontendAuth } from '../../auth';
 import { ProductStore, setProductStore } from '../../state.svelte';
 import { FakeSocket, fakeBackend } from '../../__tests__/support';
@@ -157,3 +157,129 @@ describe('the library panel', () => {
 		await waitFor(() => expect(screen.getByTestId('no-library-candidates').textContent).toContain('final engineering candidate'));
 	});
 });
+
+
+describe('quality of the recorded windows in a pretrained-V2 hardware run', () => {
+	const rq = (over: Record<string, unknown> = {}) => ({ recorded: true, windows: 73, VALID: 60, DEGRADED: 5, UNUSABLE: 8, accepted_below_valid: 13, ...over });
+	it('is parsed from the run descriptor, with nulls kept as nulls', () => {
+		expect(parseStudioRun({ ...run(), recorded_quality: rq() }).recorded_quality).toEqual({ recorded: true, windows: 73, VALID: 60, DEGRADED: 5, UNUSABLE: 8, accepted_below_valid: 13 });
+		expect(parseStudioRun({ ...run(), recorded_quality: rq({ recorded: false, VALID: null, DEGRADED: null, UNUSABLE: null, accepted_below_valid: null }) }).recorded_quality).toEqual({ recorded: false, windows: 73, VALID: null, DEGRADED: null, UNUSABLE: null, accepted_below_valid: null });
+		expect(parseStudioRun(run()).recorded_quality).toBeUndefined();
+		expect(parseStudioRun({ ...run(), recorded_quality: null }).recorded_quality).toBeNull();
+	});
+	it('says how many windows are VALID and how many lower-quality windows were accepted for experimental training', () => {
+		const text = hardwareQualityText(rq());
+		expect(text).toContain('60 are graded VALID');
+		expect(text).toContain('13 lower-quality windows (5 degraded, 8 unusable) were accepted for experimental training');
+		expect(text).toContain('reported, not enforced');
+		expect(hardwareQualityText(rq({ accepted_below_valid: 1, DEGRADED: 1, UNUSABLE: 0 }))).toContain('1 lower-quality window (1 degraded, 0 unusable) was accepted');
+	});
+	it('an older run whose grades were not kept says the split is unknown instead of showing numbers', () => {
+		const text = hardwareQualityText({ recorded: false, windows: 73, VALID: null, DEGRADED: null, UNUSABLE: null, accepted_below_valid: null });
+		expect(text).toContain('not kept for this older run');
+		expect(text).toContain('unknown');
+		expect(text).not.toMatch(/graded VALID/);
+	});
+});
+
+
+describe('label provenance of a run is named for the clients that really have each kind', () => {
+	const hist = (over: Record<string, unknown> = {}) => run({ source_mode: 'LIVE_MONITORED_SITE_00', monitored_site: 2, ...over } as never);
+	it('a History-derived run has an assigned-label client plus event-label peers, not "engineering events" for everyone', () => {
+		expect(runContext(hist({ signal_session_id: 'SES-1' })).labels).toBe('SYNTHETIC_ASSIGNED_CLIENT_PLUS_EVENT_PEERS');
+		expect(runContext(hist({ signal_session_id: 'SES-1' })).dataSentence).toContain('synthetic-assigned labels');
+	});
+	it('a live-monitored site (no History session) and a plain synthetic run keep event-window labels', () => {
+		expect(runContext(hist()).labels).toBe('SYNTHETIC_ENGINEERING_EVENTS');
+		expect(runContext(run()).labels).toBe('SYNTHETIC_ENGINEERING_EVENTS');
+	});
+	it('a pretrained-V2 hardware run is assigned client plus event peers; the tabular hardware family is all assigned', () => {
+		const v2 = run({ engine: 'HARDWARE_DEMO', source_mode: 'RECORDED_HARDWARE', base_model: { model_id: 'MODEL_V2_FINAL', label: 'p' } } as never);
+		const tabular = run({ engine: 'HARDWARE_DEMO', source_mode: 'RECORDED_HARDWARE', base_model: { model_id: 'HARDWARE_DEMO_MODEL_V1', label: 't' } } as never);
+		expect(runContext(v2).labels).toBe('SYNTHETIC_ASSIGNED_CLIENT_PLUS_EVENT_PEERS');
+		expect(runContext(tabular).labels).toBe('SYNTHETIC_ASSIGNED_FOR_DEMO');
+	});
+});
+
+
+describe('the library groups candidates by the cohort they were scored on and shows their lineage', () => {
+	it('separates different evaluation cohorts, says their scores are not comparable, and draws the lineage chain', async () => {
+		const original = RAW({ candidate_id: 'FL10_CANDIDATE_FL10RUN-ORIG', cohort: 'ORIGINAL', evaluation_cohort_id: 'WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1', base_model: { model_id: 'MODEL_V2_FINAL' } });
+		const child = RAW({ candidate_id: 'FL10_CANDIDATE_FL10RUN-CHILD', base_model: { kind: 'CANDIDATE', model_id: 'FL10_CANDIDATE_FL10RUN-AAA' } });
+		install([RAW(), child, original]);
+		render(CandidateLibrary);
+		await waitFor(() => expect(screen.getAllByTestId('library-group').length).toBe(2));
+		expect(screen.getAllByTestId('library-group').map((g) => g.textContent)).toEqual(['Scored on WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2', 'Scored on WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1']);
+		expect(screen.getByTestId('library-not-comparable').textContent).toContain('not comparable');
+		const lineages = screen.getAllByTestId('library-lineage').map((l) => l.textContent);
+		expect(lineages).toContain('Lineage: FL10_CANDIDATE_FL10RUN-CHILD ← FL10_CANDIDATE_FL10RUN-AAA ← MODEL_V2_FINAL');
+		expect(lineages).toContain('Lineage: FL10_CANDIDATE_FL10RUN-ORIG ← MODEL_V2_FINAL');
+	});
+	it('says so when a parent candidate is no longer in the library, and shows no comparability warning for a single cohort', async () => {
+		install([RAW({ candidate_id: 'FL10_CANDIDATE_FL10RUN-ORPHAN', base_model: { kind: 'CANDIDATE', model_id: 'FL10_CANDIDATE_GONE' } })]);
+		render(CandidateLibrary);
+		await waitFor(() => expect(screen.getByTestId('library-lineage').textContent).toBe('Lineage: FL10_CANDIDATE_FL10RUN-ORPHAN ← FL10_CANDIDATE_GONE ← (not in this library)'));
+		expect(screen.queryByTestId('library-not-comparable')).toBeNull();
+	});
+	it('cautions that adapting to the synthetic cohort lowered real-ECG performance, so a candidate is not a better ECG model', async () => {
+		install([RAW()]);
+		render(CandidateLibrary);
+		await waitFor(() => expect(screen.getByTestId('library-real-ecg-caution').textContent).toMatch(/lowered performance on real MIT-BIH validation ECG.*not a better ECG model/));
+	});
+});
+
+const RESEARCH = RAW({ candidate_id: 'RESEARCH_FL_V2_FL001_R50', source_run_id: 'V2-FL-001', source_kind: 'RESEARCH_FEDERATED_CHECKPOINT', cohort: 'REAL_ECG', cohort_label: 'Real MIT-BIH training patients in 8 simulated sites (no synthetic cohort)',
+	evaluation_cohort_id: 'MITBIH_OFFICIAL_VALIDATION (7 patient groups, 2,880 real windows; V2-FL-001 model selection used it)', run_length: 50, round_id: 50, base_model: { model_id: 'FL_INIT_V2', kind: 'RANDOM_INITIALISATION' }, metrics: { AUPRC: 0.8268, AUROC: 0.92, F1: 0.696 } });
+
+describe('an imported federated research checkpoint (real MIT-BIH patients, no synthetic cohort)', () => {
+	it('is parsed, and a record that claims a made-up cohort or source is still refused', () => {
+		const [c] = parseCandidates([RESEARCH]);
+		expect(c.cohort).toBe('REAL_ECG');
+		expect(c.source_kind).toBe('RESEARCH_FEDERATED_CHECKPOINT');
+		expect(() => parseCandidates([RAW({ cohort: 'MADE_UP' })])).toThrow();
+		expect(() => parseCandidates([RAW({ source_kind: 'MADE_UP' })])).toThrow();
+		expect(() => parseCandidates([{ ...RESEARCH, deployed: true }])).toThrow();                 // the never-deployed rule applies to it too
+	});
+	it('is listed as real ECG with no synthetic cohort, in its own score group, and never as an original-cohort candidate', async () => {
+		install([RAW(), RESEARCH]);
+		render(CandidateLibrary);
+		await waitFor(() => expect(screen.getAllByTestId('library-candidates').length).toBe(2));
+		const card = screen.getAllByRole('listitem').find((li) => li.getAttribute('data-candidate') === 'RESEARCH_FL_V2_FL001_R50')!;
+		expect(card.getAttribute('data-cohort')).toBe('REAL_ECG');
+		expect(card.textContent).toContain('REAL ECG · NO SYNTHETIC COHORT');
+		expect(card.textContent).not.toContain('ORIGINAL COHORT');
+		expect(card.textContent).toContain('Imported federated research checkpoint');
+		expect(card.textContent).toContain('NOT DEPLOYED');
+		expect(screen.getAllByTestId('library-group').length).toBe(2);                              // its scores are on real validation windows, so not comparable with the synthetic-cohort candidate
+		expect(screen.getByTestId('library-not-comparable').textContent).toContain('not comparable');
+		expect(card.textContent).toContain('FL_INIT_V2');                                           // lineage: it started from a random V2 initialisation, not from the central checkpoint
+	});
+	it('reads as trained on real patients when chosen as the starting model, and always notes that the run uses a synthetic cohort', async () => {
+		install([RESEARCH]);
+		const onStartTen = vi.fn();
+		render(StudioRunStarter, { props: { capabilities: CAPS(1), onStartThree: vi.fn(), onStartTen } });
+		await waitFor(() => expect([...(screen.getByTestId('cfg10-init') as HTMLSelectElement).options].map((o) => o.value)).toContain('CANDIDATE'));
+		await fireEvent.change(screen.getByTestId('cfg10-init'), { target: { value: 'CANDIDATE' } });
+		const note = screen.getByTestId('cfg10-candidate-note').textContent ?? '';
+		expect(note).toContain('imported federated research checkpoint');
+		expect(note).toContain('real MIT-BIH training patients in eight simulated sites (no synthetic cohort)');
+		expect(note).not.toMatch(/on the original cohort\./);
+		expect(note).toContain('This run uses the original cohort');
+		await fireEvent.click(screen.getByTestId('cohort-realistic'));
+		expect(screen.getByTestId('cfg10-candidate-note').textContent).toContain('This run uses the realistic cohort');
+		await fireEvent.click(screen.getByTestId('cfg10-submit'));
+		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 3, source_mode: 'CANONICAL_SYNTHETIC', initialisation: 'CANDIDATE', candidate_id: 'RESEARCH_FL_V2_FL001_R50', cohort: 'REALISTIC' });
+	});
+});
+
+describe('a candidate of the recorded-noise realistic cohort', () => {
+	it('is listed with its own chip and option text, and parsed', async () => {
+		const c = RAW({ candidate_id: 'FL10_CANDIDATE_FL10RUN-NSTDB', cohort: 'REALISTIC_NSTDB', cohort_label: 'Realistic cohort with recorded noise (NSTDB)', evaluation_cohort_id: 'WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3' });
+		expect(parseCandidates([c])[0].cohort).toBe('REALISTIC_NSTDB');
+		install([c]);
+		render(CandidateLibrary);
+		await waitFor(() => expect(screen.getByTestId('library-cohort').textContent).toContain('RECORDED NOISE'));
+		expect(screen.getByTestId('library-cohort').textContent).not.toContain('ORIGINAL');
+	});
+});
+

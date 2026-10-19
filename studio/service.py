@@ -199,10 +199,27 @@ class StudioService:
         out = []
         for client_id, c in dataset["clients"].items():
             n, lc = int(c["samples"]), c.get("label_counts") or {}
+            recorded_client = c.get("kind") == "RECORDED"
+            q = c.get("quality_counts")
+            if recorded_client and q is None:          # a run recorded before per-window grades were kept: say so, never invent a grade
+                grades: dict[str, Any] = {"VALID": None, "DEGRADED": None, "UNUSABLE": None, "accepted_below_valid": None, "quality_recorded": False}
+            elif recorded_client:
+                grades = {**{g: int(q[g]) for g in ("VALID", "DEGRADED", "UNUSABLE")}, "accepted_below_valid": int(c.get("accepted_below_valid", 0)), "quality_recorded": True}
+            else:                                       # synthetic peers: only VALID, complete windows are ever in their datasets
+                grades = {"VALID": n, "DEGRADED": 0, "UNUSABLE": 0, "accepted_below_valid": 0, "quality_recorded": True}
             out.append({"client_id": client_id, "participant_id": client_id, "session_id": c.get("session_id"), "dataset_sha256": c.get("feature_sha256"), "kind": c.get("kind"),
-                        "counts": {"source_records": None, "windows_emitted": n, "VALID": n, "DEGRADED": 0, "UNUSABLE": 0, "trainable": n, "synthetic_positive": int(lc.get("1", 0)), "synthetic_negative": int(lc.get("0", 0)),
+                        "counts": {"source_records": None, "windows_emitted": n, **grades, "excluded_windows": 0, "trainable": n, "synthetic_positive": int(lc.get("1", 0)), "synthetic_negative": int(lc.get("0", 0)),
                                    "excluded_not_valid": 0, "excluded_valid_but_incomplete": 0}})
         return out
+
+    def _recorded_quality(self, run_id: str) -> dict[str, Any] | None:
+        """The grades of the windows YOUR recording contributed to a pretrained-V2 run: genuinely VALID windows versus lower-quality windows accepted for experimental training."""
+        try:
+            mine = next(c for c in self._hardware_cohort(run_id) if c.get("kind") == "RECORDED")
+        except (OSError, StopIteration, ValueError):
+            return None
+        k = mine["counts"]
+        return {"recorded": bool(k["quality_recorded"]), "windows": int(k["trainable"]), "VALID": k["VALID"], "DEGRADED": k["DEGRADED"], "UNUSABLE": k["UNUSABLE"], "accepted_below_valid": k["accepted_below_valid"]}
 
     def _hardware_live_bundle(self, run_id: str) -> dict[str, Any]:
         """A pretrained-V2 recorded-hardware run is evaluated by the SAME observer, on the SAME frozen synthetic evaluation cohort, and bundled by the SAME builder as a synthetic V2 run."""
@@ -313,7 +330,7 @@ class StudioService:
         if self.is_hardware(run_id):
             job = self._hardware_job(run_id)
             d = self.hardware.describe(job)
-            return d | {"evaluation": self._evaluation_state(run_id), "candidate": self._hw_candidate(job)} if self._hw_v2(job) else d
+            return d | {"evaluation": self._evaluation_state(run_id), "candidate": self._hw_candidate(job), "recorded_quality": self._recorded_quality(run_id)} if self._hw_v2(job) else d
         if self.is_recorded(run_id):
             bundle = recorded_bundle(run_id)
             return {"run_id": run_id, "run_length": 10, "engine": "FL10_10R", "origin": "RECORDED", "run_type": "REPLAY", "algorithm": "FEDAVG", "secagg_mode": "PLAIN",
@@ -326,7 +343,7 @@ class StudioService:
                 raise _as_product_error(error) from error
             return {"run_id": run_id, "run_length": job.rounds, "engine": "FL10_10R", "origin": "LIVE", "run_type": "LIVE_RUN", "algorithm": job.algorithm, "secagg_mode": job.secagg_mode, "source_mode": MODES[job.mode], "monitored_site": job.monitored_site if job.mode == "B" else None, "signal_session_id": (job.signal_session or {}).get("session_id") if job.mode == "B" else None, "cohort": job.cohort, "cohort_label": cohorts.spec(job.cohort).label, "status": job.status,
                     "phase": job.phase, "current_round": job.current_round, "planned_rounds": job.rounds, "client_ids": list(cohorts.spec(job.cohort).client_ids), "candidate": job.candidate, "failure": job.failure,
-                    "label": f"{job.rounds}-round " + ("extended run" if job.init == v2_init.INIT_FRESH else "run — candidate start" if job.init == "CANDIDATE" else "run — pretrained V2 start") + (" · realistic cohort" if job.cohort == cohorts.REALISTIC else ""),
+                    "label": f"{job.rounds}-round " + ("extended run" if job.init == v2_init.INIT_FRESH else "run — candidate start" if job.init == "CANDIDATE" else "run — pretrained V2 start") + (" · realistic cohort" if job.cohort == cohorts.REALISTIC else " · realistic cohort, recorded noise" if job.cohort == cohorts.REALISTIC_NSTDB else ""),
                     "base_model": self._base_model(job.init, job.base_audit), "source_label": "LIVE RUN (this session)", "replay_of": None, "evaluation": self._evaluation_state(run_id), "export_status": job.export_status, "created_at": job.created_at}
         run = self.federation.get_run(user_id, run_id)
         meta = self.federation.artifacts.read_run_meta(run_id) or {}

@@ -53,6 +53,121 @@ def drive(mode: str, origin: str, users: Path, out: Path, shots: Path, logs: Pat
     return json.loads(out.read_text())
 
 
+def _floats(text: str) -> list[float]:
+    import re
+
+    return [float(x) for x in re.findall(r"-?\d+\.\d+", text or "")]
+
+
+def ui_round_mismatches(step: dict, run_dir: Path) -> list[str]:
+    """The values the page showed for each round against the stored evaluation records (the UI rounds its numbers: a match is within the display precision)."""
+    problems = []
+    for entry in step.get("ui_rounds", []):
+        r = int(entry["button"].rsplit("R", 1)[1])
+        path = run_dir / "eval" / f"R{r:02d}" / "record.json"
+        if not path.exists():
+            problems.append(f"R{r}: no stored record")
+            continue
+        stored = json.loads(path.read_text())["metric_result"]
+        for key in ("AUPRC", "AUROC", "F1", "BCE", "accuracy", "precision", "recall", "specificity"):
+            shown = _floats(entry.get(key, ""))
+            if stored.get(key) is None or not shown:
+                continue                                                                       # an undefined metric is shown as such, never as a number
+            if not any(abs(v - float(stored[key])) <= 6e-7 for v in shown):
+                problems.append(f"R{r} {key}: page {shown} vs stored {stored[key]}")
+    return problems
+
+
+def fl_matrix_checks(mx: dict, verification: dict | None = None, studio_root: Path | None = None) -> dict[str, bool]:
+    """Checks of the federated-run matrix browser run: per run, labels, scoring, the journal replay and (for candidate starts) the starting model."""
+    metric_id = {"ORIGINAL": "FL10", "REALISTIC": "REALISTIC_EVAL_COHORT_V2", "REALISTIC_NSTDB": "REALISTIC_EVAL_COHORT_V3"}
+    checks: dict[str, bool] = {}
+    for st in mx["steps"]:
+        tag, plan = st["tag"], st["plan"]
+        live, replay = st.get("live"), st.get("replay")
+        ok = "error" not in st and live is not None and replay is not None
+        if verification is not None and studio_root is not None and st.get("run_id") in verification and "error" not in st:
+            v = verification[st["run_id"]]
+            checks[f"{tag}_every_round_value_verified_independently"] = bool(v["ok"]) and len(v["rounds"]) == st["plan"]["rounds"] + 1
+            checks[f"{tag}_the_page_shows_the_stored_value_of_every_round"] = not ui_round_mismatches(st, studio_root / st["run_id"]) and len(st.get("ui_rounds", [])) == st["plan"]["rounds"] + 1
+        checks[f"{tag}_ran_without_error"] = ok
+        if not ok:
+            continue
+        cohort, rounds = plan["cohort"], plan["rounds"]
+        checks[f"{tag}_completed_with_eight_clients_and_scores"] = ("COMPLETED" in live["status_line"] and live["clients"] == [f"SIM_FL_SITE_0{i}" for i in range(8)]
+                                                                   and bool(live["metric_auprc"]) and not any(w in live["metric_auprc"] for w in ("NOT YET", "EVALUATING", "QUEUED")) and not live["alerts"])
+        if not plan.get("frozenForm"):                                      # the frozen 3-round contract has its own evaluation wording
+            checks[f"{tag}_scored_on_its_cohorts_holdout"] = metric_id[cohort] in live["metric_cohort"]
+        checks[f"{tag}_badge_names_the_cohort"] = (("RECORDED NOISE" in live["badge"]) if cohort == "REALISTIC_NSTDB" else ("REALISTIC" in live["badge"] and "RECORDED NOISE" not in live["badge"]) if cohort == "REALISTIC" else "REALISTIC" not in live["badge"])
+        if replay.get("skipped"):                                            # the frozen product 3-round run is not a Studio run
+            continue
+        b, a = replay["before"], replay["after"]
+        checks[f"{tag}_replay_lists_every_round_and_is_labelled"] = b["jumps"] == len({1, (rounds + 1) // 2, rounds}) and "NO LOCAL TRAINING" in b["label"] and b["clients"] >= 8 and not a["alerts"] and bool(b["scrub"])
+        checks[f"{tag}_replay_shows_the_candidate_at_the_end"] = a["from_record"] or "andidate" in a["candidate_text"]
+        if plan["init"] == "CANDIDATE":
+            cf = st.get("candidate_form") or {}
+            checks[f"{tag}_started_from_the_stored_candidate"] = plan.get("candidateId", "FL10_CANDIDATE_") in live["start_candidate"] and "Round 0 is that candidate" in live["start_candidate"] and bool(cf.get("note"))
+            if plan.get("candidateId", "").startswith("RESEARCH_"):
+                checks[f"{tag}_names_real_patients_not_a_synthetic_cohort"] = "no synthetic cohort" in live["start_candidate"]
+    lib = mx.get("library") or {"cards": [], "groups": 0, "alerts": ["missing"]}
+    cohorts_listed = {c["cohort"] for c in lib["cards"]}
+    checks["models_page_lists_the_imported_and_every_cohort_candidate"] = ({"REAL_ECG", "ORIGINAL", "REALISTIC", "REALISTIC_NSTDB"} <= cohorts_listed and any(c["id"] == "RESEARCH_FL_V2_FL001_R50" for c in lib["cards"]) and lib["groups"] >= 2 and not lib["alerts"])
+    return checks
+
+
+def recorded_noise_checks(rn: dict) -> dict[str, bool]:
+    """Checks of the recorded-noise cohort browser run."""
+    r = rn["run"]
+    d, c, live = r["defaults"], r["chosen"], r["live"]
+    return {
+        "three_cohort_buttons_offered": d["buttons"] == ["cohort-original", "cohort-realistic", "cohort-realistic-nstdb"],
+        "original_is_still_the_default": d["original_checked"] == "true" and d["nstdb_checked"] == "false",
+        "recorded_noise_choice_is_kept": c["nstdb_checked"] == "true" and c["realistic_checked"] == "false" and c["fixed_cohort"] == "REALISTIC_NSTDB",
+        "note_names_the_recorded_noise": "recorded" in c["note"].lower() and "noise" in c["note"].lower() and "frozen" not in c["source_note"].lower(),
+        "run_completed": "COMPLETED" in live["status_line"],
+        "badge_names_the_recorded_noise_cohort": "RECORDED NOISE" in live["badge"],
+        "eight_site_clients": live["clients"] == [f"SIM_FL_SITE_0{i}" for i in range(8)],
+        "scored_on_its_own_holdout": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3" in live["metric_cohort"] and live["body_has_recorded_noise_use"] and not live["body_has_frozen_reuse"],
+        "metrics_shown": bool(live["metric_auprc"]) and not any(w in live["metric_auprc"] for w in ("NOT YET", "EVALUATING", "QUEUED")),
+        "no_alerts": not live["alerts"],
+    }
+
+
+def external_check_checks(ec: dict) -> dict[str, bool]:
+    """Checks of the external-check page browser run."""
+    p = ec["primary"]
+    return {
+        "reached_from_the_observatory_nav": p["h1"].startswith("External check"),
+        "boundaries_are_shown": "NOT AAMI-SVF" in p["label"] and "NOT CLINICAL" in p["label"] and "no clinical" in p["boundary"].lower() and p["body_has_removed_scope"],
+        "all_six_models_are_listed": len(p["models"]) == 6 and p["models"][0].startswith("MODEL_V1") and any("round 50" in m for m in p["models"]),
+        "values_come_from_the_report": "0.911" in p["first_row"] or "0.701" in p["first_row"],
+        "label_rules_and_error_analysis_shown": "rule" in p["rules"].lower() or "union" in p["rules"].lower(),
+        "report_and_protocol_hashes_shown": "SHA-256" in p["hashes"] and "verified" in p["hashes"],
+        "no_alerts": not p["alerts"],
+        "set_selector_switches_to_replication": "17,199 records" in ec["replication"]["text"] and ec["replication"]["pressed"] == "true",
+        "no_horizontal_scroll_on_a_phone": ec["phone"]["scroll"] <= ec["phone"]["inner"],
+    }
+
+
+def demo_path_checks(dp: dict) -> dict[str, bool]:
+    """Checks of the guided-demonstration-path browser run."""
+    steps = dp["page"]["steps"]
+    hrefs = [x["href"] for x in steps]
+    modes = {x["mode"] for x in steps}
+    return {
+        "reached_from_the_overview": dp["page"]["h1"].startswith("One story"),
+        "eight_steps_with_four_fields_each": len(steps) == 8 and all(x["fields"] == 4 for x in steps),
+        "every_step_names_how_its_evidence_is_produced": all(x["mode"] for x in steps) and dp["page"]["mode_legend"] == 6,
+        "live_and_recorded_modes_are_distinct": any("LIVE" in m for m in modes) and any("RECORDED" in m or "FROZEN" in m for m in modes),
+        "heading_receives_focus_after_navigation": dp["page"]["focused_tag"] == "H1",
+        "keyboard_reaches_every_step_link_in_order": dp["keyboard_reached"][: len(hrefs)] == hrefs,
+        "every_target_page_exists": all(t["h1"] and not t["not_found"] for t in dp["targets"]),
+        "no_alerts": not dp["page"]["alerts"],
+        "tour_and_storyboard_link_back": bool(dp["banner_tour"]) and bool(dp["banner_storyboard"]),
+        "no_horizontal_scroll_on_a_phone": dp["phone"]["scroll"] <= dp["phone"]["inner"],
+    }
+
+
 def candidate_library_checks(cl: dict, library_files_ok: bool) -> dict[str, bool]:
     """Checks of the candidate-library browser run. Card text is the page's textContent, in which a label and its value are separate elements (no space between them), so patterns allow zero whitespace."""
     import re
@@ -96,6 +211,10 @@ def main() -> int:
     parser.add_argument("--journey", action="store_true", help="full simulated-hardware journey: sketch-faithful emulator -> local Render replica -> Atlas rehearsal DB -> live monitoring, recording, History, Observatory replay + trace, tabular and pretrained-V2 FL, high-gain negative case")
     parser.add_argument("--demo-session", action="store_true", help="the prerecorded DEMO hardware session: seeded in its own Atlas rehearsal collection, imported into History, Observatory replay + trace, pretrained-V2 and tabular runs")
     parser.add_argument("--ui-shots", action="store_true", help="screenshots of the federation starter in every source-mode state")
+    parser.add_argument("--demo-path", action="store_true", help="the guided demonstration path through the real UI: reachable from the Overview, every step link resolves, keyboard order, phone width")
+    parser.add_argument("--external-check", action="store_true", help="the Observatory external-check page through the real UI: reachable, boundaries first, evidence loaded from the hash-verified route, set selector, phone width")
+    parser.add_argument("--recorded-noise-cohort", action="store_true", help="the realistic cohort with recorded NSTDB noise through the real starter: a third cohort button and a 3-round pretrained run described, evaluated and labelled as recorded-noise")
+    parser.add_argument("--fl-matrix", action="store_true", help="every federated-run flow through the real UI: 3 and 10 rounds, every cohort, untrained and pretrained starts, runs started from stored candidates (one imported research checkpoint), each opened in the Observatory journal replay")
     parser.add_argument("--candidate-library", action="store_true", help="engineering candidates through the real UI: a realistic run is stored, listed on the Models page, and starts a second run on the other cohort")
     parser.add_argument("--realistic-cohort", action="store_true", help="the synthetic-cohort option through the real starter: a realistic 3-round pretrained run and a realistic live-monitored site run")
     parser.add_argument("--history-source", action="store_true", help="a completed simulated monitoring session from History as the signal of one federation client")
@@ -109,6 +228,7 @@ def main() -> int:
     if database == "health_db" and ws_mode:
         raise SystemExit("ws producer mode must not target health_db")
     env["NHM_HARDWARE_MONGO_DATABASE"] = database
+    env["NHM_HARDWARE_DEMO_DATABASE"] = database           # generated demo collections stay in the isolated database too (never the operator's own demo database)
     env["NHM_HARDWARE_MONGO_COLLECTION"] = "records_*" if ws_mode else "nhm_integration_test"
     replica = None
     if ws_mode:
@@ -174,6 +294,63 @@ def main() -> int:
                 running.shutdown()
             print(json.dumps({"status": "UI_SHOTS_DONE", "dir": str(out / "shots")}))
             return 0
+        if args.fl_matrix:
+            library = Path(tempfile.mkdtemp(prefix="nhm-fl-matrix-library-"))
+            env["NHM_CANDIDATE_LIBRARY_DIR"] = str(library)            # the gate never touches the real library
+            owner = json.loads(Path(args.users_file).read_text())["A"]["user_id"]
+            from scripts.register_research_candidates import register_all
+
+            register_all(owner, library)                                  # the two imported 50-round research checkpoints, owned by the gate's user
+            running, origin = stack(env, workspace, python)
+            try:
+                mx = drive("fl-matrix", origin, Path(args.users_file), out / "fl_matrix.json", out / "mx_shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            from scripts.verify_fl_rounds import run_dirs, verify_run
+
+            studio_root = workspace / "federation" / "studio_runs"
+            verification = {d.name: verify_run(d, rederive={1, 2, 3, 10}) for d in run_dirs(studio_root, None)}
+            (out / "fl_round_verification.json").write_text(json.dumps(verification, indent=1, sort_keys=True, default=float) + "\n")
+            checks = fl_matrix_checks(mx, verification, studio_root)
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "fl_matrix", "runs": {st["tag"]: st.get("run_id") for st in mx["steps"]}, "checks": checks,
+                       "rounds_verified_independently": sum(len(v["rounds"]) for v in verification.values()), "aggregations_rederived_bit_exact": sum(sum(1 for r in v["rounds"].values() if r.get("aggregation_rederivation", {}).get("bit_identical")) for v in verification.values())}
+            (out / "fl_matrix_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            shutil.rmtree(library, ignore_errors=True)
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
+        if args.recorded_noise_cohort:
+            running, origin = stack(env, workspace, python)
+            try:
+                rn = drive("recorded-noise-cohort", origin, Path(args.users_file), out / "recorded_noise_cohort.json", out / "rn_shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            checks = recorded_noise_checks(rn)
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "recorded_noise_cohort", "checks": checks, "run": rn["run"]["run_id"]}
+            (out / "recorded_noise_cohort_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
+        if args.external_check:
+            running, origin = stack(env, workspace, python)
+            try:
+                ec = drive("external-check", origin, Path(args.users_file), out / "external_check.json", out / "ec_shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            checks = external_check_checks(ec)
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "external_check", "checks": checks}
+            (out / "external_check_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
+        if args.demo_path:
+            running, origin = stack(env, workspace, python)
+            try:
+                dp = drive("demo-path", origin, Path(args.users_file), out / "demo_path.json", out / "dp_shots", out / "publisher_logs", env)
+            finally:
+                running.shutdown()
+            checks = demo_path_checks(dp)
+            verdict = {"status": "PASS" if all(checks.values()) else "FAIL", "mode": "demo_path", "checks": checks}
+            (out / "demo_path_verdict.json").write_text(json.dumps(verdict, indent=2, sort_keys=True) + "\n")
+            print(json.dumps(verdict))
+            return 0 if verdict["status"] == "PASS" else 1
         if args.candidate_library:
             library = Path(tempfile.mkdtemp(prefix="nhm-candidate-library-gate-"))
             env["NHM_CANDIDATE_LIBRARY_DIR"] = str(library)            # the gate never touches the real library
@@ -291,7 +468,7 @@ def main() -> int:
                 "trace_rejected_window_has_no_invented_result": bool(tb) and "UNUSABLE" in tb["window"] and not tb["has_inference"] and "no model result" in tb["none"],
                 "tabular_fedavg_completed": "COMPLETED" in ta["status_line"] and len(ta["card_tags"] if isinstance(ta["card_tags"], list) else []) >= 0 and ta["card_tags"] == 8 and bool(ta["metric_auprc"]),
                 "tabular_fedprox_shadow_verified": "COMPLETED" in tB["status_line"] and "VERIFIED" in tB["secagg"].upper() and tB["card_tags"] == 8,
-                "v2_refuses_the_highgain_recording_with_reason": "NOT ENOUGH" in v2["preview_c"]["text"] and "CLIPPING" in v2["preview_c"]["text"] and v2["preview_c"]["start_disabled"],
+                "v2_refuses_the_highgain_recording_with_reason": "NOT ENOUGH" in v2["preview_c"]["text"] and "graded VALID" in v2["preview_c"]["text"] and "accepted for EXPERIMENTAL training" in v2["preview_c"]["text"] and v2["preview_c"]["start_disabled"],      # V2 trains on every complete window whatever its grade; this short, clipped session is refused for too few windows and its quality is reported separately
                 "v2_accepts_the_good_recordings": "ENOUGH USABLE" in v2["preview_ab"]["text"] and not v2["preview_ab"]["start_disabled"],
                 "v2_run_one_recorded_client_plus_seven_peers": v2["live"]["badge"] == "RECORDED HARDWARE" and v2["live"]["clients"][0] == "RECORDED_DEMO_CLIENT_00" and all(c.startswith("SIM_FL_SITE_") for c in v2["live"]["clients"][1:]) and len(v2["live"]["clients"]) == 8,
                 "v2_run_has_metrics_and_generalisation": "pretrained V2" in v2["live"]["label"] and bool(v2["live"]["metric_auprc"]) and v2["generalisation"].startswith("4/4") and not v2["live"]["alerts"],
@@ -346,9 +523,7 @@ def main() -> int:
         if args.demo_session:
             if not ws_mode:
                 raise SystemExit("--demo-session needs --producer ws (isolated rehearsal database)")
-            from pymongo import MongoClient
-
-            from product.hardware_demo_session import DEMO_COLLECTION
+            from product.hardware_demo_session import DEMO_COLLECTION, LONG_DEMO_COLLECTION
 
             # App-init path under test: the collection is removed first, and no demo setting is passed, so the product app itself must create it (default-on) and import it into History.
             demo_collection = MongoClient(env["NHM_HARDWARE_MONGO_URI"], serverSelectionTimeoutMS=5000)[database][DEMO_COLLECTION]
@@ -360,10 +535,11 @@ def main() -> int:
             finally:
                 running.shutdown()
             seeded = demo_collection.count_documents({})
+            seeded_long = MongoClient(env["NHM_HARDWARE_MONGO_URI"], serverSelectionTimeoutMS=5000)[database][LONG_DEMO_COLLECTION].count_documents({})       # the long showcase session (listed first) and the original one are seeded by the same app-init path
             r = demo["replay"]
             checks = {
                 "app_init_created_the_collection_in_mongo": seeded > 4000,
-                "listed_in_history_as_saved": demo["session_id"].startswith("HW-SHOWCASE-") and "SAVED" in demo["history_row"] and str(seeded) in demo["history_row"],
+                "listed_in_history_as_saved": demo["session_id"].startswith("HW-SHOWCASE-") and "SAVED" in demo["history_row"] and (f"{seeded} readings" in demo["history_row"] or f"{seeded_long} readings" in demo["history_row"]) and seeded_long > 4000,
                 "history_links": bool(demo["history_links"]["replay"]) and bool(demo["history_links"]["trace"]),
                 "history_evidence_scored_windows": demo["evidence"]["rows"] >= 25 and demo["evidence"]["events"] > 25 and bool(demo["evidence"]["states"]) and not demo["evidence"]["alerts"] and "CONTEXT_UNAVAILABLE" not in " ".join(demo["evidence"]["states"]),
                 "replay_hardware_tag": "RECORDED HARDWARE" in r["tag"] and "NOT DIAGNOSTIC" in r["tag"],

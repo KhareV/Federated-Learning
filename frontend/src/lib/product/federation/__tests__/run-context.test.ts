@@ -37,7 +37,8 @@ describe('run context axes are independent', () => {
 	});
 	it('a pretrained-V2 hardware run keeps hardware provenance and synthetic labels and is evaluated like a synthetic V2 run', () => {
 		const c = runContext(base({ run_id: 'HDFLRUN-V', engine: 'HARDWARE_DEMO', source_mode: 'RECORDED_HARDWARE', base_model: { model_id: 'MODEL_V2_FINAL', label: 'v2' } }), 'HDFLRUN-V');
-		expect(c).toMatchObject({ provenance: 'RECORDED_HARDWARE', labels: 'SYNTHETIC_ASSIGNED_FOR_DEMO', lineage: 'HARDWARE_V2_PRETRAINED', clients: 'RECORDED_CLIENT_PLUS_SIM_PEERS' });
+		// the recorded client has ASSIGNED labels, its seven synthetic peers keep event-window labels: named as that mixture (the tabular family, with no peers, stays SYNTHETIC_ASSIGNED_FOR_DEMO)
+		expect(c).toMatchObject({ provenance: 'RECORDED_HARDWARE', labels: 'SYNTHETIC_ASSIGNED_CLIENT_PLUS_EVENT_PEERS', lineage: 'HARDWARE_V2_PRETRAINED', clients: 'RECORDED_CLIENT_PLUS_SIM_PEERS' });
 		// evaluated like a synthetic V2 run (same observer, same frozen cohort): generalisation, paired intervals and the historical reference are all available; there is still no authenticated owner-bound client
 		for (const k of ['generalisation', 'pairedIntervals', 'historicalReference'] as const) expect(c.capabilities[k].available).toBe(true);
 		expect(c.capabilities.ownerBoundClient.available).toBe(false);

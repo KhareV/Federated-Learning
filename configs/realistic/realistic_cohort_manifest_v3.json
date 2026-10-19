@@ -1,0 +1,1006 @@
+{
+ "eval": {
+  "annotation_noise": {
+   "false_artifact_rate": 0.04,
+   "false_mark_peak_mv": 0.6,
+   "jitter_s": 0.012,
+   "miss_rate": 0.02
+  },
+  "claim_boundary": "SYNTHETIC_REALISTIC_ECTOPY_RECORDED_NOISE_EVALUATION_ONLY_NOT_AAMI_SVF_OR_CLINICAL",
+  "cohort_id": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3",
+  "generator_id": "WEARABLE_SIM_REALISTIC_ECG_V3",
+  "label_contract": "WEARABLE_SIM_REALISTIC_EVENT_WINDOW_V3",
+  "noise_source": {
+   "dataset": "MIT-BIH Noise Stress Test Database v1.0.0 (pure-noise records)",
+   "eval_probs": [
+    0.18,
+    0.28,
+    0.26,
+    0.2,
+    0.08
+   ],
+   "eval_region": [
+    390000,
+    650000
+   ],
+   "power_shares": {
+    "bw": 0.4,
+    "em": 0.4,
+    "ma": 0.2
+   },
+   "record_sha256": {
+    "bw": "15f68280aba8b006f5497c14da44b558e68caaabc2afc5c4b710eea779b7512c",
+    "em": "4f9416a04b2bed98081ee3118c1282f9e35321bfd5da96ce48056a3fe147358d",
+    "ma": "40bda613a3e65adb277df1b72f8a41d2c1c2e0131ea4ec1e03cf1e2cd68199c4"
+   },
+   "snr_levels_db": [
+    24,
+    18,
+    12,
+    6,
+    0
+   ],
+   "train_probs": [
+    0.3,
+    0.35,
+    0.22,
+    0.1,
+    0.03
+   ],
+   "train_region": [
+    0,
+    390000
+   ]
+  },
+  "participants": [
+   {
+    "annotated_events": 5,
+    "burden_per_min": 0.4016,
+    "client_id": "SIM_REAL3_EVAL_00",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 0,
+     "VALID": 93,
+     "excluded_not_valid": 0,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 87,
+     "synthetic_positive": 6,
+     "trainable": 93,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "145e6fd904630560c8c48a3745d57d155c3876447881a3affe8f8172ab9a0f76",
+    "noise_channels": [
+     0,
+     1,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.02886,
+    "noise_segment_starts": [
+     475538,
+     471787,
+     406411
+    ],
+    "noise_snr_db": 18,
+    "participant_id": "SIM_P000801",
+    "pvc_ratio": 1.051,
+    "seed": 20272101,
+    "session_id": "SIM_S_REAL3_EVAL_00_000001",
+    "site_condition": "SIM_FL_SITE_00",
+    "true_ectopic_beats": 5
+   },
+   {
+    "annotated_events": 1,
+    "burden_per_min": 0.4994,
+    "client_id": "SIM_REAL3_EVAL_01",
+    "counts": {
+     "DEGRADED": 2,
+     "UNUSABLE": 0,
+     "VALID": 91,
+     "excluded_not_valid": 2,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 89,
+     "synthetic_positive": 2,
+     "trainable": 91,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "a2c275d7da1ee88fb1b327edfb547dcea2ee16aae1997ac25de5baa37ca64d09",
+    "noise_channels": [
+     1,
+     1,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.03984,
+    "noise_segment_starts": [
+     393898,
+     407139,
+     411648
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000802",
+    "pvc_ratio": 1.76,
+    "seed": 20272102,
+    "session_id": "SIM_S_REAL3_EVAL_01_000001",
+    "site_condition": "SIM_FL_SITE_01",
+    "true_ectopic_beats": 1
+   },
+   {
+    "annotated_events": 0,
+    "burden_per_min": 0.0,
+    "client_id": "SIM_REAL3_EVAL_02",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 2,
+     "VALID": 91,
+     "excluded_not_valid": 2,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 91,
+     "synthetic_positive": 0,
+     "trainable": 91,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "d94b385a7d2c65ba1d42dae30483290cf7cc51333dd45e423f349446329daed4",
+    "noise_channels": [
+     0,
+     0,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.01046,
+    "noise_segment_starts": [
+     465399,
+     455261,
+     445488
+    ],
+    "noise_snr_db": 24,
+    "participant_id": "SIM_P000803",
+    "pvc_ratio": 1.646,
+    "seed": 20272103,
+    "session_id": "SIM_S_REAL3_EVAL_02_000001",
+    "site_condition": "SIM_FL_SITE_02",
+    "true_ectopic_beats": 0
+   },
+   {
+    "annotated_events": 18,
+    "burden_per_min": 3.6054,
+    "client_id": "SIM_REAL3_EVAL_03",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 4,
+     "VALID": 89,
+     "excluded_not_valid": 4,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 65,
+     "synthetic_positive": 24,
+     "trainable": 89,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "a182361c65e512bbd6d1bd18cfbb3ae99063a35bad7b58e5da35fb86420365de",
+    "noise_channels": [
+     0,
+     0,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.02855,
+    "noise_segment_starts": [
+     415500,
+     456909,
+     399272
+    ],
+    "noise_snr_db": 18,
+    "participant_id": "SIM_P000804",
+    "pvc_ratio": 0.745,
+    "seed": 20272104,
+    "session_id": "SIM_S_REAL3_EVAL_03_000001",
+    "site_condition": "SIM_FL_SITE_03",
+    "true_ectopic_beats": 19
+   },
+   {
+    "annotated_events": 1,
+    "burden_per_min": 0.6802,
+    "client_id": "SIM_REAL3_EVAL_04",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 3,
+     "VALID": 90,
+     "excluded_not_valid": 3,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 88,
+     "synthetic_positive": 2,
+     "trainable": 90,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "66ae9d7812fa21cf7eee928ccb664e183669be13604fd015ef2d44ab46810f26",
+    "noise_channels": [
+     0,
+     0,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.03415,
+    "noise_segment_starts": [
+     423487,
+     427085,
+     396584
+    ],
+    "noise_snr_db": 18,
+    "participant_id": "SIM_P000805",
+    "pvc_ratio": 1.937,
+    "seed": 20272105,
+    "session_id": "SIM_S_REAL3_EVAL_04_000001",
+    "site_condition": "SIM_FL_SITE_04",
+    "true_ectopic_beats": 1
+   },
+   {
+    "annotated_events": 5,
+    "burden_per_min": 0.4488,
+    "client_id": "SIM_REAL3_EVAL_05",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 0,
+     "VALID": 93,
+     "excluded_not_valid": 0,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 88,
+     "synthetic_positive": 5,
+     "trainable": 93,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "c8764245878cc04bcbc7c3434a926e74729a2fbe8c437f011405c6dc78e8d430",
+    "noise_channels": [
+     0,
+     1,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.03194,
+    "noise_segment_starts": [
+     432515,
+     395789,
+     471814
+    ],
+    "noise_snr_db": 18,
+    "participant_id": "SIM_P000806",
+    "pvc_ratio": 1.038,
+    "seed": 20272106,
+    "session_id": "SIM_S_REAL3_EVAL_05_000001",
+    "site_condition": "SIM_FL_SITE_05",
+    "true_ectopic_beats": 5
+   },
+   {
+    "annotated_events": 0,
+    "burden_per_min": 0.0,
+    "client_id": "SIM_REAL3_EVAL_06",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 0,
+     "VALID": 93,
+     "excluded_not_valid": 0,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 93,
+     "synthetic_positive": 0,
+     "trainable": 93,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "e2a25e3645aee3bfec7a501515824adcc880a8219aff49abc0a6107f35694a3d",
+    "noise_channels": [
+     0,
+     1,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 2,
+    "noise_rms_mv": 0.06088,
+    "noise_segment_starts": [
+     405607,
+     437845,
+     443693
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000807",
+    "pvc_ratio": 1.849,
+    "seed": 20272107,
+    "session_id": "SIM_S_REAL3_EVAL_06_000001",
+    "site_condition": "SIM_FL_SITE_06",
+    "true_ectopic_beats": 0
+   },
+   {
+    "annotated_events": 22,
+    "burden_per_min": 5.0,
+    "client_id": "SIM_REAL3_EVAL_07",
+    "counts": {
+     "DEGRADED": 2,
+     "UNUSABLE": 8,
+     "VALID": 83,
+     "excluded_not_valid": 10,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 52,
+     "synthetic_positive": 31,
+     "trainable": 83,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "7f3fe8fa7071fed861d54e8f3a9f7d64cbd57b2948e622acd6e779c76b94f74b",
+    "noise_channels": [
+     0,
+     1,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 20,
+    "noise_rms_mv": 0.11486,
+    "noise_segment_starts": [
+     454137,
+     438703,
+     461224
+    ],
+    "noise_snr_db": 6,
+    "participant_id": "SIM_P000808",
+    "pvc_ratio": 0.826,
+    "seed": 20272108,
+    "session_id": "SIM_S_REAL3_EVAL_07_000001",
+    "site_condition": "SIM_FL_SITE_07",
+    "true_ectopic_beats": 22
+   },
+   {
+    "annotated_events": 9,
+    "burden_per_min": 1.6451,
+    "client_id": "SIM_REAL3_EVAL_08",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 0,
+     "VALID": 93,
+     "excluded_not_valid": 0,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 82,
+     "synthetic_positive": 11,
+     "trainable": 93,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "20e389ab3e81105f295f9d12ed011613610ef3c49dcc0f33f175cd67351e02c2",
+    "noise_channels": [
+     0,
+     1,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.0429,
+    "noise_segment_starts": [
+     397154,
+     472123,
+     439945
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000809",
+    "pvc_ratio": 1.443,
+    "seed": 20272201,
+    "session_id": "SIM_S_REAL3_EVAL_08_000001",
+    "site_condition": "SIM_FL_SITE_00",
+    "true_ectopic_beats": 9
+   },
+   {
+    "annotated_events": 0,
+    "burden_per_min": 0.6244,
+    "client_id": "SIM_REAL3_EVAL_09",
+    "counts": {
+     "DEGRADED": 2,
+     "UNUSABLE": 0,
+     "VALID": 91,
+     "excluded_not_valid": 2,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 91,
+     "synthetic_positive": 0,
+     "trainable": 91,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "f3aeae492ea0b613b546663659c154780c93beea7d8913446e539f4451362698",
+    "noise_channels": [
+     1,
+     0,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.01305,
+    "noise_segment_starts": [
+     403390,
+     459837,
+     426337
+    ],
+    "noise_snr_db": 24,
+    "participant_id": "SIM_P000810",
+    "pvc_ratio": 1.361,
+    "seed": 20272202,
+    "session_id": "SIM_S_REAL3_EVAL_09_000001",
+    "site_condition": "SIM_FL_SITE_01",
+    "true_ectopic_beats": 0
+   },
+   {
+    "annotated_events": 0,
+    "burden_per_min": 0.0,
+    "client_id": "SIM_REAL3_EVAL_10",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 2,
+     "VALID": 91,
+     "excluded_not_valid": 2,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 91,
+     "synthetic_positive": 0,
+     "trainable": 91,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "386f3c37b1ff44a1e9bd347999a4ffbb8708a43a36e1eb422f1a398df3b8c37f",
+    "noise_channels": [
+     1,
+     1,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 22,
+    "noise_rms_mv": 0.11939,
+    "noise_segment_starts": [
+     426032,
+     451705,
+     432697
+    ],
+    "noise_snr_db": 6,
+    "participant_id": "SIM_P000811",
+    "pvc_ratio": 0.776,
+    "seed": 20272203,
+    "session_id": "SIM_S_REAL3_EVAL_10_000001",
+    "site_condition": "SIM_FL_SITE_02",
+    "true_ectopic_beats": 0
+   },
+   {
+    "annotated_events": 2,
+    "burden_per_min": 0.4169,
+    "client_id": "SIM_REAL3_EVAL_11",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 4,
+     "VALID": 89,
+     "excluded_not_valid": 4,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 85,
+     "synthetic_positive": 4,
+     "trainable": 89,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "0147c2b16768b43323d1dab3662772befad2ebc81b4315ef53cdda7a7f484978",
+    "noise_channels": [
+     1,
+     0,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.04737,
+    "noise_segment_starts": [
+     418913,
+     452124,
+     474543
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000812",
+    "pvc_ratio": 1.1,
+    "seed": 20272204,
+    "session_id": "SIM_S_REAL3_EVAL_11_000001",
+    "site_condition": "SIM_FL_SITE_03",
+    "true_ectopic_beats": 2
+   },
+   {
+    "annotated_events": 13,
+    "burden_per_min": 2.4628,
+    "client_id": "SIM_REAL3_EVAL_12",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 3,
+     "VALID": 90,
+     "excluded_not_valid": 3,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 79,
+     "synthetic_positive": 11,
+     "trainable": 90,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "78abb0b6e91c1a57cf68e06e9fa0bbfb094592b0a49490826131dbc818168583",
+    "noise_channels": [
+     0,
+     1,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 1,
+    "noise_rms_mv": 0.04794,
+    "noise_segment_starts": [
+     454478,
+     427353,
+     401916
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000813",
+    "pvc_ratio": 1.562,
+    "seed": 20272205,
+    "session_id": "SIM_S_REAL3_EVAL_12_000001",
+    "site_condition": "SIM_FL_SITE_04",
+    "true_ectopic_beats": 13
+   },
+   {
+    "annotated_events": 20,
+    "burden_per_min": 1.7131,
+    "client_id": "SIM_REAL3_EVAL_13",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 0,
+     "VALID": 93,
+     "excluded_not_valid": 0,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 74,
+     "synthetic_positive": 19,
+     "trainable": 93,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "3edbd1d255b16fb41a222ba05fb8dbcee9ed4560efd5979c45e584aca31298d0",
+    "noise_channels": [
+     0,
+     0,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.01853,
+    "noise_segment_starts": [
+     437580,
+     417932,
+     433219
+    ],
+    "noise_snr_db": 24,
+    "participant_id": "SIM_P000814",
+    "pvc_ratio": 1.704,
+    "seed": 20272206,
+    "session_id": "SIM_S_REAL3_EVAL_13_000001",
+    "site_condition": "SIM_FL_SITE_05",
+    "true_ectopic_beats": 20
+   },
+   {
+    "annotated_events": 5,
+    "burden_per_min": 1.3977,
+    "client_id": "SIM_REAL3_EVAL_14",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 0,
+     "VALID": 93,
+     "excluded_not_valid": 0,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 85,
+     "synthetic_positive": 8,
+     "trainable": 93,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "bb6fd0aaedec3e034b90891514544c860a8d41153a73f7fd677d6849cdb18e8f",
+    "noise_channels": [
+     0,
+     0,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 30,
+    "noise_rms_mv": 0.11597,
+    "noise_segment_starts": [
+     468259,
+     418947,
+     448326
+    ],
+    "noise_snr_db": 6,
+    "participant_id": "SIM_P000815",
+    "pvc_ratio": 1.031,
+    "seed": 20272207,
+    "session_id": "SIM_S_REAL3_EVAL_14_000001",
+    "site_condition": "SIM_FL_SITE_06",
+    "true_ectopic_beats": 4
+   },
+   {
+    "annotated_events": 3,
+    "burden_per_min": 0.6258,
+    "client_id": "SIM_REAL3_EVAL_15",
+    "counts": {
+     "DEGRADED": 2,
+     "UNUSABLE": 8,
+     "VALID": 83,
+     "excluded_not_valid": 10,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 77,
+     "synthetic_positive": 6,
+     "trainable": 83,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "5baebde44e5002044a333dfce48b745f3364a578089d6fc1b51f04fbfa69afe0",
+    "noise_channels": [
+     0,
+     1,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.01452,
+    "noise_segment_starts": [
+     395544,
+     417274,
+     396778
+    ],
+    "noise_snr_db": 24,
+    "participant_id": "SIM_P000816",
+    "pvc_ratio": 1.767,
+    "seed": 20272208,
+    "session_id": "SIM_S_REAL3_EVAL_15_000001",
+    "site_condition": "SIM_FL_SITE_07",
+    "true_ectopic_beats": 3
+   }
+  ],
+  "simulation_version": "WEARABLE_SIM_V1"
+ },
+ "pin_note": "Realistic cohort with RECORDED noise (NSTDB bw, em, ma at NSTDB's documented SNR levels). The SNR levels and their probabilities, the noise power shares, the training/evaluation noise regions and the annotation-noise parameters were fixed in simulation/realistic_ecg_v3.py before any model saw this cohort. The cohort was then looked at ONCE, before this pin: on the 16 evaluation participants (1,446 windows, 129 positive) the central MODEL_V2_FINAL scored AUROC 0.949 / AUPRC 0.900, the V2-FL-001 round-50 checkpoint 0.971 / 0.906, the untrained FL_INIT_V2 0.610 / 0.316, an amplitude logistic 0.816 / 0.671 and a beat-timing logistic 0.918 / 0.888. No parameter was changed after that look, so the cohort is fresh, not untouched. Its difficulty is whatever the recorded noise at NSTDB's levels produces; it was not tuned to make any model look better or worse.",
+ "pinned_before_any_model_scoring": false,
+ "train": {
+  "annotation_noise": {
+   "false_artifact_rate": 0.04,
+   "false_mark_peak_mv": 0.6,
+   "jitter_s": 0.012,
+   "miss_rate": 0.02
+  },
+  "claim_boundary": "SYNTHETIC_REALISTIC_ECTOPY_RECORDED_NOISE_EVALUATION_ONLY_NOT_AAMI_SVF_OR_CLINICAL",
+  "cohort_id": "WEARABLE_SIM_FL_COHORT_REALISTIC_V3",
+  "generator_id": "WEARABLE_SIM_REALISTIC_ECG_V3",
+  "label_contract": "WEARABLE_SIM_REALISTIC_EVENT_WINDOW_V3",
+  "noise_source": {
+   "dataset": "MIT-BIH Noise Stress Test Database v1.0.0 (pure-noise records)",
+   "eval_probs": [
+    0.18,
+    0.28,
+    0.26,
+    0.2,
+    0.08
+   ],
+   "eval_region": [
+    390000,
+    650000
+   ],
+   "power_shares": {
+    "bw": 0.4,
+    "em": 0.4,
+    "ma": 0.2
+   },
+   "record_sha256": {
+    "bw": "15f68280aba8b006f5497c14da44b558e68caaabc2afc5c4b710eea779b7512c",
+    "em": "4f9416a04b2bed98081ee3118c1282f9e35321bfd5da96ce48056a3fe147358d",
+    "ma": "40bda613a3e65adb277df1b72f8a41d2c1c2e0131ea4ec1e03cf1e2cd68199c4"
+   },
+   "snr_levels_db": [
+    24,
+    18,
+    12,
+    6,
+    0
+   ],
+   "train_probs": [
+    0.3,
+    0.35,
+    0.22,
+    0.1,
+    0.03
+   ],
+   "train_region": [
+    0,
+    390000
+   ]
+  },
+  "participants": [
+   {
+    "annotated_events": 5,
+    "burden_per_min": 0.35,
+    "client_id": "SIM_FL_SITE_00",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 0,
+     "VALID": 93,
+     "excluded_not_valid": 0,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 86,
+     "synthetic_positive": 7,
+     "trainable": 93,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "a3f514e0ce9aa817af463eba00ef873f0d7fe5727bdd2fbea689643cb0811d54",
+    "noise_channels": [
+     1,
+     0,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.02474,
+    "noise_segment_starts": [
+     152606,
+     166817,
+     185991
+    ],
+    "noise_snr_db": 18,
+    "participant_id": "SIM_P000701",
+    "pvc_ratio": 2.063,
+    "seed": 20272001,
+    "session_id": "SIM_S_RFL3_00_000001",
+    "site_condition": "SIM_FL_SITE_00",
+    "true_ectopic_beats": 5
+   },
+   {
+    "annotated_events": 16,
+    "burden_per_min": 1.8532,
+    "client_id": "SIM_FL_SITE_01",
+    "counts": {
+     "DEGRADED": 2,
+     "UNUSABLE": 12,
+     "VALID": 79,
+     "excluded_not_valid": 14,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 70,
+     "synthetic_positive": 9,
+     "trainable": 79,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "58cafba589855cbefa2ac7351993752ee4d5ba02c511c08dfe0dbeda577c74d6",
+    "noise_channels": [
+     1,
+     0,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.01726,
+    "noise_segment_starts": [
+     133265,
+     7530,
+     148735
+    ],
+    "noise_snr_db": 24,
+    "participant_id": "SIM_P000702",
+    "pvc_ratio": 2.062,
+    "seed": 20272002,
+    "session_id": "SIM_S_RFL3_01_000001",
+    "site_condition": "SIM_FL_SITE_01",
+    "true_ectopic_beats": 16
+   },
+   {
+    "annotated_events": 9,
+    "burden_per_min": 0.4743,
+    "client_id": "SIM_FL_SITE_02",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 2,
+     "VALID": 91,
+     "excluded_not_valid": 2,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 82,
+     "synthetic_positive": 9,
+     "trainable": 91,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "181657a9bb35eec3d541da19e6227c96275b2a1c1e1a6b1824457a9ad37c10f1",
+    "noise_channels": [
+     0,
+     1,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 2,
+    "noise_rms_mv": 0.04857,
+    "noise_segment_starts": [
+     122193,
+     90835,
+     37177
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000703",
+    "pvc_ratio": 0.823,
+    "seed": 20272003,
+    "session_id": "SIM_S_RFL3_02_000001",
+    "site_condition": "SIM_FL_SITE_02",
+    "true_ectopic_beats": 9
+   },
+   {
+    "annotated_events": 2,
+    "burden_per_min": 0.35,
+    "client_id": "SIM_FL_SITE_03",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 4,
+     "VALID": 89,
+     "excluded_not_valid": 4,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 87,
+     "synthetic_positive": 2,
+     "trainable": 89,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "ac8fa1211015ca4875157006dfa569f2b34ce37ecf4c585de937f57cf09c9309",
+    "noise_channels": [
+     1,
+     1,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.04832,
+    "noise_segment_starts": [
+     98214,
+     99115,
+     203636
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000704",
+    "pvc_ratio": 1.818,
+    "seed": 20272004,
+    "session_id": "SIM_S_RFL3_03_000001",
+    "site_condition": "SIM_FL_SITE_03",
+    "true_ectopic_beats": 2
+   },
+   {
+    "annotated_events": 20,
+    "burden_per_min": 4.0,
+    "client_id": "SIM_FL_SITE_04",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 3,
+     "VALID": 90,
+     "excluded_not_valid": 3,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 65,
+     "synthetic_positive": 25,
+     "trainable": 90,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "722e9930fe373d0cf6192db70cb6a1964b5d7f6c407ca3ac7c730ede1c4f2804",
+    "noise_channels": [
+     0,
+     0,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.0438,
+    "noise_segment_starts": [
+     40226,
+     70311,
+     91994
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000705",
+    "pvc_ratio": 0.656,
+    "seed": 20272005,
+    "session_id": "SIM_S_RFL3_04_000001",
+    "site_condition": "SIM_FL_SITE_04",
+    "true_ectopic_beats": 21
+   },
+   {
+    "annotated_events": 2,
+    "burden_per_min": 0.35,
+    "client_id": "SIM_FL_SITE_05",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 0,
+     "VALID": 93,
+     "excluded_not_valid": 0,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 91,
+     "synthetic_positive": 2,
+     "trainable": 93,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "985fe58839799eaf764f25aae5670b3d78ffb2b972f426d683b31b833a8b5ef4",
+    "noise_channels": [
+     1,
+     1,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.03161,
+    "noise_segment_starts": [
+     69038,
+     58008,
+     80773
+    ],
+    "noise_snr_db": 18,
+    "participant_id": "SIM_P000706",
+    "pvc_ratio": 1.798,
+    "seed": 20272006,
+    "session_id": "SIM_S_RFL3_05_000001",
+    "site_condition": "SIM_FL_SITE_05",
+    "true_ectopic_beats": 2
+   },
+   {
+    "annotated_events": 24,
+    "burden_per_min": 2.9143,
+    "client_id": "SIM_FL_SITE_06",
+    "counts": {
+     "DEGRADED": 0,
+     "UNUSABLE": 0,
+     "VALID": 93,
+     "excluded_not_valid": 0,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 71,
+     "synthetic_positive": 22,
+     "trainable": 93,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "936e041df3ed01b97cb8b632ad37b1c0daf4fb8f4714036215256bed012d06d9",
+    "noise_channels": [
+     1,
+     0,
+     0
+    ],
+    "noise_peaks_ge_0p35_mv": 0,
+    "noise_rms_mv": 0.05921,
+    "noise_segment_starts": [
+     78294,
+     92735,
+     14389
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000707",
+    "pvc_ratio": 1.523,
+    "seed": 20272007,
+    "session_id": "SIM_S_RFL3_06_000001",
+    "site_condition": "SIM_FL_SITE_06",
+    "true_ectopic_beats": 25
+   },
+   {
+    "annotated_events": 7,
+    "burden_per_min": 1.0312,
+    "client_id": "SIM_FL_SITE_07",
+    "counts": {
+     "DEGRADED": 2,
+     "UNUSABLE": 8,
+     "VALID": 83,
+     "excluded_not_valid": 10,
+     "excluded_valid_but_incomplete": 0,
+     "source_records": null,
+     "synthetic_negative": 74,
+     "synthetic_positive": 9,
+     "trainable": 83,
+     "windows_emitted": 93
+    },
+    "dataset_sha256": "62a2aac02319e38c988c455c6da21dfb0839afa3bac77bc4bea21fdfb2280e75",
+    "noise_channels": [
+     0,
+     0,
+     1
+    ],
+    "noise_peaks_ge_0p35_mv": 1,
+    "noise_rms_mv": 0.05466,
+    "noise_segment_starts": [
+     15837,
+     7428,
+     28709
+    ],
+    "noise_snr_db": 12,
+    "participant_id": "SIM_P000708",
+    "pvc_ratio": 2.076,
+    "seed": 20272008,
+    "session_id": "SIM_S_RFL3_07_000001",
+    "site_condition": "SIM_FL_SITE_07",
+    "true_ectopic_beats": 8
+   }
+  ],
+  "simulation_version": "WEARABLE_SIM_V1"
+ }
+}

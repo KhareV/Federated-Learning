@@ -1,0 +1,74 @@
+{
+  "mode": "tour",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-TOUR-1792374202980",
+  "session_id": "HW-3a0084da46c34788b3330f00f31f1b9f",
+  "hardware_run": {
+    "run_id": "HDFLRUN-80A66740DDD8",
+    "status_line": "COMPLETED · LIVE_RUN · FEDPROX · round 3/3 · 197 events",
+    "banner": "ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED",
+    "chips": [
+      "Round 3 of 3",
+      "FedProx",
+      "8 logical clients · your recorded windows",
+      "one demonstration machine",
+      "stream: CLOSED_NORMAL"
+    ],
+    "client_cards": 8,
+    "card_tags": 8,
+    "hw_participation": "YOUR RECORDED DATA IN THIS RUN 29 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and ass",
+    "hw_total_windows": "29",
+    "hw_raw_sent": "0",
+    "metric_auprc": "AUPRC0.666667",
+    "metric_accuracy": "Accuracy0.333333",
+    "metric_bce": "BCE0.730389",
+    "metric_status": "COMPLETED",
+    "evaluated_graph_points": 23,
+    "figure_avail": [
+      "PARTIAL",
+      "PARTIAL",
+      "PARTIAL",
+      "PENDING",
+      "AVAILABLE",
+      "PENDING"
+    ],
+    "final_state": "Latest committed global state: be96cefc…9c18copy",
+    "accepted_counter": "24/24",
+    "alerts": [],
+    "run_label_text": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+    "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+    "init_options": [
+      {
+        "value": "CANDIDATE",
+        "label": "Stored engineering candidate (from your candidate library)",
+        "disabled": false
+      },
+      {
+        "value": "MODEL_V2_FINAL",
+        "label": "Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning",
+        "disabled": false
+      },
+      {
+        "value": "FRESH_SEEDED",
+        "label": "Fresh initialisation (seeded, untrained)",
+        "disabled": false
+      },
+      {
+        "value": "WARM_START",
+        "label": "Pretrained: warm start from an earlier recorded-hardware run",
+        "disabled": false
+      }
+    ],
+    "v2_note": ""
+  },
+  "synthetic_run": "FL10RUN-C8A991FD4749",
+  "routes_toured": 128
+}

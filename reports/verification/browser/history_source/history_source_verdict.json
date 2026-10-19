@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "badge_names_history_session_and_site": true,
+    "eight_synthetic_namespace_clients": true,
+    "federation_replay_opens": true,
+    "labels_are_named_synthetic_assigned": true,
+    "metrics_shown": true,
+    "no_alerts": true,
+    "overview_names_history_session": true,
+    "run_completed": true,
+    "session_signal_is_the_chosen_clients_data": true
+  },
+  "mode": "history_source",
+  "run_id": "FL10RUN-68922AD89865",
+  "session_id": "SESS-8bd013933b76408b83ad85fd15f1783e",
+  "status": "PASS"
+}

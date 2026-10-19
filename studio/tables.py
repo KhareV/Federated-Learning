@@ -53,7 +53,7 @@ def build_tables(b: dict[str, Any]) -> dict[str, dict[str, Any]]:
     rows5 = [[s, pid, *[m[c] for c in PART_COLS], _undef(m)] for s in evaluated for pid, m in states[s]["participants"].items()]
     add("FL10_TAB05", ["state", "participant_id", *PART_COLS, "undefined_reasons"], rows5, f"{len(ev['holdout_participants'])} holdout participants x {len(evaluated)} evaluated states.", ["participant_metrics.csv"], empty_note="No state has been evaluated yet.")
     sep = ev["separation"]
-    rows6 = [[h["holdout_id"], h["participant_id"], h["site_condition"], h["replicate"], h["session_id"], h["seed"], h["counts"]["windows_emitted"], h["counts"]["trainable"], h["counts"]["DEGRADED"] + h["counts"]["UNUSABLE"], h["counts"]["synthetic_positive"],
+    rows6 = [[h["holdout_id"], h["participant_id"], h["site_condition"], h["replicate"], h["session_id"], h["seed"], h["counts"]["windows_emitted"], h["counts"]["trainable"], h["counts"].get("excluded_windows", h["counts"]["DEGRADED"] + h["counts"]["UNUSABLE"]), h["counts"]["synthetic_positive"],
               h["counts"]["synthetic_negative"], h["dataset_sha256"], ("WINDOW IDS DISJOINT (same recording sessions, window-level split)" if ev.get("window_level_split") else "SEPARATE: " + ", ".join(f"{k}=0" for k in sep))] for h in ev["holdout_participants"]]
     add("FL10_TAB06", ["holdout_id", "participant_id", "site_condition", "replicate", "session_id", "seed", "windows_emitted", "eligible_windows", "excluded_windows", "positives", "negatives", "dataset_sha256", "separation_status"], rows6,
         "Composition and leakage audit; overlap counts against each excluded population: " + "; ".join(f"{k}: {v}" for k, v in sep.items()), ["holdout_manifest_v1.json", "evaluation_results.json"])

@@ -1,0 +1,51 @@
+{
+  "mode": "recorded-noise-cohort",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "run": {
+    "run_id": "FL10RUN-5C20E8F19FE9",
+    "defaults": {
+      "buttons": [
+        "cohort-original",
+        "cohort-realistic",
+        "cohort-realistic-nstdb"
+      ],
+      "original_checked": "true",
+      "nstdb_checked": "false"
+    },
+    "chosen": {
+      "nstdb_checked": "true",
+      "realistic_checked": "false",
+      "note": "The realistic cohort's rhythm, premature ectopic beats and annotation-noisy labels, with recorded MIT-BIH Noise Stress Test noise (baseline wander, electrode motion, muscle artifact) at NSTDB's SNR levels instead of invented artifacts.",
+      "fixed_cohort": "REALISTIC_NSTDB",
+      "source_note": "Realistic synthetic cohort with recorded noise — eight synthetic clients with variable rhythm, ectopic beats and annotation-noisy labels, over recorded NSTDB baseline wander, electrode motion and muscle artifact."
+    },
+    "live": {
+      "badge": "SYNTHETIC COHORT · REALISTIC · RECORDED NOISE",
+      "sentence": "Realistic synthetic ECG with RECORDED noise (MIT-BIH Noise Stress Test baseline wander, electrode motion and muscle artifact at NSTDB signal-to-noise levels) on eight logical clients on one machine: variable rhythm, premature ectopic beats with pauses, and annotation-noisy labels. The ECG is still synthetic: no real physiology.",
+      "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+      "clients": [
+        "SIM_FL_SITE_00",
+        "SIM_FL_SITE_01",
+        "SIM_FL_SITE_02",
+        "SIM_FL_SITE_03",
+        "SIM_FL_SITE_04",
+        "SIM_FL_SITE_05",
+        "SIM_FL_SITE_06",
+        "SIM_FL_SITE_07"
+      ],
+      "metric_auprc": "AUPRC0.899584",
+      "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3 · 1446 windows · 16 participants",
+      "alerts": [],
+      "body_has_recorded_noise_use": true,
+      "body_has_frozen_reuse": false
+    }
+  }
+}

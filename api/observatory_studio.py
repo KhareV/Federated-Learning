@@ -24,6 +24,7 @@ from product.api.errors import ProductError, ProductErrorCode
 from product.auth.websocket import authenticate_live_websocket
 from simulation.fl_cohort_v1 import cohort_profiles
 from studio import STUDIO_ID, cohorts, g1_cohort, v2_init
+from studio import candidates as candidates_mod
 from studio.constants import (
     CLAIM_BOUNDARY,
     COHORT_USE_DETAIL,
@@ -121,7 +122,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
 
     def _public(entry: dict[str, Any]) -> dict[str, Any]:
         out = {k: v for k, v in entry.items() if k != "owner"}
-        out["cohort_label"] = cohorts.spec(entry["cohort"]).label
+        out["cohort_label"] = candidates_mod.cohort_label(entry["cohort"])
         return out
 
     @app.get(f"{STUDIO}/candidates")
@@ -219,7 +220,7 @@ def register_studio(app: FastAPI, identity: Callable[[Request], Awaitable[str]],
             raise ProductError(ProductErrorCode.INVALID_REQUEST, "unsupported Studio algorithm, aggregation mode, or run type")
         cohort = body.get("cohort", cohorts.DEFAULT)
         if cohort not in cohorts.COHORTS:
-            raise ProductError(ProductErrorCode.INVALID_REQUEST, "cohort must be ORIGINAL or REALISTIC")
+            raise ProductError(ProductErrorCode.INVALID_REQUEST, f"cohort must be one of {', '.join(cohorts.COHORTS)}")
         resolved = await identity_resolver(request)
         store.upsert_user(resolved)
         signal_session = None

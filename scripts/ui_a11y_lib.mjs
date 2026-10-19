@@ -4,7 +4,7 @@ import { writeFileSync } from 'node:fs';
 
 export const ROUTES = ['/app', '/app/device', '/app/monitoring', '/app/history', '/app/federation', '/app/federation/live', '/app/federation/clients', '/app/federation/rounds', '/app/federation/privacy',
 	'/app/models', '/app/research/ml', '/app/research/fl', '/app/system', '/app/about', '/app/observatory', '/app/observatory/evidence', '/app/observatory/federation', '/app/observatory/fl10',
-	'/app/observatory/model', '/app/observatory/outcomes', '/app/observatory/provenance', '/app/observatory/replay', '/app/observatory/scenarios', '/app/observatory/storyboard', '/app/observatory/tour',
+	'/app/observatory/model', '/app/observatory/outcomes', '/app/observatory/provenance', '/app/observatory/replay', '/app/observatory/scenarios', '/app/observatory/storyboard', '/app/observatory/tour', '/app/observatory/federation-replay', '/app/observatory/external-check', '/app/demo',
 	'/app/federation/live?run=recorded-A', '/app/observatory/federation/SIM_FL_SITE_00', '/app/history/NO-SUCH-SESSION'];
 
 // Describes the element that currently has keyboard focus and WHY it might not be usable (hidden / clipped / obscured / outside the viewport after the browser's own scroll).

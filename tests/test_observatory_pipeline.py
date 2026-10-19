@@ -524,6 +524,11 @@ def test_api_extension_adds_only_the_documented_observatory_routes(tmp_path: Pat
         ("/product/v1/observatory/fl10/runs/{job_id}/bundle", ("GET",)),
         ("/product/v1/observatory/fl10/runs/{job_id}/exports/{item_id}/{fmt}", ("GET",)),
         # NHM_UNIFIED_LIVE_FEDERATION_STUDIO_001 adds exactly these owner-scoped routes (read-only except the 10-round start); the frozen 3-round /federation routes are unchanged.
+        # PTBXL_EXTERNAL_CHECK_V1 adds exactly this read-only, hash-verified evidence route.
+        ("/product/v1/observatory/evidence/external-check", ("GET",)),
+        # NHM_CANDIDATE_LIBRARY_001 adds exactly these owner-scoped, read-only candidate routes (a candidate is started through the existing run-start routes).
+        ("/product/v1/studio/candidates", ("GET",)),
+        ("/product/v1/studio/candidates/{candidate_id}", ("GET",)),
         ("/product/v1/studio/capabilities", ("GET",)),
         ("/product/v1/studio/runs", ("GET",)),
         ("/product/v1/studio/runs", ("POST",)),

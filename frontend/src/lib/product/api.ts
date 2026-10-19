@@ -4,6 +4,7 @@
 // the injected provider and is never stored by this module.
 
 import { parseFl10, parseFl10Job, parseFl10Recorded, type Fl10Job, type Fl10Payload, type Fl10Recorded } from './observatory/fl10';
+import { parseExternalCheck, type ExternalCheck } from './observatory/external-check';
 import { parseLiveLink, parseShowcase, type LiveLinkStatus, type ShowcaseBundle } from './observatory/showcase';
 import { parseCandidates, parseGenCurves, parseGenParticipants, parseGeneralisation, parseHardwareDemoRun, parseHardwareDemoSessions, parseHardwareV2Preview, parseOverview, parseCapabilities, parseEvalRound, parseEvalSummary, parseExports, parseFigures, parseRoundDetail, parseStudioRun, parseStudioRuns, parseTables } from './studio/parse';
 import type { StudioCandidate, GenCurves, GenParticipants, Generalisation, HardwareDemoChoice, HardwareDemoRun, HardwareDemoSession, HardwareV2Preview, StudioOverview, EvalRoundDetail, EvalSummary, RoundDetail, StudioCapabilities, StudioExports, StudioFigures, StudioRun, StudioRunChoice, StudioTables } from './studio/types';
@@ -134,6 +135,7 @@ export interface ProductClient {
 	observatoryScenarioTimeline(scenarioId: string): Promise<ScenarioTimeline>;
 	observatoryFlEval(): Promise<FlEval>;
 	observatoryShowcase(): Promise<ShowcaseBundle>;
+	observatoryExternalCheck(): Promise<ExternalCheck>;
 	fl10Recorded(): Promise<Fl10Recorded[]>;
 	fl10RecordedBundle(key: string): Promise<Fl10Payload>;
 	fl10Start(mode: 'A' | 'B'): Promise<Fl10Job>;
@@ -350,6 +352,7 @@ export function createProductClient(options: ProductClientOptions = {}): Product
 			return { blob: await response.blob(), sha256: response.headers.get('X-Content-SHA256') };
 		},
 		observatoryShowcase: async () => parseShowcase(await call<unknown>('GET', '/observatory/showcase/bundle')),
+		observatoryExternalCheck: async () => parseExternalCheck(await call<unknown>('GET', '/observatory/evidence/external-check')),
 		observatoryFlEval: async () => parseFlEval(await call<unknown>('GET', '/observatory/evidence/fl-eval')),
 		observatoryFlCurves: async (dataset, modelId) => parseFlCurves(await call<unknown>('GET',
 			`/observatory/evidence/fl-eval/curves/${enc(dataset)}/${enc(modelId)}`)),

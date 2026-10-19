@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { candidateOptionText } from '$lib/product/studio/cohort-text';
+	import { runCohortName, trainedOn } from '$lib/product/studio/candidate-text';
 	// The "Recorded hardware" branch of the single "Start a federation run" card. It owns no rounds
 	// control: the rounds radio of the parent card is the only one, so both data sources share one form.
 	import { goto } from '$app/navigation';
@@ -46,7 +48,7 @@
 		product.api.hardwareV2Preview(ids).then((value) => { if (mine === previewSeq) preview = value; }).catch((cause) => { if (mine === previewSeq) previewError = cause instanceof Error ? cause.message : String(cause); }).finally(() => { if (mine === previewSeq) previewing = false; });
 	});
 	// The realistic cohort supplies the seven synthetic peers (and the evaluation holdout) of a pretrained-V2 run; the tabular starts have eight recorded blocks and no peers.
-	const cohortNeedsV2 = $derived(cohort === 'REALISTIC' && !v2);
+	const cohortNeedsV2 = $derived(cohort !== 'ORIGINAL' && !v2);
 	const canStart = $derived(!disabled && !running && !cohortNeedsV2 && selected.length > 0 && (startModel === 'FRESH_SEEDED' || (startModel === 'WARM_START' && !!warmPick) || (v2 && preview?.eligible === true && (startModel !== 'CANDIDATE' || !!candidateId))));
 	async function load() {
 		if (!available) return;
@@ -66,7 +68,7 @@
 			// The run executes on the backend and is observed on the same Live page as every other run.
 			const run = await product.api.hardwareDemoStart({
 				session_ids: selected, run_length: rounds, algorithm, secagg_mode: secagg, label_seed: seed,
-				initialisation: startModel, ...(startModel === 'WARM_START' ? { warm_start_run_id: warmPick } : {}), ...(startModel === 'CANDIDATE' ? { candidate_id: candidateId } : {}), ...(cohort === 'REALISTIC' && v2 ? { cohort } : {})
+				initialisation: startModel, ...(startModel === 'WARM_START' ? { warm_start_run_id: warmPick } : {}), ...(startModel === 'CANDIDATE' ? { candidate_id: candidateId } : {}), ...(cohort !== 'ORIGINAL' && v2 ? { cohort } : {})
 			});
 			await goto(`/app/federation/live?run=${encodeURIComponent(run.run_id)}`);
 		} catch (cause) { error = cause instanceof Error ? cause.message : String(cause); }
@@ -96,7 +98,8 @@
 		</fieldset>
 		<label><span>Starting model</span>
 			<select value={startModel} onchange={(e) => { modelChoice = (e.currentTarget as HTMLSelectElement).value as StartModel; }} disabled={running} data-testid="hardware-demo-init">
-				{#each models as m (m.id)}<option value={m.id} disabled={!m.available}>{m.id === 'MODEL_V2_FINAL' ? 'Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning' : m.label}</option>{/each}
+				<optgroup label="Pretrained-V2 family (recommended)">{#each models.filter((m) => m.id === 'MODEL_V2_FINAL' || m.id === 'CANDIDATE') as m (m.id)}<option value={m.id} disabled={!m.available}>{m.id === 'MODEL_V2_FINAL' ? 'Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning' : m.label}</option>{/each}</optgroup>
+				<optgroup label="Advanced / engineering demo — small tabular model (HARDWARE_DEMO_MODEL_V1)">{#each models.filter((m) => m.id === 'FRESH_SEEDED' || m.id === 'WARM_START') as m (m.id)}<option value={m.id} disabled={!m.available}>{m.label}</option>{/each}</optgroup>
 			</select></label>
 		{#if startModel === 'WARM_START'}
 			<label><span>Warm-start source run</span>
@@ -107,8 +110,8 @@
 		{:else if v2}
 			<p class="help" data-testid="hardware-demo-v2-note">{startModel === 'CANDIDATE' ? 'R0 is the final state of the stored candidate chosen below, unchanged.' : 'R0 is the verified pretrained MODEL_V2_FINAL checkpoint, unchanged.'} Your recording becomes ONE recorded client (up to 93 windows) federated with the seven {cohort === 'REALISTIC' ? 'realistic' : 'canonical'} synthetic peers of the cohort. {v2Model?.note ?? 'Your recorded windows are resampled onto the V2 source grid and graded by the unchanged quality gate; only VALID windows train.'} The model changes from the small tabular classifier to the V2 ECG network, and the topology from eight recorded blocks to one recorded client plus seven peers (their labels stay the cohort's synthetic event-window labels; yours are assigned), so this is a different run family from the fresh and warm-start choices.</p>
 			{#if startModel === 'CANDIDATE'}
-				<label><span>Candidate</span><select bind:value={candidatePick} disabled={running} data-testid="hardware-demo-candidate">{#each candidates as c (c.candidate_id)}<option value={c.candidate_id}>{c.candidate_id} · {c.cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort · {c.run_length} rounds{c.metrics?.AUPRC !== undefined ? ` · AUPRC ${c.metrics.AUPRC.toFixed(3)}` : ''}</option>{/each}</select></label>
-				{#if pickedCandidate}<p class="help" data-testid="hardware-demo-candidate-note">Started from {pickedCandidate.candidate_id} (trained on the {pickedCandidate.cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort; this run's peers come from the {cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort).</p>{/if}
+				<label><span>Candidate</span><select bind:value={candidatePick} disabled={running} data-testid="hardware-demo-candidate">{#each candidates as c (c.candidate_id)}<option value={c.candidate_id}>{c.candidate_id} · {candidateOptionText(c.cohort)} · {c.run_length} rounds{c.metrics?.AUPRC !== undefined ? ` · AUPRC ${c.metrics.AUPRC.toFixed(3)}` : ''}</option>{/each}</select></label>
+				{#if pickedCandidate}<p class="help" data-testid="hardware-demo-candidate-note">Started from {pickedCandidate.candidate_id} (trained on {trainedOn(pickedCandidate.cohort)}; this run's peers come from {runCohortName(cohort)}).</p>{/if}
 			{/if}
 			{#if selected.length === 0}<p class="help">Select at least one recorded session to see how many V2 windows it provides.</p>
 			{:else if previewing}<p class="help" role="status">Checking what the unchanged quality gate accepts…</p>
@@ -117,13 +120,14 @@
 				<div class="result" data-testid="hardware-v2-preview" class:bad={!preview.eligible}>
 					<b>{preview.eligible ? 'ENOUGH USABLE WINDOWS' : 'NOT ENOUGH USABLE WINDOWS'}</b>
 					<span>{preview.train_windows} training · {preview.holdout_windows} holdout windows (needs {preview.min_train_windows} and {preview.min_holdout_windows}); time-purged so no training window overlaps the holdout.</span>
-					<table aria-label="V2 windows per recorded session"><thead><tr><th scope="col">Session</th><th scope="col">10 s windows</th><th scope="col">Quality-VALID</th><th scope="col">Train</th><th scope="col">Holdout</th></tr></thead>
-						<tbody>{#each preview.sessions as row (row.session_id)}<tr><th scope="row"><code>{row.session_id}</code></th><td>{row.windows}</td><td>{row.usable}</td><td>{row.train}</td><td>{row.holdout}</td></tr>{/each}</tbody></table>
+					<table aria-label="V2 windows per recorded session"><thead><tr><th scope="col">Session</th><th scope="col">10 s windows</th><th scope="col">Complete</th><th scope="col">of which VALID</th><th scope="col">Below VALID (accepted)</th><th scope="col">Train</th><th scope="col">Holdout</th></tr></thead>
+						<tbody>{#each preview.sessions as row (row.session_id)}<tr><th scope="row"><code>{row.session_id}</code></th><td>{row.windows}</td><td>{row.usable}</td><td>{row.valid}</td><td>{row.below_valid}</td><td>{row.train}</td><td>{row.holdout}</td></tr>{/each}</tbody></table>
+					<span data-testid="hardware-v2-quality-summary">{preview.valid_windows} of {preview.valid_windows + preview.below_valid_windows} complete windows are graded VALID. {preview.below_valid_windows} lower-quality window{preview.below_valid_windows === 1 ? '' : 's'} (degraded or unusable) {preview.below_valid_windows === 1 ? 'is' : 'are'} accepted for EXPERIMENTAL training, {preview.train_below_valid} of them in the training set: the grade is reported, not enforced, and these windows are never counted as VALID.</span>
 					{#if preview.reason}<span class="warn" data-testid="hardware-v2-preview-reason">{preview.reason}</span>{/if}
 				</div>
 			{/if}
 		{:else}
-			<p class="help" data-testid="hardware-demo-init-note">R0 is a seeded, untrained HARDWARE_DEMO_MODEL_V1 (a small tabular classifier over window features).</p>
+			<p class="help" data-testid="hardware-demo-init-note">R0 is a seeded, untrained HARDWARE_DEMO_MODEL_V1 (a small tabular classifier over window features). <b data-testid="hardware-demo-advanced-note">Advanced / engineering demo:</b> it shows the federated mechanics on your windows only; it is not the V2 network, it has eight recorded blocks and no synthetic peers, and its scores are not comparable to pretrained-V2 runs.</p>
 		{/if}
 		{#if cohortNeedsV2}<p class="warn" role="status" data-testid="hardware-cohort-needs-v2">The realistic cohort supplies the seven synthetic peers of a pretrained-V2 recorded-hardware run. Choose the pretrained V2 starting model, or switch the cohort back to original.</p>{/if}
 		{#if !warmAvailable}<p class="help">Warm start is not advertised by the connected backend.</p>{/if}

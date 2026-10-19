@@ -1,0 +1,15 @@
+{
+  "checks": {
+    "all_six_models_are_listed": true,
+    "boundaries_are_shown": true,
+    "label_rules_and_error_analysis_shown": true,
+    "no_alerts": true,
+    "no_horizontal_scroll_on_a_phone": true,
+    "reached_from_the_observatory_nav": true,
+    "report_and_protocol_hashes_shown": true,
+    "set_selector_switches_to_replication": true,
+    "values_come_from_the_report": true
+  },
+  "mode": "external_check",
+  "status": "PASS"
+}

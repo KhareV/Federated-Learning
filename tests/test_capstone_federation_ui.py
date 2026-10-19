@@ -114,7 +114,9 @@ def test_ui_v1_verifier_accepts_only_successor_bound_changes(tmp_path: Path, mon
 def test_backend_scientific_fl_cap006_cap007_files_are_byte_identical_to_entry() -> None:
     trees = ["simulation", "src", "checkpoints", "contracts", "federated", "privacy", "reports/model_v2",
              "artifacts/DEFAULT_RUNTIME_BINDING_V2.lock.json", "artifacts/SOFTWARE_SYSTEM_V2.lock.json"]
-    assert _git("diff", "--name-only", "--diff-filter=AMD", ENTRY, "--", *trees).split() == []
+    # Later successors may ADD the realistic-cohort generator files (V2 invented noise, V3 recorded noise); no entry file may be modified or deleted.
+    assert _git("diff", "--name-only", "--diff-filter=MD", ENTRY, "--", *trees).split() == []
+    assert set(_git("diff", "--name-only", "--diff-filter=A", ENTRY, "--", *trees).split()) <= {"simulation/fl_cohort_realistic_v2.py", "simulation/realistic_ecg_v2.py", "simulation/fl_cohort_realistic_v3.py", "simulation/realistic_ecg_v3.py"}
     # CAP-009 may ADD owner-scoped history/research files, but may not modify
     # any CAP-008-or-earlier API, product, or persistence implementation.
     from scripts.verify_unified_studio_001 import hardware_successor_bound

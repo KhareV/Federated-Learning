@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "eight_steps_with_four_fields_each": true,
+    "every_step_names_how_its_evidence_is_produced": true,
+    "every_target_page_exists": true,
+    "heading_receives_focus_after_navigation": true,
+    "keyboard_reaches_every_step_link_in_order": true,
+    "live_and_recorded_modes_are_distinct": true,
+    "no_alerts": true,
+    "no_horizontal_scroll_on_a_phone": true,
+    "reached_from_the_overview": true,
+    "tour_and_storyboard_link_back": true
+  },
+  "mode": "demo_path",
+  "status": "PASS"
+}

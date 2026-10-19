@@ -14,7 +14,6 @@ const NEGATION_MARKERS = ['no ', 'not ', 'never ', "isn't ", 'is not '];
 const PROHIBITED_PATTERNS: { label: string; pattern: RegExp; allowNegated?: boolean }[] = [
 	{ label: '24-bit ADC claim', pattern: /24-bit/i },
 	{ label: '360 Hz sampling claim', pattern: /360\s?hz/i },
-	{ label: 'PTB-XL as current project data', pattern: /ptb-?xl/i },
 	{ label: 'medical-grade claim', pattern: /medical[- ]grade/i, allowNegated: true },
 	{ label: 'clinical-grade claim', pattern: /clinical[- ]grade/i, allowNegated: true },
 	{ label: '"arrhythmia detected" claim', pattern: /arrhythmia detected/i },

@@ -1,0 +1,1792 @@
+{
+  "mode": "fl-matrix",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "steps": [
+    {
+      "tag": "orig3_frozen_untrained",
+      "plan": {
+        "tag": "orig3_frozen_untrained",
+        "cohort": "ORIGINAL",
+        "rounds": 3,
+        "init": "FL_INIT_V2",
+        "frozenForm": true
+      },
+      "form": {
+        "cohort_text": "",
+        "frozen_form_shown": true
+      },
+      "run_id": "FEDRUN-8120EE44A5E4",
+      "live": {
+        "badge": "SYNTHETIC COHORT",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 203 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.628671",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.628670718664115 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.628671",
+          "AUROC": "AUROC: 0.7269706268427931 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.726971",
+          "F1": "F1: 0 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10",
+          "BCE": "BCE: 0.650140193429412 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.650140",
+          "accuracy": "Accuracy: 0.7876901798063624 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.787690",
+          "precision": "",
+          "recall": "Recall: 0 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE QUEUED",
+          "AUPRC": "average precision (non-interpolated) || AUPRCQUEUED",
+          "AUROC": "area under the ROC curve || AUROCQUEUED",
+          "F1": "at the fixed decision rule || F1QUEUED",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEQUEUED",
+          "accuracy": "at the fixed rule || AccuracyQUEUED",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallQUEUED",
+          "specificity": "true-negative rate at the fixed rule || SpecificityQUEUED"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 203",
+          "jumps": 3,
+          "clients": 8,
+          "pending": false,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 203",
+          "from_record": false,
+          "candidate_text": "… produced SIM_FL_SITE_06✓ REPLAYED EVENT: ACCEPTED(SUBMITTED) local examples: 93 milestone: 100% (completed) update: d478af7a96… produced SIM_FL_SITE_07✓ REPLAYED EVENT: ACCEPTED(SUBMITTED) local examples: 83 milestone: 100% (completed) update: a2a671e9fa… produced Candidate ✓Training complete✓Candidate event replayed—Structural checks—Engineering sandbox—Scientific validationnot performed here—Deploymentnever automatic NOT DEPLOYED HISTORICAL EVENT REPLAY — NO NEW CANDIDATE CREATED. ▾ TECHNICAL EVIDENCE (candidate metadata) CandidateCAPSTONE_FL_CANDIDATE_0001ParentFL_INIT_V2State digest3f0b7762…70e4copy ValidationPENDINGChecks reported passed-- Governance--Sandbox--production_deployedFALSE",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "orig3_pretrained",
+      "plan": {
+        "tag": "orig3_pretrained",
+        "cohort": "ORIGINAL",
+        "rounds": 3,
+        "init": "MODEL_V2_FINAL"
+      },
+      "form": {
+        "cohort_text": "ORIGINAL",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-588B8121476B",
+      "live": {
+        "badge": "SYNTHETIC COHORT",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.960299",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.9039805259594729 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.903981",
+          "AUROC": "AUROC: 0.9308411001135346 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.930841",
+          "F1": "F1: 0.8415094339622642 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.841509",
+          "BCE": "BCE: 0.21844795259851424 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.218448",
+          "accuracy": "Accuracy: 0.941908713692946 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.941909",
+          "precision": "",
+          "recall": "Recall: 0.7263843648208469 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.726384",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.941137321635374 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.941137",
+          "AUROC": "AUROC: 0.9572915266549031 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.957292",
+          "F1": "F1: 0.8458646616541353 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.845865",
+          "BCE": "BCE: 0.3100086620825379 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.310009",
+          "accuracy": "Accuracy: 0.9432918395573997 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.943292",
+          "precision": "",
+          "recall": "Recall: 0.7328990228013029 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.732899",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 COMPLETED",
+          "AUPRC": "AUPRC: 0.9602991549412342 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.960299",
+          "AUROC": "AUROC: 0.9715334040660845 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.971533",
+          "F1": "F1: 0.850187265917603 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.850187",
+          "BCE": "BCE: 0.3193940499509137 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.319394",
+          "accuracy": "Accuracy: 0.9446749654218534 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.944675",
+          "precision": "",
+          "recall": "Recall: 0.739413680781759 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.739414",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 196",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 196",
+          "from_record": true,
+          "candidate_text": "ilestone: 100% (completed) update: 6c83d35705… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-588B8121476B Final global state R3: a7ecc72e…16f0copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 3. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "orig10_untrained",
+      "plan": {
+        "tag": "orig10_untrained",
+        "cohort": "ORIGINAL",
+        "rounds": 10,
+        "init": "FL_INIT_V2"
+      },
+      "form": {
+        "cohort_text": "ORIGINAL",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-1EAA613B6A56",
+      "live": {
+        "badge": "SYNTHETIC COHORT",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 10/10 · 644 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.878712",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.628670718664115 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.628671",
+          "AUROC": "AUROC: 0.7269706268427931 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.726971",
+          "F1": "F1: 0 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10",
+          "BCE": "BCE: 0.650140193429412 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.650140",
+          "accuracy": "Accuracy: 0.7876901798063624 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.787690",
+          "precision": "",
+          "recall": "Recall: 0 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.6506894376420321 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.650689",
+          "AUROC": "AUROC: 0.7538686143911597 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.753869",
+          "F1": "F1: 0 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10",
+          "BCE": "BCE: 0.651130601723202 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.651131",
+          "accuracy": "Accuracy: 0.7876901798063624 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.787690",
+          "precision": "",
+          "recall": "Recall: 0 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 COMPLETED",
+          "AUPRC": "AUPRC: 0.6539230651358623 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.653923",
+          "AUROC": "AUROC: 0.7688039968770823 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.768804",
+          "F1": "F1: 0.006493506493506494 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.006494",
+          "BCE": "BCE: 0.6403623873060557 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.640362",
+          "accuracy": "Accuracy: 0.7883817427385892 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.788382",
+          "precision": "",
+          "recall": "Recall: 0.003257328990228013 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.003257",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3 COMPLETED",
+          "AUPRC": "AUPRC: 0.6761861110494672 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.676186",
+          "AUROC": "AUROC: 0.8028472315563397 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.802847",
+          "F1": "F1: 0.3502567027952082 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.350257",
+          "BCE": "BCE: 0.7243380441302709 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.724338",
+          "accuracy": "Accuracy: 0.21230982019363762 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.212310",
+          "precision": "",
+          "recall": "Recall: 1 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall1",
+          "specificity": "Specificity: 0 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0"
+        },
+        {
+          "button": "round-btn-R4",
+          "shown_round": "ROUND R4 COMPLETED",
+          "AUPRC": "AUPRC: 0.6870190142867147 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.687019",
+          "AUROC": "AUROC: 0.8209012420175421 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.820901",
+          "F1": "F1: 0.3502567027952082 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.350257",
+          "BCE": "BCE: 1.115109553130243 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE1.115110",
+          "accuracy": "Accuracy: 0.21230982019363762 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.212310",
+          "precision": "",
+          "recall": "Recall: 1 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall1",
+          "specificity": "Specificity: 0 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0"
+        },
+        {
+          "button": "round-btn-R5",
+          "shown_round": "ROUND R5 COMPLETED",
+          "AUPRC": "AUPRC: 0.7765812545058811 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.776581",
+          "AUROC": "AUROC: 0.8766619098414805 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.876662",
+          "F1": "F1: 0.3502567027952082 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.350257",
+          "BCE": "BCE: 1.7516840127002824 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE1.751684",
+          "accuracy": "Accuracy: 0.21230982019363762 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.212310",
+          "precision": "",
+          "recall": "Recall: 1 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall1",
+          "specificity": "Specificity: 0 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0"
+        },
+        {
+          "button": "round-btn-R6",
+          "shown_round": "ROUND R6 COMPLETED",
+          "AUPRC": "AUPRC: 0.8650082938816039 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.865008",
+          "AUROC": "AUROC: 0.9338010083706778 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.933801",
+          "F1": "F1: 0.3502567027952082 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.350257",
+          "BCE": "BCE: 2.4838025772254166 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE2.483803",
+          "accuracy": "Accuracy: 0.21230982019363762 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.212310",
+          "precision": "",
+          "recall": "Recall: 1 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall1",
+          "specificity": "Specificity: 0 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0"
+        },
+        {
+          "button": "round-btn-R7",
+          "shown_round": "ROUND R7 COMPLETED",
+          "AUPRC": "AUPRC: 0.9151943649891683 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.915194",
+          "AUROC": "AUROC: 0.9636088574182164 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.963609",
+          "F1": "F1: 0.3502567027952082 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.350257",
+          "BCE": "BCE: 3.110791986543474 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE3.110792",
+          "accuracy": "Accuracy: 0.21230982019363762 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.212310",
+          "precision": "",
+          "recall": "Recall: 1 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall1",
+          "specificity": "Specificity: 0 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0"
+        },
+        {
+          "button": "round-btn-R8",
+          "shown_round": "ROUND R8 COMPLETED",
+          "AUPRC": "AUPRC: 0.8931616169634325 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.893162",
+          "AUROC": "AUROC: 0.9529674867662074 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.952967",
+          "F1": "F1: 0.3502567027952082 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.350257",
+          "BCE": "BCE: 3.702153004250136 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE3.702153",
+          "accuracy": "Accuracy: 0.21230982019363762 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.212310",
+          "precision": "",
+          "recall": "Recall: 1 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall1",
+          "specificity": "Specificity: 0 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0"
+        },
+        {
+          "button": "round-btn-R9",
+          "shown_round": "ROUND R9 COMPLETED",
+          "AUPRC": "AUPRC: 0.8787120265644718 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.878712",
+          "AUROC": "AUROC: 0.9456034638076145 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.945603",
+          "F1": "F1: 0.3502567027952082 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.350257",
+          "BCE": "BCE: 4.001970521492165 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE4.001971",
+          "accuracy": "Accuracy: 0.21230982019363762 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.212310",
+          "precision": "",
+          "recall": "Recall: 1 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall1",
+          "specificity": "Specificity: 0 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0"
+        },
+        {
+          "button": "round-btn-R10",
+          "shown_round": "ROUND R10· FINAL CANDIDATE STATE COMPLETED",
+          "AUPRC": "AUPRC: 0.9115704339868804 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.911570",
+          "AUROC": "AUROC: 0.9661712514263325 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.966171",
+          "F1": "F1: 0.3502567027952082 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.350257",
+          "BCE": "BCE: 3.4992161221242637 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE3.499216",
+          "accuracy": "Accuracy: 0.21230982019363762 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.212310",
+          "precision": "",
+          "recall": "Recall: 1 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall1",
+          "specificity": "Specificity: 0 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 644",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 643 of 644",
+          "from_record": true,
+          "candidate_text": "estone: 100% (completed) update: 917f048931… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-1EAA613B6A56 Final global state R10: 5ae2c3a4…355fcopy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 10. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "orig10_pretrained",
+      "plan": {
+        "tag": "orig10_pretrained",
+        "cohort": "ORIGINAL",
+        "rounds": 10,
+        "init": "MODEL_V2_FINAL"
+      },
+      "form": {
+        "cohort_text": "ORIGINAL",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-52698BF3139A",
+      "live": {
+        "badge": "SYNTHETIC COHORT",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 10/10 · 644 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.993378",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.9039805259594729 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.903981",
+          "AUROC": "AUROC: 0.9308411001135346 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.930841",
+          "F1": "F1: 0.8415094339622642 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.841509",
+          "BCE": "BCE: 0.21844795259851424 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.218448",
+          "accuracy": "Accuracy: 0.941908713692946 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.941909",
+          "precision": "",
+          "recall": "Recall: 0.7263843648208469 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.726384",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.941137321635374 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.941137",
+          "AUROC": "AUROC: 0.9572915266549031 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.957292",
+          "F1": "F1: 0.8458646616541353 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.845865",
+          "BCE": "BCE: 0.3100086620825379 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.310009",
+          "accuracy": "Accuracy: 0.9432918395573997 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.943292",
+          "precision": "",
+          "recall": "Recall: 0.7328990228013029 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.732899",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 COMPLETED",
+          "AUPRC": "AUPRC: 0.9602991549412342 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.960299",
+          "AUROC": "AUROC: 0.9715334040660845 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.971533",
+          "F1": "F1: 0.850187265917603 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.850187",
+          "BCE": "BCE: 0.3193940499509137 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.319394",
+          "accuracy": "Accuracy: 0.9446749654218534 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.944675",
+          "precision": "",
+          "recall": "Recall: 0.739413680781759 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.739414",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3 COMPLETED",
+          "AUPRC": "AUPRC: 0.9701792546692805 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.970179",
+          "AUROC": "AUROC: 0.9789918009111369 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.978992",
+          "F1": "F1: 0.8587360594795539 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.858736",
+          "BCE": "BCE: 0.31931136475823413 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.319311",
+          "accuracy": "Accuracy: 0.9474412171507607 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.947441",
+          "precision": "",
+          "recall": "Recall: 0.752442996742671 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.752443",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R4",
+          "shown_round": "ROUND R4 COMPLETED",
+          "AUPRC": "AUPRC: 0.9767423951249063 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.976742",
+          "AUROC": "AUROC: 0.9852233372322141 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.985223",
+          "F1": "F1: 0.8608534322820037 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.860853",
+          "BCE": "BCE: 0.2852496898203964 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.285250",
+          "accuracy": "Accuracy: 0.9481327800829875 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.948133",
+          "precision": "",
+          "recall": "Recall: 0.755700325732899 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.755700",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R5",
+          "shown_round": "ROUND R5 COMPLETED",
+          "AUPRC": "AUPRC: 0.9840823928669785 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.984082",
+          "AUROC": "AUROC: 0.9913118828162312 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.991312",
+          "F1": "F1: 0.8738574040219378 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.873857",
+          "BCE": "BCE: 0.20248279282375017 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.202483",
+          "accuracy": "Accuracy: 0.9522821576763485 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.952282",
+          "precision": "",
+          "recall": "Recall: 0.7785016286644951 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.778502",
+          "specificity": "Specificity: 0.9991220368744512 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.999122"
+        },
+        {
+          "button": "round-btn-R6",
+          "shown_round": "ROUND R6 COMPLETED",
+          "AUPRC": "AUPRC: 0.9841380787608097 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.984138",
+          "AUROC": "AUROC: 0.990639826352049 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.990640",
+          "F1": "F1: 0.8880866425992779 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.888087",
+          "BCE": "BCE: 0.15260975910311472 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.152610",
+          "accuracy": "Accuracy: 0.9571230982019364 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.957123",
+          "precision": "",
+          "recall": "Recall: 0.8013029315960912 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.801303",
+          "specificity": "Specificity: 0.9991220368744512 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.999122"
+        },
+        {
+          "button": "round-btn-R7",
+          "shown_round": "ROUND R7 COMPLETED",
+          "AUPRC": "AUPRC: 0.987469680479856 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.987470",
+          "AUROC": "AUROC: 0.9933194727645543 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.993319",
+          "F1": "F1: 0.9453924914675768 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.945392",
+          "BCE": "BCE: 0.07267077711320287 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.072671",
+          "accuracy": "Accuracy: 0.9778699861687413 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.977870",
+          "precision": "",
+          "recall": "Recall: 0.9022801302931596 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.902280",
+          "specificity": "Specificity: 0.9982440737489026 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.998244"
+        },
+        {
+          "button": "round-btn-R8",
+          "shown_round": "ROUND R8 COMPLETED",
+          "AUPRC": "AUPRC: 0.9851356228309922 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.985136",
+          "AUROC": "AUROC: 0.9913061631867487 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.991306",
+          "F1": "F1: 0.9453924914675768 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.945392",
+          "BCE": "BCE: 0.07698068492142564 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.076981",
+          "accuracy": "Accuracy: 0.9778699861687413 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.977870",
+          "precision": "",
+          "recall": "Recall: 0.9022801302931596 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.902280",
+          "specificity": "Specificity: 0.9982440737489026 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.998244"
+        },
+        {
+          "button": "round-btn-R9",
+          "shown_round": "ROUND R9 COMPLETED",
+          "AUPRC": "AUPRC: 0.9933778320051303 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.993378",
+          "AUROC": "AUROC: 0.9973003348843062 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.997300",
+          "F1": "F1: 0.9565217391304348 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.956522",
+          "BCE": "BCE: 0.1461371707044881 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.146137",
+          "accuracy": "Accuracy: 0.9820193637621023 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.982019",
+          "precision": "",
+          "recall": "Recall: 0.9315960912052117 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.931596",
+          "specificity": "Specificity: 0.9956101843722563 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.995610"
+        },
+        {
+          "button": "round-btn-R10",
+          "shown_round": "ROUND R10· FINAL CANDIDATE STATE COMPLETED",
+          "AUPRC": "AUPRC: 0.9964606757579718 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.996461",
+          "AUROC": "AUROC: 0.9990562611354037 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.999056",
+          "F1": "F1: 0.9753694581280788 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.975369",
+          "BCE": "BCE: 0.24588282947503073 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.245883",
+          "accuracy": "Accuracy: 0.9896265560165975 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.989627",
+          "precision": "",
+          "recall": "Recall: 0.9674267100977199 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.967427",
+          "specificity": "Specificity: 0.9956101843722563 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.995610"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 644",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 643 of 644",
+          "from_record": true,
+          "candidate_text": "estone: 100% (completed) update: 0299db0816… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-52698BF3139A Final global state R10: 237f2144…6e04copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 10. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "real3_pretrained",
+      "plan": {
+        "tag": "real3_pretrained",
+        "cohort": "REALISTIC",
+        "rounds": 3,
+        "init": "MODEL_V2_FINAL"
+      },
+      "form": {
+        "cohort_text": "REALISTIC",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-47F3BA0E8D27",
+      "live": {
+        "badge": "SYNTHETIC COHORT · REALISTIC",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.484391",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 · 1433 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.4843910588906293 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.484391",
+          "AUROC": "AUROC: 0.8476645472951374 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.847665",
+          "F1": "F1: 0.5580645161290323 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.558065",
+          "BCE": "BCE: 0.8297270478500732 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.829727",
+          "accuracy": "Accuracy: 0.8087927424982554 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.808793",
+          "precision": "",
+          "recall": "Recall: 0.7361702127659574 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.736170",
+          "specificity": "Specificity: 0.8230383973288815 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.823038"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE QUEUED",
+          "AUPRC": "average precision (non-interpolated) || AUPRCQUEUED",
+          "AUROC": "area under the ROC curve || AUROCQUEUED",
+          "F1": "at the fixed decision rule || F1QUEUED",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEQUEUED",
+          "accuracy": "at the fixed rule || AccuracyQUEUED",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallQUEUED",
+          "specificity": "true-negative rate at the fixed rule || SpecificityQUEUED"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 196",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 196",
+          "from_record": true,
+          "candidate_text": "ilestone: 100% (completed) update: c722402410… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-47F3BA0E8D27 Final global state R3: 1016af00…83a3copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 3. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "real10_pretrained",
+      "plan": {
+        "tag": "real10_pretrained",
+        "cohort": "REALISTIC",
+        "rounds": 10,
+        "init": "MODEL_V2_FINAL"
+      },
+      "form": {
+        "cohort_text": "REALISTIC",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-482C6A80C3D4",
+      "live": {
+        "badge": "SYNTHETIC COHORT · REALISTIC",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 10/10 · 644 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.846444",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 · 1433 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.4843910588906293 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.484391",
+          "AUROC": "AUROC: 0.8476645472951374 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.847665",
+          "F1": "F1: 0.5580645161290323 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.558065",
+          "BCE": "BCE: 0.8297270478500732 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.829727",
+          "accuracy": "Accuracy: 0.8087927424982554 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.808793",
+          "precision": "",
+          "recall": "Recall: 0.7361702127659574 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.736170",
+          "specificity": "Specificity: 0.8230383973288815 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.823038"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.6109080479447956 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.610908",
+          "AUROC": "AUROC: 0.8972294249280717 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.897229",
+          "F1": "F1: 0.6642335766423357 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.664234",
+          "BCE": "BCE: 0.43830804080480135 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.438308",
+          "accuracy": "Accuracy: 0.8715980460572226 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.871598",
+          "precision": "",
+          "recall": "Recall: 0.774468085106383 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.774468",
+          "specificity": "Specificity: 0.8906510851419032 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.890651"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 COMPLETED",
+          "AUPRC": "AUPRC: 0.40374386428557374 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.403744",
+          "AUROC": "AUROC: 0.5634284090505453 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.563428",
+          "F1": "F1: 0.23547880690737832 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.235479",
+          "BCE": "BCE: 0.787629138213715 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.787629",
+          "accuracy": "Accuracy: 0.32030704815073274 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.320307",
+          "precision": "",
+          "recall": "Recall: 0.6382978723404256 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.638298",
+          "specificity": "Specificity: 0.2579298831385643 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.257930"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3 COMPLETED",
+          "AUPRC": "AUPRC: 0.6476064465746763 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.647606",
+          "AUROC": "AUROC: 0.8377757254999467 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.837776",
+          "F1": "F1: 0.6479591836734694 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.647959",
+          "BCE": "BCE: 0.396076339618988 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.396076",
+          "accuracy": "Accuracy: 0.9036985345429169 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.903699",
+          "precision": "",
+          "recall": "Recall: 0.5404255319148936 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.540426",
+          "specificity": "Specificity: 0.9749582637729549 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.974958"
+        },
+        {
+          "button": "round-btn-R4",
+          "shown_round": "ROUND R4 COMPLETED",
+          "AUPRC": "AUPRC: 0.515803988156585 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.515804",
+          "AUROC": "AUROC: 0.6674350868468725 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.667435",
+          "F1": "F1: 0.47904191616766467 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.479042",
+          "BCE": "BCE: 0.43650751520568476 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.436508",
+          "accuracy": "Accuracy: 0.8785764131193301 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.878576",
+          "precision": "",
+          "recall": "Recall: 0.3404255319148936 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.340426",
+          "specificity": "Specificity: 0.9841402337228714 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.984140"
+        },
+        {
+          "button": "round-btn-R5",
+          "shown_round": "ROUND R5 COMPLETED",
+          "AUPRC": "AUPRC: 0.7004735715860189 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.700474",
+          "AUROC": "AUROC: 0.8334387099065819 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.833439",
+          "F1": "F1: 0.6544502617801047 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.654450",
+          "BCE": "BCE: 0.3329694175412842 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.332969",
+          "accuracy": "Accuracy: 0.9078855547801814 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.907886",
+          "precision": "",
+          "recall": "Recall: 0.5319148936170213 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.531915",
+          "specificity": "Specificity: 0.9816360601001669 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.981636"
+        },
+        {
+          "button": "round-btn-R6",
+          "shown_round": "ROUND R6 COMPLETED",
+          "AUPRC": "AUPRC: 0.6796914647999543 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.679691",
+          "AUROC": "AUROC: 0.8118069122296023 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.811807",
+          "F1": "F1: 0.6321243523316062 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.632124",
+          "BCE": "BCE: 0.34990274466922183 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.349903",
+          "accuracy": "Accuracy: 0.900907187718074 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.900907",
+          "precision": "",
+          "recall": "Recall: 0.5191489361702127 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.519149",
+          "specificity": "Specificity: 0.9757929883138564 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.975793"
+        },
+        {
+          "button": "round-btn-R7",
+          "shown_round": "ROUND R7 COMPLETED",
+          "AUPRC": "AUPRC: 0.7977691585496068 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.797769",
+          "AUROC": "AUROC: 0.9177387844989877 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.917739",
+          "F1": "F1: 0.6994818652849741 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.699482",
+          "BCE": "BCE: 0.2295791073787074 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.229579",
+          "accuracy": "Accuracy: 0.9190509420795534 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.919051",
+          "precision": "",
+          "recall": "Recall: 0.574468085106383 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.574468",
+          "specificity": "Specificity: 0.986644407345576 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.986644"
+        },
+        {
+          "button": "round-btn-R8",
+          "shown_round": "ROUND R8 COMPLETED",
+          "AUPRC": "AUPRC: 0.7822745824185913 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.782275",
+          "AUROC": "AUROC: 0.8893901182822435 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.889390",
+          "F1": "F1: 0.7300771208226221 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.730077",
+          "BCE": "BCE: 0.2547317903976069 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.254732",
+          "accuracy": "Accuracy: 0.9267271458478716 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.926727",
+          "precision": "",
+          "recall": "Recall: 0.6042553191489362 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.604255",
+          "specificity": "Specificity: 0.989983305509182 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.989983"
+        },
+        {
+          "button": "round-btn-R9",
+          "shown_round": "ROUND R9 COMPLETED",
+          "AUPRC": "AUPRC: 0.8464438975563063 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.846444",
+          "AUROC": "AUROC: 0.9444890420203886 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.944489",
+          "F1": "F1: 0.7811764705882352 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.781176",
+          "BCE": "BCE: 0.19261874701256726 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.192619",
+          "accuracy": "Accuracy: 0.9351011863224006 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.935101",
+          "precision": "",
+          "recall": "Recall: 0.7063829787234043 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.706383",
+          "specificity": "Specificity: 0.9799666110183639 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.979967"
+        },
+        {
+          "button": "round-btn-R10",
+          "shown_round": "ROUND R10· FINAL CANDIDATE STATE COMPLETED",
+          "AUPRC": "AUPRC: 0.82760912854496 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.827609",
+          "AUROC": "AUROC: 0.9153376194366497 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.915338",
+          "F1": "F1: 0.7775061124694377 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.777506",
+          "BCE": "BCE: 0.22117947102619395 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.221179",
+          "accuracy": "Accuracy: 0.9364968597348221 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.936497",
+          "precision": "",
+          "recall": "Recall: 0.676595744680851 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.676596",
+          "specificity": "Specificity: 0.9874791318864775 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.987479"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 644",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 643 of 644",
+          "from_record": true,
+          "candidate_text": "estone: 100% (completed) update: bf3d455668… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-482C6A80C3D4 Final global state R10: aacf755b…4147copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 10. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "nstdb3_pretrained",
+      "plan": {
+        "tag": "nstdb3_pretrained",
+        "cohort": "REALISTIC_NSTDB",
+        "rounds": 3,
+        "init": "MODEL_V2_FINAL"
+      },
+      "form": {
+        "cohort_text": "REALISTIC_NSTDB",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-38B95B5B0D21",
+      "live": {
+        "badge": "SYNTHETIC COHORT · REALISTIC · RECORDED NOISE",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.899584",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.8995840954472949 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.899584",
+          "AUROC": "AUROC: 0.9488972470908158 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.948897",
+          "F1": "F1: 0.8198198198198198 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.819820",
+          "BCE": "BCE: 0.10831956042785065 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.108320",
+          "accuracy": "Accuracy: 0.9723374827109267 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.972337",
+          "precision": "",
+          "recall": "Recall: 0.7054263565891473 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.705426",
+          "specificity": "Specificity: 0.9984813971146546 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.998481"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.9210815569221924 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.921082",
+          "AUROC": "AUROC: 0.96554890431036 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.965549",
+          "F1": "F1: 0.8907563025210085 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.890756",
+          "BCE": "BCE: 0.07807747217293663 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.078077",
+          "accuracy": "Accuracy: 0.9820193637621023 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.982019",
+          "precision": "",
+          "recall": "Recall: 0.8217054263565892 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.821705",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE QUEUED",
+          "AUPRC": "average precision (non-interpolated) || AUPRCQUEUED",
+          "AUROC": "area under the ROC curve || AUROCQUEUED",
+          "F1": "at the fixed decision rule || F1QUEUED",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEQUEUED",
+          "accuracy": "at the fixed rule || AccuracyQUEUED",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallQUEUED",
+          "specificity": "true-negative rate at the fixed rule || SpecificityQUEUED"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 196",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 196",
+          "from_record": true,
+          "candidate_text": "ilestone: 100% (completed) update: 67cf971104… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-38B95B5B0D21 Final global state R3: 2a39f196…5023copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 3. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "nstdb10_pretrained",
+      "plan": {
+        "tag": "nstdb10_pretrained",
+        "cohort": "REALISTIC_NSTDB",
+        "rounds": 10,
+        "init": "MODEL_V2_FINAL"
+      },
+      "form": {
+        "cohort_text": "REALISTIC_NSTDB",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-9675ACD4AB39",
+      "live": {
+        "badge": "SYNTHETIC COHORT · REALISTIC · RECORDED NOISE",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 10/10 · 644 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.902438",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.8995840954472949 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.899584",
+          "AUROC": "AUROC: 0.9488972470908158 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.948897",
+          "F1": "F1: 0.8198198198198198 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.819820",
+          "BCE": "BCE: 0.10831956042785065 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.108320",
+          "accuracy": "Accuracy: 0.9723374827109267 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.972337",
+          "precision": "",
+          "recall": "Recall: 0.7054263565891473 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.705426",
+          "specificity": "Specificity: 0.9984813971146546 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.998481"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.9210815569221924 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.921082",
+          "AUROC": "AUROC: 0.96554890431036 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.965549",
+          "F1": "F1: 0.8907563025210085 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.890756",
+          "BCE": "BCE: 0.07807747217293663 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.078077",
+          "accuracy": "Accuracy: 0.9820193637621023 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.982019",
+          "precision": "",
+          "recall": "Recall: 0.8217054263565892 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.821705",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 COMPLETED",
+          "AUPRC": "AUPRC: 0.9192781402268452 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.919278",
+          "AUROC": "AUROC: 0.9609989817120187 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.960999",
+          "F1": "F1: 0.9 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.900000",
+          "BCE": "BCE: 0.07506596473478241 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.075066",
+          "accuracy": "Accuracy: 0.983402489626556 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.983402",
+          "precision": "",
+          "recall": "Recall: 0.8372093023255814 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.837209",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3 COMPLETED",
+          "AUPRC": "AUPRC: 0.9168849996841029 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.916885",
+          "AUROC": "AUROC: 0.9594803788266734 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.959480",
+          "F1": "F1: 0.9 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.900000",
+          "BCE": "BCE: 0.0775785995023925 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.077579",
+          "accuracy": "Accuracy: 0.983402489626556 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.983402",
+          "precision": "",
+          "recall": "Recall: 0.8372093023255814 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.837209",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R4",
+          "shown_round": "ROUND R4 COMPLETED",
+          "AUPRC": "AUPRC: 0.9156133951544125 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.915613",
+          "AUROC": "AUROC: 0.9618583461355088 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.961858",
+          "F1": "F1: 0.8813559322033898 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.881356",
+          "BCE": "BCE: 0.07937246078800561 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.079372",
+          "accuracy": "Accuracy: 0.9806362378976486 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.980636",
+          "precision": "",
+          "recall": "Recall: 0.8062015503875969 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.806202",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R5",
+          "shown_round": "ROUND R5 COMPLETED",
+          "AUPRC": "AUPRC: 0.9149769543527281 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.914977",
+          "AUROC": "AUROC: 0.9636947961363918 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.963695",
+          "F1": "F1: 0.8765957446808511 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.876596",
+          "BCE": "BCE: 0.07990706707414064 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.079907",
+          "accuracy": "Accuracy: 0.9799446749654218 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.979945",
+          "precision": "",
+          "recall": "Recall: 0.7984496124031008 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.798450",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R6",
+          "shown_round": "ROUND R6 COMPLETED",
+          "AUPRC": "AUPRC: 0.9096685418326362 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.909669",
+          "AUROC": "AUROC: 0.95998069373076 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.959981",
+          "F1": "F1: 0.8370044052863436 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.837004",
+          "BCE": "BCE: 0.09025058748933527 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.090251",
+          "accuracy": "Accuracy: 0.9744121715076072 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.974412",
+          "precision": "",
+          "recall": "Recall: 0.7364341085271318 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.736434",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R7",
+          "shown_round": "ROUND R7 COMPLETED",
+          "AUPRC": "AUPRC: 0.9064914841456845 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.906491",
+          "AUROC": "AUROC: 0.9589270894033304 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.958927",
+          "F1": "F1: 0.8266666666666667 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.826667",
+          "BCE": "BCE: 0.09539175049756592 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.095392",
+          "accuracy": "Accuracy: 0.9730290456431535 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.973029",
+          "precision": "",
+          "recall": "Recall: 0.7209302325581395 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.720930",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R8",
+          "shown_round": "ROUND R8 COMPLETED",
+          "AUPRC": "AUPRC: 0.9066680233114682 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.906668",
+          "AUROC": "AUROC: 0.960327971134773 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.960328",
+          "F1": "F1: 0.831858407079646 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.831858",
+          "BCE": "BCE: 0.09104070190463506 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.091041",
+          "accuracy": "Accuracy: 0.9737206085753803 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.973721",
+          "precision": "",
+          "recall": "Recall: 0.7286821705426356 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.728682",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R9",
+          "shown_round": "ROUND R9 COMPLETED",
+          "AUPRC": "AUPRC: 0.9024377541926046 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.902438",
+          "AUROC": "AUROC: 0.9588976591148547 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.958898",
+          "F1": "F1: 0.8054298642533937 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.805430",
+          "BCE": "BCE: 0.10113237400573002 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.101132",
+          "accuracy": "Accuracy: 0.9702627939142462 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.970263",
+          "precision": "",
+          "recall": "Recall: 0.689922480620155 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.689922",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R10",
+          "shown_round": "ROUND R10· FINAL CANDIDATE STATE COMPLETED",
+          "AUPRC": "AUPRC: 0.9007457674900953 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.900746",
+          "AUROC": "AUROC: 0.9570023485370204 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.957002",
+          "F1": "F1: 0.8214285714285714 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.821429",
+          "BCE": "BCE: 0.09921924166629484 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.099219",
+          "accuracy": "Accuracy: 0.9723374827109267 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.972337",
+          "precision": "",
+          "recall": "Recall: 0.7131782945736435 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.713178",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 644",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 643 of 644",
+          "from_record": true,
+          "candidate_text": "estone: 100% (completed) update: afe7071abf… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-9675ACD4AB39 Final global state R10: 23b8fa11…e13dcopy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 10. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "orig3_monitored_site",
+      "plan": {
+        "tag": "orig3_monitored_site",
+        "cohort": "ORIGINAL",
+        "rounds": 3,
+        "init": "MODEL_V2_FINAL",
+        "monitoredSite": 1
+      },
+      "form": {
+        "cohort_text": "ORIGINAL",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-6EBA8547B726",
+      "live": {
+        "badge": "SIMULATED SITE_01",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.960299",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.9039805259594729 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.903981",
+          "AUROC": "AUROC: 0.9308411001135346 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.930841",
+          "F1": "F1: 0.8415094339622642 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.841509",
+          "BCE": "BCE: 0.21844795259851424 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.218448",
+          "accuracy": "Accuracy: 0.941908713692946 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.941909",
+          "precision": "",
+          "recall": "Recall: 0.7263843648208469 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.726384",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.941137321635374 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.941137",
+          "AUROC": "AUROC: 0.9572915266549031 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.957292",
+          "F1": "F1: 0.8458646616541353 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.845865",
+          "BCE": "BCE: 0.3100086620825379 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.310009",
+          "accuracy": "Accuracy: 0.9432918395573997 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.943292",
+          "precision": "",
+          "recall": "Recall: 0.7328990228013029 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.732899",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 COMPLETED",
+          "AUPRC": "AUPRC: 0.9602991549412342 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.960299",
+          "AUROC": "AUROC: 0.9715334040660845 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.971533",
+          "F1": "F1: 0.850187265917603 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.850187",
+          "BCE": "BCE: 0.3193940499509137 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.319394",
+          "accuracy": "Accuracy: 0.9446749654218534 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.944675",
+          "precision": "",
+          "recall": "Recall: 0.739413680781759 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.739414",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 196",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 196",
+          "from_record": true,
+          "candidate_text": "ilestone: 100% (completed) update: 6c83d35705… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-6EBA8547B726 Final global state R3: a7ecc72e…16f0copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 3. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "real3_monitored_site",
+      "plan": {
+        "tag": "real3_monitored_site",
+        "cohort": "REALISTIC",
+        "rounds": 3,
+        "init": "MODEL_V2_FINAL",
+        "monitoredSite": 2
+      },
+      "form": {
+        "cohort_text": "REALISTIC",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-A1E76D251134",
+      "live": {
+        "badge": "SIMULATED SITE_02 · REALISTIC",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.610908",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 · 1433 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.4843910588906293 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.484391",
+          "AUROC": "AUROC: 0.8476645472951374 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.847665",
+          "F1": "F1: 0.5580645161290323 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.558065",
+          "BCE": "BCE: 0.8297270478500732 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.829727",
+          "accuracy": "Accuracy: 0.8087927424982554 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.808793",
+          "precision": "",
+          "recall": "Recall: 0.7361702127659574 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.736170",
+          "specificity": "Specificity: 0.8230383973288815 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.823038"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.6109080479447956 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.610908",
+          "AUROC": "AUROC: 0.8972294249280717 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.897229",
+          "F1": "F1: 0.6642335766423357 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.664234",
+          "BCE": "BCE: 0.43830804080480135 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.438308",
+          "accuracy": "Accuracy: 0.8715980460572226 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.871598",
+          "precision": "",
+          "recall": "Recall: 0.774468085106383 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.774468",
+          "specificity": "Specificity: 0.8906510851419032 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.890651"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 196",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 196",
+          "from_record": true,
+          "candidate_text": "ilestone: 100% (completed) update: c722402410… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-A1E76D251134 Final global state R3: 1016af00…83a3copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 3. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "nstdb3_monitored_site",
+      "plan": {
+        "tag": "nstdb3_monitored_site",
+        "cohort": "REALISTIC_NSTDB",
+        "rounds": 3,
+        "init": "MODEL_V2_FINAL",
+        "monitoredSite": 5
+      },
+      "form": {
+        "cohort_text": "REALISTIC_NSTDB",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-04E971A15EF4",
+      "live": {
+        "badge": "SIMULATED SITE_05 · REALISTIC · RECORDED NOISE",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.921082",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3 · 1446 windows · 16 participants",
+        "start_candidate": "",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.8995840954472949 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.899584",
+          "AUROC": "AUROC: 0.9488972470908158 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.948897",
+          "F1": "F1: 0.8198198198198198 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.819820",
+          "BCE": "BCE: 0.10831956042785065 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.108320",
+          "accuracy": "Accuracy: 0.9723374827109267 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.972337",
+          "precision": "",
+          "recall": "Recall: 0.7054263565891473 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.705426",
+          "specificity": "Specificity: 0.9984813971146546 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.998481"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.9210815569221924 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.921082",
+          "AUROC": "AUROC: 0.96554890431036 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.965549",
+          "F1": "F1: 0.8907563025210085 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.890756",
+          "BCE": "BCE: 0.07807747217293663 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.078077",
+          "accuracy": "Accuracy: 0.9820193637621023 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.982019",
+          "precision": "",
+          "recall": "Recall: 0.8217054263565892 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.821705",
+          "specificity": "Specificity: 0.9977220956719818 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.997722"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE QUEUED",
+          "AUPRC": "average precision (non-interpolated) || AUPRCQUEUED",
+          "AUROC": "area under the ROC curve || AUROCQUEUED",
+          "F1": "at the fixed decision rule || F1QUEUED",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEQUEUED",
+          "accuracy": "at the fixed rule || AccuracyQUEUED",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallQUEUED",
+          "specificity": "true-negative rate at the fixed rule || SpecificityQUEUED"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 196",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 196",
+          "from_record": true,
+          "candidate_text": "ilestone: 100% (completed) update: 67cf971104… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-04E971A15EF4 Final global state R3: 2a39f196…5023copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 3. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "cand_orig10_to_nstdb3",
+      "plan": {
+        "tag": "cand_orig10_to_nstdb3",
+        "cohort": "REALISTIC_NSTDB",
+        "rounds": 3,
+        "init": "CANDIDATE",
+        "candidateFrom": "orig10_pretrained"
+      },
+      "candidate_form": {
+        "id": "FL10_CANDIDATE_FL10RUN-52698BF3139A",
+        "note": "Started from FL10_CANDIDATE_FL10RUN-52698BF3139A: a synthetic-cohort run on the original cohort. This run uses the realistic cohort with recorded noise: that is allowed, and both are recorded on the run.",
+        "init_note": "Stored engineering candidate. R0 is the final state of the candidate chosen below, unchanged; the federated rounds adapt it further. The Generalisation tab still compares every round with frozen V2 on an unseen cohort."
+      },
+      "form": {
+        "cohort_text": "REALISTIC_NSTDB",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-EC8F0D4A9DC8",
+      "live": {
+        "badge": "SYNTHETIC COHORT · REALISTIC · RECORDED NOISE",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.908087",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3 · 1446 windows · 16 participants",
+        "start_candidate": "Starting model: stored engineering candidate FL10_CANDIDATE_FL10RUN-52698BF3139A (trained on the original cohort; this run uses the realistic cohort with recorded noise). Round 0 is that candidate's final state, unchanged.",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.878953371340479 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.878953",
+          "AUROC": "AUROC: 0.9550305192091493 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.955031",
+          "F1": "F1: 0.4621212121212121 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.462121",
+          "BCE": "BCE: 0.45240581238695393 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.452406",
+          "accuracy": "Accuracy: 0.8035961272475796 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.803596",
+          "precision": "",
+          "recall": "Recall: 0.9457364341085271 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.945736",
+          "specificity": "Specificity: 0.7896735003796507 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.789674"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.9080866586012964 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.908087",
+          "AUROC": "AUROC: 0.9680033903692324 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.968003",
+          "F1": "F1: 0.8619246861924686 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.861925",
+          "BCE": "BCE: 0.09005017642061075 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.090050",
+          "accuracy": "Accuracy: 0.9771784232365145 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.977178",
+          "precision": "",
+          "recall": "Recall: 0.7984496124031008 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.798450",
+          "specificity": "Specificity: 0.9946848899012908 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.994685"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 COMPLETED",
+          "AUPRC": "AUPRC: 0.9200434499014829 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.920043",
+          "AUROC": "AUROC: 0.9727298946984279 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.972730",
+          "F1": "F1: 0.875 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.875000",
+          "BCE": "BCE: 0.07665407287345878 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.076654",
+          "accuracy": "Accuracy: 0.979253112033195 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.979253",
+          "precision": "",
+          "recall": "Recall: 0.813953488372093 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.813953",
+          "specificity": "Specificity: 0.9954441913439636 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.995444"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 196",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 196",
+          "from_record": true,
+          "candidate_text": "ilestone: 100% (completed) update: cf49794f53… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-EC8F0D4A9DC8 Final global state R3: b0a0b37f…49b0copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 3. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "cand_nstdb10_to_real3",
+      "plan": {
+        "tag": "cand_nstdb10_to_real3",
+        "cohort": "REALISTIC",
+        "rounds": 3,
+        "init": "CANDIDATE",
+        "candidateFrom": "nstdb10_pretrained"
+      },
+      "candidate_form": {
+        "id": "FL10_CANDIDATE_FL10RUN-9675ACD4AB39",
+        "note": "Started from FL10_CANDIDATE_FL10RUN-9675ACD4AB39: a synthetic-cohort run on the realistic cohort with recorded noise. This run uses the realistic cohort: that is allowed, and both are recorded on the run.",
+        "init_note": "Stored engineering candidate. R0 is the final state of the candidate chosen below, unchanged; the federated rounds adapt it further. The Generalisation tab still compares every round with frozen V2 on an unseen cohort."
+      },
+      "form": {
+        "cohort_text": "REALISTIC",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-323B1C3FE20E",
+      "live": {
+        "badge": "SYNTHETIC COHORT · REALISTIC",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.440183",
+        "metric_cohort": "WEARABLE_SIM_REALISTIC_EVAL_COHORT_V2 · 1433 windows · 16 participants",
+        "start_candidate": "Starting model: stored engineering candidate FL10_CANDIDATE_FL10RUN-9675ACD4AB39 (trained on the realistic cohort with recorded noise; this run uses the realistic cohort). Round 0 is that candidate's final state, unchanged.",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.3722258995817026 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.372226",
+          "AUROC": "AUROC: 0.8124214115724789 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.812421",
+          "F1": "F1: 0.5233082706766917 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.523308",
+          "BCE": "BCE: 1.8920433926890738 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE1.892043",
+          "accuracy": "Accuracy: 0.7787857641311933 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.778786",
+          "precision": "",
+          "recall": "Recall: 0.7404255319148936 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.740426",
+          "specificity": "Specificity: 0.7863105175292153 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.786311"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.440182860638199 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.440183",
+          "AUROC": "AUROC: 0.8530280964728448 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.853028",
+          "F1": "F1: 0.5510835913312694 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.551084",
+          "BCE": "BCE: 0.9339932404488178 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.933993",
+          "accuracy": "Accuracy: 0.7976273551988835 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.797627",
+          "precision": "",
+          "recall": "Recall: 0.7574468085106383 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.757447",
+          "specificity": "Specificity: 0.8055091819699499 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.805509"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 COMPLETED",
+          "AUPRC": "AUPRC: 0.5238373103492907 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.523837",
+          "AUROC": "AUROC: 0.8556885589457606 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.855689",
+          "F1": "F1: 0.5689277899343544 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.568928",
+          "BCE": "BCE: 0.3963560769206703 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.396356",
+          "accuracy": "Accuracy: 0.8625261688764829 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.862526",
+          "precision": "",
+          "recall": "Recall: 0.5531914893617021 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.553191",
+          "specificity": "Specificity: 0.9232053422370617 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity0.923205"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 196",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 196",
+          "from_record": true,
+          "candidate_text": "ilestone: 100% (completed) update: d26c754a96… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-323B1C3FE20E Final global state R3: 0feeb4bf…23c2copy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 3. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    },
+    {
+      "tag": "cand_research_to_orig3",
+      "plan": {
+        "tag": "cand_research_to_orig3",
+        "cohort": "ORIGINAL",
+        "rounds": 3,
+        "init": "CANDIDATE",
+        "candidateId": "RESEARCH_FL_V2_FL001_R50"
+      },
+      "candidate_form": {
+        "id": "RESEARCH_FL_V2_FL001_R50",
+        "note": "Started from RESEARCH_FL_V2_FL001_R50: an imported federated research checkpoint, trained on real MIT-BIH training patients in eight simulated sites (no synthetic cohort). This run uses the original cohort: that is allowed, and both are recorded on the run.",
+        "init_note": "Stored engineering candidate. R0 is the final state of the candidate chosen below, unchanged; the federated rounds adapt it further. The Generalisation tab still compares every round with frozen V2 on an unseen cohort."
+      },
+      "form": {
+        "cohort_text": "ORIGINAL",
+        "frozen_form_shown": false
+      },
+      "run_id": "FL10RUN-892BD89710EE",
+      "live": {
+        "badge": "SYNTHETIC COHORT",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 196 events",
+        "clients": [
+          "SIM_FL_SITE_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "metric_auprc": "AUPRC0.954931",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "start_candidate": "Starting model: stored engineering candidate RESEARCH_FL_V2_FL001_R50 (trained on real MIT-BIH training patients in eight simulated sites (no synthetic cohort); this run uses the original cohort). Round 0 is that candidate's final state, unchanged.",
+        "alerts": []
+      },
+      "ui_rounds": [
+        {
+          "button": "round-btn-R0",
+          "shown_round": "ROUND R0 COMPLETED",
+          "AUPRC": "AUPRC: 0.8651512762021522 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.865151",
+          "AUROC": "AUROC: 0.9169366808418151 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.916937",
+          "F1": "F1: 0.6795698924731183 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.679570",
+          "BCE": "BCE: 0.565179810052318 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.565180",
+          "accuracy": "Accuracy: 0.896957123098202 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.896957",
+          "precision": "",
+          "recall": "Recall: 0.5146579804560261 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.514658",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R1",
+          "shown_round": "ROUND R1 COMPLETED",
+          "AUPRC": "AUPRC: 0.9387663561684594 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.938766",
+          "AUROC": "AUROC: 0.9554669648500169 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.955467",
+          "F1": "F1: 0.7744510978043913 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.774451",
+          "BCE": "BCE: 0.40383235517597366 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.403832",
+          "accuracy": "Accuracy: 0.9218533886583679 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.921853",
+          "precision": "",
+          "recall": "Recall: 0.6319218241042345 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.631922",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R2",
+          "shown_round": "ROUND R2 COMPLETED",
+          "AUPRC": "AUPRC: 0.9549306349566915 — average precision (non-interpolated). Activate to follow this metric in the comparison. || AUPRC0.954931",
+          "AUROC": "AUROC: 0.9660168214303078 — area under the ROC curve. Activate to follow this metric in the comparison. || AUROC0.966017",
+          "F1": "F1: 0.8393194706994329 — at the fixed decision rule. Activate to follow this metric in the comparison. || F10.839319",
+          "BCE": "BCE: 0.2847437244682292 — unweighted binary cross-entropy (lower is better). Activate to follow this metric in the comparison. || BCE0.284744",
+          "accuracy": "Accuracy: 0.9412171507607192 — at the fixed rule. Activate to follow this metric in the comparison. || Accuracy0.941217",
+          "precision": "",
+          "recall": "Recall: 0.7231270358306189 — sensitivity at the fixed rule. Activate to follow this metric in the comparison. || Recall0.723127",
+          "specificity": "Specificity: 1 — true-negative rate at the fixed rule. Activate to follow this metric in the comparison. || Specificity1"
+        },
+        {
+          "button": "round-btn-R3",
+          "shown_round": "ROUND R3· FINAL CANDIDATE STATE EVALUATING",
+          "AUPRC": "average precision (non-interpolated) || AUPRCEVALUATING",
+          "AUROC": "area under the ROC curve || AUROCEVALUATING",
+          "F1": "at the fixed decision rule || F1EVALUATING",
+          "BCE": "unweighted binary cross-entropy (lower is better) || BCEEVALUATING",
+          "accuracy": "at the fixed rule || AccuracyEVALUATING",
+          "precision": "",
+          "recall": "sensitivity at the fixed rule || RecallEVALUATING",
+          "specificity": "true-negative rate at the fixed rule || SpecificityEVALUATING"
+        }
+      ],
+      "replay": {
+        "before": {
+          "scrub": "Event 1 of 196",
+          "jumps": 3,
+          "clients": 8,
+          "pending": true,
+          "label": "REPLAY — NO LOCAL TRAINING EXECUTING"
+        },
+        "after": {
+          "scrub": "Event 195 of 196",
+          "from_record": true,
+          "candidate_text": "ilestone: 100% (completed) update: 692fc49057… produced Candidate CANDIDATEFL10_CANDIDATE_FL10RUN-892BD89710EE Final global state R3: d5201eda…6dafcopy ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL Promoted: NODeployed: NORegistered in the product model registry: NOCalibration applied: NONEReleased monitoring model changed: NO The candidate is the committed output of round 3. It was not chosen by any evaluation result; its scores are exploratory measurements on a synthetic cohort. This run's journal has no candidate event: the extended engine records its candidate in the run record. It is shown here from that record at the end of the replay; nothing is created or deployed by replaying.",
+          "alerts": []
+        }
+      }
+    }
+  ],
+  "library": {
+    "cards": [
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-323B1C3FE20E",
+        "cohort": "REALISTIC"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-A1E76D251134",
+        "cohort": "REALISTIC"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-482C6A80C3D4",
+        "cohort": "REALISTIC"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-47F3BA0E8D27",
+        "cohort": "REALISTIC"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-EC8F0D4A9DC8",
+        "cohort": "REALISTIC_NSTDB"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-04E971A15EF4",
+        "cohort": "REALISTIC_NSTDB"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-9675ACD4AB39",
+        "cohort": "REALISTIC_NSTDB"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-38B95B5B0D21",
+        "cohort": "REALISTIC_NSTDB"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-6EBA8547B726",
+        "cohort": "ORIGINAL"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-52698BF3139A",
+        "cohort": "ORIGINAL"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-1EAA613B6A56",
+        "cohort": "ORIGINAL"
+      },
+      {
+        "id": "FL10_CANDIDATE_FL10RUN-588B8121476B",
+        "cohort": "ORIGINAL"
+      },
+      {
+        "id": "RESEARCH_FL_V2_FL001_R38_BEST",
+        "cohort": "REAL_ECG"
+      },
+      {
+        "id": "RESEARCH_FL_V2_FL001_R50",
+        "cohort": "REAL_ECG"
+      }
+    ],
+    "groups": 4,
+    "alerts": []
+  }
+}

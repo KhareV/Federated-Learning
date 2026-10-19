@@ -35,7 +35,7 @@ def install_hardware_routes(
     )
     if not all((uri, database, collection)):
         raise ValueError("HARDWARE_MONGO_CONFIGURATION_INCOMPLETE")
-    service = HardwareSessions(store, MongoTelemetry(uri, database, collection))
+    service = HardwareSessions(store, MongoTelemetry(uri, database, collection, demo_database=env.get("NHM_HARDWARE_DEMO_DATABASE") or None))
     service.demo_collection = env.get("NHM_HARDWARE_DEMO_COLLECTION") or None
     service.history_import = env.get("NHM_HARDWARE_HISTORY_IMPORT", "").lower() == "on"
     if env.get("NHM_HARDWARE_HISTORY_GAP_SECONDS"):

@@ -1,145 +1,41 @@
 <script lang="ts">
+	// The site's arrow cursor. It follows the mouse INSTANTLY, exactly like the system pointer: the position is written straight to the element on every
+	// pointer event (no spring, no frame throttling, no rotation or scale easing), and the arrow's tip is the hotspot.
 	import { onMount } from "svelte";
-	import { motion, useSpring } from "motion-sv";
 	import type { Snippet } from "svelte";
 
-	interface Position {
-		x: number;
-		y: number;
-	}
+	let { cursor }: { cursor?: Snippet } = $props();
 
-	interface SmoothCursorProps {
-		cursor?: Snippet;
-		springConfig?: {
-			damping: number;
-			stiffness: number;
-			mass: number;
-			restDelta: number;
-		};
-	}
+	let el = $state<HTMLDivElement>();
+	let visible = $state(false);
 
-	let {
-		cursor,
-		springConfig = {
-			damping: 45,
-			stiffness: 400,
-			mass: 1,
-			restDelta: 0.001,
-		},
-	}: SmoothCursorProps = $props();
-
-	let isMoving = $state(false);
-	let lastMousePos = $state<Position>({ x: 0, y: 0 });
-	let velocity = $state<Position>({ x: 0, y: 0 });
-	let lastUpdateTime = $state(Date.now());
-	let previousAngle = $state(0);
-	let accumulatedRotation = $state(0);
-
-	let cursorX = $derived(useSpring(0, springConfig));
-	let cursorY = $derived(useSpring(0, springConfig));
-	let rotation = $derived(
-		useSpring(0, {
-			...springConfig,
-			damping: 60,
-			stiffness: 300,
-		})
-	);
-	let scale = $derived(
-		useSpring(1, {
-			...springConfig,
-			damping: 35,
-			stiffness: 500,
-		})
-	);
+	// The default arrow is drawn 50x54 and shown at half scale about its centre, which puts its tip 25px right and ~15.75px down from the element's corner.
+	const TIP_X = 25;
+	const TIP_Y = 15.75;
 
 	onMount(() => {
-		const updateVelocity = (currentPos: Position) => {
-			const currentTime = Date.now();
-			const deltaTime = currentTime - lastUpdateTime;
-
-			if (deltaTime > 0) {
-				velocity = {
-					x: (currentPos.x - lastMousePos.x) / deltaTime,
-					y: (currentPos.y - lastMousePos.y) / deltaTime,
-				};
-			}
-
-			lastUpdateTime = currentTime;
-			lastMousePos = currentPos;
+		const place = (e: MouseEvent | PointerEvent) => {
+			if (el) el.style.transform = `translate3d(${e.clientX - TIP_X}px, ${e.clientY - TIP_Y}px, 0)`;
+			if (!visible) visible = true;
 		};
-
-		const smoothMouseMove = (e: MouseEvent) => {
-			let currentPos: Position = { x: e.clientX, y: e.clientY };
-			updateVelocity(currentPos);
-
-			const speed = Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.y, 2));
-
-			cursorX.set(currentPos.x);
-			cursorY.set(currentPos.y);
-
-			if (speed > 0.1) {
-				const currentAngle = Math.atan2(velocity.y, velocity.x) * (180 / Math.PI) + 90;
-
-				let angleDiff = currentAngle - previousAngle;
-				if (angleDiff > 180) angleDiff -= 360;
-				if (angleDiff < -180) angleDiff += 360;
-				accumulatedRotation += angleDiff;
-				rotation.set(accumulatedRotation);
-				previousAngle = currentAngle;
-
-				scale.set(0.95);
-				isMoving = true;
-
-				const timeout = setTimeout(() => {
-					scale.set(1);
-					isMoving = false;
-				}, 150);
-
-				return () => clearTimeout(timeout);
-			}
-		};
-
-		let rafId: number;
-		const throttledMouseMove = (e: MouseEvent) => {
-			if (rafId) return;
-
-			rafId = requestAnimationFrame(() => {
-				smoothMouseMove(e);
-				rafId = 0;
-			});
-		};
-
+		const leave = () => { visible = false; };
 		document.body.style.cursor = "none";
-		window.addEventListener("mousemove", throttledMouseMove);
-
+		window.addEventListener("pointermove", place, { passive: true });
+		window.addEventListener("mousemove", place, { passive: true });
+		document.documentElement.addEventListener("mouseleave", leave);
 		return () => {
-			window.removeEventListener("mousemove", throttledMouseMove);
+			window.removeEventListener("pointermove", place);
+			window.removeEventListener("mousemove", place);
+			document.documentElement.removeEventListener("mouseleave", leave);
 			document.body.style.cursor = "auto";
-			if (rafId) cancelAnimationFrame(rafId);
 		};
 	});
 </script>
 
-<motion.div
-	style={{
-		position: "fixed",
-		left: cursorX,
-		top: cursorY,
-		translateX: "-50%",
-		translateY: "-50%",
-		rotate: rotation,
-		scale: scale,
-		zIndex: 100,
-		pointerEvents: "none",
-		willChange: "transform",
-	}}
-	initial={{ scale: 0 }}
-	animate={{ scale: 1 }}
-	transition={{
-		type: "spring",
-		stiffness: 400,
-		damping: 30,
-	}}
+<div
+	bind:this={el}
+	data-testid="site-cursor"
+	style="position: fixed; left: 0; top: 0; z-index: 100; pointer-events: none; will-change: transform; opacity: {visible ? 1 : 0};"
 >
 	{#if cursor}
 		{@render cursor()}
@@ -202,4 +98,4 @@
 			</defs>
 		</svg>
 	{/if}
-</motion.div>
+</div>

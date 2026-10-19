@@ -417,6 +417,160 @@ if (MODE === 'scenario-a') {
 	};
 	out.canonical = await realisticRun('canonical');
 	out.monitored = await realisticRun('monitored', 2);
+} else if (MODE === 'recorded-noise-cohort') {
+	// The third synthetic-cohort option (realistic ECG over recorded NSTDB noise) through the real starter: three cohort buttons, an explicit choice, and a 3-round pretrained run that is described, evaluated and labelled as recorded-noise.
+	await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="cohort-realistic-nstdb"]')`, 120000);
+	await waitFor(`!!document.querySelector('[data-testid="cfg10-submit"]')`, 60000);
+	const defaults = { buttons: await ev(`[...document.querySelectorAll('[role="radiogroup"][aria-label="Synthetic cohort"] [role="radio"]')].map(b => b.getAttribute('data-testid'))`), original_checked: await attr('cohort-original', 'aria-checked'), nstdb_checked: await attr('cohort-realistic-nstdb', 'aria-checked') };
+	await clickId('cohort-realistic-nstdb');
+	const chosen = { nstdb_checked: await attr('cohort-realistic-nstdb', 'aria-checked'), realistic_checked: await attr('cohort-realistic', 'aria-checked'), note: await value('cohort-note'), fixed_cohort: await value('cfg10-cohort'), source_note: await value('cfg10-source-note') };
+	await shot('rn_form');
+	await clickId('cfg10-submit');
+	await waitFor(`location.pathname === '/app/federation/live' && /^FL10RUN-/.test(new URLSearchParams(location.search).get('run') || '')`, 120000);
+	const runId = await ev(`new URLSearchParams(location.search).get('run')`);
+	await waitFor(`(document.querySelector('[data-testid="run-status"]')?.textContent || '').includes('COMPLETED')`, 1500000);
+	await waitFor(`!!document.querySelector('[data-testid="metric-AUPRC"]') && !/NOT YET AVAILABLE|EVALUATING|QUEUED/.test(document.querySelector('[data-testid="metric-AUPRC"]').textContent)`, 600000).catch(() => {});
+	await sleep(4000);
+	const live = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+		return { badge: t('source-badge'), sentence: t('source-sentence'), status_line: t('run-status'), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map(x=>x.getAttribute('data-client')),
+		metric_auprc: t('metric-AUPRC'), metric_cohort: t('metric-cohort'), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)),
+		body_has_recorded_noise_use: /RECORDED NSTDB NOISE/.test(document.body.innerText), body_has_frozen_reuse: /REUSED SYNTHETIC DIAGNOSTIC EVALUATION/.test(document.body.innerText) }; })()`);
+	await shot('rn_live');
+	out.run = { run_id: runId, defaults, chosen, live };
+} else if (MODE === 'fl-matrix') {
+	// Every federated-run flow through the real UI in one signed-in session: 3 and 10 rounds, every cohort, untrained and pretrained starts, and runs started FROM stored candidates (one of them the imported
+	// 50-round research checkpoint). Each run is checked for labels and scoring, then opened in the Observatory event-journal replay (candidate panel included). One live run at a time.
+	const COHORT_BUTTON = { ORIGINAL: 'cohort-original', REALISTIC: 'cohort-realistic', REALISTIC_NSTDB: 'cohort-realistic-nstdb' };
+	const PLAN = [
+		{ tag: 'orig3_frozen_untrained', cohort: 'ORIGINAL', rounds: 3, init: 'FL_INIT_V2', frozenForm: true },
+		{ tag: 'orig3_pretrained', cohort: 'ORIGINAL', rounds: 3, init: 'MODEL_V2_FINAL' },
+		{ tag: 'orig10_untrained', cohort: 'ORIGINAL', rounds: 10, init: 'FL_INIT_V2' },
+		{ tag: 'orig10_pretrained', cohort: 'ORIGINAL', rounds: 10, init: 'MODEL_V2_FINAL' },
+		{ tag: 'real3_pretrained', cohort: 'REALISTIC', rounds: 3, init: 'MODEL_V2_FINAL' },
+		{ tag: 'real10_pretrained', cohort: 'REALISTIC', rounds: 10, init: 'MODEL_V2_FINAL' },
+		{ tag: 'nstdb3_pretrained', cohort: 'REALISTIC_NSTDB', rounds: 3, init: 'MODEL_V2_FINAL' },
+		{ tag: 'nstdb10_pretrained', cohort: 'REALISTIC_NSTDB', rounds: 10, init: 'MODEL_V2_FINAL' },
+		{ tag: 'orig3_monitored_site', cohort: 'ORIGINAL', rounds: 3, init: 'MODEL_V2_FINAL', monitoredSite: 1 },
+		{ tag: 'real3_monitored_site', cohort: 'REALISTIC', rounds: 3, init: 'MODEL_V2_FINAL', monitoredSite: 2 },
+		{ tag: 'nstdb3_monitored_site', cohort: 'REALISTIC_NSTDB', rounds: 3, init: 'MODEL_V2_FINAL', monitoredSite: 5 },
+		{ tag: 'cand_orig10_to_nstdb3', cohort: 'REALISTIC_NSTDB', rounds: 3, init: 'CANDIDATE', candidateFrom: 'orig10_pretrained' },
+		{ tag: 'cand_nstdb10_to_real3', cohort: 'REALISTIC', rounds: 3, init: 'CANDIDATE', candidateFrom: 'nstdb10_pretrained' },
+		{ tag: 'cand_research_to_orig3', cohort: 'ORIGINAL', rounds: 3, init: 'CANDIDATE', candidateId: 'RESEARCH_FL_V2_FL001_R50' }
+	];
+	const only = (process.env.NHM_MATRIX_ONLY || '').split(',').filter(Boolean);
+	const textOf = (id) => `(document.querySelector('[data-testid="${id}"]')?.textContent ?? '').replace(/\\s+/g,' ').trim()`;
+	const runIds = {};
+	out.steps = [];
+	for (const step of PLAN) {
+		if (only.length && !only.includes(step.tag)) continue;
+		const rec = { tag: step.tag, plan: step };
+		try {
+			await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="cohort-realistic-nstdb"]') && !!document.querySelector('[data-testid="rounds-10"]')`, 180000);
+			await waitFor(`!!document.querySelector('[data-testid="cfg10-submit"]') || !!document.querySelector('[data-testid="cfg-submit"]')`, 60000);
+			await clickId(COHORT_BUTTON[step.cohort]);
+			if (step.rounds === 10) await clickId('rounds-10'); else await clickId('rounds-3');
+			await sleep(400);
+			let candidateId = step.candidateId;
+			if (step.candidateFrom) candidateId = `FL10_CANDIDATE_${runIds[step.candidateFrom]}`;
+			if (step.init === 'CANDIDATE') {
+				// the candidate is registered once every evaluation of its source run has settled: wait for it to be offered
+				for (let i = 0; i < 120; i++) { await goto('/app/federation'); await waitFor(`!!document.querySelector('[data-testid="cfg10-init"]')`, 120000); await clickId(COHORT_BUTTON[step.cohort]); if (step.rounds === 10) await clickId('rounds-10'); await sleep(500);
+					const offered = await ev(`[...(document.querySelector('[data-testid="cfg10-init"]')?.options ?? [])].some(o => o.value === 'CANDIDATE')`);
+					if (offered) { await setSelect('[data-testid="cfg10-init"]', 'CANDIDATE'); await sleep(500); const has = await ev(`[...(document.querySelector('[data-testid="cfg10-candidate"]')?.options ?? [])].some(o => o.value === ${JSON.stringify(candidateId)})`); if (has) break; }
+					await sleep(15000); }
+				await setSelect('[data-testid="cfg10-candidate"]', candidateId); await sleep(300);
+				rec.candidate_form = { id: candidateId, note: await value('cfg10-candidate-note'), init_note: await value('cfg10-init-note') };
+			} else if (step.frozenForm) {
+				await setSelect('[data-testid="cfg10-init"]', step.init).catch(() => {}); await sleep(400);
+			} else if (step.init) { await setSelect('[data-testid="cfg10-init"]', step.init); await sleep(300); }
+			if (step.monitoredSite !== undefined) { await setSelect('[data-testid="cfg10-source"]', 'LIVE_MONITORED_SITE_00'); await waitFor(`!!document.querySelector('[data-testid="cfg10-site"]')`, 30000); await setSelect('[data-testid="cfg10-site"]', String(step.monitoredSite)); await sleep(300); }
+			rec.form = { cohort_text: await value('cfg10-cohort').catch(() => null), frozen_form_shown: !!(await ev(`!!document.querySelector('[data-testid="cfg-submit"]')`)) };
+			await shot(`mx_form_${step.tag}`);
+			await clickId(step.frozenForm ? 'cfg-submit' : 'cfg10-submit');
+			await waitFor(`location.pathname === '/app/federation/live' && /^(FL10RUN|FEDRUN)-/.test(new URLSearchParams(location.search).get('run') || '')`, 180000);
+			const runId = await ev(`new URLSearchParams(location.search).get('run')`); runIds[step.tag] = runId; rec.run_id = runId;
+			await waitFor(`(document.querySelector('[data-testid="run-status"]')?.textContent || '').includes('COMPLETED')`, 3600000);
+			await waitFor(`!!document.querySelector('[data-testid="metric-AUPRC"]') && !/NOT YET AVAILABLE|EVALUATING|QUEUED/.test(document.querySelector('[data-testid="metric-AUPRC"]').textContent)`, 1200000).catch(() => {});
+			await sleep(4000);
+			rec.live = await ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+				return { badge: t('source-badge'), status_line: t('run-status'), clients: [...document.querySelectorAll('[data-testid="client-grid"] li')].map(x=>x.getAttribute('data-client')), metric_auprc: t('metric-AUPRC'), metric_cohort: t('metric-cohort'),
+				start_candidate: t('start-candidate'), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }; })()`);
+			await shot(`mx_live_${step.tag}`);
+			// the values the page shows for EVERY round (select the round, read the metric cards): compared afterwards with the stored evaluation records
+			rec.ui_rounds = [];
+			const roundButtons = await ev(`[...document.querySelectorAll('[data-testid^="round-btn-R"]')].map(b => b.getAttribute('data-testid'))`);
+			for (const id of roundButtons) {
+				await clickId(id); await sleep(800);
+				rec.ui_rounds.push({ button: id, ...(await ev(`(() => { const t=(k)=>{ const e=document.querySelector('[data-testid="metric-'+k+'"]'); return e ? ((e.getAttribute('title')||'')+' || '+e.textContent.replace(/\\s+/g,' ').trim()) : ''; };
+					return { shown_round: (document.querySelector('[data-testid="metric-round"]')?.textContent ?? '').replace(/\\s+/g,' ').trim(), AUPRC: t('AUPRC'), AUROC: t('AUROC'), F1: t('F1'), BCE: t('BCE'), accuracy: t('accuracy'), precision: t('precision'), recall: t('recall'), specificity: t('specificity') }; })()`)) });
+			}
+			// the Observatory journal replay of this run, candidate panel included
+			await goto('/app/observatory/federation-replay');
+			const listed = await waitFor(`!!document.querySelector('.pick select') && [...document.querySelector('.pick select').options].some(o=>o.value===${JSON.stringify(runId)})`, step.frozenForm ? 60000 : 120000).then(() => true).catch(() => false);
+			if (!listed && step.frozenForm) { rec.replay = { skipped: 'the frozen product 3-round run is not a Studio run and is not listed by the Studio journal replay' }; out.steps.push(rec); writeFileSync(OUT, JSON.stringify(out, null, 1)); continue; }
+			await setSelect('.pick select', runId); await waitFor(`!!document.querySelector('[data-testid="fed-replay-controls"]')`, 180000); await sleep(1200);
+			const before = await ev(`(() => ({ scrub: (document.querySelector('.scrub')?.textContent ?? '').replace(/\\s+/g,' ').trim(), jumps: [...document.querySelectorAll('[data-testid="fed-replay-controls"] button')].filter(b => /Jump to round/.test(b.textContent)).length, clients: document.querySelectorAll('[data-testid="client-grid"] li').length, pending: !!document.querySelector('[data-testid="replay-candidate-pending"]'), label: (document.querySelector('[data-testid="replay-label"]')?.textContent ?? '') }))()`);
+			await ev(`[...document.querySelectorAll('[data-testid="fed-replay-controls"] button')].find(b => /Jump to candidate/.test(b.textContent))?.click()`); await sleep(1500);
+			const after = await ev(`(() => ({ scrub: (document.querySelector('.scrub')?.textContent ?? '').replace(/\\s+/g,' ').trim(), from_record: !!document.querySelector('[data-testid="replay-candidate-from-record"]'), candidate_text: (document.querySelector('[data-testid="fed-replay-state"]')?.textContent ?? '').replace(/\\s+/g,' ').slice(-700), alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) }))()`);
+			rec.replay = { before, after }; await shot(`mx_replay_${step.tag}`);
+		} catch (error) { rec.error = String(error && error.message || error).slice(0, 400); await shot(`mx_error_${step.tag}`).catch(() => {}); }
+		out.steps.push(rec);
+		writeFileSync(OUT, JSON.stringify(out, null, 1));
+	}
+	// the Models page lists the stored candidates of this session (and the imported research ones) in score groups
+	await goto('/app/models'); await waitFor(`!!document.querySelector('[data-testid="candidate-library"]')`, 120000); await sleep(2500);
+	out.library = await ev(`({ cards: [...document.querySelectorAll('[data-testid="library-candidates"] li[data-candidate]')].map(li => ({ id: li.getAttribute('data-candidate'), cohort: li.getAttribute('data-cohort') })), groups: document.querySelectorAll('[data-testid="library-group"]').length, alerts: [...document.querySelectorAll('[role="alert"]')].map(x=>x.textContent.trim().slice(0,160)) })`);
+	await shot('mx_models');
+} else if (MODE === 'demo-path') {
+	// The guided demonstration path through the real UI: reachable from the Overview, every step link resolves to a real page, the keyboard reaches every step link in order, and the page fits a phone width.
+	await goto('/app'); await waitFor(`!!document.querySelector('[data-testid="start-demo-path"]')`, 120000);
+	await shot('dp_overview');
+	await clickId('start-demo-path');
+	await waitFor(`location.pathname === '/app/demo' && !!document.querySelector('[data-testid="demo-steps"]')`, 60000);
+	await sleep(800);
+	out.page = await ev(`(() => ({ h1: document.querySelector('h1')?.textContent ?? '', focused_tag: document.activeElement?.tagName ?? null, steps: [...document.querySelectorAll('[data-testid="demo-steps"] li')].map(li => ({ id: li.getAttribute('data-step'), mode: li.querySelector('[data-testid="demo-mode"]')?.textContent ?? '', href: li.querySelector('a.go')?.getAttribute('href') ?? null, fields: li.querySelectorAll('dt').length })), mode_legend: document.querySelectorAll('[data-testid="demo-modes"] p').length, alerts: [...document.querySelectorAll('[role="alert"]')].map(x => x.textContent.trim().slice(0, 160)) }))()`);
+	await shot('dp_desktop');
+	// keyboard: Tab from the top and record which step links receive focus, in order
+	await ev(`(document.activeElement && document.activeElement.blur(), window.scrollTo(0, 0), true)`);
+	const reached = [];
+	for (let i = 0; i < 80; i++) {
+		await cdp.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 }); await cdp.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
+		const a = await ev(`(() => { const e = document.activeElement; return e && e.matches('[data-testid="demo-steps"] a.go') ? e.getAttribute('href') : null; })()`);
+		if (a) reached.push(a);
+	}
+	out.keyboard_reached = reached;
+	// every step link resolves to a real page (not the 404 catch-all)
+	out.targets = [];
+	for (const href of [...new Set(out.page.steps.map((x) => x.href))]) {
+		await goto(href); await sleep(2500);
+		out.targets.push(await ev(`(() => ({ asked: ${JSON.stringify(href)}, path: location.pathname, h1: document.querySelector('h1')?.textContent?.trim().slice(0, 80) ?? '', not_found: /404|page not found/i.test(document.title + ' ' + (document.querySelector('h1')?.textContent ?? '')) }))()`));
+	}
+	for (const path of ['/app/observatory/tour', '/app/observatory/storyboard']) { await goto(path); await sleep(2000); out[`banner_${path.split('/').pop()}`] = await ev(`!!document.querySelector('[data-testid="demo-path-banner"] a[href="/app/demo"]')`); }
+	// phone width: no horizontal page scroll
+	await goto('/app/demo'); await waitFor(`!!document.querySelector('[data-testid="demo-steps"]')`, 60000);
+	await cdp.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 900, deviceScaleFactor: 2, mobile: true }); await sleep(700);
+	out.phone = await ev(`({ inner: window.innerWidth, scroll: document.documentElement.scrollWidth })`);
+	await shot('dp_phone');
+	await cdp.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
+} else if (MODE === 'external-check') {
+	// The Observatory external-check page through the real UI: reachable from the Observatory, boundaries shown first, the evidence table loads from the hash-verified backend route, the set selector works, phone width fits.
+	await goto('/app/observatory'); await waitFor(`!!document.querySelector('nav.explore a[href="/app/observatory/external-check"]')`, 120000);
+	await ev(`document.querySelector('nav.explore a[href="/app/observatory/external-check"]').click()`);
+	await waitFor(`location.pathname === '/app/observatory/external-check' && !!document.querySelector('[data-testid="external-models"]')`, 120000);
+	await sleep(600);
+	const read = () => ev(`(() => { const t=(id)=>(document.querySelector('[data-testid="'+id+'"]')?.textContent ?? '').replace(/\\s+/g,' ').trim();
+		return { h1: document.querySelector('h1')?.textContent ?? '', label: t('extension-label'), boundary: t('claim-boundary'), models: [...document.querySelectorAll('[data-testid="external-models"] tbody tr')].map(r => r.getAttribute('data-model')),
+			first_row: (document.querySelector('[data-testid="external-models"] tbody tr')?.textContent ?? '').replace(/\\s+/g,' ').trim(), table_head: t('external-models').slice(0, 160), readings: t('readings'), rules: t('label-rules').slice(0, 220), errors: t('error-analysis').slice(0, 200), hashes: t('hashes'),
+			alerts: [...document.querySelectorAll('[role="alert"]')].map(x => x.textContent.trim().slice(0, 160)), body_has_removed_scope: document.body.innerText.includes("removed from the project's execution scope") }; })()`);
+	out.primary = await read();
+	await shot('ec_primary');
+	await clickId('set-1'); await sleep(500);
+	out.replication = { text: await value('external-models'), pressed: await attr('set-1', 'aria-pressed') };
+	await shot('ec_replication');
+	await cdp.send('Emulation.setDeviceMetricsOverride', { width: 390, height: 900, deviceScaleFactor: 2, mobile: true }); await sleep(700);
+	out.phone = await ev(`({ inner: window.innerWidth, scroll: document.documentElement.scrollWidth })`);
+	await shot('ec_phone');
+	await cdp.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
 } else if (MODE === 'candidate-library') {
 	// Engineering candidates are kept when a run completes, listed on the Models page, and usable as the starting model of a later run (here across cohorts), through the real UI.
 	const finishRun = async (tag) => {

@@ -52,7 +52,7 @@
 			{#if timeline}
 				<p class="dim">{timeline.label}. The recording is resampled to the model's 250 Hz window grid and scored by the unchanged released service; PPG context quality is an assumption (VALID while the device reports a pulse rate and SpO₂). Not validated on this signal chain.</p>
 				{#if nothingScored}<p class="notice" role="status" data-testid="hardware-evidence-none-scored"><b>No window reached the model.</b> 0 of {timeline.windows_total} 10 s windows were scored{timeline.windows_unusable ? ` — all ${timeline.windows_unusable} were rejected by the quality gate` : ''}{reasonList.length ? `: ${reasonList.join(' · ')}` : ''}. The model needs a dense, valid ECG stream (about 17 readings per second with the leads attached); a short, sparse or leads-off recording gives no probabilities, labels or policy states, so those rows below are empty rather than zero.</p>
-				{:else if reasonList.length}<p class="dim" data-testid="hardware-evidence-rejected">{timeline.windows_unusable} of {timeline.windows_total} windows were rejected by the quality gate: {reasonList.join(' · ')}.</p>{/if}
+				{:else if reasonList.length}<p class="dim" data-testid="hardware-evidence-rejected">{timeline.windows_unusable} of {timeline.windows_total} windows were rejected by the quality gate: {reasonList.join(' · ')}. Pretrained-V2 federated training still accepts complete windows of any grade as experimental training data; they are never counted as VALID.</p>{/if}
 				<dl class="facts" data-testid="hardware-evidence-summary">
 					<div><dt>10 s windows</dt><dd>{timeline.windows_total}</dd></div>
 					<div><dt>Scored</dt><dd>{timeline.windows_scored}</dd></div>

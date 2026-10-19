@@ -33,7 +33,10 @@ ROOT = Path(__file__).resolve().parents[1]
 ENV_ROOT = "NHM_CANDIDATE_LIBRARY_DIR"
 SCHEMA = "STUDIO_ENGINEERING_CANDIDATE_V1"
 LABEL = "ENGINEERING CANDIDATE - NOT PROMOTED - NOT CLINICAL"
-SOURCE_KINDS = ("SYNTHETIC_COHORT", "LIVE_MONITORED_SITE", "RECORDED_HARDWARE")
+RESEARCH_KIND, REAL_ECG = "RESEARCH_FEDERATED_CHECKPOINT", "REAL_ECG"
+SOURCE_KINDS = ("SYNTHETIC_COHORT", "LIVE_MONITORED_SITE", "RECORDED_HARDWARE", RESEARCH_KIND)
+COHORT_VALUES = ("ORIGINAL", "REALISTIC", "REALISTIC_NSTDB", REAL_ECG)         # REAL_ECG: no synthetic cohort at all; the model was federated on real MIT-BIH training patients (only the imported research checkpoints)
+REAL_ECG_LABEL = "Real MIT-BIH training patients in 8 simulated sites (no synthetic cohort)"
 METRIC_KEYS = ("AUPRC", "AUROC", "F1", "accuracy", "precision", "recall", "specificity", "BCE", "Brier", "windows")
 
 
@@ -78,10 +81,21 @@ def verify_layout(state: dict[str, np.ndarray]) -> None:
         raise CandidateError("STATE_ROUND_TRIP_DIGEST_MISMATCH")
 
 
+def cohort_label(cohort: str) -> str:
+    """The human label of a candidate's training cohort (the two synthetic cohorts by their registered label, imported research checkpoints by what they really were trained on)."""
+    if cohort == REAL_ECG:
+        return REAL_ECG_LABEL
+    from studio import cohorts
+
+    return cohorts.spec(cohort).label
+
+
 def audit_of(entry: dict[str, Any]) -> dict[str, Any]:
     """The base-model description of a run that starts from this candidate (also usable before the state is loaded)."""
     return {"model_id": entry["candidate_id"], "kind": "CANDIDATE", "family": "V2", "architecture_id": "V2_FL_MODEL_LAYOUT", "state_sha256": entry["state_sha256"],
-            "label": f"Engineering candidate {entry['candidate_id']} (federated, {entry['cohort']} synthetic cohort)", "training_target_of_checkpoint": "SYNTHETIC ENGINEERING EVENTS (federated engineering candidate)",
+            "label": (f"Engineering candidate {entry['candidate_id']} (imported federated research checkpoint, real MIT-BIH training patients)" if entry["cohort"] == REAL_ECG
+                      else f"Engineering candidate {entry['candidate_id']} (federated, {entry['cohort']} synthetic cohort)"),
+            "training_target_of_checkpoint": ("REAL MIT-BIH AAMI_SVF_WINDOW_V1 (federated, 8 simulated whole-patient sites)" if entry["cohort"] == REAL_ECG else "SYNTHETIC ENGINEERING EVENTS (federated engineering candidate)"),
             "parent_model_id": (entry.get("base_model") or {}).get("model_id"), "source_run_id": entry["source_run_id"], "source_kind": entry["source_kind"], "candidate_cohort": entry["cohort"], "candidate_run_length": entry["run_length"]}
 
 
@@ -101,6 +115,10 @@ class CandidateLibrary:
         """Store the final state of a completed run. Idempotent: registering the same candidate again returns the stored entry, and a different state under the same id is refused."""
         if source_kind not in SOURCE_KINDS:
             raise CandidateError("UNKNOWN_SOURCE_KIND", source_kind)
+        if cohort not in COHORT_VALUES:
+            raise CandidateError("UNKNOWN_COHORT", cohort)
+        if (source_kind == RESEARCH_KIND) != (cohort == REAL_ECG):      # the real-ECG cohort and the research-checkpoint kind only ever occur together
+            raise CandidateError("COHORT_AND_SOURCE_KIND_INCONSISTENT", f"{cohort}/{source_kind}")
         verify_layout(state)
         digest = state_sha(OrderedDict(state))
         directory = self._dir(owner, candidate_id)

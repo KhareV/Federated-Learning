@@ -138,3 +138,69 @@ describe('wording of a pretrained-V2 recorded-hardware run follows its cohort', 
 		expect(t.metricsNote).not.toContain('frozen');
 	});
 });
+
+// ---- the recorded-noise realistic cohort (REALISTIC_NSTDB) ---------------------------------------------------------------------------------------------------------------------------------------------------
+const NSTDB = { id: 'REALISTIC_NSTDB' as const, label: 'Realistic cohort with recorded noise (NSTDB)', description: 'The realistic cohort\'s rhythm and annotation-noisy labels with recorded MIT-BIH Noise Stress Test noise at NSTDB SNR levels instead of invented artifacts.', client_ids: ['SIM_FL_SITE_00'], evaluation_cohort_id: 'WEARABLE_SIM_REALISTIC_EVAL_COHORT_V3', cohort_use: 'REALISTIC SYNTHETIC EVALUATION COHORT WITH RECORDED NSTDB NOISE', claim_boundary: 'c', default: false };
+const CAPS3: StudioCapabilities = { ...CAPS, ten_round: { ...CAPS.ten_round, cohorts: [...COHORTS, NSTDB] } };
+
+describe('the recorded-noise realistic cohort option', () => {
+	it('is offered as a third choice when the backend advertises it, and the other two keep their test ids and meaning', async () => {
+		mount(CAPS3);
+		expect(['cohort-original', 'cohort-realistic', 'cohort-realistic-nstdb'].map((id) => screen.getByTestId(id).getAttribute('aria-checked'))).toEqual(['true', 'false', 'false']);
+		expect(screen.getByTestId('cohort-realistic-nstdb').textContent).toContain('RECORDED NOISE');
+		const two = mount(CAPS);                                                           // a backend that does not advertise it shows no third button
+		expect(screen.getAllByTestId('cohort-realistic-nstdb').length).toBe(1);             // (still the one from the first mount: the second render adds none)
+		two.onStartTen.mockClear();
+	});
+	it('travels in the request, is named in the note and the fixed configuration, and the source note never calls its clients frozen', async () => {
+		const { onStartTen } = mount(CAPS3);
+		await fireEvent.click(screen.getByTestId('cohort-realistic-nstdb'));
+		expect(screen.getByTestId('cohort-realistic-nstdb').getAttribute('aria-checked')).toBe('true');
+		expect(screen.getByTestId('cohort-realistic').getAttribute('aria-checked')).toBe('false');
+		expect(screen.getByTestId('cohort-note').textContent).toContain('recorded MIT-BIH Noise Stress Test noise');
+		expect(screen.getByTestId('cfg10-cohort').textContent).toBe('REALISTIC_NSTDB');
+		expect(screen.getByTestId('cfg10-source-note').textContent).toContain('recorded noise');
+		expect(screen.getByTestId('cfg10-source-note').textContent).not.toContain('frozen');
+		await fireEvent.click(screen.getByTestId('cfg10-submit'));
+		expect(onStartTen).toHaveBeenLastCalledWith({ run_length: 3, source_mode: 'CANONICAL_SYNTHETIC', initialisation: 'MODEL_V2_FINAL', cohort: 'REALISTIC_NSTDB' });
+		await fireEvent.click(screen.getByTestId('cohort-original'));                        // choosing the original again removes the cohort from the request
+		await fireEvent.click(screen.getByTestId('cfg10-submit'));
+		expect(onStartTen.mock.lastCall?.[0]).not.toHaveProperty('cohort');
+	});
+	it('3 untrained rounds still need the original cohort (the frozen product contract)', async () => {
+		mount(CAPS3);
+		await fireEvent.click(screen.getByTestId('cohort-realistic-nstdb'));
+		await fireEvent.change(screen.getByTestId('cfg10-init'), { target: { value: 'FL_INIT_V2' } });
+		expect(screen.getByTestId('cohort-needs-v2').textContent).toContain('original cohort only');
+		expect((screen.getByTestId('cfg10-submit') as HTMLButtonElement).disabled).toBe(true);
+	});
+	it('is parsed as an advertised cohort, as a run cohort and as a candidate cohort; an unknown one is still refused', () => {
+		const caps = JSON.parse(JSON.stringify(CAPS3));
+		expect(parseCapabilities(caps).ten_round.cohorts?.map((c) => c.id)).toEqual(['ORIGINAL', 'REALISTIC', 'REALISTIC_NSTDB']);
+		expect(parseStudioRun({ ...run(), cohort: 'REALISTIC_NSTDB', cohort_label: NSTDB.label }).cohort).toBe('REALISTIC_NSTDB');
+		caps.ten_round.cohorts[2].id = 'EXOTIC';
+		expect(() => parseCapabilities(caps)).toThrow();
+	});
+	it('the run context names it in the badge and the data sentence (recorded noise, still no real physiology)', () => {
+		const c = runContext(run({ cohort: 'REALISTIC_NSTDB' }));
+		expect(c.cohort).toBe('REALISTIC_NSTDB');
+		expect(c.badge).toContain('RECORDED NOISE');
+		expect(c.dataSentence).toContain('RECORDED noise');
+		expect(c.dataSentence).toContain('no real physiology');
+		expect(c.dataSentence).not.toContain('Synthetic engineering data on eight logical clients');
+		expect(runContext(run({ cohort: 'REALISTIC' })).dataSentence).not.toContain('RECORDED noise');         // the invented-noise cohort keeps its own wording
+	});
+	it('a hardware run on it names its peers and its holdout as recorded-noise realistic, never canonical or frozen', () => {
+		const t = hardwareV2Texts('REALISTIC_NSTDB');
+		expect(t.peers).toContain('recorded-noise');
+		expect(t.peers).not.toContain('canonical');
+		expect(t.metricsNote).toContain('recorded noise');
+		expect(t.metricsNote).not.toContain('frozen');
+	});
+	it('its cohort id reaches the backend in the POST body', async () => {
+		const sent: Record<string, unknown>[] = [];
+		const client = createProductClient({ fetchImpl: (async (_url: string, init: RequestInit) => { sent.push(JSON.parse(String(init.body))); return new Response('{}', { status: 200 }); }) as never });
+		await client.studioStartTenRound({ run_length: 10, source_mode: 'CANONICAL_SYNTHETIC', initialisation: 'MODEL_V2_FINAL', cohort: 'REALISTIC_NSTDB' }).catch(() => undefined);
+		expect(sent[0].cohort).toBe('REALISTIC_NSTDB');
+	});
+});

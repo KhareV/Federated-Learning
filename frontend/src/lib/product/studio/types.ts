@@ -8,15 +8,17 @@ export type SourceMode = 'CANONICAL_SYNTHETIC' | 'LIVE_MONITORED_SITE_00';
 export type Initialisation = 'FL_INIT_V2' | 'MODEL_V2_FINAL' | 'CANDIDATE';
 export type BaseModelId = 'FL_INIT_V2' | 'MODEL_V2_FINAL' | 'HARDWARE_DEMO_MODEL_V1';
 export type RunSourceMode = SourceMode | 'RECORDED_HARDWARE';
-export interface BaseModel { /** A known base model, or (kind CANDIDATE) the id of the stored engineering candidate the run started from. */ model_id: BaseModelId | string; kind?: 'CANDIDATE' | null; candidate_cohort?: CohortId | null; source_run_id?: string | null; parent_model_id?: string | null; initialisation?: 'FRESH_SEEDED' | 'WARM_START' | null; label: string; state_sha256?: string | null; checkpoint_sha256?: string | null; state_entries?: number | null; architecture_id?: string | null; training_target_of_checkpoint?: string | null }
+export interface BaseModel { /** A known base model, or (kind CANDIDATE) the id of the stored engineering candidate the run started from. */ model_id: BaseModelId | string; kind?: 'CANDIDATE' | null; candidate_cohort?: CandidateCohort | null; source_run_id?: string | null; parent_model_id?: string | null; initialisation?: 'FRESH_SEEDED' | 'WARM_START' | null; label: string; state_sha256?: string | null; checkpoint_sha256?: string | null; state_entries?: number | null; architecture_id?: string | null; training_target_of_checkpoint?: string | null }
 export type ExportStatus = 'NOT_STARTED' | 'PREPARING' | 'READY' | 'FAILED';
 
-export type CohortId = 'ORIGINAL' | 'REALISTIC';
+export type CohortId = 'ORIGINAL' | 'REALISTIC' | 'REALISTIC_NSTDB';
+/** The cohort a stored candidate was trained on: one of the two synthetic cohorts, or REAL_ECG for an imported research checkpoint (real MIT-BIH training patients, no synthetic cohort). */
+export type CandidateCohort = CohortId | 'REAL_ECG';
 export interface CohortOption { id: CohortId; label: string; description: string; client_ids: string[]; evaluation_cohort_id: string; cohort_use: string; claim_boundary: string; default: boolean }
 
 export interface StudioCandidate {
-	schema_version: string; candidate_id: string; label: string; created_at: string; source_run_id: string; source_kind: 'SYNTHETIC_COHORT' | 'LIVE_MONITORED_SITE' | 'RECORDED_HARDWARE'; source_detail: Record<string, unknown>;
-	cohort: CohortId; cohort_label: string; evaluation_cohort_id: string | null; run_length: number; round_id: number; algorithm: string; secagg_mode: string; base_model: Record<string, unknown>; state_sha256: string;
+	schema_version: string; candidate_id: string; label: string; created_at: string; source_run_id: string; source_kind: 'SYNTHETIC_COHORT' | 'LIVE_MONITORED_SITE' | 'RECORDED_HARDWARE' | 'RESEARCH_FEDERATED_CHECKPOINT'; source_detail: Record<string, unknown>;
+	cohort: CandidateCohort; cohort_label: string; evaluation_cohort_id: string | null; run_length: number; round_id: number; algorithm: string; secagg_mode: string; base_model: Record<string, unknown>; state_sha256: string;
 	metrics: Record<string, number> | null; promoted: false; deployed: false; registered_in_product_registry: false; used_for_monitoring: false;
 }
 
@@ -39,6 +41,9 @@ export interface HardwareDemoChoice { session_ids: string[]; run_length: 3 | 10;
 
 export interface EvaluationAvailability { available: boolean; source: 'LIVE' | 'RECORDED' | 'RECORDED_FROM_SOURCE_RUN'; evaluation_run_id: string; reason: string | null; revision: number }
 
+/** What YOUR recording contributed to a pretrained-V2 hardware run: genuinely VALID windows versus lower-quality windows accepted for experimental training. recorded=false: an older run whose per-window grades were not kept (the numbers are then null, never invented). */
+export interface RecordedQuality { recorded: boolean; windows: number; VALID: number | null; DEGRADED: number | null; UNUSABLE: number | null; accepted_below_valid: number | null }
+
 export interface StudioRun {
 	run_id: string;
 	run_length: RunLength;
@@ -55,6 +60,7 @@ export interface StudioRun {
 	/** Which synthetic cohort the run chose (absent on older runs = ORIGINAL, the frozen cohort). */
 	cohort?: CohortId;
 	cohort_label?: string;
+	recorded_quality?: RecordedQuality | null;
 	status: 'CREATED' | 'RUNNING' | 'COMPLETED' | 'FAILED';
 	phase: string;
 	current_round: number;
@@ -195,4 +201,4 @@ export interface GenParticipants { run_id: string; round_id: number; available: 
 
 export interface HardwareStartingModel { id: 'FRESH_SEEDED' | 'WARM_START' | 'MODEL_V2_FINAL' | 'CANDIDATE'; label: string; available: boolean; reason: string | null; note?: string | null }
 /** What a pretrained-V2 run could use from the chosen recorded sessions (resample + the unchanged PREPROC_V1 quality gate). */
-export interface HardwareV2Preview { sessions: { session_id: string; readings: number; windows: number; usable: number; train: number; holdout: number; by_quality: Record<string, number>; excluded_reasons: Record<string, number> }[]; train_windows: number; holdout_windows: number; min_train_windows: number; min_holdout_windows: number; eligible: boolean; reason: string | null; assumptions: Record<string, unknown> }
+export interface HardwareV2Preview { sessions: { session_id: string; readings: number; windows: number; /** complete windows (every one trains, whatever its grade) */ usable: number; /** of those, graded VALID */ valid: number; /** of those, accepted below VALID (DEGRADED or UNUSABLE) for experimental training */ below_valid: number; train: number; train_valid: number; train_below_valid: number; holdout: number; holdout_valid: number; holdout_below_valid: number; by_quality: Record<string, number>; excluded_reasons: Record<string, number> }[]; valid_windows: number; below_valid_windows: number; train_below_valid: number; holdout_below_valid: number; train_windows: number; holdout_windows: number; min_train_windows: number; min_holdout_windows: number; eligible: boolean; reason: string | null; assumptions: Record<string, unknown> }

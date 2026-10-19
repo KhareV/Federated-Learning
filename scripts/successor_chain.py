@@ -90,6 +90,9 @@ LINKS: tuple[Link, ...] = (
     Link("NHM_CANDIDATE_LIBRARY_001", "artifacts/ui/NHM_CANDIDATE_LIBRARY_001.lock.json", "artifacts/ui/NHM_REALISTIC_COHORT_001.lock.json",
          "predecessor_lock_sha256", "predecessor_commit", "979efee79349784f97017d2bfc4f0b1211016cb9", "frontend_files",
          ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "historical_locks_edited", "automatically_pushed", "frozen_scientific_evidence_edited")),
+    Link("NHM_STATE_CONSISTENCY_AND_DEMO_OPS_001", "artifacts/ui/NHM_STATE_CONSISTENCY_AND_DEMO_OPS_001.lock.json", "artifacts/ui/NHM_CANDIDATE_LIBRARY_001.lock.json",
+         "predecessor_lock_sha256", "predecessor_commit", "5f375af26f4a85cd48f324c83d21cf4f3af94e6b", "frontend_files",
+         ("released_model_changed", "calibration_applied_to_candidate", "candidate_promoted_or_deployed", "historical_locks_edited", "automatically_pushed", "frozen_scientific_evidence_edited")),
 )
 
 

@@ -1,0 +1,41 @@
+{
+  "mode": "external-check",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "primary": {
+    "h1": "External check on real ECG no model had seen",
+    "label": "FROZEN EXTENSION EVIDENCE · REAL UNSEEN ECG · RECORD-LEVEL TARGET · NOT AAMI-SVF · NOT CLINICAL",
+    "boundary": "Extension outside the locked AAMI_SVF_WINDOW_V1 scope: the dataset has no beat annotations, so the target is record-level (a cardiologist statement or an extra-beat field says the record contains premature beats). No model was trained, selected, calibrated or evaluated on this dataset before; fixed 0.5 rule, no calibration; no clinical, diagnostic or device claim.",
+    "models": [
+      "MODEL_V1 (central, frozen)",
+      "MODEL_V2_FINAL (central)",
+      "V2-FL-001 round 50 (federated)",
+      "V2-FL-001 round 38 (best-validation)",
+      "central V2 + 10 rounds on the original synthetic cohort",
+      "central V2 + 10 rounds on the realistic synthetic cohort"
+    ],
+    "first_row": "MODEL_V1 (central, frozen)0.701 [0.674, 0.729]0.313 [0.270, 0.358]2.850.3240.530.79−0.210 [-0.237, -0.184] · −0.389 [-0.432, -0.347]",
+    "table_head": "Models on primary (folds 9-10) 4,336 records, 476 with premature beats (prevalence 0.110), 3,809 patients; 95 % patient-cluster bootstrap intervals from 2,000 r",
+    "readings": "What this showsThe pretrained V2 ranks premature-beat records well above chance on data it never saw (AUROC 0.911, lift 6.4), and clearly better than V1 (V1's paired AUROC change against it is −0.210, interval [-0.237, -0.184], which excludes zero). Adapting a model to a synthetic cohort lowers its performance on this unseen real ECG: original cohort AUROC −0.036, AUPRC −0.169 against the central V2; realistic cohort AUROC −0.046, AUPRC −0.229 against the central V2. A synthetic-cohort candidate is not a better ECG model than the released one. Federated training on real patients matches centralized training in AUROC; see the paired change of the 50-round federated rows.",
+    "rules": "Label rules (primary set) The two label sources agree on only part of the premature-beat records (1,052 both, 472 cardiologist statement only, 902 extra-beat field only, over all records), so the same models are scored u",
+    "errors": "Where the central V2 errs (descriptive, primary set, rule A) GroupRecordsFlagged at 0.5negatives3,86015 %negatives NORM+SR1,5733 %negatives with AFIB23674 %negatives with baseline_drift40514 %negative",
+    "hashes": "Frozen report reports/ptbxl/external_check_v1.json SHA-256 fbcb850a06697f29… · predeclared protocol docs/ptbxl/PTBXL_EXTERNAL_CHECK_V1.md SHA-256 a4bf4af176e6ff32… (verified: the protocol was written before any score existed and is unchanged). Scientific outcomes · Observatory · Models",
+    "alerts": [],
+    "body_has_removed_scope": true
+  },
+  "replication": {
+    "text": "Models on replication (folds 1-8) 17,199 records, 1,893 with premature beats (prevalence 0.110), 14,861 patients; 95 % patient-cluster bootstrap intervals from 2,000 resamples. Label rule A (either label source). AUPRC depends on prevalence, so lift (AUPRC ÷ prevalence; 1 = chance) is shown beside it. ModelAUROC [95 %]AUPRC [95 %]LiftF1 at 0.5SensitivitySpecificityPaired change vs central V2: AUROC · AUPRCMODEL_V1 (central, frozen)0.679 [0.663, 0.693]0.310 [0.285, 0.335]2.820.3010.490.78−0.217 [-0.231, -0.203] · −0.364 [-0.389, -0.339]MODEL_V2_FINAL (central)0.896 [0.886, 0.904]0.674 [0.651, 0.697]6.130.5270.810.84referenceV2-FL-001 round 50 (federated)0.897 [0.888, 0.907]0.703 [0.682, 0.724]6.380.6340.690.94+0.002 [-0.004, 0.008] · +0.028 [0.015, 0.042]V2-FL-001 round 38 (best-validation)0.899 [0.890, 0.908]0.697 [0.676, 0.719]6.330.6330.700.94+0.003 [-0.002, 0.009] · +0.023 [0.010, 0.036]central V2 + 10 rounds on the original synthetic cohort0.863 [0.853, 0.872]0.540 [0.515, 0.566]4.910.2770.950.39−0.033 [-0.039, -0.026] · −0.134 [-0.152, -0.117]central V2 + 10 rounds on the realistic synthetic cohort0.855 [0.846, 0.864]0.438 [0.414, 0.463]3.980.4820.730.84−0.041 [-0.047, -0.034] · −0.236 [-0.257, -0.215]",
+    "pressed": "true"
+  },
+  "phone": {
+    "inner": 390,
+    "scroll": 390
+  }
+}

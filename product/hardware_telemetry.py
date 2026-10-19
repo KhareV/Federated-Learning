@@ -70,7 +70,7 @@ def split_sessions(samples: list[dict[str, Any]], gap_seconds: float) -> list[li
 
 
 class MongoTelemetry:
-    def __init__(self, uri: str, database: str, collection: str):
+    def __init__(self, uri: str, database: str, collection: str, demo_database: str | None = None):
         self.client = MongoClient(
             uri,
             serverSelectionTimeoutMS=3000,
@@ -80,6 +80,9 @@ class MongoTelemetry:
             tz_aware=True,
         )
         self.database = self.client[database]
+        # Generated demonstration collections may live in their own database (NHM_HARDWARE_DEMO_DATABASE) so that real device telemetry and generated data never share one; unset = the same database as before.
+        self.demo_database_name = demo_database or None
+        self.demo_database = self.client[demo_database] if demo_database else self.database
         self.daily = collection == "records_*" or bool(DAILY_COLLECTION.fullmatch(collection))
         self.collection_name = "records_*" if self.daily else collection
         self._names: list[str] = []
@@ -135,9 +138,22 @@ class MongoTelemetry:
             doc["_nhm_collection"] = name
         return docs
 
+    def read_demo_collection(self, name: str) -> list[dict[str, Any]]:
+        """A prerecorded demonstration collection, read from the demo database when one is configured (else the main database). Never used for live monitoring or History import."""
+        docs = list(self.demo_database[name].find({}).sort("_id", 1))
+        for doc in docs:
+            doc["_nhm_collection"] = name
+        return docs
+
+    def seed_demo_if_missing(self, name: str, make_documents: Any) -> int:
+        return self._seed(self.demo_database[name], make_documents)
+
     def seed_if_missing(self, name: str, make_documents: Any) -> int:
         """Create a named collection from ``make_documents()`` only when it holds nothing yet. Never drops or overwrites; returns the number of documents written."""
-        collection = self.database[name]
+        return self._seed(self.database[name], make_documents)
+
+    @staticmethod
+    def _seed(collection: Any, make_documents: Any) -> int:
         if collection.find_one({}, {"_id": 1}) is not None:
             return 0
         docs = make_documents()
@@ -365,7 +381,8 @@ class HardwareSessions:
             if name not in SHOWCASES:
                 continue
             try:
-                written += self.source.seed_if_missing(name, lambda name=name: documents_for(name))
+                seeder = getattr(self.source, "seed_demo_if_missing", None) or self.source.seed_if_missing
+                written += seeder(name, lambda name=name: documents_for(name))
             except PyMongoError:
                 continue
         return written
@@ -383,7 +400,8 @@ class HardwareSessions:
                     if self.store._connection.execute("SELECT 1 FROM hardware_sessions WHERE id=?", (sid,)).fetchone():
                         continue
                 try:
-                    samples = [x for doc in self.source.read_collection(name) if (x := clean_document(doc))]
+                    reader = getattr(self.source, "read_demo_collection", None) or self.source.read_collection        # the demo database when the source has one; a plain source keeps its single read
+                    samples = [x for doc in reader(name) if (x := clean_document(doc))]
                 except PyMongoError:
                     continue
                 if not samples:

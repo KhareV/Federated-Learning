@@ -1,0 +1,211 @@
+{
+  "mode": "scenario-a",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "tag": "NHM-BROWSER-A-1792372426589",
+  "session_id": "HW-ed70d37ffdb64654ace86d7a1536778a",
+  "waiting": {
+    "state": "WAITING FOR DATA",
+    "count": 0,
+    "bpm": "Unavailable",
+    "spo2": "Unavailable",
+    "points": 0,
+    "paths": 0,
+    "latest_id": null,
+    "latest_ecg": null,
+    "latest_x": null,
+    "latest_y": null,
+    "expected_y": null
+  },
+  "live": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 31,
+    "bpm": "73",
+    "spo2": "97%",
+    "points": 31,
+    "paths": 1,
+    "latest_id": "6ad56eda820f4a5051757e1f",
+    "latest_ecg": 2085,
+    "latest_x": 1000,
+    "latest_y": 93.62637362637363,
+    "expected_y": 93.62637362637363
+  },
+  "stale": {
+    "state": "STALE DATA",
+    "count": 420,
+    "bpm": "69",
+    "spo2": "97%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad56ef1820f4a5051757fa4",
+    "latest_ecg": 2253,
+    "latest_x": 1000,
+    "latest_y": 87.47252747252746,
+    "expected_y": 87.47252747252746
+  },
+  "recovered": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 422,
+    "bpm": "69",
+    "spo2": "97%",
+    "points": 300,
+    "paths": 2,
+    "latest_id": "6ad56ef8820f4a5051757fa6",
+    "latest_ecg": 2114,
+    "latest_x": 1000,
+    "latest_y": 92.56410256410255,
+    "expected_y": 92.56410256410255
+  },
+  "before_stop": {
+    "state": "LIVE DATA RECEIVED",
+    "count": 1005,
+    "bpm": "67",
+    "spo2": "96%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad56f1b820f4a50517581ed",
+    "latest_ecg": 2042,
+    "latest_x": 1000,
+    "latest_y": 95.2014652014652,
+    "expected_y": 95.2014652014652
+  },
+  "stopped": {
+    "state": "SESSION STOPPED",
+    "count": 1005,
+    "bpm": "67",
+    "spo2": "96%",
+    "points": 300,
+    "paths": 1,
+    "latest_id": "6ad56f1b820f4a50517581ed",
+    "latest_ecg": 2042,
+    "latest_x": 1000,
+    "latest_y": 95.2014652014652,
+    "expected_y": 95.2014652014652
+  },
+  "history_visible": true,
+  "demo_fl": {
+    "fedavg": {
+      "run_id": "HDFLRUN-84A200A2A4D5",
+      "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 197 events",
+      "banner": "ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED",
+      "chips": [
+        "Round 3 of 3",
+        "FedAvg",
+        "8 logical clients · your recorded windows",
+        "one demonstration machine",
+        "stream: CLOSED_NORMAL"
+      ],
+      "client_cards": 8,
+      "card_tags": 8,
+      "hw_participation": "YOUR RECORDED DATA IN THIS RUN 48 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and ass",
+      "hw_total_windows": "48",
+      "hw_raw_sent": "0",
+      "metric_auprc": "AUPRC0.608466",
+      "metric_accuracy": "Accuracy0.500000",
+      "metric_bce": "BCE0.736954",
+      "metric_status": "COMPLETED",
+      "evaluated_graph_points": 23,
+      "figure_avail": [
+        "PARTIAL",
+        "PARTIAL",
+        "PARTIAL",
+        "PENDING",
+        "AVAILABLE",
+        "PENDING"
+      ],
+      "final_state": "Latest committed global state: 4c6e5519…1076copy",
+      "accepted_counter": "24/24",
+      "alerts": [],
+      "run_label_text": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+      "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+      "init_options": [
+        {
+          "value": "CANDIDATE",
+          "label": "Stored engineering candidate (from your candidate library)",
+          "disabled": false
+        },
+        {
+          "value": "MODEL_V2_FINAL",
+          "label": "Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning",
+          "disabled": false
+        },
+        {
+          "value": "FRESH_SEEDED",
+          "label": "Fresh initialisation (seeded, untrained)",
+          "disabled": false
+        },
+        {
+          "value": "WARM_START",
+          "label": "Pretrained: warm start from an earlier recorded-hardware run",
+          "disabled": false
+        }
+      ],
+      "v2_note": ""
+    },
+    "fedprox": {
+      "run_id": "HDFLRUN-EB8539B59BB3",
+      "status_line": "COMPLETED · LIVE_RUN · FEDPROX · round 3/3 · 197 events",
+      "banner": "ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED",
+      "chips": [
+        "Round 3 of 3",
+        "FedProx",
+        "8 logical clients · your recorded windows",
+        "one demonstration machine",
+        "stream: CLOSED_NORMAL"
+      ],
+      "client_cards": 8,
+      "card_tags": 8,
+      "hw_participation": "YOUR RECORDED DATA IN THIS RUN 48 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and ass",
+      "hw_total_windows": "48",
+      "hw_raw_sent": "0",
+      "metric_auprc": "AUPRC0.608466",
+      "metric_accuracy": "Accuracy0.500000",
+      "metric_bce": "BCE0.736933",
+      "metric_status": "COMPLETED",
+      "evaluated_graph_points": 23,
+      "figure_avail": [
+        "PARTIAL",
+        "PARTIAL",
+        "PARTIAL",
+        "PENDING",
+        "AVAILABLE",
+        "PENDING"
+      ],
+      "final_state": "Latest committed global state: ad16687e…5475copy",
+      "accepted_counter": "24/24",
+      "alerts": [],
+      "run_label_text": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+      "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+      "init_options": [
+        {
+          "value": "CANDIDATE",
+          "label": "Stored engineering candidate (from your candidate library)",
+          "disabled": false
+        },
+        {
+          "value": "MODEL_V2_FINAL",
+          "label": "Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning",
+          "disabled": false
+        },
+        {
+          "value": "FRESH_SEEDED",
+          "label": "Fresh initialisation (seeded, untrained)",
+          "disabled": false
+        },
+        {
+          "value": "WARM_START",
+          "label": "Pretrained: warm start from an earlier recorded-hardware run",
+          "disabled": false
+        }
+      ],
+      "v2_note": ""
+    }
+  }
+}

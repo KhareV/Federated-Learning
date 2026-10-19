@@ -1,0 +1,246 @@
+{
+  "mode": "demo-session",
+  "signin": {
+    "signed_in": true,
+    "clerk_test": true,
+    "client_trust_code_used": true
+  },
+  "real_browser": true,
+  "real_clerk": true,
+  "actual_atlas": true,
+  "synthetic_source": true,
+  "session_id": "HW-SHOWCASE-2026-10-17-02-7f744f03",
+  "history_row": "HW-SHOWCASE-2026-10-17-02-7f744f03SAVED8024 readings7 m 60 s · 16.7 msg/sECG 1275–2443device BPM 76.417/10/202617:30:00ESP32 · UNVERIFIEDVIEW EVIDENCEUSE IN FL →REPLAY →",
+  "history_links": {
+    "replay": "/app/observatory/replay?session=HW-SHOWCASE-2026-10-17-02-7f744f03",
+    "trace": "/app/observatory?hw=HW-SHOWCASE-2026-10-17-02-7f744f03",
+    "page_text": "Skip to content N NHM Overview Device Monitor History Observatory Federation Models Research System About SIMULATED MODEL / HARDWARE TELEMETRY RESEARCH / NOT DIAGNOSTIC CLERK user_3KhjxqrP8WVKzjFI4SFOX4J8uIy Sign out HISTORY / SESSION EVIDENCE Session evidence 01 / HARDWARE TELEMETRY HW-SHOWCASE-2026-10-17-02-7f744f03 STOPPED PRESET DEMO SESSION (generated in the ESP32 sketch's document format; not a live device recording) · demo_prerecorded_hardware_session_long_v1 Started 17/10/2026, 17:30:00 · Stopped 17/10/2026, 17:38:00 · 8024 actual accepted records Stored trace: last 12000 readings maximum. Timestamp is server ingestion time. The stored trace itself is raw telemetry; the experimental model output on its resampled windows is shown below, and nothing here is a clinical classification. 8024 saved points · exact ADC values · no interpolation or resampling. READINGS 8024 STORED 8024 EC"
+  },
+  "evidence": {
+    "summary": "10 s windows93 Scored79 Rejected by the quality gate14 Raw probability min / mean / max0.00 / 0.28 / 0.95 Device BPM min / mean / max72.00 / 76.43 / 81.00 Device SpO₂ min / mean / max95.00 / 96.28 / 98.00 %",
+    "states": [
+      "NORMAL_MONITORED_PATTERN: 79"
+    ],
+    "rows": 79,
+    "events": 229,
+    "alerts": []
+  },
+  "replay": {
+    "tag": "RECORDED HARDWARE · RESAMPLED · EXPERIMENTAL · NOT VALID · NOT DIAGNOSTIC",
+    "summary": "93 windows emitted · 14 rejected by the quality gate (no model result, none invented) · 79 scored. EXPERIMENTAL · RESAMPLED FROM LOW-RATE MONGODB TELEMETRY · NOT VALID · NOT DIAGNOSTIC",
+    "has_controls": true,
+    "state": "At source time 0.0 s QUALITY (signal usability)not yet recordedAn engineering gate, not a diagnosis. MODEL OUTPUT (research metadata)calibrated —raw — · frozen threshold — · — POLICY STATEnot yet recordedno state change recorded yet CONTEXT (PPG / SpO₂, not a model signal)availableECG HR — · PPG pulse 79.0 · SpO₂ valid true",
+    "chart_points": 79,
+    "alerts": []
+  },
+  "trace": {
+    "classification": "RECORDED HARDWARE · RESAMPLED FROM LOW-RATE TELEMETRY · EXPERIMENTAL · NOT VALID · NOT DIAGNOSTIC",
+    "stages": 5,
+    "alerts": []
+  },
+  "observatory_console_errors": [],
+  "v2_runs": [
+    {
+      "rounds": 3,
+      "preview": {
+        "text": "ENOUGH USABLE WINDOWS 73 training · 19 holdout windows (needs 16 and 4); time-purged so no training window overlaps the holdout. Session10 s windowsCompleteof which VALIDBelow VALID (accepted)TrainHoldoutHW-SHOWCASE-2026-10-17-02-7f744f03939379147319 79 of 93 complete windows are graded VALID. 14 lower-quality windows (degraded or unusable) are accepted for EXPERIMENTAL training, 11 of them in the training set: the grade is reported, not enforced, and these windows are never counted as VALID.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-CDB8B439260A",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 197 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "recorded_cards": 1,
+        "peer_cards": 7,
+        "metric_auprc": "AUPRC0.903981",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "glance_method": "STATUSCOMPLETEDround 3 of 3 · 24/24 updates accepted METHODFedAvgpretrained V2 start AUPRC0.903981latest evaluated R0AUROC0.930841latest evaluated R0BCE0.218448latest evaluated R0",
+        "candidate_panel": true,
+        "backend_error": false,
+        "chips": [
+          "Round 3 of 3",
+          "FedAvg",
+          "1 recorded client · 7 synthetic peers",
+          "one demonstration machine",
+          "stream: CLOSED_NORMAL"
+        ],
+        "final_state_panel": false,
+        "label": "3-round recorded-hardware run — pretrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 1/4 · REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST",
+        "alerts": []
+      }
+    },
+    {
+      "rounds": 10,
+      "preview": {
+        "text": "ENOUGH USABLE WINDOWS 73 training · 19 holdout windows (needs 16 and 4); time-purged so no training window overlaps the holdout. Session10 s windowsCompleteof which VALIDBelow VALID (accepted)TrainHoldoutHW-SHOWCASE-2026-10-17-02-7f744f03939379147319 79 of 93 complete windows are graded VALID. 14 lower-quality windows (degraded or unusable) are accepted for EXPERIMENTAL training, 11 of them in the training set: the grade is reported, not enforced, and these windows are never counted as VALID.",
+        "start_disabled": false
+      },
+      "run_id": "HDFLRUN-8E5D82BAC7FA",
+      "live": {
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 10/10 · 645 events",
+        "badge": "RECORDED HARDWARE",
+        "clients": [
+          "RECORDED_DEMO_CLIENT_00",
+          "SIM_FL_SITE_01",
+          "SIM_FL_SITE_02",
+          "SIM_FL_SITE_03",
+          "SIM_FL_SITE_04",
+          "SIM_FL_SITE_05",
+          "SIM_FL_SITE_06",
+          "SIM_FL_SITE_07"
+        ],
+        "recorded_cards": 1,
+        "peer_cards": 7,
+        "metric_auprc": "AUPRC0.990591",
+        "metric_cohort": "WEARABLE_SIM_FL10_EVAL_HOLDOUT_V1 · 1446 windows · 16 participants",
+        "glance_method": "STATUSCOMPLETEDround 10 of 10 · 80/80 updates accepted METHODFedAvgpretrained V2 start AUPRC0.990591latest evaluated R8AUROC0.995539latest evaluated R8BCE0.076503latest evaluated R8",
+        "candidate_panel": true,
+        "backend_error": false,
+        "chips": [
+          "Round 10 of 10",
+          "FedAvg",
+          "1 recorded client · 7 synthetic peers",
+          "one demonstration machine",
+          "stream: CLOSED_NORMAL"
+        ],
+        "final_state_panel": false,
+        "label": "10-round recorded-hardware run — pretrained V2 · RECORDED HARDWARE (this account) · evaluated rounds 9/11 · REUSED SYNTHETIC DIAGNOSTIC EVALUATION — NOT A NEW UNTOUCHED FINAL TEST",
+        "alerts": []
+      }
+    }
+  ],
+  "tabular_runs": [
+    {
+      "rounds": 3,
+      "live": {
+        "run_id": "HDFLRUN-CC094C8AF6AB",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 3/3 · 197 events",
+        "banner": "ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED",
+        "chips": [
+          "Round 3 of 3",
+          "FedAvg",
+          "8 logical clients · your recorded windows",
+          "one demonstration machine",
+          "stream: CLOSED_NORMAL"
+        ],
+        "client_cards": 8,
+        "card_tags": 8,
+        "hw_participation": "YOUR RECORDED DATA IN THIS RUN 382 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and as",
+        "hw_total_windows": "382",
+        "hw_raw_sent": "0",
+        "metric_auprc": "AUPRC0.499400",
+        "metric_accuracy": "Accuracy0.489362",
+        "metric_bce": "BCE0.706726",
+        "metric_status": "COMPLETED",
+        "evaluated_graph_points": 23,
+        "figure_avail": [
+          "PARTIAL",
+          "PARTIAL",
+          "PARTIAL",
+          "PENDING",
+          "AVAILABLE",
+          "PENDING"
+        ],
+        "final_state": "Latest committed global state: 78b73c7b…cd06copy",
+        "accepted_counter": "24/24",
+        "alerts": [],
+        "run_label_text": "3-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 4/4 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+        "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+        "init_options": [
+          {
+            "value": "CANDIDATE",
+            "label": "Stored engineering candidate (from your candidate library)",
+            "disabled": false
+          },
+          {
+            "value": "MODEL_V2_FINAL",
+            "label": "Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning",
+            "disabled": false
+          },
+          {
+            "value": "FRESH_SEEDED",
+            "label": "Fresh initialisation (seeded, untrained)",
+            "disabled": false
+          },
+          {
+            "value": "WARM_START",
+            "label": "Pretrained: warm start from an earlier recorded-hardware run",
+            "disabled": false
+          }
+        ],
+        "v2_note": ""
+      }
+    },
+    {
+      "rounds": 10,
+      "live": {
+        "run_id": "HDFLRUN-CA970380D5BB",
+        "status_line": "COMPLETED · LIVE_RUN · FEDAVG · round 10/10 · 645 events",
+        "banner": "ENGINEERING FEDERATION DEMO RESEARCH PROTOTYPE RECORDED HARDWARE DATASYNTHETIC LABELS NOT CLINICAL NOT DEPLOYED",
+        "chips": [
+          "Round 10 of 10",
+          "FedAvg",
+          "8 logical clients · your recorded windows",
+          "one demonstration machine",
+          "stream: CLOSED_NORMAL"
+        ],
+        "client_cards": 8,
+        "card_tags": 8,
+        "hw_participation": "YOUR RECORDED DATA IN THIS RUN 382 recorded one-second windows, split into eight contiguous blocks (every window belongs to exactly one logical client). Raw recorded windows sent to the federation coordinator: 0 · only model updates are shared. ▾ WHAT IS REAL AND WHAT IS SYNTHETIC The features are computed from your own recorded MongoDB telemetry sessions. The class labels are deterministic and as",
+        "hw_total_windows": "382",
+        "hw_raw_sent": "0",
+        "metric_auprc": "AUPRC0.476191",
+        "metric_accuracy": "Accuracy0.489362",
+        "metric_bce": "BCE0.705818",
+        "metric_status": "COMPLETED",
+        "evaluated_graph_points": 131,
+        "figure_avail": [
+          "AVAILABLE",
+          "AVAILABLE",
+          "AVAILABLE",
+          "AVAILABLE",
+          "AVAILABLE",
+          "AVAILABLE"
+        ],
+        "final_state": "Latest committed global state: 4d38bf7f…e90dcopy",
+        "accepted_counter": "80/80",
+        "alerts": [],
+        "run_label_text": "10-round recorded-hardware run · RECORDED HARDWARE (this account) · evaluated rounds 11/11 · DIAGNOSTIC HOLDOUT OF RECORDED WINDOWS (window-level split, same recording sessions as training) — NOT AN INDEPENDENT TEST",
+        "secagg": "ROUND-1 SECAGG+ SHADOW: SHADOW_VERIFIED",
+        "init_options": [
+          {
+            "value": "CANDIDATE",
+            "label": "Stored engineering candidate (from your candidate library)",
+            "disabled": false
+          },
+          {
+            "value": "MODEL_V2_FINAL",
+            "label": "Pretrained V2 — MODEL_V2_FINAL, federated fine-tuning",
+            "disabled": false
+          },
+          {
+            "value": "FRESH_SEEDED",
+            "label": "Fresh initialisation (seeded, untrained)",
+            "disabled": false
+          },
+          {
+            "value": "WARM_START",
+            "label": "Pretrained: warm start from an earlier recorded-hardware run",
+            "disabled": false
+          }
+        ],
+        "v2_note": ""
+      }
+    }
+  ]
+}

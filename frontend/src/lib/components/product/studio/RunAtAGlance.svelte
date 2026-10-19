@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { crossesCohorts, runCohortName, trainedOn } from '$lib/product/studio/candidate-text';
 	// First-screen summary of the SELECTED run: what it is, how far it got, the latest MEASURED key result (labelled with its round) and where to go next.
 	// Every value comes from the validated run context and the stored evaluation records of this run; nothing is computed or defaulted here.
 	import { display } from '$lib/product/studio/metrics';
@@ -20,7 +21,7 @@
 		<span class="mode">{ctx.execution === 'LIVE_TRAINING' ? 'Training executes now' : ctx.execution === 'EVENT_REPLAY' ? 'Event replay: no training' : ctx.execution === 'RECORDED_EVIDENCE' ? 'Stored historical record: nothing is trained' : 'Loading…'}</span>
 	</div>
 	<p class="what" data-testid="source-sentence">{ctx.dataSentence}</p>
-	{#if ctx.startCandidate}<p class="what" data-testid="start-candidate">Starting model: stored engineering candidate <code>{ctx.startCandidate.id}</code>{ctx.startCandidate.cohort ? ` (trained on the ${ctx.startCandidate.cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort${ctx.startCandidate.cohort !== ctx.cohort ? `; this run uses the ${ctx.cohort === 'REALISTIC' ? 'realistic' : 'original'} cohort` : ''})` : ''}. Round 0 is that candidate's final state, unchanged.</p>{/if}
+	{#if ctx.startCandidate}<p class="what" data-testid="start-candidate">Starting model: stored engineering candidate <code>{ctx.startCandidate.id}</code>{ctx.startCandidate.cohort ? ` (trained on ${trainedOn(ctx.startCandidate.cohort)}${crossesCohorts(ctx.startCandidate.cohort, ctx.cohort) ? `; this run uses ${runCohortName(ctx.cohort)}` : ''})` : ''}. Round 0 is that candidate's final state, unchanged.</p>{/if}
 	<div class="cells">
 		<div><span>STATUS</span><b data-testid="glance-status">{status}</b><small>round {Math.min(currentRound, plannedRounds || currentRound)} of {plannedRounds || '--'} · {accepted}/{expected} updates accepted</small></div>
 		<div><span>METHOD</span><b>{algorithm}</b><small>{ctx.startCandidate ? 'stored candidate start' : ctx.lineage === 'MODEL_V2_FINAL' || ctx.lineage === 'HARDWARE_V2_PRETRAINED' ? 'pretrained V2 start' : ctx.lineage === 'FL_INIT_V2' ? 'untrained V2 architecture' : ctx.lineage === 'HARDWARE_DEMO_WARM_START' ? 'hardware model, warm start' : ctx.lineage === 'HARDWARE_DEMO_FRESH' ? 'hardware model, fresh start' : '—'}</small></div>
