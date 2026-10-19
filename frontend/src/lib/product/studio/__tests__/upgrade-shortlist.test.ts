@@ -37,6 +37,17 @@ describe('upgrade shortlist', () => {
 		expect(screen.getAllByRole('listitem').some((li) => li.getAttribute('data-candidate') === 'FL10_CANDIDATE_HDFLRUN-X')).toBe(true);
 		expect(screen.queryAllByRole('button')).toEqual([]);                                             // read-only: no control that could deploy or promote
 	});
+	it('shows the engineering-reuse tier with its risks and says it is not a case for deployment', async () => {
+		install(RAW([entry({ candidate_id: 'FL10_CANDIDATE_HDFLRUN-GOOD', cohort: 'ORIGINAL', rank: 1, tier: 'SHORTLISTED_FOR_SANDBOX_REUSE', failing: ['S4'], engineering: [check('E1', 'PASS'), check('E2', 'PASS'), check('E3', 'PASS')],
+			risks: [{ id: 'R1', text: 'Synthetic-only evidence' }, { id: 'R2', text: 'assigned labels' }] })]));
+		render(UpgradeShortlist);
+		await waitFor(() => expect(screen.getByTestId('shortlist-entries')).toBeTruthy());
+		expect(screen.getByTestId('shortlist-tier').textContent).toBe('SHORTLISTED FOR SANDBOX REUSE');
+		expect(screen.getByTestId('shortlist-sandbox-count').textContent).toBe('1');
+		expect(screen.getByTestId('shortlist-sandbox-note').textContent).toContain('not a case for deployment');
+		expect(screen.getByTestId('shortlist-risks').textContent).toContain('Synthetic-only evidence');
+		expect(screen.queryAllByRole('button')).toEqual([]);
+	});
 	it('pins promoted and deployed to false whatever the payload says', () => {
 		expect(parseUpgradeShortlist(RAW([entry({ deployed: true })])).entries[0].deployed).toBe(false);
 	});

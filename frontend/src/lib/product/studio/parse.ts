@@ -284,12 +284,16 @@ export const parseUpgradeShortlist = (value: unknown): UpgradeShortlist => {
 	return {
 		policy_id: str(r.policy_id, 'policy'), note: str(r.note, 'note'), external_check: strOrNull(r.external_check, 'external check'),
 		criteria: arr(r.criteria, 'criteria').map((c) => { const o = obj(c, 'criterion'); return { id: str(o.id, 'id'), title: str(o.title, 'title'), rule: str(o.rule, 'rule') }; }),
+		engineering_criteria: arr(r.engineering_criteria ?? [], 'engineering criteria').map((c) => { const o = obj(c, 'criterion'); return { id: str(o.id, 'id'), title: str(o.title, 'title'), rule: str(o.rule, 'rule') }; }),
+		references: Object.fromEntries(Object.entries(obj(r.references ?? {}, 'references')).map(([k, v]) => { const o = obj(v, 'reference'); return [k, { AUROC: num(o.AUROC, 'AUROC'), AUPRC: num(o.AUPRC, 'AUPRC') }]; })),
 		released_model: { model_id: str(released.model_id, 'model'), role: str(released.role, 'role'), real_ecg_auroc: numOrNull(released.real_ecg_auroc, 'auroc'), ci95: ci && ci.length === 2 ? [ci[0], ci[1]] : null },
 		entries: arr(r.entries, 'entries').map((e) => {
 			const o = obj(e, 'entry');
 			return {
 				candidate_id: str(o.candidate_id, 'candidate'), label: strOrNull(o.label, 'label'), cohort: oneOf(o.cohort, ['ORIGINAL', 'REALISTIC', 'REALISTIC_NSTDB', 'REAL_ECG'] as const, 'cohort'), source_kind: strOrNull(o.source_kind, 'source'),
-				run_length: numOrNull(o.run_length, 'rounds'), round_id: numOrNull(o.round_id, 'round'), rank: num(o.rank, 'rank'), tier: oneOf(o.tier, ['SHORTLISTED_FOR_REVIEW', 'COMPARABLE_NOT_BETTER', 'NOT_SHORTLISTED'] as const, 'tier'),
+				run_length: numOrNull(o.run_length, 'rounds'), round_id: numOrNull(o.round_id, 'round'), rank: num(o.rank, 'rank'), tier: oneOf(o.tier, ['SHORTLISTED_FOR_REVIEW', 'SHORTLISTED_FOR_SANDBOX_REUSE', 'COMPARABLE_NOT_BETTER', 'NOT_SHORTLISTED'] as const, 'tier'),
+				engineering: arr(o.engineering ?? [], 'engineering').map((c) => { const k = obj(c, 'check'); return { id: str(k.id, 'id'), status: oneOf(k.status, ['PASS', 'FAIL', 'NOT_EVIDENCED'] as const, 'status'), detail: str(k.detail, 'detail') }; }),
+				risks: arr(o.risks ?? [], 'risks').map((c) => { const k = obj(c, 'risk'); return { id: str(k.id, 'id'), text: str(k.text, 'text') }; }),
 				failing: arr(o.failing, 'failing').map((x) => str(x, 'id')), passing: arr(o.passing, 'passing').map((x) => str(x, 'id')), not_evidenced: arr(o.not_evidenced, 'not evidenced').map((x) => str(x, 'id')),
 				checks: arr(o.checks, 'checks').map((c) => { const k = obj(c, 'check'); return { id: str(k.id, 'id'), status: oneOf(k.status, ['PASS', 'FAIL', 'NOT_EVIDENCED'] as const, 'status'), detail: str(k.detail, 'detail') }; }),
 				promoted: false as const, deployed: false as const

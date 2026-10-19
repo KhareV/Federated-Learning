@@ -66,4 +66,14 @@ The 50-round federated V2 checkpoints of experiment V2-FL-001 (round 50, and rou
 | S6 | calibration evidence exists (none does for any candidate) |
 | S7 | a human release decision exists (NHM has no deployment path) |
 
-Tiers: `SHORTLISTED_FOR_REVIEW` (real-ECG evidence and no failing criterion), `COMPARABLE_NOT_BETTER` (matches the released model on real ECG but does not beat it: no case for an upgrade), `NOT_SHORTLISTED`. S6 and S7 stay open for every candidate. With today's evidence no candidate is shortlisted: the two federated research checkpoints match the central V2 on PTB-XL (AUROC 0.910 against 0.911) without beating it, and every synthetic-cohort or assigned-label candidate fails S4.
+A second, **engineering reuse** track asks a different question: is this candidate a better starting point for further sandbox work than the released model, on the cohort it was scored on? It needs no real-ECG evidence.
+
+| Criterion | Meaning |
+|---|---|
+| E1 | AUROC and AUPRC on its evaluation cohort both at least 0.02 above the released V2 scored on that same cohort |
+| E2 | F1 at the fixed 0.5 threshold of at least 0.5 |
+| E3 | the cohort has a released-model reference |
+
+The reference is the released V2's independently recomputed round-0 metrics from `reports/verification/browser/fl_matrix/fl_round_verification.json` (original 0.931 / 0.904, realistic 0.848 / 0.484, recorded noise 0.949 / 0.900 AUROC / AUPRC). Every engineering entry lists its risks: R1 synthetic-only evidence (synthetic adaptation lowered real-ECG performance), R2 assigned labels (recorded hardware), R3 scored on the cohort family it was adapted to.
+
+Tiers, best first: `SHORTLISTED_FOR_REVIEW` (real-ECG evidence and no failing S criterion: a possible future custom model, still needs a human decision), `SHORTLISTED_FOR_SANDBOX_REUSE` (passes E1-E3: a better sandbox starting point on its own synthetic cohort, **never a case for deployment**), `COMPARABLE_NOT_BETTER` (matches the released model on real ECG without beating it), `NOT_SHORTLISTED`. S6 and S7 stay open for every candidate. With today's evidence no candidate reaches the review tier: the two federated research checkpoints match the central V2 on PTB-XL (AUROC 0.910 against 0.911) without beating it, and every synthetic-cohort or assigned-label candidate fails S4. Candidates that clearly beat the released model on their own synthetic cohort (for example a 10-round candidate with AUROC 0.999 on the original cohort) are shortlisted for sandbox reuse.

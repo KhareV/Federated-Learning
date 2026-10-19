@@ -119,7 +119,7 @@ def fl_matrix_checks(mx: dict, verification: dict | None = None, studio_root: Pa
     sl = lib.get("shortlist") or {}
     entries = sl.get("entries") or []
     checks["upgrade_shortlist_lists_every_stored_candidate_and_is_read_only"] = (bool(sl.get("present")) and {e["id"] for e in entries} == {c["id"] for c in lib["cards"]} and "NOT AN UPGRADE" in sl.get("boundary", "") and sl.get("buttons") == 0)
-    checks["upgrade_shortlist_never_shortlists_a_synthetic_or_assigned_label_candidate"] = all(e["tier"] == "NOT_SHORTLISTED" for e in entries if not e["id"].startswith("RESEARCH_")) and all(e["tier"] in ("COMPARABLE_NOT_BETTER", "SHORTLISTED_FOR_REVIEW") for e in entries if e["id"].startswith("RESEARCH_"))
+    checks["upgrade_shortlist_never_puts_a_synthetic_or_assigned_label_candidate_in_the_review_tier"] = all(e["tier"] in ("NOT_SHORTLISTED", "SHORTLISTED_FOR_SANDBOX_REUSE") for e in entries if not e["id"].startswith("RESEARCH_")) and all(e["tier"] in ("COMPARABLE_NOT_BETTER", "SHORTLISTED_FOR_REVIEW") for e in entries if e["id"].startswith("RESEARCH_"))
     return checks
 
 
