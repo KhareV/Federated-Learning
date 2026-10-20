@@ -1,0 +1,7 @@
+# the repository is bind-mounted at run time; nothing in it is needed to build the image
+*
+!requirements-dev.lock
+!requirements-capstone-auth.lock
+!requirements-hardware.txt
+!docker/entrypoint.sh
+!docker/sitecustomize.py

@@ -1,0 +1,18 @@
+# One command on any machine with Docker: docker compose up --build
+# Needs, next to this file: .env (secrets, not in Git) and data/raw/nstdb + data/processed/mitdb (see docs/WINDOWS_SETUP.md).
+services:
+  nhm:
+    build: .
+    ports:
+      - "127.0.0.1:4173:4180"          # the browser still opens http://127.0.0.1:4173 (the Clerk-authorised origin)
+    volumes:
+      - .:/app
+      - nhm_frontend_modules:/app/frontend/node_modules
+      - nhm_clerk_modules:/app/frontend/clerk-sdk/node_modules
+      - ./.nhm:/root/.nhm               # runs, History, journals and candidates' workspace: a plain folder in the clone (git-ignored), so it survives restarts and can be zipped or restored
+    environment:
+      NHM_PORTABLE_NUMERICS: "1"          # pinned float32 test vectors cannot match bit-for-bit on another CPU; see docker/sitecustomize.py
+    command: ["--durable"]
+volumes:
+  nhm_frontend_modules:
+  nhm_clerk_modules:

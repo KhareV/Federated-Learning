@@ -41,3 +41,6 @@ tmp/
 
 # Engineering candidates of completed Studio runs (durable, per owner; never committed)
 data/studio_candidates/
+
+# Docker run-time workspace (runs, History): a copy of ~/.nhm
+.nhm/

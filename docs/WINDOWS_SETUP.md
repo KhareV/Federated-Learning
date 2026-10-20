@@ -1,6 +1,30 @@
 # Running NHM on a Windows computer
 
-Recommended: **WSL2 (Ubuntu) + the GitHub repository + one zip for the files Git does not carry.** The project was built and verified on macOS; WSL2 gives it a Linux environment close to that, avoids Windows-only process and path problems, and the Windows browser reaches `http://127.0.0.1:4173` inside WSL2 as usual. A native-Windows install is possible but untested (the launcher starts `npm` as a plain executable, which Windows only finds as `npm.cmd`).
+## Fastest path: Docker Desktop (one command)
+
+Verified on a Mac with an equivalent engine (Colima): the image builds, the inference, product and frontend services start, and FL training and evaluation tests pass inside the container. Not yet run on Windows itself.
+
+1. Install **Docker Desktop** (WSL2 backend) and git. Clone **inside WSL2** if you can (`wsl`, then `cd ~`), because bind mounts from the Linux filesystem are much faster than from `C:\`:
+   ```bash
+   git clone https://github.com/KhareV/Federated-Learning.git nhm && cd nhm
+   ```
+2. Put three things in the repository root (none of them is in Git):
+   * `.env` (Clerk and MongoDB secrets; send it privately, never through GitHub),
+   * `nhm_runtime_data.zip` unzipped there (`unzip nhm_runtime_data.zip` gives `data/raw/nstdb`, `data/processed/mitdb`, `data/studio_candidates`),
+   * optional `nhm_workspace.zip` unzipped there (gives `.nhm/demo_workspace`: your FL runs, History, monitoring sessions and replays; they show up under the same Clerk account).
+3. Start it:
+   ```bash
+   docker compose up --build
+   ```
+   The first start builds the image (about 10 minutes), installs the frontend packages and builds the frontend (about 5 minutes more). Later starts take about a minute. Open `http://127.0.0.1:4173/sign-in`. Stop with `Ctrl+C`, or `docker compose down` when it runs in the background (`docker compose up -d`).
+
+How it is put together: `Dockerfile` carries Python 3.11, Node 22 and the pinned dependencies (CPU torch); `compose.yaml` mounts the clone at `/app`, keeps the Linux `node_modules` in named volumes, keeps the workspace in `./.nhm` (a plain folder, git-ignored) and publishes only port 4173 (the browser reaches the product API through the frontend's proxy).
+
+**Portable numerics (important):** the frozen inference start-up check compares the released model's output on a pinned float32 test vector with a tolerance of 1e-7. Another CPU or BLAS build cannot match that: on the container's CPU the logits differ by 4.9e-7 absolute (agreement to about six digits), so the inference service refused to start. The container therefore sets `NHM_PORTABLE_NUMERICS=1`, which loads `docker/sitecustomize.py` and widens `numpy.allclose` tolerances tighter than 1e-4 to 1e-4. A wrong or corrupted model differs by orders of magnitude more, so the check still catches real faults, and digest and hash checks are untouched. No frozen file is modified. The same applies to any other machine you run on.
+
+## Alternative: WSL2 without Docker
+
+**WSL2 (Ubuntu) + the GitHub repository + one zip for the files Git does not carry.** The project was built and verified on macOS; WSL2 gives it a Linux environment close to that, avoids Windows-only process and path problems, and the Windows browser reaches `http://127.0.0.1:4173` inside WSL2 as usual. A native-Windows install is possible but untested (the launcher starts `npm` as a plain executable, which Windows only finds as `npm.cmd`).
 
 ## 1. What travels how
 
@@ -57,6 +81,6 @@ Open `http://127.0.0.1:4173/sign-in` in the Windows browser.
 * **Browser gates** (`scripts/verify_hardware_connected_browser.py`) drive Chrome through its debug port and were only run on macOS.
 * **Never** rebuild the frontend while the site is running; stop it first.
 
-## 5. Docker instead?
+## 5. Without Docker on another CPU
 
-Possible, not needed for a demonstration: the stack needs Python 3.11, Node, the secrets file and about 340 MB of data mounted in, and the Docker layer adds a second thing to debug without removing any of the above. WSL2 gives the same Linux behaviour with less ceremony. If you want a container anyway, say so and a Dockerfile and compose file can be added.
+The portable-numerics note above applies here too: the inference service will refuse to start on a CPU whose float32 results differ from the recording machine's. Set `NHM_PORTABLE_NUMERICS=1` and put `docker/sitecustomize.py` somewhere on the Python path (for example copy it into the venv's `site-packages/sitecustomize.py`).
